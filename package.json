@@ -1,0 +1,8 @@
+{
+	"name": "@wayward/types",
+	"description": "TypeScript declarations for Wayward, used for modding.",
+	"version": "2.8.0",
+	"dependencies": {
+		"@wayward/goodstream": "0.4.0"
+	}
+}
