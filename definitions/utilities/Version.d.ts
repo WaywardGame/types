@@ -10,6 +10,7 @@
  */
 export interface IVersionInfo {
     str: string;
+    strSemver: string;
     stage: "beta" | "release";
     major: number;
     minor: number;
@@ -18,6 +19,7 @@ export interface IVersionInfo {
     date?: Date;
 }
 declare module Version {
+    function create(stage: "beta" | "release", major: number, minor: number, patch?: number): IVersionInfo;
     function getVersionInfo(version: string): IVersionInfo;
     function isSameVersion(version: IVersionInfo, compareVersion: IVersionInfo): boolean;
     function getVersionDisplayString(version?: string | IVersionInfo): string;

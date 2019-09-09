@@ -63,5 +63,9 @@ declare module TileHelpers {
     function tilesAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): IterableIterator<ITile>;
     function tilesInRange(point: IVector3, range: number, includeCurrentTile?: boolean): import("@wayward/goodstream/Stream").default<[Vector3, ITile]>;
     function openTileInRange(point: IVector3, range: number, includeCurrentTile?: boolean): [Vector3, ITile] | undefined;
+    /**
+     * Check if the tile is blocked (impassable terrain or doodads that cause blocked movement).
+     */
+    function isTileBlocked(point: IVector3): boolean;
 }
 export default TileHelpers;

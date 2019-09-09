@@ -22,7 +22,7 @@ export interface IModConfig {
     readonly unloadable?: boolean;
     readonly tags?: string[];
     readonly dependencies?: string[];
-    readonly compatibleMinorVersions: number[];
+    readonly waywardVersion?: string;
     readonly multiplayer?: MultiplayerCompatibility;
     readonly languages?: string[];
     readonly stylesheets?: string[];

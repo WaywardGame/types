@@ -55,7 +55,7 @@ export default function generateSchema(): {
                                 type: string;
                             };
                         };
-                        uncountableRules: {
+                        uncountables: {
                             description: string;
                             type: string;
                             minItems: number;
