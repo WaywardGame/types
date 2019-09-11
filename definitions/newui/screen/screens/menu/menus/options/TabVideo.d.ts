@@ -20,6 +20,7 @@ export default class TabVideo extends Tab implements IRefreshable {
     private addRefreshable;
     private onFullscreen;
     private onPixelFont;
+    private onDisableUIAnimations;
     private onDitherFOW;
     private onDefaultCursor;
     private getUiScaleTooltip;

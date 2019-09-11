@@ -59,6 +59,7 @@ export default class Ui extends Emitter implements IUi {
     hideContextMenu(): void;
     hideActionsMenu(): void;
     setFontStyle(): void;
+    toggleUIAnimations(): void;
     setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
     setQuickSlot(quickSlot: number, itemId: number, internal?: boolean): void;
     refreshQuickSlots(): void;
