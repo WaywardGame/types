@@ -97,7 +97,6 @@ export interface IUi extends IPropSerializable, Emitter {
     updateItem(item: Item): void;
     hideContextMenu(): void;
     hideActionsMenu(): void;
-    setFontStyle(): void;
     setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
     setQuickSlot(quickSlot: number, itemId: number, internal?: boolean): void;
     refreshQuickSlots(): void;

@@ -78,6 +78,8 @@ export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     setDialogOpacity(opacity?: number, save?: boolean): void;
     addStylesheet(path: string): void;
     removeStylesheet(path: string): void;
+    updateFontStyle(): void;
+    updateUIAnimations(): void;
     protected onGlobalSlotLoaded(): void;
     protected onMessage(_: any, fullscreen: boolean): void;
     protected onInterruptClosed(): void;
