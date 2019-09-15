@@ -20,8 +20,9 @@ export default class FancyJsonSerializer {
     private static resultObj;
     private static readonly serializationRegistry;
     private static readonly classMap;
-    static registerClassSerializer<T, S>(cls: NullaryClass<T>, classSerializer: IClassSerializer<T, S>): void;
-    static hasClassSerializer(cls: NullaryClass<any>): boolean;
+    static registerClassSerializer<T, S>(cls: Class<T>, classSerializer: IClassSerializer<T, S>): void;
+    static hasClassSerializer(cls: Class<any>): boolean;
+    static getClassSerializer(cls: Class<any>): IClassSerializer<any, any> | undefined;
     static serialize(obj: any, pretty?: boolean): string;
     static deserialize(json: string): any;
     private static serializeValue;

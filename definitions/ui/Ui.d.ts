@@ -11,15 +11,12 @@
 import { EquipType } from "entity/IHuman";
 import { IContainer, IDismantleComponent, ItemType } from "item/IItem";
 import Item from "item/Item";
-import { ScreenId } from "newui/screen/IScreen";
-import { MenuId } from "newui/screen/screens/menu/component/IMenu";
-import Menu from "newui/screen/screens/menu/component/Menu";
 import "ui/functional/FunctionalSortable";
 import "ui/functional/FunctionalTooltip";
-import { DialogId, IDialogInfo, IUi } from "ui/IUi";
+import { DialogId, IDialogInfo } from "ui/IUi";
 import InGameScreen from "ui/screens/InGameScreen";
 import Emitter from "utilities/Emitter";
-export default class Ui extends Emitter implements IUi {
+export default class Ui extends Emitter {
     screenInGame: InGameScreen;
     private readonly elementDocument;
     private readonly elementWindow;
@@ -27,7 +24,6 @@ export default class Ui extends Emitter implements IUi {
     private bodyWidth;
     private bodyHeight;
     private elementScrollableContainers;
-    private objectUrl;
     private unloading;
     constructor();
     initialize(): void;
@@ -35,18 +31,12 @@ export default class Ui extends Emitter implements IUi {
     getBody(): JQuery;
     getWidth(): number;
     getHeight(): number;
-    removeStyle(id: string): void;
-    appendStyle(id: string, styleContent: string): void;
     setCheckboxValue(element: JQuery, id: string, checked: boolean): void;
     playClickSound(): void;
     hideInGameScreen(): void;
-    switchToScreen<M extends Menu = Menu>(screenId: ScreenId, menuId?: MenuId, menuInitializer?: (menu: M) => any): Promise<void>;
-    toggleOptions(): void;
-    showOptionsScreen(): Promise<void>;
     onWindowResize(): void;
     isInGameScreenShown(): boolean;
     setupItemBackgrounds(): void;
-    refreshStats(): void;
     loadQuickSlots(): void;
     isContextMenuOpen(): boolean;
     isOptionsOverlayShown(): boolean;
@@ -65,10 +55,8 @@ export default class Ui extends Emitter implements IUi {
     removeItemFromQuickSlot(itemId: number): void;
     removeItemFromEquipSlot(equip: EquipType): void;
     shouldRefreshMods(): boolean;
-    setObjectUrl(objectUrl: string): void;
     onGameEnd(): void;
     onUpdateDirection(): void;
-    highlightUnique(iterations?: number, ...selectors: Array<string | HTMLElement>): void;
     highlight(iterations?: number, ...selectors: Array<string | HTMLElement>): void;
     toggleUIDisplay(hide: boolean): void;
     getSerializationProperties(_: string): string[];
@@ -92,4 +80,6 @@ export default class Ui extends Emitter implements IUi {
     private onBeforeUnloadElectron;
     private onBeforeUnloadBrowser;
     private logErrorEvent;
+    private removeStyle;
+    private appendStyle;
 }

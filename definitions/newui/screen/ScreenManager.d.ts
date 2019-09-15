@@ -60,7 +60,7 @@ export default class ScreenManager {
      * Shows a screen
      * @param screenId The id of the screen to show
      */
-    show<S extends Screen = Screen>(screenId: ScreenId): S;
+    show<S extends Screen = Screen>(screenId: ScreenId, screenInitializer?: (screen: S) => any): NonNullable<S>;
     /**
      * Hides the given screen, or the current screen if none is passed.
      */

@@ -15,19 +15,20 @@ declare type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
 declare type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
 declare type HostFromHostOrHostClass<H extends IEventEmitterHost<any> | IEventEmitterHostClass<any>> = H extends IEventEmitterHost<any> ? H : InstanceOf<Extract<H, IEventEmitterHostClass<any>>>;
 declare module EventManager {
-    function subscribe<I extends EventBus, P extends EventNameFromIndex<I>>(emitter: I, event: P, handler: IterableOr<EventHandlerFromIndex<I, P>>, priority?: number): void;
-    function subscribe<T extends IEventEmitterHost<E> | IEventEmitterHostClass<E>, E, K extends keyof E>(emitter: T, event: K, handler: IterableOr<Handler<HostFromHostOrHostClass<T>, E[K]>>, priority?: number): void;
-    function unsubscribe<I extends EventBus, P extends EventNameFromIndex<I>>(emitter: I, event: P, handler: IterableOr<EventHandlerFromIndex<I, P>>, priority?: number): boolean;
-    function unsubscribe<T extends IEventEmitterHost<E> | IEventEmitterHostClass<E>, E, K extends keyof E>(emitter: T, event: K, handler: IterableOr<Handler<HostFromHostOrHostClass<T>, E[K]>>, priority?: number): boolean;
-    function waitFor<I extends EventBus, P extends EventNameFromIndex<I>>(emitter: I, event: P, priority?: number): Promise<ArgsOf<EventHandlerFromIndex<I, P>>>;
-    function waitFor<T extends IEventEmitterHost<E> | IEventEmitterHostClass<E>, E, K extends keyof E>(emitter: T, event: K, priority?: number): Promise<AddHead<HostFromHostOrHostClass<T>, ArgsOf<E[K]>>>;
+    export function subscribe<I extends EventBus, P extends EventNameFromIndex<I>>(emitter: I, event: P, handler: IterableOr<EventHandlerFromIndex<I, P>>, priority?: number): void;
+    export function subscribe<T extends IEventEmitterHost<E> | IEventEmitterHostClass<E>, E, K extends keyof E>(emitter: T, event: K, handler: IterableOr<Handler<HostFromHostOrHostClass<T>, E[K]>>, priority?: number): void;
+    export function unsubscribe<I extends EventBus, P extends EventNameFromIndex<I>>(emitter: I, event: P, handler: IterableOr<EventHandlerFromIndex<I, P>>, priority?: number): boolean;
+    export function unsubscribe<T extends IEventEmitterHost<E> | IEventEmitterHostClass<E>, E, K extends keyof E>(emitter: T, event: K, handler: IterableOr<Handler<HostFromHostOrHostClass<T>, E[K]>>, priority?: number): boolean;
+    export function waitFor<I extends EventBus, P extends EventNameFromIndex<I>>(emitter: I, event: P, priority?: number): Promise<ArgsOf<EventHandlerFromIndex<I, P>>>;
+    export function waitFor<T extends IEventEmitterHost<E> | IEventEmitterHostClass<E>, E, K extends keyof E>(emitter: T, event: K, priority?: number): Promise<AddHead<HostFromHostOrHostClass<T>, ArgsOf<E[K]>>>;
     interface IUntilSubscriber {
         subscribe<I extends EventBus, P extends EventNameFromIndex<I>>(emitter: I, event: P, handler: EventHandlerFromIndex<I, P>, priority?: number): this;
         subscribe<T extends IEventEmitterHost<E> | IEventEmitterHostClass<E>, E, K extends keyof E>(emitter: T, event: K, handler: Handler<HostFromHostOrHostClass<T>, E[K]>, priority?: number): this;
     }
-    function until(promise: Promise<any>): IUntilSubscriber;
-    function registerEventBusSubscriber(subscriber: object): void;
-    function deregisterEventBusSubscriber(subscriber: object): void;
+    export function until(promise: Promise<any>): IUntilSubscriber;
+    export function registerEventBusSubscriber(subscriber: object): void;
+    export function deregisterEventBusSubscriber(subscriber: object): void;
+    export {};
 }
 export default EventManager;
 declare type ReturnTypeLenient<T extends AnyFunction> = ReturnType<T> extends void ? Promise<void> : ReturnType<T>;

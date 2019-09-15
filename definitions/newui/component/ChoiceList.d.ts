@@ -22,13 +22,13 @@ export default class ChoiceList<C extends Choice = Choice, OPTIONAL extends bool
     private refreshMethod;
     private _selection;
     readonly choice: OPTIONAL extends true ? C | undefined : C;
-    private _disabled;
+    private readonly _disabledReasons;
     readonly disabled: boolean;
     private _canChooseNone;
     readonly canChooseNone: boolean;
     constructor();
     setCanChooseNone(): ChoiceList<C, true>;
-    setDisabled(val: boolean): this;
+    setDisabled(val?: boolean, reason?: string): this;
     setChoices(...choices: ArrayOfIterablesOr<C>): this;
     refresh(): this;
     setRefreshMethod(refreshMethod: (choiceList: this) => OPTIONAL extends true ? C | undefined : C): this;

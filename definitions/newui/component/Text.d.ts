@@ -26,7 +26,7 @@ export default class Text extends Component {
     setText(refresh: false, text?: TranslationGenerator): this;
     getText(): TranslationGenerator | undefined;
     getTextAsString(): string;
-    refresh(): void;
+    refresh(): this;
 }
 export declare class Paragraph extends Text {
     constructor();

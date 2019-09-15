@@ -60,7 +60,7 @@ declare module TileHelpers {
     /**
      * IterableIterator version of TileHelpers.getTilesAround
      */
-    function tilesAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): IterableIterator<ITile>;
+    function tilesAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): Generator<ITile, void, unknown>;
     function tilesInRange(point: IVector3, range: number, includeCurrentTile?: boolean): import("@wayward/goodstream/Stream").default<[Vector3, ITile]>;
     function openTileInRange(point: IVector3, range: number, includeCurrentTile?: boolean): [Vector3, ITile] | undefined;
     /**

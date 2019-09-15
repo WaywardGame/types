@@ -20,4 +20,5 @@ export default class TabCreatures extends CustomGameOptionsTab implements IRefre
     refresh(): this;
     private addCreature;
     private sortCreatures;
+    private getAberrantSpawnsGlobalMessage;
 }

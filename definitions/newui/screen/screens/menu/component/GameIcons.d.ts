@@ -11,11 +11,12 @@
 import { GameMode } from "game/options/IGameOptions";
 import Component from "newui/component/Component";
 import { IRefreshable } from "newui/component/Refreshable";
+import { ModLoadability } from "newui/util/Misc";
 import { ISteamFriend } from "steamworks/ISteamworks";
 export interface IGameIconsHost {
     difficulty: GameMode;
     pvp: boolean;
-    mods: Array<[string, string]>;
+    mods: Array<[string, ModLoadability]>;
     friends: ISteamFriend[];
 }
 export default class GameIcons extends Component implements IRefreshable {

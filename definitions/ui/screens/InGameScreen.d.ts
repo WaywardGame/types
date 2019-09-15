@@ -46,20 +46,6 @@ export default class InGameScreen extends BaseScreen {
     blockedByNewUi: boolean;
     elementVisibleInGame: JQuery;
     elementCanvas: JQuery;
-    elementStats: JQuery;
-    elementStatHealth: JQuery;
-    elementStatStamina: JQuery;
-    elementStatHunger: JQuery;
-    elementStatThirst: JQuery;
-    elementStatBurn: JQuery;
-    elementStatBleed: JQuery;
-    elementStatPoison: JQuery;
-    elementAttributeWeight: JQuery;
-    elementAttributeAttack: JQuery;
-    elementAttributeDefense: JQuery;
-    elementAttributeReputation: JQuery;
-    elementReputationMalignity: JQuery;
-    elementReputationBenignity: JQuery;
     elementQuickSlotsContainer: JQuery;
     elementActions: JQuery;
     elementDialogs: JQuery;
@@ -97,7 +83,6 @@ export default class InGameScreen extends BaseScreen {
     private isCurrentlySorting;
     private craftableItemTypes;
     private nonCraftableItemTypes;
-    private lastStats;
     selector(): string;
     bindElements(): void;
     changeEquipmentOption(id: "leftHand" | "rightHand"): void;
@@ -127,7 +112,6 @@ export default class InGameScreen extends BaseScreen {
     highlightItemElementBySelector(selector: string, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     getMovementDirection(mouseX: number, mouseY: number): Direction;
     canUseHotkeys(): boolean;
-    refreshStats(): void;
     blurInputs(): void;
     toggleDialog(dialog: JQuery): boolean;
     openDialog(dialog: JQuery): boolean;
@@ -165,7 +149,6 @@ export default class InGameScreen extends BaseScreen {
     tooltipHide(): void;
     unSelectElements(): void;
     getTooltipHtmlForItem(item: Item | undefined, itemType: ItemType, isQuickSlot: boolean, isDismantle: boolean, isNPC: boolean): string;
-    createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
     getUsedQuickSlots(): number[];
     getFreeQuickSlots(): number[];
     getQuickSlotItemElement(quickSlot: number): JQuery;
@@ -189,7 +172,6 @@ export default class InGameScreen extends BaseScreen {
     createCraftItemElements(containerSortInfo: IContainerSortInfo): void;
     updateItem(item: Item): void;
     onMove(): void;
-    refreshWorldTooltips(): void;
     getDialogElementForContainer(container: IContainer): JQuery | undefined;
     isContainerOpen(container: IContainer): boolean;
     openContainer(container: IContainer, containerName?: string): void;
@@ -203,7 +185,6 @@ export default class InGameScreen extends BaseScreen {
     hideActionsMenu(): void;
     toggleActionsMenu(center?: boolean): void;
     showActionsMenu(center?: boolean, updatePosition?: boolean, skipSound?: boolean): void;
-    onCopySelectedText(): void;
     onFilterInput(containerElement: JQuery): void;
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
     getContainerId(containerElement: JQuery): string;

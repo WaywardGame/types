@@ -20,14 +20,14 @@ interface IButtonEvents extends Events<Component> {
 export default class Button extends Component implements IDisableable {
     event: IEventEmitter<this, IButtonEvents>;
     playSound: boolean;
-    protected readonly text: Text;
-    private buttons;
-    private description;
+    readonly text: Text;
+    description?: Paragraph;
+    wrapperButtons?: Component;
     private _activated;
-    private _disabled;
+    private readonly _disabledReasons;
     readonly disabled: boolean;
     constructor(elementType?: string, listen?: boolean);
-    setDisabled(val?: boolean): this;
+    setDisabled(val?: boolean, reason?: string): this;
     activate(playSound?: boolean): void;
     addButton(initializer: (button: Button) => Button): this;
     addDescription(initializer: (description: Paragraph) => any): this;

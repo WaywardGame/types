@@ -34,6 +34,7 @@ export default class NewGameMenu extends Menu {
     setMultiplayer(): this;
     getDifficultyOptions(): IGameOptions;
     protected refreshAsync(): Promise<void>;
+    private setWasEditedPreShown;
     private getDefaultSaveName;
     private refresh;
     private startOrNext;

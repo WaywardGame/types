@@ -148,7 +148,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     addPlayer(playerOptions?: Partial<IPlayerOptions>): Player;
     removePlayer(pid: number): void;
     deletePlayer(plys: Player[], identifier: string): void;
-    isRealTimeMode(): boolean;
+    isSimulatedOrRealTimeMode(): boolean;
     getTurnMode(): TurnMode;
     setTurnMode(turnMode: TurnMode): void;
     getTickSpeed(): number;

@@ -26,7 +26,7 @@ export default class HookManager {
      * Deregisters the given `IHookHost` if it is registered under the given name.
      */
     deregister(host: IHookHost, name?: string): void;
-    getHostsWithHook(hook: Hook): IterableIterator<IHookHost>;
+    getHostsWithHook(hook: Hook): Generator<IHookHost, void, unknown>;
     /**
      * Returns the internal list of mods with a hook and their priorities.
      * @param hook A hook name.

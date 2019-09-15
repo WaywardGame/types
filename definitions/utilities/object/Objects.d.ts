@@ -9,6 +9,9 @@
  * https://waywardgame.github.io/
  */
 declare module Objects {
+    function keys<O>(o: O): Array<keyof O>;
+    function values<O>(o: O): Array<O[keyof O]>;
+    function entries<O>(o: O): Array<[keyof O, O[keyof O]]>;
     function windowKeysToObject(windowKeys: string[]): any;
     function windowKeysToParentObject(windowKeys: string[]): any;
     function deepClone<T>(obj: T): T;

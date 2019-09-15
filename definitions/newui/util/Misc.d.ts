@@ -23,3 +23,4 @@ export declare enum ModLoadability {
     Error = "error"
 }
 export declare function isModLoadable(publishId?: string): [string, ModLoadability];
+export declare function isModLoadable(index?: number): [string, ModLoadability];

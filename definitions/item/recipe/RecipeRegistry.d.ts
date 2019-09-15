@@ -17,7 +17,7 @@ declare class RecipeRegistry {
     getRecipeDescriptions(): Readonly<Descriptions<RecipeType, Recipe>>;
     stream(): import("@wayward/goodstream/Stream").default<[RecipeType, Recipe]>;
     register(recipe: Recipe): this;
-    get(recipe: RecipeType): Recipe | undefined;
+    get(recipe: RecipeType): Recipe;
 }
 declare const _default: RecipeRegistry;
 export default _default;

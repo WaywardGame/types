@@ -53,40 +53,39 @@ export declare const SYMBOL_MOD_REGISTRATIONS: unique symbol;
 export declare enum ModRegistrationType {
     Action = 0,
     Bindable = 1,
-    ChallengeModifier = 2,
-    Command = 3,
-    Creature = 4,
-    Dialog = 5,
-    Dictionary = 6,
-    Doodad = 7,
-    DoodadGroup = 8,
-    HelpArticle = 9,
-    InspectionType = 10,
-    InterModRegistration = 11,
-    InterModRegistry = 12,
-    Interrupt = 13,
-    InterruptChoice = 14,
-    Item = 15,
-    ItemGroup = 16,
-    Language = 17,
-    LanguageExtension = 18,
-    MenuBarButton = 19,
-    Message = 20,
-    MessageSource = 21,
-    MusicTrack = 22,
-    Note = 23,
-    NPC = 24,
-    OptionsSection = 25,
-    Overlay = 26,
-    Packet = 27,
-    Quest = 28,
-    QuestRequirement = 29,
-    Registry = 30,
-    Skill = 31,
-    SoundEffect = 32,
-    Terrain = 33,
-    TerrainDecoration = 34,
-    TileEvent = 35
+    Command = 2,
+    Creature = 3,
+    Dialog = 4,
+    Dictionary = 5,
+    Doodad = 6,
+    DoodadGroup = 7,
+    HelpArticle = 8,
+    InspectionType = 9,
+    InterModRegistration = 10,
+    InterModRegistry = 11,
+    Interrupt = 12,
+    InterruptChoice = 13,
+    Item = 14,
+    ItemGroup = 15,
+    Language = 16,
+    LanguageExtension = 17,
+    MenuBarButton = 18,
+    Message = 19,
+    MessageSource = 20,
+    MusicTrack = 21,
+    Note = 22,
+    NPC = 23,
+    OptionsSection = 24,
+    Overlay = 25,
+    Packet = 26,
+    Quest = 27,
+    QuestRequirement = 28,
+    Registry = 29,
+    Skill = 30,
+    SoundEffect = 31,
+    Terrain = 32,
+    TerrainDecoration = 33,
+    TileEvent = 34
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -122,7 +121,7 @@ export interface INPCRegistration extends IBaseModRegistration {
 export interface IActionRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Action;
     name: string;
-    description: IActionDescription;
+    description?: IActionDescription;
 }
 export interface IHelpArticleRegistration extends IBaseModRegistration {
     type: ModRegistrationType.HelpArticle;
@@ -185,7 +184,7 @@ export interface IDialogRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Dialog;
     name: string;
     description: IDialogDescription;
-    class: new () => Dialog;
+    class: new (id: number) => Dialog;
 }
 export interface IInterModRegistryRegistration extends IBaseModRegistration {
     type: ModRegistrationType.InterModRegistry;
@@ -538,7 +537,7 @@ export declare function Registry<H>(): {
      * @param key The key of `H` which contains `T`.
      * @returns An intermediate value referencing the `T` stored in the given key in `H`
      */
-    getMethod<K extends keyof H>(key: K): H[K];
+    getMethod<K_1 extends keyof H>(key: K_1): H[K_1];
 };
 export declare module Registry {
     /**

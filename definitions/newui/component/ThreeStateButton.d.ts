@@ -20,7 +20,7 @@ interface IThreeStateButtonEvents extends Events<Button> {
      * @param oldState The state this button is changing from.
      * @returns `false` to cancel the change.
      */
-    willChange(state: ThreeStateButtonState, oldState?: ThreeStateButtonState): boolean | void;
+    willChange(state: ThreeStateButtonState, oldState?: ThreeStateButtonState): boolean | undefined;
     /**
      * @param state The new state of this button.
      */
@@ -39,6 +39,7 @@ export declare class ThreeStateButton extends Button implements IRefreshableValu
     protected refreshMethod: () => ThreeStateButtonState;
     private _state;
     readonly state: ThreeStateButtonState;
+    private updateDescriptionOnChange;
     constructor();
     setState(state: ThreeStateButtonState, triggerEvent?: boolean): this;
     trySetState(state: ThreeStateButtonState, triggerEvent?: boolean): boolean;
@@ -47,5 +48,6 @@ export declare class ThreeStateButton extends Button implements IRefreshableValu
     setRefreshMethod(refreshMethod: () => ThreeStateButtonState): this;
     setText(text: TranslationGenerator): this;
     addDescription(initializer: (paragraph: Paragraph) => any): this;
+    setUpdateDescriptionOnChange(update?: boolean): this;
 }
 export {};
