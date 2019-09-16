@@ -11,9 +11,33 @@
 declare global {
     interface Array<T> {
         flat<U>(this: U[][]): U[];
+        /**
+         * Remove `undefined` values from an array
+         */
+        filterNullish(): Array<Exclude<T, undefined>>;
+        /**
+         * Remove all falsey values from an array (does not filter out `0` and `""`)
+         */
+        filterFalsey(): Array<Exclude<T, undefined | null | false>>;
+        /**
+         * Remove all falsey values from an array, including `0` and `""`
+         */
+        filterFalsey(includeZeroAndEmptyString: true): Array<Exclude<T, undefined | null | false | 0 | "">>;
     }
     interface ReadonlyArray<T> {
         flat<U>(this: U[][]): U[];
+        /**
+         * Remove `undefined` values from an array
+         */
+        filterNullish(): Array<Exclude<T, undefined>>;
+        /**
+         * Remove all falsey values from an array (does not filter out `0` and `""`)
+         */
+        filterFalsey(): Array<Exclude<T, undefined | null | false>>;
+        /**
+         * Remove all falsey values from an array, including `0` and `""`
+         */
+        filterFalsey(removeZeroAndEmptyString: true): Array<Exclude<T, undefined | null | false | 0 | "">>;
     }
 }
 export default function (): void;
