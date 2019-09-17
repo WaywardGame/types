@@ -225,8 +225,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     calculateTileLightLevel(tile: ITile, x: number, y: number, z: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
     setupSave(_: number): void;
-    onGlobalSlotLoaded(_: number, success: boolean): Promise<void>;
-    onSaveLoaded(slot: number): void;
+    onGlobalSlotReady(): Promise<void>;
     directionToMovement(direction: Direction): IVector2;
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
     updateOption(player: Player | undefined, id: keyof IOptions, value: boolean | number): void;
@@ -248,7 +247,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     private processAutoSave;
     private tickDayNightCycle;
     private runRandomEvents;
-    private upgradeToClasses;
     private prePlay;
     private playPostSeed;
     private render;
@@ -256,14 +254,9 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     private removeAndFixPids;
     private createWorld;
     private createWorldRenderer;
-    private loadResources;
     private initializeGameState;
     private startGame;
     private initializeDedicatedServer;
     private dedicatedServerExit;
     private dedicatedServerNewGame;
-    private upgradeSave;
-    private upgradePlayer;
-    private upgradeSaveMoveProperty;
-    private upgradeGlobalSave;
 }

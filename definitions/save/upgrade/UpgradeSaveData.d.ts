@@ -8,12 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-declare global {
-    interface Array<T> {
-        flat<U>(this: U[][]): U[];
-    }
-    interface ReadonlyArray<T> {
-        flat<U>(this: U[][]): U[];
-    }
-}
-export default function (): void;
+import { IVersionInfo } from "utilities/Version";
+export default function upgradeSave(saveVersion: IVersionInfo): void;

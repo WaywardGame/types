@@ -19,12 +19,14 @@ import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import { IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
 export interface IGameEvents {
-    globalSlotLoaded(): any;
     pause(): any;
     resume(): any;
     play(): any;
     tickStart(): any;
     tickEnd(): any;
+    glLostContext(): any;
+    glSetup(restored: boolean): any;
+    glInitialized(): any;
 }
 export declare enum TickSpeed {
     Min = 10,

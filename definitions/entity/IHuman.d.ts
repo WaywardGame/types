@@ -8,10 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ActionType } from "entity/action/IAction";
 import Entity from "entity/Entity";
 import { Events } from "event/EventBuses";
 import { IHasImagePath } from "game/IObject";
-import { RecipeLevel } from "item/IItem";
+import { ItemType, RecipeLevel } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
 import { IRGB } from "utilities/Color";
 export interface IHumanEvents extends Events<Entity> {
@@ -20,6 +21,13 @@ export interface IHumanEvents extends Events<Entity> {
      * @param value The new skill value (core + bonus)
      */
     skillChange(skill: SkillType, value: number): void;
+    /**
+     * Called before consuming an item
+     * @param itemType The item type
+     * @param actionType The action type
+     * @returns True if the human can consume the item (default logic isn't called, should use your own code for consumption), false if the human cannot consume the item, or undefined to use the default logic
+     */
+    canConsumeItem(itemType: ItemType, actionType: ActionType): boolean | undefined;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;

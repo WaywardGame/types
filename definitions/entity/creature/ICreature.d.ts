@@ -10,12 +10,14 @@
  */
 import Creature from "entity/creature/Creature";
 import Human from "entity/Human";
-import { AiType, DamageType, Defense, MoveType, StatusType } from "entity/IEntity";
+import { AiType, DamageType, Defense, IEntityEvents, MoveType, StatusType } from "entity/IEntity";
+import Player from "entity/player/Player";
 import { ItemType, ItemTypeGroup } from "item/IItem";
 import { LootGroupType } from "item/LootGroups";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IModdable } from "mod/ModRegistry";
+import { ITile } from "tile/ITerrain";
 import { TileEventType } from "tile/ITileEvent";
 import { IRGB } from "utilities/Color";
 export declare enum CreatureType {
@@ -163,4 +165,22 @@ export interface IDamageInfo {
     legacy?: boolean;
     damageMessage?: Message | Translation;
     soundDelay?: number;
+}
+export interface ICreatureEvents extends IEntityEvents {
+    /**
+     * Called before a creature attacks
+     * @param enemy The enemy (player or creature)
+     * @returns False if the creature cannot attack, or undefined to use the default logic
+     */
+    canAttack(enemy: Player | Creature): boolean | undefined;
+    /**
+     * Called when a creature tries to move
+     * @param tile The tile the creature is trying to move to
+     * @param x The x coordinate of the tile
+     * @param y The y coordinate of the tile
+     * @param z The z coordinate of the tile
+     * @param moveType The creatures move type
+     * @returns True if the creature can move, false if the creature cannot move, or undefined to use the default logic
+     */
+    canMove?(tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
 }

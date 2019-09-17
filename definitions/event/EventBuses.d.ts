@@ -17,6 +17,7 @@ import LanguageManager from "language/LanguageManager";
 import ModManager from "mod/ModManager";
 import Multiplayer from "multiplayer/Multiplayer";
 import NewUi from "newui/NewUi";
+import SaveManager from "save/SaveManager";
 import Steamworks from "steamworks/Steamworks";
 export declare enum EventBus {
     Actions = 0,
@@ -28,7 +29,8 @@ export declare enum EventBus {
     Multiplayer = 6,
     Players = 7,
     Steamworks = 8,
-    Ui = 9
+    Ui = 9,
+    SaveManager = 10
 }
 declare const eventBuses: {
     [EventBus.Actions](): typeof ActionExecutor;
@@ -41,6 +43,7 @@ declare const eventBuses: {
     [EventBus.Players](): typeof Player;
     [EventBus.Steamworks](): typeof Steamworks;
     [EventBus.Ui](): typeof NewUi;
+    [EventBus.SaveManager](): typeof SaveManager;
 };
 export default eventBuses;
 export declare module EventBus {

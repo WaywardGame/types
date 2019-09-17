@@ -40,4 +40,5 @@ export declare enum ModLoadFailureReason {
 export interface IModManagerEvents {
     loadAll(): void;
     unloadAll(): void;
+    setup(): void;
 }

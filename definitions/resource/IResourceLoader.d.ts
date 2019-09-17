@@ -10,10 +10,9 @@
  */
 import { IImageOverrideDescription } from "mod/IModInfo";
 import Vec2 from "utilities/math/Vector2";
-import ResolvablePromise from "utilities/promise/ResolvablePromise";
 export interface IResourceLoader {
     initialize(gl: WebGL2RenderingContext): void;
-    loadResources(container: IResourceContainer): ResolvablePromise;
+    loadResources(container?: IResourceContainer): Promise<void>;
     takeLoadingSlot(callback: () => void): void;
     getImageOverride(src: string): Partial<IImageOverrideDescription> | undefined;
     updateImageOverrides(): void;

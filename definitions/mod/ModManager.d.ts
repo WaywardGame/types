@@ -97,6 +97,7 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
      * Returns whether every mod that's enabled.
      */
     canUnlockMilestones(): boolean;
+    protected onGlobalSlotLoaded(): void;
     /**
      * Loads all of the stylesheets from the given mod.
      */

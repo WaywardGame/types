@@ -8,26 +8,30 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import EventEmitter from "event/EventEmitter";
 import { IImageOverrideDescription } from "mod/IModInfo";
 import { IResourceContainer, IResourceLoader } from "resource/IResourceLoader";
-import ResolvablePromise from "utilities/promise/ResolvablePromise";
-export default class ResourceLoader implements IResourceLoader {
+export interface IResourceLoaderEvents {
+    load(): any;
+}
+export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEvents> implements IResourceLoader {
     private concurrent;
     private loadingCount;
     private loadingInterval;
     private waitingSlots;
-    private callback;
+    readonly isLoading: boolean;
     private readonly maxConcurrent;
     private spritePacker;
     private tilePacker;
     private imageOverrides;
     initialize(gl: WebGL2RenderingContext): void;
-    loadResources(container: IResourceContainer): ResolvablePromise;
+    loadResources(container?: IResourceContainer): Promise<void>;
     continueLoading(): void;
     takeLoadingSlot(callback: () => void): void;
     releaseLoadingSlot(): void;
     getImageOverride(src: string): Partial<IImageOverrideDescription> | undefined;
     updateImageOverrides(): void;
+    protected onGlobalSlotReady(): Promise<void>;
     private loadResourcesInternal;
     private loadCharacter;
     private loadCreatures;

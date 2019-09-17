@@ -12,7 +12,7 @@ import { SfxType } from "audio/IAudio";
 import { Command } from "command/ICommand";
 import Doodad from "doodad/Doodad";
 import { DoodadType, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, IActionApi, IActionDescription } from "entity/action/IAction";
+import { IActionApi, IActionDescription } from "entity/action/IAction";
 import Creature from "entity/creature/Creature";
 import { CreatureType, IDamageInfo, SpawnGroup } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
@@ -76,32 +76,6 @@ export interface IHookHost {
         [hook in Hook]?: number;
     };
     [SYMBOL_HOST_NAME]?: string[];
-    /**
-     * Called before consuming an item
-     * @param human The human object
-     * @param itemType The item type
-     * @param actionType The action type
-     * @returns True if the human can consume the item (default logic isn't called, should use your own code for consumption), false if the human cannot consume the item, or undefined to use the default logic
-     */
-    canConsumeItem?(human: Human, itemType: ItemType, actionType: ActionType): boolean | undefined;
-    /**
-     * Called before a creature attacks
-     * @param creature The creature object
-     * @param enemy The enemy (player or creature)
-     * @returns False if the creature cannot attack, or undefined to use the default logic
-     */
-    canCreatureAttack?(creature: Creature, enemy: Player | Creature): boolean | undefined;
-    /**
-     * Called when a creature tries to move
-     * @param creature The creature object
-     * @param tile The tile the creature is trying to move to
-     * @param x The x coordinate of the tile
-     * @param y The y coordinate of the tile
-     * @param z The z coordinate of the tile
-     * @param moveType The creatures move type
-     * @returns True if the creature can move, false if the creature cannot move, or undefined to use the default logic
-     */
-    canCreatureMove?(creature: Creature, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
     /**
      * Called when a creature is about to be spawned
      * @param type The type of creature

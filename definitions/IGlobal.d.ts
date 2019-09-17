@@ -10,7 +10,6 @@
  */
 import "@wayward/goodstream/apply";
 import WAudio from "audio/Audio";
-import CommandManager from "command/CommandManager";
 import DoodadManager from "doodad/DoodadManager";
 import CorpseManager from "entity/creature/corpse/CorpseManager";
 import CreatureManager from "entity/creature/CreatureManager";
@@ -25,7 +24,6 @@ import HookManager from "mod/HookManager";
 import ModManager from "mod/ModManager";
 import { IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
 import Multiplayer from "multiplayer/Multiplayer";
-import GameScreen from "newui/screen/screens/GameScreen";
 import FieldOfView from "renderer/fieldofview/FieldOfView";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
 import SpriteAtlas from "renderer/SpriteAtlas";
@@ -40,7 +38,6 @@ import Steamworks from "steamworks/Steamworks";
 import TileEventManager from "tile/TileEventManager";
 import "typings/jquery";
 import "typings/jqueryui";
-import "typings/webgl2";
 import { ISortable, ISortableOptions } from "ui/functional/IFunctionalSortable";
 import { ITooltip, ITooltipOptions } from "ui/functional/IFunctionalTooltip";
 import Ui from "ui/Ui";
@@ -68,14 +65,12 @@ declare global {
     type Stream<T> = import("@wayward/goodstream").default<T>;
     let absentPlayers: Player[];
     let audio: WAudio;
-    let commandManager: CommandManager;
     let corpseManager: CorpseManager;
     let creatureManager: CreatureManager;
     let doodadManager: DoodadManager;
     let fieldOfView: FieldOfView;
     let flowFieldManager: FlowFieldManager;
     let game: Game;
-    let gameScreen: GameScreen | undefined;
     let hookManager: HookManager;
     let itemManager: ItemManager;
     let languageManager: LanguageManager;

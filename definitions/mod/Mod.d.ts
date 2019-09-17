@@ -12,7 +12,7 @@ import { SfxType } from "audio/IAudio";
 import { Command } from "command/ICommand";
 import Doodad from "doodad/Doodad";
 import { DoodadType, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, IActionApi, IActionDescription } from "entity/action/IAction";
+import { IActionApi, IActionDescription } from "entity/action/IAction";
 import Creature from "entity/creature/Creature";
 import { CreatureType, IDamageInfo, SpawnGroup } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
@@ -65,9 +65,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
      * Called when the mod is unloaded
      */
     onUnload(): void;
-    canConsumeItem(human: Human, itemType: ItemType, actionType: ActionType): boolean | undefined;
-    canCreatureAttack(creature: Creature, enemy: Player | Creature): boolean | undefined;
-    canCreatureMove(creature: Creature, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
     canCreatureSpawn(type: CreatureType, x: number, y: number, z: number, aberrant: boolean): boolean | undefined;
     canDoodadSpawn(type: DoodadType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
     canDropItem(human: Human, item: Item, tile: ITile, dropAll: boolean, dropAllQuality: Quality | undefined): boolean | undefined;

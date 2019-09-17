@@ -9,10 +9,11 @@
  * https://waywardgame.github.io/
  */
 import Player from "entity/player/Player";
+import EventEmitter from "event/EventEmitter";
 import IClientStore from "save/clientStore/IClientStore";
-import { ISaveInfo, ISaveObject, SaveSort, SortDirection } from "save/ISaveManager";
+import { ISaveInfo, ISaveManagerEvents, ISaveObject, SaveSort, SortDirection } from "save/ISaveManager";
 import ISerializer from "save/ISerializer";
-export default class SaveManager {
+export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
     private loadedGlobalSlot;
     private readonly dataStorage;
     private multiplayerSlotData;

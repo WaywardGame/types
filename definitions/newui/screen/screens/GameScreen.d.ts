@@ -38,6 +38,7 @@ interface IGameScreenEvents extends Events<Screen> {
     hideDialog(dialog: DialogId): any;
     showDialog(dialogId: Dialog): any;
 }
+export declare let gameScreen: GameScreen | undefined;
 export default class GameScreen extends Screen implements IHookHost {
     event: IEventEmitter<this, IGameScreenEvents>;
     dialogs: Map<DialogId, Dialog>;

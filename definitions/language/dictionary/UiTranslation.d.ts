@@ -217,7 +217,7 @@ declare enum UiTranslation {
     MenuLoadGameSaveButtonExportTooltip = 202,
     MenuLoadGameSaveTooltipLabelCreatedTime = 203,
     MenuLoadGameSaveTooltipLabelSaveTime = 204,
-    MenuLoadGameSaveTooltipLabelDifficulty = 205,
+    MenuLoadGameSaveTooltipLabelGameMode = 205,
     MenuLoadGameSaveTooltipLabelScore = 206,
     MenuLoadGameSaveTooltipLabelSeed = 207,
     MenuLoadGameSaveTooltipLabelTurns = 208,

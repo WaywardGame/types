@@ -11,9 +11,6 @@
 import { IHookHost } from "mod/IHookHost";
 export declare enum Hook {
     CanClientMove = "canClientMove",
-    CanConsumeItem = "canConsumeItem",
-    CanCreatureAttack = "canCreatureAttack",
-    CanCreatureMove = "canCreatureMove",
     CanCreatureSpawn = "canCreatureSpawn",
     CanDoodadSpawn = "canDoodadSpawn",
     CanDropItem = "canDropItem",

@@ -41,3 +41,13 @@ export interface ISerializeProperty {
     property: string[];
     skipCompression?: boolean;
 }
+export interface ISaveManagerEvents {
+    /**
+     * When the global slot is loaded (is not called if the global slot didn't previously exist)
+     */
+    globalSlotLoaded(slot: number): any;
+    /**
+     * When the global slot is ready (after `globalSlotLoaded` event)
+     */
+    globalSlotReady(slot: number): any;
+}

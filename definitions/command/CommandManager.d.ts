@@ -20,3 +20,4 @@ export default class CommandManager extends GenericManager<ICommand> implements 
     protected getSource(): LogSource;
     protected getEnumObject(): any;
 }
+export declare const commandManager: CommandManager;

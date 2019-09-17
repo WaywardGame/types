@@ -9,10 +9,11 @@
  * https://waywardgame.github.io/
  */
 import { SfxType } from "audio/IAudio";
-import { CreatureType, ICreatureDescription, IDamageInfo } from "entity/creature/ICreature";
+import { CreatureType, ICreatureDescription, ICreatureEvents, IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
 import { AiType, EntityType, MoveType } from "entity/IEntity";
 import Player from "entity/player/Player";
+import { IEventEmitter } from "event/EventEmitter";
 import Inspection from "game/inspection/Inspect";
 import { IInspectable, InspectionSection } from "game/inspection/Inspections";
 import { IObject } from "game/IObject";
@@ -22,6 +23,7 @@ import Translation from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 export default class Creature extends Entity implements IUnserializedCallback, IObject<CreatureType>, IInspectable {
+    event: IEventEmitter<this, ICreatureEvents>;
     readonly entityType: EntityType.Creature;
     aberrant?: boolean;
     ai: AiType;
