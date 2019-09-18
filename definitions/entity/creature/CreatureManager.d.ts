@@ -13,10 +13,25 @@ import { CreatureType, ICreatureDescription, SpawnGroup, TileGroup } from "entit
 import EntityManager from "entity/EntityManager";
 import Human from "entity/Human";
 import { MoveType } from "entity/IEntity";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 import Vector3 from "utilities/math/Vector3";
+export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> {
+    /**
+     * Called when a creature is about to be spawned
+     * @param type The type of creature
+     * @param x The x coordinate where the creature will be spawned
+     * @param y The y coordinate where the creature will be spawned
+     * @param z The z coordinate where the creature will be spawned
+     * @param aberrant True if the creature is an aberrant
+     * @returns False if the creature cannot spawn, or undefined to use the default logic
+     */
+    canSpawn(type: CreatureType, x: number, y: number, z: number, aberrant: boolean): boolean | undefined;
+}
 export default class CreatureManager extends EntityManager<Creature> {
+    readonly event: IEventEmitter<this, ICreatureManagerEvents>;
     getEntities(): (Creature | undefined)[];
     getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: boolean): Translation;
     getHappinessLevel(human: Human, creature: Creature): number;

@@ -11,23 +11,19 @@
 import { SfxType } from "audio/IAudio";
 import { Command } from "command/ICommand";
 import Doodad from "doodad/Doodad";
-import { DoodadType, IDoodadOptions } from "doodad/IDoodad";
 import { IActionApi, IActionDescription } from "entity/action/IAction";
 import Creature from "entity/creature/Creature";
 import { CreatureType, IDamageInfo, SpawnGroup } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
 import Human from "entity/Human";
-import { AttackType, MoveType } from "entity/IEntity";
 import { EquipType, SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
-import { NPCType } from "entity/npc/NPCS";
 import { IMessage } from "entity/player/IMessageManager";
 import { IMovementIntent, PlayerState, WeightStatus } from "entity/player/IPlayer";
 import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
 import { IMapRequest, TileUpdateType } from "game/IGame";
 import { IInspectionSection } from "game/inspection/IInspection";
-import { Quality } from "game/IObject";
 import "IGlobal";
 import { BookType, IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
@@ -65,19 +61,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
      * Called when the mod is unloaded
      */
     onUnload(): void;
-    canCreatureSpawn(type: CreatureType, x: number, y: number, z: number, aberrant: boolean): boolean | undefined;
-    canDoodadSpawn(type: DoodadType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
-    canDropItem(human: Human, item: Item, tile: ITile, dropAll: boolean, dropAllQuality: Quality | undefined): boolean | undefined;
-    canNPCAttack(npc: NPC, weapon: Item | undefined, attackType: AttackType): boolean | undefined;
-    canNPCMove(npc: NPC, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
-    canNPCSpawn(type: NPCType, x: number, y: number, z: number): boolean | undefined;
-    canPickupDoodad(human: Human, doodad: Doodad): boolean | undefined;
-    canPlayerAttack(player: Player, weapon: Item | undefined, attackType: AttackType): boolean | undefined;
-    canClientMove(api: BindCatcherApi): false | undefined;
-    canSeeCreature(creature: Creature, tile: ITile): boolean | undefined;
-    canSeeNPC(npc: NPC, tile: ITile): boolean | undefined;
-    getCreatureSpriteBatchLayer(creature: Creature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
-    getMaxSpritesForLayer(layer: SpriteBatchLayer, maxSprites: number): number | undefined;
     getPlayerFieldOfViewRadius(player: Player): number | undefined;
     getPlayerMaxHealth(maxHealth: number, player: Player): number;
     getPlayerMaxWeight(maxWeight: number, player: Player): number;

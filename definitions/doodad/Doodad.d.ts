@@ -9,12 +9,13 @@
  * https://waywardgame.github.io/
  */
 import DoodadInfo from "doodad/DoodadInfo";
-import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
+import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadDescription, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType } from "entity/action/IAction";
 import Creature from "entity/creature/Creature";
 import Human from "entity/Human";
 import { EquipType } from "entity/IHuman";
 import Player from "entity/player/Player";
+import EventEmitter from "event/EventEmitter";
 import Inspection from "game/inspection/Inspect";
 import { IInspectable, InspectionSection } from "game/inspection/Inspections";
 import { IObject, Quality } from "game/IObject";
@@ -25,7 +26,15 @@ import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
-export default class Doodad implements Doodad, Partial<IDoodadDoor>, IUnserializedCallback, IInspectable, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, IInspectable {
+export interface IDoodadEvents {
+    /**
+     * Called when an doodad is being picked up
+     * @param human The human object
+     * @returns False if the doodad cannot be picked up, or undefined to use the default logic
+     */
+    canPickup(human: Human): boolean | undefined;
+}
+export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements Doodad, IUnserializedCallback, IInspectable, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, IInspectable {
     static is(value: any): value is Doodad;
     static getGrowingStageTranslation(growingStage?: GrowingStage, description?: IDoodadDescription): Translation | undefined;
     protected static registrarId: number;

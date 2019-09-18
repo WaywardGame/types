@@ -9,10 +9,19 @@
  * https://waywardgame.github.io/
  */
 import { IDamageInfo } from "entity/creature/ICreature";
+import EventEmitter from "event/EventEmitter";
 import { BindCatcherApi } from "newui/IBindingManager";
 import WalkToTileHandler from "newui/screen/screens/game/util/movement/WalkToTileHandler";
 import { IVector2 } from "utilities/math/IVector";
-export default class MovementHandler {
+export interface IMovementHandlerEvents {
+    /**
+     * Called every frame where the mouse is not hovering over an item
+     * @param api The bind catcher api
+     * @returns `false` if the client can't move, `undefined` otherwise
+     */
+    canMove(api: BindCatcherApi): false | undefined;
+}
+export default class MovementHandler extends EventEmitter.Host<IMovementHandlerEvents> {
     private readonly gameScreen;
     readonly walkToTileHandler: WalkToTileHandler;
     private lastMove;

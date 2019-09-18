@@ -10,10 +10,13 @@
  */
 import { ActionType } from "entity/action/IAction";
 import Entity from "entity/Entity";
+import { AttackType } from "entity/IEntity";
 import { Events } from "event/EventBuses";
-import { IHasImagePath } from "game/IObject";
+import { IHasImagePath, Quality } from "game/IObject";
 import { ItemType, RecipeLevel } from "item/IItem";
+import Item from "item/Item";
 import { IModdable } from "mod/ModRegistry";
+import { ITile } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
 export interface IHumanEvents extends Events<Entity> {
     /**
@@ -28,6 +31,22 @@ export interface IHumanEvents extends Events<Entity> {
      * @returns True if the human can consume the item (default logic isn't called, should use your own code for consumption), false if the human cannot consume the item, or undefined to use the default logic
      */
     canConsumeItem(itemType: ItemType, actionType: ActionType): boolean | undefined;
+    /**
+     * Called when an item is being dropped
+     * @param item The item to be dropped
+     * @param tile The tile the item will be dropped on
+     * @param dropAll True if all items of this type will be dropped
+     * @param dropAllQuality If not undefined, all items of this quality will be dropped
+     * @returns True if the item can be dropped, false if the item can not be dropped, or undefined to use the default logic
+     */
+    canDropItem(item: Item, tile: ITile, dropAll: boolean, dropAllQuality: Quality | undefined): boolean | undefined;
+    /**
+     * Called before an npc attacks
+     * @param weapon The weapon used to attack
+     * @param attackType The attack type
+     * @returns False if the npc cannot attack, or undefined to use the default logic
+     */
+    canAttack(weapon: Item | undefined, attackType: AttackType): boolean | undefined;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;

@@ -11,23 +11,19 @@
 import { SfxType } from "audio/IAudio";
 import { Command } from "command/ICommand";
 import Doodad from "doodad/Doodad";
-import { DoodadType, IDoodadOptions } from "doodad/IDoodad";
 import { IActionApi, IActionDescription } from "entity/action/IAction";
 import Creature from "entity/creature/Creature";
 import { CreatureType, IDamageInfo, SpawnGroup } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
 import Human from "entity/Human";
-import { AttackType, MoveType } from "entity/IEntity";
 import { EquipType, SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
-import { NPCType } from "entity/npc/NPCS";
 import { IMessage } from "entity/player/IMessageManager";
 import { IMovementIntent, PlayerState, WeightStatus } from "entity/player/IPlayer";
 import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
 import { IMapRequest, TileUpdateType } from "game/IGame";
 import { IInspectionSection } from "game/inspection/IInspection";
-import { Quality } from "game/IObject";
 import { BookType, IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
@@ -76,113 +72,6 @@ export interface IHookHost {
         [hook in Hook]?: number;
     };
     [SYMBOL_HOST_NAME]?: string[];
-    /**
-     * Called when a creature is about to be spawned
-     * @param type The type of creature
-     * @param x The x coordinate where the creature will be spawned
-     * @param y The y coordinate where the creature will be spawned
-     * @param z The z coordinate where the creature will be spawned
-     * @param aberrant True if the creature is an aberrant
-     * @returns False if the creature cannot spawn, or undefined to use the default logic
-     */
-    canCreatureSpawn?(type: CreatureType, x: number, y: number, z: number, aberrant: boolean): boolean | undefined;
-    /**
-     * Called when a doodad is about to be spawned
-     * @param type The type of doodad
-     * @param x The x coordinate where the doodad will be spawned
-     * @param y The y coordinate where the doodad will be spawned
-     * @param z The z coordinate where the doodad will be spawned
-     * @param options The doodad spawn options
-     * @returns False if the dooodad cannot spawn, or undefined to use the default logic
-     */
-    canDoodadSpawn?(type: DoodadType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
-    /**
-     * Called when an item is being dropped
-     * @param human The human object
-     * @param item The item to be dropped
-     * @param tile The tile the item will be dropped on
-     * @param dropAll True if all items of this type will be dropped
-     * @param dropAllQuality If not undefined, all items of this quality will be dropped
-     * @returns True if the item can be dropped, false if the item can not be dropped, or undefined to use the default logic
-     */
-    canDropItem?(human: Human, item: Item, tile: ITile, dropAll: boolean, dropAllQuality: Quality | undefined): boolean | undefined;
-    /**
-     * Called before an npc attacks
-     * @param npc The npc object
-     * @param weapon The weapon used to attack
-     * @param attackType The attack type
-     * @returns False if the npc cannot attack, or undefined to use the default logic
-     */
-    canNPCAttack?(npc: NPC, weapon: Item | undefined, attackType: AttackType): boolean | undefined;
-    /**
-     * Called when a npc tries to move
-     * @param npc The npc object
-     * @param tile The tile the npc is trying to move to
-     * @param x The x coordinate of the tile
-     * @param y The y coordinate of the tile
-     * @param z The z coordinate of the tile
-     * @param moveType The npcs move type
-     * @returns True if the npc can move, false if the npc cannot move, or undefined to use the default logic
-     */
-    canNPCMove?(npc: NPC, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
-    /**
-     * Called when a npc is about to be spawned
-     * @param type The type of npc
-     * @param x The x coordinate where the npc will be spawned
-     * @param y The y coordinate where the npc will be spawned
-     * @param z The z coordinate where the npc will be spawned
-     * @returns False if the npc cannot spawn, or undefined to use the default logic
-     */
-    canNPCSpawn?(type: NPCType, x: number, y: number, z: number): boolean | undefined;
-    /**
-     * Called when an doodad is being picked up
-     * @param human The human object
-     * @param doodad The doodad object
-     * @returns False if the doodad cannot be picked up, or undefined to use the default logic
-     */
-    canPickupDoodad?(human: Human, doodad: Doodad): boolean | undefined;
-    /**
-     * Called before a player attacks
-     * @param player The player object
-     * @param weapon The weapon used to attack
-     * @param attackType The attack type
-     * @returns False if the player cannot attack, or undefined to use the default logic
-     */
-    canPlayerAttack?(player: Player, weapon: Item | undefined, attackType: AttackType): boolean | undefined;
-    /**
-     * Called every frame where the mouse is not hovering over an item
-     * @param api The bind catcher api
-     * @returns False if the player can't move, undefined otherwise
-     */
-    canClientMove?(api: BindCatcherApi): false | undefined;
-    /**
-     * Called when calculating creatures in the viewport
-     * @param creature The creature object
-     * @param tile The tile the creature is on
-     * @returns False if the player should not see the creature or undefined to use the default logic
-     */
-    canSeeCreature?(creature: Creature, tile: ITile): boolean | undefined;
-    /**
-     * Called when calculating npcs in the viewport
-     * @param npc The npc object
-     * @param tile The tile the npc is on
-     * @returns False if the player should not see the npc or undefined to use the default logic
-     */
-    canSeeNPC?(npc: NPC, tile: ITile): boolean | undefined;
-    /**
-     * Called when rendering creatures in the viewport
-     * @param creature The creature object
-     * @param batchLayer The batch layer the creature will render in
-     * @returns The batch layer the creature should render in or undefined to use the default logic
-     */
-    getCreatureSpriteBatchLayer?(creature: Creature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
-    /**
-     * Called when initializing each sprite batch layer.
-     * @param layer The SpriteBatchLayer that is being initialized
-     * @param maxSprites The default number of sprites that can be rendered at one time on this layer
-     * @returns The number of sprites that can be rendered at one time on this layer
-     */
-    getMaxSpritesForLayer?(layer: SpriteBatchLayer, maxSprites: number): number | undefined;
     /**
      * Called when getting the field of view radius for a player
      * @param player The player object

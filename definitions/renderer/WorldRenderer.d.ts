@@ -8,13 +8,47 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import Creature from "entity/creature/Creature";
+import NPC from "entity/npc/NPC";
+import EventEmitter from "event/EventEmitter";
 import IWorldRenderer, { SpriteBatchLayer } from "renderer/IWorldRenderer";
 import { ITileAdaptor } from "renderer/TileAdaptors";
 import Fence from "renderer/tileAdaptors/Fence";
 import Wall from "renderer/tileAdaptors/Wall";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
+import { ITile } from "tile/ITerrain";
 import Vector2 from "utilities/math/Vector2";
-export default class WorldRenderer implements IWorldRenderer {
+export interface IWorldRendererEvents {
+    /**
+     * Called when calculating creatures in the viewport
+     * @param creature The creature object
+     * @param tile The tile the creature is on
+     * @returns False if the player should not see the creature or undefined to use the default logic
+     */
+    canSeeCreature(creature: Creature, tile: ITile): boolean | undefined;
+    /**
+     * Called when calculating npcs in the viewport
+     * @param npc The npc object
+     * @param tile The tile the npc is on
+     * @returns False if the player should not see the npc or undefined to use the default logic
+     */
+    canSeeNPC(npc: NPC, tile: ITile): boolean | undefined;
+    /**
+     * Called when rendering creatures in the viewport
+     * @param creature The creature object
+     * @param batchLayer The batch layer the creature will render in
+     * @returns The batch layer the creature should render in or undefined to use the default logic
+     */
+    getCreatureSpriteBatchLayer(creature: Creature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
+    /**
+     * Called when initializing each sprite batch layer.
+     * @param layer The SpriteBatchLayer that is being initialized
+     * @param maxSprites The default number of sprites that can be rendered at one time on this layer
+     * @returns The number of sprites that can be rendered at one time on this layer
+     */
+    getMaxSpritesForLayer(maxSprites: number, layer: SpriteBatchLayer): number | undefined;
+}
+export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvents> implements IWorldRenderer {
     private readonly gl;
     private static textureShaderProgram;
     private static worldShaderProgram;

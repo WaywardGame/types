@@ -10,7 +10,20 @@
  */
 import Doodad from "doodad/Doodad";
 import { DoodadType, DoodadTypeGroup, IDoodadOptions } from "doodad/IDoodad";
-export default class DoodadManager {
+import EventEmitter from "event/EventEmitter";
+export interface IDoodadManagerEvents {
+    /**
+     * Called when a doodad is about to be spawned
+     * @param type The type of doodad
+     * @param x The x coordinate where the doodad will be spawned
+     * @param y The y coordinate where the doodad will be spawned
+     * @param z The z coordinate where the doodad will be spawned
+     * @param options The doodad spawn options
+     * @returns False if the dooodad cannot spawn, or undefined to use the default logic
+     */
+    canSpawn(type: DoodadType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
+}
+export default class DoodadManager extends EventEmitter.Host<IDoodadManagerEvents> {
     private cachedGroups;
     constructor();
     generateLookups(): void;

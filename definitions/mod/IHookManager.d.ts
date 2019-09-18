@@ -10,20 +10,7 @@
  */
 import { IHookHost } from "mod/IHookHost";
 export declare enum Hook {
-    CanClientMove = "canClientMove",
-    CanCreatureSpawn = "canCreatureSpawn",
-    CanDoodadSpawn = "canDoodadSpawn",
-    CanDropItem = "canDropItem",
-    CanNPCAttack = "canNPCAttack",
-    CanNPCMove = "canNPCMove",
-    CanNPCSpawn = "canNPCSpawn",
-    CanPickupDoodad = "canPickupDoodad",
-    CanPlayerAttack = "canPlayerAttack",
-    CanSeeCreature = "canSeeCreature",
-    CanSeeNPC = "canSeeNPC",
     GetCameraPosition = "getCameraPosition",
-    GetCreatureSpriteBatchLayer = "getCreatureSpriteBatchLayer",
-    GetMaxSpritesForLayer = "getMaxSpritesForLayer",
     GetPlayerFieldOfViewRadius = "getPlayerFieldOfViewRadius",
     GetPlayerMaxHealth = "getPlayerMaxHealth",
     GetPlayerMaxWeight = "getPlayerMaxWeight",

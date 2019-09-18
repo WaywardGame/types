@@ -11,8 +11,11 @@
 import { IMoveTypeZ } from "entity/creature/ICreatureManager";
 import { EntityPlayerCreatureNpc } from "entity/IEntity";
 import { IEntityManager } from "entity/IEntityManager";
+import EventEmitter from "event/EventEmitter";
 import Bound3 from "utilities/math/Bound3";
-export default abstract class EntityManager<T extends EntityPlayerCreatureNpc> implements IEntityManager<T> {
+export interface IEntityManagerEvents {
+}
+export default abstract class EntityManager<T extends EntityPlayerCreatureNpc> extends EventEmitter.Host<IEntityManagerEvents> implements IEntityManager<T> {
     private moveTypesInFov;
     remove(entity: T): void;
     updateFov(bounds: Bound3[]): number;

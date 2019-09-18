@@ -11,7 +11,20 @@
 import EntityManager from "entity/EntityManager";
 import NPC from "entity/npc/NPC";
 import { NPCType } from "entity/npc/NPCS";
+import { IEventEmitter } from "event/EventEmitter";
+export interface INPCManagerEvents {
+    /**
+     * Called when a npc is about to be spawned
+     * @param type The type of npc
+     * @param x The x coordinate where the npc will be spawned
+     * @param y The y coordinate where the npc will be spawned
+     * @param z The z coordinate where the npc will be spawned
+     * @returns False if the npc cannot spawn, or undefined to use the default logic
+     */
+    canSpawn(type: NPCType, x: number, y: number, z: number): boolean | undefined;
+}
 export default class NPCManager extends EntityManager<NPC> {
+    readonly event: IEventEmitter<this, INPCManagerEvents>;
     getEntities(): (NPC | undefined)[];
     spawn(npcType: NPCType, x: number, y: number, z: number): NPC | undefined;
     remove(npc: NPC): void;

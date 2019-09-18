@@ -40,9 +40,6 @@ export interface IDoodadGroupDescription {
     prefix?: string;
     suffix?: string;
 }
-export interface IDoodadDoor extends Doodad {
-    orientation: DoorOrientation;
-}
 export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatusEffect, ICausesDamage {
     actionTypes?: ActionType[];
     allowedTiles?: TerrainType[];

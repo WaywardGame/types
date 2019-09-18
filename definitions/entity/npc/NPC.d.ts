@@ -10,14 +10,29 @@
  */
 import { ActionType } from "entity/action/IAction";
 import Human from "entity/Human";
-import { AiType, EntityType } from "entity/IEntity";
+import { AiType, EntityType, MoveType } from "entity/IEntity";
 import { EquipType, ICustomizations } from "entity/IHuman";
 import { NPCType } from "entity/npc/NPCS";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import { ItemType } from "item/IItem";
 import Item from "item/Item";
 import { ITile } from "tile/ITerrain";
+export interface INPCEvents extends Events<Human> {
+    /**
+     * Called when a npc tries to move
+     * @param tile The tile the npc is trying to move to
+     * @param x The x coordinate of the tile
+     * @param y The y coordinate of the tile
+     * @param z The z coordinate of the tile
+     * @param moveType The npcs move type
+     * @returns True if the npc can move, false if the npc cannot move, or undefined to use the default logic
+     */
+    canMove(tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
+}
 export default abstract class NPC extends Human {
     protected static registrarId: number;
+    readonly event: IEventEmitter<this, INPCEvents>;
     readonly entityType: EntityType.NPC;
     readonly constructorFunction: typeof NPC;
     ai: AiType;

@@ -31,7 +31,7 @@ export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> {
     setTrigger<H extends Hook>(hook: H, checker: (api: IQuestRequirementApi<O, D>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
     getTriggers(): IterableIterator<[Hook, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
     setHostTrigger<E extends keyof Events<Player>>(event: E, checker: (api: IQuestRequirementApi<O, D>, player: Player, ...args: ArgumentsOf<Events<Player>[E]>) => boolean): this;
-    getHostTriggers(): IterableIterator<["spawn" | "milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "restStart" | "restEnd" | "displayMessage" | "skillChange" | "canConsumeItem" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<O, D>, player: Player, ...args: any[]) => boolean]>;
+    getHostTriggers(): IterableIterator<["spawn" | "milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "restStart" | "restEnd" | "displayMessage" | "skillChange" | "canConsumeItem" | "canDropItem" | "canAttack" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<O, D>, player: Player, ...args: any[]) => boolean]>;
     setInitializeTrigger(checker: (api: IQuestRequirementApi<O, D>) => boolean): this;
     getInitializeTrigger(): ((api: IQuestRequirementApi<O, D>) => boolean) | undefined;
     setRelations(relations: HighlightSelector[]): this;
