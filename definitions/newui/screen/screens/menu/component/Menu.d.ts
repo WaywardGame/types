@@ -38,7 +38,6 @@ export default class Menu extends Component implements IMenu, IHookHost {
     setTitle(initializer: (title: Heading) => Heading): this;
     setDescription(initializer: (title: Text) => Text): this;
     setIsSubmenu(submenu?: boolean): this;
-    setOnBeforeShow(beforeShow: () => void | Promise<void>): this;
     show(): this;
     scrollToTop(): void;
     scrollToTabSection(tabId: string | number): this;
@@ -51,7 +50,6 @@ export default class Menu extends Component implements IMenu, IHookHost {
      * from a descendant menu.
      */
     protected wentBackTo(): boolean;
-    protected onBeforeShow(): Promise<void> | void;
     protected onShowMenu(): void;
 }
 interface ITabEvents extends Events<Button> {

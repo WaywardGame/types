@@ -14,7 +14,8 @@ import { IRefreshable } from "newui/component/Refreshable";
 import { Paragraph } from "newui/component/Text";
 export default class MilestonesNotUnlockableWarning extends Component implements IRefreshable {
     private readonly gameMode;
-    readonly milestonesNotUnlockableWarning: Paragraph;
+    readonly description: Paragraph;
+    private readonly buttonShowModsThatDisallowMilestoneUnlocking;
     constructor(gameMode?: () => GameMode | undefined);
     refresh(): this;
 }

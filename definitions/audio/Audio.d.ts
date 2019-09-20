@@ -47,7 +47,7 @@ export default class WAudio implements IAudio {
     playMusic(): Promise<void>;
     stopMusic(): void;
     updateMusicSpeed(speed: number): Promise<void>;
-    updateVolume(): Promise<void>;
+    updateVolume(): void;
     updatePosition(): Promise<void>;
     queueEffect(type: SfxType, x: number, y: number, z: number, delay?: number, speed?: number, noPosition?: boolean): void;
     processEffects(): void;

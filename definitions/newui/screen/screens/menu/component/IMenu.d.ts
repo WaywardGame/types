@@ -33,6 +33,7 @@ interface IMenuEvents extends Events<IComponent> {
     goBackFrom(): any;
     cancelBind(): false | void;
     enterBind(): any;
+    preShowAsync(): any;
 }
 export interface IMenu extends IComponent {
     event: IEventEmitter<this, IMenuEvents>;

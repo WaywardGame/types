@@ -101,7 +101,7 @@ declare global {
     const isEdge: boolean;
     const isFirefox: boolean;
     const overlayWorks: boolean | undefined;
-    const webGlVersion: number;
+    let webGlVersion: number;
     const VIEWPORT_MIN_WIDTH: number;
     const VIEWPORT_MIN_HEIGHT: number;
     function Override(_target: any, _propertyKey: string, _descriptor?: PropertyDescriptor): void;

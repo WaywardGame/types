@@ -40,7 +40,9 @@ declare class Translation {
     static readonly RANDOM = "random";
     static readonly defaultInterpolator: Interpolator;
     static provider: TranslationProvider;
-    static formatList(items: Iterable<string | IStringSection[] | Translation | ISerializedTranslation>, ender?: ListEnder | false): Translation;
+    static colorize(text: string | IStringSection, color: string): IStringSection;
+    static colorize(text: IStringSection[], color: string): IStringSection[];
+    static formatList(items: Iterable<string | IStringSection | IStringSection[] | Translation | ISerializedTranslation>, ender?: ListEnder | false): Translation;
     static getString(...entries: ArrayOfIterablesOr<string | IStringSection | Translation>): string;
     static getAll(dictionary: Dictionary | string, entry?: number | string): Translation[];
     /**

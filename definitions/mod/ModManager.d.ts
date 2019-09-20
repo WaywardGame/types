@@ -12,7 +12,7 @@ import EventEmitter from "event/EventEmitter";
 import { IPlayOptions } from "game/IGame";
 import HookCallFactory from "mod/HookCallFactory";
 import { Hook } from "mod/IHookManager";
-import { IModConfig } from "mod/IMod";
+import { IModConfig, MultiplayerCompatibility } from "mod/IMod";
 import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
 import { CanLoadState, ICanLoadInfo, IModManagerEvents, ModLoadFailureReason } from "mod/IModManager";
 import Log from "utilities/Log";
@@ -21,6 +21,7 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     private readonly onModInitializedCallbacks;
     constructor();
     loadAll(options: Partial<IPlayOptions>): Promise<Array<[ModLoadFailureReason, ...any[]]>>;
+    getMultiplayerCompatibility(index: number): MultiplayerCompatibility;
     isMultiplayerCompatible(index: number): boolean;
     isMultiplayerClientSide(index: number): boolean;
     isMultiplayerServerSide(index: number): boolean;
@@ -94,9 +95,17 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     uninitialize(index: number): boolean;
     uninitializeAll(): void;
     /**
-     * Returns whether every mod that's enabled.
+     * Returns whether every mod that's enabled either allows unlocking milestones or doesn't provide scripts.
      */
     canUnlockMilestones(): boolean;
+    /**
+     * Returns whether the given mod allows unlocking milestones
+     */
+    canUnlockMilestones(mod: number | IModInfo): boolean;
+    /**
+     * Returns a list of every enabled mod that doesn't allow unlocking milestones and provides scripts.
+     */
+    getEnabledModsThatDisallowMilestoneUnlocks(): IModInfo[];
     protected onGlobalSlotLoaded(): void;
     /**
      * Loads all of the stylesheets from the given mod.

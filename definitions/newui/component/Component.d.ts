@@ -120,6 +120,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     schedule(ms: number, debounce: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
     repaint(): void;
     forceShowTooltip(onlyIfHovered?: boolean): void;
+    regenerateBoxes(): void;
     private onMouseEnterForTooltip;
     private onMouseLeaveForTooltip;
     private onMouseEnterForHighlights;

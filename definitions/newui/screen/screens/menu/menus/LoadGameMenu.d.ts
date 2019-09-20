@@ -18,6 +18,7 @@ export default class LoadGameMenu extends Menu {
     private slotsRemainingHeading;
     private newGameButton;
     private importButton;
+    private milestonesNotUnlockableWarning;
     constructor();
     protected onSteamworksHide(): Promise<void>;
     protected goBackFrom(): void;

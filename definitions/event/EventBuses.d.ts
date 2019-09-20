@@ -28,9 +28,9 @@ export declare enum EventBus {
     Mods = 5,
     Multiplayer = 6,
     Players = 7,
-    Steamworks = 8,
-    Ui = 9,
-    SaveManager = 10
+    SaveManager = 8,
+    Steamworks = 9,
+    Ui = 10
 }
 declare const eventBuses: {
     [EventBus.Actions](): typeof ActionExecutor;
@@ -41,16 +41,16 @@ declare const eventBuses: {
     [EventBus.Mods](): typeof ModManager;
     [EventBus.Multiplayer](): typeof Multiplayer;
     [EventBus.Players](): typeof Player;
+    [EventBus.SaveManager](): typeof SaveManager;
     [EventBus.Steamworks](): typeof Steamworks;
     [EventBus.Ui](): typeof NewUi;
-    [EventBus.SaveManager](): typeof SaveManager;
 };
 export default eventBuses;
 export declare module EventBus {
     function register<E extends EventBus>(eventBus: E, classOrHost: ReturnType<(typeof eventBuses)[E]>): void;
     function register(eventBus: EventBus): (constructor: NullaryClass<any>) => void;
     function onEventBusRegistration(eventBus: EventBus, handler: NullaryFunction): void;
-    function subscriber<S extends NullaryClass<any>>(constructor: S): S;
+    function subscriber<S extends Class<any>>(constructor: S): S;
 }
 export declare type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends IEventEmitterHostClass<infer E> ? E : never;
 export declare type EventNameFromIndex<I extends EventBus> = keyof Events<ReturnType<(typeof eventBuses)[I]>>;

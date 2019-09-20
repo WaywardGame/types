@@ -9,9 +9,13 @@
  * https://waywardgame.github.io/
  */
 declare module Objects {
+    function keys<K extends string | number | symbol>(o: {
+        [key in K]?: any;
+    }): K[];
     function keys<O>(o: O): Array<keyof O>;
     function values<O>(o: O): Array<O[keyof O]>;
     function entries<O>(o: O): Array<[keyof O, O[keyof O]]>;
+    function fromEntries<K extends string | number | symbol, V>(entriesIterable: Iterable<[K, V] | readonly [K, V]>): { [key in K]: V; };
     function windowKeysToObject(windowKeys: string[]): any;
     function windowKeysToParentObject(windowKeys: string[]): any;
     function deepClone<T>(obj: T): T;

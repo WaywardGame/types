@@ -32,7 +32,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     equippedType?: EntityType;
     id: number;
     itemOrders?: number[];
-    legendary: IItemLegendary;
+    legendary?: IItemLegendary;
     maxDur: number;
     minDur: number;
     order: number;

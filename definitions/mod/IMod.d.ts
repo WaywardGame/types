@@ -11,7 +11,8 @@
 export declare enum MultiplayerCompatibility {
     Clientside = "clientside",
     Serverside = "serverside",
-    Compatible = "compatible"
+    Compatible = "compatible",
+    Incompatible = "incompatible"
 }
 export interface IModConfig {
     readonly name: string;

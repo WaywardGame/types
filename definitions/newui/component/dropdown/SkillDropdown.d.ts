@@ -13,4 +13,5 @@ import { IDropdownOption } from "newui/component/Dropdown";
 import EnumDropdown from "newui/component/dropdown/EnumDropdown";
 export default class SkillDropdown<OTHER_OPTIONS extends string = never> extends EnumDropdown<typeof SkillType, OTHER_OPTIONS> {
     constructor(defaultOption: OTHER_OPTIONS | SkillType, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
+    protected filterEnum(id: SkillType): boolean;
 }
