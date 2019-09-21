@@ -181,7 +181,8 @@ export declare enum TileUpdateType {
     TileEvent = 5,
     Tilled = 6,
     Terrain = 7,
-    Corpse = 8
+    Corpse = 8,
+    DoodadOverHidden = 9
 }
 export declare const DEFAULT_MAP_SIZE = 512;
 export declare const LINE_OF_SIGHT_RADIUS = 15;

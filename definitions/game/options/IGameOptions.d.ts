@@ -96,7 +96,16 @@ export interface IGameOptions {
     disableMods: boolean;
     milestoneModifiers: Set<Milestone>;
 }
+export declare enum UnlockedRecipesStrategy {
+    StartWithNone = 0,
+    UseUnlocks = 1,
+    AllUnlocked = 2
+}
 export interface IGameOptionsPlayer {
+    /**
+     * Whether the player should use their globally unlocked recipes in this game.
+     */
+    unlockedRecipes: UnlockedRecipesStrategy;
     /**
      * A map of options for each stat.
      */
@@ -121,7 +130,6 @@ export interface IGameOptionsPlayer {
          */
         customs: DefaultMap<SkillType, IGameOptionsSkill>;
     };
-    allRecipesUnlocked: boolean;
     reputation: {
         /**
          * The initial malignity

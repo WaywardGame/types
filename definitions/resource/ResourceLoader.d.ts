@@ -24,8 +24,8 @@ export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEve
     private spritePacker;
     private tilePacker;
     private imageOverrides;
-    initialize(gl: WebGL2RenderingContext): void;
-    loadResources(container?: IResourceContainer): Promise<void>;
+    initialize(gl: WebGL2RenderingContext, container: IResourceContainer): void;
+    loadResources(): Promise<void>;
     continueLoading(): void;
     takeLoadingSlot(callback: () => void): void;
     releaseLoadingSlot(): void;

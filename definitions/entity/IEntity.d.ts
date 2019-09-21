@@ -51,8 +51,12 @@ export interface IEntityEvents {
      * @param reason The reason for the change
      */
     statusChange(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
-    preMove(fromTile: ITile, toTile: ITile): boolean | undefined | void;
-    postMove(fromTile: ITile, toTile: ITile): void;
+    /**
+     * Called when the entity is removed from the game
+     */
+    removed(): void;
+    preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): boolean | undefined | void;
+    postMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
 }
 export declare enum StatusEffectChangeReason {
     Gained = 0,

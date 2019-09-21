@@ -73,12 +73,6 @@ export interface IHookHost {
     };
     [SYMBOL_HOST_NAME]?: string[];
     /**
-     * Called when getting the field of view radius for a player
-     * @param player The player object
-     * @returns The field of view radius for the player or undefined to use the default logic
-     */
-    getPlayerFieldOfViewRadius?(player: Player): number | undefined;
-    /**
      * Called when getting the player's maximum health
      * @param maxHealth The current max health of the player (after any other previous mods)
      * @param player The player object

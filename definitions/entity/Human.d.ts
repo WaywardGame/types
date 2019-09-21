@@ -23,7 +23,7 @@ import { IEventEmitter } from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
-import { IContainer, ItemType, ItemTypeGroup } from "item/IItem";
+import { EquipEffect, EquipEffectByType, IContainer, ItemType, ItemTypeGroup } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
@@ -48,7 +48,6 @@ export default abstract class Human extends Entity {
     handToUse: EquipType | undefined;
     identifier: string;
     inventory: IContainer;
-    lightBonus: number;
     messages: MessageManager;
     notes: NoteManager;
     options: IOptions;
@@ -59,14 +58,14 @@ export default abstract class Human extends Entity {
     state: PlayerState;
     swimming: boolean;
     canSendMessage: boolean;
-    protected _fovRadius: number;
-    protected _fovMaxRadius: number;
     private readonly privateStore;
+    private readonly equipEffects;
     constructor();
     resetStatTimers(): void;
     isLocalPlayer(): boolean;
     setOptions(options: IOptions): void;
     getName(): Translation;
+    getEquipEffect<E extends EquipEffect>(type: E): FirstIfOne<EquipEffectByType<E>>;
     getProtectedItemsOptions(): IProtectedItemOptions;
     getReputation(): number;
     /**

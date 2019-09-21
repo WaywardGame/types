@@ -61,7 +61,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
      * Called when the mod is unloaded
      */
     onUnload(): void;
-    getPlayerFieldOfViewRadius(player: Player): number | undefined;
     getPlayerMaxHealth(maxHealth: number, player: Player): number;
     getPlayerMaxWeight(maxWeight: number, player: Player): number;
     getPlayerMovementIntent(player: Player): IMovementIntent | undefined;

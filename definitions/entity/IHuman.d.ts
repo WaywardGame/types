@@ -11,7 +11,7 @@
 import { ActionType } from "entity/action/IAction";
 import Entity from "entity/Entity";
 import { AttackType } from "entity/IEntity";
-import { Events } from "event/EventBuses";
+import { Events } from "event/EventEmitter";
 import { IHasImagePath, Quality } from "game/IObject";
 import { ItemType, RecipeLevel } from "item/IItem";
 import Item from "item/Item";
@@ -47,6 +47,7 @@ export interface IHumanEvents extends Events<Entity> {
      * @returns False if the npc cannot attack, or undefined to use the default logic
      */
     canAttack(weapon: Item | undefined, attackType: AttackType): boolean | undefined;
+    calculateEquipmentStats(): any;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;

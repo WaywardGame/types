@@ -17,6 +17,7 @@ export default class QuestManager extends EventEmitter.Host<IQuestManagerEvents>
     private readonly host;
     private readonly quests;
     private readonly hookTriggers;
+    private readonly eventBusTriggers;
     private readonly hostTriggers;
     private readonly initializedQuests;
     constructor(host: Player);

@@ -10,7 +10,6 @@
  */
 import ActionExecutor from "entity/action/ActionExecutor";
 import Player from "entity/player/Player";
-import { IEventEmitterHost, IEventEmitterHostClass } from "event/EventEmitter";
 import Game from "game/Game";
 import ItemManager from "item/ItemManager";
 import LanguageManager from "language/LanguageManager";
@@ -50,12 +49,5 @@ export declare module EventBus {
     function register<E extends EventBus>(eventBus: E, classOrHost: ReturnType<(typeof eventBuses)[E]>): void;
     function register(eventBus: EventBus): (constructor: NullaryClass<any>) => void;
     function onEventBusRegistration(eventBus: EventBus, handler: NullaryFunction): void;
-    function subscriber<S extends Class<any>>(constructor: S): S;
 }
-export declare type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends IEventEmitterHostClass<infer E> ? E : never;
-export declare type EventNameFromIndex<I extends EventBus> = keyof Events<ReturnType<(typeof eventBuses)[I]>>;
-export declare type EventHandlerFromIndex<I extends EventBus, K extends string | number | symbol> = Handler<HostFromHostOrHostClass<ReturnType<(typeof eventBuses)[I]>>, PropertyOf<Events<ReturnType<(typeof eventBuses)[I]>>, K>>;
-declare type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
-declare type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
-declare type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
-declare type HostFromHostOrHostClass<H extends IEventEmitterHost<any> | IEventEmitterHostClass<any>> = H extends IEventEmitterHost<any> ? H : InstanceOf<Extract<H, IEventEmitterHostClass<any>>>;
+export declare type EventBusHost<E extends EventBus> = ReturnType<(typeof eventBuses)[E]>;

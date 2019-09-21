@@ -10,10 +10,16 @@
  */
 import { PriorityMap } from "utilities/map/PriorityMap";
 export declare const SYMBOL_SUBSCRIPTIONS: unique symbol;
+declare type Abstract<T> = Function & {
+    prototype: T;
+};
+declare type Constructor<T> = new (...args: any[]) => T;
+declare type ClassOrAbstractClass<T> = Abstract<T> | Constructor<T>;
 export interface IEventEmitterHost<E> {
     event: IEventEmitter<this, E>;
 }
-export declare type IEventEmitterHostClass<E> = AnyClass<IEventEmitterHost<E>>;
+export declare type IEventEmitterHostClass<E> = ClassOrAbstractClass<IEventEmitterHost<E>>;
+export declare type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends IEventEmitterHostClass<infer E> ? E : never;
 export interface ITrueEventEmitterHostClass<E> extends Class<any> {
     [SYMBOL_SUBSCRIPTIONS]: Map<any, Map<keyof E, PriorityMap<Set<Iterable<string | Handler<any, any>>>>>>;
 }

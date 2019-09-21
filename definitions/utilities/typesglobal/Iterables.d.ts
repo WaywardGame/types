@@ -18,4 +18,5 @@ declare global {
     type Head<T extends any[]> = T[0];
     type Tail<A extends any[]> = ((...args: A) => any) extends ((_: any, ...args: infer A2) => any) ? A2 : never;
     type AddHead<H, A extends any[]> = ArgumentsOf<(arg1: H, ...args: A) => any>;
+    type FirstIfOne<T extends any[]> = T extends [infer FIRST] ? FIRST : T;
 }

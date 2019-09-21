@@ -36,7 +36,7 @@ export default class WorldLayer implements IWorldLayer {
     isTilled(terrain: TerrainData): boolean;
     setTile(x: number, y: number, terrainType: TerrainType, terrainMasks?: TerrainMask): void;
     updateAll(): void;
-    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean): void;
+    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean, updateNeighbors?: boolean): void;
     private mapIndex;
     private setTileInternal;
 }

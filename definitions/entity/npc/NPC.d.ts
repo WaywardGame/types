@@ -13,7 +13,7 @@ import Human from "entity/Human";
 import { AiType, EntityType, MoveType } from "entity/IEntity";
 import { EquipType, ICustomizations } from "entity/IHuman";
 import { NPCType } from "entity/npc/NPCS";
-import { Events } from "event/EventBuses";
+import { Events } from "event/EventEmitter";
 import { IEventEmitter } from "event/EventEmitter";
 import { ItemType } from "item/IItem";
 import Item from "item/Item";
@@ -90,7 +90,7 @@ export default abstract class NPC extends Human {
     protected attack(): boolean;
     protected move(): boolean;
     protected autoScaleStats(): void;
-    protected preMove(oldTile: ITile, tile: ITile): void;
-    protected postMove(fromTile: ITile, toTile: ITile): void;
+    protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
+    protected postMove(): void;
     private checkMove;
 }

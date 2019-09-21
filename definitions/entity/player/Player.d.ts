@@ -99,7 +99,6 @@ export default class Player extends Human {
     checkSkillMilestones(): void;
     staminaCheck(): boolean;
     addMilestone(milestone: Milestone, data?: number, update?: boolean): void;
-    calculateEquipmentStats(): void;
     getDefaultCarveTool(): Item | undefined;
     isFacingCarvableTile(): boolean;
     hasTamedCreature(creature: Creature): boolean;

@@ -15,7 +15,7 @@ import IExploreMap from "renderer/IExploreMap";
 import { TerrainData } from "renderer/IWorld";
 import { ITile, TerrainType } from "tile/ITerrain";
 export declare type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean) => void;
-export declare type onDoodadUpdateDelegate = (x: number, y: number, doodadType: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, doodadVariationX: number, doodadVariationY: number, hasGraphicVariation: boolean, flushImmediate: boolean) => void;
+export declare type onDoodadUpdateDelegate = (x: number, y: number, doodadType: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, doodadVariationX: number, doodadVariationY: number, hasGraphicVariation: boolean, terrainMasks: TerrainMask, flushImmediate: boolean) => void;
 export interface IWorldLayer {
     width: number;
     height: number;
@@ -41,7 +41,8 @@ export interface IWorldLayer {
 export default IWorldLayer;
 export declare enum TerrainMask {
     None = 0,
-    Type = 536870911,
+    Type = 268435455,
+    DoodadOverHidden = 268435456,
     Tilled = 536870912,
     Wall = 1073741824,
     Fence = 2147483648

@@ -15,7 +15,7 @@ import NPC from "entity/npc/NPC";
 import { IMessage } from "entity/player/IMessageManager";
 import MessageManager from "entity/player/MessageManager";
 import Player from "entity/player/Player";
-import { Events } from "event/EventBuses";
+import { Events } from "event/EventEmitter";
 import { Milestone } from "game/milestones/IMilestone";
 import { IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";

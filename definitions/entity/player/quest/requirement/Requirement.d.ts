@@ -10,7 +10,8 @@
  */
 import Player from "entity/player/Player";
 import { IQuestRequirementApi } from "entity/player/quest/requirement/IRequirement";
-import { Events } from "event/EventBuses";
+import { Events } from "event/EventEmitter";
+import { EmitterOrBus, Event, Handler } from "event/EventManager";
 import Translation from "language/Translation";
 import { Hook } from "mod/IHookManager";
 import Mod from "mod/Mod";
@@ -19,6 +20,7 @@ export declare type QuestRequirementApi<R extends QuestRequirement<any, any>> = 
 export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> {
     readonly defaultData: D;
     private readonly triggers;
+    private readonly eventTriggers;
     private readonly hostTriggers;
     private translation?;
     private completionAmountGetter;
@@ -30,8 +32,10 @@ export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> {
      */
     setTrigger<H extends Hook>(hook: H, checker: (api: IQuestRequirementApi<O, D>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
     getTriggers(): IterableIterator<[Hook, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
+    setEventTrigger<E extends EmitterOrBus, K extends Event<E>>(bus: E, event: K, checker: (api: IQuestRequirementApi<O, D>, ...args: Parameters<Handler<E, K>>) => boolean): this;
+    getEventBusTriggers(): IterableIterator<[EmitterOrBus, [string | number | symbol, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]]>;
     setHostTrigger<E extends keyof Events<Player>>(event: E, checker: (api: IQuestRequirementApi<O, D>, player: Player, ...args: ArgumentsOf<Events<Player>[E]>) => boolean): this;
-    getHostTriggers(): IterableIterator<["spawn" | "milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "restStart" | "restEnd" | "displayMessage" | "skillChange" | "canConsumeItem" | "canDropItem" | "canAttack" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<O, D>, player: Player, ...args: any[]) => boolean]>;
+    getHostTriggers(): IterableIterator<["spawn" | "milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "restStart" | "restEnd" | "displayMessage" | "skillChange" | "canConsumeItem" | "canDropItem" | "canAttack" | "calculateEquipmentStats" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "removed" | "preMove" | "postMove", (api: IQuestRequirementApi<O, D>, player: Player, ...args: any[]) => boolean]>;
     setInitializeTrigger(checker: (api: IQuestRequirementApi<O, D>) => boolean): this;
     getInitializeTrigger(): ((api: IQuestRequirementApi<O, D>) => boolean) | undefined;
     setRelations(relations: HighlightSelector[]): this;

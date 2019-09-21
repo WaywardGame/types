@@ -3,7 +3,7 @@
 	"description": "TypeScript declarations for Wayward, used for modding.",
 	"version": "2.8.0",
 	"dependencies": {
-		"@wayward/goodstream": "0.5.1"
+		"@wayward/goodstream": "0.5.2"
 	},
 	"license": "MIT",
 	"repository": {

@@ -82,7 +82,14 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     processSpecialAbilities(enemy: Player | Creature | undefined, bypass?: boolean): boolean;
     increaseWaste(item: Item): void;
     onUnserialized(): void;
-    protected preMove(oldTile: ITile, tile: ITile): void;
+    /**
+     * Updates the DoodadOverHidden tile flag if the creature is large
+     * large creatures should render over the doodad over layer
+     * which means we should hide the doodad over layer for doodads on the creature
+     */
+    updateDoodadOverHiddenState(x: number, y: number, z: number, tile: ITile, hidden: boolean): void;
+    protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
+    protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
     private inspectResistancesAndVulnerabilities;
     private inspectHappiness;
     private findPath;

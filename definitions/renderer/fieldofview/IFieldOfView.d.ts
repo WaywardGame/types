@@ -29,7 +29,6 @@ export interface IFieldOfView {
     getTextureSize(): number;
     resetGl(gl: WebGL2RenderingContext): void;
     tickSeed(): void;
-    updateRadius(radius: number, maxRadius: number): void;
     updateTransitionProgress(): boolean;
     resetTransitionProgress(): void;
 }

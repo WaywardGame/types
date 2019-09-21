@@ -11,7 +11,7 @@
 import { IImageOverrideDescription } from "mod/IModInfo";
 import Vec2 from "utilities/math/Vector2";
 export interface IResourceLoader {
-    initialize(gl: WebGL2RenderingContext): void;
+    initialize(gl: WebGL2RenderingContext, container: IResourceContainer): void;
     loadResources(container?: IResourceContainer): Promise<void>;
     takeLoadingSlot(callback: () => void): void;
     getImageOverride(src: string): Partial<IImageOverrideDescription> | undefined;

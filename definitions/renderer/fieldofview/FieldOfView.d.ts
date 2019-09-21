@@ -9,12 +9,16 @@
  * https://waywardgame.github.io/
  */
 import Player from "entity/player/Player";
+import EventEmitter from "event/EventEmitter";
 import IFieldOfView from "renderer/fieldofview/IFieldOfView";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { CompiledProgram } from "renderer/Shaders";
 import { IBound3 } from "utilities/math/Bound3";
 import Vec2 from "utilities/math/Vector2";
-export default class FieldOfView implements IFieldOfView {
+export interface IFieldOfViewEvents {
+    getPlayerFieldOfViewRadius(radius: number, player: Player): any;
+}
+export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> implements IFieldOfView {
     private gl;
     radius: number;
     maxRadius: number;
@@ -42,7 +46,7 @@ export default class FieldOfView implements IFieldOfView {
     static compileShaders(gl: WebGL2RenderingContext): void;
     constructor(gl: WebGL2RenderingContext, radius: number, maxRadius: number, subdivisions?: number);
     resetGl(gl: WebGL2RenderingContext): void;
-    updateRadius(radius: number, maxRadius: number): void;
+    updateRadius(player?: Player): void;
     getTextureSize(): number;
     getSubdivisions(): number;
     tickSeed(): void;

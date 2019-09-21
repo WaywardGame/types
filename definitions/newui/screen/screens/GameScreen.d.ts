@@ -11,8 +11,7 @@
 import { IDamageInfo } from "entity/creature/ICreature";
 import Human from "entity/Human";
 import Player from "entity/player/Player";
-import { Events } from "event/EventBuses";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import { IMapRequest } from "game/IGame";
 import { BookType } from "item/IItem";
 import { IHookHost } from "mod/IHookHost";

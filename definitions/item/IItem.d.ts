@@ -53,7 +53,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     onUse?: {
         [index: number]: any;
     };
-    equipEffect?: [EquipEffect, ...any[]];
+    equipEffect?: EquipEffects;
     damageType?: DamageType;
     weight?: number;
     reducedWeight?: number;
@@ -238,6 +238,15 @@ export declare enum EquipEffect {
     LightSource = 0,
     Telescopy = 1
 }
+interface IEquipEffects {
+    [EquipEffect.LightSource]: [number];
+    [EquipEffect.Telescopy]: [number, number];
+}
+export declare const EQUIP_EFFECTS_DEFAULT: IEquipEffects;
+export declare type EquipEffects = {
+    [K in keyof IEquipEffects]: AddHead<K, Extract<IEquipEffects[K], any[]>>;
+}[keyof IEquipEffects];
+export declare type EquipEffectByType<T extends EquipEffect> = IEquipEffects[T];
 export declare enum RecipeLevel {
     Simple = 0,
     Intermediate = 1,
@@ -835,3 +844,4 @@ export declare enum ItemTypeGroup {
     All = 877,
     Last = 878
 }
+export {};
