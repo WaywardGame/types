@@ -31,6 +31,7 @@ export interface IWorldLayer {
     isFence(terrain: TerrainData): boolean;
     isTilled(terrain: TerrainData): boolean;
     isWall(terrain: TerrainData): boolean;
+    isDoodadOverHidden(terrain: TerrainData): boolean;
     getTileDecoration(x: number, y: number): number;
     resetExploredMap(): void;
     setTile(x: number, y: number, terrainType: TerrainType | undefined, terrainMasks?: TerrainMask): void;

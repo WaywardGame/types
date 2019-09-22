@@ -34,6 +34,7 @@ export default class WorldLayer implements IWorldLayer {
     isWall(terrain: TerrainData): boolean;
     isFence(terrain: TerrainData): boolean;
     isTilled(terrain: TerrainData): boolean;
+    isDoodadOverHidden(terrain: TerrainData): boolean;
     setTile(x: number, y: number, terrainType: TerrainType, terrainMasks?: TerrainMask): void;
     updateAll(): void;
     updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean, updateNeighbors?: boolean): void;

@@ -52,7 +52,7 @@ export declare enum NounType {
 }
 export interface ILanguageEvents {
     change(language: string): void;
-    postGetTranslation(sections: IStringSection[]): IStringSection[] | undefined;
+    postGetTranslation(sections: IStringSection[]): IStringSection[];
 }
 export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> {
     language: string;

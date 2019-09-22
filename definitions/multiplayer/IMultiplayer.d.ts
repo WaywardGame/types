@@ -52,14 +52,16 @@ export declare enum MultiplayerSyncCheck {
     PlayerPositions = 24,
     Players = 25,
     Random = 26,
-    Seed = 27,
-    StaminaChanges = 28,
-    StatChange = 29,
-    Stats = 30,
-    Temp = 31,
-    Tick = 32,
-    Ticks = 33,
-    Weight = 34
+    Reputation = 27,
+    Seed = 28,
+    SkillGain = 29,
+    StaminaChanges = 30,
+    StatChange = 31,
+    Stats = 32,
+    Temp = 33,
+    Tick = 34,
+    Ticks = 35,
+    Weight = 36
 }
 export declare const maxPlayers = 32;
 export declare const defaultServerPort = 38740;
@@ -91,6 +93,7 @@ export interface IMultiplayerNetworkingOptions {
     checkSeedHistory: boolean;
     chunkSize: number;
     logPackets: boolean;
+    logSyncChecks: boolean;
     stopWebRtc: boolean;
     fakeRoundTripTime: number;
     recentPacketTracking: number;

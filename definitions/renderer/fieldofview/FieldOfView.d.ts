@@ -16,7 +16,7 @@ import { CompiledProgram } from "renderer/Shaders";
 import { IBound3 } from "utilities/math/Bound3";
 import Vec2 from "utilities/math/Vector2";
 export interface IFieldOfViewEvents {
-    getPlayerFieldOfViewRadius(radius: number, player: Player): any;
+    getPlayerFieldOfViewRadius(radius: number, player: Player): number;
 }
 export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> implements IFieldOfView {
     private gl;
