@@ -58,7 +58,6 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     gatherSkillUse?: SkillType;
     graphicVariation?: boolean;
     group?: DoodadTypeGroup[];
-    growthCycle?: boolean;
     growthParticles?: IDoodadParticles;
     harvest?: IDoodadLoot;
     isAnimated?: boolean;
@@ -226,5 +225,5 @@ export declare enum GrowingStage {
     Budding = 3,
     Flowering = 4,
     Ripening = 5,
-    Dead = 6
+    Bare = 6
 }

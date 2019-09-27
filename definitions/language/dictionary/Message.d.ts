@@ -530,7 +530,7 @@ declare enum Message {
     PlantHasResourcesToHarvest = 518,
     PlantHighlyFertile = 519,
     Planting = 520,
-    PlantIsDead = 521,
+    PlantIsBare = 521,
     PlantIsFertile = 522,
     PlantIsInStage = 523,
     PlantIsNotFertile = 524,

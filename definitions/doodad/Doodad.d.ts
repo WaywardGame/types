@@ -151,7 +151,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     private processSpread;
     /**
-     * Grow over time
+     * Regenerate (heal durability) over time
      */
     private processRegeneration;
     /**
