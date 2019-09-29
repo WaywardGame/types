@@ -17,7 +17,7 @@ import Translation from "language/Translation";
 export default class CorpseManager {
     create(type: CreatureType, x: number, y: number, z: number, decay?: number, aberrant?: boolean, name?: string, qualityBonus?: number): ICorpse | undefined;
     updateAll(): void;
-    getResources(corpse: ICorpse): ItemType[];
+    getResources(corpse: ICorpse, clientSide?: boolean): ItemType[];
     remove(corpse: ICorpse): void;
     getName(typeOrCorpse: CreatureType | ICorpse, article?: boolean, count?: number, showCount?: boolean): Translation;
     getCorpseTranslations(corpses: ICorpse[]): import("@wayward/goodstream/Stream").default<Translation>;

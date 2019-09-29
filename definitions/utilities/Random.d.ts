@@ -85,10 +85,10 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
 }
 export declare function convertStringToSeed(seed: string | number): number;
 export declare class SeededGenerator implements IRandomGenerator {
+    history: IRandomHistory[] | undefined;
     private debug;
     private seed;
     private readonly pushedSeeds;
-    private history;
     constructor();
     tickSeed(s: number): number;
     getSeed(): number;
