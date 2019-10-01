@@ -43,7 +43,7 @@ export declare enum Source {
      */
     Creature = 6,
     /**
-     * Messages referring to your equipment. Tools, armour, things breaking, etc
+     * Messages referring to your equipment. Tools, armour, things breaking, etc.
      */
     Equipment = 7,
     /**
@@ -81,7 +81,11 @@ export declare enum Source {
     /**
      * "You felt your X increasing" messages
      */
-    Stat = 16
+    Stat = 16,
+    /**
+     * The single message type that logs your reputation increases/reductions
+     */
+    Reputation = 17
 }
 export interface IMessage {
     id: number;
