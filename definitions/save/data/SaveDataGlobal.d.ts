@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { ICharacter, ICrafted } from "entity/IHuman";
-import { IMilestoneData } from "game/milestones/IMilestone";
+import { IMilestoneData, Milestone } from "game/milestones/IMilestone";
 import { ModState } from "mod/IModInfo";
 import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
 import { IHighscore, IOptions } from "save/data/ISaveDataGlobal";
@@ -44,7 +44,7 @@ export default class SaveDataGlobal {
     };
     multiplayerBannedPlayers: string[];
     multiplayerPreviousGames: {
-        [index: string]: ICharacter | undefined;
+        [index: string]: IMultiplayerPreviousGame | undefined;
     };
     multiplayerMessageOfTheDay: string;
     characters: ISavedCharacter[];
@@ -60,4 +60,8 @@ export default class SaveDataGlobal {
      * Resets all milestone progress
      */
     resetMilestones(): void;
+}
+export interface IMultiplayerPreviousGame {
+    character: ICharacter;
+    milestoneModifiers: Set<Milestone>;
 }

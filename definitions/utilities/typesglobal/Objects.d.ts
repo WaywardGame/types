@@ -13,4 +13,7 @@ declare global {
     type Entry<O> = O extends Descriptions<infer K, infer V> ? [K, V] : never;
     type Key<O> = O extends Descriptions<infer K, any> ? K : never;
     type Value<O> = O extends Descriptions<any, infer V> ? V : never;
+    type ExcludeKeys<O, K extends string | number | symbol> = {
+        [KN in Exclude<keyof O, K>]: O[KN];
+    };
 }

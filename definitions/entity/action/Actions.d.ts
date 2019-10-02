@@ -48,7 +48,7 @@ declare const actionDescriptions: {
     [ActionType.Ignite]: import("./Action").Action<[import("./IAction").ActionArgument.ItemInventory], import("../player/Player").default | import("../npc/NPC").default, void>;
     [ActionType.Inspect]: import("./Action").Action<[import("./IAction").ActionArgument.Vector3], import("../player/Player").default | import("../npc/NPC").default, void>;
     [ActionType.Jump]: import("./Action").Action<[], import("../player/Player").default | import("../npc/NPC").default, void>;
-    [ActionType.Learn]: import("./Action").Action<[import("./IAction").ActionArgument.ItemNearby], import("../player/Player").default | import("../npc/NPC").default, void>;
+    [ActionType.Learn]: import("./Action").Action<[import("./IAction").ActionArgument.ItemNearby], import("../player/Player").default, void>;
     [ActionType.LockPick]: import("./Action").Action<[import("./IAction").ActionArgument.ItemInventory], import("../player/Player").default | import("../npc/NPC").default, void>;
     [ActionType.Melee]: import("./Action").Action<[[import("./IAction").ActionArgument.Item, import("./IAction").ActionArgument.Undefined], [import("./IAction").ActionArgument.AttackType, import("./IAction").ActionArgument.Undefined]], import("../player/Player").default | import("../npc/NPC").default, void>;
     [ActionType.Move]: import("./Action").Action<[import("./IAction").ActionArgument.Direction], import("../player/Player").default, void>;
