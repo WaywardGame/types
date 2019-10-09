@@ -13,7 +13,9 @@ import EventEmitter from "event/EventEmitter";
 import IClientStore from "save/clientStore/IClientStore";
 import { ISaveInfo, ISaveManagerEvents, ISaveObject, SaveSort, SortDirection } from "save/ISaveManager";
 import ISerializer from "save/ISerializer";
+import { IVersionInfo } from "utilities/Version";
 export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
+    lastLoadedVersion: IVersionInfo;
     private loadedGlobalSlot;
     private readonly dataStorage;
     private multiplayerSlotData;

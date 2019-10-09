@@ -8,20 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import UiTranslation from "language/dictionary/UiTranslation";
-import { ThreeStateButtonState } from "newui/component/ThreeStateButton";
 import Dialog from "newui/screen/screens/game/component/Dialog";
+import { IFilters } from "newui/screen/screens/game/IMessages";
 interface IMessagesEditFiltersDialogEvents extends Events<Dialog> {
     edit(): any;
     reset(): any;
-}
-export interface IFilters {
-    [key: string]: IFilter;
-}
-export interface IFilter {
-    [key: string]: ThreeStateButtonState;
 }
 export default class MessagesEditFiltersDialog extends Dialog {
     event: IEventEmitter<this, IMessagesEditFiltersDialogEvents>;

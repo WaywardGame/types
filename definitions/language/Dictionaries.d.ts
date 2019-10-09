@@ -41,6 +41,7 @@ import { DisconnectReason, JoinServerRetryReason, UnableToJoinReason } from "mul
 import { Bindable, BindableType } from "newui/IBindingManager";
 import { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import { MessageTimestamp } from "newui/screen/screens/game/IGameScreenApi";
+import { MessageFilterDefault } from "newui/screen/screens/game/IMessages";
 import { CharacterSort } from "newui/screen/screens/menu/menus/character/Character";
 import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 import { HighscoreSort } from "newui/screen/screens/menu/menus/highscores/IHighscoresMenu";
@@ -83,37 +84,38 @@ export declare enum Dictionary {
     JoinServerRetryReason = 28,
     LegendaryType = 29,
     Message = 30,
-    MessagesTimestampMode = 31,
-    Milestone = 32,
-    MilestoneModifierGroup = 33,
-    Misc = 34,
-    ModLoadError = 35,
-    ModLoadFailureReason = 36,
-    ModProvide = 37,
-    ModSort = 38,
-    ModType = 39,
-    MultiplayerDisconnectReason = 40,
-    MusicPlaylist = 41,
-    Note = 42,
-    NPC = 43,
-    Number = 44,
-    PartOfDay = 45,
-    PowerMode = 46,
-    Quality = 47,
-    Quest = 48,
-    QuestRequirement = 49,
-    SaveSlotSort = 50,
-    Skill = 51,
-    Source = 52,
-    Stat = 53,
-    StatusEffect = 54,
-    TeamMemberResponsibility = 55,
-    Terrain = 56,
-    TileEvent = 57,
-    Ui = 58,
-    UiQuadrant = 59,
-    UnableToJoinReason = 60,
-    UnlockedRecipesStrategy = 61
+    MessagesDefaultFilter = 31,
+    MessagesTimestampMode = 32,
+    Milestone = 33,
+    MilestoneModifierGroup = 34,
+    Misc = 35,
+    ModLoadError = 36,
+    ModLoadFailureReason = 37,
+    ModProvide = 38,
+    ModSort = 39,
+    ModType = 40,
+    MultiplayerDisconnectReason = 41,
+    MusicPlaylist = 42,
+    Note = 43,
+    NPC = 44,
+    Number = 45,
+    PartOfDay = 46,
+    PowerMode = 47,
+    Quality = 48,
+    Quest = 49,
+    QuestRequirement = 50,
+    SaveSlotSort = 51,
+    Skill = 52,
+    Source = 53,
+    Stat = 54,
+    StatusEffect = 55,
+    TeamMemberResponsibility = 56,
+    Terrain = 57,
+    TileEvent = 58,
+    Ui = 59,
+    UiQuadrant = 60,
+    UnableToJoinReason = 61,
+    UnlockedRecipesStrategy = 62
 }
 export declare type Enum = {
     [key: string]: number;
@@ -153,6 +155,7 @@ declare const dictionaries: {
     [Dictionary.JoinServerRetryReason]: typeof JoinServerRetryReason;
     [Dictionary.LegendaryType]: typeof LegendaryType;
     [Dictionary.Message]: typeof Message;
+    [Dictionary.MessagesDefaultFilter]: typeof MessageFilterDefault;
     [Dictionary.MessagesTimestampMode]: typeof MessageTimestamp;
     [Dictionary.Milestone]: typeof Milestone;
     [Dictionary.MilestoneModifierGroup]: typeof MilestoneModifierGroup;

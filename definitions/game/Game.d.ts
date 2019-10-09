@@ -106,6 +106,8 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     tileTexture: WebGLTexture;
     tileTextureSizeInversed: Vector2;
     visible: boolean;
+    lastBuildTime: number;
+    lastSaveVersion: IVersionInfo;
     private _updateRender;
     private gameCanvas;
     private thumbnailResolve?;

@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IMessage, Source } from "entity/player/IMessageManager";
+import { IMessage } from "entity/player/IMessageManager";
 import Player from "entity/player/Player";
 import { RequirementInstance } from "entity/player/quest/quest/Quest";
 import { QuestInstance } from "entity/player/quest/QuestManager";
@@ -20,25 +20,19 @@ import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
 import Input from "newui/component/Input";
 import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
-import { IFilters } from "newui/screen/screens/game/dialog/MessagesEditFiltersDialog";
 import { IPinnedMessage, MessageTimestamp, PinType, QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+import { IFilters, MessageFilterDefault } from "newui/screen/screens/game/IMessages";
 import { IStringSection } from "utilities/string/Interpolator";
-export declare const DEFAULT_MAX_MESSAGES = 30;
-export interface IMessageFilter {
-    name: string;
-    allowedSources: Source[];
-}
 interface IMessagesEvents extends Events<QuadrantComponent> {
     pinQuestRequirement(pin: IPinnedMessage): any;
     unpinQuestRequirement(pin: IPinnedMessage): any;
 }
 export default class Messages extends QuadrantComponent implements IHookHost {
-    static preferredQuadrant: Quadrant;
     static sendChatMessage(sender: Player, message: string): typeof Messages;
-    static readonly allFilterName: string;
     private static readonly defaultFilters;
-    event: IEventEmitter<this, IMessagesEvents>;
     readonly preferredQuadrant: Quadrant;
+    static preferredQuadrant: Quadrant;
+    event: IEventEmitter<this, IMessagesEvents>;
     readonly sendButton: Button;
     readonly pinnedMessages: Component;
     readonly log: Component;
@@ -77,6 +71,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     onDisplayMessage(player: Player, message: IMessage, addBackwards?: boolean): void;
     onWrittenNote(player: Player, id: number): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
+    getDefaultFilterName(filter: MessageFilterDefault): string;
     /**
      * Event handler for when the text in the chat box should be sent as a message.
      */
