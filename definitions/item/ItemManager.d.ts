@@ -59,8 +59,8 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
      */
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     weightTree(itemType: ItemType, weightType?: WeightType, debug?: boolean, depth?: number): number;
-    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer, quality?: Quality): Item;
-    createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality): Item;
+    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer, quality?: Quality, human?: Human): Item;
+    createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human): Item;
     isContainer(obj: unknown): obj is IContainer;
     moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: Quality): Item[];
     computeContainerWeight(container: IContainer): number;
@@ -112,7 +112,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     getGroups(itemType: ItemType): import("@wayward/goodstream/Stream").default<ItemTypeGroup>;
     checkMilestones(player: Player, item: Item): void;
-    getDefaultDurability(weight: number, itemType: ItemType): number;
+    getDefaultDurability(human: Human | undefined, weight: number, itemType: ItemType): number;
     generateLookups(): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
     getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, allowIncreasedQuality?: boolean, bonusChance?: number): Quality | undefined;

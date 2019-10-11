@@ -48,7 +48,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     weightFraction: number;
     readonly fromDescription: import("../utilities/FromDescription").ISafeFn<IItemDescription, undefined>;
     private _description;
-    constructor(itemType?: ItemType | undefined, quality?: Quality);
+    constructor(itemType?: ItemType | undefined, quality?: Quality, human?: Human);
     toString(): string;
     /**
      * @deprecated This method currently shouldn't be used in production code, as it's to do with the new crafting system. Stay tuned.
@@ -91,7 +91,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
-    setQuality(quality?: Quality): void;
+    setQuality(human: Human | undefined, quality?: Quality): void;
     getAcceptableLegendaryTypes(): LegendaryType[];
     setLegendary(bypassType?: boolean): void;
     acquireNotify(player: Player): void;
