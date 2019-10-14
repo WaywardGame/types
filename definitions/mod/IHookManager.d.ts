@@ -11,10 +11,6 @@
 import { IHookHost } from "mod/IHookHost";
 export declare enum Hook {
     GetCameraPosition = "getCameraPosition",
-    GetPlayerMaxHealth = "getPlayerMaxHealth",
-    GetPlayerMaxWeight = "getPlayerMaxWeight",
-    GetPlayerMovementIntent = "getPlayerMovementIntent",
-    GetPlayerSpriteBatchLayer = "getPlayerSpriteBatchLayer",
     GetPlayerWeightMovementPenalty = "getPlayerWeightMovementPenalty",
     GetPlayerWeightStatus = "getPlayerWeightStatus",
     GetTilePenalty = "getTilePenalty",

@@ -111,16 +111,13 @@ export default class Player extends Human {
     equip(item: Item, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     unequip(item: Item, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
-    getMovementIntent(): IMovementIntent | {
-        intent: Direction;
-        shouldDisableTurnDelay: boolean;
-    };
+    getMovementIntent(): IMovementIntent;
     updateMovementIntent(movementIntent: IMovementIntent): void;
     resetStatTimers(): void;
     /**
      * Gets the max health of the player.
      *
-     * Returns the result of `Hook.GetPlayerMaxHealth`, or the `max` in `Stat.Health`,
+     * Returns the result of the `"getMaxHealth"` event, or the `max` in `Stat.Health`,
      * if the result of the hook is `undefined`.
      */
     getMaxHealth(): number;

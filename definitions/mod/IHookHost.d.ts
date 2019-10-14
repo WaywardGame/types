@@ -19,7 +19,7 @@ import Human from "entity/Human";
 import { EquipType, SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { IMessage } from "entity/player/IMessageManager";
-import { IMovementIntent, PlayerState, WeightStatus } from "entity/player/IPlayer";
+import { PlayerState, WeightStatus } from "entity/player/IPlayer";
 import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
 import { IMapRequest, TileUpdateType } from "game/IGame";
@@ -31,7 +31,7 @@ import { Hook } from "mod/IHookManager";
 import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
-import { RenderFlag, SpriteBatchLayer } from "renderer/IWorldRenderer";
+import { RenderFlag } from "renderer/IWorldRenderer";
 import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2 } from "utilities/math/IVector";
@@ -72,33 +72,6 @@ export interface IHookHost {
         [hook in Hook]?: number;
     };
     [SYMBOL_HOST_NAME]?: string[];
-    /**
-     * Called when getting the player's maximum health
-     * @param maxHealth The current max health of the player (after any other previous mods)
-     * @param player The player object
-     * @returns The maximum health of the player
-     */
-    getPlayerMaxHealth?(maxHealth: number, player: Player): number;
-    /**
-     * Called when getting the player's maximum weight
-     * @param strength The current max health of the player (after any other previous mods)
-     * @param player The player object
-     * @returns The maximum health of the player
-     */
-    getPlayerMaxWeight?(maxWeight: number, player: Player): number;
-    /**
-     * Called when getting the players movement intent
-     * @param player The player object
-     * @returns The movement intent of the player or undefined to use the default logic
-     */
-    getPlayerMovementIntent?(player: Player): IMovementIntent | undefined;
-    /**
-     * Called when rendering the player in the viewport
-     * @param player The player object
-     * @param batchLayer The batch layer the player will render in
-     * @returns The batch layer the player should render in or undefined to use the default logic
-     */
-    getPlayerSpriteBatchLayer?(player: Player, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     /**
      * Called when getting the players weight movement penalty
      * @param player The player object

@@ -10,6 +10,7 @@
  */
 import Creature from "entity/creature/Creature";
 import NPC from "entity/npc/NPC";
+import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import IWorldRenderer, { SpriteBatchLayer } from "renderer/IWorldRenderer";
 import { ITileAdaptor } from "renderer/TileAdaptors";
@@ -40,6 +41,13 @@ export interface IWorldRendererEvents {
      * @returns The batch layer the creature should render in or undefined to use the default logic
      */
     getCreatureSpriteBatchLayer(creature: Creature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
+    /**
+     * Called when rendering the player in the viewport
+     * @param player The player object
+     * @param batchLayer The batch layer the player will render in
+     * @returns The batch layer the player should render in or undefined to use the default logic
+     */
+    getPlayerSpriteBatchLayer(player: Player, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     /**
      * Called when initializing each sprite batch layer.
      * @param layer The SpriteBatchLayer that is being initialized

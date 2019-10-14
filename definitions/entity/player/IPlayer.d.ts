@@ -39,6 +39,21 @@ export interface IPlayerEvents extends Events<Human> {
      */
     updateOption<O extends keyof IOptions>(key: O, value: IOptions[O]): void;
     /**
+     * Called when a message is being disaplyed for a player
+     * @param message The message that will be displayed
+     */
+    displayMessage(message: IMessage): void;
+    /**
+     * Called when getting the player's maximum health
+     * @param maxHealth The current max health of the player (after any other previous mods)
+     */
+    getMaxHealth(maxHealth: number): number;
+    /**
+     * Called when getting the player's maximum weight
+     * @param maxWeight The current max weight of the player (after any other previous mods)
+     */
+    getMaxWeight(maxWeight: number): number;
+    /**
      * Called when an item is added to the player's inventory
      * @param item The item object
      * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
@@ -64,6 +79,11 @@ export interface IPlayerEvents extends Events<Human> {
      */
     processMovement(x: number, y: number): void;
     /**
+     * Called when getting the players movement intent
+     * @returns The movement intent of the player or undefined to use the default logic
+     */
+    getMovementIntent(): IMovementIntent | undefined;
+    /**
      * Called when the player starts resting
      * @param restData The data related to the rest event
      */
@@ -73,11 +93,6 @@ export interface IPlayerEvents extends Events<Human> {
      * @param restData The data related to the rest event
      */
     restEnd(restData: IRestData): void;
-    /**
-     * Called when a message is being disaplyed for a player
-     * @param message The message that will be displayed
-     */
-    displayMessage(message: IMessage): void;
 }
 export declare enum TurnType {
     CheckUnderPlayer = 0,
@@ -164,6 +179,7 @@ export interface IMovementIntent {
      */
     intent?: MovementIntent;
     turnDelay?: number;
+    shouldDisableTurnDelay?: true;
 }
 export interface IPlayerTravelData {
     starvation: number;

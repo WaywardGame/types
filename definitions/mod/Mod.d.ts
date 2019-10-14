@@ -19,7 +19,7 @@ import Human from "entity/Human";
 import { EquipType, SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { IMessage } from "entity/player/IMessageManager";
-import { IMovementIntent, PlayerState, WeightStatus } from "entity/player/IPlayer";
+import { PlayerState, WeightStatus } from "entity/player/IPlayer";
 import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
 import { IMapRequest, TileUpdateType } from "game/IGame";
@@ -33,7 +33,7 @@ import { IHookHost } from "mod/IHookHost";
 import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
-import { RenderFlag, SpriteBatchLayer } from "renderer/IWorldRenderer";
+import { RenderFlag } from "renderer/IWorldRenderer";
 import { ITile } from "tile/ITerrain";
 import Log from "utilities/Log";
 import { Direction } from "utilities/math/Direction";
@@ -61,10 +61,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
      * Called when the mod is unloaded
      */
     onUnload(): void;
-    getPlayerMaxHealth(maxHealth: number, player: Player): number;
-    getPlayerMaxWeight(maxWeight: number, player: Player): number;
-    getPlayerMovementIntent(player: Player): IMovementIntent | undefined;
-    getPlayerSpriteBatchLayer(player: Player, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     getPlayerWeightMovementPenalty(player: Player): number | undefined;
     getPlayerWeightStatus(player: Player): WeightStatus | undefined;
     getCameraPosition(position: IVector2): IVector2 | undefined;
