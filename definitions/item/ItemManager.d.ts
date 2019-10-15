@@ -87,10 +87,10 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     getNPCWithItemInInventory(containable: IContainable): NPC | undefined;
     countItemsInContainer(containers: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: Item): number;
     countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item): number;
-    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item, human?: Human): Item | undefined;
-    getItemForHuman(human: Human, search: ItemType | ItemTypeGroup): Item | undefined;
-    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, human?: Human): Item | undefined;
-    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, human?: Human): Item[];
+    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item, human?: Human, allowProtectedItems?: boolean): Item | undefined;
+    getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, allowProtectedItems?: boolean): Item | undefined;
+    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, human?: Human, allowProtectedItems?: boolean): Item | undefined;
+    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, human?: Human, allowProtectedItems?: boolean): Item[];
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, human?: Human): Item[];
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, human?: Human): Item[];
     getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number): Item | undefined;

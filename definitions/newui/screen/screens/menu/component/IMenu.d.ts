@@ -19,14 +19,14 @@ export declare enum MenuId {
     Highscores = 4,
     Interrupt = 5,
     JoinServer = 6,
-    LoadGame = 7,
-    Main = 8,
-    Mods = 9,
-    Multiplayer = 10,
-    NewGame = 11,
-    Options = 12,
-    Pause = 13,
-    JoinServerChooseModifiersMenu = 14
+    JoinServerChooseModifiersMenu = 7,
+    LoadGame = 8,
+    Main = 9,
+    Mods = 10,
+    Multiplayer = 11,
+    NewGame = 12,
+    Options = 13,
+    Pause = 14
 }
 interface IMenuEvents extends Events<IComponent> {
     tab(): any;
