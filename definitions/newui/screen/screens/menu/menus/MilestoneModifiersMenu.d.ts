@@ -10,19 +10,16 @@
  */
 import { Milestone } from "game/milestones/IMilestone";
 import { BlockRow } from "newui/component/BlockRow";
-import { CheckButton } from "newui/component/CheckButton";
 import FilterRow from "newui/component/FilterRow";
 import Menu from "newui/screen/screens/menu/component/Menu";
+import MilestoneModifierCheckButton from "newui/screen/screens/menu/component/MilestoneModifierCheckButton";
 export default class MilestoneModifiersMenu extends Menu {
     private readonly milestones;
     rowBatchEnablingAndDisabling: BlockRow;
     filter: FilterRow;
     private readonly modifierCheckButtons;
     constructor(milestones: Set<Milestone>, allowHostMilestones: boolean);
-    createModifierCheckButton(milestone: Milestone, initialChecked?: boolean): CheckButton;
-    /**
-     * Returns the formatted CSS url for the stat icon.
-     */
-    private getMilestoneIcon;
+    createModifierCheckButton(milestone: Milestone, initialChecked?: boolean): MilestoneModifierCheckButton;
+    protected onShow(): void;
     private updateFilter;
 }

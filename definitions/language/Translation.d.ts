@@ -68,6 +68,8 @@ declare class Translation {
     static generator(textOrGenerator: GetterOfOr<string | IStringSection[]>): TranslationGenerator;
     static isSerializedTranslation(thing: unknown): thing is ISerializedTranslation;
     static deserialize(serializedTranslation: ISerializedTranslation): Translation;
+    static sorter(dictionary: Dictionary, entry?: number): (a: number, b: number) => number;
+    static sorter<T>(dictionary: Dictionary, entry: number | undefined, mapper: (v: T) => number): (a: T, b: T) => number;
     private static getStringSections;
     readonly isValid: boolean;
     private readonly translationData;

@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
 import { BlockRow } from "newui/component/BlockRow";
 import Button from "newui/component/Button";
@@ -49,7 +48,7 @@ export default class Menu extends Component implements IMenu, IHookHost {
      * When called in `show` or after `ComponentEvent.Show`, returns whether the menu was "went back to"
      * from a descendant menu.
      */
-    protected wentBackTo(): boolean;
+    wentBackTo(): boolean;
     protected onShowMenu(): void;
 }
 interface ITabEvents extends Events<Button> {

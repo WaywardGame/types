@@ -10,14 +10,12 @@
  */
 import { Milestone } from "game/milestones/IMilestone";
 import { ServerInfo } from "multiplayer/IMultiplayer";
-import Button from "newui/component/Button";
 import Menu from "newui/screen/screens/menu/component/Menu";
+import MilestoneModifiers from "newui/screen/screens/menu/component/MilestoneModifiers";
 export default class JoinServerChooseModifiersMenu extends Menu {
-    readonly buttonMilestoneModifiers: Button;
+    readonly milestoneModifiers: MilestoneModifiers;
     readonly milestones: Set<Milestone>;
     multiplayerServerToJoin: ServerInfo;
-    private milestoneModifiersMenu;
     constructor();
     protected refresh(): void;
-    private getMilestoneModifiersMenu;
 }

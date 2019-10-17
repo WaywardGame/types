@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Events } from "event/EventEmitter";
-import EventEmitter from "event/EventEmitter";
+import EventEmitter, { Events } from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
 import { AppendStrategy, IBox, IComponent, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
 import { Bindable, BindCatcherApi } from "newui/IBindingManager";
