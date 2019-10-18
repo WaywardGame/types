@@ -19,7 +19,7 @@ import Human from "entity/Human";
 import { EquipType, SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { IMessage } from "entity/player/IMessageManager";
-import { PlayerState, WeightStatus } from "entity/player/IPlayer";
+import { PlayerState } from "entity/player/IPlayer";
 import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
 import { IMapRequest, TileUpdateType } from "game/IGame";
@@ -61,12 +61,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
      * Called when the mod is unloaded
      */
     onUnload(): void;
-    getPlayerWeightMovementPenalty(player: Player): number | undefined;
-    getPlayerWeightStatus(player: Player): WeightStatus | undefined;
-    getCameraPosition(position: IVector2): IVector2 | undefined;
-    getTilePenalty(penalty: number, tile: ITile): number;
-    getZoomLevel(): number | undefined;
-    isHumanSwimming(human: Human, isSwimming: boolean): boolean | undefined;
     isPlayerSwimming(human: Human, isSwimming: boolean): boolean | undefined;
     isTileBlocked(tile: ITile): true | undefined;
     onBuild(human: Human, item: Item, tile: ITile, doodad: Doodad): void;

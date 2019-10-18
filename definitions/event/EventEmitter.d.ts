@@ -9,6 +9,13 @@
  * https://waywardgame.github.io/
  */
 import { PriorityMap } from "utilities/map/PriorityMap";
+export declare enum Priority {
+    Lowest = -2000,
+    Low = -1000,
+    Normal = 0,
+    High = 1000,
+    Highest = 2000
+}
 export declare const SYMBOL_SUBSCRIPTIONS: unique symbol;
 declare type Abstract<T> = Function & {
     prototype: T;

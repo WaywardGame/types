@@ -16,7 +16,7 @@ import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import Item from "item/Item";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
 import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
-import { IVector3 } from "utilities/math/IVector";
+import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
 export interface IGameEvents {
     pause(): any;
@@ -27,6 +27,16 @@ export interface IGameEvents {
     glLostContext(): any;
     glSetup(restored: boolean): any;
     glInitialized(): any;
+    /**
+     * Called when getting the position to render at. By default, this is the player's location.
+     * @param position The player's location
+     * @returns The new position to render at, or undefined to use the player's location
+     */
+    getCameraPosition(position: IVector2): IVector2 | undefined;
+    /**
+     * Called when setting the zoom level.
+     */
+    getZoomLevel(): number | undefined;
 }
 export declare enum TickSpeed {
     Min = 10,

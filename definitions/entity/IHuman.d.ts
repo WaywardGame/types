@@ -48,6 +48,12 @@ export interface IHumanEvents extends Events<Entity> {
      */
     canAttack(weapon: Item | undefined, attackType: AttackType): boolean | undefined;
     calculateEquipmentStats(): any;
+    /**
+     * Called when checking if a human is swimming
+     * @param isSwimming True if the human is swimming
+     * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
+     */
+    isSwimming(isSwimming: boolean): boolean | undefined;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;

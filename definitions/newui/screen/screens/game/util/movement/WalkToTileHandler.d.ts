@@ -8,9 +8,19 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import EventEmitter from "event/EventEmitter";
 import { BindCatcherApi } from "newui/IBindingManager";
+import { ITile } from "tile/ITerrain";
 import { IVector2 } from "utilities/math/IVector";
-export default class WalkToTileHandler {
+export interface IWalkToTileHandlerEvents {
+    /**
+     * Called when calculating the movement penalty of a tile.
+     * @param penalty The current penalty of the tile
+     * @param tile The tile to get the movement penalty of
+     */
+    getTilePenalty(penalty: number, tile: ITile): number;
+}
+export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHandlerEvents> {
     private previewTarget;
     private previewPath;
     private readonly overlays;

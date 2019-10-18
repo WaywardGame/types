@@ -19,7 +19,7 @@ import Human from "entity/Human";
 import { EquipType, SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { IMessage } from "entity/player/IMessageManager";
-import { PlayerState, WeightStatus } from "entity/player/IPlayer";
+import { PlayerState } from "entity/player/IPlayer";
 import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
 import { IMapRequest, TileUpdateType } from "game/IGame";
@@ -72,41 +72,6 @@ export interface IHookHost {
         [hook in Hook]?: number;
     };
     [SYMBOL_HOST_NAME]?: string[];
-    /**
-     * Called when getting the players weight movement penalty
-     * @param player The player object
-     * @returns The weight movement penalty for the player or undefined to use the default logic
-     */
-    getPlayerWeightMovementPenalty?(player: Player): number | undefined;
-    /**
-     * Called when getting the players weight status
-     * @param player The player object
-     * @returns The weight status of the player or undefined to use the default logic
-     */
-    getPlayerWeightStatus?(player: Player): WeightStatus | undefined;
-    /**
-     * Called when getting the position to render at. By default, this is the player's location.
-     * @param position The player's location
-     * @returns The new position to render at, or undefined to use the player's location
-     */
-    getCameraPosition?(position: IVector2): IVector2 | undefined;
-    /**
-     * Called when calculating the movement penalty of a tile.
-     * @param penalty The current penalty of the tile
-     * @param tile The tile to get the movement penalty of
-     */
-    getTilePenalty?(penalty: number, tile: ITile): number | undefined;
-    /**
-     * Called when setting the zoom level.
-     */
-    getZoomLevel?(): number | undefined;
-    /**
-     * Called when checking if a human is swimming
-     * @param human The human
-     * @param isSwimming True if the human is swimming
-     * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
-     */
-    isHumanSwimming?(human: Human, isSwimming: boolean): boolean | undefined;
     /**
      * Called when checking if a tile is blocked, used for pathing.
      * @param tile The tile to check
