@@ -62,7 +62,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
      */
     onUnload(): void;
     isPlayerSwimming(human: Human, isSwimming: boolean): boolean | undefined;
-    isTileBlocked(tile: ITile): true | undefined;
     onBuild(human: Human, item: Item, tile: ITile, doodad: Doodad): void;
     onContainerItemAdd(item: Item, container: IContainer): void;
     onContainerItemRemove(item: Item, container: IContainer): void;

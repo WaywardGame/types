@@ -11,8 +11,19 @@
 import Player from "entity/player/Player";
 import { ITile } from "tile/ITerrain";
 import { IVector2 } from "utilities/math/IVector";
-export declare function findPath(start: IVector2, end: IVector2, z: number, isTileBlocked: (tile: ITile, pos: IVector2) => boolean, getTilePenalty?: (tile: ITile, pos: IVector2) => number, maxNodesChecked?: number): IVector2[] | undefined;
-/**
- * Returns whether the tile is blocked (completely impassible)
- */
-export declare function isWalkToTileBlocked(player: Player, tile: ITile, pos: IVector2, clientSide: boolean): boolean;
+export interface IPathingEvents {
+    /**
+     * Called when checking if a tile is blocked, used for pathing.
+     * @param tile The tile to check
+     */
+    isTileBlocked?(tile: ITile): true | undefined;
+}
+declare const _default: {
+    findPath(start: IVector2, end: IVector2, z: number, isTileBlocked: (tile: ITile, pos: IVector2) => boolean, getTilePenalty?: ((tile: ITile, pos: IVector2) => number) | undefined, maxNodesChecked?: number): IVector2[] | undefined;
+    /**
+     * Returns whether the tile is blocked (completely impassible)
+     */
+    isWalkToTileBlocked(player: Player, tile: ITile, pos: IVector2, clientSide: boolean): boolean;
+    readonly event: import("../../event/EventEmitter").IEventEmitter<any, IPathingEvents>;
+};
+export default _default;

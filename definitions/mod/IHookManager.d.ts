@@ -10,7 +10,6 @@
  */
 import { IHookHost } from "mod/IHookHost";
 export declare enum Hook {
-    IsTileBlocked = "isTileBlocked",
     OnBindLoop = "onBindLoop",
     OnBuild = "onBuild",
     OnContainerItemAdd = "onContainerItemAdd",

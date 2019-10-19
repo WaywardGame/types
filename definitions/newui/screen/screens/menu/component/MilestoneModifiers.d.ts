@@ -14,12 +14,13 @@ import Component from "newui/component/Component";
 import { Heading } from "newui/component/Text";
 export default class MilestoneModifiers extends Component {
     private readonly milestones;
+    private readonly allowHostMilestones;
     readonly buttonMilestoneModifiers: Button;
     readonly wrapperChosenModifiers: Component;
     readonly headerChosenModifiers: Heading;
     readonly wrapperChosenModifiersList: Component;
     private milestoneModifiersMenu;
-    constructor(milestones: () => Set<Milestone>);
+    constructor(milestones: () => Set<Milestone>, allowHostMilestones: boolean);
     reset(): this;
     protected onReturnFromMilestoneModifiersMenu(): void;
     private refresh;

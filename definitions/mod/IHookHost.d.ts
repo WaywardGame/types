@@ -73,11 +73,6 @@ export interface IHookHost {
     };
     [SYMBOL_HOST_NAME]?: string[];
     /**
-     * Called when checking if a tile is blocked, used for pathing.
-     * @param tile The tile to check
-     */
-    isTileBlocked?(tile: ITile): true | undefined;
-    /**
      * Called when something is built on a tile
      * @param human The human object
      * @param item The item used to build the object
