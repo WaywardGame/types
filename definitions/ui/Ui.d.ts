@@ -46,6 +46,7 @@ export default class Ui extends Emitter {
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     getInventoryItemOrder(): any[];
     updateItem(item: Item): void;
+    syncAllItems(): void;
     hideContextMenu(): void;
     hideActionsMenu(): void;
     setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
