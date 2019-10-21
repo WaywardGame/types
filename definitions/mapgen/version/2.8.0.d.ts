@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import IMapGen from "mapgen/IMapGen";
-export default class MapGen270 implements IMapGen {
+export default class MapGen280 implements IMapGen {
     generateWorld(generateNewWorld: boolean): void;
     private setupTiles;
 }

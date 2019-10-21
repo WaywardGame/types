@@ -10,6 +10,6 @@
  */
 export default class DefaultMap<K, V> extends Map<K, V> {
     readonly defaultValue: V;
-    constructor(defaultValue: V, entries?: ReadonlyArray<readonly [K, V]>);
+    constructor(defaultValue: V, entries?: Iterable<readonly [K, V]>);
     initialize(key: K): V;
 }
