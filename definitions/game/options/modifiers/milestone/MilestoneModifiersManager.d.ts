@@ -13,10 +13,11 @@ import GameplayModifiersManager from "game/options/modifiers/GameplayModifiersMa
 import MilestoneModifier from "game/options/modifiers/milestone/MilestoneModifier";
 declare class MilestoneModifiersManager extends GameplayModifiersManager<Milestone, MilestoneModifier> {
     constructor();
-    isNotHostExclusive(milestone: Milestone): boolean;
+    isGlobal(milestone: Milestone): boolean;
+    isNotGlobal(milestone: Milestone): boolean;
     getGroup(milestone: Milestone): import("./MilestoneModifier").MilestoneModifierGroup | undefined;
     sort(a: Milestone, b: Milestone): 1 | 0 | -1;
-    private areOptionsHostExclusive;
+    private areOptionsGlobal;
 }
 declare const _default: MilestoneModifiersManager;
 export default _default;

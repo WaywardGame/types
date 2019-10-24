@@ -30,7 +30,7 @@ export default abstract class MilestoneModifier extends GameplayModifier<Milesto
      *
      * Modifiers with custom `options: IGameOptions` are always host-exclusive.
      */
-    isHostExclusive: boolean;
+    isGlobal: boolean;
     constructor(id?: Milestone);
     isEnabledForPlayer(entity: Entity): boolean;
     abstract getGroup(): MilestoneModifierGroup;
