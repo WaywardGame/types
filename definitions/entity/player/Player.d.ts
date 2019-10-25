@@ -171,7 +171,7 @@ export default class Player extends Human {
     faceDirection(direction: Direction, turnDelay?: number): boolean;
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(): number;
-    healthSyncCheck(): void;
+    healthSyncCheck(reason: string): void;
     /**
      * This needs to be called whenever the player's strength requires an update.
      *

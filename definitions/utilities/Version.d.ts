@@ -19,6 +19,7 @@ export interface IVersionInfo {
     date?: Date;
 }
 declare module Version {
+    function isCompatible(version: IVersionInfo | string): boolean;
     function create(stage: "beta" | "release", major: number, minor: number, patch?: number): IVersionInfo;
     function getVersionInfo(version: string): IVersionInfo;
     function isSameVersion(version: IVersionInfo, compareVersion: IVersionInfo): boolean;

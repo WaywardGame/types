@@ -21,125 +21,108 @@ export default function generateSchema(): {
     title: string;
     description: string;
     type: string;
-    allOf: ({
-        type: string;
-        anyOf: ({
+    properties: {
+        extends: {
+            description: string;
+            type: string;
+        };
+        name: {
+            description: string;
+            type: string;
+        };
+        shouldPluralize: {
+            description: string;
+            enum: boolean[];
+        };
+        dictionaries: {
+            description: string;
+            type: string;
+            properties: DictionarySchemas;
+        };
+        pluralizationRules: {
+            description: string;
             type: string;
             properties: {
-                dictionaries: {
+                pluralRules: {
                     description: string;
                     type: string;
-                    properties: DictionarySchemas;
-                };
-                pluralizationRules?: undefined;
-            };
-            required: string[];
-        } | {
-            type: string;
-            properties: {
-                pluralizationRules: {
-                    description: string;
-                    type: string;
-                    properties: {
-                        pluralRules: {
-                            description: string;
-                            type: string;
-                            additionalProperties: {
-                                type: string;
-                            };
-                        };
-                        singularRules: {
-                            description: string;
-                            type: string;
-                            additionalProperties: {
-                                type: string;
-                            };
-                        };
-                        uncountables: {
-                            description: string;
-                            type: string;
-                            minItems: number;
-                            items: {
-                                type: string;
-                            };
-                        };
-                        irregularRules: {
-                            description: string;
-                            type: string;
-                            minItems: number;
-                            items: {
-                                type: string;
-                                items: {
-                                    type: string;
-                                }[];
-                            };
-                        };
-                        articleRules: {
-                            description: string;
-                            type: string;
-                            minItems: number;
-                            items: {
-                                type: string;
-                                items: ({
-                                    anyOf: ({
-                                        type: string;
-                                        properties?: undefined;
-                                        required?: undefined;
-                                    } | {
-                                        type: string;
-                                        properties: {
-                                            min: {
-                                                type: string;
-                                            };
-                                            max: {
-                                                type: string;
-                                            };
-                                        };
-                                        required: string[];
-                                    })[];
-                                    type?: undefined;
-                                } | {
-                                    type: string;
-                                    anyOf?: undefined;
-                                })[];
-                            };
-                        };
+                    additionalProperties: {
+                        type: string;
                     };
-                    additionalProperties: boolean;
                 };
-                dictionaries?: undefined;
+                singularRules: {
+                    description: string;
+                    type: string;
+                    additionalProperties: {
+                        type: string;
+                    };
+                };
+                uncountables: {
+                    description: string;
+                    type: string;
+                    minItems: number;
+                    items: {
+                        type: string;
+                    };
+                };
+                irregularRules: {
+                    description: string;
+                    type: string;
+                    minItems: number;
+                    items: {
+                        type: string;
+                        items: {
+                            type: string;
+                        }[];
+                    };
+                };
+                articleRules: {
+                    description: string;
+                    type: string;
+                    minItems: number;
+                    items: {
+                        type: string;
+                        items: ({
+                            anyOf: ({
+                                type: string;
+                                properties?: undefined;
+                                required?: undefined;
+                            } | {
+                                type: string;
+                                properties: {
+                                    min: {
+                                        type: string;
+                                    };
+                                    max: {
+                                        type: string;
+                                    };
+                                };
+                                required: string[];
+                            })[];
+                            type?: undefined;
+                        } | {
+                            type: string;
+                            anyOf?: undefined;
+                        })[];
+                    };
+                };
             };
+            additionalProperties: boolean;
+        };
+    };
+    dependencies: {
+        shouldPluralize: string[];
+    };
+    additionalProperties: boolean;
+    allOf: ({
+        anyOf: {
             required: string[];
-        })[];
+        }[];
         oneOf?: undefined;
     } | {
-        type: string;
-        oneOf: ({
-            type: string;
-            properties: {
-                extends: {
-                    description: string;
-                    type: string;
-                };
-                name?: undefined;
-                shouldPluralize?: undefined;
-            };
+        oneOf: {
             required: string[];
-        } | {
-            type: string;
-            properties: {
-                name: {
-                    description: string;
-                    type: string;
-                };
-                shouldPluralize: {
-                    description: string;
-                    enum: boolean[];
-                };
-                extends?: undefined;
-            };
-            required: string[];
-        })[];
+        }[];
         anyOf?: undefined;
     })[];
 };
