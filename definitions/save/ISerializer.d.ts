@@ -18,6 +18,8 @@ export interface ISerializer {
     loadFromString(object: any, objectKey: any, data: string): void;
     readProperty(object: any, key: any): void;
     writeProperty(object: any, key: any): void;
+    readMap(object: any, key: any): Map<any, any>;
+    writeMap(value: Map<any, any>): void;
 }
 export default ISerializer;
 export interface ISerializable {
@@ -78,7 +80,8 @@ export declare enum Types {
     Vector2 = 29,
     Set = 30,
     RandomRange = 31,
-    RandomItem = 32
+    RandomItem = 32,
+    DefaultMap = 33
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_SAVE_PROPERTY_FLAGS: unique symbol;
