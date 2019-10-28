@@ -169,6 +169,7 @@ export interface IMobCheck {
     obstacle?: boolean;
     water?: boolean;
     freshWater?: boolean;
+    shallowWater?: boolean;
 }
 export declare const setupSpawnItems: ItemType[];
 export declare const setupWaterItems: ItemType[];

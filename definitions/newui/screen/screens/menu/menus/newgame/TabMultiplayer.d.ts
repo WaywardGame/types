@@ -18,8 +18,8 @@ export default class TabMultiplayer extends Tab {
     readonly choiceSingleplayer: Choice<undefined>;
     readonly choiceMultiplayer: Choice<undefined>;
     readonly multiplayerMode: ChoiceList<Choice<string | number | undefined>, false>;
-    readonly choiceLobbyFriends: Choice<undefined>;
     readonly choiceLobbyPublic: Choice<undefined>;
+    readonly choiceLobbyFriends: Choice<undefined>;
     readonly choiceLobbyPrivate: Choice<undefined>;
     readonly lobbyType: ChoiceList<Choice<string | number | undefined>, false>;
     readonly inputPVP: CheckButton;
