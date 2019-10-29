@@ -13,6 +13,7 @@ export interface ISerializer {
     byteOffset: number;
     saveToUint8Array(object: any, objectKey: any): Uint8Array | undefined;
     saveToString(object: any, objectKey: any): string | undefined;
+    convertUint8ArrayToString(bytes: Uint8Array): string;
     load(object: any, objectKey: any, data: string | Uint8Array): void;
     loadFromUint8Array(object: any, objectKey: any, bytes: Uint8Array): void;
     loadFromString(object: any, objectKey: any, data: string): void;
