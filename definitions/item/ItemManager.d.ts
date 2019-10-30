@@ -28,7 +28,6 @@ interface ItemManagerEvents {
 export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     private readonly worldContainer;
     private cachedWeights;
-    private cachedDecaysIntoWeights;
     private cachedDefaultItemForGroup;
     private cachedItemGroups;
     private cachedItemTypes;

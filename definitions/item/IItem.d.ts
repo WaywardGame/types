@@ -66,7 +66,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     lit?: ItemType;
     damageModifier?: number;
     equip?: EquipType;
-    returnOnUse?: [ItemType, boolean];
+    returnOnUseAndDecay?: IItemReturn;
     inheritWeight?: ItemType;
     attack?: number;
     defense?: Defense;
@@ -83,6 +83,10 @@ export interface IItemDescription extends IObjectDescription, IModdable {
      */
     recipes?: Array<(recipe: Recipe) => Recipe>;
     disassemble?: boolean;
+    /**
+     * Can be set to true if you don't want the player to actually disassemble the item, but still have disassembly data via the disassemble property.
+     */
+    blockDisassembly?: boolean;
     requiredForDisassembly?: Array<ItemType | ItemTypeGroup>;
     decaysInto?: ItemType;
     twoHanded?: boolean;
@@ -115,6 +119,11 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     recipeCache?: ItemType[];
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
+}
+export interface IItemReturn {
+    type: ItemType;
+    damaged?: boolean;
+    returnFromDisassembly?: boolean;
 }
 export interface IRecipe {
     baseComponent?: (ItemType | ItemTypeGroup);
@@ -761,7 +770,10 @@ export declare enum ItemType {
     LitTallowCandle = 486,
     WispDust = 487,
     MagicalAspect = 488,
-    GoldenSextant = 489
+    GoldenSextant = 489,
+    RawChoppedFish = 490,
+    CookedChoppedFish = 491,
+    CookedFishKebab = 492
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

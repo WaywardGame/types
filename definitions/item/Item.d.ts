@@ -82,7 +82,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     clearQuickSlot(): void;
     isDecayed(): boolean;
     changeInto(type: ItemType, disableNotify?: boolean): void;
-    returns(): boolean;
+    returns(disableNotify?: boolean): boolean;
     setUsed(itemUse?: IItemUsed, human?: Human): void;
     spawnOnBreak(): Creature | undefined;
     spawnOnDecay(): Creature | undefined;
