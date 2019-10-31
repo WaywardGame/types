@@ -33,7 +33,7 @@ export declare abstract class StatElement extends Component {
     /**
      * Returns the color of this stat.
      */
-    getStatColor(): string;
+    getStatColor(dark?: boolean): string;
     /**
      * Returns the formatted CSS url for the stat icon.
      */
