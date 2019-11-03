@@ -140,5 +140,5 @@ export default abstract class Human extends Entity {
     protected calculateStats(): void;
     protected resetDefense(): void;
     protected updateSwimming(): void;
-    protected swimCheck(): void;
+    protected swimAndSootheCheck(): void;
 }

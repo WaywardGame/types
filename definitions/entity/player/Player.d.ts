@@ -191,7 +191,7 @@ export default class Player extends Human {
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
     protected getSkillGainMultiplier(skillType: SkillType): number;
     protected calculateStats(): void;
-    protected swimCheck(): void;
+    protected swimAndSootheCheck(): void;
     /**
      * Event handler for when a status effect is applied or removed.
      */
