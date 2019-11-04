@@ -110,6 +110,9 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     spawnableTiles?: TileGroup;
     gather?: ILiquid;
     placeDownType?: DoodadType;
+    damageOnUse?: {
+        [index: number]: any;
+    };
     /**
      * How good this item is at being an item of an `ItemTypeGroup`.
      *
