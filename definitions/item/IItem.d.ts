@@ -88,7 +88,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
      */
     blockDisassembly?: boolean;
     requiredForDisassembly?: Array<ItemType | ItemTypeGroup>;
-    decaysInto?: ItemType;
+    decaysInto?: ItemType[];
     twoHanded?: boolean;
     keepDurabilityOnCraft?: boolean;
     craftable?: boolean;
