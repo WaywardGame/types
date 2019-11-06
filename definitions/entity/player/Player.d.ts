@@ -77,7 +77,7 @@ export default class Player extends Human {
     private gameOptionsCached?;
     private handEquippedToLast;
     constructor(identifier?: string);
-    readonly clientStore: IClientStore;
+    get clientStore(): IClientStore;
     setOptions(options: IOptions): void;
     getGameOptionsBeforeModifiers(): IGameOptionsPlayer;
     getGameOptions(): IGameOptionsPlayer;

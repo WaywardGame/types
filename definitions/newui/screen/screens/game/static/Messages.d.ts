@@ -29,8 +29,8 @@ interface IMessagesEvents extends Events<QuadrantComponent> {
 }
 export default class Messages extends QuadrantComponent implements IHookHost {
     static sendChatMessage(sender: Player, message: string): typeof Messages;
-    private static readonly defaultFilters;
-    readonly preferredQuadrant: Quadrant;
+    private static get defaultFilters();
+    get preferredQuadrant(): Quadrant;
     static preferredQuadrant: Quadrant;
     event: IEventEmitter<this, IMessagesEvents>;
     readonly sendButton: Button;

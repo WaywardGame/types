@@ -14,7 +14,7 @@ import { IStringSection } from "utilities/string/Interpolator";
 export default class Quickslots extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
     constructor();
-    readonly preferredQuadrant: Quadrant;
+    get preferredQuadrant(): Quadrant;
     getID(): QuadrantComponentId;
     protected getName(): IStringSection[];
 }

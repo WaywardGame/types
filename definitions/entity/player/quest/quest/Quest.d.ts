@@ -56,6 +56,6 @@ export declare class RequirementInstance extends EventEmitter.Host<IQuestRequire
     triggerInitialization(): boolean;
     getTranslation(): Translation;
     getCompletionAmount(): number;
-    getRelations(): [import("../../../../newui/component/IComponent").HighlightType, string | number][];
+    getRelations(): import("../../../../newui/component/IComponent").HighlightSelector[];
     setVisible(): this;
 }

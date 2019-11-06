@@ -12,7 +12,7 @@ import InterruptChoice from "language/dictionary/InterruptChoice";
 import MenuScreen from "newui/screen/screens/menu/component/MenuScreen";
 import { InterruptOptions, InterruptType } from "newui/util/IInterrupt";
 export default class InterruptScreen extends MenuScreen {
-    readonly interruptType: InterruptType | undefined;
+    get interruptType(): InterruptType | undefined;
     private canBeInstant;
     constructor();
     backOneMenu(): this;

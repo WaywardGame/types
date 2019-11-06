@@ -34,7 +34,7 @@ export default abstract class NPC extends Human {
     protected static registrarId: number;
     readonly event: IEventEmitter<this, INPCEvents>;
     readonly entityType: EntityType.NPC;
-    readonly constructorFunction: typeof NPC;
+    get constructorFunction(): typeof NPC;
     ai: AiType;
     seen: number;
     type: NPCType;

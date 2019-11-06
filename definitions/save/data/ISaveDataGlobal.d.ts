@@ -29,7 +29,7 @@ export interface IOptions {
     developerModeContextMenu: boolean;
     dialogOpacity: number;
     directionTurnDelay: number;
-    disableUIAnimations: boolean;
+    disableUIEffects: boolean;
     dropLocation: DropLocation;
     dropOnGatherHarvest: boolean;
     enableAutoSave: boolean;
@@ -94,6 +94,7 @@ export declare type IOptionsOld = Partial<IOptions> & {
     tooltipsTerrain: boolean;
     tooltipsItems: boolean;
     allowDiagonalMovement: boolean;
+    disableUIAnimations: boolean;
 };
 export interface IHighscore {
     name: string;

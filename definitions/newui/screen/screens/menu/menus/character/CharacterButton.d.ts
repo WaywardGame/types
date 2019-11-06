@@ -20,7 +20,7 @@ export default class CharacterButton extends Button {
     event: IEventEmitter<this, ICharacterEvents>;
     private readonly preview;
     private readonly _character;
-    readonly character: ISavedCharacter;
+    get character(): ISavedCharacter;
     constructor(character: ISavedCharacter);
 }
 export {};

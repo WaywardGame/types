@@ -25,7 +25,7 @@ export interface INPCManagerEvents {
 }
 export default class NPCManager extends EntityManager<NPC> {
     readonly event: IEventEmitter<this, INPCManagerEvents>;
-    getEntities(): (NPC | undefined)[];
+    getEntities(): SaferArray<NPC>;
     spawn(npcType: NPCType, x: number, y: number, z: number): NPC | undefined;
     remove(npc: NPC): void;
     updateAll(): void;

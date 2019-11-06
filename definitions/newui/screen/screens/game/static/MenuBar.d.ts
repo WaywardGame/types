@@ -15,9 +15,9 @@ import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/Menu
 import { IStringSection } from "utilities/string/Interpolator";
 export default class MenuBar extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
-    readonly preferredQuadrant: Quadrant;
+    get preferredQuadrant(): Quadrant;
     private _buttons;
-    readonly buttons: Map<MenuBarButtonType, MenuBarButton>;
+    get buttons(): Map<MenuBarButtonType, MenuBarButton>;
     private readonly groups;
     constructor();
     /**

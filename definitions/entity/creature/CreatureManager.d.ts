@@ -32,7 +32,7 @@ export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> 
 }
 export default class CreatureManager extends EntityManager<Creature> {
     readonly event: IEventEmitter<this, ICreatureManagerEvents>;
-    getEntities(): (Creature | undefined)[];
+    getEntities(): SaferArray<Creature>;
     getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: boolean): Translation;
     getHappinessLevel(human: Human, creature: Creature): number;
     /**

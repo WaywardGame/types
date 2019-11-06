@@ -52,7 +52,7 @@ interface IQuadrantComponentEvents extends Events<StaticComponent> {
  */
 export default abstract class QuadrantComponent extends StaticComponent {
     event: IEventEmitter<this, IQuadrantComponentEvents>;
-    readonly preferredQuadrant: Quadrant;
+    get preferredQuadrant(): Quadrant;
     constructor();
     /**
      * Changes the quadrant of this element, then emits the `ChangeQuadrant` event

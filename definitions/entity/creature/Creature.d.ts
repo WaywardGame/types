@@ -36,7 +36,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     type: CreatureType;
     originalMoveType: MoveType | undefined;
     hitchedTo?: number;
-    readonly fromDescription: import("../../utilities/FromDescription").ISafeFn<ICreatureDescription, undefined>;
+    get fromDescription(): import("../../utilities/FromDescription").ISafeFn<ICreatureDescription, undefined>;
     private _description;
     private _owner;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);

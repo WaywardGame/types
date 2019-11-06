@@ -14,7 +14,7 @@ import { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import { IStringSection } from "utilities/string/Interpolator";
 export default class Stats extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
-    readonly preferredQuadrant: Quadrant;
+    get preferredQuadrant(): Quadrant;
     private player;
     constructor(player: Player);
     setPlayer(player: Player): void;

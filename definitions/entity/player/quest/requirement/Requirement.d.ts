@@ -40,7 +40,7 @@ export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> {
     getInitializeTrigger(): ((api: IQuestRequirementApi<O, D>) => boolean) | undefined;
     setRelations(relations: HighlightSelector[]): this;
     setRelations(handler: (api: IQuestRequirementApi<O, D>) => HighlightSelector[]): this;
-    getRelations(api: IQuestRequirementApi<O, D>): [import("../../../../newui/component/IComponent").HighlightType, string | number][];
+    getRelations(api: IQuestRequirementApi<O, D>): HighlightSelector[];
     setTranslation(translation: Translation | ((api: IQuestRequirementApi<O, D>) => Translation)): this;
     getTranslation(api: IQuestRequirementApi<O, D>): Translation;
     setCompletionAmountGetter(getter: (api: IQuestRequirementApi<O, D>) => number): this;

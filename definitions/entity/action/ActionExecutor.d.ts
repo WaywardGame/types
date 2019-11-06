@@ -46,9 +46,9 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
      */
     static get<T extends ActionType>(action: T): (typeof actionDescriptions)[T] extends IActionDescription<infer A, infer E, infer R> ? ActionExecutor<A, E, R> : never;
     static executeMultiplayer(packet: ActionPacket, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, EntityPlayerCreatureNpc, any>): any;
-    readonly executor: E;
-    readonly actionStack: ActionType[];
-    readonly lastAction: ActionType;
+    get executor(): E;
+    get actionStack(): ActionType[];
+    get lastAction(): ActionType;
     readonly type: ActionType;
     private _executor;
     private _actionStack;

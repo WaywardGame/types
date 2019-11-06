@@ -52,16 +52,16 @@ export default class TimeManager {
     frozenTime?: number;
     private _ticks;
     private readonly transitionPercent;
-    readonly dayStart: number;
+    get dayStart(): number;
     constructor(turns: number);
     /**
      * The total number of ticks passed.
      */
-    readonly ticks: number;
+    get ticks(): number;
     /**
      * Returns which day it is. Starts at 1.
      */
-    readonly day: number;
+    get day(): number;
     /**
      * Returns whether time is frozen.
      */

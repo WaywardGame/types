@@ -25,7 +25,7 @@ export default class Button extends Component implements IDisableable {
     wrapperButtons?: Component;
     private _activated;
     private readonly _disabledReasons;
-    readonly disabled: boolean;
+    get disabled(): boolean;
     constructor(elementType?: string, listen?: boolean);
     setDisabled(val?: boolean, reason?: string): this;
     activate(playSound?: boolean): void;

@@ -20,7 +20,8 @@ export default class InputButton extends Button {
     event: IEventEmitter<this, IInputButtonEvents>;
     private readonly inputElement;
     private _editMode;
-    editMode: boolean;
+    get editMode(): boolean;
+    set editMode(mode: boolean);
     constructor(inputInitializer: (input: Input) => any);
     getInputText(): string;
     setInputText(text: string): void;

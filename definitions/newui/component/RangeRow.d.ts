@@ -26,9 +26,10 @@ export declare class RangeRow extends BlockRow implements IRefreshable, IDisable
     rangeInputValueDisplay: RangeInputValueDisplay | undefined;
     description: Paragraph;
     defaultButton?: Button;
-    value: number;
+    get value(): number;
+    set value(val: number);
     private readonly _disabledReasons;
-    readonly disabled: boolean;
+    get disabled(): boolean;
     constructor();
     setDisabled(val?: boolean, reason?: string): this;
     editRange(rangeInputInitializer: (rangeInput: RangeInput) => RangeInput): this;

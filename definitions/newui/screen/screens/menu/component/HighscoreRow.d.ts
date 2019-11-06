@@ -26,9 +26,11 @@ export default class HighscoreRow extends Block {
     private readonly deathBy;
     private readonly replay;
     private _highscore;
-    highscore: IHighscore | undefined;
+    get highscore(): IHighscore | undefined;
+    set highscore(val: IHighscore | undefined);
     private _place;
-    place: number;
+    get place(): number;
+    set place(place: number);
     constructor(highscore?: IHighscore);
 }
 export {};

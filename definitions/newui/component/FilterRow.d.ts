@@ -17,6 +17,7 @@ export interface IFilterRowEvents extends Events<LabelledRow> {
 export default class FilterRow extends LabelledRow {
     readonly event: IEventEmitter<this, IFilterRowEvents>;
     private readonly input;
-    text: string;
+    get text(): string;
+    set text(value: string);
     constructor();
 }

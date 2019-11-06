@@ -79,11 +79,11 @@ export declare class StatAttribute extends StatElement {
 }
 export declare class Statbars extends Component {
     private readonly _statbars;
-    readonly statbars: Map<Stat, Statbar>;
+    get statbars(): Map<Stat, Statbar>;
     constructor(entity: Entity, iterableOfStats: Stream<Stat>);
 }
 export declare class StatAttributes extends Component {
     private readonly _stats;
-    readonly stats: Map<Stat, StatAttribute>;
+    get stats(): Map<Stat, StatAttribute>;
     constructor(entity: Entity, iterableOfStats: Stream<Stat>);
 }

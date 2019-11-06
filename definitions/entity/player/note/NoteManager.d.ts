@@ -37,7 +37,7 @@ export default class NoteManager {
     static get(entity: Entity): NoteManager;
     private readonly _notes;
     constructor(host: INoteHost);
-    readonly notes: INote[];
+    get notes(): INote[];
     getNote(id: number): INote | undefined;
     wasWritten(note: Note): boolean;
     write(note: Note, ...args: any[]): void;

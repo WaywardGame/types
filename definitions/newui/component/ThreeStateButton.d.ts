@@ -38,7 +38,7 @@ export declare class ThreeStateButton extends Button implements IRefreshableValu
     event: IEventEmitter<this, IThreeStateButtonEvents>;
     protected refreshMethod: () => ThreeStateButtonState;
     private _state;
-    readonly state: ThreeStateButtonState;
+    get state(): ThreeStateButtonState;
     private updateDescriptionOnChange;
     constructor();
     setState(state: ThreeStateButtonState, triggerEvent?: boolean): this;

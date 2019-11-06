@@ -117,8 +117,9 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     private gameOptionsCached?;
     private playOptions;
     private ambientLightLevelCache;
-    readonly isChallenge: boolean;
-    updateRender: (source: RenderSource) => void;
+    get isChallenge(): boolean;
+    get updateRender(): (source: RenderSource) => void;
+    set updateRender(value: (source: RenderSource) => void);
     initialize(): void;
     initGl(): Promise<void>;
     setupGl(restoring: boolean): Promise<void>;

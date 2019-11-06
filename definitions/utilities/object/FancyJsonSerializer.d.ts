@@ -14,7 +14,7 @@ interface IClassSerializer<T, S> {
 }
 export default class FancyJsonSerializer {
     private static _log;
-    private static readonly log;
+    private static get log();
     private static serializedObjects;
     private static currentPath;
     private static resultObj;

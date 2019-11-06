@@ -17,7 +17,8 @@ import { IRefreshable } from "newui/component/Refreshable";
 export default class Input extends Component implements IRefreshable, IInput {
     event: IEventEmitter<this, Events<IInput>>;
     default: (() => string) | undefined;
-    text: string;
+    get text(): string;
+    set text(value: string);
     private keydownEnter;
     private keydownEscape;
     private canBeEmpty;
@@ -26,7 +27,7 @@ export default class Input extends Component implements IRefreshable, IInput {
     private shouldBlurWhenEnterPressed;
     private shouldBlurWhenEnterPressedAndEmpty;
     private hasChanged;
-    readonly changed: boolean;
+    get changed(): boolean;
     constructor();
     setMaxLength(maxLength?: number): this;
     setCanBeEmpty(canBeEmpty?: boolean): this;

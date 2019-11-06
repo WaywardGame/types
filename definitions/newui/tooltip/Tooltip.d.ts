@@ -16,7 +16,7 @@ import Text, { Paragraph } from "newui/component/Text";
 export default class Tooltip extends Component implements ITooltip {
     protected readonly source: Component;
     event: IEventEmitter<this, Events<ITooltip>>;
-    readonly location: TooltipLocation;
+    get location(): TooltipLocation;
     cache: boolean;
     private forceShown;
     private maxWidth;

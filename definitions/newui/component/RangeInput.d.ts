@@ -22,10 +22,11 @@ export declare class RangeInput extends Component implements IRefreshableValue<n
     private refreshMethod;
     private clampOnRefresh;
     private _value;
-    value: number;
-    readonly min: number;
-    readonly max: number;
-    readonly step: number;
+    get value(): number;
+    set value(val: number);
+    get min(): number;
+    get max(): number;
+    get step(): number;
     constructor();
     clamp(): this;
     setStep(step: number): this;
