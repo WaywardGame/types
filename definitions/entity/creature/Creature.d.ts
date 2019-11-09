@@ -11,7 +11,8 @@
 import { SfxType } from "audio/IAudio";
 import { CreatureType, ICreatureDescription, ICreatureEvents, IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
-import { AiType, EntityType, MoveType } from "entity/IEntity";
+import { AiType, EntityType, MoveType, IStatChangeInfo } from "entity/IEntity";
+import { IStat } from "entity/IStats";
 import Player from "entity/player/Player";
 import { IEventEmitter } from "event/EventEmitter";
 import Inspection from "game/inspection/Inspect";
@@ -90,6 +91,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     updateDoodadOverHiddenState(x: number, y: number, z: number, tile: ITile, hidden: boolean): void;
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
+    protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
     private inspectResistancesAndVulnerabilities;
     private inspectHappiness;
     private findPath;

@@ -94,6 +94,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
      * @param wait When true, the client will keep track of what packets it sent to the server. If the client calls this method again before the server responds, it will not send a duplicate packet. It will wait for the server to send the packet back before allowing another one to be sent. When true, it will keep track of duplicate packets based on the packet type. When it's a number, it will keep track of duplicate packets based on the packet type + the number.
      */
     syncPacket(packet: IPacket, clientSide?: NullaryFunction, checkId?: boolean, wait?: number | true): any;
+    markCurrentProcessingPacket(packetId: number, processing: boolean): void;
     clearSyncPacketWaiting(packet: IPacket, wait: number): void;
     clearSyncPacketsWaiting(waitId?: string): void;
     pausePacketProcessing(pause: boolean): void;
