@@ -11,7 +11,7 @@
 import { SfxType } from "audio/IAudio";
 import { CreatureType, ICreatureDescription, ICreatureEvents, IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
-import { AiType, EntityType, MoveType, IStatChangeInfo } from "entity/IEntity";
+import { AiType, EntityType, IStatChangeInfo, MoveType } from "entity/IEntity";
 import { IStat } from "entity/IStats";
 import Player from "entity/player/Player";
 import { IEventEmitter } from "event/EventEmitter";

@@ -13,8 +13,7 @@ import { CreatureType, ICreatureDescription, SpawnGroup, TileGroup } from "entit
 import EntityManager from "entity/EntityManager";
 import Human from "entity/Human";
 import { MoveType } from "entity/IEntity";
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 import Vector3 from "utilities/math/Vector3";

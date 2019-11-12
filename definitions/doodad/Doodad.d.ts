@@ -64,6 +64,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     legendary?: IItemLegendary | undefined;
     step: number | undefined;
     hitchedCreature?: number;
+    tradedFrom?: string[];
     get fromDescription(): import("../utilities/FromDescription").ISafeFn<IDoodadDescription, undefined>;
     private _description;
     static getRegistrarId(): number;

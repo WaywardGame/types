@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IStatChangeInfo } from "entity/IEntity";
 export declare enum Stat {
     Health = 0,
     Stamina = 1,
@@ -116,4 +117,35 @@ export declare enum StatDisplayType {
 }
 export interface IStatFactory {
     get(): IStat;
+}
+export interface IStatEvents {
+    /**
+     * Called when a stat changes, for any reason
+     * @param stat An IStat object, the stat that was affected
+     * @param oldValue The value that the stat changed from
+     * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
+     */
+    statChanged(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
+    /**
+     * Called when a stat changes, for any reason
+     * @param entity The object this event is emitted from
+     * @param stat An IStat object, the stat that was affected
+     * @param oldValue The value that the stat changed from
+     */
+    statTimerChanged(stat: IStat, oldValue?: number): void;
+    /**
+     * Called when a stat changes, for any reason
+     * @param entity The object this event is emitted from
+     * @param stat An IStat object, the stat that was affected
+     * @param oldValue The value that the stat changed from
+     */
+    statMaxChanged(stat: IStatMax, oldValue?: number, info?: IStatChangeInfo): void;
+    /**
+     * Called when a stat changes, for any reason
+     * @param entity The object this event is emitted from
+     * @param stat An IStat object, the stat that was affected
+     * @param oldValue The value that the stat changed from
+     * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
+     */
+    statBonusChanged(stat: IStat, oldValue?: number, info?: IStatChangeInfo): void;
 }

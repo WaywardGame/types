@@ -15,6 +15,7 @@ import { IStat, IStatBase, IStats, Stat } from "entity/IStats";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import StatFactory from "entity/StatFactory";
+import Stats from "entity/Stats";
 import EventEmitter from "event/EventEmitter";
 import { FireType, TileUpdateType } from "game/IGame";
 import { ItemType, RecipeLevel } from "item/IItem";
@@ -30,6 +31,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
     static isNot(entity: Entity | undefined, entityType: EntityType.NPC): entity is Exclude<EntityPlayerCreatureNpc, NPC>;
     static isNot(entity: Entity | undefined, entityType: EntityType.Creature): entity is Exclude<EntityPlayerCreatureNpc, Creature>;
     static isNot(entity: Entity | undefined, entityType: EntityType.Player): entity is Exclude<EntityPlayerCreatureNpc, Player>;
+    readonly stat: Stats<this>;
     entityType: EntityType;
     id: number;
     renamed?: string | ISerializedTranslation;
@@ -62,20 +64,24 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
      * @param factory The factory to initialize the stat from.
      *
      * This method will replace existing stats.
+     * @deprecated Use `Entity.stat.init`
      */
     initStat(factory: StatFactory): void;
     /**
      * Returns whether the given stat exists on this entity.
+     * @deprecated Use `Entity.stat.has`
      */
     hasStat(stat: Stat): boolean;
     /**
      * Removes the given stat from this entity.
+     * @deprecated Use `Entity.stat.remove`
      */
     removeStat(stat: Stat): void;
     /**
      * Returns the stat object of a given `Stat`. The return type is a vague `IStat`, but can be
      * passed a type which extends `IStatBase` for automatic narrowing.
      * @param stat The `Stat` to get
+     * @deprecated Use `Entity.stat.get`
      */
     getStat<Staty extends IStatBase | undefined = IStat | undefined>(stat: Stat, allowFailure?: boolean): Staty & (Staty extends IStatBase ? {
         base: Staty;
@@ -85,6 +91,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
     getStatInternal(stat: Stat | IStat, allowFailure: boolean): IStatBase | undefined;
     /**
      * Returns the value of the given stat, or `undefined` if the stat does not exist.
+     * @deprecated Use `Entity.stat.getValue`
      */
     getStatValue(stat: Stat | IStat): number | undefined;
     /**
@@ -95,6 +102,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
      *
      * This method assumes the stat you're providing exists on this entity. If it doesn't,
      * it will likely error!
+     * @deprecated Use `Entity.stat.set`
      */
     setStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
     /**
@@ -107,6 +115,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
      *
      * This method assumes the stat you're providing exists on this entity. If it doesn't,
      * it will likely error!
+     * @deprecated Use `Entity.stat.reduce`
      */
     reduceStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
     /**
@@ -119,6 +128,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
      *
      * This method assumes the stat you're providing exists on this entity. If it doesn't,
      * it will likely error!
+     * @deprecated Use `Entity.stat.increase`
      */
     increaseStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
     /**
@@ -128,10 +138,12 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
      * @param reason Why this stat is changing.
      *
      * Triggers `EntityEvent.StatBonusChanged`, then `EntityEvent.StatChanged`
+     * @deprecated Use `Entity.stat.setBonus`
      */
     setStatBonus(stat: Stat | IStat, bonus: number, info?: StatChangeReason | IStatChangeInfo): void;
     /**
      * Returns the `max` of the given stat, or undefined if the stat isn't an `IStatMax`.
+     * @deprecated Use `Entity.stat.getMax`
      */
     getStatMax(stat: Stat | IStat): number | undefined;
     /**
@@ -141,6 +153,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
      *
      * This method assumes the stat you're providing exists on this entity. If it doesn't,
      * it will likely error!
+     * @deprecated Use `Entity.stat.setMax`
      */
     setStatMax(stat: Stat | IStat, amount: number): void;
     /**
@@ -154,12 +167,17 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
      *
      * This method assumes the stat you're providing exists on this entity. If it doesn't,
      * it will likely error!
+     * @deprecated Use `Entity.stat.setChangeTimer`
      */
     setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
+    /**
+     * @deprecated Use `Entity.stat.setMax`
+     */
     setStatAndMax(stat: Stat | IStat, max: number, current: number): void;
     /**
      * Passes the "turn" for stats, decrements their `changeTimer`s. If a stat's timer reaches `0`,
      * the stat value is changed by `changeAmount` and the `changeTimer` is reset to `nextChangeTimer`
+     * @deprecated Use `Entity.stat.updateTimers`
      */
     updateStats(): void;
     /**

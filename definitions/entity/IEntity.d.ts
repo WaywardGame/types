@@ -9,40 +9,11 @@
  * https://waywardgame.github.io/
  */
 import Creature from "entity/creature/Creature";
-import { IStat, IStatMax } from "entity/IStats";
+import { IStatEvents } from "entity/IStats";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import { ITile } from "tile/ITerrain";
-export interface IEntityEvents {
-    /**
-     * Called when a stat changes, for any reason
-     * @param stat An IStat object, the stat that was affected
-     * @param oldValue The value that the stat changed from
-     * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
-     */
-    statChanged(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
-    /**
-     * Called when a stat changes, for any reason
-     * @param entity The object this event is emitted from
-     * @param stat An IStat object, the stat that was affected
-     * @param oldValue The value that the stat changed from
-     */
-    statTimerChanged(stat: IStat, oldValue?: number): void;
-    /**
-     * Called when a stat changes, for any reason
-     * @param entity The object this event is emitted from
-     * @param stat An IStat object, the stat that was affected
-     * @param oldValue The value that the stat changed from
-     */
-    statMaxChanged(stat: IStatMax, oldValue?: number, info?: IStatChangeInfo): void;
-    /**
-     * Called when a stat changes, for any reason
-     * @param entity The object this event is emitted from
-     * @param stat An IStat object, the stat that was affected
-     * @param oldValue The value that the stat changed from
-     * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
-     */
-    statBonusChanged(stat: IStat, oldValue?: number, info?: IStatChangeInfo): void;
+export interface IEntityEvents extends IStatEvents {
     /**
      * Called when this entity gets or loses a status effect
      * @param entity The object this event is emitted from

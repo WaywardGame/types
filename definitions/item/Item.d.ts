@@ -41,6 +41,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     quickSlot: number | undefined;
     renamed: string | ISerializedTranslation;
     tatteredMap: TatteredMap;
+    tradedFrom?: string[];
     type: ItemType;
     used?: IItemUsed;
     weight: number;
