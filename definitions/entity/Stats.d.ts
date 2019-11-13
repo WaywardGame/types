@@ -12,10 +12,10 @@ import { IStatChangeInfo, StatChangeReason } from "entity/IEntity";
 import { IStat, IStatBase, IStatEvents, IStats, Stat } from "entity/IStats";
 import StatFactory from "entity/StatFactory";
 import EventEmitter from "event/EventEmitter";
-export interface IStatHost extends EventEmitter.Host<any> {
+export interface IStatHost extends EventEmitter.Host<IStatEvents> {
     stats: IStats;
 }
-export default class Stats<T extends IStatHost> extends EventEmitter.Host<IStatEvents> {
+export default class Stats<T extends IStatHost> {
     private readonly host;
     private get stats();
     constructor(host: T);
@@ -43,13 +43,14 @@ export default class Stats<T extends IStatHost> extends EventEmitter.Host<IStatE
     get<Staty extends IStatBase | undefined = IStat | undefined>(stat: Stat, allowFailure?: boolean): Staty & (Staty extends IStatBase ? {
         base: Staty;
     } : undefined);
-    getInternal(stat: Stat | IStat): IStatBase;
-    getInternal(stat: Stat | IStat, allowFailure: true): IStatBase | undefined;
-    getInternal(stat: Stat | IStat, allowFailure: boolean): IStatBase | undefined;
     /**
-     * Returns the value of the given stat, or `undefined` if the stat does not exist.
+     * Returns the value of the given stat, or `undefined` if the stat does not exist. Stat bonus *is* applied.
      */
     getValue(stat: Stat | IStat): number | undefined;
+    /**
+     * Returns the value of the given stat, or `undefined` if the stat does not exist. Stat bonus is *not* applied.
+     */
+    getBaseValue(stat: Stat | IStat): number | undefined;
     /**
      * Sets the given `Stat`'s value to the given amount. Triggers `EntityEvent.StatChange`
      * @param stat The `Stat` to set.
@@ -84,6 +85,7 @@ export default class Stats<T extends IStatHost> extends EventEmitter.Host<IStatE
      * it will likely error!
      */
     increase(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
+    getBonus(stat: Stat | IStat): number | undefined;
     /**
      * Change the bonus for a stat.
      * @param stat The `Stat` to set the bonus of.
@@ -94,9 +96,13 @@ export default class Stats<T extends IStatHost> extends EventEmitter.Host<IStatE
      */
     setBonus(stat: Stat | IStat, bonus: number, info?: StatChangeReason | IStatChangeInfo): T;
     /**
-     * Returns the `max` of the given stat, or undefined if the stat isn't an `IStatMax`.
+     * Returns the `max` of the given stat, or undefined if the stat isn't an `IStatMax`. Stat bonus *is* applied.
      */
-    getMax(stat: Stat | IStat): number | undefined;
+    getMax(stat: Stat | IStat): number;
+    /**
+     * Returns the `max` of the given stat, or undefined if the stat isn't an `IStatMax`. Stat bonus is *not* applied.
+     */
+    getBaseMax(stat: Stat | IStat): number | undefined;
     /**
      * Sets the given `Stat`'s `max` to the given amount. Triggers `EntityEvent.StatMaxChange`
      * @param stat The `Stat` to set.
@@ -118,10 +124,12 @@ export default class Stats<T extends IStatHost> extends EventEmitter.Host<IStatE
      * This method assumes the stat you're providing exists on this entity. If it doesn't,
      * it will likely error!
      */
-    setChangeTimer(stat: Stat | IStat, timer: number, amt?: number): T;
+    setChangeTimer(stat: Stat | IStat, timer: number, amt?: number, skipWillChange?: boolean): T;
+    removeChangeTimer(stat: Stat | IStat): T;
     /**
      * Passes the "turn" for stats, decrements their `changeTimer`s. If a stat's timer reaches `0`,
      * the stat value is changed by `changeAmount` and the `changeTimer` is reset to `nextChangeTimer`
      */
     updateTimers(): this;
+    private getInternal;
 }

@@ -145,7 +145,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
      * Returns the `max` of the given stat, or undefined if the stat isn't an `IStatMax`.
      * @deprecated Use `Entity.stat.getMax`
      */
-    getStatMax(stat: Stat | IStat): number | undefined;
+    getStatMax(stat: Stat | IStat): number;
     /**
      * Sets the given `Stat`'s `max` to the given amount. Triggers `EntityEvent.StatMaxChange`
      * @param stat The `Stat` to set.

@@ -92,6 +92,7 @@ export interface IStatChanging extends IStatBase {
     changeAmount: number;
     changeTimer: number;
     readonly nextChangeTimer: number;
+    changeTimerSpeed?: number;
 }
 export interface IStatBonus extends IStatBase {
     bonus: number;
@@ -127,25 +128,37 @@ export interface IStatEvents {
      */
     statChanged(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
     /**
-     * Called when a stat changes, for any reason
-     * @param entity The object this event is emitted from
+     * Called when a stat timer changes
      * @param stat An IStat object, the stat that was affected
      * @param oldValue The value that the stat changed from
      */
     statTimerChanged(stat: IStat, oldValue?: number): void;
     /**
-     * Called when a stat changes, for any reason
-     * @param entity The object this event is emitted from
+     * Called when a stat timer will change
+     * @param timer The length of time between changes
+     * @param amount Stat difference per change
+     * @param stat An `IStat` object, the stat that was affected
+     * @param oldValue The value that the stat changed from
+     * @returns The timer & amount as a tuple, or `false` to cancel the stat timer change
+     */
+    statTimerWillChange([timer, amount]: [number, number?], stat: IStat, oldValue?: number): [number, number?] | false;
+    /**
+     * Called when a stat timer is removed
+     * @param stat An `IStat` object, the stat that was affected
+     */
+    statTimerRemoved(stat: IStat): any;
+    /**
+     * Called when a stat's max value changes, for any reason
      * @param stat An IStat object, the stat that was affected
      * @param oldValue The value that the stat changed from
+     * @param info An `IStatChangeInfo` object describing why the change occurred. It will always be passed with a `reason`
      */
     statMaxChanged(stat: IStatMax, oldValue?: number, info?: IStatChangeInfo): void;
     /**
      * Called when a stat changes, for any reason
-     * @param entity The object this event is emitted from
      * @param stat An IStat object, the stat that was affected
      * @param oldValue The value that the stat changed from
-     * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
+     * @param info An `IStatChangeInfo` object describing why the change occurred. It will always be passed with a `reason`
      */
     statBonusChanged(stat: IStat, oldValue?: number, info?: IStatChangeInfo): void;
 }

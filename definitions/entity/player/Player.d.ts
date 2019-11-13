@@ -83,7 +83,6 @@ export default class Player extends Human {
     getGameOptions(): IGameOptionsPlayer;
     getDisplayCreature(): CreatureType | undefined;
     setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
-    setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatus(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
     startResting(restData: IRestData): void;
     cancelResting(reason: RestCancelReason): boolean;
@@ -204,6 +203,10 @@ export default class Player extends Human {
      * 4. When thirst > maximum, damage will be dealt, stamina will be decreased, and a message will be displayed.
      */
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
+    /**
+     * Applies stat change timer multipliers from game difficulty options
+     */
+    protected onSetStatChangeTimer([timer, amt]: [number, number?], stat: Stat | IStat, oldValue?: number): [number, number?] | false;
     private slitherSuckerDamage;
     private processMovement;
     /**
