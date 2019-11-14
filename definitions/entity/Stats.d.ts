@@ -57,8 +57,7 @@ export default class Stats<T extends IStatHost> {
      * @param amount The amount to set the value to.
      * @param reason Why this stat is changing.
      *
-     * This method assumes the stat you're providing exists on this entity. If it doesn't,
-     * it will likely error!
+     * Note: Initializes the stat if it does not exist.
      */
     set(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
     /**
@@ -125,6 +124,19 @@ export default class Stats<T extends IStatHost> {
      * it will likely error!
      */
     setChangeTimer(stat: Stat | IStat, timer: number, amt?: number, skipWillChange?: boolean): T;
+    /**
+     * Decreases the change timer for the given stat.
+     * @param stat The stat to decrease the change timer for.
+     * @param amt The amount to decrease the change timer by. Defaults to the stat's `changeTimerSpeed`.
+     */
+    reduceChangeTimer(stat: Stat | IStat, amt?: number): T;
+    /**
+     * Increases the change timer for the given stat.
+     * @param stat The stat to increase the change timer for.
+     * @param amt The amount to increase the change timer by. Defaults to the stat's `changeTimerSpeed`.
+     */
+    increaseChangeTimer(stat: Stat | IStat, amt?: number): T;
+    getTimeUntilChange(stat: Stat | IStat): number | undefined;
     removeChangeTimer(stat: Stat | IStat): T;
     /**
      * Passes the "turn" for stats, decrements their `changeTimer`s. If a stat's timer reaches `0`,

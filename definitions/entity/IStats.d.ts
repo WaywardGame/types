@@ -81,6 +81,10 @@ export interface IStatBase {
      */
     changeAmount?: number;
     /**
+     * The speed the change timer decreases. When `undefined`, `1` is used.
+     */
+    changeTimerSpeed?: number;
+    /**
      * A bonus value added to be added to `max` and `value`.
      */
     bonus?: number;
