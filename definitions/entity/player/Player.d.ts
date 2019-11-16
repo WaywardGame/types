@@ -76,6 +76,7 @@ export default class Player extends Human {
     private readonly milestonesCollection;
     private gameOptionsCached?;
     private handEquippedToLast;
+    private cachedMovementPenalty?;
     constructor(identifier?: string);
     get clientStore(): IClientStore;
     setOptions(options: IOptions): void;
