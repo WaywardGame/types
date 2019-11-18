@@ -9,17 +9,21 @@
  * https://waywardgame.github.io/
  */
 import Player from "entity/player/Player";
+import Component from "newui/component/Component";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
-import { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
-import { IStringSection } from "utilities/string/Interpolator";
-export default class Stats extends QuadrantComponent {
+import GameScreen from "newui/screen/screens/GameScreen";
+export default class StatsQuadrant extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
     get preferredQuadrant(): Quadrant;
+    private readonly stats;
+    constructor(host: GameScreen, player: Player);
+    setPlayer(player: Player): this;
+}
+export declare class Stats extends Component {
+    private readonly noEvents?;
     private player;
-    constructor(player: Player);
-    setPlayer(player: Player): void;
-    getID(): QuadrantComponentId;
-    protected getName(): IStringSection[];
+    constructor(player?: Player, noEvents?: true | undefined);
+    setPlayer(player: Player): this;
     private refresh;
     /**
      * Returns an object containing iterables for all stats that exist on the player and have a description,

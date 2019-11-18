@@ -39,8 +39,8 @@ import { ModProvide, ModType } from "mod/IModInfo";
 import { CanLoadState, ModLoadFailureReason } from "mod/IModManager";
 import { DisconnectReason, JoinServerRetryReason, UnableToJoinReason } from "multiplayer/IMultiplayer";
 import { Bindable, BindableType } from "newui/IBindingManager";
-import { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
-import { MessageTimestamp } from "newui/screen/screens/game/IGameScreenApi";
+import { Quadrant, QuadrantComponentContextMenuAction } from "newui/screen/screens/game/component/QuadrantComponent";
+import { MessageTimestamp, QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import { MessageFilterDefault } from "newui/screen/screens/game/IMessages";
 import { CharacterSort } from "newui/screen/screens/menu/menus/character/Character";
 import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
@@ -115,7 +115,9 @@ export declare enum Dictionary {
     Ui = 59,
     UiQuadrant = 60,
     UnableToJoinReason = 61,
-    UnlockedRecipesStrategy = 62
+    UnlockedRecipesStrategy = 62,
+    QuadrantComponent = 63,
+    QuadrantComponentContextMenuAction = 64
 }
 export declare type Enum = {
     [key: string]: number;
@@ -187,6 +189,8 @@ declare const dictionaries: {
     [Dictionary.UiQuadrant]: typeof Quadrant;
     [Dictionary.UnableToJoinReason]: typeof UnableToJoinReason;
     [Dictionary.UnlockedRecipesStrategy]: typeof UnlockedRecipesStrategy;
+    [Dictionary.QuadrantComponent]: typeof QuadrantComponentId;
+    [Dictionary.QuadrantComponentContextMenuAction]: typeof QuadrantComponentContextMenuAction;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
+import Translation from "language/Translation";
 import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
 import StaticComponent from "newui/screen/screens/game/component/StaticComponent";
-import { IStringSection } from "utilities/string/Interpolator";
+import { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+import GameScreen from "newui/screen/screens/GameScreen";
 /**
  * Since when do quadrants refer to 8 sections, this ain't no octagon
  */
@@ -27,17 +28,14 @@ export declare enum Quadrant {
 }
 interface IQuadrantComponentEvents extends Events<StaticComponent> {
     /**
-     * Emitted with the following arguments:
      * @param quadrant The new quadrant of this element
      * @param oldQuadrant The old quadrant of this element
      */
     changeQuadrant(quadrant: Quadrant, oldQuadrant: Quadrant): any;
     /**
-     * Emitted synchronously with no arguments.
-     * @returns A `IterableOf<QuadrantElement>` containing sibling quadrant elements. The list
-     * may contain this quadrant element.
+     * @param componentId The quadrant component to switch with
      */
-    getQuadrantElementList(): Iterable<QuadrantComponent>;
+    switchWith(componentId: QuadrantComponentId): any;
 }
 /**
  * An element that displays in one quadrant of the screen.
@@ -51,9 +49,13 @@ interface IQuadrantComponentEvents extends Events<StaticComponent> {
  * Changing the quadrant will not affect other elements: this is the responsisibility of the parent.
  */
 export default abstract class QuadrantComponent extends StaticComponent {
+    protected readonly host: GameScreen;
+    readonly id: QuadrantComponentId;
     event: IEventEmitter<this, IQuadrantComponentEvents>;
     get preferredQuadrant(): Quadrant;
-    constructor();
+    get quadrant(): Quadrant;
+    get quadrantName(): "None" | "Top" | "TopRight" | "BottomRight" | "Bottom" | "BottomLeft" | "TopLeft";
+    constructor(host: GameScreen, id: QuadrantComponentId);
     /**
      * Changes the quadrant of this element, then emits the `ChangeQuadrant` event
      * with the parameters being the new quadrant and the old quadrant.
@@ -64,15 +66,23 @@ export default abstract class QuadrantComponent extends StaticComponent {
     /**
      * The ID is used for `Switch With` context menu options
      */
-    abstract getID(): string | number;
+    getID(): QuadrantComponentId;
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
-    protected abstract getName(): IStringSection[];
+    getName(): Translation;
     protected getContextMenuDescription(): ContextMenuOptionKeyValuePair[];
     /**
      * Returns a new context menu using this element's context menu descriptions
      */
     private getContextMenu;
+}
+export declare enum QuadrantComponentContextMenuAction {
+    SwitchWith = 0,
+    MoveTo = 1,
+    Hide = 2
+}
+export declare module QuadrantComponentContextMenuAction {
+    function translation(action: QuadrantComponentContextMenuAction): Translation;
 }
 export {};

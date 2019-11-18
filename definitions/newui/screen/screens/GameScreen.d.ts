@@ -21,10 +21,11 @@ import Screen from "newui/screen/Screen";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import { DialogId } from "newui/screen/screens/game/Dialogs";
+import { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import MenuBar from "newui/screen/screens/game/static/MenuBar";
 import Messages from "newui/screen/screens/game/static/Messages";
 import Quickslots from "newui/screen/screens/game/static/Quickslots";
-import Stats from "newui/screen/screens/game/static/Stats";
+import StatsQuadrant from "newui/screen/screens/game/static/Stats";
 import MovementHandler from "newui/screen/screens/game/util/movement/MovementHandler";
 import WorldTooltipHandler from "newui/screen/screens/game/WorldTooltip";
 import { ITile } from "tile/ITerrain";
@@ -42,24 +43,25 @@ export default class GameScreen extends Screen implements IHookHost {
     event: IEventEmitter<this, IGameScreenEvents>;
     dialogs: Map<DialogId, Dialog>;
     visibleDialogs: IDialogStates;
-    quadrantComponentQuadrants: {
-        [key: string]: Quadrant;
-    };
+    quadrantComponentQuadrants: OptionalDescriptions<QuadrantComponentId, Quadrant>;
     menuBar: MenuBar;
-    stats: Stats;
+    stats: StatsQuadrant;
     quickslots: Quickslots;
     messages: Messages;
     movementHandler: MovementHandler;
     worldTooltipHandler: WorldTooltipHandler;
     private quadrantContainer;
     private readonly quadrantMap;
+    private readonly quadrantComponents;
     private readonly gameCanvas;
+    private readonly placeholders;
     constructor();
     openDialog<D = Dialog>(id: DialogId): D;
     closeDialog(id: DialogId): Promise<this>;
     toggleDialog(id: DialogId, force?: boolean): this;
     toggleDialogs(states: IDialogStates): this;
-    getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: string | number): C | undefined;
+    getQuadrantComponents(): import("@wayward/goodstream/Stream").default<QuadrantComponent>;
+    getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: QuadrantComponentId): (never extends C ? QuadrantComponent : C extends never[] ? QuadrantComponent | C : {} extends C ? QuadrantComponent | Partial<QuadrantComponent> : QuadrantComponent | C) | undefined;
     getQuadrantContainer(): Component;
     isMouseWithin(): boolean;
     wasMouseStartWithin(): boolean;
@@ -83,7 +85,7 @@ export default class GameScreen extends Screen implements IHookHost {
      * 2. If the quadrant is `Quadrant.None`, or the quadrant is already used,
      * use instead the result of `getUnusedQuadrant()`
      */
-    private addQuadrantElement;
+    private addQuadrantComponent;
     /**
      * Event handler for `QuadrantElementEvent.ChangeQuadrant`
      *
@@ -93,7 +95,8 @@ export default class GameScreen extends Screen implements IHookHost {
      * was in `Quadrant.None` and is switching places with another element, that element is removed
      * from the `quadrantMap`.
      */
-    private onQuadrantElementChange;
+    private onQuadrantComponentChange;
+    private onSwitchQuadrantComponents;
     /**
      * Handles top/bottom quadrants (for when in two-column mode)
      */

@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { IContextMenu, TranslationGenerator } from "newui/component/IComponent";
@@ -32,7 +31,8 @@ export default class ContextMenu<O extends number | string | symbol = number | s
     addOptions(...options: ArrayOfIterablesOr<O>): this;
     disableOptions(...options: ArrayOfIterablesOr<O>): this;
     removeOptions(...options: ArrayOfIterablesOr<O>): this;
-    setPosition(x: number, y: number, right?: boolean): this;
+    setPosition(): this;
+    setPosition(x: number, y: number, right?: true): this;
     hideAndRemove(): Promise<void>;
     private getDescription;
 }

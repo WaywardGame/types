@@ -20,9 +20,9 @@ import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
 import Input from "newui/component/Input";
 import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
-import { IPinnedMessage, MessageTimestamp, PinType, QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+import { IPinnedMessage, MessageTimestamp, PinType } from "newui/screen/screens/game/IGameScreenApi";
 import { IFilters, MessageFilterDefault } from "newui/screen/screens/game/IMessages";
-import { IStringSection } from "utilities/string/Interpolator";
+import GameScreen from "newui/screen/screens/GameScreen";
 interface IMessagesEvents extends Events<QuadrantComponent> {
     pinQuestRequirement(pin: IPinnedMessage): any;
     unpinQuestRequirement(pin: IPinnedMessage): any;
@@ -52,9 +52,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     private readonly chatSentHistory;
     private chatHistoryIndex;
     private pushedCurrentToHistory;
-    constructor();
-    getID(): QuadrantComponentId;
-    getName(): IStringSection[];
+    constructor(host: GameScreen);
     getPins(): import("@wayward/goodstream/Stream").default<IPinnedMessage>;
     getMessageTimestampMode(): MessageTimestamp;
     setMessageTimestampMode(mode: MessageTimestamp): this;

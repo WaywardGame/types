@@ -17,7 +17,7 @@ import { IStringSection } from "utilities/string/Interpolator";
 export declare abstract class StatElement extends Component {
     private readonly stat;
     private readonly entity;
-    constructor(entity: Entity, stat: Stat);
+    constructor(entity: Entity, stat: Stat, noEvents?: true);
     /**
      * Returns the attached entity's `IStat` for this `StatElement`'s `Stat`.
      */
@@ -62,7 +62,7 @@ export declare abstract class StatElement extends Component {
 export declare class Statbar extends StatElement {
     private readonly bar;
     private readonly text;
-    constructor(entity: Entity, stat: Stat);
+    constructor(entity: Entity, stat: Stat, noEvents?: true);
     getDisplayElement(): Text;
     getGenericStatValue(stat: IStatMax): IStringSection[];
     /**
@@ -74,16 +74,16 @@ export declare class Statbar extends StatElement {
 }
 export declare class StatAttribute extends StatElement {
     private readonly attribute;
-    constructor(entity: Entity, stat: Stat);
+    constructor(entity: Entity, stat: Stat, noEvents?: true);
     getDisplayElement(): Text;
 }
 export declare class Statbars extends Component {
     private readonly _statbars;
     get statbars(): Map<Stat, Statbar>;
-    constructor(entity: Entity, iterableOfStats: Stream<Stat>);
+    constructor(entity: Entity, iterableOfStats: Stream<Stat>, noEvents?: true);
 }
 export declare class StatAttributes extends Component {
     private readonly _stats;
     get stats(): Map<Stat, StatAttribute>;
-    constructor(entity: Entity, iterableOfStats: Stream<Stat>);
+    constructor(entity: Entity, iterableOfStats: Stream<Stat>, noEvents?: true);
 }
