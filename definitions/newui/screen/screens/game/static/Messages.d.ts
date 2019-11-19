@@ -70,6 +70,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     onWrittenNote(player: Player, id: number): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     getDefaultFilterName(filter: MessageFilterDefault): string;
+    protected onChangeQuadrant(): void;
     /**
      * Event handler for when the text in the chat box should be sent as a message.
      */
@@ -78,6 +79,8 @@ export default class Messages extends QuadrantComponent implements IHookHost {
      * Returns the context menu for messages, used by the superclass (quadrant component)
      */
     protected getContextMenuDescription(): ContextMenuOptionKeyValuePair[];
+    private isInTopQuadrant;
+    private isInDialog;
     private addPinnedNote;
     private addPinnedQuestRequirement;
     private onQuestGet;

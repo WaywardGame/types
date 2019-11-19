@@ -27,7 +27,7 @@ export default class Input extends Component implements IRefreshable, IInput {
     set text(value: string);
     private keydownEnter;
     private keydownEscape;
-    private clearOnBlurWhenEmpty;
+    private clearToDefaultWhenEmpty;
     private clearTo;
     private placeholder;
     private shouldBlurOnEnter;
@@ -40,7 +40,7 @@ export default class Input extends Component implements IRefreshable, IInput {
     addClearButton(): this;
     addResetButton(): this;
     setMaxLength(maxLength?: number): this;
-    setClearOnBlurWhenEmpty(clearOnBlurWhenEmpty?: boolean): this;
+    setClearToDefaultWhenEmpty(setClearToDefaultWhenEmpty?: boolean): this;
     setDefault(generator: () => string, apply?: boolean): this;
     setClearTo(clearTo?: () => string): this;
     setClearToEmpty(): this;
