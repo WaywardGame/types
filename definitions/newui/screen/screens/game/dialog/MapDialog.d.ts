@@ -9,7 +9,10 @@
  * https://waywardgame.github.io/
  */
 import Human from "entity/Human";
+import Player from "entity/player/Player";
 import { IMapRequest } from "game/IGame";
+import { IContainer } from "item/IItem";
+import Item from "item/Item";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import { IHookHost } from "mod/IHookHost";
@@ -27,6 +30,10 @@ export default class MapDialog extends Dialog implements IHookHost {
     getName(): Translation | UiTranslation.GameDialogMapName;
     decode(mapRequest: IMapRequest): void;
     onDigTreasure(human: Human, treasureTile: Vector3): void;
+    onInventoryItemRemove(player: Player | undefined, item: Item, container: IContainer): void;
+    onInventoryItemUpdate(player: Player | undefined, item: Item, container: IContainer): void;
+    onMoveComplete(player: Player): void;
+    private closeIfItemIsGone;
     private getDistance;
     private getDirection;
     private onResize;

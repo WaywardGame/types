@@ -12,7 +12,7 @@ import Doodad from "doodad/Doodad";
 import Creature from "entity/creature/Creature";
 import { CreatureType } from "entity/creature/ICreature";
 import Human from "entity/Human";
-import { EntityType } from "entity/IEntity";
+import { EntityPlayerCreatureNpc, EntityType } from "entity/IEntity";
 import { EquipType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
@@ -73,6 +73,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     getDecayMax(): number;
     getTotalWeight(): number;
     getDisassemblyWeight(): number;
+    isNearby(executor: EntityPlayerCreatureNpc, allowNearby?: boolean): boolean;
     verifyAndFixItem(): void;
     damage(source: string, modifier?: number): void;
     isDamaged(): boolean;
