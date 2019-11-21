@@ -54,6 +54,10 @@ export default abstract class NPC extends Human {
     addAiType(ai: AiType): void;
     updateDirection(x: number, y: number): void;
     /**
+     * Sets the default weightCapacity of an NPC (based on their equipment and starting items).
+     */
+    generateWeightCapacity(): void;
+    /**
      * Returns the bartering bonus for a given credit value
      */
     getBarteringBonus(baseCredits: number): number;
