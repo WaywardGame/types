@@ -125,6 +125,11 @@ export default class Stats<T extends IStatHost> {
      */
     setChangeTimer(stat: Stat | IStat, timer: number, amt?: number, skipWillChange?: boolean): T;
     /**
+     * Resets the change timer for the given stat.
+     * @param stat The stat to reset the change timer for.
+     */
+    resetChangeTimer(stat: Stat | IStat): T;
+    /**
      * Decreases the change timer for the given stat.
      * @param stat The stat to decrease the change timer for.
      * @param amt The amount to decrease the change timer by. Defaults to the stat's `changeTimerSpeed`.
