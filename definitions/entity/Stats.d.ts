@@ -10,7 +10,7 @@
  */
 import { IStatChangeInfo, StatChangeReason } from "entity/IEntity";
 import { IStat, IStatBase, IStatEvents, IStats, Stat } from "entity/IStats";
-import StatFactory from "entity/StatFactory";
+import StatFactory, { StatChangeTimerFactory } from "entity/StatFactory";
 import EventEmitter from "event/EventEmitter";
 export interface IStatHost extends EventEmitter.Host<IStatEvents> {
     stats: IStats;
@@ -30,18 +30,18 @@ export default class Stats<T extends IStatHost> {
     /**
      * Returns whether the given stat exists on this entity.
      */
-    has(stat: Stat): boolean;
+    has(stat: Stat | IStat): boolean;
     /**
      * Removes the given stat from this entity.
      */
-    remove(stat: Stat): T;
+    remove(stat: Stat | IStat): T;
     /**
      * Returns the stat object of a given `Stat`. The return type is a vague `IStat`, but can be
      * passed a type which extends `IStatBase` for automatic narrowing.
      * @param stat The `Stat` to get
      */
-    get<Staty extends IStatBase | undefined = IStat | undefined>(stat: Stat, allowFailure?: boolean): Staty & (Staty extends IStatBase ? {
-        base: Staty;
+    get<STAT_DATA extends IStatBase | undefined = IStat | undefined>(stat: Stat | IStat, allowFailure?: boolean): STAT_DATA & (STAT_DATA extends IStatBase ? {
+        base: STAT_DATA;
     } : undefined);
     /**
      * Returns the value of the given stat, or `undefined` if the stat does not exist. Stat bonus *is* applied.
@@ -52,7 +52,7 @@ export default class Stats<T extends IStatHost> {
      */
     getBaseValue(stat: Stat | IStat): number | undefined;
     /**
-     * Sets the given `Stat`'s value to the given amount. Triggers `EntityEvent.StatChange`
+     * Sets the given `Stat`'s value to the given amount. Triggers `statChange`
      * @param stat The `Stat` to set.
      * @param amount The amount to set the value to.
      * @param reason Why this stat is changing.
@@ -61,27 +61,21 @@ export default class Stats<T extends IStatHost> {
      */
     set(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
     /**
-     * Reduces the given `Stat` by the given amount. Triggers `EntityEvent.StatChange`
+     * Reduces the given `Stat` by the given amount. Triggers `statChange`
      * @param stat The `Stat` to reduce.
      * @param amount The amount to reduce by.
      * @param reason Why this stat is changing.
      *
      * An alias for `increaseStat`, negating the given amount.
-     *
-     * This method assumes the stat you're providing exists on this entity. If it doesn't,
-     * it will likely error!
      */
     reduce(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
     /**
-     * Increases the given `Stat` by the given amount. Triggers `EntityEvent.StatChange`
+     * Increases the given `Stat` by the given amount. Triggers `statChange`
      * @param stat The `Stat` to increase.
      * @param amount The amount to increase by.
      * @param reason Why this stat is changing.
      *
      * An alias for `setStat(stat, stat.value + amount, reason)`
-     *
-     * This method assumes the stat you're providing exists on this entity. If it doesn't,
-     * it will likely error!
      */
     increase(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
     getBonus(stat: Stat | IStat): number | undefined;
@@ -91,7 +85,7 @@ export default class Stats<T extends IStatHost> {
      * @param bonus The amount to increase/decrease the stat.
      * @param reason Why this stat is changing.
      *
-     * Triggers `EntityEvent.StatBonusChanged`, then `EntityEvent.StatChanged`
+     * Triggers `statBonusChanged`, then `statChanged`, and potentially `statMaxChanged`
      */
     setBonus(stat: Stat | IStat, bonus: number, info?: StatChangeReason | IStatChangeInfo): T;
     /**
@@ -103,27 +97,23 @@ export default class Stats<T extends IStatHost> {
      */
     getBaseMax(stat: Stat | IStat): number | undefined;
     /**
-     * Sets the given `Stat`'s `max` to the given amount. Triggers `EntityEvent.StatMaxChange`
+     * Sets the given `Stat`'s `max` to the given amount. Triggers `statMaxChange`
      * @param stat The `Stat` to set.
      * @param max The amount to set the value to.
-     *
-     * This method assumes the stat you're providing exists on this entity. If it doesn't,
-     * it will likely error!
      */
     setMax(stat: Stat | IStat, max: number, newValue?: number): T;
     /**
-     * Sets how frequently the stat should change. Triggers `EntityEvent.StatTimerChange`
+     * Sets how frequently the stat should change. Triggers `statTimerChange`
      * @param stat The `Stat` that should change.
      * @param timer How many turns should pass between changes.
      * @param amount The amount the stat will change whenever the timer completes. Defaults to increase by `1`.
+     * @param force By default, the `statTimerWillChange` event can be used to cancel or tweak the change timer when set from this method.
+     * When this parameter is `true`, that event call will be skipped.
      *
      * If the stat already has a timer going, the difference of the new and old timers
      * is subtracted from the time remaining.
-     *
-     * This method assumes the stat you're providing exists on this entity. If it doesn't,
-     * it will likely error!
      */
-    setChangeTimer(stat: Stat | IStat, timer: number, amt?: number, skipWillChange?: boolean): T;
+    setChangeTimer(stat: Stat | IStat, timer: number, initializer?: (factory: StatChangeTimerFactory) => any): T;
     /**
      * Resets the change timer for the given stat.
      * @param stat The stat to reset the change timer for.

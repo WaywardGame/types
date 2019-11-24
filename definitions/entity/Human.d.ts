@@ -23,6 +23,7 @@ import { IEventEmitter } from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
+import { IGameOptionsPlayer } from "game/options/IGameOptions";
 import { EquipEffect, EquipEffectByType, IContainer, ItemType, ItemTypeGroup } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Item from "item/Item";
@@ -145,5 +146,5 @@ export default abstract class Human extends Entity {
     protected calculateStats(): void;
     protected resetDefense(): void;
     protected updateSwimming(): void;
-    protected swimAndSootheCheck(): void;
+    protected swimAndSootheCheck(options?: IGameOptionsPlayer): void;
 }

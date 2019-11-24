@@ -17,6 +17,7 @@ import { EquipType, ICheckUnderOptions, IRestData, RestCancelReason, RestType, S
 import { IStat, Stat } from "entity/IStats";
 import { IMovementIntent, IPlayerEvents, IPlayerTravelData, TurnType, WeightStatus } from "entity/player/IPlayer";
 import QuestManager from "entity/player/quest/QuestManager";
+import { StatChangeTimerFactory } from "entity/StatFactory";
 import { IEventEmitter } from "event/EventEmitter";
 import { Milestone } from "game/milestones/IMilestone";
 import { IGameOptionsPlayer } from "game/options/IGameOptions";
@@ -207,7 +208,7 @@ export default class Player extends Human {
     /**
      * Applies stat change timer multipliers from game difficulty options
      */
-    protected onSetStatChangeTimer([timer, amt]: [number, number?], stat: Stat | IStat, oldValue?: number): [number, number?] | false;
+    protected onSetStatChangeTimer(stat: Stat | IStat, change: StatChangeTimerFactory): false | undefined;
     private slitherSuckerDamage;
     private processMovement;
     /**

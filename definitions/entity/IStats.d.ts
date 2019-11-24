@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IStatChangeInfo } from "entity/IEntity";
+import { StatChangeTimerFactory } from "entity/StatFactory";
 export declare enum Stat {
     Health = 0,
     Stamina = 1,
@@ -139,13 +140,11 @@ export interface IStatEvents {
     statTimerChanged(stat: IStat, oldValue?: number): void;
     /**
      * Called when a stat timer will change
-     * @param timer The length of time between changes
-     * @param amount Stat difference per change
-     * @param stat An `IStat` object, the stat that was affected
-     * @param oldValue The value that the stat changed from
-     * @returns The timer & amount as a tuple, or `false` to cancel the stat timer change
+     * @param stat An `IStat` object, the stat that will be affected
+     * @param changeFactory An object for manipulating how the new stat change timer will be set
+     * @returns `false` to cancel the stat timer change, `undefined` otherwise.
      */
-    statTimerWillChange([timer, amount]: [number, number?], stat: IStat, oldValue?: number): [number, number?] | false;
+    statTimerWillChange(stat: IStat, changeFactory: StatChangeTimerFactory): false | undefined;
     /**
      * Called when a stat timer is removed
      * @param stat An `IStat` object, the stat that was affected
