@@ -25,7 +25,7 @@ export declare class HairstyleChoice extends Choice {
     private readonly baseCustomization;
     private readonly preview;
     private customization;
-    readonly hairstyle: HairStyle;
+    get hairstyle(): HairStyle;
     constructor(_hairstyle: HairStyle, baseCustomization: ICustomizations, filters?: CharacterPreviewFilters);
     update(): void;
     rotate(direction: CharacterPreviewRotation): void;

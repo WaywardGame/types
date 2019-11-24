@@ -38,7 +38,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     static is(value: any): value is Doodad;
     static getGrowingStageTranslation(growingStage?: GrowingStage, description?: IDoodadDescription): Translation | undefined;
     protected static registrarId: number;
-    readonly constructorFunction: typeof Doodad;
+    get constructorFunction(): typeof Doodad;
     containedItems: Item[];
     decay?: number;
     disassembly?: Item[];
@@ -64,7 +64,8 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     legendary?: IItemLegendary | undefined;
     step: number | undefined;
     hitchedCreature?: number;
-    readonly fromDescription: import("../utilities/FromDescription").ISafeFn<IDoodadDescription, undefined>;
+    tradedFrom?: string[];
+    get fromDescription(): import("../utilities/FromDescription").ISafeFn<IDoodadDescription, undefined>;
     private _description;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;

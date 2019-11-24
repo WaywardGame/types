@@ -28,13 +28,13 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     private static regenerateAncestorBoxes;
     private static regenerateSiblingBoxes;
     private static regenerateDescendantBoxes;
-    readonly element: HTMLElement;
+    get element(): HTMLElement;
     readonly classes: ClassManipulator<this>;
     readonly attributes: AttributeManipulator<this>;
     readonly data: DataManipulator<this>;
     readonly style: StyleManipulator<this>;
-    readonly dataset: DOMStringMap;
-    readonly childCount: number;
+    get dataset(): DOMStringMap;
+    get childCount(): number;
     private _element;
     private scrollingChild?;
     private contextMenuGenerator?;
@@ -44,11 +44,11 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     private box?;
     private boxCacheLastScroll?;
     private boxCacheScrollable?;
-    readonly selectable: SelectableLayer | false;
+    get selectable(): SelectableLayer | false;
     /**
      * Alias of `.element.addEventListener`
      */
-    readonly listen: (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined) => this;
+    get listen(): (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined) => this;
     private addEventListener;
     constructor(elementType?: string, namespace?: Namespace);
     /**

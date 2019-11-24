@@ -17,6 +17,7 @@ import { EquipType, ICheckUnderOptions, IRestData, RestCancelReason, RestType, S
 import { IStat, Stat } from "entity/IStats";
 import { IMovementIntent, IPlayerEvents, IPlayerTravelData, TurnType, WeightStatus } from "entity/player/IPlayer";
 import QuestManager from "entity/player/quest/QuestManager";
+import { StatChangeTimerFactory } from "entity/StatFactory";
 import { IEventEmitter } from "event/EventEmitter";
 import { Milestone } from "game/milestones/IMilestone";
 import { IGameOptionsPlayer } from "game/options/IGameOptions";
@@ -76,14 +77,14 @@ export default class Player extends Human {
     private readonly milestonesCollection;
     private gameOptionsCached?;
     private handEquippedToLast;
+    private cachedMovementPenalty?;
     constructor(identifier?: string);
-    readonly clientStore: IClientStore;
+    get clientStore(): IClientStore;
     setOptions(options: IOptions): void;
     getGameOptionsBeforeModifiers(): IGameOptionsPlayer;
     getGameOptions(): IGameOptionsPlayer;
     getDisplayCreature(): CreatureType | undefined;
     setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
-    setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatus(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
     startResting(restData: IRestData): void;
     cancelResting(reason: RestCancelReason): boolean;
@@ -191,7 +192,7 @@ export default class Player extends Human {
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
     protected getSkillGainMultiplier(skillType: SkillType): number;
     protected calculateStats(): void;
-    protected swimCheck(): void;
+    protected swimAndSootheCheck(): void;
     /**
      * Event handler for when a status effect is applied or removed.
      */
@@ -204,6 +205,10 @@ export default class Player extends Human {
      * 4. When thirst > maximum, damage will be dealt, stamina will be decreased, and a message will be displayed.
      */
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
+    /**
+     * Applies stat change timer multipliers from game difficulty options
+     */
+    protected onSetStatChangeTimer(stat: Stat | IStat, change: StatChangeTimerFactory): false | undefined;
     private slitherSuckerDamage;
     private processMovement;
     /**

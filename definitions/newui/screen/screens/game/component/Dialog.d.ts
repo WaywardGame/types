@@ -92,7 +92,7 @@ export default abstract class Dialog extends Component implements IDialog {
     private readonly panels;
     private currentPanel;
     private lastPanel;
-    private readonly visiblePanel;
+    private get visiblePanel();
     /**
      * The last edge positions of the dialog. Used when a handle is being moved.
      */
@@ -250,7 +250,7 @@ interface IHandleEvents extends Events<Component> {
 declare class Handle extends Component {
     event: IEventEmitter<this, IHandleEvents>;
     private lastMousePosition?;
-    readonly position: HandlePosition;
+    get position(): HandlePosition;
     constructor(position: HandlePosition, elementType?: string);
     private dragStart;
     private drag;

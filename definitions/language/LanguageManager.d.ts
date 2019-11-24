@@ -55,11 +55,12 @@ export interface ILanguageEvents {
     postGetTranslation(sections: IStringSection[]): IStringSection[];
 }
 export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> {
-    language: string;
+    get language(): string;
+    set language(languageName: string);
     private readonly translationProviders;
-    readonly providers: readonly TranslationsProvider[];
+    get providers(): readonly TranslationsProvider[];
     private orderedTranslationProviders?;
-    readonly orderedProviders: readonly TranslationsProvider[];
+    get orderedProviders(): readonly TranslationsProvider[];
     constructor();
     initialize(): void;
     shouldUseAlternateFontStyle(): boolean;

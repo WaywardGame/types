@@ -41,7 +41,7 @@ export declare class Quest extends EventEmitter.Host<IQuestEvents> {
     getDescription(quest: IQuest): Translation | undefined;
     getTriggers(instance: IQuest): import("@wayward/goodstream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<[import("../../../../mod/IHookManager").Hook, (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
     getEventBusTriggers(instance: IQuest): import("@wayward/goodstream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<[import("../../../../event/EventManager").EmitterOrBus, [string | number | symbol, (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]]>]>;
-    getHostTriggers(instance: IQuest): import("@wayward/goodstream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<["canDropItem" | "skillChange" | "canConsumeItem" | "canAttack" | "calculateEquipmentStats" | "isSwimming" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "removed" | "preMove" | "postMove" | "spawn" | "milestoneUpdate" | "updateOption" | "displayMessage" | "getMaxHealth" | "getMaxWeight" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "getMovementIntent" | "getWeightStatus" | "getWeightMovementPenalty" | "restStart" | "restEnd", (api: IQuestRequirementApi<[], {}>, player: Player, ...args: any[]) => boolean]>]>;
+    getHostTriggers(instance: IQuest): import("@wayward/goodstream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<["spawn" | "milestoneUpdate" | "updateOption" | "displayMessage" | "getMaxHealth" | "getMaxWeight" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "getMovementIntent" | "getWeightStatus" | "getWeightMovementPenalty" | "restStart" | "restEnd" | "skillChange" | "canConsumeItem" | "canDropItem" | "canAttack" | "calculateEquipmentStats" | "isSwimming" | "statusChange" | "removed" | "preMove" | "postMove" | "statChanged" | "statTimerChanged" | "statTimerWillChange" | "statTimerRemoved" | "statMaxChanged" | "statBonusChanged", (api: IQuestRequirementApi<[], {}>, player: Player, ...args: any[]) => boolean]>]>;
     getRequirements(host: Player, instance: IQuest): import("@wayward/goodstream/Stream").default<RequirementInstance>;
     getRequirement(host: Player, quest: IQuest, requirement: IQuestRequirement): RequirementInstance | undefined;
     needsManualCompletion(): boolean;
@@ -56,6 +56,6 @@ export declare class RequirementInstance extends EventEmitter.Host<IQuestRequire
     triggerInitialization(): boolean;
     getTranslation(): Translation;
     getCompletionAmount(): number;
-    getRelations(): [import("../../../../newui/component/IComponent").HighlightType, string | number][];
+    getRelations(): import("../../../../newui/component/IComponent").HighlightSelector[];
     setVisible(): this;
 }

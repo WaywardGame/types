@@ -11,7 +11,8 @@
 import { SfxType } from "audio/IAudio";
 import { CreatureType, ICreatureDescription, ICreatureEvents, IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
-import { AiType, EntityType, MoveType } from "entity/IEntity";
+import { AiType, EntityType, IStatChangeInfo, MoveType } from "entity/IEntity";
+import { IStat } from "entity/IStats";
 import Player from "entity/player/Player";
 import { IEventEmitter } from "event/EventEmitter";
 import Inspection from "game/inspection/Inspect";
@@ -36,7 +37,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     type: CreatureType;
     originalMoveType: MoveType | undefined;
     hitchedTo?: number;
-    readonly fromDescription: import("../../utilities/FromDescription").ISafeFn<ICreatureDescription, undefined>;
+    get fromDescription(): import("../../utilities/FromDescription").ISafeFn<ICreatureDescription, undefined>;
     private _description;
     private _owner;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
@@ -90,6 +91,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     updateDoodadOverHiddenState(x: number, y: number, z: number, tile: ITile, hidden: boolean): void;
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
+    protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
     private inspectResistancesAndVulnerabilities;
     private inspectHappiness;
     private findPath;

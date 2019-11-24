@@ -9,6 +9,6 @@
  * https://waywardgame.github.io/
  */
 import Component from "newui/component/Component";
-export default class StaticElement extends Component {
+export default class StaticComponent extends Component {
     constructor();
 }

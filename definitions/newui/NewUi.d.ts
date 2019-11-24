@@ -31,9 +31,9 @@ export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     readonly highlights: HighlightManager;
     readonly screens: ScreenManager;
     private _windowWidth;
-    readonly windowWidth: number;
+    get windowWidth(): number;
     private _windowHeight;
-    readonly windowHeight: number;
+    get windowHeight(): number;
     private storageElement;
     private readonly dataHosts;
     constructor();

@@ -9,7 +9,8 @@
  * https://waywardgame.github.io/
  */
 export default class Emitter {
-    private subscribers;
+    private get subscribers();
+    private set subscribers(value);
     /**
      * Binds an event handler on the given event or events. If the event handler is already bound to one
      * of the given events, does nothing.

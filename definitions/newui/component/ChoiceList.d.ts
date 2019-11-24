@@ -21,11 +21,11 @@ export default class ChoiceList<C extends Choice = Choice, OPTIONAL extends bool
     event: IEventEmitter<this, IChoiceListEvents<C, OPTIONAL>>;
     private refreshMethod;
     private _selection;
-    readonly choice: OPTIONAL extends true ? C | undefined : C;
+    get choice(): OPTIONAL extends true ? C | undefined : C;
     private readonly _disabledReasons;
-    readonly disabled: boolean;
+    get disabled(): boolean;
     private _canChooseNone;
-    readonly canChooseNone: boolean;
+    get canChooseNone(): boolean;
     constructor();
     setCanChooseNone(): ChoiceList<C, true>;
     setDisabled(val?: boolean, reason?: string): this;

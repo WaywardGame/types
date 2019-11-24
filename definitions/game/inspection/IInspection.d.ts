@@ -10,27 +10,30 @@
  */
 import { MessageType } from "entity/player/MessageManager";
 import Translation from "language/Translation";
+import Component from "newui/component/Component";
 export declare enum InspectType {
-    Player = 0,
-    NPC = 1,
-    Creature = 2,
-    Doodad = 3,
-    TileEvents = 4,
-    Items = 5,
-    Corpses = 6,
-    TileEventsMinor = 7,
-    Tile = 8
+    Self = 0,
+    Player = 1,
+    NPC = 2,
+    Creature = 3,
+    Doodad = 4,
+    TileEvents = 5,
+    Items = 6,
+    Corpses = 7,
+    TileEventsMinor = 8,
+    Tile = 9
 }
 export declare enum BasicInspectionPriority {
-    Player = 0,
-    NPC = 1000,
-    Creature = 2000,
-    Doodad = 3000,
-    TileEvents = 4000,
-    Items = 5000,
-    Corpses = 6000,
-    TileEventsMinor = 7000,
-    Tile = 8000
+    Self = 0,
+    Player = 1000,
+    NPC = 2000,
+    Creature = 3000,
+    Doodad = 4000,
+    TileEvents = 5000,
+    Items = 6000,
+    Corpses = 7000,
+    TileEventsMinor = 8000,
+    Tile = 9000
 }
 export declare enum InspectionContext {
     Tooltip = 0,
@@ -48,7 +51,7 @@ export interface IInspectionSectionSimple extends IInspectionSection {
 }
 export declare type InspectionResult = Iterable<IInspectionSection | IInspectionSection["content"] | undefined> | undefined;
 export interface IInspection {
-    text: Translation;
+    text?: Translation;
     /**
      * If this inspection is in a message context, this changes the message type the inspection is sent with.
      */
@@ -66,4 +69,8 @@ export interface IInspection {
      * A bindable must be held to see this information.
      */
     extra?: true;
+    /**
+     * A custom component in the inspection.
+     */
+    custom?(component: Component): any;
 }

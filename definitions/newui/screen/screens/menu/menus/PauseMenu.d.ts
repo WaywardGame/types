@@ -12,10 +12,10 @@ import { IGameIconsHost } from "newui/screen/screens/menu/component/GameIcons";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { ISteamFriend } from "steamworks/ISteamworks";
 export default class PauseMenu extends Menu implements IGameIconsHost {
-    readonly difficulty: import("../../../../../game/options/IGameOptions").GameMode;
-    readonly pvp: boolean;
-    readonly mods: [string, import("../../../../util/Misc").ModLoadability][];
-    readonly friends: ISteamFriend[];
+    get difficulty(): import("../../../../../game/options/IGameOptions").GameMode;
+    get pvp(): boolean;
+    get mods(): [string, import("../../../../util/Misc").ModLoadability][];
+    get friends(): ISteamFriend[];
     private readonly modesButton;
     private readonly multiplayerButton;
     private readonly optionsRow;

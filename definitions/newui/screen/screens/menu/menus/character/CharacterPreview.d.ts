@@ -33,7 +33,7 @@ export default class CharacterPreview extends Component {
     private readonly filters;
     private readonly svg;
     private _loaded;
-    readonly loaded: boolean;
+    get loaded(): boolean;
     constructor(customization: ICustomizations, filters?: CharacterPreviewFilters);
     getFilters(): CharacterPreviewFilters;
     update(): this;

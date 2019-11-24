@@ -19,7 +19,7 @@ export default abstract class MenuScreen extends Screen {
     /**
      * Returns the visible menu (top of the chain)
      */
-    readonly visibleMenu: Menu;
+    get visibleMenu(): Menu;
     showMenu<M extends Menu = Menu>(menu: MenuId | M, menuInitializer?: (menu: M) => any): this;
     backOneMenu(): this;
     backToFirstMenu(): this;

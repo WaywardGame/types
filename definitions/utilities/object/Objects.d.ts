@@ -21,7 +21,7 @@ declare module Objects {
     function deepClone<T>(obj: T): T;
     function addProperty(property: string, value: any): (object: any) => any;
     function followDirections<T>(target: any, directions: string[]): T | undefined;
-    function stringify(object: any, pretty?: boolean, noDepth?: boolean): string;
+    function stringify(object: any, pretty?: boolean, noDepth?: boolean, maxIterations?: number): string;
     function mutable<T>(object: T): Mutable<T>;
 }
 export default Objects;

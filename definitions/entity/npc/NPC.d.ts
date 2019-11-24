@@ -13,8 +13,7 @@ import Human from "entity/Human";
 import { AiType, EntityType, MoveType } from "entity/IEntity";
 import { EquipType, ICustomizations } from "entity/IHuman";
 import { NPCType } from "entity/npc/NPCS";
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import { ItemType } from "item/IItem";
 import Item from "item/Item";
 import { ITile } from "tile/ITerrain";
@@ -34,7 +33,7 @@ export default abstract class NPC extends Human {
     protected static registrarId: number;
     readonly event: IEventEmitter<this, INPCEvents>;
     readonly entityType: EntityType.NPC;
-    readonly constructorFunction: typeof NPC;
+    get constructorFunction(): typeof NPC;
     ai: AiType;
     seen: number;
     type: NPCType;
@@ -54,6 +53,10 @@ export default abstract class NPC extends Human {
     getActions(): ActionType[] | undefined;
     addAiType(ai: AiType): void;
     updateDirection(x: number, y: number): void;
+    /**
+     * Sets the default weightCapacity of an NPC (based on their equipment and starting items).
+     */
+    generateWeightCapacity(): void;
     /**
      * Returns the bartering bonus for a given credit value
      */

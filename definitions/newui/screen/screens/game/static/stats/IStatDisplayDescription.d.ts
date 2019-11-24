@@ -21,6 +21,10 @@ export interface IStatDisplayDescription extends IModdable {
      */
     color?: string | ((entity: Entity, stat?: IStat) => string);
     /**
+     * Defaults to `#000000`
+     */
+    darkColor?: string | ((entity: Entity, stat?: IStat) => string);
+    /**
      * Defaults to `StatDisplayType.Auto`
      */
     displayType?: StatDisplayType;

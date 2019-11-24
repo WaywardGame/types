@@ -23,7 +23,7 @@ export interface IStringSection {
 }
 declare class Interpolator {
     private readonly _segments;
-    readonly segments: ISegment[];
+    get segments(): ISegment[];
     constructor(...segments: ISegment[]);
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;

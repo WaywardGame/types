@@ -8,10 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
-import GameScreen from "newui/screen/screens/GameScreen";
-export default class Quickslots extends QuadrantComponent {
-    static preferredQuadrant: Quadrant;
-    constructor(host: GameScreen);
-    get preferredQuadrant(): Quadrant;
-}
+import { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+declare const quadrantComponents: Descriptions<QuadrantComponentId, string>;
+export default quadrantComponents;

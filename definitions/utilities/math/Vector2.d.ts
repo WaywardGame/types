@@ -12,8 +12,8 @@ import ISerializer, { ISerializable } from "save/ISerializer";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
 export default class Vector2 implements IVector2, ISerializable {
-    static readonly ZERO: Vector2;
-    static readonly ONE: Vector2;
+    static get ZERO(): Vector2;
+    static get ONE(): Vector2;
     static inRange(center: IVector2, range: number, includeCenter?: boolean): import("@wayward/goodstream/Stream").default<IVector2>;
     static cross(vector: IVector2, vector2: IVector2): Vector3;
     static cross<D extends IVector3>(vector: IVector2, vector2: IVector2, dest: D): D;
@@ -36,9 +36,12 @@ export default class Vector2 implements IVector2, ISerializable {
     static range(a: IVector2, b: IVector2): Generator<number[], void, unknown>;
     static is(thing: unknown): thing is IVector2;
     private readonly values;
-    x: number;
-    y: number;
-    xy: [number, number];
+    get x(): number;
+    set x(value: number);
+    get y(): number;
+    set y(value: number);
+    get xy(): [number, number];
+    set xy(values: [number, number]);
     constructor();
     constructor(xy: number | [number, number] | IVector2);
     constructor(x: number, y: number);

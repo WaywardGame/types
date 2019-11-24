@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 interface IInputEvents extends Events<Component> {
@@ -25,7 +24,6 @@ interface IInputEvents extends Events<Component> {
 export interface IInput extends Component {
     event: IEventEmitter<this, IInputEvents>;
     setMaxLength(maxLength?: number): this;
-    setCanBeEmpty(canBeEmpty?: boolean): this;
     setDefault(generator: () => string): this;
     setClearTo(clearTo?: () => string): this;
     setPlaceholder(generator: TranslationGenerator): this;

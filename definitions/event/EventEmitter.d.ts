@@ -71,7 +71,8 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     waitFor<K extends ArrayOr<keyof E>>(events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
-    private stream;
+    private handlersForEvent;
+    private handlers;
 }
 declare module EventEmitter {
     class Host<E> implements IEventEmitterHost<E> {

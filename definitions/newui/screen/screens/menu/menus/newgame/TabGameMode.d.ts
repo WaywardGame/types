@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import { GameMode } from "game/options/IGameOptions";
 import ChoiceList, { Choice } from "newui/component/ChoiceList";
 import ChoiceListTurnMode from "newui/screen/screens/menu/component/ChoiceListTurnModes";

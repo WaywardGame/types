@@ -43,7 +43,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     private isFirstSelection;
     private lastFilter;
     private _selection;
-    readonly selection: O;
+    get selection(): O;
     private hovered;
     private shouldRetainLastFilter;
     constructor();

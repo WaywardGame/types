@@ -14,8 +14,8 @@ export default class MultiplayerOptionsMenu extends Menu {
     private readonly copyGameCode;
     private readonly inviteSteamFriends;
     private readonly lobbyType;
-    private readonly choiceLobbyFriends;
     private readonly choiceLobbyPublic;
+    private readonly choiceLobbyFriends;
     private readonly choiceLobbyPrivate;
     private readonly textWebRTCResult;
     private readonly textWebSocketResult;

@@ -28,7 +28,6 @@ interface ItemManagerEvents {
 export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     private readonly worldContainer;
     private cachedWeights;
-    private cachedDecaysIntoWeights;
     private cachedDefaultItemForGroup;
     private cachedItemGroups;
     private cachedItemTypes;
@@ -112,7 +111,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     getGroups(itemType: ItemType): import("@wayward/goodstream/Stream").default<ItemTypeGroup>;
     checkMilestones(player: Player, item: Item): void;
-    getDefaultDurability(human: Human | undefined, weight: number, itemType: ItemType): number;
+    getDefaultDurability(human: Human | undefined, weight: number, itemType: ItemType, getMax?: boolean): number;
     generateLookups(): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
     getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, allowIncreasedQuality?: boolean, bonusChance?: number): Quality | undefined;

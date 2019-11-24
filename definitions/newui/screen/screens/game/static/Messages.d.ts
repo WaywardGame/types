@@ -20,17 +20,17 @@ import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
 import Input from "newui/component/Input";
 import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
-import { IPinnedMessage, MessageTimestamp, PinType, QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+import { IPinnedMessage, MessageTimestamp, PinType } from "newui/screen/screens/game/IGameScreenApi";
 import { IFilters, MessageFilterDefault } from "newui/screen/screens/game/IMessages";
-import { IStringSection } from "utilities/string/Interpolator";
+import GameScreen from "newui/screen/screens/GameScreen";
 interface IMessagesEvents extends Events<QuadrantComponent> {
     pinQuestRequirement(pin: IPinnedMessage): any;
     unpinQuestRequirement(pin: IPinnedMessage): any;
 }
 export default class Messages extends QuadrantComponent implements IHookHost {
     static sendChatMessage(sender: Player, message: string): typeof Messages;
-    private static readonly defaultFilters;
-    readonly preferredQuadrant: Quadrant;
+    private static get defaultFilters();
+    get preferredQuadrant(): Quadrant;
     static preferredQuadrant: Quadrant;
     event: IEventEmitter<this, IMessagesEvents>;
     readonly sendButton: Button;
@@ -52,9 +52,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     private readonly chatSentHistory;
     private chatHistoryIndex;
     private pushedCurrentToHistory;
-    constructor();
-    getID(): QuadrantComponentId;
-    getName(): IStringSection[];
+    constructor(host: GameScreen);
     getPins(): import("@wayward/goodstream/Stream").default<IPinnedMessage>;
     getMessageTimestampMode(): MessageTimestamp;
     setMessageTimestampMode(mode: MessageTimestamp): this;
@@ -72,6 +70,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     onWrittenNote(player: Player, id: number): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     getDefaultFilterName(filter: MessageFilterDefault): string;
+    protected onChangeQuadrant(): void;
     /**
      * Event handler for when the text in the chat box should be sent as a message.
      */
@@ -80,6 +79,8 @@ export default class Messages extends QuadrantComponent implements IHookHost {
      * Returns the context menu for messages, used by the superclass (quadrant component)
      */
     protected getContextMenuDescription(): ContextMenuOptionKeyValuePair[];
+    private isInTopQuadrant;
+    private isInDialog;
     private addPinnedNote;
     private addPinnedQuestRequirement;
     private onQuestGet;

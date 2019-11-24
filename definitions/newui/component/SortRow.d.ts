@@ -33,8 +33,8 @@ export default class SortRow<S extends number> extends LabelledRow implements IR
     private disabledSorts;
     private readonly dropdown;
     private refreshMethod;
-    readonly sort: S;
-    readonly sortDirection: SortDirection;
+    get sort(): S;
+    get sortDirection(): SortDirection;
     constructor();
     setDisabledSorts(val: S[], refresh?: boolean): this;
     setRefreshMethod(refresh: () => SortRowData<S>): this;

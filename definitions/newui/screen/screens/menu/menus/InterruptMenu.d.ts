@@ -28,7 +28,7 @@ export default class InterruptMenu extends Menu {
     private readonly loadingElement;
     private readonly settingOptionsQueue;
     private isResolved;
-    readonly type: InterruptType;
+    get type(): InterruptType;
     constructor();
     setOptions(options: InterruptOptions): Promise<void>;
     setText(title?: TranslationGenerator, description?: TranslationGenerator): void;

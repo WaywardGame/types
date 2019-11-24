@@ -139,7 +139,7 @@ export default class InGameScreen extends BaseScreen {
     showItemContextMenu(element: JQuery): void;
     onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): boolean;
     runContextMenuAction(itemId: number, action: IContextMenuAction, skipSound?: boolean): boolean;
-    onCraftingItemClick(element: JQuery): void;
+    craftItemChecker(itemType: ItemType): void;
     craftItem(item: ItemType, checker: ItemRecipeRequirementChecker): Promise<void>;
     onDismantleItemClick(dismantleItem: Item | undefined): void;
     getTooltipHtml(element: JQuery): string;

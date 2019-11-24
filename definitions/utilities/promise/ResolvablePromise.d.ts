@@ -14,6 +14,6 @@ export default class ResolvablePromise<T = void> extends Promise<T> {
     readonly resolve: IResolve<T>;
     readonly reject: IReject;
     private _isResolved;
-    readonly isResolved: boolean;
+    get isResolved(): boolean;
     constructor(executor?: (resolve: IResolve<T>, reject: IReject) => void);
 }

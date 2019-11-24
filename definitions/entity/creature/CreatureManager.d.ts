@@ -13,8 +13,7 @@ import { CreatureType, ICreatureDescription, SpawnGroup, TileGroup } from "entit
 import EntityManager from "entity/EntityManager";
 import Human from "entity/Human";
 import { MoveType } from "entity/IEntity";
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 import Vector3 from "utilities/math/Vector3";
@@ -32,7 +31,7 @@ export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> 
 }
 export default class CreatureManager extends EntityManager<Creature> {
     readonly event: IEventEmitter<this, ICreatureManagerEvents>;
-    getEntities(): (Creature | undefined)[];
+    getEntities(): SaferArray<Creature>;
     getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: boolean): Translation;
     getHappinessLevel(human: Human, creature: Creature): number;
     /**

@@ -8,42 +8,65 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IEventEmitter } from "event/EventEmitter";
-import { Events } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IInput } from "newui/component/IInput";
 import { IRefreshable } from "newui/component/Refreshable";
+export declare enum ClearType {
+    UseDefault = 0,
+    Auto = 1,
+    NotDefault = 2,
+    Empty = 3
+}
 export default class Input extends Component implements IRefreshable, IInput {
     event: IEventEmitter<this, Events<IInput>>;
     default: (() => string) | undefined;
-    text: string;
+    private lastInput;
+    get text(): string;
+    set text(value: string);
     private keydownEnter;
     private keydownEscape;
-    private canBeEmpty;
+    private clearToDefaultWhenEmpty;
     private clearTo;
     private placeholder;
-    private shouldBlurWhenEnterPressed;
-    private shouldBlurWhenEnterPressedAndEmpty;
-    private hasChanged;
-    readonly changed: boolean;
+    private shouldBlurOnEnter;
+    private shouldBlurOnEnterAndEmpty;
+    private shouldNotClearOnEscape;
+    get changed(): boolean;
+    private readonly input;
+    private readonly wrapperButtons;
     constructor();
+    addClearButton(): this;
+    addResetButton(): this;
     setMaxLength(maxLength?: number): this;
-    setCanBeEmpty(canBeEmpty?: boolean): this;
-    setDefault(generator: () => string): this;
+    setClearToDefaultWhenEmpty(setClearToDefaultWhenEmpty?: boolean): this;
+    setDefault(generator: () => string, apply?: boolean): this;
     setClearTo(clearTo?: () => string): this;
+    setClearToEmpty(): this;
+    setClearToLastInput(): this;
     setPlaceholder(generator: TranslationGenerator): this;
-    setShouldBlurWhenEnterPressedAndEmpty(shouldBlurWhenEnterPressedAndEmpty?: boolean): this;
-    setShouldBlurWhenEnterPressed(shouldBlurWhenEnterPressed?: boolean): this;
+    /**
+     * @deprecated Use `setShouldBlurOnEnterAndEmpty`
+     */
+    setShouldBlurWhenEnterPressedAndEmpty(shouldBlurOnEnterAndEmpty?: boolean): this;
+    setBlurOnEnterAndEmpty(shouldBlurOnEnterAndEmpty?: boolean): this;
+    /**
+     * @deprecated Use `setShouldBlurOnEnter`
+     */
+    setBlurWhenEnterPressed(shouldBlurOnEnter?: boolean): this;
+    setBlurOnEnter(shouldBlurOnEnter?: boolean): this;
+    setNotClearOnEscape(shouldNotClearOnEscape?: boolean): this;
     refresh(): this;
     /**
      * Reset the text of the input to the default, or to the clearTo option if that was provided
-     * @param useDefault Whether to use the default over clearTo
+     * @param clearType `ClearType.UseDefault` to force using default, `ClearType.NotDefault` to prevent using default, `ClearType.Auto` otherwise. Defaults to `ClearType.Auto`
      */
-    clear(useDefault?: boolean): this;
+    clear(clearType?: ClearType): this;
     focus(): void;
     blur(event?: Event): void;
     private keydown;
     private keyup;
     private change;
+    private getClearTo;
 }

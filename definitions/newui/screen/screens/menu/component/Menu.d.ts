@@ -22,7 +22,7 @@ export default class Menu extends Component implements IMenu, IHookHost {
     event: IEventEmitter<this, Events<IMenu>>;
     menuId: MenuId | string;
     canCancel: boolean | undefined;
-    readonly isSubmenu: boolean;
+    get isSubmenu(): boolean;
     readonly selection: SelectionHandler;
     readonly buttonBack: BackButton;
     confirmButtons: ConfirmButtonHandler;
@@ -59,7 +59,7 @@ export declare class Tab<I extends string | number | undefined = string | number
     readonly id: I;
     section: MenuSection | undefined;
     private _subtabs;
-    readonly subtabs: Tab<string | number | undefined>[];
+    get subtabs(): Tab<string | number | undefined>[];
     constructor(id: I);
     setSection(section: MenuSection): this;
     setSubTabs(...tabs: ArrayOfIterablesOr<Tab>): void;

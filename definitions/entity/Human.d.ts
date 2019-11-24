@@ -60,6 +60,7 @@ export default abstract class Human extends Entity {
     canSendMessage: boolean;
     private readonly privateStore;
     private readonly equipEffects;
+    private cachedTotalSkill?;
     constructor();
     resetStatTimers(): void;
     isLocalPlayer(): boolean;
@@ -82,6 +83,10 @@ export default abstract class Human extends Entity {
      * @returns The value of the given skill, the sum of the base value and any bonuses from legendary equipment
      */
     getSkill(skill: SkillType): number;
+    /**
+     * @returns The total skill (combination of all other skills). Ignores skill bonuses.
+     */
+    getSkillTotal(): number;
     /**
      * @returns Whether the skill of this human is more than or equal to a random number between `0` and the value of `check`.
      */
@@ -140,5 +145,5 @@ export default abstract class Human extends Entity {
     protected calculateStats(): void;
     protected resetDefense(): void;
     protected updateSwimming(): void;
-    protected swimCheck(): void;
+    protected swimAndSootheCheck(): void;
 }

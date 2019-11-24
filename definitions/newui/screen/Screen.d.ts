@@ -20,7 +20,8 @@ export default abstract class Screen extends Component implements IHookHost {
     protected lastTooltipSource?: Component;
     protected log: Log;
     private contextMenu?;
-    background: Background;
+    get background(): Background;
+    set background(background: Background);
     constructor(type: ScreenId);
     /**
      * Remove the context menu from this element
