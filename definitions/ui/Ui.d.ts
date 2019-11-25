@@ -68,7 +68,7 @@ export default class Ui extends Emitter {
     closeContainer(container: IContainer): void;
     refreshContainerName(container: IContainer): void;
     isContainerOpen(container: IContainer): boolean;
-    addItemToContainer(item: Item, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
+    addItemToContainer(item: Item, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
     afterAddingMultipleItemsToContainer(container: IContainer): void;
     removeItemFromContainer(item: Item, container: IContainer): void;
     updateInventorySort(): void;

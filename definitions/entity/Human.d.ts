@@ -97,7 +97,7 @@ export default abstract class Human extends Entity {
     isRestingCancelled(): boolean;
     startResting(restData: IRestData): void;
     cancelResting(reason: RestCancelReason): boolean;
-    createItemInInventory(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality): Item;
+    createItemInInventory(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, updateTables?: boolean): Item;
     hasHandToUse(): boolean;
     getAndSwitchHandToUse(): EquipType | undefined;
     damageRandomEquipment(): void;

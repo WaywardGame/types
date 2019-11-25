@@ -526,7 +526,7 @@ export declare enum ItemType {
     RawBlindfish = 239,
     CookedBlindfish = 240,
     Pemmican = 241,
-    PreparedPemmican = 242,
+    CookedPemmican = 242,
     Sail = 243,
     Sailboat = 244,
     Egg = 245,
