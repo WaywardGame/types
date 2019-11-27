@@ -76,6 +76,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     getParent<C extends Component = Component>(): C | null;
     appendTo(where: string | HTMLElement | IComponent, appendStrategy?: AppendStrategy): this;
     append(...elements: ArrayOfIterablesOr<HTMLElement | IComponent | undefined | false>): this;
+    append(appendStrategy: AppendStrategy, ...elements: ArrayOfIterablesOr<HTMLElement | IComponent | undefined | false>): this;
     remove(): this;
     contains(what: string | HTMLElement | IComponent): boolean;
     dump(filter?: (element: Component) => boolean): this;
@@ -89,7 +90,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     closest(selector: string): Element | null;
     matches(selector: string): boolean;
     getIndex(): number | null;
-    setTooltip(initializer?: (tooltip: ITooltip) => ITooltip, showOnHover?: boolean): this;
+    setTooltip(initializer?: (tooltip: ITooltip) => any, showOnHover?: boolean): this;
     removeTooltip(): void;
     /**
      * Remove the context menu from this element

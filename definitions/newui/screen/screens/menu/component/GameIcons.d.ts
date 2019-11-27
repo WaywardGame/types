@@ -21,12 +21,51 @@ export interface IGameIconsHost {
 }
 export default class GameIcons extends Component implements IRefreshable {
     private readonly host;
-    private readonly difficulty;
+    private readonly gameMode;
     private readonly pvp;
     private readonly mods;
     private readonly friends;
+    get hasLabels(): boolean;
     constructor(host: IGameIconsHost);
+    setHasLabels(labels?: boolean): this;
     refresh(): this;
-    private getModsTooltip;
-    private getFriendsTooltip;
+    private addIcon;
+    private getGameModeText;
+    private getModsText;
+    private getFriendsText;
+}
+export declare class GameDetails extends Component implements IGameIconsHost {
+    get difficulty(): GameMode;
+    get pvp(): boolean;
+    get mods(): [string, ModLoadability][];
+    get friends(): ISteamFriend[];
+    readonly gameIcons: GameIcons;
+    readonly gameModifiers: GameModifiers;
+    private questsWrapper?;
+    private steamworksFriends;
+    constructor();
+    setHasLabels(hasLabels?: boolean): this;
+    setHasQuests(hasQuests?: boolean): this;
+    hasIcons(): boolean;
+    refresh(): void;
+    protected refreshGameIcons(): void;
+    private refreshQuests;
+}
+export declare class GameModifiers extends Component {
+    get hasLabels(): boolean;
+    constructor();
+    setHasLabels(labels?: boolean): this;
+    refresh(): void;
+    /**
+     * Returns the formatted CSS url for the game options icon.
+     */
+    private getGameOptionsIcon;
+    /**
+     * Returns the formatted CSS url for the challenge icon.
+     */
+    private getChallengeIcon;
+    /**
+     * Returns the formatted CSS url for the milestone icon.
+     */
+    private getMilestoneIcon;
 }
