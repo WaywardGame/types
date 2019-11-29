@@ -195,7 +195,8 @@ export declare enum DoodadType {
     HitchingPost = 96,
     ClayBrickWell = 97,
     SandstoneWell = 98,
-    StoneWell = 99
+    StoneWell = 99,
+    AshCementWall = 100
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,

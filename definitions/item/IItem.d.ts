@@ -776,7 +776,11 @@ export declare enum ItemType {
     GoldenSextant = 489,
     RawChoppedFish = 490,
     CookedChoppedFish = 491,
-    CookedFishKebab = 492
+    CookedFishKebab = 492,
+    AshCement = 493,
+    AshCementBrick = 494,
+    AshCementFlooring = 495,
+    AshCementWall = 496
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
