@@ -33,6 +33,8 @@ export default class Input extends Component implements IRefreshable, IInput {
     private shouldBlurOnEnter;
     private shouldBlurOnEnterAndEmpty;
     private shouldNotClearOnEscape;
+    private shouldSelectOnFocus;
+    private shouldSelectOnNextMouseUp;
     get changed(): boolean;
     private readonly input;
     private readonly wrapperButtons;
@@ -57,6 +59,7 @@ export default class Input extends Component implements IRefreshable, IInput {
     setBlurWhenEnterPressed(shouldBlurOnEnter?: boolean): this;
     setBlurOnEnter(shouldBlurOnEnter?: boolean): this;
     setNotClearOnEscape(shouldNotClearOnEscape?: boolean): this;
+    setSelectOnFocus(selectOnFocus?: boolean): this;
     refresh(): this;
     /**
      * Reset the text of the input to the default, or to the clearTo option if that was provided
@@ -65,6 +68,7 @@ export default class Input extends Component implements IRefreshable, IInput {
     clear(clearType?: ClearType): this;
     focus(): void;
     blur(event?: Event): void;
+    select(): this;
     private keydown;
     private keyup;
     private change;
