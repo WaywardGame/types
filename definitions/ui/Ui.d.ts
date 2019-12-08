@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { EquipType } from "entity/IHuman";
-import { IContainer, IDismantleComponent, ItemType } from "item/IItem";
+import { ItemType, IContainer, IDismantleComponent } from "item/IItem";
 import Item from "item/Item";
 import "ui/functional/FunctionalSortable";
 import "ui/functional/FunctionalTooltip";

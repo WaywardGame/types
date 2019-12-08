@@ -25,7 +25,7 @@ import { QuestRequirement } from "entity/player/quest/requirement/Requirement";
 import { ISkillDescription } from "entity/player/Skills";
 import { InspectType } from "game/inspection/IInspection";
 import { IInspectionHandler } from "game/inspection/Inspections";
-import { IItemDescription, IItemGroupDescription, ItemType, ItemTypeGroup } from "item/IItem";
+import { ItemType, ItemTypeGroup, IItemDescription, IItemGroupDescription } from "item/IItem";
 import { Dictionary } from "language/Dictionaries";
 import Interrupt from "language/dictionary/Interrupt";
 import InterruptChoice from "language/dictionary/InterruptChoice";

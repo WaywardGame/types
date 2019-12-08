@@ -61,6 +61,7 @@ export interface ITile extends Partial<ITileContainer> {
     events?: ITileEvent[];
     npc?: NPC;
     overlays?: IOverlayInfo[];
+    quality?: Quality;
 }
 export interface ITileOld {
     event?: ITileEvent[];

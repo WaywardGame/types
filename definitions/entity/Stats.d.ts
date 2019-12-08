@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IStatChangeInfo, StatChangeReason } from "entity/IEntity";
-import { IStat, IStatBase, IStatEvents, IStats, Stat } from "entity/IStats";
+import { IStat, IStats, IStatBase, IStatEvents, Stat } from "entity/IStats";
 import StatFactory, { StatChangeTimerFactory } from "entity/StatFactory";
 import EventEmitter from "event/EventEmitter";
 export interface IStatHost extends EventEmitter.Host<IStatEvents> {

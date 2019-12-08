@@ -11,7 +11,7 @@
 import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
 import { IServerGameDetails, IServerServerDetails } from "multiplayer/matchmaking/IMatchmaking";
-import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamworksEvents, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
+import { IDedicatedServerInfo, IModPath, ISteamworksEvents, ISteamFriend, ISteamId, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
 interface IMatchmakingServer {
     port: number | undefined;
     connectCallback: ((connection: IMatchmakingServerConnection, path: string | undefined) => void) | undefined;

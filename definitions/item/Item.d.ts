@@ -17,7 +17,7 @@ import { EquipType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
-import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, ItemType, LegendaryType, TatteredMap } from "item/IItem";
+import { BookType, ItemType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, LegendaryType, TatteredMap } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { IVector3 } from "utilities/math/IVector";

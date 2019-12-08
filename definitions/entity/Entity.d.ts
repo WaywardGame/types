@@ -10,8 +10,8 @@
  */
 import { SfxType } from "audio/IAudio";
 import Creature from "entity/creature/Creature";
-import { EntityPlayerCreatureNpc, EntityType, IEntityEvents, IProperties, IStatChangeInfo, IStatus, MoveType, Property, StatChangeReason, StatusEffectChangeReason, StatusType } from "entity/IEntity";
-import { IStat, IStatBase, IStats, Stat } from "entity/IStats";
+import { EntityPlayerCreatureNpc, EntityType, IEntityEvents, IProperties, IStatus, IStatChangeInfo, MoveType, Property, StatusEffectChangeReason, StatusType, StatChangeReason } from "entity/IEntity";
+import { IStat, IStats, IStatBase, Stat } from "entity/IStats";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import StatFactory from "entity/StatFactory";

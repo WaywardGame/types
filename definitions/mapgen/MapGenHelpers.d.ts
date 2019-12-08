@@ -43,7 +43,7 @@ export interface ITemplateOptions {
 export declare function manipulateTemplates<T extends Array<string[] | undefined>>(options: ITemplateOptions, ...templates: T): T;
 export declare function spawnTemplate(templateType: TileTemplateType, x: number, y: number, z: number, options?: ITemplateOptions): void;
 export declare function setTileUnderDoodad(tile: ITile, x: number, y: number, doodadType: DoodadType, addTileData?: boolean): void;
-export declare function setupTiles(tileGenArray: Uint16Array): void;
+export declare function setupTiles(tileGenArray: Uint16Array, tileGenQualityArray?: Uint16Array): void;
 export declare function loadDifferences(): void;
 export declare enum Pre240TerrainType {
     DeepSeawater = 0,

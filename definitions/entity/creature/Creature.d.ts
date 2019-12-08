@@ -16,7 +16,7 @@ import { IStat } from "entity/IStats";
 import Player from "entity/player/Player";
 import { IEventEmitter } from "event/EventEmitter";
 import Inspection from "game/inspection/Inspect";
-import { IInspectable, InspectionSection } from "game/inspection/Inspections";
+import { InspectionSection, IInspectable } from "game/inspection/Inspections";
 import { IObject } from "game/IObject";
 import Item from "item/Item";
 import Translation from "language/Translation";
