@@ -19,9 +19,11 @@ import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> implements IHookHost {
     private readonly _playerIdentifier;
+    private readonly _steamNetworking;
     private _isServer;
     private _server;
     private readonly _clients;
+    private readonly _steamIdToClientMapping;
     private _joinServerTimeoutId;
     private _joinedMatchmakingInfo;
     private _connectedMatchmakingInfo;
@@ -115,6 +117,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     private clearJoinServerRetryTimeout;
     private startMatchmakingServer;
     private stopMatchmakingServer;
+    private setupClientConnection;
     private connectGlobalMatchmakingServer;
     private disconnectGlobalMatchmakingServer;
     private connectDedicatedMatchmakingServer;
@@ -133,4 +136,14 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     private onStateChange;
     private convertToMatchmakingInfo;
     private getSyncPacketWaitId;
+    private refreshLobbySteamRelayStatus;
+    private onRelayNetworkStatus;
+    /**
+     * Called when a remote steam id is trying to send us a message
+     */
+    private onP2PSessionRequest;
+    /**
+     * Called when we failed to connect to a remote steam id
+     */
+    private onP2PSessionConnectFail;
 }

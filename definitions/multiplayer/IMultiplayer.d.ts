@@ -67,6 +67,7 @@ export declare enum MultiplayerSyncCheck {
     Weight = 39
 }
 export declare const maxPlayers = 32;
+export declare const packetTickRate = 10;
 export declare const defaultServerPort = 38740;
 export declare const steamLobbyPrefix = "steam:";
 export declare const checkConnectionMatchmakingId = "check";
@@ -101,6 +102,7 @@ export interface IMultiplayerNetworkingOptions {
     fakeRoundTripTime: number;
     recentPacketTracking: number;
     joinServerTimeout: number;
+    steamNetworkTimeout: number;
     webRtcTimeout: number;
     connectionTimeout: number;
     keepAliveInterval: number;

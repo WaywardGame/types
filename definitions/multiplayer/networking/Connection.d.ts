@@ -12,7 +12,7 @@ import { IMatchmakingInfo, MatchmakingMessageData } from "multiplayer/matchmakin
 import { ConnectionState, IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 export declare abstract class Connection implements IConnection {
-    playerIdentifier: string;
+    playerIdentifier: string | undefined;
     matchmakingIdentifier: string;
     pid?: number;
     /**

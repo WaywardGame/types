@@ -11,7 +11,7 @@
 import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
 import { IServerGameDetails, IServerServerDetails } from "multiplayer/matchmaking/IMatchmaking";
-import { IDedicatedServerInfo, IModPath, ISteamworksEvents, ISteamFriend, ISteamId, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
+import { IDedicatedServerInfo, IModPath, ISteamworksEvents, ISteamFriend, ISteamId, ISteamNetworking, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
 interface IMatchmakingServer {
     port: number | undefined;
     connectCallback: ((connection: IMatchmakingServerConnection, path: string | undefined) => void) | undefined;
@@ -57,11 +57,13 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private _currentLobbyId;
     private _multiplayerLogs;
     private importingSaveGameMod;
+    private relayNetworkStatus;
     isElectron(): boolean;
     reload(): void;
     closeWindow(): void;
     isOverlayWorking(): boolean;
     isGreenworksEnabled(): boolean;
+    isRelayNetworkReady(): boolean;
     isNapiEnabled(): boolean;
     getAbsolutePath(...p: string[]): string;
     isAbsolutePath(path: string): boolean;
@@ -71,6 +73,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     isDedicatedServer(): boolean;
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
     getMatchmakingServer(): IMatchmakingServer | undefined;
+    getSteamNetworking(): ISteamNetworking | undefined;
     initialize(): Promise<void>;
     onUnload(): void;
     setOverlayWorks(overlayWorks: boolean): void;
@@ -99,6 +102,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     joinLobby(lobbyId: string): void;
     getLobbyData(name: string): string | undefined;
     setLobbyData(name: string, data: string): boolean;
+    getLobbyOwner(): string | undefined;
     getLobbyMembers(): ISteamFriend[] | undefined;
     getPublishedMod(publishFileId: string): IWorkshopItem | undefined;
     fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
@@ -155,6 +159,18 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
      * Called when the user tries to join a lobby from their friends list or from an invite. The game client should attempt to connect to specified lobby when this is received. If the game isn't running yet then the game will be automatically launched with the command line parameter +connect_lobby <64-bit lobby Steam ID> instead.
      */
     private onLobbyJoinRequested;
+    /**
+     * Called when the steam relay network status changes
+     */
+    private onRelayNetworkStatus;
+    /**
+     * Called when a remote steam id is trying to send us a message
+     */
+    private onP2PSessionRequest;
+    /**
+     * Called when we failed to connect to a remote steam id
+     */
+    private onP2PSessionConnectFail;
     private showCharacterSelectionForMultiplayer;
     private createFolderIfNotExists;
     private getSyncPath;

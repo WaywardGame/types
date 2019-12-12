@@ -17,8 +17,10 @@ export default class MultiplayerOptionsMenu extends Menu {
     private readonly choiceLobbyPublic;
     private readonly choiceLobbyFriends;
     private readonly choiceLobbyPrivate;
+    private readonly textSteamRelayNetworkResult;
     private readonly textWebRTCResult;
     private readonly textWebSocketResult;
+    private readonly steamRelayNetworkSpacer;
     private readonly webRTCSpacer;
     private readonly pvp;
     private readonly maxPlayers;
@@ -31,4 +33,5 @@ export default class MultiplayerOptionsMenu extends Menu {
     private toggleServer;
     private copyGameCodeClick;
     private inviteSteamFriendsClick;
+    private refreshSteamNetworkConnection;
 }
