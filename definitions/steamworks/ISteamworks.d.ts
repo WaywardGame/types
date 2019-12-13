@@ -79,8 +79,8 @@ export interface ISteamNetworking {
     readP2PPacket(length: number): {
         steamIdRemote: string;
         data: Uint8Array;
-    };
-    readP2PPacket(length: number, data: Uint8Array): string;
+    } | undefined;
+    readP2PPacket(length: number, data: Uint8Array): string | undefined;
     setRelayNetworkStatusCallback(callback: (availabilitySummary: number, availabilityNetworkConfig: number, availabilityAnyRelay: number, debugMessage: string) => void): void;
     setP2PSessionRequestCallback(callback: (steamIdRemote: string) => void): void;
     setP2PSessionConnectFailCallback(callback: (steamIdRemote: string, errorCode: number) => void): void;

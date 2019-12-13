@@ -47,6 +47,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     private _disconnectingFromSyncIssue;
     private _ipAddress;
     private readonly _matchmakingSecret;
+    private readonly readBuffer;
     constructor();
     isConnected(): boolean;
     isReady(): boolean;
