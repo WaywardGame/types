@@ -21,10 +21,12 @@ export interface ISteamId {
     accountId: number;
     screenName: string;
     steamId: string;
+    staticAccountId: string;
 }
 export interface ISteamFriend {
     name?: string;
     steamId: string;
+    staticAccountId: string;
     gameId?: string;
     lobbyId?: string;
 }

@@ -21,6 +21,7 @@ export declare enum ConnectionState {
 }
 export interface IConnection {
     playerIdentifier: string | undefined;
+    playerSteamId: string | undefined;
     matchmakingIdentifier: string;
     pid?: number;
     /**

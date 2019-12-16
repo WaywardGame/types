@@ -11,7 +11,7 @@
 import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
 import { IServerGameDetails, IServerServerDetails } from "multiplayer/matchmaking/IMatchmaking";
-import { IDedicatedServerInfo, IModPath, ISteamworksEvents, ISteamFriend, ISteamId, ISteamNetworking, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
+import { IDedicatedServerInfo, IModPath, ISteamworksEvents, ISteamFriend, ISteamId, ISteamNetworking as ISteamworksNetworking, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
 interface IMatchmakingServer {
     port: number | undefined;
     connectCallback: ((connection: IMatchmakingServerConnection, path: string | undefined) => void) | undefined;
@@ -63,8 +63,8 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     closeWindow(): void;
     isOverlayWorking(): boolean;
     isGreenworksEnabled(): boolean;
-    isRelayNetworkReady(): boolean;
     isNapiEnabled(): boolean;
+    isRelayNetworkReady(): boolean;
     getAbsolutePath(...p: string[]): string;
     isAbsolutePath(path: string): boolean;
     getAppPath(...p: string[]): string;
@@ -73,7 +73,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     isDedicatedServer(): boolean;
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
     getMatchmakingServer(): IMatchmakingServer | undefined;
-    getSteamNetworking(): ISteamNetworking | undefined;
+    getSteamNetworking(): ISteamworksNetworking | undefined;
     initialize(): Promise<void>;
     onUnload(): void;
     setOverlayWorks(overlayWorks: boolean): void;

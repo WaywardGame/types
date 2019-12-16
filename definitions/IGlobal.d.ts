@@ -256,7 +256,7 @@ declare global {
         discord: INapiDiscord;
     }
     interface INapiDiscord {
-        initialize(): void;
+        initialize(apiKey: string, appId?: string): void;
         shutdown(): void;
         runCallbacks(): void;
         setOnJoinCallback(callback: (server: string) => void): void;

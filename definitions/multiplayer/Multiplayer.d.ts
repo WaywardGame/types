@@ -18,7 +18,15 @@ import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> implements IHookHost {
+    /**
+     * Static steam account id when steam support is on
+     * Otherwise it will be a random guid that persists
+     */
     private readonly _playerIdentifier;
+    /**
+     * Steam id - used for steam networking
+     */
+    private readonly _playerSteamId;
     private readonly _steamNetworking;
     private _isServer;
     private _server;

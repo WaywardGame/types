@@ -13,6 +13,7 @@ import { ConnectionState, IConnection } from "multiplayer/networking/IConnection
 import { IPacket } from "multiplayer/packets/IPacket";
 export declare abstract class Connection implements IConnection {
     playerIdentifier: string | undefined;
+    playerSteamId: string | undefined;
     matchmakingIdentifier: string;
     pid?: number;
     /**
