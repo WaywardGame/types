@@ -17,6 +17,7 @@ export declare class SteamNetworkConnection extends Connection {
     private readonly onData;
     private readonly onConnected?;
     private readonly connectGlobalMatchmakingServer?;
+    name: string;
     private _processIntervalId;
     private _checkSessionStateIntervalId;
     constructor(steamNetworking: ISteamNetworking, hostSteamId: string, matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, onData: (data: ArrayBuffer) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined, connectGlobalMatchmakingServer?: (() => void) | undefined);

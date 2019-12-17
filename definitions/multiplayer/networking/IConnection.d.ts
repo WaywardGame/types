@@ -20,6 +20,7 @@ export declare enum ConnectionState {
     All = 63
 }
 export interface IConnection {
+    name: string;
     playerIdentifier: string | undefined;
     playerSteamId: string | undefined;
     matchmakingIdentifier: string;
@@ -45,7 +46,7 @@ export interface IConnection {
     queuePacketData(data: ArrayBuffer): void;
     send(data: ArrayBuffer | Uint8Array): void;
     setState(state: ConnectionState): void;
-    startKeepAlive(): void;
+    sendKeepAlive(): void;
 }
 export interface IQueuedData {
     data: ArrayBuffer;

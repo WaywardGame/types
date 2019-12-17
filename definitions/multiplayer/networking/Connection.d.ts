@@ -12,6 +12,7 @@ import { IMatchmakingInfo, MatchmakingMessageData } from "multiplayer/matchmakin
 import { ConnectionState, IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 export declare abstract class Connection implements IConnection {
+    abstract name: string;
     playerIdentifier: string | undefined;
     playerSteamId: string | undefined;
     matchmakingIdentifier: string;
@@ -34,14 +35,14 @@ export declare abstract class Connection implements IConnection {
      */
     private readonly _queuedData;
     private _timeoutId;
-    private _keepAliveIntervalId;
+    private _keepAliveTimeoutId;
     constructor(matchmakingInfo: IMatchmakingInfo | undefined);
     close(): void;
     addConnectionTimeout(): void;
     addTimeout(milliseconds: number, callback: () => void): void;
     clearTimeout(): void;
     addKeepAliveTimeout(): void;
-    startKeepAlive(): void;
+    sendKeepAlive(): void;
     getState(): ConnectionState;
     setState(state: ConnectionState): void;
     queuePacketData(data: ArrayBuffer): void;

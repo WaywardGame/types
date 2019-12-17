@@ -22,6 +22,7 @@ export declare class SmartConnection extends Connection {
     private readonly onData;
     private readonly onConnected;
     private readonly connectGlobalMatchmakingServer;
+    name: string;
     private _webRTCTimeoutId;
     private _webRTCConnection;
     private _hostIpAddress;
