@@ -89,6 +89,10 @@ export default class Stats<T extends IStatHost> {
      */
     setBonus(stat: Stat | IStat, bonus: number, info?: StatChangeReason | IStatChangeInfo): T;
     /**
+     * Returns whether the given stat has a `max`.
+     */
+    hasMax(stat: Stat | IStat): boolean;
+    /**
      * Returns the `max` of the given stat, or undefined if the stat isn't an `IStatMax`. Stat bonus *is* applied.
      */
     getMax(stat: Stat | IStat): number;
