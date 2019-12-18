@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IStatChangeInfo, StatChangeReason } from "entity/IEntity";
-import { IStat, IStatBase, IStatEvents, IStats, Stat } from "entity/IStats";
+import { IStat, IStats, IStatBase, IStatEvents, Stat } from "entity/IStats";
 import StatFactory, { StatChangeTimerFactory } from "entity/StatFactory";
 import EventEmitter from "event/EventEmitter";
 export interface IStatHost extends EventEmitter.Host<IStatEvents> {
@@ -88,6 +88,10 @@ export default class Stats<T extends IStatHost> {
      * Triggers `statBonusChanged`, then `statChanged`, and potentially `statMaxChanged`
      */
     setBonus(stat: Stat | IStat, bonus: number, info?: StatChangeReason | IStatChangeInfo): T;
+    /**
+     * Returns whether the given stat has a `max`.
+     */
+    hasMax(stat: Stat | IStat): boolean;
     /**
      * Returns the `max` of the given stat, or undefined if the stat isn't an `IStatMax`. Stat bonus *is* applied.
      */

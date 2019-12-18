@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { EquipType } from "entity/IHuman";
-import { IContainer, IDismantleComponent, ItemType } from "item/IItem";
+import { ItemType, IContainer, IDismantleComponent } from "item/IItem";
 import Item from "item/Item";
 import "ui/functional/FunctionalSortable";
 import "ui/functional/FunctionalTooltip";
@@ -68,7 +68,7 @@ export default class Ui extends Emitter {
     closeContainer(container: IContainer): void;
     refreshContainerName(container: IContainer): void;
     isContainerOpen(container: IContainer): boolean;
-    addItemToContainer(item: Item, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
+    addItemToContainer(item: Item, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
     afterAddingMultipleItemsToContainer(container: IContainer): void;
     removeItemFromContainer(item: Item, container: IContainer): void;
     updateInventorySort(): void;

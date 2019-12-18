@@ -78,12 +78,18 @@ export declare class StatAttribute extends StatElement {
     getDisplayElement(): Text;
 }
 export declare class Statbars extends Component {
+    private readonly entity;
+    private readonly noEvents?;
     private readonly _statbars;
     get statbars(): Map<Stat, Statbar>;
-    constructor(entity: Entity, iterableOfStats: Stream<Stat>, noEvents?: true);
+    constructor(entity: Entity, iterableOfStats: Stream<Stat>, noEvents?: true | undefined);
+    addStatbar(stat: Stat): void;
 }
 export declare class StatAttributes extends Component {
+    private readonly entity;
+    private readonly noEvents?;
     private readonly _stats;
     get stats(): Map<Stat, StatAttribute>;
-    constructor(entity: Entity, iterableOfStats: Stream<Stat>, noEvents?: true);
+    constructor(entity: Entity, iterableOfStats: Stream<Stat>, noEvents?: true | undefined);
+    addStatAttribute(stat: Stat): void;
 }

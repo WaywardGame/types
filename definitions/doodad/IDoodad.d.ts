@@ -14,7 +14,7 @@ import { ICausesDamage, ICausesStatusEffect } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { ILootItem } from "game/ILoot";
 import { IObjectDescription, IObjectOptions } from "game/IObject";
-import { IItemLegendary, ItemType } from "item/IItem";
+import { ItemType, IItemLegendary } from "item/IItem";
 import Item from "item/Item";
 import { IModdable } from "mod/ModRegistry";
 import { TerrainType } from "tile/ITerrain";
@@ -195,7 +195,8 @@ export declare enum DoodadType {
     HitchingPost = 96,
     ClayBrickWell = 97,
     SandstoneWell = 98,
-    StoneWell = 99
+    StoneWell = 99,
+    AshCementWall = 100
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,

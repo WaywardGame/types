@@ -61,6 +61,7 @@ export interface ITile extends Partial<ITileContainer> {
     events?: ITileEvent[];
     npc?: NPC;
     overlays?: IOverlayInfo[];
+    quality?: Quality;
 }
 export interface ITileOld {
     event?: ITileEvent[];
@@ -163,5 +164,6 @@ export declare enum TerrainType {
     Obsidian = 33,
     DesertSand = 34,
     RockGround = 35,
-    SandstoneGround = 36
+    SandstoneGround = 36,
+    AshCementFlooring = 37
 }

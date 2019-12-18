@@ -23,7 +23,7 @@ import { TurnType } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
-import { IContainer, ItemType } from "item/IItem";
+import { ItemType, IContainer } from "item/IItem";
 import Item from "item/Item";
 import { RecipeType } from "item/recipe/RecipeRegistry";
 import { ITileEvent } from "tile/ITileEvent";

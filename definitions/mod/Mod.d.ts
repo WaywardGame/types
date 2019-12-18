@@ -25,7 +25,7 @@ import Player from "entity/player/Player";
 import { IMapRequest, TileUpdateType } from "game/IGame";
 import { IInspectionSection } from "game/inspection/IInspection";
 import "IGlobal";
-import { BookType, IContainer, ItemType } from "item/IItem";
+import { BookType, ItemType, IContainer } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import BaseMod from "mod/BaseMod";

@@ -64,6 +64,7 @@ export interface IMatchmakingJoinChannelMessageData extends IMatchmakingMessageD
     clientVersion: string;
     clientBuild: number | undefined;
     playerIdentifier: string;
+    playerSteamId: string | undefined;
     secret?: string;
 }
 export interface IMatchmakingIceCandidateMessageData extends IMatchmakingMessageData {

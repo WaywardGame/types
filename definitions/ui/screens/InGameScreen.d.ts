@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { EquipType, SkillType } from "entity/IHuman";
-import { IContainer, IDismantleComponent, ItemType } from "item/IItem";
+import { ItemType, IContainer, IDismantleComponent } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import Message from "language/dictionary/Message";
@@ -126,9 +126,9 @@ export default class InGameScreen extends BaseScreen {
     createItemString(itemType: ItemType, item?: Item, extraClass?: string): string;
     syncItemElements(itemId?: number, selector?: JQuery): void;
     syncDamagedDecayed(item: Item, element: JQuery): void;
-    addItemToContainer(item: Item, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
+    addItemToContainer(item: Item, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
     insertItemStringToContainer(itemElement: string | JQuery, containerElement: JQuery): void;
-    onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery | undefined, isInventoryContainer: boolean): void;
+    onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery | undefined, isInventoryContainer: boolean, updateTables?: boolean): void;
     afterAddingMultipleItemsToContainer(container: IContainer): void;
     removeItemFromContainer(item: Item, container: IContainer): void;
     refreshContainerName(container: IContainer): void;

@@ -10,7 +10,7 @@
  */
 import Entity from "entity/Entity";
 import Human from "entity/Human";
-import { IInspectionSectionSimple, InspectionContext } from "game/inspection/IInspection";
+import { InspectionContext, IInspectionSectionSimple } from "game/inspection/IInspection";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";

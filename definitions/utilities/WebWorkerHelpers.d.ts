@@ -20,6 +20,7 @@ export declare module WebWorkerHelpers {
     }
     function create(workerFunction: (data: any) => void, messageCallbackFunction: (evt: any) => void): Worker;
     function createReusable(workerFunction: (data: any) => void): WebWorker;
+    function definitionPropertiesToBoolean(name: string, values: any): string;
     function enumToString(name: string, values: any, withStrings?: boolean): string;
     function moduleToString(moduleName: string, name: string, moduleToConvert: any, globalVariables?: string[]): string;
 }

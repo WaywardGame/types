@@ -13,6 +13,9 @@ export interface ISteamworksEvents {
     overlayShown(): any;
     overlayHidden(): any;
     fullscreenUpdate(fullscreen: boolean): any;
+    onRelayNetworkStatus(ready: boolean, status: ISteamNetworkRelayStatus): void;
+    onP2PSessionRequest(steamIdRemote: string): void;
+    onP2PSessionConnectFail(steamIdRemote: string, errorCode: number): void;
 }
 export interface ISteamId {
     accountId: number;
@@ -66,4 +69,33 @@ export interface IDedicatedServerInfo {
     sshPort?: number;
     sshUsername?: string;
     sshPassword?: string;
+}
+export interface ISteamNetworking {
+    initRelayNetworkAccess(): undefined;
+    getRelayNetworkStatus(): ISteamNetworkRelayStatus;
+    acceptP2PSessionWithUser(steamIdRemote: string): boolean;
+    isP2PPacketAvailable(): number;
+    getP2PSessionState(steamIdRemote: string): ISteamNetworkSessionState | undefined;
+    closeP2PSessionWithUser(steamIdRemote: string): boolean;
+    sendP2PPacket(steamIdRemote: string, data: Uint8Array): boolean;
+    readP2PPacket(length: number): {
+        steamIdRemote: string;
+        data: Uint8Array;
+    } | undefined;
+    readP2PPacket(length: number, data: Uint8Array): string | undefined;
+    setRelayNetworkStatusCallback(callback: (availabilitySummary: number, availabilityNetworkConfig: number, availabilityAnyRelay: number, debugMessage: string) => void): void;
+    setP2PSessionRequestCallback(callback: (steamIdRemote: string) => void): void;
+    setP2PSessionConnectFailCallback(callback: (steamIdRemote: string, errorCode: number) => void): void;
+}
+export interface ISteamNetworkRelayStatus {
+    availabilitySummary: number;
+    availabilityNetworkConfig: number;
+    availabilityAnyRelay: number;
+    debugMessage: string;
+}
+export interface ISteamNetworkSessionState {
+    connectionActive: number;
+    connecting: number;
+    lastError: number;
+    usingRelay: number;
 }

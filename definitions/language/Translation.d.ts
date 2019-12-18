@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { MessageType } from "entity/player/MessageManager";
 import { Dictionary } from "language/Dictionaries";
 import Message from "language/dictionary/Message";
 import UiTranslation from "language/dictionary/UiTranslation";
@@ -40,8 +41,13 @@ declare class Translation {
     static readonly RANDOM = "random";
     static readonly defaultInterpolator: Interpolator;
     static provider: TranslationProvider;
-    static colorize(text: string | IStringSection, color: string): IStringSection;
-    static colorize(text: IStringSection[], color: string): IStringSection[];
+    static colorize(color: string | MessageType): {
+        (text: string | IStringSection): IStringSection;
+        (text: IStringSection[]): IStringSection[];
+    };
+    static colorize(color: string | MessageType, text: string | IStringSection): IStringSection;
+    static colorize(color: string | MessageType, text: IStringSection[]): IStringSection[];
+    private static colorizeInternal;
     static formatList(items: Iterable<string | IStringSection | IStringSection[] | Translation | ISerializedTranslation>, ender?: ListEnder | false): Translation;
     static getString(...entries: ArrayOfIterablesOr<string | IStringSection | Translation>): string;
     static getAll(dictionary: Dictionary | string, entry?: number | string): Translation[];

@@ -37,12 +37,13 @@ export declare enum HelpArticle {
     ItemQualities = 14,
     Death = 15,
     Taming = 16,
-    Gardening = 17,
+    RestingSleeping = 17,
     Overweight = 18,
     Merchants = 19,
-    GameModes = 20,
-    Multiplayer = 21,
-    Bugs = 22
+    Gardening = 20,
+    GameModes = 21,
+    Multiplayer = 22,
+    Bugs = 23
 }
 export declare enum HelpArticleSection {
     Interface = 0,

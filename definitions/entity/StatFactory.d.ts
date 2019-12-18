@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import Entity from "entity/Entity";
-import { IStat, IStatBase, IStatFactory, IStats, Stat } from "entity/IStats";
+import { IStat, IStats, IStatBase, IStatFactory, Stat } from "entity/IStats";
 import Stats, { IStatHost } from "entity/Stats";
 export declare class StatsFactory {
     private readonly host;

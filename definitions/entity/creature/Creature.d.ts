@@ -16,9 +16,8 @@ import { IStat } from "entity/IStats";
 import Player from "entity/player/Player";
 import { IEventEmitter } from "event/EventEmitter";
 import Inspection from "game/inspection/Inspect";
-import { IInspectable, InspectionSection } from "game/inspection/Inspections";
+import { InspectionSection, IInspectable } from "game/inspection/Inspections";
 import { IObject } from "game/IObject";
-import { ItemType } from "item/IItem";
 import Item from "item/Item";
 import Translation from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
@@ -31,7 +30,6 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     enemy?: number;
     enemyAttempts?: number;
     enemyIsPlayer?: boolean;
-    loot?: ItemType[];
     respawned?: boolean;
     shouldSkipNextUpdate: boolean;
     type: CreatureType;

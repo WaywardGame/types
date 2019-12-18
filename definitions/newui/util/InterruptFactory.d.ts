@@ -14,6 +14,7 @@ import { TranslationGenerator } from "newui/component/IComponent";
 import { IInput } from "newui/component/IInput";
 import { IInterruptFactory } from "newui/INewUi";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
+import InterruptMenu from "newui/screen/screens/menu/menus/InterruptMenu";
 export default class InterruptFactory implements IInterruptFactory {
     private readonly interrupt?;
     private title;
@@ -22,12 +23,14 @@ export default class InterruptFactory implements IInterruptFactory {
     private isTopMenu;
     private executed;
     private readonly args;
+    private initializer?;
     constructor(interrupt?: Interrupt | undefined, ...args: any[]);
     setTopMenu(topMenu?: boolean): this;
     setCanCancel(canCancel?: boolean): this;
     addArgs(...args: any[]): this;
     withTitle(title?: TranslationGenerator): this;
     withDescription(description?: TranslationGenerator): this;
+    withInitializer(initializer?: (menu: InterruptMenu) => any): this;
     withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;
     withConfirmation(): Promise<boolean>;
     withInfo(): Promise<void>;

@@ -18,10 +18,20 @@ import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> implements IHookHost {
+    /**
+     * Static steam account id when steam support is on
+     * Otherwise it will be a random guid that persists
+     */
     private readonly _playerIdentifier;
+    /**
+     * Steam id - used for steam networking
+     */
+    private readonly _playerSteamId;
+    private readonly _steamNetworking;
     private _isServer;
     private _server;
     private readonly _clients;
+    private readonly _steamIdToClientMapping;
     private _joinServerTimeoutId;
     private _joinedMatchmakingInfo;
     private _connectedMatchmakingInfo;
@@ -45,6 +55,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     private _disconnectingFromSyncIssue;
     private _ipAddress;
     private readonly _matchmakingSecret;
+    private readonly readBuffer;
     constructor();
     isConnected(): boolean;
     isReady(): boolean;
@@ -115,6 +126,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     private clearJoinServerRetryTimeout;
     private startMatchmakingServer;
     private stopMatchmakingServer;
+    private setupClientConnection;
     private connectGlobalMatchmakingServer;
     private disconnectGlobalMatchmakingServer;
     private connectDedicatedMatchmakingServer;
@@ -133,4 +145,14 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     private onStateChange;
     private convertToMatchmakingInfo;
     private getSyncPacketWaitId;
+    private refreshLobbySteamRelayStatus;
+    private onRelayNetworkStatus;
+    /**
+     * Called when a remote steam id is trying to send us a message
+     */
+    private onP2PSessionRequest;
+    /**
+     * Called when we failed to connect to a remote steam id
+     */
+    private onP2PSessionConnectFail;
 }

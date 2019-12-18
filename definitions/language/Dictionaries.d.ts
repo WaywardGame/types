@@ -101,23 +101,23 @@ export declare enum Dictionary {
     Number = 45,
     PartOfDay = 46,
     PowerMode = 47,
-    Quality = 48,
-    Quest = 49,
-    QuestRequirement = 50,
-    SaveSlotSort = 51,
-    Skill = 52,
-    Source = 53,
-    Stat = 54,
-    StatusEffect = 55,
-    TeamMemberResponsibility = 56,
-    Terrain = 57,
-    TileEvent = 58,
-    Ui = 59,
-    UiQuadrant = 60,
-    UnableToJoinReason = 61,
-    UnlockedRecipesStrategy = 62,
-    QuadrantComponent = 63,
-    QuadrantComponentContextMenuAction = 64
+    QuadrantComponent = 48,
+    QuadrantComponentContextMenuAction = 49,
+    Quality = 50,
+    Quest = 51,
+    QuestRequirement = 52,
+    SaveSlotSort = 53,
+    Skill = 54,
+    Source = 55,
+    Stat = 56,
+    StatusEffect = 57,
+    TeamMemberResponsibility = 58,
+    Terrain = 59,
+    TileEvent = 60,
+    Ui = 61,
+    UiQuadrant = 62,
+    UnableToJoinReason = 63,
+    UnlockedRecipesStrategy = 64
 }
 export declare type Enum = {
     [key: string]: number;
@@ -174,6 +174,8 @@ declare const dictionaries: {
     [Dictionary.Number]: symbol;
     [Dictionary.PartOfDay]: typeof PartOfDay;
     [Dictionary.PowerMode]: typeof PowerMode;
+    [Dictionary.QuadrantComponent]: typeof QuadrantComponentId;
+    [Dictionary.QuadrantComponentContextMenuAction]: typeof QuadrantComponentContextMenuAction;
     [Dictionary.Quality]: typeof Quality;
     [Dictionary.Quest]: typeof QuestType;
     [Dictionary.QuestRequirement]: typeof QuestRequirementType;
@@ -189,8 +191,6 @@ declare const dictionaries: {
     [Dictionary.UiQuadrant]: typeof Quadrant;
     [Dictionary.UnableToJoinReason]: typeof UnableToJoinReason;
     [Dictionary.UnlockedRecipesStrategy]: typeof UnlockedRecipesStrategy;
-    [Dictionary.QuadrantComponent]: typeof QuadrantComponentId;
-    [Dictionary.QuadrantComponentContextMenuAction]: typeof QuadrantComponentContextMenuAction;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

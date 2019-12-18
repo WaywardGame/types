@@ -15,7 +15,7 @@ import EventEmitter from "event/EventEmitter";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
 import { Quality } from "game/IObject";
-import { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, ItemType, ItemTypeGroup } from "item/IItem";
+import { ContainerReference, ItemType, ItemTypeGroup, IContainable, IContainer, IItemDescription, IItemWeightComponent } from "item/IItem";
 import { CraftStatus, RequirementInfo, WeightType } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
@@ -37,7 +37,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     getItemsWithRecipes(): readonly ItemType[];
     getContainerReference(container: IContainer | undefined, parentObject?: any, showWarnings?: boolean): ContainerReference;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
-    addToContainerInternal(item: Item, container: IContainer, movingMultiple?: boolean, skipMessage?: boolean): boolean;
+    addToContainerInternal(item: Item, container: IContainer, movingMultiple?: boolean, skipMessage?: boolean, updateTables?: boolean): boolean;
     removeContainerItems(container: IContainer): void;
     exists(item: Item): boolean;
     remove(item: Item): void;
@@ -58,7 +58,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
      */
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     weightTree(itemType: ItemType, weightType?: WeightType, debug?: boolean, depth?: number): number;
-    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer, quality?: Quality, human?: Human): Item;
+    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer, quality?: Quality, human?: Human, movingMultiple?: boolean, updateTables?: boolean): Item;
     createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human): Item;
     isContainer(obj: unknown): obj is IContainer;
     moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: Quality): Item[];

@@ -21,7 +21,7 @@ import { StatChangeTimerFactory } from "entity/StatFactory";
 import { IEventEmitter } from "event/EventEmitter";
 import { Milestone } from "game/milestones/IMilestone";
 import { IGameOptionsPlayer } from "game/options/IGameOptions";
-import { IContainer, ItemType, RecipeLevel } from "item/IItem";
+import { ItemType, IContainer, RecipeLevel } from "item/IItem";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";

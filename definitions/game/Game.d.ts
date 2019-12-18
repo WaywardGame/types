@@ -92,6 +92,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     tileEvents: SaferArray<ITileEvent>;
     time: TimeManager;
     version: string;
+    upgrades: string[];
     worldId: string;
     readonly milestonesCollection: import("./options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<Milestone, import("./options/modifiers/milestone/MilestoneModifier").default>;
     challengeCollection?: ChallengeModifiersCollection;
