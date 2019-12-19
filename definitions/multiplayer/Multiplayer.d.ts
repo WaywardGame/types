@@ -74,6 +74,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
      * 3. Global matchmaking server id - ex. 87287724-49aa-e556-4145-3ed96c649a20
      */
     getConnectedGameCode(): string | undefined;
+    isSteamLobby(gameCode: string): boolean;
     convertGameCodeToServerInfo(gameCode: string): ServerInfo;
     getDedicatedServerMatchmakingInfo(matchmakingServer: string, identifier?: string): IMatchmakingInfo;
     getBannedPlayers(): string[];

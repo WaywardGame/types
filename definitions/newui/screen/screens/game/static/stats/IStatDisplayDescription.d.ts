@@ -15,15 +15,15 @@ import Component from "newui/component/Component";
 import { ITooltip } from "newui/component/IComponent";
 import { IStringSection } from "utilities/string/Interpolator";
 export interface IStatDisplayDescription extends IModdable {
-    imagePath?: string | ((entity: Entity, stat?: IStat) => string);
+    imagePath?: string | ((entity: Entity, stat: IStat) => string);
     /**
      * Defaults to `#ffffff`
      */
-    color?: string | ((entity: Entity, stat?: IStat) => string);
+    color?: string | ((entity: Entity, stat: IStat) => string);
     /**
      * Defaults to `#000000`
      */
-    darkColor?: string | ((entity: Entity, stat?: IStat) => string);
+    darkColor?: string | ((entity: Entity, stat: IStat) => string);
     /**
      * Defaults to `StatDisplayType.Auto`
      */
@@ -47,5 +47,5 @@ export interface IStatDisplayDescription extends IModdable {
     /**
      * A function that will initialize a tooltip for this stat element
      */
-    tooltip?(tooltip: ITooltip, entity: Entity, stat?: IStat): any;
+    tooltip?(tooltip: ITooltip, entity: Entity, stat: IStat): any;
 }

@@ -104,6 +104,7 @@ export interface IServerServerDetails {
     code: string;
     isDedicatedServer: boolean;
     buildTime: number | undefined;
+    gameVersion: string | undefined;
 }
 export interface IServerGameDetails {
     players: string[];

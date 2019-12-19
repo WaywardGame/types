@@ -30,4 +30,8 @@ export declare class ServerRow extends Button implements IRefreshable {
     constructor(server: IServer, getFriend: (player: string) => ISteamFriend | undefined);
     refresh(): this;
     protected onActivate(): void;
+    /**
+     * Check if the client can join the server
+     */
+    private isJoinableServer;
 }
