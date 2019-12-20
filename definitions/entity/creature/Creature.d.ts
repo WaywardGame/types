@@ -87,6 +87,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
      * which means we should hide the doodad over layer for doodads on the creature
      */
     updateDoodadOverHiddenState(x: number, y: number, z: number, tile: ITile, hidden: boolean): void;
+    processAttack(description: ICreatureDescription, moveType: MoveType, enemy: Player | Creature | undefined): boolean;
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
@@ -95,7 +96,6 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     private findPath;
     private checkCreatureMove;
     private findPlayersWithinRadius;
-    private processAttack;
     private shouldSpecialAttack;
     private specialAttack;
     private processMovement;

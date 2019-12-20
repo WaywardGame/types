@@ -205,7 +205,7 @@ export interface IGameOptionsStat {
      * If the given value is a decimanl number less than or equal to `1`, sets the stat value to a percentage of the max.
      * Otherwise, sets the stat to the given value.
      */
-    initialValue: number;
+    initialValue?: number;
     /**
      * The max value of the state, or `undefined` if it should be generated randomly
      */
