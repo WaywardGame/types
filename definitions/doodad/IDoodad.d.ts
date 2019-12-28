@@ -99,7 +99,7 @@ export declare enum DoodadType {
     WoodenDoor = 0,
     WoodenFence = 1,
     WoodenWall = 2,
-    ClayBrickWall = 3,
+    ClayWall = 3,
     SandstoneWall = 4,
     StoneWall = 5,
     SetExplosiveTrap = 6,
@@ -193,7 +193,7 @@ export declare enum DoodadType {
     Hammock = 94,
     LeafBedroll = 95,
     HitchingPost = 96,
-    ClayBrickWell = 97,
+    ClayWell = 97,
     SandstoneWell = 98,
     StoneWell = 99,
     AshCementWall = 100
