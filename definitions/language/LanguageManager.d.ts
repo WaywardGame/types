@@ -61,6 +61,7 @@ export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> 
     get providers(): readonly TranslationsProvider[];
     private orderedTranslationProviders?;
     get orderedProviders(): readonly TranslationsProvider[];
+    private debug;
     constructor();
     initialize(): void;
     shouldUseAlternateFontStyle(): boolean;
@@ -76,6 +77,9 @@ export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> 
     private getNounType;
     private plural;
     private getEntryNameFromEntryId;
+    private setDebug;
+    private debugFor;
+    private debugLog;
     private readonly uiTranslationsToSelector;
     private setup;
     private addTranslateSelector;
