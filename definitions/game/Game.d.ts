@@ -43,6 +43,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     previousSaveVersion: IVersionInfo;
     absoluteTime: number;
     autoSaveTimer: number;
+    autoSaveLastSave: number;
     fadeInAmount: number | undefined;
     fillCount: number;
     fillTile: boolean[][];
@@ -109,6 +110,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     visible: boolean;
     lastBuildTime: number;
     lastSaveVersion: IVersionInfo;
+    saveSize?: string;
     private _updateRender;
     private gameCanvas;
     private thumbnailResolve?;

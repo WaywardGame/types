@@ -47,7 +47,7 @@ export interface IMenuBarButtonDescription extends IModdable, IHasImagePath {
      */
     onActivate(): any;
     onCreate?(button: Button): any;
-    tooltip?(tooltip: ITooltip, button: Button): ITooltip;
+    tooltip?(tooltip: ITooltip, button: Button, addBindLabel: (tooltip: ITooltip) => void): ITooltip;
 }
 export declare enum MenuBarButtonGroup {
     Meta = 0,
