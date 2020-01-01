@@ -30,6 +30,7 @@ export default class Tooltip extends Component implements ITooltip {
     setMaxWidth(maxWidth?: number): this;
     setNoCache(): this;
     addText(initializer: (text: Text) => any): this;
+    addText<TEXT extends Text>(initializer: (text: Text) => any, cls?: Class<TEXT>): this;
     addHeading(initializer: (text: Text) => any): this;
     addParagraph(initializer: (text: Paragraph) => any): this;
     addList(...initializers: Array<((text: Text) => any) | undefined | false>): this;

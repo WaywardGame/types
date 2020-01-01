@@ -51,7 +51,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     open(): void;
     close(): void;
-    select(optionId: O | undefined): void;
+    select(optionId: O | undefined): this;
     selectDefault(): this;
     setRefreshMethod(refresh: () => IDropdownData<O>): this;
     refresh(): this;

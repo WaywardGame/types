@@ -29,6 +29,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     private readonly worldContainer;
     private cachedWeights;
     private cachedDefaultItemForGroup;
+    private cachedBestItemForTier;
     private cachedItemGroups;
     private cachedItemTypes;
     private cachedItemTypesWithRecipes;

@@ -153,7 +153,7 @@ export declare enum TerrainType {
     SandstoneWithIron = 22,
     SandstoneWithNiter = 23,
     WoodenFlooring = 24,
-    ClayBrickFlooring = 25,
+    ClayFlooring = 25,
     CaveEntrance = 26,
     RedCarpet = 27,
     Lava = 28,

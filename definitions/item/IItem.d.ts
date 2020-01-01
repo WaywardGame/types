@@ -548,8 +548,8 @@ export declare enum ItemType {
     ClayJugOfUnpurifiedFreshWater = 261,
     RawClayBrick = 262,
     ClayBrick = 263,
-    ClayBrickWall = 264,
-    ClayBrickFlooring = 265,
+    ClayWall = 264,
+    ClayFlooring = 265,
     PineappleSeeds = 266,
     RaspberrySeeds = 267,
     PricklyPearSeeds = 268,
@@ -727,7 +727,7 @@ export declare enum ItemType {
     SaguaroCactusChunk = 440,
     StoneWell = 441,
     SandstoneWell = 442,
-    ClayBrickWell = 443,
+    ClayWell = 443,
     AloeVeraLeaves = 444,
     AloeVeraSeeds = 445,
     DeadScorpion = 446,
@@ -861,7 +861,8 @@ export declare enum ItemTypeGroup {
     Other = 875,
     CookedFood = 876,
     LitCandle = 877,
-    All = 878,
-    Last = 879
+    LiquidContainer = 878,
+    All = 879,
+    Last = 880
 }
 export {};

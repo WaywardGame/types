@@ -41,10 +41,7 @@ declare class Translation {
     static readonly RANDOM = "random";
     static readonly defaultInterpolator: Interpolator;
     static provider: TranslationProvider;
-    static colorize(color: string | MessageType): {
-        (text: string | IStringSection): IStringSection;
-        (text: IStringSection[]): IStringSection[];
-    };
+    static colorize(color: string | MessageType): Translation;
     static colorize(color: string | MessageType, text: string | IStringSection): IStringSection;
     static colorize(color: string | MessageType, text: IStringSection[]): IStringSection[];
     private static colorizeInternal;

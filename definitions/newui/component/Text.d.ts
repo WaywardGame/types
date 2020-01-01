@@ -26,6 +26,10 @@ export default class Text extends Component {
     setText(refresh: false, text?: TranslationGenerator): this;
     getText(): TranslationGenerator | undefined;
     getTextAsString(): string;
+    /**
+     * Returns whether the element has text. (Empty string included.)
+     */
+    hasText(): boolean;
     refresh(): this;
 }
 export declare class Paragraph extends Text {

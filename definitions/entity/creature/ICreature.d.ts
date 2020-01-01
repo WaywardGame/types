@@ -146,6 +146,7 @@ export interface ICreatureDescription extends IModdable {
     disableHitching?: boolean;
     tileMissChance?: OptionalDescriptions<TileGroup, number>;
     waste?: IWaste;
+    passable?: boolean;
 }
 export interface ICreatureLoot {
     item: ItemType;

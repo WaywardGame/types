@@ -32,7 +32,7 @@ export interface IOptions {
     disableUIEffects: boolean;
     dropLocation: DropLocation;
     dropOnGatherHarvest: boolean;
-    enableAutoSave: boolean;
+    autoSave: [AutoSave.Off] | [AutoSave.Turns | AutoSave.Time, number];
     fallBackToEnglish: boolean;
     fontStyle: boolean;
     fullscreen: boolean;
@@ -67,6 +67,11 @@ export interface IOptions {
     windowMode: boolean;
     zoomLevel: number;
 }
+export declare enum AutoSave {
+    Off = 0,
+    Turns = 1,
+    Time = 2
+}
 export declare enum MusicPlaylist {
     Ordered = 0,
     Shuffle = 1,
@@ -95,6 +100,7 @@ export declare type IOptionsOld = Partial<IOptions> & {
     tooltipsItems: boolean;
     allowDiagonalMovement: boolean;
     disableUIAnimations: boolean;
+    enableAutoSave: boolean;
 };
 export interface IHighscore {
     name: string;

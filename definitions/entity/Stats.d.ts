@@ -107,6 +107,14 @@ export default class Stats<T extends IStatHost> {
      */
     setMax(stat: Stat | IStat, max: number, newValue?: number): T;
     /**
+     * Returns the "percent" of the given stat, calculated with `value / max`. If there is no `max` for this stat, returns `undefined`.
+     */
+    getPercent(stat: Stat | IStat): number;
+    /**
+     * Returns whether the stat exceeds its `max` value. If there is no `max` for this stat, returns `false`.
+     */
+    exceedsMax(stat: Stat | IStat): boolean;
+    /**
      * Sets how frequently the stat should change. Triggers `statTimerChange`
      * @param stat The `Stat` that should change.
      * @param timer How many turns should pass between changes.

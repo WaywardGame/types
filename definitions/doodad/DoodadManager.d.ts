@@ -11,6 +11,10 @@
 import Doodad from "doodad/Doodad";
 import { DoodadType, DoodadTypeGroup, IDoodadOptions } from "doodad/IDoodad";
 import EventEmitter from "event/EventEmitter";
+interface ICachedBestDoodadForTier {
+    doodad?: DoodadType;
+    value?: number;
+}
 export interface IDoodadManagerEvents {
     /**
      * Called when a doodad is about to be spawned
@@ -24,9 +28,13 @@ export interface IDoodadManagerEvents {
     canSpawn(type: DoodadType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
 }
 export default class DoodadManager extends EventEmitter.Host<IDoodadManagerEvents> {
+    cachedBestDoodadForTier: {
+        [index: number]: ICachedBestDoodadForTier;
+    };
     private cachedGroups;
     constructor();
     generateLookups(): void;
+    createFake(type: DoodadType, options?: IDoodadOptions): Doodad;
     create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): Doodad | undefined;
     /**
      * Removes a doodad from the world.
@@ -43,3 +51,4 @@ export default class DoodadManager extends EventEmitter.Host<IDoodadManagerEvent
     getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
     verifyAndFixItemWeights(): void;
 }
+export {};

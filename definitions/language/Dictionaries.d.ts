@@ -47,7 +47,7 @@ import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDes
 import { HighscoreSort } from "newui/screen/screens/menu/menus/highscores/IHighscoresMenu";
 import { Responsibility } from "newui/screen/screens/menu/menus/main/AboutMenu";
 import { ModSort } from "newui/screen/screens/menu/menus/mods/IModsMenu";
-import { MusicPlaylist, PowerMode } from "save/data/ISaveDataGlobal";
+import { AutoSave, MusicPlaylist, PowerMode } from "save/data/ISaveDataGlobal";
 import { SaveSort } from "save/ISaveManager";
 import { TerrainType } from "tile/ITerrain";
 import { TileEventType } from "tile/ITileEvent";
@@ -117,7 +117,8 @@ export declare enum Dictionary {
     Ui = 61,
     UiQuadrant = 62,
     UnableToJoinReason = 63,
-    UnlockedRecipesStrategy = 64
+    UnlockedRecipesStrategy = 64,
+    AutoSave = 65
 }
 export declare type Enum = {
     [key: string]: number;
@@ -191,6 +192,7 @@ declare const dictionaries: {
     [Dictionary.UiQuadrant]: typeof Quadrant;
     [Dictionary.UnableToJoinReason]: typeof UnableToJoinReason;
     [Dictionary.UnlockedRecipesStrategy]: typeof UnlockedRecipesStrategy;
+    [Dictionary.AutoSave]: typeof AutoSave;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;
