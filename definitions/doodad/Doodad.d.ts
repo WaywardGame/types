@@ -159,4 +159,5 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * Decay over time
      */
     private processDecay;
+    private animateSkeletalRemains;
 }

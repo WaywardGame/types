@@ -133,7 +133,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getDailyChallengeSeed(): number;
     consumeWaterTile(x: number, y: number, z: number): void;
     checkForHiddenMob(human: Human, x: number, y: number, z: number): void;
-    animateSkeletalRemains(player: Player, x: number, y: number, z: number): void;
     getWrappedCoord(x: number): number;
     getTileFromPoint(point: IVector3): ITile;
     getTile(x: number, y: number, z: number): ITile;
