@@ -245,11 +245,14 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getExactCameraPosition(): Vector2;
     restartDedicatedServer(): boolean;
     getFireStage(decay: number): FireStage;
+    protected onRestEnd(): void;
     private updateOptionInternal;
     private tick;
     private updateEntityFov;
     private processTimers;
     private processAutoSave;
+    private isTimeForAutosave;
+    private isAutosaveWithinRestThreshold;
     private tickDayNightCycle;
     private runRandomEvents;
     private prePlay;
