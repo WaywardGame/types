@@ -133,7 +133,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getDailyChallengeSeed(): number;
     consumeWaterTile(x: number, y: number, z: number): void;
     checkForHiddenMob(human: Human, x: number, y: number, z: number): void;
-    animateSkeletalRemains(player: Player, x: number, y: number, z: number): void;
     getWrappedCoord(x: number): number;
     getTileFromPoint(point: IVector3): ITile;
     getTile(x: number, y: number, z: number): ITile;
@@ -246,11 +245,14 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getExactCameraPosition(): Vector2;
     restartDedicatedServer(): boolean;
     getFireStage(decay: number): FireStage;
+    protected onRestEnd(): void;
     private updateOptionInternal;
     private tick;
     private updateEntityFov;
     private processTimers;
     private processAutoSave;
+    private isTimeForAutosave;
+    private isAutosaveWithinRestThreshold;
     private tickDayNightCycle;
     private runRandomEvents;
     private prePlay;

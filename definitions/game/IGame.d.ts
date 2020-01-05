@@ -202,5 +202,7 @@ export declare const INTERVAL = 16.6666;
 export declare const TURN_DELAY_MAX: number;
 export declare const TURN_DELAY_DEFAULT: number;
 export declare const AUTO_SAVE_TIMER_DEFAULT = 2000;
+export declare const AUTO_SAVE_REST_THRESHOLD = 0.75;
+export declare const AUTO_SAVE_REST_THRESHOLD_MINIMUM = 200;
 export declare const LIGHT_COLOR_DEFAULT: import("../utilities/Color").IRGB;
 export declare const TOOLTIP_DELAY_DEFAULT = 170;
