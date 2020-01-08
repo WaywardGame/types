@@ -137,7 +137,7 @@ export default class Player extends Human {
     updateReputation(reputation: number): void;
     checkWeight(): void;
     getWeightStatus(): WeightStatus;
-    getWeightMovementPenalty(): number;
+    getWeightOrStaminaMovementPenalty(): number;
     checkForStill(): boolean;
     checkForWell(): boolean;
     checkForGather(): Doodad | undefined;

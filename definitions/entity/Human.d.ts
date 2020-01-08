@@ -129,7 +129,13 @@ export default abstract class Human extends Entity {
     unequipAll(): void;
     canJump(): boolean;
     hasDelay(): boolean;
-    addDelay(delay: number, replace?: boolean): void;
+    addDelay(delay: number, replace?: boolean, addStaminaDelay?: boolean): void;
+    /**
+     * Gets a stamina penalty delay to be used for slowed actions and movement.
+     * @param staminaToStartAddingDelayAt Stat value where delays start getting added from.
+     * @param maximumDelayMultiplier The maximum delay multiplier.
+     */
+    getStaminaDelay(staminaToStartAddingDelayAt: number, maximumDelayMultiplier: number): number;
     getConsumeBonus(item: Item | undefined, skillUse?: SkillType): number;
     checkForGatherFire(): Translation | undefined;
     calculateEquipmentStats(): void;

@@ -89,10 +89,10 @@ export interface IPlayerEvents extends Events<Human> {
      */
     getWeightStatus(): WeightStatus | undefined;
     /**
-     * Called when getting the players weight movement penalty
-     * @returns The weight movement penalty for the player or undefined to use the default logic
+     * Called when getting the players weight or stamina movement penalty
+     * @returns The weight/stamina movement penalty for the player or undefined to use the default logic
      */
-    getWeightMovementPenalty(): number | undefined;
+    getWeightOrStaminaMovementPenalty(): number | undefined;
     /**
      * Called when the player starts resting
      * @param restData The data related to the rest event
