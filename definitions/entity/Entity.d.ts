@@ -205,6 +205,10 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
     getFacingPoint(): IVector3;
     getFacingTile(): ITile;
     moveTo(x: number, y: number, z: number): boolean;
+    /**
+     * Faces the target and animates a bump into effect
+     */
+    animateBumpTowards(x: number, y: number): void;
     getMovementPoint(): IVector2;
     getMovementProgress(): number;
     getMovementFinishTime(): number | undefined;

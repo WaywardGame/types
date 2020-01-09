@@ -13,6 +13,7 @@ import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 interface IInputEvents extends Events<Component> {
     change(text: string): any;
+    changeDebounced(text: string): any;
     done(text: string): any;
     enter(): any;
     escape(): any;
