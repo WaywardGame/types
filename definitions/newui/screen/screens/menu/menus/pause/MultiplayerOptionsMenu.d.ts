@@ -31,6 +31,7 @@ export default class MultiplayerOptionsMenu extends Menu {
     constructor();
     protected refresh(): void;
     private updateMultiplayer;
+    private onDescriptionChange;
     private toggleServer;
     private copyGameCodeClick;
     private inviteSteamFriendsClick;

@@ -23,8 +23,6 @@ export default class Input extends Component implements IRefreshable, IInput {
     event: IEventEmitter<this, Events<IInput>>;
     default: (() => string) | undefined;
     private lastInput;
-    private changeDebounce;
-    private changeDebounceTimer;
     get text(): string;
     set text(value: string);
     private keydownEnter;
@@ -40,10 +38,9 @@ export default class Input extends Component implements IRefreshable, IInput {
     get changed(): boolean;
     private readonly input;
     private readonly wrapperButtons;
-    constructor();
+    constructor(type?: "input" | "textarea");
     addClearButton(): this;
     addResetButton(): this;
-    setChangeDebounce(milliseconds: number): this;
     setMaxLength(maxLength?: number): this;
     setClearToDefaultWhenEmpty(setClearToDefaultWhenEmpty?: boolean): this;
     setDefault(generator: () => string, apply?: boolean): this;
@@ -76,5 +73,4 @@ export default class Input extends Component implements IRefreshable, IInput {
     private keyup;
     private change;
     private getClearTo;
-    private onChange;
 }

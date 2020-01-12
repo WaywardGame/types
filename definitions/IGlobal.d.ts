@@ -107,6 +107,15 @@ declare global {
     function Override(_target: any, _propertyKey: string, _descriptor?: PropertyDescriptor): void;
     function Bound<T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;
     function Final<T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;
+    /**
+     * Prevents the decorated method from being called at a high speed. Example:
+     * 1. Method is called.
+     * 2. `ms` amount of time is waited. If the method is called again in this time, cancel.
+     * 3. If the method was not called after `ms`, *actually* call the method.
+     *
+     * WARNING: This also binds the method to the host, a la `@Bound`. Do not use both decorators.
+     */
+    function Debounce(ms: number): <T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>) => TypedPropertyDescriptor<T> | void;
     interface AsyncIterator<T> {
         next(value?: any): Promise<IteratorResult<T>>;
         return?(value?: any): Promise<IteratorResult<T>>;
