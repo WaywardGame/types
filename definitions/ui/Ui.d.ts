@@ -58,7 +58,6 @@ export default class Ui extends Emitter {
     shouldRefreshMods(): boolean;
     onGameEnd(): void;
     onUpdateDirection(): void;
-    highlight(iterations?: number, ...selectors: Array<string | HTMLElement>): void;
     toggleUIDisplay(hide: boolean): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;
