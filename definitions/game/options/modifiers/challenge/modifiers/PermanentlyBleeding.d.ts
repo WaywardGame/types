@@ -12,6 +12,6 @@ import { IGameOptionsPartial } from "game/options/IGameOptions";
 import ChallengeModifier from "game/options/modifiers/challenge/ChallengeModifier";
 export default class PermanentlyBleeding extends ChallengeModifier {
     readonly weight = 0.5;
-    readonly challenge = 300;
+    readonly challenge = 250;
     readonly options: () => IGameOptionsPartial;
 }

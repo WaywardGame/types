@@ -11,13 +11,16 @@
 import { Stat } from "entity/IStats";
 import ChallengeModifier from "game/options/modifiers/challenge/ChallengeModifier";
 export default class NoStaminaRegeneration extends ChallengeModifier {
-    readonly weight = 1;
-    readonly challenge = 150;
+    readonly weight = 0.75;
+    readonly challenge = 200;
     readonly options: {
         player: {
             stats: Map<Stat, {
                 changeTimerMultiplier: number;
             }>;
+            inventory: {
+                additionalItems: any[];
+            };
         };
     };
 }
