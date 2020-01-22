@@ -76,6 +76,10 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     isNearby(executor: EntityPlayerCreatureNpc, allowNearby?: boolean): boolean;
     verifyAndFixItem(): void;
     damage(source: string, modifier?: number): void;
+    /**
+     * Gets the item's damage modifier which certain special items have so they can have high durability for use, but normal damage ranges.
+     */
+    getDamageModifier(): number;
     isDamaged(): boolean;
     isInTradeContainer(): boolean;
     isEquipped(): boolean;
