@@ -27,6 +27,8 @@ export interface IGameEvents {
     glLostContext(): any;
     glSetup(restored: boolean): any;
     glInitialized(): any;
+    preSaveGame(saveType: SaveType): any;
+    postSaveGame(saveType: SaveType): any;
     /**
      * Called when getting the position to render at. By default, this is the player's location.
      * @param position The player's location

@@ -175,7 +175,8 @@ export declare enum LegendaryType {
     ContainerWeight = 14,
     PreservationRate = 15,
     MaxDecay = 16,
-    ItemDamage = 17
+    ItemDamage = 17,
+    StokeValue = 18
 }
 export interface IItemUsed {
     usedBy?: string[];
