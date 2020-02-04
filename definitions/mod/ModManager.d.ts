@@ -17,6 +17,7 @@ import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
 import { CanLoadState, ICanLoadInfo, IModManagerEvents, ModLoadFailureReason } from "mod/IModManager";
 import Log from "utilities/Log";
 export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
+    private setup;
     private readonly mods;
     private readonly onModInitializedCallbacks;
     constructor();
