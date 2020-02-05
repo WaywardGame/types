@@ -147,6 +147,7 @@ export interface ICreatureDescription extends IModdable {
     tileMissChance?: OptionalDescriptions<TileGroup, number>;
     waste?: IWaste;
     passable?: boolean;
+    texOffsetY?: number;
 }
 export interface ICreatureLoot {
     item: ItemType;
@@ -191,4 +192,14 @@ export interface ICreatureEvents extends IEntityEvents {
      * @returns True if the creature can face a new direction, false if the creature can't face a new direction, or undefined to use the default logic
      */
     canFaceDirections?(x: number, y: number): boolean | undefined;
+    /**
+     * Called when a creature may attempt to do a special ability
+     * @returns True if the creature can attempt to do a special ability, false if the creature can't perform special abilities, or undefined to use the default logic
+     */
+    canPerformSpecialAbilities?(): boolean | undefined;
+    /**
+     * Called when a creature despawns
+     * @returns True if the creature can despawn, false if the creature can't despawn, or undefined to use the default logic
+     */
+    canDespawn?(): boolean | undefined;
 }
