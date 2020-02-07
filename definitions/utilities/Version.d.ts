@@ -19,7 +19,16 @@ export interface IVersionInfo {
     date?: Date;
 }
 declare module Version {
+    /**
+     * Returns whether the given version is compatible with the game's version. This is used to check, for example,
+     * if a mod is compatible with the game's version.
+     */
     function isCompatible(version: IVersionInfo | string): boolean;
+    /**
+     * Returns whether the given `version` is `atLeast` another version. This can be used, for example,
+     * to see if a save or mod was created/edited after a specific thing was implemented.
+     */
+    function isAtLeast(version: IVersionInfo | string, atLeast: IVersionInfo | string): boolean;
     function create(stage: "beta" | "release", major: number, minor: number, patch?: number): IVersionInfo;
     function getVersionInfo(version: string): IVersionInfo;
     function isSameVersion(version: IVersionInfo, compareVersion: IVersionInfo): boolean;

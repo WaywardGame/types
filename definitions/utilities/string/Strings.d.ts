@@ -21,10 +21,18 @@ export declare const matchInvalidPathLettersUnix: RegExp;
 declare module Strings {
     function parseMarkup(markupText: string): string;
     function capitalizeFirstLetter(str: string): string;
+    /**
+     * @deprecated Use `formatCase` (This function will be removed in 2.9)
+     */
     function formatCaseStyle(str: string, caseStyle: CaseStyle): string;
+    function formatCase(str: string, caseStyle: CaseStyle): string;
+    function caseFormatter(caseStyle: CaseStyle): (str: string) => string;
+    /**
+     * @deprecated Use `Objects.formatKeyCase` (This function will be removed in 2.9)
+     */
+    function fixObjectCaseStyle(obj: any, caseStyle: CaseStyle, whitelist?: string[]): any;
     function escapeHTML(str: string): string;
     function stripHTML(str: string): string;
-    function fixObjectCaseStyle(obj: any, caseStyle: CaseStyle, whitelist?: string[]): any;
     function stripParentDirectoryAccessorsFromPath(path: string): string;
     function encodeURIComponentPath(p: string): string;
     function generateTimestamp(date?: Date): string;

@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { CaseStyle } from "utilities/string/Strings";
 declare module Objects {
     function keys<K extends string | number | symbol>(o: {
         [key in K]?: any;
@@ -16,6 +17,10 @@ declare module Objects {
     function values<O>(o: O): Array<O[keyof O]>;
     function entries<O>(o: O): Array<[keyof O, O[keyof O]]>;
     function fromEntries<K extends string | number | symbol, V>(entriesIterable: Iterable<[K, V] | readonly [K, V]>): { [key in K]: V; };
+    /**
+     * Returns a new object with key-value pairs matching the pairs in the given object, but with the case style of the keys changed.
+     */
+    function formatKeyCase<R = any>(obj: any, caseStyle: CaseStyle): R;
     function windowKeysToObject(windowKeys: string[]): any;
     function windowKeysToParentObject(windowKeys: string[]): any;
     function deepClone<T>(obj: T): T;

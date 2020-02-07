@@ -21,6 +21,7 @@ import Vec2 from "utilities/math/Vector2";
 export default class TileLayer {
     private readonly width;
     private readonly height;
+    private readonly yOffset;
     private static texTileSprites;
     private static inverseTileSpriteTextureSize;
     private static tileShaderProgram;
@@ -35,7 +36,7 @@ export default class TileLayer {
     private readonly vertexArray;
     static setTileTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
     static compileShaders(gl: WebGL2RenderingContext): void;
-    constructor(width: number, height: number, gl: WebGL2RenderingContext, positionBuffer: WebGLBuffer);
+    constructor(width: number, height: number, gl: WebGL2RenderingContext, positionBuffer: WebGLBuffer, yOffset?: number);
     getTileTLFG(dataIndex: number): [number, number];
     setTileTLFG(dataIndex: number, tileX: number, tileY: number): void;
     setTileTRFG(dataIndex: number, tileX: number, tileY: number): void;
