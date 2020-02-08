@@ -30,10 +30,6 @@ export default function generateSchema(): {
             description: string;
             type: string;
         };
-        shouldPluralize: {
-            description: string;
-            enum: boolean[];
-        };
         dictionaries: {
             description: string;
             type: string;
@@ -109,9 +105,6 @@ export default function generateSchema(): {
             };
             additionalProperties: boolean;
         };
-    };
-    dependencies: {
-        shouldPluralize: string[];
     };
     additionalProperties: boolean;
     allOf: ({
