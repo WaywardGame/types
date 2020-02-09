@@ -30,6 +30,10 @@ export default function generateSchema(): {
             description: string;
             type: string;
         };
+        alternateFontStyle: {
+            description: string;
+            enum: boolean[];
+        };
         dictionaries: {
             description: string;
             type: string;
@@ -105,6 +109,9 @@ export default function generateSchema(): {
             };
             additionalProperties: boolean;
         };
+    };
+    dependencies: {
+        alternateFontStyle: string[];
     };
     additionalProperties: boolean;
     allOf: ({
