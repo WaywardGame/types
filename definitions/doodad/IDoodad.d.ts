@@ -53,6 +53,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     canStoke?: boolean;
     canTrampleWhenMature?: boolean;
     disableDrop?: boolean;
+    disableOffset?: boolean;
     gather?: IDoodadLoot;
     gatherCanHurtHands?: boolean;
     gatherSkillUse?: SkillType;
