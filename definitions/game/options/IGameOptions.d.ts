@@ -58,6 +58,10 @@ export interface IGameOptions {
          * Chance for creature to spawn as scared (uses Random.chance)
          */
         chanceToSpawnScared: number;
+        /**
+         * Maximum number of creatures that can spawn in a world
+         */
+        spawnLimit: number;
     };
     time: {
         /**
