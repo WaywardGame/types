@@ -208,3 +208,5 @@ export declare const AUTO_SAVE_REST_THRESHOLD = 0.75;
 export declare const AUTO_SAVE_REST_THRESHOLD_MINIMUM = 200;
 export declare const LIGHT_COLOR_DEFAULT: import("../utilities/Color").IRGB;
 export declare const TOOLTIP_DELAY_DEFAULT = 170;
+export declare const ZOOM_LEVEL_MAX = 8;
+export declare const ZOOM_LEVEL_MIN = 1;

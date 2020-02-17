@@ -42,7 +42,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     containedItems: Item[];
     decay?: number;
     disassembly?: Item[];
-    gatherReady?: boolean;
+    gatherReady?: number;
     stillContainer?: Item;
     gfx?: number;
     id: number;
