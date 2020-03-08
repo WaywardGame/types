@@ -19,9 +19,9 @@ import ModRow from "newui/screen/screens/menu/menus/mods/ModRow";
 export default class ModsMenu extends Menu {
     readonly rowToggleAllMods: BlockRow;
     readonly sections: {
-        [ModType.Workshop]: ModSection;
-        [ModType.Local]: ModSection;
-        [ModType.Internal]: ModSection;
+        2: ModSection;
+        1: ModSection;
+        0: ModSection;
     };
     readonly sortRow: SortRow<ModSort>;
     filter: FilterRow;

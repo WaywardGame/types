@@ -36,6 +36,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     constructor();
     getItemTypes(): readonly ItemType[];
     getItemsWithRecipes(): readonly ItemType[];
+    getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
     getContainerReference(container: IContainer | undefined, parentObject?: any, showWarnings?: boolean): ContainerReference;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     addToContainerInternal(item: Item, container: IContainer, movingMultiple?: boolean, skipMessage?: boolean, updateTables?: boolean): boolean;

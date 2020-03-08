@@ -10,6 +10,7 @@
  */
 import { SfxType } from "audio/IAudio";
 import Creature from "entity/creature/Creature";
+import { IDamageInfo } from "entity/creature/ICreature";
 import { EntityPlayerCreatureNpc, EntityType, IEntityEvents, IProperties, IStatus, IStatChangeInfo, MoveType, Property, StatusEffectChangeReason, StatusType, StatChangeReason } from "entity/IEntity";
 import { IStat, IStats, IStatBase, Stat } from "entity/IStats";
 import NPC from "entity/npc/NPC";
@@ -198,6 +199,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
      * Generator for status effects on the entity.
      */
     statuses(): import("@wayward/goodstream/Stream").default<StatusType>;
+    abstract damage(damageInfoOrAmount: IDamageInfo | number): number | undefined;
     getCraftingDifficulty(level: RecipeLevel): number;
     getTileUpdateType(): TileUpdateType;
     getTile(): ITile;

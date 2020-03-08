@@ -96,6 +96,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private itemBatch;
     private corpseBatch;
     private creatureBatch;
+    private tileEventBatch;
     private overTreesBatch;
     private creatureFlyingBatch;
     private overlayBatch;

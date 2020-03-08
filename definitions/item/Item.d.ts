@@ -102,6 +102,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     setLegendary(bypassType?: boolean): void;
     acquireNotify(player: Player): void;
     getStokeFireValue(): number | undefined;
+    getStokeFireBonusValue(): number;
     getOnUseBonus(): number;
     getWorth(legendaryWorth?: boolean): number;
     getTraderSellPrice(player: Player | NPC, legendaryWorth?: boolean): number;

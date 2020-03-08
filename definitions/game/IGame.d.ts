@@ -120,8 +120,9 @@ export declare enum FireStage {
     Embers = 0,
     AlmostExtinguished = 1,
     Struggling = 2,
-    Healthy = 3,
-    Raging = 4
+    Thriving = 3,
+    Healthy = 4,
+    Raging = 5
 }
 export declare enum RenderSource {
     ActionManager = 0,

@@ -15,10 +15,10 @@ import Vec2 from "utilities/math/Vector2";
 export default class DoodadInfo {
     type: DoodadType | TerrainType | TerrainDecoration;
     isTall: boolean;
-    animated: boolean;
+    isAnimated: boolean;
     topLeft: Vec2;
     topRight: Vec2;
     bottomLeft: Vec2;
     bottomRight: Vec2;
-    constructor(type: DoodadType | TerrainType | TerrainDecoration, isTall: boolean, xOffset: number, yOffset: number, animated: boolean);
+    constructor(type: DoodadType | TerrainType | TerrainDecoration, isTall: boolean, xOffset: number, yOffset: number, isAnimated: boolean);
 }

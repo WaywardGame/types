@@ -11,6 +11,6 @@
 import Challenge from "entity/player/quest/quest/Challenge";
 import { QuestType } from "entity/player/quest/quest/IQuest";
 declare const quests: {
-    [QuestType.Challenge]: Challenge;
+    0: Challenge;
 };
 export default quests;

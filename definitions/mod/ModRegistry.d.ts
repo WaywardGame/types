@@ -14,7 +14,9 @@ import { DoodadType, DoodadTypeGroup, IDoodadDescription, IDoodadGroupDescriptio
 import { ActionType, IActionDescription } from "entity/action/IAction";
 import { ICorpseDescription } from "entity/creature/corpse/ICorpse";
 import { CreatureType, ICreatureDescription } from "entity/creature/ICreature";
+import { StatusType } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
+import { Stat } from "entity/IStats";
 import { INPCClass, NPCType } from "entity/npc/NPCS";
 import { Source } from "entity/player/IMessageManager";
 import { INoteDescription } from "entity/player/note/NoteManager";
@@ -23,6 +25,7 @@ import { Quest } from "entity/player/quest/quest/Quest";
 import { QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
 import { QuestRequirement } from "entity/player/quest/requirement/Requirement";
 import { ISkillDescription } from "entity/player/Skills";
+import { IStatusEffectDescription } from "entity/StatusEffects";
 import { InspectType } from "game/inspection/IInspection";
 import { IInspectionHandler } from "game/inspection/Inspections";
 import { ItemType, ItemTypeGroup, IItemDescription, IItemGroupDescription } from "item/IItem";
@@ -39,6 +42,7 @@ import { Bindable, IBinding } from "newui/IBindingManager";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 import { DialogId, IDialogDescription } from "newui/screen/screens/game/Dialogs";
 import { IMenuBarButtonDescription, MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
+import { IStatDisplayDescription } from "newui/screen/screens/game/static/stats/IStatDisplayDescription";
 import { HelpArticle, IHelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 import { ModOptionSectionInitializer } from "newui/screen/screens/menu/menus/options/TabMods";
 import { ITerrainDecorationBase, TerrainDecoration } from "renderer/Decorations";
@@ -85,7 +89,9 @@ export declare enum ModRegistrationType {
     SoundEffect = 31,
     Terrain = 32,
     TerrainDecoration = 33,
-    TileEvent = 34
+    TileEvent = 34,
+    Stat = 35,
+    StatusEffect = 36
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -201,6 +207,16 @@ export interface ISkillRegistration extends IBaseModRegistration {
     name: string;
     description?: ISkillDescription;
 }
+export interface IStatRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Stat;
+    name: string;
+    description?: IStatDisplayDescription;
+}
+export interface IStatusEffectRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.StatusEffect;
+    name: string;
+    description?: IStatusEffectDescription;
+}
 export interface IItemRegistrationDescription extends IItemDescription {
     groups?: ItemTypeGroup[];
 }
@@ -258,7 +274,7 @@ export interface IQuestRequirementRegistration extends IBaseModRegistration {
     name: string;
     description: QuestRequirement;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration);
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | IStatRegistration | IStatusEffectRegistration | ISoundEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -334,6 +350,22 @@ declare module Register {
      * The decorated property will be injected with the id of the registered skill.
      */
     function skill(name: string, description?: ISkillDescription): <K extends string | number | symbol, T extends { [k in K]: SkillType; }>(target: T, key: K) => void;
+    /**
+     * Registers a stat.
+     * @param name The name of the stat.
+     * @param description The definition of the stat.
+     *
+     * The decorated property will be injected with the id of the registered stat.
+     */
+    function stat(name: string, description?: IStatDisplayDescription): <K extends string | number | symbol, T extends { [k in K]: Stat; }>(target: T, key: K) => void;
+    /**
+     * Registers a status effect.
+     * @param name The name of the status effect.
+     * @param description The definition of the status effect.
+     *
+     * The decorated property will be injected with the id of the registered status effect.
+     */
+    function statusEffect(name: string, description?: IStatusEffectDescription): <K extends string | number | symbol, T extends { [k in K]: StatusType; }>(target: T, key: K) => void;
     /**
      * Registers an item.
      * @param name The name of the item.

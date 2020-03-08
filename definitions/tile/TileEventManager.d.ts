@@ -42,7 +42,14 @@ export default class TileEventManager extends EventEmitter.Host<ITileManagerEven
     is(thing: any): thing is ITileEvent;
     canPickup(tile: ITile): ITileEvent | undefined;
     blocksTile(tile: ITile): boolean;
-    createBlood(x: number, y: number, z: number): void;
+    /**
+     * Creates either blood or water blood
+     * @param x X-axis of the tile where you want to spawn around (can be any adjacent tile)
+     * @param y Y-axis of the tile where you want to spawn around (can be any adjacent tile)
+     * @param z Z-axis of the tile where you want to spawn around (can be any adjacent tile)
+     * @returns True if the blood was created, false if not
+     */
+    createBlood(x: number, y: number, z: number): boolean;
     clearBlood(position: IVector3, executor: NPC | Player): boolean;
     moveExcrement(position: IVector3): void;
     containsDamagingTileEvents(events: ITileEvent[] | undefined): boolean;

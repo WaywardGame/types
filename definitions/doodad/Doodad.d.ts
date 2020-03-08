@@ -65,6 +65,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     step: number | undefined;
     hitchedCreature?: number;
     tradedFrom?: string[];
+    aberrant?: boolean;
     get fromDescription(): import("../utilities/FromDescription").ISafeFn<IDoodadDescription, undefined>;
     private _description;
     static getRegistrarId(): number;

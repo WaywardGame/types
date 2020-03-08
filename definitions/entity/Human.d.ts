@@ -102,6 +102,7 @@ export default abstract class Human extends Entity {
     getAndSwitchHandToUse(): EquipType | undefined;
     damageRandomEquipment(): void;
     getDamageModifier(): number;
+    damage(damageInfoOrAmount: IDamageInfo | number): number | undefined;
     damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: Message | Translation, soundDelay?: number, causesBlood?: boolean): number | undefined;
     getEquippedItems(): Item[];
     getEquippedItem(slot: EquipType): Item | undefined;

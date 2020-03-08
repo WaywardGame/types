@@ -138,7 +138,12 @@ export default class Player extends Human {
     checkWeight(): void;
     getWeightStatus(): WeightStatus;
     getWeightOrStaminaMovementPenalty(): number;
-    checkForStill(): boolean;
+    /**
+     * Check if there is a still in front of the player.
+     * @param withWater Check if the still has water in it?
+     * @param isLit Check if the still is lit?
+     */
+    checkForStill(withWater?: boolean, isLit?: boolean): boolean;
     checkForWell(): boolean;
     checkForGather(): Doodad | undefined;
     updateTables(): void;

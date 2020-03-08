@@ -148,6 +148,7 @@ export interface ICreatureDescription extends IModdable {
     waste?: IWaste;
     passable?: boolean;
     texOffsetY?: number;
+    isTall?: boolean;
 }
 export interface ICreatureLoot {
     item: ItemType;

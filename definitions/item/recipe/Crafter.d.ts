@@ -15,15 +15,31 @@ import Item from "item/Item";
 import Recipe from "item/recipe/Recipe";
 import { IRecipeInputUseStrategy, RecipeInputType, RecipeRequirementType } from "item/recipe/RecipeRequirement";
 import { RecipeRequirementClass } from "item/recipe/RecipeRequirements";
+export declare enum CraftEfficacy {
+    Lowest = 0,
+    Low = 1,
+    Medium = 2,
+    High = 3,
+    Highest = 4
+}
+export interface ICraftResult {
+    type: CraftResult;
+    outputs: any[];
+    computeEfficacy(): ICraftEfficacy | undefined;
+}
+export interface ICraftEfficacy {
+    value: number;
+    tier: CraftEfficacy;
+}
 export default class Crafter {
     readonly recipe: Recipe;
     private readonly crafter;
     readonly accessibleItems: Item[];
     private readonly inputs;
-    private readonly qualityBonuses;
     private readonly usedFilter;
     private forcedQuality?;
     private readonly decays;
+    private quality?;
     constructor(recipe: Recipe, crafter: Entity, accessibleItems: Item[]);
     /**
      * Gets a stream of the tiles around the crafter entity.
@@ -58,20 +74,18 @@ export default class Crafter {
     use<R extends RecipeRequirementType>(type: R, useStrategy: IRecipeInputUseStrategy<R>, requirement: InstanceType<RecipeRequirementClass<R>>): this;
     forceResultQuality(quality?: Quality): this;
     getForcedResultQuality(): Quality | undefined;
-    getQualityBonus(): number;
-    addQualityBonus(type: RecipeRequirementType, bonus: number): this;
-    setQualityBonus(type: RecipeRequirementType, bonus: number): this;
     addDecay(decay: number, weight?: number): this;
     getDecay(): number;
-    attemptCraft(): {
-        type: CraftResult;
-        outputs: any[];
-    };
+    attemptCraft(): ICraftResult;
+    getQualityBonus(): number;
     /**
      * Returns the quality of the output items. This is randomised for each call if the quality is not forced.
      */
     getQuality(): Quality;
     private getOutputs;
     private runEvent;
+    private computeQualityBonus;
+    private computeQualityBonusOfInput;
     private getRandomResult;
+    private getEfficacy;
 }

@@ -31,6 +31,7 @@ export interface IDoodadOptions extends IObjectOptions {
     ownerIdentifier?: string;
     step?: number;
     hitchedCreature?: number;
+    aberrant?: boolean;
 }
 export declare type IDoodadOld = Partial<Doodad> & {
     growInto?: DoodadType;

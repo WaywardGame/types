@@ -79,9 +79,10 @@ export declare enum SpriteBatchLayer {
     Corpse = 0,
     Item = 1,
     Creature = 2,
-    CreatureFlying = 3,
-    Overlay = 4,
-    OverTrees = 5
+    TileEvent = 3,
+    CreatureFlying = 4,
+    Overlay = 5,
+    OverTrees = 6
 }
 export declare enum RenderFlag {
     None = 0,
@@ -92,5 +93,6 @@ export declare enum RenderFlag {
     Terrain = 16,
     Overlay = 32,
     OverTrees = 64,
+    TileEvent = 128,
     All = 65535
 }

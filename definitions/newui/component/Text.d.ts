@@ -8,20 +8,25 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import UiTranslation from "language/dictionary/UiTranslation";
 import { IColorSection } from "language/segment/ColorSegment";
 import { IFontSizeSection } from "language/segment/HeadingSegment";
 import { ILinkSection } from "language/segment/LinkSegment";
+import Translation from "language/Translation";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { ISegment, IStringSection } from "utilities/string/Interpolator";
 export default class Text extends Component {
-    static resolve(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[]): IStringSection[];
+    static resolve(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[], ...args: any[]): IStringSection[];
     private static areIdenticalSections;
     static toString(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[]): string;
     private segments;
-    private text;
+    private text?;
+    private args?;
     constructor(elementType?: string);
     setSegments(...segments: ISegment[]): this;
+    setText(text: UiTranslation | Translation, ...args: any[]): this;
+    setText(refresh: false, text: UiTranslation | Translation, ...args: any[]): this;
     setText(text?: TranslationGenerator): this;
     setText(refresh: false, text?: TranslationGenerator): this;
     getText(): TranslationGenerator | undefined;
