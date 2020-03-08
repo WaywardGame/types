@@ -23,6 +23,7 @@ export default class ItemRequirement extends RecipeRequirement<RecipeRequirement
     private outputIntermediate?;
     private changeInto?;
     private predicate?;
+    private bestItem?;
     constructor(item: ItemType | ItemTypeGroup, quantity?: number, initializer?: (requirement: ItemRequirement) => any);
     consumed(): boolean;
     /**
@@ -54,6 +55,10 @@ export default class ItemRequirement extends RecipeRequirement<RecipeRequirement
     setInheritQualityFrom(): this;
     setPredicate(predicate: (item: Item, consumed: boolean) => boolean): this;
     /**
+     * Sets the "best" item to be used for this requirement. Used to display the efficacy of an actual input item.
+     */
+    setBestItem(item: Item): this;
+    /**
      * Sets the `ItemOutput` that this requirement will be used for.
      * This is called internally, it should have no real use in recipe construction.
      */
@@ -65,11 +70,12 @@ export default class ItemRequirement extends RecipeRequirement<RecipeRequirement
     getOutput(): ItemOutput.Intermediate | undefined;
     getUsable(api: Crafter): Item[];
     isMet(api: Crafter, quantity?: number): boolean;
-    private freeUsedItem;
     private onAttemptCraft;
     private onCraft;
     private onFail;
+    private freeUsedItem;
     private itemMatches;
     private getUsedItems;
     private getQualityBonus;
+    private getBestPossibleQualityBonus;
 }

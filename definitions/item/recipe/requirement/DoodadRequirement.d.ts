@@ -15,9 +15,14 @@ import RecipeRequirement, { RecipeRequirementType } from "item/recipe/RecipeRequ
 export default class DoodadRequirement extends RecipeRequirement<RecipeRequirementType.Doodad> {
     readonly doodad: DoodadType | DoodadTypeGroup;
     static readonly BASE: DoodadRequirement;
+    private bestDoodad?;
     constructor(doodad: DoodadType | DoodadTypeGroup);
+    /**
+     * Sets the "best" doodad to be used for this requirement. Used to display the efficacy of an actual input doodad.
+     */
+    setBestDoodad(doodad: Doodad): this;
     getUsable(api: Crafter): Set<Doodad>;
     isMet(api: Crafter): boolean;
-    private onAttemptCraft;
     private getQualityBonus;
+    private getBestPossibleQualityBonus;
 }

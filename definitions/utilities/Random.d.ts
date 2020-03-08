@@ -112,6 +112,6 @@ export declare enum RandomInstance {
     MilestoneModifiers = 1
 }
 export declare const randoms: {
-    [RandomInstance.Seeded]: Random<SeededGenerator>;
-    [RandomInstance.MilestoneModifiers]: Random<SeededGenerator>;
+    0: Random<SeededGenerator>;
+    1: Random<SeededGenerator>;
 };

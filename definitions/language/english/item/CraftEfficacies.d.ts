@@ -8,9 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import Challenge from "entity/player/quest/quest/Challenge";
-import { QuestType } from "entity/player/quest/quest/IQuest";
-declare const quests: {
-    0: Challenge;
-};
-export default quests;
+import { CraftEfficacy } from "item/recipe/Crafter";
+declare const craftEfficacies: Descriptions<CraftEfficacy, string>;
+export default craftEfficacies;

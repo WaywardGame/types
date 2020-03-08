@@ -14,11 +14,11 @@ import { TerrainType } from "tile/ITerrain";
 import Vec2 from "utilities/math/Vector2";
 export default class DoodadInfo {
     type: DoodadType | TerrainType | TerrainDecoration;
-    tall: boolean;
-    animated: boolean;
+    isTall: boolean;
+    isAnimated: boolean;
     topLeft: Vec2;
     topRight: Vec2;
     bottomLeft: Vec2;
     bottomRight: Vec2;
-    constructor(type: DoodadType | TerrainType | TerrainDecoration, tall: boolean, xOffset: number, yOffset: number, animated: boolean);
+    constructor(type: DoodadType | TerrainType | TerrainDecoration, isTall: boolean, xOffset: number, yOffset: number, isAnimated: boolean);
 }

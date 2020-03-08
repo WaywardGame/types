@@ -38,7 +38,7 @@ export default class Input extends Component implements IRefreshable, IInput {
     get changed(): boolean;
     private readonly input;
     private readonly wrapperButtons;
-    constructor();
+    constructor(type?: "input" | "textarea");
     addClearButton(): this;
     addResetButton(): this;
     setMaxLength(maxLength?: number): this;

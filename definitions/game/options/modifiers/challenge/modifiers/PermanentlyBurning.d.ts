@@ -12,6 +12,6 @@ import { IGameOptionsPartial } from "game/options/IGameOptions";
 import ChallengeModifier from "game/options/modifiers/challenge/ChallengeModifier";
 export default class PermanentlyBurning extends ChallengeModifier {
     readonly weight = 0.5;
-    readonly challenge = 250;
+    readonly challenge = 200;
     readonly options: () => IGameOptionsPartial;
 }

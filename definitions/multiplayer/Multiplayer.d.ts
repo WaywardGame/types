@@ -69,7 +69,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
     /**
      * Three types of game codes:
-     * 1. Dedicated server code - ex. home.spacetech.us:1234
+     * 1. Dedicated server code - ex. 1.2.3.4:1234
      * 2. Steam lobby code - ex. steam:109775241017071190
      * 3. Global matchmaking server id - ex. 87287724-49aa-e556-4145-3ed96c649a20
      */

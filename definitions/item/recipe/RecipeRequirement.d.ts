@@ -31,6 +31,9 @@ export interface IRecipeInputUseStrategy<R extends RecipeRequirementType> {
     onAttemptCraft?(api: Crafter, inputs: Array<RecipeInputType<R>>): any;
     onCraft?(api: Crafter, inputs: Array<RecipeInputType<R>>): any;
     onFail?(api: Crafter, inputs: Array<RecipeInputType<R>>): any;
+    getQualityBonus?(api: Crafter, input: RecipeInputType<R>): number;
+    getQualityBonusType?(api: Crafter): RecipeRequirementType;
+    getBestPossibleQualityBonus?(api: Crafter): number;
 }
 export declare const MAX_QUALITY_BONUSES: Readonly<Descriptions<RecipeRequirementType, number>>;
 export default abstract class RecipeRequirement<R extends RecipeRequirementType> {

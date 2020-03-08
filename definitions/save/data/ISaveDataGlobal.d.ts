@@ -21,6 +21,7 @@ export interface IOptions {
     autoAttack: boolean;
     autoGatherHarvest: boolean;
     autoPickup: boolean;
+    autoSave: [AutoSave.Off] | [AutoSave.Turns | AutoSave.Time, number];
     bindings: IBindings;
     consoleLogSourceFilter: ISourceFilter;
     currentGame: number;
@@ -32,7 +33,6 @@ export interface IOptions {
     disableUIEffects: boolean;
     dropLocation: DropLocation;
     dropOnGatherHarvest: boolean;
-    autoSave: [AutoSave.Off] | [AutoSave.Turns | AutoSave.Time, number];
     fallBackToEnglish: boolean;
     fontStyle: boolean;
     fullscreen: boolean;

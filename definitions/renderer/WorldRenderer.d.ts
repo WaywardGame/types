@@ -55,6 +55,10 @@ export interface IWorldRendererEvents {
      * @returns The number of sprites that can be rendered at one time on this layer
      */
     getMaxSpritesForLayer(maxSprites: number, layer: SpriteBatchLayer): number;
+    /**
+     * Called when the zoom level is changed.
+     */
+    updateZoom(zoom: number, oldZoom: number): any;
 }
 export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvents> implements IWorldRenderer {
     private readonly gl;
@@ -92,6 +96,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private itemBatch;
     private corpseBatch;
     private creatureBatch;
+    private tileEventBatch;
     private overTreesBatch;
     private creatureFlyingBatch;
     private overlayBatch;

@@ -27,6 +27,8 @@ export interface IGameEvents {
     glLostContext(): any;
     glSetup(restored: boolean): any;
     glInitialized(): any;
+    preSaveGame(saveType: SaveType): any;
+    postSaveGame(saveType: SaveType): any;
     /**
      * Called when getting the position to render at. By default, this is the player's location.
      * @param position The player's location
@@ -118,8 +120,9 @@ export declare enum FireStage {
     Embers = 0,
     AlmostExtinguished = 1,
     Struggling = 2,
-    Healthy = 3,
-    Raging = 4
+    Thriving = 3,
+    Healthy = 4,
+    Raging = 5
 }
 export declare enum RenderSource {
     ActionManager = 0,
@@ -206,3 +209,5 @@ export declare const AUTO_SAVE_REST_THRESHOLD = 0.75;
 export declare const AUTO_SAVE_REST_THRESHOLD_MINIMUM = 200;
 export declare const LIGHT_COLOR_DEFAULT: import("../utilities/Color").IRGB;
 export declare const TOOLTIP_DELAY_DEFAULT = 170;
+export declare const ZOOM_LEVEL_MAX = 8;
+export declare const ZOOM_LEVEL_MIN = 1;

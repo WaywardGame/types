@@ -76,6 +76,10 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     isNearby(executor: EntityPlayerCreatureNpc, allowNearby?: boolean): boolean;
     verifyAndFixItem(): void;
     damage(source: string, modifier?: number): void;
+    /**
+     * Gets the item's damage modifier which certain special items have so they can have high durability for use, but normal damage ranges.
+     */
+    getDamageModifier(): number;
     isDamaged(): boolean;
     isInTradeContainer(): boolean;
     isEquipped(): boolean;
@@ -98,6 +102,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     setLegendary(bypassType?: boolean): void;
     acquireNotify(player: Player): void;
     getStokeFireValue(): number | undefined;
+    getStokeFireBonusValue(): number;
     getOnUseBonus(): number;
     getWorth(legendaryWorth?: boolean): number;
     getTraderSellPrice(player: Player | NPC, legendaryWorth?: boolean): number;

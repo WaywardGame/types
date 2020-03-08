@@ -163,7 +163,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     resetGameState(skipSave?: boolean): Promise<void>;
     shouldRender(): number;
     makeLavaPassage(player: Player): TerrainType | undefined;
-    makeCaveEntrance(player: Player): TerrainType | undefined;
+    makeCaveEntrance(player: Player, chance?: number): TerrainType | undefined;
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
     updateTablesAndWeightNextTick(): void;

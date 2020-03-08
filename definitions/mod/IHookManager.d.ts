@@ -72,6 +72,9 @@ export declare enum Hook {
     PostRender = "postRender",
     PostRenderPostProcess = "postRenderPostProcess",
     PostRenderWorld = "postRenderWorld",
+    /**
+     * @deprecated Does not work for all cases. Use the event `"postSaveGame"` instead. IE `event.subscribe("postSaveGame")`
+     */
     PostSaveGame = "postSaveGame",
     PreExecuteAction = "preExecuteAction",
     PreExecuteCommand = "preExecuteCommand",
@@ -79,6 +82,9 @@ export declare enum Hook {
     PreRender = "preRender",
     PreRenderPostProcess = "preRenderPostProcess",
     PreRenderWorld = "preRenderWorld",
+    /**
+     * @deprecated Does not work for all cases. Use the event `"preSaveGame"` instead. IE `event.subscribe("preSaveGame")`
+     */
     PreSaveGame = "preSaveGame",
     ProcessInput = "processInput",
     ShouldCraft = "shouldCraft",

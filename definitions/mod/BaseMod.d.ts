@@ -22,6 +22,15 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      * Returns the name of this mod.
      */
     getName(): string;
+    /**
+     * Returns the prefix for this mod used in registrations. Example: A mod named `Debug Tools` would be `ModDebugTools`
+     */
+    getPrefix(): string;
+    /**
+     * Returns the full registry name for the given registration name, concatenating the mod registration prefix.
+     * Example: A mod named `Debug Tools` registering `Cool Thingy` would be `ModDebugToolsCoolThingy`
+     */
+    getRegistryName(name: string): string;
     getLog(): Log;
     getPath(): string;
     loadFile(file: string, callback: (fileText: string, success: boolean) => void): boolean;

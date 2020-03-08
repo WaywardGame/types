@@ -8,9 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-export interface ISegmentApi {
+export interface ISegmentApi extends Readonly<IInterpolationOptions> {
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;
+    with(options: IInterpolationOptions): ISegmentApi;
+}
+export interface IInterpolationOptions {
+    formatNumbers?: boolean;
+    formatDates?: boolean;
 }
 export interface ISegment {
     startChar?: string;
@@ -22,11 +27,16 @@ export interface IStringSection {
     content: string;
 }
 declare class Interpolator {
+    private options;
+    private readonly savedOptions;
+    get formatNumbers(): boolean | undefined;
+    get formatDates(): boolean | undefined;
     private readonly _segments;
     get segments(): ISegment[];
     constructor(...segments: ISegment[]);
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;
+    with(options: IInterpolationOptions): this;
     private handleChar;
     static combineLikeSections(sections: IStringSection[], ignoreKeys?: string[]): void;
 }

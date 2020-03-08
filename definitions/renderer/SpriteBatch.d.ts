@@ -12,6 +12,7 @@ import ISpriteBatch from "renderer/ISpriteBatch";
 import Vec2 from "utilities/math/Vector2";
 export default class SpriteBatch implements ISpriteBatch {
     private readonly depthOffset;
+    private readonly yOffset;
     private static shaderProgram;
     private static readonly spriteLength;
     capacity: number;
@@ -25,7 +26,7 @@ export default class SpriteBatch implements ISpriteBatch {
     private readonly gl;
     private begun;
     private readonly vertexArray;
-    constructor(gl: WebGL2RenderingContext, maxSprites: number, depthOffset?: number);
+    constructor(gl: WebGL2RenderingContext, maxSprites: number, depthOffset?: number, yOffset?: number);
     static resetGl(): void;
     dispose(): void;
     clear(): void;

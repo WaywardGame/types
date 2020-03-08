@@ -20,7 +20,7 @@ import { IModdable } from "mod/ModRegistry";
 import { TerrainType } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
 export interface IDoodadOptions extends IObjectOptions {
-    gatherReady?: boolean;
+    gatherReady?: number;
     stillContainer?: Item;
     gfx?: number;
     spread?: number;
@@ -31,6 +31,7 @@ export interface IDoodadOptions extends IObjectOptions {
     ownerIdentifier?: string;
     step?: number;
     hitchedCreature?: number;
+    aberrant?: boolean;
 }
 export declare type IDoodadOld = Partial<Doodad> & {
     growInto?: DoodadType;
@@ -50,7 +51,6 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     canBreak?: boolean;
     canGrow?: boolean;
     canGrowInCaves?: boolean;
-    canStoke?: boolean;
     canTrampleWhenMature?: boolean;
     disableDrop?: boolean;
     gather?: IDoodadLoot;

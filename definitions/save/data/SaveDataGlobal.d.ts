@@ -64,4 +64,5 @@ export default class SaveDataGlobal {
 export interface IMultiplayerPreviousGame {
     character: ICharacter;
     milestoneModifiers: Set<Milestone>;
+    lastJoinTime?: number;
 }

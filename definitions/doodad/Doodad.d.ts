@@ -42,7 +42,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     containedItems: Item[];
     decay?: number;
     disassembly?: Item[];
-    gatherReady?: boolean;
+    gatherReady?: number;
     stillContainer?: Item;
     gfx?: number;
     id: number;
@@ -65,6 +65,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     step: number | undefined;
     hitchedCreature?: number;
     tradedFrom?: string[];
+    aberrant?: boolean;
     get fromDescription(): import("../utilities/FromDescription").ISafeFn<IDoodadDescription, undefined>;
     private _description;
     static getRegistrarId(): number;

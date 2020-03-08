@@ -11,23 +11,23 @@
 import { QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
 import { QuestRequirement } from "entity/player/quest/requirement/Requirement";
 declare const requirements: {
-    [QuestRequirementType.SailToCivilization]: QuestRequirement<[], {}>;
-    [QuestRequirementType.KillCreature]: QuestRequirement<[import("../../creature/ICreature").CreatureType, number], import("./requirement/KillCreatureRequirement").IKillCreatureRequirement>;
-    [QuestRequirementType.KillCreatures]: QuestRequirement<[number], import("./requirement/KillCreaturesRequirement").IKillCreaturesRequirement>;
-    [QuestRequirementType.CollectItem]: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[], number], {}>;
-    [QuestRequirementType.LearnSkill]: QuestRequirement<[import("../../IHuman").SkillType, number], {}>;
-    [QuestRequirementType.LearnSkills]: QuestRequirement<[number], {}>;
-    [QuestRequirementType.LearnAnySkill]: QuestRequirement<[number], {}>;
-    [QuestRequirementType.Equip]: QuestRequirement<[import("../../IHuman").EquipType[], import("../../../item/IItem").ItemTypeGroup[]], {}>;
-    [QuestRequirementType.Craft]: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[], number], {
+    0: QuestRequirement<[], {}>;
+    2: QuestRequirement<[import("../../creature/ICreature").CreatureType, number], import("./requirement/KillCreatureRequirement").IKillCreatureRequirement>;
+    3: QuestRequirement<[number], import("./requirement/KillCreaturesRequirement").IKillCreaturesRequirement>;
+    1: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[], number], {}>;
+    4: QuestRequirement<[import("../../IHuman").SkillType, number], {}>;
+    5: QuestRequirement<[number], {}>;
+    6: QuestRequirement<[number], {}>;
+    7: QuestRequirement<[import("../../IHuman").EquipType[], import("../../../item/IItem").ItemTypeGroup[]], {}>;
+    8: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[], number], {
         crafted: number;
     }>;
-    [QuestRequirementType.Dismantle]: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[], number], {
+    9: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[], number], {
         dismantled: number;
     }>;
-    [QuestRequirementType.Build]: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[]], {}>;
-    [QuestRequirementType.TameCreature]: QuestRequirement<[import("../../creature/ICreature").CreatureType, number], import("./requirement/TameCreatureRequirement").ITameCreatureRequirement>;
-    [QuestRequirementType.TameCreatures]: QuestRequirement<[number], import("./requirement/TameCreaturesRequirement").ITameCreaturesRequirement>;
+    10: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[]], {}>;
+    11: QuestRequirement<[import("../../creature/ICreature").CreatureType, number], import("./requirement/TameCreatureRequirement").ITameCreatureRequirement>;
+    12: QuestRequirement<[number], import("./requirement/TameCreaturesRequirement").ITameCreaturesRequirement>;
 };
 export default requirements;
 export declare type RequirementArgs<R extends QuestRequirementType> = (typeof requirements)[R] extends QuestRequirement<infer O, any> ? O : (typeof requirements)[R] extends QuestRequirement<infer O2> ? O2 : never;

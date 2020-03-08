@@ -24,12 +24,14 @@ export default class MultiplayerOptionsMenu extends Menu {
     private readonly webRTCSpacer;
     private readonly pvp;
     private readonly maxPlayers;
+    private readonly descriptionInput;
     private readonly checkConnectionHeading;
     private readonly checkConnectionBlock;
     private readonly checkConnectionButton;
     constructor();
     protected refresh(): void;
     private updateMultiplayer;
+    private onDescriptionChange;
     private toggleServer;
     private copyGameCodeClick;
     private inviteSteamFriendsClick;

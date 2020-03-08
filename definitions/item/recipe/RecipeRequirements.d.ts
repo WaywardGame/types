@@ -14,10 +14,10 @@ import FireRequirement from "item/recipe/requirement/FireRequirement";
 import ItemRequirement from "item/recipe/requirement/ItemRequirement";
 import ToolRequirement from "item/recipe/requirement/ToolRequirement";
 declare const requirements: {
-    [RecipeRequirementType.Item]: typeof ItemRequirement;
-    [RecipeRequirementType.Tool]: typeof ToolRequirement;
-    [RecipeRequirementType.Doodad]: typeof DoodadRequirement;
-    [RecipeRequirementType.Fire]: typeof FireRequirement;
+    0: typeof ItemRequirement;
+    1: typeof ToolRequirement;
+    2: typeof DoodadRequirement;
+    3: typeof FireRequirement;
 };
 export default requirements;
 export declare type RecipeRequirementClass<R extends RecipeRequirementType> = (typeof requirements)[R];

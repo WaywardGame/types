@@ -272,7 +272,7 @@ export interface ITooltip extends IComponent {
     updatePosition(position: IVector2, forceRegenerateBox?: true): this;
 }
 export interface IText extends IComponent {
-    setText(translation: TranslationGenerator): this;
+    setText(translation: TranslationGenerator, ...args: any[]): this;
 }
 export interface IDisableable {
     disabled: boolean;

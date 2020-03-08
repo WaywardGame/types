@@ -42,10 +42,11 @@ export default class CreatureManager extends EntityManager<Creature> {
      * @param z The tile Z position
      * @param bypass Whether to bypass checks for whether the creature can spawn there naturally. Defaults to false, if the creature can't spawn naturally, it won't.
      * @param forceAberrant If provided, forces the spawned creature's aberrant state to be the passed boolean. True = aberrant, false = not aberrant. If not provided, the aberrant state is decided based on chance.
-     * @param spawnableTiles If set, this will overwrite the creature's description for which tiles it can spawn on
+     * @param spawnTiles If set, this will overwrite the creature's description for which tiles it can spawn on
+     * @param bypassCreatureLimit If set, the creature limit will be ignored and spawn the creature over the set limit
      */
-    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: TileGroup): Creature | undefined;
-    spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): Creature | undefined;
+    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: TileGroup, bypassCreatureLimit?: boolean): Creature | undefined;
+    spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean, bypassCreatureLimit?: boolean): Creature | undefined;
     getSpawnableCreatures(creatureGroup: SpawnGroup, z: number, reputation?: number, time?: number): {
         pool: CreatureType[];
         aberrantChance: number;

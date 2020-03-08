@@ -11,7 +11,7 @@
 import ItemOutput from "item/recipe/output/ItemOutput";
 import { RecipeOutputType } from "item/recipe/RecipeOutput";
 declare const outputs: {
-    [RecipeOutputType.Item]: typeof ItemOutput;
+    0: typeof ItemOutput;
 };
 export default outputs;
 export declare type RecipeOutputClass<R extends RecipeOutputType> = (typeof outputs)[R];

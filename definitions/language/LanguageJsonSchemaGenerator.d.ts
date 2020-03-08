@@ -30,7 +30,7 @@ export default function generateSchema(): {
             description: string;
             type: string;
         };
-        shouldPluralize: {
+        alternateFontStyle: {
             description: string;
             enum: boolean[];
         };
@@ -111,7 +111,7 @@ export default function generateSchema(): {
         };
     };
     dependencies: {
-        shouldPluralize: string[];
+        alternateFontStyle: string[];
     };
     additionalProperties: boolean;
     allOf: ({

@@ -76,6 +76,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     checkUnder(x?: number, y?: number): boolean;
     canSwapWith(player: Player): boolean;
     getOwner(): Player | undefined;
+    damage(damageInfo: IDamageInfo): number | undefined;
     damage(damageInfo: IDamageInfo, creatureX?: number, creatureY?: number, creatureZ?: number): number | undefined;
     offer(items: Item[]): Item | undefined;
     processSpecialAbilities(enemy: Player | Creature | undefined, bypass?: boolean): boolean;
