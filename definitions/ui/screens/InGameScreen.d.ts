@@ -208,6 +208,12 @@ export default class InGameScreen extends BaseScreen {
     private getHoveredItem;
     private quickSlotBindPressed;
     private quickSlotToggleBindPressed;
+    /**
+     * Get a number based on an item's legendary type/skill/stat in order.
+     * @param item An item to sort.
+     * @returns A number based on the legendary type/skill/stat.
+     */
+    private getLegendarySortOrder;
     private determineSort;
     private getBestSort;
 }
