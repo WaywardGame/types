@@ -185,7 +185,12 @@ export default class InGameScreen extends BaseScreen {
     hideActionsMenu(): void;
     toggleActionsMenu(center?: boolean): void;
     showActionsMenu(center?: boolean, updatePosition?: boolean, skipSound?: boolean): void;
-    isFiltered(itemType: ItemType, containerElement: JQuery): boolean;
+    /**
+     * Checks if the item type or item is filtered from inventory/crafting/container dialogs.
+     * @param item The ItemType or Item to check.
+     * @param containerElement Which dialog the filter is in.
+     */
+    isFiltered(item: ItemType | Item, containerElement: JQuery): boolean;
     getFilterElement(containerElement: JQuery): JQuery;
     onFilterInput(containerElement: JQuery): void;
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
