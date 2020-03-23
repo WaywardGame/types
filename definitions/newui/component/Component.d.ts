@@ -102,6 +102,8 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     setContextMenu(generator: () => IContextMenu | undefined): void;
     setHighlight(highlight: IHighlight): this;
     removeHighlight(): void;
+    subscribeHoverEvents(): this;
+    unsubscribeHoverEvents(): void;
     setStyle(property: string, value: string | number): this;
     getBox(regenIfZero?: boolean, forceRegen?: boolean): IBox;
     getOffset(): {
@@ -121,8 +123,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     repaint(): void;
     forceShowTooltip(onlyIfHovered?: boolean): void;
     regenerateBoxes(): void;
-    private onMouseEnterForTooltip;
-    private onMouseLeaveForTooltip;
-    private onMouseEnterForHighlights;
-    private onMouseLeaveForHighlights;
+    private showTooltip;
+    private onMouseEnter;
+    private onMouseLeave;
 }

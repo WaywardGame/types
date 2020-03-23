@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Events } from "event/EventEmitter";
-import EventEmitter, { IEventEmitter } from "event/EventEmitter";
+import EventEmitter, { Events, IEventEmitter } from "event/EventEmitter";
 import { Dictionary } from "language/Dictionaries";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation, { ISerializedTranslation } from "language/Translation";
@@ -33,6 +32,14 @@ interface IComponentEvents {
      */
     willRemove(): boolean | void;
     regenerateBox(box: IBox): any;
+    /**
+     * Note: Requires calling `subscribeHoverEvents`
+     */
+    mouseenter(): any;
+    /**
+     * Note: Requires calling `subscribeHoverEvents`
+     */
+    mouseleave(): any;
 }
 export declare type AppendStrategy = "append" | "prepend" | {
     after: IComponent;

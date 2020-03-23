@@ -37,6 +37,7 @@ declare type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
 declare type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
 declare type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
 export interface IEventEmitter<H = any, E = any> {
+    event: IEventEmitter<this, IEventEmitterEvents<H, E>>;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     emitFirst<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): ReturnOf<E[K]> | undefined;
     emitFirstDefault<K extends keyof E, D>(event: K, generateDefault: () => D, ...args: ArgsOf<E[K]>): Exclude<ReturnOf<E[K]>, null | undefined> | D;
@@ -50,14 +51,21 @@ export interface IEventEmitter<H = any, E = any> {
     waitFor<K extends ArrayOr<keyof E>>(events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
+    hasHandlersForEvent(...events: Array<keyof E>): boolean;
 }
 interface IUntilSubscriber<H, E> {
     subscribe<K extends ArrayOr<keyof E>>(event: K, handler: IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): H;
+}
+interface IEventEmitterEvents<H, E> {
+    subscribe<K extends keyof E>(event: keyof E, handler: Iterable<(keyof H) | Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>): any;
+    unsubscribe<K extends keyof E>(event: keyof E, handler: Iterable<(keyof H) | Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>): any;
 }
 declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     private readonly host;
     private readonly hostClass;
     private readonly subscriptions;
+    private eventEmitterMeta?;
+    get event(): IEventEmitter<this, IEventEmitterEvents<H, E>>;
     constructor(host: H);
     copyFrom(emitter: IEventEmitter<H, E>): void;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
@@ -71,6 +79,7 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     waitFor<K extends ArrayOr<keyof E>>(events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
+    hasHandlersForEvent(...events: Array<keyof E>): boolean;
     private handlersForEvent;
     private handlers;
 }

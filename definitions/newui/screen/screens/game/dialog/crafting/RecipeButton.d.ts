@@ -15,4 +15,6 @@ export default class RecipeButton extends ItemComponent {
     private readonly sorts;
     constructor(craftable: Craftable);
     getSortOrder(sort: RecipeSort): number;
+    onHover(): void;
+    onUnhover(): void;
 }
