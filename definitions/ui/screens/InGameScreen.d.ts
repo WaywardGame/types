@@ -138,7 +138,7 @@ export default class InGameScreen extends BaseScreen {
     saveItemOrder(containerElement: JQuery): void;
     showItemContextMenu(element: JQuery): void;
     onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): boolean;
-    runContextMenuAction(itemId: number, action: IContextMenuAction, skipSound?: boolean): boolean;
+    runContextMenuAction(itemId: number, action: IContextMenuAction, skipSound?: boolean, usedFromQuickSlot?: boolean): boolean;
     craftItemChecker(itemType: ItemType): void;
     craftItem(item: ItemType, checker: ItemRecipeRequirementChecker): Promise<void>;
     onDismantleItemClick(dismantleItem: Item | undefined): void;
@@ -172,7 +172,16 @@ export default class InGameScreen extends BaseScreen {
     createCraftItemElements(containerSortInfo: IContainerSortInfo): void;
     updateItem(item: Item): void;
     onMove(): void;
-    getDialogElementForContainer(container: IContainer): JQuery | undefined;
+    /**
+     * Gets the dialog element for an item/doodad container (bags, backpacks, chests, etc.) and not inventories dialogs.
+     * @param container The container to check.
+     */
+    getDialogElementFromContainer(container: IContainer): JQuery | undefined;
+    /**
+     * Gets the dialog container element for an inventory or item/doodad container.
+     * @param container The container to check.
+     */
+    getDialogContainerElementForFilter(container: IContainer): JQuery | undefined;
     isContainerOpen(container: IContainer): boolean;
     openContainer(container: IContainer, containerName?: string): void;
     closeContainer(container: IContainer): void;

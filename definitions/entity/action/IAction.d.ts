@@ -121,7 +121,8 @@ export declare enum ActionType {
     TestDepth = 87,
     Enchant = 88,
     Navigate = 89,
-    Melee = 90
+    Melee = 90,
+    GrabAll = 91
 }
 export declare enum ActionUsability {
     Paused = 0,
