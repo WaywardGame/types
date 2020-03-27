@@ -36,7 +36,7 @@ export default class TileEventManager extends EventEmitter.Host<ITileManagerEven
     get(tile: ITile, type: TileEventType): ITileEvent | undefined;
     canGather(tile: ITile): ITileEvent | undefined;
     updateAll(): void;
-    fireOverflow(x: number, y: number, z: number): void;
+    fireOverflow(x: number, y: number, z: number): boolean;
     getMovementProgress(tileEvent: ITileEvent): number;
     inspect(inspection: Inspection, ...events: ITileEvent[]): InspectionResult;
     is(thing: any): thing is ITileEvent;
