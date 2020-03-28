@@ -19,8 +19,10 @@ import { ContainerReference, ItemType, ItemTypeGroup, IContainable, IContainer, 
 import { CraftStatus, RequirementInfo, WeightType } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
-import Translation from "language/Translation";
+import Translation, { TextContext } from "language/Translation";
 interface ItemManagerEvents {
+    create(item: Item): any;
+    remove(item: Item): any;
     containerItemRemove(item: Item, previousContainer: IContainer): any;
     containerItemUpdate(item: Item, previousContainer: IContainer | undefined, newContainer: IContainer): any;
     containerItemAdd(item: Item, newContainer: IContainer): any;
@@ -103,8 +105,8 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     isTileContainer(container: IContainer | undefined): boolean;
     getOrderedContainerItems(container: IContainer, human?: Human, allowProtectedItems?: boolean): Item[];
     reduceDismantleWeight(createdItems: Item[], itemWeight: number, mod?: number): void;
-    getItemTranslations(items: Item[], article?: boolean): import("@wayward/goodstream/Stream").default<Translation>;
-    getItemListTranslation(items: Item[], article?: boolean): Translation;
+    getItemTranslations(items: Item[], article?: boolean, context?: TextContext): import("@wayward/goodstream/Stream").default<Translation>;
+    getItemListTranslation(items: Item[], article?: boolean, context?: TextContext): Translation;
     loadReferences(isTraveling: boolean): void;
     saveTileReferences(): void;
     loadTileReferences(): void;

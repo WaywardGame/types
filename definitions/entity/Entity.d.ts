@@ -11,21 +11,22 @@
 import { SfxType } from "audio/IAudio";
 import Creature from "entity/creature/Creature";
 import { IDamageInfo } from "entity/creature/ICreature";
-import { EntityPlayerCreatureNpc, EntityType, IEntityEvents, IProperties, IStatus, IStatChangeInfo, MoveType, Property, StatusEffectChangeReason, StatusType, StatChangeReason } from "entity/IEntity";
-import { IStat, IStats, IStatBase, Stat } from "entity/IStats";
+import { EntityPlayerCreatureNpc, EntityType, IEntityEvents, IProperties, IStatChangeInfo, IStatus, MoveType, Property, StatChangeReason, StatusEffectChangeReason, StatusType } from "entity/IEntity";
+import { IStat, IStatBase, IStats, Stat } from "entity/IStats";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import StatFactory from "entity/StatFactory";
 import Stats from "entity/Stats";
 import EventEmitter from "event/EventEmitter";
 import { FireType, TileUpdateType } from "game/IGame";
+import { IInspector } from "game/inspection2/InfoProvider";
 import { ItemType, RecipeLevel } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { StatType } from "renderer/INotifier";
 import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
+export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IInspector {
     static is(entity: Entity | undefined, entityType: EntityType.NPC): entity is NPC;
     static is(entity: Entity | undefined, entityType: EntityType.Creature): entity is Creature;
     static is(entity: Entity | undefined, entityType: EntityType.Player): entity is Player;
@@ -60,6 +61,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
     constructor();
     abstract getName(): Translation;
     toString(): string;
+    getInspectionId(): string;
     /**
      * Initializes the given stat from the given `StatFactory` instance.
      * @param factory The factory to initialize the stat from.

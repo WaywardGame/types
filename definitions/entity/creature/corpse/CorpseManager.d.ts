@@ -10,18 +10,23 @@
  */
 import { ICorpse } from "entity/creature/corpse/ICorpse";
 import { CreatureType } from "entity/creature/ICreature";
+import EventEmitter from "event/EventEmitter";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
 import { ItemType } from "item/IItem";
-import Translation from "language/Translation";
-export default class CorpseManager {
+import Translation, { TextContext } from "language/Translation";
+export interface ICorpseManagerEvents {
+    create(corpse: ICorpse): any;
+    remove(corpse: ICorpse): any;
+}
+export default class CorpseManager extends EventEmitter.Host<ICorpseManagerEvents> {
     create(type: CreatureType, x: number, y: number, z: number, decay?: number, aberrant?: boolean, name?: string, qualityBonus?: number): ICorpse | undefined;
     updateAll(): void;
     getResources(corpse: ICorpse, clientSide?: boolean): ItemType[];
     remove(corpse: ICorpse): void;
     getName(typeOrCorpse: CreatureType | ICorpse, article?: boolean, count?: number, showCount?: boolean): Translation;
-    getCorpseTranslations(corpses: ICorpse[]): import("@wayward/goodstream/Stream").default<Translation>;
-    getCorpseListTranslation(corpses: ICorpse[]): Translation;
+    getCorpseTranslations(corpses: ICorpse[], article?: boolean, context?: TextContext): import("@wayward/goodstream/Stream").default<Translation>;
+    getCorpseListTranslation(corpses: ICorpse[], article?: boolean, context?: TextContext): Translation;
     inspect({ context }: Inspection, ...corpses: ICorpse[]): InspectionResult;
     is(thing: any): thing is ICorpse;
 }

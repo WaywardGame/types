@@ -8,12 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import EventEmitter from "event/EventEmitter";
 import { TileUpdateType } from "game/IGame";
 import IWorld from "renderer/IWorld";
 import IWorldLayer from "renderer/IWorldLayer";
 import ISerializer from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
-export default class World implements IWorld {
+export interface IWorldEvents {
+    updateTile(x: number, y: number, z: number, tile: ITile, tileUpdateType: TileUpdateType): any;
+}
+export default class World extends EventEmitter.Host<IWorldEvents> implements IWorld {
     width: number;
     height: number;
     layers: IWorldLayer[];

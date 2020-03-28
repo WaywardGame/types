@@ -47,7 +47,17 @@ declare module Arrays {
      * @returns The given array after shuffling its contents.
      */
     function shuffle<T>(arr: T[], r?: () => number): T[];
-    function toggle(arr: any[], value: any, includes?: boolean): number;
+    /**
+     * Toggles the given value in the given array.
+     * @param arr The array to toggle the value in.
+     * @param value The value to toggle in the array.
+     * @param includes Whether the value should be present in the array.
+     * - `true` — include in the array
+     * - `false` — remove from the array
+     * - `undefined` — toggle whether it's in the array.
+     *   (If it currently is, remove it. If it's not, add it.)
+     */
+    function toggle<T>(arr: T[], value: T, includes?: boolean): number;
     /**
      * Given a *sorted* array, a value, and a sorting function, returns the index where the value should be inserted.
      *
@@ -59,5 +69,6 @@ declare module Arrays {
      */
     function getSortedIndex<T>(array: ArrayLike<T>, value: T, sorter: (a: T, b: T) => number): number;
     function pushTo<T>(arr: T[]): (...items: T[]) => number;
+    function arrayOr<T>(value: T | T[]): T[];
 }
 export default Arrays;

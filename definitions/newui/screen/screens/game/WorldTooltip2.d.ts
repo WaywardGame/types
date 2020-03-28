@@ -15,11 +15,14 @@ export default class WorldTooltipHandler {
     private lastMousePosition?;
     private position?;
     private tooltip?;
+    private inspections?;
     constructor(gameScreen: Component);
     setTooltip(): void;
     initializeTooltip(tooltip: ITooltip): ITooltip;
-    update(force?: boolean): void;
+    protected onUpdateZoom(): void;
     private onTooltipMove;
     private refreshTooltip;
-    private initializeTooltipContent;
+    private refreshInspectionsOfType;
+    private refreshTooltipExtraInfoAndPosition;
+    private initializeTooltipSection;
 }

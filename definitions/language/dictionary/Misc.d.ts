@@ -83,9 +83,10 @@ export declare enum MiscTranslation {
     ReformatSingularNoun = 14,
     Renamed = 15,
     Thing = 16,
-    Unknown = 17,
-    UnknownCreature = 18,
-    UnknownDoodad = 19,
-    UnknownItem = 20,
-    UnknownTileEvent = 21
+    Tilled = 17,
+    Unknown = 18,
+    UnknownCreature = 19,
+    UnknownDoodad = 20,
+    UnknownItem = 21,
+    UnknownTileEvent = 22
 }

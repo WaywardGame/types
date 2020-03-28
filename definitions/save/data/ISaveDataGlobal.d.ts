@@ -13,6 +13,7 @@ import { InspectType } from "game/inspection/IInspection";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ISerializedTranslation } from "language/Translation";
 import { IBindings } from "newui/IBindingManager";
+import { UiExperiment } from "newui/UiExperiments";
 import { ISourceFilter } from "utilities/Log";
 export interface IOptions {
     alternateContextMenu: boolean;
@@ -24,6 +25,7 @@ export interface IOptions {
     autoSave: [AutoSave.Off] | [AutoSave.Turns | AutoSave.Time, number];
     bindings: IBindings;
     consoleLogSourceFilter: ISourceFilter;
+    uiExperiments: Array<keyof typeof UiExperiment>;
     currentGame: number;
     defaultCursor: boolean;
     developerMode: boolean;

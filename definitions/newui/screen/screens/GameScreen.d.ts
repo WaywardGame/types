@@ -28,6 +28,7 @@ import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import StatsQuadrant from "newui/screen/screens/game/static/Stats";
 import MovementHandler from "newui/screen/screens/game/util/movement/MovementHandler";
 import WorldTooltipHandler from "newui/screen/screens/game/WorldTooltip";
+import WorldTooltipHandler2 from "newui/screen/screens/game/WorldTooltip2";
 import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2 } from "utilities/math/IVector";
@@ -41,7 +42,7 @@ interface IGameScreenEvents extends Events<Screen> {
 export declare let gameScreen: GameScreen | undefined;
 export default class GameScreen extends Screen implements IHookHost {
     event: IEventEmitter<this, IGameScreenEvents>;
-    dialogs: Map<DialogId, Dialog>;
+    readonly dialogs: Map<DialogId, Dialog>;
     visibleDialogs: IDialogStates;
     quadrantComponentQuadrants: OptionalDescriptions<QuadrantComponentId, Quadrant>;
     menuBar: MenuBar;
@@ -49,7 +50,8 @@ export default class GameScreen extends Screen implements IHookHost {
     quickslots: Quickslots;
     messages: Messages;
     movementHandler: MovementHandler;
-    worldTooltipHandler: WorldTooltipHandler;
+    readonly worldTooltipHandler: WorldTooltipHandler;
+    readonly worldTooltipHandler2: WorldTooltipHandler2;
     private quadrantContainer;
     private readonly quadrantMap;
     private readonly quadrantComponents;

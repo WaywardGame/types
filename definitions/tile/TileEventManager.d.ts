@@ -27,6 +27,18 @@ export interface ITileManagerEvents {
      * @returns False if the creature cannot spawn, or undefined to use the default logic
      */
     canCreate(type: TileEventType, x: number, y: number, z: number): boolean | undefined;
+    /**
+     * Called when a tile event is created.
+     */
+    create(event: ITileEvent): any;
+    /**
+     * Called when a tile event is removed.
+     */
+    remove(event: ITileEvent): any;
+    /**
+     * Called when a tile event is moved.
+     */
+    move(event: ITileEvent): any;
 }
 export default class TileEventManager extends EventEmitter.Host<ITileManagerEvents> {
     create(type: TileEventType, x: number, y: number, z: number): ITileEvent | undefined;

@@ -35,6 +35,7 @@ export default class Text extends Component {
      * Returns whether the element has text. (Empty string included.)
      */
     hasText(): boolean;
+    isEmpty(): boolean;
     refresh(): this;
 }
 export declare class Paragraph extends Text {

@@ -59,6 +59,8 @@ export declare class ClassManipulator<T> extends Manipulator<T, ClassUntil<T>> {
     hasEvery(...classes: string[]): boolean;
     hasNone(...classes: string[]): boolean;
     hasAny(...classes: string[]): boolean;
+    values(): IterableIterator<string>;
+    stream(): import("@wayward/goodstream/Stream").default<string>;
 }
 export interface IElementWrapper {
     element: HTMLElement;
