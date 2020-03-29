@@ -16,6 +16,7 @@ export default class WorldTooltipHandler {
     private position?;
     private tooltip?;
     private inspections?;
+    private showExtraInfo;
     constructor(gameScreen: Component);
     setTooltip(): void;
     initializeTooltip(tooltip: ITooltip): ITooltip;

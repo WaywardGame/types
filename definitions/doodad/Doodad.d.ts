@@ -36,6 +36,9 @@ export interface IDoodadEvents {
 }
 export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements Doodad, IUnserializedCallback, IInspectable, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, IInspectable {
     static is(value: any): value is Doodad;
+    /**
+     * @deprecated
+     */
     static getGrowingStageTranslation(growingStage?: GrowingStage, description?: IDoodadDescription): Translation | undefined;
     protected static registrarId: number;
     get constructorFunction(): typeof Doodad;
@@ -84,6 +87,9 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     getName(article?: boolean, count?: number): Translation;
     description(): IDoodadDescription | undefined;
+    /**
+     * @deprecated
+     */
     inspect({ context, inspectFire }: Inspection, section: InspectionSection): void;
     changeType(doodadType: DoodadType): void;
     isValid(): boolean;
@@ -133,11 +139,29 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     setWellStatus(): void;
     onUnserialized(): void;
+    /**
+     * @deprecated
+     */
     protected getNameTranslation(article?: boolean, count?: number): Translation;
+    /**
+     * @deprecated
+     */
     protected getDescriptionTranslation(): Translation;
+    /**
+     * @deprecated
+     */
     private inspectGrowth;
+    /**
+     * @deprecated
+     */
     private inspectFertility;
+    /**
+     * @deprecated
+     */
     private inspectDurability;
+    /**
+     * @deprecated
+     */
     private inspectPreservation;
     private processSpecials;
     /**

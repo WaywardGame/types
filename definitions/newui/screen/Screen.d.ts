@@ -20,6 +20,7 @@ export default abstract class Screen extends Component implements IHookHost {
     protected lastTooltipSource?: Component;
     protected log: Log;
     private contextMenu?;
+    private mouse;
     get background(): Background;
     set background(background: Background);
     constructor(type: ScreenId);
@@ -41,6 +42,8 @@ export default abstract class Screen extends Component implements IHookHost {
     hideContextMenu(contextMenu?: IContextMenu): boolean;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     protected onScreenShow(): void;
+    private onMouseDown;
+    private onMouseUp;
     private onClick;
     private onDocumentClick;
 }

@@ -9,12 +9,30 @@
  * https://waywardgame.github.io/
  */
 import Doodad from "doodad/Doodad";
-import { Context } from "game/inspection2/InfoProvider";
+import { Context, InfoProvider } from "game/inspection2/InfoProvider";
 import Inspection from "game/inspection2/Inspection";
+import { TranslationGenerator } from "newui/component/IComponent";
 import { IVector3 } from "utilities/math/IVector";
 export default class DoodadInspection extends Inspection<Doodad> {
     static getFromTile(position: IVector3): never[] | DoodadInspection;
     constructor(doodad: Doodad);
-    get(context: Context): never[];
     getId(): string;
+    getBorder(): string | undefined;
+    get(context: Context): ArrayOr<InfoProvider | TranslationGenerator>;
+    onRemove(_: any, doodad: Doodad): void;
+    private getQuality;
+    private getDescription;
+    private getWaterInStill;
+    private getGrowthStage;
+    private getWeightCapacity;
+    private getContainedItems;
+    private getTier;
+    private getFertility;
+    private getFertilityMessage;
+    private getHarvestability;
+    private getHarvestabilityMessage;
+    private getDurability;
+    private getDurabilityMessage;
+    private getPreservation;
+    private getPreservationMessage;
 }

@@ -22,6 +22,14 @@ export interface IDoodadManagerEvents {
      * @returns False if the dooodad cannot spawn, or undefined to use the default logic
      */
     canSpawn(type: DoodadType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
+    /**
+     * Called when a doodad is created.
+     */
+    create(doodad: Doodad): any;
+    /**
+     * Called when a doodad is removed.
+     */
+    remove(doodad: Doodad): any;
 }
 export default class DoodadManager extends EventEmitter.Host<IDoodadManagerEvents> {
     private cachedBestDoodadForTier;

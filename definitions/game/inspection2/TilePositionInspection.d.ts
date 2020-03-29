@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import Doodad from "doodad/Doodad";
 import { ICorpse } from "entity/creature/corpse/ICorpse";
 import EventEmitter from "event/EventEmitter";
 import { InspectType } from "game/inspection2/IInspection";
@@ -35,6 +36,7 @@ export default class TilePositionInspection extends EventEmitter.Host<ITilePosit
     onItemCreate(_: any, item: Item): void;
     onItemMove(_: any, item: Item, oldContainer: IContainer | undefined, newContainer: IContainer): void;
     onCorpseCreate(_: any, corpse: ICorpse): void;
+    onDoodadCreate(_: any, doodad: Doodad): void;
     private updateInspections;
     private getInspections;
 }

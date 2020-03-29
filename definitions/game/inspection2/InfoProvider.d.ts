@@ -13,6 +13,7 @@ import { TextContext } from "language/Translation";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshable } from "newui/component/Refreshable";
+import Text from "newui/component/Text";
 export declare enum InfoClass {
     Title = "title",
     Description = "description"
@@ -61,11 +62,13 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
      */
     remove(): this;
     initComponent(component?: Component): Component;
+    protected initChildTextComponent(text: TranslationGenerator): Text;
 }
 declare class SimpleInfoProvider extends InfoProvider {
     private readonly classes;
     private readonly contents;
     private componentClass;
+    private displayLevel;
     constructor(...translations: Array<TranslationGenerator | InfoProvider>);
     get(): (import("../../language/Translation").ISerializedTranslation | import("../../language/Translation").default | import("../../language/dictionary/UiTranslation").default | (() => import("../../language/Translation").ISerializedTranslation | import("../../language/Translation").default | import("../../language/dictionary/UiTranslation").default | Iterable<import("../../utilities/string/Interpolator").IStringSection> | undefined) | InfoProvider)[];
     add(...translations: Array<TranslationGenerator | InfoProvider>): this;
@@ -73,5 +76,7 @@ declare class SimpleInfoProvider extends InfoProvider {
     addClasses(...classes: string[]): this;
     initComponent(): Component;
     setComponent(componentClass: Class<Component>): this;
+    setDisplayLevel(level: InfoDisplayLevel): this;
+    getDisplayLevel(): InfoDisplayLevel;
 }
 export {};
