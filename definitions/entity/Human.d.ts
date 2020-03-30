@@ -71,19 +71,23 @@ export default abstract class Human extends Entity {
     getProtectedItemsOptions(): IProtectedItemOptions;
     getReputation(): number;
     /**
+     * @returns The value of the given skill, the sum of the base value and any bonuses from legendary equipment
+     */
+    getSkill(skill: SkillType): number;
+    /**
      * @returns the "base value" of the skill (ignoring any bonuses applied by legendary equipment)
      */
     getSkillCore(skill: SkillType): number;
+    /**
+     * @returns the skill bonus applied by legendary equipment
+     */
+    getSkillBonus(skill: SkillType): number;
     /**
      * Sets the "base value" of the skill (ignoring any bonuses applied by legendary equipment)
      * @param skill The skill to set the base value of.
      * @param value The value (between 0 and 100) to set the skill to.
      */
     setSkillCore(skill: SkillType, value: number): void;
-    /**
-     * @returns The value of the given skill, the sum of the base value and any bonuses from legendary equipment
-     */
-    getSkill(skill: SkillType): number;
     /**
      * @returns The total skill (combination of all other skills). Ignores skill bonuses.
      */

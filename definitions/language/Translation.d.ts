@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { MessageType } from "entity/player/MessageManager";
+import { Quality } from "game/IObject";
 import { Dictionary } from "language/Dictionaries";
 import Message from "language/dictionary/Message";
 import UiTranslation from "language/dictionary/UiTranslation";
@@ -45,6 +46,9 @@ declare class Translation {
     static colorize(color: string | MessageType): Translation;
     static colorize(color: string | MessageType, text: string | IStringSection): IStringSection;
     static colorize(color: string | MessageType, text: IStringSection[]): IStringSection[];
+    static colorizeQuality(quality: Quality): Translation;
+    static colorizeQuality(quality: Quality, text: string | IStringSection): IStringSection;
+    static colorizeQuality(quality: Quality, text: IStringSection[]): IStringSection[];
     private static colorizeInternal;
     static formatList(items: Iterable<string | IStringSection | IStringSection[] | Translation | ISerializedTranslation>, ender?: ListEnder | false): Translation;
     static getString(...entries: ArrayOfIterablesOr<string | IStringSection | Translation>): string;

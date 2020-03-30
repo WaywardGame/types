@@ -68,9 +68,7 @@ export declare enum StatusType {
     Poisoned = 1,
     Burned = 2
 }
-export declare type IStatus = Writable<{
-    [key in keyof typeof StatusType]: boolean;
-}, keyof typeof StatusType>;
+export declare type IStatus = Record<keyof typeof StatusType, boolean>;
 export interface ICausesStatusEffect {
     causesStatus?: StatusType[];
 }

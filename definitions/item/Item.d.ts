@@ -47,7 +47,6 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     weight: number;
     weightCapacity: number;
     weightFraction: number;
-    get fromDescription(): import("../utilities/FromDescription").ISafeFn<IItemDescription, undefined>;
     private _description;
     constructor(itemType?: ItemType | undefined, quality?: Quality, human?: Human);
     toString(): string;

@@ -23,6 +23,7 @@ export default class SkillsDialog extends Dialog {
     private shouldShowSkill;
     private getFilterString;
     private getSkillReadout;
+    private getLegendaries;
     private getTooltip;
     private getSkillAttributeMessage;
 }

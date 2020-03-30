@@ -10,11 +10,12 @@
  */
 import { ILootItem } from "game/ILoot";
 import { Quality } from "game/IObject";
-import { IContainer } from "item/IItem";
+import { ItemType, IContainer } from "item/IItem";
 import Item from "item/Item";
 import { ITileContainer } from "tile/ITerrain";
 import { ITileEvent, ITileEventDescription } from "tile/ITileEvent";
 export declare function dissassemblyBurn(item: Item, container: ITileContainer, disassembly: boolean): void;
 export declare function harvestGatherBurn(step: number, resources: ILootItem[] | undefined, container: IContainer, quality: Quality | undefined, tileEvent: ITileEvent): void;
+export declare function burnsLike(burnsLikeItem: ItemType, tileEvent: ITileEvent, tileContainer: IContainer, quality: Quality): void;
 declare const fire: ITileEventDescription;
 export default fire;

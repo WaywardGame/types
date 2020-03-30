@@ -16,7 +16,7 @@ import Creature from "entity/creature/Creature";
 import { SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { Quality } from "game/IObject";
-import { IContainer } from "item/IItem";
+import { ItemType, IContainer } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
 import { ITileEvent } from "tile/ITileEvent";
 import { IRGB } from "utilities/Color";
@@ -52,6 +52,7 @@ export interface ITerrainDescription extends IModdable {
     wet?: boolean;
     tileOnConsume?: TerrainType;
     isMountainGround?: boolean;
+    burnItem?: ItemType;
 }
 export interface ITile extends Partial<ITileContainer> {
     corpses?: ICorpse[];

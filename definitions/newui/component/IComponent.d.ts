@@ -286,7 +286,7 @@ export interface IDisableable {
     setDisabled(disabled: boolean): this;
 }
 export declare type TranslationGenerator = Translation | UiTranslation | ISerializedTranslation | (() => Iterable<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined);
-export declare type HighlightSelector = [HighlightType, string | number];
+export declare type HighlightSelector = [HighlightType, GetterOfOr<string | number>];
 export interface IHighlight {
     selectors: HighlightSelector[];
     iterations?: number;
