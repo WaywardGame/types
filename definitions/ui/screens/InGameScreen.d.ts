@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { EquipType, SkillType } from "entity/IHuman";
-import { ItemType, IContainer, IDismantleComponent } from "item/IItem";
+import { IContainer, IDismantleComponent, ItemType } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import Message from "language/dictionary/Message";

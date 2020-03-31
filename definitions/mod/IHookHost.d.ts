@@ -24,7 +24,7 @@ import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
 import { IMapRequest, TileUpdateType } from "game/IGame";
 import { IInspectionSection } from "game/inspection/IInspection";
-import { BookType, ItemType, IContainer } from "item/IItem";
+import { BookType, IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import { Hook } from "mod/IHookManager";

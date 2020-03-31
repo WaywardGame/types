@@ -16,7 +16,7 @@ import Creature from "entity/creature/Creature";
 import { SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { Quality } from "game/IObject";
-import { ItemType, IContainer } from "item/IItem";
+import { IContainer, ItemType } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
 import { ITileEvent } from "tile/ITileEvent";
 import { IRGB } from "utilities/Color";

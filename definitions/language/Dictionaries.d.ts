@@ -19,6 +19,7 @@ import { NPCType } from "entity/npc/NPCS";
 import { Source } from "entity/player/IMessageManager";
 import { QuestType } from "entity/player/quest/quest/IQuest";
 import { QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
+import { FireStage } from "game/IGame";
 import { InspectType } from "game/inspection/IInspection";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
@@ -120,7 +121,8 @@ export declare enum Dictionary {
     Ui = 63,
     UiQuadrant = 64,
     UnableToJoinReason = 65,
-    UnlockedRecipesStrategy = 66
+    UnlockedRecipesStrategy = 66,
+    FireStage = 67
 }
 export declare type Enum = {
     [key: string]: number;
@@ -196,6 +198,7 @@ declare const dictionaries: {
     64: typeof Quadrant;
     65: typeof UnableToJoinReason;
     66: typeof UnlockedRecipesStrategy;
+    67: typeof FireStage;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

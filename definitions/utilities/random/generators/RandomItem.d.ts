@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { Quality } from "game/IObject";
-import { ItemType, ItemTypeGroup, IContainer } from "item/IItem";
+import { IContainer, ItemType, ItemTypeGroup } from "item/IItem";
 import { RandomInstance } from "utilities/Random";
 import RandomValueGenerator from "utilities/random/RandomValueGenerator";
 export default class RandomItem extends RandomValueGenerator<Array<ItemType | ItemTypeGroup>> {

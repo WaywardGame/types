@@ -10,7 +10,7 @@
  */
 import Entity from "entity/Entity";
 import { ItemType } from "item/IItem";
-import INotifier, { StatType } from "renderer/INotifier";
+import INotifier, { StatNotificationType } from "renderer/INotifier";
 import Vec2 from "utilities/math/Vector2";
 export default class Notifier implements INotifier {
     private readonly capacity;
@@ -25,7 +25,7 @@ export default class Notifier implements INotifier {
     setTexture(texture: WebGLTexture, inverseTextureSize: Vec2): void;
     clear(): void;
     addItem(entity: Entity, type: ItemType): void;
-    addStat(entity: Entity, type: StatType, value: number): void;
+    addStat(entity: Entity, type: StatNotificationType, value: number): void;
     update(timeStamp: number): void;
     render(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): void;
     private addNotification;

@@ -11,7 +11,7 @@
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
 import IExploreMap from "renderer/IExploreMap";
 import { TerrainData } from "renderer/IWorld";
-import { onDoodadUpdateDelegate, onTileUpdateDelegate, IWorldLayer, TerrainMask } from "renderer/IWorldLayer";
+import { IWorldLayer, onDoodadUpdateDelegate, onTileUpdateDelegate, TerrainMask } from "renderer/IWorldLayer";
 import { ITile, TerrainType } from "tile/ITerrain";
 export default class WorldLayer implements IWorldLayer {
     readonly width: number;

@@ -15,15 +15,16 @@ import ActionExecutor from "entity/action/ActionExecutor";
 import actionDescriptions from "entity/action/Actions";
 import { ICorpse } from "entity/creature/corpse/ICorpse";
 import Creature from "entity/creature/Creature";
+import Entity from "entity/Entity";
 import Human from "entity/Human";
-import { AttackType, EntityPlayerCreatureNpc, EntityType } from "entity/IEntity";
+import { AttackType, EntityType } from "entity/IEntity";
 import { EquipType, RestType, SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { TurnType } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
-import { ItemType, IContainer } from "item/IItem";
+import { IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import { RecipeType } from "item/recipe/RecipeRegistry";
 import { ITileEvent } from "tile/ITileEvent";
@@ -131,7 +132,7 @@ export declare enum ActionUsability {
     Ghost = 3,
     Delayed = 4
 }
-export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc, R = void> {
+export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void> {
     type?: number;
     argumentTypes: A;
     usability: {
@@ -143,7 +144,7 @@ export interface IActionDescription<A extends Array<ActionArgument | ActionArgum
     confirmer?(actionApi: IActionConfirmerApi<E>, ...args: ActionArgumentTupleTypes<A>): Promise<boolean>;
     clone(): IActionDescription<A, E, R>;
 }
-export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc> {
+export interface IActionApi<E extends Entity = Entity> {
     readonly executor: E;
     readonly type: ActionType;
     readonly actionStack: ReadonlyArray<ActionType>;
@@ -183,7 +184,7 @@ export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCrea
      */
     removeItems(...items: Array<Item | undefined>): this;
 }
-export interface IActionHandlerApi<E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc> extends IActionApi<E> {
+export interface IActionHandlerApi<E extends Entity = Entity> extends IActionApi<E> {
     /**
      * Sets that the items added to this action by `addItems` were "used" (so they will be damaged afterward).
      */
@@ -193,7 +194,7 @@ export interface IActionHandlerApi<E extends EntityPlayerCreatureNpc = EntityPla
      */
     setItemsUsed(used?: boolean): this;
 }
-export interface IActionConfirmerApi<E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc> extends IActionApi<E> {
+export interface IActionConfirmerApi<E extends Entity = Entity> extends IActionApi<E> {
     /**
      * If damaging any of the "used items" for this action will result in the item breaking, and this method is
      * called from the `confirmer` of the action, a confirmation dialog will be shown asking if you want to
@@ -273,7 +274,7 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.Direction]: Direction;
     [ActionArgument.Doodad]: Doodad;
     [ActionArgument.DoodadType]: DoodadType;
-    [ActionArgument.Entity]: EntityPlayerCreatureNpc;
+    [ActionArgument.Entity]: Entity;
     [ActionArgument.EquipType]: EquipType;
     [ActionArgument.Human]: Human;
     [ActionArgument.Item]: Item;

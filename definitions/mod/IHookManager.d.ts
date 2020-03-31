@@ -12,9 +12,6 @@ import { IHookHost } from "mod/IHookHost";
 export declare enum Hook {
     OnBindLoop = "onBindLoop",
     OnBuild = "onBuild",
-    OnContainerItemAdd = "onContainerItemAdd",
-    OnContainerItemRemove = "onContainerItemRemove",
-    OnContainerItemUpdate = "onContainerItemUpdate",
     OnCraft = "onCraft",
     OnCreateWorld = "onCreateWorld",
     OnCreatureDamage = "onCreatureDamage",
@@ -32,9 +29,6 @@ export declare enum Hook {
     OnGameTickStart = "onGameTickStart",
     OnHumanSkillChange = "onHumanSkillChange",
     OnInspectionSection = "onInspectionSection",
-    OnInventoryItemAdd = "onInventoryItemAdd",
-    OnInventoryItemRemove = "onInventoryItemRemove",
-    OnInventoryItemUpdate = "onInventoryItemUpdate",
     OnItemDamage = "onItemDamage",
     OnItemEquip = "onItemEquip",
     OnItemQuickslot = "onItemQuickslot",
@@ -72,20 +66,12 @@ export declare enum Hook {
     PostRender = "postRender",
     PostRenderPostProcess = "postRenderPostProcess",
     PostRenderWorld = "postRenderWorld",
-    /**
-     * @deprecated Does not work for all cases. Use the event `"postSaveGame"` instead. IE `event.subscribe("postSaveGame")`
-     */
-    PostSaveGame = "postSaveGame",
     PreExecuteAction = "preExecuteAction",
     PreExecuteCommand = "preExecuteCommand",
     PreLoadWorldDifferences = "preLoadWorldDifferences",
     PreRender = "preRender",
     PreRenderPostProcess = "preRenderPostProcess",
     PreRenderWorld = "preRenderWorld",
-    /**
-     * @deprecated Does not work for all cases. Use the event `"preSaveGame"` instead. IE `event.subscribe("preSaveGame")`
-     */
-    PreSaveGame = "preSaveGame",
     ProcessInput = "processInput",
     ShouldCraft = "shouldCraft",
     ShouldDisplayMessage = "shouldDisplayMessage",

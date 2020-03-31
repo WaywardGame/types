@@ -28,7 +28,7 @@ import { ISkillDescription } from "entity/player/Skills";
 import { IStatusEffectDescription } from "entity/StatusEffects";
 import { InspectType } from "game/inspection/IInspection";
 import { IInspectionHandler } from "game/inspection/Inspections";
-import { ItemType, ItemTypeGroup, IItemDescription, IItemGroupDescription } from "item/IItem";
+import { IItemDescription, IItemGroupDescription, ItemType, ItemTypeGroup } from "item/IItem";
 import { Dictionary } from "language/Dictionaries";
 import Interrupt from "language/dictionary/Interrupt";
 import InterruptChoice from "language/dictionary/InterruptChoice";

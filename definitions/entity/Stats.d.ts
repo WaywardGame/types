@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IStatChangeInfo, StatChangeReason } from "entity/IEntity";
-import { IStat, IStats, IStatBase, IStatEvents, Stat } from "entity/IStats";
+import { IStat, IStatBase, IStatEvents, IStats, Stat } from "entity/IStats";
 import StatFactory, { StatChangeTimerFactory } from "entity/StatFactory";
 import EventEmitter from "event/EventEmitter";
 export interface IStatHost extends EventEmitter.Host<IStatEvents> {
@@ -104,6 +104,7 @@ export default class Stats<T extends IStatHost> {
      * Sets the given `Stat`'s `max` to the given amount. Triggers `statMaxChange`
      * @param stat The `Stat` to set.
      * @param max The amount to set the value to.
+     * @param newValue The new value for the stat, optional. Calls `Stat.set` internally.
      */
     setMax(stat: Stat | IStat, max: number, newValue?: number): T;
     /**

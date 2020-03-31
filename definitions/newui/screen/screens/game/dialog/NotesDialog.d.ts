@@ -9,8 +9,7 @@
  * https://waywardgame.github.io/
  */
 import Player from "entity/player/Player";
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 interface INotesDialogEvents extends Events<Dialog> {

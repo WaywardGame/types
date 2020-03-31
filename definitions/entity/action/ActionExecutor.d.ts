@@ -11,7 +11,7 @@
 import { SfxType } from "audio/IAudio";
 import actionDescriptions from "entity/action/Actions";
 import { ActionArgument, ActionArgumentTupleTypes, ActionArgumentTypeMap, ActionType, IActionApi, IActionDescription, IActionHandlerApi, IActionParticle, IActionSoundEffect } from "entity/action/IAction";
-import { EntityPlayerCreatureNpc } from "entity/IEntity";
+import Entity from "entity/Entity";
 import { SkillType } from "entity/IHuman";
 import { TurnType } from "entity/player/IPlayer";
 import EventEmitter from "event/EventEmitter";
@@ -32,7 +32,7 @@ interface ActionEvents {
      */
     postExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any>, args: any[]): any;
 }
-export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends EntityPlayerCreatureNpc, R> extends EventEmitter.Host<ActionEvents> implements IActionApi<E> {
+export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R> extends EventEmitter.Host<ActionEvents> implements IActionApi<E> {
     /**
      * Gets an action by its description. If you're using the Action class for constructing the descriptions, just pass the action instance.
      *
@@ -45,7 +45,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
      * Note: Prefer `IActionApi.get` if you're calling this from within another action.
      */
     static get<T extends ActionType>(action: T): (typeof actionDescriptions)[T] extends IActionDescription<infer A, infer E, infer R> ? ActionExecutor<A, E, R> : never;
-    static executeMultiplayer(packet: ActionPacket, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, EntityPlayerCreatureNpc, any>): any;
+    static executeMultiplayer(packet: ActionPacket, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any>): any;
     get executor(): E;
     get actionStack(): ActionType[];
     get lastAction(): ActionType;
@@ -100,5 +100,5 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private canExecute;
     private isUsableWhen;
 }
-export declare function getArgumentType(executor: EntityPlayerCreatureNpc, expected: ActionArgument | ActionArgument[], actual: unknown): ActionArgument | undefined;
+export declare function getArgumentType(executor: Entity, expected: ActionArgument | ActionArgument[], actual: unknown): ActionArgument | undefined;
 export {};

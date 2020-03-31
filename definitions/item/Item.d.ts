@@ -11,13 +11,14 @@
 import Doodad from "doodad/Doodad";
 import Creature from "entity/creature/Creature";
 import { CreatureType } from "entity/creature/ICreature";
+import Entity from "entity/Entity";
 import Human from "entity/Human";
-import { EntityPlayerCreatureNpc, EntityType } from "entity/IEntity";
+import { EntityType } from "entity/IEntity";
 import { EquipType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
-import { BookType, ItemType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, LegendaryType, TatteredMap } from "item/IItem";
+import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, ItemType, LegendaryType, TatteredMap } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { IVector3 } from "utilities/math/IVector";
@@ -74,7 +75,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     getDecayMax(): number;
     getTotalWeight(): number;
     getDisassemblyWeight(): number;
-    isNearby(executor: EntityPlayerCreatureNpc, allowNearby?: boolean): boolean;
+    isNearby(executor: Entity, allowNearby?: boolean): boolean;
     verifyAndFixItem(): void;
     damage(source: string, modifier?: number): void;
     /**

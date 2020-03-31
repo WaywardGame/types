@@ -48,15 +48,7 @@ export default class Input extends Component implements IRefreshable, IInput {
     setClearToEmpty(): this;
     setClearToLastInput(): this;
     setPlaceholder(generator: TranslationGenerator): this;
-    /**
-     * @deprecated Use `setShouldBlurOnEnterAndEmpty`
-     */
-    setShouldBlurWhenEnterPressedAndEmpty(shouldBlurOnEnterAndEmpty?: boolean): this;
     setBlurOnEnterAndEmpty(shouldBlurOnEnterAndEmpty?: boolean): this;
-    /**
-     * @deprecated Use `setShouldBlurOnEnter`
-     */
-    setBlurWhenEnterPressed(shouldBlurOnEnter?: boolean): this;
     setBlurOnEnter(shouldBlurOnEnter?: boolean): this;
     setNotClearOnEscape(shouldNotClearOnEscape?: boolean): this;
     setSelectOnFocus(selectOnFocus?: boolean): this;

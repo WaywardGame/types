@@ -15,16 +15,13 @@ import { ICausesDamage } from "entity/IEntity";
 import { EquipType, ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, IRestData, RestCancelReason, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
-import MessageManager from "entity/player/MessageManager";
-import NoteManager from "entity/player/note/NoteManager";
 import PlayerDefense from "entity/player/PlayerDefense";
 import { ISkillSet } from "entity/player/Skills";
 import { IEventEmitter } from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
-import { Milestone } from "game/milestones/IMilestone";
 import { IGameOptionsPlayer } from "game/options/IGameOptions";
-import { EquipEffect, EquipEffectByType, ItemType, ItemTypeGroup, IContainer } from "item/IItem";
+import { EquipEffect, EquipEffectByType, IContainer, ItemType, ItemTypeGroup } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
@@ -49,8 +46,6 @@ export default abstract class Human extends Entity {
     handToUse: EquipType | undefined;
     identifier: string;
     inventory: IContainer;
-    messages: MessageManager;
-    notes: NoteManager;
     options: IOptions;
     raft: number | undefined;
     restData: IRestData | undefined;
@@ -112,7 +107,6 @@ export default abstract class Human extends Entity {
     getEquippedItem(slot: EquipType): Item | undefined;
     getEquipSlotForItem(item: Item): EquipType | undefined;
     getMaxHealth(): number;
-    addMilestone(milestone: Milestone, data?: number): void;
     update(): void;
     updateStatsAndAttributes(): void;
     staminaReduction(skill: SkillType): void;
@@ -162,4 +156,6 @@ export default abstract class Human extends Entity {
     protected resetDefense(): void;
     protected updateSwimming(): void;
     protected swimAndSootheCheck(options?: IGameOptionsPlayer): void;
+    get asCreature(): undefined;
+    get asHuman(): Human;
 }

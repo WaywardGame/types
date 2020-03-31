@@ -15,7 +15,7 @@ import EventEmitter from "event/EventEmitter";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
 import { Quality } from "game/IObject";
-import { ContainerReference, ItemType, ItemTypeGroup, IContainable, IContainer, IItemDescription, IItemWeightComponent } from "item/IItem";
+import { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, ItemType, ItemTypeGroup } from "item/IItem";
 import { CraftStatus, RequirementInfo, WeightType } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";

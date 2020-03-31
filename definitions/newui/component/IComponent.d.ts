@@ -294,7 +294,8 @@ export interface IHighlight {
 export declare enum HighlightType {
     Stat = 0,
     MenuBarButton = 1,
-    Selector = 2
+    Selector = 2,
+    Skill = 3
 }
 export interface IBox {
     bottom: number;

@@ -9,13 +9,13 @@
  * https://waywardgame.github.io/
  */
 import { IMoveTypeZ } from "entity/creature/ICreatureManager";
-import { EntityPlayerCreatureNpc } from "entity/IEntity";
+import Entity from "entity/Entity";
 import { IEntityManager } from "entity/IEntityManager";
 import EventEmitter from "event/EventEmitter";
 import Bound3 from "utilities/math/Bound3";
 export interface IEntityManagerEvents {
 }
-export default abstract class EntityManager<T extends EntityPlayerCreatureNpc> extends EventEmitter.Host<IEntityManagerEvents> implements IEntityManager<T> {
+export default abstract class EntityManager<T extends Entity> extends EventEmitter.Host<IEntityManagerEvents> implements IEntityManager<T> {
     private moveTypesInFov;
     remove(entity: T): void;
     updateFov(bounds: Bound3[]): number;

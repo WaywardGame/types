@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import Entity from "entity/Entity";
 import { IMessage, IMessageManager, Source } from "entity/player/IMessageManager";
 import Player from "entity/player/Player";
 import Message from "language/dictionary/Message";
@@ -32,6 +31,15 @@ export declare enum MessageType {
     Stat = 5,
     Skill = 6
 }
+export declare class MessageManagerNoOp implements IMessageManager {
+    saveNoProperties: undefined;
+    getMessageHistory(): import("@wayward/goodstream/Stream").default<IMessage>;
+    clear(): this;
+    source(): this;
+    type(): this;
+    ifVisible(): this;
+    send(): boolean;
+}
 export interface IMessageManagerHost {
     canSeePosition(x: number, y: number, z: number): boolean;
     shouldDisplayMessage(message: IMessage, id: number): boolean | undefined;
@@ -40,8 +48,6 @@ export interface IMessageManagerHost {
 }
 export default class MessageManager implements IMessageManager {
     private readonly host;
-    private static readonly noOpMessageManager;
-    static get(entity?: Entity): MessageManager;
     /**
      * Runs a callback with the message manager of every player. For sending messages, equivalent to the following:
      * ```ts
@@ -99,7 +105,7 @@ export default class MessageManager implements IMessageManager {
      * Sends a message, and adds it to the message history.
      * @param message The message to send.
      * @param args Arguments to interpolate the message with.
-     * `
+     *
      * Note: After sending a message, the message source, type, and human (if any) are reset.
      */
     send(message: Message | Translation, ...args: any[]): boolean;

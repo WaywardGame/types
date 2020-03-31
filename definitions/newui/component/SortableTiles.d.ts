@@ -9,8 +9,7 @@
  * https://waywardgame.github.io/
  */
 import Component from "component/Component";
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 interface SortableTilesEvents extends Events<Component> {
     sort(): any;
 }

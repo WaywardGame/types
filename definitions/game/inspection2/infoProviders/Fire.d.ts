@@ -12,12 +12,12 @@ import { InfoProvider } from "game/inspection2/InfoProvider";
 import Translation from "language/Translation";
 export default class FireInfoProvider extends InfoProvider {
     private readonly decayProvider;
-    static getFireMessage(decay?: number): import("../../../language/dictionary/Message").default;
-    private fireMessage;
+    static getFireStageTranslation(decay?: number): Translation | undefined;
+    private fireStage;
     constructor(decayProvider: () => number);
-    get(): never[] | Translation;
+    get(): Translation;
     getClass(): string[];
     onTickEnd(): void;
     initComponent(): import("../../../newui/component/Component").default;
-    private getFireMessage;
+    private getFireStage;
 }

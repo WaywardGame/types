@@ -16,12 +16,14 @@ import { EntityType, IStatChangeInfo, StatusEffectChangeReason, StatusType } fro
 import { EquipType, ICheckUnderOptions, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
 import { IMovementIntent, IPlayerEvents, IPlayerTravelData, TurnType, WeightStatus } from "entity/player/IPlayer";
+import MessageManager from "entity/player/MessageManager";
+import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
 import { StatChangeTimerFactory } from "entity/StatFactory";
 import { IEventEmitter } from "event/EventEmitter";
 import { Milestone } from "game/milestones/IMilestone";
 import { IGameOptionsPlayer } from "game/options/IGameOptions";
-import { ItemType, IContainer, RecipeLevel } from "item/IItem";
+import { IContainer, ItemType, RecipeLevel } from "item/IItem";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -62,6 +64,8 @@ export default class Player extends Human {
     turns: number;
     walkSoundCounter: number;
     milestoneModifiers: Set<Milestone>;
+    messages: MessageManager;
+    notes: NoteManager;
     walkPath: IVector2[] | undefined;
     exploredMap: IExploreMap[] | undefined;
     isMovingClientside: boolean;
@@ -227,4 +231,6 @@ export default class Player extends Human {
     private onWriteNote;
     private shouldDisplayMessage;
     private onDisplayMessage;
+    get asNPC(): undefined;
+    get asPlayer(): Player;
 }

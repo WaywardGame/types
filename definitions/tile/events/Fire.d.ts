@@ -10,7 +10,7 @@
  */
 import { ILootItem } from "game/ILoot";
 import { Quality } from "game/IObject";
-import { ItemType, IContainer } from "item/IItem";
+import { IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import { ITileContainer } from "tile/ITerrain";
 import { ITileEvent, ITileEventDescription } from "tile/ITileEvent";

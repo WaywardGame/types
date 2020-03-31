@@ -96,4 +96,6 @@ export default abstract class NPC extends Human {
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
     protected postMove(): void;
     private checkMove;
+    get asNPC(): NPC;
+    get asPlayer(): undefined;
 }

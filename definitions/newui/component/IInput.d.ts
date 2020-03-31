@@ -28,6 +28,5 @@ export interface IInput extends Component {
     setDefault(generator: () => string): this;
     setClearTo(clearTo?: () => string): this;
     setPlaceholder(generator: TranslationGenerator): this;
-    setShouldBlurWhenEnterPressedAndEmpty(shouldBlurWhenEnterPressedAndEmpty?: boolean): this;
 }
 export {};

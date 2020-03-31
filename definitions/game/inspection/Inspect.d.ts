@@ -10,8 +10,7 @@
  */
 import Entity from "entity/Entity";
 import Human from "entity/Human";
-import { InspectionContext, IInspectionSectionSimple } from "game/inspection/IInspection";
-import Message from "language/dictionary/Message";
+import { IInspectionSectionSimple, InspectionContext } from "game/inspection/IInspection";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 import Vector3 from "utilities/math/Vector3";
@@ -24,8 +23,5 @@ declare class Inspection {
     private constructor();
     inspectEntityHealth(entity: Entity, entityName?: Translation, revealer?: Translation, skillPercent?: number, healthPercent?: number): Translation | undefined;
     inspectFire(decay?: number): Translation | undefined;
-}
-declare module Inspection {
-    function ofFire(decay?: number): Message;
 }
 export default Inspection;

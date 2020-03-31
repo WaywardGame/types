@@ -11,28 +11,22 @@
 import { SfxType } from "audio/IAudio";
 import Creature from "entity/creature/Creature";
 import { IDamageInfo } from "entity/creature/ICreature";
-import { EntityPlayerCreatureNpc, EntityType, IEntityEvents, IProperties, IStatus, IStatChangeInfo, MoveType, Property, StatusEffectChangeReason, StatusType, StatChangeReason } from "entity/IEntity";
-import { IStat, IStats, IStatBase, Stat } from "entity/IStats";
+import Human from "entity/Human";
+import { EntityType, IEntityEvents, IProperties, IStatus, MoveType, Property, StatusEffectChangeReason, StatusType } from "entity/IEntity";
+import { IStats } from "entity/IStats";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
-import StatFactory from "entity/StatFactory";
 import Stats from "entity/Stats";
 import EventEmitter from "event/EventEmitter";
 import { FireType, TileUpdateType } from "game/IGame";
 import { IInspector } from "game/inspection2/InfoProvider";
 import { ItemType, RecipeLevel } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
-import { StatType } from "renderer/INotifier";
+import { StatNotificationType } from "renderer/INotifier";
 import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IInspector {
-    static is(entity: Entity | undefined, entityType: EntityType.NPC): entity is NPC;
-    static is(entity: Entity | undefined, entityType: EntityType.Creature): entity is Creature;
-    static is(entity: Entity | undefined, entityType: EntityType.Player): entity is Player;
-    static isNot(entity: Entity | undefined, entityType: EntityType.NPC): entity is Exclude<EntityPlayerCreatureNpc, NPC>;
-    static isNot(entity: Entity | undefined, entityType: EntityType.Creature): entity is Exclude<EntityPlayerCreatureNpc, Creature>;
-    static isNot(entity: Entity | undefined, entityType: EntityType.Player): entity is Exclude<EntityPlayerCreatureNpc, Player>;
     readonly stat: Stats<this>;
     entityType: EntityType;
     id: number;
@@ -62,127 +56,6 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     abstract getName(): Translation;
     toString(): string;
     getInspectionId(): string;
-    /**
-     * Initializes the given stat from the given `StatFactory` instance.
-     * @param factory The factory to initialize the stat from.
-     *
-     * This method will replace existing stats.
-     * @deprecated Use `Entity.stat.init`
-     */
-    initStat(factory: StatFactory): void;
-    /**
-     * Returns whether the given stat exists on this entity.
-     * @deprecated Use `Entity.stat.has`
-     */
-    hasStat(stat: Stat): boolean;
-    /**
-     * Removes the given stat from this entity.
-     * @deprecated Use `Entity.stat.remove`
-     */
-    removeStat(stat: Stat): void;
-    /**
-     * Returns the stat object of a given `Stat`. The return type is a vague `IStat`, but can be
-     * passed a type which extends `IStatBase` for automatic narrowing.
-     * @param stat The `Stat` to get
-     * @deprecated Use `Entity.stat.get`
-     */
-    getStat<Staty extends IStatBase | undefined = IStat | undefined>(stat: Stat, allowFailure?: boolean): Staty & (Staty extends IStatBase ? {
-        base: Staty;
-    } : undefined);
-    getStatInternal(stat: Stat | IStat): IStatBase;
-    getStatInternal(stat: Stat | IStat, allowFailure: true): IStatBase | undefined;
-    getStatInternal(stat: Stat | IStat, allowFailure: boolean): IStatBase | undefined;
-    /**
-     * Returns the value of the given stat, or `undefined` if the stat does not exist.
-     * @deprecated Use `Entity.stat.getValue`
-     */
-    getStatValue(stat: Stat | IStat): number | undefined;
-    /**
-     * Sets the given `Stat`'s value to the given amount. Triggers `EntityEvent.StatChange`
-     * @param stat The `Stat` to set.
-     * @param amount The amount to set the value to.
-     * @param reason Why this stat is changing.
-     *
-     * This method assumes the stat you're providing exists on this entity. If it doesn't,
-     * it will likely error!
-     * @deprecated Use `Entity.stat.set`
-     */
-    setStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
-    /**
-     * Reduces the given `Stat` by the given amount. Triggers `EntityEvent.StatChange`
-     * @param stat The `Stat` to reduce.
-     * @param amount The amount to reduce by.
-     * @param reason Why this stat is changing.
-     *
-     * An alias for `increaseStat`, negating the given amount.
-     *
-     * This method assumes the stat you're providing exists on this entity. If it doesn't,
-     * it will likely error!
-     * @deprecated Use `Entity.stat.reduce`
-     */
-    reduceStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
-    /**
-     * Increases the given `Stat` by the given amount. Triggers `EntityEvent.StatChange`
-     * @param stat The `Stat` to increase.
-     * @param amount The amount to increase by.
-     * @param reason Why this stat is changing.
-     *
-     * An alias for `setStat(stat, stat.value + amount, reason)`
-     *
-     * This method assumes the stat you're providing exists on this entity. If it doesn't,
-     * it will likely error!
-     * @deprecated Use `Entity.stat.increase`
-     */
-    increaseStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
-    /**
-     * Change the bonus for a stat.
-     * @param stat The `Stat` to set the bonus of.
-     * @param bonus The amount to increase/decrease the stat.
-     * @param reason Why this stat is changing.
-     *
-     * Triggers `EntityEvent.StatBonusChanged`, then `EntityEvent.StatChanged`
-     * @deprecated Use `Entity.stat.setBonus`
-     */
-    setStatBonus(stat: Stat | IStat, bonus: number, info?: StatChangeReason | IStatChangeInfo): void;
-    /**
-     * Returns the `max` of the given stat, or undefined if the stat isn't an `IStatMax`.
-     * @deprecated Use `Entity.stat.getMax`
-     */
-    getStatMax(stat: Stat | IStat): number;
-    /**
-     * Sets the given `Stat`'s `max` to the given amount. Triggers `EntityEvent.StatMaxChange`
-     * @param stat The `Stat` to set.
-     * @param amount The amount to set the value to.
-     *
-     * This method assumes the stat you're providing exists on this entity. If it doesn't,
-     * it will likely error!
-     * @deprecated Use `Entity.stat.setMax`
-     */
-    setStatMax(stat: Stat | IStat, amount: number): void;
-    /**
-     * Sets how frequently the stat should change. Triggers `EntityEvent.StatTimerChange`
-     * @param stat The `Stat` that should change.
-     * @param timer How many turns should pass between changes.
-     * @param amount The amount the stat will change whenever the timer completes. Defaults to increase by `1`.
-     *
-     * If the stat already has a timer going, the difference of the new and old timers
-     * is subtracted from the time remaining.
-     *
-     * This method assumes the stat you're providing exists on this entity. If it doesn't,
-     * it will likely error!
-     * @deprecated Use `Entity.stat.setChangeTimer`
-     */
-    setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
-    /**
-     * @deprecated Use `Entity.stat.setMax`
-     */
-    setStatAndMax(stat: Stat | IStat, max: number, current: number): void;
-    /**
-     * Passes the "turn" for stats, decrements their `changeTimer`s. If a stat's timer reaches `0`,
-     * the stat value is changed by `changeAmount` and the `changeTimer` is reset to `nextChangeTimer`
-     * @deprecated Use `Entity.stat.updateTimers`
-     */
-    updateStats(): void;
     /**
      * Returns whether the entity has the given `StatusType`
      * @param status The status to check
@@ -225,9 +98,14 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     notifyItem(itemType: ItemType): void;
-    notifyStat(type: StatType, value: number): void;
+    notifyStat(type: StatNotificationType, value: number): void;
     hasProperty(property: Property): boolean;
     addProperty(property: Property, value: any): void;
     getProperty<T>(property: Property): T | undefined;
     removeProperty(property: Property): boolean;
+    get asEntity(): Entity;
+    abstract get asCreature(): Creature | undefined;
+    abstract get asHuman(): Human | undefined;
+    abstract get asNPC(): NPC | undefined;
+    abstract get asPlayer(): Player | undefined;
 }

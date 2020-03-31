@@ -17,7 +17,7 @@ import MessageManager from "entity/player/MessageManager";
 import Player from "entity/player/Player";
 import { Events } from "event/EventEmitter";
 import { Milestone } from "game/milestones/IMilestone";
-import { ItemType, IContainer } from "item/IItem";
+import { IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import { IOptions } from "save/data/ISaveDataGlobal";
 import { Direction } from "utilities/math/Direction";

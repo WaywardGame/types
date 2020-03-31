@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import Button from "newui/component/Button";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshableValue } from "newui/component/Refreshable";

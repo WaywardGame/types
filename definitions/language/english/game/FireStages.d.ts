@@ -8,11 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import Entity from "entity/Entity";
-import SharedPacket from "multiplayer/packets/SharedPacket";
-export default abstract class EntityTargetedSharedPacket extends SharedPacket {
-    entity: Entity;
-    preProcess(): void;
-    protected preWriteData(): void;
-    protected preReadData(): void;
-}
+import { FireStage } from "game/IGame";
+declare const fireStages: Descriptions<FireStage, string>;
+export default fireStages;
