@@ -146,6 +146,7 @@ export default abstract class Human extends Entity {
      * Gets if the human is swimming (and not on a raft)
      */
     isSwimming(): boolean;
+    updateSwimming(): void;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
     protected getSkillGainMultiplier(skillType: SkillType): number;
     /**
@@ -154,7 +155,6 @@ export default abstract class Human extends Entity {
     protected statGain(stat: Stat, bypass: boolean): void;
     protected calculateStats(): void;
     protected resetDefense(): void;
-    protected updateSwimming(): void;
     protected swimAndSootheCheck(options?: IGameOptionsPlayer): void;
     get asCreature(): undefined;
     get asHuman(): Human;

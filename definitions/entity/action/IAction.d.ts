@@ -162,6 +162,7 @@ export interface IActionApi<E extends Entity = Entity> {
     addSkillGains(skill: SkillType, amount?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
+    cancelRaft(item: Item): this;
     setReputationChange(amount: number): this;
     setMilestone(milestone: Milestone, data?: number): this;
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
