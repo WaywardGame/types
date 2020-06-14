@@ -20,7 +20,8 @@ export declare enum DialogId {
     Book = 6,
     Map = 7,
     Quests = 8,
-    Crafting = 9
+    Crafting = 9,
+    Inspect = 10
 }
 export declare enum Edge {
     Top = 0,
@@ -29,19 +30,15 @@ export declare enum Edge {
     Left = 3
 }
 export declare type IEdges = [[Edge.Left | Edge.Right, number], [Edge.Top | Edge.Bottom, number]];
-export interface IDialogDescription extends IModdable {
-    minSize: IVector2;
-    size: IVector2;
-    maxSize: IVector2;
+export interface IDialogDescription<SQUARE = boolean> extends IModdable {
+    minSize: SQUARE extends true ? number : IVector2;
+    size: SQUARE extends true ? number : IVector2;
+    maxSize: SQUARE extends true ? number : IVector2;
     edges: IEdges;
     /**
      * Whether to save if the dialog is open. If this is false, the dialog will always be closed when a game loads. Defaults to true.
      */
     saveOpen?: boolean;
-    /**
-     * Whether resizing the dialog will keep it a square. Defaults to false.
-     */
-    square?: boolean;
 }
-declare const dialogDescriptions: Descriptions<DialogId, IDialogDescription>;
+declare const dialogDescriptions: Descriptions<DialogId, IDialogDescription<false> | IDialogDescription<true>>;
 export default dialogDescriptions;

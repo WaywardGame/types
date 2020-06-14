@@ -9,5 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { StatusType } from "entity/IEntity";
-declare const statusEffects: Descriptions<StatusType, [string, string]>;
+declare const statusEffects: Descriptions<StatusType, [string, string, string?, ...string[]]>;
 export default statusEffects;

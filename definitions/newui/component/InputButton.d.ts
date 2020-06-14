@@ -14,6 +14,7 @@ import Input from "newui/component/Input";
 interface IInputButtonEvents extends Events<Button> {
     change(text: string): any;
     done(text: string): any;
+    escape(): any;
 }
 export default class InputButton extends Button {
     event: IEventEmitter<this, IInputButtonEvents>;
@@ -25,6 +26,7 @@ export default class InputButton extends Button {
     getInputText(): string;
     setInputText(text: string): void;
     focus(): void;
+    protected onStopEditMode(): void;
     private onInputChange;
     private onInputDone;
 }

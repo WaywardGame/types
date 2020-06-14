@@ -11,6 +11,7 @@
 import { ISpriteAtlas, ISpriteInfoList } from "renderer/ISpriteAtlas";
 import ISpriteInfo from "renderer/ISpriteInfo";
 export default class SpriteAtlas implements ISpriteAtlas {
+    bullboat: ISpriteInfo;
     corpses: ISpriteInfoList;
     creatures: ISpriteInfoList;
     immune: ISpriteInfo;

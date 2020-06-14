@@ -80,6 +80,7 @@ export default class Ui extends Emitter {
     private onBeforeUnloadElectron;
     private onBeforeUnloadBrowser;
     private logErrorEvent;
+    private logPromiseRejectionEvent;
     private removeStyle;
     private appendStyle;
 }

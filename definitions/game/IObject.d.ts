@@ -9,7 +9,10 @@
  * https://waywardgame.github.io/
  */
 import { SkillType } from "entity/IHuman";
+import { BiomeType } from "game/IBiome";
+import { WorldZ } from "game/WorldZ";
 import { ISerializedTranslation } from "language/Translation";
+import { TerrainType } from "tile/ITerrain";
 export interface IObject<T> {
     type: T;
     id: number;
@@ -20,6 +23,7 @@ export interface IObjectDescription extends IHasImagePath {
     skillUse?: SkillType;
     weightCapacity?: number;
     preservationChance?: number;
+    spawnOnWorldGen?: OptionalDescriptions<BiomeType, OptionalDescriptions<WorldZ, OptionalDescriptions<TerrainType, number>>>;
 }
 export interface IHasImagePath {
     /**

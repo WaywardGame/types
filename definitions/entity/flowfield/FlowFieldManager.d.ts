@@ -21,7 +21,7 @@ export default class FlowFieldManager implements IFlowFieldManager {
     flowFields: {
         [index: string]: IFlowField;
     };
-    private plys;
+    private flowFieldPlayers;
     constructor(size: number);
     delete(): void;
     setDelegate(delegate: DebugRendererDelegate): void;
@@ -32,7 +32,7 @@ export default class FlowFieldManager implements IFlowFieldManager {
     getMoveDirection(x: number, y: number, z: number, moveType: MoveType): Direction;
     getOpposingMoveDirection(x: number, y: number, z: number, moveType: MoveType): Direction;
     updateTile(tileX: number, tileY: number, tileZ: number): void;
-    setPlayers(plys: Player[]): void;
+    setPlayers(flowFieldPlayers: Player[]): void;
     update(): void;
     reset(): void;
     private getDirection;

@@ -10,16 +10,17 @@
  */
 import DoodadInfo from "doodad/DoodadInfo";
 import { DoodadType } from "doodad/IDoodad";
+import { WorldZ } from "game/WorldZ";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
 import IExploreMap from "renderer/IExploreMap";
 import { TerrainData } from "renderer/IWorld";
 import { ITile, TerrainType } from "tile/ITerrain";
-export declare type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean) => void;
+export declare type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean, debug?: boolean) => void;
 export declare type onDoodadUpdateDelegate = (x: number, y: number, doodadType: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, doodadVariationX: number, doodadVariationY: number, hasGraphicVariation: boolean, terrainMasks: TerrainMask, flushImmediate: boolean) => void;
 export interface IWorldLayer {
     width: number;
     height: number;
-    level: number;
+    level: WorldZ;
     lightLevelMap: IColorGrid;
     lightBlockMap: IByteGrid;
     exploredMap: IExploreMap;
@@ -33,10 +34,9 @@ export interface IWorldLayer {
     isWall(terrain: TerrainData): boolean;
     isDoodadOverHidden(terrain: TerrainData): boolean;
     getTileDecoration(x: number, y: number): number;
-    resetExploredMap(): void;
     setTile(x: number, y: number, terrainType: TerrainType | undefined, terrainMasks?: TerrainMask): void;
     updateAll(): void;
-    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean): void;
+    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean, updateNeighbors?: boolean, flushImmediate?: boolean, debug?: boolean): void;
     delete(): void;
 }
 export default IWorldLayer;

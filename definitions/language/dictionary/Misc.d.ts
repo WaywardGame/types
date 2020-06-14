@@ -47,7 +47,8 @@ export declare enum ActionTranslation {
 }
 export declare enum StatusEffectTranslation {
     Past = 0,
-    Name = 1
+    Name = 1,
+    Description = 2
 }
 export declare enum QuestTranslation {
     Title = 0,
@@ -74,19 +75,20 @@ export declare enum MiscTranslation {
     Colorize = 5,
     CorpseOf = 6,
     CountThing = 7,
-    HumanName = 8,
-    ItemLegendary = 9,
-    ItemQualityColor = 10,
-    ListItemSeparator = 11,
-    OwnName = 12,
-    Quality = 13,
-    ReformatSingularNoun = 14,
-    Renamed = 15,
-    Thing = 16,
-    Tilled = 17,
-    Unknown = 18,
-    UnknownCreature = 19,
-    UnknownDoodad = 20,
-    UnknownItem = 21,
-    UnknownTileEvent = 22
+    NPCName = 8,
+    PlayerName = 9,
+    ItemLegendary = 10,
+    ItemQualityColor = 11,
+    ListItemSeparator = 12,
+    OwnName = 13,
+    Quality = 14,
+    ReformatSingularNoun = 15,
+    Renamed = 16,
+    Thing = 17,
+    Tilled = 18,
+    Unknown = 19,
+    UnknownCreature = 20,
+    UnknownDoodad = 21,
+    UnknownItem = 22,
+    UnknownTileEvent = 23
 }

@@ -16,8 +16,7 @@ import { IBound3 } from "utilities/math/Bound3";
 import Vec2 from "utilities/math/Vector2";
 export interface IWorldRenderer {
     positionBuffer: WebGLBuffer;
-    layers: WorldLayerRenderer[];
-    dirtAdaptor: ITileAdaptor;
+    layers: Record<number, WorldLayerRenderer>;
     tillAdaptor: ITileAdaptor;
     waterAdaptor: ITileAdaptor;
     lavaAdaptor: ITileAdaptor;
@@ -67,10 +66,11 @@ export interface IWorldRenderer {
     getFogColor(): [number, number, number];
     renderWorld(x: number, y: number, z: number): void;
     render(): void;
-    screenToTile(screenX: number, screenY: number): Vec2;
+    screenToVector(screenX: number, screenY: number): Vec2;
+    screenToTile(screenX: number, screenY: number): Vec2 | undefined;
     getViewportBounds(): IBound3;
     computeSpritesInViewport(): void;
-    batchCreatures(): void;
+    batchCreatures(timeStamp: number): void;
     initializeSpriteBatch(layer: SpriteBatchLayer, reset?: true): void;
     dispose(): void;
 }
@@ -95,4 +95,13 @@ export declare enum RenderFlag {
     OverTrees = 64,
     TileEvent = 128,
     All = 65535
+}
+export declare enum RenderLayerFlag {
+    None = 0,
+    Terrain = 1,
+    TerrainOver = 2,
+    TerrainDecoration = 4,
+    Doodad = 8,
+    DoodadOver = 16,
+    All = 255
 }

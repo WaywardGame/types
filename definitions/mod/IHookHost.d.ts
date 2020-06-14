@@ -19,16 +19,13 @@ import Human from "entity/Human";
 import { EquipType, SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { IMessage } from "entity/player/IMessageManager";
-import { PlayerState } from "entity/player/IPlayer";
 import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
-import { IMapRequest, TileUpdateType } from "game/IGame";
-import { IInspectionSection } from "game/inspection/IInspection";
+import { IMapRequest } from "game/IGame";
 import { BookType, IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import { Hook } from "mod/IHookManager";
-import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { RenderFlag } from "renderer/IWorldRenderer";
@@ -122,11 +119,6 @@ export interface IHookHost {
      */
     onDoodadSpawn?(doodad: Doodad): void;
     /**
-     * Called when the game is ending
-     * @param state The state of the player (why the game is ending)
-     */
-    onGameEnd?(state: PlayerState): void;
-    /**
      * Called when the game is starting
      * @param isLoadingSave True if a save game was loaded
      * @param playedCount The number of times the player has played the game (globally, not per slot)
@@ -172,11 +164,6 @@ export interface IHookHost {
      * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
      */
     onInventoryItemUpdate?(player: Player | undefined, item: Item, container: IContainer): void;
-    /**
-     * Called when inspecting a tile, for every section that may be shown. (This includes sections with no content)
-     * @param section One of the sections that will be included in the inspection.
-     */
-    onInspectionSection?(section: IInspectionSection): void;
     /**
      * Called when a craft is "requested". This currently happens when clicking an item in the crafting dialog.
      * @param requirementsMet Whether the requirements are currently met. This hook is a `reduce` hook, so this will contain
@@ -231,35 +218,6 @@ export interface IHookHost {
      */
     onCreatureTamed?(creature: Creature, owner: Player): void;
     /**
-     * Called when in-game, on the bind catcher loop (once per frame).
-     * @param bindPressed Whether a bind has been pressed. Use this as a final check before processing a bind, and set it to true when a bind was pressed.
-     * @param api The bind catcher api, allowing you to check whether binds are pressed
-     * @returns Whether a bind was pressed.
-     *
-     * To use this hook, we recommend writing your method similarly to the following:
-     *
-     * ```ts
-     * onBindLoop(bindPressed: Bindable | boolean | undefined, api: BindCatcherApi) {
-     * 	if (api.wasPressed(<the bind you want to check> && !bindPressed)) {
-     * 		// do things with that info
-     * 		bindPressed = <the bind you just checked>;
-     * 	}
-     *
-     * 	return bindPressed;
-     * }
-     * ```
-     *
-     * The reason we call `wasPressed` even if a bind has already been pressed is that the `wasPressed`
-     * method is not greedy, and does not check all possible binds every single frame. This being the
-     * case, any binds that you need to know if they become pressed in a frame need to be checked
-     * *every frame*. By putting the `wasPressed` before the `!bindPressed` check, you check the bind
-     * every frame regardless of whether another bind has been pressed. (And the `wasPressed` call
-     * won't be short-circuited out)
-     *
-     * At the end you return the updated status of whether a bind has been pressed.
-     */
-    onBindLoop?(bindPressed: Bindable, api: BindCatcherApi): Bindable;
-    /**
      * Called when a human digs up treasure.
      * @param human The human that dug up treasure
      * @param treasureTile The tile the human dug up treasure at
@@ -281,21 +239,11 @@ export interface IHookHost {
      */
     onMove?(player: Player, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     /**
-     * Called when the player completes a movement
-     * @param player The player object
-     */
-    onMoveComplete?(player: Player): void;
-    /**
      * Called when the human faces a different direction
      * @param human The human object
      * @param direction The direction the player is now facing
      */
     onMoveDirectionUpdate?(human: Human, direction: Direction): void;
-    /**
-     * Called when no input is received
-     * @param player The player object
-     */
-    onNoInputReceived?(player: Player): void;
     /**
      * Called when an npc is damaged
      * @param npc The npc object
@@ -351,16 +299,6 @@ export interface IHookHost {
      */
     onPlayerLeave?(player: Player): void;
     /**
-     * Called when the player tick ends
-     * @param player The player object
-     */
-    onPlayerTickEnd?(player: Player): void;
-    /**
-     * Called when the player tick starts
-     * @param player The player object
-     */
-    onPlayerTickStart?(player: Player): void;
-    /**
      * Called when the players walk to tile path is set
      * @param player The player object
      * @param path The path
@@ -405,15 +343,6 @@ export interface IHookHost {
      * @returns False to cancel spawning the creature or undefined to use the default logic
      */
     onSpawnCreatureFromGroup?(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
-    /**
-     * Called when a tile is updated (tile type changed, doodad created on it, etc)
-     * @param tile The tile that was updated
-     * @param x The x position of the updated tile
-     * @param y The y position of the updated tile
-     * @param z The z position of the updated tile
-     * @param tileUpdateType The tile update type
-     */
-    onTileUpdate?(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType): void;
     /**
      * Called when a turn is ending
      * @param player The player object
@@ -474,10 +403,6 @@ export interface IHookHost {
      */
     postRenderWorld?(tileScale: number, viewWidth: number, viewHeight: number): void;
     /**
-     * Called after the game is saved
-     */
-    postSaveGame?(): void;
-    /**
      * Called before an action is executed
      * This is called before the action result is used
      * @returns False to cancel the action or undefined to use the default logic
@@ -512,10 +437,6 @@ export interface IHookHost {
      * @param viewHeight The height of the view port
      */
     preRenderWorld?(tileScale: number, viewWidth: number, viewHeight: number): void;
-    /**
-     * Called before the game is saved
-     */
-    preSaveGame?(): void;
     /**
      * Called when input is being processed
      * @param player The player object

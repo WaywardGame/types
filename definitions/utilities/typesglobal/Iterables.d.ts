@@ -11,6 +11,9 @@
 export default undefined;
 declare global {
     type SaferArray<T> = Array<T | undefined>;
+    interface SaferNumberIndexedObject<T> {
+        [index: number]: T | undefined;
+    }
     type ArrayOr<T> = T | T[];
     type IterableOr<T> = T | Iterable<T>;
     type ArrayOfIterablesOr<T> = Array<T | Iterable<T>>;

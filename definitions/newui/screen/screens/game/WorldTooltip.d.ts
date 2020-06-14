@@ -13,13 +13,12 @@ import { ITooltip } from "newui/component/IComponent";
 export default class WorldTooltipHandler {
     private readonly gameScreen;
     private lastMousePosition?;
-    private position?;
     private tooltip?;
+    private showExtraInfo;
+    private inspections?;
     constructor(gameScreen: Component);
-    setTooltip(): void;
     initializeTooltip(tooltip: ITooltip): ITooltip;
-    update(force?: boolean): void;
+    protected onUpdateZoom(): void;
     private onTooltipMove;
-    private refreshTooltip;
-    private initializeTooltipContent;
+    private refreshTooltipExtraInfoAndPosition;
 }

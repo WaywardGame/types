@@ -35,5 +35,7 @@ export declare class RangeInput extends Component implements IRefreshableValue<n
     refresh(): this;
     setRefreshMethod(refresh: () => number): this;
     noClampOnRefresh(): this;
+    setDisabled(disabled?: boolean): this;
+    get disabled(): boolean;
 }
 export {};

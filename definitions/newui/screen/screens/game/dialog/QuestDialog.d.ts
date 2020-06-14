@@ -9,9 +9,8 @@
  * https://waywardgame.github.io/
  */
 import UiTranslation from "language/dictionary/UiTranslation";
-import { IHookHost } from "mod/IHookHost";
 import Dialog from "newui/screen/screens/game/component/Dialog";
-export default class QuestDialog extends Dialog implements IHookHost {
+export default class QuestDialog extends Dialog {
     private readonly questsActiveWrapper;
     private readonly questsActiveHeading;
     private readonly questsCompletedWrapper;

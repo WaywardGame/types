@@ -9,14 +9,12 @@
  * https://waywardgame.github.io/
  */
 import { DoodadType } from "doodad/IDoodad";
-import { ITile, TerrainType, TileTemplateType } from "tile/ITerrain";
+import { MapGenVersions } from "mapgen/IMapGen";
+import { ITile, TileTemplateType } from "tile/ITerrain";
+export declare function pickBasedOnVersion<T>(version: string, versions: MapGenVersions<T>): [string, T];
 export declare function hasFinishedLoading(): boolean;
 export declare function setFinishedLoading(): void;
 export declare function clearFinishedLoading(): void;
-export declare function spawnHouseItem(x: number, y: number, z: number): void;
-export declare function spawnShoreItem(x: number, y: number, z: number): void;
-export declare function spawnDesertItem(x: number, y: number, z: number): void;
-export declare function spawnDoodad(tileType: TerrainType, x: number, y: number, z: number, afterMapGen?: boolean): void;
 export declare function spawnTileEvent(x: number, y: number, z: number): void;
 export interface ITemplateOptions {
     /**

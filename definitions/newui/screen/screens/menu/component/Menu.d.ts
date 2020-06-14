@@ -9,21 +9,17 @@
  * https://waywardgame.github.io/
  */
 import { Events, IEventEmitter } from "event/EventEmitter";
-import { IHookHost } from "mod/IHookHost";
 import { BlockRow } from "newui/component/BlockRow";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { IComponent } from "newui/component/IComponent";
 import Text, { Heading } from "newui/component/Text";
-import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
-import SelectionHandler from "newui/screen/screens/menu/component/SelectionHandler";
-export default class Menu extends Component implements IMenu, IHookHost {
+export default class Menu extends Component implements IMenu {
     event: IEventEmitter<this, Events<IMenu>>;
     menuId: MenuId | string;
     canCancel: boolean | undefined;
     get isSubmenu(): boolean;
-    readonly selection: SelectionHandler;
     readonly buttonBack: BackButton;
     confirmButtons: ConfirmButtonHandler;
     readonly title: Heading;
@@ -43,12 +39,12 @@ export default class Menu extends Component implements IMenu, IHookHost {
     addTabs(...tabs: ArrayOfIterablesOr<Tab>): void;
     getTabs(): import("@wayward/goodstream/Stream").default<Tab<string | number | undefined>>;
     addSubtabs(tab: Tab): this;
-    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * When called in `show` or after `ComponentEvent.Show`, returns whether the menu was "went back to"
      * from a descendant menu.
      */
     wentBackTo(): boolean;
+    protected highlightVisibleTabs(): void;
     protected onShowMenu(): void;
 }
 interface ITabEvents extends Events<Button> {
@@ -61,6 +57,8 @@ export declare class Tab<I extends string | number | undefined = string | number
     private _subtabs;
     get subtabs(): Tab<string | number | undefined>[];
     constructor(id: I);
+    setActive(active?: boolean): this;
+    setInactive(): this;
     setSection(section: MenuSection): this;
     setSubTabs(...tabs: ArrayOfIterablesOr<Tab>): void;
 }

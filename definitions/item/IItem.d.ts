@@ -19,6 +19,7 @@ import Item from "item/Item";
 import Recipe from "item/recipe/Recipe";
 import { IModdable } from "mod/ModRegistry";
 import { IVector3 } from "utilities/math/IVector";
+import { BiomeType } from "game/IBiome";
 export interface IItemWeightComponent {
     weightFraction: number;
     type: ItemType;
@@ -119,6 +120,10 @@ export interface IItemDescription extends IObjectDescription, IModdable {
      * For instance, `ItemType.StoneSpear` has a `ItemTypeGroup.CookingEquipment` tier of 2.
      */
     tier?: OptionalDescriptions<ItemTypeGroup, number>;
+    /**
+     * Array of biome types that the item can spawn in merchant's inventory for trade. Leave empty or unset if item spawns on merchants in any biome type.
+     */
+    spawnOnMerchant?: BiomeType[];
     recipeCache?: ItemType[];
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
@@ -210,31 +215,39 @@ export declare enum ContainerReferenceType {
     NPCInventory = 6
 }
 export interface IBaseContainerReference {
-    type: ContainerReferenceType;
+    crt: ContainerReferenceType;
+    type?: ContainerReferenceType;
 }
 export interface IPlayerInventoryContainerReference extends IBaseContainerReference {
-    type: ContainerReferenceType.PlayerInventory;
+    crt: ContainerReferenceType.PlayerInventory;
+    type?: ContainerReferenceType.PlayerInventory;
     pid: number;
     identifier?: string;
 }
 export interface IInvalidContainerReference extends IBaseContainerReference {
-    type: ContainerReferenceType.Invalid;
+    crt: ContainerReferenceType.Invalid;
+    type?: ContainerReferenceType.Invalid;
 }
 export interface IWorldContainerReference extends IBaseContainerReference {
-    type: ContainerReferenceType.World;
+    crt: ContainerReferenceType.World;
+    type?: ContainerReferenceType.World;
 }
 export interface ITileContainerReference extends IBaseContainerReference, IVector3 {
-    type: ContainerReferenceType.Tile;
+    crt: ContainerReferenceType.Tile;
+    type?: ContainerReferenceType.Tile;
 }
 export interface IDoodadContainerReference extends IBaseContainerReference, IVector3 {
-    type: ContainerReferenceType.Doodad;
+    crt: ContainerReferenceType.Doodad;
+    type?: ContainerReferenceType.Doodad;
 }
 export interface IItemContainerReference extends IBaseContainerReference {
-    type: ContainerReferenceType.Item;
+    crt: ContainerReferenceType.Item;
+    type?: ContainerReferenceType.Item;
     id: number;
 }
 export interface INPCInventoryContainerReference extends IBaseContainerReference {
-    type: ContainerReferenceType.NPCInventory;
+    crt: ContainerReferenceType.NPCInventory;
+    type?: ContainerReferenceType.NPCInventory;
     id: number;
 }
 export declare type ContainerReference = IInvalidContainerReference | IWorldContainerReference | IPlayerInventoryContainerReference | ITileContainerReference | IDoodadContainerReference | IItemContainerReference | INPCInventoryContainerReference;
@@ -279,10 +292,13 @@ export declare enum BookType {
     IslandRiddle = 9,
     Trapped = 10,
     PowderyCatalog = 11,
-    OnWaterAndHydration = 12
+    OnWaterAndHydration = 12,
+    TravelingBySea = 13,
+    TheSolution = 14
 }
 export interface TatteredMap extends IVector3 {
     reinitialize?: boolean;
+    islandId?: string;
 }
 export declare enum ItemType {
     None = 0,
@@ -530,8 +546,8 @@ export declare enum ItemType {
     CookedPemmican = 242,
     Sail = 243,
     Sailboat = 244,
-    Egg = 245,
-    BoiledEgg = 246,
+    ChickenEgg = 245,
+    BoiledChickenEgg = 246,
     SheafOfHay = 247,
     Niter = 248,
     Saltpeter = 249,
@@ -781,7 +797,19 @@ export declare enum ItemType {
     AshCement = 493,
     AshCementBrick = 494,
     AshCementFlooring = 495,
-    AshCementWall = 496
+    AshCementWall = 496,
+    IceShard = 497,
+    PenguinEgg = 498,
+    BoiledPenguinEgg = 499,
+    RawPenguinMeat = 500,
+    CookedPenguinMeat = 501,
+    Crowberries = 502,
+    CookedCrowberries = 503,
+    CrowberrySeeds = 504,
+    Winterberries = 505,
+    WinterberrySeeds = 506,
+    ArcticPoppies = 507,
+    ArcticPoppySeeds = 508
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -792,78 +820,79 @@ export declare enum ItemTypeGroup {
     Fuel = 805,
     Medicinal = 806,
     Meat = 807,
-    Food = 808,
-    Bait = 809,
-    Liquid = 810,
-    Treasure = 811,
-    Rock = 812,
-    Compost = 813,
-    Fabric = 814,
-    Needle = 815,
-    Cordage = 816,
-    SharpenedRock = 817,
-    Pole = 818,
-    FireSource = 819,
-    Repairing = 820,
-    Tongs = 821,
-    Hammer = 822,
-    Preservative = 823,
-    Reinforcement = 824,
-    GlassBottleOfPotableWater = 825,
-    Bullet = 826,
-    Transmogrification = 827,
-    WaterskinOfPotableWater = 828,
-    Pulp = 829,
-    ClayJugOfPotableWater = 830,
-    Powder = 831,
-    Equipment = 832,
-    Firemaking = 833,
-    Bedding = 834,
-    Tool = 835,
-    Weapon = 836,
-    Health = 837,
-    Travel = 838,
-    Housing = 839,
-    Heating = 840,
-    Storage = 841,
-    Trap = 842,
-    RawMeat = 843,
-    CookedMeat = 844,
-    ContainerOfSeawater = 845,
-    ContainerOfDesalinatedWater = 846,
-    ContainerOfMedicinalWater = 847,
-    ContainerOfPurifiedFreshWater = 848,
-    ContainerOfUnpurifiedFreshWater = 849,
-    Campfire = 850,
-    Furnace = 851,
-    Kiln = 852,
-    WaterStill = 853,
-    Anvil = 854,
-    Seed = 855,
-    Fruit = 856,
-    Vegetable = 857,
-    Tinder = 858,
-    Bone = 859,
-    Kindling = 860,
-    MortarAndPestle = 861,
-    ContainerOfMilk = 862,
-    Book = 863,
-    CoconutContainerOfPotableWater = 864,
-    SandCastFlask = 865,
-    Glue = 866,
-    FireStarter = 867,
-    Sand = 868,
-    Untradable = 869,
-    Cookware = 870,
-    Refinement = 871,
-    LitTorch = 872,
-    LightDevice = 873,
-    Enchantment = 874,
-    Other = 875,
-    CookedFood = 876,
-    LitCandle = 877,
-    LiquidContainer = 878,
-    All = 879,
-    Last = 880
+    Bait = 808,
+    Liquid = 809,
+    Treasure = 810,
+    Rock = 811,
+    Compost = 812,
+    Fabric = 813,
+    Needle = 814,
+    Cordage = 815,
+    SharpenedRock = 816,
+    Pole = 817,
+    FireSource = 818,
+    Repairing = 819,
+    Tongs = 820,
+    Hammer = 821,
+    Preservative = 822,
+    Reinforcement = 823,
+    GlassBottleOfPotableWater = 824,
+    Bullet = 825,
+    Transmogrification = 826,
+    WaterskinOfPotableWater = 827,
+    Pulp = 828,
+    ClayJugOfPotableWater = 829,
+    Powder = 830,
+    Equipment = 831,
+    Firemaking = 832,
+    Bedding = 833,
+    Tool = 834,
+    Weapon = 835,
+    Health = 836,
+    Travel = 837,
+    Housing = 838,
+    Heating = 839,
+    Storage = 840,
+    Trap = 841,
+    RawMeat = 842,
+    CookedMeat = 843,
+    ContainerOfSeawater = 844,
+    ContainerOfDesalinatedWater = 845,
+    ContainerOfMedicinalWater = 846,
+    ContainerOfPurifiedFreshWater = 847,
+    ContainerOfUnpurifiedFreshWater = 848,
+    Campfire = 849,
+    Furnace = 850,
+    Kiln = 851,
+    WaterStill = 852,
+    Anvil = 853,
+    Seed = 854,
+    Fruit = 855,
+    Vegetable = 856,
+    Tinder = 857,
+    Bone = 858,
+    Kindling = 859,
+    MortarAndPestle = 860,
+    ContainerOfMilk = 861,
+    Book = 862,
+    CoconutContainerOfPotableWater = 863,
+    SandCastFlask = 864,
+    Glue = 865,
+    FireStarter = 866,
+    Sand = 867,
+    Untradable = 868,
+    Cookware = 869,
+    Refinement = 870,
+    LitTorch = 871,
+    LightDevice = 872,
+    Enchantment = 873,
+    Other = 874,
+    CookedFood = 875,
+    LitCandle = 876,
+    LiquidContainer = 877,
+    FrozenWater = 878,
+    RawFish = 879,
+    All = 880,
+    Last = 881
 }
 export {};

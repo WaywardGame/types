@@ -32,11 +32,17 @@ export default class ChoiceList<C extends Choice = Choice, OPTIONAL extends bool
     refresh(): this;
     setRefreshMethod(refreshMethod: (choiceList: this) => OPTIONAL extends true ? C | undefined : C): this;
     choose(chosen?: C): this;
-    findChoice(filter: (choice: C) => boolean): C | undefined;
+    choose(filter?: (choice: C, index: number) => any): this;
+    choices(filter?: (choice: C, index: number) => any): import("@wayward/goodstream/Stream").default<Exclude<C, never>>;
     private onChoiceChange;
+}
+export interface IChoiceEvents extends Events<CheckButton> {
+    chosen(): any;
 }
 export declare class Choice<I extends string | number | undefined = string | number | undefined> extends CheckButton {
     readonly id: I;
+    readonly event: IEventEmitter<this, IChoiceEvents>;
     constructor(id: I);
+    choose(): void;
 }
 export {};

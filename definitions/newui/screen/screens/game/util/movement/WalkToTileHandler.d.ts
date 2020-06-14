@@ -8,8 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IStat } from "entity/IStats";
+import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
-import { BindCatcherApi } from "newui/IBindingManager";
+import Component from "newui/component/Component";
+import { IBindHandlerApi } from "newui/input/Bind";
 import { ITile } from "tile/ITerrain";
 import { IVector2 } from "utilities/math/IVector";
 export interface IWalkToTileHandlerEvents {
@@ -21,12 +24,16 @@ export interface IWalkToTileHandlerEvents {
     getTilePenalty(penalty: number, tile: ITile): number;
 }
 export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHandlerEvents> {
+    private readonly gameScreen;
     private previewTarget;
     private previewPath;
     private readonly overlays;
     private readonly overlayType;
     private canResetTarget;
-    handle(api: BindCatcherApi, gameScreen: Element): boolean;
+    constructor(gameScreen: Component);
+    register(): void;
+    deregister(): void;
+    stopMovement(): void;
     /**
      * Event handler for when the movement completes
      */
@@ -41,6 +48,15 @@ export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHand
      * @param clearWalkPath Resets the walk along path
      */
     reset(target?: IVector2, clearWalkPath?: boolean): void;
+    protected onMoveToTile(api: IBindHandlerApi): boolean;
+    protected onHoldMoveToTile(api: IBindHandlerApi): boolean;
+    protected onCancelMoveToTile(api: IBindHandlerApi): boolean;
+    protected onHoldMoveToTilePreview(api: IBindHandlerApi): boolean;
+    protected onReleaseMoveToTilePreview(): void;
+    protected onStatChanged(player: Player, stat: IStat): void;
+    protected onPostMove(player: Player, fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
+    protected onWalkPathChange(player: Player, walkPath?: IVector2[]): void;
+    private resetToMouse;
     /**
      * Removes the overlay from the tiles and updates the game view
      * @returns True if the overlays were reset

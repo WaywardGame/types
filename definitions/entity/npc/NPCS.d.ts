@@ -10,10 +10,6 @@
  */
 import NPC from "entity/npc/NPC";
 import Registrar, { IRegistrarItem } from "game/Registrar";
-export declare enum NPCType {
-    Merchant = 0,
-    DeathKnight = 1
-}
 export interface INPCClass extends IRegistrarItem {
     new (id?: number, x?: number, y?: number, z?: number): NPC;
 }

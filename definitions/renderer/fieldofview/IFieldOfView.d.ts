@@ -22,14 +22,14 @@ export interface IFieldOfView {
     texLight: WebGLTexture;
     texLightOld: WebGLTexture;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
-    compute(force?: boolean, ambientLightLevel?: number): void;
+    compute(timeStamp: number, force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
     getBounds(player: Player, radius?: number): IBound3;
     getSubdivisions(): number;
     getTextureSize(): number;
     resetGl(gl: WebGL2RenderingContext): void;
     tickSeed(): void;
-    updateTransitionProgress(): boolean;
+    updateTransitionProgress(timeStamp: number): boolean;
     resetTransitionProgress(): void;
 }
 export default IFieldOfView;

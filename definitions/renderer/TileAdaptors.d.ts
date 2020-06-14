@@ -35,13 +35,14 @@ export interface ITileAdaptation {
     BRBO: Vec2;
 }
 export interface ITileAdaptor {
-    adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
+    adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation, debug?: boolean): void;
 }
 export interface IDoodadAdaptor {
     adapt(world: IWorldLayer, x: number, y: number, doodadType: DoodadType, result: ITileAdaptation): void;
 }
 export declare let defaultBackground: TerrainTileInfo;
-export declare function setDefaultBackground(tileInfo: TerrainTileInfo): void;
+export declare let defaultBackgroundType: TerrainType;
+export declare function setDefaultBackground(terrainType: TerrainType): void;
 export declare function isDoor(doodad?: Doodad): boolean;
-export declare function getWaterType(terrainType: TerrainType): number;
+export declare function baseWaterTypesMatch(baseWaterType: TerrainType, comparisonBaseWaterType: TerrainType): boolean;
 export declare const emptyTileAdaptor: ITileAdaptation;

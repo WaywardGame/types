@@ -11,9 +11,10 @@
 import Player from "entity/player/Player";
 import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServerPacket";
 export default class NewUiDataUpdatePacket extends PlayerTargetedServerPacket {
-    static create(player: Player, hostId: string | number, key: string, value: any): NewUiDataUpdatePacket;
+    static create(player: Player, hostId: string | number, updates: {
+        [key: string]: any;
+    }): NewUiDataUpdatePacket;
     hostId: string | number;
-    key: string;
-    value: any;
+    updates: any;
     process(): void;
 }

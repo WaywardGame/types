@@ -85,7 +85,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setMilestone(milestone: Milestone, data?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
-    cancelRaft(item: Item): this;
+    cancelPaddling(item: Item): this;
     setParticle(color: IRGB, inFront?: boolean): this;
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
     setParticle(particle: IActionParticle): this;

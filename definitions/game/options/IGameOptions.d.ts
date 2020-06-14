@@ -12,6 +12,7 @@ import { CreatureType, TileGroup } from "entity/creature/ICreature";
 import { AttackType, StatusType } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
+import { BiomeType } from "game/IBiome";
 import { Milestone } from "game/milestones/IMilestone";
 import { ThreeStateButtonState } from "newui/component/ThreeStateButton";
 import DefaultMap from "utilities/map/DefaultMap";
@@ -31,6 +32,12 @@ export interface IGameOptions {
      * Whether players respawn when they die
      */
     respawn: boolean;
+    island: {
+        /**
+         * Biome type for the first island
+         */
+        startingBiomeType: BiomeType;
+    };
     creatures: {
         /**
          * Whether creatures attack when unprovoked

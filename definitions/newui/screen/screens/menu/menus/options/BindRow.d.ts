@@ -12,7 +12,8 @@ import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshable } from "newui/component/Refreshable";
-import { Bindable, IBinding } from "newui/IBindingManager";
+import Bindable from "newui/input/Bindable";
+import { IBinding } from "newui/input/IBinding";
 export declare class BindRow extends Button implements IRefreshable {
     private readonly currentBinds;
     private readonly bind;

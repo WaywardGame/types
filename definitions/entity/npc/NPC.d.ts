@@ -10,12 +10,13 @@
  */
 import { ActionType } from "entity/action/IAction";
 import Human from "entity/Human";
-import { AiType, EntityType, MoveType } from "entity/IEntity";
+import { AiType, EntityType, MoveType, StatusType } from "entity/IEntity";
 import { EquipType, ICustomizations } from "entity/IHuman";
-import { NPCType } from "entity/npc/NPCS";
+import { NPCType } from "entity/npc/INPCs";
 import { Events, IEventEmitter } from "event/EventEmitter";
 import { ItemType } from "item/IItem";
 import Item from "item/Item";
+import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 export interface INPCEvents extends Events<Human> {
     /**
@@ -61,6 +62,8 @@ export default abstract class NPC extends Human {
      * Returns the bartering bonus for a given credit value
      */
     getBarteringBonus(baseCredits: number): number;
+    getName(): Translation;
+    protected getApplicableStatusEffects(): Set<StatusType>;
     /**
      * The name of the npc - called when created
      */

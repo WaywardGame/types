@@ -70,5 +70,6 @@ declare module Arrays {
     function getSortedIndex<T>(array: ArrayLike<T>, value: T, sorter: (a: T, b: T) => number): number;
     function pushTo<T>(arr: T[]): (...items: T[]) => number;
     function arrayOr<T>(value: T | T[]): T[];
+    function concat<T>(...arrays: T[][]): T[];
 }
 export default Arrays;

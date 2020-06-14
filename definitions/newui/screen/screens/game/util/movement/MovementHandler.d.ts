@@ -10,27 +10,26 @@
  */
 import { IDamageInfo } from "entity/creature/ICreature";
 import EventEmitter from "event/EventEmitter";
-import { BindCatcherApi } from "newui/IBindingManager";
+import Component from "newui/component/Component";
+import { IBindHandlerApi } from "newui/input/Bind";
 import WalkToTileHandler from "newui/screen/screens/game/util/movement/WalkToTileHandler";
 import { IVector2 } from "utilities/math/IVector";
 export interface IMovementHandlerEvents {
     /**
      * Called every frame where the mouse is not hovering over an item
-     * @param api The bind catcher api
      * @returns `false` if the client can't move, `undefined` otherwise
      */
-    canMove(api: BindCatcherApi): false | undefined;
+    canMove(): false | undefined;
 }
 export default class MovementHandler extends EventEmitter.Host<IMovementHandlerEvents> {
     private readonly gameScreen;
     readonly walkToTileHandler: WalkToTileHandler;
     private lastMove;
     private readonly intent;
-    constructor(gameScreen: Element);
-    /**
-     * Movement does not care if other binds are pressed, and it doesn't return whether it processed a press either.
-     */
-    handle(api: BindCatcherApi): void;
+    private preventMouseMovement;
+    constructor(gameScreen: Component);
+    register(): this;
+    deregister(): this;
     /**
      * Handles `Hook.OnMove`
      */
@@ -51,7 +50,14 @@ export default class MovementHandler extends EventEmitter.Host<IMovementHandlerE
      * Handles `Hook.OnPlayerWalkToTilePath`
      */
     onPlayerWalkToTilePath(path: IVector2[] | undefined): void;
-    private handleBinds;
+    protected onFaceDown(api: IBindHandlerApi): boolean;
+    protected onFaceDirection(api: IBindHandlerApi): boolean;
+    protected onIdle(): boolean;
+    protected onMoveToTile(): boolean;
+    protected onMove(api: IBindHandlerApi): boolean;
+    protected onMoveDirection(api: IBindHandlerApi): boolean;
+    protected onReleaseMoveBind(api: IBindHandlerApi): void;
+    private setIntent;
     /**
      * Processes moving towards the mouse.
      */
@@ -65,8 +71,4 @@ export default class MovementHandler extends EventEmitter.Host<IMovementHandlerE
      * Returns whether either of the previous statements are true.
      */
     private processDirectionBinds;
-    /**
-     * Returns whether the mouse was within the GameScreen when it began to be held down.
-     */
-    private mouseWithin;
 }

@@ -17,6 +17,7 @@ import FlowFieldManager from "entity/flowfield/FlowFieldManager";
 import NPCManager from "entity/npc/NPCManager";
 import Player from "entity/player/Player";
 import Game from "game/Game";
+import Island from "game/Island";
 import { ItemType } from "item/IItem";
 import ItemManager from "item/ItemManager";
 import LanguageManager from "language/LanguageManager";
@@ -42,7 +43,6 @@ import { ISortable, ISortableOptions } from "ui/functional/IFunctionalSortable";
 import { ITooltip, ITooltipOptions } from "ui/functional/IFunctionalTooltip";
 import Ui from "ui/Ui";
 import "utilities/prototype/Array";
-import "utilities/prototype/Map";
 import "utilities/prototype/Promise";
 import "utilities/typesglobal/Class";
 import "utilities/typesglobal/Descriptions";
@@ -50,7 +50,6 @@ import "utilities/typesglobal/Function";
 import "utilities/typesglobal/Iterables";
 import "utilities/typesglobal/Misc";
 import "utilities/typesglobal/Objects";
-import "utilities/typesglobal/Writable";
 declare global {
     interface IRequire {
         s: any;
@@ -72,6 +71,7 @@ declare global {
     let flowFieldManager: FlowFieldManager;
     let game: Game;
     let hookManager: HookManager;
+    let island: Island;
     let itemManager: ItemManager;
     let languageManager: LanguageManager;
     let localPlayer: Player;

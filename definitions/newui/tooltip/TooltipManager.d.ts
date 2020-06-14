@@ -16,9 +16,22 @@ export default class TooltipManager implements ITooltipManager {
     readonly tooltipWrapper: Component;
     private host;
     private tooltip;
+    private readonly disablers;
     constructor();
     show(host: IComponent, force?: boolean): Tooltip | undefined;
-    hide(host?: IComponent | undefined, forceRemove?: boolean): void;
+    hide(host?: Component | undefined, forceRemove?: boolean): void;
+    /**
+     * Disables tooltips.
+     * Note: Multiple things can cause tooltips to be disabled simultaneously; tooltips won't be re-enabled until every
+     * disabler has been removed via `enable(disabler)`.
+     */
+    disable(disabler: any): this;
+    /**
+     * Removes the given tooltip disabler.
+     * Note: Multiple things can cause tooltips to be disabled simultaneously; tooltips won't be re-enabled until *every*
+     * disabler has been removed.
+     */
+    enable(disabler: any): this;
     protected onScreenResize(): void;
     private loop;
 }

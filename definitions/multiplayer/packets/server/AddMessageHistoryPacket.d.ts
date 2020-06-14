@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IMessageHistoryItem } from "entity/player/MessageManager";
+import { IMessageHistoryItem } from "entity/player/IMessageManager";
 import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServerPacket";
 export default class AddMessageHistoryPacket extends PlayerTargetedServerPacket {
     messageHistoryItem: IMessageHistoryItem;

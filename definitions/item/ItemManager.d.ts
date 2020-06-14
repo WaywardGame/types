@@ -12,14 +12,14 @@ import Human from "entity/Human";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
-import { InspectionResult } from "game/inspection/IInspection";
-import Inspection from "game/inspection/Inspect";
 import { Quality } from "game/IObject";
+import Island from "game/Island";
 import { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, ItemType, ItemTypeGroup } from "item/IItem";
 import { CraftStatus, RequirementInfo, WeightType } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation, { TextContext } from "language/Translation";
+import { TerrainType } from "tile/ITerrain";
 interface ItemManagerEvents {
     create(item: Item): any;
     remove(item: Item): any;
@@ -35,6 +35,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     private cachedItemGroups;
     private cachedItemTypes;
     private cachedItemTypesWithRecipes;
+    private cachedItemSpawns;
     constructor();
     getItemTypes(): readonly ItemType[];
     getItemsWithRecipes(): readonly ItemType[];
@@ -76,15 +77,21 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
      * Drop items in a 3x3 square around the location
      */
     placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number, skipMessage?: boolean): void;
-    spawn(itemTypes: ItemType[] | undefined, x: number, y: number, z: number): void;
-    resetMapsInContainer(container: IContainer): void;
+    /**
+     * Used to spawn a random item on the current biome type and at a set location (and terrain type) based on spawnOnWorldGen properties in item descriptions.
+     * @param terrainType The terrain type to check.
+     * @param x The x coordinate to check.
+     * @param y The y coordinate to check.
+     * @param z The z coordinate to check.
+     */
+    spawn(terrainType: TerrainType, x: number, y: number, z: number): void;
     getTileContainer(x: number, y: number, z: number): IContainer;
     getRandomQuality(bonusQuality?: number): Quality;
     hasAdditionalRequirements(human: Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     craft(human: Human, itemType: ItemType, itemsToRequire: Item[], itemsToConsume: Item[], baseItem?: Item): CraftStatus;
-    decayItems(): boolean;
+    decayItems(pids: Set<number>): boolean;
     getPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getAbsentPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getNPCWithItemInInventory(containable: IContainable): NPC | undefined;
@@ -107,7 +114,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     reduceDismantleWeight(createdItems: Item[], itemWeight: number, mod?: number): void;
     getItemTranslations(items: Item[], article?: boolean, context?: TextContext): import("@wayward/goodstream/Stream").default<Translation>;
     getItemListTranslation(items: Item[], article?: boolean, context?: TextContext): Translation;
-    loadReferences(isTraveling: boolean): void;
+    loadReferences(generatedNewWorld: boolean, isTraveling: boolean): void;
     saveTileReferences(): void;
     loadTileReferences(): void;
     isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
@@ -122,9 +129,13 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     getNPCFromInventoryContainer(container: IContainer): NPC | undefined;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: Item[]): number;
-    inspect({ context }: Inspection, ...items: Item[]): InspectionResult;
     copyProperties(item: Item, item2: Item): void;
     getPlayerFromInventoryContainer(container: IContainer): Player | undefined;
+    /**
+     * Moves all player items to the target island
+     * This should be called before switching islands
+     */
+    movePlayerItemsToIsland(targetIsland: Island): void;
     private getDefaultWeightRange;
     private updateItemOrderInternal;
     private loadReference;

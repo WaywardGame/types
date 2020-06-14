@@ -26,7 +26,7 @@ export interface ITileAtlas {
     isMountainGround(type: TerrainType): boolean;
     isOre(type: TerrainType): boolean;
     isLava(type: TerrainType): boolean;
-    isWater(type: TerrainType): boolean;
+    isWaterOrIce(type: TerrainType): boolean;
     isFloor(type: TerrainType): boolean;
 }
 export default ITileAtlas;

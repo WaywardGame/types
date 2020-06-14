@@ -14,7 +14,7 @@ export interface IParticle {
     create(tileX: number, tileY: number, tileZ: number, particle: IRGB): void;
     createMultiple(tileX: number, tileY: number, tileZ: number, particle: IRGB, count: number, intensity?: number, ignoreFieldOfView?: boolean): void;
     simulate(): void;
-    render(x: any, y: any): void;
+    render(x: any, y: any): boolean;
 }
 export declare enum ParticleType {
     Fire = 0,

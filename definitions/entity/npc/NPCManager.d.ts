@@ -9,10 +9,10 @@
  * https://waywardgame.github.io/
  */
 import EntityManager from "entity/EntityManager";
+import { NPCType } from "entity/npc/INPCs";
 import NPC from "entity/npc/NPC";
-import { NPCType } from "entity/npc/NPCS";
-import { IEventEmitter } from "event/EventEmitter";
-export interface INPCManagerEvents {
+import { Events, IEventEmitter } from "event/EventEmitter";
+export interface INPCManagerEvents extends Events<EntityManager<NPC>> {
     /**
      * Called when a npc is about to be spawned
      * @param type The type of npc

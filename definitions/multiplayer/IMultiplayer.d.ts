@@ -8,9 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ICharacter } from "entity/IHuman";
 import { PlayerState } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
 import { TurnMode } from "game/IGame";
+import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
@@ -140,7 +142,8 @@ export declare enum DisconnectReason {
     UnableToJoinGame = 7,
     UnableToLoadMods = 8,
     Banned = 9,
-    CheckConnection = 10
+    CheckConnection = 10,
+    Traveling = 11
 }
 export declare enum UnableToJoinReason {
     BuildMismatch = 0,
@@ -159,4 +162,9 @@ export declare enum JoinServerRetryReason {
     UnableToConnectToGlobalMatchmakingServer = 2,
     UnableToConnectToDedicatedMatchmakingServer = 3,
     WebRTCTimeout = 4
+}
+export interface IJoinServerOptions {
+    character: ICharacter;
+    milestoneModifiers: Set<Milestone>;
+    joinServerTimeout?: number;
 }

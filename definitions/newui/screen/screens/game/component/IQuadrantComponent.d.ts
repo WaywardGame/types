@@ -1,0 +1,31 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2019
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
+import Translation from "language/Translation";
+/**
+ * Since when do quadrants refer to 8 sections, this ain't no octagon
+ */
+export declare enum Quadrant {
+    None = 0,
+    TopLeft = 1,
+    Top = 2,
+    TopRight = 3,
+    BottomRight = 4,
+    Bottom = 5,
+    BottomLeft = 6
+}
+export declare enum QuadrantComponentContextMenuAction {
+    SwitchWith = 0,
+    MoveTo = 1,
+    Hide = 2
+}
+export declare module QuadrantComponentContextMenuAction {
+    function translation(action: QuadrantComponentContextMenuAction): Translation;
+}

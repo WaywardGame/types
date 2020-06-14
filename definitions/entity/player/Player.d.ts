@@ -15,7 +15,7 @@ import Human from "entity/Human";
 import { EntityType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import { EquipType, ICheckUnderOptions, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
-import { IMovementIntent, IPlayerEvents, IPlayerTravelData, TurnType, WeightStatus } from "entity/player/IPlayer";
+import { IMovementIntent, IPlayerEvents, TurnType, WeightStatus } from "entity/player/IPlayer";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
@@ -46,6 +46,7 @@ export default class Player extends Human {
     };
     hintSeen: boolean[];
     isConnecting: boolean;
+    lastIslandId: string;
     isMoving: boolean;
     lastAttackedBy: Human | Creature | undefined;
     movementComplete: boolean;
@@ -60,7 +61,6 @@ export default class Player extends Human {
     };
     spawnPoint: IVector3;
     tamedCreatures: number[];
-    travelData: IPlayerTravelData | undefined;
     turns: number;
     walkSoundCounter: number;
     milestoneModifiers: Set<Milestone>;
@@ -96,13 +96,12 @@ export default class Player extends Human {
     /**
      * Updates caused by status effects such as bleeding, poison, and burns.
      */
-    updateStatuses(): void;
+    tickStatuses(): void;
     resetMovementStates(): void;
     setId(id: number): void;
-    setRaft(itemId: number | undefined): boolean;
+    setPaddling(paddling: boolean, itemId: number): boolean;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkSkillMilestones(): void;
-    staminaCheck(): boolean;
     addMilestone(milestone: Milestone, data?: number, update?: boolean): void;
     getDefaultCarveTool(): Item | undefined;
     isFacingCarvableTile(): boolean;
@@ -139,7 +138,6 @@ export default class Player extends Human {
     setupLoad(): void;
     setup(): void;
     updateReputation(reputation: number): void;
-    checkWeight(): void;
     getWeightStatus(): WeightStatus;
     getWeightOrStaminaMovementPenalty(): number;
     /**
@@ -159,7 +157,10 @@ export default class Player extends Human {
     setTamedCreatureEnemy(enemy: Player | Creature): void;
     setPosition(point: IVector3): void;
     getNextPosition(): IVector3;
-    setZ(z: number): void;
+    /**
+     * @param effects If true, adds a delay to the player, clears any particles, and updates the view. (Default: true)
+     */
+    setZ(z: number, effects?: boolean): void;
     isGhost(): boolean;
     isServer(): boolean;
     getName(): Translation;
@@ -174,13 +175,13 @@ export default class Player extends Human {
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
     hasWalkPath(): boolean;
     walkAlongPath(path: IVector2[] | undefined): void;
-    processInput(): void;
+    processInput(timeStamp: number): void;
     /**
      * Returns true if the player changed their facing direction.
      */
     faceDirection(direction: Direction, turnDelay?: number): boolean;
     revealItem(itemType: ItemType): void;
-    getMovementFinishTime(): number;
+    getMovementFinishTime(timeStamp: number): number;
     healthSyncCheck(reason: string): void;
     /**
      * This needs to be called whenever the player's strength requires an update.
@@ -195,9 +196,15 @@ export default class Player extends Human {
      */
     getBarteringBonus(baseCredits: number): number;
     /**
+     * Applies traveling effects to the player
+     * Includes stat loss & item damages
+     */
+    applyTravelingEffects(sailToCivilization?: boolean): void;
+    /**
      * @deprecated Do not call this with players.
      */
     moveTo(): boolean;
+    protected getApplicableStatusEffects(): Set<StatusType>;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
     protected getSkillGainMultiplier(skillType: SkillType): number;
     protected calculateStats(): void;

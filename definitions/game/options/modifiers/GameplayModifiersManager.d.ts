@@ -10,7 +10,10 @@
  */
 import GameplayModifier from "game/options/modifiers/GameplayModifier";
 export default class GameplayModifiersManager<ID extends number, MODIFIER extends GameplayModifier<ID>> {
-    protected readonly instances: Map<ID, MODIFIER>;
+    private readonly enumObject;
+    private readonly classes;
+    private _instances;
+    protected get instances(): Map<ID, MODIFIER>;
     constructor(enumObject: any, classes: OptionalDescriptions<ID, Class<MODIFIER, [ID]>>);
     getImage(id: ID): string | undefined;
     getModifierInstance(id: ID): MODIFIER | undefined;

@@ -17,7 +17,7 @@ export interface INotifier {
     clear(): void;
     update(timeStamp: number): void;
     setTexture(texture: WebGLTexture, inverseTextureSize: Vec2): void;
-    render(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): void;
+    render(timeStamp: number, x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): boolean;
 }
 export default INotifier;
 export declare enum StatNotificationType {

@@ -11,11 +11,12 @@
 import { ICausesStatusEffect } from "entity/IEntity";
 import { ILootItem } from "game/ILoot";
 import { IObject, IObjectDescription } from "game/IObject";
+import { ITemperatureSource } from "game/temperature/ITemperature";
 import { ItemType } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
-export interface ITileEventDescription extends IObjectDescription, IModdable, ICausesStatusEffect {
+export interface ITileEventDescription extends IObjectDescription, IModdable, ICausesStatusEffect, ITemperatureSource {
     spreadMax?: number;
     decayMax?: number;
     animated?: boolean;
@@ -31,6 +32,7 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
     isWaste?: boolean;
     renderBelowItems?: boolean;
     isTall?: boolean;
+    providesFire?: boolean;
     /**
      * Whether the tile event prevents things such as carving, digging, movement, etc.
      */
@@ -42,6 +44,12 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
     create?(tileEvent: ITileEvent): void;
     remove?(tileEvent: ITileEvent): void;
     update?(tileEvent: ITileEvent): void;
+    /**
+     * Gets the temperature produced by this tile event. Positive values are "heat", negative values are "cold".
+     * Refer to the values of the `Temperature` enum to see the possible range.
+     * If this method is not implemented, or it returns `undefined`, `Temperature.Neutral` is used.
+     */
+    getProducedTemperature?(tileEvent?: ITileEvent): number | undefined;
 }
 export interface ITileEvent extends IObject<TileEventType>, IVector3 {
     spread?: number;

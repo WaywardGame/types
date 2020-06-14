@@ -192,3 +192,4 @@ export interface ICheckUnderOptions {
     burned?: boolean;
 }
 export declare const craftingChances: Descriptions<RecipeLevel, number>;
+export declare const STAMINA_LOW_PENALTY_START = 15;

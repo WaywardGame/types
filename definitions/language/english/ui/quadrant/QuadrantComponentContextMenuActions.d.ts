@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { QuadrantComponentContextMenuAction } from "newui/screen/screens/game/component/QuadrantComponent";
+import { QuadrantComponentContextMenuAction } from "newui/screen/screens/game/component/IQuadrantComponent";
 declare const quadrantComponentContextMenuActions: Descriptions<QuadrantComponentContextMenuAction, string>;
 export default quadrantComponentContextMenuActions;

@@ -10,7 +10,8 @@
  */
 import Player from "entity/player/Player";
 import Component from "newui/component/Component";
-import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
+import QuadrantComponent from "newui/screen/screens/game/component/QuadrantComponent";
+import { Quadrant } from "newui/screen/screens/game/component/IQuadrantComponent";
 import GameScreen from "newui/screen/screens/GameScreen";
 export default class StatsQuadrant extends QuadrantComponent {
     static preferredQuadrant: Quadrant;

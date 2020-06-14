@@ -58,6 +58,8 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private _multiplayerLogs;
     private importingSaveGameMod;
     private relayNetworkStatus;
+    private _isGameOverlayActive;
+    get isGameOverlayActive(): boolean;
     isElectron(): boolean;
     reload(): void;
     closeWindow(): void;

@@ -88,6 +88,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     trapDamage?: number;
     waterStill?: boolean;
     durability?: number;
+    leftOver?: DoodadType;
 }
 export interface IDoodadParticles {
     [index: number]: IRGB;
@@ -196,7 +197,11 @@ export declare enum DoodadType {
     ClayWell = 97,
     SandstoneWell = 98,
     StoneWell = 99,
-    AshCementWall = 100
+    AshCementWall = 100,
+    SpruceTreeWithSnow = 101,
+    CrowberryShrub = 102,
+    WinterberryShrub = 103,
+    ArcticPoppies = 104
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,

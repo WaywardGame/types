@@ -12,7 +12,7 @@ import { IHasImagePath } from "game/IObject";
 import { IModdable } from "mod/ModRegistry";
 import Button from "newui/component/Button";
 import { ITooltip } from "newui/component/IComponent";
-import { Bindable } from "newui/IBindingManager";
+import Bindable from "newui/input/Bindable";
 export declare enum MenuBarButtonType {
     Menu = 0,
     Save = 1,

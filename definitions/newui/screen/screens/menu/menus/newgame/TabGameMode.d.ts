@@ -10,6 +10,7 @@
  */
 import { Events, IEventEmitter } from "event/EventEmitter";
 import { GameMode } from "game/options/IGameOptions";
+import { Block } from "newui/component/Block";
 import ChoiceList, { Choice } from "newui/component/ChoiceList";
 import ChoiceListTurnMode from "newui/screen/screens/menu/component/ChoiceListTurnModes";
 import { Tab } from "newui/screen/screens/menu/component/Menu";
@@ -18,9 +19,11 @@ import NewGameMenu from "newui/screen/screens/menu/menus/NewGameMenu";
 export default class TabGameMode extends Tab {
     private readonly menu;
     customGameOptionsMenu: CustomGameOptionsMenu;
+    readonly maxSavesWarning: Block;
     readonly gameMode: ChoiceList<DifficultyChoice, false>;
     readonly turnMode: ChoiceListTurnMode;
     constructor(menu: NewGameMenu);
+    setAtMaxSaves(maxSaves: boolean): void;
     private getCustomGameOptionsMenu;
     private updateGameMode;
     private onChangeTurnMode;

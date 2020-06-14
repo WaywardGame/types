@@ -12,7 +12,6 @@ import { Dictionary } from "language/Dictionaries";
 import Component from "newui/component/Component";
 import { IDropdownOption } from "newui/component/Dropdown";
 import EnumDropdown from "newui/component/dropdown/EnumDropdown";
-import { BindCatcherApi } from "newui/IBindingManager";
 import Tooltip from "newui/tooltip/Tooltip";
 import { IVector2 } from "utilities/math/IVector";
 export default abstract class GroupDropdown<ENUM_OBJECT, OTHER_OPTIONS extends string, GROUP extends number, VALUES = ENUM_OBJECT[keyof ENUM_OBJECT]> extends EnumDropdown<ENUM_OBJECT, OTHER_OPTIONS, VALUES> {
@@ -20,12 +19,17 @@ export default abstract class GroupDropdown<ENUM_OBJECT, OTHER_OPTIONS extends s
     private tooltip?;
     private lastGroupText?;
     private readonly wordToGroups;
+    private prefix;
+    private regex;
+    private regexLast;
     constructor(enumObject: ENUM_OBJECT, dictionary: Dictionary, defaultOption: VALUES | OTHER_OPTIONS, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
+    setPrefix(prefix: string): this;
     protected optionMatchesFilterWord(word: string, option: VALUES | OTHER_OPTIONS, text: string): boolean;
     protected abstract getGroups(): Iterable<GROUP>;
     protected abstract getGroupName(group: GROUP): string;
     protected abstract isInGroup(option: ENUM_OBJECT[keyof ENUM_OBJECT], group: GROUP): boolean;
-    protected isMouseWithin(api: BindCatcherApi): boolean;
+    protected shouldIncludeOtherOptionsInGroupFilter(): boolean;
+    protected isMouseWithin(): boolean;
     protected onOpen(): void;
     protected onClose(): void;
     protected onFilterChange(): void;

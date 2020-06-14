@@ -17,7 +17,8 @@ import { CreatureType, ICreatureDescription } from "entity/creature/ICreature";
 import { StatusType } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
-import { INPCClass, NPCType } from "entity/npc/NPCS";
+import { NPCType } from "entity/npc/INPCs";
+import { INPCClass } from "entity/npc/NPCS";
 import { Source } from "entity/player/IMessageManager";
 import { INoteDescription } from "entity/player/note/NoteManager";
 import { QuestType } from "entity/player/quest/quest/IQuest";
@@ -25,9 +26,10 @@ import { Quest } from "entity/player/quest/quest/Quest";
 import { QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
 import { QuestRequirement } from "entity/player/quest/requirement/Requirement";
 import { ISkillDescription } from "entity/player/Skills";
-import { IStatusEffectDescription } from "entity/StatusEffects";
+import { StatusEffectClass } from "entity/status/StatusEffect";
 import { InspectType } from "game/inspection/IInspection";
-import { IInspectionHandler } from "game/inspection/Inspections";
+import { InspectionClass } from "game/inspection/InspectionTypeMap";
+import { WorldZ } from "game/WorldZ";
 import { IItemDescription, IItemGroupDescription, ItemType, ItemTypeGroup } from "item/IItem";
 import { Dictionary } from "language/Dictionaries";
 import Interrupt from "language/dictionary/Interrupt";
@@ -36,9 +38,11 @@ import Message from "language/dictionary/Message";
 import Note from "language/dictionary/Note";
 import Language from "language/Language";
 import LanguageExtension from "language/LanguageExtension";
+import { IRegistry } from "mod/BaseMod";
 import InterModRegistry, { InterModRegistration } from "mod/InterModRegistry";
 import { IPacketClass } from "multiplayer/packets/Packets";
-import { Bindable, IBinding } from "newui/IBindingManager";
+import Bindable from "newui/input/Bindable";
+import { IBinding } from "newui/input/IBinding";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 import { DialogId, IDialogDescription } from "newui/screen/screens/game/Dialogs";
 import { IMenuBarButtonDescription, MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
@@ -91,7 +95,8 @@ export declare enum ModRegistrationType {
     StatusEffect = 33,
     Terrain = 34,
     TerrainDecoration = 35,
-    TileEvent = 36
+    TileEvent = 36,
+    WorldLayer = 37
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -104,7 +109,7 @@ export interface ILanguageExtensionRegistration extends IBaseModRegistration {
 export interface IInspectionTypeRegistration extends IBaseModRegistration {
     type: ModRegistrationType.InspectionType;
     name: string;
-    description: IInspectionHandler | IInspectionHandler["handle"];
+    handlerClass: InspectionClass;
 }
 export interface IMusicTrackRegistration extends IBaseModRegistration {
     type: ModRegistrationType.MusicTrack;
@@ -215,7 +220,7 @@ export interface IStatRegistration extends IBaseModRegistration {
 export interface IStatusEffectRegistration extends IBaseModRegistration {
     type: ModRegistrationType.StatusEffect;
     name: string;
-    description?: IStatusEffectDescription;
+    handlerClass?: StatusEffectClass;
 }
 export interface IItemRegistrationDescription extends IItemDescription {
     groups?: ItemTypeGroup[];
@@ -274,7 +279,12 @@ export interface IQuestRequirementRegistration extends IBaseModRegistration {
     name: string;
     description: QuestRequirement;
 }
+export interface IWorldLayerRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.WorldLayer;
+    name: string;
+}
 export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration);
+export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -365,7 +375,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered status effect.
      */
-    function statusEffect(name: string, description?: IStatusEffectDescription): <K extends string | number | symbol, T extends { [k in K]: StatusType; }>(target: T, key: K) => void;
+    function statusEffect(name: string, handlerClass?: StatusEffectClass): <K extends string | number | symbol, T extends { [k in K]: StatusType; }>(target: T, key: K) => void;
     /**
      * Registers an item.
      * @param name The name of the item.
@@ -477,10 +487,10 @@ declare module Register {
      */
     function overlay(name: string, description?: IOverlayDescription): <K extends string | number | symbol, T extends { [k in K]: OverlayType; }>(target: T, key: K) => void;
     /**
-     * Registers an inspection type, which will appear in tile tooltips or the messages after inspecting a tile.
-     * @param description The definition of the inspection type.
+     * Registers an inspection type, which will appear in tile tooltips or the inspect dialog.
+     * @param handlerClass The class for the handler of the inspection type.
      */
-    function inspectionType(name: string, description: IInspectionHandler | IInspectionHandler["handle"]): <K extends string | number | symbol, T extends { [k in K]: InspectType; }>(target: T, key: K) => void;
+    function inspectionType(name: string, handlerClass: InspectionClass): <K extends string | number | symbol, T extends { [k in K]: InspectType; }>(target: T, key: K) => void;
     /**
      * Registers a menu bar button.
      * @param description The definition of the menu bar button.
@@ -496,6 +506,10 @@ declare module Register {
      * @param description The definition of the doodad group.
      */
     function doodadGroup(name: string, description: IDoodadGroupDescription): <K extends string | number | symbol, T extends { [k in K]: DoodadTypeGroup; }>(target: T, key: K) => void;
+    /**
+     * Registers a world layer.
+     */
+    function worldLayer(name: string): <K extends string | number | symbol, T extends { [k in K]: WorldZ; }>(target: T, key: K) => void;
     /**
      * Registers a quest.
      * @param description The definition of the quest.
@@ -532,11 +546,30 @@ export declare const SYMBOL_REGISTRATION_ID: unique symbol;
 export interface RegisteredMethod {
     [SYMBOL_REGISTRATION_ID]: number;
 }
+declare class RegistryRegisteredFactory<H> {
+    private readonly modName?;
+    private readonly path;
+    constructor(modName: string | undefined, ...path: PropertyKey[]);
+    registry<K extends keyof H>(key: K): RegistryRegisteredFactory<H[K]>;
+    /**
+     * @param key A key of the registry `H`.
+     * @returns An intermediate value referencing the `T` stored in the given key in `H`.
+     *
+     * As much as you may wish it was, the returned value is not actually the type it claims to be. Do not use it as such.
+     */
+    get<K extends keyof H>(key: K): H[K];
+    /**
+     * @param key The key of `H` which contains `T`.
+     * @returns An intermediate value referencing the `T` stored in the given key in `H`
+     */
+    getMethod<K extends keyof H>(key: K): H[K];
+}
 /**
  * This function is for retrieving the IDs of other registered things, to be used within other `@Register` decorators.
  *
- * Pass the registry type as the `H` type parameter.
- * @param H The "Host" of the registration.
+ * @param H A type parameter which should contain the registry's type.
+ * @param name A mod's name; this disambiguates which mod we're getting a registration from.
+ * This parameter is required if you're using this in a decorator of a class other than your mod class or a sub-registry of your mod class.
  *
  * For example, if you're trying to get a bindable that was registered by your mod, you would call it like this:
  * `Registry<YourModClass>().get("bindableFieldName")`
@@ -557,20 +590,7 @@ export interface RegisteredMethod {
  *  }
  * ```
  */
-export declare function Registry<H>(): {
-    /**
-     * @param key A key of the registry `H`.
-     * @returns An intermediate value referencing the `T` stored in the given key in `H`.
-     *
-     * As much as you may wish it was, the returned value is not actually the type it claims to be. Do not use it as such.
-     */
-    get<K extends keyof H>(key: K): H[K];
-    /**
-     * @param key The key of `H` which contains `T`.
-     * @returns An intermediate value referencing the `T` stored in the given key in `H`
-     */
-    getMethod<K_1 extends keyof H>(key: K_1): H[K_1];
-};
+export declare function Registry<H>(id?: string): RegistryRegisteredFactory<H>;
 export declare module Registry {
     /**
      * Returns the ID of a registered action or command callback which was decorated with its respective `@Register` decorator.
@@ -581,10 +601,24 @@ export declare module Registry {
      * Used internally for `Registry<H, T>.get(key)`
      */
     class Registered {
-        readonly key: string | number | symbol;
+        readonly mod?: string;
         readonly type: RegistryRegisteredIntermediateType;
-        constructor(key: string | number | symbol, type: RegistryRegisteredIntermediateType);
+        readonly path: PropertyKey[];
+        constructor(modName: string | undefined, type: RegistryRegisteredIntermediateType, ...path: PropertyKey[]);
         mask<T>(): T;
+        /**
+         * An getter for a registration ID in the given `IRegistry`.
+         *
+         * @param registry The registry to get a registration ID from.
+         * @param property The property containing the registration ID.
+         * (Contains a field/method, decorated with a ` @Register.thing` decorator)
+         * @param type Whether the field is for a method or a property.
+         * (Examples include actions/commands for methods & bindables/creatures for properties)
+         *
+         * - If the type is a property, and the field has a value, it's returned immediately.
+         * - If the type is a method, and an ID is returned by `Registry.id(registry[property])`, the ID will be returned.
+         */
+        getRegistrationId<T = any>(registry: IRegistry): T | undefined;
     }
 }
 export interface IBaseModRegistration {

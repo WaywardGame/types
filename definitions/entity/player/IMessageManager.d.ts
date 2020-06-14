@@ -9,10 +9,10 @@
 * https://waywardgame.github.io/
 */
 import Human from "entity/Human";
-import { MessageType } from "entity/player/MessageManager";
 import Message from "language/dictionary/Message";
 import { ISerializedTranslation } from "language/Translation";
 import { IVector3 } from "utilities/math/IVector";
+import { IStringSection } from "utilities/string/Interpolator";
 export declare enum Source {
     /**
      * Every message
@@ -103,4 +103,21 @@ export interface IMessageManager {
     type(type?: MessageType): this;
     ifVisible(human?: Human, canSee?: IVector3): this;
     send(message: Message, ...args: any[]): boolean;
+}
+export interface IMessageHistoryItem {
+    id: number;
+    source: string[];
+    time: number;
+    turn: number;
+    type?: MessageType;
+    message: ISerializedTranslation | IStringSection[];
+}
+export declare enum MessageType {
+    None = 0,
+    Bad = 1,
+    Good = 2,
+    Miss = 3,
+    Attack = 4,
+    Stat = 5,
+    Skill = 6
 }

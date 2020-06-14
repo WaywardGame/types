@@ -73,7 +73,7 @@ export default class TimeManager {
     /**
      * Returns a decimal representation of the current time. `0` is the start of the day, and `1` is the end.
      */
-    getTime(): number;
+    getTime(tickOffset?: number): number;
     /**
      * Returns if the given time is at day.
      * @param time The time to check, defaulting to the current time.

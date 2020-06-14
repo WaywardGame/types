@@ -68,8 +68,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     positionTextureBuffer: WebGLBuffer;
     positionBuffer: WebGLBuffer;
     ditherTexture: WebGLTexture;
-    layers: WorldLayerRenderer[];
-    dirtAdaptor: ITileAdaptor;
+    layers: Record<number, WorldLayerRenderer>;
     tillAdaptor: ITileAdaptor;
     waterAdaptor: ITileAdaptor;
     lavaAdaptor: ITileAdaptor;
@@ -125,16 +124,17 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     getFogColor(): [number, number, number];
     renderWorld(x: number, y: number, z: number): void;
     render(): void;
-    screenToTile(screenX: number, screenY: number): Vector2;
+    screenToVector(screenX: number, screenY: number): Vector2;
+    screenToTile(screenX: number, screenY: number): Vector2 | undefined;
     getViewportBounds(): {
         min: Vector2;
         max: Vector2;
         z: number;
     };
     computeSpritesInViewport(): void;
-    batchCreatures(): void;
+    batchCreatures(timeStamp: number): void;
     private batchCreature;
-    private isFlyingOffset;
+    private getFlyingOffset;
     private batchShadow;
     private batchPlayers;
     private batchHuman;
@@ -147,6 +147,5 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
      */
     private renderStatusEffect;
     private spriteBatchForLayer;
-    private shouldOffsetFlying;
     private computeSpritesInViewportInternal;
 }

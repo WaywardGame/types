@@ -63,7 +63,11 @@ export declare module IStatChangeInfo {
 export declare enum StatusType {
     Bleeding = 0,
     Poisoned = 1,
-    Burned = 2
+    Burned = 2,
+    Encumbered = 3,
+    Exhausted = 4,
+    Starving = 5,
+    Dehydrated = 6
 }
 export declare type IStatus = Record<keyof typeof StatusType, boolean>;
 export interface ICausesStatusEffect {

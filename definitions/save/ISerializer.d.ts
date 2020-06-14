@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 export interface ISerializer {
+    readonly version: string;
     readonly dataView: DataView;
     byteOffset: number;
     saveToUint8Array(object: any, objectKey: any): Uint8Array | undefined;
@@ -23,6 +24,11 @@ export interface ISerializer {
     writeMap(value: Map<any, any>): void;
 }
 export default ISerializer;
+export interface ISerializerOptions {
+    version: string;
+    skipOnUnserialized?: boolean;
+    includeFlags?: SavePropertyFlag;
+}
 export interface ISerializable {
     serializeObject(serializer: ISerializer): void;
     deserializeObject(serializer: ISerializer): void;
@@ -82,11 +88,14 @@ export declare enum Types {
     Set = 30,
     RandomRange = 31,
     RandomItem = 32,
-    DefaultMap = 33
+    DefaultMap = 33,
+    Island = 34,
+    JITDeserialization = 35
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_SAVE_PROPERTY_FLAGS: unique symbol;
 export declare const SYMBOL_SAVE_ALL_PROPERTIES: unique symbol;
+export declare const SYMBOL_JIT_DESERIALIZE_ALL_PROPERTIES: unique symbol;
 export declare enum SavePropertyFlag {
     /**
      * Normal property
@@ -102,7 +111,12 @@ export declare enum SavePropertyFlag {
      * This should be used for certain properties that can change between new games that use the same seed
      */
     ExcludeFromGameStateJsonInSingleplayer = 4,
+    /**
+     * Deserialize the property the first time it's used
+     */
+    JITDeserialization = 8,
     All = 65535
 }
 export declare function SaveProperty(flags?: SavePropertyFlag): PropertyDecorator;
 export declare function SaveAllProperties(): ClassDecorator;
+export declare function JITDeserializeAllProperties(): ClassDecorator;

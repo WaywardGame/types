@@ -11,8 +11,6 @@
 import { ICorpse } from "entity/creature/corpse/ICorpse";
 import { CreatureType } from "entity/creature/ICreature";
 import EventEmitter from "event/EventEmitter";
-import { InspectionResult } from "game/inspection/IInspection";
-import Inspection from "game/inspection/Inspect";
 import { ItemType } from "item/IItem";
 import Translation, { TextContext } from "language/Translation";
 export interface ICorpseManagerEvents {
@@ -27,6 +25,5 @@ export default class CorpseManager extends EventEmitter.Host<ICorpseManagerEvent
     getName(typeOrCorpse: CreatureType | ICorpse, article?: boolean, count?: number, showCount?: boolean): Translation;
     getCorpseTranslations(corpses: ICorpse[], article?: boolean, context?: TextContext): import("@wayward/goodstream/Stream").default<Translation>;
     getCorpseListTranslation(corpses: ICorpse[], article?: boolean, context?: TextContext): Translation;
-    inspect({ context }: Inspection, ...corpses: ICorpse[]): InspectionResult;
     is(thing: any): thing is ICorpse;
 }

@@ -13,9 +13,11 @@ import Entity from "entity/Entity";
 import { IEntityManager } from "entity/IEntityManager";
 import EventEmitter from "event/EventEmitter";
 import Bound3 from "utilities/math/Bound3";
-export interface IEntityManagerEvents {
+export interface IEntityManagerEvents<T extends Entity> {
+    spawn(entity: T): any;
+    remove(entity: T): any;
 }
-export default abstract class EntityManager<T extends Entity> extends EventEmitter.Host<IEntityManagerEvents> implements IEntityManager<T> {
+export default abstract class EntityManager<T extends Entity> extends EventEmitter.Host<IEntityManagerEvents<T>> implements IEntityManager<T> {
     private moveTypesInFov;
     remove(entity: T): void;
     updateFov(bounds: Bound3[]): number;

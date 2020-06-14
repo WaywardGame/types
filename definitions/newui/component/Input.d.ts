@@ -54,6 +54,12 @@ export default class Input extends Component implements IRefreshable, IInput {
     setSelectOnFocus(selectOnFocus?: boolean): this;
     refresh(): this;
     /**
+     * Sets the text in this input
+     * @param text The new text
+     * @param triggerEvent Whether to trigger the change event for this input (defaults to `true`)
+     */
+    setText(text: string, triggerEvent?: boolean): this;
+    /**
      * Reset the text of the input to the default, or to the clearTo option if that was provided
      * @param clearType `ClearType.UseDefault` to force using default, `ClearType.NotDefault` to prevent using default, `ClearType.Auto` otherwise. Defaults to `ClearType.Auto`
      */

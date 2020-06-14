@@ -16,9 +16,8 @@ import Human from "entity/Human";
 import { EquipType } from "entity/IHuman";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
-import Inspection from "game/inspection/Inspect";
-import { IInspectable, InspectionSection } from "game/inspection/Inspections";
 import { IObject, Quality } from "game/IObject";
+import { ITemperatureSource } from "game/temperature/ITemperature";
 import { IContainer, IItemLegendary, ItemType } from "item/IItem";
 import Item from "item/Item";
 import Translation, { ISerializedTranslation } from "language/Translation";
@@ -34,7 +33,7 @@ export interface IDoodadEvents {
      */
     canPickup(human: Human): boolean | undefined;
 }
-export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements Doodad, IUnserializedCallback, IInspectable, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, IInspectable {
+export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements Doodad, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource {
     static is(value: any): value is Doodad;
     /**
      * @deprecated
@@ -61,15 +60,19 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     type: DoodadType;
     weight?: number;
     weightCapacity: number;
-    x: number;
-    y: number;
-    z: number;
+    readonly x: number;
+    readonly y: number;
+    readonly z: number;
     legendary?: IItemLegendary | undefined;
     step: number | undefined;
     hitchedCreature?: number;
     tradedFrom?: string[];
     aberrant?: boolean;
     private _description;
+    private _tile;
+    private _tileId;
+    private _isWell;
+    private readonly _doodadGroupCache;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(type?: DoodadType, x?: number, y?: number, z?: number, options?: IDoodadOptions);
@@ -86,15 +89,12 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     getName(article?: boolean, count?: number): Translation;
     description(): IDoodadDescription | undefined;
-    /**
-     * @deprecated
-     */
-    inspect({ context, inspectFire }: Inspection, section: InspectionSection): void;
     changeType(doodadType: DoodadType): void;
     isValid(): boolean;
+    isInGroup(doodadTypeGroup: DoodadTypeGroup): boolean | undefined;
     getTile(): ITile;
+    getTileId(): number;
     getPoint(): IVector3;
-    isInGroup(doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;
@@ -124,7 +124,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     getDefaultDurability(): number;
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
-    update(): void;
+    update(ticks: number, realPlayers: Player[]): void;
     canCauseStatus(): boolean;
     setOffTrap(human?: Human, withMessage?: boolean): void;
     getGrowthParticles(): IRGB | undefined;
@@ -137,6 +137,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * Keep our wells up-to-date with what is happening underground
      */
     setWellStatus(): void;
+    getProducedTemperature(): number | undefined;
     onUnserialized(): void;
     /**
      * @deprecated
@@ -146,22 +147,6 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * @deprecated
      */
     protected getDescriptionTranslation(): Translation;
-    /**
-     * @deprecated
-     */
-    private inspectGrowth;
-    /**
-     * @deprecated
-     */
-    private inspectFertility;
-    /**
-     * @deprecated
-     */
-    private inspectDurability;
-    /**
-     * @deprecated
-     */
-    private inspectPreservation;
     private processSpecials;
     /**
      * Check for items on top of lit/fire doodads, set them on fire
@@ -183,5 +168,4 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * Decay over time
      */
     private processDecay;
-    private animateSkeletalRemains;
 }

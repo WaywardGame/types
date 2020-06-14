@@ -21,9 +21,10 @@ import { IModdable } from "mod/ModRegistry";
 import { ITileEvent } from "tile/ITileEvent";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
+import { ILeftOverTile } from "./Terrains";
 export interface ITerrainDescription extends IModdable {
     passable?: boolean;
-    particles: IRGB;
+    particles?: IRGB;
     durability?: number;
     water?: boolean;
     regathered?: boolean;
@@ -35,7 +36,7 @@ export interface ITerrainDescription extends IModdable {
     flammable?: boolean;
     gatherSkillUse?: SkillType;
     sound?: SfxType;
-    leftOver?: TerrainType;
+    leftOvers?: ILeftOverTile[];
     baseTerrain?: TerrainType;
     terrainType?: TerrainType;
     doodad?: DoodadType;
@@ -53,6 +54,26 @@ export interface ITerrainDescription extends IModdable {
     tileOnConsume?: TerrainType;
     isMountainGround?: boolean;
     burnItem?: ItemType;
+    ice?: boolean;
+    renderOverOtherMountains?: boolean;
+    /**
+     * Terrain that water tile becomes when dug up using the dig action.
+     */
+    waterTerrainOnDig?: TerrainType;
+    /**
+     * Terrain that a tile becomes when routed using the dig action.
+     */
+    waterTerrainOnRoute?: TerrainType;
+    group?: TerrainTypeGroup[];
+    /**
+     *
+     * Base version of the water. Type is used for mapping and when the tile becomes when contaminated
+     */
+    waterBaseType?: TerrainType;
+    /**
+     * The temperature produced by this terrain. When not provided, uses `Temperature.Neutral`.
+     */
+    temperature?: number;
 }
 export interface ITile extends Partial<ITileContainer> {
     corpses?: ICorpse[];
@@ -90,7 +111,9 @@ export declare enum TileTemplateType {
     Desert = 3,
     Beach = 4,
     Boat = 5,
-    Lava = 6
+    Lava = 6,
+    Snow = 7,
+    IceCap = 8
 }
 export interface ITemplate {
     terrainTypes: {
@@ -103,9 +126,24 @@ export interface ITemplate {
     doodad?: string[];
     tilled?: boolean;
     /**
-     * A decimal value, 0 for no degradation, 1 for 100% degradation (basically as if there was no template)
+     * A decimal value, 0 for no degradation, 1 for 100% degradation (basically as if there was no template).
      */
-    degrade: number;
+    degrade?: number;
+    /**
+     * A decimal value, 0 for no doodad spawn chance, 1 for 100% doodad spawn chance.
+     * Doodads that can spawn on each tile are set in the doodad description's "spawnOnWorldGen" property.
+     */
+    doodadSpawnChance?: number;
+    /**
+     * A decimal value, 0 for no item spawn chance, 1 for 100% item spawn chance.
+     * Items that can spawn on each tile are set in the item description's "spawnOnWorldGen" property.
+     */
+    itemSpawnChance?: number;
+    /**
+     * A decimal value, 0 for no skeletal remains spawn chance, 1 for 100% skeletal remains spawn chance.
+     * Skeletal remains will only spawn on flooring terrain types.
+     */
+    skeletalRemainsSpawnChance?: number;
 }
 export interface ITemplateDoodad {
     type: DoodadType;
@@ -126,7 +164,8 @@ export interface IOverlayInfo {
 export declare enum OverlayType {
     WalkDots = 0,
     Arrows = 1,
-    FootPrints = 2
+    FootPrints = 2,
+    Target = 3
 }
 export declare enum TerrainType {
     DeepSeawater = 0,
@@ -166,5 +205,15 @@ export declare enum TerrainType {
     DesertSand = 34,
     RockGround = 35,
     SandstoneGround = 36,
-    AshCementFlooring = 37
+    AshCementFlooring = 37,
+    RocksWithSnow = 38,
+    Glacier = 39,
+    FreshWaterIce = 40,
+    FreezingFreshWater = 41,
+    SeawaterIce = 42,
+    FreezingSeawater = 43,
+    Void = 44
+}
+export declare enum TerrainTypeGroup {
+    Flooring = 0
 }

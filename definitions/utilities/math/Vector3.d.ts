@@ -59,7 +59,7 @@ export default class Vector3 implements IVector3, ISerializable {
     copy<D extends IVector3>(dest: D): D;
     negate(): Vector3;
     negate<D extends IVector3>(dest: D): D;
-    equals(vector: IVector3, threshold?: number): boolean;
+    equals(vector: unknown, threshold?: number): vector is IVector3;
     length(): number;
     squaredLength(): number;
     add(vector: IVector3): this;

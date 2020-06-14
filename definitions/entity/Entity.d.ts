@@ -17,16 +17,19 @@ import { IStats } from "entity/IStats";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import Stats from "entity/Stats";
+import StatusEffect from "entity/status/StatusEffect";
 import EventEmitter from "event/EventEmitter";
 import { FireType, TileUpdateType } from "game/IGame";
-import { IInspector } from "game/inspection2/InfoProvider";
+import { IInspector } from "game/inspection/InfoProvider";
+import { ITemperatureSource } from "game/temperature/ITemperature";
 import { ItemType, RecipeLevel } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { StatNotificationType } from "renderer/INotifier";
+import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IInspector {
+export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IInspector, IUnserializedCallback, ITemperatureSource {
     readonly stat: Stats<this>;
     entityType: EntityType;
     id: number;
@@ -52,7 +55,9 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     properties: IProperties | undefined;
     private _movementFinishTime;
     private _inFov;
+    private readonly statusHandlers;
     constructor();
+    onUnserialized(): void;
     abstract getName(): Translation;
     toString(): string;
     getInspectionId(): string;
@@ -62,18 +67,25 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
      */
     hasStatus(status: StatusType): boolean;
     /**
-     * Sets whether the entity has the given `StatusType`
+     * Sets whether the entity has the given `StatusType`.
+     * Emits `EntityEvent.StatusChange`.
      * @param status The status to change
-     * @param to Whether the entity will have the status
+     * @param hasStatusEffect Whether the entity will have the status
      * @param reason The reason for the change
-     *
-     * Triggers `EntityEvent.StatusChange`
      */
     setStatus(status: StatusType, hasStatusEffect: boolean, reason: StatusEffectChangeReason): void;
     /**
+     * Returns the handler for this status effect, whether or not this entity currently has the effect.
+     */
+    getStatus<S extends StatusEffect = StatusEffect>(status: StatusType): S | undefined;
+    /**
      * Generator for status effects on the entity.
      */
-    statuses(): import("@wayward/goodstream/Stream").default<StatusType>;
+    getStatuses(): import("@wayward/goodstream/Stream").default<StatusEffect>;
+    /**
+     * Generator for status effects on the entity.
+     */
+    getActiveStatuses(): import("@wayward/goodstream/Stream").default<StatusEffect>;
     abstract damage(damageInfoOrAmount: IDamageInfo | number): number | undefined;
     getCraftingDifficulty(level: RecipeLevel): number;
     getTileUpdateType(): TileUpdateType;
@@ -86,15 +98,19 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
      * Faces the target and animates a bump into effect
      */
     animateBumpTowards(x: number, y: number): void;
-    getMovementPoint(): IVector2;
-    getMovementProgress(): number;
-    getMovementFinishTime(): number | undefined;
+    getMovementPoint(timeStamp: number): IVector2;
+    getMovementProgress(timeStamp: number): number;
+    getMovementFinishTime(timeStamp: number): number | undefined;
     getMoveType(): MoveType;
     setMoveType(moveType: MoveType): void;
     isInFov(): boolean;
     setInFov(inFov: boolean): void;
     isOnFire(): FireType;
     canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
+    canSeeObject(object: IVector3 & {
+        fromX: number;
+        fromY: number;
+    }, isClientSide?: boolean): boolean;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     notifyItem(itemType: ItemType): void;
@@ -103,9 +119,13 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     addProperty(property: Property, value: any): void;
     getProperty<T>(property: Property): T | undefined;
     removeProperty(property: Property): boolean;
+    getProducedTemperature(): number | undefined;
     get asEntity(): Entity;
     abstract get asCreature(): Creature | undefined;
     abstract get asHuman(): Human | undefined;
     abstract get asNPC(): NPC | undefined;
     abstract get asPlayer(): Player | undefined;
+    protected abstract getApplicableStatusEffects(): Set<StatusType>;
+    private initializeStatusHandlers;
+    private initializeStatusHandler;
 }

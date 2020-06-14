@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import Button from "newui/component/Button";
-import { Bindable, BindCatcherApi } from "newui/IBindingManager";
+import { IBindHandlerApi } from "newui/input/Bind";
 import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 export default class MenuBarButton extends Button {
     private readonly onActivate;
@@ -19,6 +19,6 @@ export default class MenuBarButton extends Button {
      * Returns the formatted CSS url for the stat icon.
      */
     getStatIcon(): string;
-    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
+    onBindable(api: IBindHandlerApi): boolean;
     private getTooltip;
 }

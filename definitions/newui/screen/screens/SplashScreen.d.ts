@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import Screen from "newui/screen/Screen";
 export default class SplashScreen extends Screen {
+    static show(): Promise<void>;
+    private static complete;
+    private readonly completed;
     constructor();
-    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     protected create(): Promise<void>;
-    private showNext;
+    protected onInput(): void;
 }

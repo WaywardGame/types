@@ -13,7 +13,9 @@ import Interrupt from "language/dictionary/Interrupt";
 import InterruptChoice from "language/dictionary/InterruptChoice";
 import { IComponent } from "newui/component/IComponent";
 import { IInterruptMenuFactory } from "newui/INewUi";
+import { IBindHandlerApi } from "newui/input/Bind";
 import ScreenManager from "newui/screen/ScreenManager";
+import SelectionHandler from "newui/screen/screens/menu/component/SelectionHandler";
 import TooltipManager from "newui/tooltip/TooltipManager";
 import HighlightManager from "newui/util/HighlightManager";
 import { InterruptOptions } from "newui/util/IInterrupt";
@@ -30,6 +32,7 @@ export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     readonly scale: ScaleManager;
     readonly highlights: HighlightManager;
     readonly screens: ScreenManager;
+    readonly selection: SelectionHandler;
     private _windowWidth;
     get windowWidth(): number;
     private _windowHeight;
@@ -84,6 +87,10 @@ export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     protected onMessage(_: any, fullscreen: boolean): void;
     protected onInterruptClosed(): void;
     protected onLanguageChange(_: any, language: string): void;
+    protected onFullscreen(): boolean;
+    protected onToggleDevMode(): boolean;
+    protected onReload(api: IBindHandlerApi): boolean;
+    protected onToggleDevTools(): boolean;
 }
 declare const newui: NewUi;
 export default newui;

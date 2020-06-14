@@ -8,41 +8,22 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import Entity from "entity/Entity";
-import Human from "entity/Human";
 import { StatusType } from "entity/IEntity";
-import { IModdable } from "mod/ModRegistry";
-import StatusEffectRenderer from "renderer/StatusEffectRenderer";
-import { IRGB } from "utilities/Color";
-export interface IStatusEffectDescription extends IModdable {
-    iconPath?: string | ((entity: Entity) => string);
-    renderer: StatusEffectRenderer;
-    particles?: {
-        /**
-         * Particle effect for every turn, in a 2-val tuple.
-         * @param countOrChance If a number less than `1`, the chance of the particle effect happening. Greater than `1` increases the number of particles.
-         * @param color The color of the particle effect
-         */
-        onTurn?: [number, IRGB];
-        /**
-         * Particle effect for every status effect tick (20 turns), in a 2-val tuple.
-         * @param countOrChance If a number less than `1`, the chance of the particle effect happening. Greater than `1` increases the number of particles.
-         * @param color The color of the particle effect
-         */
-        onTick?: [number, IRGB];
-    };
-    /**
-     * Whether the status effect should pass (be removed from the human).
-     */
-    shouldPass(human: Human, passChanceMultiplier: number): boolean;
-    /**
-     * Event handler for when the status effect passes.
-     */
-    onPassed(human: Human): void;
-    /**
-     * Event handler for every tick that the human has the status effect.
-     */
-    onTick(human: Human, effectMultiplier: number): void;
-}
-declare const statusEffectDescriptions: OptionalDescriptions<StatusType, IStatusEffectDescription>;
-export default statusEffectDescriptions;
+import Bleeding from "entity/status/handler/Bleeding";
+import Burned from "entity/status/handler/Burned";
+import Dehydrated from "entity/status/handler/Dehydrated";
+import Encumbered from "entity/status/handler/Encumbered";
+import Exhausted from "entity/status/handler/Exhausted";
+import Poisoned from "entity/status/handler/Poisoned";
+import Starving from "entity/status/handler/Starving";
+import { StatusEffectClass } from "entity/status/StatusEffect";
+declare const _default: {
+    0: typeof Bleeding;
+    1: typeof Poisoned;
+    2: typeof Burned;
+    3: typeof Encumbered;
+    4: typeof Exhausted;
+    5: typeof Starving;
+    6: typeof Dehydrated;
+} & Record<StatusType, StatusEffectClass>;
+export default _default;

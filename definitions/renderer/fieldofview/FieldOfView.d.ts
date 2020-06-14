@@ -50,9 +50,9 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> i
     getTextureSize(): number;
     getSubdivisions(): number;
     tickSeed(): void;
-    updateTransitionProgress(): boolean;
+    updateTransitionProgress(timeStamp: number): boolean;
     resetTransitionProgress(): void;
-    compute(force?: boolean): void;
+    compute(timeStamp: number, force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
     getBounds(player: Player, radius?: number): IBound3;

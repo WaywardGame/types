@@ -13,6 +13,11 @@ export declare module EnumProperty {
     const OFFICIAL_MAX: unique symbol;
     const MOD_START: unique symbol;
     const LENGTH: unique symbol;
+    const EXCLUDED: unique symbol;
+    /**
+     * Sets the enum keys that won't be iterated over in the enum.
+     */
+    function setExcluded<E>(enumObject: E, ...keys: Array<keyof E>): void;
 }
 export declare enum EnumId {
     CreatureType = 0,
@@ -49,7 +54,8 @@ export declare enum EnumId {
     TerrainDecoration = 31,
     Interrupt = 32,
     Recipe = 33,
-    DoodadTypeGroup = 34
+    DoodadTypeGroup = 34,
+    WorldLayer = 35
 }
 export interface IEnumInfo {
     enumId: EnumId;

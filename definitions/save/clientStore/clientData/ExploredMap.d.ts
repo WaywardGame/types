@@ -10,8 +10,11 @@
  */
 import IExploreMap from "renderer/IExploreMap";
 import { IPreSerializeCallback } from "save/ISerializer";
-export default class ExploredMapClientData implements IPreSerializeCallback {
+export interface IExploredMapClientDataOld {
     exploredMapEncodedData: number[][];
+}
+export default class ExploredMapClientData implements IPreSerializeCallback {
+    exploredMapEncodedData: Map<string, number[][]>;
     exploredMap: IExploreMap[] | undefined;
     preSerializeObject(): void;
     getExploreMap(z: number): IExploreMap;

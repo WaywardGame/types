@@ -70,11 +70,22 @@ export default class TileAtlas implements ITileAtlas {
     private mountainTypes;
     private mountainGroundTypes;
     private oreTypes;
+    private renderOverMountainTypes;
+    private waterTypes;
+    private iceTypes;
+    private freshWaterTypes;
+    private baseWaterTypes;
     generateLookups(): void;
     isMountain(type: TerrainType): boolean;
     isMountainGround(type: TerrainType): boolean;
     isOre(type: TerrainType): boolean;
     isLava(type: TerrainType): boolean;
+    isWaterOrIce(type: TerrainType): boolean;
     isWater(type: TerrainType): boolean;
+    isFreezingWater(type: TerrainType): boolean;
+    isIce(type: TerrainType): boolean;
+    isFreshWater(type: TerrainType): boolean;
     isFloor(type: TerrainType): boolean;
+    shouldRenderOverMountainTypes(type: TerrainType): boolean;
+    getBaseWaterType(type: TerrainType): TerrainType;
 }

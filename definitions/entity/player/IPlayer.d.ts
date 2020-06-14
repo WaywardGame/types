@@ -16,7 +16,6 @@ import { IMessage } from "entity/player/IMessageManager";
 import MessageManager from "entity/player/MessageManager";
 import Player from "entity/player/Player";
 import { Events } from "event/EventEmitter";
-import { Milestone } from "game/milestones/IMilestone";
 import { IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import { IOptions } from "save/data/ISaveDataGlobal";
@@ -24,15 +23,17 @@ import { Direction } from "utilities/math/Direction";
 import { IVector2 } from "utilities/math/IVector";
 export interface IPlayerEvents extends Events<Human> {
     /**
+     * Called when the player tick starts
+     */
+    tickStart(): any;
+    /**
+     * Called when the player tick ends
+     */
+    tickEnd(): any;
+    /**
      * Called when the player is spawned. (At the end of `Player.setup`)
      */
     spawn(): void;
-    /**
-     * @param milestone The milestone that is being updated
-     * @param value The new value for this milestone
-     * @param max The max value for this milestone
-     */
-    milestoneUpdate(milestone: Milestone, value: number, max: number): void;
     /**
      * @param key The key of `IOptions` that was changed on this player
      * @param value The value this key was set to
@@ -84,6 +85,19 @@ export interface IPlayerEvents extends Events<Human> {
      */
     getMovementIntent(): IMovementIntent | undefined;
     /**
+     * Called when no input is received
+     */
+    noInput(): any;
+    /**
+     * Called when the walk path of the player changes.
+     */
+    walkPathChange(walkPath?: IVector2[]): any;
+    /**
+     * Called when the player completes a movement
+     */
+    moveComplete(): any;
+    changeZ(z: number, oldZ: number): any;
+    /**
      * Called when getting the players weight status
      * @returns The weight status of the player or undefined to use the default logic
      */
@@ -113,7 +127,7 @@ export interface IAttackHand {
     leftHand: number;
     rightHand: number;
 }
-export declare type IPlayerOld = Partial<Player> & {
+export declare type IPlayerOld = Partial<Omit<Player, "customization">> & {
     gender: 0 | 1;
     talent: number;
     stamina: number;
@@ -146,6 +160,7 @@ export declare type IPlayerOld = Partial<Player> & {
     malignity: number;
     exploredMapEncodedData: number[][];
     messages: MessageManager;
+    raft: number | undefined;
 };
 export interface IStatsOld {
     health: IStatOld;
@@ -193,9 +208,6 @@ export interface IMovementIntent {
     shouldDisableTurnDelay?: true;
 }
 export interface IPlayerTravelData {
-    starvation: number;
-    dehydration: number;
-    originalHealth: number;
     itemId: number | undefined;
     state: PlayerState;
 }
@@ -209,10 +221,15 @@ export declare enum PlayerState {
 }
 export declare enum WeightStatus {
     None = 0,
-    Overburdened = 1,
-    Encumbered = 2
+    Encumbered = 1,
+    Overburdened = 2
 }
 /**
  * The amount of extra weight the player can hold (added to max health)
  */
 export declare const STRENGTH_BONUS = 25;
+/**
+ * At this weight or more, you are encumbered.
+ * Defaults to 90% (0.9)
+ */
+export declare const WEIGHT_ENCUMBERED = 0.9;

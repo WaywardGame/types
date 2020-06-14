@@ -9,5 +9,9 @@
  * https://waywardgame.github.io/
  */
 import { ITerrainDescription, TerrainType } from "tile/ITerrain";
-export declare const terrainDescriptions: OptionalDescriptions<TerrainType, ITerrainDescription>;
+export interface ILeftOverTile {
+    terrainType: TerrainType;
+    chance?: number;
+}
+declare const terrainDescriptions: OptionalDescriptions<TerrainType, ITerrainDescription>;
 export default terrainDescriptions;

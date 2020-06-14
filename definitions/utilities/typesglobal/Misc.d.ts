@@ -19,4 +19,5 @@ declare global {
     type PropertyOf<T, K extends string | number | symbol> = T extends {
         [key in K]: infer V;
     } ? V : never;
+    type Falsy = undefined | null | 0 | "" | false;
 }

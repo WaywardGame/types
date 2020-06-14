@@ -17,6 +17,7 @@ export default class ChangelogMenu extends Menu {
     private lastVersion;
     constructor();
     protected onBeforeShow(): Promise<void>;
+    protected highlightVisibleTabs(): void;
     private refresh;
     private showVersion;
     private appendChangelog;

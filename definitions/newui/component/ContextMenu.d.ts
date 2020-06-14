@@ -21,14 +21,15 @@ export declare type IOptionDescription = {
     onActivate(): any;
 });
 export declare type ContextMenuOptionKeyValuePair<O extends number | string | symbol = number | string | symbol> = [O, IOptionDescription];
-export default class ContextMenu<O extends number | string | symbol = number | string | symbol> extends Component implements IContextMenu<O> {
+export declare type ContextMenuDescriptions<O extends number | string | symbol = number | string | symbol> = Array<ContextMenuOptionKeyValuePair<O> | typeof ContextMenu.Divider>;
+declare class ContextMenu<O extends number | string | symbol = number | string | symbol> extends Component implements IContextMenu<O> {
     event: IEventEmitter<this, Events<IContextMenu>>;
     private activeOption;
     private readonly descriptions;
     private readonly options;
-    constructor(...descriptions: Array<ContextMenuOptionKeyValuePair<O> | undefined>);
+    constructor(...descriptions: Array<ContextMenuOptionKeyValuePair<O> | typeof ContextMenu.Divider | undefined>);
     addAllDescribedOptions(): this;
-    addOptions(...options: ArrayOfIterablesOr<O>): this;
+    addOptions(...options: ArrayOfIterablesOr<O | typeof ContextMenu.Divider>): this;
     disableOptions(...options: ArrayOfIterablesOr<O>): this;
     removeOptions(...options: ArrayOfIterablesOr<O>): this;
     setPosition(): this;
@@ -36,6 +37,10 @@ export default class ContextMenu<O extends number | string | symbol = number | s
     hideAndRemove(): Promise<void>;
     private getDescription;
 }
+declare module ContextMenu {
+    const Divider: unique symbol;
+}
+export default ContextMenu;
 interface IContextMenuOptionEvents extends Events<Button> {
     chosen(choice?: ContextMenuOption): any;
     becomeActive(): any;
@@ -52,4 +57,3 @@ export declare class ContextMenuOption extends Button {
     onUnselected(): void;
     protected showSubmenu(generator: () => IContextMenu): void;
 }
-export {};

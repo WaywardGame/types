@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { MessageType } from "entity/player/MessageManager";
+import { MessageType } from "entity/player/IMessageManager";
 import { Quality } from "game/IObject";
 import { Dictionary } from "language/Dictionaries";
 import Message from "language/dictionary/Message";
@@ -111,7 +111,8 @@ declare class Translation {
     withSegments(priority: true, ...segments: ISegment[]): this;
     addArgs(...args: any[]): this;
     inContext(context?: TextContext, normalize?: boolean): this;
-    addReformatter(reformatter?: Translation | ((sections: IStringSection[]) => IStringSection[]), beginning?: boolean): this;
+    passTo(...reformatters: Array<Translation | ((sections: IStringSection[]) => IStringSection[]) | Falsy>): this;
+    passTo(beginning: true, ...reformatters: Array<Translation | ((sections: IStringSection[]) => IStringSection[]) | Falsy>): this;
     /**
      * Sets what this translation will return if there is no translation.
      */

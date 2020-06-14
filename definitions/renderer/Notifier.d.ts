@@ -13,6 +13,7 @@ import { ItemType } from "item/IItem";
 import INotifier, { StatNotificationType } from "renderer/INotifier";
 import Vec2 from "utilities/math/Vector2";
 export default class Notifier implements INotifier {
+    private readonly gl;
     private readonly capacity;
     private mostRecent;
     private mostRecentLife;
@@ -27,7 +28,7 @@ export default class Notifier implements INotifier {
     addItem(entity: Entity, type: ItemType): void;
     addStat(entity: Entity, type: StatNotificationType, value: number): void;
     update(timeStamp: number): void;
-    render(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): void;
+    render(timeStamp: number, x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): boolean;
     private addNotification;
     private renderNotification;
 }

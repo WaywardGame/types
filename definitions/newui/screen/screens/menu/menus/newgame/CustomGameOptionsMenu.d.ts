@@ -9,9 +9,14 @@
  * https://waywardgame.github.io/
  */
 import { IGameOptions } from "game/options/IGameOptions";
+import { BlockRow } from "newui/component/BlockRow";
+import Component from "newui/component/Component";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default class CustomGameOptionsMenu extends Menu {
     private readonly options;
+    private static readonly importButtonInputId;
+    protected readonly rowImportExport: BlockRow;
+    protected readonly buttonImport: Component;
     private readonly refreshables;
     constructor(options: () => IGameOptions);
     protected refresh(): void;

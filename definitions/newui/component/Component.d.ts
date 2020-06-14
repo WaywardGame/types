@@ -9,11 +9,11 @@
  * https://waywardgame.github.io/
  */
 import EventEmitter, { Events } from "event/EventEmitter";
-import { IHookHost } from "mod/IHookHost";
-import { AppendStrategy, IBox, IComponent, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
-import { Bindable, BindCatcherApi } from "newui/IBindingManager";
+import { AppendStrategy, IComponent, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
+import { IBindHandlerApi } from "newui/input/Bind";
 import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "newui/util/ComponentManipulator";
-export default class Component extends EventEmitter.Host<Events<IComponent>> implements IComponent, IHookHost {
+import Rectangle from "utilities/math/Rectangle";
+export default class Component extends EventEmitter.Host<Events<IComponent>> implements IComponent {
     private static readonly map;
     static get<C extends Component = Component>(selector: string, create?: false): C;
     static get<C extends Component = Component>(element: Element, create?: false): C;
@@ -66,8 +66,10 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     setId(id: string): this;
     setSelectable(val: SelectableLayer | false): this;
     registerEventBusSubscriber(...untilEvents: Array<keyof Events<this>>): void;
+    deregisterEventBusSubscriber(): void;
+    registerBindHandlers(...untilEvents: Array<keyof Events<this>>): void;
+    deregisterBindHandlers(): void;
     registerHookHost(name?: string, ...untilEvents: Array<keyof Events<this>>): void;
-    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     isVisible(): boolean;
     show(): this;
     hide(): this;
@@ -78,7 +80,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     append(...elements: ArrayOfIterablesOr<HTMLElement | IComponent | undefined | false>): this;
     append(appendStrategy: AppendStrategy, ...elements: ArrayOfIterablesOr<HTMLElement | IComponent | undefined | false>): this;
     remove(): this;
-    contains(what: string | HTMLElement | IComponent): boolean;
+    contains(what: string | Element | IComponent): boolean;
     dump(filter?: (element: Component) => boolean): this;
     /**
      * Dumps all child components & elements without triggering any events.
@@ -95,23 +97,22 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     /**
      * Remove the context menu from this element
      */
-    setContextMenu(): void;
+    setContextMenu(): this;
     /**
      * Set the context menu for this element
      */
-    setContextMenu(generator: () => IContextMenu | undefined): void;
+    setContextMenu(generator: () => IContextMenu | undefined): this;
     setHighlight(highlight: IHighlight): this;
     removeHighlight(): void;
-    subscribeHoverEvents(): this;
-    unsubscribeHoverEvents(): void;
     setStyle(property: string, value: string | number): this;
-    getBox(regenIfZero?: boolean, forceRegen?: boolean): IBox;
+    getBox(regenIfZero?: boolean, forceRegen?: boolean): Rectangle;
     getOffset(): {
         top: number;
         left: number;
     };
     getNthChild<C extends Component = Component>(nth?: number): C;
-    getChildren<C extends Component = Component>(): import("@wayward/goodstream/Stream").default<C>;
+    getChildren<C extends Component = Component>(selector?: string): import("@wayward/goodstream/Stream").default<C>;
+    siblings<C extends Component = Component>(selector?: string): import("@wayward/goodstream/Stream").default<C>;
     scrollTo(child: Component, ms?: number): void;
     scrollTo(child: Component, offsetTop: number, ms?: number): void;
     schedule<A extends any[]>(cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
@@ -121,9 +122,10 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     schedule<A extends any[]>(ms: number, debounce: number, cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(ms: number, debounce: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
     repaint(): void;
-    forceShowTooltip(onlyIfHovered?: boolean): void;
+    forceShowTooltip(onlyIfHovered?: boolean, recalcTarget?: true): void;
     regenerateBoxes(): void;
+    protected onContextMenu(api: IBindHandlerApi): boolean;
+    protected onMouseEnter(): void;
+    protected onMouseLeave(): void;
     private showTooltip;
-    private onMouseEnter;
-    private onMouseLeave;
 }

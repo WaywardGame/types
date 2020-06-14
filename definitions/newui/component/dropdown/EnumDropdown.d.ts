@@ -13,11 +13,12 @@ import Translation from "language/Translation";
 import Dropdown, { IDropdownOption } from "newui/component/Dropdown";
 export default class EnumDropdown<ENUM_OBJECT, OTHER_OPTIONS extends string | never = never, VALUES = ENUM_OBJECT[keyof ENUM_OBJECT]> extends Dropdown<VALUES | OTHER_OPTIONS> {
     protected readonly enumObject: ENUM_OBJECT;
+    private readonly dictionary;
     get selectionName(): keyof ENUM_OBJECT | undefined;
     private shouldSort;
     constructor(enumObject: ENUM_OBJECT, dictionary: Dictionary, defaultOption: VALUES, option?: Iterable<IDropdownOption<never>>);
     constructor(enumObject: ENUM_OBJECT, dictionary: Dictionary, defaultOption: VALUES | OTHER_OPTIONS, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
     setNoSort(): this;
-    protected getTranslation(id: VALUES, dictionary: Dictionary): Translation;
+    protected getTranslation(id: VALUES): Translation;
     protected filterEnum?(id: VALUES): boolean;
 }

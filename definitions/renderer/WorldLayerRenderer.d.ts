@@ -11,8 +11,16 @@
 import DoodadInfo from "doodad/DoodadInfo";
 import { DoodadType } from "doodad/IDoodad";
 import { IWorldLayer, TerrainMask } from "renderer/IWorldLayer";
-import IWorldRenderer from "renderer/IWorldRenderer";
-export default class WorldLayerRenderer {
+import IWorldRenderer, { RenderLayerFlag } from "renderer/IWorldRenderer";
+import EventEmitter from "event/EventEmitter";
+export interface IWorldLayerRendererEvents {
+    /**
+     * Called when rendering the world
+     * @returns Flags indicating what layers to render
+     */
+    getRenderFlags(): RenderLayerFlag;
+}
+export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRendererEvents> {
     private readonly gl;
     protected renderer: IWorldRenderer;
     private readonly worldLayer;

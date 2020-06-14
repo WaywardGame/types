@@ -47,7 +47,7 @@ export default abstract class Human extends Entity {
     identifier: string;
     inventory: IContainer;
     options: IOptions;
-    raft: number | undefined;
+    vehicleItemId: number | undefined;
     restData: IRestData | undefined;
     score: number;
     skills: ISkillSet;
@@ -61,7 +61,6 @@ export default abstract class Human extends Entity {
     resetStatTimers(): void;
     isLocalPlayer(): boolean;
     setOptions(options: IOptions): void;
-    getName(): Translation;
     getEquipEffect<E extends EquipEffect>(type: E): FirstIfOne<EquipEffectByType<E>>;
     getProtectedItemsOptions(): IProtectedItemOptions;
     getReputation(): number;
@@ -111,7 +110,7 @@ export default abstract class Human extends Entity {
     updateStatsAndAttributes(): void;
     staminaReduction(skill: SkillType): void;
     updateReputation(reputation: number): void;
-    setRaft(itemId: number | undefined): boolean;
+    setPaddling(paddling: boolean, itemId: number): void;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     getBurnDamage(fireType: FireType, skipParry?: boolean, equipType?: EquipType): number;
@@ -122,7 +121,7 @@ export default abstract class Human extends Entity {
     setPosition(point: IVector3): void;
     setZ(z: number, updateFlowField?: boolean): void;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
-    damageBySteppingOn(thing: Doodad | ITileEvent, options?: ICheckUnderOptions): ICheckUnderOptions;
+    damageByInteractingWith(thing: Doodad | ITileEvent, options: ICheckUnderOptions | undefined, damageLocation: EquipType): ICheckUnderOptions;
     equip(item: Item, slot: EquipType): void;
     unequip(item: Item): void;
     unequipAll(): void;
@@ -132,9 +131,8 @@ export default abstract class Human extends Entity {
     /**
      * Gets a stamina penalty delay to be used for slowed actions and movement.
      * @param staminaToStartAddingDelayAt Stat value where delays start getting added from.
-     * @param maximumDelayMultiplier The maximum delay multiplier.
      */
-    getStaminaDelay(staminaToStartAddingDelayAt: number, maximumDelayMultiplier: number): number;
+    getStaminaDelay(staminaToStartAddingDelayAt?: number): number;
     getConsumeBonus(item: Item | undefined, skillUse?: SkillType): number;
     checkForGatherFire(): Translation | undefined;
     calculateEquipmentStats(): void;
@@ -143,10 +141,14 @@ export default abstract class Human extends Entity {
     causeStatus(thing: Doodad | ITileEvent, equipForProtection?: EquipType): void;
     getAsHuman(): Human;
     /**
-     * Gets if the human is swimming (and not on a raft)
+     * Gets if the human is swimming (and not on a boat)
      */
     isSwimming(): boolean;
     updateSwimming(): void;
+    /**
+     * Humans can't produce temperature, but their equipment can
+     */
+    getProducedTemperature(): number | undefined;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
     protected getSkillGainMultiplier(skillType: SkillType): number;
     /**

@@ -18,9 +18,10 @@ import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulat
 import { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import { IStringSection } from "utilities/string/Interpolator";
-interface IComponentEvents {
+export interface IComponentEvents {
     show(): any;
     hide(): any;
+    toggle(visible: boolean): any;
     append(to: HTMLElement | IComponent): any;
     remove(): any;
     removeForAppend(): any;
@@ -40,6 +41,9 @@ interface IComponentEvents {
      * Note: Requires calling `subscribeHoverEvents`
      */
     mouseleave(): any;
+    focus(): any;
+    blur(): any;
+    removeContextMenu(): any;
 }
 export declare type AppendStrategy = "append" | "prepend" | {
     after: IComponent;
@@ -298,11 +302,11 @@ export declare enum HighlightType {
     Skill = 3
 }
 export interface IBox {
-    bottom: number;
-    height: number;
     left: number;
-    right: number;
     top: number;
     width: number;
+    height: number;
+    readonly bottom: number;
+    readonly right: number;
 }
 export {};

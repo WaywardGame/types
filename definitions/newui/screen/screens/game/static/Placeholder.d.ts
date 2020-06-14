@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import Component from "newui/component/Component";
-import { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
+import { Quadrant } from "newui/screen/screens/game/component/IQuadrantComponent";
 import GameScreen from "newui/screen/screens/GameScreen";
 export default class Placeholder extends Component {
     private readonly host;

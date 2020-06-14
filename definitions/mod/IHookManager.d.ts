@@ -10,7 +10,6 @@
  */
 import { IHookHost } from "mod/IHookHost";
 export declare enum Hook {
-    OnBindLoop = "onBindLoop",
     OnBuild = "onBuild",
     OnCraft = "onCraft",
     OnCreateWorld = "onCreateWorld",
@@ -22,21 +21,17 @@ export declare enum Hook {
     OnDisplayMessage = "onDisplayMessage",
     OnDoodadSpawn = "onDoodadSpawn",
     OnEntityKill = "onEntityKill",
-    OnGameEnd = "onGameEnd",
     OnGameScreenVisible = "onGameScreenVisible",
     OnGameStart = "onGameStart",
     OnGameTickEnd = "onGameTickEnd",
     OnGameTickStart = "onGameTickStart",
     OnHumanSkillChange = "onHumanSkillChange",
-    OnInspectionSection = "onInspectionSection",
     OnItemDamage = "onItemDamage",
     OnItemEquip = "onItemEquip",
     OnItemQuickslot = "onItemQuickslot",
     OnLanguageChange = "onLanguageChange",
     OnMove = "onMove",
-    OnMoveComplete = "onMoveComplete",
     OnMoveDirectionUpdate = "onMoveDirectionUpdate",
-    OnNoInputReceived = "onNoInputReceived",
     OnNPCDamage = "onNPCDamage",
     OnNPCDeath = "onNPCDeath",
     OnNPCSpawn = "onNPCSpawn",
@@ -46,15 +41,15 @@ export declare enum Hook {
     OnPlayerDeath = "onPlayerDeath",
     OnPlayerJoin = "onPlayerJoin",
     OnPlayerLeave = "onPlayerLeave",
-    OnPlayerTickEnd = "onPlayerTickEnd",
-    OnPlayerTickStart = "onPlayerTickStart",
+    /**
+     * @deprecated
+     */
     OnPlayerWalkToTilePath = "onPlayerWalkToTilePath",
     OnQueueSoundEffect = "onQueueSoundEffect",
     OnReadMap = "onReadMap",
     OnRenderOverlay = "onRenderOverlay",
     OnSailToCivilization = "onSailToCivilization",
     OnSpawnCreatureFromGroup = "onSpawnCreatureFromGroup",
-    OnTileUpdate = "onTileUpdate",
     OnTurnEnd = "onTurnEnd",
     OnTurnStart = "onTurnStart",
     OnUpdateWeight = "onUpdateWeight",

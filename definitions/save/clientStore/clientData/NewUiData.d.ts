@@ -10,8 +10,10 @@
  */
 export default class NewUiData {
     private readonly data;
+    private readonly updates;
     get<T>(id: string | number, key: string, or?: T): T;
     set(id: string | number, key: string, value: any): void;
     has(id: string | number, key: string): boolean;
     update(id: string | number, key: string): void;
+    private sendUpdate;
 }

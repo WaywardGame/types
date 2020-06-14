@@ -18,11 +18,12 @@ import { EquipType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
+import { ITemperatureSource } from "game/temperature/ITemperature";
 import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, ItemType, LegendaryType, TatteredMap } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { IVector3 } from "utilities/math/IVector";
-export default class Item implements IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer> {
+export default class Item implements IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource {
     book?: BookType;
     constructedFrom?: IConstructedInfo;
     containedItems: Item[];
@@ -41,7 +42,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     quality: Quality;
     quickSlot: number | undefined;
     renamed: string | ISerializedTranslation;
-    tatteredMap: TatteredMap;
+    tatteredMap?: TatteredMap;
     tradedFrom?: string[];
     type: ItemType;
     used?: IItemUsed;
@@ -51,6 +52,11 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     private _description;
     constructor(itemType?: ItemType | undefined, quality?: Quality, human?: Human);
     toString(): string;
+    /**
+     * Changes the item id for this item
+     * @param id The new item id
+     */
+    changeId(id: number): void;
     /**
      * @deprecated This method currently shouldn't be used in production code, as it's to do with the new crafting system. Stay tuned.
      */
@@ -85,6 +91,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     isDamaged(): boolean;
     isInTradeContainer(): boolean;
     isEquipped(): boolean;
+    getEquippedPlayer(): Human | undefined;
     getEquipSlot(): EquipType | undefined;
     setQuickSlot(player: Player, quickSlot: number | undefined): void;
     clearQuickSlot(): void;
@@ -98,7 +105,12 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     getLocation(): IVector3 | undefined;
     dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
-    initializeMap(): void;
+    /**
+     * Set the coordinates for a tattered or drawn map, or set it to reinitialize later.
+     * @param reinitialize Set to true if you want the map to require decoding before use (the coords will get generated at that point).
+     * @param player The player that decoded the map.
+     */
+    initializeMap(reinitialize: boolean, player?: Player): void;
     setQuality(human: Human | undefined, quality?: Quality): void;
     getAcceptableLegendaryTypes(): LegendaryType[];
     setLegendary(bypassType?: boolean): void;
@@ -114,6 +126,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     revertFromDoodad(doodad: Doodad): void;
     getContainerWeightReduction(): number;
     canBeRefined(): boolean;
+    getProducedTemperature(): number | undefined;
     onUnserialized(): void;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;

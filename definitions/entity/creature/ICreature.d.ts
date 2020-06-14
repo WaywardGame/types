@@ -12,6 +12,7 @@ import Creature from "entity/creature/Creature";
 import Human from "entity/Human";
 import { AiType, DamageType, Defense, IEntityEvents, MoveType, StatusType } from "entity/IEntity";
 import Player from "entity/player/Player";
+import { BiomeType } from "game/IBiome";
 import { ItemType, ItemTypeGroup } from "item/IItem";
 import { LootGroupType } from "item/LootGroups";
 import Message from "language/dictionary/Message";
@@ -62,7 +63,11 @@ export declare enum CreatureType {
     AntelopeJackrabbit = 38,
     RedSnapper = 39,
     Walleye = 40,
-    Wisp = 41
+    Wisp = 41,
+    ArcticWolf = 42,
+    ArcticHare = 43,
+    PolarBear = 44,
+    Penguin = 45
 }
 export interface ICreatureOld extends Creature {
     hp: number;
@@ -100,7 +105,9 @@ export declare enum TileGroup {
     All = 14,
     Seawater = 15,
     FreshWater = 16,
-    Swamp = 17
+    Swamp = 17,
+    IceCap = 18,
+    IceCapWithWater = 19
 }
 export interface ICreatureDescription extends IModdable {
     minhp: number;
@@ -122,8 +129,6 @@ export interface ICreatureDescription extends IModdable {
     loot?: ICreatureLoot[];
     aberrantLoot?: ICreatureLoot[];
     spawnTiles: TileGroup;
-    spawnReputation?: number;
-    spawnOnBenignity?: boolean;
     spawnGroup?: SpawnGroup[];
     makeNoise?: boolean;
     canCauseStatus?: StatusType[];
@@ -149,6 +154,17 @@ export interface ICreatureDescription extends IModdable {
     passable?: boolean;
     texOffsetY?: number;
     isTall?: boolean;
+    spawn?: OptionalDescriptions<BiomeType, ICreatureSpawn>;
+}
+export interface ICreatureSpawn {
+    /**
+     * The reputation of the player or players (averaged) at which the creature spawns at
+     */
+    spawnsOnReputation?: number;
+    /**
+     * True if the creature's spawnsOnReputation is set <= 0 and you want the creature to spawn on any positive reputation value
+     */
+    spawnsOnPositiveReputation?: boolean;
 }
 export interface ICreatureLoot {
     item: ItemType;

@@ -9,9 +9,11 @@
  * https://waywardgame.github.io/
  */
 import Interrupt from "language/dictionary/Interrupt";
+import InterruptChoice from "language/dictionary/InterruptChoice";
 import ClientPacket from "multiplayer/packets/ClientPacket";
-export default class ConfirmInterruptPacket extends ClientPacket {
+export default class DisplayInterruptPacket extends ClientPacket {
     interrupt: Interrupt;
     args: any[];
+    choices: InterruptChoice[] | undefined;
     process(): Promise<void>;
 }

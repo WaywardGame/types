@@ -8,29 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IMessage, IMessageManager, Source } from "entity/player/IMessageManager";
+import { IMessage, IMessageHistoryItem, IMessageManager, MessageType, Source } from "entity/player/IMessageManager";
 import Player from "entity/player/Player";
 import Message from "language/dictionary/Message";
-import Translation, { ISerializedTranslation } from "language/Translation";
+import Translation from "language/Translation";
 import { IVector3 } from "utilities/math/IVector";
-import { IStringSection } from "utilities/string/Interpolator";
-export interface IMessageHistoryItem {
-    id: number;
-    source: string[];
-    time: number;
-    turn: number;
-    type?: MessageType;
-    message: ISerializedTranslation | IStringSection[];
-}
-export declare enum MessageType {
-    None = 0,
-    Bad = 1,
-    Good = 2,
-    Miss = 3,
-    Attack = 4,
-    Stat = 5,
-    Skill = 6
-}
 export declare class MessageManagerNoOp implements IMessageManager {
     saveNoProperties: undefined;
     getMessageHistory(): import("@wayward/goodstream/Stream").default<IMessage>;

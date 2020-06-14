@@ -10,22 +10,11 @@
  */
 import { Events, IEventEmitter } from "event/EventEmitter";
 import Translation from "language/Translation";
-import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
+import { ContextMenuDescriptions } from "newui/component/ContextMenu";
 import StaticComponent from "newui/screen/screens/game/component/StaticComponent";
 import { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import GameScreen from "newui/screen/screens/GameScreen";
-/**
- * Since when do quadrants refer to 8 sections, this ain't no octagon
- */
-export declare enum Quadrant {
-    None = 0,
-    TopLeft = 1,
-    Top = 2,
-    TopRight = 3,
-    BottomRight = 4,
-    Bottom = 5,
-    BottomLeft = 6
-}
+import { Quadrant } from "./IQuadrantComponent";
 interface IQuadrantComponentEvents extends Events<StaticComponent> {
     /**
      * @param quadrant The new quadrant of this element
@@ -71,18 +60,10 @@ export default abstract class QuadrantComponent extends StaticComponent {
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
     getName(): Translation;
-    protected getContextMenuDescription(): ContextMenuOptionKeyValuePair[];
+    protected getContextMenuDescription(): ContextMenuDescriptions;
     /**
      * Returns a new context menu using this element's context menu descriptions
      */
     private getContextMenu;
-}
-export declare enum QuadrantComponentContextMenuAction {
-    SwitchWith = 0,
-    MoveTo = 1,
-    Hide = 2
-}
-export declare module QuadrantComponentContextMenuAction {
-    function translation(action: QuadrantComponentContextMenuAction): Translation;
 }
 export {};

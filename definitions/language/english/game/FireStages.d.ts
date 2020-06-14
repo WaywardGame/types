@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { FireStage } from "game/IGame";
-declare const fireStages: Descriptions<FireStage, string>;
+import { FireStage } from "tile/events/IFire";
+declare const fireStages: Record<FireStage, string>;
 export default fireStages;

@@ -20,7 +20,7 @@ declare module Enums {
     function isModded<E, K extends string>(enumObject: {
         [key in K]: E;
     }, entry: E): boolean;
-    function getMod<O>(enumObject: O, enumName: keyof O, isGlobalEnum: boolean): IModInfo | undefined;
+    function getMod<O>(enumObject: O, entry: O[keyof O], isGlobalEnum?: boolean): IModInfo | undefined;
     /**
      * Returns an enum entry by its name, case-insensitive.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
@@ -82,11 +82,14 @@ declare module Enums {
      * Returns whether the given number is a valid entry in an enum.
      * @param enumObject The enum object to check for the entry.
      * @param entry The value to check.
-     * @param isBasicEnum Whether the enum is a "basic" enum; IE, every entry is a number between 0 and Infinity
+     * @param isBasicEnum Whether the enum is a "basic" enum; IE, every entry is a number between `0` and `Infinity`. (Default: `true`)
      */
     function isValid<E, K extends string>(enumObject: {
         [key in K]: E;
     }, entry: unknown, isBasicEnum?: boolean): entry is E;
-    function toString(enumObject: any, n: number): string;
+    function toString(enumObject: any, n: number, exlude?: number): string;
+    function sortKeysByOrdinal<E extends number, K extends string>(enumObject: {
+        [key in K]: E;
+    }): (keyA: K, keyB: K) => number;
 }
 export default Enums;

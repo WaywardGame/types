@@ -9,8 +9,8 @@
  * https://waywardgame.github.io/
  */
 export declare enum WorldZ {
-    Min = 0,
+    Min = -1,
+    Max = -1,
     Cave = 0,
-    Overworld = 1,
-    Max = 1
+    Overworld = 1
 }

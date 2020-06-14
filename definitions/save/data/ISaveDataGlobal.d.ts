@@ -12,7 +12,8 @@ import { DropLocation } from "entity/action/actions/Drop";
 import { InspectType } from "game/inspection/IInspection";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ISerializedTranslation } from "language/Translation";
-import { IBindings } from "newui/IBindingManager";
+import Bindable from "newui/input/Bindable";
+import { IBinding } from "newui/input/IBinding";
 import { UiExperiment } from "newui/UiExperiments";
 import { ISourceFilter } from "utilities/Log";
 export interface IOptions {
@@ -23,9 +24,7 @@ export interface IOptions {
     autoGatherHarvest: boolean;
     autoPickup: boolean;
     autoSave: [AutoSave.Off] | [AutoSave.Turns | AutoSave.Time, number];
-    bindings: IBindings;
     consoleLogSourceFilter: ISourceFilter;
-    uiExperiments: Array<keyof typeof UiExperiment>;
     currentGame: number;
     defaultCursor: boolean;
     developerMode: boolean;
@@ -57,6 +56,7 @@ export interface IOptions {
     tooltips: {
         [key in InspectType]: boolean | undefined;
     };
+    uiExperiments: Array<keyof typeof UiExperiment>;
     uiScale: number;
     useAdjacentContainers: boolean;
     useNewCraftingSystem: boolean;
@@ -68,6 +68,11 @@ export interface IOptions {
     warnWhenBreakingItemsOnCraft: boolean;
     windowMode: boolean;
     zoomLevel: number;
+    /**
+     * Indexed by `Bindable` names, IE `GameFaceDirection`
+     * Missing indices = use default binding
+     */
+    bindings: OptionalDescriptions<keyof typeof Bindable, IBinding[]>;
 }
 export declare enum AutoSave {
     Off = 0,
@@ -84,10 +89,11 @@ export declare enum PowerMode {
     LowPower = "low-power",
     HighPerformance = "high-performance"
 }
-export declare type IOptionsOld = Partial<IOptions> & {
+export declare type IOptionsOld = Partial<Pick<IOptions, "bindings">> & {
     keyBinds: {
         [index: number]: number;
     };
+    bindings: IBindingsOld;
     directionTurnDelay: boolean;
     developerLogging: boolean;
     hints: boolean;
@@ -119,3 +125,21 @@ export declare type IHighscoreOld = Partial<IHighscore> & {
     dailyChallenge: boolean;
     talent: number;
 };
+export declare enum KeyModifierOld {
+    Shift = 0,
+    Alt = 1,
+    Control = 2
+}
+export interface IBindingOld {
+    /**
+     * See https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code#Try_it_out, use `key` only if `code` is an empty string
+     */
+    key?: string;
+    mouseButton?: number | "Up" | "Down";
+    /**
+     * Does not currently function
+     */
+    gamepadButton?: number;
+    modifiers?: KeyModifierOld[];
+}
+export declare type IBindingsOld = Record<string, ArrayOr<IBindingOld>>;

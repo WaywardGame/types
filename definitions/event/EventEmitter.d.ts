@@ -17,6 +17,7 @@ export declare enum Priority {
     Highest = 2000
 }
 export declare const SYMBOL_SUBSCRIPTIONS: unique symbol;
+export declare const SYMBOL_SUPERCLASSES: unique symbol;
 declare type Abstract<T> = Function & {
     prototype: T;
 };
@@ -28,6 +29,7 @@ export interface IEventEmitterHost<E> {
 export declare type IEventEmitterHostClass<E> = ClassOrAbstractClass<IEventEmitterHost<E>>;
 export declare type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends IEventEmitterHostClass<infer E> ? E : never;
 export interface ITrueEventEmitterHostClass<E> extends Class<any> {
+    [SYMBOL_SUPERCLASSES]: Array<ITrueEventEmitterHostClass<E>>;
     [SYMBOL_SUBSCRIPTIONS]: Map<any, Map<keyof E, PriorityMap<Set<Iterable<string | Handler<any, any>>>>>>;
 }
 export interface ISelfSubscribedEmitter<E> {
@@ -67,7 +69,6 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     private eventEmitterMeta?;
     get event(): IEventEmitter<this, IEventEmitterEvents<H, E>>;
     constructor(host: H);
-    copyFrom(emitter: IEventEmitter<H, E>): void;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     emitFirst<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): any;
     emitFirstDefault<K extends keyof E, D>(event: K, generateDefault: () => D, ...args: ArgsOf<E[K]>): any;
@@ -80,6 +81,7 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
     hasHandlersForEvent(...events: Array<keyof E>): boolean;
+    private copyFrom;
     private handlersForEvent;
     private handlers;
 }

@@ -11,10 +11,17 @@
 import ISerializer, { ISerializable } from "save/ISerializer";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
+declare type ConsumerVectorRange = (vec: IVector2, value: number) => any;
 export default class Vector2 implements IVector2, ISerializable {
     static get ZERO(): Vector2;
     static get ONE(): Vector2;
+    static get INFINITY_NEGATIVE(): Vector2;
+    static get INFINITY(): Vector2;
     static inRange(center: IVector2, range: number, includeCenter?: boolean): import("@wayward/goodstream/Stream").default<IVector2>;
+    static forRange(center: IVector2, range: number, consumer: ConsumerVectorRange): void;
+    static forRange(center: IVector2, range: number, includeCenter: boolean, consumer: ConsumerVectorRange): void;
+    static forRange(center: IVector2, range: number, min: IVector2, max: IVector2, consumer: ConsumerVectorRange): void;
+    static forRange(center: IVector2, range: number, min: IVector2, max: IVector2, includeCenter: boolean, consumer: ConsumerVectorRange): void;
     static cross(vector: IVector2, vector2: IVector2): Vector3;
     static cross<D extends IVector3>(vector: IVector2, vector2: IVector2, dest: D): D;
     static dot(vector: IVector2, vector2: IVector2): number;
@@ -72,3 +79,4 @@ export default class Vector2 implements IVector2, ISerializable {
     serializeObject(serializer: ISerializer): void;
     deserializeObject(serializer: ISerializer): void;
 }
+export {};

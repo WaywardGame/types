@@ -10,16 +10,22 @@
  */
 import { Milestone } from "game/milestones/IMilestone";
 import { BlockRow } from "newui/component/BlockRow";
+import Component from "newui/component/Component";
 import FilterRow from "newui/component/FilterRow";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import MilestoneModifierCheckButton from "newui/screen/screens/menu/component/MilestoneModifierCheckButton";
 export default class MilestoneModifiersMenu extends Menu {
     private readonly milestones;
-    rowBatchEnablingAndDisabling: BlockRow;
-    filter: FilterRow;
+    private static readonly importButtonInputId;
+    protected readonly filter: FilterRow;
+    protected readonly rowImportExport: BlockRow;
+    protected readonly buttonImport: Component;
+    protected readonly rowBatchEnablingAndDisabling: BlockRow;
     private readonly modifierCheckButtons;
     constructor(milestones: Set<Milestone>, allowHostMilestones: boolean);
-    createModifierCheckButton(milestone: Milestone, initialChecked?: boolean): MilestoneModifierCheckButton;
+    createModifierCheckButton(milestone: Milestone): MilestoneModifierCheckButton;
     protected onShow(): void;
     private updateFilter;
+    private exportModifiers;
+    private importModifiers;
 }

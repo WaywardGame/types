@@ -8,21 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ICharacter } from "entity/IHuman";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
-import { Milestone } from "game/milestones/IMilestone";
-import { IHookHost } from "mod/IHookHost";
-import { DisconnectReason, IMultiplayerEvents, IMultiplayerOptions, JoinServerRetryReason, MultiplayerSyncCheck, PacketTarget, ServerInfo, UnableToJoinReason } from "multiplayer/IMultiplayer";
+import { DisconnectReason, IJoinServerOptions, IMultiplayerEvents, IMultiplayerOptions, JoinServerRetryReason, MultiplayerSyncCheck, PacketTarget, ServerInfo, UnableToJoinReason } from "multiplayer/IMultiplayer";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
-export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> implements IHookHost {
+export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     /**
      * Static steam account id when steam support is on
      * Otherwise it will be a random guid that persists
      */
-    private readonly _playerIdentifier;
+    private _playerIdentifier;
     /**
      * Steam id - used for steam networking
      */
@@ -40,8 +37,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     private _dedicatedMatchmaking;
     private _dedicatedMatchmakingRetryTimeoutId;
     private _options;
-    private _character;
-    private _milestoneModifiers?;
+    private _joinServerOptions;
     private _incomingPacketQueue;
     private _incomingPacketProcessingPaused;
     private _packetTickIntervalId;
@@ -80,7 +76,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     getBannedPlayers(): string[];
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
-    joinServer(serverInfo: ServerInfo, character?: ICharacter, milestoneModifiers?: Set<Milestone>): void;
+    joinServer(serverInfo: ServerInfo, options?: Partial<IJoinServerOptions>): void;
     disconnect(reason?: DisconnectReason, args?: any[], unloading?: boolean): Promise<void>;
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo, retryReason: JoinServerRetryReason): Promise<void>;
     disconnectAndResetGameState(reason: DisconnectReason.UnableToJoinGame, unableToJoinReason: UnableToJoinReason): Promise<void>;
@@ -91,6 +87,10 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     onLobbyExited(lobbyId: string): void;
     getClients(): IConnection[];
     closeConnection(reason: DisconnectReason, connection: IConnection): void;
+    sendConnectPacket(): void;
+    requestReconnections(): void;
+    removePlayers(reason: DisconnectReason): void;
+    removePlayer(connection: IConnection, reason: DisconnectReason): void;
     sendPacket(packet: IPacket, exclude?: PacketTarget): void;
     sendPacketTo(to: PacketTarget, packet: IPacket, force?: boolean): void;
     /**
@@ -109,7 +109,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     markCurrentProcessingPacket(packetId: number, processing: boolean): void;
     clearSyncPacketWaiting(packet: IPacket, wait: number): void;
     clearSyncPacketsWaiting(waitId?: string): void;
-    pausePacketProcessing(pause: boolean): void;
+    pauseIncomingPacketProcessing(pause: boolean, clearQueue?: boolean): void;
     updatePlayerId(oldPid: number, newPid: number): void;
     suppressSyncChecks(suppress: boolean): void;
     syncGameState(): void;

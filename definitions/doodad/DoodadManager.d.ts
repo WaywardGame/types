@@ -10,7 +10,9 @@
  */
 import Doodad from "doodad/Doodad";
 import { DoodadType, DoodadTypeGroup, IDoodadOptions } from "doodad/IDoodad";
+import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
+import { TerrainType } from "tile/ITerrain";
 export interface IDoodadManagerEvents {
     /**
      * Called when a doodad is about to be spawned
@@ -34,10 +36,11 @@ export interface IDoodadManagerEvents {
 export default class DoodadManager extends EventEmitter.Host<IDoodadManagerEvents> {
     private cachedBestDoodadForTier;
     private cachedGroups;
+    private cachedDoodadSpawns;
     constructor();
     getBestDoodadForTier(doodad: DoodadType | DoodadTypeGroup): DoodadType | undefined;
     generateLookups(): void;
-    createFake(type: DoodadType, options?: IDoodadOptions): Doodad;
+    createFake(type: DoodadType, options?: IDoodadOptions, x?: number, y?: number, z?: number): Doodad;
     create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): Doodad | undefined;
     /**
      * Removes a doodad from the world.
@@ -48,9 +51,17 @@ export default class DoodadManager extends EventEmitter.Host<IDoodadManagerEvent
      * provided, the assumption is that it will only be called on empty doodads. Therefore, if there *are* items, it will log a warning.
      */
     remove(doodad: Doodad, removeItems?: boolean): void;
-    updateAll(): void;
+    updateAll(ticks: number, realPlayers: Player[]): void;
     isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
     isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
     verifyAndFixItemWeights(): void;
+    /**
+     * Used to spawn a random doodad on the current biome type and at a set location (and terrain type) based on spawnOnWorldGen properties in doodad descriptions.
+     * @param terrainType The terrain type to check.
+     * @param x The x coordinate to check.
+     * @param y The y coordinate to check.
+     * @param z The z coordinate to check.
+     */
+    spawn(terrainType: TerrainType, x: number, y: number, z: number): void;
 }

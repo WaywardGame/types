@@ -15,7 +15,7 @@ import { ITile } from "tile/ITerrain";
 export interface IWorld extends ISerializable {
     width: number;
     height: number;
-    layers: IWorldLayer[];
+    layers: Record<number, IWorldLayer>;
     delete(): void;
     toLocal(world: number, local: number): number;
     addLayer(level: number): void;
@@ -23,7 +23,6 @@ export interface IWorld extends ISerializable {
     isLoaded(): boolean;
     updateAll(): void;
     setupExploredMap(): void;
-    resetExploredMap(): void;
     updateTile(x: number, y: number, z: number, tile: ITile, tileUpdateType: TileUpdateType): void;
 }
 export declare type TerrainData = number;

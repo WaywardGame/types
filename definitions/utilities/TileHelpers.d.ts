@@ -57,7 +57,12 @@ declare module TileHelpers {
      * Check if a tile is a suitable spawn point
      */
     function isSuitableSpawnPointTile(point: IVector3, tile: ITile): boolean;
+    /**
+     * Check if a tile is a suitable spawn point
+     */
+    function isSuitableSpawnPointTileForMultiplayer(point: IVector3, tile: ITile): boolean;
     function getSuitableSpawnPoint(): IVector3;
+    function getPointsAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): IVector3[];
     /**
      * Array version of TileHelpers.tilesAround
      */
@@ -68,6 +73,8 @@ declare module TileHelpers {
     function tilesAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): Generator<ITile, void, unknown>;
     function tilesInRange(point: IVector3, range: number, includeCurrentTile?: boolean): import("@wayward/goodstream/Stream").default<[Vector3, ITile]>;
     function openTileInRange(point: IVector3, range: number, includeCurrentTile?: boolean): [Vector3, ITile] | undefined;
+    function forTilesInRange(point: IVector3, range: number, consumer: (vec: IVector3, tileValue: number) => any): void;
+    function forTilesInRange(point: IVector3, range: number, includeCenter: true, consumer: (vec: IVector3, tileValue: number) => any): void;
     /**
      * Check if the tile is blocked (impassable terrain or doodads that cause blocked movement).
      */

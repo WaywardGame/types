@@ -9,6 +9,5 @@
  * https://waywardgame.github.io/
  */
 export declare enum UiExperiment {
-    NewCraftingDialog = 0,
-    EventBasedTooltips = 1
+    NewCraftingDialog = 0
 }

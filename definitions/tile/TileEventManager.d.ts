@@ -11,8 +11,6 @@
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
-import { InspectionResult } from "game/inspection/IInspection";
-import Inspection from "game/inspection/Inspect";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 import { ITileEvent, TileEventType } from "tile/ITileEvent";
@@ -49,8 +47,7 @@ export default class TileEventManager extends EventEmitter.Host<ITileManagerEven
     canGather(tile: ITile): ITileEvent | undefined;
     updateAll(): void;
     fireOverflow(x: number, y: number, z: number): boolean;
-    getMovementProgress(tileEvent: ITileEvent): number;
-    inspect(inspection: Inspection, ...events: ITileEvent[]): InspectionResult;
+    getMovementProgress(tileEvent: ITileEvent, timeStamp: number): number;
     is(thing: any): thing is ITileEvent;
     canPickup(tile: ITile): ITileEvent | undefined;
     blocksTile(tile: ITile): boolean;

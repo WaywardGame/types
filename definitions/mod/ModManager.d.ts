@@ -27,7 +27,7 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     isMultiplayerClientSide(index: number): boolean;
     isMultiplayerServerSide(index: number): boolean;
     isUnloadable(index: number): boolean;
-    unloadAll(reset?: boolean): Promise<void>;
+    unloadAll(resetState?: boolean): Promise<void>;
     setupMods(): Promise<void>;
     saveAll(): void;
     getFile(modIndex: number, file: string, callback: (data: string, success: boolean) => void): boolean;
