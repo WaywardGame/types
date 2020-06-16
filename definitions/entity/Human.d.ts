@@ -27,8 +27,8 @@ import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IOptions } from "save/data/ISaveDataGlobal";
-import { ITileEvent } from "tile/ITileEvent";
 import { IVector3 } from "utilities/math/IVector";
+import TileEvent from "tile/TileEvent";
 export declare const REPUTATION_MAX = 64000;
 export default abstract class Human extends Entity {
     event: IEventEmitter<this, IHumanEvents>;
@@ -121,7 +121,7 @@ export default abstract class Human extends Entity {
     setPosition(point: IVector3): void;
     setZ(z: number, updateFlowField?: boolean): void;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
-    damageByInteractingWith(thing: Doodad | ITileEvent, options: ICheckUnderOptions | undefined, damageLocation: EquipType): ICheckUnderOptions;
+    damageByInteractingWith(thing: Doodad | TileEvent, options: ICheckUnderOptions | undefined, damageLocation: EquipType): ICheckUnderOptions;
     equip(item: Item, slot: EquipType): void;
     unequip(item: Item): void;
     unequipAll(): void;
@@ -138,7 +138,7 @@ export default abstract class Human extends Entity {
     calculateEquipmentStats(): void;
     discoverRecipe(recipeType: ItemType, crafted?: ICrafted, discoveredClientSide?: boolean): void;
     getDamage(causesDamage: ICausesDamage, equipType?: EquipType): number;
-    causeStatus(thing: Doodad | ITileEvent, equipForProtection?: EquipType): void;
+    causeStatus(thing: Doodad | TileEvent, equipForProtection?: EquipType): void;
     getAsHuman(): Human;
     /**
      * Gets if the human is swimming (and not on a boat)

@@ -21,7 +21,7 @@ import { IStringSection } from "utilities/string/Interpolator";
 export interface IComponentEvents {
     show(): any;
     hide(): any;
-    toggle(visible: boolean): any;
+    toggleVisible(visible: boolean): any;
     append(to: HTMLElement | IComponent): any;
     remove(): any;
     removeForAppend(): any;

@@ -13,8 +13,9 @@ import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
-import { ITileEvent, TileEventType } from "tile/ITileEvent";
+import { TileEventType } from "tile/ITileEvent";
 import { IVector3 } from "utilities/math/IVector";
+import TileEvent from "tile/TileEvent";
 export interface ITileManagerEvents {
     /**
      * Called when a tile event is about to be created
@@ -28,28 +29,28 @@ export interface ITileManagerEvents {
     /**
      * Called when a tile event is created.
      */
-    create(event: ITileEvent): any;
+    create(event: TileEvent): any;
     /**
      * Called when a tile event is removed.
      */
-    remove(event: ITileEvent): any;
+    remove(event: TileEvent): any;
     /**
      * Called when a tile event is moved.
      */
-    move(event: ITileEvent): any;
+    move(event: TileEvent): any;
 }
 export default class TileEventManager extends EventEmitter.Host<ITileManagerEvents> {
-    create(type: TileEventType, x: number, y: number, z: number): ITileEvent | undefined;
-    createFake(type: TileEventType, x: number, y: number, z: number): ITileEvent | undefined;
-    remove(tileEvent: ITileEvent): void;
-    moveTo(tileEvent: ITileEvent, x: number, y: number, z: number): void;
-    get(tile: ITile, type: TileEventType): ITileEvent | undefined;
-    canGather(tile: ITile): ITileEvent | undefined;
+    create(type: TileEventType, x: number, y: number, z: number): TileEvent | undefined;
+    createFake(type: TileEventType, x: number, y: number, z: number): TileEvent | undefined;
+    remove(tileEvent: TileEvent): void;
+    moveTo(tileEvent: TileEvent, x: number, y: number, z: number): void;
+    get(tile: ITile, type: TileEventType): TileEvent | undefined;
+    canGather(tile: ITile): TileEvent | undefined;
     updateAll(): void;
     fireOverflow(x: number, y: number, z: number): boolean;
-    getMovementProgress(tileEvent: ITileEvent, timeStamp: number): number;
-    is(thing: any): thing is ITileEvent;
-    canPickup(tile: ITile): ITileEvent | undefined;
+    getMovementProgress(tileEvent: TileEvent, timeStamp: number): number;
+    is(thing: any): thing is TileEvent;
+    canPickup(tile: ITile): TileEvent | undefined;
     blocksTile(tile: ITile): boolean;
     /**
      * Creates either blood or water blood
@@ -61,8 +62,8 @@ export default class TileEventManager extends EventEmitter.Host<ITileManagerEven
     createBlood(x: number, y: number, z: number): boolean;
     clearBlood(position: IVector3, executor: NPC | Player): boolean;
     moveExcrement(position: IVector3): void;
-    containsDamagingTileEvents(events: ITileEvent[] | undefined): boolean;
-    getName(tileEvent: ITileEvent): Translation;
+    containsDamagingTileEvents(events: TileEvent[] | undefined): boolean;
+    getName(tileEvent: TileEvent): Translation;
     private _addToTile;
     private _removeFromTile;
 }

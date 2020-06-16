@@ -20,7 +20,7 @@ import { IContainer } from "item/IItem";
 import Item from "item/Item";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { PacketType } from "multiplayer/packets/IPacket";
-import { ITileEvent } from "tile/ITileEvent";
+import TileEvent from "tile/TileEvent";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export default abstract class BasePacket {
     protected static registrarId: number;
@@ -81,8 +81,8 @@ export default abstract class BasePacket {
     protected writeMovementIntent(value: IMovementIntent): void;
     protected readItems(): Item[];
     protected writeItems(value: Item[]): void;
-    protected readTileEvent(): ITileEvent | undefined;
-    protected writeTileEvent(value: ITileEvent): void;
+    protected readTileEvent(): TileEvent | undefined;
+    protected writeTileEvent(value: TileEvent): void;
     protected readObject(): any;
     protected writeObject(value: any): void;
     protected readVector2Array(): IVector2[];

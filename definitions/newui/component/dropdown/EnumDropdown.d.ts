@@ -21,4 +21,5 @@ export default class EnumDropdown<ENUM_OBJECT, OTHER_OPTIONS extends string | ne
     setNoSort(): this;
     protected getTranslation(id: VALUES): Translation;
     protected filterEnum?(id: VALUES): boolean;
+    private getOptions;
 }

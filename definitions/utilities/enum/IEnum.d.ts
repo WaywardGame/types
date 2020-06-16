@@ -12,8 +12,22 @@ export declare module EnumProperty {
     const NAME: unique symbol;
     const OFFICIAL_MAX: unique symbol;
     const MOD_START: unique symbol;
-    const LENGTH: unique symbol;
     const EXCLUDED: unique symbol;
+    const KEYS: unique symbol;
+    const VALUES: unique symbol;
+    const ENTRIES: unique symbol;
+}
+export declare type EnumObject<T> = T & {
+    [EnumProperty.NAME]?: string;
+    [EnumProperty.OFFICIAL_MAX]?: number;
+    [EnumProperty.MOD_START]?: number;
+    [EnumProperty.EXCLUDED]?: Set<keyof T>;
+    [EnumProperty.KEYS]?: Array<keyof T>;
+    [EnumProperty.VALUES]?: Array<T[keyof T]>;
+    [EnumProperty.ENTRIES]?: Array<[keyof T, T[keyof T]]>;
+};
+export declare module EnumObject {
+    function get<E>(enumObject: E): EnumObject<E>;
     /**
      * Sets the enum keys that won't be iterated over in the enum.
      */

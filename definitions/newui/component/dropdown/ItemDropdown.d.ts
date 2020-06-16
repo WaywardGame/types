@@ -16,5 +16,5 @@ export default class ItemDropdown<OTHER_OPTIONS extends string = never> extends 
     protected filterEnum(value: ItemType): boolean;
     protected getGroupName(group: ItemTypeGroup): string;
     protected isInGroup(item: ItemType, group: ItemTypeGroup): boolean;
-    protected getGroups(): import("@wayward/goodstream/Stream").default<ItemTypeGroup>;
+    protected getGroups(): ItemTypeGroup[];
 }

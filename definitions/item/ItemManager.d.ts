@@ -120,7 +120,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
     getGroupItems(itemGroup: ItemType | ItemTypeGroup, ancestorGroups?: ItemTypeGroup[]): Set<ItemType>;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
-    getGroups(itemType: ItemType): import("@wayward/goodstream/Stream").default<ItemTypeGroup>;
+    getGroups(itemType: ItemType): ItemTypeGroup[];
     checkMilestones(player: Player, item: Item): void;
     getDefaultDurability(human: Human | undefined, weight: number, itemType: ItemType, getMax?: boolean): number;
     generateLookups(): void;

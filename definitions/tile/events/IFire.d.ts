@@ -18,4 +18,5 @@ export declare enum FireStage {
 }
 export declare module FireStage {
     function get(decay: number): FireStage;
+    function getTemperature(stage: FireStage): number;
 }

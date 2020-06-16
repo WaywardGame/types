@@ -34,7 +34,7 @@ declare class MilestonesManager extends EventEmitter.Host<IMilestoneEvents> {
     /**
      * Get a `Stream` of all completed milestones
      */
-    getCompleted(): import("@wayward/goodstream/Stream").default<Milestone>;
+    getCompleted(): Milestone[];
     add(...updates: IMilestoneUpdate[]): void;
     update(): void;
     areUnlockable(mode?: GameMode): boolean;

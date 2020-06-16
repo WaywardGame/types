@@ -15,7 +15,7 @@ import NPC from "entity/npc/NPC";
 import TemperatureManager from "game/temperature/TemperatureManager";
 import Item from "item/Item";
 import { ITileContainer, ITileData } from "tile/ITerrain";
-import { ITileEvent } from "tile/ITileEvent";
+import TileEvent from "tile/TileEvent";
 import { LogSource } from "utilities/Log";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import { BiomeTypes } from "./IBiome";
@@ -42,7 +42,7 @@ export default class Island {
     saveVersion: string;
     tileContainers: ITileContainer[];
     tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;
-    tileEvents: SaferArray<ITileEvent>;
+    tileEvents: SaferArray<TileEvent>;
     time: TimeManager;
     upgrades: string[];
     version: string;

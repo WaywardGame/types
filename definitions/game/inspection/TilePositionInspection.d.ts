@@ -17,7 +17,7 @@ import { Context } from "game/inspection/InfoProvider";
 import Inspection from "game/inspection/Inspection";
 import { IContainer } from "item/IItem";
 import Item from "item/Item";
-import { ITileEvent } from "tile/ITileEvent";
+import TileEvent from "tile/TileEvent";
 import { IVector3 } from "utilities/math/IVector";
 import HashSet from "utilities/set/HashSet";
 export interface ITilePositionInspectionEvents {
@@ -35,8 +35,8 @@ export default class TilePositionInspection extends EventEmitter.Host<ITilePosit
     types(): import("@wayward/goodstream/Stream").default<InspectType>;
     protected onEntityMove(entity: Entity): void;
     protected onEntitySpawnOrRemove(_: any, entity: Entity): void;
-    protected onTileEventMove(_: any, tileEvent: ITileEvent): void;
-    protected onTileEventCreate(_: any, tileEvent: ITileEvent): void;
+    protected onTileEventMove(_: any, tileEvent: TileEvent): void;
+    protected onTileEventCreate(_: any, tileEvent: TileEvent): void;
     protected onItemCreate(_: any, item: Item): void;
     protected onItemMove(_: any, item: Item, oldContainer: IContainer | undefined, newContainer: IContainer): void;
     protected onCorpseCreate(_: any, corpse: ICorpse): void;

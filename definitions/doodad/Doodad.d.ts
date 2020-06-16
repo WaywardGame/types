@@ -22,6 +22,7 @@ import { IContainer, IItemLegendary, ItemType } from "item/IItem";
 import Item from "item/Item";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
+import { FireStage } from "tile/events/IFire";
 import { ITile } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
@@ -32,8 +33,14 @@ export interface IDoodadEvents {
      * @returns False if the doodad cannot be picked up, or undefined to use the default logic
      */
     canPickup(human: Human): boolean | undefined;
+    /**
+     * Emitted when the fire stage of this doodad changes.
+     * Note: The fire stage of doodads is not saved, so when the doodad's fire stage is first checked on load, this event will be
+     * emitted.
+     */
+    fireUpdate(stage: FireStage | undefined): any;
 }
-export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements Doodad, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource {
+export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource {
     static is(value: any): value is Doodad;
     /**
      * @deprecated
@@ -73,6 +80,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     private _tileId;
     private _isWell;
     private readonly _doodadGroupCache;
+    private fireStage?;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(type?: DoodadType, x?: number, y?: number, z?: number, options?: IDoodadOptions);
@@ -168,4 +176,5 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * Decay over time
      */
     private processDecay;
+    private postProcessDecay;
 }

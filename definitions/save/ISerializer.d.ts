@@ -90,7 +90,8 @@ export declare enum Types {
     RandomItem = 32,
     DefaultMap = 33,
     Island = 34,
-    JITDeserialization = 35
+    JITDeserialization = 35,
+    TileEvent = 36
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_SAVE_PROPERTY_FLAGS: unique symbol;

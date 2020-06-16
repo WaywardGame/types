@@ -15,5 +15,5 @@ export declare class DoodadDropdown<OTHER_OPTIONS extends string = never> extend
     constructor(defaultOption: OTHER_OPTIONS | DoodadType, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
     protected getGroupName(group: DoodadTypeGroup): string;
     protected isInGroup(doodad: DoodadType, group: DoodadTypeGroup): boolean;
-    protected getGroups(): import("@wayward/goodstream/Stream").default<DoodadTypeGroup>;
+    protected getGroups(): DoodadTypeGroup[];
 }

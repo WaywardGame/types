@@ -27,7 +27,7 @@ import { Milestone } from "game/milestones/IMilestone";
 import { IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import { RecipeType } from "item/recipe/RecipeRegistry";
-import { ITileEvent } from "tile/ITileEvent";
+import TileEvent from "tile/TileEvent";
 import { IRGB } from "utilities/Color";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
@@ -288,7 +288,7 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.Quality]: Quality;
     [ActionArgument.RecipeType]: RecipeType;
     [ActionArgument.RestType]: RestType;
-    [ActionArgument.TileEvent]: ITileEvent;
+    [ActionArgument.TileEvent]: TileEvent;
     [ActionArgument.Vector2]: IVector2;
     [ActionArgument.Vector3]: IVector3;
 }[X];

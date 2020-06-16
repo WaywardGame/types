@@ -22,7 +22,7 @@ import Item from "item/Item";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
 import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import { ITile, ITileContainer, ITileData } from "tile/ITerrain";
-import { ITileEvent } from "tile/ITileEvent";
+import TileEvent from "tile/TileEvent";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
 import TimeManager from "./TimeManager";
@@ -128,7 +128,7 @@ export declare type IGameOld = Partial<Game> & {
     wellData: {
         [index: number]: IWell | undefined;
     };
-    tileEvents: SaferArray<ITileEvent>;
+    tileEvents: SaferArray<TileEvent>;
     time: TimeManager;
 };
 export interface IPlayOptions {

@@ -18,7 +18,7 @@ import NPC from "entity/npc/NPC";
 import { Quality } from "game/IObject";
 import { IContainer, ItemType } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
-import { ITileEvent } from "tile/ITileEvent";
+import TileEvent from "tile/TileEvent";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
 import { ILeftOverTile } from "./Terrains";
@@ -80,13 +80,13 @@ export interface ITile extends Partial<ITileContainer> {
     creature?: Creature;
     data: number;
     doodad?: Doodad;
-    events?: ITileEvent[];
+    events?: TileEvent[];
     npc?: NPC;
     overlays?: IOverlayInfo[];
     quality?: Quality;
 }
 export interface ITileOld {
-    event?: ITileEvent[];
+    event?: TileEvent[];
 }
 export interface ITileArray {
     [index: number]: ITile;

@@ -50,7 +50,7 @@ export declare module Modifier {
     function translate(modifier: Modifier): Translation;
     function getTranslationId(modifier: Modifier): string;
     function setsEqual(modifiersA: Set<Modifier>, modifiersB: Set<Modifier>): boolean;
-    function all(): Stream<Modifier>;
+    function all(): Modifier[];
 }
 export interface IBinding {
     catalyst: BindingCatalyst;

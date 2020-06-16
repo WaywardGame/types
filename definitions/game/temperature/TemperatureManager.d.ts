@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import Doodad from "doodad/Doodad";
 import EventEmitter from "event/EventEmitter";
 import Island from "game/Island";
 import { WorldZ } from "game/WorldZ";
-import { ITile } from "tile/ITerrain";
 export declare enum TempType {
     Cold = -1,
     Heat = 1
@@ -62,7 +62,8 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
      */
     update(x: number, y: number, z: WorldZ, invalidate?: boolean): void;
     invalidateAll(): void;
-    protected onTileUpdate(game: any, tile: ITile, x: number, y: number, z: number): void;
+    protected onFireUpdate(doodad: Doodad): void;
+    protected onCreateOrRemoveDoodad(_: any, doodad: Doodad): void;
     private calculateProduced;
     private updateProducedType;
     /**

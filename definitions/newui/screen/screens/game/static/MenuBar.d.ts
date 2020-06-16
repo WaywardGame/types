@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import QuadrantComponent from "newui/screen/screens/game/component/QuadrantComponent";
 import { Quadrant } from "newui/screen/screens/game/component/IQuadrantComponent";
+import QuadrantComponent from "newui/screen/screens/game/component/QuadrantComponent";
 import MenuBarButton from "newui/screen/screens/game/static/menubar/MenuBarButton";
 import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 import GameScreen from "newui/screen/screens/GameScreen";

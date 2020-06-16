@@ -8,6 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import Doodad from "doodad/Doodad";
+import DoodadManager from "doodad/DoodadManager";
 import ActionExecutor from "entity/action/ActionExecutor";
 import Player from "entity/player/Player";
 import Game from "game/Game";
@@ -20,19 +22,23 @@ import SaveManager from "save/SaveManager";
 import Steamworks from "steamworks/Steamworks";
 export declare enum EventBus {
     Actions = 0,
-    Game = 1,
-    Items = 2,
-    Language = 3,
-    LocalPlayer = 4,
-    Mods = 5,
-    Multiplayer = 6,
-    Players = 7,
-    SaveManager = 8,
-    Steamworks = 9,
-    Ui = 10
+    Doodads = 1,
+    DoodadManager = 2,
+    Game = 3,
+    Items = 4,
+    Language = 5,
+    LocalPlayer = 6,
+    Mods = 7,
+    Multiplayer = 8,
+    Players = 9,
+    SaveManager = 10,
+    Steamworks = 11,
+    Ui = 12
 }
 declare const eventBuses: {
     [EventBus.Actions](): typeof ActionExecutor;
+    [EventBus.Doodads](): typeof Doodad;
+    [EventBus.DoodadManager](): typeof DoodadManager;
     [EventBus.Game](): typeof Game;
     [EventBus.Items](): typeof ItemManager;
     [EventBus.Language](): typeof LanguageManager;

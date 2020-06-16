@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-declare module Functions {
+declare module Classes {
     function isSubclass(fn: unknown): boolean;
+    function instantiate<A extends any[], I>(cls: new (...args: A) => I): (...args: A) => I;
 }
-export default Functions;
+export default Classes;

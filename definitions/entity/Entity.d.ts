@@ -29,7 +29,7 @@ import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IInspector, IUnserializedCallback, ITemperatureSource {
+export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IInspector, IUnserializedCallback, ITemperatureSource, IVector3 {
     readonly stat: Stats<this>;
     entityType: EntityType;
     id: number;
@@ -81,11 +81,11 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     /**
      * Generator for status effects on the entity.
      */
-    getStatuses(): import("@wayward/goodstream/Stream").default<StatusEffect>;
+    getStatuses(): StatusEffect[];
     /**
      * Generator for status effects on the entity.
      */
-    getActiveStatuses(): import("@wayward/goodstream/Stream").default<StatusEffect>;
+    getActiveStatuses(): StatusEffect[];
     abstract damage(damageInfoOrAmount: IDamageInfo | number): number | undefined;
     getCraftingDifficulty(level: RecipeLevel): number;
     getTileUpdateType(): TileUpdateType;

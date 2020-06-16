@@ -12,19 +12,19 @@ import { InspectType } from "game/inspection/IInspection";
 import { Context, InfoProvider } from "game/inspection/InfoProvider";
 import Inspection from "game/inspection/Inspection";
 import Translation from "language/Translation";
-import { ITileEvent } from "tile/ITileEvent";
 import { IVector3 } from "utilities/math/IVector";
-declare class TileEventInspection extends Inspection<ITileEvent> {
+import TileEvent from "tile/TileEvent";
+declare class TileEventInspection extends Inspection<TileEvent> {
     static getFromTile(position: IVector3): TileEventInspection[];
-    constructor(tileEvent: ITileEvent, inspectType?: InspectType);
+    constructor(tileEvent: TileEvent, inspectType?: InspectType);
     getId(): string;
     get(context: Context): Array<Translation | InfoProvider>;
-    onRemove(_: any, event: ITileEvent): void;
+    onRemove(_: any, event: TileEvent): void;
 }
 declare module TileEventInspection {
     class Minor extends TileEventInspection {
         static getFromTile(position: IVector3): Minor[];
-        constructor(tileEvent: ITileEvent);
+        constructor(tileEvent: TileEvent);
     }
 }
 export default TileEventInspection;
