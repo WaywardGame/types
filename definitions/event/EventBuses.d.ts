@@ -20,6 +20,8 @@ import Multiplayer from "multiplayer/Multiplayer";
 import NewUi from "newui/NewUi";
 import SaveManager from "save/SaveManager";
 import Steamworks from "steamworks/Steamworks";
+import TileEvent from "tile/TileEvent";
+import TileEventManager from "tile/TileEventManager";
 export declare enum EventBus {
     Actions = 0,
     Doodads = 1,
@@ -33,7 +35,9 @@ export declare enum EventBus {
     Players = 9,
     SaveManager = 10,
     Steamworks = 11,
-    Ui = 12
+    TileEventManager = 12,
+    TileEvents = 13,
+    Ui = 14
 }
 declare const eventBuses: {
     [EventBus.Actions](): typeof ActionExecutor;
@@ -48,6 +52,8 @@ declare const eventBuses: {
     [EventBus.Players](): typeof Player;
     [EventBus.SaveManager](): typeof SaveManager;
     [EventBus.Steamworks](): typeof Steamworks;
+    [EventBus.TileEventManager](): typeof TileEventManager;
+    [EventBus.TileEvents](): typeof TileEvent;
     [EventBus.Ui](): typeof NewUi;
 };
 export default eventBuses;

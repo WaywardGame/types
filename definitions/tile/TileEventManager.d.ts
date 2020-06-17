@@ -14,8 +14,8 @@ import EventEmitter from "event/EventEmitter";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 import { TileEventType } from "tile/ITileEvent";
-import { IVector3 } from "utilities/math/IVector";
 import TileEvent from "tile/TileEvent";
+import { IVector3 } from "utilities/math/IVector";
 export interface ITileManagerEvents {
     /**
      * Called when a tile event is about to be created

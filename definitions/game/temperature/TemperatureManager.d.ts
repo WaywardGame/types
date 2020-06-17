@@ -12,6 +12,7 @@ import Doodad from "doodad/Doodad";
 import EventEmitter from "event/EventEmitter";
 import Island from "game/Island";
 import { WorldZ } from "game/WorldZ";
+import TileEvent from "tile/TileEvent";
 export declare enum TempType {
     Cold = -1,
     Heat = 1
@@ -62,8 +63,8 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
      */
     update(x: number, y: number, z: WorldZ, invalidate?: boolean): void;
     invalidateAll(): void;
-    protected onFireUpdate(doodad: Doodad): void;
-    protected onCreateOrRemoveDoodad(_: any, doodad: Doodad): void;
+    protected onFireUpdate(object: Doodad | TileEvent): void;
+    protected onCreateOrRemoveDoodadOrTileEvent(_: any, object: Doodad | TileEvent): void;
     private calculateProduced;
     private updateProducedType;
     /**
