@@ -99,7 +99,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     description(): IDoodadDescription | undefined;
     changeType(doodadType: DoodadType): void;
     isValid(): boolean;
-    isInGroup(doodadTypeGroup: DoodadTypeGroup): boolean | undefined;
+    isInGroup(doodadTypeGroup: DoodadTypeGroup): boolean;
     getTile(): ITile;
     getTileId(): number;
     getPoint(): IVector3;

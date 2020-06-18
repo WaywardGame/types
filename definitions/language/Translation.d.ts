@@ -12,6 +12,7 @@ import { MessageType } from "entity/player/IMessageManager";
 import { Quality } from "game/IObject";
 import { Dictionary } from "language/Dictionaries";
 import Message from "language/dictionary/Message";
+import { MiscTranslation } from "language/dictionary/Misc";
 import UiTranslation from "language/dictionary/UiTranslation";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { Random } from "utilities/Random";
@@ -43,13 +44,15 @@ declare class Translation {
     static empty(): Translation;
     static readonly defaultInterpolator: Interpolator;
     static provider: TranslationProvider;
-    static colorize(color: string | MessageType): Translation;
-    static colorize(color: string | MessageType, text: string | IStringSection): IStringSection;
-    static colorize(color: string | MessageType, text: IStringSection[]): IStringSection[];
     static colorizeQuality(quality: Quality): Translation;
     static colorizeQuality(quality: Quality, text: string | IStringSection): IStringSection;
     static colorizeQuality(quality: Quality, text: IStringSection[]): IStringSection[];
-    private static colorizeInternal;
+    static colorizeMessageType(type: MessageType): Translation;
+    static colorizeMessageType(type: MessageType, text: string | IStringSection): IStringSection;
+    static colorizeMessageType(type: MessageType, text: IStringSection[]): IStringSection[];
+    static colorizeImportance(importance: "primary" | "secondary"): Translation;
+    static colorizeImportance(importance: "primary" | "secondary", text: string | IStringSection): IStringSection;
+    static colorizeImportance(importance: "primary" | "secondary", text: IStringSection[]): IStringSection[];
     static formatList(items: Iterable<string | IStringSection | IStringSection[] | Translation | ISerializedTranslation>, ender?: ListEnder | false): Translation;
     static getString(...entries: ArrayOfIterablesOr<string | IStringSection | Translation>): string;
     static getAll(dictionary: Dictionary | string, entry?: number | string): Translation[];
@@ -155,5 +158,6 @@ declare class Translation {
 declare module Translation {
     const ui: (entry: string | UiTranslation) => Translation;
     const message: (entry: string | Message) => Translation;
+    const misc: (entry: string | MiscTranslation) => Translation;
 }
 export default Translation;
