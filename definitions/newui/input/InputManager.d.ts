@@ -37,7 +37,7 @@ export declare class MouseInfo {
      * The current position of the mouse.
      */
     position: Vector2;
-    private _target;
+    private _target?;
     private targetComponent?;
     /**
      * The component the mouse is currently hovering over.
@@ -48,6 +48,7 @@ export declare class MouseInfo {
     isWithin(element?: Element, recalcTarget?: true): boolean;
     isWithin(component?: Component, recalcTarget?: true): boolean;
     isTarget(component: Component): boolean;
+    invalidateTarget(): void;
 }
 interface IInputInfoEvents {
     unpress(binding: IBinding, info: BindingInfo): any;
