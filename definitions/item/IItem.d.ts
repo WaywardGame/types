@@ -196,10 +196,15 @@ export interface ILiquid {
     seawater: ItemType;
 }
 export interface IDismantleDescription {
-    items: Array<[ItemType, number]>;
+    items: IDismantleItemDescription[];
     required?: ItemTypeGroup;
     skill?: SkillType;
     reputation?: number;
+}
+export interface IDismantleItemDescription {
+    type: ItemType;
+    amount: number;
+    transferDecay?: boolean;
 }
 export interface IItemGroupDescription {
     types: Array<ItemType | ItemTypeGroup>;
