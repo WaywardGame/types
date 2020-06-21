@@ -212,6 +212,7 @@ export default class InGameScreen extends BaseScreen {
     onQuickSlot(api: IBindHandlerApi): boolean;
     onQuickSlotClear(api: IBindHandlerApi): boolean;
     onDropItem(api: IBindHandlerApi): boolean;
+    onReleaseDrop(): void;
     onMenuCancel(): boolean;
     onCloseAllDialogs(): boolean;
     onMoreInformation(): boolean;

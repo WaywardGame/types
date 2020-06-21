@@ -60,7 +60,7 @@ export default class Player extends Human {
         [index: number]: boolean;
     };
     spawnPoint: IVector3;
-    tamedCreatures: number[];
+    tamedCreatures: Map<string, number[]>;
     turns: number;
     walkSoundCounter: number;
     milestoneModifiers: Set<Milestone>;

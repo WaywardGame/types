@@ -55,6 +55,10 @@ export default class TimeManager {
     get dayStart(): number;
     constructor(turns: number);
     /**
+     * Returns a copy of this TimeManager as a new object
+     */
+    clone(): TimeManager;
+    /**
      * The total number of ticks passed.
      */
     get ticks(): number;

@@ -37,17 +37,29 @@ export declare class MouseInfo {
      * The current position of the mouse.
      */
     position: Vector2;
-    private _target?;
+    private _targetElement?;
     private targetComponent?;
     /**
-     * The component the mouse is currently hovering over.
+     * The component the mouse is currently hovering over. `null` if the hovered element has no associated component.
      */
-    get target(): Component | undefined;
+    get target(): Component | null;
+    /**
+     * The element the mouse is currently hovering over.
+     */
+    get targetElement(): HTMLElement | undefined;
     update(evt: Event & Partial<MouseEvent> & Partial<TouchEvent>): void;
-    isWithin(selector: string, recalcTarget?: true): boolean;
-    isWithin(element?: Element, recalcTarget?: true): boolean;
-    isWithin(component?: Component, recalcTarget?: true): boolean;
-    isTarget(component: Component): boolean;
+    /**
+     * Returns whether the mouse is currently within the given component, element, or selector, or its descendants.
+     * @param what A component, element, or selector.
+     * @param recalcTarget Whether to recalculate the target before this operation. Defaults to `false`
+     */
+    isWithin(what?: Component | Element | string, recalcTarget?: boolean): boolean | undefined;
+    /**
+     * Returns whether the mouse is currently within the given component, element, or selector.
+     * @param what A component, element, or selector.
+     * @param recalcTarget Whether to recalculate the target before this operation. Defaults to `false`
+     */
+    isTarget(what?: Component | Element | string, recalcTarget?: boolean): boolean | undefined;
     invalidateTarget(): void;
 }
 interface IInputInfoEvents {

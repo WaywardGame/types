@@ -161,6 +161,7 @@ export declare type IPlayerOld = Partial<Omit<Player, "customization">> & {
     exploredMapEncodedData: number[][];
     messages: MessageManager;
     raft: number | undefined;
+    tamedCreatures: number[];
 };
 export interface IStatsOld {
     health: IStatOld;
