@@ -13,7 +13,7 @@ import { InspectType } from "game/inspection/IInspection";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ISerializedTranslation } from "language/Translation";
 import Bindable from "newui/input/Bindable";
-import { IBinding } from "newui/input/IBinding";
+import { Binding } from "newui/input/Bindings";
 import { UiExperiment } from "newui/UiExperiments";
 import { ISourceFilter } from "utilities/Log";
 export interface IOptions {
@@ -72,7 +72,7 @@ export interface IOptions {
      * Indexed by `Bindable` names, IE `GameFaceDirection`
      * Missing indices = use default binding
      */
-    bindings: OptionalDescriptions<keyof typeof Bindable, IBinding[]>;
+    bindings: OptionalDescriptions<keyof typeof Bindable, Binding[]>;
 }
 export declare enum AutoSave {
     Off = 0,

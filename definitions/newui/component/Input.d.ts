@@ -11,7 +11,6 @@
 import { Events, IEventEmitter } from "event/EventEmitter";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
-import { IInput } from "newui/component/IInput";
 import { IRefreshable } from "newui/component/Refreshable";
 export declare enum ClearType {
     UseDefault = 0,
@@ -19,8 +18,19 @@ export declare enum ClearType {
     NotDefault = 2,
     Empty = 3
 }
-export default class Input extends Component implements IRefreshable, IInput {
-    event: IEventEmitter<this, Events<IInput>>;
+export interface IInputEvents extends Events<Component> {
+    change(text: string): any;
+    changeDebounced(text: string): any;
+    done(text: string): any;
+    enter(): any;
+    escape(): any;
+    focus(): any;
+    blur(): any;
+    upArrow(): any;
+    downArrow(): any;
+}
+export default class Input extends Component implements IRefreshable {
+    event: IEventEmitter<this, IInputEvents>;
     default: (() => string) | undefined;
     private lastInput;
     get text(): string;

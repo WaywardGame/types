@@ -38,10 +38,11 @@ export interface ISelfSubscribedEmitter<E> {
 declare type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
 declare type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
 declare type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
+declare type UndefinedFromVoid<V> = V extends void ? undefined : V;
 export interface IEventEmitter<H = any, E = any> {
     event: IEventEmitter<this, IEventEmitterEvents<H, E>>;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
-    emitFirst<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): ReturnOf<E[K]> | undefined;
+    emitFirst<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): UndefinedFromVoid<ReturnOf<E[K]>> | undefined;
     emitFirstDefault<K extends keyof E, D>(event: K, generateDefault: () => D, ...args: ArgsOf<E[K]>): Exclude<ReturnOf<E[K]>, null | undefined> | D;
     emitStream<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Stream<ReturnOf<E[K]>>;
     emitReduce<K extends keyof E, A extends ReturnOf<E[K]> & Head<ArgsOf<E[K]>>>(event: K, arg: A, ...args: Tail<ArgsOf<E[K]>>): Extract<ReturnOf<E[K]> & Head<ArgsOf<E[K]>>, undefined> extends undefined ? (undefined extends A ? ReturnOf<E[K]> : A) : ReturnOf<E[K]>;

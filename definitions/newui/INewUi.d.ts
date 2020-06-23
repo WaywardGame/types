@@ -10,7 +10,7 @@
  */
 import InterruptChoice from "language/dictionary/InterruptChoice";
 import { HighlightSelector, IComponent, IHighlight, ITooltip, TranslationGenerator } from "newui/component/IComponent";
-import { IInput } from "newui/component/IInput";
+import Input from "newui/component/Input";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
 export interface ITooltipManager {
     show(host: IComponent, force?: boolean): ITooltip | undefined;
@@ -41,7 +41,7 @@ export interface IInterruptFactory extends IInterruptMenuFactory {
     withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;
     withConfirmation(): Promise<boolean>;
     withInfo(): Promise<void>;
-    withInput(inputInitializer?: (input: IInput) => any): Promise<string>;
+    withInput(inputInitializer?: (input: Input) => any): Promise<string>;
     withLoading(until?: Promise<any> | (() => Promise<any>), canCancel?: boolean | (NullaryFunction), specialType?: string): Promise<InterruptChoice | undefined>;
 }
 export interface IInterruptMenuFactory {

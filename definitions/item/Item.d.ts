@@ -55,8 +55,9 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     /**
      * Changes the item id for this item
      * @param id The new item id
+     * @param player The player that has the item
      */
-    changeId(id: number): void;
+    changeId(id: number, player: Player): void;
     /**
      * @deprecated This method currently shouldn't be used in production code, as it's to do with the new crafting system. Stay tuned.
      */

@@ -9,6 +9,6 @@
  * https://waywardgame.github.io/
  */
 import Bindable from "newui/input/Bindable";
-import { IBinding } from "newui/input/IBinding";
-declare const _default: Record<Bindable, IBinding[]>;
+import { Binding } from "newui/input/Bindings";
+declare const _default: Record<Bindable, Binding[]>;
 export default _default;

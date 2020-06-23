@@ -10,14 +10,21 @@
  */
 import Translation from "language/Translation";
 import Bindable from "newui/input/Bindable";
-import { IBinding } from "newui/input/IBinding";
+import { IInput } from "newui/input/IInput";
+import { Macro } from "newui/input/Macros";
+export declare type Binding = IInput | Macro;
+export declare module Binding {
+    function is(value: unknown): value is Binding;
+    function hash(binding: Binding): string;
+    function translate(binding: Binding): Translation;
+}
 declare module Bindings {
-    function get(bindable: Bindable): IBinding[];
-    function set(bindable: Bindable, ...bindings: IBinding[]): void;
-    function add(bindable: Bindable, ...bindings: IBinding[]): void;
+    function get(bindable: Bindable): Binding[];
+    function set(bindable: Bindable, ...bindings: Binding[]): void;
+    function add(bindable: Bindable, ...bindings: Binding[]): void;
     function reset(bindable: Bindable): void;
     function clear(bindable: Bindable): void;
     function translate(bindable: Bindable): Translation;
-    function getBoundTo(binding: IBinding): Set<Bindable>;
+    function getBoundTo(binding: Binding): Set<Bindable>;
 }
 export default Bindings;

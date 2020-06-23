@@ -24,8 +24,8 @@ import TileEvent from "tile/TileEvent";
 import TileEventManager from "tile/TileEventManager";
 export declare enum EventBus {
     Actions = 0,
-    Doodads = 1,
-    DoodadManager = 2,
+    DoodadManager = 1,
+    Doodads = 2,
     Game = 3,
     Items = 4,
     Language = 5,
@@ -41,8 +41,8 @@ export declare enum EventBus {
 }
 declare const eventBuses: {
     [EventBus.Actions](): typeof ActionExecutor;
-    [EventBus.Doodads](): typeof Doodad;
     [EventBus.DoodadManager](): typeof DoodadManager;
+    [EventBus.Doodads](): typeof Doodad;
     [EventBus.Game](): typeof Game;
     [EventBus.Items](): typeof ItemManager;
     [EventBus.Language](): typeof LanguageManager;

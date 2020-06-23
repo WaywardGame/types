@@ -27,7 +27,7 @@ export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHand
     private readonly gameScreen;
     private previewTarget;
     private previewPath;
-    private readonly overlays;
+    private overlays;
     private readonly overlayType;
     private canResetTarget;
     constructor(gameScreen: Component);
@@ -38,10 +38,6 @@ export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHand
      * Event handler for when the movement completes
      */
     onMoveComplete(): void;
-    /**
-     * Event handler for when the players walk to tile path is set
-     */
-    onPlayerWalkToTilePath(path: IVector2[] | undefined): void;
     /**
      * Resets the handler, removing any intent, path, and target.
      * @param target Resets the overlays to this target
@@ -55,7 +51,7 @@ export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHand
     protected onReleaseMoveToTilePreview(): void;
     protected onStatChanged(player: Player, stat: IStat): void;
     protected onPostMove(player: Player, fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
-    protected onWalkPathChange(player: Player, walkPath?: IVector2[]): void;
+    protected onWalkPathChange(player: Player, walkPath: IVector2[] | undefined): void;
     private resetToMouse;
     /**
      * Removes the overlay from the tiles and updates the game view

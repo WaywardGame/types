@@ -9,9 +9,9 @@
  * https://waywardgame.github.io/
  */
 import Bindable, { BindableType } from "newui/input/Bindable";
-import { IBinding } from "newui/input/IBinding";
+import { IInput } from "newui/input/IInput";
 declare module Bindables {
-    function register(index: number, defaultBinding: IBinding[]): void;
+    function register(index: number, defaultBinding: IInput[]): void;
     function deregister(index: number): void;
     function getType(bindable: Bindable): BindableType | undefined;
 }

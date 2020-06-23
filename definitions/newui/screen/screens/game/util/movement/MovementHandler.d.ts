@@ -13,7 +13,6 @@ import EventEmitter from "event/EventEmitter";
 import Component from "newui/component/Component";
 import { IBindHandlerApi } from "newui/input/Bind";
 import WalkToTileHandler from "newui/screen/screens/game/util/movement/WalkToTileHandler";
-import { IVector2 } from "utilities/math/IVector";
 export interface IMovementHandlerEvents {
     /**
      * Called every frame where the mouse is not hovering over an item
@@ -30,26 +29,10 @@ export default class MovementHandler extends EventEmitter.Host<IMovementHandlerE
     constructor(gameScreen: Component);
     register(): this;
     deregister(): this;
-    /**
-     * Handles `Hook.OnMove`
-     */
-    onMoveStart(): void;
-    /**
-     * Handles `Hook.OnMoveComplete`
-     */
-    onMoveComplete(): void;
-    /**
-     * Handles `Hook.OnPlayerDamage`
-     */
-    onPlayerDamage(damageInfo: IDamageInfo): void;
-    /**
-     * Handles `Hook.OnPlayerDeath`
-     */
-    onPlayerDeath(): void;
-    /**
-     * Handles `Hook.OnPlayerWalkToTilePath`
-     */
-    onPlayerWalkToTilePath(path: IVector2[] | undefined): void;
+    protected onMoveStart(): void;
+    protected onMoveComplete(): void;
+    protected onPlayerDamage(_: any, damageInfo: IDamageInfo): void;
+    protected onPlayerDeath(): void;
     protected onFaceDown(api: IBindHandlerApi): boolean;
     protected onFaceDirection(api: IBindHandlerApi): boolean;
     protected onIdle(): boolean;

@@ -10,7 +10,7 @@
  */
 import InterruptChoice from "language/dictionary/InterruptChoice";
 import { TranslationGenerator } from "newui/component/IComponent";
-import { IInput } from "newui/component/IInput";
+import Input from "newui/component/Input";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 export declare enum InterruptType {
     Info = 0,
@@ -30,5 +30,5 @@ export interface InterruptOptions {
     isTopMenu?: boolean;
     specialType?: string;
     initializer?(menu: any): any;
-    input?(input: IInput): any;
+    input?(input: Input): any;
 }

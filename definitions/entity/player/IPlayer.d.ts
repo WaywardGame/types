@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import Creature from "entity/creature/Creature";
+import { IDamageInfo } from "entity/creature/ICreature";
 import Human from "entity/Human";
 import { HairColor, HairStyle, IRestData, SkinColor } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
@@ -33,17 +34,17 @@ export interface IPlayerEvents extends Events<Human> {
     /**
      * Called when the player is spawned. (At the end of `Player.setup`)
      */
-    spawn(): void;
+    spawn(): any;
     /**
      * @param key The key of `IOptions` that was changed on this player
      * @param value The value this key was set to
      */
-    updateOption<O extends keyof IOptions>(key: O, value: IOptions[O]): void;
+    updateOption<O extends keyof IOptions>(key: O, value: IOptions[O]): any;
     /**
      * Called when a message is being disaplyed for a player
      * @param message The message that will be displayed
      */
-    displayMessage(message: IMessage): void;
+    displayMessage(message: IMessage): any;
     /**
      * Called when getting the player's maximum health
      * @param maxHealth The current max health of the player (after any other previous mods)
@@ -55,24 +56,35 @@ export interface IPlayerEvents extends Events<Human> {
      */
     getMaxWeight(maxWeight: number): number;
     /**
+     * Called when the player is damaged
+     * @param damageInfo The damage info object
+     * @returns The amount of damage the player should take (the player will take this damage)
+     */
+    damage(damageInfo: IDamageInfo): number | void;
+    /**
+     * Called when the player is killed
+     * @returns `false` to stop the player from dying
+     */
+    die(): false | void;
+    /**
      * Called when an item is added to the player's inventory
      * @param item The item object
      * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
      */
-    inventoryItemAdd(item: Item, container: IContainer): void;
+    inventoryItemAdd(item: Item, container: IContainer): any;
     /**
      * Called when an item is removed from the players inventory
      * @param item The item object
      * @param container The container object the item was moved to.
      */
-    inventoryItemRemove(item: Item, container: IContainer): void;
+    inventoryItemRemove(item: Item, container: IContainer): any;
     /**
      * Called when an item is moved from one container to another, while still in the players inventory.
      * @param item The item object
      * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
      * @param previousContainer The container object the item was moved from. This container might be inventory or a container within the inventory.
      */
-    inventoryItemUpdate(item: Item, container: IContainer, previousContainer?: IContainer): void;
+    inventoryItemUpdate(item: Item, container: IContainer, previousContainer?: IContainer): any;
     /**
      * Called when the players x / y position changes
      * @param x The players x position
@@ -91,7 +103,7 @@ export interface IPlayerEvents extends Events<Human> {
     /**
      * Called when the walk path of the player changes.
      */
-    walkPathChange(walkPath?: IVector2[]): any;
+    walkPathChange(walkPath: IVector2[] | undefined): any;
     /**
      * Called when the player completes a movement
      */

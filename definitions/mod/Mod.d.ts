@@ -34,7 +34,6 @@ import { RenderFlag } from "renderer/IWorldRenderer";
 import { ITile } from "tile/ITerrain";
 import Log from "utilities/Log";
 import { Direction } from "utilities/math/Direction";
-import { IVector2 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
 declare abstract class Mod extends BaseMod implements IHookHost {
     /**
@@ -93,11 +92,8 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onNPCSpawn(npc: NPC): void;
     onOpenBook(human: Human, book: BookType): void;
     onPickupDoodad(player: Player, doodad: Doodad): void;
-    onPlayerDamage(player: Player, damageInfo: IDamageInfo): number | undefined;
-    onPlayerDeath(player: Player): boolean | undefined;
     onPlayerJoin(player: Player): void;
     onPlayerLeave(player: Player): void;
-    onPlayerWalkToTilePath(player: Player, path: IVector2[] | undefined): void;
     onQueueSoundEffect(type: SfxType, x: number, y: number, z: number): SfxType | boolean | undefined;
     onGameScreenVisible(): void;
     onReadMap(human: Human, mapRequest: IMapRequest): void;
@@ -123,7 +119,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     preRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
     processInput(player: Player): boolean | undefined;
     shouldRender(): RenderFlag | undefined;
-    shouldStopWalkToTileMovement(): boolean | undefined;
 }
 declare module Mod {
     /**

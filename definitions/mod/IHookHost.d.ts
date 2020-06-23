@@ -31,7 +31,6 @@ import IWorld from "renderer/IWorld";
 import { RenderFlag } from "renderer/IWorldRenderer";
 import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
-import { IVector2 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
 /**
  * A decorator for registering a hook method on an `IHookHost`.
@@ -275,19 +274,6 @@ export interface IHookHost {
      */
     onPickupDoodad?(player: Player, doodad: Doodad): void;
     /**
-     * Called when a player is damaged
-     * @param player The player object
-     * @param damageInfo The damage info object
-     * @returns The amount of damage the player should take (the player will take this damage) or undefined to use the default logic
-     */
-    onPlayerDamage?(player: Player, damageInfo: IDamageInfo): number | undefined;
-    /**
-     * Called when a player is killed
-     * @param player The player object
-     * @returns False to stop the player from dying or undefined to use the default logic
-     */
-    onPlayerDeath?(player: Player): boolean | undefined;
-    /**
      * Called when a player joins the server
      * @param player The player object
      */
@@ -298,12 +284,6 @@ export interface IHookHost {
      * @param player The player object
      */
     onPlayerLeave?(player: Player): void;
-    /**
-     * Called when the players walk to tile path is set
-     * @param player The player object
-     * @param path The path
-     */
-    onPlayerWalkToTilePath?(player: Player, path: IVector2[] | undefined): void;
     /**
      * Called when a sound effect is queued
      * @param type The sound effect type
@@ -456,9 +436,4 @@ export interface IHookHost {
      * @returns False to not display the message or undefined to use the default logic
      */
     shouldDisplayMessage?(player: Player, message: IMessage, messageId: number): boolean | undefined;
-    /**
-     * Called when determining if the player should stop walking to the tile
-     * @returns True to stop walk to tile movement, False to continue walk to tile movement, or undefined to use the default logic
-     */
-    shouldStopWalkToTileMovement?(): boolean | undefined;
 }

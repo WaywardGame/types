@@ -13,7 +13,7 @@ import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshable } from "newui/component/Refreshable";
 import Bindable from "newui/input/Bindable";
-import { IBinding } from "newui/input/IBinding";
+import { IInput } from "newui/input/IInput";
 export declare class BindRow extends Button implements IRefreshable {
     private readonly currentBinds;
     private readonly bind;
@@ -30,7 +30,7 @@ export declare class BindCatcher extends Component {
     private readonly bindText;
     private resolve;
     constructor();
-    getBind(): Promise<IBinding>;
+    getBind(): Promise<IInput>;
     setText(text: TranslationGenerator): void;
     private onInput;
 }

@@ -37,14 +37,11 @@ export declare enum Hook {
     OnNPCSpawn = "onNPCSpawn",
     OnOpenBook = "onOpenBook",
     OnPickupDoodad = "onPickupDoodad",
-    OnPlayerDamage = "onPlayerDamage",
-    OnPlayerDeath = "onPlayerDeath",
     OnPlayerJoin = "onPlayerJoin",
     OnPlayerLeave = "onPlayerLeave",
     /**
      * @deprecated
      */
-    OnPlayerWalkToTilePath = "onPlayerWalkToTilePath",
     OnQueueSoundEffect = "onQueueSoundEffect",
     OnReadMap = "onReadMap",
     OnRenderOverlay = "onRenderOverlay",
@@ -70,8 +67,7 @@ export declare enum Hook {
     ProcessInput = "processInput",
     ShouldCraft = "shouldCraft",
     ShouldDisplayMessage = "shouldDisplayMessage",
-    ShouldRender = "shouldRender",
-    ShouldStopWalkToTileMovement = "shouldStopWalkToTileMovement"
+    ShouldRender = "shouldRender"
 }
 export declare const globalHooks: Hook[];
 export declare enum HookPriority {

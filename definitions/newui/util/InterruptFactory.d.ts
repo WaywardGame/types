@@ -11,7 +11,7 @@
 import Interrupt from "language/dictionary/Interrupt";
 import InterruptChoice from "language/dictionary/InterruptChoice";
 import { TranslationGenerator } from "newui/component/IComponent";
-import { IInput } from "newui/component/IInput";
+import Input from "newui/component/Input";
 import { IInterruptFactory } from "newui/INewUi";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
 import InterruptMenu from "newui/screen/screens/menu/menus/InterruptMenu";
@@ -34,7 +34,7 @@ export default class InterruptFactory implements IInterruptFactory {
     withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;
     withConfirmation(): Promise<boolean>;
     withInfo(): Promise<void>;
-    withInput(input?: (input: IInput) => any): Promise<string>;
+    withInput(input?: (input: Input) => any): Promise<string>;
     withMenu<M extends IMenu = IMenu>(menuId: MenuId, initializer?: (menu: M) => any): Promise<void>;
     withLoading(until?: Promise<any> | (() => Promise<any>), canCancel?: boolean | (NullaryFunction), specialType?: string, choices?: InterruptChoice[]): Promise<InterruptChoice | undefined>;
     private execute;

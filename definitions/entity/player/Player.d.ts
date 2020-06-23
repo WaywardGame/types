@@ -98,7 +98,7 @@ export default class Player extends Human {
      */
     tickStatuses(): void;
     resetMovementStates(): void;
-    setId(id: number): void;
+    changeId(id: number): void;
     setPaddling(paddling: boolean, itemId: number): boolean;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkSkillMilestones(): void;

@@ -75,9 +75,9 @@ export declare enum Dictionary {
     DamageType = 13,
     Doodad = 14,
     DoodadGroup = 15,
-    ExhaustionLevel = 16,
-    EquipEffect = 17,
-    EquipSlot = 18,
+    EquipEffect = 16,
+    EquipSlot = 17,
+    ExhaustionLevel = 18,
     FireStage = 19,
     GameEndMessage = 20,
     GameMode = 21,
@@ -155,9 +155,9 @@ declare const dictionaries: {
     13: typeof DamageType;
     14: typeof DoodadType;
     15: typeof DoodadTypeGroup;
-    16: typeof ExhaustionLevel;
-    17: typeof EquipEffect;
-    18: typeof EquipType;
+    16: typeof EquipEffect;
+    17: typeof EquipType;
+    18: typeof ExhaustionLevel;
     19: typeof FireStage;
     20: typeof GameEndMessage;
     21: typeof GameMode;

@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDamageInfo } from "entity/creature/ICreature";
 import Human from "entity/Human";
 import Player from "entity/player/Player";
 import { Events, IEventEmitter } from "event/EventEmitter";
@@ -29,9 +28,6 @@ import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import StatsQuadrant from "newui/screen/screens/game/static/Stats";
 import MovementHandler from "newui/screen/screens/game/util/movement/MovementHandler";
 import WorldTooltipHandler from "newui/screen/screens/game/WorldTooltip";
-import { ITile } from "tile/ITerrain";
-import { Direction } from "utilities/math/Direction";
-import { IVector2 } from "utilities/math/IVector";
 export declare type IDialogStates = {
     [key in DialogId]: boolean;
 };
@@ -67,14 +63,10 @@ export default class GameScreen extends Screen implements IHookHost {
     isMouseWithin(): boolean | undefined;
     mouseStartWasWithin(api: IBindHandlerApi): boolean | undefined;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
-    onMove(player: Player, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
-    onMoveComplete(): void;
-    onPlayerDamage(player: Player, damageInfo: IDamageInfo): number | undefined;
-    onPlayerDeath(player: Player): boolean | undefined;
-    onPlayerWalkToTilePath(player: Player, path: IVector2[] | undefined): void;
     onGameTickEnd(): void;
     onOpenBook(human: Human, book: BookType): void;
     onReadMap(player: Player, mapRequest: IMapRequest): void;
+    protected onDie(): void;
     protected onZoom(api: IBindHandlerApi): boolean;
     protected onInspect(api: IBindHandlerApi): boolean;
     protected onScreenshotMode(): boolean;

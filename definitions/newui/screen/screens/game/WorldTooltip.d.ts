@@ -18,7 +18,7 @@ export default class WorldTooltipHandler {
     private inspections?;
     constructor(gameScreen: Component);
     initializeTooltip(tooltip: ITooltip): ITooltip;
-    protected onUpdateZoom(): void;
-    private onTooltipMove;
+    updatePosition(): void;
+    private updateTooltipPosition;
     private refreshTooltipExtraInfoAndPosition;
 }

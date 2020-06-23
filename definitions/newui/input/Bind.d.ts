@@ -10,8 +10,8 @@
  */
 import { TypedPropertyDescriptorFunctionAnyNOfParams } from "event/EventManager";
 import Bindable from "newui/input/Bindable";
-import { IBinding } from "newui/input/IBinding";
-import { BindingInfo, InputInfo, MouseInfo } from "newui/input/InputManager";
+import { IInput } from "newui/input/IInput";
+import { GlobalInputInfo, GlobalMouseInfo, InputInfo } from "newui/input/InputManager";
 export interface IBindHandlerApi {
     /**
      * The bindable this handler is called for.
@@ -27,15 +27,15 @@ export interface IBindHandlerApi {
     /**
      * Details on the catalyst of this event.
      */
-    catalyst: BindingInfo;
+    catalyst: InputInfo;
     /**
      * Details on where the mouse is.
      */
-    mouse: MouseInfo;
+    mouse: GlobalMouseInfo;
     /**
      * Details on the status of all input.
      */
-    input: InputInfo;
+    input: GlobalInputInfo;
     /**
      * A set containing all `Bindable`s that:
      * 1. Matched the currently pressed keys.
@@ -153,6 +153,6 @@ declare module Bind {
      */
     function deregisterHandlers(host: any): void;
     let shouldLogHoldingEvent: boolean;
-    function emitEvent(event: BindingEventName, binding: IBinding, info: BindingInfo, mouse: MouseInfo, input: InputInfo): Set<Bindable>;
+    function emitEvent(event: BindingEventName, input: IInput, info: InputInfo, mouse: GlobalMouseInfo, globalInput: GlobalInputInfo): Set<Bindable>;
 }
 export default Bind;

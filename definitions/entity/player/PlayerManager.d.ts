@@ -19,5 +19,5 @@ export default class PlayerManager extends EntityManager<Player> {
     remove(player: Player): void;
     remove(pid: number): void;
     delete(plys: Player[], identifier: string): void;
-    private removeAndFixPids;
+    private removeAndFixIds;
 }

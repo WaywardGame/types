@@ -11,11 +11,11 @@
 import EventEmitter from "event/EventEmitter";
 import Component from "newui/component/Component";
 import Bindable from "newui/input/Bindable";
-import { BindingCatalyst, BindingCatalystType, IBinding, Modifier } from "newui/input/IBinding";
+import { IInput, InputCatalyst, InputCatalystType, Modifier } from "newui/input/IInput";
 import HashMap from "utilities/map/HashMap";
 import Vector2 from "utilities/math/Vector2";
-export declare class BindingInfo {
-    readonly catalyst: BindingCatalyst;
+export declare class InputInfo {
+    readonly catalyst: InputCatalyst;
     /**
      * The component that this input began in.
      */
@@ -26,13 +26,17 @@ export declare class BindingInfo {
      */
     readonly startTime: number;
     /**
+     * Whether this input was a touch input
+     */
+    readonly touch: boolean;
+    /**
      * The number of milliseconds that have elapsed since `startTime`. Calculated on the fly.
      */
     get duration(): number;
-    constructor(evt: Event, catalyst: BindingCatalyst);
+    constructor(evt: Event, catalyst: InputCatalyst);
     startWasWithin(component?: Component): boolean | undefined;
 }
-export declare class MouseInfo {
+export declare class GlobalMouseInfo {
     /**
      * The current position of the mouse.
      */
@@ -63,27 +67,27 @@ export declare class MouseInfo {
     invalidateTarget(): void;
 }
 interface IInputInfoEvents {
-    unpress(binding: IBinding, info: BindingInfo): any;
+    unpress(input: IInput, info: InputInfo): any;
 }
-export declare class InputInfo extends EventEmitter.Host<IInputInfoEvents> {
-    readonly catalysts: HashMap<import("./IBinding").IBindingCatalyst<BindingCatalystType.Key> | import("./IBinding").IBindingCatalyst<BindingCatalystType.MouseButton> | import("./IBinding").IBindingCatalyst<BindingCatalystType.Scroll>, BindingInfo>;
-    readonly bindings: HashMap<IBinding, BindingInfo>;
+export declare class GlobalInputInfo extends EventEmitter.Host<IInputInfoEvents> {
+    readonly catalysts: HashMap<import("./IInput").IInputCatalyst<InputCatalystType.Key> | import("./IInput").IInputCatalyst<InputCatalystType.MouseButton> | import("./IInput").IInputCatalyst<InputCatalystType.Scroll>, InputInfo>;
+    readonly inputs: HashMap<IInput, InputInfo>;
     readonly modifiers: Set<"Shift" | "Alt" | "Ctrl">;
     isAny(): boolean;
     isNone(): boolean;
-    isHolding(bindable: Bindable): BindingInfo | undefined;
-    isHolding(binding: IBinding): BindingInfo | undefined;
-    unpress(...unpresses: Array<BindingCatalyst | IBinding | Bindable>): void;
+    isHolding(bindable: Bindable): InputInfo | undefined;
+    isHolding(input: IInput): InputInfo | undefined;
+    unpress(...unpresses: Array<InputCatalyst | IInput | Bindable>): void;
 }
 export interface IInputManagerEvents {
     disabled(): any;
     enabled(): any;
-    rising(catalyst: BindingCatalyst, info: BindingInfo, modifiers: Set<Modifier>): any;
-    falling(catalyst: BindingCatalyst, info: BindingInfo, modifiers: Set<Modifier>): any;
+    rising(catalyst: InputCatalyst, info: InputInfo, modifiers: Set<Modifier>): any;
+    falling(catalyst: InputCatalyst, info: InputInfo, modifiers: Set<Modifier>): any;
 }
 declare class InputManager extends EventEmitter.Host<IInputManagerEvents> {
-    readonly mouse: MouseInfo;
-    readonly input: InputInfo;
+    readonly mouse: GlobalMouseInfo;
+    readonly input: GlobalInputInfo;
     private readonly disablers;
     private component?;
     register(component: Component): this;
@@ -95,7 +99,7 @@ declare class InputManager extends EventEmitter.Host<IInputManagerEvents> {
      * those properties, it returns a `Set<Modifier>` matching which of those properties is true.
      */
     extractModifiers(evt: Event): Set<Modifier> | undefined;
-    getCatalyst(evt: Event): BindingCatalyst | undefined;
+    getCatalyst(evt: Event): InputCatalyst | undefined;
     disableUntil(until: number | Promise<any>, disabler: string): void;
     isDisabled(): boolean;
     isDisabledBy(disabler: string): boolean;
@@ -110,7 +114,7 @@ declare class InputManager extends EventEmitter.Host<IInputManagerEvents> {
      * @returns Whether the modifiers have changed
      */
     private updateModifiers;
-    private getBinding;
+    private getInput;
     private getModifiers;
     private cancelNonInputEvent;
     private cancelEvent;

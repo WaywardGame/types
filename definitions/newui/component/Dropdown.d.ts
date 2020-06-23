@@ -14,7 +14,7 @@ import Component from "newui/component/Component";
 import InputButton from "newui/component/InputButton";
 import { IRefreshableValue } from "newui/component/Refreshable";
 import { SelectDirection } from "newui/INewUi";
-import { BindingCatalyst } from "newui/input/IBinding";
+import { InputCatalyst } from "newui/input/IInput";
 interface IDropdownEvents<O = string | number> extends Events<Component> {
     /**
      * @param optionId The new option which is selected.
@@ -57,7 +57,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     protected onNext(): boolean;
     protected onPrevious(): boolean;
     protected onEnter(): boolean;
-    protected onInputRising(_: any, catalyst: BindingCatalyst): void;
+    protected onInputRising(_: any, catalyst: InputCatalyst): void;
     protected onCancel(): boolean;
     protected onInterrupt(): void;
     protected onSelectionChange(_: any, selection?: Component): void;

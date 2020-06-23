@@ -45,5 +45,4 @@ export default abstract class Screen extends Component {
     private onMouseDown;
     private onMouseUp;
     private onClick;
-    private onDocumentClick;
 }

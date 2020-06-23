@@ -10,4 +10,4 @@
  */
 import { IOverlayInfo } from "tile/ITerrain";
 import { IVector2 } from "utilities/math/IVector";
-export default function (i: number, len: number, pos: IVector2, lastPos: IVector2, nextPos?: IVector2): IOverlayInfo;
+export default function (i: number, len: number, pos: IVector2, lastPos: IVector2, nextPos: IVector2 | undefined, isPreviewPath: boolean | undefined): IOverlayInfo;
