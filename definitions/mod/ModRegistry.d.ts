@@ -42,7 +42,7 @@ import { IRegistry } from "mod/BaseMod";
 import InterModRegistry, { InterModRegistration } from "mod/InterModRegistry";
 import { IPacketClass } from "multiplayer/packets/Packets";
 import Bindable from "newui/input/Bindable";
-import { IInput } from "newui/input/IInput";
+import { Binding } from "newui/input/Bindings";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 import { DialogId, IDialogDescription } from "newui/screen/screens/game/Dialogs";
 import { IMenuBarButtonDescription, MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
@@ -177,7 +177,7 @@ export interface IOverlayRegistration extends IBaseModRegistration {
 export interface IBindableRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Bindable;
     name: string;
-    defaultBindings: IInput[];
+    defaultBindings: Binding[];
 }
 export interface IDictionaryRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Dictionary;
@@ -441,7 +441,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered note.
      */
-    function bindable(name: string, ...defaultBindings: IInput[]): <K extends string | number | symbol, T extends { [k in K]: Bindable; }>(target: T, key: K) => void;
+    function bindable(name: string, ...defaultBindings: Binding[]): <K extends string | number | symbol, T extends { [k in K]: Bindable; }>(target: T, key: K) => void;
     /**
      * Registers a dictionary.
      * @param name The name of the dictionary.

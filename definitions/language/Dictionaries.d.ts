@@ -94,43 +94,44 @@ export declare enum Dictionary {
     ItemGroup = 32,
     JoinServerRetryReason = 33,
     LegendaryType = 34,
-    Message = 35,
-    MessagesDefaultFilter = 36,
-    MessagesTimestampMode = 37,
-    Milestone = 38,
-    MilestoneModifierGroup = 39,
-    Misc = 40,
-    ModLoadError = 41,
-    ModLoadFailureReason = 42,
-    ModProvide = 43,
-    ModSort = 44,
-    ModType = 45,
-    MultiplayerDisconnectReason = 46,
-    MusicPlaylist = 47,
-    Note = 48,
-    NPC = 49,
-    Number = 50,
-    PartOfDay = 51,
-    PowerMode = 52,
-    QuadrantComponent = 53,
-    QuadrantComponentContextMenuAction = 54,
-    Quality = 55,
-    Quest = 56,
-    QuestRequirement = 57,
-    SaveSlotSort = 58,
-    Skill = 59,
-    Source = 60,
-    Stat = 61,
-    StatusEffect = 62,
-    TeamMemberResponsibility = 63,
-    Terrain = 64,
-    TileEvent = 65,
-    Ui = 66,
-    UiQuadrant = 67,
-    UnableToJoinReason = 68,
-    UnlockedRecipesStrategy = 69,
-    WeightStatus = 70,
-    WorldLayer = 71
+    Macro = 35,
+    Message = 36,
+    MessagesDefaultFilter = 37,
+    MessagesTimestampMode = 38,
+    Milestone = 39,
+    MilestoneModifierGroup = 40,
+    Misc = 41,
+    ModLoadError = 42,
+    ModLoadFailureReason = 43,
+    ModProvide = 44,
+    ModSort = 45,
+    ModType = 46,
+    MultiplayerDisconnectReason = 47,
+    MusicPlaylist = 48,
+    Note = 49,
+    NPC = 50,
+    Number = 51,
+    PartOfDay = 52,
+    PowerMode = 53,
+    QuadrantComponent = 54,
+    QuadrantComponentContextMenuAction = 55,
+    Quality = 56,
+    Quest = 57,
+    QuestRequirement = 58,
+    SaveSlotSort = 59,
+    Skill = 60,
+    Source = 61,
+    Stat = 62,
+    StatusEffect = 63,
+    TeamMemberResponsibility = 64,
+    Terrain = 65,
+    TileEvent = 66,
+    Ui = 67,
+    UiQuadrant = 68,
+    UnableToJoinReason = 69,
+    UnlockedRecipesStrategy = 70,
+    WeightStatus = 71,
+    WorldLayer = 72
 }
 export declare type Enum = {
     [key: string]: number;
@@ -174,43 +175,44 @@ declare const dictionaries: {
     32: typeof ItemTypeGroup;
     33: typeof JoinServerRetryReason;
     34: typeof LegendaryType;
-    35: typeof Message;
-    36: typeof MessageFilterDefault;
-    37: typeof MessageTimestamp;
-    38: typeof Milestone;
-    39: typeof MilestoneModifierGroup;
-    40: typeof MiscTranslation;
-    41: typeof CanLoadState;
-    42: typeof ModLoadFailureReason;
-    43: typeof ModProvide;
-    44: typeof ModSort;
-    45: typeof ModType;
-    46: typeof DisconnectReason;
-    47: typeof MusicPlaylist;
-    48: typeof Note;
-    49: typeof NPCType;
-    50: symbol;
-    51: typeof PartOfDay;
-    52: typeof PowerMode;
-    53: typeof QuadrantComponentId;
-    54: typeof QuadrantComponentContextMenuAction;
-    55: typeof Quality;
-    56: typeof QuestType;
-    57: typeof QuestRequirementType;
-    58: typeof SaveSort;
-    59: typeof SkillType;
-    60: typeof Source;
-    61: typeof Stat;
-    62: typeof StatusType;
-    63: typeof Responsibility;
-    64: typeof TerrainType;
-    65: typeof TileEventType;
-    66: typeof UiTranslation;
-    67: typeof Quadrant;
-    68: typeof UnableToJoinReason;
-    69: typeof UnlockedRecipesStrategy;
-    70: typeof WeightStatus;
-    71: typeof WorldZ;
+    35: symbol;
+    36: typeof Message;
+    37: typeof MessageFilterDefault;
+    38: typeof MessageTimestamp;
+    39: typeof Milestone;
+    40: typeof MilestoneModifierGroup;
+    41: typeof MiscTranslation;
+    42: typeof CanLoadState;
+    43: typeof ModLoadFailureReason;
+    44: typeof ModProvide;
+    45: typeof ModSort;
+    46: typeof ModType;
+    47: typeof DisconnectReason;
+    48: typeof MusicPlaylist;
+    49: typeof Note;
+    50: typeof NPCType;
+    51: symbol;
+    52: typeof PartOfDay;
+    53: typeof PowerMode;
+    54: typeof QuadrantComponentId;
+    55: typeof QuadrantComponentContextMenuAction;
+    56: typeof Quality;
+    57: typeof QuestType;
+    58: typeof QuestRequirementType;
+    59: typeof SaveSort;
+    60: typeof SkillType;
+    61: typeof Source;
+    62: typeof Stat;
+    63: typeof StatusType;
+    64: typeof Responsibility;
+    65: typeof TerrainType;
+    66: typeof TileEventType;
+    67: typeof UiTranslation;
+    68: typeof Quadrant;
+    69: typeof UnableToJoinReason;
+    70: typeof UnlockedRecipesStrategy;
+    71: typeof WeightStatus;
+    72: typeof WorldZ;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

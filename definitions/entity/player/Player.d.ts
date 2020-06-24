@@ -49,10 +49,8 @@ export default class Player extends Human {
     lastIslandId: string;
     isMoving: boolean;
     lastAttackedBy: Human | Creature | undefined;
-    movementComplete: boolean;
     movementCompleteZ: number | undefined;
     name: string;
-    noInputReceived: boolean;
     quests: QuestManager;
     quickSlotInfo: IQuickSlotInfo[];
     realTimeTickActionDelay: number;
@@ -69,6 +67,7 @@ export default class Player extends Human {
     walkPath: IVector2[] | undefined;
     exploredMap: IExploreMap[] | undefined;
     isMovingClientside: boolean;
+    finishedMovingClientside: boolean;
     wasAbsentPlayer: boolean;
     nextX: number;
     nextY: number;
@@ -175,7 +174,10 @@ export default class Player extends Human {
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
     hasWalkPath(): boolean;
     walkAlongPath(path: IVector2[] | undefined): void;
-    processInput(timeStamp: number): void;
+    /**
+     * This is only ran on the server
+     */
+    processInput(timeStamp: number): IMovementIntent | undefined;
     /**
      * Returns true if the player changed their facing direction.
      */

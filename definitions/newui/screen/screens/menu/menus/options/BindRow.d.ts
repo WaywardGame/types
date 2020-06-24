@@ -14,23 +14,32 @@ import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshable } from "newui/component/Refreshable";
 import Bindable from "newui/input/Bindable";
 import { IInput } from "newui/input/IInput";
+import { Macro } from "newui/input/Macros";
 export declare class BindRow extends Button implements IRefreshable {
     private readonly currentBinds;
     private readonly bind;
-    private readonly bindCatcher;
+    private readonly bindingCatcher;
     private readonly modName;
-    constructor(bindable: Bindable, bindCatcher: BindCatcher);
+    constructor(bindable: Bindable, bindCatcher: BindingCatcher);
     refresh(): this;
     protected onActivate(): Promise<void>;
     private getBindableName;
     private getBindTranslations;
-    private getBind;
+    private getBinding;
 }
-export declare class BindCatcher extends Component {
-    private readonly bindText;
+export declare class BindingCatcher extends Component {
+    private readonly requestText;
+    private readonly currentInputText;
+    private readonly timeoutBar;
     private resolve;
+    private readonly macro;
+    private closeTimeout;
     constructor();
-    getBind(): Promise<IInput>;
-    setText(text: TranslationGenerator): void;
+    getBinding(macro: boolean): Promise<IInput | Macro | undefined>;
+    setRequestText(text: TranslationGenerator): void;
     private onInput;
+    private handleInput;
+    private clearCloseTimeout;
+    private refreshCloseTimeout;
+    private close;
 }

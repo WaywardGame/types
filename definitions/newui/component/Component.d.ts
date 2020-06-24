@@ -122,6 +122,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     schedule<A extends any[]>(ms: number, debounce: number, cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(ms: number, debounce: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
     repaint(): void;
+    reflow(reason: string): void;
     forceShowTooltip(onlyIfHovered?: boolean, recalcTarget?: true): void;
     regenerateBoxes(): void;
     protected onContextMenu(api: IBindHandlerApi): boolean;

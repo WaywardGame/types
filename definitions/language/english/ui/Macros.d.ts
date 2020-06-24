@@ -8,11 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import Bindable, { BindableType } from "newui/input/Bindable";
-import { Binding } from "newui/input/Bindings";
-declare module Bindables {
-    function register(index: number, defaultBinding: Binding[]): void;
-    function deregister(index: number): void;
-    function getType(bindable: Bindable): BindableType | undefined;
-}
-export default Bindables;
+declare const macros: Record<string, string>;
+export default macros;
