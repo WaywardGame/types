@@ -41,8 +41,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     autoSaveTimer: number;
     autoSaveLastSave: number;
     fadeInAmount: number | undefined;
-    fillCount: number;
-    fillTile: boolean[][];
     isLoadingSave: boolean;
     paused: boolean;
     playing: boolean;
@@ -102,7 +100,11 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     resetWebGL(): void;
     setGlContextSize(width: number, height: number): void;
     resizeRenderer(): void;
-    checkWaterFill(x: number, y: number, z: number, needed: number): void;
+    checkWaterFill(x: number, y: number, z: number, needed: number, fillTile?: {
+        [index: number]: {
+            [index: number]: boolean;
+        };
+    }, fillCount?: number): number;
     getDailyChallengeSeed(): number;
     consumeWaterTile(x: number, y: number, z: number): void;
     checkForHiddenMob(human: Human, x: number, y: number, z: number): void;

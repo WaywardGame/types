@@ -80,7 +80,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     append(...elements: ArrayOfIterablesOr<HTMLElement | IComponent | undefined | false>): this;
     append(appendStrategy: AppendStrategy, ...elements: ArrayOfIterablesOr<HTMLElement | IComponent | undefined | false>): this;
     remove(): this;
-    contains(what: string | Element | IComponent): boolean;
+    contains(what?: string | Element | IComponent | null): boolean;
     dump(filter?: (element: Component) => boolean): this;
     /**
      * Dumps all child components & elements without triggering any events.

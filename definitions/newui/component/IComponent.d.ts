@@ -238,10 +238,11 @@ export declare enum Namespace {
     SVG = "http://www.w3.org/2000/svg"
 }
 export declare enum SelectableLayer {
-    Primary = 0,
-    Secondary = 1,
-    Tertiary = 2,
-    Quaternary = 3
+    Screen = 0,
+    Menu = 1,
+    Dialog = 2,
+    Interactable = 3,
+    SubInteractable = 4
 }
 export interface IBaseTranslationData {
     dictionary: Dictionary;

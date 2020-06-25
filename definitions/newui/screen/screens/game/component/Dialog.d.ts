@@ -93,6 +93,7 @@ export default abstract class Dialog extends Component implements IDialog {
     private currentPanel;
     private lastPanel;
     private cachedSnapPositions?;
+    private readonly activeReasons;
     private get visiblePanel();
     get square(): boolean;
     /**
@@ -138,11 +139,16 @@ export default abstract class Dialog extends Component implements IDialog {
     /**
      * Mark that this dialog is "active"
      */
-    markActive(): void;
+    markActive(reason: any): void;
     /**
      * Mark that this dialog is not "active"
      */
-    markInactive(): void;
+    markInactive(reason: any): void;
+    /**
+     * Toggle whether this dialog is "active"
+     */
+    toggleActive(reason: any, active: boolean): void;
+    isActive(): boolean;
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
@@ -151,6 +157,7 @@ export default abstract class Dialog extends Component implements IDialog {
      * Event handler for when this dialog is appended
      */
     protected onAppend(): void;
+    protected onSelect(_: any, component?: Component): void;
     private hideSettingsPanel;
     private saveEdgesForScale;
     /**

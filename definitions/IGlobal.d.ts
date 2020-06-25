@@ -256,7 +256,7 @@ declare global {
         runCallbacks(): void;
         setOnJoinCallback(callback: (server: string) => void): void;
         setOnErrorCallback(callback: (error: string | number) => void): void;
-        updatePresence(presenceInfo: INapiDiscordPresenceInfo): void;
+        updatePresence(presenceInfo: INapiDiscordPresenceInfo): Promise<number> | void;
     }
     interface INapiDiscordPresenceInfo {
         details: string;

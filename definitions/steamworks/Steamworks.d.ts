@@ -95,7 +95,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     clearSteamRichPresence(): void;
     updateSteamRichPresence(): void;
     updateDiscordPresence(): void;
-    setDiscordPresence(presenceInfo: INapiDiscordPresenceInfo): void;
+    setDiscordPresence(presenceInfo: INapiDiscordPresenceInfo): Promise<void>;
     getLobbyId(): string | undefined;
     isInLobby(): boolean;
     createLobby(type: LobbyType): void;

@@ -125,11 +125,11 @@ export declare type IGameOld = Partial<Game> & {
             };
         };
     };
+    tileEvents: SaferArray<TileEvent>;
+    time: TimeManager;
     wellData: {
         [index: number]: IWell | undefined;
     };
-    tileEvents: SaferArray<TileEvent>;
-    time: TimeManager;
 };
 export interface IPlayOptions {
     slot: number | undefined;
