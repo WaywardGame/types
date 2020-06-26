@@ -9,15 +9,8 @@
  * https://waywardgame.github.io/
  */
 import Menu from "newui/screen/screens/menu/component/Menu";
-export declare enum Responsibility {
-    Programming = 0,
-    Design = 1,
-    Web = 2,
-    Art = 3,
-    PR = 4,
-    UX = 5,
-    Music = 6
-}
+import { Website } from "newui/screen/screens/menu/menus/main/component/IWebsite";
+import { Responsibility } from "newui/screen/screens/menu/menus/main/IAbout";
 interface IPerson {
     firstName: string;
     lastName?: string;
@@ -27,6 +20,7 @@ interface IPerson {
 interface ITeamMember extends IPerson {
     responsibilities: Responsibility[];
     isCurrentMember?: true;
+    links?: Array<[Website, string]>;
 }
 export declare const teamMembers: ITeamMember[];
 export default class AboutMenu extends Menu {

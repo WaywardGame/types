@@ -15,8 +15,9 @@ import Component from "newui/component/Component";
 import Text from "newui/component/Text";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare abstract class StatElement extends Component {
-    private readonly stat;
     private readonly entity;
+    private readonly stat;
+    private readonly statIcon;
     constructor(entity: Entity, stat: Stat, noEvents?: true);
     /**
      * Returns the attached entity's `IStat` for this `StatElement`'s `Stat`.
@@ -37,7 +38,7 @@ export declare abstract class StatElement extends Component {
     /**
      * Returns the formatted CSS url for the stat icon.
      */
-    getStatIcon(): string;
+    getCustomStatIconPath(): string | undefined;
     /**
      * Returns the display priority for this stat.
      */

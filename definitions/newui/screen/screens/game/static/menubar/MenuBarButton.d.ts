@@ -15,10 +15,6 @@ export default class MenuBarButton extends Button {
     private readonly onActivate;
     private readonly bindable;
     constructor(buttonType: MenuBarButtonType);
-    /**
-     * Returns the formatted CSS url for the stat icon.
-     */
-    getStatIcon(): string;
     onBindable(api: IBindHandlerApi): boolean;
     private getTooltip;
 }

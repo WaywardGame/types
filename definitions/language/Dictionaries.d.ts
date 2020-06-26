@@ -50,7 +50,8 @@ import { MessageFilterDefault } from "newui/screen/screens/game/IMessages";
 import { CharacterSort } from "newui/screen/screens/menu/menus/character/Character";
 import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 import { HighscoreSort } from "newui/screen/screens/menu/menus/highscores/IHighscoresMenu";
-import { Responsibility } from "newui/screen/screens/menu/menus/main/AboutMenu";
+import { Website } from "newui/screen/screens/menu/menus/main/component/IWebsite";
+import { Responsibility } from "newui/screen/screens/menu/menus/main/IAbout";
 import { ModSort } from "newui/screen/screens/menu/menus/mods/IModsMenu";
 import { AutoSave, MusicPlaylist, PowerMode } from "save/data/ISaveDataGlobal";
 import { SaveSort } from "save/ISaveManager";
@@ -130,8 +131,9 @@ export declare enum Dictionary {
     UiQuadrant = 68,
     UnableToJoinReason = 69,
     UnlockedRecipesStrategy = 70,
-    WeightStatus = 71,
-    WorldLayer = 72
+    Website = 71,
+    WeightStatus = 72,
+    WorldLayer = 73
 }
 export declare type Enum = {
     [key: string]: number;
@@ -211,8 +213,9 @@ declare const dictionaries: {
     68: typeof Quadrant;
     69: typeof UnableToJoinReason;
     70: typeof UnlockedRecipesStrategy;
-    71: typeof WeightStatus;
-    72: typeof WorldZ;
+    71: typeof Website;
+    72: typeof WeightStatus;
+    73: typeof WorldZ;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

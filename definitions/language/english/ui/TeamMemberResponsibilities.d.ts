@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Responsibility } from "newui/screen/screens/menu/menus/main/AboutMenu";
+import { Responsibility } from "newui/screen/screens/menu/menus/main/IAbout";
 declare const teamMemberResponsibilities: Descriptions<Responsibility, string>;
 export default teamMemberResponsibilities;

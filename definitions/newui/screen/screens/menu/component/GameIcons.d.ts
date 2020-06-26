@@ -56,16 +56,4 @@ export declare class GameModifiers extends Component {
     constructor();
     setHasLabels(labels?: boolean): this;
     refresh(): void;
-    /**
-     * Returns the formatted CSS url for the game options icon.
-     */
-    private getGameOptionsIcon;
-    /**
-     * Returns the formatted CSS url for the challenge icon.
-     */
-    private getChallengeIcon;
-    /**
-     * Returns the formatted CSS url for the milestone icon.
-     */
-    private getMilestoneIcon;
 }

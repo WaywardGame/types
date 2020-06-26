@@ -14,6 +14,7 @@ import { Dictionary } from "language/Dictionaries";
 import Message from "language/dictionary/Message";
 import { MiscTranslation } from "language/dictionary/Misc";
 import UiTranslation from "language/dictionary/UiTranslation";
+import { Link } from "language/segment/LinkSegment";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { Random } from "utilities/Random";
 import Interpolator, { ISegment, IStringSection } from "utilities/string/Interpolator";
@@ -72,7 +73,7 @@ declare class Translation {
      *
      * Example uses include text the user inputs, and text from other sites (steam/trello)
      */
-    static generator(textOrGenerator: GetterOfOr<string | IStringSection[]>): TranslationGenerator;
+    static generator(textOrGenerator: GetterOfOr<string | IStringSection[]>, link?: Link): TranslationGenerator;
     static isSerializedTranslation(thing: unknown): thing is ISerializedTranslation;
     static deserialize(serializedTranslation: ISerializedTranslation): Translation;
     static sorter(dictionary: Dictionary, entry?: number): (a: number, b: number) => number;

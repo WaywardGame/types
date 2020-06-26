@@ -8,9 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { PathType } from "resource/IResourceLoader";
-declare module Style {
-    function getImagePath(src: string, path?: undefined, ext?: string, isVariable?: boolean, customPath?: string): string;
-    function getImagePath(pathType: PathType, path: number, ext?: string, isVariable?: boolean, customPath?: string): string;
+export declare enum Website {
+    Twitter = 0,
+    GitHubUser = 1,
+    GitHubProject = 2,
+    DiscordServer = 3,
+    Subreddit = 4,
+    RedditUser = 5,
+    Facebook = 6,
+    Personal = 7
 }
-export default Style;
+export declare const websiteLinks: Record<Website, string>;
