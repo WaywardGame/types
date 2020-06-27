@@ -46,20 +46,20 @@ export interface IComponentEvents {
     removeContextMenu(): any;
 }
 export declare type AppendStrategy = "append" | "prepend" | {
-    after: IComponent;
+    after: IComponent | string;
 } | {
-    before: IComponent;
+    before: IComponent | string;
 } | {
     sorted(a: Component, b: Component): number;
 };
 export declare module AppendStrategy {
     const Append = "append";
     const Prepend = "prepend";
-    function after(component: IComponent): {
-        after: IComponent;
+    function after(component: IComponent | string): {
+        after: string | IComponent;
     };
-    function before(component: IComponent): {
-        before: IComponent;
+    function before(component: IComponent | string): {
+        before: string | IComponent;
     };
     /**
      * A strategy that will use a sorting function in order to find the position the component should be placed.
@@ -271,6 +271,7 @@ export declare enum TooltipLocation {
 }
 export interface ITooltipEvents extends IComponentEvents {
     move(position: Vector2): any;
+    setLocation(location: TooltipLocation): any;
 }
 export interface ITooltip extends IComponent {
     event: IEventEmitter<this, ITooltipEvents>;

@@ -36,7 +36,11 @@ export declare class InputInfo {
     constructor(evt: Event, catalyst: InputCatalyst);
     startWasWithin(component?: Component): boolean | undefined;
 }
-export declare class GlobalMouseInfo {
+export interface IGlobalMouseInfoEvents {
+    move(position: Vector2): any;
+    updateTarget(): any;
+}
+export declare class GlobalMouseInfo extends EventEmitter.Host<IGlobalMouseInfoEvents> {
     /**
      * The current position of the mouse.
      */

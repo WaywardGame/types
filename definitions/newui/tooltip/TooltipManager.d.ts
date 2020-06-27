@@ -12,8 +12,11 @@ import Component from "newui/component/Component";
 import { IComponent } from "newui/component/IComponent";
 import { ITooltipManager } from "newui/INewUi";
 import Tooltip from "newui/tooltip/Tooltip";
+import Vector2 from "utilities/math/Vector2";
 export default class TooltipManager implements ITooltipManager {
     readonly tooltipWrapper: Component;
+    readonly tooltipMainWrapper: Component;
+    readonly tooltipMouseWrapper: Component;
     private host;
     private tooltip;
     private readonly disablers;
@@ -33,5 +36,6 @@ export default class TooltipManager implements ITooltipManager {
      */
     enable(disabler: any): this;
     protected onScreenResize(): void;
+    protected onMove(_: any, position: Vector2): void;
     private loop;
 }

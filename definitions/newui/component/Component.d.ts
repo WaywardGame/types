@@ -82,10 +82,6 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     remove(): this;
     contains(what?: string | Element | IComponent | null): boolean;
     dump(filter?: (element: Component) => boolean): this;
-    /**
-     * Dumps all child components & elements without triggering any events.
-     */
-    dumpFast(): this;
     setContents(html: string, escape?: boolean): this;
     store(): this;
     findDescendants(selector: string): NodeListOf<Element>;
