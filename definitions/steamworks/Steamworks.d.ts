@@ -149,7 +149,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private ugcSynchronizeItems;
     private copyFolder;
     private saveFilesToCloud;
-    private getFileShareId;
+    private getFileShareIds;
     private publishFileToWorkshop;
     private extractArchive;
     private safeOpenFolder;

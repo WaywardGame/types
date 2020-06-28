@@ -11,7 +11,7 @@
 import { BlockRow } from "newui/component/BlockRow";
 import { Heading } from "newui/component/Text";
 export declare class LabelledRow extends BlockRow {
-    private readonly label;
+    readonly label: Heading;
     constructor();
     setLabel(labelInitializer: (label: Heading) => Heading): this;
     /**

@@ -15,7 +15,7 @@ import { Delay, SkillType } from "entity/IHuman";
 import { TurnType } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
-import { FireType, IGameEvents, IMapRequest, IPlayOptions, ITravelingToIslandInfo, ITravelToIslandOptions, RenderSource, SaveType, TileUpdateType, TurnMode, UpdateRenderFlag } from "game/IGame";
+import { FireType, IGameEvents, IMapRequest, IPlayOptions, ITravelingToIslandInfo, ITravelToIslandOptions, RenderSource, SaveType, TileUpdateType, TurnMode, UpdateRenderFlag, IWaterFill } from "game/IGame";
 import { Quality } from "game/IObject";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ChallengeModifiersCollection } from "game/options/modifiers/challenge/ChallengeModifiers";
@@ -100,11 +100,10 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     resetWebGL(): void;
     setGlContextSize(width: number, height: number): void;
     resizeRenderer(): void;
-    checkWaterFill(x: number, y: number, z: number, needed: number, fillTile?: {
-        [index: number]: {
-            [index: number]: boolean;
-        };
-    }, fillCount?: number): number;
+    /**
+     * Check the amount of water tiles there is connected to a supplied x/y area
+     */
+    checkWaterFill(x: number, y: number, z: number, needed: number, waterFill?: IWaterFill): number;
     getDailyChallengeSeed(): number;
     consumeWaterTile(x: number, y: number, z: number): void;
     checkForHiddenMob(human: Human, x: number, y: number, z: number): void;
@@ -190,7 +189,14 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getPlayersAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): Player[];
     getPlayersThatSeePosition(x: number, y: number, z: number): Player[];
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
-    getNearestPlayer(x: number, y: number, z?: number): Player | undefined;
+    /**
+     * Gets the nearest player based on x/y/z coordinates.
+     * @param x The x coord to get the closest player.
+     * @param y The y coord to get the closest player.
+     * @param z The z coord to get the closest player.
+     * @param canSee If set to true, check if the player can see the x/y/z coords. Defaults to false.
+     */
+    getNearestPlayer(x: number, y: number, z?: number, canSee?: boolean): Player | undefined;
     getPlayerByPid(pid: number): Player | undefined;
     getPlayerByIdentifier(identifier: string, includeAbsent?: boolean): Player | undefined;
     getPlayerByName(name: string): Player | undefined;

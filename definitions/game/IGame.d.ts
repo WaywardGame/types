@@ -286,6 +286,14 @@ export declare enum TileUpdateType {
     DoodadOverHidden = 9,
     Batch = 10
 }
+export interface IWaterFill {
+    count: number;
+    tiles: {
+        [index: number]: {
+            [index: number]: boolean;
+        };
+    };
+}
 export declare const DEFAULT_MAP_SIZE = 512;
 export declare const LINE_OF_SIGHT_RADIUS = 15;
 export declare const LINE_OF_SIGHT_RADIUS_MAX = 20;

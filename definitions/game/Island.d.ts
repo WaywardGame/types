@@ -48,7 +48,7 @@ export default class Island {
     version: string;
     wellData: SaferNumberIndexedObject<IWell>;
     seeds: ISeeds;
-    temperature: TemperatureManager;
+    temperature: TemperatureManager | undefined;
     static positionToId(position: IVector2): string;
     static idToPosition(id: string): IVector2 | undefined;
     constructor(position?: IVector2);

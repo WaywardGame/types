@@ -1,0 +1,31 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2019
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
+import { Events, IEventEmitter } from "event/EventEmitter";
+import Input from "newui/component/Input";
+import { LabelledRow } from "newui/component/LabelledRow";
+export interface IInputRowEvents extends Events<LabelledRow> {
+    change(text: string): any;
+    toggleDisabled(disabled: boolean): any;
+}
+export default class InputRow extends LabelledRow {
+    readonly event: IEventEmitter<this, IInputRowEvents>;
+    readonly input: Input;
+    readonly clear: Input["clear"];
+    readonly setDefault: Input["setDefault"];
+    readonly focus: Input["focus"];
+    get text(): string;
+    set text(text: string);
+    get changed(): boolean;
+    private readonly _disabledReasons;
+    get disabled(): boolean;
+    setDisabled(val?: boolean, reason?: string): this;
+    editInput(editor: (input: Input) => any): this;
+}

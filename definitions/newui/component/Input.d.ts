@@ -28,6 +28,7 @@ export interface IInputEvents extends Events<Component> {
     blur(): any;
     upArrow(): any;
     downArrow(): any;
+    toggleDisabled(disabled: boolean): any;
 }
 export default class Input extends Component implements IRefreshable {
     event: IEventEmitter<this, IInputEvents>;
@@ -48,7 +49,10 @@ export default class Input extends Component implements IRefreshable {
     get changed(): boolean;
     private readonly input;
     private readonly wrapperButtons;
+    private readonly _disabledReasons;
+    get disabled(): boolean;
     constructor(type?: "input" | "textarea");
+    setDisabled(val?: boolean, reason?: string): this;
     addClearButton(): this;
     addResetButton(): this;
     setMaxLength(maxLength?: number): this;

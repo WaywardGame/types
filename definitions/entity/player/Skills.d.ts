@@ -11,11 +11,11 @@
 import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { IModdable } from "mod/ModRegistry";
-export declare class SkillLevel {
-    readonly bonus: number;
-    readonly core: number;
+export interface ISkillLevel {
+    bonus: number;
+    core: number;
 }
-export declare type ISkillSet = OptionalDescriptions<SkillType, SkillLevel>;
+export declare type ISkillSet = OptionalDescriptions<SkillType, ISkillLevel>;
 export interface ISkillDescription extends IModdable {
     attribute?: Stat;
     reputation?: number;

@@ -84,7 +84,7 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
     compressSave(slot: number, saveObject: ISaveObject, exporting?: boolean): void;
     decompressSave(slot: number, saveObject: ISaveObject, importing?: boolean): void;
     getSerializer(): ISerializer;
-    getGameStateAsJson(cleanup?: boolean): string;
+    getGameStateAsJson(cleanup?: boolean, pretty?: boolean): string;
     downloadGameStateAsJson(cleanup?: boolean): void;
     private getPropertiesToSerialize;
     private compressString;

@@ -78,10 +78,10 @@ export default abstract class Human extends Entity {
     getSkillBonus(skill: SkillType): number;
     /**
      * Sets the "base value" of the skill (ignoring any bonuses applied by legendary equipment)
-     * @param skill The skill to set the base value of.
+     * @param skillType The skill to set the base value of.
      * @param value The value (between 0 and 100) to set the skill to.
      */
-    setSkillCore(skill: SkillType, value: number): void;
+    setSkillCore(skillType: SkillType, value: number): void;
     /**
      * @returns The total skill (combination of all other skills). Ignores skill bonuses.
      */
@@ -150,7 +150,7 @@ export default abstract class Human extends Entity {
      */
     getProducedTemperature(): number | undefined;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
-    protected getSkillGainMultiplier(skillType: SkillType): number;
+    protected getSkillGainMultiplier(_skillType: SkillType): number;
     /**
      * Improve one of the core player stats
      */
