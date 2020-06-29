@@ -15,6 +15,7 @@ import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { CompiledProgram } from "renderer/Shaders";
 import { IBound3 } from "utilities/math/Bound3";
 import Vec2 from "utilities/math/Vector2";
+import { IVector2 } from "utilities/math/IVector";
 export interface IFieldOfViewEvents {
     getPlayerFieldOfViewRadius(radius: number, player: Player): number;
 }
@@ -56,6 +57,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> i
     createDebugRenderer(): ITextureDebugRenderer;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
     getBounds(player: Player, radius?: number): IBound3;
+    markAsExplored(tiles: IVector2[]): boolean;
     private updateExplored;
     private computeLights;
 }

@@ -143,27 +143,6 @@ export interface IHookHost {
      */
     onHumanSkillChange?(human: Human, skill: SkillType, currentSkill: number): void;
     /**
-     * Called when an item is added to the players inventory
-     * @param player The player object
-     * @param item The item object
-     * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
-     */
-    onInventoryItemAdd?(player: Player | undefined, item: Item, container: IContainer): void;
-    /**
-     * Called when an item is removed from the players inventory
-     * @param player The player object
-     * @param item The item object
-     * @param container The container object the item was moved to.
-     */
-    onInventoryItemRemove?(player: Player | undefined, item: Item, container: IContainer): void;
-    /**
-     * Called when an item is moved from one container to another, while still in the players inventory.
-     * @param player The player object
-     * @param item The item object
-     * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
-     */
-    onInventoryItemUpdate?(player: Player | undefined, item: Item, container: IContainer): void;
-    /**
      * Called when a craft is "requested". This currently happens when clicking an item in the crafting dialog.
      * @param requirementsMet Whether the requirements are currently met. This hook is a `reduce` hook, so this will contain
      * whatever the result of the last hook host was, or the value of `checker.requirementsMet()`, by default.

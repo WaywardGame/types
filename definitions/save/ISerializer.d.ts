@@ -26,8 +26,9 @@ export interface ISerializer {
 export default ISerializer;
 export interface ISerializerOptions {
     version: string;
-    skipOnUnserialized?: boolean;
     includeFlags?: SavePropertyFlag;
+    emptyObjectMode?: boolean;
+    disableJitDeserialization?: boolean;
 }
 export interface ISerializable {
     serializeObject(serializer: ISerializer): void;

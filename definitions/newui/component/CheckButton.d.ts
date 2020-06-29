@@ -33,5 +33,6 @@ export declare class CheckButton extends Button implements IRefreshableValue<boo
     setRefreshMethod(refreshMethod: () => boolean): this;
     setText(text: TranslationGenerator): this;
     addDescription(initializer: (paragraph: Paragraph) => any): this;
+    protected playSound(): void;
 }
 export {};

@@ -10,10 +10,9 @@
 */
 import Component from "newui/component/Component";
 import { IComponent } from "newui/component/IComponent";
-import { ITooltipManager } from "newui/INewUi";
 import Tooltip from "newui/tooltip/Tooltip";
 import Vector2 from "utilities/math/Vector2";
-export default class TooltipManager implements ITooltipManager {
+export default class TooltipManager {
     readonly tooltipWrapper: Component;
     readonly tooltipMainWrapper: Component;
     readonly tooltipMouseWrapper: Component;
@@ -21,7 +20,7 @@ export default class TooltipManager implements ITooltipManager {
     private tooltip;
     private readonly disablers;
     constructor();
-    show(host: IComponent, force?: boolean): Tooltip | undefined;
+    show(host: IComponent): Tooltip | undefined;
     hide(host?: Component | undefined, forceRemove?: boolean): void;
     /**
      * Disables tooltips.

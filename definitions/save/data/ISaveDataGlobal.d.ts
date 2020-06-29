@@ -44,6 +44,7 @@ export interface IOptions {
     musicPlaylist: MusicPlaylist;
     muteEffects: boolean;
     muteMusic: boolean;
+    playInputSoundWhenTyping: boolean;
     powerPreference: PowerMode;
     protectedCraftingItemContainers: boolean;
     protectedCraftingItems: boolean;

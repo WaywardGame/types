@@ -72,9 +72,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onGameTickEnd(): void;
     onEntityKill(attacker: Entity | Doodad, target: Entity): void;
     onHumanSkillChange(human: Human, skill: SkillType, currentSkill: number): void;
-    onInventoryItemAdd(player: Player | undefined, item: Item, container: IContainer): void;
-    onInventoryItemRemove(player: Player | undefined, item: Item, container: IContainer): void;
-    onInventoryItemUpdate(player: Player | undefined, item: Item, container: IContainer): void;
     shouldCraft(requirementsMet: boolean, item: ItemType, checker: ItemRecipeRequirementChecker): boolean | undefined;
     onItemDamage(item: Item, modifier?: number): number | undefined;
     onItemEquip(player: Player, item: Item, slot: EquipType): void;

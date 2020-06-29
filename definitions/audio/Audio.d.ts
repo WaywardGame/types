@@ -9,13 +9,17 @@
  * https://waywardgame.github.io/
  */
 import IAudio, { Music, SfxType } from "audio/IAudio";
+import EventEmitter from "event/EventEmitter";
 import EnumCursor from "utilities/enum/EnumCursor";
 export declare enum Fading {
     None = 0,
     In = 1,
     Out = 2
 }
-export default class WAudio implements IAudio {
+export interface IAudioEvents {
+    init(): any;
+}
+export default class WAudio extends EventEmitter.Host<IAudioEvents> implements IAudio {
     private readonly _musicInfo;
     private readonly _sfxInfo;
     private readonly _soundQueue;
@@ -49,7 +53,7 @@ export default class WAudio implements IAudio {
     updateMusicSpeed(speed: number): Promise<void>;
     updateVolume(): void;
     updatePosition(): Promise<void>;
-    queueEffect(type: SfxType, x: number, y: number, z: number, delay?: number, speed?: number, noPosition?: boolean): void;
+    queueEffect(type: SfxType, x: number, y: number, z: number, delay?: number, speed?: number, noPosition?: boolean, force?: boolean): void;
     processEffects(): void;
     private _stopMusic;
     private _playMusic;

@@ -14,6 +14,7 @@ export declare class LabelledRow extends BlockRow {
     readonly label: Heading;
     constructor();
     setLabel(labelInitializer: (label: Heading) => Heading): this;
+    refresh(): this;
     /**
      * Safe — removes all children except for the label
      */

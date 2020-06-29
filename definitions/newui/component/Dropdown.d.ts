@@ -48,7 +48,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     constructor();
     retainLastFilter(retainLastFilter?: boolean): this;
     open(): void;
-    close(): boolean;
+    close(input?: InputButton): boolean;
     select(optionId: O | undefined): this;
     selectDefault(): this;
     setRefreshMethod(refresh: () => IDropdownData<O>): this;
@@ -56,7 +56,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     openedDirection(): SelectDirection.Up | SelectDirection.Down;
     protected onNext(): boolean;
     protected onPrevious(): boolean;
-    protected onEnter(): boolean;
+    protected onEnterBind(): boolean;
     protected onInputRising(_: any, catalyst: InputCatalyst): void;
     protected onCancel(): boolean;
     protected onInterrupt(): void;

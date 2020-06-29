@@ -43,7 +43,7 @@ export default abstract class QuadrantComponent extends StaticComponent {
     event: IEventEmitter<this, IQuadrantComponentEvents>;
     get preferredQuadrant(): Quadrant;
     get quadrant(): Quadrant;
-    get quadrantName(): "None" | "Top" | "TopRight" | "BottomRight" | "Bottom" | "BottomLeft" | "TopLeft";
+    get quadrantName(): "None" | "TopLeft" | "TopRight" | "BottomLeft" | "BottomRight" | "Top" | "Bottom";
     constructor(host: GameScreen, id: QuadrantComponentId);
     /**
      * Changes the quadrant of this element, then emits the `ChangeQuadrant` event

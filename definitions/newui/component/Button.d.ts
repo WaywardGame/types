@@ -18,7 +18,6 @@ interface IButtonEvents extends Events<Component> {
 }
 export default class Button extends Component implements IDisableable {
     event: IEventEmitter<this, IButtonEvents>;
-    playSound: boolean;
     readonly text: Text;
     description?: Paragraph;
     wrapperButtons?: Component;
@@ -35,6 +34,7 @@ export default class Button extends Component implements IDisableable {
     getText(): TranslationGenerator | undefined;
     getTextAsString(): string;
     refreshText(): this;
+    protected playSound(): void;
     private _onActivate;
 }
 export {};

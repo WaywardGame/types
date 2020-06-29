@@ -18,8 +18,9 @@ export default class Serializer implements ISerializer {
     dataView: DataView;
     byteOffset: number;
     readonly version: string;
-    private readonly skipOnUnserialized;
     private readonly includeFlags;
+    private readonly emptyObjectMode;
+    private readonly disableJitDeserialization;
     constructor(options: ISerializerOptions);
     saveToUint8Array(object: any, objectKey: any): Uint8Array | undefined;
     saveToString(object: any, objectKey: any): string | undefined;

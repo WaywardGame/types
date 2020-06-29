@@ -9,13 +9,9 @@
  * https://waywardgame.github.io/
  */
 import InterruptChoice from "language/dictionary/InterruptChoice";
-import { HighlightSelector, IComponent, IHighlight, ITooltip, TranslationGenerator } from "newui/component/IComponent";
+import { HighlightSelector, IComponent, IHighlight, TranslationGenerator } from "newui/component/IComponent";
 import Input from "newui/component/Input";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
-export interface ITooltipManager {
-    show(host: IComponent, force?: boolean): ITooltip | undefined;
-    hide(host?: IComponent): void;
-}
 export declare enum SaveLocation {
     /**
      * Used to mark a field to be saved locally (per save)

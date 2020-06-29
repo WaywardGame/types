@@ -33,14 +33,8 @@ export interface IComponentEvents {
      */
     willRemove(): boolean | void;
     regenerateBox(box: IBox): any;
-    /**
-     * Note: Requires calling `subscribeHoverEvents`
-     */
-    mouseenter(): any;
-    /**
-     * Note: Requires calling `subscribeHoverEvents`
-     */
-    mouseleave(): any;
+    enter(reason: "mouse" | "focus"): any;
+    leave(reason: "mouse" | "focus"): any;
     focus(): any;
     blur(): any;
     removeContextMenu(): any;

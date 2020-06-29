@@ -47,7 +47,10 @@ export declare enum SfxType {
     Damaged = 21,
     Chat = 22,
     UiSelect = 23,
-    UiActivate = 24
+    UiActivate = 24,
+    UiInput = 25,
+    UiEnable = 26,
+    UiDisable = 27
 }
 export declare enum Music {
     Shipwrecked = 0,

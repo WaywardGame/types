@@ -122,7 +122,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     forceShowTooltip(onlyIfHovered?: boolean, recalcTarget?: true): void;
     regenerateBoxes(): void;
     protected onContextMenu(api: IBindHandlerApi): boolean;
-    protected onMouseEnter(): void;
-    protected onMouseLeave(): void;
+    protected onEnter(reason: "mouse" | "focus"): void;
+    protected onLeave(reason: "mouse" | "focus"): void;
     private showTooltip;
 }

@@ -15,7 +15,7 @@ import { Delay, SkillType } from "entity/IHuman";
 import { TurnType } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
-import { FireType, IGameEvents, IMapRequest, IPlayOptions, ITravelingToIslandInfo, ITravelToIslandOptions, RenderSource, SaveType, TileUpdateType, TurnMode, UpdateRenderFlag, IWaterFill } from "game/IGame";
+import { FireType, IGameEvents, IMapRequest, IPlayOptions, ITravelingToIslandInfo, ITravelToIslandOptions, IWaterFill, RenderSource, SaveType, TileUpdateType, TurnMode, UpdateRenderFlag } from "game/IGame";
 import { Quality } from "game/IObject";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ChallengeModifiersCollection } from "game/options/modifiers/challenge/ChallengeModifiers";
@@ -178,7 +178,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      * AVOID USING THIS. USE updateTablesAndWeightNextTick INSTEAD!
      * For most cases you don't need this
      */
-    updateTablesAndWeight(): void;
+    updateTablesAndWeight(deferTableUpdates?: boolean): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     damage(target: Human | Creature, damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): Player[];

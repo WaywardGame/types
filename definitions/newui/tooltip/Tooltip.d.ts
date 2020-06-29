@@ -19,6 +19,7 @@ export default class Tooltip extends Component implements ITooltip {
     cache: boolean;
     private forceShown;
     private maxWidth;
+    private hasSetPosition;
     constructor(source: Component);
     setForceShown(forceShown?: boolean): this;
     wasForceShown(): boolean;

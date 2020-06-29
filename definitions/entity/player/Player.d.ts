@@ -81,6 +81,7 @@ export default class Player extends Human {
     private gameOptionsCached?;
     private handEquippedToLast;
     private cachedMovementPenalty?;
+    private updateTablesOnNoInput?;
     constructor(identifier?: string);
     get clientStore(): IClientStore;
     setOptions(options: IOptions): void;
@@ -147,10 +148,11 @@ export default class Player extends Human {
     checkForStill(withWater?: boolean, isLit?: boolean): boolean;
     checkForWell(): boolean;
     checkForGather(): Doodad | undefined;
-    updateTables(): void;
+    update(): void;
+    updateTables(deferUpdate?: boolean): void;
     updateCraftTable(adjacentContainers?: IContainer[]): void;
     updateDismantleTable(adjacentContainers?: IContainer[]): void;
-    updateTablesAndWeight(): void;
+    updateTablesAndWeight(deferTableUpdates?: boolean): void;
     checkReputationMilestones(): void;
     hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
     setTamedCreatureEnemy(enemy: Player | Creature): void;
