@@ -22,8 +22,9 @@ import HighlightManager from "newui/util/HighlightManager";
 import { InterruptOptions } from "newui/util/IInterrupt";
 import InterruptFactory from "newui/util/InterruptFactory";
 import ScaleManager from "newui/util/ScaleManager";
+import Vector2 from "utilities/math/Vector2";
 export interface IUiEvents {
-    resize(): any;
+    resize(viewport: Vector2, oldViewport: Vector2): any;
     interrupt(options: Partial<InterruptOptions>): any;
     interruptClose(options: Partial<InterruptOptions>, result?: string | boolean | InterruptChoice): any;
     loadedFromSave(): any;
@@ -34,9 +35,8 @@ export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     readonly highlights: HighlightManager;
     readonly screens: ScreenManager;
     readonly selection: SelectionHandler;
-    private _windowWidth;
+    readonly viewport: Vector2;
     get windowWidth(): number;
-    private _windowHeight;
     get windowHeight(): number;
     private storageElement;
     private readonly dataHosts;

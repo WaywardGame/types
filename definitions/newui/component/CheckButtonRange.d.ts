@@ -28,6 +28,7 @@ export default class CheckButtonRange extends CheckButton {
     editRange(rangeInitializer: (range: RangeInput) => RangeInput): this;
     setDisplayValue(display: boolean | UiTranslation | ((val: number, enabled: boolean) => Translation)): this;
     refresh(): this;
+    protected playInputSound(): void;
     private change;
     private updateDisplay;
 }

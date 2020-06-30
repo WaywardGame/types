@@ -74,6 +74,7 @@ export default class GameScreen extends Screen implements IHookHost {
     protected onUnshowMoreInfo(): void;
     protected onCancel(): boolean;
     protected create(): void;
+    protected onResize(): void;
     /**
      * Adds a quadrant element to the screen.
      *

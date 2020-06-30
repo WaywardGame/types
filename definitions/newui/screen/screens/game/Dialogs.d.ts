@@ -34,7 +34,7 @@ export interface IDialogDescription<SQUARE = boolean> extends IModdable {
     minSize: SQUARE extends true ? number : IVector2;
     size: SQUARE extends true ? number : IVector2;
     maxSize: SQUARE extends true ? number : IVector2;
-    edges: IEdges;
+    edges: IEdges | "center";
     /**
      * Whether to save if the dialog is open. If this is false, the dialog will always be closed when a game loads. Defaults to true.
      */

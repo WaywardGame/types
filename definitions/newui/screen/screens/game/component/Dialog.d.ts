@@ -28,10 +28,6 @@ export interface IDialogEdges {
     [Edge.Bottom]: number;
     [Edge.Left]: number;
 }
-export interface ISavedEdges {
-    scale: number;
-    edges: IDialogEdges;
-}
 /**
  * An enum for every position that a dialog handle can be in.
  */
@@ -254,6 +250,10 @@ export default abstract class Dialog extends Component implements IDialog {
      * Returns the two edges of the dialog closest to the edges of the viewport, and their positions.
      */
     private getEdges;
+    /**
+     * Returns the edge positions (top/left) that would put a dialog of the given size in the centre of the screen.
+     */
+    private getCenterEdges;
     /**
      * Resets the position, causing it to be clamped to the viewport, using its current position
      *
