@@ -148,7 +148,7 @@ export default class Player extends Human {
     checkForStill(withWater?: boolean, isLit?: boolean): boolean;
     checkForWell(): boolean;
     checkForGather(): Doodad | undefined;
-    update(): void;
+    onNoInput(): void;
     updateTables(deferUpdate?: boolean): void;
     updateCraftTable(adjacentContainers?: IContainer[]): void;
     updateDismantleTable(adjacentContainers?: IContainer[]): void;

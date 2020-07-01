@@ -20,6 +20,6 @@ export default abstract class ChallengeModifier extends GameplayModifier<Challen
      * How much "challenge" this modifier adds (or subtracts!). Defaults to `0`. Added to the result of `apply`.
      */
     challenge: number;
-    args: any[];
+    tooltipArgs?: readonly any[];
     readonly getTooltip: (tooltip: ITooltip) => ITooltip;
 }
