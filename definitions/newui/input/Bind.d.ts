@@ -147,7 +147,7 @@ declare module Bind {
     /**
      * Registers bind handlers for the given class instance. (Bind handlers are methods decorated with `@Bind.onDown`, `@Bind.onHolding`, `@Bind.onUp`)
      */
-    function registerHandlers(host: any): void;
+    function registerHandlers(host: any, warnIfNoneRegistered?: boolean): boolean;
     /**
      * Deregisters any registered bind handlers for the given class instance. (Bind handlers are methods decorated with `@Bind.onDown`, `@Bind.onHolding`, `@Bind.onUp`)
      */

@@ -18,7 +18,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     static get<C extends Component = Component>(selector: string, create?: false): C;
     static get<C extends Component = Component>(element: Element, create?: false): C;
     static get<C extends Component = Component>(event: Event, create?: false): C;
-    static get<C extends Component = Component>(element?: Element | null, create?: false): C | undefined;
+    static get<C extends Component = Component>(element?: Element | null | false, create?: false): C | undefined;
     static all(selector: string): import("@wayward/goodstream/Stream").default<Component>;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
@@ -65,6 +65,8 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     setElement(elementType?: string, namespace?: Namespace): this;
     setId(id: string): this;
     setSelectable(val: SelectableLayer | false): this;
+    isFocused(): boolean;
+    getAs<C extends Component>(cls: Class<C>): C | undefined;
     registerEventBusSubscriber(...untilEvents: Array<keyof Events<this>>): void;
     deregisterEventBusSubscriber(): void;
     registerBindHandlers(...untilEvents: Array<keyof Events<this>>): void;

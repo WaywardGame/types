@@ -26,16 +26,17 @@ export interface SaveSlotData {
     seed: string;
     name: string;
     difficulty: GameMode;
+    thumbnail?: string;
 }
 interface ISaveSlotEvents extends Events<InputButton> {
     rename(): any;
     delete(): any;
 }
-export declare class SaveSlot extends InputButton {
+declare class SaveSlot extends InputButton {
     event: IEventEmitter<this, ISaveSlotEvents>;
     slotData: SaveSlotData;
     private deathby;
-    constructor(slot: number);
+    constructor(slot: number, isNewSlot?: boolean);
     /**
      * Renames the save. Event handler for when this InputButton leaves edit mode.
      */
@@ -70,4 +71,10 @@ export declare class SaveSlot extends InputButton {
     private exportToFile;
     static getFileName(name?: string): string;
 }
-export {};
+declare module SaveSlot {
+    enum Classes {
+        Is = "save-slot",
+        New = "new-slot"
+    }
+}
+export default SaveSlot;

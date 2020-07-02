@@ -61,7 +61,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     protected onCancel(): boolean;
     protected onInterrupt(): void;
     protected onSelectionChange(_: any, selection?: Component): void;
-    protected isMouseWithin(): boolean | undefined;
+    protected isMouseWithin(): false | Component;
     protected selectNext(): void;
     protected selectPrevious(): void;
     protected selectionMove(direction: "next" | "prev"): void;

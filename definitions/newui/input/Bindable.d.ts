@@ -115,10 +115,11 @@ declare enum Bindable {
     MenuRight = 96,
     MenuCancel = 97,
     MenuContextMenu = 98,
-    DeveloperToggleDeveloperMode = 99,
-    DeveloperToggleDeveloperTools = 100,
-    DeveloperReloadGame = 101,
-    DeveloperReloadAndContinueGame = 102
+    MenuSelect = 99,
+    DeveloperToggleDeveloperMode = 100,
+    DeveloperToggleDeveloperTools = 101,
+    DeveloperReloadGame = 102,
+    DeveloperReloadAndContinueGame = 103
 }
 export default Bindable;
 export declare enum BindableType {
