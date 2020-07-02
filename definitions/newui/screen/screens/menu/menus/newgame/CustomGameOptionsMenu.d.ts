@@ -15,8 +15,8 @@ import Menu from "newui/screen/screens/menu/component/Menu";
 export default class CustomGameOptionsMenu extends Menu {
     private readonly options;
     private static readonly importButtonInputId;
-    protected readonly rowImportExport: BlockRow;
     protected readonly buttonImport: Component;
+    protected readonly rowImportExport: BlockRow;
     private readonly refreshables;
     constructor(options: () => IGameOptions);
     protected refresh(): void;

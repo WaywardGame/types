@@ -13,9 +13,6 @@ import StatusEffectRenderer from "renderer/StatusEffectRenderer";
 export default class Bleeding extends StatusEffect {
     getParticles(event: StatusEffectParticleEvent): [number, import("../../../utilities/Color").IRGB] | undefined;
     getRenderer(): StatusEffectRenderer;
-    getIcon(): {
-        frames: number;
-    };
     getBadness(): StatusEffectBadness;
     getDescription(): import("../../../language/Translation").default;
     shouldPass(): boolean;

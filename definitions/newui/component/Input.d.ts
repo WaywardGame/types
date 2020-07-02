@@ -22,7 +22,7 @@ export interface IInputEvents extends Events<Component> {
     change(text: string): any;
     changeDebounced(text: string): any;
     done(text: string): any;
-    enter(): any;
+    enterBind(): any;
     escape(): any;
     focus(): any;
     blur(): any;

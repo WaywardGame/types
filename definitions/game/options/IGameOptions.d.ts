@@ -190,9 +190,9 @@ export interface IGameOptionsPlayer {
     };
     actions: {
         /**
-         * Chance to spawn guardians after successful lockpicks.
+         * Guardians to attempt to spawn after successful lockpicks.
          */
-        spawnGuardiansOnLockpick: boolean;
+        additionalGuardiansSpawnedOnLockpick: number;
     };
     damage: {
         /**

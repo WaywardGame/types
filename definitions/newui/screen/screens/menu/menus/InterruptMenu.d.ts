@@ -38,7 +38,7 @@ export default class InterruptMenu extends Menu {
     choose(choice: InterruptChoice | string): Promise<void>;
     waitFor(): Promise<InterruptChoice | string | boolean | undefined>;
     protected onCancel(triggerChoose?: boolean): void;
-    protected onEnter(): void;
+    protected onEnterBind(): void;
     protected onHide(): any;
     protected onShow(): any;
 }

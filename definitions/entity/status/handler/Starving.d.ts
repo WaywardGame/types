@@ -11,9 +11,6 @@
 import StatusEffect, { StatusEffectBadness } from "entity/status/StatusEffect";
 export default class Starving extends StatusEffect {
     register(): void;
-    getIcon(): {
-        frames: number;
-    };
     getBadness(): StatusEffectBadness;
     getDescription(): import("../../../language/Translation").default;
     refresh(): void;

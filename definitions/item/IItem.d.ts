@@ -14,12 +14,12 @@ import { CreatureType, TileGroup } from "entity/creature/ICreature";
 import { DamageType, Defense } from "entity/IEntity";
 import { EquipType, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
+import { BiomeType } from "game/IBiome";
 import { IObjectDescription } from "game/IObject";
 import Item from "item/Item";
 import Recipe from "item/recipe/Recipe";
 import { IModdable } from "mod/ModRegistry";
 import { IVector3 } from "utilities/math/IVector";
-import { BiomeType } from "game/IBiome";
 export interface IItemWeightComponent {
     weightFraction: number;
     type: ItemType;
@@ -209,6 +209,10 @@ export interface IDismantleItemDescription {
 export interface IItemGroupDescription {
     types: Array<ItemType | ItemTypeGroup>;
     default: ItemType | ItemTypeGroup;
+    /**
+     * Whether this group is hidden to the player. Defaults to `false`
+     */
+    hidden?: boolean;
 }
 export declare enum ContainerReferenceType {
     Invalid = 0,

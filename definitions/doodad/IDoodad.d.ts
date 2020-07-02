@@ -16,6 +16,7 @@ import { ILootItem } from "game/ILoot";
 import { IObjectDescription, IObjectOptions } from "game/IObject";
 import { IItemLegendary, ItemType } from "item/IItem";
 import Item from "item/Item";
+import { LootGroupType } from "item/LootGroups";
 import { IModdable } from "mod/ModRegistry";
 import { TerrainType } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
@@ -24,7 +25,6 @@ export interface IDoodadOptions extends IObjectOptions {
     stillContainer?: Item;
     gfx?: number;
     spread?: number;
-    treasure?: boolean;
     weight?: number;
     legendary?: IItemLegendary;
     disassembly?: Item[];
@@ -37,9 +37,10 @@ export declare type IDoodadOld = Partial<Doodad> & {
     growInto?: DoodadType;
 };
 export interface IDoodadGroupDescription {
-    name: string;
-    prefix?: string;
-    suffix?: string;
+    /**
+     * Whether this group is hidden to the player. Defaults to `false`
+     */
+    hidden?: boolean;
 }
 export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatusEffect, ICausesDamage {
     actionTypes?: ActionType[];
@@ -67,7 +68,6 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     isFlammable?: boolean;
     isFungi?: boolean;
     isGate?: boolean;
-    isLocked?: boolean;
     isTall?: boolean;
     isTrap?: boolean;
     isTree?: boolean;
@@ -89,6 +89,29 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     waterStill?: boolean;
     durability?: number;
     leftOver?: DoodadType;
+    lockedChest?: ILockedChest;
+}
+export interface ILockedChest {
+    /**
+     * Loot groups that gets generated inside a chest.
+     */
+    lootGroups?: LootGroupType[];
+    /**
+     * Modifies the quality of the items in the chest based on itemManager.getRandomQuality(). The higher the better.
+     */
+    lootQuality?: number;
+    /**
+     * Doodad type that it gets reverted to when unlocked.
+     */
+    unlockedDoodadType?: DoodadType;
+    /**
+     * Modifies the difficulty when attempting to lockpick the locked doodad based on skill checks.
+     */
+    lockPickingDifficulty?: number;
+    /**
+     * Number of potential guardian group creatures spawned when unlocking the chest.
+     */
+    guardiansSpawned?: number;
 }
 export interface IDoodadParticles {
     [index: number]: IRGB;
@@ -201,7 +224,11 @@ export declare enum DoodadType {
     SpruceTreeWithSnow = 101,
     CrowberryShrub = 102,
     WinterberryShrub = 103,
-    ArcticPoppies = 104
+    ArcticPoppies = 104,
+    LockedCopperChest = 105,
+    LockedWroughtIronChest = 106,
+    LockedIronChest = 107,
+    LockedOrnateWoodenChest = 108
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,
@@ -218,7 +245,8 @@ export declare enum DoodadTypeGroup {
     LightDevice = 411,
     LightSource = 412,
     LitStructure = 413,
-    Last = 414
+    LockedChest = 414,
+    Last = 415
 }
 export declare enum DoorOrientation {
     Default = 0,

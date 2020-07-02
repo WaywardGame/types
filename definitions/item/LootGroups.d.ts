@@ -12,11 +12,12 @@ import { ItemType } from "item/IItem";
 export declare enum LootGroupType {
     Low = 0,
     High = 1,
-    Treasure = 2,
+    ChestMedium = 2,
     SeaTreasure = 3,
-    CaveChest = 4,
+    ChestLow = 4,
     FireElemental = 5,
-    VeryHigh = 6
+    VeryHigh = 6,
+    ChestHigh = 7
 }
 export declare const lootGroup: (ItemType[] | undefined)[];
 export default lootGroup;

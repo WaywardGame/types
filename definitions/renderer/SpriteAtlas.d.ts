@@ -25,6 +25,7 @@ export default class SpriteAtlas implements ISpriteAtlas {
     playerHairstyles: ISpriteInfoList;
     playerSleeping: ISpriteInfo;
     raft: ISpriteInfo;
+    sailboat: ISpriteInfo;
     shadow: ISpriteInfo;
     sleeps: ISpriteInfoList;
     statusEffects: ISpriteInfoList;

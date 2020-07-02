@@ -63,7 +63,6 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     quality?: Quality;
     renamed?: string | ISerializedTranslation;
     spread?: number;
-    treasure?: boolean;
     type: DoodadType;
     weight?: number;
     weightCapacity: number;
@@ -100,6 +99,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     changeType(doodadType: DoodadType): void;
     isValid(): boolean;
     isInGroup(doodadTypeGroup: DoodadTypeGroup): boolean;
+    updateGroupCache(doodadTypeGroup: DoodadTypeGroup): boolean;
     getTile(): ITile;
     getTileId(): number;
     getPoint(): IVector3;

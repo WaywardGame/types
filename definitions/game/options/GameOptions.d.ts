@@ -24,6 +24,9 @@ declare module GameOptions {
             randomSkills?: boolean;
             globalSkills: IGameOptionsSkill;
             skills: Map<SkillType, IGameOptionsSkill>;
+            actions?: {
+                spawnGuardiansOnLockpick?: boolean;
+            };
         };
     }
     function upgrade(difficultyOptions: IGameOptions, version: IVersionInfo): string[];
