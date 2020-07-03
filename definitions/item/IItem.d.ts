@@ -818,7 +818,8 @@ export declare enum ItemType {
     Winterberries = 505,
     WinterberrySeeds = 506,
     ArcticPoppies = 507,
-    ArcticPoppySeeds = 508
+    ArcticPoppySeeds = 508,
+    PirateHat = 509
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
