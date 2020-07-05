@@ -196,7 +196,10 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      * @param z The z coord to get the closest player.
      * @param canSee If set to true, check if the player can see the x/y/z coords. Defaults to false.
      */
-    getNearestPlayer(x: number, y: number, z?: number, canSee?: boolean): Player | undefined;
+    getNearestPlayer(x: number, y: number, z?: number, canSee?: boolean, includeConnecting?: boolean): {
+        player?: Player;
+        distance?: number;
+    };
     getPlayerByPid(pid: number): Player | undefined;
     getPlayerByIdentifier(identifier: string, includeAbsent?: boolean): Player | undefined;
     getPlayerByName(name: string): Player | undefined;

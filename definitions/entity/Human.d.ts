@@ -58,7 +58,6 @@ export default abstract class Human extends Entity {
     private readonly equipEffects;
     private cachedTotalSkill?;
     constructor();
-    resetStatTimers(): void;
     isLocalPlayer(): boolean;
     setOptions(options: IOptions): void;
     getEquipEffect<E extends EquipEffect>(type: E): FirstIfOne<EquipEffectByType<E>>;
@@ -149,6 +148,7 @@ export default abstract class Human extends Entity {
      * Humans can't produce temperature, but their equipment can
      */
     getProducedTemperature(): number | undefined;
+    protected resetStatTimers(): void;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
     protected getSkillGainMultiplier(_skillType: SkillType): number;
     /**
