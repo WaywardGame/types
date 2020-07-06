@@ -37,8 +37,8 @@ export interface IGameEvents {
     end(state: PlayerState): any;
     pause(): any;
     resume(): any;
-    tickStart(): any;
-    tickEnd(): any;
+    tickStart(tickFlag: TickFlag, ticks: number): any;
+    tickEnd(tickFlag: TickFlag, ticks: number): any;
     /**
      * Called when getting the position to render at. By default, this is the player's location.
      * @param position The player's location
@@ -168,9 +168,9 @@ export interface IMapRequest {
      */
     tilePosition: Vector3;
     /**
-     * Whether to involve your skill in how "readable" the map is. Defaults to false.
+     * Whether you are decoding a map or reading a drawn map. Defaults to false.
      */
-    skillCheck?: boolean;
+    decoding?: boolean;
 }
 export interface ITravelToIslandOptions {
     spawnPosition?: IVector2;
@@ -285,7 +285,8 @@ export declare enum TileUpdateType {
     Terrain = 7,
     Corpse = 8,
     DoodadOverHidden = 9,
-    Batch = 10
+    Batch = 10,
+    Mod = 11
 }
 export interface IWaterFill {
     count: number;

@@ -28,6 +28,12 @@ import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
 export interface IDoodadEvents {
     /**
+     * Called when an doodad is being updated
+     * @param tile The tile the doodad is on
+     * @param tileContainer The tile container the doodad is on
+     * @returns True to prevent the doodad from running its update logic, or undefined to use the default logic
+     */
+    /**
      * Called when an doodad is being picked up
      * @param human The human object
      * @returns False if the doodad cannot be picked up, or undefined to use the default logic

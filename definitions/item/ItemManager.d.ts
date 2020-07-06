@@ -19,7 +19,7 @@ import { CraftStatus, RequirementInfo, WeightType } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation, { TextContext } from "language/Translation";
-import { TerrainType } from "tile/ITerrain";
+import { ITile, TerrainType } from "tile/ITerrain";
 interface ItemManagerEvents {
     create(item: Item): any;
     remove(item: Item): any;
@@ -85,7 +85,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
      * @param z The z coordinate to check.
      */
     spawn(terrainType: TerrainType, x: number, y: number, z: number): void;
-    getTileContainer(x: number, y: number, z: number): IContainer;
+    getTileContainer(x: number, y: number, z: number, tile?: ITile): IContainer;
     getRandomQuality(bonusQuality?: number): Quality;
     hasAdditionalRequirements(human: Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
