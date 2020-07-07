@@ -93,6 +93,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private readonly vertexArraySingle;
     private readonly vertexArrayDouble;
     private itemBatch;
+    private itemMovingBatch;
     private corpseBatch;
     private creatureBatch;
     private tileEventBatch;
@@ -132,7 +133,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
         z: number;
     };
     computeSpritesInViewport(): void;
-    batchCreatures(timeStamp: number): void;
+    batchMovable(timeStamp: number): void;
     private batchCreature;
     private getFlyingOffset;
     private batchShadow;
@@ -148,4 +149,6 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private renderStatusEffect;
     private spriteBatchForLayer;
     private computeSpritesInViewportInternal;
+    private batchItems;
+    private batchTileEvents;
 }

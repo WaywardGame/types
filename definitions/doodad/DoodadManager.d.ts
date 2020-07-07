@@ -13,6 +13,7 @@ import { DoodadType, DoodadTypeGroup, IDoodadOptions } from "doodad/IDoodad";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import { TerrainType } from "tile/ITerrain";
+import Human from "entity/Human";
 export interface IDoodadManagerEvents {
     /**
      * Called when a doodad is about to be spawned
@@ -27,7 +28,7 @@ export interface IDoodadManagerEvents {
     /**
      * Called when a doodad is created.
      */
-    create(doodad: Doodad): any;
+    create(doodad: Doodad, creator?: Human): any;
     /**
      * Called when a doodad is removed.
      */
@@ -41,7 +42,7 @@ export default class DoodadManager extends EventEmitter.Host<IDoodadManagerEvent
     getBestDoodadForTier(doodad: DoodadType | DoodadTypeGroup): DoodadType | undefined;
     generateLookups(): void;
     createFake(type: DoodadType, options?: IDoodadOptions, x?: number, y?: number, z?: number): Doodad;
-    create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): Doodad | undefined;
+    create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions, creator?: Human): Doodad | undefined;
     /**
      * Removes a doodad from the world.
      * @param doodad The doodad to remove

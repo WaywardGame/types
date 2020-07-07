@@ -49,6 +49,11 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     weight: number;
     weightCapacity: number;
     weightFraction: number;
+    offsetX?: number;
+    offsetY?: number;
+    fromX?: number;
+    fromY?: number;
+    _movementFinishTime?: number;
     private _description;
     constructor(itemType?: ItemType | undefined, quality?: Quality, human?: Human);
     toString(): string;
@@ -103,9 +108,12 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     spawnOnBreak(): Creature | undefined;
     spawnOnDecay(): Creature | undefined;
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: Player): Creature | undefined;
-    getLocation(): IVector3 | undefined;
+    getPoint(): IVector3 | undefined;
     dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
+    moveToTile(x: number, y: number, z: number, tileContainer?: IContainer, fromPoint?: IVector3): void;
+    isMoving(): boolean;
+    getMovementProgress(timeStamp: number): number;
     /**
      * Set the coordinates for a tattered or drawn map, or set it to reinitialize later.
      * @param reinitialize Set to true if you want the map to require decoding before use (the coords will get generated at that point).
@@ -128,6 +136,10 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     getContainerWeightReduction(): number;
     canBeRefined(): boolean;
     getProducedTemperature(): number | undefined;
+    /**
+     * Sets the item's decay value based on quality, game mode and added some randomization
+     */
+    setDecay(overrideDefault?: number): void;
     onUnserialized(): void;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;

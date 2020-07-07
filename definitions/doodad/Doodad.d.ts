@@ -137,6 +137,8 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): number;
     addTreasureChestLoot(): void;
+    attachStillContainer(item: Item): void;
+    dettachStillContainer(human?: Human): Item | undefined;
     blocksMove(): boolean;
     update(ticks: number, realPlayers: Player[]): void;
     canCauseStatus(): boolean;

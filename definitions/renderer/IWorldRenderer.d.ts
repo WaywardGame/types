@@ -70,7 +70,7 @@ export interface IWorldRenderer {
     screenToTile(screenX: number, screenY: number): Vec2 | undefined;
     getViewportBounds(): IBound3;
     computeSpritesInViewport(): void;
-    batchCreatures(timeStamp: number): void;
+    batchMovable(timeStamp: number): void;
     initializeSpriteBatch(layer: SpriteBatchLayer, reset?: true): void;
     dispose(): void;
 }
@@ -78,11 +78,12 @@ export default IWorldRenderer;
 export declare enum SpriteBatchLayer {
     Corpse = 0,
     Item = 1,
-    Creature = 2,
-    TileEvent = 3,
-    CreatureFlying = 4,
-    Overlay = 5,
-    OverTrees = 6
+    ItemMoving = 2,
+    Creature = 3,
+    TileEvent = 4,
+    CreatureFlying = 5,
+    Overlay = 6,
+    OverTrees = 7
 }
 export declare enum RenderFlag {
     None = 0,
