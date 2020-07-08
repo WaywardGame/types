@@ -42,7 +42,8 @@ export interface IWorldLayer {
 export default IWorldLayer;
 export declare enum TerrainMask {
     None = 0,
-    Type = 268435455,
+    Type = 134217727,
+    DoodadAnimationDisabled = 134217728,
     DoodadOverHidden = 268435456,
     Tilled = 536870912,
     Wall = 1073741824,

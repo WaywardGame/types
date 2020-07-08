@@ -23,6 +23,8 @@ import { ITile, TerrainType } from "tile/ITerrain";
 interface ItemManagerEvents {
     create(item: Item): any;
     remove(item: Item): any;
+    canMoveItem(human: Human | undefined, item: Item, toContainer: IContainer): boolean | undefined;
+    canMoveItems(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType: ItemType | undefined, ofQuality: Quality | undefined): boolean | undefined;
     containerItemRemove(item: Item, previousContainer: IContainer): any;
     containerItemUpdate(item: Item, previousContainer: IContainer | undefined, newContainer: IContainer): any;
     containerItemAdd(item: Item, newContainer: IContainer): any;

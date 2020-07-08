@@ -138,7 +138,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     getDefaultDurability(): number;
     addTreasureChestLoot(): void;
     attachStillContainer(item: Item): void;
-    dettachStillContainer(human?: Human): Item | undefined;
+    detachStillContainer(human?: Human): Item | undefined;
     blocksMove(): boolean;
     update(ticks: number, realPlayers: Player[]): void;
     canCauseStatus(): boolean;
@@ -153,6 +153,10 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * Keep our wells up-to-date with what is happening underground
      */
     setWellStatus(): void;
+    /**
+     * Switch unlimited/limited water status based on underground water changes
+     */
+    switchWellStatus(): void;
     getProducedTemperature(): number | undefined;
     onUnserialized(): void;
     /**

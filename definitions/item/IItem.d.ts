@@ -11,7 +11,7 @@
 import { DoodadType, DoodadTypeGroup } from "doodad/IDoodad";
 import { ActionType } from "entity/action/IAction";
 import { CreatureType, TileGroup } from "entity/creature/ICreature";
-import { DamageType, Defense } from "entity/IEntity";
+import { DamageType, Defense, StatusType } from "entity/IEntity";
 import { EquipType, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { BiomeType } from "game/IBiome";
@@ -124,6 +124,10 @@ export interface IItemDescription extends IObjectDescription, IModdable {
      * Array of biome types that the item can spawn in merchant's inventory for trade. Leave empty or unset if item spawns on merchants in any biome type.
      */
     spawnOnMerchant?: BiomeType[];
+    /**
+     * Array of status effects that using this item (via ConsumeItem) will cure.
+     */
+    canCureStatus?: StatusType[];
     recipeCache?: ItemType[];
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
@@ -819,7 +823,9 @@ export declare enum ItemType {
     WinterberrySeeds = 506,
     ArcticPoppies = 507,
     ArcticPoppySeeds = 508,
-    PirateHat = 509
+    PirateHat = 509,
+    AloeVeraBandage = 510,
+    SharkTooth = 511
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

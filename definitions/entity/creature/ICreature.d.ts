@@ -131,7 +131,7 @@ export interface ICreatureDescription extends IModdable {
     loot?: ICreatureLoot[];
     aberrantLoot?: ICreatureLoot[];
     spawnTiles: TileGroup;
-    spawnGroup?: SpawnGroup[];
+    spawnGroup?: OptionalDescriptions<BiomeType, SpawnGroup[]>;
     makeNoise?: boolean;
     canCauseStatus?: StatusType[];
     lootGroup?: LootGroupType;

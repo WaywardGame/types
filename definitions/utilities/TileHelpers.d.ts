@@ -17,6 +17,7 @@ declare module TileHelpers {
     const maskType = 4064;
     const maskTilled = 4096;
     const maskDoodadOverHidden = 8192;
+    const maskDoodadAnimationDisabled = 16384;
     function getGfx(tile: ITile): number;
     function getGfxRaw(data: number): number;
     function setGfx(tile: ITile, value: number): void;
@@ -33,6 +34,10 @@ declare module TileHelpers {
     function isDoodadOverHiddenRaw(data: number): boolean;
     function setDoodadOverHidden(tile: ITile, value: boolean): void;
     function setDoodadOverHiddenRaw(data: number, value: number): number;
+    function isDoodadAnimationDisabled(tile: ITile): boolean;
+    function isDoodadAnimationDisabledRaw(data: number): boolean;
+    function setDoodadAnimationDisabled(tile: ITile, value: boolean): void;
+    function setDoodadAnimationDisabledRaw(data: number, value: number): number;
     function getTileVariation(x: number, y: number): number;
     function isTypeInGroup(tile: ITile | TerrainType, group: TileGroup): boolean;
     function atlas(tile: ITile): {
