@@ -42,6 +42,7 @@ export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEve
     private loadItem;
     private loadEquip;
     private loadSleep;
+    private loadVehicle;
     private loadTerrains;
     private loadTerrain;
     private loadTerrainDecorations;

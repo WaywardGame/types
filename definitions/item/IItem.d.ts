@@ -74,6 +74,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     revert?: ItemType;
     use?: ActionType[];
     ranged?: IRanged;
+    isVehicle?: boolean;
     recipe?: IRecipe;
     /**
      * A list of recipes that have this item as an output.

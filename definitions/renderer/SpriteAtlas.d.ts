@@ -8,10 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ISpriteAtlas, ISpriteInfoList } from "renderer/ISpriteAtlas";
+import { ISpriteInfoList } from "renderer/ISpriteAtlas";
 import ISpriteInfo from "renderer/ISpriteInfo";
-export default class SpriteAtlas implements ISpriteAtlas {
-    bullboat: ISpriteInfo;
+export default class SpriteAtlas {
     corpses: ISpriteInfoList;
     creatures: ISpriteInfoList;
     immune: ISpriteInfo;
@@ -24,12 +23,11 @@ export default class SpriteAtlas implements ISpriteAtlas {
     playerBody: ISpriteInfo;
     playerHairstyles: ISpriteInfoList;
     playerSleeping: ISpriteInfo;
-    raft: ISpriteInfo;
-    sailboat: ISpriteInfo;
     shadow: ISpriteInfo;
     sleeps: ISpriteInfoList;
     statusEffects: ISpriteInfoList;
     text: ISpriteInfo;
     tileEvents: ISpriteInfoList;
+    vehicles: ISpriteInfoList;
     zzz: ISpriteInfo;
 }
