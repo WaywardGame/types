@@ -100,6 +100,7 @@ export interface ITileData {
     gfx?: number;
     tilled?: boolean;
     step?: number;
+    fishAvailable?: number;
 }
 export declare type ITileDataOld = Partial<ITileData> & {
     strength?: number;

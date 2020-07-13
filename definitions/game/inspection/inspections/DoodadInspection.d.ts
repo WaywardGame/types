@@ -19,6 +19,7 @@ export default class DoodadInspection extends Inspection<Doodad> {
     getId(): string;
     getBorder(): string | undefined;
     get(context: Context): ArrayOr<InfoProvider | TranslationGenerator>;
+    onUpdateTile(_: any, x: number, y: number, z: number): void;
     protected onRemove(_: any, doodad: Doodad): void;
     private getQuality;
     private getDescription;

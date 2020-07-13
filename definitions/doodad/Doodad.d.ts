@@ -16,6 +16,7 @@ import Human from "entity/Human";
 import { EquipType } from "entity/IHuman";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
+import { TileUpdateType } from "game/IGame";
 import { IObject, Quality } from "game/IObject";
 import { ITemperatureSource } from "game/temperature/ITemperature";
 import { IContainer, IItemLegendary, ItemType } from "item/IItem";
@@ -102,6 +103,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     getName(article?: boolean, count?: number): Translation;
     description(): IDoodadDescription | undefined;
+    updateTile(tileUpdateType: TileUpdateType): void;
     changeType(doodadType: DoodadType): void;
     isValid(): boolean;
     isInGroup(doodadTypeGroup: DoodadTypeGroup): boolean;

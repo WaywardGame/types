@@ -10,10 +10,10 @@
  */
 import Doodad from "doodad/Doodad";
 import { DoodadType, DoodadTypeGroup, IDoodadOptions } from "doodad/IDoodad";
+import Human from "entity/Human";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import { TerrainType } from "tile/ITerrain";
-import Human from "entity/Human";
 export interface IDoodadManagerEvents {
     /**
      * Called when a doodad is about to be spawned

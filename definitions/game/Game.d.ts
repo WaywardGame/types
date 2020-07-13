@@ -171,6 +171,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     isPositionEmpty(x: number, y: number, z: number): boolean;
     processWaterContamination(): void;
     getMovementFinishTime(delay?: Delay | number): number;
+    getMovementProgress(timeStamp: number, finishTime: number | undefined, delay?: Delay | number): number;
     passTurn(player: Player, turnType?: TurnType): void;
     tickRealtime(): void;
     updateView(source: RenderSource, updateFov?: boolean): void;
@@ -216,7 +217,8 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     directionToMovement(direction: Direction): IVector2;
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
     updateOption(player: Player | undefined, id: keyof IOptions, value: boolean | number): void;
-    updateFlowFieldTile(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType): void;
+    updateFlowFieldTile(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
+    emitTileUpdate(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
     packGround(x: number, y: number, z: number): void;
     getRandomQuality(bonusQuality?: number): Quality.None | Quality.Remarkable | Quality.Exceptional | Quality.Legendary;
     getQualityDurabilityBonus(quality: Quality, itemDurability: number, getMax?: boolean): number;

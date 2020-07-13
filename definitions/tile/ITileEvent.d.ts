@@ -14,8 +14,8 @@ import { IObjectDescription } from "game/IObject";
 import { ITemperatureSource } from "game/temperature/ITemperature";
 import { ItemType } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
-import { IRGB } from "utilities/Color";
 import TileEvent from "tile/TileEvent";
+import { IRGB } from "utilities/Color";
 export interface ITileEventDescription extends IObjectDescription, IModdable, ICausesStatusEffect, ITemperatureSource {
     spreadMax?: number;
     decayMax?: number;

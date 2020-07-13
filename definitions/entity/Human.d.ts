@@ -27,8 +27,8 @@ import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IOptions } from "save/data/ISaveDataGlobal";
-import { IVector3 } from "utilities/math/IVector";
 import TileEvent from "tile/TileEvent";
+import { IVector3 } from "utilities/math/IVector";
 export declare const REPUTATION_MAX = 64000;
 export default abstract class Human extends Entity {
     event: IEventEmitter<this, IHumanEvents>;

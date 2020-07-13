@@ -49,13 +49,14 @@ export declare enum LogSource {
     Steamworks = 37,
     TemperatureManager = 38,
     TileEventManager = 39,
-    Trello = 40,
-    Ui = 41,
-    Utilities = 42,
-    WebAssembly = 43,
-    WebRTCConnection = 44,
-    WebSocketConnection = 45,
-    World = 46
+    TileUpdate = 40,
+    Trello = 41,
+    Ui = 42,
+    Utilities = 43,
+    WebAssembly = 44,
+    WebRTCConnection = 45,
+    WebSocketConnection = 46,
+    World = 47
 }
 export interface ILog {
     debug(...args: any[]): void;

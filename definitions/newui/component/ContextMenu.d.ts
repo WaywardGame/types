@@ -22,7 +22,7 @@ export declare type IOptionDescription = {
 });
 export declare type ContextMenuOptionKeyValuePair<O extends number | string | symbol = number | string | symbol> = [O, IOptionDescription];
 export declare type ContextMenuOptionDescription<O extends number | string | symbol = number | string | symbol> = ContextMenuOptionKeyValuePair<O> | typeof ContextMenu.Divider;
-export declare type ContextMenuDescriptions<O extends number | string | symbol = number | string | symbol> = ContextMenuOptionDescription<O>[];
+export declare type ContextMenuDescriptions<O extends number | string | symbol = number | string | symbol> = Array<ContextMenuOptionDescription<O>>;
 declare class ContextMenu<O extends number | string | symbol = number | string | symbol> extends Component implements IContextMenu<O> {
     event: IEventEmitter<this, Events<IContextMenu>>;
     private activeOption;

@@ -276,18 +276,27 @@ export declare enum SaveType {
     Traveling = 6
 }
 export declare enum TileUpdateType {
-    Player = 0,
-    Doodad = 1,
-    Creature = 2,
-    Item = 3,
-    NPC = 4,
-    TileEvent = 5,
-    Tilled = 6,
-    Terrain = 7,
-    Corpse = 8,
-    DoodadOverHidden = 9,
-    Batch = 10,
-    Mod = 11
+    Batch = 0,
+    Corpse = 1,
+    CorpseManager = 2,
+    Creature = 3,
+    CreatureManager = 4,
+    Doodad = 5,
+    DoodadChangeType = 6,
+    DoodadEmbers = 7,
+    DoodadGatherReady = 8,
+    DoodadGrowingStage = 9,
+    DoodadManager = 10,
+    DoodadOrientation = 11,
+    DoodadOverHidden = 12,
+    DoodadStillContainer = 13,
+    Item = 14,
+    Mod = 15,
+    NPC = 16,
+    Player = 17,
+    Terrain = 18,
+    TileEventManager = 19,
+    Tilled = 20
 }
 export interface IWaterFill {
     count: number;

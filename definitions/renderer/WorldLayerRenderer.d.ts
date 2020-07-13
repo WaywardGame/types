@@ -10,9 +10,9 @@
  */
 import DoodadInfo from "doodad/DoodadInfo";
 import { DoodadType } from "doodad/IDoodad";
+import EventEmitter from "event/EventEmitter";
 import { IWorldLayer, TerrainMask } from "renderer/IWorldLayer";
 import IWorldRenderer, { RenderLayerFlag } from "renderer/IWorldRenderer";
-import EventEmitter from "event/EventEmitter";
 export interface IWorldLayerRendererEvents {
     /**
      * Called when rendering the world

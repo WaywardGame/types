@@ -11,7 +11,6 @@
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
-import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 import { TileEventType } from "tile/ITileEvent";
 import TileEvent from "tile/TileEvent";
@@ -43,12 +42,10 @@ export default class TileEventManager extends EventEmitter.Host<ITileManagerEven
     create(type: TileEventType, x: number, y: number, z: number): TileEvent | undefined;
     createFake(type: TileEventType, x: number, y: number, z: number): TileEvent | undefined;
     remove(tileEvent: TileEvent): void;
-    moveTo(tileEvent: TileEvent, x: number, y: number, z: number): void;
     get(tile: ITile, type: TileEventType): TileEvent | undefined;
     canGather(tile: ITile): TileEvent | undefined;
     updateAll(): void;
     fireOverflow(x: number, y: number, z: number): boolean;
-    getMovementProgress(tileEvent: TileEvent, timeStamp: number): number;
     is(thing: any): thing is TileEvent;
     canPickup(tile: ITile): TileEvent | undefined;
     blocksTile(tile: ITile): boolean;
@@ -63,7 +60,4 @@ export default class TileEventManager extends EventEmitter.Host<ITileManagerEven
     clearBlood(position: IVector3, executor: NPC | Player): boolean;
     moveExcrement(position: IVector3): void;
     containsDamagingTileEvents(events: TileEvent[] | undefined): boolean;
-    getName(tileEvent: TileEvent): Translation;
-    private _addToTile;
-    private _removeFromTile;
 }
