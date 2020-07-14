@@ -26,7 +26,9 @@ export declare enum TerrainDecoration {
     Clay = 10,
     Gravel = 11,
     RockGround = 12,
-    SandstoneGround = 13
+    SandstoneGround = 13,
+    FreshWaterIce = 14,
+    SeawaterIce = 15
 }
 export declare enum TerrainDecorationStatus {
     None = 0,
