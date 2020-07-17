@@ -20,6 +20,7 @@ import { LootGroupType } from "item/LootGroups";
 import { IModdable } from "mod/ModRegistry";
 import { TerrainType } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
+import { TileLayerType } from "renderer/IWorldRenderer";
 export interface IDoodadOptions extends IObjectOptions {
     gatherReady?: number;
     stillContainer?: Item;
@@ -90,6 +91,10 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     durability?: number;
     leftOver?: DoodadType;
     lockedChest?: ILockedChest;
+    getVariationX?(doodad: Doodad, existingVariationX: number): number | undefined;
+    getVariationY?(doodad: Doodad, existingVariationY: number): number | undefined;
+    tileLayerType?: TileLayerType;
+    tileOverLayerType?: TileLayerType;
 }
 export interface ILockedChest {
     /**

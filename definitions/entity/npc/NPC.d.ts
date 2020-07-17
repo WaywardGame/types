@@ -67,7 +67,7 @@ export default abstract class NPC extends Human {
     /**
      * The name of the npc - called when created
      */
-    protected abstract getDefaultName(): string;
+    protected getDefaultName(): Translation;
     /**
      * Initialize stats
      */

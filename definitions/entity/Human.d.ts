@@ -31,6 +31,7 @@ import TileEvent from "tile/TileEvent";
 import { IVector3 } from "utilities/math/IVector";
 export declare const REPUTATION_MAX = 64000;
 export default abstract class Human extends Entity {
+    static getNameTranslation(): Translation;
     event: IEventEmitter<this, IHumanEvents>;
     attackFromEquip: IAttackHand;
     crafted: {

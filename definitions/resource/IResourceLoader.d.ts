@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IImageOverrideDescription } from "mod/IModInfo";
-import Vec2 from "utilities/math/Vector2";
+import Vector2 from "utilities/math/Vector2";
 export interface IResourceLoader {
     initialize(gl: WebGL2RenderingContext, container: IResourceContainer): void;
     loadResources(container?: IResourceContainer): Promise<void>;
@@ -47,7 +47,7 @@ export declare enum PathType {
 }
 export interface IResourceContainer {
     spriteTexture: WebGLTexture;
-    spriteTextureSizeInversed: Vec2;
+    spriteTextureSizeInversed: Vector2;
     tileTexture: WebGLTexture;
-    tileTextureSizeInversed: Vec2;
+    tileTextureSizeInversed: Vector2;
 }

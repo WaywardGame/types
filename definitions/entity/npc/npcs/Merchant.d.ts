@@ -19,7 +19,7 @@ export default class MerchantNPC extends NPC {
     update(): void;
     getActions(): ActionType[] | undefined;
     protected getReputationChangeOnDeath(): number;
-    protected getDefaultName(): string;
+    protected getDefaultName(): import("../../../language/Translation").default;
     protected initializeStats(): void;
     protected getDefaultCustomization(): ICustomizations;
     protected getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;

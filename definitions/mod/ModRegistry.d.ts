@@ -54,6 +54,7 @@ import { IOverlayDescription } from "renderer/Overlays";
 import { ITerrainDescription, OverlayType, TerrainType } from "tile/ITerrain";
 import { ITileEventDescription, TileEventType } from "tile/ITileEvent";
 import { ITerrainLootItem } from "tile/TerrainResources";
+import { TileLayerType } from "renderer/IWorldRenderer";
 export interface IModdable {
     modIndex?: number;
 }
@@ -96,7 +97,8 @@ export declare enum ModRegistrationType {
     Terrain = 34,
     TerrainDecoration = 35,
     TileEvent = 36,
-    WorldLayer = 37
+    TileLayerType = 37,
+    WorldLayer = 38
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -283,7 +285,11 @@ export interface IWorldLayerRegistration extends IBaseModRegistration {
     type: ModRegistrationType.WorldLayer;
     name: string;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration);
+export interface ITileLayerTypeRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.TileLayerType;
+    name: string;
+}
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration);
 export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare module Register {
     /**
@@ -510,6 +516,10 @@ declare module Register {
      * Registers a world layer.
      */
     function worldLayer(name: string): <K extends string | number | symbol, T extends { [k in K]: WorldZ; }>(target: T, key: K) => void;
+    /**
+     * Registers a world renderer layer.
+     */
+    function tileLayer(name: string): <K extends string | number | symbol, T extends { [k in K]: TileLayerType; }>(target: T, key: K) => void;
     /**
      * Registers a quest.
      * @param description The definition of the quest.

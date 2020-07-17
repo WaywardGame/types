@@ -39,7 +39,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     minDur: number;
     order: number;
     ownerIdentifier?: string;
-    quality: Quality;
+    quality: Quality | undefined;
     quickSlot: number | undefined;
     renamed: string | ISerializedTranslation;
     tatteredMap?: TatteredMap;

@@ -9,15 +9,15 @@
  * https://waywardgame.github.io/
  */
 import { ModType } from "mod/IModInfo";
-import { BlockRow } from "newui/component/BlockRow";
 import Component from "newui/component/Component";
+import { EnableDisableAllRow } from "newui/component/EnableDisableAllRow";
 import FilterRow from "newui/component/FilterRow";
 import SortRow from "newui/component/SortRow";
 import Menu, { Tab } from "newui/screen/screens/menu/component/Menu";
 import { ModSort } from "newui/screen/screens/menu/menus/mods/IModsMenu";
 import ModRow from "newui/screen/screens/menu/menus/mods/ModRow";
 export default class ModsMenu extends Menu {
-    readonly rowToggleAllMods: BlockRow;
+    readonly rowToggleAllMods: EnableDisableAllRow;
     readonly sections: {
         2: ModSection;
         1: ModSection;

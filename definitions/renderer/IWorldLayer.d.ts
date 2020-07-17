@@ -9,14 +9,14 @@
  * https://waywardgame.github.io/
  */
 import DoodadInfo from "doodad/DoodadInfo";
-import { DoodadType } from "doodad/IDoodad";
+import { DoodadType, IDoodadDescription } from "doodad/IDoodad";
 import { WorldZ } from "game/WorldZ";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
 import IExploreMap from "renderer/IExploreMap";
 import { TerrainData } from "renderer/IWorld";
 import { ITile, TerrainType } from "tile/ITerrain";
 export declare type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean, debug?: boolean) => void;
-export declare type onDoodadUpdateDelegate = (x: number, y: number, doodadType: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, doodadVariationX: number, doodadVariationY: number, hasGraphicVariation: boolean, terrainMasks: TerrainMask, flushImmediate: boolean) => void;
+export declare type onDoodadUpdateDelegate = (x: number, y: number, doodadDescription: IDoodadDescription | undefined, doodadType: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, doodadVariationX: number, doodadVariationY: number, hasGraphicVariation: boolean, terrainMasks: TerrainMask, flushImmediate: boolean) => void;
 export interface IWorldLayer {
     width: number;
     height: number;

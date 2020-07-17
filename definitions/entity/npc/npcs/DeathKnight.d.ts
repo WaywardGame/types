@@ -15,7 +15,6 @@ import { ItemType } from "item/IItem";
 import Item from "item/Item";
 export default class DeathKnightNPC extends NPC {
     constructor(id?: number, x?: number, y?: number, z?: number);
-    protected getDefaultName(): string;
     protected initializeStats(): void;
     protected getDefaultCustomization(): ICustomizations;
     protected getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;

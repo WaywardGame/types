@@ -10,13 +10,13 @@
  */
 import Entity from "entity/Entity";
 import { ItemType } from "item/IItem";
-import Vec2 from "utilities/math/Vector2";
+import Vector2 from "utilities/math/Vector2";
 export interface INotifier {
     addItem(entity: Entity, type: ItemType): void;
     addStat(entity: Entity, type: StatNotificationType, value: number): void;
     clear(): void;
     update(timeStamp: number): void;
-    setTexture(texture: WebGLTexture, inverseTextureSize: Vec2): void;
+    setTexture(texture: WebGLTexture, inverseTextureSize: Vector2): void;
     render(timeStamp: number, x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): boolean;
 }
 export default INotifier;

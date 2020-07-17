@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import ISpriteInfo from "renderer/ISpriteInfo";
-import Vec2 from "utilities/math/Vector2";
+import Vector2 from "utilities/math/Vector2";
 export default class SpritePacker {
     private readonly gl;
     width: number;
@@ -17,7 +17,7 @@ export default class SpritePacker {
     private readonly padding;
     private readonly packLargeToSmall;
     texture: WebGLTexture;
-    inverseTextureSize: Vec2;
+    inverseTextureSize: Vector2;
     private spriteLoadCount;
     private sprites;
     private readonly rootNode;

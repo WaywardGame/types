@@ -15,7 +15,7 @@ import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { CompiledProgram } from "renderer/Shaders";
 import { IBound3 } from "utilities/math/Bound3";
 import { IVector2 } from "utilities/math/IVector";
-import Vec2 from "utilities/math/Vector2";
+import Vector2 from "utilities/math/Vector2";
 export interface IFieldOfViewEvents {
     getPlayerFieldOfViewRadius(radius: number, player: Player): number;
 }
@@ -32,7 +32,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> i
     texLightOld: WebGLTexture;
     disabled: boolean;
     blurEnabled: boolean;
-    computeOffset: Vec2;
+    computeOffset: Vector2;
     transitionProgress: number;
     private debugRenderer;
     private texLight01;

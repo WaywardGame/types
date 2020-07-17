@@ -11,10 +11,10 @@
 import Player from "entity/player/Player";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { IBound3 } from "utilities/math/Bound3";
-import Vec2 from "utilities/math/Vector2";
+import Vector2 from "utilities/math/Vector2";
 export interface IFieldOfView {
     blurEnabled: boolean;
-    computeOffset: Vec2;
+    computeOffset: Vector2;
     disabled: boolean;
     readonly maxRadius: number;
     readonly radius: number;

@@ -14,7 +14,7 @@ import { ModState } from "mod/IModInfo";
 import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
 import { IHighscore, IOptions } from "save/data/ISaveDataGlobal";
 import { IDialogInfo } from "ui/IUi";
-import { IEnumInfo } from "utilities/enum/IEnum";
+import EnumInfo from "utilities/enum/EnumInfo";
 export default class SaveDataGlobal {
     static defaultOptions: IOptions;
     gameCrafted: {
@@ -37,7 +37,7 @@ export default class SaveDataGlobal {
         language?: string;
     };
     utilitiesEnumsAllocated: {
-        [index: string]: IEnumInfo;
+        [index: string]: EnumInfo;
     };
     savedDialogInfo: {
         [index: string]: IDialogInfo;

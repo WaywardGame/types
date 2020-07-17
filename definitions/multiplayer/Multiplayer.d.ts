@@ -60,7 +60,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     isProcessingPacket(): boolean;
     getPlayerIdentifier(): string;
     getOptions(): IMultiplayerOptions;
-    setOptions(options: IMultiplayerOptions, creatingServer?: boolean): void;
+    setOptions(options: IMultiplayerOptions, updateGame?: boolean): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
     getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
     /**

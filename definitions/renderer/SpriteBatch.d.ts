@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import ISpriteBatch from "renderer/ISpriteBatch";
-import Vec2 from "utilities/math/Vector2";
+import Vector2 from "utilities/math/Vector2";
 export default class SpriteBatch implements ISpriteBatch {
     private readonly depthOffset;
     private readonly yOffset;
@@ -17,7 +17,7 @@ export default class SpriteBatch implements ISpriteBatch {
     private static readonly spriteLength;
     capacity: number;
     texSprites: WebGLTexture;
-    inverseSpriteTextureSize: Vec2;
+    inverseSpriteTextureSize: Vector2;
     private count;
     private readonly buffer;
     private readonly colorBuffer;

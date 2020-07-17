@@ -13,7 +13,7 @@ import Fence from "renderer/tileAdaptors/Fence";
 import Wall from "renderer/tileAdaptors/Wall";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
 import { IBound3 } from "utilities/math/Bound3";
-import Vec2 from "utilities/math/Vector2";
+import Vector2 from "utilities/math/Vector2";
 export interface IWorldRenderer {
     positionBuffer: WebGLBuffer;
     layers: Record<number, WorldLayerRenderer>;
@@ -27,15 +27,15 @@ export interface IWorldRenderer {
     defaultAdaptor: ITileAdaptor;
     floorAdaptor: ITileAdaptor;
     updateAll(): void;
-    setSpriteTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
+    setSpriteTexture(texture: WebGLTexture, textureSizeInversed: Vector2): any;
     getPixelSize(): number;
     getZoom(): number;
     getTileScale(): number;
     setTileScale(tileScale: number): void;
     setZoom(zoom: number): void;
-    setViewport(view: Vec2): void;
-    getViewport(): Vec2;
-    getTileViewport(): Vec2;
+    setViewport(view: Vector2): void;
+    getViewport(): Vector2;
+    getTileViewport(): Vector2;
     /**
      * Calculates the ambient color (color of the light), a 3-value tuple of RGB numbers 0-1.
      */
@@ -66,8 +66,8 @@ export interface IWorldRenderer {
     getFogColor(): [number, number, number];
     renderWorld(x: number, y: number, z: number): void;
     render(): void;
-    screenToVector(screenX: number, screenY: number): Vec2;
-    screenToTile(screenX: number, screenY: number): Vec2 | undefined;
+    screenToVector(screenX: number, screenY: number): Vector2;
+    screenToTile(screenX: number, screenY: number): Vector2 | undefined;
     getViewportBounds(): IBound3;
     computeSpritesInViewport(): void;
     batchMovable(timeStamp: number): void;
@@ -104,5 +104,13 @@ export declare enum RenderLayerFlag {
     TerrainDecoration = 4,
     Doodad = 8,
     DoodadOver = 16,
+    Mod = 32,
     All = 255
+}
+export declare enum TileLayerType {
+    Terrain = 0,
+    TerrainOver = 1,
+    TerrainDecoration = 2,
+    Doodad = 3,
+    DoodadOver = 4
 }

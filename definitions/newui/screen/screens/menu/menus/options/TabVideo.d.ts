@@ -17,6 +17,7 @@ export default class TabVideo extends Tab implements IRefreshable {
     constructor();
     refresh(): this;
     protected onViewportResize(): void;
+    private toggleAllTooltips;
     private addRefreshable;
     private onFullscreen;
     private onPixelFont;

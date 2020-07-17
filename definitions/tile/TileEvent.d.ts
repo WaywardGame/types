@@ -13,9 +13,9 @@ import { IObject } from "game/IObject";
 import { ITemperatureSource } from "game/temperature/ITemperature";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { FireStage } from "tile/events/IFire";
+import { ITile } from "tile/ITerrain";
 import { ITileEventDescription, TileEventType } from "tile/ITileEvent";
 import { IVector3 } from "utilities/math/IVector";
-import { ITile } from "tile/ITerrain";
 export interface ITileEventEvents {
     fireUpdate(stage?: FireStage): any;
 }

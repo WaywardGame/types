@@ -19,6 +19,7 @@ export default abstract class Inspection<O> extends InfoProvider {
     constructor(type: InspectType, value: O);
     getClass(): string[];
     getBorder(): string | undefined;
+    getPriority(): number;
     /**
      * Returns a string that should differentiate this inspection from other inspections of the same type.
      */

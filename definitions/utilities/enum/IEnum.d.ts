@@ -54,29 +54,21 @@ export declare enum EnumId {
     MenuBarButton = 17,
     CorpseType = 18,
     TileEventType = 19,
-    OverlayType = 20,
-    MessageSource = 21,
-    NPCType = 22,
-    HelpArticle = 23,
-    Note = 24,
-    Dialog = 25,
-    InterruptChoice = 26,
-    ItemTypeGroup = 27,
-    InspectType = 28,
-    Quest = 29,
-    QuestRequirement = 30,
-    TerrainDecoration = 31,
-    Interrupt = 32,
-    Recipe = 33,
-    DoodadTypeGroup = 34,
-    WorldLayer = 35
-}
-export interface IEnumInfo {
-    enumId: EnumId;
-    enumName: string;
-    enumNumber: number;
-    name: string;
-    onUnallocate?: ((index: number) => void);
-    modIndex?: number;
-    modName?: string;
+    TileLayer = 20,
+    OverlayType = 21,
+    MessageSource = 22,
+    NPCType = 23,
+    HelpArticle = 24,
+    Note = 25,
+    Dialog = 26,
+    InterruptChoice = 27,
+    ItemTypeGroup = 28,
+    InspectType = 29,
+    Quest = 30,
+    QuestRequirement = 31,
+    TerrainDecoration = 32,
+    Interrupt = 33,
+    Recipe = 34,
+    DoodadTypeGroup = 35,
+    WorldLayer = 36
 }

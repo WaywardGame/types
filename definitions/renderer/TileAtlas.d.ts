@@ -15,7 +15,7 @@ import { TerrainDecoration } from "renderer/Decorations";
 import ITileAtlas from "renderer/ITileAtlas";
 import { TerrainTileInfo } from "renderer/TerrainTileInfo";
 import { TerrainType } from "tile/ITerrain";
-import Vec2 from "utilities/math/Vector2";
+import Vector2 from "utilities/math/Vector2";
 export declare enum TileType {
     Q2TopRightQ1TopLeft = 0,
     Q2TopLeft = 1,
@@ -59,7 +59,7 @@ export declare enum TileType {
     Q4BottomLeft = 39
 }
 export declare function rotateTileType90Deg(tileType: TileType, times: number): TileType;
-export declare function getTileLoc(tileType: TileType, tileInfo: TerrainTileInfo, variation?: number): Vec2;
+export declare function getTileLoc(tileType: TileType, tileInfo: TerrainTileInfo, variation?: number): Vector2;
 export default class TileAtlas implements ITileAtlas {
     terrain: OptionalDescriptions<TerrainType, TerrainTileInfo>;
     terrainTilled: OptionalDescriptions<TerrainType, TerrainTileInfo>;

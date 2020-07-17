@@ -13,7 +13,7 @@ import { GameMode } from "game/options/IGameOptions";
 import { ISerializedTranslation } from "language/Translation";
 import { IMultiplayerState } from "multiplayer/IMultiplayer";
 import IClientStore from "save/clientStore/IClientStore";
-import { IEnumInfo } from "utilities/enum/IEnum";
+import EnumInfo from "utilities/enum/EnumInfo";
 export declare const saveDataVersionUnknown = "Unknown";
 export default class SaveData {
     gameSlotName: string;
@@ -41,7 +41,7 @@ export default class SaveData {
     multiplayerState: IMultiplayerState;
     multiplayerMessageOfTheDay: string;
     utilitiesEnumsAllocated: {
-        [index: string]: IEnumInfo;
+        [index: string]: EnumInfo;
     };
     clientStore: Map<string, IClientStore>;
 }
