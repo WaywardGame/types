@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
 import { IDamageInfo } from "entity/creature/ICreature";
@@ -21,7 +21,7 @@ import { IEventEmitter } from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
 import { IGameOptionsPlayer } from "game/options/IGameOptions";
-import { EquipEffect, EquipEffectByType, IContainer, ItemType, ItemTypeGroup } from "item/IItem";
+import { EquipEffect, EquipEffectByType, EquipEffects, IContainer, ItemType, ItemTypeGroup } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
@@ -45,18 +45,18 @@ export default abstract class Human extends Entity {
         [index: number]: number;
     };
     handToUse: EquipType | undefined;
-    identifier: string;
     inventory: IContainer;
     options: IOptions;
-    vehicleItemId: number | undefined;
+    readonly equipEffects: Map<EquipEffect, EquipEffects>;
     restData: IRestData | undefined;
     score: number;
     skills: ISkillSet;
     state: PlayerState;
     swimming: boolean;
+    vehicleItemId: number | undefined;
+    identifier: string;
     canSendMessage: boolean;
     private readonly privateStore;
-    private readonly equipEffects;
     private cachedTotalSkill?;
     constructor();
     isLocalPlayer(): boolean;
@@ -157,7 +157,7 @@ export default abstract class Human extends Entity {
      */
     protected statGain(stat: Stat, bypass: boolean): void;
     protected calculateStats(): void;
-    protected resetDefense(): void;
+    protected resetDefense(skipStatChangedEvent?: boolean): void;
     protected swimAndSootheCheck(options?: IGameOptionsPlayer): void;
     get asCreature(): undefined;
     get asHuman(): Human;

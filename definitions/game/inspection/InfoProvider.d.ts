@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Creature from "entity/creature/Creature";
 import Entity from "entity/Entity";
@@ -87,7 +87,7 @@ export declare class SimpleInfoProvider extends InfoProvider {
     private componentClass;
     private displayLevel;
     constructor(...translations: Array<TranslationGenerator | InfoProvider>);
-    get(): (import("../../language/Translation").default | import("../../language/dictionary/UiTranslation").default | import("../../language/Translation").ISerializedTranslation | (() => import("../../language/Translation").default | import("../../language/dictionary/UiTranslation").default | import("../../language/Translation").ISerializedTranslation | Iterable<import("../../utilities/string/Interpolator").IStringSection> | undefined) | InfoProvider)[];
+    get(): (import("../../language/Translation").ISerializedTranslation | import("../../language/Translation").default | import("../../language/dictionary/UiTranslation").default | (() => Iterable<import("../../utilities/string/Interpolator").IStringSection> | import("../../language/Translation").ISerializedTranslation | import("../../language/Translation").default | import("../../language/dictionary/UiTranslation").default | undefined) | InfoProvider)[];
     add(...translations: Array<TranslationGenerator | InfoProvider>): this;
     getClass(): string[];
     addClasses(...classes: string[]): this;

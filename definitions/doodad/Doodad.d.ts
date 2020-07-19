@@ -1,14 +1,13 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
-import DoodadInfo from "doodad/DoodadInfo";
 import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadDescription, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType } from "entity/action/IAction";
 import Creature from "entity/creature/Creature";
@@ -46,6 +45,14 @@ export interface IDoodadEvents {
      * emitted.
      */
     fireUpdate(stage: FireStage | undefined): any;
+    /**
+     * Emitted when the doodad is created.
+     */
+    create(creator?: Human): any;
+    /**
+     * Emitted when the doodad is removed.
+     */
+    remove(): any;
 }
 export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource {
     static is(value: any): value is Doodad;
@@ -126,7 +133,6 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     isGatherable(): boolean;
     isEmbers(): boolean;
-    getDoodadInfo(): DoodadInfo | undefined;
     canHarvest(): boolean;
     /**
      * Returns whether the doodad can be trampled
