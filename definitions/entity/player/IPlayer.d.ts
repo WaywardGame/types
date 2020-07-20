@@ -62,10 +62,25 @@ export interface IPlayerEvents extends Events<Human> {
      */
     damage(damageInfo: IDamageInfo): number | void;
     /**
-     * Called when the player is killed
-     * @returns `false` to stop the player from dying
+     * Called when the player will be killed. If any handlers return `false` to stop the player from dying,
+     * no further handlers will be called.
+     * @return `false` to stop the player from dying
      */
-    die(): false | void;
+    shouldDie(): false | void;
+    /**
+     * Called when the player is killed.
+     */
+    die(): any;
+    /**
+     * Called when the player will be respawned. If any handlers return `false` to stop the player from respawning,
+     * no further handlers will be called.
+     * @return `false` to stop the player from respawning
+     */
+    shouldRespawn(): false | void;
+    /**
+     * Called when the player is respawned.
+     */
+    respawn(): false | void;
     /**
      * Called when an item is added to the player's inventory
      * @param item The item object

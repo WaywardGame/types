@@ -57,7 +57,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> i
     createDebugRenderer(): ITextureDebugRenderer;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
     getBounds(player: Player, radius?: number): IBound3;
-    markAsExplored(tiles: IVector2[]): boolean;
+    markAsExplored(player: Player, tiles: IVector2[]): boolean;
     private updateExplored;
     private computeLights;
 }

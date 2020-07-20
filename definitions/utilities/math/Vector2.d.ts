@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import ISerializer, { ISerializable } from "save/ISerializer";
+import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
 declare type ConsumerVectorRange = (vec: IVector2, value: number) => any;
@@ -75,6 +76,7 @@ export default class Vector2 implements IVector2, ISerializable {
     toRadians(): number;
     raw(): IVector2;
     clamp(a: IVector2, b: IVector2): this;
+    offset(direction: Direction): this;
     toString(): string;
     serializeObject(serializer: ISerializer): void;
     deserializeObject(serializer: ISerializer): void;

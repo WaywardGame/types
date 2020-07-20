@@ -94,8 +94,15 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     tileLayerType?: TileLayerType;
     tileOverLayerType?: TileLayerType;
     itemStackOffset?: number;
+    itemStackRegion?: IItemStackRegion | ((doodad: Doodad) => IItemStackRegion | undefined);
     getVariationX?(doodad: Doodad, existingVariationX: number): number | undefined;
     getVariationY?(doodad: Doodad, existingVariationY: number): number | undefined;
+}
+export interface IItemStackRegion {
+    xMin?: number;
+    xMax?: number;
+    yMin?: number;
+    yMax?: number;
 }
 export interface ILockedChest {
     /**

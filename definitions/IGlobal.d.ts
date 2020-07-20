@@ -50,6 +50,7 @@ import "utilities/typesglobal/Function";
 import "utilities/typesglobal/Iterables";
 import "utilities/typesglobal/Misc";
 import "utilities/typesglobal/Objects";
+import "utilities/typesglobal/Types";
 declare global {
     interface IRequire {
         s: any;

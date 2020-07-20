@@ -22,4 +22,5 @@ export declare module Direction {
     const CARDINALS: Direction[];
     function vector(direction: Direction): Vector2;
     function vector(direction: Direction, z: number): Vector3;
+    const VECTORS: Record<Direction, Vector2>;
 }

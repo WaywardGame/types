@@ -67,6 +67,7 @@ export default class GameScreen extends Screen implements IHookHost {
     onOpenBook(human: Human, book: BookType): void;
     onReadMap(player: Player, mapRequest: IMapRequest): void;
     protected onDie(): void;
+    protected onRespawn(): void;
     protected onZoom(api: IBindHandlerApi): boolean;
     protected onInspect(api: IBindHandlerApi): boolean;
     protected onScreenshotMode(): boolean;

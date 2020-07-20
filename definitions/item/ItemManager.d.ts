@@ -71,7 +71,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: Quality): Item[];
     computeContainerWeight(container: IContainer): number;
     getLegendaryWeightCapacity(container: IContainer): number;
-    moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, includeFilteredItems?: boolean, onMoveItem?: (item: Item) => void): Item[];
+    moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, filterText?: string | undefined, onMoveItem?: (item: Item) => void): Item[];
     moveToContainer(human: Human | undefined, item: Item, container: IContainer): boolean;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: Item): boolean;
     breakContainerOnTile(itemContainer: Item, x: number, y: number, z: number): void;
@@ -103,7 +103,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, allowProtectedItems?: boolean): Item | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, human?: Human, allowProtectedItems?: boolean): Item | undefined;
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean, human?: Human, allowProtectedItems?: boolean): Item[];
-    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, human?: Human, includeFilteredItems?: boolean): Item[];
+    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, human?: Human, filterText?: string): Item[];
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, human?: Human): Item[];
     getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number): Item | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item): boolean;
@@ -139,6 +139,13 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
      */
     movePlayerItemsToIsland(targetIsland: Island): void;
     getCraftQualityBonus(item: Item, required?: boolean): number;
+    /**
+     * Checks if the item type or item is filtered from inventory/crafting/container dialogs.
+     * @param item The ItemType or Item to check.
+     * @param filterText The string of text in which to filter for.
+     * @param craftingFilter True if we are filtering the crafting dialog.
+     */
+    isFiltered(item: ItemType | Item, filterText: string, craftingFilter?: boolean): boolean;
     private getDefaultWeightRange;
     private updateItemOrderInternal;
     private loadReference;

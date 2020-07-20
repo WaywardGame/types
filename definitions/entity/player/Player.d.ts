@@ -166,12 +166,14 @@ export default class Player extends Human {
     isServer(): boolean;
     getName(): Translation;
     canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
+    markAsExplored(points: IVector2[]): boolean | undefined;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateDialogInfo(dialogIndex: string | number): void;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
     passTurn(turnType?: TurnType): void;
     tick(isPassTurn?: boolean): void;
     kill(): void;
+    respawn(): void;
     getMovementProgress(): number;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
     hasWalkPath(): boolean;
@@ -204,6 +206,11 @@ export default class Player extends Human {
      * Includes stat loss & item damages
      */
     applyTravelingEffects(sailToCivilization?: boolean): void;
+    /**
+     * Check if a position is marked as explored
+     * Only use this clientside
+     */
+    isExploredClientSide(x: number, y: number, z: number): boolean;
     /**
      * @deprecated Do not call this with players.
      */

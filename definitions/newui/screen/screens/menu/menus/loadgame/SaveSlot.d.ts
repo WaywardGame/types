@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Events, IEventEmitter } from "event/EventEmitter";
-import { GameMode } from "game/options/IGameOptions";
+import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import InputButton from "newui/component/InputButton";
 export interface SaveSlotData {
     slot: number;
@@ -26,6 +26,7 @@ export interface SaveSlotData {
     seed: string;
     name: string;
     difficulty: GameMode;
+    options: IGameOptions;
     thumbnail?: string;
 }
 interface ISaveSlotEvents extends Events<InputButton> {

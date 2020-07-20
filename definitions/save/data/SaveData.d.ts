@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { PlayerState } from "entity/player/IPlayer";
-import { GameMode } from "game/options/IGameOptions";
+import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ISerializedTranslation } from "language/Translation";
 import { IMultiplayerState } from "multiplayer/IMultiplayer";
 import IClientStore from "save/clientStore/IClientStore";
@@ -26,6 +26,7 @@ export default class SaveData {
     saveManagerSaveTime: number;
     saveManagerTicks: number;
     saveManagerDifficulty: GameMode;
+    saveManagerOptions: IGameOptions;
     saveManagerScore: number;
     saveManagerOriginalVersion: string;
     saveManagerDeathBy: ISerializedTranslation;

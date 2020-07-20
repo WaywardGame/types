@@ -62,7 +62,7 @@ export default class Vector3 implements IVector3, ISerializable {
     equals(vector: unknown, threshold?: number): vector is IVector3;
     length(): number;
     squaredLength(): number;
-    add(vector: IVector3): this;
+    add(vector: PartialUnion<[IVector3, IVector2]>): this;
     subtract(vector: IVector3): this;
     multiply(vector: IVector3): this;
     divide(vector: IVector3): this;

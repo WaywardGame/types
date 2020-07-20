@@ -34,6 +34,6 @@ export default class SpriteBatch implements ISpriteBatch {
     clear(): void;
     begin(): void;
     add(tileX: number, tileY: number, spriteSize: number, sourceX: number, sourceY: number, sourceSize: number, offsetX?: number, offsetY?: number, red?: number, green?: number, blue?: number, alpha?: number): void;
-    end(): void;
+    end(): number;
     render(x: number, y: number, tileScale: number, viewportWidth: number, viewportHeight: number): void;
 }
