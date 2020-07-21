@@ -13,11 +13,19 @@ export interface IRGB {
     g: number;
     b: number;
 }
+export interface IColorFul {
+    red: number;
+    green: number;
+    blue: number;
+}
 declare function Color(color: IRGB): IRGB;
 declare function Color(r: number, g: number, b: number): IRGB;
 declare function Color(rgb: string): IRGB;
 declare function Color(rgb: number): IRGB;
 declare module Color {
+    function fromInt(int: number): IRGB;
+    function toInt(color: IRGB): number;
+    function getFullNames(color: IRGB): IColorFul;
     function blend(...colors: IRGB[]): IRGB;
     function blend(color1: IRGB, color2: IRGB, percentage: number): IRGB;
     function getCSS(color: IRGB): string;

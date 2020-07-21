@@ -20,6 +20,7 @@ export declare enum Direction {
 export declare module Direction {
     const DIRECTIONS: Direction[];
     const CARDINALS: Direction[];
+    const OPPOSITES: Record<Direction, Direction>;
     function vector(direction: Direction): Vector2;
     function vector(direction: Direction, z: number): Vector3;
     const VECTORS: Record<Direction, Vector2>;

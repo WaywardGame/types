@@ -150,5 +150,6 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private spriteBatchForLayer;
     private computeSpritesInViewportInternal;
     private batchItems;
+    private batchItem;
     private batchTileEvents;
 }

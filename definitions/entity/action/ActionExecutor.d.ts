@@ -97,6 +97,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private executeConfirmer;
     private executeInternalOrMultiplayer;
     private executeInternal;
+    private handleApiOnActionFailure;
     private handleApi;
     private canExecute;
     private isUsableWhen;

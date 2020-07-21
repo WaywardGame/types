@@ -62,10 +62,10 @@ export default class Vector2 implements IVector2, ISerializable {
     equals(vector: unknown, threshold?: number): boolean;
     length(): number;
     squaredLength(): number;
-    add(vector: IVector2): this;
-    subtract(vector: IVector2): this;
-    multiply(vector: IVector2 | number): this;
-    divide(vector: IVector2 | number): this;
+    add(vector: IVector2 | IVector3 | number): this;
+    subtract(vector: IVector2 | IVector3 | number): this;
+    multiply(vector: IVector2 | IVector3 | number): this;
+    divide(vector: IVector2 | IVector3 | number): this;
     floor(dest?: this): this;
     lerp(vector: IVector2, amount: number): this;
     mod(n: number): this;
