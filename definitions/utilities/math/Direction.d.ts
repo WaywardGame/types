@@ -24,4 +24,6 @@ export declare module Direction {
     function vector(direction: Direction): Vector2;
     function vector(direction: Direction, z: number): Vector3;
     const VECTORS: Record<Direction, Vector2>;
+    const HORIZONTAL: Record<Direction, boolean>;
+    const VERTICAL: Record<Direction, boolean>;
 }

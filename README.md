@@ -1,23 +1,11 @@
 # Wayward Types
 
-TypeScript declarations for Wayward; used for modding.
-
-* Visit [waywardgame.github.io](https://waywardgame.github.io/) for documentation and an organized view of these types.
-* Visit [github.com/WaywardGame/types/wiki](https://github.com/WaywardGame/types/wiki) for the Wayward Modding Guide.
+TypeScript declarations used for modding Wayward.
 
 ## Usage
 
-### Installing the latest version:
-```
-npm install @wayward/types@latest
-```
+Visit the [Wiki](https://github.com/WaywardGame/types/wiki/mod-create-&-update) of this repository for more information on `+mod create` to create mods and `+mod update` to update preexisting mods.
 
-### Installing a specific version:
-```
-npm install @wayward/types@2.8.0
-```
+## Documentation
 
-### Installing the latest types for the development branch:
-```
-npm install @wayward/types@dev
-```
+Visit [waywardgame.github.io](https://waywardgame.github.io/) for documentation and an organized view of these types.

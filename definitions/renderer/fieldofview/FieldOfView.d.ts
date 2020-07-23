@@ -16,6 +16,7 @@ import { CompiledProgram } from "renderer/Shaders";
 import { IBound3 } from "utilities/math/Bound3";
 import { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
+import Entity from "entity/Entity";
 export interface IFieldOfViewEvents {
     getPlayerFieldOfViewRadius(radius: number, player: Player): number;
 }
@@ -55,7 +56,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> i
     resetTransitionProgress(): void;
     compute(timeStamp: number, force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
-    canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
+    canASeeB(sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, isClientSide?: boolean): boolean;
     getBounds(player: Player, radius?: number): IBound3;
     markAsExplored(player: Player, tiles: IVector2[]): boolean;
     private updateExplored;

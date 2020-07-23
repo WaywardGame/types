@@ -33,6 +33,8 @@ export default class TilePositionInspection extends EventEmitter.Host<ITilePosit
     set(inspectType: InspectType, inspections: HashSet<Inspection<any>>): Map<InspectType, HashSet<Inspection<any>>>;
     [Symbol.iterator](): IterableIterator<[InspectType, HashSet<Inspection<any>>]>;
     types(): import("@wayward/goodstream/Stream").default<InspectType>;
+    register(): void;
+    deregister(): void;
     protected onEntityMove(entity: Entity): void;
     protected onEntitySpawnOrRemove(_: any, entity: Entity): void;
     protected onTileEventMove(_: any, tileEvent: TileEvent): void;
@@ -43,6 +45,7 @@ export default class TilePositionInspection extends EventEmitter.Host<ITilePosit
     protected onDoodadCreate(_: any, doodad: Doodad): void;
     private updateInspectionsForEntity;
     private updateInspections;
+    private updateInspectionsInternal;
     private getInspections;
     private getInspectType;
 }

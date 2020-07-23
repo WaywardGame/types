@@ -152,7 +152,7 @@ export default class Player extends Human {
     updateTables(deferUpdate?: boolean): void;
     updateCraftTable(adjacentContainers?: IContainer[]): void;
     updateDismantleTable(adjacentContainers?: IContainer[]): void;
-    updateTablesAndWeight(deferTableUpdates?: boolean): void;
+    updateTablesAndWeight(source: string, deferTableUpdates?: boolean): void;
     checkReputationMilestones(): void;
     hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
     setTamedCreatureEnemy(enemy: Player | Creature): void;

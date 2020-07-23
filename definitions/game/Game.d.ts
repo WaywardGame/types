@@ -33,6 +33,7 @@ import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import { IVersionInfo } from "utilities/Version";
 import Island from "./Island";
+import Entity from "entity/Entity";
 export default class Game extends EventEmitter.Host<IGameEvents> {
     readonly interval = 16.6666;
     slot: number;
@@ -62,6 +63,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     tickSpeed: number;
     turnMode: TurnMode;
     time: TimeManager;
+    private difficultyOptions;
     saveVersion: string;
     upgrades: string[];
     version: string;
@@ -88,7 +90,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     private _animationTimer;
     private renderingEnabled;
     private _updateRendering;
-    private difficultyOptions;
     private gameOptionsCached?;
     private playOptions;
     private ambientLightLevelCache;
@@ -150,7 +151,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      */
     getAmbientLightLevel(z: number): number;
     updateAmbientLightLevel(z: number): number;
-    calculateAmbientLightLevel(z: number): number;
+    calculateAmbientLightLevel(player: Player | undefined, z: number): number;
     updateReputation(reputation: number): void;
     getGameMode(): GameMode;
     getGameOptionsBeforeModifiers(): IGameOptions;
@@ -189,7 +190,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getPlayersAtPosition(position: IVector3, includeGhosts?: boolean, includeConnecting?: boolean): Player[];
     getPlayersAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): Player[];
     getPlayersThatSeePosition(x: number, y: number, z: number): Player[];
-    canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
+    canASeeB(sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, isClientSide?: boolean): boolean;
     /**
      * Gets the nearest player based on x/y/z coordinates.
      * @param x The x coord to get the closest player.

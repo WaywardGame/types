@@ -12,6 +12,7 @@ import Player from "entity/player/Player";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { IBound3 } from "utilities/math/Bound3";
 import Vector2 from "utilities/math/Vector2";
+import Entity from "entity/Entity";
 export interface IFieldOfView {
     blurEnabled: boolean;
     computeOffset: Vector2;
@@ -21,7 +22,7 @@ export interface IFieldOfView {
     readonly transitionProgress: number;
     texLight: WebGLTexture;
     texLightOld: WebGLTexture;
-    canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
+    canASeeB(sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number): boolean;
     compute(timeStamp: number, force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
     getBounds(player: Player, radius?: number): IBound3;
