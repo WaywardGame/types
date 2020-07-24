@@ -267,6 +267,7 @@ export declare enum FireType {
 export interface ISeeds {
     base: number | string;
     saved: number;
+    milestoneModifierSaved: number;
 }
 export declare enum SaveType {
     InGame = 0,
