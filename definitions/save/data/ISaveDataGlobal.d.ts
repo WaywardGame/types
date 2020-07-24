@@ -14,7 +14,7 @@ import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ISerializedTranslation } from "language/Translation";
 import Bindable from "newui/input/Bindable";
 import { Binding } from "newui/input/Bindings";
-import { UiExperiment } from "newui/UiExperiments";
+import UiExperiment from "newui/UiExperiments";
 import { ISourceFilter } from "utilities/Log";
 export interface IOptions {
     alternateContextMenu: boolean;
@@ -57,7 +57,7 @@ export interface IOptions {
     tooltips: {
         [key in InspectType]: boolean | undefined;
     };
-    uiExperiments: Array<keyof typeof UiExperiment>;
+    uiExperiments: UiExperiment.Any[];
     uiScale: number;
     useAdjacentContainers: boolean;
     useNewCraftingSystem: boolean;

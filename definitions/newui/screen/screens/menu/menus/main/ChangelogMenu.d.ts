@@ -21,6 +21,7 @@ export default class ChangelogMenu extends Menu {
     private refresh;
     private showVersion;
     private appendChangelog;
+    private wrapChangeTextNodes;
     private getChangelogText;
     private sortCards;
 }

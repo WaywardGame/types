@@ -24,6 +24,7 @@ declare module Bindings {
     function add(bindable: Bindable, ...bindings: Binding[]): void;
     function reset(bindable: Bindable): void;
     function clear(bindable: Bindable): void;
+    function resetAll(): void;
     function translate(bindable: Bindable): Translation;
     function markCacheInvalid(): void;
     function getBoundTo(binding: Binding): Set<Bindable>;

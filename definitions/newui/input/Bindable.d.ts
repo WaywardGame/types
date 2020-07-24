@@ -119,7 +119,8 @@ declare enum Bindable {
     DeveloperToggleDeveloperMode = 100,
     DeveloperToggleDeveloperTools = 101,
     DeveloperReloadGame = 102,
-    DeveloperReloadAndContinueGame = 103
+    DeveloperReloadAndContinueGame = 103,
+    DeveloperReloadStylesheets = 104
 }
 export default Bindable;
 export declare enum BindableType {

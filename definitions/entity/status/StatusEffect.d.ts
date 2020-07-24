@@ -112,4 +112,5 @@ export default abstract class StatusEffect extends EventEmitter.Host<IStatusEffe
      * @param color The color of the particle effect
      */
     protected createParticles([countOrChance, color]?: [number, IRGB] | [0]): void;
+    private setupRegistration;
 }

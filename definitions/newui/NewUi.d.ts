@@ -40,7 +40,9 @@ export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     get windowHeight(): number;
     private storageElement;
     private readonly dataHosts;
+    private hqUnsupportedColors;
     constructor();
+    colorSupportsHQFontRendering(colorID?: string | null): boolean;
     /**
      * Returns a new interrupt factory with the given translation data.
      */
@@ -75,6 +77,7 @@ export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     setDialogOpacity(opacity?: number, save?: boolean): void;
     addStylesheet(path: string): void;
     removeStylesheet(path: string): void;
+    reloadStylesheets(): void;
     updateFontStyle(): void;
     updateUIAnimations(): void;
     protected onGlobalSlotLoaded(): void;
@@ -85,6 +88,8 @@ export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     protected onToggleDevMode(): boolean;
     protected onReload(api: IBindHandlerApi): boolean;
     protected onToggleDevTools(): boolean;
+    protected onReloadStylesheets(): boolean;
+    private cacheHQUnsupportedColors;
 }
 declare const newui: NewUi;
 export default newui;

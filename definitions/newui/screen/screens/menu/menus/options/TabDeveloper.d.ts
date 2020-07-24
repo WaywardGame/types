@@ -18,6 +18,7 @@ export default class TabDeveloper extends Tab implements IRefreshable {
     private readonly buttonOpenLogsFolder;
     private readonly buttonToggleDevTools;
     private readonly buttonReloadGame;
+    private readonly buttonReloadStylesheets;
     private readonly blockLogSourceFiltering;
     private readonly blockUIExperiments;
     constructor();

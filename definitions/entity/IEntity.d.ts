@@ -20,6 +20,11 @@ export interface IEntityEvents extends IStatEvents {
      */
     statusChange(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
     /**
+     * Called when the entity is created in the game
+     * Also called for players that "rejoin" the game
+     */
+    created(): void;
+    /**
      * Called when the entity is removed from the game
      */
     removed(): void;

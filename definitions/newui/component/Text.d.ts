@@ -48,7 +48,7 @@ export declare class BasicText extends Component {
     private _link;
     private linkHandler;
     constructor();
-    setText(text: IStringSection | IColorSection | ILinkSection | IFontSizeSection): this;
+    setText(text: PartialUnion<[IStringSection, IColorSection, ILinkSection, IFontSizeSection]>): this;
     setLinkHandler(handler?: (link: string | [string, string | undefined]) => boolean): void;
     private onClick;
 }
