@@ -208,7 +208,10 @@ declare global {
     }
     interface IFileSystem {
         createWriteStream(path: string, opts: any): IFileStream;
-        copy(source: string, destination: string, opt: (file: string) => boolean, cb: (err: string | null | undefined) => void): any;
+        copy(source: string, destination: string, opt: {
+            dereference?: boolean;
+            filter?: (file: string) => boolean;
+        }, cb: (err: string | null | undefined) => void): any;
         emptyDir(destination: string, cb: (err: string | null | undefined) => void): any;
         stat(path: string, cb: (err: string | null | undefined, stats: IFileStat) => void): any;
         statSync(path: string): IFileStat | undefined;
