@@ -10,8 +10,13 @@
  */
 import Entity from "entity/Entity";
 import { StatusType } from "entity/IEntity";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import Component from "newui/component/Component";
+export interface IStatusEffectsEvents extends Events<Component> {
+    update(): any;
+}
 export default class StatusEffects extends Component {
+    readonly event: IEventEmitter<this, IStatusEffectsEvents>;
     private readonly entity;
     private readonly effectIcons;
     constructor(entity: Entity);

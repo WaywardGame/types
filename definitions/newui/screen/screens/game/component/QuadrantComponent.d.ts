@@ -25,6 +25,10 @@ interface IQuadrantComponentEvents extends Events<StaticComponent> {
      * @param componentId The quadrant component to switch with
      */
     switchWith(componentId: QuadrantComponentId): any;
+    /**
+     * Emit this event when the quadrant's position or height changes, this means other quadrants should be resized accordingly.
+     */
+    updatePosition(): any;
 }
 /**
  * An element that displays in one quadrant of the screen.

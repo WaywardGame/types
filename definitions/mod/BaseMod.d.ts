@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
+import EventEmitter, { Events } from "event/EventEmitter";
 import { IModEvents } from "mod/IMod";
 import { ModRegistration, SYMBOL_MOD_REGISTRATIONS } from "mod/ModRegistry";
 import Log from "utilities/Log";
@@ -20,6 +20,7 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
     private allocatedEnums;
     private registeredPackets;
     private readonly subRegistries;
+    private subscribedHandlers;
     constructor(index: number);
     getIndex(): number;
     /**
@@ -55,6 +56,17 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      */
     initializeGlobalData(data: any): any;
     /**
+     * Registers event handlers, injections, and bind handlers. This is called on the `preLoad` event by default,
+     * and the handlers are deregistered on the `unload` event.
+     *
+     * If you call this manually before `preLoad`, it won't be called on `preLoad` and it won't deregister on `unload`.
+     *
+     * Please note that registering handlers when the mod is initialized means that the handlers will *remain
+     * registered even when the user is playing on a server that doesn't support the mod*.
+     */
+    protected registerEventHandlers(...untilEvents: Array<keyof Events<this>>): void;
+    private deregisterEventHandlers;
+    /**
      * Event handler for `ModEvent.Unallocate`.
      */
     private onUnallocate;
@@ -64,7 +76,6 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      * Handles registration of fields decorated with ` @Register.thing`, which occur at `ModRegistrationTime.Initialize`
      */
     private onBeforeInitialize;
-    private onBeforeUninitialize;
     /**
      * Event handler for `ModEvent.PreLoad`.
      *

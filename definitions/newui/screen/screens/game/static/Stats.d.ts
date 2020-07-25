@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Player from "entity/player/Player";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import Component from "newui/component/Component";
 import { Quadrant } from "newui/screen/screens/game/component/IQuadrantComponent";
 import QuadrantComponent from "newui/screen/screens/game/component/QuadrantComponent";
@@ -20,8 +21,12 @@ export default class StatsQuadrant extends QuadrantComponent {
     constructor(host: GameScreen, player: Player);
     setPlayer(player: Player): this;
 }
+export interface IStatsEvents extends Events<Component> {
+    update(): any;
+}
 export declare class Stats extends Component {
     private readonly noEvents?;
+    readonly event: IEventEmitter<this, IStatsEvents>;
     private player;
     constructor(player?: Player, noEvents?: true | undefined);
     setPlayer(player: Player): this;
