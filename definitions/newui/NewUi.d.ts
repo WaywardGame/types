@@ -1,26 +1,30 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
+import { SfxType } from "audio/IAudio";
 import EventEmitter from "event/EventEmitter";
 import Interrupt from "language/dictionary/Interrupt";
 import InterruptChoice from "language/dictionary/InterruptChoice";
 import { IComponent } from "newui/component/IComponent";
 import { IInterruptMenuFactory } from "newui/INewUi";
+import { IBindHandlerApi } from "newui/input/Bind";
 import ScreenManager from "newui/screen/ScreenManager";
+import SelectionHandler from "newui/screen/screens/menu/component/SelectionHandler";
 import TooltipManager from "newui/tooltip/TooltipManager";
 import HighlightManager from "newui/util/HighlightManager";
 import { InterruptOptions } from "newui/util/IInterrupt";
 import InterruptFactory from "newui/util/InterruptFactory";
 import ScaleManager from "newui/util/ScaleManager";
+import Vector2 from "utilities/math/Vector2";
 export interface IUiEvents {
-    resize(): any;
+    resize(viewport: Vector2, oldViewport: Vector2): any;
     interrupt(options: Partial<InterruptOptions>): any;
     interruptClose(options: Partial<InterruptOptions>, result?: string | boolean | InterruptChoice): any;
     loadedFromSave(): any;
@@ -30,13 +34,15 @@ export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     readonly scale: ScaleManager;
     readonly highlights: HighlightManager;
     readonly screens: ScreenManager;
-    private _windowWidth;
+    readonly selection: SelectionHandler;
+    readonly viewport: Vector2;
     get windowWidth(): number;
-    private _windowHeight;
     get windowHeight(): number;
     private storageElement;
     private readonly dataHosts;
+    private hqUnsupportedColors;
     constructor();
+    colorSupportsHQFontRendering(colorID?: string | null): boolean;
     /**
      * Returns a new interrupt factory with the given translation data.
      */
@@ -56,14 +62,7 @@ export declare class NewUi extends EventEmitter.Host<IUiEvents> {
      * Registers an object as a "data host", which allows its fields to be saved to `saveData` or `saveDataGlobal`
      */
     registerDataHost(id: string | number, host: any): void;
-    /**
-     * Plays the "click" sound effect, used for most interface interactions
-     */
-    playActivateSound(): void;
-    /**
-     * Plays the "select" sound effect, used for selecting things in the interface
-     */
-    playSelectSound(): void;
+    playSound(sound: SfxType | "activate" | "select" | "input" | "enable" | "disable"): void;
     /**
      * Toggles fullscreen
      */
@@ -78,12 +77,19 @@ export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     setDialogOpacity(opacity?: number, save?: boolean): void;
     addStylesheet(path: string): void;
     removeStylesheet(path: string): void;
+    reloadStylesheets(): void;
     updateFontStyle(): void;
     updateUIAnimations(): void;
     protected onGlobalSlotLoaded(): void;
     protected onMessage(_: any, fullscreen: boolean): void;
     protected onInterruptClosed(): void;
     protected onLanguageChange(_: any, language: string): void;
+    protected onFullscreen(): boolean;
+    protected onToggleDevMode(): boolean;
+    protected onReload(api: IBindHandlerApi): boolean;
+    protected onToggleDevTools(): boolean;
+    protected onReloadStylesheets(): boolean;
+    private cacheHQUnsupportedColors;
 }
 declare const newui: NewUi;
 export default newui;

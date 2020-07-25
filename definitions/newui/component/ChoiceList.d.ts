@@ -1,15 +1,14 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import { BlockRow } from "newui/component/BlockRow";
 import { CheckButton } from "newui/component/CheckButton";
 import { IDisableable } from "newui/component/IComponent";
@@ -33,11 +32,17 @@ export default class ChoiceList<C extends Choice = Choice, OPTIONAL extends bool
     refresh(): this;
     setRefreshMethod(refreshMethod: (choiceList: this) => OPTIONAL extends true ? C | undefined : C): this;
     choose(chosen?: C): this;
-    findChoice(filter: (choice: C) => boolean): C | undefined;
+    choose(filter?: (choice: C, index: number) => any): this;
+    choices(filter?: (choice: C, index: number) => any): import("@wayward/goodstream/Stream").default<Exclude<C, never>>;
     private onChoiceChange;
+}
+export interface IChoiceEvents extends Events<CheckButton> {
+    chosen(): any;
 }
 export declare class Choice<I extends string | number | undefined = string | number | undefined> extends CheckButton {
     readonly id: I;
+    readonly event: IEventEmitter<this, IChoiceEvents>;
     constructor(id: I);
+    choose(): void;
 }
 export {};

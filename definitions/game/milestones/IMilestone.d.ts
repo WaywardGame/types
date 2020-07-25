@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { GameMode } from "game/options/IGameOptions";
 export declare enum Milestone {
@@ -48,7 +48,9 @@ export declare enum Milestone {
     Huntsman = 35,
     Contender = 36,
     Challenger = 37,
-    DestroyerOfMagi = 38
+    DestroyerOfMagi = 38,
+    Helmsman = 39,
+    Multitasker = 40
 }
 export declare enum MilestoneVisibility {
     Visible = 0,

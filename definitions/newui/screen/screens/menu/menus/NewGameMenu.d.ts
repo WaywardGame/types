@@ -1,24 +1,24 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
-import Input from "newui/component/Input";
+import InputRow from "newui/component/InputRow";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import MilestonesNotUnlockableWarning from "newui/screen/screens/menu/component/MilestonesNotUnlockableWarning";
 import TabGameMode from "newui/screen/screens/menu/menus/newgame/TabGameMode";
 import TabGameplayModifiers from "newui/screen/screens/menu/menus/newgame/TabGameplayModifiers";
 import TabMultiplayer from "newui/screen/screens/menu/menus/newgame/TabMultiplayer";
 export default class NewGameMenu extends Menu {
-    readonly inputName: Input;
-    readonly inputSeed: Input;
+    readonly inputName: InputRow;
+    readonly inputSeed: InputRow;
     readonly milestonesNotUnlockableWarning: MilestonesNotUnlockableWarning;
     readonly tabGameMode: TabGameMode;
     readonly tabMultiplayer: TabMultiplayer;

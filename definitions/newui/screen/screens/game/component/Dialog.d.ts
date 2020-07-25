@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { Events, IEventEmitter } from "event/EventEmitter";
 import UiTranslation from "language/dictionary/UiTranslation";
@@ -15,7 +15,6 @@ import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshable } from "newui/component/Refreshable";
-import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import { DialogId, Edge, IDialogDescription } from "newui/screen/screens/game/Dialogs";
 import { IDialog } from "newui/screen/screens/game/IGameScreenApi";
 import Vector2 from "utilities/math/Vector2";
@@ -28,10 +27,6 @@ export interface IDialogEdges {
     [Edge.Right]: number;
     [Edge.Bottom]: number;
     [Edge.Left]: number;
-}
-export interface ISavedEdges {
-    scale: number;
-    edges: IDialogEdges;
 }
 /**
  * An enum for every position that a dialog handle can be in.
@@ -89,10 +84,14 @@ export default abstract class Dialog extends Component implements IDialog {
     protected body: Component;
     protected header: Header;
     protected footer: Component;
+    private readonly handles;
     private readonly panels;
     private currentPanel;
     private lastPanel;
+    private cachedSnapPositions?;
+    private readonly activeReasons;
     private get visiblePanel();
+    get square(): boolean;
     /**
      * The last edge positions of the dialog. Used when a handle is being moved.
      */
@@ -111,7 +110,6 @@ export default abstract class Dialog extends Component implements IDialog {
     addSettingsPanel(): Component;
     showSettingsPanel(): this;
     resetSizeAndPosition(): void;
-    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * Closes the dialog.
      *
@@ -125,7 +123,7 @@ export default abstract class Dialog extends Component implements IDialog {
     /**
      * Sets the dialog position.
      */
-    setSizeAndPosition(description: IDialogDescription): void;
+    setSizeAndPosition(description?: IDialogDescription<false> | IDialogDescription<true>): void;
     /**
      * Set the position of an edge.
      */
@@ -137,11 +135,16 @@ export default abstract class Dialog extends Component implements IDialog {
     /**
      * Mark that this dialog is "active"
      */
-    markActive(): void;
+    markActive(reason: any): void;
     /**
      * Mark that this dialog is not "active"
      */
-    markInactive(): void;
+    markInactive(reason: any): void;
+    /**
+     * Toggle whether this dialog is "active"
+     */
+    toggleActive(reason: any, active: boolean): void;
+    isActive(): boolean;
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
@@ -150,6 +153,7 @@ export default abstract class Dialog extends Component implements IDialog {
      * Event handler for when this dialog is appended
      */
     protected onAppend(): void;
+    protected onSelect(_: any, component?: Component): void;
     private hideSettingsPanel;
     private saveEdgesForScale;
     /**
@@ -157,19 +161,26 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     private onHandleMoveStart;
     /**
-     * Caches the current edge positions so any resizing/movement knows where it's moving from
-     */
-    private cacheLastEdges;
-    /**
      * Event handler for when a dialog handle finishes being moved.
      */
     private onHandleMoveEnd;
+    /**
+     * Caches the current edge positions so any resizing/movement knows where it's moving from
+     */
+    private cacheLastEdges;
     /**
      * Event handler for when a dialog handle moves.
      * @param handle The handle that moved.
      * @param move The amount that the handle has moved since the movement started.
      */
     private onHandleMove;
+    private setEdgePositionsFromMovementSquare;
+    /**
+     * Clamps the movement of this handle to the same x & y, the smoler between the two
+     */
+    private clampSquareMovement;
+    private getEdgeMovement;
+    private setEdgePositionsFromMovement;
     /**
      * Event handler for when the header is moved.
      * @param move The amount that the header has moved since the movement started.
@@ -198,14 +209,22 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     private clampAxisLength;
     /**
+     * Returns the distance between `edge1` and `edge2` (percentages) in pixels.
+     */
+    private getAxisLengthInPixels;
+    /**
      * Returns the snap position for a given `Edge`, based on where it's moving to.
      */
     private getSnapPositionForEdge;
     /**
-     * Returns the closest snap position for the given edge position, on the given `Axis`,
-     * or `undefined` if there is no snap position within the given snap distance.
+     * Returns the snap positions for the given edge positions, sorted by how close the snap position is.
      */
-    private getClosestSnapPosition;
+    private getClosestSnapPositions;
+    /**
+     * Returns an object for getting all snap positions on each axis.
+     * Each axis's list isn't calculated until requested.
+     */
+    private getSnapPositions;
     /**
      * Gets the snap positions for an axis, which include the positions of the edges of other
      * dialogs and the edges of the screen.
@@ -214,7 +233,7 @@ export default abstract class Dialog extends Component implements IDialog {
      * - `Axis.X` would return the position of `Edge.Left` and `Edge.Right` of each dialog,
      * and `0` and `100`.
      */
-    private getSnapPositions;
+    private getSnapPositionsOfAxis;
     /**
      * Returns the new position of the given `Edge`, after moving the given amount.
      */
@@ -231,13 +250,17 @@ export default abstract class Dialog extends Component implements IDialog {
      * Returns the two edges of the dialog closest to the edges of the viewport, and their positions.
      */
     private getEdges;
-    private getScale;
+    /**
+     * Returns the edge positions (top/left) that would put a dialog of the given size in the centre of the screen.
+     */
+    private getCenterEdges;
     /**
      * Resets the position, causing it to be clamped to the viewport, using its current position
      *
      * Also the event handler for when the viewport resizes
      */
     private correctPosition;
+    private addHandle;
 }
 interface IHandleEvents extends Events<Component> {
     moveStart(): any;
@@ -255,6 +278,7 @@ declare class Handle extends Component {
     private dragStart;
     private drag;
     private dragEnd;
+    private getMousePosition;
 }
 interface IHeaderEvents extends Events<Handle> {
     close(): any;

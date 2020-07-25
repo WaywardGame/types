@@ -1,14 +1,15 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Creature from "entity/creature/Creature";
+import { IDamageInfo } from "entity/creature/ICreature";
 import Human from "entity/Human";
 import { HairColor, HairStyle, IRestData, SkinColor } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
@@ -16,33 +17,39 @@ import { IMessage } from "entity/player/IMessageManager";
 import MessageManager from "entity/player/MessageManager";
 import Player from "entity/player/Player";
 import { Events } from "event/EventEmitter";
-import { Milestone } from "game/milestones/IMilestone";
-import { ItemType, IContainer } from "item/IItem";
+import { IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import { IOptions } from "save/data/ISaveDataGlobal";
 import { Direction } from "utilities/math/Direction";
 import { IVector2 } from "utilities/math/IVector";
 export interface IPlayerEvents extends Events<Human> {
     /**
+     * Called when the player tick starts
+     */
+    tickStart(): any;
+    /**
+     * Called when the player tick ends
+     */
+    tickEnd(): any;
+    /**
      * Called when the player is spawned. (At the end of `Player.setup`)
      */
-    spawn(): void;
+    spawn(): any;
     /**
-     * @param milestone The milestone that is being updated
-     * @param value The new value for this milestone
-     * @param max The max value for this milestone
+     * Claled when the player is restored from the absent state.
+     * This means the player previously stopped playing on the server but is now playing again.
      */
-    milestoneUpdate(milestone: Milestone, value: number, max: number): void;
+    restored(): void;
     /**
      * @param key The key of `IOptions` that was changed on this player
      * @param value The value this key was set to
      */
-    updateOption<O extends keyof IOptions>(key: O, value: IOptions[O]): void;
+    updateOption<O extends keyof IOptions>(key: O, value: IOptions[O]): any;
     /**
      * Called when a message is being disaplyed for a player
      * @param message The message that will be displayed
      */
-    displayMessage(message: IMessage): void;
+    displayMessage(message: IMessage): any;
     /**
      * Called when getting the player's maximum health
      * @param maxHealth The current max health of the player (after any other previous mods)
@@ -54,24 +61,50 @@ export interface IPlayerEvents extends Events<Human> {
      */
     getMaxWeight(maxWeight: number): number;
     /**
+     * Called when the player is damaged
+     * @param damageInfo The damage info object
+     * @returns The amount of damage the player should take (the player will take this damage)
+     */
+    damage(damageInfo: IDamageInfo): number | void;
+    /**
+     * Called when the player will be killed. If any handlers return `false` to stop the player from dying,
+     * no further handlers will be called.
+     * @return `false` to stop the player from dying
+     */
+    shouldDie(): false | void;
+    /**
+     * Called when the player is killed.
+     */
+    die(): any;
+    /**
+     * Called when the player will be respawned. If any handlers return `false` to stop the player from respawning,
+     * no further handlers will be called.
+     * @return `false` to stop the player from respawning
+     */
+    shouldRespawn(): false | void;
+    /**
+     * Called when the player is respawned.
+     */
+    respawn(): false | void;
+    /**
      * Called when an item is added to the player's inventory
      * @param item The item object
      * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
      */
-    inventoryItemAdd(item: Item, container: IContainer): void;
+    inventoryItemAdd(item: Item, container: IContainer): any;
     /**
      * Called when an item is removed from the players inventory
      * @param item The item object
      * @param container The container object the item was moved to.
      */
-    inventoryItemRemove(item: Item, container: IContainer): void;
+    inventoryItemRemove(item: Item, container: IContainer): any;
     /**
      * Called when an item is moved from one container to another, while still in the players inventory.
      * @param item The item object
      * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
      * @param previousContainer The container object the item was moved from. This container might be inventory or a container within the inventory.
      */
-    inventoryItemUpdate(item: Item, container: IContainer, previousContainer?: IContainer): void;
+    inventoryItemUpdate(item: Item, container: IContainer, previousContainer?: IContainer): any;
     /**
      * Called when the players x / y position changes
      * @param x The players x position
@@ -83,6 +116,19 @@ export interface IPlayerEvents extends Events<Human> {
      * @returns The movement intent of the player or undefined to use the default logic
      */
     getMovementIntent(): IMovementIntent | undefined;
+    /**
+     * Called when no input is received
+     */
+    noInput(): any;
+    /**
+     * Called when the walk path of the player changes.
+     */
+    walkPathChange(walkPath: IVector2[] | undefined): any;
+    /**
+     * Called when the player completes a movement
+     */
+    moveComplete(): any;
+    changeZ(z: number, oldZ: number): any;
     /**
      * Called when getting the players weight status
      * @returns The weight status of the player or undefined to use the default logic
@@ -113,7 +159,7 @@ export interface IAttackHand {
     leftHand: number;
     rightHand: number;
 }
-export declare type IPlayerOld = Partial<Player> & {
+export declare type IPlayerOld = Partial<Omit<Player, "customization">> & {
     gender: 0 | 1;
     talent: number;
     stamina: number;
@@ -146,6 +192,8 @@ export declare type IPlayerOld = Partial<Player> & {
     malignity: number;
     exploredMapEncodedData: number[][];
     messages: MessageManager;
+    raft: number | undefined;
+    tamedCreatures: number[];
 };
 export interface IStatsOld {
     health: IStatOld;
@@ -170,6 +218,7 @@ export interface IMobCheck {
     water?: boolean;
     freshWater?: boolean;
     shallowWater?: boolean;
+    noTile?: boolean;
 }
 export declare const setupSpawnItems: ItemType[];
 export declare const setupWaterItems: ItemType[];
@@ -193,9 +242,6 @@ export interface IMovementIntent {
     shouldDisableTurnDelay?: true;
 }
 export interface IPlayerTravelData {
-    starvation: number;
-    dehydration: number;
-    originalHealth: number;
     itemId: number | undefined;
     state: PlayerState;
 }
@@ -209,10 +255,15 @@ export declare enum PlayerState {
 }
 export declare enum WeightStatus {
     None = 0,
-    Overburdened = 1,
-    Encumbered = 2
+    Encumbered = 1,
+    Overburdened = 2
 }
 /**
  * The amount of extra weight the player can hold (added to max health)
  */
 export declare const STRENGTH_BONUS = 25;
+/**
+ * At this weight or more, you are encumbered.
+ * Defaults to 90% (0.9)
+ */
+export declare const WEIGHT_ENCUMBERED = 0.9;

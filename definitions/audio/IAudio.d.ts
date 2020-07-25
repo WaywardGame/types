@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import EnumCursor from "utilities/enum/EnumCursor";
 export interface IAudio {
@@ -24,30 +24,33 @@ export interface IAudio {
 export default IAudio;
 export declare enum SfxType {
     Bow = 0,
-    Craft = 1,
-    Death = 2,
-    Eating = 3,
-    Exceptional = 4,
-    Fail = 5,
-    TreeHit = 6,
-    Hit = 7,
-    Hurt = 8,
-    Miss = 9,
-    CreatureHit = 10,
-    CreatureNoise = 11,
-    PickUp = 12,
-    RockHit = 13,
-    SandstoneHit = 14,
-    Swim = 15,
-    Throw = 16,
-    Trample = 17,
-    Walk = 18,
-    Water = 19,
-    Click = 20,
-    Damaged = 21,
-    Chat = 22,
-    UiSelect = 23,
-    UiActivate = 24
+    Chat = 1,
+    Click = 2,
+    Craft = 3,
+    CreatureHit = 4,
+    CreatureNoise = 5,
+    Damaged = 6,
+    Death = 7,
+    Eating = 8,
+    Exceptional = 9,
+    Fail = 10,
+    Hit = 11,
+    Hurt = 12,
+    Miss = 13,
+    PickUp = 14,
+    RockHit = 15,
+    SandstoneHit = 16,
+    Swim = 17,
+    Throw = 18,
+    Trample = 19,
+    TreeHit = 20,
+    UiActivate = 21,
+    UiDisable = 22,
+    UiEnable = 23,
+    UiInput = 24,
+    UiSelect = 25,
+    Walk = 26,
+    Water = 27
 }
 export declare enum Music {
     Shipwrecked = 0,

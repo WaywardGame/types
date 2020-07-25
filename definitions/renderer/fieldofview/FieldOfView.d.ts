@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
@@ -14,7 +14,9 @@ import IFieldOfView from "renderer/fieldofview/IFieldOfView";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { CompiledProgram } from "renderer/Shaders";
 import { IBound3 } from "utilities/math/Bound3";
-import Vec2 from "utilities/math/Vector2";
+import { IVector2 } from "utilities/math/IVector";
+import Vector2 from "utilities/math/Vector2";
+import Entity from "entity/Entity";
 export interface IFieldOfViewEvents {
     getPlayerFieldOfViewRadius(radius: number, player: Player): number;
 }
@@ -31,7 +33,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> i
     texLightOld: WebGLTexture;
     disabled: boolean;
     blurEnabled: boolean;
-    computeOffset: Vec2;
+    computeOffset: Vector2;
     transitionProgress: number;
     private debugRenderer;
     private texLight01;
@@ -50,12 +52,13 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> i
     getTextureSize(): number;
     getSubdivisions(): number;
     tickSeed(): void;
-    updateTransitionProgress(): boolean;
+    updateTransitionProgress(timeStamp: number): boolean;
     resetTransitionProgress(): void;
-    compute(force?: boolean): void;
+    compute(timeStamp: number, force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
-    canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
+    canASeeB(sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, isClientSide?: boolean): boolean;
     getBounds(player: Player, radius?: number): IBound3;
+    markAsExplored(player: Player, tiles: IVector2[]): boolean;
     private updateExplored;
     private computeLights;
 }

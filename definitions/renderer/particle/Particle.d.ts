@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { IParticle } from "renderer/particle/IParticle";
 import { IRGB } from "utilities/Color";
@@ -28,7 +28,7 @@ export default class Particle implements IParticle {
     createMultiple(tileX: number, tileY: number, tileZ: number, particle: IRGB, count: number, intensity?: number, ignoreFieldOfView?: boolean): void;
     clear(): void;
     simulate(): void;
-    render(x: any, y: any): void;
+    render(x: number, y: number): boolean;
     private findUnusedParticle;
     private spawn;
 }

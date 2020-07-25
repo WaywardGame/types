@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
 import { ICorpse } from "entity/creature/corpse/ICorpse";
@@ -20,7 +20,7 @@ import { IContainer } from "item/IItem";
 import Item from "item/Item";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { PacketType } from "multiplayer/packets/IPacket";
-import { ITileEvent } from "tile/ITileEvent";
+import TileEvent from "tile/TileEvent";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export default abstract class BasePacket {
     protected static registrarId: number;
@@ -81,8 +81,8 @@ export default abstract class BasePacket {
     protected writeMovementIntent(value: IMovementIntent): void;
     protected readItems(): Item[];
     protected writeItems(value: Item[]): void;
-    protected readTileEvent(): ITileEvent | undefined;
-    protected writeTileEvent(value: ITileEvent): void;
+    protected readTileEvent(): TileEvent | undefined;
+    protected writeTileEvent(value: TileEvent): void;
     protected readObject(): any;
     protected writeObject(value: any): void;
     protected readVector2Array(): IVector2[];

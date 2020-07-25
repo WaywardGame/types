@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
 import Creature from "entity/creature/Creature";
@@ -15,13 +15,15 @@ import Human from "entity/Human";
 import { EntityType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import { EquipType, ICheckUnderOptions, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
-import { IMovementIntent, IPlayerEvents, IPlayerTravelData, TurnType, WeightStatus } from "entity/player/IPlayer";
+import { IMovementIntent, IPlayerEvents, TurnType, WeightStatus } from "entity/player/IPlayer";
+import MessageManager from "entity/player/MessageManager";
+import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
 import { StatChangeTimerFactory } from "entity/StatFactory";
 import { IEventEmitter } from "event/EventEmitter";
 import { Milestone } from "game/milestones/IMilestone";
 import { IGameOptionsPlayer } from "game/options/IGameOptions";
-import { ItemType, IContainer, RecipeLevel } from "item/IItem";
+import { IContainer, ItemType, RecipeLevel } from "item/IItem";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -44,12 +46,11 @@ export default class Player extends Human {
     };
     hintSeen: boolean[];
     isConnecting: boolean;
+    lastIslandId: string;
     isMoving: boolean;
     lastAttackedBy: Human | Creature | undefined;
-    movementComplete: boolean;
     movementCompleteZ: number | undefined;
     name: string;
-    noInputReceived: boolean;
     quests: QuestManager;
     quickSlotInfo: IQuickSlotInfo[];
     realTimeTickActionDelay: number;
@@ -57,14 +58,16 @@ export default class Player extends Human {
         [index: number]: boolean;
     };
     spawnPoint: IVector3;
-    tamedCreatures: number[];
-    travelData: IPlayerTravelData | undefined;
+    tamedCreatures: Map<string, number[]>;
     turns: number;
     walkSoundCounter: number;
     milestoneModifiers: Set<Milestone>;
+    messages: MessageManager;
+    notes: NoteManager;
     walkPath: IVector2[] | undefined;
     exploredMap: IExploreMap[] | undefined;
     isMovingClientside: boolean;
+    finishedMovingClientside: boolean;
     wasAbsentPlayer: boolean;
     nextX: number;
     nextY: number;
@@ -78,6 +81,7 @@ export default class Player extends Human {
     private gameOptionsCached?;
     private handEquippedToLast;
     private cachedMovementPenalty?;
+    private updateTablesOnNoInput?;
     constructor(identifier?: string);
     get clientStore(): IClientStore;
     setOptions(options: IOptions): void;
@@ -92,13 +96,12 @@ export default class Player extends Human {
     /**
      * Updates caused by status effects such as bleeding, poison, and burns.
      */
-    updateStatuses(): void;
+    tickStatuses(): void;
     resetMovementStates(): void;
-    setId(id: number): void;
-    setRaft(itemId: number | undefined): boolean;
+    changeId(id: number): void;
+    setPaddling(paddling: boolean, itemId: number): boolean;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkSkillMilestones(): void;
-    staminaCheck(): boolean;
     addMilestone(milestone: Milestone, data?: number, update?: boolean): void;
     getDefaultCarveTool(): Item | undefined;
     isFacingCarvableTile(): boolean;
@@ -135,7 +138,6 @@ export default class Player extends Human {
     setupLoad(): void;
     setup(): void;
     updateReputation(reputation: number): void;
-    checkWeight(): void;
     getWeightStatus(): WeightStatus;
     getWeightOrStaminaMovementPenalty(): number;
     /**
@@ -146,37 +148,46 @@ export default class Player extends Human {
     checkForStill(withWater?: boolean, isLit?: boolean): boolean;
     checkForWell(): boolean;
     checkForGather(): Doodad | undefined;
-    updateTables(): void;
+    onNoInput(): void;
+    updateTables(deferUpdate?: boolean): void;
     updateCraftTable(adjacentContainers?: IContainer[]): void;
     updateDismantleTable(adjacentContainers?: IContainer[]): void;
-    updateTablesAndWeight(): void;
+    updateTablesAndWeight(source: string, deferTableUpdates?: boolean): void;
     checkReputationMilestones(): void;
     hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
     setTamedCreatureEnemy(enemy: Player | Creature): void;
     setPosition(point: IVector3): void;
     getNextPosition(): IVector3;
-    setZ(z: number): void;
+    /**
+     * @param effects If true, adds a delay to the player, clears any particles, and updates the view. (Default: true)
+     */
+    setZ(z: number, effects?: boolean): void;
     isGhost(): boolean;
     isServer(): boolean;
     getName(): Translation;
     canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
+    markAsExplored(points: IVector2[]): boolean | undefined;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateDialogInfo(dialogIndex: string | number): void;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
     passTurn(turnType?: TurnType): void;
     tick(isPassTurn?: boolean): void;
     kill(): void;
+    respawn(): void;
     getMovementProgress(): number;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
     hasWalkPath(): boolean;
     walkAlongPath(path: IVector2[] | undefined): void;
-    processInput(): void;
+    /**
+     * This is only ran on the server
+     */
+    processInput(timeStamp: number): IMovementIntent | undefined;
     /**
      * Returns true if the player changed their facing direction.
      */
     faceDirection(direction: Direction, turnDelay?: number): boolean;
     revealItem(itemType: ItemType): void;
-    getMovementFinishTime(): number;
+    getMovementFinishTime(timeStamp: number): number;
     healthSyncCheck(reason: string): void;
     /**
      * This needs to be called whenever the player's strength requires an update.
@@ -191,9 +202,20 @@ export default class Player extends Human {
      */
     getBarteringBonus(baseCredits: number): number;
     /**
+     * Applies traveling effects to the player
+     * Includes stat loss & item damages
+     */
+    applyTravelingEffects(sailToCivilization?: boolean): void;
+    /**
+     * Check if a position is marked as explored
+     * Only use this clientside
+     */
+    isExploredClientSide(x: number, y: number, z: number): boolean;
+    /**
      * @deprecated Do not call this with players.
      */
     moveTo(): boolean;
+    protected getApplicableStatusEffects(): Set<StatusType>;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
     protected getSkillGainMultiplier(skillType: SkillType): number;
     protected calculateStats(): void;
@@ -227,4 +249,6 @@ export default class Player extends Human {
     private onWriteNote;
     private shouldDisplayMessage;
     private onDisplayMessage;
+    get asNPC(): undefined;
+    get asPlayer(): Player;
 }

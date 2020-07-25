@@ -1,19 +1,19 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { PlayerState } from "entity/player/IPlayer";
-import { GameMode } from "game/options/IGameOptions";
+import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ISerializedTranslation } from "language/Translation";
 import { IMultiplayerState } from "multiplayer/IMultiplayer";
 import IClientStore from "save/clientStore/IClientStore";
-import { IEnumInfo } from "utilities/enum/IEnum";
+import EnumInfo from "utilities/enum/EnumInfo";
 export declare const saveDataVersionUnknown = "Unknown";
 export default class SaveData {
     gameSlotName: string;
@@ -26,6 +26,7 @@ export default class SaveData {
     saveManagerSaveTime: number;
     saveManagerTicks: number;
     saveManagerDifficulty: GameMode;
+    saveManagerOptions: IGameOptions;
     saveManagerScore: number;
     saveManagerOriginalVersion: string;
     saveManagerDeathBy: ISerializedTranslation;
@@ -41,7 +42,7 @@ export default class SaveData {
     multiplayerState: IMultiplayerState;
     multiplayerMessageOfTheDay: string;
     utilitiesEnumsAllocated: {
-        [index: string]: IEnumInfo;
+        [index: string]: EnumInfo;
     };
     clientStore: Map<string, IClientStore>;
 }

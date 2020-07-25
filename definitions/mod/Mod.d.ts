@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { SfxType } from "audio/IAudio";
 import { Command } from "command/ICommand";
@@ -19,25 +19,21 @@ import Human from "entity/Human";
 import { EquipType, SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { IMessage } from "entity/player/IMessageManager";
-import { PlayerState } from "entity/player/IPlayer";
 import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
-import { IMapRequest, TileUpdateType } from "game/IGame";
-import { IInspectionSection } from "game/inspection/IInspection";
+import { IMapRequest } from "game/IGame";
 import "IGlobal";
-import { BookType, ItemType, IContainer } from "item/IItem";
+import { BookType, IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import BaseMod from "mod/BaseMod";
 import { IHookHost } from "mod/IHookHost";
-import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { RenderFlag } from "renderer/IWorldRenderer";
 import { ITile } from "tile/ITerrain";
 import Log from "utilities/Log";
 import { Direction } from "utilities/math/Direction";
-import { IVector2 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
 declare abstract class Mod extends BaseMod implements IHookHost {
     /**
@@ -71,16 +67,11 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onDisplayMessage(player: Player, message: IMessage): void;
     shouldDisplayMessage(player: Player, message: IMessage, messageId: number): boolean | undefined;
     onDoodadSpawn(doodad: Doodad): void;
-    onGameEnd(state: PlayerState): void;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     onGameTickStart(): void;
     onGameTickEnd(): void;
     onEntityKill(attacker: Entity | Doodad, target: Entity): void;
     onHumanSkillChange(human: Human, skill: SkillType, currentSkill: number): void;
-    onInventoryItemAdd(player: Player | undefined, item: Item, container: IContainer): void;
-    onInventoryItemRemove(player: Player | undefined, item: Item, container: IContainer): void;
-    onInventoryItemUpdate(player: Player | undefined, item: Item, container: IContainer): void;
-    onInspectionSection(section: IInspectionSection): void;
     shouldCraft(requirementsMet: boolean, item: ItemType, checker: ItemRecipeRequirementChecker): boolean | undefined;
     onItemDamage(item: Item, modifier?: number): number | undefined;
     onItemEquip(player: Player, item: Item, slot: EquipType): void;
@@ -89,32 +80,23 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onCreatureDeath(creature: Creature): void;
     onCreatureSpawn(creature: Creature): void;
     onCreatureTamed(creature: Creature, owner: Player): void;
-    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     onDigTreasure(human: Human, treasureTile: Vector3): void;
     onLanguageChange(languageName: string): void;
     onMove(player: Player, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
-    onMoveComplete(player: Player): void;
     onMoveDirectionUpdate(human: Human, direction: Direction): void;
-    onNoInputReceived(player: Player): void;
     onNPCDamage(npc: NPC, damageInfo: IDamageInfo): number | undefined;
     onNPCDeath(npc: NPC): boolean | undefined;
     onNPCSpawn(npc: NPC): void;
     onOpenBook(human: Human, book: BookType): void;
     onPickupDoodad(player: Player, doodad: Doodad): void;
-    onPlayerDamage(player: Player, damageInfo: IDamageInfo): number | undefined;
-    onPlayerDeath(player: Player): boolean | undefined;
     onPlayerJoin(player: Player): void;
     onPlayerLeave(player: Player): void;
-    onPlayerTickEnd(player: Player): void;
-    onPlayerTickStart(player: Player): void;
-    onPlayerWalkToTilePath(player: Player, path: IVector2[] | undefined): void;
     onQueueSoundEffect(type: SfxType, x: number, y: number, z: number): SfxType | boolean | undefined;
     onGameScreenVisible(): void;
     onReadMap(human: Human, mapRequest: IMapRequest): void;
     onRenderOverlay(spriteBatch: ISpriteBatch): void;
     onSailToCivilization(player: Player): void;
     onSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
-    onTileUpdate(tile: ITile, x: number, y: number, z: number, updateTile: TileUpdateType): void;
     onTurnEnd(player: Player): void;
     onTurnStart(player: Player): void;
     onUpdateWeight(player: Player, newWeight: number): number | undefined;
@@ -126,17 +108,14 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     postRender(): void;
     postRenderPostProcess(): void;
     postRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
-    postSaveGame(): void;
     preExecuteAction(api: IActionApi, action: IActionDescription, args: any[]): boolean | undefined;
     preLoadWorldDifferences(generateNewWorld: boolean): void;
     preExecuteCommand(player: Player, command: Command, args: string | undefined): boolean | undefined;
     preRender(): void;
     preRenderPostProcess(): void;
     preRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
-    preSaveGame(): void;
     processInput(player: Player): boolean | undefined;
     shouldRender(): RenderFlag | undefined;
-    shouldStopWalkToTileMovement(): boolean | undefined;
 }
 declare module Mod {
     /**

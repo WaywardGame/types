@@ -1,23 +1,22 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { ITileAdaptor } from "renderer/TileAdaptors";
 import Fence from "renderer/tileAdaptors/Fence";
 import Wall from "renderer/tileAdaptors/Wall";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
 import { IBound3 } from "utilities/math/Bound3";
-import Vec2 from "utilities/math/Vector2";
+import Vector2 from "utilities/math/Vector2";
 export interface IWorldRenderer {
     positionBuffer: WebGLBuffer;
-    layers: WorldLayerRenderer[];
-    dirtAdaptor: ITileAdaptor;
+    layers: Record<number, WorldLayerRenderer>;
     tillAdaptor: ITileAdaptor;
     waterAdaptor: ITileAdaptor;
     lavaAdaptor: ITileAdaptor;
@@ -28,15 +27,15 @@ export interface IWorldRenderer {
     defaultAdaptor: ITileAdaptor;
     floorAdaptor: ITileAdaptor;
     updateAll(): void;
-    setSpriteTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
+    setSpriteTexture(texture: WebGLTexture, textureSizeInversed: Vector2): any;
     getPixelSize(): number;
     getZoom(): number;
     getTileScale(): number;
     setTileScale(tileScale: number): void;
     setZoom(zoom: number): void;
-    setViewport(view: Vec2): void;
-    getViewport(): Vec2;
-    getTileViewport(): Vec2;
+    setViewport(view: Vector2): void;
+    getViewport(): Vector2;
+    getTileViewport(): Vector2;
     /**
      * Calculates the ambient color (color of the light), a 3-value tuple of RGB numbers 0-1.
      */
@@ -67,10 +66,11 @@ export interface IWorldRenderer {
     getFogColor(): [number, number, number];
     renderWorld(x: number, y: number, z: number): void;
     render(): void;
-    screenToTile(screenX: number, screenY: number): Vec2;
+    screenToVector(screenX: number, screenY: number): Vector2;
+    screenToTile(screenX: number, screenY: number): Vector2 | undefined;
     getViewportBounds(): IBound3;
     computeSpritesInViewport(): void;
-    batchCreatures(): void;
+    batchMovable(timeStamp: number): void;
     initializeSpriteBatch(layer: SpriteBatchLayer, reset?: true): void;
     dispose(): void;
 }
@@ -78,11 +78,12 @@ export default IWorldRenderer;
 export declare enum SpriteBatchLayer {
     Corpse = 0,
     Item = 1,
-    Creature = 2,
-    TileEvent = 3,
-    CreatureFlying = 4,
-    Overlay = 5,
-    OverTrees = 6
+    ItemMoving = 2,
+    Creature = 3,
+    TileEvent = 4,
+    CreatureFlying = 5,
+    Overlay = 6,
+    OverTrees = 7
 }
 export declare enum RenderFlag {
     None = 0,
@@ -95,4 +96,21 @@ export declare enum RenderFlag {
     OverTrees = 64,
     TileEvent = 128,
     All = 65535
+}
+export declare enum RenderLayerFlag {
+    None = 0,
+    Terrain = 1,
+    TerrainOver = 2,
+    TerrainDecoration = 4,
+    Doodad = 8,
+    DoodadOver = 16,
+    Mod = 32,
+    All = 255
+}
+export declare enum TileLayerType {
+    Terrain = 0,
+    TerrainOver = 1,
+    TerrainDecoration = 2,
+    Doodad = 3,
+    DoodadOver = 4
 }

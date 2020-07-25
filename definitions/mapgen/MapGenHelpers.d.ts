@@ -1,22 +1,20 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { DoodadType } from "doodad/IDoodad";
-import { ITile, TerrainType, TileTemplateType } from "tile/ITerrain";
+import { MapGenVersions } from "mapgen/IMapGen";
+import { ITile, TileTemplateType } from "tile/ITerrain";
+export declare function pickBasedOnVersion<T>(version: string, versions: MapGenVersions<T>): [string, T];
 export declare function hasFinishedLoading(): boolean;
 export declare function setFinishedLoading(): void;
 export declare function clearFinishedLoading(): void;
-export declare function spawnHouseItem(x: number, y: number, z: number): void;
-export declare function spawnShoreItem(x: number, y: number, z: number): void;
-export declare function spawnDesertItem(x: number, y: number, z: number): void;
-export declare function spawnDoodad(tileType: TerrainType, x: number, y: number, z: number, afterMapGen?: boolean): void;
 export declare function spawnTileEvent(x: number, y: number, z: number): void;
 export interface ITemplateOptions {
     /**

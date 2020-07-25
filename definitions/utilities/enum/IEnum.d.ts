@@ -1,18 +1,37 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 export declare module EnumProperty {
     const NAME: unique symbol;
     const OFFICIAL_MAX: unique symbol;
     const MOD_START: unique symbol;
-    const LENGTH: unique symbol;
+    const EXCLUDED: unique symbol;
+    const KEYS: unique symbol;
+    const VALUES: unique symbol;
+    const ENTRIES: unique symbol;
+}
+export declare type EnumObject<T> = T & {
+    [EnumProperty.NAME]?: string;
+    [EnumProperty.OFFICIAL_MAX]?: number;
+    [EnumProperty.MOD_START]?: number;
+    [EnumProperty.EXCLUDED]?: Set<keyof T>;
+    [EnumProperty.KEYS]?: Array<keyof T>;
+    [EnumProperty.VALUES]?: Array<T[keyof T]>;
+    [EnumProperty.ENTRIES]?: Array<[keyof T, T[keyof T]]>;
+};
+export declare module EnumObject {
+    function get<E>(enumObject: E): EnumObject<E>;
+    /**
+     * Sets the enum keys that won't be iterated over in the enum.
+     */
+    function setExcluded<E>(enumObject: E, ...keys: Array<keyof E>): void;
 }
 export declare enum EnumId {
     CreatureType = 0,
@@ -35,28 +54,21 @@ export declare enum EnumId {
     MenuBarButton = 17,
     CorpseType = 18,
     TileEventType = 19,
-    OverlayType = 20,
-    MessageSource = 21,
-    NPCType = 22,
-    HelpArticle = 23,
-    Note = 24,
-    Dialog = 25,
-    InterruptChoice = 26,
-    ItemTypeGroup = 27,
-    InspectType = 28,
-    Quest = 29,
-    QuestRequirement = 30,
-    TerrainDecoration = 31,
-    Interrupt = 32,
-    Recipe = 33,
-    DoodadTypeGroup = 34
-}
-export interface IEnumInfo {
-    enumId: EnumId;
-    enumName: string;
-    enumNumber: number;
-    name: string;
-    onUnallocate?: ((index: number) => void);
-    modIndex?: number;
-    modName?: string;
+    TileLayer = 20,
+    OverlayType = 21,
+    MessageSource = 22,
+    NPCType = 23,
+    HelpArticle = 24,
+    Note = 25,
+    Dialog = 26,
+    InterruptChoice = 27,
+    ItemTypeGroup = 28,
+    InspectType = 29,
+    Quest = 30,
+    QuestRequirement = 31,
+    TerrainDecoration = 32,
+    Interrupt = 33,
+    Recipe = 34,
+    DoodadTypeGroup = 35,
+    WorldLayer = 36
 }

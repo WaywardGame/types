@@ -1,17 +1,16 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { Events, IEventEmitter } from "event/EventEmitter";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
-import { IInput } from "newui/component/IInput";
 import { IRefreshable } from "newui/component/Refreshable";
 export declare enum ClearType {
     UseDefault = 0,
@@ -19,8 +18,20 @@ export declare enum ClearType {
     NotDefault = 2,
     Empty = 3
 }
-export default class Input extends Component implements IRefreshable, IInput {
-    event: IEventEmitter<this, Events<IInput>>;
+export interface IInputEvents extends Events<Component> {
+    change(text: string): any;
+    changeDebounced(text: string): any;
+    done(text: string): any;
+    enterBind(): any;
+    escape(): any;
+    focus(): any;
+    blur(): any;
+    upArrow(): any;
+    downArrow(): any;
+    toggleDisabled(disabled: boolean): any;
+}
+export default class Input extends Component implements IRefreshable {
+    event: IEventEmitter<this, IInputEvents>;
     default: (() => string) | undefined;
     private lastInput;
     get text(): string;
@@ -38,7 +49,10 @@ export default class Input extends Component implements IRefreshable, IInput {
     get changed(): boolean;
     private readonly input;
     private readonly wrapperButtons;
+    private readonly _disabledReasons;
+    get disabled(): boolean;
     constructor(type?: "input" | "textarea");
+    setDisabled(val?: boolean, reason?: string): this;
     addClearButton(): this;
     addResetButton(): this;
     setMaxLength(maxLength?: number): this;
@@ -48,19 +62,17 @@ export default class Input extends Component implements IRefreshable, IInput {
     setClearToEmpty(): this;
     setClearToLastInput(): this;
     setPlaceholder(generator: TranslationGenerator): this;
-    /**
-     * @deprecated Use `setShouldBlurOnEnterAndEmpty`
-     */
-    setShouldBlurWhenEnterPressedAndEmpty(shouldBlurOnEnterAndEmpty?: boolean): this;
     setBlurOnEnterAndEmpty(shouldBlurOnEnterAndEmpty?: boolean): this;
-    /**
-     * @deprecated Use `setShouldBlurOnEnter`
-     */
-    setBlurWhenEnterPressed(shouldBlurOnEnter?: boolean): this;
     setBlurOnEnter(shouldBlurOnEnter?: boolean): this;
     setNotClearOnEscape(shouldNotClearOnEscape?: boolean): this;
     setSelectOnFocus(selectOnFocus?: boolean): this;
     refresh(): this;
+    /**
+     * Sets the text in this input
+     * @param text The new text
+     * @param triggerEvent Whether to trigger the change event for this input (defaults to `true`)
+     */
+    setText(text: string, triggerEvent?: boolean): this;
     /**
      * Reset the text of the input to the default, or to the clearTo option if that was provided
      * @param clearType `ClearType.UseDefault` to force using default, `ClearType.NotDefault` to prevent using default, `ClearType.Auto` otherwise. Defaults to `ClearType.Auto`

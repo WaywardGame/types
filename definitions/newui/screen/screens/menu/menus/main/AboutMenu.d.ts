@@ -1,23 +1,16 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Menu from "newui/screen/screens/menu/component/Menu";
-export declare enum Responsibility {
-    Programming = 0,
-    Design = 1,
-    Web = 2,
-    Art = 3,
-    PR = 4,
-    UX = 5,
-    Music = 6
-}
+import { Website } from "newui/screen/screens/menu/menus/main/component/IWebsite";
+import { Responsibility } from "newui/screen/screens/menu/menus/main/IAbout";
 interface IPerson {
     firstName: string;
     lastName?: string;
@@ -27,6 +20,7 @@ interface IPerson {
 interface ITeamMember extends IPerson {
     responsibilities: Responsibility[];
     isCurrentMember?: true;
+    links?: Array<[Website, string]>;
 }
 export declare const teamMembers: ITeamMember[];
 export default class AboutMenu extends Menu {

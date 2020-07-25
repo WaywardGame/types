@@ -1,21 +1,17 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import InterruptChoice from "language/dictionary/InterruptChoice";
-import { HighlightSelector, IComponent, IHighlight, ITooltip, TranslationGenerator } from "newui/component/IComponent";
-import { IInput } from "newui/component/IInput";
+import { HighlightSelector, IComponent, IHighlight, TranslationGenerator } from "newui/component/IComponent";
+import Input from "newui/component/Input";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
-export interface ITooltipManager {
-    show(host: IComponent, force?: boolean): ITooltip | undefined;
-    hide(host?: IComponent): void;
-}
 export declare enum SaveLocation {
     /**
      * Used to mark a field to be saved locally (per save)
@@ -41,7 +37,7 @@ export interface IInterruptFactory extends IInterruptMenuFactory {
     withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;
     withConfirmation(): Promise<boolean>;
     withInfo(): Promise<void>;
-    withInput(inputInitializer?: (input: IInput) => any): Promise<string>;
+    withInput(inputInitializer?: (input: Input) => any): Promise<string>;
     withLoading(until?: Promise<any> | (() => Promise<any>), canCancel?: boolean | (NullaryFunction), specialType?: string): Promise<InterruptChoice | undefined>;
 }
 export interface IInterruptMenuFactory {

@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "entity/action/IAction";
 import { AiType } from "entity/IEntity";
@@ -19,10 +19,11 @@ export default class MerchantNPC extends NPC {
     update(): void;
     getActions(): ActionType[] | undefined;
     protected getReputationChangeOnDeath(): number;
-    protected getDefaultName(): string;
+    protected getDefaultName(): import("../../../language/Translation").default;
     protected initializeStats(): void;
     protected getDefaultCustomization(): ICustomizations;
     protected getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;
     protected getDefaultInventory(): Array<Item | ItemType>;
     protected getDefaultAiType(): AiType;
+    private canSpawnItem;
 }

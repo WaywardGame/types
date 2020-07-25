@@ -6,7 +6,7 @@
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import "@wayward/goodstream/apply";
 import WAudio from "audio/Audio";
@@ -17,6 +17,7 @@ import FlowFieldManager from "entity/flowfield/FlowFieldManager";
 import NPCManager from "entity/npc/NPCManager";
 import Player from "entity/player/Player";
 import Game from "game/Game";
+import Island from "game/Island";
 import { ItemType } from "item/IItem";
 import ItemManager from "item/ItemManager";
 import LanguageManager from "language/LanguageManager";
@@ -42,7 +43,6 @@ import { ISortable, ISortableOptions } from "ui/functional/IFunctionalSortable";
 import { ITooltip, ITooltipOptions } from "ui/functional/IFunctionalTooltip";
 import Ui from "ui/Ui";
 import "utilities/prototype/Array";
-import "utilities/prototype/Map";
 import "utilities/prototype/Promise";
 import "utilities/typesglobal/Class";
 import "utilities/typesglobal/Descriptions";
@@ -50,7 +50,7 @@ import "utilities/typesglobal/Function";
 import "utilities/typesglobal/Iterables";
 import "utilities/typesglobal/Misc";
 import "utilities/typesglobal/Objects";
-import "utilities/typesglobal/Writable";
+import "utilities/typesglobal/Types";
 declare global {
     interface IRequire {
         s: any;
@@ -72,6 +72,7 @@ declare global {
     let flowFieldManager: FlowFieldManager;
     let game: Game;
     let hookManager: HookManager;
+    let island: Island;
     let itemManager: ItemManager;
     let languageManager: LanguageManager;
     let localPlayer: Player;
@@ -116,20 +117,6 @@ declare global {
      * WARNING: This also binds the method to the host, a la `@Bound`. Do not use both decorators.
      */
     function Debounce(ms: number): <T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>) => TypedPropertyDescriptor<T> | void;
-    interface AsyncIterator<T> {
-        next(value?: any): Promise<IteratorResult<T>>;
-        return?(value?: any): Promise<IteratorResult<T>>;
-        throw?(e?: any): Promise<IteratorResult<T>>;
-    }
-    interface AsyncIterable<T> {
-        [Symbol.asyncIterator](): AsyncIterator<T>;
-    }
-    interface AsyncIterableIterator<T> extends AsyncIterator<T> {
-        [Symbol.asyncIterator](): AsyncIterableIterator<T>;
-    }
-    interface SymbolConstructor {
-        readonly asyncIterator: unique symbol;
-    }
     interface CallableFunction extends Function {
         bind<T, A0, A1, A2, A3, A4, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4): (...args: A) => R;
         bind<T, A0, A1, A2, A3, A4, A5, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5): (...args: A) => R;
@@ -269,7 +256,8 @@ declare global {
         shutdown(): void;
         runCallbacks(): void;
         setOnJoinCallback(callback: (server: string) => void): void;
-        updatePresence(presenceInfo: INapiDiscordPresenceInfo): void;
+        setOnErrorCallback(callback: (error: string | number) => void): void;
+        updatePresence(presenceInfo: INapiDiscordPresenceInfo): Promise<number> | void;
     }
     interface INapiDiscordPresenceInfo {
         details: string;

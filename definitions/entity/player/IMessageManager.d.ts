@@ -1,18 +1,18 @@
 /*!
-* Copyright Unlok, Vaughn Royko 2011-2019
+* Copyright Unlok, Vaughn Royko 2011-2020
 * http://www.unlok.ca
 *
 * Credits & Thanks:
 * http://www.unlok.ca/credits-thanks/
 *
 * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
-* https://waywardgame.github.io/
+* https://github.com/WaywardGame/types/wiki
 */
 import Human from "entity/Human";
-import { MessageType } from "entity/player/MessageManager";
 import Message from "language/dictionary/Message";
 import { ISerializedTranslation } from "language/Translation";
 import { IVector3 } from "utilities/math/IVector";
+import { IStringSection } from "utilities/string/Interpolator";
 export declare enum Source {
     /**
      * Every message
@@ -103,4 +103,21 @@ export interface IMessageManager {
     type(type?: MessageType): this;
     ifVisible(human?: Human, canSee?: IVector3): this;
     send(message: Message, ...args: any[]): boolean;
+}
+export interface IMessageHistoryItem {
+    id: number;
+    source: string[];
+    time: number;
+    turn: number;
+    type?: MessageType;
+    message: ISerializedTranslation | IStringSection[];
+}
+export declare enum MessageType {
+    None = 0,
+    Bad = 1,
+    Good = 2,
+    Miss = 3,
+    Attack = 4,
+    Stat = 5,
+    Skill = 6
 }

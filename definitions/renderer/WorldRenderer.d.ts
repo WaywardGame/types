@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Creature from "entity/creature/Creature";
 import NPC from "entity/npc/NPC";
@@ -68,8 +68,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     positionTextureBuffer: WebGLBuffer;
     positionBuffer: WebGLBuffer;
     ditherTexture: WebGLTexture;
-    layers: WorldLayerRenderer[];
-    dirtAdaptor: ITileAdaptor;
+    layers: Record<number, WorldLayerRenderer>;
     tillAdaptor: ITileAdaptor;
     waterAdaptor: ITileAdaptor;
     lavaAdaptor: ITileAdaptor;
@@ -94,6 +93,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private readonly vertexArraySingle;
     private readonly vertexArrayDouble;
     private itemBatch;
+    private itemMovingBatch;
     private corpseBatch;
     private creatureBatch;
     private tileEventBatch;
@@ -125,16 +125,17 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     getFogColor(): [number, number, number];
     renderWorld(x: number, y: number, z: number): void;
     render(): void;
-    screenToTile(screenX: number, screenY: number): Vector2;
+    screenToVector(screenX: number, screenY: number): Vector2;
+    screenToTile(screenX: number, screenY: number): Vector2 | undefined;
     getViewportBounds(): {
         min: Vector2;
         max: Vector2;
         z: number;
     };
     computeSpritesInViewport(): void;
-    batchCreatures(): void;
+    batchMovable(timeStamp: number): boolean | undefined;
     private batchCreature;
-    private isFlyingOffset;
+    private getFlyingOffset;
     private batchShadow;
     private batchPlayers;
     private batchHuman;
@@ -147,6 +148,8 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
      */
     private renderStatusEffect;
     private spriteBatchForLayer;
-    private shouldOffsetFlying;
     private computeSpritesInViewportInternal;
+    private batchItems;
+    private batchItem;
+    private batchTileEvents;
 }

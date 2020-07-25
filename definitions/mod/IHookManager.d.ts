@@ -1,20 +1,16 @@
 /**
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { IHookHost } from "mod/IHookHost";
 export declare enum Hook {
-    OnBindLoop = "onBindLoop",
     OnBuild = "onBuild",
-    OnContainerItemAdd = "onContainerItemAdd",
-    OnContainerItemRemove = "onContainerItemRemove",
-    OnContainerItemUpdate = "onContainerItemUpdate",
     OnCraft = "onCraft",
     OnCreateWorld = "onCreateWorld",
     OnCreatureDamage = "onCreatureDamage",
@@ -25,42 +21,32 @@ export declare enum Hook {
     OnDisplayMessage = "onDisplayMessage",
     OnDoodadSpawn = "onDoodadSpawn",
     OnEntityKill = "onEntityKill",
-    OnGameEnd = "onGameEnd",
     OnGameScreenVisible = "onGameScreenVisible",
     OnGameStart = "onGameStart",
     OnGameTickEnd = "onGameTickEnd",
     OnGameTickStart = "onGameTickStart",
     OnHumanSkillChange = "onHumanSkillChange",
-    OnInspectionSection = "onInspectionSection",
-    OnInventoryItemAdd = "onInventoryItemAdd",
-    OnInventoryItemRemove = "onInventoryItemRemove",
-    OnInventoryItemUpdate = "onInventoryItemUpdate",
     OnItemDamage = "onItemDamage",
     OnItemEquip = "onItemEquip",
     OnItemQuickslot = "onItemQuickslot",
     OnLanguageChange = "onLanguageChange",
     OnMove = "onMove",
-    OnMoveComplete = "onMoveComplete",
     OnMoveDirectionUpdate = "onMoveDirectionUpdate",
-    OnNoInputReceived = "onNoInputReceived",
     OnNPCDamage = "onNPCDamage",
     OnNPCDeath = "onNPCDeath",
     OnNPCSpawn = "onNPCSpawn",
     OnOpenBook = "onOpenBook",
     OnPickupDoodad = "onPickupDoodad",
-    OnPlayerDamage = "onPlayerDamage",
-    OnPlayerDeath = "onPlayerDeath",
     OnPlayerJoin = "onPlayerJoin",
     OnPlayerLeave = "onPlayerLeave",
-    OnPlayerTickEnd = "onPlayerTickEnd",
-    OnPlayerTickStart = "onPlayerTickStart",
-    OnPlayerWalkToTilePath = "onPlayerWalkToTilePath",
+    /**
+     * @deprecated
+     */
     OnQueueSoundEffect = "onQueueSoundEffect",
     OnReadMap = "onReadMap",
     OnRenderOverlay = "onRenderOverlay",
     OnSailToCivilization = "onSailToCivilization",
     OnSpawnCreatureFromGroup = "onSpawnCreatureFromGroup",
-    OnTileUpdate = "onTileUpdate",
     OnTurnEnd = "onTurnEnd",
     OnTurnStart = "onTurnStart",
     OnUpdateWeight = "onUpdateWeight",
@@ -72,25 +58,16 @@ export declare enum Hook {
     PostRender = "postRender",
     PostRenderPostProcess = "postRenderPostProcess",
     PostRenderWorld = "postRenderWorld",
-    /**
-     * @deprecated Does not work for all cases. Use the event `"postSaveGame"` instead. IE `event.subscribe("postSaveGame")`
-     */
-    PostSaveGame = "postSaveGame",
     PreExecuteAction = "preExecuteAction",
     PreExecuteCommand = "preExecuteCommand",
     PreLoadWorldDifferences = "preLoadWorldDifferences",
     PreRender = "preRender",
     PreRenderPostProcess = "preRenderPostProcess",
     PreRenderWorld = "preRenderWorld",
-    /**
-     * @deprecated Does not work for all cases. Use the event `"preSaveGame"` instead. IE `event.subscribe("preSaveGame")`
-     */
-    PreSaveGame = "preSaveGame",
     ProcessInput = "processInput",
     ShouldCraft = "shouldCraft",
     ShouldDisplayMessage = "shouldDisplayMessage",
-    ShouldRender = "shouldRender",
-    ShouldStopWalkToTileMovement = "shouldStopWalkToTileMovement"
+    ShouldRender = "shouldRender"
 }
 export declare const globalHooks: Hook[];
 export declare enum HookPriority {

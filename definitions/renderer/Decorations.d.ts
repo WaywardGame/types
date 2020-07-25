@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { IModdable } from "mod/ModRegistry";
 import IWorldLayer from "renderer/IWorldLayer";
@@ -26,7 +26,9 @@ export declare enum TerrainDecoration {
     Clay = 10,
     Gravel = 11,
     RockGround = 12,
-    SandstoneGround = 13
+    SandstoneGround = 13,
+    FreshWaterIce = 14,
+    SeawaterIce = 15
 }
 export declare enum TerrainDecorationStatus {
     None = 0,

@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
 import { IPlayOptions } from "game/IGame";
@@ -27,7 +27,7 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     isMultiplayerClientSide(index: number): boolean;
     isMultiplayerServerSide(index: number): boolean;
     isUnloadable(index: number): boolean;
-    unloadAll(reset?: boolean): Promise<void>;
+    unloadAll(resetState?: boolean): Promise<void>;
     setupMods(): Promise<void>;
     saveAll(): void;
     getFile(modIndex: number, file: string, callback: (data: string, success: boolean) => void): boolean;

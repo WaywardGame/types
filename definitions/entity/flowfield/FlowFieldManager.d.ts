@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { IFlowField } from "entity/flowfield/IFlowField";
 import { DebugRendererDelegate } from "entity/flowfield/IFlowFieldDebugRenderer";
@@ -21,7 +21,7 @@ export default class FlowFieldManager implements IFlowFieldManager {
     flowFields: {
         [index: string]: IFlowField;
     };
-    private plys;
+    private flowFieldPlayers;
     constructor(size: number);
     delete(): void;
     setDelegate(delegate: DebugRendererDelegate): void;
@@ -32,7 +32,7 @@ export default class FlowFieldManager implements IFlowFieldManager {
     getMoveDirection(x: number, y: number, z: number, moveType: MoveType): Direction;
     getOpposingMoveDirection(x: number, y: number, z: number, moveType: MoveType): Direction;
     updateTile(tileX: number, tileY: number, tileZ: number): void;
-    setPlayers(plys: Player[]): void;
+    setPlayers(flowFieldPlayers: Player[]): void;
     update(): void;
     reset(): void;
     private getDirection;

@@ -1,15 +1,15 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { EquipType } from "entity/IHuman";
-import { ItemType, IContainer, IDismantleComponent } from "item/IItem";
+import { IContainer, IDismantleComponent, ItemType } from "item/IItem";
 import Item from "item/Item";
 import "ui/functional/FunctionalSortable";
 import "ui/functional/FunctionalTooltip";
@@ -80,6 +80,7 @@ export default class Ui extends Emitter {
     private onBeforeUnloadElectron;
     private onBeforeUnloadBrowser;
     private logErrorEvent;
+    private logPromiseRejectionEvent;
     private removeStyle;
     private appendStyle;
 }

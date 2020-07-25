@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
 import { ActionType } from "entity/action/IAction";
@@ -14,9 +14,11 @@ import { ICausesDamage, ICausesStatusEffect } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { ILootItem } from "game/ILoot";
 import { IObjectDescription, IObjectOptions } from "game/IObject";
-import { ItemType, IItemLegendary } from "item/IItem";
+import { IItemLegendary, ItemType } from "item/IItem";
 import Item from "item/Item";
+import { LootGroupType } from "item/LootGroups";
 import { IModdable } from "mod/ModRegistry";
+import { TileLayerType } from "renderer/IWorldRenderer";
 import { TerrainType } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
 export interface IDoodadOptions extends IObjectOptions {
@@ -24,7 +26,6 @@ export interface IDoodadOptions extends IObjectOptions {
     stillContainer?: Item;
     gfx?: number;
     spread?: number;
-    treasure?: boolean;
     weight?: number;
     legendary?: IItemLegendary;
     disassembly?: Item[];
@@ -37,9 +38,10 @@ export declare type IDoodadOld = Partial<Doodad> & {
     growInto?: DoodadType;
 };
 export interface IDoodadGroupDescription {
-    name: string;
-    prefix?: string;
-    suffix?: string;
+    /**
+     * Whether this group is hidden to the player. Defaults to `false`
+     */
+    hidden?: boolean;
 }
 export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatusEffect, ICausesDamage {
     actionTypes?: ActionType[];
@@ -67,7 +69,6 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     isFlammable?: boolean;
     isFungi?: boolean;
     isGate?: boolean;
-    isLocked?: boolean;
     isTall?: boolean;
     isTrap?: boolean;
     isTree?: boolean;
@@ -88,6 +89,42 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     trapDamage?: number;
     waterStill?: boolean;
     durability?: number;
+    leftOver?: DoodadType;
+    lockedChest?: ILockedChest;
+    tileLayerType?: TileLayerType;
+    tileOverLayerType?: TileLayerType;
+    itemStackOffset?: number;
+    itemStackRegion?: IItemStackRegion | ((doodad: Doodad) => IItemStackRegion | undefined);
+    getVariationX?(doodad: Doodad, existingVariationX: number): number | undefined;
+    getVariationY?(doodad: Doodad, existingVariationY: number): number | undefined;
+}
+export interface IItemStackRegion {
+    xMin?: number;
+    xMax?: number;
+    yMin?: number;
+    yMax?: number;
+}
+export interface ILockedChest {
+    /**
+     * Loot groups that gets generated inside a chest.
+     */
+    lootGroups?: LootGroupType[];
+    /**
+     * Modifies the quality of the items in the chest based on itemManager.getRandomQuality(). The higher the better.
+     */
+    lootQuality?: number;
+    /**
+     * Doodad type that it gets reverted to when unlocked.
+     */
+    unlockedDoodadType?: DoodadType;
+    /**
+     * Modifies the difficulty when attempting to lockpick the locked doodad based on skill checks.
+     */
+    lockPickingDifficulty?: number;
+    /**
+     * Number of potential guardian group creatures spawned when unlocking the chest.
+     */
+    guardiansSpawned?: number;
 }
 export interface IDoodadParticles {
     [index: number]: IRGB;
@@ -196,7 +233,15 @@ export declare enum DoodadType {
     ClayWell = 97,
     SandstoneWell = 98,
     StoneWell = 99,
-    AshCementWall = 100
+    AshCementWall = 100,
+    SpruceTreeWithSnow = 101,
+    CrowberryShrub = 102,
+    WinterberryShrub = 103,
+    ArcticPoppies = 104,
+    LockedCopperChest = 105,
+    LockedWroughtIronChest = 106,
+    LockedIronChest = 107,
+    LockedOrnateWoodenChest = 108
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,
@@ -213,7 +258,8 @@ export declare enum DoodadTypeGroup {
     LightDevice = 411,
     LightSource = 412,
     LitStructure = 413,
-    Last = 414
+    LockedChest = 414,
+    Last = 415
 }
 export declare enum DoorOrientation {
     Default = 0,

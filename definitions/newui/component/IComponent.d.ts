@@ -1,15 +1,14 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
-import { Events } from "event/EventEmitter";
-import EventEmitter, { IEventEmitter } from "event/EventEmitter";
+import EventEmitter, { Events, IEventEmitter } from "event/EventEmitter";
 import { Dictionary } from "language/Dictionaries";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation, { ISerializedTranslation } from "language/Translation";
@@ -19,9 +18,10 @@ import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulat
 import { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import { IStringSection } from "utilities/string/Interpolator";
-interface IComponentEvents {
+export interface IComponentEvents {
     show(): any;
     hide(): any;
+    toggleVisible(visible: boolean): any;
     append(to: HTMLElement | IComponent): any;
     remove(): any;
     removeForAppend(): any;
@@ -33,22 +33,27 @@ interface IComponentEvents {
      */
     willRemove(): boolean | void;
     regenerateBox(box: IBox): any;
+    enter(reason: "mouse" | "focus"): any;
+    leave(reason: "mouse" | "focus"): any;
+    focus(): any;
+    blur(): any;
+    removeContextMenu(): any;
 }
 export declare type AppendStrategy = "append" | "prepend" | {
-    after: IComponent;
+    after: IComponent | string;
 } | {
-    before: IComponent;
+    before: IComponent | string;
 } | {
     sorted(a: Component, b: Component): number;
 };
 export declare module AppendStrategy {
     const Append = "append";
     const Prepend = "prepend";
-    function after(component: IComponent): {
-        after: IComponent;
+    function after(component: IComponent | string): {
+        after: string | IComponent;
     };
-    function before(component: IComponent): {
-        before: IComponent;
+    function before(component: IComponent | string): {
+        before: string | IComponent;
     };
     /**
      * A strategy that will use a sorting function in order to find the position the component should be placed.
@@ -227,10 +232,11 @@ export declare enum Namespace {
     SVG = "http://www.w3.org/2000/svg"
 }
 export declare enum SelectableLayer {
-    Primary = 0,
-    Secondary = 1,
-    Tertiary = 2,
-    Quaternary = 3
+    Screen = 0,
+    Menu = 1,
+    Dialog = 2,
+    Interactable = 3,
+    SubInteractable = 4
 }
 export interface IBaseTranslationData {
     dictionary: Dictionary;
@@ -259,6 +265,7 @@ export declare enum TooltipLocation {
 }
 export interface ITooltipEvents extends IComponentEvents {
     move(position: Vector2): any;
+    setLocation(location: TooltipLocation): any;
 }
 export interface ITooltip extends IComponent {
     event: IEventEmitter<this, ITooltipEvents>;
@@ -279,7 +286,7 @@ export interface IDisableable {
     setDisabled(disabled: boolean): this;
 }
 export declare type TranslationGenerator = Translation | UiTranslation | ISerializedTranslation | (() => Iterable<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined);
-export declare type HighlightSelector = [HighlightType, string | number];
+export declare type HighlightSelector = [HighlightType, GetterOfOr<string | number>];
 export interface IHighlight {
     selectors: HighlightSelector[];
     iterations?: number;
@@ -287,14 +294,15 @@ export interface IHighlight {
 export declare enum HighlightType {
     Stat = 0,
     MenuBarButton = 1,
-    Selector = 2
+    Selector = 2,
+    Skill = 3
 }
 export interface IBox {
-    bottom: number;
-    height: number;
     left: number;
-    right: number;
     top: number;
     width: number;
+    height: number;
+    readonly bottom: number;
+    readonly right: number;
 }
 export {};

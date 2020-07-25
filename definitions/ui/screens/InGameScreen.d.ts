@@ -1,19 +1,19 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { EquipType, SkillType } from "entity/IHuman";
-import { ItemType, IContainer, IDismantleComponent } from "item/IItem";
+import { IContainer, IDismantleComponent, ItemType } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import Message from "language/dictionary/Message";
-import { Bindable, BindCatcherApi } from "newui/IBindingManager";
+import { IBindHandlerApi } from "newui/input/Bind";
 import { SortType } from "SortType";
 import { ISortableEvent } from "ui/functional/IFunctionalSortable";
 import { DialogId, IContainerSortInfo, IContextMenuAction, IDialogInfo } from "ui/IUi";
@@ -43,7 +43,6 @@ export default class InGameScreen extends BaseScreen {
     shouldResetMovement: boolean;
     shouldCancelSorting: boolean;
     isQuickmoving: boolean;
-    blockedByNewUi: boolean;
     elementVisibleInGame: JQuery;
     elementCanvas: JQuery;
     elementQuickSlotsContainer: JQuery;
@@ -62,24 +61,19 @@ export default class InGameScreen extends BaseScreen {
     elementContainerDialogs: JQuery[];
     elementOtherDialogs: JQuery[];
     contextMenuOpen: boolean;
-    private readonly touchEvent;
-    private mouseX;
-    private mouseY;
     private contextMenu;
     private contextMenuTarget;
-    private contextMenuBlocking;
     private lastContextMenuPosition;
     private actionsMenuOpen;
     private actionsMenuCentered;
     private activeContainer;
     private multipleContainersOpened;
+    private contextMenuBindPressed;
     private sortableElement;
     private sortableElementPosition;
     private sortableElementTargetContainer;
     private sortingCancelled;
     private onSortableAction;
-    private canUseQuickslot;
-    private delayState;
     private isCurrentlySorting;
     private craftableItemTypes;
     private nonCraftableItemTypes;
@@ -97,7 +91,6 @@ export default class InGameScreen extends BaseScreen {
     runGlobalSortableAction(action: string, ...data: any[]): void;
     cancelSorting(): void;
     setupContextMenu(): any;
-    hasDelay(): boolean;
     onShow(): void;
     makeTopDialog(dialog: JQuery): void;
     onHide(): void;
@@ -105,13 +98,11 @@ export default class InGameScreen extends BaseScreen {
     onGameEnd(): void;
     getDialogIndex(dialogId: DialogId, customDialogInfo?: IDialogInfo): string;
     setupDialog(dialogId: DialogId, highlightItemId?: number, customDialogInfo?: IDialogInfo): JQueryUI.DialogOptions;
-    onMouseMove(event: JQueryEventObject): void;
     highlightItemElementByItemId(itemId: number, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementByItemType(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementByItemTypeWithNoItemId(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementBySelector(selector: string, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     getMovementDirection(mouseX: number, mouseY: number): Direction;
-    canUseHotkeys(): boolean;
     blurInputs(): void;
     toggleDialog(dialog: JQuery): boolean;
     openDialog(dialog: JQuery): boolean;
@@ -138,7 +129,7 @@ export default class InGameScreen extends BaseScreen {
     saveItemOrder(containerElement: JQuery): void;
     showItemContextMenu(element: JQuery): void;
     onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): boolean;
-    runContextMenuAction(itemId: number, action: IContextMenuAction, skipSound?: boolean): boolean;
+    runContextMenuAction(itemId: number, action: IContextMenuAction, skipSound?: boolean, usedFromQuickSlot?: boolean): boolean;
     craftItemChecker(itemType: ItemType): void;
     craftItem(item: ItemType, checker: ItemRecipeRequirementChecker): Promise<void>;
     onDismantleItemClick(dismantleItem: Item | undefined): void;
@@ -172,7 +163,16 @@ export default class InGameScreen extends BaseScreen {
     createCraftItemElements(containerSortInfo: IContainerSortInfo): void;
     updateItem(item: Item): void;
     onMove(): void;
-    getDialogElementForContainer(container: IContainer): JQuery | undefined;
+    /**
+     * Gets the dialog element for an item/doodad container (bags, backpacks, chests, etc.) and not inventories dialogs.
+     * @param container The container to check.
+     */
+    getDialogElementFromContainer(container: IContainer): JQuery | undefined;
+    /**
+     * Gets the dialog container element for an inventory or item/doodad container.
+     * @param container The container to check.
+     */
+    getDialogContainerElementForFilter(container: IContainer): JQuery | undefined;
     isContainerOpen(container: IContainer): boolean;
     openContainer(container: IContainer, containerName?: string): void;
     closeContainer(container: IContainer): void;
@@ -185,7 +185,7 @@ export default class InGameScreen extends BaseScreen {
     hideActionsMenu(): void;
     toggleActionsMenu(center?: boolean): void;
     showActionsMenu(center?: boolean, updatePosition?: boolean, skipSound?: boolean): void;
-    isFiltered(itemType: ItemType, containerElement: JQuery): boolean;
+    getFilterText(containerElement: JQuery | undefined): any;
     getFilterElement(containerElement: JQuery): JQuery;
     onFilterInput(containerElement: JQuery): void;
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
@@ -197,17 +197,40 @@ export default class InGameScreen extends BaseScreen {
     updateSort(containerElement: JQuery, activeSort: boolean): void;
     isContainerDialogOver(x: number, y: number): boolean;
     onUpdateDirection(): void;
-    onBindLoop(api: BindCatcherApi, bindPressed: Bindable | boolean): boolean | Bindable;
+    onItemMenu(api: IBindHandlerApi): boolean;
+    onItemQuickMove(api: IBindHandlerApi): boolean;
+    onStopItemQuickMove(): boolean;
+    onItemMove(api: IBindHandlerApi): boolean;
+    onStopItemMove(api: IBindHandlerApi): void;
+    onItemEquipToggle(api: IBindHandlerApi): boolean;
+    onContextMenu(api: IBindHandlerApi): boolean;
+    onContextMenuReleased(api: IBindHandlerApi): void;
+    onQuickSlotToggle(api: IBindHandlerApi): boolean;
+    onQuickSlot(api: IBindHandlerApi): boolean;
+    onQuickSlotClear(api: IBindHandlerApi): boolean;
+    onDropItem(api: IBindHandlerApi): boolean;
+    onReleaseDrop(): void;
+    onMenuCancel(): boolean;
+    onCloseAllDialogs(): boolean;
+    onMoreInformation(): boolean;
+    onDismantleTab(): boolean;
+    onHandToggle(api: IBindHandlerApi): boolean;
+    onInput(api: IBindHandlerApi): void;
     private additionalRequirements;
     private runAction;
     private updateContextMenu;
     private confirmAction;
+    private resetQuickSlotBinds;
     private isOverlayVisible;
     private readonly onInterrupt;
     private readonly onInterruptClosed;
     private getHoveredItem;
-    private quickSlotBindPressed;
-    private quickSlotToggleBindPressed;
+    /**
+     * Get a number based on an item's legendary type/skill/stat in order.
+     * @param item An item to sort.
+     * @returns A number based on the legendary type/skill/stat.
+     */
+    private getLegendarySortOrder;
     private determineSort;
     private getBestSort;
 }

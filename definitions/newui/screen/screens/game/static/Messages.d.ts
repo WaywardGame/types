@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { IMessage } from "entity/player/IMessageManager";
 import Player from "entity/player/Player";
@@ -16,10 +16,10 @@ import { Events, IEventEmitter } from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
-import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
+import { ContextMenuDescriptions } from "newui/component/ContextMenu";
 import Input from "newui/component/Input";
-import { Bindable, BindCatcherApi } from "newui/IBindingManager";
-import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
+import { Quadrant } from "newui/screen/screens/game/component/IQuadrantComponent";
+import QuadrantComponent from "newui/screen/screens/game/component/QuadrantComponent";
 import { IPinnedMessage, MessageTimestamp, PinType } from "newui/screen/screens/game/IGameScreenApi";
 import { IFilters, MessageFilterDefault } from "newui/screen/screens/game/IMessages";
 import GameScreen from "newui/screen/screens/GameScreen";
@@ -68,7 +68,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     unpinMessage(pinnedMessage: PinnedMessage, time?: number): Promise<void>;
     onDisplayMessage(player: Player, message: IMessage, addBackwards?: boolean): void;
     onWrittenNote(player: Player, id: number): void;
-    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
+    onFocusChat(): boolean;
     getDefaultFilterName(filter: MessageFilterDefault): string;
     protected onChangeQuadrant(): void;
     /**
@@ -78,7 +78,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     /**
      * Returns the context menu for messages, used by the superclass (quadrant component)
      */
-    protected getContextMenuDescription(): ContextMenuOptionKeyValuePair[];
+    protected getContextMenuDescription(): ContextMenuDescriptions;
     private isInTopQuadrant;
     private isInDialog;
     private addPinnedNote;

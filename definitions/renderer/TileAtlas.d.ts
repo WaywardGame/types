@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import DoodadInfo from "doodad/DoodadInfo";
 import { DoodadType } from "doodad/IDoodad";
@@ -15,7 +15,7 @@ import { TerrainDecoration } from "renderer/Decorations";
 import ITileAtlas from "renderer/ITileAtlas";
 import { TerrainTileInfo } from "renderer/TerrainTileInfo";
 import { TerrainType } from "tile/ITerrain";
-import Vec2 from "utilities/math/Vector2";
+import Vector2 from "utilities/math/Vector2";
 export declare enum TileType {
     Q2TopRightQ1TopLeft = 0,
     Q2TopLeft = 1,
@@ -59,7 +59,7 @@ export declare enum TileType {
     Q4BottomLeft = 39
 }
 export declare function rotateTileType90Deg(tileType: TileType, times: number): TileType;
-export declare function getTileLoc(tileType: TileType, tileInfo: TerrainTileInfo, variation?: number): Vec2;
+export declare function getTileLoc(tileType: TileType, tileInfo: TerrainTileInfo, variation?: number): Vector2;
 export default class TileAtlas implements ITileAtlas {
     terrain: OptionalDescriptions<TerrainType, TerrainTileInfo>;
     terrainTilled: OptionalDescriptions<TerrainType, TerrainTileInfo>;
@@ -70,11 +70,22 @@ export default class TileAtlas implements ITileAtlas {
     private mountainTypes;
     private mountainGroundTypes;
     private oreTypes;
+    private renderOverMountainTypes;
+    private waterTypes;
+    private iceTypes;
+    private freshWaterTypes;
+    private baseWaterTypes;
     generateLookups(): void;
     isMountain(type: TerrainType): boolean;
     isMountainGround(type: TerrainType): boolean;
     isOre(type: TerrainType): boolean;
     isLava(type: TerrainType): boolean;
+    isWaterOrIce(type: TerrainType): boolean;
     isWater(type: TerrainType): boolean;
+    isFreezingWater(type: TerrainType): boolean;
+    isIce(type: TerrainType): boolean;
+    isFreshWater(type: TerrainType): boolean;
     isFloor(type: TerrainType): boolean;
+    shouldRenderOverMountainTypes(type: TerrainType): boolean;
+    getBaseWaterType(type: TerrainType): TerrainType;
 }

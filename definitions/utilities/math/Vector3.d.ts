@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import ISerializer, { ISerializable } from "save/ISerializer";
 import { IVector2, IVector3 } from "utilities/math/IVector";
@@ -59,10 +59,10 @@ export default class Vector3 implements IVector3, ISerializable {
     copy<D extends IVector3>(dest: D): D;
     negate(): Vector3;
     negate<D extends IVector3>(dest: D): D;
-    equals(vector: IVector3, threshold?: number): boolean;
+    equals(vector: unknown, threshold?: number): vector is IVector3;
     length(): number;
     squaredLength(): number;
-    add(vector: IVector3): this;
+    add(vector: PartialUnion<[IVector3, IVector2]>): this;
     subtract(vector: IVector3): this;
     multiply(vector: IVector3): this;
     divide(vector: IVector3): this;

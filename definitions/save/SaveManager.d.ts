@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
@@ -84,7 +84,8 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
     compressSave(slot: number, saveObject: ISaveObject, exporting?: boolean): void;
     decompressSave(slot: number, saveObject: ISaveObject, importing?: boolean): void;
     getSerializer(): ISerializer;
-    getGameStateAsJson(cleanup?: boolean): string;
+    getGameStateAsJson(cleanup?: boolean, pretty?: boolean): string;
+    downloadGameStateAsJson(cleanup?: boolean): void;
     private getPropertiesToSerialize;
     private compressString;
     private decompressString;

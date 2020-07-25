@@ -1,15 +1,14 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
-import { Events } from "event/EventEmitter";
-import { IEventEmitter } from "event/EventEmitter";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import { CheckButton } from "newui/component/CheckButton";
@@ -29,6 +28,7 @@ export default class CheckButtonRange extends CheckButton {
     editRange(rangeInitializer: (range: RangeInput) => RangeInput): this;
     setDisplayValue(display: boolean | UiTranslation | ((val: number, enabled: boolean) => Translation)): this;
     refresh(): this;
+    protected playInputSound(): void;
     private change;
     private updateDisplay;
 }

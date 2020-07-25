@@ -1,16 +1,19 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
 import { DoodadType, DoodadTypeGroup, IDoodadOptions } from "doodad/IDoodad";
+import Human from "entity/Human";
+import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
+import { TerrainType } from "tile/ITerrain";
 export interface IDoodadManagerEvents {
     /**
      * Called when a doodad is about to be spawned
@@ -22,15 +25,24 @@ export interface IDoodadManagerEvents {
      * @returns False if the dooodad cannot spawn, or undefined to use the default logic
      */
     canSpawn(type: DoodadType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
+    /**
+     * Called when a doodad is created.
+     */
+    create(doodad: Doodad, creator?: Human): any;
+    /**
+     * Called when a doodad is removed.
+     */
+    remove(doodad: Doodad): any;
 }
 export default class DoodadManager extends EventEmitter.Host<IDoodadManagerEvents> {
     private cachedBestDoodadForTier;
     private cachedGroups;
+    private cachedDoodadSpawns;
     constructor();
     getBestDoodadForTier(doodad: DoodadType | DoodadTypeGroup): DoodadType | undefined;
     generateLookups(): void;
-    createFake(type: DoodadType, options?: IDoodadOptions): Doodad;
-    create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): Doodad | undefined;
+    createFake(type: DoodadType, options?: IDoodadOptions, x?: number, y?: number, z?: number): Doodad;
+    create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions, creator?: Human): Doodad | undefined;
     /**
      * Removes a doodad from the world.
      * @param doodad The doodad to remove
@@ -40,9 +52,17 @@ export default class DoodadManager extends EventEmitter.Host<IDoodadManagerEvent
      * provided, the assumption is that it will only be called on empty doodads. Therefore, if there *are* items, it will log a warning.
      */
     remove(doodad: Doodad, removeItems?: boolean): void;
-    updateAll(): void;
+    updateAll(ticks: number, realPlayers: Player[]): void;
     isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
     isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
     verifyAndFixItemWeights(): void;
+    /**
+     * Used to spawn a random doodad on the current biome type and at a set location (and terrain type) based on spawnOnWorldGen properties in doodad descriptions.
+     * @param terrainType The terrain type to check.
+     * @param x The x coordinate to check.
+     * @param y The y coordinate to check.
+     * @param z The z coordinate to check.
+     */
+    spawn(terrainType: TerrainType, x: number, y: number, z: number): void;
 }

@@ -1,16 +1,18 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Player from "entity/player/Player";
+import { Events, IEventEmitter } from "event/EventEmitter";
 import Component from "newui/component/Component";
-import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
+import { Quadrant } from "newui/screen/screens/game/component/IQuadrantComponent";
+import QuadrantComponent from "newui/screen/screens/game/component/QuadrantComponent";
 import GameScreen from "newui/screen/screens/GameScreen";
 export default class StatsQuadrant extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
@@ -19,8 +21,12 @@ export default class StatsQuadrant extends QuadrantComponent {
     constructor(host: GameScreen, player: Player);
     setPlayer(player: Player): this;
 }
+export interface IStatsEvents extends Events<Component> {
+    update(): any;
+}
 export declare class Stats extends Component {
     private readonly noEvents?;
+    readonly event: IEventEmitter<this, IStatsEvents>;
     private player;
     constructor(player?: Player, noEvents?: true | undefined);
     setPlayer(player: Player): this;

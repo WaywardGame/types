@@ -1,24 +1,24 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter, { Events } from "event/EventEmitter";
-import { IHookHost } from "mod/IHookHost";
-import { AppendStrategy, IBox, IComponent, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
-import { Bindable, BindCatcherApi } from "newui/IBindingManager";
+import { AppendStrategy, IComponent, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
+import { IBindHandlerApi } from "newui/input/Bind";
 import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "newui/util/ComponentManipulator";
-export default class Component extends EventEmitter.Host<Events<IComponent>> implements IComponent, IHookHost {
+import Rectangle from "utilities/math/Rectangle";
+export default class Component extends EventEmitter.Host<Events<IComponent>> implements IComponent {
     private static readonly map;
     static get<C extends Component = Component>(selector: string, create?: false): C;
     static get<C extends Component = Component>(element: Element, create?: false): C;
     static get<C extends Component = Component>(event: Event, create?: false): C;
-    static get<C extends Component = Component>(element?: Element | null, create?: false): C | undefined;
+    static get<C extends Component = Component>(element?: Element | null | false, create?: false): C | undefined;
     static all(selector: string): import("@wayward/goodstream/Stream").default<Component>;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
@@ -65,9 +65,13 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     setElement(elementType?: string, namespace?: Namespace): this;
     setId(id: string): this;
     setSelectable(val: SelectableLayer | false): this;
+    isFocused(): boolean;
+    getAs<C extends Component>(cls: Class<C>): C | undefined;
     registerEventBusSubscriber(...untilEvents: Array<keyof Events<this>>): void;
+    deregisterEventBusSubscriber(): void;
+    registerBindHandlers(...untilEvents: Array<keyof Events<this>>): void;
+    deregisterBindHandlers(): void;
     registerHookHost(name?: string, ...untilEvents: Array<keyof Events<this>>): void;
-    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     isVisible(): boolean;
     show(): this;
     hide(): this;
@@ -78,12 +82,8 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     append(...elements: ArrayOfIterablesOr<HTMLElement | IComponent | undefined | false>): this;
     append(appendStrategy: AppendStrategy, ...elements: ArrayOfIterablesOr<HTMLElement | IComponent | undefined | false>): this;
     remove(): this;
-    contains(what: string | HTMLElement | IComponent): boolean;
+    contains(what?: string | Element | IComponent | null): boolean;
     dump(filter?: (element: Component) => boolean): this;
-    /**
-     * Dumps all child components & elements without triggering any events.
-     */
-    dumpFast(): this;
     setContents(html: string, escape?: boolean): this;
     store(): this;
     findDescendants(selector: string): NodeListOf<Element>;
@@ -95,21 +95,22 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     /**
      * Remove the context menu from this element
      */
-    setContextMenu(): void;
+    setContextMenu(): this;
     /**
      * Set the context menu for this element
      */
-    setContextMenu(generator: () => IContextMenu | undefined): void;
+    setContextMenu(generator: () => IContextMenu | undefined): this;
     setHighlight(highlight: IHighlight): this;
     removeHighlight(): void;
     setStyle(property: string, value: string | number): this;
-    getBox(regenIfZero?: boolean, forceRegen?: boolean): IBox;
+    getBox(regenIfZero?: boolean, forceRegen?: boolean): Rectangle;
     getOffset(): {
         top: number;
         left: number;
     };
     getNthChild<C extends Component = Component>(nth?: number): C;
-    getChildren<C extends Component = Component>(): import("@wayward/goodstream/Stream").default<C>;
+    getChildren<C extends Component = Component>(selector?: string): import("@wayward/goodstream/Stream").default<C>;
+    siblings<C extends Component = Component>(selector?: string): import("@wayward/goodstream/Stream").default<C>;
     scrollTo(child: Component, ms?: number): void;
     scrollTo(child: Component, offsetTop: number, ms?: number): void;
     schedule<A extends any[]>(cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
@@ -119,10 +120,10 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     schedule<A extends any[]>(ms: number, debounce: number, cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(ms: number, debounce: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
     repaint(): void;
-    forceShowTooltip(onlyIfHovered?: boolean): void;
+    reflow(reason: string): void;
     regenerateBoxes(): void;
-    private onMouseEnterForTooltip;
-    private onMouseLeaveForTooltip;
-    private onMouseEnterForHighlights;
-    private onMouseLeaveForHighlights;
+    protected onContextMenu(api: IBindHandlerApi): boolean;
+    protected onEnter(reason: "mouse" | "focus"): void;
+    protected onLeave(reason: "mouse" | "focus"): void;
+    private showTooltip;
 }

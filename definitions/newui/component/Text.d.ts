@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import UiTranslation from "language/dictionary/UiTranslation";
 import { IColorSection } from "language/segment/ColorSegment";
@@ -35,6 +35,7 @@ export default class Text extends Component {
      * Returns whether the element has text. (Empty string included.)
      */
     hasText(): boolean;
+    isEmpty(): boolean;
     refresh(): this;
 }
 export declare class Paragraph extends Text {
@@ -47,7 +48,7 @@ export declare class BasicText extends Component {
     private _link;
     private linkHandler;
     constructor();
-    setText(text: IStringSection | IColorSection | ILinkSection | IFontSizeSection): this;
+    setText(text: PartialUnion<[IStringSection, IColorSection, ILinkSection, IFontSizeSection]>): this;
     setLinkHandler(handler?: (link: string | [string, string | undefined]) => boolean): void;
     private onClick;
 }

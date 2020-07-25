@@ -1,16 +1,18 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
+import { ICharacter } from "entity/IHuman";
 import { PlayerState } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
 import { TurnMode } from "game/IGame";
+import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
@@ -37,34 +39,37 @@ export declare enum MultiplayerSyncCheck {
     CreaturePosition = 9,
     Damage = 10,
     Dismantle = 11,
-    FlowFieldHashCode = 12,
-    FlowFieldValue = 13,
-    HandToUse = 14,
-    HealthChange = 15,
-    InventoryCount = 16,
-    IsTileEmpty = 17,
-    Item = 18,
-    ItemCraft = 19,
-    ItemDamage = 20,
-    ItemOrder = 21,
-    LastCreationIds = 22,
-    Misc = 23,
-    PenaltyFieldHashCode = 24,
-    PlaceOnTile = 25,
-    PlayerPositions = 26,
-    Players = 27,
-    Random = 28,
-    Reputation = 29,
-    Seed = 30,
-    SkillGain = 31,
-    StaminaChanges = 32,
-    StatChange = 33,
-    StatusChange = 34,
-    Stats = 35,
-    Temp = 36,
-    Tick = 37,
-    Ticks = 38,
-    Weight = 39
+    EncumberedStatus = 12,
+    FlowFieldHashCode = 13,
+    FlowFieldValue = 14,
+    HandToUse = 15,
+    HealthChange = 16,
+    InventoryCount = 17,
+    IsTileEmpty = 18,
+    Item = 19,
+    ItemCraft = 20,
+    ItemDamage = 21,
+    ItemOrder = 22,
+    LastCreationIds = 23,
+    MilestoneSeed = 24,
+    Misc = 25,
+    PenaltyFieldHashCode = 26,
+    PlaceOnTile = 27,
+    PlayerPositions = 28,
+    Players = 29,
+    PlayerSetup = 30,
+    Random = 31,
+    Reputation = 32,
+    Seed = 33,
+    SkillGain = 34,
+    StaminaChanges = 35,
+    StatChange = 36,
+    Stats = 37,
+    StatusChange = 38,
+    Temp = 39,
+    Tick = 40,
+    Ticks = 41,
+    Weight = 42
 }
 export declare const maxPlayers = 32;
 export declare const packetTickRate = 10;
@@ -140,7 +145,8 @@ export declare enum DisconnectReason {
     UnableToJoinGame = 7,
     UnableToLoadMods = 8,
     Banned = 9,
-    CheckConnection = 10
+    CheckConnection = 10,
+    Traveling = 11
 }
 export declare enum UnableToJoinReason {
     BuildMismatch = 0,
@@ -159,4 +165,9 @@ export declare enum JoinServerRetryReason {
     UnableToConnectToGlobalMatchmakingServer = 2,
     UnableToConnectToDedicatedMatchmakingServer = 3,
     WebRTCTimeout = 4
+}
+export interface IJoinServerOptions {
+    character: ICharacter;
+    milestoneModifiers: Set<Milestone>;
+    joinServerTimeout?: number;
 }

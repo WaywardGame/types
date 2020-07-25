@@ -1,21 +1,22 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "entity/action/IAction";
 import Human from "entity/Human";
-import { AiType, EntityType, MoveType } from "entity/IEntity";
+import { AiType, EntityType, MoveType, StatusType } from "entity/IEntity";
 import { EquipType, ICustomizations } from "entity/IHuman";
-import { NPCType } from "entity/npc/NPCS";
+import { NPCType } from "entity/npc/INPCs";
 import { Events, IEventEmitter } from "event/EventEmitter";
 import { ItemType } from "item/IItem";
 import Item from "item/Item";
+import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 export interface INPCEvents extends Events<Human> {
     /**
@@ -61,10 +62,12 @@ export default abstract class NPC extends Human {
      * Returns the bartering bonus for a given credit value
      */
     getBarteringBonus(baseCredits: number): number;
+    getName(): Translation;
+    protected getApplicableStatusEffects(): Set<StatusType>;
     /**
      * The name of the npc - called when created
      */
-    protected abstract getDefaultName(): string;
+    protected getDefaultName(): Translation;
     /**
      * Initialize stats
      */
@@ -96,4 +99,6 @@ export default abstract class NPC extends Human {
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
     protected postMove(): void;
     private checkMove;
+    get asNPC(): NPC;
+    get asPlayer(): undefined;
 }

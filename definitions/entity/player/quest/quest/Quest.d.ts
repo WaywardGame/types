@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Player from "entity/player/Player";
 import { IQuest, QuestType } from "entity/player/quest/quest/IQuest";
@@ -40,8 +40,8 @@ export declare class Quest extends EventEmitter.Host<IQuestEvents> {
     getTitle(quest: IQuest): Translation | undefined;
     getDescription(quest: IQuest): Translation | undefined;
     getTriggers(instance: IQuest): import("@wayward/goodstream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<[import("../../../../mod/IHookManager").Hook, (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
-    getEventBusTriggers(instance: IQuest): import("@wayward/goodstream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<[import("../../../../event/EventManager").EmitterOrBus, [string | number | symbol, (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]]>]>;
-    getHostTriggers(instance: IQuest): import("@wayward/goodstream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<["canDropItem" | "skillChange" | "canConsumeItem" | "canAttack" | "calculateEquipmentStats" | "isSwimming" | "statusChange" | "removed" | "preMove" | "postMove" | "statChanged" | "statTimerChanged" | "statTimerWillChange" | "statTimerRemoved" | "statMaxChanged" | "statBonusChanged" | "spawn" | "milestoneUpdate" | "updateOption" | "displayMessage" | "getMaxHealth" | "getMaxWeight" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "getMovementIntent" | "getWeightStatus" | "getWeightOrStaminaMovementPenalty" | "restStart" | "restEnd", (api: IQuestRequirementApi<[], {}>, player: Player, ...args: any[]) => boolean]>]>;
+    getEventBusTriggers(instance: IQuest): import("@wayward/goodstream/Stream").default<[IQuestRequirement<any[], {}>, import("@wayward/goodstream/Stream").default<readonly [import("../../../../event/EventManager").EmitterOrBus, string | number | symbol, (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
+    getHostTriggers(instance: IQuest): import("@wayward/goodstream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<["tickStart" | "tickEnd" | "spawn" | "restored" | "updateOption" | "displayMessage" | "getMaxHealth" | "getMaxWeight" | "damage" | "shouldDie" | "die" | "shouldRespawn" | "respawn" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "getMovementIntent" | "noInput" | "walkPathChange" | "moveComplete" | "changeZ" | "getWeightStatus" | "getWeightOrStaminaMovementPenalty" | "restStart" | "restEnd" | "skillChange" | "canConsumeItem" | "canDropItem" | "canAttack" | "calculateEquipmentStats" | "isSwimming" | "statusChange" | "created" | "removed" | "preMove" | "postMove" | "statChanged" | "statTimerChanged" | "statTimerWillChange" | "statTimerRemoved" | "statMaxChanged" | "statBonusChanged", (api: IQuestRequirementApi<[], {}>, player: Player, ...args: any[]) => boolean]>]>;
     getRequirements(host: Player, instance: IQuest): import("@wayward/goodstream/Stream").default<RequirementInstance>;
     getRequirement(host: Player, quest: IQuest, requirement: IQuestRequirement): RequirementInstance | undefined;
     needsManualCompletion(): boolean;

@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Entity from "entity/Entity";
 import { IStatChangeInfo } from "entity/IEntity";
@@ -15,8 +15,9 @@ import Component from "newui/component/Component";
 import Text from "newui/component/Text";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare abstract class StatElement extends Component {
-    private readonly stat;
     private readonly entity;
+    private readonly stat;
+    private readonly statIcon;
     constructor(entity: Entity, stat: Stat, noEvents?: true);
     /**
      * Returns the attached entity's `IStat` for this `StatElement`'s `Stat`.
@@ -37,7 +38,7 @@ export declare abstract class StatElement extends Component {
     /**
      * Returns the formatted CSS url for the stat icon.
      */
-    getStatIcon(): string;
+    getCustomStatIconPath(): string | undefined;
     /**
      * Returns the display priority for this stat.
      */

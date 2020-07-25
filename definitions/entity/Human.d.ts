@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
 import { IDamageInfo } from "entity/creature/ICreature";
@@ -15,25 +15,23 @@ import { ICausesDamage } from "entity/IEntity";
 import { EquipType, ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, IRestData, RestCancelReason, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
-import MessageManager from "entity/player/MessageManager";
-import NoteManager from "entity/player/note/NoteManager";
 import PlayerDefense from "entity/player/PlayerDefense";
 import { ISkillSet } from "entity/player/Skills";
 import { IEventEmitter } from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
-import { Milestone } from "game/milestones/IMilestone";
 import { IGameOptionsPlayer } from "game/options/IGameOptions";
-import { EquipEffect, EquipEffectByType, ItemType, ItemTypeGroup, IContainer } from "item/IItem";
+import { EquipEffect, EquipEffectByType, EquipEffects, IContainer, ItemType, ItemTypeGroup } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IOptions } from "save/data/ISaveDataGlobal";
-import { ITileEvent } from "tile/ITileEvent";
+import TileEvent from "tile/TileEvent";
 import { IVector3 } from "utilities/math/IVector";
 export declare const REPUTATION_MAX = 64000;
 export default abstract class Human extends Entity {
+    static getNameTranslation(): Translation;
     event: IEventEmitter<this, IHumanEvents>;
     attackFromEquip: IAttackHand;
     crafted: {
@@ -47,43 +45,43 @@ export default abstract class Human extends Entity {
         [index: number]: number;
     };
     handToUse: EquipType | undefined;
-    identifier: string;
     inventory: IContainer;
-    messages: MessageManager;
-    notes: NoteManager;
     options: IOptions;
-    raft: number | undefined;
+    readonly equipEffects: Map<EquipEffect, EquipEffects>;
     restData: IRestData | undefined;
     score: number;
     skills: ISkillSet;
     state: PlayerState;
     swimming: boolean;
+    vehicleItemId: number | undefined;
+    identifier: string;
     canSendMessage: boolean;
     private readonly privateStore;
-    private readonly equipEffects;
     private cachedTotalSkill?;
     constructor();
-    resetStatTimers(): void;
     isLocalPlayer(): boolean;
     setOptions(options: IOptions): void;
-    getName(): Translation;
     getEquipEffect<E extends EquipEffect>(type: E): FirstIfOne<EquipEffectByType<E>>;
     getProtectedItemsOptions(): IProtectedItemOptions;
     getReputation(): number;
+    /**
+     * @returns The value of the given skill, the sum of the base value and any bonuses from legendary equipment
+     */
+    getSkill(skill: SkillType): number;
     /**
      * @returns the "base value" of the skill (ignoring any bonuses applied by legendary equipment)
      */
     getSkillCore(skill: SkillType): number;
     /**
+     * @returns the skill bonus applied by legendary equipment
+     */
+    getSkillBonus(skill: SkillType): number;
+    /**
      * Sets the "base value" of the skill (ignoring any bonuses applied by legendary equipment)
-     * @param skill The skill to set the base value of.
+     * @param skillType The skill to set the base value of.
      * @param value The value (between 0 and 100) to set the skill to.
      */
-    setSkillCore(skill: SkillType, value: number): void;
-    /**
-     * @returns The value of the given skill, the sum of the base value and any bonuses from legendary equipment
-     */
-    getSkill(skill: SkillType): number;
+    setSkillCore(skillType: SkillType, value: number): void;
     /**
      * @returns The total skill (combination of all other skills). Ignores skill bonuses.
      */
@@ -108,12 +106,11 @@ export default abstract class Human extends Entity {
     getEquippedItem(slot: EquipType): Item | undefined;
     getEquipSlotForItem(item: Item): EquipType | undefined;
     getMaxHealth(): number;
-    addMilestone(milestone: Milestone, data?: number): void;
     update(): void;
     updateStatsAndAttributes(): void;
     staminaReduction(skill: SkillType): void;
     updateReputation(reputation: number): void;
-    setRaft(itemId: number | undefined): boolean;
+    setPaddling(paddling: boolean, itemId: number): void;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     getBurnDamage(fireType: FireType, skipParry?: boolean, equipType?: EquipType): number;
@@ -124,7 +121,7 @@ export default abstract class Human extends Entity {
     setPosition(point: IVector3): void;
     setZ(z: number, updateFlowField?: boolean): void;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
-    damageBySteppingOn(thing: Doodad | ITileEvent, options?: ICheckUnderOptions): ICheckUnderOptions;
+    damageByInteractingWith(thing: Doodad | TileEvent, options: ICheckUnderOptions | undefined, damageLocation: EquipType): ICheckUnderOptions;
     equip(item: Item, slot: EquipType): void;
     unequip(item: Item): void;
     unequipAll(): void;
@@ -134,28 +131,34 @@ export default abstract class Human extends Entity {
     /**
      * Gets a stamina penalty delay to be used for slowed actions and movement.
      * @param staminaToStartAddingDelayAt Stat value where delays start getting added from.
-     * @param maximumDelayMultiplier The maximum delay multiplier.
      */
-    getStaminaDelay(staminaToStartAddingDelayAt: number, maximumDelayMultiplier: number): number;
+    getStaminaDelay(staminaToStartAddingDelayAt?: number): number;
     getConsumeBonus(item: Item | undefined, skillUse?: SkillType): number;
     checkForGatherFire(): Translation | undefined;
     calculateEquipmentStats(): void;
     discoverRecipe(recipeType: ItemType, crafted?: ICrafted, discoveredClientSide?: boolean): void;
     getDamage(causesDamage: ICausesDamage, equipType?: EquipType): number;
-    causeStatus(thing: Doodad | ITileEvent, equipForProtection?: EquipType): void;
+    causeStatus(thing: Doodad | TileEvent, equipForProtection?: EquipType): void;
     getAsHuman(): Human;
     /**
-     * Gets if the human is swimming (and not on a raft)
+     * Gets if the human is swimming (and not on a boat)
      */
     isSwimming(): boolean;
+    updateSwimming(): void;
+    /**
+     * Humans can't produce temperature, but their equipment can
+     */
+    getProducedTemperature(): number | undefined;
+    protected resetStatTimers(): void;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
-    protected getSkillGainMultiplier(skillType: SkillType): number;
+    protected getSkillGainMultiplier(_skillType: SkillType): number;
     /**
      * Improve one of the core player stats
      */
     protected statGain(stat: Stat, bypass: boolean): void;
     protected calculateStats(): void;
-    protected resetDefense(): void;
-    protected updateSwimming(): void;
+    protected resetDefense(skipStatChangedEvent?: boolean): void;
     protected swimAndSootheCheck(options?: IGameOptionsPlayer): void;
+    get asCreature(): undefined;
+    get asHuman(): Human;
 }

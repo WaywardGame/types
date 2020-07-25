@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { Challenge } from "game/options/modifiers/challenge/IChallenge";
 import GameplayModifier from "game/options/modifiers/GameplayModifier";
@@ -20,6 +20,6 @@ export default abstract class ChallengeModifier extends GameplayModifier<Challen
      * How much "challenge" this modifier adds (or subtracts!). Defaults to `0`. Added to the result of `apply`.
      */
     challenge: number;
-    args: any[];
+    tooltipArgs?: readonly any[];
     readonly getTooltip: (tooltip: ITooltip) => ITooltip;
 }

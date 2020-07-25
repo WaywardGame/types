@@ -1,17 +1,17 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
 import { IServerGameDetails, IServerServerDetails } from "multiplayer/matchmaking/IMatchmaking";
-import { IDedicatedServerInfo, IModPath, ISteamworksEvents, ISteamFriend, ISteamId, ISteamNetworking as ISteamworksNetworking, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
+import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamNetworking as ISteamworksNetworking, ISteamworksEvents, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
 interface IMatchmakingServer {
     port: number | undefined;
     connectCallback: ((connection: IMatchmakingServerConnection, path: string | undefined) => void) | undefined;
@@ -58,6 +58,8 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private _multiplayerLogs;
     private importingSaveGameMod;
     private relayNetworkStatus;
+    private _isGameOverlayActive;
+    get isGameOverlayActive(): boolean;
     isElectron(): boolean;
     reload(): void;
     closeWindow(): void;
@@ -93,7 +95,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     clearSteamRichPresence(): void;
     updateSteamRichPresence(): void;
     updateDiscordPresence(): void;
-    setDiscordPresence(presenceInfo: INapiDiscordPresenceInfo): void;
+    setDiscordPresence(presenceInfo: INapiDiscordPresenceInfo): Promise<void>;
     getLobbyId(): string | undefined;
     isInLobby(): boolean;
     createLobby(type: LobbyType): void;
@@ -147,7 +149,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private ugcSynchronizeItems;
     private copyFolder;
     private saveFilesToCloud;
-    private getFileShareId;
+    private getFileShareIds;
     private publishFileToWorkshop;
     private extractArchive;
     private safeOpenFolder;

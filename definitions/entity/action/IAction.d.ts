@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { SfxType } from "audio/IAudio";
 import Doodad from "doodad/Doodad";
@@ -15,18 +15,19 @@ import ActionExecutor from "entity/action/ActionExecutor";
 import actionDescriptions from "entity/action/Actions";
 import { ICorpse } from "entity/creature/corpse/ICorpse";
 import Creature from "entity/creature/Creature";
+import Entity from "entity/Entity";
 import Human from "entity/Human";
-import { AttackType, EntityPlayerCreatureNpc, EntityType } from "entity/IEntity";
+import { AttackType, EntityType } from "entity/IEntity";
 import { EquipType, RestType, SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { TurnType } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
-import { ItemType, IContainer } from "item/IItem";
+import { IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import { RecipeType } from "item/recipe/RecipeRegistry";
-import { ITileEvent } from "tile/ITileEvent";
+import TileEvent from "tile/TileEvent";
 import { IRGB } from "utilities/Color";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
@@ -48,80 +49,80 @@ export declare enum ActionType {
     GatherWater = 14,
     Shoot = 15,
     Cast = 16,
-    TraverseTheSea = 17,
-    LockPick = 18,
-    Sling = 19,
-    Repair = 20,
-    Decode = 21,
-    Learn = 22,
-    Reinforce = 23,
-    Gather = 24,
-    StokeFire = 25,
-    Pour = 26,
-    Plant = 27,
-    GatherTreasure = 28,
-    Ignite = 29,
-    Build = 30,
-    OpenContainer = 31,
-    Preserve = 32,
-    OpenBottle = 33,
-    DrinkCure = 34,
-    TellTime = 35,
-    SailToCivilization = 36,
-    Transmogrify = 37,
-    Fire = 38,
-    Teleport = 39,
-    Extinguish = 40,
-    DrawMap = 41,
-    Dismantle = 42,
-    PourOnYourself = 43,
-    Squeeze = 44,
-    Pet = 45,
-    Tame = 46,
-    Release = 47,
-    HealOther = 48,
-    RubClockwise = 49,
-    RubCounterclockwise = 50,
-    OpenDoor = 51,
-    CloseDoor = 52,
-    AddFuel = 53,
-    Grasp = 54,
-    PickupItem = 55,
-    PickupAllItems = 56,
-    Offer = 57,
-    Drop = 58,
-    Jump = 59,
-    Move = 60,
-    MoveTo = 61,
-    UpdateDirection = 62,
-    Idle = 63,
-    DrinkInFront = 64,
-    UseItem = 65,
-    Equip = 66,
-    Unequip = 67,
-    MoveItem = 68,
-    Craft = 69,
-    Till = 70,
-    Rename = 71,
-    Harvest = 72,
-    GatherMilk = 73,
-    Read = 74,
-    CloseContainer = 75,
-    SmotherFire = 76,
-    Trade = 77,
-    PlaceDown = 78,
-    Inspect = 79,
-    Apply = 80,
-    Hitch = 81,
-    Unhitch = 82,
-    AttachContainer = 83,
-    DetachContainer = 84,
-    Refine = 85,
-    PickupExcrement = 86,
-    TestDepth = 87,
-    Enchant = 88,
-    Navigate = 89,
-    Melee = 90
+    LockPick = 17,
+    Sling = 18,
+    Repair = 19,
+    Decode = 20,
+    Learn = 21,
+    Reinforce = 22,
+    Gather = 23,
+    StokeFire = 24,
+    Pour = 25,
+    Plant = 26,
+    GatherTreasure = 27,
+    Ignite = 28,
+    Build = 29,
+    OpenContainer = 30,
+    Preserve = 31,
+    OpenBottle = 32,
+    DrinkCure = 33,
+    TellTime = 34,
+    SailToCivilization = 35,
+    Transmogrify = 36,
+    Fire = 37,
+    Teleport = 38,
+    Extinguish = 39,
+    DrawMap = 40,
+    Dismantle = 41,
+    PourOnYourself = 42,
+    Squeeze = 43,
+    Pet = 44,
+    Tame = 45,
+    Release = 46,
+    HealOther = 47,
+    RubClockwise = 48,
+    RubCounterclockwise = 49,
+    OpenDoor = 50,
+    CloseDoor = 51,
+    AddFuel = 52,
+    Grasp = 53,
+    PickupItem = 54,
+    PickupAllItems = 55,
+    Offer = 56,
+    Drop = 57,
+    Jump = 58,
+    Move = 59,
+    MoveTo = 60,
+    UpdateDirection = 61,
+    Idle = 62,
+    DrinkInFront = 63,
+    UseItem = 64,
+    Equip = 65,
+    Unequip = 66,
+    MoveItem = 67,
+    Craft = 68,
+    Till = 69,
+    Rename = 70,
+    Harvest = 71,
+    GatherMilk = 72,
+    Read = 73,
+    CloseContainer = 74,
+    SmotherFire = 75,
+    Trade = 76,
+    PlaceDown = 77,
+    Apply = 78,
+    Hitch = 79,
+    Unhitch = 80,
+    AttachContainer = 81,
+    DetachContainer = 82,
+    Refine = 83,
+    PickupExcrement = 84,
+    TestDepth = 85,
+    Enchant = 86,
+    Navigate = 87,
+    Melee = 88,
+    GrabAll = 89,
+    Respawn = 90
 }
 export declare enum ActionUsability {
     Paused = 0,
@@ -130,7 +131,7 @@ export declare enum ActionUsability {
     Ghost = 3,
     Delayed = 4
 }
-export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc, R = void> {
+export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void> {
     type?: number;
     argumentTypes: A;
     usability: {
@@ -142,7 +143,7 @@ export interface IActionDescription<A extends Array<ActionArgument | ActionArgum
     confirmer?(actionApi: IActionConfirmerApi<E>, ...args: ActionArgumentTupleTypes<A>): Promise<boolean>;
     clone(): IActionDescription<A, E, R>;
 }
-export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc> {
+export interface IActionApi<E extends Entity = Entity> {
     readonly executor: E;
     readonly type: ActionType;
     readonly actionStack: ReadonlyArray<ActionType>;
@@ -160,6 +161,7 @@ export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCrea
     addSkillGains(skill: SkillType, amount?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
+    cancelPaddling(item: Item): this;
     setReputationChange(amount: number): this;
     setMilestone(milestone: Milestone, data?: number): this;
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
@@ -182,7 +184,7 @@ export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCrea
      */
     removeItems(...items: Array<Item | undefined>): this;
 }
-export interface IActionHandlerApi<E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc> extends IActionApi<E> {
+export interface IActionHandlerApi<E extends Entity = Entity> extends IActionApi<E> {
     /**
      * Sets that the items added to this action by `addItems` were "used" (so they will be damaged afterward).
      */
@@ -192,7 +194,7 @@ export interface IActionHandlerApi<E extends EntityPlayerCreatureNpc = EntityPla
      */
     setItemsUsed(used?: boolean): this;
 }
-export interface IActionConfirmerApi<E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc> extends IActionApi<E> {
+export interface IActionConfirmerApi<E extends Entity = Entity> extends IActionApi<E> {
     /**
      * If damaging any of the "used items" for this action will result in the item breaking, and this method is
      * called from the `confirmer` of the action, a confirmation dialog will be shown asking if you want to
@@ -272,7 +274,7 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.Direction]: Direction;
     [ActionArgument.Doodad]: Doodad;
     [ActionArgument.DoodadType]: DoodadType;
-    [ActionArgument.Entity]: EntityPlayerCreatureNpc;
+    [ActionArgument.Entity]: Entity;
     [ActionArgument.EquipType]: EquipType;
     [ActionArgument.Human]: Human;
     [ActionArgument.Item]: Item;
@@ -287,7 +289,7 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.Quality]: Quality;
     [ActionArgument.RecipeType]: RecipeType;
     [ActionArgument.RestType]: RestType;
-    [ActionArgument.TileEvent]: ITileEvent;
+    [ActionArgument.TileEvent]: TileEvent;
     [ActionArgument.Vector2]: IVector2;
     [ActionArgument.Vector3]: IVector3;
 }[X];

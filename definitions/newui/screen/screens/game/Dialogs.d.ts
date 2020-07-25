@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { IModdable } from "mod/ModRegistry";
 import { IVector2 } from "utilities/math/IVector";
@@ -20,7 +20,8 @@ export declare enum DialogId {
     Book = 6,
     Map = 7,
     Quests = 8,
-    Crafting = 9
+    Crafting = 9,
+    Inspect = 10
 }
 export declare enum Edge {
     Top = 0,
@@ -29,19 +30,15 @@ export declare enum Edge {
     Left = 3
 }
 export declare type IEdges = [[Edge.Left | Edge.Right, number], [Edge.Top | Edge.Bottom, number]];
-export interface IDialogDescription extends IModdable {
-    minSize: IVector2;
-    size: IVector2;
-    maxSize: IVector2;
-    edges: IEdges;
+export interface IDialogDescription<SQUARE = boolean> extends IModdable {
+    minSize: SQUARE extends true ? number : IVector2;
+    size: SQUARE extends true ? number : IVector2;
+    maxSize: SQUARE extends true ? number : IVector2;
+    edges: IEdges | "center";
     /**
      * Whether to save if the dialog is open. If this is false, the dialog will always be closed when a game loads. Defaults to true.
      */
     saveOpen?: boolean;
-    /**
-     * Whether resizing the dialog will keep it a square. Defaults to false.
-     */
-    square?: boolean;
 }
-declare const dialogDescriptions: Descriptions<DialogId, IDialogDescription>;
+declare const dialogDescriptions: Descriptions<DialogId, IDialogDescription<false> | IDialogDescription<true>>;
 export default dialogDescriptions;

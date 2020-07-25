@@ -1,15 +1,14 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
-import Entity from "entity/Entity";
-import { IStat, IStats, IStatBase, IStatFactory, Stat } from "entity/IStats";
+import { IStat, IStatBase, IStatFactory, IStats, Stat } from "entity/IStats";
 import Stats, { IStatHost } from "entity/Stats";
 export declare class StatsFactory {
     private readonly host;
@@ -53,24 +52,7 @@ declare class StatFactory implements IStatFactory {
      * Sets the "bonus" for the stat. This changes the value that will be returned.
      */
     setBonus(bonus: number): this;
-    /**
-     * Initializes the `IStat` constructed by this factory on the given entity.
-     * @deprecated Use `Entity.stat.init`
-     */
-    initializeOn(entity: Entity): void;
     get(): IStat;
-}
-declare module StatFactory {
-    /**
-     * Stats are stored by their names, not their ordinal. Therefore, to access a stat, you must first
-     * get the name of the stat. `entity.stats[Stat[<your stat here>]]`. This is unweildy especially
-     * for `IStats` construction. This function is provided to alleviate that.
-     * @param stats A list of `StatFactory` instances to construct the `IStats` instance from.
-     *
-     * When passing multiple `StatFactory`s of the same `Stat`, the latter will replace the former.
-     * @deprecated Use `StatsFactory`
-     */
-    function getStats(...stats: Array<StatFactory | undefined>): IStats;
 }
 export default StatFactory;
 export declare enum StatChangeCurrentTimerStrategy {

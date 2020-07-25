@@ -1,19 +1,20 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { ActionArgument, ActionArgumentTupleTypes, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionHandlerApi } from "entity/action/IAction";
 import Creature from "entity/creature/Creature";
-import { EntityPlayerCreatureNpc, EntityType } from "entity/IEntity";
+import Entity from "entity/Entity";
+import { EntityType } from "entity/IEntity";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
-export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc, R = void> implements IActionDescription<A, E, R> {
+export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void> implements IActionDescription<A, E, R> {
     readonly argumentTypes: A;
     readonly usability: {
         [key in ActionUsability]?: boolean;

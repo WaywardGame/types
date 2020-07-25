@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Player from "entity/player/Player";
 import { IQuestRequirementApi } from "entity/player/quest/requirement/IRequirement";
@@ -33,9 +33,9 @@ export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> {
     setTrigger<H extends Hook>(hook: H, checker: (api: IQuestRequirementApi<O, D>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
     getTriggers(): IterableIterator<[Hook, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
     setEventTrigger<E extends EmitterOrBus, K extends Event<E>>(bus: E, event: K, checker: (api: IQuestRequirementApi<O, D>, ...args: Parameters<Handler<E, K>>) => boolean): this;
-    getEventBusTriggers(): IterableIterator<[EmitterOrBus, [string | number | symbol, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]]>;
+    getEventBusTriggers(): import("@wayward/goodstream/Stream").default<readonly [EmitterOrBus, string | number | symbol, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
     setHostTrigger<E extends keyof Events<Player>>(event: E, checker: (api: IQuestRequirementApi<O, D>, player: Player, ...args: ArgumentsOf<Events<Player>[E]>) => boolean): this;
-    getHostTriggers(): IterableIterator<["canDropItem" | "skillChange" | "canConsumeItem" | "canAttack" | "calculateEquipmentStats" | "isSwimming" | "statusChange" | "removed" | "preMove" | "postMove" | "statChanged" | "statTimerChanged" | "statTimerWillChange" | "statTimerRemoved" | "statMaxChanged" | "statBonusChanged" | "spawn" | "milestoneUpdate" | "updateOption" | "displayMessage" | "getMaxHealth" | "getMaxWeight" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "getMovementIntent" | "getWeightStatus" | "getWeightOrStaminaMovementPenalty" | "restStart" | "restEnd", (api: IQuestRequirementApi<O, D>, player: Player, ...args: any[]) => boolean]>;
+    getHostTriggers(): IterableIterator<["tickStart" | "tickEnd" | "spawn" | "restored" | "updateOption" | "displayMessage" | "getMaxHealth" | "getMaxWeight" | "damage" | "shouldDie" | "die" | "shouldRespawn" | "respawn" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "getMovementIntent" | "noInput" | "walkPathChange" | "moveComplete" | "changeZ" | "getWeightStatus" | "getWeightOrStaminaMovementPenalty" | "restStart" | "restEnd" | "skillChange" | "canConsumeItem" | "canDropItem" | "canAttack" | "calculateEquipmentStats" | "isSwimming" | "statusChange" | "created" | "removed" | "preMove" | "postMove" | "statChanged" | "statTimerChanged" | "statTimerWillChange" | "statTimerRemoved" | "statMaxChanged" | "statBonusChanged", (api: IQuestRequirementApi<O, D>, player: Player, ...args: any[]) => boolean]>;
     setInitializeTrigger(checker: (api: IQuestRequirementApi<O, D>) => boolean): this;
     getInitializeTrigger(): ((api: IQuestRequirementApi<O, D>) => boolean) | undefined;
     setRelations(relations: HighlightSelector[]): this;

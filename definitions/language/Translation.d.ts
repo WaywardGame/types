@@ -1,17 +1,20 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
-import { MessageType } from "entity/player/MessageManager";
+import { MessageType } from "entity/player/IMessageManager";
+import { Quality } from "game/IObject";
 import { Dictionary } from "language/Dictionaries";
 import Message from "language/dictionary/Message";
+import { MiscTranslation } from "language/dictionary/Misc";
 import UiTranslation from "language/dictionary/UiTranslation";
+import { Link } from "language/segment/LinkSegment";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { Random } from "utilities/Random";
 import Interpolator, { ISegment, IStringSection } from "utilities/string/Interpolator";
@@ -39,19 +42,21 @@ export declare enum ListEnder {
 }
 declare class Translation {
     static readonly RANDOM = "random";
+    static empty(): Translation;
     static readonly defaultInterpolator: Interpolator;
     static provider: TranslationProvider;
-    static colorize(color: string | MessageType): Translation;
-    static colorize(color: string | MessageType, text: string | IStringSection): IStringSection;
-    static colorize(color: string | MessageType, text: IStringSection[]): IStringSection[];
-    private static colorizeInternal;
+    static colorizeQuality(quality: Quality): Translation;
+    static colorizeQuality(quality: Quality, text: string | IStringSection): IStringSection;
+    static colorizeQuality(quality: Quality, text: IStringSection[]): IStringSection[];
+    static colorizeMessageType(type: MessageType): Translation;
+    static colorizeMessageType(type: MessageType, text: string | IStringSection): IStringSection;
+    static colorizeMessageType(type: MessageType, text: IStringSection[]): IStringSection[];
+    static colorizeImportance(importance: "primary" | "secondary"): Translation;
+    static colorizeImportance(importance: "primary" | "secondary", text: string | IStringSection): IStringSection;
+    static colorizeImportance(importance: "primary" | "secondary", text: IStringSection[]): IStringSection[];
     static formatList(items: Iterable<string | IStringSection | IStringSection[] | Translation | ISerializedTranslation>, ender?: ListEnder | false): Translation;
     static getString(...entries: ArrayOfIterablesOr<string | IStringSection | Translation>): string;
     static getAll(dictionary: Dictionary | string, entry?: number | string): Translation[];
-    /**
-     * @deprecated
-     */
-    static convertMakeStringToInterpolation(makeString: string): string;
     static nameOf(type: Dictionary, thing: number | {
         type: number;
         renamed?: string | ISerializedTranslation;
@@ -59,7 +64,7 @@ declare class Translation {
     static nameOf(type: Dictionary, thing: number | {
         type: number;
         renamed?: string | ISerializedTranslation;
-    }, count?: number, article?: boolean, ...args: any[]): Translation;
+    }, count?: number, article?: boolean, showRenamedQuotes?: boolean, ...args: any[]): Translation;
     static ofNumber(number: number, failWith?: string | Translation): Translation;
     /**
      * DO NOT USE THIS METHOD
@@ -68,7 +73,7 @@ declare class Translation {
      *
      * Example uses include text the user inputs, and text from other sites (steam/trello)
      */
-    static generator(textOrGenerator: GetterOfOr<string | IStringSection[]>): TranslationGenerator;
+    static generator(textOrGenerator: GetterOfOr<string | IStringSection[]>, link?: Link): TranslationGenerator;
     static isSerializedTranslation(thing: unknown): thing is ISerializedTranslation;
     static deserialize(serializedTranslation: ISerializedTranslation): Translation;
     static sorter(dictionary: Dictionary, entry?: number): (a: number, b: number) => number;
@@ -110,7 +115,8 @@ declare class Translation {
     withSegments(priority: true, ...segments: ISegment[]): this;
     addArgs(...args: any[]): this;
     inContext(context?: TextContext, normalize?: boolean): this;
-    addReformatter(reformatter?: Translation | ((sections: IStringSection[]) => IStringSection[]), beginning?: boolean): this;
+    passTo(...reformatters: Array<Translation | ((sections: IStringSection[]) => IStringSection[]) | Falsy>): this;
+    passTo(beginning: true, ...reformatters: Array<Translation | ((sections: IStringSection[]) => IStringSection[]) | Falsy>): this;
     /**
      * Sets what this translation will return if there is no translation.
      */
@@ -153,5 +159,6 @@ declare class Translation {
 declare module Translation {
     const ui: (entry: string | UiTranslation) => Translation;
     const message: (entry: string | Message) => Translation;
+    const misc: (entry: string | MiscTranslation) => Translation;
 }
 export default Translation;

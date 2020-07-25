@@ -1,14 +1,13 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
-import { IDamageInfo } from "entity/creature/ICreature";
 import Human from "entity/Human";
 import Player from "entity/player/Player";
 import { Events, IEventEmitter } from "event/EventEmitter";
@@ -16,10 +15,11 @@ import { IMapRequest } from "game/IGame";
 import { BookType } from "item/IItem";
 import { IHookHost } from "mod/IHookHost";
 import Component from "newui/component/Component";
-import { Bindable, BindCatcherApi } from "newui/IBindingManager";
+import { IBindHandlerApi } from "newui/input/Bind";
 import Screen from "newui/screen/Screen";
 import Dialog from "newui/screen/screens/game/component/Dialog";
-import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
+import { Quadrant } from "newui/screen/screens/game/component/IQuadrantComponent";
+import QuadrantComponent from "newui/screen/screens/game/component/QuadrantComponent";
 import { DialogId } from "newui/screen/screens/game/Dialogs";
 import { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import MenuBar from "newui/screen/screens/game/static/MenuBar";
@@ -28,9 +28,6 @@ import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import StatsQuadrant from "newui/screen/screens/game/static/Stats";
 import MovementHandler from "newui/screen/screens/game/util/movement/MovementHandler";
 import WorldTooltipHandler from "newui/screen/screens/game/WorldTooltip";
-import { ITile } from "tile/ITerrain";
-import { Direction } from "utilities/math/Direction";
-import { IVector2 } from "utilities/math/IVector";
 export declare type IDialogStates = {
     [key in DialogId]: boolean;
 };
@@ -41,7 +38,7 @@ interface IGameScreenEvents extends Events<Screen> {
 export declare let gameScreen: GameScreen | undefined;
 export default class GameScreen extends Screen implements IHookHost {
     event: IEventEmitter<this, IGameScreenEvents>;
-    dialogs: Map<DialogId, Dialog>;
+    readonly dialogs: Map<DialogId, Dialog>;
     visibleDialogs: IDialogStates;
     quadrantComponentQuadrants: OptionalDescriptions<QuadrantComponentId, Quadrant>;
     menuBar: MenuBar;
@@ -63,20 +60,22 @@ export default class GameScreen extends Screen implements IHookHost {
     getQuadrantComponents(): import("@wayward/goodstream/Stream").default<QuadrantComponent>;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: QuadrantComponentId): (never extends C ? QuadrantComponent : C extends never[] ? QuadrantComponent | C : {} extends C ? QuadrantComponent | Partial<QuadrantComponent> : QuadrantComponent | C) | undefined;
     getQuadrantContainer(): Component;
-    isMouseWithin(): boolean;
-    wasMouseStartWithin(): boolean;
-    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
+    isMouseWithin(): false | Component;
+    mouseStartWasWithin(api: IBindHandlerApi): boolean | undefined;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
-    onMove(player: Player, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
-    onMoveComplete(player: Player): void;
-    onPlayerDamage(player: Player, damageInfo: IDamageInfo): number | undefined;
-    onPlayerDeath(player: Player): boolean | undefined;
-    onPlayerWalkToTilePath(player: Player, path: IVector2[] | undefined): void;
     onGameTickEnd(): void;
     onOpenBook(human: Human, book: BookType): void;
     onReadMap(player: Player, mapRequest: IMapRequest): void;
+    protected onDie(): void;
+    protected onRespawn(): void;
+    protected onZoom(api: IBindHandlerApi): boolean;
+    protected onInspect(api: IBindHandlerApi): boolean;
+    protected onScreenshotMode(): boolean;
+    protected onShowMoreInfo(): void;
+    protected onUnshowMoreInfo(): void;
+    protected onCancel(): boolean;
     protected create(): void;
-    protected tryShowWorldTooltip(): Promise<void>;
+    protected onResize(): void;
     /**
      * Adds a quadrant element to the screen.
      *
@@ -97,10 +96,12 @@ export default class GameScreen extends Screen implements IHookHost {
      */
     private onQuadrantComponentChange;
     private onSwitchQuadrantComponents;
+    private onQuadrantComponentUpdatePosition;
     /**
      * Handles top/bottom quadrants (for when in two-column mode)
      */
     private updateQuadrantPositions;
+    private updateQuadrant;
     /**
      * Returns the first unused `Quadrant`, or `Quadrant.None` if there are none.
      */

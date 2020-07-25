@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Translation from "language/Translation";
 export declare enum TimeFormat {
@@ -55,6 +55,10 @@ export default class TimeManager {
     get dayStart(): number;
     constructor(turns: number);
     /**
+     * Returns a copy of this TimeManager as a new object
+     */
+    clone(): TimeManager;
+    /**
      * The total number of ticks passed.
      */
     get ticks(): number;
@@ -73,7 +77,7 @@ export default class TimeManager {
     /**
      * Returns a decimal representation of the current time. `0` is the start of the day, and `1` is the end.
      */
-    getTime(): number;
+    getTime(tickOffset?: number): number;
     /**
      * Returns if the given time is at day.
      * @param time The time to check, defaulting to the current time.

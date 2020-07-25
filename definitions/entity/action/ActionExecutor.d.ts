@@ -1,17 +1,17 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { SfxType } from "audio/IAudio";
 import actionDescriptions from "entity/action/Actions";
 import { ActionArgument, ActionArgumentTupleTypes, ActionArgumentTypeMap, ActionType, IActionApi, IActionDescription, IActionHandlerApi, IActionParticle, IActionSoundEffect } from "entity/action/IAction";
-import { EntityPlayerCreatureNpc } from "entity/IEntity";
+import Entity from "entity/Entity";
 import { SkillType } from "entity/IHuman";
 import { TurnType } from "entity/player/IPlayer";
 import EventEmitter from "event/EventEmitter";
@@ -32,7 +32,7 @@ interface ActionEvents {
      */
     postExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any>, args: any[]): any;
 }
-export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends EntityPlayerCreatureNpc, R> extends EventEmitter.Host<ActionEvents> implements IActionApi<E> {
+export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R> extends EventEmitter.Host<ActionEvents> implements IActionApi<E> {
     /**
      * Gets an action by its description. If you're using the Action class for constructing the descriptions, just pass the action instance.
      *
@@ -45,7 +45,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
      * Note: Prefer `IActionApi.get` if you're calling this from within another action.
      */
     static get<T extends ActionType>(action: T): (typeof actionDescriptions)[T] extends IActionDescription<infer A, infer E, infer R> ? ActionExecutor<A, E, R> : never;
-    static executeMultiplayer(packet: ActionPacket, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, EntityPlayerCreatureNpc, any>): any;
+    static executeMultiplayer(packet: ActionPacket, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any>): any;
     get executor(): E;
     get actionStack(): ActionType[];
     get lastAction(): ActionType;
@@ -85,6 +85,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setMilestone(milestone: Milestone, data?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
+    cancelPaddling(item: Item): this;
     setParticle(color: IRGB, inFront?: boolean): this;
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
     setParticle(particle: IActionParticle): this;
@@ -96,9 +97,10 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private executeConfirmer;
     private executeInternalOrMultiplayer;
     private executeInternal;
+    private handleApiOnActionFailure;
     private handleApi;
     private canExecute;
     private isUsableWhen;
 }
-export declare function getArgumentType(executor: EntityPlayerCreatureNpc, expected: ActionArgument | ActionArgument[], actual: unknown): ActionArgument | undefined;
+export declare function getArgumentType(executor: Entity, expected: ActionArgument | ActionArgument[], actual: unknown): ActionArgument | undefined;
 export {};

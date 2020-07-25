@@ -1,28 +1,26 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { SfxType } from "audio/IAudio";
 import { CreatureType, ICreatureDescription, ICreatureEvents, IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
-import { AiType, EntityType, IStatChangeInfo, MoveType } from "entity/IEntity";
+import { AiType, EntityType, IStatChangeInfo, MoveType, StatusType } from "entity/IEntity";
 import { IStat } from "entity/IStats";
 import Player from "entity/player/Player";
 import { IEventEmitter } from "event/EventEmitter";
-import Inspection from "game/inspection/Inspect";
-import { InspectionSection, IInspectable } from "game/inspection/Inspections";
 import { IObject } from "game/IObject";
 import Item from "item/Item";
 import Translation from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
-export default class Creature extends Entity implements IUnserializedCallback, IObject<CreatureType>, IInspectable {
+export default class Creature extends Entity implements IUnserializedCallback, IObject<CreatureType> {
     event: IEventEmitter<this, ICreatureEvents>;
     readonly entityType: EntityType.Creature;
     aberrant?: boolean;
@@ -35,7 +33,6 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     type: CreatureType;
     originalMoveType: MoveType | undefined;
     hitchedTo?: number;
-    get fromDescription(): import("../../utilities/FromDescription").ISafeFn<ICreatureDescription, undefined>;
     private _description;
     private _owner;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
@@ -54,7 +51,6 @@ export default class Creature extends Entity implements IUnserializedCallback, I
      */
     getName(article?: boolean, count?: number): Translation;
     description(): ICreatureDescription | undefined;
-    inspect({ inspector, context, inspectEntityHealth }: Inspection, section: InspectionSection): void;
     hasAi(aiType: AiType): boolean;
     isHidden(): boolean;
     isDefender(): boolean;
@@ -89,11 +85,10 @@ export default class Creature extends Entity implements IUnserializedCallback, I
      */
     updateDoodadOverHiddenState(x: number, y: number, z: number, tile: ITile, hidden: boolean): void;
     processAttack(description: ICreatureDescription, moveType: MoveType, enemy: Player | Creature | undefined): boolean;
+    protected getApplicableStatusEffects(): Set<StatusType>;
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
-    private inspectResistancesAndVulnerabilities;
-    private inspectHappiness;
     private findPath;
     private checkCreatureMove;
     private findPlayersWithinRadius;
@@ -107,4 +102,8 @@ export default class Creature extends Entity implements IUnserializedCallback, I
      */
     private breakDoodad;
     private processAiChanges;
+    get asCreature(): Creature;
+    get asHuman(): undefined;
+    get asNPC(): undefined;
+    get asPlayer(): undefined;
 }

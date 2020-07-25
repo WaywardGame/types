@@ -1,17 +1,14 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
-import Creature from "entity/creature/Creature";
 import { IStatEvents } from "entity/IStats";
-import NPC from "entity/npc/NPC";
-import Player from "entity/player/Player";
 import { ITile } from "tile/ITerrain";
 export interface IEntityEvents extends IStatEvents {
     /**
@@ -22,6 +19,11 @@ export interface IEntityEvents extends IStatEvents {
      * @param reason The reason for the change
      */
     statusChange(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
+    /**
+     * Called when the entity is created in the game
+     * Also called for players that "rejoin" the game
+     */
+    created(): void;
     /**
      * Called when the entity is removed from the game
      */
@@ -66,11 +68,13 @@ export declare module IStatChangeInfo {
 export declare enum StatusType {
     Bleeding = 0,
     Poisoned = 1,
-    Burned = 2
+    Burned = 2,
+    Encumbered = 3,
+    Exhausted = 4,
+    Starving = 5,
+    Dehydrated = 6
 }
-export declare type IStatus = Writable<{
-    [key in keyof typeof StatusType]: boolean;
-}, keyof typeof StatusType>;
+export declare type IStatus = Record<keyof typeof StatusType, boolean>;
 export interface ICausesStatusEffect {
     causesStatus?: StatusType[];
 }
@@ -82,7 +86,6 @@ export declare enum Property {
     Talked = 1
 }
 export declare type IProperties = Map<Property, any>;
-export declare type EntityPlayerCreatureNpc = Player | Creature | NPC;
 export declare enum EntityType {
     Player = 0,
     Creature = 1,

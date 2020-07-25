@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { PriorityMap } from "utilities/map/PriorityMap";
 export declare enum Priority {
@@ -17,6 +17,7 @@ export declare enum Priority {
     Highest = 2000
 }
 export declare const SYMBOL_SUBSCRIPTIONS: unique symbol;
+export declare const SYMBOL_SUPERCLASSES: unique symbol;
 declare type Abstract<T> = Function & {
     prototype: T;
 };
@@ -28,6 +29,7 @@ export interface IEventEmitterHost<E> {
 export declare type IEventEmitterHostClass<E> = ClassOrAbstractClass<IEventEmitterHost<E>>;
 export declare type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends IEventEmitterHostClass<infer E> ? E : never;
 export interface ITrueEventEmitterHostClass<E> extends Class<any> {
+    [SYMBOL_SUPERCLASSES]: Array<ITrueEventEmitterHostClass<E>>;
     [SYMBOL_SUBSCRIPTIONS]: Map<any, Map<keyof E, PriorityMap<Set<Iterable<string | Handler<any, any>>>>>>;
 }
 export interface ISelfSubscribedEmitter<E> {
@@ -36,9 +38,11 @@ export interface ISelfSubscribedEmitter<E> {
 declare type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
 declare type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
 declare type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
+declare type UndefinedFromVoid<V> = V extends void ? undefined : V;
 export interface IEventEmitter<H = any, E = any> {
+    event: IEventEmitter<this, IEventEmitterEvents<H, E>>;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
-    emitFirst<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): ReturnOf<E[K]> | undefined;
+    emitFirst<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): UndefinedFromVoid<ReturnOf<E[K]>> | undefined;
     emitFirstDefault<K extends keyof E, D>(event: K, generateDefault: () => D, ...args: ArgsOf<E[K]>): Exclude<ReturnOf<E[K]>, null | undefined> | D;
     emitStream<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Stream<ReturnOf<E[K]>>;
     emitReduce<K extends keyof E, A extends ReturnOf<E[K]> & Head<ArgsOf<E[K]>>>(event: K, arg: A, ...args: Tail<ArgsOf<E[K]>>): Extract<ReturnOf<E[K]> & Head<ArgsOf<E[K]>>, undefined> extends undefined ? (undefined extends A ? ReturnOf<E[K]> : A) : ReturnOf<E[K]>;
@@ -50,16 +54,22 @@ export interface IEventEmitter<H = any, E = any> {
     waitFor<K extends ArrayOr<keyof E>>(events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
+    hasHandlersForEvent(...events: Array<keyof E>): boolean;
 }
 interface IUntilSubscriber<H, E> {
     subscribe<K extends ArrayOr<keyof E>>(event: K, handler: IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): H;
+}
+interface IEventEmitterEvents<H, E> {
+    subscribe<K extends keyof E>(event: keyof E, handler: Iterable<(keyof H) | Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>): any;
+    unsubscribe<K extends keyof E>(event: keyof E, handler: Iterable<(keyof H) | Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>): any;
 }
 declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     private readonly host;
     private readonly hostClass;
     private readonly subscriptions;
+    private eventEmitterMeta?;
+    get event(): IEventEmitter<this, IEventEmitterEvents<H, E>>;
     constructor(host: H);
-    copyFrom(emitter: IEventEmitter<H, E>): void;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     emitFirst<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): any;
     emitFirstDefault<K extends keyof E, D>(event: K, generateDefault: () => D, ...args: ArgsOf<E[K]>): any;
@@ -71,6 +81,8 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     waitFor<K extends ArrayOr<keyof E>>(events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
+    hasHandlersForEvent(...events: Array<keyof E>): boolean;
+    private copyFrom;
     private handlersForEvent;
     private handlers;
 }

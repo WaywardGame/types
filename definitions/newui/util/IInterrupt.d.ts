@@ -1,16 +1,16 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import InterruptChoice from "language/dictionary/InterruptChoice";
 import { TranslationGenerator } from "newui/component/IComponent";
-import { IInput } from "newui/component/IInput";
+import Input from "newui/component/Input";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 export declare enum InterruptType {
     Info = 0,
@@ -30,5 +30,5 @@ export interface InterruptOptions {
     isTopMenu?: boolean;
     specialType?: string;
     initializer?(menu: any): any;
-    input?(input: IInput): any;
+    input?(input: Input): any;
 }

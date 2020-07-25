@@ -1,12 +1,12 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { TileGroup } from "entity/creature/ICreature";
 import { IOverlayInfo, ITile, TerrainType } from "tile/ITerrain";
@@ -17,6 +17,7 @@ declare module TileHelpers {
     const maskType = 4064;
     const maskTilled = 4096;
     const maskDoodadOverHidden = 8192;
+    const maskDoodadAnimationDisabled = 16384;
     function getGfx(tile: ITile): number;
     function getGfxRaw(data: number): number;
     function setGfx(tile: ITile, value: number): void;
@@ -33,6 +34,10 @@ declare module TileHelpers {
     function isDoodadOverHiddenRaw(data: number): boolean;
     function setDoodadOverHidden(tile: ITile, value: boolean): void;
     function setDoodadOverHiddenRaw(data: number, value: number): number;
+    function isDoodadAnimationDisabled(tile: ITile): boolean;
+    function isDoodadAnimationDisabledRaw(data: number): boolean;
+    function setDoodadAnimationDisabled(tile: ITile, value: boolean): void;
+    function setDoodadAnimationDisabledRaw(data: number, value: number): number;
     function getTileVariation(x: number, y: number): number;
     function isTypeInGroup(tile: ITile | TerrainType, group: TileGroup): boolean;
     function atlas(tile: ITile): {
@@ -57,7 +62,12 @@ declare module TileHelpers {
      * Check if a tile is a suitable spawn point
      */
     function isSuitableSpawnPointTile(point: IVector3, tile: ITile): boolean;
+    /**
+     * Check if a tile is a suitable spawn point
+     */
+    function isSuitableSpawnPointTileForMultiplayer(point: IVector3, tile: ITile): boolean;
     function getSuitableSpawnPoint(): IVector3;
+    function getPointsAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): IVector3[];
     /**
      * Array version of TileHelpers.tilesAround
      */
@@ -68,6 +78,8 @@ declare module TileHelpers {
     function tilesAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): Generator<ITile, void, unknown>;
     function tilesInRange(point: IVector3, range: number, includeCurrentTile?: boolean): import("@wayward/goodstream/Stream").default<[Vector3, ITile]>;
     function openTileInRange(point: IVector3, range: number, includeCurrentTile?: boolean): [Vector3, ITile] | undefined;
+    function forTilesInRange(point: IVector3, range: number, consumer: (vec: IVector3, tileValue: number) => any): void;
+    function forTilesInRange(point: IVector3, range: number, includeCenter: true, consumer: (vec: IVector3, tileValue: number) => any): void;
     /**
      * Check if the tile is blocked (impassable terrain or doodads that cause blocked movement).
      */

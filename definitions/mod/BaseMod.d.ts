@@ -1,21 +1,26 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
+import EventEmitter, { Events } from "event/EventEmitter";
 import { IModEvents } from "mod/IMod";
+import { ModRegistration, SYMBOL_MOD_REGISTRATIONS } from "mod/ModRegistry";
 import Log from "utilities/Log";
+export interface IRegistry {
+    [SYMBOL_MOD_REGISTRATIONS]: ModRegistration[];
+}
 export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
     private readonly index;
     private allocatedEnums;
     private registeredPackets;
     private readonly subRegistries;
+    private subscribedHandlers;
     constructor(index: number);
     getIndex(): number;
     /**
@@ -51,6 +56,17 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      */
     initializeGlobalData(data: any): any;
     /**
+     * Registers event handlers, injections, and bind handlers. This is called on the `preLoad` event by default,
+     * and the handlers are deregistered on the `unload` event.
+     *
+     * If you call this manually before `preLoad`, it won't be called on `preLoad` and it won't deregister on `unload`.
+     *
+     * Please note that registering handlers when the mod is initialized means that the handlers will *remain
+     * registered even when the user is playing on a server that doesn't support the mod*.
+     */
+    protected registerEventHandlers(...untilEvents: Array<keyof Events<this>>): void;
+    private deregisterEventHandlers;
+    /**
      * Event handler for `ModEvent.Unallocate`.
      */
     private onUnallocate;
@@ -60,7 +76,6 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      * Handles registration of fields decorated with ` @Register.thing`, which occur at `ModRegistrationTime.Initialize`
      */
     private onBeforeInitialize;
-    private onBeforeUninitialize;
     /**
      * Event handler for `ModEvent.PreLoad`.
      *
@@ -116,19 +131,6 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      * and any values in it which are instances of `Registry.Registered` are asynchronously replaced with their registered values.
      */
     private validateRegistration;
-    /**
-     * An asynchronous getter for a registration ID in the given `IRegistry`.
-     *
-     * @param registry The registry to get a registration ID from.
-     * @param property The property containing the registration ID.
-     * (Contains a field/method, decorated with a ` @Register.thing` decorator)
-     * @param type Whether the field is for a method or a property.
-     * (Examples include actions/commands for methods & bindables/creatures for properties)
-     *
-     * - If the type is a property, and the field has a value, it's returned immediately.
-     * - If the type is a method, and an ID is returned by `Registry.id(registry[property])`, the ID will be returned.
-     */
-    private getRegistrationId;
     /**
      * @param registry The registry to get a property value from.
      * @param property The property to get the value of.

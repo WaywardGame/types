@@ -1,15 +1,15 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import { IStatChangeInfo, StatChangeReason } from "entity/IEntity";
-import { IStat, IStats, IStatBase, IStatEvents, Stat } from "entity/IStats";
+import { IStat, IStatBase, IStatEvents, IStats, Stat } from "entity/IStats";
 import StatFactory, { StatChangeTimerFactory } from "entity/StatFactory";
 import EventEmitter from "event/EventEmitter";
 export interface IStatHost extends EventEmitter.Host<IStatEvents> {
@@ -104,6 +104,7 @@ export default class Stats<T extends IStatHost> {
      * Sets the given `Stat`'s `max` to the given amount. Triggers `statMaxChange`
      * @param stat The `Stat` to set.
      * @param max The amount to set the value to.
+     * @param newValue The new value for the stat, optional. Calls `Stat.set` internally.
      */
     setMax(stat: Stat | IStat, max: number, newValue?: number): T;
     /**

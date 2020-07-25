@@ -1,26 +1,30 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import Human from "entity/Human";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
-import { InspectionResult } from "game/inspection/IInspection";
-import Inspection from "game/inspection/Inspect";
 import { Quality } from "game/IObject";
-import { ContainerReference, ItemType, ItemTypeGroup, IContainable, IContainer, IItemDescription, IItemWeightComponent } from "item/IItem";
+import Island from "game/Island";
+import { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, ItemType, ItemTypeGroup } from "item/IItem";
 import { CraftStatus, RequirementInfo, WeightType } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
-import Translation from "language/Translation";
+import Translation, { TextContext } from "language/Translation";
+import { ITile, TerrainType } from "tile/ITerrain";
 interface ItemManagerEvents {
+    create(item: Item): any;
+    remove(item: Item): any;
+    canMoveItem(human: Human | undefined, item: Item, toContainer: IContainer): boolean | undefined;
+    canMoveItems(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType: ItemType | undefined, ofQuality: Quality | undefined): boolean | undefined;
     containerItemRemove(item: Item, previousContainer: IContainer): any;
     containerItemUpdate(item: Item, previousContainer: IContainer | undefined, newContainer: IContainer): any;
     containerItemAdd(item: Item, newContainer: IContainer): any;
@@ -33,6 +37,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     private cachedItemGroups;
     private cachedItemTypes;
     private cachedItemTypesWithRecipes;
+    private cachedItemSpawns;
     constructor();
     getItemTypes(): readonly ItemType[];
     getItemsWithRecipes(): readonly ItemType[];
@@ -60,13 +65,13 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
      */
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     weightTree(itemType: ItemType, weightType?: WeightType, debug?: boolean, depth?: number): number;
-    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer, quality?: Quality, human?: Human, movingMultiple?: boolean, updateTables?: boolean): Item;
+    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, movingMultiple?: boolean, updateTables?: boolean): Item;
     createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human): Item;
     isContainer(obj: unknown): obj is IContainer;
     moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: Quality): Item[];
     computeContainerWeight(container: IContainer): number;
     getLegendaryWeightCapacity(container: IContainer): number;
-    moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, onMoveItem?: (item: Item) => void): Item[];
+    moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, filterText?: string | undefined, onMoveItem?: (item: Item) => void): Item[];
     moveToContainer(human: Human | undefined, item: Item, container: IContainer): boolean;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: Item): boolean;
     breakContainerOnTile(itemContainer: Item, x: number, y: number, z: number): void;
@@ -74,15 +79,21 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
      * Drop items in a 3x3 square around the location
      */
     placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number, skipMessage?: boolean): void;
-    spawn(itemTypes: ItemType[] | undefined, x: number, y: number, z: number): void;
-    resetMapsInContainer(container: IContainer): void;
-    getTileContainer(x: number, y: number, z: number): IContainer;
+    /**
+     * Used to spawn a random item on the current biome type and at a set location (and terrain type) based on spawnOnWorldGen properties in item descriptions.
+     * @param terrainType The terrain type to check.
+     * @param x The x coordinate to check.
+     * @param y The y coordinate to check.
+     * @param z The z coordinate to check.
+     */
+    spawn(terrainType: TerrainType, x: number, y: number, z: number): void;
+    getTileContainer(x: number, y: number, z: number, tile?: ITile): IContainer;
     getRandomQuality(bonusQuality?: number): Quality;
     hasAdditionalRequirements(human: Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     craft(human: Human, itemType: ItemType, itemsToRequire: Item[], itemsToConsume: Item[], baseItem?: Item): CraftStatus;
-    decayItems(): boolean;
+    decayItems(pids: Set<number>): boolean;
     getPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getAbsentPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getNPCWithItemInInventory(containable: IContainable): NPC | undefined;
@@ -92,7 +103,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, allowProtectedItems?: boolean): Item | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, human?: Human, allowProtectedItems?: boolean): Item | undefined;
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean, human?: Human, allowProtectedItems?: boolean): Item[];
-    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, human?: Human): Item[];
+    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, human?: Human, filterText?: string): Item[];
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, human?: Human): Item[];
     getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number): Item | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item): boolean;
@@ -103,15 +114,15 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     isTileContainer(container: IContainer | undefined): boolean;
     getOrderedContainerItems(container: IContainer, human?: Human, allowProtectedItems?: boolean): Item[];
     reduceDismantleWeight(createdItems: Item[], itemWeight: number, mod?: number): void;
-    getItemTranslations(items: Item[], article?: boolean): import("@wayward/goodstream/Stream").default<Translation>;
-    getItemListTranslation(items: Item[], article?: boolean): Translation;
-    loadReferences(isTraveling: boolean): void;
+    getItemTranslations(items: Item[], article?: boolean, context?: TextContext): import("@wayward/goodstream/Stream").default<Translation>;
+    getItemListTranslation(items: Item[], article?: boolean, context?: TextContext): Translation;
+    loadReferences(generatedNewWorld: boolean, isTraveling: boolean): void;
     saveTileReferences(): void;
     loadTileReferences(): void;
     isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
     getGroupItems(itemGroup: ItemType | ItemTypeGroup, ancestorGroups?: ItemTypeGroup[]): Set<ItemType>;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
-    getGroups(itemType: ItemType): import("@wayward/goodstream/Stream").default<ItemTypeGroup>;
+    getGroups(itemType: ItemType): ItemTypeGroup[];
     checkMilestones(player: Player, item: Item): void;
     getDefaultDurability(human: Human | undefined, weight: number, itemType: ItemType, getMax?: boolean): number;
     generateLookups(): void;
@@ -120,15 +131,27 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     getNPCFromInventoryContainer(container: IContainer): NPC | undefined;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: Item[]): number;
-    inspect({ context }: Inspection, ...items: Item[]): InspectionResult;
     copyProperties(item: Item, item2: Item): void;
     getPlayerFromInventoryContainer(container: IContainer): Player | undefined;
+    /**
+     * Moves all player items to the target island
+     * This should be called before switching islands
+     */
+    movePlayerItemsToIsland(targetIsland: Island): void;
+    getCraftQualityBonus(item: Item, required?: boolean): number;
+    /**
+     * Checks if the item type or item is filtered from inventory/crafting/container dialogs.
+     * @param item The ItemType or Item to check.
+     * @param filterText The string of text in which to filter for.
+     * @param craftingFilter True if we are filtering the crafting dialog.
+     */
+    isFiltered(item: ItemType | Item, filterText: string, craftingFilter?: boolean): boolean;
     private getDefaultWeightRange;
     private updateItemOrderInternal;
     private loadReference;
     private removeFromContainerInternal;
     private updateUiOnItemRemove;
-    private getCraftQualityBonus;
+    private getCraftTierBonus;
     private computeCraftQualityBonus;
     private isCraftSuccessful;
     private getAbsentPlayerFromInventoryContainer;

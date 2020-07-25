@@ -1,21 +1,19 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
  * http://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
+ * https://github.com/WaywardGame/types/wiki
  */
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
-import { InspectionResult } from "game/inspection/IInspection";
-import Inspection from "game/inspection/Inspect";
-import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
-import { ITileEvent, TileEventType } from "tile/ITileEvent";
+import { TileEventType } from "tile/ITileEvent";
+import TileEvent from "tile/TileEvent";
 import { IVector3 } from "utilities/math/IVector";
 export interface ITileManagerEvents {
     /**
@@ -27,20 +25,29 @@ export interface ITileManagerEvents {
      * @returns False if the creature cannot spawn, or undefined to use the default logic
      */
     canCreate(type: TileEventType, x: number, y: number, z: number): boolean | undefined;
+    /**
+     * Called when a tile event is created.
+     */
+    create(event: TileEvent): any;
+    /**
+     * Called when a tile event is removed.
+     */
+    remove(event: TileEvent): any;
+    /**
+     * Called when a tile event is moved.
+     */
+    move(event: TileEvent): any;
 }
 export default class TileEventManager extends EventEmitter.Host<ITileManagerEvents> {
-    create(type: TileEventType, x: number, y: number, z: number): ITileEvent | undefined;
-    createFake(type: TileEventType, x: number, y: number, z: number): ITileEvent | undefined;
-    remove(tileEvent: ITileEvent): void;
-    moveTo(tileEvent: ITileEvent, x: number, y: number, z: number): void;
-    get(tile: ITile, type: TileEventType): ITileEvent | undefined;
-    canGather(tile: ITile): ITileEvent | undefined;
+    create(type: TileEventType, x: number, y: number, z: number): TileEvent | undefined;
+    createFake(type: TileEventType, x: number, y: number, z: number): TileEvent | undefined;
+    remove(tileEvent: TileEvent): void;
+    get(tile: ITile, type: TileEventType): TileEvent | undefined;
+    canGather(tile: ITile): TileEvent | undefined;
     updateAll(): void;
-    fireOverflow(x: number, y: number, z: number): void;
-    getMovementProgress(tileEvent: ITileEvent): number;
-    inspect(inspection: Inspection, ...events: ITileEvent[]): InspectionResult;
-    is(thing: any): thing is ITileEvent;
-    canPickup(tile: ITile): ITileEvent | undefined;
+    fireOverflow(x: number, y: number, z: number): boolean;
+    is(thing: any): thing is TileEvent;
+    canPickup(tile: ITile): TileEvent | undefined;
     blocksTile(tile: ITile): boolean;
     /**
      * Creates either blood or water blood
@@ -52,8 +59,5 @@ export default class TileEventManager extends EventEmitter.Host<ITileManagerEven
     createBlood(x: number, y: number, z: number): boolean;
     clearBlood(position: IVector3, executor: NPC | Player): boolean;
     moveExcrement(position: IVector3): void;
-    containsDamagingTileEvents(events: ITileEvent[] | undefined): boolean;
-    getName(tileEvent: ITileEvent): Translation;
-    private _addToTile;
-    private _removeFromTile;
+    containsDamagingTileEvents(events: TileEvent[] | undefined): boolean;
 }
