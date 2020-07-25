@@ -25,7 +25,7 @@ export default class InputButton extends Button {
     constructor(inputInitializer: (input: Input) => any);
     getInputText(): string;
     setInputText(text: string): void;
-    focus(): void;
+    focusInput(): void;
     protected onStopEditMode(): void;
     private onInputChange;
     private onInputDone;
