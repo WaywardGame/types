@@ -81,6 +81,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getMatchmakingServer(): IMatchmakingServer | undefined;
     getSteamNetworking(): ISteamworksNetworking | undefined;
     initialize(): Promise<void>;
+    enableSafePaths(): void;
     onUnload(): void;
     setOverlayWorks(overlayWorks: boolean): void;
     setupMods(): Promise<void>;

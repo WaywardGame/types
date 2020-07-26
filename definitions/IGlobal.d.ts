@@ -207,6 +207,8 @@ declare global {
         import(template: JQuery | HTMLTemplateElement): JQuery;
     }
     interface IFileSystem {
+        enableSafePaths(): void;
+        addSafePath(path: string): void;
         createWriteStream(path: string, opts: any): IFileStream;
         copy(source: string, destination: string, opt: {
             dereference?: boolean;

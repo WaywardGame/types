@@ -24,4 +24,5 @@ export default class ChangelogMenu extends Menu {
     private wrapChangeTextNodes;
     private getChangelogText;
     private sortCards;
+    private getChangeText;
 }

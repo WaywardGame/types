@@ -10,10 +10,10 @@
  */
 import IByteGrid from "renderer/fieldofview/IByteGrid";
 export default class ByteGrid implements IByteGrid {
-    width: number;
-    height: number;
-    size: number;
-    data: Uint8Array;
+    readonly width: number;
+    readonly height: number;
+    readonly size: number;
+    readonly data: Uint8Array;
     constructor(width: number, height?: number);
     get(x: number, y: number): number;
     set(x: number, y: number, value: number): void;
