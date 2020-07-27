@@ -54,7 +54,7 @@ declare class Translation {
     static colorizeImportance(importance: "primary" | "secondary"): Translation;
     static colorizeImportance(importance: "primary" | "secondary", text: string | IStringSection): IStringSection;
     static colorizeImportance(importance: "primary" | "secondary", text: IStringSection[]): IStringSection[];
-    static formatList(items: Iterable<string | IStringSection | IStringSection[] | Translation | ISerializedTranslation>, ender?: ListEnder | false): Translation;
+    static formatList(items: Iterable<string | IStringSection | Iterable<IStringSection> | Translation | ISerializedTranslation>, ender?: ListEnder | false): Translation;
     static getString(...entries: ArrayOfIterablesOr<string | IStringSection | Translation>): string;
     static getAll(dictionary: Dictionary | string, entry?: number | string): Translation[];
     static nameOf(type: Dictionary, thing: number | {

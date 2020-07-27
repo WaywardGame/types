@@ -119,14 +119,18 @@ export interface ISourceFilter {
      * Any source present in this array will not appear in the console.
      */
     disabledSources: Array<keyof typeof LogSource>;
+    /**
+     * Any source present in this array will not appear in the log file.
+     */
+    disabledFileSources: Array<keyof typeof LogSource>;
 }
 export declare const defaultSourceFilter: ISourceFilter;
 declare module Log {
+    function refresh(): void;
     /**
      * Takes a winston instance and a path. Updates the static Log methods to use the winston instance.
      */
     function setupFileLogger(fileSystem: IFileSystem, path: IPath, logsPath: string): void;
-    function refresh(): void;
     function setCallback(cb?: (...args: any[]) => void): void;
     /**
      * Returns a method that can be used to `Log.info` with the given sources.

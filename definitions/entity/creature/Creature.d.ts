@@ -64,7 +64,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     skipNextUpdate(): void;
     getMoveType(): MoveType;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
-    update(): boolean;
+    update(realPlayers: Player[]): boolean;
     /**
      * Checks under the creature for getting burned, setting off traps, eating items off the ground, and more
      * @returns Returns whether the creature can keep moving (in the case of creatures with >= 2 speed)
@@ -84,7 +84,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
      * which means we should hide the doodad over layer for doodads on the creature
      */
     updateDoodadOverHiddenState(x: number, y: number, z: number, tile: ITile, hidden: boolean): void;
-    processAttack(description: ICreatureDescription, moveType: MoveType, enemy: Player | Creature | undefined): boolean;
+    processAttack(realPlayers: Player[], description: ICreatureDescription, moveType: MoveType, enemy: Player | Creature | undefined): boolean;
     protected getApplicableStatusEffects(): Set<StatusType>;
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;

@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { RenderLayerFlag, TileLayerType } from "renderer/IWorldRenderer";
 import Vector2 from "utilities/math/Vector2";
-import { TileLayerType, RenderLayerFlag } from "renderer/IWorldRenderer";
 /**
  * Each tile in the wayward world is rendered as 4 subtiles (topleft, topright, bottomleft, bottomright).
  * The world consists of 3 tile layers (terrain, doodad, doodadOver).
@@ -27,10 +27,12 @@ export default class TileLayer {
     private readonly yRenderOffset;
     private readonly tileAnimationFrames;
     private readonly syncDoodadAnimationFrames;
-    readonly renderLayerFlag: RenderLayerFlag;
+    static setTileTexture(texture: WebGLTexture, textureSizeInversed: Vector2): any;
+    static compileShaders(gl: WebGL2RenderingContext): void;
     private static texTileSprites;
     private static inverseTileSpriteTextureSize;
     private static tileShaderProgram;
+    readonly renderLayerFlag: RenderLayerFlag;
     private readonly singleTileData;
     private readonly singleTileDataU8;
     private readonly singleTileDataU32;
@@ -40,8 +42,6 @@ export default class TileLayer {
     private readonly texTiles;
     private readonly inverseTileDataTextureSize;
     private readonly vertexArray;
-    static setTileTexture(texture: WebGLTexture, textureSizeInversed: Vector2): any;
-    static compileShaders(gl: WebGL2RenderingContext): void;
     constructor(type: TileLayerType, width: number, height: number, gl: WebGL2RenderingContext, positionBuffer: WebGLBuffer, isFixedDepth?: boolean, yRenderOffset?: number, tileAnimationFrames?: number, syncDoodadAnimationFrames?: number);
     getTileTLFG(dataIndex: number): [number, number];
     setTileTLFG(dataIndex: number, tileX: number, tileY: number): void;

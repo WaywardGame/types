@@ -51,7 +51,7 @@ export default class Island {
     temperature: TemperatureManager | undefined;
     static positionToId(position: IVector2): string;
     static idToPosition(id: string): IVector2 | undefined;
-    constructor(position?: IVector2);
+    constructor(position?: IVector2, startingSeed?: number);
     get id(): string;
     get biome(): import("./IBiome").IBiomeDescription;
     registerEventBus(): void;

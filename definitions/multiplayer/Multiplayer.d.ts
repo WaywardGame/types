@@ -62,6 +62,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions, updateGame?: boolean): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
+    enableSteamNetworkConnections(enable: boolean): void;
     getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
     /**
      * Three types of game codes:

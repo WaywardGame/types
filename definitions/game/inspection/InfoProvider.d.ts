@@ -87,7 +87,7 @@ export declare class SimpleInfoProvider extends InfoProvider {
     private componentClass;
     private displayLevel;
     constructor(...translations: Array<TranslationGenerator | InfoProvider>);
-    get(): (import("../../language/Translation").ISerializedTranslation | import("../../language/Translation").default | import("../../language/dictionary/UiTranslation").default | (() => Iterable<import("../../utilities/string/Interpolator").IStringSection> | import("../../language/Translation").ISerializedTranslation | import("../../language/Translation").default | import("../../language/dictionary/UiTranslation").default | undefined) | InfoProvider)[];
+    get(): (import("../../language/Translation").ISerializedTranslation | import("../../language/Translation").default | import("../../language/dictionary/UiTranslation").default | (() => import("../../language/Translation").ISerializedTranslation | import("../../language/Translation").default | Iterable<import("../../utilities/string/Interpolator").IStringSection> | import("../../language/dictionary/UiTranslation").default | undefined) | InfoProvider)[];
     add(...translations: Array<TranslationGenerator | InfoProvider>): this;
     getClass(): string[];
     addClasses(...classes: string[]): this;

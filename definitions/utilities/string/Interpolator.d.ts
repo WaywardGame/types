@@ -12,6 +12,7 @@ export interface ISegmentApi extends Readonly<IInterpolationOptions> {
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;
     with(options: IInterpolationOptions): ISegmentApi;
+    formatValue(value: unknown): string | Iterable<IStringSection>;
 }
 export interface IInterpolationOptions {
     formatNumbers?: boolean;
@@ -37,6 +38,7 @@ declare class Interpolator {
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;
     with(options: IInterpolationOptions): this;
+    formatValue(value: unknown): string | Iterable<IStringSection>;
     private handleChar;
     static combineLikeSections(sections: IStringSection[], ignoreKeys?: string[]): void;
 }

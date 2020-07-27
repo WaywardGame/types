@@ -70,6 +70,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     registerEventBusSubscriber(...untilEvents: Array<keyof Events<this>>): void;
     deregisterEventBusSubscriber(): void;
     registerBindHandlers(...untilEvents: Array<keyof Events<this>>): void;
+    registerBindHandlers(warnIfNoHandlers: false, ...untilEvents: Array<keyof Events<this>>): void;
     deregisterBindHandlers(): void;
     registerHookHost(name?: string, ...untilEvents: Array<keyof Events<this>>): void;
     isVisible(): boolean;

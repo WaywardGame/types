@@ -10,9 +10,7 @@
  */
 import { MoveType } from "entity/IEntity";
 import Player from "entity/player/Player";
-import IFlowField from "flowfield/IFlowField";
-import { ITile } from "tile/ITerrain";
-export default class FlowField implements IFlowField {
+export default class FlowField {
     private readonly z;
     private readonly moveType;
     private instance;
@@ -23,7 +21,7 @@ export default class FlowField implements IFlowField {
     delete(): void;
     getHashCodes(): string[];
     getFieldValue(x: number, y: number): number;
-    updateField(plys: Player[]): void;
-    updateTile(gridIndex: number, tile: ITile): void;
+    updateField(flowFieldPlayers: Player[]): void;
+    resetPenalty(gridIndex: number): void;
     reset(): void;
 }

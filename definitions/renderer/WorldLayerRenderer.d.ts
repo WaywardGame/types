@@ -50,10 +50,6 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     setDoodad(x: number, y: number, doodadDescription: IDoodadDescription | undefined, doodad: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, variationX: number, variationY: number, hasGraphicVariation: boolean, terrainMasks: TerrainMask, flushImmediate?: boolean): void;
     renderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFixedDepth: boolean): void;
     getDataIndex(x: number, y: number): number;
-    private computeTile;
-    private computeDoodad;
-    private computeTilled;
-    private computeDecorations;
     setLayer(layer: TileLayer, dataIndex: number, tileAdaptation: TileAdaptor.ITileAdaptation): void;
     setForegroundLayer(layer: TileLayer, dataIndex: number, tileAdaptation: TileAdaptor.ITileAdaptation, offset?: number): void;
     setBackgroundLayer(layer: TileLayer, dataIndex: number, tileAdaptation: TileAdaptor.ITileAdaptation, offset?: number): void;
@@ -61,6 +57,10 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     clearLayer(layer: TileLayer, dataIndex: number): boolean;
     clearForegroundLayer(layer: TileLayer, dataIndex: number): boolean;
     clearBackgroundLayer(layer: TileLayer, dataIndex: number): boolean;
+    private computeTile;
+    private computeDoodad;
+    private computeTilled;
+    private computeDecorations;
     private updateTileLightBlock;
     private flush;
 }
