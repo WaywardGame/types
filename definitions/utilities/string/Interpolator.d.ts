@@ -43,7 +43,13 @@ declare class Interpolator {
     static combineLikeSections(sections: IStringSection[], ignoreKeys?: string[]): void;
 }
 declare module Interpolator {
-    function getArgument(keyMap: string, ...args: any[]): any;
+    function getArgument(keyMap: string, ...args: any[]): {
+        hasValue: false;
+        value?: undefined;
+    } | {
+        hasValue: true;
+        value: any;
+    };
     /**
      * Returns the index of the first occurrence of character in the provided string which is not inside a segment `{}`.
      * Returns `-1` if there is no occurrence.

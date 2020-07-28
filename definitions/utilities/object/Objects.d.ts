@@ -25,7 +25,13 @@ declare module Objects {
     function windowKeysToParentObject(windowKeys: string[]): any;
     function deepClone<T>(obj: T): T;
     function addProperty(property: string, value: any): (object: any) => any;
-    function followDirections<T>(target: any, directions: string[]): T | undefined;
+    function followDirections<T>(target: any, directions: string[]): {
+        hasValue: true;
+        value: T;
+    } | {
+        hasValue: false;
+        value?: undefined;
+    };
     function stringify(object: any, pretty?: boolean, noDepth?: boolean, maxIterations?: number): string;
     function mutable<T>(object: T): Mutable<T>;
 }

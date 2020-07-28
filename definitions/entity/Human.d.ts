@@ -145,6 +145,7 @@ export default abstract class Human extends Entity {
      */
     isSwimming(): boolean;
     updateSwimming(): void;
+    updatePaddling(): void;
     /**
      * Humans can't produce temperature, but their equipment can
      */

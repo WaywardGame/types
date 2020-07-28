@@ -40,7 +40,9 @@ export default class Player extends Human {
     containerSortInfo: {
         [index: string]: IContainerSortInfo;
     };
-    dialogContainerInfo: IDialogInfo[];
+    dialogContainerInfo: {
+        [index: number]: IDialogInfo;
+    };
     dialogInfo: {
         [index: string]: IDialogInfo;
     };

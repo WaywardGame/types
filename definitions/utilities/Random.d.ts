@@ -83,6 +83,10 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
     weightedChoice<T>(choices: Array<[number, T]>): T;
     withGenerator<T>(generator: G, execute: () => T): T;
 }
+/**
+ * Converts string or number into a map gen seed
+ * Prevents negative numbers and integer overflows
+ */
 export declare function convertStringToSeed(seed: string | number): number;
 export declare class SeededGenerator implements IRandomGenerator {
     history: IRandomHistory[] | undefined;

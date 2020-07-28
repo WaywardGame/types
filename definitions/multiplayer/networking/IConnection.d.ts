@@ -38,7 +38,7 @@ export interface IConnection {
     addConnectionTimeout(): void;
     addKeepAliveTimeout(): void;
     addTimeout(milliseconds: number, callback: () => void): void;
-    clearTimeout(): void;
+    clearTimeout(): boolean;
     close(): void;
     getState(): ConnectionState;
     isConnected(): boolean;
