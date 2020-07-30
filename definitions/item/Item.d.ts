@@ -103,7 +103,12 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     clearQuickSlot(): void;
     isDecayed(): boolean;
     changeInto(type: ItemType, disableNotify?: boolean): void;
-    returns(disableNotify?: boolean): boolean;
+    /**
+     * Returns and item based on returnOnUseAndDecay.
+     * @param disableNotify Set to true if no notification should be shown for the new item above the player.
+     * @param craft Set to true when returning consumed items to check for whenCrafted property in returnOnUseAndDecay.
+     */
+    returns(disableNotify?: boolean, craft?: boolean): boolean;
     setUsed(itemUse?: IItemUsed, human?: Human): void;
     spawnOnBreak(): Creature | undefined;
     spawnOnDecay(): Creature | undefined;

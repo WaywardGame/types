@@ -27,6 +27,11 @@ export declare enum GameMode {
 }
 export declare const TIME_ETERNAL_NIGHT = 0.7;
 export declare const TIME_ETERNAL_DAY = 0.3;
+export declare enum TravelingEffectStrategy {
+    AllPlayers = 0,
+    OnlinePlayersOnly = 1,
+    NoPlayers = 2
+}
 export interface IGameOptions {
     /**
      * Whether players respawn when they die
@@ -37,6 +42,10 @@ export interface IGameOptions {
          * Biome type for the first island
          */
         startingBiomeType: BiomeType;
+        /**
+         * Traveling effect options
+         */
+        applyTravelingEffects: TravelingEffectStrategy;
     };
     creatures: {
         /**

@@ -25,7 +25,7 @@ import { BiomeType } from "game/IBiome";
 import { InspectType } from "game/inspection/IInspection";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
-import { GameMode, UnlockedRecipesStrategy } from "game/options/IGameOptions";
+import { GameMode, TravelingEffectStrategy, UnlockedRecipesStrategy } from "game/options/IGameOptions";
 import { Challenge } from "game/options/modifiers/challenge/IChallenge";
 import { MilestoneModifierGroup } from "game/options/modifiers/milestone/MilestoneModifier";
 import { PartOfDay } from "game/TimeManager";
@@ -127,13 +127,14 @@ export declare enum Dictionary {
     TeamMemberResponsibility = 64,
     Terrain = 65,
     TileEvent = 66,
-    Ui = 67,
-    UiQuadrant = 68,
-    UnableToJoinReason = 69,
-    UnlockedRecipesStrategy = 70,
-    Website = 71,
-    WeightStatus = 72,
-    WorldLayer = 73
+    TravelingEffectStrategy = 67,
+    Ui = 68,
+    UiQuadrant = 69,
+    UnableToJoinReason = 70,
+    UnlockedRecipesStrategy = 71,
+    Website = 72,
+    WeightStatus = 73,
+    WorldLayer = 74
 }
 export declare type Enum = {
     [key: string]: number;
@@ -209,13 +210,14 @@ declare const dictionaries: {
     64: typeof Responsibility;
     65: typeof TerrainType;
     66: typeof TileEventType;
-    67: typeof UiTranslation;
-    68: typeof Quadrant;
-    69: typeof UnableToJoinReason;
-    70: typeof UnlockedRecipesStrategy;
-    71: typeof Website;
-    72: typeof WeightStatus;
-    73: typeof WorldZ;
+    67: typeof TravelingEffectStrategy;
+    68: typeof UiTranslation;
+    69: typeof Quadrant;
+    70: typeof UnableToJoinReason;
+    71: typeof UnlockedRecipesStrategy;
+    72: typeof Website;
+    73: typeof WeightStatus;
+    74: typeof WorldZ;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

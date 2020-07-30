@@ -135,8 +135,18 @@ export interface IItemDescription extends IObjectDescription, IModdable {
 }
 export interface IItemReturn {
     type: ItemType;
+    /**
+     * If true, the returned item will be damaged by 1 point.
+     */
     damaged?: boolean;
+    /**
+     * If true, it will check the disassembly data for the item and return the first instance of the ItemType set in type.
+     */
     returnFromDisassembly?: boolean;
+    /**
+     * If set to true, this item will return the item when consumed in a craft, otherwise, it won't.
+     */
+    whenCrafted?: boolean;
 }
 export interface IRecipe {
     baseComponent?: (ItemType | ItemTypeGroup);

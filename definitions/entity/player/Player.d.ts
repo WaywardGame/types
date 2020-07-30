@@ -70,7 +70,6 @@ export default class Player extends Human {
     exploredMap: IExploreMap[] | undefined;
     isMovingClientside: boolean;
     finishedMovingClientside: boolean;
-    wasAbsentPlayer: boolean;
     nextX: number;
     nextY: number;
     movementProgress: number;
