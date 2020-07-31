@@ -127,11 +127,13 @@ export interface ISourceFilter {
 export declare const defaultSourceFilter: ISourceFilter;
 declare module Log {
     function refresh(): void;
+    function startSetup(): void;
+    function finalizeSetup(): void;
+    function setCallback(cb?: (...args: any[]) => void): void;
     /**
      * Takes a winston instance and a path. Updates the static Log methods to use the winston instance.
      */
     function setupFileLogger(fileSystem: IFileSystem, path: IPath, logsPath: string): void;
-    function setCallback(cb?: (...args: any[]) => void): void;
     /**
      * Returns a method that can be used to `Log.info` with the given sources.
      * @param sources A list of sources to log to.

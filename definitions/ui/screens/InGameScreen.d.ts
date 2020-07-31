@@ -63,6 +63,7 @@ export default class InGameScreen extends BaseScreen {
     contextMenuOpen: boolean;
     private contextMenu;
     private contextMenuTarget;
+    private contextMenuLastTarget;
     private lastContextMenuPosition;
     private actionsMenuOpen;
     private actionsMenuCentered;
@@ -127,7 +128,7 @@ export default class InGameScreen extends BaseScreen {
     getInventoryItemsInOrder(): any[];
     loadQuickSlots(): void;
     saveItemOrder(containerElement: JQuery): void;
-    showItemContextMenu(element: JQuery): void;
+    showItemContextMenu(element: JQuery, skipSound?: boolean): void;
     onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): boolean;
     runContextMenuAction(itemId: number, action: IContextMenuAction, skipSound?: boolean, usedFromQuickSlot?: boolean): boolean;
     craftItemChecker(itemType: ItemType): void;
