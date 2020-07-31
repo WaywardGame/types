@@ -11,7 +11,10 @@
 import ByteGrid from "renderer/fieldofview/ByteGrid";
 import IExploreMap from "renderer/IExploreMap";
 export default class ExploreMap extends ByteGrid implements IExploreMap {
+    private readonly z;
     private encodedData;
+    constructor(z: number, width: number, height: number);
     encode(): number[];
     decode(encodedData?: number[]): void;
+    private unexploreEdges;
 }

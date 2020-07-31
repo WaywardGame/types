@@ -17,6 +17,7 @@ import { Events, IEventEmitter } from "event/EventEmitter";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 import Vector3 from "utilities/math/Vector3";
+import Player from "entity/player/Player";
 export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> {
     /**
      * Called when a creature is about to be spawned
@@ -54,12 +55,16 @@ export default class CreatureManager extends EntityManager<Creature> {
     exists(creature: Creature): boolean;
     maybeSpawnClawWorm(target: Human | Creature): void;
     remove(creature: Creature): void;
-    updateAll(): void;
+    updateAll(realPlayers: Player[]): void;
     /**
      * getMovePenalty
      * @return Blocked penalty - Do no return 0!
      */
     getMovePenalty(moveType: MoveType, tile: ITile, isFinalMove?: boolean): number;
+    /**
+     * wasm calls this when calculating penalties for flow fields
+     */
+    getMovePenaltyFromWasm(moveType: MoveType, x: number, y: number, z: number): number;
     checkSpawnReputation(creatureDescription: ICreatureDescription, reputation?: number, bypass?: boolean): boolean;
     getCreaturesWithSpawnGroup(group?: SpawnGroup, checkReputation?: boolean, reputation?: number): CreatureType[];
     spawnGuardians(position: Vector3, amount: number): number;

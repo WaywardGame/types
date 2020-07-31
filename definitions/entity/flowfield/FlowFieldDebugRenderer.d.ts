@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import IFlowFieldManager from "entity/flowfield/IFlowFieldManager";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
+import FlowFieldManager from "entity/flowfield/FlowFieldManager";
 export default class FlowFieldDebugRenderer implements ITextureDebugRenderer {
     private readonly ff;
     private readonly gl;
@@ -17,7 +17,7 @@ export default class FlowFieldDebugRenderer implements ITextureDebugRenderer {
     private readonly shaderProgramAlphaDebug;
     private readonly tex;
     private readonly field;
-    constructor(gl: WebGL2RenderingContext, ff: IFlowFieldManager);
+    constructor(gl: WebGL2RenderingContext, ff: FlowFieldManager);
     update(): void;
     renderDebug(): void;
 }

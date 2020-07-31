@@ -28,13 +28,14 @@ export declare enum SshCommandType {
     Load = 6,
     Backup = 7,
     Save = 8,
-    Send = 9,
-    Chat = 10,
-    Kick = 11,
-    Ban = 12,
-    Unban = 13,
-    Shutdown = 14,
-    Exit = 15
+    Sync = 9,
+    Send = 10,
+    Chat = 11,
+    Kick = 12,
+    Ban = 13,
+    Unban = 14,
+    Shutdown = 15,
+    Exit = 16
 }
 export declare enum SshCommandCategory {
     Server = 0,

@@ -40,7 +40,7 @@ export declare abstract class Connection implements IConnection {
     close(): void;
     addConnectionTimeout(): void;
     addTimeout(milliseconds: number, callback: () => void): void;
-    clearTimeout(): void;
+    clearTimeout(): boolean;
     addKeepAliveTimeout(): void;
     sendKeepAlive(): void;
     getState(): ConnectionState;

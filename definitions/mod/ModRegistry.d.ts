@@ -50,11 +50,11 @@ import { IStatDisplayDescription } from "newui/screen/screens/game/static/stats/
 import { HelpArticle, IHelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 import { ModOptionSectionInitializer } from "newui/screen/screens/menu/menus/options/TabMods";
 import { ITerrainDecorationBase, TerrainDecoration } from "renderer/Decorations";
+import { TileLayerType } from "renderer/IWorldRenderer";
 import { IOverlayDescription } from "renderer/Overlays";
 import { ITerrainDescription, OverlayType, TerrainType } from "tile/ITerrain";
 import { ITileEventDescription, TileEventType } from "tile/ITileEvent";
 import { ITerrainLootItem } from "tile/TerrainResources";
-import { TileLayerType } from "renderer/IWorldRenderer";
 export interface IModdable {
     modIndex?: number;
 }
@@ -222,7 +222,7 @@ export interface IStatRegistration extends IBaseModRegistration {
 export interface IStatusEffectRegistration extends IBaseModRegistration {
     type: ModRegistrationType.StatusEffect;
     name: string;
-    handlerClass?: StatusEffectClass;
+    handlerClass: StatusEffectClass;
 }
 export interface IItemRegistrationDescription extends IItemDescription {
     groups?: ItemTypeGroup[];
@@ -381,7 +381,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered status effect.
      */
-    function statusEffect(name: string, handlerClass?: StatusEffectClass): <K extends string | number | symbol, T extends { [k in K]: StatusType; }>(target: T, key: K) => void;
+    function statusEffect(name: string, handlerClass: StatusEffectClass): <K extends string | number | symbol, T extends { [k in K]: StatusType; }>(target: T, key: K) => void;
     /**
      * Registers an item.
      * @param name The name of the item.

@@ -48,6 +48,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private _activeSyncCheck;
     private _syncChecksSuppressed;
     private _recentPackets;
+    private _enabledSyncChecks;
     private _disconnectingFromSyncIssue;
     private _ipAddress;
     private readonly _matchmakingSecret;
@@ -62,6 +63,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions, updateGame?: boolean): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
+    enableSteamNetworkConnections(enable: boolean): void;
     getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
     /**
      * Three types of game codes:
@@ -113,8 +115,8 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     updatePlayerId(oldPid: number, newPid: number): void;
     suppressSyncChecks(suppress: boolean): void;
     syncGameState(): void;
-    preSaveGame(): void;
-    postSaveGame(): void;
+    clearKeepAliveTimeouts(): void;
+    addKeepAliveTimeouts(): void;
     updateGlobalServerDirectory(): void;
     checkConnection(): void;
     isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;
@@ -156,4 +158,5 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
      * Called when we failed to connect to a remote steam id
      */
     private onP2PSessionConnectFail;
+    private refreshEnabledSyncChecks;
 }

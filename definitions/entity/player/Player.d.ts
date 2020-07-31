@@ -40,13 +40,16 @@ export default class Player extends Human {
     containerSortInfo: {
         [index: string]: IContainerSortInfo;
     };
-    dialogContainerInfo: IDialogInfo[];
+    dialogContainerInfo: {
+        [index: number]: IDialogInfo;
+    };
     dialogInfo: {
         [index: string]: IDialogInfo;
     };
     hintSeen: boolean[];
     isConnecting: boolean;
     lastIslandId: string;
+    shouldApplyTravelingEffects: boolean;
     isMoving: boolean;
     lastAttackedBy: Human | Creature | undefined;
     movementCompleteZ: number | undefined;
@@ -68,7 +71,6 @@ export default class Player extends Human {
     exploredMap: IExploreMap[] | undefined;
     isMovingClientside: boolean;
     finishedMovingClientside: boolean;
-    wasAbsentPlayer: boolean;
     nextX: number;
     nextY: number;
     movementProgress: number;

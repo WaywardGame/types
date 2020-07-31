@@ -15,7 +15,7 @@ export default class PlayerManager extends EntityManager<Player> {
     static readonly INSTANCE: PlayerManager;
     getEntities(): Player[];
     setLocal(player: Player): void;
-    add(playerOptions?: Partial<IPlayerOptions>): Player;
+    add(playerOptions?: Partial<IPlayerOptions>, allowMultiplayerSetup?: boolean): Player;
     remove(player: Player): void;
     remove(pid: number): void;
     delete(plys: Player[], identifier: string): void;

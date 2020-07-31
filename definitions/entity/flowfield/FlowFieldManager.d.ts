@@ -8,18 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { IFlowField } from "entity/flowfield/IFlowField";
+import FlowField from "entity/flowfield/FlowField";
 import { DebugRendererDelegate } from "entity/flowfield/IFlowFieldDebugRenderer";
-import IFlowFieldManager from "entity/flowfield/IFlowFieldManager";
 import { MoveType } from "entity/IEntity";
 import Player from "entity/player/Player";
 import { Direction } from "utilities/math/Direction";
 import { IVector3 } from "utilities/math/IVector";
-export default class FlowFieldManager implements IFlowFieldManager {
+export default class FlowFieldManager {
     private readonly size;
     delegate: DebugRendererDelegate;
     flowFields: {
-        [index: string]: IFlowField;
+        [index: string]: FlowField;
     };
     private flowFieldPlayers;
     constructor(size: number);

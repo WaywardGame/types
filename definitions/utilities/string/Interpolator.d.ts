@@ -12,6 +12,7 @@ export interface ISegmentApi extends Readonly<IInterpolationOptions> {
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;
     with(options: IInterpolationOptions): ISegmentApi;
+    formatValue(value: unknown): string | Iterable<IStringSection>;
 }
 export interface IInterpolationOptions {
     formatNumbers?: boolean;
@@ -37,11 +38,18 @@ declare class Interpolator {
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;
     with(options: IInterpolationOptions): this;
+    formatValue(value: unknown): string | Iterable<IStringSection>;
     private handleChar;
     static combineLikeSections(sections: IStringSection[], ignoreKeys?: string[]): void;
 }
 declare module Interpolator {
-    function getArgument(keyMap: string, ...args: any[]): any;
+    function getArgument(keyMap: string, ...args: any[]): {
+        hasValue: false;
+        value?: undefined;
+    } | {
+        hasValue: true;
+        value: any;
+    };
     /**
      * Returns the index of the first occurrence of character in the provided string which is not inside a segment `{}`.
      * Returns `-1` if there is no occurrence.

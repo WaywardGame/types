@@ -41,35 +41,39 @@ export declare enum MultiplayerSyncCheck {
     Dismantle = 11,
     EncumberedStatus = 12,
     FlowFieldHashCode = 13,
-    FlowFieldValue = 14,
-    HandToUse = 15,
-    HealthChange = 16,
-    InventoryCount = 17,
-    IsTileEmpty = 18,
-    Item = 19,
-    ItemCraft = 20,
-    ItemDamage = 21,
-    ItemOrder = 22,
-    LastCreationIds = 23,
-    MilestoneSeed = 24,
-    Misc = 25,
-    PenaltyFieldHashCode = 26,
-    PlaceOnTile = 27,
-    PlayerPositions = 28,
-    Players = 29,
-    PlayerSetup = 30,
-    Random = 31,
-    Reputation = 32,
-    Seed = 33,
-    SkillGain = 34,
-    StaminaChanges = 35,
-    StatChange = 36,
-    Stats = 37,
-    StatusChange = 38,
-    Temp = 39,
-    Tick = 40,
-    Ticks = 41,
-    Weight = 42
+    FlowFieldPenalty = 14,
+    FlowFieldUpdate = 15,
+    FlowFieldUpdateTile = 16,
+    FlowFieldValue = 17,
+    HandToUse = 18,
+    HealthChange = 19,
+    InventoryCount = 20,
+    IsTileEmpty = 21,
+    Item = 22,
+    ItemCraft = 23,
+    ItemDamage = 24,
+    ItemOrder = 25,
+    LastCreationIds = 26,
+    MilestoneSeed = 27,
+    Misc = 28,
+    PenaltyFieldHashCode = 29,
+    PlaceOnTile = 30,
+    PlayerPositions = 31,
+    Players = 32,
+    PlayerSetup = 33,
+    Random = 34,
+    Reputation = 35,
+    Seed = 36,
+    SkillGain = 37,
+    StaminaChanges = 38,
+    StatChange = 39,
+    Stats = 40,
+    StatusChange = 41,
+    SyncChecks = 42,
+    Temp = 43,
+    Tick = 44,
+    Ticks = 45,
+    Weight = 46
 }
 export declare const maxPlayers = 32;
 export declare const packetTickRate = 10;
@@ -98,12 +102,13 @@ export interface IMultiplayerNetworkingOptions {
     matchmakingServer: string;
     matchmakingServerPort: number;
     syncChecks: boolean | MultiplayerSyncCheck[];
+    enableSteamNetworkConnections: boolean;
+    enableWebRtcConnections: boolean;
     enablePacketNumberChecks: boolean;
-    checkSeedHistory: boolean;
+    enableSeedHistoryChecks: boolean;
     chunkSize: number;
     logPackets: boolean;
     logSyncChecks: boolean;
-    stopWebRtc: boolean;
     fakeRoundTripTime: number;
     recentPacketTracking: number;
     joinServerTimeout: number;

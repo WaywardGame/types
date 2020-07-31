@@ -249,13 +249,14 @@ export declare enum ActionArgument {
     ItemNearby = 23,
     ItemType = 24,
     NPC = 25,
-    Player = 26,
-    Quality = 27,
-    RecipeType = 28,
-    RestType = 29,
-    TileEvent = 30,
-    Vector2 = 31,
-    Vector3 = 32
+    NPCNearby = 26,
+    Player = 27,
+    Quality = 28,
+    RecipeType = 29,
+    RestType = 30,
+    TileEvent = 31,
+    Vector2 = 32,
+    Vector3 = 33
 }
 export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.Number]: number;
@@ -285,6 +286,7 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.ItemNearby]: Item;
     [ActionArgument.ItemType]: ItemType;
     [ActionArgument.NPC]: NPC;
+    [ActionArgument.NPCNearby]: NPC;
     [ActionArgument.Player]: Player;
     [ActionArgument.Quality]: Quality;
     [ActionArgument.RecipeType]: RecipeType;

@@ -265,7 +265,7 @@ export declare enum FireType {
     CoolingLava = 4
 }
 export interface ISeeds {
-    base: number | string;
+    base: number;
     saved: number;
     milestoneModifierSaved: number;
 }

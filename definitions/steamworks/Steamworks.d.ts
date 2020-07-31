@@ -12,6 +12,10 @@ import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
 import { IServerGameDetails, IServerServerDetails } from "multiplayer/matchmaking/IMatchmaking";
 import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamNetworking as ISteamworksNetworking, ISteamworksEvents, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
+interface ICloudFile {
+    name: string;
+    size: number;
+}
 interface IMatchmakingServer {
     port: number | undefined;
     connectCallback: ((connection: IMatchmakingServerConnection, path: string | undefined) => void) | undefined;
@@ -77,6 +81,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getMatchmakingServer(): IMatchmakingServer | undefined;
     getSteamNetworking(): ISteamworksNetworking | undefined;
     initialize(): Promise<void>;
+    enableSafePaths(): void;
     onUnload(): void;
     setOverlayWorks(overlayWorks: boolean): void;
     setupMods(): Promise<void>;
@@ -109,7 +114,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getPublishedMod(publishFileId: string): IWorkshopItem | undefined;
     fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
     publishMod(modIndex: number): Promise<string>;
-    createArchive(id: string, source: string): Promise<void>;
+    createArchive(id: string): Promise<void>;
     getPublishedItems(): Promise<IWorkshopItem[]>;
     openUrl(url: string): void;
     openWorkshop(publishId?: string): Promise<void>;
@@ -135,6 +140,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getMultiplayerLogs(): string;
     multiplayerLog(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
+    enumerateCloudFiles(): ICloudFile[];
     private initializeGreenworks;
     private initializeNapi;
     private setupAndInitializeWorkshopMods;
@@ -142,14 +148,19 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private initializeModsFromFolder;
     private enumerateInstalledWorkshopMods;
     private refreshSetupMods;
-    private removeTempFolders;
+    private cleanupTemporaryFiles;
     private refreshPublishedMods;
     private getIdFromWorkshopItem;
     private syncWorkshopItems;
     private ugcSynchronizeItems;
     private copyFolder;
+    /**
+     * Steam cloud files only have file names (not paths)
+     * The mod.png file should be uploaded with a unique name (not mod.png)
+     */
+    private copyImage;
     private saveFilesToCloud;
-    private getFileShareIds;
+    private shareFilesInCloud;
     private publishFileToWorkshop;
     private extractArchive;
     private safeOpenFolder;

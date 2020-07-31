@@ -56,6 +56,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     private _movementFinishTime;
     private _inFov;
     private readonly statusHandlers;
+    private wasUnserialized;
     constructor();
     onUnserialized(): void;
     abstract getName(): Translation;
@@ -94,6 +95,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     getFacingPoint(): IVector3;
     getFacingTile(): ITile;
     moveTo(x: number, y: number, z: number): boolean;
+    isNearby(entity: Entity): boolean;
     /**
      * Faces the target and animates a bump into effect
      */
@@ -126,6 +128,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     abstract get asNPC(): NPC | undefined;
     abstract get asPlayer(): Player | undefined;
     protected abstract getApplicableStatusEffects(): Set<StatusType>;
+    private initializeStatusEffects;
     private initializeStatusHandlers;
     private initializeStatusHandler;
 }

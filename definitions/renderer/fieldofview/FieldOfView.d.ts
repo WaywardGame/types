@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import Entity from "entity/Entity";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import IFieldOfView from "renderer/fieldofview/IFieldOfView";
@@ -16,7 +17,6 @@ import { CompiledProgram } from "renderer/Shaders";
 import { IBound3 } from "utilities/math/Bound3";
 import { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
-import Entity from "entity/Entity";
 export interface IFieldOfViewEvents {
     getPlayerFieldOfViewRadius(radius: number, player: Player): number;
 }

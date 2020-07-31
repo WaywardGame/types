@@ -10,6 +10,7 @@
  */
 import Creature from "entity/creature/Creature";
 import { IDamageInfo } from "entity/creature/ICreature";
+import Entity from "entity/Entity";
 import Human from "entity/Human";
 import { Delay, SkillType } from "entity/IHuman";
 import { TurnType } from "entity/player/IPlayer";
@@ -33,8 +34,9 @@ import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import { IVersionInfo } from "utilities/Version";
 import Island from "./Island";
-import Entity from "entity/Entity";
 export default class Game extends EventEmitter.Host<IGameEvents> {
+    get isChallenge(): boolean;
+    get isTravelingToIsland(): boolean;
     readonly interval = 16.6666;
     slot: number;
     previousSaveVersion: IVersionInfo;
@@ -63,7 +65,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     tickSpeed: number;
     turnMode: TurnMode;
     time: TimeManager;
-    private difficultyOptions;
     saveVersion: string;
     upgrades: string[];
     version: string;
@@ -85,6 +86,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     lastBuildTime: number;
     lastSaveVersion: IVersionInfo;
     saveSize?: string;
+    private difficultyOptions;
     private gameCanvas;
     private thumbnailResolve?;
     private _animationTimer;
@@ -93,8 +95,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     private gameOptionsCached?;
     private playOptions;
     private ambientLightLevelCache;
-    get isChallenge(): boolean;
-    get isTravelingToIsland(): boolean;
     initialize(): void;
     initGl(): Promise<void>;
     setupGl(restoring: boolean): Promise<void>;
