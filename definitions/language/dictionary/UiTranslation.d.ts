@@ -325,7 +325,7 @@ declare enum UiTranslation {
     MenuCustomGameOptionsUseUnlockedRecipes = 310,
     MenuCustomGameOptionsStartingIslandBiome = 311,
     MenuCustomGameOptionsApplyTravelingEffects = 312,
-    MenuCustomGameOptionsApplyTravelingEffectsTooltip = 313,
+    MenuCustomGameOptionsApplyTravelingEffectsDescription = 313,
     MenuCustomGameOptionsCreaturesPeaceful = 314,
     MenuCustomGameOptionsCreaturesPeacefulDescription = 315,
     MenuCustomGameOptionsCreaturesAberrantSpawns = 316,

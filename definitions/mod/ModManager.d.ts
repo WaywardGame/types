@@ -20,6 +20,8 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     private setup;
     private readonly mods;
     private readonly onModInitializedCallbacks;
+    private loadedMods;
+    get areModsLoaded(): boolean;
     constructor();
     loadAll(options: Partial<IPlayOptions>): Promise<Array<[ModLoadFailureReason, ...any[]]>>;
     getMultiplayerCompatibility(index: number): MultiplayerCompatibility;
