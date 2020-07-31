@@ -48,6 +48,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private _activeSyncCheck;
     private _syncChecksSuppressed;
     private _recentPackets;
+    private _enabledSyncChecks;
     private _disconnectingFromSyncIssue;
     private _ipAddress;
     private readonly _matchmakingSecret;
@@ -157,4 +158,5 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
      * Called when we failed to connect to a remote steam id
      */
     private onP2PSessionConnectFail;
+    private refreshEnabledSyncChecks;
 }

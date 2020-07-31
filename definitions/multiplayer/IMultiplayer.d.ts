@@ -69,10 +69,11 @@ export declare enum MultiplayerSyncCheck {
     StatChange = 39,
     Stats = 40,
     StatusChange = 41,
-    Temp = 42,
-    Tick = 43,
-    Ticks = 44,
-    Weight = 45
+    SyncChecks = 42,
+    Temp = 43,
+    Tick = 44,
+    Ticks = 45,
+    Weight = 46
 }
 export declare const maxPlayers = 32;
 export declare const packetTickRate = 10;
@@ -102,12 +103,12 @@ export interface IMultiplayerNetworkingOptions {
     matchmakingServerPort: number;
     syncChecks: boolean | MultiplayerSyncCheck[];
     enableSteamNetworkConnections: boolean;
+    enableWebRtcConnections: boolean;
     enablePacketNumberChecks: boolean;
-    checkSeedHistory: boolean;
+    enableSeedHistoryChecks: boolean;
     chunkSize: number;
     logPackets: boolean;
     logSyncChecks: boolean;
-    stopWebRtc: boolean;
     fakeRoundTripTime: number;
     recentPacketTracking: number;
     joinServerTimeout: number;
