@@ -22,7 +22,7 @@ export interface IFieldOfView {
     readonly transitionProgress: number;
     texLight: WebGLTexture;
     texLightOld: WebGLTexture;
-    canASeeB(sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number): boolean;
+    canASeeB(sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, isClientSide: boolean): boolean;
     compute(timeStamp: number, force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
     getBounds(player: Player, radius?: number): IBound3;
