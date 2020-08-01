@@ -23,7 +23,7 @@ export interface ISynchronizationCheckData {
     afterSyncChecks?: ISyncCheck;
 }
 export interface ISyncCheck {
-    [index: number]: string[];
+    [index: number]: Array<number | string>;
 }
 export interface IPacket {
     getAllowedStates(): ConnectionState;

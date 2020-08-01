@@ -87,9 +87,20 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     processAttack(realPlayers: Player[], description: ICreatureDescription, moveType: MoveType, enemy: Player | Creature | undefined): boolean;
     protected getApplicableStatusEffects(): Set<StatusType>;
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
-    protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
+    protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): boolean | void | undefined;
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
     private findPath;
+    /**
+     * Check creature move with a multiplayer sync check
+     * @param willMove Set to true if the object is about to move to this tile. This method will confirm if theres an existing npc/creature there and return false if so
+     * @returns 0 if the creature can move, otherwise an error code
+     */
+    private checkCreatureMoveSafe;
+    /**
+     * Checks that a creature can move to a certain tile and/or interact with doodads/tiles
+     * @param willMove Set to true if the object is about to move to this tile. This method will confirm if theres an existing npc/creature there and return false if so
+     * @returns 0 if the creature can move, otherwise an error code
+     */
     private checkCreatureMove;
     private findPlayersWithinRadius;
     private shouldSpecialAttack;

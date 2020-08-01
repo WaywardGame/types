@@ -96,7 +96,7 @@ export default abstract class NPC extends Human {
     protected attack(): boolean;
     protected move(): boolean;
     protected autoScaleStats(): void;
-    protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
+    protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): boolean | void | undefined;
     protected postMove(): void;
     private checkMove;
     get asNPC(): NPC;
