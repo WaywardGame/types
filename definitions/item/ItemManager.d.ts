@@ -20,16 +20,32 @@ import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation, { TextContext } from "language/Translation";
 import { ITile, TerrainType } from "tile/ITerrain";
-interface ItemManagerEvents {
+export interface IItemManagerEvents {
     create(item: Item): any;
     remove(item: Item): any;
     canMoveItem(human: Human | undefined, item: Item, toContainer: IContainer): boolean | undefined;
     canMoveItems(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType: ItemType | undefined, ofQuality: Quality | undefined): boolean | undefined;
+    /**
+     * Called when an item is removed from a container.
+     * @param item The item object
+     * @param previousContainer The container object the item was removed from.
+     */
     containerItemRemove(item: Item, previousContainer: IContainer): any;
-    containerItemUpdate(item: Item, previousContainer: IContainer | undefined, newContainer: IContainer): any;
-    containerItemAdd(item: Item, newContainer: IContainer): any;
+    /**
+     * Called when an item is moved from one container to another.
+     * @param item The item object
+     * @param containerFrom The container object the item was moved to. This container might be inventory or a container within the inventory.
+     * @param containerTo The container object the item was moved to. This container might be inventory or a container within the inventory.
+     */
+    containerItemUpdate(item: Item, containerFrom: IContainer | undefined, containerTo: IContainer): any;
+    /**
+     * Called when an item is added to a container.
+     * @param item The item object
+     * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
+     */
+    containerItemAdd(item: Item, container: IContainer): any;
 }
-export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
+export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     private readonly worldContainer;
     private cachedWeights;
     private cachedDefaultItemForGroup;
@@ -156,4 +172,3 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     private isCraftSuccessful;
     private getAbsentPlayerFromInventoryContainer;
 }
-export {};

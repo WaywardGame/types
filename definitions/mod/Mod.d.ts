@@ -23,7 +23,7 @@ import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
 import { IMapRequest } from "game/IGame";
 import "IGlobal";
-import { BookType, IContainer, ItemType } from "item/IItem";
+import { BookType, ItemType } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import BaseMod from "mod/BaseMod";
@@ -59,9 +59,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onUnload(): void;
     isPlayerSwimming(human: Human, isSwimming: boolean): boolean | undefined;
     onBuild(human: Human, item: Item, tile: ITile, doodad: Doodad): void;
-    onContainerItemAdd(item: Item, container: IContainer): void;
-    onContainerItemRemove(item: Item, container: IContainer): void;
-    onContainerItemUpdate(item: Item, containerFrom: IContainer | undefined, containerTo: IContainer): void;
     onCraft(human: Human, item: Item): void;
     onCreateWorld(world: IWorld): void;
     onDisplayMessage(player: Player, message: IMessage): void;
