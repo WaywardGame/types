@@ -44,7 +44,6 @@ export default class Island {
     tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;
     tileEvents: SaferArray<TileEvent>;
     time: TimeManager;
-    upgrades: string[];
     version: string;
     wellData: SaferNumberIndexedObject<IWell>;
     seeds: ISeeds;
