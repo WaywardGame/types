@@ -177,5 +177,6 @@ export declare enum JoinServerRetryReason {
 export interface IJoinServerOptions {
     character: ICharacter;
     milestoneModifiers: Set<Milestone>;
+    retryMatchmakingInfo: IMatchmakingInfo;
     joinServerTimeout?: number;
 }
