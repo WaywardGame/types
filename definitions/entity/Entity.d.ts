@@ -29,6 +29,7 @@ import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
+import { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IInspector, IUnserializedCallback, ITemperatureSource, IVector3 {
     readonly stat: Stats<this>;
     entityType: EntityType;
@@ -108,11 +109,11 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     isInFov(): boolean;
     setInFov(inFov: boolean): void;
     isOnFire(): FireType;
-    canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
-    canSeeObject(object: IVector3 & {
+    canSeePosition(type: CanASeeBType, tileX: number, tileY: number, tileZ: number): boolean;
+    canSeeObject(type: CanASeeBType, object: IVector3 & {
         fromX: number;
         fromY: number;
-    }, isClientSide?: boolean): boolean;
+    }): boolean;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     notifyItem(itemType: ItemType): void;

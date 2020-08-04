@@ -28,6 +28,7 @@ export interface IUiEvents {
     interrupt(options: Partial<InterruptOptions>): any;
     interruptClose(options: Partial<InterruptOptions>, result?: string | boolean | InterruptChoice): any;
     loadedFromSave(): any;
+    toggleShowMoreInformation(showingMoreInformation: boolean): any;
 }
 export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     readonly tooltips: TooltipManager;
@@ -63,6 +64,8 @@ export declare class NewUi extends EventEmitter.Host<IUiEvents> {
      */
     registerDataHost(id: string | number, host: any): void;
     playSound(sound: SfxType | "activate" | "select" | "input" | "enable" | "disable"): void;
+    shouldShowMoreInformation(): boolean;
+    toggleShowMoreInformation(showMoreInformation: boolean): void;
     /**
      * Toggles fullscreen
      */

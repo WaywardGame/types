@@ -34,6 +34,7 @@ import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import { IVersionInfo } from "utilities/Version";
 import Island from "./Island";
+import { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 export default class Game extends EventEmitter.Host<IGameEvents> {
     get isChallenge(): boolean;
     get isTravelingToIsland(): boolean;
@@ -190,7 +191,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getPlayersAtPosition(position: IVector3, includeGhosts?: boolean, includeConnecting?: boolean): Player[];
     getPlayersAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): Player[];
     getPlayersThatSeePosition(x: number, y: number, z: number): Player[];
-    canASeeB(sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, isClientSide?: boolean): boolean;
+    canASeeB(type: CanASeeBType, sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number): boolean;
     /**
      * Gets the nearest player based on x/y/z coordinates.
      * @param x The x coord to get the closest player.

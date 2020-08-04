@@ -33,6 +33,7 @@ import { IOptions } from "save/data/ISaveDataGlobal";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
+import { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 export default class Player extends Human {
     event: IEventEmitter<this, IPlayerEvents>;
     readonly entityType: EntityType.Player;
@@ -167,7 +168,7 @@ export default class Player extends Human {
     isGhost(): boolean;
     isServer(): boolean;
     getName(): Translation;
-    canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
+    canSeePosition(type: CanASeeBType, tileX: number, tileY: number, tileZ: number): boolean;
     markAsExplored(points: IVector2[]): boolean | undefined;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateDialogInfo(dialogIndex: string | number): void;
