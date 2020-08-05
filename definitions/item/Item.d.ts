@@ -15,7 +15,6 @@ import Entity from "entity/Entity";
 import Human from "entity/Human";
 import { EntityType } from "entity/IEntity";
 import { EquipType } from "entity/IHuman";
-import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { ITemperatureSource } from "game/temperature/ITemperature";
@@ -132,8 +131,18 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     getStokeFireValue(): number | undefined;
     getStokeFireBonusValue(): number;
     getOnUseBonus(): number;
-    getWorth(legendaryWorth?: boolean): number;
-    getTraderSellPrice(player: Player | NPC, legendaryWorth?: boolean): number;
+    /**
+     * Gets the worth of an item used for merchant trading. Does not consider batering or modifiers bonuses; use Item.getTraderSellPrice for that.
+     * @param player The player that is trading the item for its worth (used for durability calculations).
+     * @param legendaryWorth True if getting the worth including its legendary worth property.
+     */
+    getWorth(player: Player | undefined, legendaryWorth?: boolean): number;
+    /**
+     * The full price the item will go for when traded to a merchant NPC. Considers modifiers and a player's bartering skill.
+     * @param player The player that is trading the item.
+     * @param legendaryWorth True if getting the worth including its legendary worth property.
+     */
+    getTraderSellPrice(player: Player | undefined, legendaryWorth?: boolean): number;
     canBurnPlayer(): boolean;
     getBaseDefense(): number;
     getDurabilityCharge(): number;

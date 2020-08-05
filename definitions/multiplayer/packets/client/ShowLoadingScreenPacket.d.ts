@@ -15,5 +15,6 @@ export default class ShowLoadingScreenPacket extends ClientPacket {
     interrupt: Interrupt;
     allowCancelAndDisconnect?: boolean;
     hideScreens?: ScreenId[];
+    isSyncCheckEnabled(): boolean;
     process(): void;
 }

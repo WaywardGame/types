@@ -22,6 +22,7 @@ import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ChallengeModifiersCollection } from "game/options/modifiers/challenge/ChallengeModifiers";
 import TimeManager from "game/TimeManager";
 import VotingManager from "game/VotingManager";
+import Interrupt from "language/dictionary/Interrupt";
 import Translation from "language/Translation";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
@@ -122,7 +123,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     gameRenderLoop: (timeStamp: number) => void;
     gameLogicLoop: () => void;
     shouldUpdateWorldRender(timeStamp: number): RenderSource | undefined;
-    saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
+    saveGame(saveType: SaveType, interrupt?: Interrupt): Promise<ISaveInfo | undefined>;
     updateThumbnail(): Promise<void>;
     addZoomLevel(amount: number): void;
     updateZoomLevel(): void;

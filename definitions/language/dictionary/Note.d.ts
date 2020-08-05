@@ -34,8 +34,9 @@ declare enum Note {
     Reputation = 18,
     SeaTravel = 19,
     StaminaReplenishment = 20,
-    Stranded = 21,
-    ToolUse = 22,
-    TreasureHunting = 23
+    Starvation = 21,
+    Stranded = 22,
+    ToolUse = 23,
+    TreasureHunting = 24
 }
 export default Note;

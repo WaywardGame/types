@@ -66,7 +66,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     sendPinnedMessage(pinnedMessage: PinnedMessage): PinnedMessage;
     pinQuestRequirement(quest: QuestInstance, requirement?: RequirementInstance): IPinnedMessage | undefined;
     unpinMessage(pinnedMessage: PinnedMessage, time?: number): Promise<void>;
-    onDisplayMessage(player: Player, message: IMessage, addBackwards?: boolean): void;
+    onDisplayMessage(player: Player, message: IMessage): void;
     onWrittenNote(player: Player, id: number): void;
     onFocusChat(): boolean;
     getDefaultFilterName(filter: MessageFilterDefault): string;
@@ -88,6 +88,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     private pinRequirementsFromQuest;
     private hasIncompletePinnedRequirementFromAnotherQuest;
     private showOptions;
+    private scheduleShowMessage;
     private updateMessages;
     private messages;
     /**

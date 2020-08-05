@@ -23,6 +23,7 @@ export declare class MessageManagerNoOp implements IMessageManager {
     send(): boolean;
 }
 export interface IMessageManagerHost {
+    getTurns(): number;
     canSeePosition(x: number, y: number, z: number): boolean;
     shouldDisplayMessage(message: IMessage, id: number): boolean | undefined;
     onDisplayMessage(message: IMessage): void;
