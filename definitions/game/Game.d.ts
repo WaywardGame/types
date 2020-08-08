@@ -24,6 +24,7 @@ import TimeManager from "game/TimeManager";
 import VotingManager from "game/VotingManager";
 import Interrupt from "language/dictionary/Interrupt";
 import Translation from "language/Translation";
+import { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { IParticle } from "renderer/particle/IParticle";
@@ -33,9 +34,9 @@ import { ITile, ITileArray, ITileData, TerrainType } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
+import "utilities/Performance";
 import { IVersionInfo } from "utilities/Version";
 import Island from "./Island";
-import { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 export default class Game extends EventEmitter.Host<IGameEvents> {
     get isChallenge(): boolean;
     get isTravelingToIsland(): boolean;
