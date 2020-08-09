@@ -177,9 +177,9 @@ export default class InGameScreen extends BaseScreen {
     isContainerOpen(container: IContainer): boolean;
     openContainer(container: IContainer, containerName?: string): void;
     closeContainer(container: IContainer): void;
-    closeContainerDialog(containerDialog?: JQuery): void;
+    closeContainerDialog(containerDialog?: JQuery, closeType?: "close" | "destroy"): void;
     closeStaticContainers(): void;
-    closeAllContainers(): boolean;
+    closeAllContainers(closeType?: "close" | "destroy"): boolean;
     updateContainerName(containerDialogElement: JQuery): void;
     updateActiveContainer(): void;
     hideContextMenu(): boolean;

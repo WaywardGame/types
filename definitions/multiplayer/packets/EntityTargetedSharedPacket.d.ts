@@ -11,7 +11,7 @@
 import Entity from "entity/Entity";
 import SharedPacket from "multiplayer/packets/SharedPacket";
 export default abstract class EntityTargetedSharedPacket extends SharedPacket {
-    entity: Entity;
+    entity: Entity | undefined;
     preProcess(): void;
     protected preWriteData(): void;
     protected preReadData(): void;

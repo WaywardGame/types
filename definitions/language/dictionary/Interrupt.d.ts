@@ -46,7 +46,7 @@ declare enum Interrupt {
     GameMultiplayerTravelVote = 34,
     GameNoHealingRequired = 35,
     GameNoSaveOnDeath = 36,
-    GamePickUpWaterStillWithWater = 37,
+    GamePickUpStillWithWater = 37,
     GameReleaseCreature = 38,
     GameRenameCreature = 39,
     GameRenameDoodad = 40,

@@ -11,7 +11,7 @@
 import Entity from "entity/Entity";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
-import IFieldOfView from "renderer/fieldofview/IFieldOfView";
+import IFieldOfView, { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { CompiledProgram } from "renderer/Shaders";
 import { IBound3 } from "utilities/math/Bound3";
@@ -56,7 +56,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> i
     resetTransitionProgress(): void;
     compute(timeStamp: number, force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
-    canASeeB(sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, isClientSide?: boolean): boolean;
+    canASeeB(type: CanASeeBType, sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number): boolean;
     getBounds(player: Player, radius?: number): IBound3;
     markAsExplored(player: Player, tiles: IVector2[]): boolean;
     private updateExplored;

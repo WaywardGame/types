@@ -8,8 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import ClientPacket from "multiplayer/packets/ClientPacket";
-export default class HideLoadingScreenPacket extends ClientPacket {
-    isSyncCheckEnabled(): boolean;
-    process(): void;
+export default class Performance {
+    private readonly fns;
+    private _args;
+    args(...args: any[]): this;
+    eachArgs(generator: () => any[]): this;
+    add(fn: AnyFunction): this;
+    compare(count?: number): void;
 }

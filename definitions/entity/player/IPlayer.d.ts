@@ -36,7 +36,7 @@ export interface IPlayerEvents extends Events<Human> {
      */
     spawn(): any;
     /**
-     * Claled when the player is restored from the absent state.
+     * Called when the player is restored from the absent state.
      * This means the player previously stopped playing on the server but is now playing again.
      */
     restored(): void;

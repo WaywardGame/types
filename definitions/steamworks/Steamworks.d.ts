@@ -19,6 +19,7 @@ interface ICloudFile {
 interface IMatchmakingServer {
     port: number | undefined;
     connectCallback: ((connection: IMatchmakingServerConnection, path: string | undefined) => void) | undefined;
+    directoryConnectionConnectedCallback: ((directoryConnection: any) => void) | undefined;
     disconnectCallbacks: Map<string, () => void>;
     messageCallbacks: Map<string, (data: ArrayBuffer) => void>;
     ipAddress: string | undefined;

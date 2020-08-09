@@ -22,7 +22,7 @@ export interface IFieldOfView {
     readonly transitionProgress: number;
     texLight: WebGLTexture;
     texLightOld: WebGLTexture;
-    canASeeB(sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number): boolean;
+    canASeeB(type: CanASeeBType, sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number): boolean;
     compute(timeStamp: number, force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
     getBounds(player: Player, radius?: number): IBound3;
@@ -32,5 +32,15 @@ export interface IFieldOfView {
     tickSeed(): void;
     updateTransitionProgress(timeStamp: number): boolean;
     resetTransitionProgress(): void;
+}
+export declare enum CanASeeBType {
+    ClientSide = 0,
+    CreatureRandomSpawn = 1,
+    CreatureTrapping = 2,
+    FieldOfView = 3,
+    GetNearestPlayer = 4,
+    GetPlayersThatSeePosition = 5,
+    SkeletalMage = 6,
+    ZombieHorde = 7
 }
 export default IFieldOfView;

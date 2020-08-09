@@ -30,6 +30,7 @@ export interface ISerializerOptions {
     emptyObjectMode?: boolean;
     disableJitDeserialization?: boolean;
     disableDuplicateObjectDetection?: boolean;
+    forceSuccess?: boolean;
 }
 export interface ISerializable {
     serializeObject(serializer: ISerializer): void;

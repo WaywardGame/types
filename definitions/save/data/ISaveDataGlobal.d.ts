@@ -33,6 +33,7 @@ export interface IOptions {
     directionTurnDelay: number;
     disableUIEffects: boolean;
     dropLocation: DropLocation;
+    dropOnDismantle: boolean;
     dropOnGatherHarvest: boolean;
     fallBackToEnglish: boolean;
     fontStyle: boolean;

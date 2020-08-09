@@ -22,7 +22,9 @@ import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ChallengeModifiersCollection } from "game/options/modifiers/challenge/ChallengeModifiers";
 import TimeManager from "game/TimeManager";
 import VotingManager from "game/VotingManager";
+import Interrupt from "language/dictionary/Interrupt";
 import Translation from "language/Translation";
+import { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { IParticle } from "renderer/particle/IParticle";
@@ -32,6 +34,7 @@ import { ITile, ITileArray, ITileData, TerrainType } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
+import "utilities/Performance";
 import { IVersionInfo } from "utilities/Version";
 import Island from "./Island";
 export default class Game extends EventEmitter.Host<IGameEvents> {
@@ -121,7 +124,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     gameRenderLoop: (timeStamp: number) => void;
     gameLogicLoop: () => void;
     shouldUpdateWorldRender(timeStamp: number): RenderSource | undefined;
-    saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
+    saveGame(saveType: SaveType, interrupt?: Interrupt): Promise<ISaveInfo | undefined>;
     updateThumbnail(): Promise<void>;
     addZoomLevel(amount: number): void;
     updateZoomLevel(): void;
@@ -190,7 +193,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getPlayersAtPosition(position: IVector3, includeGhosts?: boolean, includeConnecting?: boolean): Player[];
     getPlayersAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): Player[];
     getPlayersThatSeePosition(x: number, y: number, z: number): Player[];
-    canASeeB(sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, isClientSide?: boolean): boolean;
+    canASeeB(type: CanASeeBType, sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number): boolean;
     /**
      * Gets the nearest player based on x/y/z coordinates.
      * @param x The x coord to get the closest player.

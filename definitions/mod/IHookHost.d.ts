@@ -22,7 +22,7 @@ import { IMessage } from "entity/player/IMessageManager";
 import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
 import { IMapRequest } from "game/IGame";
-import { BookType, IContainer, ItemType } from "item/IItem";
+import { BookType, ItemType } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import { Hook } from "mod/IHookManager";
@@ -76,25 +76,6 @@ export interface IHookHost {
      * @param doodad The doodad that was created on the tile
      */
     onBuild?(human: Human, item: Item, tile: ITile, doodad: Doodad): void;
-    /**
-     * Called when an item is added to a container.
-     * @param item The item object
-     * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
-     */
-    onContainerItemAdd?(item: Item, container: IContainer): void;
-    /**
-     * Called when an item is removed from a container.
-     * @param item The item object
-     * @param container The container object the item was removed from.
-     */
-    onContainerItemRemove?(item: Item, container: IContainer): void;
-    /**
-     * Called when an item is moved from one container to another.
-     * @param item The item object
-     * @param containerFrom The container object the item was moved to. This container might be inventory or a container within the inventory.
-     * @param containerTo The container object the item was moved to. This container might be inventory or a container within the inventory.
-     */
-    onContainerItemUpdate?(item: Item, containerFrom: IContainer | undefined, containerTo: IContainer): void;
     /**
      * Called when an item is crafted
      * @param human The human object

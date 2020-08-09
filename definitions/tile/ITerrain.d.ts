@@ -74,6 +74,10 @@ export interface ITerrainDescription extends IModdable {
      * The temperature produced by this terrain. When not provided, uses `Temperature.Neutral`.
      */
     temperature?: number;
+    /**
+     * The water terrain type that is a step above, or a less deep version of itself.
+     */
+    aboveType?: TerrainType;
 }
 export interface ITile extends Partial<ITileContainer> {
     corpses?: ICorpse[];
