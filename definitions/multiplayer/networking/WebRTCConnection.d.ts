@@ -15,7 +15,7 @@ export declare class WebRTCConnection extends Connection {
     private readonly onData;
     private readonly onConnected?;
     name: string;
-    private readonly _peerConnection;
+    private _peerConnection?;
     private _dataChannel?;
     constructor(matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, config: RTCConfiguration, sendMatchmakingMessage: (message: MatchmakingMessageData) => void, onData: (data: ArrayBuffer) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined);
     isConnected(): boolean;
