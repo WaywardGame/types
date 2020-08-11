@@ -44,6 +44,7 @@ export default class Ui extends Emitter {
     tooltipRefresh(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
+    filterContainers(): void;
     getInventoryItemOrder(): any[];
     updateItem(item: Item): void;
     syncAllItems(): void;

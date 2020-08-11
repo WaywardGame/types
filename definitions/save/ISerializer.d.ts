@@ -29,7 +29,7 @@ export interface ISerializerOptions {
     includeFlags?: SavePropertyFlag;
     emptyObjectMode?: boolean;
     disableJitDeserialization?: boolean;
-    disableDuplicateObjectDetection?: boolean;
+    enableDuplicateObjectDetection?: boolean;
     forceSuccess?: boolean;
 }
 export interface ISerializable {
