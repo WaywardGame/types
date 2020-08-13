@@ -42,6 +42,7 @@ export interface ISerializeProperty {
     property: string[];
     skipCompression?: boolean;
     savePropertyFlag?: SavePropertyFlag;
+    shouldSerialize?: () => boolean;
 }
 export interface ISaveManagerEvents {
     /**
