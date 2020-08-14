@@ -51,6 +51,7 @@ export default class Player extends Human {
     isConnecting: boolean;
     lastIslandId: string;
     shouldApplyTravelingEffects: boolean;
+    traveled: boolean;
     isMoving: boolean;
     lastAttackedBy: Human | Creature | undefined;
     movementCompleteZ: number | undefined;
@@ -87,6 +88,7 @@ export default class Player extends Human {
     private updateTablesOnNoInput?;
     constructor(identifier?: string);
     get clientStore(): IClientStore;
+    protected restored(): void;
     setOptions(options: IOptions): void;
     getGameOptionsBeforeModifiers(): IGameOptionsPlayer;
     getGameOptions(): IGameOptionsPlayer;
@@ -157,6 +159,7 @@ export default class Player extends Human {
     updateDismantleTable(adjacentContainers?: IContainer[]): void;
     updateTablesAndWeight(source: string, deferTableUpdates?: boolean): void;
     checkReputationMilestones(): void;
+    checkTravelMilestones(): void;
     hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
     setTamedCreatureEnemy(enemy: Player | Creature): void;
     setPosition(point: IVector3): void;

@@ -121,6 +121,10 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     hasRenderFlag(flag: UpdateRenderFlag): boolean;
     clearRenderFlag(flag: UpdateRenderFlag): void;
     requestAnimationFrame(source: RenderSource): void;
+    /**
+     * Game render loop
+     * Not executed for the host in dedicated servers
+     */
     gameRenderLoop: (timeStamp: number) => void;
     gameLogicLoop: () => void;
     shouldUpdateWorldRender(timeStamp: number): RenderSource | undefined;
@@ -216,7 +220,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      */
     calculateTileLightLevel(tile: ITile, x: number, y: number, z: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
-    setupSave(_: number): void;
+    setupSave(): void;
     onGlobalSlotReady(): Promise<void>;
     directionToMovement(direction: Direction): IVector2;
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
