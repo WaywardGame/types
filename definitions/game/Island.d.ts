@@ -57,4 +57,8 @@ export default class Island {
     unregisterEventBus(): void;
     hydrateFromOldGame(oldGame: IGameOld): void;
     findUnusedId<T>(source: LogSource, things: T[]): number;
+    /**
+     * Szudzik's function
+     */
+    private generatePositionHash;
 }

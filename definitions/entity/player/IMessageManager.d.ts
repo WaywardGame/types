@@ -85,7 +85,11 @@ export declare enum Source {
     /**
      * The single message type that logs your reputation increases/reductions
      */
-    Reputation = 17
+    Reputation = 17,
+    /**
+     * Messages for events that happen without direct player action that don't belong to other categories, such as happenings from tile events
+     */
+    Events = 18
 }
 export interface IMessage {
     id: number;

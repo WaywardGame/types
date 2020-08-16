@@ -133,7 +133,10 @@ declare module Log {
     function refresh(): void;
     function startSetup(): void;
     function finalizeSetup(): void;
+    function initializeGameState(): void;
     function setCallback(cb?: (...args: any[]) => void): void;
+    function addPreConsoleCallback(cb: (...args: any[]) => void): void;
+    function removePreConsoleCallback(cb: (...args: any[]) => void): void;
     /**
      * Takes a winston instance and a path. Updates the static Log methods to use the winston instance.
      */

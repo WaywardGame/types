@@ -65,7 +65,7 @@ declare module TileHelpers {
     /**
      * Check if a tile is a suitable spawn point
      */
-    function isSuitableSpawnPointTileForMultiplayer(point: IVector3, tile: ITile): boolean;
+    function isSuitableSpawnPointTileForMultiplayer(point: IVector3, tile: ITile, disallowWater?: boolean): boolean;
     function getSuitableSpawnPoint(): IVector3;
     function getPointsAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): IVector3[];
     /**

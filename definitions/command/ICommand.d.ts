@@ -15,14 +15,15 @@ export interface ICommand {
 }
 export declare type CommandCallback = (player: Player, args: string) => void;
 export declare enum Command {
-    Commands = 0,
-    Players = 1,
-    Ping = 2,
-    Kick = 3,
-    Banned = 4,
-    Ban = 5,
-    Unban = 6,
-    Pause = 7,
+    Backup = 0,
+    Ban = 1,
+    Banned = 2,
+    Commands = 3,
+    Kick = 4,
+    Pause = 5,
+    Ping = 6,
+    Players = 7,
     Save = 8,
-    Sync = 9
+    Sync = 9,
+    Unban = 10
 }

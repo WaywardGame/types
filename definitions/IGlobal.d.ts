@@ -119,6 +119,7 @@ declare global {
     function Debounce(ms: number): <T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>) => TypedPropertyDescriptor<T> | void;
     interface JSON {
         parseComments(jsonText: string): any;
+        modify(jsonText: string, path: string[], value: any): string;
     }
     interface CallableFunction extends Function {
         bind<T, A0, A1, A2, A3, A4, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4): (...args: A) => R;
@@ -229,6 +230,7 @@ declare global {
         remove(path: string, cb: (err: string | null | undefined) => void): any;
         rmdirSync(path: string): any;
         unlinkSync(path: string): any;
+        writeFile(path: string, data: string, opt: any, cb: (err?: any) => void): any;
         writeFileSync(path: string, data: string, opt?: any): any;
     }
     interface IFileStream {

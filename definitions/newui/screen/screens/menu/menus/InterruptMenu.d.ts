@@ -14,7 +14,7 @@ import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { InterruptOptions, InterruptType } from "newui/util/IInterrupt";
-interface IInterruptMenuEvents extends Events<Menu> {
+export interface IInterruptMenuEvents extends Events<Menu> {
     resolve(choice?: InterruptChoice | string): any;
     cancel(triggerChoice?: boolean): any;
 }
@@ -42,4 +42,3 @@ export default class InterruptMenu extends Menu {
     protected onHide(): any;
     protected onShow(): any;
 }
-export {};

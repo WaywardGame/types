@@ -151,6 +151,7 @@ export interface IPlayerOptions {
     id?: number;
     identifier?: string;
     options?: IOptions;
+    initialSpawnPosition?: IVector3;
     respawnPosition?: IVector3;
     character: ICharacter;
     crafted?: {

@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Human from "entity/Human";
-import { IContainer, IRecipe } from "item/IItem";
+import { IContainer, IRecipe, ItemType, ItemTypeGroup } from "item/IItem";
 import Item from "item/Item";
 export default class ItemRecipeRequirementChecker {
     private readonly human;
@@ -27,7 +27,7 @@ export default class ItemRecipeRequirementChecker {
     private componentItems;
     private adjacentContainers;
     private readonly itemsToProcess;
-    constructor(human: Human, recipe?: IRecipe | undefined, trackItems?: boolean | undefined, cacheItems?: boolean | undefined, canUseItem?: ((item: Item, isConsumed: boolean) => boolean) | undefined);
+    constructor(human: Human, recipe?: IRecipe | undefined, trackItems?: boolean | undefined, cacheItems?: boolean | undefined, canUseItem?: ((item: Item, isConsumed: boolean, forItemTypeOrGroup: ItemType | ItemTypeGroup) => boolean) | undefined);
     /**
      * Returns the amount of items needed for the component
      */

@@ -188,7 +188,16 @@ export default class InGameScreen extends BaseScreen {
     showActionsMenu(center?: boolean, updatePosition?: boolean, skipSound?: boolean): void;
     getFilterText(containerElement: JQuery | undefined): any;
     getFilterElement(containerElement: JQuery): JQuery;
-    onFilterInput(containerElement: JQuery): void;
+    /**
+     * Filtering for containers, inventory, crafting, etc.
+     * @param containerElement The jQuery element matching the container to filter.
+     * @param updateOnBlank True if items should be filtered when filter text is blank (useful for updates versus user input).
+     */
+    onFilterInput(containerElement: JQuery, updateOnBlank?: boolean): void;
+    /**
+     * Update the filtered items for each container, to be called when tables are updated. This does not update dismantle or crafting tabs.
+     */
+    filterContainers(): void;
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
     getContainerId(containerElement: JQuery): string;
     sortItems(containerElement: JQuery, sortType: SortType, messageType?: Message, canReverse?: boolean): void;
