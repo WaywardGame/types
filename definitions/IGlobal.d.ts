@@ -230,6 +230,7 @@ declare global {
         remove(path: string, cb: (err: string | null | undefined) => void): any;
         rmdirSync(path: string): any;
         unlinkSync(path: string): any;
+        writeFile(path: string, data: string, opt: any, cb: (err?: any) => void): any;
         writeFileSync(path: string, data: string, opt?: any): any;
     }
     interface IFileStream {
