@@ -90,6 +90,10 @@ declare class Translation {
     private normalize;
     private failWith?;
     private random;
+    private languageLoadId;
+    private cachedSections?;
+    private cachedString?;
+    private isRootTranslation;
     constructor(dictionary: Dictionary | string, entry: number | string, index?: "random" | number);
     /**
      * Creates from a translation id. Entry matching is done by changing the case-style of the inputted
@@ -142,6 +146,7 @@ declare class Translation {
     getString(...args: any[]): string;
     toString(): string;
     serialize(): ISerializedTranslation;
+    private getCachedTranslation;
     /**
      * Gets the `IStringSection[]` representing this translation, resolved.
      * If the translation is invalid, and `failWith` is set, it will return the result of `getFailureSections()`

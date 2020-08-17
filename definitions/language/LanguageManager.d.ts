@@ -62,6 +62,8 @@ export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> 
     private orderedTranslationProviders?;
     get orderedProviders(): readonly TranslationsProvider[];
     private debug;
+    private languageLoadId;
+    get loadID(): number;
     constructor();
     initialize(): void;
     shouldUseAlternateFontStyle(): boolean;
