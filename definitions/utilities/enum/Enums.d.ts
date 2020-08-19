@@ -55,7 +55,7 @@ declare module Enums {
     /**
      * Get the names of the entries in an enum.
      */
-    function keys<T>(enumObject: T): (keyof T)[];
+    function keys<T>(enumObject: T): readonly (keyof T)[];
     /**
      * Iterate over the names of the entries in an enum.
      */
@@ -63,12 +63,12 @@ declare module Enums {
     /**
      * Iterate over the values in an enum.
      */
-    function values<T>(enumObject: T): T[keyof T][];
+    function values<T>(enumObject: T): readonly T[keyof T][];
     function valueStream<T>(enumObject: T): import("@wayward/goodstream/Stream").default<T[keyof T]>;
     /**
      * Iterate over the entries in an enum. Yields a tuple containing the name and value of each entry.
      */
-    function entries<T>(enumObject: T): [keyof T, T[keyof T]][];
+    function entries<T>(enumObject: T): readonly [keyof T, T[keyof T]][];
     function entryStream<T>(enumObject: T): import("@wayward/goodstream/Stream").default<[keyof T, T[keyof T]]>;
     /**
      * Returns whether the given number is a valid entry in an enum.

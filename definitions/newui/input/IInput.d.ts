@@ -51,7 +51,7 @@ export declare module Modifier {
     function translate(modifier: Modifier): Translation;
     function getTranslationId(modifier: Modifier): string;
     function setsEqual(modifiersA: Set<Modifier>, modifiersB: Set<Modifier>): boolean;
-    function all(): Modifier[];
+    function all(): readonly Modifier[];
     function fromCatalyst(catalyst: InputCatalyst): Modifier | undefined;
 }
 export interface IInput {

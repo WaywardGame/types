@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { EquipType, SkillType } from "entity/IHuman";
+import { EquipType } from "entity/IHuman";
 import { IContainer, IDismantleComponent, ItemType } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
@@ -158,7 +158,6 @@ export default class InGameScreen extends BaseScreen {
     getItemIdInEquipSlot(equip: EquipType): number | undefined;
     setEquipSlot(equip: EquipType, itemId?: number, internal?: boolean): void;
     removeItemFromEquipSlot(equip: EquipType): void;
-    sortSkills(skills: SkillType[]): SkillType[];
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     createCraftItemElements(containerSortInfo: IContainerSortInfo): void;

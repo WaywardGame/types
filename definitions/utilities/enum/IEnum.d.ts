@@ -21,10 +21,10 @@ export declare type EnumObject<T> = T & {
     [EnumProperty.NAME]?: string;
     [EnumProperty.OFFICIAL_MAX]?: number;
     [EnumProperty.MOD_START]?: number;
-    [EnumProperty.EXCLUDED]?: Set<keyof T>;
-    [EnumProperty.KEYS]?: Array<keyof T>;
-    [EnumProperty.VALUES]?: Array<T[keyof T]>;
-    [EnumProperty.ENTRIES]?: Array<[keyof T, T[keyof T]]>;
+    [EnumProperty.EXCLUDED]?: ReadonlySet<keyof T>;
+    [EnumProperty.KEYS]?: ReadonlyArray<keyof T>;
+    [EnumProperty.VALUES]?: ReadonlyArray<T[keyof T]>;
+    [EnumProperty.ENTRIES]?: ReadonlyArray<[keyof T, T[keyof T]]>;
 };
 export declare module EnumObject {
     function get<E>(enumObject: E): EnumObject<E>;

@@ -267,3 +267,7 @@ export declare const STRENGTH_BONUS = 25;
  * Defaults to 90% (0.9)
  */
 export declare const WEIGHT_ENCUMBERED = 0.9;
+export interface IWalkPath {
+    path: IVector2[];
+    force?: boolean;
+}
