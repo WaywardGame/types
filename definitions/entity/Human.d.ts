@@ -22,7 +22,6 @@ import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
 import { IGameOptionsPlayer } from "game/options/IGameOptions";
 import { EquipEffect, EquipEffectByType, EquipEffects, IContainer, ItemType, ItemTypeGroup } from "item/IItem";
-import { IProtectedItemOptions } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -62,7 +61,6 @@ export default abstract class Human extends Entity {
     isLocalPlayer(): boolean;
     setOptions(options: IOptions): void;
     getEquipEffect<E extends EquipEffect>(type: E): FirstIfOne<EquipEffectByType<E>>;
-    getProtectedItemsOptions(): IProtectedItemOptions;
     getReputation(): number;
     /**
      * @returns The value of the given skill, the sum of the base value and any bonuses from legendary equipment

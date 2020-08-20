@@ -25,7 +25,7 @@ import ScaleManager from "newui/util/ScaleManager";
 import Vector2 from "utilities/math/Vector2";
 export interface IUiEvents {
     resize(viewport: Vector2, oldViewport: Vector2): any;
-    interrupt(options: Partial<InterruptOptions>, interrupt?: Interrupt): string | boolean | InterruptChoice | void;
+    interrupt(options: Partial<InterruptOptions>, interrupt?: Interrupt): string | boolean | InterruptChoice | undefined | void;
     interruptClose(options: Partial<InterruptOptions>, result?: string | boolean | InterruptChoice): any;
     loadedFromSave(): any;
     toggleShowMoreInformation(showingMoreInformation: boolean): any;

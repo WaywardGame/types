@@ -35,7 +35,7 @@ declare global {
         getEquipSlot(): number;
     }
     interface JQuery {
-        sort(p: (a: any, b: any) => boolean): any;
+        sort: Array<Element>["sort"];
     }
 }
 export default class InGameScreen extends BaseScreen {
@@ -161,7 +161,7 @@ export default class InGameScreen extends BaseScreen {
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     createCraftItemElements(containerSortInfo: IContainerSortInfo): void;
-    updateItem(item: Item): void;
+    updateItem(item: Item, updateChildren?: boolean): void;
     onMove(): void;
     /**
      * Gets the dialog element for an item/doodad container (bags, backpacks, chests, etc.) and not inventories dialogs.
@@ -200,7 +200,6 @@ export default class InGameScreen extends BaseScreen {
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
     getContainerId(containerElement: JQuery): string;
     sortItems(containerElement: JQuery, sortType: SortType, messageType?: Message, canReverse?: boolean): void;
-    sortItemElements(itemElements: JQuery, containerSortInfo: IContainerSortInfo): void;
     updateInventorySort(): void;
     onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;
     updateSort(containerElement: JQuery, activeSort: boolean): void;
@@ -212,6 +211,7 @@ export default class InGameScreen extends BaseScreen {
     onItemMove(api: IBindHandlerApi): boolean;
     onStopItemMove(api: IBindHandlerApi): void;
     onItemEquipToggle(api: IBindHandlerApi): boolean;
+    onItemProtectToggle(api: IBindHandlerApi): boolean;
     onContextMenu(api: IBindHandlerApi): boolean;
     onContextMenuReleased(api: IBindHandlerApi): void;
     onQuickSlotToggle(api: IBindHandlerApi): boolean;
@@ -240,6 +240,9 @@ export default class InGameScreen extends BaseScreen {
      * @returns A number based on the legendary type/skill/stat.
      */
     private getLegendarySortOrder;
-    private determineSort;
+    private sort;
+    private sortFallback;
+    private getSortValue;
+    private resolveItemReference;
     private getBestSort;
 }

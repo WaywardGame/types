@@ -47,8 +47,6 @@ export interface IOptions {
     muteMusic: boolean;
     playInputSoundWhenTyping: boolean;
     powerPreference: PowerMode;
-    protectedCraftingItemContainers: boolean;
-    protectedCraftingItems: boolean;
     realTimeTickSpeed: number;
     rightClickInspect: boolean;
     rightHand: boolean;

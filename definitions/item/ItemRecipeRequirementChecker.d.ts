@@ -44,18 +44,18 @@ export default class ItemRecipeRequirementChecker {
      * Looks inside the humans inventory and around adjacent opened doodads
      * @returns true if the recipe's requirements are satisfied
      */
-    process(allowProtectedCraftingItems?: boolean): boolean;
+    process(allowProtectedItems?: boolean): boolean;
     setRecipe(recipe: IRecipe): void;
     /**
      * Looks around adjacent containers
      * @returns true if the recipe's requirements are satisfied
      */
-    processAdjacent(allowProtectedCraftingItems?: boolean): boolean;
+    processAdjacent(allowProtectedItems?: boolean): boolean;
     /**
      * Looks inside the container and its subcontainers.
      * @param container The container
      * @returns true if the recipe's requirements are satisfied by items in the container.
      */
-    processContainer(container: IContainer, allowProtectedCraftingItems?: boolean): boolean;
+    processContainer(container: IContainer, allowProtectedItems?: boolean): boolean;
     private processItem;
 }

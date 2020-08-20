@@ -38,6 +38,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     minDur: number;
     order: number;
     ownerIdentifier?: string;
+    protected?: boolean;
     quality: Quality | undefined;
     quickSlot: number | undefined;
     renamed: string | ISerializedTranslation;
@@ -83,7 +84,6 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     description(): IItemDescription | undefined;
     isValid(): boolean;
     isProtected(human: Human): boolean;
-    areItemsProtectedWithin(human: Human): boolean;
     getDecayMax(): number;
     getTotalWeight(player?: Player): number;
     getDisassemblyWeight(): number;

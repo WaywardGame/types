@@ -122,7 +122,9 @@ export declare enum ActionType {
     Navigate = 87,
     Melee = 88,
     GrabAll = 89,
-    Respawn = 90
+    Respawn = 90,
+    ProtectItem = 91,
+    UnProtectItem = 92
 }
 export declare enum ActionUsability {
     Paused = 0,
