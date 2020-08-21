@@ -78,7 +78,7 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
      */
     importSave(slot: number, saveObject: ISaveObject | string): Promise<number | undefined>;
     copySave(slot?: number, target?: number): Promise<number | undefined>;
-    deleteSlot(slot: number): Promise<boolean | undefined>;
+    deleteSlot(slot?: number): Promise<boolean | undefined>;
     deleteAllSlots(): Promise<boolean | undefined>;
     deleteAllData(): Promise<void>;
     compressSave(slot: number, saveObject: ISaveObject, exporting?: boolean): void;

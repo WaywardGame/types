@@ -26,7 +26,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     book?: BookType;
     constructedFrom?: IConstructedInfo;
     containedItems: Item[];
-    containedWithin: IContainer;
+    containedWithin: IContainer | undefined;
     decay?: number;
     disassembly: Item[];
     equippedId?: number;
@@ -41,7 +41,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     protected?: boolean;
     quality: Quality | undefined;
     quickSlot: number | undefined;
-    renamed: string | ISerializedTranslation;
+    renamed: string | ISerializedTranslation | undefined;
     tatteredMap?: TatteredMap;
     tradedFrom?: string[];
     type: ItemType;

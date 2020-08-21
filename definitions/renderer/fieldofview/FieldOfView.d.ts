@@ -29,8 +29,8 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> i
     static vBlurProgram: CompiledProgram;
     private static shaderProgram;
     private static readonly instance;
-    texLight: WebGLTexture;
-    texLightOld: WebGLTexture;
+    texLight: WebGLTexture | undefined;
+    texLightOld: WebGLTexture | undefined;
     disabled: boolean;
     blurEnabled: boolean;
     computeOffset: Vector2;

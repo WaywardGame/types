@@ -35,7 +35,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     readonly style: StyleManipulator<this>;
     get dataset(): DOMStringMap;
     get childCount(): number;
-    private _element;
+    protected _element: HTMLElement;
     private scrollingChild?;
     private contextMenuGenerator?;
     private tooltipInitializer;

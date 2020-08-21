@@ -108,7 +108,7 @@ export default class Player extends Human {
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkSkillMilestones(): void;
     addMilestone(milestone: Milestone, data?: number, update?: boolean): void;
-    getDefaultCarveTool(): Item | undefined;
+    getDefaultCarveTool(player: Player): Item | undefined;
     isFacingCarvableTile(): boolean;
     hasTamedCreature(creature: Creature): boolean;
     hasHandToUse(): boolean;

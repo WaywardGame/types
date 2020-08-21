@@ -10,3 +10,7 @@
  */
 import { IVersionInfo } from "utilities/Version";
 export default function upgradeSave(saveVersion: IVersionInfo): void;
+/**
+ * Called after loading item & tile references
+ */
+export declare function upgradeSaveAfterLoadingReferences(): void;

@@ -10,7 +10,7 @@
  */
 export default undefined;
 declare global {
-    type AnyFunction = (...args: any[]) => any;
+    type AnyFunction<R = any> = (...args: any[]) => R;
     type NullaryFunction<O = any> = () => O;
     type UnaryFunction<I = any, O = any> = (input: I) => O;
     type SortingFunction<T> = (a: T, b: T) => number;

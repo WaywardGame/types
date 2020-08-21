@@ -23,7 +23,7 @@ export interface IWorldLayer {
     level: WorldZ;
     lightLevelMap: IColorGrid;
     lightBlockMap: IByteGrid;
-    exploredMap: IExploreMap;
+    exploredMap: IExploreMap | undefined;
     onTileUpdate: onTileUpdateDelegate;
     onDoodadUpdate: onDoodadUpdateDelegate;
     getTile(x: number, y: number): TerrainData;

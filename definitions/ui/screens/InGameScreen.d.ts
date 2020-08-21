@@ -14,11 +14,13 @@ import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import Message from "language/dictionary/Message";
 import { IBindHandlerApi } from "newui/input/Bind";
+import { GlobalMouseInfo } from "newui/input/InputManager";
 import { SortType } from "SortType";
 import { ISortableEvent } from "ui/functional/IFunctionalSortable";
 import { DialogId, IContainerSortInfo, IContextMenuAction, IDialogInfo } from "ui/IUi";
 import BaseScreen from "ui/screens/BaseScreen";
 import { Direction } from "utilities/math/Direction";
+import Vector2 from "utilities/math/Vector2";
 export declare enum TextElementId {
     Weight = 0,
     Attack = 1,
@@ -76,8 +78,10 @@ export default class InGameScreen extends BaseScreen {
     private sortingCancelled;
     private onSortableAction;
     private isCurrentlySorting;
+    private lastGlobalMouseInfo;
     private craftableItemTypes;
     private nonCraftableItemTypes;
+    constructor();
     selector(): string;
     bindElements(): void;
     changeEquipmentOption(id: "leftHand" | "rightHand"): void;
@@ -162,6 +166,7 @@ export default class InGameScreen extends BaseScreen {
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     createCraftItemElements(containerSortInfo: IContainerSortInfo): void;
     updateItem(item: Item, updateChildren?: boolean): void;
+    onGlobalMouseMove(mouseInfo: GlobalMouseInfo, _: Vector2): void;
     onMove(): void;
     /**
      * Gets the dialog element for an item/doodad container (bags, backpacks, chests, etc.) and not inventories dialogs.

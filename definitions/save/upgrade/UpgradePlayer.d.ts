@@ -11,3 +11,7 @@
 import Player from "entity/player/Player";
 import { IVersionInfo } from "utilities/Version";
 export default function upgradePlayer(player: Player, saveVersion: IVersionInfo): string[];
+/**
+ * Called after loading item & tile references
+ */
+export declare function upgradePlayerAfterLoadingReferences(player: Player): string[];

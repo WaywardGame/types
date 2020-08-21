@@ -14,7 +14,7 @@ export declare module WebWorkerHelpers {
         private blobUrl;
         private callback;
         constructor(workerFunction: (data: any) => void);
-        getWorker(): Worker;
+        getWorker(): Worker | undefined;
         setCallback(callback: (evt: any) => void): void;
         free(): void;
     }

@@ -20,8 +20,8 @@ export interface IFieldOfView {
     readonly maxRadius: number;
     readonly radius: number;
     readonly transitionProgress: number;
-    texLight: WebGLTexture;
-    texLightOld: WebGLTexture;
+    texLight: WebGLTexture | undefined;
+    texLightOld: WebGLTexture | undefined;
     canASeeB(type: CanASeeBType, sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number): boolean;
     compute(timeStamp: number, force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;

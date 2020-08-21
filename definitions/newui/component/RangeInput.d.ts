@@ -17,7 +17,8 @@ interface IRangeInputEvents extends Events<Component> {
 }
 export declare class RangeInput extends Component implements IRefreshableValue<number> {
     event: IEventEmitter<this, IRangeInputEvents>;
-    element: HTMLInputElement;
+    get element(): HTMLInputElement;
+    protected _element: HTMLInputElement;
     private refreshMethod;
     private clampOnRefresh;
     private _value;
