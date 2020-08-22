@@ -25,4 +25,5 @@ declare global {
      */
     type MaskReturn<F extends any[] | AnyFunction, R> = F extends (...args: infer A) => any ? (...args: A) => R : (...args: Extract<F, any[]>) => R;
     type FunctionOrNoParams<H extends AnyFunction> = H | (() => ReturnType<H>);
+    type FunctionAnyOtherParams<H extends AnyFunction> = (...args: [...Parameters<H>, ...any[]]) => ReturnType<H>;
 }

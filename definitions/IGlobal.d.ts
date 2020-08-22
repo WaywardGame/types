@@ -125,7 +125,7 @@ declare global {
      *
      * WARNING: This also binds the method to the host, a la `@Bound`. Do not use both decorators.
      */
-    function Debounce<R>(ms: number, initialCall: true, returnFromCancelledCalls?: R): <T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>) => TypedPropertyDescriptor<T> | void;
+    function Debounce<A extends any[] = any[], R = undefined>(ms: number, initialCall: true, returnFromCancelledCalls?: (...args: A) => R): <T extends (...args: A) => R>(target: any, key: string, descriptor: TypedPropertyDescriptor<FunctionAnyOtherParams<T>>) => TypedPropertyDescriptor<FunctionAnyOtherParams<T>> | void;
     interface JSON {
         parseComments(jsonText: string): any;
         modify(jsonText: string, path: string[], value: any): string;
