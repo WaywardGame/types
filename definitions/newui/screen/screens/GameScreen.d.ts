@@ -59,8 +59,8 @@ export default class GameScreen extends Screen implements IHookHost {
     toggleDialogs(states: IDialogStates): this;
     getQuadrantComponents(): import("@wayward/goodstream/Stream").default<QuadrantComponent>;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: QuadrantComponentId): (never extends C ? QuadrantComponent : C extends never[] ? QuadrantComponent | C : {} extends C ? QuadrantComponent | Partial<QuadrantComponent> : QuadrantComponent | C) | undefined;
-    getQuadrantContainer(): Component;
-    isMouseWithin(): false | Component;
+    getQuadrantContainer(): Component<HTMLElement>;
+    isMouseWithin(): false | Component<HTMLElement>;
     mouseStartWasWithin(api: IBindHandlerApi): boolean | undefined;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     onGameTickEnd(): void;

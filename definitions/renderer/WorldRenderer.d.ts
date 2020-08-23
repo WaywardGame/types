@@ -143,6 +143,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
      * Renders the status effects currently on the human.
      */
     private renderStatusEffects;
+    private shouldRenderBaseLayer;
     /**
      * Renders a status effect image.
      */

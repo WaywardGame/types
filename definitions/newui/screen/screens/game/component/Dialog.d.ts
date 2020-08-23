@@ -106,8 +106,8 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     private description;
     constructor(id: number);
-    addScrollableWrapper(initializer?: (wrapper: Component) => any): Component;
-    addSettingsPanel(): Component;
+    addScrollableWrapper(initializer?: (wrapper: Component) => any): Component<HTMLElement>;
+    addSettingsPanel(): Component<HTMLElement>;
     showSettingsPanel(): this;
     resetSizeAndPosition(): void;
     /**
@@ -116,9 +116,9 @@ export default abstract class Dialog extends Component implements IDialog {
      * Also the event handler for when the close button is pressed in the dialog's header.
      */
     close(): Promise<boolean>;
-    addPanel(id: string | number): Component;
-    showPanel(id: string | number): Component | undefined;
-    getPanel(id: string | number): Component | undefined;
+    addPanel(id: string | number): Component<HTMLElement>;
+    showPanel(id: string | number): Component<HTMLElement> | undefined;
+    getPanel(id: string | number): Component<HTMLElement> | undefined;
     isPanelVisible(id: string | number): boolean;
     /**
      * Sets the dialog position.

@@ -13,13 +13,13 @@ import { AppendStrategy, IComponent, IContextMenu, IHighlight, ITooltip, Namespa
 import { IBindHandlerApi } from "newui/input/Bind";
 import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "newui/util/ComponentManipulator";
 import Rectangle from "utilities/math/Rectangle";
-export default class Component extends EventEmitter.Host<Events<IComponent>> implements IComponent {
+export default class Component<E extends HTMLElement = HTMLElement> extends EventEmitter.Host<Events<IComponent>> implements IComponent {
     private static readonly map;
     static get<C extends Component = Component>(selector: string, create?: false): C;
     static get<C extends Component = Component>(element: Element, create?: false): C;
     static get<C extends Component = Component>(event: Event, create?: false): C;
     static get<C extends Component = Component>(element?: Element | null | false, create?: false): C | undefined;
-    static all(selector: string): import("@wayward/goodstream/Stream").default<Component>;
+    static all(selector: string): import("@wayward/goodstream/Stream").default<Component<HTMLElement>>;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
     static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, strategy?: AppendStrategy): void;
@@ -28,14 +28,14 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     private static regenerateAncestorBoxes;
     private static regenerateSiblingBoxes;
     private static regenerateDescendantBoxes;
-    get element(): HTMLElement;
+    get element(): E;
     readonly classes: ClassManipulator<this>;
     readonly attributes: AttributeManipulator<this>;
     readonly data: DataManipulator<this>;
     readonly style: StyleManipulator<this>;
     get dataset(): DOMStringMap;
     get childCount(): number;
-    protected _element: HTMLElement;
+    private _element;
     private scrollingChild?;
     private contextMenuGenerator?;
     private tooltipInitializer;
@@ -56,7 +56,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
      *
      * Only call this directly after constructing the element.
      */
-    setElement(element: HTMLElement): this;
+    setElement(element: E): this;
     /**
      * Warning: This method will replace the internal element backing this component.
      *
@@ -110,7 +110,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
         left: number;
     };
     getNthChild<C extends Component = Component>(nth?: number): C;
-    getChildren<C extends Component = Component>(selector?: string): import("@wayward/goodstream/Stream").default<C>;
+    getChildren<C extends Component = Component>(selector?: string): Stream<C>;
     siblings<C extends Component = Component>(selector?: string): import("@wayward/goodstream/Stream").default<C>;
     scrollTo(child: Component, ms?: number): void;
     scrollTo(child: Component, offsetTop: number, ms?: number): void;

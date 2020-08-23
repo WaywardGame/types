@@ -25,7 +25,7 @@ export default class Menu extends Component implements IMenu {
     readonly title: Heading;
     readonly description: Text;
     readonly header: BlockRow;
-    readonly staticContent: Component;
+    readonly staticContent: Component<HTMLElement>;
     readonly content: Component;
     tabContainer: Component;
     readonly tabs: Map<string | number, Tab<string | number | undefined>>;

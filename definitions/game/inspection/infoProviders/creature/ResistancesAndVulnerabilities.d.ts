@@ -17,7 +17,7 @@ export default class ResistancesAndVulnerabilitiesInfoProvider extends InfoProvi
     constructor(creature: Creature);
     getClass(): string[];
     getDisplayLevel(): InfoDisplayLevel;
-    initComponent(): import("../../../../newui/component/Component").default;
+    initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
     hasContent(): boolean;
     get(context: Context): Translation;
 }

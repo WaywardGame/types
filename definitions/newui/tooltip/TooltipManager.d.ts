@@ -21,7 +21,7 @@ export default class TooltipManager {
     private readonly disablers;
     constructor();
     show(host: IComponent): Tooltip | undefined;
-    hide(host?: Component | undefined, forceRemove?: boolean): void;
+    hide(host?: Component<HTMLElement> | undefined, forceRemove?: boolean): void;
     /**
      * Disables tooltips.
      * Note: Multiple things can cause tooltips to be disabled simultaneously; tooltips won't be re-enabled until every

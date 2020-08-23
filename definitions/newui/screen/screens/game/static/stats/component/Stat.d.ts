@@ -71,7 +71,7 @@ export declare class Statbar extends StatElement {
      * property `--stat-percent`, to update the statbar's fill width.
      */
     onStatChange(_?: any, stat?: IStat, oldValue?: number): void;
-    protected getTooltipElement(): Component;
+    protected getTooltipElement(): Component<HTMLElement>;
 }
 export declare class StatAttribute extends StatElement {
     private readonly attribute;

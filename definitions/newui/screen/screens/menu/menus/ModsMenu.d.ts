@@ -40,10 +40,10 @@ export default class ModsMenu extends Menu {
 declare class ModSection extends Tab {
     readonly disabledSorts: ModSort[];
     defaultSort: ModSort;
-    readonly wrapperMods: Component;
+    readonly wrapperMods: Component<HTMLElement>;
     readonly modRows: ModRow[];
-    readonly wrapperBefore: Component;
-    readonly wrapperAfter: Component;
+    readonly wrapperBefore: Component<HTMLElement>;
+    readonly wrapperAfter: Component<HTMLElement>;
     constructor(modType: ModType);
     setDisabledSorts(sorts: ModSort[], defaultSort: ModSort): this;
     withBefore(initializer: (component: Component) => any): this;
