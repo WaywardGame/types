@@ -20,7 +20,7 @@ export default class WorldLayer implements IWorldLayer {
     readonly level: WorldZ;
     readonly lightLevelMap: IColorGrid;
     readonly lightBlockMap: IByteGrid;
-    exploredMap: IExploreMap;
+    exploredMap: IExploreMap | undefined;
     onTileUpdate: onTileUpdateDelegate;
     onDoodadUpdate: onDoodadUpdateDelegate;
     private readonly terrainMap;

@@ -19,7 +19,7 @@ export default class SelectionHandler extends EventEmitter.Host<ISelectionHandle
     constructor(getMenu: () => IMenu | undefined);
     deselect(): void;
     select(component?: Component, focus?: boolean): void;
-    getSelection(): Component | undefined;
+    getSelection(): Component<HTMLElement> | undefined;
     selectNext(sound?: boolean): void;
     selectPrevious(sound?: boolean): void;
     protected onNext(): boolean;

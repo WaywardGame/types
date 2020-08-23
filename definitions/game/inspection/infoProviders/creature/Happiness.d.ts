@@ -16,7 +16,7 @@ export default class HappinessInfoProvider extends InfoProvider {
     private message;
     constructor(creature: Creature);
     getClass(): string[];
-    initComponent(): import("../../../../newui/component/Component").default;
+    initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
     hasContent(): boolean;
     get(): Translation;
     onTickEnd(): void;

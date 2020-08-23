@@ -29,7 +29,16 @@ export declare enum Edge {
     Bottom = 2,
     Left = 3
 }
-export declare type IEdges = [[Edge.Left | Edge.Right, number], [Edge.Top | Edge.Bottom, number]];
+export declare type IEdges = [
+    [
+        Edge.Left | Edge.Right,
+        number
+    ],
+    [
+        Edge.Top | Edge.Bottom,
+        number
+    ]
+];
 export interface IDialogDescription<SQUARE = boolean> extends IModdable {
     minSize: SQUARE extends true ? number : IVector2;
     size: SQUARE extends true ? number : IVector2;

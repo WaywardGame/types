@@ -15,7 +15,7 @@ import Human from "entity/Human";
 import { EntityType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import { EquipType, ICheckUnderOptions, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
-import { IMovementIntent, IPlayerEvents, TurnType, WeightStatus } from "entity/player/IPlayer";
+import { IMovementIntent, IPlayerEvents, TurnType, WeightStatus, IWalkPath } from "entity/player/IPlayer";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
@@ -69,7 +69,7 @@ export default class Player extends Human {
     milestoneModifiers: Set<Milestone>;
     messages: MessageManager;
     notes: NoteManager;
-    walkPath: IVector2[] | undefined;
+    walkPath: IWalkPath | undefined;
     exploredMap: IExploreMap[] | undefined;
     isMovingClientside: boolean;
     finishedMovingClientside: boolean;
@@ -108,7 +108,7 @@ export default class Player extends Human {
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkSkillMilestones(): void;
     addMilestone(milestone: Milestone, data?: number, update?: boolean): void;
-    getDefaultCarveTool(): Item | undefined;
+    getDefaultCarveTool(player: Player): Item | undefined;
     isFacingCarvableTile(): boolean;
     hasTamedCreature(creature: Creature): boolean;
     hasHandToUse(): boolean;
@@ -183,7 +183,7 @@ export default class Player extends Human {
     getMovementProgress(): number;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
     hasWalkPath(): boolean;
-    walkAlongPath(path: IVector2[] | undefined): void;
+    walkAlongPath(path: IVector2[] | undefined, force?: boolean): void;
     /**
      * This is only ran on the server
      */

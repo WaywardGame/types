@@ -137,6 +137,7 @@ declare enum Interrupt {
     SteamworksModImportSaveGameFailure = 125,
     SteamworksModImportedSaveGame = 126,
     SteamworksLoadingRefreshingMods = 127,
-    SteamworksOpenFolderFailure = 128
+    SteamworksOpenFolderFailure = 128,
+    SteamworksModPublishModJsonUpdateFailed = 129
 }
 export default Interrupt;

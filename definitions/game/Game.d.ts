@@ -41,8 +41,8 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     get isChallenge(): boolean;
     get isTravelingToIsland(): boolean;
     readonly interval = 16.6666;
-    slot: number;
-    previousSaveVersion: IVersionInfo;
+    slot: number | undefined;
+    previousSaveVersion: IVersionInfo | undefined;
     absoluteTime: number;
     autoSaveTimer: number;
     autoSaveLastSave: number;
@@ -68,7 +68,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     tickSpeed: number;
     turnMode: TurnMode;
     time: TimeManager;
-    saveVersion: string;
+    saveVersion: string | undefined;
     upgrades: string[];
     version: string;
     worldId: string;

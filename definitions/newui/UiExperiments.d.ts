@@ -15,7 +15,7 @@ declare enum UiExperiment {
 declare module UiExperiment {
     type Excluded = "toggle" | "update" | "all" | "name";
     export type Any = Exclude<keyof typeof UiExperiment, Excluded>;
-    export function all(): UiExperiment[];
+    export function all(): readonly UiExperiment[];
     export function toggle(experiment: UiExperiment, enabled: boolean): void;
     export function update(): void;
     export function name(experiment: UiExperiment): "HqFontRendering" | "NewCraftingDialog";

@@ -47,8 +47,6 @@ export interface IOptions {
     muteMusic: boolean;
     playInputSoundWhenTyping: boolean;
     powerPreference: PowerMode;
-    protectedCraftingItemContainers: boolean;
-    protectedCraftingItems: boolean;
     realTimeTickSpeed: number;
     rightClickInspect: boolean;
     rightHand: boolean;
@@ -91,7 +89,7 @@ export declare enum PowerMode {
     LowPower = "low-power",
     HighPerformance = "high-performance"
 }
-export declare type IOptionsOld = Partial<Pick<IOptions, "bindings">> & {
+export declare type IOptionsOld = Partial<Pick<IOptions, "bindings">> & Partial<{
     keyBinds: {
         [index: number]: number;
     };
@@ -111,7 +109,9 @@ export declare type IOptionsOld = Partial<Pick<IOptions, "bindings">> & {
     allowDiagonalMovement: boolean;
     disableUIAnimations: boolean;
     enableAutoSave: boolean;
-};
+    protectedCraftingItems: boolean;
+    protectedCraftingItemContainers: boolean;
+}>;
 export interface IHighscore {
     name: string;
     message: ISerializedTranslation;
@@ -123,10 +123,10 @@ export interface IHighscore {
     seed?: string | number;
     difficultyOptions?: IGameOptions;
 }
-export declare type IHighscoreOld = Partial<IHighscore> & {
+export declare type IHighscoreOld = Partial<IHighscore> & Partial<{
     dailyChallenge: boolean;
     talent: number;
-};
+}>;
 export declare enum KeyModifierOld {
     Shift = 0,
     Alt = 1,

@@ -34,7 +34,3 @@ export interface IDoodadsUsed {
     doodad: Doodad;
     group: DoodadType | DoodadTypeGroup;
 }
-export interface IProtectedItemOptions {
-    protect: boolean;
-    protectContainers: boolean;
-}

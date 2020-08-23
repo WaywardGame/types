@@ -34,7 +34,6 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     originalMoveType: MoveType | undefined;
     hitchedTo?: number;
     private _description;
-    private _owner;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
     /**
      * Initializes the creature's stats. Used in the constructor & save conversion.

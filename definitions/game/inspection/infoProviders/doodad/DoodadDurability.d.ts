@@ -17,7 +17,7 @@ export default class DoodadDurabilityInfoProvider extends InfoProvider {
     constructor(doodad: Doodad);
     getClass(): string[];
     getDisplayLevel(): InfoDisplayLevel;
-    initComponent(): import("../../../../newui/component/Component").default;
+    initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
     hasContent(): boolean;
     get(): Translation;
     onTickEnd(): void;

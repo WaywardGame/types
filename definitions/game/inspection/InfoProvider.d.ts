@@ -78,7 +78,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
      * Call when this info provider should be removed.
      */
     remove(): this;
-    initComponent(component?: Component): Component;
+    initComponent(component?: Component<HTMLElement>): Component<HTMLElement>;
     protected initChildTextComponent(text: TranslationGenerator): Text;
 }
 export declare class SimpleInfoProvider extends InfoProvider {
@@ -91,7 +91,7 @@ export declare class SimpleInfoProvider extends InfoProvider {
     add(...translations: Array<TranslationGenerator | InfoProvider>): this;
     getClass(): string[];
     addClasses(...classes: string[]): this;
-    initComponent(): Component;
+    initComponent(): Component<HTMLElement>;
     setComponent(componentClass: Class<Component>): this;
     setDisplayLevel(level: InfoDisplayLevel): this;
     getDisplayLevel(): InfoDisplayLevel;

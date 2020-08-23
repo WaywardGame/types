@@ -159,7 +159,7 @@ export interface IAttackHand {
     leftHand: number;
     rightHand: number;
 }
-export declare type IPlayerOld = Partial<Omit<Player, "customization">> & {
+export declare type IPlayerOld = Partial<Omit<Player, "customization">> & Partial<{
     gender: 0 | 1;
     talent: number;
     stamina: number;
@@ -181,7 +181,7 @@ export declare type IPlayerOld = Partial<Omit<Player, "customization">> & {
         hairColor: HairColor;
         skinColor: SkinColor;
     };
-    stats: IStatsOld;
+    stats: Partial<IStatsOld>;
     strength: number;
     dexterity: number;
     starvation: number;
@@ -194,7 +194,7 @@ export declare type IPlayerOld = Partial<Omit<Player, "customization">> & {
     messages: MessageManager;
     raft: number | undefined;
     tamedCreatures: number[];
-};
+}>;
 export interface IStatsOld {
     health: IStatOld;
     stamina: IStatOld;
@@ -267,3 +267,7 @@ export declare const STRENGTH_BONUS = 25;
  * Defaults to 90% (0.9)
  */
 export declare const WEIGHT_ENCUMBERED = 0.9;
+export interface IWalkPath {
+    path: IVector2[];
+    force?: boolean;
+}

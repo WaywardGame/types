@@ -8,17 +8,19 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { EquipType, SkillType } from "entity/IHuman";
+import { EquipType } from "entity/IHuman";
 import { IContainer, IDismantleComponent, ItemType } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import Message from "language/dictionary/Message";
 import { IBindHandlerApi } from "newui/input/Bind";
+import { GlobalMouseInfo } from "newui/input/InputManager";
 import { SortType } from "SortType";
 import { ISortableEvent } from "ui/functional/IFunctionalSortable";
 import { DialogId, IContainerSortInfo, IContextMenuAction, IDialogInfo } from "ui/IUi";
 import BaseScreen from "ui/screens/BaseScreen";
 import { Direction } from "utilities/math/Direction";
+import Vector2 from "utilities/math/Vector2";
 export declare enum TextElementId {
     Weight = 0,
     Attack = 1,
@@ -35,7 +37,7 @@ declare global {
         getEquipSlot(): number;
     }
     interface JQuery {
-        sort(p: (a: any, b: any) => boolean): any;
+        sort: Array<Element>["sort"];
     }
 }
 export default class InGameScreen extends BaseScreen {
@@ -76,8 +78,10 @@ export default class InGameScreen extends BaseScreen {
     private sortingCancelled;
     private onSortableAction;
     private isCurrentlySorting;
+    private lastGlobalMouseInfo;
     private craftableItemTypes;
     private nonCraftableItemTypes;
+    constructor();
     selector(): string;
     bindElements(): void;
     changeEquipmentOption(id: "leftHand" | "rightHand"): void;
@@ -158,11 +162,11 @@ export default class InGameScreen extends BaseScreen {
     getItemIdInEquipSlot(equip: EquipType): number | undefined;
     setEquipSlot(equip: EquipType, itemId?: number, internal?: boolean): void;
     removeItemFromEquipSlot(equip: EquipType): void;
-    sortSkills(skills: SkillType[]): SkillType[];
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     createCraftItemElements(containerSortInfo: IContainerSortInfo): void;
-    updateItem(item: Item): void;
+    updateItem(item: Item, updateChildren?: boolean): void;
+    onGlobalMouseMove(mouseInfo: GlobalMouseInfo, _: Vector2): void;
     onMove(): void;
     /**
      * Gets the dialog element for an item/doodad container (bags, backpacks, chests, etc.) and not inventories dialogs.
@@ -201,7 +205,6 @@ export default class InGameScreen extends BaseScreen {
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
     getContainerId(containerElement: JQuery): string;
     sortItems(containerElement: JQuery, sortType: SortType, messageType?: Message, canReverse?: boolean): void;
-    sortItemElements(itemElements: JQuery, containerSortInfo: IContainerSortInfo): void;
     updateInventorySort(): void;
     onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;
     updateSort(containerElement: JQuery, activeSort: boolean): void;
@@ -213,6 +216,7 @@ export default class InGameScreen extends BaseScreen {
     onItemMove(api: IBindHandlerApi): boolean;
     onStopItemMove(api: IBindHandlerApi): void;
     onItemEquipToggle(api: IBindHandlerApi): boolean;
+    onItemProtectToggle(api: IBindHandlerApi): boolean;
     onContextMenu(api: IBindHandlerApi): boolean;
     onContextMenuReleased(api: IBindHandlerApi): void;
     onQuickSlotToggle(api: IBindHandlerApi): boolean;
@@ -241,6 +245,9 @@ export default class InGameScreen extends BaseScreen {
      * @returns A number based on the legendary type/skill/stat.
      */
     private getLegendarySortOrder;
-    private determineSort;
+    private sort;
+    private sortFallback;
+    private getSortValue;
+    private resolveItemReference;
     private getBestSort;
 }

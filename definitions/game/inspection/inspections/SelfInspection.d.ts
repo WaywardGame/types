@@ -22,6 +22,6 @@ export default class SelfInspection extends PlayerInspection {
 declare class StatsInfoProvider extends InfoProvider {
     get(): never[];
     getClass(): never[];
-    initComponent(): import("../../../newui/component/Component").default;
+    initComponent(): import("../../../newui/component/Component").default<HTMLElement>;
 }
 export {};

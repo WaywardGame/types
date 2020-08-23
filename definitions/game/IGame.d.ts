@@ -89,7 +89,7 @@ export declare enum TurnMode {
     Simulated = 1,
     RealTime = 2
 }
-export declare type IGameOld = Partial<Game> & {
+export declare type IGameOld = Partial<Game> & Partial<{
     dayNight: number;
     dayNightSwitch: 0 | 1;
     monsters: Creature[];
@@ -130,7 +130,7 @@ export declare type IGameOld = Partial<Game> & {
     wellData: {
         [index: number]: IWell | undefined;
     };
-};
+}>;
 export interface IPlayOptions {
     slot: number | undefined;
     name: string;

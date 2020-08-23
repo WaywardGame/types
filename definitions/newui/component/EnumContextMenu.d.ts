@@ -23,4 +23,5 @@ export default class EnumContextMenu<E extends number, K extends string> {
     setTranslator(translator: (e: E) => Translation): this;
     setSort(sort: EnumSort | ((a: E, b: E) => number)): this;
     waitForChoice(): Promise<E | undefined>;
+    private getSort;
 }

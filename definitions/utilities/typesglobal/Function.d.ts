@@ -10,7 +10,7 @@
  */
 export default undefined;
 declare global {
-    type AnyFunction = (...args: any[]) => any;
+    type AnyFunction<R = any> = (...args: any[]) => R;
     type NullaryFunction<O = any> = () => O;
     type UnaryFunction<I = any, O = any> = (input: I) => O;
     type SortingFunction<T> = (a: T, b: T) => number;
@@ -25,4 +25,5 @@ declare global {
      */
     type MaskReturn<F extends any[] | AnyFunction, R> = F extends (...args: infer A) => any ? (...args: A) => R : (...args: Extract<F, any[]>) => R;
     type FunctionOrNoParams<H extends AnyFunction> = H | (() => ReturnType<H>);
+    type FunctionAnyOtherParams<H extends AnyFunction> = (...args: [...Parameters<H>, ...any[]]) => ReturnType<H>;
 }

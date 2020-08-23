@@ -116,7 +116,16 @@ declare global {
      *
      * WARNING: This also binds the method to the host, a la `@Bound`. Do not use both decorators.
      */
-    function Debounce(ms: number): <T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>) => TypedPropertyDescriptor<T> | void;
+    function Debounce(ms: number): <T extends AnyFunction<void>>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>) => TypedPropertyDescriptor<T> | void;
+    /**
+     * Prevents the decorated method from being called at a high speed. Example:
+     * 1. Method is called.
+     * 2. `ms` amount of time is waited. If the method is called again in this time, cancel.
+     * 3. Allow the method to be called again.
+     *
+     * WARNING: This also binds the method to the host, a la `@Bound`. Do not use both decorators.
+     */
+    function Debounce<A extends any[] = any[], R = undefined>(ms: number, initialCall: true, returnFromCancelledCalls?: (...args: A) => R): <T extends (...args: A) => R>(target: any, key: string, descriptor: TypedPropertyDescriptor<FunctionAnyOtherParams<T>>) => TypedPropertyDescriptor<FunctionAnyOtherParams<T>> | void;
     interface JSON {
         parseComments(jsonText: string): any;
         modify(jsonText: string, path: string[], value: any): string;

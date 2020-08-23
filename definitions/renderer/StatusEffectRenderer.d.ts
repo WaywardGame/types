@@ -63,5 +63,9 @@ export default class StatusEffectRenderer {
      * Renders any images for the given render layer, using the given render function.
      */
     render(renderLayer: StatusEffectRenderLayer, render: IRenderFunction): void;
+    /**
+     * Return `false` to cancel rendering of the given layer.
+     */
+    shouldRenderBaseLayer?(renderLayer: StatusEffectRenderLayer): boolean;
     protected renderLayer(layer: number | IRenderLayerImplementation, render: IRenderFunction): void;
 }

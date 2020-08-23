@@ -24,15 +24,15 @@ export interface ITileAdaptation {
     BLBG: Vector2;
     BRBG: Vector2;
     overLayerFGTall?: true;
-    TLFO: Vector2;
-    TRFO: Vector2;
-    BLFO: Vector2;
-    BRFO: Vector2;
+    TLFO?: Vector2;
+    TRFO?: Vector2;
+    BLFO?: Vector2;
+    BRFO?: Vector2;
     overLayerBGTall?: true;
-    TLBO: Vector2;
-    TRBO: Vector2;
-    BLBO: Vector2;
-    BRBO: Vector2;
+    TLBO?: Vector2;
+    TRBO?: Vector2;
+    BLBO?: Vector2;
+    BRBO?: Vector2;
 }
 export interface ITileAdaptor {
     adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation, debug?: boolean): void;

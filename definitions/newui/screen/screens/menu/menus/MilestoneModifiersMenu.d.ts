@@ -19,7 +19,7 @@ export default class MilestoneModifiersMenu extends Menu {
     private readonly milestones;
     private static readonly importButtonInputId;
     protected readonly filter: FilterRow;
-    protected readonly buttonImport: Component;
+    protected readonly buttonImport: Component<HTMLElement>;
     protected readonly rowImportExport: BlockRow;
     protected readonly rowBatchEnablingAndDisabling: EnableDisableAllRow;
     private readonly modifierCheckButtons;

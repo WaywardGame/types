@@ -16,9 +16,9 @@ export default class MilestoneModifiers extends Component {
     private readonly milestones;
     private readonly allowHostMilestones;
     readonly buttonMilestoneModifiers: Button;
-    readonly wrapperChosenModifiers: Component;
+    readonly wrapperChosenModifiers: Component<HTMLElement>;
     readonly headerChosenModifiers: Heading;
-    readonly wrapperChosenModifiersList: Component;
+    readonly wrapperChosenModifiersList: Component<HTMLElement>;
     private milestoneModifiersMenu;
     constructor(milestones: () => Set<Milestone>, allowHostMilestones: boolean);
     reset(): this;

@@ -26,7 +26,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     book?: BookType;
     constructedFrom?: IConstructedInfo;
     containedItems: Item[];
-    containedWithin: IContainer;
+    containedWithin: IContainer | undefined;
     decay?: number;
     disassembly: Item[];
     equippedId?: number;
@@ -38,9 +38,10 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     minDur: number;
     order: number;
     ownerIdentifier?: string;
+    protected?: boolean;
     quality: Quality | undefined;
     quickSlot: number | undefined;
-    renamed: string | ISerializedTranslation;
+    renamed: string | ISerializedTranslation | undefined;
     tatteredMap?: TatteredMap;
     tradedFrom?: string[];
     type: ItemType;
@@ -72,17 +73,17 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
      * @param showCount If `true`, adds the passed count to the translation, using `MiscTranslation.CountThing`.
      * @param showQuality If `true`, shows the quality of the item.
      * @param showRenamedQuotes If `true`, show the (by default) "" quotes surrounding renamed items.
+     * @param showLegendaryType If `true`, show the legendary type suffix.
      *
      * Examples:
      * - `item.getName()` // "a stone axe"
      * - `item.getName(false)` // "stone axe"
      * - `item.getName(undefined, 3)` // "stone axes"
      */
-    getName(article?: boolean, count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean): Translation;
+    getName(article?: boolean, count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showLegendaryType?: boolean): Translation;
     description(): IItemDescription | undefined;
     isValid(): boolean;
     isProtected(human: Human): boolean;
-    areItemsProtectedWithin(human: Human): boolean;
     getDecayMax(): number;
     getTotalWeight(player?: Player): number;
     getDisassemblyWeight(): number;

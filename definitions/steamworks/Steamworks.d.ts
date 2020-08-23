@@ -12,7 +12,7 @@ import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
 import { IServerGameDetails, IServerServerDetails } from "multiplayer/matchmaking/IMatchmaking";
 import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamNetworking as ISteamworksNetworking, ISteamworksEvents, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
-interface ICloudFile {
+interface IRemoteFile {
     name: string;
     size: number;
 }
@@ -141,7 +141,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getMultiplayerLogs(): string;
     multiplayerLog(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
-    enumerateCloudFiles(): ICloudFile[];
+    enumerateRemoteFiles(): IRemoteFile[];
     private initializeGreenworks;
     private initializeNapi;
     private setupAndInitializeWorkshopMods;
@@ -149,7 +149,8 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private initializeModsFromFolder;
     private enumerateInstalledWorkshopMods;
     private refreshSetupMods;
-    private cleanupTemporaryFiles;
+    private cleanupTemporaryLocalFiles;
+    private cleanupTemporaryRemoteFiles;
     private refreshPublishedMods;
     private getIdFromWorkshopItem;
     private syncWorkshopItems;
