@@ -61,9 +61,9 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getContainerReference(container: IContainer | undefined, parentObject?: any, showWarnings?: boolean): ContainerReference;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     addToContainerInternal(item: Item, container: IContainer, movingMultiple?: boolean, skipMessage?: boolean, updateTables?: boolean): boolean;
-    removeContainerItems(container: IContainer): void;
+    removeContainerItems(container: IContainer, removeContainedItems?: boolean): void;
     exists(item: Item): boolean;
-    remove(item: Item): void;
+    remove(item: Item, removeContainedItems?: boolean): void;
     getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): Item[];
     getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     /**

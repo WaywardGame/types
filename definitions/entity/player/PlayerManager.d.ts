@@ -10,14 +10,20 @@
  */
 import EntityManager from "entity/EntityManager";
 import Player from "entity/player/Player";
-import { IPlayerOptions } from "game/IGame";
+import { IPlayerOptions, IPlayOptions } from "game/IGame";
 export default class PlayerManager extends EntityManager<Player> {
     static readonly INSTANCE: PlayerManager;
     getEntities(): Player[];
     setLocal(player: Player): void;
-    add(playerOptions?: Partial<IPlayerOptions>, allowMultiplayerSetup?: boolean): Player;
+    add(playerOptions?: Partial<IPlayerOptions>, allowSetup?: boolean): Player;
     remove(player: Player): void;
     remove(pid: number): void;
-    delete(plys: Player[], identifier: string): void;
+    /**
+     * Support loading dedicated server saves & backups in single player games
+     * Support loading single player saves in dedicated servers
+     * All while not losing data for any players - regardless of if the player was in the server or not at the time of the backup
+     */
+    repair(options: Partial<IPlayOptions>): void;
+    private delete;
     private removeAndFixIds;
 }

@@ -90,7 +90,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     findDescendants(selector: string): NodeListOf<Element>;
     closest(selector: string): Element | null;
     matches(selector: string): boolean;
-    getIndex(): number | null;
+    getIndex(): number | undefined;
     setTooltip(initializer?: (tooltip: ITooltip) => any, showOnHover?: boolean): this;
     removeTooltip(): void;
     /**
@@ -111,7 +111,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     };
     getNthChild<C extends Component = Component>(nth?: number): C;
     getChildren<C extends Component = Component>(selector?: string): Stream<C>;
-    siblings<C extends Component = Component>(selector?: string): import("@wayward/goodstream/Stream").default<C>;
+    siblings<C extends Component = Component>(selector?: string): Stream<C>;
     scrollTo(child: Component, ms?: number): void;
     scrollTo(child: Component, offsetTop: number, ms?: number): void;
     schedule<A extends any[]>(cb: (this: this, button: this, ...args: A) => any, ...args: A): this;

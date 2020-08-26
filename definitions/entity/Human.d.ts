@@ -54,7 +54,6 @@ export default abstract class Human extends Entity {
     swimming: boolean;
     vehicleItemId: number | undefined;
     identifier: string;
-    canSendMessage: boolean;
     private readonly privateStore;
     private cachedTotalSkill?;
     constructor();
