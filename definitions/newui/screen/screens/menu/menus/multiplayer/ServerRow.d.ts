@@ -11,9 +11,10 @@
 import { IServer } from "multiplayer/matchmaking/IMatchmaking";
 import Button from "newui/component/Button";
 import { IRefreshable } from "newui/component/Refreshable";
+import { IGameIconsHost } from "newui/screen/screens/menu/component/GameIcons";
 import { ModLoadability } from "newui/util/Misc";
 import { ISteamFriend } from "steamworks/ISteamworks";
-export declare class ServerRow extends Button implements IRefreshable {
+export declare class ServerRow extends Button implements IRefreshable, IGameIconsHost {
     private readonly getFriend;
     get server(): IServer;
     set server(val: IServer);

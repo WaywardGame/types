@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { UnableToJoinReason } from "multiplayer/IMultiplayer";
+import { BiomeTypes } from "game/IBiome";
 export interface IMatchmaking {
     getIdentifier(): string;
     getChannel(): string;
@@ -116,9 +117,17 @@ export interface IServerGameDetails {
     mods: IServerMod[];
     peaceful: boolean;
     milestoneModifiersAllowed: boolean;
+    island: IServerIslandDetails;
 }
 export interface IServerMod {
     name: string;
     version: string;
     publishFileId: string | undefined;
+}
+export interface IServerIslandDetails {
+    position: {
+        x: number;
+        y: number;
+    };
+    biomeType: BiomeTypes;
 }

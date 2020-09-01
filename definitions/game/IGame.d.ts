@@ -79,10 +79,13 @@ export declare enum TickFlag {
     IslandTimeAdjustment = 2078,
     All = 4095
 }
+/**
+ * This number * game.interval (16.666) is the tick time in milliseconds
+ */
 export declare enum TickSpeed {
     Min = 10,
     Default = 50,
-    Max = 80
+    Max = 140
 }
 export declare enum TurnMode {
     Manual = 0,
