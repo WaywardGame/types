@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { DropLocation } from "entity/action/actions/Drop";
 import { InspectType } from "game/inspection/IInspection";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ISerializedTranslation } from "language/Translation";
@@ -73,6 +72,11 @@ export interface IOptions {
      * Missing indices = use default binding
      */
     bindings: OptionalDescriptions<keyof typeof Bindable, Binding[]>;
+}
+export declare enum DropLocation {
+    Facing = 0,
+    Feet = 1,
+    FeetWhenFacingBlocked = 2
 }
 export declare enum AutoSave {
     Off = 0,

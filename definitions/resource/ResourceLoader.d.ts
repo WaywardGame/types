@@ -15,6 +15,7 @@ export interface IResourceLoaderEvents {
     load(): any;
 }
 export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEvents> implements IResourceLoader {
+    private gl;
     private concurrent;
     private loadingCount;
     private loadingInterval;
@@ -24,6 +25,7 @@ export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEve
     private spritePacker;
     private tilePacker;
     private imageOverrides;
+    private container;
     initialize(gl: WebGL2RenderingContext, container: IResourceContainer): void;
     loadResources(): Promise<void>;
     continueLoading(): void;
@@ -32,6 +34,9 @@ export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEve
     getImageOverride(src: string): Partial<IImageOverrideDescription> | undefined;
     updateImageOverrides(): void;
     protected onGlobalSlotReady(): Promise<void>;
+    private loadSpritePacker;
+    private createSpritePacker;
+    private createTilePacker;
     private loadResourcesInternal;
     private loadCharacter;
     private loadCreatures;

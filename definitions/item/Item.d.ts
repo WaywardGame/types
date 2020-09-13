@@ -14,7 +14,7 @@ import { CreatureType } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
 import Human from "entity/Human";
 import { EntityType } from "entity/IEntity";
-import { EquipType } from "entity/IHuman";
+import { EquipType, SkillType } from "entity/IHuman";
 import Player from "entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { ITemperatureSource } from "game/temperature/ITemperature";
@@ -155,6 +155,10 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
      * Sets the item's decay value based on quality, game mode and added some randomization
      */
     setDecay(overrideDefault?: number): void;
+    /**
+     * Gets the inherit item type.
+     */
+    getInheritItemRecipeSkill(): SkillType;
     onUnserialized(): void;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;

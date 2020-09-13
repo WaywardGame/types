@@ -12,7 +12,7 @@ import Creature from "entity/creature/Creature";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
-import IWorldRenderer, { SpriteBatchLayer } from "renderer/IWorldRenderer";
+import IWorldRenderer, { RenderFlag, SpriteBatchLayer } from "renderer/IWorldRenderer";
 import { ITileAdaptor } from "renderer/TileAdaptors";
 import Fence from "renderer/tileAdaptors/Fence";
 import Wall from "renderer/tileAdaptors/Wall";
@@ -124,6 +124,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     getAmbientIntensity(): number;
     getFogColor(): [number, number, number];
     renderWorld(x: number, y: number, z: number): void;
+    renderWorldLayer(worldLayer: WorldLayerRenderer, x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFlags: RenderFlag, enableDepth: boolean): void;
     render(): void;
     screenToVector(screenX: number, screenY: number): Vector2;
     screenToTile(screenX: number, screenY: number): Vector2 | undefined;

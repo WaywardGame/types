@@ -115,7 +115,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getTileFromPoint(point: IVector3): ITile;
     getTile(x: number, y: number, z: number): ITile;
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
-    getOrCreateTile(x: number, y: number, z: number): ITile;
+    getOrCreateTile(index: number): ITile;
     setPaused(paused: boolean, showChatMessage?: boolean): void;
     updateRender(source: RenderSource, flag: UpdateRenderFlag): void;
     hasRenderFlag(flag: UpdateRenderFlag): boolean;

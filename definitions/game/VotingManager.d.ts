@@ -18,8 +18,13 @@ interface IVoteResult {
 export default class VotingManager {
     private _active;
     private readonly _history;
-    get isVoting(): boolean;
     get activeVoteInterrupt(): Interrupt | undefined;
+    /**
+     * Check if voting is active
+     * It will also end the existing vote if players left since the vote started
+     * @returns True if there an active vote
+     */
+    isVoting(): boolean;
     resetHistory(): void;
     getSecondsBeforeVotingIsAllowed(player: Player): number;
     canStartVote(player: Player): boolean;

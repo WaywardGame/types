@@ -219,6 +219,8 @@ export interface IMobCheck {
     freshWater?: boolean;
     shallowWater?: boolean;
     noTile?: boolean;
+    waterTiles?: number;
+    voidTiles?: number;
 }
 export declare const setupSpawnItems: ItemType[];
 export declare const setupWaterItems: ItemType[];

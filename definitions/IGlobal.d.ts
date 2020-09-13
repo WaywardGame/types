@@ -81,7 +81,7 @@ declare global {
     let multiplayerNetworkingOptions: IMultiplayerNetworkingOptions;
     let npcManager: NPCManager;
     let players: Player[];
-    let renderer: WorldRenderer;
+    let renderer: WorldRenderer | undefined;
     let resourceLoader: ResourceLoader;
     let saveData: SaveData;
     let saveDataGlobal: SaveDataGlobal;

@@ -12,6 +12,7 @@ import Player from "entity/player/Player";
 export interface ICommand {
     type: Command;
     callback: CommandCallback;
+    canUse?: (player: Player) => boolean;
 }
 export declare type CommandCallback = (player: Player, args: string) => void;
 export declare enum Command {

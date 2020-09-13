@@ -178,6 +178,7 @@ declare class Translation {
     getString(...args: any[]): string;
     toString(): string;
     serialize(): ISerializedTranslation;
+    private canCache;
     private getCachedTranslation;
     /**
      * Gets the `IStringSection[]` representing this translation, resolved.

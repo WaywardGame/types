@@ -10,10 +10,7 @@
  */
 import { Action } from "entity/action/Action";
 import { ActionArgument } from "entity/action/IAction";
-export declare enum DropLocation {
-    Facing = 0,
-    Feet = 1,
-    FeetWhenFacingBlocked = 2
-}
+import { DropLocation } from "save/data/ISaveDataGlobal";
+export { DropLocation };
 declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.String, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void>;
 export default _default;
