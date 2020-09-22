@@ -22,6 +22,7 @@ export default class MapDialog extends Dialog implements IHookHost {
     private readonly canvas;
     private readonly textWrapper;
     private readonly direction;
+    private readonly underground;
     private mapCanvas;
     private map;
     private decodePosition;
@@ -35,5 +36,6 @@ export default class MapDialog extends Dialog implements IHookHost {
     private closeIfItemIsGone;
     private getDistance;
     private getDirection;
+    private getLevel;
     private onResize;
 }
