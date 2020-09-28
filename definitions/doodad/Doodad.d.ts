@@ -165,6 +165,10 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     switchWellStatus(): void;
     getProducedTemperature(): number | undefined;
+    /**
+     * Refills solar stills when they are on shallow water automatically.
+     */
+    refillSolarStill(): void;
     onUnserialized(): void;
     /**
      * @deprecated

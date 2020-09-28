@@ -97,6 +97,10 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     dismantle?: IDismantleDescription;
     doodadContainer?: DoodadType;
     repairable?: boolean;
+    /**
+     * Set to false if you do not want the item to be reinforcable. Items with a durability property will be reinforcable by default.
+     */
+    reinforcable?: boolean;
     repairAndDisassemblyRequiresFire?: boolean;
     suffix?: string;
     prefix?: string;
