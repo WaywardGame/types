@@ -26,15 +26,16 @@ export default class NewGameMenu extends Menu {
     difficultyOptions?: IGameOptions;
     readonly milestones: Set<Milestone>;
     private slot;
-    private wasEditedPreShown;
+    private editedPreShown;
     constructor();
     setSeed(seed: string | number, lock?: boolean): this;
     setDifficulty(difficulty: GameMode, lock?: boolean): this;
     setDifficultyOptions(options: IGameOptions): this;
     setMultiplayer(): this;
     getDifficultyOptions(): IGameOptions;
+    setWasEditedPreShown(): void;
+    wasEditedPreShown(): boolean;
     protected refreshAsync(): Promise<void>;
-    private setWasEditedPreShown;
     private getDefaultSaveName;
     private refresh;
     private startOrNext;

@@ -15,7 +15,7 @@ import Human from "entity/Human";
 import { EntityType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import { EquipType, ICheckUnderOptions, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
-import { IMovementIntent, IPlayerEvents, TurnType, WeightStatus, IWalkPath } from "entity/player/IPlayer";
+import { IMovementIntent, IPlayerEvents, IWalkPath, TurnType, WeightStatus } from "entity/player/IPlayer";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
@@ -27,13 +27,13 @@ import { IContainer, ItemType, RecipeLevel } from "item/IItem";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
+import { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 import { IExploreMap } from "renderer/IExploreMap";
 import IClientStore from "save/clientStore/IClientStore";
 import { IOptions } from "save/data/ISaveDataGlobal";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-import { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 export default class Player extends Human {
     event: IEventEmitter<this, IPlayerEvents>;
     readonly entityType: EntityType.Player;
@@ -88,7 +88,6 @@ export default class Player extends Human {
     private updateTablesOnNoInput?;
     constructor(identifier?: string);
     get clientStore(): IClientStore;
-    protected restored(): void;
     setOptions(options: IOptions): void;
     getGameOptionsBeforeModifiers(): IGameOptionsPlayer;
     getGameOptions(): IGameOptionsPlayer;
@@ -221,6 +220,7 @@ export default class Player extends Human {
      * @deprecated Do not call this with players.
      */
     moveTo(): boolean;
+    protected restored(): void;
     protected getApplicableStatusEffects(): Set<StatusType>;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
     protected getSkillGainMultiplier(skillType: SkillType): number;
