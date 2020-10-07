@@ -923,7 +923,8 @@ export declare enum ItemTypeGroup {
     LiquidContainer = 877,
     FrozenWater = 878,
     RawFish = 879,
-    All = 880,
-    Last = 881
+    Insect = 880,
+    All = 881,
+    Last = 882
 }
 export {};
