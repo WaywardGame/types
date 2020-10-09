@@ -140,6 +140,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     setupMultiplayerLog(): void;
     getMultiplayerLogs(): string;
     multiplayerLog(...args: any[]): void;
+    multiplayerLogWarn(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
     enumerateRemoteFiles(): IRemoteFile[];
     private initializeGreenworks;
