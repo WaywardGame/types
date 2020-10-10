@@ -130,6 +130,10 @@ export interface ISourceFilter {
 }
 export declare const defaultSourceFilter: ISourceFilter;
 declare module Log {
+    enum LogType {
+        Console = 0,
+        File = 1
+    }
     function refresh(): void;
     function startSetup(): void;
     function finalizeSetup(): void;
@@ -137,6 +141,7 @@ declare module Log {
     function setCallback(cb?: (...args: any[]) => void): void;
     function addPreConsoleCallback(cb: (...args: any[]) => void): void;
     function removePreConsoleCallback(cb: (...args: any[]) => void): void;
+    function setSourceFilter(logType: LogType, enable: boolean, ...sources: Array<LogSource | string>): void;
     /**
      * Takes a winston instance and a path. Updates the static Log methods to use the winston instance.
      */
