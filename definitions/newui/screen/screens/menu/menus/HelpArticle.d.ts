@@ -12,4 +12,5 @@ import Menu from "newui/screen/screens/menu/component/Menu";
 import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 export default class HelpArticleMenu extends Menu {
     constructor(article: HelpArticle);
+    protected onGoBackFrom(): Promise<void>;
 }

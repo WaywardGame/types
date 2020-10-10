@@ -21,8 +21,8 @@ export default class MilestoneModifiers extends Component {
     readonly wrapperChosenModifiersList: Component<HTMLElement>;
     private milestoneModifiersMenu;
     constructor(milestones: () => Set<Milestone>, allowHostMilestones: boolean);
-    reset(): this;
-    protected onReturnFromMilestoneModifiersMenu(): void;
+    reset(milestoneModifiers?: Iterable<Milestone>): this;
+    private regenerateChosenMilestoneModifiersList;
     private refresh;
     private getMilestoneModifiersMenu;
 }

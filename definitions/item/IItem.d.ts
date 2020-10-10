@@ -97,6 +97,10 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     dismantle?: IDismantleDescription;
     doodadContainer?: DoodadType;
     repairable?: boolean;
+    /**
+     * Set to false if you do not want the item to be reinforcable. Items with a durability property will be reinforcable by default.
+     */
+    reinforcable?: boolean;
     repairAndDisassemblyRequiresFire?: boolean;
     suffix?: string;
     prefix?: string;
@@ -919,7 +923,8 @@ export declare enum ItemTypeGroup {
     LiquidContainer = 877,
     FrozenWater = 878,
     RawFish = 879,
-    All = 880,
-    Last = 881
+    Insect = 880,
+    All = 881,
+    Last = 882
 }
 export {};

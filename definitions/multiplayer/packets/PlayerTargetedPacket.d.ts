@@ -8,16 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-export declare enum SortType {
-    Name = 0,
-    Group = 1,
-    Weight = 2,
-    Recent = 3,
-    Skill = 4,
-    Decay = 5,
-    Quality = 6,
-    Category = 7,
-    Durability = 8,
-    DiscoveredTime = 9,
-    BestForCrafting = 10
+import Player from "entity/player/Player";
+import { Packet } from "multiplayer/packets/Packet";
+export default abstract class PlayerTargetedPacket extends Packet {
+    pid: number;
+    player: Player;
+    abstract setPlayer(): void;
+    preProcess(): void;
 }

@@ -8,12 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Player from "entity/player/Player";
-import SharedPacket from "multiplayer/packets/SharedPacket";
-export default abstract class PlayerTargetedSharedPacket extends SharedPacket {
-    pid: number;
-    player: Player;
-    preProcess(): void;
+import { PacketType } from "multiplayer/packets/IPacket";
+import PlayerTargetedPacket from "multiplayer/packets/PlayerTargetedPacket";
+export default abstract class PlayerTargetedSharedPacket extends PlayerTargetedPacket {
+    setPlayer(): void;
+    getType(): PacketType;
     protected preWriteData(): void;
     protected preReadData(): void;
 }

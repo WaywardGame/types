@@ -230,7 +230,7 @@ declare global {
         emptyDir(destination: string, cb: (err: string | null | undefined) => void): any;
         stat(path: string, cb: (err: string | null | undefined, stats: IFileStat) => void): any;
         statSync(path: string): IFileStat | undefined;
-        mkdirSync(path: string): any;
+        mkdirSync(path: string, opt?: any): any;
         existsSync(path: string): string;
         pathExistsSync(path: string): boolean;
         readdir(path: string, cb: (err: string | null | undefined, files: string[]) => void): any;
