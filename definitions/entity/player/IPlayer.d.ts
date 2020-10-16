@@ -15,6 +15,7 @@ import { HairColor, HairStyle, IRestData, SkinColor } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { IMessage } from "entity/player/IMessageManager";
 import MessageManager from "entity/player/MessageManager";
+import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
 import { Events } from "event/EventEmitter";
 import { IContainer, ItemType } from "item/IItem";
@@ -149,6 +150,22 @@ export interface IPlayerEvents extends Events<Human> {
      * @param restData The data related to the rest event
      */
     restEnd(restData: IRestData): void;
+    /**
+     * Called when the player will write a note.
+     * @param note The note that will be written.
+     * @returns `false` if the note should be cancelled
+     */
+    writeNote(note: INote): false | void;
+    /**
+     * Called when the player has written a note.
+     * @param id The id of the note that was written.
+     */
+    writtenNote(id: number): void;
+    /**
+     * Called when the player has read a note.
+     * @param id The id of the note that was read.
+     */
+    readNote(id: number): void;
 }
 export declare enum TurnType {
     CheckUnderPlayer = 0,

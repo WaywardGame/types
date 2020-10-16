@@ -10,5 +10,5 @@
  */
 import { Action } from "entity/action/Action";
 import { ActionArgument } from "entity/action/IAction";
-declare const _default: Action<[ActionArgument.Direction], import("../../player/Player").default, void>;
+declare const _default: Action<[ActionArgument.Direction], import("../../player/Player").default, void, [import("../../../utilities/math/Direction").Direction]>;
 export default _default;

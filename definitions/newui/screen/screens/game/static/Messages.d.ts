@@ -68,6 +68,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     unpinMessage(pinnedMessage: PinnedMessage, time?: number): Promise<void>;
     onDisplayMessage(player: Player, message: IMessage): void;
     onWrittenNote(player: Player, id: number): void;
+    onReadNote(player: Player, id: number): void;
     onFocusChat(): boolean;
     getDefaultFilterName(filter: MessageFilterDefault): string;
     protected onChangeQuadrant(): void;

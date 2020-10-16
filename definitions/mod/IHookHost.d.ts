@@ -19,7 +19,6 @@ import Human from "entity/Human";
 import { EquipType, SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { IMessage } from "entity/player/IMessageManager";
-import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
 import { IMapRequest } from "game/IGame";
 import { BookType, ItemType } from "item/IItem";
@@ -300,19 +299,6 @@ export interface IHookHost {
      * @returns A number to set the player weight to or undefined to use the default logic
      */
     onUpdateWeight?(player: Player, newWeight: number): number | undefined;
-    /**
-     * Called when the player will write a note.
-     * @param player The player object
-     * @param note The note that will be written.
-     * @returns `false` if the note should be cancelled, or `undefined` to use the default logic
-     */
-    onWriteNote?(player: Player, note: INote): false | undefined;
-    /**
-     * Called when the player has written a note.
-     * @param player The player object
-     * @param id The id of the note that was written.
-     */
-    onWrittenNote?(player: Player, id: number): void;
     /**
      * Called after an action has been executed
      * This is called after the action result is used

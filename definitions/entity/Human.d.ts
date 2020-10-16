@@ -11,7 +11,7 @@
 import Doodad from "doodad/Doodad";
 import { IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
-import { ICausesDamage } from "entity/IEntity";
+import { DamageType, ICausesDamage } from "entity/IEntity";
 import { EquipType, ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, IRestData, RestCancelReason, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
@@ -54,6 +54,8 @@ export default abstract class Human extends Entity {
     swimming: boolean;
     vehicleItemId: number | undefined;
     identifier: string;
+    attackAnimationType: DamageType | undefined;
+    attackAnimationEndTime: number | undefined;
     private readonly privateStore;
     private cachedTotalSkill?;
     constructor();
@@ -122,6 +124,7 @@ export default abstract class Human extends Entity {
     equip(item: Item, slot: EquipType): void;
     unequip(item: Item): void;
     unequipAll(): void;
+    animateAttack(damageType: DamageType): void;
     canJump(): boolean;
     hasDelay(): boolean;
     addDelay(delay: number, replace?: boolean, addStaminaDelay?: boolean): void;

@@ -19,7 +19,6 @@ import Human from "entity/Human";
 import { EquipType, SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { IMessage } from "entity/player/IMessageManager";
-import { INote } from "entity/player/note/NoteManager";
 import Player from "entity/player/Player";
 import { IMapRequest } from "game/IGame";
 import "IGlobal";
@@ -97,8 +96,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onTurnEnd(player: Player): void;
     onTurnStart(player: Player): void;
     onUpdateWeight(player: Player, newWeight: number): number | undefined;
-    onWriteNote(player: Player, note: INote): false | undefined;
-    onWrittenNote(player: Player, id: number): void;
     postExecuteAction(api: IActionApi, action: IActionDescription, args: any[]): void;
     postFieldOfView(): void;
     postGenerateWorld(generateNewWorld: boolean): void;

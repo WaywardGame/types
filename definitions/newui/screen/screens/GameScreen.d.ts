@@ -54,8 +54,9 @@ export default class GameScreen extends Screen implements IHookHost {
     private readonly placeholders;
     constructor();
     openDialog<D = Dialog>(id: DialogId): D;
+    isDialogVisible(id: DialogId): Promise<boolean | undefined>;
     closeDialog(id: DialogId): Promise<this>;
-    toggleDialog(id: DialogId, force?: boolean): this;
+    toggleDialog<D extends Dialog = Dialog>(id: DialogId, force?: boolean, initializer?: (dialog: D) => any): this;
     toggleDialogs(states: IDialogStates): this;
     getQuadrantComponents(): import("@wayward/goodstream/Stream").default<QuadrantComponent>;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: QuadrantComponentId): (never extends C ? QuadrantComponent : C extends never[] ? QuadrantComponent | C : {} extends C ? QuadrantComponent | Partial<QuadrantComponent> : QuadrantComponent | C) | undefined;

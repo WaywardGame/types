@@ -11,5 +11,6 @@
 import { Action } from "entity/action/Action";
 import { ActionArgument } from "entity/action/IAction";
 import Player from "entity/player/Player";
-declare const _default: Action<[ActionArgument.Vector2, [ActionArgument.Direction, ActionArgument.Undefined]], Player, void>;
+import { Direction } from "utilities/math/Direction";
+declare const _default: Action<[ActionArgument.Vector2, [ActionArgument.Direction, ActionArgument.Undefined]], Player, void, [import("../../../utilities/math/IVector").IVector2, (Direction | undefined)?]>;
 export default _default;

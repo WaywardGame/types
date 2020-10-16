@@ -31,6 +31,7 @@ export interface IModConfig {
     readonly customizations?: boolean;
     readonly publishedFileId?: string;
     readonly allowUnlockingMilestones?: boolean;
+    readonly github?: string;
 }
 export interface IModEvents {
     unload(): any;

@@ -18,5 +18,6 @@ export default class BindingsMenu extends Menu {
     onShow(): void;
     protected onGoBackFrom(): void;
     private filterBindRows;
+    private filterToBindables;
     private getSelector;
 }

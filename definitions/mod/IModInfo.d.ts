@@ -37,6 +37,8 @@ export interface IModInfo {
     }>;
     log: Log;
     loadOrder: number;
+    readme?: string | false;
+    icon?: string | false;
 }
 export declare enum TypeFlag {
     Undefined = 1,

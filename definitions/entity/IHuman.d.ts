@@ -77,7 +77,8 @@ export declare enum Delay {
     ShortPause = 13,
     Collision = 40,
     TurnDirection = 2,
-    ReallyLongPause = 100
+    ReallyLongPause = 100,
+    AttackAnimation = 30
 }
 export declare enum EquipType {
     None = 0,

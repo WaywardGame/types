@@ -43,6 +43,10 @@ export interface IBindHandlerApi {
      * Note: Only contains `Bindable`s of which the handlers have already been processed.
      */
     caught: Set<Bindable>;
+    /**
+     * Whether this event is cancelled. If `true`, no other bind handlers will be processed.
+     */
+    cancelled: boolean;
 }
 declare type BindingHandler<R = boolean> = (api: IBindHandlerApi) => R;
 interface IBindHandlerRegistration<T extends {

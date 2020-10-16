@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "entity/action/Action";
-declare const _default: Action<[], import("../../player/Player").default | import("../../npc/NPC").default, boolean>;
+declare const _default: Action<[], import("../../player/Player").default | import("../../npc/NPC").default, boolean, []>;
 export default _default;

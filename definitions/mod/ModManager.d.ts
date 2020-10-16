@@ -66,6 +66,8 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     getName(index: number): string;
     getLog(index: number): Log;
     getDescription(index: number): string;
+    getReadme(index: number): Promise<string | false>;
+    getIcon(index: number): Promise<string | false | undefined>;
     getTags(index: number): Set<string>;
     getVersion(index: number): string;
     getLastUpdatedDate(index: number): number | undefined;

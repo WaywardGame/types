@@ -130,7 +130,8 @@ export declare enum DamageType {
     Slashing = 2,
     Piercing = 4,
     Fire = 8,
-    True = 16
+    Cold = 16,
+    True = 32
 }
 export declare class Defense {
     base: number;

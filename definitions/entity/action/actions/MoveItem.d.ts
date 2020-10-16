@@ -11,5 +11,7 @@
 import { Action } from "entity/action/Action";
 import { ActionArgument } from "entity/action/IAction";
 import NPC from "entity/npc/NPC";
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Container, ActionArgument.Undefined], [ActionArgument.ItemType, ActionArgument.Undefined], [ActionArgument.Quality, ActionArgument.Undefined], [ActionArgument.String, ActionArgument.Undefined]], import("../../player/Player").default | NPC, void>;
+import { IContainer } from "item/IItem";
+import Item from "item/Item";
+declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Container, ActionArgument.Undefined], [ActionArgument.ItemType, ActionArgument.Undefined], [ActionArgument.Quality, ActionArgument.Undefined], [ActionArgument.String, ActionArgument.Undefined]], import("../../player/Player").default | NPC, void, [(Item | undefined)?, (IContainer | undefined)?, (import("../../../item/IItem").ItemType | undefined)?, (import("../../../game/IObject").Quality | undefined)?, (string | undefined)?]>;
 export default _default;

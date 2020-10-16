@@ -9,8 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { SfxType } from "audio/IAudio";
-import actionDescriptions from "entity/action/Actions";
-import { ActionArgument, ActionArgumentTupleTypes, ActionArgumentTypeMap, ActionType, IActionApi, IActionDescription, IActionHandlerApi, IActionParticle, IActionSoundEffect } from "entity/action/IAction";
+import { ActionArgument, ActionArgumentTypeMap, ActionType, IActionApi, IActionDescription, IActionHandlerApi, IActionParticle, IActionSoundEffect } from "entity/action/IAction";
 import Entity from "entity/Entity";
 import { SkillType } from "entity/IHuman";
 import { TurnType } from "entity/player/IPlayer";
@@ -32,20 +31,14 @@ interface ActionEvents {
      */
     postExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any>, args: any[]): any;
 }
-export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R> extends EventEmitter.Host<ActionEvents> implements IActionApi<E> {
+export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R, AV extends any[]> extends EventEmitter.Host<ActionEvents> implements IActionApi<E> {
     /**
      * Gets an action by its description. If you're using the Action class for constructing the descriptions, just pass the action instance.
      *
      * Note: Prefer `IActionApi.get` if you're calling this from within another action.
      */
-    static get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A, infer E, infer R> ? ActionExecutor<A, E, R> : never;
-    /**
-     * Gets an action by its `ActionType`.
-     *
-     * Note: Prefer `IActionApi.get` if you're calling this from within another action.
-     */
-    static get<T extends ActionType>(action: T): (typeof actionDescriptions)[T] extends IActionDescription<infer A, infer E, infer R> ? ActionExecutor<A, E, R> : never;
-    static executeMultiplayer(packet: ActionPacket, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any>): any;
+    static get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A, infer E, infer R, infer AV> ? ActionExecutor<A, E, R, AV> : never;
+    static executeMultiplayer(packet: ActionPacket, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any, any[]>): any;
     get executor(): E;
     get actionStack(): ActionType[];
     get lastAction(): ActionType;
@@ -69,10 +62,9 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private readonly action;
     constructor(action?: IActionDescription<A, E>, type?: number | undefined);
     skipConfirmation(): this;
-    execute(executor: E, ...args: ActionArgumentTupleTypes<A>): R;
+    execute(actionApi: IActionApi<E>, ...args: AV): R;
+    execute(executor: E, ...args: AV): R;
     isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is ActionArgumentTypeMap<AA>;
-    get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A2, infer E2, infer R2> ? ActionExecutor<A2, E2, R2> : never;
-    get<T extends ActionType>(action: T): (typeof actionDescriptions)[T] extends IActionDescription<infer A2, infer E2, infer R2> ? ActionExecutor<A2, E2, R2> : never;
     setDelay(delay: number, replace?: boolean): this;
     setPassTurn(turnType?: TurnType): this;
     setUpdateView(updateFov?: boolean): this;

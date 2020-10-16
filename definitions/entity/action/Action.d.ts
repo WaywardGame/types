@@ -14,16 +14,18 @@ import Entity from "entity/Entity";
 import { EntityType } from "entity/IEntity";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
-export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void> implements IActionDescription<A, E, R> {
+export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, AV extends any[] = ActionArgumentTupleTypes<A>> implements IActionDescription<A, E, R, AV> {
     readonly argumentTypes: A;
     readonly usability: {
         [key in ActionUsability]?: boolean;
     };
     validExecutors: EntityType[];
-    preExecutionHandler?: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => any;
-    handler: (actionApi: IActionHandlerApi<E>, ...args: ActionArgumentTupleTypes<A>) => R;
-    confirmer?: (actionApi: IActionConfirmerApi<E>, ...args: ActionArgumentTupleTypes<A>) => Promise<boolean>;
+    preExecutionHandler?: (actionApi: IActionApi<E>, ...args: AV) => any;
+    handler: (actionApi: IActionHandlerApi<E>, ...args: AV) => R;
+    confirmer?: (actionApi: IActionConfirmerApi<E>, ...args: AV) => Promise<boolean>;
     constructor(...argumentTypes: A);
+    execute(actionApi: IActionApi<E>, ...args: AV): R;
+    execute(executor: E, ...args: AV): R;
     /**
      * Add a "pre-execution" handler to this action.
      *
@@ -32,7 +34,7 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
      *
      * @return `false` to cancel the execution of the action.
      */
-    setPreExecutionHandler(handler: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => any): this;
+    setPreExecutionHandler(handler: (actionApi: IActionApi<E>, ...args: AV) => any): this;
     /**
      * Add an asynchronous "confirmer" handler to this action.
      *
@@ -44,13 +46,13 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
      *
      * @return `false` to cancel the execution of the action.
      */
-    setConfirmer(confirmer: (actionApi: IActionConfirmerApi<E>, ...args: ActionArgumentTupleTypes<A>) => Promise<boolean>): this;
+    setConfirmer(confirmer: (actionApi: IActionConfirmerApi<E>, ...args: AV) => Promise<boolean>): this;
     /**
      * Add a handler for this action.
      *
      * Handlers are executed on both the client-side and the server-side.
      */
-    setHandler<H extends (actionApi: IActionHandlerApi<E>, ...args: ActionArgumentTupleTypes<A>) => any>(handler: H): Action<A, E, H extends (...args: any) => infer R2 ? R2 : void>;
+    setHandler<H extends (actionApi: IActionHandlerApi<E>, ...args: AV) => any>(handler: H): Action<A, E, H extends (...args: any) => infer R2 ? R2 : void>;
     /**
      * Sets additional times the action can be used in.
      */
@@ -62,7 +64,7 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     /**
      * Creates an identical clone of this action.
      */
-    clone(): Action<A, never, R>;
+    clone(): IActionDescription<A, E, R, AV>;
 }
 declare type EntityTypeMap<E extends EntityType> = {
     [EntityType.Creature]: Creature;

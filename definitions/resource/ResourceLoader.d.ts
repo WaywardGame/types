@@ -39,6 +39,8 @@ export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEve
     private createTilePacker;
     private loadResourcesInternal;
     private loadCharacter;
+    private loadAttackAnimations;
+    private loadAttackAnimation;
     private loadCreatures;
     private loadCreature;
     private loadCorpses;

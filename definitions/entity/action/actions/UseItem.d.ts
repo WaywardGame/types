@@ -9,6 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "entity/action/Action";
-import { ActionArgument } from "entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ActionType], import("../../player/Player").default | import("../../npc/NPC").default, void>;
+import { ActionArgument, ActionType } from "entity/action/IAction";
+declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ActionType], import("../../player/Player").default | import("../../npc/NPC").default, void, [import("../../../item/Item").default, ActionType]>;
 export default _default;

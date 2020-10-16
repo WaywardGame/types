@@ -11,8 +11,6 @@
 import { SfxType } from "audio/IAudio";
 import Doodad from "doodad/Doodad";
 import { DoodadType } from "doodad/IDoodad";
-import ActionExecutor from "entity/action/ActionExecutor";
-import actionDescriptions from "entity/action/Actions";
 import { ICorpse } from "entity/creature/corpse/ICorpse";
 import Creature from "entity/creature/Creature";
 import Entity from "entity/Entity";
@@ -133,17 +131,28 @@ export declare enum ActionUsability {
     Ghost = 3,
     Delayed = 4
 }
-export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void> {
+export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, AV extends any[] = ActionArgumentTupleTypes<A>> {
     type?: number;
     argumentTypes: A;
     usability: {
         [key in ActionUsability]?: boolean;
     };
     validExecutors: EntityType[];
-    preExecutionHandler?(actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>): any;
-    handler(actionApi: IActionHandlerApi<E>, ...args: ActionArgumentTupleTypes<A>): R;
-    confirmer?(actionApi: IActionConfirmerApi<E>, ...args: ActionArgumentTupleTypes<A>): Promise<boolean>;
-    clone(): IActionDescription<A, E, R>;
+    execute(actionApi: IActionApi<E>, ...args: AV): R;
+    execute(executor: E, ...args: AV): R;
+    /**
+     * Called internally during `execute`
+     */
+    preExecutionHandler?(actionApi: IActionApi<E>, ...args: AV): any;
+    /**
+     * Called internally during `execute`
+     */
+    handler(actionApi: IActionHandlerApi<E>, ...args: AV): R;
+    /**
+     * Called internally during `execute`
+     */
+    confirmer?(actionApi: IActionConfirmerApi<E>, ...args: AV): Promise<boolean>;
+    clone(): IActionDescription<A, E, R, AV>;
 }
 export interface IActionApi<E extends Entity = Entity> {
     readonly executor: E;
@@ -151,8 +160,6 @@ export interface IActionApi<E extends Entity = Entity> {
     readonly actionStack: ReadonlyArray<ActionType>;
     readonly lastAction: ActionType;
     isArgumentType<A extends ActionArgument>(argument: any, index: number, argumentType: A): argument is ActionArgumentTypeMap<A>;
-    get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A, infer E2, infer R> ? ActionExecutor<A, E2, R> : never;
-    get<T extends ActionType>(action: T): (typeof actionDescriptions)[T] extends IActionDescription<infer A, infer E2, infer R> ? ActionExecutor<A, E2, R> : never;
     setDelay(delay: number, replace?: boolean): this;
     setPassTurn(turnType?: TurnType): this;
     setUpdateView(updateFov?: boolean): this;
@@ -305,7 +312,7 @@ export declare type Tuple2<X1, X2> = undefined extends X2 ? (undefined extends X
 export declare type Tuple3<X1, X2, X3> = undefined extends X3 ? (undefined extends X2 ? (undefined extends X1 ? [X1?, X2?, X3?] : [X1, X2?, X3?]) : [X1, X2, X3?]) : [X1, X2, X3];
 export declare type Tuple4<X1, X2, X3, X4> = undefined extends X4 ? (undefined extends X3 ? (undefined extends X2 ? (undefined extends X1 ? [X1?, X2?, X3?, X4?] : [X1, X2?, X3?, X4?]) : [X1, X2, X3?, X4?]) : [X1, X2, X3, X4?]) : [X1, X2, X3, X4];
 export declare type Tuple5<X1, X2, X3, X4, X5> = undefined extends X5 ? (undefined extends X4 ? (undefined extends X3 ? (undefined extends X2 ? (undefined extends X1 ? [X1?, X2?, X3?, X4?, X5?] : [X1, X2?, X3?, X4?, X5?]) : [X1, X2, X3?, X4?, X5?]) : [X1, X2, X3, X4?, X5?]) : [X1, X2, X3, X4, X5?]) : [X1, X2, X3, X4, X5];
-export declare type ActionArguments<A extends IActionDescription<any, any> | ActionType> = A extends ActionType ? (typeof actionDescriptions[A] extends IActionDescription<infer AA, any> ? ActionArgumentTupleTypes<AA> : never) : A extends IActionDescription<infer AA, any> ? ActionArgumentTupleTypes<AA> : never;
-export declare type ActionEntities<A extends IActionDescription<any, any> | ActionType> = A extends ActionType ? (typeof actionDescriptions[A] extends IActionDescription<any, infer E> ? E : never) : A extends IActionDescription<any, infer E> ? E : never;
-export declare type ActionApi<A extends IActionDescription<any, any> | ActionType> = IActionApi<ActionEntities<A>>;
+export declare type ActionArguments<A extends IActionDescription<any, any, any, any>> = A extends IActionDescription<any, any, any, infer AA> ? AA : never;
+export declare type ActionEntities<A extends IActionDescription<any, any>> = A extends IActionDescription<any, infer E> ? E : never;
+export declare type ActionApi<A extends IActionDescription<any, any>> = IActionApi<ActionEntities<A>>;
 export {};

@@ -25,11 +25,13 @@ export interface INote {
         skilled: boolean;
     };
     args: any[];
+    unread?: boolean;
 }
 export interface INoteHost {
     canWriteInHours(): boolean;
     canWriteNote(note: INote): boolean;
-    onWriteNote(index: number): void;
+    onWriteNote(index: number): any;
+    onReadNote(index: number): any;
 }
 export default class NoteManager {
     private readonly host;
@@ -39,4 +41,6 @@ export default class NoteManager {
     getNote(id: number): INote | undefined;
     wasWritten(note: Note): boolean;
     write(note: Note, ...args: any[]): void;
+    getUnread(): INote[];
+    markRead(noteId: number): void;
 }

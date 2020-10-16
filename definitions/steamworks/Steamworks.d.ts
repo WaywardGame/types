@@ -122,6 +122,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     openInviteDialog(): void;
     openSaveFolder(): void;
     openModsFolder(): void;
+    openModFolder(modIndex: number): void;
     openLogsFolder(): void;
     unsubscribe(publishId: string): Promise<void>;
     sendMessage(name: string, ...data: any[]): boolean;

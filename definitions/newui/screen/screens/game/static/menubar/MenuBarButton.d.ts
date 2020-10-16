@@ -14,7 +14,11 @@ import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/Menu
 export default class MenuBarButton extends Button {
     private readonly onActivate;
     private readonly bindable;
+    private unread?;
+    private readonly unreadIndicator;
     constructor(buttonType: MenuBarButtonType);
     onBindable(api: IBindHandlerApi): boolean;
+    setUnread(unread?: boolean | (() => boolean | number)): this;
+    refresh(): this;
     private getTooltip;
 }

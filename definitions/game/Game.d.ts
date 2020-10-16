@@ -180,6 +180,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     processWaterContamination(): void;
     getMovementFinishTime(delay?: Delay | number): number;
     getMovementProgress(timeStamp: number, finishTime: number | undefined, delay?: Delay | number): number;
+    getAnimationProgress(timeStamp: number, finishTime: number | undefined, delay: Delay | number): number;
     passTurn(player: Player, turnType?: TurnType): void;
     tickRealtime(): void;
     updateView(source: RenderSource, updateFov?: boolean): void;

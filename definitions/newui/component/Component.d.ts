@@ -87,7 +87,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     dump(filter?: (element: Component) => boolean): this;
     setContents(html: string, escape?: boolean): this;
     store(): this;
-    findDescendants(selector: string): NodeListOf<Element>;
+    findDescendants<E extends HTMLElement = HTMLElement>(selector: string): NodeListOf<E>;
     closest(selector: string): Element | null;
     matches(selector: string): boolean;
     getIndex(): number | undefined;

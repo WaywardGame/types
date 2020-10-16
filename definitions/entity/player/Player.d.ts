@@ -253,6 +253,7 @@ export default class Player extends Human {
     private canWriteInHours;
     private canWriteNote;
     private onWriteNote;
+    private onReadNote;
     private shouldDisplayMessage;
     private onDisplayMessage;
     get asNPC(): undefined;
