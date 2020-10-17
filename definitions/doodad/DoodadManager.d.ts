@@ -52,7 +52,7 @@ export default class DoodadManager extends EventEmitter.Host<IDoodadManagerEvent
      * provided, the assumption is that it will only be called on empty doodads. Therefore, if there *are* items, it will log a warning.
      */
     remove(doodad: Doodad, removeItems?: boolean): void;
-    updateAll(ticks: number, realPlayers: Player[]): void;
+    updateAll(ticks: number, realPlayers: Player[], updatesPerTick?: number): void;
     isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
     isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;

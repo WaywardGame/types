@@ -147,7 +147,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     attachStillContainer(item: Item): void;
     detachStillContainer(human?: Human): Item | undefined;
     blocksMove(): boolean;
-    update(ticks: number, realPlayers: Player[]): void;
+    update(ticks: number, realPlayers: Player[], updatesPerTick?: number): void;
     canCauseStatus(): boolean;
     setOffTrap(human?: Human, withMessage?: boolean): void;
     getGrowthParticles(): IRGB | undefined;
@@ -200,4 +200,5 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     private processDecay;
     private postProcessDecay;
+    private randomAshSpawn;
 }
