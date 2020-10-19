@@ -22,7 +22,7 @@ import { IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import { IOptions } from "save/data/ISaveDataGlobal";
 import { Direction } from "utilities/math/Direction";
-import { IVector2 } from "utilities/math/IVector";
+import { IVector2, IVector3 } from "utilities/math/IVector";
 export interface IPlayerEvents extends Events<Human> {
     /**
      * Called when the player tick starts
@@ -170,7 +170,7 @@ export interface IPlayerEvents extends Events<Human> {
 export declare enum TurnType {
     CheckUnderPlayer = 0,
     DontEnterCaves = 1,
-    ForcePickUp = 2
+    Idle = 2
 }
 export interface IAttackHand {
     leftHand: number;
@@ -224,10 +224,7 @@ export interface IStatOld {
     regen: number;
     regenBase: number;
 }
-export interface IMobCheck {
-    x: number;
-    y: number;
-    z: number;
+export interface IMobCheck extends IVector3 {
     creature?: Creature;
     player?: Player;
     npc?: NPC;

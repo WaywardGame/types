@@ -1,3 +1,4 @@
+import { SfxType } from "audio/IAudio";
 /*!
  * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
@@ -19,6 +20,7 @@ import { IObjectDescription } from "game/IObject";
 import Item from "item/Item";
 import Recipe from "item/recipe/Recipe";
 import { IModdable } from "mod/ModRegistry";
+import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
 export interface IItemWeightComponent {
     weightFraction: number;
@@ -45,6 +47,7 @@ export interface IContainable {
 export interface IContainer extends IContainable {
     weightCapacity?: number;
     containedItems: Item[];
+    transientItems?: Item[];
     itemOrders?: number[];
     containerType?: ContainerType;
 }
@@ -151,6 +154,17 @@ export interface IItemReturn {
      * If set to true, this item will return the item when consumed in a craft, otherwise, it won't.
      */
     whenCrafted?: boolean;
+}
+export interface IMoveToTileOptions {
+    fromPoint?: IVector3;
+    toPoint: IVector3;
+    toContainer?: IContainer;
+    afterMovement?: IMoveToTileAfterMovementOptions;
+}
+export interface IMoveToTileAfterMovementOptions {
+    remove?: boolean;
+    soundEffect?: SfxType;
+    particles?: IRGB;
 }
 export interface IRecipe {
     baseComponent?: (ItemType | ItemTypeGroup);
@@ -840,7 +854,10 @@ export declare enum ItemType {
     ArcticPoppySeeds = 508,
     PirateHat = 509,
     AloeVeraBandage = 510,
-    SharkTooth = 511
+    SharkTooth = 511,
+    CopperKnife = 512,
+    WroughtIronKnife = 513,
+    IronKnife = 514
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

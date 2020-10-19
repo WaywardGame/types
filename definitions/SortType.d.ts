@@ -19,5 +19,6 @@ export declare enum SortType {
     Category = 7,
     Durability = 8,
     DiscoveredTime = 9,
-    BestForCrafting = 10
+    Worth = 10,
+    BestForCrafting = 11
 }

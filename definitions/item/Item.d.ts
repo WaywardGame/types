@@ -18,7 +18,7 @@ import { EquipType, SkillType } from "entity/IHuman";
 import Player from "entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { ITemperatureSource } from "game/temperature/ITemperature";
-import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, ItemType, LegendaryType, TatteredMap } from "item/IItem";
+import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, IMoveToTileOptions, ItemType, LegendaryType, TatteredMap } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { IVector3 } from "utilities/math/IVector";
@@ -54,6 +54,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     fromX?: number;
     fromY?: number;
     _movementFinishTime?: number;
+    private _movementOptions?;
     private _description;
     constructor(itemType?: ItemType | undefined, quality?: Quality, human?: Human);
     toString(): string;
@@ -82,8 +83,9 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
      */
     getName(article?: boolean, count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showLegendaryType?: boolean): Translation;
     description(): IItemDescription | undefined;
+    isTransient(): boolean;
     isValid(): boolean;
-    isProtected(human: Human): boolean;
+    isProtected(): boolean;
     getDecayMax(): number;
     getTotalWeight(player?: Player): number;
     getDisassemblyWeight(): number;
@@ -116,7 +118,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     getPoint(): IVector3 | undefined;
     dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
-    moveToTile(x: number, y: number, z: number, tileContainer?: IContainer, fromPoint?: IVector3): void;
+    moveToTile(options: IMoveToTileOptions): void;
     isMoving(): boolean;
     getMovementProgress(timeStamp: number): number;
     /**

@@ -115,12 +115,12 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getNPCWithItemInInventory(containable: IContainable): NPC | undefined;
     countItemsInContainer(containers: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: Item): number;
     countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item): number;
-    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item, human?: Human, allowProtectedItems?: boolean): Item | undefined;
+    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item, allowProtectedItems?: boolean): Item | undefined;
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, allowProtectedItems?: boolean): Item | undefined;
-    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, human?: Human, allowProtectedItems?: boolean): Item | undefined;
-    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, human?: Human, allowProtectedItems?: boolean): Item[];
-    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, human?: Human, filterText?: string): Item[];
-    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, human?: Human): Item[];
+    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, allowProtectedItems?: boolean): Item | undefined;
+    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, allowProtectedItems?: boolean): Item[];
+    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, filterText?: string): Item[];
+    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean): Item[];
     getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number): Item | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
@@ -128,7 +128,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     isContainableInAdjacentContainer(player: Player, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
-    getOrderedContainerItems(container: IContainer, human?: Human, allowProtectedItems?: boolean): Item[];
+    getOrderedContainerItems(container: IContainer, allowProtectedItems?: boolean): Item[];
     reduceDismantleWeight(createdItems: Item[], itemWeight: number, mod?: number): void;
     getItemTranslations(items: Item[], article?: boolean, context?: TextContext): import("@wayward/goodstream/Stream").default<Translation>;
     getItemListTranslation(items: Item[], article?: boolean, context?: TextContext): Translation;

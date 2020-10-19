@@ -22,6 +22,7 @@ export interface IOptions {
     autoAttack: boolean;
     autoGatherHarvest: boolean;
     autoPickup: boolean;
+    autoPickupOnIdle: boolean;
     autoSave: [AutoSave.Off] | [AutoSave.Turns | AutoSave.Time, number];
     consoleLogSourceFilter: ISourceFilter;
     currentGame: number;
