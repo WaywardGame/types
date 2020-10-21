@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Context } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProvider";
 import Inspection from "game/inspection/Inspection";
 import Translation from "language/Translation";
 import { TranslationGenerator } from "newui/component/IComponent";
@@ -20,7 +20,7 @@ export default class TileInspection extends Inspection<IVector3> {
     getId(): string;
     getBorder(): string | undefined;
     getTile(): import("../../../tile/ITerrain").ITile;
-    get(context: Context): Translation;
+    get(context: InfoProviderContext): Translation;
     onUpdateTile(_: any, x: number, y: number, z: number): void;
     protected initChildTextComponent(text: TranslationGenerator): Text;
     private getQualityColorName;

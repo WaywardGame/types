@@ -9,15 +9,15 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Player from "entity/player/Player";
-import { Context, InfoProvider } from "game/inspection/InfoProvider";
+import { InfoProviderContext, InfoProvider } from "game/inspection/InfoProvider";
 import Inspection from "game/inspection/Inspection";
 import PlayerInspection from "game/inspection/inspections/PlayerInspection";
 import { IVector3 } from "utilities/math/IVector";
 export default class SelfInspection extends PlayerInspection {
-    static getFromTile(position: IVector3, context: Context): ArrayOr<Inspection<Player>>;
+    static getFromTile(position: IVector3, context: InfoProviderContext): ArrayOr<Inspection<Player>>;
     constructor(player: Player);
     getBorder(): string;
-    get(context: Context): (import("../InfoProvider").SimpleInfoProvider | StatsInfoProvider)[];
+    get(context: InfoProviderContext): (import("../InfoProvider").SimpleInfoProvider | StatsInfoProvider)[];
 }
 declare class StatsInfoProvider extends InfoProvider {
     get(): never[];

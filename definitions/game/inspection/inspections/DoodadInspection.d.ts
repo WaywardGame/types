@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
-import { Context, InfoProvider } from "game/inspection/InfoProvider";
+import { InfoProviderContext, InfoProvider } from "game/inspection/InfoProvider";
 import Inspection from "game/inspection/Inspection";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IVector3 } from "utilities/math/IVector";
@@ -18,7 +18,7 @@ export default class DoodadInspection extends Inspection<Doodad> {
     constructor(doodad: Doodad);
     getId(): string;
     getBorder(): string | undefined;
-    get(context: Context): ArrayOr<InfoProvider | TranslationGenerator>;
+    get(context: InfoProviderContext): ArrayOr<InfoProvider | TranslationGenerator>;
     onUpdateTile(_: any, x: number, y: number, z: number): void;
     protected onRemove(_: any, doodad: Doodad): void;
     private getQuality;

@@ -31,11 +31,11 @@ export interface IInspector {
     asPlayer?: Player;
     getInspectionId(): string;
 }
-export declare class Context {
+export declare class InfoProviderContext {
     readonly textContext: TextContext;
     readonly inspector: IInspector;
-    static readonly UI: new (inspector: IInspector) => Context;
-    static readonly RAW: new (inspector: IInspector) => Context;
+    static readonly UI: new (inspector: IInspector) => InfoProviderContext;
+    static readonly RAW: new (inspector: IInspector) => InfoProviderContext;
     constructor(textContext: TextContext, inspector: IInspector);
 }
 export interface IInfoProviderEvents {
@@ -64,9 +64,9 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     static of(...classes: string[]): SimpleInfoProvider;
     static title(...translations: TranslationGenerator[]): SimpleInfoProvider;
     static description(...translations: TranslationGenerator[]): SimpleInfoProvider;
-    abstract get(context: Context): ArrayOr<TranslationGenerator | InfoProvider>;
+    abstract get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     abstract getClass(): string[];
-    getDisplayLevel(context: Context): InfoDisplayLevel;
+    getDisplayLevel(context: InfoProviderContext): InfoDisplayLevel;
     getColor(): string | undefined;
     hasContent(): boolean;
     init(): void;

@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InspectType } from "game/inspection/IInspection";
-import { Context } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProvider";
 import Inspection from "game/inspection/Inspection";
 import CorpseInspection from "game/inspection/inspections/CorpseInspection";
 import CorpsesInspection from "game/inspection/inspections/CorpsesInspection";
@@ -24,7 +24,7 @@ import TileEventInspection from "game/inspection/inspections/TileEventInspection
 import TileInspection from "game/inspection/inspections/TileInspection";
 import { IVector3 } from "utilities/math/IVector";
 export declare type InspectionClass = Class<Inspection<any>> & {
-    getFromTile(position: IVector3, context: Context, inspectType: InspectType): ArrayOr<Inspection<any>>;
+    getFromTile(position: IVector3, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<any>>;
 };
 declare const _default: {
     9: typeof CorpseInspection;

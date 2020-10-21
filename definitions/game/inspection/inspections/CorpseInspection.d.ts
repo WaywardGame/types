@@ -9,13 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ICorpse } from "entity/creature/corpse/ICorpse";
-import { Context, InfoDisplayLevel } from "game/inspection/InfoProvider";
+import { InfoProviderContext, InfoDisplayLevel } from "game/inspection/InfoProvider";
 import Inspection from "game/inspection/Inspection";
 import { IVector3 } from "utilities/math/IVector";
 export default class CorpseInspection extends Inspection<ICorpse> {
     static getFromTile(position: IVector3): CorpseInspection[];
     constructor(corpse: ICorpse);
-    get(context: Context): never[];
+    get(context: InfoProviderContext): never[];
     getId(): string;
     getDisplayLevel(): InfoDisplayLevel;
     protected onCorpseRemove(_: any, corpse: ICorpse): void;

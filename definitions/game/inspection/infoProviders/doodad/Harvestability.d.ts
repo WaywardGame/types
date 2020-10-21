@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
-import { Context, InfoDisplayLevel, InfoProvider } from "game/inspection/InfoProvider";
+import { InfoProviderContext, InfoDisplayLevel, InfoProvider } from "game/inspection/InfoProvider";
 import Translation from "language/Translation";
 export default class HarvestabilityInfoProvider extends InfoProvider {
     private readonly doodad;
@@ -17,7 +17,7 @@ export default class HarvestabilityInfoProvider extends InfoProvider {
     private message;
     private constructor();
     getClass(): string[];
-    getDisplayLevel(context: Context): InfoDisplayLevel;
+    getDisplayLevel(context: InfoProviderContext): InfoDisplayLevel;
     initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
     hasContent(): boolean;
     get(): Translation;

@@ -10,7 +10,7 @@
  */
 import Entity from "entity/Entity";
 import { IStat } from "entity/IStats";
-import { Context, InfoProvider } from "game/inspection/InfoProvider";
+import { InfoProviderContext, InfoProvider } from "game/inspection/InfoProvider";
 import Translation from "language/Translation";
 export default class HealthInfoProvider<E extends Entity> extends InfoProvider {
     protected readonly entity: E;
@@ -18,7 +18,7 @@ export default class HealthInfoProvider<E extends Entity> extends InfoProvider {
     getClass(): string[];
     initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
     hasContent(): boolean;
-    get(context: Context): Translation;
+    get(context: InfoProviderContext): Translation;
     protected getName(): Translation;
     protected onStatChange(_: any, stat: IStat): void;
 }

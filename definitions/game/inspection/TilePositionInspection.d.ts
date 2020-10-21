@@ -13,7 +13,7 @@ import { ICorpse } from "entity/creature/corpse/ICorpse";
 import Entity from "entity/Entity";
 import EventEmitter from "event/EventEmitter";
 import { InspectType } from "game/inspection/IInspection";
-import { Context } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProvider";
 import Inspection from "game/inspection/Inspection";
 import { IContainer } from "item/IItem";
 import Item from "item/Item";
@@ -28,7 +28,7 @@ export default class TilePositionInspection extends EventEmitter.Host<ITilePosit
     private readonly inspections;
     private readonly position;
     private get tile();
-    constructor(tilePosition: IVector3, context: Context);
+    constructor(tilePosition: IVector3, context: InfoProviderContext);
     get(inspectType: InspectType): HashSet<Inspection<any>> | undefined;
     set(inspectType: InspectType, inspections: HashSet<Inspection<any>>): Map<InspectType, HashSet<Inspection<any>>>;
     [Symbol.iterator](): IterableIterator<[InspectType, HashSet<Inspection<any>>]>;

@@ -10,10 +10,10 @@
  */
 import Human from "entity/Human";
 import { InspectType } from "game/inspection/IInspection";
-import { Context, InfoProvider } from "game/inspection/InfoProvider";
+import { InfoProviderContext, InfoProvider } from "game/inspection/InfoProvider";
 import EntityInspection from "game/inspection/inspections/EntityInspection";
 export default abstract class HumanInspection<H extends Human> extends EntityInspection<H> {
     constructor(inspectType: InspectType, human: H);
-    get(context: Context): InfoProvider[];
+    get(context: InfoProviderContext): InfoProvider[];
     isImportant(): boolean;
 }

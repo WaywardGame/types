@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Creature from "entity/creature/Creature";
-import { Context, InfoProvider } from "game/inspection/InfoProvider";
+import { InfoProviderContext, InfoProvider } from "game/inspection/InfoProvider";
 import EntityInspection from "game/inspection/inspections/EntityInspection";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IVector3 } from "utilities/math/IVector";
@@ -18,6 +18,6 @@ export default class CreatureInspection extends EntityInspection<Creature> {
     constructor(creature: Creature);
     getId(): string;
     getBorder(): "var(--color-aberrant)" | "var(--color-tamed)" | undefined;
-    get(context: Context): ArrayOr<InfoProvider | TranslationGenerator>;
+    get(context: InfoProviderContext): ArrayOr<InfoProvider | TranslationGenerator>;
     private getDescription;
 }
