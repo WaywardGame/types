@@ -54,7 +54,7 @@ export default abstract class Human extends Entity {
     swimming: boolean;
     vehicleItemId: number | undefined;
     identifier: string;
-    attackAnimationType: DamageType | undefined;
+    attackAnimationType: DamageType[] | undefined;
     attackAnimationEndTime: number | undefined;
     private readonly privateStore;
     private cachedTotalSkill?;
@@ -124,7 +124,7 @@ export default abstract class Human extends Entity {
     equip(item: Item, slot: EquipType): void;
     unequip(item: Item): void;
     unequipAll(): void;
-    animateAttack(damageType: DamageType): void;
+    animateAttack(damageType: DamageType[] | undefined): void;
     canJump(): boolean;
     hasDelay(): boolean;
     addDelay(delay: number, replace?: boolean, addStaminaDelay?: boolean): void;

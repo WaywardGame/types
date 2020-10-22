@@ -13,7 +13,7 @@ import Creature from "entity/creature/Creature";
 import { CreatureType } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
 import Human from "entity/Human";
-import { EntityType } from "entity/IEntity";
+import { DamageType, EntityType } from "entity/IEntity";
 import { EquipType, SkillType } from "entity/IHuman";
 import Player from "entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
@@ -161,6 +161,11 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
      * Gets the inherit item type.
      */
     getInheritItemRecipeSkill(): SkillType;
+    /**
+     * Returns the damage types associated with a skill with a fallback for whatever damage types the item normally provides
+     * @param skillType The skill to get default damage types from
+     */
+    getDamageTypesForSkill(skillType: SkillType): DamageType[] | undefined;
     onUnserialized(): void;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;

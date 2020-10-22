@@ -12,6 +12,7 @@ import Creature from "entity/creature/Creature";
 import { IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
 import Human from "entity/Human";
+import { DamageType, Defense } from "entity/IEntity";
 import { Delay, SkillType } from "entity/IHuman";
 import { TurnType } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
@@ -190,6 +191,14 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      */
     updateTablesAndWeight(deferTableUpdates?: boolean): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
+    /**
+     * Gets the largest damage type weaknesses of a human or creature based on a type and damage value
+     * @param defense Defense of the human or creature
+     * @param damageTypes Measures the weaknesses compared to damage types passed
+     * @param damage The damage value given to the human or creature
+     * @returns returns DamageType array or undefined if there are no weaknesses
+     */
+    getGreatestWeaknesses(defense: Defense, damageTypes: DamageType, damage: number): DamageType[];
     damage(target: Human | Creature, damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): Player[];
     isPlayerAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): boolean;
