@@ -34,5 +34,5 @@ export declare class ServerRow extends Button implements IRefreshable, IGameIcon
     /**
      * Check if the client can join the server
      */
-    private isJoinableServer;
+    private getUnableToJoinTranslation;
 }

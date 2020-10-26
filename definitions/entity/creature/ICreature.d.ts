@@ -69,7 +69,8 @@ export declare enum CreatureType {
     PolarBear = 44,
     Penguin = 45,
     IceElemental = 46,
-    IceWitch = 47
+    IceWitch = 47,
+    VoidDweller = 48
 }
 export interface ICreatureOld extends Creature {
     hp: number;
@@ -109,7 +110,8 @@ export declare enum TileGroup {
     FreshWater = 16,
     Swamp = 17,
     IceCap = 18,
-    IceCapWithWater = 19
+    IceCapWithWater = 19,
+    Void = 20
 }
 export interface ICreatureDescription extends IModdable {
     minhp: number;

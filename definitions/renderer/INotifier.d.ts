@@ -8,18 +8,28 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Entity from "entity/Entity";
+import { StatusEffectChangeReason } from "entity/IEntity";
+import StatusEffect from "entity/status/StatusEffect";
 import { ItemType } from "item/IItem";
+import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
+import { SfxType } from "audio/IAudio";
+import { CreatureType } from "entity/creature/ICreature";
 export interface INotifier {
-    addItem(entity: Entity, type: ItemType): void;
-    addStat(entity: Entity, type: StatNotificationType, value: number): void;
+    addItem(location: INotifierLocation, itemNotifierType: ItemNotifierType, type: ItemType): void;
+    addStat(location: INotifierLocation, type: StatNotificationType, value: number): void;
+    addStatusEffect(location: INotifierLocation, statusEffect: StatusEffect, reason: StatusEffectChangeReason): void;
+    addCreature(location: INotifierLocation, type: CreatureType, aberrant?: boolean): void;
     clear(): void;
     update(timeStamp: number): void;
     setTexture(texture: WebGLTexture, inverseTextureSize: Vector2): void;
     render(timeStamp: number, x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): boolean;
 }
 export default INotifier;
+export interface INotifierLocation extends IVector3 {
+    getMovementPoint?(timeStamp: number): IVector2;
+    queueSoundEffect?(soundEffect: SfxType): void;
+}
 export declare enum StatNotificationType {
     EnemyHealth = 0,
     Stat = 1,
@@ -30,4 +40,9 @@ export declare enum StatNotificationType {
     Zero = 6,
     Miss = 7,
     Immune = 8
+}
+export declare enum ItemNotifierType {
+    Added = 0,
+    Removed = 1,
+    Broken = 2
 }

@@ -218,7 +218,8 @@ export declare enum TerrainType {
     SeawaterIce = 42,
     FreezingSeawater = 43,
     Void = 44,
-    SandstoneWithTalc = 45
+    SandstoneWithTalc = 45,
+    SandstoneWithLimestone = 46
 }
 export declare enum TerrainTypeGroup {
     Flooring = 0

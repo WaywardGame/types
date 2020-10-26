@@ -80,7 +80,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     debugRenderer: ITextureDebugRenderer;
     glContext: WebGL2RenderingContext | null;
     glVersion: number;
-    notifier: INotifier;
+    notifier: INotifier | undefined;
     particle: IParticle;
     spriteTexture: WebGLTexture;
     spriteTextureSizeInversed: Vector2;
@@ -151,7 +151,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
     updateTablesAndWeightNextTick(): void;
-    makeMiniMap(mapRequest: IMapRequest): HTMLCanvasElement;
+    makeMiniMap(mapCanvas: HTMLCanvasElement, mapRequest: IMapRequest): HTMLCanvasElement;
     getBlackness(): number;
     /**
      * Note: Don't inject here. This gets called ten million times. If you want to override this functionality,

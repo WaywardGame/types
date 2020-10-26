@@ -37,7 +37,7 @@ export declare enum PathType {
     Sleep = 14,
     SoundEffect = 15,
     StatIcon = 16,
-    StatusEffect = 17,
+    StatusEffectOverlay = 17,
     StatusEffectIcon = 18,
     Terrain = 19,
     TerrainDecoration = 20,

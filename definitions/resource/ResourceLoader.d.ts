@@ -61,7 +61,8 @@ export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEve
     private loadHairstyles;
     private loadHairstyle;
     private loadStatuses;
-    private loadStatus;
+    private loadStatusOverlay;
+    private loadStatusIcon;
     private loadOverlays;
     private loadOverlay;
     private loadOthers;

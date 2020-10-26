@@ -114,6 +114,7 @@ export declare enum MoveType {
     Fire = 32,
     BreakDoodads = 64,
     WetLand = 128,
+    Void = 256,
     Flying = 15
 }
 export declare enum AttackType {

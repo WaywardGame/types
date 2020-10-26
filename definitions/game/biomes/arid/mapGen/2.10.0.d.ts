@@ -9,4 +9,4 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { IBiomeMapGen } from "mapgen/IMapGen";
-export declare const aridMapGen290: IBiomeMapGen;
+export declare const aridMapGen2100: IBiomeMapGen;
