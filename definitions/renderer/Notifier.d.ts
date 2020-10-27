@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ItemType } from "item/IItem";
-import INotifier, { INotifierLocation, ItemNotifierType, StatNotificationType } from "renderer/INotifier";
+import INotifier, { CreatureNotifierType, INotifierLocation, ItemNotifierType, StatNotificationType } from "renderer/INotifier";
 import Vector2 from "utilities/math/Vector2";
 import { StatusEffectChangeReason } from "entity/IEntity";
 import { CreatureType } from "entity/creature/ICreature";
@@ -28,7 +28,7 @@ export default class Notifier implements INotifier {
     setTexture(texture: WebGLTexture, inverseTextureSize: Vector2): void;
     clear(): void;
     addItem(location: INotifierLocation, itemNotifierType: ItemNotifierType, type: ItemType, broken?: boolean): void;
-    addCreature(location: INotifierLocation, type: CreatureType, aberrant?: boolean): void;
+    addCreature(location: INotifierLocation, creatureNotifierType: CreatureNotifierType, type: CreatureType, aberrant?: boolean): void;
     addStat(location: INotifierLocation, type: StatNotificationType, value: number): void;
     addStatusEffect(location: INotifierLocation, statusEffect: StatusEffect, reason: StatusEffectChangeReason): void;
     update(timeStamp: number): void;

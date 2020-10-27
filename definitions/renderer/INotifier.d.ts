@@ -19,7 +19,7 @@ export interface INotifier {
     addItem(location: INotifierLocation, itemNotifierType: ItemNotifierType, type: ItemType): void;
     addStat(location: INotifierLocation, type: StatNotificationType, value: number): void;
     addStatusEffect(location: INotifierLocation, statusEffect: StatusEffect, reason: StatusEffectChangeReason): void;
-    addCreature(location: INotifierLocation, type: CreatureType, aberrant?: boolean): void;
+    addCreature(location: INotifierLocation, creatureNotifierType: CreatureNotifierType, type: CreatureType, aberrant?: boolean): void;
     clear(): void;
     update(timeStamp: number): void;
     setTexture(texture: WebGLTexture, inverseTextureSize: Vector2): void;
@@ -42,7 +42,14 @@ export declare enum StatNotificationType {
     Immune = 8
 }
 export declare enum ItemNotifierType {
-    Added = 0,
-    Removed = 1,
-    Broken = 2
+    Neutral = 0,
+    Added = 1,
+    Removed = 2,
+    Broken = 3,
+    Offer = 4
+}
+export declare enum CreatureNotifierType {
+    Neutral = 0,
+    Added = 1,
+    Removed = 2
 }

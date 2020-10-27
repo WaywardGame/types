@@ -151,7 +151,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
     updateTablesAndWeightNextTick(): void;
-    makeMiniMap(mapCanvas: HTMLCanvasElement, mapRequest: IMapRequest): HTMLCanvasElement;
+    makeMiniMap(mapRequest: IMapRequest): HTMLCanvasElement;
     getBlackness(): number;
     /**
      * Note: Don't inject here. This gets called ten million times. If you want to override this functionality,
