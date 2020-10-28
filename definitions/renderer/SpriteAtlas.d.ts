@@ -19,6 +19,7 @@ export default class SpriteAtlas {
     itemsEquipped: ISpriteInfoList;
     itemsSmall: ISpriteInfoList;
     miss: ISpriteInfo;
+    notifiers: ISpriteInfoList;
     npcs: ISpriteInfoList;
     overlay: ISpriteInfoList;
     playerBody: ISpriteInfo;
@@ -26,8 +27,8 @@ export default class SpriteAtlas {
     playerSleeping: ISpriteInfo;
     shadow: ISpriteInfo;
     sleeps: ISpriteInfoList;
-    statusEffectOverlays: ISpriteInfoList;
     statusEffectIcons: ISpriteInfoList;
+    statusEffectOverlays: ISpriteInfoList;
     text: ISpriteInfo;
     tileEvents: ISpriteInfoList;
     vehicles: ISpriteInfoList;

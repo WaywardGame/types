@@ -56,7 +56,9 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     _movementFinishTime?: number;
     private _movementOptions?;
     private _description;
+    private _minDur;
     constructor(itemType?: ItemType | undefined, quality?: Quality, human?: Human);
+    private setupDurabilityHandlers;
     toString(): string;
     /**
      * Changes the item id for this item

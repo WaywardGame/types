@@ -14,6 +14,7 @@ export interface ISpriteInfo {
     texWidth: number;
     texHeight: number;
     texOffsetY: number;
+    texOffsetX: number;
     animated?: boolean;
 }
 export default ISpriteInfo;

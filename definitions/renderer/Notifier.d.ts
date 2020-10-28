@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ItemType } from "item/IItem";
-import INotifier, { CreatureNotifierType, INotifierLocation, ItemNotifierType, StatNotificationType } from "renderer/INotifier";
-import Vector2 from "utilities/math/Vector2";
-import { StatusEffectChangeReason } from "entity/IEntity";
 import { CreatureType } from "entity/creature/ICreature";
+import { StatusEffectChangeReason } from "entity/IEntity";
 import StatusEffect from "entity/status/StatusEffect";
+import { ItemType } from "item/IItem";
+import INotifier, { CreatureNotifierType, INotifierLocation, ItemNotifierType, NotifierIconType, StatNotificationType } from "renderer/INotifier";
+import Vector2 from "utilities/math/Vector2";
 export default class Notifier implements INotifier {
     private readonly gl;
     private readonly capacity;
@@ -24,6 +24,7 @@ export default class Notifier implements INotifier {
     private readonly notifications;
     private readonly spriteBatch;
     private nextUpdate;
+    private suspended;
     constructor(gl: WebGL2RenderingContext, capacity: number);
     setTexture(texture: WebGLTexture, inverseTextureSize: Vector2): void;
     clear(): void;
@@ -31,6 +32,8 @@ export default class Notifier implements INotifier {
     addCreature(location: INotifierLocation, creatureNotifierType: CreatureNotifierType, type: CreatureType, aberrant?: boolean): void;
     addStat(location: INotifierLocation, type: StatNotificationType, value: number): void;
     addStatusEffect(location: INotifierLocation, statusEffect: StatusEffect, reason: StatusEffectChangeReason): void;
+    addNotifierIcon(location: INotifierLocation, type: NotifierIconType): void;
+    suspend(suspend: boolean): void;
     update(timeStamp: number): void;
     render(timeStamp: number, x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): boolean;
     private addNotification;

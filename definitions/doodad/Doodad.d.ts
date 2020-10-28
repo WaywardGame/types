@@ -93,9 +93,11 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     private _tileId;
     private readonly _doodadGroupCache;
     private fireStage?;
+    private _minDur;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(type?: DoodadType, x?: number, y?: number, z?: number, options?: IDoodadOptions);
+    private setupDurabilityHandlers;
     toString(): string;
     getRegistrarId(): number;
     /**

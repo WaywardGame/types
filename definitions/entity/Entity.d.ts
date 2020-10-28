@@ -10,7 +10,7 @@
  */
 import { SfxType } from "audio/IAudio";
 import Creature from "entity/creature/Creature";
-import { CreatureType, IDamageInfo } from "entity/creature/ICreature";
+import { IDamageInfo } from "entity/creature/ICreature";
 import Human from "entity/Human";
 import { EntityType, IEntityEvents, IProperties, IStatus, MoveType, Property, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import { IStats } from "entity/IStats";
@@ -24,7 +24,7 @@ import { IInspector } from "game/inspection/InfoProvider";
 import { ITemperatureSource } from "game/temperature/ITemperature";
 import { ItemType, RecipeLevel } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
-import { CreatureNotifierType, ItemNotifierType, StatNotificationType } from "renderer/INotifier";
+import { ItemNotifierType, StatNotificationType } from "renderer/INotifier";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
@@ -117,9 +117,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     notifyItem(itemNotifierType: ItemNotifierType, type: ItemType): void;
-    notifyCreature(creatureNotifierType: CreatureNotifierType, type: CreatureType, aberrant?: boolean): void;
     notifyStat(type: StatNotificationType, value: number): void;
-    notifyStatusEffect(type: StatusType, statusEffect: StatusEffect, reason: StatusEffectChangeReason): void;
     hasProperty(property: Property): boolean;
     addProperty(property: Property, value: any): void;
     getProperty<T>(property: Property): T | undefined;

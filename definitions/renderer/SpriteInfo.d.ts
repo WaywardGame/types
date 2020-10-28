@@ -14,7 +14,8 @@ export default class SpriteInfo implements ISpriteInfo {
     texCoord: Vector2;
     texWidth: number;
     texHeight: number;
+    texOffsetX: number;
     texOffsetY: number;
     animated?: boolean | undefined;
-    constructor(texCoord: Vector2, texWidth: number, texHeight: number, texOffsetY: number, animated?: boolean | undefined);
+    constructor(texCoord: Vector2, texWidth: number, texHeight: number, texOffsetX: number, texOffsetY: number, animated?: boolean | undefined);
 }
