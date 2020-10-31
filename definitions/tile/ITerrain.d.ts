@@ -170,7 +170,8 @@ export declare enum OverlayType {
     WalkDots = 0,
     Arrows = 1,
     FootPrints = 2,
-    Target = 3
+    Target = 3,
+    White = 4
 }
 export declare enum TerrainType {
     DeepSeawater = 0,

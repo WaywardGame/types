@@ -25,6 +25,7 @@ export default class MultiplayerOptionsMenu extends Menu {
     private readonly pvp;
     private readonly maxPlayers;
     private readonly descriptionInput;
+    private readonly messageOfTheDayInput;
     private readonly checkConnectionHeading;
     private readonly checkConnectionBlock;
     private readonly checkConnectionButton;
@@ -32,6 +33,7 @@ export default class MultiplayerOptionsMenu extends Menu {
     protected refresh(): void;
     private updateMultiplayer;
     private onDescriptionChange;
+    private onMessageOfTheDayChange;
     private toggleServer;
     private copyGameCodeClick;
     private inviteSteamFriendsClick;

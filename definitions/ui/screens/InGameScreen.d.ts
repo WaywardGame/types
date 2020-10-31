@@ -68,6 +68,7 @@ export default class InGameScreen extends BaseScreen {
     private contextMenuLastTarget;
     private lastContextMenuPosition;
     private actionsMenuOpen;
+    private actionsMenuTileOverlay;
     private actionsMenuCentered;
     private activeContainer;
     private multipleContainersOpened;
@@ -188,6 +189,7 @@ export default class InGameScreen extends BaseScreen {
     updateActiveContainer(): void;
     hideContextMenu(): boolean;
     hideActionsMenu(): void;
+    private clearActionsMenuTileOverlay;
     toggleActionsMenu(center?: boolean): void;
     showActionsMenu(center?: boolean, updatePosition?: boolean, skipSound?: boolean): void;
     getFilterText(containerElement: JQuery | undefined): any;
