@@ -10,7 +10,7 @@
  */
 import Entity from "entity/Entity";
 import { IStat } from "entity/IStats";
-import { InfoProviderContext, InfoProvider } from "game/inspection/InfoProvider";
+import { InfoProvider, InfoProviderContext } from "game/inspection/InfoProvider";
 import Translation from "language/Translation";
 export default class HealthInfoProvider<E extends Entity> extends InfoProvider {
     protected readonly entity: E;

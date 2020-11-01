@@ -41,6 +41,21 @@ import Island from "./Island";
 export default class Game extends EventEmitter.Host<IGameEvents> {
     get isChallenge(): boolean;
     get isTravelingToIsland(): boolean;
+    currentIslandId: string;
+    islands: Map<string, Island>;
+    travelingToIsland: ITravelingToIslandInfo | undefined;
+    customMilestoneModifiersAllowed: boolean;
+    difficulty: GameMode;
+    flowFieldSyncCount: number;
+    shouldUpdateTablesAndWeight: boolean;
+    tickSpeed: number;
+    turnMode: TurnMode;
+    time: TimeManager;
+    saveVersion: string | undefined;
+    upgrades: string[];
+    version: string;
+    worldId: string;
+    private difficultyOptions;
     readonly interval = 16.6666;
     slot: number | undefined;
     previousSaveVersion: IVersionInfo | undefined;
@@ -59,20 +74,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     tileDecorations: Uint16Array;
     mapSize: number;
     mapSizeSq: number;
-    currentIslandId: string;
-    islands: Map<string, Island>;
-    travelingToIsland: ITravelingToIslandInfo | undefined;
-    customMilestoneModifiersAllowed: boolean;
-    difficulty: GameMode;
-    flowFieldSyncCount: number;
-    shouldUpdateTablesAndWeight: boolean;
-    tickSpeed: number;
-    turnMode: TurnMode;
-    time: TimeManager;
-    saveVersion: string | undefined;
-    upgrades: string[];
-    version: string;
-    worldId: string;
     readonly voting: VotingManager;
     readonly milestonesCollection: import("./options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("./milestones/IMilestone").Milestone, import("./options/modifiers/milestone/MilestoneModifier").default>;
     challengeCollection?: ChallengeModifiersCollection;
@@ -90,7 +91,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     lastBuildTime: number;
     lastSaveVersion: IVersionInfo;
     saveSize?: string;
-    private difficultyOptions;
     private gameCanvas;
     private thumbnailResolve?;
     private _animationTimer;
@@ -121,7 +121,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     updateRender(source: RenderSource, flag: UpdateRenderFlag): void;
     hasRenderFlag(flag: UpdateRenderFlag): boolean;
     clearRenderFlag(flag: UpdateRenderFlag): void;
-    requestAnimationFrame(source: RenderSource): void;
+    requestAnimationFrame(_source: RenderSource): void;
     /**
      * Game render loop
      * Not executed for the host in dedicated servers

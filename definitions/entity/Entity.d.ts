@@ -24,12 +24,12 @@ import { IInspector } from "game/inspection/InfoProvider";
 import { ITemperatureSource } from "game/temperature/ITemperature";
 import { ItemType, RecipeLevel } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
+import { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 import { ItemNotifierType, StatNotificationType } from "renderer/INotifier";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-import { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IInspector, IUnserializedCallback, ITemperatureSource, IVector3 {
     readonly stat: Stats<this>;
     entityType: EntityType;

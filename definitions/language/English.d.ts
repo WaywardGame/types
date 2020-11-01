@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Language from "language/Language";
-export declare let english: Language;
+export declare const english: Language;
 export default english;

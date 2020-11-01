@@ -10,5 +10,5 @@
  */
 import { ICorpseDescription } from "entity/creature/corpse/ICorpse";
 import { CreatureType } from "entity/creature/ICreature";
-export declare let corpseDescriptions: OptionalDescriptions<CreatureType, ICorpseDescription>;
+export declare const corpseDescriptions: OptionalDescriptions<CreatureType, ICorpseDescription>;
 export default corpseDescriptions;

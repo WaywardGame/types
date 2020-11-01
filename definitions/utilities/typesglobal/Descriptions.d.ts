@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -17,9 +17,7 @@ declare global {
      */
     type OptionalDescriptions<E extends string | number, V> = {
         [key in E]?: V;
-    } & {
-        [key: number]: V | undefined;
-    };
+    } & Record<number, V | undefined>;
     /**
      * An object of descriptions. Each key in E *will* map to a valid description.
      * @param E The enum with which to index these descriptions.
@@ -27,7 +25,5 @@ declare global {
      */
     type Descriptions<E extends string | number, V> = {
         [key in E]: V;
-    } & {
-        [key: number]: V | undefined;
-    };
+    } & Record<number, V | undefined>;
 }

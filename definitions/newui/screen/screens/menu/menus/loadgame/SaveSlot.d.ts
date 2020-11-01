@@ -14,12 +14,10 @@ import InputButton from "newui/component/InputButton";
 export interface SaveSlotData {
     slot: number;
     score: number;
-    modsUnloadable: {
-        [index: string]: {
-            name: string;
-            unloadable: boolean;
-        };
-    };
+    modsUnloadable: Record<string, {
+        name: string;
+        unloadable: boolean;
+    }>;
     saveTime: number;
     createdTime: number;
     turns: number;

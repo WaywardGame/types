@@ -13,4 +13,5 @@ export interface IExploreMap extends IByteGrid {
     encode(): number[];
     decode(encodedData?: number[]): void;
 }
+export declare const EXPLORED_MAP_IS_EXPLORED = 255;
 export default IExploreMap;

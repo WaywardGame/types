@@ -30,19 +30,13 @@ export default class SaveData {
     saveManagerScore: number;
     saveManagerOriginalVersion: string;
     saveManagerDeathBy: ISerializedTranslation;
-    modManagerSaveData: {
-        [index: string]: any;
-    };
-    modManagerUnloadable: {
-        [index: string]: {
-            name: string;
-            unloadable: boolean;
-        };
-    };
+    modManagerSaveData: Record<string, any>;
+    modManagerUnloadable: Record<string, {
+        name: string;
+        unloadable: boolean;
+    }>;
     multiplayerState: IMultiplayerState;
     multiplayerMessageOfTheDay: string;
-    utilitiesEnumsAllocated: {
-        [index: string]: EnumInfo;
-    };
+    utilitiesEnumsAllocated: Record<string, EnumInfo>;
     clientStore: Map<string, IClientStore>;
 }

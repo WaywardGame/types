@@ -156,7 +156,7 @@ declare module Bind {
      * Deregisters any registered bind handlers for the given class instance. (Bind handlers are methods decorated with `@Bind.onDown`, `@Bind.onHolding`, `@Bind.onUp`)
      */
     function deregisterHandlers(host: any): void;
-    let shouldLogHoldingEvent: boolean;
+    const shouldLogHoldingEvent = false;
     function emitEvent(event: BindingEventName, input: IInput, info: InputInfo, mouse: GlobalMouseInfo, globalInput: GlobalInputInfo): Set<Bindable>;
 }
 export default Bind;

@@ -157,7 +157,7 @@ export interface IActionDescription<A extends Array<ActionArgument | ActionArgum
 export interface IActionApi<E extends Entity = Entity> {
     readonly executor: E;
     readonly type: ActionType;
-    readonly actionStack: ReadonlyArray<ActionType>;
+    readonly actionStack: readonly ActionType[];
     readonly lastAction: ActionType;
     isArgumentType<A extends ActionArgument>(argument: any, index: number, argumentType: A): argument is ActionArgumentTypeMap<A>;
     setDelay(delay: number, replace?: boolean): this;

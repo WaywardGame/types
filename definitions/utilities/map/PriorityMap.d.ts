@@ -37,9 +37,7 @@ export declare class PriorityMap<T> {
      * Returns an iterator of the items in this list.
      */
     stream(direction?: PriorityListStreamDirection): import("@wayward/goodstream/Stream").default<T>;
-    getInternalMap(): {
-        [key: number]: T;
-    };
+    getInternalMap(): Record<number, T>;
 }
 export declare enum PriorityListStreamDirection {
     HighestToLowest = -1,

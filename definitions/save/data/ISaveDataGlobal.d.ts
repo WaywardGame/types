@@ -95,9 +95,7 @@ export declare enum PowerMode {
     HighPerformance = "high-performance"
 }
 export declare type IOptionsOld = Partial<Pick<IOptions, "bindings">> & Partial<{
-    keyBinds: {
-        [index: number]: number;
-    };
+    keyBinds: Record<number, number>;
     bindings: IBindingsOld;
     directionTurnDelay: boolean;
     developerLogging: boolean;

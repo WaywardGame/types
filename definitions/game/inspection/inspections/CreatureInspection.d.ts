@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Creature from "entity/creature/Creature";
-import { InfoProviderContext, InfoProvider } from "game/inspection/InfoProvider";
+import { InfoProvider, InfoProviderContext } from "game/inspection/InfoProvider";
 import EntityInspection from "game/inspection/inspections/EntityInspection";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IVector3 } from "utilities/math/IVector";

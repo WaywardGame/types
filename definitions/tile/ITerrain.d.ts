@@ -92,9 +92,7 @@ export interface ITile extends Partial<ITileContainer> {
 export interface ITileOld {
     event?: TileEvent[];
 }
-export interface ITileArray {
-    [index: number]: ITile;
-}
+export declare type ITileArray = Record<number, ITile>;
 export declare type ITileContainer = IContainer & IVector3;
 export interface ITileData {
     type: TerrainType;
@@ -121,13 +119,9 @@ export declare enum TileTemplateType {
     IceCap = 8
 }
 export interface ITemplate {
-    terrainTypes: {
-        [id: string]: TerrainType;
-    };
+    terrainTypes: Record<string, TerrainType>;
     terrain: string[];
-    doodadTypes?: {
-        [id: string]: DoodadType | ITemplateDoodad;
-    };
+    doodadTypes?: Record<string, DoodadType | ITemplateDoodad>;
     doodad?: string[];
     tilled?: boolean;
     /**

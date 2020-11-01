@@ -134,7 +134,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
         z: number;
     };
     computeSpritesInViewport(): void;
-    batchMovable(timeStamp: number): boolean | undefined;
+    batchMovable(timeStamp: number): boolean;
     private batchCreature;
     private getFlyingOffset;
     private batchShadow;

@@ -58,7 +58,6 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     private _description;
     private _minDur;
     constructor(itemType?: ItemType | undefined, quality?: Quality, human?: Human);
-    private setupDurabilityHandlers;
     toString(): string;
     /**
      * Changes the item id for this item
@@ -169,6 +168,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
      */
     getDamageTypesForSkill(skillType: SkillType): DamageType[] | undefined;
     onUnserialized(): void;
+    private setupDurabilityHandlers;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;
     private getOwner;

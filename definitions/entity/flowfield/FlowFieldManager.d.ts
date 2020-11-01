@@ -17,9 +17,7 @@ import { IVector3 } from "utilities/math/IVector";
 export default class FlowFieldManager {
     private readonly size;
     delegate: DebugRendererDelegate;
-    flowFields: {
-        [index: string]: FlowField;
-    };
+    flowFields: Record<string, FlowField>;
     private flowFieldPlayers;
     constructor(size: number);
     delete(): void;

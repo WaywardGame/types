@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Creature from "entity/creature/Creature";
-import { InfoProviderContext, IInspector, InfoDisplayLevel, InfoProvider } from "game/inspection/InfoProvider";
+import { IInspector, InfoDisplayLevel, InfoProvider, InfoProviderContext } from "game/inspection/InfoProvider";
 import Translation from "language/Translation";
 export default class ResistancesAndVulnerabilitiesInfoProvider extends InfoProvider {
     private readonly creature;

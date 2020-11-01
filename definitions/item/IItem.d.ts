@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2020
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://github.com/WaywardGame/types/wiki
+ */
 import { SfxType } from "audio/IAudio";
 /*!
  * Copyright Unlok, Vaughn Royko 2011-2020
@@ -54,9 +64,7 @@ export interface IContainer extends IContainable {
 export interface IItemDescription extends IObjectDescription, IModdable {
     durability?: number;
     onBurn?: ItemType[];
-    onUse?: {
-        [index: number]: any;
-    };
+    onUse?: Record<number, any>;
     equipEffect?: EquipEffects;
     damageType?: DamageType;
     weight?: number;
@@ -119,9 +127,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     spawnableTiles?: TileGroup;
     gather?: ILiquid;
     placeDownType?: DoodadType;
-    damageOnUse?: {
-        [index: number]: any;
-    };
+    damageOnUse?: Record<number, any>;
     /**
      * How good this item is at being an item of an `ItemTypeGroup`.
      *
@@ -182,9 +188,7 @@ export interface IRecipeComponent {
     disassembleAmount: number;
     ignoreWeight: boolean;
 }
-export interface IDismantleComponent {
-    [index: number]: number;
-}
+export declare type IDismantleComponent = Record<number, number>;
 export interface IRanged {
     range: number;
     attack: number;

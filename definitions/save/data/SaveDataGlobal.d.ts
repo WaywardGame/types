@@ -17,40 +17,24 @@ import { IDialogInfo } from "ui/IUi";
 import EnumInfo from "utilities/enum/EnumInfo";
 export default class SaveDataGlobal {
     static defaultOptions: IOptions;
-    gameCrafted: {
-        [index: number]: ICrafted;
-    };
+    gameCrafted: Record<number, ICrafted>;
     gameLastPlayedVersion: string;
     gameHighscores: IHighscore[];
     gamePlayedCount: number;
     options: IOptions;
-    playerMilestoneData: {
-        [index: number]: IMilestoneData | undefined;
-    };
-    modManagerModState: {
-        [index: string]: ModState;
-    };
-    modManagerSaveData: {
-        [index: string]: any;
-    };
+    playerMilestoneData: Record<number, IMilestoneData | undefined>;
+    modManagerModState: Record<string, ModState>;
+    modManagerSaveData: Record<string, any>;
     languageManagerSaveData: {
         language?: string;
     };
-    utilitiesEnumsAllocated: {
-        [index: string]: EnumInfo;
-    };
-    savedDialogInfo: {
-        [index: string]: IDialogInfo;
-    };
+    utilitiesEnumsAllocated: Record<string, EnumInfo>;
+    savedDialogInfo: Record<string, IDialogInfo>;
     multiplayerBannedPlayers: string[];
-    multiplayerPreviousGames: {
-        [index: string]: IMultiplayerPreviousGame | undefined;
-    };
+    multiplayerPreviousGames: Record<string, IMultiplayerPreviousGame | undefined>;
     multiplayerMessageOfTheDay: string;
     characters: ISavedCharacter[];
-    newui: {
-        [index: string]: any;
-    };
+    newui: Record<string, any>;
     lastServerJoined: string | undefined;
     /**
      * Resets all options to default

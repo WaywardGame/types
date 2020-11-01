@@ -49,6 +49,4 @@ export declare enum TerrainMask {
     Wall = 1073741824,
     Fence = 2147483648
 }
-export declare const stillContainerOrder: {
-    [index: number]: number;
-};
+export declare const stillContainerOrder: Record<number, number>;

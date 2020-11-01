@@ -60,8 +60,10 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * @deprecated
      */
     static getGrowingStageTranslation(growingStage?: GrowingStage, description?: IDoodadDescription): Translation | undefined;
-    protected static registrarId: number;
     get constructorFunction(): typeof Doodad;
+    static getRegistrarId(): number;
+    static setRegistrarId(id: number): void;
+    protected static registrarId: number;
     containedItems: Item[];
     decay?: number;
     disassembly?: Item[];
@@ -94,10 +96,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     private readonly _doodadGroupCache;
     private fireStage?;
     private _minDur;
-    static getRegistrarId(): number;
-    static setRegistrarId(id: number): void;
     constructor(type?: DoodadType, x?: number, y?: number, z?: number, options?: IDoodadOptions);
-    private setupDurabilityHandlers;
     toString(): string;
     getRegistrarId(): number;
     /**
@@ -180,6 +179,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * @deprecated
      */
     protected getDescriptionTranslation(): Translation;
+    private setupDurabilityHandlers;
     private processSpecials;
     /**
      * Check for items on top of lit/fire doodads, set them on fire

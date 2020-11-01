@@ -10,12 +10,8 @@
  */
 import { HairStyle, ICharacter, IColorDescription, ICustomizations, IHairstyleDescription } from "entity/IHuman";
 export declare const hairstyleDescriptions: OptionalDescriptions<HairStyle, IHairstyleDescription>;
-export declare const hairColorDescriptions: {
-    [index: number]: IColorDescription | undefined;
-};
-export declare const skinColorDescriptions: {
-    [index: number]: IColorDescription | undefined;
-};
+export declare const hairColorDescriptions: Record<number, IColorDescription | undefined>;
+export declare const skinColorDescriptions: Record<number, IColorDescription | undefined>;
 export declare function generateRandomCustomization(): ICustomizations;
 export declare function generateRandomCharacter(): ICharacter;
 export declare enum ColorType {

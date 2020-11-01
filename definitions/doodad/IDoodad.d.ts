@@ -126,12 +126,8 @@ export interface ILockedChest {
      */
     guardiansSpawned?: number;
 }
-export interface IDoodadParticles {
-    [index: number]: IRGB;
-}
-export interface IDoodadLoot {
-    [index: number]: ILootItem[] | undefined;
-}
+export declare type IDoodadParticles = Record<number, IRGB>;
+export declare type IDoodadLoot = Record<number, ILootItem[] | undefined>;
 export declare enum DoodadType {
     WoodenDoor = 0,
     WoodenFence = 1,

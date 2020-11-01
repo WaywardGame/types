@@ -33,16 +33,12 @@ export default abstract class Human extends Entity {
     static getNameTranslation(): Translation;
     event: IEventEmitter<this, IHumanEvents>;
     attackFromEquip: IAttackHand;
-    crafted: {
-        [index: number]: ICrafted;
-    };
+    crafted: Record<number, ICrafted>;
     customization: ICustomizations;
     deathBy: import("../language/Translation").ISerializedTranslation;
     defense: PlayerDefense;
     defenses: number[];
-    equipped: {
-        [index: number]: number;
-    };
+    equipped: Record<number, number>;
     handToUse: EquipType | undefined;
     inventory: IContainer;
     options: IOptions;

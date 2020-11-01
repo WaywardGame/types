@@ -12,9 +12,7 @@ import { Source } from "entity/player/IMessageManager";
 import { ThreeStateButtonState } from "newui/component/IThreeStateButton";
 export declare const DEFAULT_MAX_MESSAGES = 30;
 export declare const MESSAGES_MAX_PINNED = 3;
-export interface IFilters {
-    [key: string]: IFilter;
-}
+export declare type IFilters = Record<string, IFilter>;
 export declare type IFilter = {
     -readonly [K in keyof typeof Source]?: ThreeStateButtonState;
 };

@@ -12,9 +12,7 @@ import Screen from "newui/screen/Screen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default abstract class MenuScreen extends Screen {
-    protected menus: {
-        [key: number]: Menu;
-    };
+    protected menus: Record<number, Menu>;
     protected menuChain: Menu[];
     /**
      * Returns the visible menu (top of the chain)

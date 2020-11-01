@@ -17,18 +17,10 @@ import TranslationsProvider from "language/TranslationsProvider";
 import { IStringSection } from "utilities/string/Interpolator";
 import { CaseStyle } from "utilities/string/Strings";
 export interface ISerializedTranslationsProvider {
-    dictionaries: {
-        [key: string]: {
-            [key: string]: string | string[];
-        };
-    };
+    dictionaries: Record<string, Record<string, string | string[]>>;
     pluralizationRules?: {
-        pluralRules?: {
-            [key: string]: string;
-        };
-        singularRules?: {
-            [key: string]: string;
-        };
+        pluralRules?: Record<string, string>;
+        singularRules?: Record<string, string>;
         uncountables?: string[];
         irregularRules?: Array<[string, string]>;
         articleRules?: Array<[number | {
@@ -94,6 +86,4 @@ export interface ISelector {
     attribute?: string;
     func?(translation: Translation): string;
 }
-export interface ISelectorArray {
-    [index: number]: ISelector;
-}
+export declare type ISelectorArray = Record<number, ISelector>;

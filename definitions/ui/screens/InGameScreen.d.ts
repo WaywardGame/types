@@ -37,7 +37,7 @@ declare global {
         getEquipSlot(): number;
     }
     interface JQuery {
-        sort: Array<Element>["sort"];
+        sort: Element[]["sort"];
     }
 }
 export default class InGameScreen extends BaseScreen {
@@ -189,7 +189,6 @@ export default class InGameScreen extends BaseScreen {
     updateActiveContainer(): void;
     hideContextMenu(): boolean;
     hideActionsMenu(): void;
-    private clearActionsMenuTileOverlay;
     toggleActionsMenu(center?: boolean): void;
     showActionsMenu(center?: boolean, updatePosition?: boolean, skipSound?: boolean): void;
     getFilterText(containerElement: JQuery | undefined): any;
@@ -232,6 +231,7 @@ export default class InGameScreen extends BaseScreen {
     onDismantleTab(): boolean;
     onHandToggle(api: IBindHandlerApi): boolean;
     onInput(api: IBindHandlerApi): void;
+    private clearActionsMenuTileOverlay;
     private additionalRequirements;
     private runAction;
     private updateContextMenu;

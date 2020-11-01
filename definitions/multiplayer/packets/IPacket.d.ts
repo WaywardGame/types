@@ -22,9 +22,7 @@ export interface ISynchronizationCheckData {
     beforeSyncChecks?: ISyncCheck;
     afterSyncChecks?: ISyncCheck;
 }
-export interface ISyncCheck {
-    [index: number]: Array<number | string>;
-}
+export declare type ISyncCheck = Record<number, Array<number | string>>;
 export interface IPacket {
     getAllowedStates(): ConnectionState;
     getArrayBuffer(id?: number): ArrayBuffer;

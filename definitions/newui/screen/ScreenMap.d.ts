@@ -10,7 +10,5 @@
  */
 import Screen from "newui/screen/Screen";
 export declare type ExtendsScreen = new () => Screen;
-declare const screenMap: {
-    [key: number]: ExtendsScreen;
-};
+declare const screenMap: Record<number, ExtendsScreen>;
 export default screenMap;

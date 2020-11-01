@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ICorpse } from "entity/creature/corpse/ICorpse";
-import { InfoProviderContext, InfoDisplayLevel } from "game/inspection/InfoProvider";
+import { InfoDisplayLevel, InfoProviderContext } from "game/inspection/InfoProvider";
 import Inspection from "game/inspection/Inspection";
 import { IVector3 } from "utilities/math/IVector";
 export default class CorpseInspection extends Inspection<ICorpse> {

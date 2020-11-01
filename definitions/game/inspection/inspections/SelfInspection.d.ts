@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Player from "entity/player/Player";
-import { InfoProviderContext, InfoProvider } from "game/inspection/InfoProvider";
+import { InfoProvider, InfoProviderContext } from "game/inspection/InfoProvider";
 import Inspection from "game/inspection/Inspection";
 import PlayerInspection from "game/inspection/inspections/PlayerInspection";
 import { IVector3 } from "utilities/math/IVector";

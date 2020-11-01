@@ -1,4 +1,4 @@
-/**
+/*!
  * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *

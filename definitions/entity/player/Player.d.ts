@@ -38,15 +38,9 @@ export default class Player extends Human {
     event: IEventEmitter<this, IPlayerEvents>;
     readonly entityType: EntityType.Player;
     absentLastUsedTime: number;
-    containerSortInfo: {
-        [index: string]: IContainerSortInfo;
-    };
-    dialogContainerInfo: {
-        [index: number]: IDialogInfo;
-    };
-    dialogInfo: {
-        [index: string]: IDialogInfo;
-    };
+    containerSortInfo: Record<string, IContainerSortInfo>;
+    dialogContainerInfo: Record<number, IDialogInfo>;
+    dialogInfo: Record<string, IDialogInfo>;
     hintSeen: boolean[];
     isConnecting: boolean;
     lastIslandId: string;
@@ -59,9 +53,7 @@ export default class Player extends Human {
     quests: QuestManager;
     quickSlotInfo: IQuickSlotInfo[];
     realTimeTickActionDelay: number;
-    revealedItems: {
-        [index: number]: boolean;
-    };
+    revealedItems: Record<number, boolean>;
     spawnPoint: IVector3;
     tamedCreatures: Map<string, number[]>;
     turns: number;

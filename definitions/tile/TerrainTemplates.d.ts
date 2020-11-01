@@ -9,9 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ITemplate } from "tile/ITerrain";
-export declare const templates: {
-    [id: number]: {
-        [id: string]: ITemplate;
-    };
-};
+export declare const templates: Record<number, Record<string, ITemplate>>;
 export default templates;

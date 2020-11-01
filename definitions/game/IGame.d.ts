@@ -104,35 +104,23 @@ export declare type IGameOld = Partial<Game> & Partial<{
     dailyChallenge: boolean;
     isRealTime: boolean;
     realTimeTickSpeed: TickSpeed;
-    crafted: {
-        [index: number]: ICrafted;
-    };
+    crafted: Record<number, ICrafted>;
     contaminatedWater: IVector3[];
     corpses: SaferArray<ICorpse>;
     creatures: SaferArray<Creature>;
     creatureSpawnTimer: number;
     doodads: SaferArray<Doodad>;
     items: Item[];
-    lastCreationIds: {
-        [index: number]: number;
-    };
+    lastCreationIds: Record<number, number>;
     mapGenVersion: string;
     npcs: SaferArray<NPC>;
     saveVersion: string;
     seeds: ISeeds;
     tileContainers: ITileContainer[];
-    tileData: {
-        [index: number]: {
-            [index: number]: {
-                [index: number]: ITileData[];
-            };
-        };
-    };
+    tileData: Record<number, Record<number, Record<number, ITileData[]>>>;
     tileEvents: SaferArray<TileEvent>;
     time: TimeManager;
-    wellData: {
-        [index: number]: IWell | undefined;
-    };
+    wellData: Record<number, IWell | undefined>;
 }>;
 export interface IPlayOptions {
     slot: number | undefined;
@@ -157,9 +145,7 @@ export interface IPlayerOptions {
     initialSpawnPosition?: IVector3;
     respawnPosition?: IVector3;
     character: ICharacter;
-    crafted?: {
-        [index: number]: ICrafted;
-    };
+    crafted?: Record<number, ICrafted>;
     milestoneModifiers?: Set<Milestone>;
 }
 export interface IMapRequest {
@@ -312,11 +298,7 @@ export declare enum TileUpdateType {
 }
 export interface IWaterFill {
     count: number;
-    tiles: {
-        [index: number]: {
-            [index: number]: boolean;
-        };
-    };
+    tiles: Record<number, Record<number, boolean>>;
 }
 export declare const DEFAULT_MAP_SIZE = 512;
 export declare const LINE_OF_SIGHT_RADIUS = 15;

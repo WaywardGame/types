@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -144,7 +144,7 @@ declare global {
         ByteGrid: IByteGridConstructor;
         FlowField: any;
         FieldOfView: any;
-        WorldLayer: any;
+        WorldLayer: IWorldLayerConstructor;
         Navigation: INavigationConstructor;
         DijkstraMap: IDijkstraMapConstructor;
         KDTree: IKDTreeConstructor;
@@ -163,7 +163,14 @@ declare global {
         set(x: number, y: number, red: number, blue: number, green: number, alpha: number): void;
     }
     type IByteGridConstructor = new (width: number, height: number) => IByteGrid;
+    type IWorldLayerConstructor = new (width: number, height: number, level: number) => IWorldLayerCPP;
     type IDijkstraMapConstructor = new () => IDijkstraMap;
+    interface IWorldLayerCPP {
+        getLightBlockMap: () => IByteGrid;
+        getLightLevelMap: () => IColorGrid;
+        updateLightBlockValue: (x: number, y: number, val: number) => void;
+        delete: () => void;
+    }
     interface IDijkstraMapFindPathResult {
         success: boolean;
         path: INavigationNode[];
@@ -225,7 +232,7 @@ declare global {
         createWriteStream(path: string, opts: any): IFileStream;
         copy(source: string, destination: string, opt: {
             dereference?: boolean;
-            filter?: (file: string) => boolean;
+            filter?(file: string): boolean;
         }, cb: (err: string | null | undefined) => void): any;
         emptyDir(destination: string, cb: (err: string | null | undefined) => void): any;
         stat(path: string, cb: (err: string | null | undefined, stats: IFileStat) => void): any;

@@ -138,11 +138,7 @@ export declare enum Dictionary {
     WeightStatus = 74,
     WorldLayer = 75
 }
-export declare type Enum = {
-    [key: string]: number;
-} & {
-    [key: number]: string;
-};
+export declare type Enum = Record<string, number> & Record<number, string>;
 export declare const SYMBOL_ANY_DICTIONARY: unique symbol;
 declare const dictionaries: {
     0: typeof ActionType;
