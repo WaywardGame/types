@@ -13,6 +13,7 @@ import { IBiomeTemperature } from "game/temperature/ITemperature";
 import { TerrainType } from "tile/ITerrain";
 declare const _default: {
     readonly defaultTerrainBackground: TerrainType.Dirt;
+    readonly defaultCaveEntranceFlooring: TerrainType.Dirt;
     mapGen: BiomeMapGen;
     temperature: IBiomeTemperature;
 };

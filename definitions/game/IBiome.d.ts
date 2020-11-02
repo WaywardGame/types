@@ -14,6 +14,7 @@ import { IModdable } from "mod/ModRegistry";
 import { TerrainType } from "tile/ITerrain";
 export interface IBiomeDescription extends IModdable {
     defaultTerrainBackground: TerrainType;
+    defaultCaveEntranceFlooring: TerrainType;
     temperature?: IBiomeTemperature;
     mapGen: MapGenVersions<IBiomeMapGen>;
 }

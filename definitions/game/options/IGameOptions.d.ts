@@ -97,6 +97,16 @@ export interface IGameOptions {
          */
         dayPercent?: number;
     };
+    rest: {
+        /**
+         * How long to delay before resting begins
+         */
+        startDelay?: number;
+        /**
+         * Delay between rest ticks
+         */
+        tickInterval?: number;
+    };
     player: IGameOptionsPlayer;
     npcs: {
         merchants: {

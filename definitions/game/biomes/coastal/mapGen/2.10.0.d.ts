@@ -8,12 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { IContainer } from "item/IItem";
-import SharedPacket from "multiplayer/packets/SharedPacket";
-export default class UpdateItemOrderPacket extends SharedPacket {
-    container: IContainer;
-    itemOrder: number[] | undefined;
-    isSyncCheckEnabled(): boolean;
-    isAllowedWhenPaused(): boolean;
-    process(): void;
-}
+import { IBiomeMapGen } from "mapgen/IMapGen";
+export declare const coastalMapGen2100: IBiomeMapGen;

@@ -136,7 +136,9 @@ export interface IPlayOptions {
     realTimeTickSpeed: number;
     customMilestoneModifiersAllowed: boolean;
     mapSize: number | undefined;
+    recordReplay: boolean;
     multiplayerWorld?: IMultiplayerWorldData;
+    completedMilestoneCount?: number;
 }
 export interface IPlayerOptions {
     id?: number;
@@ -271,7 +273,8 @@ export declare enum SaveType {
     BackToMainMenu = 3,
     Multiplayer = 4,
     Challenge = 5,
-    Traveling = 6
+    Traveling = 6,
+    ReplayConvert = 7
 }
 export declare enum TileUpdateType {
     Batch = 0,

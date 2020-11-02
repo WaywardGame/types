@@ -84,7 +84,7 @@ export default abstract class Human extends Entity {
     /**
      * @returns Whether the skill of this human is more than or equal to a random number between `0` and the value of `check`.
      */
-    skillCheck(skill: SkillType, check: number): boolean;
+    skillAndActionLevelCheck(skill: SkillType, check: number, actionLevel?: number): boolean;
     isResting(): boolean;
     isGhost(): boolean;
     isRestingCancelled(): boolean;
@@ -103,10 +103,10 @@ export default abstract class Human extends Entity {
     getMaxHealth(): number;
     update(): void;
     updateStatsAndAttributes(): void;
-    staminaReduction(skill: SkillType): void;
+    staminaReduction(skill?: SkillType, level?: number): void;
     updateReputation(reputation: number): void;
     setPaddling(paddling: boolean, itemId: number): void;
-    skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
+    skillGain(skillType: SkillType, mod?: number, actionLevel?: number, bypass?: boolean): void;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     getBurnDamage(fireType: FireType, skipParry?: boolean, equipType?: EquipType): number;
     /**

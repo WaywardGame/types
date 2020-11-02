@@ -47,6 +47,7 @@ declare const actionDescriptions: {
     79: IActionDescription<[], import("../player/Player").default | import("../npc/NPC").default, void, []>;
     62: import("./Action").Action<[], import("../player/Player").default, void, []>;
     28: import("./Action").Action<[import("./IAction").ActionArgument.ItemInventory], import("../player/Player").default | import("../npc/NPC").default, void, [import("../../item/Item").default]>;
+    94: import("./Action").Action<[import("./IAction").ActionArgument.Integer, [import("./IAction").ActionArgument.Boolean, import("./IAction").ActionArgument.Integer], [import("./IAction").ActionArgument.Object, import("./IAction").ActionArgument.Undefined]], import("../player/Player").default, void, [number, number | boolean, any?]>;
     58: import("./Action").Action<[], import("../player/Player").default | import("../npc/NPC").default, void, []>;
     21: import("./Action").Action<[import("./IAction").ActionArgument.ItemNearby], import("../player/Player").default, void, [import("../../item/Item").default]>;
     17: import("./Action").Action<[import("./IAction").ActionArgument.ItemInventory], import("../player/Player").default | import("../npc/NPC").default, void, [import("../../item/Item").default]>;
@@ -95,13 +96,14 @@ declare const actionDescriptions: {
     34: import("./Action").Action<[import("./IAction").ActionArgument.ItemNearby], import("../player/Player").default | import("../npc/NPC").default, void, [import("../../item/Item").default]>;
     85: import("./Action").Action<[[import("./IAction").ActionArgument.ItemInventory, import("./IAction").ActionArgument.Undefined]], import("../player/Player").default, void, [(import("../../item/Item").default | undefined)?]>;
     2: IActionDescription<[[import("./IAction").ActionArgument.ItemInventory, import("./IAction").ActionArgument.Undefined], [import("./IAction").ActionArgument.AttackType, import("./IAction").ActionArgument.Undefined]], import("../player/Player").default | import("../npc/NPC").default, void, [(import("../../item/Item").default | undefined)?, (import("../IEntity").AttackType | undefined)?]>;
-    69: import("./Action").Action<[[import("./IAction").ActionArgument.ItemInventory, import("./IAction").ActionArgument.Undefined]], import("../player/Player").default, void, [(import("../../item/Item").default | undefined)?]>;
+    69: import("./Action").Action<[[import("./IAction").ActionArgument.ItemInventory]], import("../player/Player").default, void, [import("../../item/Item").default]>;
     76: import("./Action").Action<[import("./IAction").ActionArgument.NPCNearby], import("../player/Player").default | import("../npc/NPC").default, void, [import("../npc/NPC").default]>;
     36: import("./Action").Action<[import("./IAction").ActionArgument.ItemInventory, [import("./IAction").ActionArgument.ItemInventory, import("./IAction").ActionArgument.Undefined]], import("../player/Player").default | import("../npc/NPC").default, void, [import("../../item/Item").default, (import("../../item/Item").default | undefined)?]>;
     66: import("./Action").Action<[[import("./IAction").ActionArgument.ItemInventory, import("./IAction").ActionArgument.Undefined]], import("../player/Player").default | import("../npc/NPC").default, void, [(import("../../item/Item").default | undefined)?]>;
     80: IActionDescription<[], import("../player/Player").default | import("../npc/NPC").default, void, []>;
     92: IActionDescription<[import("./IAction").ActionArgument.ItemNearby, import("./IAction").ActionArgument.Boolean], import("../player/Player").default | import("../npc/NPC").default, void, [import("../../item/Item").default, boolean]>;
-    61: import("./Action").Action<[import("./IAction").ActionArgument.Direction, [import("./IAction").ActionArgument.Number, import("./IAction").ActionArgument.Undefined]], import("../player/Player").default | import("../npc/NPC").default, void, [import("../../utilities/math/Direction").Direction, (number | undefined)?]>;
+    61: import("./Action").Action<[import("./IAction").ActionArgument.Direction, [import("./IAction").ActionArgument.Integer, import("./IAction").ActionArgument.Undefined]], import("../player/Player").default | import("../npc/NPC").default, void, [import("../../utilities/math/Direction").Direction, (number | undefined)?]>;
+    93: import("./Action").Action<[import("./IAction").ActionArgument.Container, [import("./IAction").ActionArgument.IntegerNumberArray, import("./IAction").ActionArgument.Undefined]], import("../player/Player").default, void, [import("../../item/IItem").IContainer, (number[] | undefined)?]>;
     64: import("./Action").Action<[import("./IAction").ActionArgument.ItemNearby, import("./IAction").ActionArgument.ActionType], import("../player/Player").default | import("../npc/NPC").default, void, [import("../../item/Item").default, ActionType]>;
 };
 export default actionDescriptions;

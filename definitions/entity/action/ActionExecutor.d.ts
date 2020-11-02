@@ -32,6 +32,7 @@ interface ActionEvents {
     postExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any>, args: any[]): any;
 }
 export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R, AV extends any[]> extends EventEmitter.Host<ActionEvents> implements IActionApi<E> {
+    private static executing;
     /**
      * Gets an action by its description. If you're using the Action class for constructing the descriptions, just pass the action instance.
      *
@@ -70,10 +71,10 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setUpdateView(updateFov?: boolean): this;
     setUpdateRender(): this;
     setUpdateTablesAndWeight(): this;
-    setStaminaReduction(reduction?: SkillType): this;
+    setStaminaReduction(reduction?: SkillType, actionLevel?: number): this;
     setReputationChange(amount: number): this;
-    addSkillGains(...skills: Array<[SkillType, number?]>): this;
-    addSkillGains(skill: SkillType, amount?: number): this;
+    addSkillGains(...skills: Array<[SkillType, number?, number?]>): this;
+    addSkillGains(skill: SkillType, amount?: number, actionLevel?: number): this;
     setMilestone(milestone: Milestone, data?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
@@ -89,6 +90,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private executeConfirmer;
     private executeInternalOrMultiplayer;
     private executeInternal;
+    private createActionPacket;
     private handleApiOnActionFailure;
     private handleApi;
     private canExecute;

@@ -163,7 +163,6 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
      */
     isFiltered(item: ItemType | Item, filterText: string, craftingFilter?: boolean): boolean;
     private getDefaultWeightRange;
-    private updateItemOrderInternal;
     private loadReference;
     private removeFromContainerInternal;
     private updateUiOnItemRemove;

@@ -10,5 +10,5 @@
  */
 import { Action } from "entity/action/Action";
 import { ActionArgument } from "entity/action/IAction";
-declare const _default: Action<[ActionArgument.Direction, [ActionArgument.Number, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [import("../../../utilities/math/Direction").Direction, (number | undefined)?]>;
+declare const _default: Action<[ActionArgument.Direction, [ActionArgument.Integer, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [import("../../../utilities/math/Direction").Direction, (number | undefined)?]>;
 export default _default;

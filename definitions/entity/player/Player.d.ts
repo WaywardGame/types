@@ -96,10 +96,10 @@ export default class Player extends Human {
     resetMovementStates(): void;
     changeId(id: number): void;
     setPaddling(paddling: boolean, itemId: number): boolean;
-    skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
+    skillGain(skillType: SkillType, mod?: number, activeLevel?: number, bypass?: boolean): void;
     checkSkillMilestones(): void;
     addMilestone(milestone: Milestone, data?: number, update?: boolean): void;
-    getDefaultCarveTool(player: Player): Item | undefined;
+    getDefaultCarveTool(_player: Player): Item | undefined;
     isFacingCarvableTile(): boolean;
     hasTamedCreature(creature: Creature): boolean;
     hasHandToUse(): boolean;

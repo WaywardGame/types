@@ -122,7 +122,9 @@ export declare enum ActionType {
     GrabAll = 89,
     Respawn = 90,
     ProtectItem = 91,
-    UnProtectItem = 92
+    UnProtectItem = 92,
+    UpdateItemOrder = 93,
+    InterruptResponse = 94
 }
 export declare enum ActionUsability {
     Paused = 0,
@@ -165,9 +167,9 @@ export interface IActionApi<E extends Entity = Entity> {
     setUpdateView(updateFov?: boolean): this;
     setUpdateRender(): this;
     setUpdateTablesAndWeight(): this;
-    setStaminaReduction(skill?: SkillType): this;
-    addSkillGains(...skills: Array<[SkillType, number?]>): this;
-    addSkillGains(skill: SkillType, amount?: number): this;
+    setStaminaReduction(skill?: SkillType, actionLevel?: number): this;
+    addSkillGains(...skills: Array<[SkillType, number?, number?]>): this;
+    addSkillGains(skill: SkillType, amount?: number, actionLevel?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
     cancelPaddling(item: Item): this;
@@ -236,43 +238,45 @@ export declare enum ActionArgument {
     Null = 1,
     Boolean = 2,
     Number = 3,
-    String = 4,
-    Array = 5,
-    Object = 6,
-    ActionType = 7,
-    AttackType = 8,
-    Container = 9,
-    Corpse = 10,
-    Creature = 11,
-    Direction = 12,
-    Doodad = 13,
-    DoodadType = 14,
-    Entity = 15,
-    EquipType = 16,
-    Human = 17,
-    Item = 18,
-    ItemArray = 19,
-    ItemArrayInventory = 20,
-    ItemArrayNearby = 21,
-    ItemInventory = 22,
-    ItemNearby = 23,
-    ItemType = 24,
-    NPC = 25,
-    NPCNearby = 26,
-    Player = 27,
-    Quality = 28,
-    RecipeType = 29,
-    RestType = 30,
-    TileEvent = 31,
-    Vector2 = 32,
-    Vector3 = 33
+    Integer = 4,
+    String = 5,
+    Array = 6,
+    Object = 7,
+    ActionType = 8,
+    AttackType = 9,
+    Container = 10,
+    Corpse = 11,
+    Creature = 12,
+    Direction = 13,
+    Doodad = 14,
+    DoodadType = 15,
+    Entity = 16,
+    EquipType = 17,
+    Human = 18,
+    IntegerNumberArray = 19,
+    Item = 20,
+    ItemArray = 21,
+    ItemArrayInventory = 22,
+    ItemArrayNearby = 23,
+    ItemInventory = 24,
+    ItemNearby = 25,
+    ItemType = 26,
+    NPC = 27,
+    NPCNearby = 28,
+    Player = 29,
+    Quality = 30,
+    RecipeType = 31,
+    RestType = 32,
+    TileEvent = 33,
+    Vector2 = 34,
+    Vector3 = 35
 }
 export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
-    [ActionArgument.Number]: number;
     [ActionArgument.Undefined]: undefined;
     [ActionArgument.Null]: null;
     [ActionArgument.Boolean]: boolean;
     [ActionArgument.Number]: number;
+    [ActionArgument.Integer]: number;
     [ActionArgument.String]: string;
     [ActionArgument.Array]: any[];
     [ActionArgument.Object]: any;
@@ -287,6 +291,7 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.Entity]: Entity;
     [ActionArgument.EquipType]: EquipType;
     [ActionArgument.Human]: Human;
+    [ActionArgument.IntegerNumberArray]: number[];
     [ActionArgument.Item]: Item;
     [ActionArgument.ItemArray]: Item[];
     [ActionArgument.ItemArrayInventory]: Item[];

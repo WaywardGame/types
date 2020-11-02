@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
+import { ActionType } from "entity/action/IAction";
 import Creature from "entity/creature/Creature";
 import { CreatureType } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
@@ -167,6 +168,12 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
      * @param skillType The skill to get default damage types from
      */
     getDamageTypesForSkill(skillType: SkillType): DamageType[] | undefined;
+    /**
+     * Gets the item's quality and action level (how good it is at doing the action).
+     * @param action The ActionType you are trying to get the level for.
+     * @returns A number (possibly 0 if no quality or action level).
+     */
+    getItemUseBonus(action: ActionType): number;
     onUnserialized(): void;
     private setupDurabilityHandlers;
     private checkIfItemsMatch;

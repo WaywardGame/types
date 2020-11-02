@@ -27,6 +27,7 @@ export declare enum SortDirection {
 export declare const SLOT_CHALLENGE = -1;
 export declare const SLOT_GLOBAL = 26;
 export declare const SLOT_MULTIPLAYER = 27;
+export declare const SLOT_REPLAY = 28;
 export declare const SLOT_COUNT_MAX = 20;
 export declare const propertiesToSerialize: ISerializeProperty[];
 export declare const propertiesToSerializeGlobal: ISerializeProperty[];

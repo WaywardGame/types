@@ -89,7 +89,8 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
  */
 export declare function convertStringToSeed(seed: string | number): number;
 export declare class SeededGenerator implements IRandomGenerator {
-    history: IRandomHistory[] | undefined;
+    private history;
+    private maxHistoryLength;
     private debug;
     private seed;
     private readonly pushedSeeds;
@@ -102,8 +103,10 @@ export declare class SeededGenerator implements IRandomGenerator {
     pushSeed(newSeed?: number): void;
     popSeed(): number;
     get(): number;
-    startHistory(): void;
-    stopHistory(): IRandomHistory[];
+    startHistory(maxHistory?: number): void;
+    getHistory(): IRandomHistory[] | undefined;
+    takeHistory(): IRandomHistory[] | undefined;
+    stopHistory(print?: string): IRandomHistory[];
 }
 export declare const generalRandom: Random<{
     get: () => number;

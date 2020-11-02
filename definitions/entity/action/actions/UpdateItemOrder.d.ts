@@ -8,5 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { IBiomeMapGen } from "mapgen/IMapGen";
-export declare const coastalMapGen290: IBiomeMapGen;
+import { Action } from "entity/action/Action";
+import { ActionArgument } from "entity/action/IAction";
+declare const _default: Action<[ActionArgument.Container, [ActionArgument.IntegerNumberArray, ActionArgument.Undefined]], import("../../player/Player").default, void, [import("../../../item/IItem").IContainer, (number[] | undefined)?]>;
+export default _default;

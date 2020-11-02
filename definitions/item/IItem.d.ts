@@ -142,6 +142,11 @@ export interface IItemDescription extends IObjectDescription, IModdable {
      * Array of status effects that using this item (via ConsumeItem) will cure.
      */
     canCureStatus?: StatusType[];
+    /**
+     * The level at which the items performs a certain action. The higher the number, the better.
+     * This impacts things like stamina usage, success rate, resource amount, etc.
+     */
+    actionLevel?: OptionalDescriptions<ActionType, number>;
     recipeCache?: ItemType[];
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
