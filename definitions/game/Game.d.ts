@@ -185,6 +185,12 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getMovementFinishTime(delay?: Delay | number): number;
     getMovementProgress(timeStamp: number, finishTime: number | undefined, delay?: Delay | number): number;
     getAnimationProgress(timeStamp: number, finishTime: number | undefined, delay: Delay | number): number;
+    /**
+     * Marks that the player had a turn
+     * In manual turn mode, it will tick the players stat timers & the game
+     * @param player
+     * @param turnType
+     */
     passTurn(player: Player, turnType?: TurnType): void;
     tickRealtime(): void;
     updateView(source: RenderSource, updateFov?: boolean): void;
