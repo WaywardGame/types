@@ -20,6 +20,8 @@ import Player from "entity/player/Player";
 import { Events } from "event/EventEmitter";
 import { IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
+import Interrupt from "language/dictionary/Interrupt";
+import InterruptChoice from "language/dictionary/InterruptChoice";
 import { IOptions } from "save/data/ISaveDataGlobal";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
@@ -51,6 +53,12 @@ export interface IPlayerEvents extends Events<Human> {
      * @param message The message that will be displayed
      */
     displayMessage(message: IMessage): any;
+    /**
+     * Called when a player responds to certain interrupts
+     * @param interrupt The interrupt
+     * @param choice The selected choice
+     */
+    interruptResponse(interrupt: Interrupt, choice: boolean | InterruptChoice): void;
     /**
      * Called when getting the player's maximum health
      * @param maxHealth The current max health of the player (after any other previous mods)

@@ -18,3 +18,10 @@ export interface IReplayLogEntry {
     gameState?: string;
     randomHistory?: IRandomHistory[];
 }
+export interface IPlaybackState {
+    running: boolean;
+    logIndex: number;
+    speed: number;
+    startTime?: number;
+    speedWarning?: boolean;
+}

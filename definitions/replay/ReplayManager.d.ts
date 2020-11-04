@@ -9,32 +9,30 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import ActionPacket from "multiplayer/packets/shared/ActionPacket";
-import { IReplayLogEntry } from "replay/IReplayLogEntry";
 export default class ReplayManager {
-    recording: boolean;
     debugMode: boolean;
-    gameVersion: string;
-    log: IReplayLogEntry[];
-    private _playing;
-    private _speed;
+    private recording;
+    private readonly gameVersion;
+    private log;
+    private playbackState;
     private _recordingStartTime;
-    private _playbackLogIndex;
-    private _playbackStartTime;
-    private _playbackSpeedWarning;
+    private _skipTicks;
     isRecording(): boolean;
     isReplayMode(): boolean;
     isPlaying(): boolean;
+    hasLogEntries(): boolean;
+    getPlaybackSpeed(): number;
     replayVersionMatches(): boolean;
     enableRecording(enable: boolean, debugMode?: boolean): void;
-    startPlayback(): boolean;
+    startPlayback(speed?: number): boolean;
     stopPlayback(): void;
     setPlaybackSpeed(speed: number): void;
-    loadPlayback(autoStart?: boolean): Promise<void>;
-    restoreLog(logToRestore: IReplayLogEntry[]): void;
+    loadPlayback(autoStartSpeed?: number): Promise<void>;
     tick(timeStamp: number): void;
     convertToSave(): Promise<boolean>;
     recordAction(actionPacket: ActionPacket): void;
     recordRealtimeTick(): void;
+    private _restoreLog;
     private _createLogEntry;
     private _updatePlayback;
 }
