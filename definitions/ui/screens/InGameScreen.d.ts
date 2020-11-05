@@ -227,7 +227,7 @@ export default class InGameScreen extends BaseScreen {
     onReleaseDrop(): void;
     onMenuCancel(): boolean;
     onCloseAllDialogs(): boolean;
-    onMoreInformation(): boolean;
+    onMoreInformation(api: IBindHandlerApi): boolean;
     onDismantleTab(): boolean;
     onHandToggle(api: IBindHandlerApi): boolean;
     onInput(api: IBindHandlerApi): void;

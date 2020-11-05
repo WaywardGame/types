@@ -20,7 +20,7 @@ export default class ReplayManager {
     isRecording(): boolean;
     isReplayMode(): boolean;
     isPlaying(): boolean;
-    hasLogEntries(): boolean;
+    getLogEntriesCount(): number;
     getPlaybackSpeed(): number;
     replayVersionMatches(): boolean;
     enableRecording(enable: boolean, debugMode?: boolean): void;

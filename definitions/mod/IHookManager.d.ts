@@ -30,6 +30,7 @@ export declare enum Hook {
     OnItemEquip = "onItemEquip",
     OnItemQuickslot = "onItemQuickslot",
     OnLanguageChange = "onLanguageChange",
+    OnMoreInformationRequest = "onMoreInformationRequest",
     OnMove = "onMove",
     OnMoveDirectionUpdate = "onMoveDirectionUpdate",
     OnNPCDamage = "onNPCDamage",
@@ -65,7 +66,8 @@ export declare enum Hook {
     ProcessInput = "processInput",
     ShouldCraft = "shouldCraft",
     ShouldDisplayMessage = "shouldDisplayMessage",
-    ShouldRender = "shouldRender"
+    ShouldRender = "shouldRender",
+    onMoreInformationRequest = "onMoreInformationRequest"
 }
 export declare const globalHooks: Hook[];
 export declare enum HookPriority {

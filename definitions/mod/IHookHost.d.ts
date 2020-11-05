@@ -187,6 +187,12 @@ export interface IHookHost {
      */
     onLanguageChange?(languageName: string): void;
     /**
+     * Called when more information is requested from an item
+     * @param human The human that requested more information
+     * @param book The item that was requested
+     */
+    onMoreInformationRequest?(human: Human, item: Item): void;
+    /**
      * Called when the player is moving
      * @param player The player object
      * @param nextX The x position the player is moving to
