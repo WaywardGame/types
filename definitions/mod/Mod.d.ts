@@ -78,7 +78,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onCreatureTamed(creature: Creature, owner: Player): void;
     onDigTreasure(human: Human, treasureTile: Vector3): void;
     onLanguageChange(languageName: string): void;
-    onMoreInformationRequest(human: Human, item: Item): void;
     onMove(player: Player, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     onMoveDirectionUpdate(human: Human, direction: Direction): void;
     onNPCDamage(npc: NPC, damageInfo: IDamageInfo): number | undefined;

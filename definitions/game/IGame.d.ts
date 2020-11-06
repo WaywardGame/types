@@ -20,6 +20,7 @@ import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import Item from "item/Item";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
+import { IReplayLogEntry } from "replay/IReplayLogEntry";
 import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import { ITile, ITileContainer, ITileData } from "tile/ITerrain";
 import TileEvent from "tile/TileEvent";
@@ -138,7 +139,8 @@ export interface IPlayOptions {
     mapSize: number | undefined;
     recordReplay: boolean;
     multiplayerWorld?: IMultiplayerWorldData;
-    completedMilestoneCount?: number;
+    replayLog?: IReplayLogEntry[];
+    replyCompletedMilestoneCount?: number;
 }
 export interface IPlayerOptions {
     id?: number;

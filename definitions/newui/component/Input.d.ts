@@ -66,6 +66,7 @@ export default class Input extends Component implements IRefreshable {
     setBlurOnEnter(shouldBlurOnEnter?: boolean): this;
     setNotClearOnEscape(shouldNotClearOnEscape?: boolean): this;
     setSelectOnFocus(selectOnFocus?: boolean): this;
+    editInput(consumer: (input: Component) => any): this;
     refresh(): this;
     /**
      * Sets the text in this input

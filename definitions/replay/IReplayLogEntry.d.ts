@@ -19,9 +19,10 @@ export interface IReplayLogEntry {
     randomHistory?: IRandomHistory[];
 }
 export interface IPlaybackState {
-    running: boolean;
+    running: boolean | number;
     logIndex: number;
     speed: number;
     startTime?: number;
     speedWarning?: boolean;
+    maxLogEntryIndex?: number;
 }

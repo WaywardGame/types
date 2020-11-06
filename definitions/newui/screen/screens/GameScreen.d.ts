@@ -13,7 +13,6 @@ import Player from "entity/player/Player";
 import { Events, IEventEmitter } from "event/EventEmitter";
 import { IMapRequest } from "game/IGame";
 import { BookType } from "item/IItem";
-import Item from "item/Item";
 import { IHookHost } from "mod/IHookHost";
 import Component from "newui/component/Component";
 import { IBindHandlerApi } from "newui/input/Bind";
@@ -68,7 +67,6 @@ export default class GameScreen extends Screen implements IHookHost {
     onGameTickEnd(): void;
     onOpenBook(human: Human, book: BookType): void;
     onReadMap(player: Player, mapRequest: IMapRequest): void;
-    onMoreInformationRequest(player: Player, item: Item): void;
     protected onDie(): void;
     protected onRespawn(): void;
     protected onZoom(api: IBindHandlerApi): boolean;
