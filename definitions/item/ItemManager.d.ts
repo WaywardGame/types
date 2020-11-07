@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { IActionHandlerApi } from "entity/action/IAction";
 import Human from "entity/Human";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
@@ -105,10 +106,10 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     spawn(terrainType: TerrainType, x: number, y: number, z: number): void;
     getTileContainer(x: number, y: number, z: number, tile?: ITile): IContainer;
     getRandomQuality(bonusQuality?: number): Quality;
-    hasAdditionalRequirements(human: Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
+    hasAdditionalRequirements(actionOrHuman: IActionHandlerApi<Player | NPC> | Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
-    craft(human: Human, itemType: ItemType, itemsToRequire: Item[], itemsToConsume: Item[], baseItem?: Item): CraftStatus;
+    craft(action: IActionHandlerApi<Player | NPC>, itemType: ItemType, itemsToRequire: Item[], itemsToConsume: Item[], baseItem?: Item): CraftStatus;
     decayItems(pids: Set<number>): boolean;
     getPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getAbsentPlayerWithItemInInventory(containable: IContainable): Player | undefined;

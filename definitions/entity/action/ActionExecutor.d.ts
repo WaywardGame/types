@@ -32,7 +32,6 @@ interface ActionEvents {
     postExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any>, args: any[]): any;
 }
 export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R, AV extends any[]> extends EventEmitter.Host<ActionEvents> implements IActionApi<E> {
-    private static executing;
     /**
      * Gets an action by its description. If you're using the Action class for constructing the descriptions, just pass the action instance.
      *
