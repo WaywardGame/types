@@ -15,7 +15,7 @@ import { IVector3 } from "utilities/math/IVector";
 export default class CorpseInspection extends Inspection<ICorpse> {
     static getFromTile(position: IVector3): CorpseInspection[];
     constructor(corpse: ICorpse);
-    get(context: InfoProviderContext): never[];
+    get(_context: InfoProviderContext): never[];
     getId(): string;
     getDisplayLevel(): InfoDisplayLevel;
     protected onCorpseRemove(_: any, corpse: ICorpse): void;

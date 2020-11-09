@@ -46,7 +46,7 @@ export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHand
     reset(target?: IVector2, clearWalkPath?: boolean): void;
     protected onMoveToTile(api: IBindHandlerApi): boolean;
     protected onHoldMoveToTile(api: IBindHandlerApi): boolean;
-    protected onCancelMoveToTile(api: IBindHandlerApi): boolean;
+    protected onCancelMoveToTile(_api: IBindHandlerApi): boolean;
     protected onHoldMoveToTilePreview(api: IBindHandlerApi): boolean;
     protected onReleaseMoveToTilePreview(): void;
     protected onStatChanged(player: Player, stat: IStat): void;

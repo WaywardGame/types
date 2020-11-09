@@ -21,12 +21,12 @@ export default class BaseScreen implements IUiScreen {
     doShow(): void;
     hide(): void;
     doHide(): void;
-    onMouseDown(event: JQueryEventObject): void;
-    onMouseUpOrLeave(event: JQueryEventObject): void;
-    onMouseMove(event: JQueryEventObject): void;
-    onMouseScroll(event: JQueryEventObject): void;
-    onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | undefined;
-    onKeyUp(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | undefined;
-    protected onShow(data?: any): void;
+    onMouseDown(_event: JQueryEventObject): void;
+    onMouseUpOrLeave(_event: JQueryEventObject): void;
+    onMouseMove(_event: JQueryEventObject): void;
+    onMouseScroll(_event: JQueryEventObject): void;
+    onKeyDown(_event: JQueryEventObject, _keyCode: number, _blockable: boolean): boolean | undefined;
+    onKeyUp(_event: JQueryEventObject, _keyCode: number, _blockable: boolean): boolean | undefined;
+    protected onShow(_data?: any): void;
     protected onHide(): void;
 }

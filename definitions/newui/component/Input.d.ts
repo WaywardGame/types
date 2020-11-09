@@ -80,7 +80,7 @@ export default class Input extends Component implements IRefreshable {
      */
     clear(clearType?: ClearType): this;
     focus(): void;
-    blur(event?: Event): void;
+    blur(_event?: Event): void;
     select(): this;
     private keydown;
     private keyup;

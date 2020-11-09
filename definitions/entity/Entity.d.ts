@@ -103,7 +103,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     animateBumpTowards(x: number, y: number): void;
     getMovementPoint(timeStamp: number): IVector2;
     getMovementProgress(timeStamp: number): number;
-    getMovementFinishTime(timeStamp: number): number | undefined;
+    getMovementFinishTime(_timeStamp: number): number | undefined;
     getMoveType(): MoveType;
     setMoveType(moveType: MoveType): void;
     isInFov(): boolean;

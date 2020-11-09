@@ -70,13 +70,13 @@ export default abstract class StatusEffect extends EventEmitter.Host<IStatusEffe
     getRenderer(): StatusEffectRenderer | undefined;
     /**
      * Gets the particle events for the given
-     * @param event The event that could cause particles, IE `turn` or `tick`.
+     * @param _event The event that could cause particles, IE `turn` or `tick`.
      * @returns A 2-value tuple describing the particle effect, or `undefined` if there should be no particles.
      * ### Particle tuple parameters:
      * @param countOrChance If a number less than `1`, the chance of the particle effect happening. Greater than `1` increases the number of particles.
      * @param color The color of the particle effect
      */
-    getParticles(event: StatusEffectParticleEvent): [number, IRGB] | undefined;
+    getParticles(_event: StatusEffectParticleEvent): [number, IRGB] | undefined;
     getIcon(): IStatusEffectIconDescription | undefined;
     isActive(): boolean;
     add(reason?: StatusEffectChangeReason): this;

@@ -49,7 +49,7 @@ declare module TileHelpers {
     };
     module Overlay {
         function add(tile: ITile, overlay: IOverlayInfo, ifNotExist?: (overlay: IOverlayInfo) => boolean): boolean;
-        function has(tile: ITile, filter: (overlay: IOverlayInfo) => boolean): boolean;
+        function has(tile: ITile, filter: (overlay: IOverlayInfo) => boolean): boolean | undefined;
         function remove(tile: ITile, overlay: IOverlayInfo): boolean;
         function remove(tile: ITile, filter: (overlay: IOverlayInfo) => boolean): boolean;
     }

@@ -91,7 +91,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     closest(selector: string): Element | null;
     matches(selector: string): boolean;
     getIndex(): number | undefined;
-    setTooltip(initializer?: (tooltip: ITooltip) => any, showOnHover?: boolean): this;
+    setTooltip(initializer?: (tooltip: ITooltip) => any, _showOnHover?: boolean): this;
     removeTooltip(): void;
     /**
      * Remove the context menu from this element

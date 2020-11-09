@@ -25,6 +25,6 @@ export default abstract class GameplayModifier<ID extends number> implements IHa
     initialize(): void;
     uninitialize(): void;
     getOptions(resolve?: boolean): IGameOptionsPartial | undefined;
-    isEnabledForPlayer(entity: Entity): boolean;
+    isEnabledForPlayer(_entity: Entity): boolean;
     getRandom(): import("../../../utilities/Random").Random<import("../../../utilities/Random").SeededGenerator>;
 }

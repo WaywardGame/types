@@ -28,7 +28,7 @@ export default class Notifier implements INotifier {
     constructor(gl: WebGL2RenderingContext, capacity: number);
     setTexture(texture: WebGLTexture, inverseTextureSize: Vector2): void;
     clear(): void;
-    addItem(location: INotifierLocation, itemNotifierType: ItemNotifierType, type: ItemType, broken?: boolean): void;
+    addItem(location: INotifierLocation, itemNotifierType: ItemNotifierType, type: ItemType, _broken?: boolean): void;
     addCreature(location: INotifierLocation, creatureNotifierType: CreatureNotifierType, type: CreatureType, aberrant?: boolean): void;
     addStat(location: INotifierLocation, type: StatNotificationType, value: number): void;
     addStatusEffect(location: INotifierLocation, statusEffect: StatusEffect, reason: StatusEffectChangeReason): void;

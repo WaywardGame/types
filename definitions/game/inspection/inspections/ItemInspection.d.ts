@@ -15,7 +15,7 @@ import { IVector3 } from "utilities/math/IVector";
 export default class ItemInspection extends Inspection<Item> {
     static getFromTile(position: IVector3): ItemInspection[];
     constructor(item: Item);
-    get(context: InfoProviderContext): never[];
+    get(_context: InfoProviderContext): never[];
     getId(): string;
     getDisplayLevel(): InfoDisplayLevel;
     protected onItemRemove(_: any, item: Item): void;

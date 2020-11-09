@@ -35,6 +35,6 @@ export default class World extends EventEmitter.Host<IWorldEvents> implements IW
     updateTile(x: number, y: number, z: number, tile: ITile, tileUpdateType: TileUpdateType, flush?: boolean): void;
     startUpdateTileBatch(): void;
     endUpdateTileBatch(): void;
-    serializeObject(serializer: ISerializer): void;
+    serializeObject(_serializer: ISerializer): void;
     deserializeObject(serializer: ISerializer): void;
 }

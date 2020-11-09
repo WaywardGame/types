@@ -63,7 +63,7 @@ export default class GameScreen extends Screen implements IHookHost {
     getQuadrantContainer(): Component<HTMLElement>;
     isMouseWithin(): false | Component<HTMLElement>;
     mouseStartWasWithin(api: IBindHandlerApi): boolean | undefined;
-    onGameStart(isLoadingSave: boolean, playedCount: number): void;
+    onGameStart(_isLoadingSave: boolean, _playedCount: number): void;
     onGameTickEnd(): void;
     onOpenBook(human: Human, book: BookType): void;
     onReadMap(player: Player, mapRequest: IMapRequest): void;

@@ -26,7 +26,7 @@ export default class NotesDialog extends Dialog {
     private note;
     private current;
     constructor();
-    onWrittenNote(player: Player, id: number): void;
+    onWrittenNote(_player: Player, _id: number): void;
     getName(): UiTranslation;
     showNote(noteId: number): this;
     showFirstUnreadNote(): void;

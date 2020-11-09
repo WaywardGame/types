@@ -66,7 +66,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     static description(...translations: TranslationGenerator[]): SimpleInfoProvider;
     abstract get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     abstract getClass(): string[];
-    getDisplayLevel(context: InfoProviderContext): InfoDisplayLevel;
+    getDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel;
     getColor(): string | undefined;
     hasContent(): boolean;
     init(): void;

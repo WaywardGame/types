@@ -30,9 +30,9 @@ export default class MapDialog extends Dialog implements IHookHost {
     constructor();
     getName(): Translation | UiTranslation.GameDialogMapName;
     decode(mapRequest: IMapRequest): void;
-    onDigTreasure(human: Human, treasureTile: Vector3): void;
-    onInventoryItemUpdate(player: Player | undefined, item: Item, container: IContainer): void;
-    onMoveComplete(player: Player): void;
+    onDigTreasure(human: Human, _treasureTile: Vector3): void;
+    onInventoryItemUpdate(player: Player | undefined, item: Item, _container: IContainer): void;
+    onMoveComplete(_player: Player): void;
     private closeIfItemIsGone;
     private getDistance;
     private getDirection;

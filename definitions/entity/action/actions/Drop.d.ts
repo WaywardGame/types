@@ -11,7 +11,5 @@
 import { Action } from "entity/action/Action";
 import { ActionArgument } from "entity/action/IAction";
 import Item from "item/Item";
-import { DropLocation } from "save/data/ISaveDataGlobal";
-export { DropLocation };
 declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.String, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [Item, (boolean | undefined)?, (boolean | undefined)?, (string | undefined)?]>;
 export default _default;

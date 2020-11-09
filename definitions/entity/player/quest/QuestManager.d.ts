@@ -36,7 +36,7 @@ export default class QuestManager extends EventEmitter.Host<IQuestManagerEvents>
     reset(): this;
     complete(questInstance: QuestInstance): boolean;
     onPlayerJoin(player: Player): void;
-    onGameStart(isLoadingSave: boolean, playedCount: number): void;
+    onGameStart(_isLoadingSave: boolean, _playedCount: number): void;
     private init;
     private onUpdateRequirement;
     private onCompleteRequirement;

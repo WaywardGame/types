@@ -17,7 +17,7 @@ export default class HarvestabilityInfoProvider extends InfoProvider {
     private message;
     private constructor();
     getClass(): string[];
-    getDisplayLevel(context: InfoProviderContext): InfoDisplayLevel;
+    getDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel;
     initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
     hasContent(): boolean;
     get(): Translation;

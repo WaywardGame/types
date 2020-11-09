@@ -123,7 +123,7 @@ export default class InGameScreen extends BaseScreen {
     createItemString(itemType: ItemType, item?: Item, extraClass?: string): string;
     syncItemElements(itemId?: number, selector?: JQuery): void;
     syncDamagedDecayed(item: Item, element: JQuery): void;
-    addItemToContainer(item: Item, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
+    addItemToContainer(item: Item, container: IContainer, _internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
     insertItemStringToContainer(itemElement: string | JQuery, containerElement: JQuery): void;
     onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery | undefined, isInventoryContainer: boolean, updateTables?: boolean): void;
     afterAddingMultipleItemsToContainer(container: IContainer): void;
@@ -219,7 +219,7 @@ export default class InGameScreen extends BaseScreen {
     onItemEquipToggle(api: IBindHandlerApi): boolean;
     onItemProtectToggle(api: IBindHandlerApi): boolean;
     onContextMenu(api: IBindHandlerApi): boolean;
-    onContextMenuReleased(api: IBindHandlerApi): void;
+    onContextMenuReleased(_api: IBindHandlerApi): void;
     onQuickSlotToggle(api: IBindHandlerApi): boolean;
     onQuickSlot(api: IBindHandlerApi): boolean;
     onQuickSlotClear(api: IBindHandlerApi): boolean;
