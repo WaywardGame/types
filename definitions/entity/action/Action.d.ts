@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ActionArgument, ActionArgumentTupleTypes, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionHandlerApi } from "entity/action/IAction";
+import { ActionArgument, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionHandlerApi } from "entity/action/IAction";
 import Creature from "entity/creature/Creature";
 import Entity from "entity/Entity";
 import { EntityType } from "entity/IEntity";
@@ -18,6 +18,9 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     readonly argumentTypes: A;
     readonly usability: {
         [key in ActionUsability]?: boolean;
+    };
+    readonly flags: {
+        [key in ActionFlag]?: boolean;
     };
     validExecutors: EntityType[];
     preExecutionHandler?: (actionApi: IActionApi<E>, ...args: AV) => any;
@@ -58,9 +61,18 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
      */
     setUsableWhen(...usabilities: ActionUsability[]): this;
     /**
+     * Sets additional flags for this action.
+     */
+    setFlags(...flags: ActionFlag[]): this;
+    /**
      * Sets the entities that can use an action.
      */
     setUsableBy<E2 extends EntityType[]>(...entityTypes: E2): Action<A, EntityTypeTupleType<E2>>;
+    /**
+     * Checks if a flag is set
+     * @param flag Flag to check
+     */
+    hasFlag(flag: ActionFlag): boolean;
     /**
      * Creates an identical clone of this action.
      */

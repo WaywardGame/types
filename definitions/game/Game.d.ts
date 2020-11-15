@@ -52,7 +52,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     tickSpeed: number;
     turnMode: TurnMode;
     time: TimeManager;
-    replay: ReplayManager;
+    replay: ReplayManager | undefined;
     originalPlayOptions: Partial<IPlayOptions>;
     saveVersion: string | undefined;
     upgrades: string[];

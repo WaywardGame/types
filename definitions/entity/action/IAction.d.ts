@@ -133,13 +133,20 @@ export declare enum ActionUsability {
     Ghost = 3,
     Delayed = 4
 }
+export declare enum ActionFlag {
+    OperatorMilestone = 0
+}
 export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, AV extends any[] = ActionArgumentTupleTypes<A>> {
     type?: number;
     argumentTypes: A;
     usability: {
         [key in ActionUsability]?: boolean;
     };
+    flags: {
+        [key in ActionFlag]?: boolean;
+    };
     validExecutors: EntityType[];
+    hasFlag(flag: ActionFlag): boolean;
     execute(actionApi: IActionApi<E>, ...args: AV): R;
     execute(executor: E, ...args: AV): R;
     /**
