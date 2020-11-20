@@ -9,4 +9,4 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { BiomeType } from "game/IBiome";
-export declare function generateWorld(generateNewWorld: boolean, newWorldBiomeTypeOverride?: BiomeType): Promise<unknown>;
+export declare function generateWorld(generateNewWorld: boolean, newWorldBiomeTypeOverride?: BiomeType): Promise<void>;
