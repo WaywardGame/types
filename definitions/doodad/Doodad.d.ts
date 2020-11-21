@@ -170,6 +170,12 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * Refills solar stills when they are on shallow water automatically.
      */
     refillSolarStill(): void;
+    /**
+     * Gets the doodad's quality and action level (how good it is at doing the action) based on the item it is based off of (using repairItem property).
+     * @param action The ActionType you are trying to get the level for.
+     * @returns A number (possibly 0 if no quality or action level).
+     */
+    getItemUseBonus(action: ActionType): number;
     onUnserialized(): void;
     /**
      * @deprecated
