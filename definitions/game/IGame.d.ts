@@ -172,6 +172,7 @@ export interface ITravelToIslandOptions {
 }
 export interface ITravelingToIslandInfo {
     id: string;
+    travelTime?: number;
     newWorldBiomeTypeOverride?: BiomeType;
 }
 export interface IWell {
@@ -321,4 +322,4 @@ export declare const ZOOM_LEVEL_MAX = 8;
 export declare const ZOOM_LEVEL_MIN = 1;
 export declare const DEFAULT_ISLAND_ID = "0,0";
 export declare const DEFAULT_ISLAND_POSITION: IVector2;
-export declare const ISLAND_TRAVEL_TIME = 50;
+export declare const DEFAULT_ISLAND_TRAVEL_TIME = 150;

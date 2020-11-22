@@ -149,8 +149,8 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     enableFlowFieldDebug(): void;
     resetGameState(saveType?: SaveType | false): Promise<void>;
     shouldRender(): number;
-    makeLavaPassage(player: Player): TerrainType | undefined;
-    makeCaveEntrance(player: Player, chance?: number): TerrainType | undefined;
+    makeLavaPassage(human: Human): TerrainType | undefined;
+    makeCaveEntrance(human: Human, chance?: number): TerrainType | undefined;
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
     updateTablesAndWeightNextTick(): void;
@@ -254,9 +254,9 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getCameraPosition(): IVector2;
     getExactCameraPosition(): Vector2;
     restartDedicatedServer(): boolean;
-    travelToIslandId(islandId: string, options?: ITravelToIslandOptions): Promise<void>;
-    travelToIslandPosition(position: IVector2, options?: ITravelToIslandOptions): Promise<void>;
-    travelTowardsIsland(direction: Direction, options?: ITravelToIslandOptions): Promise<void>;
+    travelToIslandId(islandId: string, human: Human, options?: ITravelToIslandOptions): Promise<void>;
+    travelToIslandPosition(position: IVector2, human: Human, options?: ITravelToIslandOptions): Promise<void>;
+    travelTowardsIsland(direction: Direction, human: Human, options?: ITravelToIslandOptions): Promise<void>;
     protected onRestEnd(): void;
     private updateOptionInternal;
     tick(ticks?: number, realPlayers?: Player[], tickFlag?: TickFlag): void;
