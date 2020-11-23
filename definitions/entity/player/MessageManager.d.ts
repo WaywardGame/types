@@ -25,6 +25,7 @@ export declare class MessageManagerNoOp implements IMessageManager {
 export interface IMessageManagerHost {
     isLocalPlayer(): boolean;
     getTurns(): number;
+    isResting(): boolean;
     canSeePosition(x: number, y: number, z: number): boolean;
     shouldDisplayMessage(message: IMessage, id: number): boolean | undefined;
     onDisplayMessage(message: IMessage): void;
