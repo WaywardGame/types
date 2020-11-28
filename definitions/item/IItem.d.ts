@@ -866,7 +866,8 @@ export declare enum ItemType {
     SharkTooth = 511,
     CopperKnife = 512,
     WroughtIronKnife = 513,
-    IronKnife = 514
+    IronKnife = 514,
+    TinOre = 515
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
