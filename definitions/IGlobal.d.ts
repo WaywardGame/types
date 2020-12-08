@@ -42,7 +42,6 @@ import "typings/jqueryui";
 import { ISortable, ISortableOptions } from "ui/functional/IFunctionalSortable";
 import { ITooltip, ITooltipOptions } from "ui/functional/IFunctionalTooltip";
 import Ui from "ui/Ui";
-import "utilities/prototype/Array";
 import "utilities/prototype/Promise";
 import "utilities/typesglobal/Class";
 import "utilities/typesglobal/Descriptions";
