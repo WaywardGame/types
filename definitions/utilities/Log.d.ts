@@ -49,19 +49,20 @@ export declare enum LogSource {
     SaveManager = 37,
     Serializer = 38,
     Shaders = 39,
-    SshCommandManager = 40,
-    SshServer = 41,
-    Steamworks = 42,
-    TemperatureManager = 43,
-    TileEventManager = 44,
-    TileUpdate = 45,
-    Trello = 46,
-    Ui = 47,
-    Utilities = 48,
-    WebAssembly = 49,
-    WebRTCConnection = 50,
-    WebSocketConnection = 51,
-    World = 52
+    SpritePack = 40,
+    SshCommandManager = 41,
+    SshServer = 42,
+    Steamworks = 43,
+    TemperatureManager = 44,
+    TileEventManager = 45,
+    TileUpdate = 46,
+    Trello = 47,
+    Ui = 48,
+    Utilities = 49,
+    WebAssembly = 50,
+    WebRTCConnection = 51,
+    WebSocketConnection = 52,
+    World = 53
 }
 export interface ILog {
     debug(...args: any[]): void;

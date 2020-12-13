@@ -22,11 +22,12 @@ export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEve
     private waitingSlots;
     get isLoading(): boolean;
     private readonly maxConcurrent;
+    private spritePack;
     private spritePacker;
     private tilePacker;
     private imageOverrides;
     private container;
-    initialize(gl: WebGL2RenderingContext, container: IResourceContainer): void;
+    initialize(gl: WebGL2RenderingContext, container: IResourceContainer): Promise<void>;
     loadResources(): Promise<void>;
     continueLoading(): void;
     takeLoadingSlot(callback: () => void): void;

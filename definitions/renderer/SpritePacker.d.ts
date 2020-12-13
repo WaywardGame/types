@@ -9,8 +9,19 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import ISpriteInfo from "renderer/ISpriteInfo";
+import { SpritePack } from "resource/SpritePack";
 import Vector2 from "utilities/math/Vector2";
+interface ISpriteImage {
+    width?: number;
+    height?: number;
+    imageOrBuffer?: HTMLImageElement | ArrayBuffer;
+    src: string;
+    padding: number;
+    animated?: boolean;
+    callback(si: ISpriteInfo, spriteImage?: ISpriteImage): void;
+}
 export default class SpritePacker {
+    private readonly spritePack;
     private readonly gl;
     readonly size: number;
     private readonly nullSprite;
@@ -24,13 +35,14 @@ export default class SpritePacker {
     private readonly sprites;
     private readonly loadedSprites;
     private loadPromise;
-    constructor(gl: WebGL2RenderingContext, size: number, nullSprite: boolean, padding: number, packLargeToSmall?: boolean);
+    constructor(spritePack: SpritePack, gl: WebGL2RenderingContext, size: number, nullSprite: boolean, padding: number, packLargeToSmall?: boolean);
     delete(): void;
     load(): Promise<boolean>;
-    addSprite(src: string, callback: (si: ISpriteInfo, imageElement?: HTMLImageElement) => void): void;
+    addSprite(src: string, callback: (si: ISpriteInfo, spriteImage?: ISpriteImage) => void): void;
     private loadSprite;
     private spriteLoaded;
     private complete;
     private pack;
     private packSprite;
 }
+export {};
