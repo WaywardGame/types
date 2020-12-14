@@ -88,7 +88,8 @@ export declare enum SpawnGroup {
     Night = 5,
     StrongGuardians = 6,
     FreshWater = 7,
-    EasyNight = 8
+    EasyNight = 8,
+    CaveVoid = 9
 }
 export declare enum TileGroup {
     None = 0,
