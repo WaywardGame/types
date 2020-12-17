@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import Doodad from "doodad/Doodad";
 import Creature from "entity/creature/Creature";
 import Human from "entity/Human";
 import { AiType, DamageType, Defense, IEntityEvents, MoveType, StatusType } from "entity/IEntity";
@@ -185,10 +186,12 @@ export interface IDamageInfo {
     type: DamageType;
     weaponName?: Message | Translation;
     creature?: Creature;
+    doodad?: Doodad;
     skipMilestones?: boolean;
     legacy?: boolean;
     damageMessage?: Message | Translation;
     soundDelay?: number;
+    surpressAttackAnimation?: boolean;
 }
 export interface ICreatureEvents extends IEntityEvents {
     /**

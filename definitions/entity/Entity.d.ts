@@ -12,7 +12,7 @@ import { SfxType } from "audio/IAudio";
 import Creature from "entity/creature/Creature";
 import { IDamageInfo } from "entity/creature/ICreature";
 import Human from "entity/Human";
-import { EntityType, IEntityEvents, IProperties, IStatus, MoveType, Property, StatusEffectChangeReason, StatusType } from "entity/IEntity";
+import { DamageType, EntityType, IEntityEvents, IProperties, IStatus, MoveType, Property, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import { IStats } from "entity/IStats";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
@@ -54,6 +54,8 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     stats: IStats;
     status: IStatus;
     properties: IProperties | undefined;
+    attackAnimationType: DamageType | undefined;
+    attackAnimationEndTime: number | undefined;
     private _movementFinishTime;
     private _inFov;
     private readonly statusHandlers;
@@ -101,6 +103,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
      * Faces the target and animates a bump into effect
      */
     animateBumpTowards(x: number, y: number): void;
+    animateAttack(damageType: DamageType[] | undefined): void;
     getMovementPoint(timeStamp: number): IVector2;
     getMovementProgress(timeStamp: number): number;
     getMovementFinishTime(_timeStamp: number): number | undefined;

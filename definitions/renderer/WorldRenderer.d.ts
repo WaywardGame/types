@@ -140,6 +140,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private batchShadow;
     private batchPlayers;
     private batchHuman;
+    private batchAttackAnimation;
     /**
      * Renders the status effects currently on the human.
      */
