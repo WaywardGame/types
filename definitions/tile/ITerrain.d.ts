@@ -116,7 +116,9 @@ export declare enum TileTemplateType {
     Boat = 5,
     Lava = 6,
     Snow = 7,
-    IceCap = 8
+    IceCap = 8,
+    IceHouses = 9,
+    SnowHouses = 10
 }
 export interface ITemplate {
     terrainTypes: Record<string, TerrainType>;
@@ -216,7 +218,9 @@ export declare enum TerrainType {
     SandstoneWithTalc = 45,
     SandstoneWithLimestone = 46,
     RocksWithTin = 47,
-    SandstoneWithTin = 48
+    SandstoneWithTin = 48,
+    IceFlooring = 49,
+    SnowFlooring = 50
 }
 export declare enum TerrainTypeGroup {
     Flooring = 0

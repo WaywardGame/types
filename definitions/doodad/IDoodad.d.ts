@@ -243,7 +243,9 @@ export declare enum DoodadType {
     LockedTinChest = 111,
     BronzeChest = 112,
     BronzeAnvil = 113,
-    LockedBronzeChest = 114
+    LockedBronzeChest = 114,
+    IceWall = 115,
+    SnowWall = 116
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,

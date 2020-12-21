@@ -922,7 +922,13 @@ export declare enum ItemType {
     BronzeMortarAndPestle = 566,
     BronzeBakingTray = 567,
     BronzeRefinementTools = 568,
-    BronzeKnife = 569
+    BronzeKnife = 569,
+    IceBrick = 570,
+    SnowBrick = 571,
+    IceWall = 572,
+    IceFlooring = 573,
+    SnowWall = 574,
+    SnowFlooring = 575
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
