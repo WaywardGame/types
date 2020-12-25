@@ -108,7 +108,7 @@ export default class Player extends Human {
      * Ensure handToUse is valid given the players options
      */
     updateHandToUse(): void;
-    equip(item: Item, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
+    equip(item: Item, slot: EquipType, internal?: boolean, switchingHands?: boolean): boolean;
     unequip(item: Item, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
     getMovementIntent(): IMovementIntent;

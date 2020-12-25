@@ -115,7 +115,7 @@ export default abstract class Human extends Entity {
     setZ(z: number, updateFlowField?: boolean): void;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
     damageByInteractingWith(thing: Doodad | TileEvent, options: ICheckUnderOptions | undefined, damageLocation: EquipType): ICheckUnderOptions;
-    equip(item: Item, slot: EquipType): void;
+    equip(item: Item, slot: EquipType): boolean;
     unequip(item: Item): void;
     unequipAll(): void;
     canJump(): boolean;
