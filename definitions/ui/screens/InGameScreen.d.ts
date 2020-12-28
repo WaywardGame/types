@@ -82,6 +82,7 @@ export default class InGameScreen extends BaseScreen {
     private lastGlobalMouseInfo;
     private craftableItemTypes;
     private nonCraftableItemTypes;
+    private craftingDialogDirty;
     constructor();
     selector(): string;
     bindElements(): void;
