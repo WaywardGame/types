@@ -60,6 +60,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     tame(player: Player): boolean;
     increaseTamedCount(): void;
     release(): boolean;
+    unhitch(): void;
     skipNextUpdate(): void;
     getMoveType(): MoveType;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;

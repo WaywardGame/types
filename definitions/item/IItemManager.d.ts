@@ -10,7 +10,7 @@
  */
 import Doodad from "doodad/Doodad";
 import { DoodadType, DoodadTypeGroup } from "doodad/IDoodad";
-import { IVector2, IVector3 } from "utilities/math/IVector";
+import { IVector3 } from "utilities/math/IVector";
 export declare enum CraftStatus {
     Invalid = 0,
     Failed = 1,
@@ -22,13 +22,19 @@ export declare enum WeightType {
     Min = 2,
     Max = 3
 }
-export interface RequirementInfo extends IVector2, IVector3 {
-    requirementsMet: boolean;
-    isLava?: boolean;
-    doodadRequirementMet: boolean;
-    fireRequirementMet: boolean;
-    requiredDoodad: Doodad | undefined;
+export declare enum RequirementStatus {
+    NotRequired = 0,
+    Missing = 1,
+    RequirementMet = 2
+}
+export interface IRequirementInfo {
+    requirements: RequirementStatus;
+    fireRequirement: RequirementStatus;
+    doodadRequirement: RequirementStatus;
+    doodadsRequired: Array<DoodadType | DoodadTypeGroup>;
     doodadsUsed: IDoodadsUsed[];
+    missingDoodads?: Set<DoodadType | DoodadTypeGroup>;
+    fireSourceLavaPosition?: IVector3;
 }
 export interface IDoodadsUsed {
     doodad: Doodad;

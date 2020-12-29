@@ -178,11 +178,11 @@ export interface IMoveToTileAfterMovementOptions {
     particles?: IRGB;
 }
 export interface IRecipe {
-    baseComponent?: (ItemType | ItemTypeGroup);
+    baseComponent?: ItemType | ItemTypeGroup;
     components: IRecipeComponent[];
     skill: SkillType;
     level: RecipeLevel;
-    requiredDoodad?: DoodadType | DoodadTypeGroup;
+    requiredDoodads?: Array<DoodadType | DoodadTypeGroup>;
     requiresFire?: boolean;
     reputation: number;
 }
@@ -203,6 +203,10 @@ export interface IItemLegendary {
     value: number;
     skill?: SkillType;
     stat?: Stat;
+}
+export interface ILegendary {
+    max: number;
+    float: boolean;
 }
 export declare enum LegendaryType {
     Attack = 0,
@@ -928,7 +932,9 @@ export declare enum ItemType {
     IceWall = 572,
     IceFlooring = 573,
     SnowWall = 574,
-    SnowFlooring = 575
+    SnowFlooring = 575,
+    CalligenousScrap = 576,
+    MagicalExtract = 577
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -1012,7 +1018,8 @@ export declare enum ItemTypeGroup {
     FrozenWater = 878,
     RawFish = 879,
     Insect = 880,
-    All = 881,
-    Last = 882
+    Upgrading = 881,
+    All = 882,
+    Last = 883
 }
 export {};

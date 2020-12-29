@@ -19,7 +19,7 @@ import { EquipType, SkillType } from "entity/IHuman";
 import Player from "entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { ITemperatureSource } from "game/temperature/ITemperature";
-import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, IMoveToTileOptions, ItemType, LegendaryType, TatteredMap } from "item/IItem";
+import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, ILegendary, IMoveToTileOptions, ItemType, LegendaryType, TatteredMap } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { IVector3 } from "utilities/math/IVector";
@@ -131,7 +131,13 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     initializeMap(reinitialize: boolean, player?: Player): void;
     setQuality(human: Human | undefined, quality?: Quality): void;
     getAcceptableLegendaryTypes(): LegendaryType[];
-    setLegendary(bypassType?: boolean): void;
+    /**
+     * Sets the legendary type for an item
+     * @param bypassType Set to true if you want to keep the current legendary type of the item
+     * @param bypassValue Set to true if you want to keep the current legendary value of the item
+     * @returns The maximum value the legendary value can be for the accepted or bypassed type and if the value is a float value or integer
+     */
+    setLegendary(bypassType?: boolean, bypassValue?: boolean): undefined | ILegendary;
     acquireNotify(player: Player): void;
     getStokeFireValue(): number | undefined;
     getStokeFireBonusValue(): number;

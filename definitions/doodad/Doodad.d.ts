@@ -142,6 +142,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     isDangerous(human: Human): boolean;
     getDamage(human: Human, equipType?: EquipType): number;
     getOwner(): Player | undefined;
+    unhitch(): void;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): number;
     addTreasureChestLoot(): void;

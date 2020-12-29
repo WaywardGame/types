@@ -16,7 +16,7 @@ import EventEmitter from "event/EventEmitter";
 import { Quality } from "game/IObject";
 import Island from "game/Island";
 import { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, ItemType, ItemTypeGroup } from "item/IItem";
-import { CraftStatus, RequirementInfo, WeightType } from "item/IItemManager";
+import { CraftStatus, IRequirementInfo, WeightType } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation, { TextContext } from "language/Translation";
@@ -107,7 +107,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     spawn(terrainType: TerrainType, x: number, y: number, z: number): void;
     getTileContainer(x: number, y: number, z: number, tile?: ITile): IContainer;
     getRandomQuality(bonusQuality?: number): Quality;
-    hasAdditionalRequirements(actionOrHuman: IActionHandlerApi<Player | NPC> | Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
+    hasAdditionalRequirements(actionOrHuman: IActionHandlerApi<Player | NPC> | Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): IRequirementInfo;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     craft(action: IActionHandlerApi<Player | NPC>, itemType: ItemType, itemsToRequire: Item[], itemsToConsume: Item[], baseItem?: Item): CraftStatus;
