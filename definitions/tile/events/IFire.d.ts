@@ -10,13 +10,13 @@
  */
 export declare enum FireStage {
     Embers = 0,
-    AlmostExtinguished = 1,
-    Struggling = 2,
-    Thriving = 3,
-    Healthy = 4,
-    Raging = 5
+    AlmostExtinguished = 150,
+    Struggling = 300,
+    Thriving = 450,
+    Healthy = 600,
+    Raging = 750
 }
 export declare module FireStage {
-    function get(decay: number): FireStage;
+    function get(decay: number): number;
     function getTemperature(stage: FireStage): number;
 }

@@ -350,7 +350,9 @@ export declare enum BookType {
     PowderyCatalog = 11,
     OnWaterAndHydration = 12,
     TravelingBySea = 13,
-    TheSolution = 14
+    TheSolution = 14,
+    TheSlimeRancher = 15,
+    DarknessCalls = 16
 }
 export interface TatteredMap extends IVector3 {
     reinitialize?: boolean;
