@@ -13,5 +13,5 @@ import { ITileAdaptation } from "renderer/TileAdaptors";
 import Default from "renderer/tileAdaptors/Default";
 import { TerrainType } from "tile/ITerrain";
 export default class Floor extends Default {
-    adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
+    adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation, debug?: boolean): void;
 }

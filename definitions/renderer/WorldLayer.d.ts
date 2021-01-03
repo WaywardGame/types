@@ -38,7 +38,7 @@ export default class WorldLayer implements IWorldLayer {
     isDoodadAnimationDisabled(terrain: TerrainData): boolean;
     setTile(x: number, y: number, terrainType: TerrainType, terrainMasks?: TerrainMask): void;
     updateAll(): void;
-    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean, updateNeighbors?: boolean, flushImmediate?: boolean, debug?: boolean): void;
+    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean, updateNeighbors?: boolean, flushImmediate?: boolean, recentlyUpdatedFiles?: Set<string>, debug?: boolean): void;
     private mapIndex;
     private setTileInternal;
 }

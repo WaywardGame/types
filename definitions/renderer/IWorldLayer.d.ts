@@ -36,7 +36,7 @@ export interface IWorldLayer {
     getTileDecoration(x: number, y: number): number;
     setTile(x: number, y: number, terrainType: TerrainType | undefined, terrainMasks?: TerrainMask): void;
     updateAll(): void;
-    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean, updateNeighbors?: boolean, flushImmediate?: boolean, debug?: boolean): void;
+    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean, updateNeighbors?: boolean, flushImmediate?: boolean, recentlyUpdatedFiles?: Set<string>, debug?: boolean): void;
     delete(): void;
 }
 export default IWorldLayer;
