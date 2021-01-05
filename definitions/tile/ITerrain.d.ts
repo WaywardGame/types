@@ -16,6 +16,7 @@ import Creature from "entity/creature/Creature";
 import { SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { Quality } from "game/IObject";
+import { MapTile } from "game/mapping/IMapTile";
 import { IContainer, ItemType } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
 import TileEvent from "tile/TileEvent";
@@ -121,6 +122,7 @@ export declare enum TileTemplateType {
     SnowHouses = 10
 }
 export interface ITemplate {
+    mapTile?: MapTile;
     terrainTypes: Record<string, TerrainType>;
     terrain: string[];
     doodadTypes?: Record<string, DoodadType | ITemplateDoodad>;

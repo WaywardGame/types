@@ -16,5 +16,5 @@ export default abstract class ListInspection<I extends Inspection<any>> extends 
     constructor(inspectType: InspectType, ...inspections: I[]);
     get(context: InfoProviderContext): Translation;
     getId(): string;
-    protected getInspectionTranslation(_context: InfoProviderContext): Translation;
+    protected getInspectionTranslation(inspection: I, context: InfoProviderContext): Translation;
 }

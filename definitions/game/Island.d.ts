@@ -12,6 +12,7 @@ import Doodad from "doodad/Doodad";
 import { ICorpse } from "entity/creature/corpse/ICorpse";
 import Creature from "entity/creature/Creature";
 import NPC from "entity/npc/NPC";
+import DrawnMap from "game/mapping/DrawnMap";
 import TemperatureManager from "game/temperature/TemperatureManager";
 import Item from "item/Item";
 import { ITileContainer, ITileData } from "tile/ITerrain";
@@ -44,6 +45,7 @@ export default class Island {
     tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;
     tileEvents: SaferArray<TileEvent>;
     time: TimeManager;
+    treasureMaps: DrawnMap[];
     version: string;
     wellData: SaferNumberIndexedObject<IWell>;
     seeds: ISeeds;

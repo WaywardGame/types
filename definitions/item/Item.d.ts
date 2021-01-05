@@ -19,7 +19,7 @@ import { EquipType, SkillType } from "entity/IHuman";
 import Player from "entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { ITemperatureSource } from "game/temperature/ITemperature";
-import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, ILegendary, IMoveToTileOptions, ItemType, LegendaryType, TatteredMap } from "item/IItem";
+import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, ILegendary, IMoveToTileOptions, ItemType, LegendaryType } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { IVector3 } from "utilities/math/IVector";
@@ -43,7 +43,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     quality: Quality | undefined;
     quickSlot: number | undefined;
     renamed: string | ISerializedTranslation | undefined;
-    tatteredMap?: TatteredMap;
+    map?: [island: string, id: number];
     tradedFrom?: string[];
     type: ItemType;
     used?: IItemUsed;
@@ -124,11 +124,14 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     isMoving(): boolean;
     getMovementProgress(timeStamp: number): number;
     /**
-     * Set the coordinates for a tattered or drawn map, or set it to reinitialize later.
-     * @param reinitialize Set to true if you want the map to require decoding before use (the coords will get generated at that point).
-     * @param player The player that decoded the map.
+     * If this item is a tattered map or a drawn map, this will return its associated `DrawnMap` instance.
      */
-    initializeMap(reinitialize: boolean, player?: Player): void;
+    getDrawnMap(): import("../game/mapping/DrawnMap").default | undefined;
+    /**
+     * Randomises which map is associated with this item.
+     * @param chanceOfGivingCompletedMap By default, 10% chance of becoming associated with an already-completed map.
+     */
+    randomizeMap(chanceOfGivingCompletedMap?: number): void;
     setQuality(human: Human | undefined, quality?: Quality): void;
     getAcceptableLegendaryTypes(): LegendaryType[];
     /**

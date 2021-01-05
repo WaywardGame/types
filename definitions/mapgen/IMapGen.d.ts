@@ -55,5 +55,6 @@ export interface IMapGenGenerateOutput {
     templateSpawns: TemplateSpawns;
 }
 export declare type CaveSpawns = Array<[number, number]>;
-export declare type TemplateSpawns = Array<[TileTemplateType, number, number, number, ITemplateOptions?]>;
+export declare type TemplateSpawn = [TileTemplateType, number, number, number, ITemplateOptions?];
+export declare type TemplateSpawns = TemplateSpawn[];
 export default IMapGen;

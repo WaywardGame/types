@@ -32,6 +32,9 @@ export interface IInjectionApi<T extends {
      */
     cancelled: boolean;
 }
+declare type InjectionMethod<T extends {
+    [key in K]: AnyFunction;
+}, K extends keyof T> = T[K] extends (...args: infer A) => any ? (api: IInjectionApi<T, K>, ...args: A) => any : never;
 export declare enum InjectionPosition {
     /**
      * This injection will be called before the target method.
@@ -44,7 +47,7 @@ export declare enum InjectionPosition {
 }
 export declare function Inject<T extends {
     [key in K]: AnyFunction;
-}, K extends keyof T>(injectInto: AnyClass<T>, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol) => void;
+}, K extends keyof T>(injectInto: AnyClass<T>, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => void;
 /**
  * Classes decorated with `Injector` will have their methods automatically injected using `inject`.
  *
@@ -76,3 +79,4 @@ export declare module Injector {
      */
     function deregister<T>(injectorClass: Class<T>, instance: T): boolean;
 }
+export {};

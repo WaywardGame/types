@@ -97,7 +97,8 @@ export declare enum Types {
     TileEvent = 36,
     ArrayV3 = 37,
     EndMarker = 38,
-    ReplayLogEntry = 39
+    ReplayLogEntry = 39,
+    DrawnMap = 40
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_SAVE_PROPERTY_FLAGS: unique symbol;

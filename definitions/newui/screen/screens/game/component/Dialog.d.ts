@@ -15,8 +15,10 @@ import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshable } from "newui/component/Refreshable";
+import Text from "newui/component/Text";
 import { DialogId, Edge, IDialogDescription } from "newui/screen/screens/game/Dialogs";
 import { IDialog } from "newui/screen/screens/game/IGameScreenApi";
+import Log from "utilities/Log";
 import Vector2 from "utilities/math/Vector2";
 import { IStringSection } from "utilities/string/Interpolator";
 /**
@@ -70,6 +72,10 @@ interface IDialogEvents extends Events<Component> {
      * @param panel The panel that was switched to
      */
     switchPanel(id: string | number, panel: Component): any;
+    /**
+     * Emitted after all fields decorated with `@Save` are loaded
+     */
+    load(): any;
 }
 export default abstract class Dialog extends Component implements IDialog {
     private static topOrder;
@@ -77,6 +83,7 @@ export default abstract class Dialog extends Component implements IDialog {
     static makeTopDialog(element: HTMLElement): void;
     event: IEventEmitter<this, IDialogEvents>;
     readonly id: DialogId;
+    readonly log: Log;
     /**
      * The positions of each edge of the dialog. Stored as percentages.
      */
@@ -290,7 +297,7 @@ export declare class Header extends Handle implements IRefreshable {
     event: IEventEmitter<this, IHeaderEvents>;
     readonly backButton: Button;
     readonly optionsButton: Button;
-    private readonly text;
+    readonly text: Text;
     constructor();
     setText(text: TranslationGenerator): void;
     refresh(): this;

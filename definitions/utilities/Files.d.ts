@@ -13,6 +13,7 @@ declare module Files {
     function getText(path: string): Promise<string>;
     function getJson<T>(path: string): Promise<T>;
     function getArrayBuffer(path: string): Promise<ArrayBuffer>;
+    function getImage(path: string): Promise<HTMLImageElement>;
     function getImageDataURL(path: string): Promise<string | undefined>;
     function download(name: string, data: any, stringify?: boolean, pretty?: boolean): void;
     function upload(e: Event, parse?: boolean): Promise<any>;

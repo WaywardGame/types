@@ -30,7 +30,6 @@ import IWorld from "renderer/IWorld";
 import { RenderFlag } from "renderer/IWorldRenderer";
 import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
-import Vector3 from "utilities/math/Vector3";
 /**
  * A decorator for registering a hook method on an `IHookHost`.
  * @param priority The priority of this hook method. Defaults to `HookPriority.Normal`
@@ -175,12 +174,6 @@ export interface IHookHost {
      * @param owner The human which the creature is tamed for
      */
     onCreatureTamed?(creature: Creature, owner: Player): void;
-    /**
-     * Called when a human digs up treasure.
-     * @param human The human that dug up treasure
-     * @param treasureTile The tile the human dug up treasure at
-     */
-    onDigTreasure?(human: Human, treasureTile: Vector3): void;
     /**
      * Called when the language is changed
      * @param languageName The name of the newly selected language

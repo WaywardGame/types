@@ -29,6 +29,7 @@ import { BiomeType } from "game/IBiome";
 import { IObjectDescription } from "game/IObject";
 import Item from "item/Item";
 import Recipe from "item/recipe/Recipe";
+import Message from "language/dictionary/Message";
 import { IModdable } from "mod/ModRegistry";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
@@ -63,6 +64,14 @@ export interface IContainer extends IContainable {
 }
 export interface IItemDescription extends IObjectDescription, IModdable {
     durability?: number;
+    /**
+     * An amount of durability that the item can start with lost. Defaults to 3
+     */
+    durabilityDistribution?: number;
+    /**
+     * A decimal number between 0 and 1 representing how much of the item's durability can already be gone when the item is created
+     */
+    durabilityModifierAtStart?: number;
     onBurn?: ItemType[];
     onUse?: Record<number, any>;
     equipEffect?: EquipEffects;
@@ -142,6 +151,13 @@ export interface IItemDescription extends IObjectDescription, IModdable {
      * Array of status effects that using this item (via ConsumeItem) will cure.
      */
     canCureStatus?: StatusType[];
+    /**
+     * Custom messages for specific items
+     */
+    messages?: {
+        nearDestroyed?: Message;
+        destroyed?: Message;
+    };
     /**
      * The level at which the items performs a certain action. The higher the number, the better.
      * This impacts things like stamina usage, success rate, resource amount, etc.
@@ -233,7 +249,6 @@ export interface IItemUsed {
     usedBy?: string[];
     recipe?: ItemType;
     skill?: SkillType;
-    map?: IVector3;
 }
 export interface ILiquid {
     milk: ItemType;

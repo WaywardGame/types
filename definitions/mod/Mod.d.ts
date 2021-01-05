@@ -33,7 +33,6 @@ import { RenderFlag } from "renderer/IWorldRenderer";
 import { ITile } from "tile/ITerrain";
 import Log from "utilities/Log";
 import { Direction } from "utilities/math/Direction";
-import Vector3 from "utilities/math/Vector3";
 declare abstract class Mod extends BaseMod implements IHookHost {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
@@ -76,7 +75,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onCreatureDeath(creature: Creature): void;
     onCreatureSpawn(creature: Creature): void;
     onCreatureTamed(creature: Creature, owner: Player): void;
-    onDigTreasure(human: Human, treasureTile: Vector3): void;
     onLanguageChange(languageName: string): void;
     onMove(player: Player, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     onMoveDirectionUpdate(human: Human, direction: Direction): void;

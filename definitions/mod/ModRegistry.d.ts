@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Music, SfxType } from "audio/IAudio";
-import { Command } from "command/ICommand";
+import { Command, CommandCallback } from "command/ICommand";
 import { DoodadType, DoodadTypeGroup, IDoodadDescription, IDoodadGroupDescription } from "doodad/IDoodad";
 import { ActionType, IActionDescription } from "entity/action/IAction";
 import { ICorpseDescription } from "entity/creature/corpse/ICorpse";
@@ -48,6 +48,7 @@ import { DialogId, IDialogDescription } from "newui/screen/screens/game/Dialogs"
 import { IMenuBarButtonDescription, MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 import { IStatDisplayDescription } from "newui/screen/screens/game/static/stats/IStatDisplayDescription";
 import { HelpArticle, IHelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
+import { ModOptionSectionInitializer } from "newui/screen/screens/menu/menus/options/TabMods";
 import { ITerrainDecorationBase, TerrainDecoration } from "renderer/Decorations";
 import { TileLayerType } from "renderer/IWorldRenderer";
 import { IOverlayDescription } from "renderer/Overlays";
@@ -542,13 +543,13 @@ declare module Register {
      *
      * This decorator should be used on a valid `CommandCallback` method.
      */
-    function command(name: string): (target: any, key: string) => void;
+    function command(name: string): (target: any, key: string, descriptor: TypedPropertyDescriptor<CommandCallback>) => void;
     /**
      * Registers an options section.
      *
      * This decorator should be used on a valid `ModOptionSectionInitializer` method.
      */
-    function optionsSection(target: any, key: string): void;
+    function optionsSection(target: any, key: string, descriptor: TypedPropertyDescriptor<ModOptionSectionInitializer>): void;
 }
 export default Register;
 export declare const SYMBOL_REGISTRATION_ID: unique symbol;

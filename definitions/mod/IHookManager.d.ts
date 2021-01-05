@@ -17,7 +17,6 @@ export declare enum Hook {
     OnCreatureDeath = "onCreatureDeath",
     OnCreatureSpawn = "onCreatureSpawn",
     OnCreatureTamed = "onCreatureTamed",
-    OnDigTreasure = "onDigTreasure",
     OnDisplayMessage = "onDisplayMessage",
     OnDoodadSpawn = "onDoodadSpawn",
     OnEntityKill = "onEntityKill",

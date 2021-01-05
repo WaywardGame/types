@@ -9,10 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Human from "entity/Human";
-import Player from "entity/player/Player";
 import { Events, IEventEmitter } from "event/EventEmitter";
-import { IMapRequest } from "game/IGame";
+import DrawnMap from "game/mapping/DrawnMap";
 import { BookType } from "item/IItem";
+import Item from "item/Item";
 import { IHookHost } from "mod/IHookHost";
 import Component from "newui/component/Component";
 import { IBindHandlerApi } from "newui/input/Bind";
@@ -66,7 +66,7 @@ export default class GameScreen extends Screen implements IHookHost {
     onGameStart(_isLoadingSave: boolean, _playedCount: number): void;
     onGameTickEnd(): void;
     onOpenBook(human: Human, book: BookType): void;
-    onReadMap(player: Player, mapRequest: IMapRequest): void;
+    protected onReadMap1(map: DrawnMap, item: Item, reader: Human): void;
     protected onDie(): void;
     protected onRespawn(): void;
     protected onZoom(api: IBindHandlerApi): boolean;

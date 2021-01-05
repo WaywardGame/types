@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { IRange } from "utilities/math/Range";
+export declare type WeightedOption<T> = [number, T];
 export interface IRandomPushed {
     seed: number;
     history?: IRandomHistory[];
@@ -80,7 +81,7 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
     /**
      * Returns a random T from the given choices, where each choice is weighted by a number. Higher numbers = higher chance.
      */
-    weightedChoice<T>(choices: Array<[number, T]>): T;
+    weightedChoice<T>(choices: Array<WeightedOption<T>>): T;
     withGenerator<T>(generator: G, execute: () => T): T;
 }
 /**
