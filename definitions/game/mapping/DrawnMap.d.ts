@@ -50,8 +50,11 @@ export interface ITreasureMapGenerationSettings {
      * The number of treasure maps an island can have
      */
     treasureMaps: IRange;
+    /**
+     * A decimal chance of whether treasures should be spawned in caves
+     */
+    caveTreasureChance: number;
 }
-export declare const DRAWN_MAP_DEFAULT_RADIUS = 20;
 export interface IDrawnMapEvents {
     /**
      * Emitted when this map is read by a human.

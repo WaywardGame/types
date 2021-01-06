@@ -98,6 +98,7 @@ declare global {
     const gameVersionMajor: number;
     const gameVersionMinor: number;
     const gameVersionPatch: number;
+    const gameVersionName: string;
     const isEdge: boolean;
     const isFirefox: boolean;
     const overlayWorks: boolean | undefined;
