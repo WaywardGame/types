@@ -247,7 +247,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
     emitTileUpdate(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
     packGround(x: number, y: number, z: number): void;
-    getRandomQuality(bonusQuality?: number): Quality.None | Quality.Remarkable | Quality.Exceptional | Quality.Legendary;
+    getRandomQuality(bonusQuality?: number): Quality.None | Quality.Superior | Quality.Remarkable | Quality.Exceptional;
     getQualityDurabilityBonus(quality: Quality, itemDurability: number, getMax?: boolean): number;
     doLavaEvents(x: number, y: number, z: number): void;
     isFlammable(x: number, y: number, z: number): boolean;

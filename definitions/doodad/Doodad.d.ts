@@ -18,7 +18,7 @@ import EventEmitter from "event/EventEmitter";
 import { TileUpdateType } from "game/IGame";
 import { IObject, Quality } from "game/IObject";
 import { ITemperatureSource } from "game/temperature/ITemperature";
-import { IContainer, IItemLegendary, ItemType } from "item/IItem";
+import { IContainer, IItemMagicalProperty, ItemType, MagicalPropertyType } from "item/IItem";
 import Item from "item/Item";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
@@ -85,7 +85,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     readonly x: number;
     readonly y: number;
     readonly z: number;
-    legendary?: IItemLegendary | undefined;
+    magicalProperties?: IItemMagicalProperty[] | undefined;
     step: number | undefined;
     hitchedCreature?: number;
     tradedFrom?: string[];
@@ -155,7 +155,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     getGrowthParticles(): IRGB | undefined;
     increaseFertility(): boolean;
     /**
-     * Return extra trap damage based on player multiplier and legendary status
+     * Return extra trap damage based on player multiplier and magical status
      */
     getTrapDamageBonus(baseDamage: number, human?: Human): number;
     /**
@@ -177,6 +177,12 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * @returns A number (possibly 0 if no quality or action level).
      */
     getItemUseBonus(action: ActionType): number;
+    /**
+     * Check to see if a doodad has a specific magical property, then return its values
+     * @param magicalPropertyType Set to type of magical property to look for
+     * @returns The IItemMagicalProperty on a match, undefined if no match
+     */
+    getMagicalProperty(magicalPropertyType: MagicalPropertyType): IItemMagicalProperty | undefined;
     onUnserialized(): void;
     /**
      * @deprecated

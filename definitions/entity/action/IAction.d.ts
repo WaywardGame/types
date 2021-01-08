@@ -175,9 +175,9 @@ export interface IActionApi<E extends Entity = Entity> {
     setUpdateView(updateFov?: boolean): this;
     setUpdateRender(): this;
     setUpdateTablesAndWeight(): this;
-    setStaminaReduction(skill?: SkillType, actionLevel?: number): this;
+    setStaminaReduction(skill?: SkillType, actionTier?: number): this;
     addSkillGains(...skills: Array<[SkillType, number?, number?]>): this;
-    addSkillGains(skill: SkillType, amount?: number, actionLevel?: number): this;
+    addSkillGains(skill: SkillType, amount?: number, actionTier?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
     cancelPaddling(item: Item): this;

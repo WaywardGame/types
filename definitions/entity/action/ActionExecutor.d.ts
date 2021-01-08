@@ -70,10 +70,10 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setUpdateView(updateFov?: boolean): this;
     setUpdateRender(): this;
     setUpdateTablesAndWeight(): this;
-    setStaminaReduction(reduction?: SkillType, actionLevel?: number): this;
+    setStaminaReduction(reduction?: SkillType, actionTier?: number): this;
     setReputationChange(amount: number): this;
     addSkillGains(...skills: Array<[SkillType, number?, number?]>): this;
-    addSkillGains(skill: SkillType, amount?: number, actionLevel?: number): this;
+    addSkillGains(skill: SkillType, amount?: number, actionTier?: number): this;
     setMilestone(milestone: Milestone, data?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;

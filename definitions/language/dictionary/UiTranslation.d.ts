@@ -76,7 +76,7 @@ declare enum UiTranslation {
     GameDialogQuestsCompletedQuests = 61,
     GameDialogQuestsCompleteQuest = 62,
     GameTooltipShowMoreInformation = 63,
-    GameTooltipLegendaryMaxWeightLabel = 64,
+    GameTooltipMagicalMaxWeightLabel = 64,
     GameStatsPercentage = 65,
     GameStatsStatAttack = 66,
     GameStatsStatGeneric = 67,

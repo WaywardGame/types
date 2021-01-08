@@ -46,11 +46,7 @@ export interface IConstructedInfo {
 export interface IItemOld {
     equipped?: EquipType;
     equippedPid?: number;
-}
-export interface IItemLegendaryOld {
-    legendary?: {
-        skill: SkillType;
-    };
+    legendary?: IItemMagicalProperty;
 }
 export interface IContainable {
     containedWithin?: IContainer;
@@ -162,7 +158,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
      * The level at which the items performs a certain action. The higher the number, the better.
      * This impacts things like stamina usage, success rate, resource amount, etc.
      */
-    actionLevel?: OptionalDescriptions<ActionType, number>;
+    actionTier?: OptionalDescriptions<ActionType, number>;
     recipeCache?: ItemType[];
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
@@ -214,17 +210,17 @@ export interface IRanged {
     range: number;
     attack: number;
 }
-export interface IItemLegendary {
-    type: LegendaryType;
+export interface IItemMagicalProperty {
+    type: MagicalPropertyType;
     value: number;
     skill?: SkillType;
     stat?: Stat;
 }
-export interface ILegendary {
+export interface IMagicalStats {
     max: number;
     float: boolean;
 }
-export declare enum LegendaryType {
+export declare enum MagicalPropertyType {
     Attack = 0,
     Defense = 1,
     Illumination = 2,

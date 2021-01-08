@@ -16,7 +16,7 @@ import EventEmitter from "event/EventEmitter";
 import { Quality } from "game/IObject";
 import Island from "game/Island";
 import { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, ItemType, ItemTypeGroup } from "item/IItem";
-import { CraftStatus, IRequirementInfo, WeightType } from "item/IItemManager";
+import { CraftStatus, IAddToContainerOptions, IRequirementInfo, WeightType } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation, { TextContext } from "language/Translation";
@@ -62,7 +62,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
     getContainerReference(container: IContainer | undefined, parentObject?: any, showWarnings?: boolean): ContainerReference;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
-    addToContainerInternal(item: Item, container: IContainer, movingMultiple?: boolean, skipMessage?: boolean, updateTables?: boolean): boolean;
+    addToContainerInternal(item: Item, container: IContainer, options?: IAddToContainerOptions): boolean;
     removeContainerItems(container: IContainer, removeContainedItems?: boolean): void;
     exists(item: Item): boolean;
     remove(item: Item, removeContainedItems?: boolean): void;
@@ -88,7 +88,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     isContainer(obj: unknown): obj is IContainer;
     moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: Quality): Item[];
     computeContainerWeight(container: IContainer, player?: Player): number;
-    getLegendaryWeightCapacity(container: IContainer): number;
+    getMagicalWeightCapacity(container: IContainer): number;
     moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, filterText?: string | undefined, onMoveItem?: (item: Item) => void): Item[];
     moveToContainer(human: Human | undefined, item: Item, container: IContainer): boolean;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: Item): boolean;

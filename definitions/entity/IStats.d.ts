@@ -37,7 +37,7 @@ export declare enum Stat {
     Reputation = 9,
     /**
      * A combination of `Stat.Hunger` + `Stat.Thirst`
-     * Does not exist on `Player` instances. Used for item legendaries.
+     * Does not exist on `Player` instances. Used for magical items.
      */
     Metabolism = 10,
     /**

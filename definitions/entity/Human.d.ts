@@ -58,19 +58,19 @@ export default abstract class Human extends Entity {
     getEquipEffect<E extends EquipEffect>(type: E): FirstIfOne<EquipEffectByType<E>>;
     getReputation(): number;
     /**
-     * @returns The value of the given skill, the sum of the base value and any bonuses from legendary equipment
+     * @returns The value of the given skill, the sum of the base value and any bonuses from magical equipment
      */
     getSkill(skill: SkillType): number;
     /**
-     * @returns the "base value" of the skill (ignoring any bonuses applied by legendary equipment)
+     * @returns the "base value" of the skill (ignoring any bonuses applied by magical equipment)
      */
     getSkillCore(skill: SkillType): number;
     /**
-     * @returns the skill bonus applied by legendary equipment
+     * @returns the skill bonus applied by magical equipment
      */
     getSkillBonus(skill: SkillType): number;
     /**
-     * Sets the "base value" of the skill (ignoring any bonuses applied by legendary equipment)
+     * Sets the "base value" of the skill (ignoring any bonuses applied by magical equipment)
      * @param skillType The skill to set the base value of.
      * @param value The value (between 0 and 100) to set the skill to.
      */
@@ -82,7 +82,7 @@ export default abstract class Human extends Entity {
     /**
      * @returns Whether the skill of this human is more than or equal to a random number between `0` and the value of `check`.
      */
-    skillAndActionLevelCheck(skill: SkillType, check: number, actionLevel?: number): boolean;
+    skillAndActionTierCheck(skill: SkillType, check: number, actionTier?: number): boolean;
     isResting(): boolean;
     isGhost(): boolean;
     isRestingCancelled(): boolean;
@@ -104,7 +104,7 @@ export default abstract class Human extends Entity {
     staminaReduction(skill?: SkillType, level?: number): void;
     updateReputation(reputation: number): void;
     setPaddling(paddling: boolean, itemId: number): void;
-    skillGain(skillType: SkillType, mod?: number, actionLevel?: number, bypass?: boolean): void;
+    skillGain(skillType: SkillType, mod?: number, actionTier?: number, bypass?: boolean): void;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     getBurnDamage(fireType: FireType, skipParry?: boolean, equipType?: EquipType): number;
     /**

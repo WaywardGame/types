@@ -243,11 +243,11 @@ export default class InGameScreen extends BaseScreen {
     private readonly onInterruptClosed;
     private getHoveredItem;
     /**
-     * Get a number based on an item's legendary type/skill/stat in order.
+     * Get a number based on an item's magical type/skill/stat in order.
      * @param item An item to sort.
-     * @returns A number based on the legendary type/skill/stat.
+     * @returns A number based on the magical type/skill/stat.
      */
-    private getLegendarySortOrder;
+    private getMagicalSortOrder;
     private sort;
     private sortFallback;
     private getSortValue;

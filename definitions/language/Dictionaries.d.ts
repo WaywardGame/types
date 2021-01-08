@@ -30,7 +30,7 @@ import { Challenge } from "game/options/modifiers/challenge/IChallenge";
 import { MilestoneModifierGroup } from "game/options/modifiers/milestone/MilestoneModifier";
 import { PartOfDay } from "game/TimeManager";
 import { WorldZ } from "game/WorldZ";
-import { BookType, EquipEffect, ItemType, ItemTypeGroup, LegendaryType } from "item/IItem";
+import { BookType, EquipEffect, ItemType, ItemTypeGroup, MagicalPropertyType } from "item/IItem";
 import { CraftEfficacy } from "item/recipe/Crafter";
 import { GameEndMessage } from "language/dictionary/GameEndMessage";
 import HumanName from "language/dictionary/HumanName";
@@ -95,8 +95,8 @@ export declare enum Dictionary {
     Item = 31,
     ItemGroup = 32,
     JoinServerRetryReason = 33,
-    LegendaryType = 34,
-    Macro = 35,
+    Macro = 34,
+    MagicalPropertyType = 35,
     Message = 36,
     MessagesDefaultFilter = 37,
     MessagesTimestampMode = 38,
@@ -175,8 +175,8 @@ declare const dictionaries: {
     31: typeof ItemType;
     32: typeof ItemTypeGroup;
     33: typeof JoinServerRetryReason;
-    34: typeof LegendaryType;
-    35: symbol;
+    34: symbol;
+    35: typeof MagicalPropertyType;
     36: typeof Message;
     37: typeof MessageFilterDefault;
     38: typeof MessageTimestamp;

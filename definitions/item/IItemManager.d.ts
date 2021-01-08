@@ -40,3 +40,14 @@ export interface IDoodadsUsed {
     doodad: Doodad;
     group: DoodadType | DoodadTypeGroup;
 }
+export interface IAddToContainerOptions {
+    movingMultiple?: boolean;
+    skipMessage?: boolean;
+    skipUpdateTables?: boolean;
+    skipTileUpdate?: boolean;
+}
+export interface IPlaceOnTileOptions {
+    force?: boolean;
+    skipMessage?: boolean;
+    skipTileUpdate?: boolean;
+}

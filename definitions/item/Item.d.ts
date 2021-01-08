@@ -19,7 +19,8 @@ import { EquipType, SkillType } from "entity/IHuman";
 import Player from "entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { ITemperatureSource } from "game/temperature/ITemperature";
-import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, ILegendary, IMoveToTileOptions, ItemType, LegendaryType } from "item/IItem";
+import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemMagicalProperty, IItemUsed, IMagicalStats, IMoveToTileOptions, ItemType, MagicalPropertyType } from "item/IItem";
+import { IPlaceOnTileOptions } from "item/IItemManager";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { IVector3 } from "utilities/math/IVector";
@@ -34,7 +35,8 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     equippedType?: EntityType;
     id: number;
     itemOrders?: number[];
-    legendary?: IItemLegendary;
+    magicalProperties?: IItemMagicalProperty[];
+    map?: [island: string, id: number];
     maxDur: number;
     minDur: number;
     order: number;
@@ -43,7 +45,6 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     quality: Quality | undefined;
     quickSlot: number | undefined;
     renamed: string | ISerializedTranslation | undefined;
-    map?: [island: string, id: number];
     tradedFrom?: string[];
     type: ItemType;
     used?: IItemUsed;
@@ -76,14 +77,14 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
      * @param showCount If `true`, adds the passed count to the translation, using `MiscTranslation.CountThing`.
      * @param showQuality If `true`, shows the quality of the item.
      * @param showRenamedQuotes If `true`, show the (by default) "" quotes surrounding renamed items.
-     * @param showLegendaryType If `true`, show the legendary type suffix.
+     * @param showMagicalType If `true`, show the magical type suffix.
      *
      * Examples:
      * - `item.getName()` // "a stone axe"
      * - `item.getName(false)` // "stone axe"
      * - `item.getName(undefined, 3)` // "stone axes"
      */
-    getName(article?: boolean, count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showLegendaryType?: boolean): Translation;
+    getName(article?: boolean, count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showMagicalType?: boolean): Translation;
     description(): IItemDescription | undefined;
     isTransient(): boolean;
     isValid(): boolean;
@@ -119,7 +120,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: Player): Creature | undefined;
     getPoint(): IVector3 | undefined;
     dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
-    placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
+    placeOnTile(x: number, y: number, z: number, options?: IPlaceOnTileOptions): boolean;
     moveToTile(options: IMoveToTileOptions): void;
     isMoving(): boolean;
     getMovementProgress(timeStamp: number): number;
@@ -133,14 +134,22 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
      */
     randomizeMap(chanceOfGivingCompletedMap?: number): void;
     setQuality(human: Human | undefined, quality?: Quality): void;
-    getAcceptableLegendaryTypes(): LegendaryType[];
+    getValidMagicalProperties(): MagicalPropertyType[];
     /**
-     * Sets the legendary type for an item
-     * @param bypassType Set to true if you want to keep the current legendary type of the item
-     * @param bypassValue Set to true if you want to keep the current legendary value of the item
-     * @returns The maximum value the legendary value can be for the accepted or bypassed type and if the value is a float value or integer
+     * Check to see if an item has a specific magical property, then return its values
+     * @param magicalPropertyType Set to type of magical property to look for
+     * @returns The IItemMagicalProperty on a match, undefined if no match
      */
-    setLegendary(bypassType?: boolean, bypassValue?: boolean): undefined | ILegendary;
+    getMagicalProperty(magicalPropertyType: MagicalPropertyType): IItemMagicalProperty | undefined;
+    /**
+     * Sets the magical type for an item
+     * @param bypassIndex Set to the index of item.magicalProperties that you want to modify to get the value from
+     * @param bypassType Set to true if you want to keep the current magical type of the item
+     * @param bypassValue Set to true if you want to keep the current magical value of the item
+     * @param properties Set to the number of properties you want to attempt to give the item
+     * @returns The maximum value the magical value can be for the accepted or bypassed type and if the value is a float value or integer
+     */
+    setMagical(bypassIndex?: number, bypassType?: boolean, bypassValue?: boolean, properties?: number): undefined | IMagicalStats;
     acquireNotify(player: Player): void;
     getStokeFireValue(): number | undefined;
     getStokeFireBonusValue(): number;
@@ -148,15 +157,15 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     /**
      * Gets the worth of an item used for merchant trading. Does not consider batering or modifiers bonuses; use Item.getTraderSellPrice for that.
      * @param player The player that is trading the item for its worth (used for durability calculations).
-     * @param legendaryWorth True if getting the worth including its legendary worth property.
+     * @param magicalWorth True if getting the worth including its magical worth property.
      */
-    getWorth(player: Player | undefined, legendaryWorth?: boolean): number;
+    getWorth(player: Player | undefined, magicalWorth?: boolean): number;
     /**
      * The full price the item will go for when traded to a merchant NPC. Considers modifiers and a player's bartering skill.
      * @param player The player that is trading the item.
-     * @param legendaryWorth True if getting the worth including its legendary worth property.
+     * @param magicalWorth True if getting the worth including its magical worth property.
      */
-    getTraderSellPrice(player: Player | undefined, legendaryWorth?: boolean): number;
+    getTraderSellPrice(player: Player | undefined, magicalWorth?: boolean): number;
     canBurnPlayer(): boolean;
     getBaseDefense(): number;
     getDurabilityCharge(): number;

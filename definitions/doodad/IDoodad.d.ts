@@ -14,7 +14,7 @@ import { ICausesDamage, ICausesStatusEffect } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { ILootItem } from "game/ILoot";
 import { IObjectDescription, IObjectOptions } from "game/IObject";
-import { IItemLegendary, ItemType } from "item/IItem";
+import { IItemMagicalProperty, ItemType } from "item/IItem";
 import Item from "item/Item";
 import { LootGroupType } from "item/LootGroups";
 import { IModdable } from "mod/ModRegistry";
@@ -27,7 +27,7 @@ export interface IDoodadOptions extends IObjectOptions {
     gfx?: number;
     spread?: number;
     weight?: number;
-    legendary?: IItemLegendary;
+    magicalProperties?: IItemMagicalProperty[];
     disassembly?: Item[];
     ownerIdentifier?: string;
     step?: number;
@@ -36,6 +36,7 @@ export interface IDoodadOptions extends IObjectOptions {
 }
 export declare type IDoodadOld = Partial<Doodad> & {
     growInto?: DoodadType;
+    legendary?: IItemMagicalProperty;
 };
 export interface IDoodadGroupDescription {
     /**

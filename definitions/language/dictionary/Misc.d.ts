@@ -82,7 +82,7 @@ export declare enum MiscTranslation {
     CorpseOf = 12,
     CountThing = 13,
     Dependency = 14,
-    ItemLegendary = 15,
+    ItemMagicalProperty = 15,
     ListItemSeparator = 16,
     MacroDoubleInput = 17,
     MacroInputSeparator = 18,
