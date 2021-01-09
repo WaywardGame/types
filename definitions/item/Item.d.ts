@@ -90,7 +90,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     isValid(): boolean;
     isProtected(): boolean;
     getDecayMax(): number;
-    getTotalWeight(player?: Player): number;
+    getTotalWeight(player?: Player, bypassContainer?: boolean): number;
     getDisassemblyWeight(): number;
     isNearby(executor: Entity, allowNearby?: boolean): boolean;
     verifyAndFixItem(): void;
