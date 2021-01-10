@@ -14,8 +14,10 @@ import { RandomInstance } from "utilities/Random";
 import RandomValueGenerator from "utilities/random/RandomValueGenerator";
 export default class RandomItem extends RandomValueGenerator<Array<ItemType | ItemTypeGroup>> {
     private quality;
+    magical: number;
     constructor();
     constructor(random: RandomInstance, ...options: Array<ItemType | ItemTypeGroup>);
     setQuality(quality: Quality): this;
+    setMagical(amount: number): this;
     create(container: IContainer): import("../../../item/Item").default;
 }

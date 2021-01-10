@@ -56,6 +56,8 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     canGrowInCaves?: boolean;
     canTrampleWhenMature?: boolean;
     disableDrop?: boolean;
+    doorToggled?: DoodadType;
+    durability?: number;
     gather?: IDoodadLoot;
     gatherCanHurtHands?: boolean;
     gatherSkillUse?: SkillType;
@@ -64,7 +66,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     growthParticles?: IDoodadParticles;
     harvest?: IDoodadLoot;
     isAnimated?: boolean;
-    isClosedDoor?: boolean;
+    isClosed?: boolean;
     isDoor?: boolean;
     isFence?: boolean;
     isFlammable?: boolean;
@@ -75,8 +77,10 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     isTree?: boolean;
     isWall?: boolean;
     isWaterSource?: boolean;
+    leftOver?: DoodadType;
     lightColor?: IRGB;
     lit?: DoodadType;
+    lockedChest?: ILockedChest;
     particles?: IRGB;
     pickUp?: ItemType[];
     providesFire?: boolean;
@@ -87,13 +91,10 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     spawnOnTerrain?: TerrainType[];
     spreadMax?: number;
     tier?: OptionalDescriptions<DoodadTypeGroup, number>;
-    trapDamage?: number;
-    waterStill?: boolean;
-    durability?: number;
-    leftOver?: DoodadType;
-    lockedChest?: ILockedChest;
     tileLayerType?: TileLayerType;
     tileOverLayerType?: TileLayerType;
+    trapDamage?: number;
+    waterStill?: boolean;
     itemStackOffset?: number;
     itemStackRegion?: IItemStackRegion | ((doodad: Doodad) => IItemStackRegion | undefined);
     getVariationX?(doodad: Doodad, existingVariationX: number): number | undefined;
