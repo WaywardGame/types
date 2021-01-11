@@ -62,6 +62,12 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     constructor(itemType?: ItemType | undefined, quality?: Quality, human?: Human);
     toString(): string;
     /**
+     * Sets the item as magical with a chance based on quality
+     * @param bonus The number that chances get multiplied by, for example, 2 or 3
+     * @returns True if the item has become magical
+     */
+    setMagicalChanceFromQuality(bonus?: number): boolean;
+    /**
      * Changes the item id for this item
      * @param id The new item id
      * @param player The player that has the item

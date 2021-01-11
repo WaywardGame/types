@@ -19,6 +19,7 @@ import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import { FireType, IGameEvents, IMapRequest, IPlayOptions, ITravelingToIslandInfo, ITravelToIslandOptions, IWaterFill, RenderSource, SaveType, TickFlag, TileUpdateType, TurnMode, UpdateRenderFlag } from "game/IGame";
 import { Quality } from "game/IObject";
+import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ChallengeModifiersCollection } from "game/options/modifiers/challenge/ChallengeModifiers";
 import TimeManager from "game/TimeManager";
@@ -78,7 +79,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     mapSize: number;
     mapSizeSq: number;
     readonly voting: VotingManager;
-    readonly milestonesCollection: import("./options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("./milestones/IMilestone").Milestone, import("./options/modifiers/milestone/MilestoneModifier").default>;
+    readonly milestonesCollection: import("./options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<Milestone, import("./options/modifiers/milestone/MilestoneModifier").default>;
     challengeCollection?: ChallengeModifiersCollection;
     cartographyTexture: WebGLTexture;
     debugRenderer: ITextureDebugRenderer;

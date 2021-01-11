@@ -237,7 +237,7 @@ export interface IGameOptionsStat {
      */
     initialValue?: number;
     /**
-     * The max value of the state, or `undefined` if it should be generated randomly
+     * The max value of the stat, or `undefined` if it should be generated randomly
      */
     maxValue?: number;
     /**
@@ -248,6 +248,10 @@ export interface IGameOptionsStat {
      * A bonus value to apply to the stat.
      */
     bonus?: number;
+    /**
+     * The number that stats increase by each gain. By default, this is "1".
+     */
+    gainAmount: number;
 }
 export interface IGameOptionsStatusEffect {
     /**
