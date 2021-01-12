@@ -66,6 +66,10 @@ export declare enum InterruptTranslation {
     Title = 0,
     Description = 1
 }
+export declare enum MagicalPropertyTranslation {
+    Name = 0,
+    Tooltip = 1
+}
 export declare enum MiscTranslation {
     AAndB = 0,
     Aberrant = 1,
@@ -79,25 +83,26 @@ export declare enum MiscTranslation {
     ColorizePrimary = 9,
     ColorizeQuality = 10,
     ColorizeSecondary = 11,
-    CorpseOf = 12,
-    CountThing = 13,
-    Dependency = 14,
-    ItemMagicalProperty = 15,
-    ListItemSeparator = 16,
-    MacroDoubleInput = 17,
-    MacroInputSeparator = 18,
-    MacroTripleInput = 19,
-    NPCName = 20,
-    OwnName = 21,
-    PlayerName = 22,
-    Quality = 23,
-    ReformatSingularNoun = 24,
-    Renamed = 25,
-    Thing = 26,
-    Tilled = 27,
-    Unknown = 28,
-    UnknownCreature = 29,
-    UnknownDoodad = 30,
-    UnknownItem = 31,
-    UnknownTileEvent = 32
+    ColorizeMagical = 12,
+    CorpseOf = 13,
+    CountThing = 14,
+    Dependency = 15,
+    ItemMagicalProperty = 16,
+    ListItemSeparator = 17,
+    MacroDoubleInput = 18,
+    MacroInputSeparator = 19,
+    MacroTripleInput = 20,
+    NPCName = 21,
+    OwnName = 22,
+    PlayerName = 23,
+    Quality = 24,
+    ReformatSingularNoun = 25,
+    Renamed = 26,
+    Thing = 27,
+    Tilled = 28,
+    Unknown = 29,
+    UnknownCreature = 30,
+    UnknownDoodad = 31,
+    UnknownItem = 32,
+    UnknownTileEvent = 33
 }

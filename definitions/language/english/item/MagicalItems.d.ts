@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { MagicalPropertyType } from "item/IItem";
-declare const magicalItems: Descriptions<MagicalPropertyType, string>;
+declare const magicalItems: Descriptions<MagicalPropertyType, [string, string]>;
 export default magicalItems;

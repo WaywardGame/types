@@ -13,6 +13,7 @@ import HumanInspection from "game/inspection/inspections/HumanInspection";
 import { IVector3 } from "utilities/math/IVector";
 export default class NPCInspection extends HumanInspection<NPC> {
     static getFromTile(position: IVector3): never[] | NPCInspection;
+    static handles(npc: unknown): boolean;
     constructor(npc: NPC);
     getBorder(): string;
 }

@@ -9,14 +9,20 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoDisplayLevel, InfoProviderContext } from "game/inspection/InfoProvider";
+import MagicalPropertiesInfoProvider from "game/inspection/infoProviders/MagicalProperties";
+import QualityInfoProvider from "game/inspection/infoProviders/Quality";
 import Inspection from "game/inspection/Inspection";
 import Item from "item/Item";
+import Translation from "language/Translation";
 import { IVector3 } from "utilities/math/IVector";
 export default class ItemInspection extends Inspection<Item> {
     static getFromTile(position: IVector3): ItemInspection[];
+    static handles(item: unknown): boolean;
     constructor(item: Item);
-    get(_context: InfoProviderContext): never[];
     getId(): string;
+    getBorder(): string | undefined;
     getDisplayLevel(): InfoDisplayLevel;
+    get(context: InfoProviderContext): (Translation | import("../InfoProvider").SimpleInfoProvider | QualityInfoProvider | MagicalPropertiesInfoProvider)[];
     protected onItemRemove(_: any, item: Item): void;
+    private getDescription;
 }

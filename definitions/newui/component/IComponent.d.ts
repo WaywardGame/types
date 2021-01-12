@@ -291,6 +291,9 @@ export interface IHighlight {
     selectors: HighlightSelector[];
     iterations?: number;
 }
+export declare module IHighlight {
+    function itemById(id: number): HighlightSelector;
+}
 export declare enum HighlightType {
     Stat = 0,
     MenuBarButton = 1,

@@ -10,6 +10,7 @@
  */
 import EventEmitter from "event/EventEmitter";
 import { IObject } from "game/IObject";
+import { IReferenceable } from "game/IReferenceManager";
 import { ITemperatureSource } from "game/temperature/ITemperature";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { FireStage } from "tile/events/IFire";
@@ -19,10 +20,11 @@ import { IVector3 } from "utilities/math/IVector";
 export interface ITileEventEvents {
     fireUpdate(stage?: FireStage): any;
 }
-export default class TileEvent extends EventEmitter.Host<ITileEventEvents> implements IObject<TileEventType>, IVector3, ITemperatureSource {
+export default class TileEvent extends EventEmitter.Host<ITileEventEvents> implements IReferenceable, IObject<TileEventType>, IVector3, ITemperatureSource {
     static is(value: any): value is TileEvent;
     type: TileEventType;
     id: number;
+    referenceId?: number;
     z: number;
     x: number;
     y: number;

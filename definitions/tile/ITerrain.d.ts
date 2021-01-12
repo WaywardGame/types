@@ -11,7 +11,7 @@
 import { SfxType } from "audio/IAudio";
 import Doodad from "doodad/Doodad";
 import { DoodadType, GrowingStage } from "doodad/IDoodad";
-import { ICorpse } from "entity/creature/corpse/ICorpse";
+import Corpse from "entity/creature/corpse/Corpse";
 import Creature from "entity/creature/Creature";
 import { SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
@@ -81,7 +81,7 @@ export interface ITerrainDescription extends IModdable {
     aboveType?: TerrainType;
 }
 export interface ITile extends Partial<ITileContainer> {
-    corpses?: ICorpse[];
+    corpses?: Corpse[];
     creature?: Creature;
     data: number;
     doodad?: Doodad;

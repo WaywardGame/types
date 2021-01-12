@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
-import { ICorpse } from "entity/creature/corpse/ICorpse";
+import Corpse from "entity/creature/corpse/Corpse";
 import Entity from "entity/Entity";
 import EventEmitter from "event/EventEmitter";
 import { InspectType } from "game/inspection/IInspection";
@@ -41,7 +41,7 @@ export default class TilePositionInspection extends EventEmitter.Host<ITilePosit
     protected onTileEventCreate(_: any, tileEvent: TileEvent): void;
     protected onItemCreate(_: any, item: Item): void;
     protected onItemMove(_: any, item: Item, oldContainer: IContainer | undefined, newContainer: IContainer): void;
-    protected onCorpseCreate(_: any, corpse: ICorpse): void;
+    protected onCorpseCreate(_: any, corpse: Corpse): void;
     protected onDoodadCreate(_: any, doodad: Doodad): void;
     private updateInspectionsForEntity;
     private updateInspections;

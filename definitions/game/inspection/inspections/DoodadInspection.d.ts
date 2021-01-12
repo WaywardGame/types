@@ -15,13 +15,13 @@ import { TranslationGenerator } from "newui/component/IComponent";
 import { IVector3 } from "utilities/math/IVector";
 export default class DoodadInspection extends Inspection<Doodad> {
     static getFromTile(position: IVector3): never[] | DoodadInspection;
+    static handles(doodad: unknown): boolean;
     constructor(doodad: Doodad);
     getId(): string;
     getBorder(): string | undefined;
     get(context: InfoProviderContext): ArrayOr<InfoProvider | TranslationGenerator>;
     onUpdateTile(_: any, x: number, y: number, z: number): void;
     protected onRemove(_: any, doodad: Doodad): void;
-    private getQuality;
     private getDescription;
     private getWeightCapacity;
     private getTier;

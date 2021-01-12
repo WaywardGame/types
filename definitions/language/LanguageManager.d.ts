@@ -28,6 +28,12 @@ export interface ISerializedTranslationsProvider {
             max?: number;
         } | null, string, string]>;
     };
+    contextRules?: {
+        isWord?: string;
+        isWordSeparator?: string;
+        isSentenceSeparator?: string;
+        shouldCapitalizeWord?: string;
+    };
 }
 export interface ISerializedLanguage extends ISerializedTranslationsProvider {
     name: string;

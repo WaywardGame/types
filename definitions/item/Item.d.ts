@@ -18,13 +18,14 @@ import { DamageType, EntityType } from "entity/IEntity";
 import { EquipType, SkillType } from "entity/IHuman";
 import Player from "entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
+import { IReferenceable } from "game/IReferenceManager";
 import { ITemperatureSource } from "game/temperature/ITemperature";
 import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemMagicalProperty, IItemUsed, IMagicalStats, IMoveToTileOptions, ItemType, MagicalPropertyType } from "item/IItem";
 import { IPlaceOnTileOptions } from "item/IItemManager";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { IVector3 } from "utilities/math/IVector";
-export default class Item implements IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource {
+export default class Item implements IReferenceable, IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource {
     book?: BookType;
     constructedFrom?: IConstructedInfo;
     containedItems: Item[];
@@ -34,6 +35,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     equippedId?: number;
     equippedType?: EntityType;
     id: number;
+    referenceId?: number;
     itemOrders?: number[];
     magicalProperties?: IItemMagicalProperty[];
     map?: [island: string, id: number];

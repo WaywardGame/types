@@ -15,6 +15,7 @@ import PlayerInspection from "game/inspection/inspections/PlayerInspection";
 import { IVector3 } from "utilities/math/IVector";
 export default class SelfInspection extends PlayerInspection {
     static getFromTile(position: IVector3, context: InfoProviderContext): ArrayOr<Inspection<Player>>;
+    static handles(player: unknown, context?: InfoProviderContext): boolean;
     constructor(player: Player);
     getBorder(): string;
     get(context: InfoProviderContext): (import("../InfoProvider").SimpleInfoProvider | StatsInfoProvider)[];

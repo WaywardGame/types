@@ -10,8 +10,8 @@
  */
 import { Quadrant } from "newui/screen/screens/game/component/IQuadrantComponent";
 import QuadrantComponent from "newui/screen/screens/game/component/QuadrantComponent";
+import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/IMenuBarButton";
 import MenuBarButton from "newui/screen/screens/game/static/menubar/MenuBarButton";
-import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 import GameScreen from "newui/screen/screens/GameScreen";
 export default class MenuBar extends QuadrantComponent {
     static preferredQuadrant: Quadrant;

@@ -12,10 +12,11 @@ import UiTranslation from "language/dictionary/UiTranslation";
 import { IColorSection } from "language/segment/ColorSegment";
 import { IFontSizeSection } from "language/segment/HeadingSegment";
 import { ILinkSection } from "language/segment/LinkSegment";
+import { ITooltipSection } from "language/segment/TooltipSegment";
 import Translation from "language/Translation";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
-import { ISegment, IStringSection } from "utilities/string/Interpolator";
+import { IReferenceSection, ISegment, IStringSection } from "utilities/string/Interpolator";
 export default class Text extends Component {
     static resolve(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[], ...args: any[]): IStringSection[];
     private static areIdenticalSections;
@@ -48,7 +49,7 @@ export declare class BasicText extends Component {
     private _link;
     private linkHandler;
     constructor();
-    setText(text: PartialUnion<[IStringSection, IColorSection, ILinkSection, IFontSizeSection]>): this;
+    setText(text: PartialUnion<[IStringSection, IColorSection, ILinkSection, IFontSizeSection, ITooltipSection, IReferenceSection]>): this;
     setLinkHandler(handler?: (link: string | [string, string | undefined]) => boolean): void;
     private onClick;
 }

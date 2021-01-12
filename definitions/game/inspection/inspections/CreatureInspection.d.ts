@@ -15,6 +15,7 @@ import { TranslationGenerator } from "newui/component/IComponent";
 import { IVector3 } from "utilities/math/IVector";
 export default class CreatureInspection extends EntityInspection<Creature> {
     static getFromTile(position: IVector3): never[] | CreatureInspection;
+    static handles(creature: unknown): boolean;
     constructor(creature: Creature);
     getId(): string;
     getBorder(): "var(--color-aberrant)" | "var(--color-tamed)" | undefined;

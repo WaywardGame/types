@@ -9,27 +9,27 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
-import { ICorpse } from "entity/creature/corpse/ICorpse";
+import Corpse from "entity/creature/corpse/Corpse";
 import Creature from "entity/creature/Creature";
 import NPC from "entity/npc/NPC";
+import { IReferenceable } from "game/IReferenceManager";
 import DrawnMap from "game/mapping/DrawnMap";
 import TemperatureManager from "game/temperature/TemperatureManager";
 import Item from "item/Item";
 import { ITileContainer, ITileData } from "tile/ITerrain";
 import TileEvent from "tile/TileEvent";
-import { LogSource } from "utilities/Log";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import { BiomeTypes } from "./IBiome";
-import { IGameOld, ISeeds, IWell } from "./IGame";
+import { CreationId, IGameOld, ISeeds, IWell } from "./IGame";
 import TimeManager from "./TimeManager";
 /**
  * Represents the worlds island
  * Items, Creatures, Npcs, etc.. all exist on the island
  */
-export default class Island {
+export default class Island implements IReferenceable {
     biomeType: BiomeTypes;
     contaminatedWater: IVector3[];
-    corpses: SaferArray<ICorpse>;
+    corpses: SaferArray<Corpse>;
     creatures: SaferArray<Creature>;
     creatureSpawnTimer: number;
     doodads: SaferArray<Doodad>;
@@ -38,6 +38,7 @@ export default class Island {
     loadCount: number;
     mapGenVersion: string;
     name?: string;
+    referenceId?: number;
     npcs: SaferArray<NPC>;
     position: IVector2;
     saveVersion: string;
@@ -58,7 +59,7 @@ export default class Island {
     registerEventBus(): void;
     unregisterEventBus(): void;
     hydrateFromOldGame(oldGame: IGameOld): void;
-    findUnusedId<T>(source: LogSource, things: T[]): number;
+    findUnusedId<T>(creationId: CreationId, things: T[]): number;
     /**
      * Szudzik's function
      */

@@ -11,7 +11,7 @@
 import { SfxType } from "audio/IAudio";
 import Doodad from "doodad/Doodad";
 import { DoodadType } from "doodad/IDoodad";
-import { ICorpse } from "entity/creature/corpse/ICorpse";
+import Corpse from "entity/creature/corpse/Corpse";
 import Creature from "entity/creature/Creature";
 import Entity from "entity/Entity";
 import Human from "entity/Human";
@@ -291,7 +291,7 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.ActionType]: ActionType;
     [ActionArgument.AttackType]: AttackType;
     [ActionArgument.Container]: IContainer;
-    [ActionArgument.Corpse]: ICorpse;
+    [ActionArgument.Corpse]: Corpse;
     [ActionArgument.Creature]: Creature;
     [ActionArgument.Direction]: Direction;
     [ActionArgument.Doodad]: Doodad;

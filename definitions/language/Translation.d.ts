@@ -10,11 +10,14 @@
  */
 import { MessageType } from "entity/player/IMessageManager";
 import { Quality } from "game/IObject";
+import { IReferenceable, ReferenceType } from "game/IReferenceManager";
+import { Reference } from "game/ReferenceManager";
 import { Dictionary } from "language/Dictionaries";
 import Message from "language/dictionary/Message";
 import { MiscTranslation } from "language/dictionary/Misc";
 import UiTranslation from "language/dictionary/UiTranslation";
 import { Link } from "language/segment/LinkSegment";
+import { ITooltipSection } from "language/segment/TooltipSegment";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { Random } from "utilities/Random";
 import Interpolator, { ISegment, IStringSection } from "utilities/string/Interpolator";
@@ -34,6 +37,8 @@ export interface ISerializedTranslation {
     args?: Array<string | number | boolean | any[] | object | ISerializedTranslation>;
     failWith?: string | ISerializedTranslation | IStringSection[];
     reformatters?: ISerializedTranslation[];
+    reference?: [number, ReferenceType?];
+    tooltip?: ISerializedTranslation | IStringSection[];
 }
 export declare enum ListEnder {
     None = 0,
@@ -126,6 +131,8 @@ declare class Translation {
     private cachedSections?;
     private cachedString?;
     private isRootTranslation;
+    private tooltip?;
+    private reference?;
     constructor(dictionary: Dictionary | string, entry: number | string, index?: "random" | number);
     /**
      * Creates from a translation id. Entry matching is done by changing the case-style of the inputted
@@ -149,6 +156,8 @@ declare class Translation {
     constructor(translationId: string);
     withSegments(...segments: ISegment[]): this;
     withSegments(priority: true, ...segments: ISegment[]): this;
+    withTooltip(tooltip: ITooltipSection["tooltip"]): this;
+    setReference(reference?: Reference | IReferenceable): this;
     addArgs(...args: any[]): this;
     inContext(context?: TextContext, normalize?: boolean): this;
     passTo(...reformatters: Array<Translation | ((sections: IStringSection[]) => IStringSection[]) | Falsy>): this;

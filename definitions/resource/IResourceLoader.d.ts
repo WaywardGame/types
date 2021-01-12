@@ -46,7 +46,9 @@ export declare enum PathType {
     TerrainMound = 23,
     TerrainTilled = 24,
     TileEvent = 25,
-    Vehicle = 26
+    Vehicle = 26,
+    Quality = 27,
+    InfoIcon = 28
 }
 export interface IResourceContainer {
     spriteTexture: WebGLTexture;

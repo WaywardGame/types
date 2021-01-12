@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
-import { ICorpse } from "entity/creature/corpse/ICorpse";
+import Corpse from "entity/creature/corpse/Corpse";
 import Creature from "entity/creature/Creature";
 import Entity from "entity/Entity";
 import Human from "entity/Human";
@@ -69,8 +69,8 @@ export default abstract class BasePacket {
     protected writeDoodad(value: Doodad): void;
     protected readNPC(): NPC | undefined;
     protected writeNPC(value: NPC): void;
-    protected readCorpse(): ICorpse | undefined;
-    protected writeCorpse(value: ICorpse): void;
+    protected readCorpse(): Corpse | undefined;
+    protected writeCorpse(value: Corpse): void;
     protected readEntity(): Player | Creature | NPC | undefined;
     protected writeHuman(value: Human): void;
     protected readHuman(): Player | NPC | undefined;

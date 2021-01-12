@@ -21,6 +21,7 @@ import StatusEffect from "entity/status/StatusEffect";
 import EventEmitter from "event/EventEmitter";
 import { FireType, TileUpdateType } from "game/IGame";
 import { IInspector } from "game/inspection/InfoProvider";
+import { IReferenceable } from "game/IReferenceManager";
 import { ITemperatureSource } from "game/temperature/ITemperature";
 import { ItemType, RecipeLevel } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
@@ -30,10 +31,11 @@ import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IInspector, IUnserializedCallback, ITemperatureSource, IVector3 {
+export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, IUnserializedCallback, ITemperatureSource, IVector3 {
     readonly stat: Stats<this>;
     entityType: EntityType;
     id: number;
+    referenceId?: number;
     renamed?: string | ISerializedTranslation;
     z: number;
     x: number;

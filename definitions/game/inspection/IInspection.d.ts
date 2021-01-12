@@ -24,3 +24,6 @@ export declare enum InspectType {
     Tile = 12
 }
 export declare const basicInspectionPriorities: Record<InspectType, number>;
+export declare enum InfoIcon {
+    Magical = 0
+}

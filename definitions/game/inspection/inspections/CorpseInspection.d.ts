@@ -8,15 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ICorpse } from "entity/creature/corpse/ICorpse";
+import Corpse from "entity/creature/corpse/Corpse";
 import { InfoDisplayLevel, InfoProviderContext } from "game/inspection/InfoProvider";
 import Inspection from "game/inspection/Inspection";
 import { IVector3 } from "utilities/math/IVector";
-export default class CorpseInspection extends Inspection<ICorpse> {
+export default class CorpseInspection extends Inspection<Corpse> {
     static getFromTile(position: IVector3): CorpseInspection[];
-    constructor(corpse: ICorpse);
+    static handles(corpse: unknown): boolean;
+    constructor(corpse: Corpse);
     get(_context: InfoProviderContext): never[];
     getId(): string;
     getDisplayLevel(): InfoDisplayLevel;
-    protected onCorpseRemove(_: any, corpse: ICorpse): void;
+    protected onCorpseRemove(_: any, corpse: Corpse): void;
 }

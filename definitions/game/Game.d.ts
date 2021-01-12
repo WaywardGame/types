@@ -22,6 +22,7 @@ import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ChallengeModifiersCollection } from "game/options/modifiers/challenge/ChallengeModifiers";
+import ReferenceManager from "game/ReferenceManager";
 import TimeManager from "game/TimeManager";
 import VotingManager from "game/VotingManager";
 import Interrupt from "language/dictionary/Interrupt";
@@ -53,6 +54,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     tickSpeed: number;
     turnMode: TurnMode;
     time: TimeManager;
+    references: ReferenceManager;
     replay: ReplayManager | undefined;
     originalPlayOptions: Partial<IPlayOptions>;
     saveVersion: string | undefined;

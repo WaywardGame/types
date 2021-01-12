@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { ReferenceType } from "game/IReferenceManager";
 export interface ISegmentApi extends Readonly<IInterpolationOptions> {
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;
@@ -26,6 +27,9 @@ export interface ISegment {
 }
 export interface IStringSection {
     content: string;
+}
+export interface IReferenceSection extends IStringSection {
+    reference: [number, ReferenceType?];
 }
 declare class Interpolator {
     private options;

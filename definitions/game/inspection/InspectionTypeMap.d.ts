@@ -25,6 +25,13 @@ import TileInspection from "game/inspection/inspections/TileInspection";
 import { IVector3 } from "utilities/math/IVector";
 export declare type InspectionClass = Class<Inspection<any>> & {
     getFromTile(position: IVector3, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<any>>;
+    /**
+     * Whether or not this inspection class can handle the given arguments.
+     * @param args A list of arguments that an inspection can be provided
+     * @returns `true` or a number if the class can handle the arguments. `false` or `undefined` if it can't.
+     * When multiple classes can both handle the arguments, higher numbers are used over lower numbers. `true` is equivalent to `0`.
+     */
+    handles?(...args: any[]): boolean | number | undefined;
 };
 declare const _default: {
     9: typeof CorpseInspection;

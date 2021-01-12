@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
-import { ICorpse } from "entity/creature/corpse/ICorpse";
+import Corpse from "entity/creature/corpse/Corpse";
 import Creature from "entity/creature/Creature";
 import { ICharacter, ICrafted } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
@@ -107,7 +107,7 @@ export declare type IGameOld = Partial<Game> & Partial<{
     realTimeTickSpeed: TickSpeed;
     crafted: Record<number, ICrafted>;
     contaminatedWater: IVector3[];
-    corpses: SaferArray<ICorpse>;
+    corpses: SaferArray<Corpse>;
     creatures: SaferArray<Creature>;
     creatureSpawnTimer: number;
     doodads: SaferArray<Doodad>;
@@ -301,6 +301,14 @@ export declare enum TileUpdateType {
     Terrain = 18,
     TileEventManager = 19,
     Tilled = 20
+}
+export declare enum CreationId {
+    Doodad = 0,
+    Creature = 1,
+    Corpse = 2,
+    NPC = 3,
+    Item = 4,
+    TileEvent = 5
 }
 export interface IWaterFill {
     count: number;

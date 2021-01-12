@@ -59,6 +59,12 @@ export declare enum InfoDisplayLevel {
     Extra = 1,
     Verbose = 2
 }
+export interface IIcon {
+    path: string;
+    width: number;
+    height: number;
+    scale?: number;
+}
 export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProviderEvents> implements IRefreshable {
     static create(...translations: TranslationGenerator[]): SimpleInfoProvider;
     static of(...classes: string[]): SimpleInfoProvider;
@@ -68,6 +74,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     abstract getClass(): string[];
     getDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel;
     getColor(): string | undefined;
+    getIcon(): IIcon | undefined;
     hasContent(): boolean;
     init(): void;
     /**
@@ -87,7 +94,7 @@ export declare class SimpleInfoProvider extends InfoProvider {
     private componentClass;
     private displayLevel;
     constructor(...translations: Array<TranslationGenerator | InfoProvider>);
-    get(): (import("../../language/Translation").default | import("../../language/dictionary/UiTranslation").default | import("../../language/Translation").ISerializedTranslation | (() => import("../../language/Translation").default | import("../../language/dictionary/UiTranslation").default | import("../../language/Translation").ISerializedTranslation | Iterable<import("../../utilities/string/Interpolator").IStringSection> | undefined) | InfoProvider)[];
+    get(): (import("../../language/Translation").default | import("../../language/Translation").ISerializedTranslation | import("../../language/dictionary/UiTranslation").default | (() => import("../../language/Translation").default | import("../../language/Translation").ISerializedTranslation | Iterable<import("../../utilities/string/Interpolator").IStringSection> | import("../../language/dictionary/UiTranslation").default | undefined) | InfoProvider)[];
     add(...translations: Array<TranslationGenerator | InfoProvider>): this;
     getClass(): string[];
     addClasses(...classes: string[]): this;

@@ -17,6 +17,7 @@ import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import { TileUpdateType } from "game/IGame";
 import { IObject, Quality } from "game/IObject";
+import { IReferenceable } from "game/IReferenceManager";
 import { ITemperatureSource } from "game/temperature/ITemperature";
 import { IContainer, IItemMagicalProperty, ItemType, MagicalPropertyType } from "item/IItem";
 import Item from "item/Item";
@@ -54,7 +55,7 @@ export interface IDoodadEvents {
      */
     remove(): any;
 }
-export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource {
+export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IReferenceable, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource {
     static is(value: any): value is Doodad;
     /**
      * @deprecated
@@ -71,6 +72,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     stillContainer?: Item;
     gfx?: number;
     id: number;
+    referenceId?: number;
     itemOrders?: number[];
     maxDur: number;
     minDur: number;

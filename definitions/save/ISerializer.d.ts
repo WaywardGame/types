@@ -98,7 +98,8 @@ export declare enum Types {
     ArrayV3 = 37,
     EndMarker = 38,
     ReplayLogEntry = 39,
-    DrawnMap = 40
+    DrawnMap = 40,
+    Corpse = 41
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_SAVE_PROPERTY_FLAGS: unique symbol;

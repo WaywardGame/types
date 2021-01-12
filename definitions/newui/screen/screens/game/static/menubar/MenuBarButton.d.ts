@@ -10,7 +10,7 @@
  */
 import Button from "newui/component/Button";
 import { IBindHandlerApi } from "newui/input/Bind";
-import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
+import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/IMenuBarButton";
 export default class MenuBarButton extends Button {
     private readonly onActivate;
     private readonly bindable;

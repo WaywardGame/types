@@ -13,21 +13,7 @@ import { IModdable } from "mod/ModRegistry";
 import Button from "newui/component/Button";
 import { ITooltip } from "newui/component/IComponent";
 import Bindable from "newui/input/Bindable";
-export declare enum MenuBarButtonType {
-    Menu = 0,
-    Save = 1,
-    Help = 2,
-    QuickSettings = 3,
-    Milestones = 4,
-    Notes = 5,
-    Quests = 6,
-    Messages = 7,
-    Actions = 8,
-    Inventory = 9,
-    Crafting = 10,
-    Equipment = 11,
-    Skills = 12
-}
+import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/IMenuBarButton";
 export interface IMenuBarButtonDescription extends IModdable, IHasImagePath {
     imageWidth?: number;
     imageHeight?: number;

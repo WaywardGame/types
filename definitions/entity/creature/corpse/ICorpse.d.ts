@@ -11,6 +11,7 @@
 import { CreatureType } from "entity/creature/ICreature";
 import { SkillType } from "entity/IHuman";
 import { IObject } from "game/IObject";
+import { IReferenceable } from "game/IReferenceManager";
 import { ItemType } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
 import { IRGB } from "utilities/Color";
@@ -31,9 +32,10 @@ export interface ICorpseResourceDrop {
     item: ItemType;
     chance?: number;
 }
-export interface ICorpse extends IObject<CreatureType>, IVector3 {
+export interface Corpse extends IReferenceable, IObject<CreatureType>, IVector3 {
     decay?: number;
     aberrant?: boolean;
     step?: number;
     qualityBonus?: number;
+    referenceId?: number;
 }
