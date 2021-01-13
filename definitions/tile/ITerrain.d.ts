@@ -27,9 +27,9 @@ export interface ITerrainDescription extends IModdable {
     passable?: boolean;
     particles?: IRGB;
     durability?: number;
-    water?: boolean;
+    water?: true;
     regathered?: boolean;
-    shallowWater?: boolean;
+    shallowWater?: true;
     freshWater?: boolean;
     gather?: boolean;
     noGfxSwitch?: boolean;

@@ -13,7 +13,6 @@ import Corpse from "entity/creature/corpse/Corpse";
 import Creature from "entity/creature/Creature";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
-import Inspection from "game/inspection/Inspection";
 import { IReferenceable, ReferenceType } from "game/IReferenceManager";
 import Island from "game/Island";
 import Item from "item/Item";
@@ -34,6 +33,6 @@ export default class ReferenceManager {
     resolve(id: number, type: ReferenceType.Island): Island | undefined;
     resolve(id: number, type: ReferenceType.Corpse): Corpse | undefined;
     resolve(id: number, type?: ReferenceType): Item | Creature | Doodad | NPC | Player | TileEvent | Island | Corpse | undefined;
-    inspect(id: number, type?: ReferenceType): Inspection<any> | undefined;
+    inspect(id: number, type?: ReferenceType): import("./inspection/Inspection").default<any> | undefined;
     private getReferenceType;
 }

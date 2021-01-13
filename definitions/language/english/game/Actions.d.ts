@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType as Action } from "entity/action/IAction";
-declare const actions: Descriptions<Action, [string, string]>;
+declare const actions: Descriptions<Action, [string, string, string?]>;
 export default actions;

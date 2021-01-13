@@ -42,5 +42,6 @@ export declare enum Quality {
     Random = 1,
     Superior = 2,
     Remarkable = 3,
-    Exceptional = 4
+    Exceptional = 4,
+    Mastercrafted = 5
 }

@@ -16,8 +16,13 @@ import Text from "newui/component/Text";
 import { IVector3 } from "utilities/math/IVector";
 export default class ItemsInspection extends ListInspection<ItemInspection> {
     static getFromTile(position: IVector3): never[] | ItemsInspection;
+    private inspector;
+    private inspectorPosition;
+    private itemPositions;
     constructor(...itemInspections: ItemInspection[]);
     get(context: InfoProviderContext): import("../../../language/Translation").default;
-    getDisplayLevel(): InfoDisplayLevel;
+    getDisplayLevel(context: InfoProviderContext): InfoDisplayLevel.NonVerbose | InfoDisplayLevel.Always;
     protected initChildTextComponent(text: TranslationGenerator): Text;
+    protected onTickEnd(): void;
+    private updatePosition;
 }

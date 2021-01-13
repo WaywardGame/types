@@ -32,10 +32,10 @@ export default class Item implements IReferenceable, IContainer, IContainable, I
     containedWithin: IContainer | undefined;
     decay?: number;
     disassembly: Item[];
+    driverId?: number;
     equippedId?: number;
     equippedType?: EntityType;
     id: number;
-    referenceId?: number;
     itemOrders?: number[];
     magicalProperties?: IItemMagicalProperty[];
     map?: [island: string, id: number];
@@ -46,6 +46,7 @@ export default class Item implements IReferenceable, IContainer, IContainable, I
     protected?: boolean;
     quality: Quality | undefined;
     quickSlot: number | undefined;
+    referenceId?: number;
     renamed: string | ISerializedTranslation | undefined;
     tradedFrom?: string[];
     type: ItemType;
@@ -66,9 +67,10 @@ export default class Item implements IReferenceable, IContainer, IContainable, I
     /**
      * Sets the item as magical with a chance based on quality
      * @param bonus The number that chances get multiplied by, for example, 2 or 3
+     * @param propertiesBypass The number of magical properties to force on to the item
      * @returns True if the item has become magical
      */
-    setMagicalChanceFromQuality(bonus?: number): boolean;
+    setMagicalChanceFromQuality(bonus?: number, propertiesBypass?: number): boolean;
     /**
      * Changes the item id for this item
      * @param id The new item id
@@ -98,7 +100,7 @@ export default class Item implements IReferenceable, IContainer, IContainable, I
     isValid(): boolean;
     isProtected(): boolean;
     getDecayMax(): number;
-    getTotalWeight(player?: Player, bypassContainer?: boolean): number;
+    getTotalWeight(bypassContainer?: boolean): number;
     getDisassemblyWeight(): number;
     isNearby(executor: Entity, allowNearby?: boolean): boolean;
     verifyAndFixItem(): void;

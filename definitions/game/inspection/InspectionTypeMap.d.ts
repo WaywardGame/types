@@ -49,3 +49,6 @@ declare const _default: {
     11: typeof TileEventInspection.Minor;
 } & Record<InspectType, InspectionClass>;
 export default _default;
+export declare module Inspections {
+    function get(...args: any[]): Inspection<any> | undefined;
+}

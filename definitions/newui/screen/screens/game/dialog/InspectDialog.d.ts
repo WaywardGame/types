@@ -13,9 +13,13 @@ import Dialog from "newui/screen/screens/game/component/Dialog";
 import Vector3 from "utilities/math/Vector3";
 export default class InspectDialog extends Dialog {
     private readonly inspections;
+    private readonly singleInspectionWrapper;
+    private inspection?;
     constructor();
     getName(): UiTranslation;
     setPosition(position: Vector3): this;
+    setInspection(thing: unknown): void;
     protected onClose(): void;
+    private update;
     private removeOverlay;
 }

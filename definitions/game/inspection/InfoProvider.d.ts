@@ -51,6 +51,10 @@ export interface IInfoProviderEvents {
      * Should be emitted when the info provider should be removed.
      */
     remove(): any;
+    /**
+     * Should be emitted when the info provider's display level changes.
+     */
+    updateDisplayLevel(displayLevel: InfoDisplayLevel, className: string, oldClassName?: string): any;
 }
 export declare enum InfoDisplayLevel {
     NonVerbose = -2,
@@ -75,7 +79,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     getDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel;
     getColor(): string | undefined;
     getIcon(): IIcon | undefined;
-    hasContent(): boolean;
+    hasContent(_context: InfoProviderContext): boolean;
     init(): void;
     /**
      * Call when this info provider should be refreshed.
