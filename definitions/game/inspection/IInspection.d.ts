@@ -25,5 +25,6 @@ export declare enum InspectType {
 }
 export declare const basicInspectionPriorities: Record<InspectType, number>;
 export declare enum InfoIcon {
-    Magical = 0
+    Magical = 0,
+    Protected = 1
 }

@@ -17,6 +17,7 @@ import Human from "entity/Human";
 import { DamageType, EntityType } from "entity/IEntity";
 import { EquipType, SkillType } from "entity/IHuman";
 import Player from "entity/player/Player";
+import EventEmitter from "event/EventEmitter";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { IReferenceable } from "game/IReferenceManager";
 import { ITemperatureSource } from "game/temperature/ITemperature";
@@ -25,7 +26,10 @@ import { IPlaceOnTileOptions } from "item/IItemManager";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { IVector3 } from "utilities/math/IVector";
-export default class Item implements IReferenceable, IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource {
+export interface IItemEvents {
+    toggleProtected(isProtected: boolean): any;
+}
+export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource {
     book?: BookType;
     constructedFrom?: IConstructedInfo;
     containedItems: Item[];
