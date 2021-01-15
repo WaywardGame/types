@@ -20,11 +20,12 @@ import ItemsInspection from "game/inspection/inspections/ItemsInspection";
 import NPCInspection from "game/inspection/inspections/NPCInspection";
 import PlayerInspection from "game/inspection/inspections/PlayerInspection";
 import SelfInspection from "game/inspection/inspections/SelfInspection";
+import SkillInspection from "game/inspection/inspections/SkillInspection";
 import TileEventInspection from "game/inspection/inspections/TileEventInspection";
 import TileInspection from "game/inspection/inspections/TileInspection";
 import { IVector3 } from "utilities/math/IVector";
 export declare type InspectionClass = Class<Inspection<any>> & {
-    getFromTile(position: IVector3, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<any>>;
+    getFromTile?(position: IVector3, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<any>>;
     /**
      * Whether or not this inspection class can handle the given arguments.
      * @param args A list of arguments that an inspection can be provided
@@ -44,6 +45,7 @@ declare const _default: {
     2: typeof NPCInspection;
     1: typeof PlayerInspection;
     0: typeof SelfInspection;
+    13: typeof SkillInspection;
     12: typeof TileInspection;
     5: typeof TileEventInspection;
     11: typeof TileEventInspection.Minor;

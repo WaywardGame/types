@@ -22,11 +22,14 @@ export interface IInterpolationOptions {
 export interface ISegment {
     startChar?: string;
     endChar?: string;
-    regex: RegExp;
+    allowNoEndChar?: true;
+    trimPriorWhitespace?: true;
+    regex?: RegExp;
     handle(match: RegExpMatchArray, segment: string, api: ISegmentApi, ...args: any[]): string | IStringSection | Iterable<IStringSection>;
 }
 export interface IStringSection {
     content: string;
+    forceInclude?: true;
 }
 export interface IReferenceSection extends IStringSection {
     reference: [number, ReferenceType?];

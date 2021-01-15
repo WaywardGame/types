@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { SkillType } from "entity/IHuman";
 import { MessageType } from "entity/player/IMessageManager";
 import { Quality } from "game/IObject";
 import { IReferenceable, ReferenceType } from "game/IReferenceManager";
@@ -177,6 +178,7 @@ declare class Translation {
      */
     setRandom(random?: Random): this;
     hasTranslation(): boolean;
+    orElse(translation?: GetterOfOr<Translation | undefined>): Translation | undefined;
     /**
      * Returns this translation as a list of string sections
      */
@@ -207,5 +209,6 @@ declare module Translation {
     const ui: (entry: string | UiTranslation) => Translation;
     const message: (entry: string | Message) => Translation;
     const misc: (entry: string | MiscTranslation) => Translation;
+    const skill: (entry: string | SkillType) => Translation;
 }
 export default Translation;

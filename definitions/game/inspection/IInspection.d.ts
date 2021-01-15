@@ -21,7 +21,8 @@ export declare enum InspectType {
     Corpse = 9,
     Corpses = 10,
     TileEventMinor = 11,
-    Tile = 12
+    Tile = 12,
+    Skill = 13
 }
 export declare const basicInspectionPriorities: Record<InspectType, number>;
 export declare enum InfoIcon {

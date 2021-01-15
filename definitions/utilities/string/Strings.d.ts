@@ -30,6 +30,7 @@ declare class Strings {
     stripParentDirectoryAccessorsFromPath(path: string): string;
     encodeURIComponentPath(p: string): string;
     generateTimestamp(date?: Date): string;
+    isSubstringAt(str: string, index: number, substr: string): boolean;
     protected onAcquire(d: any, req: IRequireFunction): Promise<void>;
 }
 declare const _default: Strings;

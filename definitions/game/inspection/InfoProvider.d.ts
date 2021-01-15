@@ -21,7 +21,8 @@ import { IRefreshable } from "newui/component/Refreshable";
 import Text from "newui/component/Text";
 export declare enum InfoClass {
     Title = "title",
-    Description = "description"
+    Description = "description",
+    List = "list"
 }
 export interface IInspector {
     asEntity?: Entity;
@@ -74,6 +75,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     static of(...classes: string[]): SimpleInfoProvider;
     static title(...translations: TranslationGenerator[]): SimpleInfoProvider;
     static description(...translations: TranslationGenerator[]): SimpleInfoProvider;
+    static list(...translations: TranslationGenerator[]): SimpleInfoProvider;
     abstract get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     abstract getClass(): string[];
     getDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel;
@@ -96,6 +98,7 @@ export declare class SimpleInfoProvider extends InfoProvider {
     private readonly classes;
     private readonly contents;
     private componentClass;
+    private childComponentClass;
     private displayLevel;
     constructor(...translations: Array<TranslationGenerator | InfoProvider>);
     get(): (import("../../language/Translation").default | import("../../language/Translation").ISerializedTranslation | import("../../language/dictionary/UiTranslation").default | (() => import("../../language/Translation").default | import("../../language/Translation").ISerializedTranslation | Iterable<import("../../utilities/string/Interpolator").IStringSection> | import("../../language/dictionary/UiTranslation").default | undefined) | InfoProvider)[];
@@ -103,7 +106,9 @@ export declare class SimpleInfoProvider extends InfoProvider {
     getClass(): string[];
     addClasses(...classes: string[]): this;
     initComponent(): Component<HTMLElement>;
+    protected initChildTextComponent(text: TranslationGenerator): Text;
     setComponent(componentClass: Class<Component>): this;
+    setChildComponent(componentClass: Class<Text>): this;
     setDisplayLevel(level: InfoDisplayLevel): this;
     getDisplayLevel(): InfoDisplayLevel;
 }

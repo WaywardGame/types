@@ -8,20 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-export interface IReferenceable {
-    /**
-     * Do not use this property directly, instead use `game.references.getReference()
-     */
-    referenceId?: number;
+import Component from "newui/component/Component";
+import Text from "newui/component/Text";
+declare class List extends Component {
+    constructor();
+    addListItem(initializer: (listItemComponent: Component) => any): this;
 }
-export declare enum ReferenceType {
-    Item = 0,
-    Creature = 1,
-    Doodad = 2,
-    NPC = 3,
-    Player = 4,
-    TileEvent = 5,
-    Island = 6,
-    Corpse = 7,
-    Skill = 8
+declare module List {
+    class Item extends Text {
+        constructor();
+    }
 }
+export default List;

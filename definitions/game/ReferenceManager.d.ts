@@ -11,6 +11,7 @@
 import Doodad from "doodad/Doodad";
 import Corpse from "entity/creature/corpse/Corpse";
 import Creature from "entity/creature/Creature";
+import { SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import { IReferenceable, ReferenceType } from "game/IReferenceManager";
@@ -19,11 +20,12 @@ import Item from "item/Item";
 import TileEvent from "tile/TileEvent";
 export declare type Reference = [number, ReferenceType?];
 export default class ReferenceManager {
-    static getList(type: ReferenceType): Player[] | SaferArray<Creature> | SaferArray<Doodad> | SaferArray<NPC> | SaferArray<Corpse> | SaferArray<Item> | SaferArray<TileEvent> | IterableIterator<Island>;
+    static needsReferenceId(type: ReferenceType): boolean;
+    static getList(type: ReferenceType): readonly SkillType[] | Player[] | SaferArray<Creature> | SaferArray<Doodad> | SaferArray<NPC> | SaferArray<Corpse> | SaferArray<Item> | SaferArray<TileEvent> | IterableIterator<Island>;
     private referenceCursor;
     create(): number;
     get(thing: IReferenceable): Reference | undefined;
-    resolve(id: number): Item | Creature | Doodad | NPC | Player | TileEvent | Island | Corpse | undefined;
+    resolve(id: number): Item | Creature | Doodad | NPC | Player | TileEvent | Island | Corpse | SkillType | undefined;
     resolve(id: number, type: ReferenceType.Item): Item | undefined;
     resolve(id: number, type: ReferenceType.Creature): Creature | undefined;
     resolve(id: number, type: ReferenceType.Doodad): Doodad | undefined;
@@ -32,7 +34,8 @@ export default class ReferenceManager {
     resolve(id: number, type: ReferenceType.TileEvent): TileEvent | undefined;
     resolve(id: number, type: ReferenceType.Island): Island | undefined;
     resolve(id: number, type: ReferenceType.Corpse): Corpse | undefined;
-    resolve(id: number, type?: ReferenceType): Item | Creature | Doodad | NPC | Player | TileEvent | Island | Corpse | undefined;
-    inspect(id: number, type?: ReferenceType): import("./inspection/Inspection").default<any> | undefined;
+    resolve(id: number, type: ReferenceType.Skill): SkillType | undefined;
+    resolve(id: number, type?: ReferenceType): Item | Creature | Doodad | NPC | Player | TileEvent | Island | Corpse | SkillType | undefined;
+    inspect(id: number, type?: ReferenceType, ...args: any[]): import("./inspection/Inspection").default<any> | undefined;
     private getReferenceType;
 }

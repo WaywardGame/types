@@ -125,7 +125,8 @@ export declare enum ActionType {
     UnProtectItem = 92,
     UpdateItemOrder = 93,
     InterruptResponse = 94,
-    Upgrade = 95
+    Upgrade = 95,
+    Enhance = 96
 }
 export declare enum ActionUsability {
     Paused = 0,

@@ -68,6 +68,12 @@ export interface IItemDescription extends IObjectDescription, IModdable {
      * A decimal number between 0 and 1 representing how much of the item's durability can already be gone when the item is created
      */
     durabilityModifierAtStart?: number;
+    /**
+     * Do not use this property is you do not want the item to burn at all.
+     * Set it to [ItemType.None] if you want it to burn but not produce anything.
+     * Otherwise, set it to an array of items you want it to burn into.
+     * This also interacts with the flammable property, so look at that as well.
+     */
     onBurn?: ItemType[];
     onUse?: Record<number, any>;
     equipEffect?: EquipEffects;
@@ -124,6 +130,10 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     spawnOnBreak?: CreatureType;
     showOverHair?: boolean;
     hasSleepImage?: boolean;
+    /**
+     * If set to true, the item will count as something you can start on fire or where fire can spread to.
+     * By default, after it burns, it will burn into its disassembly items unless the onBurn property is set.
+     */
     flammable?: boolean;
     plural?: string;
     hideHelmet?: boolean;
@@ -947,7 +957,9 @@ export declare enum ItemType {
     SnowWall = 574,
     SnowFlooring = 575,
     CalligenousScrap = 576,
-    MagicalExtract = 577
+    MagicalExtract = 577,
+    ShimmeringFibers = 578,
+    MagicalTwine = 579
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -1032,7 +1044,9 @@ export declare enum ItemTypeGroup {
     RawFish = 879,
     Insect = 880,
     Upgrading = 881,
-    All = 882,
-    Last = 883
+    Enhancement = 882,
+    FireExtinguisher = 883,
+    All = 884,
+    Last = 885
 }
 export {};

@@ -13,7 +13,7 @@ import { InspectType } from "game/inspection/IInspection";
 import Component from "newui/component/Component";
 import Vector3 from "utilities/math/Vector3";
 export interface ITileInspectionsEvents extends Events<Component> {
-    refreshed(): any;
+    refreshed(isValid?: boolean): any;
     updateInspectTypeFilter(): any;
 }
 export default class TileInspections extends Component {
@@ -25,7 +25,7 @@ export default class TileInspections extends Component {
     constructor();
     setInspectTypeFilter(filter?: (inspectType: InspectType) => boolean): this;
     refreshInspectTypeFilter(): this;
-    isPositionValid(): boolean | undefined;
+    isPositionValid(): boolean;
     getPosition(): Vector3 | undefined;
     setPosition(position: Vector3): this;
     deregister(): void;

@@ -24,7 +24,4 @@ export default class SkillsDialog extends Dialog {
     private getFilterString;
     private getSkillReadout;
     private getMagicalItems;
-    private getMagicalPropertySkill;
-    private getTooltip;
-    private getSkillAttributeMessage;
 }

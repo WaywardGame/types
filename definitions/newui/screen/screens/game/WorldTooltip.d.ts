@@ -14,6 +14,7 @@ export default class WorldTooltipHandler {
     private readonly gameScreen;
     private lastMousePosition?;
     private tooltip?;
+    private informationGuide;
     private showExtraInfo;
     private inspections?;
     constructor(gameScreen: Component);

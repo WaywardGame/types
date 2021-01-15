@@ -38,9 +38,9 @@ export default class Island implements IReferenceable {
     loadCount: number;
     mapGenVersion: string;
     name?: string;
-    referenceId?: number;
     npcs: SaferArray<NPC>;
     position: IVector2;
+    referenceId?: number;
     saveVersion: string;
     tileContainers: ITileContainer[];
     tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;

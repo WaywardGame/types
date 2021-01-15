@@ -9,11 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Events, IEventEmitter } from "event/EventEmitter";
+import { Reference } from "game/ReferenceManager";
 import Component from "newui/component/Component";
 import { ITooltip, TooltipLocation } from "newui/component/IComponent";
 import Text, { Paragraph } from "newui/component/Text";
 export default class Tooltip extends Component implements ITooltip {
     protected readonly source: Component;
+    static reference(reference: Reference): (tooltip: ITooltip) => void;
     event: IEventEmitter<this, Events<ITooltip>>;
     get location(): TooltipLocation;
     cache: boolean;
