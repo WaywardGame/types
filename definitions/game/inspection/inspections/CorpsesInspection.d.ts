@@ -18,6 +18,6 @@ export default class CorpsesInspection extends ListInspection<CorpseInspection> 
     static getFromTile(position: IVector3): never[] | CorpsesInspection;
     constructor(...corpseInspections: CorpseInspection[]);
     get(context: InfoProviderContext): import("../../../language/Translation").default;
-    getDisplayLevel(): InfoDisplayLevel;
+    getDefaultDisplayLevel(): InfoDisplayLevel;
     protected initChildTextComponent(text: TranslationGenerator): Text;
 }

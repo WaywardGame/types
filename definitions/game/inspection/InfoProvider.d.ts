@@ -76,9 +76,12 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     static title(...translations: TranslationGenerator[]): SimpleInfoProvider;
     static description(...translations: TranslationGenerator[]): SimpleInfoProvider;
     static list(...translations: TranslationGenerator[]): SimpleInfoProvider;
+    private displayLevel?;
     abstract get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     abstract getClass(): string[];
-    getDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel;
+    getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel;
+    setDisplayLevel(displayLevel: InfoDisplayLevel): this;
+    getDisplayLevel(context: InfoProviderContext): InfoDisplayLevel;
     getColor(): string | undefined;
     getIcon(): IIcon | undefined;
     hasContent(_context: InfoProviderContext): boolean;
@@ -99,7 +102,6 @@ export declare class SimpleInfoProvider extends InfoProvider {
     private readonly contents;
     private componentClass;
     private childComponentClass;
-    private displayLevel;
     constructor(...translations: Array<TranslationGenerator | InfoProvider>);
     get(): (import("../../language/Translation").default | import("../../language/Translation").ISerializedTranslation | import("../../language/dictionary/UiTranslation").default | (() => import("../../language/Translation").default | import("../../language/Translation").ISerializedTranslation | Iterable<import("../../utilities/string/Interpolator").IStringSection> | import("../../language/dictionary/UiTranslation").default | undefined) | InfoProvider)[];
     add(...translations: Array<TranslationGenerator | InfoProvider>): this;
@@ -109,6 +111,4 @@ export declare class SimpleInfoProvider extends InfoProvider {
     protected initChildTextComponent(text: TranslationGenerator): Text;
     setComponent(componentClass: Class<Component>): this;
     setChildComponent(componentClass: Class<Text>): this;
-    setDisplayLevel(level: InfoDisplayLevel): this;
-    getDisplayLevel(): InfoDisplayLevel;
 }

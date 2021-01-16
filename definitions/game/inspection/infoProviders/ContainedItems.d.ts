@@ -18,7 +18,7 @@ export default class ContainedItemsInfoProvider extends InfoProvider {
     static get(doodad: Doodad): false | ContainedItemsInfoProvider;
     private constructor();
     getClass(): string[];
-    getDisplayLevel(): InfoDisplayLevel;
+    getDefaultDisplayLevel(): InfoDisplayLevel;
     initComponent(): import("../../../newui/component/Component").default<HTMLElement>;
     hasContent(): boolean;
     get(): Translation;

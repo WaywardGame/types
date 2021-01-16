@@ -18,6 +18,6 @@ export default class CorpseInspection extends Inspection<Corpse> {
     constructor(corpse: Corpse);
     get(_context: InfoProviderContext): never[];
     getId(): string;
-    getDisplayLevel(): InfoDisplayLevel;
+    getDefaultDisplayLevel(): InfoDisplayLevel;
     protected onCorpseRemove(_: any, corpse: Corpse): void;
 }

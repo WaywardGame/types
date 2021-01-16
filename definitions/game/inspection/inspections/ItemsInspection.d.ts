@@ -21,7 +21,7 @@ export default class ItemsInspection extends ListInspection<ItemInspection> {
     private itemPositions;
     constructor(...itemInspections: ItemInspection[]);
     get(context: InfoProviderContext): import("../../../language/Translation").default;
-    getDisplayLevel(context: InfoProviderContext): InfoDisplayLevel.NonVerbose | InfoDisplayLevel.Always;
+    getDefaultDisplayLevel(context: InfoProviderContext): InfoDisplayLevel.NonVerbose | InfoDisplayLevel.Always;
     protected initChildTextComponent(text: TranslationGenerator): Text;
     protected onTickEnd(): void;
     private updatePosition;

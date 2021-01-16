@@ -27,7 +27,7 @@ export default class ItemInspection extends Inspection<Item> {
     constructor(item: Item);
     getId(): string;
     getBorder(): string | undefined;
-    getDisplayLevel(): InfoDisplayLevel;
+    getDefaultDisplayLevel(): InfoDisplayLevel;
     hasContent(context: InfoProviderContext): boolean;
     get(context: InfoProviderContext): (Translation | import("../InfoProvider").SimpleInfoProvider | QualityInfoProvider | MagicalPropertiesInfoProvider | ItemProtectedInfoProvider | ItemDurabilityInfoProvider | ItemDetailsInfoProvider)[];
     protected onItemRemove(_: any, item: Item): void;

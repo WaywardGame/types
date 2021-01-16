@@ -27,7 +27,7 @@ import Messages from "newui/screen/screens/game/static/Messages";
 import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import StatsQuadrant from "newui/screen/screens/game/static/Stats";
 import MovementHandler from "newui/screen/screens/game/util/movement/MovementHandler";
-import WorldTooltipHandler from "newui/screen/screens/game/WorldTooltip";
+import WorldTooltipHandler from "newui/screen/screens/game/WorldTooltipHandler";
 export declare type IDialogStates = {
     [key in DialogId]: boolean;
 };

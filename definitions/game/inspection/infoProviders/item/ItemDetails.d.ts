@@ -15,7 +15,7 @@ export default class ItemDetailsInfoProvider extends InfoProvider {
     private readonly item;
     constructor(item: Item);
     getClass(): string[];
-    getDisplayLevel(): InfoDisplayLevel;
+    getDefaultDisplayLevel(): InfoDisplayLevel;
     initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
     hasContent(): boolean;
     get(): (0 | Translation)[];

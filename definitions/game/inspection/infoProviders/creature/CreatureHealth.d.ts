@@ -13,6 +13,6 @@ import { InfoDisplayLevel } from "game/inspection/InfoProvider";
 import HealthInfoProvider from "game/inspection/infoProviders/entity/Health";
 import Translation from "language/Translation";
 export default class CreatureHealthInfoProvider extends HealthInfoProvider<Creature> {
-    getDisplayLevel(): InfoDisplayLevel;
+    getDefaultDisplayLevel(): InfoDisplayLevel;
     getName(): Translation;
 }

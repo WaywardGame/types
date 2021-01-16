@@ -8,21 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import TilePositionInspection from "game/inspection/handlers/TilePositionInspection";
 import UiTranslation from "language/dictionary/UiTranslation";
-import Dialog from "newui/screen/screens/game/component/Dialog";
 import InspectionsList from "newui/screen/screens/game/component/InspectionsList";
 import Vector3 from "utilities/math/Vector3";
-export default class InspectDialog extends Dialog {
-    private inspections?;
-    private readonly singleInspectionWrapper;
-    private readonly scrollableWrapper;
-    private inspection?;
-    constructor();
-    getName(): UiTranslation;
-    setInspections(inspections: InspectionsList): this;
+export default class TileInspectionsList extends InspectionsList<TilePositionInspection> {
+    private position?;
+    getPosition(): Vector3 | undefined;
     setPosition(position: Vector3): this;
-    setInspection(thing: unknown): void;
-    protected onClose(): void;
-    private update;
-    private removeOverlay;
+    isValid(): boolean;
+    protected getInvalidTranslation(): UiTranslation;
+    protected initializeInspections(): TilePositionInspection;
+    protected onTick(): void;
 }

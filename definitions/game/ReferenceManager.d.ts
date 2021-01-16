@@ -37,5 +37,6 @@ export default class ReferenceManager {
     resolve(id: number, type: ReferenceType.Skill): SkillType | undefined;
     resolve(id: number, type?: ReferenceType): Item | Creature | Doodad | NPC | Player | TileEvent | Island | Corpse | SkillType | undefined;
     inspect(id: number, type?: ReferenceType, ...args: any[]): import("./inspection/Inspection").default<any> | undefined;
+    tooltip(id: number, type?: ReferenceType, ...args: any[]): (tooltip: import("../newui/component/IComponent").ITooltip) => import("../newui/component/IComponent").ITooltip | undefined;
     private getReferenceType;
 }

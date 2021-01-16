@@ -17,7 +17,7 @@ export default class FertilityInfoProvider extends InfoProvider {
     private message;
     private constructor();
     getClass(): string[];
-    getDisplayLevel(): InfoDisplayLevel;
+    getDefaultDisplayLevel(): InfoDisplayLevel;
     initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
     hasContent(): boolean;
     get(): Translation;

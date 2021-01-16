@@ -10,27 +10,26 @@
  */
 import { Events, IEventEmitter } from "event/EventEmitter";
 import { InspectType } from "game/inspection/IInspection";
+import InspectionsHandler from "game/inspection/InspectionsHandler";
 import Component from "newui/component/Component";
-import Vector3 from "utilities/math/Vector3";
+import { TranslationGenerator } from "newui/component/IComponent";
 export interface ITileInspectionsEvents extends Events<Component> {
     refreshed(isValid?: boolean): any;
     updateInspectTypeFilter(): any;
 }
-export default class TileInspections extends Component {
+export default abstract class InspectionsList<INSPECTIONS_HANDLER extends InspectionsHandler = InspectionsHandler> extends Component {
     readonly event: IEventEmitter<this, ITileInspectionsEvents>;
-    private readonly paragraphCannotSeeTile;
+    private readonly paragraphInspectionsInvalid;
     private inspectTypeFilter;
-    private inspections?;
-    private position?;
+    protected inspectionsHandler?: InspectionsHandler;
     constructor();
     setInspectTypeFilter(filter?: (inspectType: InspectType) => boolean): this;
     refreshInspectTypeFilter(): this;
-    isPositionValid(): boolean;
-    getPosition(): Vector3 | undefined;
-    setPosition(position: Vector3): this;
     deregister(): void;
-    refresh(): void;
-    protected onTick(): void;
+    refresh(): this;
+    protected abstract initializeInspections(): INSPECTIONS_HANDLER | undefined;
+    isValid?(): boolean;
+    protected getInvalidTranslation?(): TranslationGenerator | undefined;
     private refreshInspectionsOfType;
     private initializeTooltipSection;
 }

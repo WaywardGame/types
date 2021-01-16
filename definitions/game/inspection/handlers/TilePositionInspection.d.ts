@@ -11,30 +11,24 @@
 import Doodad from "doodad/Doodad";
 import Corpse from "entity/creature/corpse/Corpse";
 import Entity from "entity/Entity";
-import EventEmitter from "event/EventEmitter";
 import { InspectType } from "game/inspection/IInspection";
 import { InfoProviderContext } from "game/inspection/InfoProvider";
 import Inspection from "game/inspection/Inspection";
+import InspectionsHandler from "game/inspection/InspectionsHandler";
 import { IContainer } from "item/IItem";
 import Item from "item/Item";
 import TileEvent from "tile/TileEvent";
 import { IVector3 } from "utilities/math/IVector";
+import Vector3 from "utilities/math/Vector3";
 import HashSet from "utilities/set/HashSet";
 export interface ITilePositionInspectionEvents {
     updatedInspections(type: InspectType, newInspections: HashSet<Inspection<any>>, oldInspections?: HashSet<Inspection<any>>): any;
 }
-export default class TilePositionInspection extends EventEmitter.Host<ITilePositionInspectionEvents> {
-    private readonly context;
-    private readonly inspections;
+export default class TilePositionInspection extends InspectionsHandler {
     private readonly position;
+    static create(position: IVector3, context: InfoProviderContext): TilePositionInspection;
     private get tile();
-    constructor(tilePosition: IVector3, context: InfoProviderContext);
-    get(inspectType: InspectType): HashSet<Inspection<any>> | undefined;
-    set(inspectType: InspectType, inspections: HashSet<Inspection<any>>): Map<InspectType, HashSet<Inspection<any>>>;
-    [Symbol.iterator](): IterableIterator<[InspectType, HashSet<Inspection<any>>]>;
-    types(): import("@wayward/goodstream/Stream").default<InspectType>;
-    register(): void;
-    deregister(): void;
+    constructor(position: Vector3, context: InfoProviderContext);
     protected onEntityMove(entity: Entity): void;
     protected onEntitySpawnOrRemove(_: any, entity: Entity): void;
     protected onTileEventMove(_: any, tileEvent: TileEvent): void;
@@ -44,8 +38,6 @@ export default class TilePositionInspection extends EventEmitter.Host<ITilePosit
     protected onCorpseCreate(_: any, corpse: Corpse): void;
     protected onDoodadCreate(_: any, doodad: Doodad): void;
     private updateInspectionsForEntity;
-    private updateInspections;
-    private updateInspectionsInternal;
-    private getInspections;
+    protected getInspections(inspectType: InspectType): HashSet<Inspection<any>>;
     private getInspectType;
 }
