@@ -23,5 +23,4 @@ export default class CorpseManager extends EventEmitter.Host<ICorpseManagerEvent
     getName(typeOrCorpse: CreatureType | Corpse, article?: boolean, count?: number, showCount?: boolean): Translation;
     getCorpseTranslations(corpses: Corpse[], article?: boolean, context?: TextContext): import("@wayward/goodstream/Stream").default<Translation>;
     getCorpseListTranslation(corpses: Corpse[], article?: boolean, context?: TextContext): Translation;
-    is(thing: any): thing is Corpse;
 }

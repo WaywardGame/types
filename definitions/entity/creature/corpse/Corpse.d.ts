@@ -15,6 +15,7 @@ import { ItemType } from "item/IItem";
 import { ISerializedTranslation } from "language/Translation";
 import { IVector3 } from "utilities/math/IVector";
 export default class Corpse implements IObject<CreatureType>, IVector3, IReferenceable {
+    static is(value: any): value is Corpse;
     aberrant?: boolean | undefined;
     decay?: number | undefined;
     id: number;
@@ -27,6 +28,7 @@ export default class Corpse implements IObject<CreatureType>, IVector3, IReferen
     y: number;
     z: number;
     constructor(type?: CreatureType, x?: number, y?: number, z?: number, decay?: number);
+    toString(): string;
     update(): void;
     getResources(clientSide?: boolean): ItemType[];
 }

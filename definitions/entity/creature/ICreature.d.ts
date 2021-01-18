@@ -72,7 +72,8 @@ export declare enum CreatureType {
     IceElemental = 46,
     IceWitch = 47,
     VoidDweller = 48,
-    SnowWalker = 49
+    SnowWalker = 49,
+    Mammoth = 50
 }
 export interface ICreatureOld extends Creature {
     hp: number;

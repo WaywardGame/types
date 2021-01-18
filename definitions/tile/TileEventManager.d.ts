@@ -46,7 +46,6 @@ export default class TileEventManager extends EventEmitter.Host<ITileManagerEven
     canGather(tile: ITile): TileEvent | undefined;
     updateAll(): void;
     fireOverflow(x: number, y: number, z: number): boolean;
-    is(thing: any): thing is TileEvent;
     canPickup(tile: ITile): TileEvent | undefined;
     blocksTile(tile: ITile): boolean;
     /**

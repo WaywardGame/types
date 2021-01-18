@@ -959,7 +959,11 @@ export declare enum ItemType {
     CalligenousScrap = 576,
     MagicalExtract = 577,
     ShimmeringFibers = 578,
-    MagicalTwine = 579
+    MagicalTwine = 579,
+    SandstoneHammer = 580,
+    SandstoneBullet = 581,
+    SandstoneAnvil = 582,
+    Snowman = 583
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

@@ -41,6 +41,7 @@ export default class TileEvent extends EventEmitter.Host<ITileEventEvents> imple
     private _fireStage?;
     private _movementFinishTime?;
     constructor(type?: TileEventType, x?: number, y?: number, z?: number);
+    toString(): string;
     description(): ITileEventDescription;
     getName(): Translation;
     getTile(): ITile;
