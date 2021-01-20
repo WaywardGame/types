@@ -20,6 +20,7 @@ import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import Item from "item/Item";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
+import World from "renderer/World";
 import { IReplayLogEntry } from "replay/IReplayLogEntry";
 import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import { ITile, ITileContainer, ITileData } from "tile/ITerrain";
@@ -36,6 +37,8 @@ export interface IGameEvents {
      * @param state The state of the player (why the game is ending)
      */
     end(state: PlayerState): any;
+    createWorld(world: World): any;
+    loadStep(): any;
     pause(): any;
     resume(): any;
     tickStart(tickFlag: TickFlag, ticks: number): any;

@@ -14,10 +14,14 @@ import Translation from "language/Translation";
 export default class ItemDurabilityInfoProvider extends InfoProvider {
     private readonly item;
     private minDur;
+    private decay;
+    private decayRate;
     constructor(item: Item);
     getClass(): string[];
     initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
-    get(): Translation;
+    get(): (0 | Translation)[];
     protected onTickEnd(): void;
+    private getDurability;
     private getMagicalItemDamageReduction;
+    private getDecay;
 }

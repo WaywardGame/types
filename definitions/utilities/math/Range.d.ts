@@ -22,3 +22,7 @@ export interface IRange {
     minimum: number;
     maximum: number;
 }
+export declare module IRange {
+    function lerp(t: number, range: IRange): number;
+    function unlerp(lerped: number, range: IRange): number;
+}

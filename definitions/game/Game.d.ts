@@ -27,6 +27,7 @@ import TimeManager from "game/TimeManager";
 import VotingManager from "game/VotingManager";
 import Interrupt from "language/dictionary/Interrupt";
 import Translation from "language/Translation";
+import ItemStylesheetHandler from "newui/screen/screens/game/util/item/ItemStylesheet";
 import { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
@@ -80,6 +81,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     tileDecorations: Uint16Array;
     mapSize: number;
     mapSizeSq: number;
+    readonly itemStylesheetHandler: ItemStylesheetHandler;
     readonly voting: VotingManager;
     readonly milestonesCollection: import("./options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<Milestone, import("./options/modifiers/milestone/MilestoneModifier").default>;
     challengeCollection?: ChallengeModifiersCollection;
@@ -105,6 +107,9 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     private gameOptionsCached?;
     private playOptions;
     private ambientLightLevelCache;
+    private readonly loading;
+    setLoading(...loading: Interrupt[]): this;
+    setLoaded(...loaded: Interrupt[]): this;
     initialize(): void;
     initGl(): Promise<void>;
     setupGl(restoring: boolean): Promise<void>;

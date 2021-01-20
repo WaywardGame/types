@@ -36,7 +36,6 @@ export default class Ui extends Emitter {
     hideInGameScreen(): void;
     onWindowResize(): void;
     isInGameScreenShown(): boolean;
-    setupItemBackgrounds(): void;
     loadQuickSlots(): void;
     isContextMenuOpen(): boolean;
     isOptionsOverlayShown(): boolean;
@@ -82,6 +81,4 @@ export default class Ui extends Emitter {
     private onBeforeUnloadBrowser;
     private logErrorEvent;
     private logPromiseRejectionEvent;
-    private removeStyle;
-    private appendStyle;
 }

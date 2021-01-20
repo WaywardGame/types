@@ -50,7 +50,7 @@ export default class Island implements IReferenceable {
     version: string;
     wellData: SaferNumberIndexedObject<IWell>;
     seeds: ISeeds;
-    temperature: TemperatureManager | undefined;
+    temperature: TemperatureManager;
     static positionToId(position: IVector2): string;
     static idToPosition(id: string): IVector2 | undefined;
     constructor(position?: IVector2, startingSeed?: number);
