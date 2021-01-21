@@ -21,7 +21,7 @@ import TileEvent from "tile/TileEvent";
 export declare type Reference = [number, ReferenceType?];
 export default class ReferenceManager {
     static needsReferenceId(type: ReferenceType): boolean;
-    static getList(type: ReferenceType): readonly SkillType[] | Player[] | SaferArray<Creature> | SaferArray<Doodad> | SaferArray<NPC> | SaferArray<Corpse> | SaferArray<Item> | SaferArray<TileEvent> | IterableIterator<Island>;
+    static getList(type: ReferenceType, gameIsland?: Island): readonly SkillType[] | Player[] | SaferArray<Creature> | SaferArray<Doodad> | SaferArray<NPC> | SaferArray<Corpse> | SaferArray<Item> | SaferArray<TileEvent> | IterableIterator<Island>;
     private referenceCursor;
     create(): number;
     get(thing: IReferenceable): Reference | undefined;
