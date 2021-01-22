@@ -23,7 +23,6 @@ export default class Ui extends Emitter {
     private readonly elementBody;
     private bodyWidth;
     private bodyHeight;
-    private elementScrollableContainers;
     private unloading;
     constructor();
     initialize(): void;
@@ -74,8 +73,6 @@ export default class Ui extends Emitter {
     getDialogInfo(dialogId: DialogId): IDialogInfo;
     setVersionExtra(msg: string): void;
     openDialogs(): void;
-    updateScrollableContainersList(): void;
-    updateScrollableContainer(this: Element): void;
     cancelSorting(): void;
     private onBeforeUnloadElectron;
     private onBeforeUnloadBrowser;

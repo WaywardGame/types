@@ -14,6 +14,7 @@ import { ContextMenuDescriptions } from "newui/component/ContextMenu";
 import StaticComponent from "newui/screen/screens/game/component/StaticComponent";
 import { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import GameScreen from "newui/screen/screens/GameScreen";
+import { ScrollableHandler } from "newui/util/ScrollableHandler";
 import { Quadrant } from "./IQuadrantComponent";
 interface IQuadrantComponentEvents extends Events<StaticComponent> {
     /**
@@ -45,6 +46,7 @@ export default abstract class QuadrantComponent extends StaticComponent {
     protected readonly host: GameScreen;
     readonly id: QuadrantComponentId;
     event: IEventEmitter<this, IQuadrantComponentEvents>;
+    protected readonly scrollableHandler: ScrollableHandler;
     get preferredQuadrant(): Quadrant;
     get quadrant(): Quadrant;
     get quadrantName(): "None" | "TopLeft" | "TopRight" | "BottomLeft" | "BottomRight" | "Top" | "Bottom";

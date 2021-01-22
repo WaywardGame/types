@@ -991,7 +991,9 @@ export declare enum ItemType {
     SandstoneHammer = 580,
     SandstoneBullet = 581,
     SandstoneAnvil = 582,
-    Snowman = 583
+    Snowman = 583,
+    FrozenFlesh = 584,
+    AnimalTusk = 585
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
