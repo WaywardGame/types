@@ -18,7 +18,12 @@ import { ITile } from "tile/ITerrain";
 import { ITileEventDescription, TileEventType } from "tile/ITileEvent";
 import { IVector3 } from "utilities/math/IVector";
 export interface ITileEventEvents {
-    fireUpdate(stage?: FireStage): any;
+    /**
+     * Emitted when the fire stage of this tile event changes.
+     * Note: The fire stage of tile event is not saved, so when the tile event's fire stage is first checked on load, this event will be
+     * emitted.
+     */
+    fireUpdate(tile: ITile, stage: FireStage | undefined): any;
 }
 export default class TileEvent extends EventEmitter.Host<ITileEventEvents> implements IReferenceable, IObject<TileEventType>, IVector3, ITemperatureSource {
     static is(value: any): value is TileEvent;
@@ -46,7 +51,7 @@ export default class TileEvent extends EventEmitter.Host<ITileEventEvents> imple
     getName(): Translation;
     getTile(): ITile;
     getProducedTemperature(): number | undefined;
-    updateFire(): void;
+    updateFire(tile: ITile): void;
     moveTo(x: number, y: number, z: number): void;
     addToTile(tile: ITile): void;
     removeFromTile(updateTile: boolean): void;

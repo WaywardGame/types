@@ -125,6 +125,12 @@ export interface IGameOptions {
      */
     disableMods: boolean;
     milestoneModifiers: Set<Milestone>;
+    items: {
+        /**
+         * Multiplier for decay of items.
+         */
+        decayMultiplier: number;
+    };
 }
 export declare enum UnlockedRecipesStrategy {
     StartWithNone = 0,

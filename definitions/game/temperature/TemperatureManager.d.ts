@@ -10,8 +10,10 @@
  */
 import Doodad from "doodad/Doodad";
 import EventEmitter from "event/EventEmitter";
+import { TileUpdateType } from "game/IGame";
 import Island from "game/Island";
 import { WorldZ } from "game/WorldZ";
+import { ITile } from "tile/ITerrain";
 import TileEvent from "tile/TileEvent";
 export declare enum TempType {
     Cold = -1,
@@ -27,7 +29,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     /**
      * Returns the current overall temperature for the given tile.
      */
-    get(x: number, y: number, z: WorldZ): number;
+    get(x: number, y: number, z: WorldZ, isClientSide: boolean): number;
     /**
      * Returns the base temperature.
      */
@@ -61,10 +63,10 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
      * Recalculates the *temperature production* of a tile.
      * @param invalidate Whether to invalidate the temperature calculations of surrounding tiles.
      */
-    update(x: number, y: number, z: WorldZ, invalidate?: boolean): void;
+    update(x: number, y: number, z: WorldZ, tile?: ITile | undefined, invalidate?: boolean): void;
     invalidateAll(): void;
-    protected onFireUpdate(object: Doodad | TileEvent): void;
-    protected onCreateOrRemoveDoodadOrTileEvent(_: any, object: Doodad | TileEvent): void;
+    protected onFireUpdate(object: Doodad | TileEvent, tile: ITile): void;
+    protected onTileUpdate(_1: any, tile: ITile, x: number, y: number, z: number, _2: TileUpdateType): void;
     private calculateProduced;
     private updateProducedType;
     /**

@@ -45,7 +45,7 @@ export interface IDoodadEvents {
      * Note: The fire stage of doodads is not saved, so when the doodad's fire stage is first checked on load, this event will be
      * emitted.
      */
-    fireUpdate(stage: FireStage | undefined): any;
+    fireUpdate(tile: ITile, stage: FireStage | undefined): any;
     /**
      * Emitted when the doodad is created.
      */
