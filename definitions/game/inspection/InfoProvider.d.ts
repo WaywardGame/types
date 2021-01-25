@@ -56,6 +56,10 @@ export interface IInfoProviderEvents {
      * Should be emitted when the info provider's display level changes.
      */
     updateDisplayLevel(displayLevel: InfoDisplayLevel, className: string, oldClassName?: string): any;
+    /**
+     * Should be emitted when the info provider has detected an update and it needs to check whether to have contents.
+     */
+    recheckHasContent(): any;
 }
 export declare enum InfoDisplayLevel {
     NonVerbose = -2,
@@ -63,6 +67,9 @@ export declare enum InfoDisplayLevel {
     Always = 0,
     Extra = 1,
     Verbose = 2
+}
+export declare module InfoDisplayLevel {
+    function canDisplay(level: InfoDisplayLevel, toDisplay: InfoDisplayLevel): boolean;
 }
 export interface IIcon {
     path: string;
@@ -91,10 +98,14 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
      */
     refresh(): this;
     /**
+     * Call when this info provider should recheck whether it has contents.
+     */
+    recheckHasContent(): this;
+    /**
      * Call when this info provider should be removed.
      */
     remove(): this;
-    initComponent(component?: Component<HTMLElement>): Component<HTMLElement>;
+    initComponent(component?: Component<HTMLElement>, context?: InfoProviderContext): Component<HTMLElement>;
     protected initChildTextComponent(text: TranslationGenerator): Text;
 }
 export declare class SimpleInfoProvider extends InfoProvider {

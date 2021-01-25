@@ -10,23 +10,28 @@
  */
 import { Events, IEventEmitter } from "event/EventEmitter";
 import { InspectType } from "game/inspection/IInspection";
+import { InfoDisplayLevel } from "game/inspection/InfoProvider";
 import InspectionsHandler from "game/inspection/InspectionsHandler";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 export interface ITileInspectionsEvents extends Events<Component> {
     refreshed(isValid?: boolean): any;
     updateInspectTypeFilter(): any;
+    updateDisplayLevel(): any;
 }
 export default abstract class InspectionsList<INSPECTIONS_HANDLER extends InspectionsHandler = InspectionsHandler> extends Component {
     readonly event: IEventEmitter<this, ITileInspectionsEvents>;
     private readonly paragraphInspectionsInvalid;
     private inspectTypeFilter;
     protected inspectionsHandler?: InspectionsHandler;
+    private displayLevel;
+    private refreshingId?;
     constructor();
     setInspectTypeFilter(filter?: (inspectType: InspectType) => boolean): this;
     refreshInspectTypeFilter(): this;
     deregister(): void;
-    refresh(): this;
+    setDisplayLevel(displayLevel: InfoDisplayLevel): this;
+    refresh(): Promise<this | undefined>;
     protected abstract initializeInspections(): INSPECTIONS_HANDLER | undefined;
     isValid?(): boolean;
     protected getInvalidTranslation?(): TranslationGenerator | undefined;

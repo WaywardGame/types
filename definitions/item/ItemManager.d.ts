@@ -133,7 +133,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     isTileContainer(container: IContainer | undefined): boolean;
     getOrderedContainerItems(container: IContainer, allowProtectedItems?: boolean): Item[];
     reduceDismantleWeight(createdItems: Item[], itemWeight: number): void;
-    getItemTranslations(items: Item[], article?: boolean, context?: TextContext): import("@wayward/goodstream/Stream").default<Translation>;
+    getItemTranslations(items: Item[], article?: boolean, context?: TextContext): Translation[];
     getItemListTranslation(items: Item[], article?: boolean, context?: TextContext): Translation;
     loadReferences(generatedNewWorld: boolean, isTraveling: boolean): void;
     saveTileReferences(): void;
