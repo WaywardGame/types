@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Action } from "entity/action/Action";
-import { ActionArgument } from "entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../player/Player").default, void, [import("../../../item/Item").default]>;
-export default _default;
+import { DrawnMapTheme } from "game/mapping/IMapRender";
+declare const drawnMapThemes: Record<DrawnMapTheme, string>;
+export default drawnMapThemes;

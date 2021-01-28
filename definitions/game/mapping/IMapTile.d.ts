@@ -41,12 +41,13 @@ export interface IMapTileData {
 export interface IMapTileRenderApi {
     data: IMapTileData;
     random: Random;
-    get(direction: Direction): IMapTileData;
+    get(direction: Direction, diagonalDirection?: Direction): IMapTileData;
     plot(strategy: IMapTileRenderStrategy): IMapTileRenderConfiguration[];
 }
 export interface IMapTileRenderConfiguration {
     spriteOffset: Vector2;
     spriteSize: Vector2;
+    drawOffset?: Vector2;
 }
 export interface IMapTileRenderStrategy extends IModdable, IHasImagePath {
     configurations?: IMapTileRenderConfiguration[];

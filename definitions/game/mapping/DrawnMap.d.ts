@@ -11,6 +11,8 @@
 import { DoodadType } from "doodad/IDoodad";
 import Human from "entity/Human";
 import EventEmitter from "event/EventEmitter";
+import MapBackground from "game/mapping/Background";
+import { DrawnMapTheme } from "game/mapping/IMapRender";
 import { IMapTileData } from "game/mapping/IMapTile";
 import Obfuscation from "game/mapping/Obfuscation";
 import Item from "item/Item";
@@ -106,7 +108,8 @@ export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> {
     addTreasure(x: number, y: number, chest: DoodadType): this;
     discoverTreasure(x: number, y: number, discoverer: Human): this;
     getCenterPosition(): IVector3;
-    render(): Promise<HTMLCanvasElement | undefined>;
+    render(theme: DrawnMapTheme): Promise<HTMLCanvasElement | undefined>;
     getObfuscator(): Obfuscation;
+    getBackground(): MapBackground;
     private plot;
 }

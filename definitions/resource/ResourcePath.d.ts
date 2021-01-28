@@ -51,10 +51,10 @@ declare module ResourcePath {
     /**
      * Returns the domain for the given `PathType`, or `undefined` if the `PathType` has no domain.
      */
-    function getPathDomain(pathType: PathType): "character" | "ui/icons" | "ui/icons/info" | "ui/map" | "terrain" | undefined;
+    function getPathDomain(pathType: PathType): "character" | "ui/icons" | "ui/icons/info" | "ui/map/{theme}" | "terrain" | undefined;
     /**
      * Returns the name of the given `PathType`
      */
-    function getPathTypeName(pathType: PathType): string;
+    function getPathTypeName(pathType: PathType): string | undefined;
 }
 export default ResourcePath;

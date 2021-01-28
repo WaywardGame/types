@@ -28,6 +28,7 @@ declare class Strings {
     escapeHTML(str: string): string;
     stripHTML(str: string): string;
     stripParentDirectoryAccessorsFromPath(path: string): string;
+    dir(path: string, times?: number): string;
     encodeURIComponentPath(p: string): string;
     generateTimestamp(date?: Date): string;
     isSubstringAt(str: string, index: number, substr: string): boolean;

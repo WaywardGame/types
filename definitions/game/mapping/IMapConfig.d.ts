@@ -21,7 +21,3 @@ export declare const DRAWN_MAP_OBFUSCATION_DEPTH = 0.9;
  * A number representing how much effect the map's obfuscation level has on each tile
  */
 export declare const DRAWN_MAP_OBFUSCATION_HEIGHT = 2;
-/**
- * How much durability damage maps take when using the read action on them
- */
-export declare const DRAWN_MAP_READ_DURABILITY_COST = 200;

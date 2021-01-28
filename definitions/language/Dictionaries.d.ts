@@ -24,6 +24,7 @@ import { ExhaustionLevel } from "entity/status/handler/IExhausted";
 import { BiomeType } from "game/IBiome";
 import { InspectType } from "game/inspection/IInspection";
 import { Quality } from "game/IObject";
+import { DrawnMapTheme } from "game/mapping/IMapRender";
 import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, TravelingEffectStrategy, UnlockedRecipesStrategy } from "game/options/IGameOptions";
 import { Challenge } from "game/options/modifiers/challenge/IChallenge";
@@ -77,66 +78,67 @@ export declare enum Dictionary {
     DamageType = 13,
     Doodad = 14,
     DoodadGroup = 15,
-    EquipEffect = 16,
-    EquipSlot = 17,
-    ExhaustionLevel = 18,
-    FireStage = 19,
-    GameEndMessage = 20,
-    GameMode = 21,
-    Growth = 22,
-    GrowthFungus = 23,
-    HelpArticle = 24,
-    HighscoreSort = 25,
-    HumanName = 26,
-    Input = 27,
-    InspectType = 28,
-    Interrupt = 29,
-    InterruptChoice = 30,
-    Item = 31,
-    ItemGroup = 32,
-    JoinServerRetryReason = 33,
-    Macro = 34,
-    MagicalPropertyType = 35,
-    Message = 36,
-    MessagesDefaultFilter = 37,
-    MessagesTimestampMode = 38,
-    Milestone = 39,
-    MilestoneModifierGroup = 40,
-    Misc = 41,
-    ModLoadError = 42,
-    ModLoadFailureReason = 43,
-    ModProvide = 44,
-    ModSort = 45,
-    ModType = 46,
-    MultiplayerCompatibility = 47,
-    MultiplayerDisconnectReason = 48,
-    MusicPlaylist = 49,
-    Note = 50,
-    NPC = 51,
-    Number = 52,
-    PartOfDay = 53,
-    PowerMode = 54,
-    QuadrantComponent = 55,
-    QuadrantComponentContextMenuAction = 56,
-    Quality = 57,
-    Quest = 58,
-    QuestRequirement = 59,
-    SaveSlotSort = 60,
-    Skill = 61,
-    Source = 62,
-    Stat = 63,
-    StatusEffect = 64,
-    TeamMemberResponsibility = 65,
-    Terrain = 66,
-    TileEvent = 67,
-    TravelingEffectStrategy = 68,
-    Ui = 69,
-    UiQuadrant = 70,
-    UnableToJoinReason = 71,
-    UnlockedRecipesStrategy = 72,
-    Website = 73,
-    WeightStatus = 74,
-    WorldLayer = 75
+    DrawnMapTheme = 16,
+    EquipEffect = 17,
+    EquipSlot = 18,
+    ExhaustionLevel = 19,
+    FireStage = 20,
+    GameEndMessage = 21,
+    GameMode = 22,
+    Growth = 23,
+    GrowthFungus = 24,
+    HelpArticle = 25,
+    HighscoreSort = 26,
+    HumanName = 27,
+    Input = 28,
+    InspectType = 29,
+    Interrupt = 30,
+    InterruptChoice = 31,
+    Item = 32,
+    ItemGroup = 33,
+    JoinServerRetryReason = 34,
+    Macro = 35,
+    MagicalPropertyType = 36,
+    Message = 37,
+    MessagesDefaultFilter = 38,
+    MessagesTimestampMode = 39,
+    Milestone = 40,
+    MilestoneModifierGroup = 41,
+    Misc = 42,
+    ModLoadError = 43,
+    ModLoadFailureReason = 44,
+    ModProvide = 45,
+    ModSort = 46,
+    ModType = 47,
+    MultiplayerCompatibility = 48,
+    MultiplayerDisconnectReason = 49,
+    MusicPlaylist = 50,
+    Note = 51,
+    NPC = 52,
+    Number = 53,
+    PartOfDay = 54,
+    PowerMode = 55,
+    QuadrantComponent = 56,
+    QuadrantComponentContextMenuAction = 57,
+    Quality = 58,
+    Quest = 59,
+    QuestRequirement = 60,
+    SaveSlotSort = 61,
+    Skill = 62,
+    Source = 63,
+    Stat = 64,
+    StatusEffect = 65,
+    TeamMemberResponsibility = 66,
+    Terrain = 67,
+    TileEvent = 68,
+    TravelingEffectStrategy = 69,
+    Ui = 70,
+    UiQuadrant = 71,
+    UnableToJoinReason = 72,
+    UnlockedRecipesStrategy = 73,
+    Website = 74,
+    WeightStatus = 75,
+    WorldLayer = 76
 }
 export declare type Enum = Record<string, number> & Record<number, string>;
 export declare const SYMBOL_ANY_DICTIONARY: unique symbol;
@@ -157,66 +159,67 @@ declare const dictionaries: {
     13: typeof DamageType;
     14: typeof DoodadType;
     15: typeof DoodadTypeGroup;
-    16: typeof EquipEffect;
-    17: typeof EquipType;
-    18: typeof ExhaustionLevel;
-    19: typeof FireStage;
-    20: typeof GameEndMessage;
-    21: typeof GameMode;
-    22: typeof GrowingStage;
+    16: typeof DrawnMapTheme;
+    17: typeof EquipEffect;
+    18: typeof EquipType;
+    19: typeof ExhaustionLevel;
+    20: typeof FireStage;
+    21: typeof GameEndMessage;
+    22: typeof GameMode;
     23: typeof GrowingStage;
-    24: typeof HelpArticle;
-    25: typeof HighscoreSort;
-    26: typeof HumanName;
-    27: symbol;
-    28: typeof InspectType;
-    29: typeof Interrupt;
-    30: typeof InterruptChoice;
-    31: typeof ItemType;
-    32: typeof ItemTypeGroup;
-    33: typeof JoinServerRetryReason;
-    34: symbol;
-    35: typeof MagicalPropertyType;
-    36: typeof Message;
-    37: typeof MessageFilterDefault;
-    38: typeof MessageTimestamp;
-    39: typeof Milestone;
-    40: typeof MilestoneModifierGroup;
-    41: typeof MiscTranslation;
-    42: typeof CanLoadState;
-    43: typeof ModLoadFailureReason;
-    44: typeof ModProvide;
-    45: typeof ModSort;
-    46: typeof ModType;
-    47: typeof MultiplayerCompatibility;
-    48: typeof DisconnectReason;
-    49: typeof MusicPlaylist;
-    50: typeof Note;
-    51: typeof NPCType;
-    52: symbol;
-    53: typeof PartOfDay;
-    54: typeof PowerMode;
-    55: typeof QuadrantComponentId;
-    56: typeof QuadrantComponentContextMenuAction;
-    57: typeof Quality;
-    58: typeof QuestType;
-    59: typeof QuestRequirementType;
-    60: typeof SaveSort;
-    61: typeof SkillType;
-    62: typeof Source;
-    63: typeof Stat;
-    64: typeof StatusType;
-    65: typeof Responsibility;
-    66: typeof TerrainType;
-    67: typeof TileEventType;
-    68: typeof TravelingEffectStrategy;
-    69: typeof UiTranslation;
-    70: typeof Quadrant;
-    71: typeof UnableToJoinReason;
-    72: typeof UnlockedRecipesStrategy;
-    73: typeof Website;
-    74: typeof WeightStatus;
-    75: typeof WorldZ;
+    24: typeof GrowingStage;
+    25: typeof HelpArticle;
+    26: typeof HighscoreSort;
+    27: typeof HumanName;
+    28: symbol;
+    29: typeof InspectType;
+    30: typeof Interrupt;
+    31: typeof InterruptChoice;
+    32: typeof ItemType;
+    33: typeof ItemTypeGroup;
+    34: typeof JoinServerRetryReason;
+    35: symbol;
+    36: typeof MagicalPropertyType;
+    37: typeof Message;
+    38: typeof MessageFilterDefault;
+    39: typeof MessageTimestamp;
+    40: typeof Milestone;
+    41: typeof MilestoneModifierGroup;
+    42: typeof MiscTranslation;
+    43: typeof CanLoadState;
+    44: typeof ModLoadFailureReason;
+    45: typeof ModProvide;
+    46: typeof ModSort;
+    47: typeof ModType;
+    48: typeof MultiplayerCompatibility;
+    49: typeof DisconnectReason;
+    50: typeof MusicPlaylist;
+    51: typeof Note;
+    52: typeof NPCType;
+    53: symbol;
+    54: typeof PartOfDay;
+    55: typeof PowerMode;
+    56: typeof QuadrantComponentId;
+    57: typeof QuadrantComponentContextMenuAction;
+    58: typeof Quality;
+    59: typeof QuestType;
+    60: typeof QuestRequirementType;
+    61: typeof SaveSort;
+    62: typeof SkillType;
+    63: typeof Source;
+    64: typeof Stat;
+    65: typeof StatusType;
+    66: typeof Responsibility;
+    67: typeof TerrainType;
+    68: typeof TileEventType;
+    69: typeof TravelingEffectStrategy;
+    70: typeof UiTranslation;
+    71: typeof Quadrant;
+    72: typeof UnableToJoinReason;
+    73: typeof UnlockedRecipesStrategy;
+    74: typeof Website;
+    75: typeof WeightStatus;
+    76: typeof WorldZ;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

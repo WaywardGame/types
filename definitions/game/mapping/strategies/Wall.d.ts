@@ -9,13 +9,25 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { IMapTileRenderApi, IMapTileRenderConfiguration, IMapTileRenderStrategy } from "game/mapping/IMapTile";
+import { TerrainType } from "tile/ITerrain";
 import Vector2 from "utilities/math/Vector2";
+export declare module WallStrategy {
+    function hash(east: boolean, north: boolean, west: boolean, south: boolean): string;
+    function hashByDirections(directions: {
+        east?: boolean;
+        north?: boolean;
+        west?: boolean;
+        south?: boolean;
+    }): string;
+    const NONE: string;
+}
 export declare const enum WallStrategyDifference {
     Terrain = 0,
     Decoration = 1
 }
-declare function wallStrategy(difference: WallStrategyDifference, solidRenderStrategy?: false | IMapTileRenderStrategy, override?: (api: IMapTileRenderApi, adaption: false | Vector2) => false | Vector2, overrideConfigurations?: (api: IMapTileRenderApi, configuration: IMapTileRenderConfiguration | undefined) => ArrayOr<IMapTileRenderConfiguration> | undefined): IMapTileRenderStrategy;
+declare function wallStrategy(difference: WallStrategyDifference | string | ((api: IMapTileRenderApi) => string), solidRenderStrategy?: false | IMapTileRenderStrategy, override?: (api: IMapTileRenderApi, adaption: false | Vector2) => false | Vector2, overrideConfigurations?: (api: IMapTileRenderApi, configuration: IMapTileRenderConfiguration | undefined) => ArrayOr<IMapTileRenderConfiguration> | undefined): IMapTileRenderStrategy;
 declare module wallStrategy {
-    function plot(difference: WallStrategyDifference, solidRenderStrategy: false | IMapTileRenderStrategy | undefined, overrideAdaption: ((api: IMapTileRenderApi, adaption: false | Vector2) => false | Vector2) | undefined, overrideConfigurations: ((api: IMapTileRenderApi, configurations: IMapTileRenderConfiguration | undefined) => ArrayOr<IMapTileRenderConfiguration> | undefined) | undefined, api: IMapTileRenderApi): IMapTileRenderConfiguration[] | undefined;
+    function isSameTerrain(terrain1: TerrainType, terrain2: TerrainType): boolean;
+    function plot(difference: WallStrategyDifference | string | ((api: IMapTileRenderApi) => string), solidRenderStrategy: false | IMapTileRenderStrategy | undefined, overrideAdaption: ((api: IMapTileRenderApi, adaption: false | Vector2) => false | Vector2) | undefined, overrideConfigurations: ((api: IMapTileRenderApi, configurations: IMapTileRenderConfiguration | undefined) => ArrayOr<IMapTileRenderConfiguration> | undefined) | undefined, api: IMapTileRenderApi): IMapTileRenderConfiguration[] | undefined;
 }
 export default wallStrategy;

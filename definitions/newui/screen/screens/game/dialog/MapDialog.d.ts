@@ -17,11 +17,11 @@ import { IBindHandlerApi } from "newui/input/Bind";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 export default class MapDialog extends Dialog {
     private readonly canvas;
-    private readonly textWrapper;
     private mapCanvas?;
     private unobfuscatedCanvas?;
     private map?;
     private obfuscation?;
+    private background?;
     private item?;
     private viewOffset;
     private viewZoom;
@@ -37,7 +37,11 @@ export default class MapDialog extends Dialog {
     private viewAnimating?;
     private animatingFullReset;
     private mapItemId?;
+    private mapAlwaysOpaque?;
+    private theme?;
+    private useOnlyIntegerZoomLevels?;
     constructor();
+    private setTheme;
     getName(): Translation;
     read(map: DrawnMap, item: Item, resetView?: boolean): Promise<void>;
     onDigTreasure(map: DrawnMap, treasure: ITreasure, revealer: Human): void;

@@ -8,7 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Action } from "entity/action/Action";
-import { ActionArgument } from "entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../player/Player").default, void, [import("../../../item/Item").default]>;
-export default _default;
+export declare enum MapSprite {
+    Obfuscation = 0,
+    Background = 1,
+    EdgeMask = 2
+}
+export declare const DRAWN_MAP_BACKGROUND_PADDING = 16;
+export declare enum DrawnMapTheme {
+    Paper = 0,
+    Dark = 1
+}
+export interface IDrawnMapTheme {
+    noBackground?: true;
+    sepia?: true;
+}
+export declare const drawnMapThemes: Record<DrawnMapTheme, IDrawnMapTheme>;

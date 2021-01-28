@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoDisplayLevel, InfoProvider } from "game/inspection/InfoProvider";
+import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import Item from "item/Item";
 import Translation from "language/Translation";
 export default class ItemDetailsInfoProvider extends InfoProvider {
@@ -18,7 +19,7 @@ export default class ItemDetailsInfoProvider extends InfoProvider {
     getDefaultDisplayLevel(): InfoDisplayLevel;
     initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
     hasContent(): boolean;
-    get(): (0 | Translation)[];
+    get(): (0 | Translation | LabelledValue)[];
     private getUses;
     private getGroupings;
     private getWorth;

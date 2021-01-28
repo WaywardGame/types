@@ -1,0 +1,30 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2020
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://github.com/WaywardGame/types/wiki
+ */
+import { InfoProvider } from "game/inspection/InfoProvider";
+import MagicalPropertyValue from "game/inspection/infoProviders/MagicalPropertyValue";
+import Translation from "language/Translation";
+import Component from "newui/component/Component";
+import { TranslationGenerator } from "newui/component/IComponent";
+import Text from "newui/component/Text";
+export default class LabelledValue extends InfoProvider {
+    private readonly label;
+    private readonly value;
+    static label(label: Translation): {
+        value(value: MagicalPropertyValue): LabelledValue;
+    };
+    private componentClass;
+    private constructor();
+    getClass(): string[];
+    get(): (Translation | MagicalPropertyValue)[];
+    initComponent(): Component<HTMLElement>;
+    protected initChildTextComponent(text: TranslationGenerator): Text;
+    setComponent(componentClass: Class<Component>): this;
+}
