@@ -269,6 +269,7 @@ export interface ITooltipEvents extends IComponentEvents {
 }
 export interface ITooltip extends IComponent {
     event: IEventEmitter<this, ITooltipEvents>;
+    setSecondary(): this;
     setLocation(location: TooltipLocation): this;
     setMaxWidth(maxWidth: number): this;
     setNoCache(): this;

@@ -31,6 +31,7 @@ import Item from "item/Item";
 import Recipe from "item/recipe/Recipe";
 import Message from "language/dictionary/Message";
 import { IModdable } from "mod/ModRegistry";
+import { TerrainType } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
 import { IRange } from "utilities/math/Range";
@@ -76,7 +77,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
      * This also interacts with the flammable property, so look at that as well.
      */
     onBurn?: ItemType[];
-    onUse?: Record<number, any>;
+    onUse?: IOnUse;
     equipEffect?: EquipEffects;
     damageType?: DamageType;
     weight?: number;
@@ -200,6 +201,21 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     recipeCache?: ItemType[];
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
+}
+export declare type ConsumeItemStatsTuple = [health: number, stamina: number, hunger: number, thirst: number];
+export interface IOnUse {
+    [ActionType.Apply]?: ConsumeItemStatsTuple;
+    [ActionType.Build]?: DoodadType | [build: DoodadType, keepItem: true];
+    [ActionType.DrinkCure]?: ConsumeItemStatsTuple;
+    [ActionType.DrinkItem]?: ConsumeItemStatsTuple;
+    [ActionType.Eat]?: ConsumeItemStatsTuple;
+    [ActionType.Heal]?: ConsumeItemStatsTuple;
+    [ActionType.HealOther]?: number;
+    [ActionType.PlaceDown]?: DoodadType;
+    [ActionType.Plant]?: DoodadType;
+    [ActionType.SetDown]?: TerrainType;
+    [ActionType.SmotherFire]?: TerrainType;
+    [ActionType.StokeFire]?: number;
 }
 export interface IItemReturn {
     type: ItemType;

@@ -49,3 +49,4 @@ export interface IStatDisplayDescription extends IModdable {
      */
     tooltip?(tooltip: ITooltip, entity: Entity, stat: IStat): any;
 }
+export declare const STAT_DEFAULT_DISPLAY_ORDER = 100;

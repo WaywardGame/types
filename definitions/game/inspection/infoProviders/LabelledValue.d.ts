@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
-import MagicalPropertyValue from "game/inspection/infoProviders/MagicalPropertyValue";
+import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
@@ -18,12 +18,12 @@ export default class LabelledValue extends InfoProvider {
     private readonly label;
     private readonly value;
     static label(label: Translation): {
-        value(value: MagicalPropertyValue): LabelledValue;
+        value(value: InfoProvider | TranslationGenerator): LabelledValue;
     };
     private componentClass;
     private constructor();
     getClass(): string[];
-    get(): (Translation | MagicalPropertyValue)[];
+    get(): (Translation | import("../../../language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | import("../../../language/Translation").ISerializedTranslation | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | UiTranslation | undefined) | InfoProvider)[];
     initComponent(): Component<HTMLElement>;
     protected initChildTextComponent(text: TranslationGenerator): Text;
     setComponent(componentClass: Class<Component>): this;

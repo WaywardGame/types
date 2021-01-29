@@ -115,7 +115,7 @@ export declare class SimpleInfoProvider extends InfoProvider {
     private childComponentClass;
     constructor(...translations: Array<TranslationGenerator | InfoProvider>);
     get(): (import("../../language/Translation").default | import("../../language/Translation").ISerializedTranslation | import("../../language/dictionary/UiTranslation").default | (() => import("../../language/Translation").default | import("../../language/Translation").ISerializedTranslation | Iterable<import("../../utilities/string/Interpolator").IStringSection> | import("../../language/dictionary/UiTranslation").default | undefined) | InfoProvider)[];
-    add(...translations: Array<TranslationGenerator | InfoProvider>): this;
+    add(...translations: Array<TranslationGenerator | InfoProvider | Falsy>): this;
     getClass(): string[];
     addClasses(...classes: string[]): this;
     initComponent(): Component<HTMLElement>;

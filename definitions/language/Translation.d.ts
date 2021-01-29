@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { SkillType } from "entity/IHuman";
+import { Stat } from "entity/IStats";
 import { MessageType } from "entity/player/IMessageManager";
 import { Quality } from "game/IObject";
 import { IReferenceable, ReferenceType } from "game/IReferenceManager";
@@ -89,6 +90,9 @@ declare class Translation {
     static colorizeMessageType(type: MessageType): Translation;
     static colorizeMessageType(type: MessageType, text: string | IStringSection): IStringSection;
     static colorizeMessageType(type: MessageType, text: IStringSection[]): IStringSection[];
+    static colorizeStat(type: Stat | string): Translation;
+    static colorizeStat(type: Stat | string, text: string | IStringSection): IStringSection;
+    static colorizeStat(type: Stat | string, text: IStringSection[]): IStringSection[];
     static colorizeImportance(importance: "primary" | "secondary"): Translation;
     static colorizeImportance(importance: "primary" | "secondary", text: string | IStringSection): IStringSection;
     static colorizeImportance(importance: "primary" | "secondary", text: IStringSection[]): IStringSection[];
@@ -209,6 +213,8 @@ declare module Translation {
     const ui: (entry: string | UiTranslation) => Translation;
     const message: (entry: string | Message) => Translation;
     const misc: (entry: string | MiscTranslation) => Translation;
-    const skill: (entry: string | SkillType) => Translation;
+    const skill: (entry: string | SkillType, color?: boolean) => Translation;
+    const stat: (entry: string | Stat, color?: boolean) => Translation;
+    function difference(value: number): number | Translation;
 }
 export default Translation;

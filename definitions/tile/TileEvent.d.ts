@@ -42,6 +42,11 @@ export default class TileEvent extends EventEmitter.Host<ITileEventEvents> imple
     minDur?: number;
     spread?: number;
     step?: number;
+    /**
+     * For use with the Fire TileEvent to check if it has a fuel source and should create ash by default.
+     * Set to 0 to stop all ash production.
+     */
+    fuel?: number;
     private _description;
     private _fireStage?;
     private _movementFinishTime?;

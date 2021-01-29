@@ -21,6 +21,7 @@ export default class Tooltip extends Component implements ITooltip {
     private maxWidth;
     private hasSetPosition;
     constructor(source: Component);
+    setSecondary(): this;
     setForceShown(forceShown?: boolean): this;
     wasForceShown(): boolean;
     setLocation(location: TooltipLocation): this;
