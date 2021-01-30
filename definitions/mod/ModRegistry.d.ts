@@ -63,43 +63,44 @@ export declare const SYMBOL_MOD_REGISTRATIONS: unique symbol;
 export declare enum ModRegistrationType {
     Action = 0,
     Bindable = 1,
-    Command = 2,
-    Creature = 3,
-    Dialog = 4,
-    Dictionary = 5,
-    Doodad = 6,
-    DoodadGroup = 7,
-    HelpArticle = 8,
-    InspectionType = 9,
-    InterModRegistration = 10,
-    InterModRegistry = 11,
-    Interrupt = 12,
-    InterruptChoice = 13,
-    Item = 14,
-    ItemGroup = 15,
-    Language = 16,
-    LanguageExtension = 17,
-    MenuBarButton = 18,
-    Message = 19,
-    MessageSource = 20,
-    MusicTrack = 21,
-    Note = 22,
-    NPC = 23,
-    OptionsSection = 24,
-    Overlay = 25,
-    Packet = 26,
-    Quest = 27,
-    QuestRequirement = 28,
-    Registry = 29,
-    Skill = 30,
-    SoundEffect = 31,
-    Stat = 32,
-    StatusEffect = 33,
-    Terrain = 34,
-    TerrainDecoration = 35,
-    TileEvent = 36,
-    TileLayerType = 37,
-    WorldLayer = 38
+    Bulk = 2,
+    Command = 3,
+    Creature = 4,
+    Dialog = 5,
+    Dictionary = 6,
+    Doodad = 7,
+    DoodadGroup = 8,
+    HelpArticle = 9,
+    InspectionType = 10,
+    InterModRegistration = 11,
+    InterModRegistry = 12,
+    Interrupt = 13,
+    InterruptChoice = 14,
+    Item = 15,
+    ItemGroup = 16,
+    Language = 17,
+    LanguageExtension = 18,
+    MenuBarButton = 19,
+    Message = 20,
+    MessageSource = 21,
+    MusicTrack = 22,
+    Note = 23,
+    NPC = 24,
+    OptionsSection = 25,
+    Overlay = 26,
+    Packet = 27,
+    Quest = 28,
+    QuestRequirement = 29,
+    Registry = 30,
+    Skill = 31,
+    SoundEffect = 32,
+    Stat = 33,
+    StatusEffect = 34,
+    Terrain = 35,
+    TerrainDecoration = 36,
+    TileEvent = 37,
+    TileLayerType = 38,
+    WorldLayer = 39
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -193,6 +194,10 @@ export interface IOptionsSectionRegistration extends IBaseModRegistration {
 export interface IRegistryRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Registry;
     class: new (mod: any) => any;
+}
+export interface IBulkRegistration extends IBaseModRegistration, IInheritsRegistrationTime {
+    type: ModRegistrationType.Bulk;
+    registrations: any;
 }
 export interface IDialogRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Dialog;
@@ -290,7 +295,10 @@ export interface ITileLayerTypeRegistration extends IBaseModRegistration {
     type: ModRegistrationType.TileLayerType;
     name: string;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration);
+export interface IInheritsRegistrationTime {
+    useRegistrationTime: ModRegistrationType;
+}
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration);
 export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare module Register {
     /**
@@ -298,21 +306,21 @@ declare module Register {
      *
      * The decorated property will be injected with the constructed instance of the provided registry class.
      */
-    function registry(cls: new (upperRegistry: any) => any): <K extends string | number | symbol, T extends { [k in K]: object; }>(target: T, key: K) => void;
+    export function registry(cls: new (upperRegistry: any) => any): <K extends string | number | symbol, T extends { [k in K]: object; }>(target: T, key: K) => void;
     /**
      * Registers a language.
      * @param instance The language instance.
      *
      * The decorated property will be injected with the provided language instance.
      */
-    function language<L extends Language>(instance: L): <K extends string | number | symbol, T extends { [k in K]: L; }>(target: T, key: K) => void;
+    export function language<L extends Language>(instance: L): <K extends string | number | symbol, T extends { [k in K]: L; }>(target: T, key: K) => void;
     /**
      * Registers a language extension.
      * @param instance The language extension instance.
      *
      * The decorated property will be injected with the provided language extension instance.
      */
-    function languageExtension<L extends LanguageExtension>(instance: L): <K extends string | number | symbol, T extends { [k in K]: L; }>(target: T, key: K) => void;
+    export function languageExtension<L extends LanguageExtension>(instance: L): <K extends string | number | symbol, T extends { [k in K]: L; }>(target: T, key: K) => void;
     /**
      * Registers a music track.
      * @param name The name of the music track.
@@ -320,7 +328,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered music track.
      */
-    function musicTrack(name: string): <K extends string | number | symbol, T extends { [k in K]: Music; }>(target: T, key: K) => void;
+    export function musicTrack(name: string): <K extends string | number | symbol, T extends { [k in K]: Music; }>(target: T, key: K) => void;
     /**
      * Registers a sound effect.
      * @param name The name of the sound effect.
@@ -328,21 +336,21 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered sound effect.
      */
-    function soundEffect(name: string, variations?: number): <K extends string | number | symbol, T extends { [k in K]: SfxType; }>(target: T, key: K) => void;
+    export function soundEffect(name: string, variations?: number): <K extends string | number | symbol, T extends { [k in K]: SfxType; }>(target: T, key: K) => void;
     /**
      * Registers a packet.
      * @param cls The packet class.
      *
      * The decorated property will be injected with the passed packet class.
      */
-    function packet<C extends IPacketClass>(cls: C): <K extends string | number | symbol, T extends { [k in K]: C; }>(target: T, key: K) => void;
+    export function packet<C extends IPacketClass>(cls: C): <K extends string | number | symbol, T extends { [k in K]: C; }>(target: T, key: K) => void;
     /**
      * Registers an NPC.
      * @param cls The NPC class.
      *
      * The decorated property will be injected with the NPCType of the registered NPC.
      */
-    function npc<C extends INPCClass>(name: string, cls: C): <K extends string | number | symbol, T extends { [k in K]: NPCType; }>(target: T, key: K) => void;
+    export function npc<C extends INPCClass>(name: string, cls: C): <K extends string | number | symbol, T extends { [k in K]: NPCType; }>(target: T, key: K) => void;
     /**
      * Registers a help article.
      * @param name The name of the help article.
@@ -350,7 +358,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered help article.
      */
-    function helpArticle(name: string, description: IHelpArticle): <K extends string | number | symbol, T extends { [k in K]: HelpArticle; }>(target: T, key: K) => void;
+    export function helpArticle(name: string, description: IHelpArticle): <K extends string | number | symbol, T extends { [k in K]: HelpArticle; }>(target: T, key: K) => void;
     /**
      * Registers a note.
      * @param name The name of the note.
@@ -358,7 +366,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered note.
      */
-    function note(name: string, description?: INoteDescription): <K extends string | number | symbol, T extends { [k in K]: Note; }>(target: T, key: K) => void;
+    export function note(name: string, description?: INoteDescription): <K extends string | number | symbol, T extends { [k in K]: Note; }>(target: T, key: K) => void;
     /**
      * Registers a skill.
      * @param name The name of the skill.
@@ -366,7 +374,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered skill.
      */
-    function skill(name: string, description?: ISkillDescription): <K extends string | number | symbol, T extends { [k in K]: SkillType; }>(target: T, key: K) => void;
+    export function skill(name: string, description?: ISkillDescription): <K extends string | number | symbol, T extends { [k in K]: SkillType; }>(target: T, key: K) => void;
     /**
      * Registers a stat.
      * @param name The name of the stat.
@@ -374,7 +382,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered stat.
      */
-    function stat(name: string, description?: IStatDisplayDescription): <K extends string | number | symbol, T extends { [k in K]: Stat; }>(target: T, key: K) => void;
+    export function stat(name: string, description?: IStatDisplayDescription): <K extends string | number | symbol, T extends { [k in K]: Stat; }>(target: T, key: K) => void;
     /**
      * Registers a status effect.
      * @param name The name of the status effect.
@@ -382,7 +390,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered status effect.
      */
-    function statusEffect(name: string, handlerClass: StatusEffectClass): <K extends string | number | symbol, T extends { [k in K]: StatusType; }>(target: T, key: K) => void;
+    export function statusEffect(name: string, handlerClass: StatusEffectClass): <K extends string | number | symbol, T extends { [k in K]: StatusType; }>(target: T, key: K) => void;
     /**
      * Registers an item.
      * @param name The name of the item.
@@ -390,7 +398,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered item.
      */
-    function item(name: string, description?: IItemRegistrationDescription): <K extends string | number | symbol, T extends { [k in K]: ItemType; }>(target: T, key: K) => void;
+    export function item(name: string, description?: IItemRegistrationDescription): <K extends string | number | symbol, T extends { [k in K]: ItemType; }>(target: T, key: K) => void;
     /**
      * Registers a creature.
      * @param name The name of the creature.
@@ -398,7 +406,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered creature.
      */
-    function creature(name: string, description: ICreatureDescription, corpseDescription?: ICorpseDescription): <K extends string | number | symbol, T extends { [k in K]: CreatureType; }>(target: T, key: K) => void;
+    export function creature(name: string, description: ICreatureDescription, corpseDescription?: ICorpseDescription): <K extends string | number | symbol, T extends { [k in K]: CreatureType; }>(target: T, key: K) => void;
     /**
      * Registers a terrain.
      * @param name The name of the terrain.
@@ -406,14 +414,14 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered terrain.
      */
-    function terrain(name: string, description?: ITerrainRegistrationDescription): <K extends string | number | symbol, T extends { [k in K]: TerrainType; }>(target: T, key: K) => void;
+    export function terrain(name: string, description?: ITerrainRegistrationDescription): <K extends string | number | symbol, T extends { [k in K]: TerrainType; }>(target: T, key: K) => void;
     /**
      * Registers a terrain decoration.
      * @param description The definition of the terrain decoration.
      *
      * The decorated property will be injected with the id of the registered terrain.
      */
-    function terrainDecoration(name: string, description: ITerrainDecorationBase): <K extends string | number | symbol, T extends { [k in K]: TerrainDecoration; }>(target: T, key: K) => void;
+    export function terrainDecoration(name: string, description: ITerrainDecorationBase): <K extends string | number | symbol, T extends { [k in K]: TerrainDecoration; }>(target: T, key: K) => void;
     /**
      * Registers a doodad.
      * @param name The name of the doodad.
@@ -421,7 +429,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered doodad.
      */
-    function doodad(name: string, description?: IDoodadDescription): <K extends string | number | symbol, T extends { [k in K]: DoodadType; }>(target: T, key: K) => void;
+    export function doodad(name: string, description?: IDoodadDescription): <K extends string | number | symbol, T extends { [k in K]: DoodadType; }>(target: T, key: K) => void;
     /**
      * Registers a tile event.
      * @param name The name of the tile event.
@@ -429,7 +437,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered tile event.
      */
-    function tileEvent(name: string, description?: ITileEventDescription): <K extends string | number | symbol, T extends { [k in K]: TileEventType; }>(target: T, key: K) => void;
+    export function tileEvent(name: string, description?: ITileEventDescription): <K extends string | number | symbol, T extends { [k in K]: TileEventType; }>(target: T, key: K) => void;
     /**
      * Registers a dialog.
      * @param name The name of the dialog.
@@ -438,7 +446,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered dialog.
      */
-    function dialog(name: string, description: IDialogDescription, cls: new (id: number) => Dialog): <K extends string | number | symbol, T extends { [k in K]: DialogId; }>(target: T, key: K) => void;
+    export function dialog(name: string, description: IDialogDescription, cls: new (id: number) => Dialog): <K extends string | number | symbol, T extends { [k in K]: DialogId; }>(target: T, key: K) => void;
     /**
      * Registers a bindable.
      * @param name The name of the bindable.
@@ -448,7 +456,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered note.
      */
-    function bindable(name: string, ...defaultBindings: Binding[]): <K extends string | number | symbol, T extends { [k in K]: Bindable; }>(target: T, key: K) => void;
+    export function bindable(name: string, ...defaultBindings: Binding[]): <K extends string | number | symbol, T extends { [k in K]: Bindable; }>(target: T, key: K) => void;
     /**
      * Registers a dictionary.
      * @param name The name of the dictionary.
@@ -456,7 +464,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered dictionary.
      */
-    function dictionary(name: string, dictionaryEnum: any): <K extends string | number | symbol, T extends { [k in K]: Dictionary; }>(target: T, key: K) => void;
+    export function dictionary(name: string, dictionaryEnum: any): <K extends string | number | symbol, T extends { [k in K]: Dictionary; }>(target: T, key: K) => void;
     /**
      * Registers a message.
      * @param name The name of the message.
@@ -466,91 +474,112 @@ declare module Register {
      * Note: The method does not support passing a translated English string. To translate your message, create a language
      * file that extends English.
      */
-    function message(name: string): <K extends string | number | symbol, T extends { [k in K]: Message; }>(target: T, key: K) => void;
+    export function message(name: string): <K extends string | number | symbol, T extends { [k in K]: Message; }>(target: T, key: K) => void;
     /**
      * Registers an interrupt.
      * @param name The name of the interrupt.
      *
      * The decorated property will be injected with the id of the registered interrupt.
      */
-    function interrupt(name: string): <K extends string | number | symbol, T extends { [k in K]: Interrupt; }>(target: T, key: K) => void;
+    export function interrupt(name: string): <K extends string | number | symbol, T extends { [k in K]: Interrupt; }>(target: T, key: K) => void;
     /**
      * Registers an interrupt choice.
      * @param name The name of the interrupt choice.
      *
      * The decorated property will be injected with the id of the registered interrupt choice.
      */
-    function interruptChoice(name: string): <K extends string | number | symbol, T extends { [k in K]: InterruptChoice; }>(target: T, key: K) => void;
+    export function interruptChoice(name: string): <K extends string | number | symbol, T extends { [k in K]: InterruptChoice; }>(target: T, key: K) => void;
     /**
      * Registers a message source.
      * @param name The name of the message source.
      *
      * The decorated property will be injected with the id of the registered message source.
      */
-    function messageSource(name: string): <K extends string | number | symbol, T extends { [k in K]: Source; }>(target: T, key: K) => void;
+    export function messageSource(name: string): <K extends string | number | symbol, T extends { [k in K]: Source; }>(target: T, key: K) => void;
     /**
      * Registers an overlay.
      * @param description The definition of the overlay.
      */
-    function overlay(name: string, description?: IOverlayDescription): <K extends string | number | symbol, T extends { [k in K]: OverlayType; }>(target: T, key: K) => void;
+    export function overlay(name: string, description?: IOverlayDescription): <K extends string | number | symbol, T extends { [k in K]: OverlayType; }>(target: T, key: K) => void;
     /**
      * Registers an inspection type, which will appear in tile tooltips or the inspect dialog.
      * @param handlerClass The class for the handler of the inspection type.
      */
-    function inspectionType(name: string, handlerClass: InspectionClass): <K extends string | number | symbol, T extends { [k in K]: InspectType; }>(target: T, key: K) => void;
+    export function inspectionType(name: string, handlerClass: InspectionClass): <K extends string | number | symbol, T extends { [k in K]: InspectType; }>(target: T, key: K) => void;
     /**
      * Registers a menu bar button.
      * @param description The definition of the menu bar button.
      */
-    function menuBarButton(name: string, description: IMenuBarButtonDescription): <K extends string | number | symbol, T extends { [k in K]: MenuBarButtonType; }>(target: T, key: K) => void;
+    export function menuBarButton(name: string, description: IMenuBarButtonDescription): <K extends string | number | symbol, T extends { [k in K]: MenuBarButtonType; }>(target: T, key: K) => void;
     /**
      * Registers an item group.
      * @param description The definition of the item group.
      */
-    function itemGroup(name: string, description: IItemGroupDescription): <K extends string | number | symbol, T extends { [k in K]: ItemTypeGroup; }>(target: T, key: K) => void;
+    export function itemGroup(name: string, description: IItemGroupDescription): <K extends string | number | symbol, T extends { [k in K]: ItemTypeGroup; }>(target: T, key: K) => void;
     /**
      * Registers a doodad group.
      * @param description The definition of the doodad group.
      */
-    function doodadGroup(name: string, description: IDoodadGroupDescription): <K extends string | number | symbol, T extends { [k in K]: DoodadTypeGroup; }>(target: T, key: K) => void;
+    export function doodadGroup(name: string, description: IDoodadGroupDescription): <K extends string | number | symbol, T extends { [k in K]: DoodadTypeGroup; }>(target: T, key: K) => void;
     /**
      * Registers a world layer.
      */
-    function worldLayer(name: string): <K extends string | number | symbol, T extends { [k in K]: WorldZ; }>(target: T, key: K) => void;
+    export function worldLayer(name: string): <K extends string | number | symbol, T extends { [k in K]: WorldZ; }>(target: T, key: K) => void;
     /**
      * Registers a world renderer layer.
      */
-    function tileLayer(name: string): <K extends string | number | symbol, T extends { [k in K]: TileLayerType; }>(target: T, key: K) => void;
+    export function tileLayer(name: string): <K extends string | number | symbol, T extends { [k in K]: TileLayerType; }>(target: T, key: K) => void;
     /**
      * Registers a quest.
      * @param description The definition of the quest.
      */
-    function quest(name: string, description: Quest): <K extends string | number | symbol, T extends { [k in K]: QuestType; }>(target: T, key: K) => void;
+    export function quest(name: string, description: Quest): <K extends string | number | symbol, T extends { [k in K]: QuestType; }>(target: T, key: K) => void;
     /**
      * Registers a quest requirement.
      * @param description The definition of the quest requirement.
      */
-    function questRequirement(name: string, description: QuestRequirement<any, any>): <K extends string | number | symbol, T extends { [k in K]: QuestRequirementType; }>(target: T, key: K) => void;
+    export function questRequirement(name: string, description: QuestRequirement<any, any>): <K extends string | number | symbol, T extends { [k in K]: QuestRequirementType; }>(target: T, key: K) => void;
     /**
      * Registers an action.
      * @param description The definition of this action.
      */
-    function action(name: string, description?: IActionDescription): <K extends string | number | symbol, T extends { [k in K]: ActionType; }>(target: T, key: K) => void;
-    function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends { [k in K]: InterModRegistry<V>; }>(target: T, key: K) => void;
-    function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends { [k in K]: InterModRegistration<V>; }>(target: T, key: K) => void;
+    export function action(name: string, description?: IActionDescription): <K extends string | number | symbol, T extends { [k in K]: ActionType; }>(target: T, key: K) => void;
+    export function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends { [k in K]: InterModRegistry<V>; }>(target: T, key: K) => void;
+    export function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends { [k in K]: InterModRegistration<V>; }>(target: T, key: K) => void;
+    type ExtractRegisteredType<F> = F extends (...args: any) => infer F2 ? F2 extends (t: infer T, k: infer K) => any ? T[Extract<K, keyof T>] : never : never;
+    /**
+     * Registers any number of registrations of a single type. Any other registration type can be used.
+     *
+     * Note: Not all registration types have been tested. If you run into any issues with one report a bug!
+     * @param type The type of registration to register — the name of another `@Register.<type>` decorator.
+     * @param entries The registration definitions — each entry is a tuple containing the parameters that would be given to the
+     * registration decorator.
+     *
+     * @example
+     * ```ts
+     * const itemColors = ["red", "blue", "green"];
+     * class Mod {
+     * 	@Register.bulk("item", ...itemColors
+     * 		.map(color => Tuple(`${color}Item`, { weight: 1 })))
+     *  public readonly items: ItemType[];
+     * }
+     * ```
+     */
+    export function bulk<REG_TYPE extends keyof typeof Register>(type: REG_TYPE, ...entries: Array<Parameters<(typeof Register)[REG_TYPE]>>): <K extends string | number | symbol, T extends { [k in K]: ExtractRegisteredType<typeof Register[REG_TYPE]>[]; }>(target: T, key: K) => void;
     /**
      * Registers a command.
      * @param name The name of this command (what players will type to use it, eg: `/heal`).
      *
      * This decorator should be used on a valid `CommandCallback` method.
      */
-    function command(name: string): (target: any, key: string, descriptor: TypedPropertyDescriptor<CommandCallback>) => void;
+    export function command(name: string): (target: any, key: string, descriptor: TypedPropertyDescriptor<CommandCallback>) => void;
     /**
      * Registers an options section.
      *
      * This decorator should be used on a valid `ModOptionSectionInitializer` method.
      */
-    function optionsSection(target: any, key: string, descriptor: TypedPropertyDescriptor<ModOptionSectionInitializer>): void;
+    export function optionsSection(target: any, key: string, descriptor: TypedPropertyDescriptor<ModOptionSectionInitializer>): void;
+    export {};
 }
 export default Register;
 export declare const SYMBOL_REGISTRATION_ID: unique symbol;
