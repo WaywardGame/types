@@ -106,7 +106,7 @@ declare class Translation {
     static nameOf(type: Dictionary, thing: number | {
         type: number;
         renamed?: string | ISerializedTranslation;
-    }, count?: number, article?: boolean, showRenamedQuotes?: boolean, ...args: any[]): Translation;
+    }, count?: number, article?: boolean, showRenamedQuotes?: boolean): Translation;
     static ofNumber(number: number, failWith?: string | Translation): Translation;
     /**
      * DO NOT USE THIS METHOD

@@ -21,6 +21,10 @@ import { IVector2, IVector3 } from "utilities/math/IVector";
 import { IRange } from "utilities/math/Range";
 import Sampler from "utilities/math/Sampler";
 import { IRandomGenerator, Random, SeededGenerator, WeightedOption } from "utilities/Random";
+export declare enum DrawnMapType {
+    Treasure = 0,
+    Drawn = 1
+}
 export interface ITreasure extends IVector2 {
     chest: DoodadType;
 }
@@ -86,7 +90,8 @@ export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> {
      * This should be called after island treasure map generation, every time the island is loaded.
      */
     static initializeIslandTreasureMaps(generationSettings: ITreasureMapGenerationSettings, mapGenOutput: IMapGenGenerateOutput): void;
-    static plotRegion(x: number, y: number, z: number, random?: Random<IRandomGenerator & Partial<SeededGenerator>>, radius?: number, map?: DrawnMap): DrawnMap;
+    static initializeIslandTreasureMapsDifferences(): void;
+    static plotRegion(x: number, y: number, z: number, random?: Random<IRandomGenerator & Partial<SeededGenerator>>, map?: DrawnMap): DrawnMap;
     private static plotTreasure;
     private static findValidTreasureLocation;
     private static getMapTile;
@@ -101,6 +106,8 @@ export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> {
     private seed?;
     private readonly treasure;
     private readonly discoveredTreasures;
+    readonly type: DrawnMapType;
+    private constructor();
     getTreasure(): readonly ITreasure[];
     isTreasureDiscovered(x: number, y: number): boolean;
     hasDiscoveredAll(): boolean;
@@ -112,4 +119,5 @@ export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> {
     getObfuscator(): Obfuscation;
     getBackground(): MapBackground;
     private plot;
+    private plotDifferences;
 }

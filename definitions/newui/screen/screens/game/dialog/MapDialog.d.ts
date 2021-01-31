@@ -36,6 +36,7 @@ export default class MapDialog extends Dialog {
     private viewVelocity;
     private viewAnimating?;
     private animatingFullReset;
+    private loading;
     private mapItemId?;
     private mapAlwaysOpaque?;
     private theme?;

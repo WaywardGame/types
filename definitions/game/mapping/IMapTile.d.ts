@@ -27,11 +27,8 @@ export declare enum MapTile {
     Path = 9,
     HiddenTreasure = 10,
     CaveEntrance = 11,
-    House = 12,
-    Garden = 13,
-    Boat = 14,
-    CaveWall = 15,
-    Obfuscation = 16
+    CaveWall = 12,
+    Obfuscation = 13
 }
 export declare const DRAWN_MAP_TILES_SAVED: Set<MapTile>;
 export interface IMapTileData {

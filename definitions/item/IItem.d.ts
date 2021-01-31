@@ -49,6 +49,10 @@ export interface IItemOld {
     equipped?: EquipType;
     equippedPid?: number;
     legendary?: IItemMagicalProperty;
+    tatteredMap?: IVector3 & {
+        reinitialize?: boolean;
+        islandId?: string;
+    };
 }
 export interface IContainable {
     containedWithin?: IContainer;
@@ -418,10 +422,6 @@ export declare enum BookType {
     TheSolution = 14,
     TheSlimeRancher = 15,
     DarknessCalls = 16
-}
-export interface TatteredMap extends IVector3 {
-    reinitialize?: boolean;
-    islandId?: string;
 }
 export declare enum ItemType {
     None = 0,
