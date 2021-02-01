@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
-import { InfoDisplayLevel, InfoProvider } from "game/inspection/InfoProvider";
+import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
+import { InfoProvider } from "game/inspection/InfoProvider";
 import { IContainer } from "item/IItem";
 import Item from "item/Item";
 import Translation from "language/Translation";

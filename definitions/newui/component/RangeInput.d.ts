@@ -11,6 +11,7 @@
 import { Events, IEventEmitter } from "event/EventEmitter";
 import Component from "newui/component/Component";
 import { IRefreshableValue } from "newui/component/Refreshable";
+import { IBindHandlerApi } from "newui/input/Bind";
 interface IRangeInputEvents extends Events<Component> {
     change(val: number): any;
     finish(val: number): any;
@@ -25,7 +26,9 @@ export declare class RangeInput extends Component<HTMLInputElement> implements I
     get min(): number;
     get max(): number;
     get step(): number;
+    private target?;
     constructor();
+    setTarget(target?: Component): this;
     clamp(): this;
     setStep(step: number): this;
     setMax(max: number, clamp?: boolean): this;
@@ -36,6 +39,9 @@ export declare class RangeInput extends Component<HTMLInputElement> implements I
     noClampOnRefresh(): this;
     setDisabled(disabled?: boolean): this;
     get disabled(): boolean;
+    protected onAppend(): void;
+    protected onNextOption(api: IBindHandlerApi): boolean;
+    protected onPreviousOption(api: IBindHandlerApi): boolean;
     protected playSound(): void;
 }
 export {};

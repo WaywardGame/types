@@ -8,10 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { InfoDisplayLevel, InfoProviderContext } from "game/inspection/InfoProvider";
+import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProvider";
 import ItemDurabilityInfoProvider from "game/inspection/infoProviders/item/Durability";
 import ItemDetailsInfoProvider from "game/inspection/infoProviders/item/ItemDetails";
 import ItemProtectedInfoProvider from "game/inspection/infoProviders/item/ItemProtected";
+import ItemWeightInfoProvider from "game/inspection/infoProviders/item/ItemWeight";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import MagicalPropertiesInfoProvider from "game/inspection/infoProviders/MagicalProperties";
 import QualityInfoProvider from "game/inspection/infoProviders/Quality";
@@ -30,10 +32,10 @@ export default class ItemInspection extends Inspection<Item> {
     getBorder(): string | undefined;
     getDefaultDisplayLevel(): InfoDisplayLevel;
     hasContent(context: InfoProviderContext): boolean;
-    get(context: InfoProviderContext): (Translation | import("../InfoProvider").SimpleInfoProvider | QualityInfoProvider | MagicalPropertiesInfoProvider | ItemProtectedInfoProvider | ItemDurabilityInfoProvider | LabelledValue | ItemDetailsInfoProvider)[];
+    get(context: InfoProviderContext): (Translation | import("../InfoProvider").SimpleInfoProvider | QualityInfoProvider | MagicalPropertiesInfoProvider | ItemProtectedInfoProvider | ItemDurabilityInfoProvider | ItemWeightInfoProvider | LabelledValue | ItemDetailsInfoProvider)[];
     protected onItemRemove(_: any, item: Item): void;
     protected onTickEnd(): void;
     private updatePosition;
     private getDescription;
-    private getWeight;
+    private getCapacity;
 }

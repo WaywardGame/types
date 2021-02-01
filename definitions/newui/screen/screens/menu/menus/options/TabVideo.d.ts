@@ -24,6 +24,7 @@ export default class TabVideo extends Tab implements IRefreshable {
     private onDisableUIEffects;
     private onDitherFOW;
     private onDefaultCursor;
+    private onSkipArticle;
     private getUiScaleTooltip;
     private onPowerPreferenceSelect;
     private getPowerPreferenceDropdownData;

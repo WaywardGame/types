@@ -53,7 +53,7 @@ export default class TileEvent extends EventEmitter.Host<ITileEventEvents> imple
     constructor(type?: TileEventType, x?: number, y?: number, z?: number);
     toString(): string;
     description(): ITileEventDescription;
-    getName(): Translation;
+    getName(article?: boolean, count?: number): Translation;
     getTile(): ITile;
     getProducedTemperature(): number | undefined;
     updateFire(tile: ITile): void;

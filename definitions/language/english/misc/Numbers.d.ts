@@ -43,5 +43,13 @@ declare const numbers: {
     thousands: string;
     millions: string;
     billions: string;
+    romanNumeral: string;
+    romanNumeral1: string;
+    romanNumeral5: string;
+    romanNumeral10: string;
+    romanNumeral50: string;
+    romanNumeral100: string;
+    romanNumeral500: string;
+    romanNumeral1000: string;
 };
 export default numbers;

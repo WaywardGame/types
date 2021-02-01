@@ -61,6 +61,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     protected onCancel(): boolean;
     protected onInterrupt(): void;
     protected onSelectionChange(_: any, selection?: Component): void;
+    protected onAppend(): void;
     protected isMouseWithin(): false | Component<HTMLElement>;
     protected selectNext(): void;
     protected selectPrevious(): void;
@@ -71,5 +72,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     protected onRegenerateBox(): void;
     private updateOptions;
     private updateWrapperPosition;
+    private nextOption;
+    private previousOption;
 }
 export {};

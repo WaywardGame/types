@@ -17,6 +17,7 @@ export default class ItemUses extends InfoProvider {
     getClass(): string[];
     get(): never[] | LabelledValue;
     private getNonExtra;
+    private getTier;
     private generateUseTooltip;
     private getUseExtraInfo;
     private generateUseConsumeTooltip;

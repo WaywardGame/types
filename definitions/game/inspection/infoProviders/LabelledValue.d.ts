@@ -16,12 +16,13 @@ import { TranslationGenerator } from "newui/component/IComponent";
 import Text from "newui/component/Text";
 export default class LabelledValue extends InfoProvider {
     private readonly label;
-    private readonly value;
+    private readonly values;
     static label(label: Translation): {
-        value(value: InfoProvider | TranslationGenerator): LabelledValue;
+        add(...values: Array<InfoProvider | TranslationGenerator>): LabelledValue;
     };
     private componentClass;
     private constructor();
+    add(...values: Array<Falsy | InfoProvider | TranslationGenerator>): this;
     getClass(): string[];
     get(): (Translation | import("../../../language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | import("../../../language/Translation").ISerializedTranslation | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | UiTranslation | undefined) | InfoProvider)[];
     initComponent(): Component<HTMLElement>;

@@ -16,9 +16,11 @@ export default class EnumDropdown<ENUM_OBJECT, OTHER_OPTIONS extends string | ne
     private readonly dictionary;
     get selectionName(): keyof ENUM_OBJECT | undefined;
     private shouldSort;
+    private readonly excluded;
     constructor(enumObject: ENUM_OBJECT, dictionary: Dictionary, defaultOption: VALUES, option?: Iterable<IDropdownOption<never>>);
     constructor(enumObject: ENUM_OBJECT, dictionary: Dictionary, defaultOption: VALUES | OTHER_OPTIONS, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
     setNoSort(): this;
+    setExcluded(...excluded: VALUES[]): this;
     protected getTranslation(id: VALUES): Translation;
     protected filterEnum?(id: VALUES): boolean;
     private getOptions;

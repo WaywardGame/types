@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
-import { InfoDisplayLevel, InfoProvider, InfoProviderContext } from "game/inspection/InfoProvider";
+import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
+import { InfoProvider, InfoProviderContext } from "game/inspection/InfoProvider";
 import Translation from "language/Translation";
 export default class HarvestabilityInfoProvider extends InfoProvider {
     private readonly doodad;

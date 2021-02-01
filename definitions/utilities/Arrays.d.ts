@@ -17,6 +17,7 @@ export declare module Tuple {
 }
 declare module Arrays {
     const EMPTY: readonly undefined[];
+    function repeat<A extends any[]>(count: number, ...values: A): Array<A[number]>;
     /**
      * Produces an array of the numbers @param min (inclusive) to @param max (exclusive), in steps of @param step
      * @param min A number, inclusive

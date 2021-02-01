@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Events, IEventEmitter } from "event/EventEmitter";
+import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InspectType } from "game/inspection/IInspection";
-import { InfoDisplayLevel } from "game/inspection/InfoProvider";
 import InspectionsHandler from "game/inspection/InspectionsHandler";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";

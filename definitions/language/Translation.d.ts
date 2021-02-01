@@ -107,6 +107,10 @@ declare class Translation {
         type: number;
         renamed?: string | ISerializedTranslation;
     }, count?: number, article?: boolean, showRenamedQuotes?: boolean): Translation;
+    static romanNumeral(number: number): Translation;
+    private static readonly romanNumeralTranslationMap;
+    private static getRomanNumeralTranslation;
+    private static translateRomanNumeral;
     static ofNumber(number: number, failWith?: string | Translation): Translation;
     /**
      * DO NOT USE THIS METHOD

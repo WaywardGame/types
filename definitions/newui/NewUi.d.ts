@@ -29,6 +29,7 @@ export interface IUiEvents {
     interruptClose(options: Partial<InterruptOptions>, result?: string | boolean | InterruptChoice): any;
     loadedFromSave(): any;
     toggleShowMoreInformation(showingMoreInformation: boolean): any;
+    toggleDeveloperMode(developerMode: boolean): any;
 }
 export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     readonly tooltips: TooltipManager;
@@ -83,6 +84,7 @@ export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     reloadStylesheets(): void;
     updateFontStyle(): void;
     updateUIAnimations(): void;
+    toggleDeveloperMode(enabled: boolean): this;
     protected onGlobalSlotLoaded(): void;
     protected onMessage(_: any, fullscreen: boolean): void;
     protected onInterruptClosed(): void;

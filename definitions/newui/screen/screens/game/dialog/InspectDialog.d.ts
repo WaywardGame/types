@@ -14,6 +14,7 @@ import InspectionsList from "newui/screen/screens/game/component/InspectionsList
 import Vector3 from "utilities/math/Vector3";
 export default class InspectDialog extends Dialog {
     private inspections?;
+    private readonly dropdownDisplayLevel;
     private readonly singleInspectionWrapper;
     private readonly scrollableWrapper;
     private inspection?;

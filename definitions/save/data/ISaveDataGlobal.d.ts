@@ -51,6 +51,7 @@ export interface IOptions {
     rightClickInspect: boolean;
     rightHand: boolean;
     shouldLoadLastSave: boolean;
+    shouldObjectNamesSkipArticle: boolean;
     skipSplash: boolean;
     tooltipDelay: number;
     tooltips: {

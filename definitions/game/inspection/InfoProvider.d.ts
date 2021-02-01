@@ -14,6 +14,7 @@ import Human from "entity/Human";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
+import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { TextContext } from "language/Translation";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
@@ -55,21 +56,15 @@ export interface IInfoProviderEvents {
     /**
      * Should be emitted when the info provider's display level changes.
      */
-    updateDisplayLevel(displayLevel: InfoDisplayLevel, className: string, oldClassName?: string): any;
+    updateDisplayLevel(displayLevels: Set<InfoDisplayLevel>, classes: Set<string>, oldClasses: Set<string>): any;
+    /**
+     * Emitted when the info provider's display level is overridden.
+     */
+    refreshDisplayLevel(): any;
     /**
      * Should be emitted when the info provider has detected an update and it needs to check whether to have contents.
      */
     recheckHasContent(): any;
-}
-export declare enum InfoDisplayLevel {
-    NonVerbose = -2,
-    NonExtra = -1,
-    Always = 0,
-    Extra = 1,
-    Verbose = 2
-}
-export declare module InfoDisplayLevel {
-    function canDisplay(level: InfoDisplayLevel, toDisplay: InfoDisplayLevel): boolean;
 }
 export interface IIcon {
     path: string;
@@ -86,9 +81,9 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     private displayLevel?;
     abstract get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     abstract getClass(): string[];
-    getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel;
-    setDisplayLevel(displayLevel: InfoDisplayLevel): this;
-    getDisplayLevel(context: InfoProviderContext): InfoDisplayLevel;
+    getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel | Set<InfoDisplayLevel>;
+    setDisplayLevel(...displayLevel: InfoDisplayLevel[]): this;
+    getDisplayLevel(context: InfoProviderContext): Set<InfoDisplayLevel>;
     getColor(): string | undefined;
     getIcon(): IIcon | undefined;
     hasContent(_context: InfoProviderContext): boolean;

@@ -83,6 +83,7 @@ export default abstract class Human extends Entity {
      * @returns Whether the skill of this human is more than or equal to a random number between `0` and the value of `check`.
      */
     skillAndActionTierCheck(skill: SkillType, check: number, actionTier?: number): boolean;
+    getSkillAndActionTierValue(skill: SkillType, actionTier?: number): number;
     isResting(): boolean;
     isGhost(): boolean;
     isRestingCancelled(): boolean;
