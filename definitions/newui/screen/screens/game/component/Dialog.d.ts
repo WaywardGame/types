@@ -18,7 +18,6 @@ import { IRefreshable } from "newui/component/Refreshable";
 import Text from "newui/component/Text";
 import { DialogId, Edge, IDialogDescription } from "newui/screen/screens/game/Dialogs";
 import { IDialog } from "newui/screen/screens/game/IGameScreenApi";
-import { ScrollableHandler } from "newui/util/ScrollableHandler";
 import Log from "utilities/Log";
 import Vector2 from "utilities/math/Vector2";
 import { IStringSection } from "utilities/string/Interpolator";
@@ -98,7 +97,7 @@ export default abstract class Dialog extends Component implements IDialog {
     private lastPanel;
     private cachedSnapPositions?;
     private readonly activeReasons;
-    protected readonly scrollableHandler: ScrollableHandler;
+    protected readonly scrollableHandler: void;
     private get visiblePanel();
     get square(): boolean;
     /**

@@ -12,6 +12,8 @@ export declare class ScrollableHandler {
     private readonly element;
     private readonly id;
     constructor(element: HTMLElement, id: string);
+    watchAnimations(): void;
+    watchTransitions(): void;
     private onAnimationStart;
     private onAnimationEnd;
 }
