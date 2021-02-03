@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import Doodad from "doodad/Doodad";
 import { IActionHandlerApi } from "entity/action/IAction";
 import Human from "entity/Human";
 import NPC from "entity/npc/NPC";
@@ -22,6 +23,7 @@ import Message from "language/dictionary/Message";
 import Translation, { TextContext } from "language/Translation";
 import { ITile, TerrainType } from "tile/ITerrain";
 import { IVector3 } from "utilities/math/IVector";
+import Vector3 from "utilities/math/Vector3";
 export interface IItemManagerEvents {
     create(item: Item): any;
     remove(item: Item): any;
@@ -60,6 +62,8 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getItemTypes(): readonly ItemType[];
     getItemsWithRecipes(): readonly ItemType[];
     getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
+    getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
+    resolveContainer(container?: IContainer): Player | Doodad | Item | IContainer | ITile | NPC | undefined;
     getContainerReference(container: IContainer | undefined, parentObject?: any, showWarnings?: boolean): ContainerReference;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     addToContainerInternal(item: Item, container: IContainer, options?: IAddToContainerOptions): boolean;

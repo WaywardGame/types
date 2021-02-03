@@ -25,7 +25,6 @@ import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription,
 import { IPlaceOnTileOptions } from "item/IItemManager";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
-import { IVector3 } from "utilities/math/IVector";
 export interface IItemEvents {
     toggleProtected(isProtected: boolean): any;
 }
@@ -133,7 +132,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     spawnOnBreak(): Creature | undefined;
     spawnOnDecay(): Creature | undefined;
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: Player): Creature | undefined;
-    getPoint(): IVector3 | undefined;
+    getPoint(): import("../utilities/math/Vector3").default | undefined;
     dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
     placeOnTile(x: number, y: number, z: number, options?: IPlaceOnTileOptions): boolean;
     moveToTile(options: IMoveToTileOptions): void;
