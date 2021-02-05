@@ -26,6 +26,7 @@ import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import { ITile, ITileContainer, ITileData } from "tile/ITerrain";
 import TileEvent from "tile/TileEvent";
 import { IVector2, IVector3 } from "utilities/math/IVector";
+import { IRange } from "utilities/math/Range";
 import Vector3 from "utilities/math/Vector3";
 import TimeManager from "./TimeManager";
 export interface IGameEvents {
@@ -318,6 +319,34 @@ export declare enum CreationId {
 export interface IWaterFill {
     count: number;
     tiles: Record<number, Record<number, boolean>>;
+}
+/**
+ * For items and terrain that can decay, the temperature range that controls the rate of decay.
+ * If not provided for items, they will always decays no matter the temperature.
+ * If not provided for terrain, they will not decay (or melt).
+ *
+ * Example:
+ * ```ts
+ * decayTemperatureRange: {
+ * 	temperature: range(Temperature.Cold, Temperature.Normal),
+ * 	decayChance: range(0, 1),
+ * },
+ * ```
+ */
+export interface IDecayTemperatureRange {
+    /**
+     * The temperature range that determines the rate of decay. IE, when using a `decayChance` of `range(0, 1)`,
+     * when at or below the minimum temperature, the item doesn't decay, and when at or above the maximum temperature,
+     * the item decays at the maximum rate of `1`.
+     */
+    temperature: IRange;
+    /**
+     * The decay chance based on the temperature. IE, when at or below the minimum temperature, uses the minimum decay chance,
+     * and when at or above the maximum temperature, uses the maximum decay chance.
+     *
+     * Defaults to `range(0, 1)`
+     */
+    decayChance?: IRange;
 }
 export declare const DEFAULT_MAP_SIZE = 512;
 export declare const LINE_OF_SIGHT_RADIUS = 15;

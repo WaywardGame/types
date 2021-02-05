@@ -43,6 +43,13 @@ export default class TileEventManager extends EventEmitter.Host<ITileManagerEven
     createFake(type: TileEventType, x: number, y: number, z: number): TileEvent | undefined;
     remove(tileEvent: TileEvent): void;
     get(tile: ITile, type: TileEventType): TileEvent | undefined;
+    /**
+     * Gets all the tile events of a type at a certain tile.
+     * @param tile ITile that you want to look at.
+     * @param type TileEventType that you want to look for.
+     * @returns Array of TileEvent or undefined if no tile events of that type at that tile.
+     */
+    getsTileEventsByType(tile: ITile, type: TileEventType): TileEvent[] | undefined;
     canGather(tile: ITile): TileEvent | undefined;
     updateAll(): void;
     fireOverflow(x: number, y: number, z: number): boolean;
@@ -57,6 +64,12 @@ export default class TileEventManager extends EventEmitter.Host<ITileManagerEven
      */
     createBlood(x: number, y: number, z: number): boolean;
     clearBlood(position: IVector3, executor: NPC | Player): boolean;
+    /**
+     * Clears all the water puddles on a specified tile.
+     * @param point The point to check for water puddles at.
+     * @param executor The player to send the message to.
+     */
+    clearPuddles(point: IVector3, executor: NPC | Player): boolean;
     moveExcrement(position: IVector3): void;
     containsDamagingTileEvents(events: TileEvent[] | undefined): boolean;
 }

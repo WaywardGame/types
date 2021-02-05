@@ -26,6 +26,7 @@ import { DamageType, Defense, StatusType } from "entity/IEntity";
 import { EquipType, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { BiomeType } from "game/IBiome";
+import { IDecayTemperatureRange } from "game/IGame";
 import { IObjectDescription } from "game/IObject";
 import Item from "item/Item";
 import Recipe from "item/recipe/Recipe";
@@ -34,7 +35,6 @@ import { IModdable } from "mod/ModRegistry";
 import { TerrainType } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
-import { IRange } from "utilities/math/Range";
 export interface IItemWeightComponent {
     weightFraction: number;
     type: ItemType;
@@ -119,33 +119,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     blockDisassembly?: boolean;
     requiredForDisassembly?: Array<ItemType | ItemTypeGroup>;
     decaysInto?: ItemType[];
-    /**
-     * For items that can decay, the temperature range that controls the rate of decay.
-     * If not provided, the item always decays no matter the temperature.
-     *
-     * Example:
-     * ```ts
-     * decayTemperatureRange: {
-     * 	temperature: range(Temperature.Cold, Temperature.Normal),
-     * 	decayChance: range(0, 1),
-     * },
-     * ```
-     */
-    decayTemperatureRange?: {
-        /**
-         * The temperature range that determines the rate of decay. IE, when using a `decayChance` of `range(0, 1)`,
-         * when at or below the minimum temperature, the item doesn't decay, and when at or above the maximum temperature,
-         * the item decays at the maximum rate of `1`.
-         */
-        temperature: IRange;
-        /**
-         * The decay chance based on the temperature. IE, when at or below the minimum temperature, uses the minimum decay chance,
-         * and when at or above the maximum temperature, uses the maximum decay chance.
-         *
-         * Defaults to `range(0, 1)`
-         */
-        decayChance?: IRange;
-    };
+    decayTemperatureRange?: IDecayTemperatureRange;
     twoHanded?: boolean;
     keepDurabilityOnCraft?: boolean;
     craftable?: boolean;

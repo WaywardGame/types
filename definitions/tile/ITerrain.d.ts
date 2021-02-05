@@ -15,10 +15,12 @@ import Corpse from "entity/creature/corpse/Corpse";
 import Creature from "entity/creature/Creature";
 import { SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
+import { IDecayTemperatureRange } from "game/IGame";
 import { Quality } from "game/IObject";
 import { MapTile } from "game/mapping/IMapTile";
 import { IContainer, ItemType } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
+import { TileEventType } from "tile/ITileEvent";
 import TileEvent from "tile/TileEvent";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
@@ -79,6 +81,15 @@ export interface ITerrainDescription extends IModdable {
      * The water terrain type that is a step above, or a less deep version of itself.
      */
     aboveType?: TerrainType;
+    decayTemperatureRange?: IDecayTemperatureRange;
+    /**
+     * Array of tile events that are spawned when terrain decays (or melts).
+     */
+    decaysInto?: TileEventType[];
+    /**
+     * Maximum decay terrain has when spawned.
+     */
+    decayMax?: number;
 }
 export interface ITile extends Partial<ITileContainer> {
     corpses?: Corpse[];
@@ -104,6 +115,7 @@ export interface ITileData {
     tilled?: boolean;
     step?: number;
     fishAvailable?: number;
+    decay?: number;
 }
 export declare type ITileDataOld = Partial<ITileData> & {
     strength?: number;

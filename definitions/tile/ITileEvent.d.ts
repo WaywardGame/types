@@ -41,6 +41,18 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
      * Whether this is a "minor" tile event. Minor tile events are rendered as faded, small text in tooltips rather than large headings.
      */
     isMinor?: boolean;
+    /**
+     * Set to true when we don't want to load a graphic or show tooltips for the event.
+     */
+    internal?: boolean;
+    /**
+     * Allow multiple of the same type of tile event to be placed on top of each other.
+     */
+    allowMultiple?: boolean;
+    /**
+     * Is the event made of water? These can put out fires if they are on the same tile as them.
+     */
+    water?: boolean;
     create?(tileEvent: TileEvent): void;
     remove?(tileEvent: TileEvent): void;
     update?(tileEvent: TileEvent): void;
@@ -62,5 +74,7 @@ export declare enum TileEventType {
     WispDust = 7,
     Blood = 8,
     BloodWater = 9,
-    Acid = 10
+    Acid = 10,
+    PuddleOfFreshWater = 11,
+    MeltingTile = 12
 }
