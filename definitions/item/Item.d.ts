@@ -20,15 +20,17 @@ import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { IReferenceable } from "game/IReferenceManager";
-import { ITemperatureSource } from "game/temperature/ITemperature";
+import { IHasInsulation, ITemperatureSource } from "game/temperature/ITemperature";
 import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemMagicalProperty, IItemUsed, IMagicalStats, IMoveToTileOptions, ItemType, MagicalPropertyType } from "item/IItem";
 import { IPlaceOnTileOptions } from "item/IItemManager";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
+import { FireStage } from "tile/events/IFire";
 export interface IItemEvents {
     toggleProtected(isProtected: boolean): any;
+    fireUpdate(stage?: FireStage): any;
 }
-export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource {
+export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation {
     book?: BookType;
     constructedFrom?: IConstructedInfo;
     containedItems: Item[];
@@ -65,6 +67,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     private _movementOptions?;
     private _description;
     private _minDur;
+    private fireStage?;
     constructor(itemType?: ItemType | undefined, quality?: Quality, human?: Human);
     toString(): string;
     /**
@@ -187,6 +190,9 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getContainerWeightReduction(): number;
     canBeRefined(): boolean;
     getProducedTemperature(): number | undefined;
+    postProcessDecay(): void;
+    getInsulation(): number | undefined;
+    getBaseTemperature(): number | undefined;
     /**
      * Sets the item's decay value based on quality, game mode and added some randomization
      */

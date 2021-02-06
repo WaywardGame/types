@@ -46,7 +46,7 @@ export default class Stats<T extends IStatHost> {
     /**
      * Returns the value of the given stat, or `undefined` if the stat does not exist. Stat bonus *is* applied.
      */
-    getValue(stat: Stat | IStat): number | undefined;
+    getValue(stat: Stat | IStat, allowFailure?: true): number | undefined;
     /**
      * Returns the value of the given stat, or `undefined` if the stat does not exist. Stat bonus is *not* applied.
      */

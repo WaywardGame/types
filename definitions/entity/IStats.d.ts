@@ -45,16 +45,20 @@ export declare enum Stat {
      */
     Strength = 11,
     /**
+     * How much this human and their inventory is affected by temperature
+     */
+    Insulation = 12,
+    /**
      * Used for chicken eggs and goat milk
      */
-    Produce = 12,
+    Produce = 13,
     /**
      * Used for tamed animals
      */
-    Happiness = 13,
-    Tamed = 14,
-    Petting = 15,
-    Waste = 16
+    Happiness = 14,
+    Tamed = 15,
+    Petting = 16,
+    Waste = 17
 }
 export declare type IStats = {
     [key in keyof typeof Stat]: IStat;

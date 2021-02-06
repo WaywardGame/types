@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
+import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import Item from "item/Item";
 import Translation from "language/Translation";
 export default class ItemDurabilityInfoProvider extends InfoProvider {
@@ -19,7 +20,7 @@ export default class ItemDurabilityInfoProvider extends InfoProvider {
     constructor(item: Item);
     getClass(): string[];
     initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
-    get(): (0 | Translation)[];
+    get(): (0 | Translation | LabelledValue)[];
     protected onTickEnd(): void;
     private getDurability;
     private getMagicalItemDamageReduction;

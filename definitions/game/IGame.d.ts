@@ -23,7 +23,7 @@ import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multipla
 import World from "renderer/World";
 import { IReplayLogEntry } from "replay/IReplayLogEntry";
 import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
-import { ITile, ITileContainer, ITileData } from "tile/ITerrain";
+import { ITile, ITileContainer, ITileData, TerrainType } from "tile/ITerrain";
 import TileEvent from "tile/TileEvent";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import { IRange } from "utilities/math/Range";
@@ -63,6 +63,10 @@ export interface IGameEvents {
      * @param tileUpdateType The tile update type
      */
     tileUpdate(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType): void;
+    /**
+     * Called when a tile type changes.
+     */
+    terrainChange(x: number, y: number, z: number, tile: ITile, oldType: TerrainType): any;
     glLostContext(): any;
     glSetup(restored: boolean): any;
     glInitialized(): any;

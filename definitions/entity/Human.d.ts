@@ -21,6 +21,7 @@ import { IEventEmitter } from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
 import { IGameOptionsPlayer } from "game/options/IGameOptions";
+import { IHasInsulation } from "game/temperature/ITemperature";
 import { EquipEffect, EquipEffectByType, EquipEffects, IContainer, ItemType, ItemTypeGroup } from "item/IItem";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
@@ -29,7 +30,7 @@ import { IOptions } from "save/data/ISaveDataGlobal";
 import TileEvent from "tile/TileEvent";
 import { IVector3 } from "utilities/math/IVector";
 export declare const REPUTATION_MAX = 64000;
-export default abstract class Human extends Entity {
+export default abstract class Human extends Entity implements IHasInsulation {
     static getNameTranslation(): Translation;
     event: IEventEmitter<this, IHumanEvents>;
     attackFromEquip: IAttackHand;
@@ -140,10 +141,8 @@ export default abstract class Human extends Entity {
     isSwimming(): boolean;
     updateSwimming(): void;
     updatePaddling(): void;
-    /**
-     * Humans can't produce temperature, but their equipment can
-     */
     getProducedTemperature(): number | undefined;
+    getInsulation(): number;
     protected resetStatTimers(): void;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
     protected getSkillGainMultiplier(_skillType: SkillType): number;

@@ -9,11 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
+import Entity from "entity/Entity";
 import EventEmitter from "event/EventEmitter";
-import { TileUpdateType } from "game/IGame";
 import Island from "game/Island";
 import { WorldZ } from "game/WorldZ";
-import { ITile } from "tile/ITerrain";
+import { IContainer } from "item/IItem";
+import Item from "item/Item";
+import { ITile, TerrainType } from "tile/ITerrain";
 import TileEvent from "tile/TileEvent";
 export declare enum TempType {
     Cold = -1,
@@ -26,6 +28,23 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     private cacheCalculated;
     private cacheProduced;
     constructor(island: Island);
+    /**
+     * Returns the current temperature for a container, calculated by combining the tile temperature and the combined temperature of the items inside
+     */
+    getContainer(container: IContainer, isClientSide: boolean): number;
+    /**
+     * Returns the produced temperature for this container, calculated by combining the min and max temperatures of the items inside.
+     * @param applyInsulation Whether to apply the container's insulation to the produced temperature value. For example,
+     * containers with no insulation return the exact temperature they produce, while containers with maximum insulation return
+     * `Temperature.Neutral`
+     */
+    getContainerProducedTemperature(container: IContainer, applyInsulation?: boolean): number;
+    /**
+     * Get the combined temperature of the items in the container.
+     */
+    getContainerItemsTemperature(container: IContainer): number;
+    private getContainerBaseTemperature;
+    private getContainerInsulation;
     /**
      * Returns the current overall temperature for the given tile.
      */
@@ -66,7 +85,12 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     update(x: number, y: number, z: WorldZ, tile?: ITile | undefined, invalidate?: boolean): void;
     invalidateAll(): void;
     protected onFireUpdate(object: Doodad | TileEvent, tile: ITile): void;
-    protected onTileUpdate(_1: any, tile: ITile, x: number, y: number, z: number, _2: TileUpdateType): void;
+    protected onCreateOrRemoveDoodadOrTileEvent(_: any, object: Doodad | TileEvent): void;
+    protected onEntityMove(entity: Entity, lastX: number, lastY: number, lastZ: number, lastTile: ITile, x: number, y: number, z: number, tile: ITile): void;
+    protected onUpdateTile(_: any, x: number, y: number, z: number, tile: ITile, oldType: TerrainType): void;
+    protected onItemContainerUpdate(_: any, item: Item): void;
+    protected onItemContainerRemove(_: any, item: Item, container: IContainer): void;
+    protected onItemFireUpdate(item: Item): void;
     private calculateProduced;
     private updateProducedType;
     /**

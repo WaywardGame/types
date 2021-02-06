@@ -18,7 +18,7 @@ import EventEmitter from "event/EventEmitter";
 import { TileUpdateType } from "game/IGame";
 import { IObject, Quality } from "game/IObject";
 import { IReferenceable } from "game/IReferenceManager";
-import { ITemperatureSource } from "game/temperature/ITemperature";
+import { IHasInsulation, ITemperatureSource } from "game/temperature/ITemperature";
 import { IContainer, IItemMagicalProperty, ItemType, MagicalPropertyType } from "item/IItem";
 import Item from "item/Item";
 import Translation, { ISerializedTranslation } from "language/Translation";
@@ -55,7 +55,7 @@ export interface IDoodadEvents {
      */
     remove(): any;
 }
-export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IReferenceable, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource {
+export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IReferenceable, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource, IHasInsulation {
     static is(value: any): value is Doodad;
     /**
      * @deprecated
@@ -169,6 +169,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     switchWellStatus(): void;
     getProducedTemperature(): number | undefined;
+    getInsulation(): number | undefined;
     /**
      * Refills solar stills when they are on shallow water automatically.
      */

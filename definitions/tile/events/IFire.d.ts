@@ -17,7 +17,9 @@ export declare enum FireStage {
     Raging = 750
 }
 export declare module FireStage {
-    function get(decay: number): number;
+    function get(decay: number): FireStage;
     function getIndex(fireStage: FireStage): number;
     function getTemperature(stage: FireStage): number;
+    function getTemperature(stage: FireStage, max?: number): number;
+    function getTemperature(stage: FireStage, min: number, max: number): number;
 }

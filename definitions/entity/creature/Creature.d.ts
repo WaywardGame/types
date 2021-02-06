@@ -85,6 +85,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
      */
     updateDoodadOverHiddenState(x: number, y: number, z: number, tile: ITile, hidden: boolean): void;
     processAttack(realPlayers: Player[], description: ICreatureDescription, moveType: MoveType, enemy: Player | Creature | undefined): boolean;
+    getProducedTemperature(): number | undefined;
     protected getApplicableStatusEffects(): Set<StatusType>;
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): boolean | void | undefined;

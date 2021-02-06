@@ -14,6 +14,7 @@ import { ICausesDamage, ICausesStatusEffect } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { ILootItem } from "game/ILoot";
 import { IObjectDescription, IObjectOptions } from "game/IObject";
+import { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
 import { IItemMagicalProperty, ItemType } from "item/IItem";
 import Item from "item/Item";
 import { LootGroupType } from "item/LootGroups";
@@ -44,7 +45,7 @@ export interface IDoodadGroupDescription {
      */
     hidden?: boolean;
 }
-export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatusEffect, ICausesDamage {
+export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatusEffect, ICausesDamage, ITemperatureDescription, IInsulationDescription {
     actionTypes?: ActionType[];
     allowedTiles?: TerrainType[];
     blockJump?: boolean;

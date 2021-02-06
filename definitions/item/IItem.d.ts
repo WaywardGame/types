@@ -28,6 +28,7 @@ import { Stat } from "entity/IStats";
 import { BiomeType } from "game/IBiome";
 import { IDecayTemperatureRange } from "game/IGame";
 import { IObjectDescription } from "game/IObject";
+import { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
 import Item from "item/Item";
 import Recipe from "item/recipe/Recipe";
 import Message from "language/dictionary/Message";
@@ -64,7 +65,7 @@ export interface IContainer extends IContainable {
     itemOrders?: number[];
     containerType?: ContainerType;
 }
-export interface IItemDescription extends IObjectDescription, IModdable {
+export interface IItemDescription extends IObjectDescription, IModdable, IInsulationDescription, ITemperatureDescription {
     durability?: number;
     /**
      * An amount of durability that the item can start with lost. Defaults to 3

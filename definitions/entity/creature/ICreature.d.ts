@@ -14,6 +14,7 @@ import Human from "entity/Human";
 import { AiType, DamageType, Defense, IEntityEvents, MoveType, StatusType } from "entity/IEntity";
 import Player from "entity/player/Player";
 import { BiomeType } from "game/IBiome";
+import { ITemperatureDescription } from "game/temperature/ITemperature";
 import { ItemType, ItemTypeGroup } from "item/IItem";
 import { LootGroupType } from "item/LootGroups";
 import Message from "language/dictionary/Message";
@@ -117,7 +118,7 @@ export declare enum TileGroup {
     IceCapWithWater = 19,
     Void = 20
 }
-export interface ICreatureDescription extends IModdable {
+export interface ICreatureDescription extends IModdable, ITemperatureDescription {
     minhp: number;
     maxhp: number;
     minatk: number;
