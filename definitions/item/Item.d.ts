@@ -107,6 +107,8 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     isProtected(): boolean;
     getDecayMax(): number;
     getDecayRate(isClientSide: boolean): number;
+    getPreservationDecayMultiplier(): number;
+    getTemperatureDecayMultiplier(isClientSide: boolean): number;
     getTotalWeight(bypassContainer?: boolean): number;
     getDisassemblyWeight(): number;
     isNearby(executor: Entity, allowNearby?: boolean): boolean;

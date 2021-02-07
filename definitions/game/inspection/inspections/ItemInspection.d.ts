@@ -10,8 +10,8 @@
  */
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InfoProviderContext } from "game/inspection/InfoProvider";
-import ItemDurabilityInfoProvider from "game/inspection/infoProviders/item/Durability";
 import ItemDetailsInfoProvider from "game/inspection/infoProviders/item/ItemDetails";
+import ItemDurabilityInfoProvider from "game/inspection/infoProviders/item/ItemDurability";
 import ItemProtectedInfoProvider from "game/inspection/infoProviders/item/ItemProtected";
 import ItemWeightInfoProvider from "game/inspection/infoProviders/item/ItemWeight";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
