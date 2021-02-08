@@ -9,19 +9,29 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
-import { MagicalPropertyType } from "item/IItem";
+import { IItemMagicalProperty, MagicalPropertyType } from "item/IItem";
 import Translation from "language/Translation";
 export default class MagicalPropertyValue extends InfoProvider {
     private readonly base;
     private readonly magical;
     private readonly magicalPropertyType;
-    static base(base: () => number): {
-        magical(type: MagicalPropertyType, magical: () => number | undefined): MagicalPropertyValue;
+    static base(base: GetterOfOr<number>): {
+        magicalOn(type: MagicalPropertyType, on: {
+            getMagicalProperty(type: MagicalPropertyType): IItemMagicalProperty | undefined;
+        }): MagicalPropertyValue;
+        magical(type: MagicalPropertyType, magical: GetterOfOr<number | undefined>): MagicalPropertyValue;
     };
     private _combined?;
+    private numberFormatter?;
+    private formatter?;
+    private baseDifference?;
     private constructor();
     combined(combined: (base: number, magical: number) => number): this;
     getClass(): string[];
     get(): Translation | import("../InfoProvider").SimpleInfoProvider[];
     initComponent(): import("../../../newui/component/Component").default<HTMLElement>;
+    setBaseDifference(): this;
+    setNumberFormatter(formatter: Translation): this;
+    setFormatter(formatter: Translation): this;
+    private formatNumber;
 }

@@ -272,7 +272,8 @@ export declare enum MagicalPropertyType {
     PreservationRate = 15,
     MaxDecay = 16,
     ItemDamage = 17,
-    StokeValue = 18
+    StokeValue = 18,
+    Insulation = 19
 }
 export interface IItemUsed {
     usedBy?: string[];

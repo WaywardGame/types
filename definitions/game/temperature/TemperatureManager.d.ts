@@ -27,6 +27,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     private readonly island;
     private cacheCalculated;
     private cacheProduced;
+    private readonly cacheContainers;
     constructor(island: Island);
     /**
      * Returns the current temperature for a container, calculated by combining the tile temperature and the combined temperature of the items inside

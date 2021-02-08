@@ -10,14 +10,12 @@
  */
 import { ActionType } from "entity/action/IAction";
 import { ItemUseInfo } from "game/inspection/infoProviders/item/ItemUseInfo";
+import MagicalPropertyValue from "game/inspection/infoProviders/MagicalPropertyValue";
 import Item from "item/Item";
-export default class ItemBuildInfo extends ItemUseInfo {
-    private readonly doodadDescription;
-    static get(item: Item, action: ActionType): ItemBuildInfo | undefined;
-    private constructor();
+import Translation from "language/Translation";
+export default class ItemEquipInfo extends ItemUseInfo {
+    static get(item: Item, action: ActionType): ItemEquipInfo | undefined;
     getClass(): string[];
-    hasContent(): boolean;
-    protected getDetails(): (import("../../InfoProvider").SimpleInfoProvider[] | undefined)[];
-    private getWeightCapacity;
-    private getPreservationChance;
+    getDetails(): (Translation | MagicalPropertyValue[])[];
+    private getAttack;
 }

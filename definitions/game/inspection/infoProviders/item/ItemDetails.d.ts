@@ -19,8 +19,9 @@ export default class ItemDetailsInfoProvider extends InfoProvider {
     getClass(): string[];
     getDefaultDisplayLevel(): InfoDisplayLevel;
     initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
-    hasContent(): boolean;
-    get(): (0 | LabelledValue | ItemUses)[];
+    get(): (0 | import("../../InfoProvider").SimpleInfoProvider | LabelledValue | ItemUses)[];
+    private getInsulation;
+    private getPreservation;
     private getGroupings;
     private getWorth;
 }

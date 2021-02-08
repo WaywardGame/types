@@ -17,6 +17,7 @@ export default class ItemUses extends InfoProvider {
     getClass(): string[];
     get(): never[] | LabelledValue;
     private getUseExtraInfo;
-    private getTier;
+    private getThrowDamageType;
+    private getUse;
     private generateUseTooltip;
 }

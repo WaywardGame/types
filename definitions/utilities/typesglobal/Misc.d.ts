@@ -20,4 +20,5 @@ declare global {
         [key in K]: infer V;
     } ? V : never;
     type Falsy = undefined | null | 0 | "" | false;
+    type Nullish = undefined | null;
 }

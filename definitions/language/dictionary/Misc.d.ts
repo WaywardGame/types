@@ -100,7 +100,7 @@ export declare enum MiscTranslation {
     PercentInteger = 25,
     NumberSingleDecimal = 26,
     PlayerName = 27,
-    Plus = 28,
+    Difference = 28,
     Quality = 29,
     ReformatSingularNoun = 30,
     Renamed = 31,

@@ -219,6 +219,5 @@ declare module Translation {
     const misc: (entry: string | MiscTranslation) => Translation;
     const skill: (entry: string | SkillType, color?: boolean) => Translation;
     const stat: (entry: string | Stat, color?: boolean) => Translation;
-    function difference(value: number): number | Translation;
 }
 export default Translation;
