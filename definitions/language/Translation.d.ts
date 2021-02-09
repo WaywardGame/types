@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { DamageType } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { MessageType } from "entity/player/IMessageManager";
@@ -219,5 +220,10 @@ declare module Translation {
     const misc: (entry: string | MiscTranslation) => Translation;
     const skill: (entry: string | SkillType, color?: boolean) => Translation;
     const stat: (entry: string | Stat, color?: boolean) => Translation;
+    /**
+     * Damage types are bit flags, so multiple can be stored in one `DamageType`.
+     * This method returns a translated list of damage types.
+     */
+    const damage: (damageTypes: ArrayOr<DamageType>, colorize?: boolean, reformatter?: Translation | ((type: DamageType) => Translation) | undefined) => Translation;
 }
 export default Translation;

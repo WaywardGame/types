@@ -32,7 +32,7 @@ import { Challenge } from "game/options/modifiers/challenge/IChallenge";
 import { MilestoneModifierGroup } from "game/options/modifiers/milestone/MilestoneModifier";
 import { PartOfDay } from "game/TimeManager";
 import { WorldZ } from "game/WorldZ";
-import { BookType, EquipEffect, ItemType, ItemTypeGroup, MagicalPropertyType } from "item/IItem";
+import { BookType, EquipEffect, ItemType, ItemTypeGroup, MagicalPropertyType, RecipeLevel } from "item/IItem";
 import { CraftEfficacy } from "item/recipe/Crafter";
 import { GameEndMessage } from "language/dictionary/GameEndMessage";
 import HumanName from "language/dictionary/HumanName";
@@ -125,22 +125,23 @@ export declare enum Dictionary {
     Quality = 59,
     Quest = 60,
     QuestRequirement = 61,
-    SaveSlotSort = 62,
-    Skill = 63,
-    Source = 64,
-    Stat = 65,
-    StatusEffect = 66,
-    TeamMemberResponsibility = 67,
-    Terrain = 68,
-    TileEvent = 69,
-    TravelingEffectStrategy = 70,
-    Ui = 71,
-    UiQuadrant = 72,
-    UnableToJoinReason = 73,
-    UnlockedRecipesStrategy = 74,
-    Website = 75,
-    WeightStatus = 76,
-    WorldLayer = 77
+    RecipeLevel = 62,
+    SaveSlotSort = 63,
+    Skill = 64,
+    Source = 65,
+    Stat = 66,
+    StatusEffect = 67,
+    TeamMemberResponsibility = 68,
+    Terrain = 69,
+    TileEvent = 70,
+    TravelingEffectStrategy = 71,
+    Ui = 72,
+    UiQuadrant = 73,
+    UnableToJoinReason = 74,
+    UnlockedRecipesStrategy = 75,
+    Website = 76,
+    WeightStatus = 77,
+    WorldLayer = 78
 }
 export declare type Enum = Record<string, number> & Record<number, string>;
 export declare const SYMBOL_ANY_DICTIONARY: unique symbol;
@@ -207,22 +208,23 @@ declare const dictionaries: {
     59: typeof Quality;
     60: typeof QuestType;
     61: typeof QuestRequirementType;
-    62: typeof SaveSort;
-    63: typeof SkillType;
-    64: typeof Source;
-    65: typeof Stat;
-    66: typeof StatusType;
-    67: typeof Responsibility;
-    68: typeof TerrainType;
-    69: typeof TileEventType;
-    70: typeof TravelingEffectStrategy;
-    71: typeof UiTranslation;
-    72: typeof Quadrant;
-    73: typeof UnableToJoinReason;
-    74: typeof UnlockedRecipesStrategy;
-    75: typeof Website;
-    76: typeof WeightStatus;
-    77: typeof WorldZ;
+    62: typeof RecipeLevel;
+    63: typeof SaveSort;
+    64: typeof SkillType;
+    65: typeof Source;
+    66: typeof Stat;
+    67: typeof StatusType;
+    68: typeof Responsibility;
+    69: typeof TerrainType;
+    70: typeof TileEventType;
+    71: typeof TravelingEffectStrategy;
+    72: typeof UiTranslation;
+    73: typeof Quadrant;
+    74: typeof UnableToJoinReason;
+    75: typeof UnlockedRecipesStrategy;
+    76: typeof Website;
+    77: typeof WeightStatus;
+    78: typeof WorldZ;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

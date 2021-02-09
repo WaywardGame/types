@@ -51,7 +51,7 @@ declare module Enums {
      * @param random The random instance to use. **Defaults to seeded random.** Note that using this method in non-game locations may
      * cause seed desyncs!
      */
-    function getRandom<T>(enumObject: T, filter?: (value: T[keyof T], index: number) => boolean, random?: import("../Random").Random<import("../Random").SeededGenerator>): T[keyof T];
+    function getRandom<T>(enumObject: T, filter?: (value: T[keyof T], index: number) => boolean, random?: import("../Random").Random<import("../Random").SeededGenerator>): Exclude<T[keyof T], AnyFunction<any>>;
     /**
      * Get the names of the entries in an enum.
      */
@@ -63,13 +63,13 @@ declare module Enums {
     /**
      * Iterate over the values in an enum.
      */
-    function values<T>(enumObject: T): readonly T[keyof T][];
-    function valueStream<T>(enumObject: T): import("@wayward/goodstream/Stream").default<T[keyof T]>;
+    function values<T>(enumObject: T): readonly Exclude<T[keyof T], AnyFunction<any>>[];
+    function valueStream<T>(enumObject: T): import("@wayward/goodstream/Stream").default<Exclude<T[keyof T], AnyFunction<any>>>;
     /**
      * Iterate over the entries in an enum. Yields a tuple containing the name and value of each entry.
      */
-    function entries<T>(enumObject: T): readonly [keyof T, T[keyof T]][];
-    function entryStream<T>(enumObject: T): import("@wayward/goodstream/Stream").default<[keyof T, T[keyof T]]>;
+    function entries<T>(enumObject: T): readonly [keyof T, Exclude<T[keyof T], AnyFunction<any>>][];
+    function entryStream<T>(enumObject: T): import("@wayward/goodstream/Stream").default<[keyof T, Exclude<T[keyof T], AnyFunction<any>>]>;
     /**
      * Returns whether the given number is a valid entry in an enum.
      * @param enumObject The enum object to check for the entry.

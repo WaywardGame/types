@@ -134,17 +134,26 @@ export declare enum DamageType {
     Cold = 16,
     True = 32
 }
+export declare module DamageType {
+    function getAll(...damageTypes: DamageType[]): DamageType[];
+}
 export declare class Defense {
     base: number;
-    resist: Resistances;
-    vulnerable: Vulnerabilities;
-    constructor(base: number, resist: Resistances, vulnerable: Vulnerabilities);
+    resist: Attributes;
+    vulnerable: Attributes;
+    constructor(base: number);
+    setResistance(damageTypes: DamageType, amount: number): this;
+    setVulnerability(damageTypes: DamageType, amount: number): this;
 }
-export declare class Vulnerabilities {
-    [index: number]: number;
-    constructor(...args: any[]);
+export declare type Attributes = AttributesImpl & Record<DamageType, number>;
+declare class AttributesImpl {
+    static create(): Attributes;
+    private constructor();
+    set(damageTypes: DamageType, amount: number): this;
+    add(attributes: Attributes): this;
+    reset(amount?: number): void;
+    all(): [DamageType, number][];
+    types(): DamageType[];
+    has(): boolean;
 }
-export declare class Resistances {
-    [index: number]: number;
-    constructor(...args: any[]);
-}
+export {};

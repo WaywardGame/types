@@ -16,6 +16,7 @@ import Translation from "language/Translation";
 export default class ItemEquipInfo extends ItemUseInfo {
     static get(item: Item, action: ActionType): ItemEquipInfo | undefined;
     getClass(): string[];
-    getDetails(): (Translation | MagicalPropertyValue[])[];
+    getDetails(): (Translation | MagicalPropertyValue)[];
     private getAttack;
+    private getDefense;
 }

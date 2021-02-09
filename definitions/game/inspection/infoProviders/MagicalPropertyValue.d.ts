@@ -24,13 +24,19 @@ export default class MagicalPropertyValue extends InfoProvider {
     private _combined?;
     private numberFormatter?;
     private formatter?;
-    private baseDifference?;
+    private isModifier?;
+    private baseColor?;
     private constructor();
     combined(combined: (base: number, magical: number) => number): this;
     getClass(): string[];
     get(): Translation | import("../InfoProvider").SimpleInfoProvider[];
     initComponent(): import("../../../newui/component/Component").default<HTMLElement>;
-    setBaseDifference(): this;
+    setIsModifier(): this;
+    /**
+     * Alias of `setNumberFormatter(Translation.misc(MiscTranslation.Percent))`
+     */
+    setIsPercentage(): this;
+    setBaseColor(translation: Translation): this;
     setNumberFormatter(formatter: Translation): this;
     setFormatter(formatter: Translation): this;
     private formatNumber;

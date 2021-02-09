@@ -10,6 +10,7 @@
  */
 import { ActionType } from "entity/action/IAction";
 import { ItemUseInfo } from "game/inspection/infoProviders/item/ItemUseInfo";
+import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import Item from "item/Item";
 export default class ItemBuildInfo extends ItemUseInfo {
     private readonly doodadDescription;
@@ -17,7 +18,8 @@ export default class ItemBuildInfo extends ItemUseInfo {
     private constructor();
     getClass(): string[];
     hasContent(): boolean;
-    protected getDetails(): (import("../../InfoProvider").SimpleInfoProvider[] | undefined)[];
+    protected getDetails(): (LabelledValue | undefined)[];
     private getWeightCapacity;
+    private getInsulation;
     private getPreservationChance;
 }
