@@ -26,16 +26,19 @@ export default class MagicalPropertyValue extends InfoProvider {
     private formatter?;
     private isModifier?;
     private baseColor?;
+    private outOf?;
     private constructor();
     combined(combined: (base: number, magical: number) => number): this;
     getClass(): string[];
     get(): Translation | import("../InfoProvider").SimpleInfoProvider[];
+    private getOutOf;
     initComponent(): import("../../../newui/component/Component").default<HTMLElement>;
     setIsModifier(): this;
     /**
      * Alias of `setNumberFormatter(Translation.misc(MiscTranslation.Percent))`
      */
     setIsPercentage(): this;
+    setOutOf(amount: GetterOfOr<number>): this;
     setBaseColor(translation: Translation): this;
     setNumberFormatter(formatter: Translation): this;
     setFormatter(formatter: Translation): this;

@@ -23,8 +23,5 @@ export default class DoodadInspection extends Inspection<Doodad> {
     onUpdateTile(_: any, x: number, y: number, z: number): void;
     protected onRemove(_: any, doodad: Doodad): void;
     private getDescription;
-    private getWeightCapacity;
     private getTier;
-    private getPreservation;
-    private getPreservationMessage;
 }

@@ -8,18 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import Doodad from "doodad/Doodad";
 import { InfoProvider } from "game/inspection/InfoProvider";
-import ItemUses from "game/inspection/infoProviders/item/ItemUses";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
-import Item from "item/Item";
-export default class ItemDetailsInfoProvider extends InfoProvider {
-    private readonly item;
-    constructor(item: Item);
-    getClass(): string[];
+export default class DoodadDetails extends InfoProvider {
+    private readonly doodad;
+    constructor(doodad: Doodad);
     initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
-    get(): (0 | import("../../InfoProvider").SimpleInfoProvider | LabelledValue | ItemUses)[];
+    getClass(): string[];
+    hasContent(): boolean;
+    get(): (import("../../InfoProvider").SimpleInfoProvider | LabelledValue)[];
+    private getWeightCapacity;
     private getInsulation;
-    private getPreservation;
-    private getGroupings;
-    private getWorth;
+    private getPreservationChance;
 }
