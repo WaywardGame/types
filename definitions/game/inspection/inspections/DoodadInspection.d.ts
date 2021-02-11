@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
-import { InfoProvider, InfoProviderContext } from "game/inspection/InfoProvider";
+import { InfoProvider } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IVector3 } from "utilities/math/IVector";

@@ -20,7 +20,7 @@ import { ContainerReference, IContainable, IContainer, IItemDescription, IItemWe
 import { CraftStatus, IAddToContainerOptions, IRequirementInfo, WeightType } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
-import Translation, { TextContext } from "language/Translation";
+import Translation, { ListEnder } from "language/Translation";
 import { ITile, TerrainType } from "tile/ITerrain";
 import { IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
@@ -137,8 +137,19 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     isTileContainer(container: IContainer | undefined): boolean;
     getOrderedContainerItems(container: IContainer, allowProtectedItems?: boolean): Item[];
     reduceDismantleWeight(createdItems: Item[], itemWeight: number): void;
-    getItemTranslations(items: Item[], article?: boolean, context?: TextContext): Translation[];
-    getItemListTranslation(items: Item[], article?: boolean, context?: TextContext): Translation;
+    /**
+     * Maps each item in the given array to its name translation.
+     * @param article Whether the item name translation should include an article
+     * @param formatter A formatting translation that should be used for each item translation
+     */
+    getItemTranslations(items: Item[], article?: boolean, formatter?: Translation): Translation[];
+    /**
+     * Formats a list translation out of an array of items.
+     * @param article Whether the items should have articles
+     * @param listEnder The way the list should end (ie `and`, `or`, etc)
+     * @param formatter A formatting translation that should be used for each item translation
+     */
+    getItemListTranslation(items: Item[], article?: boolean, listEnder?: ListEnder | false, formatter?: Translation): Translation;
     loadReferences(generatedNewWorld: boolean, isTraveling: boolean): void;
     saveTileReferences(): void;
     loadTileReferences(): void;

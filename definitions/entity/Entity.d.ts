@@ -20,7 +20,7 @@ import Stats from "entity/Stats";
 import StatusEffect from "entity/status/StatusEffect";
 import EventEmitter from "event/EventEmitter";
 import { FireType, TileUpdateType } from "game/IGame";
-import { IInspector } from "game/inspection/InfoProvider";
+import { IInspector } from "game/inspection/IInfoProvider";
 import { IReferenceable } from "game/IReferenceManager";
 import { ITemperatureSource } from "game/temperature/ITemperature";
 import { ItemType, RecipeLevel } from "item/IItem";

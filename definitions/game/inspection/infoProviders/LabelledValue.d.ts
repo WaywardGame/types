@@ -25,7 +25,10 @@ export default class LabelledValue extends InfoProvider {
     add(...values: Array<Falsy | InfoProvider | TranslationGenerator>): this;
     getClass(): string[];
     get(): (Translation | import("../../../language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | import("../../../language/Translation").ISerializedTranslation | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | UiTranslation | undefined) | InfoProvider)[];
-    initComponent(): Component<HTMLElement>;
+    initComponent(): {
+        component: Component<HTMLElement>;
+        fullInit(): void;
+    };
     protected initChildTextComponent(text: TranslationGenerator): Text;
     setComponent(componentClass: Class<Component>): this;
 }

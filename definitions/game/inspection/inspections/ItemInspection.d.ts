@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
-import { InfoProviderContext } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import ItemDetailsInfoProvider from "game/inspection/infoProviders/item/ItemDetails";
 import ItemDurabilityInfoProvider from "game/inspection/infoProviders/item/ItemDurability";
 import ItemProtectedInfoProvider from "game/inspection/infoProviders/item/ItemProtected";
@@ -24,7 +24,6 @@ import { IVector3 } from "utilities/math/IVector";
 export default class ItemInspection extends Inspection<Item> {
     static getFromTile(position: IVector3): ItemInspection[];
     static handles(item: unknown): boolean;
-    private inspector;
     private inspectorPosition;
     private itemPosition;
     constructor(item: Item);

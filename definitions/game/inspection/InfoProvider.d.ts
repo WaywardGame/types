@@ -8,38 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Creature from "entity/creature/Creature";
-import Entity from "entity/Entity";
-import Human from "entity/Human";
-import NPC from "entity/npc/NPC";
-import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
-import { TextContext } from "language/Translation";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshable } from "newui/component/Refreshable";
 import Text from "newui/component/Text";
-export declare enum InfoClass {
-    Title = "title",
-    Description = "description",
-    List = "list"
-}
-export interface IInspector {
-    asEntity?: Entity;
-    asCreature?: Creature;
-    asHuman?: Human;
-    asNPC?: NPC;
-    asPlayer?: Player;
-    getInspectionId(): string;
-}
-export declare class InfoProviderContext {
-    readonly textContext: TextContext;
-    readonly inspector: IInspector;
-    static readonly UI: new (inspector: IInspector) => InfoProviderContext;
-    static readonly RAW: new (inspector: IInspector) => InfoProviderContext;
-    constructor(textContext: TextContext, inspector: IInspector);
-}
 export interface IInfoProviderEvents {
     /**
      * Should be emitted when the info provider is initialized.
@@ -79,6 +54,8 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     static description(...translations: TranslationGenerator[]): SimpleInfoProvider;
     static list(...translations: TranslationGenerator[]): SimpleInfoProvider;
     private displayLevel?;
+    protected component?: Component;
+    protected context?: InfoProviderContext;
     abstract get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     abstract getClass(): string[];
     getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel | Set<InfoDisplayLevel>;
@@ -97,10 +74,17 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
      */
     recheckHasContent(): this;
     /**
+     * Call when this info provider should refresh its display level.
+     */
+    refreshDisplayLevel(): this;
+    /**
      * Call when this info provider should be removed.
      */
     remove(): this;
-    initComponent(component?: Component<HTMLElement>, context?: InfoProviderContext): Component<HTMLElement>;
+    initComponent(component?: Component<HTMLElement>, context?: InfoProviderContext, partial?: boolean): {
+        component: Component<HTMLElement>;
+        fullInit(): void;
+    };
     protected initChildTextComponent(text: TranslationGenerator): Text;
 }
 export declare class SimpleInfoProvider extends InfoProvider {
@@ -113,7 +97,10 @@ export declare class SimpleInfoProvider extends InfoProvider {
     add(...translations: Array<TranslationGenerator | InfoProvider | Falsy>): this;
     getClass(): string[];
     addClasses(...classes: string[]): this;
-    initComponent(): Component<HTMLElement>;
+    initComponent(): {
+        component: Component<HTMLElement>;
+        fullInit(): void;
+    };
     protected initChildTextComponent(text: TranslationGenerator): Text;
     setComponent(componentClass: Class<Component>): this;
     setChildComponent(componentClass: Class<Text>): this;

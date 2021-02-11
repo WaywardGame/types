@@ -166,7 +166,7 @@ declare class Translation {
     constructor(translationId: string);
     withSegments(...segments: ISegment[]): this;
     withSegments(priority: true, ...segments: ISegment[]): this;
-    withTooltip(tooltip: ITooltipSection["tooltip"]): this;
+    withTooltip(tooltip?: Falsy | ITooltipSection["tooltip"]): this;
     setReference(reference?: Reference | IReferenceable): this;
     addArgs(...args: any[]): this;
     inContext(context?: TextContext, normalize?: boolean): this;

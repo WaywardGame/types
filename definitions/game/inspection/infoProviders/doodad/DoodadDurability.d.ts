@@ -9,18 +9,19 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "doodad/Doodad";
-import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InfoProvider } from "game/inspection/InfoProvider";
-import Translation from "language/Translation";
+import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 export default class DoodadDurabilityInfoProvider extends InfoProvider {
     private readonly doodad;
     private durability;
     constructor(doodad: Doodad);
     getClass(): string[];
-    getDefaultDisplayLevel(): InfoDisplayLevel;
-    initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
+    initComponent(): {
+        component: import("../../../../newui/component/Component").default<HTMLElement>;
+        fullInit(): void;
+    };
     hasContent(): boolean;
-    get(): Translation;
+    get(): LabelledValue;
     onTickEnd(): void;
-    private getDurabilityMessage;
+    private getSkill;
 }

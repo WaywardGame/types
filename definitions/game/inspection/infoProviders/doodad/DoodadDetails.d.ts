@@ -10,15 +10,16 @@
  */
 import Doodad from "doodad/Doodad";
 import { InfoProvider } from "game/inspection/InfoProvider";
-import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 export default class DoodadDetails extends InfoProvider {
     private readonly doodad;
     constructor(doodad: Doodad);
-    initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
+    initComponent(): {
+        component: import("../../../../newui/component/Component").default<HTMLElement>;
+        fullInit(): void;
+    };
     getClass(): string[];
     hasContent(): boolean;
-    get(): (import("../../InfoProvider").SimpleInfoProvider | LabelledValue)[];
-    private getWeightCapacity;
+    get(): import("../../InfoProvider").SimpleInfoProvider[];
     private getInsulation;
     private getPreservationChance;
 }

@@ -12,7 +12,7 @@ import Doodad from "doodad/Doodad";
 import Corpse from "entity/creature/corpse/Corpse";
 import Entity from "entity/Entity";
 import { InspectType } from "game/inspection/IInspection";
-import { InfoProviderContext } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
 import InspectionsHandler from "game/inspection/InspectionsHandler";
 import { IContainer } from "item/IItem";

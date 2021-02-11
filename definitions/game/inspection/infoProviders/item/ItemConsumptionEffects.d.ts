@@ -17,7 +17,10 @@ export default class ItemConsumptionEffects extends InfoProvider {
     private readonly consumeAction;
     static get(item: Item, consumeAction: ActionType): ItemConsumptionEffects | undefined;
     private constructor();
-    initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
+    initComponent(): {
+        component: import("../../../../newui/component/Component").default<HTMLElement>;
+        fullInit(): void;
+    };
     getClass(): string[];
     hasContent(): boolean;
     get(): Translation;

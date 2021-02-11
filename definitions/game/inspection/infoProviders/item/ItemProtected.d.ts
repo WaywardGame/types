@@ -22,7 +22,10 @@ export default class ItemProtectedInfoProvider extends InfoProvider {
         width: number;
         height: number;
     };
-    initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
+    initComponent(): {
+        component: import("../../../../newui/component/Component").default<HTMLElement>;
+        fullInit(): void;
+    };
     hasContent(): boolean;
     get(): Translation;
     protected onToggleProtected(item: Item): void;

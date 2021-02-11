@@ -10,7 +10,7 @@
  */
 import Human from "entity/Human";
 import { SkillType } from "entity/IHuman";
-import { InfoProviderContext } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import SkillBonusMagicalItemsInfoProvider from "game/inspection/infoProviders/skill/MagicalItemBonuses";
 import Inspection from "game/inspection/Inspection";
 import Message from "language/dictionary/Message";

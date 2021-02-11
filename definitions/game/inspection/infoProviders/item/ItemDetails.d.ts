@@ -16,7 +16,10 @@ export default class ItemDetailsInfoProvider extends InfoProvider {
     private readonly item;
     constructor(item: Item);
     getClass(): string[];
-    initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
+    initComponent(): {
+        component: import("../../../../newui/component/Component").default<HTMLElement>;
+        fullInit(): void;
+    };
     get(): (0 | import("../../InfoProvider").SimpleInfoProvider | LabelledValue | ItemUses)[];
     private getInsulation;
     private getPreservation;

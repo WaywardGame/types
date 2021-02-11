@@ -8,6 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import Creature from "entity/creature/Creature";
+import Entity from "entity/Entity";
+import Human from "entity/Human";
+import NPC from "entity/npc/NPC";
+import Player from "entity/player/Player";
 export declare enum InfoDisplayLevel {
     NonVerbose = -2,
     NonExtra = -1,
@@ -17,4 +22,17 @@ export declare enum InfoDisplayLevel {
 }
 export declare module InfoDisplayLevel {
     function canDisplay(level: InfoDisplayLevel, ...toDisplay: InfoDisplayLevel[]): boolean;
+}
+export declare enum InfoClass {
+    Title = "title",
+    Description = "description",
+    List = "list"
+}
+export interface IInspector {
+    asEntity?: Entity;
+    asCreature?: Creature;
+    asHuman?: Human;
+    asNPC?: NPC;
+    asPlayer?: Player;
+    getInspectionId(): string;
 }

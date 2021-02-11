@@ -10,7 +10,7 @@
  */
 import EventEmitter from "event/EventEmitter";
 import { InspectType } from "game/inspection/IInspection";
-import { InfoProviderContext } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
 import HashSet from "utilities/set/HashSet";
 export interface IInspectionsHandlerEvents {

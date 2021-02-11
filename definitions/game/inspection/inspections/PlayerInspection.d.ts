@@ -10,13 +10,14 @@
  */
 import Player from "entity/player/Player";
 import { InspectType } from "game/inspection/IInspection";
-import { InfoProviderContext } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
 import HumanInspection from "game/inspection/inspections/HumanInspection";
 import { IVector3 } from "utilities/math/IVector";
 export default class PlayerInspection extends HumanInspection<Player> {
     static getFromTile(position: IVector3, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<Player>>;
     static handles(player: unknown, context?: InfoProviderContext): boolean;
+    constructor(player: Player, context?: InfoProviderContext);
     constructor(player: Player, inspectType?: InspectType);
     getBorder(): string;
     isImportant(): boolean;

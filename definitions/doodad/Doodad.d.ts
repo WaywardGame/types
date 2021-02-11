@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadDescription, IDoodadOptions } from "doodad/IDoodad";
+import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadDescription, IDoodadOptions, IHasOwner } from "doodad/IDoodad";
 import { ActionType } from "entity/action/IAction";
 import Creature from "entity/creature/Creature";
 import Human from "entity/Human";
@@ -19,7 +19,7 @@ import { TileUpdateType } from "game/IGame";
 import { IObject, Quality } from "game/IObject";
 import { IReferenceable } from "game/IReferenceManager";
 import { IHasInsulation, ITemperatureSource } from "game/temperature/ITemperature";
-import { IContainer, IItemMagicalProperty, ItemType, MagicalPropertyType } from "item/IItem";
+import { IContainer, IHasMagicalProperties, IItemMagicalProperty, ItemType, MagicalPropertyType } from "item/IItem";
 import Item from "item/Item";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
@@ -55,7 +55,7 @@ export interface IDoodadEvents {
      */
     remove(): any;
 }
-export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IReferenceable, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource, IHasInsulation {
+export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IReferenceable, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagicalProperties, IHasOwner {
     static is(value: any): value is Doodad;
     /**
      * @deprecated
@@ -143,7 +143,14 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     checkForTrampling(source: Human | Creature): boolean;
     isDangerous(human: Human): boolean;
     getDamage(human: Human, equipType?: EquipType): number;
+    /**
+     * Gets the owner of this doodad, or `undefined` if the doodad is ownerless.
+     */
     getOwner(): Player | undefined;
+    /**
+     * Gets the owner of this doodad. If this doodad has no owner, and this is not a multiplayer server, returns the local player.
+     */
+    getOwnerOrLocalPlayer(): Player | undefined;
     unhitch(): void;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): number;

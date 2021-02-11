@@ -10,7 +10,8 @@
  */
 import Doodad from "doodad/Doodad";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
-import { InfoProvider, InfoProviderContext } from "game/inspection/InfoProvider";
+import { InfoProvider } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Translation from "language/Translation";
 export default class HarvestabilityInfoProvider extends InfoProvider {
     private readonly doodad;
@@ -19,7 +20,10 @@ export default class HarvestabilityInfoProvider extends InfoProvider {
     private constructor();
     getClass(): string[];
     getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel;
-    initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
+    initComponent(): {
+        component: import("../../../../newui/component/Component").default<HTMLElement>;
+        fullInit(): void;
+    };
     hasContent(): boolean;
     get(): Translation;
     onTickEnd(): void;

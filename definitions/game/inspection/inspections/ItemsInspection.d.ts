@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
-import { InfoProviderContext } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import ItemInspection from "game/inspection/inspections/ItemInspection";
 import ListInspection from "game/inspection/inspections/ListInspection";
 import { TranslationGenerator } from "newui/component/IComponent";
@@ -21,9 +21,8 @@ export default class ItemsInspection extends ListInspection<ItemInspection> {
     private inspectorPosition;
     private itemPositions;
     constructor(...itemInspections: ItemInspection[]);
-    get(context: InfoProviderContext): import("../../../language/Translation").default;
-    getDefaultDisplayLevel(): InfoDisplayLevel;
-    hasContent(context: InfoProviderContext): boolean;
+    get(): import("../../../language/Translation").default;
+    getDefaultDisplayLevel(context: InfoProviderContext): InfoDisplayLevel.NonVerbose | InfoDisplayLevel.Always;
     protected initChildTextComponent(text: TranslationGenerator): Text;
     protected onTickEnd(): void;
     private updatePosition;

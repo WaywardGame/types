@@ -11,17 +11,22 @@
 import Doodad from "doodad/Doodad";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InfoProvider } from "game/inspection/InfoProvider";
+import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import { IContainer } from "item/IItem";
 import Item from "item/Item";
 import Translation from "language/Translation";
 export default class ContainedItemsInfoProvider extends InfoProvider {
     private readonly container;
+    static translateItems(max: number, ...items: Item[]): Translation;
     static get(doodad: Doodad): false | ContainedItemsInfoProvider;
-    private constructor();
+    constructor(container: IContainer);
     getClass(): string[];
     getDefaultDisplayLevel(): InfoDisplayLevel;
-    initComponent(): import("../../../newui/component/Component").default<HTMLElement>;
+    initComponent(): {
+        component: import("../../../newui/component/Component").default<HTMLElement>;
+        fullInit(): void;
+    };
     hasContent(): boolean;
-    get(): Translation;
+    get(): LabelledValue;
     protected onItemMove(_: any, item: Item, previousContainer: IContainer | undefined, newContainer: IContainer): void;
 }

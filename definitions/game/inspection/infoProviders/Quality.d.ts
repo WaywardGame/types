@@ -24,6 +24,9 @@ export default class QualityInfoProvider extends InfoProvider {
         width: number;
         height: number;
     };
-    initComponent(): import("../../../newui/component/Component").default<HTMLElement>;
+    initComponent(): {
+        component: import("../../../newui/component/Component").default<HTMLElement>;
+        fullInit(): void;
+    };
     get(): Translation;
 }

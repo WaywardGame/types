@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
-import { InfoProviderContext } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import CorpseInspection from "game/inspection/inspections/CorpseInspection";
 import ListInspection from "game/inspection/inspections/ListInspection";
 import { TranslationGenerator } from "newui/component/IComponent";

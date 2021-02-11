@@ -24,6 +24,8 @@ import { ExhaustionLevel } from "entity/status/handler/IExhausted";
 import { BiomeType } from "game/IBiome";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InspectType } from "game/inspection/IInspection";
+import { DurabilityLevel } from "game/inspection/infoProviders/doodad/IDurability";
+import { Level } from "game/inspection/infoProviders/ILevel";
 import { Quality } from "game/IObject";
 import { DrawnMapTheme } from "game/mapping/IMapRender";
 import { Milestone } from "game/milestones/IMilestone";
@@ -120,32 +122,34 @@ export declare enum Dictionary {
     Number = 54,
     PartOfDay = 55,
     PowerMode = 56,
-    QuadrantComponent = 57,
-    QuadrantComponentContextMenuAction = 58,
-    Quality = 59,
-    Quest = 60,
-    QuestRequirement = 61,
-    RecipeLevel = 62,
-    SaveSlotSort = 63,
-    Skill = 64,
-    Source = 65,
-    Stat = 66,
-    StatusEffect = 67,
-    TeamMemberResponsibility = 68,
-    Terrain = 69,
-    TileEvent = 70,
-    TravelingEffectStrategy = 71,
-    Ui = 72,
-    UiQuadrant = 73,
-    UnableToJoinReason = 74,
-    UnlockedRecipesStrategy = 75,
-    Website = 76,
-    WeightStatus = 77,
-    WorldLayer = 78
+    Level = 57,
+    QuadrantComponent = 58,
+    QuadrantComponentContextMenuAction = 59,
+    Quality = 60,
+    Quest = 61,
+    QuestRequirement = 62,
+    RecipeLevel = 63,
+    SaveSlotSort = 64,
+    Skill = 65,
+    Source = 66,
+    Stat = 67,
+    StatusEffect = 68,
+    TeamMemberResponsibility = 69,
+    Terrain = 70,
+    TileEvent = 71,
+    TravelingEffectStrategy = 72,
+    Ui = 73,
+    UiQuadrant = 74,
+    UnableToJoinReason = 75,
+    UnlockedRecipesStrategy = 76,
+    Website = 77,
+    WeightStatus = 78,
+    WorldLayer = 79,
+    DurabilityLevel = 80
 }
 export declare type Enum = Record<string, number> & Record<number, string>;
 export declare const SYMBOL_ANY_DICTIONARY: unique symbol;
-declare const dictionaries: {
+declare const dictionaryMap: {
     0: typeof ActionType;
     1: typeof AutoSave;
     2: typeof Bindable;
@@ -203,29 +207,117 @@ declare const dictionaries: {
     54: symbol;
     55: typeof PartOfDay;
     56: typeof PowerMode;
-    57: typeof QuadrantComponentId;
-    58: typeof QuadrantComponentContextMenuAction;
-    59: typeof Quality;
-    60: typeof QuestType;
-    61: typeof QuestRequirementType;
-    62: typeof RecipeLevel;
-    63: typeof SaveSort;
-    64: typeof SkillType;
-    65: typeof Source;
-    66: typeof Stat;
-    67: typeof StatusType;
-    68: typeof Responsibility;
-    69: typeof TerrainType;
-    70: typeof TileEventType;
-    71: typeof TravelingEffectStrategy;
-    72: typeof UiTranslation;
-    73: typeof Quadrant;
-    74: typeof UnableToJoinReason;
-    75: typeof UnlockedRecipesStrategy;
-    76: typeof Website;
-    77: typeof WeightStatus;
-    78: typeof WorldZ;
+    57: typeof Level;
+    80: typeof DurabilityLevel;
+    58: typeof QuadrantComponentId;
+    59: typeof QuadrantComponentContextMenuAction;
+    60: typeof Quality;
+    61: typeof QuestType;
+    62: typeof QuestRequirementType;
+    63: typeof RecipeLevel;
+    64: typeof SaveSort;
+    65: typeof SkillType;
+    66: typeof Source;
+    67: typeof Stat;
+    68: typeof StatusType;
+    69: typeof Responsibility;
+    70: typeof TerrainType;
+    71: typeof TileEventType;
+    72: typeof TravelingEffectStrategy;
+    73: typeof UiTranslation;
+    74: typeof Quadrant;
+    75: typeof UnableToJoinReason;
+    76: typeof UnlockedRecipesStrategy;
+    77: typeof Website;
+    78: typeof WeightStatus;
+    79: typeof WorldZ;
 };
-export { dictionaries as strictDictionaries };
-declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;
-export default _default;
+export { dictionaryMap as strictDictionaries };
+export declare type DictionaryEnum = (typeof dictionaryMap)[Dictionary];
+declare function getByEnum(enumObject: DictionaryEnum): Dictionary;
+declare const dictionaries: {
+    0: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    1: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    2: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    3: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    4: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    5: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    6: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    7: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    8: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    9: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    10: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    11: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    12: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    13: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    14: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    15: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    16: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    17: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    18: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    19: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    20: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    21: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    22: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    23: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    24: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    25: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    26: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    27: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    28: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    29: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    30: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    31: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    32: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    33: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    34: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    35: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    36: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    37: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    38: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    39: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    40: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    41: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    42: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    43: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    44: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    45: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    46: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    47: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    48: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    49: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    50: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    51: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    52: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    53: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    54: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    55: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    56: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    57: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    58: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    59: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    60: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    61: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    62: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    63: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    64: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    65: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    66: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    67: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    68: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    69: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    70: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    71: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    72: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    73: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    74: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    75: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    76: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    77: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    78: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    79: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    80: Enum | typeof SYMBOL_ANY_DICTIONARY;
+} & Record<number, Enum | typeof SYMBOL_ANY_DICTIONARY | undefined> & {
+    getByEnum: typeof getByEnum;
+};
+export default dictionaries;

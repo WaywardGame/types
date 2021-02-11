@@ -17,7 +17,10 @@ export default class StillWaterInfoProvider extends InfoProvider {
     private message;
     private constructor();
     getClass(): string[];
-    initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
+    initComponent(): {
+        component: import("../../../../newui/component/Component").default<HTMLElement>;
+        fullInit(): void;
+    };
     hasContent(): boolean;
     get(): Translation;
     onTickEnd(): void;

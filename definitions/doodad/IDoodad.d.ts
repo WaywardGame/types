@@ -12,6 +12,7 @@ import Doodad from "doodad/Doodad";
 import { ActionType } from "entity/action/IAction";
 import { ICausesDamage, ICausesStatusEffect } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
+import Player from "entity/player/Player";
 import { ILootItem } from "game/ILoot";
 import { IObjectDescription, IObjectOptions } from "game/IObject";
 import { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
@@ -282,4 +283,7 @@ export declare enum GrowingStage {
     Flowering = 4,
     Ripening = 5,
     Bare = 6
+}
+export interface IHasOwner {
+    getOwner(): Player | undefined;
 }

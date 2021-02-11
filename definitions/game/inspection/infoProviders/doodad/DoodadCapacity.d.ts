@@ -8,20 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Creature from "entity/creature/Creature";
+import Doodad from "doodad/Doodad";
 import { InfoProvider } from "game/inspection/InfoProvider";
-import Translation from "language/Translation";
-export default class AberrantInfoProvider extends InfoProvider {
-    private readonly creature;
-    private aberrant;
-    constructor(creature: Creature);
-    getClass(): string[];
-    getColor(): string;
+import LabelledValue from "game/inspection/infoProviders/LabelledValue";
+export default class DoodadCapacity extends InfoProvider {
+    private readonly doodad;
+    static get(doodad: Doodad): DoodadCapacity | undefined;
+    constructor(doodad: Doodad);
     initComponent(): {
         component: import("../../../../newui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
-    hasContent(): boolean;
-    get(): Translation;
-    onTickEnd(): void;
+    getClass(): string[];
+    get(): never[] | LabelledValue;
 }

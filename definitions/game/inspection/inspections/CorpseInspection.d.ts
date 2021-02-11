@@ -10,7 +10,7 @@
  */
 import Corpse from "entity/creature/corpse/Corpse";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
-import { InfoProviderContext } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
 import { IVector3 } from "utilities/math/IVector";
 export default class CorpseInspection extends Inspection<Corpse> {

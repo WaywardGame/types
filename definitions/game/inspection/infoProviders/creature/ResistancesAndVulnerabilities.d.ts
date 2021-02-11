@@ -9,8 +9,9 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Creature from "entity/creature/Creature";
-import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
-import { IInspector, InfoProvider, InfoProviderContext } from "game/inspection/InfoProvider";
+import { IInspector, InfoDisplayLevel } from "game/inspection/IInfoProvider";
+import { InfoProvider } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Translation from "language/Translation";
 export default class ResistancesAndVulnerabilitiesInfoProvider extends InfoProvider {
     private readonly creature;
@@ -18,7 +19,10 @@ export default class ResistancesAndVulnerabilitiesInfoProvider extends InfoProvi
     constructor(creature: Creature);
     getClass(): string[];
     getDefaultDisplayLevel(): InfoDisplayLevel;
-    initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
+    initComponent(): {
+        component: import("../../../../newui/component/Component").default<HTMLElement>;
+        fullInit(): void;
+    };
     hasContent(): boolean;
     get(context: InfoProviderContext): Translation;
 }

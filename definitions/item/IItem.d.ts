@@ -249,6 +249,12 @@ export interface IItemMagicalProperty {
     skill?: SkillType;
     stat?: Stat;
 }
+export interface IHasMagicalProperties {
+    /**
+     * Gets a magical property by its type, or `undefined` if it is not present
+     */
+    getMagicalProperty(type: MagicalPropertyType): IItemMagicalProperty | undefined;
+}
 export interface IMagicalStats {
     max: number;
     float: boolean;
