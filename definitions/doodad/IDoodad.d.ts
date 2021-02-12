@@ -251,7 +251,9 @@ export declare enum DoodadType {
     IceWall = 115,
     SnowWall = 116,
     SandstoneAnvil = 117,
-    Snowman = 118
+    Snowman = 118,
+    WhitePineTree = 119,
+    WhitePineTreeWithSnow = 120
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,
