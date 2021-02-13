@@ -18,8 +18,9 @@ import EventEmitter from "event/EventEmitter";
 import { TileUpdateType } from "game/IGame";
 import { IObject, Quality } from "game/IObject";
 import { IReferenceable } from "game/IReferenceManager";
+import MagicalPropertyManager, { IHasMagic } from "game/MagicalPropertyManager";
 import { IHasInsulation, ITemperatureSource } from "game/temperature/ITemperature";
-import { IContainer, IHasMagicalProperties, IItemMagicalProperty, ItemType, MagicalPropertyType } from "item/IItem";
+import { IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
@@ -55,7 +56,7 @@ export interface IDoodadEvents {
      */
     remove(): any;
 }
-export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IReferenceable, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagicalProperties, IHasOwner {
+export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IReferenceable, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasOwner, IHasMagic {
     static is(value: any): value is Doodad;
     /**
      * @deprecated
@@ -87,11 +88,11 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     readonly x: number;
     readonly y: number;
     readonly z: number;
-    magicalProperties?: IItemMagicalProperty[] | undefined;
     step: number | undefined;
     hitchedCreature?: number;
     tradedFrom?: string[];
     aberrant?: boolean;
+    magic: MagicalPropertyManager;
     private _description;
     private _tile;
     private _tileId;
@@ -187,12 +188,6 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * @returns A number (possibly 0 if no quality or action level).
      */
     getItemUseBonus(action: ActionType): number;
-    /**
-     * Check to see if a doodad has a specific magical property, then return its values
-     * @param magicalPropertyType Set to type of magical property to look for
-     * @returns The IItemMagicalProperty on a match, undefined if no match
-     */
-    getMagicalProperty(magicalPropertyType: MagicalPropertyType): IItemMagicalProperty | undefined;
     onUnserialized(): void;
     /**
      * @deprecated

@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { MagicalPropertyType } from "item/IItem";
+import { MagicalPropertyType } from "game/MagicalPropertyType";
 declare const magicalPropertyTypes: Descriptions<MagicalPropertyType, [string, string]>;
 export default magicalPropertyTypes;

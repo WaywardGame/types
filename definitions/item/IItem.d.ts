@@ -9,16 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { SfxType } from "audio/IAudio";
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2020
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://github.com/WaywardGame/types/wiki
- */
 import { DoodadType, DoodadTypeGroup } from "doodad/IDoodad";
 import { ActionType } from "entity/action/IAction";
 import { CreatureType, TileGroup } from "entity/creature/ICreature";
@@ -36,6 +26,7 @@ import { IModdable } from "mod/ModRegistry";
 import { TerrainType } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
+import { MagicalPropertyType } from "../game/MagicalPropertyType";
 export interface IItemWeightComponent {
     weightFraction: number;
     type: ItemType;
@@ -49,11 +40,18 @@ export interface IConstructedInfo {
 export interface IItemOld {
     equipped?: EquipType;
     equippedPid?: number;
-    legendary?: IItemMagicalProperty;
+    legendary?: IMagicalPropertyOld;
     tatteredMap?: IVector3 & {
         reinitialize?: boolean;
         islandId?: string;
     };
+    magicalProperties?: IMagicalPropertyOld[];
+}
+interface IMagicalPropertyOld {
+    type: MagicalPropertyType;
+    value: number;
+    skill?: SkillType;
+    stat?: Stat;
 }
 export interface IContainable {
     containedWithin?: IContainer;
@@ -243,43 +241,12 @@ export interface IRanged {
     range: number;
     attack: number;
 }
-export interface IItemMagicalProperty {
-    type: MagicalPropertyType;
-    value: number;
-    skill?: SkillType;
-    stat?: Stat;
-}
-export interface IHasMagicalProperties {
-    /**
-     * Gets a magical property by its type, or `undefined` if it is not present
-     */
-    getMagicalProperty(type: MagicalPropertyType): IItemMagicalProperty | undefined;
-}
-export interface IMagicalStats {
+export interface IMagicalPropertyInfo {
     max: number;
-    float: boolean;
-}
-export declare enum MagicalPropertyType {
-    Attack = 0,
-    Defense = 1,
-    Illumination = 2,
-    WeightCapacity = 3,
-    ItemWeight = 4,
-    Stat = 5,
-    Skill = 6,
-    Benignity = 7,
-    Malignity = 8,
-    Range = 9,
-    UseBenefits = 10,
-    Worth = 11,
-    TrapDamage = 12,
-    MaxWeight = 13,
-    ContainerWeight = 14,
-    PreservationRate = 15,
-    MaxDecay = 16,
-    ItemDamage = 17,
-    StokeValue = 18,
-    Insulation = 19
+    float?: true;
+    value(): number;
+    stat?(): Stat;
+    skill?(): SkillType;
 }
 export interface IItemUsed {
     usedBy?: string[];

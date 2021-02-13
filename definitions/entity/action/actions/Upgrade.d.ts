@@ -10,5 +10,6 @@
  */
 import { Action } from "entity/action/Action";
 import { ActionArgument } from "entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [import("../../../item/Item").default, (import("../../../item/Item").default | undefined)?]>;
+import Item from "item/Item";
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [Item, (Item | undefined)?]>;
 export default _default;

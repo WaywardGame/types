@@ -9,15 +9,15 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
-import { IItemMagicalProperty } from "item/IItem";
+import MagicalPropertyManager from "game/MagicalPropertyManager";
 import Translation from "language/Translation";
 export default class MagicalPropertiesInfoProvider extends InfoProvider {
-    private readonly properties;
+    private readonly magic;
     static getFireStageTranslation(decay?: number): Translation | undefined;
-    static get(properties: IItemMagicalProperty[] | {
-        magicalProperties?: IItemMagicalProperty[];
+    static get(magic?: MagicalPropertyManager | {
+        magic?: MagicalPropertyManager;
     }): MagicalPropertiesInfoProvider | undefined;
-    constructor(properties: IItemMagicalProperty[]);
+    constructor(magic: MagicalPropertyManager);
     getClass(): string[];
     getIcon(): {
         path: string;
@@ -28,5 +28,6 @@ export default class MagicalPropertiesInfoProvider extends InfoProvider {
         component: import("../../../newui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
+    hasContent(): boolean;
     get(): Translation;
 }

@@ -21,4 +21,5 @@ declare global {
     } ? V : never;
     type Falsy = undefined | null | 0 | "" | false;
     type Nullish = undefined | null;
+    type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;
 }

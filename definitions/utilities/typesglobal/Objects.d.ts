@@ -10,12 +10,17 @@
  */
 export default undefined;
 declare global {
-    type Entry<O> = O extends Descriptions<infer K, infer V> ? [K, V] : never;
-    type Key<O> = O extends Descriptions<infer K, any> ? K : never;
-    type Value<O> = O extends Descriptions<any, infer V> ? V : never;
+    type Entry<O> = {
+        [K in keyof O]: [K, O[K]];
+    }[keyof O];
+    type Key<O> = keyof O;
+    type Value<O> = O[keyof O];
     type ExcludeKeys<O, K extends string | number | symbol> = {
         [KN in Exclude<keyof O, K>]: O[KN];
     };
+    type PartialValues<O> = UnionToIntersection<{
+        [K in keyof O]: Partial<O[K]>;
+    }[keyof O]>;
     /**
      * Given `FROM`, returns a type matching all keys that point to `VALUES`.
      *

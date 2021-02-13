@@ -20,8 +20,10 @@ import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { IReferenceable } from "game/IReferenceManager";
+import MagicalPropertyManager, { IHasMagic } from "game/MagicalPropertyManager";
+import { MagicalPropertyType } from "game/MagicalPropertyType";
 import { IHasInsulation, ITemperatureSource } from "game/temperature/ITemperature";
-import { BookType, IConstructedInfo, IContainable, IContainer, IHasMagicalProperties, IItemDescription, IItemMagicalProperty, IItemUsed, IMagicalStats, IMoveToTileOptions, ItemType, MagicalPropertyType } from "item/IItem";
+import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemType } from "item/IItem";
 import { IPlaceOnTileOptions } from "item/IItemManager";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
@@ -30,7 +32,7 @@ export interface IItemEvents {
     toggleProtected(isProtected: boolean): any;
     fireUpdate(stage?: FireStage): any;
 }
-export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagicalProperties {
+export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagic {
     book?: BookType;
     constructedFrom?: IConstructedInfo;
     containedItems: Item[];
@@ -42,7 +44,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     equippedType?: EntityType;
     id: number;
     itemOrders?: number[];
-    magicalProperties?: IItemMagicalProperty[];
     map?: [island: string, id: number];
     maxDur: number;
     minDur: number;
@@ -59,6 +60,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     weight: number;
     weightCapacity: number;
     weightFraction: number;
+    magic: MagicalPropertyManager;
     offsetX?: number;
     offsetY?: number;
     fromX?: number;
@@ -154,21 +156,11 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     randomizeMap(chanceOfGivingCompletedMap?: number): void;
     setQuality(human: Human | undefined, quality?: Quality): void;
     getValidMagicalProperties(): MagicalPropertyType[];
-    /**
-     * Check to see if an item has a specific magical property, then return its values
-     * @param magicalPropertyType Set to type of magical property to look for
-     * @returns The IItemMagicalProperty on a match, undefined if no match
-     */
-    getMagicalProperty(magicalPropertyType: MagicalPropertyType): IItemMagicalProperty | undefined;
-    /**
-     * Sets the magical type for an item
-     * @param bypassIndex Set to the index of item.magicalProperties that you want to modify to get the value from
-     * @param bypassType Set to true if you want to keep the current magical type of the item
-     * @param bypassValue Set to true if you want to keep the current magical value of the item
-     * @param properties Set to the number of properties you want to attempt to give the item
-     * @returns The maximum value the magical value can be for the accepted or bypassed type and if the value is a float value or integer
-     */
-    setMagical(bypassIndex?: number, bypassType?: boolean, bypassValue?: boolean, properties?: number): undefined | IMagicalStats;
+    addMagicalProperties(count: number): boolean;
+    rerollMagicalProperty(type: MagicalPropertyType): boolean;
+    rerollMagicalPropertyValues(): void;
+    addMagicalProperty(type: MagicalPropertyType): boolean;
+    getMagicalPropertyInfo(type: MagicalPropertyType): IMagicalPropertyInfo | undefined;
     acquireNotify(player: Player): void;
     getStokeFireValue(): number | undefined;
     getStokeFireBonusValue(): number;

@@ -20,5 +20,4 @@ export default class SkillBonusMagicalItemsInfoProvider extends InfoProvider {
     hasContent(): boolean;
     get(): (0 | Translation | import("../../InfoProvider").SimpleInfoProvider)[];
     private getMagicalItems;
-    private getMagicalPropertySkill;
 }

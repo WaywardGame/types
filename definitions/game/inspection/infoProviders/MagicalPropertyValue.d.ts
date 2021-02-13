@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
-import { IHasMagicalProperties, MagicalPropertyType } from "item/IItem";
+import { IHasMagic, MagicalNormalPropertyTypes, MagicalPropertyTypeSubTypeMap, MagicalSubPropertyTypes } from "game/MagicalPropertyManager";
+import { MagicalPropertyType } from "game/MagicalPropertyType";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import { TranslationGenerator } from "newui/component/IComponent";
@@ -27,7 +28,8 @@ export default class MagicalPropertyValue extends InfoProvider {
     private after;
     constructor(base: GetterOfOr<number>);
     setCombined(combined: (base: number, magical: number) => number): this;
-    setMagicalOn(type: MagicalPropertyType, on: IHasMagicalProperties): this;
+    setMagicalOn(magicalThingy: IHasMagic, type: MagicalNormalPropertyTypes): this;
+    setMagicalOn<T extends MagicalSubPropertyTypes>(magicalThingy: IHasMagic, type: T, subType?: MagicalPropertyTypeSubTypeMap[T]): this;
     setMagical(type: MagicalPropertyType, magical: GetterOfOr<number | undefined>): this;
     setIsModifier(): this;
     /**

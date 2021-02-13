@@ -16,7 +16,7 @@ import Player from "entity/player/Player";
 import { ILootItem } from "game/ILoot";
 import { IObjectDescription, IObjectOptions } from "game/IObject";
 import { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
-import { IItemMagicalProperty, ItemType } from "item/IItem";
+import { IItemOld, ItemType } from "item/IItem";
 import Item from "item/Item";
 import { LootGroupType } from "item/LootGroups";
 import { IModdable } from "mod/ModRegistry";
@@ -29,16 +29,17 @@ export interface IDoodadOptions extends IObjectOptions {
     gfx?: number;
     spread?: number;
     weight?: number;
-    magicalProperties?: IItemMagicalProperty[];
     disassembly?: Item[];
     ownerIdentifier?: string;
     step?: number;
     hitchedCreature?: number;
     aberrant?: boolean;
 }
+declare type MagicalPropertyOld = Exclude<IItemOld["magicalProperties"], undefined> extends Array<infer T> ? T : never;
 export declare type IDoodadOld = Partial<Doodad> & {
     growInto?: DoodadType;
-    legendary?: IItemMagicalProperty;
+    legendary?: MagicalPropertyOld;
+    magicalProperties?: MagicalPropertyOld[];
 };
 export interface IDoodadGroupDescription {
     /**
@@ -289,3 +290,4 @@ export declare enum GrowingStage {
 export interface IHasOwner {
     getOwner(): Player | undefined;
 }
+export {};

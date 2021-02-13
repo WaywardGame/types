@@ -63,7 +63,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getItemsWithRecipes(): readonly ItemType[];
     getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
-    resolveContainer(container?: IContainer): Player | Doodad | Item | IContainer | ITile | NPC | undefined;
+    resolveContainer(container?: IContainer): Player | Doodad | Item | IContainer | NPC | ITile | undefined;
     getContainerReference(container: IContainer | undefined, parentObject?: any, showWarnings?: boolean): ContainerReference;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     addToContainerInternal(item: Item, container: IContainer, options?: IAddToContainerOptions): boolean;
