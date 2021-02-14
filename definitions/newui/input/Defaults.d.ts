@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Bindable from "newui/input/Bindable";
-import { Binding } from "newui/input/Bindings";
-declare const _default: Record<Bindable, Binding[]>;
+import { IInput } from "newui/input/IInput";
+import { Macro } from "newui/input/Macros";
+declare const _default: Record<Bindable, (IInput | Macro)[]>;
 export default _default;

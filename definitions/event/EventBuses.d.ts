@@ -13,6 +13,7 @@ import DoodadManager from "doodad/DoodadManager";
 import ActionExecutor from "entity/action/ActionExecutor";
 import Player from "entity/player/Player";
 import Game from "game/Game";
+import Item from "item/Item";
 import ItemManager from "item/ItemManager";
 import LanguageManager from "language/LanguageManager";
 import ModManager from "mod/ModManager";
@@ -27,24 +28,26 @@ export declare enum EventBus {
     DoodadManager = 1,
     Doodads = 2,
     Game = 3,
-    Items = 4,
-    Language = 5,
-    LocalPlayer = 6,
-    Mods = 7,
-    Multiplayer = 8,
-    Players = 9,
-    SaveManager = 10,
-    Steamworks = 11,
-    TileEventManager = 12,
-    TileEvents = 13,
-    Ui = 14
+    ItemManager = 4,
+    Items = 5,
+    Language = 6,
+    LocalPlayer = 7,
+    Mods = 8,
+    Multiplayer = 9,
+    Players = 10,
+    SaveManager = 11,
+    Steamworks = 12,
+    TileEventManager = 13,
+    TileEvents = 14,
+    Ui = 15
 }
 declare const eventBuses: {
     [EventBus.Actions](): typeof ActionExecutor;
     [EventBus.DoodadManager](): typeof DoodadManager;
     [EventBus.Doodads](): typeof Doodad;
     [EventBus.Game](): typeof Game;
-    [EventBus.Items](): typeof ItemManager;
+    [EventBus.ItemManager](): typeof ItemManager;
+    [EventBus.Items](): typeof Item;
     [EventBus.Language](): typeof LanguageManager;
     [EventBus.LocalPlayer](): Player;
     [EventBus.Mods](): typeof ModManager;
