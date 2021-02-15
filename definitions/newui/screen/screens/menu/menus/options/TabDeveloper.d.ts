@@ -17,6 +17,7 @@ export default class TabDeveloper extends Tab implements IRefreshable {
     private readonly buttonUnlockAllRecipes;
     private readonly buttonOpenLogsFolder;
     private readonly buttonToggleDevTools;
+    private readonly buttonToggleTraceRecording;
     private readonly buttonReloadGame;
     private readonly buttonReloadStylesheets;
     private readonly blockLogSourceFiltering;
@@ -28,6 +29,7 @@ export default class TabDeveloper extends Tab implements IRefreshable {
     private toggleUIExperiment;
     private toggleDeveloperTools;
     private openLogsFolder;
+    private toggleTraceRecording;
     private toggleDeveloperMode;
     private reloadGame;
     private unlockAllMilestones;

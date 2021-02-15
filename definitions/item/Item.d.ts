@@ -22,10 +22,10 @@ import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { IReferenceable } from "game/IReferenceManager";
 import MagicalPropertyManager, { IHasMagic } from "game/MagicalPropertyManager";
 import { MagicalPropertyType } from "game/MagicalPropertyType";
-import DrawnMap from "game/mapping/DrawnMap";
 import { IHasInsulation, ITemperatureSource } from "game/temperature/ITemperature";
 import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemType } from "item/IItem";
 import { IPlaceOnTileOptions } from "item/IItemManager";
+import ItemMapManager from "item/ItemMapManager";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { FireStage } from "tile/events/IFire";
@@ -45,7 +45,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     equippedType?: EntityType;
     id: number;
     itemOrders?: number[];
-    private map?;
     maxDur: number;
     minDur: number;
     order: number;
@@ -62,6 +61,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     weightCapacity: number;
     weightFraction: number;
     magic: MagicalPropertyManager;
+    map: ItemMapManager;
     offsetX?: number;
     offsetY?: number;
     fromX?: number;
@@ -146,36 +146,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     moveToTile(options: IMoveToTileOptions): void;
     isMoving(): boolean;
     getMovementProgress(timeStamp: number): number;
-    /**
-     * Sets the map associated with this item.
-     * @param islandId The ID of the island containing the associated map.
-     * @param mapId The index of the map in the `island.treasureMaps` array.
-     */
-    setMap(islandId: string, mapId: number): boolean;
-    /**
-     * If the associated map is already on the given island, does nothing. If not, associates the map with a map on the given island,
-     * chosen by the given properties:
-     * @param completed Whether the associated map should be a completed one
-     * @param randomDecimal A decimal to use to choose which map on this island to use
-     */
-    setMapIsland(island: string, completed: boolean, randomDecimal: number): boolean;
-    /**
-     * If this item is a tattered map or a drawn map, this will return its associated `DrawnMap` instance.
-     */
-    getMap(): DrawnMap | undefined;
-    /**
-     * @returns whether the associated map is on the current island
-     */
-    isMapOfIsland(): boolean;
-    /**
-     * Randomises which map is associated with this item.
-     * @param chanceOfGivingCompletedMap By default, 10% chance of becoming associated with an already-completed map.
-     * @param chanceOfGivingMapFromOtherIsland By default, 50% chance of, rather than becoming associated with an already-completed map,
-     * instead becoming associated with a map on another island.
-     * Note: If there are no maps on the current island, will always become associated with a map on another island regardless of chance.
-     * @returns whether this item is now associated with a map on this island
-     */
-    randomizeMap(chanceOfGivingCompletedMap?: number, chanceOfGivingMapFromOtherIsland?: number, islandId?: string, randomDecimal?: number): boolean;
     setQuality(human: Human | undefined, quality?: Quality): void;
     getValidMagicalProperties(): MagicalPropertyType[];
     addMagicalProperties(count: number): boolean;

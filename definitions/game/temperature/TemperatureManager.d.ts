@@ -17,6 +17,7 @@ import { IContainer } from "item/IItem";
 import Item from "item/Item";
 import { ITile, TerrainType } from "tile/ITerrain";
 import TileEvent from "tile/TileEvent";
+export declare const TEMPERATURE_INVALID = 255;
 export declare enum TempType {
     Cold = -1,
     Heat = 1
@@ -27,7 +28,6 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     private readonly island;
     private cacheCalculated;
     private cacheProduced;
-    private readonly cacheContainers;
     constructor(island: Island);
     /**
      * Returns the current temperature for a container, calculated by combining the tile temperature and the combined temperature of the items inside
@@ -72,11 +72,11 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
      */
     getOfType(x: number, y: number, z: WorldZ, type: TempType): number;
     /**
-     * Returns the cached calculated temperature for a tile. If a tile has not been calculated yet, this will return `-1`.
+     * Returns the cached calculated temperature for a tile. If a tile has not been calculated yet, this will return `TEMPERATURE_INVALID`.
      */
     getCachedCalculated(x: number, y: number, z: WorldZ, type: TempType): number;
     /**
-     * Returns the cached produced temperature on a tile. If the production of a tile has not been calculated yet, this will return `-1`.
+     * Returns the cached produced temperature on a tile. If the production of a tile has not been calculated yet, this will return `TEMPERATURE_INVALID`.
      */
     getCachedProduced(x: number, y: number, z: WorldZ, type: TempType): number;
     /**
@@ -89,14 +89,15 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     protected onCreateOrRemoveDoodadOrTileEvent(_: any, object: Doodad | TileEvent): void;
     protected onEntityMove(entity: Entity, lastX: number, lastY: number, lastZ: number, lastTile: ITile, x: number, y: number, z: number, tile: ITile): void;
     protected onUpdateTile(_: any, x: number, y: number, z: number, tile: ITile, oldType: TerrainType): void;
-    protected onItemContainerUpdate(_: any, item: Item): void;
+    protected onItemContainerUpdate(_: any, item: Item, container1?: IContainer, container2?: IContainer): void;
     protected onItemContainerRemove(_: any, item: Item, container: IContainer): void;
+    private invalidateContainerCache;
     protected onItemFireUpdate(item: Item): void;
     private calculateProduced;
     private updateProducedType;
     /**
      * Given a tile, goes through the entire range of tiles that could possibly diffuse their temperature to this tile,
-     * and for each of them that are -1 (ie, not calculated), we run the recalculator on them
+     * and for each of them that are TEMPERATURE_INVALID (ie, not calculated), we run the recalculator on them
      */
     private calculateRange;
     /**

@@ -64,6 +64,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private importingSaveGameMod;
     private relayNetworkStatus;
     private _isGameOverlayActive;
+    private _isTraceRecording;
     get isGameOverlayActive(): boolean;
     isElectron(): boolean;
     reload(): void;
@@ -95,6 +96,8 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getStatInt(name: string): number | undefined;
     incrementStat(name: string): void;
     getGlobalStatInt(name: string): number | undefined;
+    isContentTracingRecording(): boolean;
+    toggleContentTracingRecording(): Promise<boolean>;
     startPlaytimeTracking(): void;
     stopPlaytimeTracking(): void;
     setSteamRichPresence(key: string, value: string): boolean;

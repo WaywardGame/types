@@ -115,7 +115,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     craft(action: IActionHandlerApi<Player | NPC>, itemType: ItemType, itemsToRequire: Item[], itemsToConsume: Item[], baseItem?: Item): CraftStatus;
-    decayItems(pids: Set<number>): boolean;
+    decayItems(pids: Set<number>, skipUiUpdates?: boolean): boolean;
     getPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getAbsentPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getNPCWithItemInInventory(containable: IContainable): NPC | undefined;

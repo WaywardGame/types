@@ -52,7 +52,14 @@ export default class DoodadManager extends EventEmitter.Host<IDoodadManagerEvent
      * provided, the assumption is that it will only be called on empty doodads. Therefore, if there *are* items, it will log a warning.
      */
     remove(doodad: Doodad, removeItems?: boolean): void;
+    /**
+     * Runs a full gamut of updates on doodads including decaying items inside containers, spreading/growing plants/mushrooms, water distillation/desenation and more.
+     */
     updateAll(ticks: number, realPlayers: Player[], updatesPerTick?: number): void;
+    /**
+     * Runs a full gamut of updates on doodads including decaying items inside containers, spreading/growing plants/mushrooms, water distillation/desenation and more.
+     */
+    updateAllAsync(ticks: number, realPlayers: Player[], updatesPerTick: number | undefined, onProgress: (progess: number) => Promise<void>): Promise<void>;
     isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
     isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;

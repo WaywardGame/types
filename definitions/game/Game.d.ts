@@ -285,8 +285,16 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     travelTowardsIsland(direction: Direction, human: Human, options?: ITravelToIslandOptions): Promise<void>;
     protected onRestEnd(): void;
     private updateOptionInternal;
+    /**
+     * Collection of things to perform on each tick
+     */
     tick(ticks?: number, realPlayers?: Player[], tickFlag?: TickFlag): void;
+    /**
+     * Collection of things to perform on each tick
+     */
+    tickAsync(ticks: number | undefined, realPlayers: Player[] | undefined, tickFlag: TickFlag | undefined, onProgress: (progess: number) => Promise<void>): Promise<void>;
     private processTickFlags;
+    private processTickFlagsAsync;
     private updateEntityFov;
     private processTimers;
     private processAutoSave;

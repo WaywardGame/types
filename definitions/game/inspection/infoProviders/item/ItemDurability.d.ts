@@ -11,7 +11,6 @@
 import { InfoProvider } from "game/inspection/InfoProvider";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import Item from "item/Item";
-import Translation from "language/Translation";
 export default class ItemDurabilityInfoProvider extends InfoProvider {
     private readonly item;
     private minDur;
@@ -23,9 +22,8 @@ export default class ItemDurabilityInfoProvider extends InfoProvider {
         component: import("../../../../newui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
-    get(): (0 | Translation | LabelledValue)[];
+    get(): (0 | LabelledValue)[];
     protected onTickEnd(): void;
     private getDurability;
-    private getMagicalItemDamageReduction;
     private getDecay;
 }

@@ -37,7 +37,7 @@ export interface IConstructedInfo {
     additionalItemWeights?: IItemWeightComponent[];
     weightTweak?: number;
 }
-export interface IItemOld {
+export declare type IItemOld = Pick<Item, Exclude<keyof Item, "map">> & {
     equipped?: EquipType;
     equippedPid?: number;
     legendary?: IMagicalPropertyOld;
@@ -46,6 +46,11 @@ export interface IItemOld {
         islandId?: string;
     };
     magicalProperties?: IMagicalPropertyOld[];
+    map?: [island: string, id: number] | [island: string, completed: boolean, decimal: number];
+};
+export declare module IItemOld {
+    function get(item: Item): IItemOld;
+    function get(item?: Item): IItemOld | undefined;
 }
 interface IMagicalPropertyOld {
     type: MagicalPropertyType;
@@ -56,7 +61,11 @@ interface IMagicalPropertyOld {
 export interface IContainable {
     containedWithin?: IContainer;
 }
+export declare const SYMBOL_CONTAINER_TEMPERATURE: unique symbol;
+export declare const SYMBOL_CONTAINER_ITEMS_TEMPERATURE: unique symbol;
 export interface IContainer extends IContainable {
+    [SYMBOL_CONTAINER_TEMPERATURE]?: number;
+    [SYMBOL_CONTAINER_ITEMS_TEMPERATURE]?: number;
     weightCapacity?: number;
     containedItems: Item[];
     transientItems?: Item[];
