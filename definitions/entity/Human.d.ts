@@ -16,7 +16,7 @@ import { EquipType, ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents,
 import { Stat } from "entity/IStats";
 import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
 import PlayerDefense from "entity/player/PlayerDefense";
-import { ISkillSet } from "entity/player/Skills";
+import SkillManager from "entity/skill/SkillManager";
 import { IEventEmitter } from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
@@ -46,45 +46,17 @@ export default abstract class Human extends Entity implements IHasInsulation {
     readonly equipEffects: Map<EquipEffect, EquipEffects>;
     restData: IRestData | undefined;
     score: number;
-    skills: ISkillSet;
     state: PlayerState;
     swimming: boolean;
     vehicleItemId: number | undefined;
     identifier: string;
+    skill: SkillManager;
     private readonly privateStore;
-    private cachedTotalSkill?;
     constructor();
     isLocalPlayer(): boolean;
     setOptions(options: IOptions): void;
     getEquipEffect<E extends EquipEffect>(type: E): FirstIfOne<EquipEffectByType<E>>;
     getReputation(): number;
-    /**
-     * @returns The value of the given skill, the sum of the base value and any bonuses from magical equipment
-     */
-    getSkill(skill: SkillType): number;
-    /**
-     * @returns the "base value" of the skill (ignoring any bonuses applied by magical equipment)
-     */
-    getSkillCore(skill: SkillType): number;
-    /**
-     * @returns the skill bonus applied by magical equipment
-     */
-    getSkillBonus(skill: SkillType): number;
-    /**
-     * Sets the "base value" of the skill (ignoring any bonuses applied by magical equipment)
-     * @param skillType The skill to set the base value of.
-     * @param value The value (between 0 and 100) to set the skill to.
-     */
-    setSkillCore(skillType: SkillType, value: number): void;
-    /**
-     * @returns The total skill (combination of all other skills). Ignores skill bonuses.
-     */
-    getSkillTotal(): number;
-    /**
-     * @returns Whether the skill of this human is more than or equal to a random number between `0` and the value of `check`.
-     */
-    skillAndActionTierCheck(skill: SkillType, check: number, actionTier?: number): boolean;
-    getSkillAndActionTierValue(skill: SkillType, actionTier?: number): number;
     isResting(): boolean;
     isGhost(): boolean;
     isRestingCancelled(): boolean;
@@ -106,7 +78,6 @@ export default abstract class Human extends Entity implements IHasInsulation {
     staminaReduction(skill?: SkillType, level?: number): void;
     updateReputation(reputation: number): void;
     setPaddling(paddling: boolean, itemId: number): void;
-    skillGain(skillType: SkillType, mod?: number, actionTier?: number, bypass?: boolean): void;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     getBurnDamage(fireType: FireType, skipParry?: boolean, equipType?: EquipType): number;
     /**
@@ -145,7 +116,9 @@ export default abstract class Human extends Entity implements IHasInsulation {
     getInsulation(): number;
     protected resetStatTimers(): void;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
-    protected getSkillGainMultiplier(_skillType: SkillType): number;
+    protected getSkillGainMultiplier(skill: SkillType): number;
+    protected canSkillGain(skill: SkillType): boolean;
+    protected onSkillGain(skill: SkillType, mod: number): void;
     /**
      * Improve one of the core player stats
      */

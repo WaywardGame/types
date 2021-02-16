@@ -19,7 +19,7 @@ export default class CreatureInspection extends EntityInspection<Creature> {
     static handles(creature: unknown): boolean;
     constructor(creature: Creature);
     getId(): string;
-    getBorder(): "var(--color-tamed)" | "var(--color-aberrant)" | undefined;
+    getBorder(): "var(--color-aberrant)" | "var(--color-tamed)" | undefined;
     get(context: InfoProviderContext): ArrayOr<InfoProvider | TranslationGenerator>;
     private getDescription;
 }

@@ -21,11 +21,11 @@ import TileEvent from "tile/TileEvent";
 export declare type Reference = [number, ReferenceType?];
 export default class ReferenceManager {
     static needsReferenceId(type: ReferenceType): boolean;
-    static getList(type: ReferenceType, gameIsland?: Island): readonly SkillType[] | Player[] | SaferArray<TileEvent> | SaferArray<Item> | SaferArray<Creature> | SaferArray<Doodad> | SaferArray<NPC> | SaferArray<Corpse> | IterableIterator<Island>;
+    static getList(type: ReferenceType, gameIsland?: Island): readonly Value<typeof SkillType>[] | Player[] | SaferArray<Creature> | SaferArray<Doodad> | SaferArray<NPC> | SaferArray<Corpse> | SaferArray<Item> | SaferArray<TileEvent> | IterableIterator<Island>;
     private referenceCursor;
     create(): number;
     get(thing: IReferenceable): Reference | undefined;
-    resolve(id: number): Item | Creature | Doodad | NPC | Player | TileEvent | Island | Corpse | SkillType | undefined;
+    resolve(id: number): Item | Creature | Doodad | NPC | Player | TileEvent | Island | Corpse | [ReferenceType.Skill, SkillType] | undefined;
     resolve(id: number, type: ReferenceType.Item): Item | undefined;
     resolve(id: number, type: ReferenceType.Creature): Creature | undefined;
     resolve(id: number, type: ReferenceType.Doodad): Doodad | undefined;
@@ -35,7 +35,7 @@ export default class ReferenceManager {
     resolve(id: number, type: ReferenceType.Island): Island | undefined;
     resolve(id: number, type: ReferenceType.Corpse): Corpse | undefined;
     resolve(id: number, type: ReferenceType.Skill): SkillType | undefined;
-    resolve(id: number, type?: ReferenceType): Item | Creature | Doodad | NPC | Player | TileEvent | Island | Corpse | SkillType | undefined;
+    resolve(id: number, type?: ReferenceType): Item | Creature | Doodad | NPC | Player | TileEvent | Island | Corpse | [ReferenceType.Skill, SkillType] | undefined;
     inspect(id: number, type?: ReferenceType, ...args: any[]): import("./inspection/Inspection").default<any> | undefined;
     tooltip(id: number, type?: ReferenceType, ...args: any[]): (tooltip: import("../newui/component/IComponent").ITooltip) => import("../newui/component/IComponent").ITooltip | undefined;
     private getReferenceType;

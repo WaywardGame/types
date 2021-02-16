@@ -25,7 +25,7 @@ import { QuestType } from "entity/player/quest/quest/IQuest";
 import { Quest } from "entity/player/quest/quest/Quest";
 import { QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
 import { QuestRequirement } from "entity/player/quest/requirement/Requirement";
-import { ISkillDescription } from "entity/player/Skills";
+import { ISkillDescription } from "entity/skill/ISkills";
 import { StatusEffectClass } from "entity/status/StatusEffect";
 import { InspectType } from "game/inspection/IInspection";
 import { InspectionClass } from "game/inspection/InspectionTypeMap";

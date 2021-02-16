@@ -28,7 +28,10 @@ import { ILeftOverTile } from "./Terrains";
 export interface ITerrainDescription extends IModdable {
     passable?: boolean;
     particles?: IRGB;
-    durability?: number;
+    /**
+     * Bases the durability on an item type. Any item that has a SetDown action should have this set for the matching terrain type.
+     */
+    durability?: ItemType;
     water?: true;
     regathered?: boolean;
     shallowWater?: true;

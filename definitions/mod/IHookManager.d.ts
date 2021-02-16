@@ -24,7 +24,6 @@ export declare enum Hook {
     OnGameStart = "onGameStart",
     OnGameTickEnd = "onGameTickEnd",
     OnGameTickStart = "onGameTickStart",
-    OnHumanSkillChange = "onHumanSkillChange",
     OnItemDamage = "onItemDamage",
     OnItemEquip = "onItemEquip",
     OnItemQuickslot = "onItemQuickslot",

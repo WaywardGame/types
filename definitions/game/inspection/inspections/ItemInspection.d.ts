@@ -31,7 +31,7 @@ export default class ItemInspection extends Inspection<Item> {
     getBorder(): string | undefined;
     getDefaultDisplayLevel(): InfoDisplayLevel;
     hasContent(context: InfoProviderContext): boolean;
-    get(context: InfoProviderContext): (Translation | import("../InfoProvider").SimpleInfoProvider | QualityInfoProvider | MagicalPropertiesInfoProvider | ItemProtectedInfoProvider | ItemDurabilityInfoProvider | ItemWeightInfoProvider | LabelledValue | ItemDetailsInfoProvider)[];
+    get(context: InfoProviderContext): (Translation | import("../InfoProvider").SimpleInfoProvider | LabelledValue | MagicalPropertiesInfoProvider | QualityInfoProvider | ItemDetailsInfoProvider | ItemDurabilityInfoProvider | ItemProtectedInfoProvider | ItemWeightInfoProvider)[];
     protected onItemRemove(_: any, item: Item): void;
     protected onTickEnd(): void;
     private updatePosition;

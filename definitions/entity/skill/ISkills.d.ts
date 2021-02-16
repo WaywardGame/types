@@ -16,11 +16,9 @@ export interface ISkillLevel {
     bonus: number;
     core: number;
 }
-export declare type ISkillSet = OptionalDescriptions<SkillType, ISkillLevel>;
 export interface ISkillDescription extends IModdable {
     attribute?: Stat;
     reputation?: number;
     defaultDamageType?: DamageType;
 }
-export declare function skillSet(): ISkillSet;
 export declare const skillDescriptions: OptionalDescriptions<SkillType, ISkillDescription>;

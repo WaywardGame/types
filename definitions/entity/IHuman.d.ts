@@ -10,7 +10,9 @@
  */
 import { ActionType } from "entity/action/IAction";
 import Entity from "entity/Entity";
+import Human from "entity/Human";
 import { AttackType } from "entity/IEntity";
+import { ISkillEvents } from "entity/skill/SkillManager";
 import { Events } from "event/EventEmitter";
 import { IHasImagePath, Quality } from "game/IObject";
 import { ItemType, RecipeLevel } from "item/IItem";
@@ -18,12 +20,7 @@ import Item from "item/Item";
 import { IModdable } from "mod/ModRegistry";
 import { ITile } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
-export interface IHumanEvents extends Events<Entity> {
-    /**
-     * @param skill The skill that is changing
-     * @param value The new skill value (core + bonus)
-     */
-    skillChange(skill: SkillType, value: number): void;
+export interface IHumanEvents extends Events<Entity>, ISkillEvents {
     /**
      * Called before consuming an item
      * @param itemType The item type
@@ -194,3 +191,9 @@ export interface ICheckUnderOptions {
 }
 export declare const craftingChances: Descriptions<RecipeLevel, number>;
 export declare const STAMINA_LOW_PENALTY_START = 15;
+export interface IHumanOld extends Partial<Human> {
+    skills?: Record<SkillType, {
+        bonus: number;
+        core: number;
+    }>;
+}

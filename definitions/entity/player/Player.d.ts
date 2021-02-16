@@ -96,7 +96,6 @@ export default class Player extends Human {
     resetMovementStates(): void;
     changeId(id: number): void;
     setPaddling(paddling: boolean, itemId: number): boolean;
-    skillGain(skillType: SkillType, mod?: number, activeLevel?: number, bypass?: boolean): void;
     checkSkillMilestones(): void;
     addMilestone(milestone: Milestone, data?: number, update?: boolean): void;
     getDefaultCarveTool(_player: Player): Item | undefined;
@@ -212,10 +211,12 @@ export default class Player extends Human {
      * @deprecated Do not call this with players.
      */
     moveTo(): boolean;
+    protected canSkillGain(): boolean;
+    protected onSkillGain(skill: SkillType, mod: number): void;
+    protected getSkillGainMultiplier(skillType: SkillType): number;
     protected restored(): void;
     protected getApplicableStatusEffects(): Set<StatusType>;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
-    protected getSkillGainMultiplier(skillType: SkillType): number;
     protected calculateStats(): void;
     protected swimAndSootheCheck(): void;
     /**
