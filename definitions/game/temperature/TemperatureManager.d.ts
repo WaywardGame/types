@@ -10,6 +10,7 @@
  */
 import Doodad from "doodad/Doodad";
 import Entity from "entity/Entity";
+import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import Island from "game/Island";
 import { WorldZ } from "game/WorldZ";
@@ -22,12 +23,14 @@ export declare enum TempType {
     Cold = -1,
     Heat = 1
 }
+declare type ScheduledUpdate = [x: number, y: number, z: WorldZ, tile?: ITile | undefined, invalidate?: boolean];
 export interface ITempManagerEvents {
 }
 export default class TemperatureManager extends EventEmitter.Host<ITempManagerEvents> {
     private readonly island;
     private cacheCalculated;
     private cacheProduced;
+    private scheduledUpdates;
     constructor(island: Island);
     /**
      * Returns the current temperature for a container, calculated by combining the tile temperature and the combined temperature of the items inside
@@ -65,12 +68,12 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     /**
      * Returns the temperature of the given tile, produced by combining the temperatures of each type.
      */
-    getTile(x: number, y: number, z: WorldZ): number;
+    getTile(x: number, y: number, z: WorldZ, isClientSide: boolean): number;
     /**
      * Returns the temperature on the tile of the given type. IE, some things can produce "cold", and some things can produce "heat",
      * and both of them are cached per-tile.
      */
-    getOfType(x: number, y: number, z: WorldZ, type: TempType): number;
+    getOfType(x: number, y: number, z: WorldZ, type: TempType, isClientSide: boolean): number;
     /**
      * Returns the cached calculated temperature for a tile. If a tile has not been calculated yet, this will return `TEMPERATURE_INVALID`.
      */
@@ -83,7 +86,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
      * Recalculates the *temperature production* of a tile.
      * @param invalidate Whether to invalidate the temperature calculations of surrounding tiles.
      */
-    update(x: number, y: number, z: WorldZ, tile?: ITile | undefined, invalidate?: boolean): void;
+    scheduleUpdate(...args: ScheduledUpdate): this;
     invalidateAll(): void;
     protected onFireUpdate(object: Doodad | TileEvent, tile: ITile): void;
     protected onCreateOrRemoveDoodadOrTileEvent(_: any, object: Doodad | TileEvent): void;
@@ -91,8 +94,11 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     protected onUpdateTile(_: any, x: number, y: number, z: number, tile: ITile, oldType: TerrainType): void;
     protected onItemContainerUpdate(_: any, item: Item, container1?: IContainer, container2?: IContainer): void;
     protected onItemContainerRemove(_: any, item: Item, container: IContainer): void;
+    protected onPlayerPostMove(player: Player): void;
     private invalidateContainerCache;
     protected onItemFireUpdate(item: Item): void;
+    protected onTickEnd(): void;
+    private update;
     private calculateProduced;
     private updateProducedType;
     /**
@@ -140,3 +146,4 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     private getTileMax;
     private getProduced;
 }
+export {};

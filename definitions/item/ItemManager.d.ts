@@ -90,6 +90,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, movingMultiple?: boolean, updateTables?: boolean): Item;
     createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human): Item;
     isContainer(obj: unknown): obj is IContainer;
+    getContainedContainers(container: IContainer): IContainer[];
     moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: Quality): Item[];
     computeContainerWeight(container: IContainer): number;
     getMagicalWeightCapacity(container: IContainer): number;

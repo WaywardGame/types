@@ -74,7 +74,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     constructor(itemType?: ItemType | undefined, quality?: Quality, human?: Human);
     toString(): string;
     /**
-     * Sets the item as magical with a chance based on quality
+     * Sets the item as magical with a chance based on quality (and clears any existing magical properties)
      * @param bonus The number that chances get multiplied by, for example, 2 or 3
      * @param propertiesBypass The number of magical properties to force on to the item
      * @returns True if the item has become magical

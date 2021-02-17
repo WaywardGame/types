@@ -63,9 +63,11 @@ export interface IContainable {
 }
 export declare const SYMBOL_CONTAINER_TEMPERATURE: unique symbol;
 export declare const SYMBOL_CONTAINER_ITEMS_TEMPERATURE: unique symbol;
+export declare const SYMBOL_CONTAINER_TILE_TEMPERATURE: unique symbol;
 export interface IContainer extends IContainable {
     [SYMBOL_CONTAINER_TEMPERATURE]?: number;
     [SYMBOL_CONTAINER_ITEMS_TEMPERATURE]?: number;
+    [SYMBOL_CONTAINER_TILE_TEMPERATURE]?: number;
     weightCapacity?: number;
     containedItems: Item[];
     transientItems?: Item[];

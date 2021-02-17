@@ -10,6 +10,8 @@
  */
 import DrawnMap from "game/mapping/DrawnMap";
 import { IVector3 } from "utilities/math/IVector";
+export declare const DEFAULT_ITEM_MAP_CHANCE_COMPLETED = 0.1;
+export declare const DEFAULT_ITEM_MAP_CHANCE_OTHER_ISLAND = 0.5;
 export default class ItemMapManager {
     private map?;
     /**
@@ -47,4 +49,5 @@ export default class ItemMapManager {
      * @returns whether this item is now associated with a map on this island
      */
     randomize(chanceOfGivingCompletedMap?: number, chanceOfGivingMapFromOtherIsland?: number, islandId?: string, randomDecimal?: number): boolean;
+    randomizeToIsland(islandId: string, giveCompleted?: boolean, randomDecimal?: number): void;
 }
