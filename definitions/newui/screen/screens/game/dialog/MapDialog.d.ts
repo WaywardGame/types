@@ -17,6 +17,7 @@ import { IBindHandlerApi } from "newui/input/Bind";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 export default class MapDialog extends Dialog {
     private readonly canvas;
+    private readonly buttonCopyMap;
     private mapCanvas?;
     private unobfuscatedCanvas?;
     private map?;
@@ -42,6 +43,7 @@ export default class MapDialog extends Dialog {
     private theme?;
     private useOnlyIntegerZoomLevels?;
     constructor();
+    private onRequestMapCopy;
     private setTheme;
     getName(): Translation;
     read(map: DrawnMap, item: Item, resetView?: boolean): Promise<void>;
@@ -50,6 +52,7 @@ export default class MapDialog extends Dialog {
     protected onMoveComplete(player: Player): void;
     protected onLoad(): Promise<void>;
     protected onZoom(api: IBindHandlerApi): boolean;
+    private updateCopyMapButton;
     private closeIfItemIsGone;
     private damageMap;
     private updateObfuscation;

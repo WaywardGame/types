@@ -57,7 +57,7 @@ export declare enum ActionType {
     StokeFire = 24,
     Pour = 25,
     Plant = 26,
-    Unused1 = 27,
+    CopyMap = 27,
     Ignite = 28,
     Build = 29,
     OpenContainer = 30,
@@ -178,7 +178,7 @@ export interface IActionApi<E extends Entity = Entity> {
     setUpdateTablesAndWeight(): this;
     setStaminaReduction(skill?: SkillType, actionTier?: number): this;
     addSkillGains(...skills: Array<[SkillType, number?, number?]>): this;
-    addSkillGains(skill: SkillType, amount?: number, actionTier?: number): this;
+    addSkillGains(skill: SkillType, amount?: number, actionTier?: number, bypass?: true): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
     cancelPaddling(item: Item): this;

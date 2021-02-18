@@ -10,6 +10,7 @@
  */
 import { Command } from "command/ICommand";
 import { DoodadType, DoodadTypeGroup, GrowingStage } from "doodad/IDoodad";
+import { MapQuality } from "entity/action/actions/map/MapQuality";
 import { ActionType } from "entity/action/IAction";
 import { CreatureType } from "entity/creature/ICreature";
 import { DamageType, StatusType } from "entity/IEntity";
@@ -146,7 +147,8 @@ export declare enum Dictionary {
     UnlockedRecipesStrategy = 77,
     Website = 78,
     WeightStatus = 79,
-    WorldLayer = 80
+    WorldLayer = 80,
+    MapQuality = 81
 }
 export declare type Enum = Record<string, number> & Record<number, string>;
 export declare const SYMBOL_ANY_DICTIONARY: unique symbol;
@@ -232,6 +234,7 @@ declare const dictionaryMap: {
     78: typeof Website;
     79: typeof WeightStatus;
     80: typeof WorldZ;
+    81: typeof MapQuality;
 };
 export { dictionaryMap as strictDictionaries };
 export declare type DictionaryEnum = (typeof dictionaryMap)[Dictionary];
@@ -318,6 +321,7 @@ declare const dictionaries: {
     78: Enum | typeof SYMBOL_ANY_DICTIONARY;
     79: Enum | typeof SYMBOL_ANY_DICTIONARY;
     80: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    81: Enum | typeof SYMBOL_ANY_DICTIONARY;
 } & Record<number, Enum | typeof SYMBOL_ANY_DICTIONARY | undefined> & {
     getByEnum: typeof getByEnum;
 };

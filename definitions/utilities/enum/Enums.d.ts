@@ -38,7 +38,7 @@ declare module Enums {
      */
     function getNth<E, K extends string>(enumObject: {
         [key in K]: E;
-    }, n: number): E | undefined;
+    }, n: number): Exclude<E, AnyFunction> | undefined;
     /**
      * Returns the number of entries in this enum.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc

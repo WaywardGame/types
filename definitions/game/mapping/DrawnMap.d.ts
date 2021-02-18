@@ -57,9 +57,19 @@ export interface ITreasureMapGenerationSettings {
      */
     treasureMaps: IRange;
     /**
-     * A decimal chance of whether treasures should be spawned in caves
+     * Configuration for how treasure maps should spawn in caves
      */
-    caveTreasureChance: number;
+    caveTreasure: {
+        /**
+         * A number representing a distance from island 0,0 where the max amount of cave treasures spawn.
+         */
+        distanceForMaximumChance: number;
+        /**
+         * A range where the minimum is the cave treasure chance at island 0,0 and the maximum is the cave treasure chance at
+         * a distance `>= maxDistance`
+         */
+        chance: IRange;
+    };
 }
 export interface IDrawnMapEvents {
     /**

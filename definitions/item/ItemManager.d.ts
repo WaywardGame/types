@@ -138,6 +138,8 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     isTileContainer(container: IContainer | undefined): boolean;
     getOrderedContainerItems(container: IContainer, allowProtectedItems?: boolean): Item[];
     reduceDismantleWeight(createdItems: Item[], itemWeight: number): void;
+    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup): Translation;
+    getItemTypeListTranslation(itemTypes: Array<ItemType | ItemTypeGroup>): Translation;
     /**
      * Maps each item in the given array to its name translation.
      * @param article Whether the item name translation should include an article

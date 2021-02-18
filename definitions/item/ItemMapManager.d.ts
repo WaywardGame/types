@@ -9,11 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import DrawnMap from "game/mapping/DrawnMap";
+import { IContainer } from "item/IItem";
 import { IVector3 } from "utilities/math/IVector";
 export declare const DEFAULT_ITEM_MAP_CHANCE_COMPLETED = 0.1;
 export declare const DEFAULT_ITEM_MAP_CHANCE_OTHER_ISLAND = 0.5;
 export default class ItemMapManager {
+    static getMapsInContainer(container: IContainer): import("./Item").default[];
     private map?;
+    has(): boolean;
     /**
      * Sets the map associated with this item.
      * @param islandId The ID of the island containing the associated map.
@@ -40,6 +43,15 @@ export default class ItemMapManager {
      * @returns whether the associated map is on the current island
      */
     isOfIsland(): boolean;
+    /**
+     * @returns the obfuscation of the linked map, a multiplier that will be applied overtop whatever durability obfuscation there is
+     */
+    getObfuscation(): number | undefined;
+    /**
+     * If this item is linked to a map, sets the obfuscation of this instance to the given amount
+     */
+    setObfuscation(amount: number): boolean;
+    setObfuscationOf(map: ItemMapManager, multiplier?: number): boolean;
     /**
      * Randomises which map is associated with this item.
      * @param chanceOfGivingCompletedMap By default, 10% chance of becoming associated with an already-completed map.
