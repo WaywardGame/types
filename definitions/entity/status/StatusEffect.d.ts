@@ -16,6 +16,7 @@ import { IGameOptionsStatusEffect } from "game/options/IGameOptions";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IModdable } from "mod/ModRegistry";
+import { IHighlight } from "newui/component/IComponent";
 import StatusEffectRenderer from "renderer/StatusEffectRenderer";
 import { IRGB } from "utilities/Color";
 export interface IStatusEffectIconDescription {
@@ -78,6 +79,7 @@ export default abstract class StatusEffect extends EventEmitter.Host<IStatusEffe
      */
     getParticles(_event: StatusEffectParticleEvent): [number, IRGB] | undefined;
     getIcon(): IStatusEffectIconDescription | undefined;
+    getHighlight(): IHighlight | undefined;
     isActive(): boolean;
     add(reason?: StatusEffectChangeReason): this;
     remove(reason?: StatusEffectChangeReason): this;

@@ -53,4 +53,5 @@ declare const _default: {
 export default _default;
 export declare module Inspections {
     function get(...args: any[]): Inspection<any> | undefined;
+    function isWorldInspection(type: InspectType): boolean;
 }

@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Bindable from "newui/input/Bindable";
-declare const bindables: Descriptions<Bindable, string>;
+declare const bindables: Descriptions<Bindable, string | [string, string]>;
 export default bindables;

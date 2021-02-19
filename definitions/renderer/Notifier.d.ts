@@ -33,7 +33,8 @@ export default class Notifier implements INotifier {
     addStat(location: INotifierLocation, type: StatNotificationType, value: number): void;
     addStatusEffect(location: INotifierLocation, statusEffect: StatusEffect, reason: StatusEffectChangeReason): void;
     addNotifierIcon(location: INotifierLocation, type: NotifierIconType): void;
-    suspend(suspend: boolean): void;
+    suspend(): void;
+    resume(): void;
     update(timeStamp: number): void;
     render(timeStamp: number, x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): boolean;
     private addNotification;

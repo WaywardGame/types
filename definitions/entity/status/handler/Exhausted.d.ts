@@ -11,9 +11,11 @@
 import { ExhaustionLevel } from "entity/status/handler/IExhausted";
 import StatusEffect, { StatusEffectBadness } from "entity/status/StatusEffect";
 import Translation from "language/Translation";
+import { IHighlight } from "newui/component/IComponent";
 export default class Exhausted extends StatusEffect {
     register(): void;
     getLevel(): ExhaustionLevel;
+    getHighlight(): IHighlight;
     getBadness(): StatusEffectBadness.Neutral | StatusEffectBadness.Bad;
     getTranslation(): Translation;
     getDescription(): Translation;

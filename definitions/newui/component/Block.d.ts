@@ -10,6 +10,7 @@
  */
 import Component from "newui/component/Component";
 import Text from "newui/component/Text";
+export declare const CLASS_BLOCK = "menu-block";
 export declare class Block extends Component {
     constructor();
     addText(textInitializer: (text: Text) => any): this;

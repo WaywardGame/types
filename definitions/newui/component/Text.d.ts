@@ -44,7 +44,7 @@ export declare class Paragraph extends Text {
     constructor();
 }
 export declare class Heading extends Text {
-    constructor();
+    constructor(elementType?: string);
 }
 export declare class BasicText extends Component {
     private _link;

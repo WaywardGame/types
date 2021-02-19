@@ -25,7 +25,8 @@ export interface INotifier {
     update(timeStamp: number): void;
     setTexture(texture: WebGLTexture, inverseTextureSize: Vector2): void;
     render(timeStamp: number, x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): boolean;
-    suspend(suspend: boolean): void;
+    suspend(): void;
+    resume(): void;
 }
 export default INotifier;
 export interface INotifierLocation extends IVector3 {

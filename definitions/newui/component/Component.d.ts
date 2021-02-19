@@ -65,6 +65,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     setElement(elementType?: string, namespace?: Namespace): this;
     setId(id: string): this;
     setSelectable(val: SelectableLayer | false): this;
+    setInitialSelection(initialSelection?: boolean): this;
     isFocused(): boolean;
     getAs<C extends Component>(cls: Class<C>): C | undefined;
     registerEventBusSubscriber(...untilEvents: Array<keyof Events<this>>): void;
@@ -101,8 +102,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * Set the context menu for this element
      */
     setContextMenu(generator: () => IContextMenu | undefined): this;
-    setHighlight(highlight: IHighlight): this;
-    removeHighlight(): void;
+    setHighlight(highlight?: IHighlight): this;
     setStyle(property: string, value: string | number): this;
     getBox(regenIfZero?: boolean, forceRegen?: boolean): Rectangle;
     getOffset(): {

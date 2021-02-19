@@ -9,8 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import StatusEffect, { StatusEffectBadness } from "entity/status/StatusEffect";
+import { IHighlight } from "newui/component/IComponent";
 export default class Starving extends StatusEffect {
     register(): void;
+    getHighlight(): IHighlight;
     getBadness(): StatusEffectBadness;
     getDescription(): import("../../../language/Translation").default;
     refresh(): void;

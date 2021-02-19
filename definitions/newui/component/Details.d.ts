@@ -8,3 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import Button from "newui/component/Button";
+import Component from "newui/component/Component";
+export default class Details extends Component {
+    summary: Button;
+    constructor();
+    setBlock(block?: boolean): this;
+    setSummary(initializer?: (summary: Button) => any): this;
+}

@@ -28,7 +28,7 @@ export declare class BindRow extends Button implements IRefreshable {
     constructor(bindable: Bindable, bindCatcher: BindingCatcher);
     refresh(): this;
     protected onActivate(): Promise<void>;
-    private getBindableName;
+    private translate;
     private getBinding;
 }
 export declare class BindingCatcher extends Component {

@@ -19,7 +19,7 @@ export declare module Binding {
     function translate(binding: Binding): Translation;
 }
 declare module Bindings {
-    function get(bindable: Bindable): (IInput | Macro)[];
+    function get(bindable: Bindable): Binding[];
     function set(bindable: Bindable, ...bindings: Binding[]): void;
     function add(bindable: Bindable, ...bindings: Binding[]): void;
     function reset(bindable: Bindable): void;

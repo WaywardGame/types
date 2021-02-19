@@ -11,10 +11,12 @@
 import { WeightStatus } from "entity/player/IPlayer";
 import StatusEffect, { StatusEffectBadness } from "entity/status/StatusEffect";
 import Translation from "language/Translation";
+import { IHighlight } from "newui/component/IComponent";
 export default class Encumbered extends StatusEffect {
     private status?;
     register(): void;
     getLevel(): 0 | WeightStatus.Encumbered | WeightStatus.Overburdened;
+    getHighlight(): IHighlight;
     getBadness(): StatusEffectBadness.Neutral | StatusEffectBadness.Bad;
     getTranslation(): Translation;
     getDescription(): Translation;
