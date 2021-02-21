@@ -10,6 +10,9 @@
  */
 export default undefined;
 declare global {
+    type PartialRecord<K extends string | number | symbol, V> = {
+        [P in K]?: V;
+    };
     type Entry<O> = {
         [K in keyof O]: [K, O[K]];
     }[keyof O];

@@ -85,9 +85,9 @@ declare class Translation {
     static empty(): Translation;
     static readonly defaultInterpolator: Interpolator;
     static provider: TranslationProvider;
-    static colorizeQuality(quality: Quality): Translation;
-    static colorizeQuality(quality: Quality, text: string | IStringSection): IStringSection;
-    static colorizeQuality(quality: Quality, text: IStringSection[]): IStringSection[];
+    static colorizeQuality(quality: Quality | string): Translation;
+    static colorizeQuality(quality: Quality | string, text: string | IStringSection): IStringSection;
+    static colorizeQuality(quality: Quality | string, text: IStringSection[]): IStringSection[];
     static colorizeMessageType(type: MessageType): Translation;
     static colorizeMessageType(type: MessageType, text: string | IStringSection): IStringSection;
     static colorizeMessageType(type: MessageType, text: IStringSection[]): IStringSection[];
@@ -108,6 +108,11 @@ declare class Translation {
         type: number;
         renamed?: string | ISerializedTranslation;
     }, count?: number, article?: boolean, showRenamedQuotes?: boolean): Translation;
+    static reformatSingularNoun(): Translation;
+    static reformatSingularNoun(count: number): Translation;
+    static reformatSingularNoun(article: boolean): Translation;
+    static reformatSingularNoun(count: number, article: boolean): Translation;
+    static reformatSingularNoun(count?: number | boolean, article?: boolean): Translation;
     static romanNumeral(number: number): Translation;
     private static readonly romanNumeralTranslationMap;
     private static getRomanNumeralTranslation;
@@ -220,6 +225,7 @@ declare module Translation {
     const misc: (entry: string | MiscTranslation) => Translation;
     const skill: (entry: string | SkillType, color?: boolean) => Translation;
     const stat: (entry: string | Stat, color?: boolean) => Translation;
+    const quality: (entry: string | Quality, color?: boolean) => Translation;
     /**
      * Damage types are bit flags, so multiple can be stored in one `DamageType`.
      * This method returns a translated list of damage types.

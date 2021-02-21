@@ -148,11 +148,9 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getItemTranslations(items: Item[], article?: boolean, formatter?: Translation): Translation[];
     /**
      * Formats a list translation out of an array of items.
-     * @param article Whether the items should have articles
      * @param listEnder The way the list should end (ie `and`, `or`, etc)
-     * @param formatter A formatting translation that should be used for each item translation
      */
-    getItemListTranslation(items: Item[], article?: boolean, listEnder?: ListEnder | false, formatter?: Translation): Translation;
+    getItemListTranslation(items: Item[], listEnder?: ListEnder | false): Translation;
     loadReferences(generatedNewWorld: boolean, isTraveling: boolean): void;
     saveTileReferences(): void;
     loadTileReferences(): void;
