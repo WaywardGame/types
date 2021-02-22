@@ -21,7 +21,8 @@ export default class MagicalPropertyValue extends InfoProvider {
     private formatter?;
     private isModifier?;
     private baseColor?;
-    private outOf?;
+    private currentColor?;
+    private current?;
     private magical?;
     private magicalPropertyType?;
     private before;
@@ -36,8 +37,9 @@ export default class MagicalPropertyValue extends InfoProvider {
      * Alias of `setNumberFormatter(Translation.misc(MiscTranslation.Percent))`
      */
     setIsPercentage(): this;
-    setOutOf(amount: GetterOfOr<number>): this;
+    setCurrent(amount: GetterOfOr<number>): this;
     setBaseColor(translation: Translation): this;
+    setCurrentColor(translation: Translation): this;
     setNumberFormatter(formatter: Translation): this;
     setFormatter(formatter: Translation): this;
     setBefore(...before: Array<TranslationGenerator | InfoProvider | undefined>): this;

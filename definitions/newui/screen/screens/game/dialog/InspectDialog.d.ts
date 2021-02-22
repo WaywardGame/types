@@ -20,7 +20,7 @@ export default class InspectDialog extends Dialog {
     private inspection?;
     constructor();
     getName(): UiTranslation;
-    setInspections(inspections: InspectionsList): this;
+    setInspections(inspections: InspectionsList, update?: boolean): this;
     setPosition(position: Vector3): this;
     setInspection(thing: unknown): void;
     protected onClose(): void;

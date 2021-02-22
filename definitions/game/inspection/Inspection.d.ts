@@ -16,6 +16,7 @@ import { IVector3 } from "utilities/math/IVector";
 export default abstract class Inspection<O> extends InfoProvider {
     readonly type: InspectType;
     readonly value: O;
+    static getDefaultPriority(inspectType: InspectType): number;
     constructor(type: InspectType, value: O);
     getClass(): string[];
     getBorder(): string | undefined;

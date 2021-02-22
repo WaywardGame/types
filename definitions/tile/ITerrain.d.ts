@@ -17,6 +17,7 @@ import { SkillType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import { IDecayTemperatureRange } from "game/IGame";
 import { Quality } from "game/IObject";
+import MagicalPropertyManager from "game/MagicalPropertyManager";
 import { MapTile } from "game/mapping/IMapTile";
 import { IContainer, ItemType } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
@@ -119,6 +120,8 @@ export interface ITileData {
     step?: number;
     fishAvailable?: number;
     decay?: number;
+    weight?: number;
+    magic?: MagicalPropertyManager;
 }
 export declare type ITileDataOld = Partial<ITileData> & {
     strength?: number;

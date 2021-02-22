@@ -10,9 +10,14 @@
  */
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
-export default class Details extends Component {
+export default class Details extends Component<HTMLDetailsElement> {
     summary: Button;
+    get isOpen(): boolean;
     constructor();
     setBlock(block?: boolean): this;
     setSummary(initializer?: (summary: Button) => any): this;
+    refreshSummary(): this;
+    open(): this;
+    close(): this;
+    toggleOpen(open?: boolean): this;
 }

@@ -45,6 +45,8 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     equippedType?: EntityType;
     id: number;
     itemOrders?: number[];
+    magic: MagicalPropertyManager;
+    map: ItemMapManager;
     maxDur: number;
     minDur: number;
     order: number;
@@ -60,8 +62,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     weight: number;
     weightCapacity: number;
     weightFraction: number;
-    magic: MagicalPropertyManager;
-    map: ItemMapManager;
     offsetX?: number;
     offsetY?: number;
     fromX?: number;
