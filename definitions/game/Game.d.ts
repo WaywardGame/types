@@ -171,6 +171,10 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     setTurnMode(turnMode: TurnMode): void;
     getTickSpeed(): number;
     setTickSpeed(tickSpeed: number): void;
+    /**
+     * Synchronizes flow field, entity flow, and island temperature
+     * Usually calls when a new player joins
+     */
     synchronizeFlowFields(plys: Player[]): void;
     enableFlowFieldDebug(): void;
     resetGameState(saveType?: SaveType | false): Promise<void>;
