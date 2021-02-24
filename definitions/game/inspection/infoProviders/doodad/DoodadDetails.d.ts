@@ -19,7 +19,7 @@ export default class DoodadDetails extends InfoProvider {
     };
     getClass(): string[];
     hasContent(): boolean;
-    get(): import("../../InfoProvider").SimpleInfoProvider[];
+    get(): import("game/inspection/InfoProvider").SimpleInfoProvider[];
     private getInsulation;
     private getPreservationChance;
 }

@@ -18,7 +18,7 @@ declare module UiExperiment {
     export function all(): readonly UiExperiment[];
     export function toggle(experiment: UiExperiment, enabled: boolean): void;
     export function update(): void;
-    export function name(experiment: UiExperiment): "HqFontRendering" | "NewCraftingDialog";
+    export function name(experiment: UiExperiment): Any;
     export {};
 }
 export default UiExperiment;

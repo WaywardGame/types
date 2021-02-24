@@ -25,5 +25,5 @@ export declare enum Challenge {
     MalignityRate = 11
 }
 export declare function isPermanentEffect(effect: StatusType, options: IGameOptionsPlayer): boolean;
-export declare function isEternal(time: number): (options?: import("../../IGameOptions").IGameOptions) => boolean;
+export declare function isEternal(time: number): (options?: import("game/options/IGameOptions").IGameOptions) => boolean;
 export declare function getMultiplierChallengeValue(multiplier: number, value?: number): number;

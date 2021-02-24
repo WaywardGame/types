@@ -24,6 +24,6 @@ declare const _default: {
      * Returns whether the tile is blocked (completely impassible)
      */
     isWalkToTileBlocked(player: Player, tile: ITile, pos: IVector2, clientSide: boolean): boolean;
-    readonly event: import("../../event/EventEmitter").IEventEmitter<any, IPathingEvents>;
+    readonly event: import("event/EventEmitter").IEventEmitter<any, IPathingEvents>;
 };
 export default _default;

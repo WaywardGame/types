@@ -14,8 +14,7 @@ import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshable } from "newui/component/Refreshable";
 import Bindable from "newui/input/Bindable";
-import { IInput } from "newui/input/IInput";
-import { Macro } from "newui/input/Macros";
+import { Binding } from "newui/input/Bindings";
 export interface IBindRowEvents extends Events<Button> {
     requestFilter(bindables: Iterable<Bindable>): any;
 }
@@ -39,7 +38,7 @@ export declare class BindingCatcher extends Component {
     private readonly macro;
     private closeTimeout;
     constructor();
-    getBinding(macro: boolean): Promise<IInput | Macro | undefined>;
+    getBinding(macro: boolean): Promise<Binding | undefined>;
     setRequestText(text: TranslationGenerator): void;
     private onInput;
     private handleInput;

@@ -127,7 +127,7 @@ export default class MagicalPropertyManager {
     /**
      * @returns a list of all the "normal" magical property types on this object — ie, the ones without subtypes
      */
-    normalTypes(): (MagicalPropertyType.Attack | MagicalPropertyType.Defense | MagicalPropertyType.Illumination | MagicalPropertyType.WeightCapacity | MagicalPropertyType.ItemWeight | MagicalPropertyType.Benignity | MagicalPropertyType.Malignity | MagicalPropertyType.Range | MagicalPropertyType.UseBenefits | MagicalPropertyType.Worth | MagicalPropertyType.TrapDamage | MagicalPropertyType.MaxWeight | MagicalPropertyType.ContainerWeight | MagicalPropertyType.PreservationRate | MagicalPropertyType.MaxDecay | MagicalPropertyType.ItemDamage | MagicalPropertyType.StokeValue | MagicalPropertyType.Insulation)[];
+    normalTypes(): MagicalNormalPropertyTypes[];
     /**
      * @returns a list of all the magical sub-property types of the given supertype on this object
      */

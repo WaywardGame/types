@@ -12,6 +12,7 @@ interface IDictionarySchema {
     type: "object";
     properties: Record<string, any>;
 }
+declare type DictionarySchemas = Record<string, IDictionarySchema>;
 export default function generateSchema(): {
     title: string;
     description: string;
@@ -32,7 +33,7 @@ export default function generateSchema(): {
         dictionaries: {
             description: string;
             type: string;
-            properties: Record<string, IDictionarySchema>;
+            properties: DictionarySchemas;
         };
         pluralizationRules: {
             description: string;

@@ -19,7 +19,7 @@ export default class SelfInspection extends PlayerInspection {
     static handles(player: unknown, context?: InfoProviderContext): boolean;
     constructor(player: Player);
     getBorder(): string;
-    get(context: InfoProviderContext): (import("../InfoProvider").SimpleInfoProvider | StatsInfoProvider)[];
+    get(context: InfoProviderContext): (import("game/inspection/InfoProvider").SimpleInfoProvider | StatsInfoProvider)[];
 }
 declare class StatsInfoProvider extends InfoProvider {
     get(): never[];

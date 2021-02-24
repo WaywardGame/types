@@ -15,7 +15,7 @@ import { IHighlight } from "newui/component/IComponent";
 export default class Encumbered extends StatusEffect {
     private status?;
     register(): void;
-    getLevel(): 0 | WeightStatus.Encumbered | WeightStatus.Overburdened;
+    getLevel(): 0 | WeightStatus;
     getHighlight(): IHighlight;
     getBadness(): StatusEffectBadness.Neutral | StatusEffectBadness.Bad;
     getTranslation(): Translation;

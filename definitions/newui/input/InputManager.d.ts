@@ -11,7 +11,7 @@
 import EventEmitter from "event/EventEmitter";
 import Component from "newui/component/Component";
 import Bindable from "newui/input/Bindable";
-import { IInput, InputCatalyst, InputCatalystType, Modifier } from "newui/input/IInput";
+import { IInput, InputCatalyst, Modifier } from "newui/input/IInput";
 import HashMap from "utilities/map/HashMap";
 import Vector2 from "utilities/math/Vector2";
 export declare class InputInfo {
@@ -74,11 +74,7 @@ interface IInputInfoEvents {
     unpress(input: IInput, info: InputInfo): any;
 }
 export declare class GlobalInputInfo extends EventEmitter.Host<IInputInfoEvents> {
-    readonly catalysts: HashMap<Value<{
-        0: import("./IInput").IInputCatalyst<InputCatalystType.Key>;
-        1: import("./IInput").IInputCatalyst<InputCatalystType.MouseButton>;
-        2: import("./IInput").IInputCatalyst<InputCatalystType.Scroll>;
-    }>, InputInfo>;
+    readonly catalysts: HashMap<InputCatalyst, InputInfo>;
     readonly inputs: HashMap<IInput, InputInfo>;
     readonly modifiers: Set<"Shift" | "Alt" | "Ctrl">;
     isAny(): boolean;

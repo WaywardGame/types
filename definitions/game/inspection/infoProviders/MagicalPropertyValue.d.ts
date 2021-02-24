@@ -45,7 +45,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     setBefore(...before: Array<TranslationGenerator | InfoProvider | undefined>): this;
     setAfter(...after: Array<TranslationGenerator | InfoProvider | undefined>): this;
     getClass(): string[];
-    get(): (Translation | import("../../../language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | import("../../../language/Translation").ISerializedTranslation | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | UiTranslation | undefined) | InfoProvider)[];
+    get(): (Translation | import("language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | import("language/Translation").ISerializedTranslation | UiTranslation | undefined) | InfoProvider)[];
     private getOutOf;
     initComponent(): {
         component: import("../../../newui/component/Component").default<HTMLElement>;

@@ -13,5 +13,5 @@ import { IDropdownOption } from "newui/component/Dropdown";
 import EnumDropdown from "newui/component/dropdown/EnumDropdown";
 export default class CorpseDropdown<OTHER_OPTIONS extends string = never> extends EnumDropdown<typeof CreatureType, OTHER_OPTIONS> {
     constructor(defaultOption: OTHER_OPTIONS | CreatureType, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
-    protected getTranslation(id: CreatureType): import("../../../language/Translation").default;
+    protected getTranslation(id: CreatureType): import("language/Translation").default;
 }

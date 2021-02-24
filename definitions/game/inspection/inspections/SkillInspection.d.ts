@@ -21,7 +21,7 @@ export default class SkillInspection extends Inspection<SkillType> {
     constructor([, skill]: [any, SkillType], context?: InfoProviderContext);
     getId(): string;
     getBorder(): string;
-    get(context: InfoProviderContext): (0 | Translation | import("../InfoProvider").SimpleInfoProvider | SkillBonusMagicalItemsInfoProvider)[];
+    get(context: InfoProviderContext): (0 | Translation | import("game/inspection/InfoProvider").SimpleInfoProvider | SkillBonusMagicalItemsInfoProvider)[];
     private getCurrentValue;
     private getDescription;
     private getReputationImpact;

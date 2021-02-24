@@ -9,7 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
-import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
@@ -24,7 +23,7 @@ export default class LabelledValue extends InfoProvider {
     private constructor();
     add(...values: Array<Falsy | InfoProvider | TranslationGenerator>): this;
     getClass(): string[];
-    get(): (Translation | import("../../../language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | import("../../../language/Translation").ISerializedTranslation | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | UiTranslation | undefined) | InfoProvider)[];
+    get(): (TranslationGenerator | InfoProvider)[];
     initComponent(): {
         component: Component<HTMLElement>;
         fullInit(): void;

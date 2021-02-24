@@ -13,5 +13,5 @@ export default abstract class RandomValueGenerator<T> {
     random?: RandomInstance;
     value?: T;
     constructor(random?: RandomInstance, value?: T);
-    getRandom(): import("../Random").Random<import("../Random").SeededGenerator>;
+    getRandom(): import("utilities/Random").Random<import("utilities/Random").SeededGenerator>;
 }

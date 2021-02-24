@@ -21,6 +21,6 @@ export declare abstract class ItemUseInfo extends InfoProvider {
         component: import("../../../../newui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
-    get(context: InfoProviderContext): (Translation | import("../../../../language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | import("../../../../language/Translation").ISerializedTranslation | Iterable<import("../../../../utilities/string/Interpolator").IStringSection> | UiTranslation | undefined) | InfoProvider)[];
+    get(context: InfoProviderContext): (Translation | import("language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | Iterable<import("../../../../utilities/string/Interpolator").IStringSection> | import("language/Translation").ISerializedTranslation | UiTranslation | undefined) | InfoProvider)[];
     protected abstract getDetails(context: InfoProviderContext): Array<ArrayOr<TranslationGenerator | InfoProvider> | undefined>;
 }

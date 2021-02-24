@@ -12,8 +12,8 @@ import { QuestRequirementType } from "entity/player/quest/requirement/IRequireme
 import { QuestRequirement } from "entity/player/quest/requirement/Requirement";
 declare const requirements: {
     0: QuestRequirement<[], {}>;
-    2: QuestRequirement<[import("../../creature/ICreature").CreatureType, number], import("./requirement/KillCreatureRequirement").IKillCreatureRequirement>;
-    3: QuestRequirement<[number], import("./requirement/KillCreaturesRequirement").IKillCreaturesRequirement>;
+    2: QuestRequirement<[import("../../creature/ICreature").CreatureType, number], import("entity/player/quest/requirement/KillCreatureRequirement").IKillCreatureRequirement>;
+    3: QuestRequirement<[number], import("entity/player/quest/requirement/KillCreaturesRequirement").IKillCreaturesRequirement>;
     1: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[], number], {}>;
     4: QuestRequirement<[import("../../IHuman").SkillType, number], {}>;
     5: QuestRequirement<[number], {}>;
@@ -26,8 +26,8 @@ declare const requirements: {
         dismantled: number;
     }>;
     10: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[]], {}>;
-    11: QuestRequirement<[import("../../creature/ICreature").CreatureType, number], import("./requirement/TameCreatureRequirement").ITameCreatureRequirement>;
-    12: QuestRequirement<[number], import("./requirement/TameCreaturesRequirement").ITameCreaturesRequirement>;
+    11: QuestRequirement<[import("../../creature/ICreature").CreatureType, number], import("entity/player/quest/requirement/TameCreatureRequirement").ITameCreatureRequirement>;
+    12: QuestRequirement<[number], import("entity/player/quest/requirement/TameCreaturesRequirement").ITameCreaturesRequirement>;
 };
 export default requirements;
 export declare type RequirementArgs<R extends QuestRequirementType> = (typeof requirements)[R] extends QuestRequirement<infer O, any> ? O : (typeof requirements)[R] extends QuestRequirement<infer O2> ? O2 : never;

@@ -27,12 +27,12 @@ export default class ObscuredValue extends InfoProvider {
         unobscured(unobscuredInitializer: InfoGenerator): {
             obscured(obscuredInitializer: InfoGenerator): ObscuredValue;
         };
-        andOwner(owner?: IInspector | IHasOwner | undefined): {
+        andOwner(owner?: HasResolvableOwner | undefined): {
             unobscured(unobscuredInitializer: InfoGenerator): {
                 obscured(obscuredInitializer: InfoGenerator): ObscuredValue;
             };
         };
-        orOwner(owner?: IInspector | IHasOwner | undefined): {
+        orOwner(owner?: HasResolvableOwner | undefined): {
             unobscured(unobscuredInitializer: InfoGenerator): {
                 obscured(obscuredInitializer: InfoGenerator): ObscuredValue;
             };
@@ -56,7 +56,7 @@ export default class ObscuredValue extends InfoProvider {
     private static createInfoFactory;
     private constructor();
     getClass(): string[];
-    get(context: InfoProviderContext): ArrayOr<import("../../../language/Translation").default | import("../../../language/Translation").ISerializedTranslation | import("../../../language/dictionary/UiTranslation").default | (() => import("../../../language/Translation").default | import("../../../language/Translation").ISerializedTranslation | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | import("../../../language/dictionary/UiTranslation").default | undefined) | InfoProvider>;
+    get(context: InfoProviderContext): import("../../../language/Translation").default | import("../../../language/Translation").ISerializedTranslation | import("../../../language/dictionary/UiTranslation").default | (() => import("../../../language/Translation").default | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | import("../../../language/Translation").ISerializedTranslation | import("../../../language/dictionary/UiTranslation").default | undefined) | InfoProvider | (TranslationGenerator | InfoProvider)[];
     private canSee;
     private getOwner;
     private hasSkill;

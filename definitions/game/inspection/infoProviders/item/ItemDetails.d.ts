@@ -20,7 +20,7 @@ export default class ItemDetailsInfoProvider extends InfoProvider {
         component: import("../../../../newui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
-    get(): (0 | import("../../InfoProvider").SimpleInfoProvider | LabelledValue | ItemUses)[];
+    get(): (0 | import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue | ItemUses)[];
     private getInsulation;
     private getPreservation;
     private getGroupings;
