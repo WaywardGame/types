@@ -44,6 +44,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     equippedId?: number;
     equippedType?: EntityType;
     id: number;
+    pid: number | null | undefined;
     itemOrders?: number[];
     magic: MagicalPropertyManager;
     map: ItemMapManager;

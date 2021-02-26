@@ -180,6 +180,7 @@ export interface ITravelToIslandOptions {
 }
 export interface ITravelingToIslandInfo {
     id: string;
+    playerIdentifiers?: string[];
     travelTime?: number;
     newWorldBiomeTypeOverride?: BiomeType;
 }

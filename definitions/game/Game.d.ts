@@ -296,7 +296,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     /**
      * Collection of things to perform on each tick
      */
-    tickAsync(ticks: number | undefined, realPlayers: Player[] | undefined, tickFlag: TickFlag | undefined, onProgress: (progess: number) => Promise<void>): Promise<void>;
+    tickAsync(ticks: number, realPlayers: Player[] | undefined, tickFlag: TickFlag | undefined, onProgress: (progess: number) => Promise<void>): Promise<void>;
     private processTickFlags;
     private processTickFlagsAsync;
     private updateEntityFov;

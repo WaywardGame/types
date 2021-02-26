@@ -14,4 +14,4 @@ export default function upgradePlayer(player: Player, saveVersion: IVersionInfo)
 /**
  * Called after loading item & tile references
  */
-export declare function upgradePlayerAfterLoadingReferences(player: Player): string[];
+export declare function upgradePlayerAfterLoadingReferences(player: Player, isAbsentPlayer: boolean): string[];

@@ -44,7 +44,7 @@ export default class Player extends Human {
     hintSeen: boolean[];
     isConnecting: boolean;
     lastIslandId: string;
-    shouldApplyTravelingEffects: boolean;
+    shouldApplyTravelingEffects: boolean | number;
     traveled: boolean;
     isMoving: boolean;
     lastAttackedBy: Human | Creature | undefined;
