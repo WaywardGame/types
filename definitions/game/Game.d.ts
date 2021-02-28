@@ -134,7 +134,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      * @param point The point of the terrain/tile.
      * @returns The number of decay reduction of the terrain given the temperature of the point.
      */
-    getTileDecayRate(terrainType: TerrainType, point: IVector3): number;
+    getTileMeltRate(terrainType: TerrainType, point: IVector3): number;
     /**
      * Check tiles around the given point to see if they require a MeltingTile event for tracking terrain decay.
      * @param point Center tile coordinate to check for.

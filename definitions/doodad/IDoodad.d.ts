@@ -13,6 +13,7 @@ import { ActionType } from "entity/action/IAction";
 import { ICausesDamage, ICausesStatusEffect } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import Player from "entity/player/Player";
+import { IDecayTemperatureRange } from "game/IGame";
 import { ILootItem } from "game/ILoot";
 import { IObjectDescription, IObjectOptions } from "game/IObject";
 import { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
@@ -22,6 +23,7 @@ import { LootGroupType } from "item/LootGroups";
 import { IModdable } from "mod/ModRegistry";
 import { TileLayerType } from "renderer/IWorldRenderer";
 import { TerrainType } from "tile/ITerrain";
+import { TileEventType } from "tile/ITileEvent";
 import { IRGB } from "utilities/Color";
 export interface IDoodadOptions extends IObjectOptions {
     gatherReady?: number;
@@ -34,6 +36,7 @@ export interface IDoodadOptions extends IObjectOptions {
     step?: number;
     hitchedCreature?: number;
     aberrant?: boolean;
+    meltDecay?: number;
 }
 declare type MagicalPropertyOld = Exclude<IItemOld["magicalProperties"], undefined> extends Array<infer T> ? T : never;
 export declare type IDoodadOld = Partial<Doodad> & {
@@ -100,6 +103,15 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     waterStill?: boolean;
     itemStackOffset?: number;
     itemStackRegion?: IItemStackRegion | ((doodad: Doodad) => IItemStackRegion | undefined);
+    decayTemperatureRange?: IDecayTemperatureRange;
+    /**
+     * Item that defines the decay amount when this doodad is melting.
+     */
+    meltFromItem?: ItemType;
+    /**
+     * Array of tile events that are spawned when doodad (or things connected to the doodad) melts.
+     */
+    meltsInto?: TileEventType[];
     getVariationX?(doodad: Doodad, existingVariationX: number): number | undefined;
     getVariationY?(doodad: Doodad, existingVariationY: number): number | undefined;
 }

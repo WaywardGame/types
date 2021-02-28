@@ -68,6 +68,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     protected static registrarId: number;
     containedItems: Item[];
     decay?: number;
+    meltDecay?: number;
     disassembly?: Item[];
     gatherReady?: number;
     stillContainer?: Item;
@@ -215,6 +216,23 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * Regenerate (heal durability) over time
      */
     private processRegeneration;
+    /**
+     * Melt doodads (or things on doodads over time)
+     * @param description Doodad description
+     * @param updatesPerTick Amount of melting to perform
+     */
+    private processMelting;
+    /**
+     * Gets the decay rate of a doodad based on the temperature (returns as a default of 0).
+     * @param terrainType The doodad description to check.
+     * @param point The point of the tile the doodad is on.
+     * @returns The number of melt reduction of the doodad given the temperature of the point.
+     */
+    getMeltRate(description: IDoodadDescription, point: IVector3): number;
+    /**
+     * Initialized the doodad's melting decay number
+     */
+    setMeltingDecay(): void;
     /**
      * Decay over time
      */

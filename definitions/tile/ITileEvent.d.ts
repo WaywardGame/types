@@ -31,6 +31,7 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
     durability?: number;
     isWaste?: boolean;
     renderBelowItems?: boolean;
+    renderBelowDoodads?: boolean;
     isTall?: boolean;
     providesFire?: boolean;
     /**

@@ -89,11 +89,11 @@ export interface ITerrainDescription extends IModdable {
     /**
      * Array of tile events that are spawned when terrain decays (or melts).
      */
-    decaysInto?: TileEventType[];
+    meltsInto?: TileEventType[];
     /**
-     * Maximum decay terrain has when spawned.
+     * Item that defines the decay amount when this doodad is melting.
      */
-    decayMax?: number;
+    meltFromItem?: ItemType;
 }
 export interface ITile extends Partial<ITileContainer> {
     corpses?: Corpse[];
@@ -119,7 +119,7 @@ export interface ITileData {
     tilled?: boolean;
     step?: number;
     fishAvailable?: number;
-    decay?: number;
+    meltDecay?: number;
     weight?: number;
     magic?: MagicalPropertyManager;
 }

@@ -24,6 +24,7 @@ import Recipe from "item/recipe/Recipe";
 import Message from "language/dictionary/Message";
 import { IModdable } from "mod/ModRegistry";
 import { TerrainType } from "tile/ITerrain";
+import { TileEventType } from "tile/ITileEvent";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
 import { MagicalPropertyType } from "../game/MagicalPropertyType";
@@ -186,6 +187,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, IInsula
      * This impacts things like stamina usage, success rate, resource amount, etc.
      */
     actionTier?: OptionalDescriptions<ActionType, number>;
+    /**
+     * Array of tile events that are spawned when the item melts.
+     */
+    meltsInto?: TileEventType[];
     recipeCache?: ItemType[];
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;

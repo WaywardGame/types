@@ -92,6 +92,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private readonly fogTextureStorage;
     private readonly vertexArraySingle;
     private readonly vertexArrayDouble;
+    private belowDoodadsBatch;
     private itemBatch;
     private itemMovingBatch;
     private corpseBatch;
