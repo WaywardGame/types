@@ -78,7 +78,8 @@ export declare enum MultiplayerSyncCheck {
     TemperatureUpdate = 48,
     Tick = 49,
     Ticks = 50,
-    Weight = 51
+    Time = 51,
+    Weight = 52
 }
 export declare const maxPlayers = 32;
 export declare const packetTickRate = 10;

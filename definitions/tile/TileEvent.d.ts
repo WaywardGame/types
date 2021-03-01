@@ -47,8 +47,8 @@ export default class TileEvent extends EventEmitter.Host<ITileEventEvents> imple
      * Set to 0 to stop all ash production.
      */
     fuel?: number;
+    private fireStage?;
     private _description;
-    private _fireStage?;
     private _movementFinishTime?;
     constructor(type?: TileEventType, x?: number, y?: number, z?: number);
     toString(): string;

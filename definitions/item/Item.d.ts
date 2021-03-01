@@ -43,8 +43,8 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     driverId?: number;
     equippedId?: number;
     equippedType?: EntityType;
+    fireStage?: FireStage;
     id: number;
-    pid: number | null | undefined;
     itemOrders?: number[];
     magic: MagicalPropertyManager;
     map: ItemMapManager;
@@ -52,6 +52,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     minDur: number;
     order: number;
     ownerIdentifier?: string;
+    pid: number | null | undefined;
     protected?: boolean;
     quality: Quality | undefined;
     quickSlot: number | undefined;
@@ -71,7 +72,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     private _movementOptions?;
     private _description;
     private _minDur;
-    private fireStage?;
     constructor(itemType?: ItemType | undefined, quality?: Quality, human?: Human);
     toString(): string;
     /**
