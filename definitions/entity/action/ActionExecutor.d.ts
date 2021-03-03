@@ -73,7 +73,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setStaminaReduction(reduction?: SkillType, actionTier?: number): this;
     setReputationChange(amount: number): this;
     addSkillGains(...skills: Array<[SkillType, number?, number?, true?]>): this;
-    addSkillGains(skill: SkillType, amount?: number, actionTier?: number): this;
+    addSkillGains(skill: SkillType, amount?: number, actionTier?: number, bypass?: true): this;
     setMilestone(milestone: Milestone, data?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;

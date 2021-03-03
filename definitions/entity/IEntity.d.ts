@@ -72,7 +72,10 @@ export declare enum StatusType {
     Encumbered = 3,
     Exhausted = 4,
     Starving = 5,
-    Dehydrated = 6
+    Dehydrated = 6,
+    Overheating = 7,
+    Freezing = 8,
+    Frostbitten = 9
 }
 export declare type IStatus = Record<keyof typeof StatusType, boolean>;
 export interface ICausesStatusEffect {

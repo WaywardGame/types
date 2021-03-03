@@ -94,6 +94,10 @@ export interface ITerrainDescription extends IModdable {
      * Item that defines the decay amount when this doodad is melting.
      */
     meltFromItem?: ItemType;
+    /**
+     * Puddles will cool down tiles and create the following TerrainType on this tile.
+     */
+    cooledTile?: TerrainType;
 }
 export interface ITile extends Partial<ITileContainer> {
     corpses?: Corpse[];

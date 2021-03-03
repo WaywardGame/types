@@ -177,7 +177,7 @@ export interface IActionApi<E extends Entity = Entity> {
     setUpdateRender(): this;
     setUpdateTablesAndWeight(): this;
     setStaminaReduction(skill?: SkillType, actionTier?: number): this;
-    addSkillGains(...skills: Array<[SkillType, number?, number?]>): this;
+    addSkillGains(...skills: Array<[SkillType, number?, number?, true?]>): this;
     addSkillGains(skill: SkillType, amount?: number, actionTier?: number, bypass?: true): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;

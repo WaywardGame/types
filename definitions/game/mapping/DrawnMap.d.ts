@@ -117,6 +117,8 @@ export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> {
     private readonly treasure;
     private readonly discoveredTreasures;
     readonly type: DrawnMapType;
+    private _isValid;
+    get isValid(): boolean;
     private constructor();
     getTreasure(): readonly ITreasure[];
     getUndiscoveredTreasure(): ITreasure[];

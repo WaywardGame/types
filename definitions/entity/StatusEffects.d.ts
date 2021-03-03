@@ -14,6 +14,9 @@ import Burned from "entity/status/handler/Burned";
 import Dehydrated from "entity/status/handler/Dehydrated";
 import Encumbered from "entity/status/handler/Encumbered";
 import Exhausted from "entity/status/handler/Exhausted";
+import Freezing from "entity/status/handler/Freezing";
+import Frostbitten from "entity/status/handler/Frostbitten";
+import Overheating from "entity/status/handler/Overheating";
 import Poisoned from "entity/status/handler/Poisoned";
 import Starving from "entity/status/handler/Starving";
 import { StatusEffectClass } from "entity/status/StatusEffect";
@@ -25,5 +28,8 @@ declare const _default: {
     4: typeof Exhausted;
     5: typeof Starving;
     6: typeof Dehydrated;
+    9: typeof Frostbitten;
+    7: typeof Overheating;
+    8: typeof Freezing;
 } & Record<StatusType, StatusEffectClass>;
 export default _default;
