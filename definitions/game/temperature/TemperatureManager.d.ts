@@ -10,7 +10,6 @@
  */
 import Doodad from "doodad/Doodad";
 import Entity from "entity/Entity";
-import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import Island from "game/Island";
 import { WorldZ } from "game/WorldZ";
@@ -94,7 +93,6 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     protected onUpdateTile(_: any, x: number, y: number, z: number, tile: ITile, oldType: TerrainType): void;
     protected onItemContainerUpdate(_: any, item: Item, container1?: IContainer, container2?: IContainer): void;
     protected onItemContainerRemove(_: any, item: Item, container: IContainer): void;
-    protected onPlayerPostMove(player: Player): void;
     private invalidateContainerCache;
     protected onItemFireUpdate(item: Item): void;
     protected onTickEnd(): void;
