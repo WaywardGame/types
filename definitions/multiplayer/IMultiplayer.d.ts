@@ -112,7 +112,7 @@ export interface IMultiplayerNetworkingOptions {
     enableWebRtcConnections: boolean;
     enablePacketNumberChecks: boolean;
     enableSeedHistoryChecks: boolean;
-    chunkSize: number;
+    maxMessageSize: number;
     logPackets: boolean;
     logSyncChecks: boolean;
     fakeRoundTripTime: number;
