@@ -8,21 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Doodad from "doodad/Doodad";
-import DoodadManager from "doodad/DoodadManager";
-import ActionExecutor from "entity/action/ActionExecutor";
-import Player from "entity/player/Player";
+import Doodad from "game/doodad/Doodad";
+import DoodadManager from "game/doodad/DoodadManager";
+import ActionExecutor from "game/entity/action/ActionExecutor";
+import Player from "game/entity/player/Player";
 import Game from "game/Game";
-import Item from "item/Item";
-import ItemManager from "item/ItemManager";
+import Item from "game/item/Item";
+import ItemManager from "game/item/ItemManager";
+import TileEvent from "game/tile/TileEvent";
+import TileEventManager from "game/tile/TileEventManager";
 import LanguageManager from "language/LanguageManager";
 import ModManager from "mod/ModManager";
 import Multiplayer from "multiplayer/Multiplayer";
-import NewUi from "newui/NewUi";
 import SaveManager from "save/SaveManager";
 import Steamworks from "steamworks/Steamworks";
-import TileEvent from "tile/TileEvent";
-import TileEventManager from "tile/TileEventManager";
 export declare enum EventBus {
     Actions = 0,
     DoodadManager = 1,
@@ -57,7 +56,7 @@ declare const eventBuses: {
     [EventBus.Steamworks](): typeof Steamworks;
     [EventBus.TileEventManager](): typeof TileEventManager;
     [EventBus.TileEvents](): typeof TileEvent;
-    [EventBus.Ui](): typeof NewUi;
+    [EventBus.Ui](): typeof ui;
 };
 export default eventBuses;
 export declare module EventBus {

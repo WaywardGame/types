@@ -12,8 +12,8 @@ import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import CorpseInspection from "game/inspection/inspections/CorpseInspection";
 import ListInspection from "game/inspection/inspections/ListInspection";
-import { TranslationGenerator } from "newui/component/IComponent";
-import Text from "newui/component/Text";
+import { TranslationGenerator } from "ui/component/IComponent";
+import Text from "ui/component/Text";
 import { IVector3 } from "utilities/math/IVector";
 export default class CorpsesInspection extends ListInspection<CorpseInspection> {
     static getFromTile(position: IVector3): never[] | CorpsesInspection;

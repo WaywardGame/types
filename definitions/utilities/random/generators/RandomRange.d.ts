@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { IRange } from "utilities/math/Range";
-import { RandomInstance } from "utilities/Random";
+import { RandomInstance } from "utilities/random/Random";
 import RandomValueGenerator from "utilities/random/RandomValueGenerator";
 export default class RandomRange extends RandomValueGenerator<IRange> {
     limit?: number;

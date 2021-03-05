@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Translation from "language/Translation";
-import { ITooltip } from "newui/component/IComponent";
+import { ITooltip } from "ui/component/IComponent";
 import { ISegment, IStringSection } from "utilities/string/Interpolator";
 export interface ITooltipSection extends IStringSection {
     tooltip: IStringSection[] | Translation | ((tooltip: ITooltip) => ITooltip);

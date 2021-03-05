@@ -10,7 +10,7 @@
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
-import Item from "item/Item";
+import Item from "game/item/Item";
 export default class ItemUses extends InfoProvider {
     private readonly item;
     constructor(item: Item);

@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Quality } from "game/IObject";
-import { IContainer, ItemType, ItemTypeGroup } from "item/IItem";
-import { RandomInstance } from "utilities/Random";
+import { IContainer, ItemType, ItemTypeGroup } from "game/item/IItem";
+import { RandomInstance } from "utilities/random/Random";
 import RandomValueGenerator from "utilities/random/RandomValueGenerator";
 export default class RandomItem extends RandomValueGenerator<Array<ItemType | ItemTypeGroup>> {
     private quality;
@@ -19,5 +19,5 @@ export default class RandomItem extends RandomValueGenerator<Array<ItemType | It
     constructor(random: RandomInstance, ...options: Array<ItemType | ItemTypeGroup>);
     setQuality(quality: Quality): this;
     setMagical(amount: number): this;
-    create(container: IContainer): import("../../../item/Item").default;
+    create(container: IContainer): import("../../../game/item/Item").default;
 }

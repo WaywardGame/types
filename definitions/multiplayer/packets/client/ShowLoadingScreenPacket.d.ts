@@ -10,7 +10,7 @@
  */
 import Interrupt from "language/dictionary/Interrupt";
 import ClientPacket from "multiplayer/packets/ClientPacket";
-import { ScreenId } from "newui/screen/IScreen";
+import { ScreenId } from "ui/screen/IScreen";
 export default class ShowLoadingScreenPacket extends ClientPacket {
     interrupt: Interrupt;
     allowCancelAndDisconnect?: boolean;

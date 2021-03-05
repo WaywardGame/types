@@ -10,9 +10,9 @@
  */
 import { Command, ICommand } from "command/ICommand";
 import { ICommandManager } from "command/ICommandManager";
-import Player from "entity/player/Player";
-import GenericManager from "game/GenericManager";
-import { IGenericManager } from "game/IGenericManager";
+import Player from "game/entity/player/Player";
+import GenericManager from "utilities/generic/GenericManager";
+import { IGenericManager } from "utilities/generic/IGenericManager";
 import { LogSource } from "utilities/Log";
 export default class CommandManager extends GenericManager<ICommand> implements ICommandManager {
     setup(instance: IGenericManager<ICommand>): void;

@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
-import Item from "item/Item";
+import Item from "game/item/Item";
 import Translation from "language/Translation";
 export default class ItemProtectedInfoProvider extends InfoProvider {
     private readonly item;
@@ -23,7 +23,7 @@ export default class ItemProtectedInfoProvider extends InfoProvider {
         height: number;
     };
     initComponent(): {
-        component: import("../../../../newui/component/Component").default<HTMLElement>;
+        component: import("../../../../ui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
     hasContent(): boolean;

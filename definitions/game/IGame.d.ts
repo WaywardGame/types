@@ -8,23 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Doodad from "doodad/Doodad";
-import Corpse from "entity/creature/corpse/Corpse";
-import Creature from "entity/creature/Creature";
-import { ICharacter, ICrafted } from "entity/IHuman";
-import NPC from "entity/npc/NPC";
-import { PlayerState } from "entity/player/IPlayer";
+import { BiomeType } from "game/biome/IBiome";
+import Doodad from "game/doodad/Doodad";
+import Corpse from "game/entity/creature/corpse/Corpse";
+import Creature from "game/entity/creature/Creature";
+import { ICharacter, ICrafted } from "game/entity/IHuman";
+import NPC from "game/entity/npc/NPC";
+import { PlayerState } from "game/entity/player/IPlayer";
 import Game from "game/Game";
-import { BiomeType } from "game/IBiome";
+import Item from "game/item/Item";
 import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
-import Item from "item/Item";
+import { ITile, ITileContainer, ITileData, TerrainType } from "game/tile/ITerrain";
+import TileEvent from "game/tile/TileEvent";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
 import World from "renderer/World";
 import { IReplayLogEntry } from "replay/IReplayLogEntry";
 import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
-import { ITile, ITileContainer, ITileData, TerrainType } from "tile/ITerrain";
-import TileEvent from "tile/TileEvent";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import { IRange } from "utilities/math/Range";
 import Vector3 from "utilities/math/Vector3";

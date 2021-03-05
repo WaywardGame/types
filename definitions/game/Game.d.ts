@@ -8,26 +8,26 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Creature from "entity/creature/Creature";
-import { IDamageInfo } from "entity/creature/ICreature";
-import Entity from "entity/Entity";
-import Human from "entity/Human";
-import { DamageType, Defense } from "entity/IEntity";
-import { Delay, SkillType } from "entity/IHuman";
-import { TurnType } from "entity/player/IPlayer";
-import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
+import Creature from "game/entity/creature/Creature";
+import { IDamageInfo } from "game/entity/creature/ICreature";
+import Entity from "game/entity/Entity";
+import Human from "game/entity/Human";
+import { DamageType, Defense } from "game/entity/IEntity";
+import { Delay, SkillType } from "game/entity/IHuman";
+import { TurnType } from "game/entity/player/IPlayer";
+import Player from "game/entity/player/Player";
 import { FireType, IGameEvents, IMapRequest, IPlayOptions, ITravelingToIslandInfo, ITravelToIslandOptions, IWaterFill, RenderSource, SaveType, TickFlag, TileUpdateType, TurnMode, UpdateRenderFlag } from "game/IGame";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ChallengeModifiersCollection } from "game/options/modifiers/challenge/ChallengeModifiers";
-import ReferenceManager from "game/ReferenceManager";
+import ReferenceManager from "game/reference/ReferenceManager";
+import { ITile, ITileArray, ITileData, TerrainType } from "game/tile/ITerrain";
 import TimeManager from "game/TimeManager";
 import VotingManager from "game/VotingManager";
 import Interrupt from "language/dictionary/Interrupt";
 import Translation from "language/Translation";
-import ItemStylesheetHandler from "newui/screen/screens/game/util/item/ItemStylesheet";
 import { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
@@ -35,11 +35,11 @@ import { IParticle } from "renderer/particle/IParticle";
 import ReplayManager from "replay/ReplayManager";
 import { IOptions } from "save/data/ISaveDataGlobal";
 import { ISaveInfo } from "save/ISaveManager";
-import { ITile, ITileArray, ITileData, TerrainType } from "tile/ITerrain";
+import ItemStylesheetHandler from "ui/screen/screens/game/util/item/ItemStylesheet";
+import "utilities/dev/Performance";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
-import "utilities/Performance";
 import { IVersionInfo } from "utilities/Version";
 import Island from "./Island";
 export default class Game extends EventEmitter.Host<IGameEvents> {

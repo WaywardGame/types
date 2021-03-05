@@ -10,13 +10,13 @@
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
-import Item from "item/Item";
+import Item from "game/item/Item";
 export default class ItemWeightInfoProvider extends InfoProvider {
     private readonly item;
     constructor(item: Item);
     getClass(): string[];
     initComponent(): {
-        component: import("../../../../newui/component/Component").default<HTMLElement>;
+        component: import("../../../../ui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
     get(): LabelledValue;

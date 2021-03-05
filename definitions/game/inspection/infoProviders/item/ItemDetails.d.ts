@@ -11,13 +11,13 @@
 import { InfoProvider } from "game/inspection/InfoProvider";
 import ItemUses from "game/inspection/infoProviders/item/ItemUses";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
-import Item from "item/Item";
+import Item from "game/item/Item";
 export default class ItemDetailsInfoProvider extends InfoProvider {
     private readonly item;
     constructor(item: Item);
     getClass(): string[];
     initComponent(): {
-        component: import("../../../../newui/component/Component").default<HTMLElement>;
+        component: import("../../../../ui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
     get(): (0 | import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue | ItemUses)[];

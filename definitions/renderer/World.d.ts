@@ -10,11 +10,11 @@
  */
 import EventEmitter from "event/EventEmitter";
 import { TileUpdateType } from "game/IGame";
+import { ITile } from "game/tile/ITerrain";
 import { WorldZ } from "game/WorldZ";
 import IWorld from "renderer/IWorld";
 import IWorldLayer from "renderer/IWorldLayer";
 import ISerializer from "save/ISerializer";
-import { ITile } from "tile/ITerrain";
 export interface IWorldEvents {
     updateTile(x: number, y: number, z: number, tile: ITile, tileUpdateType: TileUpdateType): any;
 }

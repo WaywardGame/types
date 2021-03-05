@@ -9,11 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { IHasImagePath } from "game/IObject";
+import { TerrainType } from "game/tile/ITerrain";
 import { IModdable } from "mod/ModRegistry";
-import { TerrainType } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import Vector2 from "utilities/math/Vector2";
-import { Random } from "utilities/Random";
+import { Random } from "utilities/random/Random";
 export declare enum MapTile {
     Unknown = 0,
     Land = 1,

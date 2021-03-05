@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { IHasOwner } from "doodad/IDoodad";
-import { SkillType } from "entity/IHuman";
+import { IHasOwner } from "game/doodad/IDoodad";
+import { SkillType } from "game/entity/IHuman";
 import { IInspector } from "game/inspection/IInfoProvider";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import { TranslationGenerator } from "newui/component/IComponent";
+import { TranslationGenerator } from "ui/component/IComponent";
 declare type SkillRequirement = [skill: SkillType, amount: number];
 declare type InfoGenerator = () => ArrayOr<TranslationGenerator | InfoProvider>;
 declare type HasResolvableOwner = IInspector | IHasOwner;

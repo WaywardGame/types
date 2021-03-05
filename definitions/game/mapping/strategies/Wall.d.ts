@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { IMapTileRenderApi, IMapTileRenderConfiguration, IMapTileRenderStrategy } from "game/mapping/IMapTile";
-import { TerrainType } from "tile/ITerrain";
+import { TerrainType } from "game/tile/ITerrain";
 import Vector2 from "utilities/math/Vector2";
 export declare module WallStrategy {
     function hash(east: boolean, north: boolean, west: boolean, south: boolean): string;

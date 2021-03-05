@@ -11,9 +11,9 @@
 import { InspectType } from "game/inspection/IInspection";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ISerializedTranslation } from "language/Translation";
-import Bindable from "newui/input/Bindable";
-import { Binding } from "newui/input/Bindings";
-import UiExperiment from "newui/UiExperiments";
+import Bindable from "ui/input/Bindable";
+import { Binding } from "ui/input/Bindings";
+import UiExperiment from "ui/UiExperiments";
 import { ISourceFilter } from "utilities/Log";
 export interface IOptions {
     alternateContextMenu: boolean;

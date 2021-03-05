@@ -18,7 +18,7 @@ import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import MagicalPropertiesInfoProvider from "game/inspection/infoProviders/MagicalProperties";
 import QualityInfoProvider from "game/inspection/infoProviders/Quality";
 import Inspection from "game/inspection/Inspection";
-import Item from "item/Item";
+import Item from "game/item/Item";
 import Translation from "language/Translation";
 import { IVector3 } from "utilities/math/IVector";
 export default class ItemInspection extends Inspection<Item> {

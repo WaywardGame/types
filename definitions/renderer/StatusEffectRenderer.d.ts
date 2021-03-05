@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import ISpriteInfo from "renderer/ISpriteInfo";
+import { PriorityMap } from "utilities/collection/map/PriorityMap";
 import { IRGB } from "utilities/Color";
-import { PriorityMap } from "utilities/map/PriorityMap";
 export declare type IRenderFunction = (sprite: number | ISpriteInfo) => void;
 export declare type IRenderLayerImplementation = (render: IRenderFunction) => any;
 export declare type SpriteLineOrRenderLayerImpl = number | IRenderLayerImplementation;

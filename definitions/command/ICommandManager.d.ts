@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Command, ICommand } from "command/ICommand";
-import Player from "entity/player/Player";
-import { IGenericManager } from "game/IGenericManager";
+import Player from "game/entity/player/Player";
+import { IGenericManager } from "utilities/generic/IGenericManager";
 export interface ICommandManager extends IGenericManager<ICommand> {
     execute(player: Player, cmd: Command, args?: string): void;
 }

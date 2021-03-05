@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { SkillType } from "entity/IHuman";
-import { BiomeType } from "game/IBiome";
+import { BiomeType } from "game/biome/IBiome";
+import { SkillType } from "game/entity/IHuman";
+import { TerrainType } from "game/tile/ITerrain";
 import { WorldZ } from "game/WorldZ";
 import { ISerializedTranslation } from "language/Translation";
-import { TerrainType } from "tile/ITerrain";
 export interface IObject<T> {
     type: T;
     id: number;

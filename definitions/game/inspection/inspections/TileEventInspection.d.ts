@@ -12,8 +12,8 @@ import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
+import TileEvent from "game/tile/TileEvent";
 import Translation from "language/Translation";
-import TileEvent from "tile/TileEvent";
 import { IVector3 } from "utilities/math/IVector";
 declare class TileEventInspection extends Inspection<TileEvent> {
     static getFromTile(position: IVector3): TileEventInspection[];

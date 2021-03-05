@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Doodad from "doodad/Doodad";
-import Entity from "entity/Entity";
 import EventEmitter from "event/EventEmitter";
+import Doodad from "game/doodad/Doodad";
+import Entity from "game/entity/Entity";
 import Island from "game/Island";
+import { IContainer } from "game/item/IItem";
+import Item from "game/item/Item";
+import { ITile, TerrainType } from "game/tile/ITerrain";
+import TileEvent from "game/tile/TileEvent";
 import { WorldZ } from "game/WorldZ";
-import { IContainer } from "item/IItem";
-import Item from "item/Item";
-import { ITile, TerrainType } from "tile/ITerrain";
-import TileEvent from "tile/TileEvent";
 export declare const TEMPERATURE_INVALID = 255;
 export declare enum TempType {
     Cold = -1,

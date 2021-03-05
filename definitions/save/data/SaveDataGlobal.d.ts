@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ICharacter, ICrafted } from "entity/IHuman";
+import { ICharacter, ICrafted } from "game/entity/IHuman";
 import { IMilestoneData, Milestone } from "game/milestones/IMilestone";
 import { ModState } from "mod/IModInfo";
-import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
 import { IHighscore, IOptions } from "save/data/ISaveDataGlobal";
-import { IDialogInfo } from "ui/IUi";
+import { IDialogInfo } from "ui/old/IOldUi";
+import { ISavedCharacter } from "ui/screen/screens/menu/menus/character/Character";
 import EnumInfo from "utilities/enum/EnumInfo";
 export default class SaveDataGlobal {
     static defaultOptions: IOptions;
@@ -34,7 +34,7 @@ export default class SaveDataGlobal {
     multiplayerPreviousGames: Record<string, IMultiplayerPreviousGame | undefined>;
     multiplayerMessageOfTheDay: string;
     characters: ISavedCharacter[];
-    newui: Record<string, any>;
+    ui: Record<string, any>;
     lastServerJoined: string | undefined;
     /**
      * Resets all options to default

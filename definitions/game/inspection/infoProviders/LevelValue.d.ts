@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
-import { IHasMagic, MagicalNormalPropertyTypes, MagicalPropertyTypeSubTypeMap, MagicalSubPropertyTypes } from "game/MagicalPropertyManager";
+import { IHasMagic, MagicalNormalPropertyTypes, MagicalPropertyTypeSubTypeMap, MagicalSubPropertyTypes } from "game/magic/MagicalPropertyManager";
 import { DictionaryEnum } from "language/Dictionaries";
 import Translation, { TextContext } from "language/Translation";
 import { IRange } from "utilities/math/Range";
@@ -31,7 +31,7 @@ export default class LevelValue<E extends DictionaryEnum> extends InfoProvider {
     private cachedEntry?;
     private constructor();
     initComponent(): {
-        component: import("../../../newui/component/Component").default<HTMLElement>;
+        component: import("../../../ui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
     getClass(): string[];

@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ICharacter } from "entity/IHuman";
-import { PlayerState } from "entity/player/IPlayer";
-import Player from "entity/player/Player";
+import { ICharacter } from "game/entity/IHuman";
+import { PlayerState } from "game/entity/player/IPlayer";
+import Player from "game/entity/player/Player";
 import { TurnMode } from "game/IGame";
 import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";

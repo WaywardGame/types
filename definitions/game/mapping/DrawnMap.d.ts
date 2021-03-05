@@ -8,19 +8,19 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { DoodadType } from "doodad/IDoodad";
-import Human from "entity/Human";
 import EventEmitter from "event/EventEmitter";
+import { DoodadType } from "game/doodad/IDoodad";
+import Human from "game/entity/Human";
+import Item from "game/item/Item";
+import { IMapGenGenerateOutput } from "game/mapgen/IMapGen";
 import MapBackground from "game/mapping/Background";
 import { DrawnMapTheme } from "game/mapping/IMapRender";
 import { IMapTileData } from "game/mapping/IMapTile";
 import Obfuscation from "game/mapping/Obfuscation";
-import Item from "item/Item";
-import { IMapGenGenerateOutput } from "mapgen/IMapGen";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import { IRange } from "utilities/math/Range";
 import Sampler from "utilities/math/Sampler";
-import { IRandomGenerator, Random, SeededGenerator, WeightedOption } from "utilities/Random";
+import { IRandomGenerator, Random, SeededGenerator, WeightedOption } from "utilities/random/Random";
 export declare enum DrawnMapType {
     Treasure = 0,
     Drawn = 1

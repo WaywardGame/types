@@ -11,10 +11,10 @@
 import EventEmitter from "event/EventEmitter";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import Component from "newui/component/Component";
-import { TranslationGenerator } from "newui/component/IComponent";
-import { IRefreshable } from "newui/component/Refreshable";
-import Text from "newui/component/Text";
+import Component from "ui/component/Component";
+import { TranslationGenerator } from "ui/component/IComponent";
+import { IRefreshable } from "ui/component/Refreshable";
+import Text from "ui/component/Text";
 export interface IInfoProviderEvents {
     /**
      * Should be emitted when the info provider is initialized.

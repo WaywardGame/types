@@ -8,20 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Doodad from "doodad/Doodad";
-import Corpse from "entity/creature/corpse/Corpse";
-import Creature from "entity/creature/Creature";
-import NPC from "entity/npc/NPC";
-import { IReferenceable } from "game/IReferenceManager";
+import { BiomeTypes } from "game/biome/IBiome";
+import Doodad from "game/doodad/Doodad";
+import Corpse from "game/entity/creature/corpse/Corpse";
+import Creature from "game/entity/creature/Creature";
+import NPC from "game/entity/npc/NPC";
+import { CreationId, IGameOld, ISeeds, IWell } from "game/IGame";
+import Item from "game/item/Item";
 import DrawnMap from "game/mapping/DrawnMap";
+import { IReferenceable } from "game/reference/IReferenceManager";
 import TemperatureManager from "game/temperature/TemperatureManager";
-import Item from "item/Item";
-import { ITileContainer, ITileData } from "tile/ITerrain";
-import TileEvent from "tile/TileEvent";
+import { ITileContainer, ITileData } from "game/tile/ITerrain";
+import TileEvent from "game/tile/TileEvent";
+import TimeManager from "game/TimeManager";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-import { BiomeTypes } from "./IBiome";
-import { CreationId, IGameOld, ISeeds, IWell } from "./IGame";
-import TimeManager from "./TimeManager";
 /**
  * Represents the worlds island
  * Items, Creatures, Npcs, etc.. all exist on the island
@@ -55,7 +55,7 @@ export default class Island implements IReferenceable {
     static idToPosition(id: string): IVector2 | undefined;
     constructor(position?: IVector2, startingSeed?: number);
     get id(): string;
-    get biome(): import("./IBiome").IBiomeDescription;
+    get biome(): import("game/biome/IBiome").IBiomeDescription;
     registerEventBus(): void;
     unregisterEventBus(): void;
     hydrateFromOldGame(oldGame: IGameOld): void;

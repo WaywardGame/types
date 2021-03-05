@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ICommand } from "command/ICommand";
-import { IGenericManager } from "game/IGenericManager";
+import { IGenericManager } from "utilities/generic/IGenericManager";
 export default function setup(commandManager: IGenericManager<ICommand>): void;

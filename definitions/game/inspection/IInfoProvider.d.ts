@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Creature from "entity/creature/Creature";
-import Entity from "entity/Entity";
-import Human from "entity/Human";
-import NPC from "entity/npc/NPC";
-import Player from "entity/player/Player";
+import Creature from "game/entity/creature/Creature";
+import Entity from "game/entity/Entity";
+import Human from "game/entity/Human";
+import NPC from "game/entity/npc/NPC";
+import Player from "game/entity/player/Player";
 export declare enum InfoDisplayLevel {
     NonVerbose = -2,
     NonExtra = -1,

@@ -11,7 +11,7 @@
 import ChallengeModifier from "game/options/modifiers/challenge/ChallengeModifier";
 import { Challenge } from "game/options/modifiers/challenge/IChallenge";
 import GameplayModifiersManager, { GameplayModifiersCollection } from "game/options/modifiers/GameplayModifiersManager";
-import { ITooltip } from "newui/component/IComponent";
+import { ITooltip } from "ui/component/IComponent";
 export declare const EXCLUSIVE_MODIFIERS: Challenge[][];
 declare class ChallengeModifiersManager extends GameplayModifiersManager<Challenge, ChallengeModifier> {
     constructor();

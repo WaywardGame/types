@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { IMessage } from "entity/player/IMessageManager";
-import Player from "entity/player/Player";
+import { IMessage } from "game/entity/player/IMessageManager";
+import Player from "game/entity/player/Player";
 import { ISshSession, ISshStream } from "./ISsh";
 export default abstract class Shell {
     readonly session: ISshSession;

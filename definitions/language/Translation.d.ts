@@ -8,21 +8,21 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { DamageType } from "entity/IEntity";
-import { SkillType } from "entity/IHuman";
-import { Stat } from "entity/IStats";
-import { MessageType } from "entity/player/IMessageManager";
+import { DamageType } from "game/entity/IEntity";
+import { SkillType } from "game/entity/IHuman";
+import { Stat } from "game/entity/IStats";
+import { MessageType } from "game/entity/player/IMessageManager";
 import { Quality } from "game/IObject";
-import { IReferenceable, ReferenceType } from "game/IReferenceManager";
-import { Reference } from "game/ReferenceManager";
+import { IReferenceable, ReferenceType } from "game/reference/IReferenceManager";
+import { Reference } from "game/reference/ReferenceManager";
 import { Dictionary } from "language/Dictionaries";
 import Message from "language/dictionary/Message";
 import { MiscTranslation } from "language/dictionary/Misc";
 import UiTranslation from "language/dictionary/UiTranslation";
 import { Link } from "language/segment/LinkSegment";
 import { ITooltipSection } from "language/segment/TooltipSegment";
-import { TranslationGenerator } from "newui/component/IComponent";
-import { Random } from "utilities/Random";
+import { TranslationGenerator } from "ui/component/IComponent";
+import { Random } from "utilities/random/Random";
 import Interpolator, { ISegment, IStringSection } from "utilities/string/Interpolator";
 export declare type TranslationProvider = (dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean) => string[] | undefined;
 export declare enum TextContext {

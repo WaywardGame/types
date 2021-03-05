@@ -10,8 +10,8 @@
  */
 import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
-import { TranslationGenerator } from "newui/component/IComponent";
-import Text from "newui/component/Text";
+import { TranslationGenerator } from "ui/component/IComponent";
+import Text from "ui/component/Text";
 import { IVector3 } from "utilities/math/IVector";
 export default abstract class Inspection<O> extends InfoProvider {
     readonly type: InspectType;

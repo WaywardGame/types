@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Creature from "entity/creature/Creature";
+import Creature from "game/entity/creature/Creature";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import Translation from "language/Translation";
 export default class AberrantInfoProvider extends InfoProvider {
@@ -18,7 +18,7 @@ export default class AberrantInfoProvider extends InfoProvider {
     getClass(): string[];
     getColor(): string;
     initComponent(): {
-        component: import("../../../../newui/component/Component").default<HTMLElement>;
+        component: import("../../../../ui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
     hasContent(): boolean;

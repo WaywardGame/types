@@ -9,15 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { IHookHost } from "mod/IHookHost";
-import { Hook, ICachedHook, IEmitterHostRegistrationChain } from "mod/IHookManager";
+import { Hook, ICachedHook } from "mod/IHookManager";
 import ModManager from "mod/ModManager";
-import Emitter from "utilities/Emitter";
 export default class HookManager {
     private readonly hookHosts;
     private readonly modManager;
     private cachedHooks;
     constructor(modManager: ModManager);
-    register<H extends IHookHost>(host: H, name?: string): H extends Emitter ? IEmitterHostRegistrationChain : void;
+    register<H extends IHookHost>(host: H, name?: string): void;
     /**
      * Deregisters the given `IHookHost` if it is registered.
      */

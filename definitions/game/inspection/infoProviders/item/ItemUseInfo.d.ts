@@ -10,15 +10,15 @@
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import Item from "item/Item";
+import Item from "game/item/Item";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
-import { TranslationGenerator } from "newui/component/IComponent";
+import { TranslationGenerator } from "ui/component/IComponent";
 export declare abstract class ItemUseInfo extends InfoProvider {
     protected readonly item: Item;
     constructor(item: Item);
     initComponent(): {
-        component: import("../../../../newui/component/Component").default<HTMLElement>;
+        component: import("../../../../ui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
     get(context: InfoProviderContext): (Translation | import("language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | Iterable<import("../../../../utilities/string/Interpolator").IStringSection> | import("language/Translation").ISerializedTranslation | UiTranslation | undefined) | InfoProvider)[];

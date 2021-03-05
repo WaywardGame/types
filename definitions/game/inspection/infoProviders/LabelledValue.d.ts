@@ -10,9 +10,9 @@
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
 import Translation from "language/Translation";
-import Component from "newui/component/Component";
-import { TranslationGenerator } from "newui/component/IComponent";
-import Text from "newui/component/Text";
+import Component from "ui/component/Component";
+import { TranslationGenerator } from "ui/component/IComponent";
+import Text from "ui/component/Text";
 export default class LabelledValue extends InfoProvider {
     private readonly label;
     private readonly values;

@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import DoodadInfo from "doodad/DoodadInfo";
-import { DoodadType, IDoodadDescription } from "doodad/IDoodad";
 import EventEmitter from "event/EventEmitter";
+import DoodadInfo from "game/doodad/DoodadInfo";
+import { DoodadType, IDoodadDescription } from "game/doodad/IDoodad";
 import { IWorldLayer, TerrainMask } from "renderer/IWorldLayer";
 import IWorldRenderer, { RenderLayerFlag } from "renderer/IWorldRenderer";
 import * as TileAdaptor from "renderer/TileAdaptors";

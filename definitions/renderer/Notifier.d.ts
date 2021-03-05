@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { CreatureType } from "entity/creature/ICreature";
-import { StatusEffectChangeReason } from "entity/IEntity";
-import StatusEffect from "entity/status/StatusEffect";
-import { ItemType } from "item/IItem";
+import { CreatureType } from "game/entity/creature/ICreature";
+import { StatusEffectChangeReason } from "game/entity/IEntity";
+import StatusEffect from "game/entity/status/StatusEffect";
+import { ItemType } from "game/item/IItem";
 import INotifier, { CreatureNotifierType, INotifierLocation, ItemNotifierType, NotifierIconType, StatNotificationType } from "renderer/INotifier";
 import Vector2 from "utilities/math/Vector2";
 export default class Notifier implements INotifier {

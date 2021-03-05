@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ConnectionState } from "multiplayer/networking/IConnection";
-import { IRandomHistory } from "utilities/Random";
+import { IRandomHistory } from "utilities/random/Random";
 export declare const reservedBytes = 5;
 export declare enum PacketType {
     Client = 0,

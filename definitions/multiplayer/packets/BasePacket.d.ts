@@ -8,19 +8,19 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Doodad from "doodad/Doodad";
-import Corpse from "entity/creature/corpse/Corpse";
-import Creature from "entity/creature/Creature";
-import Entity from "entity/Entity";
-import Human from "entity/Human";
-import NPC from "entity/npc/NPC";
-import { IMovementIntent } from "entity/player/IPlayer";
-import Player from "entity/player/Player";
-import { IContainer } from "item/IItem";
-import Item from "item/Item";
+import Doodad from "game/doodad/Doodad";
+import Corpse from "game/entity/creature/corpse/Corpse";
+import Creature from "game/entity/creature/Creature";
+import Entity from "game/entity/Entity";
+import Human from "game/entity/Human";
+import NPC from "game/entity/npc/NPC";
+import { IMovementIntent } from "game/entity/player/IPlayer";
+import Player from "game/entity/player/Player";
+import { IContainer } from "game/item/IItem";
+import Item from "game/item/Item";
+import TileEvent from "game/tile/TileEvent";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { PacketType } from "multiplayer/packets/IPacket";
-import TileEvent from "tile/TileEvent";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export default abstract class BasePacket {
     protected static registrarId: number;

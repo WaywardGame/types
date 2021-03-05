@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { CreatureType, TileGroup } from "entity/creature/ICreature";
-import { AttackType, StatusType } from "entity/IEntity";
-import { SkillType } from "entity/IHuman";
-import { Stat } from "entity/IStats";
-import { BiomeType } from "game/IBiome";
+import { BiomeType } from "game/biome/IBiome";
+import { CreatureType, TileGroup } from "game/entity/creature/ICreature";
+import { AttackType, StatusType } from "game/entity/IEntity";
+import { SkillType } from "game/entity/IHuman";
+import { Stat } from "game/entity/IStats";
 import { Milestone } from "game/milestones/IMilestone";
-import { ThreeStateButtonState } from "newui/component/IThreeStateButton";
-import DefaultMap from "utilities/map/DefaultMap";
+import { ThreeStateButtonState } from "ui/component/IThreeStateButton";
+import DefaultMap from "utilities/collection/map/DefaultMap";
 import RandomItem from "utilities/random/generators/RandomItem";
 import RandomRange from "utilities/random/generators/RandomRange";
 import { RecursivePartial } from "utilities/types/Recursive";

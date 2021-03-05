@@ -8,16 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Creature from "entity/creature/Creature";
-import NPC from "entity/npc/NPC";
-import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
+import Creature from "game/entity/creature/Creature";
+import NPC from "game/entity/npc/NPC";
+import Player from "game/entity/player/Player";
+import { ITile } from "game/tile/ITerrain";
 import IWorldRenderer, { RenderFlag, SpriteBatchLayer } from "renderer/IWorldRenderer";
 import { ITileAdaptor } from "renderer/TileAdaptors";
 import Fence from "renderer/tileAdaptors/Fence";
 import Wall from "renderer/tileAdaptors/Wall";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
-import { ITile } from "tile/ITerrain";
 import Vector2 from "utilities/math/Vector2";
 export interface IWorldRendererEvents {
     /**

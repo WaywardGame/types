@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
-import MagicalPropertyManager from "game/MagicalPropertyManager";
+import MagicalPropertyManager from "game/magic/MagicalPropertyManager";
 import Translation from "language/Translation";
 export default class MagicalPropertiesInfoProvider extends InfoProvider {
     private readonly magic;
@@ -25,7 +25,7 @@ export default class MagicalPropertiesInfoProvider extends InfoProvider {
         height: number;
     };
     initComponent(): {
-        component: import("../../../newui/component/Component").default<HTMLElement>;
+        component: import("../../../ui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
     hasContent(): boolean;

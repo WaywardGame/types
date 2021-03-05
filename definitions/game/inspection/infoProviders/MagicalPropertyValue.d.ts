@@ -9,11 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
-import { IHasMagic, MagicalNormalPropertyTypes, MagicalPropertyTypeSubTypeMap, MagicalSubPropertyTypes } from "game/MagicalPropertyManager";
-import { MagicalPropertyType } from "game/MagicalPropertyType";
+import { IHasMagic, MagicalNormalPropertyTypes, MagicalPropertyTypeSubTypeMap, MagicalSubPropertyTypes } from "game/magic/MagicalPropertyManager";
+import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
-import { TranslationGenerator } from "newui/component/IComponent";
+import { TranslationGenerator } from "ui/component/IComponent";
 export default class MagicalPropertyValue extends InfoProvider {
     private readonly base;
     private _combined?;
@@ -48,7 +48,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     get(): (Translation | import("language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | import("language/Translation").ISerializedTranslation | UiTranslation | undefined) | InfoProvider)[];
     private getOutOf;
     initComponent(): {
-        component: import("../../../newui/component/Component").default<HTMLElement>;
+        component: import("../../../ui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
     private formatNumber;

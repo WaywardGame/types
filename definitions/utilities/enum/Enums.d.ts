@@ -51,7 +51,7 @@ declare module Enums {
      * @param random The random instance to use. **Defaults to seeded random.** Note that using this method in non-game locations may
      * cause seed desyncs!
      */
-    function getRandom<T>(enumObject: T, filter?: (value: T[keyof T], index: number) => boolean, random?: import("utilities/Random").Random<import("utilities/Random").SeededGenerator>): Exclude<T[keyof T], AnyFunction<any>>;
+    function getRandom<T>(enumObject: T, filter?: (value: T[keyof T], index: number) => boolean, random?: import("utilities/random/Random").Random<import("utilities/random/Random").SeededGenerator>): Exclude<T[keyof T], AnyFunction<any>>;
     /**
      * Get the names of the entries in an enum.
      */

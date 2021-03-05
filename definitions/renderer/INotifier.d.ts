@@ -9,10 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { SfxType } from "audio/IAudio";
-import { CreatureType } from "entity/creature/ICreature";
-import { StatusEffectChangeReason } from "entity/IEntity";
-import StatusEffect from "entity/status/StatusEffect";
-import { ItemType } from "item/IItem";
+import { CreatureType } from "game/entity/creature/ICreature";
+import { StatusEffectChangeReason } from "game/entity/IEntity";
+import StatusEffect from "game/entity/status/StatusEffect";
+import { ItemType } from "game/item/IItem";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 export interface INotifier {

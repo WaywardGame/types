@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { SkillType } from "entity/IHuman";
+import { SkillType } from "game/entity/IHuman";
+import { ItemType } from "game/item/IItem";
 import { GameMode, IGameOptions, IGameOptionsSkill } from "game/options/IGameOptions";
-import { ItemType } from "item/IItem";
 import { IVersionInfo } from "utilities/Version";
 declare module GameOptions {
     function getDefault(difficulty?: GameMode, seed?: number): IGameOptions;

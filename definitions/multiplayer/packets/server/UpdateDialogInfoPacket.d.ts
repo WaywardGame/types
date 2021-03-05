@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServerPacket";
-import { IDialogInfo } from "ui/IUi";
+import { IDialogInfo } from "ui/old/IOldUi";
 export default class UpdateDialogInfoPacket extends PlayerTargetedServerPacket {
     index: string | number;
     info: IDialogInfo;

@@ -11,15 +11,15 @@
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
 import Translation from "language/Translation";
-import { TranslationGenerator } from "newui/component/IComponent";
-import Text from "newui/component/Text";
+import { TranslationGenerator } from "ui/component/IComponent";
+import Text from "ui/component/Text";
 import { IVector3 } from "utilities/math/IVector";
 export default class TileInspection extends Inspection<IVector3> {
     static getFromTile(position: IVector3): TileInspection;
     constructor(tile: IVector3);
     getId(): string;
     getBorder(): string | undefined;
-    getTile(): import("../../../tile/ITerrain").ITile;
+    getTile(): import("../../tile/ITerrain").ITile;
     get(context: InfoProviderContext): Translation;
     onUpdateTile(_: any, x: number, y: number, z: number): void;
     protected initChildTextComponent(text: TranslationGenerator): Text;
