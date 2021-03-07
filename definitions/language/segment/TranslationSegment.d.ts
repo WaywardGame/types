@@ -14,7 +14,7 @@ declare function TranslationSegment(random: Random): ISegment & {
     isTranslationSegment: true;
 };
 declare module TranslationSegment {
-    function resolveTranslation(random: Random, api: ISegmentApi, dictionaryName: string, entryName: string, index: string, subTranslationArgsString: string, args: any[]): IStringSection[] | undefined;
+    function resolveTranslation(random: Random, api: ISegmentApi, dictionaryName: string, entryName: string, index: string | undefined, subTranslationArgsString: string, args: any[]): IStringSection[] | undefined;
     function getSubTranslationArgs(api: ISegmentApi, str: string, ...args: any[]): IStringSection[][];
 }
 export default TranslationSegment;

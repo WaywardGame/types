@@ -73,6 +73,9 @@ export default Interpolator;
  * - `"{3.test.4.wow}" => args[3]["test"][4]["wow"]`
  */
 export declare const argumentSegment: ISegment;
+export declare type InterpolationConditionalSegmentOperator = InterpolationConditionalSegmentOperatorEquivalence | InterpolationConditionalSegmentOperatorNumeric;
+export declare type InterpolationConditionalSegmentOperatorEquivalence = "=" | "!=";
+export declare type InterpolationConditionalSegmentOperatorNumeric = "<" | ">" | "<=" | ">=";
 export declare const conditionalSegment: ISegment;
 export declare const escapedSegment: ISegment;
 export declare const basicInterpolator: Interpolator;

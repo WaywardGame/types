@@ -10,7 +10,7 @@
  */
 import UiTranslation from "language/dictionary/UiTranslation";
 import { IColorSection } from "language/segment/ColorSegment";
-import { IFontSizeSection } from "language/segment/HeadingSegment";
+import { IHeadingSection } from "language/segment/HeadingSegment";
 import { ILinkSection } from "language/segment/LinkSegment";
 import { IListItemSection } from "language/segment/ListSegment";
 import { ITooltipSection } from "language/segment/TooltipSegment";
@@ -50,7 +50,7 @@ export declare class BasicText extends Component {
     private _link;
     private linkHandler;
     constructor(elementType?: string);
-    setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IFontSizeSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection>): this;
+    setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection>): this;
     setLinkHandler(handler?: (link: string | [string, string | undefined]) => boolean): void;
     private onClick;
 }
