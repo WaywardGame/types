@@ -138,7 +138,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      */
     returns(disableNotify?: boolean, craft?: boolean): boolean;
     setUsed(itemUse?: IItemUsed, human?: Human): void;
-    spawnOnBreak(): Creature | undefined;
+    createOnBreak(x: number, y: number, z: number): void;
     spawnOnDecay(): Creature | undefined;
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: Player): Creature | undefined;
     getPoint(): import("../../utilities/math/Vector3").default | undefined;

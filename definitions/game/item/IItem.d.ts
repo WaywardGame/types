@@ -145,7 +145,14 @@ export interface IItemDescription extends IObjectDescription, IModdable, IInsula
     suffix?: string;
     prefix?: string;
     spawnOnDecay?: CreatureType;
-    spawnOnBreak?: CreatureType;
+    /**
+     * Creates creatures or tile events when it breaks.
+     */
+    createOnBreak?: ICreateOnBreak;
+    /**
+     * Creates this tile event when using this item in a craft. The tileEventByProduct boolean must be set to true on the recipe calling this item.
+     */
+    createTileEventOnCraft?: TileEventType;
     showOverHair?: boolean;
     hasSleepImage?: boolean;
     /**
@@ -253,6 +260,11 @@ export interface IRecipeComponent {
     consumedAmount: number;
     disassembleAmount: number;
     ignoreWeight: boolean;
+    tileEventByProduct: boolean;
+}
+export interface ICreateOnBreak {
+    creatureType?: CreatureType;
+    tileEventType?: TileEventType;
 }
 export declare type IDismantleComponent = Record<number, number>;
 export interface IRanged {
@@ -282,6 +294,7 @@ export interface IDismantleDescription {
     required?: ItemTypeGroup;
     skill?: SkillType;
     reputation?: number;
+    producesEvent?: TileEventType;
 }
 export interface IDismantleItemDescription {
     type: ItemType;

@@ -20,4 +20,7 @@ export interface IDecoratedSection extends IStringSection {
 export declare const italicizedSegment: ISegment;
 export declare const boldSegment: ISegment;
 export declare const underlineSegment: ISegment;
+export declare const newItalicizedSegment: ISegment;
+export declare const newBoldSegment: ISegment;
+export declare const newUnderlineSegment: ISegment;
 export declare function getDecorations(section: IStringSection): [TextDecoration, number][];

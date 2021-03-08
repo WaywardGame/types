@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ICausesStatusEffect } from "game/entity/IEntity";
+import { IDecayTemperatureRange } from "game/IGame";
 import { ILootItem } from "game/ILoot";
 import { IObjectDescription } from "game/IObject";
 import { ItemType } from "game/item/IItem";
@@ -59,6 +60,7 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
      * When more than three puddles of water exist on a tile, they create the this terrain type.
      */
     waterProduces?: TerrainType;
+    decayTemperatureRange?: IDecayTemperatureRange;
     create?(tileEvent: TileEvent): void;
     remove?(tileEvent: TileEvent): void;
     update?(tileEvent: TileEvent): void;

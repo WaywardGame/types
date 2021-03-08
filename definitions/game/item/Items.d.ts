@@ -12,4 +12,4 @@ import { IItemDescription, IItemGroupDescription, IRecipeComponent, ItemType, It
 export declare const itemDescriptions: Descriptions<ItemType, IItemDescription>;
 export default itemDescriptions;
 export declare const itemGroupDescriptions: Descriptions<ItemTypeGroup, IItemGroupDescription>;
-export declare function RecipeComponent(type: ItemType | ItemTypeGroup, requiredAmount: number, consumedAmount: number, disassembleAmount?: number, ignoreWeight?: boolean): IRecipeComponent;
+export declare function RecipeComponent(type: ItemType | ItemTypeGroup, requiredAmount: number, consumedAmount: number, disassembleAmount?: number, ignoreWeight?: boolean, tileEventByProduct?: boolean): IRecipeComponent;
