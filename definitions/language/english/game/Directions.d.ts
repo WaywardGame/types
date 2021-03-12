@@ -9,15 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Direction } from "utilities/math/Direction";
-export default class Sampler<T> {
-    readonly data: readonly T[][];
-    rotation: Direction;
-    readonly hasContent: boolean;
-    readonly width: number;
-    readonly height: number;
-    mirrored: boolean;
-    constructor(data: readonly T[][], rotation?: Direction);
-    setRotation(rotation: Direction.Cardinal): this;
-    setMirrored(mirrored: boolean): this;
-    sample(x: number, y: number): T | undefined;
-}
+declare const directions: Record<Direction, string>;
+export default directions;

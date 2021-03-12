@@ -12,5 +12,5 @@ import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
 import Player from "game/entity/player/Player";
 import { Direction } from "utilities/math/Direction";
-declare const _default: Action<[ActionArgument.Vector2, [ActionArgument.Direction, ActionArgument.Undefined]], Player, void, [import("../../../../utilities/math/IVector").IVector2, (Direction | undefined)?]>;
+declare const _default: Action<[ActionArgument.Vector2, [ActionArgument.Direction, ActionArgument.Undefined]], Player, void, [import("../../../../utilities/math/IVector").IVector2, (Direction.None | Direction.East | Direction.North | Direction.West | Direction.South | undefined)?]>;
 export default _default;

@@ -251,11 +251,11 @@ export declare const setupMiscItems: ItemType[];
 export declare const setupBookItems: ItemType[];
 export declare function getDirectionFromMovement(x: number, y: number): Direction.East | Direction.North | Direction.West | Direction.South;
 export interface IInputMovement extends IVector2 {
-    moveBind: Direction;
-    direction: Direction;
+    moveBind: Direction.Cardinal;
+    direction: Direction.Cardinal;
 }
 export declare const gameMovement: IInputMovement[];
-export declare type MovementIntent = Direction | "idle" | undefined;
+export declare type MovementIntent = Direction.Cardinal | Direction.None | "idle" | undefined;
 export declare const movementIntents: MovementIntent[];
 export interface IMovementIntent {
     /**

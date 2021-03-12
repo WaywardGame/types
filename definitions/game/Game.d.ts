@@ -271,7 +271,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getLightSourceAt(x: number, y: number, z: number): number;
     setupSave(): void;
     onGlobalSlotReady(): Promise<void>;
-    directionToMovement(direction: Direction): IVector2;
+    directionToMovement(direction: Direction.Cardinal | Direction.None): IVector2;
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
     updateOption(player: Player | undefined, id: keyof IOptions, value: boolean | number): void;
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
@@ -286,7 +286,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     restartDedicatedServer(): boolean;
     travelToIslandId(islandId: string, human: Human, options?: ITravelToIslandOptions): Promise<void>;
     travelToIslandPosition(position: IVector2, human: Human, options?: ITravelToIslandOptions): Promise<void>;
-    travelTowardsIsland(direction: Direction, human: Human, options?: ITravelToIslandOptions): Promise<void>;
+    travelTowardsIsland(direction: Direction.Cardinal | Direction.None, human: Human, options?: ITravelToIslandOptions): Promise<void>;
     protected onRestEnd(): void;
     private updateOptionInternal;
     /**
@@ -297,6 +297,11 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      * Collection of things to perform on each tick
      */
     tickAsync(ticks: number, realPlayers: Player[] | undefined, tickFlag: TickFlag | undefined, onProgress: (progess: number) => Promise<void>): Promise<void>;
+    /**
+     * Converts shallow single bodies of fresh water into seawater.
+     * @param point x/y/z of the tile to check against.
+     */
+    contaminateFreshWater(point: IVector3): void;
     private processTickFlags;
     private processTickFlagsAsync;
     private updateEntityFov;

@@ -132,6 +132,7 @@ export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> {
     render(theme: DrawnMapTheme): Promise<HTMLCanvasElement | undefined>;
     getObfuscator(): Obfuscation;
     getBackground(): MapBackground;
+    getRiddle(): import("../../language/Translation").default;
     private plot;
     private plotDifferences;
 }

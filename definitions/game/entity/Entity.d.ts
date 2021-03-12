@@ -52,7 +52,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     anim: number;
     stopNextMovement: boolean;
     direction: IVector2;
-    facingDirection: Direction;
+    facingDirection: Direction.Cardinal | Direction.None;
     stats: IStats;
     status: IStatus;
     properties: IProperties | undefined;

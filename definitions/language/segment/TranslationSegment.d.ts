@@ -16,7 +16,7 @@ declare function TranslationSegment(random: Random): ISegment & {
 };
 declare module TranslationSegment {
     const thisEntry: ISegment & {
-        translationChain: Array<[Dictionary, number | string, number]>;
+        translationChain: Array<[Dictionary, number | string, number, Random]>;
     };
     const conditional: ISegment;
     function resolveTranslation(random: Random, api: ISegmentApi, dictionaryName: string, entryName: string, index: string | undefined, subTranslationArgsString: string, args: any[]): IStringSection[] | undefined;

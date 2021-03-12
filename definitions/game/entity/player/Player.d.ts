@@ -70,7 +70,7 @@ export default class Player extends Human {
     movementProgress: number;
     movementFinishTime: number;
     nextMoveTime: number;
-    nextMoveDirection: Direction | undefined;
+    nextMoveDirection: Direction.Cardinal | Direction.None | undefined;
     displayCreature?: CreatureType;
     private readonly _movementIntent;
     private readonly milestonesCollection;
@@ -181,7 +181,7 @@ export default class Player extends Human {
     /**
      * Returns true if the player changed their facing direction.
      */
-    faceDirection(direction: Direction, turnDelay?: number): boolean;
+    faceDirection(direction: Direction.Cardinal | Direction.None, turnDelay?: number): boolean;
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(timeStamp: number): number;
     healthSyncCheck(reason: string): void;

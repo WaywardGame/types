@@ -95,7 +95,7 @@ export declare class SeededGenerator implements IRandomGenerator {
     private debug;
     private seed;
     private readonly pushedSeeds;
-    constructor();
+    constructor(seed?: number);
     tickSeed(s: number): number;
     getSeed(): number;
     setSeed(newSeed: number): void;

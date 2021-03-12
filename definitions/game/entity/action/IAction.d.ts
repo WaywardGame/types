@@ -294,7 +294,7 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.Container]: IContainer;
     [ActionArgument.Corpse]: Corpse;
     [ActionArgument.Creature]: Creature;
-    [ActionArgument.Direction]: Direction;
+    [ActionArgument.Direction]: Direction.Cardinal | Direction.None;
     [ActionArgument.Doodad]: Doodad;
     [ActionArgument.DoodadType]: DoodadType;
     [ActionArgument.Entity]: Entity;
