@@ -58,7 +58,7 @@ declare enum UiTranslation {
     GameDialogMoreInformationNoInformation = 43,
     GameDialogMapName = 44,
     GameDialogMapDurability = 45,
-    GameDialogMapTooltipDecode = 46,
+    GameDialogMapTooltipRiddle = 46,
     GameDialogMapTooltipRotateClockwise = 47,
     GameDialogMapTooltipRotateCounterClockwise = 48,
     GameDialogMapTooltipFlipHorizontal = 49,

@@ -11,10 +11,8 @@
 import { Dictionary } from "language/Dictionaries";
 import { Random } from "utilities/random/Random";
 import { ISegment, ISegmentApi, IStringSection } from "utilities/string/Interpolator";
-declare function TranslationSegment(random: Random): ISegment & {
-    isTranslationSegment: true;
-};
 declare module TranslationSegment {
+    const include: ISegment;
     const thisEntry: ISegment & {
         translationChain: Array<[Dictionary, number | string, number, Random]>;
     };

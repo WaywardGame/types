@@ -25,8 +25,10 @@ export default class Text extends Component {
     private segments;
     private text?;
     private args?;
+    private paragraphs?;
     constructor(elementType?: string);
     setSegments(...segments: ISegment[]): this;
+    setParagraphs(): this;
     setText(text: UiTranslation | Translation, ...args: any[]): this;
     setText(refresh: false, text: UiTranslation | Translation, ...args: any[]): this;
     setText(text?: TranslationGenerator): this;
@@ -39,6 +41,8 @@ export default class Text extends Component {
     hasText(): boolean;
     isEmpty(): boolean;
     refresh(): this;
+    private refreshParagraphs;
+    private refreshBasic;
 }
 export declare class Paragraph extends Text {
     constructor();

@@ -9,7 +9,9 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ReferenceType } from "game/reference/IReferenceManager";
+import { Random } from "utilities/random/Random";
 export interface ISegmentApi extends Readonly<IInterpolationOptions> {
+    random: Random;
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;
     with(options: IInterpolationOptions): ISegmentApi;
@@ -41,7 +43,11 @@ declare class Interpolator {
     get formatDates(): boolean | undefined;
     private readonly _segments;
     get segments(): ISegment[];
+    random: Random<{
+        get: () => number;
+    }>;
     constructor(...segments: ISegment[]);
+    setRandom(random: Random): this;
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;
     with(options: IInterpolationOptions): this;
@@ -61,7 +67,7 @@ declare module Interpolator {
      * Returns the index of the first occurrence of character in the provided string which is not inside a segment `{}`.
      * Returns `-1` if there is no occurrence.
      */
-    function getIndexOfTopLevel(character: string, segment: string): number;
+    function getIndexOfTopLevel(character: string, segment: string, start?: number): number;
 }
 export default Interpolator;
 /**

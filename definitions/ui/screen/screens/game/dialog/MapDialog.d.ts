@@ -13,10 +13,13 @@ import Player from "game/entity/player/Player";
 import Item from "game/item/Item";
 import DrawnMap, { ITreasure } from "game/mapping/DrawnMap";
 import Translation from "language/Translation";
+import Button from "ui/component/Button";
 import { IBindHandlerApi } from "ui/input/Bind";
 import Dialog from "ui/screen/screens/game/component/Dialog";
 export default class MapDialog extends Dialog {
     private readonly canvas;
+    private readonly riddleText;
+    private readonly riddle;
     private readonly buttonCopyMap;
     private mapCanvas?;
     private unobfuscatedCanvas?;
@@ -42,6 +45,7 @@ export default class MapDialog extends Dialog {
     private mapAlwaysOpaque?;
     private theme?;
     private useOnlyIntegerZoomLevels?;
+    buttonRiddle: Button;
     constructor();
     private onRequestMapCopy;
     private setTheme;
