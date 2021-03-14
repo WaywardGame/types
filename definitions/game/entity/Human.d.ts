@@ -102,6 +102,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     getConsumeBonus(item: Item | undefined, skillUse?: SkillType): number;
     checkForGatherFire(): Translation | undefined;
     calculateEquipmentStats(): void;
+    private recalculateInsulation;
     discoverRecipe(recipeType: ItemType, crafted?: ICrafted, discoveredClientSide?: boolean): void;
     getDamage(causesDamage: ICausesDamage, equipType?: EquipType): number;
     causeStatus(thing: Doodad | TileEvent, equipForProtection?: EquipType): void;

@@ -17,7 +17,7 @@ import { IRefreshable } from "ui/component/Refreshable";
 import Text from "ui/component/Text";
 export interface IInfoProviderEvents {
     /**
-     * Should be emitted when the info provider is initialized.
+     * Should be emitted when the info provider is starting to initialize its component.
      */
     init(): any;
     /**
