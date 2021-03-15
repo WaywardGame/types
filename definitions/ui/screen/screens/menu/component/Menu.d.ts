@@ -27,7 +27,7 @@ export default class Menu extends Component implements IMenu {
     readonly header: BlockRow;
     readonly staticContent: Component<HTMLElement>;
     readonly content: Component;
-    tabContainer: Component;
+    tabContainer?: Component;
     readonly tabs: Map<string | number, Tab<string | number | undefined>>;
     constructor(menuId: MenuId | string);
     setTitle(initializer: (title: Heading) => Heading): this;
@@ -36,6 +36,7 @@ export default class Menu extends Component implements IMenu {
     show(): this;
     scrollToTop(): void;
     scrollToTabSection(tabId: string | number): this;
+    clearTabs(): void;
     addTabs(...tabs: ArrayOfIterablesOr<Tab>): void;
     getTabs(): import("@wayward/goodstream/Stream").default<Tab<string | number | undefined>>;
     addSubtabs(tab: Tab): this;

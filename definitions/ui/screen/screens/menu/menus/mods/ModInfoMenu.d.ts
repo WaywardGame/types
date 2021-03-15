@@ -22,5 +22,4 @@ export default class ModInfoMenu extends Menu {
     constructor(parent: ModRow);
     protected preShow(): Promise<void>;
     protected onGoBackFrom(): Promise<void>;
-    private lightbox;
 }

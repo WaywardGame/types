@@ -16,14 +16,17 @@ export default class MainMenu extends Menu {
     private newGameButton;
     private playRow1;
     private playRow2;
+    private modsButton;
+    private newsButton;
     private aboutMenu;
-    private changelogMenu;
     private newsMenu;
+    private isNewVersion;
     constructor();
     protected onBeforeShow(): Promise<void>;
+    private updateNewsButton;
+    protected onModsSetup(): void;
     private create;
     private checkAndShowGameInterrupts;
     private getAboutMenu;
-    private getChangelogMenu;
     private getNewsMenu;
 }

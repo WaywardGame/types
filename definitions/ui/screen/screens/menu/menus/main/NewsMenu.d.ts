@@ -10,10 +10,20 @@
  */
 import Menu from "ui/screen/screens/menu/component/Menu";
 export default class NewsMenu extends Menu {
-    private readonly newsContainer;
+    private static newsTime;
+    private static news?;
+    static getNews(): Promise<NewsArticle[]>;
+    private static fetchNews;
+    private readonly unableToLoad;
     constructor();
     protected onBeforeShow(): Promise<void>;
     private refreshNews;
-    private getNews;
-    private parseArticle;
+    private initialiseArticle;
 }
+interface NewsArticle {
+    title: string;
+    body: string;
+    link: string;
+    date: Date;
+}
+export {};

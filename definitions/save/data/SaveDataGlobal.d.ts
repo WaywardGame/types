@@ -35,6 +35,7 @@ export default class SaveDataGlobal {
     multiplayerMessageOfTheDay: string;
     characters: ISavedCharacter[];
     ui: Record<string, any>;
+    lastReadNews: string | undefined;
     lastServerJoined: string | undefined;
     /**
      * Resets all options to default

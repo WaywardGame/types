@@ -9,13 +9,16 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Menu from "ui/screen/screens/menu/component/Menu";
+import { IVersionInfo } from "utilities/Version";
 export default class ChangelogMenu extends Menu {
     private static readonly modLinks;
     private readonly headingVersionName;
     private readonly labelChangeCount;
     private readonly changesContainer;
     private lastVersion;
+    private defaultVersion?;
     constructor();
+    setDefaultVersion(version: IVersionInfo): this;
     protected onBeforeShow(): Promise<void>;
     protected highlightVisibleTabs(): void;
     private refresh;

@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 declare module Files {
+    function getXML(path: string): Promise<Document>;
     function get(path: string): Promise<Response>;
     function getText(path: string): Promise<string>;
     function getJson<T>(path: string): Promise<T>;

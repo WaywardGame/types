@@ -13,20 +13,21 @@ import { IComponent } from "ui/component/IComponent";
 export declare enum MenuId {
     BACK = -1,
     NONE = 0,
-    CharacterSelection = 1,
-    GameEnd = 2,
-    Help = 3,
-    Highscores = 4,
-    Interrupt = 5,
-    JoinServer = 6,
-    JoinServerChooseModifiersMenu = 7,
-    LoadGame = 8,
-    Main = 9,
-    Mods = 10,
-    Multiplayer = 11,
-    NewGame = 12,
-    Options = 13,
-    Pause = 14
+    Changelog = 1,
+    CharacterSelection = 2,
+    GameEnd = 3,
+    Help = 4,
+    Highscores = 5,
+    Interrupt = 6,
+    JoinServer = 7,
+    JoinServerChooseModifiersMenu = 8,
+    LoadGame = 9,
+    Main = 10,
+    Mods = 11,
+    Multiplayer = 12,
+    NewGame = 13,
+    Options = 14,
+    Pause = 15
 }
 interface IMenuEvents extends Events<IComponent> {
     tab(): any;
