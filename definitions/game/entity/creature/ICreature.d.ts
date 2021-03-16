@@ -152,6 +152,10 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
     lightSource?: boolean;
     lightColor?: IRGB;
     noStumble?: boolean;
+    /**
+     * If true, this creature will not create puddles when walking in water.
+     */
+    noSplash?: boolean;
     particlesOnMove?: boolean;
     providesFire?: boolean;
     canTrample?: boolean;

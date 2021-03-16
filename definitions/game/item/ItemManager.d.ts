@@ -65,6 +65,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
     resolveContainer(container?: IContainer): Doodad | Item | Player | IContainer | NPC | ITile | undefined;
     getContainerReference(container: IContainer | undefined, parentObject?: any, showWarnings?: boolean): ContainerReference;
+    hashContainerReference(container: IContainer): string;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     addToContainerInternal(item: Item, container: IContainer, options?: IAddToContainerOptions): boolean;
     removeContainerItems(container: IContainer, removeContainedItems?: boolean): void;

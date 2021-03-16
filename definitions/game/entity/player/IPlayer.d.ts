@@ -174,6 +174,7 @@ export interface IPlayerEvents extends Events<Human> {
      * @param id The id of the note that was read.
      */
     readNote(id: number): void;
+    reregister(): any;
 }
 export declare enum TurnType {
     CheckUnderPlayer = 0,

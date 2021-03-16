@@ -302,6 +302,11 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      * @param point x/y/z of the tile to check against.
      */
     contaminateFreshWater(point: IVector3): void;
+    /**
+     * Create puddles around a point and limit them (so they can't expand infinitely).
+     * @param point x/y/z of the splash/puddle source.
+     */
+    createPuddles(point: IVector3): void;
     private processTickFlags;
     private processTickFlagsAsync;
     private updateEntityFov;

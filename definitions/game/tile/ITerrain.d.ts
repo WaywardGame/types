@@ -98,6 +98,10 @@ export interface ITerrainDescription extends IModdable {
      * Puddles will cool down tiles and create the following TerrainType on this tile.
      */
     cooledTile?: TerrainType;
+    /**
+     * The type of puddle it produces when splashed.
+     */
+    puddleType?: TileEventType;
 }
 export interface ITile extends Partial<ITileContainer> {
     corpses?: Corpse[];

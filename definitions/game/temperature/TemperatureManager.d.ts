@@ -22,7 +22,7 @@ export declare enum TempType {
     Cold = -1,
     Heat = 1
 }
-declare type ScheduledUpdate = [x: number, y: number, z: WorldZ, tile?: ITile | undefined, invalidate?: boolean];
+declare type ScheduledUpdate = [source: string, x: number, y: number, z: WorldZ, tile?: ITile | undefined, invalidate?: boolean];
 export interface ITempManagerEvents {
 }
 export default class TemperatureManager extends EventEmitter.Host<ITempManagerEvents> {
@@ -51,7 +51,11 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     /**
      * Returns the current overall temperature for the given tile.
      */
-    get(x: number, y: number, z: WorldZ, isClientSide: boolean): number;
+    get(x: number, y: number, z: WorldZ, isClientSide: true): number;
+    /**
+     * Returns the current overall temperature for the given tile.
+     */
+    get(x: number, y: number, z: WorldZ, isClientSide: boolean, source: GetterOfOr<string>): number;
     /**
      * Returns the base temperature.
      */
