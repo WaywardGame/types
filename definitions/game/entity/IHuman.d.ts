@@ -91,7 +91,7 @@ export declare enum EquipType {
     LeftHand = 10,
     RightHand = 11
 }
-export declare const equipSlotInsulationWeights: Record<EquipType, number>;
+export declare const equipSlotInsulationWeights: Record<EquipType, number | [number, "onlyWhenEquipped"]>;
 export declare const INSULATION_MODIFIER_SWIMMING = 0.5;
 export declare enum HairColor {
     "#e7c978" = 0,

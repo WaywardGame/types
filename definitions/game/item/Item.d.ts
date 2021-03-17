@@ -178,7 +178,8 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     canBeRefined(): boolean;
     getProducedTemperature(): number | undefined;
     postProcessDecay(): void;
-    getInsulation(): number | undefined;
+    getContainerInsulation(): number | undefined;
+    getEquipmentInsulation(): number | undefined;
     getBaseTemperature(): number | undefined;
     /**
      * Sets the item's decay value based on quality, game mode and added some randomization

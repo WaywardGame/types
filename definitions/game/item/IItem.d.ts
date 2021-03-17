@@ -21,7 +21,7 @@ import { IObjectDescription } from "game/IObject";
 import Item from "game/item/Item";
 import Recipe from "game/item/recipe/Recipe";
 import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
-import { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
+import { ITemperatureDescription } from "game/temperature/ITemperature";
 import { TerrainType } from "game/tile/ITerrain";
 import { TileEventType } from "game/tile/ITileEvent";
 import Message from "language/dictionary/Message";
@@ -75,7 +75,7 @@ export interface IContainer extends IContainable {
     itemOrders?: number[];
     containerType?: ContainerType;
 }
-export interface IItemDescription extends IObjectDescription, IModdable, IInsulationDescription, ITemperatureDescription {
+export interface IItemDescription extends IObjectDescription, IModdable, ITemperatureDescription {
     durability?: number;
     /**
      * An amount of durability that the item can start with lost. Defaults to 3
@@ -199,6 +199,22 @@ export interface IItemDescription extends IObjectDescription, IModdable, IInsula
      */
     meltsInto?: TileEventType[];
     recipeCache?: ItemType[];
+    /**
+     * A decimal number from `0` to `1`.
+     * - An insulation of `0` means that the temperature inside this object is equivalent to the temperature outside.
+     * - An insulation of `1` means that *no* temperature inside this object is emitted to the outside tiles — it is a completely
+     * separate temperature "biome".
+     * - Values in between change how much of the temperatures are produced/used on either side.
+     */
+    equippedInsulation?: number;
+    /**
+     * A decimal number from `0` to `1`.
+     * - An insulation of `0` means that the temperature inside this object is equivalent to the temperature outside.
+     * - An insulation of `1` means that *no* temperature inside this object is emitted to the outside tiles — it is a completely
+     * separate temperature "biome".
+     * - Values in between change how much of the temperatures are produced/used on either side.
+     */
+    containedItemsInsulation?: number;
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
 }
