@@ -8,12 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter, { Events, IEventEmitter } from "event/EventEmitter";
+import EventEmitter, { IEventEmitter } from "event/EventEmitter";
 import { Dictionary } from "language/Dictionaries";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import Component from "ui/component/Component";
-import { ContextMenuOption } from "ui/component/ContextMenu";
 import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "ui/util/ComponentManipulator";
 import { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
@@ -219,15 +218,6 @@ export interface IComponent extends EventEmitter.Host<IComponentEvents> {
      */
     repaint(): void;
 }
-interface IContextMenuEvents extends Events<IComponent> {
-    chosen(choice: ContextMenuOption): any;
-    becomeActive(): any;
-}
-export interface IContextMenu<OptionType extends number | string | symbol = number | string | symbol> extends IComponent {
-    event: IEventEmitter<this, IContextMenuEvents>;
-    setPosition(x: number, y: number, right?: boolean): this;
-    hideAndRemove(): Promise<void>;
-}
 export declare enum Namespace {
     SVG = "http://www.w3.org/2000/svg"
 }
@@ -309,4 +299,3 @@ export interface IBox {
     readonly bottom: number;
     readonly right: number;
 }
-export {};

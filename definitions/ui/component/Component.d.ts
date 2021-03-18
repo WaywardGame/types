@@ -9,10 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter, { Events } from "event/EventEmitter";
-import { AppendStrategy, IComponent, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "ui/component/IComponent";
+import ContextMenuExport from "ui/component/ContextMenu";
+import { AppendStrategy, IComponent, IHighlight, ITooltip, Namespace, SelectableLayer } from "ui/component/IComponent";
 import { IBindHandlerApi } from "ui/input/Bind";
 import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "ui/util/ComponentManipulator";
 import Rectangle from "utilities/math/Rectangle";
+declare const ContextMenu: typeof ContextMenuExport;
+declare type ContextMenu = ContextMenuExport;
 export default class Component<E extends HTMLElement = HTMLElement> extends EventEmitter.Host<Events<IComponent>> implements IComponent {
     private static readonly map;
     static get<C extends Component = Component>(selector: string, create?: false): C;
@@ -101,7 +104,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     /**
      * Set the context menu for this element
      */
-    setContextMenu(generator: () => IContextMenu | undefined): this;
+    setContextMenu(generator: (contextMenu: ContextMenu) => ContextMenu | undefined, priority?: number): this;
     setHighlight(highlight?: IHighlight): this;
     setStyle(property: string, value: string | number): this;
     getBox(regenIfZero?: boolean, forceRegen?: boolean): Rectangle;
@@ -128,3 +131,4 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     protected onLeave(reason: "mouse" | "focus"): void;
     private showTooltip;
 }
+export {};

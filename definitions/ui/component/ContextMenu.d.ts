@@ -11,24 +11,31 @@
 import { Events, IEventEmitter } from "event/EventEmitter";
 import Button from "ui/component/Button";
 import Component from "ui/component/Component";
-import { IContextMenu, TranslationGenerator } from "ui/component/IComponent";
+import { TranslationGenerator } from "ui/component/IComponent";
 export declare type IOptionDescription = {
     translation: TranslationGenerator;
     create?(option: Button): Button;
 } & ({
-    submenu(): IContextMenu;
+    submenu(): ContextMenu;
 } | {
     onActivate(): any;
 });
 export declare type ContextMenuOptionKeyValuePair<O extends number | string | symbol = number | string | symbol> = [O, IOptionDescription];
 export declare type ContextMenuOptionDescription<O extends number | string | symbol = number | string | symbol> = ContextMenuOptionKeyValuePair<O> | typeof ContextMenu.Divider;
 export declare type ContextMenuDescriptions<O extends number | string | symbol = number | string | symbol> = Array<ContextMenuOptionDescription<O>>;
-declare class ContextMenu<O extends number | string | symbol = number | string | symbol> extends Component implements IContextMenu<O> {
-    event: IEventEmitter<this, Events<IContextMenu>>;
+export interface IContextMenuEvents extends Events<Component> {
+    chosen(choice: ContextMenuOption): any;
+    becomeActive(): any;
+}
+declare class ContextMenu<O extends number | string | symbol = number | string | symbol> extends Component {
+    event: IEventEmitter<this, IContextMenuEvents>;
     private activeOption;
     private readonly descriptions;
     private readonly options;
     constructor(...descriptions: Array<ContextMenuOptionKeyValuePair<O> | typeof ContextMenu.Divider | undefined>);
+    describeOption<NO extends number | string | symbol>(id: NO, description: IOptionDescription): ContextMenu<O | NO>;
+    describeDivider(): this;
+    describeOptions<NO extends number | string | symbol>(...descriptions: Array<ContextMenuOptionKeyValuePair<NO> | typeof ContextMenu.Divider | undefined>): ContextMenu<O | NO>;
     addAllDescribedOptions(): this;
     addOptions(...options: ArrayOfIterablesOr<O | typeof ContextMenu.Divider>): this;
     disableOptions(...options: ArrayOfIterablesOr<O>): this;
@@ -56,5 +63,5 @@ export declare class ContextMenuOption extends Button {
     hideAndRemove(): Promise<void>;
     onSelected(): void;
     onUnselected(): void;
-    protected showSubmenu(generator: () => IContextMenu): void;
+    protected showSubmenu(generator: () => ContextMenu): void;
 }

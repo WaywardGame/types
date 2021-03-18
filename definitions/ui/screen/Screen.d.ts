@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Component from "ui/component/Component";
-import { IContextMenu } from "ui/component/IComponent";
+import ContextMenu from "ui/component/ContextMenu";
 import { IBindHandlerApi } from "ui/input/Bind";
 import { Background, ScreenId } from "ui/screen/IScreen";
 import Log from "utilities/Log";
@@ -30,16 +30,16 @@ export default abstract class Screen extends Component {
     /**
      * Set the context menu for this element
      */
-    setContextMenu(generator: () => IContextMenu): this;
+    setContextMenu(generator: (contextMenu: ContextMenu) => ContextMenu): this;
     /**
      * Remove any current context menu and set the visible context menu for this screen to the given context menu
      */
-    setContextMenu(contextMenu: IContextMenu): this;
-    setContextMenu(generatorOrContextMenu?: GetterOfOr<IContextMenu>): this;
+    setContextMenu(contextMenu: ContextMenu): this;
+    setContextMenu(generatorOrContextMenu?: ContextMenu | ((contextMenu: ContextMenu) => ContextMenu)): this;
     /**
      * Hides the currently visible context menu.
      */
-    hideContextMenu(contextMenu?: IContextMenu): boolean;
+    hideContextMenu(contextMenu?: ContextMenu): boolean;
     protected onInput(api: IBindHandlerApi): void;
     protected onScreenShow(): void;
     private onMouseDown;

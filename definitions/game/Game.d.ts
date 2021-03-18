@@ -307,6 +307,11 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      * @param point x/y/z of the splash/puddle source.
      */
     createPuddles(point: IVector3): void;
+    /**
+     * Contaminate water sources when new ones are created based on the surrounding water.
+     * @param point x/y/z of the water tile created.
+     */
+    contaminateWater(point: IVector3): void;
     private processTickFlags;
     private processTickFlagsAsync;
     private updateEntityFov;
