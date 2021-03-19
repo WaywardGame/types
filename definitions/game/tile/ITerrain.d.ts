@@ -74,9 +74,13 @@ export interface ITerrainDescription extends IModdable {
     group?: TerrainTypeGroup[];
     /**
      *
-     * Base version of the water. Type is used for mapping and when the tile becomes when contaminated
+     * Base version of the water used for tilemapping.
      */
     waterBaseType?: TerrainType;
+    /**
+     * The reversed or contaminated type that this water turns into.
+     */
+    contaminatedType?: TerrainType;
     /**
      * The temperature produced by this terrain. When not provided, uses `Temperature.Neutral`.
      */

@@ -17,7 +17,7 @@ import { DamageType, Defense } from "game/entity/IEntity";
 import { Delay, SkillType } from "game/entity/IHuman";
 import { TurnType } from "game/entity/player/IPlayer";
 import Player from "game/entity/player/Player";
-import { FireType, IGameEvents, IMapRequest, IPlayOptions, ITravelingToIslandInfo, ITravelToIslandOptions, IWaterFill, RenderSource, SaveType, TickFlag, TileUpdateType, TurnMode, UpdateRenderFlag } from "game/IGame";
+import { FireType, IGameEvents, IMapRequest, IPlayOptions, ITravelingToIslandInfo, ITravelToIslandOptions, IWaterFill, RenderSource, SaveType, TickFlag, TileUpdateType, TurnMode, UpdateRenderFlag, WaterType } from "game/IGame";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
@@ -119,7 +119,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     /**
      * Check the amount of water tiles there is connected to a supplied x/y area
      */
-    checkWaterFill(x: number, y: number, z: number, needed: number, waterFill?: IWaterFill): number;
+    checkWaterFill(x: number, y: number, z: number, needed: number, waterType: WaterType, waterFill?: IWaterFill): number;
     getDailyChallengeSeed(): number;
     consumeWaterTile(x: number, y: number, z: number): void;
     /**

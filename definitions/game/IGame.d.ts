@@ -188,6 +188,14 @@ export interface IWell {
     quantity: number;
     waterType: WaterType;
 }
+export interface IWaterContamination {
+    x: number;
+    y: number;
+    z: number;
+    type: WaterType;
+    expected?: number;
+    count?: number;
+}
 export declare enum WaterType {
     None = 0,
     FreshWater = 1,

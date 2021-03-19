@@ -13,7 +13,7 @@ import Doodad from "game/doodad/Doodad";
 import Corpse from "game/entity/creature/corpse/Corpse";
 import Creature from "game/entity/creature/Creature";
 import NPC from "game/entity/npc/NPC";
-import { CreationId, IGameOld, ISeeds, IWell } from "game/IGame";
+import { CreationId, IGameOld, ISeeds, IWaterContamination, IWell } from "game/IGame";
 import Item from "game/item/Item";
 import DrawnMap from "game/mapping/DrawnMap";
 import { IReferenceable } from "game/reference/IReferenceManager";
@@ -21,14 +21,14 @@ import TemperatureManager from "game/temperature/TemperatureManager";
 import { ITileContainer, ITileData } from "game/tile/ITerrain";
 import TileEvent from "game/tile/TileEvent";
 import TimeManager from "game/TimeManager";
-import { IVector2, IVector3 } from "utilities/math/IVector";
+import { IVector2 } from "utilities/math/IVector";
 /**
  * Represents the worlds island
  * Items, Creatures, Npcs, etc.. all exist on the island
  */
 export default class Island implements IReferenceable {
     biomeType: BiomeTypes;
-    contaminatedWater: IVector3[];
+    contaminatedWater: IWaterContamination[];
     corpses: SaferArray<Corpse>;
     creatures: SaferArray<Creature>;
     creatureSpawnTimer: number;
