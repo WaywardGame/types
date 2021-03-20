@@ -177,7 +177,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      */
     synchronizeFlowFields(plys: Player[]): void;
     enableFlowFieldDebug(): void;
-    resetGameState(saveType?: SaveType | false): Promise<void>;
+    resetGameState(saveType?: SaveType | false, isReconnecting?: boolean): Promise<void>;
     shouldRender(): number;
     makeLavaPassage(human: Human): TerrainType | undefined;
     makeCaveEntrance(human: Human, chance?: number): TerrainType | undefined;

@@ -22,11 +22,9 @@ export interface IInterpolationOptions {
     formatDates?: boolean;
 }
 export interface ISegment {
-    startChar?: string;
-    endChar?: string;
-    allowNoEndChar?: true;
-    trimPriorWhitespace?: true;
-    regex?: RegExp;
+    ends?: Array<[start: string, end?: string, endAtStringEnd?: true]>;
+    trimTrailingWhitespace?: true;
+    match?: RegExp;
     handle(match: RegExpMatchArray, segment: string, api: ISegmentApi, ...args: any[]): string | IStringSection | Iterable<IStringSection>;
 }
 export interface IStringSection {

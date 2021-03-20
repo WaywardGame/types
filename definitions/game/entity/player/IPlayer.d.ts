@@ -175,6 +175,7 @@ export interface IPlayerEvents extends Events<Human> {
      */
     readNote(id: number): void;
     reregister(): any;
+    deregister(): any;
 }
 export declare enum TurnType {
     CheckUnderPlayer = 0,

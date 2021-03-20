@@ -20,4 +20,8 @@ export default class Details extends Component<HTMLDetailsElement> {
     open(): this;
     close(): this;
     toggleOpen(open?: boolean): this;
+    /**
+     * Safe — removes all children except for the summary
+     */
+    dump(): this;
 }

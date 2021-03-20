@@ -17,6 +17,7 @@ import CreatureInspection from "game/inspection/inspections/CreatureInspection";
 import DoodadInspection from "game/inspection/inspections/DoodadInspection";
 import ItemInspection from "game/inspection/inspections/ItemInspection";
 import ItemsInspection from "game/inspection/inspections/ItemsInspection";
+import MilestoneInspection from "game/inspection/inspections/MilestoneInspection";
 import NPCInspection from "game/inspection/inspections/NPCInspection";
 import PlayerInspection from "game/inspection/inspections/PlayerInspection";
 import SelfInspection from "game/inspection/inspections/SelfInspection";
@@ -50,6 +51,7 @@ declare const _default: {
     12: typeof TileInspection;
     5: typeof TileEventInspection;
     11: typeof TileEventInspection.Minor;
+    14: typeof MilestoneInspection;
 } & Record<InspectType, InspectionClass>;
 export default _default;
 export declare module Inspections {

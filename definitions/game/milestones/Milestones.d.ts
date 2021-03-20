@@ -9,4 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { IMilestone, Milestone } from "game/milestones/IMilestone";
+import { Dictionary } from "language/Dictionaries";
 export declare const milestoneDescriptions: Descriptions<Milestone, IMilestone>;
+export declare const milestoneDictionaries: Partial<Record<Milestone, Dictionary>>;

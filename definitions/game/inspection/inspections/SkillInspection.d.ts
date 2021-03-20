@@ -11,6 +11,7 @@
 import { SkillType } from "game/entity/IHuman";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import SkillBonusMagicalItemsInfoProvider from "game/inspection/infoProviders/skill/MagicalItemBonuses";
+import UnlockableRowInfoProvider from "game/inspection/infoProviders/UnlockableRowInfoProvider";
 import Inspection from "game/inspection/Inspection";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -21,7 +22,7 @@ export default class SkillInspection extends Inspection<SkillType> {
     constructor([, skill]: [any, SkillType], context?: InfoProviderContext);
     getId(): string;
     getBorder(): string;
-    get(context: InfoProviderContext): (0 | Translation | import("game/inspection/InfoProvider").SimpleInfoProvider | SkillBonusMagicalItemsInfoProvider)[];
+    get(context: InfoProviderContext): (0 | Translation | import("game/inspection/InfoProvider").SimpleInfoProvider | UnlockableRowInfoProvider | SkillBonusMagicalItemsInfoProvider)[];
     private getCurrentValue;
     private getDescription;
     private getReputationImpact;

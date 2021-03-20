@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
-import { Milestone } from "game/milestones/IMilestone";
+import { Milestone, MilestoneVisibility } from "game/milestones/IMilestone";
 declare type IMilestoneUpdate = [Milestone, number?];
 export interface IMilestoneEvents {
     /**
@@ -43,6 +43,8 @@ declare class MilestonesManager extends EventEmitter.Host<IMilestoneEvents> {
     areUnlockable(mode?: import("../options/IGameOptions").GameMode): boolean;
     areUnlockableInMode(mode?: import("../options/IGameOptions").GameMode): boolean;
     reset(): void;
+    getDiscovered(milestone: Milestone): number[] | undefined;
+    getVisibility(milestone: Milestone): MilestoneVisibility;
     private updateMilestone;
 }
 declare const _default: MilestonesManager;

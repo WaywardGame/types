@@ -13,6 +13,7 @@ import { SkillType } from "game/entity/IHuman";
 import { Stat } from "game/entity/IStats";
 import { MessageType } from "game/entity/player/IMessageManager";
 import { Quality } from "game/IObject";
+import { Milestone } from "game/milestones/IMilestone";
 import { IReferenceable, ReferenceType } from "game/reference/IReferenceManager";
 import { Reference } from "game/reference/ReferenceManager";
 import { Dictionary } from "language/Dictionaries";
@@ -49,7 +50,7 @@ export declare enum ListEnder {
     Or = 2
 }
 declare type EntryMapper<T = any> = (v: T) => number;
-declare type SortFallback<T = any, A extends any[] = any[]> = (a: T, b: T, entryA: number, entryB: number, stringA: string, stringB: string, ...args: A) => number;
+declare type SortFallback<T = any, A extends any[] = any[]> = (a: T, b: T, entryA: T extends Translation ? undefined : number, entryB: T extends Translation ? undefined : number, stringA: string, stringB: string, ...args: A) => number;
 declare type Translator<T = any> = (v: T, entry: number, dictionary: Dictionary, index?: number) => Translation | string | undefined;
 export interface ITranslationSorter<T = number> {
     (a: T, b: T): number;
@@ -129,6 +130,7 @@ declare class Translation {
     static isSerializedTranslation(thing: unknown): thing is ISerializedTranslation;
     static deserialize(serializedTranslation: ISerializedTranslation): Translation;
     static resolve(dictionary: Dictionary, entry: string | number, index?: number): string;
+    static sorter(): ITranslationSorter<Translation>;
     static sorter<T = number>(dictionary: Dictionary, index?: number): ITranslationSorter<T>;
     private static getStringSections;
     readonly isValid: boolean;
@@ -224,6 +226,7 @@ declare module Translation {
     const message: (entry: string | Message) => Translation;
     const misc: (entry: string | MiscTranslation) => Translation;
     const skill: (entry: string | SkillType, color?: boolean) => Translation;
+    const milestone: (entry: string | Milestone, color?: boolean) => Translation;
     const stat: (entry: string | Stat, color?: boolean) => Translation;
     const quality: (entry: string | Quality, color?: boolean) => Translation;
     /**

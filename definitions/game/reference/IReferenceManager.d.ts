@@ -23,5 +23,6 @@ export declare enum ReferenceType {
     TileEvent = 5,
     Island = 6,
     Corpse = 7,
-    Skill = 8
+    Skill = 8,
+    Milestone = 9
 }
