@@ -99,6 +99,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     protected onItemContainerRemove(_: any, item: Item, container: IContainer): void;
     private invalidateContainerCache;
     protected onItemFireUpdate(item: Item): void;
+    protected onPlay(): void;
     protected onTickEnd(): void;
     private update;
     private calculateProduced;

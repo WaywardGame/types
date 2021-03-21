@@ -13,6 +13,7 @@ export default class NewsMenu extends Menu {
     private static newsTime;
     private static news?;
     static getNews(): Promise<NewsArticle[]>;
+    private static fetchSteamRSS;
     private static fetchNews;
     private readonly unableToLoad;
     constructor();

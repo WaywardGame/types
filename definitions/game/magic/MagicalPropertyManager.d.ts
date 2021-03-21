@@ -45,6 +45,9 @@ declare type MagicalSubPropertyEntry = {
     };
 }[MagicalSubPropertyTypes];
 export declare type MagicalPropertyEntry = MagicalNormalPropertyEntry | MagicalSubPropertyEntry;
+export declare module MagicalPropertyEntry {
+    function isSubType(entry: MagicalPropertyEntry): entry is MagicalSubPropertyEntry;
+}
 export declare type MagicalPropertyEntryIntersection = {
     type: MagicalPropertyType;
     subType?: MagicalSubPropertySubTypes;
@@ -181,6 +184,7 @@ export default class MagicalPropertyManager {
      * @returns a translation for a magical sub-property type
      */
     static translateTooltip<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): Translation;
+    hash(): string;
     private clearCachedArrays;
 }
 export {};

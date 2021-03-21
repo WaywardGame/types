@@ -11,6 +11,7 @@
 import { ReferenceType } from "game/reference/IReferenceManager";
 import { Random } from "utilities/random/Random";
 export interface ISegmentApi extends Readonly<IInterpolationOptions> {
+    matchedEnds: Ends;
     random: Random;
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;
@@ -21,8 +22,9 @@ export interface IInterpolationOptions {
     formatNumbers?: boolean;
     formatDates?: boolean;
 }
+export declare type Ends = [start: string, end?: string, endAtStringEnd?: true];
 export interface ISegment {
-    ends?: Array<[start: string, end?: string, endAtStringEnd?: true]>;
+    ends?: Ends[];
     trimTrailingWhitespace?: true;
     match?: RegExp;
     handle(match: RegExpMatchArray, segment: string, api: ISegmentApi, ...args: any[]): string | IStringSection | Iterable<IStringSection>;
@@ -44,6 +46,7 @@ declare class Interpolator {
     random: Random<{
         get: () => number;
     }>;
+    matchedEnds?: Ends;
     constructor(...segments: ISegment[]);
     setRandom(random: Random): this;
     interpolate(str: string, ...args: any[]): IStringSection[];
@@ -81,7 +84,6 @@ export declare type InterpolationConditionalSegmentOperator = InterpolationCondi
 export declare type InterpolationConditionalSegmentOperatorEquivalence = "=" | "!=";
 export declare type InterpolationConditionalSegmentOperatorNumeric = "<" | ">" | "<=" | ">=";
 export declare const conditionalSegment: ISegment;
-export declare const escapedSegment: ISegment;
 export declare const basicInterpolator: Interpolator;
 export declare function interpolateSectioned(str: string, ...args: any[]): IStringSection[];
 export declare function interpolate(str: string, ...args: any[]): string;
