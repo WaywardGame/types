@@ -19,10 +19,10 @@ import { CaseStyle } from "utilities/string/Strings";
 export interface ISerializedTranslationsProvider {
     dictionaries: Record<string, Record<string, string | string[]>>;
     pluralizationRules?: {
-        pluralRules?: Record<string, string>;
-        singularRules?: Record<string, string>;
+        pluralRules?: Record<string, string> | Array<[singular: string, plural: string]>;
+        singularRules?: Record<string, string> | Array<[plural: string, singular: string]>;
         uncountables?: string[];
-        irregularRules?: Array<[string, string]>;
+        irregularRules?: Array<[singular: string, plural: string]>;
         articleRules?: Array<[number | {
             min: number;
             max?: number;

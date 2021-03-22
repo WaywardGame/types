@@ -177,6 +177,11 @@ export interface ITemplate {
      * Skeletal remains will only spawn on flooring terrain types.
      */
     skeletalRemainsSpawnChance?: number;
+    /**
+     * Set to true to make sure this template overlaps any other template under it.
+     * Useful for glaciers in specific since we don't want them merging with rocks/mountain faces.
+     */
+    overlap?: boolean;
 }
 export interface ITemplateDoodad {
     type: DoodadType;

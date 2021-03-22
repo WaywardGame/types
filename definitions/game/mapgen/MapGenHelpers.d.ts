@@ -37,6 +37,10 @@ export interface ITemplateOptions {
      * The exact template to use.
      */
     which?: string;
+    /**
+     * If not provided, uses the overlap boolean in the template itself.
+     */
+    overlap?: boolean;
 }
 export declare function manipulateTemplates<T extends Array<string[] | undefined>>(options: ITemplateOptions, ...templates: T): T;
 export declare function spawnTemplate(templateType: TileTemplateType, x: number, y: number, z: number, options?: ITemplateOptions): void;

@@ -59,7 +59,15 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
     /**
      * When more than three puddles of water exist on a tile, they create the this terrain type.
      */
-    waterProduces?: TerrainType;
+    meltsInto?: TerrainType;
+    /**
+     * When more than three puddles of water exist on a tile, they create the this terrain type when it lower than "Cold" on the tile.
+     */
+    freezesInto?: TerrainType;
+    /**
+     * Can the tile event burn when fire is on the same tile as it?
+     */
+    canBurn?: boolean;
     decayTemperatureRange?: IDecayTemperatureRange;
     create?(tileEvent: TileEvent): void;
     remove?(tileEvent: TileEvent): void;

@@ -42,15 +42,23 @@ export default function generateSchema(): {
                 pluralRules: {
                     description: string;
                     type: string;
-                    additionalProperties: {
+                    minItems: number;
+                    items: {
                         type: string;
+                        items: {
+                            type: string;
+                        }[];
                     };
                 };
                 singularRules: {
                     description: string;
                     type: string;
-                    additionalProperties: {
+                    minItems: number;
+                    items: {
                         type: string;
+                        items: {
+                            type: string;
+                        }[];
                     };
                 };
                 uncountables: {

@@ -247,6 +247,11 @@ export interface IGameOptionsStat {
      */
     maxValue?: number;
     /**
+     * A float or number to multiply against the maxValue after being generated randomly or set via custom options.
+     * Used specifically for milestone modifiers currently.
+     */
+    maxValueMultiplier?: number;
+    /**
      * A multiplier for the speed at which the stat changes `1` is "default", `0` is "none", `2` is "two times speed"
      */
     changeTimerMultiplier: number;

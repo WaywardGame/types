@@ -63,7 +63,9 @@ export declare enum Stat {
 export declare type IStats = {
     [key in keyof typeof Stat]: IStat;
 };
+export declare const SYMBOL_STAT_TYPE: unique symbol;
 export interface IStatBase {
+    readonly [SYMBOL_STAT_TYPE]: Stat;
     readonly type: Stat;
     readonly value: number;
     readonly max: number | undefined;
