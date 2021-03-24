@@ -14,5 +14,7 @@ export default class Obfuscation {
     private readonly canvas;
     constructor(radius: number, seed?: number | undefined);
     obfuscate(mapImage: CanvasImageSource, obfuscation: number, theme: DrawnMapTheme): Promise<HTMLCanvasElement>;
+    private readonly sprites;
+    private getSprite;
     private render;
 }

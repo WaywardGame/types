@@ -14,5 +14,6 @@ export default class MapBackground {
     private readonly canvas;
     constructor(radius: number, seed?: number | undefined);
     render(mapImage: CanvasImageSource, theme: DrawnMapTheme): Promise<HTMLCanvasElement>;
+    private lastTheme?;
     private renderBackground;
 }

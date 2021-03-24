@@ -17,6 +17,7 @@ import MapBackground from "game/mapping/Background";
 import { DrawnMapTheme } from "game/mapping/IMapRender";
 import { IMapTileData } from "game/mapping/IMapTile";
 import Obfuscation from "game/mapping/Obfuscation";
+import { IUnserializedCallback } from "save/ISerializer";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import { IRange } from "utilities/math/Range";
 import Sampler from "utilities/math/Sampler";
@@ -85,7 +86,7 @@ export interface IDrawnMapEvents {
      */
     discoverTreasure(treasure: ITreasure, discoverer: Human): any;
 }
-export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> {
+export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> implements IUnserializedCallback {
     /**
      * Generates island treasure maps.
      *
@@ -120,6 +121,7 @@ export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> {
     private _isValid;
     get isValid(): boolean;
     private constructor();
+    onUnserialized(): void;
     getTreasure(): readonly ITreasure[];
     getUndiscoveredTreasure(): ITreasure[];
     isTreasureDiscovered(treasure: ITreasure): boolean;

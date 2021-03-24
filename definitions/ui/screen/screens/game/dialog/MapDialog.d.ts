@@ -8,10 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Human from "game/entity/Human";
 import Player from "game/entity/player/Player";
 import Item from "game/item/Item";
-import DrawnMap, { ITreasure } from "game/mapping/DrawnMap";
+import DrawnMap from "game/mapping/DrawnMap";
 import Translation from "language/Translation";
 import { IBindHandlerApi } from "ui/input/Bind";
 import Dialog from "ui/screen/screens/game/component/Dialog";
@@ -47,9 +46,9 @@ export default class MapDialog extends Dialog {
     constructor();
     private onRequestMapCopy;
     private setTheme;
+    private rerender;
     getName(): Translation;
     read(map: DrawnMap, item: Item, resetView?: boolean): Promise<void>;
-    onDigTreasure(map: DrawnMap, treasure: ITreasure, revealer: Human): void;
     protected onInventoryItemUpdate(_: any, item: Item): void;
     protected onMoveComplete(player: Player): void;
     protected onLoad(): Promise<void>;
@@ -57,7 +56,10 @@ export default class MapDialog extends Dialog {
     private updateCopyMapButton;
     private closeIfItemIsGone;
     private damageMap;
+    private obfuscationPromise?;
+    private scheduledObfuscationPromise?;
     private updateObfuscation;
+    private reobfuscate;
     private onResize;
     private renderMap;
     private updateView;
