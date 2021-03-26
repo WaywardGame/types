@@ -14,14 +14,11 @@ import Entity from "game/entity/Entity";
 import Island from "game/Island";
 import { IContainer } from "game/item/IItem";
 import Item from "game/item/Item";
+import { TempType } from "game/temperature/ITemperature";
 import { ITile, TerrainType } from "game/tile/ITerrain";
 import TileEvent from "game/tile/TileEvent";
 import { WorldZ } from "game/WorldZ";
 export declare const TEMPERATURE_INVALID = 255;
-export declare enum TempType {
-    Cold = -1,
-    Heat = 1
-}
 declare type ScheduledUpdate = [source: string, x: number, y: number, z: WorldZ, tile?: ITile | undefined, invalidate?: boolean];
 export interface ITempManagerEvents {
 }

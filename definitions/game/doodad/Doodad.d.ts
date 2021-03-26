@@ -21,7 +21,7 @@ import { IContainer, ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import MagicalPropertyManager, { IHasMagic } from "game/magic/MagicalPropertyManager";
 import { IReferenceable } from "game/reference/IReferenceManager";
-import { IHasInsulation, ITemperatureSource } from "game/temperature/ITemperature";
+import { IHasInsulation, ITemperatureSource, TempType } from "game/temperature/ITemperature";
 import { FireStage } from "game/tile/events/IFire";
 import { ITile } from "game/tile/ITerrain";
 import Translation, { ISerializedTranslation } from "language/Translation";
@@ -178,7 +178,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     switchWellStatus(): void;
     getProducedTemperature(): number | undefined;
-    getInsulation(): number | undefined;
+    getInsulation(type: TempType): number | undefined;
     /**
      * Refills solar stills when they are on shallow water automatically.
      */

@@ -41,7 +41,6 @@ export declare enum Hook {
      * @deprecated
      */
     OnQueueSoundEffect = "onQueueSoundEffect",
-    OnReadMap = "onReadMap",
     OnRenderOverlay = "onRenderOverlay",
     OnSailToCivilization = "onSailToCivilization",
     OnSpawnCreatureFromGroup = "onSpawnCreatureFromGroup",

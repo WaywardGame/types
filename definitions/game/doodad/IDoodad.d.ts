@@ -50,7 +50,7 @@ export interface IDoodadGroupDescription {
      */
     hidden?: boolean;
 }
-export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatusEffect, ICausesDamage, ITemperatureDescription, IInsulationDescription {
+export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatusEffect, ICausesDamage, ITemperatureDescription {
     actionTypes?: ActionType[];
     allowedTiles?: TerrainType[];
     blockJump?: boolean;
@@ -112,6 +112,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      * Array of tile events that are spawned when doodad (or things connected to the doodad) melts.
      */
     meltsInto?: TileEventType[];
+    insulation?: IInsulationDescription;
     getVariationX?(doodad: Doodad, existingVariationX: number): number | undefined;
     getVariationY?(doodad: Doodad, existingVariationY: number): number | undefined;
 }

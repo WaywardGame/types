@@ -21,7 +21,7 @@ import { IObjectDescription } from "game/IObject";
 import Item from "game/item/Item";
 import Recipe from "game/item/recipe/Recipe";
 import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
-import { ITemperatureDescription } from "game/temperature/ITemperature";
+import { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
 import { TerrainType } from "game/tile/ITerrain";
 import { TileEventType } from "game/tile/ITileEvent";
 import Message from "language/dictionary/Message";
@@ -206,7 +206,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * separate temperature "biome".
      * - Values in between change how much of the temperatures are produced/used on either side.
      */
-    equippedInsulation?: number;
+    equippedInsulation?: IInsulationDescription;
     /**
      * A decimal number from `0` to `1`.
      * - An insulation of `0` means that the temperature inside this object is equivalent to the temperature outside.
@@ -214,7 +214,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * separate temperature "biome".
      * - Values in between change how much of the temperatures are produced/used on either side.
      */
-    containedItemsInsulation?: number;
+    containedItemsInsulation?: IInsulationDescription;
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
 }

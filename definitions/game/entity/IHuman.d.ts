@@ -17,9 +17,11 @@ import { ISkillEvents } from "game/entity/skill/SkillManager";
 import { IHasImagePath, Quality } from "game/IObject";
 import { ItemType, RecipeLevel } from "game/item/IItem";
 import Item from "game/item/Item";
+import { TempType } from "game/temperature/ITemperature";
 import { ITile } from "game/tile/ITerrain";
 import { IModdable } from "mod/ModRegistry";
 import { IRGB } from "utilities/Color";
+import { IRange } from "utilities/math/Range";
 export interface IHumanEvents extends Events<Entity>, ISkillEvents {
     /**
      * Called before consuming an item
@@ -91,8 +93,9 @@ export declare enum EquipType {
     LeftHand = 10,
     RightHand = 11
 }
-export declare const equipSlotInsulationWeights: Record<EquipType, number | [number, "onlyWhenEquipped"]>;
-export declare const INSULATION_MODIFIER_SWIMMING = 0.5;
+export declare type InsulationWeight = number | [number, "onlyWhenEquipped"];
+export declare const equipSlotInsulationWeights: Record<TempType, Record<EquipType, InsulationWeight>>;
+export declare const insulationRangeWhenSwimming: Record<TempType, IRange>;
 export declare enum HairColor {
     "#e7c978" = 0,
     "#b9793d" = 1,

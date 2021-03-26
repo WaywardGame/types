@@ -25,13 +25,14 @@ import ItemMapManager from "game/item/ItemMapManager";
 import MagicalPropertyManager, { IHasMagic } from "game/magic/MagicalPropertyManager";
 import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import { IReferenceable } from "game/reference/IReferenceManager";
-import { IHasInsulation, ITemperatureSource } from "game/temperature/ITemperature";
+import { IHasInsulation, ITemperatureSource, TempType } from "game/temperature/ITemperature";
 import { FireStage } from "game/tile/events/IFire";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 export interface IItemEvents {
     toggleProtected(isProtected: boolean): any;
     fireUpdate(stage?: FireStage): any;
+    damage(): any;
 }
 export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagic {
     book?: BookType;
@@ -178,8 +179,8 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     canBeRefined(): boolean;
     getProducedTemperature(): number | undefined;
     postProcessDecay(): void;
-    getContainerInsulation(): number | undefined;
-    getEquipmentInsulation(): number | undefined;
+    getContainerInsulation(type: TempType): number | undefined;
+    getEquipmentInsulation(type: TempType): number | undefined;
     getBaseTemperature(): number | undefined;
     /**
      * Sets the item's decay value based on quality, game mode and added some randomization

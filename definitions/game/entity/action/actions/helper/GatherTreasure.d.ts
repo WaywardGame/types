@@ -13,9 +13,10 @@ import NPC from "game/entity/npc/NPC";
 import Player from "game/entity/player/Player";
 import Item from "game/item/Item";
 import DrawnMap, { ITreasure } from "game/mapping/DrawnMap";
+import { IVector3 } from "utilities/math/IVector";
 export declare enum GatherTreasureResult {
     NoTreasure = 0,
     NotYet = 1,
     Gathered = 2
 }
-export default function (map: DrawnMap, treasure: ITreasure, action: IActionHandlerApi<Player | NPC>, tool?: Item): GatherTreasureResult;
+export default function (map: DrawnMap, treasure: ITreasure, actionPoint: IVector3, action: IActionHandlerApi<Player | NPC>, tool?: Item): GatherTreasureResult;

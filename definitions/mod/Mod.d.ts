@@ -20,7 +20,6 @@ import { EquipType, SkillType } from "game/entity/IHuman";
 import NPC from "game/entity/npc/NPC";
 import { IMessage } from "game/entity/player/IMessageManager";
 import Player from "game/entity/player/Player";
-import { IMapRequest } from "game/IGame";
 import { BookType, ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import ItemRecipeRequirementChecker from "game/item/ItemRecipeRequirementChecker";
@@ -87,7 +86,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onPlayerLeave(player: Player): void;
     onQueueSoundEffect(type: SfxType, x: number, y: number, z: number): SfxType | boolean | undefined;
     onGameScreenVisible(): void;
-    onReadMap(human: Human, mapRequest: IMapRequest): void;
     onRenderOverlay(spriteBatch: ISpriteBatch): void;
     onSailToCivilization(player: Player): void;
     onSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;

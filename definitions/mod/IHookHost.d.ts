@@ -20,7 +20,6 @@ import { EquipType, SkillType } from "game/entity/IHuman";
 import NPC from "game/entity/npc/NPC";
 import { IMessage } from "game/entity/player/IMessageManager";
 import Player from "game/entity/player/Player";
-import { IMapRequest } from "game/IGame";
 import { BookType, ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import ItemRecipeRequirementChecker from "game/item/ItemRecipeRequirementChecker";
@@ -249,12 +248,6 @@ export interface IHookHost {
      * Called when the game screen becomes visible. Messages sent before this point will not be displayed.
      */
     onGameScreenVisible?(): void;
-    /**
-     * Called when a map is read
-     * @param player The player that read the map
-     * @param mapRequest Information describing how to render the map.
-     */
-    onReadMap?(human: Human, mapRequest: IMapRequest): void;
     /**
      * Called when rendering the overlay
      * @param spriteBatch The overlay sprite batch

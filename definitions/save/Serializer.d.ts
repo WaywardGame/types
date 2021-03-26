@@ -34,14 +34,17 @@ export default class Serializer implements ISerializer {
     readString(): string;
     readArrayV2(object: any, key: any): void;
     readArrayV3(object: any, key: any): void;
+    readArrayV4(object: any, key: any): void;
     readArrayBuffer(): any;
     readMap(object: any, key: any): Map<any, any>;
     readSet(object: any, key: any): Set<any>;
     writeObject(object: any, objectKey: string, parentObject: any, chain?: string[]): void;
     writeString(value: string): void;
-    writeArrayV2(value: any[], chain?: string[]): void;
-    writeArrayV3(value: any[], chain?: string[]): void;
-    writeArrayBuffer(object: any): void;
+    writeArrayV4(value: any[], chain?: string[]): void;
+    writeArrayBuffer(typedArray: {
+        BYTES_PER_ELEMENT: number;
+        byteLength: number;
+    }): void;
     writeMap(value: Map<any, any>, chain?: string[]): void;
     writeSet(value: Set<any>, chain?: string[]): void;
     private determineSerializationProperties;

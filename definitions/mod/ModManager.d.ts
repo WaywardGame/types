@@ -75,7 +75,6 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
         onPlayerJoin: HookCallFactory<Hook.OnPlayerJoin, any>;
         onPlayerLeave: HookCallFactory<Hook.OnPlayerLeave, any>;
         onQueueSoundEffect: HookCallFactory<Hook.OnQueueSoundEffect, any>;
-        onReadMap: HookCallFactory<Hook.OnReadMap, any>;
         onRenderOverlay: HookCallFactory<Hook.OnRenderOverlay, any>;
         onSailToCivilization: HookCallFactory<Hook.OnSailToCivilization, any>;
         onSpawnCreatureFromGroup: HookCallFactory<Hook.OnSpawnCreatureFromGroup, any>;

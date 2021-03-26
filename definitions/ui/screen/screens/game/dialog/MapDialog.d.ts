@@ -8,13 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { Events, IEventEmitter } from "event/EventEmitter";
 import Player from "game/entity/player/Player";
 import Item from "game/item/Item";
 import DrawnMap from "game/mapping/DrawnMap";
 import Translation from "language/Translation";
 import { IBindHandlerApi } from "ui/input/Bind";
 import Dialog from "ui/screen/screens/game/component/Dialog";
+export interface IMapDialogEvents extends Events<Dialog> {
+    read(map: DrawnMap, item: Item): any;
+}
 export default class MapDialog extends Dialog {
+    readonly event: IEventEmitter<this, IMapDialogEvents>;
     private readonly canvas;
     private readonly riddleText;
     private readonly riddle;

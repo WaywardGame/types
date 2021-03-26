@@ -38,6 +38,7 @@ import { GameMode, TravelingEffectStrategy, UnlockedRecipesStrategy } from "game
 import { Challenge } from "game/options/modifiers/challenge/IChallenge";
 import { MilestoneModifierGroup } from "game/options/modifiers/milestone/MilestoneModifier";
 import Riddle from "game/riddle/Riddle";
+import { TempType } from "game/temperature/ITemperature";
 import { FireStage } from "game/tile/events/IFire";
 import { TerrainType } from "game/tile/ITerrain";
 import { TileEventType } from "game/tile/ITileEvent";
@@ -145,16 +146,17 @@ export declare enum Dictionary {
     Stat = 72,
     StatusEffect = 73,
     TeamMemberResponsibility = 74,
-    Terrain = 75,
-    TileEvent = 76,
-    TravelingEffectStrategy = 77,
-    Ui = 78,
-    UiQuadrant = 79,
-    UnableToJoinReason = 80,
-    UnlockedRecipesStrategy = 81,
-    Website = 82,
-    WeightStatus = 83,
-    WorldLayer = 84
+    TemperatureType = 75,
+    Terrain = 76,
+    TileEvent = 77,
+    TravelingEffectStrategy = 78,
+    Ui = 79,
+    UiQuadrant = 80,
+    UnableToJoinReason = 81,
+    UnlockedRecipesStrategy = 82,
+    Website = 83,
+    WeightStatus = 84,
+    WorldLayer = 85
 }
 export declare type Enum = Record<string, number> & Record<number, string>;
 export declare const SYMBOL_ANY_DICTIONARY: unique symbol;
@@ -234,16 +236,17 @@ declare const dictionaryMap: {
     72: typeof Stat;
     73: typeof StatusType;
     74: typeof Responsibility;
-    75: typeof TerrainType;
-    76: typeof TileEventType;
-    77: typeof TravelingEffectStrategy;
-    78: typeof UiTranslation;
-    79: typeof Quadrant;
-    80: typeof UnableToJoinReason;
-    81: typeof UnlockedRecipesStrategy;
-    82: typeof Website;
-    83: typeof WeightStatus;
-    84: typeof WorldZ;
+    75: typeof TempType;
+    76: typeof TerrainType;
+    77: typeof TileEventType;
+    78: typeof TravelingEffectStrategy;
+    79: typeof UiTranslation;
+    80: typeof Quadrant;
+    81: typeof UnableToJoinReason;
+    82: typeof UnlockedRecipesStrategy;
+    83: typeof Website;
+    84: typeof WeightStatus;
+    85: typeof WorldZ;
 };
 export { dictionaryMap as strictDictionaries };
 export declare type DictionaryEnum = (typeof dictionaryMap)[Dictionary];
@@ -334,6 +337,7 @@ declare const dictionaries: {
     82: Enum | typeof SYMBOL_ANY_DICTIONARY;
     83: Enum | typeof SYMBOL_ANY_DICTIONARY;
     84: Enum | typeof SYMBOL_ANY_DICTIONARY;
+    85: Enum | typeof SYMBOL_ANY_DICTIONARY;
 } & Record<number, Enum | typeof SYMBOL_ANY_DICTIONARY | undefined> & {
     getByEnum: typeof getByEnum;
 };

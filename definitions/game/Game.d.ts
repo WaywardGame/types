@@ -17,7 +17,7 @@ import { DamageType, Defense } from "game/entity/IEntity";
 import { Delay, SkillType } from "game/entity/IHuman";
 import { TurnType } from "game/entity/player/IPlayer";
 import Player from "game/entity/player/Player";
-import { FireType, IGameEvents, IMapRequest, IPlayOptions, ITravelingToIslandInfo, ITravelToIslandOptions, IWaterFill, RenderSource, SaveType, TickFlag, TileUpdateType, TurnMode, UpdateRenderFlag, WaterType } from "game/IGame";
+import { FireType, IGameEvents, IPlayOptions, ITravelingToIslandInfo, ITravelToIslandOptions, IWaterFill, RenderSource, SaveType, TickFlag, TileUpdateType, TurnMode, UpdateRenderFlag, WaterType } from "game/IGame";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
@@ -85,7 +85,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     readonly voting: VotingManager;
     readonly milestonesCollection: import("./options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<Milestone, import("./options/modifiers/milestone/MilestoneModifier").default>;
     challengeCollection?: ChallengeModifiersCollection;
-    cartographyTexture: WebGLTexture;
     debugRenderer: ITextureDebugRenderer;
     glContext: WebGL2RenderingContext | null;
     glVersion: number;
@@ -179,7 +178,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
     updateTablesAndWeightNextTick(): void;
-    makeMiniMap(mapRequest: IMapRequest): HTMLCanvasElement;
     getBlackness(): number;
     /**
      * Note: Don't inject here. This gets called ten million times. If you want to override this functionality,

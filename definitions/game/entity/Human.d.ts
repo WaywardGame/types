@@ -23,7 +23,7 @@ import { Quality } from "game/IObject";
 import { EquipEffect, EquipEffectByType, EquipEffects, IContainer, ItemType, ItemTypeGroup } from "game/item/IItem";
 import Item from "game/item/Item";
 import { IGameOptionsPlayer } from "game/options/IGameOptions";
-import { IHasInsulation } from "game/temperature/ITemperature";
+import { IHasInsulation, TempType } from "game/temperature/ITemperature";
 import TileEvent from "game/tile/TileEvent";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -103,6 +103,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     checkForGatherFire(): Translation | undefined;
     calculateEquipmentStats(): void;
     private recalculateInsulation;
+    private getEquipmentInsulation;
     discoverRecipe(recipeType: ItemType, crafted?: ICrafted, discoveredClientSide?: boolean): void;
     getDamage(causesDamage: ICausesDamage, equipType?: EquipType): number;
     causeStatus(thing: Doodad | TileEvent, equipForProtection?: EquipType): void;
@@ -114,7 +115,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     updateSwimming(): void;
     updatePaddling(): void;
     getProducedTemperature(): number | undefined;
-    getInsulation(): number;
+    getInsulation(type: TempType): number;
     protected resetStatTimers(): void;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
     protected getSkillGainMultiplier(skill: SkillType): number;

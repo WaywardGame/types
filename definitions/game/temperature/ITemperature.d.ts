@@ -54,6 +54,10 @@ export interface ITemperatureSource {
 export declare module ITemperatureSource {
     function is(value: unknown): value is ITemperatureSource;
 }
+export declare enum TempType {
+    Cold = -1,
+    Heat = 1
+}
 export interface IHasInsulation {
     /**
      * Gets the insulation of this object.
@@ -64,7 +68,7 @@ export interface IHasInsulation {
      * separate temperature "biome".
      * - Values in between change how much of the temperatures are produced/used on either side.
      */
-    getInsulation?(): number | undefined;
+    getInsulation?(type: TempType): number | undefined;
     getBaseTemperature?(): number | undefined;
 }
 export interface IInsulationDescription {
@@ -75,8 +79,17 @@ export interface IInsulationDescription {
      * separate temperature "biome".
      * - Values in between change how much of the temperatures are produced/used on either side.
      */
-    insulation?: number;
+    [TempType.Cold]?: number;
+    /**
+     * A decimal number from `0` to `1`.
+     * - An insulation of `0` means that the temperature inside this object is equivalent to the temperature outside.
+     * - An insulation of `1` means that *no* temperature inside this object is emitted to the outside tiles — it is a completely
+     * separate temperature "biome".
+     * - Values in between change how much of the temperatures are produced/used on either side.
+     */
+    [TempType.Heat]?: number;
 }
+export declare function getInsulationTypesOrderedByRelevance(): TempType[];
 export interface ITemperatureDescription {
     /**
      * The produced temperature of this object — objects whose temperature affects surrounding objects.

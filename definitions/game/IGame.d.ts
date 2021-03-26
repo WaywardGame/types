@@ -27,7 +27,6 @@ import { IReplayLogEntry } from "replay/IReplayLogEntry";
 import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import { IRange } from "utilities/math/Range";
-import Vector3 from "utilities/math/Vector3";
 import TimeManager from "./TimeManager";
 export interface IGameEvents {
     play(): any;
@@ -160,20 +159,6 @@ export interface IPlayerOptions {
     crafted?: Record<number, ICrafted>;
     milestoneModifiers?: Set<Milestone>;
 }
-export interface IMapRequest {
-    /**
-     * The item containing the map.
-     */
-    item: Item;
-    /**
-     * The tile position of the top-left corner of the map.
-     */
-    tilePosition: Vector3;
-    /**
-     * Whether you are decoding a map or reading a drawn map. Defaults to false.
-     */
-    decoding?: boolean;
-}
 export interface ITravelToIslandOptions {
     spawnPosition?: IVector2;
     newWorldBiomeTypeOverride?: BiomeType;
@@ -232,47 +217,46 @@ export declare enum RenderSource {
     ItemMovement = 17,
     ItemUnequip = 18,
     Loop = 19,
-    MapDecode = 20,
-    Mod = 21,
-    MovementCreature = 22,
-    MovementNPC = 23,
-    MovementPlayerPost = 24,
-    MovementPlayerPre = 25,
-    MovementPlayerZPost = 26,
-    MovementPlayerZPre = 27,
-    MovementTileEvent = 28,
-    MultiplayerDisconnect = 29,
-    Notifier = 30,
-    NotifierAddCreature = 31,
-    NotifierAddItem = 32,
-    NotifierAddNotifierIcon = 33,
-    NotifierAddStat = 34,
-    NotifierAddStatusType = 35,
-    OptionHeadgear = 36,
-    OptionVisionMode = 37,
-    OptionZoomLevel = 38,
-    Particles = 39,
-    ParticleSpawn = 40,
-    PlayerAdd = 41,
-    PlayerKill = 42,
-    PlayerProcessMovement = 43,
-    PlayerReady = 44,
-    PlayerRemove = 45,
-    PlayerRespawn = 46,
-    PlayerRest = 47,
-    PlayerRestStart = 48,
-    PlayerRestStop = 49,
-    PlayerWalkToTilePath = 50,
-    PlayerWalkToTilePathOverburdened = 51,
-    PlayerWalkToTilePathPreview = 52,
-    PlayerWalkToTilePathReset = 53,
-    RemoveBlood = 54,
-    Resize = 55,
-    SetupGl = 56,
-    StartGame = 57,
-    Steamworks = 58,
-    Thumbnail = 59,
-    WorldLayerRendererFlush = 60
+    Mod = 20,
+    MovementCreature = 21,
+    MovementNPC = 22,
+    MovementPlayerPost = 23,
+    MovementPlayerPre = 24,
+    MovementPlayerZPost = 25,
+    MovementPlayerZPre = 26,
+    MovementTileEvent = 27,
+    MultiplayerDisconnect = 28,
+    Notifier = 29,
+    NotifierAddCreature = 30,
+    NotifierAddItem = 31,
+    NotifierAddNotifierIcon = 32,
+    NotifierAddStat = 33,
+    NotifierAddStatusType = 34,
+    OptionHeadgear = 35,
+    OptionVisionMode = 36,
+    OptionZoomLevel = 37,
+    Particles = 38,
+    ParticleSpawn = 39,
+    PlayerAdd = 40,
+    PlayerKill = 41,
+    PlayerProcessMovement = 42,
+    PlayerReady = 43,
+    PlayerRemove = 44,
+    PlayerRespawn = 45,
+    PlayerRest = 46,
+    PlayerRestStart = 47,
+    PlayerRestStop = 48,
+    PlayerWalkToTilePath = 49,
+    PlayerWalkToTilePathOverburdened = 50,
+    PlayerWalkToTilePathPreview = 51,
+    PlayerWalkToTilePathReset = 52,
+    RemoveBlood = 53,
+    Resize = 54,
+    SetupGl = 55,
+    StartGame = 56,
+    Steamworks = 57,
+    Thumbnail = 58,
+    WorldLayerRendererFlush = 59
 }
 export declare enum FireType {
     None = 0,
