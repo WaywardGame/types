@@ -12,8 +12,8 @@ import { ISerializer, ISerializerOptions } from "save/ISerializer";
 export default class Serializer implements ISerializer {
     private readonly options;
     static readonly maxBytes = 100000000;
-    private static readonly buffer;
-    private static usingBuffer;
+    private static readonly array;
+    private static usingArray;
     private static readonly savedObjectCache;
     dataView: DataView;
     byteOffset: number;
