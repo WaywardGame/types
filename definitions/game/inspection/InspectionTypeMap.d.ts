@@ -50,7 +50,7 @@ declare const _default: {
     13: typeof SkillInspection;
     12: typeof TileInspection;
     5: typeof TileEventInspection;
-    11: typeof TileEventInspection.Minor;
+    11: typeof TileEventInspection.Minors;
     14: typeof MilestoneInspection;
 } & Record<InspectType, InspectionClass>;
 export default _default;

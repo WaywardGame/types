@@ -9,11 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import { CreatureType } from "game/entity/creature/ICreature";
 import NPC from "game/entity/npc/NPC";
 import Player from "game/entity/player/Player";
 import { ITile } from "game/tile/ITerrain";
 import { TileEventType } from "game/tile/ITileEvent";
 import TileEvent from "game/tile/TileEvent";
+import Translation, { TextContext } from "language/Translation";
 import { IVector3 } from "utilities/math/IVector";
 export interface ITileManagerEvents {
     /**
@@ -71,4 +73,7 @@ export default class TileEventManager extends EventEmitter.Host<ITileManagerEven
     clearPuddles(point: IVector3, executor: NPC | Player): boolean;
     moveExcrement(position: IVector3): void;
     containsDamagingTileEvents(events: TileEvent[] | undefined): boolean;
+    getName(typeOrEvent: CreatureType | TileEvent, article?: boolean, count?: number, showCount?: boolean): Translation;
+    getEventTranslations(events: TileEvent[], article?: boolean, context?: TextContext): import("@wayward/goodstream/Stream").default<Translation>;
+    getEventListTranslation(events: TileEvent[], article?: boolean, context?: TextContext): Translation;
 }

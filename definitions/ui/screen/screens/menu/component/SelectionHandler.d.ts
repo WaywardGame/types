@@ -16,7 +16,9 @@ export interface ISelectionHandlerEvents {
 }
 export default class SelectionHandler extends EventEmitter.Host<ISelectionHandlerEvents> {
     private readonly getMenu;
+    private changingSelection;
     constructor(getMenu: () => IMenu | undefined);
+    focus(component: Component): void;
     deselect(): void;
     select(component?: Component, focus?: boolean): void;
     getSelection(): Component<HTMLElement> | undefined;
