@@ -14,4 +14,5 @@ import { ITileAdaptation } from "renderer/TileAdaptors";
 import Default from "renderer/tileAdaptors/Default";
 export default class Water extends Default {
     adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation, debug?: boolean): void;
+    private diagonalMatcher;
 }
