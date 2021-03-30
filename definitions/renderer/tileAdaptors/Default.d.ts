@@ -13,5 +13,5 @@ import IWorldLayer from "renderer/IWorldLayer";
 import { ITileAdaptation, ITileAdaptor } from "renderer/TileAdaptors";
 export default class Default implements ITileAdaptor {
     adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
-    protected getTerrainBeneathTile(x: number, y: number): TerrainType;
+    protected getTerrainBeneathTile(x: number, y: number, ignoreWater?: boolean): TerrainType;
 }
