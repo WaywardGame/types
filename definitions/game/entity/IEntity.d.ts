@@ -123,11 +123,9 @@ export declare enum MoveType {
 export declare enum AttackType {
     Melee = 0,
     HandToHand = 1,
-    Shoot = 2,
-    Sling = 3,
-    Fire = 4,
-    ThrowItem = 5,
-    Generic = 6
+    Fire = 2,
+    ThrowItem = 3,
+    Generic = 4
 }
 export declare enum DamageType {
     Blunt = 1,

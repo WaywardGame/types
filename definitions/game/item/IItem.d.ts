@@ -286,6 +286,9 @@ export declare type IDismantleComponent = Record<number, number>;
 export interface IRanged {
     range: number;
     attack: number;
+    ammunitionType?: ItemTypeGroup;
+    requiredToFire?: ItemType;
+    skillType?: SkillType;
 }
 export interface IMagicalPropertyInfo {
     max: number;

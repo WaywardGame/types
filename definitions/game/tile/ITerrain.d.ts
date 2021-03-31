@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { SfxType } from "audio/IAudio";
+import { BiomeType } from "game/biome/IBiome";
 import Doodad from "game/doodad/Doodad";
 import { DoodadType, GrowingStage } from "game/doodad/IDoodad";
 import Corpse from "game/entity/creature/corpse/Corpse";
@@ -86,9 +87,9 @@ export interface ITerrainDescription extends IModdable {
      */
     temperature?: number;
     /**
-     * The water terrain type that is a step above, or a less deep version of itself.
+     * The water terrain type that is a step above, or a less deep version of itself (which has specific rules based on the biometype).
      */
-    aboveType?: TerrainType;
+    aboveType?: OptionalDescriptions<BiomeType, TerrainType>;
     decayTemperatureRange?: IDecayTemperatureRange;
     /**
      * Array of tile events that are spawned when terrain decays (or melts).

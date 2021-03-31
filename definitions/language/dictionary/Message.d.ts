@@ -451,7 +451,7 @@ declare enum Message {
     NightQuarter4 = 439,
     No = 440,
     NoAmmunitionForThatWeapon = 441,
-    NoBlackPowderToFireWeapon = 442,
+    NoRequiredItemToFireWeapon = 442,
     NoFireToStokeWith = 443,
     NoFishAtLocation = 444,
     NoGroundWater = 445,
