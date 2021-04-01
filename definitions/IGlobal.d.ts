@@ -80,6 +80,7 @@ declare global {
     let multiplayer: Multiplayer;
     let multiplayerNetworkingOptions: IMultiplayerNetworkingOptions;
     let npcManager: NPCManager;
+    let oldui: OldUi;
     let players: Player[];
     let renderer: WorldRenderer | undefined;
     let resourceLoader: ResourceLoader;
@@ -90,9 +91,8 @@ declare global {
     let steamworks: Steamworks;
     let tileAtlas: TileAtlas;
     let tileEventManager: TileEventManager;
-    let oldui: OldUi;
-    let world: World;
     let ui: Ui;
+    let world: World;
     const process: any;
     const gc: NullaryFunction<void> | undefined;
     const gameVersion: string;

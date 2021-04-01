@@ -17,6 +17,7 @@ import Entity from "game/entity/Entity";
 import Human from "game/entity/Human";
 import { DamageType, EntityType } from "game/entity/IEntity";
 import { EquipType, SkillType } from "game/entity/IHuman";
+import NPC from "game/entity/npc/NPC";
 import Player from "game/entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemType } from "game/item/IItem";
@@ -201,6 +202,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @returns A number (possibly 0 if no quality or action level).
      */
     getItemUseBonus(action: ActionType): number;
+    getRangedWeapon(player: Player | NPC): Item | boolean;
     onUnserialized(): void;
     private setupDurabilityHandlers;
     private checkIfItemsMatch;

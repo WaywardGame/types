@@ -215,6 +215,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * - Values in between change how much of the temperatures are produced/used on either side.
      */
     containedItemsInsulation?: IInsulationDescription;
+    /**
+     * Specifies with item group (weapon) this ammunition can be fired with.
+     */
+    firedWith?: ItemTypeGroup;
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
 }
@@ -229,11 +233,11 @@ export interface IOnUse {
     [ActionType.HealOther]?: number;
     [ActionType.PlaceDown]?: DoodadType;
     [ActionType.Plant]?: DoodadType;
+    [ActionType.Pour]?: TileEventType;
+    [ActionType.PourOnYourself]?: TileEventType;
     [ActionType.SetDown]?: TerrainType;
     [ActionType.SmotherFire]?: TerrainType;
     [ActionType.StokeFire]?: number;
-    [ActionType.Pour]?: TileEventType;
-    [ActionType.PourOnYourself]?: TileEventType;
 }
 export interface IItemReturn {
     type: ItemType;
@@ -1098,7 +1102,9 @@ export declare enum ItemTypeGroup {
     Upgrading = 881,
     Enhancement = 882,
     FireExtinguisher = 883,
-    All = 884,
-    Last = 885
+    WeaponThatFiresArrows = 884,
+    WeaponThatFiresBullets = 885,
+    All = 886,
+    Last = 887
 }
 export {};

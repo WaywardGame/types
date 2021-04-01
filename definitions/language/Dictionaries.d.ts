@@ -176,8 +176,8 @@ declare const dictionaryMap: {
     12: typeof CraftEfficacy;
     13: typeof CreatureType;
     14: typeof DamageType;
-    16: typeof InfoDisplayLevel;
     15: typeof Direction;
+    16: typeof InfoDisplayLevel;
     17: typeof DoodadType;
     18: typeof DoodadTypeGroup;
     19: typeof DrawnMapTheme;
