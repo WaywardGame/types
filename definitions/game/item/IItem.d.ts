@@ -1015,7 +1015,10 @@ export declare enum ItemType {
     AnimalTusk = 585,
     WhitePineCone = 586,
     WhitePineSeeds = 587,
-    WhitePineNeedles = 588
+    WhitePineNeedles = 588,
+    FurCoat = 589,
+    FurMittens = 590,
+    FurBoots = 591
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
