@@ -69,5 +69,7 @@ export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEve
     private loadOverlays;
     private loadOverlay;
     private loadOthers;
+    private loadBiomeOverrides;
+    private loadBiomeOverride;
     private warnIfTextureOutOfBounds;
 }

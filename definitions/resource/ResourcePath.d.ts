@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { BiomeType } from "game/biome/IBiome";
 import { IHasImagePath } from "game/IObject";
 import { IModdable } from "mod/ModRegistry";
 import { PathType } from "resource/IResourceLoader";
@@ -21,10 +22,13 @@ declare module ResourcePath {
      * Returns the path of a resource.
      * @param pathType The type of resource this is.
      * @param index The index of this resource (indexed by this number in resource's enum)
-     * @param customPath If this is retrieving the path to a modded item, and the path for that item doesn't appear in the
+     * @param options Object. customPath - If this is retrieving the path to a modded item, and the path for that item doesn't appear in the
      * description as `imagePath`, it may be passed here instead.
      */
-    function getPath(pathType: PathType, index: number, customPath?: string): string;
+    function getPath(pathType: PathType, index: number, options?: {
+        biomeType?: BiomeType;
+        customPath?: string;
+    }): string;
     /**
      * Returns the mod version of a given resource path.
      * @param path The current path of this resource.
