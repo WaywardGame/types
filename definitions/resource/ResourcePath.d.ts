@@ -12,6 +12,11 @@ import { BiomeType } from "game/biome/IBiome";
 import { IHasImagePath } from "game/IObject";
 import { IModdable } from "mod/ModRegistry";
 import { PathType } from "resource/IResourceLoader";
+interface IResourceOptionsMap {
+    [PathType.Terrain]: [biome?: BiomeType];
+    [PathType.TerrainTilled]: [biome?: BiomeType];
+}
+declare type ResourceOptionsMap = Record<Exclude<PathType, keyof IResourceOptionsMap>, []> & IResourceOptionsMap;
 export interface IResourceData {
     enumObject: any;
     descriptions?: OptionalDescriptions<number, IModdable & IHasImagePath> | ((key: number) => (IModdable & IHasImagePath) | undefined);
@@ -25,10 +30,7 @@ declare module ResourcePath {
      * @param options Object. customPath - If this is retrieving the path to a modded item, and the path for that item doesn't appear in the
      * description as `imagePath`, it may be passed here instead.
      */
-    function getPath(pathType: PathType, index: number, options?: {
-        biomeType?: BiomeType;
-        customPath?: string;
-    }): string;
+    function getPath<P extends PathType>(pathType: P, index: number, customPath?: string, ...args: ResourceOptionsMap[P]): string;
     /**
      * Returns the mod version of a given resource path.
      * @param path The current path of this resource.
@@ -55,10 +57,10 @@ declare module ResourcePath {
     /**
      * Returns the domain for the given `PathType`, or `undefined` if the `PathType` has no domain.
      */
-    function getPathDomain(pathType: PathType): "character" | "ui/icons" | "ui/icons/info" | "ui/map/{theme}" | "terrain" | undefined;
+    function getPathDomain<P extends PathType>(pathType: P, ...args: ResourceOptionsMap[P]): string | undefined;
     /**
      * Returns the name of the given `PathType`
      */
-    function getPathTypeName(pathType: PathType): string | undefined;
+    function getPathTypeName<P extends PathType>(pathType: PathType, ...args: ResourceOptionsMap[P]): string | undefined;
 }
 export default ResourcePath;
