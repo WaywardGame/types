@@ -70,7 +70,12 @@ export default class Creature extends Entity implements IUnserializedCallback, I
      * @returns Returns whether the creature can keep moving (in the case of creatures with >= 2 speed)
      */
     checkUnder(x?: number, y?: number): boolean;
-    canSwapWith(player: Player, source?: string): boolean;
+    /**
+     * Check if this creature can swap with the player in the event that the player is moving into them
+     * @param player Player object
+     * @param source Source string. Set to undefined if this is being called from the clientside
+     */
+    canSwapWith(player: Player, source: string | undefined): boolean;
     getOwner(): Player | undefined;
     damage(damageInfo: IDamageInfo): number | undefined;
     damage(damageInfo: IDamageInfo, creatureX?: number, creatureY?: number, creatureZ?: number): number | undefined;
