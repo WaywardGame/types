@@ -19,10 +19,13 @@ import Translation from "language/Translation";
 declare const _default: UseInfo<{
     equip: import("../../../../entity/IHuman").EquipType;
     objectType: import("../../../../IGame").CreationId.Item;
-    value: Item;
+    value?: Item | undefined;
+    type: import("../../../../item/IItem").ItemType;
     description: import("../../../../item/IItem").IItemDescription;
+    quality: import("../../../../IObject").Quality;
     action: ActionType.Equip;
     union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Equip>;
+    details: Set<symbol>;
 }, ActionType.Equip, {
     getAttack: () => MagicalPropertyValue | undefined;
 } & {

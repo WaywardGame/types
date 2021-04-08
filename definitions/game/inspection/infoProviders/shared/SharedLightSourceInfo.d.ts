@@ -16,16 +16,22 @@ import Item from "game/item/Item";
 declare const _default: UseInfo<{
     lightSource: number;
     objectType: CreationId.Item;
-    value: Item;
+    value?: Item | undefined;
+    type: import("game/item/IItem").ItemType;
     description: import("game/item/IItem").IItemDescription;
+    quality: import("../../../IObject").Quality;
     action: ActionType.StartFire | ActionType.Ignite | ActionType.Equip;
     union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>;
+    details: Set<symbol>;
 } | {
     lightSource: number;
     objectType: CreationId.Doodad;
-    value: Doodad;
+    value?: Doodad | undefined;
+    type: import("../../../doodad/IDoodad").DoodadType;
     description: import("../../../doodad/IDoodad").IDoodadDescription;
+    quality: import("../../../IObject").Quality;
     action: ActionType.StartFire | ActionType.Ignite | ActionType.Equip;
     union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Doodad, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>;
+    details: Set<symbol>;
 }, ActionType.StartFire | ActionType.Ignite | ActionType.Equip, {}, Doodad | Item>;
 export default _default;

@@ -39,8 +39,8 @@ export default class MagicalPropertyValue extends InfoProvider {
     private before;
     private after;
     constructor(base: GetterOfOr<number | IRange>);
-    setMagical(magicalThingy: IHasMagic, type: MagicalNormalPropertyTypes): this;
-    setMagical<T extends MagicalSubPropertyTypes>(magicalThingy: IHasMagic, type: T, subType?: MagicalPropertyTypeSubTypeMap[T]): this;
+    setMagical(magicalThingy: IHasMagic | undefined, type: MagicalNormalPropertyTypes): this;
+    setMagical<T extends MagicalSubPropertyTypes>(magicalThingy: IHasMagic | undefined, type: T, subType?: MagicalPropertyTypeSubTypeMap[T]): this;
     setMagicalByEntry(entry: MagicalPropertyEntry): this;
     setMagicalReduction(): this;
     setQuality(quality?: Quality, modifier?: number | IRange): this;

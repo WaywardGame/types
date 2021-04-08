@@ -14,9 +14,12 @@ import Item from "game/item/Item";
 declare const _default: UseInfo<{
     ranged: import("../../../../item/IItem").IRanged;
     objectType: import("../../../../IGame").CreationId.Item;
-    value: Item;
+    value?: Item | undefined;
+    type: import("../../../../item/IItem").ItemType;
     description: import("../../../../item/IItem").IItemDescription;
+    quality: import("../../../../IObject").Quality;
     action: ActionType.Cast | ActionType.Fire;
     union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Cast | ActionType.Fire>;
+    details: Set<symbol>;
 }, ActionType.Cast | ActionType.Fire, {}, Item>;
 export default _default;

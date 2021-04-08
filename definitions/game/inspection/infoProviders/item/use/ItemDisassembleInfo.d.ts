@@ -14,16 +14,15 @@ import Item from "game/item/Item";
 import Translation from "language/Translation";
 declare const _default: UseInfo<{
     requiredItems: (import("../../../../item/IItem").ItemType | import("../../../../item/IItem").ItemTypeGroup)[];
-    requiredDoodads: (import("../../../../doodad/IDoodad").DoodadType | import("../../../../doodad/IDoodad").DoodadTypeGroup)[];
-    requiresFire: boolean;
     objectType: import("../../../../IGame").CreationId.Item;
-    value: Item;
+    value?: Item | undefined;
+    type: import("../../../../item/IItem").ItemType;
     description: import("../../../../item/IItem").IItemDescription;
+    quality: import("../../../../IObject").Quality;
     action: ActionType.Disassemble;
     union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Disassemble>;
+    details: Set<symbol>;
 }, ActionType.Disassemble, {
     getRequiredItems: () => Translation[];
-} & {
-    getAdditionalRequirements: () => Translation[];
 }, Item>;
 export default _default;

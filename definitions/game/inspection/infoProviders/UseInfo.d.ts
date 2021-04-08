@@ -18,16 +18,20 @@ import Translation from "language/Translation";
 import { TranslationGenerator } from "ui/component/IComponent";
 export interface IDescribed {
     objectType: CreationId;
+    type: number;
     quality?: Quality;
     description(): any;
 }
 export declare type DescribedDescription<T extends IDescribed> = Exclude<ReturnType<T["description"]>, undefined>;
 export interface IUseInfoBase<T extends IDescribed, A extends ActionType> {
     objectType: T["objectType"];
-    value: T;
+    value?: T;
+    type: T["type"];
     description: DescribedDescription<T>;
+    quality: Quality;
     action: A;
     union: InfoUnion<T, A>;
+    details: Set<symbol>;
 }
 export interface IItemUseInfo<T extends IDescribed, A extends ActionType, M extends Record<string, AnyFunction>> extends IUseInfoBase<T, A> {
     context: InfoProviderContext;

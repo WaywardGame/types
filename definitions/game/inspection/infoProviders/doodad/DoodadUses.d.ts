@@ -9,10 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "game/doodad/Doodad";
-import { IDoodadDescription } from "game/doodad/IDoodad";
+import { DoodadType, IDoodadDescription } from "game/doodad/IDoodad";
 import { ActionType } from "game/entity/action/IAction";
+import { CreationId } from "game/IGame";
 import Uses from "game/inspection/infoProviders/Uses";
 export default class DoodadUses extends Uses<Doodad> {
+    protected getObjectType(): CreationId.Doodad;
+    protected getDescription(type: DoodadType): IDoodadDescription | undefined;
     protected getUses(description: IDoodadDescription): ActionType[];
     protected getUseInfoHandlers(): import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Doodad, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>, ActionType.StartFire | ActionType.Ignite | ActionType.Equip, {}, Doodad>[];
 }

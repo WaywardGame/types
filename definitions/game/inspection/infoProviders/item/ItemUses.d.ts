@@ -9,18 +9,24 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "game/entity/action/IAction";
+import { CreationId } from "game/IGame";
 import Uses from "game/inspection/infoProviders/Uses";
-import { IItemDescription } from "game/item/IItem";
+import { IItemDescription, ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 export default class ItemUses extends Uses<Item> {
+    protected getObjectType(): CreationId.Item;
+    protected getDescription(type: ItemType): IItemDescription;
     protected getUses(description: IItemDescription): ActionType[];
     protected getUseInfoHandlers(): (import("../UseInfo").default<{
         doodadDescription: import("../../../doodad/IDoodad").IDoodadDescription;
-        objectType: import("../../../IGame").CreationId.Item;
-        value: Item;
+        objectType: CreationId.Item;
+        value?: Item | undefined;
+        type: ItemType;
         description: IItemDescription;
+        quality: import("../../../IObject").Quality;
         action: ActionType.Build;
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Build>;
+        details: Set<symbol>;
     }, ActionType.Build, {
         getWeightCapacity: () => import("../LabelledValue").default | undefined;
     } & {
@@ -37,42 +43,48 @@ export default class ItemUses extends Uses<Item> {
         skillBonus: number;
         magicalBonus: number;
         stats: import("../../../entity/IStats").Stat[];
-        objectType: import("../../../IGame").CreationId.Item;
-        value: Item;
+        objectType: CreationId.Item;
+        value?: Item | undefined;
+        type: ItemType;
         description: IItemDescription;
+        quality: import("../../../IObject").Quality;
         action: ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther;
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther>;
+        details: Set<symbol>;
     }, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther, {
         generateUseConsumeTooltip: () => (tooltip: import("../../../../ui/component/IComponent").ITooltip, stat: import("../../../entity/IStats").Stat, base: number) => import("../../../../ui/component/IComponent").ITooltip;
     }, Item> | import("../UseInfo").default<{
-        requiredItems: (import("game/item/IItem").ItemType | import("game/item/IItem").ItemTypeGroup)[];
-        requiredDoodads: (import("../../../doodad/IDoodad").DoodadType | import("../../../doodad/IDoodad").DoodadTypeGroup)[];
-        requiresFire: boolean;
-        objectType: import("../../../IGame").CreationId.Item;
-        value: Item;
+        requiredItems: (ItemType | import("game/item/IItem").ItemTypeGroup)[];
+        objectType: CreationId.Item;
+        value?: Item | undefined;
+        type: ItemType;
         description: IItemDescription;
+        quality: import("../../../IObject").Quality;
         action: ActionType.Disassemble;
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Disassemble>;
+        details: Set<symbol>;
     }, ActionType.Disassemble, {
         getRequiredItems: () => import("../../../../language/Translation").default[];
-    } & {
-        getAdditionalRequirements: () => import("../../../../language/Translation").default[];
     }, Item> | import("../UseInfo").default<{
         dismantle: import("game/item/IItem").IDismantleDescription;
-        objectType: import("../../../IGame").CreationId.Item;
-        value: Item;
+        objectType: CreationId.Item;
+        value?: Item | undefined;
+        type: ItemType;
         description: IItemDescription;
+        quality: import("../../../IObject").Quality;
         action: ActionType.Dismantle;
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Dismantle>;
-    }, ActionType.Dismantle, {
-        getRequired: () => import("../../../../language/Translation").default | undefined;
-    }, Item> | import("../UseInfo").default<{
+        details: Set<symbol>;
+    }, ActionType.Dismantle, {}, Item> | import("../UseInfo").default<{
         equip: import("../../../entity/IHuman").EquipType;
-        objectType: import("../../../IGame").CreationId.Item;
-        value: Item;
+        objectType: CreationId.Item;
+        value?: Item | undefined;
+        type: ItemType;
         description: IItemDescription;
+        quality: import("../../../IObject").Quality;
         action: ActionType.Equip;
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Equip>;
+        details: Set<symbol>;
     }, ActionType.Equip, {
         getAttack: () => import("../MagicalPropertyValue").default | undefined;
     } & {
@@ -89,31 +101,43 @@ export default class ItemUses extends Uses<Item> {
         getMagic: () => import("../LabelledValue").default[];
     }, Item> | import("../UseInfo").default<{
         ranged: import("game/item/IItem").IRanged;
-        objectType: import("../../../IGame").CreationId.Item;
-        value: Item;
+        objectType: CreationId.Item;
+        value?: Item | undefined;
+        type: ItemType;
         description: IItemDescription;
+        quality: import("../../../IObject").Quality;
         action: ActionType.Cast | ActionType.Fire;
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Cast | ActionType.Fire>;
+        details: Set<symbol>;
     }, ActionType.Cast | ActionType.Fire, {}, Item> | import("../UseInfo").default<{
         attack: number;
-        objectType: import("../../../IGame").CreationId.Item;
-        value: Item;
+        objectType: CreationId.Item;
+        value?: Item | undefined;
+        type: ItemType;
         description: IItemDescription;
+        quality: import("../../../IObject").Quality;
         action: ActionType.Shoot;
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Shoot>;
+        details: Set<symbol>;
     }, ActionType.Shoot, {}, Item> | import("../UseInfo").default<{
         stoke: number;
-        objectType: import("../../../IGame").CreationId.Item;
-        value: Item;
+        objectType: CreationId.Item;
+        value?: Item | undefined;
+        type: ItemType;
         description: IItemDescription;
+        quality: import("../../../IObject").Quality;
         action: ActionType.StokeFire;
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.StokeFire>;
+        details: Set<symbol>;
     }, ActionType.StokeFire, {}, Item> | import("../UseInfo").default<{
         telescopy: number;
-        objectType: import("../../../IGame").CreationId.Item;
-        value: Item;
+        objectType: CreationId.Item;
+        value?: Item | undefined;
+        type: ItemType;
         description: IItemDescription;
+        quality: import("../../../IObject").Quality;
         action: ActionType.Equip;
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Equip>;
+        details: Set<symbol>;
     }, ActionType.Equip, {}, Item> | import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Item, ActionType.Throw>, ActionType.Throw, {}, Item> | import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Item, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>, ActionType.StartFire | ActionType.Ignite | ActionType.Equip, {}, Item>)[];
 }

@@ -24,5 +24,8 @@ export declare enum ReferenceType {
     Island = 6,
     Corpse = 7,
     Skill = 8,
-    Milestone = 9
+    Milestone = 9,
+    Recipe = 10,
+    ItemType = 11,
+    Dismantle = 12
 }

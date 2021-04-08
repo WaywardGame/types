@@ -9,17 +9,37 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "game/entity/action/IAction";
+import { IIcon, InfoProvider } from "game/inspection/InfoProvider";
 import UseInfo from "game/inspection/infoProviders/UseInfo";
+import { IDismantleDescription, ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import Translation from "language/Translation";
-declare const _default: UseInfo<{
-    dismantle: import("game/item/IItem").IDismantleDescription;
-    objectType: import("../../../../IGame").CreationId.Item;
-    value: Item;
-    description: import("game/item/IItem").IItemDescription;
-    action: ActionType.Dismantle;
-    union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Dismantle>;
-}, ActionType.Dismantle, {
-    getRequired: () => Translation | undefined;
-}, Item>;
-export default _default;
+declare module ItemDismantleInfo {
+    function getRequired(dismantle: IDismantleDescription, mode?: "action" | "standalone"): import("game/inspection/InfoProvider").SimpleInfoProvider | undefined;
+    function getProduced(dismantle: IDismantleDescription): ItemDismantleOutputInfoProvider[];
+    const SYMBOL_IS_DISMANTLE_INSPECTION: unique symbol;
+    const useInfo: UseInfo<{
+        dismantle: IDismantleDescription;
+        objectType: import("../../../../IGame").CreationId.Item;
+        value?: Item | undefined;
+        type: ItemType;
+        description: import("game/item/IItem").IItemDescription;
+        quality: import("../../../../IObject").Quality;
+        action: ActionType.Dismantle;
+        union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Dismantle>;
+        details: Set<symbol>;
+    }, ActionType.Dismantle, {}, Item>;
+}
+export default ItemDismantleInfo;
+declare class ItemDismantleOutputInfoProvider extends InfoProvider {
+    private readonly item;
+    private readonly count;
+    constructor(item: ItemType, count: number);
+    getClass(): string[];
+    getIcon(): IIcon;
+    get(): Translation;
+    initComponent(): {
+        component: import("../../../../../ui/component/Component").default<HTMLElement>;
+        fullInit(): void;
+    };
+}

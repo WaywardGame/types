@@ -16,10 +16,13 @@ import { TempType } from "game/temperature/ITemperature";
 declare const _default: UseInfo<{
     doodadDescription: import("../../../../doodad/IDoodad").IDoodadDescription;
     objectType: import("../../../../IGame").CreationId.Item;
-    value: Item;
+    value?: Item | undefined;
+    type: import("../../../../item/IItem").ItemType;
     description: import("../../../../item/IItem").IItemDescription;
+    quality: import("../../../../IObject").Quality;
     action: ActionType.Build;
     union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Build>;
+    details: Set<symbol>;
 }, ActionType.Build, {
     getWeightCapacity: () => LabelledValue | undefined;
 } & {

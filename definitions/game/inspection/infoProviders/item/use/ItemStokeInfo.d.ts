@@ -14,9 +14,12 @@ import Item from "game/item/Item";
 declare const _default: UseInfo<{
     stoke: number;
     objectType: import("../../../../IGame").CreationId.Item;
-    value: Item;
+    value?: Item | undefined;
+    type: import("../../../../item/IItem").ItemType;
     description: import("../../../../item/IItem").IItemDescription;
+    quality: import("../../../../IObject").Quality;
     action: ActionType.StokeFire;
     union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.StokeFire>;
+    details: Set<symbol>;
 }, ActionType.StokeFire, {}, Item>;
 export default _default;
