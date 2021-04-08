@@ -15,12 +15,14 @@ import Entity from "game/entity/Entity";
 import { AiType, EntityType, IStatChangeInfo, MoveType, StatusType } from "game/entity/IEntity";
 import { IStat } from "game/entity/IStats";
 import Player from "game/entity/player/Player";
+import { CreationId } from "game/IGame";
 import { IObject } from "game/IObject";
 import Item from "game/item/Item";
 import { ITile } from "game/tile/ITerrain";
 import Translation from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 export default class Creature extends Entity implements IUnserializedCallback, IObject<CreatureType> {
+    readonly objectType: CreationId.Creature;
     event: IEventEmitter<this, ICreatureEvents>;
     readonly entityType: EntityType.Creature;
     aberrant?: boolean;

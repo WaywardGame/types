@@ -15,7 +15,7 @@ import Creature from "game/entity/creature/Creature";
 import Human from "game/entity/Human";
 import { EquipType } from "game/entity/IHuman";
 import Player from "game/entity/player/Player";
-import { TileUpdateType } from "game/IGame";
+import { CreationId, TileUpdateType } from "game/IGame";
 import { IObject, Quality } from "game/IObject";
 import { IContainer, ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
@@ -66,6 +66,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     protected static registrarId: number;
+    readonly objectType = CreationId.Doodad;
     containedItems: Item[];
     decay?: number;
     meltDecay?: number;

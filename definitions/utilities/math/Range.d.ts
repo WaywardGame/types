@@ -25,4 +25,6 @@ export interface IRange {
 export declare module IRange {
     function lerp(t: number, range: IRange): number;
     function unlerp(lerped: number, range: IRange): number;
+    function add(...rangesOrNumbers: Array<IRange | number>): IRange;
+    function flatten(rangeOrNumber: IRange | number): number | IRange;
 }

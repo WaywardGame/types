@@ -14,6 +14,7 @@ import Human from "game/entity/Human";
 import { AiType, EntityType, MoveType, StatusType } from "game/entity/IEntity";
 import { EquipType, ICustomizations } from "game/entity/IHuman";
 import { NPCType } from "game/entity/npc/INPCs";
+import { CreationId } from "game/IGame";
 import { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import { ITile } from "game/tile/ITerrain";
@@ -32,6 +33,7 @@ export interface INPCEvents extends Events<Human> {
 }
 export default abstract class NPC extends Human {
     protected static registrarId: number;
+    readonly objectType = CreationId.NPC;
     readonly event: IEventEmitter<this, INPCEvents>;
     readonly entityType: EntityType.NPC;
     get constructorFunction(): typeof NPC;

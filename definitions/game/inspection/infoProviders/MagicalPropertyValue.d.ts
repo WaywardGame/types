@@ -8,39 +8,53 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { SkillType } from "game/entity/IHuman";
 import { InfoProvider } from "game/inspection/InfoProvider";
-import { IHasMagic, MagicalNormalPropertyTypes, MagicalPropertyTypeSubTypeMap, MagicalSubPropertyTypes } from "game/magic/MagicalPropertyManager";
-import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
+import { Quality } from "game/IObject";
+import { IHasMagic, MagicalNormalPropertyTypes, MagicalPropertyEntry, MagicalPropertyTypeSubTypeMap, MagicalSubPropertyTypes } from "game/magic/MagicalPropertyManager";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import { TranslationGenerator } from "ui/component/IComponent";
+import { IRange } from "utilities/math/Range";
+export declare type NumberTranslator = (number: number | IRange, isMod: boolean, isPercent: boolean) => Translation;
 export default class MagicalPropertyValue extends InfoProvider {
     private readonly base;
-    private _combined?;
-    private numberFormatter?;
+    private numberTranslator?;
     private formatter?;
     private isModifier?;
     private baseColor?;
+    private baseColorPreferred?;
     private currentColor?;
     private current?;
     private magical?;
-    private magicalPropertyType?;
+    private magicalProperty?;
+    private magicalReduction?;
+    private quality?;
+    private qualityModifier?;
+    private skill?;
+    private skillModifier?;
+    private baseHidden?;
+    private isPercentage?;
+    private percentageIsPremultiplied?;
     private before;
     private after;
-    constructor(base: GetterOfOr<number>);
-    setCombined(combined: (base: number, magical: number) => number): this;
-    setMagicalOn(magicalThingy: IHasMagic, type: MagicalNormalPropertyTypes): this;
-    setMagicalOn<T extends MagicalSubPropertyTypes>(magicalThingy: IHasMagic, type: T, subType?: MagicalPropertyTypeSubTypeMap[T]): this;
-    setMagical(type: MagicalPropertyType, magical: GetterOfOr<number | undefined>): this;
+    constructor(base: GetterOfOr<number | IRange>);
+    setMagical(magicalThingy: IHasMagic, type: MagicalNormalPropertyTypes): this;
+    setMagical<T extends MagicalSubPropertyTypes>(magicalThingy: IHasMagic, type: T, subType?: MagicalPropertyTypeSubTypeMap[T]): this;
+    setMagicalByEntry(entry: MagicalPropertyEntry): this;
+    setMagicalReduction(): this;
+    setQuality(quality?: Quality, modifier?: number | IRange): this;
+    setSkill(skill?: SkillType, modifier?: number | IRange): this;
     setIsModifier(): this;
+    setBaseHidden(): this;
     /**
-     * Alias of `setNumberFormatter(Translation.misc(MiscTranslation.Percent))`
+     * Not compatible with `setNumberTranslator`.
      */
-    setIsPercentage(): this;
+    setIsPercentage(isPercentage?: boolean, premultiplied?: boolean): this;
     setCurrent(amount: GetterOfOr<number>): this;
-    setBaseColor(translation: Translation): this;
+    setBaseColor(translation: Translation, preferred?: boolean): this;
     setCurrentColor(translation: Translation): this;
-    setNumberFormatter(formatter: Translation): this;
+    setNumberTranslator(translator: (number: number | IRange) => Translation): this;
     setFormatter(formatter: Translation): this;
     setBefore(...before: Array<TranslationGenerator | InfoProvider | undefined>): this;
     setAfter(...after: Array<TranslationGenerator | InfoProvider | undefined>): this;

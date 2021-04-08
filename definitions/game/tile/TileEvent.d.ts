@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import { CreationId } from "game/IGame";
 import { IObject } from "game/IObject";
 import { IReferenceable } from "game/reference/IReferenceManager";
 import { ITemperatureSource } from "game/temperature/ITemperature";
@@ -27,6 +28,7 @@ export interface ITileEventEvents {
 }
 export default class TileEvent extends EventEmitter.Host<ITileEventEvents> implements IReferenceable, IObject<TileEventType>, IVector3, ITemperatureSource {
     static is(value: any): value is TileEvent;
+    readonly objectType: CreationId;
     type: TileEventType;
     id: number;
     referenceId?: number;

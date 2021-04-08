@@ -10,10 +10,13 @@
  */
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
+import DoodadUses from "game/inspection/infoProviders/doodad/DoodadUses";
 import ItemDetailsInfoProvider from "game/inspection/infoProviders/item/ItemDetails";
 import ItemDurabilityInfoProvider from "game/inspection/infoProviders/item/ItemDurability";
 import ItemProtectedInfoProvider from "game/inspection/infoProviders/item/ItemProtected";
+import ItemUses from "game/inspection/infoProviders/item/ItemUses";
 import ItemWeightInfoProvider from "game/inspection/infoProviders/item/ItemWeight";
+import ItemWorthInfoProvider from "game/inspection/infoProviders/item/ItemWorth";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import MagicalPropertiesInfoProvider from "game/inspection/infoProviders/MagicalProperties";
 import QualityInfoProvider from "game/inspection/infoProviders/Quality";
@@ -31,10 +34,11 @@ export default class ItemInspection extends Inspection<Item> {
     getBorder(): string | undefined;
     getDefaultDisplayLevel(): InfoDisplayLevel;
     hasContent(context: InfoProviderContext): boolean;
-    get(context: InfoProviderContext): (Translation | import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue | MagicalPropertiesInfoProvider | QualityInfoProvider | ItemDetailsInfoProvider | ItemDurabilityInfoProvider | ItemProtectedInfoProvider | ItemWeightInfoProvider)[];
+    get(context: InfoProviderContext): Translation | (Translation | import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue | MagicalPropertiesInfoProvider | QualityInfoProvider | DoodadUses | ItemWorthInfoProvider | ItemDetailsInfoProvider | ItemDurabilityInfoProvider | ItemProtectedInfoProvider | ItemUses | ItemWeightInfoProvider)[];
     protected onItemRemove(_: any, item: Item): void;
     protected onTickEnd(): void;
     private updatePosition;
     private getDescription;
     private getCapacity;
+    private getDoodadUses;
 }

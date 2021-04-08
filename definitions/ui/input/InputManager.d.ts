@@ -38,7 +38,8 @@ export declare class InputInfo {
 }
 export interface IGlobalMouseInfoEvents {
     move(position: Vector2): any;
-    updateTarget(): any;
+    invalidateTarget(): any;
+    updateTarget(element: HTMLElement | undefined): any;
 }
 export declare class GlobalMouseInfo extends EventEmitter.Host<IGlobalMouseInfoEvents> {
     /**

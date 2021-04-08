@@ -19,6 +19,7 @@ import { DamageType, EntityType } from "game/entity/IEntity";
 import { EquipType, SkillType } from "game/entity/IHuman";
 import NPC from "game/entity/npc/NPC";
 import Player from "game/entity/player/Player";
+import { CreationId } from "game/IGame";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemType } from "game/item/IItem";
 import { IPlaceOnTileOptions } from "game/item/IItemManager";
@@ -36,6 +37,7 @@ export interface IItemEvents {
     damage(): any;
 }
 export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagic {
+    readonly objectType = CreationId.Item;
     book?: BookType;
     constructedFrom?: IConstructedInfo;
     containedItems: Item[];

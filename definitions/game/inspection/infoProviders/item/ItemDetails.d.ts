@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
-import ItemUses from "game/inspection/infoProviders/item/ItemUses";
+import ItemWorthInfoProvider from "game/inspection/infoProviders/item/ItemWorth";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import Item from "game/item/Item";
 export default class ItemDetailsInfoProvider extends InfoProvider {
@@ -20,9 +20,8 @@ export default class ItemDetailsInfoProvider extends InfoProvider {
         component: import("../../../../ui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };
-    get(): (0 | import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue | ItemUses)[];
+    get(): (0 | import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue | ItemWorthInfoProvider)[];
     private getInsulation;
     private getPreservation;
     private getGroupings;
-    private getWorth;
 }

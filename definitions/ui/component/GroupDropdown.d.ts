@@ -40,7 +40,7 @@ export default abstract class GroupDropdown<ENUM_OBJECT, OTHER_OPTIONS extends s
     private addGroup;
 }
 declare class GroupDropdownTooltip extends Tooltip {
-    constructor(source: Component);
+    constructor(source: Component | HTMLElement);
     updatePosition(position?: IVector2, force?: boolean): this;
     protected onShow(): void;
 }

@@ -168,6 +168,8 @@ export default class InGameScreen extends BaseScreen {
     createCraftItemElements(containerSortInfo: IContainerSortInfo): void;
     updateItem(item: Item, updateChildren?: boolean): void;
     onGlobalMouseMove(mouseInfo: GlobalMouseInfo, _: Vector2): void;
+    private tooltipTarget?;
+    onGlobalMouseUpdateTarget(mouse: GlobalMouseInfo, target?: HTMLElement): void;
     onMove(): void;
     /**
      * Gets the dialog element for an item/doodad container (bags, backpacks, chests, etc.) and not inventories dialogs.

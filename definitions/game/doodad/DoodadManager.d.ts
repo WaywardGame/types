@@ -14,6 +14,7 @@ import { DoodadType, DoodadTypeGroup, IDoodadOptions } from "game/doodad/IDoodad
 import Human from "game/entity/Human";
 import Player from "game/entity/player/Player";
 import { TerrainType } from "game/tile/ITerrain";
+import Translation from "language/Translation";
 export interface IDoodadManagerEvents {
     /**
      * Called when a doodad is about to be spawned
@@ -72,4 +73,5 @@ export default class DoodadManager extends EventEmitter.Host<IDoodadManagerEvent
      * @param z The z coordinate to check.
      */
     spawn(terrainType: TerrainType, x: number, y: number, z: number): void;
+    getDoodadTypeGroupName(doodadType: DoodadType | DoodadTypeGroup, article?: boolean, count?: number): Translation;
 }

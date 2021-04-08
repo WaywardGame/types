@@ -47,6 +47,7 @@ declare type MagicalSubPropertyEntry = {
 export declare type MagicalPropertyEntry = MagicalNormalPropertyEntry | MagicalSubPropertyEntry;
 export declare module MagicalPropertyEntry {
     function isSubType(entry: MagicalPropertyEntry): entry is MagicalSubPropertyEntry;
+    function identity(entry: MagicalPropertyEntry): MagicalPropertyIdentity;
 }
 export declare type MagicalPropertyEntryIntersection = {
     type: MagicalPropertyType;
@@ -64,6 +65,9 @@ declare type MagicalSubPropertyTypesResult = {
         type: K;
         subTypes: ReadonlyArray<MagicalPropertyTypeSubTypeMap[K]>;
     };
+}[MagicalSubPropertyTypes];
+export declare type MagicalPropertyIdentity = [MagicalNormalPropertyTypes] | {
+    [Key in MagicalSubPropertyTypes]: [Key, MagicalPropertyTypeSubTypeMap[Key]];
 }[MagicalSubPropertyTypes];
 export default class MagicalPropertyManager {
     private properties;
@@ -96,6 +100,7 @@ export default class MagicalPropertyManager {
      * @returns a magical sub-property on this object, if it exists
      */
     get<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): number | undefined;
+    get(...identity: MagicalPropertyIdentity): number | undefined;
     /**
      * Sets a magical property on this object. Replaces any existing magical property of that type
      */
@@ -176,6 +181,7 @@ export default class MagicalPropertyManager {
      * @returns a translation for a magical sub-property type
      */
     static translate<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): Translation;
+    static translate(...identity: MagicalPropertyIdentity): Translation;
     /**
      * @returns a translation for a magical property type
      */

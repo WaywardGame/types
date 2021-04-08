@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { CreatureType } from "game/entity/creature/ICreature";
+import { CreationId } from "game/IGame";
 import { IObject } from "game/IObject";
 import { ItemType } from "game/item/IItem";
 import { IReferenceable } from "game/reference/IReferenceManager";
@@ -16,6 +17,7 @@ import { ISerializedTranslation } from "language/Translation";
 import { IVector3 } from "utilities/math/IVector";
 export default class Corpse implements IObject<CreatureType>, IVector3, IReferenceable {
     static is(value: any): value is Corpse;
+    readonly objectType: CreationId.Corpse;
     aberrant?: boolean | undefined;
     decay?: number | undefined;
     id: number;

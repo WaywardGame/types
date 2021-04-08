@@ -13,14 +13,14 @@ import Component from "ui/component/Component";
 import { ITooltip, TooltipLocation } from "ui/component/IComponent";
 import Text, { Paragraph } from "ui/component/Text";
 export default class Tooltip extends Component implements ITooltip {
-    protected readonly source: Component;
     event: IEventEmitter<this, Events<ITooltip>>;
     get location(): TooltipLocation;
     cache: boolean;
+    protected readonly source: Component;
     private forceShown;
     private maxWidth;
     private hasSetPosition;
-    constructor(source: Component);
+    constructor(source: Component | HTMLElement);
     setSecondary(): this;
     setForceShown(forceShown?: boolean): this;
     wasForceShown(): boolean;

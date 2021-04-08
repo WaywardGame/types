@@ -9,7 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Component from "ui/component/Component";
-import { IComponent } from "ui/component/IComponent";
 import Tooltip from "ui/tooltip/Tooltip";
 import Vector2 from "utilities/math/Vector2";
 export default class TooltipManager {
@@ -20,8 +19,8 @@ export default class TooltipManager {
     private tooltip;
     private readonly disablers;
     constructor();
-    show(host: IComponent): Tooltip | undefined;
-    hide(host?: Component<HTMLElement> | undefined, forceRemove?: boolean): void;
+    show(host: HTMLElement): Tooltip | undefined;
+    hide(host?: HTMLElement | undefined, forceRemove?: boolean): void;
     /**
      * Disables tooltips.
      * Note: Multiple things can cause tooltips to be disabled simultaneously; tooltips won't be re-enabled until every

@@ -10,10 +10,12 @@
  */
 import { BiomeType } from "game/biome/IBiome";
 import { SkillType } from "game/entity/IHuman";
+import { CreationId } from "game/IGame";
 import { TerrainType } from "game/tile/ITerrain";
 import { WorldZ } from "game/WorldZ";
 import { ISerializedTranslation } from "language/Translation";
 export interface IObject<T> {
+    objectType: CreationId;
     type: T;
     id: number;
     renamed?: string | ISerializedTranslation;
