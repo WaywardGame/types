@@ -24,6 +24,13 @@ declare module Objects {
     function windowKeysToObject(windowKeys: string[]): any;
     function windowKeysToParentObject(windowKeys: string[]): any;
     function deepClone<T>(obj: T): T;
+    const SYMBOL_CLONE: unique symbol;
+    interface ICloneable {
+        [SYMBOL_CLONE](clone: typeof deepClone): this;
+    }
+    module ICloneable {
+        function is(value: unknown): value is ICloneable;
+    }
     function addProperty(property: string, value: any): (object: any) => any;
     function followDirections<T>(target: any, directions: string[]): {
         hasValue: true;

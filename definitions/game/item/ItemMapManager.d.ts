@@ -39,6 +39,7 @@ export default class ItemMapManager {
      * If this item is a tattered map or a drawn map, this will return its associated `DrawnMap` instance.
      */
     get(): DrawnMap | undefined;
+    get(clientSide: true): DrawnMap | "unplotted" | undefined;
     /**
      * @returns whether the associated map is on the current island
      */

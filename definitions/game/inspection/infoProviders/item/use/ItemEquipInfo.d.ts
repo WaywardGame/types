@@ -31,7 +31,7 @@ declare const _default: UseInfo<{
 } & {
     getDefense: () => (Translation | MagicalPropertyValue)[];
 } & {
-    formatInsulation: (insulation: number, type?: TempType | undefined) => LabelledValue;
+    formatInsulation: (insulation?: number | undefined, type?: TempType | undefined) => LabelledValue;
 } & {
     getInsulationOfType: (type: TempType) => LabelledValue | undefined;
 } & {

@@ -42,8 +42,8 @@ export default class LabelledValue extends InfoProvider {
     };
     protected initChildTextComponent(text: TranslationGenerator): Text;
     setComponent(componentClass: Class<Component>): this;
-    setDisplayMode(mode: (typeof LabelledValueDisplayMode)["label: value"]): this;
-    setDisplayMode(mode: (typeof LabelledValueDisplayMode)["value label"]): this;
-    setDisplayMode(mode: (typeof LabelledValueDisplayMode)["label (value)"], contentDisplayLevel?: InfoDisplayLevel): this;
+    setDisplayMode(mode: keyof typeof LabelledValueDisplayMode): this;
+    setDisplayMode(mode: keyof typeof LabelledValueDisplayMode): this;
+    setDisplayMode(mode: keyof typeof LabelledValueDisplayMode, contentDisplayLevel?: InfoDisplayLevel): this;
     setInline(): this;
 }

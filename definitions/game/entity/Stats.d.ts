@@ -151,5 +151,6 @@ export default class Stats<T extends IStatHost> {
      * the stat value is changed by `changeAmount` and the `changeTimer` is reset to `nextChangeTimer`
      */
     updateTimers(): this;
+    all(): IStatBase[];
     private getInternal;
 }

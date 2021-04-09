@@ -145,7 +145,6 @@ export default class InGameScreen extends BaseScreen {
     tooltipDisable(): void;
     tooltipHide(): void;
     unSelectElements(): void;
-    getTooltipHtmlForItem(item: Item | undefined, itemType: ItemType, isQuickSlot: boolean, isDismantle: boolean, isNPC: boolean): string;
     getUsedQuickSlots(): number[];
     getFreeQuickSlots(): number[];
     getQuickSlotItemElement(quickSlot: number): JQuery;
@@ -234,7 +233,6 @@ export default class InGameScreen extends BaseScreen {
     onHandToggle(api: IBindHandlerApi): boolean;
     onInput(api: IBindHandlerApi): void;
     private clearActionsMenuTileOverlay;
-    private additionalRequirements;
     private runAction;
     private updateContextMenu;
     private confirmAction;

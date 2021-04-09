@@ -21,6 +21,7 @@ export default class RecipeInspection extends Inspection<ItemType> {
     getId(): string;
     get(context: InfoProviderContext): Translation | (Translation | import("game/inspection/InfoProvider").SimpleInfoProvider | DoodadUses | ItemDetailsInfoProvider | ItemUses)[];
     private getDetails;
+    private isUnskilled;
     private getReputation;
     private getDescription;
     private getDoodadUses;

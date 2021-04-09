@@ -9,10 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import ISerializer, { ISerializable } from "save/ISerializer";
-export default class DefaultMap<K, V> extends Map<K, V> implements ISerializable {
+import Objects from "utilities/object/Objects";
+export default class DefaultMap<K, V> extends Map<K, V> implements ISerializable, Objects.ICloneable {
     readonly defaultValue: V;
     constructor(defaultValue: V, entries?: Iterable<readonly [K, V]>);
     initialize(key: K): V;
     serializeObject(serializer: ISerializer): void;
     deserializeObject(serializer: ISerializer): void;
+    [Objects.SYMBOL_CLONE](clone: typeof Objects.deepClone): this;
 }

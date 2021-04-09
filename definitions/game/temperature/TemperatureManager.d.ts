@@ -87,6 +87,8 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
      * @param invalidate Whether to invalidate the temperature calculations of surrounding tiles.
      */
     scheduleUpdate(...args: ScheduledUpdate): this;
+    private readonly scheduledContainerInvalidations;
+    scheduleContainerInvalidation(...containers: Array<IContainer | undefined>): this;
     invalidateAll(): void;
     protected onFireUpdate(object: Doodad | TileEvent, tile: ITile): void;
     protected onCreateOrRemoveDoodadOrTileEvent(_: any, object: Doodad | TileEvent): void;
@@ -94,7 +96,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     protected onUpdateTile(_: any, x: number, y: number, z: number, tile: ITile, oldType: TerrainType): void;
     protected onItemContainerUpdate(_: any, item: Item, container1?: IContainer, container2?: IContainer): void;
     protected onItemContainerRemove(_: any, item: Item, container: IContainer): void;
-    private invalidateContainerCache;
+    private runContainerInvalidations;
     protected onItemFireUpdate(item: Item): void;
     protected onPlay(): void;
     protected onTickEnd(): void;

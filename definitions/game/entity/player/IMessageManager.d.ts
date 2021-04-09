@@ -123,5 +123,6 @@ export declare enum MessageType {
     Miss = 3,
     Attack = 4,
     Stat = 5,
-    Skill = 6
+    Skill = 6,
+    Warning = 7
 }

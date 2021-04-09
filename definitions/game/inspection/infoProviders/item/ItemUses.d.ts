@@ -90,7 +90,7 @@ export default class ItemUses extends Uses<Item> {
     } & {
         getDefense: () => (import("../../../../language/Translation").default | import("../MagicalPropertyValue").default)[];
     } & {
-        formatInsulation: (insulation: number, type?: import("../../../temperature/ITemperature").TempType | undefined) => import("../LabelledValue").default;
+        formatInsulation: (insulation?: number | undefined, type?: import("../../../temperature/ITemperature").TempType | undefined) => import("../LabelledValue").default;
     } & {
         getInsulationOfType: (type: import("../../../temperature/ITemperature").TempType) => import("../LabelledValue").default | undefined;
     } & {
@@ -139,5 +139,15 @@ export default class ItemUses extends Uses<Item> {
         action: ActionType.Equip;
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Equip>;
         details: Set<symbol>;
-    }, ActionType.Equip, {}, Item> | import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Item, ActionType.Throw>, ActionType.Throw, {}, Item> | import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Item, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>, ActionType.StartFire | ActionType.Ignite | ActionType.Equip, {}, Item>)[];
+    }, ActionType.Equip, {}, Item> | import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Item, ActionType.Throw>, ActionType.Throw, {}, Item> | import("../UseInfo").default<{
+        damage: number;
+        objectType: CreationId.Item;
+        value?: Item | undefined;
+        type: ItemType;
+        description: IItemDescription;
+        quality: import("../../../IObject").Quality;
+        action: ActionType.Build;
+        union: import("../UseInfo").IUseInfoBase<Item, ActionType.Build>;
+        details: Set<symbol>;
+    }, ActionType.Build, {}, Item> | import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Item, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>, ActionType.StartFire | ActionType.Ignite | ActionType.Equip, {}, Item>)[];
 }

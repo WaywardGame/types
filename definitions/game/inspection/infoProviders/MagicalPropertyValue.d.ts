@@ -36,6 +36,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     private baseHidden?;
     private isPercentage?;
     private percentageIsPremultiplied?;
+    private expandedVerbose?;
     private before;
     private after;
     constructor(base: GetterOfOr<number | IRange>);
@@ -58,6 +59,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     setFormatter(formatter?: Translation): this;
     setBefore(...before: Array<TranslationGenerator | InfoProvider | undefined>): this;
     setAfter(...after: Array<TranslationGenerator | InfoProvider | undefined>): this;
+    setExpandedVerbose(): this;
     getClass(): string[];
     get(): (Translation | import("language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | import("language/Translation").ISerializedTranslation | UiTranslation | undefined) | InfoProvider)[];
     private getOutOf;

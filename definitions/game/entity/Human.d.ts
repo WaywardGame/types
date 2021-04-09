@@ -114,7 +114,6 @@ export default abstract class Human extends Entity implements IHasInsulation {
     isSwimming(): boolean;
     updateSwimming(): void;
     updatePaddling(): void;
-    getProducedTemperature(): number | undefined;
     getInsulation(type: TempType): number;
     protected resetStatTimers(): void;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
