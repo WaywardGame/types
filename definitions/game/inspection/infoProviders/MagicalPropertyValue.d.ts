@@ -52,10 +52,10 @@ export default class MagicalPropertyValue extends InfoProvider {
      */
     setIsPercentage(isPercentage?: boolean, premultiplied?: boolean): this;
     setCurrent(amount: GetterOfOr<number>): this;
-    setBaseColor(translation: Translation, preferred?: boolean): this;
+    setBaseColor(translation?: Translation, preferred?: boolean): this;
     setCurrentColor(translation: Translation): this;
     setNumberTranslator(translator: (number: number | IRange) => Translation): this;
-    setFormatter(formatter: Translation): this;
+    setFormatter(formatter?: Translation): this;
     setBefore(...before: Array<TranslationGenerator | InfoProvider | undefined>): this;
     setAfter(...after: Array<TranslationGenerator | InfoProvider | undefined>): this;
     getClass(): string[];

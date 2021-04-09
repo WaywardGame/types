@@ -70,13 +70,14 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     /**
      * Marks this info provider as to subscribe refresh events to the given host.
      * Note: Any existing initialized components will not be retroactively subscribed.
+     * @param predicate A predicate function for whether or not this info provider should actually refresh when the event is hit
+     */
+    subscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...args: [...events: K[], predicate: () => boolean]): this;
+    /**
+     * Marks this info provider as to subscribe refresh events to the given host.
+     * Note: Any existing initialized components will not be retroactively subscribed.
      */
     subscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...events: K[]): this;
-    /**
-     * Unmarks this info provider to subscribe refresh events on the given host.
-     * Note: Any existing initialized components will not be retroactively unsubscribed.
-     */
-    unsubscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...events: K[]): this;
     /**
      * Call when this info provider should be refreshed.
      */

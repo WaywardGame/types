@@ -14,7 +14,9 @@ export declare enum Temperature {
     Coldest = -100,
     Cold = -50,
     Cool = -25,
+    Chilled = -12.5,
     Neutral = 0,
+    LukeWarm = 12.5,
     Warm = 25,
     Hot = 50,
     Hottest = 100

@@ -13,6 +13,7 @@ import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import Item from "game/item/Item";
 export default class ItemWeightInfoProvider extends InfoProvider {
     private readonly item;
+    private weight;
     constructor(item: Item);
     getClass(): string[];
     initComponent(): {
@@ -20,5 +21,6 @@ export default class ItemWeightInfoProvider extends InfoProvider {
         fullInit(): void;
     };
     get(): LabelledValue;
+    protected onTickEnd(): void;
     private getStoredWeight;
 }

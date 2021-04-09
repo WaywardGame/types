@@ -35,6 +35,9 @@ export interface IItemEvents {
     toggleProtected(isProtected: boolean): any;
     fireUpdate(stage?: FireStage): any;
     damage(): any;
+    transformed(): any;
+    weightUpdate(): any;
+    moved(): any;
 }
 export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagic {
     readonly objectType = CreationId.Item;
@@ -43,6 +46,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     containedItems: Item[];
     containedWithin: IContainer | undefined;
     decay?: number;
+    startingDecay?: number;
     disassembly: Item[];
     driverId?: number;
     equippedId?: number;
@@ -113,6 +117,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     isTransient(): boolean;
     isValid(): boolean;
     isProtected(): boolean;
+    getDecayAtStart(): number;
     getDecayMax(): number;
     getDecayRate(isClientSide: boolean): number;
     getPreservationDecayMultiplier(): number;
@@ -134,7 +139,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     setQuickSlot(player: Player, quickSlot: number | undefined): void;
     clearQuickSlot(): void;
     isDecayed(): boolean;
-    changeInto(type: ItemType, disableNotify?: boolean): void;
+    changeInto(type: ItemType, disableNotify?: boolean, emitTransformation?: boolean): void;
     /**
      * Returns and item based on returnOnUseAndDecay.
      * @param disableNotify Set to true if no notification should be shown for the new item above the player.
@@ -165,13 +170,13 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     /**
      * Gets the worth of an item used for merchant trading. Does not consider batering or modifiers bonuses; use Item.getTraderSellPrice for that.
      * @param player The player that is trading the item for its worth (used for durability calculations).
-     * @param magicalWorth True if getting the worth including its magical worth property.
+     * @param magicalWorth Include the value of `MagicalPropertyType.Worth`, defaults to true
      */
     getWorth(player: Player | undefined, magicalWorth?: boolean): number;
     /**
      * The full price the item will go for when traded to a merchant NPC. Considers modifiers and a player's bartering skill.
      * @param player The player that is trading the item.
-     * @param magicalWorth True if getting the worth including its magical worth property.
+     * @param magicalWorth Include the value of `MagicalPropertyType.Worth`, defaults to true
      */
     getTraderSellPrice(player: Player | undefined, magicalWorth?: boolean): number;
     canBurnPlayer(): boolean;

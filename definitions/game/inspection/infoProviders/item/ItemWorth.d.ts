@@ -23,4 +23,6 @@ export default class ItemWorthInfoProvider extends InfoProvider {
         fullInit(): void;
     };
     get(): LabelledValue;
+    private minDur;
+    private shouldRefresh;
 }

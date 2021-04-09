@@ -16,7 +16,7 @@ import Item from "game/item/Item";
 import Translation from "language/Translation";
 declare module ItemDismantleInfo {
     function getRequired(dismantle: IDismantleDescription, mode?: "action" | "standalone"): import("game/inspection/InfoProvider").SimpleInfoProvider | undefined;
-    function getProduced(dismantle: IDismantleDescription): ItemDismantleOutputInfoProvider[];
+    function getProduced(dismantle: IDismantleDescription, iconScale?: number): ItemDismantleOutputInfoProvider[];
     const SYMBOL_IS_DISMANTLE_INSPECTION: unique symbol;
     const useInfo: UseInfo<{
         dismantle: IDismantleDescription;
@@ -34,7 +34,8 @@ export default ItemDismantleInfo;
 declare class ItemDismantleOutputInfoProvider extends InfoProvider {
     private readonly item;
     private readonly count;
-    constructor(item: ItemType, count: number);
+    private readonly scale;
+    constructor(item: ItemType, count: number, scale?: number);
     getClass(): string[];
     getIcon(): IIcon;
     get(): Translation;
