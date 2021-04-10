@@ -32,10 +32,10 @@ export interface IUiEvents {
     toggleDeveloperMode(developerMode: boolean): any;
 }
 export declare class Ui extends EventEmitter.Host<IUiEvents> {
-    readonly tooltips: TooltipManager;
     readonly scale: ScaleManager;
     readonly highlights: HighlightManager;
     readonly screens: ScreenManager;
+    readonly tooltips: TooltipManager;
     readonly selection: SelectionHandler;
     readonly viewport: Vector2;
     get windowWidth(): number;

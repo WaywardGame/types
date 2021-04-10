@@ -27,6 +27,7 @@ import TileEventInspection from "game/inspection/inspections/TileEventInspection
 import TileInspection from "game/inspection/inspections/TileInspection";
 import { IVector3 } from "utilities/math/IVector";
 export declare type InspectionClass = Class<Inspection<any>> & {
+    isWorldInspection?(inspectType: InspectType): boolean;
     getFromTile?(position: IVector3, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<any>>;
     /**
      * Whether or not this inspection class can handle the given arguments.

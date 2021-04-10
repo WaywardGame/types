@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
-import { EmitterOrBus, Event } from "event/EventManager";
+import { EmitterOrBus, Event, Handler } from "event/EventManager";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Component from "ui/component/Component";
@@ -72,7 +72,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
      * Note: Any existing initialized components will not be retroactively subscribed.
      * @param predicate A predicate function for whether or not this info provider should actually refresh when the event is hit
      */
-    subscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...args: [...events: K[], predicate: () => boolean]): this;
+    subscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...args: [...events: K[], predicate: (...params: Parameters<Handler<E, K>>) => boolean]): this;
     /**
      * Marks this info provider as to subscribe refresh events to the given host.
      * Note: Any existing initialized components will not be retroactively subscribed.

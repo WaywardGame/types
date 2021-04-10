@@ -10,7 +10,7 @@
  */
 import Player from "game/entity/player/Player";
 import { IVersionInfo } from "utilities/Version";
-export default function upgradePlayer(player: Player, saveVersion: IVersionInfo): string[];
+export default function upgradePlayer(player: Player, saveVersion: IVersionInfo, islandVersion: IVersionInfo): string[];
 /**
  * Called after loading item & tile references
  */

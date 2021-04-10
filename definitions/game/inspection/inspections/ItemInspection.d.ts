@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
+import { InspectType } from "game/inspection/IInspection";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import DoodadUses from "game/inspection/infoProviders/doodad/DoodadUses";
 import ItemDetailsInfoProvider from "game/inspection/infoProviders/item/ItemDetails";
@@ -28,6 +29,7 @@ import Translation from "language/Translation";
 import { IVector3 } from "utilities/math/IVector";
 export default class ItemInspection extends Inspection<ItemType> {
     static getFromTile(position: IVector3): ItemInspection[];
+    static isWorldInspection(type: InspectType): boolean;
     static handles(item: unknown): boolean;
     readonly item?: Item;
     private readonly description?;

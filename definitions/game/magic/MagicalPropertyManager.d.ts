@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import EventEmitter from "event/EventEmitter";
 import { MagicalPropertyType, magicalPropertyTypeSubTypeMap } from "game/magic/MagicalPropertyType";
 import Translation, { ListEnder } from "language/Translation";
 export interface IHasMagic {
@@ -47,7 +48,7 @@ declare type MagicalSubPropertyEntry = {
 export declare type MagicalPropertyEntry = MagicalNormalPropertyEntry | MagicalSubPropertyEntry;
 export declare module MagicalPropertyEntry {
     function isSubType(entry: MagicalPropertyEntry): entry is MagicalSubPropertyEntry;
-    function identity(entry: MagicalPropertyEntry): MagicalPropertyIdentity;
+    function identity(entry: MagicalPropertyEntry): MagicalPropertyIdentity<[]>;
 }
 export declare type MagicalPropertyEntryIntersection = {
     type: MagicalPropertyType;
@@ -66,10 +67,35 @@ declare type MagicalSubPropertyTypesResult = {
         subTypes: ReadonlyArray<MagicalPropertyTypeSubTypeMap[K]>;
     };
 }[MagicalSubPropertyTypes];
-export declare type MagicalPropertyIdentity = [MagicalNormalPropertyTypes] | {
-    [Key in MagicalSubPropertyTypes]: [Key, MagicalPropertyTypeSubTypeMap[Key]];
+export declare type MagicalPropertyIdentity<A extends any[] = []> = [MagicalNormalPropertyTypes, ...A] | {
+    [Key in MagicalSubPropertyTypes]: [Key, MagicalPropertyTypeSubTypeMap[Key], ...A];
 }[MagicalSubPropertyTypes];
-export default class MagicalPropertyManager {
+export declare module MagicalPropertyIdentity {
+    function equals(...identities: MagicalPropertyIdentity[]): boolean;
+}
+export interface IMagicalPropertyManagerEvents {
+    /**
+     * Emitted when a property was removed
+     */
+    remove(...identity: MagicalPropertyIdentity): any;
+    /**
+     * Emitted when a property was set, and the value it was set to
+     */
+    set(...args: MagicalPropertyIdentity<[value: number]>): any;
+    /**
+     * Emitted when a property was changed or removed
+     */
+    change(...identity: MagicalPropertyIdentity): any;
+    /**
+     * Emitted when removing all magical properties
+     */
+    clear(): any;
+    /**
+     * Emitted when inheriting magic from another property manager
+     */
+    inherit(from: MagicalPropertyManager): any;
+}
+export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPropertyManagerEvents> {
     private properties;
     private cachedCount?;
     private cachedEntries?;

@@ -11,7 +11,7 @@
 import { SkillType } from "game/entity/IHuman";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import { Quality } from "game/IObject";
-import { IHasMagic, MagicalNormalPropertyTypes, MagicalPropertyEntry, MagicalPropertyTypeSubTypeMap, MagicalSubPropertyTypes } from "game/magic/MagicalPropertyManager";
+import { IHasMagic, MagicalNormalPropertyTypes, MagicalPropertyIdentity, MagicalPropertyTypeSubTypeMap, MagicalSubPropertyTypes } from "game/magic/MagicalPropertyManager";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import { TranslationGenerator } from "ui/component/IComponent";
@@ -42,7 +42,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     constructor(base: GetterOfOr<number | IRange>);
     setMagical(magicalThingy: IHasMagic | undefined, type: MagicalNormalPropertyTypes): this;
     setMagical<T extends MagicalSubPropertyTypes>(magicalThingy: IHasMagic | undefined, type: T, subType?: MagicalPropertyTypeSubTypeMap[T]): this;
-    setMagicalByEntry(entry: MagicalPropertyEntry): this;
+    setMagical(magicalThingy: IHasMagic | undefined, ...identity: MagicalPropertyIdentity): this;
     setMagicalReduction(): this;
     setQuality(quality?: Quality, modifier?: number | IRange): this;
     setSkill(skill?: SkillType, modifier?: number | IRange): this;
