@@ -23,7 +23,7 @@ export interface ISorter<T, R> {
     /**
      * Sets a fallback sorter for when two items are in the same position
      */
-    setFallback<A extends any[]>(fallback?: SortFallback<T, R, A>, ...args: A): this;
+    addFallback<A extends any[]>(fallback?: SortFallback<T, R, A>, ...args: A): this;
     /**
      * Sets a custom sorter to override the default sort functionality
      *

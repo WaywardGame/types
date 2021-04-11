@@ -46,7 +46,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     setMagicalReduction(): this;
     setQuality(quality?: Quality, modifier?: number | IRange): this;
     setSkill(skill?: SkillType, modifier?: number | IRange): this;
-    setIsModifier(): this;
+    setIsModifier(isModifier?: boolean): this;
     setBaseHidden(): this;
     /**
      * Not compatible with `setNumberTranslator`.

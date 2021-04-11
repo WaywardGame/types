@@ -1107,7 +1107,8 @@ export declare enum ItemTypeGroup {
     FireExtinguisher = 883,
     WeaponThatFiresArrows = 884,
     WeaponThatFiresBullets = 885,
-    All = 886,
-    Last = 887
+    BecomesFireSource = 886,
+    All = 887,
+    Last = 888
 }
 export {};

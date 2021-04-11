@@ -26,7 +26,8 @@ export declare enum InspectType {
     Milestone = 14,
     Recipe = 15,
     ItemType = 16,
-    Dismantle = 17
+    Dismantle = 17,
+    Stat = 18
 }
 /**
  * A convenience object for the priority of an inspection compared to other inspections. Useful to make an inspection priority

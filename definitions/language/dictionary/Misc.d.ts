@@ -36,6 +36,10 @@ export declare enum SkillTranslation {
     Name = 0,
     Description = 1
 }
+export declare enum StatTranslation {
+    Name = 0,
+    Description = 1
+}
 export declare enum BookTranslation {
     Title = 0,
     Text = 1
@@ -84,21 +88,21 @@ export declare enum MiscTranslation {
     Binding = 5,
     BindingListSeparator = 6,
     Colorize = 7,
-    ColorizeAttack = 8,
-    ColorizeDamage = 9,
-    ColorizeDefense = 10,
-    ColorizeMagical = 11,
-    ColorizeMessageType = 12,
-    ColorizePrimary = 13,
-    ColorizeQuality = 14,
-    ColorizeSecondary = 15,
-    ColorizeStat = 16,
-    CorpseOf = 17,
-    CountThing = 18,
-    Dependency = 19,
-    Difference = 20,
-    ItemMagicalProperty = 21,
-    ListItemSeparator = 22,
+    ColorizeDamage = 8,
+    ColorizeVulnerability = 9,
+    ColorizeMagical = 10,
+    ColorizeMessageType = 11,
+    ColorizePrimary = 12,
+    ColorizeQuality = 13,
+    ColorizeSecondary = 14,
+    ColorizeStat = 15,
+    CorpseOf = 16,
+    CountThing = 17,
+    Dependency = 18,
+    Difference = 19,
+    ItemMagicalProperty = 20,
+    ListItemSeparator = 21,
+    ExpressionSeparator = 22,
     MacroDoubleInput = 23,
     MacroInputSeparator = 24,
     MacroTripleInput = 25,
@@ -116,8 +120,5 @@ export declare enum MiscTranslation {
     Thing = 37,
     Tilled = 38,
     Unknown = 39,
-    UnknownCreature = 40,
-    UnknownDoodad = 41,
-    UnknownItem = 42,
-    UnknownTileEvent = 43
+    UnknownItem = 40
 }

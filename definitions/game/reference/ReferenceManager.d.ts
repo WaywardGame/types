@@ -12,6 +12,7 @@ import Doodad from "game/doodad/Doodad";
 import Corpse from "game/entity/creature/corpse/Corpse";
 import Creature from "game/entity/creature/Creature";
 import { SkillType } from "game/entity/IHuman";
+import { Stat } from "game/entity/IStats";
 import NPC from "game/entity/npc/NPC";
 import Player from "game/entity/player/Player";
 import Island from "game/Island";
@@ -21,9 +22,9 @@ import { Milestone } from "game/milestones/IMilestone";
 import { ReferenceType } from "game/reference/IReferenceManager";
 import TileEvent from "game/tile/TileEvent";
 export declare type Reference = [number, ReferenceType?];
-declare const enumRefTypes: Set<ReferenceType.Skill | ReferenceType.Milestone | ReferenceType.Recipe | ReferenceType.ItemType | ReferenceType.Dismantle>;
-declare type EnumReferenceTypes = (typeof enumRefTypes) extends Set<infer R> ? R : never;
-declare type ReferenceableReferenceTypes = Exclude<ReferenceType, EnumReferenceTypes>;
+declare const enumRefTypes: Set<ReferenceType.Skill | ReferenceType.Milestone | ReferenceType.Recipe | ReferenceType.ItemType | ReferenceType.Dismantle | ReferenceType.Stat>;
+export declare type EnumReferenceTypes = (typeof enumRefTypes) extends Set<infer R> ? R : never;
+export declare type ReferenceableReferenceTypes = Exclude<ReferenceType, EnumReferenceTypes>;
 interface IReferenceTypeMap {
     [ReferenceType.Item]: Item;
     [ReferenceType.Creature]: Creature;
@@ -38,11 +39,12 @@ interface IReferenceTypeMap {
     [ReferenceType.Recipe]: [ReferenceType.Recipe, ItemType];
     [ReferenceType.ItemType]: [ReferenceType.ItemType, ItemType];
     [ReferenceType.Dismantle]: [ReferenceType.Dismantle, ItemType];
+    [ReferenceType.Stat]: [ReferenceType.Stat, Stat];
 }
 export declare type Referenceable = IReferenceTypeMap[ReferenceableReferenceTypes];
 export default class ReferenceManager {
     static isEnumReference(type: ReferenceType): type is EnumReferenceTypes;
-    static getList(type: ReferenceType, gameIsland?: Island): Player[] | SaferArray<Item> | readonly Milestone[] | SaferArray<Corpse> | SaferArray<Doodad> | SaferArray<Creature> | SaferArray<NPC> | SaferArray<TileEvent> | readonly SkillType[] | readonly ItemType[] | IterableIterator<Island>;
+    static getList(type: ReferenceType, gameIsland?: Island): Player[] | SaferArray<Item> | readonly Milestone[] | SaferArray<Corpse> | SaferArray<Doodad> | SaferArray<Creature> | SaferArray<NPC> | SaferArray<TileEvent> | readonly Stat[] | IterableIterator<Island> | readonly SkillType[] | readonly ItemType[];
     private referenceCursor;
     create(): number;
     get(thing: Referenceable): Reference | undefined;

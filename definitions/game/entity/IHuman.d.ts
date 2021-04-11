@@ -95,6 +95,10 @@ export declare enum EquipType {
 }
 export declare type InsulationWeight = number | [number, "onlyWhenEquipped"];
 export declare const equipSlotInsulationWeights: Record<TempType, Record<EquipType, InsulationWeight>>;
+export interface IExcludedWhenLowering {
+    excludeIfLowering: true;
+}
+export declare function calculateEquipSlotInsulation(type: TempType, slot: EquipType, equipped?: Item): [number, number, IExcludedWhenLowering | undefined];
 export declare const insulationRangeWhenSwimming: Record<TempType, IRange>;
 export declare enum HairColor {
     "#e7c978" = 0,

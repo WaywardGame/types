@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Stat } from "game/entity/IStats";
-declare const stats: Descriptions<Stat, string>;
+declare const stats: Descriptions<Stat, string | [string, string?]>;
 export default stats;

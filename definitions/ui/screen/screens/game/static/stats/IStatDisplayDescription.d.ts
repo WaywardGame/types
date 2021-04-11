@@ -10,6 +10,7 @@
  */
 import Entity from "game/entity/Entity";
 import { IStat, StatDisplayType } from "game/entity/IStats";
+import { Reference } from "game/reference/ReferenceManager";
 import { IModdable } from "mod/ModRegistry";
 import Component from "ui/component/Component";
 import { ITooltip } from "ui/component/IComponent";
@@ -45,8 +46,8 @@ export interface IStatDisplayDescription extends IModdable {
      */
     getFormatted?(entity: Entity, stat?: IStat): IStringSection[];
     /**
-     * A function that will initialize a tooltip for this stat element
+     * A function that will initialize a tooltip for this stat element, or a reference to show a tooltip for
      */
-    tooltip?(tooltip: ITooltip, entity: Entity, stat: IStat): any;
+    tooltip: Reference | ((tooltip: ITooltip, entity: Entity, stat: IStat) => any);
 }
 export declare const STAT_DEFAULT_DISPLAY_ORDER = 100;

@@ -23,6 +23,7 @@ import PlayerInspection from "game/inspection/inspections/PlayerInspection";
 import RecipeInspection from "game/inspection/inspections/RecipeInspection";
 import SelfInspection from "game/inspection/inspections/SelfInspection";
 import SkillInspection from "game/inspection/inspections/SkillInspection";
+import StatInspection from "game/inspection/inspections/StatInspection";
 import TileEventInspection from "game/inspection/inspections/TileEventInspection";
 import TileInspection from "game/inspection/inspections/TileInspection";
 import { IVector3 } from "utilities/math/IVector";
@@ -57,6 +58,7 @@ declare const _default: {
     15: typeof RecipeInspection;
     16: typeof ItemInspection;
     17: typeof ItemInspection;
+    18: typeof StatInspection;
 } & Record<InspectType, InspectionClass>;
 export default _default;
 export declare module Inspections {
