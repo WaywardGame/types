@@ -17,7 +17,7 @@ import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 export default class SkillInspection extends Inspection<SkillType> {
     static getSkillAttributeMessage(skill: SkillType): Message.Dexterity | Message.Metabolism | Message.Strength | undefined;
-    static handles(skill: unknown, context?: InfoProviderContext): boolean;
+    static handles: (value: unknown, context?: InfoProviderContext | undefined) => any;
     private readonly human?;
     constructor([, skill]: [any, SkillType], context?: InfoProviderContext);
     getId(): string;

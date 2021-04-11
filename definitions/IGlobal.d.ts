@@ -272,6 +272,7 @@ declare global {
         isSymbolicLink(): boolean;
     }
     interface IPath {
+        resolve(...path: string[]): string;
         join(...path: string[]): string;
         basename(...path: string[]): string;
         isAbsolute(path: string): boolean;

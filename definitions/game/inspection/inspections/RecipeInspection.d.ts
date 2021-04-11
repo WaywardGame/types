@@ -16,7 +16,7 @@ import Inspection from "game/inspection/Inspection";
 import { ItemType } from "game/item/IItem";
 import Translation from "language/Translation";
 export default class RecipeInspection extends Inspection<ItemType> {
-    static handles(recipe: unknown, context?: InfoProviderContext): boolean;
+    static handles: (value: unknown, context?: InfoProviderContext | undefined) => any;
     constructor([, itemType]: [any, ItemType]);
     getId(): string;
     get(context: InfoProviderContext): Translation | (Translation | import("game/inspection/InfoProvider").SimpleInfoProvider | DoodadUses | ItemDetailsInfoProvider | ItemUses)[];

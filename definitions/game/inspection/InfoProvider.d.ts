@@ -62,7 +62,6 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel | Set<InfoDisplayLevel>;
     setDisplayLevel(...displayLevel: InfoDisplayLevel[]): this;
     getDisplayLevel(context: InfoProviderContext): Set<InfoDisplayLevel>;
-    getColor(): string | undefined;
     getIcon(): IIcon | undefined;
     hasContent(_context: InfoProviderContext): boolean;
     init(): void;

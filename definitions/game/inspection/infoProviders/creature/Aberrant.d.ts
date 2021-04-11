@@ -16,7 +16,6 @@ export default class AberrantInfoProvider extends InfoProvider {
     private aberrant;
     constructor(creature: Creature);
     getClass(): string[];
-    getColor(): string;
     initComponent(): {
         component: import("../../../../ui/component/Component").default<HTMLElement>;
         fullInit(): void;

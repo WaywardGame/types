@@ -16,7 +16,7 @@ import { Milestone, MilestoneVisibility } from "game/milestones/IMilestone";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 export default class MilestoneInspection extends Inspection<Milestone> {
-    static handles(milestone: unknown): boolean;
+    static handles: (value: unknown, context?: InfoProviderContext | undefined) => any;
     static getMilestoneName(milestone: Milestone, visibility?: MilestoneVisibility): Translation;
     static getMilestoneReadout(milestone: Milestone, name?: Translation): () => Translation;
     static getDescription(milestone: Milestone): Translation | UiTranslation.GameDialogMilestonesTooltipHidden | UiTranslation.GameDialogMilestonesTooltipInvisible;

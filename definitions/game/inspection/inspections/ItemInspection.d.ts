@@ -30,7 +30,9 @@ import { IVector3 } from "utilities/math/IVector";
 export default class ItemInspection extends Inspection<ItemType> {
     static getFromTile(position: IVector3): ItemInspection[];
     static isWorldInspection(type: InspectType): boolean;
-    static handles(item: unknown): boolean;
+    static handles(item: unknown): any;
+    private static readonly itemTypeHandles;
+    private static readonly dismantleHandles;
     readonly item?: Item;
     private readonly description?;
     private readonly isDismantle;
