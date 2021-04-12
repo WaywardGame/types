@@ -18,10 +18,6 @@ export default class ItemWorthInfoProvider extends InfoProvider {
     constructor(item: Item);
     getClass(): string[];
     getDefaultDisplayLevel(): InfoDisplayLevel.Always | InfoDisplayLevel.Extra;
-    initComponent(): {
-        component: import("../../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     get(): LabelledValue;
     private minDur;
     private shouldRefresh;

@@ -43,22 +43,22 @@ declare const _default: {
     9: typeof CorpseInspection;
     10: typeof CorpsesInspection;
     3: typeof CreatureInspection;
+    17: typeof ItemInspection;
     4: typeof DoodadInspection;
     6: typeof PlayerInspection;
     7: typeof ItemInspection;
     8: typeof ItemsInspection;
+    16: typeof ItemInspection;
     14: typeof MilestoneInspection;
     2: typeof NPCInspection;
     1: typeof PlayerInspection;
+    15: typeof RecipeInspection;
     0: typeof SelfInspection;
     13: typeof SkillInspection;
+    18: typeof StatInspection;
     12: typeof TileInspection;
     5: typeof TileEventInspection;
     11: typeof TileEventInspection.Minors;
-    15: typeof RecipeInspection;
-    16: typeof ItemInspection;
-    17: typeof ItemInspection;
-    18: typeof StatInspection;
 } & Record<InspectType, InspectionClass>;
 export default _default;
 export declare module Inspections {

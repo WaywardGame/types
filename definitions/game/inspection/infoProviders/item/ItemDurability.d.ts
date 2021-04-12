@@ -18,10 +18,6 @@ export default class ItemDurabilityInfoProvider extends InfoProvider {
     private decayRate;
     constructor(item: Item);
     getClass(): string[];
-    initComponent(): {
-        component: import("../../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     get(): (0 | LabelledValue)[];
     protected onTickEnd(): void;
     private getDurability;

@@ -18,10 +18,6 @@ export default class GrowthStageInfoProvider extends InfoProvider {
     private constructor();
     getClass(): string[];
     onTickEnd(): void;
-    initComponent(): {
-        component: import("../../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     hasContent(): boolean;
     get(): Translation;
 }

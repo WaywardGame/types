@@ -17,6 +17,7 @@ export default class InspectDialog extends Dialog {
     private readonly dropdownDisplayLevel;
     private readonly singleInspectionWrapper;
     private readonly scrollableWrapper;
+    private readonly context;
     private inspection?;
     constructor();
     getName(): UiTranslation;

@@ -11,6 +11,7 @@
 import { Events, IEventEmitter } from "event/EventEmitter";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InspectType } from "game/inspection/IInspection";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import InspectionsHandler from "game/inspection/InspectionsHandler";
 import Component from "ui/component/Component";
 import { TranslationGenerator } from "ui/component/IComponent";
@@ -20,6 +21,7 @@ export interface ITileInspectionsEvents extends Events<Component> {
     updateDisplayLevel(): any;
 }
 export default abstract class InspectionsList<INSPECTIONS_HANDLER extends InspectionsHandler = InspectionsHandler> extends Component {
+    protected readonly context: InfoProviderContext;
     readonly event: IEventEmitter<this, ITileInspectionsEvents>;
     private readonly paragraphInspectionsInvalid;
     private inspectTypeFilter;
@@ -27,7 +29,7 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     private displayLevel;
     private refreshingId?;
     private readonly inspectTypeWrappers;
-    constructor();
+    constructor(context: InfoProviderContext);
     setInspectTypeFilter(filter?: (inspectType: InspectType) => boolean): this;
     refreshInspectTypeFilter(): this;
     deregister(): void;

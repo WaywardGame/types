@@ -46,7 +46,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     containedItems: Item[];
     containedWithin: IContainer | undefined;
     decay?: number;
-    startingDecay?: number;
     disassembly: Item[];
     driverId?: number;
     equippedId?: number;
@@ -66,6 +65,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     quickSlot: number | undefined;
     referenceId?: number;
     renamed: string | ISerializedTranslation | undefined;
+    startingDecay?: number;
     tradedFrom?: string[];
     type: ItemType;
     used?: IItemUsed;

@@ -24,10 +24,6 @@ export default class MagicalPropertiesInfoProvider extends InfoProvider {
         width: number;
         height: number;
     };
-    initComponent(): {
-        component: import("../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     hasContent(): boolean;
     get(): Translation;
 }

@@ -16,10 +16,6 @@ export default class ItemWeightInfoProvider extends InfoProvider {
     private weight;
     constructor(item: Item);
     getClass(): string[];
-    initComponent(): {
-        component: import("../../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     get(): LabelledValue;
     protected onTickEnd(): void;
     private getStoredWeight;

@@ -22,10 +22,6 @@ export default class ContainedItemsInfoProvider extends InfoProvider {
     constructor(container: IContainer);
     getClass(): string[];
     getDefaultDisplayLevel(): InfoDisplayLevel;
-    initComponent(): {
-        component: import("../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     hasContent(): boolean;
     get(): LabelledValue;
     protected onItemMove(_: any, item: Item, previousContainer: IContainer | undefined, newContainer: IContainer): void;

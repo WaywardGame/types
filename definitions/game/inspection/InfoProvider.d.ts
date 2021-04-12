@@ -57,11 +57,13 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     private displayLevel?;
     protected component?: Component;
     protected context?: InfoProviderContext;
+    private componentClass?;
     abstract get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     abstract getClass(): string[];
     getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel | Set<InfoDisplayLevel>;
     setDisplayLevel(...displayLevel: InfoDisplayLevel[]): this;
     getDisplayLevel(context: InfoProviderContext): Set<InfoDisplayLevel>;
+    setComponent(componentClass: Class<Component>): this;
     private icon?;
     getIcon(): IIcon | undefined;
     setIcon(icon?: IIcon): this;
@@ -95,7 +97,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
      * Call when this info provider should be removed.
      */
     remove(): this;
-    initComponent(component?: Component<HTMLElement>, context?: InfoProviderContext, partial?: boolean): {
+    initComponent(context: InfoProviderContext, component?: Component<HTMLElement>, partial?: boolean): {
         component: Component<HTMLElement>;
         fullInit(): void;
     };
@@ -104,7 +106,6 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
 export declare class SimpleInfoProvider extends InfoProvider {
     private readonly classes;
     private readonly contents;
-    private componentClass;
     private childComponentClass;
     constructor(...translations: Array<TranslationGenerator | InfoProvider>);
     get(): (import("../../language/Translation").default | import("../../language/Translation").ISerializedTranslation | import("../../language/dictionary/UiTranslation").default | (() => import("../../language/Translation").default | Iterable<import("../../utilities/string/Interpolator").IStringSection> | import("../../language/Translation").ISerializedTranslation | import("../../language/dictionary/UiTranslation").default | undefined) | InfoProvider)[];
@@ -112,11 +113,6 @@ export declare class SimpleInfoProvider extends InfoProvider {
     addInfoGetter(provider: () => InfoProvider | undefined): this;
     getClass(): string[];
     addClasses(...classes: string[]): this;
-    initComponent(): {
-        component: Component<HTMLElement>;
-        fullInit(): void;
-    };
     protected initChildTextComponent(text: TranslationGenerator): Text;
-    setComponent(componentClass: Class<Component>): this;
     setChildComponent(componentClass: Class<Text>): this;
 }

@@ -15,16 +15,16 @@ import { Reference } from "game/reference/ReferenceManager";
 import InspectionsList from "ui/screen/screens/game/component/InspectionsList";
 import InspectionsTooltipHandler from "ui/screen/screens/game/InspectionsTooltipHandler";
 export default class ReferenceTooltipHandler extends InspectionsTooltipHandler<ReferenceInspectionsList> {
+    private readonly context;
     private readonly reference;
     private readonly args;
-    constructor(reference: Reference, ...args: any[]);
+    constructor(context: InfoProviderContext, reference: Reference, ...args: any[]);
     protected initializeInspections(): ReferenceInspectionsList;
 }
 export declare class ReferenceInspectionsList extends InspectionsList<ReferenceInspectionsHandler> {
     private readonly reference;
     private readonly args;
-    private readonly context;
-    constructor(reference: Reference, ...args: any[]);
+    constructor(context: InfoProviderContext, reference: Reference, ...args: any[]);
     isValid(): boolean;
     protected initializeInspections(): ReferenceInspectionsHandler;
     protected onInspect(): boolean;

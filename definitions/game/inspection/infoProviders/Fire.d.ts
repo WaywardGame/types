@@ -18,10 +18,6 @@ export default class FireInfoProvider extends InfoProvider {
     private fireStage;
     constructor(decayProvider: () => number);
     getClass(): string[];
-    initComponent(): {
-        component: import("../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     get(): Translation;
     protected onTickEnd(): void;
     private getFireStage;

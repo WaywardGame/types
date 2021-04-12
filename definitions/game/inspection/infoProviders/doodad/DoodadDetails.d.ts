@@ -13,10 +13,6 @@ import { InfoProvider } from "game/inspection/InfoProvider";
 export default class DoodadDetails extends InfoProvider {
     private readonly doodad;
     constructor(doodad: Doodad);
-    initComponent(): {
-        component: import("../../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     getClass(): string[];
     hasContent(): boolean;
     get(): import("game/inspection/InfoProvider").SimpleInfoProvider[];

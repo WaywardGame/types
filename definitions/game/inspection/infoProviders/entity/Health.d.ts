@@ -17,10 +17,6 @@ export default class HealthInfoProvider<E extends Entity> extends InfoProvider {
     protected readonly entity: E;
     constructor(entity: E);
     getClass(): string[];
-    initComponent(): {
-        component: import("../../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     hasContent(): boolean;
     get(context: InfoProviderContext): Translation;
     protected getName(): Translation;

@@ -19,10 +19,6 @@ export default class ItemDetailsInfoProvider extends InfoProvider {
     private readonly description;
     constructor(item: Item | ItemType);
     getClass(): string[];
-    initComponent(): {
-        component: import("../../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     get(): (0 | import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue | ItemWorthInfoProvider)[];
     private getInsulation;
     private getPreservation;

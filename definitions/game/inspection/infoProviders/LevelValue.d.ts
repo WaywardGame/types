@@ -30,10 +30,6 @@ export default class LevelValue<E extends DictionaryEnum> extends InfoProvider {
     private formatter?;
     private cachedEntry?;
     private constructor();
-    initComponent(): {
-        component: import("../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     getClass(): string[];
     get(): Translation;
     setFirstLevelNone(): this;

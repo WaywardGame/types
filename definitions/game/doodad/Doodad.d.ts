@@ -55,6 +55,10 @@ export interface IDoodadEvents {
      * Emitted when the doodad is removed.
      */
     remove(): any;
+    /**
+     * Emitted when the doodad's type changes.
+     */
+    transformed(newType: DoodadType, oldType: DoodadType): any;
 }
 export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IReferenceable, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasOwner, IHasMagic {
     static is(value: any): value is Doodad;

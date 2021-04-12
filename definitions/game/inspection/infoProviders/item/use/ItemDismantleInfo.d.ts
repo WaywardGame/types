@@ -39,8 +39,4 @@ declare class ItemDismantleOutputInfoProvider extends InfoProvider {
     getClass(): string[];
     getIcon(): IIcon;
     get(): Translation;
-    initComponent(): {
-        component: import("../../../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
 }

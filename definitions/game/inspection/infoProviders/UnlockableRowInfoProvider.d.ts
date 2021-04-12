@@ -19,8 +19,8 @@ export default class UnlockableRowInfoProvider extends InfoProvider {
     constructor(getter: () => number);
     setContent(handler?: ContentHandler | InfoProvider | Translation): this;
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
-    getClass(): never[];
-    initComponent(): {
+    getClass(): string[];
+    initComponent(context: InfoProviderContext): {
         component: import("../../../ui/component/Component").default<HTMLElement>;
         fullInit(): void;
     };

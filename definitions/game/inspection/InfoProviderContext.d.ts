@@ -9,11 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { TextContext } from "language/Translation";
-import { IInspector } from "./IInfoProvider";
+import { IInspector, InfoDisplayLevel } from "./IInfoProvider";
 export declare class InfoProviderContext {
     readonly textContext: TextContext;
     readonly inspector: IInspector;
-    static readonly UI: new (inspector: IInspector) => InfoProviderContext;
-    static readonly RAW: new (inspector: IInspector) => InfoProviderContext;
-    constructor(textContext: TextContext, inspector: IInspector);
+    readonly maxDisplayLevel: InfoDisplayLevel;
+    static readonly UI: new (inspector: IInspector, maxDisplayLevel: InfoDisplayLevel) => InfoProviderContext;
+    static readonly RAW: new (inspector: IInspector, maxDisplayLevel: InfoDisplayLevel) => InfoProviderContext;
+    constructor(textContext: TextContext, inspector: IInspector, maxDisplayLevel: InfoDisplayLevel);
 }

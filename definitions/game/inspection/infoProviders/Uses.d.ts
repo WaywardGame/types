@@ -28,10 +28,6 @@ export default abstract class Uses<T extends IDescribed> extends InfoProvider {
     protected abstract getUses(description: DescribedDescription<T>): ActionType[];
     protected abstract getUseInfoHandlers(description: DescribedDescription<T>): Array<UseInfo<any, any, any, T>>;
     getClass(): string[];
-    initComponent(): {
-        component: import("../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     setLabel(label: Translation | UiTranslation): this;
     private readonly details;
     addDetails(...details: symbol[]): this;

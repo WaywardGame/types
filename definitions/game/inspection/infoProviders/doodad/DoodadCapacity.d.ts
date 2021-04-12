@@ -15,10 +15,6 @@ export default class DoodadCapacity extends InfoProvider {
     private readonly doodad;
     static get(doodad: Doodad): DoodadCapacity | undefined;
     constructor(doodad: Doodad);
-    initComponent(): {
-        component: import("../../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     getClass(): string[];
     get(): never[] | LabelledValue;
 }

@@ -20,10 +20,6 @@ export default class HarvestabilityInfoProvider extends InfoProvider {
     private constructor();
     getClass(): string[];
     getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel;
-    initComponent(): {
-        component: import("../../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     hasContent(): boolean;
     get(): Translation;
     onTickEnd(): void;

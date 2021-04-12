@@ -16,10 +16,6 @@ export default class DoodadDurabilityInfoProvider extends InfoProvider {
     private durability;
     constructor(doodad: Doodad);
     getClass(): string[];
-    initComponent(): {
-        component: import("../../../../ui/component/Component").default<HTMLElement>;
-        fullInit(): void;
-    };
     hasContent(): boolean;
     get(): LabelledValue;
     onTickEnd(): void;

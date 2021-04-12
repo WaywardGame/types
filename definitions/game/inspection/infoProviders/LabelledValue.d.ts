@@ -12,7 +12,6 @@ import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
-import Component from "ui/component/Component";
 import { TranslationGenerator } from "ui/component/IComponent";
 import Text from "ui/component/Text";
 export declare enum LabelledValueDisplayMode {
@@ -27,7 +26,6 @@ export default class LabelledValue extends InfoProvider {
     static label(label: Translation | UiTranslation): {
         add(...values: Array<GetterOfOr<InfoProvider | Translation | UiTranslation | undefined>>): LabelledValue;
     };
-    private componentClass;
     private displayMode;
     private contentDisplayLevel?;
     private labelDisplayLevel?;
@@ -39,12 +37,7 @@ export default class LabelledValue extends InfoProvider {
     addClasses(...classes: string[]): this;
     private getLabel;
     get(): (Translation | UiTranslation | InfoProvider)[];
-    initComponent(): {
-        component: Component<HTMLElement>;
-        fullInit(): void;
-    };
     protected initChildTextComponent(text: TranslationGenerator): Text;
-    setComponent(componentClass: Class<Component>): this;
     setDisplayMode(mode: keyof typeof LabelledValueDisplayMode): this;
     setDisplayMode(mode: keyof typeof LabelledValueDisplayMode): this;
     setDisplayMode(mode: keyof typeof LabelledValueDisplayMode, contentDisplayLevel?: InfoDisplayLevel): this;
