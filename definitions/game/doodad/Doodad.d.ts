@@ -99,11 +99,11 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     tradedFrom?: string[];
     aberrant?: boolean;
     magic: MagicalPropertyManager;
+    private fireStage?;
     private _description;
     private _tile;
     private _tileId;
     private readonly _doodadGroupCache;
-    private fireStage?;
     private _minDur;
     constructor(type?: DoodadType, x?: number, y?: number, z?: number, options?: IDoodadOptions);
     toString(): string;
