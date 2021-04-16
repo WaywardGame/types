@@ -10,12 +10,19 @@
  */
 import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
-import { TranslationGenerator } from "newui/component/IComponent";
-import Text from "newui/component/Text";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
+import { ReferenceType } from "game/reference/IReferenceManager";
+import { TranslationGenerator } from "ui/component/IComponent";
+import Text from "ui/component/Text";
 import { IVector3 } from "utilities/math/IVector";
 export default abstract class Inspection<O> extends InfoProvider {
     readonly type: InspectType;
     readonly value: O;
+    static createEnumReferenceHandler<R extends ReferenceType, E, K extends string>(referenceType: R, enumObject: {
+        [key in K]: E;
+    }, predicate?: (reference: [R, E], context?: InfoProviderContext) => any): (value: unknown, context?: InfoProviderContext | undefined) => any;
+    static verifyHumanity(_: any, context?: InfoProviderContext): boolean;
+    static getDefaultPriority(inspectType: InspectType): number;
     constructor(type: InspectType, value: O);
     getClass(): string[];
     getBorder(): string | undefined;

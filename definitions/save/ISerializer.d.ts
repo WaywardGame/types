@@ -46,16 +46,9 @@ export interface IPropSerializable {
     getSerializationProperties(version: string): string[];
 }
 /**
- * Do not add anything to this list unless Spacetech approves it
- */
-/**
- * Do not add anything to this list unless Spacetech approves it
- */
-/**
- * Do not add anything to this list unless Spacetech approves it
- */
-/**
- * Do not add anything to this list unless Spacetech approves it
+ * Note 1: Do not add anything to this list unless Spacetech approves it
+ * Note 2: Max of 255 types before the game breaks
+ * Note 3: NEVER reorder or remove things from this
  */
 export declare enum Types {
     Invalid = 0,
@@ -96,7 +89,12 @@ export declare enum Types {
     JITDeserialization = 35,
     TileEvent = 36,
     ArrayV3 = 37,
-    EndMarker = 38
+    EndMarker = 38,
+    ReplayLogEntry = 39,
+    DrawnMap = 40,
+    Corpse = 41,
+    ArrayV4 = 42,
+    SavedTilesSerializer = 43
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_SAVE_PROPERTY_FLAGS: unique symbol;

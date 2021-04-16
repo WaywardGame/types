@@ -25,11 +25,6 @@ export interface IConnection {
     playerSteamId: string | undefined;
     matchmakingIdentifier: string;
     pid?: number;
-    /**
-     * Packets are queued while the player is connected.
-     * They are dequeued once the client loads the world - catch up logic
-     */
-    queuedPackets: IPacket[];
     buffer?: Uint8Array;
     bufferOffset?: number;
     bufferPacketId?: number;
@@ -43,7 +38,23 @@ export interface IConnection {
     getState(): ConnectionState;
     isConnected(): boolean;
     processMatchmakingMessage(message: ArrayBuffer | MatchmakingMessageData): Promise<boolean>;
-    queuePacketData(data: ArrayBuffer): void;
+    /**
+     * Queues a packet to be sent soon
+     * Note: packets are serialized when queued
+     */
+    queuePacket(packet: IPacket): void;
+    /**
+     * Clears queued packets
+     */
+    clearQueuedPackets(): void;
+    /**
+     * Sends a packet to the connection w/ flow control
+     */
+    sendPacket(packet: IPacket): void;
+    /**
+     * Sends queued packets w/ flow control
+     */
+    processQueuedPackets(): void;
     send(data: ArrayBuffer | Uint8Array): void;
     setState(state: ConnectionState): void;
     sendKeepAlive(): void;
@@ -51,6 +62,5 @@ export interface IConnection {
 export interface IQueuedData {
     data: ArrayBuffer;
     byteOffset: number;
-    sendAfter: number | undefined;
     retries?: number;
 }

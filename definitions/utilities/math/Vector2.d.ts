@@ -18,6 +18,10 @@ export default class Vector2 implements IVector2, ISerializable {
     static get ONE(): Vector2;
     static get INFINITY_NEGATIVE(): Vector2;
     static get INFINITY(): Vector2;
+    static fromSize(size: {
+        width: number;
+        height: number;
+    }): Vector2;
     static inRange(center: IVector2, range: number, includeCenter?: boolean): import("@wayward/goodstream/Stream").default<IVector2>;
     static forRange(center: IVector2, range: number, consumer: ConsumerVectorRange): void;
     static forRange(center: IVector2, range: number, includeCenter: boolean, consumer: ConsumerVectorRange): void;

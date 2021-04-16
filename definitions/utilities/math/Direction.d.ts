@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import Vector3 from "utilities/math/Vector3";
 export declare enum Direction {
@@ -15,15 +16,56 @@ export declare enum Direction {
     East = 0,
     North = 1,
     West = 2,
-    South = 3
+    South = 3,
+    Northeast = 4,
+    Northwest = 5,
+    Southeast = 6,
+    Southwest = 7
 }
 export declare module Direction {
-    const DIRECTIONS: Direction[];
-    const CARDINALS: Direction[];
-    const OPPOSITES: Record<Direction, Direction>;
+    type CardinalNames = "East" | "North" | "West" | "South";
+    type Cardinal = (typeof CARDINALS)[number];
+    type Ordinal = (typeof ORDINALS)[number];
+    type Valid = Cardinal | Ordinal;
+    const CARDINALS_AND_NONE: readonly [Direction.None, Direction.East, Direction.North, Direction.West, Direction.South];
+    const CARDINALS: readonly [Direction.East, Direction.North, Direction.West, Direction.South];
+    const ORDINALS: readonly [Direction.Northwest, Direction.Northeast, Direction.Southeast, Direction.Southwest];
+    const DIRECTIONS: readonly [Direction.East, Direction.North, Direction.West, Direction.South, Direction.Northwest, Direction.Northeast, Direction.Southeast, Direction.Southwest];
+    function isCardinal(value: unknown): value is Cardinal;
+    function isOrdinal(value: unknown): value is Ordinal;
+    function isValid(value: unknown): value is Valid;
+    function get(vector: IVector2): Direction;
+    function getByDirections(north: boolean, east: boolean, south: boolean, west: boolean): Direction;
+    const OPPOSITES: {
+        [-1]: Direction.None;
+        0: Direction.West;
+        1: Direction.South;
+        2: Direction.East;
+        3: Direction.North;
+        4: Direction.Southwest;
+        5: Direction.Southeast;
+        6: Direction.Northwest;
+        7: Direction.Northeast;
+    };
     function vector(direction: Direction): Vector2;
     function vector(direction: Direction, z: number): Vector3;
-    const VECTORS: Record<Direction, Vector2>;
-    const HORIZONTAL: Record<Direction, boolean>;
-    const VERTICAL: Record<Direction, boolean>;
+    /**
+     * `0` = East
+     */
+    function radians(direction: Direction): number;
+    /**
+     * `0` = East
+     */
+    function degrees(direction: Direction): number;
+    /**
+     * `0` = East
+     */
+    function fromRadians(rad: number): Direction;
+    /**
+     * `0` = East
+     */
+    function fromDegrees(deg: number): Direction;
+    const VECTORS: Readonly<Record<Direction, Vector2>>;
+    const HORIZONTAL: Readonly<Record<Direction, boolean>>;
+    const VERTICAL: Readonly<Record<Direction, boolean>>;
 }

@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { IRange } from "utilities/math/Range";
-import { RandomInstance } from "utilities/Random";
+import Objects from "utilities/object/Objects";
+import { RandomInstance } from "utilities/random/Random";
 import RandomValueGenerator from "utilities/random/RandomValueGenerator";
 export default class RandomRange extends RandomValueGenerator<IRange> {
     limit?: number;
@@ -21,4 +22,5 @@ export default class RandomRange extends RandomValueGenerator<IRange> {
     int(): number;
     intInRange(): number;
     float(): number;
+    [Objects.SYMBOL_CLONE](clone: typeof Objects.deepClone): this;
 }

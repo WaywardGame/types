@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,16 +10,17 @@
  */
 import "@wayward/goodstream/apply";
 import WAudio from "audio/Audio";
-import DoodadManager from "doodad/DoodadManager";
-import CorpseManager from "entity/creature/corpse/CorpseManager";
-import CreatureManager from "entity/creature/CreatureManager";
-import FlowFieldManager from "entity/flowfield/FlowFieldManager";
-import NPCManager from "entity/npc/NPCManager";
-import Player from "entity/player/Player";
+import DoodadManager from "game/doodad/DoodadManager";
+import CorpseManager from "game/entity/creature/corpse/CorpseManager";
+import CreatureManager from "game/entity/creature/CreatureManager";
+import FlowFieldManager from "game/entity/flowfield/FlowFieldManager";
+import NPCManager from "game/entity/npc/NPCManager";
+import Player from "game/entity/player/Player";
 import Game from "game/Game";
 import Island from "game/Island";
-import { ItemType } from "item/IItem";
-import ItemManager from "item/ItemManager";
+import { ItemType } from "game/item/IItem";
+import ItemManager from "game/item/ItemManager";
+import TileEventManager from "game/tile/TileEventManager";
 import LanguageManager from "language/LanguageManager";
 import HookManager from "mod/HookManager";
 import ModManager from "mod/ModManager";
@@ -36,13 +37,12 @@ import SaveData from "save/data/SaveData";
 import SaveDataGlobal from "save/data/SaveDataGlobal";
 import SaveManager from "save/SaveManager";
 import Steamworks from "steamworks/Steamworks";
-import TileEventManager from "tile/TileEventManager";
 import "typings/jquery";
 import "typings/jqueryui";
-import { ISortable, ISortableOptions } from "ui/functional/IFunctionalSortable";
-import { ITooltip, ITooltipOptions } from "ui/functional/IFunctionalTooltip";
-import Ui from "ui/Ui";
-import "utilities/prototype/Array";
+import { ISortable, ISortableOptions } from "ui/old/functional/IFunctionalSortable";
+import { ITooltip, ITooltipOptions } from "ui/old/functional/IFunctionalTooltip";
+import OldUi from "ui/old/OldUi";
+import { Ui } from "ui/Ui";
 import "utilities/prototype/Promise";
 import "utilities/typesglobal/Class";
 import "utilities/typesglobal/Descriptions";
@@ -80,6 +80,7 @@ declare global {
     let multiplayer: Multiplayer;
     let multiplayerNetworkingOptions: IMultiplayerNetworkingOptions;
     let npcManager: NPCManager;
+    let oldui: OldUi;
     let players: Player[];
     let renderer: WorldRenderer | undefined;
     let resourceLoader: ResourceLoader;
@@ -99,6 +100,7 @@ declare global {
     const gameVersionMajor: number;
     const gameVersionMinor: number;
     const gameVersionPatch: number;
+    const gameVersionName: string;
     const isEdge: boolean;
     const isFirefox: boolean;
     const overlayWorks: boolean | undefined;
@@ -144,7 +146,7 @@ declare global {
         ByteGrid: IByteGridConstructor;
         FlowField: any;
         FieldOfView: any;
-        WorldLayer: any;
+        WorldLayer: IWorldLayerConstructor;
         Navigation: INavigationConstructor;
         DijkstraMap: IDijkstraMapConstructor;
         KDTree: IKDTreeConstructor;
@@ -163,7 +165,14 @@ declare global {
         set(x: number, y: number, red: number, blue: number, green: number, alpha: number): void;
     }
     type IByteGridConstructor = new (width: number, height: number) => IByteGrid;
+    type IWorldLayerConstructor = new (width: number, height: number, level: number) => IWorldLayerCPP;
     type IDijkstraMapConstructor = new () => IDijkstraMap;
+    interface IWorldLayerCPP {
+        getLightBlockMap: () => IByteGrid;
+        getLightLevelMap: () => IColorGrid;
+        updateLightBlockValue: (x: number, y: number, val: number) => void;
+        delete: () => void;
+    }
     interface IDijkstraMapFindPathResult {
         success: boolean;
         path: INavigationNode[];
@@ -225,7 +234,7 @@ declare global {
         createWriteStream(path: string, opts: any): IFileStream;
         copy(source: string, destination: string, opt: {
             dereference?: boolean;
-            filter?: (file: string) => boolean;
+            filter?(file: string): boolean;
         }, cb: (err: string | null | undefined) => void): any;
         emptyDir(destination: string, cb: (err: string | null | undefined) => void): any;
         stat(path: string, cb: (err: string | null | undefined, stats: IFileStat) => void): any;
@@ -263,6 +272,7 @@ declare global {
         isSymbolicLink(): boolean;
     }
     interface IPath {
+        resolve(...path: string[]): string;
         join(...path: string[]): string;
         basename(...path: string[]): string;
         isAbsolute(path: string): boolean;

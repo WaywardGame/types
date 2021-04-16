@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { ITile, TerrainType } from "game/tile/ITerrain";
 import { WorldZ } from "game/WorldZ";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
 import IExploreMap from "renderer/IExploreMap";
 import { TerrainData } from "renderer/IWorld";
 import { IWorldLayer, onDoodadUpdateDelegate, onTileUpdateDelegate, TerrainMask } from "renderer/IWorldLayer";
-import { ITile, TerrainType } from "tile/ITerrain";
 export default class WorldLayer implements IWorldLayer {
     readonly width: number;
     readonly height: number;
@@ -38,7 +38,7 @@ export default class WorldLayer implements IWorldLayer {
     isDoodadAnimationDisabled(terrain: TerrainData): boolean;
     setTile(x: number, y: number, terrainType: TerrainType, terrainMasks?: TerrainMask): void;
     updateAll(): void;
-    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean, updateNeighbors?: boolean, flushImmediate?: boolean, debug?: boolean): void;
+    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean, updateNeighbors?: boolean, flushImmediate?: boolean, recentlyUpdatedFiles?: Set<string>, debug?: boolean): void;
     private mapIndex;
     private setTileInternal;
 }

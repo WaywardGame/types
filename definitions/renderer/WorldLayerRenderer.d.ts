@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import DoodadInfo from "doodad/DoodadInfo";
-import { DoodadType, IDoodadDescription } from "doodad/IDoodad";
 import EventEmitter from "event/EventEmitter";
+import DoodadInfo from "game/doodad/DoodadInfo";
+import { DoodadType, IDoodadDescription } from "game/doodad/IDoodad";
 import { IWorldLayer, TerrainMask } from "renderer/IWorldLayer";
 import IWorldRenderer, { RenderLayerFlag } from "renderer/IWorldRenderer";
 import * as TileAdaptor from "renderer/TileAdaptors";
@@ -48,7 +48,7 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     addTileLayer(tileLayer: TileLayer): void;
     updateAll(): void;
     setDoodad(x: number, y: number, doodadDescription: IDoodadDescription | undefined, doodad: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, variationX: number, variationY: number, hasGraphicVariation: boolean, terrainMasks: TerrainMask, flushImmediate?: boolean): void;
-    renderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFixedDepth: boolean): void;
+    renderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFixedDepth: boolean, flags?: RenderLayerFlag): void;
     getDataIndex(x: number, y: number): number;
     setLayer(layer: TileLayer, dataIndex: number, tileAdaptation: TileAdaptor.ITileAdaptation): void;
     setForegroundLayer(layer: TileLayer, dataIndex: number, tileAdaptation: TileAdaptor.ITileAdaptation, offset?: number): void;

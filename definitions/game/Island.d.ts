@@ -8,27 +8,28 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Doodad from "doodad/Doodad";
-import { ICorpse } from "entity/creature/corpse/ICorpse";
-import Creature from "entity/creature/Creature";
-import NPC from "entity/npc/NPC";
+import { BiomeTypes } from "game/biome/IBiome";
+import Doodad from "game/doodad/Doodad";
+import Corpse from "game/entity/creature/corpse/Corpse";
+import Creature from "game/entity/creature/Creature";
+import NPC from "game/entity/npc/NPC";
+import { CreationId, IGameOld, ISeeds, IWaterContamination, IWell } from "game/IGame";
+import Item from "game/item/Item";
+import DrawnMap from "game/mapping/DrawnMap";
+import { IReferenceable } from "game/reference/IReferenceManager";
 import TemperatureManager from "game/temperature/TemperatureManager";
-import Item from "item/Item";
-import { ITileContainer, ITileData } from "tile/ITerrain";
-import TileEvent from "tile/TileEvent";
-import { LogSource } from "utilities/Log";
-import { IVector2, IVector3 } from "utilities/math/IVector";
-import { BiomeTypes } from "./IBiome";
-import { IGameOld, ISeeds, IWell } from "./IGame";
-import TimeManager from "./TimeManager";
+import { ITileContainer, ITileData } from "game/tile/ITerrain";
+import TileEvent from "game/tile/TileEvent";
+import TimeManager from "game/TimeManager";
+import { IVector2 } from "utilities/math/IVector";
 /**
  * Represents the worlds island
  * Items, Creatures, Npcs, etc.. all exist on the island
  */
-export default class Island {
+export default class Island implements IReferenceable {
     biomeType: BiomeTypes;
-    contaminatedWater: IVector3[];
-    corpses: SaferArray<ICorpse>;
+    contaminatedWater: IWaterContamination[];
+    corpses: SaferArray<Corpse>;
     creatures: SaferArray<Creature>;
     creatureSpawnTimer: number;
     doodads: SaferArray<Doodad>;
@@ -39,24 +40,26 @@ export default class Island {
     name?: string;
     npcs: SaferArray<NPC>;
     position: IVector2;
+    referenceId?: number;
     saveVersion: string;
     tileContainers: ITileContainer[];
     tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;
     tileEvents: SaferArray<TileEvent>;
     time: TimeManager;
+    treasureMaps: DrawnMap[];
     version: string;
     wellData: SaferNumberIndexedObject<IWell>;
     seeds: ISeeds;
-    temperature: TemperatureManager | undefined;
+    temperature: TemperatureManager;
     static positionToId(position: IVector2): string;
     static idToPosition(id: string): IVector2 | undefined;
     constructor(position?: IVector2, startingSeed?: number);
     get id(): string;
-    get biome(): import("./IBiome").IBiomeDescription;
+    get biome(): import("./biome/IBiome").IBiomeDescription;
     registerEventBus(): void;
     unregisterEventBus(): void;
     hydrateFromOldGame(oldGame: IGameOld): void;
-    findUnusedId<T>(source: LogSource, things: T[]): number;
+    findUnusedId<T>(creationId: CreationId, things: T[]): number;
     /**
      * Szudzik's function
      */

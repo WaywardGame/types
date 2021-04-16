@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { CreatureType, TileGroup } from "entity/creature/ICreature";
-import { AttackType, StatusType } from "entity/IEntity";
-import { SkillType } from "entity/IHuman";
-import { Stat } from "entity/IStats";
-import { BiomeType } from "game/IBiome";
+import { BiomeType } from "game/biome/IBiome";
+import { CreatureType, TileGroup } from "game/entity/creature/ICreature";
+import { AttackType, StatusType } from "game/entity/IEntity";
+import { SkillType } from "game/entity/IHuman";
+import { Stat } from "game/entity/IStats";
 import { Milestone } from "game/milestones/IMilestone";
-import { ThreeStateButtonState } from "newui/component/IThreeStateButton";
-import DefaultMap from "utilities/map/DefaultMap";
+import { ThreeStateButtonState } from "ui/component/IThreeStateButton";
+import DefaultMap from "utilities/collection/map/DefaultMap";
 import RandomItem from "utilities/random/generators/RandomItem";
 import RandomRange from "utilities/random/generators/RandomRange";
 import { RecursivePartial } from "utilities/types/Recursive";
@@ -97,6 +97,16 @@ export interface IGameOptions {
          */
         dayPercent?: number;
     };
+    rest: {
+        /**
+         * How long to delay before resting begins
+         */
+        startDelay?: number;
+        /**
+         * Delay between rest ticks
+         */
+        tickInterval?: number;
+    };
     player: IGameOptionsPlayer;
     npcs: {
         merchants: {
@@ -115,6 +125,12 @@ export interface IGameOptions {
      */
     disableMods: boolean;
     milestoneModifiers: Set<Milestone>;
+    items: {
+        /**
+         * Multiplier for decay of items.
+         */
+        decayMultiplier: number;
+    };
 }
 export declare enum UnlockedRecipesStrategy {
     StartWithNone = 0,
@@ -227,9 +243,14 @@ export interface IGameOptionsStat {
      */
     initialValue?: number;
     /**
-     * The max value of the state, or `undefined` if it should be generated randomly
+     * The max value of the stat, or `undefined` if it should be generated randomly
      */
     maxValue?: number;
+    /**
+     * A float or number to multiply against the maxValue after being generated randomly or set via custom options.
+     * Used specifically for milestone modifiers currently.
+     */
+    maxValueMultiplier?: number;
     /**
      * A multiplier for the speed at which the stat changes `1` is "default", `0` is "none", `2` is "two times speed"
      */
@@ -238,6 +259,10 @@ export interface IGameOptionsStat {
      * A bonus value to apply to the stat.
      */
     bonus?: number;
+    /**
+     * The number that stats increase by each gain. By default, this is "1".
+     */
+    gainAmount: number;
 }
 export interface IGameOptionsStatusEffect {
     /**

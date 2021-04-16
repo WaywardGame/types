@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
+import Player from "game/entity/player/Player";
 import IClientStore from "save/clientStore/IClientStore";
 import { ISaveInfo, ISaveManagerEvents, ISaveObject, SaveSort, SortDirection } from "save/ISaveManager";
 import ISerializer from "save/ISerializer";

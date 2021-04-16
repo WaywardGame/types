@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Entity from "entity/Entity";
-import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
+import Entity from "game/entity/Entity";
+import Player from "game/entity/player/Player";
 import IFieldOfView, { CanASeeBType } from "renderer/fieldofview/IFieldOfView";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { CompiledProgram } from "renderer/Shaders";
@@ -58,7 +58,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> i
     createDebugRenderer(): ITextureDebugRenderer;
     canASeeB(type: CanASeeBType, sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number): boolean;
     getBounds(player: Player, radius?: number): IBound3;
-    markAsExplored(player: Player, tiles: IVector2[]): boolean | undefined;
+    markAsExplored(player: Player, tiles: IVector2[]): boolean;
     private updateExplored;
     private computeLights;
 }

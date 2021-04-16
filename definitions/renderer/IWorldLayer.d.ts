@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import DoodadInfo from "doodad/DoodadInfo";
-import { DoodadType, IDoodadDescription } from "doodad/IDoodad";
+import DoodadInfo from "game/doodad/DoodadInfo";
+import { DoodadType, IDoodadDescription } from "game/doodad/IDoodad";
+import { ITile, TerrainType } from "game/tile/ITerrain";
 import { WorldZ } from "game/WorldZ";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
 import IExploreMap from "renderer/IExploreMap";
 import { TerrainData } from "renderer/IWorld";
-import { ITile, TerrainType } from "tile/ITerrain";
 export declare type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean, debug?: boolean) => void;
 export declare type onDoodadUpdateDelegate = (x: number, y: number, doodadDescription: IDoodadDescription | undefined, doodadType: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, doodadVariationX: number, doodadVariationY: number, hasGraphicVariation: boolean, terrainMasks: TerrainMask, flushImmediate: boolean) => void;
 export interface IWorldLayer {
@@ -36,7 +36,7 @@ export interface IWorldLayer {
     getTileDecoration(x: number, y: number): number;
     setTile(x: number, y: number, terrainType: TerrainType | undefined, terrainMasks?: TerrainMask): void;
     updateAll(): void;
-    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean, updateNeighbors?: boolean, flushImmediate?: boolean, debug?: boolean): void;
+    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean, updateNeighbors?: boolean, flushImmediate?: boolean, recentlyUpdatedFiles?: Set<string>, debug?: boolean): void;
     delete(): void;
 }
 export default IWorldLayer;
@@ -49,6 +49,4 @@ export declare enum TerrainMask {
     Wall = 1073741824,
     Fence = 2147483648
 }
-export declare const stillContainerOrder: {
-    [index: number]: number;
-};
+export declare const stillContainerOrder: Record<number, number>;

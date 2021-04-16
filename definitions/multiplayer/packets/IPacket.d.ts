@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ConnectionState } from "multiplayer/networking/IConnection";
-import { IRandomHistory } from "utilities/Random";
+import { IRandomHistory } from "utilities/random/Random";
 export declare const reservedBytes = 5;
 export declare enum PacketType {
     Client = 0,
@@ -22,9 +22,7 @@ export interface ISynchronizationCheckData {
     beforeSyncChecks?: ISyncCheck;
     afterSyncChecks?: ISyncCheck;
 }
-export interface ISyncCheck {
-    [index: number]: Array<number | string>;
-}
+export declare type ISyncCheck = Record<number, Array<number | string>>;
 export interface IPacket {
     getAllowedStates(): ConnectionState;
     getArrayBuffer(id?: number): ArrayBuffer;

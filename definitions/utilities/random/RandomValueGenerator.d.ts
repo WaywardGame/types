@@ -8,10 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { RandomInstance } from "utilities/Random";
-export default abstract class RandomValueGenerator<T> {
+import Objects from "utilities/object/Objects";
+import { RandomInstance } from "utilities/random/Random";
+export default abstract class RandomValueGenerator<T> implements Objects.ICloneable {
     random?: RandomInstance;
     value?: T;
     constructor(random?: RandomInstance, value?: T);
-    getRandom(): import("../Random").Random<import("../Random").SeededGenerator>;
+    getRandom(): import("./Random").Random<import("./Random").SeededGenerator>;
+    abstract [Objects.SYMBOL_CLONE](clone: typeof Objects.deepClone): this;
+    protected clone(clone: typeof Objects.deepClone): readonly [RandomInstance | undefined, T | undefined];
 }

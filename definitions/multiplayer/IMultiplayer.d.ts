@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ICharacter } from "entity/IHuman";
-import { PlayerState } from "entity/player/IPlayer";
-import Player from "entity/player/Player";
+import { ICharacter } from "game/entity/IHuman";
+import { PlayerState } from "game/entity/player/IPlayer";
+import Player from "game/entity/player/Player";
 import { TurnMode } from "game/IGame";
 import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
@@ -27,56 +27,65 @@ export interface IMultiplayerEvents {
     checkConnection(webRtcWorks: boolean, webSocketWorks: boolean): any;
 }
 export declare enum MultiplayerSyncCheck {
-    ActionAttack = 0,
-    ActionMove = 1,
-    BaseEntityManager = 2,
-    CanASeeB = 3,
-    Container = 4,
-    Creature = 5,
-    CreatureCheckMove = 6,
-    CreatureMovement = 7,
-    CreatureNearestPlayer = 8,
-    CreatureOffer = 9,
-    CreaturePosition = 10,
-    Damage = 11,
-    Dismantle = 12,
-    Doodad = 13,
-    EncumberedStatus = 14,
-    FlowFieldHashCode = 15,
-    FlowFieldPenalty = 16,
-    FlowFieldUpdate = 17,
-    FlowFieldUpdateTile = 18,
-    FlowFieldValue = 19,
-    HandToUse = 20,
-    HealthChange = 21,
-    InventoryCount = 22,
-    IsTileEmpty = 23,
-    Item = 24,
-    ItemCraft = 25,
-    ItemDamage = 26,
-    ItemOrder = 27,
-    LastCreationIds = 28,
-    MilestoneSeed = 29,
-    Misc = 30,
-    MoveToTile = 31,
-    PenaltyFieldHashCode = 32,
-    PlaceOnTile = 33,
-    PlayerPositions = 34,
-    Players = 35,
-    PlayerSetup = 36,
-    Random = 37,
-    Reputation = 38,
-    Seed = 39,
-    SkillGain = 40,
-    StaminaChanges = 41,
-    StatChange = 42,
-    Stats = 43,
-    StatusChange = 44,
-    SyncChecks = 45,
-    Temp = 46,
-    Tick = 47,
-    Ticks = 48,
-    Weight = 49
+    Action = 0,
+    ActionAttack = 1,
+    ActionMove = 2,
+    BaseEntityManager = 3,
+    CanASeeB = 4,
+    Container = 5,
+    Creature = 6,
+    CreatureCheckMove = 7,
+    CreatureMovement = 8,
+    CreatureNearestPlayer = 9,
+    CreatureOffer = 10,
+    CreaturePosition = 11,
+    CreatureStatChange = 12,
+    Damage = 13,
+    Dismantle = 14,
+    Doodad = 15,
+    EncumberedStatus = 16,
+    ExhaustedPreMove = 17,
+    FlowFieldHashCode = 18,
+    FlowFieldPenalty = 19,
+    FlowFieldUpdate = 20,
+    FlowFieldUpdateTile = 21,
+    FlowFieldValue = 22,
+    HandToUse = 23,
+    HealthChange = 24,
+    InventoryCount = 25,
+    IsTileEmpty = 26,
+    Item = 27,
+    ItemCraft = 28,
+    ItemDamage = 29,
+    ItemOrder = 30,
+    LastCreationIds = 31,
+    MilestoneSeed = 32,
+    Misc = 33,
+    MoveToTile = 34,
+    PenaltyFieldHashCode = 35,
+    PlaceOnTile = 36,
+    PlayerManager = 37,
+    PlayerPositions = 38,
+    Players = 39,
+    PlayerSetup = 40,
+    Random = 41,
+    Reputation = 42,
+    Seed = 43,
+    SkillGain = 44,
+    StaminaChanges = 45,
+    StatChange = 46,
+    Stats = 47,
+    StatusChange = 48,
+    SyncChecks = 49,
+    Temp = 50,
+    TemperatureGet = 51,
+    TemperatureUpdate = 52,
+    Tick = 53,
+    Ticks = 54,
+    TileEvent = 55,
+    Time = 56,
+    UpdateDirection = 57,
+    Weight = 58
 }
 export declare const maxPlayers = 32;
 export declare const packetTickRate = 10;
@@ -109,10 +118,9 @@ export interface IMultiplayerNetworkingOptions {
     enableWebRtcConnections: boolean;
     enablePacketNumberChecks: boolean;
     enableSeedHistoryChecks: boolean;
-    chunkSize: number;
+    maxMessageSize: number;
     logPackets: boolean;
     logSyncChecks: boolean;
-    fakeRoundTripTime: number;
     recentPacketTracking: number;
     joinServerTimeout: number;
     steamNetworkTimeout: number;
@@ -179,4 +187,5 @@ export interface IJoinServerOptions {
     milestoneModifiers: Set<Milestone>;
     retryMatchmakingInfo: IMatchmakingInfo;
     joinServerTimeout?: number;
+    automaticallyRetry?: boolean;
 }

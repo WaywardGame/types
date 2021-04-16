@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -20,4 +20,6 @@ declare global {
         [key in K]: infer V;
     } ? V : never;
     type Falsy = undefined | null | 0 | "" | false;
+    type Nullish = undefined | null;
+    type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;
 }

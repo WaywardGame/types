@@ -10,31 +10,28 @@
  */
 import { SfxType } from "audio/IAudio";
 import { Command } from "command/ICommand";
-import Doodad from "doodad/Doodad";
-import { IActionApi, IActionDescription } from "entity/action/IAction";
-import Creature from "entity/creature/Creature";
-import { CreatureType, IDamageInfo, SpawnGroup } from "entity/creature/ICreature";
-import Entity from "entity/Entity";
-import Human from "entity/Human";
-import { EquipType, SkillType } from "entity/IHuman";
-import NPC from "entity/npc/NPC";
-import { IMessage } from "entity/player/IMessageManager";
-import { INote } from "entity/player/note/NoteManager";
-import Player from "entity/player/Player";
-import { IMapRequest } from "game/IGame";
+import Doodad from "game/doodad/Doodad";
+import { IActionApi, IActionDescription } from "game/entity/action/IAction";
+import Creature from "game/entity/creature/Creature";
+import { CreatureType, IDamageInfo, SpawnGroup } from "game/entity/creature/ICreature";
+import Entity from "game/entity/Entity";
+import Human from "game/entity/Human";
+import { EquipType, SkillType } from "game/entity/IHuman";
+import NPC from "game/entity/npc/NPC";
+import { IMessage } from "game/entity/player/IMessageManager";
+import Player from "game/entity/player/Player";
+import { BookType, ItemType } from "game/item/IItem";
+import Item from "game/item/Item";
+import ItemRecipeRequirementChecker from "game/item/ItemRecipeRequirementChecker";
+import { ITile } from "game/tile/ITerrain";
 import "IGlobal";
-import { BookType, ItemType } from "item/IItem";
-import Item from "item/Item";
-import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import BaseMod from "mod/BaseMod";
 import { IHookHost } from "mod/IHookHost";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { RenderFlag } from "renderer/IWorldRenderer";
-import { ITile } from "tile/ITerrain";
 import Log from "utilities/Log";
 import { Direction } from "utilities/math/Direction";
-import Vector3 from "utilities/math/Vector3";
 declare abstract class Mod extends BaseMod implements IHookHost {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
@@ -77,7 +74,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onCreatureDeath(creature: Creature): void;
     onCreatureSpawn(creature: Creature): void;
     onCreatureTamed(creature: Creature, owner: Player): void;
-    onDigTreasure(human: Human, treasureTile: Vector3): void;
     onLanguageChange(languageName: string): void;
     onMove(player: Player, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     onMoveDirectionUpdate(human: Human, direction: Direction): void;
@@ -90,15 +86,12 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onPlayerLeave(player: Player): void;
     onQueueSoundEffect(type: SfxType, x: number, y: number, z: number): SfxType | boolean | undefined;
     onGameScreenVisible(): void;
-    onReadMap(human: Human, mapRequest: IMapRequest): void;
     onRenderOverlay(spriteBatch: ISpriteBatch): void;
     onSailToCivilization(player: Player): void;
     onSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
     onTurnEnd(player: Player): void;
     onTurnStart(player: Player): void;
     onUpdateWeight(player: Player, newWeight: number): number | undefined;
-    onWriteNote(player: Player, note: INote): false | undefined;
-    onWrittenNote(player: Player, id: number): void;
     postExecuteAction(api: IActionApi, action: IActionDescription, args: any[]): void;
     postFieldOfView(): void;
     postGenerateWorld(generateNewWorld: boolean): void;

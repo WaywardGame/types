@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InspectType } from "game/inspection/IInspection";
-import { Context } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
 import CorpseInspection from "game/inspection/inspections/CorpseInspection";
 import CorpsesInspection from "game/inspection/inspections/CorpsesInspection";
@@ -17,28 +17,51 @@ import CreatureInspection from "game/inspection/inspections/CreatureInspection";
 import DoodadInspection from "game/inspection/inspections/DoodadInspection";
 import ItemInspection from "game/inspection/inspections/ItemInspection";
 import ItemsInspection from "game/inspection/inspections/ItemsInspection";
+import MilestoneInspection from "game/inspection/inspections/MilestoneInspection";
 import NPCInspection from "game/inspection/inspections/NPCInspection";
 import PlayerInspection from "game/inspection/inspections/PlayerInspection";
+import RecipeInspection from "game/inspection/inspections/RecipeInspection";
 import SelfInspection from "game/inspection/inspections/SelfInspection";
+import SkillInspection from "game/inspection/inspections/SkillInspection";
+import StatInspection from "game/inspection/inspections/StatInspection";
 import TileEventInspection from "game/inspection/inspections/TileEventInspection";
 import TileInspection from "game/inspection/inspections/TileInspection";
 import { IVector3 } from "utilities/math/IVector";
 export declare type InspectionClass = Class<Inspection<any>> & {
-    getFromTile(position: IVector3, context: Context, inspectType: InspectType): ArrayOr<Inspection<any>>;
+    isWorldInspection?(inspectType: InspectType): boolean;
+    getFromTile?(position: IVector3, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<any>>;
+    /**
+     * Whether or not this inspection class can handle the given arguments.
+     * @param args A list of arguments that an inspection can be provided
+     * @returns `true` or a number if the class can handle the arguments. `false` or `undefined` if it can't.
+     * When multiple classes can both handle the arguments, higher numbers are used over lower numbers. `true` is equivalent to `0`.
+     */
+    handles?(...args: any[]): boolean | number | undefined;
+    getDefaultPriority(type: InspectType): number;
 };
 declare const _default: {
     9: typeof CorpseInspection;
     10: typeof CorpsesInspection;
     3: typeof CreatureInspection;
+    17: typeof ItemInspection;
     4: typeof DoodadInspection;
     6: typeof PlayerInspection;
     7: typeof ItemInspection;
     8: typeof ItemsInspection;
+    16: typeof ItemInspection;
+    14: typeof MilestoneInspection;
     2: typeof NPCInspection;
     1: typeof PlayerInspection;
+    15: typeof RecipeInspection;
     0: typeof SelfInspection;
+    13: typeof SkillInspection;
+    18: typeof StatInspection;
     12: typeof TileInspection;
     5: typeof TileEventInspection;
-    11: typeof TileEventInspection.Minor;
+    11: typeof TileEventInspection.Minors;
 } & Record<InspectType, InspectionClass>;
 export default _default;
+export declare module Inspections {
+    function get(...args: any[]): Inspection<any> | undefined;
+    function isWorldInspection(type: InspectType): boolean;
+}

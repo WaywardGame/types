@@ -9,5 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ISegment } from "utilities/string/Interpolator";
-declare const numberSegment: ISegment;
-export default numberSegment;
+export declare const numberAsWordsSegment: ISegment;
+export declare const numberAsRomanNumeralSegment: ISegment;
+export declare const numberToPlacesSegment: ISegment;
+export declare const numberToPercentSegment: ISegment;
+export declare const numberDifferenceSegment: ISegment;
+/**
+ * @deprecated Prefer `numberToPlacesSegment`, `numberAsWordsSegment`
+ */
+export declare const compatNumberSegment: ISegment;

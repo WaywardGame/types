@@ -8,23 +8,25 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Doodad from "doodad/Doodad";
-import { ICorpse } from "entity/creature/corpse/ICorpse";
-import Creature from "entity/creature/Creature";
-import { ICharacter, ICrafted } from "entity/IHuman";
-import NPC from "entity/npc/NPC";
-import { PlayerState } from "entity/player/IPlayer";
+import { BiomeType } from "game/biome/IBiome";
+import Doodad from "game/doodad/Doodad";
+import Corpse from "game/entity/creature/corpse/Corpse";
+import Creature from "game/entity/creature/Creature";
+import { ICharacter, ICrafted } from "game/entity/IHuman";
+import NPC from "game/entity/npc/NPC";
+import { PlayerState } from "game/entity/player/IPlayer";
 import Game from "game/Game";
-import { BiomeType } from "game/IBiome";
+import Item from "game/item/Item";
 import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
-import Item from "item/Item";
+import { ITile, ITileContainer, ITileData, TerrainType } from "game/tile/ITerrain";
+import TileEvent from "game/tile/TileEvent";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
+import World from "renderer/World";
+import { IReplayLogEntry } from "replay/IReplayLogEntry";
 import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
-import { ITile, ITileContainer, ITileData } from "tile/ITerrain";
-import TileEvent from "tile/TileEvent";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-import Vector3 from "utilities/math/Vector3";
+import { IRange } from "utilities/math/Range";
 import TimeManager from "./TimeManager";
 export interface IGameEvents {
     play(): any;
@@ -35,6 +37,8 @@ export interface IGameEvents {
      * @param state The state of the player (why the game is ending)
      */
     end(state: PlayerState): any;
+    createWorld(world: World): any;
+    loadStep(): any;
     pause(): any;
     resume(): any;
     tickStart(tickFlag: TickFlag, ticks: number): any;
@@ -58,6 +62,10 @@ export interface IGameEvents {
      * @param tileUpdateType The tile update type
      */
     tileUpdate(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType): void;
+    /**
+     * Called when a tile type changes.
+     */
+    terrainChange(x: number, y: number, z: number, tile: ITile, oldType: TerrainType): any;
     glLostContext(): any;
     glSetup(restored: boolean): any;
     glInitialized(): any;
@@ -104,35 +112,23 @@ export declare type IGameOld = Partial<Game> & Partial<{
     dailyChallenge: boolean;
     isRealTime: boolean;
     realTimeTickSpeed: TickSpeed;
-    crafted: {
-        [index: number]: ICrafted;
-    };
+    crafted: Record<number, ICrafted>;
     contaminatedWater: IVector3[];
-    corpses: SaferArray<ICorpse>;
+    corpses: SaferArray<Corpse>;
     creatures: SaferArray<Creature>;
     creatureSpawnTimer: number;
     doodads: SaferArray<Doodad>;
     items: Item[];
-    lastCreationIds: {
-        [index: number]: number;
-    };
+    lastCreationIds: Record<number, number>;
     mapGenVersion: string;
     npcs: SaferArray<NPC>;
     saveVersion: string;
     seeds: ISeeds;
     tileContainers: ITileContainer[];
-    tileData: {
-        [index: number]: {
-            [index: number]: {
-                [index: number]: ITileData[];
-            };
-        };
-    };
+    tileData: Record<number, Record<number, Record<number, ITileData[]>>>;
     tileEvents: SaferArray<TileEvent>;
     time: TimeManager;
-    wellData: {
-        [index: number]: IWell | undefined;
-    };
+    wellData: Record<number, IWell | undefined>;
 }>;
 export interface IPlayOptions {
     slot: number | undefined;
@@ -148,7 +144,10 @@ export interface IPlayOptions {
     realTimeTickSpeed: number;
     customMilestoneModifiersAllowed: boolean;
     mapSize: number | undefined;
+    recordReplay: boolean;
     multiplayerWorld?: IMultiplayerWorldData;
+    replayLog?: IReplayLogEntry[];
+    replyCompletedMilestoneCount?: number;
 }
 export interface IPlayerOptions {
     id?: number;
@@ -157,24 +156,8 @@ export interface IPlayerOptions {
     initialSpawnPosition?: IVector3;
     respawnPosition?: IVector3;
     character: ICharacter;
-    crafted?: {
-        [index: number]: ICrafted;
-    };
+    crafted?: Record<number, ICrafted>;
     milestoneModifiers?: Set<Milestone>;
-}
-export interface IMapRequest {
-    /**
-     * The item containing the map.
-     */
-    item: Item;
-    /**
-     * The tile position of the top-left corner of the map.
-     */
-    tilePosition: Vector3;
-    /**
-     * Whether you are decoding a map or reading a drawn map. Defaults to false.
-     */
-    decoding?: boolean;
 }
 export interface ITravelToIslandOptions {
     spawnPosition?: IVector2;
@@ -182,11 +165,21 @@ export interface ITravelToIslandOptions {
 }
 export interface ITravelingToIslandInfo {
     id: string;
+    playerIdentifiers?: string[];
+    travelTime?: number;
     newWorldBiomeTypeOverride?: BiomeType;
 }
 export interface IWell {
     quantity: number;
     waterType: WaterType;
+}
+export interface IWaterContamination {
+    x: number;
+    y: number;
+    z: number;
+    type: WaterType;
+    expected?: number;
+    count?: number;
 }
 export declare enum WaterType {
     None = 0,
@@ -205,61 +198,65 @@ export declare enum UpdateRenderFlag {
 }
 export declare enum RenderSource {
     ActionManager = 0,
-    AmbientLightLevelUpdate = 1,
-    FadeIn = 2,
-    FovTransition = 3,
-    FovUpdate = 4,
-    FovUpdateRadius = 5,
-    GameMovingItems = 6,
-    GamePassTurn = 7,
-    GameResumed = 8,
-    GameTick = 9,
-    GlobalSlotReady = 10,
-    HiddenMob = 11,
-    InspectOverlay = 12,
-    ItemEquip = 13,
-    ItemEquipEffect = 14,
-    ItemMovement = 15,
-    ItemUnequip = 16,
-    Loop = 17,
-    MapDecode = 18,
-    Mod = 19,
-    MovementCreature = 20,
-    MovementNPC = 21,
-    MovementPlayerPost = 22,
-    MovementPlayerPre = 23,
-    MovementPlayerZPost = 24,
-    MovementPlayerZPre = 25,
-    MovementTileEvent = 26,
-    MultiplayerDisconnect = 27,
-    Notifier = 28,
-    NotifierAddItem = 29,
-    NotifierAddStat = 30,
-    OptionHeadgear = 31,
-    OptionVisionMode = 32,
-    OptionZoomLevel = 33,
-    Particles = 34,
-    ParticleSpawn = 35,
-    PlayerAdd = 36,
-    PlayerKill = 37,
-    PlayerProcessMovement = 38,
-    PlayerReady = 39,
-    PlayerRemove = 40,
-    PlayerRespawn = 41,
-    PlayerRest = 42,
-    PlayerRestStart = 43,
-    PlayerRestStop = 44,
-    PlayerWalkToTilePath = 45,
-    PlayerWalkToTilePathOverburdened = 46,
-    PlayerWalkToTilePathPreview = 47,
-    PlayerWalkToTilePathReset = 48,
-    RemoveBlood = 49,
-    Resize = 50,
-    SetupGl = 51,
-    StartGame = 52,
-    Steamworks = 53,
-    Thumbnail = 54,
-    WorldLayerRendererFlush = 55
+    ActionsMenu = 1,
+    AmbientLightLevelUpdate = 2,
+    AttackAnimationStart = 3,
+    FadeIn = 4,
+    FovTransition = 5,
+    FovUpdate = 6,
+    FovUpdateRadius = 7,
+    GameAnimating = 8,
+    GamePassTurn = 9,
+    GameResumed = 10,
+    GameTick = 11,
+    GlobalSlotReady = 12,
+    HiddenMob = 13,
+    InspectOverlay = 14,
+    ItemEquip = 15,
+    ItemEquipEffect = 16,
+    ItemMovement = 17,
+    ItemUnequip = 18,
+    Loop = 19,
+    Mod = 20,
+    MovementCreature = 21,
+    MovementNPC = 22,
+    MovementPlayerPost = 23,
+    MovementPlayerPre = 24,
+    MovementPlayerZPost = 25,
+    MovementPlayerZPre = 26,
+    MovementTileEvent = 27,
+    MultiplayerDisconnect = 28,
+    Notifier = 29,
+    NotifierAddCreature = 30,
+    NotifierAddItem = 31,
+    NotifierAddNotifierIcon = 32,
+    NotifierAddStat = 33,
+    NotifierAddStatusType = 34,
+    OptionHeadgear = 35,
+    OptionVisionMode = 36,
+    OptionZoomLevel = 37,
+    Particles = 38,
+    ParticleSpawn = 39,
+    PlayerAdd = 40,
+    PlayerKill = 41,
+    PlayerProcessMovement = 42,
+    PlayerReady = 43,
+    PlayerRemove = 44,
+    PlayerRespawn = 45,
+    PlayerRest = 46,
+    PlayerRestStart = 47,
+    PlayerRestStop = 48,
+    PlayerWalkToTilePath = 49,
+    PlayerWalkToTilePathOverburdened = 50,
+    PlayerWalkToTilePathPreview = 51,
+    PlayerWalkToTilePathReset = 52,
+    RemoveBlood = 53,
+    Resize = 54,
+    SetupGl = 55,
+    StartGame = 56,
+    Steamworks = 57,
+    Thumbnail = 58,
+    WorldLayerRendererFlush = 59
 }
 export declare enum FireType {
     None = 0,
@@ -280,38 +277,73 @@ export declare enum SaveType {
     BackToMainMenu = 3,
     Multiplayer = 4,
     Challenge = 5,
-    Traveling = 6
+    Traveling = 6,
+    ReplayConvert = 7
 }
 export declare enum TileUpdateType {
     Batch = 0,
-    Corpse = 1,
-    CorpseManager = 2,
-    Creature = 3,
-    CreatureManager = 4,
-    Doodad = 5,
-    DoodadChangeType = 6,
-    DoodadEmbers = 7,
-    DoodadGatherReady = 8,
-    DoodadGrowingStage = 9,
-    DoodadManager = 10,
+    CorpseManager = 1,
+    Creature = 2,
+    CreatureSpawn = 3,
+    DoodadAttachStillContainer = 4,
+    DoodadChangeType = 5,
+    DoodadCreate = 6,
+    DoodadDetachStillContainer = 7,
+    DoodadEmbers = 8,
+    DoodadGatherReady = 9,
+    DoodadGrowingStage = 10,
     DoodadOrientation = 11,
     DoodadOverHidden = 12,
-    DoodadStillContainer = 13,
+    DoodadRemove = 13,
     Item = 14,
-    Mod = 15,
-    NPC = 16,
-    Player = 17,
-    Terrain = 18,
-    TileEventManager = 19,
-    Tilled = 20
+    ItemDrop = 15,
+    Mod = 16,
+    NPC = 17,
+    NPCSpawn = 18,
+    Player = 19,
+    Terrain = 20,
+    TileEventManager = 21,
+    Tilled = 22
+}
+export declare enum CreationId {
+    Doodad = 0,
+    Creature = 1,
+    Corpse = 2,
+    NPC = 3,
+    Item = 4,
+    TileEvent = 5
 }
 export interface IWaterFill {
     count: number;
-    tiles: {
-        [index: number]: {
-            [index: number]: boolean;
-        };
-    };
+    tiles: Record<number, Record<number, boolean>>;
+}
+/**
+ * For items and terrain that can decay, the temperature range that controls the rate of decay.
+ * If not provided for items, they will always decays no matter the temperature.
+ * If not provided for terrain, they will not decay (or melt).
+ *
+ * Example:
+ * ```ts
+ * decayTemperatureRange: {
+ * 	temperature: range(Temperature.Cold, Temperature.Normal),
+ * 	decayChance: range(0, 1),
+ * },
+ * ```
+ */
+export interface IDecayTemperatureRange {
+    /**
+     * The temperature range that determines the rate of decay. IE, when using a `decayChance` of `range(0, 1)`,
+     * when at or below the minimum temperature, the item doesn't decay, and when at or above the maximum temperature,
+     * the item decays at the maximum rate of `1`.
+     */
+    temperature: IRange;
+    /**
+     * The decay chance based on the temperature. IE, when at or below the minimum temperature, uses the minimum decay chance,
+     * and when at or above the maximum temperature, uses the maximum decay chance.
+     *
+     * Defaults to `range(0, 1)`
+     */
+    decayChance?: IRange;
 }
 export declare const DEFAULT_MAP_SIZE = 512;
 export declare const LINE_OF_SIGHT_RADIUS = 15;
@@ -329,4 +361,4 @@ export declare const ZOOM_LEVEL_MAX = 8;
 export declare const ZOOM_LEVEL_MIN = 1;
 export declare const DEFAULT_ISLAND_ID = "0,0";
 export declare const DEFAULT_ISLAND_POSITION: IVector2;
-export declare const ISLAND_TRAVEL_TIME = 50;
+export declare const DEFAULT_ISLAND_TRAVEL_TIME = 150;

@@ -46,7 +46,58 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
      * @param defaultValue The default value to return
      * @see `Mod` or `Hook` for a list of valid hook names.
      */
-    getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
+    getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): {
+        onBuild: HookCallFactory<Hook.OnBuild, any>;
+        onCraft: HookCallFactory<Hook.OnCraft, any>;
+        onCreateWorld: HookCallFactory<Hook.OnCreateWorld, any>;
+        onCreatureDamage: HookCallFactory<Hook.OnCreatureDamage, any>;
+        onCreatureDeath: HookCallFactory<Hook.OnCreatureDeath, any>;
+        onCreatureSpawn: HookCallFactory<Hook.OnCreatureSpawn, any>;
+        onCreatureTamed: HookCallFactory<Hook.OnCreatureTamed, any>;
+        onDisplayMessage: HookCallFactory<Hook.OnDisplayMessage, any>;
+        onDoodadSpawn: HookCallFactory<Hook.OnDoodadSpawn, any>;
+        onEntityKill: HookCallFactory<Hook.OnEntityKill, any>;
+        onGameScreenVisible: HookCallFactory<Hook.OnGameScreenVisible, any>;
+        onGameStart: HookCallFactory<Hook.OnGameStart, any>;
+        onGameTickEnd: HookCallFactory<Hook.OnGameTickEnd, any>;
+        onGameTickStart: HookCallFactory<Hook.OnGameTickStart, any>;
+        onItemDamage: HookCallFactory<Hook.OnItemDamage, any>;
+        onItemEquip: HookCallFactory<Hook.OnItemEquip, any>;
+        onItemQuickslot: HookCallFactory<Hook.OnItemQuickslot, any>;
+        onLanguageChange: HookCallFactory<Hook.OnLanguageChange, any>;
+        onMove: HookCallFactory<Hook.OnMove, any>;
+        onMoveDirectionUpdate: HookCallFactory<Hook.OnMoveDirectionUpdate, any>;
+        onNPCDamage: HookCallFactory<Hook.OnNPCDamage, any>;
+        onNPCDeath: HookCallFactory<Hook.OnNPCDeath, any>;
+        onNPCSpawn: HookCallFactory<Hook.OnNPCSpawn, any>;
+        onOpenBook: HookCallFactory<Hook.OnOpenBook, any>;
+        onPickupDoodad: HookCallFactory<Hook.OnPickupDoodad, any>;
+        onPlayerJoin: HookCallFactory<Hook.OnPlayerJoin, any>;
+        onPlayerLeave: HookCallFactory<Hook.OnPlayerLeave, any>;
+        onQueueSoundEffect: HookCallFactory<Hook.OnQueueSoundEffect, any>;
+        onRenderOverlay: HookCallFactory<Hook.OnRenderOverlay, any>;
+        onSailToCivilization: HookCallFactory<Hook.OnSailToCivilization, any>;
+        onSpawnCreatureFromGroup: HookCallFactory<Hook.OnSpawnCreatureFromGroup, any>;
+        onTurnEnd: HookCallFactory<Hook.OnTurnEnd, any>;
+        onTurnStart: HookCallFactory<Hook.OnTurnStart, any>;
+        onUpdateWeight: HookCallFactory<Hook.OnUpdateWeight, any>;
+        postExecuteAction: HookCallFactory<Hook.PostExecuteAction, any>;
+        postFieldOfView: HookCallFactory<Hook.PostFieldOfView, any>;
+        postGenerateWorld: HookCallFactory<Hook.PostGenerateWorld, any>;
+        postRender: HookCallFactory<Hook.PostRender, any>;
+        postRenderPostProcess: HookCallFactory<Hook.PostRenderPostProcess, any>;
+        postRenderWorld: HookCallFactory<Hook.PostRenderWorld, any>;
+        preExecuteAction: HookCallFactory<Hook.PreExecuteAction, any>;
+        preExecuteCommand: HookCallFactory<Hook.PreExecuteCommand, any>;
+        preLoadWorldDifferences: HookCallFactory<Hook.PreLoadWorldDifferences, any>;
+        preRender: HookCallFactory<Hook.PreRender, any>;
+        preRenderPostProcess: HookCallFactory<Hook.PreRenderPostProcess, any>;
+        preRenderWorld: HookCallFactory<Hook.PreRenderWorld, any>;
+        processInput: HookCallFactory<Hook.ProcessInput, any>;
+        shouldCraft: HookCallFactory<Hook.ShouldCraft, any>;
+        shouldDisplayMessage: HookCallFactory<Hook.ShouldDisplayMessage, any>;
+        shouldRender: HookCallFactory<Hook.ShouldRender, any>;
+    }[H] | HookCallFactory<H, R>;
     load(index: number, loadOrder: number): Promise<void>;
     unload(index: number, cacheHooks?: boolean): Promise<void>;
     save(index: number): void;
@@ -66,6 +117,8 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     getName(index: number): string;
     getLog(index: number): Log;
     getDescription(index: number): string;
+    getReadme(index: number): Promise<string | false>;
+    getIcon(index: number): Promise<string | false | undefined>;
     getTags(index: number): Set<string>;
     getVersion(index: number): string;
     getLastUpdatedDate(index: number): number | undefined;

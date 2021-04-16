@@ -9,9 +9,9 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { TileUpdateType } from "game/IGame";
+import { ITile } from "game/tile/ITerrain";
 import IWorldLayer from "renderer/IWorldLayer";
 import { ISerializable } from "save/ISerializer";
-import { ITile } from "tile/ITerrain";
 export interface IWorld extends ISerializable {
     width: number;
     height: number;

@@ -8,80 +8,93 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { EquipType } from "entity/IHuman";
-import { IContainer, IDismantleComponent, ItemType } from "item/IItem";
-import Item from "item/Item";
-import "ui/functional/FunctionalSortable";
-import "ui/functional/FunctionalTooltip";
-import { DialogId, IDialogInfo } from "ui/IUi";
-import InGameScreen from "ui/screens/InGameScreen";
-import Emitter from "utilities/Emitter";
-export default class Ui extends Emitter {
-    screenInGame: InGameScreen;
-    private readonly elementDocument;
-    private readonly elementWindow;
-    private readonly elementBody;
-    private bodyWidth;
-    private bodyHeight;
-    private elementScrollableContainers;
-    private unloading;
-    constructor();
-    initialize(): void;
-    initializeGameState(): void;
-    getBody(): JQuery;
-    getWidth(): number;
-    getHeight(): number;
-    setCheckboxValue(element: JQuery, id: string, checked: boolean): void;
-    playClickSound(): void;
-    hideInGameScreen(): void;
-    onWindowResize(): void;
-    isInGameScreenShown(): boolean;
-    setupItemBackgrounds(): void;
-    loadQuickSlots(): void;
-    isContextMenuOpen(): boolean;
-    isOptionsOverlayShown(): boolean;
-    isOptionsOverlayEnabled(): boolean;
-    tooltipRefresh(): void;
-    updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
-    updateDismantleTab(dismantleItems: IDismantleComponent): void;
-    filterContainers(): void;
-    getInventoryItemOrder(): any[];
-    updateItem(item: Item, updateChildren?: boolean): void;
-    syncAllItems(): void;
-    hideContextMenu(): void;
-    hideActionsMenu(): void;
-    setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
-    setQuickSlot(quickSlot: number, itemId: number, internal?: boolean): void;
-    refreshQuickSlots(): void;
-    getUsedQuickSlots(): number[];
-    removeItemFromQuickSlot(itemId: number): void;
-    removeItemFromEquipSlot(equip: EquipType): void;
-    shouldRefreshMods(): boolean;
-    onGameEnd(): void;
-    onUpdateDirection(): void;
-    toggleUIDisplay(hide: boolean): void;
-    getSerializationProperties(_: string): string[];
-    onMove(): void;
-    changeEquipmentOption(id: "leftHand" | "rightHand"): void;
-    closeAllContainers(): void;
-    openContainer(container: IContainer, containerName?: string): void;
-    closeContainer(container: IContainer): void;
-    refreshContainerName(container: IContainer): void;
-    isContainerOpen(container: IContainer): boolean;
-    addItemToContainer(item: Item, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
-    afterAddingMultipleItemsToContainer(container: IContainer): void;
-    removeItemFromContainer(item: Item, container: IContainer): void;
-    updateInventorySort(): void;
-    getDialogInfo(dialogId: DialogId): IDialogInfo;
-    setVersionExtra(msg: string): void;
-    openDialogs(): void;
-    updateScrollableContainersList(): void;
-    updateScrollableContainer(this: Element): void;
-    cancelSorting(): void;
-    private onBeforeUnloadElectron;
-    private onBeforeUnloadBrowser;
-    private logErrorEvent;
-    private logPromiseRejectionEvent;
-    private removeStyle;
-    private appendStyle;
+import { SfxType } from "audio/IAudio";
+import EventEmitter from "event/EventEmitter";
+import Interrupt from "language/dictionary/Interrupt";
+import InterruptChoice from "language/dictionary/InterruptChoice";
+import { IComponent } from "ui/component/IComponent";
+import { IBindHandlerApi } from "ui/input/Bind";
+import { IInterruptMenuFactory } from "ui/IUi";
+import ScreenManager from "ui/screen/ScreenManager";
+import SelectionHandler from "ui/screen/screens/menu/component/SelectionHandler";
+import TooltipManager from "ui/tooltip/TooltipManager";
+import HighlightManager from "ui/util/HighlightManager";
+import { InterruptOptions } from "ui/util/IInterrupt";
+import InterruptFactory from "ui/util/InterruptFactory";
+import ScaleManager from "ui/util/ScaleManager";
+import Vector2 from "utilities/math/Vector2";
+export interface IUiEvents {
+    resize(viewport: Vector2, oldViewport: Vector2): any;
+    interrupt(options: Partial<InterruptOptions>, interrupt?: Interrupt): string | boolean | InterruptChoice | undefined | void;
+    interruptClose(options: Partial<InterruptOptions>, result?: string | boolean | InterruptChoice): any;
+    loadedFromSave(): any;
+    toggleShowMoreInformation(showingMoreInformation: boolean): any;
+    toggleDeveloperMode(developerMode: boolean): any;
 }
+export declare class Ui extends EventEmitter.Host<IUiEvents> {
+    readonly scale: ScaleManager;
+    readonly highlights: HighlightManager;
+    readonly screens: ScreenManager;
+    readonly tooltips: TooltipManager;
+    readonly selection: SelectionHandler;
+    readonly viewport: Vector2;
+    get windowWidth(): number;
+    get windowHeight(): number;
+    private storageElement;
+    private readonly dataHosts;
+    private hqUnsupportedColors;
+    constructor();
+    colorSupportsHQFontRendering(colorID?: string | null): boolean;
+    /**
+     * Returns a new interrupt factory with the given translation data.
+     */
+    interrupt(interrupt: Interrupt, ...args: any[]): InterruptFactory;
+    /**
+     * Returns an interrupt factory that can only be used to create menus.
+     */
+    interrupt(): IInterruptMenuFactory;
+    showLoadingInterrupt(interrupt: Interrupt, ...args: any[]): Promise<InterruptChoice | undefined>;
+    hideLoadingInterrupt(): Promise<void>;
+    /**
+     * @param elements The elements to refresh translations inside
+     */
+    refreshTranslations(...elements: Array<HTMLElement | IComponent | undefined>): void;
+    storeElements(...elements: Array<HTMLElement | IComponent>): void;
+    /**
+     * Registers an object as a "data host", which allows its fields to be saved to `saveData` or `saveDataGlobal`
+     */
+    registerDataHost(id: string | number, host: any): void;
+    playSound(sound: SfxType | "activate" | "select" | "input" | "enable" | "disable"): void;
+    shouldShowMoreInformation(): boolean;
+    toggleShowMoreInformation(showMoreInformation: boolean): void;
+    /**
+     * Toggles fullscreen
+     */
+    toggleFullscreen(): void;
+    /**
+     * @param fullscreen Whether or not fullscreen is enabled
+     */
+    toggleFullscreen(fullscreen?: boolean): void;
+    /**
+     * @param save Whether or not to save the new scale into options. Defaults to true.
+     */
+    setDialogOpacity(opacity?: number, save?: boolean): void;
+    addStylesheet(path: string): void;
+    removeStylesheet(path: string): void;
+    reloadStylesheets(): void;
+    updateFontStyle(): void;
+    updateUIAnimations(): void;
+    toggleDeveloperMode(enabled: boolean): this;
+    protected onGlobalSlotLoaded(): void;
+    protected onMessage(_: any, fullscreen: boolean): void;
+    protected onInterruptClosed(): void;
+    protected onLanguageChange(_: any, language: string): void;
+    protected onFullscreen(): boolean;
+    protected onToggleDevMode(): boolean;
+    protected onReload(api: IBindHandlerApi): boolean;
+    protected onToggleDevTools(): boolean;
+    protected onReloadStylesheets(): boolean;
+    private cacheHQUnsupportedColors;
+}
+declare const ui: Ui;
+export default ui;

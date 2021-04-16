@@ -13,7 +13,7 @@ import { ISaveObject } from "save/ISaveManager";
 export default class LocalStorageDataStorage implements IDataStorage {
     isEnabled(): boolean;
     isReady(): boolean;
-    isSlotUsed(slot: number, interval?: number): boolean;
+    isSlotUsed(slot: number, _interval?: number): boolean;
     saveToSlot(slot: number, saveObject: ISaveObject): number;
     loadFromSlot(slot: number): ISaveObject;
     deleteSlot(slot: number): boolean;

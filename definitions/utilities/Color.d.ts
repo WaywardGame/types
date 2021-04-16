@@ -13,14 +13,20 @@ export interface IRGB {
     g: number;
     b: number;
 }
+export interface IRGBA extends IRGB {
+    a: number;
+}
 export interface IColorFul {
     red: number;
     green: number;
     blue: number;
 }
 declare function Color(color: IRGB): IRGB;
+declare function Color(color: IRGB, a: number): IRGBA;
+declare function Color(color: IRGBA): IRGBA;
 declare function Color(r: number, g: number, b: number): IRGB;
-declare function Color(rgb: string): IRGB;
+declare function Color(r: number, g: number, b: number, a: number): IRGBA;
+declare function Color(rgb: string): IRGB | IRGBA;
 declare function Color(rgb: number): IRGB;
 declare module Color {
     function fromInt(int: number): IRGB;

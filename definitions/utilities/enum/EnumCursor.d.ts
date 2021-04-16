@@ -8,17 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Emitter from "utilities/Emitter";
-export declare enum EnumCursorEvent {
+import EventEmitter from "event/EventEmitter";
+export interface IEnumCursorEvents<E> {
     /**
      * Triggered when the cursor position is changed, for any reason
      */
-    Change = 0
+    change(e: E): any;
 }
 export declare enum EnumCursorDefaultGenerator {
     Random = "Random"
 }
-declare class EnumCursor<E, K extends string = string> extends Emitter {
+declare class EnumCursor<E, K extends string = string> extends EventEmitter.Host<IEnumCursorEvents<E>> {
     protected enumObject: any;
     protected values: E[];
     protected cursor: number;

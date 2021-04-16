@@ -1,13 +1,13 @@
 /*!
-* Copyright Unlok, Vaughn Royko 2011-2020
-* http://www.unlok.ca
-*
-* Credits & Thanks:
-* http://www.unlok.ca/credits-thanks/
-*
-* Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
-* https://github.com/WaywardGame/types/wiki
-*/
+ * Copyright Unlok, Vaughn Royko 2011-2020
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://github.com/WaywardGame/types/wiki
+ */
 import { IModInfo } from "mod/IModInfo";
 declare module Enums {
     function isModdable(enumObject: any): boolean;
@@ -38,7 +38,7 @@ declare module Enums {
      */
     function getNth<E, K extends string>(enumObject: {
         [key in K]: E;
-    }, n: number): E | undefined;
+    }, n: number): Exclude<E, AnyFunction> | undefined;
     /**
      * Returns the number of entries in this enum.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
@@ -51,7 +51,7 @@ declare module Enums {
      * @param random The random instance to use. **Defaults to seeded random.** Note that using this method in non-game locations may
      * cause seed desyncs!
      */
-    function getRandom<T>(enumObject: T, filter?: (value: T[keyof T], index: number) => boolean, random?: import("../Random").Random<import("../Random").SeededGenerator>): T[keyof T];
+    function getRandom<T>(enumObject: T, filter?: (value: T[keyof T], index: number) => boolean, random?: import("../random/Random").Random<import("../random/Random").SeededGenerator>): Exclude<T[keyof T], AnyFunction<any>>;
     /**
      * Get the names of the entries in an enum.
      */
@@ -63,13 +63,13 @@ declare module Enums {
     /**
      * Iterate over the values in an enum.
      */
-    function values<T>(enumObject: T): readonly T[keyof T][];
-    function valueStream<T>(enumObject: T): import("@wayward/goodstream/Stream").default<T[keyof T]>;
+    function values<T>(enumObject: T): readonly Exclude<T[keyof T], AnyFunction<any>>[];
+    function valueStream<T>(enumObject: T): import("@wayward/goodstream/Stream").default<Exclude<T[keyof T], AnyFunction<any>>>;
     /**
      * Iterate over the entries in an enum. Yields a tuple containing the name and value of each entry.
      */
-    function entries<T>(enumObject: T): readonly [keyof T, T[keyof T]][];
-    function entryStream<T>(enumObject: T): import("@wayward/goodstream/Stream").default<[keyof T, T[keyof T]]>;
+    function entries<T>(enumObject: T): readonly [keyof T, Exclude<T[keyof T], AnyFunction<any>>][];
+    function entryStream<T>(enumObject: T): import("@wayward/goodstream/Stream").default<[keyof T, Exclude<T[keyof T], AnyFunction<any>>]>;
     /**
      * Returns whether the given number is a valid entry in an enum.
      * @param enumObject The enum object to check for the entry.

@@ -8,49 +8,34 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ICharacter, ICrafted } from "entity/IHuman";
+import { ICharacter, ICrafted } from "game/entity/IHuman";
 import { IMilestoneData, Milestone } from "game/milestones/IMilestone";
 import { ModState } from "mod/IModInfo";
-import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
 import { IHighscore, IOptions } from "save/data/ISaveDataGlobal";
-import { IDialogInfo } from "ui/IUi";
+import { IDialogInfo } from "ui/old/IOldUi";
+import { ISavedCharacter } from "ui/screen/screens/menu/menus/character/Character";
 import EnumInfo from "utilities/enum/EnumInfo";
 export default class SaveDataGlobal {
     static defaultOptions: IOptions;
-    gameCrafted: {
-        [index: number]: ICrafted;
-    };
+    gameCrafted: Record<number, ICrafted>;
     gameLastPlayedVersion: string;
     gameHighscores: IHighscore[];
     gamePlayedCount: number;
     options: IOptions;
-    playerMilestoneData: {
-        [index: number]: IMilestoneData | undefined;
-    };
-    modManagerModState: {
-        [index: string]: ModState;
-    };
-    modManagerSaveData: {
-        [index: string]: any;
-    };
+    playerMilestoneData: Record<number, IMilestoneData | undefined>;
+    modManagerModState: Record<string, ModState>;
+    modManagerSaveData: Record<string, any>;
     languageManagerSaveData: {
         language?: string;
     };
-    utilitiesEnumsAllocated: {
-        [index: string]: EnumInfo;
-    };
-    savedDialogInfo: {
-        [index: string]: IDialogInfo;
-    };
+    utilitiesEnumsAllocated: Record<string, EnumInfo>;
+    savedDialogInfo: Record<string, IDialogInfo>;
     multiplayerBannedPlayers: string[];
-    multiplayerPreviousGames: {
-        [index: string]: IMultiplayerPreviousGame | undefined;
-    };
+    multiplayerPreviousGames: Record<string, IMultiplayerPreviousGame | undefined>;
     multiplayerMessageOfTheDay: string;
     characters: ISavedCharacter[];
-    newui: {
-        [index: string]: any;
-    };
+    ui: Record<string, any>;
+    lastReadNews: string | undefined;
     lastServerJoined: string | undefined;
     /**
      * Resets all options to default

@@ -10,11 +10,11 @@
  */
 import EventEmitter from "event/EventEmitter";
 import { TileUpdateType } from "game/IGame";
+import { ITile } from "game/tile/ITerrain";
 import { WorldZ } from "game/WorldZ";
 import IWorld from "renderer/IWorld";
 import IWorldLayer from "renderer/IWorldLayer";
 import ISerializer from "save/ISerializer";
-import { ITile } from "tile/ITerrain";
 export interface IWorldEvents {
     updateTile(x: number, y: number, z: number, tile: ITile, tileUpdateType: TileUpdateType): any;
 }
@@ -35,6 +35,6 @@ export default class World extends EventEmitter.Host<IWorldEvents> implements IW
     updateTile(x: number, y: number, z: number, tile: ITile, tileUpdateType: TileUpdateType, flush?: boolean): void;
     startUpdateTileBatch(): void;
     endUpdateTileBatch(): void;
-    serializeObject(serializer: ISerializer): void;
+    serializeObject(_serializer: ISerializer): void;
     deserializeObject(serializer: ISerializer): void;
 }

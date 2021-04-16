@@ -11,6 +11,7 @@
 import { ISpriteInfoList } from "renderer/ISpriteAtlas";
 import ISpriteInfo from "renderer/ISpriteInfo";
 export default class SpriteAtlas {
+    attackAnimations: ISpriteInfoList;
     corpses: ISpriteInfoList;
     creatures: ISpriteInfoList;
     immune: ISpriteInfo;
@@ -18,6 +19,7 @@ export default class SpriteAtlas {
     itemsEquipped: ISpriteInfoList;
     itemsSmall: ISpriteInfoList;
     miss: ISpriteInfo;
+    notifiers: ISpriteInfoList;
     npcs: ISpriteInfoList;
     overlay: ISpriteInfoList;
     playerBody: ISpriteInfo;
@@ -25,7 +27,8 @@ export default class SpriteAtlas {
     playerSleeping: ISpriteInfo;
     shadow: ISpriteInfo;
     sleeps: ISpriteInfoList;
-    statusEffects: ISpriteInfoList;
+    statusEffectIcons: ISpriteInfoList;
+    statusEffectOverlays: ISpriteInfoList;
     text: ISpriteInfo;
     tileEvents: ISpriteInfoList;
     vehicles: ISpriteInfoList;

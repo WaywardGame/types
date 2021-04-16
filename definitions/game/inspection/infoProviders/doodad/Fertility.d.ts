@@ -8,8 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Doodad from "doodad/Doodad";
-import { InfoDisplayLevel, InfoProvider } from "game/inspection/InfoProvider";
+import Doodad from "game/doodad/Doodad";
+import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
+import { InfoProvider } from "game/inspection/InfoProvider";
 import Translation from "language/Translation";
 export default class FertilityInfoProvider extends InfoProvider {
     private readonly doodad;
@@ -17,8 +18,7 @@ export default class FertilityInfoProvider extends InfoProvider {
     private message;
     private constructor();
     getClass(): string[];
-    getDisplayLevel(): InfoDisplayLevel;
-    initComponent(): import("../../../../newui/component/Component").default<HTMLElement>;
+    getDefaultDisplayLevel(): InfoDisplayLevel;
     hasContent(): boolean;
     get(): Translation;
     onTickEnd(): void;

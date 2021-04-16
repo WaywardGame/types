@@ -24,25 +24,24 @@ export declare enum SortDirection {
     More = 1,
     Less = -1
 }
-export declare let SLOT_CHALLENGE: number;
-export declare let SLOT_GLOBAL: number;
-export declare let SLOT_MULTIPLAYER: number;
-export declare let SLOT_COUNT_MAX: number;
-export declare let propertiesToSerialize: ISerializeProperty[];
-export declare let propertiesToSerializeGlobal: ISerializeProperty[];
+export declare const SLOT_CHALLENGE = -1;
+export declare const SLOT_GLOBAL = 26;
+export declare const SLOT_MULTIPLAYER = 27;
+export declare const SLOT_REPLAY = 28;
+export declare const SLOT_COUNT_MAX = 20;
+export declare const propertiesToSerialize: ISerializeProperty[];
+export declare const propertiesToSerializeGlobal: ISerializeProperty[];
 export interface ISaveObject {
     version: string;
     isCompressed: boolean;
-    data: {
-        [index: string]: any;
-    };
+    data: Record<string, any>;
 }
 export interface ISerializeProperty {
     key: string;
     property: string[];
     skipCompression?: boolean;
     savePropertyFlag?: SavePropertyFlag;
-    shouldSerialize?: () => boolean;
+    shouldSerialize?(): boolean;
 }
 export interface ISaveManagerEvents {
     /**

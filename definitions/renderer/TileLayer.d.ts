@@ -56,5 +56,4 @@ export default class TileLayer {
     sendTileToGPU(x: number, y: number, gl: WebGL2RenderingContext): void;
     sendToGPU(gl: WebGL2RenderingContext): void;
     render(gl: WebGL2RenderingContext, x: number, y: number, subTileSize: number, tileScale: number, viewWidth: number, viewHeight: number): void;
-    clear(): void;
 }

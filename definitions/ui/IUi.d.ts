@@ -8,58 +8,55 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ItemType } from "item/IItem";
-import { SortType } from "SortType";
-export declare enum DialogId {
-    Inventory = 0,
-    Crafting = 1,
-    Equipment = 2,
-    Map = 3,
-    Container = 4,
-    Custom = 5
+import InterruptChoice from "language/dictionary/InterruptChoice";
+import { HighlightSelector, IComponent, IHighlight, TranslationGenerator } from "ui/component/IComponent";
+import Input from "ui/component/Input";
+import { IMenu, MenuId } from "ui/screen/screens/menu/component/IMenu";
+export declare enum SaveLocation {
+    /**
+     * Used to mark a field to be saved locally (per save)
+     */
+    Local = 0,
+    /**
+     * Used to mark a field to be saved globally (across saves)
+     */
+    Global = 1,
+    /**
+     * Used to mark a field to be saved both locally and globally. Local data will override global data, if it exists.
+     */
+    Both = 2
 }
-export interface IUiScreen {
-    bindCatcher?: number;
-    selector(): string;
-    bindElements(): void;
-    unbindElements(): void;
-    show(data?: any): void;
-    hide(): void;
-    isVisible(): void;
+/**
+ * Used to mark a field to be saved to either `saveData` or `saveDataGlobal`. Used in conjunction with
+ * `IGameScreenApi.registerDataHost(<id>, <the instance that contains fields marked with this decorator>)`
+ */
+export declare function Save(saveLocation: SaveLocation): any;
+export declare function savedProperties(target: any): Map<string, SaveLocation>;
+export interface IInterruptFactory extends IInterruptMenuFactory {
+    withDescription(description: TranslationGenerator): this;
+    withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;
+    withConfirmation(): Promise<boolean>;
+    withInfo(): Promise<void>;
+    withInput(inputInitializer?: (input: Input) => any): Promise<string>;
+    withLoading(until?: Promise<any> | (() => Promise<any>), canCancel?: boolean | (NullaryFunction), specialType?: string): Promise<InterruptChoice | undefined>;
 }
-export interface IDialogInfo {
-    id?: string;
-    title?: string;
-    open?: boolean;
-    x?: number;
-    y?: number;
-    width?: number | "auto";
-    height?: number | "auto";
-    minWidth?: number;
-    minHeight?: number;
-    maxHeight?: number;
-    maxWidth?: number;
-    canResizeHeight?: boolean;
-    resizable?: boolean;
-    onOpen?(): void;
-    onClose?(): void;
-    onResizeStop?(): void;
+export interface IInterruptMenuFactory {
+    withMenu<M extends IMenu = IMenu>(menuId: MenuId, initializer?: (menu: M) => any): Promise<void>;
 }
-export interface IQuickSlotInfo {
-    itemType: ItemType;
-    action: IContextMenuAction | undefined;
+export interface IHighlightManager {
+    start(host: any, highlight: IHighlight): void;
+    end(host: any): void;
+    register(component: IComponent, selector: HighlightSelector, until?: string | number): void;
 }
-export interface IContainerSortInfo {
-    sortType: SortType;
-    reverse?: boolean;
+export declare enum SelectDirection {
+    Up = -1,
+    Down = 1,
+    Left = -2,
+    Right = 2
 }
-export interface IContextMenuAction {
-    action: string;
-    text: string;
-    keybind?: number;
-    data?: any;
+export interface LoadMenuArgs {
+    _wentBack: boolean;
 }
-export declare enum UiEvent {
-    HelpShow = 0,
-    HelpHide = 1
-}
+export declare const DIALOG_OPACITY_MIN = 0;
+export declare const DIALOG_OPACITY_DEFAULT = 80;
+export declare const UI_HOOK_PRIORITY = -99999999999;

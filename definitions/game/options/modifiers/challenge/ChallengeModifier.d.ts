@@ -10,7 +10,7 @@
  */
 import { Challenge } from "game/options/modifiers/challenge/IChallenge";
 import GameplayModifier from "game/options/modifiers/GameplayModifier";
-import { ITooltip } from "newui/component/IComponent";
+import { ITooltip } from "ui/component/IComponent";
 export default abstract class ChallengeModifier extends GameplayModifier<Challenge> {
     /**
      * How often this modifier should be chosen compared to the others

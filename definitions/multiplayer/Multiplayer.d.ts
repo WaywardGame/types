@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
+import Player from "game/entity/player/Player";
 import { DisconnectReason, IJoinServerOptions, IMultiplayerEvents, IMultiplayerOptions, JoinServerRetryReason, MultiplayerSyncCheck, PacketTarget, ServerInfo, UnableToJoinReason } from "multiplayer/IMultiplayer";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
@@ -144,7 +144,6 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private synchronizationCheck;
     private desync;
     private sendPacketInternal;
-    private _sendData;
     private onStateChange;
     private convertToMatchmakingInfo;
     private getSyncPacketWaitId;

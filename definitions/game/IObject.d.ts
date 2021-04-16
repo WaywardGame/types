@@ -8,12 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { SkillType } from "entity/IHuman";
-import { BiomeType } from "game/IBiome";
+import { BiomeType } from "game/biome/IBiome";
+import { SkillType } from "game/entity/IHuman";
+import { CreationId } from "game/IGame";
+import { TerrainType } from "game/tile/ITerrain";
 import { WorldZ } from "game/WorldZ";
 import { ISerializedTranslation } from "language/Translation";
-import { TerrainType } from "tile/ITerrain";
 export interface IObject<T> {
+    objectType: CreationId;
     type: T;
     id: number;
     renamed?: string | ISerializedTranslation;
@@ -40,7 +42,8 @@ export interface IObjectOptions {
 export declare enum Quality {
     None = 0,
     Random = 1,
-    Remarkable = 2,
-    Exceptional = 3,
-    Legendary = 4
+    Superior = 2,
+    Remarkable = 3,
+    Exceptional = 4,
+    Mastercrafted = 5
 }

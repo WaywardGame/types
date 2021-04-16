@@ -15,12 +15,8 @@ export declare class CompiledProgram {
     private readonly vertexName;
     private readonly fragmentName;
     program: WebGLProgram;
-    uniforms: {
-        [index: string]: number;
-    };
-    attribs: {
-        [index: string]: number;
-    };
+    uniforms: Record<string, number>;
+    attribs: Record<string, number>;
     constructor(gl: WebGL2RenderingContext, vertexName: string, fragmentName: string);
     compileProgram(): void;
 }

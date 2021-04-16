@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ISegment, IStringSection } from "utilities/string/Interpolator";
-export interface IFontSizeSection extends IStringSection {
-    fontSize: "heading" | undefined;
+export interface IHeadingSection extends IStringSection {
+    heading: 1 | 2 | 3 | 4 | 5 | 6 | undefined;
 }
 declare const headingSegment: ISegment;
 export default headingSegment;

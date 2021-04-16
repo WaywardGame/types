@@ -10,28 +10,25 @@
  */
 import { SfxType } from "audio/IAudio";
 import { Command } from "command/ICommand";
-import Doodad from "doodad/Doodad";
-import { IActionApi, IActionDescription } from "entity/action/IAction";
-import Creature from "entity/creature/Creature";
-import { CreatureType, IDamageInfo, SpawnGroup } from "entity/creature/ICreature";
-import Entity from "entity/Entity";
-import Human from "entity/Human";
-import { EquipType, SkillType } from "entity/IHuman";
-import NPC from "entity/npc/NPC";
-import { IMessage } from "entity/player/IMessageManager";
-import { INote } from "entity/player/note/NoteManager";
-import Player from "entity/player/Player";
-import { IMapRequest } from "game/IGame";
-import { BookType, ItemType } from "item/IItem";
-import Item from "item/Item";
-import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
+import Doodad from "game/doodad/Doodad";
+import { IActionApi, IActionDescription } from "game/entity/action/IAction";
+import Creature from "game/entity/creature/Creature";
+import { CreatureType, IDamageInfo, SpawnGroup } from "game/entity/creature/ICreature";
+import Entity from "game/entity/Entity";
+import Human from "game/entity/Human";
+import { EquipType, SkillType } from "game/entity/IHuman";
+import NPC from "game/entity/npc/NPC";
+import { IMessage } from "game/entity/player/IMessageManager";
+import Player from "game/entity/player/Player";
+import { BookType, ItemType } from "game/item/IItem";
+import Item from "game/item/Item";
+import ItemRecipeRequirementChecker from "game/item/ItemRecipeRequirementChecker";
+import { ITile } from "game/tile/ITerrain";
 import { Hook } from "mod/IHookManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { RenderFlag } from "renderer/IWorldRenderer";
-import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
-import Vector3 from "utilities/math/Vector3";
 /**
  * A decorator for registering a hook method on an `IHookHost`.
  * @param priority The priority of this hook method. Defaults to `HookPriority.Normal`
@@ -177,12 +174,6 @@ export interface IHookHost {
      */
     onCreatureTamed?(creature: Creature, owner: Player): void;
     /**
-     * Called when a human digs up treasure.
-     * @param human The human that dug up treasure
-     * @param treasureTile The tile the human dug up treasure at
-     */
-    onDigTreasure?(human: Human, treasureTile: Vector3): void;
-    /**
      * Called when the language is changed
      * @param languageName The name of the newly selected language
      */
@@ -258,12 +249,6 @@ export interface IHookHost {
      */
     onGameScreenVisible?(): void;
     /**
-     * Called when a map is read
-     * @param player The player that read the map
-     * @param mapRequest Information describing how to render the map.
-     */
-    onReadMap?(human: Human, mapRequest: IMapRequest): void;
-    /**
      * Called when rendering the overlay
      * @param spriteBatch The overlay sprite batch
      */
@@ -300,19 +285,6 @@ export interface IHookHost {
      * @returns A number to set the player weight to or undefined to use the default logic
      */
     onUpdateWeight?(player: Player, newWeight: number): number | undefined;
-    /**
-     * Called when the player will write a note.
-     * @param player The player object
-     * @param note The note that will be written.
-     * @returns `false` if the note should be cancelled, or `undefined` to use the default logic
-     */
-    onWriteNote?(player: Player, note: INote): false | undefined;
-    /**
-     * Called when the player has written a note.
-     * @param player The player object
-     * @param id The id of the note that was written.
-     */
-    onWrittenNote?(player: Player, id: number): void;
     /**
      * Called after an action has been executed
      * This is called after the action result is used

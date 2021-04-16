@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { PriorityMap } from "utilities/map/PriorityMap";
+import { PriorityMap } from "utilities/collection/map/PriorityMap";
 export declare enum Priority {
     Lowest = -2000,
     Low = -1000,

@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,9 +11,7 @@
 export default undefined;
 declare global {
     type SaferArray<T> = Array<T | undefined>;
-    interface SaferNumberIndexedObject<T> {
-        [index: number]: T | undefined;
-    }
+    type SaferNumberIndexedObject<T> = Record<number, T | undefined>;
     type ArrayOr<T> = T | T[];
     type IterableOr<T> = T | Iterable<T>;
     type ArrayOfIterablesOr<T> = Array<T | Iterable<T>>;

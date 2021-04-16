@@ -22,11 +22,12 @@ export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEve
     private waitingSlots;
     get isLoading(): boolean;
     private readonly maxConcurrent;
+    private spritePack;
     private spritePacker;
     private tilePacker;
     private imageOverrides;
     private container;
-    initialize(gl: WebGL2RenderingContext, container: IResourceContainer): void;
+    initialize(gl: WebGL2RenderingContext, container: IResourceContainer): Promise<void>;
     loadResources(): Promise<void>;
     continueLoading(): void;
     takeLoadingSlot(callback: () => void): void;
@@ -39,6 +40,8 @@ export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEve
     private createTilePacker;
     private loadResourcesInternal;
     private loadCharacter;
+    private loadAttackAnimations;
+    private loadAttackAnimation;
     private loadCreatures;
     private loadCreature;
     private loadCorpses;
@@ -48,6 +51,8 @@ export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEve
     private loadEquip;
     private loadSleep;
     private loadVehicle;
+    private loadNotifiers;
+    private loadNotifier;
     private loadTerrains;
     private loadTerrain;
     private loadTerrainDecorations;
@@ -59,9 +64,12 @@ export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEve
     private loadHairstyles;
     private loadHairstyle;
     private loadStatuses;
-    private loadStatus;
+    private loadStatusOverlay;
+    private loadStatusIcon;
     private loadOverlays;
     private loadOverlay;
     private loadOthers;
+    private loadBiomeOverrides;
+    private loadBiomeOverride;
     private warnIfTextureOutOfBounds;
 }

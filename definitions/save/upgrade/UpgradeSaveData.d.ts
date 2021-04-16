@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { IVersionInfo } from "utilities/Version";
-export default function upgradeSave(saveVersion: IVersionInfo): void;
+export default function upgradeSave(saveVersion: IVersionInfo, islandVersion: IVersionInfo): void;
 /**
  * Called after loading item & tile references
  */

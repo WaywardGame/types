@@ -27,19 +27,27 @@ export interface IPluralizationRules {
     irregularRules: IrregularRule[];
     articleRules: NameRule[];
 }
+export interface IContextRules {
+    isWord?: RegExp;
+    isWordSeparator?: RegExp;
+    isSentenceSeparator?: RegExp;
+    shouldCapitalizeWord?: RegExp;
+}
 export default abstract class TranslationsProvider {
     readonly dictionaries: Map<string, Map<string, string[]>>;
     readonly language: string;
     readonly pluralizationRules: IPluralizationRules;
+    readonly contextRules: IContextRules;
     constructor(language: string);
     getTranslation(dictionaryName: string, entry: string): string[] | undefined;
-    setDictionary(dictionary: string, translations: {
-        [key: string]: string | string[];
-    }): this;
+    setDictionary(dictionary: string, translations: Record<string, string | string[]>): this;
     setIrregularRules(...rules: Array<[string, string]>): this;
     setPluralizationRules(...rules: Array<PluralRule | [string, string]>): this;
     setSingularizationRules(...rules: Array<SingularRule | [string, string]>): this;
     setUncountableRules(...rules: Array<RegExp | string>): this;
     setArticleRules(...rules: Array<NameRule | [CountMatcher, string, string]>): this;
+    setContextRules(rules: {
+        [key in keyof IContextRules]?: RegExp | string;
+    }): this;
     private getEntryName;
 }

@@ -23,8 +23,8 @@ export declare type EnumObject<T> = T & {
     [EnumProperty.MOD_START]?: number;
     [EnumProperty.EXCLUDED]?: ReadonlySet<keyof T>;
     [EnumProperty.KEYS]?: ReadonlyArray<keyof T>;
-    [EnumProperty.VALUES]?: ReadonlyArray<T[keyof T]>;
-    [EnumProperty.ENTRIES]?: ReadonlyArray<[keyof T, T[keyof T]]>;
+    [EnumProperty.VALUES]?: ReadonlyArray<Exclude<T[keyof T], AnyFunction>>;
+    [EnumProperty.ENTRIES]?: ReadonlyArray<[keyof T, Exclude<T[keyof T], AnyFunction>]>;
 };
 export declare module EnumObject {
     function get<E>(enumObject: E): EnumObject<E>;

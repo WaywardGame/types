@@ -11,9 +11,9 @@
 import { InspectType } from "game/inspection/IInspection";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ISerializedTranslation } from "language/Translation";
-import Bindable from "newui/input/Bindable";
-import { Binding } from "newui/input/Bindings";
-import UiExperiment from "newui/UiExperiments";
+import Bindable from "ui/input/Bindable";
+import { Binding } from "ui/input/Bindings";
+import UiExperiment from "ui/UiExperiments";
 import { ISourceFilter } from "utilities/Log";
 export interface IOptions {
     alternateContextMenu: boolean;
@@ -22,6 +22,7 @@ export interface IOptions {
     autoAttack: boolean;
     autoGatherHarvest: boolean;
     autoPickup: boolean;
+    autoPickupOnIdle: boolean;
     autoSave: [AutoSave.Off] | [AutoSave.Turns | AutoSave.Time, number];
     consoleLogSourceFilter: ISourceFilter;
     currentGame: number;
@@ -50,6 +51,7 @@ export interface IOptions {
     rightClickInspect: boolean;
     rightHand: boolean;
     shouldLoadLastSave: boolean;
+    shouldObjectNamesSkipArticle: boolean;
     skipSplash: boolean;
     tooltipDelay: number;
     tooltips: {
@@ -94,9 +96,7 @@ export declare enum PowerMode {
     HighPerformance = "high-performance"
 }
 export declare type IOptionsOld = Partial<Pick<IOptions, "bindings">> & Partial<{
-    keyBinds: {
-        [index: number]: number;
-    };
+    keyBinds: Record<number, number>;
     bindings: IBindingsOld;
     directionTurnDelay: boolean;
     developerLogging: boolean;

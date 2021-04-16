@@ -10,13 +10,9 @@
  */
 interface IDictionarySchema {
     type: "object";
-    properties: {
-        [key: string]: any;
-    };
+    properties: Record<string, any>;
 }
-interface DictionarySchemas {
-    [key: string]: IDictionarySchema;
-}
+declare type DictionarySchemas = Record<string, IDictionarySchema>;
 export default function generateSchema(): {
     title: string;
     description: string;
@@ -46,15 +42,23 @@ export default function generateSchema(): {
                 pluralRules: {
                     description: string;
                     type: string;
-                    additionalProperties: {
+                    minItems: number;
+                    items: {
                         type: string;
+                        items: {
+                            type: string;
+                        }[];
                     };
                 };
                 singularRules: {
                     description: string;
                     type: string;
-                    additionalProperties: {
+                    minItems: number;
+                    items: {
                         type: string;
+                        items: {
+                            type: string;
+                        }[];
                     };
                 };
                 uncountables: {

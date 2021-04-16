@@ -9,17 +9,17 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import ExploredMapClientData from "save/clientStore/clientData/ExploredMap";
-import NewUiData from "save/clientStore/clientData/NewUiData";
+import UiData from "save/clientStore/clientData/UiData";
 export interface IClientStore {
     get<T extends ClientDataType>(type: T): ClientDataMap<T>;
 }
 export default IClientStore;
 export declare enum ClientDataType {
     ExploredMap = 0,
-    NewUi = 1
+    Ui = 1
 }
 export interface IClientData {
     [ClientDataType.ExploredMap]: ExploredMapClientData;
-    [ClientDataType.NewUi]: NewUiData;
+    [ClientDataType.Ui]: UiData;
 }
 export declare type ClientDataMap<T extends ClientDataType> = IClientData[T];

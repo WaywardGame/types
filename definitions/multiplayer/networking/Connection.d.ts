@@ -17,11 +17,6 @@ export declare abstract class Connection implements IConnection {
     playerSteamId: string | undefined;
     matchmakingIdentifier: string;
     pid?: number;
-    /**
-     * Packets are queued while the player is connected.
-     * They are dequeued once the client loads the world - catch up logic
-     */
-    queuedPackets: IPacket[];
     buffer?: Uint8Array;
     bufferOffset?: number;
     bufferPacketId?: number;
@@ -29,6 +24,11 @@ export declare abstract class Connection implements IConnection {
     lastPacketNumberReceived?: number;
     protected _matchmakingInfo: IMatchmakingInfo | undefined;
     private _state;
+    /**
+     * Packets are queued while the player is connected.
+     * They are dequeued once the client loads the world - catch up logic
+     */
+    private readonly _queuedPackets;
     /**
      * Data is queued when packets are "sent" the client.
      * Used for flow control
@@ -45,8 +45,32 @@ export declare abstract class Connection implements IConnection {
     sendKeepAlive(): void;
     getState(): ConnectionState;
     setState(state: ConnectionState): void;
-    queuePacketData(data: ArrayBuffer): void;
-    processQueuedData(): void;
+    serializePacket(packet: IPacket): ArrayBuffer;
+    /**
+     * Queues a packet to be sent soon
+     * Note: packets are serialized when queued
+     */
+    queuePacket(packet: IPacket): void;
+    /**
+     * Clears queued packets
+     */
+    clearQueuedPackets(): void;
+    /**
+     * Sends a packet to the connection w/ flow control
+     */
+    sendPacket(packet: IPacket): void;
+    /**
+     * Sends queued packets w/ flow control
+     */
+    processQueuedPackets(): void;
+    /**
+     * Sends data to the connection w/ flow control
+     */
+    private _queueData;
+    /**
+     * Sends queued data to the connection w/ flow control
+     */
+    private _processQueuedData;
     abstract isConnected(): boolean;
     abstract send(data: ArrayBuffer | Uint8Array): void;
     abstract processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;

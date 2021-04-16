@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import DoodadInfo from "doodad/DoodadInfo";
-import { DoodadType } from "doodad/IDoodad";
-import { ItemType } from "item/IItem";
+import { BiomeType } from "game/biome/IBiome";
+import DoodadInfo from "game/doodad/DoodadInfo";
+import { DoodadType } from "game/doodad/IDoodad";
+import { ItemType } from "game/item/IItem";
+import { TerrainType } from "game/tile/ITerrain";
 import { TerrainDecoration } from "renderer/Decorations";
-import ITileAtlas from "renderer/ITileAtlas";
 import { TerrainTileInfo } from "renderer/TerrainTileInfo";
-import { TerrainType } from "tile/ITerrain";
 import Vector2 from "utilities/math/Vector2";
 export declare enum TileType {
     Q2TopRightQ1TopLeft = 0,
@@ -60,9 +60,9 @@ export declare enum TileType {
 }
 export declare function rotateTileType90Deg(tileType: TileType, times: number): TileType;
 export declare function getTileLoc(tileType: TileType, tileInfo: TerrainTileInfo, variation?: number): Vector2;
-export default class TileAtlas implements ITileAtlas {
-    terrain: OptionalDescriptions<TerrainType, TerrainTileInfo>;
-    terrainTilled: OptionalDescriptions<TerrainType, TerrainTileInfo>;
+export default class TileAtlas {
+    private readonly terrain;
+    private readonly terrainTilled;
     terrainDecoration: OptionalDescriptions<TerrainDecoration, DoodadInfo>;
     doodads: OptionalDescriptions<DoodadType, DoodadInfo>;
     doodadItems: OptionalDescriptions<ItemType, DoodadInfo>;
@@ -75,6 +75,10 @@ export default class TileAtlas implements ITileAtlas {
     private iceTypes;
     private freshWaterTypes;
     private baseWaterTypes;
+    getTerrain(terrainType: TerrainType, biomeType: BiomeType | undefined): TerrainTileInfo | undefined;
+    getTerrainTilled(terrainType: TerrainType, biomeType: BiomeType | undefined): TerrainTileInfo | undefined;
+    setTerrain(terrainType: TerrainType, terrainTileInfo: TerrainTileInfo, biomeType: BiomeType | undefined): void;
+    setTerrainTilled(terrainType: TerrainType, terrainTileInfo: TerrainTileInfo, biomeType: BiomeType | undefined): void;
     generateLookups(): void;
     isMountain(type: TerrainType): boolean;
     isMountainGround(type: TerrainType): boolean;
@@ -88,4 +92,5 @@ export default class TileAtlas implements ITileAtlas {
     isFloor(type: TerrainType): boolean;
     shouldRenderOverMountainTypes(type: TerrainType): boolean;
     getBaseWaterType(type: TerrainType): TerrainType;
+    private getIndex;
 }

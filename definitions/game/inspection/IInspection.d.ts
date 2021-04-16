@@ -21,6 +21,20 @@ export declare enum InspectType {
     Corpse = 9,
     Corpses = 10,
     TileEventMinor = 11,
-    Tile = 12
+    Tile = 12,
+    Skill = 13,
+    Milestone = 14,
+    Recipe = 15,
+    ItemType = 16,
+    Dismantle = 17,
+    Stat = 18
 }
-export declare const basicInspectionPriorities: Record<InspectType, number>;
+/**
+ * A convenience object for the priority of an inspection compared to other inspections. Useful to make an inspection priority
+ * relative to a vanilla inspection type.
+ */
+export declare const basicInspectionPriorities: Readonly<Record<InspectType, number>>;
+export declare enum InfoIcon {
+    Magical = 0,
+    Protected = 1
+}

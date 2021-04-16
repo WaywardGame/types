@@ -12,6 +12,12 @@ import EventEmitter, { Events } from "event/EventEmitter";
 import { IModEvents } from "mod/IMod";
 import { ModRegistration, SYMBOL_MOD_REGISTRATIONS } from "mod/ModRegistry";
 import Log from "utilities/Log";
+export declare enum ModRegistrationTime {
+    Inherit = 0,
+    Setup = 1,
+    Initialize = 2,
+    Load = 3
+}
 export interface IRegistry {
     [SYMBOL_MOD_REGISTRATIONS]: ModRegistration[];
 }
@@ -91,7 +97,7 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      * Since registrations can reference other registrations, each registration is mapped to a promise, which will resolve when it's
      * completely registered (all registrations it depends upon are registered, and then it itself is registered).
      *
-     * @param registrationTime There are three times in which registrations actually happen:
+     * @param initializationStage There are three times in which registrations actually happen:
      * 	1. `ModRegistrationTime.Initialize` — When the mod is enabled, or the game starts, if the mod is already enabled
      * 	2. `ModRegistrationTime.Load` — When a world is loaded
      * 	3. `ModRegistrationTime.Setup` — When the mod is set up

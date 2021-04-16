@@ -9,12 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InspectType } from "game/inspection/IInspection";
-import { Context } from "game/inspection/InfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
 import Translation from "language/Translation";
 export default abstract class ListInspection<I extends Inspection<any>> extends Inspection<I[]> {
     constructor(inspectType: InspectType, ...inspections: I[]);
-    get(context: Context): Translation;
+    get(context: InfoProviderContext): Translation;
     getId(): string;
-    protected getInspectionTranslation(inspection: I, context: Context): Translation;
+    protected getInspectionTranslation(inspection: I, context: InfoProviderContext): Translation;
 }

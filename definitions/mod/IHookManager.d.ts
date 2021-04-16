@@ -1,4 +1,4 @@
-/**
+/*!
  * Copyright Unlok, Vaughn Royko 2011-2020
  * http://www.unlok.ca
  *
@@ -17,7 +17,6 @@ export declare enum Hook {
     OnCreatureDeath = "onCreatureDeath",
     OnCreatureSpawn = "onCreatureSpawn",
     OnCreatureTamed = "onCreatureTamed",
-    OnDigTreasure = "onDigTreasure",
     OnDisplayMessage = "onDisplayMessage",
     OnDoodadSpawn = "onDoodadSpawn",
     OnEntityKill = "onEntityKill",
@@ -25,7 +24,6 @@ export declare enum Hook {
     OnGameStart = "onGameStart",
     OnGameTickEnd = "onGameTickEnd",
     OnGameTickStart = "onGameTickStart",
-    OnHumanSkillChange = "onHumanSkillChange",
     OnItemDamage = "onItemDamage",
     OnItemEquip = "onItemEquip",
     OnItemQuickslot = "onItemQuickslot",
@@ -43,15 +41,12 @@ export declare enum Hook {
      * @deprecated
      */
     OnQueueSoundEffect = "onQueueSoundEffect",
-    OnReadMap = "onReadMap",
     OnRenderOverlay = "onRenderOverlay",
     OnSailToCivilization = "onSailToCivilization",
     OnSpawnCreatureFromGroup = "onSpawnCreatureFromGroup",
     OnTurnEnd = "onTurnEnd",
     OnTurnStart = "onTurnStart",
     OnUpdateWeight = "onUpdateWeight",
-    OnWriteNote = "onWriteNote",
-    OnWrittenNote = "onWrittenNote",
     PostExecuteAction = "postExecuteAction",
     PostFieldOfView = "postFieldOfView",
     PostGenerateWorld = "postGenerateWorld",

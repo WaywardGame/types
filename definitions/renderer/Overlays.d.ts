@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { IHasImagePath } from "game/IObject";
+import { OverlayType } from "game/tile/ITerrain";
 import { IModdable } from "mod/ModRegistry";
-import { OverlayType } from "tile/ITerrain";
 export interface IOverlayDescription extends IModdable, IHasImagePath {
 }
 export declare const overlayDescriptions: OptionalDescriptions<OverlayType, IOverlayDescription>;

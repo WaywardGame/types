@@ -8,15 +8,22 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { MessageType } from "entity/player/IMessageManager";
+import { DamageType } from "game/entity/IEntity";
+import { SkillType } from "game/entity/IHuman";
+import { Stat } from "game/entity/IStats";
+import { MessageType } from "game/entity/player/IMessageManager";
 import { Quality } from "game/IObject";
+import { Milestone } from "game/milestones/IMilestone";
+import { ReferenceType } from "game/reference/IReferenceManager";
+import { Reference, Referenceable } from "game/reference/ReferenceManager";
 import { Dictionary } from "language/Dictionaries";
 import Message from "language/dictionary/Message";
 import { MiscTranslation } from "language/dictionary/Misc";
 import UiTranslation from "language/dictionary/UiTranslation";
 import { Link } from "language/segment/LinkSegment";
-import { TranslationGenerator } from "newui/component/IComponent";
-import { Random } from "utilities/Random";
+import { ITooltipSection } from "language/segment/TooltipSegment";
+import { TranslationGenerator } from "ui/component/IComponent";
+import { Random } from "utilities/random/Random";
 import Interpolator, { ISegment, IStringSection } from "utilities/string/Interpolator";
 export declare type TranslationProvider = (dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean) => string[] | undefined;
 export declare enum TextContext {
@@ -34,6 +41,8 @@ export interface ISerializedTranslation {
     args?: Array<string | number | boolean | any[] | object | ISerializedTranslation>;
     failWith?: string | ISerializedTranslation | IStringSection[];
     reformatters?: ISerializedTranslation[];
+    reference?: [number, ReferenceType?];
+    tooltip?: ISerializedTranslation | IStringSection[];
 }
 export declare enum ListEnder {
     None = 0,
@@ -41,7 +50,7 @@ export declare enum ListEnder {
     Or = 2
 }
 declare type EntryMapper<T = any> = (v: T) => number;
-declare type SortFallback<T = any, A extends any[] = any[]> = (a: T, b: T, entryA: number, entryB: number, stringA: string, stringB: string, ...args: A) => number;
+declare type SortFallback<T = any, A extends any[] = any[]> = (a: T, b: T, entryA: T extends Translation ? undefined : number, entryB: T extends Translation ? undefined : number, stringA: string, stringB: string, ...args: A) => number;
 declare type Translator<T = any> = (v: T, entry: number, dictionary: Dictionary, index?: number) => Translation | string | undefined;
 export interface ITranslationSorter<T = number> {
     (a: T, b: T): number;
@@ -77,12 +86,15 @@ declare class Translation {
     static empty(): Translation;
     static readonly defaultInterpolator: Interpolator;
     static provider: TranslationProvider;
-    static colorizeQuality(quality: Quality): Translation;
-    static colorizeQuality(quality: Quality, text: string | IStringSection): IStringSection;
-    static colorizeQuality(quality: Quality, text: IStringSection[]): IStringSection[];
+    static colorizeQuality(quality: Quality | string): Translation;
+    static colorizeQuality(quality: Quality | string, text: string | IStringSection): IStringSection;
+    static colorizeQuality(quality: Quality | string, text: IStringSection[]): IStringSection[];
     static colorizeMessageType(type: MessageType): Translation;
     static colorizeMessageType(type: MessageType, text: string | IStringSection): IStringSection;
     static colorizeMessageType(type: MessageType, text: IStringSection[]): IStringSection[];
+    static colorizeStat(type: Stat | string): Translation;
+    static colorizeStat(type: Stat | string, text: string | IStringSection): IStringSection;
+    static colorizeStat(type: Stat | string, text: IStringSection[]): IStringSection[];
     static colorizeImportance(importance: "primary" | "secondary"): Translation;
     static colorizeImportance(importance: "primary" | "secondary", text: string | IStringSection): IStringSection;
     static colorizeImportance(importance: "primary" | "secondary", text: IStringSection[]): IStringSection[];
@@ -96,7 +108,16 @@ declare class Translation {
     static nameOf(type: Dictionary, thing: number | {
         type: number;
         renamed?: string | ISerializedTranslation;
-    }, count?: number, article?: boolean, showRenamedQuotes?: boolean, ...args: any[]): Translation;
+    }, count?: number, article?: boolean, showRenamedQuotes?: boolean): Translation;
+    static reformatSingularNoun(): Translation;
+    static reformatSingularNoun(count: number): Translation;
+    static reformatSingularNoun(article: boolean): Translation;
+    static reformatSingularNoun(count: number, article: boolean): Translation;
+    static reformatSingularNoun(count?: number | boolean, article?: boolean): Translation;
+    static romanNumeral(number: number): Translation;
+    private static readonly romanNumeralTranslationMap;
+    private static getRomanNumeralTranslation;
+    private static translateRomanNumeral;
     static ofNumber(number: number, failWith?: string | Translation): Translation;
     /**
      * DO NOT USE THIS METHOD
@@ -109,6 +130,7 @@ declare class Translation {
     static isSerializedTranslation(thing: unknown): thing is ISerializedTranslation;
     static deserialize(serializedTranslation: ISerializedTranslation): Translation;
     static resolve(dictionary: Dictionary, entry: string | number, index?: number): string;
+    static sorter(): ITranslationSorter<Translation>;
     static sorter<T = number>(dictionary: Dictionary, index?: number): ITranslationSorter<T>;
     private static getStringSections;
     readonly isValid: boolean;
@@ -126,6 +148,8 @@ declare class Translation {
     private cachedSections?;
     private cachedString?;
     private isRootTranslation;
+    private tooltip?;
+    private reference?;
     constructor(dictionary: Dictionary | string, entry: number | string, index?: "random" | number);
     /**
      * Creates from a translation id. Entry matching is done by changing the case-style of the inputted
@@ -149,6 +173,8 @@ declare class Translation {
     constructor(translationId: string);
     withSegments(...segments: ISegment[]): this;
     withSegments(priority: true, ...segments: ISegment[]): this;
+    withTooltip(tooltip?: Falsy | ITooltipSection["tooltip"]): this;
+    setReference(reference?: Reference | Referenceable): this;
     addArgs(...args: any[]): this;
     inContext(context?: TextContext, normalize?: boolean): this;
     passTo(...reformatters: Array<Translation | ((sections: IStringSection[]) => IStringSection[]) | Falsy>): this;
@@ -168,6 +194,7 @@ declare class Translation {
      */
     setRandom(random?: Random): this;
     hasTranslation(): boolean;
+    orElse(translation?: GetterOfOr<Translation | undefined>): Translation | undefined;
     /**
      * Returns this translation as a list of string sections
      */
@@ -198,5 +225,14 @@ declare module Translation {
     const ui: (entry: string | UiTranslation) => Translation;
     const message: (entry: string | Message) => Translation;
     const misc: (entry: string | MiscTranslation) => Translation;
+    const skill: (entry: string | SkillType, color?: boolean) => Translation;
+    const milestone: (entry: string | Milestone, color?: boolean) => Translation;
+    const stat: (entry: string | Stat, color?: boolean) => Translation;
+    const quality: (entry: string | Quality, color?: boolean) => Translation;
+    /**
+     * Damage types are bit flags, so multiple can be stored in one `DamageType`.
+     * This method returns a translated list of damage types.
+     */
+    const damage: (damageTypes: ArrayOr<DamageType>, colorize?: boolean, reformatter?: Translation | ((type: DamageType) => Translation) | undefined) => Translation;
 }
 export default Translation;

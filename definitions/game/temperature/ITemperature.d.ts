@@ -14,7 +14,9 @@ export declare enum Temperature {
     Coldest = -100,
     Cold = -50,
     Cool = -25,
+    Chilled = -12.5,
     Neutral = 0,
+    LukeWarm = 12.5,
     Warm = 25,
     Hot = 50,
     Hottest = 100
@@ -50,4 +52,50 @@ export interface ITemperatureSource {
      * If this method is not implemented, or it returns `undefined`, `Temperature.Neutral` is used.
      */
     getProducedTemperature?(): number | undefined;
+}
+export declare module ITemperatureSource {
+    function is(value: unknown): value is ITemperatureSource;
+}
+export declare enum TempType {
+    Cold = -1,
+    Heat = 1
+}
+export interface IHasInsulation {
+    /**
+     * Gets the insulation of this object.
+     *
+     * Insulation is a decimal number from `0` to `1`.
+     * - An insulation of `0` means that the temperature inside this object is equivalent to the temperature outside.
+     * - An insulation of `1` means that *no* temperature inside this object is emitted to the outside tiles — it is a completely
+     * separate temperature "biome".
+     * - Values in between change how much of the temperatures are produced/used on either side.
+     */
+    getInsulation?(type: TempType): number | undefined;
+    getBaseTemperature?(): number | undefined;
+}
+export interface IInsulationDescription {
+    /**
+     * A decimal number from `0` to `1`.
+     * - An insulation of `0` means that the temperature inside this object is equivalent to the temperature outside.
+     * - An insulation of `1` means that *no* temperature inside this object is emitted to the outside tiles — it is a completely
+     * separate temperature "biome".
+     * - Values in between change how much of the temperatures are produced/used on either side.
+     */
+    [TempType.Cold]?: number;
+    /**
+     * A decimal number from `0` to `1`.
+     * - An insulation of `0` means that the temperature inside this object is equivalent to the temperature outside.
+     * - An insulation of `1` means that *no* temperature inside this object is emitted to the outside tiles — it is a completely
+     * separate temperature "biome".
+     * - Values in between change how much of the temperatures are produced/used on either side.
+     */
+    [TempType.Heat]?: number;
+}
+export declare function getInsulationTypesOrderedByRelevance(): TempType[];
+export interface ITemperatureDescription {
+    /**
+     * The produced temperature of this object — objects whose temperature affects surrounding objects.
+     * A number between `Temperature.Coldest` and `Temperature.Hottest`. When not provided, `Temperature.Neutral` is used.
+     */
+    temperature?: number;
 }

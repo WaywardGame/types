@@ -83,7 +83,8 @@ export declare enum SpriteBatchLayer {
     TileEvent = 4,
     CreatureFlying = 5,
     Overlay = 6,
-    OverTrees = 7
+    OverTrees = 7,
+    BelowDoodads = 8
 }
 export declare enum RenderFlag {
     None = 0,
@@ -95,6 +96,8 @@ export declare enum RenderFlag {
     Overlay = 32,
     OverTrees = 64,
     TileEvent = 128,
+    BelowDoodads = 256,
+    Doodads = 512,
     All = 65535
 }
 export declare enum RenderLayerFlag {
@@ -105,7 +108,8 @@ export declare enum RenderLayerFlag {
     Doodad = 8,
     DoodadOver = 16,
     Mod = 32,
-    All = 255
+    All = 255,
+    ExcludeDoodad = 247
 }
 export declare enum TileLayerType {
     Terrain = 0,
