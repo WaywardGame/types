@@ -10,6 +10,7 @@
  */
 import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
+import { ServerInfo } from "multiplayer/IMultiplayer";
 import { IServerGameDetails, IServerServerDetails } from "multiplayer/matchmaking/IMatchmaking";
 import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamNetworking as ISteamworksNetworking, ISteamworksEvents, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
 interface IRemoteFile {
@@ -57,6 +58,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private readonly workshopFileUrl;
     private readonly ignoredDirectories;
     private _serverToJoin;
+    private _automaticallyJoinServer;
     private _dedicatedServerInfo;
     private _nextBackupTime;
     private _currentLobbyId;
@@ -139,7 +141,8 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     importFromSaveGameMod(modIndex: number, json: string, callback?: (success: boolean) => void): Promise<boolean>;
     deleteSaveGameMod(name: string): void;
     hasServerToJoin(): boolean;
-    onReady(): void;
+    setServerToJoin(serverToJoin: ServerInfo, automatic?: boolean): void;
+    onReady(): Promise<void>;
     processBackups(force?: boolean): Promise<boolean>;
     setupMultiplayerLog(): void;
     getMultiplayerLogs(): string;

@@ -144,7 +144,6 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private synchronizationCheck;
     private desync;
     private sendPacketInternal;
-    private _sendData;
     private onStateChange;
     private convertToMatchmakingInfo;
     private getSyncPacketWaitId;
