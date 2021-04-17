@@ -86,8 +86,8 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     readonly milestonesCollection: import("./options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<Milestone, import("./options/modifiers/milestone/MilestoneModifier").default>;
     challengeCollection?: ChallengeModifiersCollection;
     debugRenderer: ITextureDebugRenderer;
-    glContext: WebGL2RenderingContext | null;
-    glVersion: number;
+    glContext: WebGL2RenderingContext | undefined;
+    glVersion: number | undefined;
     notifier: INotifier | undefined;
     particle: IParticle;
     spriteTexture: WebGLTexture;
@@ -110,7 +110,15 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     setLoading(...loading: Interrupt[]): this;
     setLoaded(...loaded: Interrupt[]): this;
     initialize(): void;
-    initGl(): Promise<void>;
+    globalSlotReady(): void;
+    /**
+     * Initializes WebGl
+     * @param forceWebGlVersion Set to force a specific webgl version
+     */
+    initGl(forceWebGlVersion?: number): Promise<void>;
+    /**
+     * Compiles webgl programs / shaders and creates renderers
+     */
     setupGl(restoring: boolean): Promise<void>;
     resetWebGL(): void;
     setGlContextSize(width: number, height: number): void;

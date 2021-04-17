@@ -146,6 +146,8 @@ export declare class Defense {
     constructor(base: number);
     setResistance(damageTypes: DamageType, amount: number): this;
     setVulnerability(damageTypes: DamageType, amount: number): this;
+    copy(): Defense;
+    equals(defense: Defense): boolean;
 }
 export declare type Attributes = AttributesImpl & Record<DamageType, number>;
 declare class AttributesImpl {
@@ -157,5 +159,7 @@ declare class AttributesImpl {
     all(): [DamageType, number][];
     types(): DamageType[];
     has(): boolean;
+    copy(): Attributes;
+    equals(attrs: Attributes): boolean;
 }
 export {};

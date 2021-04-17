@@ -21,6 +21,7 @@ export default class ModRow extends CheckButton {
     event: IEventEmitter<this, IModRowEvents>;
     private readonly buttonHandler;
     constructor(index: number, info: IModInfo);
+    shouldDisableButtonButtonsOnUnchecked(): boolean;
     setEnabled(enabled: boolean, prompts?: boolean): Promise<boolean>;
     protected onToggle(checked: boolean): Promise<void>;
     private checkDependants;

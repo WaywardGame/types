@@ -20,7 +20,7 @@ export interface IInfoProviderEvents {
     /**
      * Should be emitted when the info provider is starting to initialize its component.
      */
-    init(): any;
+    init(component: Component): any;
     /**
      * Should be emitted when the info provider has detected an update and its contents will need to be refreshed.
      */

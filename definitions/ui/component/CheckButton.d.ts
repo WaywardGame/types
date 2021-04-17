@@ -27,6 +27,7 @@ export declare class CheckButton extends Button implements IRefreshableValue<boo
     get checked(): boolean;
     constructor();
     setChecked(checked: boolean, triggerEvent?: boolean): this;
+    shouldDisableButtonButtonsOnUnchecked(): boolean;
     trySetChecked(checked: boolean, triggerEvent?: boolean): boolean;
     toggleChecked(): void;
     refresh(): this;

@@ -23,7 +23,7 @@ export declare enum LabelledValueDisplayMode {
 export default class LabelledValue extends InfoProvider {
     private readonly label;
     private readonly values;
-    static label(label: Translation | UiTranslation): {
+    static label(label: Translation | UiTranslation | InfoProvider): {
         add(...values: Array<GetterOfOr<InfoProvider | Translation | UiTranslation | undefined>>): LabelledValue;
     };
     private displayMode;
