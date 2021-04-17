@@ -13,13 +13,15 @@ import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import Item from "game/item/Item";
 export default class ItemDurabilityInfoProvider extends InfoProvider {
     private readonly item;
-    private minDur;
-    private decay;
-    private decayRate;
     constructor(item: Item);
     getClass(): string[];
     get(): (0 | LabelledValue)[];
-    protected onTickEnd(): void;
     private getDurability;
     private getDecay;
+    private minDur;
+    private shouldRefreshDurability;
+    private decay;
+    private shouldRefreshDecay;
+    private decayRate;
+    private shouldRefreshDecayRate;
 }

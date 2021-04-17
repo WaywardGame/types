@@ -144,6 +144,10 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getOrderedContainerItems(container: IContainer, allowProtectedItems?: boolean): Item[];
     reduceDismantleWeight(createdItems: Item[], itemWeight: number): void;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup): Translation;
+    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number): Translation;
+    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, article: boolean): Translation;
+    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number, article: boolean): Translation;
+    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count?: number, article?: boolean): Translation;
     getItemTypeListTranslation(itemTypes: Array<ItemType | ItemTypeGroup>): Translation;
     /**
      * Maps each item in the given array to its name translation.

@@ -15,10 +15,11 @@ import { IDismantleDescription, ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import Translation from "language/Translation";
 declare module ItemDismantleInfo {
-    function getRequired(dismantle: IDismantleDescription, mode?: "action" | "standalone"): import("game/inspection/InfoProvider").SimpleInfoProvider | undefined;
-    function getProduced(dismantle: IDismantleDescription, iconScale?: number): ItemDismantleOutputInfoProvider[];
-    const SYMBOL_IS_DISMANTLE_INSPECTION: unique symbol;
-    const useInfo: UseInfo<{
+    type Mode = "action" | "standalone";
+    export function getRequired(item: ItemType, dismantle: IDismantleDescription, mode?: Mode): import("game/inspection/InfoProvider").SimpleInfoProvider | undefined;
+    export function getProduced(dismantle: IDismantleDescription, iconScale?: number): ItemDismantleOutputInfoProvider[];
+    export const SYMBOL_IS_DISMANTLE_INSPECTION: unique symbol;
+    export const useInfo: UseInfo<{
         dismantle: IDismantleDescription;
         objectType: import("../../../../IGame").CreationId.Item;
         value?: Item | undefined;
@@ -29,6 +30,7 @@ declare module ItemDismantleInfo {
         union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Dismantle>;
         details: Set<symbol>;
     }, ActionType.Dismantle, {}, Item>;
+    export {};
 }
 export default ItemDismantleInfo;
 declare class ItemDismantleOutputInfoProvider extends InfoProvider {
