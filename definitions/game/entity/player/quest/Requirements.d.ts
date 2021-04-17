@@ -28,6 +28,9 @@ declare const requirements: {
     10: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[]], {}>;
     11: QuestRequirement<[import("../../creature/ICreature").CreatureType, number], import("game/entity/player/quest/requirement/TameCreatureRequirement").ITameCreatureRequirement>;
     12: QuestRequirement<[number], import("game/entity/player/quest/requirement/TameCreaturesRequirement").ITameCreaturesRequirement>;
+    13: QuestRequirement<[number], {
+        discovered: number;
+    }>;
 };
 export default requirements;
 export declare type RequirementArgs<R extends QuestRequirementType> = (typeof requirements)[R] extends QuestRequirement<infer O, any> ? O : (typeof requirements)[R] extends QuestRequirement<infer O2> ? O2 : never;

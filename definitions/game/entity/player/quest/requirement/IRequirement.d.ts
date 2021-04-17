@@ -22,7 +22,8 @@ export declare enum QuestRequirementType {
     Dismantle = 9,
     Build = 10,
     TameCreature = 11,
-    TameCreatures = 12
+    TameCreatures = 12,
+    DiscoverTreasure = 13
 }
 export interface IQuestRequirementEvents {
     met(requirement: IQuestRequirement): any;
