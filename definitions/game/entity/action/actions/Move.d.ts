@@ -10,5 +10,6 @@
  */
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.Direction], import("../../player/Player").default, void, [import("../../../../utilities/math/Direction").Direction.None | import("../../../../utilities/math/Direction").Direction.East | import("../../../../utilities/math/Direction").Direction.North | import("../../../../utilities/math/Direction").Direction.West | import("../../../../utilities/math/Direction").Direction.South]>;
+import { Direction } from "utilities/math/Direction";
+declare const _default: Action<[ActionArgument.Direction], import("../../player/Player").default, void, [Direction.None | Direction.East | Direction.North | Direction.West | Direction.South]>;
 export default _default;
