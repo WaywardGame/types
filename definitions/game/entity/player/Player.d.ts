@@ -214,7 +214,6 @@ export default class Player extends Human {
     protected canSkillGain(): boolean;
     protected onSkillGain(skill: SkillType, mod: number): void;
     protected getSkillGainMultiplier(skillType: SkillType): number;
-    protected restored(): void;
     protected getApplicableStatusEffects(): Set<StatusType>;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
     protected calculateStats(): void;

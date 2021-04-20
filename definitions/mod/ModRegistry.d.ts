@@ -565,7 +565,7 @@ declare module Register {
      * }
      * ```
      */
-    export function bulk<REG_TYPE extends keyof typeof Register>(type: REG_TYPE, ...entries: Array<Parameters<(typeof Register)[REG_TYPE]>>): <K extends string | number | symbol, T extends { [k in K]: ExtractRegisteredType<typeof Register[REG_TYPE]>[]; }>(target: T, key: K) => void;
+    export function bulk<REG_TYPE extends keyof typeof Register, REG extends AnyFunction = (typeof Register)[REG_TYPE]>(type: REG_TYPE, ...entries: Array<Parameters<REG>>): <K extends string | number | symbol, T extends { [k in K]: ExtractRegisteredType<REG>[]; }>(target: T, key: K) => void;
     /**
      * Registers a command.
      * @param name The name of this command (what players will type to use it, eg: `/heal`).
@@ -598,6 +598,14 @@ declare class RegistryRegisteredFactory<H> {
      * As much as you may wish it was, the returned value is not actually the type it claims to be. Do not use it as such.
      */
     get<K extends keyof H>(key: K): H[K];
+    /**
+     * @param key A key of the registry `H` that maps to an array value.
+     * @param index An index in the array.
+     * @returns An intermediate value referencing the `T` stored in the array in the given key in `H`.
+     *
+     * As much as you may wish it was, the returned value is not actually the type it claims to be. Do not use it as such.
+     */
+    get<K extends keyof H>(key: K, index: number): H[K] extends Array<infer T> ? T : never;
     /**
      * @param key The key of `H` which contains `T`.
      * @returns An intermediate value referencing the `T` stored in the given key in `H`

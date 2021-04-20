@@ -97,7 +97,9 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
      * Call when this info provider should be removed.
      */
     remove(): this;
-    initComponent(context: InfoProviderContext, component?: Component<HTMLElement>, partial?: boolean): {
+    initComponent(context: InfoProviderContext, component?: Component<HTMLElement>, partial?: boolean, data?: {
+        lastInfoSleep: number;
+    }): {
         component: Component<HTMLElement>;
         fullInit(): void;
     };

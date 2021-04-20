@@ -73,6 +73,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     readonly objectType = CreationId.Doodad;
     containedItems: Item[];
     decay?: number;
+    startingDecay?: number;
     meltDecay?: number;
     disassembly?: Item[];
     gatherReady?: number;

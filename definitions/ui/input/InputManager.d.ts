@@ -56,6 +56,10 @@ export declare class GlobalMouseInfo extends EventEmitter.Host<IGlobalMouseInfoE
      * The element the mouse is currently hovering over.
      */
     get targetElement(): HTMLElement | undefined;
+    /**
+     * Forces a target update. Don't call this unless you absolutely have to, it's a perf hog.
+     */
+    updateTarget(): void;
     update(evt: Event & Partial<MouseEvent> & Partial<TouchEvent>): void;
     /**
      * Returns whether the mouse is currently within the given component, element, or selector, or its descendants.

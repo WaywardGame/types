@@ -26,10 +26,15 @@ export interface ITrelloList {
 }
 export interface ITrelloCard {
     id: string;
+    idAttachmentCover: string | null;
+    cover?: ITrelloCardCover;
     name: string;
     pos: number;
     labels: ITrelloCardLabel[];
     important: boolean;
+}
+export interface ITrelloCardCover {
+    url: string;
 }
 export interface ITrelloCardLabel {
     id: string;

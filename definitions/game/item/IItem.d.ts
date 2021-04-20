@@ -526,7 +526,7 @@ export declare enum ItemType {
     BullBoat = 96,
     RefinedSand = 97,
     Spyglass = 98,
-    Flask = 99,
+    Retort = 99,
     RawClay = 100,
     RawClayBlowpipe = 101,
     ClayBlowpipe = 102,

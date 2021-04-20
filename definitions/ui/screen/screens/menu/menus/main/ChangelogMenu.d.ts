@@ -17,8 +17,9 @@ export default class ChangelogMenu extends Menu {
     private readonly changesContainer;
     private lastVersion;
     private defaultVersion?;
+    versions: IVersionInfo[];
     constructor();
-    setDefaultVersion(version: IVersionInfo): this;
+    setDefaultVersion(version: Partial<IVersionInfo>): this;
     protected onBeforeShow(): Promise<void>;
     protected highlightVisibleTabs(): void;
     private refresh;

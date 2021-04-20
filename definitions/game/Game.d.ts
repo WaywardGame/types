@@ -329,6 +329,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     private initializeGameState;
     private startGame;
     private initializeDedicatedServer;
+    private fastForwardIsland;
     private dedicatedServerExit;
     private dedicatedServerNewGame;
 }
