@@ -36,7 +36,7 @@ export declare type InspectionClass = Class<Inspection<any>> & {
      * @returns `true` or a number if the class can handle the arguments. `false` or `undefined` if it can't.
      * When multiple classes can both handle the arguments, higher numbers are used over lower numbers. `true` is equivalent to `0`.
      */
-    handles?(...args: any[]): boolean | number | undefined;
+    handles?(inspectType: InspectType, ...args: any[]): boolean | number | undefined;
     getDefaultPriority(type: InspectType): number;
 };
 declare const _default: {

@@ -28,9 +28,9 @@ import { ReferenceType } from "game/reference/IReferenceManager";
 import Translation from "language/Translation";
 import { IVector3 } from "utilities/math/IVector";
 export default class ItemInspection extends Inspection<ItemType> {
-    static getFromTile(position: IVector3): ItemInspection[];
+    static getFromTile(position: IVector3, _: any, inspectType: InspectType): ItemInspection[];
     static isWorldInspection(type: InspectType): boolean;
-    static handles(item: unknown): any;
+    static handles(type: InspectType, item: unknown): any;
     private static readonly itemTypeHandles;
     private static readonly dismantleHandles;
     readonly item?: Item;

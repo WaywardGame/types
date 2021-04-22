@@ -22,7 +22,7 @@ import { IVector3 } from "utilities/math/IVector";
 declare class TileEventInspection extends Inspection<TileEvent> {
     static getFromTile(position: IVector3): TileEventInspection[];
     static getFromTileFiltered(position: IVector3, minorEvents: boolean): TileEventInspection[];
-    static handles(tileEvent: unknown): boolean;
+    static handles(type: InspectType, tileEvent: unknown): boolean;
     constructor(tileEvent: TileEvent, inspectType?: InspectType);
     getId(): string;
     get(context: InfoProviderContext): Array<Translation | InfoProvider>;
