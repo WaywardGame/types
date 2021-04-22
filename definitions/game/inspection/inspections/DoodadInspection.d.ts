@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "game/doodad/Doodad";
+import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
@@ -16,7 +17,7 @@ import { TranslationGenerator } from "ui/component/IComponent";
 import { IVector3 } from "utilities/math/IVector";
 export default class DoodadInspection extends Inspection<Doodad> {
     static getFromTile(position: IVector3): never[] | DoodadInspection;
-    static handles(doodad: unknown): boolean;
+    static handles(type: InspectType, doodad: unknown): boolean;
     constructor(doodad: Doodad);
     getId(): string;
     getBorder(): string | undefined;

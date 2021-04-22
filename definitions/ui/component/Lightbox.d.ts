@@ -16,6 +16,7 @@ export interface ILightboxEvents extends Events<Component> {
 }
 export default class Lightbox extends Component {
     static registerOnDescendants(component: Component): void;
+    static register(img: HTMLImageElement | Component<HTMLImageElement>): void;
     static show(event: Event): Promise<void>;
     readonly event: IEventEmitter<this, ILightboxEvents>;
     constructor(img: Component<HTMLImageElement>);

@@ -14,7 +14,6 @@ import UiTranslation from "language/dictionary/UiTranslation";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import Component from "ui/component/Component";
 import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "ui/util/ComponentManipulator";
-import { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import { IStringSection } from "utilities/string/Interpolator";
 export interface IComponentEvents {
@@ -267,7 +266,7 @@ export interface ITooltip extends IComponent {
     addHeading(initializer: (text: IText) => any): this;
     addParagraph(initializer: (text: IText) => any): this;
     addList(...initializers: Array<((text: IText) => any) | undefined | false>): this;
-    updatePosition(position: IVector2, forceRegenerateBox?: true): this;
+    updatePosition(forceRegenerateBox?: true): this;
 }
 export interface IText extends IComponent {
     setText(translation: TranslationGenerator, ...args: any[]): this;

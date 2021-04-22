@@ -54,6 +54,7 @@ export default class MapDialog extends Dialog {
     private rerender;
     getName(): Translation;
     read(map: DrawnMap, item: Item, resetView?: boolean): Promise<void>;
+    protected onInventoryItemRemove(_: any, item: Item): void;
     protected onInventoryItemUpdate(_: any, item: Item): void;
     protected onMoveComplete(player: Player): void;
     protected onLoad(): Promise<void>;

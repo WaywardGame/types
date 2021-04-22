@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import Translation from "language/Translation";
 import { IServer } from "multiplayer/matchmaking/IMatchmaking";
 import { ISteamFriend } from "steamworks/ISteamworks";
 import Button from "ui/component/Button";
@@ -34,5 +35,5 @@ export declare class ServerRow extends Button implements IRefreshable, IGameIcon
     /**
      * Check if the client can join the server
      */
-    private getUnableToJoinTranslation;
+    static getUnableToJoinTranslation(server: IServer, getFriend: (player: string) => ISteamFriend | undefined): Translation | undefined;
 }

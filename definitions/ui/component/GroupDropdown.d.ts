@@ -13,7 +13,6 @@ import Component from "ui/component/Component";
 import { IDropdownOption } from "ui/component/Dropdown";
 import EnumDropdown from "ui/component/dropdown/EnumDropdown";
 import Tooltip from "ui/tooltip/Tooltip";
-import { IVector2 } from "utilities/math/IVector";
 export default abstract class GroupDropdown<ENUM_OBJECT, OTHER_OPTIONS extends string, GROUP extends number, VALUES = ENUM_OBJECT[keyof ENUM_OBJECT]> extends EnumDropdown<ENUM_OBJECT, OTHER_OPTIONS, VALUES> {
     private groups;
     private tooltip?;
@@ -41,7 +40,7 @@ export default abstract class GroupDropdown<ENUM_OBJECT, OTHER_OPTIONS extends s
 }
 declare class GroupDropdownTooltip extends Tooltip {
     constructor(source: Component | HTMLElement);
-    updatePosition(position?: IVector2, force?: boolean): this;
+    updatePosition(force?: boolean): this;
     protected onShow(): void;
 }
 export {};

@@ -14,9 +14,8 @@ export interface IExploredMapClientDataOld {
     exploredMapEncodedData: number[][];
 }
 export default class ExploredMapClientData implements IPreSerializeCallback {
-    exploredMapEncodedData: Map<string, number[][]>;
-    exploredMap: IExploreMap[] | undefined;
+    exploredMapEncodedData: Map<string, Record<number, number[]>>;
+    private exploredMap;
     preSerializeObject(): void;
     getExploreMap(z: number): IExploreMap;
-    restoreExploredMap(): void;
 }

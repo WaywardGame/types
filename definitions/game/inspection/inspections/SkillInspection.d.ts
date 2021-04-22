@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { SkillType } from "game/entity/IHuman";
+import { InspectType } from "game/inspection/IInspection";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import SkillBonusMagicalItemsInfoProvider from "game/inspection/infoProviders/skill/MagicalItemBonuses";
 import UnlockableRowInfoProvider from "game/inspection/infoProviders/UnlockableRowInfoProvider";
@@ -17,7 +18,7 @@ import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 export default class SkillInspection extends Inspection<SkillType> {
     static getSkillAttributeMessage(skill: SkillType): Message.Dexterity | Message.Metabolism | Message.Strength | undefined;
-    static handles: (value: unknown, context?: InfoProviderContext | undefined) => any;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
     private readonly human?;
     constructor([, skill]: [any, SkillType], context?: InfoProviderContext);
     getId(): string;

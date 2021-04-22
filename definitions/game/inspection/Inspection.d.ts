@@ -20,7 +20,7 @@ export default abstract class Inspection<O> extends InfoProvider {
     readonly value: O;
     static createEnumReferenceHandler<R extends ReferenceType, E, K extends string>(referenceType: R, enumObject: {
         [key in K]: E;
-    }, predicate?: (reference: [R, E], context?: InfoProviderContext) => any): (value: unknown, context?: InfoProviderContext | undefined) => any;
+    }, predicate?: (reference: [R, E], context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
     static verifyHumanity(_: any, context?: InfoProviderContext): boolean;
     static getDefaultPriority(inspectType: InspectType): number;
     constructor(type: InspectType, value: O);

@@ -10,12 +10,13 @@
  */
 import Corpse from "game/entity/creature/corpse/Corpse";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
+import { InspectType } from "game/inspection/IInspection";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
 import { IVector3 } from "utilities/math/IVector";
 export default class CorpseInspection extends Inspection<Corpse> {
     static getFromTile(position: IVector3): CorpseInspection[];
-    static handles(corpse: unknown): boolean;
+    static handles(type: InspectType, corpse: unknown): boolean;
     constructor(corpse: Corpse);
     get(_context: InfoProviderContext): never[];
     getId(): string;

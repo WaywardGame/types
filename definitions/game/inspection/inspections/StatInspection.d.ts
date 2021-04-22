@@ -9,12 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Stat } from "game/entity/IStats";
+import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
 import Translation from "language/Translation";
 export default class StatInspection extends Inspection<Stat> {
-    static handles: (value: unknown, context?: InfoProviderContext | undefined) => any;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
     private readonly human?;
     constructor([, stat]: [any, Stat], context?: InfoProviderContext);
     getId(): string;

@@ -16,7 +16,7 @@ import HumanInspection from "game/inspection/inspections/HumanInspection";
 import { IVector3 } from "utilities/math/IVector";
 export default class PlayerInspection extends HumanInspection<Player> {
     static getFromTile(position: IVector3, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<Player>>;
-    static handles(player: unknown, context?: InfoProviderContext): boolean;
+    static handles(type: InspectType, player: unknown, context?: InfoProviderContext): boolean;
     constructor(player: Player, context?: InfoProviderContext);
     constructor(player: Player, inspectType?: InspectType);
     getBorder(): string;

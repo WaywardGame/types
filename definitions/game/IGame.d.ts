@@ -153,8 +153,7 @@ export interface IPlayerOptions {
     id?: number;
     identifier?: string;
     options?: IOptions;
-    initialSpawnPosition?: IVector3;
-    respawnPosition?: IVector3;
+    spawnPosition?: IVector3;
     character: ICharacter;
     crafted?: Record<number, ICrafted>;
     milestoneModifiers?: Set<Milestone>;

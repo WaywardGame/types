@@ -14,7 +14,7 @@ import { ILootItem } from "game/ILoot";
 import { IObjectDescription } from "game/IObject";
 import { ItemType } from "game/item/IItem";
 import { ITemperatureSource } from "game/temperature/ITemperature";
-import { TerrainType } from "game/tile/ITerrain";
+import { ITile, TerrainType } from "game/tile/ITerrain";
 import TileEvent from "game/tile/TileEvent";
 import { IModdable } from "mod/ModRegistry";
 import { IRGB } from "utilities/Color";
@@ -69,6 +69,7 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
      */
     canBurn?: boolean;
     decayTemperatureRange?: IDecayTemperatureRange;
+    canCreate?(type: TileEventType, tile: ITile, x: number, y: number, z: number): boolean;
     create?(tileEvent: TileEvent): void;
     remove?(tileEvent: TileEvent): void;
     update?(tileEvent: TileEvent): void;

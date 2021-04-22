@@ -30,6 +30,15 @@ export default class VotingManager {
     canStartVote(player: Player): boolean;
     startVote(initiator: Player, interrupt: Interrupt, choices: InterruptChoice[], ...interruptArgs: any[]): Promise<IVoteResult>;
     addVote(player: Player, choice: InterruptChoice): void;
+    /**
+     * Returns player identifiers of currently connected players
+     */
+    private _getActivePlayers;
+    /**
+     * Check if any connected player has not voted yet
+     * @returns True if everyone voted
+     */
+    private _shouldEndVote;
     private _endVote;
 }
 export {};
