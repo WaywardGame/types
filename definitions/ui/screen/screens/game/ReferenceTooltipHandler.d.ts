@@ -17,14 +17,12 @@ import InspectionsTooltipHandler from "ui/screen/screens/game/InspectionsTooltip
 export default class ReferenceTooltipHandler extends InspectionsTooltipHandler<ReferenceInspectionsList> {
     private readonly context;
     private readonly reference;
-    private readonly args;
-    constructor(context: InfoProviderContext, reference: Reference, ...args: any[]);
+    constructor(context: InfoProviderContext, reference: Reference);
     protected initializeInspections(): ReferenceInspectionsList;
 }
 export declare class ReferenceInspectionsList extends InspectionsList<ReferenceInspectionsHandler> {
     private readonly reference;
-    private readonly args;
-    constructor(context: InfoProviderContext, reference: Reference, ...args: any[]);
+    constructor(context: InfoProviderContext, reference: Reference);
     isValid(): boolean;
     protected initializeInspections(): ReferenceInspectionsHandler;
     protected onInspect(): boolean;

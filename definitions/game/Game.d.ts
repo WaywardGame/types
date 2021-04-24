@@ -161,7 +161,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     gameLogicLoop: () => void;
     shouldUpdateWorldRender(timeStamp: number): RenderSource | undefined;
     saveGame(saveType: SaveType, interrupt?: Interrupt): Promise<ISaveInfo | undefined>;
-    updateThumbnail(): Promise<void>;
+    updateThumbnail(): Promise<boolean>;
     addZoomLevel(amount: number): void;
     updateZoomLevel(): void;
     requestPlay(options: Partial<IPlayOptions> & {

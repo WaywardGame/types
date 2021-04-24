@@ -190,6 +190,14 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
      * @param craftingFilter True if we are filtering the crafting dialog.
      */
     isFiltered(item: ItemType | Item, filterText: string, craftingFilter?: boolean): boolean;
+    /**
+     * Summons a void dweller based on item worth and chance or provides a hint message.
+     * @param item Item to get the worth of.
+     * @param player The player that is dropping the item.
+     * @param point The point in which we are dropping the item.
+     * @returns True or false based on if we get a message or not.
+     */
+    summonVoidDweller(item: Item, player: Player | NPC, point: IVector3): boolean;
     private getDefaultWeightRange;
     private loadReference;
     private removeFromContainerInternal;
