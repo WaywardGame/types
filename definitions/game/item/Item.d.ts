@@ -21,7 +21,7 @@ import NPC from "game/entity/npc/NPC";
 import Player from "game/entity/player/Player";
 import { CreationId } from "game/IGame";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
-import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemType } from "game/item/IItem";
+import { BookType, ContainerReference, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemType } from "game/item/IItem";
 import { IPlaceOnTileOptions } from "game/item/IItemManager";
 import ItemMapManager from "game/item/ItemMapManager";
 import MagicalPropertyManager, { IHasMagic } from "game/magic/MagicalPropertyManager";
@@ -76,7 +76,8 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     offsetY?: number;
     fromX?: number;
     fromY?: number;
-    _movementFinishTime?: number;
+    cachedContainerReference?: ContainerReference;
+    private _movementFinishTime?;
     private _movementOptions?;
     private _description;
     private _minDur;
@@ -183,6 +184,10 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getBaseDefense(): number;
     getDurabilityCharge(): number;
     revertFromDoodad(doodad: Doodad): void;
+    /**
+     * Returns the container weight reduction
+     * @returns 1 if there is no reducton or [-50% + magical storing values]
+     */
     getContainerWeightReduction(): number;
     canBeRefined(): boolean;
     getProducedTemperature(): number | undefined;
