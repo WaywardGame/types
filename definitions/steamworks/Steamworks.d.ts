@@ -8,37 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { INapiDiscordPresenceInfo, IRemoteFile, IMatchmakingServer, ISteamFriend, ISteamId, ISteamworksNetworking, IWorkshopItem } from "electron/interfaces";
 import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
 import { ServerInfo } from "multiplayer/IMultiplayer";
-import { IServerGameDetails, IServerServerDetails } from "multiplayer/matchmaking/IMatchmaking";
-import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamNetworking as ISteamworksNetworking, ISteamworksEvents, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
-interface IRemoteFile {
-    name: string;
-    size: number;
-}
-interface IMatchmakingServer {
-    port: number | undefined;
-    connectCallback: ((connection: IMatchmakingServerConnection, path: string | undefined) => void) | undefined;
-    directoryConnectionConnectedCallback: ((directoryConnection: any) => void) | undefined;
-    disconnectCallbacks: Map<string, () => void>;
-    messageCallbacks: Map<string, (data: ArrayBuffer) => void>;
-    ipAddress: string | undefined;
-    isRunning(): boolean;
-    start(port?: number, disableServerDirectoryConnection?: boolean): string;
-    stop(): void;
-    setLogCallback(logFunc: ((...args: any[]) => void) | undefined): void;
-    updateName(name: string): void;
-    updateDirectory(serverDetails: Partial<IServerServerDetails>, gameDetails: IServerGameDetails): void;
-    checkConnection(): Promise<{
-        webRtcWorks: boolean;
-        webSocketWorks: boolean;
-    }>;
-    getConnections(): Map<string, IMatchmakingServerConnection>;
-}
-interface IMatchmakingServerConnection {
-    send(data: ArrayBuffer | Uint8Array): void;
-}
+import { ISteamworksEvents, IDedicatedServerInfo, IModPath, LobbyType } from "steamworks/ISteamworks";
 export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private steamId;
     private betaName;
@@ -203,4 +177,3 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private processArguments;
     private logDebugInfo;
 }
-export {};

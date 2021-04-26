@@ -10,4 +10,4 @@
  */
 import { ItemType } from "game/item/IItem";
 import Translation from "language/Translation";
-export default function (type: ItemType, count?: boolean): Translation[];
+export default function (type: ItemType, count?: boolean, disassembly?: boolean): Translation[];

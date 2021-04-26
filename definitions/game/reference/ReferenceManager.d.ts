@@ -44,7 +44,7 @@ interface IReferenceTypeMap {
 export declare type Referenceable = IReferenceTypeMap[ReferenceableReferenceTypes];
 export default class ReferenceManager {
     static isEnumReference(type: ReferenceType): type is EnumReferenceTypes;
-    static getList(type: ReferenceType, gameIsland?: Island): Player[] | SaferArray<Item> | readonly Milestone[] | SaferArray<Corpse> | SaferArray<Doodad> | SaferArray<Creature> | SaferArray<NPC> | SaferArray<TileEvent> | readonly Stat[] | IterableIterator<Island> | readonly SkillType[] | readonly ItemType[];
+    static getList(type: ReferenceType, gameIsland?: Island): SaferArray<NPC> | SaferArray<Creature> | Player[] | SaferArray<Item> | readonly Milestone[] | SaferArray<Corpse> | SaferArray<Doodad> | SaferArray<TileEvent> | readonly Stat[] | IterableIterator<Island> | readonly SkillType[] | readonly ItemType[];
     private referenceCursor;
     create(): number;
     get(thing: Referenceable): Reference | undefined;

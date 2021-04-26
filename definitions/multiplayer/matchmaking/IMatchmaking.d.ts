@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { BiomeTypes } from "game/biome/IBiome";
+import { IServerServerDetails, IServerGameDetails } from "electron/interfaces";
 import { UnableToJoinReason } from "multiplayer/IMultiplayer";
 export interface IMatchmaking {
     getIdentifier(): string;
@@ -93,41 +93,4 @@ export interface IServer {
     id: string;
     serverDetails: IServerServerDetails;
     gameDetails: IServerGameDetails;
-}
-export interface IServerServerDetails {
-    worldId: string;
-    name: string;
-    description: string;
-    hostPlayerName: string;
-    hostPlayerId: string;
-    lobbyType: number;
-    region: string;
-    code: string;
-    isDedicatedServer: boolean;
-    buildTime: number | undefined;
-    gameVersion: string | undefined;
-}
-export interface IServerGameDetails {
-    players: string[];
-    maxPlayers: number;
-    difficulty: number;
-    pvp: boolean;
-    reputation: number;
-    days: number;
-    mods: IServerMod[];
-    peaceful: boolean;
-    milestoneModifiersAllowed: boolean;
-    island: IServerIslandDetails;
-}
-export interface IServerMod {
-    name: string;
-    version: string;
-    publishFileId: string | undefined;
-}
-export interface IServerIslandDetails {
-    position: {
-        x: number;
-        y: number;
-    };
-    biomeType: BiomeTypes;
 }

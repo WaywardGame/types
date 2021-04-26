@@ -11,7 +11,10 @@
 import Doodad from "game/doodad/Doodad";
 import DoodadManager from "game/doodad/DoodadManager";
 import ActionExecutor from "game/entity/action/ActionExecutor";
+import CreatureManager from "game/entity/creature/CreatureManager";
+import NPCManager from "game/entity/npc/NPCManager";
 import Player from "game/entity/player/Player";
+import PlayerManager from "game/entity/player/PlayerManager";
 import Game from "game/Game";
 import Item from "game/item/Item";
 import ItemManager from "game/item/ItemManager";
@@ -24,24 +27,28 @@ import SaveManager from "save/SaveManager";
 import Steamworks from "steamworks/Steamworks";
 export declare enum EventBus {
     Actions = 0,
-    DoodadManager = 1,
-    Doodads = 2,
-    Game = 3,
-    ItemManager = 4,
-    Items = 5,
-    Language = 6,
-    LocalPlayer = 7,
-    Mods = 8,
-    Multiplayer = 9,
-    Players = 10,
-    SaveManager = 11,
-    Steamworks = 12,
-    TileEventManager = 13,
-    TileEvents = 14,
-    Ui = 15
+    CreatureManager = 1,
+    DoodadManager = 2,
+    Doodads = 3,
+    Game = 4,
+    ItemManager = 5,
+    Items = 6,
+    Language = 7,
+    LocalPlayer = 8,
+    Mods = 9,
+    Multiplayer = 10,
+    NPCManager = 11,
+    PlayerManager = 12,
+    Players = 13,
+    SaveManager = 14,
+    Steamworks = 15,
+    TileEventManager = 16,
+    TileEvents = 17,
+    Ui = 18
 }
 declare const eventBuses: {
     [EventBus.Actions](): typeof ActionExecutor;
+    [EventBus.CreatureManager](): typeof CreatureManager;
     [EventBus.DoodadManager](): typeof DoodadManager;
     [EventBus.Doodads](): typeof Doodad;
     [EventBus.Game](): typeof Game;
@@ -51,6 +58,8 @@ declare const eventBuses: {
     [EventBus.LocalPlayer](): Player;
     [EventBus.Mods](): typeof ModManager;
     [EventBus.Multiplayer](): typeof Multiplayer;
+    [EventBus.NPCManager](): typeof NPCManager;
+    [EventBus.PlayerManager](): typeof PlayerManager;
     [EventBus.Players](): typeof Player;
     [EventBus.SaveManager](): typeof SaveManager;
     [EventBus.Steamworks](): typeof Steamworks;
