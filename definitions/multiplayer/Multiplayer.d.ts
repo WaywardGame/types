@@ -79,7 +79,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
     joinServer(serverInfo: ServerInfo, options?: Partial<IJoinServerOptions>): void;
-    disconnect(reason?: DisconnectReason, args?: any[], unloading?: boolean): Promise<void>;
+    disconnect(reason?: DisconnectReason, args?: any[], unloadingOrResetGameState?: boolean): Promise<void>;
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo, retryReason: JoinServerRetryReason): Promise<void>;
     disconnectAndResetGameState(reason: DisconnectReason.UnableToJoinGame, unableToJoinReason: UnableToJoinReason): Promise<void>;
     disconnectAndResetGameState(reason?: DisconnectReason, reasonDescription?: any[]): Promise<void>;

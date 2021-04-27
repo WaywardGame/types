@@ -64,7 +64,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
     resolveContainer(container?: IContainer): Doodad | Item | Player | NPC | IContainer | ITile | undefined;
-    getContainerReference(container: IContainer | undefined, showWarnings?: boolean): ContainerReference;
+    getContainerReference(continable: IContainable | undefined, showWarnings?: boolean): ContainerReference;
     private _getContainerReference;
     hashContainerReference(container: IContainer): string;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
@@ -174,11 +174,11 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     generateLookups(): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
     getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, allowIncreasedQuality?: boolean, bonusChance?: number): Quality | undefined;
-    getNPCFromInventoryContainer(container: IContainer): NPC | undefined;
+    getNPCFromInventoryContainer(containable: IContainable): NPC | undefined;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: Item[]): number;
     copyProperties(item: Item, item2: Item): void;
-    getPlayerFromInventoryContainer(container: IContainer): Player | undefined;
+    getPlayerFromInventoryContainer(containable: IContainable): Player | undefined;
     /**
      * Moves all player items to the target island
      * This should be called before switching islands

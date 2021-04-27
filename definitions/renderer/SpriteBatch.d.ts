@@ -27,9 +27,10 @@ export default class SpriteBatch implements ISpriteBatch {
     private begun;
     private readonly vertexArray;
     private _setup;
+    static createShaders(gl: WebGL2RenderingContext): void;
+    static linkShaders(): Promise<void>;
     constructor(gl: WebGL2RenderingContext, maxSprites: number, depthOffset?: number, yOffset?: number);
     setup(): void;
-    static resetGl(): void;
     dispose(): void;
     clear(): void;
     begin(): void;

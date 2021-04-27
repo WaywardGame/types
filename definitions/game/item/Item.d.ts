@@ -39,11 +39,11 @@ export interface IItemEvents {
     weightUpdate(): any;
     moved(): any;
 }
-export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagic {
+export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagic {
     readonly objectType = CreationId.Item;
     book?: BookType;
     constructedFrom?: IConstructedInfo;
-    containedItems: Item[];
+    containedItems: Item[] | undefined;
     containedWithin: IContainer | undefined;
     decay?: number;
     disassembly: Item[];
@@ -90,12 +90,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @returns True if the item has become magical
      */
     setMagicalChanceFromQuality(bonus?: number, propertiesBypass?: number): boolean;
-    /**
-     * Changes the item id for this item
-     * @param id The new item id
-     * @param player The player that has the item
-     */
-    changeId(id: number, player: Player): void;
     /**
      * @deprecated This method currently shouldn't be used in production code, as it's to do with the new crafting system. Stay tuned.
      */

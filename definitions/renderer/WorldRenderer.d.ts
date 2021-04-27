@@ -103,7 +103,8 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private overlayBatch;
     private readonly entitiesInViewport;
     private viewportSpritesDirty;
-    static compileShaders(gl: WebGL2RenderingContext): void;
+    static createShaders(gl: WebGL2RenderingContext): void;
+    static linkShaders(): Promise<void>;
     constructor(gl: WebGL2RenderingContext);
     dispose(): void;
     initializeSpriteBatch(layer: SpriteBatchLayer, reset?: boolean): void;
