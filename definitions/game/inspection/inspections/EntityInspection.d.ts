@@ -14,6 +14,5 @@ import Inspection from "game/inspection/Inspection";
 export default abstract class EntityInspection<E extends Entity> extends Inspection<E> {
     constructor(inspectType: InspectType, entity: E);
     init(): void;
-    remove(): this;
     getId(): string;
 }

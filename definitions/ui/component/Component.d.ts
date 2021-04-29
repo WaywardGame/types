@@ -18,6 +18,7 @@ declare const ContextMenu: typeof ContextMenuExport;
 declare type ContextMenu = ContextMenuExport;
 export default class Component<E extends HTMLElement = HTMLElement> extends EventEmitter.Host<Events<IComponent>> implements IComponent {
     private static readonly map;
+    static checkForLeaks(): void;
     static get(selector: string): Component | undefined;
     static get(element: Element): Component;
     static get(event: Event): Component;
@@ -38,7 +39,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
     static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, strategy?: AppendStrategy): void;
-    static remove(elementToRemove: string | IComponent | HTMLElement): void;
+    static remove(elementToRemove: string | IComponent | Element): void;
     private static appendRegenerateBoxes;
     private static regenerateAncestorBoxes;
     private static regenerateSiblingBoxes;
@@ -78,6 +79,9 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * Only call this directly after constructing the element.
      */
     setElement(elementType?: string, namespace?: Namespace): this;
+    private static registerToMap;
+    private onAppendToDocument;
+    private onRemoveFromDocument;
     setId(id: string): this;
     setSelectable(val: SelectableLayer | false): this;
     setInitialSelection(initialSelection?: boolean): this;
@@ -100,7 +104,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     append(appendStrategy: AppendStrategy, ...elements: ArrayOfIterablesOr<HTMLElement | IComponent | undefined | false>): this;
     remove(): this;
     contains(what?: string | Element | IComponent | null): boolean;
-    dump(filter?: (element: Component) => boolean): this;
+    dump(filter?: (element: HTMLElement) => boolean): this;
     setContents(html: string, escape?: boolean): this;
     store(): this;
     findDescendants<E extends HTMLElement = HTMLElement>(selector: string): NodeListOf<E>;

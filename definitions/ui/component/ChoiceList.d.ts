@@ -20,6 +20,7 @@ export default class ChoiceList<C extends Choice = Choice, OPTIONAL extends bool
     event: IEventEmitter<this, IChoiceListEvents<C, OPTIONAL>>;
     private refreshMethod;
     private _selection;
+    private _choices;
     get choice(): OPTIONAL extends true ? C | undefined : C;
     private readonly _disabledReasons;
     get disabled(): boolean;

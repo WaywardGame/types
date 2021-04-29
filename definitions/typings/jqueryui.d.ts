@@ -1,4 +1,5 @@
-export default undefined;
+declare const _default: {};
+export default _default;
 declare global {
     namespace JQueryUI {
         interface AccordionOptions extends AccordionEvents {

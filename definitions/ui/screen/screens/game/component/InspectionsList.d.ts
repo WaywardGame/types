@@ -28,8 +28,6 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     protected inspectionsHandler?: InspectionsHandler;
     private displayLevel;
     private refreshingId?;
-    private updateWrapperVisibility?;
-    private refreshDisplayLevel?;
     private readonly inspectTypeWrappers;
     constructor(context: InfoProviderContext);
     setInspectTypeFilter(filter?: (inspectType: InspectType) => boolean): this;
