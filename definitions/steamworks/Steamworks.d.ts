@@ -44,6 +44,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     get isGameOverlayActive(): boolean;
     isElectron(): boolean;
     reload(): void;
+    openGpuInfoWindow(): void;
     closeWindow(): void;
     isOverlayWorking(): boolean;
     isGreenworksEnabled(): boolean;

@@ -17,8 +17,6 @@ import Rectangle from "utilities/math/Rectangle";
 declare const ContextMenu: typeof ContextMenuExport;
 declare type ContextMenu = ContextMenuExport;
 export default class Component<E extends HTMLElement = HTMLElement> extends EventEmitter.Host<Events<IComponent>> implements IComponent {
-    private static readonly map;
-    static checkForLeaks(): void;
     static get(selector: string): Component | undefined;
     static get(element: Element): Component;
     static get(event: Event): Component;
@@ -79,9 +77,6 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * Only call this directly after constructing the element.
      */
     setElement(elementType?: string, namespace?: Namespace): this;
-    private static registerToMap;
-    private onAppendToDocument;
-    private onRemoveFromDocument;
     setId(id: string): this;
     setSelectable(val: SelectableLayer | false): this;
     setInitialSelection(initialSelection?: boolean): this;
@@ -104,7 +99,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     append(appendStrategy: AppendStrategy, ...elements: ArrayOfIterablesOr<HTMLElement | IComponent | undefined | false>): this;
     remove(): this;
     contains(what?: string | Element | IComponent | null): boolean;
-    dump(filter?: (element: HTMLElement) => boolean): this;
+    dump(filter?: (element: HTMLElement, component?: Component) => boolean): this;
     setContents(html: string, escape?: boolean): this;
     store(): this;
     findDescendants<E extends HTMLElement = HTMLElement>(selector: string): NodeListOf<E>;
