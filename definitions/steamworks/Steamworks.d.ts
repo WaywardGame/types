@@ -20,7 +20,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private overlayWorks;
     private initializingMods;
     private logsPath;
-    private backupPath;
+    private backupsPath;
     private modsPath;
     private workshopPath;
     private workshopModsPath;
@@ -118,7 +118,9 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     hasServerToJoin(): boolean;
     setServerToJoin(serverToJoin: ServerInfo, automatic?: boolean): void;
     onReady(): Promise<void>;
-    processBackups(force?: boolean): Promise<boolean>;
+    processDedicatedServerBackups(force?: boolean): Promise<boolean>;
+    writeBackup(slot: number, data: Uint8Array): Promise<string | undefined>;
+    private _writeBackupFile;
     setupMultiplayerLog(): void;
     getMultiplayerLogs(): string;
     multiplayerLog(...args: any[]): void;

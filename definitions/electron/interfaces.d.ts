@@ -167,7 +167,7 @@ export interface IFileSystem {
     readdir(path: string, cb: (err: string | null | undefined, files: string[]) => void): any;
     readdirSync(path: string): string[];
     readFileSync(path: string, opt?: any): string | any;
-    writeFile(path: string, data: string, opt: any, cb: (err?: any) => void): any;
+    writeFile(path: string, data: string | Uint8Array, opt: any, cb: (err?: any) => void): any;
     writeFileSync(path: string, data: string, opt?: any): any;
 }
 export interface IFileStream {

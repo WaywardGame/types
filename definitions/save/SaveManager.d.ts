@@ -72,11 +72,17 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
      *  Returns the number of bytes the save takes up
      */
     savePartialDataInside(slot: number, saveObjectKey: string, key: string, value: any): Promise<number>;
-    exportSave(slot: number): Promise<ISaveObject>;
+    exportSave(slot: number): Promise<Uint8Array>;
+    exportSaveObject(saveObject: ISaveObject): Uint8Array;
+    exportSaveAsCompressedSaveObject(slot: number): Promise<ISaveObject>;
     /**
-     * Returns the number of bytes the save takes up, or undefined, if an error occurs
+     * Imports saves from multiple formats
+     * 1. ISaveObject - games imported while joining a multiplayer server
+     * 2. string - From legacy exported save games to files or to steam
+     * 3. Uint8Array - From exported save games
+     * @returns the number of bytes the save takes up, or undefined, if an error occurs
      */
-    importSave(slot: number, saveObject: ISaveObject | string): Promise<number | undefined>;
+    importSave(slot: number, saveObject: ISaveObject | string | Uint8Array): Promise<number | undefined>;
     copySave(slot?: number, target?: number): Promise<number | undefined>;
     deleteSlot(slot?: number): Promise<boolean | undefined>;
     deleteAllSlots(): Promise<boolean | undefined>;
@@ -95,4 +101,5 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
      * Returns the number of bytes the save takes up
      */
     private saveObjectToSlot;
+    private backupSlot;
 }

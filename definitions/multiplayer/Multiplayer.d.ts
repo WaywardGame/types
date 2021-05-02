@@ -50,6 +50,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private _recentPackets;
     private _enabledSyncChecks;
     private _disconnectingFromSyncIssue;
+    private readonly _autojoinEnabled;
     private _ipAddress;
     private readonly _matchmakingSecret;
     private readonly readBuffer;
