@@ -10,6 +10,8 @@
  */
 import Doodad from "game/doodad/Doodad";
 import { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
+import TileEvent from "game/tile/TileEvent";
+import { IVector3 } from "utilities/math/IVector";
 export declare enum CraftStatus {
     Invalid = 0,
     Failed = 1,
@@ -33,6 +35,9 @@ export interface IRequirementInfo {
     doodadsRequired: Array<DoodadType | DoodadTypeGroup>;
     doodadsUsed: IDoodadsUsed[];
     missingDoodads?: Set<DoodadType | DoodadTypeGroup>;
+    fireSourceDoodad?: Doodad;
+    fireSourceTileEvent?: TileEvent;
+    fireSourceLavaPosition?: IVector3;
 }
 export interface IDoodadsUsed {
     doodad: Doodad;

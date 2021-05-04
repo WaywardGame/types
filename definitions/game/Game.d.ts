@@ -19,6 +19,7 @@ import { TurnType } from "game/entity/player/IPlayer";
 import Player from "game/entity/player/Player";
 import { FireType, IGameEvents, IPlayOptions, ITravelingToIslandInfo, ITravelToIslandOptions, IWaterFill, RenderSource, SaveType, TickFlag, TileUpdateType, TurnMode, UpdateRenderFlag, WaterType } from "game/IGame";
 import { Quality } from "game/IObject";
+import { IRequirementInfo } from "game/item/IItemManager";
 import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { ChallengeModifiersCollection } from "game/options/modifiers/challenge/ChallengeModifiers";
@@ -281,7 +282,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     packGround(x: number, y: number, z: number): void;
     getRandomQuality(bonusQuality?: number): Quality.None | Quality.Superior | Quality.Remarkable | Quality.Exceptional;
     getQualityDurabilityBonus(quality: Quality, itemDurability: number, getMax?: boolean): number;
-    doLavaEvents(x: number, y: number, z: number): void;
+    coolFires(requirements: IRequirementInfo): void;
     isFlammable(x: number, y: number, z: number): boolean;
     getCameraPosition(): IVector2;
     getExactCameraPosition(): Vector2;
