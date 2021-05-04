@@ -35,6 +35,7 @@ export interface IOptions {
     dropLocation: DropLocation;
     dropOnDismantle: boolean;
     dropOnGatherHarvest: boolean;
+    enableSaveDataBackups: boolean;
     fallBackToEnglish: boolean;
     fontStyle: boolean;
     fullscreen: boolean;

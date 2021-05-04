@@ -11,6 +11,7 @@
 export declare const π: number;
 export declare const τ: number;
 declare module Math2 {
+    function parseLocalizedFloat(str: string): number;
     /**
      * Clamps the given number in the given range
      */

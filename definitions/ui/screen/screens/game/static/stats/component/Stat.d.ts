@@ -22,7 +22,7 @@ export declare abstract class StatElement extends Component {
     /**
      * Returns the attached entity's `IStat` for this `StatElement`'s `Stat`.
      */
-    getStat<S extends IStat>(): S & (S extends import("../../../../../../../game/entity/IStats").IStatBase ? {
+    getStat<S extends IStat>(): S & (S extends import("game/entity/IStats").IStatBase ? {
         base: S;
     } : undefined);
     /**

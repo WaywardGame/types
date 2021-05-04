@@ -63,10 +63,12 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getItemsWithRecipes(): readonly ItemType[];
     getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
-    resolveContainer(container?: IContainer): Doodad | Item | Player | IContainer | NPC | ITile | undefined;
-    getContainerReference(container: IContainer | undefined, parentObject?: any, showWarnings?: boolean): ContainerReference;
+    resolveContainer(container?: IContainer): Doodad | Item | Player | NPC | IContainer | ITile | undefined;
+    getContainerReference(continable: IContainable | undefined, showWarnings?: boolean): ContainerReference;
+    private _getContainerReference;
     hashContainerReference(container: IContainer): string;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
+    updateContainedWithin(containable: IContainable, containedWithin: IContainer | undefined): void;
     addToContainerInternal(item: Item, container: IContainer, options?: IAddToContainerOptions): boolean;
     removeContainerItems(container: IContainer, removeContainedItems?: boolean): void;
     exists(item: Item): boolean;
@@ -113,7 +115,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     spawn(terrainType: TerrainType, x: number, y: number, z: number): void;
     getTileContainer(x: number, y: number, z: number, tile?: ITile): IContainer;
     getRandomQuality(bonusQuality?: number): Quality;
-    hasAdditionalRequirements(actionOrHuman: IActionHandlerApi<Player | NPC> | Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): IRequirementInfo;
+    hasAdditionalRequirements(actionOrHuman: IActionHandlerApi<Player | NPC> | Human, craftType: ItemType, message?: Message, useDoodad?: boolean, isRepairOrDisassembly?: boolean): IRequirementInfo;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     craft(action: IActionHandlerApi<Player | NPC>, itemType: ItemType, itemsToRequire: Item[], itemsToConsume: Item[], baseItem?: Item): CraftStatus;
@@ -172,11 +174,11 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     generateLookups(): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
     getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, allowIncreasedQuality?: boolean, bonusChance?: number): Quality | undefined;
-    getNPCFromInventoryContainer(container: IContainer): NPC | undefined;
+    getNPCFromInventoryContainer(containable: IContainable): NPC | undefined;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: Item[]): number;
     copyProperties(item: Item, item2: Item): void;
-    getPlayerFromInventoryContainer(container: IContainer): Player | undefined;
+    getPlayerFromInventoryContainer(containable: IContainable): Player | undefined;
     /**
      * Moves all player items to the target island
      * This should be called before switching islands
@@ -190,6 +192,14 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
      * @param craftingFilter True if we are filtering the crafting dialog.
      */
     isFiltered(item: ItemType | Item, filterText: string, craftingFilter?: boolean): boolean;
+    /**
+     * Summons a void dweller based on item worth and chance or provides a hint message.
+     * @param item Item to get the worth of.
+     * @param player The player that is dropping the item.
+     * @param point The point in which we are dropping the item.
+     * @returns True or false based on if we get a message or not.
+     */
+    summonVoidDweller(item: Item, player: Player | NPC, point: IVector3): boolean;
     private getDefaultWeightRange;
     private loadReference;
     private removeFromContainerInternal;

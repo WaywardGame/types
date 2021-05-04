@@ -10,7 +10,6 @@
  */
 import Entity from "game/entity/Entity";
 import Player from "game/entity/player/Player";
-import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { IBound3 } from "utilities/math/Bound3";
 import Vector2 from "utilities/math/Vector2";
 export interface IFieldOfView {
@@ -24,7 +23,6 @@ export interface IFieldOfView {
     texLightOld: WebGLTexture | undefined;
     canASeeB(type: CanASeeBType, sourceEntity: Entity | undefined, aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number): boolean;
     compute(timeStamp: number, force?: boolean): void;
-    createDebugRenderer(): ITextureDebugRenderer;
     getBounds(player: Player, radius?: number): IBound3;
     getSubdivisions(): number;
     getTextureSize(): number;

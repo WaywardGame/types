@@ -61,7 +61,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     setAfter(...after: Array<TranslationGenerator | InfoProvider | undefined>): this;
     setExpandedVerbose(): this;
     getClass(): string[];
-    get(): (Translation | import("../../../language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | import("../../../language/Translation").ISerializedTranslation | UiTranslation | undefined) | InfoProvider)[];
+    get(): (Translation | import("language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | import("language/Translation").ISerializedTranslation | UiTranslation | undefined) | InfoProvider)[];
     private getOutOf;
     private formatNumber;
 }

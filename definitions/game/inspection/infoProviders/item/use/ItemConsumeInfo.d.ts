@@ -25,7 +25,7 @@ declare const _default: UseInfo<{
     description: import("../../../../item/IItem").IItemDescription;
     quality: import("../../../../IObject").Quality;
     action: ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther;
-    union: import("../../UseInfo").IUseInfoBase<Item, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther>;
+    union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther>;
     details: Set<symbol>;
 }, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther, {
     generateUseConsumeTooltip: () => (tooltip: ITooltip, stat: Stat, base: number) => ITooltip;

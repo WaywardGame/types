@@ -21,7 +21,7 @@ import NPC from "game/entity/npc/NPC";
 import Player from "game/entity/player/Player";
 import { CreationId } from "game/IGame";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
-import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemType } from "game/item/IItem";
+import { BookType, ContainerReference, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemType } from "game/item/IItem";
 import { IPlaceOnTileOptions } from "game/item/IItemManager";
 import ItemMapManager from "game/item/ItemMapManager";
 import MagicalPropertyManager, { IHasMagic } from "game/magic/MagicalPropertyManager";
@@ -39,11 +39,11 @@ export interface IItemEvents {
     weightUpdate(): any;
     moved(): any;
 }
-export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, IContainer, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagic {
+export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagic {
     readonly objectType = CreationId.Item;
     book?: BookType;
     constructedFrom?: IConstructedInfo;
-    containedItems: Item[];
+    containedItems: Item[] | undefined;
     containedWithin: IContainer | undefined;
     decay?: number;
     disassembly: Item[];
@@ -76,7 +76,8 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     offsetY?: number;
     fromX?: number;
     fromY?: number;
-    _movementFinishTime?: number;
+    cachedContainerReference?: ContainerReference;
+    private _movementFinishTime?;
     private _movementOptions?;
     private _description;
     private _minDur;
@@ -89,12 +90,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @returns True if the item has become magical
      */
     setMagicalChanceFromQuality(bonus?: number, propertiesBypass?: number): boolean;
-    /**
-     * Changes the item id for this item
-     * @param id The new item id
-     * @param player The player that has the item
-     */
-    changeId(id: number, player: Player): void;
     /**
      * @deprecated This method currently shouldn't be used in production code, as it's to do with the new crafting system. Stay tuned.
      */
@@ -183,6 +178,10 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getBaseDefense(): number;
     getDurabilityCharge(): number;
     revertFromDoodad(doodad: Doodad): void;
+    /**
+     * Returns the container weight reduction
+     * @returns 1 if there is no reducton or [-50% + magical storing values]
+     */
     getContainerWeightReduction(): number;
     canBeRefined(): boolean;
     getProducedTemperature(): number | undefined;

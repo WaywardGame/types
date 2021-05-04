@@ -21,7 +21,7 @@ declare const _default: UseInfo<{
     description: import("../../../../item/IItem").IItemDescription;
     quality: import("../../../../IObject").Quality;
     action: ActionType.Build;
-    union: import("../../UseInfo").IUseInfoBase<Item, ActionType.Build>;
+    union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Build>;
     details: Set<symbol>;
 }, ActionType.Build, {
     getWeightCapacity: () => LabelledValue | undefined;

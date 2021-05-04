@@ -1,4 +1,5 @@
-export default undefined;
+declare const _default: {};
+export default _default;
 declare global {
     /**
      * Interface for the AJAX setting that will configure the AJAX request

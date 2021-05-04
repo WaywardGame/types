@@ -18,7 +18,7 @@ export default class NotesButtonDescription implements IMenuBarButtonDescription
     bindable: Bindable;
     private button?;
     tooltip: IMenuBarButtonDescription["tooltip"];
-    onActivate: () => import("../../../../GameScreen").default;
+    onActivate: () => import("ui/screen/screens/GameScreen").default;
     onCreate(button: MenuBarButton): void;
     onDispose(): void;
     protected onUnreadsChanged(): void;

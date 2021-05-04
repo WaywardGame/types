@@ -14,7 +14,7 @@ export default abstract class RandomValueGenerator<T> implements Objects.IClonea
     random?: RandomInstance;
     value?: T;
     constructor(random?: RandomInstance, value?: T);
-    getRandom(): import("./Random").Random<import("./Random").SeededGenerator>;
+    getRandom(): import("utilities/random/Random").Random<import("utilities/random/Random").SeededGenerator>;
     abstract [Objects.SYMBOL_CLONE](clone: typeof Objects.deepClone): this;
     protected clone(clone: typeof Objects.deepClone): readonly [RandomInstance | undefined, T | undefined];
 }

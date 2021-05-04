@@ -45,7 +45,8 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> i
     private viewQuadBuffer;
     private seed;
     private transitionFinishTime;
-    static compileShaders(gl: WebGL2RenderingContext): void;
+    static createShaders(gl: WebGL2RenderingContext): void;
+    static linkShaders(): Promise<void>;
     constructor(gl: WebGL2RenderingContext, radius: number, maxRadius: number, subdivisions?: number);
     resetGl(gl: WebGL2RenderingContext): void;
     updateRadius(player?: Player): void;

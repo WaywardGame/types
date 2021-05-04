@@ -21,6 +21,8 @@ export default class Tooltip extends Component implements ITooltip {
     private maxWidth;
     private hasSetPosition;
     constructor(source: Component | HTMLElement);
+    protected onRemove(): void;
+    protected onHide(): void;
     setSecondary(): this;
     setForceShown(forceShown?: boolean): this;
     wasForceShown(): boolean;
@@ -40,6 +42,5 @@ export default class Tooltip extends Component implements ITooltip {
     private initialPositionAndShownHandledExternally;
     setInitialPositionAndShownHandledExternally(): this;
     protected onShow(): void;
-    protected onHide(): void;
     private onMouseMove;
 }

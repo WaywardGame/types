@@ -20,7 +20,7 @@ export interface IMilestoneEvents {
     update(milestone: Milestone, value: number, max: number): void;
 }
 declare class MilestonesManager extends EventEmitter.Host<IMilestoneEvents> {
-    readonly descriptions: Descriptions<Milestone, import("./IMilestone").IMilestone>;
+    readonly descriptions: Descriptions<Milestone, import("game/milestones/IMilestone").IMilestone>;
     private readonly milestoneUpdates;
     /**
      * Get whether the given milestone is completed or not.

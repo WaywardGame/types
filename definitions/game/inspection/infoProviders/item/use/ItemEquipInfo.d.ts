@@ -24,7 +24,7 @@ declare const _default: UseInfo<{
     description: import("../../../../item/IItem").IItemDescription;
     quality: import("../../../../IObject").Quality;
     action: ActionType.Equip;
-    union: import("../../UseInfo").IUseInfoBase<Item, ActionType.Equip>;
+    union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Equip>;
     details: Set<symbol>;
 }, ActionType.Equip, {
     getAttack: () => MagicalPropertyValue | undefined;

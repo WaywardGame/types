@@ -44,7 +44,7 @@ interface IReferenceTypeMap {
 export declare type Referenceable = IReferenceTypeMap[ReferenceableReferenceTypes];
 export default class ReferenceManager {
     static isEnumReference(type: ReferenceType): type is EnumReferenceTypes;
-    static getList(type: ReferenceType, gameIsland?: Island): Player[] | SaferArray<Item> | readonly Milestone[] | SaferArray<Corpse> | SaferArray<Doodad> | SaferArray<Creature> | SaferArray<NPC> | SaferArray<TileEvent> | readonly Stat[] | IterableIterator<Island> | readonly SkillType[] | readonly ItemType[];
+    static getList(type: ReferenceType, gameIsland?: Island): SaferArray<NPC> | SaferArray<Creature> | Player[] | SaferArray<Item> | readonly Milestone[] | SaferArray<Corpse> | SaferArray<Doodad> | SaferArray<TileEvent> | readonly Stat[] | IterableIterator<Island> | readonly SkillType[] | readonly ItemType[];
     private referenceCursor;
     create(): number;
     get(thing: Referenceable): Reference | undefined;
@@ -52,7 +52,7 @@ export default class ReferenceManager {
     resolve<R extends ReferenceType>(id: number, type: R): IReferenceTypeMap[R] | undefined;
     resolve(id: number, type?: ReferenceType): IReferenceTypeMap[ReferenceType] | undefined;
     inspect(id: number, type?: ReferenceType, ...args: any[]): import("../inspection/Inspection").default<any> | undefined;
-    tooltip(id: number, type?: ReferenceType, ...args: any[]): (tooltip: import("../../ui/component/IComponent").ITooltip) => import("../../ui/component/IComponent").ITooltip | undefined;
+    tooltip(id: number, type?: ReferenceType): (tooltip: import("../../ui/component/IComponent").ITooltip) => import("../../ui/component/IComponent").ITooltip | undefined;
     private getReferenceType;
 }
 export {};

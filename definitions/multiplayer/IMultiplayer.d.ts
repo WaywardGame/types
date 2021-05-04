@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { LobbyType } from "steamworks/ISteamworks";
 import { ICharacter } from "game/entity/IHuman";
 import { PlayerState } from "game/entity/player/IPlayer";
 import Player from "game/entity/player/Player";
@@ -17,7 +18,6 @@ import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { ISaveObject } from "save/ISaveManager";
-import { LobbyType } from "steamworks/ISteamworks";
 export interface IMultiplayerEvents {
     connect(): any;
     disconnect(): any;

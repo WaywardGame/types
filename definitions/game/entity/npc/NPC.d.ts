@@ -44,6 +44,10 @@ export default abstract class NPC extends Human {
     static setRegistrarId(id: number): void;
     constructor(type?: NPCType, id?: number, x?: number, y?: number, z?: number);
     getRegistrarId(): number;
+    /**
+     * Creates inventory, equips items, and scales stats
+     */
+    spawn(): void;
     update(): void;
     kill(): boolean;
     isHostile(): boolean;

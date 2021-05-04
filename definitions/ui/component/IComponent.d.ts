@@ -134,7 +134,7 @@ export interface IComponent extends EventEmitter.Host<IComponentEvents> {
      * Remove all children that are not filtered out with the given filter function
      * @param filter A function that will return true if the child should be kept
      */
-    dump(filter: (element: IComponent) => boolean): this;
+    dump(filter: (element: HTMLElement, component?: Component) => boolean): this;
     /**
      * Sets the contents of this element using `innerHTML`.
      * @param html The content, an HTML string. Script tags will not be executed, as per the normal functionality of `innerHTML`

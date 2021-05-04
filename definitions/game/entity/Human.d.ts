@@ -36,7 +36,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     attackFromEquip: IAttackHand;
     crafted: Record<number, ICrafted>;
     customization: ICustomizations;
-    deathBy: import("../../language/Translation").ISerializedTranslation;
+    deathBy: import("language/Translation").ISerializedTranslation;
     defense: PlayerDefense;
     defenses: number[];
     equipped: Record<number, number>;

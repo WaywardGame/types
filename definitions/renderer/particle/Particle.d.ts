@@ -23,6 +23,8 @@ export default class Particle implements IParticle {
     private readonly particleSize;
     private lastUsedParticle;
     private readonly vertexArray;
+    static createShaders(gl: WebGL2RenderingContext): void;
+    static linkShaders(): Promise<void>;
     constructor(gl: WebGL2RenderingContext, maxParticles?: number);
     create(tileX: number, tileY: number, tileZ: number, particle: IRGB): void;
     createMultiple(tileX: number, tileY: number, tileZ: number, particle: IRGB, count: number, intensity?: number, ignoreFieldOfView?: boolean): void;

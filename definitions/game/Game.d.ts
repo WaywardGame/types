@@ -153,6 +153,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     hasRenderFlag(flag: UpdateRenderFlag): boolean;
     clearRenderFlag(flag: UpdateRenderFlag): void;
     requestAnimationFrame(_source: RenderSource): void;
+    cancelAnimationFrame(): void;
     /**
      * Game render loop
      * Not executed for the host in dedicated servers
@@ -161,7 +162,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     gameLogicLoop: () => void;
     shouldUpdateWorldRender(timeStamp: number): RenderSource | undefined;
     saveGame(saveType: SaveType, interrupt?: Interrupt): Promise<ISaveInfo | undefined>;
-    updateThumbnail(): Promise<void>;
+    updateThumbnail(): Promise<boolean>;
     addZoomLevel(amount: number): void;
     updateZoomLevel(): void;
     requestPlay(options: Partial<IPlayOptions> & {

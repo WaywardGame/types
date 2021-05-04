@@ -11,5 +11,5 @@
 import { ActionType } from "game/entity/action/IAction";
 import UseInfo from "game/inspection/infoProviders/UseInfo";
 import Item from "game/item/Item";
-declare const _default: UseInfo<import("../../UseInfo").IUseInfoBase<Item, ActionType.Throw>, ActionType.Throw, {}, Item>;
+declare const _default: UseInfo<import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Throw>, ActionType.Throw, {}, Item>;
 export default _default;

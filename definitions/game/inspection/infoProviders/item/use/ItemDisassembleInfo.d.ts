@@ -20,7 +20,7 @@ declare const _default: UseInfo<{
     description: import("../../../../item/IItem").IItemDescription;
     quality: import("../../../../IObject").Quality;
     action: ActionType.Disassemble;
-    union: import("../../UseInfo").IUseInfoBase<Item, ActionType.Disassemble>;
+    union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Disassemble>;
     details: Set<symbol>;
 }, ActionType.Disassemble, {
     getRequiredItems: () => Translation[];

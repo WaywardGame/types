@@ -16,7 +16,10 @@ declare module Files {
     function getArrayBuffer(path: string): Promise<ArrayBuffer>;
     function getImage(path: string): Promise<HTMLImageElement>;
     function getImageDataURL(path: string): Promise<string | undefined>;
-    function download(name: string, data: any, stringify?: boolean, pretty?: boolean): void;
-    function upload(e: Event, parse?: boolean): Promise<any>;
+    function download(name: string, data: Uint8Array): void;
+    function downloadWithJsonEncoding(name: string, data: any, stringify?: boolean, pretty?: boolean): void;
+    function uploadSingle(event: Event): Promise<Uint8Array>;
+    function uploadSingleWithStringEncoding(event: Event, parseAsJson?: boolean): Promise<any>;
+    function uploadMultiple(event: Event): Promise<Array<Uint8Array | undefined> | undefined>;
 }
 export default Files;

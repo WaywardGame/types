@@ -27,8 +27,9 @@ export default class TileLayer {
     private readonly yRenderOffset;
     private readonly tileAnimationFrames;
     private readonly syncDoodadAnimationFrames;
+    static createShaders(gl: WebGL2RenderingContext): void;
+    static linkShaders(): Promise<void>;
     static setTileTexture(texture: WebGLTexture, textureSizeInversed: Vector2): any;
-    static compileShaders(gl: WebGL2RenderingContext): void;
     private static texTileSprites;
     private static inverseTileSpriteTextureSize;
     private static tileShaderProgram;

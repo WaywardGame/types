@@ -45,7 +45,7 @@ export default class ItemInspection extends Inspection<ItemType> {
     getDefaultDisplayLevel(): InfoDisplayLevel;
     hasContent(context: InfoProviderContext): boolean;
     private getName;
-    get(context: InfoProviderContext): Translation | (Translation | import("../InfoProvider").SimpleInfoProvider | LabelledValue | MagicalPropertiesInfoProvider | QualityInfoProvider | DoodadUses | ItemWorthInfoProvider | ItemDetailsInfoProvider | ItemDurabilityInfoProvider | ItemProtectedInfoProvider | ItemUses | ItemWeightInfoProvider)[];
+    get(context: InfoProviderContext): Translation | (Translation | import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue | MagicalPropertiesInfoProvider | QualityInfoProvider | DoodadUses | ItemWorthInfoProvider | ItemDetailsInfoProvider | ItemDurabilityInfoProvider | ItemProtectedInfoProvider | ItemUses | ItemWeightInfoProvider)[];
     protected onItemRemove(_: any, item: Item): void;
     protected onTickEnd(): void;
     private updatePosition;

@@ -93,7 +93,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     invalidateAll(): void;
     protected onFireUpdate(object: Doodad | TileEvent, tile: ITile): void;
     protected onDoodadTransformed(object: Doodad, newType: DoodadType, oldType: DoodadType): void;
-    protected onCreateOrRemoveDoodadOrTileEvent(_: any, object: Doodad | TileEvent): void;
+    protected onCreateOrRemoveObject(_: any, object: Doodad | TileEvent | Entity): void;
     protected onEntityMove(entity: Entity, lastX: number, lastY: number, lastZ: number, lastTile: ITile, x: number, y: number, z: number, tile: ITile): void;
     protected onUpdateTile(_: any, x: number, y: number, z: number, tile: ITile, oldType: TerrainType): void;
     protected onItemContainerUpdate(_: any, item: Item, container1?: IContainer, container2?: IContainer): void;

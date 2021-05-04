@@ -55,7 +55,7 @@ export default class Island implements IReferenceable {
     static idToPosition(id: string): IVector2 | undefined;
     constructor(position?: IVector2, startingSeed?: number);
     get id(): string;
-    get biome(): import("./biome/IBiome").IBiomeDescription;
+    get biome(): import("game/biome/IBiome").IBiomeDescription;
     registerEventBus(): void;
     unregisterEventBus(): void;
     hydrateFromOldGame(oldGame: IGameOld): void;

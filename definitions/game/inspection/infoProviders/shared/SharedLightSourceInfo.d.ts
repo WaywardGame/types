@@ -17,11 +17,11 @@ declare const _default: UseInfo<{
     lightSource: number;
     objectType: CreationId.Item;
     value?: Item | undefined;
-    type: import("../../../item/IItem").ItemType;
-    description: import("../../../item/IItem").IItemDescription;
+    type: import("game/item/IItem").ItemType;
+    description: import("game/item/IItem").IItemDescription;
     quality: import("../../../IObject").Quality;
     action: ActionType.StartFire | ActionType.Ignite | ActionType.Equip;
-    union: import("../UseInfo").IUseInfoBase<Item, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>;
+    union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>;
     details: Set<symbol>;
 } | {
     lightSource: number;
@@ -31,7 +31,7 @@ declare const _default: UseInfo<{
     description: import("../../../doodad/IDoodad").IDoodadDescription;
     quality: import("../../../IObject").Quality;
     action: ActionType.StartFire | ActionType.Ignite | ActionType.Equip;
-    union: import("../UseInfo").IUseInfoBase<Doodad, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>;
+    union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Doodad, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>;
     details: Set<symbol>;
 }, ActionType.StartFire | ActionType.Ignite | ActionType.Equip, {}, Doodad | Item>;
 export default _default;

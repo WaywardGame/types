@@ -20,7 +20,7 @@ export default class RecipeInspection extends Inspection<ItemType> {
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
     constructor([, itemType]: [any, ItemType]);
     getId(): string;
-    get(context: InfoProviderContext): Translation | (Translation | import("../InfoProvider").SimpleInfoProvider | DoodadUses | ItemDetailsInfoProvider | ItemUses)[];
+    get(context: InfoProviderContext): Translation | (Translation | import("game/inspection/InfoProvider").SimpleInfoProvider | DoodadUses | ItemDetailsInfoProvider | ItemUses)[];
     private getDetails;
     private isUnskilled;
     private getReputation;

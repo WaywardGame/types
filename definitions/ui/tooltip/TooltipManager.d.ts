@@ -33,6 +33,7 @@ export default class TooltipManager {
      * disabler has been removed.
      */
     enable(disabler: any): this;
+    protected onInterrupt(): void;
     protected onScreenResize(): void;
     protected onMove(_: any, position: Vector2): void;
     private loop;

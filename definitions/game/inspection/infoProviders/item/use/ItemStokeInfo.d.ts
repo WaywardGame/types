@@ -19,7 +19,7 @@ declare const _default: UseInfo<{
     description: import("../../../../item/IItem").IItemDescription;
     quality: import("../../../../IObject").Quality;
     action: ActionType.StokeFire;
-    union: import("../../UseInfo").IUseInfoBase<Item, ActionType.StokeFire>;
+    union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.StokeFire>;
     details: Set<symbol>;
 }, ActionType.StokeFire, {}, Item>;
 export default _default;

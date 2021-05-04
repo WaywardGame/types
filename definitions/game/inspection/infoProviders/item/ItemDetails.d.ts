@@ -19,7 +19,7 @@ export default class ItemDetailsInfoProvider extends InfoProvider {
     private readonly description;
     constructor(item: Item | ItemType);
     getClass(): string[];
-    get(): (0 | import("../../InfoProvider").SimpleInfoProvider | LabelledValue | ItemWorthInfoProvider)[];
+    get(): (0 | import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue | ItemWorthInfoProvider)[];
     private getInsulation;
     private getPreservation;
     private getGroupings;

@@ -31,6 +31,7 @@ export interface ISerializerOptions {
     disableJitDeserialization?: boolean;
     enableDuplicateObjectDetection?: boolean;
     forceSuccess?: boolean;
+    swallowErrors?: boolean;
 }
 export interface ISerializable {
     serializeObject(serializer: ISerializer): void;

@@ -38,7 +38,7 @@ export default class ItemUses extends Uses<Item> {
     } & {
         getPreservationChance: () => import("../LabelledValue").default | undefined;
     }, Item> | import("../UseInfo").default<{
-        onConsume: number | import("../../../item/IItem").ConsumeItemStatsTuple;
+        onConsume: number | import("game/item/IItem").ConsumeItemStatsTuple;
         skill: import("../../../entity/IHuman").SkillType | undefined;
         skillBonus: number;
         magicalBonus: number;
@@ -54,7 +54,7 @@ export default class ItemUses extends Uses<Item> {
     }, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther, {
         generateUseConsumeTooltip: () => (tooltip: import("../../../../ui/component/IComponent").ITooltip, stat: import("../../../entity/IStats").Stat, base: number) => import("../../../../ui/component/IComponent").ITooltip;
     }, Item> | import("../UseInfo").default<{
-        requiredItems: (ItemType | import("../../../item/IItem").ItemTypeGroup)[];
+        requiredItems: (ItemType | import("game/item/IItem").ItemTypeGroup)[];
         objectType: CreationId.Item;
         value?: Item | undefined;
         type: ItemType;
@@ -66,7 +66,7 @@ export default class ItemUses extends Uses<Item> {
     }, ActionType.Disassemble, {
         getRequiredItems: () => import("../../../../language/Translation").default[];
     }, Item> | import("../UseInfo").default<{
-        dismantle: import("../../../item/IItem").IDismantleDescription;
+        dismantle: import("game/item/IItem").IDismantleDescription;
         objectType: CreationId.Item;
         value?: Item | undefined;
         type: ItemType;
@@ -100,7 +100,7 @@ export default class ItemUses extends Uses<Item> {
     } & {
         getMagic: () => import("../LabelledValue").default[];
     }, Item> | import("../UseInfo").default<{
-        ranged: import("../../../item/IItem").IRanged;
+        ranged: import("game/item/IItem").IRanged;
         objectType: CreationId.Item;
         value?: Item | undefined;
         type: ItemType;

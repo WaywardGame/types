@@ -61,6 +61,7 @@ interface IMagicalPropertyOld {
 }
 export interface IContainable {
     containedWithin?: IContainer;
+    cachedContainerReference?: ContainerReference;
 }
 export declare const SYMBOL_CONTAINER_TEMPERATURE: unique symbol;
 export declare const SYMBOL_CONTAINER_ITEMS_TEMPERATURE: unique symbol;

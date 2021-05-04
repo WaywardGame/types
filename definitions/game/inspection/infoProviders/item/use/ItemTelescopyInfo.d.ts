@@ -15,11 +15,11 @@ declare const _default: UseInfo<{
     telescopy: number;
     objectType: import("../../../../IGame").CreationId.Item;
     value?: Item | undefined;
-    type: import("../../../../item/IItem").ItemType;
-    description: import("../../../../item/IItem").IItemDescription;
+    type: import("game/item/IItem").ItemType;
+    description: import("game/item/IItem").IItemDescription;
     quality: import("../../../../IObject").Quality;
     action: ActionType.Equip;
-    union: import("../../UseInfo").IUseInfoBase<Item, ActionType.Equip>;
+    union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Equip>;
     details: Set<symbol>;
 }, ActionType.Equip, {}, Item>;
 export default _default;
