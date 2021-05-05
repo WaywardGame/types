@@ -37,6 +37,10 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
     isTall?: boolean;
     providesFire?: boolean;
     /**
+     * Prevents the event from being created on these types
+     */
+    excludedTerrains?: TerrainType[];
+    /**
      * Whether the tile event prevents things such as carving, digging, movement, etc.
      */
     blocksTile?: boolean;
