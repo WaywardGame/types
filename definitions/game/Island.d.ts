@@ -61,6 +61,11 @@ export default class Island implements IReferenceable {
     hydrateFromOldGame(oldGame: IGameOld): void;
     findUnusedId<T>(creationId: CreationId, things: T[]): number;
     /**
+     * Gets the total distance away the current island is from 0, 0 as a positive value.
+     * @returns The distance as a positive number.
+     */
+    getIslandDistance(): number;
+    /**
      * Szudzik's function
      */
     private generatePositionHash;

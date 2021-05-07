@@ -59,13 +59,14 @@ interface IMagicalPropertyOld {
     skill?: SkillType;
     stat?: Stat;
 }
-export interface IContainable {
-    containedWithin?: IContainer;
-    cachedContainerReference?: ContainerReference;
-}
+export declare const SYMBOL_CONTAINER_CACHED_REFERENCE: unique symbol;
 export declare const SYMBOL_CONTAINER_TEMPERATURE: unique symbol;
 export declare const SYMBOL_CONTAINER_ITEMS_TEMPERATURE: unique symbol;
 export declare const SYMBOL_CONTAINER_TILE_TEMPERATURE: unique symbol;
+export interface IContainable {
+    containedWithin?: IContainer;
+    [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
+}
 export interface IContainer extends IContainable {
     [SYMBOL_CONTAINER_TEMPERATURE]?: number;
     [SYMBOL_CONTAINER_ITEMS_TEMPERATURE]?: number;
@@ -1019,7 +1020,8 @@ export declare enum ItemType {
     WhitePineNeedles = 588,
     FurCoat = 589,
     FurMittens = 590,
-    FurBoots = 591
+    FurBoots = 591,
+    BirdDroppings = 592
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

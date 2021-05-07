@@ -13,3 +13,4 @@ export declare const animalDroppings: ITileEventDescription;
 export declare const animalDung: ITileEventDescription;
 export declare const guano: ITileEventDescription;
 export declare const wispDust: ITileEventDescription;
+export declare const birdDroppings: ITileEventDescription;

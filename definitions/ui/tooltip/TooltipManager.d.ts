@@ -34,6 +34,7 @@ export default class TooltipManager {
      */
     enable(disabler: any): this;
     protected onInterrupt(): void;
+    protected onInterruptClose(): void;
     protected onScreenResize(): void;
     protected onMove(_: any, position: Vector2): void;
     private loop;
