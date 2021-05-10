@@ -70,7 +70,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     type: ItemType;
     used?: IItemUsed;
     weight: number;
-    weightCapacity: number;
     weightFraction: number;
     offsetX?: number;
     offsetY?: number;
@@ -118,7 +117,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @returns A number or undefined.
      */
     canDecay(): number | undefined;
-    getDecayMax(): number;
     getDecayRate(isClientSide: boolean): number;
     getPreservationDecayMultiplier(): number;
     getTemperatureDecayMultiplier(isClientSide: boolean): number;

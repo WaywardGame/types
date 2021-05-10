@@ -91,7 +91,6 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     spread?: number;
     type: DoodadType;
     weight?: number;
-    weightCapacity: number;
     readonly x: number;
     readonly y: number;
     readonly z: number;

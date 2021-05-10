@@ -26,9 +26,11 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     preExecutionHandler?: (actionApi: IActionApi<E>, ...args: AV) => any;
     handler: (actionApi: IActionHandlerApi<E>, ...args: AV) => R;
     confirmer?: (actionApi: IActionConfirmerApi<E>, ...args: AV) => Promise<boolean>;
+    private shouldSkipConfirmation;
     constructor(...argumentTypes: A);
     execute(actionApi: IActionApi<E>, ...args: AV): R;
     execute(executor: E, ...args: AV): R;
+    skipConfirmation(): this;
     /**
      * Add a "pre-execution" handler to this action.
      *

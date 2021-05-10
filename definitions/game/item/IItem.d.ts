@@ -71,7 +71,6 @@ export interface IContainer extends IContainable {
     [SYMBOL_CONTAINER_TEMPERATURE]?: number;
     [SYMBOL_CONTAINER_ITEMS_TEMPERATURE]?: number;
     [SYMBOL_CONTAINER_TILE_TEMPERATURE]?: number;
-    weightCapacity?: number;
     containedItems: Item[];
     transientItems?: Item[];
     itemOrders?: number[];
@@ -345,6 +344,10 @@ export declare enum ContainerReferenceType {
 }
 export interface IBaseContainerReference {
     crt: ContainerReferenceType;
+    /**
+     * Legacy, don't use this
+     * @deprecated
+     */
     type?: ContainerReferenceType;
 }
 export interface IPlayerInventoryContainerReference extends IBaseContainerReference {
