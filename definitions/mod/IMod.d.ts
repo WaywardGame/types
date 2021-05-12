@@ -32,6 +32,7 @@ export interface IModConfig {
     readonly publishedFileId?: string;
     readonly allowUnlockingMilestones?: boolean;
     readonly github?: string;
+    readonly saveGameData?: boolean;
 }
 export interface IModEvents {
     unload(): any;
