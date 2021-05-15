@@ -171,6 +171,7 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
      * Initializes the languages for the given mod.
      */
     private initializeLanguages;
+    private initializeSaveData;
     /**
      * Initializes the customizations for the given mod.
      */

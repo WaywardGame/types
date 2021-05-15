@@ -37,6 +37,10 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
     isTall?: boolean;
     providesFire?: boolean;
     /**
+     * Prevents the event from being created on these types
+     */
+    excludedTerrains?: TerrainType[];
+    /**
      * Whether the tile event prevents things such as carving, digging, movement, etc.
      */
     blocksTile?: boolean;
@@ -86,19 +90,20 @@ export declare enum TileEventType {
     HoneyFungus = 2,
     TumblingTumbleweed = 3,
     AnimalDroppings = 4,
-    AnimalDung = 5,
-    Guano = 6,
-    WispDust = 7,
-    Blood = 8,
-    BloodWater = 9,
-    Acid = 10,
-    PuddleOfFreshWater = 11,
-    MeltingTile = 12,
-    PuddleOfPurifiedFreshWater = 13,
-    PuddleOfUnpurifiedFreshWater = 14,
-    PuddleOfSeawater = 15,
-    PuddleOfDesalinatedWater = 16,
-    PuddleOfMedicinalWater = 17,
-    PuddleOfGoatMilk = 18,
-    PuddleOfCoconutWater = 19
+    BirdDroppings = 5,
+    AnimalDung = 6,
+    Guano = 7,
+    WispDust = 8,
+    Blood = 9,
+    BloodWater = 10,
+    Acid = 11,
+    PuddleOfFreshWater = 12,
+    MeltingTile = 13,
+    PuddleOfPurifiedFreshWater = 14,
+    PuddleOfUnpurifiedFreshWater = 15,
+    PuddleOfSeawater = 16,
+    PuddleOfDesalinatedWater = 17,
+    PuddleOfMedicinalWater = 18,
+    PuddleOfGoatMilk = 19,
+    PuddleOfCoconutWater = 20
 }

@@ -13,11 +13,13 @@ import { WorldZ } from "game/WorldZ";
 export declare enum Temperature {
     Coldest = -100,
     Cold = -50,
+    Freezing = -37.5,
     Cool = -25,
     Chilled = -12.5,
     Neutral = 0,
     LukeWarm = 12.5,
     Warm = 25,
+    Overheating = 37.5,
     Hot = 50,
     Hottest = 100
 }

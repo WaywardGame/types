@@ -64,7 +64,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
     resolveContainer(container?: IContainer): Doodad | Item | Player | NPC | IContainer | ITile | undefined;
-    getContainerReference(continable: IContainable | undefined, showWarnings?: boolean): ContainerReference;
+    getContainerReference(containable: IContainable | undefined, showWarnings?: boolean): ContainerReference;
     private _getContainerReference;
     hashContainerReference(container: IContainer): string;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
@@ -90,6 +90,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
      */
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     weightTree(itemType: ItemType, weightType?: WeightType, debug?: boolean, depth?: number): number;
+    getWeightCapacity(container: IContainer, includeMagic?: boolean): number | undefined;
     create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, movingMultiple?: boolean, updateTables?: boolean): Item;
     createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human): Item;
     isContainer(obj: unknown): obj is IContainer;

@@ -59,18 +59,18 @@ interface IMagicalPropertyOld {
     skill?: SkillType;
     stat?: Stat;
 }
-export interface IContainable {
-    containedWithin?: IContainer;
-    cachedContainerReference?: ContainerReference;
-}
+export declare const SYMBOL_CONTAINER_CACHED_REFERENCE: unique symbol;
 export declare const SYMBOL_CONTAINER_TEMPERATURE: unique symbol;
 export declare const SYMBOL_CONTAINER_ITEMS_TEMPERATURE: unique symbol;
 export declare const SYMBOL_CONTAINER_TILE_TEMPERATURE: unique symbol;
+export interface IContainable {
+    containedWithin?: IContainer;
+    [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
+}
 export interface IContainer extends IContainable {
     [SYMBOL_CONTAINER_TEMPERATURE]?: number;
     [SYMBOL_CONTAINER_ITEMS_TEMPERATURE]?: number;
     [SYMBOL_CONTAINER_TILE_TEMPERATURE]?: number;
-    weightCapacity?: number;
     containedItems: Item[];
     transientItems?: Item[];
     itemOrders?: number[];
@@ -344,6 +344,10 @@ export declare enum ContainerReferenceType {
 }
 export interface IBaseContainerReference {
     crt: ContainerReferenceType;
+    /**
+     * Legacy, don't use this
+     * @deprecated
+     */
     type?: ContainerReferenceType;
 }
 export interface IPlayerInventoryContainerReference extends IBaseContainerReference {
@@ -1019,7 +1023,8 @@ export declare enum ItemType {
     WhitePineNeedles = 588,
     FurCoat = 589,
     FurMittens = 590,
-    FurBoots = 591
+    FurBoots = 591,
+    BirdDroppings = 592
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -1109,7 +1114,8 @@ export declare enum ItemTypeGroup {
     WeaponThatFiresArrows = 884,
     WeaponThatFiresBullets = 885,
     BecomesFireSource = 886,
-    All = 887,
-    Last = 888
+    Egg = 887,
+    All = 888,
+    Last = 889
 }
 export {};

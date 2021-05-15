@@ -129,10 +129,6 @@ export interface ISourceFilter {
      * Any source present in this array will not appear in the console.
      */
     disabledSources: Array<keyof typeof LogSource>;
-    /**
-     * Any source present in this array will not appear in the log file.
-     */
-    disabledFileSources: Array<keyof typeof LogSource>;
 }
 export declare const defaultSourceFilter: ISourceFilter;
 declare module Log {

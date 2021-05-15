@@ -40,6 +40,7 @@ export default abstract class NPC extends Human {
     ai: AiType;
     seen: number;
     type: NPCType;
+    weightCapacity: number;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(type?: NPCType, id?: number, x?: number, y?: number, z?: number);

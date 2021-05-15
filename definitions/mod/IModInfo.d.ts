@@ -81,6 +81,7 @@ export interface IModProvides {
     stylesheets: number;
     imageOverrides: boolean;
     customizations: boolean;
+    saveData: boolean;
 }
 export interface IImageOverrideDescription extends IHasImagePath {
     replace: string;

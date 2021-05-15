@@ -35,6 +35,7 @@ export interface ISortableOptions {
 }
 export interface ISortableItem {
     element: JQuery;
+    parent: JQuery;
     left: number;
     top: number;
     width: number;

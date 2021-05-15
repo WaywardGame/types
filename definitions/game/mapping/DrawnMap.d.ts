@@ -21,7 +21,7 @@ import { IPreSerializeCallback, IUnserializedCallback } from "save/ISerializer";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import { IRange } from "utilities/math/Range";
 import Sampler from "utilities/math/Sampler";
-import { IRandomGenerator, Random, SeededGenerator, WeightedOption } from "utilities/random/Random";
+import { IRandomGenerator, Random, SeededGenerator } from "utilities/random/Random";
 export declare enum DrawnMapType {
     Treasure = 0,
     Drawn = 1
@@ -29,7 +29,6 @@ export declare enum DrawnMapType {
 export interface ITreasure extends IVector2 {
     chest: DoodadType;
 }
-export declare const TREASURE_CHEST_DOODADS: Array<WeightedOption<DoodadType>>;
 export interface ITreasureMapGenerationSettings {
     /**
      * The map's dimensions, x & y, will be `radius * 2 + 1`

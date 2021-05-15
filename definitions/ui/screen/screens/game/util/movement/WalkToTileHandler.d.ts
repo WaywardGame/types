@@ -61,7 +61,7 @@ export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHand
     /**
      * Finds a path to a target and then updates the overlay to that path (if it was valid)
      */
-    private findPath;
+    private updatePreviewPath;
     /**
      * Returns the penalty of the given tile (just how much we *don't* want to step there)
      */

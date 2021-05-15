@@ -21,7 +21,7 @@ import NPC from "game/entity/npc/NPC";
 import Player from "game/entity/player/Player";
 import { CreationId } from "game/IGame";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
-import { BookType, ContainerReference, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemType } from "game/item/IItem";
+import { BookType, ContainerReference, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemType, SYMBOL_CONTAINER_CACHED_REFERENCE } from "game/item/IItem";
 import { IPlaceOnTileOptions } from "game/item/IItemManager";
 import ItemMapManager from "game/item/ItemMapManager";
 import MagicalPropertyManager, { IHasMagic } from "game/magic/MagicalPropertyManager";
@@ -70,13 +70,12 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     type: ItemType;
     used?: IItemUsed;
     weight: number;
-    weightCapacity: number;
     weightFraction: number;
     offsetX?: number;
     offsetY?: number;
     fromX?: number;
     fromY?: number;
-    cachedContainerReference?: ContainerReference;
+    [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
     private _movementFinishTime?;
     private _movementOptions?;
     private _description;
@@ -113,7 +112,11 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     isValid(): boolean;
     isProtected(): boolean;
     getDecayAtStart(): number;
-    getDecayMax(): number;
+    /**
+     * Returns the maximum decay of an item, or undefined if the item does not have the decayMax property.
+     * @returns A number or undefined.
+     */
+    canDecay(): number | undefined;
     getDecayRate(isClientSide: boolean): number;
     getPreservationDecayMultiplier(): number;
     getTemperatureDecayMultiplier(isClientSide: boolean): number;

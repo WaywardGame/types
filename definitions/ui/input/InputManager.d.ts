@@ -74,6 +74,7 @@ export declare class GlobalMouseInfo extends EventEmitter.Host<IGlobalMouseInfoE
      */
     isTarget<W extends Component | Element | string | undefined>(what?: W, recalcTarget?: boolean): (W extends Component ? W : HTMLElement) | false;
     invalidateTarget(): void;
+    private _updateTarget;
 }
 interface IInputInfoEvents {
     unpress(input: IInput, info: InputInfo): any;

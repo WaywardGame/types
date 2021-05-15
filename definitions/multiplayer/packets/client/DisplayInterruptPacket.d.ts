@@ -15,5 +15,6 @@ export default class DisplayInterruptPacket extends ClientPacket {
     interrupt: Interrupt;
     args: any[];
     choices: InterruptChoice[] | undefined;
+    extraData: any;
     process(): Promise<void>;
 }
