@@ -73,7 +73,7 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
      */
     canBurn?: boolean;
     decayTemperatureRange?: IDecayTemperatureRange;
-    canCreate?(type: TileEventType, tile: ITile, x: number, y: number, z: number): boolean;
+    canCreate?(type: TileEventType, tile: ITile, tileType: TerrainType, x: number, y: number, z: number): boolean;
     create?(tileEvent: TileEvent): void;
     remove?(tileEvent: TileEvent): void;
     update?(tileEvent: TileEvent): void;

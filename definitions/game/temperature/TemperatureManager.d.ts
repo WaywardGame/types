@@ -27,6 +27,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     private readonly island;
     private cacheCalculated;
     private cacheProduced;
+    private processingScheduledUpdates;
     private scheduledUpdates;
     constructor(island: Island);
     /**
@@ -103,6 +104,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     protected onPlay(): void;
     protected onTickEnd(): void;
     private update;
+    private processScheduledUpdate;
     private calculateProduced;
     private updateProducedType;
     /**

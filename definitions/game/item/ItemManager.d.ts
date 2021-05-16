@@ -100,7 +100,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getMagicalWeightCapacity(container: IContainer): number;
     moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, filterText?: string | undefined, onMoveItem?: (item: Item) => void): Item[];
     moveToContainer(human: Human | undefined, item: Item, container: IContainer): boolean;
-    hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: Item): boolean;
+    hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove: Item): boolean;
     breakContainerOnTile(itemContainer: Item, x: number, y: number, z: number): void;
     /**
      * Drop items in a 3x3 square around the location

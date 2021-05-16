@@ -144,6 +144,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      */
     getTileMeltRate(terrainType: TerrainType, point: IVector3): number;
     checkForHiddenMob(human: Human, x: number, y: number, z: number): void;
+    isMapEdge(x: number, y: number): boolean;
     ensureValidPoint<T extends IVector2>(point?: T): T | undefined;
     getTileFromPoint(point: IVector3): ITile;
     getTile(x: number, y: number, z: number): ITile;
