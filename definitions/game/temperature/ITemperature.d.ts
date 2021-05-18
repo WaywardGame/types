@@ -10,6 +10,7 @@
  */
 import TimeManager from "game/TimeManager";
 import { WorldZ } from "game/WorldZ";
+import { IRange } from "utilities/math/Range";
 export declare enum Temperature {
     Coldest = -100,
     Cold = -50,
@@ -23,6 +24,7 @@ export declare enum Temperature {
     Hot = 50,
     Hottest = 100
 }
+export declare type TimeTemperatureModifier = ((time: TimeManager) => number) | IRange;
 export interface ILayerTemperature {
     /**
      * When not provided, uses `0`
@@ -31,7 +33,7 @@ export interface ILayerTemperature {
     /**
      * When not provided, uses `0`
      */
-    timeModifier?(time: TimeManager): number;
+    timeModifier?: TimeTemperatureModifier;
 }
 export interface IBiomeTemperature {
     /**
@@ -45,7 +47,7 @@ export interface IBiomeTemperature {
     /**
      * When not provided, uses `0`
      */
-    timeModifier?(time: TimeManager): number;
+    timeModifier?: TimeTemperatureModifier;
 }
 export interface ITemperatureSource {
     /**
