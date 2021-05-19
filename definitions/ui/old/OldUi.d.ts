@@ -44,6 +44,7 @@ export default class OldUi {
     filterContainers(): void;
     getInventoryItemOrder(): any[];
     updateItem(item: Item, updateChildren?: boolean): void;
+    syncDecayBar(item: Item, syncDamage?: boolean): void;
     syncAllItems(): void;
     hideContextMenu(): void;
     hideActionsMenu(): void;
