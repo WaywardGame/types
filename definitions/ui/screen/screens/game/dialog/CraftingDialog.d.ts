@@ -22,7 +22,7 @@ export default class CraftingDialog extends Dialog {
     protected updateCraftableInventories(): void;
     protected onContainerItemAdd(_: any, item: Item, container: IContainer): void;
     protected onInventoryItemAdd(_: any, item: Item): void;
-    protected onContainerItemRemove(_: any, item: Item, previousContainer: IContainer): void;
+    protected onContainerItemRemove(_: any, item: Item, previousContainer: IContainer | undefined): void;
     protected onInventoryItemRemove(_: any, item: Item): void;
     private addItem;
     private addCraftable;

@@ -15,6 +15,7 @@ import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import { IContainer } from "game/item/IItem";
 import Item from "game/item/Item";
 import Translation from "language/Translation";
+import Vector3 from "utilities/math/Vector3";
 export default class ContainedItemsInfoProvider extends InfoProvider {
     private readonly container;
     static translateItems(max: number, ...items: Item[]): Translation;
@@ -24,5 +25,5 @@ export default class ContainedItemsInfoProvider extends InfoProvider {
     getDefaultDisplayLevel(): InfoDisplayLevel;
     hasContent(): boolean;
     get(): LabelledValue;
-    protected onItemMove(_: any, item: Item, previousContainer: IContainer | undefined, newContainer: IContainer): void;
+    protected onItemMove(_: any, item: Item, previousContainer: IContainer | undefined, _previousContainerPosition: Vector3 | undefined, newContainer: IContainer): void;
 }

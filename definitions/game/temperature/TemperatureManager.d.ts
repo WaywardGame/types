@@ -21,6 +21,7 @@ import TileEvent from "game/tile/TileEvent";
 import TimeManager from "game/TimeManager";
 import { WorldZ } from "game/WorldZ";
 import { IRange } from "utilities/math/Range";
+import Vector3 from "utilities/math/Vector3";
 export declare const TEMPERATURE_INVALID = 255;
 declare type ScheduledUpdate = [source: string, x: number, y: number, z: WorldZ, tile?: ITile | undefined, invalidate?: boolean];
 export interface ITempManagerEvents {
@@ -103,8 +104,8 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     protected onCreateOrRemoveObject(_: any, object: Doodad | TileEvent | Entity): void;
     protected onEntityMove(entity: Entity, lastX: number, lastY: number, lastZ: number, lastTile: ITile, x: number, y: number, z: number, tile: ITile): void;
     protected onUpdateTile(_: any, x: number, y: number, z: number, tile: ITile, oldType: TerrainType): void;
-    protected onItemContainerUpdate(_: any, item: Item, container1?: IContainer, container2?: IContainer): void;
-    protected onItemContainerRemove(_: any, item: Item, container: IContainer): void;
+    protected onItemContainerAdd(_: any, item: Item, container?: IContainer): void;
+    protected onItemContainerRemove(_: any, item: Item, container: IContainer | undefined, containerPosition: Vector3 | undefined): void;
     private runContainerInvalidations;
     protected onItemFireUpdate(item: Item): void;
     protected onPlay(): void;

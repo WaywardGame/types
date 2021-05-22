@@ -30,6 +30,7 @@ export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHand
     private overlays;
     private readonly overlayType;
     private canResetTarget;
+    private currenWalkPathTarget;
     constructor(gameScreen: Component);
     register(): void;
     deregister(): void;
