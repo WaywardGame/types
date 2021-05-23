@@ -111,6 +111,12 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      */
     hasAny(): boolean;
     /**
+     * Check to see if any an array of MagicalPropertyTypese exist on an object.
+     * @param types Array of MagicalPropertyTypes.
+     * @returns True if any of the magical property types exist on this object.
+     */
+    hasAnyTypes(types: MagicalPropertyType[]): boolean;
+    /**
      * @returns whether the given type of magical property is present on this object
      */
     has(type: MagicalPropertyType): boolean;
