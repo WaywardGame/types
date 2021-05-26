@@ -136,14 +136,8 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      * @returns The default terrain type with a fallback to dirt (which shouldn't happen without mods or bugs).
      */
     getDefaultTerrainType(tile: ITile): TerrainType;
-    /**
-     * Gets the decay rate of a terrain type based on the temperature (returns as a default of 0).
-     * @param terrainType The terrain type to check.
-     * @param point The point of the terrain/tile.
-     * @returns The number of decay reduction of the terrain given the temperature of the point.
-     */
-    getTileMeltRate(terrainType: TerrainType, point: IVector3): number;
     checkForHiddenMob(human: Human, x: number, y: number, z: number): void;
+    isMapEdge(x: number, y: number): boolean;
     ensureValidPoint<T extends IVector2>(point?: T): T | undefined;
     getTileFromPoint(point: IVector3): ITile;
     getTile(x: number, y: number, z: number): ITile;

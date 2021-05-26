@@ -18,8 +18,8 @@ export declare enum MagicalPropertyType {
     ItemWeight = 4,
     Stat = 5,
     Skill = 6,
-    Benignity = 7,
-    Malignity = 8,
+    Reputation = 7,
+    Unused = 8,
     Range = 9,
     UseBenefits = 10,
     Worth = 11,
@@ -38,4 +38,5 @@ export declare enum MagicalPropertyType {
 export declare const magicalPropertyTypeSubTypeMap: {
     6: typeof SkillType;
     5: typeof Stat;
+    7: typeof Stat;
 };

@@ -38,7 +38,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
      * Note: Prefer `IActionApi.get` if you're calling this from within another action.
      */
     static get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A, infer E, infer R, infer AV> ? ActionExecutor<A, E, R, AV> : never;
-    static executeMultiplayer(packet: ActionPacket, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any, any[]>): any;
+    static executeMultiplayer(packet: ActionPacket, executor?: Entity | undefined, nonMpActionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any, any[]>): any;
     get executor(): E;
     get actionStack(): ActionType[];
     get lastAction(): ActionType;
@@ -94,6 +94,9 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private handleApi;
     private canExecute;
     private isUsableWhen;
+    private static validate;
+    private static getArgumentType;
+    private static validateArgument;
+    private static isValidItem;
 }
-export declare function getArgumentType(executor: Entity, expected: ActionArgument | ActionArgument[], actual: unknown): ActionArgument | undefined;
 export {};

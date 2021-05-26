@@ -37,7 +37,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     readonly pinnedMessages: Component;
     readonly log: Component;
     readonly input: Input;
-    readonly filter: Button;
+    readonly filter: Button | undefined;
     pinNotesAutomatically: boolean;
     filters: IFilters;
     private selectedFilter;

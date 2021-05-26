@@ -18,7 +18,10 @@ import Item from "game/item/Item";
 import { TempType } from "game/temperature/ITemperature";
 import { ITile, TerrainType } from "game/tile/ITerrain";
 import TileEvent from "game/tile/TileEvent";
+import TimeManager from "game/TimeManager";
 import { WorldZ } from "game/WorldZ";
+import { IRange } from "utilities/math/Range";
+import Vector3 from "utilities/math/Vector3";
 export declare const TEMPERATURE_INVALID = 255;
 declare type ScheduledUpdate = [source: string, x: number, y: number, z: WorldZ, tile?: ITile | undefined, invalidate?: boolean];
 export interface ITempManagerEvents {
@@ -27,6 +30,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     private readonly island;
     private cacheCalculated;
     private cacheProduced;
+    private processingScheduledUpdates;
     private scheduledUpdates;
     constructor(island: Island);
     /**
@@ -54,6 +58,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
      * Returns the current overall temperature for the given tile.
      */
     get(x: number, y: number, z: WorldZ, isClientSide: boolean, source: GetterOfOr<string>): number;
+    getRange(x: number, y: number, z: WorldZ, isClientSide: boolean): IRange;
     /**
      * Returns the base temperature.
      */
@@ -61,11 +66,14 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     /**
      * Returns the temperature modifier at the given time.
      */
-    getTime(time?: import("../TimeManager").default): number;
+    getTime(time?: TimeManager): number;
+    getBiomeRange(): IRange;
     /**
      * Returns the temperature modifier of the given layer, at the given time.
      */
-    getLayer(z: WorldZ, time?: import("../TimeManager").default): number;
+    getLayer(z: WorldZ, time?: TimeManager): number;
+    getLayerRange(z: WorldZ): IRange;
+    private resolveTimeModifier;
     /**
      * Returns the temperature of the given tile, produced by combining the temperatures of each type.
      */
@@ -96,13 +104,14 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     protected onCreateOrRemoveObject(_: any, object: Doodad | TileEvent | Entity): void;
     protected onEntityMove(entity: Entity, lastX: number, lastY: number, lastZ: number, lastTile: ITile, x: number, y: number, z: number, tile: ITile): void;
     protected onUpdateTile(_: any, x: number, y: number, z: number, tile: ITile, oldType: TerrainType): void;
-    protected onItemContainerUpdate(_: any, item: Item, container1?: IContainer, container2?: IContainer): void;
-    protected onItemContainerRemove(_: any, item: Item, container: IContainer): void;
+    protected onItemContainerAdd(_: any, item: Item, container?: IContainer): void;
+    protected onItemContainerRemove(_: any, item: Item, container: IContainer | undefined, containerPosition: Vector3 | undefined): void;
     private runContainerInvalidations;
     protected onItemFireUpdate(item: Item): void;
     protected onPlay(): void;
     protected onTickEnd(): void;
     private update;
+    private processScheduledUpdate;
     private calculateProduced;
     private updateProducedType;
     /**

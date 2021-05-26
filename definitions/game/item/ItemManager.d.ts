@@ -31,20 +31,22 @@ export interface IItemManagerEvents {
     canMoveItems(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType: ItemType | undefined, ofQuality: Quality | undefined): boolean | undefined;
     /**
      * Called when an item is removed from a container.
-     * @param item The item object
-     * @param previousContainer The container object the item was removed from.
+     * @param item The item object.
+     * @param container The container object the item was removed from.
+     * @param containerPosition The psoition of that container when the remove occurred.
      */
-    containerItemRemove(item: Item, previousContainer: IContainer): any;
+    containerItemRemove(item: Item, container: IContainer | undefined, containerPosition: Vector3 | undefined): any;
     /**
      * Called when an item is moved from one container to another.
-     * @param item The item object
+     * @param item The item object.
      * @param containerFrom The container object the item was moved to. This container might be inventory or a container within the inventory.
+     * @param containerFromPosition The position of containerFrom when the update occurred.
      * @param containerTo The container object the item was moved to. This container might be inventory or a container within the inventory.
      */
-    containerItemUpdate(item: Item, containerFrom: IContainer | undefined, containerTo: IContainer): any;
+    containerItemUpdate(item: Item, containerFrom: IContainer | undefined, containerFromPosition: Vector3 | undefined, containerTo: IContainer): any;
     /**
      * Called when an item is added to a container.
-     * @param item The item object
+     * @param item The item object.
      * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
      */
     containerItemAdd(item: Item, container: IContainer): any;
@@ -100,7 +102,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getMagicalWeightCapacity(container: IContainer): number;
     moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, filterText?: string | undefined, onMoveItem?: (item: Item) => void): Item[];
     moveToContainer(human: Human | undefined, item: Item, container: IContainer): boolean;
-    hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: Item): boolean;
+    hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove: Item): boolean;
     breakContainerOnTile(itemContainer: Item, x: number, y: number, z: number): void;
     /**
      * Drop items in a 3x3 square around the location

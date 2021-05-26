@@ -1024,7 +1024,9 @@ export declare enum ItemType {
     FurCoat = 589,
     FurMittens = 590,
     FurBoots = 591,
-    BirdDroppings = 592
+    BirdDroppings = 592,
+    HardenedCoil = 593,
+    MagicalBinding = 594
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -1115,7 +1117,8 @@ export declare enum ItemTypeGroup {
     WeaponThatFiresBullets = 885,
     BecomesFireSource = 886,
     Egg = 887,
-    All = 888,
-    Last = 889
+    Alteration = 888,
+    All = 889,
+    Last = 890
 }
 export {};

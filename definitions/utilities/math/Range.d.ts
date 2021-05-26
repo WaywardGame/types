@@ -23,6 +23,8 @@ export interface IRange {
     maximum: number;
 }
 export declare module IRange {
+    const ZERO: Readonly<IRange>;
+    const ONE: Readonly<IRange>;
     function lerp(t: number, range: IRange): number;
     function unlerp(lerped: number, range: IRange): number;
     function add(...rangesOrNumbers: Array<IRange | number>): IRange;

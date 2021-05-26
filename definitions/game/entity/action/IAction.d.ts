@@ -125,7 +125,8 @@ export declare enum ActionType {
     InterruptResponse = 92,
     Upgrade = 93,
     Enhance = 94,
-    Shoot = 95
+    Shoot = 95,
+    Alter = 96
 }
 export declare enum ActionUsability {
     Paused = 0,
