@@ -14,10 +14,14 @@ import { IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
 declare module TileHelpers {
     const maskGfx = 31;
-    const maskType = 4064;
-    const maskTilled = 4096;
-    const maskDoodadOverHidden = 8192;
-    const maskDoodadAnimationDisabled = 16384;
+    const maskType = 131040;
+    const maskTypeShift = 5;
+    const maskTilled = 131072;
+    const maskTilledShift: number;
+    const maskDoodadOverHidden = 262144;
+    const maskDoodadOverHiddenShift: number;
+    const maskDoodadAnimationDisabled = 524288;
+    const maskDoodadAnimationDisabledShift: number;
     function getGfx(tile: ITile): number;
     function getGfxRaw(data: number): number;
     function setGfx(tile: ITile, value: number): void;

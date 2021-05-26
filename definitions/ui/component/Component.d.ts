@@ -17,6 +17,7 @@ import Rectangle from "utilities/math/Rectangle";
 declare const ContextMenu: typeof ContextMenuExport;
 declare type ContextMenu = ContextMenuExport;
 export default class Component<E extends HTMLElement = HTMLElement> extends EventEmitter.Host<Events<IComponent>> implements IComponent {
+    private static readonly map;
     static get(selector: string): Component | undefined;
     static get(element: Element): Component;
     static get(event: Event): Component;
@@ -38,6 +39,8 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
     static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, strategy?: AppendStrategy): void;
     static remove(elementToRemove: string | IComponent | Element): void;
+    private static getComponentFromElement;
+    private static setComponentForElement;
     private static appendRegenerateBoxes;
     private static regenerateAncestorBoxes;
     private static regenerateSiblingBoxes;

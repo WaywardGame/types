@@ -18,6 +18,7 @@ export default abstract class InspectionsTooltipHandler<INSPECTIONS_LIST extends
     private informationGuide;
     private showExtraInfo;
     initializeTooltip(tooltip: ITooltip): ITooltip | undefined;
+    dispose(): void;
     protected abstract initializeInspections(): INSPECTIONS_LIST | undefined;
     protected onUpdateTooltipPosition(position: Vector2): void;
     protected getTooltipClass(): string[];
