@@ -50,7 +50,7 @@ export interface ISteamworks {
     getFriends(): ISteamFriend[];
     getStatInt(name: string): number | undefined;
     setStat(name: string, value: number): void;
-    storeStats(cb: () => void, errCallback?: () => void): void;
+    storeStats(cb: (err: string | null) => void): void;
     getGlobalStatInt(name: string, count: number): number | undefined;
     startPlaytimeTracking(publishFileIds: number[]): void;
     stopPlaytimeTracking(): void;
@@ -64,13 +64,13 @@ export interface ISteamworks {
     setLobbyData(lobbyId: string, name: string, value: string): boolean;
     getLobbyOwner(lobbyId: string): string | undefined;
     getLobbyMembers(lobbyId: string): ISteamFriend[] | undefined;
-    ugcGetUserItems(type: number, sort: number, listType: number, cb: (items: IWorkshopItem[]) => void, failure: (err: string) => void): void;
-    ugcSynchronizeItems(path: string, cb: (items: IWorkshopItem[]) => void, failure: (err: string) => void): void;
-    ugcUnsubscribe(publishId: string, cb: () => void, err: (err: string) => void): void;
-    saveFilesToCloud(files: string[], cb: () => void, err: (err: string) => void): void;
-    publishWorkshopFile(path: string, imagePath: string, title: string, description: string, tags: string[], cb: (publishedFileId2: string) => void, err: (err: string) => void): void;
-    updatePublishedWorkshopFile(publishFileId: string, path: string, imagePath: string, title: string, description: string, tags: string[], cb: (publishedFileId2: string) => void, err: (err: string) => void): void;
-    fileShare(path: string, cb: () => void, err: (err: string) => void): void;
+    ugcGetUserItems(type: number, sort: number, listType: number, cb: (err: string | null, items: IWorkshopItem[]) => void): void;
+    ugcSynchronizeItems(path: string, cb: (err: string | null, items: IWorkshopItem[]) => void): void;
+    ugcUnsubscribe(publishId: string, cb: (err: string | null) => void): void;
+    saveFilesToCloud(files: string[], cb: (err: string | null) => void): void;
+    publishWorkshopFile(path: string, imagePath: string, title: string, description: string, tags: string[], cb: (err: string | null, publishedFileId2: string) => void): void;
+    updatePublishedWorkshopFile(publishFileId: string, path: string, imagePath: string, title: string, description: string, tags: string[], cb: (err: string | null, publishedFileId2: string) => void): void;
+    fileShare(path: string, cb: (err: string | null) => void): void;
     activateGameOverlayToWebPage(url: string): void;
     activateGameOverlayInviteDialog(lobbyId: string): void;
     ugcShowOverlay(publishFileId?: string): void;
@@ -100,7 +100,6 @@ export interface ISteamworksNetworking {
         data: Uint8Array;
     } | undefined;
     readP2PPacket(length: number, data: Uint8Array): string | undefined;
-    setRelayNetworkStatusCallback(callback: (availabilitySummary: number, availabilityNetworkConfig: number, availabilityAnyRelay: number, debugMessage: string) => void): void;
     setP2PSessionRequestCallback(callback: (steamIdRemote: string) => void): void;
     setP2PSessionConnectFailCallback(callback: (steamIdRemote: string, errorCode: number) => void): void;
 }
@@ -203,8 +202,9 @@ export interface INapiDiscord {
     initialize(apiKey: string, appId?: string): void;
     shutdown(): void;
     runCallbacks(): void;
-    setOnJoinCallback(callback: (server: string) => void): void;
-    setOnErrorCallback(callback: (error: string | number) => void): void;
+    setReadyCallback(callback: () => void): void;
+    setJoinCallback(callback: (server: string) => void): void;
+    setErrorCallback(callback: (error: string | number) => void): void;
     updatePresence(presenceInfo: INapiDiscordPresenceInfo): Promise<number> | void;
 }
 export interface INapiDiscordPresenceInfo {
