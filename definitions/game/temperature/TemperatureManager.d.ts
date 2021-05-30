@@ -109,6 +109,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     private runContainerInvalidations;
     protected onItemFireUpdate(item: Item): void;
     protected onPlay(): void;
+    protected onTickStart(): void;
     protected onTickEnd(): void;
     private update;
     private processScheduledUpdate;

@@ -36,4 +36,5 @@ export default class HighlightManager implements IHighlightManager {
     private getHighlightSelectorId;
     private getHighlightComponents;
     private startHighlight;
+    private endHighlightSelector;
 }

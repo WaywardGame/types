@@ -57,7 +57,18 @@ declare module TileHelpers {
         function remove(tile: ITile, overlay: IOverlayInfo): boolean;
         function remove(tile: ITile, filter: (overlay: IOverlayInfo) => boolean): boolean;
     }
-    function findMatchingTile(start: IVector3, isMatchingTile?: (point: IVector3, tile: ITile) => boolean, maxTilesChecked?: number, canVisitTile?: (point: IVector3, tile: ITile) => boolean): IVector3 | undefined;
+    function findMatchingTile(start: IVector3, isMatchingTile: (point: IVector3, tile: ITile) => boolean, options?: {
+        maxTilesChecked?: number;
+        canVisitTile?: (point: IVector3, tile: ITile) => boolean;
+    }): IVector3 | undefined;
+    function findMatchingTiles(start: IVector3, isMatchingTile: (point: IVector3, tile: ITile) => boolean, options?: {
+        maxTiles?: number;
+        maxTilesChecked?: number;
+        canVisitTile?: (point: IVector3, tile: ITile) => boolean;
+    }): Array<{
+        point: IVector3;
+        tile: ITile;
+    }>;
     /**
      * Check is a tile is open
      */

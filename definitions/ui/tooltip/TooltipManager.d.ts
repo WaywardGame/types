@@ -15,12 +15,11 @@ export default class TooltipManager {
     readonly tooltipWrapper: Component;
     readonly tooltipMainWrapper: Component;
     readonly tooltipMouseWrapper: Component;
-    private host;
-    private tooltip;
+    private current;
     private readonly disablers;
     constructor();
     show(host: HTMLElement): Tooltip | undefined;
-    hide(host?: HTMLElement | undefined, forceRemove?: boolean): void;
+    hide(host?: HTMLElement | undefined): void;
     /**
      * Disables tooltips.
      * Note: Multiple things can cause tooltips to be disabled simultaneously; tooltips won't be re-enabled until every
@@ -38,4 +37,5 @@ export default class TooltipManager {
     protected onScreenResize(): void;
     protected onMove(_: any, position: Vector2): void;
     private loop;
+    private remove;
 }
