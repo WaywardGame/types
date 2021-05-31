@@ -203,6 +203,15 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     getSkillPercent(skill: SkillType): number;
     getPlayerAverage(calc: (player: Player) => number | undefined, round?: boolean): number;
     changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean, skipCaveDirt?: boolean): void;
+    /**
+     * Removes the top tiledata (index 0) from the tile
+     * If there is no remaining tile data, a new tile data will be added with the newTileTypeWhenEmpty type
+     */
+    removeTopTile(x: number, y: number, z: number, newTileTypeWhenEmpty: TerrainType | ((tile: ITile) => TerrainType)): void;
+    /**
+     * Checks if island.tileData is synced with ITile.data
+     */
+    checkTileState(): void;
     isPositionFull(x: number, y: number, z: number): boolean;
     isTileFull(tile: ITile): boolean;
     isOnFire(tile: ITile): FireType;
