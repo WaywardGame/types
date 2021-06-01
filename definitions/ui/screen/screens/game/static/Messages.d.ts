@@ -43,6 +43,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     private selectedFilter;
     private showSendButton;
     private showOptionsButton;
+    private unfocusOnSend;
     private messageTimestamps;
     private maxMessages;
     private readonly pinnedNotes;
@@ -60,6 +61,8 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     setShouldShowSendButton(shouldShow: boolean): this;
     shouldShowOptionsButton(): boolean;
     setShouldShowOptionsButton(shouldShow: boolean): this;
+    shouldUnfocusOnSend(): boolean;
+    setShouldUnfocusOnSend(shouldUnfocusOnSend: boolean): this;
     getMaxMessages(): number;
     setMaxMessages(maxMessages: number): this;
     scrollToNewest(): void;

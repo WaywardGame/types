@@ -212,6 +212,11 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      */
     getItemUseBonus(action: ActionType): number;
     getRangedWeapon(player: Player | NPC): Item | boolean;
+    /**
+     * Extinguishes to item if it is lit.
+     * @param player Player or NPC entity that is carrying the item to extinguish.
+     */
+    extinguish(player: Player | NPC | undefined): void;
     onUnserialized(): void;
     private setupDurabilityHandlers;
     private checkIfItemsMatch;

@@ -11,8 +11,8 @@
 import { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
 import { IDropdownOption } from "ui/component/Dropdown";
 import GroupDropdown from "ui/component/GroupDropdown";
-export declare class DoodadDropdown<OTHER_OPTIONS extends string = never> extends GroupDropdown<typeof DoodadType, OTHER_OPTIONS, DoodadTypeGroup> {
-    constructor(defaultOption: OTHER_OPTIONS | DoodadType, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
+export default class DoodadDropdown<OTHER_OPTIONS extends string = never> extends GroupDropdown<typeof DoodadType, OTHER_OPTIONS, DoodadTypeGroup> {
+    constructor(defaultOption: OTHER_OPTIONS | DoodadType, options?: Iterable<IDropdownOption<OTHER_OPTIONS>>);
     protected getGroupName(group: DoodadTypeGroup): string;
     protected isInGroup(doodad: DoodadType, group: DoodadTypeGroup): boolean;
     protected getGroups(): readonly DoodadTypeGroup[];
