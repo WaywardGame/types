@@ -62,6 +62,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     protected onInterrupt(): void;
     protected onSelectionChange(_: any, selection?: Component): void;
     protected onAppend(): void;
+    protected isSelectionWithin(selection?: Component): boolean;
     protected isMouseWithin(): false | Component<HTMLElement>;
     protected selectNext(): void;
     protected selectPrevious(): void;
