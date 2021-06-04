@@ -13,7 +13,7 @@ import { CreationId } from "game/IGame";
 import { IObject } from "game/IObject";
 import { ItemType } from "game/item/IItem";
 import { IReferenceable } from "game/reference/IReferenceManager";
-import { ISerializedTranslation } from "language/Translation";
+import Translation, { ISerializedTranslation } from "language/Translation";
 import { IVector3 } from "utilities/math/IVector";
 export default class Corpse implements IObject<CreatureType>, IVector3, IReferenceable {
     static is(value: any): value is Corpse;
@@ -31,6 +31,16 @@ export default class Corpse implements IObject<CreatureType>, IVector3, IReferen
     z: number;
     constructor(type?: CreatureType, x?: number, y?: number, z?: number, decay?: number);
     toString(): string;
+    /**
+     * @param article Whether to include an article for the name of the creature. Uses the article rules on the language. Defaults to `true`.
+     * @param count The number of this creature that you're getting the name of. Defaults to `1`.
+     *
+     * Examples:
+     * - `corpse.getName()` // "an acid spitter demon"
+     * - `corpse.getName(false)` // "acid spitter demon"
+     * - `corpse.getName(undefined, 3)` // "acid spitter demons"
+     */
+    getName(article?: boolean, count?: number): Translation;
     update(): void;
     getResources(clientSide?: boolean): ItemType[];
 }

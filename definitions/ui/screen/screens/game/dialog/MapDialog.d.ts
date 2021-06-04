@@ -56,7 +56,7 @@ export default class MapDialog extends Dialog {
     read(map: DrawnMap, item: Item, resetView?: boolean): Promise<void>;
     protected onInventoryItemRemove(_: any, item: Item): void;
     protected onInventoryItemUpdate(_: any, item: Item): void;
-    protected onMoveComplete(player: Player): void;
+    protected onPostMove(player: Player): void;
     protected onLoad(): Promise<void>;
     protected onZoom(api: IBindHandlerApi): boolean;
     private updateCopyMapButton;

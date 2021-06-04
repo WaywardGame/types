@@ -23,6 +23,7 @@ import Translation from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { IVector2 } from "utilities/math/IVector";
 export default class Creature extends Entity implements IUnserializedCallback, IObject<CreatureType> {
+    static is(value: any): value is Creature;
     readonly objectType: CreationId.Creature;
     event: IEventEmitter<this, ICreatureEvents>;
     readonly entityType: EntityType.Creature;
