@@ -10,5 +10,5 @@
  */
 import { SkillType } from "game/entity/IHuman";
 import Translation from "language/Translation";
-declare function SkillSourceTooltip(type: SkillType): Translation;
+declare function SkillSourceTooltip(type: SkillType): Translation | undefined;
 export default SkillSourceTooltip;

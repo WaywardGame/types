@@ -325,6 +325,7 @@ export interface ILiquid {
     milk: ItemType;
     desalinated: ItemType;
     unpurified: ItemType;
+    purified: ItemType;
     seawater: ItemType;
 }
 export interface IDismantleDescription {
