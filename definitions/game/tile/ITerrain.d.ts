@@ -35,7 +35,6 @@ export interface ITerrainDescription extends IModdable {
      */
     durability?: ItemType;
     water?: true;
-    regathered?: boolean;
     shallowWater?: true;
     freshWater?: boolean;
     gather?: boolean;

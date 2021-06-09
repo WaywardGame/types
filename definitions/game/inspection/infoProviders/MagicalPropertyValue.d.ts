@@ -12,7 +12,6 @@ import { SkillType } from "game/entity/IHuman";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import { Quality } from "game/IObject";
 import { IHasMagic, MagicalNormalPropertyTypes, MagicalPropertyIdentity, MagicalPropertyTypeSubTypeMap, MagicalSubPropertyTypes } from "game/magic/MagicalPropertyManager";
-import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import { TranslationGenerator } from "ui/component/IComponent";
 import { IRange } from "utilities/math/Range";
@@ -61,7 +60,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     setAfter(...after: Array<TranslationGenerator | InfoProvider | undefined>): this;
     setExpandedVerbose(): this;
     getClass(): string[];
-    get(): (Translation | import("language/Translation").ISerializedTranslation | UiTranslation | (() => Translation | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | import("language/Translation").ISerializedTranslation | UiTranslation | undefined) | InfoProvider)[];
+    get(): (TranslationGenerator | InfoProvider)[];
     private getOutOf;
     private formatNumber;
 }

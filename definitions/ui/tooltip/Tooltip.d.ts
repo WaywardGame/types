@@ -15,7 +15,6 @@ import Text, { Paragraph } from "ui/component/Text";
 export default class Tooltip extends Component implements ITooltip {
     event: IEventEmitter<this, Events<ITooltip>>;
     get location(): TooltipLocation;
-    cache: boolean;
     protected readonly source: Component;
     private forceShown;
     private maxWidth;
@@ -32,7 +31,6 @@ export default class Tooltip extends Component implements ITooltip {
      * @param maxWidth The max-width of the tooltip is this value * ui scale.
      */
     setMaxWidth(maxWidth?: number): this;
-    setNoCache(): this;
     addText(initializer: (text: Text) => any): this;
     addText<TEXT extends Text>(initializer: (text: Text) => any, cls?: Class<TEXT>): this;
     addHeading(initializer: (text: Text) => any): this;

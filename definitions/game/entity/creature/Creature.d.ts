@@ -21,7 +21,9 @@ import Item from "game/item/Item";
 import { ITile } from "game/tile/ITerrain";
 import Translation from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
+import { IVector2 } from "utilities/math/IVector";
 export default class Creature extends Entity implements IUnserializedCallback, IObject<CreatureType> {
+    static is(value: any): value is Creature;
     readonly objectType: CreationId.Creature;
     event: IEventEmitter<this, ICreatureEvents>;
     readonly entityType: EntityType.Creature;
@@ -97,7 +99,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): boolean | void | undefined;
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
-    private findPath;
+    findPath(target: IVector2, maxNodesChecked?: number): IVector2[] | undefined;
     /**
      * Check creature move with a multiplayer sync check
      * @param willMove Set to true if the object is about to move to this tile. This method will confirm if theres an existing npc/creature there and return false if so

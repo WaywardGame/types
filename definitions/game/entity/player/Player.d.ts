@@ -95,7 +95,7 @@ export default class Player extends Human {
     tickStatuses(): void;
     resetMovementStates(): void;
     changeId(id: number): void;
-    setPaddling(paddling: boolean, itemId: number): boolean;
+    setPaddling(paddling: boolean, itemId: number, extinguishTorches?: boolean): boolean;
     checkSkillMilestones(): void;
     addMilestone(milestone: Milestone, data?: number, update?: boolean): void;
     getDefaultCarveTool(_player: Player): Item | undefined;

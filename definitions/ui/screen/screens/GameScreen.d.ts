@@ -54,7 +54,7 @@ export default class GameScreen extends Screen implements IHookHost {
     private readonly placeholders;
     constructor();
     openDialog<D = Dialog>(id: DialogId, initializer?: (dialog: D) => any): D;
-    isDialogVisible(id: DialogId): Promise<boolean | undefined>;
+    isDialogVisible(id: DialogId): boolean | undefined;
     closeDialog(id: DialogId): Promise<this>;
     toggleDialog<D extends Dialog = Dialog>(id: DialogId, force?: boolean, initializer?: (dialog: D) => any): this;
     toggleDialogs(states: IDialogStates): this;

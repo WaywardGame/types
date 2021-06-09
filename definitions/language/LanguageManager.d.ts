@@ -71,6 +71,7 @@ export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> 
     remove(provider: TranslationsProvider): void;
     serialize(languageName?: string, caseStyle?: CaseStyle): ISerializedLanguage | undefined;
     serializeLanguageToFile(language?: string, caseStyle?: CaseStyle): void;
+    serializeLanguageToFiles(language?: string, caseStyle?: CaseStyle): Promise<void>;
     deserialize(serialized: ISerializedLanguage | ISerializedLanguageExtension): Language | LanguageExtension;
     generateSchema(): void;
     reformatSingularNoun(noun: string, count: number, article?: boolean): string;

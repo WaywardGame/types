@@ -56,7 +56,7 @@ export default class ObscuredValue extends InfoProvider {
     private static createInfoFactory;
     private constructor();
     getClass(): string[];
-    get(context: InfoProviderContext): import("../../../language/Translation").default | import("../../../language/Translation").ISerializedTranslation | import("../../../language/dictionary/UiTranslation").default | (() => import("../../../language/Translation").default | Iterable<import("../../../utilities/string/Interpolator").IStringSection> | import("../../../language/Translation").ISerializedTranslation | import("../../../language/dictionary/UiTranslation").default | undefined) | InfoProvider | (TranslationGenerator | InfoProvider)[];
+    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private canSee;
     private getOwner;
     private hasSkill;

@@ -21,7 +21,7 @@ import NPC from "game/entity/npc/NPC";
 import Player from "game/entity/player/Player";
 import { CreationId } from "game/IGame";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
-import { BookType, ContainerReference, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemType, SYMBOL_CONTAINER_CACHED_REFERENCE } from "game/item/IItem";
+import { BookType, ContainerReference, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemDisassembleResult, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemType, SYMBOL_CONTAINER_CACHED_REFERENCE } from "game/item/IItem";
 import { IPlaceOnTileOptions } from "game/item/IItemManager";
 import ItemMapManager from "game/item/ItemMapManager";
 import MagicalPropertyManager, { IHasMagic } from "game/magic/MagicalPropertyManager";
@@ -122,6 +122,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getTemperatureDecayMultiplier(isClientSide: boolean): number;
     getTotalWeight(bypassContainer?: boolean): number;
     getDisassemblyWeight(): number;
+    getDisassemblyItems(): IItemDisassembleResult | undefined;
     isNearby(executor: Entity, allowNearby?: boolean): boolean;
     verifyAndFixItem(): void;
     damage(source: string, modifier?: number): void;
@@ -212,6 +213,11 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      */
     getItemUseBonus(action: ActionType): number;
     getRangedWeapon(player: Player | NPC): Item | boolean;
+    /**
+     * Extinguishes to item if it is lit.
+     * @param player Player or NPC entity that is carrying the item to extinguish.
+     */
+    extinguish(player: Player | NPC | undefined): void;
     onUnserialized(): void;
     private setupDurabilityHandlers;
     private checkIfItemsMatch;

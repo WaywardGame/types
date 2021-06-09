@@ -23,7 +23,7 @@ export interface SaveSlotData {
     turns: number;
     seed: string;
     name: string;
-    difficulty: GameMode;
+    difficulty: GameMode | -1;
     options: IGameOptions;
     thumbnail?: string;
 }

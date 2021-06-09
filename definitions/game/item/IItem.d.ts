@@ -17,9 +17,10 @@ import { DamageType, Defense, StatusType } from "game/entity/IEntity";
 import { EquipType, SkillType } from "game/entity/IHuman";
 import { Stat } from "game/entity/IStats";
 import { IDecayTemperatureRange } from "game/IGame";
-import { IObjectDescription } from "game/IObject";
+import { IObjectDescription, Quality } from "game/IObject";
 import Item from "game/item/Item";
 import Recipe from "game/item/recipe/Recipe";
+import MagicalPropertyManager from "game/magic/MagicalPropertyManager";
 import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
 import { TerrainType } from "game/tile/ITerrain";
@@ -75,6 +76,19 @@ export interface IContainer extends IContainable {
     transientItems?: Item[];
     itemOrders?: number[];
     containerType?: ContainerType;
+}
+export interface IItemDisassembleResult {
+    items: IItemDisassembly[];
+    itemsBroken: number;
+}
+export interface IItemDisassembly {
+    type: ItemType;
+    quality: Quality | undefined;
+    minDur: number;
+    maxDur: number;
+    weight: number;
+    magic: MagicalPropertyManager;
+    tradedFrom: string[] | undefined;
 }
 export interface IItemDescription extends IObjectDescription, IModdable, ITemperatureDescription {
     durability?: number;
@@ -311,6 +325,7 @@ export interface ILiquid {
     milk: ItemType;
     desalinated: ItemType;
     unpurified: ItemType;
+    purified: ItemType;
     seawater: ItemType;
 }
 export interface IDismantleDescription {

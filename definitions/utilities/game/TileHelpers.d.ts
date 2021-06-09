@@ -23,21 +23,37 @@ declare module TileHelpers {
     const maskDoodadAnimationDisabled = 524288;
     const maskDoodadAnimationDisabledShift: number;
     function getGfx(tile: ITile): number;
-    function getGfxRaw(data: number): number;
+    /**
+     * This should only be called if you know what you're doing
+     * Use game.changeTile or game.removeTopTile when modifying tiles
+     * Otherwise the game state could get out of sync
+     */
     function setGfx(tile: ITile, value: number): void;
+    /**
+     * This should only be called from MapGen code
+     */
     function setGfxRaw(data: number, value: number): number;
     function getType(tile: ITile): TerrainType;
     function getTypeRaw(data: number): TerrainType;
+    /**
+     * This should only be called if you know what you're doing
+     * Use game.changeTile or game.removeTopTile when modifying tiles
+     * Otherwise the game state could get out of sync
+     */
     function setType(tile: ITile, value: TerrainType): void;
+    /**
+     * This should only be called from MapGen code
+     */
     function setTypeRaw(data: number, value: TerrainType): number;
     function isTilled(tile: ITile): boolean;
-    function isTilledRaw(data: number): boolean;
+    /**
+     * This should only be called if you know what you're doing
+     * Ensure a tile data with tilled is created
+     * Otherwise the game state could get out of sync
+     */
     function setTilled(tile: ITile, value: boolean): void;
-    function setTilledRaw(data: number, value: number): number;
     function isDoodadOverHidden(tile: ITile): boolean;
-    function isDoodadOverHiddenRaw(data: number): boolean;
     function setDoodadOverHidden(tile: ITile, value: boolean): void;
-    function setDoodadOverHiddenRaw(data: number, value: number): number;
     function isDoodadAnimationDisabled(tile: ITile): boolean;
     function isDoodadAnimationDisabledRaw(data: number): boolean;
     function setDoodadAnimationDisabled(tile: ITile, value: boolean): void;
@@ -57,7 +73,18 @@ declare module TileHelpers {
         function remove(tile: ITile, overlay: IOverlayInfo): boolean;
         function remove(tile: ITile, filter: (overlay: IOverlayInfo) => boolean): boolean;
     }
-    function findMatchingTile(start: IVector3, isMatchingTile?: (point: IVector3, tile: ITile) => boolean, maxTilesChecked?: number, canVisitTile?: (point: IVector3, tile: ITile) => boolean): IVector3 | undefined;
+    function findMatchingTile(start: IVector3, isMatchingTile: (point: IVector3, tile: ITile) => boolean, options?: {
+        maxTilesChecked?: number;
+        canVisitTile?: (point: IVector3, tile: ITile) => boolean;
+    }): IVector3 | undefined;
+    function findMatchingTiles(start: IVector3, isMatchingTile: (point: IVector3, tile: ITile) => boolean, options?: {
+        maxTiles?: number;
+        maxTilesChecked?: number;
+        canVisitTile?: (point: IVector3, tile: ITile) => boolean;
+    }): Array<{
+        point: IVector3;
+        tile: ITile;
+    }>;
     /**
      * Check is a tile is open
      */

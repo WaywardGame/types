@@ -261,7 +261,6 @@ export interface ITooltip extends IComponent {
     setSecondary(): this;
     setLocation(location: TooltipLocation): this;
     setMaxWidth(maxWidth: number): this;
-    setNoCache(): this;
     addText(initializer: (text: IText) => any): this;
     addHeading(initializer: (text: IText) => any): this;
     addParagraph(initializer: (text: IText) => any): this;

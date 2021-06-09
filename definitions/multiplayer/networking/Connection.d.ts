@@ -39,9 +39,9 @@ export declare abstract class Connection implements IConnection {
     constructor(matchmakingInfo: IMatchmakingInfo | undefined);
     close(): void;
     addConnectionTimeout(): void;
+    addKeepAliveTimeout(): void;
     addTimeout(milliseconds: number, callback: () => void): void;
     clearTimeout(): boolean;
-    addKeepAliveTimeout(): void;
     sendKeepAlive(): void;
     getState(): ConnectionState;
     setState(state: ConnectionState): void;
