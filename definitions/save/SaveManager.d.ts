@@ -20,6 +20,7 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
     private readonly dataStorage;
     private multiplayerSlotData;
     private readonly serializer;
+    clearMultiplayerSlotData(): void;
     isEnabled(): boolean;
     initialize(): Promise<void>;
     /**
