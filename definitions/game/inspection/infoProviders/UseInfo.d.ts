@@ -44,6 +44,7 @@ export declare type InfoUnion<T extends IDescribed, ACTION extends ActionType> =
 }[T["objectType"]];
 export declare type UseInfoPredicate<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType> = (info: IUseInfoBase<T, ACTION>) => I | undefined;
 export declare type UseInfoHandler<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType> = (info: I, context: InfoProviderContext) => Array<ArrayOr<TranslationGenerator | InfoProvider> | undefined> | Translation | InfoProvider | undefined;
+export declare type UseInfoDisplayLevelGetter<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType> = (info: I, context: InfoProviderContext) => InfoDisplayLevel;
 export declare type UseInfoMethod<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType, ARGS extends any[], RETURN> = (info: I, ...args: ARGS) => RETURN;
 export interface IUseInfoFactory<I extends IUseInfoBase<T, A>, T extends IDescribed, A extends ActionType, M extends Record<string, AnyFunction> = {}> {
     actions<A2 extends ActionType[]>(...actions: A2): IUseInfoFactory<IUseInfoBase<T, A | A2[number]>, T, A | A2[number]>;
@@ -64,11 +65,11 @@ export default class UseInfo<I extends IUseInfoBase<T, A>, A extends ActionType,
     }, T, A>;
     readonly methods: M;
     static of<T extends IDescribed>(): IUseInfoFactory<IUseInfoBase<T, never>, T, never>;
-    displayLevel: InfoDisplayLevel;
+    displayLevel: InfoDisplayLevel | UseInfoDisplayLevelGetter<I, T, A>;
     ownRow?: true;
     private constructor();
     initializeInfo(info: I, context: InfoProviderContext): I & IItemUseInfo<T, A, M>;
-    setDisplayLevel(level: InfoDisplayLevel): this;
+    setDisplayLevel(level: InfoDisplayLevel | UseInfoDisplayLevelGetter<I, T, A>): this;
     setOwnRow(): this;
     of<T2 extends T>(): UseInfo<IUseInfoBase<T2, A>, A, M, T2>;
 }

@@ -8,9 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { LiquidType } from "game/IGame";
 import { ITileEventDescription } from "game/tile/ITileEvent";
 import TileEvent from "game/tile/TileEvent";
-export declare function puddleUpdate(tileEvent: TileEvent): void;
+export declare function puddleUpdate(tileEvent: TileEvent, liquidType: LiquidType): void;
 export declare const puddleOfFreshWater: ITileEventDescription;
 export declare const puddleOfPurifiedFreshWater: ITileEventDescription;
 export declare const puddleOfUnpurifiedFreshWater: ITileEventDescription;

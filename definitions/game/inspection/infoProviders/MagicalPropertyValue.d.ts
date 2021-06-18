@@ -33,6 +33,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     private skill?;
     private skillModifier?;
     private baseHidden?;
+    private hiddenWhenZero?;
     private isPercentage?;
     private percentageIsPremultiplied?;
     private expandedVerbose?;
@@ -47,6 +48,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     setSkill(skill?: SkillType, modifier?: number | IRange): this;
     setIsModifier(isModifier?: boolean): this;
     setBaseHidden(): this;
+    setHiddenWhenZero(): this;
     /**
      * Not compatible with `setNumberTranslator`.
      */

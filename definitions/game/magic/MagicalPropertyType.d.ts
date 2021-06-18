@@ -30,7 +30,8 @@ export declare enum MagicalPropertyType {
     MaxDecay = 16,
     ItemDamage = 17,
     StokeValue = 18,
-    Insulation = 19
+    Insulation = 19,
+    ThrowingBonus = 20
 }
 /**
  * A map of magical property types that contain sub-properties to the corresponding sub property enum
