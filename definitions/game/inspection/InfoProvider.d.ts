@@ -68,6 +68,8 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     getIcon(): IIcon | undefined;
     setIcon(icon?: IIcon): this;
     hasContent(_context: InfoProviderContext): boolean;
+    private synchronous;
+    setSynchronous(): this;
     init(): void;
     private readonly refreshEvents;
     /**

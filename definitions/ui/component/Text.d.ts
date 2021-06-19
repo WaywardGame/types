@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { EmitterOrBus, Event, Handler } from "event/EventManager";
 import UiTranslation from "language/dictionary/UiTranslation";
 import { IColorSection } from "language/segment/ColorSegment";
 import { IHeadingSection } from "language/segment/HeadingSegment";
@@ -41,6 +42,21 @@ export default class Text extends Component {
     hasText(): boolean;
     isEmpty(): boolean;
     refresh(): this;
+    private readonly refreshEvents;
+    /**
+     * Subscribes refresh events to the given host.
+     *
+     * **WARNING:** If you call this method without the element later being removed, it will cause a leak!
+     * @param predicate A predicate function for whether or not this component should actually refresh when the event is hit
+     */
+    subscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...args: [...events: K[], predicate: (...params: Parameters<Handler<E, K>>) => boolean]): this;
+    /**
+     * Subscribes refresh events to the given host.
+     *
+     * **WARNING:** If you call this method without the element later being removed, it will cause a leak!
+     */
+    subscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...events: K[]): this;
+    protected onRemove(): void;
     private refreshParagraphs;
     private refreshBasic;
 }

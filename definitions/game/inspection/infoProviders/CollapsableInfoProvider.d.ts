@@ -13,8 +13,8 @@ import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Translation from "language/Translation";
 import Button from "ui/component/Button";
 import { TranslationGenerator } from "ui/component/IComponent";
-declare type ContentHandler = (context: InfoProviderContext, provider: UnlockableRowInfoProvider) => ArrayOr<TranslationGenerator | InfoProvider>;
-export default class UnlockableRowInfoProvider extends InfoProvider {
+declare type ContentHandler = (context: InfoProviderContext, provider: CollapsableInfoProvider) => ArrayOr<TranslationGenerator | InfoProvider>;
+export default class CollapsableInfoProvider extends InfoProvider {
     private contentHandler?;
     private summaryInitializer?;
     private isOpen?;
