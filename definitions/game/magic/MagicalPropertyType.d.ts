@@ -31,6 +31,9 @@ export declare enum MagicalPropertyType {
     ItemDamage = 17,
     StokeValue = 18,
     Insulation = 19,
+    /**
+     * Adds damage, range, and reduces stamina used when throwing items. It also removes the heavy item reduction when calculating the range.
+     */
     ThrowingBonus = 20
 }
 /**
