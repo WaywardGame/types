@@ -34,7 +34,11 @@ export declare enum MagicalPropertyType {
     /**
      * Adds damage, range, and reduces stamina used when throwing items. It also removes the heavy item reduction when calculating the range.
      */
-    ThrowingBonus = 20
+    ThrowingBonus = 20,
+    /**
+     * Adds tame length and disables chance to fail taming when attempting to offer to aberrant creatures.
+     */
+    Offering = 21
 }
 /**
  * A map of magical property types that contain sub-properties to the corresponding sub property enum

@@ -139,7 +139,7 @@ export default class ItemUses extends Uses<Item> {
         action: ActionType.Equip;
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Equip>;
         details: Set<symbol>;
-    }, ActionType.Equip, {}, Item> | import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Item, ActionType.Throw>, ActionType.Throw, {}, Item> | import("../UseInfo").default<{
+    }, ActionType.Equip, {}, Item> | import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Item, ActionType.Throw>, ActionType.Throw, {}, Item> | import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Item, ActionType.Offer>, ActionType.Offer, {}, Item> | import("../UseInfo").default<{
         damage: number;
         objectType: CreationId.Item;
         value?: Item | undefined;
