@@ -15,7 +15,7 @@ import Creature from "game/entity/creature/Creature";
 import Human from "game/entity/Human";
 import { EquipType } from "game/entity/IHuman";
 import Player from "game/entity/player/Player";
-import { CreationId, TileUpdateType } from "game/IGame";
+import { CreationId, LiquidType, TileUpdateType } from "game/IGame";
 import { IObject, Quality } from "game/IObject";
 import { IContainer, ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
@@ -169,7 +169,12 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     canCauseStatus(): boolean;
     setOffTrap(human?: Human, withMessage?: boolean): void;
     getGrowthParticles(): IRGB | undefined;
-    increaseFertility(): boolean;
+    /**
+     * Increased the fertility (spread) of a plant/growing doodad.
+     * @param bypassChange Set to true if you just want to check if fertility can be increased.
+     * @returns True or false depending on if it increased in fertility or not.
+     */
+    increaseFertility(bypassChange?: boolean): boolean;
     /**
      * Return extra trap damage based on player multiplier and magical status
      */
@@ -194,6 +199,12 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * @returns A number (possibly 0 if no quality or action level).
      */
     getItemUseBonus(action: ActionType): number;
+    /**
+     * Increases or decreases plant fertility, growth and durability (health) based on the liquid applied.
+     * @param liquid The LiquidType that is to be applied.
+     * @param growthBonus The bonus that is applied (on top of a default of 10) to the plants decay (so it grows faster).
+     */
+    healOrHarmPlant(liquid: LiquidType, growthBonus?: number): void;
     onUnserialized(): void;
     /**
      * @deprecated

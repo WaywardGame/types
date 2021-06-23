@@ -141,8 +141,8 @@ export interface IMultiplayerWorldData {
     multiplayerOptions: IMultiplayerOptions;
     difficulty: GameMode;
     difficultyOptions?: IGameOptions;
-    saveObject: ISaveObject;
     initialFlowFieldPids: number[];
+    saveObject: ISaveObject | undefined;
 }
 export interface IMultiplayerMod {
     name: string;

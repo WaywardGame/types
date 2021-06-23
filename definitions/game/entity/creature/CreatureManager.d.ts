@@ -34,7 +34,7 @@ export default class CreatureManager extends EntityManager<Creature> {
     readonly event: IEventEmitter<this, ICreatureManagerEvents>;
     getEntities(): SaferArray<Creature>;
     getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: boolean): Translation;
-    getHappinessLevel(human: Human, creature: Creature): number;
+    getHappinessLevel(human: Human, creature: Creature, bonus?: number): number;
     /**
      * Spawns a creature.
      * @param creatureType The type of creature to spawn.

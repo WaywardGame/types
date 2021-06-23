@@ -57,6 +57,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     private cachedDefaultItemForGroup;
     private cachedBestItemForTier;
     private cachedItemGroups;
+    private cachedItemsThatAreAcceptedAsOffer;
     private cachedItemTypes;
     private cachedItemTypesWithRecipes;
     private cachedItemSpawns;
@@ -64,6 +65,7 @@ export default class ItemManager extends EventEmitter.Host<IItemManagerEvents> {
     getItemTypes(): readonly ItemType[];
     getItemsWithRecipes(): readonly ItemType[];
     getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
+    isItemAcceptedAsOffer(item: ItemType): boolean | undefined;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
     resolveContainer(container?: IContainer): Doodad | Item | Player | NPC | IContainer | ITile | undefined;
     getContainerReference(containable: IContainable | undefined, showWarnings?: boolean): ContainerReference;

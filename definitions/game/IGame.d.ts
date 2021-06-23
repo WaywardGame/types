@@ -185,6 +185,11 @@ export declare enum WaterType {
     FreshWater = 1,
     Seawater = 2
 }
+export declare enum LiquidType {
+    Seawater = 0,
+    FreshWater = 1,
+    Milk = 2
+}
 export declare enum UpdateRenderFlag {
     None = 0,
     World = 1,

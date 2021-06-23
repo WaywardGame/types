@@ -61,7 +61,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     isValid(): boolean;
     preventNextMovement(): void;
     checkForBurn(moveType?: MoveType): boolean;
-    tame(player: Player): boolean;
+    tame(player: Player, bonus?: number): boolean;
     increaseTamedCount(): void;
     release(): boolean;
     unhitch(): void;
@@ -99,7 +99,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): boolean | void | undefined;
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
-    findPath(target: IVector2, maxNodesChecked?: number): IVector2[] | undefined;
+    findPath(target: IVector2, maxNodesChecked?: number, ignorePlayer?: Player): IVector2[] | undefined;
     /**
      * Check creature move with a multiplayer sync check
      * @param willMove Set to true if the object is about to move to this tile. This method will confirm if theres an existing npc/creature there and return false if so
