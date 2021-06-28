@@ -235,7 +235,10 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      * For most cases you don't need this
      */
     updateTablesAndWeight(deferTableUpdates?: boolean): void;
-    rangeFinder(weaponRange: number, playerSkillLevel: number): number;
+    /**
+     * @returns a range value for the weapon being shot based on the weapon range and the players skill with that weapon type. This value then becomes the maximum potential range of the current shot.
+     */
+    rangeFinder(weaponRange: number, playerSkillLevel: number, useMaxRange?: boolean): number;
     /**
      * Gets the largest damage type weaknesses of a human or creature based on a type and damage value
      * @param defense Defense of the human or creature
