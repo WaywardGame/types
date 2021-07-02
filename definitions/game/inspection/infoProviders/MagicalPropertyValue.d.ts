@@ -28,6 +28,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     private magical?;
     private magicalProperty?;
     private magicalReduction?;
+    private magicIncluded?;
     private quality?;
     private qualityModifier?;
     private skill?;
@@ -61,6 +62,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     setBefore(...before: Array<TranslationGenerator | InfoProvider | undefined>): this;
     setAfter(...after: Array<TranslationGenerator | InfoProvider | undefined>): this;
     setExpandedVerbose(): this;
+    setMagicIncluded(): this;
     getClass(): string[];
     get(): (TranslationGenerator | InfoProvider)[];
     private getOutOf;

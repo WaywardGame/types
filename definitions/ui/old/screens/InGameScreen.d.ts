@@ -122,6 +122,8 @@ export default class InGameScreen extends BaseScreen {
     getItemClass(item?: Item, itemType?: ItemType): string;
     createItemString(itemType: ItemType, item?: Item, extraClass?: string): string;
     syncItemElements(itemId?: number, selector?: JQuery): void;
+    private readonly SYMBOL_ITEM_ELEMENTS;
+    private readonly SYMBOL_LAST_DECAY;
     syncDecayBar(item: Item, syncDamage?: boolean): void;
     syncDamagedDecayed(item: Item, element: JQuery): void;
     addItemToContainer(item: Item, container: IContainer, _internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;

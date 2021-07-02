@@ -11,5 +11,14 @@
 import { ActionType } from "game/entity/action/IAction";
 import UseInfo from "game/inspection/infoProviders/UseInfo";
 import Item from "game/item/Item";
-declare const _default: UseInfo<import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Offer>, ActionType.Offer, {}, Item>;
+declare const _default: UseInfo<{
+    objectType: import("../../../../IGame").CreationId.Item;
+    value?: Item | undefined;
+    type: import("../../../../item/IItem").ItemType;
+    description: import("../../../../item/IItem").IItemDescription;
+    quality: import("../../../../IObject").Quality;
+    action: ActionType.Offer;
+    union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Offer>;
+    details: Set<symbol>;
+}, ActionType.Offer, {}, Item>;
 export default _default;
