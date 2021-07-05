@@ -88,6 +88,7 @@ export interface IItemDisassembly {
     maxDur: number;
     weight: number;
     magic: MagicalPropertyManager;
+    disassembly: Item[];
     tradedFrom: string[] | undefined;
 }
 export interface IItemDescription extends IObjectDescription, IModdable, ITemperatureDescription {

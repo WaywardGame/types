@@ -194,9 +194,16 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getEquipmentInsulation(type: TempType): number;
     getBaseTemperature(): number | undefined;
     /**
-     * Sets the item's decay value based on quality, game mode and added some randomization
+     * Sets the item's decay with some added randomization.
      */
     setDecay(overrideDefault?: number): void;
+    /**
+     * Gets the item's max decay value based on quality. The max number can be modified slightly due to overrideDefault (crafting) and adding fuel which goes over this max.
+     * @param overrideDefault Override the item's decayMax definition with something else.
+     * @param withRandomization True if you want to return a randomized value (useful when setting the value on an item).
+     * @returns A number equal to the maximum item decay or 0 if the item should not have decay at all.
+     */
+    getMaxDecay(overrideDefault?: number, withRandomization?: boolean): number;
     /**
      * Gets the inherit item type.
      */
