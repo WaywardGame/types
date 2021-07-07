@@ -168,6 +168,10 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
     texOffsetY?: number;
     isTall?: boolean;
     spawn?: OptionalDescriptions<BiomeType, ICreatureSpawn>;
+    /**
+     * If true, this creature will get the "produce" stat.
+     */
+    hasProduce?: boolean;
 }
 export interface ICreatureSpawn {
     /**
