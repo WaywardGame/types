@@ -45,7 +45,7 @@ export interface ISteamworks {
     networking: ISteamworksNetworking;
     Utils: {
         createArchive(target: string, src: string, success: () => void, failure: (err: string) => void): void;
-        extractArchive(src: string, dest: string, success: () => void, failure: (err: string) => void): void;
+        extractArchive(src: string, dest: string): Promise<void>;
     };
     getFriends(): ISteamFriend[];
     getStatInt(name: string): number | undefined;
