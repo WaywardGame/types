@@ -67,8 +67,11 @@ declare type MagicalSubPropertyTypesResult = {
         subTypes: ReadonlyArray<MagicalPropertyTypeSubTypeMap[K]>;
     };
 }[MagicalSubPropertyTypes];
-export declare type MagicalPropertyIdentity<A extends any[] = []> = [MagicalNormalPropertyTypes, ...A] | {
+export declare type MagicalPropertyIdentity<A extends any[] = []> = [MagicalPropertyType, ...A] | {
     [Key in MagicalSubPropertyTypes]: [Key, MagicalPropertyTypeSubTypeMap[Key], ...A];
+}[MagicalSubPropertyTypes];
+export declare type MagicalPropertyIdentityFlat = MagicalNormalPropertyTypes | MagicalSubPropertyTypes | {
+    [Key in MagicalSubPropertyTypes]: [Key, MagicalPropertyTypeSubTypeMap[Key]];
 }[MagicalSubPropertyTypes];
 export declare module MagicalPropertyIdentity {
     function equals(...identities: MagicalPropertyIdentity[]): boolean;
@@ -102,6 +105,7 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
     private cachedTypes?;
     private cachedNormalTypes?;
     private cachedSubTypes?;
+    private cachedHash?;
     /**
      * @returns the number of magical properties on this object
      */
@@ -111,11 +115,9 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      */
     hasAny(): boolean;
     /**
-     * Check to see if any an array of MagicalPropertyTypese exist on an object.
-     * @param types Array of MagicalPropertyTypes.
-     * @returns True if any of the magical property types exist on this object.
+     * @returns if this object has any of the given magical property types
      */
-    hasAnyTypes(types: MagicalPropertyType[]): boolean;
+    hasAny(...types: MagicalPropertyIdentityFlat[]): boolean;
     /**
      * @returns whether the given type of magical property is present on this object
      */
@@ -124,6 +126,7 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      * @returns whether the given type of magical sub-property is present on this object
      */
     has<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): boolean;
+    has(...identity: MagicalPropertyIdentity): boolean;
     /**
      * @returns a magical property on this object, if it exists
      */
