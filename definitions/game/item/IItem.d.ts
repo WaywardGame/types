@@ -1024,7 +1024,7 @@ export declare enum ItemType {
     IceFlooring = 573,
     SnowWall = 574,
     SnowFlooring = 575,
-    CalligenousScrap = 576,
+    CaliginousScrap = 576,
     MagicalExtract = 577,
     ShimmeringFibers = 578,
     MagicalTwine = 579,

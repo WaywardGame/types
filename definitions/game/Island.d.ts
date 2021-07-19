@@ -53,7 +53,12 @@ export default class Island implements IReferenceable {
     temperature: TemperatureManager;
     static positionToId(position: IVector2): string;
     static idToPosition(id: string): IVector2 | undefined;
-    constructor(position?: IVector2, startingSeed?: number);
+    /**
+     * Szudzik's function (signed)
+     */
+    static generatePositionHash(x: number, y: number): number;
+    static calcualteBaseSeed(x: number, y: number, initialSeed: number): number;
+    constructor(position?: IVector2, initialSeed?: number);
     get id(): string;
     get biome(): import("game/biome/IBiome").IBiomeDescription;
     registerEventBus(): void;
@@ -65,8 +70,4 @@ export default class Island implements IReferenceable {
      * @returns The distance as a positive number.
      */
     getIslandDistance(): number;
-    /**
-     * Szudzik's function
-     */
-    private generatePositionHash;
 }
