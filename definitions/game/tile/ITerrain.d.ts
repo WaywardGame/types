@@ -261,5 +261,6 @@ export declare enum TerrainType {
 }
 export declare enum TerrainTypeGroup {
     Flooring = 0,
-    Nonflammable = 1
+    Nonflammable = 1,
+    Ice = 2
 }
