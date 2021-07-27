@@ -126,7 +126,8 @@ export declare enum ActionType {
     Upgrade = 93,
     Enhance = 94,
     Shoot = 95,
-    Alter = 96
+    Alter = 96,
+    UpdateItemQuickSlot = 97
 }
 export declare enum ActionUsability {
     Paused = 0,
@@ -136,7 +137,11 @@ export declare enum ActionUsability {
     Delayed = 4
 }
 export declare enum ActionFlag {
-    OperatorMilestone = 0
+    OperatorMilestone = 0,
+    /**
+     * Allows multiple of these actions to run at once when in multiplayer
+     */
+    AllowPacketConcurrency = 1
 }
 export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, AV extends any[] = ActionArgumentTupleTypes<A>> {
     type?: number;

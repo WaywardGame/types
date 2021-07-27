@@ -137,7 +137,7 @@ export default class InGameScreen extends BaseScreen {
     loadQuickSlots(): void;
     saveItemOrder(containerElement: JQuery): void;
     showItemContextMenu(element: JQuery, skipSound?: boolean): void;
-    onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): boolean;
+    onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): void;
     runContextMenuAction(itemId: number, action: IContextMenuAction, skipSound?: boolean, usedFromQuickSlot?: boolean): boolean;
     craftItemChecker(itemType: ItemType): void;
     craftItem(item: ItemType, checker: ItemRecipeRequirementChecker): Promise<void>;
