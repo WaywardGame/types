@@ -31,6 +31,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     ai: AiType;
     enemy?: number;
     enemyAttempts?: number;
+    enemyAttacks?: number;
     enemyIsPlayer?: boolean;
     respawned?: boolean;
     shouldSkipNextUpdate: boolean;
