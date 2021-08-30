@@ -170,7 +170,7 @@ export declare enum SkillType {
     Fletching = 11,
     Glassblowing = 12,
     Leatherworking = 13,
-    LockPicking = 14,
+    Lockpicking = 14,
     Lumberjacking = 15,
     Mining = 16,
     Mycology = 17,

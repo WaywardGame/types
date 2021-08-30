@@ -62,7 +62,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     pid: number | null | undefined;
     protected?: boolean;
     quality: Quality | undefined;
-    quickSlot: number | undefined;
     referenceId?: number;
     renamed: string | ISerializedTranslation | undefined;
     startingDecay?: number;
@@ -71,6 +70,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     used?: IItemUsed;
     weight: number;
     weightFraction: number;
+    quickSlot: number | undefined;
     offsetX?: number;
     offsetY?: number;
     fromX?: number;

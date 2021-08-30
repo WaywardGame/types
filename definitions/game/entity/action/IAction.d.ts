@@ -46,7 +46,7 @@ export declare enum ActionType {
     Paddle = 13,
     GatherWater = 14,
     Cast = 15,
-    LockPick = 16,
+    Lockpick = 16,
     Repair = 17,
     ReadMap = 18,
     Learn = 19,
