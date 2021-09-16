@@ -110,6 +110,8 @@ export default abstract class Human extends Entity implements IHasInsulation {
      */
     getStaminaDelay(staminaToStartAddingDelayAt?: number): number;
     getConsumeBonus(item: Item | undefined, skillUse?: SkillType): number;
+    getSkillBonus(skillUse?: SkillType): number;
+    getQualityBonus(item: Item | undefined): number;
     checkForGatherFire(): Translation | undefined;
     calculateEquipmentStats(): void;
     private recalculateInsulation;

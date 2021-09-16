@@ -16,6 +16,8 @@ import { ITooltip } from "ui/component/IComponent";
 declare const _default: UseInfo<{
     onConsume: number | import("../../../../item/IItem").ConsumeItemStatsTuple;
     skill: import("../../../../entity/IHuman").SkillType | undefined;
+    itemQuality: import("../../../../IObject").Quality | undefined;
+    qualityBonus: number;
     skillBonus: number;
     magicalBonus: number;
     stats: Stat[];
