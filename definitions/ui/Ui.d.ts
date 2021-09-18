@@ -84,6 +84,7 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     reloadStylesheets(): void;
     updateFontStyle(): void;
     updateUIAnimations(): void;
+    updateUIOpacity(): void;
     toggleDeveloperMode(enabled: boolean): this;
     protected onGlobalSlotLoaded(): void;
     protected onMessage(_: any, fullscreen: boolean): void;

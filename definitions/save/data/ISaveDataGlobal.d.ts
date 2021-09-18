@@ -32,6 +32,7 @@ export interface IOptions {
     dialogOpacity: number;
     directionTurnDelay: number;
     disableUIEffects: boolean;
+    disableUIOpacity: boolean;
     dropLocation: DropLocation;
     dropOnDismantle: boolean;
     dropOnGatherHarvest: boolean;

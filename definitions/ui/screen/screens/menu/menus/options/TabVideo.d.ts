@@ -22,6 +22,7 @@ export default class TabVideo extends Tab implements IRefreshable {
     private onFullscreen;
     private onPixelFont;
     private onDisableUIEffects;
+    private onDisableUIOpacity;
     private onDitherFOW;
     private onDefaultCursor;
     private onSkipArticle;
