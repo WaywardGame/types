@@ -1,9 +1,9 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2020
- * http://www.unlok.ca
+ * Copyright 2011-2021 Unlok
+ * https://www.unlok.ca
  *
  * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
+ * https://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
@@ -88,6 +88,7 @@ export interface IItemDisassembly {
     maxDur: number;
     weight: number;
     magic: MagicalPropertyManager;
+    disassembly: Item[];
     tradedFrom: string[] | undefined;
 }
 export interface IItemDescription extends IObjectDescription, IModdable, ITemperatureDescription {
@@ -565,7 +566,7 @@ export declare enum ItemType {
     WoodenSandCastFlask = 115,
     Lens = 116,
     PlantRoots = 117,
-    LockPick = 118,
+    Lockpick = 118,
     BoneNeedle = 119,
     Pineapple = 120,
     TatteredMap = 121,
@@ -600,7 +601,7 @@ export declare enum ItemType {
     SlimeGlue = 150,
     CookedSpiderMeat = 151,
     SpiderMeat = 152,
-    IronLockPick = 153,
+    IronLockpick = 153,
     RottingVegetation = 154,
     Chives = 155,
     IronHammer = 156,
@@ -624,7 +625,7 @@ export declare enum ItemType {
     WroughtIronShovel = 174,
     WroughtIronSpear = 175,
     WroughtIronHammer = 176,
-    WroughtIronLockPick = 177,
+    WroughtIronLockpick = 177,
     WroughtIronShield = 178,
     WroughtIronGauntlets = 179,
     WroughtIronCuisses = 180,
@@ -815,7 +816,7 @@ export declare enum ItemType {
     CopperShovel = 365,
     CopperSpear = 366,
     CopperHammer = 367,
-    CopperLockPick = 368,
+    CopperLockpick = 368,
     CopperBuckler = 369,
     CopperGauntlets = 370,
     CopperGreaves = 371,
@@ -969,7 +970,7 @@ export declare enum ItemType {
     TinShovel = 519,
     TinSpear = 520,
     TinHammer = 521,
-    TinLockPick = 522,
+    TinLockpick = 522,
     TinShield = 523,
     TinGloves = 524,
     TinChausses = 525,
@@ -996,7 +997,7 @@ export declare enum ItemType {
     BronzeShovel = 546,
     BronzeSpear = 547,
     BronzeHammer = 548,
-    BronzeLockPick = 549,
+    BronzeLockpick = 549,
     BronzeKiteShield = 550,
     BronzeGauntlets = 551,
     BronzeGreaves = 552,
@@ -1023,7 +1024,7 @@ export declare enum ItemType {
     IceFlooring = 573,
     SnowWall = 574,
     SnowFlooring = 575,
-    CalligenousScrap = 576,
+    CaliginousScrap = 576,
     MagicalExtract = 577,
     ShimmeringFibers = 578,
     MagicalTwine = 579,

@@ -1,9 +1,9 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2020
- * http://www.unlok.ca
+ * Copyright 2011-2021 Unlok
+ * https://www.unlok.ca
  *
  * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
+ * https://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
@@ -235,7 +235,10 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
      * For most cases you don't need this
      */
     updateTablesAndWeight(deferTableUpdates?: boolean): void;
-    rangeFinder(weaponRange: number, playerSkillLevel: number): number;
+    /**
+     * @returns a range value for the weapon being shot based on the weapon range and the players skill with that weapon type. This value then becomes the maximum potential range of the current shot.
+     */
+    rangeFinder(weaponRange: number, playerSkillLevel: number, useMaxRange?: boolean): number;
     /**
      * Gets the largest damage type weaknesses of a human or creature based on a type and damage value
      * @param defense Defense of the human or creature

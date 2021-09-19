@@ -1,9 +1,9 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2020
- * http://www.unlok.ca
+ * Copyright 2011-2021 Unlok
+ * https://www.unlok.ca
  *
  * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
+ * https://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
@@ -20,8 +20,9 @@ import PlayerDefense from "game/entity/player/PlayerDefense";
 import SkillManager from "game/entity/skill/SkillManager";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
-import { EquipEffect, EquipEffectByType, EquipEffects, IContainer, ItemType, ItemTypeGroup } from "game/item/IItem";
+import { EquipEffect, EquipEffectByType, EquipEffects, IContainer, IRanged, ItemType, ItemTypeGroup } from "game/item/IItem";
 import Item from "game/item/Item";
+import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import { IGameOptionsPlayer } from "game/options/IGameOptions";
 import { IHasInsulation, TempType } from "game/temperature/ITemperature";
 import TileEvent from "game/tile/TileEvent";
@@ -82,6 +83,11 @@ export default abstract class Human extends Entity implements IHasInsulation {
      * Extinguishes all torches the player is holding.
      */
     extinguishTorches(): void;
+    rangeAction(weapon: Item | undefined, ranged: IRanged | undefined, bonusMagicalType: MagicalPropertyType, skillType: SkillType, useMaxRange?: boolean): {
+        mobCheck: IMobCheck;
+        bonusRange: number;
+        actionRange: number;
+    };
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     getBurnDamage(fireType: FireType, skipParry?: boolean, equipType?: EquipType): number;
     /**
@@ -104,6 +110,8 @@ export default abstract class Human extends Entity implements IHasInsulation {
      */
     getStaminaDelay(staminaToStartAddingDelayAt?: number): number;
     getConsumeBonus(item: Item | undefined, skillUse?: SkillType): number;
+    getSkillBonus(skillUse?: SkillType): number;
+    getQualityBonus(item: Item | undefined): number;
     checkForGatherFire(): Translation | undefined;
     calculateEquipmentStats(): void;
     private recalculateInsulation;

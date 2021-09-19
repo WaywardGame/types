@@ -1,9 +1,9 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2020
- * http://www.unlok.ca
+ * Copyright 2011-2021 Unlok
+ * https://www.unlok.ca
  *
  * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
+ * https://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
@@ -28,6 +28,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     private magical?;
     private magicalProperty?;
     private magicalReduction?;
+    private magicIncluded?;
     private quality?;
     private qualityModifier?;
     private skill?;
@@ -61,6 +62,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     setBefore(...before: Array<TranslationGenerator | InfoProvider | undefined>): this;
     setAfter(...after: Array<TranslationGenerator | InfoProvider | undefined>): this;
     setExpandedVerbose(): this;
+    setMagicIncluded(): this;
     getClass(): string[];
     get(): (TranslationGenerator | InfoProvider)[];
     private getOutOf;

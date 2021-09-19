@@ -1,9 +1,9 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2020
- * http://www.unlok.ca
+ * Copyright 2011-2021 Unlok
+ * https://www.unlok.ca
  *
  * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
+ * https://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
@@ -62,7 +62,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     pid: number | null | undefined;
     protected?: boolean;
     quality: Quality | undefined;
-    quickSlot: number | undefined;
     referenceId?: number;
     renamed: string | ISerializedTranslation | undefined;
     startingDecay?: number;
@@ -71,6 +70,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     used?: IItemUsed;
     weight: number;
     weightFraction: number;
+    quickSlot: number | undefined;
     offsetX?: number;
     offsetY?: number;
     fromX?: number;
@@ -194,9 +194,16 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getEquipmentInsulation(type: TempType): number;
     getBaseTemperature(): number | undefined;
     /**
-     * Sets the item's decay value based on quality, game mode and added some randomization
+     * Sets the item's decay with some added randomization.
      */
     setDecay(overrideDefault?: number): void;
+    /**
+     * Gets the item's max decay value based on quality. The max number can be modified slightly due to overrideDefault (crafting) and adding fuel which goes over this max.
+     * @param overrideDefault Override the item's decayMax definition with something else.
+     * @param withRandomization True if you want to return a randomized value (useful when setting the value on an item).
+     * @returns A number equal to the maximum item decay or 0 if the item should not have decay at all.
+     */
+    getMaxDecay(overrideDefault?: number, withRandomization?: boolean): number;
     /**
      * Gets the inherit item type.
      */

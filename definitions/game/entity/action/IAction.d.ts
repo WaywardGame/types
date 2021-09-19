@@ -1,9 +1,9 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2020
- * http://www.unlok.ca
+ * Copyright 2011-2021 Unlok
+ * https://www.unlok.ca
  *
  * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
+ * https://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
@@ -46,7 +46,7 @@ export declare enum ActionType {
     Paddle = 13,
     GatherWater = 14,
     Cast = 15,
-    LockPick = 16,
+    Lockpick = 16,
     Repair = 17,
     ReadMap = 18,
     Learn = 19,
@@ -126,7 +126,8 @@ export declare enum ActionType {
     Upgrade = 93,
     Enhance = 94,
     Shoot = 95,
-    Alter = 96
+    Alter = 96,
+    UpdateItemQuickSlot = 97
 }
 export declare enum ActionUsability {
     Paused = 0,
@@ -136,7 +137,11 @@ export declare enum ActionUsability {
     Delayed = 4
 }
 export declare enum ActionFlag {
-    OperatorMilestone = 0
+    OperatorMilestone = 0,
+    /**
+     * Allows multiple of these actions to run at once when in multiplayer
+     */
+    AllowPacketConcurrency = 1
 }
 export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, AV extends any[] = ActionArgumentTupleTypes<A>> {
     type?: number;

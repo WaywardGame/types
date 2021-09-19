@@ -1,9 +1,9 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2020
- * http://www.unlok.ca
+ * Copyright 2011-2021 Unlok
+ * https://www.unlok.ca
  *
  * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
+ * https://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
@@ -121,8 +121,10 @@ export default class InGameScreen extends BaseScreen {
     clampDialogs(): void;
     getItemClass(item?: Item, itemType?: ItemType): string;
     createItemString(itemType: ItemType, item?: Item, extraClass?: string): string;
-    syncItemElements(itemId?: number, selector?: JQuery): void;
-    syncDecayBar(item: Item, syncDamage?: boolean): void;
+    syncItemElements(itemId?: number, selector?: JQuery, forceSyncDecay?: boolean): void;
+    private readonly SYMBOL_ITEM_ELEMENTS;
+    private readonly SYMBOL_LAST_DECAY;
+    syncDecayBar(item: Item, syncDamage?: boolean, force?: boolean): void;
     syncDamagedDecayed(item: Item, element: JQuery): void;
     addItemToContainer(item: Item, container: IContainer, _internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
     insertItemStringToContainer(itemElement: string | JQuery, containerElement: JQuery): void;
@@ -135,7 +137,7 @@ export default class InGameScreen extends BaseScreen {
     loadQuickSlots(): void;
     saveItemOrder(containerElement: JQuery): void;
     showItemContextMenu(element: JQuery, skipSound?: boolean): void;
-    onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): boolean;
+    onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): void;
     runContextMenuAction(itemId: number, action: IContextMenuAction, skipSound?: boolean, usedFromQuickSlot?: boolean): boolean;
     craftItemChecker(itemType: ItemType): void;
     craftItem(item: ItemType, checker: ItemRecipeRequirementChecker): Promise<void>;

@@ -1,9 +1,9 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2020
- * http://www.unlok.ca
+ * Copyright 2011-2021 Unlok
+ * https://www.unlok.ca
  *
  * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
+ * https://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
@@ -105,6 +105,7 @@ declare const actionDescriptions: {
     90: IActionDescription<[import("game/entity/action/IAction").ActionArgument.ItemNearby, import("game/entity/action/IAction").ActionArgument.Boolean], import("../player/Player").default | import("../npc/NPC").default, void, [import("../../item/Item").default, boolean]>;
     59: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.Direction, [import("game/entity/action/IAction").ActionArgument.Integer, import("game/entity/action/IAction").ActionArgument.Undefined]], import("../player/Player").default | import("../npc/NPC").default, void, [import("../../../utilities/math/Direction").Direction.None | import("../../../utilities/math/Direction").Direction.East | import("../../../utilities/math/Direction").Direction.North | import("../../../utilities/math/Direction").Direction.West | import("../../../utilities/math/Direction").Direction.South, (number | undefined)?]>;
     91: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.Container, [import("game/entity/action/IAction").ActionArgument.IntegerNumberArray, import("game/entity/action/IAction").ActionArgument.Undefined]], import("../player/Player").default, void, [import("../../item/IItem").IContainer, (number[] | undefined)?]>;
+    97: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.ItemNearby, [import("game/entity/action/IAction").ActionArgument.Integer, import("game/entity/action/IAction").ActionArgument.Undefined]], import("../player/Player").default, void, [import("../../item/Item").default, (number | undefined)?]>;
     93: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.ItemNearby, [import("game/entity/action/IAction").ActionArgument.ItemNearby, import("game/entity/action/IAction").ActionArgument.Undefined]], import("../player/Player").default | import("../npc/NPC").default, void, [import("../../item/Item").default, (import("../../item/Item").default | undefined)?]>;
     62: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.ItemNearby, import("game/entity/action/IAction").ActionArgument.ActionType], import("../player/Player").default | import("../npc/NPC").default, void, [import("../../item/Item").default, ActionType]>;
 };

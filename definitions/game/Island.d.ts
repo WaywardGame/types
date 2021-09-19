@@ -1,9 +1,9 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2020
- * http://www.unlok.ca
+ * Copyright 2011-2021 Unlok
+ * https://www.unlok.ca
  *
  * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
+ * https://www.unlok.ca/credits-thanks/
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
@@ -53,7 +53,12 @@ export default class Island implements IReferenceable {
     temperature: TemperatureManager;
     static positionToId(position: IVector2): string;
     static idToPosition(id: string): IVector2 | undefined;
-    constructor(position?: IVector2, startingSeed?: number);
+    /**
+     * Szudzik's function (signed)
+     */
+    static generatePositionHash(x: number, y: number): number;
+    static calcualteBaseSeed(x: number, y: number, initialSeed: number): number;
+    constructor(position?: IVector2, initialSeed?: number);
     get id(): string;
     get biome(): import("game/biome/IBiome").IBiomeDescription;
     registerEventBus(): void;
@@ -65,8 +70,4 @@ export default class Island implements IReferenceable {
      * @returns The distance as a positive number.
      */
     getIslandDistance(): number;
-    /**
-     * Szudzik's function
-     */
-    private generatePositionHash;
 }
