@@ -225,6 +225,19 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @param player Player or NPC entity that is carrying the item to extinguish.
      */
     extinguish(player: Player | NPC | undefined): void;
+    /**
+     * Get the maximum durability for an item based on many factors.
+     * @param human Player that we checking to get the maximum item durability (as game options can affect this).
+     * @returns The maximum durability of the item as a number.
+     */
+    getMaxDurability(human: Human): number;
+    /**
+     * Get the maximum reinforcement allowed for an item based on many factors.
+     * @param maxDurability The maximum durability that the item should have.
+     * @param actionTier Any bonus from the item's action tier.
+     * @returns The maximum reinforcement of the item as a number.
+     */
+    getMaxReinforcement(maxDurability: number, actionTier: number): number;
     onUnserialized(): void;
     private setupDurabilityHandlers;
     private checkIfItemsMatch;
