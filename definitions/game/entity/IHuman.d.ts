@@ -140,7 +140,8 @@ export declare enum RestCancelReason {
     FullStamina = 2,
     NearbyCreatureDamagedDoodad = 3,
     CreatureDamaged = 4,
-    Canceled = 5
+    Canceled = 5,
+    Dying = 6
 }
 export interface IRestData {
     type: RestType;

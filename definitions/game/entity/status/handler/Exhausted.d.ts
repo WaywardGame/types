@@ -23,7 +23,7 @@ export default class Exhausted extends StatusEffect {
     private onPreMove;
     private onStatChange;
     /**
-     * Deals damage and sends a message, while keeping the player's stamina at least `1`.
+     * Deals damage and sends a message, while keeping the player's stamina at least `0`.
      * @returns whether the effect was applied.
      */
     private applyEffect;
