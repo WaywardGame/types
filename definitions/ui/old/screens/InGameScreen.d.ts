@@ -135,7 +135,7 @@ export default class InGameScreen extends BaseScreen {
     refreshQuickSlots(): void;
     getInventoryItemsInOrder(): any[];
     loadQuickSlots(): void;
-    saveItemOrder(containerElement: JQuery): void;
+    saveItemOrder(containerElement: JQuery, skipSound?: boolean): void;
     showItemContextMenu(element: JQuery, skipSound?: boolean): void;
     onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): void;
     runContextMenuAction(itemId: number, action: IContextMenuAction, skipSound?: boolean, usedFromQuickSlot?: boolean): boolean;
@@ -209,7 +209,7 @@ export default class InGameScreen extends BaseScreen {
     filterContainers(): void;
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
     getContainerId(containerElement: JQuery): string;
-    sortItems(containerElement: JQuery, sortType: SortType, messageType?: Message, canReverse?: boolean): void;
+    sortItems(containerElement: JQuery, sortType: SortType, messageType?: Message, canReverse?: boolean, skipSound?: boolean): void;
     updateInventorySort(): void;
     onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;
     updateSort(containerElement: JQuery, activeSort: boolean): void;

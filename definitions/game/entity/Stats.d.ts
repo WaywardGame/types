@@ -52,6 +52,15 @@ export default class Stats<T extends IStatHost> {
      */
     getBaseValue(stat: Stat | IStat): number | undefined;
     /**
+     * Sets the given `Stat`'s value to the given amount. Assumes the given value includes any bonus. Triggers `statChange`
+     * @param stat The `Stat` to set.
+     * @param amount The amount to set the value to, including the bonus.
+     * @param reason Why this stat is changing.
+     *
+     * Note: Initializes the stat if it does not exist.
+     */
+    set(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
+    /**
      * Sets the given `Stat`'s value to the given amount. Triggers `statChange`
      * @param stat The `Stat` to set.
      * @param amount The amount to set the value to.
@@ -59,7 +68,7 @@ export default class Stats<T extends IStatHost> {
      *
      * Note: Initializes the stat if it does not exist.
      */
-    set(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
+    setValue(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
     /**
      * Reduces the given `Stat` by the given amount. Triggers `statChange`
      * @param stat The `Stat` to reduce.

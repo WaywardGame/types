@@ -24,7 +24,7 @@ import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { BookType, ContainerReference, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemDisassembleResult, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemType, SYMBOL_CONTAINER_CACHED_REFERENCE } from "game/item/IItem";
 import { IPlaceOnTileOptions } from "game/item/IItemManager";
 import ItemMapManager from "game/item/ItemMapManager";
-import MagicalPropertyManager, { IHasMagic } from "game/magic/MagicalPropertyManager";
+import MagicalPropertyManager, { IHasMagic, MagicalSubPropertySubTypes } from "game/magic/MagicalPropertyManager";
 import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import { IReferenceable } from "game/reference/IReferenceManager";
 import { IHasInsulation, ITemperatureSource, TempType } from "game/temperature/ITemperature";
@@ -158,9 +158,9 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     setQuality(human: Human | undefined, quality?: Quality): void;
     getValidMagicalProperties(): MagicalPropertyType[];
     addMagicalProperties(count: number): boolean;
-    rerollMagicalProperty(type: MagicalPropertyType): boolean;
+    rerollMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     rerollMagicalPropertyValues(): void;
-    addMagicalProperty(type: MagicalPropertyType): boolean;
+    addMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     getMagicalPropertyInfo(type: MagicalPropertyType): IMagicalPropertyInfo | undefined;
     acquireNotify(player: Player): void;
     getStokeFireValue(): number | undefined;
@@ -225,6 +225,19 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @param player Player or NPC entity that is carrying the item to extinguish.
      */
     extinguish(player: Player | NPC | undefined): void;
+    /**
+     * Get the maximum durability for an item based on many factors.
+     * @param human Player that we checking to get the maximum item durability (as game options can affect this).
+     * @returns The maximum durability of the item as a number.
+     */
+    getMaxDurability(human: Human): number;
+    /**
+     * Get the maximum reinforcement allowed for an item based on many factors.
+     * @param maxDurability The maximum durability that the item should have.
+     * @param actionTier Any bonus from the item's action tier.
+     * @returns The maximum reinforcement of the item as a number.
+     */
+    getMaxReinforcement(maxDurability: number, actionTier: number): number;
     onUnserialized(): void;
     private setupDurabilityHandlers;
     private checkIfItemsMatch;
