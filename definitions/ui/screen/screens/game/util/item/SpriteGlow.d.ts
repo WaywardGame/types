@@ -15,10 +15,17 @@ export default class SpriteGlow {
     private readonly context;
     private versionID?;
     constructor();
-    releaseImageDataCache(): void;
+    /**
+     * Clears the cache of sprites from the user's localStorage.
+     * @param versionID The current version. If not provided, clears the cache regardless.
+     */
+    clearCache(versionID?: string): void;
+    /**
+     * Releases a cache of data used for generation.
+     */
+    releaseGenerationImageDataCache(): void;
     render(path: string, color: IRGB): Promise<string | undefined>;
     private renderInternal;
     private getVersion;
     private getGitVersionID;
-    private clearOldCache;
 }

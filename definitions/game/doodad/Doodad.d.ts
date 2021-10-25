@@ -205,6 +205,10 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * @param growthBonus The bonus that is applied (on top of a default of 10) to the plants decay (so it grows faster).
      */
     healOrHarmPlant(liquid: LiquidType, growthBonus?: number): void;
+    /**
+     * Reverts lit doodads if they provide fire and have a revert doodad type set.
+     */
+    revert(): boolean;
     onUnserialized(): void;
     /**
      * @deprecated

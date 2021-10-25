@@ -23,6 +23,7 @@ export default class MapDialog extends Dialog {
     private readonly canvas;
     private readonly riddleText;
     private readonly riddle;
+    private readonly riddleButton;
     private readonly buttonCopyMap;
     private mapCanvas?;
     private unobfuscatedCanvas?;
