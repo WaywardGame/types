@@ -177,6 +177,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
      * Called when a networking messages session fails
      */
     private onSteamNetworkingMessagesSessionFailed;
+    setSteamNetworkingSendRates(min: number, max: number): void;
     /**
      * Insanely expensive to do and it's possible for it to cause crashes
      */

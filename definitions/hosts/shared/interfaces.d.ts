@@ -104,6 +104,7 @@ export interface ISteamworksNetworking {
     setSteamNetworkingMessagesSessionRequestCallback(callback: (steamIdRemote: string) => void): void;
     setSteamNetworkingMessagesSessionFailedCallback(callback: (steamIdRemote: string, state: SteamNetworkingConnectionState, endReason: number) => void): void;
     setSteamNetworkingConnectionStatusCallback(callback: (steamIdRemote: string, state: SteamNetworkingConnectionState, endReason: number, oldState: SteamNetworkingConnectionState) => void): void;
+    setSteamNetworkingSendRates(min: number, max: number): void;
     setSteamNetworkingDebugCallback(callback: (type: number, message: string) => void): void;
 }
 export interface ISteamFriend {

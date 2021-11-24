@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 declare const config: {
+    testRetires: string | number;
     testTimeout: string | number;
     randomInputCount: number;
 };

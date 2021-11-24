@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Component from "ui/component/Component";
 export declare class ScrollableHandler {
     private readonly id;
     private readonly elementRef;
-    get element(): HTMLElement;
+    get element(): HTMLElement | undefined;
     constructor(element: HTMLElement, id: string);
-    watchAnimations(): void;
-    watchTransitions(): void;
+    watchAnimations(parent: Component): void;
     private onAnimationStart;
     private onAnimationEnd;
 }
