@@ -1,0 +1,100 @@
+/*!
+ * Copyright 2011-2021 Unlok
+ * https://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * https://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://github.com/WaywardGame/types/wiki
+ */
+import type { SfxType } from "audio/IAudio";
+import EventEmitter from "event/EventEmitter";
+import type { ActionArgumentTypeMap, IActionApi, IActionDescription, IActionHandlerApi, IActionParticle, IActionSoundEffect } from "game/entity/action/IAction";
+import { ActionArgument, ActionType } from "game/entity/action/IAction";
+import type Entity from "game/entity/Entity";
+import type { SkillType } from "game/entity/IHuman";
+import type { TurnType } from "game/entity/player/IPlayer";
+import type Item from "game/item/Item";
+import { Milestone } from "game/milestones/IMilestone";
+import ActionPacket from "multiplayer/packets/shared/ActionPacket";
+import type { IRGB } from "utilities/Color";
+interface ActionEvents {
+    /**
+     * Called before an action is executed
+     * This is called before the action result is used
+     * @returns False to cancel the action
+     */
+    preExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any>, args: any[]): false | void;
+    /**
+     * Called after an action has been executed
+     * This is called after the action result is used
+     */
+    postExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any>, args: any[]): any;
+}
+export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R, AV extends any[]> extends EventEmitter.Host<ActionEvents> implements IActionApi<E> {
+    /**
+     * Gets an action by its description. If you're using the Action class for constructing the descriptions, just pass the action instance.
+     *
+     * Note: Prefer `IActionApi.get` if you're calling this from within another action.
+     */
+    static get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A, infer E, infer R, infer AV> ? ActionExecutor<A, E, R, AV> : never;
+    static executeMultiplayer(packet: ActionPacket, executor?: Entity | undefined, nonMpActionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any, any[]>): any;
+    get executor(): E;
+    get actionStack(): ActionType[];
+    get lastAction(): ActionType;
+    readonly type: ActionType;
+    private _executor;
+    private _actionStack;
+    private executionStage;
+    private shouldSkipConfirmation;
+    private readonly privateStore;
+    private updateTablesAndWeight;
+    private staminaReduction?;
+    private reputationChange;
+    private milestone?;
+    private skillGains?;
+    private sfx?;
+    private particle?;
+    private updateView?;
+    private updateRender?;
+    private readonly items;
+    private itemsUsed;
+    private readonly action;
+    constructor(action?: IActionDescription<A, E>, type?: number | undefined);
+    skipConfirmation(): this;
+    execute(actionApi: IActionApi<E>, ...args: AV): R;
+    execute(executor: E, ...args: AV): R;
+    isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is ActionArgumentTypeMap<AA>;
+    setDelay(delay: number, replace?: boolean): this;
+    setPassTurn(turnType?: TurnType): this;
+    setUpdateView(updateFov?: boolean): this;
+    setUpdateRender(): this;
+    setUpdateTablesAndWeight(): this;
+    setStaminaReduction(reduction?: SkillType, actionTier?: number): this;
+    setReputationChange(amount: number): this;
+    addSkillGains(...skills: Array<[SkillType, number?, number?, true?]>): this;
+    addSkillGains(skill: SkillType, amount?: number, actionTier?: number, bypass?: true): this;
+    setMilestone(milestone: Milestone, data?: number): this;
+    setSoundEffect(soundEffect: IActionSoundEffect): this;
+    setSoundEffect(type: SfxType, inFront?: boolean): this;
+    cancelPaddling(item: Item): this;
+    setParticle(color: IRGB, inFront?: boolean): this;
+    setParticle(color: IRGB, count?: number, inFront?: boolean): this;
+    setParticle(particle: IActionParticle): this;
+    addItems(...addItems: Array<Item | undefined>): this;
+    getItems(): import("@wayward/goodstream").default<Item>;
+    removeItems(...items: Array<Item | undefined>): this;
+    setItemsUsed(used?: boolean): this;
+    confirmItemsBroken(): Promise<boolean>;
+    private executeConfirmer;
+    private executeInternalOrMultiplayer;
+    private executeInternal;
+    private createActionPacket;
+    private handleApiOnActionFailure;
+    private handleApi;
+    private canExecute;
+    private isUsableWhen;
+    private static validate;
+}
+export {};
