@@ -132,7 +132,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     isValid(): boolean;
     isInGroup(doodadTypeGroup: DoodadTypeGroup): boolean;
     updateGroupCache(doodadTypeGroup: DoodadTypeGroup): boolean;
-    getTile(): ITile;
+    getTile(ignoreCache?: boolean): ITile;
     getTileId(): number;
     getPoint(): IVector3;
     canGrow(): boolean;

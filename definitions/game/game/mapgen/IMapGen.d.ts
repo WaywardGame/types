@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { BiomeTypes } from "game/biome/IBiome";
+import type { MapGenDoodadTrees } from "game/doodad/IDoodad";
 import type Island from "game/island/Island";
 import type { ITemplateOptions } from "game/mapgen/MapGenHelpers";
 import type { Load } from "game/meta/Loading";
@@ -51,7 +52,7 @@ export interface IMapGenGenerateInput {
     getBiomeHeightMap(x: number, y: number): number;
     getRandomQuality(tileType: number): number;
     setTileGen(x: number, y: number, z: number, value: number): void;
-    setTree(type: number, override?: number): number;
+    setTree(type: MapGenDoodadTrees, override?: number): number;
     setTileVein(x: number, y: number, z: number, value: number, terrainType: number): void;
     setCaveOres(dValue: number, tileData: number, x: number, y: number, z: number): void;
 }

@@ -93,6 +93,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     previousSaveVersion: IVersionInfo | undefined;
     civilizationScore: number;
     spawnPoint: IVector3;
+    private _loadedReferences;
     private _tiles;
     private _world;
     modifiersCollection?: IslandModifiersCollection;
@@ -128,7 +129,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * Removes all players and stores tiles references
      * @param resetState True if the game state is resetting
      */
-    unload(resetState?: boolean): void;
+    unload(): void;
     delete(): void;
     private fastForward;
     hydrateFromOldGame(oldGame: IGameOld): void;
@@ -251,5 +252,9 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     rangeFinder(weaponRange: number, playerSkillLevel: number, useMaxRange?: boolean): number;
     getRandomQuality(bonusQuality?: number): Quality.None | Quality.Superior | Quality.Remarkable | Quality.Exceptional;
     getQualityDurabilityBonus(quality: Quality, itemDurability: number, getMax?: boolean): number;
+    /**
+     * Only allow loading references once
+     * Even if an island is unloaded, the loaded references will remain
+     */
     loadReferences(): void;
 }

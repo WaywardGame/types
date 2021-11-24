@@ -112,7 +112,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
     resolveContainer(container?: IContainer): Doodad | Item | Player | NPC | IContainer | ITile | undefined;
     getContainerReference(containable: IContainable | undefined, showWarnings?: boolean): ContainerReference;
-    derefenceContainerReference(containerReference: ContainerReference): IContainable | undefined;
+    derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
     hashContainer(containable: IContainable): string;
     hashContainerReference(containerReference: ContainerReference): string;
     updateContainedWithin(containable: IContainable, containedWithin: IContainer | undefined): void;

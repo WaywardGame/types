@@ -16,6 +16,6 @@ declare module ItemReferenceManager {
      */
     function getContainerReferenceSlow(containable: IContainable, includeIsland?: boolean): ContainerReference;
     function getContainerReferenceInIsland(island: Island, containable: IContainable | undefined, showWarnings?: boolean): ContainerReference;
-    function derefenceContainerReference(containerRef: ContainerReference, island?: Island): object | undefined;
+    function derefenceContainerReference(containerRef: ContainerReference, island?: Island, showWarnings?: boolean): object | undefined;
 }
 export default ItemReferenceManager;

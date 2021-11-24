@@ -15,6 +15,7 @@ import type { IObject } from "game/IObject";
 import type { IslandId } from "game/island/IIsland";
 import { ItemType } from "game/item/IItem";
 import type { IReferenceable } from "game/reference/IReferenceManager";
+import type { ITile } from "game/tile/ITerrain";
 import type { ISerializedTranslation } from "language/ITranslation";
 import type Translation from "language/Translation";
 import type { IVector3 } from "utilities/math/IVector";
@@ -48,6 +49,7 @@ export default class Corpse extends EventEmitter.Host<ICorpseEvents> implements 
      * - `corpse.getName(undefined, 3)` // "acid spitter demons"
      */
     getName(article?: boolean, count?: number): Translation;
+    getTile(): ITile;
     update(): void;
     getResources(clientSide?: boolean): ItemType[];
 }
