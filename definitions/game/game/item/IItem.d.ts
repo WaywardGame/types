@@ -243,7 +243,7 @@ export declare type ConsumeItemStatsTuple = [health: number, stamina: number, hu
 export interface IOnUse {
     [ActionType.Apply]?: ConsumeItemStatsTuple;
     [ActionType.Build]?: DoodadType | [build: DoodadType, keepItem: true];
-    [ActionType.DrinkCure]?: ConsumeItemStatsTuple;
+    [ActionType.Cure]?: ConsumeItemStatsTuple;
     [ActionType.DrinkItem]?: ConsumeItemStatsTuple;
     [ActionType.Eat]?: ConsumeItemStatsTuple;
     [ActionType.Heal]?: ConsumeItemStatsTuple;

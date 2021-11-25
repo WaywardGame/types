@@ -26,10 +26,10 @@ declare const _default: UseInfo<{
     type: import("../../../../item/IItem").ItemType;
     description: import("../../../../item/IItem").IItemDescription;
     quality: import("../../../../IObject").Quality;
-    action: ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther;
-    union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther>;
+    action: ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.Cure | ActionType.HealOther;
+    union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.Cure | ActionType.HealOther>;
     details: Set<symbol>;
-}, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther, {
+}, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.Cure | ActionType.HealOther, {
     generateUseConsumeTooltip: () => (tooltip: Tooltip, stat: Stat, base: number) => Tooltip;
 }, Item>;
 export default _default;

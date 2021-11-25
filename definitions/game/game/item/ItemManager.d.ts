@@ -182,7 +182,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getNPCWithItemInInventory(containable: IContainable): NPC | undefined;
     countItemsInContainer(containers: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: Item): number;
     countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item): number;
-    getSafeItemInContainerByUse(container: IContainer, action: ActionType, allowProtectedItems?: boolean): Item | undefined;
+    getSafeItemInContainerByUse(container: IContainer, action: ActionType, allowProtectedItems?: boolean, canDamageItem?: boolean, consumable?: boolean): Item | undefined;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item, allowProtectedItems?: boolean): Item | undefined;
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, allowProtectedItems?: boolean): Item | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, allowProtectedItems?: boolean): Item | undefined;

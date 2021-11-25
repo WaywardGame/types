@@ -50,10 +50,10 @@ export default class ItemUses extends Uses<Item> {
         type: ItemType;
         description: IItemDescription;
         quality: import("../../../IObject").Quality;
-        action: ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther;
-        union: import("../UseInfo").IUseInfoBase<Item, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther>;
+        action: ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.Cure | ActionType.HealOther;
+        union: import("../UseInfo").IUseInfoBase<Item, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.Cure | ActionType.HealOther>;
         details: Set<symbol>;
-    }, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.DrinkCure | ActionType.HealOther, {
+    }, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.Cure | ActionType.HealOther, {
         generateUseConsumeTooltip: () => (tooltip: import("../../../../ui/tooltip/Tooltip").default, stat: import("../../../entity/IStats").Stat, base: number) => import("../../../../ui/tooltip/Tooltip").default;
     }, Item> | import("../UseInfo").default<{
         objectType: CreationId.Item;

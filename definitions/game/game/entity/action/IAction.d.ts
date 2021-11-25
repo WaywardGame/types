@@ -63,7 +63,7 @@ export declare enum ActionType {
     OpenContainer = 28,
     Preserve = 29,
     OpenBottle = 30,
-    DrinkCure = 31,
+    Cure = 31,
     TellTime = 32,
     SailToCivilization = 33,
     Transmogrify = 34,
