@@ -17,9 +17,10 @@ export interface IStatHost extends EventEmitter.Host<IStatEvents> {
     stats: IStats;
 }
 export default class Stats<T extends IStatHost> {
-    private readonly host;
     private get stats();
+    private readonly _host;
     constructor(host: T);
+    private get host();
     /**
      * Initializes the given stat from a `StatFactory` instance.
      * @param factory The factory to initialize the stat from.

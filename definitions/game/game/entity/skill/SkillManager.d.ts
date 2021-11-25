@@ -27,14 +27,16 @@ export interface ISkillEvents {
     skillChange(skill: SkillType, value: number, oldValue: number): any;
 }
 export declare type SkillSet = Record<SkillType, ISkillLevel>;
+export interface ISkillHost extends EventEmitter.Host<ISkillEvents> {
+    readonly island: Island;
+}
 export default class SkillManager {
-    private readonly host;
     private readonly configuration;
     private skills;
     private cachedTotalSkill?;
-    constructor(host: EventEmitter.Host<ISkillEvents> & {
-        readonly island: Island;
-    }, configuration: ISkillConfiguration);
+    private readonly _host;
+    constructor(host: ISkillHost, configuration: ISkillConfiguration);
+    private get host();
     has(skill: SkillType): boolean;
     /**
      * @returns whether the given skill is maxed-out. Ignores bonus.

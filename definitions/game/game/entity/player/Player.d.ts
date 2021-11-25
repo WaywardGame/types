@@ -10,7 +10,7 @@
  */
 import type { IEventEmitter } from "event/EventEmitter";
 import type Doodad from "game/doodad/Doodad";
-import { ActionType } from "game/entity/action/IAction";
+import type { ActionType } from "game/entity/action/IAction";
 import Creature from "game/entity/creature/Creature";
 import { CreatureType } from "game/entity/creature/ICreature";
 import Human from "game/entity/Human";

@@ -14,6 +14,7 @@ import { Direction } from "../../game/utilities/math/Direction";
 import type { Random, SeededGenerator } from "../../game/utilities/random/Random";
 import type { INewGameOptions } from "../interfaces";
 import { GameMode } from "../interfaces";
+import type { IslandId } from "../../game/game/island/IIsland";
 import ApplicationDom from "./applicationDom";
 import ApplicationLogger from "./applicationLogger";
 export default class ApplicationInteractions {
@@ -64,6 +65,8 @@ export default class ApplicationInteractions {
     joinMultiplayerDedicatedServer(gameCode: string): Promise<void>;
     pauseGame(): Promise<void>;
     unpauseGame(): Promise<void>;
+    moveToIslandId(islandId: IslandId): Promise<void>;
+    verifyIslandReferences(islandId: IslandId): Promise<void>;
     getGameStateAsJson(): Promise<string>;
     saveStateAndVerifyWithPrevious(): Promise<void>;
     clearSavedStates(): void;

@@ -55,11 +55,11 @@ export default abstract class Human extends Entity implements IHasInsulation {
     readonly equipEffects: Map<EquipEffect, EquipEffects>;
     restData: IRestData | undefined;
     score: number;
-    skill: SkillManager;
     state: PlayerState;
     swimming: boolean;
     vehicleItemReference: ItemReference | undefined;
     identifier: string;
+    skill: SkillManager;
     private readonly privateStore;
     constructor();
     createSkillManager(): SkillManager;

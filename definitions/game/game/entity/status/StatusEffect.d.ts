@@ -58,8 +58,9 @@ export default abstract class StatusEffect extends EventEmitter.Host<IStatusEffe
     readonly type: StatusType;
     static update(effect: StatusEffect): void;
     private registered;
-    protected readonly entity: Entity;
+    private readonly _entity;
     constructor(type: StatusType, entity: Entity | undefined);
+    protected get entity(): Entity;
     getOptions(): IGameOptionsStatusEffect;
     register(): void;
     /**

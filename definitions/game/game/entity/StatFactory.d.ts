@@ -13,9 +13,10 @@ import { Stat } from "game/entity/IStats";
 import type { IStatHost } from "game/entity/Stats";
 import type Stats from "game/entity/Stats";
 export declare class StatsFactory {
-    private readonly host;
     private readonly stats;
+    private readonly _host;
     constructor(host: IStatHost);
+    private get host();
     /**
      * If the condition is not falsey, runs the initializer on this factory.
      */

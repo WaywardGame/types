@@ -17,13 +17,14 @@ import { QuestType } from "game/entity/player/quest/quest/IQuest";
 import type { RequirementInstance } from "game/entity/player/quest/quest/Quest";
 import type { Game } from "game/Game";
 export default class QuestManager extends EventEmitter.Host<IQuestManagerEvents> {
-    private readonly host;
     static reset(): void;
     private readonly quests;
     private readonly eventBusTriggers;
     private readonly hostTriggers;
     private readonly initializedQuests;
+    private readonly _host;
     constructor(host: Player);
+    private get host();
     /**
      * Get all quests
      */

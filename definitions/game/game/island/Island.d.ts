@@ -91,6 +91,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     readonly players: Set<Player>;
     previousSaveVersion: IVersionInfo | undefined;
+    brokenReferencesCount: number;
     civilizationScore: number;
     spawnPoint: IVector3;
     private _loadedReferences;

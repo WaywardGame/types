@@ -9,10 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 export default class ChromeDriver {
+    private readonly appId;
     readonly port: number;
     private process;
     private exitHandler;
-    constructor();
+    constructor(appId: string);
     start(): Promise<void>;
     stop(): void;
 }
