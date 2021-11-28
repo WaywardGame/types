@@ -16,7 +16,7 @@ import type Human from "game/entity/Human";
 import { MoveType } from "game/entity/IEntity";
 import type Player from "game/entity/player/Player";
 import type { ITile } from "game/tile/ITerrain";
-import Vector3 from "utilities/math/Vector3";
+import type Vector3 from "utilities/math/Vector3";
 export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> {
     /**
      * Called when a creature is about to be spawned

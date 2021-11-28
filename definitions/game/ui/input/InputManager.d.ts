@@ -111,6 +111,8 @@ declare class InputManager extends EventEmitter.Host<IInputManagerEvents> {
     extractModifiers(evt: Event): Set<Modifier> | undefined;
     getCatalyst(evt: Event): InputCatalyst | undefined;
     disableUntil(until: number | Promise<any>, disabler: string): void;
+    disable(disabler: string): boolean;
+    enable(disabler: string): void;
     isDisabled(): boolean;
     isDisabledBy(disabler: string): boolean;
     private handleRising;

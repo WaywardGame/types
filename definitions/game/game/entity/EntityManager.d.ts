@@ -17,9 +17,20 @@ export interface IEntityManagerEvents<T extends Entity> {
     spawn(entity: T): any;
     remove(entity: T): any;
 }
+export interface IEntityCanCreateOptions {
+    allowEdgeSpawning?: boolean;
+    allowOnBlockedTiles?: boolean;
+    allowOnFire?: boolean;
+    allowOverDooadsAndTileEvents?: boolean;
+    chanceOfScarecrowScare?: number;
+}
 export default abstract class EntityManager<T extends Entity> extends ObjectManager<T, IEntityManagerEvents<T>> implements IEntityManager<T> {
     private readonly moveTypesInFov;
     remove(entity: T): void;
     updateFov(bounds: Bound3[]): number;
     getMoveTypesInFov(): IMoveTypeZ[];
+    /**
+     * Checks if the target position is a good spot for a new entity
+     */
+    protected canCreateEntity(x: number, y: number, z: number, options?: IEntityCanCreateOptions): boolean;
 }

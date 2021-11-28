@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+/// <reference types="node" />
 import EventEmitter from "event/EventEmitter";
 import type Entity from "game/entity/Entity";
 import type { Defense } from "game/entity/IEntity";
@@ -60,6 +61,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     lastTickTime: number | undefined;
     saveClear: boolean;
     tileDecorations: Uint16Array;
+    initialThumbnailTimeout: NodeJS.Timer | undefined;
     mapSize: number;
     mapSizeSq: number;
     readonly itemStylesheetHandler: ItemStylesheetHandler | undefined;
