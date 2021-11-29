@@ -74,6 +74,15 @@ export default abstract class NPC extends Human {
      */
     getActions(): ActionType[] | undefined;
     addAiType(ai: AiType): void;
+    /**
+     * Removes an AiType from an NPC.
+     * @param ai The AiType to remove from the NPC.
+     */
+    removeAiType(ai: AiType): void;
+    /**
+     * Closes the merchant trading window for everybody.
+     */
+    closeInventory(): void;
     updateDirection(x: number, y: number): void;
     /**
      * Sets the default weightCapacity of an NPC (based on their equipment and starting items).

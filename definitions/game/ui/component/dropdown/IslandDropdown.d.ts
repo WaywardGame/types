@@ -19,4 +19,5 @@ export default class IslandDropdown<OTHER_OPTIONS extends string = never> extend
     protected shouldIncludeOtherOptionsInGroupFilter(): boolean;
     protected isInGroup(islandId: IslandId, biome: BiomeType): boolean;
     protected getGroups(): BiomeType[];
+    protected onRefresh(): void;
 }

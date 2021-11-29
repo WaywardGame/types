@@ -12,5 +12,5 @@ import { NPCType } from "game/entity/npc/INPCs";
 import type { IDropdownOption } from "ui/component/Dropdown";
 import EnumDropdown from "ui/component/dropdown/EnumDropdown";
 export default class NPCDropdown<OTHER_OPTIONS extends string = never> extends EnumDropdown<typeof NPCType, OTHER_OPTIONS> {
-    constructor(defaultOption: OTHER_OPTIONS | NPCType, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
+    constructor(defaultOption: OTHER_OPTIONS | NPCType, options?: Iterable<IDropdownOption<OTHER_OPTIONS>>);
 }
