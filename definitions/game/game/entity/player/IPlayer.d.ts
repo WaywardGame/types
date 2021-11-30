@@ -141,6 +141,12 @@ export interface IPlayerEvents extends Events<Human> {
      */
     equip?(item: Item, slot: EquipType): any;
     /**
+     * Called when the players quickslots are updated
+     * @param quickslot The quick slot
+     * @param itemType The item type
+     */
+    updatedQuickslotInfo?(quickslot: number, itemType?: ItemType): any;
+    /**
      * Called when input is being processed
      * @param player The player object
      * @returns False to prevent input processing or undefined to use the default logic
