@@ -1174,7 +1174,8 @@ export declare enum ItemTypeGroup {
     WispContainer = 889,
     Shirt = 890,
     Trousers = 891,
-    All = 892,
-    Last = 893
+    Spine = 892,
+    All = 893,
+    Last = 894
 }
 export {};

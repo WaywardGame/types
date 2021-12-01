@@ -37,6 +37,7 @@ export default class MapDialog extends PrerenderedCanvasDialog {
     getName(): import("../../../../../language/impl/TranslationImpl").default;
     read(map: DrawnMap, item: Item, resetView?: boolean): Promise<void>;
     protected onInventoryItemRemove(_: any, item: Item): void;
+    protected onToggleProtected(item: Item): void;
     protected onInventoryItemAdd(_: any, item: Item): void;
     protected onInventoryItemUpdate(_: any, item: Item): void;
     protected onPostMove(player: Player): void;
