@@ -110,7 +110,14 @@ declare class InputManager extends EventEmitter.Host<IInputManagerEvents> {
      */
     extractModifiers(evt: Event): Set<Modifier> | undefined;
     getCatalyst(evt: Event): InputCatalyst | undefined;
+    /**
+     * @param disabler Each `disableUntil` call should be given a unique `disabler`,
+     * as this system uses the timing from the latest `disableUntil` call
+     */
     disableUntil(until: number | Promise<any>, disabler: string): void;
+    /**
+     * @param disabler Each `disable` call should be given a unique `disabler`
+     */
     disable(disabler: string): boolean;
     enable(disabler: string): void;
     isDisabled(): boolean;

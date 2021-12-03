@@ -21,7 +21,7 @@ export default abstract class InspectionsTooltipHandler<INSPECTIONS_LIST extends
         showExtraInfo?: Text;
     } | undefined;
     private lastMousePosition?;
-    initializeTooltip(tooltip: Tooltip): Tooltip | undefined;
+    initializeTooltip(tooltip: Tooltip): Promise<void>;
     remove(): void;
     protected abstract initializeInspections(): INSPECTIONS_LIST | undefined;
     protected onUpdateTooltipPosition(position: Vector2): void;

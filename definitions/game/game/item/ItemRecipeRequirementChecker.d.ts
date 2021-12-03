@@ -13,7 +13,6 @@ import type { IContainer, IRecipe, ItemType, ItemTypeGroup } from "game/item/IIt
 import type Item from "game/item/Item";
 export default class ItemRecipeRequirementChecker {
     private readonly human;
-    private readonly recipe?;
     private readonly trackItems?;
     private readonly cacheItems?;
     private readonly canUseItem?;
@@ -21,13 +20,14 @@ export default class ItemRecipeRequirementChecker {
     itemComponentsRequired: Item[];
     itemComponentsConsumed: Item[];
     itemComponentsCanBurn: boolean;
-    numComponentsNeeded: number;
+    private numComponentsNeeded;
     private baseComponent;
     private components;
     private componentItems;
+    private recipe;
     private adjacentContainers;
     private readonly itemsToProcess;
-    constructor(human: Human, recipe?: IRecipe | undefined, trackItems?: boolean | undefined, cacheItems?: boolean | undefined, canUseItem?: ((item: Item, isConsumed: boolean, forItemTypeOrGroup: ItemType | ItemTypeGroup) => boolean) | undefined);
+    constructor(human: Human, recipe?: IRecipe, trackItems?: boolean | undefined, cacheItems?: boolean | undefined, canUseItem?: ((item: Item, isConsumed: boolean, forItemTypeOrGroup: ItemType | ItemTypeGroup) => boolean) | undefined);
     /**
      * Returns the amount of items needed for the component
      */
@@ -45,7 +45,7 @@ export default class ItemRecipeRequirementChecker {
      * @returns true if the recipe's requirements are satisfied
      */
     process(): boolean;
-    setRecipe(recipe: IRecipe): void;
+    setRecipe(recipe: IRecipe | undefined): boolean;
     /**
      * Looks around adjacent containers
      * @returns true if the recipe's requirements are satisfied

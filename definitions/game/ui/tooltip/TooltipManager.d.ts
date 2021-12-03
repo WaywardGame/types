@@ -18,7 +18,7 @@ export default class TooltipManager {
     private current;
     private readonly disablers;
     constructor();
-    show(host: HTMLElement): Tooltip | undefined;
+    show(host: HTMLElement, initialize?: (tooltip: Tooltip) => any): Tooltip | undefined;
     hide(host?: HTMLElement | undefined): void;
     /**
      * Disables tooltips.

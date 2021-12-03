@@ -52,7 +52,7 @@ export default class ReferenceManager {
     resolve<R extends ReferenceType>(id: number, type: R): IReferenceTypeMap[R] | undefined;
     resolve(id: number, type?: ReferenceType): IReferenceTypeMap[ReferenceType] | undefined;
     inspect(id: number, type?: ReferenceType, ...args: any[]): import("../inspection/Inspection").default<any> | undefined;
-    tooltip(id: number, type?: ReferenceType): (tooltip: import("../../ui/tooltip/Tooltip").default) => import("../../ui/tooltip/Tooltip").default | undefined;
+    tooltip(id: number, type?: ReferenceType): (tooltip: import("../../ui/tooltip/Tooltip").default) => Promise<void>;
     getReferenceType(thing: Value<IReferenceTypeMap>): ReferenceType;
 }
 export {};

@@ -87,6 +87,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     updateStatsAndAttributes(): void;
     staminaReduction(skill?: SkillType, level?: number): void;
     updateReputation(reputation: number): void;
+    capReputation(): void;
     setPaddling(item: Item | undefined, extinguishTorches?: boolean): void;
     /**
      * Extinguishes all torches the player is holding.
