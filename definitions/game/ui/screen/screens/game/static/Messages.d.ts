@@ -75,6 +75,7 @@ export default class Messages extends QuadrantComponent {
     onReadNote(player: Player, id: number): void;
     onFocusChat(): boolean;
     getDefaultFilterName(filter: MessageFilterDefault): string;
+    protected onAppend(): void;
     protected onChangeQuadrant(): void;
     /**
      * Event handler for when the text in the chat box should be sent as a message.

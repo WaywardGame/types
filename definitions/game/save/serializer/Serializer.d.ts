@@ -14,6 +14,7 @@ import StringTokenizer from "save/serializer/StringTokenizer";
 export default class Serializer implements ISerializer {
     private readonly options;
     private readonly stringTokenizer?;
+    static convertStringToUint8Array(data: string): Uint8Array;
     private static array;
     private static usingArray;
     private static readonly savedObjectCache;

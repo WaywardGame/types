@@ -11,6 +11,7 @@
 import EventEmitter from "event/EventEmitter";
 import { DoodadType } from "game/doodad/IDoodad";
 import type Human from "game/entity/Human";
+import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import type Item from "game/item/Item";
 import type { IMapGenGenerateOutput } from "game/mapgen/IMapGen";
@@ -113,7 +114,7 @@ export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> impleme
     get position(): Readonly<IVector3>;
     get radius(): number;
     private _position;
-    private islandId;
+    islandId: IslandId;
     private seed?;
     private readonly discoveredTreasures;
     readonly type: DrawnMapType;

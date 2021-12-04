@@ -15,7 +15,6 @@ import Human from "game/entity/Human";
 import type NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
 import { Quality } from "game/IObject";
-import type Island from "game/island/Island";
 import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent } from "game/item/IItem";
 import { ItemType, ItemTypeGroup } from "game/item/IItem";
 import type { IAddToContainerOptions, IRequirementInfo } from "game/item/IItemManager";
@@ -91,6 +90,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     static isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
     static isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     static getGroupItems(itemGroup: ItemType | ItemTypeGroup, ancestorGroups?: ItemTypeGroup[]): Set<ItemType>;
+    static getPlayerFromInventoryContainer(containable: IContainable): Player | undefined;
     static getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     static getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     /**
@@ -160,6 +160,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     getGroups(itemType: ItemType): ItemTypeGroup[];
+    getPlayerFromInventoryContainer(containable: IContainable): Player | undefined;
     /**
      * Used to spawn a random item on the current biome type and at a set location (and terrain type) based on spawnOnWorldGen properties in item descriptions.
      * @param terrainType The terrain type to check.
@@ -225,7 +226,6 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: Item[]): number;
     copyProperties(item: Item, item2: Item): void;
-    getPlayerFromInventoryContainer(island: Island, containable: IContainable): Player | undefined;
     getCraftQualityBonus(item: Item, required?: boolean): number;
     /**
      * Checks if the item type or item is filtered from inventory/crafting/container dialogs.
@@ -245,7 +245,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     /**
      * Note: don't print items to the console because the console will hold the item indefinitely
      */
-    loadReference(container: IContainer): boolean;
+    loadReference(container: IContainer, loadChildReferences?: boolean): boolean;
     private removeFromContainerInternal;
     private updateUiOnItemRemove;
     private getCraftTierBonus;

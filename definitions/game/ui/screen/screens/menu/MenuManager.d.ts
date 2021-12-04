@@ -8,11 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import EventEmitter from "event/EventEmitter";
 import type Screen from "ui/screen/Screen";
 import { MenuId } from "ui/screen/screens/menu/component/IMenu";
 import Menu from "ui/screen/screens/menu/component/Menu";
 import type { MenuById } from "ui/screen/screens/menu/MenuMap";
-export default class MenuManager {
+export interface IMenuManagerEvents {
+    init(menu: Menu): any;
+    show(menu: Menu): any;
+    hide(menu: Menu): any;
+}
+export default class MenuManager extends EventEmitter.Host<IMenuManagerEvents> {
     allowNoMenus: boolean;
     all: Record<number, Menu>;
     chain: Menu[];
@@ -39,4 +45,8 @@ export default class MenuManager {
      * Sets the given menu to be the new top menu. (Removes super-menus, keeps sub-menus)
      */
     setTop(menu: Menu): this;
+    /**
+     * Returns a promise that resolves when the given screen is shown.
+     */
+    await<MENU extends MenuId>(menuId: MENU): Promise<MenuById[MENU]>;
 }

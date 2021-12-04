@@ -80,6 +80,7 @@ export default class CanvasDialog extends Dialog {
     protected buttonSurface: Component<HTMLElement>;
     protected drawer: Component<HTMLElement>;
     constructor(id: DialogId);
+    protected onCanvasDialogRemove(): void;
     setZoomLevels(levels: Iterable<number>): this;
     get isHovering(): boolean;
     getMousePosition(): Vector2;
@@ -99,6 +100,7 @@ export default class CanvasDialog extends Dialog {
     private dragStart;
     private drag;
     private dragEnd;
+    private removeDragEventListeners;
     protected onCanvasClick(): void;
     private getAbsoluteMousePosition;
     protected rotateClockwise(): void;

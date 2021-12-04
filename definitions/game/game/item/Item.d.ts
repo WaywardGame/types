@@ -24,7 +24,7 @@ import type { IObject, IObjectOptions } from "game/IObject";
 import { Quality } from "game/IObject";
 import type { IslandId } from "game/island/IIsland";
 import type { ContainerReference, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemDisassembleResult, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions } from "game/item/IItem";
-import { BookType, ItemType, SYMBOL_CONTAINER_CACHED_REFERENCE } from "game/item/IItem";
+import { ItemWeightChange, BookType, ItemType, SYMBOL_CONTAINER_CACHED_REFERENCE } from "game/item/IItem";
 import type { IPlaceOnTileOptions } from "game/item/IItemManager";
 import ItemMapManager from "game/item/ItemMapManager";
 import type { IHasMagic, MagicalSubPropertySubTypes } from "game/magic/MagicalPropertyManager";
@@ -170,6 +170,11 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     clearQuickSlot(): void;
     isDecayed(): boolean;
     changeInto(type: ItemType, disableNotify?: boolean, emitTransformation?: boolean): void;
+    /**
+     * Verifies an item has a proper weight combined with its magical item weight (featherweight) property and changes it if not.
+     * @returns A type of change via ItemWeightChange for showing a new magical property was added or a new magical weight was added. If no change happened, it will return undefined.
+     */
+    verifyMagicalItemWeight(): ItemWeightChange | undefined;
     /**
      * Returns and item based on returnOnUseAndDecay.
      * @param disableNotify Set to true if no notification should be shown for the new item above the player.
