@@ -69,16 +69,17 @@ export declare enum LogSource {
     TemperatureManager = 56,
     TileEventManager = 57,
     TileUpdate = 58,
-    Trello = 59,
-    Ui = 60,
-    Utilities = 61,
-    WebAssembly = 62,
-    WebGlContext = 63,
-    WebRTCConnection = 64,
-    WebSocketConnection = 65,
-    World = 66,
-    WorldLayerRenderer = 67,
-    WorldRenderer = 68
+    Timer = 59,
+    Trello = 60,
+    Ui = 61,
+    Utilities = 62,
+    WebAssembly = 63,
+    WebGlContext = 64,
+    WebRTCConnection = 65,
+    WebSocketConnection = 66,
+    World = 67,
+    WorldLayerRenderer = 68,
+    WorldRenderer = 69
 }
 export declare enum LogLineType {
     Debug = 0,

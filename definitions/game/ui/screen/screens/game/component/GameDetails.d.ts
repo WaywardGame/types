@@ -26,6 +26,7 @@ export declare class GameDetails extends Component implements IGameIconsHost, IG
     readonly gameModifiers: GameModifiers;
     readonly gameIcons: GameIcons;
     questsWrapper?: Component;
+    private refreshGameIconsTimeout?;
     private steamworksFriends;
     constructor(island: Island);
     lockHidden(): this;

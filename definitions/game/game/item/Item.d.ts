@@ -92,7 +92,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     used?: IItemUsed;
     weight: number;
     weightFraction?: number;
-    quickSlot: number | undefined;
+    quickSlot: number[] | undefined;
     magic: MagicalPropertyManager;
     map: ItemMapManager;
     islandId: IslandId;

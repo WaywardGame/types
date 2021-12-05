@@ -165,7 +165,7 @@ export default class InGameScreen extends BaseScreen {
     setQuickSlotByContextAction(quickSlot: number, action: IContextMenuAction): void;
     addItemToFreeQuickSlot(itemId: number): boolean;
     clearQuickSlot(quickSlot: number, internal?: boolean): void;
-    removeItemFromQuickSlot(itemId?: number, skipSync?: boolean): void;
+    removeItemFromQuickSlot(quickSlot: number, itemId?: number, skipSync?: boolean): void;
     setItemQuickslot(item: Item, quickSlot: number | undefined): void;
     updateQuickSlotItem(quickSlot: number): boolean;
     onUpdateQuickSlotsOrEquips(): void;
