@@ -31,7 +31,8 @@
             "DOM.Iterable",
             "ScriptHost",
             "ES2019",
-            "ES2020.String"
+            "ES2020.String",
+            "ES2021.WeakRef"
         ]
     }
 }

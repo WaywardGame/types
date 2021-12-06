@@ -274,6 +274,11 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @returns The maximum reinforcement of the item as a number.
      */
     getMaxReinforcement(maxDurability: number, actionTier: number): number;
+    /**
+     * Check if an item will break on damage.
+     * @returns True or false if the item will be broken when being damaged.
+     */
+    willBreakOnDamage(actionType?: ActionType): boolean;
     onUnserialized(): void;
     private setupDurabilityHandlers;
     private checkIfItemsMatch;

@@ -21,7 +21,7 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     readonly id: number;
     readonly worldRenderer: WorldRenderer;
     private fadeInTime;
-    private thumbnailResolve?;
+    private thumbnailResolve;
     private ambientLightLevelCache;
     private updateRendering;
     private animationTimer;

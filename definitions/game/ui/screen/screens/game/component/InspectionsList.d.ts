@@ -12,9 +12,11 @@ import type { Events, IEventEmitter } from "event/EventEmitter";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import type { InspectType } from "game/inspection/IInspection";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
+import type Inspection from "game/inspection/Inspection";
 import type InspectionsHandler from "game/inspection/InspectionsHandler";
 import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
+import type HashSet from "utilities/collection/set/HashSet";
 export interface ITileInspectionsEvents extends Events<Component> {
     refreshed(isValid?: boolean): any;
     updateInspectTypeFilter(): any;
@@ -26,6 +28,7 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     private readonly paragraphInspectionsInvalid;
     private inspectTypeFilter;
     protected inspectionsHandler?: InspectionsHandler;
+    protected inspectionsHandlerUpdatedInspectionsCallback?: (_: any, inspectType: InspectType, inspections: HashSet<Inspection<any>>, oldInspections: HashSet<Inspection<any>> | undefined) => Promise<void>;
     private displayLevel;
     private refreshingId?;
     private readonly inspectTypeWrappers;
@@ -38,6 +41,7 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     protected abstract initializeInspections(): INSPECTIONS_HANDLER | undefined;
     isValid?(): boolean;
     protected getInvalidTranslation?(): TranslationGenerator | undefined;
+    private deregisterInspectionsHandler;
     private refreshInspectionsOfType;
     private initializeTooltipSection;
 }

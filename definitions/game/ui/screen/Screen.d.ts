@@ -31,13 +31,14 @@ export default abstract class Screen extends Component {
     log: Log;
     private contextMenu?;
     private mouse;
-    get background(): Background;
-    set background(background: Background);
     readonly menus: MenuManager;
     dialogs: DialogManager;
     visibleDialogs: IDialogStates;
     constructor(type: ScreenId);
     remove(): this;
+    getBackground(): Background;
+    setBackground(background: Background): this;
+    removeBackground(): this;
     /**
      * Remove the context menu from this element
      */

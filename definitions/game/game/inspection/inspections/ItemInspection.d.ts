@@ -32,7 +32,7 @@ export default class ItemInspection extends Inspection<ItemType> {
     static handles(type: InspectType, item: unknown): any;
     private static readonly itemTypeHandles;
     private static readonly dismantleHandles;
-    readonly item?: Item;
+    readonly item?: WeakRef<Item> | undefined;
     private readonly description?;
     private readonly isDismantle;
     private inspectorPosition;
