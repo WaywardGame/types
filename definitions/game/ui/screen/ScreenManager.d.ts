@@ -90,6 +90,7 @@ export default class ScreenManager extends EventEmitter.Host<IScreenManagerEvent
     private hideAndRemove;
     /**
      * Removes a screen, or does nothing if the given screen is not initialized.
+     * Note: "hide" event is always emitted before remove since this is only called from hideAndRemove
      */
     private remove;
 }

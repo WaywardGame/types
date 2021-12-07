@@ -32,6 +32,7 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     private displayLevel;
     private refreshingId?;
     private readonly inspectTypeWrappers;
+    private readonly previouslyRefreshed;
     constructor(context: InfoProviderContext);
     setInspectTypeFilter(filter?: (inspectType: InspectType) => boolean): this;
     refreshInspectTypeFilter(): this;

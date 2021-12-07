@@ -364,7 +364,6 @@ export declare enum ContainerReferenceType {
 }
 export interface IBaseContainerReference {
     crt: ContainerReferenceType;
-    ii?: IslandId;
     /**
      * Legacy, don't use this
      * @deprecated
