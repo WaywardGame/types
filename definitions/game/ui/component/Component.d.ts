@@ -186,7 +186,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     /**
      * Returns the index of this component amongst its sibling nodes. If it has no parent, it returns `undefined`.
      */
-    getIndex(): number | undefined;
+    getIndex(elementsOnly?: boolean): number | undefined;
     /**
      * Returns whether this component contains the given element.
      */

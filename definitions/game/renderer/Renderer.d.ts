@@ -27,6 +27,7 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     private animationTimer;
     private renderingEnabled;
     private readonly context;
+    private readonly gameRenderLoopWeak;
     /**
      * Creates a WebGl context that can be used for rendering the game
      * @param canvas The html canvas
@@ -36,7 +37,7 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
      */
     static createWebGlContext(canvas: HTMLCanvasElement, desiredWebGlVersion?: number, desiredPowerPreference?: WebGLPowerPreference): Promise<WebGlContext>;
     constructor(webGlContext: WebGlContext, origin: IRendererOrigin);
-    delete(): void;
+    delete(): Promise<void>;
     get fieldOfView(): import("./fieldOfView/FieldOfView").default;
     get notifier(): import("./notifier/Notifier").default;
     get particle(): import("./particle/Particle").default;
@@ -53,13 +54,8 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     getCameraPosition(): IVector2;
     getExactCameraPosition(): Vector2;
     createFadeIn(duration?: number): void;
-    getFadeInProgress(timeStamp: number): number;
     getBlackness(timeStamp: number): number;
     updateRender(source: RenderSource, flag: UpdateRenderFlag): void;
-    hasRenderFlag(flag: UpdateRenderFlag): boolean;
-    clearRenderFlag(flag: UpdateRenderFlag): void;
-    requestAnimationFrame(_source: RenderSource): void;
-    cancelAnimationFrame(): void;
     /**
      * Note: Don't inject here. This gets called ten million times. If you want to override this functionality,
      * use `calculateAmbientLightLevel`
@@ -71,11 +67,16 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     update(timeStamp: number): void;
     computeSpritesInViewport(): void;
     computeSpritesInViewportImmediately(): void;
+    private getFadeInProgress;
+    private hasRenderFlag;
+    private clearRenderFlag;
+    private requestAnimationFrame;
+    private cancelAnimationFrame;
     /**
      * Game render loop
      * Not executed for the host in dedicated servers
      */
-    gameRenderLoop: (timeStamp: number) => void;
-    render(timeStamp: number, renderPosition: IVector2): void;
+    private readonly gameRenderLoop;
+    private render;
     private shouldUpdateWorldRender;
 }

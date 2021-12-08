@@ -10,11 +10,12 @@
  */
 import type Island from "game/island/Island";
 import type { ContainerReference, IContainable } from "game/item/IItem";
+import { ContainerReferenceSource } from "game/item/IItemManager";
 declare module ItemReferenceManager {
     /**
      * Don't use this
      */
-    function getContainerReferenceInIsland(island: Island, containable: IContainable | undefined, showWarnings?: boolean): ContainerReference;
+    function getContainerReferenceInIsland(island: Island, containable: IContainable | undefined, source?: ContainerReferenceSource): ContainerReference;
     function derefenceContainerReference(containerRef: ContainerReference, island?: Island, showWarnings?: boolean): object | undefined;
 }
 export default ItemReferenceManager;

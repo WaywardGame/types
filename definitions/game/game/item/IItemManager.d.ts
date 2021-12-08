@@ -54,3 +54,18 @@ export interface IPlaceOnTileOptions {
     skipMessage?: boolean;
     skipTileUpdate?: boolean;
 }
+export declare enum ContainerReferenceSource {
+    ContainerWeightReduction = 0,
+    GetContainerId = 1,
+    GetPoint = 2,
+    GetWeightCapacity = 3,
+    HashContainer = 4,
+    MoveItem = 5,
+    OpenContainer = 6,
+    OriginalContainerId = 7,
+    OriginalContainerId2 = 8,
+    ResolveContainer = 9,
+    ScheduleContainerInvalidation = 10,
+    Serializer = 11,
+    WriteContainer = 12
+}

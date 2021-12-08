@@ -76,7 +76,7 @@ export default class InGameScreen extends BaseScreen {
     private actionsMenuOpen;
     private autoActionsMenuOpen;
     private actionsMenuTileOverlay;
-    private actionsMenuCentered;
+    actionsMenuCentered: boolean;
     private activeContainer;
     private multipleContainersOpened;
     private contextMenuBindPressed;
@@ -238,6 +238,8 @@ export default class InGameScreen extends BaseScreen {
     onQuickSlotToggle(api: IBindHandlerApi): boolean;
     onQuickSlot(api: IBindHandlerApi): boolean;
     onQuickSlotClear(api: IBindHandlerApi): boolean;
+    protected onQuickSlotBindAction(api: IBindHandlerApi): boolean;
+    protected onQuickSlotBindItemAction(api: IBindHandlerApi): boolean;
     onDropItem(api: IBindHandlerApi): boolean;
     onReleaseDrop(): void;
     onMenuCancel(): boolean;

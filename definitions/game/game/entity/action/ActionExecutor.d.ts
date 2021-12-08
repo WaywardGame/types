@@ -50,6 +50,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private shouldSkipConfirmation;
     private readonly privateStore;
     private updateTablesAndWeight;
+    private deferUpdateTables;
     private staminaReduction?;
     private reputationChange;
     private milestone?;
@@ -70,7 +71,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setPassTurn(turnType?: TurnType): this;
     setUpdateView(updateFov?: boolean): this;
     setUpdateRender(): this;
-    setUpdateTablesAndWeight(): this;
+    setUpdateTablesAndWeight(defer?: boolean): this;
     setStaminaReduction(reduction?: SkillType, actionTier?: number): this;
     setReputationChange(amount: number): this;
     addSkillGains(...skills: Array<[SkillType, number?, number?, true?]>): this;

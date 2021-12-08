@@ -32,5 +32,4 @@ export interface IMenuEvents extends Events<Component> {
     goBackFrom(): any;
     cancelBind(): false | void;
     enterBind(): any;
-    preShowAsync(): any;
 }

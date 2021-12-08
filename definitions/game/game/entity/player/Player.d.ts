@@ -171,6 +171,7 @@ export default class Player extends Human implements IUnserializedCallback {
      */
     setZ(z: number, effects?: boolean): void;
     isGhost(): boolean;
+    isDead(): boolean;
     /**
      * Returns true if this is the special dedicated server player
      */

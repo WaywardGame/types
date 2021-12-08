@@ -19,7 +19,7 @@ export default class NewsMenu extends Menu {
     private static hasCachedNews;
     private readonly unableToLoad;
     constructor();
-    protected onBeforeShow(): Promise<void>;
+    protected preShow(): Promise<void>;
     private refreshNews;
     private initialiseArticle;
 }

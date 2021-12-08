@@ -62,6 +62,7 @@ export default class GameScreen extends Screen {
     private showIslandIntro;
     onGameTickEnd(game: Game, tickFlag: TickFlag): void;
     private refreshGhostState;
+    private refreshRespawnGhostState;
     onOpenBook(human: Human, book: BookType): void;
     protected onReadMap1(map: DrawnMap, item: Item, reader: Human): void;
     protected onSailOffMapEdge(player: Player, direction: Direction): void;

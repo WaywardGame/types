@@ -20,7 +20,7 @@ export default class ChangelogMenu extends Menu {
     private versions;
     constructor();
     setDefaultVersion(version: Partial<IVersionInfo>): this;
-    protected onBeforeShow(): Promise<void>;
+    protected preShow(): Promise<void>;
     protected highlightVisibleTabs(): void;
     private refresh;
     private showVersion;

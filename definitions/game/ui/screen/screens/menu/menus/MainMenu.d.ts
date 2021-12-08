@@ -33,7 +33,7 @@ export default class MainMenu extends Menu {
     private aboutMenu;
     private newsMenu;
     constructor();
-    protected onBeforeShow(): Promise<void>;
+    protected preShow(): Promise<void>;
     private initContinueNewGame;
     private updateNewsButton;
     protected onModsSetup(): void;

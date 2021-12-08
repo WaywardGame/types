@@ -15,5 +15,5 @@ export default class UiData {
     set(id: string | number, key: string, value: any): void;
     has(id: string | number, key: string): boolean;
     update(id: string | number, key: string): void;
-    private sendUpdate;
+    private sendUpdates;
 }

@@ -29,14 +29,15 @@ export default class MenuManager extends EventEmitter.Host<IMenuManagerEvents> {
      * Returns the visible menu (top of the chain)
      */
     get visible(): Menu | undefined;
-    show<MENU extends Menu | MenuId>(menu: MENU, menuInitializer?: (menu: MENU extends MenuId ? MenuById[MENU] : MENU) => any): this;
-    back(): this;
-    backToFirst(): this;
+    show<MENU extends Menu | MenuId>(menu: MENU, menuInitializer?: (menu: MENU extends MenuId ? MenuById[MENU] : MENU) => any): void | Promise<void>;
+    back(): void | Promise<void>;
+    backToFirst(): void | Promise<void>;
     /**
      * Gets the menu by the given ID, initializing it if it does not already exist.
      */
     get<ID extends MenuId>(menuId: ID): MenuById[ID];
     removeFromChain(menu: Menu): this;
+    clearChain(): this;
     /**
      * Sets the visible menu to be the new top menu. (Removes super-menus, keeps sub-menus)
      */

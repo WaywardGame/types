@@ -29,7 +29,7 @@ export declare enum MenuBarButtonType {
     Equipment = 11,
     Skills = 12,
     Islands = 13,
-    AutoActions = 14
+    ActionsItems = 14
 }
 export declare const DEFAULT_MENU_BAR_BUTTON_ORDER: {
     0: number;

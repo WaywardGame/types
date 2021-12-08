@@ -75,6 +75,7 @@ export default class Messages extends QuadrantComponent {
     onReadNote(player: Player, id: number): void;
     onFocusChat(): boolean;
     getDefaultFilterName(filter: MessageFilterDefault): string;
+    private appended;
     protected onAppend(): void;
     protected onChangeQuadrant(): void;
     /**

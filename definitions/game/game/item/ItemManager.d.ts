@@ -18,7 +18,7 @@ import { Quality } from "game/IObject";
 import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent } from "game/item/IItem";
 import { ItemType, ItemTypeGroup } from "game/item/IItem";
 import type { IAddToContainerOptions, IRequirementInfo } from "game/item/IItemManager";
-import { CraftStatus, WeightType } from "game/item/IItemManager";
+import { CraftStatus, WeightType, ContainerReferenceSource } from "game/item/IItemManager";
 import Item from "game/item/Item";
 import type ItemRecipeRequirementChecker from "game/item/ItemRecipeRequirementChecker";
 import { ObjectManager } from "game/ObjectManager";
@@ -111,7 +111,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     load(): void;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
     resolveContainer(container?: IContainer): Doodad | Item | Player | NPC | IContainer | ITile | undefined;
-    getContainerReference(containable: IContainable | undefined, showWarnings?: boolean): ContainerReference;
+    getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
     hashContainer(containable: IContainable): string;
     hashContainerReference(containerReference: ContainerReference): string;

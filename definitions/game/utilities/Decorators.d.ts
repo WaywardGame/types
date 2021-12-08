@@ -25,6 +25,7 @@ export declare function Final<T extends AnyFunction>(target: any, key: string, d
  * 3. If the method was not called after `ms`, *actually* call the method.
  *
  * WARNING: This also binds the method to the host, a la `@Bound`. Do not use both decorators.
+ * WARNING 2: Only the arguments of the last call are passed along!!
  */
 export declare function Debounce(time: number, initial?: boolean, returnIfCancelled?: (...args: any[]) => any): (target: any, key: any, descriptor: any) => {
     configurable: boolean;

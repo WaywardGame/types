@@ -33,7 +33,14 @@ export default class Menu extends Component {
     setTitle(initializer: (title: Heading) => Heading): this;
     setDescription(initializer: (title: Text) => Text): this;
     setIsSubmenu(submenu?: boolean): this;
+    protected preShow?(): Promise<void>;
+    /**
+     * @deprecated Use Menu.showMenu()
+     */
     show(): this;
+    private willShow;
+    showMenu(): Promise<void> | void;
+    hide(): this;
     scrollToTop(): void;
     scrollToTabSection(tabId: string | number): this;
     clearTabs(): void;

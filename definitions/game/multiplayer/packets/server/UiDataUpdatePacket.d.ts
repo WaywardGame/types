@@ -11,8 +11,7 @@
 import type Player from "game/entity/player/Player";
 import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServerPacket";
 export default class UiDataUpdatePacket extends PlayerTargetedServerPacket {
-    static create(player: Player, hostId: string | number, updates: Record<string, any>): UiDataUpdatePacket;
-    hostId: string | number;
-    updates: any;
+    static create(player: Player, updates: Map<string | number, Record<string, any>>): UiDataUpdatePacket;
+    updates: Map<string | number, Record<string, any>>;
     process(): void;
 }

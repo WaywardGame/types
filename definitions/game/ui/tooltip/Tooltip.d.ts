@@ -35,7 +35,7 @@ export default class Tooltip extends Component {
      * Sets the max width of this tooltip.
      * @param maxWidth The max-width of the tooltip is this value * ui scale.
      */
-    setMaxWidth(maxWidth?: number): this;
+    setMaxWidth(maxWidth?: number | `${number}vw`): this;
     addText(initializer: (text: Text) => any): this;
     addText<TEXT extends Text>(initializer: (text: Text) => any, cls?: Class<TEXT>): this;
     addHeading(initializer: (text: Text) => any): this;
