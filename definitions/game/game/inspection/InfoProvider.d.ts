@@ -22,9 +22,13 @@ export interface IInfoProviderEvents {
      */
     init(component: Component): any;
     /**
-     * Emitted when the info provider finishes initializing
+     * Emitted when the info provider finishes initializing (will still be called when it cancels initialization)
      */
     initDone(): any;
+    /**
+     * Emitted when the info provider finishes initializing its content (does not get called if initialization is cancelled)
+     */
+    initContent(component: Component): any;
     /**
      * Should be emitted when the info provider skipped initializing
      */

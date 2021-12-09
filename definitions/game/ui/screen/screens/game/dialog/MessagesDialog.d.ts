@@ -11,6 +11,7 @@
 import Dialog from "ui/screen/screens/game/component/Dialog";
 export default class MessagesDialog extends Dialog {
     constructor();
+    protected onAppend2(): void;
     protected willRemove(): void;
     private onFocus;
     private onBlur;

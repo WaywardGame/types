@@ -53,6 +53,6 @@ export default class PlayerManager extends EntityManager<Player> {
      * Removes and deletes a player.
      * Use with caution!
      */
-    delete(player: Player): void;
+    permanentlyDelete(player: Player): void;
     private removeAndFixIds;
 }

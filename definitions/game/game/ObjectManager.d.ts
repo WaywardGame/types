@@ -16,6 +16,10 @@ export declare abstract class ObjectManager<ObjectType extends StringableObject,
     protected readonly island: Island;
     protected readonly objects: SaferArray<ObjectType>;
     constructor(island: Island, objects?: SaferArray<ObjectType>);
+    /**
+     * Called when this object manager is not used anymore (after it was saved!)
+     */
+    delete(): void;
     onUnserialized(): void;
     [Symbol.iterator](): IterableIterator<ObjectType | undefined>;
     get length(): number;

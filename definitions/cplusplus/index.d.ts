@@ -108,6 +108,7 @@ export interface IKDTree {
     nearestPoints(x: number, y: number): Array<{
         x: number;
         y: number;
+        distance: number;
     }>;
     delete(): void;
 }

@@ -294,9 +294,11 @@ export declare class Header extends Handle implements IRefreshable {
     event: IEventEmitter<this, IHeaderEvents>;
     readonly backButton: Button;
     readonly optionsButton: Button;
+    readonly closeButton: Button;
     readonly text: Text;
     constructor();
     setText(text: TranslationGenerator): void;
     refresh(): this;
+    setCloseIcon(icon?: "minimize" | "close"): this;
 }
 export {};

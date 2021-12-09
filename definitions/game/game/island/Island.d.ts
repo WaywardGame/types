@@ -132,6 +132,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     unload(): void;
     delete(): void;
+    private deleteIfDeserialized;
     private fastForward;
     hydrateFromOldGame(oldGame: IGameOld): void;
     findUnusedId<T extends object>(creationId: CreationId, things: ObjectManager<T, any>): number;

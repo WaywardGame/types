@@ -14,15 +14,23 @@ import type Tooltip from "ui/tooltip/Tooltip";
 import type Vector2 from "utilities/math/Vector2";
 export default abstract class InspectionsTooltipHandler<INSPECTIONS_LIST extends InspectionsList> {
     protected current: {
-        initialized: boolean;
+        initialized: boolean | Promise<any>;
         tooltip: Tooltip;
         inspectionsList: INSPECTIONS_LIST;
         informationGuide?: Text;
         showExtraInfo?: Text;
+        removed: boolean;
     } | undefined;
     private lastMousePosition?;
     initializeTooltip(tooltip: Tooltip): Promise<void>;
-    remove(): void;
+    remove(tooltip?: {
+        initialized: boolean | Promise<any>;
+        tooltip: Tooltip;
+        inspectionsList: INSPECTIONS_LIST;
+        informationGuide?: Text | undefined;
+        showExtraInfo?: Text | undefined;
+        removed: boolean;
+    } | undefined): Promise<void>;
     protected abstract initializeInspections(): INSPECTIONS_LIST | undefined;
     protected onUpdateTooltipPosition(position: Vector2): void;
     protected getTooltipClass(): string[];

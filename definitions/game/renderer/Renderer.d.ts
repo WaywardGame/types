@@ -27,7 +27,6 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     private animationTimer;
     private renderingEnabled;
     private readonly context;
-    private readonly gameRenderLoopWeak;
     /**
      * Creates a WebGl context that can be used for rendering the game
      * @param canvas The html canvas
@@ -76,7 +75,7 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
      * Game render loop
      * Not executed for the host in dedicated servers
      */
-    private readonly gameRenderLoop;
+    protected gameRenderLoop: (timeStamp: number) => void;
     private render;
     private shouldUpdateWorldRender;
 }
