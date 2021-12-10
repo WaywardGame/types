@@ -50,6 +50,7 @@ export interface IAddToContainerOptions {
     skipTileUpdate?: boolean;
 }
 export interface IPlaceOnTileOptions {
+    movingMultiple?: boolean;
     force?: boolean;
     skipMessage?: boolean;
     skipTileUpdate?: boolean;

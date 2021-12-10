@@ -188,7 +188,8 @@ export interface IActionApi<E extends Entity = Entity> {
     setPassTurn(turnType?: TurnType): this;
     setUpdateView(updateFov?: boolean): this;
     setUpdateRender(): this;
-    setUpdateTablesAndWeight(defer?: boolean): this;
+    setUpdateTablesAndWeight(): this;
+    setUpdateWeight(): this;
     setStaminaReduction(skill?: SkillType, actionTier?: number): this;
     addSkillGains(...skills: Array<[skill: SkillType, multiplier?: number, actionTier?: number, bypass?: true]>): this;
     addSkillGains(skill: SkillType, multiplier?: number, actionTier?: number, bypass?: true): this;

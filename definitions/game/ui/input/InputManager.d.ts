@@ -57,7 +57,7 @@ export declare class GlobalMouseInfo extends EventEmitter.Host<IGlobalMouseInfoE
      */
     get targetElement(): HTMLElement | undefined;
     /**
-     * Forces a target update. Don't call this unless you absolutely have to, it's a perf hog.
+     * Forces a target update. Use as much as you want now ;)
      */
     updateTarget(): void;
     update(evt: Event & Partial<MouseEvent> & Partial<TouchEvent>): void;

@@ -41,7 +41,7 @@ declare class ContextMenu<O extends number | string | symbol = number | string |
     disableOptions(...options: ArrayOfIterablesOr<O>): this;
     removeOptions(...options: ArrayOfIterablesOr<O>): this;
     setPosition(): this;
-    setPosition(x: number, y: number, right?: true): this;
+    setPosition(x: number, y: number, right?: true, mousePaddingLeft?: false): this;
     hideAndRemove(): Promise<void>;
     private getDescription;
 }

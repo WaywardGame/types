@@ -41,6 +41,7 @@ export default class Menu extends Component {
     private willShow;
     showMenu(): Promise<void> | void;
     hide(): this;
+    setSectionsForcedOpen(forcedOpen?: boolean): this;
     scrollToTop(): void;
     scrollToTabSection(tabId: string | number): this;
     clearTabs(): void;
@@ -81,6 +82,7 @@ export declare class MenuSection extends Component {
     setDescription(initializer: (description: Paragraph) => Paragraph): this;
     addContent(...content: ArrayOfIterablesOr<Component | undefined>): this;
     dumpContent(): this;
+    setToggle(): this;
 }
 export declare class BackButton extends Button {
     constructor();

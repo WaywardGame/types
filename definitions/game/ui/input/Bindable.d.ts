@@ -140,8 +140,11 @@ declare enum Bindable {
 export default Bindable;
 export declare enum BindableType {
     Game = 0,
-    Dialog = 1,
-    Menu = 2,
-    Developer = 3,
-    Mod = 4
+    GameItem = 1,
+    GameQuickSlot = 2,
+    GameContextMenu = 3,
+    Dialog = 4,
+    Menu = 5,
+    Developer = 6,
+    Mod = 7
 }
