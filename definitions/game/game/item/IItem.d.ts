@@ -1082,7 +1082,11 @@ export declare enum ItemType {
     ClothTrousers = 623,
     UnripePapaya = 624,
     Papaya = 625,
-    PapayaSeeds = 626
+    PapayaSeeds = 626,
+    PalapalaiFrond = 627,
+    PalapalaiSpores = 628,
+    ButtonMushroomSpores = 629,
+    FlyAmanitaSpores = 630
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -1178,7 +1182,8 @@ export declare enum ItemTypeGroup {
     Shirt = 890,
     Trousers = 891,
     Spine = 892,
-    All = 893,
-    Last = 894
+    Spores = 893,
+    All = 894,
+    Last = 895
 }
 export {};

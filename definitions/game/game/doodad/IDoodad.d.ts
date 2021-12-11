@@ -77,7 +77,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     isDoor?: boolean;
     isFence?: boolean;
     isFlammable?: boolean;
-    isFungi?: boolean;
+    usesSpores?: boolean;
     isGate?: boolean;
     isTall?: boolean;
     isTrap?: boolean;
@@ -280,13 +280,14 @@ export declare enum DoodadType {
     Tanglehead = 121,
     StrawScarecrow = 122,
     CactusScarecrow = 123,
-    PapayaTree = 124
+    PapayaTree = 124,
+    Palapalai = 125
 }
 /**
  * All tree types that can be spawned during map gen
  * !! This must be kept in sync with the tree list in setupTiles !!
  */
-export declare type MapGenDoodadTrees = DoodadType.MapleTree | DoodadType.CoconutTree | DoodadType.JoshuaTree | DoodadType.SpruceTree | DoodadType.CypressTree | DoodadType.AppleTree | DoodadType.SpruceTreeWithSnow | DoodadType.WhitePineTree | DoodadType.WhitePineTreeWithSnow | DoodadType.PapayaTree;
+export declare type MapGenDoodadTrees = DoodadType.MapleTree | DoodadType.CoconutTree | DoodadType.JoshuaTree | DoodadType.SpruceTree | DoodadType.CypressTree | DoodadType.AppleTree | DoodadType.SpruceTreeWithSnow | DoodadType.WhitePineTree | DoodadType.WhitePineTreeWithSnow | DoodadType.PapayaTree | DoodadType.Palapalai;
 export declare enum DoodadTypeGroup {
     Invalid = 400,
     LitCampfire = 401,
