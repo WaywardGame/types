@@ -1183,7 +1183,8 @@ export declare enum ItemTypeGroup {
     Trousers = 891,
     Spine = 892,
     Spores = 893,
-    All = 894,
-    Last = 895
+    Stick = 894,
+    All = 895,
+    Last = 896
 }
 export {};
