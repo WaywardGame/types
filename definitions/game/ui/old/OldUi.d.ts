@@ -44,7 +44,7 @@ export default class OldUi {
     getInventoryItemOrder(): any[];
     updateItem(item: Item, updateChildren?: boolean): void;
     syncDecayBar(item: Item, syncDamage?: boolean): void;
-    syncItemElements(itemIds: number | number[]): void;
+    syncItemElements(itemIds: number | number[], forceSyncDecay?: boolean): void;
     hideContextMenu(): void;
     hideActionsMenu(): void;
     setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;

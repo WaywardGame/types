@@ -10,7 +10,7 @@
  */
 import type { ISteamNetworkRelayStatus, SteamNetworkingConnectionState } from "@hosts/shared/interfaces";
 import type { IPlayOptions } from "game/IGame";
-import type { ServerInfo } from "multiplayer/IMultiplayer";
+import type { MultiplayerSyncCheckLevel, ServerInfo } from "multiplayer/IMultiplayer";
 export interface ISteamworksEvents {
     overlayShown(): any;
     overlayHidden(): any;
@@ -39,4 +39,5 @@ export interface IDedicatedServerInfo {
     sshUsername?: string;
     sshPassword?: string;
     devMode: boolean;
+    syncChecks: MultiplayerSyncCheckLevel;
 }

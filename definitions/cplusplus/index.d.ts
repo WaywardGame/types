@@ -16,12 +16,13 @@ export interface IWaywardCPP {
     ByteGrid: IByteGridConstructor;
     DijkstraMap: IDijkstraMapConstructor;
     FieldOfView: any;
-    FlowField: any;
+    FlowField: IFlowFieldConstructor;
     Game: IWaywardCPPGame;
     KDTree: IKDTreeConstructor;
     Navigation: INavigationConstructor;
     WorldLayer: IWorldLayerConstructor;
 }
+export declare type IFlowFieldConstructor = new (x: number, y: number, size: number, z: number, moveType: number) => IWaywardCPPFlowField;
 export declare type IByteGridConstructor = new (width: number, height: number) => IByteGrid;
 export declare type IBitGridConstructor = new (count: number) => IBitGrid;
 export declare type IDijkstraMapConstructor = new () => IDijkstraMap;
@@ -30,6 +31,16 @@ export declare type INavigationConstructor = new (autoConnect: boolean) => INavi
 export declare type IWorldLayerConstructor = new (width: number, height: number, level: number) => IWorldLayerCPP;
 export interface IWaywardCPPGame {
     setMapSize(size: number): void;
+}
+export interface IWaywardCPPFlowField {
+    delete(): void;
+    reset(): void;
+    getFlowField(): Uint8Array;
+    getPenaltyField(): Uint8Array;
+    getFieldValue(x: number, y: number): number | undefined;
+    prepareUpdate(): void;
+    addPlayer(x: number, y: number): void;
+    finalizeUpdate(): void;
 }
 export interface IByteGrid {
     width: number;
