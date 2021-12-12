@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ISerializer } from "save/serializer/ISerializer";
-export default class StringTokenizer {
+import type { ISerializer, IUnserializedCallback } from "save/serializer/ISerializer";
+export default class StringTokenizer implements IUnserializedCallback {
     private static readonly targets;
     /**
      * Strings that will be tokenized when serializing (saving)
@@ -26,6 +26,7 @@ export default class StringTokenizer {
      * Token -> String mapping. Used when reading string tokens during deserialization
      */
     private readonly tokenToString;
+    onUnserialized(): void;
     clear(): void;
     /**
      * Writes the token for the string if it has one
