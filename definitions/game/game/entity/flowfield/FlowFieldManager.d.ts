@@ -24,13 +24,14 @@ export default class FlowFieldManager {
     private _flowFieldPlayers;
     constructor(island: Island, size: number);
     private get flowFieldPlayers();
+    load(): void;
+    unload(): void;
     /**
      * Remove the player from the flow field when they leave the game
      * Using preRemove because we are relying on the player id
      */
     protected onPlayerIdChanged(player: Player, currentId: number, newId: number, isAbsentPlayer: boolean): void;
     protected onMoveToIsland(player: Player, oldIsland: Island): void;
-    delete(): void;
     setDelegate(delegate: DebugRendererDelegate): void;
     getWidth(): number;
     getHeight(): number;

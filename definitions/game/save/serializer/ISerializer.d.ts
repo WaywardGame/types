@@ -35,7 +35,7 @@ export interface ISerializerOptions {
     disableJitDeserialization?: boolean;
     enableDuplicateObjectDetection?: boolean;
     enableTypesStats?: boolean;
-    enableStringTokenization?: boolean;
+    stringTokenizationProperty?: string;
     forceSuccess?: boolean;
     swallowErrors?: boolean;
 }

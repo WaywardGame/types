@@ -50,9 +50,7 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     readonly promptsBridge: PromptsBridge;
     private storage;
     private readonly dataHosts;
-    private hqUnsupportedColors;
     constructor();
-    colorSupportsHQFontRendering(colorID?: string | null): boolean;
     /**
      * @param elements The elements to refresh translations inside
      */
@@ -94,5 +92,4 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     protected onReload(api: IBindHandlerApi): boolean;
     protected onToggleDevTools(): boolean;
     protected onReloadStylesheets(): boolean;
-    private cacheHQUnsupportedColors;
 }

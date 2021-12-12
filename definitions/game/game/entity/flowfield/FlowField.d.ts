@@ -10,8 +10,8 @@
  */
 import { MoveType } from "game/entity/IEntity";
 import type Player from "game/entity/player/Player";
-import type { IPreSerializeCallback, IUnserializedCallback } from "save/serializer/ISerializer";
-export default class FlowField implements IPreSerializeCallback, IUnserializedCallback {
+import type { IPreSerializeCallback } from "save/serializer/ISerializer";
+export default class FlowField implements IPreSerializeCallback {
     readonly x: number;
     readonly y: number;
     readonly z: number;
@@ -25,12 +25,18 @@ export default class FlowField implements IPreSerializeCallback, IUnserializedCa
     constructor(x: number | undefined, y: number, z: number, size: number, moveType: MoveType);
     toString(): string;
     preSerializeObject(): void;
-    onUnserialized(): void;
+    load(): void;
+    unload(): void;
     getZ(): number;
-    delete(): void;
     getHashCodes(): string[];
     getFieldValue(x: number, y: number): number;
     updateField(flowFieldPlayers: Player[]): void;
     resetPenalty(gridIndex: number): void;
     reset(): void;
+    /**
+     * The pointer to the views might change when emscripten grows memory
+     * So we need to refetch it sometimes
+     * The array length is 0 when the view is invalid
+     */
+    private updateViews;
 }

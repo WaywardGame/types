@@ -33,6 +33,7 @@ import type ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import type WebGlContext from "renderer/WebGlContext";
 import ReplayManager from "replay/ReplayManager";
 import type { IOptions } from "save/data/ISaveDataGlobal";
+import type StringTokenizer from "save/serializer/StringTokenizer";
 import ItemStylesheetHandler from "ui/screen/screens/game/util/item/ItemStylesheet";
 import type { IVersionInfo } from "utilities/Version";
 export declare class Game extends EventEmitter.Host<IGameEvents> {
@@ -78,6 +79,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     private queueDedicatedServerFovUpdate?;
     private gameOptionsCached?;
     private synchronizeStateId;
+    protected stringTokenizer: StringTokenizer | undefined;
     initializeRenderer(): void;
     globalSlotReady(): void;
     /**

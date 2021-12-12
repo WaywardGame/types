@@ -91,11 +91,7 @@ declare module TileHelpers {
     /**
      * Gives civilization score based on how much is defined for this tile's terrain.
      */
-    function addCivilizationScore(island: Island, point: IVector3): void;
-    /**
-     * Reduces civilization score based on how much is defined for this tile's terrain.
-     */
-    function reduceCivilizationScore(island: Island, point: IVector3): void;
+    function changeCivilizationScore(island: Island, x: number, y: number, z: number, add: boolean): void;
     /**
      * Check if a tile is a suitable spawn point
      */

@@ -13,7 +13,7 @@ import { SerializerMetadataKey, SavePropertyFlag, Types } from "save/serializer/
 import StringTokenizer from "save/serializer/StringTokenizer";
 export default class Serializer implements ISerializer {
     private readonly options;
-    private readonly stringTokenizer?;
+    stringTokenizer?: StringTokenizer | undefined;
     static convertStringToUint8Array(data: string): Uint8Array;
     private static array;
     private static usingArray;

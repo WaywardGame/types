@@ -17,6 +17,7 @@ export default class StringTokenizer {
     private static readonly tokenizableStrings;
     static registerTarget(target: any): void;
     static initialize(): void;
+    static create(): StringTokenizer;
     /**
      * String -> Token. Used when writing string tokens during serialization
      */
@@ -25,10 +26,7 @@ export default class StringTokenizer {
      * Token -> String mapping. Used when reading string tokens during deserialization
      */
     private readonly tokenToString;
-    /**
-     * Constructs the mappings
-     */
-    constructor();
+    clear(): void;
     /**
      * Writes the token for the string if it has one
      * @param serializer Serializer object

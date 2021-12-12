@@ -264,11 +264,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     /**
      * Gives civilization score based on how much is defined for this doodad.
      */
-    addCivilizationScore(): void;
-    /**
-     * Reduces civilization score based on how much is defined for this doodad.
-     */
-    reduceCivilizationScore(): void;
+    changeCivilizationScore(add: boolean): void;
     /**
      * Decay over time
      */
