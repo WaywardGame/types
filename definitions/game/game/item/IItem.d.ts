@@ -171,6 +171,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      */
     createTileEventOnCraft?: TileEventType;
     showOverHair?: boolean;
+    /**
+     * If set to true, still render the hair under this equipment.
+     */
+    showOnTopOfHair?: boolean;
     hasSleepImage?: boolean;
     /**
      * If set to true, the item will count as something you can start on fire or where fire can spread to.
@@ -1086,7 +1090,9 @@ export declare enum ItemType {
     PalapalaiFrond = 627,
     PalapalaiSpores = 628,
     ButtonMushroomSpores = 629,
-    FlyAmanitaSpores = 630
+    FlyAmanitaSpores = 630,
+    BrambleCrown = 631,
+    DarkBrambleCrown = 632
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

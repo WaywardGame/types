@@ -16,7 +16,7 @@ import type Human from "game/entity/Human";
 import { MoveType } from "game/entity/IEntity";
 import type Player from "game/entity/player/Player";
 import type { ITile } from "game/tile/ITerrain";
-import type Vector3 from "utilities/math/Vector3";
+import Vector3 from "utilities/math/Vector3";
 export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> {
     /**
      * Called when a creature is about to be spawned
@@ -60,6 +60,11 @@ export default class CreatureManager extends EntityManager<Creature> {
     spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean, bypassCreatureLimit?: boolean): Creature | undefined;
     exists(creature: Creature): boolean;
     maybeSpawnClawWorm(target: Human | Creature): void;
+    /**
+     * Maybe spawns a Dryad based on target reputation, plants around target, and chance.
+     * @param target Human that we check around to find a suitable spawn.
+     */
+    maybeSpawnDryad(target: Human): void;
     remove(creature: Creature): void;
     updateAll(realPlayers: Player[]): void;
     /**
