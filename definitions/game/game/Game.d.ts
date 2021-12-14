@@ -145,7 +145,10 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      */
     getGreatestWeaknesses(defense: Defense, damageTypes: DamageType, damage: number): DamageType[];
     updateOption(player: Player | undefined, id: keyof IOptions, value: boolean | number): void;
-    private updateOptionInternal;
+    /**
+     * Do not call this directly. Use updateOption instead
+     */
+    updateOptionInternal(id: keyof IOptions, value: boolean | number, player?: Player): void;
     /**
      * Collection of things to perform on each tick
      */

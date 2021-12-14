@@ -135,7 +135,8 @@ export declare enum ActionType {
     Mine = 100,
     ToggleHitch = 101,
     ToggleDoor = 102,
-    ToggleContainer = 103
+    ToggleContainer = 103,
+    UpdateOption = 104
 }
 export declare enum ActionUsability {
     Paused = 0,

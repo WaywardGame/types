@@ -19,11 +19,13 @@ import type NPC from "game/entity/npc/NPC";
 import type { IDecayTemperatureRange } from "game/IGame";
 import type { Quality } from "game/IObject";
 import type { IContainer, ItemType } from "game/item/IItem";
+import type Item from "game/item/Item";
 import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
 import type { MapTile } from "game/mapping/IMapTile";
 import type { TileEventType } from "game/tile/ITileEvent";
 import type { ILeftOverTile } from "game/tile/Terrains";
 import type TileEvent from "game/tile/TileEvent";
+import type { ISerializedTranslation } from "language/ITranslation";
 import type { IModdable } from "mod/ModRegistry";
 import type { IRGB } from "utilities/Color";
 import type { IVector3 } from "utilities/math/IVector";
@@ -141,6 +143,10 @@ export interface ITileData {
     meltDecay?: number;
     weight?: number;
     magic?: MagicalPropertyManager;
+    disassembly?: Item[];
+    ownerIdentifier?: string;
+    renamed?: string | ISerializedTranslation | undefined;
+    tradedFrom?: string[];
 }
 export declare type ITileDataOld = Partial<ITileData> & {
     strength?: number;

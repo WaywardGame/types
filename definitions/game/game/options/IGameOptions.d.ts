@@ -73,6 +73,14 @@ export interface IGameOptions {
          * Maximum number of creatures that can spawn in a world
          */
         spawnLimit: number;
+        /**
+         * Multiplier for how much max/min HP bonus is given on each tame
+         */
+        tameHealthMultiplier: number;
+        /**
+         * Multiplier for how long each tame lasts
+         */
+        tameTimeMutiplier: number;
     };
     time: {
         /**
