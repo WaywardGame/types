@@ -183,6 +183,9 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getNPCWithItemInInventory(containable: IContainable): NPC | undefined;
     countItemsInContainer(containers: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: Item): number;
     countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item): number;
+    /**
+     * Get the best tier item
+     */
     getBestSafeItemInContainerByUse(container: IContainer, action: ActionType, allowProtectedItems?: boolean, actionMayDamageItem?: boolean, consumable?: boolean): Item | undefined;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item, allowProtectedItems?: boolean): Item | undefined;
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, allowProtectedItems?: boolean): Item | undefined;
