@@ -146,7 +146,7 @@ export interface IPlayerOptions {
     id?: number;
     identifier?: string;
     absentPlayerIndex?: number;
-    options?: IOptions;
+    options?: Readonly<IOptions>;
     spawnIslandId?: IslandId;
     spawnPosition?: IVector3;
     character: ICharacter;

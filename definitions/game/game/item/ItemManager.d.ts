@@ -183,7 +183,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getNPCWithItemInInventory(containable: IContainable): NPC | undefined;
     countItemsInContainer(containers: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: Item): number;
     countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item): number;
-    getBestSafeItemInContainerByUse(container: IContainer, action: ActionType, allowProtectedItems?: boolean, canDamageItem?: boolean, consumable?: boolean): Item | undefined;
+    getBestSafeItemInContainerByUse(container: IContainer, action: ActionType, allowProtectedItems?: boolean, actionMayDamageItem?: boolean, consumable?: boolean): Item | undefined;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item, allowProtectedItems?: boolean): Item | undefined;
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, allowProtectedItems?: boolean): Item | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, allowProtectedItems?: boolean): Item | undefined;
@@ -198,6 +198,10 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     isContainableInAdjacentContainer(player: Player, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
+    /**
+     * Returns ordered items for the containers
+     * Note: It may return the real containedItems array!
+     */
     getOrderedContainerItems(container: IContainer, allowProtectedItems?: boolean): Item[];
     reduceDismantleWeight(createdItems: Item[], itemWeight: number): void;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup): Translation;

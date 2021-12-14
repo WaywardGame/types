@@ -51,7 +51,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     handToUse: EquipType | undefined;
     inventory: IContainer;
     islandId: IslandId;
-    options: IOptions;
+    options: Readonly<IOptions>;
     readonly equipEffects: Map<EquipEffect, EquipEffects>;
     restData: IRestData | undefined;
     score: number;
