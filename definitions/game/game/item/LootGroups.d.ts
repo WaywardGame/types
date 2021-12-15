@@ -18,8 +18,8 @@ export declare enum LootGroupType {
     Highest = 5,
     Low = 6,
     SeaTreasure = 7,
-    VeryHigh = 8,
-    SeedsSpores = 9
+    SeedsSpores = 8,
+    VeryHigh = 9
 }
 export declare const lootGroup: (ItemType[] | undefined)[];
 export default lootGroup;
