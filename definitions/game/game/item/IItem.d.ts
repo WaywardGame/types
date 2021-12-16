@@ -627,7 +627,7 @@ export declare enum ItemType {
     Offal = 164,
     BoneFragments = 165,
     LitPoleTorch = 166,
-    Cotton = 167,
+    CottonBoll = 167,
     CottonSeeds = 168,
     CottonFabric = 169,
     BonePole = 170,
@@ -1092,7 +1092,8 @@ export declare enum ItemType {
     ButtonMushroomSpores = 629,
     FlyAmanitaSpores = 630,
     BrambleCrown = 631,
-    DarkBrambleCrown = 632
+    DarkBrambleCrown = 632,
+    Cotton = 633
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

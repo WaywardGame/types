@@ -217,6 +217,10 @@ export default class InGameScreen extends BaseScreen {
      * Update the filtered items for each container, to be called when tables are updated. This does not update dismantle or crafting tabs.
      */
     filterContainers(): void;
+    /**
+     * Invalidates and updates mouse targets when crafting/dismantle table updates are called whether or not tables updates are defered.
+     */
+    invalidateTableTargets(): void;
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
     getContainerId(containerElement: JQuery): string;
     sortItems(containerElement: JQuery, sortType: SortType, messageType?: Message, canReverse?: boolean): void;

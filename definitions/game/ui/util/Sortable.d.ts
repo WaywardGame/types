@@ -24,6 +24,8 @@ export default class Sortable {
     get host(): ISortableComponent;
     private readonly draggables;
     constructor(host: ISortableComponent);
+    private sortDelay;
+    setSortDelay(delay: number): this;
     commit(): void;
     private onAddChild;
     private savedPosition?;

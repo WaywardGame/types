@@ -38,7 +38,7 @@ declare module GameOptions {
             };
         };
     }
-    export function upgrade(difficultyOptions: IGameOptions, _version: IVersionInfo): string[];
+    export function upgrade(options: IGameOptions, _version: IVersionInfo): string[];
     export {};
 }
 export default GameOptions;

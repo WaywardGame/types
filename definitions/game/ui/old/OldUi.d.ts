@@ -41,6 +41,7 @@ export default class OldUi {
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     filterContainers(): void;
+    invalidateTableTargets(): void;
     getInventoryItemOrder(): any[];
     updateItem(item: Item, updateChildren?: boolean): void;
     syncDecayBar(item: Item, syncDamage?: boolean): void;

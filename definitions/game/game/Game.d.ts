@@ -50,6 +50,9 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     originalPlayOptions: Partial<IPlayOptions>;
     saveVersion: string;
     upgrades: string[];
+    /**
+     * The version the save was originally created on
+     */
     version: string;
     worldId: string;
     private difficultyOptions;
@@ -72,7 +75,6 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     debugRenderer: ITextureDebugRenderer | undefined;
     webGlContext: WebGlContext | undefined;
     visible: boolean;
-    lastBuildTime: number;
     lastSaveVersion: IVersionInfo;
     saveSize?: string;
     canvas: HTMLCanvasElement | undefined;

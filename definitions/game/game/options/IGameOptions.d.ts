@@ -298,6 +298,10 @@ export interface IGameOptionsSkill {
      * A multiplier for how fast the skill is gained.
      */
     gainMultiplier: number;
+    /**
+     * If set, skill cannot be raised past 100 even with bonuses.
+     */
+    noBonuses: boolean;
 }
 export interface IGameOptionsCreature {
     /**

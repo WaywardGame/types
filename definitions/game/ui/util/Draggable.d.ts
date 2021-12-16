@@ -26,6 +26,8 @@ export default class Draggable {
     private readonly hostRef;
     get host(): IDraggableComponent;
     constructor(host: IDraggableComponent);
+    private delay;
+    setDelay(delay: number): this;
     private dragStart;
     private drag;
     private dragEnd;
