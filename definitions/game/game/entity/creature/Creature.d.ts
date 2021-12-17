@@ -91,11 +91,10 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     increaseWaste(item: Item): void;
     onUnserialized(): void;
     /**
-     * Updates the DoodadOverHidden tile flag if the creature is large
-     * large creatures should render over the doodad over layer
-     * which means we should hide the doodad over layer for doodads on the creature
+     * Updates the DoodadOverHidden tile flag if the creature is large.
+     * Large creatures should render over the doodad over layer, which means we should hide the doodad over layer for doodads on the creatures tile.
      */
-    updateDoodadOverHiddenState(x: number, y: number, z: number, tile: ITile, hidden: boolean): void;
+    updateDoodadOverHiddenState(x: number, y: number, z: number, tile: ITile, shouldBeHidden: boolean): void;
     processAttack(realPlayers: Player[], description: ICreatureDescription, moveType: MoveType, enemy: Player | Creature | undefined): boolean;
     getProducedTemperature(): number | undefined;
     protected getApplicableStatusEffects(): Set<StatusType>;

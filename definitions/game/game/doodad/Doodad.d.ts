@@ -138,6 +138,11 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;
+    /**
+     * Checks if the doodad will be rendered as tall (2 tiles)
+     * @returns True if the doodad is tall
+     */
+    isTall(): boolean;
     canPickup(human: Human): boolean;
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;
