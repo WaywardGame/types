@@ -50,7 +50,7 @@ export default class TileEventManager extends ObjectManager<TileEvent, ITileMana
     /**
      * Gets an array of tile events that have the water property at a given tile.
      * @param tile ITile that you want to look at.
-     * @returns Array of TileEvent or undefined if no tile events have the water property at the given tile.
+     * @returns Array of tile events with water properties or undefined
      */
     getPuddles(tile: ITile): TileEvent[] | undefined;
     canGather(tile: ITile): TileEvent | undefined;

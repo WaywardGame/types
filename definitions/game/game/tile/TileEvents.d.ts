@@ -10,5 +10,5 @@
  */
 import type { ITileEventDescription } from "game/tile/ITileEvent";
 import { TileEventType } from "game/tile/ITileEvent";
-declare const tileEventDescriptions: Descriptions<TileEventType, ITileEventDescription>;
+declare const tileEventDescriptions: OptionalDescriptions<TileEventType, ITileEventDescription>;
 export default tileEventDescriptions;

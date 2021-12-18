@@ -58,7 +58,7 @@ export default class TileEvent extends EventEmitter.Host<ITileEventEvents> imple
     constructor(type?: TileEventType, islandId?: `${number},${number}`, x?: number, y?: number, z?: number);
     get island(): import("../island/Island").default;
     toString(): string;
-    description(): ITileEventDescription;
+    description(): ITileEventDescription | undefined;
     getName(article?: boolean, count?: number): import("../../language/impl/TranslationImpl").default;
     getTile(): ITile;
     getProducedTemperature(): number | undefined;
