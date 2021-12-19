@@ -34,6 +34,10 @@ export interface IGameEvents {
      * @param playedCount The number of times the player has played the game (globally, not per slot)
      */
     play(isLoadingSave: boolean, playedCount: number): any;
+    /**
+     * Called when the local player clicks "explore world as ghost"
+     */
+    exploreAsGhost(): any;
     preSaveGame(saveType: SaveType): any;
     postSaveGame(saveType: SaveType): any;
     /**

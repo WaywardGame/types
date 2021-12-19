@@ -126,7 +126,7 @@ export interface IMultiplayerState {
 }
 export interface IMultiplayerNetworkingOptions {
     matchmakingServer: string;
-    matchmakingServerPort: number;
+    matchmakingServerWebSocketPort: number;
     syncChecks: boolean | MultiplayerSyncCheck[];
     enableSteamNetworkConnections: boolean;
     enableWebRtcConnections: boolean;

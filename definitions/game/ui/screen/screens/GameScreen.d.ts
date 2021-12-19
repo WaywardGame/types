@@ -61,12 +61,23 @@ export default class GameScreen extends Screen {
     onLoadedOnIsland(player: Player, island: Island): void;
     private showIslandIntro;
     onGameTickEnd(game: Game, tickFlag: TickFlag): void;
+    /**
+     * Refreshed death / ghost state stuff
+     */
+    private refreshState;
+    /**
+     * Refreshed ghost/death overlays
+     */
     private refreshGhostState;
-    private refreshRespawnGhostState;
+    /**
+     * Refreshes respawn button state
+     */
+    private refreshRespawnButton;
+    onExploreAsGhost(): void;
     onOpenBook(human: Human, book: BookType): void;
     protected onReadMap1(map: DrawnMap, item: Item, reader: Human): void;
     protected onSailOffMapEdge(player: Player, direction: Direction): void;
-    protected onDie(): void;
+    protected onDie(player: Player, showingGameEndScreen: boolean): void;
     protected onRespawn(): void;
     protected onZoom(api: IBindHandlerApi): boolean;
     protected onInspect(api: IBindHandlerApi): boolean;

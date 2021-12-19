@@ -28,5 +28,13 @@ declare module SaveLoad {
     }): Promise<boolean>;
     function play(options: Partial<IPlayOptions>): Promise<boolean>;
     function playLoadMods(isLoadingSave: boolean, options: Partial<IPlayOptions>): Promise<boolean>;
+    /**
+     * Called from the GameEnd menu
+     */
+    function exploreAsGhost(): void;
+    /**
+     * Called from the GameEnd menu
+     */
+    function respawnInCasualMode(): void;
 }
 export default SaveLoad;

@@ -98,8 +98,9 @@ export interface IPlayerEvents extends Events<Human> {
     shouldDie(): false | void;
     /**
      * Called when the player is killed.
+     * @param showingGameEndScreen True if the game end screen will be shown
      */
-    die(): any;
+    die(showingGameEndScreen: boolean): any;
     /**
      * Called when the player will be respawned. If any handlers return `false` to stop the player from respawning,
      * no further handlers will be called.
