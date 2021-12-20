@@ -1,0 +1,36 @@
+/*!
+ * Copyright 2011-2021 Unlok
+ * https://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * https://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://github.com/WaywardGame/types/wiki
+ */
+import type { ISpriteInfoList } from "resource/ISpriteAtlas";
+import type ISpriteInfo from "renderer/ISpriteInfo";
+export default class SpriteAtlas {
+    attackAnimations: ISpriteInfoList;
+    corpses: ISpriteInfoList;
+    creatures: ISpriteInfoList;
+    immune: ISpriteInfo;
+    items: ISpriteInfoList;
+    itemsEquipped: ISpriteInfoList;
+    itemsSmall: ISpriteInfoList;
+    miss: ISpriteInfo;
+    notifiers: ISpriteInfoList;
+    npcs: ISpriteInfoList;
+    overlay: ISpriteInfoList;
+    playerBody: ISpriteInfo;
+    playerHairstyles: ISpriteInfoList;
+    playerSleeping: ISpriteInfo;
+    shadow: ISpriteInfo;
+    sleeps: ISpriteInfoList;
+    statusEffectIcons: ISpriteInfoList;
+    statusEffectOverlays: ISpriteInfoList;
+    text: ISpriteInfo;
+    tileEvents: ISpriteInfoList;
+    vehicles: ISpriteInfoList;
+    zzz: ISpriteInfo;
+}

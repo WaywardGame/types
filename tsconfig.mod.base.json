@@ -1,0 +1,38 @@
+{
+    "compilerOptions": {
+        "target": "ES2019",
+        "module": "AMD",
+        "composite": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "inlineSourceMap": true,
+        "noImplicitOverride": true,
+        "noUnusedLocals": true,
+        "preserveConstEnums": true,
+        "removeComments": true,
+        "strict": true,
+        "strictPropertyInitialization": false,
+        "moduleResolution": "node",
+        "paths": {
+            "*": [
+                "node_modules/@wayward/types/definitions/game/*"
+            ],
+            "@cplusplus/*": [
+                "node_modules/@wayward/types/definitions/cplusplus/*"
+            ],
+            "@hosts/*": [
+                "node_modules/@wayward/types/definitions/hosts/*"
+            ]
+        },
+        "types": [],
+        "lib": [
+            "WebWorker.ImportScripts",
+            "DOM",
+            "DOM.Iterable",
+            "ScriptHost",
+            "ES2019",
+            "ES2020.String",
+            "ES2021.WeakRef"
+        ]
+    }
+}
