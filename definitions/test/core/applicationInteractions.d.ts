@@ -40,7 +40,7 @@ export default class ApplicationInteractions {
     clickMultiplayer(): Promise<void>;
     clickJoinServer(): Promise<void>;
     clickDailyChallenge(): Promise<void>;
-    clickBack(): Promise<void>;
+    clickBack(timeout?: number): Promise<void>;
     clickButton(name: string, timeout?: number): Promise<void>;
     clickYesIfVisible(): Promise<boolean>;
     clickButtonIfVisible(name: string): Promise<boolean>;

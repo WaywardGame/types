@@ -75,7 +75,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     debugRenderer: ITextureDebugRenderer | undefined;
     webGlContext: WebGlContext | undefined;
     visible: boolean;
-    lastSaveVersion: IVersionInfo;
+    previousSaveVersion: IVersionInfo;
     saveSize?: string;
     canvas: HTMLCanvasElement | undefined;
     private queueDedicatedServerFovUpdate?;
