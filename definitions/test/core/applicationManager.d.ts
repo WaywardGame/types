@@ -51,6 +51,7 @@ export declare class Apps {
     add(app: Application): Application;
     addServer(app: Application): Application;
     addTARS(app: Application): Application;
+    addConnectedClient(app: Application): Application;
     activateTARS(): () => void;
     getTestState(): Promise<ITestState>;
     startAll(): Promise<void>;
@@ -63,6 +64,7 @@ export declare class Apps {
     verifyGameStates(): Promise<void>;
     createMultiplayerGame(gameMode: GameMode): Promise<void>;
     setClientJoinIsland(x: number, y: number): Promise<void>;
+    getServerGameCode(): Promise<string>;
     joinServer(...apps: Application[]): Promise<void>;
     leaveServer(...apps: Application[]): Promise<void>;
     returnToTitleScreen(): Promise<void>;

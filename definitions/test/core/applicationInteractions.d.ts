@@ -25,7 +25,7 @@ export default class ApplicationInteractions {
     readonly isDedicatedServer: boolean;
     private readonly savedStates;
     constructor(additionalArgs: string[], random: Random<SeededGenerator>);
-    waitForInitialStartup(): Promise<void>;
+    waitForInitialStartup(expectedInitialScreen: "title" | "mp_gameplay_modifiers"): Promise<void>;
     waitUntilLoadingIsFinished(): Promise<void>;
     playDedicatedServer(gameMode?: GameMode): Promise<void>;
     playNewGame(options: INewGameOptions): Promise<void>;
