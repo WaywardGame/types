@@ -89,7 +89,14 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     lit?: DoodadType;
     lockedChest?: ILockedChest;
     particles?: IRGB;
+    /**
+     * Works with "PickUpDoodad" action, typically used for doodads that you can "build" like walls, furnaces, etc.
+     */
     pickUp?: ItemType[];
+    /**
+     * Works with "Gather"-based actions.
+     */
+    gatherPickUp?: ILootItem[];
     providesFire?: boolean;
     providesLight?: number;
     reduceDurabilityOnGather?: boolean;
