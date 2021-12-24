@@ -10,7 +10,7 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import EntityManager from "game/entity/EntityManager";
-import type { NPCType } from "game/entity/npc/INPCs";
+import { NPCType } from "game/entity/npc/INPCs";
 import type NPC from "game/entity/npc/NPC";
 export interface INPCManagerEvents extends Events<EntityManager<NPC>> {
     /**

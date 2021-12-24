@@ -27,6 +27,7 @@ import type { IModdable } from "mod/ModRegistry";
 import type { TileLayerType } from "renderer/world/IWorldRenderer";
 import type { IRGB } from "utilities/Color";
 export interface IDoodadOptions extends IObjectOptions {
+    force?: boolean;
     gatherReady?: number;
     stillContainer?: Item;
     gfx?: number;
