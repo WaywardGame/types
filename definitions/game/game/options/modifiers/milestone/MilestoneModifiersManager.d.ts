@@ -13,6 +13,9 @@ import GameplayModifiersManager from "game/options/modifiers/GameplayModifiersMa
 import type MilestoneModifier from "game/options/modifiers/milestone/MilestoneModifier";
 declare class MilestoneModifiersManager extends GameplayModifiersManager<MilestoneModifier> {
     constructor();
+    has(milestone: Milestone): boolean;
+    getUnlocked(): Milestone[];
+    getAll(): Milestone[];
     isGlobal(milestone: Milestone): boolean;
     isNotGlobal(milestone: Milestone): boolean;
     getGroup(milestone: Milestone): import("game/options/modifiers/milestone/MilestoneModifier").MilestoneModifierGroup | undefined;

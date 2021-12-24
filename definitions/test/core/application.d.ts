@@ -57,7 +57,7 @@ export default class Application extends ApplicationInteractions {
     private readonly videoFrames;
     constructor(mochaTestContext: Mocha.Context | ITest, appId: string, paths: IAppPaths, random: Random<SeededGenerator>, options?: IApplicationOptions);
     get waywardLogFilePath(): string;
-    start(): Promise<void>;
+    start(expectedInitialScreen?: "title" | "mp_gameplay_modifiers"): Promise<void>;
     stop(shouldQuitGame?: boolean): Promise<string[]>;
     clearDirectory(directory: string): Promise<void>;
     getApplicationState(): Promise<IApplicationState>;

@@ -27,6 +27,7 @@ import type { IModdable } from "mod/ModRegistry";
 import type { TileLayerType } from "renderer/world/IWorldRenderer";
 import type { IRGB } from "utilities/Color";
 export interface IDoodadOptions extends IObjectOptions {
+    force?: boolean;
     gatherReady?: number;
     stillContainer?: Item;
     gfx?: number;
@@ -89,7 +90,14 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     lit?: DoodadType;
     lockedChest?: ILockedChest;
     particles?: IRGB;
+    /**
+     * Works with "PickUpDoodad" action, typically used for doodads that you can "build" like walls, furnaces, etc.
+     */
     pickUp?: ItemType[];
+    /**
+     * Works with "Gather"-based actions.
+     */
+    gatherPickUp?: ILootItem[];
     providesFire?: boolean;
     providesLight?: number;
     reduceDurabilityOnGather?: boolean;
