@@ -27,7 +27,7 @@ export declare class SharedFileSystemIPCHandler implements IFileSystem {
     setLogsPath(path: string): Promise<void>;
     appendLogFile(message: string): Promise<void>;
     closeLogFile(): Promise<void>;
-    copy(source: string, destination: string, opt: any): Promise<void>;
+    copy(source: string, destination: string, dereference?: boolean, ignoredDirectories?: string[]): Promise<void>;
     emptyDir(destination: string): Promise<void>;
     stat(path: string): Promise<{
         atime: Date;

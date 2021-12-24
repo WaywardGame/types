@@ -15,10 +15,7 @@ export interface IFileSystem {
     addSafePath(path: string): Promise<void>;
     appendLogFile(message: string): Promise<void>;
     closeLogFile(): Promise<void>;
-    copy(source: string, destination: string, opt: {
-        dereference?: boolean;
-        filter?(file: string): boolean;
-    }): Promise<void>;
+    copy(source: string, destination: string, dereference?: boolean, ignoredDirectories?: string[]): Promise<void>;
     emptyDir(destination: string): Promise<void>;
     enableSafePaths?(): Promise<void>;
     mkdir(path: string, opt?: any): Promise<void>;
