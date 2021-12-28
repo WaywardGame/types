@@ -12,3 +12,4 @@ import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
 declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../player/Player").default, void, [(import("../../../item/Item").default | undefined)?]>;
 export default _default;
+export declare function getCoordinatesTranslationArgs(x: number, y: number): any[];
