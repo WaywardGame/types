@@ -279,10 +279,13 @@ export interface IMoveToTileOptions {
     fromPoint?: IVector3;
     toPoint: IVector3;
     toContainer?: IContainer;
+    beforeMovement?: IMoveToTileBeforeMovementOptions;
     afterMovement?: IMoveToTileAfterMovementOptions;
 }
-export interface IMoveToTileAfterMovementOptions {
+export interface IMoveToTileBeforeMovementOptions {
     remove?: boolean;
+}
+export interface IMoveToTileAfterMovementOptions {
     soundEffect?: SfxType;
     particles?: IRGB;
 }

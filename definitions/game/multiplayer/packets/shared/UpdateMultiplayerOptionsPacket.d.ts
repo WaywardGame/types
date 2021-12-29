@@ -12,6 +12,7 @@ import type { IMultiplayerOptions } from "multiplayer/IMultiplayer";
 import SharedPacket from "multiplayer/packets/SharedPacket";
 export default class UpdateMultiplayerOptionsPacket extends SharedPacket {
     options: IMultiplayerOptions;
+    getDebugInfo(): string;
     isAllowedWhenPaused(): boolean;
     process(): void;
 }

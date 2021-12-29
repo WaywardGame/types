@@ -15,6 +15,7 @@ import ServerPacket from "multiplayer/packets/ServerPacket";
  * We can now mark the player as ready
  */
 export default class ReadyPacket extends ServerPacket {
+    getDebugInfo(): string;
     getAllowedStates(): ConnectionState;
     isAllowedWhenPaused(): boolean;
     process(): void;

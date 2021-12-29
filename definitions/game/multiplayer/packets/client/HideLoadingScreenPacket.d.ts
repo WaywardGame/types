@@ -12,6 +12,7 @@ import type { Load } from "game/meta/Loading";
 import ClientPacket from "multiplayer/packets/ClientPacket";
 export default class HideLoadingScreenPacket extends ClientPacket {
     load: Load;
+    getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     process(): void;
 }

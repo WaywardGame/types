@@ -28,11 +28,11 @@ export interface IMultiplayerEvents {
     checkConnection(webRtcWorks: boolean, webSocketWorks: boolean): any;
 }
 export declare enum MultiplayerSyncCheckLevel {
-    None = 0,
-    Normal = 1,
-    Extended = 2,
-    Verbose = 3,
-    All = 4
+    None = "none",
+    Normal = "normal",
+    Extended = "extended",
+    Verbose = "verbose",
+    All = "all"
 }
 export declare enum MultiplayerSyncCheck {
     Action = 0,

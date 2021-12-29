@@ -11,6 +11,7 @@
 import ClientPacket from "multiplayer/packets/ClientPacket";
 export default class SynchronizeGameStatePacket extends ClientPacket {
     serverGameState: Uint8Array;
+    getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     process(): void;
     protected getInitialBufferSize(): number;

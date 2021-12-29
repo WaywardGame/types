@@ -12,6 +12,7 @@ import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServer
 export default class LogsPacket extends PlayerTargetedServerPacket {
     logs: string;
     containsServerGameState: boolean | undefined;
+    getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     process(): void;

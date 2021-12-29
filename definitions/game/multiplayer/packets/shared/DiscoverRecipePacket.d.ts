@@ -14,6 +14,7 @@ export default class DiscoverRecipePacket extends PlayerTargetedSharedPacket {
     recipeType: ItemType;
     newUnlock: boolean;
     unlockTime: number;
+    getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     process(): void;

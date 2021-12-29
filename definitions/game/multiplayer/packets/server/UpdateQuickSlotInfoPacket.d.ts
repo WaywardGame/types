@@ -13,6 +13,7 @@ import type { IQuickSlotInfo } from "ui/old/IOldUi";
 export default class UpdateQuickSlotInfoPacket extends PlayerTargetedServerPacket {
     quickSlot: number;
     quickSlotInfo: IQuickSlotInfo | undefined;
+    getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     process(): void;

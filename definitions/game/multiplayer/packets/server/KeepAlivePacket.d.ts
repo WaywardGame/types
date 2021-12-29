@@ -14,6 +14,7 @@ import ServerPacket from "multiplayer/packets/ServerPacket";
  * If the server hasn't received this message for 15 seconds, the player is disconnected
  */
 export default class KeepAlivePacket extends ServerPacket {
+    getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     process(): void;

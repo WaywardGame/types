@@ -12,6 +12,7 @@ import type { IMovementIntent } from "game/entity/player/IPlayer";
 import PlayerTargetedSharedPacket from "multiplayer/packets/PlayerTargetedSharedPacket";
 export default class UpdateMovementIntentPacket extends PlayerTargetedSharedPacket {
     intent: IMovementIntent;
+    getDebugInfo(): string;
     isAllowedWhenPaused(): boolean;
     process(): void;
 }

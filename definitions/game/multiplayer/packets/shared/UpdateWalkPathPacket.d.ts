@@ -13,6 +13,7 @@ import type { IVector2 } from "utilities/math/IVector";
 export default class UpdateWalkPathPacket extends PlayerTargetedSharedPacket {
     path: IVector2[] | undefined;
     force: boolean | undefined;
+    getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     process(): void;

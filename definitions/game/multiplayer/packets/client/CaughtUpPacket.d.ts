@@ -14,5 +14,6 @@ import ClientPacket from "multiplayer/packets/ClientPacket";
  * Tell the server to mark us as ready
  */
 export default class CaughtUpPacket extends ClientPacket {
+    getDebugInfo(): string;
     process(): void;
 }

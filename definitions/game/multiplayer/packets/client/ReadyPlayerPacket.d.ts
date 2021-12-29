@@ -10,5 +10,6 @@
  */
 import PlayerTargetedClientPacket from "multiplayer/packets/PlayerTargetedClientPacket";
 export default class ReadyPlayerPacket extends PlayerTargetedClientPacket {
+    getDebugInfo(): string;
     process(): void;
 }

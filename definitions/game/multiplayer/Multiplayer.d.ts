@@ -12,7 +12,7 @@ import EventEmitter from "event/EventEmitter";
 import Player from "game/entity/player/Player";
 import type Island from "game/island/Island";
 import type { IJoinServerOptions, IMultiplayerEvents, IMultiplayerOptions, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
-import { DisconnectReason, JoinServerRetryReason, MultiplayerSyncCheck, UnableToJoinReason } from "multiplayer/IMultiplayer";
+import { DisconnectReason, JoinServerRetryReason, MultiplayerSyncCheck, UnableToJoinReason, MultiplayerSyncCheckLevel } from "multiplayer/IMultiplayer";
 import type { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import type { IConnection } from "multiplayer/networking/IConnection";
 import type { IPacket } from "multiplayer/packets/IPacket";
@@ -65,6 +65,13 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions, updateGame?: boolean): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
+    /**
+     * Helper method for updating sync checks
+     * multiplayer.updateSyncChecks("normal")
+     * multiplayer.updateSyncChecks("verbose")
+     */
+    updateSyncChecks(syncChecks: boolean | MultiplayerSyncCheckLevel | MultiplayerSyncCheck[]): void;
+    private parseSyncChecks;
     enableSteamNetworkConnections(enable: boolean): void;
     getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
     /**

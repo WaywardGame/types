@@ -106,6 +106,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     get id(): `${number},${number}`;
     get biome(): import("game/biome/IBiome").IBiomeDescription;
     get isLoaded(): boolean;
+    get hasLoadedItemReferences(): boolean;
     get isLocalIsland(): boolean;
     get world(): World;
     /**

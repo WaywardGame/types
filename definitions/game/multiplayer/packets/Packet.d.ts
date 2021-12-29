@@ -15,7 +15,7 @@ import type { IPacket, ISynchronizationCheckData } from "multiplayer/packets/IPa
 export declare abstract class Packet<T = void> extends IndexedPacket implements IPacket<T> {
     protected synchronizationCheckData: ISynchronizationCheckData;
     private _arrayBuffer;
-    getDebugInfo(): string;
+    abstract getDebugInfo(): string;
     getAllowedStates(): ConnectionState;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
