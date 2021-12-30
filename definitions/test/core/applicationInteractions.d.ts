@@ -26,7 +26,7 @@ export default class ApplicationInteractions {
     private readonly savedStates;
     constructor(additionalArgs: string[], random: Random<SeededGenerator>);
     waitForInitialStartup(expectedInitialScreen: "title" | "mp_gameplay_modifiers"): Promise<void>;
-    waitUntilLoadingIsFinished(): Promise<void>;
+    waitUntilLoadingIsFinished(expectedMultiplayerMenu?: boolean): Promise<void>;
     playDedicatedServer(gameMode?: GameMode): Promise<void>;
     playNewGame(options: INewGameOptions): Promise<void>;
     playImportedGame(savePath: string): Promise<void>;
@@ -71,7 +71,10 @@ export default class ApplicationInteractions {
     saveStateAndVerifyWithPrevious(): Promise<void>;
     clearSavedStates(): void;
     waitUntilPauseMenuIsShown(): Promise<void>;
-    waitUntilGameIsLoaded(isJoiningServer?: boolean): Promise<void>;
+    waitUntilGameIsLoaded(options?: Partial<{
+        isJoiningServer: boolean;
+        isCreatingServer: boolean;
+    }>): Promise<void>;
     isTitleScreenVisible(): Promise<WebdriverIO.Element[] | undefined>;
     isButtonVisible(text: string): Promise<WebdriverIO.Element[] | undefined>;
     isOverlayVisible(): Promise<WebdriverIO.Element[] | undefined>;

@@ -32,6 +32,7 @@ export interface IPacket<T = any> {
     isAllowedWhenPaused(): boolean;
     process(): T;
     processData(dataView: DataView): void;
+    preSerialize(): void;
 }
 export declare enum NetworkPropertyType {
     Bool = 0,

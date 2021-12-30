@@ -184,6 +184,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     plural?: string;
     hideHelmet?: boolean;
     worth?: number;
+    /**
+     * Array of items that the item is "made from" in cases where we can't use the disassembly items to burn into.
+     * All items in array are required to have onBurn set in their description to function properly.
+     */
     burnsLike?: ItemType[];
     spawnableTiles?: TileGroup;
     gather?: ILiquid;
