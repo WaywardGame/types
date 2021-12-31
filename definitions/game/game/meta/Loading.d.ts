@@ -128,17 +128,19 @@ declare module Loading {
          */
         progress(load: Load, progress: number): any;
         /**
-         * Emitted when a thing has finished loading
+         * Emitted when a load has finished loading.
+         * Either this or "cancel" will be called when a load is done
          */
         step(...loaded: Load[]): any;
+        /**
+         * Emitted when a load has been cancelled.
+         * Either this or "step"" will be called when a load is done
+         */
+        cancel(load: Load): any;
         /**
          * Emitted when all things have finished loading
          */
         end(...loaded: Load[]): any;
-        /**
-         * Emitted when a load has been cancelled
-         */
-        cancel(load: Load): any;
     }
     const currently: Map<Load, any[]>;
     class Events extends EventEmitter.Host<ILoadingEvents> {
@@ -161,7 +163,10 @@ declare module Loading {
      * Returns a promise that will resolve when the load is complete, and reject if the load is cancelled.
      */
     function waitFor(load: Load): Promise<void>;
+    /**
+     * Returns a promise that will resolve when all running loads are complete.
+     */
+    function waitForAll(): Promise<void>;
     function progress(load: Load, progress: number): Promise<void>;
-    function done(): Promise<void>;
 }
 export default Loading;

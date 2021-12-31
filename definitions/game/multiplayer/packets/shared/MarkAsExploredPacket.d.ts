@@ -12,6 +12,7 @@ import PlayerTargetedSharedPacket from "multiplayer/packets/PlayerTargetedShared
 import type { IVector2 } from "utilities/math/IVector";
 export default class MarkAsExploredPacket extends PlayerTargetedSharedPacket {
     points: IVector2[];
+    getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     process(): void;
 }

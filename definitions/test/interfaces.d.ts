@@ -8,12 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-export interface INewGameOptions {
+export interface ICommonGameOptions {
     gameMode: GameMode;
+    seed?: string | number;
+    enableAllMilestoneModifiers?: boolean;
+}
+export interface INewGameOptions extends ICommonGameOptions {
     playMode: GamePlayMode;
     reuseCharacter?: boolean;
-    seed?: string | number;
 }
+export declare type IDedicatedServerGameOptions = ICommonGameOptions;
 export declare enum GameMode {
     Hardcore = "Hardcore Mode",
     Casual = "Casual Mode",

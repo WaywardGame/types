@@ -69,5 +69,6 @@ export interface IConnection {
 export interface IQueuedData {
     data: ArrayBuffer;
     byteOffset: number;
+    packetNumber?: number;
     retries?: number;
 }

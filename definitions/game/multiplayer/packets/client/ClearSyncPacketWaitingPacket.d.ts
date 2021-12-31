@@ -11,6 +11,7 @@
 import ClientPacket from "multiplayer/packets/ClientPacket";
 export default class ClearSyncPacketWaitingPacket extends ClientPacket {
     waitId: string;
+    getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     process(): void;

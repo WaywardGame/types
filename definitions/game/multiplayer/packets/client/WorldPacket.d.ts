@@ -13,6 +13,7 @@ import { ConnectionState } from "multiplayer/networking/IConnection";
 import ClientPacket from "multiplayer/packets/ClientPacket";
 export default class WorldPacket extends ClientPacket<Promise<void>> {
     data: IMultiplayerWorldData;
+    getDebugInfo(): string;
     getAllowedStates(): ConnectionState;
     process(): Promise<void>;
     protected getInitialBufferSize(): number;

@@ -23,7 +23,7 @@ export default class ApplicationDom {
     clickIfVisibleElement(selector: string): Promise<WebdriverIO.Element | undefined>;
     getVisibleElements(selector: string): Promise<WebdriverIO.Element[] | undefined>;
     getVisibleAndClickableElement(selector: string): Promise<WebdriverIO.Element | undefined>;
-    waitForVisibleThenClick(selector: string, timeout?: number, indent?: boolean): Promise<void>;
+    waitForVisibleThenClick(selector: string, timeout?: number, indent?: boolean, clickOnce?: boolean): Promise<void>;
     waitForVisibleElements(selector: string, timeout?: number): Promise<WebdriverIO.Element[]>;
     waitForNotVisible(selector: string, timeout?: number): Promise<void>;
     waitUntil(executor: () => Promise<boolean>, options: webdriverio.WaitUntilOptions): Promise<true | void>;

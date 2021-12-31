@@ -12,6 +12,7 @@ import { DisconnectReason } from "multiplayer/IMultiplayer";
 import SharedPacket from "multiplayer/packets/SharedPacket";
 export default class DisconnectPacket extends SharedPacket {
     reason: DisconnectReason;
+    getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     process(): void;

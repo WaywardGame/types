@@ -56,7 +56,7 @@ export default class ObscuredValue extends InfoProvider {
     private static createInfoFactory;
     private constructor();
     getClass(): string[];
-    get(context: InfoProviderContext): ArrayOr<TranslationGenerator<import("../../../language/dictionary/UiTranslation").default, []> | InfoProvider>;
+    get(context: InfoProviderContext): ArrayOr<InfoProvider | TranslationGenerator<import("../../../language/dictionary/UiTranslation").default, []>>;
     private canSee;
     private getOwner;
     private hasSkill;

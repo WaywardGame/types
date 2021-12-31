@@ -16,7 +16,7 @@ import Inspection from "game/inspection/Inspection";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IVector3 } from "utilities/math/IVector";
 export default class DoodadInspection extends Inspection<Doodad> {
-    static getFromTile(position: IVector3): never[] | DoodadInspection;
+    static getFromTile(position: IVector3): DoodadInspection | never[];
     static handles(type: InspectType, doodad: unknown): boolean;
     constructor(doodad: Doodad);
     getId(): string;

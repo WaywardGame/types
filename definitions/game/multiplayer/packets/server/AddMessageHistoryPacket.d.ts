@@ -12,6 +12,7 @@ import type { IMessageHistoryItem } from "game/entity/player/IMessageManager";
 import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServerPacket";
 export default class AddMessageHistoryPacket extends PlayerTargetedServerPacket {
     messageHistoryItem: IMessageHistoryItem;
+    getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     process(): void;

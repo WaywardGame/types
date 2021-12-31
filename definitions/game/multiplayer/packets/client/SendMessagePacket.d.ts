@@ -15,5 +15,6 @@ export default class SendMessagePacket extends ClientPacket {
     source: Source;
     message: Message;
     args: any[];
+    getDebugInfo(): string;
     process(): Promise<void>;
 }

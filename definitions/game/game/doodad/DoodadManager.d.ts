@@ -39,10 +39,10 @@ export interface IDoodadManagerEvents {
     remove(doodad: Doodad): any;
 }
 export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerEvents> {
-    private readonly scarecrows;
     private static cachedBestDoodadForTier;
     private static cachedGroups;
     private static cachedDoodadSpawns;
+    private readonly scarecrows;
     static getBestDoodadForTier(doodad: DoodadType | DoodadTypeGroup): DoodadType | undefined;
     static generateLookups(): void;
     static isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
@@ -50,7 +50,10 @@ export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerE
     static getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
     static getDoodadTypeGroupName(doodadType: DoodadType | DoodadTypeGroup, article?: boolean, count?: number): Translation;
     delete(): void;
-    load(): void;
+    /**
+     * Note: This can be called multiple times in the same game depending on loading/unloading of islands
+     */
+    load(hasLoadedBefore: boolean): void;
     isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
     isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     getBestDoodadForTier(doodad: DoodadType | DoodadTypeGroup): DoodadType | undefined;

@@ -19,6 +19,6 @@ export default class StatInspection extends Inspection<Stat> {
     constructor([, stat]: [any, Stat], context?: InfoProviderContext);
     getId(): string;
     getBorder(): string;
-    get(context: InfoProviderContext): (import("../../../language/impl/TranslationImpl").default | InfoProvider)[];
+    get(context: InfoProviderContext): (InfoProvider | import("../../../language/impl/TranslationImpl").default)[];
     private getInfo;
 }

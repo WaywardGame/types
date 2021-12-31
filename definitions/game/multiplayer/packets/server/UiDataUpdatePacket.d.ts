@@ -13,5 +13,6 @@ import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServer
 export default class UiDataUpdatePacket extends PlayerTargetedServerPacket {
     static create(player: Player, updates: Map<string | number, Record<string, any>>): UiDataUpdatePacket;
     updates: Map<string | number, Record<string, any>>;
+    getDebugInfo(): string;
     process(): void;
 }

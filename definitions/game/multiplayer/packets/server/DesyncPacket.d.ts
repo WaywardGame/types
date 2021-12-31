@@ -14,6 +14,7 @@ import ServerPacket from "multiplayer/packets/ServerPacket";
  */
 export default class DesyncPacket extends ServerPacket {
     logs: string;
+    getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     process(): void;

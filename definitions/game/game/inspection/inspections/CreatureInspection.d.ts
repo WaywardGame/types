@@ -16,7 +16,7 @@ import EntityInspection from "game/inspection/inspections/EntityInspection";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IVector3 } from "utilities/math/IVector";
 export default class CreatureInspection extends EntityInspection<Creature> {
-    static getFromTile(position: IVector3): never[] | CreatureInspection;
+    static getFromTile(position: IVector3): CreatureInspection | never[];
     static handles(type: InspectType, creature: unknown): boolean;
     constructor(creature: Creature);
     getId(): string;

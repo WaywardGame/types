@@ -61,7 +61,6 @@ declare global {
     let saveManager: SaveManager;
     let steamworks: Steamworks;
     let ui: Ui;
-    const gc: ((options?: any) => Promise<void> | void) | undefined;
     const gameVersion: string;
     const gameVersionStage: string;
     const gameVersionMajor: number;

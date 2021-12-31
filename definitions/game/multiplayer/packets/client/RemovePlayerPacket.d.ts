@@ -12,5 +12,6 @@ import { DisconnectReason } from "multiplayer/IMultiplayer";
 import PlayerTargetedClientPacket from "multiplayer/packets/PlayerTargetedClientPacket";
 export default class RemovePlayerPacket extends PlayerTargetedClientPacket {
     reason: DisconnectReason;
+    getDebugInfo(): string;
     process(): void;
 }

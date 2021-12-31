@@ -16,7 +16,7 @@ import type { TranslationGenerator } from "ui/component/IComponent";
 import Text from "ui/component/Text";
 import type { IVector3 } from "utilities/math/IVector";
 export default class CorpsesInspection extends ListInspection<CorpseInspection> {
-    static getFromTile(position: IVector3): never[] | CorpsesInspection;
+    static getFromTile(position: IVector3): CorpsesInspection | never[];
     constructor(...corpseInspections: CorpseInspection[]);
     get(context: InfoProviderContext): import("../../../language/impl/TranslationImpl").default;
     getDefaultDisplayLevel(): InfoDisplayLevel;

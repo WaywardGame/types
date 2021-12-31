@@ -110,7 +110,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private static getDefaultWeightRange;
     load(): void;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
-    resolveContainer(container?: IContainer): Doodad | Item | Player | NPC | IContainer | ITile | undefined;
+    resolveContainer(container?: IContainer): Player | ITile | IContainer | Item | Doodad | NPC | undefined;
     getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
     hashContainer(containable: IContainable): string;

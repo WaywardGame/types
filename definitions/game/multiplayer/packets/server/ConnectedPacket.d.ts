@@ -15,6 +15,7 @@ import ServerPacket from "multiplayer/packets/ServerPacket";
  * They probably still have packets to catch up on
  */
 export default class ConnectedPacket extends ServerPacket {
+    getDebugInfo(): string;
     getAllowedStates(): ConnectionState;
     isAllowedWhenPaused(): boolean;
     process(): void;

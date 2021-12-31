@@ -13,6 +13,7 @@ import type { IDialogInfo } from "ui/old/IOldUi";
 export default class UpdateDialogInfoPacket extends PlayerTargetedServerPacket {
     index: string | number;
     info: IDialogInfo;
+    getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     process(): void;

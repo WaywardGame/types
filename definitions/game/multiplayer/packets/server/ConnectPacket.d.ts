@@ -13,6 +13,7 @@ import { ConnectionState } from "multiplayer/networking/IConnection";
 import ServerPacket from "multiplayer/packets/ServerPacket";
 export default class ConnectPacket extends ServerPacket {
     playerOptions: IPlayerOptions;
+    getDebugInfo(): string;
     getAllowedStates(): ConnectionState;
     isAllowedWhenPaused(): boolean;
     process(): void;

@@ -14,5 +14,6 @@ export default class DisplayInterruptPacket extends ClientPacket {
     prompt: Prompt;
     args: any[];
     extraData: any;
+    getDebugInfo(): string;
     process(): Promise<void>;
 }

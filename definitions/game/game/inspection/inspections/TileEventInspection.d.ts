@@ -30,7 +30,7 @@ declare class TileEventInspection extends Inspection<TileEvent> {
 }
 declare module TileEventInspection {
     class Minors extends ListInspection<TileEventInspection> {
-        static getFromTile(position: IVector3): never[] | Minors;
+        static getFromTile(position: IVector3): Minors | never[];
         constructor(...inspections: TileEventInspection[]);
         get(context: InfoProviderContext): import("../../../language/impl/TranslationImpl").default;
         getDefaultDisplayLevel(): InfoDisplayLevel;

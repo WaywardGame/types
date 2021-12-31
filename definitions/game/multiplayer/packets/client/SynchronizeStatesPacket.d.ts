@@ -12,5 +12,6 @@ import type { ISynchronizeState } from "game/IGame";
 import ClientPacket from "multiplayer/packets/ClientPacket";
 export default class SynchronizeStatesPacket extends ClientPacket {
     state: ISynchronizeState;
+    getDebugInfo(): string;
     process(): void;
 }

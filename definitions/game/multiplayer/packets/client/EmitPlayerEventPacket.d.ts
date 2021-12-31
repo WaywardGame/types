@@ -15,5 +15,6 @@ export declare enum EmitPlayerEventType {
 }
 export default class EmitPlayerEventPacket extends PlayerTargetedClientPacket {
     type: EmitPlayerEventType;
+    getDebugInfo(): string;
     process(): void;
 }

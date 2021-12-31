@@ -10,7 +10,7 @@
  */
 import type Player from "../../game/game/entity/player/Player";
 import { Direction } from "../../game/utilities/math/Direction";
-import type { GameMode } from "../interfaces";
+import type { INewGameOptions } from "../interfaces";
 import type { IDifferences } from "../../game/utilities/object/JsonHelper";
 import type Application from "./application";
 import type { ITestState } from "./application";
@@ -62,7 +62,7 @@ export declare class Apps {
     getLog(): string[];
     compileDifferences(client: string | number, differences: IDifferences): string;
     verifyGameStates(): Promise<void>;
-    createMultiplayerGame(gameMode: GameMode): Promise<void>;
+    createMultiplayerGame(options: Omit<INewGameOptions, "playMode">): Promise<void>;
     setClientJoinIsland(x: number, y: number): Promise<void>;
     getServerGameCode(): Promise<string>;
     joinServer(...apps: Application[]): Promise<void>;

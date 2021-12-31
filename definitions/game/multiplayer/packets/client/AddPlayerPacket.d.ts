@@ -12,5 +12,6 @@ import type { IPlayerOptions } from "game/IGame";
 import ClientPacket from "multiplayer/packets/ClientPacket";
 export default class AddPlayerPacket extends ClientPacket<number> {
     playerOptions: IPlayerOptions;
+    getDebugInfo(): string;
     process(): number;
 }

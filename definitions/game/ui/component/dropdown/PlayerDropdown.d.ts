@@ -8,9 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IDropdownOption } from "ui/component/Dropdown";
-import EnumDropdown from "ui/component/dropdown/EnumDropdown";
-export default class PlayerDropdown<OTHER_OPTIONS extends string = never> extends EnumDropdown<Record<string, string>, OTHER_OPTIONS> {
-    constructor(defaultOption: string | OTHER_OPTIONS, options?: Iterable<IDropdownOption<OTHER_OPTIONS>>);
-    protected getTranslation(playerIdentifier: string): import("../../../language/impl/TranslationImpl").default;
+import type Button from "ui/component/Button";
+import Dropdown from "ui/component/Dropdown";
+export default class PlayerDropdown extends Dropdown<string> {
+    constructor(defaultOption: string);
+    get selectedPlayer(): import("../../../game/entity/player/Player").default | undefined;
+    protected getOptions(): [string, (option: Button) => Button][];
 }

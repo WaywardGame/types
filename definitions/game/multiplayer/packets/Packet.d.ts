@@ -15,13 +15,15 @@ import type { IPacket, ISynchronizationCheckData } from "multiplayer/packets/IPa
 export declare abstract class Packet<T = void> extends IndexedPacket implements IPacket<T> {
     protected synchronizationCheckData: ISynchronizationCheckData;
     private _arrayBuffer;
-    getDebugInfo(): string;
+    private _serializedDataByteOffset;
+    abstract getDebugInfo(): string;
     getAllowedStates(): ConnectionState;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     getSynchronizationCheckData(): ISynchronizationCheckData;
     getArrayBuffer(id?: number): ArrayBuffer;
-    processData(dataView: DataView): void;
+    serializeData(): number;
+    processSerializedData(dataView: DataView): void;
     abstract process(): T;
     send(exclude?: PacketTarget): void;
     sendTo(to: PacketTarget, force?: boolean): void;

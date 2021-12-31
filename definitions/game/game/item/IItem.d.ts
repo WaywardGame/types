@@ -184,6 +184,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     plural?: string;
     hideHelmet?: boolean;
     worth?: number;
+    /**
+     * Array of items that the item is "made from" in cases where we can't use the disassembly items to burn into.
+     * All items in array are required to have onBurn set in their description to function properly.
+     */
     burnsLike?: ItemType[];
     spawnableTiles?: TileGroup;
     gather?: ILiquid;
@@ -279,10 +283,13 @@ export interface IMoveToTileOptions {
     fromPoint?: IVector3;
     toPoint: IVector3;
     toContainer?: IContainer;
+    beforeMovement?: IMoveToTileBeforeMovementOptions;
     afterMovement?: IMoveToTileAfterMovementOptions;
 }
-export interface IMoveToTileAfterMovementOptions {
+export interface IMoveToTileBeforeMovementOptions {
     remove?: boolean;
+}
+export interface IMoveToTileAfterMovementOptions {
     soundEffect?: SfxType;
     particles?: IRGB;
 }
