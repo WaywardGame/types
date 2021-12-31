@@ -14,11 +14,11 @@
 		"watch": "tsc --build"
 	},
 	"dependencies": {
+		"@types/fs-extra": "^9.0.13",
+		"@types/node": "^17.0.5",
 		"@wayward/goodstream": "0.7.1"
 	},
 	"devDependencies": {
-		"@wayward/game": "^1.0.0",
-		"@types/node": "^17.0.5",
-		"@types/fs-extra": "^9.0.13"
+		"@wayward/game": "^1.0.0"
 	}
 }

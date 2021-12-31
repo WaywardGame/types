@@ -87,6 +87,11 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     seeds: ISeeds;
     readonly seededRandom: Random<SeededGenerator>;
     /**
+     * Random for milestone modifiers. You should only use the one in the default island
+     * todo: remove since this is no longer used
+     */
+    readonly seededMilestoneModifiersRandom: Random<SeededGenerator>;
+    /**
      * Set of players on this island
      */
     readonly players: Set<Player>;

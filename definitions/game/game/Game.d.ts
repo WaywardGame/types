@@ -165,7 +165,8 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      * This method should be able to be called multiple times in a row and nothing unexpected should occur.
      * @param saveType Saves the game with the specified save type. Set to false to not save. Defaults to BackToMainMenu.
      * @param shouldDisconnect Marks if the game should disconnect from multiplayer. Defaults to true.
+     * @param hasDisconnected Marks if the game just disconnected from multiplayer. Defaults to false.
      */
-    reset(saveType?: SaveType | false, shouldDisconnect?: boolean): Promise<void>;
+    reset(saveType?: SaveType | false, shouldDisconnect?: boolean, hasDisconnected?: boolean): Promise<void>;
     fastForwardIsland(island: Island, ticks: number, multiplayerLoadingDescription?: MultiplayerLoadingDescription): Promise<void>;
 }

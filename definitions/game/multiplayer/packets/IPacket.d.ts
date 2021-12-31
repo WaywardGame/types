@@ -31,8 +31,8 @@ export interface IPacket<T = any> {
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     process(): T;
-    processData(dataView: DataView): void;
-    preSerialize(): void;
+    processSerializedData(dataView: DataView): void;
+    serializeData(): void;
 }
 export declare enum NetworkPropertyType {
     Bool = 0,

@@ -47,7 +47,6 @@ export declare abstract class Connection implements IConnection {
     sendKeepAlive(): void;
     getState(): ConnectionState;
     setState(state: ConnectionState): void;
-    serializePacket(packet: IPacket): ArrayBuffer;
     /**
      * Queues a packet to be sent soon
      * Note: packets are serialized when queued
@@ -56,7 +55,7 @@ export declare abstract class Connection implements IConnection {
     /**
      * Queues data to be sent soon
      */
-    protected queuePacketData(data: ArrayBuffer): void;
+    protected queuePacketData(data: ArrayBuffer, packetNumber?: number): void;
     /**
      * Clears queued packets
      */
@@ -73,6 +72,7 @@ export declare abstract class Connection implements IConnection {
      * Sends queued data to the connection w/ flow control
      */
     private _processQueuedData;
+    private _serializePacket;
     abstract readonly maxMessageSize: number;
     abstract isConnected(): boolean;
     protected abstract onClosing(): void;

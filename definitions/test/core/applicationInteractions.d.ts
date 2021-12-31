@@ -12,8 +12,7 @@
 import type { Stat } from "../../game/game/entity/IStats";
 import { Direction } from "../../game/utilities/math/Direction";
 import type { Random, SeededGenerator } from "../../game/utilities/random/Random";
-import type { INewGameOptions } from "../interfaces";
-import { GameMode } from "../interfaces";
+import type { IDedicatedServerGameOptions, INewGameOptions } from "../interfaces";
 import type { IslandId } from "../../game/game/island/IIsland";
 import ApplicationDom from "./applicationDom";
 import ApplicationLogger from "./applicationLogger";
@@ -27,11 +26,14 @@ export default class ApplicationInteractions {
     constructor(additionalArgs: string[], random: Random<SeededGenerator>);
     waitForInitialStartup(expectedInitialScreen: "title" | "mp_gameplay_modifiers"): Promise<void>;
     waitUntilLoadingIsFinished(expectedMultiplayerMenu?: boolean): Promise<void>;
-    playDedicatedServer(gameMode?: GameMode): Promise<void>;
+    playDedicatedServer(options: IDedicatedServerGameOptions): Promise<void>;
     playNewGame(options: INewGameOptions): Promise<void>;
+    private setupCommonOptions;
+    unlockMilestoneModifiers(): Promise<void>;
     playImportedGame(savePath: string): Promise<void>;
     playContinueGame(): Promise<void>;
     quitGame(): Promise<void>;
+    clickOptions(): Promise<void>;
     clickNewGame(): Promise<void>;
     clickLoadGame(): Promise<void>;
     clickConfirm(): Promise<void>;
@@ -41,7 +43,11 @@ export default class ApplicationInteractions {
     clickJoinServer(): Promise<void>;
     clickDailyChallenge(): Promise<void>;
     clickBack(timeout?: number): Promise<void>;
-    clickButton(name: string, timeout?: number): Promise<void>;
+    clickButton(name: string, options?: Partial<{
+        force: boolean;
+        clickOnce: boolean;
+        timeout: number;
+    }>): Promise<void>;
     clickYesIfVisible(): Promise<boolean>;
     clickButtonIfVisible(name: string): Promise<boolean>;
     clickUnpauseIconIfVisible(): Promise<void>;
@@ -80,7 +86,10 @@ export default class ApplicationInteractions {
     isOverlayVisible(): Promise<WebdriverIO.Element[] | undefined>;
     waitUntilTitleScreenIsVisible(): Promise<void>;
     waitUntilGameEndMenuIsVisible(): Promise<void>;
-    waitForVisibleButtonThenClick(name: string, timeout?: number): Promise<void>;
+    waitForVisibleButtonThenClick(name: string, options?: Partial<{
+        clickOnce: boolean;
+        timeout: number;
+    }>): Promise<void>;
     increaseStat(stat: Stat, value: number): Promise<void>;
     randomInput(count: number): Promise<void>;
     pressKey(key: string, modifier?: string): Promise<void>;

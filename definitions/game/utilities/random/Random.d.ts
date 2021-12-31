@@ -132,7 +132,6 @@ export declare module RandomReference {
 export declare function getRandom(randomInstance: RandomInstance, islandId?: IslandId): Random<SeededGenerator>;
 export declare function createSeededRandom(seed?: number, addMultiplayerSyncChecks?: boolean): Random<SeededGenerator>;
 export declare const mapGenRandom: Random<SeededGenerator>;
-export declare const randomMilestoneModifiers: Random<SeededGenerator>;
 export declare const generalRandom: Random<{
     get: () => number;
 }>;
