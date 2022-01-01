@@ -18,6 +18,10 @@ export interface INewGameOptions extends ICommonGameOptions {
     reuseCharacter?: boolean;
 }
 export declare type IDedicatedServerGameOptions = ICommonGameOptions;
+export interface IJoinServerOptions {
+    joinProgrammatically: boolean;
+    enableAllMilestoneModifiers?: boolean;
+}
 export declare enum GameMode {
     Hardcore = "Hardcore Mode",
     Casual = "Casual Mode",

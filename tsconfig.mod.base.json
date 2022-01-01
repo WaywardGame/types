@@ -12,7 +12,8 @@
         "removeComments": true,
         "strict": true,
         "strictPropertyInitialization": false,
-        "moduleResolution": "node",
+        // classic is required for auto imports to use the shortest path in vscode
+        "moduleResolution": "classic",
         "paths": {
             "*": [
                 "node_modules/@wayward/types/definitions/game/*"
@@ -22,6 +23,15 @@
             ],
             "@hosts/*": [
                 "node_modules/@wayward/types/definitions/hosts/*"
+            ],
+            // required when using classic module resolution
+            "@wayward/goodstream": [
+                "node_modules/@wayward/goodstream/Stream",
+                "node_modules/@wayward/types/node_modules/@wayward/goodstream/Stream"
+            ],
+            "@wayward/goodstream/*": [
+                "node_modules/@wayward/goodstream/*",
+                "node_modules/@wayward/types/node_modules/@wayward/goodstream/*"
             ]
         },
         "types": [],

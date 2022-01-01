@@ -12,7 +12,7 @@
 import type { Stat } from "../../game/game/entity/IStats";
 import { Direction } from "../../game/utilities/math/Direction";
 import type { Random, SeededGenerator } from "../../game/utilities/random/Random";
-import type { IDedicatedServerGameOptions, INewGameOptions } from "../interfaces";
+import type { IDedicatedServerGameOptions, IJoinServerOptions, INewGameOptions } from "../interfaces";
 import type { IslandId } from "../../game/game/island/IIsland";
 import ApplicationDom from "./applicationDom";
 import ApplicationLogger from "./applicationLogger";
@@ -67,8 +67,7 @@ export default class ApplicationInteractions {
     waitForGameEndScreen(isWinner: boolean): Promise<void>;
     returnToTitleScreen(): Promise<void>;
     getServerGameCode(): Promise<string>;
-    joinMultiplayerServer(gameCode: string): Promise<void>;
-    joinMultiplayerDedicatedServer(gameCode: string): Promise<void>;
+    joinMultiplayerServer(gameCode: string, options: IJoinServerOptions, isDedicatedServer: boolean): Promise<void>;
     pauseGame(): Promise<void>;
     unpauseGame(): Promise<void>;
     moveToIslandId(islandId: IslandId): Promise<void>;
