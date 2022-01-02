@@ -201,7 +201,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * @param z The z coord to get the closest player.
      * @param canSee If set to true, check if the player can see the x/y/z coords. Defaults to false.
      */
-    getNearestPlayer(x: number, y: number, z?: number, canSee?: boolean, includeConnecting?: boolean): {
+    getNearestPlayer(x: number, y: number, z?: number, canSee?: boolean, includeGhosts?: boolean, includeConnecting?: boolean): {
         player?: Player;
         distance?: number;
     };
