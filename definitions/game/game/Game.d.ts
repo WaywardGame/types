@@ -25,6 +25,8 @@ import type { Milestone } from "game/milestones/IMilestone";
 import type { IGameOptions } from "game/options/IGameOptions";
 import { GameMode } from "game/options/IGameOptions";
 import type { ChallengeModifiersCollection } from "game/options/modifiers/challenge/ChallengeModifiers";
+import type { GameplayModifiersCollection } from "game/options/modifiers/GameplayModifiersManager";
+import type MilestoneModifier from "game/options/modifiers/milestone/MilestoneModifier";
 import ReferenceManager from "game/reference/ReferenceManager";
 import TimeManager from "game/time/TimeManager";
 import VotingManager from "game/VotingManager";
@@ -70,7 +72,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     mapSizeSq: number;
     readonly itemStylesheetHandler: ItemStylesheetHandler | undefined;
     readonly voting: VotingManager;
-    readonly milestonesCollection: import("./options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("./options/modifiers/milestone/MilestoneModifier").default, Milestone, import("./options/modifiers/milestone/MilestoneModifier").MilestoneModifierInstance, []>;
+    milestonesCollection?: GameplayModifiersCollection<MilestoneModifier, Milestone>;
     challengeCollection?: ChallengeModifiersCollection;
     debugRenderer: ITextureDebugRenderer | undefined;
     webGlContext: WebGlContext | undefined;
@@ -82,6 +84,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     private gameOptionsCached?;
     private synchronizeStateId;
     protected stringTokenizer: StringTokenizer | undefined;
+    toString(): string;
     get isPaused(): boolean;
     initializeRenderer(): void;
     globalSlotReady(): void;

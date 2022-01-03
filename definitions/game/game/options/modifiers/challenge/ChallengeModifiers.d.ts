@@ -15,6 +15,7 @@ import type Tooltip from "ui/tooltip/Tooltip";
 export declare const EXCLUSIVE_MODIFIERS: Challenge[][];
 declare class ChallengeModifiersManager extends GameplayModifiersManager<ChallengeModifier> {
     constructor();
+    toString(): string;
     createCollection(seed?: number): ChallengeModifiersCollection;
 }
 declare const _default: ChallengeModifiersManager;

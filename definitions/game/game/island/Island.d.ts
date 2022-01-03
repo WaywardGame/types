@@ -105,6 +105,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     modifiersCollection?: IslandModifiersCollection;
     details?: IIslandDetails;
     constructor(position?: IVector2, seed?: number);
+    toString(): string;
     private registerMemoryLeakDetector;
     preSerializeObject(serializer: ISerializer): void;
     onUnserialized(): void;

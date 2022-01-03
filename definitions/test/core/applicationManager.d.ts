@@ -71,6 +71,7 @@ export declare class Apps {
     waitUntilLoadingIsFinished(): Promise<void>;
     randomInput(count: number): Promise<void>;
     moveToTowardsIsland(app: Application, direction: Direction.Cardinal, recoverStats?: boolean): Promise<void>;
+    recoverStats(app: Application): Promise<void>;
     moveAndVerifyTicks(app: Application, direction: Direction.Cardinal): Promise<void>;
     waitForClientConsistency(): Promise<void>;
     sailToCivilization(winnerApp: Application): Promise<void>;
