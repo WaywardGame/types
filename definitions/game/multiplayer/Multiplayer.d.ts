@@ -32,6 +32,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private readonly _clients;
     private readonly _steamIdToClientMapping;
     private _joinServerTimeoutId;
+    private _steamNetworkConnectionWebRTCFallbackTimeoutId;
     private _joinedMatchmakingInfo;
     private _connectedMatchmakingInfo;
     private _globalMatchmaking;
@@ -91,6 +92,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     rejoinServer(options?: {
         randomizeIdentifier?: boolean;
         automaticallyRetry?: boolean;
+        enableSteamNetworkConnections?: boolean;
     }): Promise<boolean>;
     /**
      * Disconnects from multiplayer
@@ -146,6 +148,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private addDefaultSyncChecks;
     private getPacketSyncChecks;
     private clearJoinServerRetryTimeout;
+    clearSteamNetworkConnectionWebRTCFallbackTimer(): void;
     private startMatchmakingServer;
     private stopMatchmakingServer;
     private setupClientConnection;

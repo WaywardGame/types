@@ -228,6 +228,13 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     checkMilestones(player: Player, item: Item): void;
     getDefaultDurability(human: Human | undefined, weight: number, itemType: ItemType, getMax?: boolean): number;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
+    /**
+     * Used in cases where we break items down from their base form like in dismantling or burning items.
+     * @param itemQuality Quality of the base item.
+     * @param bonusValue A number that we likely will be passing to getQualityBasedOnSkill and can be based on a skill or some arbitrary value.
+     * @returns number That is distributed from the quality/value.
+     */
+    getBreakingQualityBonus(itemQuality: Quality | undefined, bonusValue: number): number;
     getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, allowIncreasedQuality?: boolean, bonusChance?: number): Quality | undefined;
     getNPCFromInventoryContainer(containable: IContainable): NPC | undefined;
     getItemsByWeight(a: number, b: number): number;

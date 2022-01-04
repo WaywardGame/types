@@ -141,6 +141,7 @@ export interface IMultiplayerNetworkingOptions {
     connectionTimeout: number;
     keepAliveInterval: number;
     keepAliveTimeout: number;
+    steamNetworkingConnectionWebRTCFallbackTimeout: number;
 }
 export declare type ServerInfo = string | IMatchmakingInfo;
 export declare enum PacketAcceptType {
@@ -200,6 +201,6 @@ export interface IJoinServerOptions {
     character: ICharacter;
     milestoneModifiers: Set<Milestone>;
     retryMatchmakingInfo: IMatchmakingInfo;
-    joinServerTimeout?: number;
-    automaticallyRetry?: boolean;
+    automaticallyRetry: boolean;
+    enableSteamNetworkConnections: boolean;
 }
