@@ -255,6 +255,14 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     private processTimers;
     private runRandomEvents;
     /**
+     * Plants a random seed at the given coordinates based on what can grow on that tile naturally. This will replace any doodad that is there.
+     * @param x X coordinates.
+     * @param y Y coordinates.
+     * @param z Z coordinates.
+     * @returns True if a seed was planted.
+     */
+    plantRandomSeed(x: number, y: number, z: number): boolean;
+    /**
      * Synchronizes player events
      * Usually called when a new player joins
      */
