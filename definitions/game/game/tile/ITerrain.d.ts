@@ -27,7 +27,7 @@ import type { ILeftOverTile } from "game/tile/Terrains";
 import type TileEvent from "game/tile/TileEvent";
 import type { ISerializedTranslation } from "language/ITranslation";
 import type { IModdable } from "mod/ModRegistry";
-import type { IRGB } from "utilities/Color";
+import type { IColorFul, IRGB } from "utilities/Color";
 import type { IVector3 } from "utilities/math/IVector";
 export interface ITerrainDescription extends IModdable {
     passable?: boolean;
@@ -201,16 +201,13 @@ export interface ITemplateDoodad {
     type: DoodadType;
     growingStages: GrowingStage[];
 }
-export interface IOverlayInfo {
+export interface IOverlayInfo extends Partial<IColorFul> {
     type: OverlayType;
     size?: number;
     offsetX?: number;
     offsetY?: number;
     spriteOffsetX?: number;
     spriteOffsetY?: number;
-    red?: number;
-    green?: number;
-    blue?: number;
     alpha?: number;
 }
 export declare enum OverlayType {
