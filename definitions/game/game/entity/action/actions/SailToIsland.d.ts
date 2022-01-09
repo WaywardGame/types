@@ -49,11 +49,11 @@ export declare const ISLAND_TRAVEL_TIME_SEAFARING_SKILL_REDUCTION_MULTIPLIER = 0
 /**
  * Metabolic stat loss is `travelTime * this multiplier`
  */
-export declare const PLAYER_TRAVEL_METABOLIC_STAT_REDUCTION_MULTIPLIER = 0.075;
+export declare const PLAYER_TRAVEL_METABOLIC_STAT_REDUCTION_MULTIPLIER = 0.2;
 /**
  * Stamina loss is `this reduction / Math.log2(boat tier)`
  */
-export declare const PLAYER_TRAVEL_BOAT_STAMINA_STAT_REDUCTION = 20;
+export declare const PLAYER_TRAVEL_BOAT_STAMINA_STAT_REDUCTION = 40;
 /**
  * Stat loss is `this reduction / Math.log2(boat tier)`
  */
@@ -61,8 +61,8 @@ export declare const PLAYER_TRAVEL_CIVILIZATION_STAT_REDUCTION = 5;
 /**
  * Stamina loss is `lerp(this range, skill percentage)`
  * This works out to:
- * - 80% skill (required for swimming to another island) = ~54 stamina lost
- * - 100% skill = 30 stamina lost
+ * - 80% skill (required for swimming to another island) = ~108 stamina lost
+ * - 100% skill = 60 stamina lost
  * - 125% skill = 0 stamina lost
  */
 export declare const PLAYER_TRAVEL_SWIM_STAMINA_STAT_REDUCTION: IRange;

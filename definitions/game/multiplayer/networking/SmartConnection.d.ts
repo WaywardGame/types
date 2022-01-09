@@ -29,6 +29,7 @@ export declare class SmartConnection extends Connection {
     private _steamNetworkTimeoutId;
     private _steamNetworkConnection;
     constructor(matchmakingInfo: IMatchmakingInfo, matchmakingIdentifier: string, config: RTCConfiguration, sendMatchmakingMessage: (message: MatchmakingMessageData) => void, onData: (data: ArrayBuffer) => void, onConnected: (matchmakingInfo: IMatchmakingInfo) => void, trySteamRelayNetwork: boolean, connectGlobalMatchmakingServer: () => void);
+    get isSteamNetworkConnection(): boolean;
     isConnected(): boolean;
     getState(): ConnectionState;
     setState(state: ConnectionState): void;

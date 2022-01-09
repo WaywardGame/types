@@ -10,3 +10,4 @@
  */
 import { Random, SeededGenerator } from "../../game/utilities/random/Random";
 export declare function createRandom(): Random<SeededGenerator>;
+export declare function getSeed(): number | undefined;

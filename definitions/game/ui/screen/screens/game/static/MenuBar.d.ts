@@ -30,7 +30,7 @@ export default class MenuBar extends QuadrantComponent implements ISortableCompo
     order?: Order;
     readonly sortable: Sortable;
     constructor();
-    getSortableID(child: Component): -1 | MenuBarButtonType;
+    getSortableID(child: Component): MenuBarButtonType | -1;
     /**
      * Removes any existing groups of menubar buttons, then initializes new ones from the `MenuBarButtonType` enum.
      */

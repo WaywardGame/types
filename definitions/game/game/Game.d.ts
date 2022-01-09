@@ -17,7 +17,7 @@ import { Delay, SkillType } from "game/entity/IHuman";
 import type { TurnType } from "game/entity/player/IPlayer";
 import type Player from "game/entity/player/Player";
 import type { IGameEvents, IPlayOptions, ISynchronizeState } from "game/IGame";
-import { SaveType, TickFlag, TurnMode } from "game/IGame";
+import { SaveType, TickFlag, TurnMode, PauseSource } from "game/IGame";
 import type Island from "game/island/Island";
 import IslandManager from "game/island/IslandManager";
 import type { MultiplayerLoadingDescription } from "game/meta/Loading";
@@ -25,6 +25,8 @@ import type { Milestone } from "game/milestones/IMilestone";
 import type { IGameOptions } from "game/options/IGameOptions";
 import { GameMode } from "game/options/IGameOptions";
 import type { ChallengeModifiersCollection } from "game/options/modifiers/challenge/ChallengeModifiers";
+import type { GameplayModifiersCollection } from "game/options/modifiers/GameplayModifiersManager";
+import type MilestoneModifier from "game/options/modifiers/milestone/MilestoneModifier";
 import ReferenceManager from "game/reference/ReferenceManager";
 import TimeManager from "game/time/TimeManager";
 import VotingManager from "game/VotingManager";
@@ -59,7 +61,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     readonly interval = 16.6666;
     slot: number | undefined;
     absoluteTime: number;
-    paused: boolean;
+    paused: Set<PauseSource>;
     playing: boolean;
     nextTickTime: number | undefined;
     lastTickTime: number | undefined;
@@ -70,7 +72,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     mapSizeSq: number;
     readonly itemStylesheetHandler: ItemStylesheetHandler | undefined;
     readonly voting: VotingManager;
-    readonly milestonesCollection: import("./options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("./options/modifiers/milestone/MilestoneModifier").default, Milestone, import("./options/modifiers/milestone/MilestoneModifier").MilestoneModifierInstance, []>;
+    milestonesCollection?: GameplayModifiersCollection<MilestoneModifier, Milestone>;
     challengeCollection?: ChallengeModifiersCollection;
     debugRenderer: ITextureDebugRenderer | undefined;
     webGlContext: WebGlContext | undefined;
@@ -82,6 +84,8 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     private gameOptionsCached?;
     private synchronizeStateId;
     protected stringTokenizer: StringTokenizer | undefined;
+    toString(): string;
+    get isPaused(): boolean;
     initializeRenderer(): void;
     globalSlotReady(): void;
     /**
@@ -96,7 +100,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     resetWebGL(): void;
     setGlContextSize(width: number, height: number): void;
     resizeRenderer(): void;
-    setPaused(paused: boolean, showChatMessage?: boolean): void;
+    setPaused(pause: boolean, source: PauseSource): void;
     gameLogicLoop: () => void;
     isSimulatedOrRealTimeMode(): boolean;
     getTurnMode(): TurnMode;

@@ -8,13 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type ApplicationLogger from "./applicationLogger";
 export default class ChromeDriver {
     private readonly safeTestTile;
     private readonly appId;
+    private readonly logger;
     readonly port: number;
     private process;
     private exitHandler;
-    constructor(safeTestTile: string, appId: string);
+    constructor(safeTestTile: string, appId: string, logger: ApplicationLogger);
     start(): Promise<void>;
     stop(): void;
 }

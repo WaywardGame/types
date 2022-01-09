@@ -10,7 +10,7 @@
  */
 import type Player from "../../game/game/entity/player/Player";
 import { Direction } from "../../game/utilities/math/Direction";
-import type { INewGameOptions } from "../interfaces";
+import type { IJoinServerOptions, INewGameOptions } from "../interfaces";
 import type { IDifferences } from "../../game/utilities/object/JsonHelper";
 import type Application from "./application";
 import type { ITestState } from "./application";
@@ -65,12 +65,13 @@ export declare class Apps {
     createMultiplayerGame(options: Omit<INewGameOptions, "playMode">): Promise<void>;
     setClientJoinIsland(x: number, y: number): Promise<void>;
     getServerGameCode(): Promise<string>;
-    joinServer(...apps: Application[]): Promise<void>;
+    joinServer(options: IJoinServerOptions, ...apps: Application[]): Promise<void>;
     leaveServer(...apps: Application[]): Promise<void>;
     returnToTitleScreen(): Promise<void>;
     waitUntilLoadingIsFinished(): Promise<void>;
     randomInput(count: number): Promise<void>;
     moveToTowardsIsland(app: Application, direction: Direction.Cardinal, recoverStats?: boolean): Promise<void>;
+    recoverStats(app: Application): Promise<void>;
     moveAndVerifyTicks(app: Application, direction: Direction.Cardinal): Promise<void>;
     waitForClientConsistency(): Promise<void>;
     sailToCivilization(winnerApp: Application): Promise<void>;

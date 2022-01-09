@@ -17,7 +17,8 @@ import type Item from "game/item/Item";
 import type { ITileContainer } from "game/tile/ITerrain";
 import type TileEvent from "game/tile/TileEvent";
 export declare enum FireStage {
-    Embers = 0,
+    Extinguished = 0,
+    Embers = 1,
     AlmostExtinguished = 150,
     Struggling = 300,
     Thriving = 450,
@@ -34,5 +35,5 @@ export declare module FireStage {
 export declare module IFire {
     function dissassemblyBurn(island: Island, item: Item, container: ITileContainer, disassembly: boolean): void;
     function harvestGatherBurn(step: number, resources: ILootItem[] | undefined, container: IContainer, quality: Quality | undefined, tileEvent: TileEvent): void;
-    function burnsLike(burnsLikeItem: ItemType, tileEvent: TileEvent, tileContainer: IContainer, quality: Quality): void;
+    function burnsLike(burnsLikeItem: ItemType, tileEvent: TileEvent, tileContainer: IContainer, quality: Quality | undefined): void;
 }

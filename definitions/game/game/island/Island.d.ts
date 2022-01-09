@@ -105,6 +105,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     modifiersCollection?: IslandModifiersCollection;
     details?: IIslandDetails;
     constructor(position?: IVector2, seed?: number);
+    toString(): string;
     private registerMemoryLeakDetector;
     preSerializeObject(serializer: ISerializer): void;
     onUnserialized(): void;
@@ -201,7 +202,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * @param z The z coord to get the closest player.
      * @param canSee If set to true, check if the player can see the x/y/z coords. Defaults to false.
      */
-    getNearestPlayer(x: number, y: number, z?: number, canSee?: boolean, includeConnecting?: boolean): {
+    getNearestPlayer(x: number, y: number, z?: number, canSee?: boolean, includeGhosts?: boolean, includeConnecting?: boolean): {
         player?: Player;
         distance?: number;
     };
@@ -227,7 +228,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     calculateTileLightLevel(tile: ITile, x: number, y: number, z: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
-    coolFires(requirements: IRequirementInfo): void;
+    coolFires(requirements: IRequirementInfo, human: Human): void;
     isFlammable(x: number, y: number, z: number): boolean;
     /**
      * Converts shallow single bodies of fresh water into seawater.
@@ -253,6 +254,14 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     private updateEntityFov;
     private processTimers;
     private runRandomEvents;
+    /**
+     * Plants a random seed at the given coordinates based on what can grow on that tile naturally. This will replace any doodad that is there.
+     * @param x X coordinates.
+     * @param y Y coordinates.
+     * @param z Z coordinates.
+     * @returns True if a seed was planted.
+     */
+    plantRandomSeed(x: number, y: number, z: number): boolean;
     /**
      * Synchronizes player events
      * Usually called when a new player joins

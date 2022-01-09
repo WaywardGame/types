@@ -205,6 +205,18 @@ export declare enum CreationId {
     Item = 4,
     TileEvent = 5
 }
+export declare enum PauseSource {
+    /**
+     * Used for pauses that the player will be able to turn on / off / override
+     */
+    Generic = 0,
+    IslandLoad = 1,
+    Mod = 2,
+    PlayerMoveToIsland = 3,
+    SyncGameState = 4,
+    WebGlContextLost = 5,
+    MultiplayerConnect = 6
+}
 /**
  * For items and terrain that can decay, the temperature range that controls the rate of decay.
  * If not provided for items, they will always decays no matter the temperature.

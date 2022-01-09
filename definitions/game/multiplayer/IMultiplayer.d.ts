@@ -74,31 +74,32 @@ export declare enum MultiplayerSyncCheck {
     Merchant = 36,
     MilestoneSeed = 37,
     Misc = 38,
-    MoveToTile = 39,
-    PenaltyFieldHashCode = 40,
-    PlaceOnTile = 41,
-    PlayerManager = 42,
-    PlayerPositions = 43,
-    Players = 44,
-    PlayerSetup = 45,
-    Random = 46,
-    Reputation = 47,
-    Seed = 48,
-    SeededGenerator = 49,
-    SkillGain = 50,
-    StaminaChanges = 51,
-    StatChange = 52,
-    Stats = 53,
-    StatusChange = 54,
-    StatusEffect = 55,
-    SyncChecks = 56,
-    TemperatureManager = 57,
-    Temporary = 58,
-    Tick = 59,
-    TileEvent = 60,
-    Time = 61,
-    UpdateDirection = 62,
-    Weight = 63
+    Modifier = 39,
+    MoveToTile = 40,
+    PenaltyFieldHashCode = 41,
+    PlaceOnTile = 42,
+    PlayerManager = 43,
+    PlayerPositions = 44,
+    Players = 45,
+    PlayerSetup = 46,
+    Random = 47,
+    Reputation = 48,
+    Seed = 49,
+    SeededGenerator = 50,
+    SkillGain = 51,
+    StaminaChanges = 52,
+    StatChange = 53,
+    Stats = 54,
+    StatusChange = 55,
+    StatusEffect = 56,
+    SyncChecks = 57,
+    TemperatureManager = 58,
+    Temporary = 59,
+    Tick = 60,
+    TileEvent = 61,
+    Time = 62,
+    UpdateDirection = 63,
+    Weight = 64
 }
 export declare const maxPlayers = 32;
 export declare const packetTickRate = 16;
@@ -140,6 +141,7 @@ export interface IMultiplayerNetworkingOptions {
     connectionTimeout: number;
     keepAliveInterval: number;
     keepAliveTimeout: number;
+    steamNetworkingConnectionWebRTCFallbackTimeout: number;
 }
 export declare type ServerInfo = string | IMatchmakingInfo;
 export declare enum PacketAcceptType {
@@ -199,6 +201,6 @@ export interface IJoinServerOptions {
     character: ICharacter;
     milestoneModifiers: Set<Milestone>;
     retryMatchmakingInfo: IMatchmakingInfo;
-    joinServerTimeout?: number;
-    automaticallyRetry?: boolean;
+    automaticallyRetry: boolean;
+    enableSteamNetworkConnections: boolean;
 }

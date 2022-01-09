@@ -16,7 +16,7 @@ import type { TranslationGenerator } from "ui/component/IComponent";
 import Text from "ui/component/Text";
 import type { IVector3 } from "utilities/math/IVector";
 export default class ItemsInspection extends ListInspection<ItemInspection> {
-    static getFromTile(position: IVector3): ItemsInspection | never[];
+    static getFromTile(position: IVector3): never[] | ItemsInspection;
     private inspector;
     private inspectorPosition;
     private itemPositions;
