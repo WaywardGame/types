@@ -51,7 +51,8 @@ export declare enum SfxType {
     UiInput = 24,
     UiSelect = 25,
     Walk = 26,
-    Water = 27
+    Water = 27,
+    Extinguish = 28
 }
 export declare enum Music {
     Shipwrecked = 0,

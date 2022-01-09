@@ -228,7 +228,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     calculateTileLightLevel(tile: ITile, x: number, y: number, z: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
-    coolFires(requirements: IRequirementInfo): void;
+    coolFires(requirements: IRequirementInfo, human: Human): void;
     isFlammable(x: number, y: number, z: number): boolean;
     /**
      * Converts shallow single bodies of fresh water into seawater.
