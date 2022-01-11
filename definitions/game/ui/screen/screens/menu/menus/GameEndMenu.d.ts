@@ -18,7 +18,6 @@ export interface IGameEndData {
 export default class GameEndMenu extends Menu {
     private readonly highscore;
     private readonly respawnButton;
-    private readonly rejoinAsNewPlayerButton;
     private gameEndData;
     constructor();
     setGameEndData(gameEndData: IGameEndData): this;
@@ -27,8 +26,7 @@ export default class GameEndMenu extends Menu {
     private getTagline;
     private getContinueButtonText;
     private continue;
-    private respawnInCasualMode;
-    private rejoinAsNewPlayer;
+    private respawn;
     private exitToMenu;
     private share;
 }

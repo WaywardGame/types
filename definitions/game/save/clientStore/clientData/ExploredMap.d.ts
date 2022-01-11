@@ -18,5 +18,6 @@ export default class ExploredMapClientData implements IPreSerializeCallback {
     exploredMapEncodedData: Map<string, Record<number, number[]>>;
     private readonly exploredMaps;
     preSerializeObject(): void;
+    clear(): void;
     getExploreMap(island: Island, z: number): ExploreMap;
 }

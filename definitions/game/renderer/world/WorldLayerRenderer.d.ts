@@ -54,6 +54,7 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     delete(): void;
     private deleteTileLayers;
     reset(): void;
+    refreshExploredMap(): void;
     setWorldLayer(worldLayer: WorldLayer): void;
     addTileLayer(tileLayer: TileLayer): void;
     updateAll(): void;

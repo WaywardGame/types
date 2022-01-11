@@ -187,7 +187,7 @@ export default class Player extends Human implements IUnserializedCallback {
     passTurn(turnType?: TurnType): void;
     tick(isPassTurn?: boolean): void;
     kill(): void;
-    respawn(): Promise<void>;
+    respawn(reset: boolean): Promise<void>;
     getMovementProgress(): number;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
     hasWalkPath(): boolean;
