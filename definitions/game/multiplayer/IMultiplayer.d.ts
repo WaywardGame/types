@@ -141,7 +141,8 @@ export interface IMultiplayerNetworkingOptions {
     connectionTimeout: number;
     keepAliveInterval: number;
     keepAliveTimeout: number;
-    steamNetworkingConnectionWebRTCFallbackTimeout: number;
+    steamNetworkingConnectionWebRTCFallbackInitialTimeout: number;
+    steamNetworkingConnectionWebRTCFallbackDownloadingTimeout: number;
 }
 export declare type ServerInfo = string | IMatchmakingInfo;
 export declare enum PacketAcceptType {

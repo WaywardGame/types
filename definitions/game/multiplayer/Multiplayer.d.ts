@@ -148,6 +148,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private addDefaultSyncChecks;
     private getPacketSyncChecks;
     private clearJoinServerRetryTimeout;
+    createOrExtendSteamNetworkConnectionWebRTCFallbackTimer(timeoutTime: number): void;
     clearSteamNetworkConnectionWebRTCFallbackTimer(): void;
     private startMatchmakingServer;
     private stopMatchmakingServer;

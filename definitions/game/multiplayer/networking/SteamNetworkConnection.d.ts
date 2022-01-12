@@ -18,7 +18,7 @@ export declare class SteamNetworkConnection extends Connection {
     private readonly onConnected?;
     private readonly connectGlobalMatchmakingServer?;
     name: string;
-    readonly maxMessageSize = 262144;
+    readonly maxMessageSize = 65536;
     private _processIntervalId;
     private _checkSessionStateIntervalId;
     constructor(steamNetworking: ISteamworksNetworking, hostSteamId: string, matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, onData: (data: ArrayBuffer) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined, connectGlobalMatchmakingServer?: (() => void) | undefined);
