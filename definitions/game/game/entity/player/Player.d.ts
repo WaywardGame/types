@@ -158,7 +158,7 @@ export default class Player extends Human implements IUnserializedCallback {
     onNoInput(): void;
     updateTables(deferUpdate?: boolean): void;
     updateCraftTable(adjacentContainers?: IContainer[]): void;
-    updateDismantleTable(adjacentContainers?: IContainer[]): void;
+    updateDismantleTable(adjacentContainers?: IContainer[], force?: boolean): void;
     updateWeight(source: string): void;
     updateTablesAndWeight(source: string, deferTableUpdates?: boolean): void;
     checkReputationMilestones(): void;

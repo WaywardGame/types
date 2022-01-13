@@ -13,7 +13,6 @@ import type Player from "game/entity/player/Player";
 import type { Game } from "game/Game";
 import { TickFlag } from "game/IGame";
 import type Island from "game/island/Island";
-import type { BookType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import DrawnMap from "game/mapping/DrawnMap";
 import Component from "ui/component/Component";
@@ -74,7 +73,7 @@ export default class GameScreen extends Screen {
      */
     private refreshRespawnButton;
     onExploreAsGhost(): void;
-    onOpenBook(human: Human, book: BookType): void;
+    onOpenBook(human: Human, item: Item): void;
     protected onReadMap1(map: DrawnMap, item: Item, reader: Human): void;
     protected onSailOffMapEdge(player: Player, direction: Direction): void;
     protected onDie(player: Player, showingGameEndScreen: boolean): void;

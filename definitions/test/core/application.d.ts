@@ -47,7 +47,6 @@ export default class Application extends ApplicationInteractions {
     readonly basePath: string;
     readonly userDataDirectory: string;
     private readonly chromeDriver;
-    private readonly remoteOptions;
     manager: Apps;
     private screenshotPath;
     private heapSnapshotPath;
@@ -66,4 +65,5 @@ export default class Application extends ApplicationInteractions {
     requestHeapSnapshot(heapSnapshotPath: string): void;
     requestVideo(videoPath: string): void;
     private recordVideoFrame;
+    private configureDirectories;
 }

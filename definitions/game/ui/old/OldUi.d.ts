@@ -39,9 +39,8 @@ export default class OldUi {
     isOptionsOverlayEnabled(): boolean;
     tooltipRefresh(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
-    updateDismantleTab(dismantleItems: IDismantleComponent): void;
+    updateDismantleTab(dismantleItems: IDismantleComponent, force?: boolean): void;
     filterContainers(): void;
-    invalidateTableTargets(): void;
     getInventoryItemOrder(): any[];
     updateItem(item: Item, updateChildren?: boolean): void;
     syncDecayBar(item: Item, syncDamage?: boolean): void;
@@ -69,7 +68,6 @@ export default class OldUi {
     addItemToContainer(item: Item, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
     afterAddingMultipleItemsToContainer(container: IContainer): void;
     removeItemFromContainer(item: Item, container: IContainer): void;
-    updateInventorySort(): void;
     getDialogInfo(dialogId: DialogId): IDialogInfo;
     setVersionExtra(msg: string): void;
     openDialogs(): void;

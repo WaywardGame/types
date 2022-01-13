@@ -16,7 +16,7 @@ import type Human from "game/entity/Human";
 import type { AttackType } from "game/entity/IEntity";
 import type { ISkillEvents } from "game/entity/skill/SkillManager";
 import type { IHasImagePath, Quality } from "game/IObject";
-import type { BookType, ItemType } from "game/item/IItem";
+import type { ItemType } from "game/item/IItem";
 import { RecipeLevel } from "game/item/IItem";
 import type Item from "game/item/Item";
 import { TempType } from "game/temperature/ITemperature";
@@ -65,7 +65,7 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      * Called when a book is opened by a player
      * @param book The book that was opened
      */
-    openBook?(book: BookType): void;
+    openBook?(item: Item): void;
     /**
      * Called when something is built on a tile
      * @param item The item used to build the object
