@@ -53,6 +53,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private _recentPackets;
     private _enabledSyncChecks;
     private _disconnectingFromSyncIssue;
+    private _reportedSyncHashMismatch;
     private readonly _autojoinEnabled;
     private _ipAddress;
     private readonly _matchmakingSecret;
@@ -147,6 +148,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     sendChatMessage(sender: Player, message: string): void;
     private addDefaultSyncChecks;
     private getPacketSyncChecks;
+    private hashSyncCheckHash;
     private clearJoinServerRetryTimeout;
     createOrExtendSteamNetworkConnectionWebRTCFallbackTimer(timeoutTime: number): void;
     clearSteamNetworkConnectionWebRTCFallbackTimer(): void;
@@ -166,7 +168,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private processOutgoingPackets;
     private processPacket;
     private synchronizationCheck;
-    private desync;
+    private logSyncCheckErrors;
     private sendPacketInternal;
     private onStateChange;
     private convertToMatchmakingInfo;

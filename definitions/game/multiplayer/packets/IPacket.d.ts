@@ -19,6 +19,8 @@ export interface ISynchronizationCheckData {
     packetNumber?: number;
     beforeSyncChecks?: ISyncCheck;
     afterSyncChecks?: ISyncCheck;
+    beforeSyncChecksHash?: number;
+    afterSyncChecksHash?: number;
 }
 export declare type ISyncCheck = Record<number, Array<number | string>>;
 export interface IPacket<T = any> {

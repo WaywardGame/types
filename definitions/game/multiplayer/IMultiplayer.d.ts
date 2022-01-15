@@ -26,6 +26,7 @@ export interface IMultiplayerEvents {
     leaveLobby(lobbyId: string): any;
     stateChange(): any;
     checkConnection(webRtcWorks: boolean, webSocketWorks: boolean): any;
+    updatedOptions(options: IMultiplayerOptions): any;
 }
 export declare enum MultiplayerSyncCheckLevel {
     None = "none",

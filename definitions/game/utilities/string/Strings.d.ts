@@ -36,6 +36,7 @@ declare class Strings {
      * Returns a new object with key-value pairs matching the pairs in the given object, but with the case style of the keys changed.
      */
     formatKeyCase<R = any>(obj: any, caseStyle: CaseStyle): R;
+    hashCode(str: string): number;
     protected onAcquire(d: any, req: IRequireFunction): Promise<void>;
 }
 declare const _default: Strings;

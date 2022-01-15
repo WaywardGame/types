@@ -150,7 +150,11 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getDisassemblyWeight(): number;
     getDisassemblyItems(): IItemDisassembleResult | undefined;
     isNearby(executor: Entity, allowNearby?: boolean): boolean;
-    verifyAndFixItem(): void;
+    /**
+     * Fixes item issues.
+     * Note: Be careful with what gets fixed in multiplayer! (when onlyRestoreIslandIds is set)
+     */
+    verifyAndFixItem(onlyRestoreIslandIds: boolean): void;
     /**
      * @param source A string representing the reason for this damage. Used for multiplayer debugging. Just put a unique string of characters here
      * @param modifier The amount of damage to take. Defaults to 1.
