@@ -98,7 +98,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      */
     setupGl(restoring: boolean): Promise<void>;
     resetWebGL(): void;
-    setGlContextSize(width: number, height: number): void;
+    setGlContextSize(): void;
     resizeRenderer(): void;
     setPaused(pause: boolean, source: PauseSource): void;
     gameLogicLoop: () => void;
