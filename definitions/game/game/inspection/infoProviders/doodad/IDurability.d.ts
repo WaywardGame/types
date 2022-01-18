@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 export declare enum DurabilityLevel {
-    Undamaged = 0,
-    SlightlyDamaged = 1,
-    Damaged = 2,
-    VeryDamaged = 3
+    VeryDamaged = 0,
+    Damaged = 1,
+    SlightlyDamaged = 2,
+    Undamaged = 3
 }
