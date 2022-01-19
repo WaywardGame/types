@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IMovementIntent } from "game/entity/player/IPlayer";
-import PlayerTargetedSharedPacket from "multiplayer/packets/PlayerTargetedSharedPacket";
-export default class UpdateMovementIntentPacket extends PlayerTargetedSharedPacket {
+import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServerPacket";
+export default class UpdateMovementIntentPacket extends PlayerTargetedServerPacket {
     intent: IMovementIntent;
     getDebugInfo(): string;
     isAllowedWhenPaused(): boolean;

@@ -76,6 +76,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private static cachedWeights;
     private static cachedDefaultItemForGroup;
     private static cachedBestItemForTier;
+    private static cachedHighestItemActionTierForAction;
     private static cachedItemGroups;
     private static cachedItemsThatAreAcceptedAsOffer;
     private static cachedItemsThatAreUsedInRecipes;
@@ -85,6 +86,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     static getItemTypes(): readonly ItemType[];
     static getItemsWithRecipes(): readonly ItemType[];
     static getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
+    static getHighestItemActionTierForAction(action: ActionType): number | undefined;
     static isItemAcceptedAsOffer(item: ItemType): boolean | undefined;
     static isItemUsedInRecipe(item: ItemType): boolean | undefined;
     static isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;

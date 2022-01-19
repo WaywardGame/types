@@ -17,12 +17,16 @@ export declare enum PacketType {
 }
 export interface ISynchronizationCheckData {
     packetNumber?: number;
-    beforeSyncChecks?: ISyncCheck;
-    afterSyncChecks?: ISyncCheck;
+    beforeEnabledSyncChecksHash?: number;
+    afterEnabledSyncChecksHash?: number;
     beforeSyncChecksHash?: number;
     afterSyncChecksHash?: number;
 }
 export declare type ISyncCheck = Record<number, Array<number | string>>;
+export interface IHashedSyncCheck {
+    hash: number;
+    syncCheck: ISyncCheck;
+}
 export interface IPacket<T = any> {
     getAllowedStates(): ConnectionState;
     getArrayBuffer(id?: number): ArrayBuffer;

@@ -16,6 +16,7 @@ import { DisconnectReason, JoinServerRetryReason, MultiplayerSyncCheck, UnableTo
 import type { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import type { IConnection } from "multiplayer/networking/IConnection";
 import type { IPacket } from "multiplayer/packets/IPacket";
+import DesyncPacket from "multiplayer/packets/server/DesyncPacket";
 export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     /**
      * Static steam account id when steam support is on
@@ -47,11 +48,12 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private _currentPacketProcessing;
     private _currentSyncPacketsWaiting;
     private _currentSyncPacketsProcessing;
-    private _syncCheckStack;
     private _activeSyncCheck;
-    private _syncChecksSuppressed;
-    private _recentPackets;
     private _enabledSyncChecks;
+    private readonly _recentHashedSyncChecks;
+    private _recentPackets;
+    private _syncChecksSuppressed;
+    private _syncCheckStack;
     private _disconnectingFromSyncIssue;
     private _reportedSyncHashMismatch;
     private readonly _autojoinEnabled;
@@ -140,14 +142,20 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     addKeepAliveTimeouts(): void;
     updateGlobalServerDirectory(): void;
     checkConnection(): Promise<void>;
-    isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck, failIfNotActiveOrSurpressed?: boolean): boolean;
+    isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any, addStackTrace?: boolean): void;
     addMiscSeedSyncCheck(island: Island, ...messages: any[]): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addAfterSyncChecks(packet: IPacket): void;
     sendChatMessage(sender: Player, message: string): void;
     private addDefaultSyncChecks;
+    /**
+     * Returns sync check hashes
+     * @returns [all sync checks hash, enabled sync checks hash]
+     */
     private getPacketSyncChecks;
+    private recordHashedSyncCheck;
+    private filterEnabledSyncChecks;
     private hashSyncCheckHash;
     private clearJoinServerRetryTimeout;
     createOrExtendSteamNetworkConnectionWebRTCFallbackTimer(timeoutTime: number): void;
@@ -169,6 +177,8 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private processPacket;
     private synchronizationCheck;
     private logSyncCheckErrors;
+    private sendDesyncPacket;
+    processDesyncPacket(connection: IConnection, desyncPacket: DesyncPacket): void;
     private sendPacketInternal;
     private onStateChange;
     private convertToMatchmakingInfo;

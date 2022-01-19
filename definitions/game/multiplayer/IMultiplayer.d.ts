@@ -134,8 +134,8 @@ export interface IMultiplayerNetworkingOptions {
     enableWebRtcConnections: boolean;
     enablePacketNumberChecks: boolean;
     logPackets: boolean;
-    logSyncChecks: boolean;
     recentPacketTracking: number;
+    recentHashedSyncCheckTracking: number;
     joinServerTimeout: number;
     steamNetworkTimeout: number;
     webRtcTimeout: number;
