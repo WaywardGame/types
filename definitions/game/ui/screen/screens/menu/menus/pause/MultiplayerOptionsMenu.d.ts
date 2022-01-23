@@ -23,7 +23,7 @@ export default class MultiplayerOptionsMenu extends Menu {
     private readonly steamRelayNetworkSpacer;
     private readonly webRTCSpacer;
     private readonly pvp;
-    private readonly ghostDataClear;
+    private readonly allowHardcoreRespawns;
     private readonly maxPlayers;
     private readonly descriptionInput;
     private readonly messageOfTheDayInput;

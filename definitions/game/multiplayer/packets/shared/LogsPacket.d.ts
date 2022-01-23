@@ -8,9 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-export declare enum DurabilityLevel {
-    VeryDamaged = 0,
-    Damaged = 1,
-    SlightlyDamaged = 2,
-    Undamaged = 3
+import PlayerTargetedSharedPacket from "multiplayer/packets/PlayerTargetedSharedPacket";
+import { LogLineType } from "utilities/Log";
+export default class LogsPacket extends PlayerTargetedSharedPacket {
+    logs: string;
+    logType: LogLineType;
+    getDebugInfo(): string;
+    isSyncCheckEnabled(): boolean;
+    isAllowedWhenPaused(): boolean;
+    process(): void;
 }

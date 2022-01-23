@@ -36,7 +36,6 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     private readonly scheduledContainerInvalidations;
     private readonly cacheCalculated;
     private readonly cacheProduced;
-    private processingScheduledUpdates;
     constructor(island: Island);
     delete(): void;
     preSerializeObject(): void;

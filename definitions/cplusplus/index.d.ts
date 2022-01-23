@@ -79,6 +79,7 @@ export interface IWorldLayerCPP {
 }
 export interface IDijkstraMap {
     getNode(x: number, y: number): INavigationNode;
+    updateNode(x: number, y: number, penalty: number, disabled: boolean): void;
     updateOrigin(origin: INavigationNode): void;
     findPath(end: INavigationNode): {
         success: boolean;

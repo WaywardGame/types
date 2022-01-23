@@ -76,6 +76,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private static cachedWeights;
     private static cachedDefaultItemForGroup;
     private static cachedBestItemForTier;
+    private static cachedHighestItemActionTierForAction;
     private static cachedItemGroups;
     private static cachedItemsThatAreAcceptedAsOffer;
     private static cachedItemsThatAreUsedInRecipes;
@@ -85,6 +86,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     static getItemTypes(): readonly ItemType[];
     static getItemsWithRecipes(): readonly ItemType[];
     static getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
+    static getHighestItemActionTierForAction(action: ActionType): number | undefined;
     static isItemAcceptedAsOffer(item: ItemType): boolean | undefined;
     static isItemUsedInRecipe(item: ItemType): boolean | undefined;
     static isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
@@ -110,7 +112,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private static getDefaultWeightRange;
     load(): void;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
-    resolveContainer(container?: IContainer): ITile | Player | Item | IContainer | Doodad | NPC | undefined;
+    resolveContainer(container?: IContainer): Player | ITile | IContainer | Item | Doodad | NPC | undefined;
     getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
     hashContainer(containable: IContainable): string;
@@ -188,13 +190,13 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      */
     getBestSafeItemInContainerByUse(container: IContainer, action: ActionType, allowProtectedItems?: boolean, actionMayDamageItem?: boolean, consumable?: boolean): Item | undefined;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item, allowProtectedItems?: boolean): Item | undefined;
-    getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, allowProtectedItems?: boolean): Item | undefined;
-    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, allowProtectedItems?: boolean): Item | undefined;
+    getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, ignoreItem?: Item, allowProtectedItems?: boolean): Item | undefined;
+    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item, allowProtectedItems?: boolean): Item | undefined;
     getItemInAdjacentContainersByGroup(position: IVector3, itemTypeGroupSearch: ItemTypeGroup): Item | undefined;
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean, allowProtectedItems?: boolean): Item[];
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, filterText?: string): Item[];
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean): Item[];
-    getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number): Item | undefined;
+    getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item): Item | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     getAdjacentContainers(humanOrPosition: Human | IVector3, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];

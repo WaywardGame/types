@@ -19,7 +19,7 @@ declare class MilestoneModifiersManager extends GameplayModifiersManager<Milesto
     isGlobal(milestone: Milestone): boolean;
     isNotGlobal(milestone: Milestone): boolean;
     getGroup(milestone: Milestone): import("game/options/modifiers/milestone/MilestoneModifier").MilestoneModifierGroup | undefined;
-    sort(a: Milestone, b: Milestone): 0 | 1 | -1;
+    sort(a: Milestone, b: Milestone): 1 | 0 | -1;
     private areOptionsGlobal;
 }
 declare const _default: MilestoneModifiersManager;

@@ -13,7 +13,7 @@ import EventEmitter from "event/EventEmitter";
 import type Entity from "game/entity/Entity";
 import type { Defense } from "game/entity/IEntity";
 import { DamageType } from "game/entity/IEntity";
-import { Delay, SkillType } from "game/entity/IHuman";
+import { Delay } from "game/entity/IHuman";
 import type { TurnType } from "game/entity/player/IPlayer";
 import type Player from "game/entity/player/Player";
 import type { IGameEvents, IPlayOptions, ISynchronizeState } from "game/IGame";
@@ -98,7 +98,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      */
     setupGl(restoring: boolean): Promise<void>;
     resetWebGL(): void;
-    setGlContextSize(width: number, height: number): void;
+    setGlContextSize(): void;
     resizeRenderer(): void;
     setPaused(pause: boolean, source: PauseSource): void;
     gameLogicLoop: () => void;
@@ -115,14 +115,6 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     updateGameUpdates(gameOptions: IGameOptions): void;
     initializeGameOptions(seed: string | number, mode?: GameMode, options?: IGameOptions, milestoneModifiers?: Set<Milestone>): void;
     initializeModifiers(): void;
-    getReputation(): number;
-    getMalignity(): number;
-    getBenignity(): number;
-    getMaxHealth(): number;
-    getMaxWeight(): number;
-    getTactics(): number;
-    getSkillPercent(skill: SkillType): number;
-    getPlayerAverage(calc: (player: Player) => number | undefined, round?: boolean): number;
     getMovementFinishTime(delay?: Delay | number): number;
     getMovementProgress(timeStamp: number, finishTime: number | undefined, delay?: Delay | number): number;
     getAnimationProgress(timeStamp: number, finishTime: number | undefined, delay: Delay | number): number;

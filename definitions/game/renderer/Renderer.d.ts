@@ -46,7 +46,7 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     stop(): void;
     setOrigin(origin: IRendererOrigin): void;
     load(island: Island): void;
-    setViewport(view: Vector2): void;
+    setViewport(view?: Vector2): void;
     getZoom(): number;
     addZoomLevel(amount: number): void;
     updateZoomLevel(): void;

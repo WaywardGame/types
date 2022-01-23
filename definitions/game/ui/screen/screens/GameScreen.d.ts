@@ -13,7 +13,6 @@ import type Player from "game/entity/player/Player";
 import type { Game } from "game/Game";
 import { TickFlag } from "game/IGame";
 import type Island from "game/island/Island";
-import type { BookType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import DrawnMap from "game/mapping/DrawnMap";
 import Component from "ui/component/Component";
@@ -48,6 +47,7 @@ export default class GameScreen extends Screen {
     private readonly quadrantMap;
     private readonly quadrantComponents;
     private readonly gameCanvas;
+    private readonly effects;
     private readonly placeholders;
     private readonly islandIntroWrapper;
     private readonly buttonRespawn;
@@ -61,6 +61,11 @@ export default class GameScreen extends Screen {
     onLoadedOnIsland(player: Player, island: Island): void;
     private showIslandIntro;
     onGameTickEnd(game: Game, tickFlag: TickFlag): void;
+    onExploreAsGhost(): void;
+    /**
+     * Notee: calculateEquipmentStats is always ran after calculateStats is called, so this will work
+     */
+    onCalculateEquipmentStats(): void;
     /**
      * Refreshed death / ghost state stuff
      */
@@ -73,8 +78,16 @@ export default class GameScreen extends Screen {
      * Refreshes respawn button state
      */
     private refreshRespawnButton;
-    onExploreAsGhost(): void;
-    onOpenBook(human: Human, book: BookType): void;
+    private refreshHealthBasedEffects;
+    /**
+     * Refreshes the state of the hurt effect
+     */
+    private refreshHurtEffect;
+    /**
+     * Refreshes the state of the music speed
+     */
+    private refreshMusicSpeed;
+    onOpenBook(human: Human, item: Item): void;
     protected onReadMap1(map: DrawnMap, item: Item, reader: Human): void;
     protected onSailOffMapEdge(player: Player, direction: Direction): void;
     protected onDie(player: Player, showingGameEndScreen: boolean): void;
@@ -84,6 +97,7 @@ export default class GameScreen extends Screen {
     protected onScreenshotMode(): boolean;
     protected onShowMoreInfo(): void;
     protected onUnshowMoreInfo(): void;
+    protected onDisableHealthVignette(): void;
     protected onCancel(): boolean;
     protected create(): void;
     protected onHide(): void;

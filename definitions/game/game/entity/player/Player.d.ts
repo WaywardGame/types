@@ -16,7 +16,7 @@ import { CreatureType } from "game/entity/creature/ICreature";
 import Human from "game/entity/Human";
 import { EntityType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "game/entity/IEntity";
 import type { ICheckUnderOptions, IRestData } from "game/entity/IHuman";
-import { EquipType, RestCancelReason, RestType, SkillType } from "game/entity/IHuman";
+import { EquipType, RestCancelReason, SkillType } from "game/entity/IHuman";
 import type { IStat } from "game/entity/IStats";
 import { Stat } from "game/entity/IStats";
 import type { ILoadOnIslandOptions, IMovementIntent, IPlayerEvents, IWalkPath } from "game/entity/player/IPlayer";
@@ -102,7 +102,6 @@ export default class Player extends Human implements IUnserializedCallback {
     setStatus(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
     startResting(restData: IRestData): void;
     cancelResting(reason: RestCancelReason): boolean;
-    showRestInterrupt(restType: RestType): void;
     /**
      * Updates caused by status effects such as bleeding, poison, and burns.
      */
@@ -158,7 +157,7 @@ export default class Player extends Human implements IUnserializedCallback {
     onNoInput(): void;
     updateTables(deferUpdate?: boolean): void;
     updateCraftTable(adjacentContainers?: IContainer[]): void;
-    updateDismantleTable(adjacentContainers?: IContainer[]): void;
+    updateDismantleTable(adjacentContainers?: IContainer[], force?: boolean): void;
     updateWeight(source: string): void;
     updateTablesAndWeight(source: string, deferTableUpdates?: boolean): void;
     checkReputationMilestones(): void;
@@ -187,7 +186,7 @@ export default class Player extends Human implements IUnserializedCallback {
     passTurn(turnType?: TurnType): void;
     tick(isPassTurn?: boolean): void;
     kill(): void;
-    respawn(): Promise<void>;
+    respawn(reset: boolean): Promise<void>;
     getMovementProgress(): number;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
     hasWalkPath(): boolean;

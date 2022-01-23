@@ -168,5 +168,9 @@ declare module Loading {
      */
     function waitForAll(): Promise<void>;
     function progress(load: Load, progress: number): Promise<void>;
+    /**
+     * Returns true if the load is running
+     */
+    function exists(load: Load): boolean;
 }
 export default Loading;

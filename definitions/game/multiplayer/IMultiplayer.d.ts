@@ -26,6 +26,7 @@ export interface IMultiplayerEvents {
     leaveLobby(lobbyId: string): any;
     stateChange(): any;
     checkConnection(webRtcWorks: boolean, webSocketWorks: boolean): any;
+    updatedOptions(options: IMultiplayerOptions): any;
 }
 export declare enum MultiplayerSyncCheckLevel {
     None = "none",
@@ -113,7 +114,7 @@ export declare type PacketTarget = Array<Player | IConnection> | Player | IConne
 export interface IMultiplayerOptions {
     lobbyType: LobbyType;
     pvp: boolean;
-    ghostDataClear: boolean;
+    allowHardcoreRespawns: boolean;
     turnMode: TurnMode;
     maxPlayers: number;
     tickSpeed: number;
@@ -133,15 +134,16 @@ export interface IMultiplayerNetworkingOptions {
     enableWebRtcConnections: boolean;
     enablePacketNumberChecks: boolean;
     logPackets: boolean;
-    logSyncChecks: boolean;
     recentPacketTracking: number;
+    recentHashedSyncCheckTracking: number;
     joinServerTimeout: number;
     steamNetworkTimeout: number;
     webRtcTimeout: number;
     connectionTimeout: number;
     keepAliveInterval: number;
     keepAliveTimeout: number;
-    steamNetworkingConnectionWebRTCFallbackTimeout: number;
+    steamNetworkingConnectionWebRTCFallbackInitialTimeout: number;
+    steamNetworkingConnectionWebRTCFallbackDownloadingTimeout: number;
 }
 export declare type ServerInfo = string | IMatchmakingInfo;
 export declare enum PacketAcceptType {

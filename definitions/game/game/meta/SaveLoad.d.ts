@@ -35,6 +35,6 @@ declare module SaveLoad {
     /**
      * Called from the GameEnd menu
      */
-    function respawnInCasualMode(): void;
+    function respawn(): void;
 }
 export default SaveLoad;

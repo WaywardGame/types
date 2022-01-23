@@ -89,6 +89,7 @@ export default class InGameScreen extends BaseScreen {
     private lastGlobalMouseInfo;
     private craftableItemTypes;
     private nonCraftableItemTypes;
+    private dismantleItems;
     private craftingDialogDirty;
     constructor();
     selector(): string;
@@ -142,7 +143,7 @@ export default class InGameScreen extends BaseScreen {
     refreshQuickSlots(): void;
     getInventoryItemsInOrder(): any[];
     loadQuickSlots(): void;
-    saveItemOrder(containerElement: JQuery): void;
+    saveItemOrder(containerElement: JQuery, activeSort?: boolean): void;
     showItemContextMenu(element: JQuery, skipSound?: boolean): void;
     onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): void;
     runContextMenuItemAction(itemId: number, action: IContextMenuAction, skipSound?: boolean, usedFromQuickSlot?: boolean, itemTypeBypass?: ItemType): boolean;
@@ -174,7 +175,7 @@ export default class InGameScreen extends BaseScreen {
     setEquipSlot(equip: EquipType, itemId?: number, internal?: boolean): void;
     removeItemFromEquipSlot(equip: EquipType): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
-    updateDismantleTab(dismantleItems: IDismantleComponent): void;
+    updateDismantleTab(dismantleItems: IDismantleComponent, force?: boolean): void;
     createCraftItemElements(containerSortInfo: IContainerSortInfo): void;
     updateItem(item: Item, updateChildren?: boolean): void;
     onGlobalMouseMove(mouseInfo: GlobalMouseInfo, _: Vector2): void;
@@ -218,13 +219,12 @@ export default class InGameScreen extends BaseScreen {
      */
     filterContainers(): void;
     /**
-     * Invalidates and updates mouse targets when crafting/dismantle table updates are called whether or not tables updates are defered.
+     * Invalidates and updates mouse targets when mouse is inside crafting/dismantle containers
      */
     invalidateTableTargets(): void;
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
     getContainerId(containerElement: JQuery): string;
-    sortItems(containerElement: JQuery, sortType: SortType, messageType?: Message, canReverse?: boolean): void;
-    updateInventorySort(): void;
+    sortItems(containerElement: JQuery, sortType: SortType, messageType?: Message, canReverse?: boolean, activeSort?: boolean): void;
     onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;
     updateSort(containerElement: JQuery, activeSort: boolean): void;
     isContainerDialogOver(x: number, y: number): boolean;
