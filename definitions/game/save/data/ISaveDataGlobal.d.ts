@@ -33,6 +33,8 @@ export interface IOptions {
     developerModeContextMenu: boolean;
     dialogOpacity: number;
     directionTurnDelay: number;
+    disableCraftingProtectedItems: boolean;
+    disableHealthVignette: boolean;
     disableUIEffects: boolean;
     disableUIOpacity: boolean;
     dropLocation: DropLocation;
@@ -51,7 +53,6 @@ export interface IOptions {
     muteMusic: boolean;
     playInputSoundWhenTyping: boolean;
     powerPreference: PowerMode;
-    disableCraftingProtectedItems: boolean;
     realTimeTickSpeed: number;
     rightClickInspect: boolean;
     rightHand: boolean;

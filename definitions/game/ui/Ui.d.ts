@@ -33,6 +33,7 @@ export interface IUiEvents {
     interruptClose(options: Partial<InterruptOptions>, result?: string | boolean | InterruptChoice): any;
     loadedFromSave(): any;
     toggleShowMoreInformation(showingMoreInformation: boolean): any;
+    toggleHealthVignette(healthVignette: boolean): any;
     toggleDeveloperMode(developerMode: boolean): any;
 }
 export declare class Ui extends EventEmitter.Host<IUiEvents> {
@@ -63,6 +64,10 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     playSound(sound: SfxType | "activate" | "select" | "input" | "enable" | "disable"): void;
     shouldShowMoreInformation(): boolean;
     toggleShowMoreInformation(showMoreInformation: boolean): void;
+    /**
+     * Toggle health vignette
+     */
+    toggleHealthVignette(healthVignette: boolean): void;
     /**
      * Toggles fullscreen
      */
