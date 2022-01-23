@@ -190,13 +190,13 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      */
     getBestSafeItemInContainerByUse(container: IContainer, action: ActionType, allowProtectedItems?: boolean, actionMayDamageItem?: boolean, consumable?: boolean): Item | undefined;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item, allowProtectedItems?: boolean): Item | undefined;
-    getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, allowProtectedItems?: boolean): Item | undefined;
-    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, allowProtectedItems?: boolean): Item | undefined;
+    getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, ignoreItem?: Item, allowProtectedItems?: boolean): Item | undefined;
+    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item, allowProtectedItems?: boolean): Item | undefined;
     getItemInAdjacentContainersByGroup(position: IVector3, itemTypeGroupSearch: ItemTypeGroup): Item | undefined;
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean, allowProtectedItems?: boolean): Item[];
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, filterText?: string): Item[];
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean): Item[];
-    getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number): Item | undefined;
+    getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item): Item | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     getAdjacentContainers(humanOrPosition: Human | IVector3, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
