@@ -105,6 +105,8 @@ export declare enum MultiplayerSyncCheck {
 export declare const maxPlayers = 32;
 export declare const packetTickRate = 16;
 export declare const defaultServerPort = 38740;
+export declare const defaultSshServerPort = 38742;
+export declare const defaultSshServerUsername = "wayward";
 export declare const steamLobbyPrefix = "steam:";
 export declare const checkConnectionMatchmakingId = "check";
 export declare const defaultSyncChecks: MultiplayerSyncCheck[];
