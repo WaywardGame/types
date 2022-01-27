@@ -23,8 +23,8 @@ export interface IGetItemOptions {
      */
     excludeProtectedItems: boolean;
     /**
-     * True to include protected items if they pass an item.willBreakOnDamage() check.
-     * excludeProtectedItems must be set to false for this to work.
+     * True to only include protected items if they pass an item.willBreakOnDamage() check.
+     * excludeProtectedItems must be set to true for this to work.
      */
     includeProtectedItemsThatWillNotBreak: ActionType;
     /**
