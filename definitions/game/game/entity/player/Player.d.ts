@@ -220,6 +220,12 @@ export default class Player extends Human implements IUnserializedCallback {
      */
     isExploredClientSide(x: number, y: number, z: number): boolean;
     /**
+     * Multiply the reputation amount with whatever is set via milestone modifiers or custom game options for this player.
+     * @param reputation A number or undefined to be mutiplied.
+     * @returns A number or undefined if a reputation number was not passed.
+     */
+    getReputationMultiplier(reputation: number | undefined): number | undefined;
+    /**
      * @deprecated Do not call this with players.
      */
     moveTo(): boolean;

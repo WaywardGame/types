@@ -62,7 +62,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     /**
      * Gets the field of view radius based on either the field of view object, player, or the default value
      */
-    private static getRadius;
+    static getRadius(fieldOfView: FieldOfView | undefined, player: Player | undefined): number;
     /**
      * Marks a set of tiles as exploreed
      */
