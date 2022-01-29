@@ -14,6 +14,7 @@ import type { ActionType } from "game/entity/action/IAction";
 import type Entity from "game/entity/Entity";
 import type Human from "game/entity/Human";
 import type { AttackType } from "game/entity/IEntity";
+import type { WeightStatus } from "game/entity/player/IPlayer";
 import type { ISkillEvents } from "game/entity/skill/SkillManager";
 import type { IHasImagePath, Quality } from "game/IObject";
 import type { ItemType } from "game/item/IItem";
@@ -55,6 +56,11 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      */
     canAttack(weapon: Item | undefined, attackType: AttackType): boolean | undefined;
     calculateEquipmentStats(): any;
+    /**
+     * Called when getting the players weight status
+     * @returns The weight status of the player or undefined to use the default logic
+     */
+    getWeightStatus(): WeightStatus | undefined;
     /**
      * Called when checking if a human is swimming
      * @param isSwimming True if the human is swimming
@@ -229,3 +235,8 @@ export interface IHumanOld extends Partial<Human> {
         core: number;
     }>;
 }
+/**
+ * At this weight or more, you are encumbered.
+ * Defaults to 90% (0.9)
+ */
+export declare const WEIGHT_ENCUMBERED = 0.9;

@@ -184,11 +184,6 @@ export interface IPlayerEvents extends Events<Human> {
      */
     updateWeight(newWeight: number): number | undefined;
     /**
-     * Called when getting the players weight status
-     * @returns The weight status of the player or undefined to use the default logic
-     */
-    getWeightStatus(): WeightStatus | undefined;
-    /**
      * Called when getting the players weight or stamina movement penalty
      * @returns The weight/stamina movement penalty for the player or undefined to use the default logic
      */
@@ -376,11 +371,6 @@ export declare enum WeightStatus {
  * The amount of extra weight the player can hold (added to max health)
  */
 export declare const STRENGTH_BONUS = 25;
-/**
- * At this weight or more, you are encumbered.
- * Defaults to 90% (0.9)
- */
-export declare const WEIGHT_ENCUMBERED = 0.9;
 export interface IWalkPath {
     path: IVector2[];
     force?: boolean;

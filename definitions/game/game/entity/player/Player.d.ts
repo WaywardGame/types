@@ -20,7 +20,7 @@ import { EquipType, RestCancelReason, SkillType } from "game/entity/IHuman";
 import type { IStat } from "game/entity/IStats";
 import { Stat } from "game/entity/IStats";
 import type { ILoadOnIslandOptions, IMovementIntent, IPlayerEvents, IWalkPath } from "game/entity/player/IPlayer";
-import { TurnType, WeightStatus } from "game/entity/player/IPlayer";
+import { TurnType } from "game/entity/player/IPlayer";
 import MessageManager from "game/entity/player/MessageManager";
 import NoteManager from "game/entity/player/note/NoteManager";
 import QuestManager from "game/entity/player/quest/QuestManager";
@@ -144,7 +144,6 @@ export default class Player extends Human implements IUnserializedCallback {
     load(): void;
     setup(spawnPoint: IVector3): void;
     updateReputation(reputation: number): void;
-    getWeightStatus(): WeightStatus;
     getWeightOrStaminaMovementPenalty(): number;
     /**
      * Check if there is a still in front of the player.

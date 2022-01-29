@@ -17,7 +17,7 @@ import type { ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, IRest
 import { EquipType, SkillType } from "game/entity/IHuman";
 import { Stat } from "game/entity/IStats";
 import type { IAttackHand, IMobCheck } from "game/entity/player/IPlayer";
-import { PlayerState } from "game/entity/player/IPlayer";
+import { WeightStatus, PlayerState } from "game/entity/player/IPlayer";
 import PlayerDefense from "game/entity/player/PlayerDefense";
 import SkillManager from "game/entity/skill/SkillManager";
 import { StatChangeCurrentTimerStrategy } from "game/entity/StatFactory";
@@ -89,6 +89,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     updateReputation(reputation: number): void;
     capReputation(): void;
     setPaddling(item: Item | undefined, extinguishTorches?: boolean): void;
+    getWeightStatus(): WeightStatus;
     /**
      * Extinguishes all torches the player is holding.
      */
