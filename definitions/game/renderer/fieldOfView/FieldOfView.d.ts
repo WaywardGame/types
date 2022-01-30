@@ -21,6 +21,7 @@ import type { IBound3 } from "utilities/math/Bound3";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import type { IRendererOrigin } from "renderer/context/RendererOrigin";
+import type { IslandId } from "game/island/IIsland";
 export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     protected readonly context: RendererContext;
     private readonly worldRenderer;
@@ -50,7 +51,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     private transitionFinishTime;
     private lastComputedIslandId;
     static initializePrograms(webGlContext: WebGlContext): Promise<void>;
-    static canSeePosition(origin: IRendererOrigin, type: CanASeeBType, tileX: number, tileY: number, tileZ: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
+    static canSeePosition(origin: IRendererOrigin, type: CanASeeBType, islandId: IslandId, tileX: number, tileY: number, tileZ: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
     static getBounds(origin: IVector3, radius: number): IBound3;
     /**
      * Updates the explored tiles around players

@@ -13,11 +13,13 @@ import type { IEventEmitter } from "event/EventEmitter";
 import type { ICreatureDescription, ICreatureEvents, IDamageInfo } from "game/entity/creature/ICreature";
 import { CreatureType } from "game/entity/creature/ICreature";
 import Entity from "game/entity/Entity";
+import type Human from "game/entity/Human";
 import type { IStatChangeInfo } from "game/entity/IEntity";
 import { AiType, EntityType, MoveType, StatusType } from "game/entity/IEntity";
 import type { IStat } from "game/entity/IStats";
 import type Player from "game/entity/player/Player";
 import type { CreationId } from "game/IGame";
+import { TileUpdateType } from "game/IGame";
 import type { IObject } from "game/IObject";
 import type Item from "game/item/Item";
 import type { ITile } from "game/tile/ITerrain";
@@ -29,6 +31,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     readonly objectType: CreationId.Creature;
     event: IEventEmitter<this, ICreatureEvents>;
     readonly entityType: EntityType.Creature;
+    readonly tileUpdateType = TileUpdateType.Creature;
     aberrant?: boolean;
     ai: AiType;
     enemy?: number;
@@ -101,7 +104,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): boolean | void | undefined;
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
-    findPath(target: IVector2, maxNodesChecked?: number, ignorePlayer?: Player): IVector2[] | undefined;
+    findPath(target: IVector2, maxNodesChecked?: number, ignoreHuman?: Human): IVector2[] | undefined;
     /**
      * Check creature move with a multiplayer sync check
      * @param source Provided when the check is running in a sync environment (NOT CLIENTSIDE)

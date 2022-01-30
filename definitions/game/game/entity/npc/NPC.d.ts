@@ -17,7 +17,7 @@ import { AiType, EntityType, MoveType } from "game/entity/IEntity";
 import type { ICustomizations } from "game/entity/IHuman";
 import { EquipType } from "game/entity/IHuman";
 import type { NPCType } from "game/entity/npc/INPCs";
-import { CreationId } from "game/IGame";
+import { CreationId, TileUpdateType } from "game/IGame";
 import type { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type { ITile } from "game/tile/ITerrain";
@@ -50,6 +50,7 @@ export default abstract class NPC extends Human {
     readonly objectType = CreationId.NPC;
     readonly event: IEventEmitter<this, INPCEvents>;
     readonly entityType: EntityType.NPC;
+    readonly tileUpdateType = TileUpdateType.NPC;
     get constructorFunction(): typeof NPC;
     ai: AiType;
     seen: number;

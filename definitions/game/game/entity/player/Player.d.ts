@@ -25,6 +25,7 @@ import MessageManager from "game/entity/player/MessageManager";
 import NoteManager from "game/entity/player/note/NoteManager";
 import QuestManager from "game/entity/player/quest/QuestManager";
 import type { StatChangeCurrentTimerStrategy, StatChangeTimerFactory } from "game/entity/StatFactory";
+import { TileUpdateType } from "game/IGame";
 import type { IMoveToIslandOptions, IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import type { IContainer, RecipeLevel } from "game/item/IItem";
@@ -42,9 +43,11 @@ import type { IUnserializedCallback } from "save/serializer/ISerializer";
 import type { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/old/IOldUi";
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
+import type { IVector4 } from "utilities/math/Vector4";
 export default class Player extends Human implements IUnserializedCallback {
     event: IEventEmitter<this, IPlayerEvents>;
     readonly entityType: EntityType.Player;
+    readonly tileUpdateType = TileUpdateType.Player;
     absentLastUsedTime: number;
     containerSortInfo: Record<string, IContainerSortInfo>;
     dialogContainerInfo: Record<number, IDialogInfo>;
@@ -60,9 +63,7 @@ export default class Player extends Human implements IUnserializedCallback {
     quickSlotInfo: IQuickSlotInfo[];
     realTimeTickActionDelay: number;
     revealedItems: Record<number, boolean>;
-    respawnPoint: {
-        islandId: IslandId;
-    } & IVector3 | undefined;
+    respawnPoint: IVector4 | undefined;
     tamedCreatures: Map<string, number[]>;
     turns: number;
     walkSoundCounter: number;
@@ -177,7 +178,7 @@ export default class Player extends Human implements IUnserializedCallback {
     isServer(): boolean;
     isMultiplayerHost(): boolean;
     getName(): import("../../../language/impl/TranslationImpl").default;
-    canSeePosition(type: CanASeeBType, tileX: number, tileY: number, tileZ: number, fieldOfView?: FieldOfView): boolean;
+    canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     markAsExplored(points: IVector2[]): boolean | undefined;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction, contextActionSlot?: number, contextActionType?: ActionType, canUseProtected?: boolean): void;
     updateDialogInfo(dialogIndex: string | number): void;
