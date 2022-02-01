@@ -19,7 +19,7 @@ import type { ICheckUnderOptions, IRestData } from "game/entity/IHuman";
 import { EquipType, RestCancelReason, SkillType } from "game/entity/IHuman";
 import type { IStat } from "game/entity/IStats";
 import { Stat } from "game/entity/IStats";
-import type { ILoadOnIslandOptions, IMovementIntent, IPlayerEvents, IWalkPath } from "game/entity/player/IPlayer";
+import type { ILoadOnIslandOptions, IMovementIntent, IPlayerEvents } from "game/entity/player/IPlayer";
 import { TurnType } from "game/entity/player/IPlayer";
 import MessageManager from "game/entity/player/MessageManager";
 import NoteManager from "game/entity/player/note/NoteManager";
@@ -71,7 +71,6 @@ export default class Player extends Human implements IUnserializedCallback {
     quests: QuestManager;
     messages: MessageManager;
     notes: NoteManager;
-    walkPath: IWalkPath | undefined;
     exploredMap: ExploreMap[] | undefined;
     finishedMovingClientside: boolean;
     nextX: number;
@@ -81,7 +80,6 @@ export default class Player extends Human implements IUnserializedCallback {
     nextMoveTime: number;
     nextMoveDirection: Direction.Cardinal | Direction.None | undefined;
     displayCreature?: CreatureType;
-    private readonly _movementIntent;
     private readonly milestonesCollection;
     private gameOptionsCached?;
     private handEquippedToLast;
@@ -122,8 +120,7 @@ export default class Player extends Human implements IUnserializedCallback {
     equip(item: Item, slot: EquipType, internal?: boolean, switchingHands?: boolean): boolean;
     unequip(item: Item, internal?: boolean, skipMessage?: boolean, skipRevertItem?: boolean): void;
     unequipAll(): void;
-    getMovementIntent(): IMovementIntent;
-    updateMovementIntent(movementIntent: IMovementIntent): void;
+    updateMovementIntent(movementIntent: IMovementIntent): boolean;
     resetStatTimers(type?: StatChangeCurrentTimerStrategy): void;
     /**
      * Gets the max health of the player.
@@ -189,7 +186,6 @@ export default class Player extends Human implements IUnserializedCallback {
     respawn(reset: boolean): Promise<void>;
     getMovementProgress(): number;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
-    hasWalkPath(): boolean;
     walkAlongPath(path: IVector2[] | undefined, force?: boolean): void;
     /**
      * This is only ran on the server

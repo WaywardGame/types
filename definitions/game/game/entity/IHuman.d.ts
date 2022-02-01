@@ -25,6 +25,7 @@ import type { ITile } from "game/tile/ITerrain";
 import type { IModdable } from "mod/ModRegistry";
 import type { IRGB } from "utilities/Color";
 import type { Direction } from "utilities/math/Direction";
+import type { IVector2 } from "utilities/math/IVector";
 import type { IRange } from "utilities/math/Range";
 export interface IHumanEvents extends Events<Entity>, ISkillEvents {
     /**
@@ -67,6 +68,10 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
      */
     isSwimming(isSwimming: boolean): boolean | undefined;
+    /**
+     * Called when the walk path of the player changes.
+     */
+    walkPathChange(walkPath: IVector2[] | undefined): any;
     /**
      * Called when a book is opened by a player
      * @param book The book that was opened

@@ -129,7 +129,7 @@ export default abstract class NPC extends Human {
     protected autoScaleStats(): void;
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): boolean | void | undefined;
     protected postMove(): void;
-    private checkMove;
+    protected checkMove(moveType: MoveType, tileX: number, tileY: number, tileZ: number): 0 | -1 | -2 | -3 | -4 | -5;
     get asNPC(): NPC;
     get asPlayer(): undefined;
     get asLocalPlayer(): undefined;
