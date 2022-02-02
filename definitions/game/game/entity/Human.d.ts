@@ -50,15 +50,15 @@ export default abstract class Human extends Entity implements IHasInsulation {
     equippedReferences: Map<EquipType, ItemReference>;
     handToUse: EquipType | undefined;
     inventory: IContainer;
-    islandId: IslandId;
     options: Readonly<IOptions>;
+    islandId: IslandId;
     readonly equipEffects: Map<EquipEffect, EquipEffects>;
-    readonly movementIntent: IMovementIntent;
     restData: IRestData | undefined;
     score: number;
     state: PlayerState;
     swimming: boolean;
     vehicleItemReference: ItemReference | undefined;
+    readonly movementIntent: IMovementIntent;
     walkPath: IWalkPath | undefined;
     identifier: string;
     skill: SkillManager;
