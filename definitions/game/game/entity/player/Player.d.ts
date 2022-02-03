@@ -207,10 +207,6 @@ export default class Player extends Human implements IUnserializedCallback {
      */
     updateStrength(): void;
     /**
-     * Returns the bartering bonus for a given credit value
-     */
-    getBarteringBonus(baseCredits: number): number;
-    /**
      * Check if a position is marked as explored
      * Only use this clientside
      */

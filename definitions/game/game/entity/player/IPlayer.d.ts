@@ -21,7 +21,6 @@ import type { INote } from "game/entity/player/note/NoteManager";
 import type Player from "game/entity/player/Player";
 import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
-import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type { Prompt } from "game/meta/prompt/IPrompt";
@@ -115,25 +114,6 @@ export interface IPlayerEvents extends Events<Human> {
      * Called when the player attempts to sail off the edge of the map
      */
     sailOffMapEdge(direction: Direction): any;
-    /**
-     * Called when an item is added to the player's inventory
-     * @param item The item object
-     * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
-     */
-    inventoryItemAdd(item: Item, container: IContainer): any;
-    /**
-     * Called when an item is removed from the players inventory
-     * @param item The item object
-     * @param container The container object the item was moved to.
-     */
-    inventoryItemRemove(item: Item, container: IContainer): any;
-    /**
-     * Called when an item is moved from one container to another, while still in the players inventory.
-     * @param item The item object
-     * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
-     * @param previousContainer The container object the item was moved from. This container might be inventory or a container within the inventory.
-     */
-    inventoryItemUpdate(item: Item, container: IContainer, previousContainer?: IContainer): any;
     /**
      * Called when the player equips an item to a slot
      * @param player The player object

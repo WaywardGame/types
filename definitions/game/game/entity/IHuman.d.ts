@@ -17,7 +17,7 @@ import type { AttackType } from "game/entity/IEntity";
 import type { WeightStatus } from "game/entity/player/IPlayer";
 import type { ISkillEvents } from "game/entity/skill/SkillManager";
 import type { IHasImagePath, Quality } from "game/IObject";
-import type { ItemType } from "game/item/IItem";
+import type { IContainer, ItemType } from "game/item/IItem";
 import { RecipeLevel } from "game/item/IItem";
 import type Item from "game/item/Item";
 import { TempType } from "game/temperature/ITemperature";
@@ -28,6 +28,25 @@ import type { Direction } from "utilities/math/Direction";
 import type { IVector2 } from "utilities/math/IVector";
 import type { IRange } from "utilities/math/Range";
 export interface IHumanEvents extends Events<Entity>, ISkillEvents {
+    /**
+     * Called when an item is added to the player's inventory
+     * @param item The item object
+     * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
+     */
+    inventoryItemAdd(item: Item, container: IContainer): any;
+    /**
+     * Called when an item is removed from the players inventory
+     * @param item The item object
+     * @param container The container object the item was moved to.
+     */
+    inventoryItemRemove(item: Item, container: IContainer): any;
+    /**
+     * Called when an item is moved from one container to another, while still in the players inventory.
+     * @param item The item object
+     * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
+     * @param previousContainer The container object the item was moved from. This container might be inventory or a container within the inventory.
+     */
+    inventoryItemUpdate(item: Item, container: IContainer, previousContainer?: IContainer): any;
     /**
      * Called when the human faces a different direction
      * @param direction The direction the player is now facing

@@ -253,11 +253,11 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     /**
      * Summons a void dweller based on item worth and chance or provides a hint message.
      * @param item Item to get the worth of.
-     * @param player The player that is dropping the item.
+     * @param human The human that is dropping the item.
      * @param point The point in which we are dropping the item.
      * @returns True or false based on if we get a message or not.
      */
-    summonVoidDweller(item: Item, player: Player | NPC, point: IVector3): boolean;
+    summonVoidDweller(item: Item, human: Human, point: IVector3): boolean;
     /**
      * Note: don't print items to the console because the console will hold the item indefinitely
      */

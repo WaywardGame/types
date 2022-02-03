@@ -143,6 +143,10 @@ export default abstract class Human extends Entity implements IHasInsulation {
     isSwimming(): boolean;
     updateSwimming(): void;
     updatePaddling(): void;
+    /**
+     * Returns the bartering bonus for a given credit value
+     */
+    getBarteringBonus(baseCredits: number): number;
     getInsulation(type: TempType): number;
     protected resetStatTimers(type?: StatChangeCurrentTimerStrategy): void;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;

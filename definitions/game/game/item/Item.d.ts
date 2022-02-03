@@ -17,7 +17,6 @@ import type Entity from "game/entity/Entity";
 import type Human from "game/entity/Human";
 import { DamageType, EntityType } from "game/entity/IEntity";
 import { EquipType, SkillType } from "game/entity/IHuman";
-import type NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
 import { CreationId } from "game/IGame";
 import type { IObject, IObjectOptions } from "game/IObject";
@@ -202,22 +201,22 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     rerollMagicalPropertyValues(): void;
     addMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     getMagicalPropertyInfo(type: MagicalPropertyType): IMagicalPropertyInfo | undefined;
-    acquireNotify(player: Player): void;
+    acquireNotify(human: Human): void;
     getStokeFireValue(): number | undefined;
     getStokeFireBonusValue(): number;
     getOnUseBonus(): number;
     /**
      * Gets the worth of an item used for merchant trading. Does not consider batering or modifiers bonuses; use Item.getTraderSellPrice for that.
-     * @param player The player that is trading the item for its worth (used for durability calculations).
+     * @param human The human that is trading the item for its worth (used for durability calculations).
      * @param magicalWorth Include the value of `MagicalPropertyType.Worth`, defaults to true
      */
-    getWorth(player: Player | undefined, magicalWorth?: boolean): number;
+    getWorth(human: Human | undefined, magicalWorth?: boolean): number;
     /**
-     * The full price the item will go for when traded to a merchant NPC. Considers modifiers and a player's bartering skill.
-     * @param player The player that is trading the item.
+     * The full price the item will go for when traded to a merchant NPC. Considers modifiers and a human's bartering skill.
+     * @param human The human that is trading the item.
      * @param magicalWorth Include the value of `MagicalPropertyType.Worth`, defaults to true
      */
-    getTraderSellPrice(player: Player | undefined, magicalWorth?: boolean): number;
+    getTraderSellPrice(human: Human | undefined, magicalWorth?: boolean): number;
     canBurnPlayer(): boolean;
     getBaseDefense(): number;
     getDurabilityCharge(): number;
@@ -259,12 +258,12 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @returns A number (possibly 0 if no quality or action level).
      */
     getItemUseBonus(action: ActionType): number;
-    getRangedWeapon(player: Player | NPC): Item | boolean;
+    getRangedWeapon(human: Human): Item | boolean;
     /**
      * Extinguishes to item if it is lit.
-     * @param player Player or NPC entity that is carrying the item to extinguish.
+     * @param human Human entity that is carrying the item to extinguish.
      */
-    extinguish(player: Player | NPC | undefined): void;
+    extinguish(human: Human | undefined): void;
     /**
      * Get the maximum durability for an item based on many factors.
      * @param human Player that we checking to get the maximum item durability (as game options can affect this).

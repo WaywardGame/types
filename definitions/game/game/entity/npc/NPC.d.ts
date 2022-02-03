@@ -89,10 +89,6 @@ export default abstract class NPC extends Human {
      * Sets the default weightCapacity of an NPC (based on their equipment and starting items).
      */
     generateWeightCapacity(): void;
-    /**
-     * Returns the bartering bonus for a given credit value
-     */
-    getBarteringBonus(baseCredits: number): number;
     getName(): import("../../../language/impl/TranslationImpl").default;
     protected getApplicableStatusEffects(): Set<StatusType>;
     /**
