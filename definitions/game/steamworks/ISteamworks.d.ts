@@ -35,8 +35,8 @@ export interface IDedicatedServerInfo {
         dailyChallenge?: boolean;
     };
     ssh: boolean;
-    sshPort?: number;
-    sshUsername?: string;
+    sshPort: number;
+    sshUsername: string;
     sshPassword?: string;
     devMode: boolean;
     syncChecks: MultiplayerSyncCheckLevel;

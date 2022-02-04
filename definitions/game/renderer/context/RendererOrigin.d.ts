@@ -16,6 +16,7 @@ import type Island from "game/island/Island";
 import FieldOfView from "renderer/fieldOfView/FieldOfView";
 import type { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
 import type { IVector3 } from "utilities/math/IVector";
+import type { IVector4 } from "utilities/math/Vector4";
 export interface IRendererOrigin {
     readonly islandId: IslandId;
     readonly island: Island;
@@ -28,11 +29,11 @@ export interface IRendererOrigin {
     readonly asEntity: Entity | undefined;
     readonly asPlayer: Player | undefined;
     readonly asHuman: Human | undefined;
-    canSeePosition(type: CanASeeBType, x: number, y: number, z: number, fieldOfView: FieldOfView | undefined): boolean;
-    canSeeObject(type: CanASeeBType, object: IVector3 & {
+    canSeeObject(type: CanASeeBType, object: IVector4 & {
         fromX: number;
         fromY: number;
     }, fieldOfView: FieldOfView | undefined): boolean;
+    canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView: FieldOfView | undefined): boolean;
     getMovementProgress(timeStamp: number): number;
 }
 export declare class RendererOrigin implements IRendererOrigin {
@@ -47,13 +48,13 @@ export declare class RendererOrigin implements IRendererOrigin {
     readonly isMovingClientside: boolean;
     readonly asEntity: Entity | undefined;
     readonly asPlayer: Player | undefined;
-    readonly asHuman: Player | undefined;
+    readonly asHuman: Human | undefined;
     private constructor();
     get island(): Island;
     getMovementProgress(_timeStamp: number): number;
-    canSeeObject(type: CanASeeBType, object: IVector3 & {
+    canSeeObject(type: CanASeeBType, object: IVector4 & {
         fromX: number;
         fromY: number;
     }, fieldOfView: FieldOfView | undefined): boolean;
-    canSeePosition(type: CanASeeBType, x: number, y: number, z: number, fieldOfView: FieldOfView | undefined): boolean;
+    canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView: FieldOfView | undefined): boolean;
 }

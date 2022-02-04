@@ -16,8 +16,8 @@ import type { ICausesDamage } from "game/entity/IEntity";
 import type { ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, IRestData, RestCancelReason } from "game/entity/IHuman";
 import { EquipType, SkillType } from "game/entity/IHuman";
 import { Stat } from "game/entity/IStats";
-import type { IAttackHand, IMobCheck } from "game/entity/player/IPlayer";
-import { PlayerState } from "game/entity/player/IPlayer";
+import type { IAttackHand, IMobCheck, IMovementIntent, IWalkPath } from "game/entity/player/IPlayer";
+import { WeightStatus, PlayerState } from "game/entity/player/IPlayer";
 import PlayerDefense from "game/entity/player/PlayerDefense";
 import SkillManager from "game/entity/skill/SkillManager";
 import { StatChangeCurrentTimerStrategy } from "game/entity/StatFactory";
@@ -36,7 +36,7 @@ import type TileEvent from "game/tile/TileEvent";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import type { IOptions } from "save/data/ISaveDataGlobal";
-import type { IVector3 } from "utilities/math/IVector";
+import type { IVector2, IVector3 } from "utilities/math/IVector";
 export declare const REPUTATION_MAX = 64000;
 export default abstract class Human extends Entity implements IHasInsulation {
     static getNameTranslation(): import("../../language/impl/TranslationImpl").default;
@@ -50,14 +50,16 @@ export default abstract class Human extends Entity implements IHasInsulation {
     equippedReferences: Map<EquipType, ItemReference>;
     handToUse: EquipType | undefined;
     inventory: IContainer;
-    islandId: IslandId;
     options: Readonly<IOptions>;
+    islandId: IslandId;
     readonly equipEffects: Map<EquipEffect, EquipEffects>;
     restData: IRestData | undefined;
     score: number;
     state: PlayerState;
     swimming: boolean;
     vehicleItemReference: ItemReference | undefined;
+    readonly movementIntent: IMovementIntent;
+    walkPath: IWalkPath | undefined;
     identifier: string;
     skill: SkillManager;
     private readonly privateStore;
@@ -89,6 +91,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     updateReputation(reputation: number): void;
     capReputation(): void;
     setPaddling(item: Item | undefined, extinguishTorches?: boolean): void;
+    getWeightStatus(): WeightStatus;
     /**
      * Extinguishes all torches the player is holding.
      */
@@ -106,6 +109,10 @@ export default abstract class Human extends Entity implements IHasInsulation {
     burn(fireType: FireType, skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
     setPosition(point: IVector3): void;
     setZ(z: number, updateFlowField?: boolean): void;
+    getMovementIntent(): IMovementIntent;
+    updateMovementIntent(movementIntent: IMovementIntent): boolean;
+    hasWalkPath(): boolean;
+    walkAlongPath(path: IVector2[] | undefined, force?: boolean): void;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
     damageByInteractingWith(thing: Doodad | TileEvent, options: ICheckUnderOptions | undefined, damageLocation: EquipType): ICheckUnderOptions;
     equip(item: Item, slot: EquipType): boolean;
@@ -136,6 +143,10 @@ export default abstract class Human extends Entity implements IHasInsulation {
     isSwimming(): boolean;
     updateSwimming(): void;
     updatePaddling(): void;
+    /**
+     * Returns the bartering bonus for a given credit value
+     */
+    getBarteringBonus(baseCredits: number): number;
     getInsulation(type: TempType): number;
     protected resetStatTimers(type?: StatChangeCurrentTimerStrategy): void;
     protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;

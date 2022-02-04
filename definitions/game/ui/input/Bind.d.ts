@@ -65,7 +65,7 @@ declare enum BindingEvent {
     holding = 2
 }
 declare type BindingEventName = keyof typeof BindingEvent;
-export { BindingEventName as BindingEvent };
+export type { BindingEventName as BindingEvent };
 declare module Bind {
     /**
      * Registers a handler for when the given `Bindable` is pressed. This event won't be fired again until the `Bindable` was then *released*.

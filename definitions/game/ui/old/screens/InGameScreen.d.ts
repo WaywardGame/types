@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { ActionType } from "game/entity/action/IAction";
 import { EquipType } from "game/entity/IHuman";
 import type { IContainer, IDismantleComponent } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
@@ -79,7 +80,6 @@ export default class InGameScreen extends BaseScreen {
     actionsMenuCentered: boolean;
     private activeContainer;
     private multipleContainersOpened;
-    private contextMenuBindPressed;
     private sortableElement;
     private sortableElementPosition;
     private sortableElementTargetContainer;
@@ -237,7 +237,6 @@ export default class InGameScreen extends BaseScreen {
     onItemEquipToggle(api: IBindHandlerApi): boolean;
     onItemProtectToggle(api: IBindHandlerApi): boolean;
     onContextMenu(api: IBindHandlerApi): boolean;
-    onContextMenuReleased(_api: IBindHandlerApi): void;
     onQuickSlotToggle(api: IBindHandlerApi): boolean;
     onQuickSlot(api: IBindHandlerApi): boolean;
     onQuickSlotClear(api: IBindHandlerApi): boolean;
@@ -252,6 +251,7 @@ export default class InGameScreen extends BaseScreen {
     onHandToggle(api: IBindHandlerApi): boolean;
     onInput(api: IBindHandlerApi): void;
     private clearActionsMenuTileOverlay;
+    getAutoActionItem(actionType: ActionType, allowProtectedItems?: boolean): Item | undefined;
     private runAutoAction;
     private runAction;
     private updateContextMenu;

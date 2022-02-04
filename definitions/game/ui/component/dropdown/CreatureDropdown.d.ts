@@ -12,5 +12,5 @@ import { CreatureType } from "game/entity/creature/ICreature";
 import type { IDropdownOption } from "ui/component/Dropdown";
 import EnumDropdown from "ui/component/dropdown/EnumDropdown";
 export default class CreatureDropdown<OTHER_OPTIONS extends string = never> extends EnumDropdown<typeof CreatureType, OTHER_OPTIONS> {
-    constructor(defaultOption: OTHER_OPTIONS | CreatureType, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
+    constructor(defaultOption: OTHER_OPTIONS | CreatureType, options?: Iterable<IDropdownOption<OTHER_OPTIONS>>);
 }

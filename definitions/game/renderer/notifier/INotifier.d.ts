@@ -9,9 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { SfxType } from "audio/IAudio";
+import type { IslandId } from "game/island/IIsland";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 export interface INotificationLocation extends IVector3 {
-    readonly islandId: string;
+    readonly islandId: IslandId;
     getMovementPoint?(timeStamp: number): IVector2;
     queueSoundEffect?(soundEffect: SfxType): void;
 }

@@ -17,7 +17,7 @@ import type Player from "game/entity/player/Player";
 import { Quality } from "game/IObject";
 import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent } from "game/item/IItem";
 import { ItemType, ItemTypeGroup } from "game/item/IItem";
-import type { IAddToContainerOptions, IRequirementInfo } from "game/item/IItemManager";
+import type { IAddToContainerOptions, IGetItemOptions, IGetItemsOptions, IRequirementInfo } from "game/item/IItemManager";
 import { CraftStatus, WeightType, ContainerReferenceSource } from "game/item/IItemManager";
 import Item from "game/item/Item";
 import type ItemRecipeRequirementChecker from "game/item/ItemRecipeRequirementChecker";
@@ -112,7 +112,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private static getDefaultWeightRange;
     load(): void;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
-    resolveContainer(container?: IContainer): Player | ITile | IContainer | Item | Doodad | NPC | undefined;
+    resolveContainer(container?: IContainer): Item | IContainer | Player | NPC | ITile | Doodad | undefined;
     getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
     hashContainer(containable: IContainable): string;
@@ -188,26 +188,26 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     /**
      * Get the best tier item
      */
-    getBestSafeItemInContainerByUse(container: IContainer, action: ActionType, allowProtectedItems?: boolean, actionMayDamageItem?: boolean, consumable?: boolean): Item | undefined;
-    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item, allowProtectedItems?: boolean): Item | undefined;
-    getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, ignoreItem?: Item, allowProtectedItems?: boolean): Item | undefined;
-    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item, allowProtectedItems?: boolean): Item | undefined;
+    getBestSafeItemInContainerByUse(container: IContainer, action: ActionType, options?: Partial<IGetItemsOptions>, consumable?: boolean): Item | undefined;
+    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, options?: Partial<IGetItemOptions>): Item | undefined;
+    getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, options?: Partial<IGetItemOptions>): Item | undefined;
+    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, options?: Partial<IGetItemOptions>): Item | undefined;
     getItemInAdjacentContainersByGroup(position: IVector3, itemTypeGroupSearch: ItemTypeGroup): Item | undefined;
-    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, allowProtectedItems?: boolean): Item[];
-    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, filterText?: string): Item[];
-    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean): Item[];
-    getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item): Item | undefined;
-    isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item): boolean;
+    getItemsInContainer(container: IContainer, options?: Partial<IGetItemsOptions>): Item[];
+    getItemsInContainerByType(container: IContainer, itemType: ItemType, options?: Partial<IGetItemsOptions>, filterText?: string): Item[];
+    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, options?: Partial<IGetItemsOptions>): Item[];
+    getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, options?: Partial<IGetItemOptions>): Item | undefined;
+    isItemInContainer(container: IContainer, itemTypeSearch: ItemType, options?: Partial<IGetItemOptions>): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     getAdjacentContainers(humanOrPosition: Human | IVector3, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
-    isContainableInAdjacentContainer(player: Player, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
+    isContainableInAdjacentContainer(human: Human, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
     /**
      * Returns ordered items for the containers
      * Note: It may return the real containedItems array!
      */
-    getOrderedContainerItems(container: IContainer, allowProtectedItems?: boolean): Item[];
+    getOrderedContainerItems(container: IContainer, options?: Partial<IGetItemOptions>): Item[];
     reduceDismantleWeight(createdItems: Item[], itemWeight: number): void;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup): Translation;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number): Translation;
@@ -253,11 +253,11 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     /**
      * Summons a void dweller based on item worth and chance or provides a hint message.
      * @param item Item to get the worth of.
-     * @param player The player that is dropping the item.
+     * @param human The human that is dropping the item.
      * @param point The point in which we are dropping the item.
      * @returns True or false based on if we get a message or not.
      */
-    summonVoidDweller(item: Item, player: Player | NPC, point: IVector3): boolean;
+    summonVoidDweller(item: Item, human: Human, point: IVector3): boolean;
     /**
      * Note: don't print items to the console because the console will hold the item indefinitely
      */

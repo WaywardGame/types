@@ -9,15 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Entity from "game/entity/Entity";
-import type { MoveType } from "game/entity/IEntity";
+import type Player from "game/entity/player/Player";
 import type { IBound3 } from "utilities/math/Bound3";
 export interface IEntityManager<T extends Entity> {
     remove(entity: T): void;
-    updateFov(bounds: IBound3[]): number;
-    getMoveTypesInFov(): IMoveTypeZ[];
+    updateFov(playerBounds: IPlayerBound[]): void;
 }
 export default IEntityManager;
-export interface IMoveTypeZ {
-    moveType: MoveType;
-    z: number;
+export interface IPlayerBound {
+    player: Player;
+    bound: IBound3;
 }

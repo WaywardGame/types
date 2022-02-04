@@ -20,8 +20,7 @@ import type NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
 import Stats from "game/entity/Stats";
 import type StatusEffect from "game/entity/status/StatusEffect";
-import type { FireType } from "game/IGame";
-import { TileUpdateType } from "game/IGame";
+import type { FireType, TileUpdateType } from "game/IGame";
 import type { IInspector } from "game/inspection/IInfoProvider";
 import type { IslandId } from "game/island/IIsland";
 import type { ItemType, RecipeLevel } from "game/item/IItem";
@@ -36,6 +35,7 @@ import type { ItemNotifierType, StatNotificationType } from "renderer/notifier/I
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
+import type { IVector4 } from "utilities/math/Vector4";
 export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, ITemperatureSource, IVector3 {
     readonly stat: Stats<this>;
     entityType: EntityType;
@@ -100,7 +100,6 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     getActiveStatuses(): StatusEffect[];
     abstract damage(damageInfoOrAmount: IDamageInfo | number): number | undefined;
     getCraftingDifficulty(level: RecipeLevel): number;
-    getTileUpdateType(): TileUpdateType;
     getTile(): ITile;
     getPoint(): IVector3;
     getFacingPoint(): IVector3;
@@ -120,11 +119,11 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     isInFov(): boolean;
     setInFov(inFov: boolean): void;
     isOnFire(): FireType;
-    canSeePosition(type: CanASeeBType, x: number, y: number, z: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
-    canSeeObject(type: CanASeeBType, object: IVector3 & {
+    canSeeObject(type: CanASeeBType, object: IVector4 & {
         fromX: number;
         fromY: number;
-    }, fieldOfView?: FieldOfView): boolean;
+    }, fieldOfView?: FieldOfView, customRadius?: number): boolean;
+    canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     notifyItem(itemNotifierType: ItemNotifierType, type: ItemType): void;
@@ -134,6 +133,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     getProperty<T>(property: Property): T | undefined;
     removeProperty(property: Property): boolean;
     getProducedTemperature(): number | undefined;
+    abstract readonly tileUpdateType: TileUpdateType;
     get asEntity(): Entity;
     abstract get asCreature(): Creature | undefined;
     abstract get asHuman(): Human | undefined;

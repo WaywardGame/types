@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Player from "game/entity/player/Player";
+import type Human from "game/entity/Human";
 import type Island from "game/island/Island";
 import type { ITile } from "game/tile/ITerrain";
 import type { IVector2 } from "utilities/math/IVector";
@@ -24,7 +24,7 @@ declare const _default: {
     /**
      * Returns whether the tile is blocked (completely impassible)
      */
-    isWalkToTileBlocked(player: Player, tile: ITile, pos: IVector2, clientSide: boolean): boolean;
+    isWalkToTileBlocked(human: Human, tile: ITile, pos: IVector2, clientSide: boolean): boolean;
     readonly event: import("event/EventEmitter").IEventEmitter<any, IPathingEvents>;
 };
 export default _default;

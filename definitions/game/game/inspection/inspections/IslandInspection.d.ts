@@ -13,13 +13,13 @@ import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import Inspection from "game/inspection/Inspection";
 import Island from "game/island/Island";
-import Vector2 from "utilities/math/Vector2";
-export default class IslandInspection extends Inspection<Vector2> {
+import type { IVector2 } from "utilities/math/IVector";
+export default class IslandInspection extends Inspection<IVector2> {
     private readonly title;
     static getIslandName(island?: Island, useGenerated?: boolean): import("../../../language/impl/TranslationImpl").default;
     static handles(type: InspectType, island: unknown): boolean;
     get island(): Island | undefined;
-    constructor(island: Island | Vector2, title?: boolean);
+    constructor(island: Island | IVector2, title?: boolean);
     getId(): string;
     get(context: InfoProviderContext): (import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue)[];
     private getTreasureMaps;

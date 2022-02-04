@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "ES2019",
+        "target": "ES2021",
         "module": "AMD",
         "composite": true,
         "experimentalDecorators": true,
@@ -36,13 +36,10 @@
         },
         "types": [],
         "lib": [
-            "WebWorker.ImportScripts",
             "DOM",
             "DOM.Iterable",
-            "ScriptHost",
-            "ES2019",
-            "ES2020.String",
-            "ES2021.WeakRef"
+            "ES2021",
+            "WebWorker.ImportScripts",
         ]
     }
 }

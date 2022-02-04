@@ -21,7 +21,6 @@ import type { INote } from "game/entity/player/note/NoteManager";
 import type Player from "game/entity/player/Player";
 import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
-import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type { Prompt } from "game/meta/prompt/IPrompt";
@@ -116,25 +115,6 @@ export interface IPlayerEvents extends Events<Human> {
      */
     sailOffMapEdge(direction: Direction): any;
     /**
-     * Called when an item is added to the player's inventory
-     * @param item The item object
-     * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
-     */
-    inventoryItemAdd(item: Item, container: IContainer): any;
-    /**
-     * Called when an item is removed from the players inventory
-     * @param item The item object
-     * @param container The container object the item was moved to.
-     */
-    inventoryItemRemove(item: Item, container: IContainer): any;
-    /**
-     * Called when an item is moved from one container to another, while still in the players inventory.
-     * @param item The item object
-     * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
-     * @param previousContainer The container object the item was moved from. This container might be inventory or a container within the inventory.
-     */
-    inventoryItemUpdate(item: Item, container: IContainer, previousContainer?: IContainer): any;
-    /**
      * Called when the player equips an item to a slot
      * @param player The player object
      * @param item The item being equipped
@@ -183,11 +163,6 @@ export interface IPlayerEvents extends Events<Human> {
      * @returns A number to set the player weight to or undefined to use the default logic
      */
     updateWeight(newWeight: number): number | undefined;
-    /**
-     * Called when getting the players weight status
-     * @returns The weight status of the player or undefined to use the default logic
-     */
-    getWeightStatus(): WeightStatus | undefined;
     /**
      * Called when getting the players weight or stamina movement penalty
      * @returns The weight/stamina movement penalty for the player or undefined to use the default logic
@@ -376,11 +351,6 @@ export declare enum WeightStatus {
  * The amount of extra weight the player can hold (added to max health)
  */
 export declare const STRENGTH_BONUS = 25;
-/**
- * At this weight or more, you are encumbered.
- * Defaults to 90% (0.9)
- */
-export declare const WEIGHT_ENCUMBERED = 0.9;
 export interface IWalkPath {
     path: IVector2[];
     force?: boolean;

@@ -9,12 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { CreatureType } from "game/entity/creature/ICreature";
-import type { MoveType } from "game/entity/IEntity";
 export interface ISpawnableCreatures {
     pool: CreatureType[];
     aberrantChance: number;
-}
-export interface IMoveTypeZ {
-    moveType: MoveType;
-    z: number;
 }

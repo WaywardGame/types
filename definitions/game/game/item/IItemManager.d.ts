@@ -10,8 +10,34 @@
  */
 import type Doodad from "game/doodad/Doodad";
 import type { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
+import type { ActionType } from "game/entity/action/IAction";
+import type Item from "game/item/Item";
 import type TileEvent from "game/tile/TileEvent";
 import type { IVector3 } from "utilities/math/IVector";
+/**
+ * Includes all protected items by default
+ */
+export interface IGetItemOptions {
+    /**
+     * True to exclude protected items
+     */
+    excludeProtectedItems: boolean;
+    /**
+     * True to only include protected items if they pass an item.willBreakOnDamage() check.
+     * excludeProtectedItems must be set to true for this to work.
+     */
+    includeProtectedItemsThatWillNotBreak: ActionType;
+    /**
+     * Item will be ignored
+     */
+    ignoreItem?: Item;
+}
+export interface IGetItemsOptions extends IGetItemOptions {
+    /**
+     * Include sub containers in the search
+     */
+    includeSubContainers: boolean;
+}
 export declare enum CraftStatus {
     Invalid = 0,
     Failed = 1,

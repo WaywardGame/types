@@ -32,7 +32,7 @@ export default class Particle {
     constructor(context: RendererContext, worldRenderer: WorldRenderer, maxParticles?: number);
     delete(): void;
     create(island: Island, tileX: number, tileY: number, tileZ: number, particle: IRGB): void;
-    createMultiple(island: Island, tileX: number, tileY: number, tileZ: number, particle: IRGB, count: number, intensity?: number, ignoreFieldOfView?: boolean): void;
+    createMultiple(island: Island, tileX: number, tileY: number, tileZ: number, particle: IRGB, count: number, intensity?: number): void;
     clear(): void;
     update(timeStamp: number): void;
     render(x: number, y: number): boolean;

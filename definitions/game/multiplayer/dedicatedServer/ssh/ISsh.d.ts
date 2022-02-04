@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type * as ssh2 from "ssh2";
 import type Log from "utilities/Log";
 export declare const globalHistory: Map<string, string[]>;
 export declare const maxHistory = 50;
@@ -20,7 +21,7 @@ export interface ISshStream {
         toString(): string;
     }) => void): void;
 }
-export interface ISshSession {
+export interface ISshSession extends ssh2.Session {
     clientId: string;
     clientLog: Log;
 }

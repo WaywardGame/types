@@ -20,7 +20,8 @@ import type Human from "game/entity/Human";
 import { SkillType } from "game/entity/IHuman";
 import NPCManager from "game/entity/npc/NPCManager";
 import Player from "game/entity/player/Player";
-import { CreationId, FireType, IGameOld, TickFlag, TileUpdateType } from "game/IGame";
+import type { IGameOld } from "game/IGame";
+import { CreationId, FireType, TickFlag, TileUpdateType } from "game/IGame";
 import { Quality } from "game/IObject";
 import type { IIslandEvents, IIslandLoadOptions, ISeeds, IWaterContamination, IWaterFill, IWell } from "game/island/IIsland";
 import { WaterType } from "game/island/IIsland";
@@ -95,6 +96,11 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * Set of players on this island
      */
     readonly players: Set<Player>;
+    /**
+     * Entity move types in fov on this island
+     * `${z}-${moveType}` -> Players
+     */
+    readonly moveTypesInFov: Map<string, Set<Player>>;
     previousSaveVersion: IVersionInfo | undefined;
     brokenReferencesCount: number;
     civilizationScore: number;

@@ -15,7 +15,7 @@ import type Player from "game/entity/player/Player";
 import type Island from "game/island/Island";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
-import type { IVector3 } from "utilities/math/IVector";
+import type { IVector4 } from "utilities/math/Vector4";
 export declare class MessageManagerNoOp implements IMessageManager {
     saveNoProperties: undefined;
     getMessageHistory(): Stream<IMessage>;
@@ -86,7 +86,7 @@ export default class MessageManager implements IMessageManager {
     /**
      * If the position is not visible to this human, the message won't be sent.
      */
-    ifVisible(canSee?: IVector3): this;
+    ifVisible(canSee?: IVector4): this;
     /**
      * If this human is not on the given island, the message won't be sent.
      */

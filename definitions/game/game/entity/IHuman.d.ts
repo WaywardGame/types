@@ -14,9 +14,10 @@ import type { ActionType } from "game/entity/action/IAction";
 import type Entity from "game/entity/Entity";
 import type Human from "game/entity/Human";
 import type { AttackType } from "game/entity/IEntity";
+import type { WeightStatus } from "game/entity/player/IPlayer";
 import type { ISkillEvents } from "game/entity/skill/SkillManager";
 import type { IHasImagePath, Quality } from "game/IObject";
-import type { ItemType } from "game/item/IItem";
+import type { IContainer, ItemType } from "game/item/IItem";
 import { RecipeLevel } from "game/item/IItem";
 import type Item from "game/item/Item";
 import { TempType } from "game/temperature/ITemperature";
@@ -24,8 +25,28 @@ import type { ITile } from "game/tile/ITerrain";
 import type { IModdable } from "mod/ModRegistry";
 import type { IRGB } from "utilities/Color";
 import type { Direction } from "utilities/math/Direction";
+import type { IVector2 } from "utilities/math/IVector";
 import type { IRange } from "utilities/math/Range";
 export interface IHumanEvents extends Events<Entity>, ISkillEvents {
+    /**
+     * Called when an item is added to the player's inventory
+     * @param item The item object
+     * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
+     */
+    inventoryItemAdd(item: Item, container: IContainer): any;
+    /**
+     * Called when an item is removed from the players inventory
+     * @param item The item object
+     * @param container The container object the item was moved to.
+     */
+    inventoryItemRemove(item: Item, container: IContainer): any;
+    /**
+     * Called when an item is moved from one container to another, while still in the players inventory.
+     * @param item The item object
+     * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
+     * @param previousContainer The container object the item was moved from. This container might be inventory or a container within the inventory.
+     */
+    inventoryItemUpdate(item: Item, container: IContainer, previousContainer?: IContainer): any;
     /**
      * Called when the human faces a different direction
      * @param direction The direction the player is now facing
@@ -56,11 +77,20 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
     canAttack(weapon: Item | undefined, attackType: AttackType): boolean | undefined;
     calculateEquipmentStats(): any;
     /**
+     * Called when getting the players weight status
+     * @returns The weight status of the player or undefined to use the default logic
+     */
+    getWeightStatus(): WeightStatus | undefined;
+    /**
      * Called when checking if a human is swimming
      * @param isSwimming True if the human is swimming
      * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
      */
     isSwimming(isSwimming: boolean): boolean | undefined;
+    /**
+     * Called when the walk path of the player changes.
+     */
+    walkPathChange(walkPath: IVector2[] | undefined): any;
     /**
      * Called when a book is opened by a player
      * @param book The book that was opened
@@ -229,3 +259,8 @@ export interface IHumanOld extends Partial<Human> {
         core: number;
     }>;
 }
+/**
+ * At this weight or more, you are encumbered.
+ * Defaults to 90% (0.9)
+ */
+export declare const WEIGHT_ENCUMBERED = 0.9;
