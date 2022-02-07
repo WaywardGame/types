@@ -13,10 +13,11 @@ import type { IGameOptionsPartial } from "game/options/IGameOptions";
 import type Translation from "language/Translation";
 import type { Random, SeededGenerator } from "utilities/random/Random";
 import { RandomInstance, RandomReference } from "utilities/random/Random";
-export declare abstract class GameplayModifierInstance<ID extends number> {
+export declare abstract class GameplayModifierInstance<ID extends number, INSTANCE_ARGS extends any[] = []> {
     readonly id: ID;
     readonly random: Random<SeededGenerator>;
-    constructor(id: ID, random: Random<SeededGenerator>);
+    protected readonly args: INSTANCE_ARGS;
+    constructor(id: ID, random: Random<SeededGenerator>, ...args: INSTANCE_ARGS);
     options: IGameOptionsPartial;
     setOptions(options: IGameOptionsPartial): this;
     addOptions(options: IGameOptionsPartial): this;
@@ -25,12 +26,13 @@ export declare abstract class GameplayModifierInstance<ID extends number> {
     protected abstract getDefaultTitle(): Translation;
     setTitle(initializer: (defaultTitle: Translation) => Translation): this;
 }
-export declare type GetModifierInstance<MODIFIER extends GameplayModifier<number>> = MODIFIER extends GameplayModifier<number, infer INSTANCE, any[]> ? INSTANCE : never;
-export declare type GetModifierId<MODIFIER extends GameplayModifier<number>> = MODIFIER extends GameplayModifier<infer ID, any, any[]> ? ID : never;
-export declare type GetModifierInstanceArgs<MODIFIER extends GameplayModifier<number>> = MODIFIER extends GameplayModifier<number, any, infer INSTANCE_ARGS> ? INSTANCE_ARGS : never;
-export default abstract class GameplayModifier<ID extends number, INSTANCE extends GameplayModifierInstance<ID> = GameplayModifierInstance<ID>, INSTANCE_ARGS extends any[] = []> implements IHasImagePath {
+export declare type GetModifierInstance<MODIFIER extends GameplayModifier<number, GameplayModifierInstance<number, any[]>, any[]>> = MODIFIER extends GameplayModifier<number, infer INSTANCE, any[]> ? INSTANCE : never;
+export declare type GetModifierId<MODIFIER extends GameplayModifier<number, GameplayModifierInstance<number, any[]>, any[]>> = MODIFIER extends GameplayModifier<infer ID, any, any[]> ? ID : never;
+export declare type GetModifierInstanceArgs<MODIFIER extends GameplayModifier<number, GameplayModifierInstance<number, any[]>, any[]>> = MODIFIER extends GameplayModifier<number, any, infer INSTANCE_ARGS> ? INSTANCE_ARGS : never;
+export default abstract class GameplayModifier<ID extends number, INSTANCE extends GameplayModifierInstance<ID, any[]> = GameplayModifierInstance<ID, any[]>, INSTANCE_ARGS extends any[] = []> implements IHasImagePath {
     readonly id: ID;
     readonly random: RandomInstance | RandomReference;
+    private readonly _args;
     readonly imagePath?: string;
     constructor(id: ID, random?: RandomInstance | RandomReference);
     abstract instantiate(type: ID, ...args: INSTANCE_ARGS): INSTANCE;

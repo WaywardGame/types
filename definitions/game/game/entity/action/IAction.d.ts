@@ -282,19 +282,20 @@ export declare enum ActionArgument {
     ItemArray = 21,
     ItemArrayInventory = 22,
     ItemArrayNearby = 23,
-    ItemInventory = 24,
-    ItemNearby = 25,
-    ItemType = 26,
-    NPC = 27,
-    NPCNearby = 28,
-    Player = 29,
-    Quality = 30,
-    RecipeType = 31,
-    RestType = 32,
-    TileEvent = 33,
-    UnsignedInteger32NumberArray = 34,
-    Vector2 = 35,
-    Vector3 = 36
+    OptionalItemArrayNearby = 24,
+    ItemInventory = 25,
+    ItemNearby = 26,
+    ItemType = 27,
+    NPC = 28,
+    NPCNearby = 29,
+    Player = 30,
+    Quality = 31,
+    RecipeType = 32,
+    RestType = 33,
+    TileEvent = 34,
+    UnsignedInteger32NumberArray = 35,
+    Vector2 = 36,
+    Vector3 = 37
 }
 export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.Undefined]: undefined;
@@ -321,6 +322,7 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.ItemArray]: Item[];
     [ActionArgument.ItemArrayInventory]: Item[];
     [ActionArgument.ItemArrayNearby]: Item[];
+    [ActionArgument.OptionalItemArrayNearby]: Array<Item | undefined>;
     [ActionArgument.ItemInventory]: Item;
     [ActionArgument.ItemNearby]: Item;
     [ActionArgument.ItemType]: ItemType;

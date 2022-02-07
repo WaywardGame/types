@@ -11,5 +11,5 @@
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
 import type Item from "game/item/Item";
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../player/Player").default | import("../../npc/NPC").default, void, [Item]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.OptionalItemArrayNearby, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [Item, ((Item | undefined)[] | undefined)?]>;
 export default _default;

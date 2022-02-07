@@ -89,7 +89,9 @@ export default abstract class BasePacket {
     protected readIsland(): Island;
     protected writeIsland(value: Island): void;
     protected readItems(): Item[];
+    protected readOptionalItems(): Array<Item | undefined>;
     protected writeItems(value: Item[]): void;
+    protected writeOptionalItems(value: Array<Item | undefined>): void;
     protected readTileEvent(): TileEvent | undefined;
     protected writeTileEvent(value: TileEvent): void;
     protected readObject(): any;

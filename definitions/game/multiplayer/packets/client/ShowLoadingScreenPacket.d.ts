@@ -10,10 +10,8 @@
  */
 import type { Load } from "game/meta/Loading";
 import ClientPacket from "multiplayer/packets/ClientPacket";
-import { ScreenId } from "ui/screen/IScreen";
 export default class ShowLoadingScreenPacket extends ClientPacket {
     load: Load;
-    hideScreens?: ScreenId[];
     getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     process(): void;
