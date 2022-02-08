@@ -187,6 +187,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     /**
      * Array of items that the item is "made from" in cases where we can't use the disassembly items to burn into.
      * All items in array are required to have onBurn set in their description to function properly.
+     * This should eventually be removed since we want to be able to break down items into proper sub-ingredients/items.
      */
     burnsLike?: ItemType[];
     spawnableTiles?: TileGroup;

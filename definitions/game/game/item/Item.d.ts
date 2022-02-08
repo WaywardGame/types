@@ -169,7 +169,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     isEquipped(): boolean;
     getEquippedPlayer(): Human | undefined;
     getEquipSlot(): EquipType | undefined;
-    setQuickSlot(player: Player, quickSlot: number | undefined): void;
+    setQuickSlot(player: Player, quickSlot: number, removeQuickSlot?: boolean): void;
     clearQuickSlot(): void;
     isDecayed(): boolean;
     changeInto(type: ItemType, disableNotify?: boolean, emitTransformation?: boolean): void;

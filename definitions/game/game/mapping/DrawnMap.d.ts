@@ -125,6 +125,7 @@ export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> impleme
     get isValid(): boolean;
     get island(): Island;
     private constructor();
+    toString(): string;
     preSerializeObject(): void;
     onUnserialized(): void;
     getTreasure(): readonly ITreasure[];

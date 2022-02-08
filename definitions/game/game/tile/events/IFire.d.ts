@@ -33,7 +33,7 @@ export declare module FireStage {
     function getTemperature(stage: FireStage, min: number, max: number): number;
 }
 export declare module IFire {
-    function dissassemblyBurn(island: Island, item: Item, container: ITileContainer, disassembly: boolean): void;
+    function dissassemblyBurn(island: Island, item: Item, container: ITileContainer, disassembly: boolean): Item[];
     function harvestGatherBurn(step: number, resources: ILootItem[] | undefined, container: IContainer, quality: Quality | undefined, tileEvent: TileEvent): void;
-    function burnsLike(burnsLikeItem: ItemType, tileEvent: TileEvent, tileContainer: IContainer, quality: Quality | undefined): void;
+    function burnsLike(burnsLikeItem: ItemType, tileEvent: TileEvent, tileContainer: IContainer, quality: Quality | undefined): Item[];
 }

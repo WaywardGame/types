@@ -208,7 +208,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      * Note: It may return the real containedItems array!
      */
     getOrderedContainerItems(container: IContainer, options?: Partial<IGetItemOptions>): Item[];
-    reduceDismantleWeight(createdItems: Item[], itemWeight: number): void;
+    capWeightOfItems(createdItems: Item[], itemWeight: number): void;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup): Translation;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number): Translation;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, article: boolean): Translation;
