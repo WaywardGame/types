@@ -145,7 +145,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getDecayRate(isClientSide: boolean): number;
     getPreservationDecayMultiplier(): number;
     getTemperatureDecayMultiplier(isClientSide: boolean): number;
-    getTotalWeight(bypassContainer?: boolean): number;
+    getTotalWeight(bypassContainer?: boolean, targetContainer?: IContainer): number;
     getDisassemblyWeight(): number;
     getDisassemblyItems(): IItemDisassembleResult | undefined;
     isNearby(executor: Entity, allowNearby?: boolean): boolean;
@@ -223,9 +223,10 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     revertFromDoodad(doodad: Doodad): void;
     /**
      * Returns the container weight reduction
+     * @param targetContainer Container to calculate the weight reduction for
      * @returns 1 if there is no reducton or [-50% + magical storing values]
      */
-    getContainerWeightReduction(): number;
+    getContainerWeightReduction(container?: IContainer | undefined): number;
     canBeRefined(): boolean;
     getProducedTemperature(): number | undefined;
     postProcessDecay(): void;
