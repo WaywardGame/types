@@ -163,10 +163,6 @@ export default class Player extends Human implements IUnserializedCallback {
     setTamedCreatureEnemy(enemy: Player | Creature): void;
     setPosition(point: IVector3): void;
     getNextPosition(): IVector3;
-    /**
-     * @param effects If true, adds a delay to the player, clears any particles, and updates the view. (Default: true)
-     */
-    setZ(z: number, effects?: boolean): void;
     isGhost(): boolean;
     isDead(): boolean;
     /**

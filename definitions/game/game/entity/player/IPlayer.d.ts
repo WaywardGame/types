@@ -156,7 +156,6 @@ export interface IPlayerEvents extends Events<Human> {
      * Called when the player completes a movement
      */
     moveComplete(): any;
-    changeZ(z: number, oldZ: number): any;
     /**
      * Called when the players weight is being updated
      * @param newWeight The new weight of the player
