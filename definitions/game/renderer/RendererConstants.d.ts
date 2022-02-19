@@ -17,3 +17,5 @@ export declare function getPixelOffset(pixels: number): number;
 export declare const fourPixelOffset: number;
 export declare const negativeFivePixelOffset: number;
 export declare const defaultFadeInTime = 2000;
+export declare const texCordsPerSprite = 6;
+export declare function createTexCordArray(capacity: number): Float32Array;

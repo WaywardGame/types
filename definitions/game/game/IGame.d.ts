@@ -259,5 +259,5 @@ export declare const TURN_DELAY_MAX: number;
 export declare const TURN_DELAY_DEFAULT: number;
 export declare const LIGHT_COLOR_DEFAULT: import("utilities/Color").IRGB;
 export declare const TOOLTIP_DELAY_DEFAULT = 170;
-export declare const ZOOM_LEVEL_MAX = 8;
+export declare const ZOOM_LEVEL_MAX = 16;
 export declare const ZOOM_LEVEL_MIN = 1;

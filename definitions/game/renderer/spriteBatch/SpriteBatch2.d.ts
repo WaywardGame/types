@@ -25,7 +25,6 @@ export default class SpriteBatch2 implements ISpriteBatch {
     inverseSpriteTextureSize: Vector2 | undefined;
     private spriteCount;
     private readonly texCordBuffer;
-    private texCordArray;
     private readonly dataBuffer;
     private dataArray;
     private readonly colorBuffer;

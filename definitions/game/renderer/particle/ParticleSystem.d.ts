@@ -13,21 +13,18 @@ import type RendererContext from "renderer/context/RendererContext";
 import type WebGlContext from "renderer/WebGlContext";
 import type WorldRenderer from "renderer/world/WorldRenderer";
 import type { IRGB } from "utilities/Color";
-export default class Particle {
+export default class ParticleSystem {
     private readonly context;
     private readonly worldRenderer;
-    private readonly shaderProgram;
-    private readonly capacity;
-    private readonly positionSizeBuffer;
-    private readonly colorBuffer;
+    private readonly maxParticles;
     private readonly particles;
     private readonly positionSizeData;
     private readonly colorData;
-    private readonly particleSize;
-    private readonly vertexArray;
+    private readonly dataPerParticle;
     private count;
     private lastUsedParticle;
     private nextUpdate;
+    private readonly renderer;
     static initializePrograms(webGlContext: WebGlContext): Promise<void>;
     constructor(context: RendererContext, worldRenderer: WorldRenderer, maxParticles?: number);
     delete(): void;

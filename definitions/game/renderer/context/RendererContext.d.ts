@@ -20,6 +20,7 @@ export default class RendererContext {
     readonly gl: WebGL2RenderingContext;
     readonly webGlContext: WebGlContext;
     constructor(renderer: Renderer, baseRendererContext: BaseRendererContext);
+    get isWebGl2(): boolean;
     get origin(): IRendererOrigin;
     createSpriteBatch(capacity: number, depthOffset?: number, yOffset?: number): SpriteBatch2 | SpriteBatch1;
 }
