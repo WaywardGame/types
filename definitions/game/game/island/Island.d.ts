@@ -252,9 +252,9 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     contaminateWater(point: IVector3): void;
     /**
-     * Gives civilization score based on how much is defined for this tile's terrain.
+     * Adds civilization score
      */
-    changeCivilizationScore(score: number, source: string): void;
+    addCivilizationScore(score: number, source: string | undefined): void;
     processTickFlags(tickFlag: TickFlag, ticks: number, realPlayers: Player[]): void;
     processTickFlagsAsync(tickFlag: TickFlag, ticks: number, realPlayers: Player[], onProgress: (progess: number) => Promise<void>): Promise<void>;
     private updateEntityFov;
