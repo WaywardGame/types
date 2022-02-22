@@ -167,7 +167,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     getPixelSize(): number;
     getZoom(): number;
     getTileScale(): number;
-    setTileScale(tileScale: number): void;
+    private setTileScale;
     setZoom(zoom: number): void;
     setViewport(view: Vector2): void;
     getViewport(): Vector2;

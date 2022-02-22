@@ -110,6 +110,7 @@ export declare const defaultSshServerPort = 38742;
 export declare const defaultSshServerUsername = "wayward";
 export declare const steamLobbyPrefix = "steam:";
 export declare const checkConnectionMatchmakingId = "check";
+export declare const syncCheckWaitingResetTime = 5000;
 export declare const defaultSyncChecks: MultiplayerSyncCheck[];
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export declare function getDefaultMultiplayerOptions(): IMultiplayerOptions;
