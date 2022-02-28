@@ -112,7 +112,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     getGameMode(): GameMode;
     getGameOptionsBeforeModifiers(): IGameOptions;
     getGameOptions(): IGameOptions;
-    updateGameUpdates(gameOptions: IGameOptions): void;
+    updateGameOptions(gameOptions: IGameOptions): void;
     initializeGameOptions(seed: string | number, mode?: GameMode, options?: IGameOptions, milestoneModifiers?: Set<Milestone>): void;
     initializeModifiers(): void;
     getMovementFinishTime(delay?: Delay | number): number;

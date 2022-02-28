@@ -27,6 +27,9 @@ export declare enum GameMode {
 }
 export declare const TIME_ETERNAL_NIGHT = 0.7;
 export declare const TIME_ETERNAL_DAY = 0.3;
+export declare const MAX_TRAVEL_TIME_MIN = 1000;
+export declare const MAX_TRAVEL_TIME_MAX = 200000;
+export declare const MAX_TRAVEL_TIME_DEFAULT = 20000;
 export interface IGameOptions {
     /**
      * Whether players respawn when they die
@@ -41,6 +44,10 @@ export interface IGameOptions {
          * Traveling effect options
          */
         applyTravelingEffects: boolean;
+        /**
+         * Maximum amount of turns to tick when traveling
+         */
+        maxTravelTime: number;
     };
     creatures: {
         /**
