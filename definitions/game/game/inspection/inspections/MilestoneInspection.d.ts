@@ -20,11 +20,11 @@ export default class MilestoneInspection extends Inspection<Milestone> {
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
     static getMilestoneName(milestone: Milestone, visibility?: MilestoneVisibility): import("../../../language/impl/TranslationImpl").default;
     static getMilestoneReadout(milestone: Milestone, name?: Translation): () => import("../../../language/impl/TranslationImpl").default;
-    static getDescription(milestone: Milestone): UiTranslation.GameDialogMilestonesTooltipHidden | UiTranslation.GameDialogMilestonesTooltipInvisible | import("../../../language/impl/TranslationImpl").default;
+    static getDescription(milestone: Milestone): import("../../../language/impl/TranslationImpl").default | UiTranslation.GameDialogMilestonesTooltipHidden | UiTranslation.GameDialogMilestonesTooltipInvisible;
     constructor([, milestone]: [any, Milestone], context?: InfoProviderContext);
     getId(): string;
     getBorder(): string;
-    get(context: InfoProviderContext): (UiTranslation | import("../../../language/impl/TranslationImpl").default | import("game/inspection/InfoProvider").SimpleInfoProvider | CollapsableInfoProvider | UnlockableRowInfoProvider)[];
+    get(context: InfoProviderContext): (import("../../../language/impl/TranslationImpl").default | UiTranslation | import("game/inspection/InfoProvider").SimpleInfoProvider | CollapsableInfoProvider | UnlockableRowInfoProvider)[];
     private getDiscovered;
     private getDiscoveredTranslations;
 }

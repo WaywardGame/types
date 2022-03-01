@@ -36,7 +36,7 @@ export default class LabelledValue extends InfoProvider {
     getClass(): string[];
     addClasses(...classes: string[]): this;
     private getLabel;
-    get(): (UiTranslation | import("../../../language/impl/TranslationImpl").default | InfoProvider)[];
+    get(): (import("../../../language/impl/TranslationImpl").default | UiTranslation | InfoProvider)[];
     protected initChildTextComponent(text: TranslationGenerator): Text;
     setDisplayMode(mode: keyof typeof LabelledValueDisplayMode): this;
     setDisplayMode(mode: keyof typeof LabelledValueDisplayMode): this;
