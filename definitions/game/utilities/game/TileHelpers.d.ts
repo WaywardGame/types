@@ -118,5 +118,11 @@ declare module TileHelpers {
      * Check if the tile is blocked (impassable terrain or doodads that cause blocked movement).
      */
     function isTileBlocked(island: Island, point: IVector3): boolean;
+    /**
+     * Checks whether a player can dig at a certain location or not.
+     * @param tile of the ITile to check where to dig.
+     * @returns True if a player can dig the tile.
+     */
+    function canDig(tile: ITile): boolean;
 }
 export default TileHelpers;
