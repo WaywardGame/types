@@ -18,6 +18,9 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private betaName;
     private buildTime;
     private overlayWorks;
+    private runningOnSteamDeck;
+    private floatingTextInputFocused;
+    private floatingTextInputBlurTime;
     private initializingMods;
     private logsPath;
     private backupsPath;
@@ -43,6 +46,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private _isTraceRecording;
     private _intervalIds;
     get isGameOverlayActive(): boolean;
+    get isRunningOnSteamDeck(): boolean;
     isElectron(): boolean;
     reload(): Promise<void>;
     openGpuInfoWindow(): void;
@@ -126,6 +130,8 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     protected onGlobalSlotLoaded(): void;
     writeBackup(slot: number, data: Uint8Array): Promise<string | undefined>;
     private _writeBackupFile;
+    onInputFocus(inputElement: HTMLElement): void;
+    private onFloatingGamepadTextInputDismissed;
     setupMultiplayerLog(): void;
     getMultiplayerLogs(): string;
     multiplayerLog(...args: any[]): void;

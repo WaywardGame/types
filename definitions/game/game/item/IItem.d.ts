@@ -1199,7 +1199,8 @@ export declare enum ItemTypeGroup {
     Spine = 892,
     Spores = 893,
     Stick = 894,
-    All = 895,
-    Last = 896
+    NotForSale = 895,
+    All = 896,
+    Last = 897
 }
 export {};

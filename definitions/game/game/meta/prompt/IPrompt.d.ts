@@ -121,7 +121,8 @@ export declare enum Prompt {
     SteamworksModImportedSaveGame = 103,
     SteamworksOpenFolderFailure = 104,
     SteamworksModPublishModJsonUpdateFailed = 105,
-    UiSaveDrop = 106
+    SteamworksNotAvailableOnSteamDeck = 106,
+    UiSaveDrop = 107
 }
 export declare enum PromptType {
     Info = 0,

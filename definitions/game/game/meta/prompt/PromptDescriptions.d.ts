@@ -123,8 +123,9 @@ declare const promptDescriptions: {
     102: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[modName: string]>;
     103: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[modName: string]>;
     104: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
+    106: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
     105: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[error: string | undefined, publishedFileId: string]>;
-    106: import("game/meta/prompt/IPrompt").IPromptChoiceDescription<any[], never[]>;
+    107: import("game/meta/prompt/IPrompt").IPromptChoiceDescription<any[], never[]>;
 };
 declare const _default: Record<Prompt, PromptDescription<any[]>>;
 export default _default;
