@@ -18,11 +18,18 @@ import type { IStringSection } from "utilities/string/Interpolator";
 export interface IStatDisplayDescription extends IModdable {
     imagePath?: string | ((entity: Entity, stat: IStat) => string);
     /**
-     * Defaults to `#ffffff`
+     * The CSS variable to use for the stat bar color
+     * Defaults to white
      */
     color?: string | ((entity: Entity, stat: IStat) => string);
     /**
-     * Defaults to `#000000`
+     * The CSS variable to use for the stat bar color in RGB format
+     * Defaults to white
+     */
+    rgbColor?: string | ((entity: Entity, stat: IStat) => string);
+    /**
+     * The CSS variable to use for the background of the stat bar
+     * Defaults to black
      */
     darkColor?: string | ((entity: Entity, stat: IStat) => string);
     /**
