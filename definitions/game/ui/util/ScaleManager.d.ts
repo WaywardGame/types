@@ -26,7 +26,7 @@ export default class ScaleManager {
     /**
      * Returns the currently "requested" UI scale.
      */
-    getUserSetting(): number;
+    getUserSetting(scale?: number): number;
     /**
      * Requests a new UI scale, a multiplier of the default size.
      */

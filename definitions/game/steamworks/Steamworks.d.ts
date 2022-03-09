@@ -19,6 +19,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private buildTime;
     private overlayWorks;
     private runningOnSteamDeck;
+    private runningOnBatteryPower;
     private floatingTextInputFocused;
     private floatingTextInputBlurTime;
     private initializingMods;
@@ -47,6 +48,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private _intervalIds;
     get isGameOverlayActive(): boolean;
     get isRunningOnSteamDeck(): boolean;
+    get isRunningOnBatteryPower(): boolean;
     isElectron(): boolean;
     reload(): Promise<void>;
     openGpuInfoWindow(): void;
