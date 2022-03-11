@@ -16,7 +16,6 @@ import { TerrainType } from "game/tile/ITerrain";
 import type { ITile } from "game/tile/ITerrain";
 import FieldOfView from "renderer/fieldOfView/FieldOfView";
 import Notifier from "renderer/notifier/Notifier";
-import Particle from "renderer/particle/Particle";
 import type RendererContext from "renderer/context/RendererContext";
 import type ISpriteBatch from "renderer/spriteBatch/ISpriteBatch";
 import Fence from "renderer/tile/adaptors/Fence";
@@ -29,6 +28,7 @@ import WorldLayerRenderer from "renderer/world/WorldLayerRenderer";
 import Vector2 from "utilities/math/Vector2";
 import type { TerrainTileInfo } from "renderer/tile/TerrainTileInfo";
 import type { IRendererOrigin } from "renderer/context/RendererOrigin";
+import ParticleSystem from "renderer/particle/ParticleSystem";
 export interface IWorldRendererEvents {
     /**
      * Called when calculating creatures in the viewport
@@ -108,7 +108,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private readonly worldShaderProgram;
     private readonly fogShaderProgram;
     readonly fieldOfView: FieldOfView;
-    readonly particle: Particle;
+    readonly particleSystem: ParticleSystem;
     readonly notifier: Notifier;
     layers: Record<number, WorldLayerRenderer>;
     tillAdaptor: ITileAdaptor;
@@ -167,7 +167,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     getPixelSize(): number;
     getZoom(): number;
     getTileScale(): number;
-    setTileScale(tileScale: number): void;
+    private setTileScale;
     setZoom(zoom: number): void;
     setViewport(view: Vector2): void;
     getViewport(): Vector2;

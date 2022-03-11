@@ -47,7 +47,7 @@ export interface ITemplateOptions {
 }
 export declare function manipulateTemplates<T extends Array<string[] | undefined>>(island: Island, options: ITemplateOptions, ...templates: T): T;
 export declare function spawnTemplate(island: Island, templateType: TileTemplateType, x: number, y: number, z: number, options?: ITemplateOptions): void;
-export declare function setTileUnderDoodad(tile: ITile, x: number, y: number, doodadType: DoodadType, biomeType: BiomeType): void;
+export declare function setTileUnderDoodad(island: Island, tile: ITile, x: number, y: number, z: number, doodadType: DoodadType, biomeType: BiomeType): void;
 export declare function setupTiles(island: Island, tileGenArray: Uint16Array, tileGenQualityArray?: Uint16Array): void;
 export declare function loadDifferences(island: Island): void;
 export declare enum Pre240TerrainType {

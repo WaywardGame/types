@@ -12,6 +12,7 @@ import type { ISteamNetworkRelayStatus, SteamNetworkingConnectionState } from "@
 import type { IPlayOptions } from "game/IGame";
 import type { MultiplayerSyncCheckLevel, ServerInfo } from "multiplayer/IMultiplayer";
 export interface ISteamworksEvents {
+    batteryChange(): any;
     overlayShown(): any;
     overlayHidden(): any;
     onRelayNetworkStatus(ready: boolean, status: ISteamNetworkRelayStatus): void;

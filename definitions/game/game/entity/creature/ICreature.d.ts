@@ -200,6 +200,10 @@ export interface IWaste {
     event: TileEventType;
     timer: number;
 }
+export interface IHitch {
+    inUse: boolean;
+    doodad: Doodad | undefined;
+}
 export interface IDamageInfo {
     human?: Human;
     amount: number;

@@ -14,12 +14,12 @@ import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } 
 import type { Random, SeededGenerator } from "utilities/random/Random";
 declare class TamedCreatureMilestoneModifierInstance extends MilestoneModifierInstance {
     private readonly modifier;
-    constructor(modifier: TamedCreatureMilestoneModifier, id: Milestone, random: Random<SeededGenerator>);
+    constructor(modifier: TamedCreatureMilestoneModifier, id: Milestone, random: Random<SeededGenerator>, player?: Player);
     onSpawnPlayer(player: Player): void;
 }
 export default abstract class TamedCreatureMilestoneModifier extends MilestoneModifier {
     getGroup(): MilestoneModifierGroup;
-    instantiate(id: Milestone): TamedCreatureMilestoneModifierInstance;
+    instantiate(id: Milestone, player?: Player): TamedCreatureMilestoneModifierInstance;
     abstract isAberrant(): boolean;
 }
 export {};

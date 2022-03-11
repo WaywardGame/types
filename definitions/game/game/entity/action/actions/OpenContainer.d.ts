@@ -8,5 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-declare const _default: import("../Action").Action<[[import("game/entity/action/IAction").ActionArgument.Container, import("game/entity/action/IAction").ActionArgument.Undefined], [import("game/entity/action/IAction").ActionArgument.Boolean, import("game/entity/action/IAction").ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [(import("../../../item/IItem").IContainer | undefined)?, (boolean | undefined)?]>;
+declare const _default: import("../Action").Action<[[import("game/entity/action/IAction").ActionArgument.Container, import("game/entity/action/IAction").ActionArgument.Undefined], [import("game/entity/action/IAction").ActionArgument.Boolean, import("game/entity/action/IAction").ActionArgument.Undefined]], import("../../npc/NPC").default | import("../../player/Player").default, void, [(import("../../../item/IItem").IContainer | undefined)?, (boolean | undefined)?]>;
 export default _default;

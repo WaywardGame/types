@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Entity from "game/entity/Entity";
+import type Player from "game/entity/player/Player";
 import type { Milestone } from "game/milestones/IMilestone";
 import type { IGameOptionsPartial } from "game/options/IGameOptions";
 import GameplayModifier, { GameplayModifierInstance } from "game/options/modifiers/GameplayModifier";
@@ -25,11 +26,12 @@ export declare enum MilestoneModifierGroup {
     Challenge = 9
 }
 export declare const milestoneGroupIcons: Record<MilestoneModifierGroup, string>;
-export declare class MilestoneModifierInstance extends GameplayModifierInstance<Milestone> {
+export declare class MilestoneModifierInstance extends GameplayModifierInstance<Milestone, [Player?]> {
+    protected get player(): Player | undefined;
     isEnabledForPlayer(entity: Entity): boolean;
     protected getDefaultTitle(): import("../../../../language/impl/TranslationImpl").default;
 }
-export default abstract class MilestoneModifier extends GameplayModifier<Milestone, MilestoneModifierInstance> {
+export default abstract class MilestoneModifier extends GameplayModifier<Milestone, MilestoneModifierInstance, [Player?]> {
     after?: Milestone[];
     /**
      * Whether this milestone modifier is host-exclusive, IE, clients connecting to a server can't select this modifier.
@@ -38,7 +40,7 @@ export default abstract class MilestoneModifier extends GameplayModifier<Milesto
      */
     isGlobal: boolean;
     constructor(id?: Milestone);
-    instantiate(id: Milestone): MilestoneModifierInstance;
+    instantiate(id: Milestone, player?: Player): MilestoneModifierInstance;
     abstract getOptions(): IGameOptionsPartial;
     initialize(instance: MilestoneModifierInstance): MilestoneModifierInstance;
     abstract getGroup(): MilestoneModifierGroup;

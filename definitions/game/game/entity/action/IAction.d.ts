@@ -136,7 +136,8 @@ export declare enum ActionType {
     ToggleHitch = 101,
     ToggleDoor = 102,
     ToggleContainer = 103,
-    UpdateOption = 104
+    UpdateOption = 104,
+    UpdateGameOption = 105
 }
 export declare enum ActionUsability {
     Paused = 0,
@@ -287,14 +288,15 @@ export declare enum ActionArgument {
     ItemType = 26,
     NPC = 27,
     NPCNearby = 28,
-    Player = 29,
-    Quality = 30,
-    RecipeType = 31,
-    RestType = 32,
-    TileEvent = 33,
-    UnsignedInteger32NumberArray = 34,
-    Vector2 = 35,
-    Vector3 = 36
+    OptionalItemArrayNearby = 29,
+    Player = 30,
+    Quality = 31,
+    RecipeType = 32,
+    RestType = 33,
+    TileEvent = 34,
+    UnsignedInteger32NumberArray = 35,
+    Vector2 = 36,
+    Vector3 = 37
 }
 export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.Undefined]: undefined;
@@ -326,6 +328,7 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.ItemType]: ItemType;
     [ActionArgument.NPC]: NPC;
     [ActionArgument.NPCNearby]: NPC;
+    [ActionArgument.OptionalItemArrayNearby]: Array<Item | undefined>;
     [ActionArgument.Player]: Player;
     [ActionArgument.Quality]: Quality;
     [ActionArgument.RecipeType]: RecipeType;

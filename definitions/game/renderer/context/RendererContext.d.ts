@@ -11,6 +11,8 @@
 import type BaseRendererContext from "renderer/context/BaseRendererContext";
 import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 import type Renderer from "renderer/Renderer";
+import SpriteBatch1 from "renderer/spriteBatch/SpriteBatch1";
+import SpriteBatch2 from "renderer/spriteBatch/SpriteBatch2";
 import type WebGlContext from "renderer/WebGlContext";
 export default class RendererContext {
     readonly renderer: Renderer;
@@ -18,5 +20,7 @@ export default class RendererContext {
     readonly gl: WebGL2RenderingContext;
     readonly webGlContext: WebGlContext;
     constructor(renderer: Renderer, baseRendererContext: BaseRendererContext);
+    get isWebGl2(): boolean;
     get origin(): IRendererOrigin;
+    createSpriteBatch(capacity: number, depthOffset?: number, yOffset?: number): SpriteBatch2 | SpriteBatch1;
 }

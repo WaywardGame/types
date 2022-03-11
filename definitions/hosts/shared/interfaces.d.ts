@@ -89,6 +89,11 @@ export interface ISteamworks {
     getFileCount(): number;
     getFileNameAndSize(index: number): IRemoteFile;
     deleteRemoteFile(name: string): void;
+    getCurrentBatteryPower(): number;
+    isSteamRunningOnSteamDeck(): boolean;
+    showFloatingGamepadTextInput(nTextFieldXPosition: number, nTextFieldYPosition: number, nTextFieldWidth: number, nTextFieldHeight: number): boolean;
+    dismissFloatingGamepadTextInput(): boolean;
+    setFloatingGamepadTextInputDismissedCallback(cb: () => void): void;
 }
 export interface ISteamworksNetworking {
     initRelayNetworkAccess(): undefined;

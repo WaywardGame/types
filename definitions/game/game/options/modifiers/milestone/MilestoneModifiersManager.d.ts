@@ -8,10 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Player from "game/entity/player/Player";
 import { Milestone } from "game/milestones/IMilestone";
 import GameplayModifiersManager from "game/options/modifiers/GameplayModifiersManager";
 import type MilestoneModifier from "game/options/modifiers/milestone/MilestoneModifier";
-declare class MilestoneModifiersManager extends GameplayModifiersManager<MilestoneModifier> {
+declare class MilestoneModifiersManager extends GameplayModifiersManager<MilestoneModifier, Milestone, [Player?]> {
     constructor();
     has(milestone: Milestone): boolean;
     getUnlocked(): Milestone[];
@@ -19,7 +20,7 @@ declare class MilestoneModifiersManager extends GameplayModifiersManager<Milesto
     isGlobal(milestone: Milestone): boolean;
     isNotGlobal(milestone: Milestone): boolean;
     getGroup(milestone: Milestone): import("game/options/modifiers/milestone/MilestoneModifier").MilestoneModifierGroup | undefined;
-    sort(a: Milestone, b: Milestone): 1 | 0 | -1;
+    sort(a: Milestone, b: Milestone): 0 | 1 | -1;
     private areOptionsGlobal;
 }
 declare const _default: MilestoneModifiersManager;

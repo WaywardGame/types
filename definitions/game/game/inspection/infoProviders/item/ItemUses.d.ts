@@ -17,7 +17,19 @@ export default class ItemUses extends Uses<Item> {
     protected getObjectType(): CreationId.Item;
     protected getDescription(type: ItemType): IItemDescription;
     protected getUses(description: IItemDescription): ActionType[];
-    protected getUseInfoHandlers(): (import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Item, ActionType.Throw>, ActionType.Throw, {}, Item> | import("../UseInfo").default<{
+    protected getUseInfoHandlers(): (import("../UseInfo").default<{
+        requiredItems: (ItemType | import("game/item/IItem").ItemTypeGroup)[];
+        objectType: CreationId.Item;
+        value?: Item | undefined;
+        type: ItemType;
+        description: IItemDescription;
+        quality: import("../../../IObject").Quality;
+        action: ActionType.Disassemble;
+        union: import("../UseInfo").IUseInfoBase<Item, ActionType.Disassemble>;
+        details: Set<symbol>;
+    }, ActionType.Disassemble, {
+        getRequiredItems: () => import("../../../../language/impl/TranslationImpl").default[];
+    }, Item> | import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Item, ActionType.Throw>, ActionType.Throw, {}, Item> | import("../UseInfo").default<{
         objectType: CreationId.Item;
         value?: Item | undefined;
         type: ItemType;
@@ -129,18 +141,6 @@ export default class ItemUses extends Uses<Item> {
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Equip>;
         details: Set<symbol>;
     }, ActionType.Equip, {}, Item> | import("../UseInfo").default<{
-        requiredItems: (ItemType | import("game/item/IItem").ItemTypeGroup)[];
-        objectType: CreationId.Item;
-        value?: Item | undefined;
-        type: ItemType;
-        description: IItemDescription;
-        quality: import("../../../IObject").Quality;
-        action: ActionType.Disassemble;
-        union: import("../UseInfo").IUseInfoBase<Item, ActionType.Disassemble>;
-        details: Set<symbol>;
-    }, ActionType.Disassemble, {
-        getRequiredItems: () => import("../../../../language/impl/TranslationImpl").default[];
-    }, Item> | import("../UseInfo").default<{
         dismantle: import("game/item/IItem").IDismantleDescription;
         objectType: CreationId.Item;
         value?: Item | undefined;

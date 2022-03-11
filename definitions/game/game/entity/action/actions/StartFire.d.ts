@@ -11,5 +11,5 @@
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
 import type Item from "game/item/Item";
-declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../npc/NPC").default | import("../../player/Player").default, void, [Item, (Item | undefined)?]>;
 export default _default;

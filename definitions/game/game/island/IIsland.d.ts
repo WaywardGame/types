@@ -79,7 +79,6 @@ export interface IIslandEvents {
 export interface ISeeds {
     base: number;
     saved: number;
-    milestoneModifierSaved: number;
 }
 export interface IIslandLoadOptions {
     isNewSave: boolean;

@@ -108,7 +108,10 @@ export default abstract class Human extends Entity implements IHasInsulation {
      */
     burn(fireType: FireType, skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
     setPosition(point: IVector3): void;
-    setZ(z: number, updateFlowField?: boolean): void;
+    /**
+     * @param effects If true, adds a delay to the player, clears any particles, and updates the view. (Default: true)
+     */
+    setZ(z: number, effects?: boolean, updateFlowField?: boolean): void;
     getMovementIntent(): IMovementIntent;
     updateMovementIntent(movementIntent: IMovementIntent): boolean;
     hasWalkPath(): boolean;

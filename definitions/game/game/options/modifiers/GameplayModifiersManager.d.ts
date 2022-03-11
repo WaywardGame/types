@@ -11,7 +11,7 @@
 import type GameplayModifier from "game/options/modifiers/GameplayModifier";
 import type { GameplayModifierInstance, GetModifierId, GetModifierInstance, GetModifierInstanceArgs } from "game/options/modifiers/GameplayModifier";
 import type { StringableObject } from "utilities/object/Objects";
-export default abstract class GameplayModifiersManager<MODIFIER extends GameplayModifier<number, GameplayModifierInstance<number>, any[]>, ID extends GetModifierId<MODIFIER> = GetModifierId<MODIFIER>, INSTANCE_ARGS extends GetModifierInstanceArgs<MODIFIER> = GetModifierInstanceArgs<MODIFIER>> {
+export default abstract class GameplayModifiersManager<MODIFIER extends GameplayModifier<number, GameplayModifierInstance<number, any[]>, any[]>, ID extends GetModifierId<MODIFIER> = GetModifierId<MODIFIER>, INSTANCE_ARGS extends GetModifierInstanceArgs<MODIFIER> = GetModifierInstanceArgs<MODIFIER>> {
     private readonly enumObject;
     private readonly classes;
     private _instances;
@@ -21,7 +21,7 @@ export default abstract class GameplayModifiersManager<MODIFIER extends Gameplay
     getModifierInstance(id: ID): MODIFIER | undefined;
     createCollection(...args: INSTANCE_ARGS): GameplayModifiersCollection<MODIFIER, ID>;
 }
-export declare class GameplayModifiersCollection<MODIFIER extends GameplayModifier<number, GameplayModifierInstance<number>, any[]>, ID extends GetModifierId<MODIFIER> = GetModifierId<MODIFIER>, INSTANCE extends GetModifierInstance<MODIFIER> = GetModifierInstance<MODIFIER>, INSTANCE_ARGS extends GetModifierInstanceArgs<MODIFIER> = GetModifierInstanceArgs<MODIFIER>> {
+export declare class GameplayModifiersCollection<MODIFIER extends GameplayModifier<number, GameplayModifierInstance<number, any[]>, any[]>, ID extends GetModifierId<MODIFIER> = GetModifierId<MODIFIER>, INSTANCE extends GetModifierInstance<MODIFIER> = GetModifierInstance<MODIFIER>, INSTANCE_ARGS extends GetModifierInstanceArgs<MODIFIER> = GetModifierInstanceArgs<MODIFIER>> {
     protected readonly manager: GameplayModifiersManager<MODIFIER>;
     readonly initializedModifiers: Map<ID, INSTANCE>;
     protected readonly args: INSTANCE_ARGS;

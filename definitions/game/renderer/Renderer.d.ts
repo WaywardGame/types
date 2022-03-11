@@ -39,7 +39,7 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     delete(): Promise<void>;
     get fieldOfView(): import("./fieldOfView/FieldOfView").default;
     get notifier(): import("./notifier/Notifier").default;
-    get particle(): import("./particle/Particle").default;
+    get particle(): import("./particle/ParticleSystem").default;
     get isFadingIn(): boolean;
     get isUpdatingThumbnail(): boolean;
     start(): void;

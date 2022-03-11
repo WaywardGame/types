@@ -92,6 +92,10 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      */
     walkPathChange(walkPath: IVector2[] | undefined): any;
     /**
+     * Called when the human changes their layer (z position)
+     */
+    changeZ(z: number, oldZ: number): any;
+    /**
      * Called when a book is opened by a player
      * @param book The book that was opened
      */

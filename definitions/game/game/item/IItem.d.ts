@@ -142,9 +142,9 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     recipes?: Array<(recipe: Recipe) => Recipe>;
     disassemble?: boolean;
     /**
-     * Can be set to true if you don't want the player to actually disassemble the item, but still have disassembly data via the disassemble property.
+     * Set items that are part of the item's disassembly that are converted into another item when disassembled.
      */
-    blockDisassembly?: boolean;
+    disassemblyTransform?: OptionalDescriptions<ItemType, ItemType>;
     requiredForDisassembly?: Array<ItemType | ItemTypeGroup>;
     decaysInto?: ItemType[];
     decayTemperatureRange?: IDecayTemperatureRange;
@@ -187,6 +187,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     /**
      * Array of items that the item is "made from" in cases where we can't use the disassembly items to burn into.
      * All items in array are required to have onBurn set in their description to function properly.
+     * This should eventually be removed since we want to be able to break down items into proper sub-ingredients/items.
      */
     burnsLike?: ItemType[];
     spawnableTiles?: TileGroup;
@@ -271,7 +272,7 @@ export interface IItemReturn {
      */
     damaged?: boolean;
     /**
-     * If true, it will check the disassembly data for the item and return the first instance of the ItemType set in type.
+     * If true, disassembly data will be checked for the item and return the first instance of the ItemType set in type and will filter out any other types from its disassembly data.
      */
     returnFromDisassembly?: boolean;
     /**
@@ -1198,7 +1199,8 @@ export declare enum ItemTypeGroup {
     Spine = 892,
     Spores = 893,
     Stick = 894,
-    All = 895,
-    Last = 896
+    NotForSale = 895,
+    All = 896,
+    Last = 897
 }
 export {};

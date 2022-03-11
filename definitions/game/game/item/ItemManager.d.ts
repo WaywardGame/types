@@ -112,7 +112,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private static getDefaultWeightRange;
     load(): void;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
-    resolveContainer(container?: IContainer): Item | IContainer | Player | NPC | ITile | Doodad | undefined;
+    resolveContainer(container?: IContainer): IContainer | Doodad | Item | NPC | Player | ITile | undefined;
     getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
     hashContainer(containable: IContainable): string;
@@ -134,7 +134,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getMagicalWeightCapacity(container: IContainer): number;
     moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, filterText?: string | undefined, onMoveItem?: (item: Item) => void): Item[];
     moveToContainer(human: Human | undefined, item: Item, container: IContainer): boolean;
-    hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove: Item): boolean;
+    hasRoomInContainer(targetContainer: IContainer, itemToMove: Item): boolean;
     breakContainerOnTile(itemContainer: Item, x: number, y: number, z: number): void;
     /**
      * Drop items in a 3x3 square around the location
@@ -208,7 +208,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      * Note: It may return the real containedItems array!
      */
     getOrderedContainerItems(container: IContainer, options?: Partial<IGetItemOptions>): Item[];
-    reduceDismantleWeight(createdItems: Item[], itemWeight: number): void;
+    capWeightOfItems(createdItems: Item[], itemWeight: number): void;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup): Translation;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number): Translation;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, article: boolean): Translation;

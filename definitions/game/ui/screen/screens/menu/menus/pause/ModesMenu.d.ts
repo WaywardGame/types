@@ -14,6 +14,7 @@ import Menu from "ui/screen/screens/menu/component/Menu";
 export default class ModesMenu extends Menu {
     readonly turnMode: ChoiceListTurnMode;
     readonly tickSpeed: RangeRow;
+    readonly maxTravelTime: RangeRow;
     constructor();
     protected refresh(): void;
     private updateTurnModes;

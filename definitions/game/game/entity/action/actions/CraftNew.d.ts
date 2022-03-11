@@ -12,5 +12,5 @@ import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
 import Item from "game/item/Item";
 import type { RecipeType } from "game/item/recipe/RecipeRegistry";
-declare const _default: Action<[ActionArgument.RecipeType, ActionArgument.ItemArrayNearby, [ActionArgument.Undefined, ActionArgument.ItemType]], import("../../player/Player").default | import("../../npc/NPC").default | import("../../creature/Creature").default, void, [RecipeType, Item[], (import("game/item/IItem").ItemType | undefined)?]>;
+declare const _default: Action<[ActionArgument.RecipeType, ActionArgument.ItemArrayNearby, [ActionArgument.Undefined, ActionArgument.ItemType]], import("../../creature/Creature").default | import("../../npc/NPC").default | import("../../player/Player").default, void, [RecipeType, Item[], (import("game/item/IItem").ItemType | undefined)?]>;
 export default _default;
