@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Screen from "ui/screen/Screen";
+import DedicatedServerScreen from "ui/screen/screens/DedicatedServerScreen";
 import GameScreen from "ui/screen/screens/GameScreen";
 import InterruptScreen from "ui/screen/screens/InterruptScreen";
 import MainMenuScreen from "ui/screen/screens/MainMenuScreen";
@@ -20,6 +21,7 @@ declare const screenMap: {
     4: typeof SplashScreen;
     2: typeof InterruptScreen;
     1: typeof GameScreen;
+    5: typeof DedicatedServerScreen;
 };
 export declare type ScreenById = {
     [ID in keyof typeof screenMap]: (typeof screenMap)[ID] extends new () => infer SCREEN ? SCREEN : never;
