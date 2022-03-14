@@ -169,7 +169,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
-    emitTileUpdate(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
     isTilled(x: number, y: number, z: number): boolean;
     packGround(x: number, y: number, z: number): void;
     /**
