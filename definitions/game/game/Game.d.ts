@@ -107,7 +107,6 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     setTurnMode(turnMode: TurnMode): void;
     getTickSpeed(): number;
     setTickSpeed(tickSpeed: number): void;
-    updateTablesAndWeightNextTick(): void;
     updateReputation(reputation: number): void;
     getGameMode(): GameMode;
     getGameOptionsBeforeModifiers(): IGameOptions;
@@ -129,11 +128,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     passTurn(player: Player, turnType?: TurnType): void;
     tickRealtime(): void;
     updateView(source: RenderSource, updateFov?: boolean, computeSpritesNow?: boolean): void;
-    /**
-     * AVOID USING THIS. USE updateTablesAndWeightNextTick INSTEAD!
-     * For most cases you don't need this
-     */
-    updateTablesAndWeight(deferTableUpdates?: boolean): void;
+    updateTablesAndWeight(): void;
     /**
      * Gets the largest damage type weaknesses of a human or creature based on a type and damage value
      * @param defense Defense of the human or creature
