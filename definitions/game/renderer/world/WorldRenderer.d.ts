@@ -161,7 +161,6 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     load(island: Island): void;
     update(timeStamp: number): void;
     updateAllTiles(): void;
-    refreshExploredMap(): void;
     initializeSpriteBatch(layer: SpriteBatchLayer): void;
     private setResources;
     getPixelSize(): number;

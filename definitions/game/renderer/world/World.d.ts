@@ -9,7 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
-import type Player from "game/entity/player/Player";
 import { TileUpdateType } from "game/IGame";
 import type Island from "game/island/Island";
 import type { ITile } from "game/tile/ITerrain";
@@ -32,7 +31,6 @@ export default class World extends EventEmitter.Host<IWorldEvents> implements IS
     toLocal(world: number, local: number): number;
     addLayer(level: WorldZ): void;
     load(): void;
-    setupExploredMap(player: Player): void;
     updateTile(x: number, y: number, z: number, tile: ITile, tileUpdateType: TileUpdateType, flush?: boolean): void;
     startUpdateTileBatch(): void;
     endUpdateTileBatch(): void;

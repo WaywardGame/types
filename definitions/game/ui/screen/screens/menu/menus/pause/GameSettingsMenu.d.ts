@@ -11,7 +11,7 @@
 import { RangeRow } from "ui/component/RangeRow";
 import ChoiceListTurnMode from "ui/screen/screens/menu/component/ChoiceListTurnModes";
 import Menu from "ui/screen/screens/menu/component/Menu";
-export default class ModesMenu extends Menu {
+export default class GameSettingsMenu extends Menu {
     readonly turnMode: ChoiceListTurnMode;
     readonly tickSpeed: RangeRow;
     readonly maxTravelTime: RangeRow;

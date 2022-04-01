@@ -36,7 +36,7 @@ export default class PauseMenu extends Menu {
     constructor();
     showMultiplayerOptionsMenu(): this;
     protected onShow(): void;
-    private showModesMenu;
+    private showGameSettingsMenu;
     private getHeadingText;
     private getParagraphText;
     private onTogglePaused;
