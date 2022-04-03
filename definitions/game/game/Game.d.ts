@@ -128,7 +128,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     passTurn(player: Player, turnType?: TurnType): void;
     tickRealtime(): void;
     updateView(source: RenderSource, updateFov?: boolean, computeSpritesNow?: boolean): void;
-    updateTablesAndWeight(): void;
+    updateTablesAndWeight(deferTableUpdates?: boolean): void;
     /**
      * Gets the largest damage type weaknesses of a human or creature based on a type and damage value
      * @param defense Defense of the human or creature
