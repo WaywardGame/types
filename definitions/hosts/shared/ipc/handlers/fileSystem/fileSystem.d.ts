@@ -15,12 +15,14 @@ export declare class SharedFileSystemIPCHandler implements IFileSystem {
     private readonly shell;
     private safePathsEnabled;
     readonly safePaths: Set<string>;
+    readonly safeFileWritePaths: Set<string>;
     private readonly logFile;
     constructor(defaultSafePaths: string[], shell: {
         openExternal(url: string): Promise<void>;
         openPath(path: string): Promise<string>;
     } | undefined);
     addSafePath(path: string): Promise<void>;
+    addSafeFileWritePath(filePath: string): Promise<void>;
     enableSafePaths(): Promise<void>;
     openExternal(url: string): Promise<void>;
     openPath(path: string): Promise<string>;

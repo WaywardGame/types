@@ -123,6 +123,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
      */
     importFromSaveGameMod(modIndex: number, jsonOrUint8Array: string | Uint8Array, callback?: (success: boolean) => void): Promise<boolean>;
     deleteSaveGameMod(name: string): Promise<void>;
+    saveFile(fileName: string, blob: Blob): Promise<void>;
     hasServerToJoin(): boolean;
     getServerToJoin(): ServerInfo | undefined;
     setServerToJoin(serverToJoin: ServerInfo, automatic?: boolean): void;
