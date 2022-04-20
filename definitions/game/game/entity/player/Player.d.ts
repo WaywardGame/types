@@ -68,6 +68,7 @@ export default class Player extends Human implements IUnserializedCallback {
     turns: number;
     walkSoundCounter: number;
     milestoneModifiers: Set<Milestone>;
+    handEquippedToLast: EquipType.RightHand | EquipType.LeftHand;
     quests: QuestManager;
     messages: MessageManager;
     notes: NoteManager;
@@ -82,7 +83,6 @@ export default class Player extends Human implements IUnserializedCallback {
     displayCreature?: CreatureType;
     private readonly milestonesCollection;
     private gameOptionsCached?;
-    private handEquippedToLast;
     private cachedMovementPenalty?;
     private updateTablesOnNoInput?;
     constructor(identifier?: string);
