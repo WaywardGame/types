@@ -80,7 +80,6 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     previousSaveVersion: IVersionInfo;
     saveSize?: string;
     canvas: HTMLCanvasElement | undefined;
-    private queueDedicatedServerFovUpdate?;
     private gameOptionsCached?;
     private synchronizeStateId;
     protected stringTokenizer: StringTokenizer | undefined;

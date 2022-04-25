@@ -56,6 +56,8 @@ export default abstract class BasePacket {
     protected writeBool(value: boolean): void;
     protected readUint8Array(): Uint8Array;
     protected writeUint8Array(value: Uint8Array): void;
+    protected readUint16Array(): Uint16Array;
+    protected writeUint16Array(value: Uint16Array): void;
     protected readUint32NumberArray(): number[];
     protected writeUint32NumberArray(value: number[]): void;
     protected readString(): string;

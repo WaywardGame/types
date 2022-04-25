@@ -35,7 +35,7 @@ import { Milestone } from "game/milestones/IMilestone";
 import type { IGameOptionsPlayer } from "game/options/IGameOptions";
 import Message from "language/dictionary/Message";
 import type ExploreMap from "renderer/exploreMap/ExploreMap";
-import FieldOfView from "renderer/fieldOfView/FieldOfView";
+import type FieldOfView from "renderer/fieldOfView/FieldOfView";
 import type { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
 import type IClientStore from "save/clientStore/IClientStore";
 import type { IOptions } from "save/data/ISaveDataGlobal";
@@ -172,7 +172,6 @@ export default class Player extends Human implements IUnserializedCallback {
     isMultiplayerHost(): boolean;
     getName(): import("../../../language/impl/TranslationImpl").default;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView, customRadius?: number): boolean;
-    markAsExplored(points: IVector2[]): boolean | undefined;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction, contextActionSlot?: number, contextActionType?: ActionType, canUseProtected?: boolean): void;
     updateDialogInfo(dialogIndex: string | number): void;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
