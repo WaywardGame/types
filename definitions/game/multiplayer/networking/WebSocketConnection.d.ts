@@ -15,7 +15,7 @@ export declare class WebSocketConnection extends Connection {
     private readonly onData;
     private readonly onConnected?;
     name: string;
-    readonly maxMessageSize = 524288;
+    get maxMessageSize(): number;
     constructor(matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, getMatchmaking: () => IMatchmaking | undefined, onData: (data: ArrayBuffer) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined);
     isConnected(): boolean;
     protected onClosing(): void;
