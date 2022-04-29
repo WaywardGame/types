@@ -17,11 +17,11 @@ import SplashScreen from "ui/screen/screens/SplashScreen";
 export declare type ExtendsScreen = new () => Screen;
 declare const screenMap: {
     0: undefined;
-    3: typeof MainMenuScreen;
-    4: typeof SplashScreen;
-    2: typeof InterruptScreen;
-    1: typeof GameScreen;
-    5: typeof DedicatedServerScreen;
+    4: typeof MainMenuScreen;
+    5: typeof SplashScreen;
+    3: typeof InterruptScreen;
+    2: typeof GameScreen;
+    1: typeof DedicatedServerScreen;
 };
 export declare type ScreenById = {
     [ID in keyof typeof screenMap]: (typeof screenMap)[ID] extends new () => infer SCREEN ? SCREEN : never;
