@@ -10,10 +10,11 @@
  */
 export declare enum ScreenId {
     None = 0,
-    Game = 1,
-    Interrupt = 2,
-    MainMenu = 3,
-    Splash = 4
+    DedicatedServer = 1,
+    Game = 2,
+    Interrupt = 3,
+    MainMenu = 4,
+    Splash = 5
 }
 export declare enum ScreenEvent {
     ShowMenu = "ShowMenu",

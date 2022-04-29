@@ -14,6 +14,7 @@ import type { IMessage } from "game/entity/player/IMessageManager";
 import type Player from "game/entity/player/Player";
 import type { RequirementInstance } from "game/entity/player/quest/quest/Quest";
 import type { QuestInstance } from "game/entity/player/quest/QuestManager";
+import type { Game } from "game/Game";
 import Button from "ui/component/Button";
 import Component from "ui/component/Component";
 import type { ContextMenuDescriptions } from "ui/component/ContextMenu";
@@ -70,6 +71,7 @@ export default class Messages extends QuadrantComponent {
     sendPinnedMessage(pinnedMessage: PinnedMessage): PinnedMessage;
     pinQuestRequirement(quest: QuestInstance, requirement?: RequirementInstance): IPinnedMessage | undefined;
     unpinMessage(pinnedMessage: PinnedMessage, time?: number): Promise<void>;
+    protected onPlay(game: Game, isLoadingSave: boolean): void;
     onDisplayMessage(player: Player, message: IMessage): void;
     onWrittenNote(player: Player, id: number): void;
     onReadNote(player: Player, id: number): void;

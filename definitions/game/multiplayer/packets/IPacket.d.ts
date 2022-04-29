@@ -46,13 +46,14 @@ export declare enum NetworkPropertyType {
     Uint8 = 2,
     Uint8Array = 3,
     Uint16 = 4,
-    Float64 = 5,
-    Uint32NumberArray = 6,
-    String = 7,
-    Generic = 8,
-    Item = 9,
-    MovementIntent = 10,
-    Vector2Array = 11
+    Uint16Array = 5,
+    Float64 = 6,
+    Uint32NumberArray = 7,
+    String = 8,
+    Generic = 9,
+    Item = 10,
+    MovementIntent = 11,
+    Vector2Array = 12
 }
 export interface INetworkedProperty {
     key: string;

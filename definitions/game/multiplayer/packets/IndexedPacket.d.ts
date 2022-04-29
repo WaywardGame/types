@@ -38,6 +38,8 @@ export default abstract class IndexedPacket extends BasePacket {
     protected writeIndexedBool(value?: boolean): void;
     protected readIndexedUint8Array(): Uint8Array | undefined;
     protected writeIndexedUint8Array(value?: Uint8Array): void;
+    protected readIndexedUint16Array(): Uint16Array | undefined;
+    protected writeIndexedUint16Array(value?: Uint16Array): void;
     protected readIndexedUint32NumberArray(): number[] | undefined;
     protected writeIndexedUint32NumberArray(value?: number[]): void;
     protected readIndexedString(): string | undefined;

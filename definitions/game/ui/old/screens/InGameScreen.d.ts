@@ -91,6 +91,8 @@ export default class InGameScreen extends BaseScreen {
     private nonCraftableItemTypes;
     private dismantleItems;
     private craftingDialogDirty;
+    private dismantleDialogDirty;
+    private invalidatingTargets;
     constructor();
     selector(): string;
     bindElements(): void;
@@ -219,9 +221,13 @@ export default class InGameScreen extends BaseScreen {
      */
     filterContainers(): void;
     /**
-     * Invalidates and updates mouse targets when mouse is inside crafting/dismantle containers
+     * Invalidates and updates mouse targets after 300 milliseconds (should be enough time to calculate all the new stuffs).
      */
     invalidateTableTargets(): void;
+    /**
+     * Will force an update on crafting and dismantle tables based on dirty variables.
+     */
+    updateTablesDirty(which?: "crafting" | "dismantle"): void;
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
     getContainerId(containerElement: JQuery): string;
     sortItems(containerElement: JQuery, sortType: SortType, messageType?: Message, canReverse?: boolean, activeSort?: boolean): void;

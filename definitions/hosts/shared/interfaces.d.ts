@@ -173,6 +173,7 @@ export interface IPath {
     resolve(...path: string[]): string;
     join(...path: string[]): string;
     basename(...path: string[]): string;
+    extname(path: string): string;
     isAbsolute(path: string): boolean;
 }
 export interface INapi {

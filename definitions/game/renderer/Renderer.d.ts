@@ -26,6 +26,7 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     private updateRendering;
     private animationTimer;
     private renderingEnabled;
+    private rendered;
     private readonly context;
     /**
      * Creates a WebGl context that can be used for rendering the game

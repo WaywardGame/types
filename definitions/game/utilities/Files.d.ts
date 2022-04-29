@@ -16,8 +16,8 @@ declare module Files {
     function getArrayBuffer(path: string, signal?: AbortSignal): Promise<ArrayBuffer>;
     function getImage(path: string, signal?: AbortSignal): Promise<HTMLImageElement>;
     function getImageDataURL(path: string, signal?: AbortSignal): Promise<string | undefined>;
-    function download(name: string, data: Uint8Array): void;
-    function downloadWithJsonEncoding(name: string, data: any, stringify?: boolean, pretty?: boolean): void;
+    function download(fileName: string, data: Uint8Array): void;
+    function downloadWithJsonEncoding(fileName: string, data: any, stringify?: boolean, pretty?: boolean): void;
     function getFromEvent(event: Event): File[];
     function getSingleFromEvent(event: Event): File | undefined;
     function uploadSingle(file: File): Promise<IFileUploadSuccess>;

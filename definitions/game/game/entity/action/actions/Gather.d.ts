@@ -15,5 +15,5 @@ export declare enum GatherType {
     TileEvent = 1,
     Tile = 2
 }
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../npc/NPC").default | import("../../player/Player").default, void, [(import("../../../item/Item").default | undefined)?, (boolean | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [(import("../../../item/Item").default | undefined)?, (boolean | undefined)?]>;
 export default _default;

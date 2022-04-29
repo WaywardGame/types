@@ -48,7 +48,7 @@ export default abstract class QuadrantComponent extends StaticComponent {
     protected readonly scrollableHandler: void;
     get preferredQuadrant(): Quadrant;
     get quadrant(): Quadrant;
-    get quadrantName(): "None" | "TopLeft" | "TopRight" | "BottomLeft" | "BottomRight" | "Top" | "Bottom";
+    get quadrantName(): "TopLeft" | "TopRight" | "BottomLeft" | "BottomRight" | "None" | "Top" | "Bottom";
     constructor(id: QuadrantComponentId);
     /**
      * Changes the quadrant of this element, then emits the `ChangeQuadrant` event

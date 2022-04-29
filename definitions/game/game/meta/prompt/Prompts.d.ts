@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
-import type { IPromptDescriptionBase, Prompt, PromptDescriptionArgs, PromptResult } from "game/meta/prompt/IPrompt";
+import { Prompt } from "game/meta/prompt/IPrompt";
+import type { IPromptDescriptionBase, PromptDescriptionArgs, PromptResult } from "game/meta/prompt/IPrompt";
 import type { PromptArgs, PromptDescriptionOf } from "game/meta/prompt/PromptDescriptions";
 export interface IPrompt<PROMPT extends IPromptDescriptionBase<any[]>> extends PromiseLike<PromptResult<PROMPT>> {
     type?: Prompt;

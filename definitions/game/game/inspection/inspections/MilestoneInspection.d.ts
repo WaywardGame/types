@@ -24,7 +24,7 @@ export default class MilestoneInspection extends Inspection<Milestone> {
     constructor([, milestone]: [any, Milestone], context?: InfoProviderContext);
     getId(): string;
     getBorder(): string;
-    get(context: InfoProviderContext): (import("../../../language/impl/TranslationImpl").default | UiTranslation | import("game/inspection/InfoProvider").SimpleInfoProvider | UnlockableRowInfoProvider | CollapsableInfoProvider)[];
+    get(context: InfoProviderContext): (import("../../../language/impl/TranslationImpl").default | UiTranslation | import("game/inspection/InfoProvider").SimpleInfoProvider | CollapsableInfoProvider | UnlockableRowInfoProvider)[];
     private getDiscovered;
     private getDiscoveredTranslations;
 }

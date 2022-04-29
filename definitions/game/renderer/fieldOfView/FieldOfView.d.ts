@@ -55,10 +55,10 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     static getBounds(origin: IVector3, radius: number): IBound3;
     /**
      * Updates the explored tiles around players
-     * @param fieldOfView Field of view object. Provided when this is being called clientside
+     * @param fieldOfView Field of view object
      * @param updateForGhosts Update field of ghosts too
      */
-    static updateExplored(fieldOfView: FieldOfView | undefined, updateForGhosts?: boolean): void;
+    static updateExplored(fieldOfView: FieldOfView, updateForGhosts?: boolean): void;
     private static processExploredMapBounds;
     /**
      * Gets the field of view radius based on either the field of view object, player, or the default value

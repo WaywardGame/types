@@ -637,7 +637,7 @@ declare enum UiTranslation {
     MenuPauseButtonContinueGame = 622,
     MenuPauseButtonReturnToGame = 623,
     MenuPauseButtonOptions = 624,
-    MenuPauseButtonModes = 625,
+    MenuPauseButtonGameSettings = 625,
     MenuPauseButtonPaused = 626,
     MenuPauseButtonMultiplayer = 627,
     MenuPauseButtonTitleScreen = 628,
