@@ -102,7 +102,6 @@ export declare class SeededGenerator implements IRandomGenerator {
     private readonly addMultiplayerSyncChecks;
     private history;
     private maxHistoryLength;
-    private debug;
     private seed;
     private readonly pushedSeeds;
     constructor(seed?: number, addMultiplayerSyncChecks?: boolean);
@@ -110,14 +109,13 @@ export declare class SeededGenerator implements IRandomGenerator {
     getSeed(): number;
     setSeed(newSeed: number): void;
     generateSeed(): void;
-    setDebug(value: boolean): void;
     pushSeed(newSeed?: number): void;
     popSeed(): number;
     get(): number;
     startHistory(maxHistory?: number): void;
     getHistory(): IRandomHistory[] | undefined;
     takeHistory(): IRandomHistory[] | undefined;
-    stopHistory(print?: string): IRandomHistory[];
+    stopHistory(): IRandomHistory[];
     getBaseSeed(): number;
 }
 export declare enum RandomInstance {

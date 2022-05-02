@@ -108,6 +108,16 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     get island(): import("../island/Island").default;
     toString(): string;
     /**
+     * Gets the owner of this item.
+     * This will be the human who crafted it.
+     * Note: The owner might be different than the human whose inventory the item is currently in
+     */
+    getOwner(): Player | undefined;
+    /**
+     * Gets the current human that has the item in their inventory
+     */
+    private getCurrentOwner;
+    /**
      * Sets the item as magical with a chance based on quality (and clears any existing magical properties)
      * @param bonus The number that chances get multiplied by, for example, 2 or 3
      * @param propertiesBypass The number of magical properties to force on to the item
@@ -287,5 +297,4 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     private setupDurabilityHandlers;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;
-    private getOwner;
 }
