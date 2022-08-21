@@ -19,6 +19,10 @@ export interface IElectron {
     startContentTraceRecording(): Promise<void>;
     stopContentTraceRecording(logPath: string): Promise<void>;
     setFullScreen(fullscreen: boolean): Promise<void>;
+    setCustomTitleBar(enabled: boolean): Promise<void>;
+    isMaximized(): Promise<boolean>;
+    minimizeWindow(): Promise<void>;
+    maximizeOrUnmaximizeWindow(): Promise<void>;
     reloadWindow(): Promise<void>;
     invalidateWindow(): Promise<void>;
     destroyWindow(): Promise<void>;

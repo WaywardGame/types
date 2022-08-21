@@ -16,7 +16,6 @@ import "utilities/prototype/Apply";
 import type { IInit } from "Init";
 import { BaseLoader } from "../shared/baseLoader";
 import type { IWaywardCPP } from "../../cplusplus";
-import "../shared/globalTypes";
 export declare class BrowserLoader extends BaseLoader<IInit> {
     protected loadWaywardPlusPlus(): Promise<IWaywardCPP | undefined>;
     protected loadGame(): Promise<IInit>;

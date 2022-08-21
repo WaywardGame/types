@@ -19,14 +19,13 @@ export default class LoadGameMenu extends Menu {
     private sort;
     private sortDirection;
     private newGameButton;
-    private milestonesNotUnlockableWarning;
+    private readonly milestonesNotUnlockableWarning;
     private readonly selectedRow;
     constructor();
     protected onSelect(api: IBindHandlerApi): boolean;
     protected onSteamworksHide(): Promise<void>;
     protected goBackFrom(): void;
     protected preShow(): Promise<void>;
-    private shouldShowLoadingAnimation;
     private refresh;
     protected onSaveImport(handler: SaveDropHandler, result: ISaveImportSuccess): void;
     protected onSaveImportComplete(): Promise<void>;

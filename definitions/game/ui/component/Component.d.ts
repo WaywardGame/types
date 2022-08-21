@@ -12,7 +12,7 @@ import Stream from "@wayward/goodstream/Stream";
 import type { Events } from "event/EventEmitter";
 import EventEmitter from "event/EventEmitter";
 import type ContextMenuExport from "ui/component/ContextMenu";
-import type { AppendStrategy, IComponentEvents, IHighlight, Namespace } from "ui/component/IComponent";
+import type { AppendStrategy, IComponentEvents, Namespace } from "ui/component/IComponent";
 import { SelectableLayer } from "ui/component/IComponent";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import type Screen from "ui/screen/Screen";
@@ -20,6 +20,7 @@ import type Dialog from "ui/screen/screens/game/component/Dialog";
 import type Menu from "ui/screen/screens/menu/component/Menu";
 import type Tooltip from "ui/tooltip/Tooltip";
 import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "ui/util/ComponentManipulator";
+import type { IHighlight } from "ui/util/IHighlight";
 import Rectangle from "utilities/math/Rectangle";
 declare const ContextMenu: typeof ContextMenuExport;
 declare type ContextMenu = ContextMenuExport;
@@ -73,23 +74,26 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     private _element;
     private scrollingChild?;
     private contextMenuGenerator?;
-    private tooltipInitializer;
+    private tooltipInitializer?;
+    private tooltipArgs?;
     private highlight;
     private readonly debounces;
     private box?;
     private boxCacheLastScroll?;
     private boxCacheScrollable?;
     removed: boolean;
+    observing: boolean;
+    private eventListeners;
     /**
      * The selectable layer of this element, or `false` if it is not selectable.
      */
     get selectable(): SelectableLayer | false;
-    /**
-     * Alias of `.element.addEventListener`, except it returns `this` instead.
-     */
-    get listen(): (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined) => this;
-    private addEventListener;
     constructor(elementType?: string, namespace?: Namespace);
+    /**
+     * Alias of `.element.addEventListener`, except it returns `this` instead and prevents memory leaks
+     */
+    addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): this;
+    removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any): this;
     getAs<C extends Component>(cls: Class<C>): C | undefined;
     matches(selector: string): boolean;
     exists(): boolean;
@@ -128,7 +132,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     setStyle(property: string, value: string | number): this;
     isFocused(): boolean;
     setSelectable(val: SelectableLayer | false): this;
-    isSelectable(): boolean | undefined;
+    isSelectable(): boolean;
     getSelectionTarget(): Component;
     setInitialSelection(initialSelection?: boolean): this;
     registerEventBusSubscriber(...untilEvents: Array<keyof Events<this>>): void;
@@ -204,7 +208,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * @param where A CSS selector, an element, or a component to append this component to.
      * @param appendStrategy Where in the new container to insert this component. See {@link AppendStrategy}
      */
-    appendTo(where: string | HTMLElement | Component, appendStrategy?: AppendStrategy): this;
+    appendTo(where?: string | HTMLElement | Component | null, appendStrategy?: AppendStrategy): this;
     /**
      * Appends every element of a list of components/elements.
      * @param elements A varargs list of elements or iterables of elements. Falsy values are skipped
@@ -236,6 +240,10 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      */
     store(owner: Component): this;
     /**
+     * Enables a intersection observe on this component and fires an observe event once when the element is first observed
+     */
+    observe(): void;
+    /**
      * Sets the contents of this element using `innerHTML`.
      * @param html The content, an HTML string. Script tags will not be executed, as per the normal functionality of `innerHTML`
      * @param escape Only the text within the HTML will be appended, not the tags.
@@ -245,7 +253,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * Sets the tooltip options for this element. Setting the tooltip to undefined, or not
      * providing the argument removes the tooltip options.
      */
-    setTooltip(initializer?: (tooltip: Tooltip) => any, _showOnHover?: boolean): this;
+    setTooltip<ARGS extends any[]>(initializer?: (tooltip: Tooltip, ...args: ARGS) => any, ...args: ARGS): this;
     removeTooltip(): void;
     /**
      * Removes the context menu from this element.
@@ -260,14 +268,14 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * @param child The child to scroll to
      * @param ms The time to take, defaulting to 1000 (1 second)
      */
-    scrollTo(child: Component, ms?: number): void;
+    scrollTo(child?: Component, ms?: number): void;
     /**
      * Scrolls this element so the given child is at the top of the viewport.
      * @param child The child to scroll to
      * @param offsetTop An offset for the position to scroll to, relative to the position of the child
      * @param ms The time to take, defaulting to 1000 (1 second)
      */
-    scrollTo(child: Component, offsetTop: number, ms?: number): void;
+    scrollTo(child: Component | undefined, offsetTop: number, ms?: number): void;
     /**
      * Triggers a repaint on this element.
      */
@@ -278,13 +286,13 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * @param cb The callback to run.
      * @param args The arguments with which to call the callback.
      */
-    schedule<A extends any[]>(cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
+    schedule<A extends any[]>(cb?: (this: this, component: this, ...args: A) => any, ...args: A): this;
     /**
      * Runs the given callback with the given arguments. `this` and the first argument are this element.
      * @param cb The callback to run.
      * @param args The arguments with which to call the callback.
      */
-    schedule(cb?: (this: this, button: this) => any, ...args: any[]): this;
+    schedule(cb?: (this: this, component: this) => any, ...args: any[]): this;
     /**
      * Runs the given callback with the given arguments, after the specified amount of time.
      * `this` and the first argument are this element.
@@ -292,7 +300,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * @param cb The callback to run.
      * @param args The arguments with which to call the callback.
      */
-    schedule<A extends any[]>(ms: number, cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
+    schedule<A extends any[]>(ms: number, cb: (this: this, component: this, ...args: A) => any, ...args: A): this;
     /**
      * Runs the given callback with the given arguments, after the specified amount of time.
      * `this` and the first argument are this element.
@@ -300,16 +308,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * @param cb The callback to run.
      * @param args The arguments with which to call the callback.
      */
-    schedule(ms: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
-    /**
-     * Runs the given callback with the given arguments, after the specified amount of time.
-     * `this` and the first argument are this element.
-     * @param ms The amount of time to wait before running the callback, in milliseconds.
-     * @param debounce The span of time to debounce in. (If this callback was scheduled again in this time, skip this earlier call)
-     * @param cb The callback to run.
-     * @param args The arguments with which to call the callback.
-     */
-    schedule<A extends any[]>(ms: number, debounce: number, cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
+    schedule(ms: number, cb?: (this: this, component: this) => any, ...args: any[]): this;
     /**
      * Runs the given callback with the given arguments, after the specified amount of time.
      * `this` and the first argument are this element.
@@ -318,15 +317,26 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * @param cb The callback to run.
      * @param args The arguments with which to call the callback.
      */
-    schedule(ms: number, debounce: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
+    schedule<A extends any[]>(ms: number, debounce: number, cb: (this: this, component: this, ...args: A) => any, ...args: A): this;
+    /**
+     * Runs the given callback with the given arguments, after the specified amount of time.
+     * `this` and the first argument are this element.
+     * @param ms The amount of time to wait before running the callback, in milliseconds.
+     * @param debounce The span of time to debounce in. (If this callback was scheduled again in this time, skip this earlier call)
+     * @param cb The callback to run.
+     * @param args The arguments with which to call the callback.
+     */
+    schedule(ms: number, debounce: number, cb?: (this: this, component: this) => any, ...args: any[]): this;
     protected onContextMenu(api: IBindHandlerApi): boolean;
     protected onEnter(reason: "mouse" | "focus"): void;
+    private menuCancelHideTooltip;
     protected onLeave(reason: "mouse" | "focus"): void;
     /**
      * @returns a promise that resolves when either the given time has passed, or this component has been removed.
      * Returns `true` if this component exists, `false` if it has been removed.
      */
     sleep(ms: number): Promise<boolean>;
+    protected getClosestDialog(): Dialog | undefined;
     private showTooltip;
 }
 export {};

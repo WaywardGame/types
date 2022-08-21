@@ -119,6 +119,7 @@ export declare type PacketTarget = Array<Player | IConnection> | Player | IConne
 export interface IMultiplayerOptions {
     lobbyType: LobbyType;
     pvp: boolean;
+    allowTraveling: boolean;
     allowHardcoreRespawns: boolean;
     turnMode: TurnMode;
     maxPlayers: number;

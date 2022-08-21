@@ -10,10 +10,21 @@
  */
 import type { Events } from "event/EventEmitter";
 import Component from "ui/component/Component";
-import type { HighlightSelector, IHighlight } from "ui/component/IComponent";
+import type { HighlightSelector, IHighlight } from "ui/util/IHighlight";
 export default class HighlightManager {
+    private readonly highlightableComponents;
+    /**
+     * Registers this component to the given highlight selector.
+     *
+     * Note: When not providing `until` events, the `remove` event will be subscribed to automatically.
+     */
+    register<C extends Component>(component: C, selector: HighlightSelector, ...until: Array<keyof Events<C>>): void;
+    private getHighlightSelectorId;
+    private getHighlightableComponents;
     private readonly highlights;
-    private readonly highlightComponents;
+    private readonly activeHighlights;
+    private readonly activeHighlightTimeouts;
+    private readonly activeHighlightsByComponent;
     /**
      * Begins a highlight.
      * @param host Any value, used to index the highlight
@@ -25,15 +36,8 @@ export default class HighlightManager {
      * the highlight would end there and then, cancelling the remainder of the other highlight.
      */
     start(host: any, highlight: IHighlight): void;
+    private startHighlightSelector;
     end(host: any): void;
-    /**
-     * Registers this component to the given highlight selector.
-     *
-     * Note: When not providing `until` events, the `remove` event will be subscribed to automatically.
-     */
-    register<C extends Component>(component: C, selector: HighlightSelector, ...until: Array<keyof Events<C>>): void;
-    private getHighlightSelectorId;
-    private getHighlightComponents;
-    private startHighlight;
-    private endHighlightSelector;
+    private deleteComponentHighlighter;
+    private handleHighlightIterations;
 }

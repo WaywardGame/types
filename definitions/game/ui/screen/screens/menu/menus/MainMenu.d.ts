@@ -12,11 +12,12 @@ import { BlockRow } from "ui/component/BlockRow";
 import Button from "ui/component/Button";
 import RowSection from "ui/component/RowSection";
 import Menu from "ui/screen/screens/menu/component/Menu";
+import SaveSlot from "ui/screen/screens/menu/menus/loadgame/SaveSlot";
 export default class MainMenu extends Menu {
     private isNewVersion;
     readonly updateBanner: Button;
     readonly gameSection: RowSection;
-    continueGameButton?: Button;
+    continueGameButton?: SaveSlot;
     readonly newLoadRow: BlockRow;
     readonly newGameButton: Button;
     readonly loadGameButton: Button;
@@ -29,7 +30,7 @@ export default class MainMenu extends Menu {
     readonly aboutRow: BlockRow | undefined;
     readonly newsButton: Button | undefined;
     readonly aboutButton: Button | undefined;
-    readonly quitButton: Button;
+    readonly quitButton: Button | undefined;
     private aboutMenu;
     private newsMenu;
     constructor();

@@ -31,6 +31,7 @@ export default class TileAtlas {
     private waterTypes;
     private iceTypes;
     private freshWaterTypes;
+    private swampWaterTypes;
     private baseWaterTypes;
     getTerrain(terrainType: TerrainType, biomeType: BiomeType | undefined): TerrainTileInfo | undefined;
     getTerrainTilled(terrainType: TerrainType, biomeType: BiomeType | undefined): TerrainTileInfo | undefined;
@@ -46,7 +47,9 @@ export default class TileAtlas {
     isFreezingWater(type: TerrainType): boolean;
     isIce(type: TerrainType): boolean;
     isFreshWater(type: TerrainType): boolean;
+    isSwampWater(type: TerrainType): boolean;
     isFloor(type: TerrainType): boolean;
+    isTrack(type: TerrainType): boolean;
     shouldRenderOverMountainTypes(type: TerrainType): boolean;
     getBaseWaterType(type: TerrainType): TerrainType;
     /**

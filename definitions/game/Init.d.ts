@@ -9,12 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Game } from "game/Game";
+import "game/entity/action/ActionsRegistration";
+import "game/item/Items";
 export interface IInit {
     game: Game;
     onUnload(message?: string): Promise<void>;
 }
 export default function (): Promise<IInit | undefined>;
-export declare function onBeforeUnloadAsynchronous(event?: {
-    preventDefault?: () => void;
-    returnValue?: boolean | string;
-}): Promise<void>;

@@ -13,7 +13,7 @@ import type WorldLayer from "renderer/world/WorldLayer";
 import type { ITileAdaptation, ITileAdaptor } from "renderer/tile/TileAdaptors";
 import type TileAtlas from "renderer/tile/atlas/TileAtlas";
 import type RendererContext from "renderer/context/RendererContext";
-export default class Default implements ITileAdaptor {
+export default class DefaultTileAdaptor implements ITileAdaptor {
     protected readonly context: RendererContext;
     constructor(context: RendererContext);
     adapt(worldLayer: WorldLayer, tileAtlas: TileAtlas, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;

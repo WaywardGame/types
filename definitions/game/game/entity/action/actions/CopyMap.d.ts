@@ -20,5 +20,5 @@ interface ICopyMapRequirement {
 export declare const copyMapRequirements: ICopyMapRequirement[];
 export declare function hasMapRequirement(requirement: ICopyMapRequirement, human: Human): import("../../../item/Item").default | undefined;
 export declare function canMakeMapCopy(human: Human): boolean;
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../player/Player").default, void, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby], Human, void, import("game/entity/action/IAction").IActionUsable, [import("../../../item/Item").default]>;
 export default _default;

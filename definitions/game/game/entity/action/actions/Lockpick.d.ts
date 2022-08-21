@@ -8,7 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Doodad from "game/doodad/Doodad";
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../player/Player").default | import("../../npc/NPC").default, void, [import("../../../item/Item").default]>;
+import type { ITile } from "game/tile/ITerrain";
+export interface ILockpickCanUse extends IActionUsable {
+    tile: ITile;
+    doodad: Doodad;
+}
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, ILockpickCanUse, [import("../../../item/Item").default]>;
 export default _default;

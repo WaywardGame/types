@@ -36,7 +36,7 @@ declare module TileHelpers {
      */
     function setGfxRaw(data: number, value: number): number;
     function getType(tile: ITile): TerrainType;
-    function getTypeRaw(data: number): TerrainType;
+    function getTypeRaw(data: number): number;
     /**
      * This should only be called if you know what you're doing
      * Use game.changeTile or game.removeTopTile when modifying tiles
@@ -100,6 +100,10 @@ declare module TileHelpers {
      * Check if a tile is a suitable spawn point
      */
     function isSuitableSpawnPointTileForMultiplayer(island: Island, point: IVector3, tile: ITile, disallowWater?: boolean): boolean;
+    /**
+     * Check if a tile is a suitable spawn point for a creature
+     */
+    function isSuitableSpawnPointTileForTamedCreature(island: Island, point: IVector3, tile: ITile): boolean;
     function getSuitableSpawnPoint(island: Island): IVector3;
     function getPointsAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): IVector3[];
     /**
@@ -118,11 +122,7 @@ declare module TileHelpers {
      * Check if the tile is blocked (impassable terrain or doodads that cause blocked movement).
      */
     function isTileBlocked(island: Island, point: IVector3): boolean;
-    /**
-     * Checks whether a player can dig at a certain location or not.
-     * @param tile of the ITile to check where to dig.
-     * @returns True if a player can dig the tile.
-     */
-    function canDig(tile: ITile): boolean;
+    function isAdjacent(point: IVector3, point2: IVector3): boolean;
+    function isAround(point: IVector3, point2: IVector3): boolean;
 }
 export default TileHelpers;

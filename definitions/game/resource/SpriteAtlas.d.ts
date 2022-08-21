@@ -14,6 +14,7 @@ export default class SpriteAtlas {
     attackAnimations: ISpriteInfoList;
     corpses: ISpriteInfoList;
     creatures: ISpriteInfoList;
+    doodads: ISpriteInfoList;
     immune: ISpriteInfo;
     items: ISpriteInfoList;
     itemsEquipped: ISpriteInfoList;

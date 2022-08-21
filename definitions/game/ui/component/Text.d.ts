@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { EmitterOrBus, Event, Handler } from "event/EventManager";
 import UiTranslation from "language/dictionary/UiTranslation";
 import type { IColorSection } from "language/segment/ColorSegment";
@@ -65,12 +66,21 @@ export declare class Paragraph extends Text {
 }
 export declare class Heading extends Text {
     constructor(elementType?: string);
+    /**
+     * Safe — removes all children except for the icon
+     */
+    dump(): this;
+    icon?: Component;
+    addIcon(initializer: (component: Component) => any): this;
+}
+export declare type BasicTextLink = string | [string, string?];
+export interface IBasicTextEvents extends Events<Component> {
+    handleLink(link: BasicTextLink): true | void;
 }
 export declare class BasicText extends Component {
+    event: IEventEmitter<this, IBasicTextEvents>;
     private _link;
-    private linkHandler;
     constructor(elementType?: string);
     setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection>): this;
-    setLinkHandler(handler?: (link: string | [string, string | undefined]) => boolean): void;
     private onClick;
 }

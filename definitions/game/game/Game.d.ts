@@ -10,14 +10,15 @@
  */
 /// <reference types="node" />
 import EventEmitter from "event/EventEmitter";
+import type { BiomeTypes } from "game/biome/IBiome";
 import type Entity from "game/entity/Entity";
+import type Human from "game/entity/Human";
 import type { Defense } from "game/entity/IEntity";
 import { DamageType } from "game/entity/IEntity";
-import { Delay } from "game/entity/IHuman";
+import type { Delay } from "game/entity/IHuman";
 import type { TurnType } from "game/entity/player/IPlayer";
-import type Player from "game/entity/player/Player";
-import type { IGameEvents, IPlayOptions, ISynchronizeState } from "game/IGame";
-import { SaveType, TickFlag, TurnMode, PauseSource } from "game/IGame";
+import type { IGameEvents, IMovementTime, IPlayOptions, ISynchronizeState } from "game/IGame";
+import { PauseSource, SaveType, TickFlag, TurnMode } from "game/IGame";
 import type Island from "game/island/Island";
 import IslandManager from "game/island/IslandManager";
 import type { MultiplayerLoadingDescription } from "game/meta/Loading";
@@ -37,6 +38,8 @@ import ReplayManager from "replay/ReplayManager";
 import type { IOptions } from "save/data/ISaveDataGlobal";
 import type StringTokenizer from "save/serializer/StringTokenizer";
 import ItemStylesheetHandler from "ui/screen/screens/game/util/item/ItemStylesheet";
+import type { IVector2 } from "utilities/math/IVector";
+import type { Random } from "utilities/random/Random";
 import type { IVersionInfo } from "utilities/Version";
 export declare class Game extends EventEmitter.Host<IGameEvents> {
     get isChallenge(): boolean;
@@ -85,6 +88,8 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     protected stringTokenizer: StringTokenizer | undefined;
     toString(): string;
     get isPaused(): boolean;
+    getPlayingHumans(includeGhosts?: boolean, includeConnecting?: boolean, includeServer?: boolean): Human[];
+    getNonPlayerHumans(): Human[];
     initializeRenderer(): void;
     globalSlotReady(): void;
     /**
@@ -100,34 +105,37 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     setGlContextSize(): void;
     resizeRenderer(): void;
     setPaused(pause: boolean, source: PauseSource): void;
+    onPlayingEntityChange(_manager: any, entity: Entity): void;
     gameLogicLoop: () => void;
     isSimulatedOrRealTimeMode(): boolean;
     getTurnMode(): TurnMode;
     setTurnMode(turnMode: TurnMode): void;
+    /**
+     * Changes the turn mode if it's not correct
+     */
+    ensureTurnMode(): void;
+    isTurnModeAllowed(turnMode: TurnMode): boolean;
     getTickSpeed(): number;
     setTickSpeed(tickSpeed: number): void;
-    updateReputation(reputation: number): void;
+    selectBiome(position: IVector2, random: Random): BiomeTypes;
     getGameMode(): GameMode;
     getGameOptionsBeforeModifiers(): IGameOptions;
     getGameOptions(): IGameOptions;
     updateGameOptions(gameOptions: IGameOptions): void;
     initializeGameOptions(seed: string | number, mode?: GameMode, options?: IGameOptions, milestoneModifiers?: Set<Milestone>): void;
     initializeModifiers(): void;
-    getMovementFinishTime(delay?: Delay | number): number;
-    getMovementProgress(timeStamp: number, finishTime: number | undefined, delay?: Delay | number): number;
-    getAnimationProgress(timeStamp: number, finishTime: number | undefined, delay: Delay | number): number;
+    getMovementTime(delay: Delay | number): IMovementTime;
+    getMovementProgress(timeStamp: number, movementTime: IMovementTime | undefined): number;
     getSynchronizeState(identifier: string): ISynchronizeState;
     synchronizeState(synchronizeState: ISynchronizeState): void;
     /**
-     * Marks that the player had a turn
-     * In manual turn mode, it will tick the players stat timers & the game
-     * @param player
-     * @param turnType
+     * Marks that the human had a turn
+     * In manual turn mode, it will tick the humans stat timers & the game
      */
-    passTurn(player: Player, turnType?: TurnType): void;
+    passTurn(human: Human, turnType?: TurnType): void;
     tickRealtime(): void;
     updateView(source: RenderSource, updateFov?: boolean, computeSpritesNow?: boolean): void;
-    updateTablesAndWeight(deferTableUpdates?: boolean): void;
+    updateTablesAndWeight(): void;
     /**
      * Gets the largest damage type weaknesses of a human or creature based on a type and damage value
      * @param defense Defense of the human or creature
@@ -136,19 +144,19 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      * @returns returns DamageType array or undefined if there are no weaknesses
      */
     getGreatestWeaknesses(defense: Defense, damageTypes: DamageType, damage: number): DamageType[];
-    updateOption(player: Player | undefined, id: keyof IOptions, value: boolean | number): void;
+    updateOption(human: Human | undefined, id: keyof IOptions, value: boolean | number): void;
     /**
      * Do not call this directly. Use updateOption instead
      */
-    updateOptionInternal(id: keyof IOptions, value: boolean | number, player?: Player): void;
+    updateOptionInternal(id: keyof IOptions, value: boolean | number, human?: Human): void;
     /**
      * Collection of things to perform on each tick
      */
-    tick(ticks?: number, realPlayers?: Player[], tickFlag?: TickFlag): void;
+    tick(ticks?: number, playingHumans?: Human[], tickFlag?: TickFlag): void;
     /**
      * Collection of things to perform on each tick
      */
-    tickAsync(island: Island, ticks: number, realPlayers: Player[] | undefined, tickFlag: TickFlag | undefined, onProgress: (progess: number) => Promise<void>): Promise<void>;
+    tickAsync(island: Island, ticks: number, playingHumans: Human[] | undefined, tickFlag: TickFlag | undefined, onProgress: (progess: number) => Promise<void>): Promise<void>;
     createRenderer(entity: Entity): void;
     /**
      * Resets the game state. This should be called when returning to the main menu from a game and/or right before starting/joining a game.

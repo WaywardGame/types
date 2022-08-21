@@ -9,6 +9,16 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../player/Player").default | import("../../npc/NPC").default, void, [import("../../../item/Item").default]>;
+import type { ITerrainDescription } from "game/tile/ITerrain";
+import { TerrainType } from "game/tile/ITerrain";
+export interface ISetDownCanUse extends IActionUsable {
+    currentTileDescription: ITerrainDescription;
+    tileType: TerrainType;
+    x: number;
+    y: number;
+    z: number;
+}
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, ISetDownCanUse, [import("../../../item/Item").default]>;
 export default _default;

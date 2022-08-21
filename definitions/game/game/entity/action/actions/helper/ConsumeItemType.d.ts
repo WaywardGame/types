@@ -10,8 +10,7 @@
  */
 import type { IActionApi } from "game/entity/action/IAction";
 import { ActionType } from "game/entity/action/IAction";
-import type NPC from "game/entity/npc/NPC";
-import type Player from "game/entity/player/Player";
+import type Human from "game/entity/Human";
 import type { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
-export default function consumeItemType(action: IActionApi<Player | NPC>, item: Item | ItemType, actionType?: ActionType): boolean;
+export default function consumeItemType(action: IActionApi<Human>, item: Item | ItemType, actionType?: ActionType): boolean;

@@ -20,6 +20,7 @@ export default class IndexedDbDataStorage implements IAsyncDataStorage {
     private readonly uniqueSlotsIndexName;
     private database;
     private readonly dataStorageLocalStorage;
+    constructor();
     initialize(): Promise<void>;
     isEnabled(): boolean;
     isSlotUsed(slot: number): Promise<boolean>;
@@ -27,6 +28,7 @@ export default class IndexedDbDataStorage implements IAsyncDataStorage {
     saveToSlot(slot: number, saveObject: ISaveObject, specificKeys?: Set<string>): Promise<number>;
     saveToSlotSynchronous(slot: number, saveObject: ISaveObject, specificKeys?: Set<string>): number;
     loadFromSlot(slot: number, specificKeys?: Set<string>): Promise<ISaveObject>;
+    loadFromSlots(slots: number[], specificKeys?: Set<string>): Promise<ISaveObject[]>;
     deleteSlot(slot: number): Promise<void>;
     deleteAllSlots(): Promise<void>;
     deleteAllData(): Promise<void>;

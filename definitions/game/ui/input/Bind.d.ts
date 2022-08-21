@@ -10,6 +10,7 @@
  */
 import type { TypedPropertyDescriptorFunctionAnyNOfParams } from "event/EventManager";
 import Bindable from "ui/input/Bindable";
+import Bindings from "ui/input/Bindings";
 import { IInput } from "ui/input/IInput";
 import type { GlobalInputInfo, GlobalMouseInfo, InputInfo } from "ui/input/InputManager";
 export interface IBindHandlerApi {
@@ -48,7 +49,7 @@ export interface IBindHandlerApi {
      */
     cancelled: boolean;
 }
-declare type BindingHandler<R = boolean> = (api: IBindHandlerApi) => R;
+export declare type BindingHandler<R = boolean> = (api: IBindHandlerApi) => R;
 interface IBindHandlerRegistration<T extends {
     [K in P]: BindingHandler;
 }, P extends string | number | symbol> {
@@ -96,7 +97,7 @@ declare module Bind {
      * @param bindable The `Bindable`.
      * @param priority The "priority" of this handler compared to other handlers. Higher priorities are executed first.
      */
-    function onUp(bindable: Bindable | "anything", priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<BindingHandler<any>>) => void;
+    function onUp(bindable: Bindable | "anything", priority?: number, always?: boolean): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<BindingHandler<any>>) => void;
     /**
      * Registers a handler for every frame in which the given `Bindable` is held down.
      *
@@ -158,5 +159,6 @@ declare module Bind {
     function deregisterHandlers(host: any): void;
     const shouldLogHoldingEvent = false;
     function emitEvent(event: BindingEventName, input: IInput, info: InputInfo, mouse: GlobalMouseInfo, globalInput: GlobalInputInfo): Set<Bindable>;
+    function currentMacroMatch(...bindables: Bindable[]): Bindings.IBindableMatch;
 }
 export default Bind;

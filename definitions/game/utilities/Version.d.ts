@@ -33,5 +33,6 @@ declare module Version {
     function getVersionInfo(version: string): IVersionInfo;
     function isSameVersion(version: IVersionInfo, compareVersion: IVersionInfo): boolean;
     function getVersionDisplayString(version?: string | IVersionInfo): string;
+    function getUpdateDisplayString(version?: string | IVersionInfo): string | undefined;
 }
 export default Version;

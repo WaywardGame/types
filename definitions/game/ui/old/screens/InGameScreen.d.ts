@@ -8,8 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import Doodad from "game/doodad/Doodad";
 import { ActionType } from "game/entity/action/IAction";
 import { EquipType } from "game/entity/IHuman";
+import NPC from "game/entity/npc/NPC";
+import type Player from "game/entity/player/Player";
 import type { IContainer, IDismantleComponent } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
@@ -23,11 +26,6 @@ import { DialogId, SortType } from "ui/old/IOldUi";
 import BaseScreen from "ui/old/screens/BaseScreen";
 import { Direction } from "utilities/math/Direction";
 import type Vector2 from "utilities/math/Vector2";
-export declare enum ContextMenuType {
-    Actions = 0,
-    AutoActions = 1,
-    Items = 2
-}
 export declare enum TextElementId {
     Weight = 0,
     Attack = 1,
@@ -46,6 +44,11 @@ declare global {
     interface JQuery {
         sort: Element[]["sort"];
     }
+}
+export interface IUiContainer {
+    container: IContainer;
+    name: string;
+    owner: NPC | Doodad | Item;
 }
 export default class InGameScreen extends BaseScreen {
     overlayBindCatcherId: number;
@@ -96,7 +99,7 @@ export default class InGameScreen extends BaseScreen {
     constructor();
     selector(): string;
     bindElements(): void;
-    changeEquipmentOption(id: "leftHand" | "rightHand"): void;
+    onChangeEquipmentOption(player: Player, id: "leftHand" | "rightHand", newValue: boolean): void;
     toggleCraftingTab(which: "crafting" | "dismantle", canClose?: boolean): void;
     toggleCraftingTabElements(which: "crafting" | "dismantle"): void;
     unbindElements(): void;
@@ -109,6 +112,7 @@ export default class InGameScreen extends BaseScreen {
     cancelSorting(): void;
     setupContextMenu(): any;
     onShow(): void;
+    makeActiveContainer(dialog: JQuery): void;
     makeTopDialog(dialog: JQuery): void;
     onHide(): void;
     initializeGameState(): void;
@@ -119,6 +123,7 @@ export default class InGameScreen extends BaseScreen {
     highlightItemElementByItemType(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementByItemTypeWithNoItemId(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementBySelector(selector: string, highlight: boolean, force?: boolean, skipCount?: boolean): void;
+    highlightItemElement(element: HTMLElement, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     getMovementDirection(mouseX: number, mouseY: number): Direction;
     blurInputs(): void;
     toggleDialog(dialog: JQuery): boolean;
@@ -133,9 +138,8 @@ export default class InGameScreen extends BaseScreen {
     getItemClass(item?: Item, itemType?: ItemType): string;
     createItemString(itemType: ItemType, item?: Item, extraClass?: string): string;
     syncItemElements(itemIds: number | number[], forceSyncDecay?: boolean): void;
-    private readonly SYMBOL_ITEM_ELEMENTS;
     private readonly SYMBOL_LAST_DECAY;
-    syncDecayBar(item: Item, force?: boolean): void;
+    syncDecayBar(item: Item, force?: boolean, elements?: NodeListOf<HTMLElement>): void;
     addItemToContainer(item: Item, container: IContainer, _internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
     insertItemStringToContainer(itemElement: string | JQuery, containerElement: JQuery): void;
     onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery | undefined, isInventoryContainer: boolean, updateTables?: boolean): void;
@@ -160,6 +164,7 @@ export default class InGameScreen extends BaseScreen {
     unSelectElements(): void;
     getUsedQuickSlots(): number[];
     getFreeQuickSlots(): number[];
+    getQuickSlots(): number;
     getQuickSlotItemElement(quickSlot: number): JQuery;
     getItemIdInQuickSlot(quickSlot: number): number | undefined;
     setQuickSlot(quickSlot: number, itemId?: number, internal?: boolean): boolean;
@@ -186,22 +191,25 @@ export default class InGameScreen extends BaseScreen {
     onMove(): void;
     /**
      * Gets the dialog element for an item/doodad container (bags, backpacks, chests, etc.) and not inventories dialogs.
-     * @param container The container to check.
+     * @param value The container to check.
      */
-    getDialogElementFromContainer(container: IContainer): JQuery | undefined;
+    getDialogElementFromContainer(value: unknown): JQuery | undefined;
     /**
      * Gets the dialog container element for an inventory or item/doodad container.
      * @param container The container to check.
      */
     getDialogContainerElementForFilter(container: IContainer): JQuery | undefined;
-    isContainerOpen(container: IContainer): boolean;
-    openContainer(container: IContainer, containerName?: string): void;
+    isContainerOpen(value: unknown): value is IContainer;
+    openContainer(container: IContainer | NPC, containerName?: string): void;
     closeContainer(container: IContainer): void;
     closeContainerDialog(containerDialog?: JQuery, closeType?: "close" | "destroy"): void;
     closeStaticContainers(): void;
+    hasOpenContainer(): boolean;
     closeAllContainers(closeType?: "close" | "destroy"): boolean;
     updateContainerName(containerDialogElement: JQuery): void;
     updateActiveContainer(): void;
+    getActiveContainer(): IUiContainer | undefined;
+    getOpenContainers(): IUiContainer[];
     hideContextMenu(): boolean;
     hideActionsMenu(): void;
     toggleActionsMenu(center?: boolean): void;
@@ -242,6 +250,7 @@ export default class InGameScreen extends BaseScreen {
     onStopItemMove(api: IBindHandlerApi): void;
     onItemEquipToggle(api: IBindHandlerApi): boolean;
     onItemProtectToggle(api: IBindHandlerApi): boolean;
+    onItemRename(api: IBindHandlerApi): boolean;
     onContextMenu(api: IBindHandlerApi): boolean;
     onQuickSlotToggle(api: IBindHandlerApi): boolean;
     onQuickSlot(api: IBindHandlerApi): boolean;
@@ -254,12 +263,12 @@ export default class InGameScreen extends BaseScreen {
     onCloseAllDialogs(): boolean;
     onMoreInformation(api: IBindHandlerApi): boolean;
     onDismantleTab(): boolean;
-    onHandToggle(api: IBindHandlerApi): boolean;
     onInput(api: IBindHandlerApi): void;
     private clearActionsMenuTileOverlay;
     getAutoActionItem(actionType: ActionType, allowProtectedItems?: boolean): Item | undefined;
     private runAutoAction;
     private runAction;
+    private runContextMenuAction;
     private updateContextMenu;
     private confirmAction;
     private resetQuickSlotBinds;

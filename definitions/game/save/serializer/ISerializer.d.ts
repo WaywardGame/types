@@ -104,7 +104,8 @@ export declare enum Types {
     SavedTilesSerializer = 43,
     FlowField = 44,
     ItemReference = 45,
-    StringTokenizer = 46
+    StringTokenizer = 46,
+    MagicalPropertyManager = 47
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_SAVE_PROPERTY_FLAGS: unique symbol;

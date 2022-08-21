@@ -57,7 +57,7 @@ export interface IEventEmitter<H = any, E = any> {
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
     hasHandlersForEvent(...events: Array<keyof E>): boolean;
 }
-interface IUntilSubscriber<H, E> {
+export interface IUntilSubscriber<H, E> {
     subscribe<K extends ArrayOr<keyof E>>(event: K, handler: IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): H;
 }
 interface IEventEmitterEvents<H, E> {

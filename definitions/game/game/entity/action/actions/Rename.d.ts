@@ -12,5 +12,5 @@ import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
 import Creature from "game/entity/creature/Creature";
 import type Item from "game/item/Item";
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Creature], ActionArgument.String], import("../../player/Player").default | import("../../npc/NPC").default, void, [Creature | import("../../../doodad/Doodad").default | Item, string]>;
+declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Creature, ActionArgument.NPC], ActionArgument.String], import("../../Human").default, void, import("game/entity/action/IAction").IActionUsable, [Creature | import("../../../doodad/Doodad").default | Item | import("../../npc/NPC").default, string]>;
 export default _default;

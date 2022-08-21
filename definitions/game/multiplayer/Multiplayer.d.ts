@@ -112,7 +112,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onLobbyExited(lobbyId: string): void;
     getClients(): IConnection[];
-    closeConnection(reason: DisconnectReason, connection: IConnection): void;
+    closeConnection(reason: DisconnectReason, connection: IConnection): boolean;
     sendConnectPacket(): void;
     removePlayers(reason: DisconnectReason): void;
     removePlayer(connection: IConnection, reason: DisconnectReason): void;

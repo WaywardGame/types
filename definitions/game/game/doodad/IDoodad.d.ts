@@ -11,19 +11,22 @@
 import type { BiomeType } from "game/biome/IBiome";
 import type Doodad from "game/doodad/Doodad";
 import type { ActionType } from "game/entity/action/IAction";
+import type Human from "game/entity/Human";
 import type { ICausesDamage, ICausesStatusEffect } from "game/entity/IEntity";
 import type { SkillType } from "game/entity/IHuman";
-import type Player from "game/entity/player/Player";
 import type { IDecayTemperatureRange } from "game/IGame";
 import type { ILootItem } from "game/ILoot";
 import type { IObjectDescription, IObjectOptions } from "game/IObject";
+import type Island from "game/island/Island";
 import type { IItemOld, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type { LootGroupType } from "game/item/LootGroups";
+import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
 import type { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
-import type { TerrainType } from "game/tile/ITerrain";
+import type { ITile, TerrainType } from "game/tile/ITerrain";
 import type { TileEventType } from "game/tile/ITileEvent";
 import type { IModdable } from "mod/ModRegistry";
+import type { ISpriteAnimation } from "renderer/ISpriteInfo";
 import type { TileLayerType } from "renderer/world/IWorldRenderer";
 import type { IRGB } from "utilities/Color";
 export interface IDoodadOptions extends IObjectOptions {
@@ -34,17 +37,20 @@ export interface IDoodadOptions extends IObjectOptions {
     spread?: number;
     weight?: number;
     disassembly?: Item[];
-    ownerIdentifier?: string;
+    crafterIdentifier?: string;
+    builderIdentifier?: string;
     step?: number;
     hitchedCreature?: number;
     aberrant?: boolean;
     meltDecay?: number;
+    inheritMagic?: MagicalPropertyManager;
 }
 declare type MagicalPropertyOld = Exclude<IItemOld["magicalProperties"], undefined> extends Array<infer T> ? T : never;
 export declare type IDoodadOld = Partial<Doodad> & {
     growInto?: DoodadType;
     legendary?: MagicalPropertyOld;
     magicalProperties?: MagicalPropertyOld[];
+    ownerIdentifier?: string;
 };
 export interface IDoodadGroupDescription {
     /**
@@ -65,6 +71,9 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     canTrampleWhenMature?: boolean;
     disableDrop?: boolean;
     doorToggled?: DoodadType;
+    /**
+     * Mostly used for canGrow doodads
+     */
     durability?: number;
     gather?: IDoodadLoot;
     gatherCanHurtHands?: boolean;
@@ -73,18 +82,24 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     group?: DoodadTypeGroup[];
     growthParticles?: IDoodadParticles;
     harvest?: IDoodadLoot;
-    isAnimated?: boolean;
+    isAnimated?: boolean | ISpriteAnimation;
     isClosed?: boolean;
     isDoor?: boolean;
     isFence?: boolean;
     isFlammable?: boolean;
     usesSpores?: boolean;
     isGate?: boolean;
+    adaptsToFence?: boolean;
     isTall?: boolean;
     isTrap?: boolean;
     isTree?: boolean;
     isWall?: boolean;
     isWaterSource?: boolean;
+    isVehicle?: boolean;
+    attackable?: true;
+    /**
+     * When gathered completely, convert to a new DoodadType
+     */
     leftOver?: DoodadType;
     lightColor?: IRGB;
     lit?: DoodadType;
@@ -130,8 +145,28 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      * After the plant is fully grown, it morphs into this terrain type.
      */
     growsIntoTerrain?: TerrainType;
-    getVariationX?(doodad: Doodad, existingVariationX: number): number | undefined;
-    getVariationY?(doodad: Doodad, existingVariationY: number): number | undefined;
+    /**
+     * Allows overiding the adapter
+     */
+    useRendererAdapter?: "Door";
+    /**
+     * Use SpriteBatch to render the doodad instead of tile based rendering
+     */
+    renderAsSprite?: boolean | Partial<{
+        /**
+         * y offset when rendering the sprite
+         */
+        renderOffsetY: number;
+        /**
+         * Number of rows in the sprite
+         */
+        rows: number;
+        /**
+         * Number of columns in the sprite
+         */
+        columns: number;
+    }>;
+    getVariation?(island: Island, tile: ITile, x: number, y: number, z: number, doodad: Doodad | undefined, existingVariationX: number, existingVariationY: number): [number, number] | undefined;
 }
 export interface IItemStackRegion {
     xMin?: number;
@@ -169,9 +204,9 @@ export declare enum DoodadType {
     WoodenWall = 2,
     ClayWall = 3,
     SandstoneWall = 4,
-    StoneWall = 5,
+    GraniteWall = 5,
     SetExplosiveTrap = 6,
-    SetDeadfall = 7,
+    SetGraniteDeadfall = 7,
     SetSnare = 8,
     SetHobgoblinSnare = 9,
     SolarStill = 10,
@@ -193,17 +228,17 @@ export declare enum DoodadType {
     Cotton = 26,
     PricklyPears = 27,
     Tumbleweed = 28,
-    StoneWaterStill = 29,
-    LitStoneWaterStill = 30,
-    StoneCampfire = 31,
-    LitStoneCampfire = 32,
+    GraniteWaterStill = 29,
+    LitGraniteWaterStill = 30,
+    GraniteCampfire = 31,
+    LitGraniteCampfire = 32,
     SandstoneKiln = 33,
     LitSandstoneKiln = 34,
-    StoneFurnace = 35,
-    LitStoneFurnace = 36,
+    GraniteFurnace = 35,
+    LitGraniteFurnace = 36,
     PoleTorchStand = 37,
     LitPoleTorchStand = 38,
-    StoneAnvil = 39,
+    GraniteAnvil = 39,
     CaveEntrance = 40,
     WoodenDoorOpen = 41,
     WoodenGate = 42,
@@ -227,8 +262,8 @@ export declare enum DoodadType {
     LitSandstoneFurnace = 60,
     SandstoneWaterStill = 61,
     LitSandstoneWaterStill = 62,
-    StoneKiln = 63,
-    LitStoneKiln = 64,
+    GraniteKiln = 63,
+    LitGraniteKiln = 64,
     WroughtIronAnvil = 65,
     IronAnvil = 66,
     MapleTree = 67,
@@ -263,7 +298,7 @@ export declare enum DoodadType {
     HitchingPost = 96,
     ClayWell = 97,
     SandstoneWell = 98,
-    StoneWell = 99,
+    GraniteWell = 99,
     AshCementWall = 100,
     SpruceTreeWithSnow = 101,
     CrowberryShrub = 102,
@@ -289,13 +324,40 @@ export declare enum DoodadType {
     StrawScarecrow = 122,
     CactusScarecrow = 123,
     PapayaTree = 124,
-    Palapalai = 125
+    Palapalai = 125,
+    Sailboat = 126,
+    Raft = 127,
+    BullBoat = 128,
+    SetSandstoneDeadfall = 129,
+    WoodenMinecart = 130,
+    TinMinecart = 131,
+    CopperMinecart = 132,
+    WroughtIronMinecart = 133,
+    IronMinecart = 134,
+    BronzeMinecart = 135,
+    BasaltWall = 136,
+    SetBasaltDeadfall = 137,
+    BasaltWaterStill = 138,
+    LitBasaltWaterStill = 139,
+    BasaltCampfire = 140,
+    LitBasaltCampfire = 141,
+    BasaltFurnace = 142,
+    LitBasaltFurnace = 143,
+    BasaltAnvil = 144,
+    BasaltKiln = 145,
+    LitBasaltKiln = 146,
+    BasaltWell = 147,
+    WoodenTrackGate = 148,
+    WoodenTrackGateOpen = 149,
+    Cattails = 150,
+    WaterLilies = 151,
+    Spikerush = 152
 }
 /**
  * All tree types that can be spawned during map gen
  * !! This must be kept in sync with the tree list in setupTiles !!
  */
-export declare type MapGenDoodadTrees = DoodadType.MapleTree | DoodadType.CoconutTree | DoodadType.JoshuaTree | DoodadType.SpruceTree | DoodadType.CypressTree | DoodadType.AppleTree | DoodadType.SpruceTreeWithSnow | DoodadType.WhitePineTree | DoodadType.WhitePineTreeWithSnow | DoodadType.PapayaTree | DoodadType.Palapalai;
+export declare type MapGenDoodadTrees = DoodadType.MapleTree | DoodadType.CoconutTree | DoodadType.JoshuaTree | DoodadType.SpruceTree | DoodadType.CypressTree | DoodadType.AppleTree | DoodadType.SpruceTreeWithSnow | DoodadType.WhitePineTree | DoodadType.WhitePineTreeWithSnow | DoodadType.PapayaTree | DoodadType.Palapalai | DoodadType.ButtonMushrooms | DoodadType.PoisonIvy | DoodadType.Cattails;
 export declare enum DoodadTypeGroup {
     Invalid = 400,
     LitCampfire = 401,
@@ -328,7 +390,7 @@ export declare enum GrowingStage {
     Ripening = 5,
     Bare = 6
 }
-export interface IHasOwner {
-    getOwner(): Player | undefined;
+export interface IHasBuilder {
+    getBuilder(): Human | undefined;
 }
 export {};

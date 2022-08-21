@@ -107,6 +107,7 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
     private cachedNormalTypes?;
     private cachedSubTypes?;
     private cachedHash?;
+    constructor(properties?: Partial<Record<MagicalPropertyType, AnyMagicalProperty>>);
     /**
      * @returns the number of magical properties on this object
      */

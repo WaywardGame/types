@@ -12,6 +12,6 @@ import type { TerrainType } from "game/tile/ITerrain";
 import type WorldLayer from "renderer/world/WorldLayer";
 import type { ITileAdaptation, ITileAdaptor } from "renderer/tile/TileAdaptors";
 import type TileAtlas from "renderer/tile/atlas/TileAtlas";
-export default class Till implements ITileAdaptor {
+export default class TillTileAdaptor implements ITileAdaptor {
     adapt(worldLayer: WorldLayer, tileAtlas: TileAtlas, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
 }

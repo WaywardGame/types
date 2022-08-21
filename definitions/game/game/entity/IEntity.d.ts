@@ -10,7 +10,9 @@
  */
 import type Doodad from "game/doodad/Doodad";
 import type Entity from "game/entity/Entity";
+import type { SkillType } from "game/entity/IHuman";
 import type { IStatEvents } from "game/entity/IStats";
+import type Item from "game/item/Item";
 import type { ITile } from "game/tile/ITerrain";
 export interface IEntityEvents extends IStatEvents {
     /**
@@ -21,20 +23,29 @@ export interface IEntityEvents extends IStatEvents {
      * Called when this entity gets or loses a status effect
      * @param entity The object this event is emitted from
      * @param status The type of status effect that was gained or lost
-     * @param hasStatus Whether the entity now has the status effect
+     * @param level Whether the entity now has the status effect
      * @param reason The reason for the change
      */
-    statusChange(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
+    statusChange(status: StatusType, level: number, reason: StatusEffectChangeReason): void;
     /**
      * Called when the entity is created in the game
      * Also called for players that "rejoin" the game
      */
     created(): void;
     /**
+     * Called when the entity is renamed
+     */
+    renamed(): void;
+    /**
      * Called when the entity is removed from the game
      */
     removed(): void;
-    preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): boolean | undefined | void;
+    /**
+     * Called before moving.
+     * Can be called twice for humans
+     * @param isMoving True the second time it's called, right as the entity is about to actually move
+     */
+    preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile, isMoving: boolean): boolean | undefined | void;
     postMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
 }
 export declare enum StatusEffectChangeReason {
@@ -46,7 +57,8 @@ export declare enum StatChangeReason {
     Normal = 0,
     ChangeTimer = 1,
     BonusChanged = 2,
-    Upgrade = 3
+    Upgrade = 3,
+    Dynamic = 4
 }
 export interface IStatChangeInfo<T = any> {
     /**
@@ -83,9 +95,9 @@ export declare enum StatusType {
     Freezing = 8,
     Frostbitten = 9
 }
-export declare type IStatus = Record<keyof typeof StatusType, boolean>;
+export declare type IStatus = Record<keyof typeof StatusType, number>;
 export interface ICausesStatusEffect {
-    causesStatus?: StatusType[];
+    causesStatus?: Array<StatusType | [status: StatusType, level: number]>;
 }
 export interface ICausesDamage {
     damage?: number;
@@ -98,7 +110,8 @@ export declare type IProperties = Map<Property, any>;
 export declare enum EntityType {
     Player = 0,
     Creature = 1,
-    NPC = 2
+    NPC = 2,
+    Human = 3
 }
 export declare enum AiType {
     Neutral = 0,
@@ -128,12 +141,22 @@ export declare enum MoveType {
     Flying = 15
 }
 export declare enum AttackType {
-    Melee = 0,
+    /**
+     * Melee weapon
+     */
+    MeleeWeapon = 0,
+    /**
+     * Hand to hand (no weapon)
+     */
     HandToHand = 1,
-    Fire = 2,
-    Shoot = 3,
-    ThrowItem = 4,
-    Generic = 5
+    /**
+     * Ranged weapon with ammo
+     */
+    RangedWeapon = 2,
+    /**
+     * Throwing an item
+     */
+    ThrowItem = 3
 }
 export declare enum DamageType {
     Blunt = 1,
@@ -168,5 +191,28 @@ declare class AttributesImpl {
     has(): boolean;
     copy(): Attributes;
     equals(attrs: Attributes): boolean;
+}
+export interface IAttack {
+    attack: AttackType;
+    type: DamageType;
+    tactics: number;
+    mainHand?: IAttackMainHand;
+    offHand?: IAttackOffHand;
+    skillBonus?: IAttackSkillBonus;
+    multiplier?: number;
+}
+export interface IAttackMainHand {
+    item: Item;
+    value: number;
+}
+export interface IAttackOffHand {
+    item: Item;
+    raw: number;
+    skill: number;
+    result: number;
+}
+export interface IAttackSkillBonus {
+    skill: SkillType;
+    value: number;
 }
 export {};

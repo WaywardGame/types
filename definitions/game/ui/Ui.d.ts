@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { SfxUi } from "audio/IAudio";
 import { SfxType } from "audio/IAudio";
 import EventEmitter from "event/EventEmitter";
 import type { PlayerState } from "game/entity/player/IPlayer";
@@ -61,7 +62,7 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
      * Registers an object as a "data host", which allows its fields to be saved to `saveData` or `saveDataGlobal`
      */
     registerDataHost(id: string | number, host: any): void;
-    playSound(sound: SfxType | "activate" | "select" | "input" | "enable" | "disable"): void;
+    playSound(sound: SfxType | SfxUi): void;
     shouldShowMoreInformation(): boolean;
     toggleShowMoreInformation(showMoreInformation: boolean): void;
     /**
@@ -76,6 +77,8 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
      * @param fullscreen Whether or not fullscreen is enabled
      */
     toggleFullscreen(fullscreen?: boolean): void;
+    enableCustomTitleBar(enabled: boolean): void;
+    getTitleBarHeight(): 0 | 30;
     /**
      * @param save Whether or not to save the new scale into options. Defaults to true.
      */
@@ -83,9 +86,11 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     addStylesheet(path: string): void;
     removeStylesheet(path: string): void;
     reloadStylesheets(): void;
+    reloadVariableUIImages(): void;
     updateFontStyle(): void;
     updateUIAnimations(): void;
     updateUIOpacity(): void;
+    updateAcrylicTransparency(): void;
     updatePowerMode(): void;
     toggleDeveloperMode(enabled: boolean): this;
     protected onGlobalSlotLoaded(): void;
@@ -93,9 +98,11 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     protected onStopPlay(game: Game, state: PlayerState): Promise<void>;
     protected onInterruptClosed(): void;
     protected onLanguageChange(_: any, language: string): void;
+    protected onToggleScreen(): void;
     protected onFullscreen(): boolean;
     protected onToggleDevMode(): boolean;
     protected onReload(api: IBindHandlerApi): boolean;
     protected onToggleDevTools(): boolean;
     protected onReloadStylesheets(): boolean;
+    protected onReloadVariableUIImages(): boolean;
 }

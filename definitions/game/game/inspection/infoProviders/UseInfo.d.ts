@@ -19,6 +19,7 @@ import type { TranslationGenerator } from "ui/component/IComponent";
 export interface IDescribed {
     objectType: CreationId;
     type: number;
+    referenceId?: number;
     quality?: Quality;
     description(): any;
 }

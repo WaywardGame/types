@@ -64,7 +64,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     protected onSelectionChange(_: any, selection?: Component): void;
     protected onAppend(): void;
     protected isSelectionWithin(selection?: Component): boolean;
-    protected isMouseWithin(): false | Component<HTMLElement>;
+    protected isMouseWithin(): Component<HTMLElement> | undefined;
     protected selectNext(): void;
     protected selectPrevious(): void;
     protected selectionMove(direction: "next" | "prev"): void;

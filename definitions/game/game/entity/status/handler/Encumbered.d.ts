@@ -10,7 +10,7 @@
  */
 import { WeightStatus } from "game/entity/player/IPlayer";
 import StatusEffect, { StatusEffectBadness } from "game/entity/status/StatusEffect";
-import type { IHighlight } from "ui/component/IComponent";
+import type { IHighlight } from "ui/util/IHighlight";
 export default class Encumbered extends StatusEffect {
     private status?;
     register(): void;

@@ -12,14 +12,14 @@ import type { BiomeType } from "game/biome/IBiome";
 import type Doodad from "game/doodad/Doodad";
 import type Creature from "game/entity/creature/Creature";
 import type Human from "game/entity/Human";
-import type { AiType, DamageType, Defense, IEntityEvents, MoveType, StatusType } from "game/entity/IEntity";
-import type Player from "game/entity/player/Player";
+import type { AiType, DamageType, Defense, ICausesStatusEffect, IEntityEvents, MoveType } from "game/entity/IEntity";
 import type { ItemType, ItemTypeGroup } from "game/item/IItem";
 import type { LootGroupType } from "game/item/LootGroups";
 import type { ITemperatureDescription } from "game/temperature/ITemperature";
 import type { ITile } from "game/tile/ITerrain";
 import type { TileEventType } from "game/tile/ITileEvent";
 import type Message from "language/dictionary/Message";
+import type TranslationImpl from "language/impl/TranslationImpl";
 import type Translation from "language/Translation";
 import type { IModdable } from "mod/ModRegistry";
 import type { IRGB } from "utilities/Color";
@@ -76,7 +76,9 @@ export declare enum CreatureType {
     SnowWalker = 49,
     Mammoth = 50,
     Pangolin = 51,
-    Dryad = 52
+    Dryad = 52,
+    Coyote = 53,
+    KomodoMonitor = 54
 }
 export interface ICreatureOld extends Creature {
     hp: number;
@@ -95,7 +97,8 @@ export declare enum SpawnGroup {
     StrongGuardians = 6,
     FreshWater = 7,
     EasyNight = 8,
-    CaveVoid = 9
+    CaveVoid = 9,
+    SwampWater = 10
 }
 export declare enum TileGroup {
     None = 0,
@@ -121,7 +124,7 @@ export declare enum TileGroup {
     Void = 20,
     DesertWithDirt = 21
 }
-export interface ICreatureDescription extends IModdable, ITemperatureDescription {
+export interface ICreatureDescription extends IModdable, ITemperatureDescription, ICausesStatusEffect {
     minhp: number;
     maxhp: number;
     minatk: number;
@@ -143,7 +146,6 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
     spawnTiles: TileGroup;
     spawnGroup?: OptionalDescriptions<BiomeType, SpawnGroup[]>;
     makeNoise?: boolean;
-    canCauseStatus?: StatusType[];
     lootGroup?: LootGroupType;
     jumpOver?: boolean;
     noCorpse?: boolean;
@@ -217,13 +219,31 @@ export interface IDamageInfo {
     soundDelay?: number;
     surpressAttackAnimation?: boolean;
 }
+export interface IDamageOutcomeInput {
+    human?: Human;
+    target: Human | Creature;
+    damageAmount: number;
+    damageType: DamageType;
+    onlyCalculating?: boolean;
+    weaponName?: Message | TranslationImpl;
+    yourWeaponName?: Translation;
+    targetName?: Translation;
+}
+export interface IDamageOutcome {
+    attackOutcome: number;
+    resist: number;
+    resistTypes: DamageType[];
+    vulnerable: number;
+    vulnerableTypes: DamageType[];
+    noDamage: boolean;
+}
 export interface ICreatureEvents extends IEntityEvents {
     /**
      * Called before a creature attacks
-     * @param enemy The enemy (player or creature)
+     * @param enemy The enemy (human or creature)
      * @returns False if the creature cannot attack, or undefined to use the default logic
      */
-    canAttack(enemy: Player | Creature): boolean | undefined;
+    canAttack(enemy: Human | Creature): boolean | undefined;
     /**
      * Called when a creature tries to move
      * @param tile The tile the creature is trying to move to
@@ -255,7 +275,7 @@ export interface ICreatureEvents extends IEntityEvents {
      * Called when a creature becomes tamed
      * @param owner The human which the creature is tamed for
      */
-    tame?(owner: Player): void;
+    tame?(owner: Human): void;
     /**
      * Called when a creature dies
      */

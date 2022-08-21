@@ -9,13 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InspectType } from "game/inspection/IInspection";
+import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import CollapsableInfoProvider from "game/inspection/infoProviders/CollapsableInfoProvider";
-import UnlockableRowInfoProvider from "game/inspection/infoProviders/UnlockableRowInfoProvider";
 import Inspection from "game/inspection/Inspection";
 import { Milestone, MilestoneVisibility } from "game/milestones/IMilestone";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
+import type { TranslationGenerator } from "ui/component/IComponent";
 export default class MilestoneInspection extends Inspection<Milestone> {
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
     static getMilestoneName(milestone: Milestone, visibility?: MilestoneVisibility): import("../../../language/impl/TranslationImpl").default;
@@ -24,7 +24,7 @@ export default class MilestoneInspection extends Inspection<Milestone> {
     constructor([, milestone]: [any, Milestone], context?: InfoProviderContext);
     getId(): string;
     getBorder(): string;
-    get(context: InfoProviderContext): (import("../../../language/impl/TranslationImpl").default | UiTranslation | import("game/inspection/InfoProvider").SimpleInfoProvider | CollapsableInfoProvider | UnlockableRowInfoProvider)[];
+    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getDiscovered;
     private getDiscoveredTranslations;
 }

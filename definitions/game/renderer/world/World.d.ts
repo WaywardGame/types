@@ -31,7 +31,7 @@ export default class World extends EventEmitter.Host<IWorldEvents> implements IS
     toLocal(world: number, local: number): number;
     addLayer(level: WorldZ): void;
     load(): void;
-    updateTile(x: number, y: number, z: number, tile: ITile, tileUpdateType: TileUpdateType, flush?: boolean): void;
+    updateTile(x: number, y: number, z: number, tile: ITile, tileUpdateType: TileUpdateType, updateNeighbors?: boolean, flush?: boolean): void;
     startUpdateTileBatch(): void;
     endUpdateTileBatch(): void;
     serializeObject(_serializer: ISerializer): void;

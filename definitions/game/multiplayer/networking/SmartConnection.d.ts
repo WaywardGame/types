@@ -17,7 +17,7 @@ import { ConnectionState } from "multiplayer/networking/IConnection";
 export declare class SmartConnection extends Connection {
     private readonly matchmakingInfo;
     readonly matchmakingIdentifier: string;
-    private readonly config;
+    private readonly webRTCConfig;
     private readonly sendMatchmakingMessage;
     private readonly onData;
     private readonly onConnected;
@@ -28,7 +28,8 @@ export declare class SmartConnection extends Connection {
     private _hostIpAddress;
     private _steamNetworkTimeoutId;
     private _steamNetworkConnection;
-    constructor(matchmakingInfo: IMatchmakingInfo, matchmakingIdentifier: string, config: RTCConfiguration, sendMatchmakingMessage: (message: MatchmakingMessageData) => void, onData: (data: ArrayBuffer) => void, onConnected: (matchmakingInfo: IMatchmakingInfo) => void, trySteamRelayNetwork: boolean, connectGlobalMatchmakingServer: () => void);
+    private _webWorkerConnection;
+    constructor(matchmakingInfo: IMatchmakingInfo, matchmakingIdentifier: string, webRTCConfig: RTCConfiguration, sendMatchmakingMessage: (message: MatchmakingMessageData) => void, onData: (data: ArrayBuffer) => void, onConnected: (matchmakingInfo: IMatchmakingInfo) => void, trySteamRelayNetwork: boolean, connectGlobalMatchmakingServer: () => void);
     get isSteamNetworkConnection(): boolean;
     isConnected(): boolean;
     getState(): ConnectionState;
@@ -37,10 +38,11 @@ export declare class SmartConnection extends Connection {
     close(closeImmediately: boolean): void;
     protected onClosing(): void;
     protected onClosed(): void;
-    send(data: ArrayBuffer | Uint8Array): boolean;
+    send(data: Uint8Array, byteOffset: number, length?: number): boolean;
     processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;
     private trySteamNetwork;
     private tryWebRTC;
     private tryWebSocket;
+    private tryWebWorker;
     private _onConnected;
 }

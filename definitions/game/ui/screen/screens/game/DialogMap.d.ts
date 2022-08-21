@@ -10,6 +10,7 @@
  */
 import BookDialog from "ui/screen/screens/game/dialog/BookDialog";
 import CraftingDialog from "ui/screen/screens/game/dialog/CraftingDialog";
+import EquipmentDialog from "ui/screen/screens/game/dialog/EquipmentDialog";
 import InspectDialog from "ui/screen/screens/game/dialog/InspectDialog";
 import IslandsDialog from "ui/screen/screens/game/dialog/IslandsDialog";
 import MapDialog from "ui/screen/screens/game/dialog/MapDialog";
@@ -23,6 +24,7 @@ import SkillsDialog from "ui/screen/screens/game/dialog/SkillsDialog";
 declare const dialogMap: {
     6: typeof BookDialog;
     9: typeof CraftingDialog;
+    12: typeof EquipmentDialog;
     10: typeof InspectDialog;
     11: typeof IslandsDialog;
     7: typeof MapDialog;

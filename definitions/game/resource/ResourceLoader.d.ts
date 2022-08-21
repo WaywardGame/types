@@ -21,7 +21,6 @@ export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEve
     private loadingInterval;
     private waitingSlots;
     private readonly maxConcurrent;
-    private spritePack;
     private spritePacker;
     private tilePacker;
     private _resourceContainer;

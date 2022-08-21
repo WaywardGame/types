@@ -62,6 +62,7 @@ export default class TranslationImpl {
     private reference?;
     constructor(dictionary: Dictionary | string, entry: number | string, index?: "random" | number);
     constructor(translationId: string);
+    equals(translation: TranslationImpl): boolean;
     withSegments(...segments: ISegment[]): this;
     withSegments(priority: true, ...segments: ISegment[]): this;
     withTooltip(tooltip?: Falsy | ITooltipSection["tooltip"]): this;

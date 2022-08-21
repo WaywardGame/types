@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 /// <reference types="node" />
+/// <reference types="node" />
 import * as osNative from "os";
 import type { IOS } from "../../os";
 export declare class SharedOSIPCHandler implements IOS {

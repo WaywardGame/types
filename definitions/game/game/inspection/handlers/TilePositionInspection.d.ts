@@ -18,7 +18,7 @@ import InspectionsHandler from "game/inspection/InspectionsHandler";
 import type { IContainer } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type TileEvent from "game/tile/TileEvent";
-import HashSet from "utilities/collection/set/HashSet";
+import type HashSet from "utilities/collection/set/HashSet";
 import type { IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
 export interface ITilePositionInspectionEvents {

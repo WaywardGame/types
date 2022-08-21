@@ -46,7 +46,8 @@ declare class SaveSlot extends InputButton {
     /**
      * Loads the data for this save slot.
      */
-    private load;
+    load(loadAll?: boolean): Promise<void>;
+    private loadTooltip;
     /**
      * The tooltip generator for this component.
      */

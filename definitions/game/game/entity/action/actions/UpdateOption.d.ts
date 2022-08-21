@@ -10,5 +10,5 @@
  */
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.String, ActionArgument.Object], import("../../player/Player").default, void, [string, any?]>;
+declare const _default: Action<[ActionArgument.String, ActionArgument.Object], import("../../Human").default, void, import("game/entity/action/IAction").IActionUsable, [string, any?]>;
 export default _default;

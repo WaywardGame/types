@@ -12,6 +12,7 @@ declare const config: {
     testRetires: string | number;
     testTimeout: string | number;
     randomInputCount: number;
+    outputConsoleErrors: boolean;
 };
 export declare type Config = typeof config;
 export {};

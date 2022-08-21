@@ -10,5 +10,5 @@
  */
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.Item, ActionArgument.Integer32, [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../player/Player").default, void, [import("../../../item/Item").default, number, (boolean | undefined)?]>;
+declare const _default: Action<[ActionArgument.Item, ActionArgument.Integer32, [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default, void, import("game/entity/action/IAction").IActionUsable, [import("../../../item/Item").default, number, (boolean | undefined)?]>;
 export default _default;

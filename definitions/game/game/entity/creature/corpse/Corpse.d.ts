@@ -26,6 +26,7 @@ export default class Corpse extends EventEmitter.Host<ICorpseEvents> implements 
     readonly objectType: CreationId.Corpse;
     aberrant?: boolean | undefined;
     decay?: number | undefined;
+    startingDecay?: number;
     id: number;
     qualityBonus?: number | undefined;
     referenceId?: number;
@@ -48,8 +49,10 @@ export default class Corpse extends EventEmitter.Host<ICorpseEvents> implements 
      * - `corpse.getName(false)` // "acid spitter demon"
      * - `corpse.getName(undefined, 3)` // "acid spitter demons"
      */
-    getName(article?: boolean, count?: number): Translation;
+    getName(article?: false | "definite" | "indefinite", count?: number): Translation;
     getTile(): ITile;
+    isValid(): boolean;
+    getDecayAtStart(): number;
     update(): void;
     getResources(clientSide?: boolean): ItemType[];
 }

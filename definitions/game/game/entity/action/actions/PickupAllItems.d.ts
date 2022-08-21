@@ -9,5 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
-declare const _default: Action<[], import("../../player/Player").default | import("../../npc/NPC").default, void, []>;
+import type { IActionUsable } from "game/entity/action/IAction";
+import type { ITileContainer } from "game/tile/ITerrain";
+export interface IPickUpAllItemsCanUse extends IActionUsable {
+    tileContainer: ITileContainer;
+}
+declare const _default: Action<[], import("../../Human").default, void, IPickUpAllItemsCanUse, []>;
 export default _default;

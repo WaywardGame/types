@@ -9,11 +9,19 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Entity from "game/entity/Entity";
-import type { IEntityManager, IPlayerBound } from "game/entity/IEntityManager";
+import type { IEntityManager, IHumanBound } from "game/entity/IEntityManager";
 import { ObjectManager } from "game/ObjectManager";
 export interface IEntityManagerEvents<T extends Entity> {
     spawn(entity: T): any;
     remove(entity: T): any;
+    /**
+     * Called when a player-like human (player / special npc) is spawned
+     */
+    addPlayingEntity(entity: T): any;
+    /**
+     * Called when a player-like human (player / special npc) is removed
+     */
+    removePlayingEntity(entity: T): any;
 }
 export interface IEntityCanCreateOptions {
     allowEdgeSpawning?: boolean;
@@ -24,7 +32,7 @@ export interface IEntityCanCreateOptions {
 }
 export default abstract class EntityManager<T extends Entity> extends ObjectManager<T, IEntityManagerEvents<T>> implements IEntityManager<T> {
     remove(entity: T): void;
-    updateFov(playerBounds: IPlayerBound[]): void;
+    updateFov(humanBounds: IHumanBound[]): void;
     /**
      * Checks if the target position is a good spot for a new entity
      */

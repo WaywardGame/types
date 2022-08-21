@@ -15,6 +15,7 @@ export interface ILaunchOptions {
     backgroundThrottling: boolean;
     borderless: boolean;
     colorProfile: string;
+    customTitleBar: boolean;
     devtools: boolean;
     disableDirectComposition: boolean;
     disableES3GLContext: boolean;

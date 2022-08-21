@@ -11,10 +11,10 @@
 import type { SfxType } from "audio/IAudio";
 import type { BiomeType } from "game/biome/IBiome";
 import type { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
-import type { ActionType } from "game/entity/action/IAction";
+import { ActionType } from "game/entity/action/IAction";
 import type { CreatureType, TileGroup } from "game/entity/creature/ICreature";
-import type { DamageType, Defense, StatusType } from "game/entity/IEntity";
-import type { EquipType, SkillType } from "game/entity/IHuman";
+import type { DamageType, Defense, MoveType, StatusType } from "game/entity/IEntity";
+import type { Delay, EquipType, SkillType } from "game/entity/IHuman";
 import type { Stat } from "game/entity/IStats";
 import type { IDecayTemperatureRange } from "game/IGame";
 import type { IObjectDescription, Quality } from "game/IObject";
@@ -49,6 +49,7 @@ export declare type IItemOld = Pick<Item, Exclude<keyof Item, "map">> & {
         islandId?: IslandId;
     };
     magicalProperties?: IMagicalPropertyOld[];
+    ownerIdentifier?: string;
     map?: [island: IslandId, id: number] | [island: IslandId, completed: boolean, decimal: number];
 };
 export declare module IItemOld {
@@ -103,13 +104,12 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      */
     durabilityModifierAtStart?: number;
     /**
-     * Do not use this property is you do not want the item to burn at all.
+     * Do not use this property if you do not want the item to burn at all (unless flammable is set, in which case, it burns into its diassembly items).
      * Set it to [ItemType.None] if you want it to burn but not produce anything.
      * Otherwise, set it to an array of items you want it to burn into.
-     * This also interacts with the flammable property, so look at that as well.
      */
     onBurn?: ItemType[];
-    onUse?: IOnUse;
+    onUse?: IItemOnUse;
     equipEffect?: EquipEffects;
     damageType?: DamageType;
     weight?: number;
@@ -130,7 +130,6 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     revert?: ItemType;
     use?: ActionType[];
     ranged?: IRanged;
-    isVehicle?: boolean;
     recipe?: IRecipe;
     /**
      * A list of recipes that have this item as an output.
@@ -191,7 +190,11 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      */
     burnsLike?: ItemType[];
     spawnableTiles?: TileGroup;
-    gather?: ILiquid;
+    /**
+     * Set on the base item for a type of water container
+     * Mapping of the specific item types per liquid type
+     */
+    liquidGather?: ILiquidGather;
     placeDownType?: DoodadType;
     damageOnUse?: Record<number, any>;
     /**
@@ -245,25 +248,112 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * Specifies with item group (weapon) this ammunition can be fired with.
      */
     firedWith?: ItemTypeGroup;
+    vehicle?: IItemVehicle;
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
 }
 export declare type ConsumeItemStatsTuple = [health: number, stamina: number, hunger: number, thirst: number];
-export interface IOnUse {
+export interface IItemOnUse {
     [ActionType.Apply]?: ConsumeItemStatsTuple;
-    [ActionType.Build]?: DoodadType | [build: DoodadType, keepItem: true];
+    [ActionType.Build]?: IItemBuild;
     [ActionType.Cure]?: ConsumeItemStatsTuple;
     [ActionType.DrinkItem]?: ConsumeItemStatsTuple;
     [ActionType.Eat]?: ConsumeItemStatsTuple;
     [ActionType.Heal]?: ConsumeItemStatsTuple;
     [ActionType.HealOther]?: number;
-    [ActionType.PlaceDown]?: DoodadType;
+    [ActionType.PlaceDown]?: IItemBuild;
     [ActionType.Plant]?: DoodadType;
     [ActionType.Pour]?: TileEventType;
     [ActionType.PourOnYourself]?: TileEventType;
     [ActionType.SetDown]?: TerrainType;
     [ActionType.SmotherFire]?: TerrainType;
     [ActionType.StokeFire]?: number;
+}
+export interface IItemBuild {
+    /**
+     * Doodad to build
+     */
+    type: DoodadType;
+    /**
+     * Prevents the item from being removed when building
+     */
+    keepItem?: boolean;
+    /**
+     * When defined, allows the build to work only on these tile types
+     */
+    allowedTileTypes?: Set<TerrainType>;
+}
+/**
+ * Describes a vehicle
+ */
+export interface IItemVehicle {
+    /**
+     * Type of vehicle
+     */
+    type: VehicleType;
+    /**
+     * Makes movement try to stay on a valid path
+     */
+    smartMovement?: boolean;
+    /**
+     * Vehicle movement type
+     */
+    movementType?: MoveType;
+    /**
+     * Movement delay
+     */
+    movementSpeed: Delay | number;
+    /**
+     * Defense bonus when inside a vehicle
+     */
+    defenseBonus?: number;
+    /**
+     * Sound effect when moving
+     */
+    soundEffect?: SfxType;
+    /**
+     * Allowed tiles the vehicle operates on
+     */
+    allowedTiles?: {
+        /**
+         * Allow moving on the set of tile types
+         */
+        tileTypes?: Set<TerrainType>;
+        /**
+         * Allow moving on the set of doodad types
+         */
+        doodadTypes?: Set<DoodadType>;
+        /**
+         * Allow moving on any water tile
+         */
+        allowAnyWater?: boolean;
+    };
+    /**
+     * Message to display when trying to use the vehicle on a disallowed tile
+     */
+    disallowedTileMessage: Message;
+    /**
+     * Allows resting
+     */
+    allowResting?: Message;
+    /**
+     * Allows sleeping
+     */
+    allowSleeping?: Message;
+    /**
+     * y offset when rendering the sprite
+     */
+    renderOffsetY?: number;
+}
+export declare enum VehicleType {
+    /**
+     * Human will stand on the vehicle
+     */
+    Stand = 0,
+    /**
+     * Human sits inside the vehicle (only show the head)
+     */
+    Sit = 1
 }
 export interface IItemReturn {
     type: ItemType;
@@ -336,12 +426,13 @@ export interface IItemUsed {
     recipe?: ItemType;
     skill?: SkillType;
 }
-export interface ILiquid {
+export interface ILiquidGather {
     milk: ItemType;
     desalinated: ItemType;
     unpurified: ItemType;
     purified: ItemType;
     seawater: ItemType;
+    swampWater: ItemType;
     wisp: ItemType;
     aberrantWisp: ItemType;
 }
@@ -437,6 +528,7 @@ export declare type EquipEffects = {
     [K in keyof IEquipEffects]: AddHead<K, Extract<IEquipEffects[K], any[]>>;
 }[keyof IEquipEffects];
 export declare type EquipEffectByType<T extends EquipEffect> = IEquipEffects[T];
+export declare const magicUseBenefitsConsumables: Set<ActionType>;
 export declare enum ItemWeightChange {
     NewMagicProperty = 0,
     NewWeight = 1
@@ -465,14 +557,16 @@ export declare enum BookType {
     TravelingBySea = 13,
     TheSolution = 14,
     TheSlimeRancher = 15,
-    DarknessCalls = 16
+    DarknessCalls = 16,
+    RemnantsOfCivilization = 17,
+    AndTheVoidAnswersBack = 18
 }
 export declare enum ItemType {
     None = 0,
     Copal = 1,
     AnimalSkull = 2,
-    StoneArrow = 3,
-    StoneArrowhead = 4,
+    GraniteArrow = 3,
+    GraniteArrowhead = 4,
     PileOfAsh = 5,
     BarkLeggings = 6,
     BarkShield = 7,
@@ -481,7 +575,7 @@ export declare enum ItemType {
     Branch = 10,
     CactusSpines = 11,
     Charcoal = 12,
-    CobblestoneFlooring = 13,
+    GraniteFlooring = 13,
     CookedMeat = 14,
     Earthworm = 15,
     Feather = 16,
@@ -497,13 +591,13 @@ export declare enum ItemType {
     GrassSeeds = 26,
     IronOre = 27,
     WoodenDowels = 28,
-    LargeRock = 29,
+    Granite = 29,
     LeafBedroll = 30,
     LeatherHide = 31,
     Leaves = 32,
     Limestone = 33,
     Log = 34,
-    StoneMortarAndPestle = 35,
+    GraniteMortarAndPestle = 35,
     ButtonMushrooms = 36,
     Nopal = 37,
     Peat = 38,
@@ -511,11 +605,11 @@ export declare enum ItemType {
     PileOfGravel = 40,
     PileOfBeachSand = 41,
     WoodenArrow = 42,
-    StoneAxe = 43,
+    GraniteAxe = 43,
     Bandage = 44,
     WovenFabric = 45,
     CactusNeedle = 46,
-    StoneShovel = 47,
+    GraniteShovel = 47,
     WoodenSpear = 48,
     Suture = 49,
     Raft = 50,
@@ -526,13 +620,13 @@ export declare enum ItemType {
     MapleSeeds = 55,
     Badderlocks = 56,
     SharpGlass = 57,
-    SharpRock = 58,
+    SharpGranite = 58,
     Skullcap = 59,
-    SmoothRock = 60,
+    SmoothGranite = 60,
     Soil = 61,
-    StoneSpear = 62,
+    GraniteSpear = 62,
     Stones = 63,
-    StoneWall = 64,
+    GraniteWall = 64,
     String = 65,
     StrippedBark = 66,
     TannedLeather = 67,
@@ -550,7 +644,7 @@ export declare enum ItemType {
     FishingNet = 79,
     RawCod = 80,
     CookedCod = 81,
-    StoneCampfire = 82,
+    GraniteCampfire = 82,
     VineWhip = 83,
     PileOfSnow = 84,
     BarkTorch = 85,
@@ -578,7 +672,7 @@ export declare enum ItemType {
     LeatherGorget = 107,
     LeatherPants = 108,
     LeatherGloves = 109,
-    StoneFurnace = 110,
+    GraniteFurnace = 110,
     SandstoneKiln = 111,
     IronTongs = 112,
     Talc = 113,
@@ -596,10 +690,10 @@ export declare enum ItemType {
     IronIngot = 125,
     Backpack = 126,
     RottenMeat = 127,
-    StoneHammer = 128,
+    GraniteHammer = 128,
     RawChicken = 129,
     CookedChicken = 130,
-    StoneAnvil = 131,
+    GraniteAnvil = 131,
     WoodenChest = 132,
     IronSword = 133,
     IronBreastplate = 134,
@@ -663,7 +757,7 @@ export declare enum ItemType {
     PileOfCompost = 192,
     MeltedCopal = 193,
     WoodenShavings = 194,
-    Deadfall = 195,
+    GraniteDeadfall = 195,
     Snare = 196,
     WaterskinOfMedicinalWater = 197,
     CharcoalBandage = 198,
@@ -671,8 +765,8 @@ export declare enum ItemType {
     WroughtIronTongs = 200,
     SheetOfGlass = 201,
     SolarStill = 202,
-    StoneWaterStill = 203,
-    Sundial = 204,
+    GraniteWaterStill = 203,
+    GraniteSundial = 204,
     LitTallowTorch = 205,
     Sinew = 206,
     ShortBow = 207,
@@ -689,7 +783,7 @@ export declare enum ItemType {
     GlassBottleOfUnpurifiedFreshWater = 218,
     WroughtIronArrow = 219,
     IronArrow = 220,
-    StoneBullet = 221,
+    GraniteBullet = 221,
     WroughtIronBullet = 222,
     IronBullet = 223,
     LeatherQuiver = 224,
@@ -706,7 +800,7 @@ export declare enum ItemType {
     FeatherBedroll = 235,
     RawTaintedMeat = 236,
     CookedTaintedMeat = 237,
-    StoneKnife = 238,
+    GraniteKnife = 238,
     RawBlindfish = 239,
     CookedBlindfish = 240,
     Pemmican = 241,
@@ -769,7 +863,7 @@ export declare enum ItemType {
     SandstoneCampfire = 298,
     SandstoneFurnace = 299,
     SandstoneWaterStill = 300,
-    StoneKiln = 301,
+    GraniteKiln = 301,
     WroughtIronAnvil = 302,
     IronAnvil = 303,
     MageRobe = 304,
@@ -785,11 +879,11 @@ export declare enum ItemType {
     CookedTentacles = 314,
     WormMeat = 315,
     CookedWormMeat = 316,
-    StonePickaxe = 317,
+    GranitePickaxe = 317,
     WroughtIronAxe = 318,
     IronAxe = 319,
     FertileSoil = 320,
-    StoneHoe = 321,
+    GraniteHoe = 321,
     WroughtIronHoe = 322,
     IronHoe = 323,
     LavaBeetleHelmet = 324,
@@ -896,7 +990,7 @@ export declare enum ItemType {
     StrippedLeather = 425,
     ClaySandCastFlask = 426,
     SandstoneSandCastFlask = 427,
-    StoneSandCastFlask = 428,
+    GraniteSandCastFlask = 428,
     AnimalGlue = 429,
     CopalResin = 430,
     BoneMeal = 431,
@@ -909,7 +1003,7 @@ export declare enum ItemType {
     SaguaroCactusFruit = 438,
     SaguaroCactusSeeds = 439,
     SaguaroCactusChunk = 440,
-    StoneWell = 441,
+    GraniteWell = 441,
     SandstoneWell = 442,
     ClayWell = 443,
     AloeVeraLeaves = 444,
@@ -1101,7 +1195,95 @@ export declare enum ItemType {
     FlyAmanitaSpores = 630,
     BrambleCrown = 631,
     DarkBrambleCrown = 632,
-    Cotton = 633
+    Cotton = 633,
+    WaterskinOfSwampWater = 634,
+    GlassBottleOfSwampWater = 635,
+    ClayJugOfSwampWater = 636,
+    CoconutContainerOfSwampWater = 637,
+    WaterskinOfFilteredWater = 638,
+    GlassBottleOfFilteredWater = 639,
+    ClayJugOfFilteredWater = 640,
+    CoconutContainerOfFilteredWater = 641,
+    ClayFilter = 642,
+    SandstoneAxe = 643,
+    SandstoneShovel = 644,
+    SharpSandstone = 645,
+    SmoothSandstone = 646,
+    SandstoneSpear = 647,
+    SandstoneKnife = 648,
+    SandstonePickaxe = 649,
+    SandstoneHoe = 650,
+    SandstoneDeadfall = 651,
+    SandstoneSundial = 652,
+    WoodenPlank = 653,
+    WoodenWheel = 654,
+    WoodenAxle = 655,
+    WoodenMinecart = 656,
+    WoodenRail = 657,
+    WoodenTrack = 658,
+    TinWheel = 659,
+    TinAxle = 660,
+    TinMinecart = 661,
+    TinRail = 662,
+    TinTrack = 663,
+    CopperWheel = 664,
+    CopperAxle = 665,
+    CopperMinecart = 666,
+    CopperRail = 667,
+    CopperTrack = 668,
+    WroughtIronWheel = 669,
+    WroughtIronAxle = 670,
+    WroughtIronMinecart = 671,
+    WroughtIronRail = 672,
+    WroughtIronTrack = 673,
+    IronWheel = 674,
+    IronAxle = 675,
+    IronMinecart = 676,
+    IronRail = 677,
+    IronTrack = 678,
+    BronzeWheel = 679,
+    BronzeAxle = 680,
+    BronzeMinecart = 681,
+    BronzeRail = 682,
+    BronzeTrack = 683,
+    BasaltArrow = 684,
+    BasaltArrowhead = 685,
+    Basalt = 686,
+    BasaltMortarAndPestle = 687,
+    BasaltAxe = 688,
+    BasaltShovel = 689,
+    SharpBasalt = 690,
+    SmoothBasalt = 691,
+    BasaltSpear = 692,
+    BasaltFlooring = 693,
+    BasaltWall = 694,
+    BasaltCampfire = 695,
+    BasaltFurnace = 696,
+    BasaltHammer = 697,
+    BasaltAnvil = 698,
+    BasaltDeadfall = 699,
+    BasaltWaterStill = 700,
+    BasaltSundial = 701,
+    BasaltBullet = 702,
+    BasaltKnife = 703,
+    BasaltKiln = 704,
+    BasaltPickaxe = 705,
+    BasaltHoe = 706,
+    BasaltSandCastFlask = 707,
+    BasaltWell = 708,
+    WoodenTrackGate = 709,
+    MoldyScroll = 710,
+    MysteriousParchment = 711,
+    MagicalInscription = 712,
+    CattailLeaves = 713,
+    CattailShoots = 714,
+    CattailFlowers = 715,
+    CattailSeeds = 716,
+    CobblestoneFlooring = 717,
+    WaterLilies = 718,
+    Mud = 719,
+    SpikerushSheaths = 720,
+    SpikerushSeeds = 721
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -1200,7 +1382,26 @@ export declare enum ItemTypeGroup {
     Spores = 893,
     Stick = 894,
     NotForSale = 895,
-    All = 896,
-    Last = 897
+    ContainerOfSwampWater = 896,
+    ContainerOfFilteredWater = 897,
+    Sundial = 898,
+    Axle = 899,
+    Minecart = 900,
+    Track = 901,
+    EquippableMainHand = 902,
+    EquippableOffHand = 903,
+    EquippableHead = 904,
+    EquippableNeck = 905,
+    EquippableChest = 906,
+    EquippableHands = 907,
+    EquippableBelt = 908,
+    EquippableLegs = 909,
+    EquippableFeet = 910,
+    EquippableBack = 911,
+    Absorbing = 912,
+    Exuding = 913,
+    DualWield = 914,
+    All = 915,
+    Last = 916
 }
 export {};

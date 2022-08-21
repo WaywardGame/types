@@ -10,23 +10,31 @@
  */
 import type { IEventEmitter } from "event/EventEmitter";
 import EventEmitter from "event/EventEmitter";
+import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import type Item from "game/item/Item";
 import type { IUnserializedCallback } from "save/serializer/ISerializer";
+export interface IItemReference {
+    islandId?: IslandId;
+    itemId?: number;
+}
 interface IItemReferenceEvents {
     clear(): void;
 }
-export default class ItemReference extends EventEmitter.Host<IItemReferenceEvents> implements IUnserializedCallback {
+export default class ItemReference extends EventEmitter.Host<IItemReferenceEvents> implements IItemReference, IUnserializedCallback {
+    static get(item?: Item | IItemReference): ItemReference | undefined;
+    static item(item?: Item | IItemReference): Item | undefined;
     event: IEventEmitter<this, IItemReferenceEvents>;
     private registeredForEvents;
-    private islandId;
-    private itemId;
-    constructor(item?: Item);
+    islandId: IslandId | undefined;
+    itemId: number | undefined;
+    constructor(item?: Item | IItemReference);
+    raw(): IItemReference;
     onUnserialized(): void;
     get isValid(): boolean;
     get island(): Island | undefined;
     get item(): Item | undefined;
-    set(item: Item): void;
+    set(reference?: Item | IItemReference): void;
     clear(): void;
     private onItemMovedIsland;
     private onItemRemove;

@@ -51,8 +51,8 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     getZoom(): number;
     addZoomLevel(amount: number): void;
     updateZoomLevel(): void;
-    getCameraPosition(): IVector2;
-    getExactCameraPosition(): Vector2;
+    getCameraPosition(timeStamp: number): IVector2;
+    getExactCameraPosition(timeStamp: number): Vector2;
     createFadeIn(duration?: number): void;
     getBlackness(timeStamp: number): number;
     updateRender(source: RenderSource, flag: UpdateRenderFlag): void;

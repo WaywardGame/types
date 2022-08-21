@@ -9,5 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
-declare const _default: Action<[], import("../../player/Player").default | import("../../npc/NPC").default, void, []>;
+import type { IActionUsable } from "game/entity/action/IAction";
+import type { IStat } from "game/entity/IStats";
+export interface IJumpCanUse extends IActionUsable {
+    stamina: IStat;
+    jumpStamina: number;
+}
+declare const _default: Action<[], import("../../Human").default, void, IJumpCanUse, []>;
 export default _default;

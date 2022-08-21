@@ -9,6 +9,16 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [(import("../../../item/Item").default | undefined)?]>;
+import type { ITile } from "game/tile/ITerrain";
+import type { ITileEventDescription } from "game/tile/ITileEvent";
+import type TileEvent from "game/tile/TileEvent";
+export interface IPickUpExcrementCanUse extends IActionUsable {
+    usable: true;
+    tile: ITile;
+    excrementDescription: ITileEventDescription;
+    excrement: TileEvent;
+}
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, IPickUpExcrementCanUse, [(import("../../../item/Item").default | undefined)?]>;
 export default _default;

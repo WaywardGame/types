@@ -11,13 +11,15 @@
 import type { SfxType } from "audio/IAudio";
 import type { BiomeType } from "game/biome/IBiome";
 import type Doodad from "game/doodad/Doodad";
-import type { DoodadType, GrowingStage } from "game/doodad/IDoodad";
+import type { GrowingStage } from "game/doodad/IDoodad";
+import { DoodadType } from "game/doodad/IDoodad";
 import type Corpse from "game/entity/creature/corpse/Corpse";
 import type Creature from "game/entity/creature/Creature";
 import type { SkillType } from "game/entity/IHuman";
 import type NPC from "game/entity/npc/NPC";
 import type { IDecayTemperatureRange } from "game/IGame";
 import type { Quality } from "game/IObject";
+import type { WaterType } from "game/island/IIsland";
 import type { IContainer, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
@@ -39,6 +41,7 @@ export interface ITerrainDescription extends IModdable {
     water?: true;
     shallowWater?: true;
     freshWater?: boolean;
+    swampWater?: boolean;
     gather?: boolean;
     noGfxSwitch?: boolean;
     noLos?: boolean;
@@ -48,7 +51,11 @@ export interface ITerrainDescription extends IModdable {
     leftOvers?: ILeftOverTile[];
     baseTerrain?: TerrainType;
     terrainType?: TerrainType;
-    doodad?: DoodadType;
+    /**
+     * Set to true to prevent building things on the tile.
+     * Or set it to a list of allowed doodad types that can be built on the tile.
+     */
+    preventBuilding?: boolean | Set<DoodadType>;
     isMountain?: boolean;
     background?: TerrainType;
     noBackground?: boolean;
@@ -60,11 +67,18 @@ export interface ITerrainDescription extends IModdable {
     reduceRest?: boolean;
     noResting?: boolean;
     wet?: boolean;
-    tileOnConsume?: TerrainType;
+    /**
+     * Tile to create when consuming the tile (in the case of gathering/drinking water)
+     */
+    tileOnConsume?: OptionalDescriptions<BiomeType, TerrainType>;
     isMountainGround?: boolean;
     burnItem?: ItemType;
     ice?: boolean;
     renderOverOtherMountains?: boolean;
+    /**
+     * Update neighbors when the tile type is involved
+     */
+    updateNeighbors?: boolean;
     /**
      * Terrain that water tile becomes when dug up using the dig action.
      */
@@ -82,7 +96,7 @@ export interface ITerrainDescription extends IModdable {
     /**
      * The reversed or contaminated type that this water turns into.
      */
-    contaminatedType?: TerrainType;
+    contaminatedType?: OptionalDescriptions<WaterType, TerrainType>;
     /**
      * The temperature produced by this terrain. When not provided, uses `Temperature.Neutral`.
      */
@@ -116,6 +130,22 @@ export interface ITerrainDescription extends IModdable {
      * When tilling this terrain, you will attempt to dig up the grass instead.
      */
     isGrass?: boolean;
+    /**
+     * When this tile dies via the "isGrass" property, this is what the tile turns into.
+     */
+    diesInto?: OptionalDescriptions<BiomeType, TerrainType>;
+    /**
+     * The tile to switch to when collapsing or opening up a cave entrance.
+     */
+    caveSwitch?: TerrainType;
+    /**
+     * is either a cave entrance or collapsed cave entrance. Used for multiple checks.
+     */
+    isCave?: boolean;
+    /**
+     * True if the terrain sprite is like a doodad
+     */
+    useDoodadLikeAdaptor?: boolean;
 }
 export interface ITile extends Partial<ITileContainer> {
     corpses?: Corpse[];
@@ -153,7 +183,7 @@ export declare type ITileDataOld = Partial<ITileData> & {
     strength?: number;
 };
 export declare enum TileTemplateType {
-    House = 0,
+    WoodenHouses = 0,
     Pond = 1,
     CavePond = 2,
     Desert = 3,
@@ -164,7 +194,8 @@ export declare enum TileTemplateType {
     IceCap = 8,
     IceHouses = 9,
     SnowHouses = 10,
-    AshCementHouses = 11
+    AshCementHouses = 11,
+    StoneHouses = 12
 }
 export interface ITemplate {
     mapTile?: MapTile;
@@ -233,12 +264,12 @@ export declare enum TerrainType {
     Swamp = 11,
     Clay = 12,
     Ash = 13,
-    Rocks = 14,
-    RocksWithIron = 15,
-    RocksWithTalc = 16,
-    RocksWithCoal = 17,
-    RocksWithLimestone = 18,
-    CobblestoneFlooring = 19,
+    Granite = 14,
+    GraniteWithIron = 15,
+    GraniteWithTalc = 16,
+    GraniteWithCoal = 17,
+    GraniteWithLimestone = 18,
+    GraniteFlooring = 19,
     Sandstone = 20,
     SandstoneFlooring = 21,
     SandstoneWithIron = 22,
@@ -249,15 +280,15 @@ export declare enum TerrainType {
     RedCarpet = 27,
     Lava = 28,
     FertileSoil = 29,
-    RocksWithCopper = 30,
+    GraniteWithCopper = 30,
     SandstoneWithCopper = 31,
     CoolingLava = 32,
     Obsidian = 33,
     DesertSand = 34,
-    RockGround = 35,
+    GraniteGround = 35,
     SandstoneGround = 36,
     AshCementFlooring = 37,
-    RocksWithSnow = 38,
+    GraniteWithSnow = 38,
     Glacier = 39,
     FreshWaterIce = 40,
     FreezingFreshWater = 41,
@@ -266,14 +297,38 @@ export declare enum TerrainType {
     Void = 44,
     SandstoneWithTalc = 45,
     SandstoneWithLimestone = 46,
-    RocksWithTin = 47,
+    GraniteWithTin = 47,
     SandstoneWithTin = 48,
     IceFlooring = 49,
     SnowFlooring = 50,
-    Tanglehead = 51
+    Tanglehead = 51,
+    DeepSwampWater = 52,
+    SwampWater = 53,
+    ShallowSwampWater = 54,
+    FreezingSwampWater = 55,
+    SwampWaterIce = 56,
+    WoodenTrack = 57,
+    TinTrack = 58,
+    CopperTrack = 59,
+    WroughtIronTrack = 60,
+    IronTrack = 61,
+    BronzeTrack = 62,
+    CollapsedCaveEntrance = 63,
+    Basalt = 64,
+    BasaltWithIron = 65,
+    BasaltWithTalc = 66,
+    BasaltWithCoal = 67,
+    BasaltWithLimestone = 68,
+    BasaltFlooring = 69,
+    BasaltGround = 70,
+    CobblestoneFlooring = 71,
+    Mud = 72,
+    Spikerush = 73
 }
 export declare enum TerrainTypeGroup {
     Flooring = 0,
     Nonflammable = 1,
     Ice = 2
 }
+export declare const trackTerrainTypes: Set<TerrainType>;
+export declare const trackGateDoodadTypes: Set<DoodadType>;

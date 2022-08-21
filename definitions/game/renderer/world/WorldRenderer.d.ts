@@ -12,23 +12,23 @@ import EventEmitter from "event/EventEmitter";
 import type Creature from "game/entity/creature/Creature";
 import type NPC from "game/entity/npc/NPC";
 import type Island from "game/island/Island";
-import { TerrainType } from "game/tile/ITerrain";
 import type { ITile } from "game/tile/ITerrain";
+import { TerrainType } from "game/tile/ITerrain";
+import type RendererContext from "renderer/context/RendererContext";
+import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 import FieldOfView from "renderer/fieldOfView/FieldOfView";
 import Notifier from "renderer/notifier/Notifier";
-import type RendererContext from "renderer/context/RendererContext";
+import ParticleSystem from "renderer/particle/ParticleSystem";
 import type ISpriteBatch from "renderer/spriteBatch/ISpriteBatch";
-import Fence from "renderer/tile/adaptors/Fence";
-import Wall from "renderer/tile/adaptors/Wall";
+import FenceTileAdaptor from "renderer/tile/adaptors/Fence";
+import WallTileAdaptor from "renderer/tile/adaptors/Wall";
 import type TileAtlas from "renderer/tile/atlas/TileAtlas";
+import type { TerrainTileInfo } from "renderer/tile/TerrainTileInfo";
 import type { ITileAdaptor } from "renderer/tile/TileAdaptors";
 import type WebGlContext from "renderer/WebGlContext";
 import { RenderFlag, SpriteBatchLayer } from "renderer/world/IWorldRenderer";
 import WorldLayerRenderer from "renderer/world/WorldLayerRenderer";
 import Vector2 from "utilities/math/Vector2";
-import type { TerrainTileInfo } from "renderer/tile/TerrainTileInfo";
-import type { IRendererOrigin } from "renderer/context/RendererOrigin";
-import ParticleSystem from "renderer/particle/ParticleSystem";
 export interface IWorldRendererEvents {
     /**
      * Called when calculating creatures in the viewport
@@ -111,15 +111,17 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     readonly particleSystem: ParticleSystem;
     readonly notifier: Notifier;
     layers: Record<number, WorldLayerRenderer>;
-    tillAdaptor: ITileAdaptor;
-    waterAdaptor: ITileAdaptor;
+    defaultAdaptor: ITileAdaptor;
+    doodadLikeAdaptor: ITileAdaptor;
+    fenceAdaptor: FenceTileAdaptor;
+    floorAdaptor: ITileAdaptor;
     lavaAdaptor: ITileAdaptor;
-    fenceAdaptor: Fence;
     mountainAdaptor: ITileAdaptor;
     mountainGroundAdaptor: ITileAdaptor;
-    wallAdaptor: Wall;
-    defaultAdaptor: ITileAdaptor;
-    floorAdaptor: ITileAdaptor;
+    tillAdaptor: ITileAdaptor;
+    trackAdaptor: ITileAdaptor;
+    wallAdaptor: WallTileAdaptor;
+    waterAdaptor: ITileAdaptor;
     defaultBackground: TerrainTileInfo;
     defaultBackgroundType: TerrainType;
     private readonly screenspaceViewport;
@@ -151,6 +153,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private overTreesBatch;
     private creatureFlyingBatch;
     private overlayBatch;
+    private vehicleBatch;
     private readonly entitiesInViewport;
     private viewportSpritesDirty;
     static initializePrograms(webGlContext: WebGlContext): Promise<void>;
@@ -182,14 +185,14 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     renderWorld(timeStamp: number, x: number, y: number, z: number): void;
     renderWorldLayer(worldLayer: WorldLayerRenderer, x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFlags: RenderFlag, enableDepth: boolean): void;
     render(): void;
-    screenToVector(screenX: number, screenY: number): Vector2;
+    screenToVector(screenX: number, screenY: number, timeStamp?: number): Vector2;
     screenToTile(screenX: number, screenY: number): Vector2 | undefined;
-    getViewportBounds(): {
+    getViewportBounds(timeStamp: number): {
         min: Vector2;
         max: Vector2;
         z: number;
     };
-    getBounds(): {
+    getBounds(timeStamp: number): {
         viewportBounds: {
             min: Vector2;
             max: Vector2;
@@ -205,6 +208,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private batchCreature;
     private getFlyingOffset;
     private batchShadow;
+    private batchDoodad;
     private batchHuman;
     private batchAttackAnimation;
     /**

@@ -17,7 +17,8 @@ export declare enum SpriteBatchLayer {
     CreatureFlying = 5,
     Overlay = 6,
     OverTrees = 7,
-    BelowDoodads = 8
+    BelowDoodads = 8,
+    Vehicle = 9
 }
 export declare enum RenderFlag {
     None = 0,
@@ -32,6 +33,7 @@ export declare enum RenderFlag {
     BelowDoodads = 256,
     Doodads = 512,
     NPC = 1024,
+    Vehicle = 2048,
     All = 65535
 }
 export declare enum RenderLayerFlag {

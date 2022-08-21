@@ -9,14 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { DamageType } from "game/entity/IEntity";
-import { SkillType } from "game/entity/IHuman";
+import { EquipType, SkillType } from "game/entity/IHuman";
 import { Stat } from "game/entity/IStats";
 import { MessageType } from "game/entity/player/IMessageManager";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
 import Dictionary from "language/Dictionary";
 import Message from "language/dictionary/Message";
-import { MiscTranslation } from "language/dictionary/Misc";
+import { EquipSlotTranslation, MiscTranslation } from "language/dictionary/Misc";
 import type UiTranslation from "language/dictionary/UiTranslation";
 import type { DictionaryEntryEnums } from "language/DictionaryMap";
 import TranslationImpl from "language/impl/TranslationImpl";
@@ -26,6 +26,7 @@ import ITranslationSorter from "language/utility/TranslationSorter";
 import type { IStringSection } from "utilities/string/Interpolator";
 declare type Translation = TranslationImpl;
 declare module Translation {
+    function equals(a: Translation, b: Translation): boolean;
     const RANDOM = "random";
     /**
      * Gets a translation given a dictionary, entry, and translation index.
@@ -88,6 +89,7 @@ declare module Translation {
     const skill: (entry: string | SkillType, color?: boolean) => TranslationImpl;
     const milestone: (entry: string | Milestone, color?: boolean) => TranslationImpl;
     const stat: (entry: string | Stat, color?: boolean) => TranslationImpl;
+    const equipSlot: (entry: string | EquipType, type?: EquipSlotTranslation) => TranslationImpl;
     const quality: (entry: string | Quality, color?: boolean) => TranslationImpl;
     /**
      * Damage types are bit flags, so multiple can be stored in one `DamageType`.
@@ -113,15 +115,15 @@ declare module Translation {
     function nameOf(type: Dictionary, thing: number | {
         type: number;
         renamed?: string | ISerializedTranslation;
-    }, article?: boolean): Translation;
+    }, article?: false | "definite" | "indefinite"): Translation;
     function nameOf(type: Dictionary, thing: number | {
         type: number;
         renamed?: string | ISerializedTranslation;
-    }, count?: number, article?: boolean, showRenamedQuotes?: boolean): Translation;
+    }, count?: number, article?: false | "definite" | "indefinite", showRenamedQuotes?: boolean): Translation;
     function reformatSingularNoun(): Translation;
     function reformatSingularNoun(count: number): Translation;
-    function reformatSingularNoun(article: boolean): Translation;
-    function reformatSingularNoun(count: number, article: boolean): Translation;
-    function reformatSingularNoun(count?: number | boolean, article?: boolean): Translation;
+    function reformatSingularNoun(article: false | "definite" | "indefinite"): Translation;
+    function reformatSingularNoun(count: number, article: false | "definite" | "indefinite"): Translation;
+    function reformatSingularNoun(count?: number | false | "definite" | "indefinite", article?: false | "definite" | "indefinite"): Translation;
 }
 export default Translation;

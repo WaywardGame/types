@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+/// <reference types="node" />
 import type { IMatchmakingServer, INapiDiscordPresenceInfo, IRemoteFile, ISteamFriend, ISteamId, ISteamworksNetworking, IWaywardPreload, IWorkshopItem, LobbyType } from "@hosts/shared/interfaces";
 import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
@@ -45,11 +46,13 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private relayNetworkStatus;
     private _isGameOverlayActive;
     private _isTraceRecording;
+    private _osPlatform;
     private _intervalIds;
     get isGameOverlayActive(): boolean;
     get isRunningOnSteamDeck(): boolean;
     get isRunningOnBatteryPower(): boolean;
     isElectron(): boolean;
+    getOsPlatform(): NodeJS.Platform | undefined;
     reload(): Promise<void>;
     openGpuInfoWindow(): void;
     closeWindow(): void;
@@ -70,6 +73,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     enableSafePaths(): void;
     onUnload(): void;
     setFullscreen(fullscreen: boolean): Promise<void>;
+    setCustomTitleBar(enabled: boolean): Promise<void>;
     setOverlayWorks(overlayWorks: boolean): void;
     setupMods(): Promise<void>;
     getSteamId(): ISteamId | undefined;

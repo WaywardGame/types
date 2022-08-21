@@ -54,10 +54,25 @@ export declare enum ActionTranslation {
     Description = 1,
     TierDescription = 2
 }
+export declare enum UiActionTranslation {
+    Name = 0,
+    Description = 1
+}
+export declare enum EquipSlotTranslation {
+    Name = 0,
+    EquipTo = 1,
+    Description = 2
+}
 export declare enum StatusEffectTranslation {
-    Past = 0,
+    Adjective = 0,
     Name = 1,
     Description = 2
+}
+export declare enum BleedLevelTranslation {
+    Adjective = 0,
+    Name = 1,
+    Description = 2,
+    Effects = 3
 }
 export declare enum QuestTranslation {
     Title = 0,
@@ -91,25 +106,25 @@ export declare enum MiscTranslation {
     AOrB = 4,
     Binding = 5,
     BindingListSeparator = 6,
-    Colorize = 7,
-    ColorizeDamage = 8,
-    ColorizeMagical = 9,
-    ColorizeMessageType = 10,
-    ColorizePrimary = 11,
-    ColorizeQuality = 12,
-    ColorizeSecondary = 13,
-    ColorizeStat = 14,
-    ColorizeVulnerability = 15,
-    CorpseOf = 16,
-    CountThing = 17,
-    Dependency = 18,
-    Difference = 19,
-    ExpressionSeparator = 20,
-    ItemMagicalProperty = 21,
-    ListItemSeparator = 22,
-    MacroDoubleInput = 23,
-    MacroInputSeparator = 24,
-    MacroTripleInput = 25,
+    BindingWhenHoveringItem = 7,
+    Colorize = 8,
+    ColorizeDamage = 9,
+    ColorizeMagical = 10,
+    ColorizeMessageType = 11,
+    ColorizePrimary = 12,
+    ColorizeQuality = 13,
+    ColorizeSecondary = 14,
+    ColorizeStat = 15,
+    ColorizeVulnerability = 16,
+    CorpseOf = 17,
+    CountThing = 18,
+    Dependency = 19,
+    Difference = 20,
+    EquipSlotEquipToYour = 21,
+    ExpressionSeparator = 22,
+    ItemMagicalProperty = 23,
+    ListItemSeparator = 24,
+    MacroInputSeparator = 25,
     Multiply = 26,
     NPCName = 27,
     NumberSingleDecimal = 28,

@@ -9,11 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IWaywardPreload } from "./interfaces";
+import type { IElectron } from "./ipc/electron";
 export interface IRequireJs {
     s: any;
     undef(path: string): void;
     onResourceLoad(ctx: any, map: any): void;
-    (moduleName: string): any | undefined;
+    (moduleName: string): any;
     (moduleNames: string[], onLoad: (...args: any[]) => void, onError: (err: any) => void): void;
 }
 export interface IWaywardPreloadLoader {
@@ -22,9 +23,15 @@ export interface IWaywardPreloadLoader {
 }
 declare global {
     interface Window {
-        require: any | undefined;
-        electronRequire: any | undefined;
+        require: any;
+        electronRequire: any;
         requirejs: IRequireJs | undefined;
         waywardPreload: IWaywardPreloadLoader | undefined;
+        waywardTitleBar: {
+            title: string;
+            platform: string;
+            isMaximized: boolean;
+            electron: IElectron;
+        } | undefined;
     }
 }

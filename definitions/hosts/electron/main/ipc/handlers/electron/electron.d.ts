@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IIPCHandler } from "../../interfaces";
 import type { IElectron } from "../../../../../shared/ipc/electron";
 import type { IElectronContainer } from "../../../interfaces";
+import type { IIPCHandler } from "../../interfaces";
 import type { FileSystemIPCHandler } from "../fileSystem/fileSystem";
 export declare class ElectronIPCHandler implements IElectron, IIPCHandler<IElectron> {
     private readonly fileSystem;
@@ -25,6 +25,10 @@ export declare class ElectronIPCHandler implements IElectron, IIPCHandler<IElect
     startContentTraceRecording(): Promise<void>;
     stopContentTraceRecording(logPath: string): Promise<void>;
     setFullScreen(fullscreen: boolean): Promise<void>;
+    setCustomTitleBar(enabled: boolean): Promise<void>;
+    isMaximized(): Promise<boolean>;
+    minimizeWindow(): Promise<void>;
+    maximizeOrUnmaximizeWindow(): Promise<void>;
     reloadWindow(): Promise<void>;
     invalidateWindow(): Promise<void>;
     destroyWindow(): Promise<void>;

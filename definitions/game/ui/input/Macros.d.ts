@@ -15,10 +15,14 @@ export declare type Macro = IInput[];
 export declare module Macro {
     function is(value: unknown): value is Macro;
     function of(inputOrMacro: IInput | Macro): Macro;
-    function hash(macro: Macro): string;
-    function translate(macro: Macro): TranslationImpl;
+    function hash(macro: Macro, resolveModifiers?: boolean): string;
+    function translate(macro: Macro, simplifyModifierCatalysts?: boolean): TranslationImpl;
 }
 declare module Macros {
+    function getCurrent(): Macro;
+    function getTouch(): Macro;
+    function reset(): void;
+    function setIsolated(_isolated?: boolean): void;
     function handleInput(input: IInput, api: IBindHandlerApi): Macro | undefined;
 }
 export default Macros;

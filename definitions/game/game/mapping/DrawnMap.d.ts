@@ -103,7 +103,7 @@ export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> impleme
      */
     static initializeIslandTreasureMaps(island: Island, generationSettings: ITreasureMapGenerationSettings, mapGenOutput: IMapGenGenerateOutput): void;
     static initializeIslandTreasureMapsDifferences(island: Island): void;
-    static plotRegion(island: Island, x: number, y: number, z: number, random?: Random<IRandomGenerator & Partial<SeededGenerator>>, map?: DrawnMap): DrawnMap;
+    static plotRegion(island: Island, x: number, y: number, z: number, random?: Random<IRandomGenerator & Partial<SeededGenerator>>, map?: DrawnMap, radius?: number): DrawnMap;
     private static plotTreasure;
     private static findValidTreasureLocation;
     private static getMapTile;
@@ -115,6 +115,7 @@ export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> impleme
     get radius(): number;
     private _position;
     islandId: IslandId;
+    drawnMapRadius?: number;
     private seed?;
     private readonly discoveredTreasures;
     readonly type: DrawnMapType;

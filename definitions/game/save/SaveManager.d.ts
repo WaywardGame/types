@@ -69,6 +69,7 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
      */
     load(slot: number): Promise<boolean>;
     loadSpecificData(slot: number, keys: Set<AnyPropertyToSerialize>): Promise<Record<AnyPropertyToSerialize, any>>;
+    loadSpecificDatas(slots: number[], keys: Set<AnyPropertyToSerialize>): Promise<Array<Record<AnyPropertyToSerialize, any>>>;
     /**
      * Returns the number of bytes the save takes up
      */

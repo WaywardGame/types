@@ -11,9 +11,9 @@
 import { TerrainType } from "game/tile/ITerrain";
 import type TileAtlas from "renderer/tile/atlas/TileAtlas";
 import type { ITileAdaptation } from "renderer/tile/TileAdaptors";
-import Default from "renderer/tile/adaptors/Default";
+import DefaultTileAdaptor from "renderer/tile/adaptors/Default";
 import type WorldLayer from "renderer/world/WorldLayer";
-export default class Water extends Default {
+export default class WaterTileAdaptor extends DefaultTileAdaptor {
     adapt(worldLayer: WorldLayer, tileAtlas: TileAtlas, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation, debug?: boolean): void;
     private diagonalMatcher;
 }

@@ -9,13 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Article } from "ui/component/Article";
+import { Block } from "ui/component/Block";
 import { BlockRow } from "ui/component/BlockRow";
 import Component from "ui/component/Component";
 import Menu from "ui/screen/screens/menu/component/Menu";
 import type ModRow from "ui/screen/screens/menu/menus/mods/ModRow";
 export default class ModInfoMenu extends Menu {
     protected modImage: Component<HTMLElement>;
-    protected modMetadata: Article;
+    protected modMetadata: Block;
     protected mainInfo: BlockRow;
     protected readme: Article;
     private readonly hostRef;

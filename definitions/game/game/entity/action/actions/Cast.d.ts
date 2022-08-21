@@ -9,7 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
+import type { IRanged } from "game/item/IItem";
 import type Item from "game/item/Item";
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../player/Player").default | import("../../npc/NPC").default, void, [Item]>;
+export interface ICastCanUse extends IActionUsable {
+    ranged: IRanged;
+}
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, ICastCanUse, [Item]>;
 export default _default;

@@ -10,8 +10,8 @@
  */
 import Stream from "@wayward/goodstream/Stream";
 import { CreatureType } from "game/entity/creature/ICreature";
-import type NPC from "game/entity/npc/NPC";
-import type Player from "game/entity/player/Player";
+import type Human from "game/entity/Human";
+import { CreationId } from "game/IGame";
 import { ObjectManager } from "game/ObjectManager";
 import type { ITile } from "game/tile/ITerrain";
 import { TileEventType } from "game/tile/ITileEvent";
@@ -42,6 +42,7 @@ export interface ITileManagerEvents {
     move(event: TileEvent): any;
 }
 export default class TileEventManager extends ObjectManager<TileEvent, ITileManagerEvents> {
+    protected readonly creationId: CreationId;
     load(): void;
     create(type: TileEventType, x: number, y: number, z: number): TileEvent | undefined;
     createFake(type: TileEventType, x: number, y: number, z: number): TileEvent | undefined;
@@ -56,7 +57,7 @@ export default class TileEventManager extends ObjectManager<TileEvent, ITileMana
     canGather(tile: ITile): TileEvent | undefined;
     updateAll(): void;
     fireOverflow(x: number, y: number, z: number): boolean;
-    canPickup(tile: ITile): TileEvent | undefined;
+    canPickUp(tile: ITile): TileEvent | undefined;
     blocksTile(tile: ITile): boolean;
     /**
      * Creates either blood or water blood
@@ -66,16 +67,16 @@ export default class TileEventManager extends ObjectManager<TileEvent, ITileMana
      * @returns True if the blood was created, false if not
      */
     createBlood(x: number, y: number, z: number): boolean;
-    clearBlood(position: IVector3, executor: NPC | Player): boolean;
+    clearBlood(position: IVector3, executor: Human): boolean;
     /**
      * Clears all the water puddles on a specified tile.
      * @param point The point to check for water puddles at.
      * @param executor The player to send the message to.
      */
-    clearPuddles(point: IVector3, executor: NPC | Player): boolean;
+    clearPuddles(point: IVector3, executor: Human): boolean;
     moveExcrement(position: IVector3): void;
     containsDamagingTileEvents(events: TileEvent[] | undefined): boolean;
-    getName(typeOrEvent: CreatureType | TileEvent, article?: boolean, count?: number, showCount?: boolean): import("../../language/impl/TranslationImpl").default;
-    getEventTranslations(events: TileEvent[], article?: boolean, context?: TextContext): Stream<import("../../language/impl/TranslationImpl").default>;
-    getEventListTranslation(events: TileEvent[], article?: boolean, context?: TextContext): import("../../language/impl/TranslationImpl").default;
+    getName(typeOrEvent: CreatureType | TileEvent, article?: false | "definite" | "indefinite", count?: number, showCount?: boolean): import("../../language/impl/TranslationImpl").default;
+    getEventTranslations(events: TileEvent[], article?: false | "definite" | "indefinite", context?: TextContext): Stream<import("../../language/impl/TranslationImpl").default>;
+    getEventListTranslation(events: TileEvent[], article?: false | "definite" | "indefinite", context?: TextContext): import("../../language/impl/TranslationImpl").default;
 }

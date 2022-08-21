@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IHasOwner } from "game/doodad/IDoodad";
+import type { IHasBuilder } from "game/doodad/IDoodad";
 import type { SkillType } from "game/entity/IHuman";
 import type { IInspector } from "game/inspection/IInfoProvider";
 import { InfoProvider } from "game/inspection/InfoProvider";
@@ -16,10 +16,10 @@ import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import type { TranslationGenerator } from "ui/component/IComponent";
 declare type SkillRequirement = [skill: SkillType, amount: number];
 declare type InfoGenerator = () => ArrayOr<TranslationGenerator | InfoProvider>;
-declare type HasResolvableOwner = IInspector | IHasOwner;
+declare type HasResolvableBuilder = IInspector | IHasBuilder;
 export default class ObscuredValue extends InfoProvider {
     private readonly isOrCheck;
-    private readonly owner;
+    private readonly inspector;
     private readonly skill;
     private readonly unobscured;
     private readonly obscured;
@@ -27,27 +27,27 @@ export default class ObscuredValue extends InfoProvider {
         unobscured(unobscuredInitializer: InfoGenerator): {
             obscured(obscuredInitializer: InfoGenerator): ObscuredValue;
         };
-        andOwner(owner?: HasResolvableOwner | undefined): {
+        andBuilder(builder?: HasResolvableBuilder): {
             unobscured(unobscuredInitializer: InfoGenerator): {
                 obscured(obscuredInitializer: InfoGenerator): ObscuredValue;
             };
         };
-        orOwner(owner?: HasResolvableOwner | undefined): {
+        orBuilder(builder?: HasResolvableBuilder): {
             unobscured(unobscuredInitializer: InfoGenerator): {
                 obscured(obscuredInitializer: InfoGenerator): ObscuredValue;
             };
         };
     };
-    static requiresOwner(owner?: HasResolvableOwner): {
+    static requiresBuilder(builder?: HasResolvableBuilder): {
         unobscured(unobscuredInitializer: InfoGenerator): {
             obscured(obscuredInitializer: InfoGenerator): ObscuredValue;
         };
-        andSkill(skill?: SkillRequirement | undefined): {
+        andSkill(skill?: SkillRequirement): {
             unobscured(unobscuredInitializer: InfoGenerator): {
                 obscured(obscuredInitializer: InfoGenerator): ObscuredValue;
             };
         };
-        orSkill(skill?: SkillRequirement | undefined): {
+        orSkill(skill?: SkillRequirement): {
             unobscured(unobscuredInitializer: InfoGenerator): {
                 obscured(obscuredInitializer: InfoGenerator): ObscuredValue;
             };
@@ -56,9 +56,9 @@ export default class ObscuredValue extends InfoProvider {
     private static createInfoFactory;
     private constructor();
     getClass(): string[];
-    get(context: InfoProviderContext): ArrayOr<TranslationGenerator<import("../../../language/dictionary/UiTranslation").default, []> | InfoProvider>;
+    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private canSee;
-    private getOwner;
+    private getBuilder;
     private hasSkill;
 }
 export {};

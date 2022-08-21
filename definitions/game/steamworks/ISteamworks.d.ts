@@ -26,6 +26,7 @@ export interface IModPath {
 }
 export interface IDedicatedServerInfo {
     name: string;
+    motd?: string;
     port: number;
     backup: boolean;
     backupInterval: number;

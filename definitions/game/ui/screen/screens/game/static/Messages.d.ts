@@ -18,7 +18,7 @@ import type { Game } from "game/Game";
 import Button from "ui/component/Button";
 import Component from "ui/component/Component";
 import type { ContextMenuDescriptions } from "ui/component/ContextMenu";
-import Input from "ui/component/Input";
+import type Input from "ui/component/Input";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import { Quadrant } from "ui/screen/screens/game/component/IQuadrantComponent";
 import QuadrantComponent from "ui/screen/screens/game/component/QuadrantComponent";
@@ -37,7 +37,7 @@ export default class Messages extends QuadrantComponent {
     event: IEventEmitter<this, IMessagesEvents>;
     readonly sendButton: Button;
     readonly pinnedMessages: Component;
-    readonly log: Component;
+    readonly messagelog: Component;
     readonly input: Input;
     readonly filter: Button | undefined;
     pinNotesAutomatically: boolean;
@@ -69,7 +69,7 @@ export default class Messages extends QuadrantComponent {
     setMaxMessages(maxMessages: number): this;
     scrollToNewest(): void;
     sendPinnedMessage(pinnedMessage: PinnedMessage): PinnedMessage;
-    pinQuestRequirement(quest: QuestInstance, requirement?: RequirementInstance): IPinnedMessage | undefined;
+    pinQuestRequirement(quest: QuestInstance, requirement?: RequirementInstance): IPinnedMessage | PinnedMessage | undefined;
     unpinMessage(pinnedMessage: PinnedMessage, time?: number): Promise<void>;
     protected onPlay(game: Game, isLoadingSave: boolean): void;
     onDisplayMessage(player: Player, message: IMessage): void;

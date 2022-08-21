@@ -9,12 +9,16 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import type { CreationId } from "game/IGame";
 import type Island from "game/island/Island";
 import type { IUnserializedCallback } from "save/serializer/ISerializer";
 import type { StringableObject } from "utilities/object/Objects";
 export declare abstract class ObjectManager<ObjectType extends StringableObject, EventsType> extends EventEmitter.Host<EventsType> implements IUnserializedCallback {
     protected readonly island: Island;
     protected readonly objects: SaferArray<ObjectType>;
+    private lastUsedId;
+    private sparseIds;
+    protected abstract readonly creationId: CreationId;
     constructor(island: Island, objects?: SaferArray<ObjectType>);
     /**
      * Called when this object manager is not used anymore (after it was saved!)
@@ -26,6 +30,7 @@ export declare abstract class ObjectManager<ObjectType extends StringableObject,
     get(id: number): ObjectType | undefined;
     set(id: number, value: ObjectType | undefined): void;
     getObjects(): SaferArray<ObjectType>;
+    findUnusedId<T extends object>(): number;
     protected replaceNullsWithUndefined(): void;
-    private registerForMemoryLeakDetection;
+    protected registerForMemoryLeakDetection(object: SaferArray<ObjectType>): void;
 }

@@ -13,12 +13,18 @@ import { AiType } from "game/entity/IEntity";
 import type { ICustomizations } from "game/entity/IHuman";
 import { EquipType } from "game/entity/IHuman";
 import NPC from "game/entity/npc/NPC";
+import type Player from "game/entity/player/Player";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 export default class MerchantNPC extends NPC {
     constructor(id?: number, islandId?: `${number},${number}`, x?: number, y?: number, z?: number);
-    update(): void;
     getActions(): ActionType[] | undefined;
+    getSellPrice(player: Player, item: Item): number | undefined;
+    getBuyPrice(player: Player, item: Item): {
+        base: number;
+        bonus: number;
+        total: number;
+    } | undefined;
     protected getReputationChangeOnDeath(): number;
     protected getDefaultName(): import("../../../../language/impl/TranslationImpl").default;
     protected initializeStats(): void;
@@ -27,4 +33,22 @@ export default class MerchantNPC extends NPC {
     protected getDefaultInventory(): Array<Item | ItemType>;
     protected getDefaultAiType(): AiType;
     private canSpawnItem;
+    protected runActions(): boolean;
+    /**
+     * Stop stat timers when they would kill
+     */
+    private capStatTimers;
+    /**
+     * Try to do something when health is below 20%
+     */
+    private processHealth;
+    /**
+     * Try to do something when hunger is below 20%
+     */
+    private processHunger;
+    /**
+     * Try to do something when thirst is below 20%
+     */
+    private processThirst;
+    get asMerchant(): MerchantNPC;
 }

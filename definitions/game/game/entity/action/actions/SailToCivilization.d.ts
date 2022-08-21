@@ -9,6 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../player/Player").default, void, [(import("../../../item/Item").default | undefined)?, (boolean | undefined)?]>;
+import type Item from "game/item/Item";
+export interface ISailToCivilizationCanUse extends IActionUsable {
+    itemsToRemove?: Item[];
+}
+declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../player/Player").default, void, ISailToCivilizationCanUse, [(Item | undefined)?, (boolean | undefined)?]>;
 export default _default;

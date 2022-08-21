@@ -17,9 +17,10 @@ export declare enum CanASeeBType {
     CreatureRandomSpawn = 1,
     CreatureScarecrow = 2,
     CreatureTrapping = 3,
-    FieldOfView = 4,
-    GetNearestPlayer = 5,
-    GetPlayersThatSeePosition = 6,
-    SkeletalMage = 7,
-    ZombieHorde = 8
+    CreatureIslandTravel = 4,
+    FieldOfView = 5,
+    GetNearestPlayer = 6,
+    GetPlayersThatSeePosition = 7,
+    SkeletalMage = 8,
+    ZombieHorde = 9
 }

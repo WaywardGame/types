@@ -9,4 +9,4 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { ItemType } from "game/item/IItem";
-export default function (type: ItemType, count?: boolean, disassembly?: boolean): import("../../../../language/impl/TranslationImpl").default[];
+export default function (type: ItemType, count?: boolean, isRepairOrDisassembly?: boolean): import("../../../../language/impl/TranslationImpl").default[];

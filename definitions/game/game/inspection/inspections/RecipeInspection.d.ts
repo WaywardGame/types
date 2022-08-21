@@ -9,17 +9,17 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InspectType } from "game/inspection/IInspection";
+import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import DoodadUses from "game/inspection/infoProviders/doodad/DoodadUses";
-import ItemDetailsInfoProvider from "game/inspection/infoProviders/item/ItemDetails";
-import ItemUses from "game/inspection/infoProviders/item/ItemUses";
 import Inspection from "game/inspection/Inspection";
 import { ItemType } from "game/item/IItem";
+import type { TranslationGenerator } from "ui/component/IComponent";
 export default class RecipeInspection extends Inspection<ItemType> {
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
+    private checker;
     constructor([, itemType]: [any, ItemType]);
     getId(): string;
-    get(context: InfoProviderContext): import("../../../language/impl/TranslationImpl").default | (import("../../../language/impl/TranslationImpl").default | import("game/inspection/InfoProvider").SimpleInfoProvider | ItemDetailsInfoProvider | ItemUses | DoodadUses)[];
+    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getDetails;
     private isUnskilled;
     private getReputation;

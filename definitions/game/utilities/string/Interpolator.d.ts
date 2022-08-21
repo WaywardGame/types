@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ReferenceType } from "game/reference/IReferenceManager";
+import type { ISerializedIcon } from "game/inspection/InfoProvider";
+import type { Reference } from "game/reference/ReferenceManager";
 import type { Random } from "utilities/random/Random";
 export interface ISegmentApi extends Readonly<IInterpolationOptions> {
     matchedEnds: Ends;
@@ -31,10 +32,12 @@ export interface ISegment {
 }
 export interface IStringSection {
     content: string;
+    classes?: Set<string>;
+    icon?: ISerializedIcon;
     forceInclude?: true;
 }
 export interface IReferenceSection extends IStringSection {
-    reference: [number, ReferenceType?];
+    reference: Reference;
 }
 declare class Interpolator {
     private options;
@@ -84,6 +87,8 @@ export declare type InterpolationConditionalSegmentOperator = InterpolationCondi
 export declare type InterpolationConditionalSegmentOperatorEquivalence = "=" | "!=";
 export declare type InterpolationConditionalSegmentOperatorNumeric = "<" | ">" | "<=" | ">=";
 export declare const conditionalSegment: ISegment;
+export declare const falsyCoalescingSegment: ISegment;
+export declare const classSegment: ISegment;
 export declare const basicInterpolator: Interpolator;
 export declare function interpolateSectioned(str: string, ...args: any[]): IStringSection[];
 export declare function interpolate(str: string, ...args: any[]): string;

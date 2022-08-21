@@ -17,8 +17,8 @@ import type { IStringSection } from "utilities/string/Interpolator";
 export declare enum QuadrantComponentId {
     Messages = 0,
     Stats = 1,
-    Quickslots = 2,
-    MenuBar = 3
+    MenuBar = 2,
+    ActionBar = 3
 }
 export declare enum PinType {
     Note = 0,

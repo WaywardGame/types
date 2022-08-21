@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 /// <reference types="node" />
+/// <reference types="node" />
 import type * as osNative from "os";
 import type { IIPC } from "../ipc";
 export declare const osIPC: IIPC<IOS>;

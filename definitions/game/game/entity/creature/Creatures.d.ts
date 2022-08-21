@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { ICreatureDescription } from "game/entity/creature/ICreature";
-import { CreatureType } from "game/entity/creature/ICreature";
+import { CreatureType, TileGroup } from "game/entity/creature/ICreature";
 import { TerrainType } from "game/tile/ITerrain";
-export declare const tileGroups: TerrainType[][];
 export declare const creatureDescriptions: OptionalDescriptions<CreatureType, ICreatureDescription>;
 export default creatureDescriptions;
+export declare const tileGroups: Descriptions<TileGroup, Set<TerrainType>>;

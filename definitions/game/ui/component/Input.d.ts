@@ -26,8 +26,8 @@ export interface IInputEvents extends Events<Component> {
     escape(): any;
     focus(): any;
     blur(): any;
-    upArrow(): any;
-    downArrow(): any;
+    upArrow(event: KeyboardEvent): any;
+    downArrow(event: KeyboardEvent): any;
     toggleDisabled(disabled: boolean): any;
 }
 export default class Input extends Component implements IRefreshable {
@@ -47,7 +47,7 @@ export default class Input extends Component implements IRefreshable {
     private shouldSelectOnFocus;
     private shouldSelectOnNextMouseUp;
     get changed(): boolean;
-    private readonly input;
+    protected readonly input: Component;
     private readonly wrapperButtons;
     private readonly _disabledReasons;
     get disabled(): boolean;

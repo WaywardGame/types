@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ReferenceType } from "game/reference/IReferenceManager";
+import type { Reference } from "game/reference/ReferenceManager";
 import type { Segment } from "language/segment/Segments";
 import type { IInterpolationOptions, IStringSection } from "utilities/string/Interpolator";
 export declare enum ListEnder {
@@ -31,7 +31,7 @@ export interface ISerializedTranslation {
     args?: Array<string | number | boolean | any[] | object | ISerializedTranslation>;
     failWith?: string | ISerializedTranslation | IStringSection[];
     reformatters?: ISerializedTranslation[];
-    reference?: [number, ReferenceType?];
+    reference?: Reference;
     tooltip?: ISerializedTranslation | IStringSection[];
     interpolator?: ISerializedInterpolator;
 }

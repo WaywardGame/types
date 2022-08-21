@@ -31,7 +31,7 @@ export default class Notifier {
     constructor(context: RendererContext, capacity: number);
     setResources(resourceContainer: IResourceContainer): void;
     delete(): void;
-    addItem(location: INotificationLocation, itemNotifierType: ItemNotifierType, type: ItemType, _broken?: boolean): void;
+    addItem(location: INotificationLocation, itemNotifierType: ItemNotifierType, type: ItemType): void;
     addCreature(location: INotificationLocation, creatureNotifierType: CreatureNotifierType, type: CreatureType, aberrant?: boolean): void;
     addStat(location: INotificationLocation, type: StatNotificationType, value: number): void;
     addStatusEffect(location: INotificationLocation, statusEffect: StatusEffect, reason: StatusEffectChangeReason): void;

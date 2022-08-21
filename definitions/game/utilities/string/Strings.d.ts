@@ -13,7 +13,8 @@ export declare enum CaseStyle {
     PascalCase = 0,
     CamelCase = 1,
     SnakeCase = 2,
-    KebabCase = 3
+    KebabCase = 3,
+    ConstCase = 4
 }
 export declare const matchLanguageLetters: RegExp;
 export declare const matchNotLanguageLetters: RegExp;

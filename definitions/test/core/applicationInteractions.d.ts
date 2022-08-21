@@ -10,10 +10,10 @@
  */
 /// <reference types="webdriverio/async" />
 import type { Stat } from "../../game/game/entity/IStats";
+import type { IslandId } from "../../game/game/island/IIsland";
 import { Direction } from "../../game/utilities/math/Direction";
 import type { Random, SeededGenerator } from "../../game/utilities/random/Random";
 import type { IDedicatedServerGameOptions, IJoinServerOptions, INewGameOptions } from "../interfaces";
-import type { IslandId } from "../../game/game/island/IIsland";
 import ApplicationDom from "./applicationDom";
 import ApplicationLogger from "./applicationLogger";
 export default class ApplicationInteractions {
@@ -55,7 +55,7 @@ export default class ApplicationInteractions {
     clickButtonIfClickable(name: string): Promise<boolean>;
     setNewGameSeed(seed: string | number): Promise<void>;
     setMultiplayerIdentifier(identifier: string): Promise<void>;
-    rightClickItemId(itemId: number): Promise<void>;
+    runItemAction(itemId: number, action: string): Promise<void>;
     importGame(savePath: string): Promise<void>;
     /**
      * Executes a Move action
@@ -64,6 +64,7 @@ export default class ApplicationInteractions {
      * @param verifyMovement True to verify the players position changed. Don't use this if the player is moving into the edge
      */
     moveInDirection(direction: Direction.Cardinal, steps?: number, verifyMovement?: boolean): Promise<void>;
+    setSail(): Promise<void>;
     waitForGameEndScreen(isWinner: boolean): Promise<void>;
     returnToTitleScreen(): Promise<void>;
     getServerGameCode(): Promise<string>;

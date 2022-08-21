@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { ISerializable, ISerializer } from "save/serializer/ISerializer";
 import { Types } from "save/serializer/ISerializer";
-import type { ISerializer, ISerializable } from "save/serializer/ISerializer";
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
@@ -24,11 +24,23 @@ export default class Vector2 implements IVector2, ISerializable {
         width: number;
         height: number;
     }): Vector2;
+    static fromSize(size?: {
+        width: number;
+        height: number;
+    }): Vector2 | undefined;
     static fromTopLeft(topLeft: {
         top: number;
         left: number;
     }): Vector2;
+    static fromTopLeft(topLeft?: {
+        top: number;
+        left: number;
+    }): Vector2 | undefined;
     static fromClient(clientXClientY: {
+        clientX?: number;
+        clientY?: number;
+    }): Vector2;
+    static fromClient(clientXClientY?: {
         clientX?: number;
         clientY?: number;
     }): Vector2 | undefined;

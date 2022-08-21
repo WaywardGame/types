@@ -9,6 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../player/Player").default | import("../../npc/NPC").default, void, [import("../../../item/Item").default]>;
+import type { IItemDescription } from "game/item/IItem";
+export interface IPourOnYourselfCanUse extends IActionUsable {
+    itemDescription: IItemDescription;
+}
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default, void, IPourOnYourselfCanUse, [import("../../../item/Item").default]>;
 export default _default;

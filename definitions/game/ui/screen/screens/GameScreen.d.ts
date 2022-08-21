@@ -22,15 +22,15 @@ import { Quadrant } from "ui/screen/screens/game/component/IQuadrantComponent";
 import type QuadrantComponent from "ui/screen/screens/game/component/QuadrantComponent";
 import { DialogId } from "ui/screen/screens/game/Dialogs";
 import { QuadrantComponentId } from "ui/screen/screens/game/IGameScreenApi";
+import type ActionBar from "ui/screen/screens/game/static/ActionBar";
 import type MenuBar from "ui/screen/screens/game/static/MenuBar";
 import type Messages from "ui/screen/screens/game/static/Messages";
-import type Quickslots from "ui/screen/screens/game/static/Quickslots";
 import type StatsQuadrant from "ui/screen/screens/game/static/Stats";
 import MovementHandler from "ui/screen/screens/game/util/movement/MovementHandler";
 import WorldTooltipHandler from "ui/screen/screens/game/WorldTooltipHandler";
 import type { Direction } from "utilities/math/Direction";
 export declare type IDialogStates = {
-    [key in DialogId]: boolean;
+    [key in `${DialogId}` | `${DialogId},${string}`]: boolean;
 };
 declare global {
     let gameScreen: GameScreen | undefined;
@@ -39,7 +39,7 @@ export default class GameScreen extends Screen {
     quadrantComponentQuadrants: OptionalDescriptions<QuadrantComponentId, Quadrant>;
     menuBar: MenuBar;
     stats: StatsQuadrant;
-    quickslots: Quickslots;
+    actionBar: ActionBar;
     messages: Messages;
     movementHandler: MovementHandler;
     worldTooltipHandler: WorldTooltipHandler;
@@ -55,7 +55,7 @@ export default class GameScreen extends Screen {
     getQuadrantComponents(): import("@wayward/goodstream").default<QuadrantComponent>;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: QuadrantComponentId): (never extends C ? QuadrantComponent : C extends never[] ? QuadrantComponent | C : {} extends C ? QuadrantComponent | Partial<QuadrantComponent> : QuadrantComponent | C) | undefined;
     getQuadrantContainer(): Component<HTMLElement>;
-    isMouseWithin(): false | Component<HTMLElement>;
+    isMouseWithin(): Component<HTMLElement> | undefined;
     mouseStartWasWithin(api: IBindHandlerApi): boolean | undefined;
     onGameStart(game: Game, _isLoadingSave: boolean, _playedCount: number): void;
     onLoadedOnIsland(player: Player, island: Island): void;
@@ -92,12 +92,14 @@ export default class GameScreen extends Screen {
     protected onSailOffMapEdge(player: Player, direction: Direction): void;
     protected onDie(player: Player, showingGameEndScreen: boolean): void;
     protected onRespawn(): void;
+    protected onItemMenu(api: IBindHandlerApi): boolean;
     protected onZoom(api: IBindHandlerApi): boolean;
     protected onInspect(api: IBindHandlerApi): boolean;
     protected onScreenshotMode(): boolean;
     protected onShowMoreInfo(): void;
     protected onUnshowMoreInfo(): void;
     protected onDisableHealthVignette(): void;
+    protected onEquipItem(): void;
     protected onCancel(): boolean;
     protected create(): void;
     protected onHide(): void;

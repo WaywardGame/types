@@ -66,13 +66,13 @@ export declare class GlobalMouseInfo extends EventEmitter.Host<IGlobalMouseInfoE
      * @param what A component, element, or selector.
      * @param recalcTarget Whether to recalculate the target before this operation. Defaults to `false`
      */
-    isWithin<W extends Component | Element | string | undefined>(what?: W, recalcTarget?: boolean): (W extends Component ? W : HTMLElement) | false;
+    isWithin<W extends Component | Element | string | undefined>(what?: W, recalcTarget?: boolean): (W extends Component ? W : HTMLElement) | undefined;
     /**
      * Returns whether the mouse is currently within the given component, element, or selector.
      * @param what A component, element, or selector.
      * @param recalcTarget Whether to recalculate the target before this operation. Defaults to `false`
      */
-    isTarget<W extends Component | Element | string | undefined>(what?: W, recalcTarget?: boolean): (W extends Component ? W : HTMLElement) | false;
+    isTarget<W extends Component | Element | string | undefined>(what?: W, recalcTarget?: boolean): (W extends Component ? W : HTMLElement) | undefined;
     invalidateTarget(): void;
     private _updateTarget;
 }
@@ -88,6 +88,7 @@ export declare class GlobalInputInfo extends EventEmitter.Host<IInputInfoEvents>
     isHolding(bindable: Bindable): InputInfo | undefined;
     isHolding(input: IInput): InputInfo | undefined;
     unpress(...unpresses: Array<InputCatalyst | IInput | Bindable>): void;
+    mayBeModifier(): boolean;
 }
 export interface IInputManagerEvents {
     disabled(): any;
@@ -109,7 +110,7 @@ declare class InputManager extends EventEmitter.Host<IInputManagerEvents> {
      * those properties, it returns a `Set<Modifier>` matching which of those properties is true.
      */
     extractModifiers(evt: Event): Set<Modifier> | undefined;
-    getCatalyst(evt: Event): InputCatalyst | undefined;
+    getCatalyst(evt: Event, asMouse?: boolean): InputCatalyst | undefined;
     /**
      * @param disabler Each `disableUntil` call should be given a unique `disabler`,
      * as this system uses the timing from the latest `disableUntil` call

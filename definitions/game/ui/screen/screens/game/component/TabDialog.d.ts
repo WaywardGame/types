@@ -26,9 +26,9 @@ export default abstract class TabDialog<T extends TabDialogPanel = TabDialogPane
     protected subpanelInformations: SubpanelInformation[];
     protected activeSubpanel: SubpanelInformation | undefined;
     protected subpanels: T[];
-    protected activePanel: T;
+    protected activePanel: T | undefined;
     protected storePanels: boolean;
-    constructor(id: DialogId);
+    constructor(id: DialogId, subId?: string, initializeSubpanels?: boolean);
     /**
      * Implements the abstract method in "TabDialog". Returns an array of subpanels.
      * This will only be called once
@@ -43,6 +43,7 @@ export default abstract class TabDialog<T extends TabDialogPanel = TabDialogPane
      * and trigger a `SwitchAway` event on the panel when this occurs.
      */
     protected abstract getSubpanelInformation(subpanels: T[]): SubpanelInformation[];
+    protected initializeSubpanels(): void;
     protected getDefaultSubpanelInformation(): SubpanelInformation;
     /**
      * Returns a function that will be executed when the passed subpanel is shown.

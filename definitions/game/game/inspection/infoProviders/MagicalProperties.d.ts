@@ -10,6 +10,8 @@
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
 import MagicalPropertyManager from "game/magic/MagicalPropertyManager";
+import { PathType } from "resource/IResourceLoader";
+import ImagePath from "ui/util/ImagePath";
 export default class MagicalPropertiesInfoProvider extends InfoProvider {
     private readonly magic;
     static getFireStageTranslation(decay?: number): import("../../../language/impl/TranslationImpl").default | undefined;
@@ -19,7 +21,7 @@ export default class MagicalPropertiesInfoProvider extends InfoProvider {
     constructor(magic: MagicalPropertyManager);
     getClass(): string[];
     getIcon(): {
-        path: string;
+        path: ImagePath<PathType.InfoIcon>;
         width: number;
         height: number;
     };

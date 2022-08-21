@@ -9,7 +9,23 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type Item from "game/item/Item";
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [(Item | undefined)?]>;
+import type { ITerrainDescription, ITile } from "game/tile/ITerrain";
+import { TerrainType } from "game/tile/ITerrain";
+export interface IDigGenericCanUse extends IActionUsable {
+    type: "PickUpExcrement" | "PickUp" | "Gather";
+}
+export interface IDigTileCanUse extends IActionUsable {
+    type: "Tile";
+    tile: ITile;
+    x: number;
+    y: number;
+    z: number;
+    terrainDescription?: ITerrainDescription;
+    tileType: TerrainType;
+}
+declare type IDigCanUse = IDigGenericCanUse | IDigTileCanUse;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, IDigCanUse, [(Item | undefined)?]>;
 export default _default;

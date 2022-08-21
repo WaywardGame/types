@@ -10,6 +10,7 @@
  */
 import type { Music, SfxType } from "audio/IAudio";
 import type { Command, CommandCallback } from "command/ICommand";
+import type { BiomeType, IBiomeDescription } from "game/biome/IBiome";
 import type { DoodadType, DoodadTypeGroup, IDoodadDescription, IDoodadGroupDescription } from "game/doodad/IDoodad";
 import type { ActionType, IActionDescription } from "game/entity/action/IAction";
 import type { ICorpseDescription } from "game/entity/creature/corpse/ICorpse";
@@ -31,7 +32,7 @@ import type { InspectType } from "game/inspection/IInspection";
 import type { InspectionClass } from "game/inspection/InspectionTypeMap";
 import type { IItemDescription, IItemGroupDescription, ItemType, ItemTypeGroup } from "game/item/IItem";
 import type { ILoadingDescription } from "game/meta/Loading";
-import type { PromptDescription } from "game/meta/prompt/IPrompt";
+import type { Prompt } from "game/meta/prompt/IPrompt";
 import type { ITerrainDescription, OverlayType, TerrainType } from "game/tile/ITerrain";
 import type { ITileEventDescription, TileEventType } from "game/tile/ITileEvent";
 import type { ITerrainLootItem } from "game/tile/TerrainResources";
@@ -66,47 +67,48 @@ export declare const SYMBOL_MOD_REGISTRATIONS: unique symbol;
 export declare enum ModRegistrationType {
     Action = 0,
     Bindable = 1,
-    Bulk = 2,
-    Command = 3,
-    Creature = 4,
-    Dialog = 5,
-    Dictionary = 6,
-    Doodad = 7,
-    DoodadGroup = 8,
-    HelpArticle = 9,
-    InspectionType = 10,
-    InterModRegistration = 11,
-    InterModRegistry = 12,
-    Interrupt = 13,
-    InterruptChoice = 14,
-    Item = 15,
-    ItemGroup = 16,
-    Language = 17,
-    LanguageExtension = 18,
-    Load = 19,
-    MenuBarButton = 20,
-    Message = 21,
-    MessageSource = 22,
-    MusicTrack = 23,
-    Note = 24,
-    NPC = 25,
-    OptionsSection = 26,
-    Overlay = 27,
-    Packet = 28,
-    Prompt = 29,
-    QuadrantComponent = 30,
-    Quest = 31,
-    QuestRequirement = 32,
-    Registry = 33,
-    Skill = 34,
-    SoundEffect = 35,
-    Stat = 36,
-    StatusEffect = 37,
-    Terrain = 38,
-    TerrainDecoration = 39,
-    TileEvent = 40,
-    TileLayerType = 41,
-    WorldLayer = 42
+    Biome = 2,
+    Bulk = 3,
+    Command = 4,
+    Creature = 5,
+    Dialog = 6,
+    Dictionary = 7,
+    Doodad = 8,
+    DoodadGroup = 9,
+    HelpArticle = 10,
+    InspectionType = 11,
+    InterModRegistration = 12,
+    InterModRegistry = 13,
+    Interrupt = 14,
+    InterruptChoice = 15,
+    Item = 16,
+    ItemGroup = 17,
+    Language = 18,
+    LanguageExtension = 19,
+    Load = 20,
+    MenuBarButton = 21,
+    Message = 22,
+    MessageSource = 23,
+    MusicTrack = 24,
+    Note = 25,
+    NPC = 26,
+    OptionsSection = 27,
+    Overlay = 28,
+    Packet = 29,
+    Prompt = 30,
+    QuadrantComponent = 31,
+    Quest = 32,
+    QuestRequirement = 33,
+    Registry = 34,
+    Skill = 35,
+    SoundEffect = 36,
+    Stat = 37,
+    StatusEffect = 38,
+    Terrain = 39,
+    TerrainDecoration = 40,
+    TileEvent = 41,
+    TileLayerType = 42,
+    WorldLayer = 43
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -188,6 +190,11 @@ export interface IBindableRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Bindable;
     name: string;
     defaultBindings: Binding[];
+}
+export interface IBiomeRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Biome;
+    name: string;
+    description: IBiomeDescription;
 }
 export interface IDictionaryRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Dictionary;
@@ -296,7 +303,6 @@ export interface IQuestRequirementRegistration extends IBaseModRegistration {
 export interface IPromptRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Prompt;
     name: string;
-    description: PromptDescription<any[]>;
 }
 export interface ILoadRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Load;
@@ -319,7 +325,7 @@ export interface IQuadrantComponentRegistration extends IBaseModRegistration {
 export interface IInheritsRegistrationTime {
     useRegistrationTime: ModRegistrationType;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration);
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration);
 export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare module Register {
     /**
@@ -421,6 +427,14 @@ declare module Register {
      */
     export function item(name: string, description?: IItemRegistrationDescription): <K extends string | number | symbol, T extends { [k in K]: ItemType; }>(target: T, key: K) => void;
     /**
+     * Registers a biome.
+     * @param name The name of the biome.
+     * @param description The definition of the biome.
+     *
+     * The decorated property will be injected with the id of the registered biome.
+     */
+    export function biome(name: string, description: IBiomeDescription): <K extends string | number | symbol, T extends { [k in K]: BiomeType; }>(target: T, key: K) => void;
+    /**
      * Registers a creature.
      * @param name The name of the creature.
      * @param description The definition of the creature.
@@ -504,11 +518,10 @@ declare module Register {
     /**
      * Registers a prompt.
      * @param name The name of the prompt.
-     * @param description The definition of the prompt.
      *
      * The decorated property will be injected with the id of the registered prompt.
      */
-    export function prompt(name: string, description: PromptDescription<any[]>): <K extends string | number | symbol, T extends { [k in K]: Message; }>(target: T, key: K) => void;
+    export function prompt(name: string): <K extends string | number | symbol, T extends { [k in K]: Prompt; }>(target: T, key: K) => void;
     /**
      * Registers an interrupt choice.
      * @param name The name of the interrupt choice.

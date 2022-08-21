@@ -11,49 +11,19 @@
 import type { Events } from "event/EventEmitter";
 import type Doodad from "game/doodad/Doodad";
 import type Creature from "game/entity/creature/Creature";
-import type { IDamageInfo } from "game/entity/creature/ICreature";
 import type Human from "game/entity/Human";
-import type { EquipType, HairColor, HairStyle, IRestData, SkinColor } from "game/entity/IHuman";
+import type { HairColor, HairStyle, SkinColor } from "game/entity/IHuman";
 import type NPC from "game/entity/npc/NPC";
 import type { IMessage } from "game/entity/player/IMessageManager";
 import type MessageManager from "game/entity/player/MessageManager";
 import type { INote } from "game/entity/player/note/NoteManager";
 import type Player from "game/entity/player/Player";
-import type { IslandId } from "game/island/IIsland";
-import type Island from "game/island/Island";
 import { ItemType } from "game/item/IItem";
-import type Item from "game/item/Item";
 import type { Prompt } from "game/meta/prompt/IPrompt";
 import type InterruptChoice from "language/dictionary/InterruptChoice";
-import type { IOptions } from "save/data/ISaveDataGlobal";
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 export interface IPlayerEvents extends Events<Human> {
-    /**
-     * Called when the player tick starts
-     */
-    tickStart(): any;
-    /**
-     * Called when the player tick ends
-     */
-    tickEnd(): any;
-    /**
-     * Called when a turn is starting
-     */
-    turnStart(): any;
-    /**
-     * Called when a turn is ending
-     */
-    turnEnd(): any;
-    /**
-     * Called when the player is spawned. (At the end of `Player.setup`)
-     */
-    spawn(): any;
-    /**
-     * @param key The key of `IOptions` that was changed on this player
-     * @param value The value this key was set to
-     */
-    updateOption<O extends keyof IOptions>(key: O, value: IOptions[O]): any;
     /**
      * Called when a message is being disaplyed for a player
      * @param message The message that will be displayed
@@ -73,22 +43,6 @@ export interface IPlayerEvents extends Events<Human> {
      * @param choice The selected choice
      */
     interruptResponse(interrupt: Prompt, choice: boolean | InterruptChoice): any;
-    /**
-     * Called when getting the player's maximum health
-     * @param maxHealth The current max health of the player (after any other previous mods)
-     */
-    getMaxHealth(maxHealth: number): number;
-    /**
-     * Called when getting the player's maximum weight
-     * @param maxWeight The current max weight of the player (after any other previous mods)
-     */
-    getMaxWeight(maxWeight: number): number;
-    /**
-     * Called when the player is damaged
-     * @param damageInfo The damage info object
-     * @returns The amount of damage the player should take (the player will take this damage)
-     */
-    damage(damageInfo: IDamageInfo): number | void;
     /**
      * Called when the player will be killed. If any handlers return `false` to stop the player from dying,
      * no further handlers will be called.
@@ -115,68 +69,15 @@ export interface IPlayerEvents extends Events<Human> {
      */
     sailOffMapEdge(direction: Direction): any;
     /**
-     * Called when the player equips an item to a slot
-     * @param player The player object
-     * @param item The item being equipped
-     * @param slot The slot
-     */
-    equip?(item: Item, slot: EquipType): any;
-    /**
      * Called when the players quickslots are updated
      * @param quickslot The quick slot
      * @param itemType The item type
      */
     updatedQuickslotInfo?(quickslot: number, itemType?: ItemType): any;
     /**
-     * Called when input is being processed
-     * @param player The player object
-     * @returns False to prevent input processing or undefined to use the default logic
-     */
-    processInput(): boolean | undefined;
-    /**
-     * Called when the players x / y position changes
-     * @param x The players x position
-     * @param y The players y position
-     */
-    processMovement(x: number, y: number): any;
-    /**
-     * Called when getting the players movement intent
-     * @returns The movement intent of the player or undefined to use the default logic
-     */
-    getMovementIntent(): IMovementIntent | undefined;
-    /**
      * Called when no input is received
      */
     noInput(): any;
-    /**
-     * Called when the walk path of the player changes.
-     */
-    walkPathChange(walkPath: IVector2[] | undefined): any;
-    /**
-     * Called when the player completes a movement
-     */
-    moveComplete(): any;
-    /**
-     * Called when the players weight is being updated
-     * @param newWeight The new weight of the player
-     * @returns A number to set the player weight to or undefined to use the default logic
-     */
-    updateWeight(newWeight: number): number | undefined;
-    /**
-     * Called when getting the players weight or stamina movement penalty
-     * @returns The weight/stamina movement penalty for the player or undefined to use the default logic
-     */
-    getWeightOrStaminaMovementPenalty(): number | undefined;
-    /**
-     * Called when the player starts resting
-     * @param restData The data related to the rest event
-     */
-    restStart(restData: IRestData): any;
-    /**
-     * Called when the player stops resting
-     * @param restData The data related to the rest event
-     */
-    restEnd(restData: IRestData): any;
     /**
      * Called when the player will write a note.
      * @param note The note that will be written.
@@ -197,37 +98,11 @@ export interface IPlayerEvents extends Events<Human> {
      * Called when an doodad is picked up
      * @param doodad The doodad object
      */
-    pickupDoodad?(doodad: Doodad): any;
+    pickUpDoodad?(doodad: Doodad): any;
     /**
      * Called when a player sails to civilization.
      */
     sailToCivilization?(): any;
-    /**
-     * Used for registering events
-     * This may be called more than once on the same player
-     */
-    reregister(): any;
-    /**
-     * Used for deregistering events
-     */
-    deregister(): any;
-    /**
-     * Called when the player is moving to another island
-     * @param oldIsland The players old island
-     * @param newIslandId The players new island
-     */
-    preMoveToIsland(oldIsland: Island, newIslandId: IslandId): any;
-    /**
-     * Called when the player is moving to another island
-     * @param oldIsland The players old island
-     * @param newIsland The players new island
-     */
-    moveToIsland(oldIsland: Island, newIsland: Island): any;
-    /**
-     * Called when the player is loaded onto an island
-     * @param options Load island options
-     */
-    loadedOnIsland(island: Island, options?: Partial<ILoadOnIslandOptions>): any;
     /**
      * Called when the players id is changing
      * @param currentId The players current id
@@ -242,8 +117,8 @@ export declare enum TurnType {
     Idle = 2
 }
 export interface IAttackHand {
-    leftHand: number;
-    rightHand: number;
+    mainHand: number;
+    offHand: number;
 }
 export declare type IPlayerOld = Partial<Omit<Player, "customization">> & Partial<{
     gender: 0 | 1;
@@ -298,12 +173,13 @@ export interface IStatOld {
 }
 export interface IMobCheck extends IVector3 {
     creature?: Creature;
-    player?: Player;
+    player?: Human;
     npc?: NPC;
     obstacle?: boolean;
     water?: boolean;
     freshWater?: boolean;
     shallowWater?: boolean;
+    swampWater?: boolean;
     noTile?: boolean;
     waterTiles?: number;
     voidTiles?: number;

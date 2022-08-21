@@ -11,7 +11,9 @@
 import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
+import type { InspectionClass } from "game/inspection/InspectionTypeMap";
 import type { ReferenceType } from "game/reference/IReferenceManager";
+import type { EnumReferenceResolved, EnumReferenceTypes } from "game/reference/ReferenceManager";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type Text from "ui/component/Text";
 import type { IVector3 } from "utilities/math/IVector";
@@ -20,7 +22,9 @@ export default abstract class Inspection<O> extends InfoProvider {
     readonly value: O;
     static createEnumReferenceHandler<R extends ReferenceType, E, K extends string>(referenceType: R, enumObject: {
         [key in K]: E;
-    }, predicate?: (reference: [R, E], context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
+    }, predicate?: (reference: [R, E], context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext) => any;
+    static createAnyHandler(...handlers: Array<Exclude<InspectionClass["handles"], undefined>>): (type: InspectType, ...args: any[]) => boolean;
+    static createReferenceHandler<REFTYPE extends EnumReferenceTypes>(referenceType: REFTYPE, handler?: (resolvedReference: EnumReferenceResolved<REFTYPE>, context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext) => any;
     static verifyHumanity(_: any, context?: InfoProviderContext): boolean;
     static getDefaultPriority(inspectType: InspectType): number;
     constructor(type: InspectType, value: O);

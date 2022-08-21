@@ -20,3 +20,5 @@ export declare const puddleOfDesalinatedWater: ITileEventDescription;
 export declare const puddleOfMedicinalWater: ITileEventDescription;
 export declare const puddleOfGoatMilk: ITileEventDescription;
 export declare const puddleOfCoconutWater: ITileEventDescription;
+export declare const puddleOfSwampWater: ITileEventDescription;
+export declare const puddleOfFilteredWater: ITileEventDescription;

@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { EquipType } from "game/entity/IHuman";
+import type NPC from "game/entity/npc/NPC";
 import type { IContainer, IDismantleComponent, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import "ui/old/functional/FunctionalSortable";
@@ -59,12 +60,12 @@ export default class OldUi {
     toggleUIDisplay(hide: boolean): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;
-    changeEquipmentOption(id: "leftHand" | "rightHand"): void;
     closeAllContainers(): void;
-    openContainer(container: IContainer, containerName?: string): void;
+    hasOpenContainer(): boolean;
+    openContainer(container: IContainer | NPC, containerName?: string): void;
     closeContainer(container: IContainer): void;
     refreshContainerName(container: IContainer): void;
-    isContainerOpen(container: IContainer): boolean;
+    isContainerOpen(value: unknown): value is IContainer;
     addItemToContainer(item: Item, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
     afterAddingMultipleItemsToContainer(container: IContainer): void;
     removeItemFromContainer(item: Item, container: IContainer): void;
@@ -72,6 +73,6 @@ export default class OldUi {
     setVersionExtra(msg: string): void;
     openDialogs(): void;
     cancelSorting(): void;
-    private logErrorEvent;
+    logErrorEvent(event: ErrorEvent | (Partial<ErrorEvent> & Error)): void;
     private logPromiseRejectionEvent;
 }

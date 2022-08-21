@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { BiomeType } from "game/biome/IBiome";
-declare const islandNameBiomeDescriptors: Descriptions<BiomeType, [adjective: string, noun: string]>;
+declare const islandNameBiomeDescriptors: Descriptions<BiomeType, [DESCRIPTOR_island: string, island_of_DESCRIPTOR: string]>;
 export default islandNameBiomeDescriptors;

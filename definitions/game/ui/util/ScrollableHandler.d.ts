@@ -11,10 +11,10 @@
 import type Component from "ui/component/Component";
 export declare class ScrollableHandler {
     private readonly id;
-    private readonly elementRef;
-    get element(): HTMLElement | undefined;
-    constructor(element: HTMLElement, id: string);
-    watchAnimations(parent: Component): void;
+    private readonly componentRef;
+    get component(): Component<HTMLElement> | undefined;
+    constructor(component: Component, id: string);
+    watchAnimations(_parent: Component): void;
     private onAnimationStart;
     private onAnimationEnd;
 }

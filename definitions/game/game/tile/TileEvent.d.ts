@@ -54,12 +54,12 @@ export default class TileEvent extends EventEmitter.Host<ITileEventEvents> imple
     private fireStage?;
     islandId: IslandId;
     private _description;
-    private _movementFinishTime?;
+    private _movementTime;
     constructor(type?: TileEventType, islandId?: `${number},${number}`, x?: number, y?: number, z?: number);
     get island(): import("../island/Island").default;
     toString(): string;
     description(): ITileEventDescription | undefined;
-    getName(article?: boolean, count?: number): import("../../language/impl/TranslationImpl").default;
+    getName(article?: false | "definite" | "indefinite", count?: number): import("../../language/impl/TranslationImpl").default;
     getTile(): ITile;
     getProducedTemperature(): number | undefined;
     updateFire(tile: ITile): void;

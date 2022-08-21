@@ -28,5 +28,7 @@ export declare enum ReferenceType {
     Recipe = 10,
     ItemType = 11,
     Dismantle = 12,
-    Stat = 13
+    Stat = 13,
+    Action = 14,
+    EquipSlot = 15
 }

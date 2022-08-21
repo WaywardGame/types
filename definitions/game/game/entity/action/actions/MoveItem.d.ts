@@ -10,8 +10,10 @@
  */
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
-import type NPC from "game/entity/npc/NPC";
+import type Human from "game/entity/Human";
 import type { IContainer } from "game/item/IItem";
 import type Item from "game/item/Item";
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Container, ActionArgument.Undefined], [ActionArgument.ItemType, ActionArgument.Undefined], [ActionArgument.Quality, ActionArgument.Undefined], [ActionArgument.String, ActionArgument.Undefined]], import("../../player/Player").default | NPC, void, [(Item | undefined)?, (IContainer | undefined)?, (import("game/item/IItem").ItemType | undefined)?, (import("../../../IObject").Quality | undefined)?, (string | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemNearbyIncludingTradeContainer, ActionArgument.Undefined], [ActionArgument.Container, ActionArgument.Undefined], [ActionArgument.ItemType, ActionArgument.Undefined], [ActionArgument.Quality, ActionArgument.Undefined], [ActionArgument.String, ActionArgument.Undefined]], Human, void, {
+    usable: true;
+}, [(Item | undefined)?, (IContainer | undefined)?, (import("game/item/IItem").ItemType | undefined)?, (import("../../../IObject").Quality | undefined)?, (string | undefined)?]>;
 export default _default;

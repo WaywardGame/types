@@ -46,6 +46,7 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
     getRegistryName(name: string): string;
     getLog(): Log;
     getPath(): string;
+    getVersion(): string;
     loadFile(file: string): Promise<string | undefined>;
     /**
      * Called when the save data for this mod is retrieved from a field decorated with `@Mod.saveData`.

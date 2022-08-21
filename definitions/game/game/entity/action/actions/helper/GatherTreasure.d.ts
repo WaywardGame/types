@@ -9,8 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IActionHandlerApi } from "game/entity/action/IAction";
-import type NPC from "game/entity/npc/NPC";
-import type Player from "game/entity/player/Player";
+import type Human from "game/entity/Human";
 import type Item from "game/item/Item";
 import type { ITreasure } from "game/mapping/DrawnMap";
 import type DrawnMap from "game/mapping/DrawnMap";
@@ -19,4 +18,4 @@ export declare enum GatherTreasureResult {
     NotYet = 1,
     Gathered = 2
 }
-export default function (map: DrawnMap, treasure: ITreasure, action: IActionHandlerApi<Player | NPC>, tool?: Item): GatherTreasureResult;
+export default function (map: DrawnMap, treasure: ITreasure, action: IActionHandlerApi<Human>, tool?: Item): GatherTreasureResult;

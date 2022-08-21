@@ -9,7 +9,21 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
+import type { IMagicalPropertyInfo } from "game/item/IItem";
 import type Item from "game/item/Item";
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [Item, (Item | undefined)?]>;
+import type { MagicalSubPropertySubTypes } from "game/magic/MagicalPropertyManager";
+import type { MagicalPropertyType } from "game/magic/MagicalPropertyType";
+export interface IUpgradeCanUse extends IActionUsable {
+    upgrade: IUpgradeable;
+    upgradeTarget: Item;
+}
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default, void, IUpgradeCanUse, [Item, (Item | undefined)?]>;
 export default _default;
+export interface IUpgradeable extends IMagicalPropertyInfo {
+    target: Item;
+    type: MagicalPropertyType;
+    subType?: MagicalSubPropertySubTypes;
+    currentValue: number;
+}

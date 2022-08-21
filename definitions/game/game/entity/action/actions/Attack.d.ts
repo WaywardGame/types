@@ -9,9 +9,39 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
+import type Human from "game/entity/Human";
 import { AttackType } from "game/entity/IEntity";
-import Player from "game/entity/player/Player";
+import { SkillType } from "game/entity/IHuman";
+import type { IItemDescription, IRanged } from "game/item/IItem";
 import type Item from "game/item/Item";
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined]], Player | import("../../npc/NPC").default, void, [(Item | undefined)?, (AttackType | undefined)?]>;
+import type { ITile } from "game/tile/ITerrain";
+export interface IBaseCanUse extends IActionUsable {
+    human: Human;
+    attackType: AttackType;
+    pvp: boolean;
+    facingTile: ITile;
+    attackSkill: SkillType;
+    weapon?: Item;
+    weaponDescription?: IItemDescription;
+}
+export interface IAttackCloseUpCanUse extends IBaseCanUse {
+    attackType: AttackType.HandToHand | AttackType.MeleeWeapon;
+}
+export interface IAttackThrowItemCanUse extends IBaseCanUse {
+    attackType: AttackType.ThrowItem;
+    weapon: Item;
+    weaponDescription: IItemDescription;
+}
+export interface IAttackRangedWeaponCanUse extends IBaseCanUse {
+    attackType: AttackType.RangedWeapon;
+    weapon: Item;
+    weaponDescription: IItemDescription;
+    ranged: IRanged;
+    rangedRequiredWeapon?: Item;
+    ammoItem: Item;
+}
+export declare type IAttackCanUse = IAttackCloseUpCanUse | IAttackThrowItemCanUse | IAttackRangedWeaponCanUse;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined], [ActionArgument.ItemInventory, ActionArgument.Undefined]], Human, void, IAttackCanUse, [(Item | undefined)?, (AttackType | undefined)?, (Item | undefined)?]>;
 export default _default;

@@ -8,5 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-declare const _default: import("../Action").Action<[[import("../IAction").ActionArgument.ItemInventory, import("../IAction").ActionArgument.Undefined], [import("../IAction").ActionArgument.AttackType, import("../IAction").ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [(import("../../../item/Item").default | undefined)?, (import("../../IEntity").AttackType | undefined)?]>;
+import { Action } from "game/entity/action/Action";
+import { ActionArgument } from "game/entity/action/IAction";
+/**
+ * Firing a weapon (like a bow)
+ */
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, import("game/entity/action/IAction").IActionUsable, [import("../../../item/Item").default]>;
 export default _default;

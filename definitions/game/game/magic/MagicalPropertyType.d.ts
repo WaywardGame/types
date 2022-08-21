@@ -46,7 +46,15 @@ export declare enum MagicalPropertyType {
     /**
      * Has a chance to regenerate durability every turn.
      */
-    ItemRegeneration = 23
+    ItemRegeneration = 23,
+    /**
+     * Adds a bonus to the item's civilization score value.
+     */
+    CivilizationBonus = 24,
+    /**
+     * Adds a bonus to the growth speed for plants and mushrooms planted on it.
+     */
+    GrowingSpeed = 25
 }
 /**
  * A map of magical property types that contain sub-properties to the corresponding sub property enum

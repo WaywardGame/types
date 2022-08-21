@@ -10,6 +10,11 @@
  */
 import type { MenuId } from "ui/screen/screens/menu/component/IMenu";
 import type Menu from "ui/screen/screens/menu/component/Menu";
+export declare enum FontStyle {
+    Pixel = 0,
+    Balanced = 1,
+    Smooth = 2
+}
 export declare enum SaveLocation {
     /**
      * Used to mark a field to be saved locally (per save)
@@ -45,3 +50,9 @@ export interface LoadMenuArgs {
 export declare const DIALOG_OPACITY_MIN = 0;
 export declare const DIALOG_OPACITY_DEFAULT = 80;
 export declare const UI_HOOK_PRIORITY = -99999999999;
+export declare enum UiClasses {
+    FitContent = "fit-content"
+}
+export declare namespace UiClasses {
+    function createDynamic<CLASS extends string, ENUM>(baseClass: CLASS, enm: ENUM): (enumValue: ENUM[keyof ENUM]) => `${CLASS}-${Lowercase<keyof ENUM & string>}`;
+}

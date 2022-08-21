@@ -9,9 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import TileInspectionsList from "ui/screen/screens/game/component/TileInspectionsList";
+import type { InspectionTooltipHints } from "ui/screen/screens/game/InspectionsTooltipHandler";
 import InspectionsTooltipHandler from "ui/screen/screens/game/InspectionsTooltipHandler";
 import type Vector2 from "utilities/math/Vector2";
 export default class WorldTooltipHandler extends InspectionsTooltipHandler<TileInspectionsList> {
+    protected initializeHints(hints: InspectionTooltipHints): void;
     protected getTooltipClass(): string[];
     protected initializeInspections(): TileInspectionsList | undefined;
     protected onUpdateTooltipPosition(position: Vector2): void;

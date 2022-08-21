@@ -11,7 +11,8 @@
 export declare enum IslandName {
     AdjectiveIsland = 0,
     IslandOfNoun = 1,
-    GenericDescriptor = 2
+    GenericDescriptor = 2,
+    GenericNoun = 3
 }
 declare const islandNames: Descriptions<IslandName, string | string[]>;
 export default islandNames;

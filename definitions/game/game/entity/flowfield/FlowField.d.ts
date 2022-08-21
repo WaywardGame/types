@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { MoveType } from "game/entity/IEntity";
-import type Player from "game/entity/player/Player";
 import type { IPreSerializeCallback } from "save/serializer/ISerializer";
+import type Human from "game/entity/Human";
 export default class FlowField implements IPreSerializeCallback {
     readonly x: number;
     readonly y: number;
@@ -30,7 +30,7 @@ export default class FlowField implements IPreSerializeCallback {
     getZ(): number;
     getHashCodes(): string[];
     getFieldValue(x: number, y: number): number;
-    updateField(flowFieldPlayers: Player[]): void;
+    updateField(flowFieldHumans: Human[]): void;
     resetPenalty(gridIndex: number): void;
     reset(): void;
     /**

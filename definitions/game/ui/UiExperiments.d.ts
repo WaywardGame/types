@@ -13,12 +13,13 @@ declare enum UiExperiment {
     NewCraftingDialog = 1
 }
 declare module UiExperiment {
-    type Excluded = "toggle" | "update" | "all" | "name";
+    type Excluded = "toggle" | "update" | "all" | "name" | "has";
     export type Any = Exclude<keyof typeof UiExperiment, Excluded>;
     export function all(): readonly UiExperiment[];
     export function toggle(experiment: UiExperiment, enabled: boolean): void;
     export function update(): void;
     export function name(experiment: UiExperiment): Any;
+    export function has(experiment: UiExperiment): boolean;
     export {};
 }
 export default UiExperiment;

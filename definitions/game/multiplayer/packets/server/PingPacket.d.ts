@@ -11,7 +11,9 @@
 import ServerPacket from "multiplayer/packets/ServerPacket";
 export default class PingPacket extends ServerPacket {
     sendTime: number;
+    displayMessage: boolean;
     getDebugInfo(): string;
+    isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     process(): void;
 }

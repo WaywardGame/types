@@ -25,9 +25,11 @@ export default abstract class InspectionsHandler extends EventEmitter.Host<IInsp
     set(inspectType: InspectType, inspections: HashSet<Inspection<any>>): Map<InspectType, HashSet<Inspection<any>>>;
     [Symbol.iterator](): IterableIterator<[InspectType, HashSet<Inspection<any>>]>;
     types(): import("@wayward/goodstream").default<InspectType>;
+    getInspectTypes(): InspectType[];
     register(): void;
     deregister(): void;
     protected getInspections?(inspectType: InspectType): HashSet<Inspection<any>>;
+    protected createInspectionSet(...values: Array<ArrayOr<Inspection<any> | undefined>>): HashSet<Inspection<any>>;
     protected updateInspections(...inspectTypes: InspectType[]): void;
     protected updateInspectionsForType(inspectType: InspectType, inspections: HashSet<Inspection<any>>): void;
 }

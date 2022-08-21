@@ -9,10 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InspectType } from "game/inspection/IInspection";
+import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import Inspection from "game/inspection/Inspection";
 import Island from "game/island/Island";
+import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IVector2 } from "utilities/math/IVector";
 export default class IslandInspection extends Inspection<IVector2> {
     private readonly title;
@@ -21,7 +22,7 @@ export default class IslandInspection extends Inspection<IVector2> {
     get island(): Island | undefined;
     constructor(island: Island | IVector2, title?: boolean);
     getId(): string;
-    get(context: InfoProviderContext): (import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue)[];
+    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getTreasureMaps;
     private getModifiers;
     private getBiome;

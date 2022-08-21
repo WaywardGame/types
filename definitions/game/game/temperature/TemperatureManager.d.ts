@@ -37,6 +37,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     private readonly cacheCalculated;
     private readonly cacheProduced;
     constructor(island: Island);
+    addLayer(z: WorldZ): void;
     delete(): void;
     preSerializeObject(): void;
     onUnserialized(): void;
@@ -70,7 +71,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
      * Returns the temperature modifier at the given time.
      */
     getTime(time?: TimeManager): number;
-    getBiomeRange(): IRange;
+    getBiomeRange(): Readonly<IRange>;
     /**
      * Returns the temperature modifier of the given layer, at the given time.
      */

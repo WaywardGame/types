@@ -14,17 +14,19 @@ import { ActionType } from "game/entity/action/IAction";
 import Human from "game/entity/Human";
 import type NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
+import { CreationId } from "game/IGame";
 import { Quality } from "game/IObject";
-import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent } from "game/item/IItem";
-import { ItemType, ItemTypeGroup } from "game/item/IItem";
-import type { IAddToContainerOptions, IGetItemOptions, IGetItemsOptions, IRequirementInfo } from "game/item/IItemManager";
-import { CraftStatus, WeightType, ContainerReferenceSource } from "game/item/IItemManager";
+import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IRecipe } from "game/item/IItem";
+import { CraftResult, ItemType, ItemTypeGroup } from "game/item/IItem";
+import type { IAddToContainerOptions, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IRequirementInfo } from "game/item/IItemManager";
+import { ContainerReferenceSource, CraftStatus, WeightType } from "game/item/IItemManager";
 import Item from "game/item/Item";
 import type ItemRecipeRequirementChecker from "game/item/ItemRecipeRequirementChecker";
 import { ObjectManager } from "game/ObjectManager";
 import type { ITile } from "game/tile/ITerrain";
 import { TerrainType } from "game/tile/ITerrain";
 import Message from "language/dictionary/Message";
+import type TranslationImpl from "language/impl/TranslationImpl";
 import type { ListEnder } from "language/ITranslation";
 import Translation from "language/Translation";
 import type { IVector3 } from "utilities/math/IVector";
@@ -72,28 +74,35 @@ export interface IItemManagerEvents {
     craft?(human: Human, item: Item): void;
 }
 export default class ItemManager extends ObjectManager<Item, IItemManagerEvents> {
+    protected readonly creationId: CreationId;
     readonly worldContainer: IContainer;
-    private static cachedWeights;
-    private static cachedDefaultItemForGroup;
     private static cachedBestItemForTier;
+    private static cachedDefaultItemForGroup;
+    private static cachedEquippables;
     private static cachedHighestItemActionTierForAction;
     private static cachedItemGroups;
+    private static cachedItemSpawns;
     private static cachedItemsThatAreAcceptedAsOffer;
+    private static cachedItemsThatAreUsedForGrowingPlants;
     private static cachedItemsThatAreUsedInRecipes;
     private static cachedItemTypes;
     private static cachedItemTypesWithRecipes;
-    private static cachedItemSpawns;
+    private static cachedWeights;
+    private static readonly cachedGroupItems;
+    private static readonly cachedUseItemActions;
     static getItemTypes(): readonly ItemType[];
     static getItemsWithRecipes(): readonly ItemType[];
     static getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
     static getHighestItemActionTierForAction(action: ActionType): number | undefined;
     static isItemAcceptedAsOffer(item: ItemType): boolean | undefined;
     static isItemUsedInRecipe(item: ItemType): boolean | undefined;
+    static isItemUsedForGrowingPlants(item: ItemType): boolean | undefined;
     static isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
     static isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
-    static getGroupItems(itemGroup: ItemType | ItemTypeGroup, ancestorGroups?: ItemTypeGroup[]): Set<ItemType>;
+    static getGroupItems(itemGroup: ItemType | ItemTypeGroup): Set<ItemType>;
+    private static getGroupItemsWithoutCache;
     static getPlayerFromInventoryContainer(containable: IContainable): Player | undefined;
-    static getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
+    static getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: false | "definite" | "indefinite", count?: number): Translation;
     static getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     /**
      * Returns the "processed" weight of the given item.
@@ -109,6 +118,8 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     static weightTree(itemType: ItemType, random: Random | undefined, weightType?: WeightType, debug?: boolean, depth?: number): number;
     static getGroups(itemType: ItemType): ItemTypeGroup[];
     static generateLookups(): void;
+    static clearCaches(): void;
+    static getUseItemActions(): ReadonlySet<ActionType>;
     private static getDefaultWeightRange;
     load(): void;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
@@ -156,10 +167,11 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
     isItemAcceptedAsOffer(item: ItemType): boolean | undefined;
     isItemUsedInRecipe(item: ItemType): boolean | undefined;
+    isItemUsedForGrowingPlants(item: ItemType): boolean | undefined;
     isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
-    getGroupItems(itemGroup: ItemType | ItemTypeGroup, ancestorGroups?: ItemTypeGroup[]): Set<ItemType>;
-    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
+    getGroupItems(itemGroup: ItemType | ItemTypeGroup): Set<ItemType>;
+    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: false | "definite" | "indefinite", count?: number): Translation;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     getGroups(itemType: ItemType): ItemTypeGroup[];
     getPlayerFromInventoryContainer(containable: IContainable): Player | undefined;
@@ -173,8 +185,24 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     spawn(terrainType: TerrainType, x: number, y: number, z: number): void;
     getTileContainer(x: number, y: number, z: number, tile?: ITile): IContainer;
     getRandomQuality(bonusQuality?: number, relicChance?: boolean): Quality;
-    hasAdditionalRequirements(actionOrHuman: IActionHandlerApi<Player | NPC> | Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): IRequirementInfo;
-    craft(action: IActionHandlerApi<Player | NPC>, itemType: ItemType, itemsToRequire: Item[], itemsToConsume: Item[], baseItem?: Item): CraftStatus;
+    hasAdditionalRequirements(actionOrHuman: IActionHandlerApi<Human> | Human, craftType: ItemType, actionNotUsableMessage?: Message, isRepairOrDisassembly?: boolean): IRequirementInfo;
+    /**
+     * Gets the max quality bonus that can be applied to an item (using its recipe).
+     * @param itemType The item to check for.
+     * @returns A number for its max quality value.
+     */
+    getMaxQualityBonus(itemType: ItemType): number;
+    craft(action: IActionHandlerApi<Human>, itemType: ItemType, itemsToRequire: Item[], itemsToConsume: Item[], baseItem: Item | undefined, requirementInfo: IRequirementInfo): CraftStatus;
+    /**
+     * Get the translation (either message or UI based) for the efficacy of a given recipe.
+     * @param human The player/human to check for.
+     * @param qualityBonus The current quality bonus (via computeCraftQualityBonus).
+     * @param maxQualityBonus The maximum quality bonus (via getMaxQualityBonus).
+     * @param recipe The item recipe to check.
+     * @param ui If set to true, output the translation as a UiTranslation instead of Message.
+     * @returns A traslantion for the efficacy or undefined if not enough skill
+     */
+    getEfficacyTranslation(human: Human, qualityBonus: number, maxQualityBonus: number, recipe: IRecipe, ui?: boolean): TranslationImpl | undefined;
     updateItems(pids: Set<number>, options: {
         skipPlayerItems?: boolean;
         skipUiUpdates?: boolean;
@@ -186,9 +214,13 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     countItemsInContainer(containers: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: Item): number;
     countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item): number;
     /**
+     * Get the best tier items sorted by how good they are
+     */
+    getBestSafeItems(container: IContainer, options?: Partial<IGetBestItemsOptions>): Item[];
+    /**
      * Get the best tier item
      */
-    getBestSafeItemInContainerByUse(container: IContainer, action: ActionType, options?: Partial<IGetItemsOptions>, consumable?: boolean): Item | undefined;
+    getBestSafeItem(container: IContainer, options?: Partial<IGetBestItemsOptions>): Item | undefined;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, options?: Partial<IGetItemOptions>): Item | undefined;
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, options?: Partial<IGetItemOptions>): Item | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, options?: Partial<IGetItemOptions>): Item | undefined;
@@ -198,6 +230,9 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, options?: Partial<IGetItemsOptions>): Item[];
     getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, options?: Partial<IGetItemOptions>): Item | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, options?: Partial<IGetItemOptions>): boolean;
+    /**
+     * @returns whether the given containable is, or is contained within, the given container
+     */
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     getAdjacentContainers(humanOrPosition: Human | IVector3, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
     isContainableInAdjacentContainer(human: Human, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
@@ -211,23 +246,23 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     capWeightOfItems(createdItems: Item[], itemWeight: number): void;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup): Translation;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number): Translation;
-    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, article: boolean): Translation;
-    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number, article: boolean): Translation;
-    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count?: number, article?: boolean): Translation;
-    getItemTypeListTranslation(itemTypes: Array<ItemType | ItemTypeGroup>): import("../../language/impl/TranslationImpl").default;
+    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, article: false | "definite" | "indefinite"): Translation;
+    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number, article: false | "definite" | "indefinite"): Translation;
+    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count?: number, article?: false | "definite" | "indefinite"): Translation;
+    getItemTypeListTranslation(itemTypes: Array<ItemType | ItemTypeGroup>): TranslationImpl;
     /**
      * Maps each item in the given array to its name translation.
      * @param article Whether the item name translation should include an article
      * @param formatter A formatting translation that should be used for each item translation
      */
-    getItemTranslations(items: Item[], article?: boolean, formatter?: Translation): import("../../language/impl/TranslationImpl").default[];
+    getItemTranslations(items: Item[], article?: false | "definite" | "indefinite", formatter?: Translation): TranslationImpl[];
     /**
      * Formats a list translation out of an array of items.
      * @param listEnder The way the list should end (ie `and`, `or`, etc)
      */
-    getItemListTranslation(items: Item[], listEnder?: ListEnder | false): import("../../language/impl/TranslationImpl").default;
+    getItemListTranslation(items: Item[], listEnder?: ListEnder | false): TranslationImpl;
     saveTileReferences(): void;
-    checkMilestones(player: Player, item: Item): void;
+    checkMilestones(human: Human, item: Item): void;
     getDefaultDurability(human: Human | undefined, weight: number, itemType: ItemType, getMax?: boolean): number;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
     /**
@@ -265,6 +300,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private removeFromContainerInternal;
     private updateUiOnItemRemove;
     private getCraftTierBonus;
-    private computeCraftQualityBonus;
-    private isCraftSuccessful;
+    computeCraftQualityBonus(itemType: ItemType, itemsToRequire: Item[], itemsToConsume: Item[], doodadsUsed: IDoodadsUsed[] | undefined): number;
+    getCraftChance(human: Human, recipe: IRecipe, qualityBonus: number, returnQuality?: boolean, alwaysReturn?: boolean): number;
+    isCraftSuccessful(human: Human, recipe: IRecipe, qualityBonus: number): CraftResult;
 }

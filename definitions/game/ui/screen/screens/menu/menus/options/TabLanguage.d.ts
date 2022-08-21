@@ -17,6 +17,7 @@ export default class TabLanguage extends Tab implements IRefreshable {
     private addRefreshable;
     private onLanguageSelect;
     private getLanguageDropdownData;
+    private onFontStyleSelect;
+    private getFontStyleDropdownData;
     private onSkipArticle;
-    private onPixelFont;
 }

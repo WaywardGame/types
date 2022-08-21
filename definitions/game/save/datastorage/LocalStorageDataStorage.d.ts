@@ -18,6 +18,7 @@ export default class LocalStorageDataStorage implements IDataStorage {
     saveToSlot(slot: number, saveObject: ISaveObject, specificKeys?: Set<string>): number;
     saveToSlotSynchronous(slot: number, saveObject: ISaveObject, specificKeys?: Set<string>): number;
     loadFromSlot(slot: number, specificKeys?: Set<string>): ISaveObject;
+    loadFromSlots(slots: number[], specificKeys?: Set<string>): ISaveObject[];
     deleteSlot(slot: number): void;
     deleteAllSlots(): void;
     deleteAllData(): void;

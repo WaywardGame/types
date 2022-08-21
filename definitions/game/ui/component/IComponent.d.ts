@@ -34,6 +34,11 @@ export interface IComponentEvents {
     focus(): any;
     blur(): any;
     removeContextMenu(): any;
+    /**
+     * Fired when the element is first observed.
+     * observe() must be called to setup this event.
+     */
+    observed(): any;
 }
 export declare type AppendStrategy = "append" | "prepend" | {
     after: Component | string;
@@ -83,37 +88,24 @@ export declare type TranslationData = IBaseTranslationData | (Partial<IBaseTrans
 export declare type TextOrTranslationData = string | UiTranslation | TranslationData;
 export declare enum TooltipLocation {
     AboveLeft = 0,
-    AboveRight = 1,
-    TopLeft = 2,
-    TopRight = 3,
-    CenterLeft = 4,
-    CenterRight = 5,
-    BottomLeft = 6,
-    BottomRight = 7,
-    BeneathLeft = 8,
-    BeneathRight = 9,
-    Mouse = 10
+    AboveMiddle = 1,
+    AboveRight = 2,
+    TopLeft = 3,
+    TopRight = 4,
+    CenterLeft = 5,
+    CenterRight = 6,
+    BottomLeft = 7,
+    BottomRight = 8,
+    BeneathLeft = 9,
+    BeneathMiddle = 10,
+    BeneathRight = 11,
+    Mouse = 12
 }
 export interface IDisableable {
     disabled: boolean;
     setDisabled(disabled: boolean): this;
 }
 export declare type TranslationGenerator<ENUM extends number = UiTranslation, A extends any[] = []> = Translation | ENUM | ISerializedTranslation | ((...args: A) => Iterable<IStringSection> | Translation | ENUM | ISerializedTranslation | undefined);
-export declare type HighlightSelector = [HighlightType, GetterOfOr<string | number>];
-export interface IHighlight {
-    selectors: HighlightSelector[];
-    iterations?: number;
-    class?: string;
-}
-export declare module IHighlight {
-    function itemById(id: number): HighlightSelector;
-}
-export declare enum HighlightType {
-    Stat = 0,
-    MenuBarButton = 1,
-    Selector = 2,
-    Skill = 3
-}
 export interface IBox {
     left: number;
     top: number;

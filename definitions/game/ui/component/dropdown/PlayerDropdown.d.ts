@@ -11,7 +11,7 @@
 import type Button from "ui/component/Button";
 import Dropdown from "ui/component/Dropdown";
 export default class PlayerDropdown extends Dropdown<string> {
-    constructor(defaultOption: string);
+    constructor();
     get selectedPlayer(): import("../../../game/entity/player/Player").default | undefined;
     protected getOptions(): [string, (option: Button) => Button][];
 }

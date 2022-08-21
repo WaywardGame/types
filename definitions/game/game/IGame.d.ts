@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { BiomeTypes } from "game/biome/IBiome";
 import type Doodad from "game/doodad/Doodad";
 import type Corpse from "game/entity/creature/corpse/Corpse";
 import type Creature from "game/entity/creature/Creature";
@@ -25,7 +26,7 @@ import type TimeManager from "game/time/TimeManager";
 import type { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
 import type { IReplayLogEntry } from "replay/IReplayLogEntry";
 import type { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
-import type { IVector3 } from "utilities/math/IVector";
+import type { IVector2, IVector3 } from "utilities/math/IVector";
 import type { IRange } from "utilities/math/Range";
 export interface IGameEvents {
     /**
@@ -55,10 +56,28 @@ export interface IGameEvents {
      * Called when all game state was reset
      */
     reset(): any;
+    /**
+     * Called when getting the biome type distribution for random biome selection
+     */
+    getBiomeTypeChances(): Array<[number, BiomeTypes]> | undefined;
+    /**
+     * Called when selecting the biome type for and island
+     * @param positon Island position
+     * @param biomeType Biome type
+     */
+    getBiomeType(positon: IVector2, biomeType: BiomeTypes): BiomeTypes | undefined;
     pause(): any;
     resume(): any;
     tickStart(tickFlag: TickFlag, ticks: number): any;
     tickEnd(tickFlag: TickFlag, ticks: number): any;
+    /**
+     * Called when the playing entity count changes
+     */
+    playingEntityChange(): any;
+    /**
+     * Called when the turn mode is set
+     */
+    setTurnMode(turnMode: TurnMode): any;
     glLostContext(): any;
     glSetup(restored: boolean): any;
     glInitialized(): any;
@@ -77,7 +96,7 @@ export declare enum TickFlag {
     Creatures = 32,
     NPCs = 64,
     RandomEvents = 128,
-    PlayerStatuses = 256,
+    StatusEffects = 256,
     FlowFields = 512,
     PlayerNotes = 1024,
     Items = 2048,
@@ -203,7 +222,8 @@ export declare enum CreationId {
     Corpse = 2,
     NPC = 3,
     Item = 4,
-    TileEvent = 5
+    TileEvent = 5,
+    Player = 6
 }
 export declare enum PauseSource {
     /**
@@ -248,6 +268,10 @@ export interface IDecayTemperatureRange {
 export interface ISynchronizeState {
     id: string;
     state: Map<IslandId, number[]>;
+}
+export interface IMovementTime {
+    start: number;
+    end: number;
 }
 export declare const DEFAULT_MAP_SIZE = 512;
 export declare const DEFAULT_MAP_SIZE_SQUARED: number;

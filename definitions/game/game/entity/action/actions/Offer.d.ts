@@ -9,6 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../player/Player").default, void, [import("../../../item/Item").default]>;
+import type Creature from "game/entity/creature/Creature";
+export interface IOfferCanUse extends IActionUsable {
+    creature: Creature;
+}
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, IOfferCanUse, [import("../../../item/Item").default]>;
 export default _default;

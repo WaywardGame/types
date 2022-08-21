@@ -12,7 +12,9 @@ import type { IMatchmakingInfo, MatchmakingMessageData } from "multiplayer/match
 import type { IConnection } from "multiplayer/networking/IConnection";
 import { ConnectionState } from "multiplayer/networking/IConnection";
 import type { IPacket } from "multiplayer/packets/IPacket";
+import Log from "utilities/Log";
 export declare abstract class Connection implements IConnection {
+    protected readonly log: Log;
     abstract name: string;
     playerIdentifier: string | undefined;
     playerSteamId: string | undefined;
@@ -37,13 +39,17 @@ export declare abstract class Connection implements IConnection {
     private _queuedData;
     private _timeoutId;
     private _keepAliveTimeoutId;
-    constructor(matchmakingInfo: IMatchmakingInfo | undefined);
+    constructor(matchmakingInfo: IMatchmakingInfo | undefined, log: Log);
     close(closeImmediately: boolean): void;
     private completeClosing;
     addConnectionTimeout(): void;
     addKeepAliveTimeout(): void;
     addTimeout(milliseconds: number, callback: () => void): void;
     clearTimeout(): boolean;
+    /**
+     * Sends a ping packet to the server every so often.
+     * The server should send back a pong packet.
+     */
     sendKeepAlive(): void;
     getState(): ConnectionState;
     setState(state: ConnectionState): void;
@@ -77,7 +83,7 @@ export declare abstract class Connection implements IConnection {
     abstract isConnected(): boolean;
     protected abstract onClosing(): void;
     protected abstract onClosed(): void;
-    abstract send(data: ArrayBuffer | Uint8Array): boolean;
+    abstract send(data: Uint8Array, byteOffset: number, length?: number): boolean;
     abstract processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;
     private _clearKeepAliveInterval;
 }

@@ -9,24 +9,35 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import TranslationImpl from "language/impl/TranslationImpl";
-import Bindable from "ui/input/Bindable";
+import type Bindable from "ui/input/Bindable";
 import { IInput } from "ui/input/IInput";
 import { Macro } from "ui/input/Macros";
 export declare type Binding = IInput | Macro;
 export declare module Binding {
     function is(value: unknown): value is Binding;
-    function hash(binding: Binding): string;
-    function translate(binding: Binding): TranslationImpl;
+    function hash(binding: Binding, resolveModifiers?: boolean): string;
+    function translate(binding: Binding, simplifyModifierCatalysts?: boolean): TranslationImpl;
 }
 declare module Bindings {
-    function get(bindable: Bindable): Binding[];
+    function get(bindable?: Bindable): Binding[];
+    function getPrecision(bindable?: Bindable): number;
     function set(bindable: Bindable, ...bindings: Binding[]): void;
     function add(bindable: Bindable, ...bindings: Binding[]): void;
     function reset(bindable: Bindable): void;
     function clear(bindable: Bindable): void;
     function resetAll(): void;
-    function translate(bindable: Bindable): TranslationImpl;
+    function translate(bindable?: Bindable, noBindings?: TranslationImpl): TranslationImpl;
+    function translate(bindable?: Bindable, noBindings?: TranslationImpl | null): TranslationImpl | undefined;
     function markCacheInvalid(): void;
     function getBoundTo(binding: Binding): Set<Bindable>;
+    type IBindableMatch = {
+        matches: Set<Bindable>;
+        mayMatch: Set<Bindable>;
+    } | {
+        matches: Set<Bindable>;
+        mayMatch: Set<Bindable>;
+    } | undefined;
+    function match(binding: Binding, ...bindables: Bindable[]): IBindableMatch;
+    function mergeMatches(...matches: IBindableMatch[]): IBindableMatch;
 }
 export default Bindings;

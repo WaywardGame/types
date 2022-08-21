@@ -11,7 +11,7 @@
 import type { BiomeTypes } from "game/biome/IBiome";
 import type { MapGenDoodadTrees } from "game/doodad/IDoodad";
 import type Island from "game/island/Island";
-import type { ITemplateOptions } from "game/mapgen/MapGenHelpers";
+import type MapGenHelpers from "game/mapgen/MapGenHelpers";
 import type { Load } from "game/meta/Loading";
 import type { TileTemplateType } from "game/tile/ITerrain";
 import type { IVector3 } from "utilities/math/IVector";
@@ -42,6 +42,7 @@ export interface IBiomeMapGen {
 }
 export interface IMapGenGenerateInput {
     mapSize: number;
+    tileTypeDoodadOffset: number;
     zMin: number;
     zMax: number;
     zNormal: number;
@@ -52,21 +53,25 @@ export interface IMapGenGenerateInput {
     getBiomeHeightMap(x: number, y: number): number;
     getRandomQuality(tileType: number): number;
     setTileGen(x: number, y: number, z: number, value: number): void;
-    setTree(type: MapGenDoodadTrees, override?: number): number;
+    setDoodad(type: MapGenDoodadTrees, override?: number): number;
     setTileVein(x: number, y: number, z: number, value: number, terrainType: number): void;
     setCaveOres(dValue: number, tileData: number, x: number, y: number, z: number): void;
 }
 export interface IMapGenPostProcessInput {
     island: Island;
+    tileTypeDoodadOffset: number;
     tileGenArray: Uint16Array;
     tileGenQualityArray: Uint16Array;
 }
 export interface IMapGenGenerateOutput {
     spawnCoords: IVector3;
     caveSpawns: CaveSpawns;
+    waterSpawns: WaterSpawns;
     templateSpawns: TemplateSpawns;
 }
 export declare type CaveSpawns = Array<[number, number]>;
-export declare type TemplateSpawn = [TileTemplateType, number, number, number, ITemplateOptions?];
+export declare type WaterSpawns = Array<[number, number, number]>;
+export declare type TemplateSpawn = [TileTemplateType, number, number, number, MapGenHelpers.ITemplateOptions?];
 export declare type TemplateSpawns = TemplateSpawn[];
+export declare const tileTypeDoodadOffset = 256;
 export default IMapGen;

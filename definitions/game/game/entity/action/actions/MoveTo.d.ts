@@ -9,8 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionApi } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-import type Player from "game/entity/player/Player";
+import type Human from "game/entity/Human";
 import { Direction } from "utilities/math/Direction";
-declare const _default: Action<[ActionArgument.Vector2, [ActionArgument.Direction, ActionArgument.Undefined]], Player, void, [import("../../../../utilities/math/IVector").IVector2, (Direction.None | Direction.East | Direction.North | Direction.West | Direction.South | undefined)?]>;
+declare const _default: Action<[ActionArgument.Vector2, [ActionArgument.Direction, ActionArgument.Undefined]], Human, void, {
+    usable: true;
+}, [import("../../../../utilities/math/IVector").IVector2, (Direction.None | Direction.East | Direction.North | Direction.West | Direction.South | undefined)?]>;
 export default _default;
+export declare function blockMove(action: IActionApi<Human>): void;

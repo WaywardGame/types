@@ -9,22 +9,42 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { PathType } from "resource/IResourceLoader";
+import type { ResourceOptionsMap } from "resource/ResourcePath";
 import type Component from "ui/component/Component";
-export default class ImagePath {
+declare type Path = [PathType, number] | [string];
+export interface ISerializedImagePath {
+    path: Path;
+    args?: ResourceOptionsMap[PathType];
+    extension?: string;
+}
+declare module "ui/component/IComponent" {
+    interface IComponentEvents {
+        unapplyImagePathHandler(component: Component, variableName: string): any;
+    }
+}
+export default class ImagePath<PATHTYPE extends PathType = PathType> {
     private static readonly registrations;
     static cachebust(): void;
-    static of(pathType: PathType, id: number): ImagePath;
+    static of<PATHTYPE extends PathType>(pathType: PATHTYPE, id: number): ImagePath<PATHTYPE>;
     static of(path: string): ImagePath;
+    static deserialize(serialized: ImagePath | ISerializedImagePath): ImagePath<PathType>;
+    static applyPath(component: Component, path: string | ImagePath | ISerializedImagePath | undefined, variableName: string): void;
     private readonly path;
     private extension;
     private customPath?;
     private readonly applications;
+    private args?;
     private constructor();
+    serialize(): ISerializedImagePath;
     setExtension(extension?: string): this;
-    setCustomPath(customPath?: GetterOfOr<string | undefined>): this;
+    setArgs(args?: ResourceOptionsMap[PATHTYPE]): this;
+    setCustomPath(customPath?: GetterOfOr<string | ImagePath | undefined>): this;
     refresh(): void;
     get(isVariable?: boolean): string;
+    private deregistered;
     apply(component: Component, variableName: string): this;
-    private applyInternal;
+    private unapply;
+    private updateVariable;
     private getCustomPath;
 }
+export {};

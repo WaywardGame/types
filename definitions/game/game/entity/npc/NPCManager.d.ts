@@ -9,9 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
-import EntityManager, { IEntityCanCreateOptions } from "game/entity/EntityManager";
+import type { IEntityCanCreateOptions } from "game/entity/EntityManager";
+import EntityManager from "game/entity/EntityManager";
 import type { NPCType } from "game/entity/npc/INPCs";
-import type NPC from "game/entity/npc/NPC";
+import NPC from "game/entity/npc/NPC";
+import { CreationId } from "game/IGame";
 export interface INPCManagerEvents extends Events<EntityManager<NPC>> {
     /**
      * Called when a npc is about to be spawned
@@ -24,9 +26,13 @@ export interface INPCManagerEvents extends Events<EntityManager<NPC>> {
     canSpawn(type: NPCType, x: number, y: number, z: number): boolean | undefined;
 }
 export default class NPCManager extends EntityManager<NPC> {
+    protected readonly creationId: CreationId;
     readonly event: IEventEmitter<this, INPCManagerEvents>;
+    readonly playerLikeNpcs: NPC[];
     load(): void;
     spawn(npcType: NPCType, x: number, y: number, z: number, options?: IEntityCanCreateOptions): NPC | undefined;
     remove(npc: NPC): void;
+    addPlayerLike(npc: NPC): void;
+    removePlayerLike(npc: NPC): void;
     updateAll(): void;
 }
