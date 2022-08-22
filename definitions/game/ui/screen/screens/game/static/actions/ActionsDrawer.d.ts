@@ -10,7 +10,9 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import Button from "ui/component/Button";
+import { CheckButton } from "ui/component/CheckButton";
 import Component from "ui/component/Component";
+import HorizontalLine from "ui/component/HorizontalLine";
 import type { IRefreshable } from "ui/component/Refreshable";
 import Text, { Heading } from "ui/component/Text";
 import { IActionBarSlotData } from "ui/screen/screens/game/static/actions/IActionBar";
@@ -52,6 +54,8 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     readonly hintToggle: Text;
     readonly editBindingsButton: Button;
     readonly byItemTypeButton: Button;
+    readonly useOnMoveCheckButton: CheckButton;
+    readonly hr: HorizontalLine;
     readonly removeSlotButton: Button;
     get configuringNumber(): number | undefined;
     get configuringSlotData(): number | undefined;
@@ -62,6 +66,7 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     protected onHide(): void;
     private editBindings;
     private setByItemType;
+    private setUseOnMove;
     private removeSlot;
     private generateActionLists;
     private appendActionButton;

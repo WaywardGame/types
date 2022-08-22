@@ -139,11 +139,17 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      */
     getMaxWeight(maxWeight: number): number;
     /**
-     * Called when input is being processed
+     * Called when input is being processed on the server
      * @param player The player object
      * @returns False to prevent input processing or undefined to use the default logic
      */
-    processInput(): boolean | undefined;
+    processInput(): false | undefined;
+    /**
+     * Called when movement is attempted on the server
+     * @param player The player object
+     * @returns False to prevent movement or undefined to use the default logic
+     */
+    canMove(): false | undefined;
     /**
      * Called when getting the players movement intent
      * @returns The movement intent of the player or undefined to use the default logic

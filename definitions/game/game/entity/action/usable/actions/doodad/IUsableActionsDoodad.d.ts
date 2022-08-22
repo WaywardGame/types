@@ -9,15 +9,16 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "game/doodad/Doodad";
-declare namespace IUiActionsDoodad {
-    function getFacing(filter?: (doodad: Doodad) => any): Doodad | undefined;
-    function getUnder(filter?: (doodad: Doodad) => any): Doodad | undefined;
-    function validate(doodad: Doodad | undefined): doodad is Doodad;
+import type Player from "game/entity/player/Player";
+declare namespace IUsableActionsDoodad {
+    function getFacing(player: Player, filter?: (doodad: Doodad) => any): Doodad | undefined;
+    function getUnder(player: Player, filter?: (doodad: Doodad) => any): Doodad | undefined;
+    function validate(player: Player, doodad: Doodad | undefined): doodad is Doodad;
     const requireFacing: (filter?: ((doodad: Doodad) => any) | undefined) => {
-        find: () => Doodad | undefined;
+        find: (player: Player) => Doodad | undefined;
     };
     const requireFacingOrUnder: (filter?: ((doodad: Doodad) => any) | undefined) => {
-        find: () => Doodad | undefined;
+        find: (player: Player) => Doodad | undefined;
     };
 }
-export default IUiActionsDoodad;
+export default IUsableActionsDoodad;

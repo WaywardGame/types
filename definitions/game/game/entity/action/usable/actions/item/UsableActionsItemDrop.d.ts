@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { UiActionGenerator } from "ui/screen/screens/game/static/actions/UiActionRegistrar";
-declare const _default: UiActionGenerator<[]>;
-export default _default;
+import { UsableActionGenerator } from "game/entity/action/usable/UsableActionRegistrar";
+declare const UsableActionsItemDrop: UsableActionGenerator<[isDropMenu?: true | undefined]>;
+export default UsableActionsItemDrop;
+export declare const UsableActionsItemDropMenu: UsableActionGenerator<[]>;

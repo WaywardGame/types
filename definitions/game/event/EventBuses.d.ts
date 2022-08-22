@@ -37,6 +37,8 @@ import type Multiplayer from "multiplayer/Multiplayer";
 import type WorldRenderer from "renderer/world/WorldRenderer";
 import type SaveManager from "save/SaveManager";
 import type Steamworks from "steamworks/Steamworks";
+import type ActionBar from "ui/screen/screens/game/static/ActionBar";
+import type MovementHandler from "ui/screen/screens/game/util/movement/MovementHandler";
 export declare enum EventBus {
     Actions = 0,
     Audio = 1,
@@ -69,7 +71,9 @@ export declare enum EventBus {
     TileEventManager = 28,
     TileEvents = 29,
     Ui = 30,
-    WorldRenderer = 31
+    UiActionBar = 31,
+    UiMovementHandler = 32,
+    WorldRenderer = 33
 }
 declare const eventBuses: {
     [EventBus.Actions](): typeof ActionExecutor;
@@ -103,6 +107,8 @@ declare const eventBuses: {
     [EventBus.TileEventManager](): typeof TileEventManager;
     [EventBus.TileEvents](): typeof TileEvent;
     [EventBus.Ui](): typeof ui;
+    [EventBus.UiActionBar](): typeof ActionBar;
+    [EventBus.UiMovementHandler](): typeof MovementHandler;
     [EventBus.WorldRenderer](): typeof WorldRenderer;
 };
 export default eventBuses;

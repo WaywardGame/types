@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "game/entity/action/IAction";
+import type { IUsableActionPossibleUsing } from "game/entity/action/usable/UsableAction";
 import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
@@ -17,14 +18,13 @@ import { ReferenceType } from "game/reference/IReferenceManager";
 import type { EnumReferenceResolved } from "game/reference/ReferenceManager";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { ActionSlot } from "ui/screen/screens/game/static/ActionBar";
-import type { IUiActionPossibleUsing } from "ui/screen/screens/game/static/actions/UiAction";
 export default class ActionInspection extends Inspection<ActionType | string | undefined> {
     private readonly slot?;
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
     private readonly item?;
-    using?: IUiActionPossibleUsing;
+    using?: IUsableActionPossibleUsing;
     constructor(value?: string | EnumReferenceResolved<ReferenceType.Action>, slot?: ActionSlot | undefined);
-    setUsing(using?: IUiActionPossibleUsing): void;
+    setUsing(using?: IUsableActionPossibleUsing): void;
     getId(): string;
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getTranslation;

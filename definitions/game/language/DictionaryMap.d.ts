@@ -13,6 +13,7 @@ import { BiomeType } from "game/biome/IBiome";
 import { DoodadType, DoodadTypeGroup, GrowingStage } from "game/doodad/IDoodad";
 import { MapQuality } from "game/entity/action/actions/map/MapQuality";
 import { ActionType } from "game/entity/action/IAction";
+import { UsableActionType } from "game/entity/action/usable/UsableActionType";
 import { CreatureType } from "game/entity/creature/ICreature";
 import { DamageType, StatusType } from "game/entity/IEntity";
 import { EquipType, SkillType } from "game/entity/IHuman";
@@ -70,7 +71,6 @@ import { Quadrant, QuadrantComponentContextMenuAction } from "ui/screen/screens/
 import { DialogId } from "ui/screen/screens/game/Dialogs";
 import { MessageTimestamp, QuadrantComponentId } from "ui/screen/screens/game/IGameScreenApi";
 import { MessageFilterDefault } from "ui/screen/screens/game/IMessages";
-import { UiActionType } from "ui/screen/screens/game/static/actions/UiActionType";
 import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 import { CharacterSort } from "ui/screen/screens/menu/menus/character/Character";
 import { HelpArticle } from "ui/screen/screens/menu/menus/help/HelpArticleDescriptions";
@@ -174,7 +174,7 @@ declare const dictionaryMap: {
     88: typeof TerrainType;
     89: typeof TileEventType;
     90: typeof UiTranslation;
-    91: typeof UiActionType;
+    91: typeof UsableActionType;
     92: typeof Quadrant;
     93: typeof UnableToJoinReason;
     94: typeof UnlockedRecipesStrategy;
@@ -274,7 +274,7 @@ export declare const strictDictionaries: {
     88: typeof TerrainType;
     89: typeof TileEventType;
     90: typeof UiTranslation;
-    91: typeof UiActionType;
+    91: typeof UsableActionType;
     92: typeof Quadrant;
     93: typeof UnableToJoinReason;
     94: typeof UnlockedRecipesStrategy;

@@ -10,6 +10,7 @@
  */
 export default class ScaleManager {
     private scale;
+    get scaleNativeFactor(): number;
     /**
      * Returns the minimum scale we allow, 0.5.
      */

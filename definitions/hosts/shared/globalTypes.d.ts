@@ -33,5 +33,6 @@ declare global {
             isMaximized: boolean;
             electron: IElectron;
         } | undefined;
+        getScaleFactor(): number;
     }
 }

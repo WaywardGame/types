@@ -24,6 +24,8 @@ import type { ISortableEvent } from "ui/old/functional/IFunctionalSortable";
 import type { IContainerSortInfo, IContextMenuAction, IDialogInfo } from "ui/old/IOldUi";
 import { DialogId, SortType } from "ui/old/IOldUi";
 import BaseScreen from "ui/old/screens/BaseScreen";
+import type ActionBar from "ui/screen/screens/game/static/ActionBar";
+import type { ActionSlot } from "ui/screen/screens/game/static/ActionBar";
 import { Direction } from "utilities/math/Direction";
 import type Vector2 from "utilities/math/Vector2";
 export declare enum TextElementId {
@@ -186,6 +188,7 @@ export default class InGameScreen extends BaseScreen {
     createCraftItemElements(containerSortInfo: IContainerSortInfo): void;
     updateItem(item: Item, updateChildren?: boolean): void;
     onGlobalMouseMove(mouseInfo: GlobalMouseInfo, _: Vector2): void;
+    onActionBarSlotUpdate(actionBar: ActionBar, actionSlot: ActionSlot, item?: Item, oldItem?: Item): void;
     private tooltipTarget?;
     onGlobalMouseUpdateTarget(mouse: GlobalMouseInfo, target?: HTMLElement): void;
     onMove(): void;

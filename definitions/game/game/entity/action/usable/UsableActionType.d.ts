@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-export declare enum UiActionType {
+export declare enum UsableActionType {
     Use = 1000000,
     QuickSlotRemove = 1000001,
     QuickSlotAdd = 1000002,
@@ -58,7 +58,7 @@ export declare enum UiActionType {
     EquipMainHand = 1000046,
     EquipOffHand = 1000047
 }
-export declare enum UiActionTypePlaceholder {
+export declare enum UsableActionTypePlaceholder {
     TradeItem = 2000000,
     MoveAllToInventory = 2000001,
     MoveAllOfSameQualityToInventory = 2000002

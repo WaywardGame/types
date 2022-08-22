@@ -10,6 +10,7 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { IActionApi } from "game/entity/action/IAction";
+import type { IUsableActionRequirements, ReturnableUsableActionUsability } from "game/entity/action/usable/UsableAction";
 import type Player from "game/entity/player/Player";
 import type Item from "game/item/Item";
 import Button from "ui/component/Button";
@@ -25,7 +26,6 @@ import QuadrantComponent from "ui/screen/screens/game/component/QuadrantComponen
 import ActionsConfigurationDrawer from "ui/screen/screens/game/static/actions/ActionsDrawer";
 import ActionSlotTooltipHandler from "ui/screen/screens/game/static/actions/ActionSlotTooltip";
 import { IActionBarSlotData } from "ui/screen/screens/game/static/actions/IActionBar";
-import type { IUiActionRequirements, ReturnableUiActionUsability } from "ui/screen/screens/game/static/actions/UiAction";
 export declare const MAX_SLOTS = 50;
 export declare enum ActionBarClasses {
     Main = "game-action-bar",
@@ -42,11 +42,13 @@ export declare enum ActionBarClasses {
     SlotConfiguring = "game-action-slot-configuring",
     SlotDisabled = "game-action-slot-disabled",
     SlotAddButton = "game-action-slot-add-button",
-    SlotAddButtonIcon = "game-action-slot-add-button-icon"
+    SlotAddButtonIcon = "game-action-slot-add-button-icon",
+    SlotUseOnMove = "game-action-slot-use-on-move"
 }
 export interface IActionBarEvents extends Events<QuadrantComponent> {
     configure(number: number): any;
     endConfiguration(): any;
+    slotUpdate(slot: ActionSlot, item?: Item, oldItem?: Item): any;
 }
 export default class ActionBar extends QuadrantComponent {
     readonly event: IEventEmitter<this, IActionBarEvents>;
@@ -64,7 +66,9 @@ export default class ActionBar extends QuadrantComponent {
     addSlot(): this;
     removeSlot(slot?: number): this;
     generateSlots(): this;
+    getSlottedIn(item: Item): number[];
     private onMoveSlot;
+    private onSlotUpdate;
     configure(number: number): void;
     protected onResize(): void;
     endConfiguration(): void;
@@ -85,7 +89,7 @@ declare class ActionSlotSlottedContainer extends ItemComponent {
     protected onEnter(reason: "mouse" | "focus"): void;
 }
 export interface IActionSlotEvents extends Events<Button>, IItemSlotEvents {
-    update(): any;
+    update(item?: Item, oldItem?: Item): any;
 }
 export declare class ActionSlot extends Button implements IRefreshable {
     readonly number: number;
@@ -94,8 +98,9 @@ export declare class ActionSlot extends Button implements IRefreshable {
     private get actionBar();
     readonly label: Text;
     readonly slotted: ActionSlotSlottedContainer;
+    readonly useOnMoveIndicator: Component<HTMLElement>;
     private lastItem?;
-    usability: ReturnableUiActionUsability;
+    usability: ReturnableUsableActionUsability;
     constructor(number: number, slotData: IActionBarSlotData);
     refresh(): this;
     private isUsable;
@@ -108,11 +113,11 @@ export declare class ActionSlot extends Button implements IRefreshable {
     protected playSound(): void;
     private lastUsableResult?;
     private lastUseAttempt;
-    onActivate(arg?: IBindHandlerApi): boolean;
+    onActivate(nonClick?: IBindHandlerApi | true, silent?: true): boolean;
     protected onGetOrRemoveItemInInventory(player: Player, item: Item): void;
     onToggle(api: IBindHandlerApi): boolean;
     protected onLeave(reason: "mouse" | "focus"): void;
     private getTooltipLocation;
-    getAction(): import("ui/screen/screens/game/static/actions/UiAction").default<IUiActionRequirements, import("ui/screen/screens/game/static/actions/UiAction").IUiActionDefinition<IUiActionRequirements>> | undefined;
+    getAction(): import("game/entity/action/usable/UsableAction").default<IUsableActionRequirements, import("game/entity/action/usable/UsableAction").IUsableActionDefinition<IUsableActionRequirements>> | undefined;
 }
 export {};

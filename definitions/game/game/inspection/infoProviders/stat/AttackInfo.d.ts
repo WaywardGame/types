@@ -15,7 +15,7 @@ export default class AttackInfo extends InfoProvider {
     private readonly human?;
     constructor(human?: Human | undefined);
     getClass(): string[];
-    get(): (import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue)[];
+    get(): (LabelledValue | import("game/inspection/InfoProvider").SimpleInfoProvider)[];
     private getTactics;
     private getMainHand;
     private getOffHand;

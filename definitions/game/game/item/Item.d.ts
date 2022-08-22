@@ -59,6 +59,12 @@ export interface IItemEvents {
      */
     equip?(human: Human, slot: EquipType): void;
     /**
+     * Called when the human unequip an item from a slot
+     * @param human The human object
+     * @param slot The slot
+     */
+    unequip?(human: Human, slot: EquipType): void;
+    /**
      * Called when an item is damaged
      * @param modifier The damage modifier
      * @returns The amount of damage the item shouldd take or undefined to use the default logic

@@ -100,7 +100,7 @@ declare enum Dictionary {
     Terrain = 88,
     TileEvent = 89,
     Ui = 90,
-    UiActionType = 91,
+    UsableActionType = 91,
     UiQuadrant = 92,
     UnableToJoinReason = 93,
     UnlockedRecipesStrategy = 94,

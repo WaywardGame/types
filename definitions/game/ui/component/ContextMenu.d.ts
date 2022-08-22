@@ -66,6 +66,7 @@ declare class ContextMenu<O extends number | string | symbol = number | string |
     setTitle(initializer?: (title: Heading) => any): this;
     setPosition(): this;
     setPosition(x: number, y: number, parentFacingLeft?: true): this;
+    private hiding;
     hideAndRemove(): Promise<void>;
     private getDescription;
     protected onAppend(): void;

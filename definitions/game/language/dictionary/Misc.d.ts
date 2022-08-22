@@ -54,7 +54,7 @@ export declare enum ActionTranslation {
     Description = 1,
     TierDescription = 2
 }
-export declare enum UiActionTranslation {
+export declare enum UsableActionTranslation {
     Name = 0,
     Description = 1
 }

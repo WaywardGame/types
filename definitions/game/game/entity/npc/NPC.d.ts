@@ -36,7 +36,7 @@ export interface INPCEvents extends Events<Human> {
      * @param moveType The npcs move type
      * @returns True if the npc can move, false if the npc cannot move, or undefined to use the default logic
      */
-    canMove(tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
+    canNPCMove(tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
     /**
      * Called when an npc is killed
      * @returns False to stop the npc from dying or undefined to use the default logic

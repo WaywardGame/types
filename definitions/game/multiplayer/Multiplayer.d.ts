@@ -119,6 +119,11 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     sendPacket(packet: IPacket, exclude?: PacketTarget): void;
     sendPacketTo(to: PacketTarget, packet: IPacket, force?: boolean): void;
     /**
+     * Executes a function while ensuring it is runs outside the context of any executing actions/multiplayer logic in order to prevent desyncs
+     * @param lambda Function to execute
+     */
+    executeClientside(lambda: () => any): void;
+    /**
      * Sends a packet in a synchronized way to the server or clients
      *
      * When ran as a server, clientSide() is called and the packet data is sent to all the clients.
