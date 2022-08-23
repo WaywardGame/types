@@ -11,12 +11,15 @@
 import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-import { BookType } from "game/item/IItem";
-import type Item from "game/item/Item";
-import type TranslationImpl from "language/impl/TranslationImpl";
-export interface IReadCanUse extends IActionUsable {
-    book: BookType;
-    basicBookName: TranslationImpl;
+import type { ITerrainDescription, ITile, TerrainType } from "game/tile/ITerrain";
+export interface ITillCanUse extends IActionUsable {
+    tile: ITile;
+    isGrass: boolean;
+    tileType: TerrainType;
+    terrainDescription: ITerrainDescription;
+    x: number;
+    y: number;
+    z: number;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default, void, IReadCanUse, [Item]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, ITillCanUse, [(import("../../../item/Item").default | undefined)?]>;
 export default _default;

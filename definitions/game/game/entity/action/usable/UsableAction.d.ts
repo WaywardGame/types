@@ -125,6 +125,7 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
     execute?(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): any;
     isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>): ReturnableUsableActionUsability;
     displayLevel?: ActionDisplayLevel;
+    order?: number | ((using: IUsableActionPossibleUsing) => number | undefined);
 }
 export interface IUsableActionDefinitionSubmenu<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {
     submenu(registrar: UsableActionRegistrar, using: IUsableActionUsing<REQUIREMENTS>): UsableActionRegistrar | void;
@@ -149,14 +150,14 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     execute(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): boolean;
     private resolveUsing;
     isUsable(player: Player, provided: IUsableActionUsing<REQUIREMENTS>): UsableActionUsability<REQUIREMENTS>;
-    isApplicable(player: Player, provided?: IUsableActionPossibleUsing): provided is IUsableActionUsing<REQUIREMENTS>;
+    isApplicable(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean): provided is IUsableActionUsing<REQUIREMENTS>;
     private isItemApplicable;
     private isDoodadApplicable;
     private isCreatureApplicable;
     private isNPCApplicable;
     private readonly findItemCannotUse;
     getFindItemCannotUse(): IUsableActionNotUsable[];
-    getItem(player: Player, provided?: IUsableActionPossibleUsing): Item | false | undefined;
+    getItem(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean): Item | false | undefined;
     private getItemByType;
     getDoodad(player: Player, provided?: IUsableActionPossibleUsing): false | Doodad | undefined;
     getCreature(player: Player, provided?: IUsableActionPossibleUsing): false | Creature | undefined;
@@ -169,6 +170,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     getHighlightSelectors(using?: IUsableActionPossibleUsing): HighlightSelector[];
     private translator?;
     getTranslation(using?: IUsableActionUsing<REQUIREMENTS>, which?: ActionTranslation): TranslationImpl | undefined;
+    getOrder(using?: IUsableActionPossibleUsing): number;
 }
 export declare class UsableActionTranslator {
     readonly id: ActionId;

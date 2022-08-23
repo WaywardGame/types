@@ -19,6 +19,7 @@ export default class ScaleManager {
      * Returns the maximum scale the screen size will allow.
      */
     getMaximum(): number;
+    private maximumFormula;
     /**
      * Returns the current UI scale (after being clamped by min & max).
      */

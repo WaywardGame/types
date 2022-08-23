@@ -147,7 +147,9 @@ export declare enum ActionType {
     UpdateWalkPath = 107,
     Operate = 108,
     Absorb = 109,
-    Exude = 110
+    Exude = 110,
+    PackGround = 111,
+    ToggleTilled = 112
 }
 export declare enum ActionUsability {
     Paused = 0,

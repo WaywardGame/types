@@ -10,7 +10,7 @@
  */
 import type { ActionDisplayLevel } from "game/entity/action/IAction";
 import { ActionType } from "game/entity/action/IAction";
-import type { IUsableActionRequirements, IUsableActionUsing, ReturnableUsableActionUsability, UsableActionIconReference } from "game/entity/action/usable/UsableAction";
+import type { IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, ReturnableUsableActionUsability, UsableActionIconReference } from "game/entity/action/usable/UsableAction";
 import { UsableActionGenerator } from "game/entity/action/usable/UsableActionRegistrar";
 import type Player from "game/entity/player/Player";
 import type Bindable from "ui/input/Bindable";
@@ -26,6 +26,7 @@ export interface IUsableActionsDynamicConfig<DEFINITION extends IUsableActionDyn
     requirements?(action: ActionType, definition?: DEFINITION): REQUIREMENTS;
     isUsable(action: ActionType, player: Player, using: IUsableActionUsing<REQUIREMENTS>): ReturnableUsableActionUsability;
     execute(action: ActionType, player: Player, using: IUsableActionUsing<REQUIREMENTS>): any;
+    order?(action: ActionType, using: IUsableActionPossibleUsing): number | undefined;
 }
 export default class UsableActionsDynamic<DEFINITION extends IUsableActionDynamicDefinition, REQUIREMENTS extends IUsableActionRequirements> extends UsableActionGenerator {
     constructor(config: IUsableActionsDynamicConfig<DEFINITION, REQUIREMENTS>);

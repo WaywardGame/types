@@ -11,6 +11,7 @@
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import Button from "ui/component/Button";
 import { CheckButton } from "ui/component/CheckButton";
+import ChoiceList, { Choice } from "ui/component/ChoiceList";
 import Component from "ui/component/Component";
 import HorizontalLine from "ui/component/HorizontalLine";
 import type { IRefreshable } from "ui/component/Refreshable";
@@ -33,6 +34,11 @@ declare enum Classes {
     ConfigurationColumnTitleInapplicable = "game-action-configuration-drawer-column-title-inapplicable"
 }
 export { Classes as ActionsConfigurationDrawerClasses };
+declare enum ItemMethod {
+    ExactItem = 0,
+    AnyOfType = 1,
+    AnyItem = 2
+}
 export interface IActionsConfigurationDrawerEvents extends Events<Component> {
     update(): any;
     endConfiguration(): any;
@@ -53,19 +59,20 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     readonly hintUse: Component<HTMLElement>;
     readonly hintToggle: Text;
     readonly editBindingsButton: Button;
-    readonly byItemTypeButton: Button;
+    readonly itemOrTypeChoiceList: ChoiceList<Choice<ItemMethod>, false>;
     readonly useOnMoveCheckButton: CheckButton;
     readonly hr: HorizontalLine;
     readonly removeSlotButton: Button;
     get configuringNumber(): number | undefined;
     get configuringSlotData(): number | undefined;
     private current?;
+    private savedUsing?;
     constructor();
     open(number: number, slot: IActionBarSlotData): this;
     refresh(): this;
     protected onHide(): void;
     private editBindings;
-    private setByItemType;
+    private setMethod;
     private setUseOnMove;
     private removeSlot;
     private generateActionLists;
@@ -76,4 +83,5 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     private slotButton;
     private selectAction;
     private updateConfigurationColumn;
+    private getAction;
 }

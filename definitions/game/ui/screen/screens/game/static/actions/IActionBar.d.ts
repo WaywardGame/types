@@ -22,6 +22,6 @@ export interface IActionBarSlotData {
 }
 export declare module IActionBarSlotData {
     function using(slotData?: IActionBarSlotData): IUsableActionPossibleUsing;
-    function item(slotData?: IActionBarSlotData): import("../../../../../../game/item/Item").default | undefined;
+    function item(slotData?: IActionBarSlotData | IActionBarSlotData["using"]): import("../../../../../../game/item/Item").default | undefined;
     function copy(slotData?: IActionBarSlotData): IActionBarSlotData;
 }
