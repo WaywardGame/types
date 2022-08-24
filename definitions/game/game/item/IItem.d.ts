@@ -528,7 +528,7 @@ export declare type EquipEffects = {
     [K in keyof IEquipEffects]: AddHead<K, Extract<IEquipEffects[K], any[]>>;
 }[keyof IEquipEffects];
 export declare type EquipEffectByType<T extends EquipEffect> = IEquipEffects[T];
-export declare const magicUseBenefitsConsumables: Set<ActionType>;
+export declare const consumables: Set<ActionType>;
 export declare enum ItemWeightChange {
     NewMagicProperty = 0,
     NewWeight = 1
