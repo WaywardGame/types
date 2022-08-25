@@ -41,6 +41,7 @@ export interface IOptions {
     disableUIOpacity: boolean;
     dropIntoContainers: boolean;
     dropLocation: DropLocation;
+    dropOnDisassemble: boolean;
     dropOnDismantle: boolean;
     dropOnGatherHarvest: boolean;
     enableSaveDataBackups: boolean;

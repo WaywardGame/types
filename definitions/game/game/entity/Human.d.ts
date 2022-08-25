@@ -77,7 +77,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     score: number;
     state: PlayerState;
     swimming: boolean;
-    tamedCreatures: Map<IslandId, number[]>;
+    tamedCreatures: Map<`${number},${number}`, number[]>;
     turns: number;
     vehicleItemReference: ItemReference | undefined;
     walkSoundCounter: number;
