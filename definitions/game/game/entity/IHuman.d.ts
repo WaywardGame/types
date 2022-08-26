@@ -213,10 +213,6 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      */
     updateOption<O extends keyof IOptions>(key: O, value: IOptions[O]): any;
     /**
-     * Called when the left/right hand is enabled/disabled
-     */
-    changeEquipmentOption(id: "leftHand" | "rightHand", newValue: boolean): any;
-    /**
      * Used for registering events
      * This may be called more than once on the same player
      */

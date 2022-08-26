@@ -21,16 +21,18 @@ export declare const promptGameDialogMessagesEditFiltersResetConfirm: import("ga
 export declare const promptGameMessagesContextMenuClear: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameCannotRunGlError: import("game/meta/prompt/IPrompt").IPromptChoiceDescription<any[], InterruptChoice.Quit[]>;
 export declare const promptGameCannotRunIndexedDbError: import("game/meta/prompt/IPrompt").IPromptChoiceDescription<any[], InterruptChoice.Quit[]>;
-export declare const promptGameConfirmationActionOnFire: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[objectName: Text, gatherText: Text]>;
-export declare const promptGameConfirmationActionOnFirePlural: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[objectName: Text, gatherText: Text]>;
-export declare const promptGameConfirmationActionInLava: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[objectName: Text, gatherText: Text]>;
-export declare const promptGameConfirmationActionInLavaPlural: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[objectName: Text, gatherText: Text]>;
-export declare const promptGameConfirmationActionIsLava: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[objectName: Text, gatherText: Text]>;
+export declare const promptGameConfirmationActionInLavaOrFire: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[{
+    WITH?: Text | undefined;
+    ACTION: Text;
+    AMOUNT: number;
+    LAVA?: true | undefined;
+}]>;
+export declare const promptGameConfirmationActionIsLava: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[gatherText: Text]>;
 export declare const promptGameConfirmationDestroyOnGather: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[growthStage: Text | undefined, objectName: Text]>;
 export declare const promptGameConfirmationDroppingContainer: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameConfirmationRestWithEquippedFireSource: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[actionVerb: Text, objectName: Text, actionNoun: Text]>;
 export declare const promptGameContainerNotFull: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
-export declare const promptGameDangerousStep: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[objectName: Text, gatherText: Text]>;
+export declare const promptGameDangerousStep: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[objectName: Text]>;
 export declare const promptGameDesalinationNoNeed: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameExtinguishWaterStill: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameItemMayBeDestroyedInCraft: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[breakingItemsList: Text]>;

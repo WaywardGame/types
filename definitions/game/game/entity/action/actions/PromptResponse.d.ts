@@ -10,5 +10,9 @@
  */
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.Integer32, [ActionArgument.Boolean, ActionArgument.Integer32], [ActionArgument.Object, ActionArgument.Undefined]], import("../../player/Player").default, void, import("game/entity/action/IAction").IActionUsable, [number, number | boolean, any?]>;
+import type Player from "game/entity/player/Player";
+import { Prompt } from "game/meta/prompt/IPrompt";
+import type InterruptChoice from "language/dictionary/InterruptChoice";
+declare const _default: Action<[ActionArgument.Integer32, [ActionArgument.Boolean, ActionArgument.Integer32]], Player, void, import("game/entity/action/IAction").IActionUsable, [number, number | boolean]>;
 export default _default;
+export declare function waitForPromptResponse(executor: Player, type: Prompt): Promise<boolean | InterruptChoice>;

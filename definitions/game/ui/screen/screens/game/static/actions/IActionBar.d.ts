@@ -14,14 +14,16 @@ import type { Reference } from "game/reference/ReferenceManager";
 export interface IActionBarSlotData {
     useOnMove?: true;
     actionId?: string;
-    using?: Omit<IUsableActionPossibleUsing, "item" | "doodad" | "creature"> & {
+    using?: Omit<IUsableActionPossibleUsing, "item" | "doodad" | "creature" | "npc"> & {
         item?: Reference<ReferenceType.Item>;
         doodad?: Reference<ReferenceType.Doodad>;
         creature?: Reference<ReferenceType.Creature>;
+        npc?: Reference<ReferenceType.NPC>;
     };
 }
 export declare module IActionBarSlotData {
     function using(slotData?: IActionBarSlotData): IUsableActionPossibleUsing;
     function item(slotData?: IActionBarSlotData | IActionBarSlotData["using"]): import("../../../../../../game/item/Item").default | undefined;
     function copy(slotData?: IActionBarSlotData): IActionBarSlotData;
+    function equals(a?: IActionBarSlotData, b?: IActionBarSlotData): boolean;
 }

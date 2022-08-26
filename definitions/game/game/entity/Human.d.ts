@@ -43,7 +43,6 @@ import type { IHasInsulation } from "game/temperature/ITemperature";
 import { TempType } from "game/temperature/ITemperature";
 import type TileEvent from "game/tile/TileEvent";
 import Message from "language/dictionary/Message";
-import type { ISerializedTranslation } from "language/ITranslation";
 import Translation from "language/Translation";
 import type FieldOfView from "renderer/fieldOfView/FieldOfView";
 import { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
@@ -58,7 +57,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     event: IEventEmitter<this, IHumanEvents>;
     crafted: Record<number, ICrafted>;
     customization: ICustomizations;
-    deathBy: ISerializedTranslation;
+    deathBy: import("language/ITranslation").ISerializedTranslation;
     defense: PlayerDefense;
     defenses: number[];
     equippedReferences: Map<EquipType, ItemReference>;

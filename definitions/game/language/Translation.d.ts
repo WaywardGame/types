@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { GrowingStage } from "game/doodad/IDoodad";
 import { DamageType } from "game/entity/IEntity";
 import { EquipType, SkillType } from "game/entity/IHuman";
 import { Stat } from "game/entity/IStats";
@@ -96,6 +97,8 @@ declare module Translation {
      * This method returns a translated list of damage types.
      */
     const damage: (damageTypes: ArrayOr<DamageType>, colorize?: boolean, reformatter?: TranslationImpl | ((type: DamageType) => Translation) | undefined) => TranslationImpl;
+    function growthStage(stage: GrowingStage, spores?: boolean): TranslationImpl;
+    function growthStage(stage?: GrowingStage, spores?: boolean): TranslationImpl | undefined;
     const getString: typeof TranslationImpl.getString;
     const resolve: typeof TranslationImpl.resolve;
     function colorizeQuality(quality: Quality | string): Translation;

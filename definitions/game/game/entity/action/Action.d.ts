@@ -29,7 +29,7 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     preExecutionHandler?: (actionApi: IActionApi<E, CU>, ...args: AV) => any;
     canUseHandler: (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => CU | IActionNotUsable;
     handler: (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => R;
-    confirmer?: (actionApi: IActionConfirmerApi<E, CU>, ...args: AV) => Promise<boolean>;
+    confirmer?: (actionApi: IActionConfirmerApi<E, any>, ...args: AV) => Promise<boolean>;
     private shouldSkipConfirmation;
     constructor(...argumentTypes: A);
     /**
@@ -39,8 +39,8 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     canUse(actionApi: IActionApi<E, any>, ...args: AV): CU | IActionNotUsable;
     canUse(executor: E, ...args: AV): CU | IActionNotUsable;
     canUseWhileFacing(actionExecutor: E, position: IVector3, direction: Direction.Cardinal, ...args: AV): CU | IActionNotUsable;
-    execute(actionApi: IActionApi<E, any>, ...args: AV): R | Promise<R>;
-    execute(executor: E, ...args: AV): R | Promise<R>;
+    execute(actionApiOrExecutor: IActionApi<E, any> | E, ...args: AV): R | Promise<R>;
+    executeConfirmer(actionApiOrExecutor: IActionApi<E, any> | E, args: AV, argumentTypes?: ActionArgument[]): Promise<boolean>;
     skipConfirmation(): this;
     /**
      * Add a "pre-execution" handler to this action.

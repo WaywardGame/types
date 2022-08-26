@@ -10,7 +10,7 @@
  */
 import type { SfxType } from "audio/IAudio";
 import EventEmitter from "event/EventEmitter";
-import type { ActionArgumentTypeMap, AnyActionDescription, IActionApi, IActionDescription, IActionHandlerApi, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable } from "game/entity/action/IAction";
+import type { AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionDescription, IActionHandlerApi, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument, ActionType } from "game/entity/action/IAction";
 import type Entity from "game/entity/Entity";
 import type { SkillType } from "game/entity/IHuman";
@@ -97,9 +97,9 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
      */
     canUseWhileFacing(executor: E, position: IVector3, direction: Direction.Cardinal, ...args: AV): CU | IActionNotUsable;
     private processNotUsableResult;
-    execute(actionApi: IActionApi<E, CU>, ...args: AV): R | Promise<R>;
-    execute(executor: E, ...args: AV): R | Promise<R>;
-    isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is ActionArgumentTypeMap<AA>;
+    execute(actionApiOrExecutor: IActionApi<E, CU> | E, ...args: AV): R | Promise<R>;
+    executeConfirmer(actionApiOrExecutor: IActionApi<E, CU> | E, args: AV, argumentTypes?: ActionArgument[]): Promise<boolean>;
+    isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is IActionArgumentTypeMap[AA];
     setDelay(delay: number, replace?: boolean): this;
     setPassTurn(turnType?: TurnType): this;
     setUpdateView(updateFov?: boolean): this;
@@ -117,11 +117,11 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
     setParticle(particle: IActionParticle): this;
     addItems(...addItems: Array<Item | undefined>): this;
-    getItems(): import("@wayward/goodstream").default<Item>;
+    getItems(): readonly Item[];
     removeItems(...items: Array<Item | undefined>): this;
     setItemsUsed(used?: boolean): this;
-    confirmItemsBroken(): Promise<boolean>;
-    private executeConfirmer;
+    confirmItemsBroken(executor: E): Promise<boolean>;
+    private checkConfirmer;
     private executeInternalOrMultiplayer;
     private executeInternal;
     private createActionPacket;

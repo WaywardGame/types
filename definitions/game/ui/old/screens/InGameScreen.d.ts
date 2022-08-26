@@ -8,11 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Doodad from "game/doodad/Doodad";
+import type Doodad from "game/doodad/Doodad";
 import { ActionType } from "game/entity/action/IAction";
 import { EquipType } from "game/entity/IHuman";
 import NPC from "game/entity/npc/NPC";
-import type Player from "game/entity/player/Player";
 import type { IContainer, IDismantleComponent } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
@@ -101,7 +100,6 @@ export default class InGameScreen extends BaseScreen {
     constructor();
     selector(): string;
     bindElements(): void;
-    onChangeEquipmentOption(player: Player, id: "leftHand" | "rightHand", newValue: boolean): void;
     toggleCraftingTab(which: "crafting" | "dismantle", canClose?: boolean): void;
     toggleCraftingTabElements(which: "crafting" | "dismantle"): void;
     unbindElements(): void;

@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ActionType } from "game/entity/action/IAction";
-import type Player from "game/entity/player/Player";
-export default function (player: Player, actionType: ActionType, actionArgs: any[]): Promise<boolean>;
+import type { IActionConfirmerApi } from "game/entity/action/IAction";
+import type Human from "game/entity/Human";
+export default function (action: IActionConfirmerApi<Human>): Promise<boolean>;

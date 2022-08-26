@@ -11,9 +11,11 @@
 import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import type { IStat } from "game/entity/IStats";
+import type { IVector3 } from "utilities/math/IVector";
 export interface IJumpCanUse extends IActionUsable {
     stamina: IStat;
     jumpStamina: number;
+    jumpPosition: IVector3;
 }
 declare const _default: Action<[], import("../../Human").default, void, IJumpCanUse, []>;
 export default _default;

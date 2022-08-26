@@ -42,7 +42,7 @@ export interface IPlayerEvents extends Events<Human> {
      * @param interrupt The interrupt
      * @param choice The selected choice
      */
-    interruptResponse(interrupt: Prompt, choice: boolean | InterruptChoice): any;
+    promptResponse(interrupt: Prompt, choice: boolean | InterruptChoice): any;
     /**
      * Called when the player will be killed. If any handlers return `false` to stop the player from dying,
      * no further handlers will be called.

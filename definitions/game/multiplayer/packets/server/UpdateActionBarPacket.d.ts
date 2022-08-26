@@ -9,10 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServerPacket";
-import type { IQuickSlotInfo } from "ui/old/IOldUi";
-export default class UpdateQuickSlotInfoPacket extends PlayerTargetedServerPacket {
-    quickSlot: number;
-    quickSlotInfo: IQuickSlotInfo | undefined;
+import type { IActionBarSlotData } from "ui/screen/screens/game/static/actions/IActionBar";
+export default class UpdateActionBarPacket extends PlayerTargetedServerPacket {
+    slots: Uint8Array;
+    data: IActionBarSlotData[];
     getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;

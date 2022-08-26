@@ -36,6 +36,9 @@ export interface IStringSection {
     icon?: ISerializedIcon;
     forceInclude?: true;
 }
+export declare namespace IStringSection {
+    function get(content?: string | IStringSection | Iterable<IStringSection>): Iterable<IStringSection>;
+}
 export interface IReferenceSection extends IStringSection {
     reference: Reference;
 }

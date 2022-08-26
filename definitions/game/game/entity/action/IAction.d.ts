@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Stream from "@wayward/goodstream";
 import type { SfxType } from "audio/IAudio";
 import type Doodad from "game/doodad/Doodad";
 import type { DoodadType } from "game/doodad/IDoodad";
@@ -128,7 +127,7 @@ export declare enum ActionType {
     ProtectItem = 88,
     UnProtectItem = 89,
     UpdateItemOrder = 90,
-    InterruptResponse = 91,
+    PromptResponse = 91,
     Upgrade = 92,
     Enhance = 93,
     Shoot = 94,
@@ -149,7 +148,8 @@ export declare enum ActionType {
     Absorb = 109,
     Exude = 110,
     PackGround = 111,
-    ToggleTilled = 112
+    ToggleTilled = 112,
+    ActionConfirmerResponse = 113
 }
 export declare enum ActionUsability {
     Paused = 0,
@@ -204,8 +204,8 @@ export interface IActionDescription<A extends Array<ActionArgument | ActionArgum
     };
     validExecutors: Set<EntityType>;
     hasFlag(flag: ActionFlag): boolean;
-    execute(actionApi: IActionApi<E, CU>, ...args: AV): R | Promise<R>;
-    execute(executor: E, ...args: AV): R | Promise<R>;
+    execute(actionApiOrExecutor: IActionApi<E, CU> | E, ...args: AV): R | Promise<R>;
+    executeConfirmer(actionApiOrExecutor: IActionApi<E, any> | E, args: AV, argumentTypes?: ActionArgument[]): Promise<boolean>;
     /**
      * Check if the action has setup CanUse logic
      */
@@ -236,7 +236,7 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
     readonly actionStack: readonly ActionType[];
     readonly lastAction: ActionType;
     readonly hasSetCanUse: boolean;
-    isArgumentType<A extends ActionArgument>(argument: any, index: number, argumentType: A): argument is ActionArgumentTypeMap<A>;
+    isArgumentType<A extends ActionArgument>(argument: any, index: number, argumentType: A): argument is IActionArgumentTypeMap[A];
     canUse(): CU | IActionNotUsable;
     /**
      * Check if a creature on a tile and blocking the execution of the action
@@ -271,7 +271,7 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
     /**
      * Returns the items registered for this action via `addItems`.
      */
-    getItems(): Stream<Item>;
+    getItems(): readonly Item[];
     /**
      * Removes all items added via `addItems`
      */
@@ -301,7 +301,7 @@ export interface IActionConfirmerApi<E extends Entity = Entity, CU extends IActi
      * a custom confirmer if new items are added to the action here, and items *aren't* added in the `preExecutionHandler`.
      * Otherwise the player could get two confirmations, and that's annoying.
      */
-    confirmItemsBroken(): Promise<boolean>;
+    confirmItemsBroken(executor: E): Promise<boolean>;
 }
 export interface IActionSoundEffect {
     type: SfxType;
@@ -361,7 +361,7 @@ export declare enum ActionArgument {
     Vector2Array = 38,
     Vector3 = 39
 }
-export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
+export interface IActionArgumentTypeMap {
     [ActionArgument.Undefined]: undefined;
     [ActionArgument.Null]: null;
     [ActionArgument.Boolean]: boolean;
@@ -402,10 +402,11 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.Vector2]: IVector2;
     [ActionArgument.Vector2Array]: IVector2[];
     [ActionArgument.Vector3]: IVector3;
-}[X];
-declare type ActionArgumentEntryType<X extends ActionArgument | ActionArgument[]> = X extends ActionArgument ? ActionArgumentTypeMap<X> : X extends ActionArgument[] ? ExtractActionArgumentArray<X> : never;
-declare type ExtractActionArgumentArray<X extends ActionArgument[]> = X extends [ActionArgument] ? ActionArgumentTypeMap<X[0]> : X extends [ActionArgument, ActionArgument] ? ActionArgumentTypeMap<X[0]> | ActionArgumentTypeMap<X[1]> : X extends [ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentTypeMap<X[0]> | ActionArgumentTypeMap<X[1]> | ActionArgumentTypeMap<X[2]> : X extends [ActionArgument, ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentTypeMap<X[0]> | ActionArgumentTypeMap<X[1]> | ActionArgumentTypeMap<X[2]> | ActionArgumentTypeMap<X[3]> : X extends [ActionArgument, ActionArgument, ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentTypeMap<X[0]> | ActionArgumentTypeMap<X[1]> | ActionArgumentTypeMap<X[2]> | ActionArgumentTypeMap<X[3]> | ActionArgumentTypeMap<X[4]> : never;
-export declare type ActionArgumentTupleTypes<X extends Array<ActionArgument | ActionArgument[]>> = X extends [] ? [] : X extends [ActionArgument | ActionArgument[]] ? Tuple1<ActionArgumentEntryType<X[0]>> : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? Tuple2<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>> : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? Tuple3<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>> : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? Tuple4<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>, ActionArgumentEntryType<X[3]>> : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? Tuple5<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>, ActionArgumentEntryType<X[3]>, ActionArgumentEntryType<X[4]>> : never;
+}
+declare type ActionArgumentEntryType<X extends ActionArgument | ActionArgument[]> = X extends ActionArgument ? IActionArgumentTypeMap[X] : X extends ActionArgument[] ? ({
+    [INDEX in keyof X]: IActionArgumentTypeMap[X[INDEX] & ActionArgument];
+}[number]) : never;
+export declare type ActionArgumentTupleTypes<X extends Array<ActionArgument | ActionArgument[]>> = X["length"] extends 0 ? [] : X["length"] extends 1 ? Tuple1<ActionArgumentEntryType<X[0]>> : X["length"] extends 2 ? Tuple2<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>> : X["length"] extends 3 ? Tuple3<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>> : X["length"] extends 4 ? Tuple4<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>, ActionArgumentEntryType<X[3]>> : X["length"] extends 5 ? Tuple5<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>, ActionArgumentEntryType<X[3]>, ActionArgumentEntryType<X[4]>> : never;
 export declare type Tuple1<X1> = undefined extends X1 ? [X1?] : [X1];
 export declare type Tuple2<X1, X2> = undefined extends X2 ? (undefined extends X1 ? [X1?, X2?] : [X1, X2?]) : [X1, X2];
 export declare type Tuple3<X1, X2, X3> = undefined extends X3 ? (undefined extends X2 ? (undefined extends X1 ? [X1?, X2?, X3?] : [X1, X2?, X3?]) : [X1, X2, X3?]) : [X1, X2, X3];

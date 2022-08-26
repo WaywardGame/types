@@ -69,10 +69,6 @@ export interface IDoodadEvents {
 }
 export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IReferenceable, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasBuilder, IHasMagic {
     static is(value: any): value is Doodad;
-    /**
-     * @deprecated
-     */
-    static getGrowingStageTranslation(growingStage?: GrowingStage, description?: IDoodadDescription): import("../../language/impl/TranslationImpl").default | undefined;
     get constructorFunction(): typeof Doodad;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;

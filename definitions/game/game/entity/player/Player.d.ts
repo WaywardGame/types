@@ -9,7 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IEventEmitter } from "event/EventEmitter";
-import type { ActionType } from "game/entity/action/IAction";
 import Creature from "game/entity/creature/Creature";
 import { CreatureType } from "game/entity/creature/ICreature";
 import Human from "game/entity/Human";
@@ -27,7 +26,8 @@ import { ItemType } from "game/item/IItem";
 import { Milestone } from "game/milestones/IMilestone";
 import type IClientStore from "save/clientStore/IClientStore";
 import type { IUnserializedCallback } from "save/serializer/ISerializer";
-import type { IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/old/IOldUi";
+import type { IDialogInfo } from "ui/old/IOldUi";
+import { IActionBarSlotData } from "ui/screen/screens/game/static/actions/IActionBar";
 import { Direction } from "utilities/math/Direction";
 import type { IVector3 } from "utilities/math/IVector";
 export default class Player extends Human implements IUnserializedCallback {
@@ -40,7 +40,7 @@ export default class Player extends Human implements IUnserializedCallback {
     islandId: IslandId;
     lastAttackedBy: Human | Creature | undefined;
     name: string;
-    quickSlotInfo: IQuickSlotInfo[];
+    actionBar: IActionBarSlotData[];
     revealedItems: Record<number, boolean>;
     milestoneModifiers: Set<Milestone>;
     displayCreature?: CreatureType;
@@ -71,7 +71,7 @@ export default class Player extends Human implements IUnserializedCallback {
     private updateCraftTable;
     updateDismantleTable(adjacentContainers?: IContainer[], force?: boolean): void;
     getName(): import("../../../language/impl/TranslationImpl").default;
-    updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction, contextActionSlot?: number, contextActionType?: ActionType, canUseProtected?: boolean): void;
+    updateActionSlots(slots: number[], data: IActionBarSlotData[]): void;
     updateDialogInfo(dialogIndex: string | number): void;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
     kill(): void;
