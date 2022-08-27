@@ -39,7 +39,7 @@ export declare module InputCatalyst {
     function hash(catalyst: InputCatalyst, resolveModifiers?: boolean): string;
     function equals(a: InputCatalyst, b: InputCatalyst): boolean;
     function fromModifier(modifier: Modifier): InputCatalyst[];
-    function isModifier(catalyst: InputCatalyst): boolean;
+    function isModifier(catalyst: InputCatalyst, acceptedModifiers?: Set<Modifier>): boolean;
 }
 declare enum ModifierType {
     Shift = 0,

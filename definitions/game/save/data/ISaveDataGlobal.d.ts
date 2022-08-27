@@ -34,6 +34,7 @@ export interface IOptions {
     dialogOpacity: number;
     directionTurnDelay: number;
     disableAcrylicTransparency: boolean;
+    disableOverlaySupport: boolean;
     disableCraftingProtectedItems: boolean;
     disableHealthVignette: boolean;
     disableMovementAnimations: boolean;

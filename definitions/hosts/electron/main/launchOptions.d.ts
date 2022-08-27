@@ -26,6 +26,7 @@ export interface ILaunchOptions {
     forceHighPerformanceGpu: boolean;
     forceInProcessGPU: boolean;
     forceWaveAudio: boolean;
+    forceOverlaySupport: boolean;
     fullscreen: boolean;
     height: "max" | number;
     ignoreGpuBlockList: boolean;

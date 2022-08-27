@@ -37,6 +37,9 @@ export interface IUsableActionRequirement<TYPE> {
     find?(player: Player): TYPE | undefined;
     getMissingName?(): Translation;
 }
+export interface IUsableActionItemRequirement extends IUsableActionRequirement<Item> {
+    allowOnlyItemType?(player: Player, type: ItemType): boolean;
+}
 export declare namespace IUsableActionRequirement {
     interface Maybe<TYPE> {
         allowNone: true;
@@ -45,7 +48,7 @@ export declare namespace IUsableActionRequirement {
     type Always = true;
 }
 export interface IUsableActionRequirements {
-    item?: true | IUsableActionRequirement<Item>;
+    item?: true | IUsableActionItemRequirement;
     doodad?: true | IUsableActionRequirement<Doodad>;
     creature?: true | IUsableActionRequirement<Creature>;
     npc?: true | IUsableActionRequirement<NPC>;
@@ -65,6 +68,15 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
     } ? Item : never) | (REQUIREMENTS["item"] extends {
         find(player: Player): Item;
     } ? Item : never));
+    itemType: ((REQUIREMENTS["item"] extends true ? ItemType : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
+        allowNone: true;
+    } ? undefined : never) | (REQUIREMENTS["item"] extends {
+        validate(player: Player, value: Item): boolean;
+    } ? ItemType : never) | (REQUIREMENTS["item"] extends {
+        find(player: Player): Item;
+    } ? ItemType : never) | (REQUIREMENTS["item"] extends {
+        allowOnlyItemType(player: Player): boolean;
+    } ? ItemType : never));
     doodad: ((REQUIREMENTS["doodad"] extends true ? Doodad : never) | (undefined extends REQUIREMENTS["doodad"] ? undefined : never) | (REQUIREMENTS["doodad"] extends {
         allowNone: true;
     } ? undefined : never) | (REQUIREMENTS["doodad"] extends {
