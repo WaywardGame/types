@@ -13,7 +13,7 @@ import type { Stat } from "../../game/game/entity/IStats";
 import type { IslandId } from "../../game/game/island/IIsland";
 import { Direction } from "../../game/utilities/math/Direction";
 import type { Random, SeededGenerator } from "../../game/utilities/random/Random";
-import type { IDedicatedServerGameOptions, IJoinServerOptions, INewGameOptions } from "../interfaces";
+import type { IDedicatedServerGameOptions, IJoinServerOptions, INewGameOptions, IWaitUntilGameLoadedOptions } from "../interfaces";
 import ApplicationDom from "./applicationDom";
 import ApplicationLogger from "./applicationLogger";
 export default class ApplicationInteractions {
@@ -25,13 +25,13 @@ export default class ApplicationInteractions {
     private readonly savedStates;
     constructor(additionalArgs: string[], random: Random<SeededGenerator>);
     waitForInitialStartup(expectedInitialScreen: "title" | "mp_gameplay_modifiers"): Promise<void>;
-    waitUntilLoadingIsFinished(expectedMultiplayerMenu?: boolean): Promise<void>;
+    waitUntilLoadingIsFinished(options?: Partial<IWaitUntilGameLoadedOptions>): Promise<void>;
     playDedicatedServer(options: IDedicatedServerGameOptions): Promise<void>;
     playNewGame(options: INewGameOptions): Promise<void>;
     private setupCommonOptions;
     unlockMilestoneModifiers(): Promise<void>;
     playImportedGame(savePath: string): Promise<void>;
-    playContinueGame(): Promise<void>;
+    playContinueGame(options?: Partial<IWaitUntilGameLoadedOptions>): Promise<void>;
     quitGame(): Promise<void>;
     clickOptions(): Promise<void>;
     clickNewGame(): Promise<void>;
@@ -77,10 +77,7 @@ export default class ApplicationInteractions {
     saveStateAndVerifyWithPrevious(): Promise<void>;
     clearSavedStates(): void;
     waitUntilPauseMenuIsShown(): Promise<void>;
-    waitUntilGameIsLoaded(options?: Partial<{
-        isJoiningServer: boolean;
-        isCreatingServer: boolean;
-    }>): Promise<void>;
+    waitUntilGameIsLoaded(options?: Partial<IWaitUntilGameLoadedOptions>): Promise<void>;
     isTitleScreenVisible(): Promise<WebdriverIO.Element[] | undefined>;
     isButtonVisible(text: string): Promise<WebdriverIO.Element[] | undefined>;
     isOverlayVisible(): Promise<WebdriverIO.Element[] | undefined>;

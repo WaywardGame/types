@@ -106,7 +106,8 @@ export declare class ActionSlot extends Button implements IRefreshable {
     private isUsable;
     clear(): void;
     equipItem(item: Item, configure?: boolean): void;
-    configure(): boolean;
+    protected onConfigureBind(api: IBindHandlerApi): boolean;
+    configure(): void;
     protected onAppend(): void;
     protected onItemMaybeInaccessible(): void;
     postExecuteAction(action: IActionApi): void;

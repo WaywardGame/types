@@ -14,6 +14,7 @@ import type { ISerializedTranslation } from "language/ITranslation";
 import { TextContext } from "language/ITranslation";
 import type { Link } from "language/segment/LinkSegment";
 import type { ITooltipSection } from "language/segment/TooltipSegment";
+import type { ISerializable } from "save/serializer/ISerializer";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { Random } from "utilities/random/Random";
 import type { ISegment, IStringSection } from "utilities/string/Interpolator";
@@ -24,7 +25,7 @@ export interface ITranslationConfig {
     interpolator: Interpolator;
     provideTranslation(dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean): string[] | undefined;
 }
-export default class TranslationImpl {
+export default class TranslationImpl implements Omit<ISerializable, "deserializeObject"> {
     private static defaultInterpolatorSegmentIds?;
     private static _config?;
     static set config(config: ITranslationConfig | undefined);
@@ -97,6 +98,7 @@ export default class TranslationImpl {
     getString(...args: any[]): string;
     toString(): string;
     private getCustomInterpolatorSegments;
+    serializeObject(): ISerializedTranslation;
     serialize(): ISerializedTranslation;
     private canCache;
     private getCachedTranslation;

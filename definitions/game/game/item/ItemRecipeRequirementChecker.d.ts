@@ -60,4 +60,6 @@ export default class ItemRecipeRequirementChecker {
      */
     processContainer(container: IContainer): boolean;
     private processItem;
+    processBaseComponent(item: Item): boolean;
+    processComponents(item: Item, disableExtraChecks?: boolean): boolean;
 }

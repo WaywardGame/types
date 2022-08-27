@@ -73,6 +73,6 @@ export default class Vector3 implements IVector3, ISerializable {
     normalize<D extends IVector3>(dest: D): D;
     raw(): IVector3;
     toString(): string;
-    serializeObject(serializer: ISerializer): void;
+    serializeObject(serializer: ISerializer): undefined;
     deserializeObject(serializer: ISerializer, dataType: Types): boolean;
 }

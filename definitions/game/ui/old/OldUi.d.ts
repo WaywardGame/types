@@ -34,8 +34,6 @@ export default class OldUi {
     hideInGameScreen(): void;
     onWindowResize(): void;
     isInGameScreenShown(): boolean;
-    loadQuickSlots(): void;
-    isContextMenuOpen(): boolean;
     isOptionsOverlayShown(): boolean;
     isOptionsOverlayEnabled(): boolean;
     tooltipRefresh(): void;
@@ -46,17 +44,10 @@ export default class OldUi {
     updateItem(item: Item, updateChildren?: boolean): void;
     syncDecayBar(item: Item, syncDamage?: boolean): void;
     syncItemElements(itemIds: number | number[], forceSyncDecay?: boolean): void;
-    hideContextMenu(): void;
-    hideActionsMenu(): void;
     setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
-    setQuickSlot(quickSlot: number, itemId: number, internal?: boolean): void;
-    refreshQuickSlots(): void;
-    getUsedQuickSlots(): number[];
-    removeItemFromQuickSlot(itemId: number): void;
     removeItemFromEquipSlot(equip: EquipType): void;
     shouldRefreshMods(): boolean;
     onGameEnd(): void;
-    onUpdateDirection(): void;
     toggleUIDisplay(hide: boolean): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;

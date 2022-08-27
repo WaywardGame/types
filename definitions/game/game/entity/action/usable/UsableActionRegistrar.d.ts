@@ -46,10 +46,14 @@ export declare class UsableActionGenerator<ARGS extends any[] = []> extends Even
     static persisting(initializer: (persist: IUsableActionGeneratorPersistenceFactory<IUsableActionGeneratorFactory>) => UsableActionGenerator): UsableActionGenerator;
     static singleton<REQUIREMENTS extends IUsableActionRequirements>(id: string | number, action: UsableAction<REQUIREMENTS>): UsableActionGenerator<[]>;
     private readonly id?;
-    private readonly registrationHandler;
+    private readonly registrationHandlers;
     private get log();
     constructor(id: string, registrationHandler: UsableActionGeneratorRegistrationHandler<ARGS>);
     constructor(registrationHandler: UsableActionGeneratorRegistrationHandler<ARGS>);
+    add(registrationHandler: UsableActionGeneratorRegistrationHandler<ARGS>): this;
+    add(generator: UsableActionGenerator<ARGS>): this;
+    remove(registrationHandler: UsableActionGeneratorRegistrationHandler<ARGS>): this;
+    remove(generator: UsableActionGenerator<ARGS>): this;
     register(registrar: UsableActionRegistrar, ...args: ARGS): void;
     private contextMenuInitializer?;
     /**

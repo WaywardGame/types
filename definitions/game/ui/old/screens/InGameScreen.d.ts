@@ -9,18 +9,16 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "game/doodad/Doodad";
-import { ActionType } from "game/entity/action/IAction";
 import { EquipType } from "game/entity/IHuman";
 import NPC from "game/entity/npc/NPC";
 import type { IContainer, IDismantleComponent } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
-import ItemRecipeRequirementChecker from "game/item/ItemRecipeRequirementChecker";
 import Message from "language/dictionary/Message";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import { GlobalMouseInfo } from "ui/input/InputManager";
 import type { ISortableEvent } from "ui/old/functional/IFunctionalSortable";
-import type { IContainerSortInfo, IContextMenuAction, IDialogInfo } from "ui/old/IOldUi";
+import type { IContainerSortInfo, IDialogInfo } from "ui/old/IOldUi";
 import { DialogId, SortType } from "ui/old/IOldUi";
 import BaseScreen from "ui/old/screens/BaseScreen";
 import type ActionBar from "ui/screen/screens/game/static/ActionBar";
@@ -35,11 +33,9 @@ export declare enum TextElementId {
 }
 declare global {
     interface JQuery {
-        contextmenu(p: any, p2?: any, p3?: any): any;
         isVisible(): boolean;
         quickShow(): void;
         quickHide(): void;
-        getQuickSlot(): number;
         getEquipSlot(): number;
     }
     interface JQuery {
@@ -58,7 +54,6 @@ export default class InGameScreen extends BaseScreen {
     isQuickmoving: boolean;
     elementVisibleInGame: JQuery;
     elementCanvas: JQuery;
-    elementQuickSlotsContainer: JQuery;
     elementActions: JQuery;
     elementDialogs: JQuery;
     elementDialogInventory: JQuery;
@@ -73,17 +68,7 @@ export default class InGameScreen extends BaseScreen {
     elementVersion: JQuery;
     elementContainerDialogs: JQuery[];
     elementOtherDialogs: JQuery[];
-    contextMenuOpen: boolean;
-    private contextMenu;
-    private contextMenuTarget;
-    private contextMenuLastTarget;
-    private lastContextMenuPosition;
-    private actionsMenuOpen;
-    private autoActionsMenuOpen;
-    private actionsMenuTileOverlay;
-    actionsMenuCentered: boolean;
     private activeContainer;
-    private multipleContainersOpened;
     private sortableElement;
     private sortableElementPosition;
     private sortableElementTargetContainer;
@@ -104,13 +89,10 @@ export default class InGameScreen extends BaseScreen {
     toggleCraftingTabElements(which: "crafting" | "dismantle"): void;
     unbindElements(): void;
     bindSortable(element: JQuery): void;
-    pressHotKey(hotKeyNumber: number): boolean;
-    useQuickSlot(slot: number): boolean;
     isSorting(): boolean;
     runSortableAction(sortable: JQuery, action: string, ...data: any[]): void;
     runGlobalSortableAction(action: string, ...data: any[]): void;
     cancelSorting(): void;
-    setupContextMenu(): any;
     onShow(): void;
     makeActiveContainer(dialog: JQuery): void;
     makeTopDialog(dialog: JQuery): void;
@@ -146,15 +128,9 @@ export default class InGameScreen extends BaseScreen {
     afterAddingMultipleItemsToContainer(container: IContainer): void;
     removeItemFromContainer(item: Item, container: IContainer): void;
     refreshContainerName(container: IContainer): void;
-    refreshQuickSlots(): void;
     getInventoryItemsInOrder(): any[];
-    loadQuickSlots(): void;
     saveItemOrder(containerElement: JQuery, activeSort?: boolean): void;
-    showItemContextMenu(element: JQuery, skipSound?: boolean): void;
-    onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): void;
-    runContextMenuItemAction(itemId: number, action: IContextMenuAction, skipSound?: boolean, usedFromQuickSlot?: boolean, itemTypeBypass?: ItemType): boolean;
-    craftItemChecker(itemType: ItemType): void;
-    craftItem(item: ItemType, checker: ItemRecipeRequirementChecker): Promise<void>;
+    craftItem(itemType: ItemType): void;
     onDismantleItemClick(dismantleItem: Item | undefined): void;
     getTooltipHtml(element: JQuery): string;
     tooltipEnable(): void;
@@ -162,20 +138,6 @@ export default class InGameScreen extends BaseScreen {
     tooltipDisable(): void;
     tooltipHide(): void;
     unSelectElements(): void;
-    getUsedQuickSlots(): number[];
-    getFreeQuickSlots(): number[];
-    getQuickSlots(): number;
-    getQuickSlotItemElement(quickSlot: number): JQuery;
-    getItemIdInQuickSlot(quickSlot: number): number | undefined;
-    setQuickSlot(quickSlot: number, itemId?: number, internal?: boolean): boolean;
-    setQuickSlotByItemType(quickSlot: number, itemType: ItemType, disabled: boolean, item?: Item | undefined): void;
-    setQuickSlotByContextAction(quickSlot: number, action: IContextMenuAction): void;
-    addItemToFreeQuickSlot(itemId: number): boolean;
-    clearQuickSlot(quickSlot: number, internal?: boolean): void;
-    removeItemFromQuickSlot(quickSlot: number, itemId?: number, skipSync?: boolean): void;
-    setItemQuickslot(item: Item, quickSlot: number, removeQuickSlot?: boolean): void;
-    updateQuickSlotItem(quickSlot: number): boolean;
-    onUpdateQuickSlotsOrEquips(): void;
     onSortableItemReceive(sortableEvent: ISortableEvent): void;
     getEquipSlotItemElement(equip: EquipType): JQuery;
     getItemIdInEquipSlot(equip: EquipType): number | undefined;
@@ -211,12 +173,6 @@ export default class InGameScreen extends BaseScreen {
     updateActiveContainer(): void;
     getActiveContainer(): IUiContainer | undefined;
     getOpenContainers(): IUiContainer[];
-    hideContextMenu(): boolean;
-    hideActionsMenu(): void;
-    toggleActionsMenu(center?: boolean): void;
-    toggleAutoActionsMenu(center?: boolean): void;
-    showAutoActionsMenu(center?: boolean, updatePosition?: boolean, skipSound?: boolean, quickSlotNumber?: number): void;
-    showActionsMenu(center?: boolean, updatePosition?: boolean, skipSound?: boolean, quickSlotNumber?: number): void;
     getFilterText(containerElement: JQuery | undefined): any;
     getFilterElement(containerElement: JQuery): JQuery;
     /**
@@ -237,14 +193,12 @@ export default class InGameScreen extends BaseScreen {
      * Will force an update on crafting and dismantle tables based on dirty variables.
      */
     updateTablesDirty(which?: "crafting" | "dismantle"): void;
-    showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
+    showSortMenu(element: JQuery, container: JQuery, messageType: Message): void;
     getContainerId(containerElement: JQuery): string;
     sortItems(containerElement: JQuery, sortType: SortType, messageType?: Message, canReverse?: boolean, activeSort?: boolean): void;
     onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;
     updateSort(containerElement: JQuery, activeSort: boolean): void;
     isContainerDialogOver(x: number, y: number): boolean;
-    onUpdateDirection(): void;
-    onItemMenu(api: IBindHandlerApi): boolean;
     onItemQuickMove(api: IBindHandlerApi): boolean;
     onStopItemQuickMove(): boolean;
     onItemMove(api: IBindHandlerApi): boolean;
@@ -252,27 +206,11 @@ export default class InGameScreen extends BaseScreen {
     onItemEquipToggle(api: IBindHandlerApi): boolean;
     onItemProtectToggle(api: IBindHandlerApi): boolean;
     onItemRename(api: IBindHandlerApi): boolean;
-    onContextMenu(api: IBindHandlerApi): boolean;
-    onQuickSlotToggle(api: IBindHandlerApi): boolean;
-    onQuickSlot(api: IBindHandlerApi): boolean;
-    onQuickSlotClear(api: IBindHandlerApi): boolean;
-    protected onQuickSlotBindAction(api: IBindHandlerApi): boolean;
-    protected onQuickSlotBindItemAction(api: IBindHandlerApi): boolean;
     onDropItem(api: IBindHandlerApi): boolean;
     onReleaseDrop(): void;
-    onMenuCancel(): boolean;
     onCloseAllDialogs(): boolean;
     onMoreInformation(api: IBindHandlerApi): boolean;
     onDismantleTab(): boolean;
-    onInput(api: IBindHandlerApi): void;
-    private clearActionsMenuTileOverlay;
-    getAutoActionItem(actionType: ActionType, allowProtectedItems?: boolean): Item | undefined;
-    private runAutoAction;
-    private runAction;
-    private runContextMenuAction;
-    private updateContextMenu;
-    private confirmAction;
-    private resetQuickSlotBinds;
     private isOverlayVisible;
     private readonly onInterrupt;
     private readonly onInterruptClosed;

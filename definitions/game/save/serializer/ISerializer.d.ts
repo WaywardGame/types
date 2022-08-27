@@ -40,7 +40,7 @@ export interface ISerializerOptions {
     swallowErrors?: boolean;
 }
 export interface ISerializable {
-    serializeObject(serializer: ISerializer): void;
+    serializeObject(serializer: ISerializer): object | undefined;
     deserializeObject(serializer: ISerializer, dataType: Types): boolean;
 }
 export interface IPreSerializeCallback {

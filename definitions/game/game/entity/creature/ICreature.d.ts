@@ -78,7 +78,8 @@ export declare enum CreatureType {
     Pangolin = 51,
     Dryad = 52,
     Coyote = 53,
-    KomodoMonitor = 54
+    KomodoMonitor = 54,
+    BogBody = 55
 }
 export interface ICreatureOld extends Creature {
     hp: number;

@@ -23,7 +23,9 @@ import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
+import type { Prompt } from "game/meta/prompt/IPrompt";
 import { Milestone } from "game/milestones/IMilestone";
+import type InterruptChoice from "language/dictionary/InterruptChoice";
 import type IClientStore from "save/clientStore/IClientStore";
 import type { IUnserializedCallback } from "save/serializer/ISerializer";
 import type { IDialogInfo } from "ui/old/IOldUi";
@@ -71,6 +73,10 @@ export default class Player extends Human implements IUnserializedCallback {
     private updateCraftTable;
     updateDismantleTable(adjacentContainers?: IContainer[], force?: boolean): void;
     getName(): import("../../../language/impl/TranslationImpl").default;
+    /**
+     * Prompts the player
+     */
+    prompt(type: Prompt, ...args: any[]): Promise<boolean | InterruptChoice>;
     updateActionSlots(slots: number[], data: IActionBarSlotData[]): void;
     updateDialogInfo(dialogIndex: string | number): void;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;

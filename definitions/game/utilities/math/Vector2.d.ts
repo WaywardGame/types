@@ -117,7 +117,7 @@ export default class Vector2 implements IVector2, ISerializable {
     clamp(a: IVector2, b: IVector2): this;
     offset(direction: Direction): this;
     toString(): string;
-    serializeObject(serializer: ISerializer): void;
+    serializeObject(serializer: ISerializer): undefined;
     deserializeObject(serializer: ISerializer, dataType: Types): boolean;
 }
 export {};

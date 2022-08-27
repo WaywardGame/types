@@ -47,12 +47,6 @@ export interface IItemEvents {
     remove(): any;
     movedIsland(islandId: IslandId, itemId: number): any;
     /**
-     * Called when the human quickslots an item
-     * @param human The human object
-     * @param quickSlot The quickslot number
-     */
-    quickslot?(human: Human, quickSlot: number | undefined): void;
-    /**
      * Called when the human equips an item to a slot
      * @param human The human object
      * @param slot The slot
@@ -102,7 +96,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     vehicleFacingDirection?: Direction.Cardinal;
     weight: number;
     weightFraction?: number;
-    quickSlot: number[] | undefined;
     magic: MagicalPropertyManager;
     map: ItemMapManager;
     islandId: IslandId;
@@ -193,8 +186,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     isEquipped(includeDisabled?: true): boolean;
     getEquippedPlayer(): Human | undefined;
     getEquipSlot(includeDisabled?: true): EquipType | undefined;
-    setQuickSlot(human: Human, quickSlot: number, removeQuickSlot?: boolean): void;
-    clearQuickSlot(): void;
     isDecayed(): boolean;
     changeInto(type: ItemType, disableNotify?: boolean, emitTransformation?: boolean): void;
     /**

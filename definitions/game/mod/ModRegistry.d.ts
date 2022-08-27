@@ -13,6 +13,9 @@ import type { Command, CommandCallback } from "command/ICommand";
 import type { BiomeType, IBiomeDescription } from "game/biome/IBiome";
 import type { DoodadType, DoodadTypeGroup, IDoodadDescription, IDoodadGroupDescription } from "game/doodad/IDoodad";
 import type { ActionType, IActionDescription } from "game/entity/action/IAction";
+import type { UsableActionSet, usableActionSets } from "game/entity/action/usable/actions/UsableActionsMain";
+import type UsableActionRegistrar from "game/entity/action/usable/UsableActionRegistrar";
+import type { UsableActionGenerator } from "game/entity/action/usable/UsableActionRegistrar";
 import type { ICorpseDescription } from "game/entity/creature/corpse/ICorpse";
 import type { CreatureType, ICreatureDescription } from "game/entity/creature/ICreature";
 import type { StatusType } from "game/entity/IEntity";
@@ -108,7 +111,8 @@ export declare enum ModRegistrationType {
     TerrainDecoration = 40,
     TileEvent = 41,
     TileLayerType = 42,
-    WorldLayer = 43
+    UsableActions = 43,
+    WorldLayer = 44
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -322,10 +326,16 @@ export interface IQuadrantComponentRegistration extends IBaseModRegistration {
     name: string;
     class: new (id: QuadrantComponentId) => QuadrantComponent;
 }
+export interface IUsableActionsRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.UsableActions;
+    name: string;
+    set: UsableActionSet;
+    registrationHandler: (registrar: UsableActionRegistrar, ...args: any[]) => any;
+}
 export interface IInheritsRegistrationTime {
     useRegistrationTime: ModRegistrationType;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration);
+export declare type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration;
 export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare module Register {
     /**
@@ -592,6 +602,12 @@ declare module Register {
      * @param description The definition of this action.
      */
     export function action(name: string, description?: IActionDescription): <K extends string | number | symbol, T extends { [k in K]: ActionType; }>(target: T, key: K) => void;
+    /**
+     * Registers a "usable" action generator — actions that appear in the UI, and can be slotted in the action bar.
+     * @param set Where to append the usable actions
+     * @param registrationHandler The handler that will register the new actions
+     */
+    export function usableActions<SET extends UsableActionSet>(name: string, set: SET, registrationHandler: (registrar: UsableActionRegistrar, ...args: (typeof usableActionSets)[SET] extends UsableActionGenerator<infer ARGS> ? ARGS : []) => any): <K extends string | number | symbol, T extends { [k in K]: UsableActionGenerator<[]>; }>(target: T, key: K) => void;
     export function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends { [k in K]: InterModRegistry<V>; }>(target: T, key: K) => void;
     export function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends { [k in K]: InterModRegistration<V>; }>(target: T, key: K) => void;
     type ExtractRegisteredType<F> = F extends (...args: any) => infer F2 ? F2 extends (t: infer T, k: infer K) => any ? T[Extract<K, keyof T>] : never : never;

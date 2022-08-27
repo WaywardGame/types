@@ -27,6 +27,7 @@ import type Island from "game/island/Island";
 import type { IContainer, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type { RecipeType } from "game/item/recipe/RecipeRegistry";
+import type { IPromptDescriptionBase, PromptDescriptionArgs } from "game/meta/prompt/IPrompt";
 import type { Milestone } from "game/milestones/IMilestone";
 import type { ITile } from "game/tile/ITerrain";
 import type TileEvent from "game/tile/TileEvent";
@@ -133,7 +134,7 @@ export declare enum ActionType {
     Shoot = 94,
     Alter = 95,
     SailToIsland = 96,
-    UpdateItemQuickSlot = 97,
+    Unused1 = 97,
     RenameIsland = 98,
     Chop = 99,
     Mine = 100,
@@ -148,8 +149,7 @@ export declare enum ActionType {
     Absorb = 109,
     Exude = 110,
     PackGround = 111,
-    ToggleTilled = 112,
-    ActionConfirmerResponse = 113
+    ToggleTilled = 112
 }
 export declare enum ActionUsability {
     Paused = 0,
@@ -293,15 +293,9 @@ export interface IActionHandlerApi<E extends Entity = Entity, CU extends IAction
 }
 export interface IActionConfirmerApi<E extends Entity = Entity, CU extends IActionUsable = IActionUsable> extends IActionApi<E, CU> {
     /**
-     * If damaging any of the "used items" for this action will result in the item breaking, and this method is
-     * called from the `confirmer` of the action, a confirmation dialog will be shown asking if you want to
-     * proceed with the action.
-     *
-     * Note: This is called automatically if items are added in the `preExecutionHandler`. This should only be used in
-     * a custom confirmer if new items are added to the action here, and items *aren't* added in the `preExecutionHandler`.
-     * Otherwise the player could get two confirmations, and that's annoying.
+     * Prompts the user about something
      */
-    confirmItemsBroken(executor: E): Promise<boolean>;
+    prompt<PROMPT extends IPromptDescriptionBase<any[]>>(prompt: PROMPT, ...args: PromptDescriptionArgs<PROMPT>): Promise<boolean>;
 }
 export interface IActionSoundEffect {
     type: SfxType;

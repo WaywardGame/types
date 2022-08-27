@@ -8,10 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IPromptChoiceDescription, IPromptConfirmDescription, IPromptInfoDescription, IPromptInputDescription, IPromptMenuDescription, Prompt, PromptChoices, PromptPriority } from "game/meta/prompt/IPrompt";
+import type { IPromptChoiceDescription, IPromptConfirmDescription, IPromptDescriptionBase, IPromptInfoDescription, IPromptInputDescription, IPromptMenuDescription, Prompt, PromptChoices, PromptPriority } from "game/meta/prompt/IPrompt";
+import { PromptType } from "game/meta/prompt/IPrompt";
 import type InterruptChoice from "language/dictionary/InterruptChoice";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { MenuId } from "ui/screen/screens/menu/component/IMenu";
+export declare const promptDescriptions: Descriptions<PromptType, IPromptDescriptionBase<any>>;
 declare class PromptDescriptionFactory {
     private readonly _priority?;
     constructor(_priority?: PromptPriority | undefined);

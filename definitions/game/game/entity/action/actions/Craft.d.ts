@@ -12,8 +12,13 @@ import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type { IRequirementInfo } from "game/item/IItemManager";
+import type Item from "game/item/Item";
 export interface ICraftCanUse extends IActionUsable {
     requirementInfo: IRequirementInfo;
+    componentsRequired: Item[];
+    componentsConsumed: Item[];
+    baseComponent: Item | undefined;
+    canBurn: boolean;
 }
-declare const _default: Action<[ActionArgument.ItemType, ActionArgument.ItemArrayNearby, ActionArgument.ItemArrayNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default, void, ICraftCanUse, [import("../../../item/IItem").ItemType, import("../../../item/Item").default[], import("../../../item/Item").default[], (import("../../../item/Item").default | undefined)?, (boolean | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemType, [ActionArgument.ItemArrayNearby, ActionArgument.Undefined], [ActionArgument.ItemArrayNearby, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default, void, ICraftCanUse, [import("../../../item/IItem").ItemType, (Item[] | undefined)?, (Item[] | undefined)?, (Item | undefined)?, (boolean | undefined)?]>;
 export default _default;

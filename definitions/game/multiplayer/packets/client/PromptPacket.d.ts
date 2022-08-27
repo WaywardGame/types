@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Prompt } from "game/meta/prompt/IPrompt";
+import type { Prompt } from "game/meta/prompt/IPrompt";
 import ClientPacket from "multiplayer/packets/ClientPacket";
 export default class PromptPacket extends ClientPacket {
-    promptType: Prompt;
-    args: any;
+    type: Prompt;
+    args: any[];
     getDebugInfo(): string;
     process(): Promise<void>;
 }

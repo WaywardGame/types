@@ -137,7 +137,7 @@ export declare enum PromptPriority {
 }
 export declare type PromptDescriptionArgs<PROMPT extends IPromptDescriptionBase<any[]>> = PROMPT extends IPromptDescriptionBase<infer A> ? A : never;
 export interface IPromptDescriptionBase<A extends any[]> {
-    type?: Prompt;
+    type: Prompt;
     promptType: PromptType;
     priority?: PromptPriority;
     title?: TranslationGenerator<UiTranslation, A>;

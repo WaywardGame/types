@@ -10,12 +10,13 @@
  */
 import type { SfxType } from "audio/IAudio";
 import EventEmitter from "event/EventEmitter";
-import type { AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionDescription, IActionHandlerApi, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable } from "game/entity/action/IAction";
+import type { AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionHandlerApi, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument, ActionType } from "game/entity/action/IAction";
 import type Entity from "game/entity/Entity";
 import type { SkillType } from "game/entity/IHuman";
 import type { TurnType } from "game/entity/player/IPlayer";
 import type Item from "game/item/Item";
+import type { IPromptDescriptionBase, PromptDescriptionArgs } from "game/meta/prompt/IPrompt";
 import { Milestone } from "game/milestones/IMilestone";
 import type { ITile } from "game/tile/ITerrain";
 import ActionPacket from "multiplayer/packets/shared/ActionPacket";
@@ -35,7 +36,7 @@ interface ActionEvents {
      */
     postExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any, any>, args: any[]): any;
 }
-export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R, CU extends IActionUsable, AV extends any[]> extends EventEmitter.Host<ActionEvents> implements IActionApi<E, CU> {
+export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R, CU extends IActionUsable, AV extends any[]> extends EventEmitter.Host<ActionEvents> implements IActionApi<E, CU>, IActionConfirmerApi<E, CU> {
     /**
      * Gets an action by its description. If you're using the Action class for constructing the descriptions, just pass the action instance.
      *
@@ -99,6 +100,10 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private processNotUsableResult;
     execute(actionApiOrExecutor: IActionApi<E, CU> | E, ...args: AV): R | Promise<R>;
     executeConfirmer(actionApiOrExecutor: IActionApi<E, CU> | E, args: AV, argumentTypes?: ActionArgument[]): Promise<boolean>;
+    /**
+     * Prompts the user about something
+     */
+    prompt<PROMPT extends IPromptDescriptionBase<any[]>>(prompt: PROMPT, ...args: PromptDescriptionArgs<PROMPT>): Promise<boolean>;
     isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is IActionArgumentTypeMap[AA];
     setDelay(delay: number, replace?: boolean): this;
     setPassTurn(turnType?: TurnType): this;

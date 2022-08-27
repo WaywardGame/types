@@ -113,19 +113,93 @@ export interface IUsableActionExecutionContext {
 }
 export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> {
     id?: string | number;
+    /**
+     * Whether this action can be slotted in the action bar. Defaults to `true`.
+     */
     slottable?: boolean;
+    /**
+     * Whether this action is "applicable" given this player and these "provided" objects.
+     * @param player The player executing this action. This isn't always the local player!
+     * @param using What the player is using — items, doodads, etc.
+     */
     isApplicable?(player: Player, using: IUsableActionPossibleUsing): boolean;
+    /**
+     * A handler for registering translations for the action's name, description, etc.
+     */
     translate?: (translator: UsableActionTranslator) => UsableActionTranslator;
+    /**
+     * The icon this action should have, if any.
+     */
     icon?: UsableActionIconReference;
+    /**
+     * Where the icon should appear, when slotted with an item. Defaults to bottom right.
+     *
+     * Generally, top left means "something else interacting with the slotted item" rather than "the slotted item interacting with something."
+     * For example, "Harvest" shows in bottom right, because it's using this tool to harvest. Whereas "Repair With X" shows in top left,
+     * because it's repairing this tool.
+     */
     iconLocationOnItem?: ItemDetailIconLocation;
+    /**
+     * The tooltip this action should have, or an initialiser for it.
+     */
     tooltip?: ActionType | ((tooltip: Tooltip) => any);
+    /**
+     * A handler for what this action will highlight when hovered with the mouse.
+     * @param selectors The default selectors. The defaults can be removed, and/or additional selectors can be added.
+     * @param using What this action is using. Item, doodad, etc.
+     */
     highlight?(selectors: HighlightSelector[], using: IUsableActionPossibleUsing): any;
+    /**
+     * The bindable assigned to this action, for use in action context menus (ie, right clicking on the world or an item.)
+     * Allows for a dynamically generated bindable based on what this action is using — item, doodad, etc.
+     */
     bindable?: Bindable | ((using: IUsableActionUsing<REQUIREMENTS>) => Bindable | undefined);
-    submenu?(registrar: UsableActionRegistrar, using: IUsableActionUsing<REQUIREMENTS>): UsableActionRegistrar | void;
-    execute?(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): any;
-    isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>): ReturnableUsableActionUsability;
+    /**
+     * The contexts this action appears in.
+     * - "Always" means whenever an action of this type is shown, it will be. For example, the "item actions" menu.
+     * - "Direct" means whenever an action of this type is applicable to given objects, it will be. For example, a specific item's menu.
+     * - "Never" means it will never be shown in menus. This results in an action which is executable but never appears in menus.
+     */
     displayLevel?: ActionDisplayLevel;
+    /**
+     * The display order of this action compared to other actions.
+     * Generally you want to leave this as 0 (default) and just register your action in the correct place.
+     * Order can be generated dynamically based on the given objects — item, doodad, etc.
+     */
     order?: number | ((using: IUsableActionPossibleUsing) => number | undefined);
+    /**
+     * Whether this action is currently usable — even if an action "makes sense" with the player and the objects they're using,
+     * and the player can slot it and stuff, it might not currently be usable. For example, "harvest" having nothing to harvest.
+     * @param player The player executing this action. This isn't always the local player!
+     * @param using What the player is using — items, doodads, etc.
+     */
+    isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>): ReturnableUsableActionUsability;
+    /**
+     * Marks this "action" as a submenu container instead of an executable. Is a generator for the submenu.
+     * @param registrar The registrar that submenu actions should be appended to.
+     * @param using What this action is using. Item, doodad, etc.
+     */
+    submenu?(registrar: UsableActionRegistrar, using: IUsableActionUsing<REQUIREMENTS>): UsableActionRegistrar | void;
+    /**
+     * Executes this action. Generally, this is where you want to execute an internal action registered with `@Register.action`,
+     * as internal actions are called on all sides, rather than only clientside*.
+     *
+     * ***Warning:** While usable actions appear to only ever be client-side, they're *not always.*
+     * The "use when moving" feature for action slots results in actions being executed *only* on the server's side.
+     * **If you try to perform a client-side UI function here, such as showing a prompt, and a player puts the action in a "use when moving" action slot,
+     * the host will receive the prompt instead!**
+     *
+     * If you'd like to execute some things on clientside, you can check if the player is the local player by checking `if (player.asLocalPlayer)`,
+     * or ensure that this action is only executed clientside by setting `clientSide: true`, which disables support for the "use when moving" feature.
+     * @param player The player executing this action. This isn't always the local player!
+     * @param using What the player is using — items, doodads, etc.
+     * @param context Context to do with this action execution — where it's executed from, etc.
+     */
+    execute?(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): any;
+    /**
+     * Marks this usable action as only executable client-side. This disables support for "use when moving" in action slots.
+     */
+    clientSide?: true;
 }
 export interface IUsableActionDefinitionSubmenu<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {
     submenu(registrar: UsableActionRegistrar, using: IUsableActionUsing<REQUIREMENTS>): UsableActionRegistrar | void;
@@ -141,6 +215,19 @@ export interface IUsableActionDefinitionExecutable<REQUIREMENTS extends IUsableA
 }
 export declare type IUsableActionDefinition<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> = IUsableActionDefinitionSubmenu<REQUIREMENTS> | IUsableActionDefinitionExecutable<REQUIREMENTS>;
 export declare type ActionId = string | ActionType | UsableActionType;
+/**
+ * Create a basic usable action:
+ * ```ts
+ * UsableAction.create({...definition});
+ * ```
+ * If your action has item/doodad/creature/npc requirements:
+ * ```ts
+ * UsableAction.requiring({...requirements})
+ * 	.create({...definition});
+ * ```
+ *
+ * To learn about action definitions, see {@link IUsableActionDefinitionBase}
+ */
 declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements, DEFINITION extends IUsableActionDefinition<REQUIREMENTS> = IUsableActionDefinition<REQUIREMENTS>> {
     readonly requirements: REQUIREMENTS;
     readonly definition: DEFINITION;
