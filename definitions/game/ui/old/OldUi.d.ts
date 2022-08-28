@@ -65,5 +65,6 @@ export default class OldUi {
     openDialogs(): void;
     cancelSorting(): void;
     logErrorEvent(event: ErrorEvent | (Partial<ErrorEvent> & Error)): void;
+    private loggingRejection;
     private logPromiseRejectionEvent;
 }
