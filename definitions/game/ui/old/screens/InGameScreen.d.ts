@@ -208,7 +208,6 @@ export default class InGameScreen extends BaseScreen {
     onItemRename(api: IBindHandlerApi): boolean;
     onDropItem(api: IBindHandlerApi): boolean;
     onReleaseDrop(): void;
-    onCloseAllDialogs(): boolean;
     onMoreInformation(api: IBindHandlerApi): boolean;
     onDismantleTab(): boolean;
     private isOverlayVisible;

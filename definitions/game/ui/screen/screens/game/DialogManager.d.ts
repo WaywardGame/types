@@ -25,8 +25,8 @@ export default class DialogManager {
     open<ID extends DialogId>(id: ID, subId?: string): DialogById[ID];
     open<DIALOG extends Dialog>(id: DialogId, subId?: string): DIALOG;
     isVisible(id: DialogId, subId?: string): boolean | undefined;
-    close(id: DialogId | `${DialogId}` | `${DialogId},${string}`, subId?: string): Promise<this>;
-    closeAll(): Promise<void>;
+    close(id: DialogId | `${DialogId}` | `${DialogId},${string}`, subId?: string): boolean;
+    closeAll(): boolean;
     toggle<ID extends DialogId>(id: ID, force?: boolean, initializer?: (dialog: DialogById[ID]) => any, subId?: string): this;
     toggle<DIALOG extends Dialog>(id: DialogId, force?: boolean, initializer?: (dialog: DIALOG) => any, subId?: string): this;
     toggleAll(states: IDialogStates): this;

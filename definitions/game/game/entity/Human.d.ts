@@ -153,7 +153,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     getDamageModifier(): number;
     calculateDamageAmount(attackType: AttackType, weapon?: Item, ammoItem?: Item): number;
     isDualWielding(): boolean;
-    getAttack(attack?: AttackType): IAttack;
+    getAttack(attack?: AttackType, weapon?: Item): IAttack;
     private getAttackType;
     private getAttackSkillBonus;
     private getAttackSkill;

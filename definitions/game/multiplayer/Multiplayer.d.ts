@@ -61,10 +61,10 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private readonly _matchmakingSecret;
     constructor();
     isConnected(): boolean;
-    isReady(): boolean;
+    isPacketProcessingPaused(): boolean;
+    isProcessingPacket(): boolean;
     isServer(): boolean;
     isClient(): boolean;
-    isProcessingPacket(): boolean;
     getPlayerIdentifier(): string;
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions, updateGame?: boolean): void;

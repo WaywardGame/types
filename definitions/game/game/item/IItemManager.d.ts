@@ -11,6 +11,7 @@
 import type Doodad from "game/doodad/Doodad";
 import type { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
 import type { ActionType, IActionNotUsable } from "game/entity/action/IAction";
+import type Creature from "game/entity/creature/Creature";
 import type { ItemType, ItemTypeGroup } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type TileEvent from "game/tile/TileEvent";
@@ -49,6 +50,8 @@ export interface IGetBestItemsOptions extends IGetItemsOptions {
     filterType: ItemType;
     filterGroup: ItemTypeGroup;
     filterConsumable: true;
+    targetCreature: Creature;
+    ammoItem: Item;
     filter(item: Item): any;
 }
 export declare enum CraftStatus {

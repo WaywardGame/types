@@ -276,7 +276,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @returns A number (possibly 0 if no quality or action level).
      */
     getItemUseBonus(action?: ActionType): number;
-    getRangedWeapon(human: Human): Item | undefined;
+    getBestRangedWeapon(human: Human): Item | undefined;
     /**
      * Extinguishes to item if it is lit.
      * @param human Human entity that is carrying the item to extinguish.

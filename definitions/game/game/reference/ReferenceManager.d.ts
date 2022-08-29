@@ -59,7 +59,7 @@ export declare module Reference {
 }
 export default class ReferenceManager {
     static isEnumReference(type: ReferenceType): type is EnumReferenceTypes;
-    static getList(type: ReferenceType, gameIsland?: Island): import("../entity/creature/corpse/CorpseManager").default | import("../entity/creature/CreatureManager").default | import("../doodad/DoodadManager").default | import("../item/ItemManager").default | import("../entity/npc/NPCManager").default | import("../tile/TileEventManager").default | readonly Milestone[] | readonly SkillType[] | (Player | undefined)[] | readonly ItemType[] | EquipType[] | IterableIterator<Island> | readonly Stat[] | (string | ActionType)[];
+    static getList(type: ReferenceType, gameIsland?: Island): import("../entity/creature/corpse/CorpseManager").default | import("../entity/creature/CreatureManager").default | import("../doodad/DoodadManager").default | import("../item/ItemManager").default | import("../entity/npc/NPCManager").default | import("../tile/TileEventManager").default | (Player | undefined)[] | readonly Milestone[] | readonly SkillType[] | readonly ItemType[] | EquipType[] | IterableIterator<Island> | readonly Stat[] | (string | ActionType)[];
     static get(thing: Referenceable): Reference | undefined;
     static getReferenceType(thing: Value<IReferenceTypeMap>): ReferenceType;
     private referenceCursor;

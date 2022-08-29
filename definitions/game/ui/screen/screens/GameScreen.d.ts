@@ -104,6 +104,7 @@ export default class GameScreen extends Screen {
     protected create(): void;
     protected onHide(): void;
     protected onResize(): void;
+    protected onCloseAllDialogs(): boolean;
     /**
      * Adds a quadrant element to the screen.
      *

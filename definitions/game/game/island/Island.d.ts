@@ -42,7 +42,7 @@ import World from "renderer/world/World";
 import type { IPreSerializeCallback, ISerializer } from "save/serializer/ISerializer";
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
-import { Random, SeededGenerator } from "utilities/random/Random";
+import type { Random, SeededGenerator } from "utilities/random/Random";
 import type { IVersionInfo } from "utilities/Version";
 import Vector3 from "utilities/math/Vector3";
 export interface IIslandDetails {

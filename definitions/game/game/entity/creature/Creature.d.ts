@@ -17,7 +17,7 @@ import type Human from "game/entity/Human";
 import type { IStatChangeInfo } from "game/entity/IEntity";
 import { AiType, EntityType, MoveType, StatusType } from "game/entity/IEntity";
 import type { IStat } from "game/entity/IStats";
-import type { CreationId } from "game/IGame";
+import { CreationId } from "game/IGame";
 import { TileUpdateType } from "game/IGame";
 import type { IObject } from "game/IObject";
 import type Island from "game/island/Island";
@@ -28,7 +28,7 @@ import type { IUnserializedCallback } from "save/serializer/ISerializer";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 export default class Creature extends Entity implements IUnserializedCallback, IObject<CreatureType> {
     static is(value: any): value is Creature;
-    readonly objectType: CreationId.Creature;
+    readonly objectType = CreationId.Creature;
     event: IEventEmitter<this, ICreatureEvents>;
     readonly entityType: EntityType.Creature;
     readonly tileUpdateType = TileUpdateType.Creature;

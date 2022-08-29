@@ -214,13 +214,13 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     countItemsInContainer(containers: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: Item): number;
     countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item): number;
     /**
-     * Get the best tier items sorted by how good they are
+     * Get the best items sorted by how good they are
      */
-    getBestSafeItems(container: IContainer, options?: Partial<IGetBestItemsOptions>): Item[];
+    getBestSafeItems(human: Human, container: IContainer, options?: Partial<IGetBestItemsOptions>): Item[];
     /**
-     * Get the best tier item
+     * Get the best item
      */
-    getBestSafeItem(container: IContainer, options?: Partial<IGetBestItemsOptions>): Item | undefined;
+    getBestSafeItem(human: Human, container: IContainer, options?: Partial<IGetBestItemsOptions>): Item | undefined;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, options?: Partial<IGetItemOptions>): Item | undefined;
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, options?: Partial<IGetItemOptions>): Item | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, options?: Partial<IGetItemOptions>): Item | undefined;

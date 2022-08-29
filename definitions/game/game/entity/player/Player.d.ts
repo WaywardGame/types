@@ -23,7 +23,7 @@ import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
-import type { Prompt } from "game/meta/prompt/IPrompt";
+import { Prompt } from "game/meta/prompt/IPrompt";
 import { Milestone } from "game/milestones/IMilestone";
 import type InterruptChoice from "language/dictionary/InterruptChoice";
 import type IClientStore from "save/clientStore/IClientStore";

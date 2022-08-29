@@ -11,9 +11,7 @@
 import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-import type Island from "game/island/Island";
 export interface ISailToIslandCanUse extends IActionUsable {
-    newIsland?: Island;
     distanceFromEdge?: number;
 }
 declare const _default: Action<[ActionArgument.Integer32, ActionArgument.Integer32], import("../../Human").default, void, ISailToIslandCanUse, [number, number]>;
