@@ -40,7 +40,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
         attacks: number;
         attempts: number;
     };
-    respawned?: boolean;
+    respawned?: number;
     shouldSkipNextUpdate: boolean;
     type: CreatureType;
     originalMoveType: MoveType | undefined;

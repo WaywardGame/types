@@ -32,6 +32,7 @@ export default class Corpse extends EventEmitter.Host<ICorpseEvents> implements 
     referenceId?: number;
     renamed?: string | ISerializedTranslation | undefined;
     step?: number | undefined;
+    respawned?: number;
     type: CreatureType;
     x: number;
     y: number;

@@ -150,7 +150,6 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
     lootGroup?: LootGroupType;
     jumpOver?: boolean;
     noCorpse?: boolean;
-    respawn?: boolean;
     reputation: number;
     waterAnimations?: boolean;
     tamingDifficulty?: number;
