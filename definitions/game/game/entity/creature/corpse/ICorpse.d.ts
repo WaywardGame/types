@@ -23,6 +23,7 @@ export interface ICorpseDescription extends IModdable {
     lightColor?: IRGB;
     animated?: boolean;
     isFlammable?: boolean;
+    isTall?: boolean;
     respawns?: boolean;
 }
 export interface ICorpseResourceDrop {

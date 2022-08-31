@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import type { ICorpseDescription } from "game/entity/creature/corpse/ICorpse";
 import { CreatureType } from "game/entity/creature/ICreature";
 import type { CreationId } from "game/IGame";
 import type { IObject } from "game/IObject";
@@ -20,7 +21,19 @@ import type { ISerializedTranslation } from "language/ITranslation";
 import type Translation from "language/Translation";
 import type { IVector3 } from "utilities/math/IVector";
 export interface ICorpseEvents {
+    /**
+     * Called when the entity is created in the game
+     * Also called for players that "rejoin" the game
+     */
+    created(): void;
+    /**
+     * Called when the entity is removed from the game
+     */
+    removed(): void;
 }
+/**
+ * TODO: extends Entity?
+ */
 export default class Corpse extends EventEmitter.Host<ICorpseEvents> implements IObject<CreatureType>, IVector3, IReferenceable {
     static is(value: any): value is Corpse;
     readonly objectType: CreationId.Corpse;
@@ -38,6 +51,7 @@ export default class Corpse extends EventEmitter.Host<ICorpseEvents> implements 
     y: number;
     z: number;
     islandId: IslandId;
+    private _description;
     constructor(type?: CreatureType, islandId?: `${number},${number}`, x?: number, y?: number, z?: number, decay?: number);
     get island(): import("../../../island/Island").default;
     toString(): string;
@@ -51,9 +65,17 @@ export default class Corpse extends EventEmitter.Host<ICorpseEvents> implements 
      * - `corpse.getName(undefined, 3)` // "acid spitter demons"
      */
     getName(article?: false | "definite" | "indefinite", count?: number): Translation;
+    description(): ICorpseDescription | undefined;
     getTile(): ITile;
     isValid(): boolean;
     getDecayAtStart(): number;
     update(): void;
     getResources(clientSide?: boolean): ItemType[];
+    protected onCreated(): void;
+    protected onRemoved(): void;
+    /**
+     * Updates the DoodadOverHidden tile flag if the creature is large.
+     * Large creatures should render over the doodad over layer, which means we should hide the doodad over layer for doodads on the creatures tile.
+     */
+    updateDoodadOverHiddenState(shouldBeHidden: boolean): void;
 }

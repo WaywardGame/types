@@ -26,7 +26,7 @@ import QuadrantComponent from "ui/screen/screens/game/component/QuadrantComponen
 import ActionsConfigurationDrawer from "ui/screen/screens/game/static/actions/ActionsDrawer";
 import ActionSlotTooltipHandler from "ui/screen/screens/game/static/actions/ActionSlotTooltip";
 import { IActionBarSlotData } from "ui/screen/screens/game/static/actions/IActionBar";
-export declare const MAX_SLOTS = 50;
+export declare const MAX_SLOTS = 48;
 export declare enum ActionBarClasses {
     Main = "game-action-bar",
     Configuring = "game-action-bar-configuring",
@@ -107,7 +107,7 @@ export declare class ActionSlot extends Button implements IRefreshable {
     clear(): void;
     equipItem(item: Item, configure?: boolean): void;
     protected onConfigureBind(api: IBindHandlerApi): boolean;
-    configure(): void;
+    configure(emitToActionBar?: boolean): void;
     protected onAppend(): void;
     protected onItemMaybeInaccessible(): void;
     postExecuteAction(action: IActionApi): void;

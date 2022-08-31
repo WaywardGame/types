@@ -221,6 +221,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
      */
     private renderStatusEffect;
     private spriteBatchForLayer;
+    addTileToViewport(visibleTiles: Set<ITile>, x: number, y: number, itemBatch: ISpriteBatch | undefined): void;
     computeSpritesInViewportImmediately(): void;
     private batchItems;
     private batchItem;

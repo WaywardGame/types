@@ -49,7 +49,7 @@ declare enum ModifierType {
 export declare type Modifier = keyof typeof ModifierType;
 export declare module Modifier {
     function is(value: unknown): value is Modifier;
-    function translate(modifier: Modifier): TranslationImpl;
+    function translate(modifier: Modifier, simplify?: boolean): TranslationImpl;
     function getTranslationId(modifier: Modifier): string;
     function setsEqual(modifiersA: Set<Modifier>, modifiersB: Set<Modifier>): boolean;
     function all(): readonly Modifier[];
