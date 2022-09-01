@@ -127,7 +127,7 @@ export default class InGameScreen extends BaseScreen {
     onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery | undefined, isInventoryContainer: boolean, updateTables?: boolean): void;
     afterAddingMultipleItemsToContainer(container: IContainer): void;
     removeItemFromContainer(item: Item, container: IContainer): void;
-    refreshContainerName(container: IContainer): void;
+    refreshContainerName(container: IContainer, nestedUpdate?: boolean): void;
     getInventoryItemsInOrder(): any[];
     saveItemOrder(containerElement: JQuery, activeSort?: boolean): void;
     craftItem(itemType: ItemType): void;
@@ -169,7 +169,7 @@ export default class InGameScreen extends BaseScreen {
     closeStaticContainers(): void;
     hasOpenContainer(): boolean;
     closeAllContainers(closeType?: "close" | "destroy"): boolean;
-    updateContainerName(containerDialogElement: JQuery): void;
+    updateContainerName(containerDialogElement: JQuery, nestedUpdate?: boolean): void;
     updateActiveContainer(): void;
     getActiveContainer(): IUiContainer | undefined;
     getOpenContainers(): IUiContainer[];

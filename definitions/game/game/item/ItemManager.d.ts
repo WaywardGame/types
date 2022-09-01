@@ -234,6 +234,11 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      * @returns whether the given containable is, or is contained within, the given container
      */
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
+    /**
+     * @returns whether the given containable is, or is contained within, a trade container
+     */
+    isContainableInTradeContainer(containable: IContainable): boolean;
+    getTradeContainerForContainer(containable: IContainer | undefined): IContainer | undefined;
     getAdjacentContainers(humanOrPosition: Human | IVector3, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
     isContainableInAdjacentContainer(human: Human, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isInInventory(containable: IContainable): boolean;
@@ -298,7 +303,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      */
     loadReference(container: IContainer, loadChildReferences?: boolean): boolean;
     private removeFromContainerInternal;
-    private updateUiOnItemRemove;
+    private onItemMoveOrRemove;
     private getCraftTierBonus;
     computeCraftQualityBonus(itemType: ItemType, itemsToRequire: Item[], itemsToConsume: Item[], doodadsUsed: IDoodadsUsed[] | undefined): number;
     getCraftChance(human: Human, recipe: IRecipe, qualityBonus: number, returnQuality?: boolean, alwaysReturn?: boolean): number;

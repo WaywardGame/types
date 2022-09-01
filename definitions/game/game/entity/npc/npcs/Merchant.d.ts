@@ -39,6 +39,10 @@ export default class MerchantNPC extends NPC {
      */
     private capStatTimers;
     /**
+     * Equip better things when available
+     */
+    private processEquipment;
+    /**
      * Try to do something when health is below 20%
      */
     private processHealth;
@@ -51,4 +55,6 @@ export default class MerchantNPC extends NPC {
      */
     private processThirst;
     get asMerchant(): MerchantNPC;
+    private calculateWeaponEquipItemScore;
+    private calculateDefenseEquipItemScore;
 }

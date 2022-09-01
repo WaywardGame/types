@@ -183,8 +183,8 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getDamageModifier(): number;
     isDamaged(): boolean;
     isInTradeContainer(): boolean;
+    getEquippedHuman(): Human | undefined;
     isEquipped(includeDisabled?: true): boolean;
-    getEquippedPlayer(): Human | undefined;
     getEquipSlot(includeDisabled?: true): EquipType | undefined;
     isDecayed(): boolean;
     changeInto(type: ItemType, disableNotify?: boolean, emitTransformation?: boolean): void;

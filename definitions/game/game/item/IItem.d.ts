@@ -68,6 +68,7 @@ export declare const SYMBOL_CONTAINER_ITEMS_TEMPERATURE: unique symbol;
 export declare const SYMBOL_CONTAINER_TILE_TEMPERATURE: unique symbol;
 export interface IContainable {
     containedWithin?: IContainer;
+    containerType?: ContainerType;
     [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
 }
 export interface IContainer extends IContainable {
@@ -77,7 +78,6 @@ export interface IContainer extends IContainable {
     containedItems: Item[];
     transientItems?: Item[];
     itemOrders?: number[];
-    containerType?: ContainerType;
 }
 export interface IItemDisassembleResult {
     items: IItemDisassembly[];

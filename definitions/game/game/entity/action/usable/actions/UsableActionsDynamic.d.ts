@@ -18,15 +18,16 @@ export interface IUsableActionDynamicDefinition {
     icon?: UsableActionIconReference;
     bindable: Bindable;
     displayLevel?: ActionDisplayLevel;
+    order?: number;
 }
 export interface IUsableActionsDynamicConfig<DEFINITION extends IUsableActionDynamicDefinition, REQUIREMENTS extends IUsableActionRequirements> {
     id: string;
     record: PartialRecord<ActionType, DEFINITION | false>;
     getDynamic(actions: Set<ActionType>): any;
     requirements?(action: ActionType, definition?: DEFINITION): REQUIREMENTS;
-    isUsable(action: ActionType, player: Player, using: IUsableActionUsing<REQUIREMENTS>): ReturnableUsableActionUsability;
-    execute(action: ActionType, player: Player, using: IUsableActionUsing<REQUIREMENTS>): any;
-    order?(action: ActionType, using: IUsableActionPossibleUsing): number | undefined;
+    isUsable(action: ActionType, player: Player, using: IUsableActionUsing<REQUIREMENTS>, definition?: DEFINITION): ReturnableUsableActionUsability;
+    execute(action: ActionType, player: Player, using: IUsableActionUsing<REQUIREMENTS>, definition?: DEFINITION): any;
+    order?(action: ActionType, using: IUsableActionPossibleUsing, definition?: DEFINITION): number | undefined;
 }
 export default class UsableActionsDynamic<DEFINITION extends IUsableActionDynamicDefinition, REQUIREMENTS extends IUsableActionRequirements> extends UsableActionGenerator {
     constructor(config: IUsableActionsDynamicConfig<DEFINITION, REQUIREMENTS>);

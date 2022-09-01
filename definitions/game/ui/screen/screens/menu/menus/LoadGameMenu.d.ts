@@ -19,7 +19,7 @@ export default class LoadGameMenu extends Menu {
     private sort;
     private sortDirection;
     private newGameButton;
-    private readonly milestonesNotUnlockableWarning;
+    private milestonesNotUnlockableWarning;
     private readonly selectedRow;
     constructor();
     protected onSelect(api: IBindHandlerApi): boolean;
