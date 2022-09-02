@@ -11,7 +11,7 @@
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { ActionType } from "game/entity/action/IAction";
 import Human from "game/entity/Human";
-import { AiType, EntityType, MoveType } from "game/entity/IEntity";
+import { AiType, EntityType, MoveType, StatusType } from "game/entity/IEntity";
 import type { ICustomizations } from "game/entity/IHuman";
 import { EquipType } from "game/entity/IHuman";
 import type { NPCType } from "game/entity/npc/INPCs";
@@ -63,6 +63,7 @@ export default abstract class NPC extends Human {
     createMessageManager(): MessageManagerNoOp;
     createQuestManager(): QuestManagerNoOp;
     addMilestone(): void;
+    protected getApplicableStatusEffects(): Set<StatusType>;
     /**
      * Creates inventory, equips items, and scales stats
      */

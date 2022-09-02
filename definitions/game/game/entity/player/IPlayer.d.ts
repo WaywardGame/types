@@ -111,10 +111,14 @@ export interface IPlayerEvents extends Events<Human> {
      */
     idChanged(currentId: number, newId: number, isAbsentPlayer: boolean): any;
 }
-export declare enum TurnType {
-    CheckUnderPlayer = 0,
-    DontEnterCaves = 1,
-    Idle = 2
+export declare enum TurnTypeFlag {
+    CheckUnderPlayer = 1,
+    DontEnterCaves = 2,
+    Idle = 4,
+    /**
+     * Indicates the turn is passing due to a movement
+     */
+    Movement = 8
 }
 export interface IAttackHand {
     mainHand: number;

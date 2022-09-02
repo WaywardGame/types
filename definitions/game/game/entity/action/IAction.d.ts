@@ -20,7 +20,7 @@ import type { EquipType, RestType, SkillType } from "game/entity/IHuman";
 import type NPC from "game/entity/npc/NPC";
 import type { MessageType } from "game/entity/player/IMessageManager";
 import { Source } from "game/entity/player/IMessageManager";
-import type { TurnType } from "game/entity/player/IPlayer";
+import type { TurnTypeFlag } from "game/entity/player/IPlayer";
 import type Player from "game/entity/player/Player";
 import type { Quality } from "game/IObject";
 import type Island from "game/island/Island";
@@ -249,7 +249,7 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
      */
     isCreatureBlocking(tile: ITile): boolean;
     setDelay(delay: number, replace?: boolean): this;
-    setPassTurn(turnType?: TurnType): this;
+    setPassTurn(turnType?: TurnTypeFlag): this;
     setUpdateView(updateFov?: boolean): this;
     setUpdateRender(): this;
     setUpdateTablesAndWeight(): this;

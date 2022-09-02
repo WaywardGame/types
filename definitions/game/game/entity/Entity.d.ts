@@ -66,6 +66,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     attackAnimationType: DamageType | undefined;
     attackAnimationTime: IMovementTime | undefined;
     isMovingClientside: boolean;
+    allowSmartMovementClientside: boolean;
     protected _movementTime: {
         start: number;
         end: number;

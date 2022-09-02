@@ -25,6 +25,7 @@ import { ItemType, ItemTypeGroup, RecipeLevel } from "game/item/IItem";
 import type Item from "game/item/Item";
 import { TempType } from "game/temperature/ITemperature";
 import type { ITile } from "game/tile/ITerrain";
+import Message from "language/dictionary/Message";
 import type { IModdable } from "mod/ModRegistry";
 import type { IOptions } from "save/data/ISaveDataGlobal";
 import type { IRGB } from "utilities/Color";
@@ -332,6 +333,7 @@ export declare enum RestCancelReason {
     Canceled = 5,
     Dying = 6
 }
+export declare const restCancelReasonMessageMap: Record<RestCancelReason, Message | undefined>;
 export interface IRestData {
     type: RestType;
     startHealth: number;
@@ -339,7 +341,7 @@ export interface IRestData {
     itemId?: number;
     doodadId?: number;
     cycle?: number;
-    cancelReason?: RestCancelReason;
+    cancelReason?: Set<RestCancelReason>;
 }
 export declare enum RestType {
     Resting = 0,

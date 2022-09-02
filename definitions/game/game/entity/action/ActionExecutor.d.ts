@@ -14,7 +14,7 @@ import type { AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionC
 import { ActionArgument, ActionType } from "game/entity/action/IAction";
 import type Entity from "game/entity/Entity";
 import type { SkillType } from "game/entity/IHuman";
-import type { TurnType } from "game/entity/player/IPlayer";
+import type { TurnTypeFlag } from "game/entity/player/IPlayer";
 import type Item from "game/item/Item";
 import type { IPromptDescriptionBase, PromptDescriptionArgs } from "game/meta/prompt/IPrompt";
 import { Milestone } from "game/milestones/IMilestone";
@@ -106,7 +106,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     prompt<PROMPT extends IPromptDescriptionBase<any[]>>(prompt: PROMPT, ...args: PromptDescriptionArgs<PROMPT>): Promise<boolean>;
     isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is IActionArgumentTypeMap[AA];
     setDelay(delay: number, replace?: boolean): this;
-    setPassTurn(turnType?: TurnType): this;
+    setPassTurn(turnType?: TurnTypeFlag): this;
     setUpdateView(updateFov?: boolean): this;
     setUpdateRender(): this;
     setUpdateTablesAndWeight(): this;

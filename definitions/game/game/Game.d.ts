@@ -16,7 +16,7 @@ import type Human from "game/entity/Human";
 import type { Defense } from "game/entity/IEntity";
 import { DamageType } from "game/entity/IEntity";
 import type { Delay } from "game/entity/IHuman";
-import type { TurnType } from "game/entity/player/IPlayer";
+import type { TurnTypeFlag } from "game/entity/player/IPlayer";
 import type { IGameEvents, IMovementTime, IPlayOptions, ISynchronizeState } from "game/IGame";
 import { PauseSource, SaveType, TickFlag, TurnMode } from "game/IGame";
 import type Island from "game/island/Island";
@@ -132,7 +132,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      * Marks that the human had a turn
      * In manual turn mode, it will tick the humans stat timers & the game
      */
-    passTurn(human: Human, turnType?: TurnType): void;
+    passTurn(human: Human, turnType?: TurnTypeFlag): void;
     tickRealtime(): void;
     updateView(source: RenderSource, updateFov?: boolean, computeSpritesNow?: boolean): void;
     updateTablesAndWeight(): void;

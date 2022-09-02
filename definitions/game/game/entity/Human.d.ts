@@ -21,7 +21,7 @@ import type { IStat } from "game/entity/IStats";
 import { Stat } from "game/entity/IStats";
 import type { IMessageManager } from "game/entity/player/IMessageManager";
 import type { ILoadOnIslandOptions, IMobCheck, IMovementIntent, IWalkPath } from "game/entity/player/IPlayer";
-import { PlayerState, TurnType, WeightStatus } from "game/entity/player/IPlayer";
+import { PlayerState, TurnTypeFlag, WeightStatus } from "game/entity/player/IPlayer";
 import type { INoteManager } from "game/entity/player/note/NoteManager";
 import PlayerDefense from "game/entity/player/PlayerDefense";
 import type { IQuestManager } from "game/entity/player/quest/QuestManager";
@@ -241,12 +241,12 @@ export default abstract class Human extends Entity implements IHasInsulation {
     private recalculateInsulation;
     private getEquipmentInsulation;
     discoverRecipe(recipeType: ItemType, crafted?: ICrafted, discoveredClientSide?: boolean): void;
-    passTurn(turnType?: TurnType): void;
+    passTurn(turnType?: TurnTypeFlag): void;
     /**
      * Ticks a player
      * @returns True if the game should tick after this
      */
-    tick(isPassTurn?: boolean): boolean;
+    tick(isPassTurn?: boolean, turnType?: TurnTypeFlag): boolean;
     private restTick;
     getDamage(causesDamage: ICausesDamage, equipType?: EquipType): number;
     private slitherSuckerDamage;

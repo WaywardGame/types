@@ -15,6 +15,7 @@ export interface ISortableEvent {
     initialContainer: JQuery;
     targetContainer?: JQuery;
     all?: true;
+    quality?: true;
 }
 export interface ISortableOptions {
     connectWith?: string;
