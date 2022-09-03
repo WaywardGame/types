@@ -142,7 +142,7 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
     /**
      * The icon this action should have, if any.
      */
-    icon?: UsableActionIconReference;
+    icon?: SupplierOr<UsableActionIconReference, [using: IUsableActionPossibleUsing, action: UsableAction<REQUIREMENTS>]>;
     /**
      * Where the icon should appear, when slotted with an item. Defaults to bottom right.
      *
@@ -261,14 +261,14 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     getDoodad(player: Player, provided?: IUsableActionPossibleUsing): false | Doodad | undefined;
     getCreature(player: Player, provided?: IUsableActionPossibleUsing): false | Creature | undefined;
     getNPC(player: Player, provided?: IUsableActionPossibleUsing): false | NPC | undefined;
-    getIcon(): {
+    getIcon(provided: IUsableActionPossibleUsing): {
         path: ImagePath<PathType.Action>;
         width: number;
         height: number;
     } | undefined;
     getHighlightSelectors(using?: IUsableActionPossibleUsing): HighlightSelector[];
     private translator?;
-    getTranslation(using?: IUsableActionUsing<REQUIREMENTS>, which?: ActionTranslation): TranslationImpl | undefined;
+    getTranslation(using?: IUsableActionUsing<REQUIREMENTS>, which?: ActionTranslation): Translation | undefined;
     getOrder(using?: IUsableActionPossibleUsing): number;
 }
 export declare class UsableActionTranslator {
@@ -276,9 +276,9 @@ export declare class UsableActionTranslator {
     private nameSupplier?;
     private descriptionSupplier?;
     constructor(id: ActionId);
-    name(supplier: SupplierOr<Translation, [IUsableActionPossibleUsing]>): this;
-    description(supplier: SupplierOr<Translation, [IUsableActionPossibleUsing]>): this;
-    get(using?: IUsableActionPossibleUsing, which?: ActionTranslation): TranslationImpl | undefined;
+    name(supplier: SupplierOr<Translation, [using: IUsableActionPossibleUsing, action: UsableAction]>): this;
+    description(supplier: SupplierOr<Translation, [using: IUsableActionPossibleUsing, action: UsableAction]>): this;
+    get(action: UsableAction, using?: IUsableActionPossibleUsing, which?: ActionTranslation): Translation | undefined;
 }
 export interface IUsableActionFactory<REQUIREMENTS extends IUsableActionRequirements> {
     create: <DEFINITION extends IUsableActionDefinition<REQUIREMENTS>>(action: DEFINITION) => UsableAction<REQUIREMENTS, DEFINITION>;

@@ -29,5 +29,5 @@ export interface ToggleVehicleItemCanUse extends IActionUsable {
     facingTile?: ITile;
 }
 export declare type ToggleVehicleCanUse = ToggleVehicleDoodadCanUse | ToggleVehicleItemCanUse;
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad]], import("../../Human").default, void, ToggleVehicleCanUse, [Doodad | Item]>;
+declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Undefined]], import("../../Human").default, void, ToggleVehicleCanUse, [(Doodad | Item | undefined)?]>;
 export default _default;

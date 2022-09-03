@@ -16,15 +16,16 @@ import NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
+export interface IMerchantBuyPrice {
+    base: number;
+    bonus: number;
+    total: number;
+}
 export default class MerchantNPC extends NPC {
     constructor(id?: number, islandId?: `${number},${number}`, x?: number, y?: number, z?: number);
     getActions(): ActionType[] | undefined;
     getSellPrice(player: Player, item: Item): number | undefined;
-    getBuyPrice(player: Player, item: Item): {
-        base: number;
-        bonus: number;
-        total: number;
-    } | undefined;
+    getBuyPrice(player: Player, item: Item): IMerchantBuyPrice | undefined;
     protected getReputationChangeOnDeath(): number;
     protected getDefaultName(): import("../../../../language/impl/TranslationImpl").default;
     protected initializeStats(): void;

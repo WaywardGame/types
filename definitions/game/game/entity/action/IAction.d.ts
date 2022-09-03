@@ -51,7 +51,7 @@ export declare enum ActionType {
     Sleep = 11,
     Heal = 12,
     Dig = 13,
-    Paddle = 14,
+    Ride = 14,
     GatherLiquid = 15,
     Cast = 16,
     Lockpick = 17,
@@ -145,11 +145,12 @@ export declare enum ActionType {
     UpdateOption = 105,
     UpdateGameOption = 106,
     UpdateWalkPath = 107,
-    Operate = 108,
+    Unused2 = 108,
     Absorb = 109,
     Exude = 110,
     PackGround = 111,
-    ToggleTilled = 112
+    ToggleTilled = 112,
+    DismountVehicle = 113
 }
 export declare enum ActionUsability {
     Paused = 0,

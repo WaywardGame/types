@@ -61,5 +61,7 @@ export declare enum UsableActionType {
 export declare enum UsableActionTypePlaceholder {
     TradeItem = 2000000,
     MoveAllToInventory = 2000001,
-    MoveAllOfSameQualityToInventory = 2000002
+    MoveAllOfSameQualityToInventory = 2000002,
+    Paddle = 2000003,
+    Operate = 2000004
 }

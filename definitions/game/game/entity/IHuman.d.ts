@@ -331,7 +331,8 @@ export declare enum RestCancelReason {
     NearbyCreatureDamagedDoodad = 3,
     CreatureDamaged = 4,
     Canceled = 5,
-    Dying = 6
+    Dying = 6,
+    WaterPoured = 7
 }
 export declare const restCancelReasonMessageMap: Record<RestCancelReason, Message | undefined>;
 export interface IRestData {

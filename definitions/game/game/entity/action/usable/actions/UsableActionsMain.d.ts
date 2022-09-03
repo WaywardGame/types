@@ -17,25 +17,26 @@ export declare enum UsableActionSet {
      * Note that `order` is used to sort "use item/doodad/npc" actions to the top — the actions that appear in {@link IItemDescription.use}.
      */
     First = 0,
-    WithHands = 1,
-    PickUp = 2,
-    Rest = 3,
-    Misc = 4,
-    Till = 5,
-    UseItem = 6,
-    CloseContainer = 7,
-    Equip = 8,
-    Craft = 9,
-    XWithY = 10,
-    ItemMisc = 11,
-    ItemDrop = 12,
-    ItemMoveMenus = 13,
-    Doodads = 14,
-    Creatures = 15,
-    UseNPC = 16,
-    Rename = 17,
-    Protect = 18,
-    Main = 19
+    Vehicle = 1,
+    WithHands = 2,
+    PickUp = 3,
+    Rest = 4,
+    Misc = 5,
+    Till = 6,
+    UseItem = 7,
+    CloseContainer = 8,
+    Equip = 9,
+    Craft = 10,
+    XWithY = 11,
+    ItemMisc = 12,
+    ItemDrop = 13,
+    ItemMoveMenus = 14,
+    Doodads = 15,
+    Creatures = 16,
+    UseNPC = 17,
+    Rename = 18,
+    Protect = 19,
+    Main = 20
 }
 export declare const usableActionSets: {
     0: UsableActionGenerator<[]>;
@@ -44,18 +45,19 @@ export declare const usableActionSets: {
     3: UsableActionGenerator<[]>;
     4: UsableActionGenerator<[]>;
     5: UsableActionGenerator<[]>;
-    6: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/item/UsableActionsUseItem").IUseItemAction, import("game/entity/action/usable/UsableAction").IUsableActionRequirements>;
-    7: UsableActionGenerator<[]>;
+    6: UsableActionGenerator<[]>;
+    7: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/item/UsableActionsUseItem").IUseItemAction, import("game/entity/action/usable/UsableAction").IUsableActionRequirements>;
     8: UsableActionGenerator<[]>;
     9: UsableActionGenerator<[]>;
     10: UsableActionGenerator<[]>;
     11: UsableActionGenerator<[]>;
-    12: UsableActionGenerator<[isDropMenu?: true | undefined]>;
-    13: UsableActionGenerator<[]>;
+    12: UsableActionGenerator<[]>;
+    13: UsableActionGenerator<[isDropMenu?: true | undefined]>;
     14: UsableActionGenerator<[]>;
     15: UsableActionGenerator<[]>;
-    16: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/UsableActionsUseNPC").IUseNPCAction, import("game/entity/action/usable/UsableAction").IUsableActionRequirements>;
-    17: UsableActionGenerator<[]>;
+    16: UsableActionGenerator<[]>;
+    17: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/UsableActionsUseNPC").IUseNPCAction, import("game/entity/action/usable/UsableAction").IUsableActionRequirements>;
     18: UsableActionGenerator<[]>;
     19: UsableActionGenerator<[]>;
+    20: UsableActionGenerator<[]>;
 };

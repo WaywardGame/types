@@ -147,7 +147,6 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     requiredForDisassembly?: Array<ItemType | ItemTypeGroup>;
     decaysInto?: ItemType[];
     decayTemperatureRange?: IDecayTemperatureRange;
-    twoHanded?: boolean;
     keepDurabilityOnCraft?: boolean;
     craftable?: boolean;
     dismantle?: IDismantleDescription;
@@ -292,6 +291,10 @@ export interface IItemVehicle {
      */
     type: VehicleType;
     /**
+     * Render type of vehicle
+     */
+    renderType: VehicleRenderType;
+    /**
      * Makes movement try to stay on a valid path
      */
     smartMovement?: boolean;
@@ -345,7 +348,7 @@ export interface IItemVehicle {
      */
     renderOffsetY?: number;
 }
-export declare enum VehicleType {
+export declare enum VehicleRenderType {
     /**
      * Human will stand on the vehicle
      */
@@ -354,6 +357,20 @@ export declare enum VehicleType {
      * Human sits inside the vehicle (only show the head)
      */
     Sit = 1
+}
+export declare enum VehicleType {
+    /**
+     * A vehicle that moves within water
+     */
+    Boat = 0,
+    /**
+     * A vehicle that moves along tracks
+     */
+    Minecart = 1,
+    /**
+     * Any other vehicle type
+     */
+    Other = 2
 }
 export interface IItemReturn {
     type: ItemType;
@@ -1401,7 +1418,9 @@ export declare enum ItemTypeGroup {
     Absorbing = 912,
     Exuding = 913,
     DualWield = 914,
-    All = 915,
-    Last = 916
+    TwoHanded = 915,
+    Boat = 916,
+    All = 917,
+    Last = 918
 }
 export {};

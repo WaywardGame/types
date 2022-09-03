@@ -154,6 +154,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     isGatherable(): boolean;
     isEmbers(): boolean;
+    getVehicle(): import("game/item/IItem").IItemVehicle | undefined;
     isVehicle(): boolean;
     canHarvest(): boolean;
     /**

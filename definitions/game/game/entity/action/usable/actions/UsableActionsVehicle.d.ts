@@ -8,5 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-declare const _default: import("../Action").Action<[[import("game/entity/action/IAction").ActionArgument.ItemNearby, import("game/entity/action/IAction").ActionArgument.Doodad]], import("../../Human").default, void, import("game/entity/action/actions/ToggleVehicle").ToggleVehicleCanUse, [import("../../../doodad/Doodad").default | import("../../../item/Item").default]>;
+import { UsableActionGenerator } from "game/entity/action/usable/UsableActionRegistrar";
+declare const _default: UsableActionGenerator<[]>;
 export default _default;

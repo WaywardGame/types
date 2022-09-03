@@ -75,6 +75,7 @@ export default class ActionBar extends QuadrantComponent {
     hasFilledSlot(): boolean;
     protected getContextMenuDescription(api: IBindHandlerApi): ContextMenuDescriptions;
     protected onClearActionSlot(api: IBindHandlerApi): boolean;
+    protected onToggleUseWhileMoving(api: IBindHandlerApi): boolean;
     protected onMenuCancel(): boolean;
     protected onChangeWhetherCopying(api: IBindHandlerApi): boolean;
     private getSlots;

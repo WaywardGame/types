@@ -10,7 +10,7 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type UsableAction from "game/entity/action/usable/UsableAction";
-import type { ActionId } from "game/entity/action/usable/UsableAction";
+import type { ActionId, IUsableActionPossibleUsing } from "game/entity/action/usable/UsableAction";
 import type { EquipType } from "game/entity/IHuman";
 import type { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
@@ -61,6 +61,7 @@ export interface IItemHandler {
     getItem?(): Item | undefined;
     getItemType?(): ItemType | undefined;
     getAction?(): UsableAction | undefined;
+    getActionUsing?(): IUsableActionPossibleUsing | undefined;
     getBindables?(bindables: Bindable[]): Bindable[];
 }
 export default class ItemComponent extends Component {

@@ -307,6 +307,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @returns number of score (or 0 if no civilization score is set).
      */
     getCivilizationScore(actionType: ActionType.Build | ActionType.SetDown): number;
+    getVehicle(): import("game/item/IItem").IItemVehicle | undefined;
     isVehicleAllowedOnTile(tile: ITile): boolean;
     private setupDurabilityHandlers;
     private checkIfItemsMatch;
