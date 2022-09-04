@@ -45,7 +45,7 @@ export default class OldUi {
     syncDecayBar(item: Item, syncDamage?: boolean): void;
     syncItemElements(itemIds: number | number[], forceSyncDecay?: boolean): void;
     setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
-    removeItemFromEquipSlot(equip: EquipType): void;
+    removeItemFromEquipSlot(equip: EquipType, itemId: number): void;
     shouldRefreshMods(): boolean;
     onGameEnd(): void;
     toggleUIDisplay(hide: boolean): void;

@@ -102,6 +102,12 @@ export interface IMessage {
     type?: MessageType;
     message: ISerializedTranslation;
 }
+export interface IPackedMessage {
+    message: Message;
+    args?: Translation | any[];
+    type?: MessageType;
+    sources?: Source | Source[];
+}
 export interface IMessageManager {
     getMessageHistory(): Stream<IMessage>;
     clear(): this;
@@ -111,6 +117,7 @@ export interface IMessageManager {
     ifVisible(canSee?: IVector4): this;
     ifOnIsland(island: Island): this;
     send(message: Message | Translation, ...args: any[]): boolean;
+    sendPacked(pack: Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
     pruneMessageHistory(): boolean;
     ifIs(human: Human): this;
     ifIsNot(human: Human): this;

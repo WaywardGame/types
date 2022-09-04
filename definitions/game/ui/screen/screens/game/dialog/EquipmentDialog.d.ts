@@ -14,7 +14,7 @@ import Component from "ui/component/Component";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import Dialog from "ui/screen/screens/game/component/Dialog";
 import type { IItemDropApi, ItemSlot } from "ui/screen/screens/game/component/Item";
-import ItemComponent from "ui/screen/screens/game/component/Item";
+import ItemComponent, { ItemRefreshType } from "ui/screen/screens/game/component/Item";
 import EquipmentSlotTooltipHandler from "ui/screen/screens/game/dialog/equipment/EquipmentSlotTooltip";
 export declare enum EquipmentClasses {
     Main = "game-dialog-equipment",
@@ -41,7 +41,7 @@ export declare class EquipmentSlot extends ItemComponent {
     private overriddenItem?;
     equipItem(item: Item): Promise<void>;
     clear(): void;
-    refresh(): void;
+    refresh(refreshType: ItemRefreshType): void;
     protected onEquipEvent(): void;
     protected onDrop(api: IItemDropApi, intoSlot?: ItemSlot): void;
     private isEquippable;

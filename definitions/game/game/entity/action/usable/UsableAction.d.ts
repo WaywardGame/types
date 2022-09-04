@@ -25,12 +25,9 @@ import type Message from "language/dictionary/Message";
 import { ActionTranslation } from "language/dictionary/Misc";
 import TranslationImpl from "language/impl/TranslationImpl";
 import Translation from "language/Translation";
-import { PathType } from "resource/IResourceLoader";
 import type Bindable from "ui/input/Bindable";
 import type { ItemDetailIconLocation } from "ui/screen/screens/game/component/Item";
-import type Tooltip from "ui/tooltip/Tooltip";
 import type { HighlightSelector } from "ui/util/IHighlight";
-import ImagePath from "ui/util/ImagePath";
 export interface IUsableActionRequirement<TYPE> {
     allowNone?: true;
     validate?(player: Player, value: TYPE): boolean;
@@ -101,7 +98,7 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
 }
 export declare type UsableActionIconReference = ActionType | UsableActionType | UsableActionTypePlaceholder | (Omit<IIcon, "path"> & {
     action: ActionType | UsableActionType | UsableActionTypePlaceholder;
-});
+}) | IIcon;
 export declare type ReturnableUsableActionUsability = IActionUsable | IActionNotUsable | boolean;
 export interface IUsableActionUsable<REQUIREMENTS extends IUsableActionRequirements> extends IActionUsable {
     using: IUsableActionUsing<REQUIREMENTS>;
@@ -152,10 +149,6 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
      */
     iconLocationOnItem?: ItemDetailIconLocation;
     /**
-     * The tooltip this action should have, or an initialiser for it.
-     */
-    tooltip?: ActionType | ((tooltip: Tooltip) => any);
-    /**
      * A handler for what this action will highlight when hovered with the mouse.
      * @param selectors The default selectors. The defaults can be removed, and/or additional selectors can be added.
      * @param using What this action is using. Item, doodad, etc.
@@ -174,11 +167,14 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
      */
     displayLevel?: ActionDisplayLevel;
     /**
-     * The display order of this action compared to other actions.
+     * Controls the display order of this action compared to other actions.
      * Generally you want to leave this as 0 (default) and just register your action in the correct place.
-     * Order can be generated dynamically based on the given objects — item, doodad, etc.
+     * Priority can be generated dynamically based on the given objects — item, doodad, etc.
+     *
+     * Higher priority === appears first.
+     * Lower priority === appears last.
      */
-    order?: number | ((using: IUsableActionPossibleUsing) => number | undefined);
+    priority?: number | ((using: IUsableActionPossibleUsing) => number | undefined);
     /**
      * Whether this action is currently usable — even if an action "makes sense" with the player and the objects they're using,
      * and the player can slot it and stuff, it might not currently be usable. For example, "harvest" having nothing to harvest.
@@ -261,11 +257,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     getDoodad(player: Player, provided?: IUsableActionPossibleUsing): false | Doodad | undefined;
     getCreature(player: Player, provided?: IUsableActionPossibleUsing): false | Creature | undefined;
     getNPC(player: Player, provided?: IUsableActionPossibleUsing): false | NPC | undefined;
-    getIcon(provided: IUsableActionPossibleUsing): {
-        path: ImagePath<PathType.Action>;
-        width: number;
-        height: number;
-    } | undefined;
+    getIcon(provided: IUsableActionPossibleUsing): IIcon | undefined;
     getHighlightSelectors(using?: IUsableActionPossibleUsing): HighlightSelector[];
     private translator?;
     getTranslation(using?: IUsableActionUsing<REQUIREMENTS>, which?: ActionTranslation): Translation | undefined;

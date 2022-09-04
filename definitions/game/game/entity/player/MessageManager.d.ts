@@ -10,7 +10,7 @@
  */
 import Stream from "@wayward/goodstream/Stream";
 import type Human from "game/entity/Human";
-import type { IMessage, IMessageHistoryItem, IMessageManager } from "game/entity/player/IMessageManager";
+import type { IMessage, IMessageHistoryItem, IMessageManager, IPackedMessage } from "game/entity/player/IMessageManager";
 import { MessageType, Source } from "game/entity/player/IMessageManager";
 import type Player from "game/entity/player/Player";
 import type Island from "game/island/Island";
@@ -28,6 +28,7 @@ export declare class MessageManagerNoOp implements IMessageManager {
     ifIs(player: Player): this;
     ifIsNot(player: Player): this;
     send(): boolean;
+    sendPacked(): boolean;
     sentToAll(sentToAll?: boolean): this;
     pruneMessageHistory(): boolean;
     addToHistory(messageHistoryItem: IMessageHistoryItem): void;
@@ -114,6 +115,7 @@ export default class MessageManager implements IMessageManager {
      * Note: After sending a message, the message source, type, and human (if any) are reset.
      */
     send(message: Message | Translation, ...args: any[]): boolean;
+    sendPacked(pack: Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
     addToHistory(messageHistoryItem: IMessageHistoryItem): void;
     /**
      * Signal that the message was sent to everyone

@@ -47,11 +47,11 @@ export interface IGetItemsOptions extends IGetItemOptions {
 }
 export interface IGetBestItemsOptions extends IGetItemsOptions {
     action: ActionType;
+    actionWith: Item;
     filterType: ItemType;
     filterGroup: ItemTypeGroup;
     filterConsumable: true;
     targetCreature: Creature;
-    ammoItem: Item;
     filter(item: Item): any;
 }
 export declare enum CraftStatus {

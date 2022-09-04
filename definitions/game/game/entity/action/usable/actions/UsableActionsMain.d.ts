@@ -13,8 +13,8 @@ declare const UsableActionsMain: UsableActionGenerator<[]>;
 export default UsableActionsMain;
 export declare enum UsableActionSet {
     /**
-     * A set of usable action that appear before all other actions, unless {@link IUsableActionDefinitionBase.order} causes them to appear even earlier.
-     * Note that `order` is used to sort "use item/doodad/npc" actions to the top — the actions that appear in {@link IItemDescription.use}.
+     * A set of usable action that appear before all other actions, unless {@link IUsableActionDefinitionBase.priority} causes them to appear even earlier.
+     * Note that `priority` is used to sort "use item/doodad/npc" actions to the top — the actions that appear in {@link IItemDescription.use}.
      */
     First = 0,
     Vehicle = 1,

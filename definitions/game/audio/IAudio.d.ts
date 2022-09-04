@@ -55,9 +55,11 @@ export declare enum SfxType {
     UiInput = 28,
     UiInvalid = 29,
     UiOpen = 30,
-    UiSelect = 31,
-    Walk = 32,
-    Water = 33
+    UiProtect = 31,
+    UiSelect = 32,
+    UiUnprotect = 33,
+    Walk = 34,
+    Water = 35
 }
 export declare type SfxUi = Extract<keyof typeof SfxType, `Ui${string}`> extends `Ui${infer RESULT}` ? Lowercase<RESULT> : never;
 export declare enum Music {

@@ -10,7 +10,7 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { IActionApi } from "game/entity/action/IAction";
-import type { IUsableActionRequirements, ReturnableUsableActionUsability } from "game/entity/action/usable/UsableAction";
+import type { IUsableActionPossibleUsing, IUsableActionRequirements, ReturnableUsableActionUsability } from "game/entity/action/usable/UsableAction";
 import type Player from "game/entity/player/Player";
 import type Item from "game/item/Item";
 import Button from "ui/component/Button";
@@ -84,8 +84,8 @@ export default class ActionBar extends QuadrantComponent {
     private refreshSlots;
 }
 declare class ActionSlotSlottedContainer extends ItemComponent {
-    slotData: IActionBarSlotData;
-    constructor(slotData: IActionBarSlotData);
+    readonly slot: ActionSlot;
+    constructor(slot: ActionSlot);
     clone(): ActionSlotSlottedContainer;
     protected onEnter(reason: "mouse" | "focus"): void;
 }
@@ -121,5 +121,6 @@ export declare class ActionSlot extends Button implements IRefreshable {
     protected onLeave(reason: "mouse" | "focus"): void;
     private getTooltipLocation;
     getAction(): import("game/entity/action/usable/UsableAction").default<IUsableActionRequirements, import("game/entity/action/usable/UsableAction").IUsableActionDefinition<IUsableActionRequirements>> | undefined;
+    getUsing(): IUsableActionPossibleUsing;
 }
 export {};

@@ -18,8 +18,7 @@ import type Human from "game/entity/Human";
 import type { AttackType, EntityType } from "game/entity/IEntity";
 import type { EquipType, RestType, SkillType } from "game/entity/IHuman";
 import type NPC from "game/entity/npc/NPC";
-import type { MessageType } from "game/entity/player/IMessageManager";
-import { Source } from "game/entity/player/IMessageManager";
+import type { IPackedMessage } from "game/entity/player/IMessageManager";
 import type { TurnTypeFlag } from "game/entity/player/IPlayer";
 import type Player from "game/entity/player/Player";
 import type { Quality } from "game/IObject";
@@ -31,8 +30,6 @@ import type { IPromptDescriptionBase, PromptDescriptionArgs } from "game/meta/pr
 import type { Milestone } from "game/milestones/IMilestone";
 import type { ITile } from "game/tile/ITerrain";
 import type TileEvent from "game/tile/TileEvent";
-import type Message from "language/dictionary/Message";
-import type Translation from "language/Translation";
 import type { IRGB } from "utilities/Color";
 import type { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
@@ -176,22 +173,19 @@ export declare enum ActionDisplayLevel {
 }
 export interface IActionUsable {
     usable: true;
+    /**
+     * Whether this action is currently usable with the "use on move" feature. Defaults to `true`
+     */
+    usableOnMove?: boolean;
     displayLevel?: ActionDisplayLevel;
 }
-export interface IActionNotUsable {
+export interface IActionNotUsable extends Partial<IPackedMessage> {
     usable: false;
     alreadyUsing?: true;
     errorDisplayLevel?: ActionDisplayLevel;
-    message?: Message;
-    args?: Translation | any[];
-    arg?: never;
-    type?: MessageType;
-    sources?: Source | Source[];
-    source?: never;
     mobCheck?: IVector3;
-}
-export declare namespace IActionNotUsableUtilities {
-    function sendMessage(result: IActionNotUsable, human?: Human): void;
+    arg?: never;
+    source?: never;
 }
 export declare type AnyActionDescription = IActionDescription<Array<ActionArgument | ActionArgument[]>, Entity, any, IActionUsable, any[]>;
 export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> {

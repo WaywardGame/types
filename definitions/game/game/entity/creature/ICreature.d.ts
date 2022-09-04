@@ -8,11 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { SfxType } from "audio/IAudio";
 import type { BiomeType } from "game/biome/IBiome";
 import type Doodad from "game/doodad/Doodad";
 import type Creature from "game/entity/creature/Creature";
 import type Human from "game/entity/Human";
 import type { AiType, DamageType, Defense, ICausesStatusEffect, IEntityEvents, MoveType } from "game/entity/IEntity";
+import type { IPackedMessage } from "game/entity/player/IMessageManager";
 import type { ItemType, ItemTypeGroup } from "game/item/IItem";
 import type { LootGroupType } from "game/item/LootGroups";
 import type { ITemperatureDescription } from "game/temperature/ITemperature";
@@ -22,6 +24,7 @@ import type Message from "language/dictionary/Message";
 import type TranslationImpl from "language/impl/TranslationImpl";
 import type Translation from "language/Translation";
 import type { IModdable } from "mod/ModRegistry";
+import type { StatNotificationType } from "renderer/notifier/INotifier";
 import type { IRGB } from "utilities/Color";
 export declare enum CreatureType {
     Slime = 0,
@@ -224,7 +227,6 @@ export interface IDamageOutcomeInput {
     target: Human | Creature;
     damageAmount: number;
     damageType: DamageType;
-    onlyCalculating?: boolean;
     weaponName?: Message | TranslationImpl;
     yourWeaponName?: Translation;
     targetName?: Translation;
@@ -236,6 +238,10 @@ export interface IDamageOutcome {
     vulnerable: number;
     vulnerableTypes: DamageType[];
     noDamage: boolean;
+    regenerate: number[];
+    soundEffect?: SfxType;
+    statNotifications: Array<[StatNotificationType, number]>;
+    messages: IPackedMessage[];
 }
 export interface ICreatureEvents extends IEntityEvents {
     /**

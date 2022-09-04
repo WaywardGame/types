@@ -18,7 +18,7 @@ export interface IUsableActionDynamicDefinition {
     icon?: UsableActionIconReference;
     bindable: Bindable;
     displayLevel?: ActionDisplayLevel;
-    order?: number;
+    priority?: number;
 }
 export interface IUsableActionsDynamicConfig<DEFINITION extends IUsableActionDynamicDefinition, REQUIREMENTS extends IUsableActionRequirements> {
     id: string;
@@ -27,7 +27,7 @@ export interface IUsableActionsDynamicConfig<DEFINITION extends IUsableActionDyn
     requirements?(action: ActionType, definition?: DEFINITION): REQUIREMENTS;
     isUsable(action: ActionType, player: Player, using: IUsableActionUsing<REQUIREMENTS>, definition?: DEFINITION): ReturnableUsableActionUsability;
     execute(action: ActionType, player: Player, using: IUsableActionUsing<REQUIREMENTS>, definition?: DEFINITION): any;
-    order?(action: ActionType, using: IUsableActionPossibleUsing, definition?: DEFINITION): number | undefined;
+    priority?(action: ActionType, using: IUsableActionPossibleUsing, definition?: DEFINITION): number | undefined;
 }
 export default class UsableActionsDynamic<DEFINITION extends IUsableActionDynamicDefinition, REQUIREMENTS extends IUsableActionRequirements> extends UsableActionGenerator {
     constructor(config: IUsableActionsDynamicConfig<DEFINITION, REQUIREMENTS>);

@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "game/doodad/Doodad";
-import { EquipType } from "game/entity/IHuman";
+import type { EquipType } from "game/entity/IHuman";
 import NPC from "game/entity/npc/NPC";
 import type { IContainer, IDismantleComponent } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
@@ -139,10 +139,8 @@ export default class InGameScreen extends BaseScreen {
     tooltipHide(): void;
     unSelectElements(): void;
     onSortableItemReceive(sortableEvent: ISortableEvent): void;
-    getEquipSlotItemElement(equip: EquipType): JQuery;
-    getItemIdInEquipSlot(equip: EquipType): number | undefined;
     setEquipSlot(equip: EquipType, itemId?: number, internal?: boolean): void;
-    removeItemFromEquipSlot(equip: EquipType): void;
+    removeItemFromEquipSlot(equip: EquipType, itemId: number): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent, force?: boolean): void;
     createCraftItemElements(containerSortInfo: IContainerSortInfo): void;
