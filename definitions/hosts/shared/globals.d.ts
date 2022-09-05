@@ -10,5 +10,5 @@
  */
 export declare const gameVersionStage = "beta", gameVersionMajor = 2, gameVersionMinor = 12, gameVersionPatch = 0, gameVersionName = "Wheels & Wetlands";
 export declare const gameVersion: string;
-export declare function getTitleBarString(isSimplified?: boolean, isDedicatedServer?: boolean, testAppId?: string, testTitleId?: string): string;
+export declare function getTitleBarString(isSimplified?: boolean, build?: string, isDedicatedServer?: boolean, testAppId?: string, testTitleId?: string): string;
 export declare function registerGlobals(globalObject: any): void;

@@ -106,12 +106,6 @@ declare class InputManager extends EventEmitter.Host<IInputManagerEvents> {
     isRegistered(): boolean;
     reset(): void;
     /**
-     * Most input HTML events contain `ctrlKey`, `shiftKey` and `altKey` properties. This function takes any event, and if it has
-     * those properties, it returns a `Set<Modifier>` matching which of those properties is true.
-     */
-    extractModifiers(evt: Event): Set<Modifier> | undefined;
-    getCatalyst(evt: Event, asMouse?: boolean): InputCatalyst | undefined;
-    /**
      * @param disabler Each `disableUntil` call should be given a unique `disabler`,
      * as this system uses the timing from the latest `disableUntil` call
      */

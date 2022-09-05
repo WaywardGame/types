@@ -21,18 +21,20 @@ export interface IWaywardPreloadLoader {
     installPath?: string;
     getObject?: () => IWaywardPreload;
 }
+export interface IWaywardTitleBar {
+    customTitleBar: boolean;
+    title: string;
+    platform: string;
+    isMaximized: boolean;
+    electron: IElectron;
+}
 declare global {
     interface Window {
         require: any;
         electronRequire: any;
         requirejs: IRequireJs | undefined;
         waywardPreload: IWaywardPreloadLoader | undefined;
-        waywardTitleBar: {
-            title: string;
-            platform: string;
-            isMaximized: boolean;
-            electron: IElectron;
-        } | undefined;
+        waywardTitleBar: IWaywardTitleBar | undefined;
         getScaleFactor(): number;
     }
 }

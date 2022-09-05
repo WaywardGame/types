@@ -17,7 +17,9 @@ export default class ActionBarBindableManager extends BindableManager {
     private constructor();
     getSlotUseBindable(slot: number): Bindable | undefined;
     getSlotToggleBindable(slot: number): Bindable | undefined;
+    getSlotToggleUseOnMoveBindable(slot: number): Bindable | undefined;
     requireSlots(slotCount: number): void;
     private generateBindings;
+    private generateUseOnMoveBindings;
     private generateBinding;
 }

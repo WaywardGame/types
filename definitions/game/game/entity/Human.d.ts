@@ -65,7 +65,6 @@ export default abstract class Human extends Entity implements IHasInsulation {
     handEquippedToLast: EquipType.OffHand | EquipType.MainHand;
     inventory: IContainer;
     isConnecting: boolean;
-    movementCompleteZ: number | undefined;
     options: Readonly<IOptions>;
     islandId: IslandId;
     readonly equipEffects: Map<EquipEffect, EquipEffects>;
@@ -82,7 +81,6 @@ export default abstract class Human extends Entity implements IHasInsulation {
     walkSoundCounter: number;
     containerSortInfo: Record<string, IContainerSortInfo>;
     dialogContainerInfo: Record<number, IDialogInfo>;
-    isMoving: boolean;
     readonly movementIntent: IMovementIntent;
     walkPath: IWalkPath | undefined;
     identifier: string;
@@ -91,7 +89,6 @@ export default abstract class Human extends Entity implements IHasInsulation {
     messages: IMessageManager;
     notes: INoteManager;
     private readonly privateStore;
-    finishedMovingClientside: boolean;
     nextMoveTime: number;
     nextMoveDirection: Direction.Cardinal | Direction.None | undefined;
     private lastVehicleMoveDirection;
@@ -129,6 +126,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
      */
     isServer(): boolean;
     isMultiplayerHost(): boolean;
+    protected onMovementCompleted(): void;
     moveTowardsIsland(direction: Direction.Cardinal | Direction.None, options?: Partial<IMoveToIslandOptions>): Promise<void>;
     moveToIslandPosition(position: IVector2, options?: Partial<IMoveToIslandOptions>): Promise<void>;
     /**

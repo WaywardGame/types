@@ -39,6 +39,7 @@ export declare module InputCatalyst {
     function hash(catalyst: InputCatalyst, resolveModifiers?: boolean): string;
     function equals(a: InputCatalyst, b: InputCatalyst): boolean;
     function fromModifier(modifier: Modifier): InputCatalyst[];
+    function fromEvent(evt: Event, asMouse?: boolean): InputCatalyst | undefined;
     function isModifier(catalyst: InputCatalyst, acceptedModifiers?: Set<Modifier>): boolean;
 }
 declare enum ModifierType {
@@ -50,10 +51,16 @@ export declare type Modifier = keyof typeof ModifierType;
 export declare module Modifier {
     function is(value: unknown): value is Modifier;
     function translate(modifier: Modifier, simplify?: boolean): TranslationImpl;
+    function hash(...modifiers: Modifier[]): string;
     function getTranslationId(modifier: Modifier): string;
     function setsEqual(modifiersA: Set<Modifier>, modifiersB: Set<Modifier>): boolean;
     function all(): readonly Modifier[];
     function fromCatalyst(catalyst: InputCatalyst): Modifier | undefined;
+    /**
+     * Most input HTML events contain `ctrlKey`, `shiftKey` and `altKey` properties. This function takes any event, and if it has
+     * those properties, it returns a `Set<Modifier>` matching which of those properties is true.
+     */
+    function fromEvent(evt?: Event, onlyIfNotCatalyst?: boolean): Set<Modifier> | undefined;
 }
 export interface IInput {
     catalyst: InputCatalyst;

@@ -11,6 +11,7 @@
 import type { IUsableActionPossibleUsing } from "game/entity/action/usable/UsableAction";
 import type { ReferenceType } from "game/reference/IReferenceManager";
 import type { Reference } from "game/reference/ReferenceManager";
+import type { Modifier } from "ui/input/IInput";
 export interface IActionBarSlotData {
     useOnMove?: true;
     actionId?: string;
@@ -27,3 +28,4 @@ export declare module IActionBarSlotData {
     function copy(slotData?: IActionBarSlotData): IActionBarSlotData;
     function equals(a?: IActionBarSlotData, b?: IActionBarSlotData): boolean;
 }
+export declare function isActionBarUseOnMoveToggleBoundToClick(...modifiers: Modifier[]): boolean;

@@ -10,8 +10,8 @@
  */
 import PlayerTargetedClientPacket from "multiplayer/packets/PlayerTargetedClientPacket";
 export declare enum EmitPlayerEventType {
-    NoInput = 0,
-    MovementComplete = 1
+    NoInput = 1,
+    MovementComplete = 2
 }
 export default class EmitPlayerEventPacket extends PlayerTargetedClientPacket {
     type: EmitPlayerEventType;

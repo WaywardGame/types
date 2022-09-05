@@ -15,7 +15,7 @@ import type { IDamageInfo } from "game/entity/creature/ICreature";
 import type Human from "game/entity/Human";
 import type { IEntityEvents, IProperties, IStatus, Property, StatusEffectChangeReason } from "game/entity/IEntity";
 import { DamageType, EntityType, MoveType, StatusType } from "game/entity/IEntity";
-import { Delay } from "game/entity/IHuman";
+import { Delay, MovingClientSide } from "game/entity/IHuman";
 import type { IStats } from "game/entity/IStats";
 import type NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
@@ -30,14 +30,15 @@ import type { ITemperatureSource } from "game/temperature/ITemperature";
 import type { ITile } from "game/tile/ITerrain";
 import type { ISerializedTranslation } from "language/ITranslation";
 import type Translation from "language/Translation";
+import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 import FieldOfView from "renderer/fieldOfView/FieldOfView";
 import type { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
-import type { ItemNotifierType, StatNotificationType } from "renderer/notifier/INotifier";
+import type { INotificationLocation, ItemNotifierType, StatNotificationType } from "renderer/notifier/INotifier";
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import type { IVector4 } from "utilities/math/Vector4";
-export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, ITemperatureSource, IVector3 {
+export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, ITemperatureSource, INotificationLocation, IRendererOrigin, IVector3 {
     readonly stat: Stats<this>;
     entityType: EntityType;
     id: number;
@@ -47,13 +48,21 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     x: number;
     y: number;
     /**
-     * Not guaranteed to be synced between the server and client for Player entities
+     * Not guaranteed to be synced between the server and client for Human entities
      */
     fromX: number;
     /**
-     * Not guaranteed to be synced between the server and client for Player entities
+     * Not guaranteed to be synced between the server and client for Human entities
      */
     fromY: number;
+    /**
+     * Not guaranteed to be synced between the server and client for Human entities
+     */
+    isMoving: boolean;
+    /**
+     * Only used for Human entities
+     */
+    movementCompleteZ: number | undefined;
     moveType: MoveType | undefined;
     anim: number;
     stopNextMovement: boolean;
@@ -65,7 +74,10 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     islandId: IslandId;
     attackAnimationType: DamageType | undefined;
     attackAnimationTime: IMovementTime | undefined;
-    isMovingClientside: boolean;
+    /**
+     * The state of what the client thinks is happening to this entity (regarding movement)
+     */
+    movingClientside: MovingClientSide;
     allowSmartMovementClientside: boolean;
     protected _movementTime: {
         start: number;
@@ -118,9 +130,11 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
      * Faces the target and animates a bump into effect
      */
     animateBumpTowards(x: number, y: number): void;
+    protected setMoving(delay: Delay, fromX: number, fromY: number, toZ?: number): void;
     animateAttack(damageType: DamageType[] | undefined): void;
     getMovementPoint(timeStamp: number): IVector2;
     getMovementProgress(timeStamp: number): number;
+    protected onMovementCompleted(): void;
     getMoveType(): MoveType;
     setMoveType(moveType: MoveType): void;
     isInFov(): boolean;

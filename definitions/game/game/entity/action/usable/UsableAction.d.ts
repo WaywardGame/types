@@ -64,15 +64,17 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
         validate(player: Player, value: Item): boolean;
     } ? Item : never) | (REQUIREMENTS["item"] extends {
         find(player: Player): Item;
-    } ? Item : never));
+    } ? Item : never) | (REQUIREMENTS["item"] extends {
+        allowOnlyItemType(player: Player, type: ItemType): boolean;
+    } ? undefined : never));
     itemType: ((REQUIREMENTS["item"] extends true ? ItemType : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
         allowNone: true;
     } ? undefined : never) | (REQUIREMENTS["item"] extends {
         validate(player: Player, value: Item): boolean;
-    } ? ItemType : never) | (REQUIREMENTS["item"] extends {
+    } ? ItemType | undefined : never) | (REQUIREMENTS["item"] extends {
         find(player: Player): Item;
     } ? ItemType : never) | (REQUIREMENTS["item"] extends {
-        allowOnlyItemType(player: Player): boolean;
+        allowOnlyItemType(player: Player, type: ItemType): boolean;
     } ? ItemType : never));
     doodad: ((REQUIREMENTS["doodad"] extends true ? Doodad : never) | (undefined extends REQUIREMENTS["doodad"] ? undefined : never) | (REQUIREMENTS["doodad"] extends {
         allowNone: true;

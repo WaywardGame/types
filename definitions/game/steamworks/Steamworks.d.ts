@@ -13,11 +13,13 @@ import type { IMatchmakingServer, INapiDiscordPresenceInfo, IRemoteFile, ISteamF
 import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
 import type { ServerInfo } from "multiplayer/IMultiplayer";
-import type { IDedicatedServerInfo, IModPath, ISteamworksEvents } from "steamworks/ISteamworks";
+import type { IBuild, IDedicatedServerInfo, IModPath, ISteamworksEvents } from "steamworks/ISteamworks";
 export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
+    protected initialized: boolean;
     private steamId;
     private betaName;
     private buildTime;
+    private build;
     private overlayWorks;
     private runningOnSteamDeck;
     private runningOnBatteryPower;
@@ -81,7 +83,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getFriends(): ISteamFriend[] | undefined;
     getScreenName(): string | undefined;
     isDevelopmentBranch(): boolean;
-    getBuildTime(): number | undefined;
+    getBuild(): IBuild | undefined;
     getPublishedMods(): IWorkshopItem[] | undefined;
     getStatInt(name: string): number | undefined;
     incrementStat(name: string): void;

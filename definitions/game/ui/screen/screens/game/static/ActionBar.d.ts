@@ -113,6 +113,9 @@ export declare class ActionSlot extends Button implements IRefreshable {
     protected onItemMaybeInaccessible(): void;
     postExecuteAction(action: IActionApi): void;
     protected playSound(): void;
+    private lastClickUseWhenMoving;
+    protected onClick(event?: Event & Partial<MouseEvent>): void;
+    toggleUseOnMove(): boolean;
     private lastUsableResult?;
     private lastUseAttempt;
     onActivate(nonClick?: IBindHandlerApi | true, silent?: true): boolean;

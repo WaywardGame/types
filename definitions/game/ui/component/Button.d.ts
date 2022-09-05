@@ -61,6 +61,6 @@ export default class Button extends Component implements IDisableable {
     private sound?;
     setSound(sound?: SfxUi): this;
     protected playSound(): void;
-    private _onActivate;
+    protected onClick(event?: Event | MouseEvent): void;
 }
 export {};

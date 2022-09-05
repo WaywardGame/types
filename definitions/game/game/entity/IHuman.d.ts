@@ -419,6 +419,12 @@ export interface IVoyageInfo {
     usedItems?: Item[];
     wantedItems?: ItemType[];
 }
+export declare enum MovingClientSide {
+    NoInput = 0,
+    Moving = 1,
+    Moved = 2,
+    PreNoInput = 3
+}
 /**
  * The swimming skill required to travel to another island
  *
