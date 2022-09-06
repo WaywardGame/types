@@ -79,8 +79,8 @@ export default abstract class Human extends Entity implements IHasInsulation {
     turns: number;
     vehicleItemReference: ItemReference | undefined;
     walkSoundCounter: number;
-    containerSortInfo: Record<string, IContainerSortInfo>;
-    dialogContainerInfo: Record<number, IDialogInfo>;
+    containerSortInfo: Record<string, IContainerSortInfo | undefined>;
+    dialogContainerInfo: Record<number, IDialogInfo | undefined>;
     readonly movementIntent: IMovementIntent;
     walkPath: IWalkPath | undefined;
     identifier: string;

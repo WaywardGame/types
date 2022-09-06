@@ -95,6 +95,7 @@ export default class ItemComponent extends Component {
     protected onUpdateEquip(): void;
     protected onUpdateItemType(): void;
     protected onUpdateDurability(): void;
+    protected onUpdateQuality(): void;
     refresh(refreshType: ItemRefreshType): void;
     clone(): ItemComponent;
     setItemMenu(initialiser?: (contextMenu: ContextMenu<ActionId>) => any): this;

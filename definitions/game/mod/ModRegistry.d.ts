@@ -16,6 +16,7 @@ import type { ActionType, IActionDescription } from "game/entity/action/IAction"
 import type { UsableActionSet, usableActionSets } from "game/entity/action/usable/actions/UsableActionsMain";
 import type UsableActionRegistrar from "game/entity/action/usable/UsableActionRegistrar";
 import type { UsableActionGenerator } from "game/entity/action/usable/UsableActionRegistrar";
+import type { UsableActionType } from "game/entity/action/usable/UsableActionType";
 import type { ICorpseDescription } from "game/entity/creature/corpse/ICorpse";
 import type { CreatureType, ICreatureDescription } from "game/entity/creature/ICreature";
 import type { StatusType } from "game/entity/IEntity";
@@ -112,7 +113,9 @@ export declare enum ModRegistrationType {
     TileEvent = 41,
     TileLayerType = 42,
     UsableActions = 43,
-    WorldLayer = 44
+    UsableActionType = 44,
+    UsableActionTypePlaceholder = 45,
+    WorldLayer = 46
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -332,10 +335,18 @@ export interface IUsableActionsRegistration extends IBaseModRegistration {
     set: UsableActionSet;
     registrationHandler: (registrar: UsableActionRegistrar, ...args: any[]) => any;
 }
+export interface IUsableActionTypeRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.UsableActionType;
+    name: string;
+}
+export interface IUsableActionTypePlaceholderRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.UsableActionTypePlaceholder;
+    name: string;
+}
 export interface IInheritsRegistrationTime {
     useRegistrationTime: ModRegistrationType;
 }
-export declare type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration;
+export declare type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypeRegistration | IUsableActionTypePlaceholderRegistration;
 export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare module Register {
     /**
@@ -608,6 +619,29 @@ declare module Register {
      * @param registrationHandler The handler that will register the new actions
      */
     export function usableActions<SET extends UsableActionSet>(name: string, set: SET, registrationHandler: (registrar: UsableActionRegistrar, ...args: (typeof usableActionSets)[SET] extends UsableActionGenerator<infer ARGS> ? ARGS : []) => any): <K extends string | number | symbol, T extends { [k in K]: UsableActionGenerator<[]>; }>(target: T, key: K) => void;
+    /**
+     * **Trying to register an action with the UI?** You may be looking for `@Register.`{@link usableActions}
+     *
+     * Registers a "usable" action type. This is solely used for generating an ID that can be associated with custom UsableActions.
+     * A custom UsableActionType provides an ID used for translation, icons, etc.
+     *
+     * IE: If a UsableAction is registered with your custom UsableActionType:
+     * - If your definition doesn't have a `translate` handler, the translation will be handled automatically with a translation in the
+     * "usableActionType" dictionary.
+     * - If your definition doesn't have a custom `icon` provided, it will automatically attempt to use the icon at
+     * `<your mod directory>/static/image/ui/icons/action/mod<your mod name><this registration name>.png`.
+     */
+    export function usableActionType(name: string): <K extends string | number | symbol, T extends { [k in K]: UsableActionType; }>(target: T, key: K) => void;
+    /**
+     * **Trying to register an action with the UI?** You may be looking for `@Register.`{@link usableActions}
+     *
+     * Registers a "usable" action *placeholder* type. This is solely used for generating an ID that can be used in `UsableAction`s.
+     * A custom UsableActionTypePlaceholder provides an ID that can be used for icons.
+     *
+     * IE: If a UsableAction definition's `icon` property is this placeholder ID's name, it will automatically attempt to use the icon at
+     * `<your mod directory>/static/image/ui/icons/action/mod<your mod name><this registration name>.png`.
+     */
+    export function usableActionTypePlaceholder(name: string): <K extends string | number | symbol, T extends { [k in K]: UsableActionType; }>(target: T, key: K) => void;
     export function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends { [k in K]: InterModRegistry<V>; }>(target: T, key: K) => void;
     export function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends { [k in K]: InterModRegistration<V>; }>(target: T, key: K) => void;
     type ExtractRegisteredType<F> = F extends (...args: any) => infer F2 ? F2 extends (t: infer T, k: infer K) => any ? T[Extract<K, keyof T>] : never : never;

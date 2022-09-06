@@ -15,6 +15,9 @@ import type { IContainer, IDismantleComponent } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import Message from "language/dictionary/Message";
+import { SortDirection } from "save/ISaveManager";
+import Input from "ui/component/Input";
+import SortRow from "ui/component/SortRow";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import { GlobalMouseInfo } from "ui/input/InputManager";
 import type { ISortableEvent } from "ui/old/functional/IFunctionalSortable";
@@ -143,7 +146,7 @@ export default class InGameScreen extends BaseScreen {
     removeItemFromEquipSlot(equip: EquipType, itemId: number): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent, force?: boolean): void;
-    createCraftItemElements(containerSortInfo: IContainerSortInfo): void;
+    createCraftItemElements(containerSortInfo: IContainerSortInfo | undefined): void;
     updateItem(item: Item, updateChildren?: boolean): void;
     onGlobalMouseMove(mouseInfo: GlobalMouseInfo, _: Vector2): void;
     onActionBarSlotUpdate(actionBar: ActionBar, actionSlot: ActionSlot, item?: Item, oldItem?: Item): void;
@@ -171,8 +174,8 @@ export default class InGameScreen extends BaseScreen {
     updateActiveContainer(): void;
     getActiveContainer(): IUiContainer | undefined;
     getOpenContainers(): IUiContainer[];
-    getFilterText(containerElement: JQuery | undefined): any;
-    getFilterElement(containerElement: JQuery): JQuery;
+    getFilterText(containerElement: JQuery | undefined): string | undefined;
+    getFilterElement(containerElement: JQuery): Input | undefined;
     /**
      * Filtering for containers, inventory, crafting, etc.
      * @param containerElement The jQuery element matching the container to filter.
@@ -191,9 +194,9 @@ export default class InGameScreen extends BaseScreen {
      * Will force an update on crafting and dismantle tables based on dirty variables.
      */
     updateTablesDirty(which?: "crafting" | "dismantle"): void;
-    showSortMenu(element: JQuery, container: JQuery, messageType: Message): void;
+    createSortMenu(element: JQuery, container: JQuery, messageType: Message): SortRow<number>;
     getContainerId(containerElement: JQuery): string;
-    sortItems(containerElement: JQuery, sortType: SortType, messageType?: Message, canReverse?: boolean, activeSort?: boolean): void;
+    sortItems(containerElement: JQuery, sortType: SortType, direction: SortDirection, messageType?: Message, activeSort?: boolean): void;
     onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;
     updateSort(containerElement: JQuery, activeSort: boolean): void;
     isContainerDialogOver(x: number, y: number): boolean;

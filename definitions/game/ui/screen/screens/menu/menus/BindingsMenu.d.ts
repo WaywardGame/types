@@ -17,6 +17,7 @@ export default class BindingsMenu extends Menu {
     private readonly filterInput;
     constructor();
     onShow(): void;
+    refresh(): Promise<void>;
     protected onGoBackFrom(): void;
     private filterBindRows;
     filter(...bindables: Bindable[]): void;

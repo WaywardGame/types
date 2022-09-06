@@ -9,8 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "game/doodad/Doodad";
-import type { ActionDisplayLevel, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
-import { ActionType } from "game/entity/action/IAction";
+import type { ActionDisplayLevel, ActionType, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
 import type UsableActionRegistrar from "game/entity/action/usable/UsableActionRegistrar";
 import type { UsableActionTypePlaceholder } from "game/entity/action/usable/UsableActionType";
 import { UsableActionType } from "game/entity/action/usable/UsableActionType";
@@ -141,7 +140,7 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
     /**
      * The icon this action should have, if any.
      */
-    icon?: SupplierOr<UsableActionIconReference, [using: IUsableActionPossibleUsing, action: UsableAction<REQUIREMENTS>]>;
+    icon?: SupplierOr<UsableActionIconReference | false, [using: IUsableActionPossibleUsing, action: UsableAction<REQUIREMENTS>]>;
     /**
      * Where the icon should appear, when slotted with an item. Defaults to bottom right.
      *

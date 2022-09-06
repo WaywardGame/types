@@ -51,19 +51,20 @@ export interface IItemEvents {
      * @param human The human object
      * @param slot The slot
      */
-    equip?(human: Human, slot: EquipType): void;
+    equip(human: Human, slot: EquipType): any;
     /**
      * Called when the human unequip an item from a slot
      * @param human The human object
      * @param slot The slot
      */
-    unequip?(human: Human, slot: EquipType): void;
+    unequip(human: Human, slot: EquipType): any;
     /**
      * Called when an item is damaged
      * @param modifier The damage modifier
      * @returns The amount of damage the item shouldd take or undefined to use the default logic
      */
-    shouldDamage?(modifier?: number): number | false | undefined;
+    shouldDamage(modifier?: number): number | false | undefined;
+    qualityChange(quality: Quality, oldQuality: Quality): any;
 }
 export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagic {
     readonly objectType = CreationId.Item;

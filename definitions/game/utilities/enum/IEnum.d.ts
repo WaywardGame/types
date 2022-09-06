@@ -78,5 +78,7 @@ export declare enum EnumId {
     WorldLayer = 36,
     Load = 37,
     QuadrantComponent = 38,
-    Biome = 39
+    Biome = 39,
+    UsableActionType = 40,
+    UsableActionTypePlaceholder = 41
 }

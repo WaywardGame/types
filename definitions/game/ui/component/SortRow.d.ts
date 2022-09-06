@@ -16,6 +16,8 @@ import type { IRefreshableValue } from "ui/component/Refreshable";
 export interface SortRowData<Sort> {
     sortEnum: any;
     defaultSort: Sort;
+    defaultDirection?: SortDirection;
+    filter?(name: string, sort: Sort): boolean;
     initializeOption(button: Button, sort: [string, Sort]): any;
 }
 interface ISortRowEvents<S extends number> extends Events<LabelledRow> {
@@ -31,6 +33,7 @@ export default class SortRow<S extends number> extends LabelledRow implements IR
     private _sortDirection;
     private disabledSorts;
     private readonly dropdown;
+    private readonly sortDirectionButton;
     private refreshMethod;
     get sort(): S;
     get sortDirection(): SortDirection;
@@ -38,6 +41,7 @@ export default class SortRow<S extends number> extends LabelledRow implements IR
     setDisabledSorts(val: S[], refresh?: boolean): this;
     setRefreshMethod(refresh: () => SortRowData<S>): this;
     refresh(): this;
+    toggleSortDirection(sortDirection?: SortDirection): void;
     triggerSort(): void;
     triggerSortAsync(): Promise<import("@wayward/goodstream").default<any>>;
 }

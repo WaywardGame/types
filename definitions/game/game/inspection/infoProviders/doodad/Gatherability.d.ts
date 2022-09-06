@@ -12,15 +12,15 @@ import type Doodad from "game/doodad/Doodad";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-export default class HarvestabilityInfoProvider extends InfoProvider {
+export default class GatherabilityInfoProvider extends InfoProvider {
     private readonly doodad;
-    static get(doodad: Doodad): false | HarvestabilityInfoProvider | undefined;
-    private harvestMessage;
+    static get(doodad: Doodad): false | GatherabilityInfoProvider | undefined;
+    private gatherMessage;
     private constructor();
     getClass(): string[];
     getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel;
     hasContent(): boolean;
     get(): import("../../../../language/impl/TranslationImpl").default;
     onTickEnd(): void;
-    private getHarvestabilityMessage;
+    private getGatherabilityMessage;
 }

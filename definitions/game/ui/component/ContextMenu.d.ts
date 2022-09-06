@@ -64,6 +64,9 @@ declare class ContextMenu<O extends number | string | symbol = number | string |
     removeOptions(...options: ArrayOfIterablesOr<O>): this;
     private title?;
     setTitle(initializer?: (title: Heading) => any): this;
+    private offsetX;
+    private offsetY;
+    setOffset(x?: number, y?: number): this;
     setPosition(): this;
     setPosition(x: number, y: number, parentFacingLeft?: true): this;
     private hiding;

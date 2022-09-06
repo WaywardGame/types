@@ -311,9 +311,7 @@ declare global {
         }
         interface DialogOptions extends DialogEvents {
             autoOpen?: boolean;
-            buttons?: {
-                [buttonText: string]: (event?: Event) => void;
-            } | DialogButtonOptions[];
+            buttons?(element: HTMLElement): any;
             closeOnEscape?: boolean;
             closeText?: string;
             appendTo?: string;

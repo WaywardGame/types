@@ -17,6 +17,7 @@ import Bindable from "ui/input/Bindable";
 import { Binding } from "ui/input/Bindings";
 export interface IBindRowEvents extends Events<Button> {
     requestFilter(bindables: Iterable<Bindable>): any;
+    update(): any;
 }
 export declare class BindRow extends Button implements IRefreshable {
     readonly event: IEventEmitter<this, IBindRowEvents>;

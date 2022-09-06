@@ -12,6 +12,12 @@ import type { Events, IEventEmitter } from "event/EventEmitter";
 import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IRefreshable } from "ui/component/Refreshable";
+export declare enum InputClasses {
+    Main = "input",
+    Filter = "input-filter",
+    Empty = "input-empty",
+    Modified = "input-modified"
+}
 export declare enum ClearType {
     UseDefault = 0,
     Auto = 1,
