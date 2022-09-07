@@ -30,6 +30,7 @@ import type { IPromptDescriptionBase, PromptDescriptionArgs } from "game/meta/pr
 import type { Milestone } from "game/milestones/IMilestone";
 import type { ITile } from "game/tile/ITerrain";
 import type TileEvent from "game/tile/TileEvent";
+import type { IModdable } from "mod/ModRegistry";
 import type { IRGB } from "utilities/Color";
 import type { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
@@ -188,7 +189,7 @@ export interface IActionNotUsable extends Partial<IPackedMessage> {
     source?: never;
 }
 export declare type AnyActionDescription = IActionDescription<Array<ActionArgument | ActionArgument[]>, Entity, any, IActionUsable, any[]>;
-export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> {
+export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> extends IModdable {
     type?: number;
     argumentTypes: A;
     usability: {

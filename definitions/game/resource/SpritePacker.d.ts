@@ -26,6 +26,7 @@ export default class SpritePacker {
     private loadPromise;
     constructor(resourceLoader: ResourceLoader, gl: WebGL2RenderingContext, size: number, addNullSprite: boolean, packLargeToSmall?: boolean);
     delete(): void;
+    get loadedSpriteCount(): number;
     load(): Promise<boolean>;
     addSprite(src: string, frontPack?: boolean): Promise<ISpriteInfo>;
     private loadSprite;

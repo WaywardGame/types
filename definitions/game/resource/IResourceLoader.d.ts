@@ -49,7 +49,8 @@ export declare enum PathType {
     TerrainMound = 34,
     TerrainTilled = 35,
     TileEvent = 36,
-    Vehicle = 37
+    Vehicle = 37,
+    Website = 38
 }
 export interface IResourceContainer {
     tileAtlas: TileAtlas;

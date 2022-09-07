@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Button from "ui/component/Button";
+import { Website } from "ui/screen/screens/menu/menus/main/component/IWebsite";
 export default class SocialRow extends Button {
-    constructor();
+    constructor(includedSites?: Website[]);
 }

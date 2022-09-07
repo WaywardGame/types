@@ -16,6 +16,6 @@ export default class ChromeDriver {
     private process;
     private exitHandler;
     constructor(safeTestTile: string, appId: string, logger: ApplicationLogger);
-    start(): Promise<number>;
+    start(port: number): Promise<number>;
     stop(): void;
 }

@@ -13,6 +13,11 @@ import { EnumId } from "utilities/enum/IEnum";
 declare module EnumManager {
     function initialize(): void;
     function restore(): void;
+    /**
+     * Clears cached enums for mods that were just loaded.
+     * because it's possible it cached the values while the mod was not loaded
+     */
+    function clearCacheForMod(modIndex: number): void;
     function reset(): void;
     function allocate(modIndex: number, id: EnumId, name: string, objectValue?: ((enumNumber: number) => any) | any, onAllocate?: ((enumNumber: number) => void), onUnallocate?: ((enumNumber: number) => void)): EnumInfo | undefined;
     function unallocate(enumInfo: EnumInfo): void;

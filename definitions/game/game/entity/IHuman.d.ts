@@ -420,9 +420,23 @@ export interface IVoyageInfo {
     wantedItems?: ItemType[];
 }
 export declare enum MovingClientSide {
+    /**
+     * NoInput = Idle
+     */
     NoInput = 0,
+    /**
+     * Is actively moving
+     */
     Moving = 1,
+    /**
+     * Just completed their movement.
+     * They might be about to move again.
+     */
     Moved = 2,
+    /**
+     * The game registered the end of the movement.
+     * It's about to check if it will move again or finish (state change into Moving or NoInput)
+     */
     PreNoInput = 3
 }
 /**

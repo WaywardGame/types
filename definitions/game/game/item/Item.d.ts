@@ -276,7 +276,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @param action The ActionType you are trying to get the level for.
      * @returns A number (possibly 0 if no quality or action level).
      */
-    getItemUseBonus(action?: ActionType): number;
+    getItemUseBonus(action: ActionType): number;
     getBestRangedWeapon(human: Human): Item | undefined;
     /**
      * Extinguishes to item if it is lit.

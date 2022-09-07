@@ -51,7 +51,8 @@ export default class Tooltip extends Component {
      * @param maxWidth The max-width of the tooltip is this value * ui scale.
      */
     setMaxWidth(maxWidth?: number | `${number}vw`): this;
-    setText(translation: GetterOfOr<Translation | UiTranslation>): this;
+    setText(translation: GetterOfOr<Translation | UiTranslation>, ...args: any[]): this;
+    setDelay(delay: number): this;
     getLastBlock(): TooltipBlock;
     getBlocks(): import("@wayward/goodstream").default<TooltipBlock>;
     addBlock(initializer: (block: TooltipBlock) => any): this;

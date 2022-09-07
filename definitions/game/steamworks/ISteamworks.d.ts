@@ -47,4 +47,6 @@ export interface IDedicatedServerInfo {
 export interface IBuild {
     name: string;
     time: number;
+    publishName?: string;
+    publishTime?: string;
 }

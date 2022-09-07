@@ -14,6 +14,7 @@ import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import type { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import type { Quality } from "game/IObject";
+import type Island from "game/island/Island";
 import type Translation from "language/Translation";
 import type { TranslationGenerator } from "ui/component/IComponent";
 export interface IDescribed {
@@ -21,6 +22,7 @@ export interface IDescribed {
     type: number;
     referenceId?: number;
     quality?: Quality;
+    island: Island;
     description(): any;
 }
 export declare type DescribedDescription<T extends IDescribed> = Exclude<ReturnType<T["description"]>, undefined>;

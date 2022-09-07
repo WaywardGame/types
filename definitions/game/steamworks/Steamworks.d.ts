@@ -84,6 +84,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getScreenName(): string | undefined;
     isDevelopmentBranch(): boolean;
     getBuild(): IBuild | undefined;
+    getBuildName(): string;
     getPublishedMods(): IWorkshopItem[] | undefined;
     getStatInt(name: string): number | undefined;
     incrementStat(name: string): void;

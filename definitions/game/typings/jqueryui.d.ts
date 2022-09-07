@@ -311,7 +311,7 @@ declare global {
         }
         interface DialogOptions extends DialogEvents {
             autoOpen?: boolean;
-            buttons?(element: HTMLElement): any;
+            buttons?(buttonPane: HTMLElement, dialog: JQuery): any;
             closeOnEscape?: boolean;
             closeText?: string;
             appendTo?: string;

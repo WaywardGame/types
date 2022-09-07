@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import "@cplusplus/index";
+import "@hosts/shared/globalTypes";
 import "@wayward/goodstream/apply";
 import type WAudio from "audio/Audio";
 import type CommandManager from "command/CommandManager";
@@ -41,7 +42,6 @@ import "utilities/typesglobal/Iterables";
 import "utilities/typesglobal/Misc";
 import "utilities/typesglobal/Objects";
 import "utilities/typesglobal/Types";
-import "@hosts/shared/globalTypes";
 declare global {
     let absentPlayers: Player[];
     let audio: WAudio | undefined;
@@ -69,6 +69,9 @@ declare global {
     const gameVersionMinor: number;
     const gameVersionPatch: number;
     const gameVersionName: string;
+    const gameVersionTitleMajor: string;
+    const gameVersionTitleMinor: string;
+    const gameVersionTitle: string;
     const isNodeJs: boolean;
     const isWebWorker: boolean;
     const overlayWorks: boolean | undefined;

@@ -215,12 +215,19 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item): number;
     /**
      * Get the best items sorted by how good they are
+     * Usability/custom (ie the sorting for melee/start fire) > Action tier (+quality if there's an action tier on both items) > quality > durability
      */
     getBestSafeItems(human: Human, container: IContainer, options?: Partial<IGetBestItemsOptions>): Item[];
     /**
      * Get the best item
      */
     getBestSafeItem(human: Human, container: IContainer, options?: Partial<IGetBestItemsOptions>): Item | undefined;
+    /**
+     * Gets the item's quality and action level (how good it is at doing the action).
+     * @param action The ActionType you are trying to get the level for.
+     * @returns A number (possibly 0 if no quality or action level).
+     */
+    getItemUseBonus(itemType: ItemType, action: ActionType, quality: Quality | undefined): number;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, options?: Partial<IGetItemOptions>): Item | undefined;
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, options?: Partial<IGetItemOptions>): Item | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, options?: Partial<IGetItemOptions>): Item | undefined;

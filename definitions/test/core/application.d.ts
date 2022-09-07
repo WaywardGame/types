@@ -66,4 +66,5 @@ export default class Application extends ApplicationInteractions {
     requestVideo(videoPath: string): void;
     private recordVideoFrame;
     private configureDirectories;
+    private getFreePort;
 }

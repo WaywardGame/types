@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IModdable } from "mod/ModRegistry";
 export declare enum ActionTypeStarts {
     ActionType = 0,
     ModActionType = 10000,
@@ -73,3 +74,4 @@ export declare enum UsableActionTypePlaceholder {
     Paddle = 200003,
     Operate = 200004
 }
+export declare const usableActionDescriptions: PartialRecord<UsableActionType | UsableActionTypePlaceholder, IModdable>;

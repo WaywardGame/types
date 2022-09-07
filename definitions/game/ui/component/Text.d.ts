@@ -33,8 +33,8 @@ export default class Text extends Component {
     setParagraphs(): this;
     setText(text: UiTranslation | Translation, ...args: any[]): this;
     setText(refresh: false, text: UiTranslation | Translation, ...args: any[]): this;
-    setText(text?: TranslationGenerator): this;
-    setText(refresh: false, text?: TranslationGenerator): this;
+    setText(text?: TranslationGenerator, ...args: any[]): this;
+    setText(refresh: false, text?: TranslationGenerator, ...args: any[]): this;
     getText(): TranslationGenerator | undefined;
     getTextAsString(): string;
     /**

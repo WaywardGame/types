@@ -45,6 +45,7 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     readonly selection: SelectionHandler;
     readonly serverJoinHandler: ServerJoinHandler;
     readonly saveDropHandler: SaveDropHandler;
+    readonly versionText: Component<HTMLElement> | undefined;
     readonly viewport: Vector2;
     get windowWidth(): number;
     get windowHeight(): number;

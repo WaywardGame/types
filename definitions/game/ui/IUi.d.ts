@@ -51,7 +51,9 @@ export declare const DIALOG_OPACITY_MIN = 0;
 export declare const DIALOG_OPACITY_DEFAULT = 80;
 export declare const UI_HOOK_PRIORITY = -99999999999;
 export declare enum UiClasses {
-    FitContent = "fit-content"
+    FitContent = "fit-content",
+    ColoredSecondary = "colored-secondary",
+    BalancedSmooth = "balanced-smooth"
 }
 export declare namespace UiClasses {
     function createDynamic<CLASS extends string, ENUM>(baseClass: CLASS, enm: ENUM): (enumValue: ENUM[keyof ENUM]) => `${CLASS}-${Lowercase<keyof ENUM & string>}`;

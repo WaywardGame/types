@@ -33,6 +33,7 @@ export default abstract class GroupDropdown<ENUM_OBJECT, OTHER_OPTIONS extends s
     protected isSelectionWithin(selection?: Component): boolean;
     protected onOpen(): void;
     protected onClose(): void;
+    protected onRemove(): void;
     protected onFilterChange(): void;
     protected updateTooltip(): GroupDropdownTooltip;
     protected onRegenerateBox(): void;
