@@ -65,6 +65,8 @@ export interface IItemEvents {
      */
     shouldDamage(modifier?: number): number | false | undefined;
     qualityChange(quality: Quality, oldQuality: Quality): any;
+    durabilityChange(durability: number, oldDurability: number): any;
+    durabilityMaxChange(durabilityMax: number, oldDurabilityMax: number): any;
 }
 export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagic {
     readonly objectType = CreationId.Item;
@@ -83,8 +85,8 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     fireStage?: FireStage;
     id: number;
     itemOrders?: number[];
-    maxDur: number;
-    minDur: number;
+    private maxDur;
+    private minDur;
     pid: number | null | undefined;
     protected?: boolean;
     quality: Quality | undefined;
@@ -108,10 +110,13 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     private _movementTime?;
     private _movementOptions?;
     private _description;
-    private _minDur;
     constructor(itemType?: ItemType | undefined, islandId?: IslandId, quality?: Quality, human?: Human);
     get island(): import("../island/Island").default;
     toString(): string;
+    get durability(): number;
+    set durability(value: number);
+    get durabilityMax(): number;
+    set durabilityMax(value: number);
     /**
      * Gets the owner of this item.
      * This will be the human who crafted it.
@@ -310,7 +315,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getCivilizationScore(actionType: ActionType.Build | ActionType.SetDown): number;
     getVehicle(): import("game/item/IItem").IItemVehicle | undefined;
     isVehicleAllowedOnTile(tile: ITile): boolean;
-    private setupDurabilityHandlers;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;
 }

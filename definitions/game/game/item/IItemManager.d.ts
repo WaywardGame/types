@@ -114,3 +114,10 @@ export declare enum ContainerReferenceSource {
     Serializer = 11,
     WriteContainer = 12
 }
+export interface ICraftResultChances {
+    success: number;
+    quality: number;
+}
+export declare namespace ICraftResultChances {
+    const NEVER: Readonly<ICraftResultChances>;
+}

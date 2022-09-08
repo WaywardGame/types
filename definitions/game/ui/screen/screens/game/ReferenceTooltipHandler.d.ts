@@ -11,7 +11,7 @@
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import type Inspection from "game/inspection/Inspection";
 import InspectionsHandler from "game/inspection/InspectionsHandler";
-import type { Reference } from "game/reference/ReferenceManager";
+import type { Reference } from "game/reference/IReferenceManager";
 import InspectionsList from "ui/screen/screens/game/component/InspectionsList";
 import type { InspectionTooltipHints } from "ui/screen/screens/game/InspectionsTooltipHandler";
 import InspectionsTooltipHandler from "ui/screen/screens/game/InspectionsTooltipHandler";

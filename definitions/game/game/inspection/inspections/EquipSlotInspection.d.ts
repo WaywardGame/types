@@ -13,8 +13,8 @@ import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
+import type { EnumReferenceResolved } from "game/reference/IReferenceManager";
 import { ReferenceType } from "game/reference/IReferenceManager";
-import type { EnumReferenceResolved } from "game/reference/ReferenceManager";
 import type { TranslationGenerator } from "ui/component/IComponent";
 export default class EquipSlotInspection extends Inspection<EquipType | undefined> {
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;

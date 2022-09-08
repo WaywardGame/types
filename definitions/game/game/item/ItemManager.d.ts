@@ -19,7 +19,7 @@ import { Quality } from "game/IObject";
 import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IRecipe } from "game/item/IItem";
 import { CraftResult, ItemType, ItemTypeGroup } from "game/item/IItem";
 import type { IAddToContainerOptions, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IRequirementInfo } from "game/item/IItemManager";
-import { ContainerReferenceSource, CraftStatus, WeightType } from "game/item/IItemManager";
+import { ContainerReferenceSource, CraftStatus, ICraftResultChances, WeightType } from "game/item/IItemManager";
 import Item from "game/item/Item";
 import type ItemRecipeRequirementChecker from "game/item/ItemRecipeRequirementChecker";
 import { ObjectManager } from "game/ObjectManager";
@@ -313,6 +313,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private onItemMoveOrRemove;
     private getCraftTierBonus;
     computeCraftQualityBonus(itemType: ItemType, itemsToRequire: Item[], itemsToConsume: Item[], doodadsUsed: IDoodadsUsed[] | undefined): number;
-    getCraftChance(human: Human, recipe: IRecipe, qualityBonus: number, returnQuality?: boolean, alwaysReturn?: boolean): number;
+    getCraftChance(human: Human, recipe: IRecipe, qualityBonus: number, returnQuality?: boolean): number;
+    getCraftResultChances(human: Human, recipe: IRecipe, qualityBonus: number): Readonly<ICraftResultChances>;
     isCraftSuccessful(human: Human, recipe: IRecipe, qualityBonus: number): CraftResult;
 }

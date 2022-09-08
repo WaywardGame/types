@@ -39,8 +39,8 @@ export interface IHasImagePath {
 }
 export interface IObjectOptions {
     decay?: number;
-    minDur?: number;
-    maxDur?: number;
+    durability?: number;
+    durabilityMax?: number;
     quality?: Quality;
 }
 export declare enum Quality {

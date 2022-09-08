@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { ISerializedIcon } from "game/inspection/InfoProvider";
-import type { Reference } from "game/reference/ReferenceManager";
+import type { Reference } from "game/reference/IReferenceManager";
 import type { Random } from "utilities/random/Random";
 export interface ISegmentApi extends Readonly<IInterpolationOptions> {
     matchedEnds: Ends;

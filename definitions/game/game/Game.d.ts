@@ -22,6 +22,7 @@ import { PauseSource, SaveType, TickFlag, TurnMode } from "game/IGame";
 import type Island from "game/island/Island";
 import IslandManager from "game/island/IslandManager";
 import type { MultiplayerLoadingDescription } from "game/meta/Loading";
+import SaveLoad from "game/meta/SaveLoad";
 import type { Milestone } from "game/milestones/IMilestone";
 import type { IGameOptions } from "game/options/IGameOptions";
 import { GameMode } from "game/options/IGameOptions";
@@ -86,6 +87,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     private gameOptionsCached?;
     private synchronizeStateId;
     protected stringTokenizer: StringTokenizer | undefined;
+    readonly saveLoad: typeof SaveLoad;
     toString(): string;
     get isPaused(): boolean;
     getPlayingHumans(includeGhosts?: boolean, includeConnecting?: boolean, includeServer?: boolean): Human[];

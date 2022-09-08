@@ -11,7 +11,10 @@
 import Bindable from "ui/input/Bindable";
 import BindableManager from "ui/input/BindableManager";
 export default class ActionBarBindableManager extends BindableManager {
-    static readonly DEFAULT_ACTION_BAR_SLOTS = 10;
+    /**
+     * Default to 1 full action bar
+     */
+    static readonly DEFAULT_ACTION_BAR_SLOTS = 12;
     static readonly INSTANCE: ActionBarBindableManager;
     private requiredSlots;
     private constructor();

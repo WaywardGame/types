@@ -16,7 +16,9 @@ import { UsableActionType } from "game/entity/action/usable/UsableActionType";
 import type Creature from "game/entity/creature/Creature";
 import type NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
+import type { InspectType } from "game/inspection/IInspection";
 import type { IIcon } from "game/inspection/InfoProvider";
+import type Inspection from "game/inspection/Inspection";
 import type { ItemType } from "game/item/IItem";
 import type { IGetBestItemsOptions } from "game/item/IItemManager";
 import type Item from "game/item/Item";
@@ -27,6 +29,7 @@ import Translation from "language/Translation";
 import type Bindable from "ui/input/Bindable";
 import type { ItemDetailIconLocation } from "ui/screen/screens/game/component/Item";
 import type { HighlightSelector } from "ui/util/IHighlight";
+import type HashSet from "utilities/collection/set/HashSet";
 export interface IUsableActionRequirement<TYPE> {
     allowNone?: true;
     validate?(player: Player, value: TYPE): boolean;
@@ -160,6 +163,8 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
      * Allows for a dynamically generated bindable based on what this action is using — item, doodad, etc.
      */
     bindable?: Bindable | ((using: IUsableActionUsing<REQUIREMENTS>) => Bindable | undefined);
+    inspectTypes?: InspectType[];
+    inspect?(type: InspectType, using: IUsableActionPossibleUsing): HashSet<Inspection<any>> | Inspection<any> | undefined;
     /**
      * The contexts this action appears in.
      * - "Always" means whenever an action of this type is shown, it will be. For example, the "item actions" menu.
@@ -209,6 +214,10 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
      * Marks this usable action as only executable client-side. This disables support for "use when moving" in action slots.
      */
     clientSide?: true;
+    /**
+     * Marks this usable action as, when slotted in the action bar on an item, the item should be ignored and instead the type should be used.
+     */
+    onlySlotItemType?: true;
 }
 export interface IUsableActionDefinitionSubmenu<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {
     submenu(registrar: UsableActionRegistrar, using: IUsableActionUsing<REQUIREMENTS>): UsableActionRegistrar | void;

@@ -85,8 +85,8 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     id: number;
     referenceId?: number;
     itemOrders?: number[];
-    maxDur: number;
-    minDur: number;
+    durabilityMax: number;
+    durability: number;
     orientation?: DoorOrientation | Direction.Cardinal;
     crafterIdentifier?: string;
     builderIdentifier?: string;

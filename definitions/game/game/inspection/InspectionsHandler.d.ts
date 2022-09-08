@@ -19,7 +19,7 @@ export interface IInspectionsHandlerEvents {
 export default abstract class InspectionsHandler extends EventEmitter.Host<IInspectionsHandlerEvents> {
     protected readonly context: InfoProviderContext;
     protected readonly inspectionsMap: Map<InspectType, HashSet<Inspection<any>>>;
-    static makeInspectionsSet(values: IterableOr<Inspection<any>>): HashSet<Inspection<any>>;
+    static makeInspectionsSet(...values: Array<IterableOr<Inspection<any> | undefined>>): HashSet<Inspection<any>>;
     constructor(context: InfoProviderContext, inspectionsMap?: Map<InspectType, HashSet<Inspection<any>>>);
     get(inspectType: InspectType): HashSet<Inspection<any>> | undefined;
     set(inspectType: InspectType, inspections: HashSet<Inspection<any>>): Map<InspectType, HashSet<Inspection<any>>>;
@@ -29,7 +29,7 @@ export default abstract class InspectionsHandler extends EventEmitter.Host<IInsp
     register(): void;
     deregister(): void;
     protected getInspections?(inspectType: InspectType): HashSet<Inspection<any>>;
-    protected createInspectionSet(...values: Array<ArrayOr<Inspection<any> | undefined>>): HashSet<Inspection<any>>;
+    protected createInspectionSet(...values: Array<IterableOr<Inspection<any> | undefined>>): HashSet<Inspection<any>>;
     protected updateInspections(...inspectTypes: InspectType[]): void;
     protected updateInspectionsForType(inspectType: InspectType, inspections: HashSet<Inspection<any>>): void;
 }

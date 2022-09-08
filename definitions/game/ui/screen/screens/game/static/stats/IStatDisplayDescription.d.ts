@@ -10,7 +10,7 @@
  */
 import type Entity from "game/entity/Entity";
 import type { IStat, StatDisplayType } from "game/entity/IStats";
-import type { Reference } from "game/reference/ReferenceManager";
+import type { Reference } from "game/reference/IReferenceManager";
 import type { IModdable } from "mod/ModRegistry";
 import type Component from "ui/component/Component";
 import type Tooltip from "ui/tooltip/Tooltip";

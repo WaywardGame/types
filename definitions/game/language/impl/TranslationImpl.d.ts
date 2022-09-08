@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Reference, Referenceable } from "game/reference/ReferenceManager";
+import type { Reference, Referenceable } from "game/reference/IReferenceManager";
 import Dictionary from "language/Dictionary";
 import type { ISerializedTranslation } from "language/ITranslation";
 import { TextContext } from "language/ITranslation";

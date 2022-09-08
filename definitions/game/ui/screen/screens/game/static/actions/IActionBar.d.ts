@@ -9,8 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IUsableActionPossibleUsing } from "game/entity/action/usable/UsableAction";
-import type { ReferenceType } from "game/reference/IReferenceManager";
-import type { Reference } from "game/reference/ReferenceManager";
+import type { Reference, ReferenceType } from "game/reference/IReferenceManager";
 import type { Modifier } from "ui/input/IInput";
 export interface IActionBarSlotData {
     useOnMove?: true;

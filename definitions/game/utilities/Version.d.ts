@@ -32,7 +32,7 @@ declare module Version {
     function create(stage: "beta" | "release", major: number, minor: number, patch?: number): IVersionInfo;
     function getVersionInfo(version: string): IVersionInfo;
     function isSameVersion(version: IVersionInfo, compareVersion: IVersionInfo): boolean;
-    function getVersionDisplayString(version?: string | IVersionInfo): string;
+    function getVersionDisplayString(version?: string | IVersionInfo, development?: boolean): string;
     function getUpdateDisplayString(version?: string | IVersionInfo): string | undefined;
 }
 export default Version;
