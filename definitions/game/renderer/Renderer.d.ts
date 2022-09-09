@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 import type { IRendererEvents } from "renderer/IRenderer";
@@ -43,6 +44,8 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     get particle(): import("./particle/ParticleSystem").default;
     get isFadingIn(): boolean;
     get isUpdatingThumbnail(): boolean;
+    get island(): Island;
+    get islandId(): IslandId;
     start(): void;
     stop(): void;
     setOrigin(origin: IRendererOrigin): void;
@@ -79,4 +82,7 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     protected gameRenderLoop: (timeStamp: number) => void;
     private render;
     private shouldUpdateWorldRender;
+    private registerOriginEvents;
+    private unregisterOriginEvents;
+    private onOriginLoadedOnIsland;
 }

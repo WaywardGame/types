@@ -40,8 +40,22 @@ declare module Math2 {
      * Return a number between `from` and `to`, using the decimal `t`
      *
      * Example: `lerp(1, 2, .5): 1.5`
+     *
+     * When `t` is out of the range `0` to `1`, values outside `from` and `to` are returned instead
+     *
+     * Example: `lerp(1, 2, 1.5): 2.5`
      */
     function lerp(from: number, to: number, t: number): number;
+    /**
+     * Return a number between `from` and `to`, using the decimal `t`
+     *
+     * Example: `clerp(1, 2, .5): 1.5`
+     *
+     * When `t` is out of the range `0` to `1`, the result is clamped to `from` or `to`
+     *
+     * Example: `clerp(1, 2, 1.5): 2`
+     */
+    function clerp(from: number, to: number, t: number): number;
     /**
      * Given a number between `from` and `to`, returns a decimal how far it is, `t`.
      */

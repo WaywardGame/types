@@ -37,11 +37,6 @@ export interface INPCEvents extends Events<Human> {
      * @returns True if the npc can move, false if the npc cannot move, or undefined to use the default logic
      */
     canNPCMove(tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
-    /**
-     * Called when an npc is killed
-     * @returns False to stop the npc from dying or undefined to use the default logic
-     */
-    die?(): boolean | undefined;
 }
 export default abstract class NPC extends Human {
     protected static registrarId: number;
@@ -132,6 +127,7 @@ export default abstract class NPC extends Human {
     protected attack(): boolean;
     protected move(): boolean;
     protected autoScaleStats(): void;
+    protected changeZ(toZ: number, fromZ: number): boolean | void | undefined;
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile, isMoving: boolean): boolean | void | undefined;
     protected postMove(): void;
     protected checkMove(moveType: MoveType, tileX: number, tileY: number, tileZ: number): 0 | -1 | -2 | -3 | -4 | -5;

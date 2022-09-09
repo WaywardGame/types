@@ -32,7 +32,6 @@ import type MilestoneModifier from "game/options/modifiers/milestone/MilestoneMo
 import ReferenceManager from "game/reference/ReferenceManager";
 import TimeManager from "game/time/TimeManager";
 import VotingManager from "game/VotingManager";
-import { RenderSource } from "renderer/IRenderer";
 import type ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import type WebGlContext from "renderer/WebGlContext";
 import ReplayManager from "replay/ReplayManager";
@@ -136,7 +135,6 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      */
     passTurn(human: Human, turnType?: TurnTypeFlag): void;
     tickRealtime(): void;
-    updateView(source: RenderSource, updateFov?: boolean, computeSpritesNow?: boolean): void;
     updateTablesAndWeight(): void;
     /**
      * Gets the largest damage type weaknesses of a human or creature based on a type and damage value

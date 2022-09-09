@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Button from "ui/component/Button";
-import type { IMenuBarButtonDescription, MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
+import type { IMenuBarButtonDescription } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
+import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 export default class MenuBarButton extends Button {
     readonly type: MenuBarButtonType;
     private readonly menuBarButtonDescription;

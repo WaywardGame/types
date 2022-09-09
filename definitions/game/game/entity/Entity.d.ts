@@ -133,6 +133,9 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     protected setMoving(delay: Delay, fromX: number, fromY: number, toZ?: number): void;
     animateAttack(damageType: DamageType[] | undefined): void;
     getMovementPoint(timeStamp: number): IVector2;
+    /**
+     * Gets movement progress and moves the state machine forward when the movement is completed
+     */
     getMovementProgress(timeStamp: number): number;
     protected onMovementCompleted(): void;
     getMoveType(): MoveType;

@@ -18,7 +18,6 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     protected initialized: boolean;
     private steamId;
     private betaName;
-    private buildTime;
     private build;
     private overlayWorks;
     private runningOnSteamDeck;

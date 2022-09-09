@@ -202,7 +202,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     /**
      * @param effects If true, adds a delay to the player, clears any particles, and updates the view. (Default: true)
      */
-    setZ(z: number, effects?: boolean, updateFlowField?: boolean): void;
+    setZ(z: number, allowCancelation?: boolean, effects?: boolean, updateFlowField?: boolean): boolean;
     getMovementIntent(): IMovementIntent;
     updateMovementIntent(movementIntent: IMovementIntent): boolean;
     hasWalkPath(): boolean;
@@ -307,6 +307,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
      */
     protected statGain(stat: Stat, bypass: boolean): void;
     protected calculateStats(): void;
+    kill(): void;
     protected resetDefense(skipStatChangedEvent?: boolean): void;
     protected swimAndSootheCheck(): void;
     /**

@@ -308,7 +308,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     /**
      * Note: don't print items to the console because the console will hold the item indefinitely
      */
-    loadReference(container: IContainer, loadChildReferences?: boolean): boolean;
+    loadReference(container: IContainer, loadChildReferences?: boolean, parentContainer?: IContainer): boolean;
     private removeFromContainerInternal;
     private onItemMoveOrRemove;
     private getCraftTierBonus;

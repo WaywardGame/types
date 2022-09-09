@@ -59,7 +59,7 @@ export declare enum UsableActionType {
     EquipLegs = 100038,
     EquipChest = 100039,
     EquipHead = 100040,
-    EquipBelt = 100041,
+    EquipWaist = 100041,
     EquipFeet = 100042,
     EquipNeck = 100043,
     EquipHands = 100044,

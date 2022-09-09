@@ -20,6 +20,7 @@ import type ActionBar from "ui/screen/screens/game/static/ActionBar";
 import type { ActionSlot } from "ui/screen/screens/game/static/ActionBar";
 import type { IDraggableComponent } from "ui/util/Draggable";
 import Draggable from "ui/util/Draggable";
+import Bezier from "utilities/math/Bezier";
 import Vector2 from "utilities/math/Vector2";
 export declare type ItemSlot = Omit<Component, "event"> & {
     event: IEventEmitter<Component, IItemSlotEvents>;
@@ -51,11 +52,18 @@ export declare enum ItemClasses {
     ProtectedIcon = "item-component-icon-protected",
     Slot = "item-component-slot",
     Dragging = "item-component-dragging",
-    DragPreview = "item-component-drag-preview"
+    DragPreview = "item-component-drag-preview",
+    StatBar = "item-component-stat-bar",
+    StatBars = "item-component-stat-bars-wrapper",
+    DecayBar = "item-component-stat-bar-decay",
+    DurabilityBar = "item-component-stat-bar-durability",
+    NearlyDestroyed = "item-component-nearly-destroyed",
+    NearlyDecayed = "item-component-nearly-decayed"
 }
 export declare namespace ItemClasses {
     const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-topleft" | "item-component-icon-location-bottomright";
 }
+export declare const ITEM_COMPONENT_STAT_BAR_BEZIER: Bezier;
 export interface IItemHandler {
     noDrag?: true;
     equipSlot?: EquipType;
@@ -86,6 +94,9 @@ export default class ItemComponent extends Component {
     readonly actionIcon: Component<HTMLElement> | undefined;
     readonly slottedIcon: Component<HTMLElement> | undefined;
     readonly equipIcon: Component<HTMLElement>;
+    statBars?: Component;
+    decayBar?: Component;
+    durabilityBar?: Component;
     readonly draggable?: Draggable;
     constructor(handler: IItemHandler);
     private lastItem?;
@@ -96,6 +107,7 @@ export default class ItemComponent extends Component {
     protected onUpdateItemType(): void;
     protected onUpdateDurability(): void;
     protected onUpdateQuality(): void;
+    protected onTickEnd(): void;
     refresh(refreshType: ItemRefreshType): void;
     clone(): ItemComponent;
     setItemMenu(initialiser?: (contextMenu: ContextMenu<ActionId>) => any): this;
@@ -106,4 +118,9 @@ export default class ItemComponent extends Component {
     protected endedMoveOnSelfTick: number;
     endedMoveOnSelf(): boolean;
     protected onMoveEnd(_: any, offset: Vector2, mouse: Vector2, bindable?: Bindable): void;
+    private getStatBarsWrapper;
+    private lastDecay;
+    private refreshDecayBar;
+    private lastDurability;
+    private refreshDurabilityBar;
 }

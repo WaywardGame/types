@@ -93,7 +93,6 @@ export default class Player extends Human implements IUnserializedCallback {
      */
     isExploredClientSide(x: number, y: number, z: number): boolean;
     protected onSkillGain(skill: SkillType, mod: number): void;
-    protected calculateStats(): void;
     private canWriteInHours;
     private canWriteNote;
     private onWriteNote;

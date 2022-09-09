@@ -8,9 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import PlayerTargetedClientPacket from "multiplayer/packets/PlayerTargetedClientPacket";
-export default class SetPlayerZPacket extends PlayerTargetedClientPacket {
-    z: number;
-    getDebugInfo(): string;
-    process(): void;
+import type Human from "game/entity/Human";
+import ClientPacket from "multiplayer/packets/ClientPacket";
+export default abstract class HumanTargetedClientPacket extends ClientPacket {
+    human: Human;
+    preProcess(): void;
+    protected preWriteData(): void;
+    protected preReadData(): void;
 }

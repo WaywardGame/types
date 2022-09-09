@@ -239,6 +239,12 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      * @param options Load island options
      */
     loadedOnIsland(island: Island, options?: Partial<ILoadOnIslandOptions>): any;
+    /**
+     * Called when the human will be killed. If any handlers return `false` to stop the human from dying,
+     * no further handlers will be called.
+     * @return `false` to stop the human from dying
+     */
+    shouldDie(): false | void;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;
@@ -271,7 +277,7 @@ export declare enum EquipType {
     Legs = 2,
     Chest = 3,
     Head = 4,
-    Belt = 5,
+    Waist = 5,
     Feet = 6,
     Neck = 7,
     Hands = 8,

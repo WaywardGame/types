@@ -13,6 +13,7 @@ import type { StatusEffectChangeReason } from "game/entity/IEntity";
 import type StatusEffect from "game/entity/status/StatusEffect";
 import type Island from "game/island/Island";
 import type { ItemType } from "game/item/IItem";
+import type { RenderSource, UpdateRenderFlag } from "renderer/IRenderer";
 import type { CreatureNotifierType, INotificationLocation, ItemNotifierType, NotifierIconType, StatNotificationType } from "renderer/notifier/INotifier";
 import type Renderer from "renderer/Renderer";
 import type { IRGB } from "utilities/Color";
@@ -34,8 +35,11 @@ export default class Renderers {
         create: (island: Island, tileX: number, tileY: number, tileZ: number, particle: IRGB) => void;
         createMultiple: (island: Island, tileX: number, tileY: number, tileZ: number, particle: IRGB, count: number, intensity?: number) => void;
     };
+    hasRendererForIsland(island: Island): boolean;
     add(renderer: Renderer): void;
     remove(renderer: Renderer): void;
     computeSpritesInViewport(): void;
     update(timeStamp: number): void;
+    updateView(/*island: Island,*/ source: RenderSource, updateFov?: boolean, computeSpritesNow?: boolean): void;
+    updateRender(/*island: Island,*/ source: RenderSource, flag: UpdateRenderFlag): void;
 }

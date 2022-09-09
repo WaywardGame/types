@@ -1411,7 +1411,7 @@ export declare enum ItemTypeGroup {
     EquippableNeck = 905,
     EquippableChest = 906,
     EquippableHands = 907,
-    EquippableBelt = 908,
+    EquippableWaist = 908,
     EquippableLegs = 909,
     EquippableFeet = 910,
     EquippableBack = 911,

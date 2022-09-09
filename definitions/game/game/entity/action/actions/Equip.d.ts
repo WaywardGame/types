@@ -11,5 +11,5 @@
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
 import { EquipType } from "game/entity/IHuman";
-declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.EquipType, [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default, boolean, import("game/entity/action/IAction").IActionUsable, [import("../../../item/Item").default, EquipType, (boolean | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.EquipType], import("../../Human").default, boolean, import("game/entity/action/IAction").IActionUsable, [import("../../../item/Item").default, EquipType]>;
 export default _default;

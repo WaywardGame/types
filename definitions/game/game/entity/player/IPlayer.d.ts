@@ -44,12 +44,6 @@ export interface IPlayerEvents extends Events<Human> {
      */
     promptResponse(interrupt: Prompt, choice: boolean | InterruptChoice): any;
     /**
-     * Called when the player will be killed. If any handlers return `false` to stop the player from dying,
-     * no further handlers will be called.
-     * @return `false` to stop the player from dying
-     */
-    shouldDie(): false | void;
-    /**
      * Called when the player is killed.
      * @param showingGameEndScreen True if the game end screen will be shown
      */
