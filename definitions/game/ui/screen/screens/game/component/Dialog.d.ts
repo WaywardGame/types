@@ -163,7 +163,8 @@ export default abstract class Dialog extends Component implements IDialog {
     /**
      * Set the position of an edge.
      */
-    setEdgePosition(edge: Edge, position: number): void;
+    setEdgePosition(edge: Edge, position: number, transform?: boolean): void;
+    private setTransform;
     /**
      * Makes this dialog the top dialog.
      */

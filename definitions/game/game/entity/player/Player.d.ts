@@ -67,7 +67,6 @@ export default class Player extends Human implements IUnserializedCallback {
     setup(spawnPoint: IVector3): void;
     onNoInput(): void;
     updateTables(source: string, options?: Partial<{
-        allowDeferingUpdate: boolean;
         allowCaching: boolean;
     }>): void;
     private updateCraftTable;
