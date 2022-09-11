@@ -13,7 +13,6 @@ import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type { IMagicalPropertyInfo } from "game/item/IItem";
 import type Item from "game/item/Item";
-import type { MagicalSubPropertySubTypes } from "game/magic/MagicalPropertyManager";
 import type { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 export interface IUpgradeCanUse extends IActionUsable {
     upgrade: IUpgradeable;
@@ -24,6 +23,5 @@ export default _default;
 export interface IUpgradeable extends IMagicalPropertyInfo {
     target: Item;
     type: MagicalPropertyType;
-    subType?: MagicalSubPropertySubTypes;
     currentValue: number;
 }

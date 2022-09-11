@@ -37,7 +37,6 @@ export interface IApplicationState {
  * WebDriver client api: http://webdriver.io/api.html
  */
 export default class Application extends ApplicationInteractions {
-    readonly appId: string;
     private readonly paths;
     private readonly options;
     private static readonly browsers;
@@ -45,10 +44,8 @@ export default class Application extends ApplicationInteractions {
     static stop(): Promise<void>;
     readonly id: string;
     readonly basePath: string;
-    readonly userDataDirectory: string;
     private readonly chromeDriver;
     manager: Apps;
-    private screenshotPath;
     private heapSnapshotPath;
     private recordVideo;
     private videoPath;
@@ -61,7 +58,6 @@ export default class Application extends ApplicationInteractions {
     clearDirectory(directory: string): Promise<void>;
     getApplicationState(): Promise<IApplicationState>;
     getLogs(): Promise<string[]>;
-    requestScreenshot(screenshotPath: string): void;
     requestHeapSnapshot(heapSnapshotPath: string): void;
     requestVideo(videoPath: string): void;
     private recordVideoFrame;

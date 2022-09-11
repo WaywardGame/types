@@ -169,6 +169,10 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      */
     moveComplete(): any;
     /**
+     * Called when no input is received
+     */
+    noInput(): any;
+    /**
      * Called when a book is opened by a player
      * @param book The book that was opened
      */

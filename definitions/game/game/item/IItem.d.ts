@@ -22,6 +22,7 @@ import type { IslandId } from "game/island/IIsland";
 import type Item from "game/item/Item";
 import type Recipe from "game/item/recipe/Recipe";
 import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
+import type { MagicalSubPropertySubTypes } from "game/magic/MagicalPropertyManager";
 import type { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import type { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
 import type { TerrainType } from "game/tile/ITerrain";
@@ -432,11 +433,22 @@ export interface IRanged {
     skillType?: SkillType;
 }
 export interface IMagicalPropertyInfo {
+    /**
+     * The maximum value this magical property can be on this item.
+     */
     max: number;
-    float?: true;
+    /**
+     * Does nothing for integer magical properties. For decimal magical properties, rounds it to the nearest `.1` for calculations and display.
+     */
+    roundToNearestTenthPlace?: true;
+    /**
+     * Generates a random starting value for this magical property.
+     */
     value(): number;
-    stat?(): Stat;
-    skill?(): SkillType;
+    /**
+     * Generates the random sub-property to use for this magical property, if this magical property is a magical property with subtypes.
+     */
+    subType?: MagicalSubPropertySubTypes | (() => MagicalSubPropertySubTypes);
 }
 export interface IItemUsed {
     usedBy?: string[];

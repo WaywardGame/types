@@ -112,7 +112,8 @@ export declare enum ContainerReferenceSource {
     ResolveContainer = 9,
     ScheduleContainerInvalidation = 10,
     Serializer = 11,
-    WriteContainer = 12
+    WriteContainer = 12,
+    GetContainerName = 13
 }
 export interface ICraftResultChances {
     success: number;

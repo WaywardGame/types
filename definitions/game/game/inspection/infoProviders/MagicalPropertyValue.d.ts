@@ -11,8 +11,9 @@
 import type { SkillType } from "game/entity/IHuman";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { Quality } from "game/IObject";
-import type { IHasMagic, MagicalNormalPropertyTypes, MagicalPropertyTypeSubTypeMap, MagicalSubPropertyTypes } from "game/magic/MagicalPropertyManager";
+import type { IHasMagic, MagicalNormalPropertyTypes, MagicalSubPropertyTypes } from "game/magic/MagicalPropertyManager";
 import { MagicalPropertyIdentity } from "game/magic/MagicalPropertyManager";
+import type { MagicalPropertyTypeSubTypeMap } from "game/magic/MagicalPropertyType";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import type { TranslationGenerator } from "ui/component/IComponent";

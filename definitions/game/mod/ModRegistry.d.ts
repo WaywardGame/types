@@ -35,6 +35,7 @@ import type { StatusEffectClass } from "game/entity/status/StatusEffect";
 import type { InspectType } from "game/inspection/IInspection";
 import type { InspectionClass } from "game/inspection/InspectionTypeMap";
 import type { IItemDescription, IItemGroupDescription, ItemType, ItemTypeGroup } from "game/item/IItem";
+import type { IMagicalPropertyDescription, MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import type { ILoadingDescription } from "game/meta/Loading";
 import type { Prompt } from "game/meta/prompt/IPrompt";
 import type { ITerrainDescription, OverlayType, TerrainType } from "game/tile/ITerrain";
@@ -90,32 +91,33 @@ export declare enum ModRegistrationType {
     Language = 18,
     LanguageExtension = 19,
     Load = 20,
-    MenuBarButton = 21,
-    Message = 22,
-    MessageSource = 23,
-    MusicTrack = 24,
-    Note = 25,
-    NPC = 26,
-    OptionsSection = 27,
-    Overlay = 28,
-    Packet = 29,
-    Prompt = 30,
-    QuadrantComponent = 31,
-    Quest = 32,
-    QuestRequirement = 33,
-    Registry = 34,
-    Skill = 35,
-    SoundEffect = 36,
-    Stat = 37,
-    StatusEffect = 38,
-    Terrain = 39,
-    TerrainDecoration = 40,
-    TileEvent = 41,
-    TileLayerType = 42,
-    UsableActions = 43,
-    UsableActionType = 44,
-    UsableActionTypePlaceholder = 45,
-    WorldLayer = 46
+    MagicalProperty = 21,
+    MenuBarButton = 22,
+    Message = 23,
+    MessageSource = 24,
+    MusicTrack = 25,
+    Note = 26,
+    NPC = 27,
+    OptionsSection = 28,
+    Overlay = 29,
+    Packet = 30,
+    Prompt = 31,
+    QuadrantComponent = 32,
+    Quest = 33,
+    QuestRequirement = 34,
+    Registry = 35,
+    Skill = 36,
+    SoundEffect = 37,
+    Stat = 38,
+    StatusEffect = 39,
+    Terrain = 40,
+    TerrainDecoration = 41,
+    TileEvent = 42,
+    TileLayerType = 43,
+    UsableActions = 44,
+    UsableActionType = 45,
+    UsableActionTypePlaceholder = 46,
+    WorldLayer = 47
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -343,10 +345,15 @@ export interface IUsableActionTypePlaceholderRegistration extends IBaseModRegist
     type: ModRegistrationType.UsableActionTypePlaceholder;
     name: string;
 }
+export interface IMagicalPropertyRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.MagicalProperty;
+    name: string;
+    description: IMagicalPropertyDescription;
+}
 export interface IInheritsRegistrationTime {
     useRegistrationTime: ModRegistrationType;
 }
-export declare type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypeRegistration | IUsableActionTypePlaceholderRegistration;
+export declare type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypeRegistration | IUsableActionTypePlaceholderRegistration;
 export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare module Register {
     /**
@@ -613,6 +620,13 @@ declare module Register {
      * @param description The definition of this action.
      */
     export function action(name: string, description?: IActionDescription): <K extends string | number | symbol, T extends { [k in K]: ActionType; }>(target: T, key: K) => void;
+    /**
+     * Registers a magical property.
+     * @param description The definition of this magical property.
+     *
+     * See — [Adding Magical Properties](https://github.com/WaywardGame/types/wiki/Adding-Magical-Properties)
+     */
+    export function magicalProperty(name: string, description: IMagicalPropertyDescription): <K extends string | number | symbol, T extends { [k in K]: MagicalPropertyType; }>(target: T, key: K) => void;
     /**
      * Registers a "usable" action generator — actions that appear in the UI, and can be slotted in the action bar.
      * @param set Where to append the usable actions

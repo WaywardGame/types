@@ -17,13 +17,17 @@ import type { IDedicatedServerGameOptions, IJoinServerOptions, INewGameOptions, 
 import ApplicationDom from "./applicationDom";
 import ApplicationLogger from "./applicationLogger";
 export default class ApplicationInteractions {
+    readonly appId: string;
     readonly random: Random<SeededGenerator>;
     readonly logger: ApplicationLogger;
     dom: ApplicationDom;
     protected browser: WebdriverIO.Browser;
     readonly isDedicatedServer: boolean;
+    userDataDirectory: string;
+    readonly screenshots: string[];
+    private returnToTitleScreenCount;
     private readonly savedStates;
-    constructor(additionalArgs: string[], random: Random<SeededGenerator>);
+    constructor(appId: string, additionalArgs: string[], random: Random<SeededGenerator>);
     waitForInitialStartup(expectedInitialScreen: "title" | "mp_gameplay_modifiers"): Promise<void>;
     waitUntilLoadingIsFinished(options?: Partial<IWaitUntilGameLoadedOptions>): Promise<void>;
     playDedicatedServer(options: IDedicatedServerGameOptions): Promise<void>;
@@ -90,4 +94,5 @@ export default class ApplicationInteractions {
     increaseStat(stat: Stat, value: number): Promise<void>;
     randomInput(count: number): Promise<void>;
     pressKey(key: string, modifier?: string): Promise<void>;
+    protected screenshot(suffix: string): Promise<void>;
 }

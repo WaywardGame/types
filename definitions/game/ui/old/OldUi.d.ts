@@ -48,7 +48,6 @@ export default class OldUi {
     removeItemFromEquipSlot(equip: EquipType, itemId: number): void;
     shouldRefreshMods(): boolean;
     onGameEnd(): void;
-    toggleUIDisplay(hide: boolean): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;
     closeAllContainers(): void;

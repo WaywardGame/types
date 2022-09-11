@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
-import { MagicalPropertyType, magicalPropertyTypeSubTypeMap } from "game/magic/MagicalPropertyType";
+import type { MagicalPropertyTypeSubTypeMap } from "game/magic/MagicalPropertyType";
+import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import type { ListEnder } from "language/ITranslation";
 import Translation from "language/Translation";
 export interface IHasMagic {
@@ -29,9 +30,6 @@ export interface IMagicalSubProperty<T extends number> {
         value: number;
     }>;
 }
-export declare type MagicalPropertyTypeSubTypeMap = {
-    [K in keyof typeof magicalPropertyTypeSubTypeMap]: Value<(typeof magicalPropertyTypeSubTypeMap)[K]>;
-};
 export declare type MagicalProperty<T extends MagicalPropertyType> = MagicalPropertyTypeSubTypeMap extends {
     [key in T]: any;
 } ? IMagicalSubProperty<MagicalPropertyTypeSubTypeMap[T]> : IMagicalProperty;

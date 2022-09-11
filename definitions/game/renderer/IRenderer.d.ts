@@ -35,9 +35,10 @@ export declare enum UpdateRenderFlag {
     World = 1,
     FieldOfView = 2,
     FieldOfViewForced = 4,
-    Particles = 8,
-    Notifier = 16,
-    SteamOverlay = 32,
+    FieldOfViewSkipTransition = 8,
+    Particles = 16,
+    Notifier = 32,
+    SteamOverlay = 64,
     All = 255
 }
 export declare enum RenderSource {

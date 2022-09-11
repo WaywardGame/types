@@ -66,6 +66,8 @@ export interface IDoodadEvents {
      * Emitted when the doodad's type changes.
      */
     transformed(newType: DoodadType, oldType: DoodadType): any;
+    durabilityChange(durability: number, oldDurability: number): any;
+    durabilityMaxChange(durability: number, oldDurability: number): any;
 }
 export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IReferenceable, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasBuilder, IHasMagic {
     static is(value: any): value is Doodad;
@@ -85,8 +87,8 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     id: number;
     referenceId?: number;
     itemOrders?: number[];
-    durabilityMax: number;
-    durability: number;
+    maxDur: number;
+    minDur: number;
     orientation?: DoorOrientation | Direction.Cardinal;
     crafterIdentifier?: string;
     builderIdentifier?: string;
@@ -109,7 +111,6 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     private _tile;
     private _tileId;
     private readonly _doodadGroupCache;
-    private _minDur;
     constructor(type?: DoodadType, islandId?: `${number},${number}`, x?: number, y?: number, z?: number, options?: IDoodadOptions);
     get island(): import("../island/Island").default;
     toString(): string;
@@ -178,7 +179,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     getBuilder(): Player | undefined;
     unhitch(): void;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
-    getDefaultDurability(): number;
+    getDefaultDurability(random?: import("../../utilities/random/Random").Random<import("../../utilities/random/Random").SeededGenerator>): number;
     addTreasureChestLoot(): void;
     attachStillContainer(item: Item): void;
     detachStillContainer(human?: Human): Item | undefined;
@@ -237,7 +238,10 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     revert(): boolean;
     onUnserialized(): void;
-    private setupDurabilityHandlers;
+    get durability(): number;
+    set durability(value: number);
+    get durabilityMax(): number;
+    set durabilityMax(value: number);
     private processSpecials;
     /**
      * Check for items on top of lit/fire doodads, set them on fire

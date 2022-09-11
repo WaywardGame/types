@@ -8,9 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-export interface IInjectionApi<T extends {
-    [key in K]: AnyFunction;
-}, K extends keyof T> {
+export interface IInjectionApi<T, K extends keyof T> {
     /**
      * The instance that the injected method was called on.
      */
@@ -22,7 +20,7 @@ export interface IInjectionApi<T extends {
     /**
      * The return value of the method call.
      */
-    returnValue: ReturnType<T[K]> | undefined;
+    returnValue: ReturnType<T[K] extends (...args: any[]) => any ? T[K] : never> | undefined;
     /**
      * The arguments given to the method call.
      */
@@ -32,9 +30,7 @@ export interface IInjectionApi<T extends {
      */
     cancelled: boolean;
 }
-declare type InjectionMethod<T extends {
-    [key in K]: AnyFunction;
-}, K extends keyof T> = T[K] extends (...args: infer A) => any ? (api: IInjectionApi<T, K>, ...args: A) => any : never;
+declare type InjectionMethod<T, K extends keyof T> = T[K] extends (...args: infer A) => any ? (api: IInjectionApi<T, K>, ...args: A) => any : never;
 export declare enum InjectionPosition {
     /**
      * This injection will be called before the target method.
@@ -45,9 +41,12 @@ export declare enum InjectionPosition {
      */
     Post = "post"
 }
+export declare function InjectObject<T extends {
+    [key in K]: AnyFunction;
+}, K extends keyof T>(injectInto: T, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any;
 export declare function Inject<T extends {
     [key in K]: AnyFunction;
-}, K extends keyof T>(injectInto: AnyClass<T>, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => void;
+}, K extends keyof T>(injectInto: AnyClass<T>, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any;
 /**
  * Classes decorated with `Injector` will have their methods automatically injected using `inject`.
  *

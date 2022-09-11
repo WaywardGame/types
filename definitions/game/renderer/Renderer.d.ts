@@ -65,7 +65,7 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
      */
     getAmbientLightLevel(z: number): number;
     updateAmbientLightLevel(z: number): number;
-    updateView(source: RenderSource, updateFov: boolean, computeSpritesNow: boolean): void;
+    updateView(source: RenderSource, updateFov: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition, computeSpritesNow: boolean): void;
     updateThumbnail(): Promise<boolean>;
     update(timeStamp: number): void;
     computeSpritesInViewport(): void;

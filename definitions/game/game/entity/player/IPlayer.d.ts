@@ -69,10 +69,6 @@ export interface IPlayerEvents extends Events<Human> {
      */
     updatedQuickslotInfo?(quickslot: number, itemType?: ItemType): any;
     /**
-     * Called when no input is received
-     */
-    noInput(): any;
-    /**
      * Called when the player will write a note.
      * @param note The note that will be written.
      * @returns `false` if the note should be cancelled

@@ -14,7 +14,9 @@ import MagicalPropertyValue from "game/inspection/infoProviders/MagicalPropertyV
 import UseInfo from "game/inspection/infoProviders/UseInfo";
 import type Item from "game/item/Item";
 import { MagicalPropertyEntry } from "game/magic/MagicalPropertyManager";
+import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import { TempType } from "game/temperature/ITemperature";
+import UiTranslation from "language/dictionary/UiTranslation";
 declare const _default: UseInfo<{
     equip: import("../../../../entity/IHuman").EquipType;
     objectType: import("../../../../IGame").CreationId.Item;
@@ -26,6 +28,14 @@ declare const _default: UseInfo<{
     union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Equip>;
     details: Set<symbol>;
 }, ActionType.Equip, {
+    getMagicalEquipTypes: () => Set<MagicalPropertyType>;
+} & {
+    getMagicalPropertyLabels: () => Map<MagicalPropertyType, UiTranslation>;
+} & {
+    isMagicalPropertyPercentage: (property: MagicalPropertyType) => boolean;
+} & {
+    isMagicalPropertyPercentagePremultiplied: (property: MagicalPropertyType) => boolean;
+} & {
     getAttack: () => MagicalPropertyValue | undefined;
 } & {
     getDefense: () => (import("../../../../../language/impl/TranslationImpl").default | MagicalPropertyValue)[];

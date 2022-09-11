@@ -146,6 +146,11 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, filterText?: string | undefined, onMoveItem?: (item: Item) => void): Item[];
     moveToContainer(human: Human | undefined, item: Item, container: IContainer): boolean;
     hasRoomInContainer(targetContainer: IContainer, itemToMove: Item): boolean;
+    /**
+     * Gets the name of a container
+     * @returns Name of the container or undefined if it's ending up on the ground
+     */
+    getContainerName(container: IContainer): Translation | undefined;
     breakContainerOnTile(itemContainer: Item, x: number, y: number, z: number): void;
     /**
      * Drop items in a 3x3 square around the location

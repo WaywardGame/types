@@ -73,7 +73,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     startTransition(timeStamp: number): void;
     updateTransitionProgress(timeStamp: number): boolean;
     resetTransitionProgress(): void;
-    compute(timeStamp: number, force?: boolean): boolean;
+    compute(timeStamp: number, force?: boolean, skipTransition?: boolean): boolean;
     createDebugRenderer(): ITextureDebugRenderer;
     /**
      * Updates the explored tiles around players

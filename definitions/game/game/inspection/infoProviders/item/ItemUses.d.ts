@@ -100,6 +100,14 @@ export default class ItemUses extends Uses<Item> {
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Equip>;
         details: Set<symbol>;
     }, ActionType.Equip, {
+        getMagicalEquipTypes: () => Set<import("../../../magic/MagicalPropertyType").MagicalPropertyType>;
+    } & {
+        getMagicalPropertyLabels: () => Map<import("../../../magic/MagicalPropertyType").MagicalPropertyType, import("../../../../language/dictionary/UiTranslation").default>;
+    } & {
+        isMagicalPropertyPercentage: (property: import("../../../magic/MagicalPropertyType").MagicalPropertyType) => boolean;
+    } & {
+        isMagicalPropertyPercentagePremultiplied: (property: import("../../../magic/MagicalPropertyType").MagicalPropertyType) => boolean;
+    } & {
         getAttack: () => import("../MagicalPropertyValue").default | undefined;
     } & {
         getDefense: () => (import("../../../../language/impl/TranslationImpl").default | import("../MagicalPropertyValue").default)[];
