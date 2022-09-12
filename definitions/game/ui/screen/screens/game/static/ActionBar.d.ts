@@ -55,7 +55,7 @@ export default class ActionBar extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
     get preferredQuadrant(): Quadrant;
     protected slots: IActionBarSlotData[];
-    shouldShowBindings: boolean;
+    showBindings?: boolean;
     readonly slotsContainer: Component<HTMLElement>;
     readonly lastSlotsContainer: Component<HTMLElement>;
     readonly addSlotButton: Button;
@@ -78,7 +78,7 @@ export default class ActionBar extends QuadrantComponent {
     protected onToggleUseWhileMoving(api: IBindHandlerApi): boolean;
     protected onMenuCancel(): boolean;
     protected onChangeWhetherCopying(api: IBindHandlerApi): boolean;
-    private getSlots;
+    getSlots(): Generator<ActionSlot, void, unknown>;
     private toggleShowingBindings;
     private focus;
     private refreshSlots;

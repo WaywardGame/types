@@ -78,7 +78,12 @@ export declare module IInput {
     function modifiersEqual(inputA: IInput, modifiersB: Set<Modifier>): boolean;
     function getPrecision(input: IInput): number;
     function hash(input: IInput, resolveModifiers?: boolean): string;
+    interface IInputStringSection extends IStringSection {
+        input?: IInput;
+        inputMacro?: true;
+        inputModifier?: Modifier;
+    }
     function translate(input: IInput, simplifyModifierCatalysts?: boolean): TranslationImpl;
-    function kbd(translation: TranslationImpl): IStringSection[];
+    function kbd(translation: TranslationImpl, input?: IInput): Array<IStringSection & Partial<IInputStringSection>>;
 }
 export {};

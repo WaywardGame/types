@@ -19,6 +19,7 @@ import type { ITooltipSection } from "language/segment/TooltipSegment";
 import Translation from "language/Translation";
 import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
+import { IInput } from "ui/input/IInput";
 import type { IReferenceSection, ISegment, IStringSection } from "utilities/string/Interpolator";
 export default class Text extends Component {
     static resolve(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[], ...args: any[]): IStringSection[];
@@ -80,7 +81,12 @@ export interface IBasicTextEvents extends Events<Component> {
 export declare class BasicText extends Component {
     event: IEventEmitter<this, IBasicTextEvents>;
     private _link;
+    inputIndex?: number;
+    private input?;
+    private inputModifier?;
     constructor(elementType?: string);
-    setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection>): this;
+    setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection> & Partial<IInput.IInputStringSection>): this;
+    private onInputUp;
+    private onInputUpdate;
     private onClick;
 }

@@ -60,6 +60,8 @@ export interface IIcon {
     path: string | ImagePath | ISerializedImagePath;
     width: number;
     height: number;
+    imageWidth?: number;
+    imageHeight?: number;
     scale?: number;
 }
 export interface ISerializedIcon extends IIcon {

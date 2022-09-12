@@ -45,6 +45,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private _incomingPacketQueue;
     private _incomingPacketProcessingPaused;
     private _packetTickIntervalId;
+    private _keepAliveTimeoutsPaused;
     private _currentPacketProcessing;
     private _currentSyncPacketsWaiting;
     private _currentSyncPacketsProcessing;
@@ -143,8 +144,8 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     updatePlayerId(oldPid: number, newPid: number): void;
     suppressSyncChecks(suppress: boolean): void;
     syncGameState(): void;
-    clearKeepAliveTimeouts(): void;
-    addKeepAliveTimeouts(): void;
+    pauseKeepAliveTimeouts(): void;
+    resumeKeepAliveTimeouts(): void;
     updateGlobalServerDirectory(): void;
     checkConnection(): Promise<void>;
     isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;

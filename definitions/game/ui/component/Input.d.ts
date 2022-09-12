@@ -26,7 +26,6 @@ export declare enum ClearType {
 }
 export interface IInputEvents extends Events<Component> {
     change(text: string): any;
-    changeDebounced(text: string): any;
     done(text: string): any;
     enterBind(): any;
     escape(): any;
@@ -40,6 +39,7 @@ export default class Input extends Component implements IRefreshable {
     event: IEventEmitter<this, IInputEvents>;
     default: (() => string) | undefined;
     private lastInput;
+    private lastText;
     get text(): string;
     set text(value: string);
     private keydownEnter;
@@ -52,6 +52,7 @@ export default class Input extends Component implements IRefreshable {
     private shouldNotClearOnEscape;
     private shouldSelectOnFocus;
     private shouldSelectOnNextMouseUp;
+    private debounce;
     get changed(): boolean;
     protected readonly input: Component;
     private readonly wrapperButtons;
@@ -74,6 +75,7 @@ export default class Input extends Component implements IRefreshable {
     setBlurOnEnter(shouldBlurOnEnter?: boolean): this;
     setNotClearOnEscape(shouldNotClearOnEscape?: boolean): this;
     setSelectOnFocus(selectOnFocus?: boolean): this;
+    setDebounce(debounce?: number): this;
     editInput(consumer: (input: Component) => any): this;
     refresh(): this;
     /**
@@ -93,5 +95,6 @@ export default class Input extends Component implements IRefreshable {
     private keydown;
     private keyup;
     private change;
+    private emitChange;
     private getClearTo;
 }

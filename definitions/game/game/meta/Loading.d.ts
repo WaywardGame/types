@@ -24,33 +24,34 @@ export declare enum Load {
     GameItems = 10,
     GameLoading = 11,
     GameLostGLContext = 12,
-    GameMods = 13,
-    GameMultiplayerPlayerConnecting = 14,
-    GameMultiplayerSynchronizing = 15,
-    GameMultiplayerSyncing = 16,
-    GameQuitting = 17,
-    GameReloadingWebGl = 18,
-    GameResting = 19,
-    GameSaving = 20,
-    GameSleeping = 21,
-    GameSprites = 22,
-    MenuChangelogLoading = 23,
-    MenuCustomGameOptionsImporting = 24,
-    MenuLoadGameExportingSave = 25,
-    MenuLoadGameImportingSaves = 26,
-    MenuLoadGameLoading = 27,
-    MenuLoadGamePublishingSave = 28,
-    MenuMainLoadingChangelog = 29,
-    MenuMainLoadingNews = 30,
-    MenuMilestoneModifiersImporting = 31,
-    MenuModsUpdatingMod = 32,
-    MenuModsPublishingMod = 33,
-    MenuOptionsImportingGlobalData = 34,
-    MenuOptionsLoading = 35,
-    MultiplayerConnecting = 36,
-    MultiplayerDownloadingGameData = 37,
-    MultiplayerWaitingForGameData = 38,
-    SteamworksRefreshingMods = 39
+    GameInitializingMods = 13,
+    GameLoadingMods = 14,
+    GameMultiplayerPlayerConnecting = 15,
+    GameMultiplayerSynchronizing = 16,
+    GameMultiplayerSyncing = 17,
+    GameQuitting = 18,
+    GameReloadingWebGl = 19,
+    GameResting = 20,
+    GameSaving = 21,
+    GameSleeping = 22,
+    GameSprites = 23,
+    MenuChangelogLoading = 24,
+    MenuCustomGameOptionsImporting = 25,
+    MenuLoadGameExportingSave = 26,
+    MenuLoadGameImportingSaves = 27,
+    MenuLoadGameLoading = 28,
+    MenuLoadGamePublishingSave = 29,
+    MenuMainLoadingChangelog = 30,
+    MenuMainLoadingNews = 31,
+    MenuMilestoneModifiersImporting = 32,
+    MenuModsUpdatingMod = 33,
+    MenuModsPublishingMod = 34,
+    MenuOptionsImportingGlobalData = 35,
+    MenuOptionsLoading = 36,
+    MultiplayerConnecting = 37,
+    MultiplayerDownloadingGameData = 38,
+    MultiplayerWaitingForGameData = 39,
+    SteamworksRefreshingMods = 40
 }
 export interface ILoadingDescription<A extends any[]> {
     canCancel?: SupplierOr<boolean | undefined, A>;
@@ -95,12 +96,12 @@ export declare const loadingDescriptions: {
     19: LoadingDescription<[]>;
     20: LoadingDescription<[]>;
     21: LoadingDescription<[]>;
-    22: LoadingDescription<[background: boolean]>;
-    23: LoadingDescription<[]>;
+    22: LoadingDescription<[]>;
+    23: LoadingDescription<[background: boolean]>;
     24: LoadingDescription<[]>;
     25: LoadingDescription<[]>;
-    26: LoadingDescription<[numberOfSaves: number, filenames: string[]]>;
-    27: LoadingDescription<[]>;
+    26: LoadingDescription<[]>;
+    27: LoadingDescription<[numberOfSaves: number, filenames: string[]]>;
     28: LoadingDescription<[]>;
     29: LoadingDescription<[]>;
     30: LoadingDescription<[]>;
@@ -113,6 +114,7 @@ export declare const loadingDescriptions: {
     37: LoadingDescription<[]>;
     38: LoadingDescription<[]>;
     39: LoadingDescription<[]>;
+    40: LoadingDescription<[]>;
 };
 export declare type LoadDescriptionOf<LOAD extends Load> = (typeof loadingDescriptions)[LOAD];
 export declare type LoadArgs<LOAD extends Load> = (typeof loadingDescriptions)[LOAD] extends ILoadingDescription<infer A> ? A : never;
