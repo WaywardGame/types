@@ -65,9 +65,10 @@ export default class Player extends Human implements IUnserializedCallback {
     updateMovementIntent(movementIntent: IMovementIntent): boolean;
     load(): void;
     setup(spawnPoint: IVector3): void;
-    onNoInput(): void;
+    protected onNoInput(): void;
     updateTables(source: string, options?: Partial<{
         allowCaching: boolean;
+        skipDeferral: boolean;
     }>): void;
     private updateCraftTable;
     updateDismantleTable(adjacentContainers?: IContainer[], force?: boolean): void;

@@ -173,6 +173,8 @@ export default abstract class Human extends Entity implements IHasInsulation {
     update(): void;
     updateStatsAndAttributes(): void;
     getMovementDelay(): number;
+    protected onMoveComplete(): void;
+    protected onNoInput(): void;
     /**
      * This is only ran on the server
      */
