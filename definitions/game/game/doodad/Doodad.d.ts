@@ -162,6 +162,9 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * Returns whether the doodad can be trampled
      */
     canTrample(): boolean | undefined;
+    /**
+     * Trampling growing things.
+     */
     checkForTrampling(source: Human | Creature): boolean;
     isDangerous(human: Human): boolean;
     getDamage(human: Human, equipType?: EquipType): number;

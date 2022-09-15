@@ -70,6 +70,8 @@ export interface IItemEvents {
 }
 export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagic {
     readonly objectType = CreationId.Item;
+    private maxDur;
+    private minDur;
     book?: BookType;
     constructedFrom?: IConstructedInfo;
     containedItems: Item[] | undefined;
@@ -85,8 +87,6 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     fireStage?: FireStage;
     id: number;
     itemOrders?: number[];
-    private maxDur;
-    private minDur;
     pid: number | null | undefined;
     protected?: boolean;
     quality: Quality | undefined;
