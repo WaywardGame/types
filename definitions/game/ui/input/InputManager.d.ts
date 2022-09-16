@@ -82,6 +82,7 @@ interface IInputInfoEvents {
 export declare class GlobalInputInfo extends EventEmitter.Host<IInputInfoEvents> {
     readonly catalysts: HashMap<InputCatalyst, InputInfo>;
     readonly inputs: HashMap<IInput, InputInfo>;
+    readonly ignore: HashMap<IInput, InputInfo>;
     readonly modifiers: Set<"Shift" | "Alt" | "Ctrl">;
     isAny(): boolean;
     isNone(): boolean;

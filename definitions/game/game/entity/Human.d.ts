@@ -173,8 +173,12 @@ export default abstract class Human extends Entity implements IHasInsulation {
     update(): void;
     updateStatsAndAttributes(): void;
     getMovementDelay(): number;
-    protected onMoveComplete(): void;
+    /**
+     * Note: The noInput event would be emitted before moveComplete.
+     * Ordering is done via EmitHumanEventPacket
+     */
     protected onNoInput(): void;
+    protected onMoveComplete(): void;
     /**
      * This is only ran on the server
      */
