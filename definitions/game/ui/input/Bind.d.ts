@@ -10,7 +10,6 @@
  */
 import type { TypedPropertyDescriptorFunctionAnyNOfParams } from "event/EventManager";
 import Bindable from "ui/input/Bindable";
-import Bindings from "ui/input/Bindings";
 import { IInput } from "ui/input/IInput";
 import type { GlobalInputInfo, GlobalMouseInfo, InputInfo } from "ui/input/InputManager";
 export interface IBindHandlerApi {
@@ -159,6 +158,5 @@ declare module Bind {
     function deregisterHandlers(host: any): void;
     const shouldLogHoldingEvent = false;
     function emitEvent(event: BindingEventName, input: IInput, info: InputInfo, mouse: GlobalMouseInfo, globalInput: GlobalInputInfo): Set<Bindable>;
-    function currentMacroMatch(...bindables: Bindable[]): Bindings.IBindableMatch;
 }
 export default Bind;

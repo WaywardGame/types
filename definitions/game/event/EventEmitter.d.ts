@@ -25,7 +25,7 @@ declare type Abstract<T> = Function & {
 declare type Constructor<T> = new (...args: any[]) => T;
 declare type ClassOrAbstractClass<T> = Abstract<T> | Constructor<T>;
 export interface IEventEmitterHost<E> {
-    event: IEventEmitter<this, E>;
+    event: IEventEmitter<this | {}, E>;
 }
 export declare type IEventEmitterHostClass<E> = ClassOrAbstractClass<IEventEmitterHost<E>>;
 export declare type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends IEventEmitterHostClass<infer E> ? E : never;

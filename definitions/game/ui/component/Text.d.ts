@@ -11,6 +11,7 @@
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { EmitterOrBus, Event, Handler } from "event/EventManager";
 import UiTranslation from "language/dictionary/UiTranslation";
+import type { IBindingsSection } from "language/segment/BindSegment";
 import type { IColorSection } from "language/segment/ColorSegment";
 import type { IHeadingSection } from "language/segment/HeadingSegment";
 import type { ILinkSection } from "language/segment/LinkSegment";
@@ -19,7 +20,7 @@ import type { ITooltipSection } from "language/segment/TooltipSegment";
 import Translation from "language/Translation";
 import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
-import { IInput } from "ui/input/IInput";
+import type { IInput, Modifier } from "ui/input/IInput";
 import type { IReferenceSection, ISegment, IStringSection } from "utilities/string/Interpolator";
 export default class Text extends Component {
     static resolve(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[], ...args: any[]): IStringSection[];
@@ -82,11 +83,9 @@ export declare class BasicText extends Component {
     event: IEventEmitter<this, IBasicTextEvents>;
     private _link;
     inputIndex?: number;
-    private input?;
-    private inputModifier?;
+    protected input?: IInput;
+    protected inputModifier?: Modifier;
     constructor(elementType?: string);
-    setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection> & Partial<IInput.IInputStringSection>): this;
-    private onInputUp;
-    private onInputUpdate;
+    setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection> & Partial<IBindingsSection>): this;
     private onClick;
 }

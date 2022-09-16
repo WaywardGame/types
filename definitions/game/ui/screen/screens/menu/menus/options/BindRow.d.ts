@@ -14,7 +14,7 @@ import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IRefreshable } from "ui/component/Refreshable";
 import Bindable from "ui/input/Bindable";
-import { Binding } from "ui/input/Bindings";
+import type { Binding } from "ui/input/Bindings";
 export interface IBindRowEvents extends Events<Button> {
     requestFilter(bindables: Iterable<Bindable>): any;
     update(): any;
@@ -36,7 +36,7 @@ export declare class BindingCatcher extends Component {
     private readonly currentInputText;
     private readonly timeoutBar;
     private resolve;
-    private readonly macro;
+    private macro;
     private closeTimeout;
     constructor();
     getBinding(macro: boolean): Promise<Binding | undefined>;

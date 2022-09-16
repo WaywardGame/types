@@ -10,7 +10,6 @@
  */
 import TranslationImpl from "language/impl/TranslationImpl";
 import { InputCatalystType } from "ui/input/IIInput";
-import type { IStringSection } from "utilities/string/Interpolator";
 interface IInputCatalystValueMap {
     [InputCatalystType.Key]: string;
     [InputCatalystType.MouseButton]: number;
@@ -50,7 +49,7 @@ declare enum ModifierType {
 export declare type Modifier = keyof typeof ModifierType;
 export declare module Modifier {
     function is(value: unknown): value is Modifier;
-    function translate(modifier: Modifier, simplify?: boolean): TranslationImpl;
+    function translate(modifier: Modifier): TranslationImpl;
     function hash(...modifiers: Modifier[]): string;
     function getTranslationId(modifier: Modifier): string;
     function setsEqual(modifiersA: Set<Modifier>, modifiersB: Set<Modifier>): boolean;
@@ -78,12 +77,15 @@ export declare module IInput {
     function modifiersEqual(inputA: IInput, modifiersB: Set<Modifier>): boolean;
     function getPrecision(input: IInput): number;
     function hash(input: IInput, resolveModifiers?: boolean): string;
-    interface IInputStringSection extends IStringSection {
-        input?: IInput;
-        inputMacro?: true;
-        inputModifier?: Modifier;
+    interface IModifierResolvedHash {
+        hash: string;
+        input: IInput | IModifierResolvedInput;
+        simplifies: string;
     }
-    function translate(input: IInput, simplifyModifierCatalysts?: boolean): TranslationImpl;
-    function kbd(translation: TranslationImpl, input?: IInput): Array<IStringSection & Partial<IInputStringSection>>;
+    interface IModifierResolvedInput extends IInput {
+        resolvedCatalyst: Modifier;
+    }
+    function modifiersResolvedHashes(input: IInput): [IModifierResolvedHash, IModifierResolvedHash?];
+    function translate(input: IInput, resolvedModifierCatalyst?: Modifier): TranslationImpl;
 }
 export {};

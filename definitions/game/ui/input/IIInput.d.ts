@@ -27,5 +27,7 @@ export declare enum InputIcon {
     Alt = 8
 }
 export declare namespace InputIcon {
+    function get(catalyst: Modifier): InputIcon;
+    function get(catalyst: InputCatalyst): InputIcon | undefined;
     function get(catalyst: InputCatalyst | Modifier): InputIcon | undefined;
 }

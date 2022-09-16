@@ -76,7 +76,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     setFullscreen(fullscreen: boolean): Promise<void>;
     setCustomTitleBar(enabled: boolean): Promise<void>;
     setOverlayWorks(overlayWorks: boolean): void;
-    toggleOverlay(toggle: boolean): void;
+    toggleOverlay(disabled: boolean): void;
     setupMods(): Promise<void>;
     getSteamId(): ISteamId | undefined;
     getFriends(): ISteamFriend[] | undefined;
