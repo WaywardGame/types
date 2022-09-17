@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { ISerializable, ISerializer } from "save/serializer/ISerializer";
 import { Types } from "save/serializer/ISerializer";
-import type { ISerializer, ISerializable } from "save/serializer/ISerializer";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 export default class Vector3 implements IVector3, ISerializable {
     static get ZERO(): Vector3;
@@ -17,6 +17,10 @@ export default class Vector3 implements IVector3, ISerializable {
     static get UP(): Vector3;
     static get RIGHT(): Vector3;
     static get FORWARD(): Vector3;
+    static xy(vector: IVector3): [x: number, y: number];
+    static yz(vector: IVector3): [y: number, z: number];
+    static xz(vector: IVector3): [x: number, z: number];
+    static xyz(vector: IVector3): [x: number, y: number, z: number];
     static cross(vector: IVector3, vector2: IVector3): Vector3;
     static cross<D extends IVector3>(vector: IVector3, vector2: IVector3, dest: D): D;
     static dot(vector: IVector3, vector2: IVector3): number;
@@ -42,17 +46,17 @@ export default class Vector3 implements IVector3, ISerializable {
     set y(value: number);
     get z(): number;
     set z(value: number);
-    get xy(): [number, number];
-    set xy(values: [number, number]);
-    get xz(): [number, number];
-    set xz(values: [number, number]);
-    get yz(): [number, number];
-    set yz(values: [number, number]);
-    get xyz(): [number, number, number];
-    set xyz(values: [number, number, number]);
+    get xy(): [x: number, y: number];
+    set xy(values: [x: number, y: number]);
+    get xz(): [x: number, z: number];
+    set xz(values: [x: number, z: number]);
+    get yz(): [y: number, z: number];
+    set yz(values: [y: number, z: number]);
+    get xyz(): [x: number, y: number, z: number];
+    set xyz(values: [x: number, y: number, z: number]);
     constructor();
     constructor(xy: IVector2, z: number);
-    constructor(xyz: number | [number, number, number] | IVector3);
+    constructor(xyz: number | [x: number, y: number, z: number] | IVector3);
     constructor(x: number, y: number, z: number);
     at(index: number): number;
     reset(): void;

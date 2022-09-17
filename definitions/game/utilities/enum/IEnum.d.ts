@@ -16,7 +16,7 @@ export declare module EnumProperty {
     const KEYS: unique symbol;
     const VALUES: unique symbol;
     const ENTRIES: unique symbol;
-    const CURSORS: unique symbol;
+    const DEPENDANTS: unique symbol;
     const COMPUTE: unique symbol;
 }
 export declare type EnumObject<T> = T & {
@@ -27,7 +27,7 @@ export declare type EnumObject<T> = T & {
     [EnumProperty.KEYS]?: ReadonlyArray<keyof T>;
     [EnumProperty.VALUES]?: ReadonlyArray<Exclude<T[keyof T], AnyFunction>>;
     [EnumProperty.ENTRIES]?: ReadonlyArray<[keyof T, Exclude<T[keyof T], AnyFunction>]>;
-    [EnumProperty.CURSORS]?: Set<symbol>;
+    [EnumProperty.DEPENDANTS]?: Set<WeakRef<any>>;
     [EnumProperty.COMPUTE]?(): void;
 };
 export declare module EnumObject {

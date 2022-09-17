@@ -81,7 +81,7 @@ export default class Player extends Human implements IUnserializedCallback {
     updateDialogInfo(dialogIndex: string | number): void;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
     kill(): void;
-    respawn(reset: boolean): Promise<void>;
+    respawn(reset: boolean): void;
     /**
      * Returns true if the player changed their facing direction.
      */

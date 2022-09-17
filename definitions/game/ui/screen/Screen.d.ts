@@ -39,6 +39,7 @@ export default abstract class Screen extends Component {
     getBackground(): Background;
     setBackground(background: Background): this;
     removeBackground(): this;
+    hasContextMenu(): boolean;
     /**
      * Remove the context menu from this element
      */

@@ -72,6 +72,8 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     tileEvents: TileEventManager;
     time: TimeManager;
     biomeType: BiomeTypes;
+    civilizationScore: number;
+    civilizationScoreTiles: Record<number, number>;
     contaminatedWater: IWaterContamination[];
     creatureSpawnTimer: number;
     mapGenVersion: string;
@@ -98,7 +100,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly moveTypesInFov: Map<string, Set<Human>>;
     previousSaveVersion: IVersionInfo | undefined;
     brokenReferencesCount: number;
-    civilizationScore: number;
     spawnPoint: IVector3;
     private _loadedReferences;
     private _tiles;
@@ -260,6 +261,14 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * @param point x/y/z of the water tile created.
      */
     contaminateWater(point: IVector3): void;
+    /**
+     * Resets & recalculates the civilization score
+     */
+    recalculateCivilizationScore(): void;
+    /**
+     * Refreshes the provided civ score for the given tile
+     */
+    refreshTileCivilizationScore(tile: ITile, x: number, y: number, z: number, isRecalculating?: boolean): void;
     /**
      * Adds civilization score
      */

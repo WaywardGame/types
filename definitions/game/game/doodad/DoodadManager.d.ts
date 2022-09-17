@@ -55,7 +55,7 @@ export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerE
     /**
      * Note: This can be called multiple times in the same game depending on loading/unloading of islands
      */
-    load(hasLoadedBefore: boolean): void;
+    load(): void;
     isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
     isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     getBestDoodadForTier(doodad: DoodadType | DoodadTypeGroup): DoodadType | undefined;

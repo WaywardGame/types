@@ -92,6 +92,7 @@ export interface IMoveToIslandOptions {
     newWorldBiomeTypeOverride: BiomeType;
     noTravelingEffects: true;
     distanceFromEdge: number;
+    respawn: boolean;
 }
 export interface IWell {
     quantity: number;

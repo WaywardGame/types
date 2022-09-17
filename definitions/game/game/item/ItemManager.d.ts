@@ -97,6 +97,8 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     static isItemAcceptedAsOffer(item: ItemType): boolean | undefined;
     static isItemUsedInRecipe(item: ItemType): boolean | undefined;
     static isItemUsedForGrowingPlants(item: ItemType): boolean | undefined;
+    static isContainer(obj: unknown): obj is IContainer;
+    isContainer(obj: unknown): obj is IContainer;
     static isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
     static isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     static getGroupItems(itemGroup: ItemType | ItemTypeGroup): Set<ItemType>;
@@ -138,7 +140,6 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getWeightCapacity(container: IContainer, includeMagic?: boolean): number | undefined;
     create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, movingMultiple?: boolean, updateTables?: boolean): Item;
     createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human): Item;
-    isContainer(obj: unknown): obj is IContainer;
     getContainedContainers(container: IContainer): IContainer[];
     moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: Quality): Item[];
     computeContainerWeight(container: IContainer): number;

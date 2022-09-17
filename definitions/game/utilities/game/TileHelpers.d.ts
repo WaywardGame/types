@@ -89,10 +89,6 @@ declare module TileHelpers {
      */
     function isOpenTile(island: Island, point: IVector3, tile?: ITile): boolean;
     /**
-     * Refreshes the provided civ score for the given tile
-     */
-    function refreshCivilizationScore(island: Island, x: number, y: number, z: number): void;
-    /**
      * Check if a tile is a suitable spawn point
      */
     function isSuitableSpawnPointTile(island: Island, point: IVector3, tile: ITile): boolean;

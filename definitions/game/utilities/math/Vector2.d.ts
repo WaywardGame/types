@@ -20,6 +20,7 @@ export default class Vector2 implements IVector2, ISerializable {
     static get INFINITY_NEGATIVE(): Vector2;
     static get INFINITY(): Vector2;
     static readonly DIRECTIONS: Readonly<Record<Direction, Vector2>>;
+    static xy(vector: IVector2): [x: number, y: number];
     static fromSize(size: {
         width: number;
         height: number;

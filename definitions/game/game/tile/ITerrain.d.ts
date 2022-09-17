@@ -156,7 +156,6 @@ export interface ITile extends Partial<ITileContainer> {
     npc?: NPC;
     overlays?: IOverlayInfo[];
     quality?: Quality;
-    civScore?: number;
 }
 export interface ITileOld {
     event?: TileEvent[];
