@@ -19,10 +19,11 @@ export default class ActionBarBindableManager extends BindableManager {
     private requiredSlots;
     private constructor();
     getSlotUseBindable(slot: number): Bindable | undefined;
-    getSlotToggleBindable(slot: number): Bindable | undefined;
+    getSlotAssignBindable(slot: number): Bindable | undefined;
     getSlotToggleUseOnMoveBindable(slot: number): Bindable | undefined;
     requireSlots(slotCount: number): void;
     private generateBindings;
     private generateUseOnMoveBindings;
+    private generateAssignBindings;
     private generateBinding;
 }

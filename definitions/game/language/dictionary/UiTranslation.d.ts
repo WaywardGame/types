@@ -292,7 +292,7 @@ declare enum UiTranslation {
     MenuBindingsDescription = 277,
     MenuBindingsTooltipBindConflicts = 278,
     MenuBindingsManagedBindableGameActionBarUseSlot = 279,
-    MenuBindingsManagedBindableGameActionBarToggleSlot = 280,
+    MenuBindingsManagedBindableGameActionBarAssignSlot = 280,
     MenuBindingsManagedBindableGameActionBarToggleUseOnMoveSlot = 281,
     MenuChangelogTitle = 282,
     MenuChangelogDescription = 283,

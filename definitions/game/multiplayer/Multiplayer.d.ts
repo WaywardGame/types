@@ -92,7 +92,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     getBannedPlayers(): string[];
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(serverInfo: ServerInfo): void;
-    joinServer(serverInfo: ServerInfo, options?: Partial<IJoinServerOptions>): void;
+    joinServer(serverInfo: ServerInfo, options?: Partial<IJoinServerOptions>): Promise<void>;
     rejoinServer(options?: {
         randomizeIdentifier?: boolean;
         automaticallyRetry?: boolean;
