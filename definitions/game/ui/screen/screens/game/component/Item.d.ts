@@ -20,7 +20,6 @@ import type ActionBar from "ui/screen/screens/game/static/ActionBar";
 import type { ActionSlot } from "ui/screen/screens/game/static/ActionBar";
 import type { IDraggableComponent } from "ui/util/Draggable";
 import Draggable from "ui/util/Draggable";
-import Bezier from "utilities/math/Bezier";
 import Vector2 from "utilities/math/Vector2";
 export declare type ItemSlot = Omit<Component, "event"> & {
     event: IEventEmitter<Component, IItemSlotEvents>;
@@ -63,7 +62,6 @@ export declare enum ItemClasses {
 export declare namespace ItemClasses {
     const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-topleft" | "item-component-icon-location-bottomright";
 }
-export declare const ITEM_COMPONENT_STAT_BAR_BEZIER: Bezier;
 export interface IItemHandler {
     noDrag?: true;
     equipSlot?: EquipType;

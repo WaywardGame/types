@@ -65,11 +65,10 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
      */
     getAmbientLightLevel(z: number): number;
     updateAmbientLightLevel(z: number): number;
-    updateView(source: RenderSource, updateFov: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition, computeSpritesNow: boolean): void;
+    updateView(source: RenderSource, updateFov: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition): void;
     updateThumbnail(): Promise<boolean>;
     update(timeStamp: number): void;
     computeSpritesInViewport(): void;
-    computeSpritesInViewportImmediately(): void;
     private getFadeInProgress;
     private hasRenderFlag;
     private clearRenderFlag;

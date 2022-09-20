@@ -83,6 +83,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     previousSaveVersion: IVersionInfo;
     saveSize?: string;
     canvas: HTMLCanvasElement | undefined;
+    private gameLoopLogicTimer;
     private gameOptionsCached?;
     private synchronizeStateId;
     protected stringTokenizer: StringTokenizer | undefined;
@@ -108,6 +109,10 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     setPaused(pause: boolean, source: PauseSource): void;
     onPlayingEntityChange(_manager: any, entity: Entity): void;
     gameLogicLoop: () => void;
+    /**
+     * Triggers a game logic loop to run in the next javascript event loop
+     */
+    triggerGameLogicLoop(): void;
     isSimulatedOrRealTimeMode(): boolean;
     getTurnMode(): TurnMode;
     setTurnMode(turnMode: TurnMode): void;

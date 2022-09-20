@@ -148,7 +148,8 @@ export declare enum ActionType {
     Exude = 110,
     PackGround = 111,
     ToggleTilled = 112,
-    DismountVehicle = 113
+    DismountVehicle = 113,
+    CreatrControllableNPC = 114
 }
 export declare enum ActionUsability {
     Paused = 0,

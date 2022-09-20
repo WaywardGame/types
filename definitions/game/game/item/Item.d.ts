@@ -159,7 +159,18 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     isProtected(): boolean;
     isInGroup(itemGroup: ItemTypeGroup): boolean;
     getDriver(): Human | undefined;
+    /**
+     * Gets the item's damage modifier which certain special items have so they can have high durability for use, but normal damage ranges.
+     */
+    getDamageModifier(): number;
+    isDamaged(): boolean;
+    getDamagedThreshold(): number;
+    isDecayed(): boolean;
+    getDecayedThreshold(): number;
     getDecayAtStart(): number;
+    getVisualDurability(): number;
+    getVisualDecay(): number;
+    private getVisualBarValue;
     /**
      * Returns the maximum decay of an item, or undefined if the item does not have the decayMax property.
      * @returns A number or undefined.
@@ -183,16 +194,10 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @param min The minimum durability that this item should have remaining. Defaults to n/a
      */
     damage(source: string, modifier?: number, min?: number): void;
-    /**
-     * Gets the item's damage modifier which certain special items have so they can have high durability for use, but normal damage ranges.
-     */
-    getDamageModifier(): number;
-    isDamaged(): boolean;
     isInTradeContainer(): boolean;
     getEquippedHuman(): Human | undefined;
     isEquipped(includeDisabled?: true): boolean;
     getEquipSlot(includeDisabled?: true): EquipType | undefined;
-    isDecayed(): boolean;
     changeInto(type: ItemType, disableNotify?: boolean, emitTransformation?: boolean): void;
     /**
      * Verifies an item has a proper weight combined with its magical item weight (featherweight) property and changes it if not.

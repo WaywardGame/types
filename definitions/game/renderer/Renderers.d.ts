@@ -40,6 +40,6 @@ export default class Renderers {
     remove(renderer: Renderer): void;
     computeSpritesInViewport(): void;
     update(timeStamp: number): void;
-    updateView(/*island: Island,*/ source: RenderSource, updateFov?: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition, computeSpritesNow?: boolean): void;
+    updateView(/*island: Island,*/ source: RenderSource, updateFov?: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition): void;
     updateRender(/*island: Island,*/ source: RenderSource, flag: UpdateRenderFlag): void;
 }

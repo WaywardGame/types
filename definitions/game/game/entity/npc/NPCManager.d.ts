@@ -14,6 +14,9 @@ import EntityManager from "game/entity/EntityManager";
 import type { NPCType } from "game/entity/npc/INPCs";
 import NPC from "game/entity/npc/NPC";
 import { CreationId } from "game/IGame";
+export interface INPCCanCreateOptions extends IEntityCanCreateOptions {
+    uniqueNpcType?: string;
+}
 export interface INPCManagerEvents extends Events<EntityManager<NPC>> {
     /**
      * Called when a npc is about to be spawned
@@ -30,7 +33,7 @@ export default class NPCManager extends EntityManager<NPC> {
     readonly event: IEventEmitter<this, INPCManagerEvents>;
     readonly playerLikeNpcs: NPC[];
     load(): void;
-    spawn(npcType: NPCType, x: number, y: number, z: number, options?: IEntityCanCreateOptions): NPC | undefined;
+    spawn(npcType: NPCType, x: number, y: number, z: number, options?: INPCCanCreateOptions): NPC | undefined;
     remove(npc: NPC): void;
     addPlayerLike(npc: NPC): void;
     removePlayerLike(npc: NPC): void;

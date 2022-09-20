@@ -48,16 +48,16 @@ export interface ITrelloChangelog {
 export interface IChangelog {
     version: IVersionInfo;
     sections: {
-        [index in ChangelogSection]?: ITrelloCard[];
+        [index in ChangeType]?: ITrelloCard[];
     };
     changeCount: number;
 }
-export declare enum ChangelogSection {
-    New = "New",
-    Improvement = "Improvement",
-    Bug = "Bug",
-    Balance = "Balance",
-    Modding = "Modding",
-    Mod = "Mod",
-    Technical = "Technical"
+export declare enum ChangeType {
+    New = 0,
+    Improvement = 1,
+    Bug = 2,
+    Balance = 3,
+    Modding = 4,
+    Mod = 5,
+    Technical = 6
 }

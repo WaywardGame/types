@@ -24,7 +24,8 @@ export declare enum TooltipClasses {
     Blocks = "tooltip-blocks",
     Heading = "tooltip-heading",
     Hints = "tooltip-hints",
-    Hint = "tooltip-hint"
+    Hint = "tooltip-hint",
+    Secondary = "tooltip-colored-secondary"
 }
 export interface ITooltipEvents extends Events<Component> {
     move(position: Vector2): any;
@@ -76,5 +77,8 @@ export default class Tooltip extends Component {
 }
 export declare class TooltipBlock extends Component {
     constructor();
+    setSecondary(): this;
     setTitle(initializer: (text: Text) => any): this;
+    addParagraph(initializer: (text: Text) => any): this;
+    addText(initializer: (text: Text) => any): this;
 }

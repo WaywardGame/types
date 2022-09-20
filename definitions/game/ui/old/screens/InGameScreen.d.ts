@@ -193,7 +193,7 @@ export default class InGameScreen extends BaseScreen {
      * Will force an update on crafting and dismantle tables based on dirty variables.
      */
     updateTablesDirty(which?: "crafting" | "dismantle"): void;
-    createSortMenu(container: JQuery, messageType: Message): SortRow<number>;
+    createSortMenu(container: JQuery, messageType: Message, containerSortInfo?: IContainerSortInfo): SortRow<number>;
     getContainerId(containerElement: JQuery): string;
     sortItems(containerElement: JQuery, sortType: SortType, direction: SortDirection, messageType?: Message, activeSort?: boolean): void;
     onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;

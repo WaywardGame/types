@@ -18,7 +18,7 @@ declare enum Dictionary {
     BleedLevel = 6,
     Book = 7,
     Challenge = 8,
-    ChangelogSection = 9,
+    ChangelogChangeType = 9,
     CharacterSort = 10,
     Command = 11,
     Corpse = 12,

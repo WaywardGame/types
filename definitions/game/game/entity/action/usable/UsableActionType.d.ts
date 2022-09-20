@@ -65,7 +65,9 @@ export declare enum UsableActionType {
     EquipHands = 100044,
     EquipBack = 100045,
     EquipMainHand = 100046,
-    EquipOffHand = 100047
+    EquipOffHand = 100047,
+    RestOnGround = 100048,
+    SleepOnGround = 100049
 }
 export declare enum UsableActionTypePlaceholder {
     TradeItem = 200000,

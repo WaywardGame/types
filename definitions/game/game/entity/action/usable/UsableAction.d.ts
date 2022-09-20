@@ -28,6 +28,7 @@ import TranslationImpl from "language/impl/TranslationImpl";
 import Translation from "language/Translation";
 import type Bindable from "ui/input/Bindable";
 import type { ItemDetailIconLocation } from "ui/screen/screens/game/component/Item";
+import type Tooltip from "ui/tooltip/Tooltip";
 import type { HighlightSelector } from "ui/util/IHighlight";
 import type HashSet from "utilities/collection/set/HashSet";
 export interface IUsableActionRequirement<TYPE> {
@@ -171,7 +172,7 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
      * - "Direct" means whenever an action of this type is applicable to given objects, it will be. For example, a specific item's menu.
      * - "Never" means it will never be shown in menus. This results in an action which is executable but never appears in menus.
      */
-    displayLevel?: ActionDisplayLevel;
+    displayLevel?: ActionDisplayLevel | ((using: IUsableActionPossibleUsing) => ActionDisplayLevel | undefined);
     /**
      * Controls the display order of this action compared to other actions.
      * Generally you want to leave this as 0 (default) and just register your action in the correct place.
@@ -218,6 +219,7 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
      * Marks this usable action as, when slotted in the action bar on an item, the item should be ignored and instead the type should be used.
      */
     onlySlotItemType?: true;
+    tooltip?(tooltip: Tooltip): any;
 }
 export interface IUsableActionDefinitionSubmenu<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {
     submenu(registrar: UsableActionRegistrar, using: IUsableActionUsing<REQUIREMENTS>): UsableActionRegistrar | void;
@@ -253,7 +255,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     constructor(requirements: REQUIREMENTS, definition: DEFINITION);
     isExecutable(): this is UsableAction<REQUIREMENTS, IUsableActionDefinitionExecutable<REQUIREMENTS>>;
     execute(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): boolean;
-    private resolveUsing;
+    resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>): false | IUsableActionUsing<REQUIREMENTS>;
     isUsable(player: Player, provided: IUsableActionUsing<REQUIREMENTS>): UsableActionUsability<REQUIREMENTS>;
     isApplicable(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean): provided is IUsableActionUsing<REQUIREMENTS>;
     private isItemApplicable;

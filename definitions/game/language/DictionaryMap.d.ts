@@ -80,7 +80,7 @@ import { Website } from "ui/screen/screens/menu/menus/main/component/IWebsite";
 import { Responsibility } from "ui/screen/screens/menu/menus/main/IAbout";
 import { ModSort } from "ui/screen/screens/menu/menus/mods/IModsMenu";
 import { Direction } from "utilities/math/Direction";
-import { ChangelogSection } from "utilities/trello/ITrello";
+import { ChangeType } from "utilities/trello/ITrello";
 export declare type Enum = Record<string, number> & Record<number, string>;
 export declare const SYMBOL_ANY_DICTIONARY: unique symbol;
 declare const dictionaryMap: {
@@ -93,7 +93,7 @@ declare const dictionaryMap: {
     6: typeof BleedLevel;
     7: typeof BookType;
     8: typeof Challenge;
-    9: typeof ChangelogSection;
+    9: typeof ChangeType;
     10: typeof CharacterSort;
     11: typeof Command;
     12: typeof CreatureType;
@@ -194,7 +194,7 @@ export declare const strictDictionaries: {
     6: typeof BleedLevel;
     7: typeof BookType;
     8: typeof Challenge;
-    9: typeof ChangelogSection;
+    9: typeof ChangeType;
     10: typeof CharacterSort;
     11: typeof Command;
     12: typeof CreatureType;

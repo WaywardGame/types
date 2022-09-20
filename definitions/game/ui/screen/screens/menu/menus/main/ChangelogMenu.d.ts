@@ -14,7 +14,9 @@ export default class ChangelogMenu extends Menu {
     private static readonly modLinks;
     private readonly headingVersionName;
     private readonly headingVersionNameSubtitle;
-    private readonly labelChangeCount;
+    private readonly labelDate;
+    private readonly labelChangeCountAll;
+    private readonly labelChangeCountsByType;
     private readonly changesContainer;
     private readonly warningFailedToLoad;
     private lastVersion;

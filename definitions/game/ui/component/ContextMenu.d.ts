@@ -92,6 +92,7 @@ export declare class ContextMenuOption extends Button {
     get contextMenu(): ContextMenu<string | number | symbol> | undefined;
     constructor(optionDescription: IContextMenuOptionDescription);
     bindEvents(): void;
+    setRequiresClick(requiresClick?: boolean): this;
     hideSubmenu(): void;
     hideAndRemove(): Promise<void>;
     onSelected(): void;
