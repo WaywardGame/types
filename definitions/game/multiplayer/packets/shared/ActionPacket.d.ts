@@ -11,6 +11,7 @@
 import type { IActionDescription } from "game/entity/action/IAction";
 import { ActionArgument, ActionType } from "game/entity/action/IAction";
 import type Entity from "game/entity/Entity";
+import type Player from "game/entity/player/Player";
 import type Item from "game/item/Item";
 import { PacketType } from "multiplayer/packets/IPacket";
 import ActionPacketBase from "multiplayer/packets/shared/ActionPacketBase";
@@ -20,6 +21,7 @@ export default class ActionPacket extends ActionPacketBase {
     arguments: any[];
     items: Item[];
     argumentTypes: ActionArgument[];
+    connectionPlayer: Player | undefined;
     getType(): PacketType;
     get action(): IActionDescription;
     getDebugInfo(): string;

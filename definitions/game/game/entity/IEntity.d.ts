@@ -215,4 +215,7 @@ export interface IAttackSkillBonus {
     skill: SkillType;
     value: number;
 }
+export declare enum EntityTag {
+    None = 0
+}
 export {};

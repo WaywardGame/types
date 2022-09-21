@@ -125,7 +125,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
      * Returns true if this is the special dedicated server player
      */
     isServer(): boolean;
-    isMultiplayerHost(): boolean;
+    isHost(): boolean;
     protected onMovementCompleted(): void;
     moveTowardsIsland(direction: Direction.Cardinal | Direction.None, options?: Partial<IMoveToIslandOptions>): Promise<void>;
     moveToIslandPosition(position: IVector2, options?: Partial<IMoveToIslandOptions>): Promise<void>;

@@ -81,5 +81,8 @@ export declare enum EnumId {
     Biome = 39,
     UsableActionType = 40,
     UsableActionTypePlaceholder = 41,
-    MagicalProperty = 42
+    MagicalProperty = 42,
+    ItemTag = 43,
+    DoodadTag = 44,
+    EntityTag = 45
 }

@@ -11,7 +11,7 @@
 import type { Music, SfxType } from "audio/IAudio";
 import type { Command, CommandCallback } from "command/ICommand";
 import type { BiomeType, IBiomeDescription } from "game/biome/IBiome";
-import type { DoodadType, DoodadTypeGroup, IDoodadDescription, IDoodadGroupDescription } from "game/doodad/IDoodad";
+import type { DoodadTag, DoodadType, DoodadTypeGroup, IDoodadDescription, IDoodadGroupDescription } from "game/doodad/IDoodad";
 import type { ActionType, IActionDescription } from "game/entity/action/IAction";
 import type { UsableActionSet, usableActionSets } from "game/entity/action/usable/actions/UsableActionsMain";
 import type UsableActionRegistrar from "game/entity/action/usable/UsableActionRegistrar";
@@ -19,7 +19,7 @@ import type { UsableActionGenerator } from "game/entity/action/usable/UsableActi
 import type { UsableActionType } from "game/entity/action/usable/UsableActionType";
 import type { ICorpseDescription } from "game/entity/creature/corpse/ICorpse";
 import type { CreatureType, ICreatureDescription } from "game/entity/creature/ICreature";
-import type { StatusType } from "game/entity/IEntity";
+import type { EntityTag, StatusType } from "game/entity/IEntity";
 import type { SkillType } from "game/entity/IHuman";
 import type { Stat } from "game/entity/IStats";
 import type { NPCType } from "game/entity/npc/INPCs";
@@ -34,7 +34,7 @@ import type { ISkillDescription } from "game/entity/skill/ISkills";
 import type { StatusEffectClass } from "game/entity/status/StatusEffect";
 import type { InspectType } from "game/inspection/IInspection";
 import type { InspectionClass } from "game/inspection/InspectionTypeMap";
-import type { IItemDescription, IItemGroupDescription, ItemType, ItemTypeGroup } from "game/item/IItem";
+import type { IItemDescription, IItemGroupDescription, ItemTag, ItemType, ItemTypeGroup } from "game/item/IItem";
 import type { IMagicalPropertyDescription, MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import type { ILoadingDescription } from "game/meta/Loading";
 import type { Prompt } from "game/meta/prompt/IPrompt";
@@ -117,7 +117,10 @@ export declare enum ModRegistrationType {
     UsableActions = 44,
     UsableActionType = 45,
     UsableActionTypePlaceholder = 46,
-    WorldLayer = 47
+    WorldLayer = 47,
+    ItemTag = 48,
+    DoodadTag = 49,
+    EntityTag = 50
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -350,10 +353,22 @@ export interface IMagicalPropertyRegistration extends IBaseModRegistration {
     name: string;
     description: IMagicalPropertyDescription;
 }
+export interface IItemTagRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.ItemTag;
+    name: string;
+}
+export interface IDoodadTagRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.DoodadTag;
+    name: string;
+}
+export interface IEntityTagRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.EntityTag;
+    name: string;
+}
 export interface IInheritsRegistrationTime {
     useRegistrationTime: ModRegistrationType;
 }
-export declare type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration;
+export declare type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration | IItemTagRegistration | IDoodadTagRegistration | IEntityTagRegistration;
 export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare module Register {
     /**
@@ -627,6 +642,18 @@ declare module Register {
      * See — [Adding Magical Properties](https://github.com/WaywardGame/types/wiki/Adding-Magical-Properties)
      */
     export function magicalProperty(name: string, description: IMagicalPropertyDescription): <K extends string | number | symbol, T extends { [k in K]: MagicalPropertyType; }>(target: T, key: K) => void;
+    /**
+     * Registers an item tag.
+     */
+    export function itemTag(name: string): <K extends string | number | symbol, T extends { [k in K]: ItemTag; }>(target: T, key: K) => void;
+    /**
+     * Registers a doodad tag.
+     */
+    export function doodadTag(name: string): <K extends string | number | symbol, T extends { [k in K]: DoodadTag; }>(target: T, key: K) => void;
+    /**
+     * Registers an entity tag.
+     */
+    export function entityTag(name: string): <K extends string | number | symbol, T extends { [k in K]: EntityTag; }>(target: T, key: K) => void;
     /**
      * Registers a "usable" action generator — actions that appear in the UI, and can be slotted in the action bar.
      * @param set Where to append the usable actions

@@ -353,6 +353,10 @@ export declare enum DoodadType {
     WaterLilies = 151,
     Spikerush = 152
 }
+export declare enum DoodadTag {
+    None = 0,
+    ProppedOpen = 1
+}
 /**
  * All tree types that can be spawned during map gen
  * !! This must be kept in sync with the tree list in setupTiles !!

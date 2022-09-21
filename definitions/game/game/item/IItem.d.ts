@@ -1314,6 +1314,9 @@ export declare enum ItemType {
     SpikerushSheaths = 720,
     SpikerushSeeds = 721
 }
+export declare enum ItemTag {
+    None = 0
+}
 export declare enum ItemTypeGroup {
     Invalid = 800,
     Sharpened = 801,

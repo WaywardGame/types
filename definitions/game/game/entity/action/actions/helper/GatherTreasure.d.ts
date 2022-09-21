@@ -13,9 +13,10 @@ import type Human from "game/entity/Human";
 import type Item from "game/item/Item";
 import type { ITreasure } from "game/mapping/DrawnMap";
 import type DrawnMap from "game/mapping/DrawnMap";
+import type { IVector3 } from "utilities/math/IVector";
 export declare enum GatherTreasureResult {
     NoTreasure = 0,
     NotYet = 1,
     Gathered = 2
 }
-export default function (map: DrawnMap, treasure: ITreasure, action: IActionHandlerApi<Human>, tool?: Item): GatherTreasureResult;
+export default function (map: DrawnMap, treasure: ITreasure, actionPoint: IVector3, action: IActionHandlerApi<Human>, tool?: Item): GatherTreasureResult;

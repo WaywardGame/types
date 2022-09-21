@@ -81,6 +81,7 @@ export default ContextMenu;
 interface IContextMenuOptionEvents extends Events<Button> {
     chosen(choice?: ContextMenuOption): any;
     becomeActive(): any;
+    dispose(): any;
 }
 export declare class ContextMenuOption extends Button {
     private readonly optionDescription;

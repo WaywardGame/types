@@ -13,7 +13,7 @@ import EventEmitter from "event/EventEmitter";
 import type Creature from "game/entity/creature/Creature";
 import type { IDamageInfo } from "game/entity/creature/ICreature";
 import type Human from "game/entity/Human";
-import type { IEntityEvents, IProperties, IStatus, Property, StatusEffectChangeReason } from "game/entity/IEntity";
+import type { EntityTag, IEntityEvents, IProperties, IStatus, Property, StatusEffectChangeReason } from "game/entity/IEntity";
 import { DamageType, EntityType, MoveType, StatusType } from "game/entity/IEntity";
 import { Delay, MovingClientSide } from "game/entity/IHuman";
 import type { IStats } from "game/entity/IStats";
@@ -71,6 +71,8 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     stats: IStats;
     status: IStatus;
     properties: IProperties | undefined;
+    private _tags?;
+    get tags(): Set<EntityTag>;
     islandId: IslandId;
     attackAnimationType: DamageType | undefined;
     attackAnimationTime: IMovementTime | undefined;

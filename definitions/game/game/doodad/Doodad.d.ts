@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
-import type { DoorOrientation, IDoodadDescription, IDoodadOptions, IHasBuilder } from "game/doodad/IDoodad";
+import type { DoodadTag, DoorOrientation, IDoodadDescription, IDoodadOptions, IHasBuilder } from "game/doodad/IDoodad";
 import { DoodadType, DoodadTypeGroup, GrowingStage } from "game/doodad/IDoodad";
 import { ActionType } from "game/entity/action/IAction";
 import type Creature from "game/entity/creature/Creature";
@@ -104,8 +104,10 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     hitchedCreature?: number;
     tradedFrom?: string[];
     aberrant?: boolean;
+    private _tags?;
     magic: MagicalPropertyManager;
     private fireStage?;
+    get tags(): Set<DoodadTag>;
     islandId: IslandId;
     private _description;
     private _tile;
