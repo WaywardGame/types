@@ -21,6 +21,7 @@ export interface IObject<T> {
     renamed?: string | ISerializedTranslation;
 }
 export interface IObjectDescription extends IHasImagePath {
+    storeDecay?: boolean;
     decayMax?: number;
     skillUse?: SkillType;
     weightCapacity?: number;

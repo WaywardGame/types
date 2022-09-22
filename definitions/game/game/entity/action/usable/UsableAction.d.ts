@@ -10,7 +10,7 @@
  */
 import type Doodad from "game/doodad/Doodad";
 import type { ActionDisplayLevel, ActionType, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
-import type UsableActionRegistrar from "game/entity/action/usable/UsableActionRegistrar";
+import UsableActionRegistrar from "game/entity/action/usable/UsableActionRegistrar";
 import type { UsableActionTypePlaceholder } from "game/entity/action/usable/UsableActionType";
 import { UsableActionType } from "game/entity/action/usable/UsableActionType";
 import type Creature from "game/entity/creature/Creature";
@@ -107,6 +107,7 @@ export declare type UsableActionIconReference = ActionType | UsableActionType | 
 export declare type ReturnableUsableActionUsability = IActionUsable | IActionNotUsable | boolean;
 export interface IUsableActionUsable<REQUIREMENTS extends IUsableActionRequirements> extends IActionUsable {
     using: IUsableActionUsing<REQUIREMENTS>;
+    forceDisplay?: true;
 }
 export interface IUsableActionNotUsable extends IActionNotUsable {
     sendMessage(): void;
@@ -220,16 +221,19 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
      */
     onlySlotItemType?: true;
     tooltip?(tooltip: Tooltip): any;
+    forceDisplayWhenEmpty?: true;
 }
 export interface IUsableActionDefinitionSubmenu<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {
     submenu(registrar: UsableActionRegistrar, using: IUsableActionUsing<REQUIREMENTS>): UsableActionRegistrar | void;
     execute?: undefined;
     isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>): ReturnableUsableActionUsability;
     slottable?: undefined;
+    forceDisplayWhenEmpty?: true;
 }
 export interface IUsableActionDefinitionExecutable<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {
     slottable?: boolean;
     submenu?: undefined;
+    forceDisplayWhenEmpty?: undefined;
     execute(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): any;
     isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>): ReturnableUsableActionUsability;
 }

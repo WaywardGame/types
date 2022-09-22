@@ -174,10 +174,10 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getVisualDecay(): number;
     private getVisualBarValue;
     /**
-     * Returns the maximum decay of an item, or undefined if the item does not have the decayMax property.
+     * Returns the maximum decay of an item, or undefined if the item does not have the decayMax or storeDecay property.
      * @returns A number or undefined.
      */
-    canDecay(): number | undefined;
+    canDecay(): 1 | undefined;
     getDecayRate(isClientSide: boolean): number;
     getPreservationDecayMultiplier(): number;
     getTemperatureDecayMultiplier(isClientSide: boolean): number;

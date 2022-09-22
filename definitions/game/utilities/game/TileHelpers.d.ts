@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Stream from "@wayward/goodstream/Stream";
 import { TileGroup } from "game/entity/creature/ICreature";
 import type Island from "game/island/Island";
 import type { IOverlayInfo, ITile } from "game/tile/ITerrain";
@@ -101,7 +102,7 @@ declare module TileHelpers {
      */
     function isSuitableSpawnPointTileForTamedCreature(island: Island, point: IVector3, tile: ITile): boolean;
     function getSuitableSpawnPoint(island: Island): IVector3;
-    function getPointsAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): IVector3[];
+    function getPointsAround(island: Island, point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): IVector3[];
     /**
      * Array version of TileHelpers.tilesAround
      */
@@ -110,10 +111,8 @@ declare module TileHelpers {
      * IterableIterator version of TileHelpers.getTilesAround
      */
     function tilesAround(island: Island, point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): Generator<ITile, void, unknown>;
-    function tilesInRange(island: Island, point: IVector3, range: number, includeCurrentTile?: boolean): import("@wayward/goodstream").default<[Vector3, ITile]>;
+    function tilesInRange(island: Island, point: IVector3, range: number, includeCurrentTile?: boolean): Stream<[Vector3, ITile]>;
     function openTileInRange(island: Island, point: IVector3, range: number, includeCurrentTile?: boolean): [Vector3, ITile] | undefined;
-    function forTilesInRange(point: IVector3, range: number, consumer: (vec: IVector3, tileValue: number) => any): void;
-    function forTilesInRange(point: IVector3, range: number, includeCenter: true, consumer: (vec: IVector3, tileValue: number) => any): void;
     /**
      * Check if the tile is blocked (impassable terrain or doodads that cause blocked movement).
      */

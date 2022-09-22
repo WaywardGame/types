@@ -9,12 +9,15 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import TreasureGathering from "game/entity/action/actions/helper/TreasureGathering";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type { IRanged } from "game/item/IItem";
-import type Item from "game/item/Item";
 export interface ICastCanUse extends IActionUsable {
     ranged: IRanged;
+    itemRange: number;
+    maxFishingRange: number;
+    gatherableTreasures?: TreasureGathering.IGatherable[];
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, ICastCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, ICastCanUse, [import("../../../item/Item").default]>;
 export default _default;

@@ -159,9 +159,13 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     getDefaultTerrainType(tile: ITile): TerrainType;
     checkForHiddenMob(human: Human, x: number, y: number, z: number): void;
     isMapEdge(x: number, y: number): boolean;
+    /**
+     * Ensures a point is valid and is not the edge of the map
+     */
     ensureValidPoint<T extends IVector2>(point?: T): T | undefined;
     getTileFromPoint(point: IVector3): ITile;
     getTile(x: number, y: number, z: number): ITile;
+    getTileSafe(x: number, y: number, z: number): ITile | undefined;
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
     setTiles(tiles: ITile[]): void;
     getOrCreateTile(index: number): ITile;
@@ -312,7 +316,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     /**
      * @returns a range value for the weapon being shot based on the weapon range and the players skill with that weapon type. This value then becomes the maximum potential range of the current shot.
      */
-    rangeFinder(weaponRange: number, playerSkillLevel: number, useMaxRange?: boolean): number;
+    rangeFinder(weaponRange: number, playerSkillLevel: number, get?: "random" | "min" | "max"): number;
     getRandomQuality(bonusQuality?: number): Quality.None | Quality.Superior | Quality.Remarkable | Quality.Exceptional;
     getQualityDurabilityBonus(quality: Quality, itemDurability: number, getMax?: boolean): number;
     /**
