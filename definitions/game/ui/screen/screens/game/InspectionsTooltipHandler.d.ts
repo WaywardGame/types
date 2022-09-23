@@ -30,6 +30,7 @@ export default abstract class InspectionsTooltipHandler<INSPECTIONS_LIST extends
     private lastMousePosition?;
     initializeTooltip(tooltip: Tooltip, ...args: TOOLTIP_ARGS): Promise<void>;
     remove(tooltip?: IInspectionsTooltipHandlerCurrent<INSPECTIONS_LIST, TOOLTIP_ARGS> | undefined): Promise<void>;
+    onInitInspections(handler: (inspections: INSPECTIONS_LIST) => any): void;
     protected abstract initializeInspections(...args: TOOLTIP_ARGS): INSPECTIONS_LIST | undefined;
     protected onUpdateTooltipPosition(position: Vector2): void;
     protected getTooltipClass(): string[];

@@ -14,6 +14,7 @@ import type { InspectType } from "game/inspection/IInspection";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import type Inspection from "game/inspection/Inspection";
 import type InspectionsHandler from "game/inspection/InspectionsHandler";
+import type { ResolvedInspection } from "game/inspection/InspectionTypeMap";
 import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type HashSet from "utilities/collection/set/HashSet";
@@ -22,6 +23,7 @@ export interface ITileInspectionsEvents extends Events<Component> {
     updateInspectTypeFilter(): any;
     updateDisplayLevel(): any;
 }
+export declare type InspectionsHandlerOf<INSPECTIONS_LIST extends InspectionsList> = INSPECTIONS_LIST extends InspectionsList<infer INSPECTIONS_HANDLER> ? INSPECTIONS_HANDLER : never;
 export default abstract class InspectionsList<INSPECTIONS_HANDLER extends InspectionsHandler = InspectionsHandler> extends Component {
     protected readonly context: InfoProviderContext;
     readonly event: IEventEmitter<this, ITileInspectionsEvents>;
@@ -34,6 +36,7 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     private readonly inspectTypeWrappers;
     private readonly previouslyRefreshed;
     constructor(context: InfoProviderContext);
+    get<TYPE extends InspectType>(type: TYPE): HashSet<ResolvedInspection<TYPE>> | undefined;
     setInspectTypeFilter(filter?: (inspectType: InspectType) => boolean): this;
     refreshInspectTypeFilter(): this;
     deregister(): void;

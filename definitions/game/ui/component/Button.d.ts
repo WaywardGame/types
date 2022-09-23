@@ -46,7 +46,7 @@ export default class Button extends Component implements IDisableable {
     constructor(elementType?: string, listenForEvents?: boolean);
     setDisplayMode(mode: ButtonClasses.DisplayModeButtonList, zoomClass: ButtonClasses.ListIconsZoom2To3): this;
     setDisplayMode(mode: ButtonClasses.DisplayModeBlock | ButtonClasses.DisplayModeIcon | ButtonClasses.DisplayModeButtonList | false): this;
-    setActionless(isActionless?: boolean): this;
+    setActionless(isActionless?: boolean, setDisabled?: boolean): this;
     isButtonList(): boolean;
     setDisabled(val?: boolean, reason?: string): this;
     setActive(val?: boolean, reason?: string): this;

@@ -276,17 +276,22 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     getIcon(provided: IUsableActionPossibleUsing): IIcon | undefined;
     getHighlightSelectors(using?: IUsableActionPossibleUsing): HighlightSelector[];
     private translator?;
-    getTranslation(using?: IUsableActionUsing<REQUIREMENTS>, which?: ActionTranslation): Translation | undefined;
+    getTranslation(using?: IUsableActionPossibleUsing, which?: ActionTranslation, context?: UsableActionTranslationContext): Translation | undefined;
     getOrder(using?: IUsableActionPossibleUsing): number;
 }
+export declare enum UsableActionTranslationContext {
+    None = 0,
+    Use = 1
+}
+export declare type UsableActionTranslationArguments = [using: IUsableActionPossibleUsing, action: UsableAction, context: UsableActionTranslationContext];
 export declare class UsableActionTranslator {
     readonly id: ActionId;
     private nameSupplier?;
     private descriptionSupplier?;
     constructor(id: ActionId);
-    name(supplier: SupplierOr<Translation, [using: IUsableActionPossibleUsing, action: UsableAction]>): this;
-    description(supplier: SupplierOr<Translation, [using: IUsableActionPossibleUsing, action: UsableAction]>): this;
-    get(action: UsableAction, using?: IUsableActionPossibleUsing, which?: ActionTranslation): Translation | undefined;
+    name(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
+    description(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
+    get(action: UsableAction, using?: IUsableActionPossibleUsing, which?: ActionTranslation, context?: UsableActionTranslationContext): Translation | undefined;
 }
 export interface IUsableActionFactory<REQUIREMENTS extends IUsableActionRequirements> {
     create: <DEFINITION extends IUsableActionDefinition<REQUIREMENTS>>(action: DEFINITION) => UsableAction<REQUIREMENTS, DEFINITION>;

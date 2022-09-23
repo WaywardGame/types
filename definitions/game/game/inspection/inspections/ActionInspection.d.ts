@@ -10,9 +10,10 @@
  */
 import { ActionType } from "game/entity/action/IAction";
 import type { IUsableActionPossibleUsing } from "game/entity/action/usable/UsableAction";
+import { UsableActionTranslationContext } from "game/entity/action/usable/UsableAction";
 import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
 import type { EnumReferenceResolved } from "game/reference/IReferenceManager";
 import { ReferenceType } from "game/reference/IReferenceManager";
@@ -24,7 +25,8 @@ export default class ActionInspection extends Inspection<ActionType | string | u
     private readonly item?;
     using?: IUsableActionPossibleUsing;
     constructor(value?: string | EnumReferenceResolved<ReferenceType.Action>, slot?: ActionSlot | undefined);
-    setUsing(using?: IUsableActionPossibleUsing): void;
+    setUsing(using?: IUsableActionPossibleUsing): this;
+    setContext(context: UsableActionTranslationContext): this;
     getId(): string;
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getTranslation;

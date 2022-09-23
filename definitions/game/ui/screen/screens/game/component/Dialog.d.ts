@@ -140,7 +140,7 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     private description;
     constructor(id: number, subId?: string);
-    addScrollableWrapper(initializer?: (wrapper: Component) => any): Component<HTMLElement>;
+    addScrollableWrapper(type?: "scroll" | "auto", initializer?: (wrapper: Component) => any): Component<HTMLElement>;
     addSettingsPanel(): Component<HTMLElement>;
     showSettingsPanel(): this;
     resetSizeAndPosition(): void;

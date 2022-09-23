@@ -17,7 +17,7 @@ export interface ICastCanUse extends IActionUsable {
     ranged: IRanged;
     itemRange: number;
     maxFishingRange: number;
-    gatherableTreasures?: TreasureGathering.IGatherable[];
+    canGatherTreasure?: TreasureGathering.ICanGather;
 }
 declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, ICastCanUse, [import("../../../item/Item").default]>;
 export default _default;

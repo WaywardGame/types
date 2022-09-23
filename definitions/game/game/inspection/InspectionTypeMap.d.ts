@@ -30,6 +30,30 @@ import StatInspection from "game/inspection/inspections/StatInspection";
 import TileEventInspection from "game/inspection/inspections/TileEventInspection";
 import TileInspection from "game/inspection/inspections/TileInspection";
 import type { IVector3 } from "utilities/math/IVector";
+declare const inspectionTypeMap: {
+    12: typeof ActionInspection;
+    14: typeof CorpseInspection;
+    15: typeof CorpsesInspection;
+    3: typeof CreatureInspection;
+    10: typeof ItemInspection;
+    4: typeof DoodadInspection;
+    7: typeof EquipSlotInspection;
+    6: typeof PlayerInspection;
+    21: typeof IslandInspection;
+    8: typeof ItemInspection;
+    13: typeof ItemsInspection;
+    11: typeof ItemInspection;
+    19: typeof MilestoneInspection;
+    2: typeof NPCInspection;
+    1: typeof PlayerInspection;
+    9: typeof RecipeInspection;
+    0: typeof SelfInspection;
+    18: typeof SkillInspection;
+    20: typeof StatInspection;
+    17: typeof TileInspection;
+    5: typeof TileEventInspection;
+    16: typeof TileEventInspection.Minors;
+};
 export declare type InspectionClass = Class<Inspection<any>> & {
     isWorldInspection?(inspectType: InspectType): boolean;
     getFromTile?(position: IVector3, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<any>>;
@@ -67,6 +91,7 @@ declare const _default: {
     16: typeof TileEventInspection.Minors;
 } & Record<InspectType, InspectionClass>;
 export default _default;
+export declare type ResolvedInspection<TYPE extends InspectType> = InstanceOf<(typeof inspectionTypeMap)[TYPE]>;
 export declare module Inspections {
     function get(...args: any[]): Inspection<any> | undefined;
     function isWorldInspection(type: InspectType): boolean;

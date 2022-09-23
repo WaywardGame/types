@@ -28,16 +28,21 @@ declare namespace TreasureGathering {
         NoTreasure = 1,
         NoMapsForTreasure = 2
     }
-    interface IGatherablesResult {
+    interface ICanGather {
         gatherables?: IGatherable[];
         result?: GatherablesResult;
     }
-    function getGatherable(executor: Human, itemRange: number, requireMap: boolean, maxRange?: number): IGatherablesResult;
+    function canGather(executor: Human, itemRange: number, requireMap: boolean, maxRange?: number): ICanGather;
     enum Result {
         NoTreasure = 0,
         NotYet = 1,
         Gathered = 2
     }
-    function gather({ map, mapItem, treasure, position: { x, y, z }, maxRange, toolRange }: IGatherable, action: IActionHandlerApi<Human>, tool?: Item): Result;
+    interface IGatherResult {
+        result: Result;
+        position?: IVector3;
+        treasure?: ITreasure;
+    }
+    function gather(action: IActionHandlerApi<Human>, itemRange: number, requireMap: boolean, tool?: Item, canGather?: ICanGather): IGatherResult;
 }
 export default TreasureGathering;
