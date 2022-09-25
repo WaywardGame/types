@@ -153,6 +153,7 @@ export declare enum ActionType {
     RemoveControllableNPC = 115,
     PropOpenDoor = 116
 }
+export declare const ACTIONS_RECOMMENDED: ActionType[];
 export declare enum ActionUsability {
     Paused = 0,
     Resting = 1,

@@ -20,6 +20,7 @@ export interface IUseItemAction extends IUsableActionDynamicDefinition {
     allowAnyItems?: true;
     allowNoItem?: true;
     hasNoBestItem?: true;
+    validate?(item: Item): boolean;
 }
 export declare namespace IUseItemAction {
     function getGetItemOptions(actionType: ActionType, useItemAction?: Omit<IUseItemAction, keyof IUsableActionDynamicDefinition>): Partial<IGetBestItemsOptions>;

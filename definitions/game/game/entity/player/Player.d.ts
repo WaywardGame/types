@@ -60,7 +60,7 @@ export default class Player extends Human implements IUnserializedCallback {
     changeId(id: number): void;
     protected moveToIsland(island: Island, targetPosition: IVector3): void;
     checkSkillMilestones(): void;
-    protected onCanMove(): false | undefined;
+    protected onCanMove(direction: Direction.Cardinal): false | undefined;
     addMilestone(milestone: Milestone, data?: number, update?: boolean): void;
     updateMovementIntent(movementIntent: IMovementIntent): boolean;
     load(): void;

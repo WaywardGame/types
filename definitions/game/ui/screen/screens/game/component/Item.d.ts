@@ -11,6 +11,7 @@
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { ActionId } from "game/entity/action/usable/UsableAction";
 import type { EquipType } from "game/entity/IHuman";
+import { Quality } from "game/IObject";
 import type { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import Component from "ui/component/Component";
@@ -67,6 +68,7 @@ export interface IItemHandler {
     equipSlot?: EquipType;
     getItem?(): Item | undefined;
     getItemType?(): ItemType | undefined;
+    getItemQuality?(): Quality | undefined;
     getActionSlot?(): ActionSlot | undefined;
     getBindables?(bindables: Bindable[]): Bindable[];
 }

@@ -36,8 +36,9 @@ declare enum Classes {
 export { Classes as ActionsConfigurationDrawerClasses };
 declare enum ItemMethod {
     ExactItem = 0,
-    AnyOfType = 1,
-    AnyItem = 2
+    AnyOfTypeAndQuality = 1,
+    AnyOfType = 2,
+    AnyItem = 3
 }
 export interface IActionsConfigurationDrawerEvents extends Events<Component> {
     update(): any;
@@ -58,6 +59,7 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     readonly hints: Component<HTMLElement>;
     readonly hintUse: Component<HTMLElement>;
     readonly hintToggle: Text;
+    readonly hintToggleUseOnMove: Text;
     readonly editBindingsButton: Button;
     readonly itemOrTypeChoiceList: ChoiceList<Choice<ItemMethod>, false>;
     readonly useOnMoveCheckButton: CheckButton;

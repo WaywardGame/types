@@ -19,6 +19,7 @@ import type Player from "game/entity/player/Player";
 import type { InspectType } from "game/inspection/IInspection";
 import type { IIcon } from "game/inspection/InfoProvider";
 import type Inspection from "game/inspection/Inspection";
+import type { Quality } from "game/IObject";
 import type { ItemType } from "game/item/IItem";
 import type { IGetBestItemsOptions } from "game/item/IItemManager";
 import type Item from "game/item/Item";
@@ -56,6 +57,7 @@ export interface IUsableActionRequirements {
 export interface IUsableActionPossibleUsing {
     item?: Item;
     itemType?: ItemType;
+    itemQuality?: Quality;
     doodad?: Doodad;
     creature?: Creature;
     npc?: NPC;

@@ -67,6 +67,7 @@ export interface IOptions {
     };
     uiExperiments: UiExperiment.Any[];
     uiScale: number;
+    hudWidth?: number;
     useAdjacentContainers: boolean;
     useNewCraftingSystem: boolean;
     visionMode: boolean;

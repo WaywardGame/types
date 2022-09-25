@@ -121,9 +121,10 @@ export default class InGameScreen extends BaseScreen {
     clampDialogs(): void;
     getItemClass(item?: Item, itemType?: ItemType): string;
     createItemString(itemType: ItemType, item?: Item, extraClass?: string): string;
+    getItemElements(item: Item | number): HTMLCollectionOf<HTMLElement>;
     syncItemElements(itemIds: number | number[], forceSyncDecay?: boolean): void;
     private readonly SYMBOL_LAST_DECAY;
-    syncDecayBar(item: Item, force?: boolean, elements?: NodeListOf<HTMLElement>): void;
+    syncDecayBar(item: Item, force?: boolean, elements?: HTMLCollectionOf<HTMLElement>): void;
     addItemToContainer(item: Item, container: IContainer, _internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
     insertItemStringToContainer(itemElement: string | JQuery, containerElement: JQuery): void;
     onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery | undefined, isInventoryContainer: boolean, updateTables?: boolean): void;

@@ -79,7 +79,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     containsCreature: Creature;
     crafterIdentifier?: string;
     decay?: number;
-    disassembly: Item[];
+    disassembly?: Item[];
     driverId?: number;
     driverType?: EntityType;
     equippedId?: number;

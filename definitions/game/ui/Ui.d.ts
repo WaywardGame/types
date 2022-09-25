@@ -25,6 +25,7 @@ import SelectionHandler from "ui/screen/screens/menu/component/SelectionHandler"
 import ServerJoinHandler from "ui/ServerJoinHandler";
 import TooltipManager from "ui/tooltip/TooltipManager";
 import HighlightManager from "ui/util/HighlightManager";
+import HudWidthManager from "ui/util/HudWidthManager";
 import type { InterruptOptions } from "ui/util/IInterrupt";
 import ScaleManager from "ui/util/ScaleManager";
 import Vector2 from "utilities/math/Vector2";
@@ -39,6 +40,7 @@ export interface IUiEvents {
 }
 export declare class Ui extends EventEmitter.Host<IUiEvents> {
     readonly scale: ScaleManager;
+    readonly hudWidth: HudWidthManager;
     readonly highlights: HighlightManager;
     readonly screens: ScreenManager;
     readonly tooltips: TooltipManager;

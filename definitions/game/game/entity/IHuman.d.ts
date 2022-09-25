@@ -148,9 +148,10 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
     /**
      * Called when movement is attempted on the server
      * @param player The player object
+     * @param direction The direction to move
      * @returns False to prevent movement or undefined to use the default logic
      */
-    canMove(): false | undefined;
+    canMove(direction: Direction.Cardinal): false | undefined;
     /**
      * Called when getting the players movement intent
      * @returns The movement intent of the player or undefined to use the default logic

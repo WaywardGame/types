@@ -12,6 +12,7 @@ import type Doodad from "game/doodad/Doodad";
 import type { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
 import type { ActionType, IActionNotUsable } from "game/entity/action/IAction";
 import type Creature from "game/entity/creature/Creature";
+import type { Quality } from "game/IObject";
 import type { ItemType, ItemTypeGroup } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type TileEvent from "game/tile/TileEvent";
@@ -49,6 +50,7 @@ export interface IGetBestItemsOptions extends IGetItemsOptions {
     action: ActionType;
     actionWith: Item;
     filterType: ItemType;
+    filterQuality: Quality;
     filterGroup: ItemTypeGroup;
     filterConsumable: true;
     targetCreature: Creature;
