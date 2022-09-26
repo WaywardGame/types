@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
 import TranslationImpl from "language/impl/TranslationImpl";
 import type Bindable from "ui/input/Bindable";
 import { IInput } from "ui/input/IInput";
@@ -23,7 +22,7 @@ declare module Bindings {
     interface IEvents {
         invalidate(): any;
     }
-    const event: EventEmitter<typeof Bindings, IEvents>;
+    const event: import("event/EventEmitter").IEventEmitter<typeof Bindings, IEvents>;
     function get(bindable?: Bindable): Binding[];
     function getModifierCatalystsResolved(bindable?: Bindable): Binding[];
     function getPrecision(bindable?: Bindable): number;

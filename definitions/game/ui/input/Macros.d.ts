@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
 import TranslationImpl from "language/impl/TranslationImpl";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import type Bindable from "ui/input/Bindable";
@@ -26,7 +25,7 @@ declare module Macros {
         update(): any;
         inputUp(): any;
     }
-    const event: EventEmitter<typeof Macros, IEvents>;
+    const event: import("event/EventEmitter").IEventEmitter<typeof Macros, IEvents>;
     function getCurrent(): Macro;
     function getTouch(): Macro;
     function reset(): void;

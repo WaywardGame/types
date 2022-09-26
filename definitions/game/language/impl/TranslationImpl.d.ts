@@ -79,7 +79,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     /**
      * Returns true if this translation has been set to fail with another translation or string.
      */
-    hasFailWith(): boolean;
+    hasFailWith(notEmptyString?: boolean): boolean;
     /**
      * Sets the random source for this Translation. Uses general random by default, not seeded.
      *

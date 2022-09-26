@@ -291,7 +291,9 @@ export declare class UsableActionTranslator {
     private nameSupplier?;
     private descriptionSupplier?;
     constructor(id: ActionId);
+    name(id: ActionId): this;
     name(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
+    description(id: ActionId): this;
     description(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
     get(action: UsableAction, using?: IUsableActionPossibleUsing, which?: ActionTranslation, context?: UsableActionTranslationContext): Translation | undefined;
 }

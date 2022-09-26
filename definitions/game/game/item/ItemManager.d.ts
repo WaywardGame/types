@@ -47,7 +47,7 @@ export interface IItemManagerEvents {
     /**
      * Called when an item is moved from one container to another.
      * @param item The item object.
-     * @param containerFrom The container object the item was moved to. This container might be inventory or a container within the inventory.
+     * @param containerFrom The container object the item was moved from. This container might be inventory or a container within the inventory.
      * @param containerFromPosition The position of containerFrom when the update occurred.
      * @param containerTo The container object the item was moved to. This container might be inventory or a container within the inventory.
      */
