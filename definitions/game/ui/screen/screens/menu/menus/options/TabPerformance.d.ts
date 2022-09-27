@@ -20,6 +20,5 @@ export default class TabPerformance extends Tab implements IRefreshable {
     private onDisableUIOpacity;
     private onDisableAcrylicTransparency;
     private onDisableOverlaySupport;
-    private onPowerPreferenceSelect;
-    private getPowerPreferenceDropdownData;
+    private onEnableLowPowerMode;
 }

@@ -119,6 +119,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     set durability(value: number);
     get durabilityMax(): number;
     set durabilityMax(value: number);
+    isContainer(): this is Item & IContainer;
     /**
      * Gets the owner of this item.
      * This will be the human who crafted it.

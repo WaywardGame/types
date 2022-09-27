@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "game/entity/action/IAction";
-import type { IUsableActionPossibleUsing } from "game/entity/action/usable/UsableAction";
-import { UsableActionTranslationContext } from "game/entity/action/usable/UsableAction";
+import type { IUsableActionPossibleUsing } from "game/entity/action/usable/IUsableAction";
+import { UsableActionTranslationContext } from "game/entity/action/usable/IUsableAction";
 import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import { InfoProviderContext } from "game/inspection/InfoProviderContext";

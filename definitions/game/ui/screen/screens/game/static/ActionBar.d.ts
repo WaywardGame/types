@@ -10,7 +10,7 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { IActionApi } from "game/entity/action/IAction";
-import type { IUsableActionPossibleUsing, IUsableActionRequirements, ReturnableUsableActionUsability } from "game/entity/action/usable/UsableAction";
+import type { IUsableActionPossibleUsing, IUsableActionRequirements, ReturnableUsableActionUsability } from "game/entity/action/usable/IUsableAction";
 import type Player from "game/entity/player/Player";
 import type Item from "game/item/Item";
 import Button from "ui/component/Button";
@@ -123,7 +123,7 @@ export declare class ActionSlot extends Button implements IRefreshable {
     onToggle(api: IBindHandlerApi): boolean;
     protected onLeave(reason: "mouse" | "focus"): void;
     private getTooltipLocation;
-    getAction(): import("game/entity/action/usable/UsableAction").default<IUsableActionRequirements, import("game/entity/action/usable/UsableAction").IUsableActionDefinition<IUsableActionRequirements>> | undefined;
+    getAction(): import("../../../../../game/entity/action/usable/UsableAction").default<IUsableActionRequirements, import("game/entity/action/usable/IUsableAction").IUsableActionDefinition<IUsableActionRequirements>> | undefined;
     getUsing(): IUsableActionPossibleUsing;
 }
 export {};

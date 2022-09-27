@@ -11,8 +11,8 @@
 import EventEmitter from "event/EventEmitter";
 import type { EmitterOrBus, Event } from "event/EventManager";
 import { ActionDisplayLevel } from "game/entity/action/IAction";
+import type { ActionId, IUsableActionPossibleUsing, IUsableActionRequirements } from "game/entity/action/usable/IUsableAction";
 import type UsableAction from "game/entity/action/usable/UsableAction";
-import type { ActionId, IUsableActionPossibleUsing, IUsableActionRequirements } from "game/entity/action/usable/UsableAction";
 import ContextMenu from "ui/component/ContextMenu";
 export default class UsableActionRegistrar {
     readonly actions: Array<[string, UsableAction]>;

@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IUsableActionPossibleUsing } from "game/entity/action/usable/UsableAction";
+import type { IUsableActionPossibleUsing } from "game/entity/action/usable/IUsableAction";
 import type { Reference, ReferenceType } from "game/reference/IReferenceManager";
 import type { Modifier } from "ui/input/IInput";
 export interface IActionBarSlotData {

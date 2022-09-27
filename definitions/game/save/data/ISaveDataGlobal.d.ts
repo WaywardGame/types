@@ -50,13 +50,14 @@ export interface IOptions {
     fontStyle: FontStyle;
     fullscreen: boolean;
     hideEquippedHeadgear: boolean;
+    hudWidth?: number;
     keepSortActive: boolean;
+    lowPowerMode: boolean;
     mouseTurnDelay: number;
     musicPlaylist: MusicPlaylist;
     muteEffects: boolean;
     muteMusic: boolean;
     playInputSoundWhenTyping: boolean;
-    powerPreference: PowerMode;
     realTimeTickSpeed: number;
     shouldLoadLastSave: boolean;
     shouldObjectNamesSkipArticle: boolean;
@@ -66,8 +67,7 @@ export interface IOptions {
         [key in InspectType]: boolean | undefined;
     };
     uiExperiments: UiExperiment.Any[];
-    uiScale: number;
-    hudWidth?: number;
+    uiScale?: number;
     useAdjacentContainers: boolean;
     useNewCraftingSystem: boolean;
     visionMode: boolean;
@@ -93,11 +93,6 @@ export declare enum MusicPlaylist {
     Ordered = 0,
     Shuffle = 1,
     Dynamic = 2
-}
-export declare enum PowerMode {
-    Default = "default",
-    LowPower = "low-power",
-    HighPerformance = "high-performance"
 }
 export declare type IOptionsOld = Partial<Pick<IOptions, "bindings">> & Partial<{
     keyBinds: Record<number, number>;

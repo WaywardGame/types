@@ -10,7 +10,7 @@
  */
 import type { IUsableActionDynamicDefinition } from "game/entity/action/usable/actions/UsableActionsDynamic";
 import UsableActionsDynamic from "game/entity/action/usable/actions/UsableActionsDynamic";
-import type { IUsableActionRequirements } from "game/entity/action/usable/UsableAction";
+import type { IUsableActionRequirements } from "game/entity/action/usable/IUsableAction";
 export interface IUseDoodadAction extends IUsableActionDynamicDefinition {
     allowNoDoodad?: true;
 }

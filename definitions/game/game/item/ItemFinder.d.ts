@@ -17,8 +17,8 @@ export default class ItemFinder {
     private readonly options;
     private readonly human;
     private readonly container;
-    private readonly trackedContainerIds;
-    private readonly trackedItemIds;
+    private trackedContainers?;
+    private trackedItems?;
     private foundItemIds?;
     constructor(human: Human, container: IContainer, options?: Partial<IGetBestItemsOptions>);
     get(): Item[];
@@ -31,5 +31,4 @@ export default class ItemFinder {
     protected onContainerItemRemove(items: ItemManager, itemRemoved: Item, containerRemovedFrom?: IContainer): void;
     private trackContainer;
     private untrackContainer;
-    private isTrackedContainer;
 }

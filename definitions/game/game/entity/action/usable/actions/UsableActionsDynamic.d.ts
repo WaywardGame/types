@@ -10,7 +10,7 @@
  */
 import type { ActionDisplayLevel } from "game/entity/action/IAction";
 import { ActionType } from "game/entity/action/IAction";
-import type { IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, ReturnableUsableActionUsability, UsableActionIconReference } from "game/entity/action/usable/UsableAction";
+import type { IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, ReturnableUsableActionUsability, UsableActionIconReference } from "game/entity/action/usable/IUsableAction";
 import { UsableActionGenerator } from "game/entity/action/usable/UsableActionRegistrar";
 import type Player from "game/entity/player/Player";
 import type Bindable from "ui/input/Bindable";

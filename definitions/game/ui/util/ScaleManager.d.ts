@@ -25,10 +25,12 @@ export default class ScaleManager {
      */
     get(): number;
     getFloor(floor?: number): number;
+    getClamped(scale?: number): number;
     /**
      * Returns the currently "requested" UI scale.
      */
-    getUserSetting(scale?: number): number;
+    getUserSetting(): number;
+    private getPlatformDefaultUiScale;
     /**
      * Requests a new UI scale, a multiplier of the default size.
      */

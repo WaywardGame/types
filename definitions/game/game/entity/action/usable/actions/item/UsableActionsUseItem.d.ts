@@ -11,7 +11,7 @@
 import { ActionType } from "game/entity/action/IAction";
 import type { IUsableActionDynamicDefinition } from "game/entity/action/usable/actions/UsableActionsDynamic";
 import UsableActionsDynamic from "game/entity/action/usable/actions/UsableActionsDynamic";
-import type { IUsableActionRequirement, IUsableActionRequirements } from "game/entity/action/usable/UsableAction";
+import type { IUsableActionRequirement, IUsableActionRequirements } from "game/entity/action/usable/IUsableAction";
 import type { IGetBestItemsOptions } from "game/item/IItemManager";
 import type Item from "game/item/Item";
 export interface IUseItemAction extends IUsableActionDynamicDefinition {

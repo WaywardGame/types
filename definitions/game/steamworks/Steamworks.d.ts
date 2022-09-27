@@ -52,6 +52,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     get isGameOverlayActive(): boolean;
     get isRunningOnSteamDeck(): boolean;
     get isRunningOnBatteryPower(): boolean;
+    get isLowPowerMode(): boolean;
     isElectron(): boolean;
     getOsPlatform(): NodeJS.Platform | undefined;
     reload(): Promise<void>;
