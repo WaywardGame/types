@@ -12,7 +12,6 @@ import type { ActionId, IUsableActionDefinition, IUsableActionDefinitionExecutab
 import { IUsableActionNotUsable } from "game/entity/action/usable/IUsableAction";
 import type Player from "game/entity/player/Player";
 import type { IIcon } from "game/inspection/InfoProvider";
-import type { IGetBestItemsOptions } from "game/item/IItemManager";
 import type Item from "game/item/Item";
 import { ActionTranslation } from "language/dictionary/Misc";
 import type Translation from "language/Translation";
@@ -47,6 +46,10 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     private readonly findItemCannotUse;
     getFindItemCannotUse(): IUsableActionNotUsable[];
     getItem(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean): Item | false | undefined;
+    private requirementsItemFinders?;
+    private getItemFinder;
+    private itemFinderFullCheck?;
+    private itemFinderSimpleCheck?;
     private getItemByType;
     getDoodad(player: Player, provided?: IUsableActionPossibleUsing): false | import("../../../doodad/Doodad").default | undefined;
     getCreature(player: Player, provided?: IUsableActionPossibleUsing): false | import("../../creature/Creature").default | undefined;
@@ -63,6 +66,5 @@ export interface IUsableActionFactory<REQUIREMENTS extends IUsableActionRequirem
 declare namespace UsableAction {
     function requiring<REQUIREMENTS1 extends IUsableActionRequirements>(requirements: REQUIREMENTS1): IUsableActionFactory<REQUIREMENTS1>;
     function create<DEFINITION extends IUsableActionDefinition<{}>>(action: DEFINITION): UsableAction<{}, DEFINITION>;
-    function getBestSafeItemInInventory(player: Player, options?: Partial<IGetBestItemsOptions>): Item | undefined;
 }
 export default UsableAction;

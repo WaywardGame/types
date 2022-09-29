@@ -30,7 +30,7 @@ export interface IComponentEvents {
     willRemove(): boolean | void;
     regenerateBox(box: IBox): any;
     enter(reason: "mouse" | "focus"): any;
-    leave(reason: "mouse" | "focus"): any;
+    leave(reason: "mouse" | "focus" | "remove"): any;
     focus(): any;
     blur(): any;
     removeContextMenu(): any;

@@ -13,6 +13,10 @@ import type { IContainer } from "game/item/IItem";
 import type { IGetBestItemsOptions } from "game/item/IItemManager";
 import type Item from "game/item/Item";
 import type ItemManager from "game/item/ItemManager";
+export interface IItemFinderOptions extends Partial<IGetBestItemsOptions> {
+    replace?(): Item[] | undefined;
+    fallback?: ItemFinder;
+}
 export default class ItemFinder {
     private readonly options;
     private readonly human;
@@ -20,10 +24,11 @@ export default class ItemFinder {
     private trackedContainers?;
     private trackedItems?;
     private foundItemIds?;
-    constructor(human: Human, container: IContainer, options?: Partial<IGetBestItemsOptions>);
-    get(): Item[];
-    track(): void;
-    dispose(): void;
+    constructor(human: Human, container: IContainer, options?: IItemFinderOptions);
+    best(): Item | undefined;
+    all(): Item[];
+    track(): this;
+    dispose(): this;
     markDirty(): void;
     private compute;
     protected onItemStateChange(item: Item): void;

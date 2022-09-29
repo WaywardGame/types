@@ -138,7 +138,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      * Marks that the human had a turn
      * In manual turn mode, it will tick the humans stat timers & the game
      */
-    passTurn(human: Human, turnType?: TurnTypeFlag): void;
+    passTurn(human: Human, turnType?: TurnTypeFlag, dueToAction?: boolean): void;
     tickRealtime(): void;
     updateTablesAndWeight(): void;
     /**
@@ -157,11 +157,11 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     /**
      * Collection of things to perform on each tick
      */
-    tick(ticks?: number, playingHumans?: Human[], tickFlag?: TickFlag): void;
+    tick(ticks?: number, playingHumans?: Human[], tickFlag?: TickFlag, dueToAction?: boolean): void;
     /**
      * Collection of things to perform on each tick
      */
-    tickAsync(island: Island, ticks: number, playingHumans: Human[] | undefined, tickFlag: TickFlag | undefined, onProgress: (progess: number) => Promise<void>): Promise<void>;
+    tickAsync(island: Island, ticks: number, playingHumans: Human[] | undefined, tickFlag: TickFlag | undefined, onProgress: (progess: number) => Promise<void>, dueToAction?: boolean): Promise<void>;
     createRenderer(entity: Entity): void;
     /**
      * Resets the game state. This should be called when returning to the main menu from a game and/or right before starting/joining a game.

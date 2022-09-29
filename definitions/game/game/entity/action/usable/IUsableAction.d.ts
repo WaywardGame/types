@@ -23,6 +23,7 @@ import type Inspection from "game/inspection/Inspection";
 import type { Quality } from "game/IObject";
 import type { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
+import type ItemFinder from "game/item/ItemFinder";
 import type Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import type Bindable from "ui/input/Bindable";
@@ -36,8 +37,9 @@ export interface IUsableActionRequirement<TYPE> {
     find?(player: Player): TYPE | undefined;
     getMissingName?(): Translation;
 }
-export interface IUsableActionItemRequirement extends IUsableActionRequirement<Item> {
+export interface IUsableActionItemRequirement extends Omit<IUsableActionRequirement<Item>, "find"> {
     allowOnlyItemType?(player: Player, type: ItemType): boolean;
+    finder?(player: Player): ItemFinder | undefined;
 }
 export declare namespace IUsableActionRequirement {
     interface Maybe<TYPE> {
@@ -66,7 +68,7 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
     } ? undefined : never) | (REQUIREMENTS["item"] extends {
         validate(player: Player, value: Item): boolean;
     } ? Item : never) | (REQUIREMENTS["item"] extends {
-        find(player: Player): Item;
+        finder: ItemFinder;
     } ? Item : never) | (REQUIREMENTS["item"] extends {
         allowOnlyItemType(player: Player, type: ItemType): boolean;
     } ? undefined : never));
@@ -75,7 +77,7 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
     } ? undefined : never) | (REQUIREMENTS["item"] extends {
         validate(player: Player, value: Item): boolean;
     } ? ItemType | undefined : never) | (REQUIREMENTS["item"] extends {
-        find(player: Player): Item;
+        finder: ItemFinder;
     } ? ItemType : never) | (REQUIREMENTS["item"] extends {
         allowOnlyItemType(player: Player, type: ItemType): boolean;
     } ? ItemType : never));

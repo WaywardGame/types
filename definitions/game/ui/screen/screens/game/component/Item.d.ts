@@ -123,4 +123,6 @@ export default class ItemComponent extends Component {
     private refreshDecayBar;
     private lastDurability;
     private refreshDurabilityBar;
+    private lastActionIcon?;
+    private refreshActionIcon;
 }

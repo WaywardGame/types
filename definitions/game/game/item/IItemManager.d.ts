@@ -48,7 +48,7 @@ export interface IGetItemsOptions extends IGetItemOptions {
 }
 export interface IGetBestItemsOptions extends IGetItemsOptions {
     action: ActionType;
-    actionWith: Item;
+    actionWith: Item | (() => Item | undefined);
     filterType: ItemType;
     filterQuality: Quality;
     filterGroup: ItemTypeGroup;

@@ -12,6 +12,8 @@ import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { IActionApi } from "game/entity/action/IAction";
 import type { IUsableActionPossibleUsing, IUsableActionRequirements, ReturnableUsableActionUsability } from "game/entity/action/usable/IUsableAction";
 import type Player from "game/entity/player/Player";
+import type { Game } from "game/Game";
+import type { TickFlag } from "game/IGame";
 import type Item from "game/item/Item";
 import Button from "ui/component/Button";
 import Component from "ui/component/Component";
@@ -111,6 +113,7 @@ export declare class ActionSlot extends Button implements IRefreshable {
     configure(emitToActionBar?: boolean): void;
     protected onAppend(): void;
     protected onItemMaybeInaccessible(): void;
+    protected onTickEnd(game: Game, tickFlag: TickFlag, ticks: number, dueToAction: boolean): void;
     postExecuteAction(action: IActionApi): void;
     protected playSound(): void;
     private lastClickUseWhenMoving;
@@ -121,7 +124,7 @@ export declare class ActionSlot extends Button implements IRefreshable {
     onActivate(nonClick?: IBindHandlerApi | true, silent?: true): boolean;
     protected onGetOrRemoveItemInInventory(player: Player, item: Item): void;
     onToggle(api: IBindHandlerApi): boolean;
-    protected onLeave(reason: "mouse" | "focus"): void;
+    protected onLeave(reason: "mouse" | "focus" | "remove"): void;
     private getTooltipLocation;
     getAction(): import("../../../../../game/entity/action/usable/UsableAction").default<IUsableActionRequirements, import("game/entity/action/usable/IUsableAction").IUsableActionDefinition<IUsableActionRequirements>> | undefined;
     getUsing(): IUsableActionPossibleUsing;

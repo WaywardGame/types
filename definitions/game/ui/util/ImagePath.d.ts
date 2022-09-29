@@ -35,6 +35,7 @@ export default class ImagePath<PATHTYPE extends PathType = PathType> {
     private readonly applications;
     private args?;
     private constructor();
+    static equals(imagePath?: ImagePath | ISerializedImagePath | string, imagePath2?: ImagePath | ISerializedImagePath | string): boolean;
     serialize(): ISerializedImagePath;
     setExtension(extension?: string): this;
     setArgs(args?: ResourceOptionsMap[PATHTYPE]): this;

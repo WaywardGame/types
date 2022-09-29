@@ -121,8 +121,11 @@ export default class InGameScreen extends BaseScreen {
     clampDialogs(): void;
     getItemClass(item?: Item, itemType?: ItemType): string;
     createItemString(itemType: ItemType, item?: Item, extraClass?: string): string;
+    private readonly itemElementsCollections;
     getItemElements(item: Item | number): HTMLCollectionOf<HTMLElement>;
     syncItemElements(itemIds: number | number[], forceSyncDecay?: boolean): void;
+    private readonly SYMBOL_LAST_NEARLY_DESTROYED;
+    private readonly SYMBOL_LAST_NEARLY_DECAYED;
     private readonly SYMBOL_LAST_DECAY;
     syncDecayBar(item: Item, force?: boolean, elements?: HTMLCollectionOf<HTMLElement>): void;
     addItemToContainer(item: Item, container: IContainer, _internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;

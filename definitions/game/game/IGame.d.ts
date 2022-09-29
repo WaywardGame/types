@@ -68,8 +68,8 @@ export interface IGameEvents {
     getBiomeType(positon: IVector2, biomeType: BiomeTypes): BiomeTypes | undefined;
     pause(): any;
     resume(): any;
-    tickStart(tickFlag: TickFlag, ticks: number): any;
-    tickEnd(tickFlag: TickFlag, ticks: number): any;
+    tickStart(tickFlag: TickFlag, ticks: number, dueToAction: boolean): any;
+    tickEnd(tickFlag: TickFlag, ticks: number, dueToAction: boolean): any;
     /**
      * Called when the playing entity count changes
      */

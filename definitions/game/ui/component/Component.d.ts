@@ -330,7 +330,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     protected onContextMenu(api: IBindHandlerApi): boolean;
     protected onEnter(reason: "mouse" | "focus"): void;
     private menuCancelHideTooltip;
-    protected onLeave(reason: "mouse" | "focus"): void;
+    protected onLeave(reason: "mouse" | "focus" | "remove"): void;
     /**
      * @returns a promise that resolves when either the given time has passed, or this component has been removed.
      * Returns `true` if this component exists, `false` if it has been removed.
