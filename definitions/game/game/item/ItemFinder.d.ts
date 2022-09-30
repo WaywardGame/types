@@ -16,6 +16,7 @@ import type ItemManager from "game/item/ItemManager";
 export interface IItemFinderOptions extends Partial<IGetBestItemsOptions> {
     replace?(): Item[] | undefined;
     fallback?: ItemFinder;
+    postFilter?(item: Item): boolean;
 }
 export default class ItemFinder {
     private readonly options;
