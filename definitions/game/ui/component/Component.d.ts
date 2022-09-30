@@ -176,7 +176,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     /**
      * Returns the `nth` child, defaulting to the first child
      */
-    getNthChild<C extends Component | undefined = Component | undefined>(nth?: number): C;
+    getNthChild<C extends Component | undefined = Component | undefined>(nth?: number): C | undefined;
     /**
      * Returns a stream of this component's child components. Child elements that don't have associated components will be `undefined`.
      * @param selector A selector that each element must match to be included in the result stream
@@ -328,6 +328,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      */
     schedule(ms: number, debounce: number, cb?: (this: this, component: this) => any, ...args: any[]): this;
     protected onContextMenu(api: IBindHandlerApi): boolean;
+    private entered;
     protected onEnter(reason: "mouse" | "focus"): void;
     private menuCancelHideTooltip;
     protected onLeave(reason: "mouse" | "focus" | "remove"): void;
