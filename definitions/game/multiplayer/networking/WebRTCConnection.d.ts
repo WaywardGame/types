@@ -22,7 +22,7 @@ export declare class WebRTCConnection extends Connection {
     isConnected(): boolean;
     protected onClosing(): void;
     protected onClosed(): void;
-    send(data: ArrayBuffer | Uint8Array): boolean;
+    send(data: Uint8Array): boolean;
     processMatchmakingMessage(message: ArrayBuffer | MatchmakingMessageData): Promise<boolean>;
     private _onDataChannelMessage;
     private _onNegotiationNeeded;

@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
-import type { IHasMagic, MagicalNormalPropertyTypes, MagicalPropertyTypeSubTypeMap, MagicalSubPropertyTypes } from "game/magic/MagicalPropertyManager";
+import type { IHasMagic, MagicalNormalPropertyTypes, MagicalSubPropertyTypes } from "game/magic/MagicalPropertyManager";
+import type { MagicalPropertyTypeSubTypeMap } from "game/magic/MagicalPropertyType";
 import type { DictionaryEnum } from "language/DictionaryMap";
 import type { TextContext } from "language/ITranslation";
 import Translation from "language/Translation";

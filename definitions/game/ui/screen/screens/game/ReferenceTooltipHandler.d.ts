@@ -11,14 +11,19 @@
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import type Inspection from "game/inspection/Inspection";
 import InspectionsHandler from "game/inspection/InspectionsHandler";
-import type { Reference } from "game/reference/ReferenceManager";
+import type { Reference } from "game/reference/IReferenceManager";
 import InspectionsList from "ui/screen/screens/game/component/InspectionsList";
+import type { InspectionTooltipHints } from "ui/screen/screens/game/InspectionsTooltipHandler";
 import InspectionsTooltipHandler from "ui/screen/screens/game/InspectionsTooltipHandler";
+import type Tooltip from "ui/tooltip/Tooltip";
 export default class ReferenceTooltipHandler extends InspectionsTooltipHandler<ReferenceInspectionsList> {
     private readonly context;
     private readonly reference;
-    constructor(context: InfoProviderContext, reference: Reference);
+    private readonly initializer?;
+    constructor(context: InfoProviderContext, reference: Reference, initializer?: ((tooltip: Tooltip, handler: ReferenceTooltipHandler) => any) | undefined);
+    initializeTooltip(tooltip: Tooltip): Promise<void>;
     protected initializeInspections(): ReferenceInspectionsList;
+    protected initializeHints(hints: InspectionTooltipHints): void;
 }
 export declare class ReferenceInspectionsList extends InspectionsList<ReferenceInspectionsHandler> {
     private readonly reference;

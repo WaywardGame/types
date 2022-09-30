@@ -24,7 +24,7 @@ export interface IStatInfo extends Partial<IStatBase> {
  * @param predicate A function that takes an `IStatInfo` object and returns whether it "matches".
  * @param handler A function that takes whether the info matches, the `statElement`, the entity, and the `IStatInfo` object and "handles" it.
  */
-export declare function when(predicate: (info: IStatInfo) => boolean, handler: (matched: boolean, statElement: Component, entity: Entity, info: IStatInfo) => any): (statElement: Component, entity: Entity, stat: IStat, oldValue?: number | undefined) => void;
+export declare function when(predicate: (info: IStatInfo) => boolean, handler: (matched: boolean, statElement: Component, entity: Entity, info: IStatInfo) => any): (statElement: Component, entity: Entity, stat: IStat, oldValue?: number) => void;
 /**
  * Returns a `when()` handler that will toggle classes on a `statElement` based on whether the `predicate` matched.
  */

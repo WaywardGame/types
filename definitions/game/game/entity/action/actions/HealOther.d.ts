@@ -9,6 +9,18 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../player/Player").default | import("../../npc/NPC").default, void, [import("../../../item/Item").default]>;
+import type Creature from "game/entity/creature/Creature";
+import type Human from "game/entity/Human";
+import type NPC from "game/entity/npc/NPC";
+import type { IItemDescription, IItemOnUse } from "game/item/IItem";
+export interface IHealOtherCanUse extends IActionUsable {
+    itemDescription: IItemDescription;
+    target: Creature | Human | NPC;
+    onUse: IItemOnUse;
+    creature?: Creature;
+    npc?: NPC;
+}
+declare const _default: Action<[ActionArgument.ItemInventory], Human, void, IHealOtherCanUse, [import("../../../item/Item").default]>;
 export default _default;

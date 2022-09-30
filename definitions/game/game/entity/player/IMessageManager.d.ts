@@ -9,9 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Stream from "@wayward/goodstream";
+import type Human from "game/entity/Human";
+import type Island from "game/island/Island";
 import type Message from "language/dictionary/Message";
 import type { ISerializedTranslation } from "language/ITranslation";
-import type { IVector3 } from "utilities/math/IVector";
+import type Translation from "language/Translation";
+import type { IVector4 } from "utilities/math/Vector4";
 import type { IStringSection } from "utilities/string/Interpolator";
 export declare enum Source {
     /**
@@ -99,14 +102,30 @@ export interface IMessage {
     type?: MessageType;
     message: ISerializedTranslation;
 }
+export interface IPackedMessage {
+    message: Message;
+    args?: Translation | any[];
+    type?: MessageType;
+    sources?: Source | Source[];
+}
 export interface IMessageManager {
     getMessageHistory(): Stream<IMessage>;
     clear(): this;
     source(noGameSource: true, ...sources: Array<Source | false | undefined>): this;
     source(...sources: Array<Source | false | undefined>): this;
     type(type?: MessageType): this;
-    ifVisible(canSee?: IVector3): this;
-    send(message: Message, ...args: any[]): boolean;
+    ifVisible(canSee?: IVector4): this;
+    ifOnIsland(island: Island): this;
+    send(message: Message | Translation, ...args: any[]): boolean;
+    sendPacked(pack: Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
+    pruneMessageHistory(): boolean;
+    ifIs(human: Human): this;
+    ifIsNot(human: Human): this;
+    addToHistory(messageHistoryItem: IMessageHistoryItem): void;
+    /**
+     * Signal that the message was sent to everyone
+     */
+    sentToAll(sentToAll?: boolean): this;
 }
 export interface IMessageHistoryItem {
     id: number;

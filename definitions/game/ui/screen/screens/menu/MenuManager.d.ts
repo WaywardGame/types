@@ -30,7 +30,7 @@ export default class MenuManager extends EventEmitter.Host<IMenuManagerEvents> {
      */
     get visible(): Menu | undefined;
     show<MENU extends Menu | MenuId>(menu: MENU, menuInitializer?: (menu: MENU extends MenuId ? MenuById[MENU] : MENU) => any): void | Promise<void>;
-    back(): void | Promise<void>;
+    back(): false | void | Promise<void>;
     backToFirst(): void | Promise<void>;
     /**
      * Gets the menu by the given ID, initializing it if it does not already exist.

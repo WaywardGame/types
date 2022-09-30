@@ -15,6 +15,11 @@ export interface ISpriteInfo {
     texHeight: number;
     texOffsetY: number;
     texOffsetX: number;
-    animated?: boolean;
+    animated?: boolean | ISpriteAnimation;
+}
+export interface ISpriteAnimation {
+    offsetY?: number;
+    frameOffsetX?: Record<number, number>;
+    frameOffsetY?: Record<number, number>;
 }
 export default ISpriteInfo;

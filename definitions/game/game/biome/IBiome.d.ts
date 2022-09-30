@@ -58,7 +58,8 @@ export declare enum BiomeType {
     Coastal = 1,
     IceCap = 2,
     Arid = 3,
-    Volcanic = 4
+    Volcanic = 4,
+    Wetlands = 5
 }
 /**
  * @see {@link IFogDescription.ambientColorFogBrightness }

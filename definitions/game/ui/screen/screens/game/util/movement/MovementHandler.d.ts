@@ -37,7 +37,7 @@ export default class MovementHandler extends EventEmitter.Host<IMovementHandlerE
     protected onFaceDown(api: IBindHandlerApi): boolean;
     protected onFaceDirection(api: IBindHandlerApi): boolean;
     protected onIdle(): boolean;
-    protected onMoveToTile(): boolean;
+    protected onMoveToTile(api: IBindHandlerApi): boolean;
     protected onMove(api: IBindHandlerApi): boolean;
     protected onMoveDirection(api: IBindHandlerApi): boolean;
     protected onReleaseMoveBind(api: IBindHandlerApi): void;

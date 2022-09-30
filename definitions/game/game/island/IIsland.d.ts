@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { BiomeType } from "game/biome/IBiome";
-import type Player from "game/entity/player/Player";
+import type Human from "game/entity/Human";
 import type { TickFlag, TileUpdateType } from "game/IGame";
 import type { MultiplayerLoadingDescription } from "game/meta/Loading";
 import type { ITile, TerrainType } from "game/tile/ITerrain";
@@ -74,7 +74,7 @@ export interface IIslandEvents {
     /**
      * Emitted when an island is renamed
      */
-    rename(player: Player, newName?: string, oldName?: string): any;
+    rename(human: Human, newName?: string, oldName?: string): any;
 }
 export interface ISeeds {
     base: number;
@@ -88,9 +88,11 @@ export interface IIslandLoadOptions {
     multiplayerLoadingDescription?: MultiplayerLoadingDescription;
 }
 export interface IMoveToIslandOptions {
-    spawnPosition?: IVector2;
-    newWorldBiomeTypeOverride?: BiomeType;
-    noTravelingEffects?: true;
+    spawnPosition: IVector2;
+    newWorldBiomeTypeOverride: BiomeType;
+    noTravelingEffects: true;
+    distanceFromEdge: number;
+    respawn: boolean;
 }
 export interface IWell {
     quantity: number;
@@ -111,12 +113,14 @@ export interface IWaterContamination {
 export declare enum WaterType {
     None = 0,
     FreshWater = 1,
-    Seawater = 2
+    Seawater = 2,
+    SwampWater = 3
 }
 export declare enum LiquidType {
     Seawater = 0,
     FreshWater = 1,
-    Milk = 2
+    Milk = 2,
+    SwampWater = 3
 }
 export declare const ISLAND_NAME_MAX_LENGTH = 32;
 export declare const DEFAULT_ISLAND_ID = "0,0";

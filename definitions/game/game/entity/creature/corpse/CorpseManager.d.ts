@@ -11,6 +11,7 @@
 import Stream from "@wayward/goodstream/Stream";
 import Corpse from "game/entity/creature/corpse/Corpse";
 import type { CreatureType } from "game/entity/creature/ICreature";
+import { CreationId } from "game/IGame";
 import { ObjectManager } from "game/ObjectManager";
 import type { TextContext } from "language/ITranslation";
 export interface ICorpseManagerEvents {
@@ -18,11 +19,12 @@ export interface ICorpseManagerEvents {
     remove(corpse: Corpse): any;
 }
 export default class CorpseManager extends ObjectManager<Corpse, ICorpseManagerEvents> {
+    protected readonly creationId: CreationId;
     load(): void;
-    create(type: CreatureType, x: number, y: number, z: number, decay?: number, aberrant?: boolean, name?: string, qualityBonus?: number): Corpse | undefined;
+    create(type: CreatureType, x: number, y: number, z: number, decay?: number, aberrant?: boolean, name?: string, qualityBonus?: number, respawned?: number): Corpse | undefined;
     updateAll(): void;
     remove(corpse: Corpse): void;
-    getName(typeOrCorpse: CreatureType | Corpse, article?: boolean, count?: number, showCount?: boolean): import("../../../../language/impl/TranslationImpl").default;
-    getCorpseTranslations(corpses: Corpse[], article?: boolean, context?: TextContext): Stream<import("../../../../language/impl/TranslationImpl").default>;
-    getCorpseListTranslation(corpses: Corpse[], article?: boolean, context?: TextContext): import("../../../../language/impl/TranslationImpl").default;
+    getName(typeOrCorpse: CreatureType | Corpse, article?: false | "definite" | "indefinite", count?: number, showCount?: boolean): import("../../../../language/impl/TranslationImpl").default;
+    getCorpseTranslations(corpses: Corpse[], article?: false | "definite" | "indefinite", context?: TextContext): Stream<import("../../../../language/impl/TranslationImpl").default>;
+    getCorpseListTranslation(corpses: Corpse[], article?: false | "definite" | "indefinite", context?: TextContext): import("../../../../language/impl/TranslationImpl").default;
 }

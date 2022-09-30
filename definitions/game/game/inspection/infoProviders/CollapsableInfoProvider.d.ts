@@ -24,7 +24,7 @@ export default class CollapsableInfoProvider extends InfoProvider {
     setHasContent(handler?: () => boolean): this;
     setOpen(isOpen?: () => boolean): this;
     hasContent(): boolean;
-    get(context: InfoProviderContext): ArrayOr<TranslationGenerator<import("../../../language/dictionary/UiTranslation").default, []> | InfoProvider>;
+    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     getClass(): never[];
     initComponent(context: InfoProviderContext): {
         component: import("../../../ui/component/Component").default<HTMLElement>;

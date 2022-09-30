@@ -10,6 +10,7 @@
  */
 export default class ScaleManager {
     private scale;
+    get scaleNativeFactor(): number;
     /**
      * Returns the minimum scale we allow, 0.5.
      */
@@ -18,15 +19,18 @@ export default class ScaleManager {
      * Returns the maximum scale the screen size will allow.
      */
     getMaximum(): number;
+    private maximumFormula;
     /**
      * Returns the current UI scale (after being clamped by min & max).
      */
     get(): number;
     getFloor(floor?: number): number;
+    getClamped(scale?: number): number;
     /**
      * Returns the currently "requested" UI scale.
      */
-    getUserSetting(scale?: number): number;
+    getUserSetting(): number;
+    private getPlatformDefaultUiScale;
     /**
      * Requests a new UI scale, a multiplier of the default size.
      */

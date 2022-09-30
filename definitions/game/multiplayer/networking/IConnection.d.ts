@@ -62,7 +62,7 @@ export interface IConnection {
      * @param data Data to send
      * @returns True when sent, false when it was not sent and should be retried. Throws an error if something very bad happened
      */
-    send(data: ArrayBuffer | Uint8Array): boolean;
+    send(data: Uint8Array, byteOffset: number, length?: number): boolean;
     setState(state: ConnectionState): void;
     sendKeepAlive(): void;
 }

@@ -8,33 +8,41 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Text from "ui/component/Text";
+import EventEmitter from "event/EventEmitter";
+import Text, { Paragraph } from "ui/component/Text";
 import type InspectionsList from "ui/screen/screens/game/component/InspectionsList";
 import type Tooltip from "ui/tooltip/Tooltip";
 import type Vector2 from "utilities/math/Vector2";
-export default abstract class InspectionsTooltipHandler<INSPECTIONS_LIST extends InspectionsList> {
-    protected current: {
-        initialized: boolean | Promise<any>;
-        tooltip: Tooltip;
-        inspectionsList: INSPECTIONS_LIST;
-        informationGuide?: Text;
-        showExtraInfo?: Text;
-        removed: boolean;
-    } | undefined;
+export interface IInspectionsTooltipHandlerCurrent<INSPECTIONS_LIST extends InspectionsList, TOOLTIP_ARGS extends any[]> {
+    initialized: boolean | Promise<any>;
+    tooltip: Tooltip;
+    inspectionsList: INSPECTIONS_LIST;
+    hints?: InspectionTooltipHints;
+    args: TOOLTIP_ARGS;
+    removed: boolean;
+}
+export interface IInspectionsTooltipHandlerEvents<INSPECTIONS_LIST extends InspectionsList, TOOLTIP_ARGS extends any[]> {
+    init(current: IInspectionsTooltipHandlerCurrent<INSPECTIONS_LIST, TOOLTIP_ARGS>): any;
+    remove(): any;
+}
+export default abstract class InspectionsTooltipHandler<INSPECTIONS_LIST extends InspectionsList, TOOLTIP_ARGS extends any[] = []> extends EventEmitter.Host<IInspectionsTooltipHandlerEvents<INSPECTIONS_LIST, TOOLTIP_ARGS>> {
+    protected current: IInspectionsTooltipHandlerCurrent<INSPECTIONS_LIST, TOOLTIP_ARGS> | undefined;
     private lastMousePosition?;
-    initializeTooltip(tooltip: Tooltip): Promise<void>;
-    remove(tooltip?: {
-        initialized: boolean | Promise<any>;
-        tooltip: Tooltip;
-        inspectionsList: INSPECTIONS_LIST;
-        informationGuide?: Text | undefined;
-        showExtraInfo?: Text | undefined;
-        removed: boolean;
-    } | undefined): Promise<void>;
-    protected abstract initializeInspections(): INSPECTIONS_LIST | undefined;
+    initializeTooltip(tooltip: Tooltip, ...args: TOOLTIP_ARGS): Promise<void>;
+    remove(tooltip?: IInspectionsTooltipHandlerCurrent<INSPECTIONS_LIST, TOOLTIP_ARGS> | undefined): Promise<void>;
+    onInitInspections(handler: (inspections: INSPECTIONS_LIST) => any): void;
+    protected abstract initializeInspections(...args: TOOLTIP_ARGS): INSPECTIONS_LIST | undefined;
     protected onUpdateTooltipPosition(position: Vector2): void;
     protected getTooltipClass(): string[];
+    protected initializeHints(hints: InspectionTooltipHints, ...args: TOOLTIP_ARGS): void;
     protected updateTooltipPosition(position?: Vector2): void;
     private refreshTooltipExtraInfoAndPosition;
     protected onMoveToIsland(): void;
+}
+export declare class InspectionTooltipHints extends Paragraph {
+    constructor();
+    private _showExtraInfo?;
+    get showExtraInfo(): Text;
+    private _inspectInDialog?;
+    get inspectInDialog(): Text;
 }

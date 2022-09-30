@@ -10,18 +10,22 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { ActionType } from "game/entity/action/IAction";
-import type { IDamageInfo } from "game/entity/creature/ICreature";
 import Human from "game/entity/Human";
-import type { StatusType } from "game/entity/IEntity";
-import { AiType, EntityType, MoveType } from "game/entity/IEntity";
+import { AiType, EntityType, MoveType, StatusType } from "game/entity/IEntity";
 import type { ICustomizations } from "game/entity/IHuman";
 import { EquipType } from "game/entity/IHuman";
 import type { NPCType } from "game/entity/npc/INPCs";
+import type MerchantNPC from "game/entity/npc/npcs/Merchant";
+import { MessageManagerNoOp } from "game/entity/player/MessageManager";
+import { NoteManagerNoOp } from "game/entity/player/note/NoteManager";
+import { QuestManagerNoOp } from "game/entity/player/quest/QuestManager";
 import { CreationId, TileUpdateType } from "game/IGame";
+import type Island from "game/island/Island";
 import type { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type { ITile } from "game/tile/ITerrain";
 import Translation from "language/Translation";
+import type { IVector3 } from "utilities/math/IVector";
 export interface INPCEvents extends Events<Human> {
     /**
      * Called when a npc tries to move
@@ -32,18 +36,7 @@ export interface INPCEvents extends Events<Human> {
      * @param moveType The npcs move type
      * @returns True if the npc can move, false if the npc cannot move, or undefined to use the default logic
      */
-    canMove(tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
-    /**
-     * Called when an npc is killed
-     * @returns False to stop the npc from dying or undefined to use the default logic
-     */
-    die?(): boolean | undefined;
-    /**
-     * Called when an npc is damaged
-     * @param damageInfo The damage info object
-     * @returns The amount of damage the npc should take (the npc will take this damage) or undefined to use the default logic
-     */
-    damage?(damageInfo: IDamageInfo): number | undefined;
+    canNPCMove(tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
 }
 export default abstract class NPC extends Human {
     protected static registrarId: number;
@@ -52,6 +45,7 @@ export default abstract class NPC extends Human {
     readonly entityType: EntityType.NPC;
     readonly tileUpdateType = TileUpdateType.NPC;
     get constructorFunction(): typeof NPC;
+    readonly isPlayerLike: boolean;
     ai: AiType;
     seen: number;
     type: NPCType;
@@ -60,11 +54,21 @@ export default abstract class NPC extends Human {
     static setRegistrarId(id: number): void;
     constructor(type?: NPCType, id?: number, islandId?: `${number},${number}`, x?: number, y?: number, z?: number);
     getRegistrarId(): number;
+    createNoteManager(): NoteManagerNoOp;
+    createMessageManager(): MessageManagerNoOp;
+    createQuestManager(): QuestManagerNoOp;
+    addMilestone(): void;
+    protected getApplicableStatusEffects(): Set<StatusType>;
     /**
      * Creates inventory, equips items, and scales stats
      */
     spawn(): void;
     update(): void;
+    /**
+     * Override in npcs for custom logic
+     * @returns True if the npc is doing something that would prevent it from attacking/moving
+     */
+    protected runActions(): boolean;
     kill(): boolean;
     isHostile(): boolean;
     isWaiting(): boolean;
@@ -85,12 +89,12 @@ export default abstract class NPC extends Human {
      */
     closeInventory(): void;
     updateDirection(x: number, y: number): void;
+    moveToIsland(targetIsland: Island, targetPosition: IVector3): void;
     /**
      * Sets the default weightCapacity of an NPC (based on their equipment and starting items).
      */
     generateWeightCapacity(): void;
     getName(): import("../../../language/impl/TranslationImpl").default;
-    protected getApplicableStatusEffects(): Set<StatusType>;
     /**
      * The name of the npc - called when created
      */
@@ -123,9 +127,12 @@ export default abstract class NPC extends Human {
     protected attack(): boolean;
     protected move(): boolean;
     protected autoScaleStats(): void;
-    protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): boolean | void | undefined;
+    protected changeZ(toZ: number, fromZ: number): boolean | void | undefined;
+    protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile, isMoving: boolean): boolean | void | undefined;
     protected postMove(): void;
     protected checkMove(moveType: MoveType, tileX: number, tileY: number, tileZ: number): 0 | -1 | -2 | -3 | -4 | -5;
+    getWeightOrStaminaMovementPenalty(): number;
+    get asMerchant(): MerchantNPC | undefined;
     get asNPC(): NPC;
     get asPlayer(): undefined;
     get asLocalPlayer(): undefined;

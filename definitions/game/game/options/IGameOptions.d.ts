@@ -13,6 +13,7 @@ import type { CreatureType, TileGroup } from "game/entity/creature/ICreature";
 import type { AttackType, StatusType } from "game/entity/IEntity";
 import type { SkillType } from "game/entity/IHuman";
 import type { Stat } from "game/entity/IStats";
+import type { ItemType } from "game/item/IItem";
 import type { Milestone } from "game/milestones/IMilestone";
 import type { ThreeStateButtonState } from "ui/component/IThreeStateButton";
 import type DefaultMap from "utilities/collection/map/DefaultMap";
@@ -128,6 +129,10 @@ export interface IGameOptions {
              * The number of items a merchant spawns with.
              */
             initialItems: RandomRange[];
+            /**
+             * Can spawn at all.
+             */
+            allowSpawning: boolean;
         };
     };
     /**
@@ -136,6 +141,10 @@ export interface IGameOptions {
     disableMods: boolean;
     milestoneModifiers: Set<Milestone>;
     items: {
+        /**
+         * A multiplier for the durability of each item globally.
+         */
+        durabilityMultiplier: number;
         /**
          * Multiplier for decay of items.
          */
@@ -214,7 +223,7 @@ export interface IGameOptionsPlayer {
     };
     crafting: {
         /**
-         * A multiplier for the durability of each item.
+         * A multiplier for the durability of each item (not specifically for crafting).
          */
         durabilityMultiplier: number;
         /**
@@ -222,6 +231,10 @@ export interface IGameOptionsPlayer {
          * TODO: Set to Map<RecipeLevel, number> when we can support maps in milestone modifier overrides?
          */
         difficultyMultiplier: number;
+        /**
+         * Allow default crafting recipe discovery.
+         */
+        unlockRecipesWithComponents: boolean;
     };
     actions: {
         /**
@@ -337,4 +350,11 @@ export interface IGameOptionsCreature {
      * Modifies the tiles the creature can spawn on.
      */
     spawnTiles: TileGroup;
+    /**
+     * Adds additional loot with chance using decimal number.
+     */
+    addedLoot: Array<{
+        type: ItemType;
+        chance: number;
+    }>;
 }

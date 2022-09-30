@@ -12,12 +12,13 @@ import type Entity from "game/entity/Entity";
 import type { IStat } from "game/entity/IStats";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
+import type { TranslationGenerator } from "ui/component/IComponent";
 export default class HealthInfoProvider<E extends Entity> extends InfoProvider {
     protected readonly entity: E;
     constructor(entity: E);
     getClass(): string[];
     hasContent(): boolean;
-    get(context: InfoProviderContext): import("../../../../language/impl/TranslationImpl").default;
+    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     protected getName(): import("../../../../language/impl/TranslationImpl").default;
     protected onStatChange(_: any, stat: IStat): void;
 }

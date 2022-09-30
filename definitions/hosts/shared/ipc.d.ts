@@ -10,5 +10,5 @@
  */
 export interface IIPC<T> {
     readonly prefix: string;
-    readonly handlers: Array<keyof T>;
+    readonly handlers: Array<string & keyof T>;
 }

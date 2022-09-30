@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IModdable } from "mod/ModRegistry";
+import type { BasicText, BasicTextLink } from "ui/component/Text";
 export interface IHelpArticle extends IModdable {
     /**
      * Whether this article is "important", which makes it take up the full row (instead of sharing
@@ -24,8 +25,8 @@ export declare enum HelpArticle {
     Controls = 1,
     Interface = 2,
     InventoryManagement = 3,
-    Quickslots = 4,
-    FastPickup = 5,
+    ActionSlots = 4,
+    FastPickUp = 5,
     Actions = 6,
     Stats = 7,
     Doodads = 8,
@@ -53,3 +54,4 @@ export declare enum HelpArticleSection {
 }
 declare const descriptions: Descriptions<HelpArticle, IHelpArticle>;
 export default descriptions;
+export declare function HelpArticleLinkHandler(text: BasicText, link: BasicTextLink): true | void;

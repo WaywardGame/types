@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { ISerializable, ISerializer } from "save/serializer/ISerializer";
 import { Types } from "save/serializer/ISerializer";
-import type { ISerializer, ISerializable } from "save/serializer/ISerializer";
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
@@ -20,15 +20,28 @@ export default class Vector2 implements IVector2, ISerializable {
     static get INFINITY_NEGATIVE(): Vector2;
     static get INFINITY(): Vector2;
     static readonly DIRECTIONS: Readonly<Record<Direction, Vector2>>;
+    static xy(vector: IVector2): [x: number, y: number];
     static fromSize(size: {
         width: number;
         height: number;
     }): Vector2;
+    static fromSize(size?: {
+        width: number;
+        height: number;
+    }): Vector2 | undefined;
     static fromTopLeft(topLeft: {
         top: number;
         left: number;
     }): Vector2;
+    static fromTopLeft(topLeft?: {
+        top: number;
+        left: number;
+    }): Vector2 | undefined;
     static fromClient(clientXClientY: {
+        clientX?: number;
+        clientY?: number;
+    }): Vector2;
+    static fromClient(clientXClientY?: {
         clientX?: number;
         clientY?: number;
     }): Vector2 | undefined;
@@ -105,7 +118,7 @@ export default class Vector2 implements IVector2, ISerializable {
     clamp(a: IVector2, b: IVector2): this;
     offset(direction: Direction): this;
     toString(): string;
-    serializeObject(serializer: ISerializer): void;
+    serializeObject(serializer: ISerializer): undefined;
     deserializeObject(serializer: ISerializer, dataType: Types): boolean;
 }
 export {};

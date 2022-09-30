@@ -8,6 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Doodad from "game/doodad/Doodad";
 import { Action } from "game/entity/action/Action";
-declare const _default: Action<[], import("../../player/Player").default | import("../../npc/NPC").default, void, []>;
+import type { IActionUsable } from "game/entity/action/IAction";
+import type Creature from "game/entity/creature/Creature";
+export interface IToggleHitchCanUse extends IActionUsable {
+    creature: Creature;
+    hitch?: Doodad;
+}
+declare const _default: Action<[], import("../../Human").default, void, IToggleHitchCanUse, []>;
 export default _default;

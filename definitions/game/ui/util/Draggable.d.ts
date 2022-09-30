@@ -10,26 +10,53 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type Component from "ui/component/Component";
+import type { IBindHandlerApi } from "ui/input/Bind";
+import type Bindable from "ui/input/Bindable";
 import Vector2 from "utilities/math/Vector2";
+export declare type IDraggableInputEvent = (MouseEvent & {
+    [KEY in Exclude<keyof TouchEvent, keyof MouseEvent>]?: undefined;
+} & {
+    [KEY in Exclude<keyof IBindHandlerApi, keyof MouseEvent>]?: undefined;
+}) | (TouchEvent & {
+    [KEY in Exclude<keyof MouseEvent, keyof TouchEvent>]?: undefined;
+} & {
+    [KEY in Exclude<keyof IBindHandlerApi, keyof TouchEvent>]?: undefined;
+}) | (IBindHandlerApi & {
+    [KEY in Exclude<keyof MouseEvent, keyof IBindHandlerApi>]?: undefined;
+} & {
+    [KEY in Exclude<keyof TouchEvent, keyof IBindHandlerApi>]?: undefined;
+});
 export interface IDraggableEvents {
-    moveStart(mousePosition: Vector2): any;
-    move(change: Vector2): any;
-    moveEnd(): any;
+    moveStart(mouse: Vector2): false | void;
+    move(offset: Vector2, mouse: Vector2): any;
+    moveEnd(offset: Vector2, mouse: Vector2, bindable?: Bindable): any;
 }
 export declare type WithDraggableEvents<EVENTS_OF> = Events<EVENTS_OF> & IDraggableEvents;
 export interface IDraggableComponent extends Component {
     event: IEventEmitter<this, Events<Component> & IDraggableEvents>;
 }
 export default class Draggable {
-    private lastMousePosition?;
+    private mouseStartPosition?;
     private dragStage;
     private readonly hostRef;
     get host(): IDraggableComponent;
-    constructor(host: IDraggableComponent);
+    constructor(host: IDraggableComponent, ...bindables: Bindable[]);
+    private stickyDistance;
+    setStickyDistance(stickyDistance: number): this;
     private delay;
     setDelay(delay: number): this;
-    private dragStart;
+    private filter?;
+    setInputFilter(filter?: (input: IDraggableInputEvent) => any): this;
+    private bindables;
+    private bindablePriority?;
+    /**
+     * Sets this draggable to be dragged on a bindable press/release instead of mouse/touch.
+     * Incompatible with `setInputFilter`
+     */
+    setBindable(bindables: ArrayOr<Bindable>, priority?: number): this;
+    private removeBindHandlers;
+    dragStart(event: IDraggableInputEvent): boolean;
     private drag;
-    private dragEnd;
+    dragEnd(event?: IDraggableInputEvent): boolean;
     private getMousePosition;
 }

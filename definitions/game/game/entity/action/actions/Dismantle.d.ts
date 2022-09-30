@@ -9,7 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
+import type { IDismantleDescription, IItemDescription } from "game/item/IItem";
 import type Item from "game/item/Item";
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [Item, (Item | undefined)?]>;
+export interface IDismantleCanUse extends IActionUsable {
+    description: IItemDescription;
+    dismantleDescription: IDismantleDescription;
+}
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default, void, IDismantleCanUse, [Item, (Item | undefined)?]>;
 export default _default;

@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { RenderLayerFlag, TileLayerType } from "renderer/world/IWorldRenderer";
 import type RendererContext from "renderer/context/RendererContext";
 import type WebGlContext from "renderer/WebGlContext";
+import { RenderLayerFlag, TileLayerType } from "renderer/world/IWorldRenderer";
 /**
  * Each tile in the wayward world is rendered as 4 subtiles (topleft, topright, bottomleft, bottomright).
  * The world consists of 3 tile layers (terrain, doodad, doodadOver).

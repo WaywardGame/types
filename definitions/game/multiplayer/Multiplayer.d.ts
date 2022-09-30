@@ -45,6 +45,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private _incomingPacketQueue;
     private _incomingPacketProcessingPaused;
     private _packetTickIntervalId;
+    private _keepAliveTimeoutsPaused;
     private _currentPacketProcessing;
     private _currentSyncPacketsWaiting;
     private _currentSyncPacketsProcessing;
@@ -61,10 +62,10 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private readonly _matchmakingSecret;
     constructor();
     isConnected(): boolean;
-    isReady(): boolean;
+    isPacketProcessingPaused(): boolean;
+    isProcessingPacket(): boolean;
     isServer(): boolean;
     isClient(): boolean;
-    isProcessingPacket(): boolean;
     getPlayerIdentifier(): string;
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions, updateGame?: boolean): void;
@@ -91,7 +92,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     getBannedPlayers(): string[];
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(serverInfo: ServerInfo): void;
-    joinServer(serverInfo: ServerInfo, options?: Partial<IJoinServerOptions>): void;
+    joinServer(serverInfo: ServerInfo, options?: Partial<IJoinServerOptions>): Promise<void>;
     rejoinServer(options?: {
         randomizeIdentifier?: boolean;
         automaticallyRetry?: boolean;
@@ -112,12 +113,17 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onLobbyExited(lobbyId: string): void;
     getClients(): IConnection[];
-    closeConnection(reason: DisconnectReason, connection: IConnection): void;
+    closeConnection(reason: DisconnectReason, connection: IConnection): boolean;
     sendConnectPacket(): void;
     removePlayers(reason: DisconnectReason): void;
     removePlayer(connection: IConnection, reason: DisconnectReason): void;
     sendPacket(packet: IPacket, exclude?: PacketTarget): void;
     sendPacketTo(to: PacketTarget, packet: IPacket, force?: boolean): void;
+    /**
+     * Executes a function while ensuring it is runs outside the context of any executing actions/multiplayer logic in order to prevent desyncs
+     * @param lambda Function to execute
+     */
+    executeClientside(lambda: () => any): void;
     /**
      * Sends a packet in a synchronized way to the server or clients
      *
@@ -138,8 +144,8 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     updatePlayerId(oldPid: number, newPid: number): void;
     suppressSyncChecks(suppress: boolean): void;
     syncGameState(): void;
-    clearKeepAliveTimeouts(): void;
-    addKeepAliveTimeouts(): void;
+    pauseKeepAliveTimeouts(): void;
+    resumeKeepAliveTimeouts(): void;
     updateGlobalServerDirectory(): void;
     checkConnection(): Promise<void>;
     isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;

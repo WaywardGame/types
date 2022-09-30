@@ -20,6 +20,6 @@ export declare class WebSocketConnection extends Connection {
     isConnected(): boolean;
     protected onClosing(): void;
     protected onClosed(): void;
-    send(data: ArrayBuffer | Uint8Array): boolean;
+    send(data: Uint8Array): boolean;
     processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;
 }

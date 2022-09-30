@@ -14,7 +14,7 @@ import { CreatureType, SpawnGroup, TileGroup } from "game/entity/creature/ICreat
 import EntityManager from "game/entity/EntityManager";
 import type Human from "game/entity/Human";
 import { MoveType } from "game/entity/IEntity";
-import type Player from "game/entity/player/Player";
+import { CreationId } from "game/IGame";
 import type { ITile } from "game/tile/ITerrain";
 import Vector3 from "utilities/math/Vector3";
 export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> {
@@ -40,10 +40,11 @@ export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> 
     shouldSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
 }
 export default class CreatureManager extends EntityManager<Creature> {
+    protected readonly creationId: CreationId;
     readonly event: IEventEmitter<this, ICreatureManagerEvents>;
     load(): void;
-    static getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: boolean): import("../../../language/impl/TranslationImpl").default;
-    getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: boolean): import("../../../language/impl/TranslationImpl").default;
+    static getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: false | "definite" | "indefinite"): import("../../../language/impl/TranslationImpl").default;
+    getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: false | "definite" | "indefinite"): import("../../../language/impl/TranslationImpl").default;
     getHappinessLevel(human: Human, creature: Creature, bonus?: number): number;
     /**
      * Spawns a creature.
@@ -66,7 +67,7 @@ export default class CreatureManager extends EntityManager<Creature> {
      */
     maybeSpawnDryad(target: Human): void;
     remove(creature: Creature): void;
-    updateAll(realPlayers: Player[]): void;
+    updateAll(playingHumans: Human[]): void;
     /**
      * getMovePenalty
      * @param willMove Set to true if the object is about to move to this tile. This method will confirm if theres an existing npc/creature there and return false if so

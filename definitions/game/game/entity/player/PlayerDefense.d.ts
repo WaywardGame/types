@@ -11,7 +11,8 @@
 import { Defense } from "game/entity/IEntity";
 export default class PlayerDefense extends Defense {
     parrying: number;
-    constructor(base: number, parrying: number);
+    vehicle: number;
+    constructor(base: number, parrying: number, vehicle: number);
     copy(): PlayerDefense;
     equals(defense: Defense): boolean;
 }

@@ -10,7 +10,6 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import Button from "ui/component/Button";
-import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IRefreshableValue } from "ui/component/Refreshable";
 import type { Paragraph } from "ui/component/Text";
 interface ICheckButtonEvents extends Events<Button> {
@@ -30,9 +29,8 @@ export declare class CheckButton extends Button implements IRefreshableValue<boo
     shouldDisableButtonButtonsOnUnchecked(): boolean;
     trySetChecked(checked: boolean, triggerEvent?: boolean): boolean;
     toggleChecked(): void;
-    refresh(): this;
+    refresh(emitEvent?: boolean): this;
     setRefreshMethod(refreshMethod: () => boolean): this;
-    setText(text: TranslationGenerator): this;
     addDescription(initializer: (paragraph: Paragraph) => any): this;
     protected playSound(): void;
 }

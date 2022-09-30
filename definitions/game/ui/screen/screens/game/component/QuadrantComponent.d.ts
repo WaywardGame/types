@@ -12,10 +12,12 @@ import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { ContextMenuDescriptions } from "ui/component/ContextMenu";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import type Screen from "ui/screen/Screen";
+import type { QuadrantRegion } from "ui/screen/screens/game/component/IQuadrantComponent";
 import { Quadrant } from "ui/screen/screens/game/component/IQuadrantComponent";
 import StaticComponent from "ui/screen/screens/game/component/StaticComponent";
 import { QuadrantComponentId } from "ui/screen/screens/game/IGameScreenApi";
 import type GameScreen from "ui/screen/screens/GameScreen";
+import Log from "utilities/Log";
 interface IQuadrantComponentEvents extends Events<StaticComponent> {
     /**
      * @param quadrant The new quadrant of this element
@@ -48,8 +50,11 @@ export default abstract class QuadrantComponent extends StaticComponent {
     protected readonly scrollableHandler: void;
     get preferredQuadrant(): Quadrant;
     get quadrant(): Quadrant;
-    get quadrantName(): "TopLeft" | "TopRight" | "BottomLeft" | "BottomRight" | "None" | "Top" | "Bottom";
+    get quadrantName(): "TopLeft" | "TopRight" | "BottomLeft" | "BottomRight" | "None" | "Top" | "Bottom" | "Any";
+    readonly log: Log;
     constructor(id: QuadrantComponentId);
+    protected registerDataHost(): void;
+    inRegion(region: QuadrantRegion): boolean;
     /**
      * Changes the quadrant of this element, then emits the `ChangeQuadrant` event
      * with the parameters being the new quadrant and the old quadrant.

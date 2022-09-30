@@ -8,12 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Reference, Referenceable } from "game/reference/ReferenceManager";
+import type { Reference, Referenceable } from "game/reference/IReferenceManager";
 import Dictionary from "language/Dictionary";
 import type { ISerializedTranslation } from "language/ITranslation";
 import { TextContext } from "language/ITranslation";
 import type { Link } from "language/segment/LinkSegment";
 import type { ITooltipSection } from "language/segment/TooltipSegment";
+import type { ISerializable } from "save/serializer/ISerializer";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { Random } from "utilities/random/Random";
 import type { ISegment, IStringSection } from "utilities/string/Interpolator";
@@ -24,7 +25,7 @@ export interface ITranslationConfig {
     interpolator: Interpolator;
     provideTranslation(dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean): string[] | undefined;
 }
-export default class TranslationImpl {
+export default class TranslationImpl implements Omit<ISerializable, "deserializeObject"> {
     private static defaultInterpolatorSegmentIds?;
     private static _config?;
     static set config(config: ITranslationConfig | undefined);
@@ -62,6 +63,7 @@ export default class TranslationImpl {
     private reference?;
     constructor(dictionary: Dictionary | string, entry: number | string, index?: "random" | number);
     constructor(translationId: string);
+    equals(translation: TranslationImpl): boolean;
     withSegments(...segments: ISegment[]): this;
     withSegments(priority: true, ...segments: ISegment[]): this;
     withTooltip(tooltip?: Falsy | ITooltipSection["tooltip"]): this;
@@ -77,7 +79,7 @@ export default class TranslationImpl {
     /**
      * Returns true if this translation has been set to fail with another translation or string.
      */
-    hasFailWith(): boolean;
+    hasFailWith(notEmptyString?: boolean): boolean;
     /**
      * Sets the random source for this Translation. Uses general random by default, not seeded.
      *
@@ -96,6 +98,7 @@ export default class TranslationImpl {
     getString(...args: any[]): string;
     toString(): string;
     private getCustomInterpolatorSegments;
+    serializeObject(): ISerializedTranslation;
     serialize(): ISerializedTranslation;
     private canCache;
     private getCachedTranslation;

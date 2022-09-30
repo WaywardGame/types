@@ -48,7 +48,7 @@ export interface IBindHandlerApi {
      */
     cancelled: boolean;
 }
-declare type BindingHandler<R = boolean> = (api: IBindHandlerApi) => R;
+export declare type BindingHandler<R = boolean> = (api: IBindHandlerApi) => R;
 interface IBindHandlerRegistration<T extends {
     [K in P]: BindingHandler;
 }, P extends string | number | symbol> {
@@ -96,7 +96,7 @@ declare module Bind {
      * @param bindable The `Bindable`.
      * @param priority The "priority" of this handler compared to other handlers. Higher priorities are executed first.
      */
-    function onUp(bindable: Bindable | "anything", priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<BindingHandler<any>>) => void;
+    function onUp(bindable: Bindable | "anything", priority?: number, always?: boolean): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<BindingHandler<any>>) => void;
     /**
      * Registers a handler for every frame in which the given `Bindable` is held down.
      *

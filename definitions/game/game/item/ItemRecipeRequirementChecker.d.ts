@@ -26,7 +26,9 @@ export default class ItemRecipeRequirementChecker {
     private componentItems;
     private recipe;
     private adjacentContainers;
-    private readonly itemsToProcess;
+    private readonly cachedItems;
+    private readonly relevantItemTypes;
+    private readonly itemManager;
     constructor(human: Human, recipe?: IRecipe, trackItems?: boolean | undefined, cacheItems?: boolean | undefined, canUseItem?: ((item: Item, isConsumed: boolean, forItemTypeOrGroup: ItemType | ItemTypeGroup) => boolean) | undefined);
     /**
      * Returns the amount of items needed for the component
@@ -58,4 +60,6 @@ export default class ItemRecipeRequirementChecker {
      */
     processContainer(container: IContainer): boolean;
     private processItem;
+    processBaseComponent(item: Item): boolean;
+    processComponents(item: Item, disableExtraChecks?: boolean): boolean;
 }

@@ -9,9 +9,9 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
-import type { DoorOrientation, IDoodadDescription, IDoodadOptions, IHasOwner } from "game/doodad/IDoodad";
+import type { DoodadTag, DoorOrientation, IDoodadDescription, IDoodadOptions, IHasBuilder } from "game/doodad/IDoodad";
 import { DoodadType, DoodadTypeGroup, GrowingStage } from "game/doodad/IDoodad";
-import type { ActionType } from "game/entity/action/IAction";
+import { ActionType } from "game/entity/action/IAction";
 import type Creature from "game/entity/creature/Creature";
 import type Human from "game/entity/Human";
 import { EquipType } from "game/entity/IHuman";
@@ -19,9 +19,9 @@ import type Player from "game/entity/player/Player";
 import { CreationId, TileUpdateType } from "game/IGame";
 import type { IObject } from "game/IObject";
 import { Quality } from "game/IObject";
-import type { IslandId } from "game/island/IIsland";
+import type { IslandId, IWell } from "game/island/IIsland";
 import { LiquidType } from "game/island/IIsland";
-import type { IContainer } from "game/item/IItem";
+import type { IContainer, ILiquidGather } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type { IHasMagic } from "game/magic/MagicalPropertyManager";
@@ -33,6 +33,7 @@ import type { ITile } from "game/tile/ITerrain";
 import type { ISerializedTranslation } from "language/ITranslation";
 import type { IUnserializedCallback } from "save/serializer/ISerializer";
 import type { IRGB } from "utilities/Color";
+import type { Direction } from "utilities/math/Direction";
 import type { IVector3 } from "utilities/math/IVector";
 export interface IDoodadEvents {
     /**
@@ -46,7 +47,7 @@ export interface IDoodadEvents {
      * @param human The human object
      * @returns False if the doodad cannot be picked up, or undefined to use the default logic
      */
-    canPickup(human: Human): boolean | undefined;
+    canPickUp(human: Human): boolean | undefined;
     /**
      * Emitted when the fire stage of this doodad changes.
      * Note: The fire stage of doodads is not saved, so when the doodad's fire stage is first checked on load, this event will be
@@ -65,13 +66,11 @@ export interface IDoodadEvents {
      * Emitted when the doodad's type changes.
      */
     transformed(newType: DoodadType, oldType: DoodadType): any;
+    durabilityChange(durability: number, oldDurability: number): any;
+    durabilityMaxChange(durability: number, oldDurability: number): any;
 }
-export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IReferenceable, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasOwner, IHasMagic {
+export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IReferenceable, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasBuilder, IHasMagic {
     static is(value: any): value is Doodad;
-    /**
-     * @deprecated
-     */
-    static getGrowingStageTranslation(growingStage?: GrowingStage, description?: IDoodadDescription): import("../../language/impl/TranslationImpl").default | undefined;
     get constructorFunction(): typeof Doodad;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
@@ -90,8 +89,9 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     itemOrders?: number[];
     maxDur: number;
     minDur: number;
-    orientation?: DoorOrientation;
-    ownerIdentifier?: string;
+    orientation?: DoorOrientation | Direction.Cardinal;
+    crafterIdentifier?: string;
+    builderIdentifier?: string;
     quality?: Quality;
     renamed?: string | ISerializedTranslation;
     spread?: number;
@@ -104,14 +104,15 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     hitchedCreature?: number;
     tradedFrom?: string[];
     aberrant?: boolean;
+    private _tags?;
     magic: MagicalPropertyManager;
     private fireStage?;
+    get tags(): Set<DoodadTag>;
     islandId: IslandId;
     private _description;
     private _tile;
     private _tileId;
     private readonly _doodadGroupCache;
-    private _minDur;
     constructor(type?: DoodadType, islandId?: `${number},${number}`, x?: number, y?: number, z?: number, options?: IDoodadOptions);
     get island(): import("../island/Island").default;
     toString(): string;
@@ -125,7 +126,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * - `doodad.getName(false)` // "stone furnace"
      * - `doodad.getName(undefined, 3)` // "stone furnaces"
      */
-    getName(article?: boolean, count?: number): import("../../language/impl/TranslationImpl").default;
+    getName(article?: false | "definite" | "indefinite", count?: number): import("../../language/impl/TranslationImpl").default;
     description(): IDoodadDescription | undefined;
     updateTile(tileUpdateType: TileUpdateType): void;
     changeType(doodadType: DoodadType): void;
@@ -143,8 +144,9 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * @returns True if the doodad is tall
      */
     isTall(): boolean;
-    canPickup(human: Human): boolean;
-    getPickupTypes(): ItemType[] | undefined;
+    canPickUp(human: Human): boolean;
+    getPickUpTypes(): ItemType[] | undefined;
+    getAssociatedItem(): ItemType;
     getActions(): ActionType[] | undefined;
     /**
      * Can the doodad be gathered from in its current form?
@@ -155,32 +157,45 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     isGatherable(): boolean;
     isEmbers(): boolean;
+    getVehicle(): import("game/item/IItem").IItemVehicle | undefined;
+    isVehicle(): boolean;
     canHarvest(): boolean;
     /**
      * Returns whether the doodad can be trampled
      */
     canTrample(): boolean | undefined;
+    /**
+     * Trampling growing things.
+     */
     checkForTrampling(source: Human | Creature): boolean;
     isDangerous(human: Human): boolean;
     getDamage(human: Human, equipType?: EquipType): number;
     /**
-     * Gets the owner of this doodad, or `undefined` if the doodad is ownerless.
+     * Gets the crafter of this doodad, or `undefined` if the doodad is crafterless.
      */
-    getOwner(): Player | undefined;
+    getCrafter(): Player | undefined;
     /**
-     * Gets the owner of this doodad. If this doodad has no owner, and this is not a multiplayer server, returns the local player.
+     * Gets the crafter of this doodad. If this doodad has no crafter, and this is not a multiplayer server, returns the local player.
      */
-    getOwnerOrLocalPlayer(): Player | undefined;
+    getCrafterOrLocalPlayer(): Player | undefined;
+    /**
+     * Gets the builder of this doodad, or `undefined` if the doodad is builderless.
+     */
+    getBuilder(): Player | undefined;
     unhitch(): void;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
-    getDefaultDurability(): number;
+    getDefaultDurability(random?: import("../../utilities/random/Random").Random<import("../../utilities/random/Random").SeededGenerator>): number;
     addTreasureChestLoot(): void;
     attachStillContainer(item: Item): void;
     detachStillContainer(human?: Human): Item | undefined;
     blocksMove(): boolean;
-    update(ticks: number, realPlayers: Player[], updatesPerTick?: number): void;
+    update(ticks: number, playingHumans: Human[], updatesPerTick?: number): void;
     canCauseStatus(): boolean;
-    setOffTrap(human?: Human, withMessage?: boolean): void;
+    /**
+     * Potentially animates a skeleton (if it can spawn) and returns a message to all those who can see it.
+     */
+    animateSkeletalRemains(): void;
+    setOffTrap(human?: Human, withMessage?: boolean, damage?: boolean): void;
     getGrowthParticles(): IRGB | undefined;
     /**
      * Increased the fertility (spread) of a plant/growing doodad.
@@ -195,11 +210,15 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     /**
      * Keep our wells up-to-date with what is happening underground
      */
-    setWellStatus(): void;
+    setWellStatus(well?: IWell): IWell;
     /**
      * Switch unlimited/limited water status based on underground water changes
      */
     switchWellStatus(): void;
+    /**
+     * Returns the type of liquid that can be gathered from this doodad
+     */
+    getLiquidGatherType(): keyof ILiquidGather | undefined;
     getProducedTemperature(): number | undefined;
     getInsulation(type: TempType): number | undefined;
     /**
@@ -224,15 +243,10 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      */
     revert(): boolean;
     onUnserialized(): void;
-    /**
-     * @deprecated
-     */
-    protected getNameTranslation(article?: boolean, count?: number): import("../../language/impl/TranslationImpl").default;
-    /**
-     * @deprecated
-     */
-    protected getDescriptionTranslation(): import("../../language/impl/TranslationImpl").default;
-    private setupDurabilityHandlers;
+    get durability(): number;
+    set durability(value: number);
+    get durabilityMax(): number;
+    set durabilityMax(value: number);
     private processSpecials;
     /**
      * Check for items on top of lit/fire doodads, set them on fire

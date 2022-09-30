@@ -13,6 +13,7 @@ import type InterruptChoice from "language/dictionary/InterruptChoice";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type Input from "ui/component/Input";
 import type { MenuId } from "ui/screen/screens/menu/component/IMenu";
+import type ResolvablePromise from "utilities/promise/ResolvablePromise";
 export declare enum InterruptType {
     Info = 0,
     Confirm = 1,
@@ -29,6 +30,7 @@ export interface InterruptOptions {
     choices?: InterruptChoice[];
     menuId?: MenuId;
     canCancel?: boolean | (NullaryFunction);
+    cancelPromise?: ResolvablePromise;
     isTopMenu?: boolean;
     specialType?: string;
     initializer?(menu: any): any;

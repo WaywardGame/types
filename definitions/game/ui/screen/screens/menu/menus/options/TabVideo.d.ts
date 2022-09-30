@@ -14,12 +14,13 @@ export default class TabVideo extends Tab implements IRefreshable {
     private readonly refreshables;
     private readonly checkButtonFullscreen;
     private readonly inputUiScale;
+    private readonly inputHudWidth;
     constructor();
     refresh(): this;
     protected onViewportResize(): void;
     private addRefreshable;
     private onFullscreen;
+    private onCustomTitleBar;
     private onDitherFOW;
     private onDefaultCursor;
-    private getUiScaleTooltip;
 }

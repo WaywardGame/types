@@ -16,6 +16,10 @@ import Translation from "language/Translation";
 import type TranslationsProvider from "language/TranslationsProvider";
 import type { IStringSection } from "utilities/string/Interpolator";
 import { CaseStyle } from "utilities/string/Strings";
+declare type ArticleRules = Array<[number | {
+    min: number;
+    max?: number;
+} | null, string, string]>;
 export interface ISerializedTranslationsProvider {
     dictionaries: Record<string, Record<string, string | string[]>>;
     pluralizationRules?: {
@@ -23,10 +27,10 @@ export interface ISerializedTranslationsProvider {
         singularRules?: Record<string, string> | Array<[plural: string, singular: string]>;
         uncountables?: string[];
         irregularRules?: Array<[singular: string, plural: string]>;
-        articleRules?: Array<[number | {
-            min: number;
-            max?: number;
-        } | null, string, string]>;
+        articleRules?: {
+            definite?: ArticleRules;
+            indefinite?: ArticleRules;
+        };
     };
     contextRules?: {
         isWord?: string;
@@ -73,7 +77,7 @@ export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> 
     serializeLanguageToFiles(language?: string, caseStyle?: CaseStyle): Promise<void>;
     deserialize(serialized: ISerializedLanguage | ISerializedLanguageExtension): Language | LanguageExtension;
     generateSchema(): void;
-    reformatSingularNoun(noun: string, count: number, article?: boolean): string;
+    reformatSingularNoun(noun: string, count: number, article?: false | "definite" | "indefinite"): string;
     private getNounType;
     private plural;
     private getEntryNameFromEntryId;
@@ -93,3 +97,4 @@ export interface ISelector {
     func?(translation: Translation): string;
 }
 export declare type ISelectorArray = Record<number, ISelector>;
+export {};

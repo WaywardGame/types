@@ -11,5 +11,6 @@
 declare module Classes {
     function isSubclass(fn: unknown): boolean;
     function instantiate<A extends any[], I>(cls: new (...args: A) => I): (...args: A) => I;
+    function is(value: unknown): boolean;
 }
 export default Classes;

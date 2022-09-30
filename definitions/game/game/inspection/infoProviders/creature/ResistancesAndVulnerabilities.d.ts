@@ -14,6 +14,7 @@ import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Translation from "language/Translation";
+import type { TranslationGenerator } from "ui/component/IComponent";
 export default class ResistancesAndVulnerabilitiesInfoProvider extends InfoProvider {
     private readonly creature;
     static getTranslation(creature: Creature, inspector: IInspector | undefined, revealer?: Translation, creatureName?: import("../../../../language/impl/TranslationImpl").default): import("../../../../language/impl/TranslationImpl").default | undefined;
@@ -21,5 +22,5 @@ export default class ResistancesAndVulnerabilitiesInfoProvider extends InfoProvi
     getClass(): string[];
     getDefaultDisplayLevel(): InfoDisplayLevel;
     hasContent(): boolean;
-    get(context: InfoProviderContext): import("../../../../language/impl/TranslationImpl").default;
+    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
 }

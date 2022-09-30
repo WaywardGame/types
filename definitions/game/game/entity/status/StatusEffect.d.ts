@@ -15,15 +15,17 @@ import { StatusEffectChangeReason } from "game/entity/IEntity";
 import { MessageType } from "game/entity/player/IMessageManager";
 import type { IGameOptionsStatusEffect } from "game/options/IGameOptions";
 import type Message from "language/dictionary/Message";
+import { StatusEffectTranslation } from "language/dictionary/Misc";
 import type { IModdable } from "mod/ModRegistry";
 import type StatusEffectRenderer from "renderer/StatusEffectRenderer";
-import type { IHighlight } from "ui/component/IComponent";
+import type { IHighlight } from "ui/util/IHighlight";
+import type ImagePath from "ui/util/ImagePath";
 import type { IRGB } from "utilities/Color";
 export interface IStatusEffectIconDescription {
     /**
      * A custom path for the icon, if necessary.
      */
-    path?: string;
+    path?: string | ImagePath;
     /**
      * The frames of the status effect icon animation. Defaults to `3`.
      */
@@ -49,17 +51,20 @@ export declare enum StatusEffectParticleEvent {
      */
     Passed = 2
 }
+export declare enum UiStatusType {
+    Cut = -100000
+}
 export declare const badnessMessageType: Record<StatusEffectBadness, MessageType>;
 export interface IStatusEffectEvents {
     deregister(): any;
-    changed(): any;
+    refreshed(): any;
 }
 export default abstract class StatusEffect extends EventEmitter.Host<IStatusEffectEvents> {
     readonly type: StatusType;
     static update(effect: StatusEffect): void;
     private registered;
     private readonly _entity;
-    constructor(type: StatusType, entity: Entity | undefined);
+    constructor(type: StatusType, entity?: Entity);
     protected get entity(): Entity;
     getOptions(): IGameOptionsStatusEffect;
     register(): void;
@@ -73,6 +78,7 @@ export default abstract class StatusEffect extends EventEmitter.Host<IStatusEffe
      */
     private deregister;
     getRenderer(): StatusEffectRenderer | undefined;
+    getDefaultRenderer(): StatusEffectRenderer | undefined;
     /**
      * Gets the particle events for the given
      * @param _event The event that could cause particles, IE `turn` or `tick`.
@@ -84,17 +90,16 @@ export default abstract class StatusEffect extends EventEmitter.Host<IStatusEffe
     getParticles(_event: StatusEffectParticleEvent): [number, IRGB] | undefined;
     getIcon(): IStatusEffectIconDescription | undefined;
     getHighlight(): IHighlight | undefined;
-    isActive(): boolean;
-    add(reason?: StatusEffectChangeReason): this;
+    isActive(): number;
+    add(reason?: StatusEffectChangeReason, level?: number): this;
     remove(reason?: StatusEffectChangeReason): this;
     toggle(has: boolean, reason?: StatusEffectChangeReason): this;
     /**
      * Returns the "level" of this status effect. Higher levels mean greater effects. A level of `0` means no effect.
-     * The default implementation of this method returns `1` if the effect is active, and `0` if it is not.
      */
     getLevel(): number;
     getBadness(): StatusEffectBadness;
-    getTranslation(): import("../../../language/impl/TranslationImpl").default;
+    getTranslation(which?: StatusEffectTranslation.Adjective | StatusEffectTranslation.Name): import("../../../language/impl/TranslationImpl").default;
     getDescription(): import("../../../language/impl/TranslationImpl").default;
     refresh(): void;
     protected getEffectRate(): number;
@@ -105,7 +110,7 @@ export default abstract class StatusEffect extends EventEmitter.Host<IStatusEffe
     /**
      * Event handler for when the status effect passes.
      */
-    protected onPassed(): void;
+    protected onPassed(level: number): void;
     /**
      * Event handler for every tick that the human has the status effect.
      */

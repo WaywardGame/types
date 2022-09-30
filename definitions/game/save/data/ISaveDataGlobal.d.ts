@@ -14,48 +14,51 @@ import type { GameMode, IGameOptions } from "game/options/IGameOptions";
 import type { ISerializedTranslation } from "language/ITranslation";
 import type Bindable from "ui/input/Bindable";
 import type { Binding } from "ui/input/Bindings";
+import type { FontStyle } from "ui/IUi";
 import type UiExperiment from "ui/UiExperiments";
 import type { ISourceFilter } from "utilities/Log";
 export interface IOptions {
-    alternateContextMenu: boolean;
     alternatingDirectionMovement: boolean;
     alwaysShowMoreInformation: boolean;
     autoAttack: boolean;
-    autoGatherHarvest: boolean;
     autoPickup: boolean;
     autoPickupOnIdle: boolean;
     autoSave: [AutoSaveMode.Off] | [AutoSaveMode.Turns | AutoSaveMode.Time, number];
     compressSaves: boolean;
     consoleLogSourceFilter: ISourceFilter;
     currentGame: number;
+    customTitleBar: boolean;
     defaultCursor: boolean;
     developerMode: boolean;
     developerModeContextMenu: boolean;
     dialogOpacity: number;
     directionTurnDelay: number;
+    disableAcrylicTransparency: boolean;
     disableCraftingProtectedItems: boolean;
     disableHealthVignette: boolean;
+    disableMovementAnimations: boolean;
+    disableOverlaySupport: boolean;
     disableUIEffects: boolean;
     disableUIOpacity: boolean;
+    dropIntoContainers: boolean;
     dropLocation: DropLocation;
+    dropOnDisassemble: boolean;
     dropOnDismantle: boolean;
     dropOnGatherHarvest: boolean;
     enableSaveDataBackups: boolean;
     fallBackToEnglish: boolean;
-    fontStyle: boolean;
+    fontStyle: FontStyle;
     fullscreen: boolean;
     hideEquippedHeadgear: boolean;
+    hudWidth?: number;
     keepSortActive: boolean;
-    leftHand: boolean;
+    lowPowerMode: boolean;
     mouseTurnDelay: number;
     musicPlaylist: MusicPlaylist;
     muteEffects: boolean;
     muteMusic: boolean;
     playInputSoundWhenTyping: boolean;
-    powerPreference: PowerMode;
     realTimeTickSpeed: number;
-    rightClickInspect: boolean;
-    rightHand: boolean;
     shouldLoadLastSave: boolean;
     shouldObjectNamesSkipArticle: boolean;
     skipSplash: boolean;
@@ -64,7 +67,7 @@ export interface IOptions {
         [key in InspectType]: boolean | undefined;
     };
     uiExperiments: UiExperiment.Any[];
-    uiScale: number;
+    uiScale?: number;
     useAdjacentContainers: boolean;
     useNewCraftingSystem: boolean;
     visionMode: boolean;
@@ -91,15 +94,11 @@ export declare enum MusicPlaylist {
     Shuffle = 1,
     Dynamic = 2
 }
-export declare enum PowerMode {
-    Default = "default",
-    LowPower = "low-power",
-    HighPerformance = "high-performance"
-}
 export declare type IOptionsOld = Partial<Pick<IOptions, "bindings">> & Partial<{
     keyBinds: Record<number, number>;
     bindings: IBindingsOld;
     directionTurnDelay: boolean;
+    fontStyle: boolean;
     developerLogging: boolean;
     hints: boolean;
     skipIntro: boolean;

@@ -9,14 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Entity from "game/entity/Entity";
-import type Player from "game/entity/player/Player";
+import type Human from "game/entity/Human";
 import type { IBound3 } from "utilities/math/Bound3";
 export interface IEntityManager<T extends Entity> {
     remove(entity: T): void;
-    updateFov(playerBounds: IPlayerBound[]): void;
+    updateFov(humanBounds: IHumanBound[]): void;
 }
 export default IEntityManager;
-export interface IPlayerBound {
-    player: Player;
+export interface IHumanBound {
+    human: Human;
     bound: IBound3;
 }

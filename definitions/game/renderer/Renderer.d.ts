@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 import type { IRendererEvents } from "renderer/IRenderer";
@@ -43,6 +44,8 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     get particle(): import("./particle/ParticleSystem").default;
     get isFadingIn(): boolean;
     get isUpdatingThumbnail(): boolean;
+    get island(): Island;
+    get islandId(): IslandId;
     start(): void;
     stop(): void;
     setOrigin(origin: IRendererOrigin): void;
@@ -51,8 +54,8 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     getZoom(): number;
     addZoomLevel(amount: number): void;
     updateZoomLevel(): void;
-    getCameraPosition(): IVector2;
-    getExactCameraPosition(): Vector2;
+    getCameraPosition(timeStamp: number): IVector2;
+    getExactCameraPosition(timeStamp: number): Vector2;
     createFadeIn(duration?: number): void;
     getBlackness(timeStamp: number): number;
     updateRender(source: RenderSource, flag: UpdateRenderFlag): void;
@@ -62,11 +65,10 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
      */
     getAmbientLightLevel(z: number): number;
     updateAmbientLightLevel(z: number): number;
-    updateView(source: RenderSource, updateFov: boolean, computeSpritesNow: boolean): void;
+    updateView(source: RenderSource, updateFov: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition): void;
     updateThumbnail(): Promise<boolean>;
     update(timeStamp: number): void;
     computeSpritesInViewport(): void;
-    computeSpritesInViewportImmediately(): void;
     private getFadeInProgress;
     private hasRenderFlag;
     private clearRenderFlag;
@@ -79,4 +81,7 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     protected gameRenderLoop: (timeStamp: number) => void;
     private render;
     private shouldUpdateWorldRender;
+    private registerOriginEvents;
+    private unregisterOriginEvents;
+    private onOriginLoadedOnIsland;
 }

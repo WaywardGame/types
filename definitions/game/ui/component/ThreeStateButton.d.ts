@@ -10,7 +10,6 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import Button from "ui/component/Button";
-import type { TranslationGenerator } from "ui/component/IComponent";
 import { ThreeStateButtonState } from "ui/component/IThreeStateButton";
 import type { IRefreshableValue } from "ui/component/Refreshable";
 import type { Paragraph } from "ui/component/Text";
@@ -38,7 +37,6 @@ export declare class ThreeStateButton extends Button implements IRefreshableValu
     toggleState(): void;
     refresh(): this;
     setRefreshMethod(refreshMethod: () => ThreeStateButtonState): this;
-    setText(text: TranslationGenerator): this;
     addDescription(initializer: (paragraph: Paragraph) => any): this;
     setUpdateDescriptionOnChange(update?: boolean): this;
     protected playSound(): void;

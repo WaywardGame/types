@@ -20,6 +20,13 @@ export interface ISkillConfiguration {
 }
 export interface ISkillEvents {
     /**
+     * @param skill The skill that is being checked
+     * @param check The desired value that needs to pass
+     * @param actionTier Optional action tier
+     * @return True if the skill check should pass, false if it shouldn't, undefined if it should be random
+     */
+    skillCheck(skill: SkillType, check: number, actionTier?: number): boolean | undefined;
+    /**
      * @param skill The skill that is changing
      * @param value The new skill value (core + bonus)
      * @param oldValue The previous skill value (previous core + bonus)

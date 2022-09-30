@@ -22,6 +22,7 @@ import type { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 import type { IslandId } from "game/island/IIsland";
+import type Human from "game/entity/Human";
 export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     protected readonly context: RendererContext;
     private readonly worldRenderer;
@@ -54,16 +55,9 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     static canSeePosition(origin: IRendererOrigin, type: CanASeeBType, islandId: IslandId, tileX: number, tileY: number, tileZ: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
     static getBounds(origin: IVector3, radius: number): IBound3;
     /**
-     * Updates the explored tiles around players
-     * @param fieldOfView Field of view object
-     * @param updateForGhosts Update field of ghosts too
-     */
-    static updateExplored(fieldOfView: FieldOfView, updateForGhosts?: boolean): void;
-    private static processExploredMapBounds;
-    /**
      * Gets the field of view radius based on either the field of view object, player, or the default value
      */
-    static getRadius(fieldOfView: FieldOfView | undefined, player: Player | undefined): number;
+    static getRadius(fieldOfView: FieldOfView | undefined, human: Human | undefined): number;
     /**
      * Marks a set of tiles as exploreed
      */
@@ -79,7 +73,17 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     startTransition(timeStamp: number): void;
     updateTransitionProgress(timeStamp: number): boolean;
     resetTransitionProgress(): void;
-    compute(timeStamp: number, force?: boolean): boolean;
+    compute(timeStamp: number, force?: boolean, skipTransition?: boolean): boolean;
     createDebugRenderer(): ITextureDebugRenderer;
+    /**
+     * Updates the explored tiles around players
+     * @param updateForGhosts Update field of ghosts too
+     */
+    updateExplored(updateForGhosts?: boolean): void;
+    /**
+     * Run this as clientside to ensure nothing desyncs
+     * This prevents clientside only seed changes
+     */
+    private processExploredMapBounds;
     private computeLights;
 }

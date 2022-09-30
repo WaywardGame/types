@@ -11,11 +11,12 @@
 import type { IInspector, InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { TextContext } from "language/ITranslation";
 export declare class InfoProviderContext {
-    readonly textContext: TextContext;
-    readonly maxDisplayLevel: InfoDisplayLevel;
     static readonly UI: new (inspector: IInspector, maxDisplayLevel: InfoDisplayLevel) => InfoProviderContext;
     static readonly RAW: new (inspector: IInspector, maxDisplayLevel: InfoDisplayLevel) => InfoProviderContext;
-    private readonly _inspector;
+    protected readonly _inspector: WeakRef<IInspector>;
+    readonly textContext: TextContext;
+    readonly maxDisplayLevel: InfoDisplayLevel;
+    constructor(context: InfoProviderContext);
     constructor(textContext: TextContext, inspector: IInspector, maxDisplayLevel: InfoDisplayLevel);
     get inspector(): IInspector | undefined;
 }

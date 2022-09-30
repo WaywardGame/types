@@ -99,25 +99,23 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
  */
 export declare function convertStringToSeed(seed: string | number): number;
 export declare class SeededGenerator implements IRandomGenerator {
-    private readonly addMultiplayerSyncChecks;
+    private readonly requiresSynchronization;
     private history;
     private maxHistoryLength;
-    private debug;
     private seed;
     private readonly pushedSeeds;
-    constructor(seed?: number, addMultiplayerSyncChecks?: boolean);
+    constructor(requiresSynchronization: boolean, seed?: number);
     tickSeed(s: number): number;
     getSeed(): number;
     setSeed(newSeed: number): void;
     generateSeed(): void;
-    setDebug(value: boolean): void;
     pushSeed(newSeed?: number): void;
     popSeed(): number;
     get(): number;
     startHistory(maxHistory?: number): void;
     getHistory(): IRandomHistory[] | undefined;
     takeHistory(): IRandomHistory[] | undefined;
-    stopHistory(print?: string): IRandomHistory[];
+    stopHistory(): IRandomHistory[];
     getBaseSeed(): number;
 }
 export declare enum RandomInstance {
@@ -130,7 +128,7 @@ export declare module RandomReference {
     function resolve(reference: RandomInstance | RandomReference): RandomReference;
 }
 export declare function getRandom(randomInstance: RandomInstance, islandId?: IslandId): Random<SeededGenerator>;
-export declare function createSeededRandom(seed?: number, addMultiplayerSyncChecks?: boolean): Random<SeededGenerator>;
+export declare function createSeededRandom(requiresSynchronization: boolean, seed?: number): Random<SeededGenerator>;
 export declare const mapGenRandom: Random<SeededGenerator>;
 export declare const generalRandom: Random<{
     get: () => number;

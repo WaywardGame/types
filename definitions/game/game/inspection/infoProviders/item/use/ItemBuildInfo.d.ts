@@ -14,7 +14,8 @@ import UseInfo from "game/inspection/infoProviders/UseInfo";
 import type Item from "game/item/Item";
 import { TempType } from "game/temperature/ITemperature";
 declare const _default: UseInfo<{
-    doodadDescription: import("../../../../doodad/IDoodad").IDoodadDescription;
+    doodadContainer: import("../../../../doodad/IDoodad").IDoodadDescription | undefined;
+    civilizationScore: number | undefined;
     objectType: import("../../../../IGame").CreationId.Item;
     value?: Item | undefined;
     type: import("../../../../item/IItem").ItemType;
@@ -33,5 +34,7 @@ declare const _default: UseInfo<{
     getInsulation: () => (LabelledValue | undefined)[];
 } & {
     getPreservationChance: () => LabelledValue | undefined;
+} & {
+    getCivilizationScore: () => LabelledValue | undefined;
 }, Item>;
 export default _default;

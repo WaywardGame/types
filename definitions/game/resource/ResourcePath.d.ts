@@ -20,6 +20,7 @@ interface IResourceOptionsMap {
     [PathType.Map]: [theme: DrawnMapTheme];
     [PathType.Island]: [theme: DrawnMapTheme, offset: number];
     [PathType.Pin]: [theme: DrawnMapTheme];
+    [PathType.EquipSlot]: [resolution?: 16 | 8];
 }
 export declare type ResourceOptionsMap = Record<Exclude<PathType, keyof IResourceOptionsMap>, []> & IResourceOptionsMap;
 declare module ResourcePath {

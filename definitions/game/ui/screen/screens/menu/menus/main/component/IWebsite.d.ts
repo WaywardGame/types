@@ -16,6 +16,9 @@ export declare enum Website {
     Subreddit = 4,
     RedditUser = 5,
     Facebook = 6,
-    Personal = 7
+    Generic = 7,
+    SteamStorePage = 8,
+    Unlok = 9,
+    Wayward = 10
 }
-export declare const websiteLinks: Record<Website, string>;
+export declare const websiteLinks: Readonly<Record<Website, string>>;

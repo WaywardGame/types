@@ -8,15 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+/// <reference types="node" />
 import type { IMatchmakingServer, INapiDiscordPresenceInfo, IRemoteFile, ISteamFriend, ISteamId, ISteamworksNetworking, IWaywardPreload, IWorkshopItem, LobbyType } from "@hosts/shared/interfaces";
 import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
 import type { ServerInfo } from "multiplayer/IMultiplayer";
-import type { IDedicatedServerInfo, IModPath, ISteamworksEvents } from "steamworks/ISteamworks";
+import type { IBuild, IDedicatedServerInfo, IModPath, ISteamworksEvents } from "steamworks/ISteamworks";
 export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
+    protected initialized: boolean;
     private steamId;
     private betaName;
-    private buildTime;
+    private build;
     private overlayWorks;
     private runningOnSteamDeck;
     private runningOnBatteryPower;
@@ -45,11 +47,14 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private relayNetworkStatus;
     private _isGameOverlayActive;
     private _isTraceRecording;
+    private _osPlatform;
     private _intervalIds;
     get isGameOverlayActive(): boolean;
     get isRunningOnSteamDeck(): boolean;
     get isRunningOnBatteryPower(): boolean;
+    get isLowPowerMode(): boolean;
     isElectron(): boolean;
+    getOsPlatform(): NodeJS.Platform | undefined;
     reload(): Promise<void>;
     openGpuInfoWindow(): void;
     closeWindow(): void;
@@ -70,13 +75,16 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     enableSafePaths(): void;
     onUnload(): void;
     setFullscreen(fullscreen: boolean): Promise<void>;
+    setCustomTitleBar(enabled: boolean): Promise<void>;
     setOverlayWorks(overlayWorks: boolean): void;
+    toggleOverlay(disabled: boolean): void;
     setupMods(): Promise<void>;
     getSteamId(): ISteamId | undefined;
     getFriends(): ISteamFriend[] | undefined;
     getScreenName(): string | undefined;
     isDevelopmentBranch(): boolean;
-    getBuildTime(): number | undefined;
+    getBuild(): IBuild | undefined;
+    getBuildName(): string;
     getPublishedMods(): IWorkshopItem[] | undefined;
     getStatInt(name: string): number | undefined;
     incrementStat(name: string): void;

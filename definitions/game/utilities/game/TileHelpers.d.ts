@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Stream from "@wayward/goodstream/Stream";
 import { TileGroup } from "game/entity/creature/ICreature";
 import type Island from "game/island/Island";
 import type { IOverlayInfo, ITile } from "game/tile/ITerrain";
@@ -36,7 +37,7 @@ declare module TileHelpers {
      */
     function setGfxRaw(data: number, value: number): number;
     function getType(tile: ITile): TerrainType;
-    function getTypeRaw(data: number): TerrainType;
+    function getTypeRaw(data: number): number;
     /**
      * This should only be called if you know what you're doing
      * Use game.changeTile or game.removeTopTile when modifying tiles
@@ -89,10 +90,6 @@ declare module TileHelpers {
      */
     function isOpenTile(island: Island, point: IVector3, tile?: ITile): boolean;
     /**
-     * Refreshes the provided civ score for the given tile
-     */
-    function refreshCivilizationScore(island: Island, x: number, y: number, z: number): void;
-    /**
      * Check if a tile is a suitable spawn point
      */
     function isSuitableSpawnPointTile(island: Island, point: IVector3, tile: ITile): boolean;
@@ -100,8 +97,12 @@ declare module TileHelpers {
      * Check if a tile is a suitable spawn point
      */
     function isSuitableSpawnPointTileForMultiplayer(island: Island, point: IVector3, tile: ITile, disallowWater?: boolean): boolean;
+    /**
+     * Check if a tile is a suitable spawn point for a creature
+     */
+    function isSuitableSpawnPointTileForTamedCreature(island: Island, point: IVector3, tile: ITile): boolean;
     function getSuitableSpawnPoint(island: Island): IVector3;
-    function getPointsAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): IVector3[];
+    function getPointsAround(island: Island, point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): IVector3[];
     /**
      * Array version of TileHelpers.tilesAround
      */
@@ -110,19 +111,13 @@ declare module TileHelpers {
      * IterableIterator version of TileHelpers.getTilesAround
      */
     function tilesAround(island: Island, point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): Generator<ITile, void, unknown>;
-    function tilesInRange(island: Island, point: IVector3, range: number, includeCurrentTile?: boolean): import("@wayward/goodstream").default<[Vector3, ITile]>;
+    function tilesInRange(island: Island, point: IVector3, range: number, includeCurrentTile?: boolean): Stream<[Vector3, ITile]>;
     function openTileInRange(island: Island, point: IVector3, range: number, includeCurrentTile?: boolean): [Vector3, ITile] | undefined;
-    function forTilesInRange(point: IVector3, range: number, consumer: (vec: IVector3, tileValue: number) => any): void;
-    function forTilesInRange(point: IVector3, range: number, includeCenter: true, consumer: (vec: IVector3, tileValue: number) => any): void;
     /**
      * Check if the tile is blocked (impassable terrain or doodads that cause blocked movement).
      */
     function isTileBlocked(island: Island, point: IVector3): boolean;
-    /**
-     * Checks whether a player can dig at a certain location or not.
-     * @param tile of the ITile to check where to dig.
-     * @returns True if a player can dig the tile.
-     */
-    function canDig(tile: ITile): boolean;
+    function isAdjacent(point: IVector3, point2: IVector3): boolean;
+    function isAround(point: IVector3, point2: IVector3): boolean;
 }
 export default TileHelpers;

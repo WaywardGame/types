@@ -12,11 +12,13 @@ import type { IRefreshable } from "ui/component/Refreshable";
 import { Tab } from "ui/screen/screens/menu/component/Menu";
 export default class TabPerformance extends Tab implements IRefreshable {
     private readonly refreshables;
+    private readonly acrylicTransparency;
     constructor();
     refresh(): this;
     private addRefreshable;
     private onDisableUIEffects;
     private onDisableUIOpacity;
-    private onPowerPreferenceSelect;
-    private getPowerPreferenceDropdownData;
+    private onDisableAcrylicTransparency;
+    private onDisableOverlaySupport;
+    private onEnableLowPowerMode;
 }

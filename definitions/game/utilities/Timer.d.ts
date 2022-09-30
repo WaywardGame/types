@@ -13,6 +13,7 @@ import { ExpectedLifetime } from "utilities/memory/ILifetime";
 declare module Timer {
     function apply(): void;
     function printActiveTimers(expectedLifetime: ExpectedLifetime): void;
+    function clearAllTimers(): void;
     /**
      * Creates a timeout with the provided expected lifetime
      */

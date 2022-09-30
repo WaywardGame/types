@@ -10,25 +10,5 @@
  */
 export declare function Bound<T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;
 export declare function Final<T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;
-/**
- * Prevents the decorated method from being called at a high speed. Example:
- * 1. Method is called.
- * 2. `ms` amount of time is waited. If the method is called again in this time, cancel.
- * 3. Allow the method to be called again.
- *
- * WARNING: This also binds the method to the host, a la `@Bound`. Do not use both decorators.
- */
-/**
- * Prevents the decorated method from being called at a high speed. Example:
- * 1. Method is called.
- * 2. `ms` amount of time is waited. If the method is called again in this time, cancel.
- * 3. If the method was not called after `ms`, *actually* call the method.
- *
- * WARNING: This also binds the method to the host, a la `@Bound`. Do not use both decorators.
- * WARNING 2: Only the arguments of the last call are passed along!!
- */
-export declare function Debounce(time: number, initial?: boolean, returnIfCancelled?: (...args: any[]) => any): (target: any, key: any, descriptor: any) => {
-    configurable: boolean;
-    get(): any;
-    set(value: any): void;
-};
+export declare function Debounce<TARGET>(time: (target: TARGET) => number, initial?: boolean, returnIfCancelled?: (...args: any[]) => any): (target: TARGET, key: any, descriptor: any) => void;
+export declare function Debounce(time: number, initial?: boolean, returnIfCancelled?: (...args: any[]) => any): (target: any, key: any, descriptor: any) => void;

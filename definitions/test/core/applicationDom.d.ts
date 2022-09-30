@@ -11,6 +11,7 @@
 /// <reference types="webdriverio/async" />
 import type * as webdriverio from "webdriverio";
 import type ApplicationLogger from "./applicationLogger";
+export declare const defaultWaitTimeout: number;
 export default class ApplicationDom {
     private readonly browser;
     private readonly logger;
@@ -24,7 +25,7 @@ export default class ApplicationDom {
     getVisibleElements(selector: string): Promise<WebdriverIO.Element[] | undefined>;
     getVisibleAndClickableElement(selector: string): Promise<WebdriverIO.Element | undefined>;
     waitForVisibleThenClick(selector: string, timeout?: number, indent?: boolean, clickOnce?: boolean): Promise<void>;
-    waitForVisibleElements(selector: string, timeout?: number): Promise<WebdriverIO.Element[]>;
+    waitForVisibleElements(selector: string, timeout?: number, scrollIntoView?: boolean): Promise<WebdriverIO.Element[]>;
     waitForNotVisible(selector: string, timeout?: number): Promise<void>;
     waitUntil(executor: () => Promise<boolean>, options: webdriverio.WaitUntilOptions): Promise<true | void>;
 }

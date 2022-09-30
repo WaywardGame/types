@@ -11,12 +11,9 @@
 import type { Load } from "game/meta/Loading";
 import Loading from "game/meta/Loading";
 export default class LoadingBridge {
-    private readonly shown;
-    protected onLoadingStart(loading: Loading.Events, type: Load, ...args: any[]): Promise<void>;
+    private readonly queue;
+    protected onLoadingStart(loading: Loading.Events, load: Load, ...args: any[]): Promise<void>;
     protected onLoadingEndOrPromptResolved(): Promise<void>;
-    private showingLoad?;
     private showLoading;
-    private showLoadingInternal;
-    private hideLoadingInterrupt;
     protected onProgress(_: any, load: Load, progress: number): void;
 }

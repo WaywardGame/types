@@ -22,7 +22,8 @@ export declare enum DialogId {
     Quests = 8,
     Crafting = 9,
     Inspect = 10,
-    Islands = 11
+    Islands = 11,
+    Equipment = 12
 }
 export declare enum Edge {
     Top = 0,
@@ -41,9 +42,14 @@ export declare type IEdges = [
     ]
 ];
 export interface IDialogDescription<SQUARE = boolean> extends IModdable {
-    minSize: SQUARE extends true ? number : IVector2;
+    /**
+     * The minimum resolution of this dialog, in pixels.
+     */
+    minResolution: SQUARE extends true ? number : IVector2;
+    /**
+     * The default size of this dialog, in percentages. For square dialogs, this is the Y axis.
+     */
     size: SQUARE extends true ? number : IVector2;
-    maxSize: SQUARE extends true ? number : IVector2;
     edges: IEdges | "center";
     /**
      * Whether to save if the dialog is open. If this is false, the dialog will always be closed when a game loads. Defaults to true.

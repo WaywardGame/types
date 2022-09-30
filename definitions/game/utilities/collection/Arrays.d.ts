@@ -19,7 +19,7 @@ export declare module Tuple {
     export function filterNullish<I extends 0 | 1 | 2 | 3 | 4 | 5>(index: I): TupleNullishFilter<I>;
     export type TupleFalsyFilter<I extends 0 | 1 | 2 | 3 | 4 | 5> = TupleFilterNot<I, Falsy>;
     export function filterFalsy<I extends 0 | 1 | 2 | 3 | 4 | 5>(index: I): TupleFalsyFilter<I>;
-    export type TupleGetter<I extends 0 | 1 | 2 | 3 | 4 | 5> = <A extends any[]>(value: A) => A[I];
+    export type TupleGetter<I extends 0 | 1 | 2 | 3 | 4 | 5> = <A extends readonly any[]>(value: A) => A[I];
     export function getter<I extends 0 | 1 | 2 | 3 | 4 | 5>(index: I): TupleGetter<I>;
     export function filter<I extends 0 | 1 | 2 | 3 | 4 | 5, A extends any[], R extends A[I]>(index: I, predicate: (value: A[I], i: number) => value is R): (value: A) => value is Extract<[...Slice<A>[I], R, ...SliceAfter<A>[IAddOne[I]]], A>;
     export function filter<I extends 0 | 1 | 2 | 3 | 4 | 5, A extends any[]>(index: I, predicate: (value: A[I], i: number) => any): (value: A, i: number) => any;
@@ -72,6 +72,7 @@ declare module Arrays {
      * @param max A number, exclusive
      */
     function range(max: number): number[];
+    function equals<T>(array1: ArrayLike<T> | undefined, array2: ArrayLike<T> | undefined, valueEquals: (a: T, b: T) => any): boolean;
     /**
      * Note: This does not perform any deep checking
      */

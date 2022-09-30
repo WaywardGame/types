@@ -13,12 +13,13 @@ import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
+import type { TranslationGenerator } from "ui/component/IComponent";
 export default class StatInspection extends Inspection<Stat> {
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
     private readonly human?;
     constructor([, stat]: [any, Stat], context?: InfoProviderContext);
     getId(): string;
     getBorder(): string;
-    get(context: InfoProviderContext): (import("../../../language/impl/TranslationImpl").default | InfoProvider)[];
+    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getInfo;
 }

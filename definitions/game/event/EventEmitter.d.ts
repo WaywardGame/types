@@ -25,7 +25,7 @@ declare type Abstract<T> = Function & {
 declare type Constructor<T> = new (...args: any[]) => T;
 declare type ClassOrAbstractClass<T> = Abstract<T> | Constructor<T>;
 export interface IEventEmitterHost<E> {
-    event: IEventEmitter<this, E>;
+    event: IEventEmitter<this | null, E>;
 }
 export declare type IEventEmitterHostClass<E> = ClassOrAbstractClass<IEventEmitterHost<E>>;
 export declare type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends IEventEmitterHostClass<infer E> ? E : never;
@@ -57,7 +57,7 @@ export interface IEventEmitter<H = any, E = any> {
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
     hasHandlersForEvent(...events: Array<keyof E>): boolean;
 }
-interface IUntilSubscriber<H, E> {
+export interface IUntilSubscriber<H, E> {
     subscribe<K extends ArrayOr<keyof E>>(event: K, handler: IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): H;
 }
 interface IEventEmitterEvents<H, E> {
@@ -71,6 +71,7 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     private eventEmitterMeta?;
     get event(): IEventEmitter<this, IEventEmitterEvents<H, E>>;
     constructor(host: H);
+    raw(): IEventEmitter<H, E>;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     emitFirst<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): any;
     emitFirstDefault<K extends keyof E, D>(event: K, generateDefault: () => D, ...args: ArgsOf<E[K]>): any;

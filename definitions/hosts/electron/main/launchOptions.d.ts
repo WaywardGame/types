@@ -15,6 +15,7 @@ export interface ILaunchOptions {
     backgroundThrottling: boolean;
     borderless: boolean;
     colorProfile: string;
+    customTitleBar: boolean;
     devtools: boolean;
     disableDirectComposition: boolean;
     disableES3GLContext: boolean;
@@ -25,6 +26,7 @@ export interface ILaunchOptions {
     forceHighPerformanceGpu: boolean;
     forceInProcessGPU: boolean;
     forceWaveAudio: boolean;
+    forceOverlaySupport: boolean;
     fullscreen: boolean;
     height: "max" | number;
     ignoreGpuBlockList: boolean;
@@ -40,6 +42,5 @@ export interface ILaunchOptions {
     width: "max" | number;
     x: number | null;
     y: number | null;
-    zoomFactor: number;
 }
 export declare const launchOptionsDefault: ILaunchOptions;

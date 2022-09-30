@@ -29,10 +29,11 @@ export default abstract class GroupDropdown<ENUM_OBJECT, OTHER_OPTIONS extends s
     protected abstract getGroupName(group: GROUP): string;
     protected abstract isInGroup(option: ENUM_OBJECT[keyof ENUM_OBJECT], group: GROUP): boolean;
     protected shouldIncludeOtherOptionsInGroupFilter(): boolean;
-    protected isMouseWithin(): false | Component<HTMLElement>;
+    protected isMouseWithin(): Component<HTMLElement> | undefined;
     protected isSelectionWithin(selection?: Component): boolean;
     protected onOpen(): void;
     protected onClose(): void;
+    protected onRemove(): void;
     protected onFilterChange(): void;
     protected updateTooltip(): GroupDropdownTooltip;
     protected onRegenerateBox(): void;

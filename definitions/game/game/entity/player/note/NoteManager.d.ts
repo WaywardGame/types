@@ -28,6 +28,14 @@ export interface INote {
     args: any[];
     unread?: boolean;
 }
+export interface INoteManager {
+    readonly notes: INote[];
+    getNote(id: number): INote | undefined;
+    wasWritten(note: Note): boolean;
+    write(note: Note, ...args: any[]): void;
+    getUnread(): INote[];
+    markRead(noteId: number): void;
+}
 export interface INoteHost {
     getIsland(): Island;
     canWriteInHours(): boolean;
@@ -35,7 +43,15 @@ export interface INoteHost {
     onWriteNote(index: number, note: Note): any;
     onReadNote(index: number): any;
 }
-export default class NoteManager {
+export declare class NoteManagerNoOp implements INoteManager {
+    readonly notes: INote[];
+    getNote(id: number): INote | undefined;
+    wasWritten(note: Note): boolean;
+    write(note: Note, ...args: any[]): void;
+    getUnread(): INote[];
+    markRead(noteId: number): void;
+}
+export default class NoteManager implements INoteManager {
     private readonly host;
     private readonly _notes;
     constructor(host: INoteHost);

@@ -21,6 +21,7 @@ export interface IObject<T> {
     renamed?: string | ISerializedTranslation;
 }
 export interface IObjectDescription extends IHasImagePath {
+    storeDecay?: boolean;
     decayMax?: number;
     skillUse?: SkillType;
     weightCapacity?: number;
@@ -39,8 +40,8 @@ export interface IHasImagePath {
 }
 export interface IObjectOptions {
     decay?: number;
-    minDur?: number;
-    maxDur?: number;
+    durability?: number;
+    durabilityMax?: number;
     quality?: Quality;
 }
 export declare enum Quality {

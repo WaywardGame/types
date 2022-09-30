@@ -66,10 +66,8 @@ export declare class Tab<I extends string | number | undefined = string | number
     private _subtabs;
     get subtabs(): Tab<string | number | undefined>[];
     constructor(id: I);
-    setActive(active?: boolean): this;
-    setInactive(): this;
     private icon?;
-    setIcon(icon?: string): this;
+    setTabIcon(icon?: string): this;
     setSection(section: MenuSection): this;
     setSubTabs(...tabs: ArrayOfIterablesOr<Tab>): void;
 }

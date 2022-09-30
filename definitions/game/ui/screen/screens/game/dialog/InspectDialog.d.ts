@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Reference } from "game/reference/ReferenceManager";
+import type { Reference } from "game/reference/IReferenceManager";
 import Dialog from "ui/screen/screens/game/component/Dialog";
 import type InspectionsList from "ui/screen/screens/game/component/InspectionsList";
 import Vector3 from "utilities/math/Vector3";

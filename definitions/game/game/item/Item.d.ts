@@ -15,15 +15,16 @@ import type Creature from "game/entity/creature/Creature";
 import type { CreatureType } from "game/entity/creature/ICreature";
 import type Entity from "game/entity/Entity";
 import type Human from "game/entity/Human";
-import { DamageType, EntityType } from "game/entity/IEntity";
-import { EquipType, SkillType } from "game/entity/IHuman";
+import { AttackType, DamageType, EntityType } from "game/entity/IEntity";
+import type { EquipType } from "game/entity/IHuman";
+import { SkillType } from "game/entity/IHuman";
 import type Player from "game/entity/player/Player";
 import { CreationId } from "game/IGame";
 import type { IObject, IObjectOptions } from "game/IObject";
 import { Quality } from "game/IObject";
 import type { IslandId } from "game/island/IIsland";
-import type { ContainerReference, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemDisassembleResult, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions } from "game/item/IItem";
-import { ItemWeightChange, BookType, ItemType, SYMBOL_CONTAINER_CACHED_REFERENCE } from "game/item/IItem";
+import type { ContainerReference, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemDisassembleResult, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemTag } from "game/item/IItem";
+import { BookType, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "game/item/IItem";
 import type { IPlaceOnTileOptions } from "game/item/IItemManager";
 import ItemMapManager from "game/item/ItemMapManager";
 import type { IHasMagic, MagicalSubPropertySubTypes } from "game/magic/MagicalPropertyManager";
@@ -32,8 +33,10 @@ import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import type { IReferenceable } from "game/reference/IReferenceManager";
 import type { IHasInsulation, ITemperatureSource, TempType } from "game/temperature/ITemperature";
 import { FireStage } from "game/tile/events/IFire";
+import type { ITile } from "game/tile/ITerrain";
 import type { ISerializedTranslation } from "language/ITranslation";
 import type { IUnserializedCallback } from "save/serializer/ISerializer";
+import type { Direction } from "utilities/math/Direction";
 export interface IItemEvents {
     toggleProtected(isProtected: boolean): any;
     fireUpdate(stage?: FireStage): any;
@@ -44,42 +47,46 @@ export interface IItemEvents {
     remove(): any;
     movedIsland(islandId: IslandId, itemId: number): any;
     /**
-     * Called when the player quickslots an item
-     * @param player The player object
-     * @param quickSlot The quickslot number
-     */
-    quickslot?(player: Player, quickSlot: number | undefined): void;
-    /**
-     * Called when the player equips an item to a slot
-     * @param player The player object
+     * Called when the human equips an item to a slot
+     * @param human The human object
      * @param slot The slot
      */
-    equip?(player: Player, slot: EquipType): void;
+    equip(human: Human, slot: EquipType): any;
+    /**
+     * Called when the human unequip an item from a slot
+     * @param human The human object
+     * @param slot The slot
+     */
+    unequip(human: Human, slot: EquipType): any;
     /**
      * Called when an item is damaged
      * @param modifier The damage modifier
      * @returns The amount of damage the item shouldd take or undefined to use the default logic
      */
-    shouldDamage?(modifier?: number): number | false | undefined;
+    shouldDamage(modifier?: number): number | false | undefined;
+    qualityChange(quality: Quality, oldQuality: Quality): any;
+    durabilityChange(durability: number, oldDurability: number): any;
+    durabilityMaxChange(durabilityMax: number, oldDurabilityMax: number): any;
 }
 export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagic {
     readonly objectType = CreationId.Item;
+    private maxDur;
+    private minDur;
     book?: BookType;
     constructedFrom?: IConstructedInfo;
     containedItems: Item[] | undefined;
     containedWithin: IContainer | undefined;
     containsCreature: Creature;
+    crafterIdentifier?: string;
     decay?: number;
-    disassembly: Item[];
+    disassembly?: Item[];
     driverId?: number;
+    driverType?: EntityType;
     equippedId?: number;
     equippedType?: EntityType;
     fireStage?: FireStage;
     id: number;
     itemOrders?: number[];
-    maxDur: number;
-    minDur: number;
-    ownerIdentifier?: string;
     pid: number | null | undefined;
     protected?: boolean;
     quality: Quality | undefined;
@@ -89,24 +96,40 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     tradedFrom?: string[];
     type: ItemType;
     used?: IItemUsed;
+    vehicleFacingDirection?: Direction.Cardinal;
     weight: number;
     weightFraction?: number;
-    quickSlot: number[] | undefined;
+    private _tags?;
     magic: MagicalPropertyManager;
     map: ItemMapManager;
+    get tags(): Set<ItemTag>;
     islandId: IslandId;
     offsetX?: number;
     offsetY?: number;
     fromX?: number;
     fromY?: number;
     [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
-    private _movementFinishTime?;
+    private _movementTime?;
     private _movementOptions?;
     private _description;
-    private _minDur;
     constructor(itemType?: ItemType | undefined, islandId?: IslandId, quality?: Quality, human?: Human);
     get island(): import("../island/Island").default;
     toString(): string;
+    get durability(): number;
+    set durability(value: number);
+    get durabilityMax(): number;
+    set durabilityMax(value: number);
+    isContainer(): this is Item & IContainer;
+    /**
+     * Gets the owner of this item.
+     * This will be the human who crafted it.
+     * Note: The owner might be different than the human whose inventory the item is currently in
+     */
+    getOwner(): Player | undefined;
+    /**
+     * Gets the current human that has the item in their inventory
+     */
+    getCurrentOwner(): Human | undefined;
     /**
      * Sets the item as magical with a chance based on quality (and clears any existing magical properties)
      * @param bonus The number that chances get multiplied by, for example, 2 or 3
@@ -118,6 +141,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @deprecated This method currently shouldn't be used in production code, as it's to do with the new crafting system. Stay tuned.
      */
     getWeight(): number;
+    getWeaponWeight(): number;
     /**
      * @param article Whether to include an article for the name of the item. Uses the article rules on the language. Defaults to `true`.
      * @param count The number of this item that you're getting the name of. Defaults to `1`.
@@ -131,17 +155,30 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * - `item.getName(false)` // "stone axe"
      * - `item.getName(undefined, 3)` // "stone axes"
      */
-    getName(article?: boolean, count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showMagicalType?: boolean): import("../../language/impl/TranslationImpl").default;
+    getName(article?: false | "definite" | "indefinite", count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showMagicalType?: boolean): import("../../language/impl/TranslationImpl").default;
     description(): IItemDescription | undefined;
     isTransient(): boolean;
     isValid(): boolean;
     isProtected(): boolean;
-    getDecayAtStart(): number;
+    isInGroup(itemGroup: ItemTypeGroup): boolean;
+    getDriver(): Human | undefined;
     /**
-     * Returns the maximum decay of an item, or undefined if the item does not have the decayMax property.
+     * Gets the item's damage modifier which certain special items have so they can have high durability for use, but normal damage ranges.
+     */
+    getDamageModifier(): number;
+    isDamaged(): boolean;
+    getDamagedThreshold(): number;
+    isDecayed(): boolean;
+    getDecayedThreshold(): number;
+    getDecayAtStart(): number;
+    getVisualDurability(): number;
+    getVisualDecay(): number;
+    private getVisualBarValue;
+    /**
+     * Returns the maximum decay of an item, or undefined if the item does not have the decayMax or storeDecay property.
      * @returns A number or undefined.
      */
-    canDecay(): number | undefined;
+    canDecay(): 1 | undefined;
     getDecayRate(isClientSide: boolean): number;
     getPreservationDecayMultiplier(): number;
     getTemperatureDecayMultiplier(isClientSide: boolean): number;
@@ -160,18 +197,10 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @param min The minimum durability that this item should have remaining. Defaults to n/a
      */
     damage(source: string, modifier?: number, min?: number): void;
-    /**
-     * Gets the item's damage modifier which certain special items have so they can have high durability for use, but normal damage ranges.
-     */
-    getDamageModifier(): number;
-    isDamaged(): boolean;
     isInTradeContainer(): boolean;
-    isEquipped(): boolean;
-    getEquippedPlayer(): Human | undefined;
-    getEquipSlot(): EquipType | undefined;
-    setQuickSlot(player: Player, quickSlot: number, removeQuickSlot?: boolean): void;
-    clearQuickSlot(): void;
-    isDecayed(): boolean;
+    getEquippedHuman(): Human | undefined;
+    isEquipped(includeDisabled?: true): boolean;
+    getEquipSlot(includeDisabled?: true): EquipType | undefined;
     changeInto(type: ItemType, disableNotify?: boolean, emitTransformation?: boolean): void;
     /**
      * Verifies an item has a proper weight combined with its magical item weight (featherweight) property and changes it if not.
@@ -187,7 +216,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     setUsed(itemUse?: IItemUsed, human?: Human): void;
     createOnBreak(x: number, y: number, z: number): void;
     spawnOnDecay(): Creature | undefined;
-    spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: Player): Creature | undefined;
+    spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: Human): Creature | undefined;
     getPoint(): import("../../utilities/math/Vector3").default | undefined;
     dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
     placeOnTile(x: number, y: number, z: number, options?: IPlaceOnTileOptions): boolean;
@@ -205,6 +234,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getStokeFireValue(): number | undefined;
     getStokeFireBonusValue(): number;
     getOnUseBonus(): number;
+    getAttackDamage(type: AttackType.MeleeWeapon | AttackType.RangedWeapon): number;
     /**
      * Gets the worth of an item used for merchant trading. Does not consider batering or modifiers bonuses; use Item.getTraderSellPrice for that.
      * @param human The human that is trading the item for its worth (used for durability calculations).
@@ -221,6 +251,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getBaseDefense(): number;
     getDurabilityCharge(): number;
     revertFromDoodad(doodad: Doodad): void;
+    getWeightCapacity(): number | undefined;
     /**
      * Returns the container weight reduction
      * @param targetContainer Container to calculate the weight reduction for
@@ -259,7 +290,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @returns A number (possibly 0 if no quality or action level).
      */
     getItemUseBonus(action: ActionType): number;
-    getRangedWeapon(human: Human): Item | boolean;
+    getBestRangedWeapon(human: Human): Item | undefined;
     /**
      * Extinguishes to item if it is lit.
      * @param human Human entity that is carrying the item to extinguish.
@@ -284,8 +315,14 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      */
     willBreakOnDamage(actionType?: ActionType): boolean;
     onUnserialized(): void;
-    private setupDurabilityHandlers;
+    /**
+     * Gets civilization score based on item's quality and type (if it can be build/set down) but without the magical property values.
+     * @param actionType Either Build or SetDown as they are the only types that can use civilization score.
+     * @returns number of score (or 0 if no civilization score is set).
+     */
+    getCivilizationScore(actionType: ActionType.Build | ActionType.SetDown): number;
+    getVehicle(): import("game/item/IItem").IItemVehicle | undefined;
+    isVehicleAllowedOnTile(tile: ITile): boolean;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;
-    private getOwner;
 }

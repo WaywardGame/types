@@ -15,10 +15,8 @@ import Menu from "ui/screen/screens/menu/component/Menu";
 export default class JoinServerMenu extends Menu {
     static show(screen: Screen, serverToJoin: ServerInfo, server?: IServer): void;
     private readonly serverInput;
-    private readonly joinButton;
     constructor();
     protected onShow(): void;
     private onInputEnter;
-    private onInputChange;
     private getServerToJoin;
 }

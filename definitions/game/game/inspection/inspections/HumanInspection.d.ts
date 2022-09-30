@@ -13,8 +13,9 @@ import type { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import EntityInspection from "game/inspection/inspections/EntityInspection";
+import type { TranslationGenerator } from "ui/component/IComponent";
 export default abstract class HumanInspection<H extends Human> extends EntityInspection<H> {
     constructor(inspectType: InspectType, human: H);
-    get(context: InfoProviderContext): InfoProvider[];
+    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     isImportant(): boolean;
 }

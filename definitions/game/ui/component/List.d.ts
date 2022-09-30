@@ -12,7 +12,7 @@ import Component from "ui/component/Component";
 import Text from "ui/component/Text";
 declare class List extends Component {
     constructor();
-    addListItem(initializer: (listItemComponent: Component) => any): this;
+    addListItems(...initializers: Array<(listItemComponent: Component) => any>): this;
 }
 declare module List {
     class Item extends Text {

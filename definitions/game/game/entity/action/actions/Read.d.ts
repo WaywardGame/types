@@ -9,6 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../player/Player").default | import("../../npc/NPC").default, void, [import("../../../item/Item").default]>;
+import { BookType } from "game/item/IItem";
+import type Item from "game/item/Item";
+import type TranslationImpl from "language/impl/TranslationImpl";
+export interface IReadCanUse extends IActionUsable {
+    book: BookType;
+    basicBookName: TranslationImpl;
+}
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default, void, IReadCanUse, [Item]>;
 export default _default;

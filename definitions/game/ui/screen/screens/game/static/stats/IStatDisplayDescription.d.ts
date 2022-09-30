@@ -10,7 +10,7 @@
  */
 import type Entity from "game/entity/Entity";
 import type { IStat, StatDisplayType } from "game/entity/IStats";
-import type { Reference } from "game/reference/ReferenceManager";
+import type { Reference } from "game/reference/IReferenceManager";
 import type { IModdable } from "mod/ModRegistry";
 import type Component from "ui/component/Component";
 import type Tooltip from "ui/tooltip/Tooltip";
@@ -56,5 +56,6 @@ export interface IStatDisplayDescription extends IModdable {
      * A function that will initialize a tooltip for this stat element, or a reference to show a tooltip for
      */
     tooltip: Reference | ((tooltip: Tooltip, entity: Entity, stat: IStat) => any);
+    subscribeCalculateEquipmentStats?: true;
 }
 export declare const STAT_DEFAULT_DISPLAY_ORDER = 100;

@@ -18,7 +18,8 @@ export default class ItemUses extends Uses<Item> {
     protected getDescription(type: ItemType): IItemDescription;
     protected getUses(description: IItemDescription): ActionType[];
     protected getUseInfoHandlers(): (import("../UseInfo").default<{
-        doodadDescription: import("../../../doodad/IDoodad").IDoodadDescription;
+        doodadContainer: import("../../../doodad/IDoodad").IDoodadDescription | undefined;
+        civilizationScore: number | undefined;
         objectType: CreationId.Item;
         value?: Item | undefined;
         type: ItemType;
@@ -37,6 +38,8 @@ export default class ItemUses extends Uses<Item> {
         getInsulation: () => (import("../LabelledValue").default | undefined)[];
     } & {
         getPreservationChance: () => import("../LabelledValue").default | undefined;
+    } & {
+        getCivilizationScore: () => import("../LabelledValue").default | undefined;
     }, Item> | import("../UseInfo").default<{
         onConsume: number | import("game/item/IItem").ConsumeItemStatsTuple;
         skill: import("../../../entity/IHuman").SkillType | undefined;
@@ -97,6 +100,14 @@ export default class ItemUses extends Uses<Item> {
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Equip>;
         details: Set<symbol>;
     }, ActionType.Equip, {
+        getMagicalEquipTypes: () => Set<import("../../../magic/MagicalPropertyType").MagicalPropertyType>;
+    } & {
+        getMagicalPropertyLabels: () => Map<import("../../../magic/MagicalPropertyType").MagicalPropertyType, import("../../../../language/dictionary/UiTranslation").default>;
+    } & {
+        isMagicalPropertyPercentage: (property: import("../../../magic/MagicalPropertyType").MagicalPropertyType) => boolean;
+    } & {
+        isMagicalPropertyPercentagePremultiplied: (property: import("../../../magic/MagicalPropertyType").MagicalPropertyType) => boolean;
+    } & {
         getAttack: () => import("../MagicalPropertyValue").default | undefined;
     } & {
         getDefense: () => (import("../../../../language/impl/TranslationImpl").default | import("../MagicalPropertyValue").default)[];
@@ -130,6 +141,21 @@ export default class ItemUses extends Uses<Item> {
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Cast | ActionType.Fire>;
         details: Set<symbol>;
     }, ActionType.Cast | ActionType.Fire, {}, Item> | import("../UseInfo").default<{
+        civilizationScore: number | undefined;
+        growingSpeed: number | undefined;
+        objectType: CreationId.Item;
+        value?: Item | undefined;
+        type: ItemType;
+        description: IItemDescription;
+        quality: import("../../../IObject").Quality;
+        action: ActionType.SetDown;
+        union: import("../UseInfo").IUseInfoBase<Item, ActionType.SetDown>;
+        details: Set<symbol>;
+    }, ActionType.SetDown, {
+        getCivilizationScore: () => import("../LabelledValue").default | undefined;
+    } & {
+        getGrowingSpeed: () => import("../LabelledValue").default | undefined;
+    }, Item> | import("../UseInfo").default<{
         attack: number;
         objectType: CreationId.Item;
         value?: Item | undefined;

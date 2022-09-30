@@ -21,6 +21,7 @@ export declare class RangeInput extends Component<HTMLInputElement> implements I
     private refreshMethod;
     private clampOnRefresh;
     private _value;
+    private emit;
     get value(): number;
     set value(val: number);
     get min(): number;
@@ -34,7 +35,7 @@ export declare class RangeInput extends Component<HTMLInputElement> implements I
     setMax(max: number, clamp?: boolean): this;
     setMin(min: number, clamp?: boolean): this;
     update(eventTrigger?: keyof IRangeInputEvents): void;
-    refresh(): this;
+    refresh(emit?: boolean): this;
     setRefreshMethod(refresh: () => number): this;
     noClampOnRefresh(): this;
     setDisabled(disabled?: boolean): this;

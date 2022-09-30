@@ -26,7 +26,6 @@ export default class LoadGameMenu extends Menu {
     protected onSteamworksHide(): Promise<void>;
     protected goBackFrom(): void;
     protected preShow(): Promise<void>;
-    private shouldShowLoadingAnimation;
     private refresh;
     protected onSaveImport(handler: SaveDropHandler, result: ISaveImportSuccess): void;
     protected onSaveImportComplete(): Promise<void>;

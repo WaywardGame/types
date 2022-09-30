@@ -9,7 +9,17 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import { RestType } from "game/entity/IHuman";
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Doodad, ActionArgument.Undefined], [ActionArgument.RestType, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../player/Player").default, void, [(import("../../../item/Item").default | undefined)?, (import("../../../doodad/Doodad").default | undefined)?, (RestType | undefined)?, (boolean | undefined)?]>;
+import type { IStatChanging, IStatMax } from "game/entity/IStats";
+import type { ITerrainDescription, TerrainType } from "game/tile/ITerrain";
+export interface IRestCanUse extends IActionUsable {
+    restType: RestType;
+    stamina: IStatMax & IStatChanging;
+    underPlayer: boolean;
+    tileDescription?: ITerrainDescription;
+    tileType: TerrainType;
+}
+declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Undefined], [ActionArgument.RestType, ActionArgument.Undefined]], import("../../Human").default, void, IRestCanUse, [(import("../../../item/Item").default | import("../../../doodad/Doodad").default | undefined)?, (RestType | undefined)?]>;
 export default _default;

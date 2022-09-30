@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
-import type Player from "game/entity/player/Player";
+import type Human from "game/entity/Human";
 import Component from "ui/component/Component";
 import { Quadrant } from "ui/screen/screens/game/component/IQuadrantComponent";
 import QuadrantComponent from "ui/screen/screens/game/component/QuadrantComponent";
@@ -18,7 +18,7 @@ export default class StatsQuadrant extends QuadrantComponent {
     get preferredQuadrant(): Quadrant;
     private readonly stats;
     constructor();
-    setPlayer(player: Player): this;
+    setPlayer(human: Human): this;
 }
 export interface IStatsEvents extends Events<Component> {
     update(): any;
@@ -26,9 +26,9 @@ export interface IStatsEvents extends Events<Component> {
 export declare class Stats extends Component {
     private readonly noEvents?;
     readonly event: IEventEmitter<this, IStatsEvents>;
-    private player;
-    constructor(player?: Player, noEvents?: true | undefined);
-    setPlayer(player: Player): this;
+    private human;
+    constructor(human?: Human, noEvents?: true | undefined);
+    setHuman(human: Human): this;
     private refresh;
     /**
      * Returns an object containing iterables for all stats that exist on the player and have a description,

@@ -9,50 +9,35 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "game/doodad/Doodad";
-import Corpse from "game/entity/creature/corpse/Corpse";
+import { ActionType } from "game/entity/action/IAction";
 import Creature from "game/entity/creature/Creature";
 import { SkillType } from "game/entity/IHuman";
 import { Stat } from "game/entity/IStats";
-import NPC from "game/entity/npc/NPC";
 import Player from "game/entity/player/Player";
+import type Inspection from "game/inspection/Inspection";
 import Island from "game/island/Island";
 import { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import { Milestone } from "game/milestones/IMilestone";
-import { ReferenceType } from "game/reference/IReferenceManager";
-import TileEvent from "game/tile/TileEvent";
-export declare type Reference = [number, ReferenceType?];
-declare const enumRefTypes: Set<ReferenceType.Skill | ReferenceType.Milestone | ReferenceType.Recipe | ReferenceType.ItemType | ReferenceType.Dismantle | ReferenceType.Stat>;
-export declare type EnumReferenceTypes = (typeof enumRefTypes) extends Set<infer R> ? R : never;
-export declare type ReferenceableReferenceTypes = Exclude<ReferenceType, EnumReferenceTypes>;
-interface IReferenceTypeMap {
-    [ReferenceType.Item]: Item;
-    [ReferenceType.Creature]: Creature;
-    [ReferenceType.Doodad]: Doodad;
-    [ReferenceType.NPC]: NPC;
-    [ReferenceType.Player]: Player;
-    [ReferenceType.TileEvent]: TileEvent;
-    [ReferenceType.Island]: Island;
-    [ReferenceType.Corpse]: Corpse;
-    [ReferenceType.Skill]: [ReferenceType.Skill, SkillType];
-    [ReferenceType.Milestone]: [ReferenceType.Milestone, Milestone];
-    [ReferenceType.Recipe]: [ReferenceType.Recipe, ItemType];
-    [ReferenceType.ItemType]: [ReferenceType.ItemType, ItemType];
-    [ReferenceType.Dismantle]: [ReferenceType.Dismantle, ItemType];
-    [ReferenceType.Stat]: [ReferenceType.Stat, Stat];
-}
-export declare type Referenceable = IReferenceTypeMap[ReferenceableReferenceTypes];
+import type { EnumReferenceTypes, IReferenceTypeMap, Referenceable } from "game/reference/IReferenceManager";
+import { Reference, ReferenceType } from "game/reference/IReferenceManager";
+import ReferenceTooltipHandler from "ui/screen/screens/game/ReferenceTooltipHandler";
+import type Tooltip from "ui/tooltip/Tooltip";
 export default class ReferenceManager {
     static isEnumReference(type: ReferenceType): type is EnumReferenceTypes;
-    static getList(type: ReferenceType, gameIsland?: Island): import("../entity/creature/corpse/CorpseManager").default | import("../entity/creature/CreatureManager").default | import("../doodad/DoodadManager").default | import("../item/ItemManager").default | import("../entity/npc/NPCManager").default | import("../tile/TileEventManager").default | Player[] | readonly Milestone[] | readonly SkillType[] | readonly ItemType[] | readonly Stat[] | IterableIterator<Island>;
+    static getList(type: ReferenceType, gameIsland?: Island): readonly Milestone[] | readonly SkillType[] | import("../item/ItemManager").default | import("../entity/creature/corpse/CorpseManager").default | import("../entity/creature/CreatureManager").default | import("../doodad/DoodadManager").default | import("../entity/npc/NPCManager").default | import("../tile/TileEventManager").default | (Player | undefined)[] | readonly ItemType[] | import("game/entity/IHuman").EquipType[] | IterableIterator<Island> | readonly Stat[] | (string | ActionType)[];
+    static get(thing: Referenceable): Reference | undefined;
+    static getReferenceType(thing: Value<IReferenceTypeMap>): ReferenceType;
     private referenceCursor;
     create(): number;
+    get(thing: Item): Reference<ReferenceType.Item> | undefined;
+    get(thing: Doodad): Reference<ReferenceType.Doodad> | undefined;
+    get(thing: Creature): Reference<ReferenceType.Creature> | undefined;
     get(thing: Referenceable): Reference | undefined;
-    resolve(id: number): IReferenceTypeMap[ReferenceType] | undefined;
-    resolve<R extends ReferenceType>(id: number, type: R): IReferenceTypeMap[R] | undefined;
-    resolve(id: number, type?: ReferenceType): IReferenceTypeMap[ReferenceType] | undefined;
-    inspect(id: number, type?: ReferenceType, ...args: any[]): import("../inspection/Inspection").default<any> | undefined;
-    tooltip(id: number, type?: ReferenceType): (tooltip: import("../../ui/tooltip/Tooltip").default) => Promise<void>;
     getReferenceType(thing: Value<IReferenceTypeMap>): ReferenceType;
+    resolve<REFTYPE extends ReferenceType>(reference?: Reference<REFTYPE>): IReferenceTypeMap[REFTYPE] | undefined;
+    resolve(reference?: Reference): IReferenceTypeMap[ReferenceType] | undefined;
+    inspect<REFTYPE extends ReferenceType>(reference: Reference<REFTYPE>, ...args: any[]): Inspection<any> | undefined;
+    inspect(reference: Reference, ...args: any[]): Inspection<any> | undefined;
+    tooltip(reference: Reference, initializer?: (tooltip: Tooltip, handler: ReferenceTooltipHandler) => any): (tooltip: Tooltip) => Promise<void>;
 }
-export {};

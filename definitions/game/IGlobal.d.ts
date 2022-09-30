@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import "@cplusplus/index";
+import "@hosts/shared/globalTypes";
 import "@wayward/goodstream/apply";
 import type WAudio from "audio/Audio";
 import type CommandManager from "command/CommandManager";
@@ -22,6 +23,7 @@ import type ModManager from "mod/ModManager";
 import type { IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
 import type Multiplayer from "multiplayer/Multiplayer";
 import type Renderer from "renderer/Renderer";
+import type Renderers from "renderer/Renderers";
 import type SaveData from "save/data/SaveData";
 import type SaveDataGlobal from "save/data/SaveDataGlobal";
 import type SaveManager from "save/SaveManager";
@@ -40,7 +42,6 @@ import "utilities/typesglobal/Iterables";
 import "utilities/typesglobal/Misc";
 import "utilities/typesglobal/Objects";
 import "utilities/typesglobal/Types";
-import "@hosts/shared/globalTypes";
 declare global {
     let absentPlayers: Player[];
     let audio: WAudio | undefined;
@@ -54,8 +55,9 @@ declare global {
     let multiplayerNetworkingOptions: IMultiplayerNetworkingOptions;
     let oldui: OldUi;
     let playerManager: PlayerManager;
-    let players: Player[];
+    let players: Array<Player | undefined>;
     let renderer: Renderer | undefined;
+    let renderers: Renderers;
     let saveData: SaveData;
     let saveDataGlobal: SaveDataGlobal;
     let saveManager: SaveManager;
@@ -67,7 +69,11 @@ declare global {
     const gameVersionMinor: number;
     const gameVersionPatch: number;
     const gameVersionName: string;
+    const gameVersionTitleMajor: string;
+    const gameVersionTitleMinor: string;
+    const gameVersionTitle: string;
     const isNodeJs: boolean;
+    const isWebWorker: boolean;
     const overlayWorks: boolean | undefined;
     let webGlVersion: number;
     const VIEWPORT_MIN_WIDTH: number;

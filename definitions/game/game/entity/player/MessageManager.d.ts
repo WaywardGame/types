@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Stream from "@wayward/goodstream/Stream";
-import type { IMessage, IMessageHistoryItem, IMessageManager } from "game/entity/player/IMessageManager";
+import type Human from "game/entity/Human";
+import type { IMessage, IMessageHistoryItem, IMessageManager, IPackedMessage } from "game/entity/player/IMessageManager";
 import { MessageType, Source } from "game/entity/player/IMessageManager";
 import type Player from "game/entity/player/Player";
 import type Island from "game/island/Island";
@@ -17,13 +18,20 @@ import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import type { IVector4 } from "utilities/math/Vector4";
 export declare class MessageManagerNoOp implements IMessageManager {
-    saveNoProperties: undefined;
+    private readonly history;
     getMessageHistory(): Stream<IMessage>;
     clear(): this;
     source(): this;
     type(): this;
     ifVisible(): this;
+    ifOnIsland(island: Island): this;
+    ifIs(player: Player): this;
+    ifIsNot(player: Player): this;
     send(): boolean;
+    sendPacked(): boolean;
+    sentToAll(sentToAll?: boolean): this;
+    pruneMessageHistory(): boolean;
+    addToHistory(messageHistoryItem: IMessageHistoryItem): void;
 }
 export interface IMessageManagerOptions {
     shouldDisplayMessage(message: IMessage, id: number): boolean | undefined;
@@ -48,7 +56,7 @@ export default class MessageManager implements IMessageManager {
      * Note: When this is called from a client, it actually only displays the message to the client and syncs that with the server.
      * When called from the server, it is sent to every client.
      */
-    static toAll(callback: (manager: MessageManager, player: Player) => boolean): boolean;
+    static toAll(callback: (manager: IMessageManager, player: Player) => boolean): boolean;
     private readonly history;
     private lastMessageId;
     private _source;
@@ -94,11 +102,11 @@ export default class MessageManager implements IMessageManager {
     /**
      * If this human is not the given player, the message won't be sent.
      */
-    ifIs(player: Player): this;
+    ifIs(human: Human): this;
     /**
      * If this human is the given player, the message won't be sent.
      */
-    ifIsNot(player: Player): this;
+    ifIsNot(human: Human): this;
     /**
      * Sends a message, and adds it to the message history.
      * @param message The message to send.
@@ -107,6 +115,7 @@ export default class MessageManager implements IMessageManager {
      * Note: After sending a message, the message source, type, and human (if any) are reset.
      */
     send(message: Message | Translation, ...args: any[]): boolean;
+    sendPacked(pack: Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
     addToHistory(messageHistoryItem: IMessageHistoryItem): void;
     /**
      * Signal that the message was sent to everyone

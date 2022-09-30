@@ -10,11 +10,11 @@
  */
 import { SkillType } from "game/entity/IHuman";
 import { InspectType } from "game/inspection/IInspection";
+import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import SkillBonusMagicalItemsInfoProvider from "game/inspection/infoProviders/skill/MagicalItemBonuses";
-import UnlockableRowInfoProvider from "game/inspection/infoProviders/UnlockableRowInfoProvider";
 import Inspection from "game/inspection/Inspection";
 import Message from "language/dictionary/Message";
+import type { TranslationGenerator } from "ui/component/IComponent";
 export default class SkillInspection extends Inspection<SkillType> {
     static getSkillAttributeMessage(skill: SkillType): Message.Dexterity | Message.Metabolism | Message.Strength | undefined;
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
@@ -22,7 +22,7 @@ export default class SkillInspection extends Inspection<SkillType> {
     constructor([, skill]: [any, SkillType], context?: InfoProviderContext);
     getId(): string;
     getBorder(): string;
-    get(context: InfoProviderContext): (0 | import("../../../language/impl/TranslationImpl").default | import("game/inspection/InfoProvider").SimpleInfoProvider | UnlockableRowInfoProvider | SkillBonusMagicalItemsInfoProvider)[];
+    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getCurrentValue;
     private getDescription;
     private getReputationImpact;

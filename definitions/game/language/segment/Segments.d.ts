@@ -33,7 +33,9 @@ export declare enum Segment {
     NumberAsWords = 20,
     NumberDifference = 21,
     NumberToPercent = 22,
-    NumberToPlaces = 23
+    NumberToPlaces = 23,
+    FalsyCoalescing = 24,
+    Class = 25
 }
 declare const segments: Record<Segment, ISegment>;
 export default segments;

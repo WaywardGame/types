@@ -10,6 +10,8 @@
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { Quality } from "game/IObject";
+import { PathType } from "resource/IResourceLoader";
+import ImagePath from "ui/util/ImagePath";
 export default class QualityInfoProvider extends InfoProvider {
     private readonly quality;
     static getFireStageTranslation(decay?: number): import("../../../language/impl/TranslationImpl").default | undefined;
@@ -19,7 +21,7 @@ export default class QualityInfoProvider extends InfoProvider {
     constructor(quality: Quality);
     getClass(): string[];
     getIcon(): {
-        path: string;
+        path: ImagePath<PathType.Quality>;
         width: number;
         height: number;
     };

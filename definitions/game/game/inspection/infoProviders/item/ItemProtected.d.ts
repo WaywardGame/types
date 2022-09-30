@@ -10,6 +10,8 @@
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type Item from "game/item/Item";
+import { PathType } from "resource/IResourceLoader";
+import ImagePath from "ui/util/ImagePath";
 export default class ItemProtectedInfoProvider extends InfoProvider {
     private readonly item;
     private itemProtected;
@@ -17,7 +19,7 @@ export default class ItemProtectedInfoProvider extends InfoProvider {
     constructor(item: Item);
     getClass(): string[];
     getIcon(): {
-        path: string;
+        path: ImagePath<PathType.InfoIcon>;
         width: number;
         height: number;
     };

@@ -11,13 +11,12 @@
 export declare enum MapSprite {
     Obfuscation = 0,
     Background = 1,
-    BackgroundTattered = 2,
-    EdgeMask = 3,
-    FogOfWar = 4,
-    InnerFogOfWar = 5,
-    O = 6,
-    X = 7,
-    TravelDots = 8
+    EdgeMask = 2,
+    FogOfWar = 3,
+    InnerFogOfWar = 4,
+    O = 5,
+    X = 6,
+    TravelDots = 7
 }
 export declare const DRAWN_MAP_BACKGROUND_PADDING = 16;
 export declare enum DrawnMapTheme {

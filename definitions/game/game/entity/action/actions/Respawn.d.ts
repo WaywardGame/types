@@ -9,5 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
-declare const _default: Action<[], import("../../player/Player").default, void, []>;
+import type { IActionUsable } from "game/entity/action/IAction";
+export interface IRespawnCanUse extends IActionUsable {
+    rerunInitialPlayerSetup?: boolean;
+    isNotMultiplayer?: boolean;
+}
+declare const _default: Action<[], import("../../player/Player").default, void, IRespawnCanUse, []>;
 export default _default;

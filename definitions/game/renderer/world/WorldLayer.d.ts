@@ -42,7 +42,11 @@ export default class WorldLayer {
     isDoodadAnimationDisabled(terrain: TerrainData): boolean;
     setTile(x: number, y: number, terrainType: TerrainType, terrainMasks?: TerrainMask): void;
     updateAll(): void;
-    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean, updateNeighbors?: boolean, flushImmediate?: boolean, recentlyUpdatedTiles?: Set<string>, debug?: boolean): void;
+    /**
+     * Updates the rendered tile.
+     * All neighbors are updated by default, but the neighbor tile update is only done when updateNeighbors is true
+     */
+    updateTile(x: number, y: number, tile: ITile, shouldUpdate: boolean, updateNeighbors: boolean, flushImmediate: boolean, isUpdatingNeighbors?: boolean, debug?: boolean): void;
     getTileUpdate(x: number, y: number, tile?: ITile): ITileUpdate;
     private setTileInternal;
     /**

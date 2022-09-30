@@ -15,6 +15,7 @@ import type Input from "ui/component/Input";
 import type { MenuId } from "ui/screen/screens/menu/component/IMenu";
 import type Menu from "ui/screen/screens/menu/component/Menu";
 import type InterruptMenu from "ui/screen/screens/menu/menus/InterruptMenu";
+import type ResolvablePromise from "utilities/promise/ResolvablePromise";
 export default class InterruptFactory {
     private readonly interrupt?;
     private title;
@@ -36,7 +37,7 @@ export default class InterruptFactory {
     withInfo(): Promise<void>;
     withInput(input?: (input: Input) => any): Promise<string>;
     withMenu<M extends Menu = Menu>(menuId: MenuId, initializer?: (menu: M) => any): Promise<void>;
-    withLoading(until?: Promise<any> | (() => Promise<any>), canCancel?: boolean | (NullaryFunction), specialType?: string, choices?: InterruptChoice[]): Promise<InterruptChoice | undefined>;
+    withLoading(until?: Promise<any> | (() => Promise<any>), canCancel?: boolean | (NullaryFunction), specialType?: string, choices?: InterruptChoice[], cancelPromise?: ResolvablePromise): Promise<InterruptChoice | undefined>;
     private execute;
     private warnIfNeverShown;
 }

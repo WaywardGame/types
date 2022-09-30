@@ -10,6 +10,7 @@
  */
 import { MenuId } from "ui/screen/screens/menu/component/IMenu";
 import type Menu from "ui/screen/screens/menu/component/Menu";
+import BindingsMenu from "ui/screen/screens/menu/menus/BindingsMenu";
 import CharacterSelectionMenu from "ui/screen/screens/menu/menus/CharacterSelectionMenu";
 import GameEndMenu from "ui/screen/screens/menu/menus/GameEndMenu";
 import HelpMenu from "ui/screen/screens/menu/menus/HelpMenu";
@@ -26,21 +27,22 @@ import NewGameMenu from "ui/screen/screens/menu/menus/NewGameMenu";
 import OptionsMenu from "ui/screen/screens/menu/menus/OptionsMenu";
 import PauseMenu from "ui/screen/screens/menu/menus/PauseMenu";
 declare const menuMap: {
-    0: typeof ChangelogMenu;
-    1: typeof CharacterSelectionMenu;
-    2: typeof GameEndMenu;
-    3: typeof HelpMenu;
-    4: typeof HighscoresMenu;
-    5: typeof InterruptMenu;
-    6: typeof JoinServerMenu;
-    7: typeof JoinServerChooseModifiersMenu;
-    8: typeof LoadGameMenu;
-    9: typeof MainMenu;
-    10: typeof ModsMenu;
-    11: typeof MultiplayerMenu;
-    12: typeof NewGameMenu;
-    13: typeof OptionsMenu;
-    14: typeof PauseMenu;
+    0: typeof BindingsMenu;
+    1: typeof ChangelogMenu;
+    2: typeof CharacterSelectionMenu;
+    3: typeof GameEndMenu;
+    4: typeof HelpMenu;
+    5: typeof HighscoresMenu;
+    6: typeof InterruptMenu;
+    7: typeof JoinServerMenu;
+    8: typeof JoinServerChooseModifiersMenu;
+    9: typeof LoadGameMenu;
+    10: typeof MainMenu;
+    11: typeof ModsMenu;
+    12: typeof MultiplayerMenu;
+    13: typeof NewGameMenu;
+    14: typeof OptionsMenu;
+    15: typeof PauseMenu;
 };
 export declare type MenuById = {
     [ID in keyof typeof menuMap]: (typeof menuMap)[ID] extends new () => infer MENU ? MENU : never;

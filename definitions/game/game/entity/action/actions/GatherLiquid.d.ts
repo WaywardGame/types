@@ -8,7 +8,51 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Doodad from "game/doodad/Doodad";
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../player/Player").default | import("../../npc/NPC").default, void, [import("../../../item/Item").default]>;
+import type Creature from "game/entity/creature/Creature";
+import type { IWell } from "game/island/IIsland";
+import type { ILiquidGather } from "game/item/IItem";
+import type { ITerrainDescription } from "game/tile/ITerrain";
+import { TerrainType } from "game/tile/ITerrain";
+export interface IGatherLiquidFromWispCanUse extends IActionUsable {
+    type: "wisp";
+    liquidGather: ILiquidGather;
+    wisp: Creature;
+}
+export interface IGatherLiquidFromGoatCanUse extends IActionUsable {
+    type: "goat";
+    liquidGather: ILiquidGather;
+    goat: Creature;
+    x: number;
+    y: number;
+    z: number;
+}
+export interface IGatherLiquidFromWaterStillCanUse extends IActionUsable {
+    type: "waterStill";
+    liquidGather: ILiquidGather;
+    terrainDescription: ITerrainDescription;
+    fromWaterStill: Doodad;
+}
+export interface IGatherLiquidFromWellCanUse extends IActionUsable {
+    type: "well";
+    liquidGather: ILiquidGather;
+    terrainDescription: ITerrainDescription;
+    fromWell: Doodad;
+    fromWellData: IWell;
+}
+export interface IGatherLiquidFromLiquidCanUse extends IActionUsable {
+    type: "liquid";
+    liquidGather: ILiquidGather;
+    terrainDescription: ITerrainDescription;
+    liquidGatherType: keyof ILiquidGather;
+    tileType: TerrainType;
+    x: number;
+    y: number;
+    z: number;
+}
+export declare type IGatherLiquidCanUse = IGatherLiquidFromWispCanUse | IGatherLiquidFromGoatCanUse | IGatherLiquidFromWaterStillCanUse | IGatherLiquidFromWellCanUse | IGatherLiquidFromLiquidCanUse;
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default, void, IGatherLiquidCanUse, [import("../../../item/Item").default]>;
 export default _default;

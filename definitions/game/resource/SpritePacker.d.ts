@@ -10,26 +10,13 @@
  */
 import type ISpriteInfo from "renderer/ISpriteInfo";
 import type ResourceLoader from "resource/ResourceLoader";
-import type { SpritePack } from "resource/SpritePack";
 import Vector2 from "utilities/math/Vector2";
-interface ISpriteImage {
-    width?: number;
-    height?: number;
-    imageOrBuffer?: HTMLImageElement | ArrayBuffer;
-    src: string;
-    padding: number;
-    animated?: boolean;
-    callback(si: ISpriteInfo, spriteImage?: ISpriteImage): void;
-}
 export default class SpritePacker {
     private readonly resourceLoader;
-    private readonly spritePack;
     private readonly gl;
     readonly size: number;
-    private readonly nullSprite;
-    private readonly padding;
+    private readonly addNullSprite;
     private readonly packLargeToSmall;
-    private static readonly cachedImages;
     readonly texture: WebGLTexture;
     readonly inverseTextureSize: Vector2;
     private readonly rootNode;
@@ -37,14 +24,14 @@ export default class SpritePacker {
     private readonly sprites;
     private readonly loadedSprites;
     private loadPromise;
-    constructor(resourceLoader: ResourceLoader, spritePack: SpritePack, gl: WebGL2RenderingContext, size: number, nullSprite: boolean, padding: number, packLargeToSmall?: boolean);
+    constructor(resourceLoader: ResourceLoader, gl: WebGL2RenderingContext, size: number, addNullSprite: boolean, packLargeToSmall?: boolean);
     delete(): void;
+    get loadedSpriteCount(): number;
     load(): Promise<boolean>;
-    addSprite(src: string, callback: (si: ISpriteInfo, spriteImage?: ISpriteImage) => void): void;
+    addSprite(src: string, frontPack?: boolean): Promise<ISpriteInfo>;
     private loadSprite;
     private spriteLoaded;
     private complete;
     private pack;
     private packSprite;
 }
-export {};

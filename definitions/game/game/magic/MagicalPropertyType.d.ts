@@ -10,6 +10,8 @@
  */
 import { SkillType } from "game/entity/IHuman";
 import { Stat } from "game/entity/IStats";
+import type { IItemDescription, IMagicalPropertyInfo } from "game/item/IItem";
+import type Item from "game/item/Item";
 export declare enum MagicalPropertyType {
     Attack = 0,
     Defense = 1,
@@ -46,13 +48,34 @@ export declare enum MagicalPropertyType {
     /**
      * Has a chance to regenerate durability every turn.
      */
-    ItemRegeneration = 23
+    ItemRegeneration = 23,
+    /**
+     * Adds a bonus to the item's civilization score value.
+     */
+    CivilizationBonus = 24,
+    /**
+     * Adds a bonus to the growth speed for plants and mushrooms planted on it.
+     */
+    GrowingSpeed = 25
 }
-/**
- * A map of magical property types that contain sub-properties to the corresponding sub property enum
- */
-export declare const magicalPropertyTypeSubTypeMap: {
-    6: typeof SkillType;
-    5: typeof Stat;
-    7: typeof Stat;
-};
+export interface IMagicalPropertyDescription {
+    /**
+     * Whether this magical property is applicable for the given item.
+     */
+    isApplicable(item: Item, description: IItemDescription): boolean;
+    /**
+     * Generates the magical property value when added.
+     */
+    getInfo(item: Item, description: IItemDescription): IMagicalPropertyInfo | undefined;
+    /**
+     * By default, all magical property types can be inscribed. This allows disabling that feature for this magical property type.
+     */
+    disableInscription?: true;
+    subTypeEnum?: any;
+}
+export interface MagicalPropertyTypeSubTypeMap {
+    [MagicalPropertyType.Stat]: Stat;
+    [MagicalPropertyType.Skill]: SkillType;
+    [MagicalPropertyType.Reputation]: Stat;
+}
+export declare const magicalPropertyDescriptions: PartialRecord<MagicalPropertyType, IMagicalPropertyDescription>;

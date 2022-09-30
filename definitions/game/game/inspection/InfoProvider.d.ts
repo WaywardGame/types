@@ -16,6 +16,8 @@ import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IRefreshable } from "ui/component/Refreshable";
 import Text from "ui/component/Text";
+import type { ISerializedImagePath } from "ui/util/ImagePath";
+import ImagePath from "ui/util/ImagePath";
 export interface IInfoProviderEvents {
     /**
      * Should be emitted when the info provider is starting to initialize its component.
@@ -55,17 +57,23 @@ export interface IInfoProviderEvents {
     recheckHasContent(): any;
 }
 export interface IIcon {
-    path: string;
+    path: string | ImagePath | ISerializedImagePath;
     width: number;
     height: number;
+    imageWidth?: number;
+    imageHeight?: number;
     scale?: number;
 }
+export interface ISerializedIcon extends IIcon {
+    path: string | ISerializedImagePath;
+}
 export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProviderEvents> implements IRefreshable {
+    private static uniqueInitializationId;
     static create(...translations: TranslationGenerator[]): SimpleInfoProvider;
     static of(...classes: string[]): SimpleInfoProvider;
-    static title(...translations: TranslationGenerator[]): SimpleInfoProvider;
-    static description(...translations: TranslationGenerator[]): SimpleInfoProvider;
-    static list(...translations: TranslationGenerator[]): SimpleInfoProvider;
+    static title(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
+    static description(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
+    static list(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
     static ofComponent(componentSupplier: () => Component): InfoProvider;
     private displayLevel?;
     protected component?: Component;
@@ -113,6 +121,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
      * Call when this info provider should be removed.
      */
     remove(): this;
+    onStoppingPlay(): void;
     initComponent(context: InfoProviderContext, component?: Component<HTMLElement>, partial?: boolean, data?: {
         lastInfoSleep: number;
     }): {
@@ -126,8 +135,9 @@ export declare class SimpleInfoProvider extends InfoProvider {
     private readonly contents;
     private childComponentClass;
     constructor(...translations: Array<TranslationGenerator | InfoProvider>);
-    get(): (import("../../language/ITranslation").ISerializedTranslation | import("../../language/impl/TranslationImpl").default | import("../../language/dictionary/UiTranslation").default | (() => import("../../language/ITranslation").ISerializedTranslation | import("../../language/impl/TranslationImpl").default | import("../../language/dictionary/UiTranslation").default | Iterable<import("../../utilities/string/Interpolator").IStringSection> | undefined) | InfoProvider)[];
+    get(): (import("../../language/dictionary/UiTranslation").default | import("../../language/impl/TranslationImpl").default | InfoProvider | import("../../language/ITranslation").ISerializedTranslation | (() => import("../../language/dictionary/UiTranslation").default | import("../../language/impl/TranslationImpl").default | import("../../language/ITranslation").ISerializedTranslation | Iterable<import("../../utilities/string/Interpolator").IStringSection> | undefined))[];
     add(...translations: Array<TranslationGenerator | InfoProvider | Falsy>): this;
+    onlyIfHasContents(): this | undefined;
     addInfoGetter(provider: () => InfoProvider | undefined): this;
     getClass(): string[];
     addClasses(...classes: string[]): this;

@@ -10,28 +10,32 @@
  */
 /// <reference types="webdriverio/async" />
 import type { Stat } from "../../game/game/entity/IStats";
+import type { IslandId } from "../../game/game/island/IIsland";
 import { Direction } from "../../game/utilities/math/Direction";
 import type { Random, SeededGenerator } from "../../game/utilities/random/Random";
-import type { IDedicatedServerGameOptions, IJoinServerOptions, INewGameOptions } from "../interfaces";
-import type { IslandId } from "../../game/game/island/IIsland";
+import type { IDedicatedServerGameOptions, IJoinServerOptions, INewGameOptions, IWaitUntilGameLoadedOptions } from "../interfaces";
 import ApplicationDom from "./applicationDom";
 import ApplicationLogger from "./applicationLogger";
 export default class ApplicationInteractions {
+    readonly appId: string;
     readonly random: Random<SeededGenerator>;
     readonly logger: ApplicationLogger;
     dom: ApplicationDom;
     protected browser: WebdriverIO.Browser;
     readonly isDedicatedServer: boolean;
+    userDataDirectory: string;
+    readonly screenshots: string[];
+    private returnToTitleScreenCount;
     private readonly savedStates;
-    constructor(additionalArgs: string[], random: Random<SeededGenerator>);
+    constructor(appId: string, additionalArgs: string[], random: Random<SeededGenerator>);
     waitForInitialStartup(expectedInitialScreen: "title" | "mp_gameplay_modifiers"): Promise<void>;
-    waitUntilLoadingIsFinished(expectedMultiplayerMenu?: boolean): Promise<void>;
+    waitUntilLoadingIsFinished(options?: Partial<IWaitUntilGameLoadedOptions>): Promise<void>;
     playDedicatedServer(options: IDedicatedServerGameOptions): Promise<void>;
     playNewGame(options: INewGameOptions): Promise<void>;
     private setupCommonOptions;
     unlockMilestoneModifiers(): Promise<void>;
     playImportedGame(savePath: string): Promise<void>;
-    playContinueGame(): Promise<void>;
+    playContinueGame(options?: Partial<IWaitUntilGameLoadedOptions>): Promise<void>;
     quitGame(): Promise<void>;
     clickOptions(): Promise<void>;
     clickNewGame(): Promise<void>;
@@ -55,7 +59,7 @@ export default class ApplicationInteractions {
     clickButtonIfClickable(name: string): Promise<boolean>;
     setNewGameSeed(seed: string | number): Promise<void>;
     setMultiplayerIdentifier(identifier: string): Promise<void>;
-    rightClickItemId(itemId: number): Promise<void>;
+    runItemAction(itemId: number, action: string): Promise<void>;
     importGame(savePath: string): Promise<void>;
     /**
      * Executes a Move action
@@ -64,6 +68,7 @@ export default class ApplicationInteractions {
      * @param verifyMovement True to verify the players position changed. Don't use this if the player is moving into the edge
      */
     moveInDirection(direction: Direction.Cardinal, steps?: number, verifyMovement?: boolean): Promise<void>;
+    setSail(): Promise<void>;
     waitForGameEndScreen(isWinner: boolean): Promise<void>;
     returnToTitleScreen(): Promise<void>;
     getServerGameCode(): Promise<string>;
@@ -76,10 +81,7 @@ export default class ApplicationInteractions {
     saveStateAndVerifyWithPrevious(): Promise<void>;
     clearSavedStates(): void;
     waitUntilPauseMenuIsShown(): Promise<void>;
-    waitUntilGameIsLoaded(options?: Partial<{
-        isJoiningServer: boolean;
-        isCreatingServer: boolean;
-    }>): Promise<void>;
+    waitUntilGameIsLoaded(options?: Partial<IWaitUntilGameLoadedOptions>): Promise<void>;
     isTitleScreenVisible(): Promise<WebdriverIO.Element[] | undefined>;
     isButtonVisible(text: string): Promise<WebdriverIO.Element[] | undefined>;
     isOverlayVisible(): Promise<WebdriverIO.Element[] | undefined>;
@@ -92,4 +94,5 @@ export default class ApplicationInteractions {
     increaseStat(stat: Stat, value: number): Promise<void>;
     randomInput(count: number): Promise<void>;
     pressKey(key: string, modifier?: string): Promise<void>;
+    protected screenshot(suffix: string): Promise<void>;
 }

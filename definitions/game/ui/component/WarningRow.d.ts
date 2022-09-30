@@ -9,13 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Block } from "ui/component/Block";
-import Component from "ui/component/Component";
 import type { IRefreshable } from "ui/component/Refreshable";
-import { Heading, Paragraph } from "ui/component/Text";
-export default class WarningRow extends Component implements IRefreshable {
-    readonly block: Block;
-    readonly blockTextWrapper: Component<HTMLElement>;
-    readonly title: Heading;
+import type { Heading } from "ui/component/Text";
+import { Paragraph } from "ui/component/Text";
+export default class WarningRow extends Block implements IRefreshable {
     readonly description: Paragraph;
     constructor();
     setTitle(headingInitializer: (heading: Heading) => any): this;

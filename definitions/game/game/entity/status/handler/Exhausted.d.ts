@@ -10,7 +10,7 @@
  */
 import { ExhaustionLevel } from "game/entity/status/handler/IExhausted";
 import StatusEffect, { StatusEffectBadness } from "game/entity/status/StatusEffect";
-import type { IHighlight } from "ui/component/IComponent";
+import type { IHighlight } from "ui/util/IHighlight";
 export default class Exhausted extends StatusEffect {
     register(): void;
     getLevel(): ExhaustionLevel;

@@ -10,7 +10,7 @@
  */
 import type IMapGen from "game/mapgen/IMapGen";
 import type { IMapGenOptions } from "game/mapgen/IMapGen";
-export default class MapGen2100 implements IMapGen {
+export default class MapGen2110 implements IMapGen {
     generateWorld({ island, generateNewWorld, biomeType, mapGenVersion, load, loadArgs }: IMapGenOptions): void;
     private setupTiles;
 }

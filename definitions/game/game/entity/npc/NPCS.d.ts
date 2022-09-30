@@ -15,4 +15,4 @@ import Registrar from "utilities/Registrar";
 export interface INPCClass extends IRegistrarItem {
     new (id?: number, islandId?: IslandId, x?: number, y?: number, z?: number): NPC;
 }
-export declare const registrar: Registrar<INPCClass>;
+export declare const npcRegistrar: Registrar<INPCClass>;

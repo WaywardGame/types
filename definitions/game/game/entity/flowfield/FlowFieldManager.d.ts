@@ -10,20 +10,25 @@
  */
 import FlowField from "game/entity/flowfield/FlowField";
 import type { DebugRendererDelegate } from "game/entity/flowfield/IFlowFieldDebugRenderer";
-import { MoveType } from "game/entity/IEntity";
+import type Human from "game/entity/Human";
+import { EntityType, MoveType } from "game/entity/IEntity";
 import type Player from "game/entity/player/Player";
 import type Island from "game/island/Island";
 import { Direction } from "utilities/math/Direction";
 import type { IVector3 } from "utilities/math/IVector";
+interface IFlowFieldHuman {
+    type: EntityType;
+    id: number;
+}
 export default class FlowFieldManager {
     private readonly island;
     private readonly size;
     delegate: DebugRendererDelegate;
     flowFields: Record<string, FlowField>;
-    playerIds: number[];
-    private _flowFieldPlayers;
+    humans: IFlowFieldHuman[];
+    private _flowFieldHumans;
     constructor(island: Island, size: number);
-    private get flowFieldPlayers();
+    private get flowFieldHumans();
     load(): void;
     unload(): void;
     /**
@@ -36,14 +41,15 @@ export default class FlowFieldManager {
     getWidth(): number;
     getHeight(): number;
     isInFlowField(point: IVector3): boolean;
-    isPlayerInFlowField(player: Player): boolean;
+    isHumanInFlowField(human: Human): boolean;
     getMoveDirection(x: number, y: number, z: number, moveType: MoveType): Direction;
     getOpposingMoveDirection(x: number, y: number, z: number, moveType: MoveType): Direction;
     updateTile(tileX: number, tileY: number, tileZ: number): void;
-    setPlayers(flowFieldPlayers: Player[]): void;
+    setPlayers(flowFieldHumans: Human[]): void;
     update(): void;
     reset(): void;
     private getDirection;
     private getFlowField;
     private getFlowFields;
 }
+export {};

@@ -18,7 +18,8 @@ export declare enum LabelledValueDisplayMode {
     "label: value" = 0,
     "label (value)" = 1,
     "value label" = 2,
-    "label value" = 3
+    "value (label)" = 3,
+    "label value" = 4
 }
 export default class LabelledValue extends InfoProvider {
     private readonly label;
@@ -36,7 +37,7 @@ export default class LabelledValue extends InfoProvider {
     getClass(): string[];
     addClasses(...classes: string[]): this;
     private getLabel;
-    get(): (import("../../../language/impl/TranslationImpl").default | UiTranslation | InfoProvider)[];
+    get(): (UiTranslation | import("../../../language/impl/TranslationImpl").default | InfoProvider)[];
     protected initChildTextComponent(text: TranslationGenerator): Text;
     setDisplayMode(mode: keyof typeof LabelledValueDisplayMode): this;
     setDisplayMode(mode: keyof typeof LabelledValueDisplayMode): this;

@@ -26,5 +26,6 @@ export default class Rectangle implements IBox {
     get right(): number;
     get bottom(): number;
     constructor(position: Vector2, size: Vector2);
+    getCenter(): Vector2;
     intersects(rect2: Rectangle): boolean;
 }

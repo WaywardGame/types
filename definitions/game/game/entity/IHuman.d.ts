@@ -11,23 +11,42 @@
 import type { Events } from "event/EventEmitter";
 import type Doodad from "game/doodad/Doodad";
 import type { ActionType } from "game/entity/action/IAction";
+import type { IDamageInfo } from "game/entity/creature/ICreature";
 import type Entity from "game/entity/Entity";
 import type Human from "game/entity/Human";
 import type { AttackType } from "game/entity/IEntity";
-import type { WeightStatus } from "game/entity/player/IPlayer";
+import type { ILoadOnIslandOptions, IMovementIntent, WeightStatus } from "game/entity/player/IPlayer";
 import type { ISkillEvents } from "game/entity/skill/SkillManager";
 import type { IHasImagePath, Quality } from "game/IObject";
-import type { IContainer, ItemType } from "game/item/IItem";
-import { RecipeLevel } from "game/item/IItem";
+import type { IslandId } from "game/island/IIsland";
+import type Island from "game/island/Island";
+import type { IContainer } from "game/item/IItem";
+import { ItemType, ItemTypeGroup, RecipeLevel } from "game/item/IItem";
 import type Item from "game/item/Item";
 import { TempType } from "game/temperature/ITemperature";
 import type { ITile } from "game/tile/ITerrain";
+import Message from "language/dictionary/Message";
 import type { IModdable } from "mod/ModRegistry";
+import type { IOptions } from "save/data/ISaveDataGlobal";
 import type { IRGB } from "utilities/Color";
 import type { Direction } from "utilities/math/Direction";
 import type { IVector2 } from "utilities/math/IVector";
 import type { IRange } from "utilities/math/Range";
 export interface IHumanEvents extends Events<Entity>, ISkillEvents {
+    /**
+     * Called when the human is spawned. (At the end of `Player.setup` / `NPC.spawn`)
+     */
+    spawn(): any;
+    /**
+     * Called when the player starts resting
+     * @param restData The data related to the rest event
+     */
+    restStart(restData: IRestData): any;
+    /**
+     * Called when the player stops resting
+     * @param restData The data related to the rest event
+     */
+    restEnd(restData: IRestData): any;
     /**
      * Called when an item is added to the player's inventory
      * @param item The item object
@@ -47,6 +66,24 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      * @param previousContainer The container object the item was moved from. This container might be inventory or a container within the inventory.
      */
     inventoryItemUpdate(item: Item, container: IContainer, previousContainer?: IContainer): any;
+    /**
+     * Called when the human equips an item to a slot
+     * @param item The item being equipped
+     * @param slot The slot
+     */
+    equip?(item: Item, slot: EquipType): any;
+    /**
+     * Called when the human fails to equip an item to a slot
+     * @param item The item being equipped
+     * @param slot The slot
+     */
+    equipFailed?(item: Item, slot: EquipType): any;
+    /**
+     * Called when the human unequips an item from a slot
+     * @param item The item being unequipped
+     * @param slot The slot it was equipped in
+     */
+    unequip?(item: Item, slot: EquipType): any;
     /**
      * Called when the human faces a different direction
      * @param direction The direction the player is now facing
@@ -77,16 +114,49 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
     canAttack(weapon: Item | undefined, attackType: AttackType): boolean | undefined;
     calculateEquipmentStats(): any;
     /**
+     * Called when getting the player's maximum health
+     * @param maxHealth The current max health of the player (after any other previous mods)
+     */
+    getMaxHealth(maxHealth: number): number;
+    /**
+     * Called when the players weight is being updated
+     * @param newWeight The new weight of the player
+     * @returns A number to set the player weight to or undefined to use the default logic
+     */
+    updateWeight(newWeight: number): number | undefined;
+    /**
+     * Called when getting the players weight or stamina movement penalty
+     * @returns The weight/stamina movement penalty for the player or undefined to use the default logic
+     */
+    getWeightOrStaminaMovementPenalty(): number | undefined;
+    /**
      * Called when getting the players weight status
      * @returns The weight status of the player or undefined to use the default logic
      */
     getWeightStatus(): WeightStatus | undefined;
     /**
-     * Called when checking if a human is swimming
-     * @param isSwimming True if the human is swimming
-     * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
+     * Called when getting the player's maximum weight
+     * @param maxWeight The current max weight of the player (after any other previous mods)
      */
-    isSwimming(isSwimming: boolean): boolean | undefined;
+    getMaxWeight(maxWeight: number): number;
+    /**
+     * Called when input is being processed on the server
+     * @param player The player object
+     * @returns False to prevent input processing or undefined to use the default logic
+     */
+    processInput(): false | undefined;
+    /**
+     * Called when movement is attempted on the server
+     * @param player The player object
+     * @param direction The direction to move
+     * @returns False to prevent movement or undefined to use the default logic
+     */
+    canMove(direction: Direction.Cardinal): false | undefined;
+    /**
+     * Called when getting the players movement intent
+     * @returns The movement intent of the player or undefined to use the default logic
+     */
+    getMovementIntent(): IMovementIntent | undefined;
     /**
      * Called when the walk path of the player changes.
      */
@@ -95,6 +165,14 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      * Called when the human changes their layer (z position)
      */
     changeZ(z: number, oldZ: number): any;
+    /**
+     * Called when the player completes a movement
+     */
+    moveComplete(): any;
+    /**
+     * Called when no input is received
+     */
+    noInput(): any;
     /**
      * Called when a book is opened by a player
      * @param book The book that was opened
@@ -107,6 +185,71 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      * @param doodad The doodad that was created on the tile
      */
     build?(item: Item, tile: ITile, doodad: Doodad): void;
+    /**
+     * Called when the human is damaged
+     * @param damageInfo The damage info object
+     * @returns The amount of damage the player should take (the player will take this damage)
+     */
+    damage(damageInfo: IDamageInfo): number | void;
+    /**
+     * Called when the player tick starts
+     */
+    tickStart(): any;
+    /**
+     * Called when the player tick ends
+     */
+    tickEnd(): any;
+    /**
+     * Called when a turn is starting
+     */
+    turnStart(): any;
+    /**
+     * Called when a turn is ending
+     */
+    turnEnd(): any;
+    /**
+     * Called when checking if a human is swimming
+     * @param isSwimming True if the human is swimming
+     * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
+     */
+    isSwimming(isSwimming: boolean): boolean | undefined;
+    /**
+     * @param key The key of `IOptions` that was changed on this player
+     * @param value The value this key was set to
+     */
+    updateOption<O extends keyof IOptions>(key: O, value: IOptions[O]): any;
+    /**
+     * Used for registering events
+     * This may be called more than once on the same player
+     */
+    reregister(): any;
+    /**
+     * Used for deregistering events
+     */
+    deregister(): any;
+    /**
+     * Called when the human is moving to another island
+     * @param oldIsland The humans old island
+     * @param newIslandId The humans new island
+     */
+    preMoveToIsland(oldIsland: Island, newIslandId: IslandId): any;
+    /**
+     * Called when the human is moving to another island
+     * @param oldIsland The humans old island
+     * @param newIsland The humans new island
+     */
+    moveToIsland(oldIsland: Island, newIsland: Island): any;
+    /**
+     * Called when the human is loaded onto an island
+     * @param options Load island options
+     */
+    loadedOnIsland(island: Island, options?: Partial<ILoadOnIslandOptions>): any;
+    /**
+     * Called when the human will be killed. If any handlers return `false` to stop the human from dying,
+     * no further handlers will be called.
+     * @return `false` to stop the human from dying
+     */
+    shouldDie(): false | void;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;
@@ -139,14 +282,17 @@ export declare enum EquipType {
     Legs = 2,
     Chest = 3,
     Head = 4,
-    Belt = 5,
+    Waist = 5,
     Feet = 6,
     Neck = 7,
     Hands = 8,
     Back = 9,
-    LeftHand = 10,
-    RightHand = 11
+    MainHand = 10,
+    OffHand = 11
 }
+export declare const EQUIP_SLOTS: EquipType[];
+export declare const EQUIP_SLOTS_FREE: EquipType[];
+export declare const EQUIP_SLOT_ITEM_GROUPS: Record<EquipType, ItemTypeGroup | undefined>;
 export declare const equipmentRenderOrder: EquipType[];
 export declare type InsulationWeight = number | [number, "onlyWhenEquipped"];
 export declare const equipSlotInsulationWeights: Record<TempType, Record<EquipType, InsulationWeight>>;
@@ -196,8 +342,10 @@ export declare enum RestCancelReason {
     NearbyCreatureDamagedDoodad = 3,
     CreatureDamaged = 4,
     Canceled = 5,
-    Dying = 6
+    Dying = 6,
+    WaterPoured = 7
 }
+export declare const restCancelReasonMessageMap: Record<RestCancelReason, Message | undefined>;
 export interface IRestData {
     type: RestType;
     startHealth: number;
@@ -205,7 +353,7 @@ export interface IRestData {
     itemId?: number;
     doodadId?: number;
     cycle?: number;
-    cancelReason?: RestCancelReason;
+    cancelReason?: Set<RestCancelReason>;
 }
 export declare enum RestType {
     Resting = 0,
@@ -242,7 +390,9 @@ export declare enum SkillType {
     Taming = 27,
     Gardening = 28,
     Bartering = 29,
-    Seafaring = 30
+    Seafaring = 30,
+    Thaumaturgy = 31,
+    DualWielding = 32
 }
 export interface ICrafted {
     unlockTime: number;
@@ -251,7 +401,7 @@ export interface ICrafted {
 export interface ICheckUnderOptions {
     autoActions?: boolean;
     enterCave?: boolean;
-    forcePickup?: boolean;
+    forcePickUp?: boolean;
     skipDoodadEvents?: boolean;
     burned?: boolean;
 }
@@ -268,3 +418,98 @@ export interface IHumanOld extends Partial<Human> {
  * Defaults to 90% (0.9)
  */
 export declare const WEIGHT_ENCUMBERED = 0.9;
+export interface ICanSailAwayResult {
+    canSailAway: boolean;
+    distanceFromEdge?: number;
+    blockedTilesChecked?: Set<ITile>;
+}
+export interface IVoyageInfo {
+    time: number;
+    boat?: Item;
+    destination?: Island;
+    usedItems?: Item[];
+    wantedItems?: ItemType[];
+}
+export declare enum MovingClientSide {
+    /**
+     * NoInput = Idle
+     */
+    NoInput = 0,
+    /**
+     * Is actively moving
+     */
+    Moving = 1,
+    /**
+     * Just completed their movement.
+     * They might be about to move again.
+     */
+    Moved = 2,
+    /**
+     * The game registered the end of the movement.
+     * It's about to check if it will move again or finish (state change into Moving or NoInput)
+     */
+    PreNoInput = 3
+}
+/**
+ * The swimming skill required to travel to another island
+ *
+ * **NOTE:** If you change this number, make sure to also rebalance `PLAYER_TRAVEL_SWIM_STAMINA_STAT_REDUCTION`,
+ * as the amount of stamina used is based around swimming only first being available at 80% skill
+ */
+export declare const ISLAND_TRAVEL_SWIMMING_SKILL_THRESHOLD = 80;
+/**
+ *
+ */
+export declare const ISLAND_TRAVEL_STAMINA_THRESHOLD = 0.6;
+/**
+ * 100 ticks of travel time @ base
+ */
+export declare const DEFAULT_ISLAND_TRAVEL_TIME_BASE = 100;
+/**
+ * A multiplier for how much travel time is added by the distance travelled, variable based on the player's seafaring skill.
+ */
+export declare const DEFAULT_ISLAND_TRAVEL_TIME_MULTIPLIER: IRange;
+/**
+ * The amount of travel time it takes to travel to civilisation
+ */
+export declare const DEFAULT_TRAVEL_TIME_CIVILIZATION = 2000;
+/**
+ * 0 == no reduction, higher is more. The travel time is divided by `Math.log(skill) * multiplier + 1`
+ */
+export declare const ISLAND_TRAVEL_TIME_SEAFARING_SKILL_REDUCTION_MULTIPLIER = 0.3;
+/**
+ * Metabolic stat loss is `travelTime * this multiplier`
+ */
+export declare const PLAYER_TRAVEL_METABOLIC_STAT_REDUCTION_MULTIPLIER = 0.2;
+/**
+ * Stamina loss is `this reduction / Math.log2(boat tier)`
+ */
+export declare const PLAYER_TRAVEL_BOAT_STAMINA_STAT_REDUCTION = 40;
+/**
+ * Stat loss is `this reduction / Math.log2(boat tier)`
+ */
+export declare const PLAYER_TRAVEL_CIVILIZATION_STAT_REDUCTION = 5;
+/**
+ * Stamina loss is `lerp(this range, skill percentage)`
+ * This works out to:
+ * - 80% skill (required for swimming to another island) = ~108 stamina lost
+ * - 100% skill = 60 stamina lost
+ * - 125% skill = 0 stamina lost
+ */
+export declare const PLAYER_TRAVEL_SWIM_STAMINA_STAT_REDUCTION: IRange;
+/**
+ * The minimum remaining stamina the player should have after swimming
+ */
+export declare const PLAYER_TRAVEL_SWIM_STAMINA_STAT_MIN = 10;
+/**
+ * A multiplier for travel time when the player is swimming
+ */
+export declare const PLAYER_TRAVEL_TIME_SWIMMING_MULTIPLIER = 2;
+/**
+ * A multiplier for travel time when the player is using an item
+ */
+export declare const PLAYER_TRAVEL_TIME_REDUCTION_ITEM_MULTIPLIER = 0.75;
+/**
+ * A list of items that reduce the travel time, when in the player's inventory
+ */
+export declare const PLAYER_TRAVEL_TIME_REDUCTION_ITEMS: ItemType[];

@@ -15,7 +15,7 @@ import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 export default class HarvestabilityInfoProvider extends InfoProvider {
     private readonly doodad;
     static get(doodad: Doodad): false | HarvestabilityInfoProvider | undefined;
-    private message;
+    private harvestMessage;
     private constructor();
     getClass(): string[];
     getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel;

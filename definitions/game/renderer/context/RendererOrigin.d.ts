@@ -10,6 +10,7 @@
  */
 import type Entity from "game/entity/Entity";
 import type Human from "game/entity/Human";
+import { MovingClientSide } from "game/entity/IHuman";
 import type Player from "game/entity/player/Player";
 import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
@@ -25,7 +26,7 @@ export interface IRendererOrigin {
     readonly z: number;
     readonly fromX: number;
     readonly fromY: number;
-    readonly isMovingClientside: boolean;
+    readonly movingClientside: MovingClientSide;
     readonly asEntity: Entity | undefined;
     readonly asPlayer: Player | undefined;
     readonly asHuman: Human | undefined;
@@ -45,7 +46,7 @@ export declare class RendererOrigin implements IRendererOrigin {
     static fromVector(island: Island, vector: IVector3): IRendererOrigin;
     readonly fromX: number;
     readonly fromY: number;
-    readonly isMovingClientside: boolean;
+    readonly movingClientside: MovingClientSide;
     readonly asEntity: Entity | undefined;
     readonly asPlayer: Player | undefined;
     readonly asHuman: Human | undefined;

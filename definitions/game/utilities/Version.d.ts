@@ -29,9 +29,10 @@ declare module Version {
      * to see if a save or mod was created/edited after a specific thing was implemented.
      */
     function isAtLeast(version: IVersionInfo | string, atLeast: IVersionInfo | string): boolean;
-    function create(stage: "beta" | "release", major: number, minor: number, patch?: number): IVersionInfo;
+    function create(stage: "beta" | "release", major: number, minor: number, patch?: number, date?: Date): IVersionInfo;
     function getVersionInfo(version: string): IVersionInfo;
     function isSameVersion(version: IVersionInfo, compareVersion: IVersionInfo): boolean;
-    function getVersionDisplayString(version?: string | IVersionInfo): string;
+    function getVersionDisplayString(version?: string | IVersionInfo, development?: boolean): string;
+    function getUpdateDisplayString(version?: string | IVersionInfo): string | undefined;
 }
 export default Version;

@@ -12,7 +12,7 @@ import { DoodadType } from "game/doodad/IDoodad";
 import type WorldLayer from "renderer/world/WorldLayer";
 import type { IDoodadAdaptor, ITileAdaptation } from "renderer/tile/TileAdaptors";
 import type TileAtlas from "renderer/tile/atlas/TileAtlas";
-export default class Fence implements IDoodadAdaptor {
+export default class FenceTileAdaptor implements IDoodadAdaptor {
     adaptGate(worldLayer: WorldLayer, tileAtlas: TileAtlas, x: number, y: number, doodadType: DoodadType, vertical: boolean, result: ITileAdaptation): void;
     adapt(worldLayer: WorldLayer, tileAtlas: TileAtlas, x: number, y: number, doodadType: DoodadType, result: ITileAdaptation): void;
 }

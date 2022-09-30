@@ -14,9 +14,10 @@ export default class ExploreMap extends ByteGrid {
     private readonly z;
     private encodedData;
     constructor(z: number, width: number, height: number);
-    isExplored(x: number, y: number): boolean;
+    isExplored(x: number, y: number, extraRange?: number): boolean;
     markAsExplored(x: number, y: number): void;
     encode(): number[];
     decode(encodedData?: number[]): void;
     private unexploreEdges;
+    private _isExplored;
 }

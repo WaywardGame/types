@@ -25,6 +25,7 @@ export default class ScreenManager extends EventEmitter.Host<IScreenManagerEvent
     private visible;
     private overlay;
     readonly screenWrapper: Component<HTMLElement>;
+    isInterruptVisible(): boolean;
     /**
      * Streams all initialized screens.
      */

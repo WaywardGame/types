@@ -8,14 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Stream from "@wayward/goodstream/Stream";
 import type Entity from "game/entity/Entity";
 import type { IStatChangeInfo } from "game/entity/IEntity";
 import type { IStat, IStatMax, Stat } from "game/entity/IStats";
 import Component from "ui/component/Component";
 import Text from "ui/component/Text";
 import type { IStringSection } from "utilities/string/Interpolator";
-export declare abstract class StatElement extends Component {
+export declare abstract class StatComponent extends Component {
     private readonly entity;
     private readonly stat;
     private readonly statIcon;
@@ -62,7 +61,16 @@ export declare abstract class StatElement extends Component {
     protected getTooltipElement(): Component;
     private getTooltip;
 }
-export declare class Statbar extends StatElement {
+export declare abstract class StatsContainer<STAT_COMPONENT extends StatComponent> extends Component {
+    private readonly entity;
+    private readonly noEvents?;
+    private readonly _stats;
+    get stats(): Map<Stat, STAT_COMPONENT>;
+    constructor(entity: Entity, stats: Iterable<Stat>, noEvents?: true | undefined);
+    addStat(stat: Stat): void;
+    protected abstract createStatComponent(entity: Entity, stat: Stat, noEvents: true | undefined): STAT_COMPONENT;
+}
+export declare class Statbar extends StatComponent {
     private readonly bar;
     private readonly text;
     constructor(entity: Entity, stat: Stat, noEvents?: true);
@@ -75,24 +83,16 @@ export declare class Statbar extends StatElement {
     onStatChange(_?: any, stat?: IStat, oldValue?: number): void;
     protected getTooltipElement(): Component<HTMLElement>;
 }
-export declare class StatAttribute extends StatElement {
+export declare class StatAttribute extends StatComponent {
     private readonly attribute;
     constructor(entity: Entity, stat: Stat, noEvents?: true);
     getDisplayElement(): Text;
 }
-export declare class Statbars extends Component {
-    private readonly entity;
-    private readonly noEvents?;
-    private readonly _statbars;
-    get statbars(): Map<Stat, Statbar>;
-    constructor(entity: Entity, iterableOfStats: Stream<Stat>, noEvents?: true | undefined);
-    addStatbar(stat: Stat): void;
+export declare class Statbars extends StatsContainer<Statbar> {
+    constructor(entity: Entity, stats: Iterable<Stat>, noEvents?: true);
+    protected createStatComponent(entity: Entity, stat: Stat, noEvents: true | undefined): Statbar;
 }
-export declare class StatAttributes extends Component {
-    private readonly entity;
-    private readonly noEvents?;
-    private readonly _stats;
-    get stats(): Map<Stat, StatAttribute>;
-    constructor(entity: Entity, iterableOfStats: Stream<Stat>, noEvents?: true | undefined);
-    addStatAttribute(stat: Stat): void;
+export declare class StatAttributes extends StatsContainer<StatAttribute> {
+    constructor(entity: Entity, stats: Iterable<Stat>, noEvents?: true);
+    protected createStatComponent(entity: Entity, stat: Stat, noEvents: true | undefined): StatAttribute;
 }

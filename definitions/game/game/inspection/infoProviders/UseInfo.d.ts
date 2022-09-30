@@ -14,12 +14,15 @@ import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import type { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import type { Quality } from "game/IObject";
+import type Island from "game/island/Island";
 import type Translation from "language/Translation";
 import type { TranslationGenerator } from "ui/component/IComponent";
 export interface IDescribed {
     objectType: CreationId;
     type: number;
+    referenceId?: number;
     quality?: Quality;
+    island: Island;
     description(): any;
 }
 export declare type DescribedDescription<T extends IDescribed> = Exclude<ReturnType<T["description"]>, undefined>;
@@ -58,12 +61,15 @@ export interface IUseInfoFactory<I extends IUseInfoBase<T, A>, T extends IDescri
         methods: M;
     }, T, A>): UseInfo<I, A, M, T>;
 }
+export declare type IGetUseInfo<USE_INFO extends UseInfo<any, any, any>> = USE_INFO extends UseInfo<infer I extends IUseInfoBase<any, any>, any, any> ? I : never;
 export default class UseInfo<I extends IUseInfoBase<T, A>, A extends ActionType, M extends Record<string, AnyFunction>, T extends IDescribed = any> {
     readonly predicates: Array<UseInfoPredicate<I, T, A>>;
     readonly handle: UseInfoHandler<I & {
         methods: M;
     }, T, A>;
-    readonly methods: M;
+    readonly methods: {
+        [KEY in keyof M]: (info: I, ...args: ArgumentsOf<M[KEY]>) => ReturnType<M[KEY]>;
+    };
     static of<T extends IDescribed>(): IUseInfoFactory<IUseInfoBase<T, never>, T, never>;
     displayLevel: InfoDisplayLevel | UseInfoDisplayLevelGetter<I, T, A>;
     ownRow?: true;

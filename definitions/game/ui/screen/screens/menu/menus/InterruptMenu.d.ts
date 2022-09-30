@@ -31,6 +31,7 @@ export default class InterruptMenu extends Menu {
     private readonly loadingElement;
     private readonly customContentWrapper;
     readonly progressBar: RangeInput;
+    private _optionEpoch;
     private _type;
     private _interrupt?;
     private readonly settingOptionsQueue;
@@ -38,10 +39,10 @@ export default class InterruptMenu extends Menu {
     get type(): InterruptType;
     get interrupt(): Prompt | undefined;
     constructor();
-    setOptions(options: InterruptOptions): Promise<void>;
+    setOptions(options: InterruptOptions): void;
     initializeCustomContent(initializer?: (wrapper: Component) => any): this;
     setText(title?: TranslationGenerator, description?: TranslationGenerator): this;
-    cancelInterrupt(): Promise<void>;
+    cancelInterrupt(): void;
     choose(choice: InterruptChoice | string): Promise<void>;
     waitFor(): Promise<InterruptChoice | string | boolean | undefined>;
     protected onCancel(triggerChoose?: boolean): void;

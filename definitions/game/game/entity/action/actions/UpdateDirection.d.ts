@@ -10,5 +10,7 @@
  */
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.Direction, [ActionArgument.Integer32, ActionArgument.Undefined]], import("../../player/Player").default | import("../../npc/NPC").default, void, [import("../../../../utilities/math/Direction").Direction.None | import("../../../../utilities/math/Direction").Direction.East | import("../../../../utilities/math/Direction").Direction.North | import("../../../../utilities/math/Direction").Direction.West | import("../../../../utilities/math/Direction").Direction.South, (number | undefined)?]>;
+declare const _default: Action<[ActionArgument.Direction, [ActionArgument.Integer32, ActionArgument.Undefined]], import("../../Human").default, void, {
+    usable: true;
+}, [import("../../../../utilities/math/Direction").Direction.None | import("../../../../utilities/math/Direction").Direction.East | import("../../../../utilities/math/Direction").Direction.North | import("../../../../utilities/math/Direction").Direction.West | import("../../../../utilities/math/Direction").Direction.South, (number | undefined)?]>;
 export default _default;

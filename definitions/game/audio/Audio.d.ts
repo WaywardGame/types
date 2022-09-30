@@ -40,6 +40,7 @@ export default class WAudio extends EventEmitter.Host<IAudioEvents> implements I
     private _audioContext;
     private _musicGainNode;
     private _effectsGainNode;
+    private _suspended;
     private _musicSpeed;
     private _soundDelay;
     private _musicHandler;
@@ -56,6 +57,8 @@ export default class WAudio extends EventEmitter.Host<IAudioEvents> implements I
      * Resets the music handler to its original state.
      */
     resetMusicHandler(): Promise<void>;
+    suspendSoundEffects(): void;
+    resumeSoundEffects(): void;
     /**
      * Sets the current track to the first in the current music handler.
      */

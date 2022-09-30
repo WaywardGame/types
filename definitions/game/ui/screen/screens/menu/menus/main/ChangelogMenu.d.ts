@@ -13,8 +13,12 @@ import type { IVersionInfo } from "utilities/Version";
 export default class ChangelogMenu extends Menu {
     private static readonly modLinks;
     private readonly headingVersionName;
-    private readonly labelChangeCount;
+    private readonly headingVersionNameSubtitle;
+    private readonly labelDate;
+    private readonly labelChangeCountAll;
+    private readonly labelChangeCountsByType;
     private readonly changesContainer;
+    private readonly warningFailedToLoad;
     private lastVersion;
     private defaultVersion?;
     private versions;
@@ -24,6 +28,7 @@ export default class ChangelogMenu extends Menu {
     protected highlightVisibleTabs(): void;
     private refresh;
     private showVersion;
+    private getVersionName;
     private appendChangelog;
     private wrapChangeTextNodes;
     private getChangelogText;

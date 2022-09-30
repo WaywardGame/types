@@ -8,27 +8,48 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { SfxUi } from "audio/IAudio";
 import type { Events, IEventEmitter } from "event/EventEmitter";
+import type { IIcon } from "game/inspection/InfoProvider";
 import Component from "ui/component/Component";
 import type { IDisableable, TranslationGenerator } from "ui/component/IComponent";
 import Text, { Paragraph } from "ui/component/Text";
 interface IButtonEvents extends Events<Component> {
-    activate(): void;
+    activate(): any;
     toggleDisabled(disabled: boolean): any;
+    toggleActive(active: boolean): any;
+}
+export declare enum ButtonClasses {
+    Main = "button",
+    DisplayModeBlock = "button-block",
+    DisplayModeIcon = "button-icon",
+    DisplayModeButtonList = "button-list",
+    Active = "active",
+    Disabled = "disabled",
+    NoAction = "button-no-action",
+    HasButtonButtons = "has-button-buttons",
+    ButtonButtons = "button-buttons",
+    Text = "button-text",
+    ListIconsZoom2To3 = "button-list-zoom-2-to-3",
+    IconZoom2To3 = "button-icon-zoom-2-to-3"
 }
 export default class Button extends Component implements IDisableable {
     event: IEventEmitter<this, IButtonEvents>;
-    readonly text: Text;
+    text?: Text;
     description?: Paragraph;
     wrapperButtons?: Component;
     private _activated;
     private readonly _disabledReasons;
     get disabled(): boolean;
-    constructor(elementType?: string, listen?: boolean);
-    setActionless(isActionless?: boolean): this;
-    setButtonList(isButtonList?: boolean): this;
+    private readonly _activeReasons;
+    get active(): boolean;
+    constructor(elementType?: string, listenForEvents?: boolean);
+    setDisplayMode(mode: ButtonClasses.DisplayModeButtonList, zoomClass: ButtonClasses.ListIconsZoom2To3): this;
+    setDisplayMode(mode: ButtonClasses.DisplayModeBlock | ButtonClasses.DisplayModeIcon | ButtonClasses.DisplayModeButtonList | false): this;
+    setActionless(isActionless?: boolean, setDisabled?: boolean): this;
     isButtonList(): boolean;
     setDisabled(val?: boolean, reason?: string): this;
+    setActive(val?: boolean, reason?: string): this;
     activate(playSound?: boolean): void;
     addButton(initializer: (button: Button) => Button): this;
     addDescription(initializer: (description: Paragraph) => any): this;
@@ -36,7 +57,10 @@ export default class Button extends Component implements IDisableable {
     getText(): TranslationGenerator | undefined;
     getTextAsString(): string;
     refreshText(): this;
+    setIcon(icon?: IIcon, scale?: boolean): this;
+    private sound?;
+    setSound(sound?: SfxUi): this;
     protected playSound(): void;
-    private _onActivate;
+    protected onClick(event?: Event | MouseEvent): void;
 }
 export {};

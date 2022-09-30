@@ -10,6 +10,11 @@
  */
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
+import type Human from "game/entity/Human";
 import { Direction } from "utilities/math/Direction";
-declare const _default: Action<[ActionArgument.Direction], import("../../player/Player").default, void, [Direction.None | Direction.East | Direction.North | Direction.West | Direction.South]>;
+import Vector2 from "utilities/math/Vector2";
+declare const _default: Action<[ActionArgument.Direction], Human, void, {
+    usable: true;
+}, [Direction.None | Direction.East | Direction.North | Direction.West | Direction.South]>;
 export default _default;
+export declare function getMovePos(executor: Human, direction: Direction): Vector2;

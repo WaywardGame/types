@@ -9,9 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import type { IPromptDescriptionBase, PromptResult, PromptDescriptionArgs } from "game/meta/prompt/IPrompt";
 import { Prompt } from "game/meta/prompt/IPrompt";
-import type { IPromptDescriptionBase, PromptDescriptionArgs, PromptResult } from "game/meta/prompt/IPrompt";
-import type { PromptArgs, PromptDescriptionOf } from "game/meta/prompt/PromptDescriptions";
 export interface IPrompt<PROMPT extends IPromptDescriptionBase<any[]>> extends PromiseLike<PromptResult<PROMPT>> {
     type?: Prompt;
     priority?: number;
@@ -31,10 +30,8 @@ declare module Prompts {
         static INSTANCE: Events;
         get queue(): IPrompt<IPromptDescriptionBase<any[]>>[];
     }
-    function isQueued(prompt: Prompt): boolean;
-    function queue<PROMPT extends Prompt>(prompt: PROMPT, ...args: PromptArgs<PROMPT>): IPrompt<PromptDescriptionOf<PROMPT>>;
+    function isQueued(prompt: Prompt | IPromptDescriptionBase<any[]>): boolean;
     function queue<PROMPT extends IPromptDescriptionBase<any[]>>(prompt: PROMPT, ...args: PromptDescriptionArgs<PROMPT>): IPrompt<PROMPT>;
-    function interrupt<PROMPT extends Prompt>(prompt: PROMPT, ...args: PromptArgs<PROMPT>): IPrompt<PromptDescriptionOf<PROMPT>>;
     function interrupt<PROMPT extends IPromptDescriptionBase<any[]>>(prompt: PROMPT, ...args: PromptDescriptionArgs<PROMPT>): IPrompt<PROMPT>;
 }
 export default Prompts;

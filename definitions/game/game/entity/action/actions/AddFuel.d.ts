@@ -9,6 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../../player/Player").default | import("../../npc/NPC").default, void, [import("../../../item/Item").default, import("../../../item/Item").default]>;
+export interface IAddFuelCanUse extends IActionUsable {
+    stokeAmount: number;
+}
+declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../../Human").default, void, IAddFuelCanUse, [import("../../../item/Item").default, import("../../../item/Item").default]>;
 export default _default;

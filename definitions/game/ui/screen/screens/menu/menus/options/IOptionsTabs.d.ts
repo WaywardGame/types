@@ -10,14 +10,14 @@
  */
 export declare enum OptionsTab {
     Language = 0,
-    Tooltips = 1,
-    Audio = 2,
-    Video = 3,
-    Performance = 4,
-    Gameplay = 5,
-    Other = 6,
-    Mods = 7,
-    Controls = 8,
+    Audio = 1,
+    Video = 2,
+    Performance = 3,
+    Gameplay = 4,
+    Controls = 5,
+    Tooltips = 6,
+    Other = 7,
+    Mods = 8,
     SaveData = 9,
     Developer = 10
 }

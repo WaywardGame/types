@@ -20,80 +20,80 @@ export declare enum Prompt {
     GameMessagesContextMenuClear = 2,
     GameCannotRunGlError = 3,
     GameCannotRunIndexedDbError = 4,
-    GameConfirmationActionOnFire = 5,
-    GameConfirmationActionOnFirePlural = 6,
-    GameConfirmationActionInLava = 7,
-    GameConfirmationActionInLavaPlural = 8,
-    GameConfirmationActionIsLava = 9,
-    GameConfirmationDestroyOnGather = 10,
-    GameConfirmationDroppingContainer = 11,
-    GameConfirmationRestWithEquippedFireSource = 12,
-    GameContainerNotFull = 13,
-    GameDangerousStep = 14,
-    GameDesalinationNoNeed = 15,
-    GameExtinguishWaterStill = 16,
-    GameItemMayBeDestroyedInCraft = 17,
-    GameItemMayCauseBurns = 18,
-    GameItemsMayBeDestroyedOnUse = 19,
-    GameLoadFailure = 20,
-    GameNoHealingRequired = 21,
-    GameNoSaveOnDeath = 22,
-    GamePickUpStillWithWater = 23,
-    GameReleaseCreature = 24,
-    GameRenameCreature = 25,
-    GameRenameDoodad = 26,
-    GameRenameItem = 27,
-    GameReturnToTitleScreen = 28,
-    GameReturnToTitleScreenChallenge = 29,
-    GameSailAwayEnd = 30,
-    GameSailAwayReturnable = 31,
-    GameSaveFailure = 32,
-    GameIslandTravelConfirmation = 33,
-    GameWellConvert = 34,
-    GameSolarStillWontWorkInTemperature = 35,
-    GameSolarStillWontWorkInCave = 36,
-    GamePause = 37,
-    GameWin = 38,
-    GameOver = 39,
-    GameHelp = 40,
-    GameMultiplayerOptions = 41,
-    MenuCharacterCreationImportCharacterFailure = 42,
-    MenuCharacterSelectionDeleteCharacter = 43,
-    MenuGameEndGhostDeleteSave = 44,
-    MenuGameEndWonDeleteSave = 45,
-    MenuGameEndReturnToTitleScreen = 46,
-    MenuGameEndReturnToTitleScreenChallengeMultiplayer = 47,
-    MenuGameEndReturnToTitleScreenChallenge = 48,
-    MenuGameEndReturnToTitleScreenMultiplayer = 49,
-    MenuLoadGameDeleteSave = 50,
-    MenuLoadGameDeleteSaves = 51,
-    MenuLoadGameExportType = 52,
-    MenuLoadGameImportSaveFailure = 53,
-    MenuLoadGameMissingMod = 54,
-    MenuLoadGameOldBuildTime = 55,
-    MenuLoadGamePublishError = 56,
-    MenuMainWelcomeToVersion = 57,
-    MenuMainOldVersionWarning = 58,
-    MenuModsConfirmPublish = 59,
-    MenuModsConfirmPublishUpdate = 60,
-    MenuModsModEnableMultipleLanguages = 61,
-    MenuModsModEnableUseLanguage = 62,
-    MenuModsPublishedReminderRequiredModsOnWorkshop = 63,
-    MenuModsPublishError = 64,
-    MenuModsPublishUpdateError = 65,
-    MenuModsInfoMissingDependencies = 66,
-    MenuModsConfirmEnableDisabledDependencies = 67,
-    MenuModsConfirmDisableDependents = 68,
-    MenuModsConfirmUninstallMod = 69,
-    MenuModsUnloadableSaveGameMod = 70,
-    MenuModsSubmenuEditInternalModsModsListChangeReload = 71,
-    MenuMultiplayerCannotJoinFailedToLoadMods = 72,
-    MenuNewGameTooManySaves = 73,
-    MenuCustomGameOptionsConfirmImport = 74,
-    MenuCustomGameOptionsImportFailure = 75,
-    MenuMilestoneModifiersConfirmImport = 76,
-    MenuMilestoneModifiersImportFailure = 77,
-    MenuOptionsReloadGame = 78,
+    GameConfirmationActionIsLava = 5,
+    GameConfirmationActionInLavaOrFire = 6,
+    GameConfirmationDestroyOnGather = 7,
+    GameConfirmationDroppingContainer = 8,
+    GameConfirmationRestWithEquippedFireSource = 9,
+    GameContainerNotFull = 10,
+    GameDangerousStep = 11,
+    GameDesalinationNoNeed = 12,
+    GameExtinguishWaterStill = 13,
+    GameItemMayBeDestroyedInCraft = 14,
+    GameItemMayCauseBurns = 15,
+    GameItemsMayBeDestroyedOnUse = 16,
+    GameLoadFailure = 17,
+    GameNoHealingRequired = 18,
+    GameNoSaveOnDeath = 19,
+    GamePickUpStillWithWater = 20,
+    GameReleaseCreature = 21,
+    GameRenameGeneric = 22,
+    GameRenameCreature = 23,
+    GameRenameDoodad = 24,
+    GameRenameItem = 25,
+    GameReturnToTitleScreen = 26,
+    GameReturnToTitleScreenChallenge = 27,
+    GameSailAwayEnd = 28,
+    GameSailAwayReturnable = 29,
+    GameSaveFailure = 30,
+    GameIslandTravelConfirmation = 31,
+    GameWellConvert = 32,
+    GameSolarStillWontWorkInTemperature = 33,
+    GameSolarStillWontWorkInCave = 34,
+    GamePause = 35,
+    GameWin = 36,
+    GameOver = 37,
+    GameHelp = 38,
+    GameMultiplayerOptions = 39,
+    GameEditBindings = 40,
+    MenuCharacterCreationImportCharacterFailure = 41,
+    MenuCharacterSelectionDeleteCharacter = 42,
+    MenuGameEndGhostDeleteSave = 43,
+    MenuGameEndWonDeleteSave = 44,
+    MenuGameEndReturnToTitleScreen = 45,
+    MenuGameEndReturnToTitleScreenChallengeMultiplayer = 46,
+    MenuGameEndReturnToTitleScreenChallenge = 47,
+    MenuGameEndReturnToTitleScreenMultiplayer = 48,
+    MenuLoadGameDeleteSave = 49,
+    MenuLoadGameDeleteSaves = 50,
+    MenuLoadGameExportType = 51,
+    MenuLoadGameImportSaveFailure = 52,
+    MenuLoadGameMissingMod = 53,
+    MenuLoadGameOldBuildTime = 54,
+    MenuLoadGamePublishError = 55,
+    MenuMainWelcomeToVersion = 56,
+    MenuMainOldVersionWarning = 57,
+    MenuModsConfirmPublish = 58,
+    MenuModsConfirmPublishUpdate = 59,
+    MenuModsModEnableMultipleLanguages = 60,
+    MenuModsModEnableUseLanguage = 61,
+    MenuModsPublishedReminderRequiredModsOnWorkshop = 62,
+    MenuModsPublishError = 63,
+    MenuModsPublishUpdateError = 64,
+    MenuModsInfoMissingDependencies = 65,
+    MenuModsConfirmEnableDisabledDependencies = 66,
+    MenuModsConfirmDisableDependents = 67,
+    MenuModsConfirmUninstallMod = 68,
+    MenuModsUnloadableSaveGameMod = 69,
+    MenuModsSubmenuEditInternalModsModsListChangeReload = 70,
+    MenuMultiplayerCannotJoinFailedToLoadMods = 71,
+    MenuNewGameTooManySaves = 72,
+    MenuCustomGameOptionsConfirmImport = 73,
+    MenuCustomGameOptionsImportFailure = 74,
+    MenuMilestoneModifiersConfirmImport = 75,
+    MenuMilestoneModifiersImportFailure = 76,
+    MenuOptionsReloadGame = 77,
+    MenuOptionsChangeReload = 78,
     MenuOptionsConfirmUnlockMilestones = 79,
     MenuOptionsConfirmUnlockRecipes = 80,
     MenuOptionsSaveDataClearAll = 81,
@@ -137,7 +137,8 @@ export declare enum PromptPriority {
 }
 export declare type PromptDescriptionArgs<PROMPT extends IPromptDescriptionBase<any[]>> = PROMPT extends IPromptDescriptionBase<infer A> ? A : never;
 export interface IPromptDescriptionBase<A extends any[]> {
-    type: PromptType;
+    type: Prompt;
+    promptType: PromptType;
     priority?: PromptPriority;
     title?: TranslationGenerator<UiTranslation, A>;
     description?: TranslationGenerator<UiTranslation, A>;
@@ -150,40 +151,29 @@ export declare type PromptResult<PROMPT extends IPromptDescriptionBase<any[]>> =
     [PromptType.Choice]: PROMPT extends IPromptChoiceDescription<any, infer CHOICES> ? CHOICES extends ResolvablePromptProperty<any, infer T> ? T extends Array<infer T2> ? T2 : T : never : never;
     [PromptType.Input]: string;
     [PromptType.Menu]: void;
-}[PROMPT["type"]];
+}[PROMPT["promptType"]];
 export interface IPromptInfoDescription<A extends any[] = []> extends IPromptDescriptionBase<A> {
-    type: PromptType.Info;
+    promptType: PromptType.Info;
 }
 export interface IPromptConfirmDescription<A extends any[] = []> extends IPromptDescriptionBase<A> {
-    type: PromptType.Confirm;
+    promptType: PromptType.Confirm;
     yesTranslation?: TranslationGenerator<InterruptChoice>;
     noTranslation?: TranslationGenerator<InterruptChoice>;
 }
-declare type Choices<A extends any[]> = ResolvablePromptProperty<A, InterruptChoice[]>;
-export interface IPromptChoiceDescription<A extends any[] = [], CHOICES extends Choices<A> = Choices<A>> extends IPromptDescriptionBase<A> {
-    type: PromptType.Choice;
+export declare type PromptChoices<A extends any[]> = ResolvablePromptProperty<A, InterruptChoice[]>;
+export interface IPromptChoiceDescription<A extends any[] = [], CHOICES extends PromptChoices<A> = PromptChoices<A>> extends IPromptDescriptionBase<A> {
+    promptType: PromptType.Choice;
     choices: CHOICES;
 }
 export interface IPromptInputDescription<A extends any[] = []> extends IPromptDescriptionBase<A> {
-    type: PromptType.Input;
+    promptType: PromptType.Input;
     configure?(input: Input, ...args: A): any;
     canCancel?: boolean;
 }
 export interface IPromptMenuDescription<MENU extends MenuId, A extends any[] = []> extends IPromptDescriptionBase<A> {
-    type: PromptType.Menu;
+    promptType: PromptType.Menu;
     menu: MENU;
     configure?(menu: MenuById[MENU], ...args: A): any;
 }
-declare class PromptDescriptionFactory {
-    private readonly _priority?;
-    constructor(_priority?: PromptPriority | undefined);
-    priority(priority: PromptPriority): PromptDescriptionFactory;
-    info<A extends any[] = []>(): IPromptInfoDescription<A>;
-    confirm<A extends any[] = []>(yesTranslation?: TranslationGenerator<InterruptChoice>, noTranslation?: TranslationGenerator<InterruptChoice>): IPromptConfirmDescription<A>;
-    choice<A extends any[], CHOICES extends Choices<A>>(choices: CHOICES): IPromptChoiceDescription<A, CHOICES>;
-    input<A extends any[] = []>(configure?: IPromptInputDescription<A>["configure"], canCancel?: true): IPromptInputDescription<A>;
-    menu<MENU extends MenuId, A extends any[] = []>(menu: MENU, configure?: IPromptMenuDescription<MENU, A>["configure"]): IPromptMenuDescription<MENU, A>;
-}
 export declare type PromptDescription<A extends any[] = []> = IPromptInfoDescription<A> | IPromptConfirmDescription<A> | IPromptChoiceDescription<A> | IPromptInputDescription<A> | IPromptMenuDescription<MenuId, A>;
-export declare const PromptDescription: PromptDescriptionFactory;
 export {};

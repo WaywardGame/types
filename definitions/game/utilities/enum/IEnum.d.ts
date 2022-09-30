@@ -16,6 +16,8 @@ export declare module EnumProperty {
     const KEYS: unique symbol;
     const VALUES: unique symbol;
     const ENTRIES: unique symbol;
+    const DEPENDANTS: unique symbol;
+    const COMPUTE: unique symbol;
 }
 export declare type EnumObject<T> = T & {
     [EnumProperty.NAME]?: string;
@@ -25,6 +27,8 @@ export declare type EnumObject<T> = T & {
     [EnumProperty.KEYS]?: ReadonlyArray<keyof T>;
     [EnumProperty.VALUES]?: ReadonlyArray<Exclude<T[keyof T], AnyFunction>>;
     [EnumProperty.ENTRIES]?: ReadonlyArray<[keyof T, Exclude<T[keyof T], AnyFunction>]>;
+    [EnumProperty.DEPENDANTS]?: Set<WeakRef<any>>;
+    [EnumProperty.COMPUTE]?(): void;
 };
 export declare module EnumObject {
     function get<E>(enumObject: E): EnumObject<E>;
@@ -32,6 +36,7 @@ export declare module EnumObject {
      * Sets the enum keys that won't be iterated over in the enum.
      */
     function setExcluded<E>(enumObject: E, ...keys: Array<keyof E>): void;
+    function clearCache(enumObject: any): void;
 }
 export declare enum EnumId {
     CreatureType = 0,
@@ -72,5 +77,12 @@ export declare enum EnumId {
     DoodadTypeGroup = 35,
     WorldLayer = 36,
     Load = 37,
-    QuadrantComponent = 38
+    QuadrantComponent = 38,
+    Biome = 39,
+    UsableActionType = 40,
+    UsableActionTypePlaceholder = 41,
+    MagicalProperty = 42,
+    ItemTag = 43,
+    DoodadTag = 44,
+    EntityTag = 45
 }

@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Stream from "@wayward/goodstream/Stream";
 import type { IModInfo } from "mod/IModInfo";
 import type { Random } from "utilities/random/Random";
 declare module Enums {
@@ -61,17 +60,17 @@ declare module Enums {
     /**
      * Iterate over the names of the entries in an enum.
      */
-    function keyStream<T>(enumObject: T): Stream<keyof T>;
+    function keyStream<T>(enumObject: T): import("@wayward/goodstream").default<keyof T>;
     /**
      * Iterate over the values in an enum.
      */
     function values<T>(enumObject: T): readonly Exclude<T[keyof T], AnyFunction<any>>[];
-    function valueStream<T>(enumObject: T): Stream<Exclude<T[keyof T], AnyFunction<any>>>;
+    function valueStream<T>(enumObject: T): import("@wayward/goodstream").default<Exclude<T[keyof T], AnyFunction<any>>>;
     /**
      * Iterate over the entries in an enum. Yields a tuple containing the name and value of each entry.
      */
     function entries<T>(enumObject: T): readonly [keyof T, Exclude<T[keyof T], AnyFunction<any>>][];
-    function entryStream<T>(enumObject: T): Stream<[keyof T, Exclude<T[keyof T], AnyFunction<any>>]>;
+    function entryStream<T>(enumObject: T): import("@wayward/goodstream").default<[keyof T, Exclude<T[keyof T], AnyFunction<any>>]>;
     /**
      * Returns whether the given number is a valid entry in an enum.
      * @param enumObject The enum object to check for the entry.
@@ -85,5 +84,19 @@ declare module Enums {
     function sortKeysByOrdinal<E extends number, K extends string>(enumObject: {
         [key in K]: E;
     }): (keyA: K, keyB: K) => number;
+    /**
+     * Creates a "merged" enum which can be used in `Enums.keys`, `values`, `entries`, etc with the same performance.
+     *
+     * **Note that basic lookup will not be aware of new/deleted values until an `Enums` operation is called.**
+     */
+    function merge<ENUM_OBJECTS extends any[]>(...enumObjects: ENUM_OBJECTS): (ENUM_OBJECTS["length"] extends 0 ? {} : ENUM_OBJECTS["length"] extends 1 ? ENUM_OBJECTS[0] : ENUM_OBJECTS["length"] extends 2 ? {
+        [KEY in keyof (ENUM_OBJECTS[0] & ENUM_OBJECTS[1])]: (ENUM_OBJECTS[0] & ENUM_OBJECTS[1])[KEY];
+    } : ENUM_OBJECTS["length"] extends 3 ? {
+        [KEY in keyof (ENUM_OBJECTS[0] & ENUM_OBJECTS[1] & ENUM_OBJECTS[2])]: (ENUM_OBJECTS[0] & ENUM_OBJECTS[1] & ENUM_OBJECTS[2])[KEY];
+    } : ENUM_OBJECTS["length"] extends 4 ? {
+        [KEY in keyof (ENUM_OBJECTS[0] & ENUM_OBJECTS[1] & ENUM_OBJECTS[2] & ENUM_OBJECTS[3])]: (ENUM_OBJECTS[0] & ENUM_OBJECTS[1] & ENUM_OBJECTS[2] & ENUM_OBJECTS[3])[KEY];
+    } : ENUM_OBJECTS["length"] extends 5 ? {
+        [KEY in keyof (ENUM_OBJECTS[0] & ENUM_OBJECTS[1] & ENUM_OBJECTS[2] & ENUM_OBJECTS[3] & ENUM_OBJECTS[4])]: (ENUM_OBJECTS[0] & ENUM_OBJECTS[1] & ENUM_OBJECTS[2] & ENUM_OBJECTS[3] & ENUM_OBJECTS[4])[KEY];
+    } : "too many enum objects, expand type");
 }
 export default Enums;

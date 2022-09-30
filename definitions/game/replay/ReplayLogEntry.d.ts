@@ -23,7 +23,7 @@ export declare class ReplayLogEntry implements IReplayLogEntry, ISerializable {
     /**
      * Custom serializer to reduce save data size
      */
-    serializeObject(serializer: ISerializer): void;
+    serializeObject(serializer: ISerializer): undefined;
     /**
      * Custom serializer to reduce save data size
      */

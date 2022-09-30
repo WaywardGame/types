@@ -30,7 +30,10 @@ export declare enum GameOptionsIcon {
     Burned = 14,
     Skills = 15,
     NoItems = 16,
-    Weight = 17
+    Weight = 17,
+    Crafting = 18,
+    Items = 19,
+    Travel = 20
 }
 export interface IGameOptionsIcon extends IModdable, IHasImagePath {
     check(options: IGameOptions, localPlayerOption: IGameOptionsPlayer): boolean;

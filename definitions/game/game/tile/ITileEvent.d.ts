@@ -66,7 +66,7 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
      */
     meltsInto?: TerrainType;
     /**
-     * When more than three puddles of water exist on a tile, they create the this terrain type when it lower than "Cold" on the tile.
+     * When more than three puddles of water exist on a tile, they create the this terrain type when it is lower than "Cold" on the tile.
      */
     freezesInto?: TerrainType;
     /**
@@ -106,5 +106,7 @@ export declare enum TileEventType {
     PuddleOfDesalinatedWater = 17,
     PuddleOfMedicinalWater = 18,
     PuddleOfGoatMilk = 19,
-    PuddleOfCoconutWater = 20
+    PuddleOfCoconutWater = 20,
+    PuddleOfSwampWater = 21,
+    PuddleOfFilteredWater = 22
 }

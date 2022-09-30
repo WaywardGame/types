@@ -10,6 +10,7 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import Component from "ui/component/Component";
+import type { IDraggableInputEvent } from "ui/util/Draggable";
 export interface ISortableEvents {
     commit(): any;
 }
@@ -26,6 +27,10 @@ export default class Sortable {
     constructor(host: ISortableComponent);
     private sortDelay;
     setSortDelay(delay: number): this;
+    private stickyDistance;
+    setStickyDistance(stickyDistance: number): this;
+    private sortInputFilter?;
+    setInputFilter(filter: (input: IDraggableInputEvent) => any): this;
     commit(): void;
     private onAddChild;
     private savedPosition?;

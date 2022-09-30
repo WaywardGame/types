@@ -9,10 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Component from "ui/component/Component";
-import Text from "ui/component/Text";
+import Text, { Heading } from "ui/component/Text";
 export declare const CLASS_BLOCK = "menu-block";
 export declare class Block extends Component {
     constructor();
+    heading?: Heading;
+    setHeading(headingInitializer: (heading: Heading) => any): this;
     addText(textInitializer: (text: Text) => any): this;
-    addIcon(initializer: (component: Component) => any): this;
 }

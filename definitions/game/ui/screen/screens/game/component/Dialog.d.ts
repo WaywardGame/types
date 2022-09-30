@@ -80,7 +80,26 @@ interface IDialogEvents extends Events<Component> {
      */
     load(): any;
 }
+export declare enum DialogClasses {
+    Wrapper = "dialog-wrapper",
+    Main = "dialog",
+    Body = "dialog-body",
+    Footer = "dialog-footer",
+    ScrollableWrapper = "game-dialog-scrollable-wrapper",
+    Panel = "game-dialog-panel",
+    ButtonClose = "game-dialog-button-close",
+    ButtonMinimize = "game-dialog-button-minimize",
+    ButtonOptions = "game-dialog-button-options",
+    Title = "dialog-title",
+    ButtonBack = "game-dialog-button-back",
+    Handle = "handle",
+    Header = "dialog-header",
+    EndsIconsLeft = "dialog-ends-icons-left",
+    EndsIconsRight = "dialog-ends-icons-right",
+    EndsContent = "dialog-ends-content"
+}
 export default abstract class Dialog extends Component implements IDialog {
+    readonly subId: string;
     private static topOrder;
     private static topDialog;
     static makeTopDialog(element: HTMLElement): void;
@@ -91,9 +110,13 @@ export default abstract class Dialog extends Component implements IDialog {
      * The positions of each edge of the dialog. Stored as percentages.
      */
     edges: IDialogEdges;
-    protected body: Component;
-    protected header: Header;
-    protected footer: Component;
+    private lastSizes;
+    private lastPositions;
+    protected readonly internalDialog: Component;
+    protected readonly body: Component;
+    protected readonly header: Header;
+    protected get footer(): Footer;
+    private _footer?;
     private readonly handles;
     private readonly panels;
     private currentPanel;
@@ -116,8 +139,8 @@ export default abstract class Dialog extends Component implements IDialog {
      * The description of how the dialog should be sized. (min, default, and max sizes and the position)
      */
     private description;
-    constructor(id: number);
-    addScrollableWrapper(initializer?: (wrapper: Component) => any): Component<HTMLElement>;
+    constructor(id: number, subId?: string);
+    addScrollableWrapper(type?: "scroll" | "auto", initializer?: (wrapper: Component) => any): Component<HTMLElement>;
     addSettingsPanel(): Component<HTMLElement>;
     showSettingsPanel(): this;
     resetSizeAndPosition(): void;
@@ -140,7 +163,8 @@ export default abstract class Dialog extends Component implements IDialog {
     /**
      * Set the position of an edge.
      */
-    setEdgePosition(edge: Edge, position: number): void;
+    setEdgePosition(edge: Edge, position: number, transform?: boolean): void;
+    private setTransform;
     /**
      * Makes this dialog the top dialog.
      */
@@ -292,6 +316,8 @@ interface IHeaderEvents extends Events<Handle> {
  */
 export declare class Header extends Handle implements IRefreshable {
     event: IEventEmitter<this, IHeaderEvents>;
+    readonly iconsLeft: Component;
+    readonly iconsRight: Component;
     readonly backButton: Button;
     readonly optionsButton: Button;
     readonly closeButton: Button;
@@ -299,6 +325,12 @@ export declare class Header extends Handle implements IRefreshable {
     constructor();
     setText(text: TranslationGenerator): void;
     refresh(): this;
-    setCloseIcon(icon?: "minimize" | "close"): this;
+    setCloseIcon(icon?: "Minimize" | "Close"): this;
+}
+export declare class Footer extends Component {
+    readonly iconsLeft: Component;
+    readonly iconsRight: Component;
+    readonly content: Component;
+    constructor();
 }
 export {};

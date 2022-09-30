@@ -12,6 +12,7 @@ import type { ISteamNetworkRelayStatus, SteamNetworkingConnectionState } from "@
 import type { IPlayOptions } from "game/IGame";
 import type { MultiplayerSyncCheckLevel, ServerInfo } from "multiplayer/IMultiplayer";
 export interface ISteamworksEvents {
+    initialize(): any;
     batteryChange(): any;
     overlayShown(): any;
     overlayHidden(): any;
@@ -26,6 +27,7 @@ export interface IModPath {
 }
 export interface IDedicatedServerInfo {
     name: string;
+    motd?: string;
     port: number;
     backup: boolean;
     backupInterval: number;
@@ -41,4 +43,10 @@ export interface IDedicatedServerInfo {
     sshPassword?: string;
     devMode: boolean;
     syncChecks: MultiplayerSyncCheckLevel;
+}
+export interface IBuild {
+    name: string;
+    time: number;
+    publishName?: string;
+    publishTime?: string;
 }

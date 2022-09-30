@@ -10,21 +10,13 @@
  */
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InspectType } from "game/inspection/IInspection";
+import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import DoodadUses from "game/inspection/infoProviders/doodad/DoodadUses";
-import ItemDetailsInfoProvider from "game/inspection/infoProviders/item/ItemDetails";
-import ItemDurabilityInfoProvider from "game/inspection/infoProviders/item/ItemDurability";
-import ItemProtectedInfoProvider from "game/inspection/infoProviders/item/ItemProtected";
-import ItemUses from "game/inspection/infoProviders/item/ItemUses";
-import ItemWeightInfoProvider from "game/inspection/infoProviders/item/ItemWeight";
-import ItemWorthInfoProvider from "game/inspection/infoProviders/item/ItemWorth";
-import LabelledValue from "game/inspection/infoProviders/LabelledValue";
-import MagicalPropertiesInfoProvider from "game/inspection/infoProviders/MagicalProperties";
-import QualityInfoProvider from "game/inspection/infoProviders/Quality";
 import Inspection from "game/inspection/Inspection";
 import { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import { ReferenceType } from "game/reference/IReferenceManager";
+import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IVector3 } from "utilities/math/IVector";
 export default class ItemInspection extends Inspection<ItemType> {
     static getFromTile(position: IVector3, _: any, inspectType: InspectType): ItemInspection[];
@@ -44,7 +36,7 @@ export default class ItemInspection extends Inspection<ItemType> {
     getDefaultDisplayLevel(): InfoDisplayLevel;
     hasContent(context: InfoProviderContext): boolean;
     private getName;
-    get(context: InfoProviderContext): import("../../../language/impl/TranslationImpl").default | (import("../../../language/impl/TranslationImpl").default | import("game/inspection/InfoProvider").SimpleInfoProvider | QualityInfoProvider | MagicalPropertiesInfoProvider | ItemProtectedInfoProvider | ItemWorthInfoProvider | ItemDurabilityInfoProvider | ItemWeightInfoProvider | LabelledValue | ItemDetailsInfoProvider | ItemUses | DoodadUses)[];
+    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     protected onItemRemove(_: any, item: Item): void;
     protected onTickEnd(): void;
     private updatePosition;

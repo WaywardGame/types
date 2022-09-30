@@ -32,7 +32,7 @@ declare module TileEventInspection {
     class Minors extends ListInspection<TileEventInspection> {
         static getFromTile(position: IVector3): never[] | Minors;
         constructor(...inspections: TileEventInspection[]);
-        get(context: InfoProviderContext): import("../../../language/impl/TranslationImpl").default;
+        get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
         getDefaultDisplayLevel(): InfoDisplayLevel;
         protected initChildTextComponent(text: TranslationGenerator): Text;
     }

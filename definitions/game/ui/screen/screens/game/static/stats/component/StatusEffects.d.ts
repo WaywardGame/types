@@ -23,5 +23,5 @@ export default class StatusEffects extends Component {
     /**
      * Event handler for the status effects of this entity changing
      */
-    onStatusChange(_: any, status: StatusType, hasStatus: boolean): void;
+    onStatusChange(_: any, status: StatusType, level: number): void;
 }

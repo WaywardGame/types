@@ -8,28 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
 import type WebGlContext from "renderer/WebGlContext";
 import type { IResourceContainer } from "resource/IResourceLoader";
-export interface IResourceLoaderEvents {
-    load(): any;
-}
-export default class ResourceLoader extends EventEmitter.Host<IResourceLoaderEvents> {
+export default class ResourceLoader {
     private readonly webGlContext;
     private concurrent;
-    private loadingCount;
     private loadingInterval;
     private waitingSlots;
     private readonly maxConcurrent;
-    private spritePack;
     private spritePacker;
     private tilePacker;
+    private pendingLoads;
+    private activeLoad;
     private _resourceContainer;
     private readonly spriteAtlas;
     private readonly tileAtlas;
     constructor(webGlContext: WebGlContext);
     delete(): void;
-    get isLoading(): boolean;
     get resourceContainer(): IResourceContainer | undefined;
     initialize(): Promise<void>;
     loadResources(background?: boolean): Promise<void>;

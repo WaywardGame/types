@@ -13,6 +13,11 @@ export interface ICommonGameOptions {
     seed?: string | number;
     enableAllMilestoneModifiers?: boolean;
 }
+export interface IWaitUntilGameLoadedOptions {
+    isJoiningServer: boolean;
+    isCreatingServer: boolean;
+    expectReopenServerPrompt: boolean;
+}
 export interface INewGameOptions extends ICommonGameOptions {
     playMode: GamePlayMode;
     reuseCharacter?: boolean;

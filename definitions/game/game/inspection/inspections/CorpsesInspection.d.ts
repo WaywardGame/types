@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
+import type { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import CorpseInspection from "game/inspection/inspections/CorpseInspection";
 import ListInspection from "game/inspection/inspections/ListInspection";
@@ -18,7 +19,7 @@ import type { IVector3 } from "utilities/math/IVector";
 export default class CorpsesInspection extends ListInspection<CorpseInspection> {
     static getFromTile(position: IVector3): never[] | CorpsesInspection;
     constructor(...corpseInspections: CorpseInspection[]);
-    get(context: InfoProviderContext): import("../../../language/impl/TranslationImpl").default;
+    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     getDefaultDisplayLevel(): InfoDisplayLevel;
     protected initChildTextComponent(text: TranslationGenerator): Text;
 }

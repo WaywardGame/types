@@ -11,9 +11,9 @@
 import type { TerrainType } from "game/tile/ITerrain";
 import type WorldLayer from "renderer/world/WorldLayer";
 import type { ITileAdaptation } from "renderer/tile/TileAdaptors";
-import Default from "renderer/tile/adaptors/Default";
+import DefaultTileAdaptor from "renderer/tile/adaptors/Default";
 import type TileAtlas from "renderer/tile/atlas/TileAtlas";
-export default class Mountain extends Default {
+export default class MountainTileAdaptor extends DefaultTileAdaptor {
     private mountainTopFlag;
     adapt(worldLayer: WorldLayer, tileAtlas: TileAtlas, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
     private getTileType;

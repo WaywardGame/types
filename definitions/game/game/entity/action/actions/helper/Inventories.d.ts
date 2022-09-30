@@ -14,6 +14,6 @@ import type Item from "game/item/Item";
 import type { IVector3 } from "utilities/math/IVector";
 declare module Inventories {
     function ofEntity(entity: Entity): Item[][];
-    function get(island: Island, tile: IVector3): Item[][];
+    function get(island: Island, point: IVector3): Item[][];
 }
 export default Inventories;

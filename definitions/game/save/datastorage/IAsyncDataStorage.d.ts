@@ -17,6 +17,7 @@ export default interface IAsyncDataStorage {
     saveToSlot(slot: number, saveObject: ISaveObject, specificKeys?: Set<string>): Promise<number>;
     saveToSlotSynchronous(slot: number, saveObject: ISaveObject, specificKeys?: Set<string>): number;
     loadFromSlot(slot: number, specificKeys?: Set<string>): Promise<ISaveObject>;
+    loadFromSlots(slot: number[], specificKeys: Set<string>): Promise<ISaveObject[]>;
     deleteSlot(slot: number): Promise<void>;
     deleteAllSlots(): Promise<void>;
     deleteAllData(): Promise<void>;

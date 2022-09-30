@@ -13,7 +13,7 @@ import type { IDoodadOptions } from "game/doodad/IDoodad";
 import { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
 import type Creature from "game/entity/creature/Creature";
 import type Human from "game/entity/Human";
-import type Player from "game/entity/player/Player";
+import { CreationId } from "game/IGame";
 import { ObjectManager } from "game/ObjectManager";
 import type { TerrainType } from "game/tile/ITerrain";
 import Translation from "language/Translation";
@@ -39,21 +39,23 @@ export interface IDoodadManagerEvents {
     remove(doodad: Doodad): any;
 }
 export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerEvents> {
+    protected readonly creationId: CreationId;
     private static cachedBestDoodadForTier;
     private static cachedGroups;
     private static cachedDoodadSpawns;
     private readonly scarecrows;
     static getBestDoodadForTier(doodad: DoodadType | DoodadTypeGroup): DoodadType | undefined;
     static generateLookups(): void;
+    static clearCaches(): void;
     static isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
     static isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     static getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
-    static getDoodadTypeGroupName(doodadType: DoodadType | DoodadTypeGroup, article?: boolean, count?: number): Translation;
+    static getDoodadTypeGroupName(doodadType: DoodadType | DoodadTypeGroup, article?: false | "definite" | "indefinite", count?: number): Translation;
     delete(): void;
     /**
      * Note: This can be called multiple times in the same game depending on loading/unloading of islands
      */
-    load(hasLoadedBefore: boolean): void;
+    load(): void;
     isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
     isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     getBestDoodadForTier(doodad: DoodadType | DoodadTypeGroup): DoodadType | undefined;
@@ -71,11 +73,11 @@ export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerE
     /**
      * Runs a full gamut of updates on doodads including decaying items inside containers, spreading/growing plants/mushrooms, water distillation/desenation and more.
      */
-    updateAll(ticks: number, realPlayers: Player[], updatesPerTick?: number): void;
+    updateAll(ticks: number, playingHumans: Human[], updatesPerTick?: number): void;
     /**
      * Runs a full gamut of updates on doodads including decaying items inside containers, spreading/growing plants/mushrooms, water distillation/desenation and more.
      */
-    updateAllAsync(ticks: number, realPlayers: Player[], updatesPerTick: number | undefined, onProgress: (progess: number) => Promise<void>): Promise<void>;
+    updateAllAsync(ticks: number, playingHumans: Human[], updatesPerTick: number | undefined, onProgress: (progess: number) => Promise<void>): Promise<void>;
     verifyAndFixItemWeights(): void;
     /**
      * Used to spawn a random doodad on the current biome type and at a set location (and terrain type) based on spawnOnWorldGen properties in doodad descriptions.

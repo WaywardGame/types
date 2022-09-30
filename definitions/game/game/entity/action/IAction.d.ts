@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Stream from "@wayward/goodstream";
 import type { SfxType } from "audio/IAudio";
 import type Doodad from "game/doodad/Doodad";
 import type { DoodadType } from "game/doodad/IDoodad";
@@ -19,21 +18,25 @@ import type Human from "game/entity/Human";
 import type { AttackType, EntityType } from "game/entity/IEntity";
 import type { EquipType, RestType, SkillType } from "game/entity/IHuman";
 import type NPC from "game/entity/npc/NPC";
-import type { TurnType } from "game/entity/player/IPlayer";
+import type { IPackedMessage } from "game/entity/player/IMessageManager";
+import type { TurnTypeFlag } from "game/entity/player/IPlayer";
 import type Player from "game/entity/player/Player";
 import type { Quality } from "game/IObject";
 import type Island from "game/island/Island";
 import type { IContainer, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type { RecipeType } from "game/item/recipe/RecipeRegistry";
+import type { IPromptDescriptionBase, PromptDescriptionArgs } from "game/meta/prompt/IPrompt";
 import type { Milestone } from "game/milestones/IMilestone";
+import type { ITile } from "game/tile/ITerrain";
 import type TileEvent from "game/tile/TileEvent";
+import type { IModdable } from "mod/ModRegistry";
 import type { IRGB } from "utilities/Color";
 import type { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 export declare enum ActionType {
     Disassemble = 0,
-    Pickup = 1,
+    PickUp = 1,
     Throw = 2,
     Attack = 3,
     StartFire = 4,
@@ -42,59 +45,59 @@ export declare enum ActionType {
     Eat = 7,
     DrinkItem = 8,
     Rest = 9,
-    Sleep = 10,
-    Heal = 11,
-    Dig = 12,
-    Paddle = 13,
-    GatherLiquid = 14,
-    Cast = 15,
-    Lockpick = 16,
-    Repair = 17,
-    ReadMap = 18,
-    Learn = 19,
-    Reinforce = 20,
-    Gather = 21,
-    StokeFire = 22,
-    Pour = 23,
-    Plant = 24,
-    CopyMap = 25,
-    Ignite = 26,
-    Build = 27,
-    OpenContainer = 28,
-    Preserve = 29,
-    OpenBottle = 30,
-    Cure = 31,
-    TellTime = 32,
-    SailToCivilization = 33,
-    Transmogrify = 34,
-    Fire = 35,
-    Teleport = 36,
-    Extinguish = 37,
-    DrawMap = 38,
-    Dismantle = 39,
-    PourOnYourself = 40,
-    Squeeze = 41,
-    Pet = 42,
-    Tame = 43,
-    Release = 44,
-    HealOther = 45,
-    RubClockwise = 46,
-    RubCounterclockwise = 47,
-    OpenDoor = 48,
-    CloseDoor = 49,
-    AddFuel = 50,
-    Grasp = 51,
-    PickupItem = 52,
-    PickupAllItems = 53,
-    Offer = 54,
-    Drop = 55,
-    Jump = 56,
-    Move = 57,
-    MoveTo = 58,
-    UpdateDirection = 59,
-    Idle = 60,
-    DrinkInFront = 61,
-    UseItem = 62,
+    RestCancel = 10,
+    Sleep = 11,
+    Heal = 12,
+    Dig = 13,
+    Ride = 14,
+    GatherLiquid = 15,
+    Cast = 16,
+    Lockpick = 17,
+    Repair = 18,
+    ReadMap = 19,
+    Learn = 20,
+    Reinforce = 21,
+    Gather = 22,
+    StokeFire = 23,
+    Pour = 24,
+    Plant = 25,
+    CopyMap = 26,
+    Ignite = 27,
+    Build = 28,
+    OpenContainer = 29,
+    Preserve = 30,
+    OpenBottle = 31,
+    Cure = 32,
+    TellTime = 33,
+    SailToCivilization = 34,
+    Transmogrify = 35,
+    Fire = 36,
+    Teleport = 37,
+    Extinguish = 38,
+    DrawMap = 39,
+    Dismantle = 40,
+    PourOnYourself = 41,
+    Squeeze = 42,
+    Pet = 43,
+    Tame = 44,
+    Release = 45,
+    HealOther = 46,
+    RubClockwise = 47,
+    RubCounterclockwise = 48,
+    OpenDoor = 49,
+    CloseDoor = 50,
+    AddFuel = 51,
+    Grasp = 52,
+    PickUpItem = 53,
+    PickUpAllItems = 54,
+    Offer = 55,
+    Drop = 56,
+    Jump = 57,
+    Move = 58,
+    MoveTo = 59,
+    UpdateDirection = 60,
+    Idle = 61,
+    DrinkInFront = 62,
     Equip = 63,
     Unequip = 64,
     MoveItem = 65,
@@ -113,7 +116,7 @@ export declare enum ActionType {
     AttachContainer = 78,
     DetachContainer = 79,
     Refine = 80,
-    PickupExcrement = 81,
+    PickUpExcrement = 81,
     TestDepth = 82,
     Enchant = 83,
     Navigate = 84,
@@ -123,22 +126,34 @@ export declare enum ActionType {
     ProtectItem = 88,
     UnProtectItem = 89,
     UpdateItemOrder = 90,
-    InterruptResponse = 91,
+    PromptResponse = 91,
     Upgrade = 92,
     Enhance = 93,
     Shoot = 94,
     Alter = 95,
     SailToIsland = 96,
-    UpdateItemQuickSlot = 97,
+    Unused1 = 97,
     RenameIsland = 98,
     Chop = 99,
     Mine = 100,
     ToggleHitch = 101,
-    ToggleDoor = 102,
-    ToggleContainer = 103,
-    UpdateOption = 104,
-    UpdateGameOption = 105
+    ToggleVehicle = 102,
+    ToggleDoor = 103,
+    ToggleContainer = 104,
+    UpdateOption = 105,
+    UpdateGameOption = 106,
+    UpdateWalkPath = 107,
+    Unused2 = 108,
+    Absorb = 109,
+    Exude = 110,
+    PackGround = 111,
+    ToggleTilled = 112,
+    DismountVehicle = 113,
+    CreateControllableNPC = 114,
+    RemoveControllableNPC = 115,
+    PropOpenDoor = 116
 }
+export declare const ACTIONS_RECOMMENDED: ActionType[];
 export declare enum ActionUsability {
     Paused = 0,
     Resting = 1,
@@ -153,7 +168,32 @@ export declare enum ActionFlag {
      */
     AllowPacketConcurrency = 1
 }
-export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, AV extends any[] = ActionArgumentTupleTypes<A>> {
+/**
+ * Used for hiding actions that can't currently be used from context menus.
+ */
+export declare enum ActionDisplayLevel {
+    Always = 0,
+    Direct = 1,
+    Never = 2
+}
+export interface IActionUsable {
+    usable: true;
+    /**
+     * Whether this action is currently usable with the "use on move" feature. Defaults to `true`
+     */
+    usableOnMove?: boolean;
+    displayLevel?: ActionDisplayLevel;
+}
+export interface IActionNotUsable extends Partial<IPackedMessage> {
+    usable: false;
+    alreadyUsing?: true;
+    errorDisplayLevel?: ActionDisplayLevel;
+    mobCheck?: IVector3;
+    arg?: never;
+    source?: never;
+}
+export declare type AnyActionDescription = IActionDescription<Array<ActionArgument | ActionArgument[]>, Entity, any, IActionUsable, any[]>;
+export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> extends IModdable {
     type?: number;
     argumentTypes: A;
     usability: {
@@ -162,32 +202,54 @@ export interface IActionDescription<A extends Array<ActionArgument | ActionArgum
     flags: {
         [key in ActionFlag]?: boolean;
     };
-    validExecutors: EntityType[];
+    validExecutors: Set<EntityType>;
     hasFlag(flag: ActionFlag): boolean;
-    execute(actionApi: IActionApi<E>, ...args: AV): R;
-    execute(executor: E, ...args: AV): R;
+    execute(actionApiOrExecutor: IActionApi<E, CU> | E, ...args: AV): R | Promise<R>;
+    executeConfirmer(actionApiOrExecutor: IActionApi<E, any> | E, args: AV, argumentTypes?: ActionArgument[]): Promise<boolean>;
+    /**
+     * Check if the action has setup CanUse logic
+     */
+    readonly hasSetCanUse: boolean;
+    canUse(executor: E, ...args: AV): CU | IActionNotUsable;
     /**
      * Called internally during `execute`
      */
-    preExecutionHandler?(actionApi: IActionApi<E>, ...args: AV): any;
+    preExecutionHandler?(actionApi: IActionApi<E, CU>, ...args: AV): any;
+    /**
+     * Called internally before `execute`
+     */
+    canUseHandler(actionApi: IActionHandlerApi<E, CU>, ...args: AV): CU | IActionNotUsable;
     /**
      * Called internally during `execute`
      */
-    handler(actionApi: IActionHandlerApi<E>, ...args: AV): R;
+    handler(actionApi: IActionHandlerApi<E, CU>, ...args: AV): R;
     /**
      * Called internally during `execute`
      */
-    confirmer?(actionApi: IActionConfirmerApi<E>, ...args: AV): Promise<boolean>;
-    clone(): IActionDescription<A, E, R, AV>;
+    confirmer?(actionApi: IActionConfirmerApi<E, CU>, ...args: AV): Promise<boolean>;
+    skipConfirmation(): this;
+    clone(): IActionDescription<A, E, R, CU, AV>;
 }
-export interface IActionApi<E extends Entity = Entity> {
+export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable = IActionUsable> {
     readonly executor: E;
     readonly type: ActionType;
     readonly actionStack: readonly ActionType[];
     readonly lastAction: ActionType;
-    isArgumentType<A extends ActionArgument>(argument: any, index: number, argumentType: A): argument is ActionArgumentTypeMap<A>;
+    readonly hasSetCanUse: boolean;
+    isArgumentType<A extends ActionArgument>(argument: any, index: number, argumentType: A): argument is IActionArgumentTypeMap[A];
+    canUse(): CU | IActionNotUsable;
+    /**
+     * Check if a creature on a tile and blocking the execution of the action
+     * @returns
+     * When checking before the action is being executed:
+     * true if a creature is on a tile and that creature is not hidden, false otherwise
+     *
+     * When checking when the action is being execute
+     * true if a creature is on a tile, false otherwise
+     */
+    isCreatureBlocking(tile: ITile): boolean;
     setDelay(delay: number, replace?: boolean): this;
-    setPassTurn(turnType?: TurnType): this;
+    setPassTurn(turnType?: TurnTypeFlag): this;
     setUpdateView(updateFov?: boolean): this;
     setUpdateRender(): this;
     setUpdateTablesAndWeight(): this;
@@ -197,7 +259,6 @@ export interface IActionApi<E extends Entity = Entity> {
     addSkillGains(skill: SkillType, multiplier?: number, actionTier?: number, bypass?: true): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
-    cancelPaddling(item: Item): this;
     setReputationChange(amount: number): this;
     setMilestone(milestone: Milestone, data?: number): this;
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
@@ -210,7 +271,7 @@ export interface IActionApi<E extends Entity = Entity> {
     /**
      * Returns the items registered for this action via `addItems`.
      */
-    getItems(): Stream<Item>;
+    getItems(): readonly Item[];
     /**
      * Removes all items added via `addItems`
      */
@@ -220,7 +281,7 @@ export interface IActionApi<E extends Entity = Entity> {
      */
     removeItems(...items: Array<Item | undefined>): this;
 }
-export interface IActionHandlerApi<E extends Entity = Entity> extends IActionApi<E> {
+export interface IActionHandlerApi<E extends Entity = Entity, CU extends IActionUsable = IActionUsable> extends IActionApi<E, CU> {
     /**
      * Sets that the items added to this action by `addItems` were "used" (so they will be damaged afterward).
      */
@@ -230,17 +291,11 @@ export interface IActionHandlerApi<E extends Entity = Entity> extends IActionApi
      */
     setItemsUsed(used?: boolean): this;
 }
-export interface IActionConfirmerApi<E extends Entity = Entity> extends IActionApi<E> {
+export interface IActionConfirmerApi<E extends Entity = Entity, CU extends IActionUsable = IActionUsable> extends IActionApi<E, CU> {
     /**
-     * If damaging any of the "used items" for this action will result in the item breaking, and this method is
-     * called from the `confirmer` of the action, a confirmation dialog will be shown asking if you want to
-     * proceed with the action.
-     *
-     * Note: This is called automatically if items are added in the `preExecutionHandler`. This should only be used in
-     * a custom confirmer if new items are added to the action here, and items *aren't* added in the `preExecutionHandler`.
-     * Otherwise the player could get two confirmations, and that's annoying.
+     * Prompts the user about something
      */
-    confirmItemsBroken(): Promise<boolean>;
+    prompt<PROMPT extends IPromptDescriptionBase<any[]>>(prompt: PROMPT, ...args: PromptDescriptionArgs<PROMPT>): Promise<boolean>;
 }
 export interface IActionSoundEffect {
     type: SfxType;
@@ -285,20 +340,22 @@ export declare enum ActionArgument {
     ItemArrayNearby = 23,
     ItemInventory = 24,
     ItemNearby = 25,
-    ItemType = 26,
-    NPC = 27,
-    NPCNearby = 28,
-    OptionalItemArrayNearby = 29,
-    Player = 30,
-    Quality = 31,
-    RecipeType = 32,
-    RestType = 33,
-    TileEvent = 34,
-    UnsignedInteger32NumberArray = 35,
-    Vector2 = 36,
-    Vector3 = 37
+    ItemNearbyIncludingTradeContainer = 26,
+    ItemType = 27,
+    NPC = 28,
+    NPCNearby = 29,
+    OptionalItemArrayNearby = 30,
+    Player = 31,
+    Quality = 32,
+    RecipeType = 33,
+    RestType = 34,
+    TileEvent = 35,
+    UnsignedInteger32NumberArray = 36,
+    Vector2 = 37,
+    Vector2Array = 38,
+    Vector3 = 39
 }
-export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
+export interface IActionArgumentTypeMap {
     [ActionArgument.Undefined]: undefined;
     [ActionArgument.Null]: null;
     [ActionArgument.Boolean]: boolean;
@@ -325,6 +382,7 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.ItemArrayNearby]: Item[];
     [ActionArgument.ItemInventory]: Item;
     [ActionArgument.ItemNearby]: Item;
+    [ActionArgument.ItemNearbyIncludingTradeContainer]: Item;
     [ActionArgument.ItemType]: ItemType;
     [ActionArgument.NPC]: NPC;
     [ActionArgument.NPCNearby]: NPC;
@@ -336,17 +394,19 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.TileEvent]: TileEvent;
     [ActionArgument.UnsignedInteger32NumberArray]: number[];
     [ActionArgument.Vector2]: IVector2;
+    [ActionArgument.Vector2Array]: IVector2[];
     [ActionArgument.Vector3]: IVector3;
-}[X];
-declare type ActionArgumentEntryType<X extends ActionArgument | ActionArgument[]> = X extends ActionArgument ? ActionArgumentTypeMap<X> : X extends ActionArgument[] ? ExtractActionArgumentArray<X> : never;
-declare type ExtractActionArgumentArray<X extends ActionArgument[]> = X extends [ActionArgument] ? ActionArgumentTypeMap<X[0]> : X extends [ActionArgument, ActionArgument] ? ActionArgumentTypeMap<X[0]> | ActionArgumentTypeMap<X[1]> : X extends [ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentTypeMap<X[0]> | ActionArgumentTypeMap<X[1]> | ActionArgumentTypeMap<X[2]> : X extends [ActionArgument, ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentTypeMap<X[0]> | ActionArgumentTypeMap<X[1]> | ActionArgumentTypeMap<X[2]> | ActionArgumentTypeMap<X[3]> : X extends [ActionArgument, ActionArgument, ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentTypeMap<X[0]> | ActionArgumentTypeMap<X[1]> | ActionArgumentTypeMap<X[2]> | ActionArgumentTypeMap<X[3]> | ActionArgumentTypeMap<X[4]> : never;
-export declare type ActionArgumentTupleTypes<X extends Array<ActionArgument | ActionArgument[]>> = X extends [] ? [] : X extends [ActionArgument | ActionArgument[]] ? Tuple1<ActionArgumentEntryType<X[0]>> : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? Tuple2<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>> : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? Tuple3<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>> : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? Tuple4<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>, ActionArgumentEntryType<X[3]>> : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? Tuple5<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>, ActionArgumentEntryType<X[3]>, ActionArgumentEntryType<X[4]>> : never;
+}
+declare type ActionArgumentEntryType<X extends ActionArgument | ActionArgument[]> = X extends ActionArgument ? IActionArgumentTypeMap[X] : X extends ActionArgument[] ? ({
+    [INDEX in keyof X]: IActionArgumentTypeMap[X[INDEX] & ActionArgument];
+}[number]) : never;
+export declare type ActionArgumentTupleTypes<X extends Array<ActionArgument | ActionArgument[]>> = X["length"] extends 0 ? [] : X["length"] extends 1 ? Tuple1<ActionArgumentEntryType<X[0]>> : X["length"] extends 2 ? Tuple2<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>> : X["length"] extends 3 ? Tuple3<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>> : X["length"] extends 4 ? Tuple4<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>, ActionArgumentEntryType<X[3]>> : X["length"] extends 5 ? Tuple5<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>, ActionArgumentEntryType<X[3]>, ActionArgumentEntryType<X[4]>> : never;
 export declare type Tuple1<X1> = undefined extends X1 ? [X1?] : [X1];
 export declare type Tuple2<X1, X2> = undefined extends X2 ? (undefined extends X1 ? [X1?, X2?] : [X1, X2?]) : [X1, X2];
 export declare type Tuple3<X1, X2, X3> = undefined extends X3 ? (undefined extends X2 ? (undefined extends X1 ? [X1?, X2?, X3?] : [X1, X2?, X3?]) : [X1, X2, X3?]) : [X1, X2, X3];
 export declare type Tuple4<X1, X2, X3, X4> = undefined extends X4 ? (undefined extends X3 ? (undefined extends X2 ? (undefined extends X1 ? [X1?, X2?, X3?, X4?] : [X1, X2?, X3?, X4?]) : [X1, X2, X3?, X4?]) : [X1, X2, X3, X4?]) : [X1, X2, X3, X4];
 export declare type Tuple5<X1, X2, X3, X4, X5> = undefined extends X5 ? (undefined extends X4 ? (undefined extends X3 ? (undefined extends X2 ? (undefined extends X1 ? [X1?, X2?, X3?, X4?, X5?] : [X1, X2?, X3?, X4?, X5?]) : [X1, X2, X3?, X4?, X5?]) : [X1, X2, X3, X4?, X5?]) : [X1, X2, X3, X4, X5?]) : [X1, X2, X3, X4, X5];
-export declare type ActionArguments<A extends IActionDescription<any, any, any, any>> = A extends IActionDescription<any, any, any, infer AA> ? AA : never;
+export declare type ActionArguments<A extends IActionDescription<any, any, any, any, any>> = A extends IActionDescription<any, any, any, any, infer AA> ? AA : never;
 export declare type ActionEntities<A extends IActionDescription<any, any>> = A extends IActionDescription<any, infer E> ? E : never;
 export declare type ActionApi<A extends IActionDescription<any, any>> = IActionApi<ActionEntities<A>>;
 export {};

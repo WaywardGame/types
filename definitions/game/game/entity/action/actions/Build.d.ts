@@ -9,6 +9,16 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../player/Player").default | import("../../npc/NPC").default, void, [import("../../../item/Item").default]>;
+import type { IItemBuild, IItemDescription } from "game/item/IItem";
+import type { ITile } from "game/tile/ITerrain";
+import type { IVector3 } from "utilities/math/IVector";
+export interface IBuildCanUse extends IActionUsable {
+    description: IItemDescription;
+    tile: ITile;
+    buildPosition: IVector3;
+    buildInfo: IItemBuild;
+}
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.Vector3, ActionArgument.Undefined]], import("../../Human").default, void, IBuildCanUse, [import("../../../item/Item").default, (IVector3 | undefined)?]>;
 export default _default;

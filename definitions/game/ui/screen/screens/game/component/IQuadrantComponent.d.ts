@@ -12,6 +12,7 @@
  * Since when do quadrants refer to 8 sections, this ain't no octagon
  */
 export declare enum Quadrant {
+    Any = -1,
     None = 0,
     TopLeft = 1,
     Top = 2,
@@ -20,6 +21,14 @@ export declare enum Quadrant {
     Bottom = 5,
     BottomLeft = 6
 }
+export declare const QUADRANT_REGIONS: {
+    top: Quadrant[];
+    bottom: Quadrant[];
+    left: Quadrant[];
+    right: Quadrant[];
+    middle: Quadrant[];
+};
+export declare type QuadrantRegion = keyof typeof QUADRANT_REGIONS;
 export declare enum QuadrantComponentContextMenuAction {
     SwitchWith = 0,
     MoveTo = 1,

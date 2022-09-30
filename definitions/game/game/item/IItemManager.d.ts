@@ -10,9 +10,13 @@
  */
 import type Doodad from "game/doodad/Doodad";
 import type { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
-import type { ActionType } from "game/entity/action/IAction";
+import type { ActionType, IActionNotUsable } from "game/entity/action/IAction";
+import type Creature from "game/entity/creature/Creature";
+import type { Quality } from "game/IObject";
+import type { ItemType, ItemTypeGroup } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type TileEvent from "game/tile/TileEvent";
+import type { Direction } from "utilities/math/Direction";
 import type { IVector3 } from "utilities/math/IVector";
 /**
  * Includes all protected items by default
@@ -21,7 +25,7 @@ export interface IGetItemOptions {
     /**
      * True to exclude protected items
      */
-    excludeProtectedItems: boolean;
+    excludeProtectedItems: true;
     /**
      * True to only include protected items if they pass an item.willBreakOnDamage() check.
      * excludeProtectedItems must be set to true for this to work.
@@ -31,12 +35,26 @@ export interface IGetItemOptions {
      * Item will be ignored
      */
     ignoreItem?: Item;
+    /**
+     * Only get items matching this text
+     */
+    filterText?: string;
 }
 export interface IGetItemsOptions extends IGetItemOptions {
     /**
      * Include sub containers in the search
      */
-    includeSubContainers: boolean;
+    includeSubContainers: true;
+}
+export interface IGetBestItemsOptions extends IGetItemsOptions {
+    action: ActionType;
+    actionWith: Item | (() => Item | undefined);
+    filterType: ItemType;
+    filterQuality: Quality;
+    filterGroup: ItemTypeGroup;
+    filterConsumable: true;
+    targetCreature: Creature;
+    filter(item: Item): any;
 }
 export declare enum CraftStatus {
     Invalid = 0,
@@ -64,6 +82,8 @@ export interface IRequirementInfo {
     fireSourceDoodad?: Doodad;
     fireSourceTileEvent?: TileEvent;
     fireSourceLavaPosition?: IVector3;
+    faceDirection?: Direction.Cardinal;
+    actionNotUsable?: IActionNotUsable;
 }
 export interface IDoodadsUsed {
     doodad: Doodad;
@@ -94,5 +114,13 @@ export declare enum ContainerReferenceSource {
     ResolveContainer = 9,
     ScheduleContainerInvalidation = 10,
     Serializer = 11,
-    WriteContainer = 12
+    WriteContainer = 12,
+    GetContainerName = 13
+}
+export interface ICraftResultChances {
+    success: number;
+    quality: number;
+}
+export declare namespace ICraftResultChances {
+    const NEVER: Readonly<ICraftResultChances>;
 }

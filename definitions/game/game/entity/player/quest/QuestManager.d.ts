@@ -16,7 +16,28 @@ import type { IQuest } from "game/entity/player/quest/quest/IQuest";
 import { QuestType } from "game/entity/player/quest/quest/IQuest";
 import type { RequirementInstance } from "game/entity/player/quest/quest/Quest";
 import type { Game } from "game/Game";
-export default class QuestManager extends EventEmitter.Host<IQuestManagerEvents> {
+export interface IQuestManager extends EventEmitter.Host<IQuestManagerEvents> {
+    /**
+     * Get all quests
+     */
+    getQuests(): QuestInstance[];
+    /**
+     * Get all quests of the given type
+     */
+    getQuests(type: QuestType): QuestInstance[];
+    getQuests(type?: QuestType): QuestInstance[];
+    add(type: QuestType): this;
+    reset(): void;
+}
+export declare class QuestManagerNoOp extends EventEmitter.Host<IQuestManagerEvents> implements IQuestManager {
+    private readonly quests;
+    getQuests(): QuestInstance[];
+    getQuests(type: QuestType): QuestInstance[];
+    getQuests(type?: QuestType): QuestInstance[];
+    add(type: QuestType): this;
+    reset(): void;
+}
+export default class QuestManager extends EventEmitter.Host<IQuestManagerEvents> implements IQuestManager {
     static reset(): void;
     private readonly quests;
     private readonly eventBusTriggers;

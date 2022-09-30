@@ -22,6 +22,7 @@ export default class TabMultiplayer extends Tab {
     readonly choiceLobbyPrivate: Choice<undefined>;
     readonly lobbyType: ChoiceList<Choice<string | number | undefined>, false>;
     readonly inputPVP: CheckButton;
+    readonly inputAllowTraveling: CheckButton;
     readonly inputAllowHardcoreRespawns: CheckButton;
     readonly maxPlayersRow: RangeRow;
     readonly tickSpeedRow: RangeRow;

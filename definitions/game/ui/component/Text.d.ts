@@ -8,8 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { EmitterOrBus, Event, Handler } from "event/EventManager";
 import UiTranslation from "language/dictionary/UiTranslation";
+import type { IBindingsSection } from "language/segment/BindSegment";
 import type { IColorSection } from "language/segment/ColorSegment";
 import type { IHeadingSection } from "language/segment/HeadingSegment";
 import type { ILinkSection } from "language/segment/LinkSegment";
@@ -18,6 +20,7 @@ import type { ITooltipSection } from "language/segment/TooltipSegment";
 import Translation from "language/Translation";
 import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
+import type { IInput, Modifier } from "ui/input/IInput";
 import type { IReferenceSection, ISegment, IStringSection } from "utilities/string/Interpolator";
 export default class Text extends Component {
     static resolve(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[], ...args: any[]): IStringSection[];
@@ -32,8 +35,8 @@ export default class Text extends Component {
     setParagraphs(): this;
     setText(text: UiTranslation | Translation, ...args: any[]): this;
     setText(refresh: false, text: UiTranslation | Translation, ...args: any[]): this;
-    setText(text?: TranslationGenerator): this;
-    setText(refresh: false, text?: TranslationGenerator): this;
+    setText(text?: TranslationGenerator, ...args: any[]): this;
+    setText(refresh: false, text?: TranslationGenerator, ...args: any[]): this;
     getText(): TranslationGenerator | undefined;
     getTextAsString(): string;
     /**
@@ -65,12 +68,24 @@ export declare class Paragraph extends Text {
 }
 export declare class Heading extends Text {
     constructor(elementType?: string);
+    /**
+     * Safe — removes all children except for the icon
+     */
+    dump(): this;
+    icon?: Component;
+    addIcon(initializer: (component: Component) => any): this;
+}
+export declare type BasicTextLink = string | [string, string?];
+export interface IBasicTextEvents extends Events<Component> {
+    handleLink(link: BasicTextLink): true | void;
 }
 export declare class BasicText extends Component {
+    event: IEventEmitter<this, IBasicTextEvents>;
     private _link;
-    private linkHandler;
+    inputIndex?: number;
+    protected input?: IInput;
+    protected inputModifier?: Modifier;
     constructor(elementType?: string);
-    setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection>): this;
-    setLinkHandler(handler?: (link: string | [string, string | undefined]) => boolean): void;
+    setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection> & Partial<IBindingsSection>): this;
     private onClick;
 }

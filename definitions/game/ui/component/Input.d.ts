@@ -12,6 +12,12 @@ import type { Events, IEventEmitter } from "event/EventEmitter";
 import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IRefreshable } from "ui/component/Refreshable";
+export declare enum InputClasses {
+    Main = "input",
+    Filter = "input-filter",
+    Empty = "input-empty",
+    Modified = "input-modified"
+}
 export declare enum ClearType {
     UseDefault = 0,
     Auto = 1,
@@ -20,20 +26,20 @@ export declare enum ClearType {
 }
 export interface IInputEvents extends Events<Component> {
     change(text: string): any;
-    changeDebounced(text: string): any;
     done(text: string): any;
     enterBind(): any;
     escape(): any;
     focus(): any;
     blur(): any;
-    upArrow(): any;
-    downArrow(): any;
+    upArrow(event: KeyboardEvent): any;
+    downArrow(event: KeyboardEvent): any;
     toggleDisabled(disabled: boolean): any;
 }
 export default class Input extends Component implements IRefreshable {
     event: IEventEmitter<this, IInputEvents>;
     default: (() => string) | undefined;
     private lastInput;
+    private lastText;
     get text(): string;
     set text(value: string);
     private keydownEnter;
@@ -46,8 +52,9 @@ export default class Input extends Component implements IRefreshable {
     private shouldNotClearOnEscape;
     private shouldSelectOnFocus;
     private shouldSelectOnNextMouseUp;
+    private debounce;
     get changed(): boolean;
-    private readonly input;
+    protected readonly input: Component;
     private readonly wrapperButtons;
     private readonly _disabledReasons;
     get disabled(): boolean;
@@ -68,6 +75,7 @@ export default class Input extends Component implements IRefreshable {
     setBlurOnEnter(shouldBlurOnEnter?: boolean): this;
     setNotClearOnEscape(shouldNotClearOnEscape?: boolean): this;
     setSelectOnFocus(selectOnFocus?: boolean): this;
+    setDebounce(debounce?: number): this;
     editInput(consumer: (input: Component) => any): this;
     refresh(): this;
     /**
@@ -87,5 +95,6 @@ export default class Input extends Component implements IRefreshable {
     private keydown;
     private keyup;
     private change;
+    private emitChange;
     private getClearTo;
 }
