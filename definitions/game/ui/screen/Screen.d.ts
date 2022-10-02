@@ -22,6 +22,8 @@ import Log from "utilities/Log";
 interface IScreenEvents extends Events<Component> {
     hideDialog(dialogId: DialogId): any;
     showDialog(dialog: Dialog): any;
+    showContextMenu(contextMenu: ContextMenu): any;
+    hideContextMenu(contextMenu: ContextMenu): any;
 }
 export default abstract class Screen extends Component {
     readonly type: ScreenId;

@@ -147,7 +147,7 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
     /**
      * The icon this action should have, if any.
      */
-    icon?: SupplierOr<UsableActionIconReference | false, [using: IUsableActionPossibleUsing, action: UsableAction<REQUIREMENTS>]>;
+    icon?: SupplierOr<UsableActionIconReference | false, [using: IUsableActionPossibleUsing, action: UsableAction<REQUIREMENTS>, context: UsableActionDisplayContext]>;
     /**
      * Where the icon should appear, when slotted with an item. Defaults to bottom right.
      *
@@ -241,7 +241,7 @@ export interface IUsableActionDefinitionExecutable<REQUIREMENTS extends IUsableA
 }
 export declare type IUsableActionDefinition<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> = IUsableActionDefinitionSubmenu<REQUIREMENTS> | IUsableActionDefinitionExecutable<REQUIREMENTS>;
 export declare type ActionId = string | ActionType | UsableActionType;
-export declare enum UsableActionTranslationContext {
+export declare enum UsableActionDisplayContext {
     None = 0,
     Use = 1
 }

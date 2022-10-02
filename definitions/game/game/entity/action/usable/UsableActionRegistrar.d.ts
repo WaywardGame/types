@@ -18,7 +18,7 @@ export default class UsableActionRegistrar {
     readonly actions: Array<[string, UsableAction]>;
     readonly actionIndices: Record<string, number>;
     readonly actionIds: string[];
-    byId(id?: string): UsableAction | undefined;
+    byId(id?: ActionId): UsableAction | undefined;
     filter(filter: (action: UsableAction, id: string) => any): UsableActionRegistrar;
     private contextMenuInitializer?;
     setContextMenuInitializer(initializer?: (menu: ContextMenu) => any): this;

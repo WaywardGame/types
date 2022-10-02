@@ -47,7 +47,7 @@ export interface IActionsConfigurationDrawerEvents extends Events<Component> {
 }
 export default class ActionsConfigurationDrawer extends Component implements IRefreshable {
     readonly event: IEventEmitter<this, IActionsConfigurationDrawerEvents>;
-    readonly minimizeButton: Button;
+    readonly acceptButton: Button;
     readonly columnsContainer: Component<HTMLElement>;
     readonly actionsColumn: Component<HTMLElement>;
     readonly actionsColumnContent: Component<HTMLElement>;

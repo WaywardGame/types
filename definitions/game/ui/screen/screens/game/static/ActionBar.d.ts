@@ -68,8 +68,9 @@ export default class ActionBar extends QuadrantComponent {
     addSlot(): this;
     removeSlot(slot?: number): this;
     generateSlots(): this;
-    getSlottedIn(item: Item): number[];
+    getSlottedIn(item: Item): ReadonlySet<number> | undefined;
     private onMoveSlot;
+    private readonly slottedIn;
     private onSlotUpdate;
     configure(number: number): void;
     protected onResize(): void;
