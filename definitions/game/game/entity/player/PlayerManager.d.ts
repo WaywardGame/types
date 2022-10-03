@@ -61,5 +61,15 @@ export default class PlayerManager extends EntityManager<Player> {
      * Use with caution!
      */
     permanentlyDelete(player: Player): void;
-    private removeFromAbsentPlayers;
+    /**
+     * Moves to the player to the target array
+     * @param source Where they are coming from. It's okay if they aren't in this array
+     * @param destination Where the player should be added to
+     * @param player The player to move
+     */
+    private movePlayerTo;
+    /**
+     * Finds the first available player id in the array
+     */
+    private findAvailablePlayerId;
 }

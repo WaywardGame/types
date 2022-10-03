@@ -253,6 +253,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * If set to true, this item will not grant quality bonuses (durability/quality bonuses) when used in a craft. Aptitude and tiers will still apply.
      */
     noCraftingQualityBonus?: boolean;
+    /**
+     * A float that items inside the container will be reduced by when in a player's inventory.
+     */
+    reducedStoredItemsWeight?: number;
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
 }

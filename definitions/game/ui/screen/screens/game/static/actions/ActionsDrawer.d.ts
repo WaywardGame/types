@@ -84,6 +84,6 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     private slottedItemActionButton?;
     private slotButton;
     private selectAction;
-    private updateConfigurationColumn;
+    updateConfigurationColumn(): void;
     private getAction;
 }

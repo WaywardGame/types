@@ -46,7 +46,7 @@ export declare const usableActionSets: {
     4: UsableActionGenerator<[]>;
     5: UsableActionGenerator<[]>;
     6: UsableActionGenerator<[]>;
-    7: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/item/UsableActionsUseItem").IUseItemAction, import("../IUsableAction").IUsableActionRequirements>;
+    7: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/item/UsableActionsUseItem").IUseItemAction, import("game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
     8: UsableActionGenerator<[]>;
     9: UsableActionGenerator<[]>;
     10: UsableActionGenerator<[]>;
@@ -56,7 +56,7 @@ export declare const usableActionSets: {
     14: UsableActionGenerator<[]>;
     15: UsableActionGenerator<[]>;
     16: UsableActionGenerator<[]>;
-    17: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/UsableActionsUseNPC").IUseNPCAction, import("../IUsableAction").IUsableActionRequirements>;
+    17: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/UsableActionsUseNPC").IUseNPCAction, import("game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
     18: UsableActionGenerator<[]>;
     19: UsableActionGenerator<[]>;
     20: UsableActionGenerator<[]>;

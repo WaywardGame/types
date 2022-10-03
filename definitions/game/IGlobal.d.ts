@@ -43,7 +43,7 @@ import "utilities/typesglobal/Misc";
 import "utilities/typesglobal/Objects";
 import "utilities/typesglobal/Types";
 declare global {
-    let absentPlayers: Player[];
+    let absentPlayers: Array<Player | undefined>;
     let audio: WAudio | undefined;
     let commandManager: CommandManager;
     let game: Game;
