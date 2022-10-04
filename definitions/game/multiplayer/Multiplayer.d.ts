@@ -67,6 +67,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     isServer(): boolean;
     isClient(): boolean;
     getPlayerIdentifier(): string;
+    setPlayerIdentifier(identifier: string): void;
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions, updateGame?: boolean): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;

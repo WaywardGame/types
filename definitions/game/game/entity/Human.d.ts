@@ -168,7 +168,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
      * Returns the result of the `"getMaxHealth"` event, or the `max` in `Stat.Health`,
      * if the result of the hook is `undefined`.
      */
-    getMaxHealth(): number;
+    getMaxHealth(withBonus?: boolean): number;
     getCraftingDifficulty(level: RecipeLevel): number;
     update(): void;
     updateStatsAndAttributes(): void;

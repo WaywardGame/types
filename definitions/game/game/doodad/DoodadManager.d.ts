@@ -78,7 +78,7 @@ export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerE
      * Runs a full gamut of updates on doodads including decaying items inside containers, spreading/growing plants/mushrooms, water distillation/desenation and more.
      */
     updateAllAsync(ticks: number, playingHumans: Human[], updatesPerTick: number | undefined, onProgress: (progess: number) => Promise<void>): Promise<void>;
-    verifyAndFixItemWeights(): void;
+    verifyAndFixItemWeights(allowFixesInMultiplayer?: boolean): void;
     /**
      * Used to spawn a random doodad on the current biome type and at a set location (and terrain type) based on spawnOnWorldGen properties in doodad descriptions.
      * @param terrainType The terrain type to check.

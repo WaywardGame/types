@@ -106,6 +106,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     private _world;
     modifiersCollection?: IslandModifiersCollection;
     details?: IIslandDetails;
+    ranUpgrades: boolean;
     constructor(position?: IVector2, seed?: number);
     toString(): string;
     private registerMemoryLeakDetector;
@@ -323,7 +324,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * Only allow loading references once
      * Even if an island is unloaded, the loaded references will remain
      */
-    loadReferences(): void;
+    loadReferences(allowFixesInMultiplayer?: boolean): void;
     /**
      * Gets the items/resources from terrain based on the TerrainResources definition and checks if it is based on the current biome type.
      * @param terrainLoot The resource to check.

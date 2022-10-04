@@ -26,6 +26,7 @@ export declare type IDedicatedServerGameOptions = ICommonGameOptions;
 export interface IJoinServerOptions {
     joinProgrammatically: boolean;
     enableAllMilestoneModifiers?: boolean;
+    multiplayerIdentifier?: string;
 }
 export declare enum GameMode {
     Hardcore = "Hardcore Mode",
