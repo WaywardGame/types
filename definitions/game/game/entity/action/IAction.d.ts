@@ -162,11 +162,10 @@ export declare enum ActionUsability {
     Delayed = 4
 }
 export declare enum ActionFlag {
-    OperatorMilestone = 0,
     /**
      * Allows multiple of these actions to run at once when in multiplayer
      */
-    AllowPacketConcurrency = 1
+    AllowPacketConcurrency = 0
 }
 /**
  * Used for hiding actions that can't currently be used from context menus.

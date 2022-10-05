@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import EventEmitter from "event/EventEmitter";
 import type { ActionId, IUsableActionDefinition, IUsableActionDefinitionExecutable, IUsableActionExecutionContext, IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, UsableActionUsability } from "game/entity/action/usable/IUsableAction";
 import { IUsableActionNotUsable, UsableActionDisplayContext } from "game/entity/action/usable/IUsableAction";
 import type Player from "game/entity/player/Player";
@@ -16,6 +17,10 @@ import type Item from "game/item/Item";
 import { ActionTranslation } from "language/dictionary/Misc";
 import type Translation from "language/Translation";
 import type { HighlightSelector } from "ui/util/IHighlight";
+export interface IUsableActionEvents {
+    preExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
+    postExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
+}
 /**
  * Create a basic usable action:
  * ```ts
@@ -29,7 +34,7 @@ import type { HighlightSelector } from "ui/util/IHighlight";
  *
  * To learn about action definitions, see {@link IUsableActionDefinitionBase}
  */
-declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements, DEFINITION extends IUsableActionDefinition<REQUIREMENTS> = IUsableActionDefinition<REQUIREMENTS>> {
+declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements, DEFINITION extends IUsableActionDefinition<REQUIREMENTS> = IUsableActionDefinition<REQUIREMENTS>> extends EventEmitter.Host<IUsableActionEvents> {
     readonly requirements: REQUIREMENTS;
     readonly definition: DEFINITION;
     id: ActionId;

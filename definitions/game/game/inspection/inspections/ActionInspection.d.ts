@@ -30,6 +30,7 @@ export default class ActionInspection extends Inspection<ActionId | undefined> {
     private getActionId;
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getTranslation;
+    private getActionDiscovered;
     private getActionTier;
     private getActionUsability;
 }

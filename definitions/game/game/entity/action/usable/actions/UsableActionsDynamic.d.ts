@@ -19,6 +19,7 @@ export interface IUsableActionDynamicDefinition {
     bindable: Bindable;
     displayLevel?: ActionDisplayLevel;
     priority?: number;
+    discoveredByDefault?: true;
 }
 export interface IUsableActionsDynamicConfig<DEFINITION extends IUsableActionDynamicDefinition, REQUIREMENTS extends IUsableActionRequirements> {
     id: string;
