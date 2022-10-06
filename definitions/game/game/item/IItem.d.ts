@@ -19,6 +19,7 @@ import type { Stat } from "game/entity/IStats";
 import type { IDecayTemperatureRange } from "game/IGame";
 import type { IObjectDescription, Quality } from "game/IObject";
 import type { IslandId } from "game/island/IIsland";
+import type { IAddToContainerOptions } from "game/item/IItemManager";
 import type Item from "game/item/Item";
 import type Recipe from "game/item/recipe/Recipe";
 import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
@@ -400,7 +401,11 @@ export interface IMoveToTileOptions {
     fromPoint?: IVector3;
     toPoint: IVector3;
     toContainer?: IContainer;
+    toContainerOptions?: IAddToContainerOptions;
     beforeMovement?: IMoveToTileBeforeMovementOptions;
+    /**
+     * Note: Everything done in afterMovement must be clientside only
+     */
     afterMovement?: IMoveToTileAfterMovementOptions;
 }
 export interface IMoveToTileBeforeMovementOptions {

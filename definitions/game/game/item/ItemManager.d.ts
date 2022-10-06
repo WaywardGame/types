@@ -145,7 +145,14 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     computeContainerWeight(container: IContainer): number;
     getMagicalWeightCapacity(container: IContainer): number;
     moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, filterText?: string | undefined, onMoveItem?: (item: Item) => void): Item[];
-    moveToContainer(human: Human | undefined, item: Item, container: IContainer): boolean;
+    /**
+     * Moves an item into a container when the container has enough room for it
+     * @param human Human causing the item movement
+     * @param item Item to move
+     * @param container Container to move the item to
+     * @returns True if the item was moved, false if it wasn't
+     */
+    moveToContainer(human: Human | undefined, item: Item, container: IContainer, animateToTarget?: IVector3): boolean;
     hasRoomInContainer(targetContainer: IContainer, itemToMove: Item): boolean;
     /**
      * Gets the name of a container

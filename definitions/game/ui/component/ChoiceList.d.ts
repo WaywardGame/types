@@ -31,8 +31,8 @@ export default class ChoiceList<C extends Choice = Choice, OPTIONAL extends bool
     setChoices(...choices: ArrayOfIterablesOr<C>): this;
     refresh(): this;
     setRefreshMethod(refreshMethod: (choiceList: this) => OPTIONAL extends true ? C | undefined : C): this;
-    choose(chosen?: C): this;
-    choose(filter?: (choice: C, index: number) => any): this;
+    choose(chosen?: C, emitEvent?: boolean): this;
+    choose(filter?: (choice: C, index: number) => any, emitEvent?: boolean): this;
     choices(filter?: (choice: C, index: number) => any): import("@wayward/goodstream").default<Exclude<C, never>>;
     private onChoiceChange;
 }

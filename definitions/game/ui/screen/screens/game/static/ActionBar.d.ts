@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import Stream from "@wayward/goodstream/Stream";
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { IActionApi } from "game/entity/action/IAction";
 import type { IUsableActionPossibleUsing, IUsableActionRequirements, ReturnableUsableActionUsability } from "game/entity/action/usable/IUsableAction";
@@ -43,9 +44,13 @@ export declare enum ActionBarClasses {
     SlotSlottedContainerCopyingFrom = "game-action-slot-slotted-container-copying-from",
     SlotConfiguring = "game-action-slot-configuring",
     SlotDisabled = "game-action-slot-disabled",
-    SlotAddButton = "game-action-slot-add-button",
-    SlotAddButtonIcon = "game-action-slot-add-button-icon",
-    SlotUseOnMove = "game-action-slot-use-on-move"
+    SlotUseOnMove = "game-action-slot-use-on-move",
+    MetaButtons = "game-action-bar-meta-buttons-container",
+    MetaButton = "game-action-bar-meta-button",
+    MetaButtonAdd = "game-action-bar-meta-button-add",
+    MetaButtonAddIcon = "game-action-bar-meta-button-add-icon",
+    MetaButtonRemove = "game-action-bar-meta-button-remove",
+    MetaButtonRemoveIcon = "game-action-bar-meta-button-remove-icon"
 }
 export interface IActionBarEvents extends Events<QuadrantComponent> {
     configure(number: number): any;
@@ -59,14 +64,15 @@ export default class ActionBar extends QuadrantComponent {
     protected slots: IActionBarSlotData[];
     showBindings?: boolean;
     readonly slotsContainer: Component<HTMLElement>;
-    readonly lastSlotsContainer: Component<HTMLElement>;
+    readonly metaButtons: Component<HTMLElement>;
+    readonly removeSlotButton: Button;
     readonly addSlotButton: Button;
     readonly configurationDrawer: ActionsConfigurationDrawer;
     get configuringNumber(): number | undefined;
     readonly actionSlotTooltipHandler: ActionSlotTooltipHandler;
     constructor();
     addSlot(): this;
-    removeSlot(slot?: number): this;
+    removeSlot(): this;
     generateSlots(): this;
     getSlottedIn(item: Item): ReadonlySet<number> | undefined;
     private onMoveSlot;
@@ -81,7 +87,7 @@ export default class ActionBar extends QuadrantComponent {
     protected onToggleUseWhileMoving(api: IBindHandlerApi): boolean;
     protected onMenuCancel(): boolean;
     protected onChangeWhetherCopying(api: IBindHandlerApi): boolean;
-    getSlots(): Generator<ActionSlot, void, unknown>;
+    getSlots(): Stream<ActionSlot>;
     private toggleShowingBindings;
     private focus;
     private refreshSlots;

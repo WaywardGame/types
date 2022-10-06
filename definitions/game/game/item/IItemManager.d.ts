@@ -100,6 +100,7 @@ export interface IPlaceOnTileOptions {
     force?: boolean;
     skipMessage?: boolean;
     skipTileUpdate?: boolean;
+    animate?: boolean;
 }
 export declare enum ContainerReferenceSource {
     ContainerWeightReduction = 0,

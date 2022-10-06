@@ -22,6 +22,9 @@ declare enum Classes {
     Header = "game-action-configuration-drawer-header",
     HeaderTitle = "game-action-configuration-drawer-header-title",
     ButtonClose = "game-action-configuration-drawer-button-close",
+    ButtonCloseNoAction = "game-action-configuration-drawer-button-close-no-action",
+    Footer = "game-action-configuration-drawer-footer",
+    DiscoveryHint = "game-action-configuration-drawer-footer-discovery-hint",
     Column = "game-action-configuration-drawer-column",
     ColumnContent = "game-action-configuration-drawer-column-content",
     ColumnsContainer = "game-action-configuration-drawer-columns-container",
@@ -47,7 +50,6 @@ declare enum ItemMethod {
 export interface IActionsConfigurationDrawerEvents extends Events<Component> {
     update(): any;
     endConfiguration(): any;
-    removeSlot(slot: number): any;
 }
 export default class ActionsConfigurationDrawer extends Component implements IRefreshable {
     readonly event: IEventEmitter<this, IActionsConfigurationDrawerEvents>;
@@ -55,6 +57,8 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     readonly headerTitle: Text;
     readonly acceptButton: Button;
     readonly columnsContainer: Component<HTMLElement>;
+    readonly footer: Component<HTMLElement>;
+    readonly discoveryHint: Text;
     readonly actionsColumn: Component<HTMLElement>;
     readonly actionsColumnContent: Component<HTMLElement>;
     readonly itemActionsColumn: Component<HTMLElement>;
@@ -64,7 +68,7 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     readonly itemOrTypeChoiceList: ChoiceList<Choice<ItemMethod>, false>;
     readonly useOnMoveCheckButton: CheckButton;
     readonly hr1: HorizontalLine;
-    readonly removeSlotButton: Button;
+    readonly clearSlotButton: Button;
     readonly hr2: HorizontalLine;
     readonly editBindingsButton: Button;
     readonly hints: Component<HTMLElement>;
@@ -82,8 +86,10 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     private editBindings;
     private setMethod;
     private setUseOnMove;
-    private removeSlot;
+    private clearSlot;
+    protected postExecuteAction(): void;
     private generateActionLists;
+    private getRenderInfo;
     private appendActionButton;
     private createActionButton;
     private slottedActionButton?;
