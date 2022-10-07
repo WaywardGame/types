@@ -16,7 +16,7 @@ import type NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
 import { CreationId } from "game/IGame";
 import { Quality } from "game/IObject";
-import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IRecipe } from "game/item/IItem";
+import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IMoveToTileOptions, IRecipe } from "game/item/IItem";
 import { CraftResult, ItemType, ItemTypeGroup } from "game/item/IItem";
 import type { IAddToContainerOptions, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IRequirementInfo } from "game/item/IItemManager";
 import { ContainerReferenceSource, CraftStatus, ICraftResultChances, WeightType } from "game/item/IItemManager";
@@ -144,15 +144,16 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: Quality): Item[];
     computeContainerWeight(container: IContainer): number;
     getMagicalWeightCapacity(container: IContainer): number;
-    moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, filterText?: string | undefined, onMoveItem?: (item: Item) => void): Item[];
+    moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, filterText?: string | undefined, onMoveItem?: (item: Item) => void, moveToTileOptions?: IMoveToTileOptions): Item[];
     /**
      * Moves an item into a container when the container has enough room for it
      * @param human Human causing the item movement
      * @param item Item to move
      * @param container Container to move the item to
+     * @param moveToTileOptions When set, the movement will be animated
      * @returns True if the item was moved, false if it wasn't
      */
-    moveToContainer(human: Human | undefined, item: Item, container: IContainer, animateToTarget?: IVector3): boolean;
+    moveToContainer(human: Human | undefined, item: Item, container: IContainer, moveToTileOptions?: IMoveToTileOptions): boolean;
     hasRoomInContainer(targetContainer: IContainer, itemToMove: Item): boolean;
     /**
      * Gets the name of a container

@@ -399,7 +399,9 @@ export interface IItemReturn {
 }
 export interface IMoveToTileOptions {
     fromPoint?: IVector3;
+    fromPointApplyPlayerOffset?: boolean;
     toPoint: IVector3;
+    toPointApplyPlayerOffset?: boolean;
     toContainer?: IContainer;
     toContainerOptions?: IAddToContainerOptions;
     beforeMovement?: IMoveToTileBeforeMovementOptions;
@@ -414,6 +416,7 @@ export interface IMoveToTileBeforeMovementOptions {
 export interface IMoveToTileAfterMovementOptions {
     soundEffect?: SfxType;
     particles?: IRGB;
+    updateTileLayer?: boolean;
 }
 export interface IRecipe {
     baseComponent?: ItemType | ItemTypeGroup;

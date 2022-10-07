@@ -226,7 +226,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @returns True if the movement is happening, false if it wasn't able to move
      */
     moveToTile(options: IMoveToTileOptions): boolean;
-    isMoving(): boolean;
+    isMoving(): IMoveToTileOptions | undefined;
     getMovementProgress(timeStamp: number): number;
     setQuality(human: Human | undefined, quality?: Quality): void;
     getValidMagicalProperties(): MagicalPropertyType[];

@@ -19,6 +19,8 @@ export interface IVersionInfo {
     date?: Date;
 }
 declare module Version {
+    const versionInfoRegExp: RegExp;
+    const versionInfoRegExpSemver: RegExp;
     /**
      * Returns whether the given version is compatible with the game's version. This is used to check, for example,
      * if a mod is compatible with the game's version.

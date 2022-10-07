@@ -208,13 +208,14 @@ export declare enum TileUpdateType {
     DoodadRemove = 13,
     Item = 14,
     ItemDrop = 15,
-    Mod = 16,
-    NPC = 17,
-    NPCSpawn = 18,
-    Player = 19,
-    Terrain = 20,
-    TileEventManager = 21,
-    Tilled = 22
+    ItemMovement = 16,
+    Mod = 17,
+    NPC = 18,
+    NPCSpawn = 19,
+    Player = 20,
+    Terrain = 21,
+    TileEventManager = 22,
+    Tilled = 23
 }
 export declare enum CreationId {
     Doodad = 0,
