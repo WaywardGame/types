@@ -13,7 +13,7 @@ import type { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
 import type { ActionType, IActionNotUsable } from "game/entity/action/IAction";
 import type Creature from "game/entity/creature/Creature";
 import type { Quality } from "game/IObject";
-import type { ItemType, ItemTypeGroup } from "game/item/IItem";
+import type { IMoveToTileOptions, ItemType, ItemTypeGroup } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type TileEvent from "game/tile/TileEvent";
 import type { Direction } from "utilities/math/Direction";
@@ -100,7 +100,7 @@ export interface IPlaceOnTileOptions {
     force?: boolean;
     skipMessage?: boolean;
     skipTileUpdate?: boolean;
-    animate?: boolean;
+    animateMovement?: boolean | Partial<IMoveToTileOptions>;
 }
 export declare enum ContainerReferenceSource {
     ContainerWeightReduction = 0,
