@@ -30,6 +30,7 @@ export declare class SmartConnection extends Connection {
     private _steamNetworkConnection;
     private _webWorkerConnection;
     constructor(matchmakingInfo: IMatchmakingInfo, matchmakingIdentifier: string, webRTCConfig: RTCConfiguration, sendMatchmakingMessage: (message: MatchmakingMessageData) => void, onData: (data: ArrayBuffer) => void, onConnected: (matchmakingInfo: IMatchmakingInfo) => void, trySteamRelayNetwork: boolean, connectGlobalMatchmakingServer: () => void);
+    private get activeConnection();
     get isSteamNetworkConnection(): boolean;
     isConnected(): boolean;
     getState(): ConnectionState;
@@ -38,6 +39,8 @@ export declare class SmartConnection extends Connection {
     close(closeImmediately: boolean): void;
     protected onClosing(): void;
     protected onClosed(): void;
+    addKeepAliveTimeout(): void;
+    sendKeepAlive(): void;
     send(data: Uint8Array, byteOffset: number, length?: number): boolean;
     processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;
     private trySteamNetwork;

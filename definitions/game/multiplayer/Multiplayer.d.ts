@@ -109,6 +109,11 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo, retryReason: JoinServerRetryReason): Promise<void>;
     disconnectAndResetGameState(reason: DisconnectReason.UnableToJoinGame, unableToJoinReason: UnableToJoinReason): Promise<void>;
     disconnectAndResetGameState(reason: DisconnectReason, reasonDescription?: any[]): Promise<void>;
+    /**
+     * Sanity checks for the state of multiplayer
+     * @returns True when the state is invalid
+     */
+    verifyState(): boolean;
     kick(player: Player, reason: DisconnectReason.Kick | DisconnectReason.Banned): void;
     onPlaying(): Promise<void>;
     onLobbyEntered(success: boolean, lobbyId: string): void;

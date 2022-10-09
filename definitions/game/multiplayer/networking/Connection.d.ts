@@ -85,5 +85,5 @@ export declare abstract class Connection implements IConnection {
     protected abstract onClosed(): void;
     abstract send(data: Uint8Array, byteOffset: number, length?: number): boolean;
     abstract processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;
-    private _clearKeepAliveInterval;
+    protected _clearKeepAliveInterval(): void;
 }
