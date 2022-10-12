@@ -17,6 +17,7 @@ import type Item from "game/item/Item";
 import { ActionTranslation } from "language/dictionary/Misc";
 import type Translation from "language/Translation";
 import type { HighlightSelector } from "ui/util/IHighlight";
+export declare const USABLE_ACTION_USE_ON_MOVE_UNLOCK_AT = 20;
 export interface IUsableActionEvents {
     preExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
     postExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
@@ -64,6 +65,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     private translator?;
     getTranslation(using?: IUsableActionPossibleUsing, which?: ActionTranslation, context?: UsableActionDisplayContext): Translation | undefined;
     getOrder(using?: IUsableActionPossibleUsing): number;
+    canUseOnMove(): boolean;
 }
 export interface IUsableActionFactory<REQUIREMENTS extends IUsableActionRequirements> {
     create: <DEFINITION extends IUsableActionDefinition<REQUIREMENTS>>(action: DEFINITION) => UsableAction<REQUIREMENTS, DEFINITION>;

@@ -93,7 +93,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     static getItemTypes(): readonly ItemType[];
     static getItemsWithRecipes(): readonly ItemType[];
     static getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
-    static getHighestItemActionTierForAction(action: ActionType): number | undefined;
+    static getHighestItemActionTierForAction(action: ActionType): number;
     static isItemAcceptedAsOffer(item: ItemType): boolean | undefined;
     static isItemUsedInRecipe(item: ItemType): boolean | undefined;
     static isItemUsedForGrowingPlants(item: ItemType): boolean | undefined;
@@ -182,6 +182,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     isItemAcceptedAsOffer(item: ItemType): boolean | undefined;
     isItemUsedInRecipe(item: ItemType): boolean | undefined;
     isItemUsedForGrowingPlants(item: ItemType): boolean | undefined;
+    getHighestItemActionTierForAction(action: ActionType): number;
     isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     getGroupItems(itemGroup: ItemType | ItemTypeGroup): Set<ItemType>;

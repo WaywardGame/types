@@ -27,4 +27,5 @@ export default class MilestoneInspection extends Inspection<Milestone> {
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getDiscovered;
     private getDiscoveredTranslations;
+    private getDiscoveryTranslation;
 }

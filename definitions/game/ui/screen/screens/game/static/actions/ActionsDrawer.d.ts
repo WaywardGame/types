@@ -15,7 +15,7 @@ import ChoiceList, { Choice } from "ui/component/ChoiceList";
 import Component from "ui/component/Component";
 import HorizontalLine from "ui/component/HorizontalLine";
 import type { IRefreshable } from "ui/component/Refreshable";
-import Text from "ui/component/Text";
+import Text, { Paragraph } from "ui/component/Text";
 import { IActionBarSlotData } from "ui/screen/screens/game/static/actions/IActionBar";
 declare enum Classes {
     Main = "game-action-configuration-drawer",
@@ -64,9 +64,12 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     readonly itemActionsColumn: Component<HTMLElement>;
     readonly itemActionsColumnContent: Component<HTMLElement>;
     readonly configurationColumn: Component<HTMLElement>;
+    readonly hintSelectAction: Paragraph;
+    readonly configurationColumnHeaderHorizontalLine: HorizontalLine;
     readonly configurationColumnContents: Component<HTMLElement>;
     readonly itemOrTypeChoiceList: ChoiceList<Choice<ItemMethod>, false>;
     readonly useOnMoveCheckButton: CheckButton;
+    readonly hintDiscoverMore: Paragraph;
     readonly hr1: HorizontalLine;
     readonly clearSlotButton: Button;
     readonly hr2: HorizontalLine;
