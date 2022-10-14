@@ -24,6 +24,7 @@ import type { ITileContainer, ITileData } from "game/tile/ITerrain";
 import type TileEvent from "game/tile/TileEvent";
 import type TimeManager from "game/time/TimeManager";
 import type { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
+import type Renderer from "renderer/Renderer";
 import type { IReplayLogEntry } from "replay/IReplayLogEntry";
 import type { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
@@ -81,6 +82,10 @@ export interface IGameEvents {
     glLostContext(): any;
     glSetup(restored: boolean): any;
     glInitialized(): any;
+    /**
+     * Called when the game creates the primary renderer
+     */
+    rendererCreated(renderer: Renderer): any;
     /**
      * Called after the field of view has initialized
      */

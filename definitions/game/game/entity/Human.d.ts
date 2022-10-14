@@ -76,6 +76,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     state: PlayerState;
     swimming: boolean;
     tamedCreatures: Map<`${number},${number}`, number[]>;
+    ticksSpent: Map<`${number},${number}`, number>;
     turns: number;
     vehicleItemReference: ItemReference | undefined;
     walkSoundCounter: number;
@@ -245,6 +246,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     private recalculateInsulation;
     private getEquipmentInsulation;
     discoverRecipe(recipeType: ItemType, crafted?: ICrafted, discoveredClientSide?: boolean): void;
+    incrementIslandTickCount(): void;
     passTurn(turnType?: TurnTypeFlag): void;
     /**
      * Ticks a player

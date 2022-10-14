@@ -101,6 +101,7 @@ export declare const promptMenuMilestoneModifiersImportFailure: import("game/met
 export declare const promptMenuOptionsReloadGame: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsChangeReload: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsConfirmUnlockMilestones: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
+export declare const promptMenuOptionsConfirmDiscoverActions: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsConfirmUnlockRecipes: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsSaveDataClearAll: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsSaveDataClearCharacters: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;

@@ -12,7 +12,9 @@ import type { IRefreshable } from "ui/component/Refreshable";
 import { Tab } from "ui/screen/screens/menu/component/Menu";
 export default class TabDeveloper extends Tab implements IRefreshable {
     private readonly refreshables;
-    private readonly buttonDeveloperMode;
+    private readonly buttonDeveloperMode1;
+    private readonly buttonDeveloperMode2;
+    private readonly buttonDiscoverAllActions;
     private readonly buttonUnlockAllMilestones;
     private readonly buttonUnlockAllRecipes;
     private readonly buttonOpenLogsFolder;
@@ -34,6 +36,7 @@ export default class TabDeveloper extends Tab implements IRefreshable {
     private toggleDeveloperMode;
     private reloadGame;
     private unlockAllMilestones;
+    private discoverAllActions;
     private unlockAllRecipes;
     private resetGeneratedSpriteCache;
 }

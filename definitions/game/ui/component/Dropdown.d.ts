@@ -11,8 +11,10 @@
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import Button from "ui/component/Button";
 import Component from "ui/component/Component";
+import type Input from "ui/component/Input";
 import InputButton from "ui/component/InputButton";
 import type { IRefreshableValue } from "ui/component/Refreshable";
+import type { IBindHandlerApi } from "ui/input/Bind";
 import { InputCatalyst } from "ui/input/IInput";
 import { SelectDirection } from "ui/IUi";
 interface IDropdownEvents<O = string | number> extends Events<Component> {
@@ -57,7 +59,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     openedDirection(): SelectDirection.Up | SelectDirection.Down;
     protected onNext(): boolean;
     protected onPrevious(): boolean;
-    protected onEnterBind(): boolean;
+    protected onEnterBind(api: IBindHandlerApi | Input, event?: KeyboardEvent): boolean;
     protected onInputRising(_: any, catalyst: InputCatalyst): void;
     protected onCancel(): boolean;
     protected onInterrupt(): void;

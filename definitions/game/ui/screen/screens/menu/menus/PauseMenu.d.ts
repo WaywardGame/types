@@ -25,6 +25,7 @@ export default class PauseMenu extends Menu {
     readonly labelPaused?: Heading;
     readonly buttonContinue?: Button;
     readonly continueRow: false | LabelledRow;
+    readonly gameplaySettingsButton: Button;
     readonly optionsRow: BlockRow;
     readonly multiplayerRow: BlockRow;
     readonly helpRow: BlockRow;

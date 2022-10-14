@@ -230,7 +230,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getMovementProgress(timeStamp: number): number;
     setQuality(human: Human | undefined, quality?: Quality): void;
     getValidMagicalProperties(): MagicalPropertyType[];
-    addMagicalProperties(count: number): boolean;
+    addMagicalProperties(count: number, source?: string): boolean;
     rerollMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     rerollMagicalPropertyValues(): void;
     addMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;

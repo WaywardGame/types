@@ -37,13 +37,14 @@ export default class PlayerManager extends EntityManager<Player> {
     event: IEventEmitter<this, IPlayerManagerEvents>;
     constructor();
     /**
-     * Get players in the game. Set all args to true to ensure all players are returned
+     * Get players in the game. Parameters include additional players that may not be relevant, such as ghosts, connecting players, absent players, the dedicated server fake player.
      * @param includeGhosts True to include players that are ghosts
      * @param includeConnecting True to include players that are connecting
-     * @param includeServer True to the server player
+     * @param includeDedicatedServer True to include the dedicated server fake player
+     * @param includeAbsent True to include the absent players
      * @returns Array of Player objects
      */
-    getAll(includeGhosts?: boolean, includeConnecting?: boolean, includeServer?: boolean): Player[];
+    getAll(includeGhosts?: boolean, includeConnecting?: boolean, includeDedicatedServer?: boolean, includeAbsent?: boolean): Player[];
     getByIdentifier(identifier: string, includeAbsent?: boolean): Player | undefined;
     getByName(name: string): Player | undefined;
     getValidName(name: string | undefined): string;

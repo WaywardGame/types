@@ -65,6 +65,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     private translator?;
     getTranslation(using?: IUsableActionPossibleUsing, which?: ActionTranslation, context?: UsableActionDisplayContext): Translation | undefined;
     getOrder(using?: IUsableActionPossibleUsing): number;
+    canUseOnMoveWhenDiscovered(): boolean;
     canUseOnMove(): boolean;
 }
 export interface IUsableActionFactory<REQUIREMENTS extends IUsableActionRequirements> {

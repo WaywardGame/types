@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import EventEmitter from "event/EventEmitter";
 import type Human from "game/entity/Human";
 import type { IContainer } from "game/item/IItem";
 import type { IGetBestItemsOptions } from "game/item/IItemManager";
@@ -18,7 +19,11 @@ export interface IItemFinderOptions extends Partial<IGetBestItemsOptions> {
     fallback?: ItemFinder;
     postFilter?(item: Item): boolean;
 }
-export default class ItemFinder {
+export interface IItemFinderEvents {
+    track(): any;
+    dispose(): any;
+}
+export default class ItemFinder extends EventEmitter.Host<IItemFinderEvents> {
     private readonly options;
     private readonly human;
     private readonly container;

@@ -61,8 +61,9 @@ export default class ActionBar extends QuadrantComponent {
     readonly event: IEventEmitter<this, IActionBarEvents>;
     static preferredQuadrant: Quadrant;
     get preferredQuadrant(): Quadrant;
-    protected slots: IActionBarSlotData[];
+    slots: IActionBarSlotData[];
     showBindings?: boolean;
+    autoSelectPrimaryUse?: boolean;
     readonly slotsContainer: Component<HTMLElement>;
     readonly metaButtons: Component<HTMLElement>;
     readonly removeSlotButton: Button;
@@ -89,6 +90,7 @@ export default class ActionBar extends QuadrantComponent {
     protected onChangeWhetherCopying(api: IBindHandlerApi): boolean;
     getSlots(): Stream<ActionSlot>;
     private toggleShowingBindings;
+    private toggleAutoSelectPrimaryUse;
     private focus;
     private refreshSlots;
 }
@@ -117,6 +119,7 @@ export declare class ActionSlot extends Button implements IRefreshable {
     clear(): void;
     equipItem(item: Item, configure?: boolean): void;
     protected onConfigureBind(api: IBindHandlerApi): boolean;
+    protected onUseSlottedItem(api: IBindHandlerApi): boolean;
     configure(emitToActionBar?: boolean): void;
     protected onAppend(): void;
     protected onItemMaybeInaccessible(): void;
