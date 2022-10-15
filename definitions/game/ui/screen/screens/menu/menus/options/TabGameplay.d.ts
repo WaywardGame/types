@@ -16,5 +16,4 @@ export default class TabGameplay extends Tab implements IRefreshable {
     constructor();
     refresh(): this;
     static createContent(isForQuickSettings: boolean, addRefreshable: (refreshable: IRefreshable) => void): ArrayOfIterablesOr<Component | undefined>;
-    private addRefreshable;
 }

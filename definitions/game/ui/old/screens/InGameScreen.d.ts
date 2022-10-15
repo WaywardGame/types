@@ -102,7 +102,7 @@ export default class InGameScreen extends BaseScreen {
     initializeGameState(): void;
     onGameEnd(): void;
     getDialogIndex(dialogId: DialogId, customDialogInfo?: IDialogInfo): string;
-    setupDialog(dialogId: DialogId, highlightItemId?: number, customDialogInfo?: IDialogInfo): JQueryUI.DialogOptions;
+    setupDialog(dialogId: DialogId, highlightItemId?: number, customDialogInfo?: IDialogInfo, containerSortInfo?: IContainerSortInfo): JQueryUI.DialogOptions;
     highlightItemElementByItemId(itemId: number, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementByItemType(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementByItemTypeWithNoItemId(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
@@ -121,6 +121,7 @@ export default class InGameScreen extends BaseScreen {
     clampDialogs(): void;
     getItemClass(item?: Item, itemType?: ItemType): string;
     createItemString(itemType: ItemType, item?: Item, extraClass?: string): string;
+    private readonly itemElementsIds;
     private readonly itemElementsCollections;
     getItemElements(item: Item | number): HTMLCollectionOf<HTMLElement>;
     syncItemElements(itemIds: number | number[], forceSyncDecay?: boolean): void;

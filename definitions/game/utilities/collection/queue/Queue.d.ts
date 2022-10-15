@@ -16,5 +16,6 @@ export default class Queue<T> {
     isEmpty(): boolean;
     enqueue(value: T): void;
     dequeue(): T | undefined;
+    dequeueAmount(amount: number): T[];
     isInQueue(item: T, equals?: (item1: T, item2: T) => boolean): boolean;
 }
