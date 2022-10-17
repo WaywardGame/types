@@ -23,5 +23,6 @@ export declare enum HighlightType {
     MenuBarButton = 1,
     Selector = 2,
     Skill = 3,
-    ActionSlot = 4
+    ActionSlot = 4,
+    EquipSlot = 5
 }
