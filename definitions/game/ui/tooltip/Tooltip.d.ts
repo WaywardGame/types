@@ -16,7 +16,8 @@ import type { TranslationGenerator } from "ui/component/IComponent";
 import { TooltipLocation } from "ui/component/IComponent";
 import Text, { Paragraph } from "ui/component/Text";
 import type Bindable from "ui/input/Bindable";
-import Vector2 from "utilities/math/Vector2";
+import type { TooltipAnchorStringHorizontal, TooltipAnchorStringVertical } from "ui/tooltip/TooltipLocationHandler";
+import TooltipLocationHandler from "ui/tooltip/TooltipLocationHandler";
 export declare enum TooltipClasses {
     Main = "tooltip",
     ForceShown = "tooltip-force-shown",
@@ -28,24 +29,28 @@ export declare enum TooltipClasses {
     Secondary = "tooltip-colored-secondary"
 }
 export interface ITooltipEvents extends Events<Component> {
-    move(position: Vector2): any;
-    setLocation(location: TooltipLocation): any;
+    setLocation(): any;
+    updatePosition(): any;
 }
 export default class Tooltip extends Component {
     event: IEventEmitter<this, ITooltipEvents>;
-    get location(): TooltipLocation;
     readonly source: Component;
     readonly blocks: Component<HTMLElement>;
     readonly hints: Component<HTMLElement>;
+    readonly location: TooltipLocationHandler;
     private forceShown;
     private maxWidth;
     private hasSetPosition;
     constructor(source: Component | HTMLElement);
     protected onRemove(): void;
-    protected onHide(): void;
     setSecondary(): this;
     setForceShown(forceShown?: boolean): this;
     wasForceShown(): boolean;
+    setLocation(initializer: (locationHandler: TooltipLocationHandler) => any): this;
+    setLocation(xAnchor: TooltipAnchorStringHorizontal, yAnchor: TooltipAnchorStringVertical): this;
+    setLocation(xAnchor: TooltipAnchorStringHorizontal, xRefSelector: string, yAnchor: TooltipAnchorStringVertical): this;
+    setLocation(xAnchor: TooltipAnchorStringHorizontal, yAnchor: TooltipAnchorStringVertical, yRefSelector: string): this;
+    setLocation(xAnchor: TooltipAnchorStringHorizontal, xRefSelector: string, yAnchor: TooltipAnchorStringVertical, yRefSelector: string): this;
     setLocation(location: TooltipLocation): this;
     /**
      * Sets the max width of this tooltip.
@@ -72,9 +77,10 @@ export default class Tooltip extends Component {
     updatePosition(regenerateBox?: boolean): this;
     private initialPositionAndShownHandledExternally;
     setInitialPositionAndShownHandledExternally(): this;
+    private dumpOnShow;
+    setDumpOnShow(dumpOnShow?: boolean): this;
     protected onShow(): void;
     dump(): this;
-    private onMouseMove;
 }
 export declare class TooltipBlock extends Component {
     constructor();

@@ -35,7 +35,7 @@ export default abstract class InspectionsTooltipHandler<INSPECTIONS_LIST extends
     protected onUpdateTooltipPosition(position: Vector2): void;
     protected getTooltipClass(): string[];
     protected initializeHints(hints: InspectionTooltipHints, ...args: TOOLTIP_ARGS): void;
-    protected updateTooltipPosition(position?: Vector2): void;
+    protected updateTooltipPosition(): void;
     private refreshTooltipExtraInfoAndPosition;
     protected onMoveToIsland(): void;
 }

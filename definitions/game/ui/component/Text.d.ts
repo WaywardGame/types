@@ -87,5 +87,6 @@ export declare class BasicText extends Component {
     protected inputModifier?: Modifier;
     constructor(elementType?: string);
     setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection> & Partial<IBindingsSection>): this;
+    private setTooltipLocation;
     private onClick;
 }

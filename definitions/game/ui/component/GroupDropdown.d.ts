@@ -9,12 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Dictionary from "language/Dictionary";
-import Component from "ui/component/Component";
+import type Component from "ui/component/Component";
 import type { IDropdownOption } from "ui/component/Dropdown";
 import EnumDropdown from "ui/component/dropdown/EnumDropdown";
-import Tooltip from "ui/tooltip/Tooltip";
+import type Tooltip from "ui/tooltip/Tooltip";
+import type TooltipLocationHandler from "ui/tooltip/TooltipLocationHandler";
 export default abstract class GroupDropdown<ENUM_OBJECT, OTHER_OPTIONS extends string, GROUP extends number, VALUES = ENUM_OBJECT[keyof ENUM_OBJECT]> extends EnumDropdown<ENUM_OBJECT, OTHER_OPTIONS, VALUES> {
     private groups;
+    private tooltipSurface?;
     private tooltip?;
     private lastGroupText?;
     private readonly wordToGroups;
@@ -35,15 +37,10 @@ export default abstract class GroupDropdown<ENUM_OBJECT, OTHER_OPTIONS extends s
     protected onClose(): void;
     protected onRemove(): void;
     protected onFilterChange(): void;
-    protected updateTooltip(): GroupDropdownTooltip;
+    protected updateTooltip(): Tooltip | undefined;
     protected onRegenerateBox(): void;
     private getTooltip;
+    protected getTooltipLocation(handler: TooltipLocationHandler): void;
     private getGroupMap;
     private addGroup;
 }
-declare class GroupDropdownTooltip extends Tooltip {
-    constructor(source: Component | HTMLElement);
-    updatePosition(force?: boolean): this;
-    protected onShow(): void;
-}
-export {};
