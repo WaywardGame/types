@@ -26,7 +26,6 @@ export default class UsableActionRegistrar {
     add<REQUIREMENTS extends IUsableActionRequirements>(id: string | number, action: UsableAction<REQUIREMENTS>): this;
     showContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any): ContextMenu<string | number | symbol>;
     createContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any): ContextMenu;
-    private getTooltipLocation;
 }
 export interface IUsableActionGeneratorEvents {
     stopPersisting(): any;

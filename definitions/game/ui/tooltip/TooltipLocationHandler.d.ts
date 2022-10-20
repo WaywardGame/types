@@ -64,9 +64,21 @@ export default class TooltipLocationHandler {
     constructor(tooltip: Tooltip);
     isMouse(): boolean;
     reset(): this;
+    /**
+     * Add a location fallback by defining an x and y anchor on the source component.
+     */
     add(xAnchor: TooltipAnchorStringHorizontal, yAnchor: TooltipAnchorStringVertical): this;
+    /**
+     * Add a location fallback by defining an x anchor on a selected ancestor component, and a y anchor on the source component.
+     */
     add(xAnchor: TooltipAnchorStringHorizontal, xRefSelector: string, yAnchor: TooltipAnchorStringVertical): this;
+    /**
+     * Add a location fallback by defining an x anchor on the source component, and a y anchor on a selected ancestor component.
+     */
     add(xAnchor: TooltipAnchorStringHorizontal, yAnchor: TooltipAnchorStringVertical, yRefSelector: string): this;
+    /**
+     * Add a location fallback by defining x and y anchors on selected ancestor components.
+     */
     add(xAnchor: TooltipAnchorStringHorizontal, xRefSelector: string, yAnchor: TooltipAnchorStringVertical, yRefSelector: string): this;
     private parseAnchor;
     private location;
