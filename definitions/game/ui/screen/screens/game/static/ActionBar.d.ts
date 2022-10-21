@@ -102,6 +102,7 @@ declare class ActionSlotSlottedContainer extends ItemComponent {
 }
 export interface IActionSlotEvents extends Events<Button>, IItemSlotEvents {
     update(item?: Item, oldItem?: Item): any;
+    unequipItem(): any;
 }
 export declare class ActionSlot extends Button implements IRefreshable {
     readonly number: number;
@@ -115,6 +116,7 @@ export declare class ActionSlot extends Button implements IRefreshable {
     usability: ReturnableUsableActionUsability;
     constructor(number: number, slotData: IActionBarSlotData);
     refresh(): this;
+    private onItemTransformed;
     private isUsable;
     clear(): void;
     equipItem(item: Item, configure?: boolean): void;

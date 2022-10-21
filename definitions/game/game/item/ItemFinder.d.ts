@@ -10,6 +10,7 @@
  */
 import EventEmitter from "event/EventEmitter";
 import type Human from "game/entity/Human";
+import type Player from "game/entity/player/Player";
 import type { IContainer } from "game/item/IItem";
 import type { IGetBestItemsOptions } from "game/item/IItemManager";
 import type Item from "game/item/Item";
@@ -40,6 +41,7 @@ export default class ItemFinder extends EventEmitter.Host<IItemFinderEvents> {
     protected onItemStateChange(item: Item): void;
     protected onContainerItemAdd(items: ItemManager, itemAdded: Item, containerAddedTo: IContainer): void;
     protected onContainerItemRemove(items: ItemManager, itemRemoved: Item, containerRemovedFrom?: IContainer): void;
+    protected onLoadOnIsland(player: Player): void;
     private trackContainer;
     private untrackContainer;
 }

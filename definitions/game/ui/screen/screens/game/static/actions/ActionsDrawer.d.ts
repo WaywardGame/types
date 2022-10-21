@@ -84,7 +84,7 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     private savedUsing?;
     constructor();
     open(number: number, slot: IActionBarSlotData): this;
-    refresh(): this;
+    refresh(updateSavedUsing?: boolean): this;
     protected onHide(): void;
     private editBindings;
     private setMethod;
