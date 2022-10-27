@@ -198,7 +198,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      * @param z The z coordinate to check.
      */
     spawn(terrainType: TerrainType, x: number, y: number, z: number): void;
-    getTileContainer(x: number, y: number, z: number, tile?: ITile): IContainer;
+    getTileContainer(x: number, y: number, z: number, tile?: ITile): IContainer | undefined;
     getRandomQuality(bonusQuality?: number, relicChance?: boolean): Quality;
     hasAdditionalRequirements(actionOrHuman: IActionHandlerApi<Human> | Human, craftType: ItemType, actionNotUsableMessage?: Message, isRepairOrDisassembly?: boolean): IRequirementInfo;
     /**
