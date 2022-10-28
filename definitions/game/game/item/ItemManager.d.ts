@@ -128,7 +128,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     resolveContainer(container?: IContainer): Doodad | Item | Player | NPC | IContainer | ITile | undefined;
     getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
-    hashContainer(containable: IContainable): string;
+    hashContainer(containable: IContainable, containerReferenceSource?: ContainerReferenceSource): string;
     hashContainerReference(containerReference: ContainerReference): string;
     updateContainedWithin(containable: IContainable, containedWithin: IContainer | undefined): void;
     addToContainerInternal(item: Item, container: IContainer, options?: IAddToContainerOptions): boolean;

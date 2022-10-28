@@ -12,7 +12,7 @@
 import type { IMatchmakingServer, INapiDiscordPresenceInfo, IRemoteFile, ISteamFriend, ISteamId, ISteamworksNetworking, IWaywardPreload, IWorkshopItem, LobbyType } from "@hosts/shared/interfaces";
 import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
-import type { ServerInfo } from "multiplayer/IMultiplayer";
+import type { IJoinServerOptions, ServerInfo } from "multiplayer/IMultiplayer";
 import type { IBuild, IDedicatedServerInfo, IModPath, ISteamworksEvents } from "steamworks/ISteamworks";
 export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     protected initialized: boolean;
@@ -134,9 +134,9 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     saveFile(fileName: string, blob: Blob): Promise<void>;
     hasServerToJoin(): boolean;
     getServerToJoin(): ServerInfo | undefined;
-    setServerToJoin(serverToJoin: ServerInfo, automatic?: boolean): void;
+    setServerToJoin(serverToJoin: ServerInfo, automatic?: Partial<IJoinServerOptions>): void;
     clearServerToJoin(): void;
-    shouldAutomaticallyJoinServer(): boolean | undefined;
+    shouldAutomaticallyJoinServer(): Partial<IJoinServerOptions> | undefined;
     processDedicatedServerBackups(force?: boolean): Promise<boolean>;
     protected onGlobalSlotLoaded(): void;
     writeBackup(slot: number, data: Uint8Array): Promise<string | undefined>;

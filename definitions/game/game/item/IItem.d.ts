@@ -65,18 +65,12 @@ interface IMagicalPropertyOld {
     stat?: Stat;
 }
 export declare const SYMBOL_CONTAINER_CACHED_REFERENCE: unique symbol;
-export declare const SYMBOL_CONTAINER_TEMPERATURE: unique symbol;
-export declare const SYMBOL_CONTAINER_ITEMS_TEMPERATURE: unique symbol;
-export declare const SYMBOL_CONTAINER_TILE_TEMPERATURE: unique symbol;
 export interface IContainable {
     containedWithin?: IContainer;
     containerType?: ContainerType;
     [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
 }
 export interface IContainer extends IContainable {
-    [SYMBOL_CONTAINER_TEMPERATURE]?: number;
-    [SYMBOL_CONTAINER_ITEMS_TEMPERATURE]?: number;
-    [SYMBOL_CONTAINER_TILE_TEMPERATURE]?: number;
     containedItems: Item[];
     transientItems?: Item[];
     itemOrders?: number[];

@@ -64,6 +64,7 @@ export default class Player extends Human implements IUnserializedCallback {
     addMilestone(milestone: Milestone, data?: number | string, update?: boolean): void;
     updateMovementIntent(movementIntent: IMovementIntent): boolean;
     load(): void;
+    unload(): void;
     setup(spawnPoint: IVector3): void;
     protected onNoInput(): void;
     updateTables(source: string, options?: Partial<{

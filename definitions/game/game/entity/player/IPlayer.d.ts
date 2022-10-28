@@ -99,6 +99,13 @@ export interface IPlayerEvents extends Events<Human> {
      * @param newId The new id for the player
      * @param isAbsentPlayer True if the player is absent
      */
+    idChanging(currentId: number, newId: number, isAbsentPlayer: boolean): any;
+    /**
+     * Called when the players id has changed
+     * @param currentId The players current id
+     * @param newId The new id for the player
+     * @param isAbsentPlayer True if the player is absent
+     */
     idChanged(currentId: number, newId: number, isAbsentPlayer: boolean): any;
 }
 export declare enum TurnTypeFlag {
