@@ -32,15 +32,17 @@ export declare class MilestoneModifierInstance extends GameplayModifierInstance<
     protected getDefaultTitle(): import("../../../../language/impl/TranslationImpl").default;
 }
 export default abstract class MilestoneModifier extends GameplayModifier<Milestone, MilestoneModifierInstance, [Human?]> {
+    static isGlobal(modifier: MilestoneModifier): boolean;
+    static areOptionsGlobal(gameOptions: IGameOptionsPartial): boolean;
     after?: Milestone[];
     /**
      * Whether this milestone modifier is host-exclusive, IE, clients connecting to a server can't select this modifier.
      *
      * Modifiers with custom `options: IGameOptions` are always host-exclusive.
      */
-    isGlobal: boolean;
+    isGlobal(): boolean;
     constructor(id?: Milestone);
-    instantiate(id: Milestone, human?: Human): MilestoneModifierInstance;
+    instantiate(id: Milestone, human?: Human): MilestoneModifierInstance | undefined;
     abstract getOptions(): IGameOptionsPartial;
     initialize(instance: MilestoneModifierInstance): MilestoneModifierInstance;
     abstract getGroup(): MilestoneModifierGroup;

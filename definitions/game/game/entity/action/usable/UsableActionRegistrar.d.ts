@@ -18,7 +18,7 @@ export default class UsableActionRegistrar {
     readonly actions: Array<[string, UsableAction]>;
     readonly actionIndices: Record<string, number>;
     readonly actionIds: string[];
-    byId(id?: string): UsableAction | undefined;
+    byId(id?: ActionId): UsableAction | undefined;
     filter(filter: (action: UsableAction, id: string) => any): UsableActionRegistrar;
     private contextMenuInitializer?;
     setContextMenuInitializer(initializer?: (menu: ContextMenu) => any): this;
@@ -26,7 +26,6 @@ export default class UsableActionRegistrar {
     add<REQUIREMENTS extends IUsableActionRequirements>(id: string | number, action: UsableAction<REQUIREMENTS>): this;
     showContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any): ContextMenu<string | number | symbol>;
     createContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any): ContextMenu;
-    private getTooltipLocation;
 }
 export interface IUsableActionGeneratorEvents {
     stopPersisting(): any;

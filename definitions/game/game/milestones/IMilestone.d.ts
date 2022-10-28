@@ -106,5 +106,5 @@ export declare enum MilestoneDataType {
 }
 export interface IMilestoneData {
     amount: number;
-    data?: number[];
+    data?: Array<number | string>;
 }

@@ -76,6 +76,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     state: PlayerState;
     swimming: boolean;
     tamedCreatures: Map<`${number},${number}`, number[]>;
+    ticksSpent: Map<`${number},${number}`, number>;
     turns: number;
     vehicleItemReference: ItemReference | undefined;
     walkSoundCounter: number;
@@ -168,7 +169,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
      * Returns the result of the `"getMaxHealth"` event, or the `max` in `Stat.Health`,
      * if the result of the hook is `undefined`.
      */
-    getMaxHealth(): number;
+    getMaxHealth(withBonus?: boolean): number;
     getCraftingDifficulty(level: RecipeLevel): number;
     update(): void;
     updateStatsAndAttributes(): void;
@@ -245,6 +246,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     private recalculateInsulation;
     private getEquipmentInsulation;
     discoverRecipe(recipeType: ItemType, crafted?: ICrafted, discoveredClientSide?: boolean): void;
+    incrementIslandTickCount(): void;
     passTurn(turnType?: TurnTypeFlag): void;
     /**
      * Ticks a player

@@ -13,7 +13,7 @@ import type { IIcon } from "game/inspection/InfoProvider";
 import Button from "ui/component/Button";
 import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
-import { Heading } from "ui/component/Text";
+import Text, { Heading } from "ui/component/Text";
 import type Bindable from "ui/input/Bindable";
 import type Tooltip from "ui/tooltip/Tooltip";
 export interface IContextMenuOptionCheckbox {
@@ -26,6 +26,7 @@ export declare type IContextMenuOptionDescription = {
     translation: TranslationGenerator;
     tooltip?: (tooltip: Tooltip) => any;
     create?(option: ContextMenuOption): ContextMenuOption;
+    createText?(text: Text): ContextMenuOption;
     submenu?(): ContextMenu;
     onActivate?(): any;
     checkbox?: IContextMenuOptionCheckbox;

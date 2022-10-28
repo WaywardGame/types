@@ -8,14 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ActionId, IUsableActionDefinition, IUsableActionDefinitionExecutable, IUsableActionExecutionContext, IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, UsableActionTranslationContext, UsableActionUsability } from "game/entity/action/usable/IUsableAction";
-import { IUsableActionNotUsable } from "game/entity/action/usable/IUsableAction";
+import EventEmitter from "event/EventEmitter";
+import type { ActionId, IUsableActionDefinition, IUsableActionDefinitionExecutable, IUsableActionExecutionContext, IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, UsableActionUsability } from "game/entity/action/usable/IUsableAction";
+import { IUsableActionNotUsable, UsableActionDisplayContext } from "game/entity/action/usable/IUsableAction";
 import type Player from "game/entity/player/Player";
 import type { IIcon } from "game/inspection/InfoProvider";
 import type Item from "game/item/Item";
 import { ActionTranslation } from "language/dictionary/Misc";
 import type Translation from "language/Translation";
 import type { HighlightSelector } from "ui/util/IHighlight";
+export declare const USABLE_ACTION_USE_ON_MOVE_UNLOCK_AT = 20;
+export interface IUsableActionEvents {
+    preExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
+    postExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
+}
 /**
  * Create a basic usable action:
  * ```ts
@@ -29,7 +35,7 @@ import type { HighlightSelector } from "ui/util/IHighlight";
  *
  * To learn about action definitions, see {@link IUsableActionDefinitionBase}
  */
-declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements, DEFINITION extends IUsableActionDefinition<REQUIREMENTS> = IUsableActionDefinition<REQUIREMENTS>> {
+declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements, DEFINITION extends IUsableActionDefinition<REQUIREMENTS> = IUsableActionDefinition<REQUIREMENTS>> extends EventEmitter.Host<IUsableActionEvents> {
     readonly requirements: REQUIREMENTS;
     readonly definition: DEFINITION;
     id: ActionId;
@@ -54,11 +60,13 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     getDoodad(player: Player, provided?: IUsableActionPossibleUsing): false | import("../../../doodad/Doodad").default | undefined;
     getCreature(player: Player, provided?: IUsableActionPossibleUsing): false | import("../../creature/Creature").default | undefined;
     getNPC(player: Player, provided?: IUsableActionPossibleUsing): false | import("../../npc/NPC").default | undefined;
-    getIcon(provided: IUsableActionPossibleUsing): IIcon | undefined;
+    getIcon(provided: IUsableActionPossibleUsing, context?: UsableActionDisplayContext): IIcon | undefined;
     getHighlightSelectors(using?: IUsableActionPossibleUsing): HighlightSelector[];
     private translator?;
-    getTranslation(using?: IUsableActionPossibleUsing, which?: ActionTranslation, context?: UsableActionTranslationContext): Translation | undefined;
+    getTranslation(using?: IUsableActionPossibleUsing, which?: ActionTranslation, context?: UsableActionDisplayContext): Translation | undefined;
     getOrder(using?: IUsableActionPossibleUsing): number;
+    canUseOnMoveWhenDiscovered(): boolean;
+    canUseOnMove(): boolean;
 }
 export interface IUsableActionFactory<REQUIREMENTS extends IUsableActionRequirements> {
     create: <DEFINITION extends IUsableActionDefinition<REQUIREMENTS>>(action: DEFINITION) => UsableAction<REQUIREMENTS, DEFINITION>;

@@ -8,7 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import EventEmitter from "event/EventEmitter";
 import type Human from "game/entity/Human";
+import type Player from "game/entity/player/Player";
 import type { IContainer } from "game/item/IItem";
 import type { IGetBestItemsOptions } from "game/item/IItemManager";
 import type Item from "game/item/Item";
@@ -18,7 +20,11 @@ export interface IItemFinderOptions extends Partial<IGetBestItemsOptions> {
     fallback?: ItemFinder;
     postFilter?(item: Item): boolean;
 }
-export default class ItemFinder {
+export interface IItemFinderEvents {
+    track(): any;
+    dispose(): any;
+}
+export default class ItemFinder extends EventEmitter.Host<IItemFinderEvents> {
     private readonly options;
     private readonly human;
     private readonly container;
@@ -35,6 +41,7 @@ export default class ItemFinder {
     protected onItemStateChange(item: Item): void;
     protected onContainerItemAdd(items: ItemManager, itemAdded: Item, containerAddedTo: IContainer): void;
     protected onContainerItemRemove(items: ItemManager, itemRemoved: Item, containerRemovedFrom?: IContainer): void;
+    protected onLoadOnIsland(player: Player): void;
     private trackContainer;
     private untrackContainer;
 }

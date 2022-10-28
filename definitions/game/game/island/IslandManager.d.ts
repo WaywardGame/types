@@ -16,6 +16,10 @@ export default class IslandManager extends Map<IslandId, Island> {
      */
     get active(): Island[];
     /**
+     * Get the list of islands that are loaded
+     */
+    get loaded(): Island[];
+    /**
      * Get the island at position 0,0
      */
     get default(): Island;

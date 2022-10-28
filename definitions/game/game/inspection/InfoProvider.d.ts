@@ -73,6 +73,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     static of(...classes: string[]): SimpleInfoProvider;
     static title(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
     static description(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
+    static text(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
     static list(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
     static ofComponent(componentSupplier: () => Component): InfoProvider;
     private displayLevel?;
@@ -135,7 +136,7 @@ export declare class SimpleInfoProvider extends InfoProvider {
     private readonly contents;
     private childComponentClass;
     constructor(...translations: Array<TranslationGenerator | InfoProvider>);
-    get(): (import("../../language/dictionary/UiTranslation").default | import("../../language/impl/TranslationImpl").default | InfoProvider | import("../../language/ITranslation").ISerializedTranslation | (() => import("../../language/dictionary/UiTranslation").default | import("../../language/impl/TranslationImpl").default | import("../../language/ITranslation").ISerializedTranslation | Iterable<import("../../utilities/string/Interpolator").IStringSection> | undefined))[];
+    get(): (import("../../language/impl/TranslationImpl").default | import("../../language/dictionary/UiTranslation").default | import("../../language/ITranslation").ISerializedTranslation | (() => import("../../language/impl/TranslationImpl").default | import("../../language/dictionary/UiTranslation").default | import("../../language/ITranslation").ISerializedTranslation | Iterable<import("../../utilities/string/Interpolator").IStringSection> | undefined) | InfoProvider)[];
     add(...translations: Array<TranslationGenerator | InfoProvider | Falsy>): this;
     onlyIfHasContents(): this | undefined;
     addInfoGetter(provider: () => InfoProvider | undefined): this;

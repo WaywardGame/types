@@ -16,7 +16,7 @@ import type NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
 import { CreationId } from "game/IGame";
 import { Quality } from "game/IObject";
-import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IRecipe } from "game/item/IItem";
+import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IMoveToTileOptions, IRecipe } from "game/item/IItem";
 import { CraftResult, ItemType, ItemTypeGroup } from "game/item/IItem";
 import type { IAddToContainerOptions, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IRequirementInfo } from "game/item/IItemManager";
 import { ContainerReferenceSource, CraftStatus, ICraftResultChances, WeightType } from "game/item/IItemManager";
@@ -93,7 +93,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     static getItemTypes(): readonly ItemType[];
     static getItemsWithRecipes(): readonly ItemType[];
     static getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
-    static getHighestItemActionTierForAction(action: ActionType): number | undefined;
+    static getHighestItemActionTierForAction(action: ActionType): number;
     static isItemAcceptedAsOffer(item: ItemType): boolean | undefined;
     static isItemUsedInRecipe(item: ItemType): boolean | undefined;
     static isItemUsedForGrowingPlants(item: ItemType): boolean | undefined;
@@ -125,10 +125,10 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private static getDefaultWeightRange;
     load(): void;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
-    resolveContainer(container?: IContainer): Item | Doodad | NPC | Player | IContainer | ITile | undefined;
+    resolveContainer(container?: IContainer): Player | Item | Doodad | NPC | ITile | IContainer | undefined;
     getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
-    hashContainer(containable: IContainable): string;
+    hashContainer(containable: IContainable, containerReferenceSource?: ContainerReferenceSource): string;
     hashContainerReference(containerReference: ContainerReference): string;
     updateContainedWithin(containable: IContainable, containedWithin: IContainer | undefined): void;
     addToContainerInternal(item: Item, container: IContainer, options?: IAddToContainerOptions): boolean;
@@ -144,8 +144,16 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: Quality): Item[];
     computeContainerWeight(container: IContainer): number;
     getMagicalWeightCapacity(container: IContainer): number;
-    moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, filterText?: string | undefined, onMoveItem?: (item: Item) => void): Item[];
-    moveToContainer(human: Human | undefined, item: Item, container: IContainer): boolean;
+    moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, filterText?: string | undefined, onMoveItem?: (item: Item) => void, moveToTileOptions?: IMoveToTileOptions): Item[];
+    /**
+     * Moves an item into a container when the container has enough room for it
+     * @param human Human causing the item movement
+     * @param item Item to move
+     * @param container Container to move the item to
+     * @param moveToTileOptions When set, the movement will be animated
+     * @returns True if the item was moved, false if it wasn't
+     */
+    moveToContainer(human: Human | undefined, item: Item, container: IContainer, moveToTileOptions?: IMoveToTileOptions): boolean;
     hasRoomInContainer(targetContainer: IContainer, itemToMove: Item): boolean;
     /**
      * Gets the name of a container
@@ -174,6 +182,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     isItemAcceptedAsOffer(item: ItemType): boolean | undefined;
     isItemUsedInRecipe(item: ItemType): boolean | undefined;
     isItemUsedForGrowingPlants(item: ItemType): boolean | undefined;
+    getHighestItemActionTierForAction(action: ActionType): number;
     isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     getGroupItems(itemGroup: ItemType | ItemTypeGroup): Set<ItemType>;
@@ -189,7 +198,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      * @param z The z coordinate to check.
      */
     spawn(terrainType: TerrainType, x: number, y: number, z: number): void;
-    getTileContainer(x: number, y: number, z: number, tile?: ITile): IContainer;
+    getTileContainer(x: number, y: number, z: number, tile?: ITile): IContainer | undefined;
     getRandomQuality(bonusQuality?: number, relicChance?: boolean): Quality;
     hasAdditionalRequirements(actionOrHuman: IActionHandlerApi<Human> | Human, craftType: ItemType, actionNotUsableMessage?: Message, isRepairOrDisassembly?: boolean): IRequirementInfo;
     /**
@@ -314,7 +323,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     /**
      * Note: don't print items to the console because the console will hold the item indefinitely
      */
-    loadReference(container: IContainer, loadChildReferences?: boolean, parentContainer?: IContainer): boolean;
+    loadReference(allowFixes: boolean, container: IContainer, loadChildReferences?: boolean, parentContainer?: IContainer): boolean;
     private removeFromContainerInternal;
     private onItemMoveOrRemove;
     private getCraftTierBonus;

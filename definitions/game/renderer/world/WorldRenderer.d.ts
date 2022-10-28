@@ -180,7 +180,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     getAmbientColorNight(): [number, number, number];
     getAmbientColorDawn(): [number, number, number];
     getAmbientIntensity(): number;
-    getFogColor(): [number, number, number];
+    getFogColor(): [x: number, y: number, z: number];
     shouldRender(): RenderFlag;
     renderWorld(timeStamp: number, x: number, y: number, z: number): void;
     renderWorldLayer(worldLayer: WorldLayerRenderer, x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFlags: RenderFlag, enableDepth: boolean): void;

@@ -19,6 +19,7 @@ import type { Stat } from "game/entity/IStats";
 import type { IDecayTemperatureRange } from "game/IGame";
 import type { IObjectDescription, Quality } from "game/IObject";
 import type { IslandId } from "game/island/IIsland";
+import type { IAddToContainerOptions } from "game/item/IItemManager";
 import type Item from "game/item/Item";
 import type Recipe from "game/item/recipe/Recipe";
 import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
@@ -64,18 +65,12 @@ interface IMagicalPropertyOld {
     stat?: Stat;
 }
 export declare const SYMBOL_CONTAINER_CACHED_REFERENCE: unique symbol;
-export declare const SYMBOL_CONTAINER_TEMPERATURE: unique symbol;
-export declare const SYMBOL_CONTAINER_ITEMS_TEMPERATURE: unique symbol;
-export declare const SYMBOL_CONTAINER_TILE_TEMPERATURE: unique symbol;
 export interface IContainable {
     containedWithin?: IContainer;
     containerType?: ContainerType;
     [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
 }
 export interface IContainer extends IContainable {
-    [SYMBOL_CONTAINER_TEMPERATURE]?: number;
-    [SYMBOL_CONTAINER_ITEMS_TEMPERATURE]?: number;
-    [SYMBOL_CONTAINER_TILE_TEMPERATURE]?: number;
     containedItems: Item[];
     transientItems?: Item[];
     itemOrders?: number[];
@@ -253,6 +248,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * If set to true, this item will not grant quality bonuses (durability/quality bonuses) when used in a craft. Aptitude and tiers will still apply.
      */
     noCraftingQualityBonus?: boolean;
+    /**
+     * A float that items inside the container will be reduced by when in a player's inventory.
+     */
+    reducedStoredItemsWeight?: number;
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
 }
@@ -394,9 +393,15 @@ export interface IItemReturn {
 }
 export interface IMoveToTileOptions {
     fromPoint?: IVector3;
+    fromPointApplyPlayerOffset?: boolean;
     toPoint: IVector3;
+    toPointApplyPlayerOffset?: boolean;
     toContainer?: IContainer;
+    toContainerOptions?: IAddToContainerOptions;
     beforeMovement?: IMoveToTileBeforeMovementOptions;
+    /**
+     * Note: Everything done in afterMovement must be clientside only
+     */
     afterMovement?: IMoveToTileAfterMovementOptions;
 }
 export interface IMoveToTileBeforeMovementOptions {
@@ -405,6 +410,7 @@ export interface IMoveToTileBeforeMovementOptions {
 export interface IMoveToTileAfterMovementOptions {
     soundEffect?: SfxType;
     particles?: IRGB;
+    updateTileLayer?: boolean;
 }
 export interface IRecipe {
     baseComponent?: ItemType | ItemTypeGroup;

@@ -17,7 +17,7 @@ import type { SkillType } from "game/entity/IHuman";
 import type { TurnTypeFlag } from "game/entity/player/IPlayer";
 import type Item from "game/item/Item";
 import type { IPromptDescriptionBase, PromptDescriptionArgs } from "game/meta/prompt/IPrompt";
-import { Milestone } from "game/milestones/IMilestone";
+import type { Milestone } from "game/milestones/IMilestone";
 import type { ITile } from "game/tile/ITerrain";
 import ActionPacket from "multiplayer/packets/shared/ActionPacket";
 import type { IRGB } from "utilities/Color";

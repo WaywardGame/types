@@ -10,7 +10,7 @@
  */
 import EventEmitter from "event/EventEmitter";
 import { Milestone, MilestoneVisibility } from "game/milestones/IMilestone";
-declare type IMilestoneUpdate = [Milestone, number?];
+declare type IMilestoneUpdate = [Milestone, (number | string)?];
 export interface IMilestoneEvents {
     /**
      * @param milestone The milestone that is being updated
@@ -44,9 +44,9 @@ declare class MilestonesManager extends EventEmitter.Host<IMilestoneEvents> {
     areUnlockableInMode(mode?: import("../options/IGameOptions").GameMode): boolean;
     isUnlockableInMode(milestone: Milestone, mode?: import("../options/IGameOptions").GameMode): boolean;
     reset(): void;
-    getDiscovered(milestone: Milestone): number[] | undefined;
+    getDiscovered(milestone: Milestone): (string | number)[] | undefined;
     getVisibility(milestone: Milestone): MilestoneVisibility;
-    isDiscovered(milestone: Milestone, data: number): boolean;
+    isDiscovered(milestone: Milestone, data: number | string): boolean;
     private updateMilestone;
 }
 declare const _default: MilestonesManager;

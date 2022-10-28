@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "game/doodad/Doodad";
-import type { ActionType } from "game/entity/action/IAction";
+import type { ActionId } from "game/entity/action/usable/IUsableAction";
 import type Corpse from "game/entity/creature/corpse/Corpse";
 import type Creature from "game/entity/creature/Creature";
 import type { EquipType, SkillType } from "game/entity/IHuman";
@@ -65,7 +65,7 @@ export interface IReferenceTypeMap {
     [ReferenceType.ItemType]: [ReferenceType.ItemType, ItemType];
     [ReferenceType.Dismantle]: [ReferenceType.Dismantle, ItemType];
     [ReferenceType.Stat]: [ReferenceType.Stat, Stat];
-    [ReferenceType.Action]: [ReferenceType.Action, ActionType | string, Item?];
+    [ReferenceType.Action]: [ReferenceType.Action, ActionId, Item?];
     [ReferenceType.EquipSlot]: [ReferenceType.EquipSlot, EquipType];
 }
 declare type ReferenceId<REFTYPE extends ReferenceType> = IReferenceTypeMap[REFTYPE] extends [REFTYPE, infer IdType, any?] ? IdType : number;
@@ -77,6 +77,6 @@ export declare module Reference {
     function setReferenceResolver(resolver: typeof ReferenceManager.get): void;
     function create(id: number): Reference;
     function create<REFTYPE extends ReferenceType>(id: ReferenceId<REFTYPE>, type: REFTYPE, context?: Referenceable | number | [number, ReferenceType?]): Reference;
-    function context(reference?: Reference): [number] | [id: number, type: ReferenceType.Item, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Creature, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Doodad, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.NPC, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Player, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.TileEvent, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Island, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Corpse, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: SkillType, type: ReferenceType.Skill, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: Milestone, type: ReferenceType.Milestone, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ItemType, type: ReferenceType.Recipe, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ItemType, type: ReferenceType.ItemType, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ItemType, type: ReferenceType.Dismantle, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: Stat, type: ReferenceType.Stat, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: string | ActionType, type: ReferenceType.Action, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: EquipType, type: ReferenceType.EquipSlot, context?: [number, (ReferenceType | undefined)?] | undefined] | undefined;
+    function context(reference?: Reference): [number] | [id: number, type: ReferenceType.Item, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Creature, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Doodad, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.NPC, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Player, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.TileEvent, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Island, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Corpse, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: SkillType, type: ReferenceType.Skill, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: Milestone, type: ReferenceType.Milestone, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ItemType, type: ReferenceType.Recipe, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ItemType, type: ReferenceType.ItemType, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ItemType, type: ReferenceType.Dismantle, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: Stat, type: ReferenceType.Stat, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ActionId, type: ReferenceType.Action, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: EquipType, type: ReferenceType.EquipSlot, context?: [number, (ReferenceType | undefined)?] | undefined] | undefined;
 }
 export {};

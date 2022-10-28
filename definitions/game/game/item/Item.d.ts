@@ -190,7 +190,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * Fixes item issues.
      * Note: Be careful with what gets fixed in multiplayer! (when onlyRestoreIslandIds is set)
      */
-    verifyAndFixItem(onlyRestoreIslandIds: boolean): void;
+    verifyAndFixItem(allowFixes: boolean): void;
     /**
      * @param source A string representing the reason for this damage. Used for multiplayer debugging. Just put a unique string of characters here
      * @param modifier The amount of damage to take. Defaults to 1.
@@ -220,12 +220,17 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     getPoint(): import("../../utilities/math/Vector3").default | undefined;
     dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
     placeOnTile(x: number, y: number, z: number, options?: IPlaceOnTileOptions): boolean;
-    moveToTile(options: IMoveToTileOptions): void;
-    isMoving(): boolean;
+    /**
+     * Moves an item to a target point / container while animating it
+     * @param options Movement options
+     * @returns True if the movement is happening, false if it wasn't able to move
+     */
+    moveToTile(options: IMoveToTileOptions): boolean;
+    isMoving(): IMoveToTileOptions | undefined;
     getMovementProgress(timeStamp: number): number;
     setQuality(human: Human | undefined, quality?: Quality): void;
     getValidMagicalProperties(): MagicalPropertyType[];
-    addMagicalProperties(count: number): boolean;
+    addMagicalProperties(count: number, source?: string): boolean;
     rerollMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     rerollMagicalPropertyValues(): void;
     addMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;

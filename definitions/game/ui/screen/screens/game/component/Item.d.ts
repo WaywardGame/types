@@ -10,7 +10,7 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { ActionId } from "game/entity/action/usable/IUsableAction";
-import type { EquipType } from "game/entity/IHuman";
+import { EquipType } from "game/entity/IHuman";
 import { Quality } from "game/IObject";
 import type { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
@@ -43,8 +43,10 @@ export declare enum ItemClasses {
     Main = "item-component",
     Icon = "item-component-icon",
     ItemIcon = "item-component-icon-item",
+    ItemIconIsReal = "item-component-icon-item-is-real",
     ActionIcon = "item-component-icon-action",
     ActionIconHasItem = "item-component-icon-action-has-item",
+    ActionIconNone = "item-component-icon-action-none",
     SlottedIcon = "item-component-icon-slotted",
     EquipIcon = "item-component-icon-equip",
     EquipIconHasItem = "item-component-icon-equip-has-item",
@@ -61,7 +63,7 @@ export declare enum ItemClasses {
     NearlyDecayed = "item-component-nearly-decayed"
 }
 export declare namespace ItemClasses {
-    const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-topleft" | "item-component-icon-location-bottomright";
+    const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-bottomright" | "item-component-icon-location-topleft";
 }
 export interface IItemHandler {
     noDrag?: true;

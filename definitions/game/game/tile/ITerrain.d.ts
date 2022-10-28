@@ -148,10 +148,16 @@ export interface ITerrainDescription extends IModdable {
     useDoodadLikeAdaptor?: boolean;
 }
 export interface ITile extends Partial<ITileContainer> {
+    /**
+     * Note: corpses must be ordered by id asc
+     */
     corpses?: Corpse[];
     creature?: Creature;
     data: number;
     doodad?: Doodad;
+    /**
+     * Note: tile events must be ordered by id asc
+     */
     events?: TileEvent[];
     npc?: NPC;
     overlays?: IOverlayInfo[];

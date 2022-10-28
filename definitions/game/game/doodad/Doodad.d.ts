@@ -187,7 +187,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     getDefaultDurability(random?: import("../../utilities/random/Random").Random<import("../../utilities/random/Random").SeededGenerator>): number;
     addTreasureChestLoot(): void;
     attachStillContainer(item: Item): void;
-    detachStillContainer(human?: Human): Item | undefined;
+    detachStillContainer(human: Human): Item | undefined;
     blocksMove(): boolean;
     update(ticks: number, playingHumans: Human[], updatesPerTick?: number): void;
     canCauseStatus(): boolean;

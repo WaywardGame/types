@@ -104,7 +104,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     /**
      * Forcibly regenerates the cached result of {@link Component.getBox} for this component and all descendants.
      */
-    regenerateBoxes(): void;
+    regenerateBoxes(descendants?: boolean): void;
     /**
      * Returns an object containing {@link HTMLElement.offsetTop} and {@link HTMLElement.offsetLeft}
      */

@@ -60,6 +60,7 @@ export declare abstract class StatComponent extends Component {
      */
     protected getTooltipElement(): Component;
     private getTooltip;
+    private getTooltipLocation;
 }
 export declare abstract class StatsContainer<STAT_COMPONENT extends StatComponent> extends Component {
     private readonly entity;

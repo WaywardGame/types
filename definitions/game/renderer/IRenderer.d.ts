@@ -29,6 +29,10 @@ export interface IRendererEvents {
      * Called when setting the zoom level.
      */
     getZoomLevel(): number | undefined;
+    /**
+     * Called when the renderer is deleted
+     */
+    deleted(): void;
 }
 export declare enum UpdateRenderFlag {
     None = 0,

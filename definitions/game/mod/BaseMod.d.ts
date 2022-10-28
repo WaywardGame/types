@@ -85,6 +85,7 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      * Handles registration of fields decorated with ` @Register.thing`, which occur at `ModRegistrationTime.Initialize`
      */
     private onBeforeInitialize;
+    protected registerEventHandlersOnPreLoad: boolean;
     /**
      * Event handler for `ModEvent.PreLoad`.
      *

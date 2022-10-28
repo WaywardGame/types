@@ -12,6 +12,7 @@ import EventEmitter from "event/EventEmitter";
 import type Doodad from "game/doodad/Doodad";
 import type { DoodadType } from "game/doodad/IDoodad";
 import type Entity from "game/entity/Entity";
+import type Player from "game/entity/player/Player";
 import type Island from "game/island/Island";
 import type { IContainer } from "game/item/IItem";
 import type Item from "game/item/Item";
@@ -32,15 +33,30 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     private readonly island;
     encodedCalculatedCache: Map<number, Map<number, Uint32Array>>;
     encodedProducedCache: Map<number, Map<number, Uint32Array>>;
+    private readonly containerTemperatureCache;
+    private readonly containerTileTemperatureCache;
+    private readonly containerItemsTemperatureCache;
     private readonly scheduledUpdates;
     private readonly scheduledContainerInvalidations;
     private readonly cacheCalculated;
     private readonly cacheProduced;
     constructor(island: Island);
+    /**
+     * Clears all container caches
+     */
+    clearContainerCaches(): void;
     addLayer(z: WorldZ): void;
     delete(): void;
     preSerializeObject(): void;
     onUnserialized(): void;
+    /**
+     * Clears temperature caching for the container
+     */
+    clearContainerCache(container: IContainer): void;
+    /**
+     * Clears temperature caching for the container
+     */
+    clearContainerCacheByHash(containerHash: string): void;
     /**
      * Returns the current temperature for a container, calculated by combining the tile temperature and the combined temperature of the items inside
      */
@@ -51,11 +67,11 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
      * containers with no insulation return the exact temperature they produce, while containers with maximum insulation return
      * `Temperature.Neutral`
      */
-    getContainerProducedTemperature(container: IContainer, applyInsulation?: boolean): number;
+    getContainerProducedTemperature(container: IContainer, containerHash?: string, applyInsulation?: boolean): number;
     /**
      * Get the combined temperature of the items in the container.
      */
-    getContainerItemsTemperature(container: IContainer): number;
+    getContainerItemsTemperature(container: IContainer, containerHash?: string): number;
     private getContainerBaseTemperature;
     private getContainerInsulation;
     /**
@@ -104,6 +120,8 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     protected onDpodadFireUpdate(object: Doodad, tile: ITile, stage?: FireStage): void;
     protected onTileEventFireUpdate(object: TileEvent, tile: ITile, stage?: FireStage): void;
     protected onDoodadTransformed(object: Doodad, newType: DoodadType, oldType: DoodadType): void;
+    protected onPlayerSpawnOrRemove(_: any, player: Player): void;
+    protected onPlayerIdChanged(player: Player): void;
     protected onCreateOrRemoveObject(_: any, object: Doodad | TileEvent | Entity): void;
     protected onEntityMove(object: Entity, lastX: number, lastY: number, lastZ: number, lastTile: ITile, x: number, y: number, z: number, tile: ITile): void;
     protected onUpdateTile(island: Island, x: number, y: number, z: number, tile: ITile, oldType: TerrainType): void;

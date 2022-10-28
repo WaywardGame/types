@@ -12,7 +12,7 @@ import type { ResolveReference } from "game/reference/IReferenceManager";
 import { ReferenceType } from "game/reference/IReferenceManager";
 import Component from "ui/component/Component";
 export interface IReferenceIconDefinition<TYPE extends ReferenceType> {
-    render(text: Component, referenced: ResolveReference<TYPE>): any;
+    render(text: Component, referenced?: ResolveReference<TYPE>): any;
 }
 export declare const referenceIconDefinitions: PartialRecord<ReferenceType, IReferenceIconDefinition<ReferenceType>>;
 export declare function registerReferenceIcon<TYPE extends ReferenceType>(type: TYPE, definition: IReferenceIconDefinition<TYPE>): void;

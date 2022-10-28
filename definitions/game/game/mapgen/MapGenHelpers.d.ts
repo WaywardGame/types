@@ -15,7 +15,10 @@ import type { MapGenVersions } from "game/mapgen/IMapGen";
 import type { ITile, TileTemplateType } from "game/tile/ITerrain";
 import type { TileEventType } from "game/tile/ITileEvent";
 export declare module MapGenHelpers {
-    function pickBasedOnVersion<T>(version: string, versions: MapGenVersions<T>): [string, T];
+    function pickBasedOnVersion<T>(version: string, versions: MapGenVersions<T>): {
+        version: string;
+        selection: T;
+    };
     function startLoading(): Promise<void>;
     function setFinishedLoading(): void;
     function spawnTileEvent(island: Island, type: TileEventType, x: number, y: number, z: number): void;

@@ -35,8 +35,8 @@ export default abstract class GameplayModifier<ID extends number, INSTANCE exten
     private readonly _args;
     readonly imagePath?: string;
     constructor(id: ID, random?: RandomInstance | RandomReference);
-    abstract instantiate(type: ID, ...args: INSTANCE_ARGS): INSTANCE;
-    abstract initialize(instance: INSTANCE, ...args: INSTANCE_ARGS): INSTANCE;
+    abstract instantiate(type: ID, ...args: INSTANCE_ARGS): INSTANCE | undefined;
+    abstract initialize(instance: INSTANCE, ...args: INSTANCE_ARGS): INSTANCE | undefined;
     uninitialize(instance: INSTANCE): any;
     protected getRandom(): Random<SeededGenerator>;
 }

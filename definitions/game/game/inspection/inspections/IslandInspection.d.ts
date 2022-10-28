@@ -26,6 +26,9 @@ export default class IslandInspection extends Inspection<IVector2> {
     private getTreasureMaps;
     private getModifiers;
     private getBiome;
+    private getSeed;
+    private getDaysSpent;
+    private getDaysSpentByPlayer;
     private getPlayers;
     private getPlayerLikeNPCs;
     private getYouAreHereLabel;

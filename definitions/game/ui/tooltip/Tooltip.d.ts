@@ -16,7 +16,8 @@ import type { TranslationGenerator } from "ui/component/IComponent";
 import { TooltipLocation } from "ui/component/IComponent";
 import Text, { Paragraph } from "ui/component/Text";
 import type Bindable from "ui/input/Bindable";
-import Vector2 from "utilities/math/Vector2";
+import type { TooltipAnchorStringHorizontal, TooltipAnchorStringVertical } from "ui/tooltip/TooltipLocationHandler";
+import TooltipLocationHandler from "ui/tooltip/TooltipLocationHandler";
 export declare enum TooltipClasses {
     Main = "tooltip",
     ForceShown = "tooltip-force-shown",
@@ -28,25 +29,56 @@ export declare enum TooltipClasses {
     Secondary = "tooltip-colored-secondary"
 }
 export interface ITooltipEvents extends Events<Component> {
-    move(position: Vector2): any;
-    setLocation(location: TooltipLocation): any;
+    setLocation(): any;
+    updatePosition(): any;
 }
 export default class Tooltip extends Component {
     event: IEventEmitter<this, ITooltipEvents>;
-    get location(): TooltipLocation;
     readonly source: Component;
     readonly blocks: Component<HTMLElement>;
     readonly hints: Component<HTMLElement>;
+    readonly location: TooltipLocationHandler;
     private forceShown;
     private maxWidth;
     private hasSetPosition;
     constructor(source: Component | HTMLElement);
     protected onRemove(): void;
-    protected onHide(): void;
     setSecondary(): this;
     setForceShown(forceShown?: boolean): this;
     wasForceShown(): boolean;
+    /**
+     * Set this tooltip's location by initialising a `TooltipLocationHandler` with multiple location fallbacks.
+     */
+    setLocation(initializer: (locationHandler: TooltipLocationHandler) => any): this;
+    /**
+     * Set this tooltip's location by defining an x and y anchor on the source component.
+     */
+    setLocation(xAnchor: TooltipAnchorStringHorizontal, yAnchor: TooltipAnchorStringVertical): this;
+    /**
+     * Set this tooltip's location by defining an x anchor on a selected ancestor component, and a y anchor on the source component.
+     */
+    setLocation(xAnchor: TooltipAnchorStringHorizontal, xRefSelector: string, yAnchor: TooltipAnchorStringVertical): this;
+    /**
+     * Set this tooltip's location by defining an x anchor on the source component, and a y anchor on a selected ancestor component.
+     */
+    setLocation(xAnchor: TooltipAnchorStringHorizontal, yAnchor: TooltipAnchorStringVertical, yRefSelector: string): this;
+    /**
+     * Set this tooltip's location by defining x and y anchors on selected ancestor components.
+     */
+    setLocation(xAnchor: TooltipAnchorStringHorizontal, xRefSelector: string, yAnchor: TooltipAnchorStringVertical, yRefSelector: string): this;
+    /**
+     * Set this tooltip's location to the default, determined based on where the source component is. (IE, menu or dialog)
+     */
+    setLocation(location: "default"): this;
+    /**
+     * Set this tooltip's location to follow the mouse.
+     */
+    setLocation(location: "mouse"): this;
+    /**
+     * @deprecated This overload will be removed in 2.13.0-beta. Please update to other overloads.
+     */
     setLocation(location: TooltipLocation): this;
+    private getDefaultLocation;
     /**
      * Sets the max width of this tooltip.
      * @param maxWidth The max-width of the tooltip is this value * ui scale.
@@ -72,9 +104,10 @@ export default class Tooltip extends Component {
     updatePosition(regenerateBox?: boolean): this;
     private initialPositionAndShownHandledExternally;
     setInitialPositionAndShownHandledExternally(): this;
+    private dumpOnShow;
+    setDumpOnShow(dumpOnShow?: boolean): this;
     protected onShow(): void;
     dump(): this;
-    private onMouseMove;
 }
 export declare class TooltipBlock extends Component {
     constructor();

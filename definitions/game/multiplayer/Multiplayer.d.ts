@@ -57,7 +57,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private _syncCheckStack;
     private _disconnectingFromSyncIssue;
     private _reportedSyncHashMismatch;
-    private readonly _autojoinEnabled;
+    private readonly _autoJoinOptions;
     private _ipAddress;
     private readonly _matchmakingSecret;
     constructor();
@@ -67,6 +67,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     isServer(): boolean;
     isClient(): boolean;
     getPlayerIdentifier(): string;
+    setPlayerIdentifier(identifier: string): void;
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions, updateGame?: boolean): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
@@ -108,6 +109,11 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo, retryReason: JoinServerRetryReason): Promise<void>;
     disconnectAndResetGameState(reason: DisconnectReason.UnableToJoinGame, unableToJoinReason: UnableToJoinReason): Promise<void>;
     disconnectAndResetGameState(reason: DisconnectReason, reasonDescription?: any[]): Promise<void>;
+    /**
+     * Sanity checks for the state of multiplayer
+     * @returns True when the state is invalid
+     */
+    verifyState(): boolean;
     kick(player: Player, reason: DisconnectReason.Kick | DisconnectReason.Banned): void;
     onPlaying(): Promise<void>;
     onLobbyEntered(success: boolean, lobbyId: string): void;

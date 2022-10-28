@@ -35,16 +35,33 @@ export default class MilestoneDefinition {
      */
     static counter(amount: number): MilestoneDefinition;
     private constructor();
+    /**
+     * Replaces the type and desired amount of this MilestoneDefinition with the type and desired amount of another's.
+     */
+    set(def: MilestoneDefinition): this;
+    /**
+     * Inherits the metadata (visibility, applicable game modes, whether it's disabled by mods, any unlock handler)
+     * of another MilestoneDefinition.
+     */
+    inherit(def: MilestoneDefinition): this;
     visibility: MilestoneVisibility;
     /**
      * @param visibility Whether the milestone is completely visible, has its name hidden, or has its required amt hidden. Defaults to `Visible`
      */
     setVisibility(visibility: MilestoneVisibility): this;
+    /**
+     * Sets this milestone to be unlockable in all game modes, and not disabled by mods.
+     */
+    setAlwaysUnlockable(): this;
     gameModeLock?: GameMode[];
     /**
      * @param gameModes What game modes this milestone can be unlocked in. Defaults to `[Hardcore]`
      */
     setGameModes(...gameModes: GameMode[]): this;
+    /**
+     * Sets this milestone to be unlockable in all game modes.
+     */
+    setGameModes(all: "all"): this;
     disabledByMods: boolean;
     setNotDisabledByMods(): this;
     unlockedHandler?: (tellPlayer: () => void) => any;

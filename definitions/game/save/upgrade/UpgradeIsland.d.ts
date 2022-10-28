@@ -10,7 +10,3 @@
  */
 import type Island from "game/island/Island";
 export declare function upgradeIsland(island: Island): void;
-/**
- * Called after loading item & tile references
- */
-export declare function upgradeSaveAfterLoadingReferences(): void;

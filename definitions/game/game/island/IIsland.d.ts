@@ -85,7 +85,8 @@ export interface IIslandLoadOptions {
     travelTime: number;
     newWorldBiomeTypeOverride: BiomeType;
     pauseAndShowLoadingScreen: boolean;
-    multiplayerLoadingDescription?: MultiplayerLoadingDescription;
+    multiplayerLoadingDescription: MultiplayerLoadingDescription;
+    allowItemAndDoodadFixesInMultiplayer: boolean;
 }
 export interface IMoveToIslandOptions {
     spawnPosition: IVector2;

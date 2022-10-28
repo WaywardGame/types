@@ -36,7 +36,7 @@ export default class TimeManager {
     /**
      * Increments `ticks`.
      */
-    nextTick(): void;
+    nextTick(amount?: number): void;
     /**
      * Returns a decimal representation of the current time. `0` is the start of the day, and `1` is the end.
      */

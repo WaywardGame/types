@@ -102,7 +102,7 @@ export default class InGameScreen extends BaseScreen {
     initializeGameState(): void;
     onGameEnd(): void;
     getDialogIndex(dialogId: DialogId, customDialogInfo?: IDialogInfo): string;
-    setupDialog(dialogId: DialogId, highlightItemId?: number, customDialogInfo?: IDialogInfo): JQueryUI.DialogOptions;
+    setupDialog(dialogId: DialogId, highlightItemId?: number, customDialogInfo?: IDialogInfo, containerSortInfo?: IContainerSortInfo): JQueryUI.DialogOptions;
     highlightItemElementByItemId(itemId: number, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementByItemType(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementByItemTypeWithNoItemId(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
@@ -121,13 +121,11 @@ export default class InGameScreen extends BaseScreen {
     clampDialogs(): void;
     getItemClass(item?: Item, itemType?: ItemType): string;
     createItemString(itemType: ItemType, item?: Item, extraClass?: string): string;
-    private readonly itemElementsCollections;
-    getItemElements(item: Item | number): HTMLCollectionOf<HTMLElement>;
     syncItemElements(itemIds: number | number[], forceSyncDecay?: boolean): void;
     private readonly SYMBOL_LAST_NEARLY_DESTROYED;
     private readonly SYMBOL_LAST_NEARLY_DECAYED;
     private readonly SYMBOL_LAST_DECAY;
-    syncDecayBar(item: Item, force?: boolean, elements?: HTMLCollectionOf<HTMLElement>): void;
+    syncDecayBar(item: Item, force?: boolean, element?: HTMLElement | null): void;
     addItemToContainer(item: Item, container: IContainer, _internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
     insertItemStringToContainer(itemElement: string | JQuery, containerElement: JQuery): void;
     onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery | undefined, isInventoryContainer: boolean, updateTables?: boolean): void;

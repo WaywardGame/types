@@ -19,7 +19,7 @@ declare class TamedCreatureMilestoneModifierInstance extends MilestoneModifierIn
 }
 export default abstract class TamedCreatureMilestoneModifier extends MilestoneModifier {
     getGroup(): MilestoneModifierGroup;
-    instantiate(id: Milestone, player?: Player): TamedCreatureMilestoneModifierInstance;
+    instantiate(id: Milestone, player?: Player): TamedCreatureMilestoneModifierInstance | undefined;
     abstract isAberrant(): boolean;
 }
 export {};

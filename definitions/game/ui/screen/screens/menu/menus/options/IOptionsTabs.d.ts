@@ -9,11 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 export declare enum OptionsTab {
-    Language = 0,
-    Audio = 1,
-    Video = 2,
-    Performance = 3,
-    Gameplay = 4,
+    Gameplay = 0,
+    Language = 1,
+    Audio = 2,
+    Video = 3,
+    Performance = 4,
     Controls = 5,
     Tooltips = 6,
     Other = 7,

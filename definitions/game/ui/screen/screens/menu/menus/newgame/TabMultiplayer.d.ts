@@ -11,12 +11,14 @@
 import { CheckButton } from "ui/component/CheckButton";
 import ChoiceList, { Choice } from "ui/component/ChoiceList";
 import { RangeRow } from "ui/component/RangeRow";
+import ChoiceListTurnMode from "ui/screen/screens/menu/component/ChoiceListTurnModes";
 import { Tab } from "ui/screen/screens/menu/component/Menu";
 import type NewGameMenu from "ui/screen/screens/menu/menus/NewGameMenu";
 export default class TabMultiplayer extends Tab {
     readonly choiceSingleplayer: Choice<undefined>;
     readonly choiceMultiplayer: Choice<undefined>;
     readonly multiplayerMode: ChoiceList<Choice<string | number | undefined>, false>;
+    readonly turnMode: ChoiceListTurnMode;
     readonly choiceLobbyPublic: Choice<undefined>;
     readonly choiceLobbyFriends: Choice<undefined>;
     readonly choiceLobbyPrivate: Choice<undefined>;
@@ -30,4 +32,5 @@ export default class TabMultiplayer extends Tab {
     get menu(): NewGameMenu;
     constructor(menu: NewGameMenu);
     private onChangeMultiplayerMode;
+    private onChangeTurnMode;
 }

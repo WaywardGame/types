@@ -27,8 +27,8 @@ export declare enum ClearType {
 export interface IInputEvents extends Events<Component> {
     change(text: string): any;
     done(text: string): any;
-    enterBind(): any;
-    escape(): any;
+    enterBind(event: KeyboardEvent): any;
+    escape(event: KeyboardEvent): any;
     focus(): any;
     blur(): any;
     upArrow(event: KeyboardEvent): any;
@@ -42,8 +42,8 @@ export default class Input extends Component implements IRefreshable {
     private lastText;
     get text(): string;
     set text(value: string);
-    private keydownEnter;
-    private keydownEscape;
+    private keydownEnter?;
+    private keydownEscape?;
     private clearToDefaultWhenEmpty;
     private clearTo;
     private placeholder;

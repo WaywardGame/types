@@ -24,6 +24,7 @@ import type { ITileContainer, ITileData } from "game/tile/ITerrain";
 import type TileEvent from "game/tile/TileEvent";
 import type TimeManager from "game/time/TimeManager";
 import type { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
+import type Renderer from "renderer/Renderer";
 import type { IReplayLogEntry } from "replay/IReplayLogEntry";
 import type { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
@@ -81,6 +82,10 @@ export interface IGameEvents {
     glLostContext(): any;
     glSetup(restored: boolean): any;
     glInitialized(): any;
+    /**
+     * Called when the game creates the primary renderer
+     */
+    rendererCreated(renderer: Renderer): any;
     /**
      * Called after the field of view has initialized
      */
@@ -208,13 +213,14 @@ export declare enum TileUpdateType {
     DoodadRemove = 13,
     Item = 14,
     ItemDrop = 15,
-    Mod = 16,
-    NPC = 17,
-    NPCSpawn = 18,
-    Player = 19,
-    Terrain = 20,
-    TileEventManager = 21,
-    Tilled = 22
+    ItemMovement = 16,
+    Mod = 17,
+    NPC = 18,
+    NPCSpawn = 19,
+    Player = 20,
+    Terrain = 21,
+    TileEventManager = 22,
+    Tilled = 23
 }
 export declare enum CreationId {
     Doodad = 0,

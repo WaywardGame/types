@@ -8,14 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import EventEmitter from "event/EventEmitter";
 import Component from "ui/component/Component";
 import Tooltip from "ui/tooltip/Tooltip";
-import type Vector2 from "utilities/math/Vector2";
 export default class TooltipManager {
-    readonly tooltipWrapper: Component;
-    readonly tooltipMainWrapper: Component;
-    readonly tooltipMouseWrapper: Component;
-    private current;
+    readonly surfaceWrapper: Component<HTMLElement>;
+    readonly main: TooltipSurface;
+    readonly surfaces: TooltipSurface[];
     private readonly disablers;
     constructor();
     show(host: HTMLElement, initialize?: (tooltip: Tooltip) => any): Tooltip | undefined;
@@ -32,10 +31,27 @@ export default class TooltipManager {
      * disabler has been removed.
      */
     enable(disabler: any): this;
+    createSurface(): TooltipSurface;
     protected onInterrupt(): void;
     protected onInterruptClose(): void;
     protected onScreenResize(): void;
-    protected onMove(_: any, position: Vector2): void;
+    protected onMove(): void;
     private loop;
-    private remove;
+}
+export interface ITooltipSurfaceEvents {
+    remove(): any;
+}
+export declare class TooltipSurface extends EventEmitter.Host<ITooltipSurfaceEvents> {
+    private _host?;
+    get host(): HTMLElement | undefined;
+    tooltip?: Tooltip;
+    readonly surface: Component<HTMLElement>;
+    setId(id: string): this;
+    hasTooltip(): boolean;
+    showTooltip(host: HTMLElement, initialize?: (tooltip: Tooltip) => any): Tooltip | undefined;
+    hideTooltip(host?: HTMLElement | undefined): boolean;
+    removeTooltip(): void;
+    remove(): void;
+    private currentAlignment;
+    updatePosition(): void;
 }

@@ -90,7 +90,17 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     readonly saveLoad: typeof SaveLoad;
     toString(): string;
     get isPaused(): boolean;
-    getPlayingHumans(includeGhosts?: boolean, includeConnecting?: boolean, includeServer?: boolean): Human[];
+    /**
+     * Get humans in the game; ie, players, NPCs, and other non-player humans.
+     * Parameters include additional players that may not be relevant, such as ghosts, connecting players, absent players, the dedicated server fake player.
+     * Only want players? @see {@link PlayerManager.getAll}
+     * @param includeGhosts True to include players that are ghosts
+     * @param includeConnecting True to include players that are connecting
+     * @param includeDedicatedServer True to include the dedicated server fake player
+     * @param includeAbsent True to include the absent players
+     * @returns Array of Human objects
+     */
+    getPlayingHumans(includeGhosts?: boolean, includeConnecting?: boolean, includeDedicatedServer?: boolean, includeAbsent?: boolean): Human[];
     getNonPlayerHumans(): Human[];
     initializeRenderer(): void;
     globalSlotReady(): void;

@@ -69,6 +69,7 @@ export default class Corpse extends EventEmitter.Host<ICorpseEvents> implements 
     getTile(): ITile;
     isValid(): boolean;
     getDecayAtStart(): number;
+    addToTile(tile: ITile): void;
     update(): void;
     getResources(clientSide?: boolean): ItemType[];
     protected onCreated(): void;

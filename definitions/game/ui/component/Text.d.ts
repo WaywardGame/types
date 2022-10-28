@@ -75,7 +75,7 @@ export declare class Heading extends Text {
     icon?: Component;
     addIcon(initializer: (component: Component) => any): this;
 }
-export declare type BasicTextLink = string | [string, string?];
+export declare type BasicTextLink = string | [string, string?, string?];
 export interface IBasicTextEvents extends Events<Component> {
     handleLink(link: BasicTextLink): true | void;
 }
@@ -87,5 +87,6 @@ export declare class BasicText extends Component {
     protected inputModifier?: Modifier;
     constructor(elementType?: string);
     setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection> & Partial<IBindingsSection>): this;
+    private setTooltipLocation;
     private onClick;
 }

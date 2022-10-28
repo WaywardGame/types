@@ -25,13 +25,17 @@ export default class World extends EventEmitter.Host<IWorldEvents> implements IS
     layers: Record<number, WorldLayer>;
     _loaded: boolean;
     private batchTileUpdate;
+    private layerUpdatesSuspended;
     constructor(island: Island, width: number, height: number);
     delete(): void;
     get loaded(): boolean;
     toLocal(world: number, local: number): number;
     addLayer(level: WorldZ): void;
     load(): void;
+    suspendLayerUpdates(): void;
+    resumeLayerUpdates(): void;
     updateTile(x: number, y: number, z: number, tile: ITile, tileUpdateType: TileUpdateType, updateNeighbors?: boolean, flush?: boolean): void;
+    updateTileLayer(x: number, y: number, z: number, tile: ITile, updateNeighbors?: boolean, flush?: boolean): void;
     startUpdateTileBatch(): void;
     endUpdateTileBatch(): void;
     serializeObject(_serializer: ISerializer): undefined;

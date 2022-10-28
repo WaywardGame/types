@@ -31,7 +31,14 @@ export declare enum ButtonClasses {
     ButtonButtons = "button-buttons",
     Text = "button-text",
     ListIconsZoom2To3 = "button-list-zoom-2-to-3",
-    IconZoom2To3 = "button-icon-zoom-2-to-3"
+    IconZoom2To3 = "button-icon-zoom-2-to-3",
+    Opaque = "button-opaque"
+}
+export declare enum ButtonType {
+    None = "button-type-none",
+    Accept = "button-type-accept",
+    Warning = "button-type-warning",
+    Important = "button-type-important"
 }
 export default class Button extends Component implements IDisableable {
     event: IEventEmitter<this, IButtonEvents>;
@@ -46,6 +53,7 @@ export default class Button extends Component implements IDisableable {
     constructor(elementType?: string, listenForEvents?: boolean);
     setDisplayMode(mode: ButtonClasses.DisplayModeButtonList, zoomClass: ButtonClasses.ListIconsZoom2To3): this;
     setDisplayMode(mode: ButtonClasses.DisplayModeBlock | ButtonClasses.DisplayModeIcon | ButtonClasses.DisplayModeButtonList | false): this;
+    setType(type?: ButtonType): this;
     setActionless(isActionless?: boolean, setDisabled?: boolean): this;
     isButtonList(): boolean;
     setDisabled(val?: boolean, reason?: string): this;

@@ -69,7 +69,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     setExpandedVerbose(): this;
     setMagicIncluded(): this;
     getClass(): string[];
-    get(): (InfoProvider | TranslationGenerator<UiTranslation, []>)[];
+    get(): (TranslationGenerator<UiTranslation, []> | InfoProvider)[];
     private getOutOf;
     private formatNumber;
 }

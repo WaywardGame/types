@@ -30,7 +30,7 @@ export declare abstract class ObjectManager<ObjectType extends StringableObject,
     get(id: number): ObjectType | undefined;
     set(id: number, value: ObjectType | undefined): void;
     getObjects(): SaferArray<ObjectType>;
-    findUnusedId<T extends object>(): number;
+    findUnusedId(): number;
     protected replaceNullsWithUndefined(): void;
     protected registerForMemoryLeakDetection(object: SaferArray<ObjectType>): void;
 }

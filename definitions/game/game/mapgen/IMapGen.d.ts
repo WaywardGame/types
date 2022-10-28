@@ -15,9 +15,7 @@ import type MapGenHelpers from "game/mapgen/MapGenHelpers";
 import type { Load } from "game/meta/Loading";
 import type { TileTemplateType } from "game/tile/ITerrain";
 import type { IVector3 } from "utilities/math/IVector";
-export declare type MapGenVersions<T> = Descriptions<number, T> & {
-    latest: [string, T];
-};
+export declare type MapGenVersions<T> = Descriptions<string, T>;
 export interface IMapGen {
     generateWorld(options: IMapGenOptions): void;
 }

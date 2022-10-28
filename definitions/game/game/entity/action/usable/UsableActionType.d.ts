@@ -18,6 +18,7 @@ export declare enum ActionTypeStarts {
     ModUsableActionTypePlaceholder = 400000
 }
 export declare enum UsableActionType {
+    None = -1,
     Use = 100000,
     QuickSlotRemove = 100001,
     QuickSlotAdd = 100002,

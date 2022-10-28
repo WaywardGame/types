@@ -49,6 +49,7 @@ export declare class ClassManipulator<T> extends Manipulator<T, ClassUntil<T>> {
     };
     add(...classes: string[]): T;
     remove(...classes: string[]): T;
+    removeStartingWith(start: string): T;
     toggle(...classes: string[]): T;
     toggle(hasClass: boolean, ...classes: string[]): T;
     /**

@@ -86,6 +86,9 @@ export declare type TranslationData = IBaseTranslationData | (Partial<IBaseTrans
     entry: UiTranslation;
 });
 export declare type TextOrTranslationData = string | UiTranslation | TranslationData;
+/**
+ * @deprecated
+ */
 export declare enum TooltipLocation {
     AboveLeft = 0,
     AboveMiddle = 1,
