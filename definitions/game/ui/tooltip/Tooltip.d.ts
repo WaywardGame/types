@@ -85,8 +85,8 @@ export default class Tooltip extends Component {
      */
     setMaxWidth(maxWidth?: number | `${number}vw`): this;
     setText(translation: GetterOfOr<Translation | UiTranslation>, ...args: any[]): this;
-    private delay;
-    setDelay(delay: number): this;
+    private delay?;
+    setDelay(delay?: number): this;
     getLastBlock(): TooltipBlock;
     getBlocks(): import("@wayward/goodstream").default<TooltipBlock>;
     addBlock(initializer: (block: TooltipBlock) => any): this;

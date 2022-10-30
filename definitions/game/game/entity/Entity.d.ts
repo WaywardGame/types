@@ -74,6 +74,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
     private _tags?;
     get tags(): Set<EntityTag>;
     islandId: IslandId;
+    spawnAnimationTime: IMovementTime | undefined;
     attackAnimationType: DamageType | undefined;
     attackAnimationTime: IMovementTime | undefined;
     /**
@@ -133,6 +134,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> im
      */
     animateBumpTowards(x: number, y: number): void;
     protected setMoving(delay: Delay, fromX: number, fromY: number, toZ?: number): void;
+    animateSpawn(): void;
     animateAttack(damageType: DamageType[] | undefined): void;
     getMovementPoint(timeStamp: number): IVector2;
     /**

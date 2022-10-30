@@ -103,9 +103,10 @@ export declare enum RenderSource {
     RemoveBlood = 54,
     Resize = 55,
     SetupGl = 56,
-    StartGame = 57,
-    Steamworks = 58,
-    Thumbnail = 59,
-    WorldLayerRendererFlush = 60
+    SpawnAnimationStart = 57,
+    StartGame = 58,
+    Steamworks = 59,
+    Thumbnail = 60,
+    WorldLayerRendererFlush = 61
 }
 export declare function calculateAmbientLightLevel(origin: IRendererOrigin, z: number): number;

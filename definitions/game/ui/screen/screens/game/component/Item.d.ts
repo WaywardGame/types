@@ -110,6 +110,7 @@ export default class ItemComponent extends Component {
     protected onUpdateDurability(): void;
     protected onUpdateQuality(): void;
     protected onTickEnd(): void;
+    protected onLoadedOnIsland(): void;
     refresh(refreshType: ItemRefreshType): void;
     clone(): ItemComponent;
     setItemMenu(initialiser?: (contextMenu: ContextMenu<ActionId>) => any): this;
