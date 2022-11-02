@@ -63,7 +63,7 @@ import { IslandName } from "language/english/game/islandName/IslandName";
 import { ModProvide, ModType } from "mod/IModInfo";
 import { CanLoadState, ModLoadFailureReason } from "mod/IModManager";
 import { DisconnectReason, JoinServerRetryReason, UnableToJoinReason } from "multiplayer/IMultiplayer";
-import { MusicPlaylist } from "save/data/ISaveDataGlobal";
+import { MusicPlaylist, TooltipVisibilityOption } from "save/data/ISaveDataGlobal";
 import { SaveImportErrorReason, SaveSort } from "save/ISaveManager";
 import Bindable, { BindableType } from "ui/input/Bindable";
 import { FontStyle } from "ui/IUi";
@@ -174,14 +174,15 @@ declare const dictionaryMap: {
     87: typeof TempType;
     88: typeof TerrainType;
     89: typeof TileEventType;
-    90: typeof UiTranslation;
-    91: typeof Quadrant;
-    92: typeof UnableToJoinReason;
-    93: typeof UnlockedRecipesStrategy;
-    94: typeof UsableActionType;
-    95: typeof Website;
-    96: typeof WeightStatus;
-    97: typeof WorldZ;
+    90: typeof TooltipVisibilityOption;
+    91: typeof UiTranslation;
+    92: typeof Quadrant;
+    93: typeof UnableToJoinReason;
+    94: typeof UnlockedRecipesStrategy;
+    95: typeof UsableActionType;
+    96: typeof Website;
+    97: typeof WeightStatus;
+    98: typeof WorldZ;
 };
 export declare const strictDictionaries: {
     0: typeof ActionType;
@@ -274,14 +275,15 @@ export declare const strictDictionaries: {
     87: typeof TempType;
     88: typeof TerrainType;
     89: typeof TileEventType;
-    90: typeof UiTranslation;
-    91: typeof Quadrant;
-    92: typeof UnableToJoinReason;
-    93: typeof UnlockedRecipesStrategy;
-    94: typeof UsableActionType;
-    95: typeof Website;
-    96: typeof WeightStatus;
-    97: typeof WorldZ;
+    90: typeof TooltipVisibilityOption;
+    91: typeof UiTranslation;
+    92: typeof Quadrant;
+    93: typeof UnableToJoinReason;
+    94: typeof UnlockedRecipesStrategy;
+    95: typeof UsableActionType;
+    96: typeof Website;
+    97: typeof WeightStatus;
+    98: typeof WorldZ;
 };
 export declare type DictionaryEnum = (typeof dictionaryMap)[Dictionary];
 export declare type DictionaryEntryEnums = {
@@ -387,6 +389,7 @@ declare const dictionaries: {
     95: typeof SYMBOL_ANY_DICTIONARY | Enum;
     96: typeof SYMBOL_ANY_DICTIONARY | Enum;
     97: typeof SYMBOL_ANY_DICTIONARY | Enum;
+    98: typeof SYMBOL_ANY_DICTIONARY | Enum;
 } & Record<number, typeof SYMBOL_ANY_DICTIONARY | Enum | undefined> & {
     getByEnum: typeof getByEnum;
 };

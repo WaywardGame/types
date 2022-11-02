@@ -19,7 +19,6 @@ import type UiExperiment from "ui/UiExperiments";
 import type { ISourceFilter } from "utilities/Log";
 export interface IOptions {
     alternatingDirectionMovement: boolean;
-    alwaysShowMoreInformation: boolean;
     autoAttack: boolean;
     autoPickup: boolean;
     autoPickupOnIdle: boolean;
@@ -66,6 +65,7 @@ export interface IOptions {
     tooltips: {
         [key in InspectType]: boolean | undefined;
     };
+    tooltipVisibility?: TooltipVisibilityOption;
     uiExperiments: UiExperiment.Any[];
     uiScale?: number;
     useAdjacentContainers: boolean;
@@ -94,7 +94,13 @@ export declare enum MusicPlaylist {
     Shuffle = 1,
     Dynamic = 2
 }
+export declare enum TooltipVisibilityOption {
+    HiddenUnlessBind = 0,
+    ShowMoreInformationWithBind = 1,
+    AlwaysShowMoreInformation = 2
+}
 export declare type IOptionsOld = Partial<Pick<IOptions, "bindings">> & Partial<{
+    alwaysShowMoreInformation: boolean;
     keyBinds: Record<number, number>;
     bindings: IBindingsOld;
     directionTurnDelay: boolean;

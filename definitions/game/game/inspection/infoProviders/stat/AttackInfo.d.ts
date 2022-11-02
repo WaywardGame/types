@@ -20,5 +20,6 @@ export default class AttackInfo extends InfoProvider {
     private getMainHand;
     private getOffHand;
     private getSkillBonus;
+    private getAttackMultiplier;
     private getAttack;
 }

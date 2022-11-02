@@ -159,6 +159,7 @@ export declare enum AttackType {
     ThrowItem = 3
 }
 export declare enum DamageType {
+    None = 0,
     Blunt = 1,
     Slashing = 2,
     Piercing = 4,
@@ -203,10 +204,12 @@ export interface IAttack {
 }
 export interface IAttackMainHand {
     item: Item;
+    type: DamageType;
     value: number;
 }
 export interface IAttackOffHand {
     item: Item;
+    type: DamageType;
     raw: number;
     skill: number;
     result: number;

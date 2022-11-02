@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "game/doodad/Doodad";
-import type { EquipType } from "game/entity/IHuman";
+import { EquipType } from "game/entity/IHuman";
 import NPC from "game/entity/npc/NPC";
 import type { IContainer, IDismantleComponent } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";

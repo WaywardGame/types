@@ -15,6 +15,7 @@ import type { PlayerState } from "game/entity/player/IPlayer";
 import type { Game } from "game/Game";
 import type { Prompt } from "game/meta/prompt/IPrompt";
 import type InterruptChoice from "language/dictionary/InterruptChoice";
+import { TooltipVisibilityOption } from "save/data/ISaveDataGlobal";
 import Component from "ui/component/Component";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import LoadingBridge from "ui/LoadingBridge";
@@ -34,7 +35,7 @@ export interface IUiEvents {
     interrupt(options: Partial<InterruptOptions>, interrupt?: Prompt): string | boolean | InterruptChoice | undefined | void;
     interruptClose(options: Partial<InterruptOptions>, result?: string | boolean | InterruptChoice): any;
     loadedFromSave(): any;
-    toggleShowMoreInformation(showingMoreInformation: boolean): any;
+    changeInformationVisibility(informationVisibility: TooltipVisibilityOption): any;
     toggleHealthVignette(healthVignette: boolean): any;
     toggleDeveloperMode(developerMode: boolean): any;
 }
@@ -66,8 +67,8 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
      */
     registerDataHost(id: string | number, host: any): void;
     playSound(sound: SfxType | SfxUi): void;
-    shouldShowMoreInformation(): boolean;
-    toggleShowMoreInformation(showMoreInformation: boolean): void;
+    getTooltipVisibility(): TooltipVisibilityOption;
+    protected onChangeInformationVisibility(): void;
     /**
      * Toggle health vignette
      */

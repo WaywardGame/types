@@ -99,13 +99,14 @@ declare enum Dictionary {
     TemperatureType = 87,
     Terrain = 88,
     TileEvent = 89,
-    Ui = 90,
-    UiQuadrant = 91,
-    UnableToJoinReason = 92,
-    UnlockedRecipesStrategy = 93,
-    UsableActionType = 94,
-    Website = 95,
-    WeightStatus = 96,
-    WorldLayer = 97
+    TooltipVisibilityOption = 90,
+    Ui = 91,
+    UiQuadrant = 92,
+    UnableToJoinReason = 93,
+    UnlockedRecipesStrategy = 94,
+    UsableActionType = 95,
+    Website = 96,
+    WeightStatus = 97,
+    WorldLayer = 98
 }
 export default Dictionary;

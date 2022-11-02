@@ -106,6 +106,9 @@ export default class Tooltip extends Component {
     setInitialPositionAndShownHandledExternally(): this;
     private dumpOnShow;
     setDumpOnShow(dumpOnShow?: boolean): this;
+    private showId?;
+    reshow(force?: boolean): void;
+    private reshowInternal;
     protected onShow(): void;
     dump(): this;
 }
