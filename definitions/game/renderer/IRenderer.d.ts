@@ -80,7 +80,7 @@ export declare enum RenderSource {
     NotifierAddNotifierIcon = 31,
     NotifierAddStat = 32,
     NotifierAddStatusType = 33,
-    OptionHeadgear = 34,
+    OptionEquipment = 34,
     OptionVisionMode = 35,
     OptionZoomLevel = 36,
     Particles = 37,

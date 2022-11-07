@@ -101,7 +101,7 @@ export declare class QuestInstance extends EventEmitter.Host<IQuestInstanceEvent
     getTitle(): import("../../../../language/impl/TranslationImpl").default | undefined;
     getDescription(): import("../../../../language/impl/TranslationImpl").default | undefined;
     getRequirements(): Stream<RequirementInstance>;
-    needsManualCompletion(): boolean;
+    needsManualCompletion(): boolean | undefined;
     complete(): this;
     getChildren(): Stream<QuestType>;
     getCompletionAmount(): number;

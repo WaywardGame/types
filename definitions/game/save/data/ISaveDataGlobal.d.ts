@@ -49,6 +49,7 @@ export interface IOptions {
     fontStyle: FontStyle;
     fullscreen: boolean;
     hideEquippedHeadgear: boolean;
+    leftHanded: boolean;
     hudWidth?: number;
     keepSortActive: boolean;
     lowPowerMode: boolean;

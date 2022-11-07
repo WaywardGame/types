@@ -41,7 +41,7 @@ export interface IItemEvents {
     toggleProtected(isProtected: boolean): any;
     fireUpdate(stage?: FireStage): any;
     damage(): any;
-    transformed(): any;
+    transformed(newType: ItemType, oldType: ItemType): any;
     weightUpdate(): any;
     moved(): any;
     remove(): any;

@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Challenge from "game/entity/player/quest/quest/Challenge";
-declare const quests: {
-    0: Challenge;
-};
+import { QuestType } from "game/entity/player/quest/quest/IQuest";
+import type { Quest } from "game/entity/player/quest/quest/Quest";
+declare const quests: OptionalDescriptions<QuestType, Quest>;
 export default quests;
