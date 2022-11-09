@@ -16,6 +16,7 @@ import type Item from "game/item/Item";
 export interface IDismantleCanUse extends IActionUsable {
     description: IItemDescription;
     dismantleDescription: IDismantleDescription;
+    requiredItem?: Item;
 }
 declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default, void, IDismantleCanUse, [Item, (Item | undefined)?]>;
 export default _default;

@@ -31,7 +31,6 @@ import type Steamworks from "steamworks/Steamworks";
 import "typings/jquery";
 import "typings/jqueryui";
 import type { ISortable, ISortableOptions } from "ui/old/functional/IFunctionalSortable";
-import type { ITooltip, ITooltipOptions } from "ui/old/functional/IFunctionalTooltip";
 import type OldUi from "ui/old/OldUi";
 import type { Ui } from "ui/Ui";
 import "utilities/prototype/Promise";
@@ -90,8 +89,6 @@ declare global {
         getItemType(): ItemType;
         functionalSortable(data: string, ...args: any[]): void;
         functionalSortable(data: ISortableOptions): ISortable;
-        functionalTooltip(data: string, ...args: any[]): void;
-        functionalTooltip(data: ITooltipOptions): ITooltip;
         import(template: JQuery | HTMLTemplateElement): JQuery;
     }
 }
