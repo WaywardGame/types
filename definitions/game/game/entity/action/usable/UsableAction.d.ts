@@ -11,6 +11,7 @@
 import EventEmitter from "event/EventEmitter";
 import type { ActionId, IUsableActionDefinition, IUsableActionDefinitionExecutable, IUsableActionExecutionContext, IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, UsableActionUsability } from "game/entity/action/usable/IUsableAction";
 import { IUsableActionNotUsable, UsableActionDisplayContext } from "game/entity/action/usable/IUsableAction";
+import UsableActionRegistrar from "game/entity/action/usable/UsableActionRegistrar";
 import type Player from "game/entity/player/Player";
 import type { IIcon } from "game/inspection/InfoProvider";
 import type Item from "game/item/Item";
@@ -21,6 +22,7 @@ export declare const USABLE_ACTION_USE_ON_MOVE_UNLOCK_AT = 20;
 export interface IUsableActionEvents {
     preExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
     postExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
+    showContextMenu(registrar: UsableActionRegistrar): any;
 }
 /**
  * Create a basic usable action:
