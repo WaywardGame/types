@@ -15,8 +15,9 @@ import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IRefreshable } from "ui/component/Refreshable";
 import Bindable from "ui/input/Bindable";
 import type { Binding } from "ui/input/Bindings";
+import { Macro } from "ui/input/Macros";
 export interface IBindRowEvents extends Events<Button> {
-    requestFilter(bindables: Iterable<Bindable>): any;
+    requestFilter(macro: Macro): any;
     update(): any;
 }
 export declare class BindRow extends Button implements IRefreshable {

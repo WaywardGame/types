@@ -35,6 +35,7 @@ export interface IStringSection {
     classes?: Set<string>;
     icon?: ISerializedIcon;
     forceInclude?: true;
+    stringOnly?: true;
 }
 export declare namespace IStringSection {
     function get(content?: string | IStringSection | Iterable<IStringSection>): Iterable<IStringSection>;

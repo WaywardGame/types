@@ -24,11 +24,12 @@ export declare enum CanLoadState {
     ModRequiresItself = 4,
     MissingRequiredMod = 5,
     CannotLoadRequiredMod = 6,
-    ReqiredModNotLoaded = 7,
+    RequiredModNotLoaded = 7,
     LocalModPrecedence = 8,
-    IncompatibleVersion = 9,
-    DisabledInMultiplayer = 10,
-    ServerSideOnNonDedicatedServer = 11
+    WorkshopModPrecedence = 9,
+    IncompatibleVersion = 10,
+    DisabledInMultiplayer = 11,
+    ServerSideOnNonDedicatedServer = 12
 }
 export declare enum ModLoadFailureReason {
     IsDisabled = 0,

@@ -22,6 +22,7 @@ export default class BindingsMenu extends Menu {
     private filterBindRows;
     filter(...bindables: Bindable[]): void;
     private filterToBindables;
+    private filterToMacros;
     private getSelector;
     private createBindRow;
 }
