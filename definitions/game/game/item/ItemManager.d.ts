@@ -17,7 +17,7 @@ import type Player from "game/entity/player/Player";
 import { CreationId } from "game/IGame";
 import { Quality } from "game/IObject";
 import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IMoveToTileOptions, IRecipe } from "game/item/IItem";
-import { CraftResult, ItemType, ItemTypeGroup } from "game/item/IItem";
+import { CraftResult, ItemType, ItemTypeGroup, ItemTypeExtra } from "game/item/IItem";
 import type { IAddToContainerOptions, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IRequirementInfo } from "game/item/IItemManager";
 import { ContainerReferenceSource, CraftStatus, ICraftResultChances, WeightType } from "game/item/IItemManager";
 import Item from "game/item/Item";
@@ -133,6 +133,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     updateContainedWithin(containable: IContainable, containedWithin: IContainer | undefined): void;
     addToContainerInternal(item: Item, container: IContainer, options?: IAddToContainerOptions): boolean;
     removeContainerItems(container: IContainer, removeContainedItems?: boolean): void;
+    isItemExtra(type: number): type is ItemTypeExtra;
     exists(item: Item): boolean;
     remove(item: Item, removeContainedItems?: boolean): void;
     getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): Item[];

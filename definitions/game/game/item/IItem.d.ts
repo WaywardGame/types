@@ -255,7 +255,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     /**
      * The item type to display instead of the describe item type
      */
-    displayItem?: SupplierOr<ItemType | undefined, [Item]>;
+    displayItem?: SupplierOr<DisplayableItemType | undefined, [Item]>;
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
 }
@@ -1326,9 +1326,14 @@ export declare enum ItemType {
     WaterLilies = 718,
     Mud = 719,
     SpikerushSheaths = 720,
-    SpikerushSeeds = 721,
-    TatteredMap_RolledUp = 722
+    SpikerushSeeds = 721
 }
+export declare enum ItemTypeExtra {
+    None = 999,
+    TatteredMap_RolledUp = 1000,
+    TatteredMap_Completed = 1001
+}
+export declare type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
     None = 0
 }
