@@ -21,4 +21,4 @@ export interface ISshServerOptions {
     username: string;
     password?: string;
 }
-export declare function start(options: ISshServerOptions): void;
+export declare function start(options: ISshServerOptions): Promise<void>;

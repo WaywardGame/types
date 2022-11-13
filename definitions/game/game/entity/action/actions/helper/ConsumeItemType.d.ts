@@ -11,6 +11,6 @@
 import type { IActionApi } from "game/entity/action/IAction";
 import { ActionType } from "game/entity/action/IAction";
 import type Human from "game/entity/Human";
-import type { ItemType } from "game/item/IItem";
+import { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 export default function consumeItemType(action: IActionApi<Human>, item: Item | ItemType, actionType?: ActionType): boolean;

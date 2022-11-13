@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { MultiplayerSyncCheck } from "multiplayer/IMultiplayer";
 import type { ConnectionState } from "multiplayer/networking/IConnection";
 export declare const reservedBytes = 5;
 export declare enum PacketType {
@@ -22,10 +23,14 @@ export interface ISynchronizationCheckData {
     beforeSyncChecksHash?: number;
     afterSyncChecksHash?: number;
 }
-export declare type ISyncCheck = Record<number, Array<number | string>>;
+export interface ISyncCheck {
+    id: MultiplayerSyncCheck;
+    value: string | number;
+}
+export declare type SyncChecks = ISyncCheck[];
 export interface IHashedSyncCheck {
     hash: number;
-    syncCheck: ISyncCheck;
+    syncCheck: SyncChecks;
 }
 export interface IPacket<T = any> {
     getAllowedStates(): ConnectionState;

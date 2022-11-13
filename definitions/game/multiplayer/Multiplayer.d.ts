@@ -156,7 +156,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     checkConnection(): Promise<void>;
     isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any, addStackTrace?: boolean): void;
-    addMiscSeedSyncCheck(island: Island, ...messages: any[]): void;
+    addSyncCheckWithSeed(island: Island, syncCheck: MultiplayerSyncCheck, ...messages: any[]): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addAfterSyncChecks(packet: IPacket): void;
     sendChatMessage(sender: Player, message: string): void;
