@@ -17,6 +17,10 @@ export interface IVersionInfo {
     patch: number;
     name?: string;
     date?: Date;
+    /**
+     * A number representing the patch (if beta) or minor (if release), used when the stage is not known
+     */
+    update?: number;
 }
 declare module Version {
     const versionInfoRegExp: RegExp;
