@@ -328,7 +328,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      */
     schedule(ms: number, debounce: number, cb?: (this: this, component: this) => any, ...args: any[]): this;
     protected onContextMenu(api: IBindHandlerApi): boolean;
-    private entered;
+    protected entered: boolean;
     protected onEnter(reason: "mouse" | "focus"): void;
     private menuCancelHideTooltip;
     protected onLeave(reason: "mouse" | "focus" | "remove"): void;
