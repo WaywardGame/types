@@ -21,5 +21,4 @@ export default class NPCInspection extends HumanInspection<NPC> {
     constructor(npc: NPC);
     getBorder(): string;
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
-    isImportant(): boolean;
 }

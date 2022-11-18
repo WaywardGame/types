@@ -68,6 +68,10 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     readonly configurationColumnHeaderHorizontalLine: HorizontalLine;
     readonly configurationColumnContents: Component<HTMLElement>;
     readonly itemOrTypeChoiceList: ChoiceList<Choice<ItemMethod>, false>;
+    private translateUseExact;
+    private translateUseByTypeAndQuality;
+    private translateUseByType;
+    private translateUseAny;
     readonly useOnMoveCheckButton: CheckButton;
     readonly hintDiscoverMore: Paragraph;
     readonly hr1: HorizontalLine;

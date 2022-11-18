@@ -14,15 +14,24 @@ import type UsableAction from "game/entity/action/usable/UsableAction";
 import { ActionTranslation } from "language/dictionary/Misc";
 import Translation from "language/Translation";
 export declare type UsableActionTranslationArguments = [using: IUsableActionPossibleUsing, action: UsableAction, context: UsableActionDisplayContext];
+export declare type ActionWhichTranslation = ActionTranslation | "useExact" | "useByTypeAndQuality" | "useByType" | "useAny";
 export declare class UsableActionTranslator {
     readonly id: ActionId;
     static translateId(id: ActionId, which?: ActionTranslation): import("../../../../language/impl/TranslationImpl").default | undefined;
     private nameSupplier?;
     private descriptionSupplier?;
+    private useExactSupplier?;
+    private useByTypeAndQualitySupplier?;
+    private useByTypeSupplier?;
+    private useAnySupplier?;
     constructor(id: ActionId);
     name(id: ActionId): this;
     name(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
     description(id: ActionId): this;
     description(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
-    get(action: UsableAction, using?: IUsableActionPossibleUsing, which?: ActionTranslation, context?: UsableActionDisplayContext): Translation | undefined;
+    useExact(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
+    useByTypeAndQuality(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
+    useByType(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
+    useAny(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
+    get(action: UsableAction, using?: IUsableActionPossibleUsing, which?: ActionWhichTranslation, context?: UsableActionDisplayContext): Translation | undefined;
 }
