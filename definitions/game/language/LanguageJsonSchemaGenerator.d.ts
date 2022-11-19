@@ -83,32 +83,92 @@ export default function generateSchema(): {
                 articleRules: {
                     description: string;
                     type: string;
-                    minItems: number;
-                    items: {
-                        type: string;
-                        items: ({
-                            anyOf: ({
-                                type: string;
-                                properties?: undefined;
-                                required?: undefined;
-                            } | {
-                                type: string;
-                                properties: {
-                                    min: {
-                                        type: string;
-                                    };
-                                    max: {
-                                        type: string;
-                                    };
-                                };
-                                required: string[];
-                            })[];
-                            type?: undefined;
-                        } | {
+                    properties: {
+                        indefinite: {
+                            description: string;
                             type: string;
-                            anyOf?: undefined;
-                        })[];
+                            minItems: number;
+                            items: {
+                                type: string;
+                                items: ({
+                                    anyOf: ({
+                                        type: string;
+                                        properties?: undefined;
+                                        required?: undefined;
+                                    } | {
+                                        type: string;
+                                        properties: {
+                                            min: {
+                                                type: string;
+                                            };
+                                            max: {
+                                                type: string;
+                                            };
+                                        };
+                                        required: string[];
+                                    })[];
+                                    type?: undefined;
+                                } | {
+                                    type: string;
+                                    anyOf?: undefined;
+                                })[];
+                            };
+                        };
+                        definite: {
+                            description: string;
+                            type: string;
+                            minItems: number;
+                            items: {
+                                type: string;
+                                items: ({
+                                    anyOf: ({
+                                        type: string;
+                                        properties?: undefined;
+                                        required?: undefined;
+                                    } | {
+                                        type: string;
+                                        properties: {
+                                            min: {
+                                                type: string;
+                                            };
+                                            max: {
+                                                type: string;
+                                            };
+                                        };
+                                        required: string[];
+                                    })[];
+                                    type?: undefined;
+                                } | {
+                                    type: string;
+                                    anyOf?: undefined;
+                                })[];
+                            };
+                        };
                     };
+                    additionalProperties: boolean;
+                };
+            };
+            additionalProperties: boolean;
+        };
+        contextRules: {
+            description: string;
+            type: string;
+            properties: {
+                isWord: {
+                    description: string;
+                    type: string;
+                };
+                isWordSeparator: {
+                    description: string;
+                    type: string;
+                };
+                isSentenceSeparator: {
+                    description: string;
+                    type: string;
+                };
+                shouldCapitalizeWord: {
+                    description: string;
+                    type: string;
                 };
             };
             additionalProperties: boolean;
