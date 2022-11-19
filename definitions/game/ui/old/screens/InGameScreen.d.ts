@@ -9,9 +9,9 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "game/doodad/Doodad";
-import type { EquipType } from "game/entity/IHuman";
+import { EquipType } from "game/entity/IHuman";
 import NPC from "game/entity/npc/NPC";
-import type { IContainer, IDismantleComponent } from "game/item/IItem";
+import type { DisplayableItemType, IContainer, IDismantleComponent } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import Message from "language/dictionary/Message";
@@ -27,7 +27,6 @@ import BaseScreen from "ui/old/screens/BaseScreen";
 import type ActionBar from "ui/screen/screens/game/static/ActionBar";
 import type { ActionSlot } from "ui/screen/screens/game/static/ActionBar";
 import { Direction } from "utilities/math/Direction";
-import type Vector2 from "utilities/math/Vector2";
 export declare enum TextElementId {
     Weight = 0,
     Attack = 1,
@@ -66,8 +65,6 @@ export default class InGameScreen extends BaseScreen {
     elementDialogDismantleContainer: JQuery;
     elementDialogCraftingButton: JQuery;
     elementDialogDismantleButton: JQuery;
-    elementDialogEquipment: JQuery;
-    elementDialogEquipmentContainer: JQuery;
     elementContainerDialogs: JQuery[];
     elementOtherDialogs: JQuery[];
     private activeContainer;
@@ -77,7 +74,6 @@ export default class InGameScreen extends BaseScreen {
     private sortingCancelled;
     private onSortableAction;
     private isCurrentlySorting;
-    private lastGlobalMouseInfo;
     private craftableItemTypes;
     private nonCraftableItemTypes;
     private dismantleItems;
@@ -119,7 +115,7 @@ export default class InGameScreen extends BaseScreen {
     autoOpenDialog(index: string | number, element: JQuery): boolean;
     openDialogs(): void;
     clampDialogs(): void;
-    getItemClass(item?: Item, itemType?: ItemType): string;
+    getItemClass(item?: Item, itemType?: DisplayableItemType): string;
     createItemString(itemType: ItemType, item?: Item, extraClass?: string): string;
     syncItemElements(itemIds: number | number[], forceSyncDecay?: boolean): void;
     private readonly SYMBOL_LAST_NEARLY_DESTROYED;
@@ -135,12 +131,7 @@ export default class InGameScreen extends BaseScreen {
     getInventoryItemsInOrder(): any[];
     saveItemOrder(containerElement: JQuery, activeSort?: boolean): void;
     craftItem(itemType: ItemType): void;
-    onDismantleItemClick(dismantleItem: Item | undefined): void;
-    getTooltipHtml(element: JQuery): string;
-    tooltipEnable(): void;
-    tooltipRefresh(): void;
-    tooltipDisable(): void;
-    tooltipHide(): void;
+    onDismantleItemClick(dismantleItem: Item): void;
     unSelectElements(): void;
     onSortableItemReceive(sortableEvent: ISortableEvent): void;
     setEquipSlot(equip: EquipType, itemId?: number, internal?: boolean): void;
@@ -149,7 +140,6 @@ export default class InGameScreen extends BaseScreen {
     updateDismantleTab(dismantleItems: IDismantleComponent, force?: boolean): void;
     createCraftItemElements(containerSortInfo: IContainerSortInfo | undefined): void;
     updateItem(item: Item, updateChildren?: boolean): void;
-    onGlobalMouseMove(mouseInfo: GlobalMouseInfo, _: Vector2): void;
     onActionBarSlotUpdate(actionBar: ActionBar, actionSlot: ActionSlot, item?: Item, oldItem?: Item): void;
     private tooltipTarget?;
     onGlobalMouseUpdateTarget(mouse: GlobalMouseInfo, target?: HTMLElement): void;

@@ -252,6 +252,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * A float that items inside the container will be reduced by when in a player's inventory.
      */
     reducedStoredItemsWeight?: number;
+    /**
+     * The item type to display instead of the describe item type
+     */
+    displayItem?: SupplierOr<DisplayableItemType | undefined, [Item]>;
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
 }
@@ -1324,6 +1328,12 @@ export declare enum ItemType {
     SpikerushSheaths = 720,
     SpikerushSeeds = 721
 }
+export declare enum ItemTypeExtra {
+    None = 999,
+    TatteredMap_RolledUp = 1000,
+    TatteredMap_Completed = 1001
+}
+export declare type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
     None = 0
 }

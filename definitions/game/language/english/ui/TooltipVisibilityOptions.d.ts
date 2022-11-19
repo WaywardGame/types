@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { QuestType } from "game/entity/player/quest/quest/IQuest";
-import type { Quest } from "game/entity/player/quest/quest/Quest";
-declare const quests: OptionalDescriptions<QuestType, Quest>;
-export default quests;
+import { TooltipVisibilityOption } from "save/data/ISaveDataGlobal";
+declare const tooltipVisibilityOptions: Descriptions<TooltipVisibilityOption, string>;
+export default tooltipVisibilityOptions;

@@ -23,7 +23,7 @@ import { CreationId } from "game/IGame";
 import type { IObject, IObjectOptions } from "game/IObject";
 import { Quality } from "game/IObject";
 import type { IslandId } from "game/island/IIsland";
-import type { ContainerReference, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemDisassembleResult, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemTag } from "game/item/IItem";
+import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemDisassembleResult, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemTag } from "game/item/IItem";
 import { BookType, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "game/item/IItem";
 import type { IPlaceOnTileOptions } from "game/item/IItemManager";
 import ItemMapManager from "game/item/ItemMapManager";
@@ -41,7 +41,7 @@ export interface IItemEvents {
     toggleProtected(isProtected: boolean): any;
     fireUpdate(stage?: FireStage): any;
     damage(): any;
-    transformed(): any;
+    transformed(newType: ItemType, oldType: ItemType): any;
     weightUpdate(): any;
     moved(): any;
     remove(): any;
@@ -119,6 +119,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     set durability(value: number);
     get durabilityMax(): number;
     set durabilityMax(value: number);
+    getDisplayItem(): DisplayableItemType;
     isContainer(): this is Item & IContainer;
     /**
      * Gets the owner of this item.

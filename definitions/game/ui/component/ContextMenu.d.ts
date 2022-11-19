@@ -42,6 +42,8 @@ export declare type ContextMenuOptionKeyValuePair<O extends number | string | sy
 export declare type ContextMenuOptionDescription<O extends number | string | symbol = number | string | symbol> = ContextMenuOptionKeyValuePair<O> | typeof ContextMenu.Divider;
 export declare type ContextMenuDescriptions<O extends number | string | symbol = number | string | symbol> = Array<ContextMenuOptionDescription<O>>;
 export interface IContextMenuEvents extends Events<Component> {
+    setPosition(): any;
+    interactable(): any;
     chosen(choice: ContextMenuOption): any;
     becomeActive(): any;
 }

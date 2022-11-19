@@ -37,5 +37,6 @@ export declare class RangeRow extends BlockRow implements IRefreshable, IDisable
     addDefaultButton(defaultValue?: () => number): this;
     addDescription(initializer: (description: Paragraph) => any): this;
     refresh(): this;
+    setInheritTextTooltip(): this;
     private updateDisplay;
 }

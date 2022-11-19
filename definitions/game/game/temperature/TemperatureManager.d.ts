@@ -14,7 +14,7 @@ import type { DoodadType } from "game/doodad/IDoodad";
 import type Entity from "game/entity/Entity";
 import type Player from "game/entity/player/Player";
 import type Island from "game/island/Island";
-import type { IContainer } from "game/item/IItem";
+import type { IContainer, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type ItemManager from "game/item/ItemManager";
 import { TempType } from "game/temperature/ITemperature";
@@ -66,12 +66,14 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
      * @param applyInsulation Whether to apply the container's insulation to the produced temperature value. For example,
      * containers with no insulation return the exact temperature they produce, while containers with maximum insulation return
      * `Temperature.Neutral`
+     * @returns temperature or undefined if the container/contained items do not produce temperatures
      */
-    getContainerProducedTemperature(container: IContainer, containerHash?: string, applyInsulation?: boolean): number;
+    getContainerProducedTemperature(container: IContainer, containerHash?: string, applyInsulation?: boolean): number | undefined;
     /**
      * Get the combined temperature of the items in the container.
+     * @returns temperature or undefined if the container/contained items do not produce temperatures
      */
-    getContainerItemsTemperature(container: IContainer, containerHash?: string): number;
+    getContainerItemsTemperature(container: IContainer, containerHash?: string): number | undefined;
     private getContainerBaseTemperature;
     private getContainerInsulation;
     /**
@@ -120,6 +122,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     protected onDpodadFireUpdate(object: Doodad, tile: ITile, stage?: FireStage): void;
     protected onTileEventFireUpdate(object: TileEvent, tile: ITile, stage?: FireStage): void;
     protected onDoodadTransformed(object: Doodad, newType: DoodadType, oldType: DoodadType): void;
+    protected onItemTransformed(object: Item, newType: ItemType, oldType: ItemType): void;
     protected onPlayerSpawnOrRemove(_: any, player: Player): void;
     protected onPlayerIdChanged(player: Player): void;
     protected onCreateOrRemoveObject(_: any, object: Doodad | TileEvent | Entity): void;
@@ -180,4 +183,5 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     private calculateTile;
     private getTileMax;
     private getProduced;
+    private doesProduceTemperature;
 }

@@ -101,9 +101,9 @@ declare module Translation {
     function growthStage(stage?: GrowingStage, spores?: boolean): TranslationImpl | undefined;
     const getString: typeof TranslationImpl.getString;
     const resolve: typeof TranslationImpl.resolve;
-    function colorizeQuality(quality: Quality | string): Translation;
-    function colorizeQuality(quality: Quality | string, text: string | IStringSection): IStringSection;
-    function colorizeQuality(quality: Quality | string, text: IStringSection[]): IStringSection[];
+    function colorizeQuality(quality: Quality | string | undefined): Translation;
+    function colorizeQuality(quality: Quality | string | undefined, text: string | IStringSection): IStringSection;
+    function colorizeQuality(quality: Quality | string | undefined, text: IStringSection[]): IStringSection[];
     function colorizeMessageType(type: MessageType): Translation;
     function colorizeMessageType(type: MessageType, text: string | IStringSection): IStringSection;
     function colorizeMessageType(type: MessageType, text: IStringSection[]): IStringSection[];

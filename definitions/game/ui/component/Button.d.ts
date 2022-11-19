@@ -64,6 +64,7 @@ export default class Button extends Component implements IDisableable {
     setText(text?: TranslationGenerator): this;
     getText(): TranslationGenerator | undefined;
     getTextAsString(): string;
+    setInheritTextTooltip(): this;
     refreshText(): this;
     setIcon(icon?: IIcon, scale?: boolean): this;
     private sound?;

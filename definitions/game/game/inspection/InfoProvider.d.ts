@@ -135,11 +135,13 @@ export declare class SimpleInfoProvider extends InfoProvider {
     private readonly classes;
     private readonly contents;
     private childComponentClass;
+    private validWhen?;
     constructor(...translations: Array<TranslationGenerator | InfoProvider>);
     get(): (import("../../language/impl/TranslationImpl").default | import("../../language/dictionary/UiTranslation").default | import("../../language/ITranslation").ISerializedTranslation | (() => import("../../language/impl/TranslationImpl").default | import("../../language/dictionary/UiTranslation").default | import("../../language/ITranslation").ISerializedTranslation | Iterable<import("../../utilities/string/Interpolator").IStringSection> | undefined) | InfoProvider)[];
     add(...translations: Array<TranslationGenerator | InfoProvider | Falsy>): this;
     onlyIfHasContents(): this | undefined;
     addInfoGetter(provider: () => InfoProvider | undefined): this;
+    setValidWhen(predicate: () => any): this;
     getClass(): string[];
     addClasses(...classes: string[]): this;
     protected initChildTextComponent(text: TranslationGenerator): Text;

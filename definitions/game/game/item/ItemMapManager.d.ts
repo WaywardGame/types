@@ -11,13 +11,16 @@
 import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import type { IContainer } from "game/item/IItem";
+import type Item from "game/item/Item";
 import DrawnMap from "game/mapping/DrawnMap";
 import type { IVector3 } from "utilities/math/IVector";
 export declare const DEFAULT_ITEM_MAP_CHANCE_COMPLETED = 0.1;
 export declare const DEFAULT_ITEM_MAP_CHANCE_OTHER_ISLAND = 0.5;
 export default class ItemMapManager {
-    static getMapsInContainer(island: Island, container: IContainer): import("./Item").default[];
+    static getMapsInContainer(island: Island, container: IContainer): Item[];
     private map?;
+    private readonly host;
+    constructor(host: Item);
     has(): boolean;
     /**
      * Sets the map associated with this item.
@@ -50,6 +53,10 @@ export default class ItemMapManager {
      * @returns the island associated with this map, if it exists
      */
     getIsland(): Island | undefined;
+    /**
+     * @returns whether this map is completed
+     */
+    isCompleted(): boolean;
     /**
      * @returns the obfuscation of the linked map, a multiplier that will be applied overtop whatever durability obfuscation there is
      */

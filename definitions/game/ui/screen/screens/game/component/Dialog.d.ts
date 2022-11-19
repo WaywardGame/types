@@ -96,7 +96,8 @@ export declare enum DialogClasses {
     Header = "dialog-header",
     EndsIconsLeft = "dialog-ends-icons-left",
     EndsIconsRight = "dialog-ends-icons-right",
-    EndsContent = "dialog-ends-content"
+    EndsContent = "dialog-ends-content",
+    FooterContent = "dialog-footer-content"
 }
 export default abstract class Dialog extends Component implements IDialog {
     readonly subId: string;

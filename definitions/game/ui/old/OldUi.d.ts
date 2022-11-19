@@ -13,7 +13,6 @@ import type NPC from "game/entity/npc/NPC";
 import type { IContainer, IDismantleComponent, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import "ui/old/functional/FunctionalSortable";
-import "ui/old/functional/FunctionalTooltip";
 import type { DialogId, IDialogInfo } from "ui/old/IOldUi";
 import InGameScreen from "ui/old/screens/InGameScreen";
 export default class OldUi {
@@ -36,7 +35,6 @@ export default class OldUi {
     isInGameScreenShown(): boolean;
     isOptionsOverlayShown(): boolean;
     isOptionsOverlayEnabled(): boolean;
-    tooltipRefresh(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent, force?: boolean): void;
     filterContainers(): void;

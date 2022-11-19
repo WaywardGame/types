@@ -21,6 +21,7 @@ import Translation from "language/Translation";
 import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IInput, Modifier } from "ui/input/IInput";
+import type Tooltip from "ui/tooltip/Tooltip";
 import type { IReferenceSection, ISegment, IStringSection } from "utilities/string/Interpolator";
 export default class Text extends Component {
     static resolve(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[], ...args: any[]): IStringSection[];
@@ -85,6 +86,7 @@ export declare class BasicText extends Component {
     inputIndex?: number;
     protected input?: IInput;
     protected inputModifier?: Modifier;
+    currentTooltip?: (tooltip: Tooltip) => any;
     constructor(elementType?: string);
     setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection> & Partial<IBindingsSection>): this;
     private setTooltipLocation;

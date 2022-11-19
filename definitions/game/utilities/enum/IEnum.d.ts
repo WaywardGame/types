@@ -84,5 +84,6 @@ export declare enum EnumId {
     MagicalProperty = 42,
     ItemTag = 43,
     DoodadTag = 44,
-    EntityTag = 45
+    EntityTag = 45,
+    ItemTypeExtra = 46
 }

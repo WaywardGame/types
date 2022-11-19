@@ -11,6 +11,7 @@
 import type { IHasImagePath } from "game/IObject";
 import type { IModdable } from "mod/ModRegistry";
 import type Button from "ui/component/Button";
+import type { IBindHandlerApi } from "ui/input/Bind";
 import type Bindable from "ui/input/Bindable";
 import type Tooltip from "ui/tooltip/Tooltip";
 import type { IVector2 } from "utilities/math/IVector";
@@ -72,7 +73,7 @@ export interface IMenuBarButtonDescription extends IModdable, IHasImagePath {
     /**
      * What should happen when this button is clicked.
      */
-    onActivate(): any;
+    onActivate(api?: IBindHandlerApi): any;
     onCreate?(button: Button): any;
     onDispose?(button: Button): any;
     tooltip?(tooltip: Tooltip, button: Button, addBindLabel: (tooltip: Tooltip) => void): Tooltip;

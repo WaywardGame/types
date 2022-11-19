@@ -57,6 +57,8 @@ export default class Vector2 implements IVector2, ISerializable {
     static isDistanceWithin(vector: IVector2, vector2: IVector2, distance: number): boolean;
     static distance(vector: IVector2, vector2: IVector2): number;
     static squaredDistance(vector: IVector2, vector2: IVector2): number;
+    static manhattanDistance(vec1: IVector2, vec2: IVector2): number;
+    static equals(vec1: IVector2, vec2: IVector2): boolean;
     static direction(vector: IVector2, vector2: IVector2): Vector2;
     static direction<D extends IVector2>(vector: IVector2, vector2: IVector2, dest: D): D;
     static mix(vector: IVector2, vector2: IVector2, time: number): Vector2;
@@ -88,8 +90,7 @@ export default class Vector2 implements IVector2, ISerializable {
     map(mapper: (v2: Vector2) => Vector2): Vector2;
     negate(): Vector2;
     negate<D extends IVector2>(dest: D): D;
-    equals(x: number, y: number, threshold?: number): boolean;
-    equals(vector?: IVector2, threshold?: number): boolean;
+    equals(vector?: IVector2): boolean;
     length(): number;
     squaredLength(): number;
     add(vector: IVector2 | IVector3): this;

@@ -11,10 +11,8 @@
 export declare enum DialogId {
     Inventory = 0,
     Crafting = 1,
-    Equipment = 2,
-    Map = 3,
-    Container = 4,
-    Custom = 5
+    Container = 2,
+    Custom = 3
 }
 export interface IUiScreen {
     bindCatcher?: number;

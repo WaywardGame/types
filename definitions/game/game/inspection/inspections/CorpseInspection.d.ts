@@ -19,7 +19,7 @@ export default class CorpseInspection extends Inspection<Corpse> {
     static getFromTile(position: IVector3): CorpseInspection[];
     static handles(type: InspectType, corpse: unknown): boolean;
     constructor(corpse: Corpse);
-    get(context: InfoProviderContext): (0 | LabelledValue | import("game/inspection/InfoProvider").SimpleInfoProvider)[];
+    get(context: InfoProviderContext): (0 | import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue)[];
     private getDecay;
     private decay;
     private shouldRefreshDecay;

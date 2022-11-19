@@ -25,7 +25,7 @@ import ReferenceTooltipHandler from "ui/screen/screens/game/ReferenceTooltipHand
 import type Tooltip from "ui/tooltip/Tooltip";
 export default class ReferenceManager {
     static isEnumReference(type: ReferenceType): type is EnumReferenceTypes;
-    static getList(type: ReferenceType, gameIsland?: Island): import("../entity/creature/CreatureManager").default | (Player | undefined)[] | import("../item/ItemManager").default | readonly SkillType[] | import("game/entity/IHuman").EquipType[] | import("../doodad/DoodadManager").default | import("../tile/TileEventManager").default | import("../entity/npc/NPCManager").default | IterableIterator<Island> | readonly ItemType[] | readonly Milestone[] | import("../entity/creature/corpse/CorpseManager").default | readonly Stat[] | (string | ActionType)[];
+    static getList(type: ReferenceType, gameIsland?: Island): readonly Milestone[] | import("../item/ItemManager").default | (Player | undefined)[] | import("../entity/creature/corpse/CorpseManager").default | import("../entity/creature/CreatureManager").default | import("../doodad/DoodadManager").default | import("../entity/npc/NPCManager").default | import("../tile/TileEventManager").default | readonly SkillType[] | import("game/entity/IHuman").EquipType[] | readonly ItemType[] | IterableIterator<Island> | readonly Stat[] | (string | ActionType)[];
     static get(thing: Referenceable): Reference | undefined;
     static getReferenceType(thing: Value<IReferenceTypeMap>): ReferenceType;
     private referenceCursor;

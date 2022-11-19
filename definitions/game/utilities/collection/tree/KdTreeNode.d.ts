@@ -8,7 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { QuestType } from "game/entity/player/quest/quest/IQuest";
-import type { Quest } from "game/entity/player/quest/quest/Quest";
-declare const quests: OptionalDescriptions<QuestType, Quest>;
-export default quests;
+import type { IVector2 } from "utilities/math/IVector";
+export declare class KdTreeNode {
+    parent: KdTreeNode | undefined;
+    point: IVector2;
+    left: KdTreeNode | undefined;
+    right: KdTreeNode | undefined;
+    constructor(parent: KdTreeNode | undefined, point: IVector2);
+    setPoint(point: IVector2): void;
+}

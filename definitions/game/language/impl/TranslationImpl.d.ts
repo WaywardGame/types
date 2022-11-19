@@ -93,6 +93,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
      * Returns this translation as a list of string sections
      */
     get(...args: any[]): IStringSection[];
+    private resolveSections;
     /**
      * Returns the translation as a string
      */

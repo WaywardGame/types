@@ -63,7 +63,7 @@ export declare enum ItemClasses {
     NearlyDecayed = "item-component-nearly-decayed"
 }
 export declare namespace ItemClasses {
-    const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-bottomright" | "item-component-icon-location-topleft";
+    const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-topleft" | "item-component-icon-location-bottomright";
 }
 export interface IItemHandler {
     noDrag?: true;
@@ -110,6 +110,7 @@ export default class ItemComponent extends Component {
     protected onUpdateDurability(): void;
     protected onUpdateQuality(): void;
     protected onTickEnd(): void;
+    protected onLoadedOnIsland(): void;
     refresh(refreshType: ItemRefreshType): void;
     clone(): ItemComponent;
     setItemMenu(initialiser?: (contextMenu: ContextMenu<ActionId>) => any): this;

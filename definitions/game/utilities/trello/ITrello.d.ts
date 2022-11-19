@@ -55,9 +55,9 @@ export interface IChangelog {
 export declare enum ChangeType {
     New = 0,
     Improvement = 1,
-    Bug = 2,
-    Balance = 3,
-    Modding = 4,
-    Mod = 5,
-    Technical = 6
+    Balance = 2,
+    Bug = 3,
+    Technical = 4,
+    Modding = 5,
+    Mod = 6
 }

@@ -87,40 +87,41 @@ export declare enum ModRegistrationType {
     Interrupt = 14,
     InterruptChoice = 15,
     Item = 16,
-    ItemGroup = 17,
-    Language = 18,
-    LanguageExtension = 19,
-    Load = 20,
-    MagicalProperty = 21,
-    MenuBarButton = 22,
-    Message = 23,
-    MessageSource = 24,
-    MusicTrack = 25,
-    Note = 26,
-    NPC = 27,
-    OptionsSection = 28,
-    Overlay = 29,
-    Packet = 30,
-    Prompt = 31,
-    QuadrantComponent = 32,
-    Quest = 33,
-    QuestRequirement = 34,
-    Registry = 35,
-    Skill = 36,
-    SoundEffect = 37,
-    Stat = 38,
-    StatusEffect = 39,
-    Terrain = 40,
-    TerrainDecoration = 41,
-    TileEvent = 42,
-    TileLayerType = 43,
-    UsableActions = 44,
-    UsableActionType = 45,
-    UsableActionTypePlaceholder = 46,
-    WorldLayer = 47,
-    ItemTag = 48,
-    DoodadTag = 49,
-    EntityTag = 50
+    ItemExtra = 17,
+    ItemGroup = 18,
+    Language = 19,
+    LanguageExtension = 20,
+    Load = 21,
+    MagicalProperty = 22,
+    MenuBarButton = 23,
+    Message = 24,
+    MessageSource = 25,
+    MusicTrack = 26,
+    Note = 27,
+    NPC = 28,
+    OptionsSection = 29,
+    Overlay = 30,
+    Packet = 31,
+    Prompt = 32,
+    QuadrantComponent = 33,
+    Quest = 34,
+    QuestRequirement = 35,
+    Registry = 36,
+    Skill = 37,
+    SoundEffect = 38,
+    Stat = 39,
+    StatusEffect = 40,
+    Terrain = 41,
+    TerrainDecoration = 42,
+    TileEvent = 43,
+    TileLayerType = 44,
+    UsableActions = 45,
+    UsableActionType = 46,
+    UsableActionTypePlaceholder = 47,
+    WorldLayer = 48,
+    ItemTag = 49,
+    DoodadTag = 50,
+    EntityTag = 51
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -262,6 +263,10 @@ export interface IItemRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Item;
     name: string;
     description?: IItemRegistrationDescription;
+}
+export interface IItemExtraRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.ItemExtra;
+    name: string;
 }
 export interface ICreatureRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Creature;

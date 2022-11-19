@@ -51,7 +51,6 @@ export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerE
     static isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     static getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
     static getDoodadTypeGroupName(doodadType: DoodadType | DoodadTypeGroup, article?: false | "definite" | "indefinite", count?: number): Translation;
-    delete(): void;
     /**
      * Note: This can be called multiple times in the same game depending on loading/unloading of islands
      */

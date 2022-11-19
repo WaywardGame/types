@@ -149,6 +149,7 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
     aberrantLoot?: ICreatureLoot[];
     spawnTiles: TileGroup;
     spawnGroup?: OptionalDescriptions<BiomeType, SpawnGroup[]>;
+    spawnAnimation?: boolean;
     makeNoise?: boolean;
     lootGroup?: LootGroupType;
     jumpOver?: boolean;
@@ -165,6 +166,7 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      */
     noSplash?: boolean;
     particlesOnMove?: boolean;
+    particlesOnSpawn?: boolean;
     providesFire?: boolean;
     canTrample?: boolean;
     helpPlants?: boolean;
