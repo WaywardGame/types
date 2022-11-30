@@ -14,4 +14,4 @@ declare const outputs: {
     0: typeof ItemOutput;
 };
 export default outputs;
-export declare type RecipeOutputClass<R extends RecipeOutputType> = (typeof outputs)[R];
+export type RecipeOutputClass<R extends RecipeOutputType> = (typeof outputs)[R];

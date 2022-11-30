@@ -12,7 +12,7 @@ interface IDictionarySchema {
     type: "object";
     properties: Record<string, any>;
 }
-declare type DictionarySchemas = Record<string, IDictionarySchema>;
+type DictionarySchemas = Record<string, IDictionarySchema>;
 export default function generateSchema(): {
     title: string;
     description: string;

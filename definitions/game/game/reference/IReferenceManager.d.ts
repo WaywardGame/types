@@ -47,8 +47,8 @@ export declare enum ReferenceType {
     EquipSlot = 15
 }
 export declare const enumRefTypes: Set<ReferenceType.Skill | ReferenceType.Milestone | ReferenceType.Recipe | ReferenceType.ItemType | ReferenceType.Dismantle | ReferenceType.Stat | ReferenceType.Action | ReferenceType.EquipSlot>;
-export declare type EnumReferenceTypes = (typeof enumRefTypes) extends Set<infer R> ? R : never;
-export declare type ReferenceableReferenceTypes = Exclude<ReferenceType, EnumReferenceTypes>;
+export type EnumReferenceTypes = (typeof enumRefTypes) extends Set<infer R> ? R : never;
+export type ReferenceableReferenceTypes = Exclude<ReferenceType, EnumReferenceTypes>;
 export declare const referenceableRefTypes: Set<ReferenceableReferenceTypes>;
 export interface IReferenceTypeMap {
     [ReferenceType.Item]: Item;
@@ -68,11 +68,11 @@ export interface IReferenceTypeMap {
     [ReferenceType.Action]: [ReferenceType.Action, ActionId, Item?];
     [ReferenceType.EquipSlot]: [ReferenceType.EquipSlot, EquipType];
 }
-declare type ReferenceId<REFTYPE extends ReferenceType> = IReferenceTypeMap[REFTYPE] extends [REFTYPE, infer IdType, any?] ? IdType : number;
-export declare type Reference<REFTYPE extends ReferenceType | undefined = ReferenceType | undefined> = REFTYPE extends ReferenceType ? [id: ReferenceId<REFTYPE>, type: REFTYPE, context?: [number, ReferenceType?]] : [number];
-export declare type Referenceable = IReferenceTypeMap[ReferenceableReferenceTypes];
-export declare type ResolveReference<REFTYPE extends ReferenceType> = IReferenceTypeMap[REFTYPE];
-export declare type EnumReferenceResolved<REFTYPE extends EnumReferenceTypes = EnumReferenceTypes> = IReferenceTypeMap[REFTYPE];
+type ReferenceId<REFTYPE extends ReferenceType> = IReferenceTypeMap[REFTYPE] extends [REFTYPE, infer IdType, any?] ? IdType : number;
+export type Reference<REFTYPE extends ReferenceType | undefined = ReferenceType | undefined> = REFTYPE extends ReferenceType ? [id: ReferenceId<REFTYPE>, type: REFTYPE, context?: [number, ReferenceType?]] : [number];
+export type Referenceable = IReferenceTypeMap[ReferenceableReferenceTypes];
+export type ResolveReference<REFTYPE extends ReferenceType> = IReferenceTypeMap[REFTYPE];
+export type EnumReferenceResolved<REFTYPE extends EnumReferenceTypes = EnumReferenceTypes> = IReferenceTypeMap[REFTYPE];
 export declare module Reference {
     function setReferenceResolver(resolver: typeof ReferenceManager.get): void;
     function create(id: number): Reference;

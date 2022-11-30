@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IModdable } from "mod/ModRegistry";
-export declare type IMusicDescription = IModdable;
+export type IMusicDescription = IModdable;
 export interface ISoundEffectDescription extends IModdable {
     variations?: number;
 }

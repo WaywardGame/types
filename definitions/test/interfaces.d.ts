@@ -22,7 +22,7 @@ export interface INewGameOptions extends ICommonGameOptions {
     playMode: GamePlayMode;
     reuseCharacter?: boolean;
 }
-export declare type IDedicatedServerGameOptions = ICommonGameOptions;
+export type IDedicatedServerGameOptions = ICommonGameOptions;
 export interface IJoinServerOptions {
     joinProgrammatically: boolean;
     enableAllMilestoneModifiers?: boolean;

@@ -29,7 +29,7 @@ import type StatsQuadrant from "ui/screen/screens/game/static/Stats";
 import MovementHandler from "ui/screen/screens/game/util/movement/MovementHandler";
 import WorldTooltipHandler from "ui/screen/screens/game/WorldTooltipHandler";
 import type { Direction } from "utilities/math/Direction";
-export declare type IDialogStates = {
+export type IDialogStates = {
     [key in `${DialogId}` | `${DialogId},${string}`]: boolean;
 };
 declare global {

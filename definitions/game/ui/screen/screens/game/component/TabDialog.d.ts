@@ -15,7 +15,7 @@ import type { TranslationGenerator } from "ui/component/IComponent";
 import Dialog from "ui/screen/screens/game/component/Dialog";
 import type TabDialogPanel from "ui/screen/screens/game/component/TabDialogPanel";
 import type { DialogId } from "ui/screen/screens/game/Dialogs";
-export declare type SubpanelInformation = [string | number, TranslationGenerator, ((component: Component) => any)?, ((button: Button) => any)?, Button?];
+export type SubpanelInformation = [string | number, TranslationGenerator, ((component: Component) => any)?, ((button: Button) => any)?, Button?];
 interface ITabDialogEvents extends Events<Dialog> {
     changeSubpanel(subpanel: SubpanelInformation): any;
 }

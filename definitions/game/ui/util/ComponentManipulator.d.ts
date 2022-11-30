@@ -9,14 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Stream from "@wayward/goodstream";
-export declare type Until<T> = Record<string, (...args: any[]) => T>;
-export declare type UntilHandler<T, U extends Until<T>> = {
+export type Until<T> = Record<string, (...args: any[]) => T>;
+export type UntilHandler<T, U extends Until<T>> = {
     [key in keyof U]: {
         start: U[key];
         end: U[key];
     };
 };
-declare type EmptyIfUndefined<T> = T extends undefined ? {} : T;
+type EmptyIfUndefined<T> = T extends undefined ? {} : T;
 export declare abstract class Manipulator<T, U extends Until<T> | undefined = undefined> {
     protected readonly element: () => HTMLElement;
     protected readonly host: T;

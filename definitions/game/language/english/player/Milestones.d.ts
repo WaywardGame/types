@@ -9,6 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Milestone as Milestone } from "game/milestones/IMilestone";
-declare type MilestoneTranslation = [string, string, string];
+type MilestoneTranslation = [string, string, string];
 declare const _default: Record<Milestone, MilestoneTranslation>;
 export default _default;

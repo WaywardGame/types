@@ -30,7 +30,7 @@ export interface ClientConnection extends ws {
     servers?: string[];
     pendingCheckConnection?: boolean;
 }
-export declare type Connections = Map<string, ClientConnection>;
+export type Connections = Map<string, ClientConnection>;
 export interface IServer {
     serverDetails?: Partial<IServerServerDetails>;
     gameDetails?: Partial<IServerGameDetails>;
@@ -107,7 +107,7 @@ export interface ICheckConnectionDirectoryRequest extends IServerDirectoryReques
     type: ServerDirectoryRequestType.CheckConnection;
     ipAddress?: string;
 }
-export declare type ServerDirectoryRequest = IAddOrUpdateServerDirectoryRequest | IRemoveServerDirectoryRequest | ICheckConnectionDirectoryRequest;
+export type ServerDirectoryRequest = IAddOrUpdateServerDirectoryRequest | IRemoveServerDirectoryRequest | ICheckConnectionDirectoryRequest;
 /**
  * Responses
  */
@@ -128,7 +128,7 @@ export interface ICheckConnectionServerDirectoryResponse extends IServerDirector
     webRtcWorks: boolean;
     webSocketWorks: boolean;
 }
-export declare type ServerDirectoryResponse = IIpAddressServerDirectoryResponse | ICheckConnectionServerDirectoryResponse;
+export type ServerDirectoryResponse = IIpAddressServerDirectoryResponse | ICheckConnectionServerDirectoryResponse;
 /**
  * APIs
  */

@@ -12,8 +12,8 @@ import type { Source } from "game/entity/player/IMessageManager";
 import { ThreeStateButtonState } from "ui/component/IThreeStateButton";
 export declare const DEFAULT_MAX_MESSAGES = 30;
 export declare const MESSAGES_MAX_PINNED = 3;
-export declare type IFilters = Record<string, IFilter>;
-export declare type IFilter = {
+export type IFilters = Record<string, IFilter>;
+export type IFilter = {
     -readonly [K in keyof typeof Source]?: ThreeStateButtonState;
 };
 export declare enum MessageFilterDefault {

@@ -19,5 +19,5 @@ export declare enum MapPinType {
 }
 export declare const ISLANDS_SHOW_TREASURE_MAPS_SKILL_THRESHOLD = 40;
 export declare function getMapsForIslandInInventory(player: Player, island: Island): import("../../../../../../game/item/Item").default[];
-export declare type IIslandRenderStrategy = IHasImagePath;
+export type IIslandRenderStrategy = IHasImagePath;
 export declare const islandRenderStrategies: PartialRecord<BiomeType, IIslandRenderStrategy>;

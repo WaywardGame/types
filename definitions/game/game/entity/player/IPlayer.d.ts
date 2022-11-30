@@ -121,7 +121,7 @@ export interface IAttackHand {
     mainHand: number;
     offHand: number;
 }
-export declare type IPlayerOld = Partial<Omit<Player, "customization">> & Partial<{
+export type IPlayerOld = Partial<Omit<Player, "customization">> & Partial<{
     gender: 0 | 1;
     talent: number;
     stamina: number;
@@ -196,7 +196,7 @@ export interface IInputMovement extends IVector2 {
     direction: Direction.Cardinal;
 }
 export declare const gameMovement: IInputMovement[];
-export declare type MovementIntent = Direction.Cardinal | Direction.None | "idle" | undefined;
+export type MovementIntent = Direction.Cardinal | Direction.None | "idle" | undefined;
 export declare const movementIntents: MovementIntent[];
 export interface IMovementIntent {
     /**

@@ -83,7 +83,7 @@ export interface ISaveImportFailure extends IPartialSaveImportResult {
     bytes?: undefined;
     error: SaveImportErrorReason;
 }
-export declare type SaveImportResult = ISaveImportSuccess | ISaveImportFailure;
+export type SaveImportResult = ISaveImportSuccess | ISaveImportFailure;
 /**
  * Verifies and fixes save objects that were made on older games
  */

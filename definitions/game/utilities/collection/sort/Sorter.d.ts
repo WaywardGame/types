@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-declare type EntryMapper<T = any, R = any, A extends any[] = any[]> = (v: T, ...args: A) => R;
-declare type SortFallback<T = any, R = any, A extends any[] = any[]> = (a: T, b: T, valueA: R, valueB: R, ...args: A) => number;
+type EntryMapper<T = any, R = any, A extends any[] = any[]> = (v: T, ...args: A) => R;
+type SortFallback<T = any, R = any, A extends any[] = any[]> = (a: T, b: T, valueA: R, valueB: R, ...args: A) => number;
 export interface ISorter<T, R> {
     (a: T, b: T): number;
     /**

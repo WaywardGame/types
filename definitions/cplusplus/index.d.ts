@@ -22,13 +22,13 @@ export interface IWaywardCPP {
     Navigation: INavigationConstructor;
     WorldLayer: IWorldLayerConstructor;
 }
-export declare type IFlowFieldConstructor = new (x: number, y: number, size: number, z: number, moveType: number) => IWaywardCPPFlowField;
-export declare type IByteGridConstructor = new (width: number, height: number) => IByteGrid;
-export declare type IBitGridConstructor = new (count: number) => IBitGrid;
-export declare type IDijkstraMapConstructor = new () => IDijkstraMap;
-export declare type IKDTreeConstructor = new () => IKDTree;
-export declare type INavigationConstructor = new (autoConnect: boolean) => INavigation;
-export declare type IWorldLayerConstructor = new (width: number, height: number, level: number) => IWorldLayerCPP;
+export type IFlowFieldConstructor = new (x: number, y: number, size: number, z: number, moveType: number) => IWaywardCPPFlowField;
+export type IByteGridConstructor = new (width: number, height: number) => IByteGrid;
+export type IBitGridConstructor = new (count: number) => IBitGrid;
+export type IDijkstraMapConstructor = new () => IDijkstraMap;
+export type IKDTreeConstructor = new () => IKDTree;
+export type INavigationConstructor = new (autoConnect: boolean) => INavigation;
+export type IWorldLayerConstructor = new (width: number, height: number, level: number) => IWorldLayerCPP;
 export interface IWaywardCPPGame {
     setMapSize(size: number): void;
 }

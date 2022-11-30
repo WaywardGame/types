@@ -13,7 +13,7 @@ import type { IBindHandlerApi } from "ui/input/Bind";
 import type Bindable from "ui/input/Bindable";
 import { Binding } from "ui/input/Bindings";
 import { IInput } from "ui/input/IInput";
-export declare type Macro = IInput[];
+export type Macro = IInput[];
 export declare module Macro {
     function is(value: unknown): value is Macro;
     function of(inputOrMacro: IInput | Macro): Macro;

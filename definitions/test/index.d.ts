@@ -14,5 +14,5 @@ declare const config: {
     randomInputCount: number;
     outputConsoleErrors: boolean;
 };
-export declare type Config = typeof config;
+export type Config = typeof config;
 export {};

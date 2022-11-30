@@ -10,7 +10,7 @@
  */
 import type DefaultMap from "utilities/collection/map/DefaultMap";
 import type RandomValueGenerator from "utilities/random/RandomValueGenerator";
-export declare type RecursivePartial<T> = {
+export type RecursivePartial<T> = {
     map: T extends Map<infer K, infer V> ? Map<K, RecursivePartial<V>> : never;
     defaultmap: T extends DefaultMap<infer K, infer V> ? DefaultMap<K, RecursivePartial<V>> : never;
     set: T extends Set<infer V> ? Set<RecursivePartial<V>> : never;

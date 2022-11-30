@@ -103,10 +103,10 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
         find(player: Player): NPC;
     } ? NPC : never));
 }
-export declare type UsableActionIconReference = ActionType | UsableActionType | UsableActionTypePlaceholder | (Omit<IIcon, "path"> & {
+export type UsableActionIconReference = ActionType | UsableActionType | UsableActionTypePlaceholder | (Omit<IIcon, "path"> & {
     action: ActionType | UsableActionType | UsableActionTypePlaceholder;
 }) | IIcon;
-export declare type ReturnableUsableActionUsability = IActionUsable | IActionNotUsable | boolean;
+export type ReturnableUsableActionUsability = IActionUsable | IActionNotUsable | boolean;
 export interface IUsableActionUsable<REQUIREMENTS extends IUsableActionRequirements> extends IActionUsable {
     using: IUsableActionUsing<REQUIREMENTS>;
     forceDisplay?: true;
@@ -119,7 +119,7 @@ export declare namespace IUsableActionNotUsable {
     function sendMessage(notUsable: IActionNotUsable): void;
     function equals(a: IUsableActionNotUsable, b: IUsableActionNotUsable): boolean;
 }
-export declare type UsableActionUsability<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> = IUsableActionUsable<REQUIREMENTS> | IUsableActionNotUsable;
+export type UsableActionUsability<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> = IUsableActionUsable<REQUIREMENTS> | IUsableActionNotUsable;
 export declare enum UsableActionExecutionContext {
     ContextMenu = 0,
     ActionBar = 1
@@ -240,8 +240,8 @@ export interface IUsableActionDefinitionExecutable<REQUIREMENTS extends IUsableA
     execute(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): any;
     isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>): ReturnableUsableActionUsability;
 }
-export declare type IUsableActionDefinition<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> = IUsableActionDefinitionSubmenu<REQUIREMENTS> | IUsableActionDefinitionExecutable<REQUIREMENTS>;
-export declare type ActionId = string | ActionType | UsableActionType;
+export type IUsableActionDefinition<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> = IUsableActionDefinitionSubmenu<REQUIREMENTS> | IUsableActionDefinitionExecutable<REQUIREMENTS>;
+export type ActionId = string | ActionType | UsableActionType;
 export declare enum UsableActionDisplayContext {
     None = 0,
     Use = 1

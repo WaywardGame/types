@@ -24,7 +24,7 @@ export interface RecipeInputTypeMap {
     [RecipeRequirementType.Doodad]: Doodad;
     [RecipeRequirementType.Fire]: ITile;
 }
-export declare type RecipeInputType<R extends RecipeRequirementType = RecipeRequirementType> = RecipeInputTypeMap[R];
+export type RecipeInputType<R extends RecipeRequirementType = RecipeRequirementType> = RecipeInputTypeMap[R];
 export interface IRecipeInputUseStrategy<R extends RecipeRequirementType> {
     inputs: Array<RecipeInputType<R>>;
     freeUsedInput?(api: Crafter, inputs: Array<RecipeInputType<R>>): boolean;

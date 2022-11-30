@@ -51,8 +51,8 @@ export interface IFogDescription {
      */
     nightFogColorMaxMix?: number;
 }
-export declare type BiomeMapGen = MapGenVersions<IBiomeMapGen>;
-export declare type BiomeTypes = Exclude<BiomeType, BiomeType.Random>;
+export type BiomeMapGen = MapGenVersions<IBiomeMapGen>;
+export type BiomeTypes = Exclude<BiomeType, BiomeType.Random>;
 export declare enum BiomeType {
     Random = 0,
     Coastal = 1,

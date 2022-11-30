@@ -95,7 +95,7 @@ export declare enum StatusType {
     Freezing = 8,
     Frostbitten = 9
 }
-export declare type IStatus = Record<keyof typeof StatusType, number>;
+export type IStatus = Record<keyof typeof StatusType, number>;
 export interface ICausesStatusEffect {
     causesStatus?: Array<StatusType | [status: StatusType, level: number]>;
 }
@@ -106,7 +106,7 @@ export declare enum Property {
     Credit = 0,
     Talked = 1
 }
-export declare type IProperties = Map<Property, any>;
+export type IProperties = Map<Property, any>;
 export declare enum EntityType {
     Player = 0,
     Creature = 1,
@@ -180,7 +180,7 @@ export declare class Defense {
     copy(): Defense;
     equals(defense: Defense): boolean;
 }
-export declare type Attributes = AttributesImpl & Record<DamageType, number>;
+export type Attributes = AttributesImpl & Record<DamageType, number>;
 declare class AttributesImpl {
     static create(): Attributes;
     private constructor();

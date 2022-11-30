@@ -22,15 +22,15 @@ export declare enum TooltipAnchorSideVertical {
     Top = 0,
     Bottom = 1
 }
-export declare type TooltipAnchorTypeString = Lowercase<keyof typeof TooltipAnchorType>;
-export declare type TooltipAnchorSideStringHorizontal = Lowercase<keyof typeof TooltipAnchorSideHorizontal>;
-export declare type TooltipAnchorSideStringVertical = Lowercase<keyof typeof TooltipAnchorSideVertical>;
-export declare type TooltipAnchorStringHorizontalSimple = `${TooltipAnchorTypeString} ${TooltipAnchorSideStringHorizontal}` | "center";
-export declare type TooltipAnchorStringHorizontal = `${"sticky " | ""}${TooltipAnchorStringHorizontalSimple}`;
-export declare type TooltipAnchorStringVerticalSimple = `${TooltipAnchorTypeString} ${TooltipAnchorSideStringVertical}` | "center";
-export declare type TooltipAnchorStringVertical = `${"sticky " | ""}${TooltipAnchorStringVerticalSimple}`;
-export declare type TooltipAnchorStringSimple = TooltipAnchorStringHorizontalSimple | TooltipAnchorStringVerticalSimple;
-export declare type TooltipAnchorString = TooltipAnchorStringHorizontal | TooltipAnchorStringVertical;
+export type TooltipAnchorTypeString = Lowercase<keyof typeof TooltipAnchorType>;
+export type TooltipAnchorSideStringHorizontal = Lowercase<keyof typeof TooltipAnchorSideHorizontal>;
+export type TooltipAnchorSideStringVertical = Lowercase<keyof typeof TooltipAnchorSideVertical>;
+export type TooltipAnchorStringHorizontalSimple = `${TooltipAnchorTypeString} ${TooltipAnchorSideStringHorizontal}` | "center";
+export type TooltipAnchorStringHorizontal = `${"sticky " | ""}${TooltipAnchorStringHorizontalSimple}`;
+export type TooltipAnchorStringVerticalSimple = `${TooltipAnchorTypeString} ${TooltipAnchorSideStringVertical}` | "center";
+export type TooltipAnchorStringVertical = `${"sticky " | ""}${TooltipAnchorStringVerticalSimple}`;
+export type TooltipAnchorStringSimple = TooltipAnchorStringHorizontalSimple | TooltipAnchorStringVerticalSimple;
+export type TooltipAnchorString = TooltipAnchorStringHorizontal | TooltipAnchorStringVertical;
 export interface ITooltipLocationPreference {
     xAnchor: ITooltipLocationHorizontalAnchor;
     xRefSelector: string;

@@ -42,6 +42,6 @@ export interface IAttackRangedWeaponCanUse extends IBaseCanUse {
     rangedRequiredWeapon?: Item;
     ammoItem: Item;
 }
-export declare type IAttackCanUse = IAttackCloseUpCanUse | IAttackThrowItemCanUse | IAttackRangedWeaponCanUse;
+export type IAttackCanUse = IAttackCloseUpCanUse | IAttackThrowItemCanUse | IAttackRangedWeaponCanUse;
 declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined], [ActionArgument.ItemInventory, ActionArgument.Undefined]], Human, void, IAttackCanUse, [(Item | undefined)?, (AttackType | undefined)?, (Item | undefined)?]>;
 export default _default;

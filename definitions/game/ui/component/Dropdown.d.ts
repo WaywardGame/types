@@ -27,7 +27,7 @@ interface IDropdownEvents<O = string | number> extends Events<Component> {
     filterChange(text: string): any;
     refresh(): any;
 }
-export declare type IDropdownOption<OptionId = string | number> = [OptionId, (option: Button) => any];
+export type IDropdownOption<OptionId = string | number> = [OptionId, (option: Button) => any];
 export interface IDropdownData<OptionId = string | number> {
     defaultOption: OptionId;
     options: Iterable<IDropdownOption<OptionId>>;

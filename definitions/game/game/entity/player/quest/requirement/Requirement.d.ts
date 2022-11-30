@@ -14,7 +14,7 @@ import type Player from "game/entity/player/Player";
 import type { IQuestRequirementApi } from "game/entity/player/quest/requirement/IRequirement";
 import Translation from "language/Translation";
 import type { HighlightSelector } from "ui/util/IHighlight";
-export declare type QuestRequirementApi<R extends QuestRequirement<any, any>> = R extends QuestRequirement<infer O, infer D> ? IQuestRequirementApi<O, D> : never;
+export type QuestRequirementApi<R extends QuestRequirement<any, any>> = R extends QuestRequirement<infer O, infer D> ? IQuestRequirementApi<O, D> : never;
 export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> {
     readonly defaultData: D;
     private readonly eventTriggers;

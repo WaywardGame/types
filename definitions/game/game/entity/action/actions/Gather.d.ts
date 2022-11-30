@@ -64,6 +64,6 @@ export interface IGatherTerrainCanUse extends IGatherBaseCanUse {
     gatherType: GatherType.Terrain;
     terrainDescription: ITerrainDescription;
 }
-export declare type IGatherCanUse = IGatherTileEventCanUse | IGatherDoodadCanUse | IGatherDoodadHarvestCanUse | IGatherTerrainCanUse;
+export type IGatherCanUse = IGatherTileEventCanUse | IGatherDoodadCanUse | IGatherDoodadHarvestCanUse | IGatherTerrainCanUse;
 declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, IGatherCanUse, [(Item | undefined)?]>;
 export default _default;

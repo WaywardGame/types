@@ -25,7 +25,7 @@ export interface IDescribed {
     island: Island;
     description(): any;
 }
-export declare type DescribedDescription<T extends IDescribed> = Exclude<ReturnType<T["description"]>, undefined>;
+export type DescribedDescription<T extends IDescribed> = Exclude<ReturnType<T["description"]>, undefined>;
 export interface IUseInfoBase<T extends IDescribed, A extends ActionType> {
     objectType: T["objectType"];
     value?: T;
@@ -40,15 +40,15 @@ export interface IItemUseInfo<T extends IDescribed, A extends ActionType, M exte
     context: InfoProviderContext;
     methods: M;
 }
-export declare type InfoUnion<T extends IDescribed, ACTION extends ActionType> = {
+export type InfoUnion<T extends IDescribed, ACTION extends ActionType> = {
     [K in T["objectType"]]: IUseInfoBase<Extract<T, {
         objectType: K;
     }>, ACTION>;
 }[T["objectType"]];
-export declare type UseInfoPredicate<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType> = (info: IUseInfoBase<T, ACTION>) => I | undefined;
-export declare type UseInfoHandler<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType> = (info: I, context: InfoProviderContext) => Array<ArrayOr<TranslationGenerator | InfoProvider> | undefined> | Translation | InfoProvider | undefined;
-export declare type UseInfoDisplayLevelGetter<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType> = (info: I, context: InfoProviderContext) => InfoDisplayLevel;
-export declare type UseInfoMethod<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType, ARGS extends any[], RETURN> = (info: I, ...args: ARGS) => RETURN;
+export type UseInfoPredicate<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType> = (info: IUseInfoBase<T, ACTION>) => I | undefined;
+export type UseInfoHandler<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType> = (info: I, context: InfoProviderContext) => Array<ArrayOr<TranslationGenerator | InfoProvider> | undefined> | Translation | InfoProvider | undefined;
+export type UseInfoDisplayLevelGetter<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType> = (info: I, context: InfoProviderContext) => InfoDisplayLevel;
+export type UseInfoMethod<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType, ARGS extends any[], RETURN> = (info: I, ...args: ARGS) => RETURN;
 export interface IUseInfoFactory<I extends IUseInfoBase<T, A>, T extends IDescribed, A extends ActionType, M extends Record<string, AnyFunction> = {}> {
     actions<A2 extends ActionType[]>(...actions: A2): IUseInfoFactory<IUseInfoBase<T, A | A2[number]>, T, A | A2[number]>;
     handle<I2 extends I>(predicate: UseInfoPredicate<I2, T, A>): IUseInfoFactory<I2, T, A, M>;
@@ -61,7 +61,7 @@ export interface IUseInfoFactory<I extends IUseInfoBase<T, A>, T extends IDescri
         methods: M;
     }, T, A>): UseInfo<I, A, M, T>;
 }
-export declare type IGetUseInfo<USE_INFO extends UseInfo<any, any, any>> = USE_INFO extends UseInfo<infer I extends IUseInfoBase<any, any>, any, any> ? I : never;
+export type IGetUseInfo<USE_INFO extends UseInfo<any, any, any>> = USE_INFO extends UseInfo<infer I extends IUseInfoBase<any, any>, any, any> ? I : never;
 export default class UseInfo<I extends IUseInfoBase<T, A>, A extends ActionType, M extends Record<string, AnyFunction>, T extends IDescribed = any> {
     readonly predicates: Array<UseInfoPredicate<I, T, A>>;
     readonly handle: UseInfoHandler<I & {

@@ -23,7 +23,7 @@ export interface IInterpolationOptions {
     formatNumbers?: boolean;
     formatDates?: boolean;
 }
-export declare type Ends = [start: string, end?: string, endAtStringEnd?: true];
+export type Ends = [start: string, end?: string, endAtStringEnd?: true];
 export interface ISegment {
     ends?: Ends[];
     trimTrailingWhitespace?: true;
@@ -87,9 +87,9 @@ export default Interpolator;
  * - `"{3.test.4.wow}" => args[3]["test"][4]["wow"]`
  */
 export declare const argumentSegment: ISegment;
-export declare type InterpolationConditionalSegmentOperator = InterpolationConditionalSegmentOperatorEquivalence | InterpolationConditionalSegmentOperatorNumeric;
-export declare type InterpolationConditionalSegmentOperatorEquivalence = "=" | "!=";
-export declare type InterpolationConditionalSegmentOperatorNumeric = "<" | ">" | "<=" | ">=";
+export type InterpolationConditionalSegmentOperator = InterpolationConditionalSegmentOperatorEquivalence | InterpolationConditionalSegmentOperatorNumeric;
+export type InterpolationConditionalSegmentOperatorEquivalence = "=" | "!=";
+export type InterpolationConditionalSegmentOperatorNumeric = "<" | ">" | "<=" | ">=";
 export declare const conditionalSegment: ISegment;
 export declare const falsyCoalescingSegment: ISegment;
 export declare const classSegment: ISegment;

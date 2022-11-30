@@ -20,4 +20,4 @@ declare const requirements: {
     3: typeof FireRequirement;
 };
 export default requirements;
-export declare type RecipeRequirementClass<R extends RecipeRequirementType> = (typeof requirements)[R];
+export type RecipeRequirementClass<R extends RecipeRequirementType> = (typeof requirements)[R];

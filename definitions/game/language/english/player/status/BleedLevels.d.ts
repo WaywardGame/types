@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { BleedLevel } from "game/entity/status/handler/IBleeding";
-declare type BleedTranslations = [
+type BleedTranslations = [
     adjective: string,
     name: string,
     description: string,

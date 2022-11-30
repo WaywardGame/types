@@ -81,7 +81,7 @@ import { Responsibility } from "ui/screen/screens/menu/menus/main/IAbout";
 import { ModSort } from "ui/screen/screens/menu/menus/mods/IModsMenu";
 import { Direction } from "utilities/math/Direction";
 import { ChangeType } from "utilities/trello/ITrello";
-export declare type Enum = Record<string, number> & Record<number, string>;
+export type Enum = Record<string, number> & Record<number, string>;
 export declare const SYMBOL_ANY_DICTIONARY: unique symbol;
 declare const dictionaryMap: {
     0: typeof ActionType;
@@ -287,8 +287,8 @@ export declare const strictDictionaries: {
     98: typeof WeightStatus;
     99: typeof WorldZ;
 };
-export declare type DictionaryEnum = (typeof dictionaryMap)[Dictionary];
-export declare type DictionaryEntryEnums = {
+export type DictionaryEnum = (typeof dictionaryMap)[Dictionary];
+export type DictionaryEntryEnums = {
     [DICTIONARY in keyof typeof dictionaryMap]: (typeof dictionaryMap)[DICTIONARY] extends infer ENTRY_ENUM ? ENTRY_ENUM[keyof ENTRY_ENUM] : never;
 };
 declare function getByEnum(enumObject: DictionaryEnum): Dictionary;

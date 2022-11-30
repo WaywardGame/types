@@ -31,7 +31,7 @@ export declare enum Edge {
     Bottom = 2,
     Left = 3
 }
-export declare type IEdges = [
+export type IEdges = [
     [
         Edge.Left | Edge.Right,
         number

@@ -15,7 +15,7 @@ import type { MultiplayerLoadingDescription } from "game/meta/Loading";
 import type { ITile, TerrainType } from "game/tile/ITerrain";
 import type World from "renderer/world/World";
 import type { IVector2 } from "utilities/math/IVector";
-export declare type IslandId = `${number},${number}`;
+export type IslandId = `${number},${number}`;
 export declare module IslandPosition {
     function toId(position: IVector2): IslandId;
     function fromId(id: IslandId): IVector2 | undefined;

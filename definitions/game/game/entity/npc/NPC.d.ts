@@ -130,7 +130,7 @@ export default abstract class NPC extends Human {
     protected changeZ(toZ: number, fromZ: number): boolean | void | undefined;
     protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile, isMoving: boolean): boolean | void | undefined;
     protected postMove(): void;
-    protected checkMove(moveType: MoveType, tileX: number, tileY: number, tileZ: number): 0 | -1 | -2 | -3 | -4 | -5;
+    protected checkMove(moveType: MoveType, tileX: number, tileY: number, tileZ: number): -1 | 0 | -2 | -3 | -4 | -5;
     getWeightOrStaminaMovementPenalty(): number;
     get asMerchant(): MerchantNPC | undefined;
     get asNPC(): NPC;

@@ -16,7 +16,7 @@ import Dialog from "ui/screen/screens/game/component/Dialog";
 import type { DialogId } from "ui/screen/screens/game/Dialogs";
 import type { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
-declare type Zoom = [index: number, zoom: number];
+type Zoom = [index: number, zoom: number];
 declare class CanvasZoomReference {
     private readonly reference;
     readonly default: Zoom;

@@ -14,7 +14,7 @@ import GameScreen from "ui/screen/screens/GameScreen";
 import InterruptScreen from "ui/screen/screens/InterruptScreen";
 import MainMenuScreen from "ui/screen/screens/MainMenuScreen";
 import SplashScreen from "ui/screen/screens/SplashScreen";
-export declare type ExtendsScreen = new () => Screen;
+export type ExtendsScreen = new () => Screen;
 declare const screenMap: {
     0: undefined;
     4: typeof MainMenuScreen;
@@ -23,7 +23,7 @@ declare const screenMap: {
     2: typeof GameScreen;
     1: typeof DedicatedServerScreen;
 };
-export declare type ScreenById = {
+export type ScreenById = {
     [ID in keyof typeof screenMap]: (typeof screenMap)[ID] extends new () => infer SCREEN ? SCREEN : never;
 };
 export default screenMap;

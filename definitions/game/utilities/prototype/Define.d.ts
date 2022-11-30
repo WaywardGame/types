@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-declare type Implementation<P, K extends keyof P> = (this: P, ...args: P[K] extends (...args: infer A) => any ? A : []) => P[K] extends (...args: any[]) => infer R ? R : never;
+type Implementation<P, K extends keyof P> = (this: P, ...args: P[K] extends (...args: infer A) => any ? A : []) => P[K] extends (...args: any[]) => infer R ? R : never;
 declare function Define<P, K extends string & keyof P>(proto: P, key: K, implementation: Implementation<P, K>): void;
 declare module Define {
     export function all<P, K extends string & keyof P>(protos: P[], key: K, implementation: Implementation<P, K>): void;

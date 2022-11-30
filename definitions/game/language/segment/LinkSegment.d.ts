@@ -11,7 +11,7 @@
 import type { IColorSection } from "language/segment/ColorSegment";
 import type { IDecoratedSection } from "language/segment/TextDecorationSegments";
 import type { ISegment } from "utilities/string/Interpolator";
-export declare type Link = string | [string, string | undefined, string | undefined];
+export type Link = string | [string, string | undefined, string | undefined];
 export interface ILinkSection extends IColorSection, IDecoratedSection {
     link: Link;
 }

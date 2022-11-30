@@ -294,7 +294,7 @@ export declare const EQUIP_SLOTS: EquipType[];
 export declare const EQUIP_SLOTS_FREE: EquipType[];
 export declare const EQUIP_SLOT_ITEM_GROUPS: Record<EquipType, ItemTypeGroup | undefined>;
 export declare const equipmentRenderOrder: EquipType[];
-export declare type InsulationWeight = number | [number, "onlyWhenEquipped"];
+export type InsulationWeight = number | [number, "onlyWhenEquipped"];
 export declare const equipSlotInsulationWeights: Record<TempType, Record<EquipType, InsulationWeight>>;
 export interface IExcludedWhenLowering {
     excludeIfLowering: true;

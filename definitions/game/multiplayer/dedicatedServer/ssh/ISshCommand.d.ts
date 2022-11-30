@@ -16,8 +16,8 @@ export interface ISshCommand {
     requirements: SshCommandRequirement;
     callback: SshCommandCallback;
 }
-export declare type SshCommandCallback = (shell: ISshShell, args: string) => Promise<SshCommandResult>;
-export declare type SshCommandResult = ISshShell | false | undefined | void;
+export type SshCommandCallback = (shell: ISshShell, args: string) => Promise<SshCommandResult>;
+export type SshCommandResult = ISshShell | false | undefined | void;
 export declare enum SshCommandType {
     Help = 0,
     Status = 1,

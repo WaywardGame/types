@@ -12,7 +12,7 @@ import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import type Translation from "language/Translation";
 import type { TranslationGenerator } from "ui/component/IComponent";
-declare type ContentHandler = (context: InfoProviderContext, provider: UnlockableRowInfoProvider) => ArrayOr<TranslationGenerator | InfoProvider>;
+type ContentHandler = (context: InfoProviderContext, provider: UnlockableRowInfoProvider) => ArrayOr<TranslationGenerator | InfoProvider>;
 export default class UnlockableRowInfoProvider extends InfoProvider {
     private readonly getter;
     private contentHandler?;

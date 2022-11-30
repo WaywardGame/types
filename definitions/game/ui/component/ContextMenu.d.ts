@@ -20,7 +20,7 @@ export interface IContextMenuOptionCheckbox {
     checked: boolean;
     onToggle(): any;
 }
-export declare type IContextMenuOptionDescription = {
+export type IContextMenuOptionDescription = {
     bindable?: Bindable;
     icon?: IIcon;
     translation: TranslationGenerator;
@@ -38,9 +38,9 @@ export declare type IContextMenuOptionDescription = {
 } | {
     checkbox: IContextMenuOptionCheckbox;
 });
-export declare type ContextMenuOptionKeyValuePair<O extends number | string | symbol = number | string | symbol> = [O, IContextMenuOptionDescription];
-export declare type ContextMenuOptionDescription<O extends number | string | symbol = number | string | symbol> = ContextMenuOptionKeyValuePair<O> | typeof ContextMenu.Divider;
-export declare type ContextMenuDescriptions<O extends number | string | symbol = number | string | symbol> = Array<ContextMenuOptionDescription<O>>;
+export type ContextMenuOptionKeyValuePair<O extends number | string | symbol = number | string | symbol> = [O, IContextMenuOptionDescription];
+export type ContextMenuOptionDescription<O extends number | string | symbol = number | string | symbol> = ContextMenuOptionKeyValuePair<O> | typeof ContextMenu.Divider;
+export type ContextMenuDescriptions<O extends number | string | symbol = number | string | symbol> = Array<ContextMenuOptionDescription<O>>;
 export interface IContextMenuEvents extends Events<Component> {
     setPosition(): any;
     interactable(): any;

@@ -118,4 +118,4 @@ export declare module EventBus {
     function unregister(eventBus: EventBus): void;
     function onEventBusRegistration(eventBus: EventBus, handler: NullaryFunction): void;
 }
-export declare type EventBusHost<E extends EventBus> = ReturnType<(typeof eventBuses)[E]>;
+export type EventBusHost<E extends EventBus> = ReturnType<(typeof eventBuses)[E]>;

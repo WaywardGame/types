@@ -11,9 +11,9 @@
 import type ISpriteInfo from "renderer/ISpriteInfo";
 import { PriorityMap } from "utilities/collection/map/PriorityMap";
 import type { IRGB } from "utilities/Color";
-export declare type IRenderFunction = (sprite: number | ISpriteInfo) => void;
-export declare type IRenderLayerImplementation = (render: IRenderFunction) => any;
-export declare type SpriteLineOrRenderLayerImpl = number | IRenderLayerImplementation;
+export type IRenderFunction = (sprite: number | ISpriteInfo) => void;
+export type IRenderLayerImplementation = (render: IRenderFunction) => any;
+export type SpriteLineOrRenderLayerImpl = number | IRenderLayerImplementation;
 export declare enum StatusEffectRenderLayer {
     Body = 1,
     Hair = 2,

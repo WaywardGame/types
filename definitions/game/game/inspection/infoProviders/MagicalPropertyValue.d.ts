@@ -18,7 +18,7 @@ import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import { IRange } from "utilities/math/Range";
-export declare type NumberTranslator = (number: number | IRange, isMod: boolean, isPercent: boolean, isMultiplied: boolean) => Translation;
+export type NumberTranslator = (number: number | IRange, isMod: boolean, isPercent: boolean, isMultiplied: boolean) => Translation;
 export default class MagicalPropertyValue extends InfoProvider {
     private readonly base;
     private numberTranslator?;

@@ -115,7 +115,7 @@ export declare const syncCheckWaitingResetTime = 5000;
 export declare const defaultSyncChecks: MultiplayerSyncCheck[];
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export declare function getDefaultMultiplayerOptions(): IMultiplayerOptions;
-export declare type PacketTarget = Array<Player | IConnection> | Player | IConnection;
+export type PacketTarget = Array<Player | IConnection> | Player | IConnection;
 export interface IMultiplayerOptions {
     lobbyType: LobbyType;
     pvp: boolean;
@@ -152,7 +152,7 @@ export interface IMultiplayerNetworkingOptions {
     steamNetworkingConnectionWebRTCFallbackDownloadingTimeout: number;
     webSocketConnectionMaxMessageSize: number;
 }
-export declare type ServerInfo = string | IMatchmakingInfo;
+export type ServerInfo = string | IMatchmakingInfo;
 export declare enum PacketAcceptType {
     Serverside = 1,
     Clientside = 2,

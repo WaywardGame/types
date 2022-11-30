@@ -31,7 +31,7 @@ export interface IStatusEffectIconDescription {
      */
     frames?: number;
 }
-export declare type StatusEffectClass = Class<StatusEffect, [StatusType, Entity]> & IModdable;
+export type StatusEffectClass = Class<StatusEffect, [StatusType, Entity]> & IModdable;
 export declare enum StatusEffectBadness {
     Neutral = 0,
     Bad = 1,

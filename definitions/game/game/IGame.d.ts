@@ -121,7 +121,7 @@ export declare enum TurnMode {
     Simulated = 1,
     RealTime = 2
 }
-export declare type IGameOld = Partial<Game> & Partial<{
+export type IGameOld = Partial<Game> & Partial<{
     dayNight: number;
     dayNightSwitch: 0 | 1;
     monsters: Creature[];

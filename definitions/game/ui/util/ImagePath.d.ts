@@ -11,7 +11,7 @@
 import type { PathType } from "resource/IResourceLoader";
 import type { ResourceOptionsMap } from "resource/ResourcePath";
 import type Component from "ui/component/Component";
-declare type Path = [PathType, number] | [string];
+type Path = [PathType, number] | [string];
 export interface ISerializedImagePath {
     path: Path;
     args?: ResourceOptionsMap[PathType];

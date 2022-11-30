@@ -12,7 +12,7 @@ import TranslationImpl from "language/impl/TranslationImpl";
 import type Bindable from "ui/input/Bindable";
 import { IInput } from "ui/input/IInput";
 import { Macro } from "ui/input/Macros";
-export declare type Binding = IInput | Macro;
+export type Binding = IInput | Macro;
 export declare module Binding {
     function is(value: unknown): value is Binding;
     function hash(binding: Binding): string;

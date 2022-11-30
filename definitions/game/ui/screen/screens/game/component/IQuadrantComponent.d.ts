@@ -28,7 +28,7 @@ export declare const QUADRANT_REGIONS: {
     right: Quadrant[];
     middle: Quadrant[];
 };
-export declare type QuadrantRegion = keyof typeof QUADRANT_REGIONS;
+export type QuadrantRegion = keyof typeof QUADRANT_REGIONS;
 export declare enum QuadrantComponentContextMenuAction {
     SwitchWith = 0,
     MoveTo = 1,

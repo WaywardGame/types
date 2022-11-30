@@ -42,7 +42,7 @@ export interface IConstructedInfo {
     additionalItemWeights?: IItemWeightComponent[];
     weightTweak?: number;
 }
-export declare type IItemOld = Pick<Item, Exclude<keyof Item, "map">> & {
+export type IItemOld = Pick<Item, Exclude<keyof Item, "map">> & {
     equipped?: EquipType;
     equippedPid?: number;
     legendary?: IMagicalPropertyOld;
@@ -259,7 +259,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
 }
-export declare type ConsumeItemStatsTuple = [health: number, stamina: number, hunger: number, thirst: number];
+export type ConsumeItemStatsTuple = [health: number, stamina: number, hunger: number, thirst: number];
 export interface IItemOnUse {
     [ActionType.Apply]?: ConsumeItemStatsTuple;
     [ActionType.Build]?: IItemBuild;
@@ -438,7 +438,7 @@ export interface ICreateOnBreak {
     aberrantCreature?: boolean;
     tileEventType?: TileEventType;
 }
-export declare type IDismantleComponent = Record<number, number>;
+export type IDismantleComponent = Record<number, number>;
 export interface IRanged {
     range: number;
     attack: number;
@@ -548,7 +548,7 @@ export interface INPCInventoryContainerReference extends IBaseContainerReference
     type?: ContainerReferenceType.NPCInventory;
     id: number;
 }
-export declare type ContainerReference = IInvalidContainerReference | IWorldContainerReference | IPlayerInventoryContainerReference | ITileContainerReference | IDoodadContainerReference | IItemContainerReference | INPCInventoryContainerReference;
+export type ContainerReference = IInvalidContainerReference | IWorldContainerReference | IPlayerInventoryContainerReference | ITileContainerReference | IDoodadContainerReference | IItemContainerReference | INPCInventoryContainerReference;
 export declare enum CraftResult {
     Fail = 0,
     Success = 1,
@@ -567,10 +567,10 @@ interface IEquipEffects {
     [EquipEffect.Telescopy]: [number, number];
 }
 export declare const EQUIP_EFFECTS_DEFAULT: IEquipEffects;
-export declare type EquipEffects = {
+export type EquipEffects = {
     [K in keyof IEquipEffects]: AddHead<K, Extract<IEquipEffects[K], any[]>>;
 }[keyof IEquipEffects];
-export declare type EquipEffectByType<T extends EquipEffect> = IEquipEffects[T];
+export type EquipEffectByType<T extends EquipEffect> = IEquipEffects[T];
 export declare const consumables: Set<ActionType>;
 export declare enum ItemWeightChange {
     NewMagicProperty = 0,
@@ -1333,7 +1333,7 @@ export declare enum ItemTypeExtra {
     TatteredMap_RolledUp = 1000,
     TatteredMap_Completed = 1001
 }
-export declare type DisplayableItemType = ItemType | ItemTypeExtra;
+export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
     None = 0
 }

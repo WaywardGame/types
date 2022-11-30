@@ -48,7 +48,7 @@ export interface IBindHandlerApi {
      */
     cancelled: boolean;
 }
-export declare type BindingHandler<R = boolean> = (api: IBindHandlerApi) => R;
+export type BindingHandler<R = boolean> = (api: IBindHandlerApi) => R;
 interface IBindHandlerRegistration<T extends {
     [K in P]: BindingHandler;
 }, P extends string | number | symbol> {
@@ -64,7 +64,7 @@ declare enum BindingEvent {
     up = 1,
     holding = 2
 }
-declare type BindingEventName = keyof typeof BindingEvent;
+type BindingEventName = keyof typeof BindingEvent;
 export type { BindingEventName as BindingEvent };
 declare module Bind {
     /**

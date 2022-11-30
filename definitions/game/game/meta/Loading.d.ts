@@ -58,7 +58,7 @@ export interface ILoadingDescription<A extends any[]> {
     background?: SupplierOr<boolean | undefined, A>;
     type?: SupplierOr<LoadType | undefined, A>;
 }
-export declare type MultiplayerLoadingDescription = [Translation, Translation, Translation];
+export type MultiplayerLoadingDescription = [Translation, Translation, Translation];
 export declare class LoadingDescription<A extends any[]> implements ILoadingDescription<A> {
     canCancel?: SupplierOr<boolean | undefined, A>;
     background?: SupplierOr<boolean | undefined, A>;
@@ -116,8 +116,8 @@ export declare const loadingDescriptions: {
     39: LoadingDescription<[]>;
     40: LoadingDescription<[]>;
 };
-export declare type LoadDescriptionOf<LOAD extends Load> = (typeof loadingDescriptions)[LOAD];
-export declare type LoadArgs<LOAD extends Load> = (typeof loadingDescriptions)[LOAD] extends ILoadingDescription<infer A> ? A : never;
+export type LoadDescriptionOf<LOAD extends Load> = (typeof loadingDescriptions)[LOAD];
+export type LoadArgs<LOAD extends Load> = (typeof loadingDescriptions)[LOAD] extends ILoadingDescription<infer A> ? A : never;
 declare module Loading {
     interface ILoadingEvents {
         /**

@@ -25,7 +25,7 @@ import type { ISerializedTranslation } from "language/ITranslation";
 import { formatList as formatListTranslation } from "language/segment/FormatListSegment";
 import ITranslationSorter from "language/utility/TranslationSorter";
 import type { IStringSection } from "utilities/string/Interpolator";
-declare type Translation = TranslationImpl;
+type Translation = TranslationImpl;
 declare module Translation {
     function equals(a: Translation, b: Translation): boolean;
     const RANDOM = "random";

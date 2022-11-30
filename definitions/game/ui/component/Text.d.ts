@@ -76,7 +76,7 @@ export declare class Heading extends Text {
     icon?: Component;
     addIcon(initializer: (component: Component) => any): this;
 }
-export declare type BasicTextLink = string | [string, string?, string?];
+export type BasicTextLink = string | [string, string?, string?];
 export interface IBasicTextEvents extends Events<Component> {
     handleLink(link: BasicTextLink): true | void;
 }

@@ -100,7 +100,7 @@ export declare enum TooltipVisibilityOption {
     ShowMoreInformationWithBind = 1,
     AlwaysShowMoreInformation = 2
 }
-export declare type IOptionsOld = Partial<Pick<IOptions, "bindings">> & Partial<{
+export type IOptionsOld = Partial<Pick<IOptions, "bindings">> & Partial<{
     alwaysShowMoreInformation: boolean;
     keyBinds: Record<number, number>;
     bindings: IBindingsOld;
@@ -134,7 +134,7 @@ export interface IHighscore {
     seed?: string | number;
     difficultyOptions?: IGameOptions;
 }
-export declare type IHighscoreOld = Partial<IHighscore> & Partial<{
+export type IHighscoreOld = Partial<IHighscore> & Partial<{
     dailyChallenge: boolean;
     talent: number;
 }>;
@@ -155,4 +155,4 @@ export interface IBindingOld {
     gamepadButton?: number;
     modifiers?: KeyModifierOld[];
 }
-export declare type IBindingsOld = Record<string, ArrayOr<IBindingOld>>;
+export type IBindingsOld = Record<string, ArrayOr<IBindingOld>>;

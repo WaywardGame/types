@@ -13,8 +13,8 @@ import { UsableActionDisplayContext } from "game/entity/action/usable/IUsableAct
 import type UsableAction from "game/entity/action/usable/UsableAction";
 import { ActionTranslation } from "language/dictionary/Misc";
 import Translation from "language/Translation";
-export declare type UsableActionTranslationArguments = [using: IUsableActionPossibleUsing, action: UsableAction, context: UsableActionDisplayContext];
-export declare type ActionWhichTranslation = ActionTranslation | "useExact" | "useByTypeAndQuality" | "useByType" | "useAny";
+export type UsableActionTranslationArguments = [using: IUsableActionPossibleUsing, action: UsableAction, context: UsableActionDisplayContext];
+export type ActionWhichTranslation = ActionTranslation | "useExact" | "useByTypeAndQuality" | "useByType" | "useAny";
 export declare class UsableActionTranslator {
     readonly id: ActionId;
     static translateId(id: ActionId, which?: ActionTranslation): import("../../../../language/impl/TranslationImpl").default | undefined;

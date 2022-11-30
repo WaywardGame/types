@@ -27,7 +27,7 @@ export interface ISyncCheck {
     id: MultiplayerSyncCheck;
     value: string | number;
 }
-export declare type SyncChecks = ISyncCheck[];
+export type SyncChecks = ISyncCheck[];
 export interface IHashedSyncCheck {
     hash: number;
     syncCheck: SyncChecks;
