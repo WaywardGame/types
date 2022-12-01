@@ -22,8 +22,8 @@ export default class ItemRecipeRequirementChecker {
     itemComponentsCanBurn: boolean;
     private numComponentsNeeded;
     private baseComponent;
-    private components;
-    private componentItems;
+    private readonly components;
+    private readonly componentItems;
     private recipe;
     private adjacentContainers;
     private readonly cachedItems;

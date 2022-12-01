@@ -48,7 +48,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private _isGameOverlayActive;
     private _isTraceRecording;
     private _osPlatform;
-    private _intervalIds;
+    private readonly _intervalIds;
     get isGameOverlayActive(): boolean;
     get isRunningOnSteamDeck(): boolean;
     get isRunningOnBatteryPower(): boolean;

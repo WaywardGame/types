@@ -15,7 +15,7 @@ export default class ReplayManager {
     private recording;
     private readonly gameVersion;
     private log;
-    private playbackState;
+    private readonly playbackState;
     private _recordingStartTime;
     private _skipTicks;
     isRecording(): boolean;
