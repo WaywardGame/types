@@ -85,6 +85,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     readonly movementIntent: IMovementIntent;
     walkPath: IWalkPath | undefined;
     identifier: string;
+    lastAttackedBy: Human | Creature | undefined;
     skill: SkillManager;
     quests: IQuestManager;
     messages: IMessageManager;

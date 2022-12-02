@@ -9,7 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IEventEmitter } from "event/EventEmitter";
-import Creature from "game/entity/creature/Creature";
 import { CreatureType } from "game/entity/creature/ICreature";
 import Human from "game/entity/Human";
 import { EntityType } from "game/entity/IEntity";
@@ -40,7 +39,6 @@ export default class Player extends Human implements IUnserializedCallback {
     dialogInfo: Record<string, IDialogInfo>;
     hintSeen: boolean[];
     islandId: IslandId;
-    lastAttackedBy: Human | Creature | undefined;
     name: string;
     actionBar: IActionBarSlotData[];
     revealedItems: Record<number, boolean>;

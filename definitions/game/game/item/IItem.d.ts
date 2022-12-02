@@ -403,6 +403,7 @@ export interface IMoveToTileOptions {
     toContainer?: IContainer;
     toContainerOptions?: IAddToContainerOptions;
     beforeMovement?: IMoveToTileBeforeMovementOptions;
+    extinguishTorches?: boolean;
     /**
      * Note: Everything done in afterMovement must be clientside only
      */

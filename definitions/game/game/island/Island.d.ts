@@ -16,7 +16,7 @@ import Creature from "game/entity/creature/Creature";
 import CreatureManager from "game/entity/creature/CreatureManager";
 import type { IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "game/entity/creature/ICreature";
 import FlowFieldManager from "game/entity/flowfield/FlowFieldManager";
-import type Human from "game/entity/Human";
+import Human from "game/entity/Human";
 import { SkillType } from "game/entity/IHuman";
 import NPCManager from "game/entity/npc/NPCManager";
 import type { IGameOld } from "game/IGame";
