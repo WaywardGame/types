@@ -151,7 +151,8 @@ export declare enum ActionType {
     DismountVehicle = 113,
     CreateControllableNPC = 114,
     RemoveControllableNPC = 115,
-    PropOpenDoor = 116
+    PropOpenDoor = 116,
+    DamageMap = 117
 }
 export declare const ACTIONS_RECOMMENDED: ActionType[];
 export declare enum ActionUsability {

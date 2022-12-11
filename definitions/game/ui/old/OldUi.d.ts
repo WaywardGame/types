@@ -55,7 +55,7 @@ export default class OldUi {
     refreshContainerName(container: IContainer): void;
     isContainerOpen(value: unknown): value is IContainer;
     addItemToContainer(item: Item, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
-    afterAddingMultipleItemsToContainer(container: IContainer): void;
+    afterAddingMultipleItemsToContainer(container: IContainer, itemsToSync?: Item[]): void;
     removeItemFromContainer(item: Item, container: IContainer): void;
     getDialogInfo(dialogId: DialogId): IDialogInfo;
     setVersionExtra(msg: string): void;

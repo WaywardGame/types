@@ -148,7 +148,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     startResting(restData: IRestData): void;
     cancelResting(reason: RestCancelReason): boolean;
     resetMovementIntent(): void;
-    createItemInInventory(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, updateTables?: boolean): Item;
+    createItemInInventory(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, updateTables?: boolean, movingMultiple?: boolean): Item;
     damageRandomEquipment(): void;
     getDamageModifier(): number;
     calculateDamageAmount(attackType: AttackType, weapon?: Item, ammoItem?: Item): number;

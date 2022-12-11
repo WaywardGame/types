@@ -125,7 +125,7 @@ export default class InGameScreen extends BaseScreen {
     addItemToContainer(item: Item, container: IContainer, _internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
     insertItemStringToContainer(itemElement: string | JQuery, containerElement: JQuery): void;
     onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery | undefined, isInventoryContainer: boolean, updateTables?: boolean): void;
-    afterAddingMultipleItemsToContainer(container: IContainer): void;
+    afterAddingMultipleItemsToContainer(container: IContainer, itemsToSync?: Item[]): void;
     removeItemFromContainer(item: Item, container: IContainer): void;
     refreshContainerName(container: IContainer, nestedUpdate?: boolean): void;
     getInventoryItemsInOrder(): any[];

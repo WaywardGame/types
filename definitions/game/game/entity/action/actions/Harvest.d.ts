@@ -14,10 +14,11 @@ import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type { ILootItem } from "game/ILoot";
+import type Item from "game/item/Item";
 export interface IHarvestCanUse extends IActionUsable {
     description: IDoodadDescription;
     doodad: Doodad;
     resources: ILootItem[];
 }
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, IHarvestCanUse, [(import("../../../item/Item").default | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, IHarvestCanUse, [(Item | undefined)?]>;
 export default _default;
