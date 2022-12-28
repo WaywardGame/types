@@ -21,6 +21,7 @@ import type { IBindHandlerApi } from "ui/input/Bind";
 import LoadingBridge from "ui/LoadingBridge";
 import PromptsBridge from "ui/PromptsBridge";
 import SaveDropHandler from "ui/SaveDropHandler";
+import { ScreenId } from "ui/screen/IScreen";
 import ScreenManager from "ui/screen/ScreenManager";
 import SelectionHandler from "ui/screen/screens/menu/component/SelectionHandler";
 import ServerJoinHandler from "ui/ServerJoinHandler";
@@ -98,6 +99,10 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     updatePowerMode(): void;
     toggleDeveloperMode(enabled: boolean): this;
     protected onGlobalSlotLoaded(): void;
+    /**
+     * Screen id used while in game / playing
+     */
+    get primaryScreenId(): ScreenId.DedicatedServer | ScreenId.Game;
     protected onPlay(): void;
     protected onStopPlay(game: Game, state: PlayerState): Promise<void>;
     protected onInterruptClosed(): void;

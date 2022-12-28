@@ -14,9 +14,12 @@ import { CheckButton } from "ui/component/CheckButton";
 import ChoiceList, { Choice } from "ui/component/ChoiceList";
 import Component from "ui/component/Component";
 import HorizontalLine from "ui/component/HorizontalLine";
+import Input from "ui/component/Input";
 import type { IRefreshable } from "ui/component/Refreshable";
 import Text, { Paragraph } from "ui/component/Text";
+import type { IBindHandlerApi } from "ui/input/Bind";
 import { IActionBarSlotData } from "ui/screen/screens/game/static/actions/IActionBar";
+import SelectionHandler from "ui/screen/screens/menu/component/SelectionHandler";
 declare enum Classes {
     Main = "game-action-configuration-drawer",
     Header = "game-action-configuration-drawer-header",
@@ -28,6 +31,9 @@ declare enum Classes {
     Column = "game-action-configuration-drawer-column",
     ColumnContent = "game-action-configuration-drawer-column-content",
     ColumnsContainer = "game-action-configuration-drawer-columns-container",
+    ActionsColumnsContainer = "game-action-configuration-drawer-columns-container-actions",
+    ActionsFilterSortContainer = "game-action-configuration-drawer-actions-filter-sort-container",
+    ActionsFilter = "game-action-configuration-drawer-actions-filter",
     ConfigurationColumn = "game-action-configuration-drawer-configuration-column",
     Hints = "game-action-configuration-drawer-hints",
     Hint = "game-action-configuration-drawer-hint",
@@ -36,6 +42,7 @@ declare enum Classes {
     ActionButton = "game-action-configuration-drawer-action-button",
     ActionButtonInapplicable = "game-action-configuration-drawer-action-button-inapplicable",
     ActionButtonSlotted = "game-action-configuration-drawer-action-button-slotted",
+    ActionButtonSelected = "game-action-configuration-drawer-action-button-selected",
     ConfigurationColumnTitle = "game-action-configuration-drawer-column-title",
     ConfigurationColumnDescription = "game-action-configuration-drawer-column-description",
     ConfigurationColumnTitleInapplicable = "game-action-configuration-drawer-column-title-inapplicable"
@@ -59,6 +66,11 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     readonly columnsContainer: Component<HTMLElement>;
     readonly footer: Component<HTMLElement>;
     readonly discoveryHint: Text;
+    readonly actionsFilterSort: Component<HTMLElement>;
+    readonly actionsColumnsContainer: Component<HTMLElement>;
+    readonly filterInput: Input;
+    private lastFilter?;
+    private filter;
     readonly actionsColumn: Component<HTMLElement>;
     readonly actionsColumnContent: Component<HTMLElement>;
     readonly itemActionsColumn: Component<HTMLElement>;
@@ -105,4 +117,17 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     private selectAction;
     updateConfigurationColumn(): void;
     private getAction;
+    private selectedAction?;
+    private selectedColumn?;
+    private getVisibleActions;
+    protected onMenuCancel(): boolean;
+    protected onNext(): boolean;
+    protected onPrevious(): boolean;
+    protected onLeft(): boolean;
+    protected onEnterBind(api: IBindHandlerApi | Input): boolean;
+    protected onSelectionChange(handler: SelectionHandler, component?: Component): void;
+    private selectNext;
+    private selectPrevious;
+    private unselectHighlightAction;
+    private selectHighlightAction;
 }
