@@ -29,7 +29,7 @@ export default class StringTokenizer implements IUnserializedCallback {
     onUnserialized(): void;
     clear(): void;
     /**
-     * Writes the token for the string if it has one
+     * Reads the token for the string if it has one
      * @param serializer Serializer object
      * @return Detokenized string or undefined if the string was not tokenized
      */
