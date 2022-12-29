@@ -53,6 +53,6 @@ export interface IGatherLiquidFromLiquidCanUse extends IActionUsable {
     y: number;
     z: number;
 }
-export declare type IGatherLiquidCanUse = IGatherLiquidFromWispCanUse | IGatherLiquidFromGoatCanUse | IGatherLiquidFromWaterStillCanUse | IGatherLiquidFromWellCanUse | IGatherLiquidFromLiquidCanUse;
+export type IGatherLiquidCanUse = IGatherLiquidFromWispCanUse | IGatherLiquidFromGoatCanUse | IGatherLiquidFromWaterStillCanUse | IGatherLiquidFromWellCanUse | IGatherLiquidFromLiquidCanUse;
 declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default, void, IGatherLiquidCanUse, [import("../../../item/Item").default]>;
 export default _default;

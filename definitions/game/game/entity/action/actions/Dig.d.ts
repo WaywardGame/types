@@ -26,6 +26,6 @@ export interface IDigTileCanUse extends IActionUsable {
     terrainDescription?: ITerrainDescription;
     tileType: TerrainType;
 }
-declare type IDigCanUse = IDigGenericCanUse | IDigTileCanUse;
+type IDigCanUse = IDigGenericCanUse | IDigTileCanUse;
 declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, IDigCanUse, [(Item | undefined)?]>;
 export default _default;

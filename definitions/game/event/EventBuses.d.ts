@@ -37,6 +37,7 @@ import type Multiplayer from "multiplayer/Multiplayer";
 import type WorldRenderer from "renderer/world/WorldRenderer";
 import type SaveManager from "save/SaveManager";
 import type Steamworks from "steamworks/Steamworks";
+import type ScreenManager from "ui/screen/ScreenManager";
 import type ActionBar from "ui/screen/screens/game/static/ActionBar";
 import type MovementHandler from "ui/screen/screens/game/util/movement/MovementHandler";
 export declare enum EventBus {
@@ -67,13 +68,14 @@ export declare enum EventBus {
     Players = 24,
     Prompt = 25,
     SaveManager = 26,
-    Steamworks = 27,
-    TileEventManager = 28,
-    TileEvents = 29,
-    Ui = 30,
-    UiActionBar = 31,
-    UiMovementHandler = 32,
-    WorldRenderer = 33
+    ScreenManager = 27,
+    Steamworks = 28,
+    TileEventManager = 29,
+    TileEvents = 30,
+    Ui = 31,
+    UiActionBar = 32,
+    UiMovementHandler = 33,
+    WorldRenderer = 34
 }
 declare const eventBuses: {
     [EventBus.Actions](): typeof ActionExecutor;
@@ -103,6 +105,7 @@ declare const eventBuses: {
     [EventBus.Players](): typeof Player;
     [EventBus.Prompt](): typeof Prompts.Events;
     [EventBus.SaveManager](): typeof SaveManager;
+    [EventBus.ScreenManager](): typeof ScreenManager;
     [EventBus.Steamworks](): typeof Steamworks;
     [EventBus.TileEventManager](): typeof TileEventManager;
     [EventBus.TileEvents](): typeof TileEvent;
@@ -118,4 +121,4 @@ export declare module EventBus {
     function unregister(eventBus: EventBus): void;
     function onEventBusRegistration(eventBus: EventBus, handler: NullaryFunction): void;
 }
-export declare type EventBusHost<E extends EventBus> = ReturnType<(typeof eventBuses)[E]>;
+export type EventBusHost<E extends EventBus> = ReturnType<(typeof eventBuses)[E]>;

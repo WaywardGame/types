@@ -256,7 +256,7 @@ export interface IGameOptionsPlayer {
 /**
  * "Partial" difficulty options; used to apply options over top base options. Milestone modifiers can never exist on partial difficulty options.
  */
-export declare type IGameOptionsPartial = RecursivePartial<IGameOptions> & {
+export type IGameOptionsPartial = RecursivePartial<IGameOptions> & {
     milestoneModifiers?: never;
 };
 export interface IGameOptionsStat {

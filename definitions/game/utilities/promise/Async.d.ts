@@ -16,4 +16,4 @@
  */
 export declare function sleep(ms: number): Promise<undefined>;
 export declare function sleep(ms: number, signal: AbortSignal): Promise<boolean>;
-export declare type Awaited<T> = T extends PromiseLike<infer U> ? Awaited<U> : T;
+export type Awaited<T> = T extends PromiseLike<infer U> ? Awaited<U> : T;

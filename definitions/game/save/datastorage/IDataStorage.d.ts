@@ -10,7 +10,7 @@
  */
 import type IAsyncDataStorage from "save/datastorage/IAsyncDataStorage";
 import type { Awaited } from "utilities/promise/Async";
-declare type IDataStorage = {
+type IDataStorage = {
     [key in keyof IAsyncDataStorage]: (...params: Parameters<IAsyncDataStorage[key]>) => Awaited<ReturnType<IAsyncDataStorage[key]>>;
 };
 export default IDataStorage;

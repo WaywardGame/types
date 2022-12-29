@@ -97,11 +97,11 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
      */
     clone(): Action<A, E, R, CU, AV>;
 }
-declare type EntityTypeMap<E extends EntityType> = {
+type EntityTypeMap<E extends EntityType> = {
     [EntityType.Creature]: Creature;
     [EntityType.NPC]: NPC;
     [EntityType.Player]: Player;
     [EntityType.Human]: Human;
 }[E];
-declare type EntityTypeTupleType<E extends EntityType[]> = E extends [EntityType] ? EntityTypeMap<E[0]> : E extends [EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> : E extends [EntityType, EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> | EntityTypeMap<E[2]> : never;
+type EntityTypeTupleType<E extends EntityType[]> = E extends [EntityType] ? EntityTypeMap<E[0]> : E extends [EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> : E extends [EntityType, EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> | EntityTypeMap<E[2]> : never;
 export {};

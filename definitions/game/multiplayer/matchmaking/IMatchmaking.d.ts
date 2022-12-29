@@ -88,7 +88,7 @@ export interface IMatchmakingUnableToJoinGameMessageData extends IMatchmakingMes
     reason: UnableToJoinReason;
     args?: Array<number | string>;
 }
-export declare type MatchmakingMessageData = IMatchmakingCheckConnectionMessageData | IMatchmakingUpdateDirectoryMessageData | IMatchmakingIpAddressMessageData | IMatchmakingJoinChannelMessageData | IMatchmakingIceCandidateMessageData | IMatchmakingSessionDescriptionMessageData | IMatchmakingHostIpAddressMessageData | IMatchmakingConnectedMessageData | IMatchmakingUnableToJoinGameMessageData;
+export type MatchmakingMessageData = IMatchmakingCheckConnectionMessageData | IMatchmakingUpdateDirectoryMessageData | IMatchmakingIpAddressMessageData | IMatchmakingJoinChannelMessageData | IMatchmakingIceCandidateMessageData | IMatchmakingSessionDescriptionMessageData | IMatchmakingHostIpAddressMessageData | IMatchmakingConnectedMessageData | IMatchmakingUnableToJoinGameMessageData;
 export interface IServer {
     id: string;
     serverDetails: IServerServerDetails;

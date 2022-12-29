@@ -15,13 +15,13 @@ interface IWebWorkerMessage<Type extends string, DataType> {
 interface IDatalessWebWorkerMessage<Type extends string> {
     type: Type;
 }
-export declare type SharedWebWorkerMessages = IDatalessWebWorkerMessage<"delete"> | IWebWorkerMessage<"multiplayerData", ArrayBuffer>;
-export declare type HostWebWorkerMessage = SharedWebWorkerMessages | IDatalessWebWorkerMessage<"ready"> | IWebWorkerMessage<"status", {
+export type SharedWebWorkerMessages = IDatalessWebWorkerMessage<"delete"> | IWebWorkerMessage<"multiplayerData", ArrayBuffer>;
+export type HostWebWorkerMessage = SharedWebWorkerMessages | IDatalessWebWorkerMessage<"ready"> | IWebWorkerMessage<"status", {
     status: WebWorkerStatus;
 }> | IWebWorkerMessage<"multiplayerConnect", {
     matchmakingIdentifier: string;
 }>;
-export declare type ClientWebWorkerMessage = SharedWebWorkerMessages | IWebWorkerMessage<"joinServer", {
+export type ClientWebWorkerMessage = SharedWebWorkerMessages | IWebWorkerMessage<"joinServer", {
     code: string;
 }>;
 export declare enum WebWorkerStatus {

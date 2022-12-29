@@ -17,7 +17,7 @@ export interface INoteDescription extends IModdable {
     learnMore?: HelpArticle;
 }
 export declare const noteDescriptions: OptionalDescriptions<Note, INoteDescription>;
-export declare type Time = PartOfDay | string;
+export type Time = PartOfDay | string;
 export interface INote {
     id: keyof typeof Note;
     time: {

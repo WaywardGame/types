@@ -9,4 +9,4 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type ISpriteInfo from "renderer/ISpriteInfo";
-export declare type ISpriteInfoList = Record<number, ISpriteInfo | undefined>;
+export type ISpriteInfoList = Record<number, ISpriteInfo | undefined>;

@@ -33,7 +33,7 @@ export interface ISkillEvents {
      */
     skillChange(skill: SkillType, value: number, oldValue: number): any;
 }
-export declare type SkillSet = Record<SkillType, ISkillLevel>;
+export type SkillSet = Record<SkillType, ISkillLevel>;
 export interface ISkillHost extends EventEmitter.Host<ISkillEvents> {
     readonly island: Island;
 }

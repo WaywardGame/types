@@ -24,7 +24,7 @@ export interface IPerson {
     nickname?: string;
     fileName?: string;
 }
-export declare type TeamMemberLink = [Website, string];
+export type TeamMemberLink = [Website, string];
 export interface ITeamMember extends IPerson {
     responsibilities: Responsibility[];
     isCurrentMember?: true;

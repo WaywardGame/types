@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ExpectedLifetime } from "utilities/memory/ILifetime";
+import type Screen from "ui/screen/Screen";
 declare class MemoryLeakDetector {
     private surpressLogs;
     private nextObjectId;
@@ -20,7 +21,8 @@ declare class MemoryLeakDetector {
     waitForIdle(): Promise<void>;
     register(object: object, objectName: string, expectedLifetime: ExpectedLifetime, parentObjectIdentifier?: string): void;
     registerMultiple<T extends object>(prefix: string, objects: SaferArray<T>, objectNamer: (object: T) => string, expectedLifetime: ExpectedLifetime): void;
-    onStopPlay(): Promise<void>;
+    onStopPlay(): void;
+    onScreenShow(_: any, screen: Screen): Promise<any>;
     private runCheck;
     garbageCollect(): Promise<void>;
     private checkObjects;

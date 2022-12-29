@@ -14,9 +14,9 @@ import type { IInspector } from "game/inspection/IInfoProvider";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import type { TranslationGenerator } from "ui/component/IComponent";
-declare type SkillRequirement = [skill: SkillType, amount: number];
-declare type InfoGenerator = () => ArrayOr<TranslationGenerator | InfoProvider>;
-declare type HasResolvableBuilder = IInspector | IHasBuilder;
+type SkillRequirement = [skill: SkillType, amount: number];
+type InfoGenerator = () => ArrayOr<TranslationGenerator | InfoProvider>;
+type HasResolvableBuilder = IInspector | IHasBuilder;
 export default class ObscuredValue extends InfoProvider {
     private readonly isOrCheck;
     private readonly inspector;

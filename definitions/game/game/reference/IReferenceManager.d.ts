@@ -47,8 +47,8 @@ export declare enum ReferenceType {
     EquipSlot = 15
 }
 export declare const enumRefTypes: Set<ReferenceType.Skill | ReferenceType.Milestone | ReferenceType.Recipe | ReferenceType.ItemType | ReferenceType.Dismantle | ReferenceType.Stat | ReferenceType.Action | ReferenceType.EquipSlot>;
-export declare type EnumReferenceTypes = (typeof enumRefTypes) extends Set<infer R> ? R : never;
-export declare type ReferenceableReferenceTypes = Exclude<ReferenceType, EnumReferenceTypes>;
+export type EnumReferenceTypes = (typeof enumRefTypes) extends Set<infer R> ? R : never;
+export type ReferenceableReferenceTypes = Exclude<ReferenceType, EnumReferenceTypes>;
 export declare const referenceableRefTypes: Set<ReferenceableReferenceTypes>;
 export interface IReferenceTypeMap {
     [ReferenceType.Item]: Item;
@@ -68,15 +68,15 @@ export interface IReferenceTypeMap {
     [ReferenceType.Action]: [ReferenceType.Action, ActionId, Item?];
     [ReferenceType.EquipSlot]: [ReferenceType.EquipSlot, EquipType];
 }
-declare type ReferenceId<REFTYPE extends ReferenceType> = IReferenceTypeMap[REFTYPE] extends [REFTYPE, infer IdType, any?] ? IdType : number;
-export declare type Reference<REFTYPE extends ReferenceType | undefined = ReferenceType | undefined> = REFTYPE extends ReferenceType ? [id: ReferenceId<REFTYPE>, type: REFTYPE, context?: [number, ReferenceType?]] : [number];
-export declare type Referenceable = IReferenceTypeMap[ReferenceableReferenceTypes];
-export declare type ResolveReference<REFTYPE extends ReferenceType> = IReferenceTypeMap[REFTYPE];
-export declare type EnumReferenceResolved<REFTYPE extends EnumReferenceTypes = EnumReferenceTypes> = IReferenceTypeMap[REFTYPE];
+type ReferenceId<REFTYPE extends ReferenceType> = IReferenceTypeMap[REFTYPE] extends [REFTYPE, infer IdType, any?] ? IdType : number;
+export type Reference<REFTYPE extends ReferenceType | undefined = ReferenceType | undefined> = REFTYPE extends ReferenceType ? [id: ReferenceId<REFTYPE>, type: REFTYPE, context?: [number, ReferenceType?]] : [number];
+export type Referenceable = IReferenceTypeMap[ReferenceableReferenceTypes];
+export type ResolveReference<REFTYPE extends ReferenceType> = IReferenceTypeMap[REFTYPE];
+export type EnumReferenceResolved<REFTYPE extends EnumReferenceTypes = EnumReferenceTypes> = IReferenceTypeMap[REFTYPE];
 export declare module Reference {
     function setReferenceResolver(resolver: typeof ReferenceManager.get): void;
     function create(id: number): Reference;
     function create<REFTYPE extends ReferenceType>(id: ReferenceId<REFTYPE>, type: REFTYPE, context?: Referenceable | number | [number, ReferenceType?]): Reference;
-    function context(reference?: Reference): [number] | [id: number, type: ReferenceType.Item, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Creature, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Doodad, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.NPC, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Player, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.TileEvent, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Island, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Corpse, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: SkillType, type: ReferenceType.Skill, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: Milestone, type: ReferenceType.Milestone, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ItemType, type: ReferenceType.Recipe, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ItemType, type: ReferenceType.ItemType, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ItemType, type: ReferenceType.Dismantle, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: Stat, type: ReferenceType.Stat, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ActionId, type: ReferenceType.Action, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: EquipType, type: ReferenceType.EquipSlot, context?: [number, (ReferenceType | undefined)?] | undefined] | undefined;
+    function context(reference?: Reference): [id: number, type: ReferenceType.Item, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Doodad, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Creature, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.NPC, context?: [number, (ReferenceType | undefined)?] | undefined] | [number] | [id: number, type: ReferenceType.Player, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.TileEvent, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Island, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: number, type: ReferenceType.Corpse, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: SkillType, type: ReferenceType.Skill, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: Milestone, type: ReferenceType.Milestone, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ItemType, type: ReferenceType.Recipe, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ItemType, type: ReferenceType.ItemType, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ItemType, type: ReferenceType.Dismantle, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: Stat, type: ReferenceType.Stat, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: ActionId, type: ReferenceType.Action, context?: [number, (ReferenceType | undefined)?] | undefined] | [id: EquipType, type: ReferenceType.EquipSlot, context?: [number, (ReferenceType | undefined)?] | undefined] | undefined;
 }
 export {};

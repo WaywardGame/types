@@ -17,8 +17,8 @@ import type { QuestInstance } from "game/entity/player/quest/QuestManager";
 import type { Game } from "game/Game";
 import Button from "ui/component/Button";
 import Component from "ui/component/Component";
+import Contenteditable from "ui/component/Contenteditable";
 import type { ContextMenuDescriptions } from "ui/component/ContextMenu";
-import type Input from "ui/component/Input";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import { Quadrant } from "ui/screen/screens/game/component/IQuadrantComponent";
 import QuadrantComponent from "ui/screen/screens/game/component/QuadrantComponent";
@@ -38,7 +38,7 @@ export default class Messages extends QuadrantComponent {
     readonly sendButton: Button;
     readonly pinnedMessages: Component;
     readonly messagelog: Component;
-    readonly input: Input;
+    readonly input: Contenteditable;
     readonly filter: Button | undefined;
     pinNotesAutomatically: boolean;
     filters: IFilters;

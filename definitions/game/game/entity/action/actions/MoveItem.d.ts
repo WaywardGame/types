@@ -43,6 +43,6 @@ export interface IMoveItemMultipleItemsCanUse extends IActionUsable {
     targetContainer: IContainer;
     containerName: Translation | undefined;
 }
-export declare type MoveItemCanUse = IMoveItemBuyItemFromMerchantCanUse | IMoveItemSellItemFromMerchantCanUse | IMoveItemSingleItemCanUse | IMoveItemMultipleItemsCanUse;
+export type MoveItemCanUse = IMoveItemBuyItemFromMerchantCanUse | IMoveItemSellItemFromMerchantCanUse | IMoveItemSingleItemCanUse | IMoveItemMultipleItemsCanUse;
 declare const _default: Action<[[ActionArgument.ItemNearbyIncludingTradeContainer, ActionArgument.Undefined], [ActionArgument.Container, ActionArgument.Undefined], [ActionArgument.ItemType, ActionArgument.Undefined], [ActionArgument.Quality, ActionArgument.Undefined], [ActionArgument.String, ActionArgument.Undefined]], Human, void, MoveItemCanUse, [(Item | undefined)?, (IContainer | undefined)?, (import("game/item/IItem").ItemType | undefined)?, (import("../../../IObject").Quality | undefined)?, (string | undefined)?]>;
 export default _default;

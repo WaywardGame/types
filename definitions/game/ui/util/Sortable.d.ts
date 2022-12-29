@@ -14,7 +14,7 @@ import type { IDraggableInputEvent } from "ui/util/Draggable";
 export interface ISortableEvents {
     commit(): any;
 }
-export declare type WithSortableEvents<EVENTS_OF> = Events<EVENTS_OF> & ISortableEvents;
+export type WithSortableEvents<EVENTS_OF> = Events<EVENTS_OF> & ISortableEvents;
 export interface ISortableComponent extends Component {
     event: IEventEmitter<this, Events<Component> & ISortableEvents>;
     order?: number[];

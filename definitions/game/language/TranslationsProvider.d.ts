@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-export declare type PluralRule = [RegExp, string];
-export declare type SingularRule = [RegExp, string];
-export declare type UncountableRule = RegExp;
+export type PluralRule = [RegExp, string];
+export type SingularRule = [RegExp, string];
+export type UncountableRule = RegExp;
 export interface IrregularRule {
     singular: [string, RegExp];
     plural: [string, RegExp];
 }
-export declare type NameRule = [CountMatcher, RegExp, string];
-export declare type CountMatcher = number | {
+export type NameRule = [CountMatcher, RegExp, string];
+export type CountMatcher = number | {
     min: number;
     max?: number;
 } | null;

@@ -30,46 +30,46 @@ export interface IMagicalSubProperty<T extends number> {
         value: number;
     }>;
 }
-export declare type MagicalProperty<T extends MagicalPropertyType> = MagicalPropertyTypeSubTypeMap extends {
+export type MagicalProperty<T extends MagicalPropertyType> = MagicalPropertyTypeSubTypeMap extends {
     [key in T]: any;
 } ? IMagicalSubProperty<MagicalPropertyTypeSubTypeMap[T]> : IMagicalProperty;
-declare type MagicalNormalPropertyEntry = {
+type MagicalNormalPropertyEntry = {
     type: MagicalNormalPropertyTypes;
     value: number;
 };
-declare type MagicalSubPropertyEntry = {
+type MagicalSubPropertyEntry = {
     [K in MagicalSubPropertyTypes]: {
         type: K;
         subType: MagicalPropertyTypeSubTypeMap[K];
         value: number;
     };
 }[MagicalSubPropertyTypes];
-export declare type MagicalPropertyEntry = MagicalNormalPropertyEntry | MagicalSubPropertyEntry;
+export type MagicalPropertyEntry = MagicalNormalPropertyEntry | MagicalSubPropertyEntry;
 export declare module MagicalPropertyEntry {
     function isSubType(entry: MagicalPropertyEntry): entry is MagicalSubPropertyEntry;
     function identity(entry: MagicalPropertyEntry): MagicalPropertyIdentity<[]>;
 }
-export declare type MagicalPropertyEntryIntersection = {
+export type MagicalPropertyEntryIntersection = {
     type: MagicalPropertyType;
     subType?: MagicalSubPropertySubTypes;
     value: number;
 };
-export declare type AnyMagicalProperty = Partial<IMagicalProperty> & PartialValues<{
+export type AnyMagicalProperty = Partial<IMagicalProperty> & PartialValues<{
     [K in MagicalSubPropertyTypes]: IMagicalSubProperty<MagicalPropertyTypeSubTypeMap[K]>;
 }>;
-export declare type MagicalSubPropertyTypes = keyof MagicalPropertyTypeSubTypeMap;
-export declare type MagicalNormalPropertyTypes = Exclude<MagicalPropertyType, MagicalSubPropertyTypes>;
-export declare type MagicalSubPropertySubTypes = MagicalPropertyTypeSubTypeMap[MagicalSubPropertyTypes];
-declare type MagicalSubPropertyTypesResult = {
+export type MagicalSubPropertyTypes = keyof MagicalPropertyTypeSubTypeMap;
+export type MagicalNormalPropertyTypes = Exclude<MagicalPropertyType, MagicalSubPropertyTypes>;
+export type MagicalSubPropertySubTypes = MagicalPropertyTypeSubTypeMap[MagicalSubPropertyTypes];
+type MagicalSubPropertyTypesResult = {
     [K in MagicalSubPropertyTypes]: {
         type: K;
         subTypes: ReadonlyArray<MagicalPropertyTypeSubTypeMap[K]>;
     };
 }[MagicalSubPropertyTypes];
-export declare type MagicalPropertyIdentity<A extends any[] = []> = [MagicalPropertyType, ...A] | {
+export type MagicalPropertyIdentity<A extends any[] = []> = [MagicalPropertyType, ...A] | {
     [Key in MagicalSubPropertyTypes]: [Key, MagicalPropertyTypeSubTypeMap[Key], ...A];
 }[MagicalSubPropertyTypes];
-export declare type MagicalPropertyIdentityFlat = MagicalNormalPropertyTypes | MagicalSubPropertyTypes | {
+export type MagicalPropertyIdentityFlat = MagicalNormalPropertyTypes | MagicalSubPropertyTypes | {
     [Key in MagicalSubPropertyTypes]: [Key, MagicalPropertyTypeSubTypeMap[Key]];
 }[MagicalSubPropertyTypes];
 export declare module MagicalPropertyIdentity {

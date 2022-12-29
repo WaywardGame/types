@@ -59,6 +59,7 @@ export default class Input extends Component implements IRefreshable {
     private readonly _disabledReasons;
     get disabled(): boolean;
     constructor(type?: "input" | "textarea");
+    isFocused(): boolean;
     setDisabled(val?: boolean, reason?: string): this;
     isSelectable(): boolean;
     getSelectionTarget(): Component<HTMLElement>;
@@ -90,6 +91,10 @@ export default class Input extends Component implements IRefreshable {
      */
     clear(clearType?: ClearType): this;
     focus(): void;
+    private emitEnterBindOn;
+    setEmitEnterBindOn(on: "blur" | "keydown"): this;
+    private shouldIgnoreShiftEnter;
+    setIgnoreShiftEnter(ignore?: boolean): this;
     blur(_event?: Event): void;
     select(): this;
     private keydown;

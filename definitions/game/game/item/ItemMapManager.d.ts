@@ -19,6 +19,7 @@ export declare const DEFAULT_ITEM_MAP_CHANCE_OTHER_ISLAND = 0.5;
 export default class ItemMapManager {
     static getMapsInContainer(island: Island, container: IContainer): Item[];
     private map?;
+    private subscribedToDiscoverTreasure;
     private readonly host;
     constructor(host: Item);
     has(): boolean;
@@ -76,4 +77,5 @@ export default class ItemMapManager {
      */
     randomize(island: Island, chanceOfGivingCompletedMap?: number, chanceOfGivingMapFromOtherIsland?: number, randomDecimal?: number): boolean;
     randomizeToIsland(islandId: IslandId, giveCompleted?: boolean, randomDecimal?: number): void;
+    private ensureSubscribedToDiscoverTreasure;
 }

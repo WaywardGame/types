@@ -19,16 +19,16 @@ export declare enum Priority {
 }
 export declare const SYMBOL_SUBSCRIPTIONS: unique symbol;
 export declare const SYMBOL_SUPERCLASSES: unique symbol;
-declare type Abstract<T> = Function & {
+type Abstract<T> = Function & {
     prototype: T;
 };
-declare type Constructor<T> = new (...args: any[]) => T;
-declare type ClassOrAbstractClass<T> = Abstract<T> | Constructor<T>;
+type Constructor<T> = new (...args: any[]) => T;
+type ClassOrAbstractClass<T> = Abstract<T> | Constructor<T>;
 export interface IEventEmitterHost<E> {
     event: IEventEmitter<this | null, E>;
 }
-export declare type IEventEmitterHostClass<E> = ClassOrAbstractClass<IEventEmitterHost<E>>;
-export declare type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends IEventEmitterHostClass<infer E> ? E : never;
+export type IEventEmitterHostClass<E> = ClassOrAbstractClass<IEventEmitterHost<E>>;
+export type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends IEventEmitterHostClass<infer E> ? E : never;
 export interface ITrueEventEmitterHostClass<E> extends Class<any> {
     [SYMBOL_SUPERCLASSES]: Array<ITrueEventEmitterHostClass<E>>;
     [SYMBOL_SUBSCRIPTIONS]: Map<any, Map<keyof E, PriorityMap<Set<Iterable<string | Handler<any, any>>>>>>;
@@ -36,10 +36,10 @@ export interface ITrueEventEmitterHostClass<E> extends Class<any> {
 export interface ISelfSubscribedEmitter<E> {
     [SYMBOL_SUBSCRIPTIONS]: Array<[ISelfSubscribedEmitter<any>, keyof E, string | number | symbol, number?]>;
 }
-declare type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
-declare type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
-declare type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
-declare type UndefinedFromVoid<V> = V extends void ? undefined : V;
+type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
+type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
+type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
+type UndefinedFromVoid<V> = V extends void ? undefined : V;
 export interface IEventEmitter<H = any, E = any> {
     event: IEventEmitter<this, IEventEmitterEvents<H, E>>;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;

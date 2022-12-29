@@ -23,7 +23,7 @@ export interface ITileInspectionsEvents extends Events<Component> {
     updateInspectTypeFilter(): any;
     updateDisplayLevel(): any;
 }
-export declare type InspectionsHandlerOf<INSPECTIONS_LIST extends InspectionsList> = INSPECTIONS_LIST extends InspectionsList<infer INSPECTIONS_HANDLER> ? INSPECTIONS_HANDLER : never;
+export type InspectionsHandlerOf<INSPECTIONS_LIST extends InspectionsList> = INSPECTIONS_LIST extends InspectionsList<infer INSPECTIONS_HANDLER> ? INSPECTIONS_HANDLER : never;
 export default abstract class InspectionsList<INSPECTIONS_HANDLER extends InspectionsHandler = InspectionsHandler> extends Component {
     protected readonly context: InfoProviderContext;
     readonly event: IEventEmitter<this, ITileInspectionsEvents>;

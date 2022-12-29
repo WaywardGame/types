@@ -21,10 +21,10 @@ export interface IInputCatalyst<C extends InputCatalystType> {
     which: IInputCatalystValueMap[C];
     extra?: any;
 }
-declare type IInputCatalystMap = {
+type IInputCatalystMap = {
     [C in InputCatalystType]: IInputCatalyst<C>;
 };
-export declare type InputCatalyst = Value<IInputCatalystMap>;
+export type InputCatalyst = Value<IInputCatalystMap>;
 export declare module InputCatalyst {
     function is(value: unknown): value is InputCatalyst;
     function get<K extends keyof typeof InputCatalystType>(type: K, catalyst: IInputCatalystValueMap[(typeof InputCatalystType)[K]]): InputCatalyst;
@@ -46,7 +46,7 @@ declare enum ModifierType {
     Alt = 1,
     Ctrl = 2
 }
-export declare type Modifier = keyof typeof ModifierType;
+export type Modifier = keyof typeof ModifierType;
 export declare module Modifier {
     function is(value: unknown): value is Modifier;
     function translate(modifier: Modifier): TranslationImpl;

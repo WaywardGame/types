@@ -22,7 +22,7 @@ interface IResourceOptionsMap {
     [PathType.Pin]: [theme: DrawnMapTheme];
     [PathType.EquipSlot]: [resolution?: 16 | 8];
 }
-export declare type ResourceOptionsMap = Record<Exclude<PathType, keyof IResourceOptionsMap>, []> & IResourceOptionsMap;
+export type ResourceOptionsMap = Record<Exclude<PathType, keyof IResourceOptionsMap>, []> & IResourceOptionsMap;
 declare module ResourcePath {
     /**
      * Returns the path of a resource.

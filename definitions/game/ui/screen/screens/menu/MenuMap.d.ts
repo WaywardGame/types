@@ -44,8 +44,8 @@ declare const menuMap: {
     14: typeof OptionsMenu;
     15: typeof PauseMenu;
 };
-export declare type MenuById = {
+export type MenuById = {
     [ID in keyof typeof menuMap]: (typeof menuMap)[ID] extends new () => infer MENU ? MENU : never;
 };
-export declare type ResolveMenu<MENU extends MenuId | Menu> = MENU extends MenuId ? MenuById[MENU] : MENU;
+export type ResolveMenu<MENU extends MenuId | Menu> = MENU extends MenuId ? MenuById[MENU] : MENU;
 export default menuMap;

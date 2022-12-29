@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { DrawnMapTheme } from "game/mapping/IMapRender";
-export declare type CanvasImage = HTMLImageElement | HTMLCanvasElement | ImageBitmap;
+export type CanvasImage = HTMLImageElement | HTMLCanvasElement | ImageBitmap;
 export default class MapBackground {
     private readonly seed?;
     private readonly canvas;

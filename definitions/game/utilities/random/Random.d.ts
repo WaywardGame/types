@@ -10,7 +10,7 @@
  */
 import type { IslandId } from "game/island/IIsland";
 import type { IRange } from "utilities/math/Range";
-export declare type WeightedOption<T> = [number, T];
+export type WeightedOption<T> = [number, T];
 export interface IRandomPushed {
     seed: number;
     history?: IRandomHistory[];
@@ -123,7 +123,7 @@ export declare enum RandomInstance {
     MilestoneModifiers = 1,
     IslandModifier = 2
 }
-export declare type RandomReference = [random: RandomInstance, islandId?: IslandId];
+export type RandomReference = [random: RandomInstance, islandId?: IslandId];
 export declare module RandomReference {
     function resolve(reference: RandomInstance | RandomReference): RandomReference;
 }

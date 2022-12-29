@@ -22,7 +22,7 @@ import type { ActionSlot } from "ui/screen/screens/game/static/ActionBar";
 import type { IDraggableComponent } from "ui/util/Draggable";
 import Draggable from "ui/util/Draggable";
 import Vector2 from "utilities/math/Vector2";
-export declare type ItemSlot = Omit<Component, "event"> & {
+export type ItemSlot = Omit<Component, "event"> & {
     event: IEventEmitter<Component, IItemSlotEvents>;
 };
 export interface IItemSlotEvents extends Events<Component> {

@@ -8,9 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 export interface ICommonGameOptions {
     gameMode: GameMode;
     seed?: string | number;
+    enableMilestoneModifiers?: Set<Milestone>;
     enableAllMilestoneModifiers?: boolean;
 }
 export interface IWaitUntilGameLoadedOptions {
@@ -22,7 +24,7 @@ export interface INewGameOptions extends ICommonGameOptions {
     playMode: GamePlayMode;
     reuseCharacter?: boolean;
 }
-export declare type IDedicatedServerGameOptions = ICommonGameOptions;
+export type IDedicatedServerGameOptions = ICommonGameOptions;
 export interface IJoinServerOptions {
     joinProgrammatically: boolean;
     enableAllMilestoneModifiers?: boolean;

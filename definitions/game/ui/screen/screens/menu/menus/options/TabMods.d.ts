@@ -11,7 +11,7 @@
 import Component from "ui/component/Component";
 import type { IRefreshable } from "ui/component/Refreshable";
 import { Tab } from "ui/screen/screens/menu/component/Menu";
-export declare type ModOptionSectionInitializer = (component: Component) => any;
+export type ModOptionSectionInitializer = (component: Component) => any;
 export default class TabMods extends Tab implements IRefreshable {
     private static readonly modOptions;
     static registerModOptions(modIndex: number, initializer: ModOptionSectionInitializer): void;

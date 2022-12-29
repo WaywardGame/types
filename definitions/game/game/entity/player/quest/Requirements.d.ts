@@ -33,4 +33,4 @@ declare const requirements: {
     }>;
 };
 export default requirements;
-export declare type RequirementArgs<R extends QuestRequirementType> = (typeof requirements)[R] extends QuestRequirement<infer O, any> ? O : (typeof requirements)[R] extends QuestRequirement<infer O2> ? O2 : never;
+export type RequirementArgs<R extends QuestRequirementType> = (typeof requirements)[R] extends QuestRequirement<infer O, any> ? O : (typeof requirements)[R] extends QuestRequirement<infer O2> ? O2 : never;

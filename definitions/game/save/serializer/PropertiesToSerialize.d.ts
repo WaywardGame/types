@@ -11,9 +11,9 @@
 import type { ISerializeProperty } from "save/ISaveManager";
 declare const propertiesToSerializeObject: Record<string, ISerializeProperty>;
 declare const propertiesToSerializeGlobalObject: Record<string, ISerializeProperty>;
-export declare type PropertyToSerialize = keyof typeof propertiesToSerializeObject;
-export declare type PropertyToSerializeGlobal = keyof typeof propertiesToSerializeGlobalObject;
-export declare type AnyPropertyToSerialize = PropertyToSerialize | PropertyToSerializeGlobal;
+export type PropertyToSerialize = keyof typeof propertiesToSerializeObject;
+export type PropertyToSerializeGlobal = keyof typeof propertiesToSerializeGlobalObject;
+export type AnyPropertyToSerialize = PropertyToSerialize | PropertyToSerializeGlobal;
 export declare const propertiesToSerialize: Record<PropertyToSerialize, ISerializeProperty>;
 export declare const propertiesToSerializeGlobal: Record<PropertyToSerializeGlobal, ISerializeProperty>;
 export {};

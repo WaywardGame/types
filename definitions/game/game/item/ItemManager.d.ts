@@ -125,7 +125,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private static getDefaultWeightRange;
     load(): void;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
-    resolveContainer(container?: IContainer): Player | Item | IContainer | NPC | Doodad | ITile | undefined;
+    resolveContainer(container?: IContainer): Item | Doodad | NPC | Player | IContainer | ITile | undefined;
     getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
     hashContainer(containable: IContainable, containerReferenceSource?: ContainerReferenceSource): string;
@@ -135,7 +135,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     removeContainerItems(container: IContainer, removeContainedItems?: boolean): void;
     isItemExtra(type: number): type is ItemTypeExtra;
     exists(item: Item): boolean;
-    remove(item: Item, removeContainedItems?: boolean): void;
+    remove(item: Item, removeContainedItems?: boolean, extinguishTorches?: boolean): void;
     getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): Item[];
     getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getWeightCapacity(container: IContainer, includeMagic?: boolean): number | undefined;

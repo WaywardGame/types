@@ -13,7 +13,7 @@ import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import type Translation from "language/Translation";
 import type Button from "ui/component/Button";
 import type { TranslationGenerator } from "ui/component/IComponent";
-declare type ContentHandler = (context: InfoProviderContext, provider: CollapsableInfoProvider) => ArrayOr<TranslationGenerator | InfoProvider>;
+type ContentHandler = (context: InfoProviderContext, provider: CollapsableInfoProvider) => ArrayOr<TranslationGenerator | InfoProvider>;
 export default class CollapsableInfoProvider extends InfoProvider {
     private contentHandler?;
     private summaryInitializer?;

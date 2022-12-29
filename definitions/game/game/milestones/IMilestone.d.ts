@@ -58,7 +58,7 @@ export declare enum Milestone {
     Rouseabout = 46,
     Murderer = 47
 }
-export declare type ExcludeInternalMilestones<MILESTONE extends Milestone> = PickValueKeys<typeof Milestone, MILESTONE> extends `Internal${string}` ? never : MILESTONE;
+export type ExcludeInternalMilestones<MILESTONE extends Milestone> = PickValueKeys<typeof Milestone, MILESTONE> extends `Internal${string}` ? never : MILESTONE;
 export declare enum MilestoneVisibility {
     /**
      * Everything about the milestone — the name, the description, the progress — is displayed to the player.

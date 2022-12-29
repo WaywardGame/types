@@ -21,7 +21,7 @@ export interface CharacterPreviewFilters {
     skin: string;
     hair: string;
 }
-export declare type CharacterPreviewRotation = 0 | 1 | 2 | 3;
+export type CharacterPreviewRotation = 0 | 1 | 2 | 3;
 export default class CharacterPreview extends Component {
     private readonly elementPreviewBody;
     private readonly elementPreviewShirt;

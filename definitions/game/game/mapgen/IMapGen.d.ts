@@ -15,7 +15,7 @@ import type MapGenHelpers from "game/mapgen/MapGenHelpers";
 import type { Load } from "game/meta/Loading";
 import type { TileTemplateType } from "game/tile/ITerrain";
 import type { IVector3 } from "utilities/math/IVector";
-export declare type MapGenVersions<T> = Descriptions<string, T>;
+export type MapGenVersions<T> = Descriptions<string, T>;
 export interface IMapGen {
     generateWorld(options: IMapGenOptions): void;
 }
@@ -67,9 +67,9 @@ export interface IMapGenGenerateOutput {
     waterSpawns: WaterSpawns;
     templateSpawns: TemplateSpawns;
 }
-export declare type CaveSpawns = Array<[number, number]>;
-export declare type WaterSpawns = Array<[number, number, number]>;
-export declare type TemplateSpawn = [TileTemplateType, number, number, number, MapGenHelpers.ITemplateOptions?];
-export declare type TemplateSpawns = TemplateSpawn[];
+export type CaveSpawns = Array<[number, number]>;
+export type WaterSpawns = Array<[number, number, number]>;
+export type TemplateSpawn = [TileTemplateType, number, number, number, MapGenHelpers.ITemplateOptions?];
+export type TemplateSpawns = TemplateSpawn[];
 export declare const tileTypeDoodadOffset = 256;
 export default IMapGen;

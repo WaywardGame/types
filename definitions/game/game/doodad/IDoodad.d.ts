@@ -45,8 +45,8 @@ export interface IDoodadOptions extends IObjectOptions {
     meltDecay?: number;
     inheritMagic?: MagicalPropertyManager;
 }
-declare type MagicalPropertyOld = Exclude<IItemOld["magicalProperties"], undefined> extends Array<infer T> ? T : never;
-export declare type IDoodadOld = Partial<Doodad> & {
+type MagicalPropertyOld = Exclude<IItemOld["magicalProperties"], undefined> extends Array<infer T> ? T : never;
+export type IDoodadOld = Partial<Doodad> & {
     growInto?: DoodadType;
     legendary?: MagicalPropertyOld;
     magicalProperties?: MagicalPropertyOld[];
@@ -196,8 +196,8 @@ export interface ILockedChest {
      */
     guardiansSpawned?: number;
 }
-export declare type IDoodadParticles = Record<number, IRGB>;
-export declare type IDoodadLoot = Record<number, ILootItem[] | undefined>;
+export type IDoodadParticles = Record<number, IRGB>;
+export type IDoodadLoot = Record<number, ILootItem[] | undefined>;
 export declare enum DoodadType {
     WoodenDoor = 0,
     WoodenFence = 1,
@@ -361,7 +361,7 @@ export declare enum DoodadTag {
  * All tree types that can be spawned during map gen
  * !! This must be kept in sync with the tree list in setupTiles !!
  */
-export declare type MapGenDoodadTrees = DoodadType.MapleTree | DoodadType.CoconutTree | DoodadType.JoshuaTree | DoodadType.SpruceTree | DoodadType.CypressTree | DoodadType.AppleTree | DoodadType.SpruceTreeWithSnow | DoodadType.WhitePineTree | DoodadType.WhitePineTreeWithSnow | DoodadType.PapayaTree | DoodadType.Palapalai | DoodadType.ButtonMushrooms | DoodadType.PoisonIvy | DoodadType.Cattails;
+export type MapGenDoodadTrees = DoodadType.MapleTree | DoodadType.CoconutTree | DoodadType.JoshuaTree | DoodadType.SpruceTree | DoodadType.CypressTree | DoodadType.AppleTree | DoodadType.SpruceTreeWithSnow | DoodadType.WhitePineTree | DoodadType.WhitePineTreeWithSnow | DoodadType.PapayaTree | DoodadType.Palapalai | DoodadType.ButtonMushrooms | DoodadType.PoisonIvy | DoodadType.Cattails;
 export declare enum DoodadTypeGroup {
     Invalid = 400,
     LitCampfire = 401,

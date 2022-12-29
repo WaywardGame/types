@@ -13,7 +13,7 @@ import type Component from "ui/component/Component";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import type Bindable from "ui/input/Bindable";
 import Vector2 from "utilities/math/Vector2";
-export declare type IDraggableInputEvent = (MouseEvent & {
+export type IDraggableInputEvent = (MouseEvent & {
     [KEY in Exclude<keyof TouchEvent, keyof MouseEvent>]?: undefined;
 } & {
     [KEY in Exclude<keyof IBindHandlerApi, keyof MouseEvent>]?: undefined;
@@ -31,7 +31,7 @@ export interface IDraggableEvents {
     move(offset: Vector2, mouse: Vector2): any;
     moveEnd(offset: Vector2, mouse: Vector2, bindable?: Bindable): any;
 }
-export declare type WithDraggableEvents<EVENTS_OF> = Events<EVENTS_OF> & IDraggableEvents;
+export type WithDraggableEvents<EVENTS_OF> = Events<EVENTS_OF> & IDraggableEvents;
 export interface IDraggableComponent extends Component {
     event: IEventEmitter<this, Events<Component> & IDraggableEvents>;
 }

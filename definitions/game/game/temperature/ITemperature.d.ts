@@ -25,7 +25,7 @@ export declare enum Temperature {
     Hot = 50,
     Hottest = 100
 }
-export declare type TimeTemperatureModifier = ((time: TimeManager) => number) | IRange;
+export type TimeTemperatureModifier = ((time: TimeManager) => number) | IRange;
 export interface ILayerTemperature {
     /**
      * When not provided, uses `0`

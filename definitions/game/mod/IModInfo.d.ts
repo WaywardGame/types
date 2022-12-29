@@ -87,7 +87,7 @@ export interface IImageOverrideDescription extends IHasImagePath {
     replace: string;
     animated?: boolean;
 }
-export declare type IImageOverrides = Array<string | IImageOverrideDescription>;
+export type IImageOverrides = Array<string | IImageOverrideDescription>;
 export interface ICustomizations {
     hairColors: string[];
     skinColors: string[];

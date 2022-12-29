@@ -19,7 +19,7 @@ export declare module EnumProperty {
     const DEPENDANTS: unique symbol;
     const COMPUTE: unique symbol;
 }
-export declare type EnumObject<T> = T & {
+export type EnumObject<T> = T & {
     [EnumProperty.NAME]?: string;
     [EnumProperty.OFFICIAL_MAX]?: number;
     [EnumProperty.MOD_START]?: number;

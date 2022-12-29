@@ -36,7 +36,7 @@ declare const dialogMap: {
     3: typeof QuickSettingsDialog;
     5: typeof SkillsDialog;
 };
-export declare type DialogById = {
+export type DialogById = {
     [ID in keyof typeof dialogMap]: (typeof dialogMap)[ID] extends new () => infer DIALOG ? DIALOG : never;
 };
 export default dialogMap;

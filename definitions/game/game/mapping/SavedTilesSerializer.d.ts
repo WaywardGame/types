@@ -11,7 +11,7 @@
 import type { MapTile } from "game/mapping/IMapTile";
 import type { TerrainType } from "game/tile/ITerrain";
 import type { ISerializer, ISerializable } from "save/serializer/ISerializer";
-export declare type SavedMapTiles = Array<[terrain: TerrainType | undefined, decoration: MapTile | undefined, x: number, y: number]>;
+export type SavedMapTiles = Array<[terrain: TerrainType | undefined, decoration: MapTile | undefined, x: number, y: number]>;
 export default class SavedTilesSerializer implements ISerializable {
     saved: SavedMapTiles;
     serializeObject(serializer: ISerializer): undefined;

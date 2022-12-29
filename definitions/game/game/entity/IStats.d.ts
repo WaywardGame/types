@@ -61,7 +61,7 @@ export declare enum Stat {
     Petting = 17,
     Waste = 18
 }
-export declare type IStats = {
+export type IStats = {
     [key in keyof typeof Stat]: IStat;
 };
 export declare const SYMBOL_STAT_TYPE: unique symbol;
@@ -109,7 +109,7 @@ export interface IStatChanging extends IStatBase {
 export interface IStatBonus extends IStatBase {
     bonus: number;
 }
-export declare type IStat = IStatBase | IStatMax | IStatChanging | IStatBonus;
+export type IStat = IStatBase | IStatMax | IStatChanging | IStatBonus;
 export declare enum StatDisplayType {
     /**
      * Do not display this stat

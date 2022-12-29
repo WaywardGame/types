@@ -11,7 +11,7 @@
 export declare class LogFile {
     private fileStreamInfoPromise;
     private fileStreamInfo;
-    private buffer;
+    private readonly buffer;
     private closed;
     logsPath: string | undefined;
     append(message: string): Promise<void>;

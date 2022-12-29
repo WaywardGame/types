@@ -35,7 +35,7 @@ export interface IUsableActionGeneratorPersistenceFactory<HOST> {
         until<E extends EmitterOrBus, K extends Event<E>>(emitter: E, event: K): HOST;
     };
 }
-export declare type UsableActionGeneratorRegistrationHandler<ARGS extends any[]> = (registrar: UsableActionRegistrar, ...args: ARGS) => any;
+export type UsableActionGeneratorRegistrationHandler<ARGS extends any[]> = (registrar: UsableActionRegistrar, ...args: ARGS) => any;
 export interface IUsableActionGeneratorFactory {
     create<ARGS extends any[]>(id: string, registrationHandler: UsableActionGeneratorRegistrationHandler<ARGS>): UsableActionGenerator<ARGS>;
     create<ARGS extends any[]>(registrationHandler: UsableActionGeneratorRegistrationHandler<ARGS>): UsableActionGenerator<ARGS>;

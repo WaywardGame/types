@@ -16,7 +16,7 @@ import Translation from "language/Translation";
 import type TranslationsProvider from "language/TranslationsProvider";
 import type { IStringSection } from "utilities/string/Interpolator";
 import { CaseStyle } from "utilities/string/Strings";
-declare type ArticleRules = Array<[number | {
+type ArticleRules = Array<[number | {
     min: number;
     max?: number;
 } | null, string, string]>;
@@ -96,5 +96,5 @@ export interface ISelector {
     attribute?: string;
     func?(translation: Translation): string;
 }
-export declare type ISelectorArray = Record<number, ISelector>;
+export type ISelectorArray = Record<number, ISelector>;
 export {};

@@ -30,7 +30,7 @@ export interface IInjectionApi<T, K extends keyof T> {
      */
     cancelled: boolean;
 }
-declare type InjectionMethod<T, K extends keyof T> = T[K] extends (...args: infer A) => any ? (api: IInjectionApi<T, K>, ...args: A) => any : never;
+type InjectionMethod<T, K extends keyof T> = T[K] extends (...args: infer A) => any ? (api: IInjectionApi<T, K>, ...args: A) => any : never;
 export declare enum InjectionPosition {
     /**
      * This injection will be called before the target method.

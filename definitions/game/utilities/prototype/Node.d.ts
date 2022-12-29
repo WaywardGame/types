@@ -9,5 +9,9 @@
  * https://github.com/WaywardGame/types/wiki
  */
 declare global {
+    interface Node {
+        queryXPath(selector: string): Node | null;
+        queryXPathAll(selector: string): Node[];
+    }
 }
 export default function (): void;

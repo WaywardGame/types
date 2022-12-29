@@ -136,7 +136,7 @@ export declare enum PromptPriority {
     Default = 0,
     Menu = 1
 }
-export declare type PromptDescriptionArgs<PROMPT extends IPromptDescriptionBase<any[]>> = PROMPT extends IPromptDescriptionBase<infer A> ? A : never;
+export type PromptDescriptionArgs<PROMPT extends IPromptDescriptionBase<any[]>> = PROMPT extends IPromptDescriptionBase<infer A> ? A : never;
 export interface IPromptDescriptionBase<A extends any[]> {
     type: Prompt;
     promptType: PromptType;
@@ -145,8 +145,8 @@ export interface IPromptDescriptionBase<A extends any[]> {
     description?: TranslationGenerator<UiTranslation, A>;
     init?(...args: A): any;
 }
-declare type ResolvablePromptProperty<A extends any[], T> = T | ((...args: A) => T);
-export declare type PromptResult<PROMPT extends IPromptDescriptionBase<any[]>> = {
+type ResolvablePromptProperty<A extends any[], T> = T | ((...args: A) => T);
+export type PromptResult<PROMPT extends IPromptDescriptionBase<any[]>> = {
     [PromptType.Info]: void;
     [PromptType.Confirm]: boolean;
     [PromptType.Choice]: PROMPT extends IPromptChoiceDescription<any, infer CHOICES> ? CHOICES extends ResolvablePromptProperty<any, infer T> ? T extends Array<infer T2> ? T2 : T : never : never;
@@ -161,7 +161,7 @@ export interface IPromptConfirmDescription<A extends any[] = []> extends IPrompt
     yesTranslation?: TranslationGenerator<InterruptChoice>;
     noTranslation?: TranslationGenerator<InterruptChoice>;
 }
-export declare type PromptChoices<A extends any[]> = ResolvablePromptProperty<A, InterruptChoice[]>;
+export type PromptChoices<A extends any[]> = ResolvablePromptProperty<A, InterruptChoice[]>;
 export interface IPromptChoiceDescription<A extends any[] = [], CHOICES extends PromptChoices<A> = PromptChoices<A>> extends IPromptDescriptionBase<A> {
     promptType: PromptType.Choice;
     choices: CHOICES;
@@ -176,5 +176,5 @@ export interface IPromptMenuDescription<MENU extends MenuId, A extends any[] = [
     menu: MENU;
     configure?(menu: MenuById[MENU], ...args: A): any;
 }
-export declare type PromptDescription<A extends any[] = []> = IPromptInfoDescription<A> | IPromptConfirmDescription<A> | IPromptChoiceDescription<A> | IPromptInputDescription<A> | IPromptMenuDescription<MenuId, A>;
+export type PromptDescription<A extends any[] = []> = IPromptInfoDescription<A> | IPromptConfirmDescription<A> | IPromptChoiceDescription<A> | IPromptInputDescription<A> | IPromptMenuDescription<MenuId, A>;
 export {};

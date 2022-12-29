@@ -21,7 +21,7 @@ import Sortable from "ui/util/Sortable";
  * Never change this!
  */
 declare const ID_SEPARATOR = -1;
-declare type Order = Array<MenuBarButtonType | typeof ID_SEPARATOR>;
+type Order = Array<MenuBarButtonType | typeof ID_SEPARATOR>;
 export default class MenuBar extends QuadrantComponent implements ISortableComponent {
     readonly event: IEventEmitter<this, WithSortableEvents<QuadrantComponent>>;
     static getDefaultOrder(): Order;

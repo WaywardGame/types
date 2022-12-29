@@ -26,9 +26,9 @@ export interface IDoodadUpdate {
     hasGraphicVariation: boolean;
     terrainMasks: TerrainMask;
 }
-export declare type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean, debug?: boolean) => void;
-export declare type onDoodadUpdateDelegate = (x: number, y: number, flushImmediate: boolean, doodadUpdate: IDoodadUpdate) => void;
-export declare type TerrainData = number;
+export type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean, debug?: boolean) => void;
+export type onDoodadUpdateDelegate = (x: number, y: number, flushImmediate: boolean, doodadUpdate: IDoodadUpdate) => void;
+export type TerrainData = number;
 export declare enum TerrainMask {
     None = 0,
     Type = 134217727,

@@ -71,7 +71,7 @@ export interface ITerrainDecorationVariationAdaption {
  * object for the tile. How the variation index is used to generate the `ITileAdaptation` will be implementation-specific.
  * @param variationIndex A random integer between 1 (inclusive) and 65536 (exclusive)
  */
-export declare type AdaptionFunction = (worldLayer: WorldLayer, x: number, y: number, terrain: TerrainType, adaptation: ITileAdaptation, variationIndex: number) => TerrainDecorationStatus;
+export type AdaptionFunction = (worldLayer: WorldLayer, x: number, y: number, terrain: TerrainType, adaptation: ITileAdaptation, variationIndex: number) => TerrainDecorationStatus;
 export interface ITerrainDecoration extends ITerrainDecorationBase, IModdable {
     type: TerrainDecoration;
 }

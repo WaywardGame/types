@@ -166,7 +166,7 @@ export interface ITile extends Partial<ITileContainer> {
 export interface ITileOld {
     event?: TileEvent[];
 }
-export declare type ITileContainer = IContainer & IVector3;
+export type ITileContainer = IContainer & IVector3;
 export interface ITileData {
     type: TerrainType;
     minDur?: number;
@@ -184,7 +184,7 @@ export interface ITileData {
     renamed?: string | ISerializedTranslation | undefined;
     tradedFrom?: string[];
 }
-export declare type ITileDataOld = Partial<ITileData> & {
+export type ITileDataOld = Partial<ITileData> & {
     strength?: number;
 };
 export declare enum TileTemplateType {

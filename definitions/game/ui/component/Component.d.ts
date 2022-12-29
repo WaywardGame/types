@@ -199,6 +199,8 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * An alias for `element.querySelectorAll(selector)`
      */
     findDescendants<E extends HTMLElement = HTMLElement>(selector: string): NodeListOf<E>;
+    queryX<N extends Node = Node>(selector: string): N | null;
+    queryXAll<N extends Node = Node>(selector: string): N[];
     /**
      * An alias for `element.closest(selector)`
      */

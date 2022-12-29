@@ -40,7 +40,7 @@ export interface IComponentEvents {
      */
     observed(): any;
 }
-export declare type AppendStrategy = "append" | "prepend" | {
+export type AppendStrategy = "append" | "prepend" | {
     after: Component | string;
 } | {
     before: Component | string;
@@ -82,10 +82,10 @@ export interface IBaseTranslationData {
     properties?: string[];
     shouldTrim?: false;
 }
-export declare type TranslationData = IBaseTranslationData | (Partial<IBaseTranslationData> & {
+export type TranslationData = IBaseTranslationData | (Partial<IBaseTranslationData> & {
     entry: UiTranslation;
 });
-export declare type TextOrTranslationData = string | UiTranslation | TranslationData;
+export type TextOrTranslationData = string | UiTranslation | TranslationData;
 /**
  * @deprecated
  */
@@ -108,7 +108,7 @@ export interface IDisableable {
     disabled: boolean;
     setDisabled(disabled: boolean): this;
 }
-export declare type TranslationGenerator<ENUM extends number = UiTranslation, A extends any[] = []> = Translation | ENUM | ISerializedTranslation | ((...args: A) => Iterable<IStringSection> | Translation | ENUM | ISerializedTranslation | undefined);
+export type TranslationGenerator<ENUM extends number = UiTranslation, A extends any[] = []> = Translation | ENUM | ISerializedTranslation | ((...args: A) => Iterable<IStringSection> | Translation | ENUM | ISerializedTranslation | undefined);
 export interface IBox {
     left: number;
     top: number;

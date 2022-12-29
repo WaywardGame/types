@@ -54,7 +54,7 @@ declare const inspectionTypeMap: {
     5: typeof TileEventInspection;
     16: typeof TileEventInspection.Minors;
 };
-export declare type InspectionClass = Class<Inspection<any>> & {
+export type InspectionClass = Class<Inspection<any>> & {
     isWorldInspection?(inspectType: InspectType): boolean;
     getFromTile?(position: IVector3, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<any>>;
     /**
@@ -91,7 +91,7 @@ declare const _default: {
     16: typeof TileEventInspection.Minors;
 } & Record<InspectType, InspectionClass>;
 export default _default;
-export declare type ResolvedInspection<TYPE extends InspectType> = InstanceOf<(typeof inspectionTypeMap)[TYPE]>;
+export type ResolvedInspection<TYPE extends InspectType> = InstanceOf<(typeof inspectionTypeMap)[TYPE]>;
 export declare module Inspections {
     function get(...args: any[]): Inspection<any> | undefined;
     function isWorldInspection(type: InspectType): boolean;

@@ -10,7 +10,7 @@
  */
 import EventEmitter from "event/EventEmitter";
 import { Milestone, MilestoneVisibility } from "game/milestones/IMilestone";
-declare type IMilestoneUpdate = [Milestone, (number | string)?];
+type IMilestoneUpdate = [Milestone, (number | string)?];
 export interface IMilestoneEvents {
     /**
      * @param milestone The milestone that is being updated

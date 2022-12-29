@@ -13,4 +13,5 @@ export default class Contenteditable extends Input {
     get text(): string;
     constructor();
     setText(text: string, triggerEvent?: boolean): this;
+    private onPaste;
 }

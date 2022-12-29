@@ -22,4 +22,4 @@ export interface IClientData {
     [ClientDataType.ExploredMap]: ExploredMapClientData;
     [ClientDataType.Ui]: UiData;
 }
-export declare type ClientDataMap<T extends ClientDataType> = IClientData[T];
+export type ClientDataMap<T extends ClientDataType> = IClientData[T];

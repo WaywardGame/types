@@ -15,7 +15,7 @@ export interface ICommand {
     callback: CommandCallback;
     canUse?(player: Player): boolean;
 }
-export declare type CommandCallback = (commandManager: CommandManager, player: Player, args: string) => void;
+export type CommandCallback = (commandManager: CommandManager, player: Player, args: string) => void;
 export declare enum Command {
     Backup = 0,
     Ban = 1,
