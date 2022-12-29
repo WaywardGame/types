@@ -35,6 +35,7 @@ declare enum Classes {
     ActionsFilterSortContainer = "game-action-configuration-drawer-actions-filter-sort-container",
     ActionsFilter = "game-action-configuration-drawer-actions-filter",
     ConfigurationColumn = "game-action-configuration-drawer-configuration-column",
+    ConfigurationColumnCloseNoAction = "game-action-configuration-drawer-configuration-column-close-no-action",
     Hints = "game-action-configuration-drawer-hints",
     Hint = "game-action-configuration-drawer-hint",
     HintLabel = "game-action-configuration-drawer-hint-label",
@@ -99,7 +100,7 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     private current?;
     private savedUsing?;
     constructor();
-    open(number: number, slot: IActionBarSlotData): this;
+    open(number: number, slot: IActionBarSlotData): Promise<this>;
     refresh(updateSavedUsing?: boolean): this;
     protected onHide(): void;
     private editBindings;
