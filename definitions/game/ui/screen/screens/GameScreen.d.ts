@@ -39,7 +39,7 @@ export default class GameScreen extends Screen {
     quadrantComponentQuadrants: OptionalDescriptions<QuadrantComponentId, Quadrant>;
     menuBar: MenuBar;
     stats: StatsQuadrant;
-    actionBar: ActionBar;
+    actionBar: ActionBar | undefined;
     messages: Messages;
     movementHandler: MovementHandler;
     worldTooltipHandler: WorldTooltipHandler;
