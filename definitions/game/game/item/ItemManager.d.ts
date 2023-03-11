@@ -21,7 +21,6 @@ import { ContainerType, CraftResult, ItemType, ItemTypeExtra, ItemTypeGroup } fr
 import type { IAddToContainerOptions, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IRequirementInfo } from "game/item/IItemManager";
 import { ContainerReferenceSource, CraftStatus, ICraftResultChances, WeightType } from "game/item/IItemManager";
 import Item from "game/item/Item";
-import type ItemRecipeRequirementChecker from "game/item/ItemRecipeRequirementChecker";
 import { ObjectManager } from "game/ObjectManager";
 import { TerrainType } from "game/tile/ITerrain";
 import type Tile from "game/tile/Tile";
@@ -58,14 +57,6 @@ export interface IItemManagerEvents {
      * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
      */
     containerItemAdd(item: Item, container: IContainer): any;
-    /**
-     * Called when a craft is "requested". This currently happens when clicking an item in the crafting dialog.
-     * @param requirementsMet Whether the requirements are currently met. This hook is a `reduce` hook, so this will contain
-     * whatever the result of the last hook host was, or the value of `checker.requirementsMet()`, by default.
-     * @param item The item to be crafted.
-     * @param checker The recipe requirement checker for this craft.
-     */
-    shouldCraft(requirementsMet: boolean, item: ItemType, checker: ItemRecipeRequirementChecker): boolean | undefined;
     /**
      * Called when an item is crafted
      * @param human The human object
