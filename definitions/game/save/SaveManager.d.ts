@@ -11,6 +11,7 @@
 import type { IWaywardPreload } from "@hosts/shared/interfaces";
 import EventEmitter from "event/EventEmitter";
 import type Player from "game/entity/player/Player";
+import type { Game } from "game/Game";
 import type IClientStore from "save/clientStore/IClientStore";
 import type { ISaveImportSuccess, ISaveInfo, ISaveManagerEvents, ISaveObject, SaveImportResult } from "save/ISaveManager";
 import { SaveSort, SortDirection } from "save/ISaveManager";
@@ -19,6 +20,7 @@ import type { AnyPropertyToSerialize } from "save/serializer/PropertiesToSeriali
 import Files from "utilities/Files";
 import type { IVersionInfo } from "utilities/Version";
 export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
+    readonly game: Game;
     lastLoadedVersion: IVersionInfo;
     private loadedGlobalSlot;
     private readonly dataStorage;
@@ -26,7 +28,7 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
     private readonly serializer;
     private _isLoading;
     get isLoading(): boolean;
-    constructor(waywardPreload: IWaywardPreload | undefined);
+    constructor(game: Game, waywardPreload: IWaywardPreload | undefined);
     clearMultiplayerSlotData(): void;
     isEnabled(): boolean;
     initialize(): Promise<void>;

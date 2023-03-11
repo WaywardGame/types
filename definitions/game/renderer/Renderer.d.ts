@@ -18,9 +18,11 @@ import WebGlContext from "renderer/WebGlContext";
 import WorldRenderer from "renderer/world/WorldRenderer";
 import type { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
+import type { IVector4 } from "utilities/math/Vector4";
 export default class Renderer extends EventEmitter.Host<IRendererEvents> {
+    private readonly canvasElement;
     readonly id: number;
-    readonly worldRenderer: WorldRenderer;
+    worldRenderer: WorldRenderer;
     private fadeInTime;
     private thumbnailResolve;
     private ambientLightLevelCache;
@@ -28,36 +30,65 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     private animationTimer;
     private renderingEnabled;
     private rendered;
+    private readonly states;
     private readonly context;
+    private canvasContext;
+    private readonly viewportSize;
+    private loadedIsland?;
     /**
      * Creates a WebGl context that can be used for rendering the game
-     * @param canvas The html canvas
+     * @param canvas The canvas
      * @param desiredWebGlVersion Desired webgl version. Defaults to 2
      * @param desiredPowerPreference Desired power preference
      * @returns
      */
     static createWebGlContext(canvas: HTMLCanvasElement, desiredWebGlVersion?: number, desiredPowerPreference?: WebGLPowerPreference): Promise<WebGlContext>;
-    constructor(webGlContext: WebGlContext, origin: IRendererOrigin);
-    delete(): Promise<void>;
+    constructor(canvasElement: HTMLCanvasElement);
+    reinitialize(): Promise<void>;
+    private initialize;
+    delete(reinitializing?: boolean): Promise<boolean>;
     get fieldOfView(): import("./fieldOfView/FieldOfView").default;
     get notifier(): import("./notifier/Notifier").default;
     get particle(): import("./particle/ParticleSystem").default;
     get isFadingIn(): boolean;
     get isUpdatingThumbnail(): boolean;
-    get island(): Island;
-    get islandId(): IslandId;
+    /**
+     * The island the renderer is rendering.
+     * Could be undefined if the renderer has not had it's origin set.
+     */
+    get island(): Island | undefined;
+    /**
+     * The island id the renderer is rendering.
+     * Could be undefined if the renderer has not had it's origin set.
+     */
+    get islandId(): IslandId | undefined;
     start(): void;
     stop(): void;
+    pushState(): void;
+    popState(): void;
     setOrigin(origin: IRendererOrigin): void;
-    load(island: Island): void;
-    setViewport(view?: Vector2): void;
+    /**
+     * Loads the island into the renderer
+     * @param island Island to load
+     * @returns True when the island is loaded. False if the island was already loaded
+     */
+    private load;
+    setViewportSize(width: number, height: number): void;
     getZoom(): number;
     addZoomLevel(amount: number): void;
     updateZoomLevel(): void;
     getCameraPosition(timeStamp: number): IVector2;
     getExactCameraPosition(timeStamp: number): Vector2;
     createFadeIn(duration?: number): void;
+    /**
+     * @returns a value between 0 and 1. 0 being full black
+     */
     getBlackness(timeStamp: number): number;
+    /**
+     * Determines if the renderer cares about an update
+     * based on the position of the update vs renderer origin
+     */
+    shouldUpdate(updateOrigin: IVector4 | undefined): boolean;
     updateRender(source: RenderSource, flag: UpdateRenderFlag): void;
     /**
      * Note: Don't inject here. This gets called ten million times. If you want to override this functionality,
@@ -74,14 +105,19 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     private clearRenderFlag;
     private requestAnimationFrame;
     private cancelAnimationFrame;
+    protected renderLoop(timeStamp: number, viewportOffsetX: number): void;
     /**
-     * Game render loop
-     * Not executed for the host in dedicated servers
+     * Game render loop.
+     * Not executed for the host in dedicated servers.
+     * Only executed for the primary renderer.
      */
-    protected gameRenderLoop: (timeStamp: number) => void;
+    protected static gameRenderLoop: (timeStamp: number) => void;
     private render;
     private shouldUpdateWorldRender;
     private registerOriginEvents;
     private unregisterOriginEvents;
+    private registerIslandEvents;
+    private unregisterIslandEvents;
     private onOriginLoadedOnIsland;
+    private onIslandUnloaded;
 }

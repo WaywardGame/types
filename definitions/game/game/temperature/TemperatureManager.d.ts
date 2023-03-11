@@ -11,7 +11,9 @@
 import EventEmitter from "event/EventEmitter";
 import type Doodad from "game/doodad/Doodad";
 import type { DoodadType } from "game/doodad/IDoodad";
-import type Entity from "game/entity/Entity";
+import type Creature from "game/entity/creature/Creature";
+import type EntityMovable from "game/entity/EntityMovable";
+import type NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
 import type Island from "game/island/Island";
 import type { IContainer, ItemType } from "game/item/IItem";
@@ -19,17 +21,18 @@ import type Item from "game/item/Item";
 import type ItemManager from "game/item/ItemManager";
 import { TempType } from "game/temperature/ITemperature";
 import type { FireStage } from "game/tile/events/IFire";
-import type { ITile, TerrainType } from "game/tile/ITerrain";
+import type { TerrainType } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 import type TimeManager from "game/time/TimeManager";
 import { WorldZ } from "game/WorldZ";
-import type { IPreSerializeCallback, IUnserializedCallback } from "save/serializer/ISerializer";
+import type { IPreSerializeCallback } from "save/serializer/ISerializer";
+import type { IVector3 } from "utilities/math/IVector";
 import { IRange } from "utilities/math/Range";
-import type Vector3 from "utilities/math/Vector3";
 export declare const TEMPERATURE_INVALID = 255;
-export interface ITempManagerEvents {
+export interface ITemperatureManagerEvents {
 }
-export default class TemperatureManager extends EventEmitter.Host<ITempManagerEvents> implements IPreSerializeCallback, IUnserializedCallback {
+export default class TemperatureManager extends EventEmitter.Host<ITemperatureManagerEvents> implements IPreSerializeCallback {
     private readonly island;
     encodedCalculatedCache: Map<number, Map<number, Uint32Array>>;
     encodedProducedCache: Map<number, Map<number, Uint32Array>>;
@@ -38,9 +41,15 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     private readonly containerItemsTemperatureCache;
     private readonly scheduledUpdates;
     private readonly scheduledContainerInvalidations;
-    private readonly cacheCalculated;
-    private readonly cacheProduced;
+    private cacheCalculated;
+    private cacheProduced;
+    private temperatureBoundaryMax;
+    private temperatureBoundaryMaxVector;
     constructor(island: Island);
+    /**
+     * Called after the island map size is configured
+     */
+    initialize(): void;
     /**
      * Clears all container caches
      */
@@ -48,7 +57,6 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     addLayer(z: WorldZ): void;
     delete(): void;
     preSerializeObject(): void;
-    onUnserialized(): void;
     /**
      * Clears temperature caching for the container
      */
@@ -79,8 +87,8 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     /**
      * Returns the current overall temperature for the given tile.
      */
-    get(x: number, y: number, z: WorldZ, serverSideSource: GetterOfOr<string> | undefined): number;
-    getRange(x: number, y: number, z: WorldZ, serverSideSource: GetterOfOr<string> | undefined): IRange;
+    get(tile: Tile, serverSideSource: GetterOfOr<string> | undefined): number;
+    getRange(tile: Tile, serverSideSource: GetterOfOr<string> | undefined): IRange;
     /**
      * Returns the base temperature.
      */
@@ -108,34 +116,34 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     /**
      * Returns the cached calculated temperature for a tile. If a tile has not been calculated yet, this will return `TEMPERATURE_INVALID`.
      */
-    getCachedCalculated(x: number, y: number, z: WorldZ, type: TempType): number;
+    getCachedCalculated({ x, y, z }: IVector3, type: TempType): number;
     /**
      * Returns the cached produced temperature on a tile. If the production of a tile has not been calculated yet, this will return `TEMPERATURE_INVALID`.
      */
-    getCachedProduced(x: number, y: number, z: WorldZ, type: TempType): number;
+    getCachedProduced({ x, y, z }: IVector3, type: TempType): number;
     /**
      * Recalculates the *temperature production* of a tile.
      * @param invalidate Whether to invalidate the temperature calculations of surrounding tiles.
      */
     private scheduleUpdate;
     private scheduleContainerInvalidation;
-    protected onDpodadFireUpdate(object: Doodad, tile: ITile, stage?: FireStage): void;
-    protected onTileEventFireUpdate(object: TileEvent, tile: ITile, stage?: FireStage): void;
+    protected onDpodadFireUpdate(object: Doodad, tile: Tile, stage?: FireStage): void;
+    protected onTileEventFireUpdate(object: TileEvent, tile: Tile, stage?: FireStage): void;
     protected onDoodadTransformed(object: Doodad, newType: DoodadType, oldType: DoodadType): void;
     protected onItemTransformed(object: Item, newType: ItemType, oldType: ItemType): void;
     protected onPlayerSpawnOrRemove(_: any, player: Player): void;
     protected onPlayerIdChanged(player: Player): void;
-    protected onCreateOrRemoveObject(_: any, object: Doodad | TileEvent | Entity): void;
-    protected onEntityMove(object: Entity, lastX: number, lastY: number, lastZ: number, lastTile: ITile, x: number, y: number, z: number, tile: ITile): void;
-    protected onUpdateTile(island: Island, x: number, y: number, z: number, tile: ITile, oldType: TerrainType): void;
+    protected onCreateOrRemoveObject(_: any, object: Doodad | TileEvent | Creature | NPC): void;
+    protected onEntityMove(object: EntityMovable, lastTile: Tile, tile: Tile): void;
+    protected onUpdateTile(island: Island, tile: Tile, oldType: TerrainType): void;
     protected onItemContainerAdd(itemManager: ItemManager, item: Item, container?: IContainer): void;
-    protected onItemContainerRemove(itemManager: ItemManager, item: Item, container: IContainer | undefined, containerPosition: Vector3 | undefined): void;
+    protected onItemContainerRemove(itemManager: ItemManager, item: Item, container: IContainer | undefined, containerTile: Tile | undefined): void;
     protected onItemFireUpdate(item: Item): void;
     protected onPlay(): void;
     protected onTickStart(island: Island): void;
     protected onTickEnd(island: Island): void;
     private runContainerInvalidations;
-    private update;
+    update(invalidateContainers?: boolean, source?: GetterOfOr<string>): void;
     private processScheduledUpdate;
     private calculateProduced;
     private updateProducedType;
@@ -184,4 +192,5 @@ export default class TemperatureManager extends EventEmitter.Host<ITempManagerEv
     private getTileMax;
     private getProduced;
     private doesProduceTemperature;
+    private generateEmptyTempCache;
 }

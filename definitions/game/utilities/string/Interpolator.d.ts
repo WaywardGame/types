@@ -50,9 +50,7 @@ declare class Interpolator {
     get formatDates(): boolean | undefined;
     private readonly _segments;
     get segments(): ISegment[];
-    random: Random<{
-        get: () => number;
-    }>;
+    random: Random;
     matchedEnds?: Ends;
     constructor(...segments: ISegment[]);
     setRandom(random: Random): this;

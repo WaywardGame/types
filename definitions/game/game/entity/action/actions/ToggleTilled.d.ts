@@ -11,15 +11,13 @@
 import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-import type { ITerrainDescription, ITile, TerrainType } from "game/tile/ITerrain";
+import type { ITerrainDescription, TerrainType } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export interface ITillCanUse extends IActionUsable {
-    tile: ITile;
+    tile: Tile;
     isGrass: boolean;
     tileType: TerrainType;
     terrainDescription: ITerrainDescription;
-    x: number;
-    y: number;
-    z: number;
 }
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, ITillCanUse, [(import("../../../item/Item").default | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number>, void, ITillCanUse, [(import("../../../item/Item").default | undefined)?]>;
 export default _default;

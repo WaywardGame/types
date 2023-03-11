@@ -68,7 +68,13 @@ export declare enum UsableActionType {
     EquipMainHand = 100046,
     EquipOffHand = 100047,
     RestOnGround = 100048,
-    SleepOnGround = 100049
+    SleepOnGround = 100049,
+    CommandMenu = 100050,
+    CommandFollowClose = 100051,
+    CommandFollowFar = 100052,
+    CommandStay = 100053,
+    CommandDefend = 100054,
+    CommandAttack = 100055
 }
 export declare enum UsableActionTypePlaceholder {
     TradeItem = 200000,

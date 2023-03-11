@@ -12,7 +12,7 @@ import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { ActionId } from "game/entity/action/usable/IUsableAction";
 import { EquipType } from "game/entity/IHuman";
 import { Quality } from "game/IObject";
-import type { ItemType } from "game/item/IItem";
+import type { ItemType, ItemTypeExtra } from "game/item/IItem";
 import type Item from "game/item/Item";
 import Component from "ui/component/Component";
 import type ContextMenu from "ui/component/ContextMenu";
@@ -63,13 +63,13 @@ export declare enum ItemClasses {
     NearlyDecayed = "item-component-nearly-decayed"
 }
 export declare namespace ItemClasses {
-    const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-bottomright" | "item-component-icon-location-topleft";
+    const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-topleft" | "item-component-icon-location-bottomright";
 }
 export interface IItemHandler {
     noDrag?: true;
     equipSlot?: EquipType;
     getItem?(): Item | undefined;
-    getItemType?(): ItemType | undefined;
+    getItemType?(): ItemType | ItemTypeExtra | undefined;
     getItemQuality?(): Quality | undefined;
     getActionSlot?(): ActionSlot | undefined;
     getBindables?(bindables: Bindable[]): Bindable[];

@@ -12,15 +12,15 @@ import type { IEventEmitter } from "event/EventEmitter";
 import Doodad from "game/doodad/Doodad";
 import type Creature from "game/entity/creature/Creature";
 import type { IDamageInfo } from "game/entity/creature/ICreature";
-import Entity from "game/entity/Entity";
-import type { IAttack, ICausesDamage } from "game/entity/IEntity";
+import EntityWithStats from "game/entity/EntityWithStats";
+import type { IAttack, ICausesDamage, IEntityConstructorOptions } from "game/entity/IEntity";
 import { AttackType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "game/entity/IEntity";
-import type { ICanSailAwayResult, ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, IRestData, IVoyageInfo } from "game/entity/IHuman";
+import type { ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo } from "game/entity/IHuman";
 import { EquipType, RestCancelReason, SkillType } from "game/entity/IHuman";
 import type { IStat } from "game/entity/IStats";
 import { Stat } from "game/entity/IStats";
 import type { IMessageManager } from "game/entity/player/IMessageManager";
-import type { ILoadOnIslandOptions, IMobCheck, IMovementIntent, IWalkPath } from "game/entity/player/IPlayer";
+import type { IMobCheck, IMovementIntent, IWalkPath } from "game/entity/player/IPlayer";
 import { PlayerState, TurnTypeFlag, WeightStatus } from "game/entity/player/IPlayer";
 import type { INoteManager } from "game/entity/player/note/NoteManager";
 import PlayerDefense from "game/entity/player/PlayerDefense";
@@ -39,69 +39,86 @@ import ItemReference from "game/item/ItemReference";
 import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import { Milestone } from "game/milestones/IMilestone";
 import type { IGameOptionsPlayer } from "game/options/IGameOptions";
+import type { Reference } from "game/reference/IReferenceManager";
 import type { IHasInsulation } from "game/temperature/ITemperature";
 import { TempType } from "game/temperature/ITemperature";
+import type Tile from "game/tile/Tile";
+import type { ICanSailAwayResult } from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import type FieldOfView from "renderer/fieldOfView/FieldOfView";
 import { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
 import type { IOptions } from "save/data/ISaveDataGlobal";
-import type { IContainerSortInfo, IDialogInfo } from "ui/old/IOldUi";
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
+import Vector2 from "utilities/math/Vector2";
 import type { IVector4 } from "utilities/math/Vector4";
 export declare const REPUTATION_MAX = 64000;
-export default abstract class Human extends Entity implements IHasInsulation {
+export default abstract class Human<TypeType extends number = number> extends EntityWithStats<TypeType> implements IHasInsulation {
     static getNameTranslation(): import("../../language/impl/TranslationImpl").default;
     event: IEventEmitter<this, IHumanEvents>;
+    anim: number;
+    direction: Vector2;
+    facingDirection: Direction.Cardinal;
+    /**
+     * Not guaranteed to be synced between the server and client for Human entities
+     */
+    fromX: number;
+    /**
+     * Not guaranteed to be synced between the server and client for Human entities
+     */
+    fromY: number;
     crafted: Record<number, ICrafted>;
     customization: ICustomizations;
     deathBy: import("language/ITranslation").ISerializedTranslation;
     defense: PlayerDefense;
     defenses: number[];
-    equippedReferences: Map<EquipType, ItemReference>;
     equippedOffHandDisabled?: ItemReference;
+    equippedReferences: Map<EquipType, ItemReference>;
+    flyingDelay?: number;
     handEquippedToLast: EquipType.OffHand | EquipType.MainHand;
     inventory: IContainer;
     isConnecting: boolean;
+    lastAttackedByReference?: Reference;
+    manualTickActionDelay?: number;
     options: Readonly<IOptions>;
     islandId: IslandId;
     readonly equipEffects: Map<EquipEffect, EquipEffects>;
-    manualTickActionDelay: number | undefined;
     realTimeTickActionDelay: number;
     respawnPoint: IVector4 | undefined;
     restData: IRestData | undefined;
     score: number;
     state: PlayerState;
     swimming: boolean;
-    tamedCreatures: Map<`${number},${number}`, number[]>;
+    tamedCreatures: Map<`${number},${number}`, Set<number>>;
     ticksSpent: Map<`${number},${number}`, number>;
     turns: number;
     vehicleItemReference: ItemReference | undefined;
     walkSoundCounter: number;
-    containerSortInfo: Record<string, IContainerSortInfo | undefined>;
-    dialogContainerInfo: Record<number, IDialogInfo | undefined>;
     readonly movementIntent: IMovementIntent;
-    walkPath: IWalkPath | undefined;
+    walkPath?: IWalkPath;
     identifier: string;
-    lastAttackedBy: Human | Creature | undefined;
     skill: SkillManager;
     quests: IQuestManager;
     messages: IMessageManager;
     notes: INoteManager;
     private readonly privateStore;
     nextMoveTime: number;
-    nextMoveDirection: Direction.Cardinal | Direction.None | undefined;
-    private lastVehicleMoveDirection;
+    nextMoveDirection?: Direction.Cardinal | Direction.None;
+    private lastVehicleMoveDirection?;
+    /**
+     * Only tracked serverside for dangerous bouncing
+     */
+    private preventedBadMovement?;
     /**
      * Flag that will prevent a humans vehicle from showing up until the movement finishews
      */
     isMovingSuppressVehicleClientside: boolean;
-    protected readonly milestonesCollection: import("../options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("../options/modifiers/milestone/MilestoneModifier").default, Milestone, import("../options/modifiers/milestone/MilestoneModifier").MilestoneModifierInstance, [(Human | undefined)?]>;
+    protected readonly milestonesCollection: import("../options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("../options/modifiers/milestone/MilestoneModifier").default, Milestone, import("../options/modifiers/milestone/MilestoneModifier").MilestoneModifierInstance, [(Human<number> | undefined)?]>;
     protected gameOptionsCached?: IGameOptionsPlayer;
     protected cachedMovementPenalty?: number;
-    constructor();
+    constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
     abstract createNoteManager(): INoteManager;
     abstract createMessageManager(): IMessageManager;
     abstract createQuestManager(): IQuestManager;
@@ -128,6 +145,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
      */
     isServer(): boolean;
     isHost(): boolean;
+    updateDirection(tile: Tile, updateVehicleDirection?: boolean): void;
     protected onMovementCompleted(): void;
     moveTowardsIsland(direction: Direction.Cardinal | Direction.None, options?: Partial<IMoveToIslandOptions>): Promise<void>;
     moveToIslandPosition(position: IVector2, options?: Partial<IMoveToIslandOptions>): Promise<void>;
@@ -136,17 +154,25 @@ export default abstract class Human extends Entity implements IHasInsulation {
      */
     moveToIslandId(islandId: IslandId, options?: Partial<IMoveToIslandOptions>): Promise<void>;
     /**
+     * Starts the travel animation for the player
+     * @param direction Direction they are traveling
+     * @returns A method that you should invoke to end the animation
+     */
+    private startTravelAnimation;
+    /**
      * Loads the player onto an island
      * Called when the game is initially loading and moving a player to another island
      */
-    loadOnIsland(island: Island, options?: Partial<ILoadOnIslandOptions>): void;
-    protected abstract moveToIsland(island: Island, targetPosition: IVector3): void;
+    loadOnIsland(island: Island, options?: Partial<ILoadOnIslandOptions>, voyageInfo?: IVoyageInfo): void;
+    protected abstract moveToIsland(targetTile: Tile): void;
     /**
      * Loads ui. Should only be called if this player is local
      */
     loadUi(): void;
     startResting(restData: IRestData): void;
     cancelResting(reason: RestCancelReason): boolean;
+    addTamedCreature(creature: Creature): void;
+    removeTamedCreature(creature: Creature): boolean;
     resetMovementIntent(): void;
     createItemInInventory(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, updateTables?: boolean, movingMultiple?: boolean): Item;
     damageRandomEquipment(): void;
@@ -154,6 +180,8 @@ export default abstract class Human extends Entity implements IHasInsulation {
     calculateDamageAmount(attackType: AttackType, weapon?: Item, ammoItem?: Item): number;
     isDualWielding(): boolean;
     getAttack(attack?: AttackType, weapon?: Item): IAttack;
+    getSimplifiedCumulativeAttack(): number;
+    getCombatStrength(): number;
     private getAttackType;
     private getAttackSkillBonus;
     private getAttackSkill;
@@ -172,7 +200,6 @@ export default abstract class Human extends Entity implements IHasInsulation {
      */
     getMaxHealth(withBonus?: boolean): number;
     getCraftingDifficulty(level: RecipeLevel): number;
-    update(): void;
     updateStatsAndAttributes(): void;
     getMovementDelay(): number;
     /**
@@ -187,7 +214,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
     processInput(timeStamp: number): IMovementIntent | undefined;
     staminaReduction(skill?: SkillType, level?: number): void;
     updateReputation(reputation: number): void;
-    protected checkReputationMilestones(): void;
+    protected checkOnLoadMilestones(): void;
     capReputation(): void;
     setVehicle(item: Item | undefined, extinguishTorches?: boolean): boolean;
     getWeightStatus(): WeightStatus;
@@ -206,7 +233,7 @@ export default abstract class Human extends Entity implements IHasInsulation {
      * Burn the player
      */
     burn(fireType: FireType, skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean, level?: number): number | undefined;
-    setPosition(point: IVector3): void;
+    setPosition(tile: Tile): void;
     /**
      * @param effects If true, adds a delay to the player, clears any particles, and updates the view. (Default: true)
      */
@@ -232,7 +259,6 @@ export default abstract class Human extends Entity implements IHasInsulation {
     getConsumeBonus(item: Item | undefined, skillUse?: SkillType): number;
     getSkillBonus(skillUse?: SkillType): number;
     getQualityBonus(item: Item | undefined): number;
-    hasTamedCreature(creature: Creature): boolean;
     setTamedCreatureEnemy(enemy: Human | Creature): void;
     checkForGatherFire(): Translation | undefined;
     /**
@@ -279,7 +305,6 @@ export default abstract class Human extends Entity implements IHasInsulation {
     updateVehicle(): void;
     getWeightOrStaminaMovementPenalty(): number;
     canSailAway(): ICanSailAwayResult;
-    canSailAwayFromPosition(island: Island, position?: IVector3): ICanSailAwayResult;
     canSailTo(x: number, y: number): boolean;
     canCombatTides(): true | "Swimming" | "Stamina";
     protected calculateVoyageInfo(destination?: Island, distanceFromEdge?: number): IVoyageInfo;
@@ -306,10 +331,10 @@ export default abstract class Human extends Entity implements IHasInsulation {
     getInsulation(type: TempType): number;
     resetStatTimers(type?: StatChangeCurrentTimerStrategy): void;
     private getBaseStatBonuses;
-    protected getApplicableStatusEffects(): Set<StatusType>;
+    protected getApplicableStatusEffects(): Set<StatusType> | undefined;
     private getSkillGainMultiplier;
     private canSkillGain;
-    protected onSkillGain(skill: SkillType, mod: number): void;
+    protected onSkillGain(skill: SkillType, fromValue: number, toValue: number, mod: number): void;
     setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
     /**
      * Improve one of the core player stats
@@ -355,15 +380,17 @@ export default abstract class Human extends Entity implements IHasInsulation {
      */
     getMaxWeight(): number;
     /**
-     * Get the strength of the player without any bonuses applied (ie custom game mode or debug tools).
-     */
-    getOriginalMaxWeight(): number;
-    /**
      * Gets this human's current carried weight, scaled down to what it would be without any weight bonuses applied
      */
     getScaledWeight(): number;
+    get asCorpse(): undefined;
     get asCreature(): undefined;
+    get asDoodad(): undefined;
     get asHuman(): Human;
+    get asTileEvent(): undefined;
+    get asItem(): undefined;
+    get point(): IVector3;
+    get tile(): Tile;
     /**
      * Moves inventory items to the target island
      * This should be called before switching islands

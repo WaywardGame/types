@@ -14,5 +14,5 @@ import type { ITileContainer } from "game/tile/ITerrain";
 export interface IPickUpAllItemsCanUse extends IActionUsable {
     tileContainer: ITileContainer;
 }
-declare const _default: Action<[], import("../../Human").default, void, IPickUpAllItemsCanUse, []>;
+declare const _default: Action<[], import("../../Human").default<number>, void, IPickUpAllItemsCanUse, []>;
 export default _default;

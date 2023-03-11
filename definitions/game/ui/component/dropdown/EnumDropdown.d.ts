@@ -21,8 +21,8 @@ export default class EnumDropdown<ENUM_OBJECT, OTHER_OPTIONS extends string | ne
     get selectionName(): keyof ENUM_OBJECT | undefined;
     private shouldSort;
     private readonly excluded;
-    constructor(enumObject: ENUM_OBJECT, dictionary: Dictionary, defaultOption: SupplierOr<VALUES>, options?: SupplierOr<Iterable<IDropdownOption<never>>>);
-    constructor(enumObject: ENUM_OBJECT, dictionary: Dictionary, defaultOption: SupplierOr<VALUES | OTHER_OPTIONS>, options: SupplierOr<Iterable<IDropdownOption<OTHER_OPTIONS>>>);
+    constructor(enumObject: ENUM_OBJECT, dictionary: Dictionary | undefined, defaultOption: SupplierOr<VALUES>, options?: SupplierOr<Iterable<IDropdownOption<never>>>);
+    constructor(enumObject: ENUM_OBJECT, dictionary: Dictionary | undefined, defaultOption: SupplierOr<VALUES | OTHER_OPTIONS>, options: SupplierOr<Iterable<IDropdownOption<OTHER_OPTIONS>>>);
     setNoSort(): this;
     setExcluded(...excluded: VALUES[]): this;
     protected getTranslation(id: VALUES): import("../../../language/impl/TranslationImpl").default;

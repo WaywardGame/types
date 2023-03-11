@@ -11,13 +11,14 @@
 import type { IHasImagePath } from "game/IObject";
 import type { IGameOptionsPartial } from "game/options/IGameOptions";
 import type Translation from "language/Translation";
-import type { Random, SeededGenerator } from "utilities/random/Random";
-import { RandomInstance, RandomReference } from "utilities/random/Random";
+import { RandomInstance } from "utilities/random/IRandom";
+import type { Random } from "utilities/random/Random";
+import { RandomReference } from "utilities/random/RandomReference";
 export declare abstract class GameplayModifierInstance<ID extends number, INSTANCE_ARGS extends any[] = []> {
     readonly id: ID;
-    readonly random: Random<SeededGenerator>;
+    readonly random: Random;
     protected readonly args: INSTANCE_ARGS;
-    constructor(id: ID, random: Random<SeededGenerator>, ...args: INSTANCE_ARGS);
+    constructor(id: ID, random: Random, ...args: INSTANCE_ARGS);
     options: IGameOptionsPartial;
     setOptions(options: IGameOptionsPartial): this;
     addOptions(options: IGameOptionsPartial): this;
@@ -38,5 +39,5 @@ export default abstract class GameplayModifier<ID extends number, INSTANCE exten
     abstract instantiate(type: ID, ...args: INSTANCE_ARGS): INSTANCE | undefined;
     abstract initialize(instance: INSTANCE, ...args: INSTANCE_ARGS): INSTANCE | undefined;
     uninitialize(instance: INSTANCE): any;
-    protected getRandom(): Random<SeededGenerator>;
+    protected getRandom(): Random<import("../../../utilities/random/generators/LegacySeededGenerator").LegacySeededGenerator | import("../../../utilities/random/generators/PCGSeededGenerator").PCGSeededGenerator>;
 }

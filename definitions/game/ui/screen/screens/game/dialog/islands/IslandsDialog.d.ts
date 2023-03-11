@@ -8,40 +8,40 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Island from "game/island/Island";
-import Button from "ui/component/Button";
+import type Island from "game/island/Island";
 import Component from "ui/component/Component";
 import Input from "ui/component/Input";
 import CanvasDialog from "ui/screen/screens/game/component/CanvasDialog";
+import type { DialogId } from "ui/screen/screens/game/Dialogs";
 import type { IVector2 } from "utilities/math/IVector";
-export default class IslandsDialog extends CanvasDialog {
+import Vector2 from "utilities/math/Vector2";
+export interface IIslandDialogOptions {
+    allowRename?: boolean;
+}
+export default abstract class IslandsDialog extends CanvasDialog {
+    private readonly options;
     private hoveredIslandPosition?;
-    private selectedIslandPosition;
-    private lastSailAwayCheckPosition?;
+    protected selectedIslandPosition: Vector2;
+    protected lastSailAwayCheckPosition?: Vector2;
     readonly title: Input;
     readonly info: Component<HTMLElement>;
-    readonly sailButton: Button;
-    closeOnTravel: boolean;
-    constructor();
-    protected initializeSettingsPanel(panel: Component): void;
+    constructor(dialogId: DialogId, options: IIslandDialogOptions);
     private addMouseMoveListener;
     private removeMouseMoveListener;
+    protected onMouseMoveWhileOver(): void;
     selectIsland(x: number, y: number): void;
     protected onLoad(): Promise<void>;
-    protected sail(): void;
     protected onIslandRenamed(island: Island): void;
-    protected preMoveToIsland(): void;
-    protected onLoadedOnIsland(): void;
+    protected onPortsChanged(island: Island): void;
     protected onMouseMove(): void;
     protected onCanvasClick(): void;
     protected onAccept(): boolean;
-    protected onSubmit(): boolean;
     protected onLeft(): boolean;
     protected onRight(): boolean;
     protected onUp(): boolean;
     protected onDown(): boolean;
     private moveSelectedIsland;
-    private onChangedSelectedIsland;
+    protected onChangedSelectedIsland(animate?: boolean): void;
     protected resetViewZoom(): void;
     protected resetViewOffset(islandPosition?: IVector2): void;
     protected canHideDrawer(): boolean;
@@ -61,5 +61,4 @@ export default class IslandsDialog extends CanvasDialog {
     private getIslandOffset;
     private handleInvalidSprite;
     private getHoveredIslandPosition;
-    private canSailAway;
 }

@@ -19,7 +19,7 @@ import { TempType } from "game/temperature/ITemperature";
 import UiTranslation from "language/dictionary/UiTranslation";
 declare const _default: UseInfo<{
     equip: import("../../../../entity/IHuman").EquipType;
-    objectType: import("../../../../IGame").CreationId.Item;
+    entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
     type: import("../../../../item/IItem").ItemType;
     description: import("../../../../item/IItem").IItemDescription;

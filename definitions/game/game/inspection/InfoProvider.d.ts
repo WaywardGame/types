@@ -68,10 +68,12 @@ export interface ISerializedIcon extends IIcon {
     path: string | ISerializedImagePath;
 }
 export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProviderEvents> implements IRefreshable {
+    static multiTextParagraph: string;
     private static uniqueInitializationId;
     static create(...translations: TranslationGenerator[]): SimpleInfoProvider;
     static of(...classes: string[]): SimpleInfoProvider;
     static title(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
+    static subtitle(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
     static description(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
     static text(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
     static list(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
@@ -83,9 +85,11 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     abstract get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     abstract getClass(): string[];
     getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel | Set<InfoDisplayLevel>;
-    setDisplayLevel(...displayLevel: InfoDisplayLevel[]): this;
+    setDisplayLevel(...displayLevel: Array<InfoDisplayLevel | undefined>): this;
     getDisplayLevel(context: InfoProviderContext): Set<InfoDisplayLevel>;
     setComponent(componentClass: Class<Component>): this;
+    private componentInitializer?;
+    setComponentInitializer(initializer: (componenent: Component) => any): this;
     private icon?;
     getIcon(): IIcon | string | undefined;
     setIcon(icon?: IIcon | string): this;

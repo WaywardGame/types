@@ -44,6 +44,6 @@ export default class SortRow<S extends number> extends LabelledRow implements IR
     refresh(): this;
     toggleSortDirection(sortDirection?: SortDirection): void;
     triggerSort(): void;
-    triggerSortAsync(): Promise<import("@wayward/goodstream").default<any>>;
+    triggerSortAsync(): Promise<any[]>;
 }
 export {};

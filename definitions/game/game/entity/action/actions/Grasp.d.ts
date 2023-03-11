@@ -15,5 +15,5 @@ import type { ITileContainer } from "game/tile/ITerrain";
 export interface IGraspCanUse extends IActionUsable {
     tileContainer: ITileContainer;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, IGraspCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number>, void, IGraspCanUse, [import("../../../item/Item").default]>;
 export default _default;

@@ -13,11 +13,11 @@ import type { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import CorpseInspection from "game/inspection/inspections/CorpseInspection";
 import ListInspection from "game/inspection/inspections/ListInspection";
+import type Tile from "game/tile/Tile";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import Text from "ui/component/Text";
-import type { IVector3 } from "utilities/math/IVector";
 export default class CorpsesInspection extends ListInspection<CorpseInspection> {
-    static getFromTile(position: IVector3): never[] | CorpsesInspection;
+    static getFromTile(tile: Tile): never[] | CorpsesInspection;
     constructor(...corpseInspections: CorpseInspection[]);
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     getDefaultDisplayLevel(): InfoDisplayLevel;

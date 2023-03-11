@@ -13,10 +13,10 @@ import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type Item from "game/item/Item";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 export interface IStartFireCanUse extends IActionUsable {
-    tile: ITile;
+    tile: Tile;
     kindlingNeeded: boolean;
     kindlingFuelNeeded: boolean;
     tinderNeeded: boolean;
@@ -27,5 +27,5 @@ export interface IStartFireCanUse extends IActionUsable {
     fuel?: Item;
     tileEvent?: TileEvent;
 }
-declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default, void, IStartFireCanUse, [Item, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default<number>, void, IStartFireCanUse, [Item, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?]>;
 export default _default;

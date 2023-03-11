@@ -10,6 +10,7 @@
  */
 import type * as ssh2 from "ssh2";
 import type { IFileSystem } from "@hosts/shared/ipc/fileSystem";
+import type { Game } from "game/Game";
 export interface ISshServerOptions {
     ssh2: typeof ssh2;
     crypto: any;
@@ -21,4 +22,4 @@ export interface ISshServerOptions {
     username: string;
     password?: string;
 }
-export declare function start(options: ISshServerOptions): Promise<void>;
+export declare function start(game: Game, options: ISshServerOptions): Promise<void>;

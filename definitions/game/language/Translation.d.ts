@@ -22,7 +22,7 @@ import type UiTranslation from "language/dictionary/UiTranslation";
 import type { DictionaryEntryEnums } from "language/DictionaryMap";
 import TranslationImpl from "language/impl/TranslationImpl";
 import type { ISerializedTranslation } from "language/ITranslation";
-import { formatList as formatListTranslation } from "language/segment/FormatListSegment";
+import { formatListTranslation } from "language/segment/FormatListSegment";
 import ITranslationSorter from "language/utility/TranslationSorter";
 import type { IStringSection } from "utilities/string/Interpolator";
 type Translation = TranslationImpl;

@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
-import type Entity from "game/entity/Entity";
+import type EntityWithStats from "game/entity/EntityWithStats";
 import type { StatusType } from "game/entity/IEntity";
 import { StatusEffectChangeReason } from "game/entity/IEntity";
 import { MessageType } from "game/entity/player/IMessageManager";
@@ -31,7 +31,7 @@ export interface IStatusEffectIconDescription {
      */
     frames?: number;
 }
-export type StatusEffectClass = Class<StatusEffect, [StatusType, Entity]> & IModdable;
+export type StatusEffectClass = Class<StatusEffect, [StatusType, EntityWithStats]> & IModdable;
 export declare enum StatusEffectBadness {
     Neutral = 0,
     Bad = 1,
@@ -64,8 +64,8 @@ export default abstract class StatusEffect extends EventEmitter.Host<IStatusEffe
     static update(effect: StatusEffect): void;
     private registered;
     private readonly _entity;
-    constructor(type: StatusType, entity?: Entity);
-    protected get entity(): Entity;
+    constructor(type: StatusType, entity?: EntityWithStats);
+    protected get entity(): EntityWithStats;
     getOptions(): IGameOptionsStatusEffect;
     register(): void;
     /**

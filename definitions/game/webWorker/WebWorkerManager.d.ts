@@ -8,14 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Game } from "game/Game";
 import { WebWorkerClient } from "webWorker/WebWorkerClient";
 import type { HostWebWorkerMessage } from "webWorker/WebWorkerMessages";
 /**
  * Manager WebWorker interactions between the parent (host) & webworker's (clients)
  */
-declare class WebWorkerManager {
+export declare class WebWorkerManager {
+    private readonly game;
     readonly workers: Map<string, WebWorkerClient>;
     multiplayerDataCallback: ((data: ArrayBuffer) => void) | undefined;
+    constructor(game: Game);
     get workerId(): string | undefined;
     /**
      * Called from a webworker when it's ready
@@ -36,5 +39,3 @@ declare class WebWorkerManager {
     private throwIfHost;
     private throwIfWorker;
 }
-export declare const webWorkerManager: WebWorkerManager;
-export {};

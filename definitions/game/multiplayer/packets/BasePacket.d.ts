@@ -19,6 +19,7 @@ import type Player from "game/entity/player/Player";
 import type Island from "game/island/Island";
 import type { IContainer } from "game/item/IItem";
 import type Item from "game/item/Item";
+import type Tile from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 import type { IConnection } from "multiplayer/networking/IConnection";
 import type { PacketType } from "multiplayer/packets/IPacket";
@@ -80,7 +81,7 @@ export default abstract class BasePacket {
     protected writeNPC(value: NPC): void;
     protected readCorpse(): Corpse | undefined;
     protected writeCorpse(value: Corpse): void;
-    protected readEntity(): Player | Creature | NPC | undefined;
+    protected readEntity(): Player | Creature | NPC | Doodad | TileEvent | Corpse | Item | undefined;
     protected writeEntity(value: Entity): undefined;
     protected writeHuman(value: Human): void;
     protected readHuman(): Player | NPC | undefined;
@@ -96,6 +97,10 @@ export default abstract class BasePacket {
     protected writeOptionalItems(value: Array<Item | undefined>): void;
     protected readTileEvent(): TileEvent | undefined;
     protected writeTileEvent(value: TileEvent): void;
+    protected readTile(): Tile;
+    protected writeTile(value: Tile): void;
+    protected readTileArray(): Tile[];
+    protected writeTileArray(value: Tile[]): void;
     protected readObject(): any;
     protected writeObject(value: any): void;
     protected readVector2Array(): IVector2[];

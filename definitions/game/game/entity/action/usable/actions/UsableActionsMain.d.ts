@@ -34,10 +34,11 @@ export declare enum UsableActionSet {
     ItemMoveMenus = 15,
     Doodads = 16,
     Creatures = 17,
-    UseNPC = 18,
-    Rename = 19,
-    Protect = 20,
-    Main = 21
+    Commands = 18,
+    UseNPC = 19,
+    Rename = 20,
+    Protect = 21,
+    Main = 22
 }
 export declare const usableActionSets: {
     0: UsableActionGenerator<[]>;
@@ -58,8 +59,9 @@ export declare const usableActionSets: {
     15: UsableActionGenerator<[]>;
     16: UsableActionGenerator<[]>;
     17: UsableActionGenerator<[]>;
-    18: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/UsableActionsUseNPC").IUseNPCAction, import("game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
-    19: UsableActionGenerator<[]>;
+    18: UsableActionGenerator<[isCommandMenu?: true | undefined]>;
+    19: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/UsableActionsUseNPC").IUseNPCAction, import("game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
     20: UsableActionGenerator<[]>;
     21: UsableActionGenerator<[]>;
+    22: UsableActionGenerator<[]>;
 };

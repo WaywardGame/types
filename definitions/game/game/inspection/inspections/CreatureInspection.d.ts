@@ -13,14 +13,14 @@ import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import EntityInspection from "game/inspection/inspections/EntityInspection";
+import type Tile from "game/tile/Tile";
 import type { TranslationGenerator } from "ui/component/IComponent";
-import type { IVector3 } from "utilities/math/IVector";
 export default class CreatureInspection extends EntityInspection<Creature> {
-    static getFromTile(position: IVector3): never[] | CreatureInspection;
+    static getFromTile(tile: Tile): never[] | CreatureInspection;
     static handles(type: InspectType, creature: unknown): boolean;
     constructor(creature: Creature);
     getId(): string;
     getBorder(): "var(--color-tamed)" | "var(--color-aberrant)" | undefined;
     get(context: InfoProviderContext): ArrayOr<InfoProvider | TranslationGenerator>;
-    private getDescription;
+    private getCreatureCombatDetails;
 }

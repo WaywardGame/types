@@ -17,18 +17,8 @@ import type WorldLayer from "renderer/world/WorldLayer";
 import type WorldRenderer from "renderer/world/WorldRenderer";
 import type { IBound3 } from "utilities/math/Bound3";
 import type RendererContext from "renderer/context/RendererContext";
-export interface IWorldLayerRendererEvents {
-    /**
-     * Called when rendering the world
-     * @returns Flags indicating what layers to render
-     */
-    getRenderFlags(): RenderLayerFlag;
-    /**
-     * Called when tile layers are created
-     * Custom tile layers can be added to it
-     */
-    createTileLayers(context: RendererContext, width: number, height: number, positionBuffer: WebGLBuffer): void;
-}
+import type ExploredMapClientData from "save/clientStore/clientData/ExploredMap";
+import type { IWorldLayerRendererEvents } from "renderer/world/IWorldLayerRenderer";
 export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRendererEvents> {
     readonly context: RendererContext;
     protected readonly worldRenderer: WorldRenderer;
@@ -38,6 +28,7 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     texLightBlock: WebGLTexture;
     texLightLevel: WebGLTexture;
     texExplored: WebGLTexture;
+    private exploredMap;
     private dirty;
     private dirtyTiles;
     private dirtyDoodads;
@@ -54,7 +45,7 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     delete(): void;
     private deleteTileLayers;
     reset(): void;
-    setWorldLayer(worldLayer: WorldLayer): void;
+    setWorldLayer(worldLayer: WorldLayer, exploredMapClientData: ExploredMapClientData): void;
     addTileLayer(tileLayer: TileLayer): void;
     updateAll(): void;
     updateDoodad(x: number, y: number, flushImmediate: boolean, { doodadDescription, doodadType, doodadInfo, doodadVariationX, doodadVariationY, terrainMasks }: IDoodadUpdate): void;
@@ -70,8 +61,9 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     /**
      * Ensures tiles in the view are rendered/flushed
      * Tiles & doodads are flushed the first time they are visible within the fov
+     * @returns True when there's more rendering to be done
      */
-    ensureRendered({ min, max }: IBound3): void;
+    ensureRendered({ min, max }: IBound3): boolean;
     updateTile(x: number, y: number, flushImmediate?: boolean, debug?: boolean): void;
     private computeDoodad;
     private computeTilled;

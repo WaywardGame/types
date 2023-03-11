@@ -21,7 +21,7 @@ export default class DoodadRequirement extends RecipeRequirement<RecipeRequireme
      * Sets the "best" doodad to be used for this requirement. Used to display the efficacy of an actual input doodad.
      */
     setBestDoodad(doodad: Doodad): this;
-    getUsable(api: Crafter): Set<Doodad>;
+    getUsable(api: Crafter): Set<any>;
     isMet(api: Crafter): boolean;
     private getQualityBonus;
     private getBestPossibleQualityBonus;

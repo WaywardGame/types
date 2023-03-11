@@ -12,10 +12,10 @@ import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type Corpse from "game/entity/creature/corpse/Corpse";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export interface IButcherCanUse extends IActionUsable {
-    tile: ITile;
+    tile: Tile;
     corpses: Corpse[];
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, IButcherCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number>, void, IButcherCanUse, [import("../../../item/Item").default]>;
 export default _default;

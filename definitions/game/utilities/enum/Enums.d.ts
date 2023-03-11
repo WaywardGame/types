@@ -71,6 +71,7 @@ declare module Enums {
      */
     function entries<T>(enumObject: T): readonly [keyof T, Exclude<T[keyof T], AnyFunction<any>>][];
     function entryStream<T>(enumObject: T): import("@wayward/goodstream").default<[keyof T, Exclude<T[keyof T], AnyFunction<any>>]>;
+    function lerp<T>(enumObject: T, t: number): Exclude<T[keyof T], AnyFunction<any>>;
     /**
      * Returns whether the given number is a valid entry in an enum.
      * @param enumObject The enum object to check for the entry.

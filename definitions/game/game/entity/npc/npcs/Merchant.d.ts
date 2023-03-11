@@ -9,9 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "game/entity/action/IAction";
+import type Human from "game/entity/Human";
 import { AiType } from "game/entity/IEntity";
-import type { ICustomizations } from "game/entity/IHuman";
 import { EquipType } from "game/entity/IHuman";
+import type { INPCConstructorOptions } from "game/entity/npc/INPC";
 import NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
 import { ItemType } from "game/item/IItem";
@@ -22,40 +23,25 @@ export interface IMerchantBuyPrice {
     total: number;
 }
 export default class MerchantNPC extends NPC {
-    constructor(id?: number, islandId?: `${number},${number}`, x?: number, y?: number, z?: number);
+    credit: Record<string, number>;
+    constructor(options?: INPCConstructorOptions);
+    getCustomerCredit(customer: Human): number;
+    modifyCustomerCredit(customer: Human, creditChange: number): number;
     getActions(): ActionType[] | undefined;
     getSellPrice(player: Player, item: Item): number | undefined;
     getBuyPrice(player: Player, item: Item): IMerchantBuyPrice | undefined;
+    /**
+     * Closes container dialogs
+     */
+    closeContainerDialogs(): void;
     protected getReputationChangeOnDeath(): number;
     protected getDefaultName(): import("../../../../language/impl/TranslationImpl").default;
     protected initializeStats(): void;
-    protected getDefaultCustomization(): ICustomizations;
     protected getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;
     protected getDefaultInventory(): Array<Item | ItemType>;
     protected getDefaultAiType(): AiType;
     private canSpawnItem;
     protected runActions(): boolean;
-    /**
-     * Stop stat timers when they would kill
-     */
-    private capStatTimers;
-    /**
-     * Equip better things when available
-     */
-    private processEquipment;
-    /**
-     * Try to do something when health is below 20%
-     */
-    private processHealth;
-    /**
-     * Try to do something when hunger is below 20%
-     */
-    private processHunger;
-    /**
-     * Try to do something when thirst is below 20%
-     */
-    private processThirst;
     get asMerchant(): MerchantNPC;
-    private calculateWeaponEquipItemScore;
-    private calculateDefenseEquipItemScore;
+    get asShipper(): undefined;
 }

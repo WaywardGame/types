@@ -20,5 +20,5 @@ export interface ICraftCanUse extends IActionUsable {
     baseComponent: Item | undefined;
     canBurn: boolean;
 }
-declare const _default: Action<[ActionArgument.ItemType, [ActionArgument.ItemArrayNearby, ActionArgument.Undefined], [ActionArgument.ItemArrayNearby, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default, void, ICraftCanUse, [import("../../../item/IItem").ItemType, (Item[] | undefined)?, (Item[] | undefined)?, (Item | undefined)?, (boolean | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemType, [ActionArgument.ItemArrayNearby, ActionArgument.Undefined], [ActionArgument.ItemArrayNearby, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default<number>, void, ICraftCanUse, [import("../../../item/IItem").ItemType, (Item[] | undefined)?, (Item[] | undefined)?, (Item | undefined)?, (boolean | undefined)?]>;
 export default _default;

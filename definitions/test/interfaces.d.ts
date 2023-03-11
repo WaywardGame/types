@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { GameMode } from "@wayward/game/game/options/IGameOptions";
 export interface ICommonGameOptions {
     gameMode: GameMode;
     seed?: string | number;
@@ -29,11 +30,6 @@ export interface IJoinServerOptions {
     joinProgrammatically: boolean;
     enableAllMilestoneModifiers?: boolean;
     multiplayerIdentifier?: string;
-}
-export declare enum GameMode {
-    Hardcore = "Hardcore Mode",
-    Casual = "Casual Mode",
-    Challenge = "Challenge Mode"
 }
 export declare enum GamePlayMode {
     Singleplayer = "Singleplayer",

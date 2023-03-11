@@ -8,13 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Doodad from "game/doodad/Doodad";
 import type { ActionArgument, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
+import type Corpse from "game/entity/creature/corpse/Corpse";
 import type Creature from "game/entity/creature/Creature";
 import type Entity from "game/entity/Entity";
 import type Human from "game/entity/Human";
 import type { EntityType } from "game/entity/IEntity";
 import type NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
+import type Item from "game/item/Item";
+import type TileEvent from "game/tile/TileEvent";
 import type { Direction } from "utilities/math/Direction";
 import type { IVector3 } from "utilities/math/IVector";
 export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> implements IActionDescription<A, E, R, CU, AV> {
@@ -98,10 +102,14 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     clone(): Action<A, E, R, CU, AV>;
 }
 type EntityTypeMap<E extends EntityType> = {
+    [EntityType.Corpse]: Corpse;
     [EntityType.Creature]: Creature;
+    [EntityType.Doodad]: Doodad;
+    [EntityType.Human]: Human;
+    [EntityType.Item]: Item;
     [EntityType.NPC]: NPC;
     [EntityType.Player]: Player;
-    [EntityType.Human]: Human;
+    [EntityType.TileEvent]: TileEvent;
 }[E];
 type EntityTypeTupleType<E extends EntityType[]> = E extends [EntityType] ? EntityTypeMap<E[0]> : E extends [EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> : E extends [EntityType, EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> | EntityTypeMap<E[2]> : never;
 export {};

@@ -17,24 +17,21 @@ import type Inspection from "game/inspection/Inspection";
 import InspectionsHandler from "game/inspection/InspectionsHandler";
 import type { IContainer } from "game/item/IItem";
 import type Item from "game/item/Item";
+import type Tile from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 import type HashSet from "utilities/collection/set/HashSet";
-import type { IVector3 } from "utilities/math/IVector";
-import Vector3 from "utilities/math/Vector3";
 export interface ITilePositionInspectionEvents {
     updatedInspections(type: InspectType, newInspections: HashSet<Inspection<any>>, oldInspections?: HashSet<Inspection<any>>): any;
 }
 export default class TilePositionInspection extends InspectionsHandler {
-    private readonly position;
-    static create(position: IVector3, context: InfoProviderContext): TilePositionInspection;
-    private get tile();
-    constructor(position: Vector3, context: InfoProviderContext);
+    private readonly tile;
+    constructor(tile: Tile, context: InfoProviderContext);
     protected onEntityMove(entity: Entity): void;
     protected onEntitySpawnOrRemove(_: any, entity: Entity): void;
-    protected onTileEventMove(_: any, tileEvent: TileEvent): void;
+    protected onTileEventMove(tileEvent: TileEvent): void;
     protected onTileEventCreate(_: any, tileEvent: TileEvent): void;
     protected onItemCreate(_: any, item: Item): void;
-    protected onItemMove(_: any, _item: Item, containerFrom: IContainer | undefined, _containerFromPosition: Vector3 | undefined, containerTo: IContainer): void;
+    protected onItemMove(_: any, _item: Item, containerFrom: IContainer | undefined, _containerFromTile: Tile | undefined, containerTo: IContainer): void;
     protected onCorpseCreate(_: any, corpse: Corpse): void;
     protected onDoodadCreate(_: any, doodad: Doodad): void;
     private updateInspectionsForEntity;

@@ -15,5 +15,5 @@ import type Item from "game/item/Item";
 export interface IRefineCanUse extends IActionUsable {
     refineTarget: Item;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default, void, IRefineCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default<number>, void, IRefineCanUse, [Item, (Item | undefined)?]>;
 export default _default;

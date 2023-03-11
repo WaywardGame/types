@@ -8,9 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Game } from "game/Game";
 import ActionPacket from "multiplayer/packets/shared/ActionPacket";
 import type { IReplayLogEntry } from "replay/IReplayLogEntry";
 export default class ReplayManager {
+    private readonly game;
     debugMode: boolean;
     private recording;
     private readonly gameVersion;
@@ -18,6 +20,7 @@ export default class ReplayManager {
     private readonly playbackState;
     private _recordingStartTime;
     private _skipTicks;
+    constructor(game: Game);
     isRecording(): boolean;
     isReplayMode(): boolean;
     isPlaying(): boolean;

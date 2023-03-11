@@ -10,12 +10,12 @@
  */
 import type Doodad from "game/doodad/Doodad";
 import { ActionType } from "game/entity/action/IAction";
-import { CreationId } from "game/IGame";
+import { EntityType } from "game/entity/IEntity";
 import UseInfo from "game/inspection/infoProviders/UseInfo";
 import type Item from "game/item/Item";
 declare const _default: UseInfo<{
     lightSource: number;
-    objectType: CreationId.Item;
+    entityType: EntityType.Item;
     value?: Item | undefined;
     type: import("game/item/IItem").ItemType;
     description: import("game/item/IItem").IItemDescription;
@@ -25,7 +25,7 @@ declare const _default: UseInfo<{
     details: Set<symbol>;
 } | {
     lightSource: number;
-    objectType: CreationId.Doodad;
+    entityType: EntityType.Doodad;
     value?: Doodad | undefined;
     type: import("../../../doodad/IDoodad").DoodadType;
     description: import("../../../doodad/IDoodad").IDoodadDescription;

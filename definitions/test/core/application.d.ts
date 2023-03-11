@@ -12,7 +12,7 @@ import type { Load } from "../../game/game/meta/Loading";
 import type { Prompt } from "../../game/game/meta/prompt/IPrompt";
 import type { ScreenId } from "../../game/ui/screen/IScreen";
 import type { MenuId } from "../../game/ui/screen/screens/menu/component/IMenu";
-import type { Random, SeededGenerator } from "../../game/utilities/random/Random";
+import type { Random } from "../../game/utilities/random/Random";
 import type { ITest } from "../util/mochaNUnitReporter";
 import type { IAppPaths } from "../interfaces";
 import type { Apps } from "./applicationManager";
@@ -20,6 +20,7 @@ import ApplicationInteractions from "./applicationInteractions";
 export interface IApplicationOptions {
     additionalArgs?: string[];
     mods?: string[];
+    nodeJsMode?: boolean;
 }
 export interface ITestState {
     seed: number;
@@ -51,7 +52,7 @@ export default class Application extends ApplicationInteractions {
     private videoPath;
     private videoTimerId;
     private readonly videoFrames;
-    constructor(mochaTestContext: Mocha.Context | ITest, appId: string, paths: IAppPaths, random: Random<SeededGenerator>, options?: IApplicationOptions);
+    constructor(mochaTestContext: Mocha.Context | ITest, appId: string, paths: IAppPaths, random: Random, options?: IApplicationOptions);
     get waywardLogFilePath(): string;
     start(expectedInitialScreen?: "title" | "mp_gameplay_modifiers"): Promise<void>;
     stop(shouldQuitGame?: boolean): Promise<string[]>;

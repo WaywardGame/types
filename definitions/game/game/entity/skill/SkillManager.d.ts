@@ -16,7 +16,7 @@ export interface ISkillConfiguration {
     id: GetterOfOr<string | number>;
     getSkillGainMultiplier?(skill: SkillType): number;
     canSkillGain?(skill: SkillType): boolean;
-    onSkillGain?(skill: SkillType, mod: number): any;
+    onSkillGain?(skill: SkillType, fromValue: number, toValue: number, mod: number): any;
 }
 export interface ISkillEvents {
     /**

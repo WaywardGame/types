@@ -11,7 +11,7 @@
 import EventEmitter from "event/EventEmitter";
 import type { IStat } from "game/entity/IStats";
 import type Player from "game/entity/player/Player";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import type Component from "ui/component/Component";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import type { IVector2 } from "utilities/math/IVector";
@@ -21,7 +21,7 @@ export interface IWalkToTileHandlerEvents {
      * @param penalty The current penalty of the tile
      * @param tile The tile to get the movement penalty of
      */
-    getTilePenalty(penalty: number, tile: ITile): number;
+    getTilePenalty(penalty: number, tile: Tile): number;
 }
 export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHandlerEvents> {
     private previewTarget;
@@ -51,7 +51,7 @@ export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHand
     protected onHoldMoveToTilePreview(api: IBindHandlerApi): boolean;
     protected onReleaseMoveToTilePreview(): void;
     protected onStatChanged(player: Player, stat: IStat): void;
-    protected onPostMove(player: Player, fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
+    protected onPostMove(player: Player, fromTile: Tile, toTile: Tile): void;
     protected onWalkPathChange(player: Player, walkPath: IVector2[] | undefined): void;
     private resetToMouse;
     /**

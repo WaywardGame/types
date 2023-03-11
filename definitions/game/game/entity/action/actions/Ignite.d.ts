@@ -15,5 +15,5 @@ import type { ItemType } from "game/item/IItem";
 export interface IIgniteCanUse extends IActionUsable {
     lit: ItemType;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, IIgniteCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number>, void, IIgniteCanUse, [import("../../../item/Item").default]>;
 export default _default;

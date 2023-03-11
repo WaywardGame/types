@@ -43,6 +43,7 @@ export declare const promptGameNoHealingRequired: import("game/meta/prompt/IProm
 export declare const promptGameNoSaveOnDeath: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptGamePickUpStillWithWater: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameReleaseCreature: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[creatureName: Text]>;
+export declare const promptGameUncage: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[creatureName: Text]>;
 export declare const promptGameRenameGeneric: import("game/meta/prompt/IPrompt").IPromptInputDescription<[placeholder?: string | TranslationImpl | undefined, name?: string | ISerializedTranslation | undefined]>;
 export declare const promptGameRenameCreature: import("game/meta/prompt/IPrompt").IPromptInputDescription<[baseName?: TranslationImpl | undefined, placeholder?: TranslationImpl | undefined, name?: string | ISerializedTranslation | undefined]>;
 export declare const promptGameRenameDoodad: import("game/meta/prompt/IPrompt").IPromptInputDescription<[baseName?: TranslationImpl | undefined, placeholder?: TranslationImpl | undefined, name?: string | ISerializedTranslation | undefined]>;
@@ -51,6 +52,7 @@ export declare const promptGameReturnToTitleScreen: import("game/meta/prompt/IPr
 export declare const promptGameReturnToTitleScreenChallenge: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameSailAwayEnd: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameSailAwayReturnable: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
+export declare const promptGameShipToIslandPayment: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[npcName: Text, itemName?: Text | undefined]>;
 export declare const promptGameSaveFailure: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptGameIslandTravelConfirmation: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[isGhost: boolean]>;
 export declare const promptGameWellConvert: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[waterName: Text]>;

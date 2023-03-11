@@ -8,19 +8,19 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
+import type { IEventEmitter } from "event/EventEmitter";
 import type { ICorpseDescription } from "game/entity/creature/corpse/ICorpse";
 import { CreatureType } from "game/entity/creature/ICreature";
-import type { CreationId } from "game/IGame";
+import Entity from "game/entity/Entity";
+import type { IEntityConstructorOptions, IEntityEvents } from "game/entity/IEntity";
+import { EntityType } from "game/entity/IEntity";
+import { TileUpdateType } from "game/IGame";
 import type { IObject } from "game/IObject";
-import type { IslandId } from "game/island/IIsland";
 import { ItemType } from "game/item/IItem";
-import type { IReferenceable } from "game/reference/IReferenceManager";
-import type { ITile } from "game/tile/ITerrain";
-import type { ISerializedTranslation } from "language/ITranslation";
+import type Tile from "game/tile/Tile";
 import type Translation from "language/Translation";
 import type { IVector3 } from "utilities/math/IVector";
-export interface ICorpseEvents {
+export interface ICorpseEvents extends IEntityEvents {
     /**
      * Called when the entity is created in the game
      * Also called for players that "rejoin" the game
@@ -34,26 +34,30 @@ export interface ICorpseEvents {
 /**
  * TODO: extends Entity?
  */
-export default class Corpse extends EventEmitter.Host<ICorpseEvents> implements IObject<CreatureType>, IVector3, IReferenceable {
+export default class Corpse extends Entity<CreatureType> implements IObject<CreatureType> {
     static is(value: any): value is Corpse;
-    readonly objectType: CreationId.Corpse;
+    get entityType(): EntityType.Corpse;
+    get tileUpdateType(): TileUpdateType;
+    readonly event: IEventEmitter<this, ICorpseEvents>;
     aberrant?: boolean | undefined;
     decay?: number | undefined;
-    startingDecay?: number;
-    id: number;
     qualityBonus?: number | undefined;
-    referenceId?: number;
-    renamed?: string | ISerializedTranslation | undefined;
-    step?: number | undefined;
     respawned?: number;
-    type: CreatureType;
-    x: number;
-    y: number;
-    z: number;
-    islandId: IslandId;
+    startingDecay?: number;
+    step?: number | undefined;
     private _description;
-    constructor(type?: CreatureType, islandId?: `${number},${number}`, x?: number, y?: number, z?: number, decay?: number);
-    get island(): import("../../../island/Island").default;
+    constructor(entityOptions?: IEntityConstructorOptions<CreatureType>, decay?: number);
+    get asCorpse(): Corpse | undefined;
+    get asCreature(): undefined;
+    get asDoodad(): undefined;
+    get asHuman(): undefined;
+    get asLocalPlayer(): undefined;
+    get asNPC(): undefined;
+    get asPlayer(): undefined;
+    get asTileEvent(): undefined;
+    get asItem(): undefined;
+    get point(): IVector3;
+    get tile(): Tile;
     toString(): string;
     /**
      * @param article Whether to include an article for the name of the creature. Uses the article rules on the language. Defaults to `true`.
@@ -66,10 +70,10 @@ export default class Corpse extends EventEmitter.Host<ICorpseEvents> implements 
      */
     getName(article?: false | "definite" | "indefinite", count?: number): Translation;
     description(): ICorpseDescription | undefined;
-    getTile(): ITile;
     isValid(): boolean;
     getDecayAtStart(): number;
-    addToTile(tile: ITile): void;
+    addToTile(tile: Tile): void;
+    removeFromTile(updateTile: boolean): void;
     update(): void;
     getResources(clientSide?: boolean): ItemType[];
     protected onCreated(): void;

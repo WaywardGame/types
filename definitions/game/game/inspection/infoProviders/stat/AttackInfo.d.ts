@@ -13,7 +13,7 @@ import { InfoProvider } from "game/inspection/InfoProvider";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 export default class AttackInfo extends InfoProvider {
     private readonly human?;
-    constructor(human?: Human | undefined);
+    constructor(human?: Human<number> | undefined);
     getClass(): string[];
     get(): (import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue)[];
     private getTactics;

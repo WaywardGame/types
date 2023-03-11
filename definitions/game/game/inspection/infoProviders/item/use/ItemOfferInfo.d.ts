@@ -12,7 +12,7 @@ import { ActionType } from "game/entity/action/IAction";
 import UseInfo from "game/inspection/infoProviders/UseInfo";
 import type Item from "game/item/Item";
 declare const _default: UseInfo<{
-    objectType: import("../../../../IGame").CreationId.Item;
+    entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
     type: import("../../../../item/IItem").ItemType;
     description: import("../../../../item/IItem").IItemDescription;

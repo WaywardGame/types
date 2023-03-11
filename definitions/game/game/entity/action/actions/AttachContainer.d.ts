@@ -15,5 +15,5 @@ import { ActionArgument } from "game/entity/action/IAction";
 export interface IAttachContainerCanUse extends IActionUsable {
     doodad: Doodad;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default, void, IAttachContainerCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<number>, void, IAttachContainerCanUse, [import("../../../item/Item").default]>;
 export default _default;

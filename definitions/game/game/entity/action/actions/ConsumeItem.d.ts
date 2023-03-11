@@ -15,5 +15,5 @@ import type { IItemDescription } from "game/item/IItem";
 export interface IConsumeItemCanUse extends IActionUsable {
     description: IItemDescription;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default, void, IConsumeItemCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<number>, void, IConsumeItemCanUse, [import("../../../item/Item").default]>;
 export default _default;

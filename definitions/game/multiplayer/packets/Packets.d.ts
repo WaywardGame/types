@@ -15,4 +15,4 @@ import Registrar from "utilities/Registrar";
 export interface IPacketClass extends IRegistrarItem {
     new (connection?: IConnection): IPacket;
 }
-export declare const registrar: Registrar<IPacketClass>;
+export declare const packetRegistrar: Registrar<IPacketClass>;

@@ -12,8 +12,10 @@ import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type Item from "game/item/Item";
+import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
 export interface IAlterCanUse extends IActionUsable {
     alterationTarget: Item;
+    targetMagic: MagicalPropertyManager;
 }
-declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, IAlterCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number>, void, IAlterCanUse, [Item, (Item | undefined)?]>;
 export default _default;

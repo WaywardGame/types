@@ -11,7 +11,7 @@
 import type Doodad from "game/doodad/Doodad";
 import type Item from "game/item/Item";
 import type Crafter from "game/item/recipe/Crafter";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export declare enum RecipeRequirementType {
     Item = 0,
     Tool = 1,
@@ -22,7 +22,7 @@ export interface RecipeInputTypeMap {
     [RecipeRequirementType.Item]: Item;
     [RecipeRequirementType.Tool]: Item;
     [RecipeRequirementType.Doodad]: Doodad;
-    [RecipeRequirementType.Fire]: ITile;
+    [RecipeRequirementType.Fire]: Tile;
 }
 export type RecipeInputType<R extends RecipeRequirementType = RecipeRequirementType> = RecipeInputTypeMap[R];
 export interface IRecipeInputUseStrategy<R extends RecipeRequirementType> {

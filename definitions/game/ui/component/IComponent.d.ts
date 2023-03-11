@@ -86,24 +86,6 @@ export type TranslationData = IBaseTranslationData | (Partial<IBaseTranslationDa
     entry: UiTranslation;
 });
 export type TextOrTranslationData = string | UiTranslation | TranslationData;
-/**
- * @deprecated
- */
-export declare enum TooltipLocation {
-    AboveLeft = 0,
-    AboveMiddle = 1,
-    AboveRight = 2,
-    TopLeft = 3,
-    TopRight = 4,
-    CenterLeft = 5,
-    CenterRight = 6,
-    BottomLeft = 7,
-    BottomRight = 8,
-    BeneathLeft = 9,
-    BeneathMiddle = 10,
-    BeneathRight = 11,
-    Mouse = 12
-}
 export interface IDisableable {
     disabled: boolean;
     setDisabled(disabled: boolean): this;

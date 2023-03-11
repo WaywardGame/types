@@ -12,6 +12,7 @@ import type { SfxType } from "audio/IAudio";
 import type { BiomeType } from "game/biome/IBiome";
 import type { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
 import { ActionType } from "game/entity/action/IAction";
+import type Creature from "game/entity/creature/Creature";
 import type { CreatureType, TileGroup } from "game/entity/creature/ICreature";
 import type { DamageType, Defense, MoveType, StatusType } from "game/entity/IEntity";
 import type { Delay, EquipType, SkillType } from "game/entity/IHuman";
@@ -28,7 +29,9 @@ import type { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import type { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
 import type { TerrainType } from "game/tile/ITerrain";
 import type { TileEventType } from "game/tile/ITileEvent";
+import type Tile from "game/tile/Tile";
 import type Message from "language/dictionary/Message";
+import type TranslationImpl from "language/impl/TranslationImpl";
 import type { IModdable } from "mod/ModRegistry";
 import type { IRGB } from "utilities/Color";
 import type { IVector3 } from "utilities/math/IVector";
@@ -85,9 +88,14 @@ export interface IItemDisassembly {
     minDur: number;
     maxDur: number;
     weight: number;
-    magic: MagicalPropertyManager;
+    magic: MagicalPropertyManager | undefined;
     disassembly: Item[];
     tradedFrom: string[] | undefined;
+}
+export declare enum ItemDamageResult {
+    NoDamage = 0,
+    Damaged = 1,
+    DamagedAndRemoved = 2
 }
 export interface IItemDescription extends IObjectDescription, IModdable, ITemperatureDescription {
     durability?: number;
@@ -148,6 +156,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     dismantle?: IDismantleDescription;
     doodadContainer?: DoodadType;
     repairable?: boolean;
+    subTypes?: ItemTypeExtra[];
     /**
      * Set to false if you do not want the item to be reinforcable. Items with a durability property will be reinforcable by default.
      */
@@ -253,16 +262,27 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      */
     reducedStoredItemsWeight?: number;
     /**
-     * The item type to display instead of the describe item type
+     * The amount of civilization score to give when placing item in a bookcase.
+     */
+    civilizationContainerScore?: number;
+    /**
+     * The item name to display instead of the described item name
+     */
+    displayNameArgs?: (item: Item) => TranslationImpl[] | undefined;
+    /**
+     * The item type to display instead of the described item type
      */
     displayItem?: SupplierOr<DisplayableItemType | undefined, [Item]>;
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
+    onContainerItemAdd?(container: Item & IContainer, item: Item): void;
+    onContainerItemRemove?(container: Item & IContainer, item: Item): void;
 }
 export type ConsumeItemStatsTuple = [health: number, stamina: number, hunger: number, thirst: number];
 export interface IItemOnUse {
     [ActionType.Apply]?: ConsumeItemStatsTuple;
     [ActionType.Build]?: IItemBuild;
+    [ActionType.CageCreature]?: ItemType;
     [ActionType.Cure]?: ConsumeItemStatsTuple;
     [ActionType.DrinkItem]?: ConsumeItemStatsTuple;
     [ActionType.Eat]?: ConsumeItemStatsTuple;
@@ -275,6 +295,8 @@ export interface IItemOnUse {
     [ActionType.SetDown]?: TerrainType;
     [ActionType.SmotherFire]?: TerrainType;
     [ActionType.StokeFire]?: number;
+    [ActionType.Summon]?: ISummon;
+    [ActionType.Uncage]?: ItemType;
 }
 export interface IItemBuild {
     /**
@@ -289,6 +311,16 @@ export interface IItemBuild {
      * When defined, allows the build to work only on these tile types
      */
     allowedTileTypes?: Set<TerrainType>;
+}
+export interface ISummon {
+    /**
+     * Creature type to summon.
+     */
+    type: CreatureType;
+    /**
+     * Set to true if it should summon an aberrant version of the creature.
+     */
+    aberrant?: boolean;
 }
 /**
  * Describes a vehicle
@@ -396,10 +428,10 @@ export interface IItemReturn {
     whenCrafted?: boolean;
 }
 export interface IMoveToTileOptions {
-    fromPoint?: IVector3;
-    fromPointApplyPlayerOffset?: boolean;
-    toPoint: IVector3;
-    toPointApplyPlayerOffset?: boolean;
+    fromTile?: Tile;
+    fromTileApplyPlayerOffset?: boolean;
+    toTile: Tile;
+    toTileApplyPlayerOffset?: boolean;
     toContainer?: IContainer;
     toContainerOptions?: IAddToContainerOptions;
     beforeMovement?: IMoveToTileBeforeMovementOptions;
@@ -416,6 +448,7 @@ export interface IMoveToTileAfterMovementOptions {
     soundEffect?: SfxType;
     particles?: IRGB;
     updateTileLayer?: boolean;
+    renderCreature?: Creature;
 }
 export interface IRecipe {
     baseComponent?: ItemType | ItemTypeGroup;
@@ -603,7 +636,9 @@ export declare enum BookType {
     TheSlimeRancher = 15,
     DarknessCalls = 16,
     RemnantsOfCivilization = 17,
-    AndTheVoidAnswersBack = 18
+    AndTheVoidAnswersBack = 18,
+    ThePowerOfTheWrittenWord = 19,
+    TheAbnormals = 20
 }
 export declare enum ItemType {
     None = 0,
@@ -1327,16 +1362,63 @@ export declare enum ItemType {
     WaterLilies = 718,
     Mud = 719,
     SpikerushSheaths = 720,
-    SpikerushSeeds = 721
+    SpikerushSeeds = 721,
+    WoodenBookcase = 722,
+    GraniteLighthouse = 723,
+    SandstoneLighthouse = 724,
+    ClayLighthouse = 725,
+    BasaltLighthouse = 726,
+    WoodenCage = 727,
+    FullWoodenCage = 728,
+    TinCage = 729,
+    FullTinCage = 730,
+    CopperCage = 731,
+    FullCopperCage = 732,
+    WroughtIronCage = 733,
+    FullWroughtIronCage = 734,
+    IronCage = 735,
+    FullIronCage = 736,
+    BronzeCage = 737,
+    FullBronzeCage = 738,
+    Amber = 739,
+    Tourmaline = 740,
+    Topaz = 741,
+    Opal = 742,
+    Sapphire = 743,
+    WoodGolemFigure = 744,
+    ClayGolemFigure = 745,
+    GraniteGolemFigure = 746,
+    SandstoneGolemFigure = 747,
+    BasaltGolemFigure = 748,
+    AberrantWoodGolemFigure = 749,
+    AberrantClayGolemFigure = 750,
+    AberrantGraniteGolemFigure = 751,
+    AberrantSandstoneGolemFigure = 752,
+    AberrantBasaltGolemFigure = 753
 }
 export declare enum ItemTypeExtra {
     None = 999,
     TatteredMap_RolledUp = 1000,
-    TatteredMap_Completed = 1001
+    TatteredMap_Completed = 1001,
+    WoodenBookcase_25 = 1002,
+    WoodenBookcase_50 = 1003,
+    WoodenBookcase_75 = 1004,
+    WoodenBookcase_100 = 1005
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
-    None = 0
+    None = 0,
+    ShipperBoat = 1
+}
+export declare enum ItemCounter {
+    None = 0,
+    Repair = 1,
+    Reinforce = 2,
+    Refine = 3,
+    Enhance = 4,
+    En = 5,
+    Upgrade = 6,
+    Transmogrify = 7
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -1456,7 +1538,8 @@ export declare enum ItemTypeGroup {
     DualWield = 914,
     TwoHanded = 915,
     Boat = 916,
-    All = 917,
-    Last = 918
+    Text = 917,
+    All = 918,
+    Last = 919
 }
 export {};

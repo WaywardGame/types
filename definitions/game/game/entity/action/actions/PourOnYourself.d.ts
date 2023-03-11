@@ -15,5 +15,5 @@ import type { IItemDescription } from "game/item/IItem";
 export interface IPourOnYourselfCanUse extends IActionUsable {
     itemDescription: IItemDescription;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default, void, IPourOnYourselfCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<number>, void, IPourOnYourselfCanUse, [import("../../../item/Item").default]>;
 export default _default;

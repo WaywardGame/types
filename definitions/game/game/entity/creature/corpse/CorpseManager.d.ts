@@ -11,17 +11,16 @@
 import Stream from "@wayward/goodstream/Stream";
 import Corpse from "game/entity/creature/corpse/Corpse";
 import type { CreatureType } from "game/entity/creature/ICreature";
-import { CreationId } from "game/IGame";
 import { ObjectManager } from "game/ObjectManager";
+import type Tile from "game/tile/Tile";
 import type { TextContext } from "language/ITranslation";
 export interface ICorpseManagerEvents {
     create(corpse: Corpse): any;
     remove(corpse: Corpse): any;
 }
 export default class CorpseManager extends ObjectManager<Corpse, ICorpseManagerEvents> {
-    protected readonly creationId: CreationId;
     load(): void;
-    create(type: CreatureType, x: number, y: number, z: number, decay?: number, aberrant?: boolean, name?: string, qualityBonus?: number, respawned?: number): Corpse | undefined;
+    create(type: CreatureType, tile: Tile, decay?: number, aberrant?: boolean, name?: string, qualityBonus?: number, respawned?: number): Corpse | undefined;
     updateAll(): void;
     remove(corpse: Corpse): void;
     getName(typeOrCorpse: CreatureType | Corpse, article?: false | "definite" | "indefinite", count?: number, showCount?: boolean): import("../../../../language/impl/TranslationImpl").default;

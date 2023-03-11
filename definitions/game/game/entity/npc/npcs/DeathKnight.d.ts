@@ -9,15 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { AiType } from "game/entity/IEntity";
-import type { ICustomizations } from "game/entity/IHuman";
 import { EquipType } from "game/entity/IHuman";
+import type { INPCConstructorOptions } from "game/entity/npc/INPC";
 import NPC from "game/entity/npc/NPC";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 export default class DeathKnightNPC extends NPC {
-    constructor(id?: number, islandId?: `${number},${number}`, x?: number, y?: number, z?: number);
+    constructor(options?: INPCConstructorOptions);
     protected initializeStats(): void;
-    protected getDefaultCustomization(): ICustomizations;
     protected getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;
     protected getDefaultAiType(): AiType;
     protected getDefaultInventory(): Array<Item | ItemType>;

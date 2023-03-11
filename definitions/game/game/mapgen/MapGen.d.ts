@@ -8,10 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Island from "game/island/Island";
-import type { MultiplayerLoadingDescription } from "game/meta/Loading";
-export declare function generateWorld({ island, generateNewWorld, multiplayerLoadingDescription }: {
-    island: Island;
-    generateNewWorld: boolean;
-    multiplayerLoadingDescription?: MultiplayerLoadingDescription;
-}): Promise<void>;
+import type { IMapGenGenerateWorldOptions } from "game/mapgen/IMapGen";
+export declare function generateWorld(options: IMapGenGenerateWorldOptions): Promise<void>;

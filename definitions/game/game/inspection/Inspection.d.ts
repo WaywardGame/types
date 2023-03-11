@@ -15,6 +15,7 @@ import type { InspectionClass } from "game/inspection/InspectionTypeMap";
 import type { EnumReferenceResolved, EnumReferenceTypes, ReferenceType } from "game/reference/IReferenceManager";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type Text from "ui/component/Text";
+import type { InspectionTooltipHints } from "ui/screen/screens/game/InspectionsTooltipHandler";
 import type { IVector3 } from "utilities/math/IVector";
 export default abstract class Inspection<O> extends InfoProvider {
     readonly type: InspectType;
@@ -34,6 +35,7 @@ export default abstract class Inspection<O> extends InfoProvider {
      * Returns a string that should differentiate this inspection from other inspections of the same type.
      */
     abstract getId(): string;
+    renderHints(hints: InspectionTooltipHints): void;
     protected createIdFromVector3(vec3: IVector3): string;
     protected initChildTextComponent(text: TranslationGenerator): Text;
 }

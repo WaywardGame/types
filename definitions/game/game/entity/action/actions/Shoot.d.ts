@@ -18,5 +18,5 @@ export interface IShootCanUse extends IActionUsable {
 /**
  * Shooting a specific item (like an arrow)
  */
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, IShootCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number>, void, IShootCanUse, [Item]>;
 export default _default;

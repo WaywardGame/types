@@ -8,28 +8,28 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
+import type { BiomeType } from "game/biome/IBiome";
+import Doodad from "game/doodad/Doodad";
 import type { IActionHandlerApi } from "game/entity/action/IAction";
 import { ActionType } from "game/entity/action/IAction";
 import Human from "game/entity/Human";
 import type NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
-import { CreationId } from "game/IGame";
 import { Quality } from "game/IObject";
 import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IMoveToTileOptions, IRecipe } from "game/item/IItem";
-import { CraftResult, ItemType, ItemTypeGroup, ItemTypeExtra } from "game/item/IItem";
+import { ContainerType, CraftResult, ItemType, ItemTypeExtra, ItemTypeGroup } from "game/item/IItem";
 import type { IAddToContainerOptions, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IRequirementInfo } from "game/item/IItemManager";
 import { ContainerReferenceSource, CraftStatus, ICraftResultChances, WeightType } from "game/item/IItemManager";
 import Item from "game/item/Item";
 import type ItemRecipeRequirementChecker from "game/item/ItemRecipeRequirementChecker";
 import { ObjectManager } from "game/ObjectManager";
-import type { ITile } from "game/tile/ITerrain";
 import { TerrainType } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
+import { WorldZ } from "game/WorldZ";
 import Message from "language/dictionary/Message";
 import type TranslationImpl from "language/impl/TranslationImpl";
 import type { ListEnder } from "language/ITranslation";
 import Translation from "language/Translation";
-import type { IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
 import type { Random } from "utilities/random/Random";
 export interface IItemManagerEvents {
@@ -41,17 +41,17 @@ export interface IItemManagerEvents {
      * Called when an item is removed from a container.
      * @param item The item object.
      * @param container The container object the item was removed from.
-     * @param containerPosition The psoition of that container when the remove occurred.
+     * @param containerTile The tile of that container when the remove occurred.
      */
-    containerItemRemove(item: Item, container: IContainer | undefined, containerPosition: Vector3 | undefined): any;
+    containerItemRemove(item: Item, container: IContainer | undefined, containerTile: Tile | undefined): any;
     /**
      * Called when an item is moved from one container to another.
      * @param item The item object.
      * @param containerFrom The container object the item was moved from. This container might be inventory or a container within the inventory.
-     * @param containerFromPosition The position of containerFrom when the update occurred.
+     * @param containerFromTile The tile of containerFrom when the update occurred.
      * @param containerTo The container object the item was moved to. This container might be inventory or a container within the inventory.
      */
-    containerItemUpdate(item: Item, containerFrom: IContainer | undefined, containerFromPosition: Vector3 | undefined, containerTo: IContainer): any;
+    containerItemUpdate(item: Item, containerFrom: IContainer | undefined, containerFromTile: Tile | undefined, containerTo: IContainer): any;
     /**
      * Called when an item is added to a container.
      * @param item The item object.
@@ -74,36 +74,37 @@ export interface IItemManagerEvents {
     craft?(human: Human, item: Item): void;
 }
 export default class ItemManager extends ObjectManager<Item, IItemManagerEvents> {
-    protected readonly creationId: CreationId;
     readonly worldContainer: IContainer;
     private static cachedBestItemForTier;
     private static cachedDefaultItemForGroup;
     private static cachedEquippables;
     private static cachedHighestItemActionTierForAction;
     private static cachedItemGroups;
-    private static cachedItemSpawns;
-    private static cachedItemsThatAreAcceptedAsOffer;
-    private static cachedItemsThatAreUsedForGrowingPlants;
-    private static cachedItemsThatAreUsedInRecipes;
+    private static cachedItemTypeGroups;
     private static cachedItemTypes;
     private static cachedItemTypesWithRecipes;
     private static cachedWeights;
     private static readonly cachedGroupItems;
+    private static readonly cachedItemGroupsUsedInRecipes;
+    private static readonly cachedItemsThatAreAcceptedAsOffer;
+    private static readonly cachedItemsThatAreUsedForGrowingPlants;
+    private static readonly cachedItemsThatAreUsedInRecipes;
     private static readonly cachedUseItemActions;
+    static cachedItemSpawns: OptionalDescriptions<BiomeType, OptionalDescriptions<WorldZ, OptionalDescriptions<TerrainType, ItemType[]>>>;
     static getItemTypes(): readonly ItemType[];
     static getItemsWithRecipes(): readonly ItemType[];
     static getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
     static getHighestItemActionTierForAction(action: ActionType): number;
-    static isItemAcceptedAsOffer(item: ItemType): boolean | undefined;
-    static isItemUsedInRecipe(item: ItemType): boolean | undefined;
-    static isItemUsedForGrowingPlants(item: ItemType): boolean | undefined;
+    static isItemAcceptedAsOffer(item: ItemType): boolean;
+    static isItemUsedInRecipe(item: ItemType): boolean;
+    static isItemUsedForGrowingPlants(item: ItemType): boolean;
     static isContainer(obj: unknown): obj is IContainer;
     isContainer(obj: unknown): obj is IContainer;
     static isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
     static isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
+    static isItemExtra(type: number): type is ItemTypeExtra;
     static getGroupItems(itemGroup: ItemType | ItemTypeGroup): Set<ItemType>;
     private static getGroupItemsWithoutCache;
-    static getPlayerFromInventoryContainer(containable: IContainable): Player | undefined;
     static getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: false | "definite" | "indefinite", count?: number): Translation;
     static getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     /**
@@ -120,12 +121,19 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     static weightTree(itemType: ItemType, random: Random | undefined, weightType?: WeightType, debug?: boolean, depth?: number): number;
     static getGroups(itemType: ItemType): ItemTypeGroup[];
     static generateLookups(): void;
+    private static cacheEquippables;
+    private static cacheGroupItems;
+    private static cacheItemRecipes;
+    private static cacheItemTypes;
+    private static cacheItemWeights;
+    private static cacheCreatureOfferingsAndResources;
+    private static cacheRemainingItemStuff;
     static clearCaches(): void;
     static getUseItemActions(): ReadonlySet<ActionType>;
     private static getDefaultWeightRange;
     load(): void;
     getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
-    resolveContainer(container?: IContainer): Doodad | Item | Player | NPC | IContainer | ITile | undefined;
+    resolveContainer(container?: IContainer): Doodad | Item | Player | NPC | Tile | IContainer | undefined;
     getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
     hashContainer(containable: IContainable, containerReferenceSource?: ContainerReferenceSource): string;
@@ -133,7 +141,6 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     updateContainedWithin(containable: IContainable, containedWithin: IContainer | undefined): void;
     addToContainerInternal(item: Item, container: IContainer, options?: IAddToContainerOptions): boolean;
     removeContainerItems(container: IContainer, removeContainedItems?: boolean): void;
-    isItemExtra(type: number): type is ItemTypeExtra;
     exists(item: Item): boolean;
     remove(item: Item, removeContainedItems?: boolean, extinguishTorches?: boolean): void;
     getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): Item[];
@@ -161,11 +168,14 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      * @returns Name of the container or undefined if it's ending up on the ground
      */
     getContainerName(container: IContainer): Translation | undefined;
-    breakContainerOnTile(itemContainer: Item, x: number, y: number, z: number): void;
+    /**
+     * Will break a container item on a tile, and remove it after (whether or not if it's a container)
+     */
+    breakContainerOnTile(itemContainer: Item, tile: Tile): void;
     /**
      * Drop items in a 3x3 square around the location
      */
-    placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number, skipMessage?: boolean): void;
+    placeItemsAroundTile(container: IContainer, tile: Tile, skipMessage?: boolean): void;
     /**
      * Returns the "processed" weight of the given item.
      * - If the item is a "raw" item — ie, it was not created from other items, this is the `weightFraction` lerping the item's min & max weight.
@@ -180,26 +190,18 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getItemTypes(): readonly ItemType[];
     getItemsWithRecipes(): readonly ItemType[];
     getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
-    isItemAcceptedAsOffer(item: ItemType): boolean | undefined;
-    isItemUsedInRecipe(item: ItemType): boolean | undefined;
-    isItemUsedForGrowingPlants(item: ItemType): boolean | undefined;
+    isItemAcceptedAsOffer(item: ItemType): boolean;
+    isItemUsedInRecipe(item: ItemType): boolean;
+    isItemUsedForGrowingPlants(item: ItemType): boolean;
     getHighestItemActionTierForAction(action: ActionType): number;
     isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
+    isItemExtra(type: number): type is ItemTypeExtra;
     getGroupItems(itemGroup: ItemType | ItemTypeGroup): Set<ItemType>;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: false | "definite" | "indefinite", count?: number): Translation;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     getGroups(itemType: ItemType): ItemTypeGroup[];
     getPlayerFromInventoryContainer(containable: IContainable): Player | undefined;
-    /**
-     * Used to spawn a random item on the current biome type and at a set location (and terrain type) based on spawnOnWorldGen properties in item descriptions.
-     * @param terrainType The terrain type to check.
-     * @param x The x coordinate to check.
-     * @param y The y coordinate to check.
-     * @param z The z coordinate to check.
-     */
-    spawn(terrainType: TerrainType, x: number, y: number, z: number): void;
-    getTileContainer(x: number, y: number, z: number, tile?: ITile): IContainer | undefined;
     getRandomQuality(bonusQuality?: number, relicChance?: boolean): Quality;
     hasAdditionalRequirements(actionOrHuman: IActionHandlerApi<Human> | Human, craftType: ItemType, actionNotUsableMessage?: Message, isRepairOrDisassembly?: boolean): IRequirementInfo;
     /**
@@ -247,7 +249,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, options?: Partial<IGetItemOptions>): Item | undefined;
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup, options?: Partial<IGetItemOptions>): Item | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, options?: Partial<IGetItemOptions>): Item | undefined;
-    getItemInAdjacentContainersByGroup(position: IVector3, itemTypeGroupSearch: ItemTypeGroup, options?: Partial<IGetItemsOptions>): Item | undefined;
+    getItemInAdjacentContainersByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, options?: Partial<IGetItemsOptions>): Item | undefined;
     getItemsInContainer(container: IContainer, options?: Partial<IGetItemsOptions>): Item[];
     getItemsInContainerByType(container: IContainer, itemType: ItemType, options?: Partial<IGetItemsOptions>, filterText?: string): Item[];
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, options?: Partial<IGetItemsOptions>): Item[];
@@ -261,8 +263,9 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      * @returns whether the given containable is, or is contained within, a trade container
      */
     isContainableInTradeContainer(containable: IContainable): boolean;
-    getTradeContainerForContainer(containable: IContainer | undefined): IContainer | undefined;
-    getAdjacentContainers(humanOrPosition: Human | IVector3, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
+    getTradeContainerForContainer(containable: IContainable | undefined): IContainable | undefined;
+    getContainerTypeForContainer(containable: IContainable | undefined, containerType: ContainerType): IContainable | undefined;
+    getAdjacentContainers(human: Human, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
     isContainableInAdjacentContainer(human: Human, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
@@ -304,7 +307,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getNPCFromInventoryContainer(containable: IContainable): NPC | undefined;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: Item[]): number;
-    copyProperties(item: Item, item2: Item): void;
+    copyProperties(toItem: Item, fromItem: Item): void;
     getCraftQualityBonus(item: Item, required?: boolean): number;
     /**
      * Checks if the item type or item is filtered from inventory/crafting/container dialogs.
@@ -317,10 +320,10 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      * Summons a void dweller based on item worth and chance or provides a hint message.
      * @param item Item to get the worth of.
      * @param human The human that is dropping the item.
-     * @param point The point in which we are dropping the item.
+     * @param tile The tile in which we are dropping the item.
      * @returns True or false based on if we get a message or not.
      */
-    summonVoidDweller(item: Item, human: Human, point: IVector3): boolean;
+    summonVoidDweller(item: Item, human: Human, tile: Tile): boolean;
     /**
      * Note: don't print items to the console because the console will hold the item indefinitely
      */
@@ -332,4 +335,13 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     getCraftChance(human: Human, recipe: IRecipe, qualityBonus: number, returnQuality?: boolean): number;
     getCraftResultChances(human: Human, recipe: IRecipe, qualityBonus: number): Readonly<ICraftResultChances>;
     isCraftSuccessful(human: Human, recipe: IRecipe, qualityBonus: number): CraftResult;
+    /**
+     * Get the civilization score based on contained books/text
+     * @returns number that corresponds to how much civilization score is contained within.
+     */
+    getCivilizationContentsScore(container: Item | Doodad): number;
+    /**
+     * Runs a thing the container + parent containers
+     */
+    private forEachContainer;
 }

@@ -20,18 +20,19 @@ import type { INote } from "game/entity/player/note/NoteManager";
 import type Player from "game/entity/player/Player";
 import { ItemType } from "game/item/IItem";
 import type { Prompt } from "game/meta/prompt/IPrompt";
+import type { Milestone } from "game/milestones/IMilestone";
+import type Tile from "game/tile/Tile";
 import type InterruptChoice from "language/dictionary/InterruptChoice";
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 export interface IPlayerEvents extends Events<Human> {
     /**
-     * Called when a message is being disaplyed for a player
+     * Called when a message is being displayed for a player
      * @param message The message that will be displayed
      */
     displayMessage(message: IMessage): any;
     /**
      * Called when a message is about to be displayed
-     * @param player The player object
      * @param message The message that will be displayed
      * @param messageId The `Message`, or `-1` if the message being displayed isn't a `Message`
      * @returns False to not display the message or undefined to use the default logic
@@ -62,6 +63,10 @@ export interface IPlayerEvents extends Events<Human> {
      * Called when the player attempts to sail off the edge of the map
      */
     sailOffMapEdge(direction: Direction): any;
+    /**
+     * Called when a player's title changes. IE, John -> John, the Merchant
+     */
+    changeTitle(milestone?: Milestone): any;
     /**
      * Called when the players quickslots are updated
      * @param quickslot The quick slot
@@ -173,6 +178,7 @@ export interface IStatOld {
     regenBase: number;
 }
 export interface IMobCheck extends IVector3 {
+    tile: Tile;
     creature?: Creature;
     player?: Human;
     npc?: NPC;
@@ -190,7 +196,6 @@ export declare const setupWaterItems: ItemType[];
 export declare const setupToolItems: ItemType[];
 export declare const setupMiscItems: ItemType[];
 export declare const setupBookItems: ItemType[];
-export declare function getDirectionFromMovement(x: number, y: number): Direction.East | Direction.North | Direction.West | Direction.South;
 export interface IInputMovement extends IVector2 {
     moveBind: Direction.Cardinal;
     direction: Direction.Cardinal;
@@ -230,8 +235,4 @@ export declare const STRENGTH_BONUS = 25;
 export interface IWalkPath {
     path: IVector2[];
     force?: boolean;
-}
-export interface ILoadOnIslandOptions {
-    spawnPosition: IVector2;
-    startingGame: boolean;
 }

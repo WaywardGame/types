@@ -8,36 +8,37 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
+import type { IEventEmitter } from "event/EventEmitter";
 import type Doodad from "game/doodad/Doodad";
 import { ActionType } from "game/entity/action/IAction";
 import type Creature from "game/entity/creature/Creature";
 import type { CreatureType } from "game/entity/creature/ICreature";
 import type Entity from "game/entity/Entity";
+import type { IEntityMovableEvents } from "game/entity/EntityMovable";
+import EntityMovable from "game/entity/EntityMovable";
 import type Human from "game/entity/Human";
 import { AttackType, DamageType, EntityType } from "game/entity/IEntity";
 import type { EquipType } from "game/entity/IHuman";
 import { SkillType } from "game/entity/IHuman";
 import type Player from "game/entity/player/Player";
-import { CreationId } from "game/IGame";
+import { TileUpdateType } from "game/IGame";
 import type { IObject, IObjectOptions } from "game/IObject";
 import { Quality } from "game/IObject";
 import type { IslandId } from "game/island/IIsland";
-import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemDisassembleResult, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemTag } from "game/item/IItem";
-import { BookType, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "game/item/IItem";
+import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemDisassembleResult, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemCounter, ItemTag, ItemTypeExtra } from "game/item/IItem";
+import { BookType, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE, ItemDamageResult } from "game/item/IItem";
 import type { IPlaceOnTileOptions } from "game/item/IItemManager";
 import ItemMapManager from "game/item/ItemMapManager";
 import type { IHasMagic, MagicalSubPropertySubTypes } from "game/magic/MagicalPropertyManager";
 import MagicalPropertyManager from "game/magic/MagicalPropertyManager";
 import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
-import type { IReferenceable } from "game/reference/IReferenceManager";
-import type { IHasInsulation, ITemperatureSource, TempType } from "game/temperature/ITemperature";
+import type { IHasInsulation, TempType } from "game/temperature/ITemperature";
 import { FireStage } from "game/tile/events/IFire";
-import type { ITile } from "game/tile/ITerrain";
-import type { ISerializedTranslation } from "language/ITranslation";
+import type Tile from "game/tile/Tile";
 import type { IUnserializedCallback } from "save/serializer/ISerializer";
 import type { Direction } from "utilities/math/Direction";
-export interface IItemEvents {
+import type Vector3 from "utilities/math/Vector3";
+export interface IItemEvents extends IEntityMovableEvents {
     toggleProtected(isProtected: boolean): any;
     fireUpdate(stage?: FireStage): any;
     damage(): any;
@@ -68,15 +69,20 @@ export interface IItemEvents {
     durabilityChange(durability: number, oldDurability: number): any;
     durabilityMaxChange(durabilityMax: number, oldDurabilityMax: number): any;
 }
-export default class Item extends EventEmitter.Host<IItemEvents> implements IReferenceable, Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasMagic {
-    readonly objectType = CreationId.Item;
+export default class Item extends EntityMovable<ItemType, ItemTag, ItemCounter> implements Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, IHasInsulation, IHasMagic {
+    get entityType(): EntityType.Item;
+    get tileUpdateType(): TileUpdateType;
+    readonly event: IEventEmitter<this, IItemEvents>;
     private maxDur;
     private minDur;
+    weight: number;
+    bonusAttack?: number;
+    bonusDefense?: number;
     book?: BookType;
     constructedFrom?: IConstructedInfo;
-    containedItems: Item[] | undefined;
-    containedWithin: IContainer | undefined;
-    containsCreature: Creature;
+    containedItems?: Item[];
+    containedWithin?: IContainer;
+    containsCreature?: Creature;
     crafterIdentifier?: string;
     decay?: number;
     disassembly?: Item[];
@@ -85,36 +91,35 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
     equippedId?: number;
     equippedType?: EntityType;
     fireStage?: FireStage;
-    id: number;
     itemOrders?: number[];
-    pid: number | null | undefined;
+    magic?: MagicalPropertyManager;
+    map?: ItemMapManager;
+    pid?: number | null;
     protected?: boolean;
-    quality: Quality | undefined;
-    referenceId?: number;
-    renamed: string | ISerializedTranslation | undefined;
+    quality?: Quality;
     startingDecay?: number;
     tradedFrom?: string[];
-    type: ItemType;
     used?: IItemUsed;
     vehicleFacingDirection?: Direction.Cardinal;
-    weight: number;
+    weightCapacity?: number;
     weightFraction?: number;
-    private _tags?;
-    magic: MagicalPropertyManager;
-    map: ItemMapManager;
-    get tags(): Set<ItemTag>;
-    islandId: IslandId;
     offsetX?: number;
     offsetY?: number;
-    fromX?: number;
-    fromY?: number;
     [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
-    private _movementTime?;
     private _movementOptions?;
     private _description;
     constructor(itemType?: ItemType | undefined, islandId?: IslandId, quality?: Quality, human?: Human);
-    get island(): import("../island/Island").default;
+    get asCorpse(): undefined;
+    get asCreature(): undefined;
+    get asDoodad(): undefined;
+    get asHuman(): undefined;
+    get asLocalPlayer(): undefined;
+    get asNPC(): undefined;
+    get asPlayer(): undefined;
+    get asTileEvent(): undefined;
+    get asItem(): Item | undefined;
     toString(): string;
+    protected updateTile(fromTile: Tile, toTile: Tile): boolean;
     get durability(): number;
     set durability(value: number);
     get durabilityMax(): number;
@@ -197,7 +202,7 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      * @param modifier The amount of damage to take. Defaults to 1.
      * @param min The minimum durability that this item should have remaining. Defaults to n/a
      */
-    damage(source: string, modifier?: number, min?: number): void;
+    damage(source: string, modifier?: number, min?: number): ItemDamageResult;
     isInTradeContainer(): boolean;
     getEquippedHuman(): Human | undefined;
     isEquipped(includeDisabled?: true): boolean;
@@ -215,20 +220,25 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      */
     returns(disableNotify?: boolean, craft?: boolean): boolean;
     setUsed(itemUse?: IItemUsed, human?: Human): void;
-    createOnBreak(x: number, y: number, z: number): void;
-    spawnOnDecay(): Creature | undefined;
-    spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: Human): Creature | undefined;
-    getPoint(): import("../../utilities/math/Vector3").default | undefined;
-    dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
-    placeOnTile(x: number, y: number, z: number, options?: IPlaceOnTileOptions): boolean;
+    createOnBreak(tile: Tile): void;
+    spawnOnDecay(tile: Tile): Creature | undefined;
+    spawnCreatureOnItem(tile: Tile, creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingTile?: Human, maxTilesChecked?: number): Creature | undefined;
+    get point(): Vector3 | undefined;
+    get tile(): Tile | undefined;
+    dropInWater(human: Human, tile?: Tile, skipParticles?: boolean): void;
+    placeOnTile(tile: Tile, options?: IPlaceOnTileOptions): boolean;
+    /**
+     * Unsupported
+     */
+    moveTo(): boolean;
     /**
      * Moves an item to a target point / container while animating it
      * @param options Movement options
      * @returns True if the movement is happening, false if it wasn't able to move
      */
     moveToTile(options: IMoveToTileOptions): boolean;
-    isMoving(): IMoveToTileOptions | undefined;
-    getMovementProgress(timeStamp: number): number;
+    getMovementOptions(): IMoveToTileOptions | undefined;
+    protected onMovementCompleted(): void;
     setQuality(human: Human | undefined, quality?: Quality): void;
     getValidMagicalProperties(): MagicalPropertyType[];
     addMagicalProperties(count: number, source?: string): boolean;
@@ -328,7 +338,45 @@ export default class Item extends EventEmitter.Host<IItemEvents> implements IRef
      */
     getCivilizationScore(actionType: ActionType.Build | ActionType.SetDown): number;
     getVehicle(): import("game/item/IItem").IItemVehicle | undefined;
-    isVehicleAllowedOnTile(tile: ITile): boolean;
+    isVehicleAllowedOnTile(tile: Tile): boolean;
+    addCreature(creature: Creature, remainTamed?: boolean): void;
+    /**
+     * Tries restoring the creature on the target tile and fans out to nearby tiles if it's occupied
+     */
+    tryRestoreCreature(tile: Tile, preventRendering?: boolean): Creature | undefined;
+    restoreCreature(tile: Tile, preventRendering?: boolean): Creature | undefined;
+    /**
+     * Update the item's display (in the case that its extras are used).
+     */
+    updateItemDisplay(): void;
+    /**
+     * Determines which graphic to show based on how full the bookcase is with books/text.
+     * @returns DisplayableItemType equal to which graphic it should show.
+     */
+    getBookcaseFullness(): ItemTypeExtra | undefined;
+    /**
+     * Gives bonus attack and defense to items with have quality.
+     * Example: Superior quality can get a bonus of 1-2; relics can get 5-10.
+     */
+    setAttackDefenseBonus(): void;
+    /**
+     * Gets the attack damage with its bonus value.
+     * Note: This does not get the value with any magical properties applied.
+     * @returns number The attack value with bonus applied.
+     */
+    getAttackWithBonus(): number;
+    /**
+     * Gets the ranged attack damage with its bonus value.
+     * Note: This does not get the value with any magical properties applied.
+     * @returns number The ranged attack value with bonus applied.
+     */
+    getRangedAttackWithBonus(): number;
+    /**
+     * Gets the base defense with its bonus value.
+     * Note: This does not get the value with any magical properties applied.
+     * @returns number The base defense value.
+     */
+    getBaseDefenseWithBonus(): number;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;
 }

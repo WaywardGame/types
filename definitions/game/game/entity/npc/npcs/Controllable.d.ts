@@ -9,13 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { AiType } from "game/entity/IEntity";
-import type { ICustomizations } from "game/entity/IHuman";
 import { EquipType } from "game/entity/IHuman";
 import NPC from "game/entity/npc/NPC";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import Island from "game/island/Island";
 import type { Events, IEventEmitter } from "event/EventEmitter";
+import type { INPCConstructorOptions } from "game/entity/npc/INPC";
 export interface IControllableNPCEvents extends Events<NPC> {
     /**
      * NPC is spawned / ready to do things
@@ -35,7 +35,7 @@ export default class ControllableNPC<SaveDataType = void> extends NPC {
     uniqueNpcType: string;
     saveData: SaveDataType;
     private registered;
-    constructor(id?: number, islandId?: `${number},${number}`, x?: number, y?: number, z?: number);
+    constructor(options?: INPCConstructorOptions);
     onSpawnOrPlay(): void;
     onRemoved(): void;
     onRegister(): void;
@@ -44,7 +44,6 @@ export default class ControllableNPC<SaveDataType = void> extends NPC {
     protected initializeStats(): void;
     protected autoScaleStats(): void;
     protected getDefaultName(): import("../../../../language/impl/TranslationImpl").default;
-    protected getDefaultCustomization(): ICustomizations;
     protected getDefaultAiType(): AiType;
     protected getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;
     protected getDefaultInventory(): Array<Item | ItemType>;

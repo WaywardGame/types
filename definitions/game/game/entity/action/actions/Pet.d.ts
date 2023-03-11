@@ -14,5 +14,5 @@ import type Creature from "game/entity/creature/Creature";
 export interface IPetCanUse extends IActionUsable {
     creature: Creature;
 }
-declare const _default: Action<[], import("../../Human").default, void, IPetCanUse, []>;
+declare const _default: Action<[], import("../../Human").default<number>, void, IPetCanUse, []>;
 export default _default;

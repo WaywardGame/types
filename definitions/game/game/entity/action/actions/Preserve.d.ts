@@ -17,5 +17,5 @@ export interface IPreserveCanUse extends IActionUsable {
     preservee: Item;
     description: IItemDescription;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default, void, IPreserveCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default<number>, void, IPreserveCanUse, [Item, (Item | undefined)?]>;
 export default _default;

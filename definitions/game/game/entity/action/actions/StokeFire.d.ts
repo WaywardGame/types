@@ -20,5 +20,5 @@ export interface IStokeFireCanUse extends IActionUsable {
     doodad?: Doodad;
     tileEvent?: TileEvent;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, IStokeFireCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number>, void, IStokeFireCanUse, [import("../../../item/Item").default]>;
 export default _default;

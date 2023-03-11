@@ -12,8 +12,8 @@ import { BiomeType } from "game/biome/IBiome";
 import { DoodadType } from "game/doodad/IDoodad";
 import type Island from "game/island/Island";
 import type { MapGenVersions } from "game/mapgen/IMapGen";
-import type { ITile, TileTemplateType } from "game/tile/ITerrain";
-import type { TileEventType } from "game/tile/ITileEvent";
+import type { ITemplate, TileTemplateType } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export declare module MapGenHelpers {
     function pickBasedOnVersion<T>(version: string, versions: MapGenVersions<T>): {
         version: string;
@@ -21,7 +21,6 @@ export declare module MapGenHelpers {
     };
     function startLoading(): Promise<void>;
     function setFinishedLoading(): void;
-    function spawnTileEvent(island: Island, type: TileEventType, x: number, y: number, z: number): void;
     interface ITemplateOptions {
         /**
          * If not provided, randomly decides whether to mirror the template vertically.
@@ -49,8 +48,8 @@ export declare module MapGenHelpers {
         overlap?: boolean;
     }
     function manipulateTemplates<T extends Array<string[] | undefined>>(island: Island, options: ITemplateOptions, ...templates: T): T;
-    function spawnTemplate(island: Island, templateType: TileTemplateType, x: number, y: number, z: number, options?: ITemplateOptions): void;
-    function setTileUnderDoodad(island: Island, tile: ITile, x: number, y: number, z: number, doodadType: DoodadType, biomeType: BiomeType): void;
+    function spawnTemplate(island: Island, templateType: TileTemplateType | ITemplate, x: number, y: number, z: number, options?: ITemplateOptions): void;
+    function setTileUnderDoodad(tile: Tile, doodadType: DoodadType, biomeType: BiomeType): void;
     function setupTiles(island: Island, tileGenArray: Uint16Array, tileGenQualityArray?: Uint16Array): void;
     function loadDifferences(island: Island): void;
     enum Pre240TerrainType {

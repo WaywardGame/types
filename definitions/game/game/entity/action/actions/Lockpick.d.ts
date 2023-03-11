@@ -12,10 +12,10 @@ import type Doodad from "game/doodad/Doodad";
 import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export interface ILockpickCanUse extends IActionUsable {
-    tile: ITile;
+    tile: Tile;
     doodad: Doodad;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, ILockpickCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number>, void, ILockpickCanUse, [import("../../../item/Item").default]>;
 export default _default;

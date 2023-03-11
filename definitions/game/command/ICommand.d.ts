@@ -22,10 +22,11 @@ export declare enum Command {
     Banned = 2,
     Commands = 3,
     Kick = 4,
-    Pause = 5,
-    Ping = 6,
-    Players = 7,
-    Save = 8,
-    Sync = 9,
-    Unban = 10
+    Noclip = 5,
+    Pause = 6,
+    Ping = 7,
+    Players = 8,
+    Save = 9,
+    Sync = 10,
+    Unban = 11
 }

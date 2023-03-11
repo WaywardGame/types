@@ -18,6 +18,7 @@ import type Creature from "game/entity/creature/Creature";
 import type CreatureManager from "game/entity/creature/CreatureManager";
 import type Entity from "game/entity/Entity";
 import type EntityManager from "game/entity/EntityManager";
+import type EntityMovable from "game/entity/EntityMovable";
 import type Human from "game/entity/Human";
 import type NPC from "game/entity/npc/NPC";
 import type NPCManager from "game/entity/npc/NPCManager";
@@ -50,75 +51,81 @@ export declare enum EventBus {
     DoodadManager = 6,
     Doodads = 7,
     Entities = 8,
-    EntityManager = 9,
-    Game = 10,
-    Humans = 11,
-    Island = 12,
-    ItemManager = 13,
-    Items = 14,
-    Language = 15,
-    Loading = 16,
-    LocalIsland = 17,
-    LocalPlayer = 18,
-    Mods = 19,
-    Multiplayer = 20,
-    NPCManager = 21,
-    NPCs = 22,
-    PlayerManager = 23,
-    Players = 24,
-    Prompt = 25,
-    SaveManager = 26,
-    ScreenManager = 27,
-    Steamworks = 28,
-    TileEventManager = 29,
-    TileEvents = 30,
-    Ui = 31,
-    UiActionBar = 32,
-    UiMovementHandler = 33,
-    WorldRenderer = 34
+    EntitiesMovable = 9,
+    EntityManager = 10,
+    Game = 11,
+    Humans = 12,
+    Island = 13,
+    ItemManager = 14,
+    Items = 15,
+    Language = 16,
+    Loading = 17,
+    LocalIsland = 18,
+    LocalPlayer = 19,
+    Mods = 20,
+    Multiplayer = 21,
+    NPCManager = 22,
+    NPCs = 23,
+    PlayerManager = 24,
+    Players = 25,
+    Prompt = 26,
+    SaveManager = 27,
+    ScreenManager = 28,
+    Steamworks = 29,
+    TileEventManager = 30,
+    TileEvents = 31,
+    Ui = 32,
+    UiActionBar = 33,
+    UiMovementHandler = 34,
+    WorldRenderer = 35
 }
 declare const eventBuses: {
-    [EventBus.Actions](): typeof ActionExecutor;
-    [EventBus.Audio](): typeof Audio;
-    [EventBus.CorpseManager](): typeof CorpseManager;
-    [EventBus.Corpses](): typeof Corpse;
-    [EventBus.CreatureManager](): typeof CreatureManager;
-    [EventBus.Creatures](): typeof Creature;
-    [EventBus.DoodadManager](): typeof DoodadManager;
-    [EventBus.Doodads](): typeof Doodad;
-    [EventBus.Entities](): typeof Entity;
-    [EventBus.EntityManager](): typeof EntityManager;
-    [EventBus.Game](): typeof Game;
-    [EventBus.Humans](): typeof Human;
-    [EventBus.Island](): typeof Island;
-    [EventBus.ItemManager](): typeof ItemManager;
-    [EventBus.Items](): typeof Item;
-    [EventBus.Language](): typeof LanguageManager;
-    [EventBus.Loading](): typeof Loading.Events;
+    [EventBus.Actions](): ActionExecutor<any, any, any, any, any>;
+    [EventBus.Audio](): Audio;
+    [EventBus.CorpseManager](): CorpseManager;
+    [EventBus.Corpses](): Corpse;
+    [EventBus.CreatureManager](): CreatureManager;
+    [EventBus.Creatures](): Creature;
+    [EventBus.DoodadManager](): DoodadManager;
+    [EventBus.Doodads](): Doodad;
+    [EventBus.Entities](): Entity;
+    [EventBus.EntitiesMovable](): EntityMovable;
+    [EventBus.EntityManager](): EntityManager<any>;
+    [EventBus.Game](): Game;
+    [EventBus.Humans](): Human;
+    [EventBus.Island](): Island;
+    [EventBus.ItemManager](): ItemManager;
+    [EventBus.Items](): Item;
+    [EventBus.Language](): LanguageManager;
+    [EventBus.Loading](): Loading.Events;
     [EventBus.LocalIsland](): Island;
     [EventBus.LocalPlayer](): Player;
-    [EventBus.Mods](): typeof ModManager;
-    [EventBus.Multiplayer](): typeof Multiplayer;
-    [EventBus.NPCManager](): typeof NPCManager;
-    [EventBus.NPCs](): typeof NPC;
-    [EventBus.PlayerManager](): typeof PlayerManager;
-    [EventBus.Players](): typeof Player;
-    [EventBus.Prompt](): typeof Prompts.Events;
-    [EventBus.SaveManager](): typeof SaveManager;
-    [EventBus.ScreenManager](): typeof ScreenManager;
-    [EventBus.Steamworks](): typeof Steamworks;
-    [EventBus.TileEventManager](): typeof TileEventManager;
-    [EventBus.TileEvents](): typeof TileEvent;
+    [EventBus.Mods](): ModManager;
+    [EventBus.Multiplayer](): Multiplayer;
+    [EventBus.NPCManager](): NPCManager;
+    [EventBus.NPCs](): NPC;
+    [EventBus.PlayerManager](): PlayerManager;
+    [EventBus.Players](): Player;
+    [EventBus.Prompt](): Prompts.Events;
+    [EventBus.SaveManager](): SaveManager;
+    [EventBus.ScreenManager](): ScreenManager;
+    [EventBus.Steamworks](): Steamworks;
+    [EventBus.TileEventManager](): TileEventManager;
+    [EventBus.TileEvents](): TileEvent;
     [EventBus.Ui](): typeof ui;
-    [EventBus.UiActionBar](): typeof ActionBar;
-    [EventBus.UiMovementHandler](): typeof MovementHandler;
-    [EventBus.WorldRenderer](): typeof WorldRenderer;
+    [EventBus.UiActionBar](): ActionBar;
+    [EventBus.UiMovementHandler](): MovementHandler;
+    [EventBus.WorldRenderer](): WorldRenderer;
 };
+export interface IEventBusRegistration {
+    subscribe: NullaryFunction;
+    unsubscribe: NullaryFunction;
+}
 export default eventBuses;
 export declare module EventBus {
     function register<E extends EventBus>(eventBus: E, classOrHost: ReturnType<(typeof eventBuses)[E]>): void;
     function register(eventBus: EventBus): (constructor: AbstractNullaryClass<any>) => void;
     function unregister(eventBus: EventBus): void;
-    function onEventBusRegistration(eventBus: EventBus, handler: NullaryFunction): void;
+    function onEventBusRegistration(eventBus: EventBus, registration: IEventBusRegistration): void;
 }
 export type EventBusHost<E extends EventBus> = ReturnType<(typeof eventBuses)[E]>;

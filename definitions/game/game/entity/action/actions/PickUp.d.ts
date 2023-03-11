@@ -15,13 +15,14 @@ import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
-import type { ITerrainDescription, ITile } from "game/tile/ITerrain";
+import type { ITerrainDescription } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export interface IPickUpCanUse extends IActionUsable {
-    tile: ITile;
+    tile: Tile;
     doodad: Doodad;
     description: IDoodadDescription;
     pickUpTypes: ItemType[];
     terrainDescription: ITerrainDescription;
 }
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, IPickUpCanUse, [(Item | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number>, void, IPickUpCanUse, [(Item | undefined)?]>;
 export default _default;

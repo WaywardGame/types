@@ -13,8 +13,7 @@ import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
-import { TooltipLocation } from "ui/component/IComponent";
-import Text, { Paragraph } from "ui/component/Text";
+import Text, { Heading } from "ui/component/Text";
 import type Bindable from "ui/input/Bindable";
 import type { TooltipAnchorStringHorizontal, TooltipAnchorStringVertical } from "ui/tooltip/TooltipLocationHandler";
 import TooltipLocationHandler from "ui/tooltip/TooltipLocationHandler";
@@ -74,10 +73,6 @@ export default class Tooltip extends Component {
      * Set this tooltip's location to follow the mouse.
      */
     setLocation(location: "mouse"): this;
-    /**
-     * @deprecated This overload will be removed in 2.13.0-beta. Please update to other overloads.
-     */
-    setLocation(location: TooltipLocation): this;
     private getDefaultLocation;
     /**
      * Sets the max width of this tooltip.
@@ -89,18 +84,8 @@ export default class Tooltip extends Component {
     setDelay(delay?: number): this;
     getLastBlock(): TooltipBlock;
     getBlocks(): import("@wayward/goodstream").default<TooltipBlock>;
-    addBlock(initializer: (block: TooltipBlock) => any): this;
+    addBlock(initializer?: (block: TooltipBlock) => any): this;
     addHint(translation: TranslationGenerator, ...bindables: Bindable[]): this;
-    /** @deprecated use setText/addBlock */
-    addText(initializer: (text: Text) => any): this;
-    /** @deprecated use setText/addBlock */
-    addText<TEXT extends Text>(initializer: (text: Text) => any, cls?: Class<TEXT>): this;
-    /** @deprecated use setText/addBlock */
-    addHeading(initializer: (text: Text) => any): this;
-    /** @deprecated use setText/addBlock */
-    addParagraph(initializer: (text: Paragraph) => any): this;
-    /** @deprecated use setText/addBlock */
-    addList(...initializers: Array<((text: Text) => any) | undefined | false>): this;
     updatePosition(regenerateBox?: boolean): this;
     private initialPositionAndShownHandledExternally;
     setInitialPositionAndShownHandledExternally(): this;
@@ -116,6 +101,8 @@ export declare class TooltipBlock extends Component {
     constructor();
     setSecondary(): this;
     setTitle(initializer: (text: Text) => any): this;
+    addHeading(initializer: (text: Heading) => any): this;
     addParagraph(initializer: (text: Text) => any): this;
     addText(initializer: (text: Text) => any): this;
+    addList(...initializers: Array<((text: Text) => any) | undefined | false>): this;
 }

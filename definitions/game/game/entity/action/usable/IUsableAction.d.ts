@@ -34,7 +34,7 @@ import type HashSet from "utilities/collection/set/HashSet";
 export interface IUsableActionRequirement<TYPE> {
     allowNone?: true;
     validate?(player: Player, value: TYPE): boolean;
-    find?(player: Player): TYPE | undefined;
+    find?(player: Player): TYPE | false | undefined;
     getMissingName?(): Translation;
 }
 export interface IUsableActionItemRequirement extends Omit<IUsableActionRequirement<Item>, "find"> {

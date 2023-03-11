@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { DoodadTypeGroup } from "game/doodad/IDoodad";
-declare const doodadGroups: OptionalDescriptions<DoodadTypeGroup, string>;
+declare const doodadGroups: Descriptions<DoodadTypeGroup, string>;
 export default doodadGroups;

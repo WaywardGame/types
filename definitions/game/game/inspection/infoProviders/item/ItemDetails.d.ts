@@ -23,4 +23,5 @@ export default class ItemDetailsInfoProvider extends InfoProvider {
     private getInsulation;
     private getPreservation;
     private getGroupings;
+    static getGroups(itemOrType: Item | ItemType): import("game/item/IItem").ItemTypeGroup[];
 }

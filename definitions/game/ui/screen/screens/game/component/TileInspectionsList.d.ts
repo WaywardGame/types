@@ -9,13 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import TilePositionInspection from "game/inspection/handlers/TilePositionInspection";
+import type Tile from "game/tile/Tile";
 import UiTranslation from "language/dictionary/UiTranslation";
 import InspectionsList from "ui/screen/screens/game/component/InspectionsList";
-import Vector3 from "utilities/math/Vector3";
 export default class TileInspectionsList extends InspectionsList<TilePositionInspection> {
-    private position?;
-    getPosition(): Vector3 | undefined;
-    setPosition(position: Vector3): this;
+    private tile?;
+    getTile(): Tile | undefined;
+    setTile(tile: Tile): this;
     isValid(): boolean;
     protected getInvalidTranslation(): UiTranslation;
     protected initializeInspections(): TilePositionInspection;

@@ -10,7 +10,8 @@
  */
 import type { IRange } from "utilities/math/Range";
 import Objects from "utilities/object/Objects";
-import type { RandomInstance, RandomReference } from "utilities/random/Random";
+import type { RandomInstance } from "utilities/random/IRandom";
+import type { RandomReference } from "utilities/random/RandomReference";
 import RandomValueGenerator from "utilities/random/RandomValueGenerator";
 export default class RandomRange extends RandomValueGenerator<IRange> {
     limit?: number;

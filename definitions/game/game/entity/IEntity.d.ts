@@ -10,23 +10,15 @@
  */
 import type Doodad from "game/doodad/Doodad";
 import type Entity from "game/entity/Entity";
-import type { SkillType } from "game/entity/IHuman";
-import type { IStatEvents } from "game/entity/IStats";
+import type { Delay, SkillType } from "game/entity/IHuman";
 import type Item from "game/item/Item";
-import type { ITile } from "game/tile/ITerrain";
-export interface IEntityEvents extends IStatEvents {
+import type Tile from "game/tile/Tile";
+import type { IRGB } from "utilities/Color";
+export interface IEntityEvents {
     /**
      * Called when an entity is killed by another entity.
      */
     kill?(attacker: Entity | Doodad): void;
-    /**
-     * Called when this entity gets or loses a status effect
-     * @param entity The object this event is emitted from
-     * @param status The type of status effect that was gained or lost
-     * @param level Whether the entity now has the status effect
-     * @param reason The reason for the change
-     */
-    statusChange(status: StatusType, level: number, reason: StatusEffectChangeReason): void;
     /**
      * Called when the entity is created in the game
      * Also called for players that "rejoin" the game
@@ -40,13 +32,11 @@ export interface IEntityEvents extends IStatEvents {
      * Called when the entity is removed from the game
      */
     removed(): void;
-    /**
-     * Called before moving.
-     * Can be called twice for humans
-     * @param isMoving True the second time it's called, right as the entity is about to actually move
-     */
-    preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile, isMoving: boolean): boolean | undefined | void;
-    postMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): void;
+}
+export interface IEntityConstructorOptions<TypeType extends number> {
+    id: number;
+    type: TypeType;
+    tile: Tile;
 }
 export declare enum StatusEffectChangeReason {
     Gained = 0,
@@ -103,28 +93,87 @@ export interface ICausesDamage {
     damage?: number;
 }
 export declare enum Property {
-    Credit = 0,
-    Talked = 1
 }
 export type IProperties = Map<Property, any>;
 export declare enum EntityType {
     Player = 0,
     Creature = 1,
     NPC = 2,
-    Human = 3
+    Human = 3,
+    Doodad = 4,
+    TileEvent = 5,
+    Corpse = 6,
+    Item = 7
 }
 export declare enum AiType {
+    /**
+     * Doesn't attack
+     */
     Neutral = 0,
+    /**
+     * Attacks player
+     */
     Hostile = 1,
+    /**
+     * Move like neutral - become fleeing within 10 tiles of a player
+     */
     Scared = 2,
+    /**
+     * Moves in random direction
+     */
     Random = 4,
+    /**
+     * Doesn't move, can't be seen
+     */
     Hidden = 8,
+    /**
+     * Never scared
+     */
     Fearless = 16,
+    /**
+     * Monster is tamed
+     */
     Tamed = 32,
-    Follower = 64,
-    Defender = 128,
+    /**
+     * Follows the player at a close distance
+     */
+    FollowClose = 64,
+    /**
+     * Retaliates the player when attacked
+     */
+    Retaliate = 128,
+    /**
+     * Run away from the player
+     */
     Fleeing = 256,
-    Waiting = 512
+    /**
+     * Do nothing until there are no players next to the entity
+     */
+    Waiting = 512,
+    /**
+     * Follows the player at a far distance
+     */
+    FollowFar = 1024,
+    /**
+     * Never move
+     */
+    Stay = 2048,
+    /**
+     * Attacks adjacent enemies (creatures when tamed)
+     */
+    AttackAdjacent = 4096,
+    /**
+     * Attacks enemies in sight(creatures when tamed)
+     */
+    AttackInSight = 8192,
+    /**
+     * Stays in place and attacks things that pass by it
+     */
+    Defend = 6144,
+    /**
+     * Follows the owner and attacks enemies it sees
+     */
+    Attack = 8256
 }
 export declare enum MoveType {
     None = 0,
@@ -135,9 +184,10 @@ export declare enum MoveType {
     Mountain = 16,
     Fire = 32,
     BreakDoodads = 64,
-    WetLand = 128,
-    Void = 256,
-    LandBlind = 512,
+    BreakItems = 128,
+    WetLand = 256,
+    Void = 512,
+    LandBlind = 1024,
     Flying = 15
 }
 export declare enum AttackType {
@@ -220,5 +270,15 @@ export interface IAttackSkillBonus {
 }
 export declare enum EntityTag {
     None = 0
+}
+export interface IMoveToOptions {
+    disallowCancelation?: boolean;
+    movementDelay?: Delay | number;
+    animation?: MoveAnimation;
+    onMoveCompletedParticles?: IRGB;
+}
+export declare enum MoveAnimation {
+    Normal = 0,
+    Jump = 1
 }
 export {};

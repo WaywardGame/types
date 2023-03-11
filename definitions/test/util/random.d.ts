@@ -8,5 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-export declare function createRandom(): import("../../game/utilities/random/Random").Random<import("../../game/utilities/random/Random").SeededGenerator>;
-export declare function getSeed(): number | undefined;
+import type { Random } from "../../game/utilities/random/Random";
+export declare function createRandom(): Random;
+export declare function getSeed(): number;

@@ -20,6 +20,7 @@ import Text from "ui/component/Text";
 import type { IDialogDescription } from "ui/screen/screens/game/Dialogs";
 import { DialogId, Edge } from "ui/screen/screens/game/Dialogs";
 import type { IDialog } from "ui/screen/screens/game/IGameScreenApi";
+import type TooltipLocationHandler from "ui/tooltip/TooltipLocationHandler";
 import type { IDraggableEvents } from "ui/util/Draggable";
 import Draggable from "ui/util/Draggable";
 import Log from "utilities/Log";
@@ -99,7 +100,7 @@ export declare enum DialogClasses {
     EndsContent = "dialog-ends-content",
     FooterContent = "dialog-footer-content"
 }
-export default abstract class Dialog extends Component implements IDialog {
+declare abstract class Dialog extends Component implements IDialog {
     readonly subId: string;
     private static topOrder;
     private static topDialog;
@@ -141,6 +142,7 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     private description;
     constructor(id: number, subId?: string);
+    tempHighlight(duration?: number): void;
     addScrollableWrapper(type?: "scroll" | "auto", initializer?: (wrapper: Component) => any): Component<HTMLElement>;
     addSettingsPanel(): Component<HTMLElement>;
     showSettingsPanel(): this;
@@ -300,6 +302,10 @@ export default abstract class Dialog extends Component implements IDialog {
     private correctPosition;
     private addHandle;
 }
+declare namespace Dialog {
+    const TooltipLocation: (locationHandler: TooltipLocationHandler) => TooltipLocationHandler;
+}
+export default Dialog;
 /**
  * A component that emits events for being dragged. Takes a `HandlePosition` to be styled with.
  */
@@ -334,4 +340,3 @@ export declare class Footer extends Component {
     readonly content: Component;
     constructor();
 }
-export {};

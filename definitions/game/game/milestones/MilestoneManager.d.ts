@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import type { Game } from "game/Game";
 import { Milestone, MilestoneVisibility } from "game/milestones/IMilestone";
 type IMilestoneUpdate = [Milestone, (number | string)?];
 export interface IMilestoneEvents {
@@ -19,7 +20,9 @@ export interface IMilestoneEvents {
      */
     update(milestone: Milestone, value: number, max: number): void;
 }
-declare class MilestonesManager extends EventEmitter.Host<IMilestoneEvents> {
+export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents> {
+    private readonly game;
+    constructor(game: Game);
     readonly descriptions: Descriptions<Milestone, import("./MilestoneDefinition").default>;
     private readonly milestoneUpdates;
     /**
@@ -49,5 +52,4 @@ declare class MilestonesManager extends EventEmitter.Host<IMilestoneEvents> {
     isDiscovered(milestone: Milestone, data: number | string): boolean;
     private updateMilestone;
 }
-declare const _default: MilestonesManager;
-export default _default;
+export {};

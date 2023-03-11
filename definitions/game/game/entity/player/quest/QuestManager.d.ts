@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Stream from "@wayward/goodstream/Stream";
 import EventEmitter from "event/EventEmitter";
 import type Player from "game/entity/player/Player";
 import type PlayerManager from "game/entity/player/PlayerManager";
@@ -100,10 +99,10 @@ export declare class QuestInstance extends EventEmitter.Host<IQuestInstanceEvent
     constructor(host: Player, data: IQuest, id: number);
     getTitle(): import("../../../../language/impl/TranslationImpl").default | undefined;
     getDescription(): import("../../../../language/impl/TranslationImpl").default | undefined;
-    getRequirements(): Stream<RequirementInstance>;
+    getRequirements(): RequirementInstance[];
     needsManualCompletion(): boolean | undefined;
     complete(): this;
-    getChildren(): Stream<QuestType>;
+    getChildren(): QuestType[];
     getCompletionAmount(): number;
 }
 interface IQuestInstanceEvents {

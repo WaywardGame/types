@@ -56,7 +56,15 @@ export declare enum MagicalPropertyType {
     /**
      * Adds a bonus to the growth speed for plants and mushrooms planted on it.
      */
-    GrowingSpeed = 25
+    GrowingSpeed = 25,
+    /**
+     * Adds "light" to any piece of equipment/weapon.
+     */
+    Glowing = 26,
+    /**
+     * Adds a property that emits skill bonus to anybody within range (3x3 square) of the doodad.
+     */
+    DoodadSkill = 27
 }
 export interface IMagicalPropertyDescription {
     /**
@@ -77,5 +85,6 @@ export interface MagicalPropertyTypeSubTypeMap {
     [MagicalPropertyType.Stat]: Stat;
     [MagicalPropertyType.Skill]: SkillType;
     [MagicalPropertyType.Reputation]: Stat;
+    [MagicalPropertyType.DoodadSkill]: SkillType;
 }
 export declare const magicalPropertyDescriptions: PartialRecord<MagicalPropertyType, IMagicalPropertyDescription>;

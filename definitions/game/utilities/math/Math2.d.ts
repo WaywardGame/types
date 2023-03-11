@@ -60,6 +60,72 @@ declare module Math2 {
      * Given a number between `from` and `to`, returns a decimal how far it is, `t`.
      */
     function unlerp(from: number, to: number, lerped: number): number;
+    /**
+     * Curve the value t exponentially (IE, starts gentle, ends steep)
+     * @param from Rather than starting the curve at 0, start it here
+     * @param to Rather than ending the curve at 1, end it here
+     * @param t A decimal value from 0 to 1 representing how far along the curve's x axis to return the y position of
+     * @param steepness A value representing how steep the curve should be. Defaults to 4 (this value does not behave the same as it does for `logarithmicLerp`)
+     *
+     * ### Also see:
+     * - {@link logarithmicLerp} — Steep to gentle, logarithmically
+     * - {@link curve2} — Steep to gentle, shaped like the circumference of a quarter circle
+     * - {@link curve4} — Gentle to steep, shaped like the circumference of a quarter circle
+     *
+     * See this suite of curves [graphed on desmos](https://www.desmos.com/calculator/rqx0u7xjtm)
+     */
+    function exponentialLerp(from: number, to: number, t: number, steepness?: number): number;
+    /**
+     * Curve the value t exponentially (IE, starts steep, ends gentle)
+     * @param from Rather than starting the curve at 0, start it here
+     * @param to Rather than ending the curve at 1, end it here
+     * @param t A decimal value from 0 to 1 representing how far along the curve's x axis to return the y position of
+     * @param steepness A value representing how steep the curve should be. Defaults to 50 (this value does not behave the same as it does for `exponentialLerp`)
+     *
+     * ### Also see:
+     * - {@link exponentialLerp} — Gentle to steep, exponentially
+     * - {@link curve2} — Steep to gentle, shaped like the circumference of a quarter circle
+     * - {@link curve4} — Gentle to steep, shaped like the circumference of a quarter circle
+     *
+     * See this suite of curves [graphed on desmos](https://www.desmos.com/calculator/rqx0u7xjtm)
+     */
+    function logarithmicLerp(from: number, to: number, t: number, steepness?: number): number;
+    /**
+     * Curve the value t (0-1) along the second quadrant of a rounded square/circle. (IE, starts steep, ends gentle)
+     * @param from Rather than starting the curve at 0, start it here
+     * @param to Rather than ending the curve at 1, end it here
+     * @param t A decimal value from 0 to 1 representing how far along the curve's x axis to return the y position of
+     * @param steepness How rounded the square/circle is.
+     * - `1` — linear/a diamond
+     * - `2` (default) — a circle
+     * - Further reduces the curve's portion of the square
+     *
+     * ### Also see:
+     * - {@link curve4} — Gentle to steep, shaped like the circumference of a quarter circle
+     * - {@link exponentialLerp} — Gentle to steep, exponentially
+     * - {@link logarithmicLerp} — Steep to gentle, logarithmically
+     *
+     * See this suite of curves [graphed on desmos](https://www.desmos.com/calculator/rqx0u7xjtm)
+     */
+    function curve2(from: number, to: number, t: number, steepness?: number): number;
+    /**
+     * Curve the value t (0-1) along the fourth quadrant of a rounded square/circle. (IE, starts gentle, ends steep)
+     * @param from Rather than starting the curve at 0, start it here
+     * @param to Rather than ending the curve at 1, end it here
+     * @param t A decimal value from 0 to 1 representing how far along the curve's x axis to return the y position of
+     * @param steepness How rounded the square/circle is.
+     * - `1` — linear/a diamond
+     * - `2` (default) — a circle
+     * - Further reduces the curve's portion of the square
+     *
+     * ### Also see:
+     * - {@link curve2} — Steep to gentle, shaped like the circumference of a quarter circle
+     * - {@link exponentialLerp} — Gentle to steep, exponentially
+     * - {@link logarithmicLerp} — Steep to gentle, logarithmically
+     *
+     * See this suite of curves [graphed on desmos](https://www.desmos.com/calculator/rqx0u7xjtm)
+     */
+    function curve4(from: number, to: number, t: number, steepness?: number): number;
     function mod(n1: number, n2: number): number;
     function average(...ns: number[]): number;
     function sum(...ns: number[]): number;

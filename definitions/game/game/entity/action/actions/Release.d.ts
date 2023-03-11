@@ -14,5 +14,8 @@ import type Creature from "game/entity/creature/Creature";
 export interface IReleaseCanUse extends IActionUsable {
     creature: Creature;
 }
-declare const _default: Action<[], import("../../Human").default, void, IReleaseCanUse, []>;
+/**
+ * Releases a creature from being tamed
+ */
+declare const _default: Action<[], import("../../Human").default<number>, void, IReleaseCanUse, []>;
 export default _default;

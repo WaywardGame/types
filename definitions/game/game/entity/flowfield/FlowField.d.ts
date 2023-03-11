@@ -15,6 +15,7 @@ export default class FlowField implements IPreSerializeCallback {
     readonly x: number;
     readonly y: number;
     readonly z: number;
+    readonly mapSize: number;
     readonly size: number;
     readonly moveType: MoveType;
     encodedFlowField: Uint32Array | undefined;
@@ -22,13 +23,12 @@ export default class FlowField implements IPreSerializeCallback {
     private instance;
     private flowField;
     private penaltyField;
-    constructor(x: number | undefined, y: number, z: number, size: number, moveType: MoveType);
+    constructor(x: number | undefined, y: number, z: number, mapSize: number, size: number, moveType: MoveType);
     toString(): string;
     preSerializeObject(): void;
     load(): void;
     unload(): void;
     getZ(): number;
-    getHashCodes(): string[];
     getFieldValue(x: number, y: number): number;
     updateField(flowFieldHumans: Human[]): void;
     resetPenalty(gridIndex: number): void;

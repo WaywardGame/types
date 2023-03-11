@@ -8,39 +8,35 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { CreationId } from "game/IGame";
+import type { IEventEmitter } from "event/EventEmitter";
+import type { IEntityMovableEvents } from "game/entity/EntityMovable";
+import EntityMovable from "game/entity/EntityMovable";
+import type { IEntityConstructorOptions } from "game/entity/IEntity";
+import { EntityType } from "game/entity/IEntity";
+import { TileUpdateType } from "game/IGame";
 import type { IObject } from "game/IObject";
-import type { IslandId } from "game/island/IIsland";
-import type { IReferenceable } from "game/reference/IReferenceManager";
-import type { ITemperatureSource } from "game/temperature/ITemperature";
 import { FireStage } from "game/tile/events/IFire";
-import type { ITile } from "game/tile/ITerrain";
 import type { ITileEventDescription } from "game/tile/ITileEvent";
 import { TileEventType } from "game/tile/ITileEvent";
-import type { ISerializedTranslation } from "language/ITranslation";
+import type Tile from "game/tile/Tile";
 import type { IVector3 } from "utilities/math/IVector";
-export interface ITileEventEvents {
+export interface ITileEventEvents extends IEntityMovableEvents {
     /**
      * Emitted when the fire stage of this tile event changes.
      * Note: The fire stage of tile event is not saved, so when the tile event's fire stage is first checked on load, this event will be
      * emitted.
      */
-    fireUpdate(tile: ITile, stage: FireStage | undefined): any;
+    fireUpdate(tile: Tile, stage: FireStage | undefined): any;
 }
-export default class TileEvent extends EventEmitter.Host<ITileEventEvents> implements IReferenceable, IObject<TileEventType>, IVector3, ITemperatureSource {
+export default class TileEvent extends EntityMovable<TileEventType> implements IObject<TileEventType> {
     static is(value: any): value is TileEvent;
-    readonly objectType: CreationId;
-    type: TileEventType;
-    id: number;
-    referenceId?: number;
-    z: number;
-    x: number;
-    y: number;
-    renamed?: string | ISerializedTranslation;
-    decay?: number;
+    get entityType(): EntityType.TileEvent;
+    get tileUpdateType(): TileUpdateType;
+    readonly event: IEventEmitter<this, ITileEventEvents>;
+    anim: number;
     fromX: number;
     fromY: number;
+    decay?: number;
     gfx?: number;
     maxDur?: number;
     minDur?: number;
@@ -52,20 +48,27 @@ export default class TileEvent extends EventEmitter.Host<ITileEventEvents> imple
      */
     fuel?: number;
     private fireStage?;
-    islandId: IslandId;
     private _description;
-    private _movementTime;
-    constructor(type?: TileEventType, islandId?: `${number},${number}`, x?: number, y?: number, z?: number);
-    get island(): import("../island/Island").default;
+    constructor(entityOptions?: IEntityConstructorOptions<TileEventType>);
+    isValid(): boolean;
+    get asCorpse(): undefined;
+    get asCreature(): undefined;
+    get asDoodad(): undefined;
+    get asHuman(): undefined;
+    get asLocalPlayer(): undefined;
+    get asNPC(): undefined;
+    get asPlayer(): undefined;
+    get asTileEvent(): TileEvent | undefined;
+    get asItem(): undefined;
+    get point(): IVector3;
+    get tile(): Tile;
     toString(): string;
     description(): ITileEventDescription | undefined;
     getName(article?: false | "definite" | "indefinite", count?: number): import("../../language/impl/TranslationImpl").default;
-    getTile(): ITile;
     getProducedTemperature(): number | undefined;
-    updateFire(tile: ITile): void;
-    moveTo(x: number, y: number, z: number): void;
-    addToTile(tile: ITile): void;
+    updateFire(tile: Tile): void;
+    protected updateTile(fromTile: Tile, toTile: Tile): boolean;
+    addToTile(tile: Tile): void;
     removeFromTile(updateTile: boolean): void;
-    getMovementProgress(timeStamp: number): number;
     burn(fire: TileEvent): void;
 }

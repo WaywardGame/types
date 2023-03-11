@@ -20,8 +20,9 @@ export default class ItemMapManager {
     static getMapsInContainer(island: Island, container: IContainer): Item[];
     private map?;
     private subscribedToDiscoverTreasure;
-    private readonly host;
-    constructor(host: Item);
+    private host;
+    constructor(item?: Item);
+    setHost(item: Item): void;
     has(): boolean;
     /**
      * Sets the map associated with this item.

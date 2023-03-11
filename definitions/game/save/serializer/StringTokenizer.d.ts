@@ -19,6 +19,10 @@ export default class StringTokenizer implements IUnserializedCallback {
     static initialize(): void;
     static create(): StringTokenizer;
     /**
+     * Updates an existing string tokenizer with new strings
+     */
+    static update(stringTokenizer: StringTokenizer): void;
+    /**
      * String -> Token. Used when writing string tokens during serialization
      */
     private readonly stringToToken;

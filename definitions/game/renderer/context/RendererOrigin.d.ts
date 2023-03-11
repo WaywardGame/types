@@ -15,19 +15,13 @@ import type Player from "game/entity/player/Player";
 import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import FieldOfView from "renderer/fieldOfView/FieldOfView";
-import type { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
-import type { IVector3 } from "utilities/math/IVector";
+import type { CanASeeBType, IFieldOfViewOrigin } from "renderer/fieldOfView/IFieldOfView";
 import type { IVector4 } from "utilities/math/Vector4";
-export interface IRendererOrigin {
-    readonly islandId: IslandId;
-    readonly island: Island;
-    readonly x: number;
-    readonly y: number;
-    readonly z: number;
-    readonly fromX: number;
-    readonly fromY: number;
+export interface IRendererOrigin extends IFieldOfViewOrigin {
+    readonly fromX?: number;
+    readonly fromY?: number;
     readonly movingClientside: MovingClientSide;
-    readonly asEntity: Entity | undefined;
+    readonly asEntity: Entity;
     readonly asPlayer: Player | undefined;
     readonly asHuman: Human | undefined;
     canSeeObject(type: CanASeeBType, object: IVector4 & {
@@ -43,11 +37,10 @@ export declare class RendererOrigin implements IRendererOrigin {
     readonly y: number;
     readonly z: number;
     static fromEntity(entity: Entity): IRendererOrigin;
-    static fromVector(island: Island, vector: IVector3): IRendererOrigin;
     readonly fromX: number;
     readonly fromY: number;
     readonly movingClientside: MovingClientSide;
-    readonly asEntity: Entity | undefined;
+    readonly asEntity: Entity;
     readonly asPlayer: Player | undefined;
     readonly asHuman: Human | undefined;
     private constructor();

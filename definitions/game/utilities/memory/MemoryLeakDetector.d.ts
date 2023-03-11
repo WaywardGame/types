@@ -23,6 +23,7 @@ declare class MemoryLeakDetector {
     registerMultiple<T extends object>(prefix: string, objects: SaferArray<T>, objectNamer: (object: T) => string, expectedLifetime: ExpectedLifetime): void;
     onStopPlay(): void;
     onScreenShow(_: any, screen: Screen): Promise<any>;
+    private onReset;
     private runCheck;
     garbageCollect(): Promise<void>;
     private checkObjects;

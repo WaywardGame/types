@@ -30,6 +30,7 @@ export default class IslandInspection extends Inspection<IVector2> {
     private getDaysSpent;
     private getDaysSpentByPlayer;
     private getPlayers;
+    private getLighthouses;
     private getPlayerLikeNPCs;
     private getYouAreHereLabel;
 }

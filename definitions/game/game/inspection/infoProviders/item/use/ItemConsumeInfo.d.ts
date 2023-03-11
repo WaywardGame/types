@@ -21,7 +21,7 @@ declare const _default: UseInfo<{
     skillBonus: number;
     magicalBonus: number;
     stats: Stat[];
-    objectType: import("../../../../IGame").CreationId.Item;
+    entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
     type: import("../../../../item/IItem").ItemType;
     description: import("../../../../item/IItem").IItemDescription;

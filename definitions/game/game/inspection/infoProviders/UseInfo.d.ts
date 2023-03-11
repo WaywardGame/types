@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { ActionType } from "game/entity/action/IAction";
-import type { CreationId } from "game/IGame";
+import type { EntityType } from "game/entity/IEntity";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import type { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
@@ -18,7 +18,7 @@ import type Island from "game/island/Island";
 import type Translation from "language/Translation";
 import type { TranslationGenerator } from "ui/component/IComponent";
 export interface IDescribed {
-    objectType: CreationId;
+    entityType: EntityType;
     type: number;
     referenceId?: number;
     quality?: Quality;
@@ -27,7 +27,7 @@ export interface IDescribed {
 }
 export type DescribedDescription<T extends IDescribed> = Exclude<ReturnType<T["description"]>, undefined>;
 export interface IUseInfoBase<T extends IDescribed, A extends ActionType> {
-    objectType: T["objectType"];
+    entityType: T["entityType"];
     value?: T;
     type: T["type"];
     description: DescribedDescription<T>;
@@ -41,10 +41,10 @@ export interface IItemUseInfo<T extends IDescribed, A extends ActionType, M exte
     methods: M;
 }
 export type InfoUnion<T extends IDescribed, ACTION extends ActionType> = {
-    [K in T["objectType"]]: IUseInfoBase<Extract<T, {
-        objectType: K;
+    [K in T["entityType"]]: IUseInfoBase<Extract<T, {
+        entityType: K;
     }>, ACTION>;
-}[T["objectType"]];
+}[T["entityType"]];
 export type UseInfoPredicate<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType> = (info: IUseInfoBase<T, ACTION>) => I | undefined;
 export type UseInfoHandler<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType> = (info: I, context: InfoProviderContext) => Array<ArrayOr<TranslationGenerator | InfoProvider> | undefined> | Translation | InfoProvider | undefined;
 export type UseInfoDisplayLevelGetter<I extends IUseInfoBase<T, ACTION>, T extends IDescribed, ACTION extends ActionType> = (info: I, context: InfoProviderContext) => InfoDisplayLevel;

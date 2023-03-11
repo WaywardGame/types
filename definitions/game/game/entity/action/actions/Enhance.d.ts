@@ -15,5 +15,5 @@ import type Item from "game/item/Item";
 export interface IEnhanceCanUse extends IActionUsable {
     enhanceTarget: Item;
 }
-declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, IEnhanceCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number>, void, IEnhanceCanUse, [Item, (Item | undefined)?]>;
 export default _default;

@@ -8,19 +8,28 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Human from "game/entity/Human";
 import type Player from "game/entity/player/Player";
+import type Island from "game/island/Island";
+import type { IVector4 } from "utilities/math/Vector4";
 export interface IFieldOfViewEvents {
     getPlayerFieldOfViewRadius(radius: number, player: Player): number;
 }
+export interface IFieldOfViewOrigin extends Readonly<IVector4> {
+    readonly island: Island;
+    readonly asHuman?: Human;
+}
 export declare enum CanASeeBType {
     ClientSide = 0,
-    CreatureRandomSpawn = 1,
-    CreatureScarecrow = 2,
-    CreatureTrapping = 3,
-    CreatureIslandTravel = 4,
-    FieldOfView = 5,
-    GetNearestPlayer = 6,
-    GetPlayersThatSeePosition = 7,
-    SkeletalMage = 8,
-    ZombieHorde = 9
+    CreatureInSightAttacking = 1,
+    CreatureIslandTravel = 2,
+    CreatureRandomSpawn = 3,
+    CreatureScarecrow = 4,
+    CreatureTrapping = 5,
+    FieldOfView = 6,
+    GetNearestPlayer = 7,
+    GetPlayersThatSeePosition = 8,
+    Shipper = 9,
+    SkeletalMage = 10,
+    ZombieHorde = 11
 }

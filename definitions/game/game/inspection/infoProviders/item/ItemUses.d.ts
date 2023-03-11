@@ -9,18 +9,18 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "game/entity/action/IAction";
-import { CreationId } from "game/IGame";
+import { EntityType } from "game/entity/IEntity";
 import Uses from "game/inspection/infoProviders/Uses";
 import type { IItemDescription, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 export default class ItemUses extends Uses<Item> {
-    protected getObjectType(): CreationId.Item;
+    protected getEntityType(): EntityType.Item;
     protected getDescription(type: ItemType): IItemDescription;
     protected getUses(description: IItemDescription): ActionType[];
     protected getUseInfoHandlers(): (import("../UseInfo").default<{
         doodadContainer: import("../../../doodad/IDoodad").IDoodadDescription | undefined;
         civilizationScore: number | undefined;
-        objectType: CreationId.Item;
+        entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: IItemDescription;
@@ -40,6 +40,12 @@ export default class ItemUses extends Uses<Item> {
         getPreservationChance: () => import("../LabelledValue").default | undefined;
     } & {
         getCivilizationScore: () => import("../LabelledValue").default | undefined;
+    } & {
+        getMagicalBuildTypes: () => Set<import("../../../magic/MagicalPropertyType").MagicalPropertyType>;
+    } & {
+        getMagicEffect: (magic: import("../../../magic/MagicalPropertyManager").MagicalPropertyEntry) => import("../LabelledValue").default;
+    } & {
+        getDoodadSkill: () => import("../LabelledValue").default[];
     }, Item> | import("../UseInfo").default<{
         onConsume: number | import("game/item/IItem").ConsumeItemStatsTuple;
         skill: import("../../../entity/IHuman").SkillType | undefined;
@@ -48,7 +54,7 @@ export default class ItemUses extends Uses<Item> {
         skillBonus: number;
         magicalBonus: number;
         stats: import("../../../entity/IStats").Stat[];
-        objectType: CreationId.Item;
+        entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: IItemDescription;
@@ -59,7 +65,7 @@ export default class ItemUses extends Uses<Item> {
     }, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.Cure | ActionType.HealOther, {
         generateUseConsumeTooltip: () => (tooltip: import("../../../../ui/tooltip/Tooltip").default, stat: import("../../../entity/IStats").Stat, base: number) => import("../../../../ui/tooltip/Tooltip").default;
     }, Item> | import("../UseInfo").default<{
-        objectType: CreationId.Item;
+        entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: IItemDescription;
@@ -69,7 +75,7 @@ export default class ItemUses extends Uses<Item> {
         details: Set<symbol>;
     }, ActionType.Craft, {}, Item> | import("../UseInfo").default<{
         requiredItems: (ItemType | import("game/item/IItem").ItemTypeGroup)[];
-        objectType: CreationId.Item;
+        entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: IItemDescription;
@@ -81,7 +87,7 @@ export default class ItemUses extends Uses<Item> {
         getRequiredItems: () => import("../../../../language/impl/TranslationImpl").default[];
     }, Item> | import("../UseInfo").default<{
         dismantle: import("game/item/IItem").IDismantleDescription;
-        objectType: CreationId.Item;
+        entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: IItemDescription;
@@ -91,7 +97,7 @@ export default class ItemUses extends Uses<Item> {
         details: Set<symbol>;
     }, ActionType.Dismantle, {}, Item> | import("../UseInfo").default<{
         equip: import("../../../entity/IHuman").EquipType;
-        objectType: CreationId.Item;
+        entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: IItemDescription;
@@ -122,7 +128,7 @@ export default class ItemUses extends Uses<Item> {
     } & {
         getMagic: () => import("../LabelledValue").default[];
     }, Item> | import("../UseInfo").default<{
-        objectType: CreationId.Item;
+        entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: IItemDescription;
@@ -132,7 +138,7 @@ export default class ItemUses extends Uses<Item> {
         details: Set<symbol>;
     }, ActionType.Offer, {}, Item> | import("../UseInfo").default<{
         ranged: import("game/item/IItem").IRanged;
-        objectType: CreationId.Item;
+        entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: IItemDescription;
@@ -143,7 +149,7 @@ export default class ItemUses extends Uses<Item> {
     }, ActionType.Cast | ActionType.Fire, {}, Item> | import("../UseInfo").default<{
         civilizationScore: number | undefined;
         growingSpeed: number | undefined;
-        objectType: CreationId.Item;
+        entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: IItemDescription;
@@ -157,7 +163,7 @@ export default class ItemUses extends Uses<Item> {
         getGrowingSpeed: () => import("../LabelledValue").default | undefined;
     }, Item> | import("../UseInfo").default<{
         attack: number;
-        objectType: CreationId.Item;
+        entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: IItemDescription;
@@ -167,7 +173,7 @@ export default class ItemUses extends Uses<Item> {
         details: Set<symbol>;
     }, ActionType.Shoot, {}, Item> | import("../UseInfo").default<{
         stoke: number;
-        objectType: CreationId.Item;
+        entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: IItemDescription;
@@ -177,7 +183,7 @@ export default class ItemUses extends Uses<Item> {
         details: Set<symbol>;
     }, ActionType.StokeFire, {}, Item> | import("../UseInfo").default<{
         telescopy: number;
-        objectType: CreationId.Item;
+        entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: IItemDescription;
@@ -187,7 +193,7 @@ export default class ItemUses extends Uses<Item> {
         details: Set<symbol>;
     }, ActionType.Equip, {}, Item> | import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Item, ActionType.Throw>, ActionType.Throw, {}, Item> | import("../UseInfo").default<{
         damage: number;
-        objectType: CreationId.Item;
+        entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: IItemDescription;

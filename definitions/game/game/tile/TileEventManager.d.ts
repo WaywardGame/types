@@ -10,11 +10,9 @@
  */
 import Stream from "@wayward/goodstream/Stream";
 import { CreatureType } from "game/entity/creature/ICreature";
-import type Human from "game/entity/Human";
-import { CreationId } from "game/IGame";
 import { ObjectManager } from "game/ObjectManager";
-import type { ITile } from "game/tile/ITerrain";
 import { TileEventType } from "game/tile/ITileEvent";
+import type Tile from "game/tile/Tile";
 import TileEvent from "game/tile/TileEvent";
 import type { TextContext } from "language/ITranslation";
 import type { IVector3 } from "utilities/math/IVector";
@@ -22,12 +20,10 @@ export interface ITileManagerEvents {
     /**
      * Called when a tile event is about to be created
      * @param type The type of tile event
-     * @param x The x coordinate where the tile event will be created
-     * @param y The y coordinate where the tile event will be created
-     * @param z The z coordinate where the tile event will be created
+     * @param tile The tile where the tile event will be created
      * @returns False if the creature cannot spawn, or undefined to use the default logic
      */
-    canCreate(type: TileEventType, x: number, y: number, z: number): boolean | undefined;
+    canCreate(type: TileEventType, tile: Tile): boolean | undefined;
     /**
      * Called when a tile event is created.
      */
@@ -36,45 +32,30 @@ export interface ITileManagerEvents {
      * Called when a tile event is removed.
      */
     remove(event: TileEvent): any;
-    /**
-     * Called when a tile event is moved.
-     */
-    move(event: TileEvent): any;
 }
 export default class TileEventManager extends ObjectManager<TileEvent, ITileManagerEvents> {
-    protected readonly creationId: CreationId;
     load(): void;
-    create(type: TileEventType, x: number, y: number, z: number): TileEvent | undefined;
-    createFake(type: TileEventType, x: number, y: number, z: number): TileEvent | undefined;
+    create(type: TileEventType, tile: Tile): TileEvent | undefined;
+    createFake(type: TileEventType, tile: Tile, id?: number): TileEvent | undefined;
     remove(tileEvent: TileEvent): void;
-    getFromTile(tile: ITile, type: TileEventType): TileEvent | undefined;
+    getFromTile(tile: Tile, type: TileEventType): TileEvent | undefined;
     /**
      * Gets an array of tile events that have the water property at a given tile.
-     * @param tile ITile that you want to look at.
+     * @param tile Tile that you want to look at.
      * @returns Array of tile events with water properties or undefined
      */
-    getPuddles(tile: ITile): TileEvent[] | undefined;
-    canGather(tile: ITile): TileEvent | undefined;
+    getPuddles(tile: Tile): TileEvent[] | undefined;
+    canGather(tile: Tile): TileEvent | undefined;
     updateAll(): void;
     fireOverflow(x: number, y: number, z: number): boolean;
-    canPickUp(tile: ITile): TileEvent | undefined;
-    blocksTile(tile: ITile): boolean;
+    canPickUp(tile: Tile): TileEvent | undefined;
+    blocksTile(tile: Tile): boolean;
     /**
      * Creates either blood or water blood
-     * @param x X-axis of the tile where you want to spawn around (can be any adjacent tile)
-     * @param y Y-axis of the tile where you want to spawn around (can be any adjacent tile)
-     * @param z Z-axis of the tile where you want to spawn around (can be any adjacent tile)
+     * @param origin The origin around where you want to spawn around (can be any adjacent tile)
      * @returns True if the blood was created, false if not
      */
-    createBlood(x: number, y: number, z: number): boolean;
-    clearBlood(position: IVector3, executor: Human): boolean;
-    /**
-     * Clears all the water puddles on a specified tile.
-     * @param point The point to check for water puddles at.
-     * @param executor The player to send the message to.
-     */
-    clearPuddles(point: IVector3, executor: Human): boolean;
-    moveExcrement(position: IVector3): void;
+    createBlood(origin: IVector3): boolean;
     containsDamagingTileEvents(events: TileEvent[] | undefined): boolean;
     getName(typeOrEvent: CreatureType | TileEvent, article?: false | "definite" | "indefinite", count?: number, showCount?: boolean): import("../../language/impl/TranslationImpl").default;
     getEventTranslations(events: TileEvent[], article?: false | "definite" | "indefinite", context?: TextContext): Stream<import("../../language/impl/TranslationImpl").default>;

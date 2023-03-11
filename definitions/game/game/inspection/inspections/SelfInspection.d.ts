@@ -10,16 +10,15 @@
  */
 import Player from "game/entity/player/Player";
 import { InspectType } from "game/inspection/IInspection";
-import { InfoProvider } from "game/inspection/InfoProvider";
+import type { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import type Inspection from "game/inspection/Inspection";
 import PlayerInspection from "game/inspection/inspections/PlayerInspection";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import type { IVector3 } from "utilities/math/IVector";
+import type Tile from "game/tile/Tile";
 export default class SelfInspection extends PlayerInspection {
-    static getFromTile(position: IVector3, context: InfoProviderContext): ArrayOr<Inspection<Player>>;
+    static getFromTile(tile: Tile, context: InfoProviderContext): ArrayOr<Inspection<Player>>;
     static handles(type: InspectType, player: unknown, context?: InfoProviderContext): boolean;
     constructor(player: Player);
     getBorder(): string;
-    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
+    get(context: InfoProviderContext): InfoProvider[];
 }

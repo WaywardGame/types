@@ -17,10 +17,7 @@ export declare module WebWorkerHelpers {
         getWorker(): Worker | undefined;
         free(): void;
     }
-    function create(workerFunction: (data: any) => void, messageCallbackFunction: (data: any) => void): Worker;
-    function createReusable(workerFunction: (data: any) => void): WebWorker;
-    function definitionPropertiesToBoolean(name: string, values: any): string;
-    function enumToString(name: string, values: any, withStrings?: boolean): string;
-    function moduleToString(moduleName: string, name: string | undefined, moduleToConvert: any, globalVariables?: string[]): string;
-    function biomesToString(): string;
+    export function create(workerFunction: (data: any) => void, messageCallbackFunction: (data: any) => void): Worker;
+    export function createReusable(workerFunction: (data: any) => void): WebWorker;
+    export {};
 }

@@ -14,5 +14,5 @@ import { ActionArgument } from "game/entity/action/IAction";
 export interface IAddFuelCanUse extends IActionUsable {
     stokeAmount: number;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../../Human").default, void, IAddFuelCanUse, [import("../../../item/Item").default, import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../../Human").default<number>, void, IAddFuelCanUse, [import("../../../item/Item").default, import("../../../item/Item").default]>;
 export default _default;

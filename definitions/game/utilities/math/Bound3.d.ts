@@ -18,7 +18,7 @@ export default class Bound3 implements IBound3 {
     min: Vector2;
     max: Vector2;
     z: number;
-    static contains(bound: IBound3, x: number, y: number, z: number): boolean;
-    static containsIgnoreZ(bound: IBound3, x: number, y: number): boolean;
+    static contains(mapSize: number, bound: IBound3, x: number, y: number, z: number): boolean;
+    static containsIgnoreZ(mapSize: number, bound: IBound3, x: number, y: number): boolean;
     constructor(min: Vector2, max: Vector2, z: number);
 }

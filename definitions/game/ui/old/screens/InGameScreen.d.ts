@@ -9,9 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "game/doodad/Doodad";
-import { EquipType } from "game/entity/IHuman";
-import NPC from "game/entity/npc/NPC";
-import type { DisplayableItemType, IContainer, IDismantleComponent } from "game/item/IItem";
+import type NPC from "game/entity/npc/NPC";
+import type { ContainerReference, DisplayableItemType, IContainer, IDismantleComponent } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import Message from "language/dictionary/Message";
@@ -21,8 +20,8 @@ import SortRow from "ui/component/SortRow";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import { GlobalMouseInfo } from "ui/input/InputManager";
 import type { ISortableEvent } from "ui/old/functional/IFunctionalSortable";
-import type { IContainerSortInfo, IDialogInfo } from "ui/old/IOldUi";
-import { DialogId, SortType } from "ui/old/IOldUi";
+import type { IContainerSortInfo } from "ui/old/IOldUi";
+import { OldUiDialogId, SortType } from "ui/old/IOldUi";
 import BaseScreen from "ui/old/screens/BaseScreen";
 import type ActionBar from "ui/screen/screens/game/static/ActionBar";
 import type { ActionSlot } from "ui/screen/screens/game/static/ActionBar";
@@ -48,6 +47,13 @@ export interface IUiContainer {
     container: IContainer;
     name: string;
     owner: NPC | Doodad | Item;
+}
+interface IDialogPosition {
+    title?: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
 }
 export default class InGameScreen extends BaseScreen {
     overlayBindCatcherId: number;
@@ -97,8 +103,20 @@ export default class InGameScreen extends BaseScreen {
     onHide(): void;
     initializeGameState(): void;
     onGameEnd(): void;
-    getDialogIndex(dialogId: DialogId, customDialogInfo?: IDialogInfo): string;
-    setupDialog(dialogId: DialogId, highlightItemId?: number, customDialogInfo?: IDialogInfo, containerSortInfo?: IContainerSortInfo): JQueryUI.DialogOptions;
+    /**
+     * Gets dialog index
+     * @param dialogId Dialog id
+     * @param containerReference Container reference when opening a container
+     * @returns string if it's a named dialog, number if it's a container (reference id), -1 if no dialog index was retrievable
+     */
+    getDialogIndex(dialogId: OldUiDialogId, containerReference?: ContainerReference): "inventory" | "crafting-tabs" | number;
+    /**
+     * Gets dialog index
+     * @param containerElement Dialog container element
+     * @returns string if it's a named dialog, number if it's a container (reference id), -1 if no dialog index was retrievable
+     */
+    getDialogIndexByContainerElement(containerElement: JQuery): "inventory" | "crafting-tabs" | number;
+    setupDialog(dialogId: OldUiDialogId, containerReference?: ContainerReference, highlightItemId?: number): JQueryUI.DialogOptions;
     highlightItemElementByItemId(itemId: number, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementByItemType(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementByItemTypeWithNoItemId(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
@@ -112,7 +130,7 @@ export default class InGameScreen extends BaseScreen {
     focus(): void;
     closeDialog(dialog: JQuery): boolean;
     closeAllDialogs(): boolean;
-    autoOpenDialog(index: string | number, element: JQuery): boolean;
+    autoOpenDialog(dialogId: OldUiDialogId, element: JQuery): boolean;
     openDialogs(): void;
     clampDialogs(): void;
     getItemClass(item?: Item, itemType?: DisplayableItemType): string;
@@ -134,8 +152,6 @@ export default class InGameScreen extends BaseScreen {
     onDismantleItemClick(dismantleItem: Item): void;
     unSelectElements(): void;
     onSortableItemReceive(sortableEvent: ISortableEvent): void;
-    setEquipSlot(equip: EquipType, itemId?: number, internal?: boolean): void;
-    removeItemFromEquipSlot(equip: EquipType, itemId: number): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent, force?: boolean): void;
     createCraftItemElements(containerSortInfo: IContainerSortInfo | undefined): void;
@@ -154,8 +170,8 @@ export default class InGameScreen extends BaseScreen {
      * @param container The container to check.
      */
     getDialogContainerElementForFilter(container: IContainer): JQuery | undefined;
-    isContainerOpen(value: unknown): value is IContainer;
-    openContainer(container: IContainer | NPC, containerName?: string): void;
+    isContainerOpen(value: unknown): boolean;
+    openContainer(container: IContainer, containerNameSource?: NPC | Doodad | Item): void;
     closeContainer(container: IContainer): void;
     closeContainerDialog(containerDialog?: JQuery, closeType?: "close" | "destroy"): void;
     closeStaticContainers(): void;
@@ -186,11 +202,10 @@ export default class InGameScreen extends BaseScreen {
      */
     updateTablesDirty(which?: "crafting" | "dismantle"): void;
     createSortMenu(container: JQuery, messageType: Message, containerSortInfo?: IContainerSortInfo): SortRow<number>;
-    getContainerId(containerElement: JQuery): string;
     sortItems(containerElement: JQuery, sortType: SortType, direction: SortDirection, messageType?: Message, activeSort?: boolean): void;
     onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;
     updateSort(containerElement: JQuery, activeSort: boolean): void;
-    isContainerDialogOver(x: number, y: number): boolean;
+    isContainerDialogOver(dialogInfo: IDialogPosition, dialogPositions: IDialogPosition[]): boolean;
     onItemQuickMove(api: IBindHandlerApi): boolean;
     onStopItemQuickMove(): boolean;
     onItemMove(api: IBindHandlerApi): boolean;
@@ -218,3 +233,4 @@ export default class InGameScreen extends BaseScreen {
     private resolveItemReference;
     private getBestSort;
 }
+export {};

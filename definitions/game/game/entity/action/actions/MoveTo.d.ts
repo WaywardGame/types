@@ -13,7 +13,7 @@ import type { IActionApi } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type Human from "game/entity/Human";
 import { Direction } from "utilities/math/Direction";
-declare const _default: Action<[ActionArgument.Vector2, [ActionArgument.Direction, ActionArgument.Undefined]], Human, void, {
+declare const _default: Action<[ActionArgument.Vector2, [ActionArgument.Direction, ActionArgument.Undefined]], Human<number>, void, {
     usable: true;
 }, [import("../../../../utilities/math/IVector").IVector2, (Direction.None | Direction.East | Direction.North | Direction.West | Direction.South | undefined)?]>;
 export default _default;

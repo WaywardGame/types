@@ -11,9 +11,11 @@
 import type { IWaywardPreload } from "@hosts/shared/interfaces";
 import type IAsyncDataStorage from "save/datastorage/IAsyncDataStorage";
 import type { ISaveObject } from "save/ISaveManager";
+import type SaveManager from "save/SaveManager";
 export default class FileDataStorage implements IAsyncDataStorage {
+    private readonly saveManager;
     private readonly waywardPreload;
-    constructor(waywardPreload: IWaywardPreload);
+    constructor(saveManager: SaveManager, waywardPreload: IWaywardPreload);
     initialize(): Promise<void>;
     isEnabled(): boolean;
     isSlotUsed(slot: number): Promise<boolean>;

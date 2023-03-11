@@ -45,7 +45,7 @@ export interface ISaveObject {
 export interface ISerializeProperty {
     property: string[];
     stringTokenizationProperty?: string;
-    enableTypesStats?: boolean;
+    enableStats?: boolean;
     skipCompression?: boolean;
     savePropertyFlag?: SavePropertyFlag;
     shouldSerialize?(version: string): boolean;

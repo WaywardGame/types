@@ -11,21 +11,21 @@
 import EventEmitter from "event/EventEmitter";
 import { TileUpdateType } from "game/IGame";
 import type Island from "game/island/Island";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import type { WorldZ } from "game/WorldZ";
 import WorldLayer from "renderer/world/WorldLayer";
 import type { ISerializable, ISerializer } from "save/serializer/ISerializer";
 export interface IWorldEvents {
-    updateTile(x: number, y: number, z: number, tile: ITile, tileUpdateType: TileUpdateType): any;
+    updateTile(tile: Tile, tileUpdateType: TileUpdateType): any;
 }
 export default class World extends EventEmitter.Host<IWorldEvents> implements ISerializable {
     readonly island: Island;
     width: number;
     height: number;
     layers: Record<number, WorldLayer>;
-    _loaded: boolean;
     private batchTileUpdate;
     private layerUpdatesSuspended;
+    private _loaded;
     constructor(island: Island, width: number, height: number);
     delete(): void;
     get loaded(): boolean;
@@ -34,8 +34,8 @@ export default class World extends EventEmitter.Host<IWorldEvents> implements IS
     load(): void;
     suspendLayerUpdates(): void;
     resumeLayerUpdates(): void;
-    updateTile(x: number, y: number, z: number, tile: ITile, tileUpdateType: TileUpdateType, updateNeighbors?: boolean, flush?: boolean): void;
-    updateTileLayer(x: number, y: number, z: number, tile: ITile, updateNeighbors?: boolean, flush?: boolean): void;
+    updateTile(tile: Tile, tileUpdateType: TileUpdateType, updateNeighbors?: boolean, flush?: boolean): void;
+    updateTileLayer(tile: Tile, updateNeighbors?: boolean, flush?: boolean): void;
     startUpdateTileBatch(): void;
     endUpdateTileBatch(): void;
     serializeObject(_serializer: ISerializer): undefined;

@@ -22,5 +22,5 @@ export interface IHealOtherCanUse extends IActionUsable {
     creature?: Creature;
     npc?: NPC;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], Human, void, IHealOtherCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], Human<number>, void, IHealOtherCanUse, [import("../../../item/Item").default]>;
 export default _default;

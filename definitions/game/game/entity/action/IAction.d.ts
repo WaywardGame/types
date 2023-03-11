@@ -28,7 +28,7 @@ import type Item from "game/item/Item";
 import type { RecipeType } from "game/item/recipe/RecipeRegistry";
 import type { IPromptDescriptionBase, PromptDescriptionArgs } from "game/meta/prompt/IPrompt";
 import type { Milestone } from "game/milestones/IMilestone";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 import type { IModdable } from "mod/ModRegistry";
 import type { IRGB } from "utilities/Color";
@@ -81,78 +81,85 @@ export declare enum ActionType {
     Pet = 43,
     Tame = 44,
     Release = 45,
-    HealOther = 46,
-    RubClockwise = 47,
-    RubCounterclockwise = 48,
-    OpenDoor = 49,
-    CloseDoor = 50,
-    AddFuel = 51,
-    Grasp = 52,
-    PickUpItem = 53,
-    PickUpAllItems = 54,
-    Offer = 55,
-    Drop = 56,
-    Jump = 57,
-    Move = 58,
-    MoveTo = 59,
-    UpdateDirection = 60,
-    Idle = 61,
-    DrinkInFront = 62,
-    Equip = 63,
-    Unequip = 64,
-    MoveItem = 65,
-    Craft = 66,
-    Till = 67,
-    Rename = 68,
-    Harvest = 69,
-    Read = 70,
-    CloseContainer = 71,
-    SmotherFire = 72,
-    Trade = 73,
-    PlaceDown = 74,
-    Apply = 75,
-    Hitch = 76,
-    Unhitch = 77,
-    AttachContainer = 78,
-    DetachContainer = 79,
-    Refine = 80,
-    PickUpExcrement = 81,
-    TestDepth = 82,
-    Enchant = 83,
-    Navigate = 84,
-    Melee = 85,
-    GrabAll = 86,
-    Respawn = 87,
-    ProtectItem = 88,
-    UnProtectItem = 89,
-    UpdateItemOrder = 90,
-    PromptResponse = 91,
-    Upgrade = 92,
-    Enhance = 93,
-    Shoot = 94,
-    Alter = 95,
-    SailToIsland = 96,
-    Unused1 = 97,
-    RenameIsland = 98,
-    Chop = 99,
-    Mine = 100,
-    ToggleHitch = 101,
-    ToggleVehicle = 102,
-    ToggleDoor = 103,
-    ToggleContainer = 104,
-    UpdateOption = 105,
-    UpdateGameOption = 106,
-    UpdateWalkPath = 107,
-    Unused2 = 108,
-    Absorb = 109,
-    Exude = 110,
-    PackGround = 111,
-    ToggleTilled = 112,
-    DismountVehicle = 113,
-    CreateControllableNPC = 114,
-    RemoveControllableNPC = 115,
-    PropOpenDoor = 116,
-    DamageMap = 117
+    Uncage = 46,
+    HealOther = 47,
+    RubClockwise = 48,
+    RubCounterclockwise = 49,
+    OpenDoor = 50,
+    CloseDoor = 51,
+    AddFuel = 52,
+    Grasp = 53,
+    PickUpItem = 54,
+    PickUpAllItems = 55,
+    Offer = 56,
+    Drop = 57,
+    Jump = 58,
+    Move = 59,
+    MoveTo = 60,
+    UpdateDirection = 61,
+    Idle = 62,
+    DrinkInFront = 63,
+    Equip = 64,
+    Unequip = 65,
+    MoveItem = 66,
+    Craft = 67,
+    Till = 68,
+    Rename = 69,
+    Harvest = 70,
+    Read = 71,
+    CloseContainer = 72,
+    SmotherFire = 73,
+    Trade = 74,
+    PlaceDown = 75,
+    Apply = 76,
+    Hitch = 77,
+    Unhitch = 78,
+    AttachContainer = 79,
+    DetachContainer = 80,
+    Refine = 81,
+    PickUpExcrement = 82,
+    TestDepth = 83,
+    Enchant = 84,
+    Navigate = 85,
+    Melee = 86,
+    GrabAll = 87,
+    Respawn = 88,
+    ProtectItem = 89,
+    UnProtectItem = 90,
+    UpdateItemOrder = 91,
+    PromptResponse = 92,
+    Upgrade = 93,
+    Enhance = 94,
+    Shoot = 95,
+    Alter = 96,
+    SailToIsland = 97,
+    Unused1 = 98,
+    RenameIsland = 99,
+    Chop = 100,
+    Mine = 101,
+    ToggleHitch = 102,
+    ToggleVehicle = 103,
+    ToggleDoor = 104,
+    ToggleContainer = 105,
+    UpdateOption = 106,
+    UpdateGameOption = 107,
+    UpdateWalkPath = 108,
+    Unused2 = 109,
+    Absorb = 110,
+    Exude = 111,
+    PackGround = 112,
+    ToggleTilled = 113,
+    DismountVehicle = 114,
+    CreateControllableNPC = 115,
+    RemoveControllableNPC = 116,
+    PropOpenDoor = 117,
+    DamageMap = 118,
+    Noclip = 119,
+    ShipToIsland = 120,
+    CageCreature = 121,
+    Summon = 122,
+    SetCreatureAi = 123,
+    SetTitle = 124
 }
 export declare const ACTIONS_RECOMMENDED: ActionType[];
 export declare enum ActionUsability {
@@ -188,7 +195,7 @@ export interface IActionNotUsable extends Partial<IPackedMessage> {
     usable: false;
     alreadyUsing?: true;
     errorDisplayLevel?: ActionDisplayLevel;
-    mobCheck?: IVector3;
+    mobCheckTile?: Tile;
     arg?: never;
     source?: never;
 }
@@ -247,7 +254,7 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
      * When checking when the action is being execute
      * true if a creature is on a tile, false otherwise
      */
-    isCreatureBlocking(tile: ITile): boolean;
+    isCreatureBlocking(tile: Tile): boolean;
     setDelay(delay: number, replace?: boolean): this;
     setPassTurn(turnType?: TurnTypeFlag): this;
     setUpdateView(updateFov?: boolean): this;
@@ -300,14 +307,14 @@ export interface IActionConfirmerApi<E extends Entity = Entity, CU extends IActi
 export interface IActionSoundEffect {
     type: SfxType;
     inFront?: boolean;
-    position?: Partial<IVector3>;
+    tile?: Tile;
     delay?: number;
     speed?: number;
     noPosition?: boolean;
 }
 export interface IActionParticle {
     color: IRGB;
-    position?: Partial<IVector3>;
+    tile?: Tile;
     count?: number;
     inFront?: boolean;
 }
@@ -349,11 +356,13 @@ export declare enum ActionArgument {
     Quality = 32,
     RecipeType = 33,
     RestType = 34,
-    TileEvent = 35,
-    UnsignedInteger32NumberArray = 36,
-    Vector2 = 37,
-    Vector2Array = 38,
-    Vector3 = 39
+    Tile = 35,
+    TileArray = 36,
+    TileEvent = 37,
+    UnsignedInteger32NumberArray = 38,
+    Vector2 = 39,
+    Vector2Array = 40,
+    Vector3 = 41
 }
 export interface IActionArgumentTypeMap {
     [ActionArgument.Undefined]: undefined;
@@ -391,6 +400,8 @@ export interface IActionArgumentTypeMap {
     [ActionArgument.Quality]: Quality;
     [ActionArgument.RecipeType]: RecipeType;
     [ActionArgument.RestType]: RestType;
+    [ActionArgument.Tile]: Tile;
+    [ActionArgument.TileArray]: Tile[];
     [ActionArgument.TileEvent]: TileEvent;
     [ActionArgument.UnsignedInteger32NumberArray]: number[];
     [ActionArgument.Vector2]: IVector2;

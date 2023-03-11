@@ -9,8 +9,9 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Player from "game/entity/player/Player";
+import type { Game } from "game/Game";
 import type { IVersionInfo } from "utilities/Version";
-export default function upgradePlayer(player: Player, saveVersion: IVersionInfo, isLocalPlayer: boolean): string[];
+export default function upgradePlayer(game: Game, player: Player, saveVersion: IVersionInfo, isLocalPlayer: boolean): string[];
 /**
  * Called after loading item & tile references
  */

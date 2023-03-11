@@ -79,49 +79,50 @@ export declare enum ModRegistrationType {
     Dialog = 6,
     Dictionary = 7,
     Doodad = 8,
-    DoodadGroup = 9,
-    HelpArticle = 10,
-    InspectionType = 11,
-    InterModRegistration = 12,
-    InterModRegistry = 13,
-    Interrupt = 14,
-    InterruptChoice = 15,
-    Item = 16,
-    ItemExtra = 17,
-    ItemGroup = 18,
-    Language = 19,
-    LanguageExtension = 20,
-    Load = 21,
-    MagicalProperty = 22,
-    MenuBarButton = 23,
-    Message = 24,
-    MessageSource = 25,
-    MusicTrack = 26,
-    Note = 27,
-    NPC = 28,
-    OptionsSection = 29,
-    Overlay = 30,
-    Packet = 31,
-    Prompt = 32,
-    QuadrantComponent = 33,
-    Quest = 34,
-    QuestRequirement = 35,
-    Registry = 36,
-    Skill = 37,
-    SoundEffect = 38,
-    Stat = 39,
-    StatusEffect = 40,
-    Terrain = 41,
-    TerrainDecoration = 42,
-    TileEvent = 43,
-    TileLayerType = 44,
-    UsableActions = 45,
-    UsableActionType = 46,
-    UsableActionTypePlaceholder = 47,
-    WorldLayer = 48,
-    ItemTag = 49,
-    DoodadTag = 50,
-    EntityTag = 51
+    DoodadExtra = 9,
+    DoodadGroup = 10,
+    DoodadTag = 11,
+    EntityTag = 12,
+    HelpArticle = 13,
+    InspectionType = 14,
+    InterModRegistration = 15,
+    InterModRegistry = 16,
+    Interrupt = 17,
+    InterruptChoice = 18,
+    Item = 19,
+    ItemExtra = 20,
+    ItemGroup = 21,
+    ItemTag = 22,
+    Language = 23,
+    LanguageExtension = 24,
+    Load = 25,
+    MagicalProperty = 26,
+    MenuBarButton = 27,
+    Message = 28,
+    MessageSource = 29,
+    MusicTrack = 30,
+    Note = 31,
+    NPC = 32,
+    OptionsSection = 33,
+    Overlay = 34,
+    Packet = 35,
+    Prompt = 36,
+    QuadrantComponent = 37,
+    Quest = 38,
+    QuestRequirement = 39,
+    Registry = 40,
+    Skill = 41,
+    SoundEffect = 42,
+    Stat = 43,
+    StatusEffect = 44,
+    Terrain = 45,
+    TerrainDecoration = 46,
+    TileEvent = 47,
+    TileLayerType = 48,
+    UsableActions = 49,
+    UsableActionType = 50,
+    UsableActionTypePlaceholder = 51,
+    WorldLayer = 52
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -268,6 +269,10 @@ export interface IItemExtraRegistration extends IBaseModRegistration {
     type: ModRegistrationType.ItemExtra;
     name: string;
 }
+export interface IDoodadExtraRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.DoodadExtra;
+    name: string;
+}
 export interface ICreatureRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Creature;
     name: string;
@@ -373,7 +378,7 @@ export interface IEntityTagRegistration extends IBaseModRegistration {
 export interface IInheritsRegistrationTime {
     useRegistrationTime: ModRegistrationType;
 }
-export type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration | IItemTagRegistration | IDoodadTagRegistration | IEntityTagRegistration;
+export type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IDoodadTagRegistration | IEntityTagRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | IItemTagRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration;
 export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare module Register {
     /**

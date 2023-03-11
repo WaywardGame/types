@@ -8,16 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Game } from "game/Game";
 import type { ISerializer, ISerializerOptions } from "save/serializer/ISerializer";
 import { SerializerMetadataKey, SavePropertyFlag, Types } from "save/serializer/ISerializer";
 import StringTokenizer from "save/serializer/StringTokenizer";
 export default class Serializer implements ISerializer {
+    readonly game: Game;
     private readonly options;
     stringTokenizer?: StringTokenizer | undefined;
     static convertStringToUint8Array(data: string): Uint8Array;
     private static array;
     private static usingArray;
-    private static readonly savedObjectCache;
+    private static savedObjectCache;
     readonly metadata: Map<SerializerMetadataKey, any>;
     dataView: DataView;
     byteOffset: number;
@@ -25,7 +27,7 @@ export default class Serializer implements ISerializer {
     private readonly includeFlags;
     private readonly emptyObjectMode;
     private readonly disableJitDeserialization;
-    constructor(options: ISerializerOptions, stringTokenizer?: StringTokenizer | undefined);
+    constructor(game: Game, options: ISerializerOptions, stringTokenizer?: StringTokenizer | undefined);
     private get isDeveloperMode();
     saveToUint8Array(object: any, objectKey: any): Uint8Array | undefined;
     saveToString(object: any, objectKey: any): string | undefined;

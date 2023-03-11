@@ -50,7 +50,7 @@ export default abstract class QuadrantComponent extends StaticComponent {
     protected readonly scrollableHandler: void;
     get preferredQuadrant(): Quadrant;
     get quadrant(): Quadrant;
-    get quadrantName(): "None" | "Top" | "TopRight" | "BottomRight" | "Bottom" | "BottomLeft" | "TopLeft" | "Any";
+    get quadrantName(): "Any" | "None" | "TopLeft" | "Top" | "TopRight" | "BottomRight" | "Bottom" | "BottomLeft";
     readonly log: Log;
     constructor(id: QuadrantComponentId);
     protected registerDataHost(): void;

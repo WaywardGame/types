@@ -23,11 +23,12 @@ export declare enum MilestoneModifierGroup {
     Treasure = 6,
     Metagame = 7,
     Turns = 8,
-    Challenge = 9
+    Challenge = 9,
+    Merchants = 10
 }
 export declare const milestoneGroupIcons: Record<MilestoneModifierGroup, string>;
 export declare class MilestoneModifierInstance extends GameplayModifierInstance<Milestone, [Human?]> {
-    protected get player(): Human | undefined;
+    protected get player(): Human<number> | undefined;
     isEnabledForPlayer(entity: Entity): boolean;
     protected getDefaultTitle(): import("../../../../language/impl/TranslationImpl").default;
 }

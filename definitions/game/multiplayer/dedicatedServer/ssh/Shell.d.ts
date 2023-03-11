@@ -10,10 +10,12 @@
  */
 import type { IMessage } from "game/entity/player/IMessageManager";
 import type Player from "game/entity/player/Player";
+import type { Game } from "game/Game";
 import type { ISshSession, ISshStream } from "multiplayer/dedicatedServer/ssh/ISsh";
 export default abstract class Shell {
     readonly session: ISshSession;
     readonly stream: ISshStream;
+    readonly game: Game;
     protected active: boolean;
     protected line: string;
     protected cursor: number;
@@ -21,7 +23,7 @@ export default abstract class Shell {
     private history;
     private historyCursor;
     private watchMessages;
-    constructor(session: ISshSession, stream: ISshStream);
+    constructor(session: ISshSession, stream: ISshStream, game: Game);
     start(): Promise<boolean>;
     stop(): void;
     allowHistory(): void;

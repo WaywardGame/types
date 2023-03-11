@@ -10,5 +10,5 @@
  */
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.String, ActionArgument.Vector3], import("../../Human").default, void, import("game/entity/action/IAction").IActionUsable, [string, import("../../../../utilities/math/IVector").IVector3]>;
+declare const _default: Action<[ActionArgument.String, ActionArgument.Vector3], import("../../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [string, import("../../../../utilities/math/IVector").IVector3]>;
 export default _default;

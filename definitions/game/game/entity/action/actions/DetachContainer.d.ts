@@ -17,5 +17,5 @@ export interface IDetachContainerCanUse extends IActionUsable {
     doodad: Doodad;
     stillContainer: Item;
 }
-declare const _default: Action<[[ActionArgument.Doodad, ActionArgument.Undefined]], import("../../Human").default, void, IDetachContainerCanUse, [(Doodad | undefined)?]>;
+declare const _default: Action<[[ActionArgument.Doodad, ActionArgument.Undefined]], import("../../Human").default<number>, void, IDetachContainerCanUse, [(Doodad | undefined)?]>;
 export default _default;

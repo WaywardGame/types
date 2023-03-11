@@ -14,7 +14,7 @@ import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import type { ListEnder } from "language/ITranslation";
 import Translation from "language/Translation";
 export interface IHasMagic {
-    magic: MagicalPropertyManager;
+    magic?: MagicalPropertyManager;
 }
 export interface IMagicalProperty {
     value: number;
@@ -105,6 +105,7 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
     private cachedNormalTypes?;
     private cachedSubTypes?;
     private cachedHash?;
+    static inherit(source: IHasMagic | MagicalPropertyManager | undefined, target: IHasMagic): void;
     constructor(properties?: Partial<Record<MagicalPropertyType, AnyMagicalProperty>>);
     /**
      * @returns the number of magical properties on this object
@@ -194,14 +195,6 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      * @returns a list of all the magical properties on this object,
      */
     all(intersectionType: true): MagicalPropertyEntryIntersection[];
-    /**
-     * Alias of `.all().stream()`
-     */
-    stream(): import("@wayward/goodstream").default<MagicalPropertyEntry>;
-    /**
-     * Alias of `.types().stream()`
-     */
-    typeStream(): import("@wayward/goodstream").default<MagicalPropertyType>;
     /**
      * Translates a list of the magical properties on this object, including sub-properties
      * @param ender The way to end this list translation, ie and/or

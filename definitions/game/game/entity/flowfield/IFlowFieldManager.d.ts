@@ -8,4 +8,4 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-export declare const blockedPenalty = 11;
+export declare const flowFieldBlockedPenalty = 11;

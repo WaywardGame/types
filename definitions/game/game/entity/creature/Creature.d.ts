@@ -10,42 +10,56 @@
  */
 import { SfxType } from "audio/IAudio";
 import type { IEventEmitter } from "event/EventEmitter";
-import type { ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "game/entity/creature/ICreature";
-import { CreatureType } from "game/entity/creature/ICreature";
-import Entity from "game/entity/Entity";
+import type { CreatureType, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "game/entity/creature/ICreature";
+import EntityWithStats from "game/entity/EntityWithStats";
 import type Human from "game/entity/Human";
-import type { IStatChangeInfo } from "game/entity/IEntity";
-import { AiType, EntityType, MoveType, StatusType } from "game/entity/IEntity";
+import type { IEntityConstructorOptions, IStatChangeInfo } from "game/entity/IEntity";
+import { AiType, EntityType, MoveType } from "game/entity/IEntity";
 import type { IStat } from "game/entity/IStats";
-import { CreationId, TileUpdateType } from "game/IGame";
+import type { IMovementTime } from "game/IGame";
+import { TileUpdateType } from "game/IGame";
 import type { IObject } from "game/IObject";
-import type Island from "game/island/Island";
 import type Item from "game/item/Item";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import Translation from "language/Translation";
 import type { IUnserializedCallback } from "save/serializer/ISerializer";
-import type { IVector2, IVector3 } from "utilities/math/IVector";
-export default class Creature extends Entity implements IUnserializedCallback, IObject<CreatureType> {
+import { Direction } from "utilities/math/Direction";
+import type { IVector3 } from "utilities/math/IVector";
+import Vector2 from "utilities/math/Vector2";
+export default class Creature extends EntityWithStats<CreatureType> implements IUnserializedCallback, IObject<CreatureType> {
     static is(value: any): value is Creature;
-    readonly objectType = CreationId.Creature;
-    event: IEventEmitter<this, ICreatureEvents>;
-    readonly entityType: EntityType.Creature;
-    readonly tileUpdateType = TileUpdateType.Creature;
-    aberrant?: boolean;
+    get entityType(): EntityType.Creature;
+    get tileUpdateType(): TileUpdateType;
+    readonly event: IEventEmitter<this, ICreatureEvents>;
+    anim: number;
+    direction: Vector2;
+    facingDirection: Direction.Cardinal;
+    fromX: number;
+    fromY: number;
     ai: AiType;
+    aberrant?: true;
     enemy?: {
-        id: number;
         type: EntityType;
+        id: number;
         attacks: number;
         attempts: number;
+        breakAway?: boolean;
+    };
+    hitchedTo?: number;
+    originalMoveType?: MoveType;
+    owner?: {
+        type: EntityType.Player;
+        identifier: string;
+    } | {
+        type: EntityType.NPC;
+        id: number;
     };
     respawned?: number;
-    shouldSkipNextUpdate: boolean;
-    type: CreatureType;
-    originalMoveType: MoveType | undefined;
-    hitchedTo?: number;
+    shouldSkipNextUpdate?: true;
+    tameTime?: number;
     private _description;
-    constructor(creatureType?: CreatureType, islandId?: `${number},${number}`, x?: number, y?: number, z?: number, aberrant?: boolean);
+    spawnAnimationTime: IMovementTime | undefined;
+    constructor(entityOptions?: IEntityConstructorOptions<CreatureType>, aberrant?: boolean);
     /**
      * Initializes the creature's stats. Used in the constructor & save conversion.
      */
@@ -63,29 +77,43 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     description(): ICreatureDescription | undefined;
     hasAi(aiType: AiType): boolean;
     isHidden(): boolean;
-    isDefender(): boolean;
+    isRetaliator(): boolean;
     isTamed(): boolean;
     isValid(): boolean;
-    moveToIsland(targetIsland: Island, targetPosition: IVector3): void;
+    getCommandedAiType(): AiType | undefined;
+    /**
+     * Check is a creature is allowed to attack the target (rules of engagement)
+     * @param target Target thing to attack
+     * @returns True if it can attack them
+     */
+    canTarget(target: Human | Creature | undefined): boolean;
+    moveToIsland(targetTile: Tile, owner: Human): void;
+    restore(targetTile: Tile, preventRendering?: boolean): void;
+    overrideNextMovement(tile: Tile): void;
     preventNextMovement(): void;
     checkForBurn(moveType?: MoveType): boolean;
+    private setOwner;
     tame(human: Human, bonus?: number): boolean;
     increaseTamedCount(): void;
-    release(): boolean;
-    private addTamed;
-    private removeTamed;
+    release(remainTamed?: boolean): boolean;
     unhitch(): void;
+    animateSpawn(): void;
+    /**
+     * Gets the enemy the creature marked
+     * @returns Enemy
+     */
     getEnemy(): Human | Creature | undefined;
     setEnemy(enemy: Human | Creature | undefined): void;
     skipNextUpdate(): void;
     getMoveType(): MoveType;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     update(playingHumans: Human[]): boolean;
+    private determineEnemy;
     /**
      * Checks under the creature for getting burned, setting off traps, eating items off the ground, and more
      * @returns Returns whether the creature can keep moving (in the case of creatures with >= 2 speed)
      */
-    checkUnder(x?: number, y?: number): boolean;
+    checkUnder(x?: number, y?: number, skipParticles?: boolean): boolean;
     /**
      * Check if this creature can swap with the player in the event that the player is moving into them
      * @param human Human object
@@ -103,14 +131,13 @@ export default class Creature extends Entity implements IUnserializedCallback, I
      * Updates the DoodadOverHidden tile flag if the creature is large.
      * Large creatures should render over the doodad over layer, which means we should hide the doodad over layer for doodads on the creatures tile.
      */
-    updateDoodadOverHiddenState(x: number, y: number, z: number, tile: ITile, shouldBeHidden: boolean): void;
-    processAttack(humans: Human[], description: ICreatureDescription, moveType: MoveType, enemy: Human | Creature | undefined): boolean;
+    updateDoodadOverHiddenState(tile: Tile, shouldBeHidden: boolean): void;
+    processAttack(description: ICreatureDescription, humans: Human[], moveType: MoveType, enemy: Human | Creature | undefined): boolean;
     getProducedTemperature(): number | undefined;
-    protected getApplicableStatusEffects(): Set<StatusType>;
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
-    protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile): boolean | void | undefined;
+    protected updateTile(fromTile: Tile, toTile: Tile): boolean;
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
-    findPath(target: IVector2, maxNodesChecked?: number, ignoreHuman?: Human): IVector2[] | undefined;
+    findPath(target: Tile, maxNodesChecked?: number, ignoreHuman?: Human): Tile[] | undefined;
     getHitchingPostsAround(): IHitch;
     /**
      * Check creature move with a multiplayer sync check
@@ -125,7 +152,12 @@ export default class Creature extends Entity implements IUnserializedCallback, I
      * @param willMove Set to true if the object is about to move to this tile. This method will confirm if theres an existing npc/creature there and return false if so
      * @returns 0 if the creature can move, otherwise an error code
      */
-    checkCreatureMove(isClientside: boolean, moveX: number, moveY: number, moveZ: number, tile: ITile, moveType: MoveType, willMove: boolean, ignoreHuman?: Human): number;
+    checkCreatureMove(isClientside: boolean, tile: Tile, moveType: MoveType, willMove: boolean, ignoreHuman?: Human, ignoreScareCrow?: boolean): number;
+    /**
+     * Returns the times a creature has been tamed.
+     * @returns number if the creature has been tamed and undefined if it has never been tamed.
+     */
+    timesTamed(): number | undefined;
     private findHumansWithinRadius;
     private shouldSpecialAttack;
     private specialAttack;
@@ -136,10 +168,22 @@ export default class Creature extends Entity implements IUnserializedCallback, I
      * @param moveType The move type of the creature attempting to break the doodad
      */
     private breakDoodad;
+    /**
+     * Some (untamed) creatures can break items on the ground as they move into them.
+     * @param tile The tile to check for items to damage.
+     * @param moveType The move type of the creature attempting to break items.
+     */
+    private breakItems;
     private processAiChanges;
+    get asCorpse(): undefined;
     get asCreature(): Creature;
+    get asDoodad(): undefined;
     get asHuman(): undefined;
+    get asLocalPlayer(): undefined;
     get asNPC(): undefined;
     get asPlayer(): undefined;
-    get asLocalPlayer(): undefined;
+    get asTileEvent(): undefined;
+    get asItem(): undefined;
+    get point(): IVector3;
+    get tile(): Tile;
 }

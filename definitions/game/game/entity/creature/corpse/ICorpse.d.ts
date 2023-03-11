@@ -10,6 +10,9 @@
  */
 import type { SkillType } from "game/entity/IHuman";
 import type { ItemType } from "game/item/IItem";
+import type { TerrainType } from "game/tile/ITerrain";
+import type { TileEventType } from "game/tile/ITileEvent";
+import type Message from "language/dictionary/Message";
 import type { IModdable } from "mod/ModRegistry";
 import type { IRGB } from "utilities/Color";
 export interface ICorpseDescription extends IModdable {
@@ -25,8 +28,22 @@ export interface ICorpseDescription extends IModdable {
     isFlammable?: boolean;
     isTall?: boolean;
     respawns?: boolean;
+    /**
+     * Things to do when a corpse decays
+     */
+    createOnDecay?: Partial<ICorpseCreateOnSideEffects>;
+    /**
+     * Things to do when a corpse is butchered
+     */
+    createOnButcher?: Partial<ICorpseCreateOnSideEffects> & {
+        message?: Message;
+    };
 }
 export interface ICorpseResourceDrop {
     item: ItemType;
     chance?: number;
+}
+export interface ICorpseCreateOnSideEffects {
+    tileType: TerrainType;
+    tileEvent: TileEventType;
 }

@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Player from "game/entity/player/Player";
+import type { Game } from "game/Game";
 import type { Prompt } from "game/meta/prompt/IPrompt";
 import type InterruptChoice from "language/dictionary/InterruptChoice";
 interface IVoteResult {
@@ -16,9 +17,11 @@ interface IVoteResult {
     votes: Map<string, InterruptChoice | undefined>;
 }
 export default class VotingManager {
+    private readonly game;
     private _active;
     private readonly _history;
     get activeVoteInterrupt(): Prompt | undefined;
+    constructor(game: Game);
     /**
      * Check if voting is active
      * It will also end the existing vote if players left since the vote started

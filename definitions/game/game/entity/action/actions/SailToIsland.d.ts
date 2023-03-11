@@ -14,5 +14,5 @@ import { ActionArgument } from "game/entity/action/IAction";
 export interface ISailToIslandCanUse extends IActionUsable {
     distanceFromEdge?: number;
 }
-declare const _default: Action<[ActionArgument.Integer32, ActionArgument.Integer32], import("../../Human").default, void, ISailToIslandCanUse, [number, number]>;
+declare const _default: Action<[ActionArgument.Integer32, ActionArgument.Integer32], import("../../Human").default<number>, void, ISailToIslandCanUse, [number, number]>;
 export default _default;

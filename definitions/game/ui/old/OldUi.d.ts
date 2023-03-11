@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { EquipType } from "game/entity/IHuman";
+import type Doodad from "game/doodad/Doodad";
 import type NPC from "game/entity/npc/NPC";
 import type { IContainer, IDismantleComponent, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import "ui/old/functional/FunctionalSortable";
-import type { DialogId, IDialogInfo } from "ui/old/IOldUi";
+import type { OldUiDialogId, IDialogInfo } from "ui/old/IOldUi";
 import InGameScreen from "ui/old/screens/InGameScreen";
 export default class OldUi {
     screenInGame: InGameScreen | undefined;
@@ -42,22 +42,19 @@ export default class OldUi {
     updateItem(item: Item, updateChildren?: boolean): void;
     syncDecayBar(item: Item, syncDamage?: boolean): void;
     syncItemElements(itemIds: number | number[], forceSyncDecay?: boolean): void;
-    setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
-    removeItemFromEquipSlot(equip: EquipType, itemId: number): void;
     shouldRefreshMods(): boolean;
     onGameEnd(): void;
     getSerializationProperties(_: string): string[];
-    onMove(): void;
     closeAllContainers(): void;
     hasOpenContainer(): boolean;
-    openContainer(container: IContainer | NPC, containerName?: string): void;
+    openContainer(container: IContainer, containerNameSource: NPC | Doodad | Item): void;
     closeContainer(container: IContainer): void;
     refreshContainerName(container: IContainer): void;
-    isContainerOpen(value: unknown): value is IContainer;
+    isContainerOpen(value: unknown): boolean;
     addItemToContainer(item: Item, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean, updateTables?: boolean): void;
     afterAddingMultipleItemsToContainer(container: IContainer, itemsToSync?: Item[]): void;
     removeItemFromContainer(item: Item, container: IContainer): void;
-    getDialogInfo(dialogId: DialogId): IDialogInfo;
+    getDialogInfo(dialogId: OldUiDialogId): IDialogInfo;
     setVersionExtra(msg: string): void;
     openDialogs(): void;
     cancelSorting(): void;

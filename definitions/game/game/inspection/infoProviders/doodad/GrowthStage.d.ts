@@ -13,6 +13,7 @@ import { InfoProvider } from "game/inspection/InfoProvider";
 export default class GrowthStageInfoProvider extends InfoProvider {
     private readonly doodad;
     static get(doodad: Doodad): false | GrowthStageInfoProvider | undefined;
+    static getGrowthStage(doodad: Doodad): import("../../../../language/impl/TranslationImpl").default | undefined;
     private stage;
     private constructor();
     getClass(): string[];
