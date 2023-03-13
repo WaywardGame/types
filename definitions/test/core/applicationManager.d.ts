@@ -11,7 +11,6 @@
 import type Player from "../../game/game/entity/player/Player";
 import { Direction } from "../../game/utilities/math/Direction";
 import type { IJoinServerOptions, INewGameOptions } from "../interfaces";
-import type { IDifferences } from "../../game/utilities/object/JsonHelper";
 import type Application from "./application";
 import type { ITestState } from "./application";
 export declare class Apps {
@@ -48,6 +47,7 @@ export declare class Apps {
      * Returns clients not playing
      */
     get inactiveClients(): Application[];
+    reset(): void;
     add(app: Application): Application;
     addServer(app: Application): Application;
     addTARS(app: Application): Application;
@@ -58,9 +58,7 @@ export declare class Apps {
     lastTestState?: ITestState;
     stopAll(): Promise<Map<string, string[]>>;
     get(): readonly Application[];
-    pipe(logTo: string[]): void;
-    getLog(): string[];
-    compileDifferences(client: string | number, differences: IDifferences): string;
+    getLogs(): string[];
     verifyGameStates(): Promise<void>;
     createMultiplayerGame(options: Omit<INewGameOptions, "playMode">): Promise<void>;
     setClientJoinIsland(x: number, y: number): Promise<void>;

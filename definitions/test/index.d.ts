@@ -9,7 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 declare const config: {
-    testRetires: number;
     testTimeout: number;
     randomInputCount: number;
     outputConsoleErrors: boolean;

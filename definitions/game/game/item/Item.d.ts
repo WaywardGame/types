@@ -357,8 +357,9 @@ export default class Item extends EntityMovable<ItemType, ItemTag, ItemCounter> 
     /**
      * Gives bonus attack and defense to items with have quality.
      * Example: Superior quality can get a bonus of 1-2; relics can get 5-10.
+     * @returns true if bonusDefense/Attack was set.
      */
-    setAttackDefenseBonus(): void;
+    setAttackDefenseBonus(): boolean;
     /**
      * Gets the attack damage with its bonus value.
      * Note: This does not get the value with any magical properties applied.

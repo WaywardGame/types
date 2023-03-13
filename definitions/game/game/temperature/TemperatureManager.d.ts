@@ -127,7 +127,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
      */
     private scheduleUpdate;
     private scheduleContainerInvalidation;
-    protected onDpodadFireUpdate(object: Doodad, tile: Tile, stage?: FireStage): void;
+    protected onDoodadFireUpdate(object: Doodad, tile: Tile, stage?: FireStage): void;
     protected onTileEventFireUpdate(object: TileEvent, tile: Tile, stage?: FireStage): void;
     protected onDoodadTransformed(object: Doodad, newType: DoodadType, oldType: DoodadType): void;
     protected onItemTransformed(object: Item, newType: ItemType, oldType: ItemType): void;
