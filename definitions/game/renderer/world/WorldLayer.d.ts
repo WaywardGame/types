@@ -21,7 +21,14 @@ export default class WorldLayer {
     readonly width: number;
     readonly height: number;
     readonly z: WorldZ;
+    /**
+     * Light level for the renderer.
+     * Updated in FieldOfView.computeLightMap
+     */
     readonly lightLevelMap: IColorGrid;
+    /**
+     * Light blocks - changed via tileUpdate event
+     */
     readonly lightBlockMap: IByteGrid;
     onTileUpdates: Map<number, onTileUpdateDelegate>;
     onDoodadUpdates: Map<number, onDoodadUpdateDelegate>;

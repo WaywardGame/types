@@ -84,5 +84,5 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
      * This prevents clientside only seed changes
      */
     private processExploredMapBounds;
-    private computeLights;
+    private computeLightMap;
 }

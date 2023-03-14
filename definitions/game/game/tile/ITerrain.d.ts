@@ -73,7 +73,7 @@ export interface ITerrainDescription extends IModdable {
     /**
      * Update neighbors when the tile type is involved
      */
-    updateNeighbors?: boolean;
+    updateNeighbors?: true;
     /**
      * Terrain that water tile becomes when dug up using the dig action.
      */
