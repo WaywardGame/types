@@ -47,7 +47,7 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
     /**
      * Returns the players ClientStore
      */
-    getClientStore(player?: Player): IClientStore;
+    getClientStore(player: Player): IClientStore;
     /**
      * Gets the used slots, ordered by one of a few properties of the savedData in that slot
      */

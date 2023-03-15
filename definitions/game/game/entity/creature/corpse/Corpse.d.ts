@@ -10,6 +10,7 @@
  */
 import type { IEventEmitter } from "event/EventEmitter";
 import type { ICorpseDescription } from "game/entity/creature/corpse/ICorpse";
+import type { ICreatureDescription } from "game/entity/creature/ICreature";
 import { CreatureType } from "game/entity/creature/ICreature";
 import Entity from "game/entity/Entity";
 import type { IEntityConstructorOptions, IEntityEvents } from "game/entity/IEntity";
@@ -46,6 +47,7 @@ export default class Corpse extends Entity<CreatureType> implements IObject<Crea
     startingDecay?: number;
     step?: number | undefined;
     private _description;
+    private _creatureDescription;
     constructor(entityOptions?: IEntityConstructorOptions<CreatureType>, decay?: number);
     get asCorpse(): Corpse | undefined;
     get asCreature(): undefined;
@@ -70,6 +72,7 @@ export default class Corpse extends Entity<CreatureType> implements IObject<Crea
      */
     getName(article?: false | "definite" | "indefinite", count?: number): Translation;
     description(): ICorpseDescription | undefined;
+    creatureDescription(): ICreatureDescription | undefined;
     isValid(): boolean;
     getDecayAtStart(): number;
     addToTile(tile: Tile): void;

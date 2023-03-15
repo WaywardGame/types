@@ -24,6 +24,7 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     readonly id: number;
     worldRenderer: WorldRenderer;
     private fadeInTime;
+    private targetZoomLevel;
     private thumbnailResolve;
     private ambientLightLevelCache;
     private updateRendering;
@@ -101,6 +102,7 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     update(timeStamp: number): void;
     computeSpritesInViewport(): void;
     private getFadeInProgress;
+    private getZoomLevelProgress;
     private hasRenderFlag;
     private clearRenderFlag;
     private requestAnimationFrame;

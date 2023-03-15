@@ -49,6 +49,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     texLightOld: WebGLTexture | undefined;
     private seed;
     private transitionFinishTime;
+    private readonly transitioningExploredMap;
     private lastComputedIslandId;
     static initializePrograms(webGlContext: WebGlContext): Promise<void>;
     static canSeePosition(origin: IFieldOfViewOrigin, type: CanASeeBType, islandId: IslandId, tileX: number, tileY: number, tileZ: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
@@ -58,7 +59,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
      */
     static getRadius(fieldOfView: FieldOfView | undefined, human: Human | undefined): number;
     /**
-     * Marks a set of tiles as exploreed
+     * Marks a set of tiles as explored
      */
     static markAsExplored(player: Player, tiles: IVector2[]): boolean;
     constructor(context: RendererContext, worldRenderer: WorldRenderer, radius: number, maxRadius: number, subdivisions?: number);
@@ -72,6 +73,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     startTransition(timeStamp: number): void;
     updateTransitionProgress(timeStamp: number): boolean;
     resetTransitionProgress(): void;
+    private processExploredMapTransition;
     compute(timeStamp: number, force?: boolean, skipTransition?: boolean): boolean;
     createDebugRenderer(): ITextureDebugRenderer;
     /**

@@ -117,3 +117,6 @@ export declare enum RenderSource {
     WorldLayerRendererFlush = 64
 }
 export declare function calculateAmbientLightLevel(origin: IFieldOfViewOrigin, z: number): number;
+export declare const ZOOM_LEVEL_MIN = 1;
+export declare const ZOOM_LEVEL_MAX = 16;
+export declare const ZOOM_LEVEL_ANIMATION_TIME = 400;

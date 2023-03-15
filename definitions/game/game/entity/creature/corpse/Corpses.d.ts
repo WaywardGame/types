@@ -11,4 +11,3 @@
 import type { ICorpseDescription } from "game/entity/creature/corpse/ICorpse";
 import { CreatureType } from "game/entity/creature/ICreature";
 export declare const corpseDescriptions: OptionalDescriptions<CreatureType, ICorpseDescription>;
-export default corpseDescriptions;

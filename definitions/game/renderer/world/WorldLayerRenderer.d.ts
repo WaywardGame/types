@@ -48,6 +48,11 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     setWorldLayer(worldLayer: WorldLayer, exploredMapClientData: ExploredMapClientData): void;
     addTileLayer(tileLayer: TileLayer): void;
     updateAll(): void;
+    /**
+     * Sets the alpha of a tile in the explored data
+     * Note: You must call bind the texture before calling this
+     */
+    setExploredAlpha(x: number, y: number, alpha: Uint8Array): void;
     updateDoodad(x: number, y: number, flushImmediate: boolean, { doodadDescription, doodadType, doodadInfo, doodadVariationX, doodadVariationY, terrainMasks }: IDoodadUpdate): void;
     renderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFixedDepth: boolean, flags?: RenderLayerFlag): void;
     getDataIndex(x: number, y: number): number;

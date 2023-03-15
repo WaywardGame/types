@@ -10,5 +10,4 @@
  */
 import type { ITemplate } from "game/tile/ITerrain";
 import { TileTemplateType } from "game/tile/ITerrain";
-export declare const templates: OptionalDescriptions<TileTemplateType, Record<string, ITemplate>>;
-export default templates;
+export declare const terrainTemplates: OptionalDescriptions<TileTemplateType, Record<string, ITemplate>>;

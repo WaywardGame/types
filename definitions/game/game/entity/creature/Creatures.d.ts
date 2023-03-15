@@ -11,4 +11,3 @@
 import type { ICreatureDescription } from "game/entity/creature/ICreature";
 import { CreatureType } from "game/entity/creature/ICreature";
 export declare const creatureDescriptions: OptionalDescriptions<CreatureType, ICreatureDescription>;
-export default creatureDescriptions;
