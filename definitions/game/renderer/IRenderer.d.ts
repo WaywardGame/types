@@ -28,7 +28,16 @@ export interface IRendererEvents {
     /**
      * Called when setting the zoom level.
      */
-    getZoomLevel(): number | undefined;
+    getMinZoomLevel(): number | undefined;
+    /**
+     * Called when setting the zoom level.
+     */
+    getMaxZoomLevel(): number | undefined;
+    /**
+     * Called when setting the zoom level.
+     * @param zoomLevel The zoom level that will be used by default
+     */
+    getZoomLevel(zoomLevel: number): number | undefined;
     /**
      * Called when the renderer is initialized
      */

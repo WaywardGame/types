@@ -38,6 +38,7 @@ export declare class PriorityMap<T> {
      * Returns an iterator of the items in this list.
      */
     stream(direction?: PriorityListStreamDirection): import("@wayward/goodstream").default<T>;
+    array(): (T extends readonly (infer InnerArr)[] ? InnerArr : T)[];
     getInternalMap(): Record<number, T>;
 }
 export declare enum PriorityListStreamDirection {

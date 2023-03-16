@@ -177,6 +177,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private setTileScale;
     setZoom(zoom: number): void;
     syncViewport(): void;
+    private syncTileScale;
     getViewport(): IVector2;
     calculateAmbientColor(): [number, number, number];
     getAmbientColorCave(): [number, number, number];
