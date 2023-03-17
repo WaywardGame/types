@@ -79,6 +79,7 @@ export interface IOptions {
     warnWhenBreakingItemsOnCraft: boolean;
     windowMode: boolean;
     zoomLevel: number;
+    zoomSmoothing: boolean;
     /**
      * Indexed by `Bindable` names, IE `GameFaceDirection`
      * Missing indices = use default binding

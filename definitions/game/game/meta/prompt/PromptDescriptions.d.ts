@@ -32,7 +32,6 @@ export declare const promptGameConfirmationDestroyOnGather: import("game/meta/pr
 export declare const promptGameConfirmationDroppingContainer: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameConfirmationRestWithEquippedFireSource: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[actionVerb: Text, objectName: Text, actionNoun: Text]>;
 export declare const promptGameContainerNotFull: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
-export declare const promptGameDangerousStep: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[objectName: Text]>;
 export declare const promptGameDesalinationNoNeed: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameExtinguishWaterStill: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameItemMayBeDestroyedInCraft: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[breakingItemsList: Text]>;

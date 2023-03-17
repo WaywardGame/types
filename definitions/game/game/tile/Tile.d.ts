@@ -24,6 +24,8 @@ import type { IOverlayInfo, ITerrainDescription, ITileContainer, ITileData } fro
 import { TerrainType } from "game/tile/ITerrain";
 import type TileEvent from "game/tile/TileEvent";
 import { WorldZ } from "game/WorldZ";
+import Message from "language/dictionary/Message";
+import Translation from "language/Translation";
 import FieldOfView from "renderer/fieldOfView/FieldOfView";
 import type { IFieldOfViewOrigin } from "renderer/fieldOfView/IFieldOfView";
 import { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
@@ -137,7 +139,10 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * Checks if a tile is dangerous for a human
      */
-    isDangerous(human: Human): boolean;
+    isDangerous(human: Human): {
+        message: Message;
+        object: Translation;
+    } | false;
     isPlayerOnTile(includeGhosts?: boolean, includeConnecting?: boolean): boolean;
     getPlayersOnTile(includeGhosts?: boolean, includeConnecting?: boolean): Human[];
     getPlayersThatSeeTile(): Human[];

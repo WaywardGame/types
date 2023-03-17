@@ -16,6 +16,7 @@ import NPC from "game/entity/npc/NPC";
 import type Tile from "game/tile/Tile";
 export interface INPCCanCreateOptions extends IEntityCanCreateOptions {
     uniqueNpcType?: string;
+    disablePlayerLike?: boolean;
 }
 export interface INPCManagerEvents extends Events<EntityManager<NPC>> {
     /**
