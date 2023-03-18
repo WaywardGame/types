@@ -116,6 +116,11 @@ export declare class TestRunContext extends BaseContext {
     readonly title: string;
     readonly titleTree: string[];
     readonly fullTitle: string;
+    /**
+     * Signal that's fired when the test has an error / times out.
+     * This is not fired when the test is successful.
+     */
+    readonly abortSignal: AbortSignal;
     readonly suites: TestRunContext[];
     readonly tests: TestRunContext[];
     private _output;
@@ -124,6 +129,7 @@ export declare class TestRunContext extends BaseContext {
     private readonly startTime;
     private endTime;
     private duration;
+    private readonly abortController;
     constructor(runContext: IRunContext, suiteContext: TestSetupContext, test?: ITest);
     /**
      * Check if every test / suite under this tree has succedded
