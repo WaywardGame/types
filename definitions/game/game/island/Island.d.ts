@@ -125,7 +125,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     onUnserialized(serializer: ISerializer): void;
     get biome(): import("game/biome/IBiome").IBiomeDescription;
     get isLoaded(): boolean;
-    get tiles(): Tile[];
+    get tiles(): Record<number, Tile | undefined>;
     get hasLoadedItemReferences(): boolean;
     get isLocalIsland(): boolean;
     get world(): World;
@@ -182,7 +182,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     getTileSafe(x: number, y: number, z: number): Tile | undefined;
     createTile(x: number, y: number, z: number, index: number): Tile;
     setTile(x: number, y: number, z: number, tile: Tile): Tile;
-    setTiles(tiles: Tile[]): void;
     getOrCreateTile(index: number, x: number, y: number, z: number): Tile;
     makeLavaPassage(human: Human): TerrainType | undefined;
     makeCaveEntrance(human: Human, chance?: number): TerrainType | undefined;

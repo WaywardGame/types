@@ -11,7 +11,7 @@
 import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-import type { IItemDescription } from "game/item/IItem";
+import { IItemDescription } from "game/item/IItem";
 export interface IConsumeItemCanUse extends IActionUsable {
     description: IItemDescription;
 }

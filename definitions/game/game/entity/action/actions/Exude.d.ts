@@ -12,10 +12,10 @@ import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type Item from "game/item/Item";
-import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
+import MagicalPropertyManager from "game/magic/MagicalPropertyManager";
 export interface IExudeCanUse extends IActionUsable {
     exudeTarget: Item;
-    magic: MagicalPropertyManager;
+    exudeItemMagic: MagicalPropertyManager;
 }
 declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number>, void, IExudeCanUse, [Item, (Item | undefined)?]>;
 export default _default;

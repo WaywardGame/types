@@ -1539,7 +1539,8 @@ export declare enum ItemTypeGroup {
     TwoHanded = 915,
     Boat = 916,
     Text = 917,
-    All = 918,
-    Last = 919
+    ContainerWithLiquid = 918,
+    All = 919,
+    Last = 920
 }
 export {};
