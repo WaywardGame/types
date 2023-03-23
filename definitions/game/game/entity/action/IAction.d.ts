@@ -420,4 +420,17 @@ export type Tuple5<X1, X2, X3, X4, X5> = undefined extends X5 ? (undefined exten
 export type ActionArguments<A extends IActionDescription<any, any, any, any, any>> = A extends IActionDescription<any, any, any, any, infer AA> ? AA : never;
 export type ActionEntities<A extends IActionDescription<any, any>> = A extends IActionDescription<any, infer E> ? E : never;
 export type ActionApi<A extends IActionDescription<any, any>> = IActionApi<ActionEntities<A>>;
+export interface ActionExecutorEvents {
+    /**
+     * Called before an action is executed
+     * This is called before the action result is used
+     * @returns False to cancel the action
+     */
+    preExecuteAction<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, AV extends any[] = ActionArgumentTupleTypes<A>, CU extends IActionUsable = any>(actionType: ActionType, actionApi: IActionHandlerApi<E, CU>, args: AV): false | void;
+    /**
+     * Called after an action has been executed
+     * This is called after the action result is used
+     */
+    postExecuteAction<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, AV extends any[] = ActionArgumentTupleTypes<A>, CU extends IActionUsable = any>(actionType: ActionType, actionApi: IActionHandlerApi<E, CU>, args: AV): any;
+}
 export {};

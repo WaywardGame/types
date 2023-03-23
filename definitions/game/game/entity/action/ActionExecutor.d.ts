@@ -10,7 +10,7 @@
  */
 import type { SfxType } from "audio/IAudio";
 import EventEmitter from "event/EventEmitter";
-import type { AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionHandlerApi, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable } from "game/entity/action/IAction";
+import type { ActionExecutorEvents, AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument, ActionType } from "game/entity/action/IAction";
 import type Entity from "game/entity/Entity";
 import type { SkillType } from "game/entity/IHuman";
@@ -23,20 +23,7 @@ import ActionPacket from "multiplayer/packets/shared/ActionPacket";
 import type { IRGB } from "utilities/Color";
 import type { Direction } from "utilities/math/Direction";
 import type { IVector3 } from "utilities/math/IVector";
-interface ActionEvents {
-    /**
-     * Called before an action is executed
-     * This is called before the action result is used
-     * @returns False to cancel the action
-     */
-    preExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any, any>, args: any[]): false | void;
-    /**
-     * Called after an action has been executed
-     * This is called after the action result is used
-     */
-    postExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any, any>, args: any[]): any;
-}
-export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R, CU extends IActionUsable, AV extends any[]> extends EventEmitter.Host<ActionEvents> implements IActionApi<E, CU>, IActionConfirmerApi<E, CU> {
+export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R, CU extends IActionUsable, AV extends any[]> extends EventEmitter.Host<ActionExecutorEvents> implements IActionApi<E, CU>, IActionConfirmerApi<E, CU> {
     /**
      * Gets an action by its description. If you're using the Action class for constructing the descriptions, just pass the action instance.
      *
@@ -136,4 +123,3 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private isUsableWhen;
     private static validate;
 }
-export {};

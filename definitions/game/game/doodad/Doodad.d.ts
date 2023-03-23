@@ -323,6 +323,10 @@ export default class Doodad extends Entity<DoodadType, DoodadTag> implements IUn
      */
     getMagicalDoodadSkills(): Map<SkillType, number>;
     /**
+     * Forces a boat to be drydocked (revert from doodad to an item if water was taken away for some reason).
+     */
+    dryDockBoat(human: Human): void;
+    /**
      * Decay over time
      */
     private processDecay;
