@@ -164,7 +164,8 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      */
     breakContainerOnTile(itemContainer: Item, tile: Tile): void;
     /**
-     * Drop items in a 3x3 square around the location
+     * Drop items in a 3x3 square around the location.
+     * This will ensure all items in the container are removed
      */
     placeItemsAroundTile(container: IContainer, tile: Tile, skipMessage?: boolean): void;
     /**
