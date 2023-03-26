@@ -199,6 +199,11 @@ export interface IActionNotUsable extends Partial<IPackedMessage> {
     arg?: never;
     source?: never;
 }
+export interface IProtectedItems {
+    consumedItems?: Item[] | Item;
+    damagedItems?: Item[] | Item;
+    actionType?: ActionType;
+}
 export type AnyActionDescription = IActionDescription<Array<ActionArgument | ActionArgument[]>, Entity, any, IActionUsable, any[]>;
 export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> extends IModdable {
     type?: number;
@@ -287,6 +292,10 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
      * Removes specific items added by `addItems`
      */
     removeItems(...items: Array<Item | undefined>): this;
+    /**
+     * Checks to see if a protected item can be used
+     */
+    canProtectedItemBeUsed(items: IProtectedItems): IActionNotUsable | true;
 }
 export interface IActionHandlerApi<E extends Entity = Entity, CU extends IActionUsable = IActionUsable> extends IActionApi<E, CU> {
     /**

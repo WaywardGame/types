@@ -15,7 +15,7 @@ import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type Human from "game/entity/Human";
 import type { IWell } from "game/island/IIsland";
-import type { IItemDescription } from "game/item/IItem";
+import type { IItemDescription, IItemReturn } from "game/item/IItem";
 import type Tile from "game/tile/Tile";
 export interface IPourCanUse extends IActionUsable {
     tile: Tile;
@@ -25,6 +25,7 @@ export interface IPourCanUse extends IActionUsable {
     waterDoodad?: Doodad;
     waterDoodadDescription?: IDoodadDescription;
     well?: IWell;
+    returnOnUse?: IItemReturn | undefined;
 }
 declare const _default: Action<[ActionArgument.ItemNearby], Human<number>, void, IPourCanUse, [import("../../../item/Item").default]>;
 export default _default;

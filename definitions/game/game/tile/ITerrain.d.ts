@@ -234,7 +234,9 @@ export declare enum OverlayType {
     Arrows = 1,
     FootPrints = 2,
     Target = 3,
-    FacingTile = 4
+    FacingTile = 4,
+    Full = 5,
+    QuestionMark = 6
 }
 export declare enum TerrainType {
     DeepSeawater = 0,

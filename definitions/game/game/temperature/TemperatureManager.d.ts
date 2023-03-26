@@ -29,8 +29,11 @@ import { WorldZ } from "game/WorldZ";
 import type { IPreSerializeCallback } from "save/serializer/ISerializer";
 import type { IVector3 } from "utilities/math/IVector";
 import { IRange } from "utilities/math/Range";
+import Vector2 from "utilities/math/Vector2";
+export declare const TEMPERATURE_BOUNDARY_MIN_VEC2: Vector2;
 export declare const TEMPERATURE_INVALID = 255;
 export interface ITemperatureManagerEvents {
+    updateProducedTile(tile: Tile, invalidateRange?: number): any;
 }
 export default class TemperatureManager extends EventEmitter.Host<ITemperatureManagerEvents> implements IPreSerializeCallback {
     private readonly island;
@@ -44,7 +47,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     private cacheCalculated;
     private cacheProduced;
     private temperatureBoundaryMax;
-    private temperatureBoundaryMaxVector;
+    temperatureBoundaryMaxVector: Vector2;
     constructor(island: Island);
     /**
      * Called after the island map size is configured

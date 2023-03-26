@@ -10,7 +10,7 @@
  */
 import type { SfxType } from "audio/IAudio";
 import EventEmitter from "event/EventEmitter";
-import type { ActionExecutorEvents, AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable } from "game/entity/action/IAction";
+import type { ActionExecutorEvents, AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable, IProtectedItems } from "game/entity/action/IAction";
 import { ActionArgument, ActionType } from "game/entity/action/IAction";
 import type Entity from "game/entity/Entity";
 import type { SkillType } from "game/entity/IHuman";
@@ -109,6 +109,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
     setParticle(particle: IActionParticle): this;
     addItems(...addItems: Array<Item | undefined>): this;
+    canProtectedItemBeUsed(items: IProtectedItems): true | IActionNotUsable;
     getItems(): readonly Item[];
     removeItems(...items: Array<Item | undefined>): this;
     setItemsUsed(used?: boolean): this;
