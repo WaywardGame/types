@@ -123,7 +123,8 @@ export declare enum RenderSource {
     StartGame = 61,
     Steamworks = 62,
     Thumbnail = 63,
-    WorldLayerRendererFlush = 64
+    WorldLayerRendererFlush = 64,
+    GenericOverlay = 65
 }
 export declare function calculateAmbientLightLevel(origin: IFieldOfViewOrigin, z: number): number;
 export declare const ZOOM_LEVEL_MIN = 1;

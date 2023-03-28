@@ -15,6 +15,7 @@ import { EquipType } from "game/entity/IHuman";
 import type { INPCConstructorOptions } from "game/entity/npc/INPC";
 import NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
+import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 export interface IMerchantBuyPrice {
@@ -28,6 +29,7 @@ export default class MerchantNPC extends NPC {
     getCustomerCredit(customer: Human): number;
     modifyCustomerCredit(customer: Human, creditChange: number): number;
     getActions(): ActionType[] | undefined;
+    getPublicContainer(): IContainer | undefined;
     getSellPrice(player: Player, item: Item): number | undefined;
     getBuyPrice(player: Player, item: Item): IMerchantBuyPrice | undefined;
     /**

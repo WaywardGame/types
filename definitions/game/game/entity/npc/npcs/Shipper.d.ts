@@ -30,6 +30,7 @@ export default class ShipperNPC extends NPC {
      * Closes container dialogs
      */
     closeContainerDialogs(): void;
+    getPublicContainer(): IContainer | undefined;
     protected getReputationChangeOnDeath(): number;
     protected getDefaultName(): import("../../../../language/impl/TranslationImpl").default;
     protected initializeStats(): void;

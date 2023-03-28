@@ -22,7 +22,7 @@ import { MessageManagerNoOp } from "game/entity/player/MessageManager";
 import { NoteManagerNoOp } from "game/entity/player/note/NoteManager";
 import { QuestManagerNoOp } from "game/entity/player/quest/QuestManager";
 import { TileUpdateType } from "game/IGame";
-import type { ItemType } from "game/item/IItem";
+import type { IContainer, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type Tile from "game/tile/Tile";
 import Translation from "language/Translation";
@@ -83,6 +83,7 @@ export default abstract class NPC extends Human<NPCType> {
     isWaiting(): boolean;
     getDamageModifier(): number;
     makeHostile(): void;
+    getPublicContainer(): IContainer | undefined;
     /**
      * The actions available to use with this npc
      */

@@ -39,6 +39,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     private readonly island;
     encodedCalculatedCache: Map<number, Map<number, Uint32Array>>;
     encodedProducedCache: Map<number, Map<number, Uint32Array>>;
+    encodedGuaranteedCorrectCache: Map<number, Map<number, Uint32Array>>;
     private readonly containerTemperatureCache;
     private readonly containerTileTemperatureCache;
     private readonly containerItemsTemperatureCache;
@@ -46,6 +47,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     private readonly scheduledContainerInvalidations;
     private cacheCalculated;
     private cacheProduced;
+    private cacheGuaranteedCorrect;
     private temperatureBoundaryMax;
     temperatureBoundaryMaxVector: Vector2;
     constructor(island: Island);
@@ -95,16 +97,18 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     /**
      * Returns the base temperature.
      */
-    getBase(): number;
+    getBiomeBase(): number;
     /**
      * Returns the temperature modifier at the given time.
      */
-    getTime(time?: TimeManager): number;
+    getBiomeTimeModifier(time?: TimeManager): number;
     getBiomeRange(): Readonly<IRange>;
     /**
      * Returns the temperature modifier of the given layer, at the given time.
      */
     getLayer(z: WorldZ, time?: TimeManager): number;
+    getLayerBase(z: WorldZ): number;
+    getLayerTimeModifier(z: WorldZ, time?: TimeManager): number;
     getLayerRange(z: WorldZ): IRange;
     private resolveTimeModifier;
     /**
@@ -157,7 +161,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     private calculateRange;
     /**
      * Starting from the middle, set the calculated value of the tile to the maximum of all surrounding tiles minus the diffusion rate
-     * For each tile where the value is updated, update all surrounding tiles
+     * For each tile where the value is updated, update all surrounding tiles:
      * ```
      * - - 0 - -      - - 0 - -      - - 1 - -      - - 1 - -      - - 1 - -      - - 1 - -
      * - 0 0 0 -      - 0 3 0 -      - 0 3 0 -      - 0 3 1 -      - 1 3 1 -      - 1 3 1 -
@@ -174,7 +178,8 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
      * - 0 0 0 -      - 0 0 0 -
      * - - 0 - -      - - 0 - -
      * ```
-     * When this happens, if we allow the tiles to continue updating each other, it'll progress as such:
+     * If cascading skipped previously touched tiles, the temperature from the 9 wouldn't spread out to the full distance.
+     * Instead, if we allow the tiles to continue updating each other, it'll progress as such:
      * ```
      * - - 1 - -      - - 1 - -      - - 1 - -      - - 1 - -      - - 1 - -      - - 1 - -
      * - 1 3 7 9      - 1 3 7 9      - 1 3 7 9      - 1 3 7 9      - 1 3 7 9      - 1 3 7 9
@@ -188,7 +193,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
      *       - 1 3 3 -      - 1 3 3 -      - 1 3 3 -
      *       - - 1 - -      - - 1 - -      - - 1 - -
      * ```
-     * By not cascading updates if a tile's value wasn't actually updated, the algorithm actually makes itself more efficient.
+     * Instead we stop cascading updates to adjacent tiles *only* if a tile's value wasn't actually updated.
      */
     private recalculate;
     private calculateTile;

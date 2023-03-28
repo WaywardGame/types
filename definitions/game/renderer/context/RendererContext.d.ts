@@ -24,5 +24,5 @@ export default class RendererContext {
     get isWebGl2(): boolean;
     get origin(): IRendererOrigin;
     get viewport(): IVector2;
-    createSpriteBatch(capacity: number, depthOffset?: number, yOffset?: number): SpriteBatch2 | SpriteBatch1;
+    createSpriteBatch(capacity: number, depthOffset?: number, yOffset?: number, enableAlphaMultiplcation?: boolean): SpriteBatch2 | SpriteBatch1;
 }

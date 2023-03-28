@@ -14,6 +14,9 @@ export interface IVector2 {
     x: number;
     y: number;
 }
+export declare namespace IVector2 {
+    function hash(v2: IVector2): number;
+}
 export interface IVector3 extends IVector2 {
     z: WorldZ;
 }

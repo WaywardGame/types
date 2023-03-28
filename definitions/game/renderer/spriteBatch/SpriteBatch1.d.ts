@@ -20,6 +20,7 @@ export default class SpriteBatch1 implements ISpriteBatch {
     readonly capacity: number;
     private readonly depthOffset;
     private readonly yOffset;
+    private readonly enableAlphaMultiplcation;
     private readonly shaderProgram;
     texSprites: WebGLTexture | undefined;
     inverseSpriteTextureSize: Vector2 | undefined;
@@ -31,7 +32,7 @@ export default class SpriteBatch1 implements ISpriteBatch {
     private begun;
     private _setup;
     static initializePrograms(webGlContext: WebGlContext): Promise<void>;
-    constructor(context: RendererContext, capacity: number, depthOffset?: number, yOffset?: number);
+    constructor(context: RendererContext, capacity: number, depthOffset?: number, yOffset?: number, enableAlphaMultiplcation?: boolean);
     setup(): void;
     delete(): void;
     clear(): void;
