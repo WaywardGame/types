@@ -17,15 +17,15 @@ export declare enum UsableActionSet {
      * Note that `priority` is used to sort "use item/doodad/npc" actions to the top — the actions that appear in {@link IItemDescription.use}.
      */
     First = 0,
-    Vehicle = 1,
-    Drink = 2,
-    Doodads = 3,
-    Extinguish = 4,
-    UseItem = 5,
-    PickUp = 6,
-    Containers = 7,
-    Creatures = 8,
-    Commands = 9,
+    TamedCreatures = 1,
+    Vehicle = 2,
+    Drink = 3,
+    Doodads = 4,
+    Extinguish = 5,
+    UseItem = 6,
+    PickUp = 7,
+    Containers = 8,
+    Creatures = 9,
     UseNPC = 10,
     Rest = 11,
     WithHands = 12,
@@ -47,11 +47,11 @@ export declare const usableActionSets: {
     2: UsableActionGenerator<[]>;
     3: UsableActionGenerator<[]>;
     4: UsableActionGenerator<[]>;
-    5: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/item/UsableActionsUseItem").IUseItemAction, import("game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
-    6: UsableActionGenerator<[]>;
+    5: UsableActionGenerator<[]>;
+    6: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/item/UsableActionsUseItem").IUseItemAction, import("game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
     7: UsableActionGenerator<[]>;
     8: UsableActionGenerator<[]>;
-    9: UsableActionGenerator<[isCommandMenu?: true | undefined]>;
+    9: UsableActionGenerator<[]>;
     10: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/UsableActionsUseNPC").IUseNPCAction, import("game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
     11: UsableActionGenerator<[]>;
     12: UsableActionGenerator<[]>;

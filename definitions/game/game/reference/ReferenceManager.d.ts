@@ -33,7 +33,7 @@ export default class ReferenceManager {
     constructor(game: Game);
     create(): number;
     reset(): void;
-    getList(type: ReferenceType, gameIsland?: Island): import("../entity/creature/corpse/CorpseManager").default | import("../entity/creature/CreatureManager").default | import("../doodad/DoodadManager").default | import("../item/ItemManager").default | import("../entity/npc/NPCManager").default | import("../tile/TileEventManager").default | Player[] | import("game/entity/IHuman").EquipType[] | readonly SkillType[] | readonly Milestone[] | IterableIterator<Island> | readonly Stat[] | readonly ItemType[] | (string | ActionType)[];
+    getList(type: ReferenceType, gameIsland?: Island): import("../entity/creature/corpse/CorpseManager").default | import("../entity/creature/CreatureManager").default | import("../doodad/DoodadManager").default | import("../item/ItemManager").default | import("../entity/npc/NPCManager").default | import("../tile/TileEventManager").default | import("game/entity/IHuman").EquipType[] | readonly Milestone[] | Player[] | readonly SkillType[] | IterableIterator<Island> | readonly Stat[] | readonly ItemType[] | (string | ActionType)[];
     get(thing: Item): Reference<ReferenceType.Item> | undefined;
     get(thing: Doodad): Reference<ReferenceType.Doodad> | undefined;
     get(thing: Creature): Reference<ReferenceType.Creature> | undefined;

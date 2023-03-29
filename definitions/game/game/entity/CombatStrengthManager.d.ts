@@ -23,6 +23,13 @@ export declare enum CombatStrength {
     Tier8 = 8,
     Tier9 = 9
 }
+export declare enum CombatDangerLevel {
+    Low = 0,
+    Medium = 1,
+    High = 2,
+    VeryHigh = 3,
+    Extreme = 4
+}
 export default class CombatStrengthManager {
     readonly minimumCreatureValue: number;
     readonly maximumCreatureValue: number;
@@ -32,9 +39,14 @@ export default class CombatStrengthManager {
      */
     getTier(strength: number): CombatStrength;
     /**
+     * Given a combat strength decimal, from 0 to 1, returns a CombatDangerLevel
+     */
+    getDangerLevel(difficulty: number): CombatDangerLevel;
+    /**
      * Calculates a float value between 0 and 1 representing a creature's difficulty.
      */
-    getCreature(creature: Creature | CreatureType, aberrant?: boolean, human?: Human): number;
+    getCreature(creature: Creature | CreatureType, aberrant?: boolean): number;
+    getCreatureDifficultyAgainstHuman(creature: Creature | CreatureType, aberrant?: boolean, human?: Human): number;
     /**
      * Calculates a value representing a creature's combat strength.
      *

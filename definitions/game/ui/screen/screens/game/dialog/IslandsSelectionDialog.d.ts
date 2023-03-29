@@ -18,5 +18,6 @@ export default class IslandsSelectionDialog extends IslandsDialog {
     constructor();
     setShipper(npc: ShipperNPC): this;
     protected onChangedSelectedIsland(animate?: boolean): void;
+    get island(): import("../../../../../game/island/Island").default | undefined;
     protected ship(): void;
 }

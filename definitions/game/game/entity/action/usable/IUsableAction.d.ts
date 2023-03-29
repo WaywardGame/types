@@ -61,6 +61,7 @@ export interface IUsableActionPossibleUsing {
     doodad?: Doodad;
     creature?: Creature;
     npc?: NPC;
+    misc?: any;
 }
 export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequirements> {
     item: ((REQUIREMENTS["item"] extends true ? Item : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
@@ -102,6 +103,7 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
     } ? NPC : never) | (REQUIREMENTS["npc"] extends {
         find(player: Player): NPC;
     } ? NPC : never));
+    misc: any;
 }
 export type UsableActionIconReference = ActionType | UsableActionType | UsableActionTypePlaceholder | (Omit<IIcon, "path"> & {
     action: ActionType | UsableActionType | UsableActionTypePlaceholder;

@@ -220,7 +220,7 @@ export default class InGameScreen extends BaseScreen {
     private isOverlayVisible;
     private readonly onInterrupt;
     private readonly onInterruptClosed;
-    private getHoveredItem;
+    getHoveredItem(api: IBindHandlerApi): HTMLElement | undefined;
     /**
      * Get a number based on an item's magical type/skill/stat in order.
      * @param item An item to sort.

@@ -10,9 +10,11 @@
  */
 import type { IUsableActionDynamicDefinition } from "game/entity/action/usable/actions/UsableActionsDynamic";
 import UsableActionsDynamic from "game/entity/action/usable/actions/UsableActionsDynamic";
-import type { IUsableActionRequirements } from "game/entity/action/usable/IUsableAction";
+import type { IUsableActionRequirements, IUsableActionUsing, ReturnableUsableActionUsability } from "game/entity/action/usable/IUsableAction";
+import type Player from "game/entity/player/Player";
 export interface IUseNPCAction extends IUsableActionDynamicDefinition {
     allowNoNPC?: true;
+    isUsable?(player: Player, using: IUsableActionUsing<IUsableActionRequirements>): ReturnableUsableActionUsability;
 }
 declare const _default: UsableActionsDynamic<IUseNPCAction, IUsableActionRequirements>;
 export default _default;
