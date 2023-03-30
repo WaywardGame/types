@@ -58,7 +58,6 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     rendererData: number;
     quality?: Quality;
-    overlays?: IOverlayInfo[];
     /**
      * Entities on the tile
      */
@@ -228,10 +227,8 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Decrease the depth of a water tile if under 6 connected tiles
      */
     consumeWaterTile(): void;
-    addOverlay(overlay: IOverlayInfo, ifNotExist?: (overlay: IOverlayInfo) => boolean): boolean;
-    hasOverlay(filter: (overlay: IOverlayInfo) => boolean): boolean | undefined;
-    removeOverlay(overlay: IOverlayInfo): boolean;
-    removeOverlay(filter: (overlay: IOverlayInfo) => boolean): boolean;
+    addOrUpdateOverlay(overlay: IOverlayInfo): void;
+    removeOverlay(overlay: IOverlayInfo): void;
     canSeeObject(type: CanASeeBType, object: IVector4 & {
         fromX: number;
         fromY: number;

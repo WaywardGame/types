@@ -12,6 +12,7 @@ import EventEmitter from "event/EventEmitter";
 import type Creature from "game/entity/creature/Creature";
 import type NPC from "game/entity/npc/NPC";
 import type Island from "game/island/Island";
+import type { IOverlayInfo } from "game/tile/ITerrain";
 import { TerrainType } from "game/tile/ITerrain";
 import type Tile from "game/tile/Tile";
 import { WorldZ } from "game/WorldZ";
@@ -112,6 +113,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     readonly fieldOfView: FieldOfView;
     readonly particleSystem: ParticleSystem;
     readonly notifier: Notifier;
+    private readonly overlays;
     layers: Record<number, WorldLayerRenderer>;
     defaultAdaptor: ITileAdaptor;
     doodadLikeAdaptor: ITileAdaptor;
@@ -186,6 +188,8 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     getAmbientColorDawn(): [number, number, number];
     getAmbientIntensity(): number;
     getFogColor(): [x: number, y: number, z: number];
+    addOrUpdateOverlay(tile: Tile, overlay: IOverlayInfo): void;
+    removeOverlay(tile: Tile, overlay: IOverlayInfo): void;
     shouldRender(): RenderFlag;
     renderWorld(timeStamp: number, x: number, y: number, z: number): void;
     renderWorldLayer(worldLayer: WorldLayerRenderer, x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFlags: RenderFlag, enableDepth: boolean): void;
@@ -236,7 +240,6 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
      * @returns True when there's more rendering to be done
      */
     private computeSpritesInViewportImmediately;
-    private batchOverlay;
     private batchItems;
     private batchItem;
     private batchTileEvents;

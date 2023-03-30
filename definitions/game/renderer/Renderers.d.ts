@@ -14,6 +14,7 @@ import type StatusEffect from "game/entity/status/StatusEffect";
 import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import type { DisplayableItemType } from "game/item/IItem";
+import type { IOverlayInfo } from "game/tile/ITerrain";
 import type Tile from "game/tile/Tile";
 import type { RenderSource, UpdateRenderFlag } from "renderer/IRenderer";
 import type { CreatureNotifierType, INotificationLocation, ItemNotifierType, NotifierIconType, StatNotificationType } from "renderer/notifier/INotifier";
@@ -47,6 +48,8 @@ export default class Renderers {
     delete(): Promise<void>;
     update(timeStamp: number): void;
     computeSpritesInViewport(origin: IVector4): void;
+    addOrUpdateOverlay(tile: Tile, overlay: IOverlayInfo): void;
+    removeOverlay(tile: Tile, overlay: IOverlayInfo): void;
     updateView(origin: IVector4 | undefined, source: RenderSource, updateFov?: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition): void;
     updateRender(origin: IVector4 | undefined, source: RenderSource, flag: UpdateRenderFlag): void;
 }

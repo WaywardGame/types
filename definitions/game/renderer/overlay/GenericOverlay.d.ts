@@ -11,8 +11,9 @@
 import type { IOverlayInfo } from "game/tile/ITerrain";
 import type Tile from "game/tile/Tile";
 export default abstract class GenericOverlay<OVERLAY extends IOverlayInfo = IOverlayInfo, PARAMS extends any[] = []> {
-    private readonly overlay;
+    protected readonly overlay: Map<Tile, OVERLAY>;
     protected alpha: number;
+    constructor(hideByDefault?: boolean);
     getDefaultAlpha(): number;
     show(): void;
     hide(): void;

@@ -11,6 +11,8 @@
 import EventEmitter from "event/EventEmitter";
 import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
+import type { IOverlayInfo } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 import type { IRendererEvents } from "renderer/IRenderer";
 import { RenderSource, UpdateRenderFlag } from "renderer/IRenderer";
@@ -98,6 +100,8 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
     getAmbientLightLevel(z: number): number;
     updateAmbientLightLevel(z: number): number;
     updateView(source: RenderSource, updateFov: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition): void;
+    addOrUpdateOverlay(tile: Tile, overlay: IOverlayInfo): void;
+    removeOverlay(tile: Tile, overlay: IOverlayInfo): void;
     updateThumbnail(): Promise<string | undefined>;
     update(timeStamp: number): void;
     computeSpritesInViewport(): void;
