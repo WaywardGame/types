@@ -35,7 +35,7 @@ export interface ICorpseEvents extends IEntityEvents {
 /**
  * TODO: extends Entity?
  */
-export default class Corpse extends Entity<CreatureType> implements IObject<CreatureType> {
+export default class Corpse extends Entity<ICorpseDescription, CreatureType> implements IObject<CreatureType> {
     static is(value: any): value is Corpse;
     get entityType(): EntityType.Corpse;
     get tileUpdateType(): TileUpdateType;
@@ -46,7 +46,6 @@ export default class Corpse extends Entity<CreatureType> implements IObject<Crea
     respawned?: number;
     startingDecay?: number;
     step?: number | undefined;
-    private _description;
     private _creatureDescription;
     constructor(entityOptions?: IEntityConstructorOptions<CreatureType>, decay?: number);
     get asCorpse(): Corpse | undefined;
@@ -71,7 +70,7 @@ export default class Corpse extends Entity<CreatureType> implements IObject<Crea
      * - `corpse.getName(undefined, 3)` // "acid spitter demons"
      */
     getName(article?: false | "definite" | "indefinite", count?: number): Translation;
-    description(): ICorpseDescription | undefined;
+    protected getDescription(): ICorpseDescription | undefined;
     creatureDescription(): ICreatureDescription | undefined;
     isValid(): boolean;
     getDecayAtStart(): number;

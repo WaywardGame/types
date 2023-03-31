@@ -31,7 +31,7 @@ export interface IEntityWithStatsEvents extends IEntityMovableEvents, IStatEvent
  * Entity class that includes stats/status system.
  * Note: We're assuming something with stats is also movable!
  */
-export default abstract class EntityWithStats<TypeType extends number = number, TagType = unknown> extends EntityMovable<TypeType, TagType> implements IStatHost {
+export default abstract class EntityWithStats<DescriptionType = unknown, TypeType extends number = number, TagType = unknown> extends EntityMovable<DescriptionType, TypeType, TagType> implements IStatHost {
     event: IEventEmitter<this, IEntityWithStatsEvents>;
     stats: IStats;
     status: IStatus;
@@ -39,7 +39,7 @@ export default abstract class EntityWithStats<TypeType extends number = number, 
     private readonly statusHandlers;
     constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
     protected getApplicableStatusEffects(): Set<StatusType> | undefined;
-    get asEntityWithStats(): EntityWithStats<TypeType, TagType>;
+    get asEntityWithStats(): EntityWithStats<DescriptionType, TypeType, TagType>;
     /**
      * Returns whether the entity has the given `StatusType`
      * @param status The status to check

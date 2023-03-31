@@ -34,7 +34,7 @@ import type EntityWithStats from "game/entity/EntityWithStats";
 import type Tile from "game/tile/Tile";
 import type EntityMovable from "game/entity/EntityMovable";
 import type { RenderSource, UpdateRenderFlag } from "renderer/IRenderer";
-export default abstract class Entity<TypeType extends number = number, TagType = unknown, CounterType = unknown> extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, ITemperatureSource, INotificationLocation, IVector3 {
+export default abstract class Entity<DescriptionType = unknown, TypeType extends number = number, TagType = unknown, CounterType = unknown> extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, ITemperatureSource, INotificationLocation, IVector3 {
     abstract readonly entityType: EntityType;
     abstract readonly tileUpdateType: TileUpdateType;
     id: number;
@@ -58,14 +58,23 @@ export default abstract class Entity<TypeType extends number = number, TagType =
      * This should be cleared when x,y,z is changing.
      */
     private _tilesAround;
+    protected _description?: DescriptionType;
     constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
     get island(): import("../island/Island").default;
     get reference(): Reference | undefined;
+    /**
+     * Get the entities description
+     */
+    get description(): DescriptionType | undefined;
     /**
      * Adds a referenceId to the entity if it doesn't already have one
      */
     addReferenceId(): void;
     abstract getName(): Translation;
+    /**
+     * Called when filling out the entities description for the first time
+     */
+    protected abstract getDescription(): DescriptionType | undefined;
     toString(): string;
     getInspectionId(): string;
     /**
@@ -81,7 +90,7 @@ export default abstract class Entity<TypeType extends number = number, TagType =
     get tilesAround(): Tile[] | undefined;
     protected setCachedTile(tile: Tile): void;
     clearTileCache(): void;
-    isNearby(entity: Entity): boolean;
+    isNearby(entity: Entity<DescriptionType>): boolean;
     isInFov(): boolean;
     setInFov(inFov: boolean): void;
     isOnFire(): FireType;
@@ -96,9 +105,9 @@ export default abstract class Entity<TypeType extends number = number, TagType =
     addTag(tag: TagType): void;
     removeTag(tag: TagType): void;
     abstract isValid(): boolean;
-    get asEntity(): Entity<TypeType, TagType>;
-    get asEntityMovable(): EntityMovable<TypeType, TagType> | undefined;
-    get asEntityWithStats(): EntityWithStats<TypeType, TagType> | undefined;
+    get asEntity(): Entity<DescriptionType, TypeType, TagType>;
+    get asEntityMovable(): EntityMovable<DescriptionType, TypeType, TagType> | undefined;
+    get asEntityWithStats(): EntityWithStats<DescriptionType, TypeType, TagType> | undefined;
     abstract get asCorpse(): Corpse | undefined;
     abstract get asCreature(): Creature | undefined;
     abstract get asDoodad(): Doodad | undefined;

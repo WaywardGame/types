@@ -48,7 +48,7 @@ export default class Crafter {
      * @param includeCrafterTile Whether the tile the crafter is on should be included. Defaults to `true`.
      */
     tilesAroundCrafter(includeCrafterTile?: boolean): Stream<any>;
-    getCrafter(): Entity<number, unknown, unknown>;
+    getCrafter(): Entity<unknown, number, unknown, unknown>;
     getUsable<R extends RecipeRequirementType>(type: R, requirement: InstanceType<RecipeRequirementClass<R>>): Set<RecipeInputType<R>>;
     getUsed<R extends RecipeRequirementType>(type: R, requirement?: InstanceType<RecipeRequirementClass<R>>): Stream<RecipeInputType<R>>;
     /**

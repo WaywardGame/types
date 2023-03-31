@@ -55,7 +55,7 @@ import type { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import type { IVector4 } from "utilities/math/Vector4";
 export declare const REPUTATION_MAX = 64000;
-export default abstract class Human<TypeType extends number = number> extends EntityWithStats<TypeType> implements IHasInsulation {
+export default abstract class Human<TypeType extends number = number> extends EntityWithStats<unknown, TypeType> implements IHasInsulation {
     static getNameTranslation(): import("../../language/impl/TranslationImpl").default;
     event: IEventEmitter<this, IHumanEvents>;
     anim: number;
@@ -119,6 +119,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     protected gameOptionsCached?: IGameOptionsPlayer;
     protected cachedMovementPenalty?: number;
     constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
+    protected getDescription(): void;
     abstract createNoteManager(): INoteManager;
     abstract createMessageManager(): IMessageManager;
     abstract createQuestManager(): IQuestManager;

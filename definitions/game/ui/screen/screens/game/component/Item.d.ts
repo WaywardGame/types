@@ -42,7 +42,6 @@ export declare enum ItemDetailIconLocation {
 export declare enum ItemClasses {
     Main = "item-component",
     Icon = "item-component-icon",
-    ItemIcon = "item-component-icon-item",
     ItemIconIsReal = "item-component-icon-item-is-real",
     ActionIcon = "item-component-icon-action",
     ActionIconHasItem = "item-component-icon-action-has-item",
@@ -90,7 +89,6 @@ export default class ItemComponent extends Component {
     protected readonly handler: IItemHandler;
     static registerSlot(slot: ItemSlot): void;
     event: IEventEmitter<this, Events<IDraggableComponent> & IItemSlotEvents>;
-    readonly itemIcon: Component<HTMLElement>;
     readonly magicalIcon: Component<HTMLElement>;
     readonly protectedIcon: Component<HTMLElement>;
     readonly actionIcon: Component<HTMLElement> | undefined;

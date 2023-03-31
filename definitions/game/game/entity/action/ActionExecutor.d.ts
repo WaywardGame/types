@@ -30,7 +30,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
      * Note: Prefer `IActionApi.get` if you're calling this from within another action.
      */
     static get<D extends AnyActionDescription>(action: D): D extends IActionDescription<infer A, infer E, infer R, infer CU, infer AV> ? ActionExecutor<A, E, R, CU, AV> : never;
-    static executeMultiplayer(packet: ActionPacket, executor?: Entity<number, unknown, unknown> | undefined, nonMpActionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any, any, any[]>): any;
+    static executeMultiplayer(packet: ActionPacket, executor?: Entity<unknown, number, unknown, unknown> | undefined, nonMpActionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any, any, any[]>): any;
     get executor(): E;
     get actionStack(): ActionType[];
     get lastAction(): ActionType;

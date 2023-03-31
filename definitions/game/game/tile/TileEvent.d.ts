@@ -28,7 +28,7 @@ export interface ITileEventEvents extends IEntityMovableEvents {
      */
     fireUpdate(tile: Tile, stage: FireStage | undefined): any;
 }
-export default class TileEvent extends EntityMovable<TileEventType> implements IObject<TileEventType> {
+export default class TileEvent extends EntityMovable<ITileEventDescription, TileEventType> implements IObject<TileEventType> {
     static is(value: any): value is TileEvent;
     get entityType(): EntityType.TileEvent;
     get tileUpdateType(): TileUpdateType;
@@ -48,7 +48,6 @@ export default class TileEvent extends EntityMovable<TileEventType> implements I
      */
     fuel?: number;
     private fireStage?;
-    private _description;
     constructor(entityOptions?: IEntityConstructorOptions<TileEventType>);
     isValid(): boolean;
     get asCorpse(): undefined;
@@ -63,7 +62,7 @@ export default class TileEvent extends EntityMovable<TileEventType> implements I
     get point(): IVector3;
     get tile(): Tile;
     toString(): string;
-    description(): ITileEventDescription | undefined;
+    protected getDescription(): ITileEventDescription | undefined;
     getName(article?: false | "definite" | "indefinite", count?: number): import("../../language/impl/TranslationImpl").default;
     getProducedTemperature(): number | undefined;
     updateFire(tile: Tile): void;

@@ -26,7 +26,7 @@ import type { IUnserializedCallback } from "save/serializer/ISerializer";
 import { Direction } from "utilities/math/Direction";
 import type { IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
-export default class Creature extends EntityWithStats<CreatureType> implements IUnserializedCallback, IObject<CreatureType> {
+export default class Creature extends EntityWithStats<ICreatureDescription, CreatureType> implements IUnserializedCallback, IObject<CreatureType> {
     static is(value: any): value is Creature;
     get entityType(): EntityType.Creature;
     get tileUpdateType(): TileUpdateType;
@@ -57,7 +57,6 @@ export default class Creature extends EntityWithStats<CreatureType> implements I
     respawned?: number;
     shouldSkipNextUpdate?: true;
     tameTime?: number;
-    private _description;
     spawnAnimationTime: IMovementTime | undefined;
     constructor(entityOptions?: IEntityConstructorOptions<CreatureType>, aberrant?: boolean);
     /**
@@ -74,7 +73,7 @@ export default class Creature extends EntityWithStats<CreatureType> implements I
      * - `creature.getName(undefined, 3)` // "acid spitter demons"
      */
     getName(article?: false | "definite" | "indefinite", count?: number): Translation;
-    description(): ICreatureDescription | undefined;
+    protected getDescription(): ICreatureDescription | undefined;
     hasAi(aiType: AiType): boolean;
     isHidden(): boolean;
     isRetaliator(): boolean;

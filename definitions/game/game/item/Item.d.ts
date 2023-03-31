@@ -69,7 +69,7 @@ export interface IItemEvents extends IEntityMovableEvents {
     durabilityChange(durability: number, oldDurability: number): any;
     durabilityMaxChange(durabilityMax: number, oldDurabilityMax: number): any;
 }
-export default class Item extends EntityMovable<ItemType, ItemTag, ItemCounter> implements Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, IHasInsulation, IHasMagic {
+export default class Item extends EntityMovable<IItemDescription, ItemType, ItemTag, ItemCounter> implements Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, IHasInsulation, IHasMagic {
     get entityType(): EntityType.Item;
     get tileUpdateType(): TileUpdateType;
     readonly event: IEventEmitter<this, IItemEvents>;
@@ -107,7 +107,6 @@ export default class Item extends EntityMovable<ItemType, ItemTag, ItemCounter> 
     offsetY?: number;
     [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
     private _movementOptions?;
-    private _description;
     constructor(itemType?: ItemType | undefined, islandId?: IslandId, quality?: Quality, human?: Human);
     get asCorpse(): undefined;
     get asCreature(): undefined;
@@ -162,7 +161,7 @@ export default class Item extends EntityMovable<ItemType, ItemTag, ItemCounter> 
      * - `item.getName(undefined, 3)` // "stone axes"
      */
     getName(article?: false | "definite" | "indefinite", count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showMagicalType?: boolean): import("../../language/impl/TranslationImpl").default;
-    description(): IItemDescription | undefined;
+    protected getDescription(): IItemDescription | undefined;
     isTransient(): boolean;
     isValid(): boolean;
     isProtected(): boolean;

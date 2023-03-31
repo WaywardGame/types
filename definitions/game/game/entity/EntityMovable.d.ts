@@ -39,7 +39,7 @@ export interface IEntityMovableEvents extends IEntityEvents {
 /**
  * Entity class that allows movement
  */
-export default abstract class EntityMovable<TypeType extends number = number, TagType = unknown, CounterType = unknown> extends Entity<TypeType, TagType, CounterType> implements IRendererOrigin {
+export default abstract class EntityMovable<DescriptionType = unknown, TypeType extends number = number, TagType = unknown, CounterType = unknown> extends Entity<DescriptionType, TypeType, TagType, CounterType> implements IRendererOrigin {
     event: IEventEmitter<this, IEntityMovableEvents>;
     /**
      * Not guaranteed to be synced between the server and client for Human entities
@@ -83,7 +83,7 @@ export default abstract class EntityMovable<TypeType extends number = number, Ta
      * @returns False to block the move
      */
     protected abstract updateTile(fromTile: Tile, toTile: Tile): boolean;
-    get asEntityMovable(): EntityMovable<TypeType, TagType>;
+    get asEntityMovable(): EntityMovable<DescriptionType, TypeType, TagType>;
     /**
      * Regular entities don't have a direction so this will be the same as getTile()
      */

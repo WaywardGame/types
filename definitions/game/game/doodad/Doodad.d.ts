@@ -72,7 +72,7 @@ export interface IDoodadEvents extends IEntityEvents {
     durabilityChange(durability: number, oldDurability: number): any;
     durabilityMaxChange(durability: number, oldDurability: number): any;
 }
-export default class Doodad extends Entity<DoodadType, DoodadTag> implements IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, Partial<IContainer>, IHasInsulation, IHasBuilder, IHasMagic {
+export default class Doodad extends Entity<IDoodadDescription, DoodadType, DoodadTag> implements IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, Partial<IContainer>, IHasInsulation, IHasBuilder, IHasMagic {
     static is(value: any): value is Doodad;
     get constructorFunction(): typeof Doodad;
     static getRegistrarId(): number;
@@ -104,7 +104,6 @@ export default class Doodad extends Entity<DoodadType, DoodadTag> implements IUn
     stillContainer?: Item;
     tradedFrom?: string[];
     weight?: number;
-    private _description?;
     private _tileId?;
     /**
      * Separate property just for wells because isInGroup is still expensive for processWell()
@@ -133,7 +132,7 @@ export default class Doodad extends Entity<DoodadType, DoodadTag> implements IUn
      * - `doodad.getName(undefined, 3)` // "stone furnaces"
      */
     getName(article?: false | "definite" | "indefinite", count?: number): import("../../language/impl/TranslationImpl").default;
-    description(): IDoodadDescription | undefined;
+    protected getDescription(): IDoodadDescription | undefined;
     updateTile(tileUpdateType: TileUpdateType): void;
     changeType(doodadType: DoodadType): void;
     isValid(): boolean;

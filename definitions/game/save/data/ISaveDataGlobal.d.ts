@@ -99,7 +99,8 @@ export declare enum MusicPlaylist {
 export declare enum TooltipVisibilityOption {
     HiddenUnlessBind = 0,
     ShowMoreInformationWithBind = 1,
-    AlwaysShowMoreInformation = 2
+    AlwaysShowMoreInformation = 2,
+    Default = 1
 }
 export type IOptionsOld = Partial<Pick<IOptions, "bindings">> & Partial<{
     alwaysShowMoreInformation: boolean;

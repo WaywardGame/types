@@ -23,9 +23,9 @@ export interface IDescribed {
     referenceId?: number;
     quality?: Quality;
     island: Island;
-    description(): any;
+    description: any;
 }
-export type DescribedDescription<T extends IDescribed> = Exclude<ReturnType<T["description"]>, undefined>;
+export type DescribedDescription<T extends IDescribed> = Exclude<T["description"], undefined>;
 export interface IUseInfoBase<T extends IDescribed, A extends ActionType> {
     entityType: T["entityType"];
     value?: T;
