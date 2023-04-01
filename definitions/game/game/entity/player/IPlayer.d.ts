@@ -10,10 +10,8 @@
  */
 import type { Events } from "event/EventEmitter";
 import type Doodad from "game/doodad/Doodad";
-import type Creature from "game/entity/creature/Creature";
 import type Human from "game/entity/Human";
 import type { HairColor, HairStyle, SkinColor } from "game/entity/IHuman";
-import type NPC from "game/entity/npc/NPC";
 import type { IMessage } from "game/entity/player/IMessageManager";
 import type MessageManager from "game/entity/player/MessageManager";
 import type { INote } from "game/entity/player/note/NoteManager";
@@ -21,7 +19,6 @@ import type Player from "game/entity/player/Player";
 import { ItemType } from "game/item/IItem";
 import type { Prompt } from "game/meta/prompt/IPrompt";
 import type { Milestone } from "game/milestones/IMilestone";
-import type Tile from "game/tile/Tile";
 import type InterruptChoice from "language/dictionary/InterruptChoice";
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
@@ -176,20 +173,6 @@ export interface IStatOld {
     timer: number;
     regen: number;
     regenBase: number;
-}
-export interface IMobCheck extends IVector3 {
-    tile: Tile;
-    creature?: Creature;
-    player?: Human;
-    npc?: NPC;
-    obstacle?: boolean;
-    water?: boolean;
-    freshWater?: boolean;
-    shallowWater?: boolean;
-    swampWater?: boolean;
-    noTile?: boolean;
-    waterTiles?: number;
-    voidTiles?: number;
 }
 export declare const setupSpawnItems: ItemType[];
 export declare const setupWaterItems: ItemType[];

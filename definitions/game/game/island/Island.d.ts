@@ -25,7 +25,7 @@ import type { Game } from "game/Game";
 import type { IGameOld } from "game/IGame";
 import { TickFlag, TileUpdateType } from "game/IGame";
 import { Quality } from "game/IObject";
-import type { IIslandEvents, IIslandLoadOptions, IIslandPort, ISeeds, IslandId, IWaterContamination, IWaterFill, IWell } from "game/island/IIsland";
+import type { IIslandEvents, IIslandLoadOptions, IIslandPort, IMobCheck, ISeeds, IslandId, IWaterContamination, IWaterFill, IWell } from "game/island/IIsland";
 import { WaterType } from "game/island/IIsland";
 import type { ILiquidGather } from "game/item/IItem";
 import type { IRequirementInfo } from "game/item/IItemManager";
@@ -216,6 +216,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     calculateTileLightLevel(tile: Tile): number;
     getLightSourceAt(x: number, y: number, z: number): number;
+    checkForTargetInRange(tile: Tile, direction: Direction.Cardinal, range: number, includePlayers?: boolean): IMobCheck;
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
     coolFires(requirements: IRequirementInfo, human: Human): void;
     /**

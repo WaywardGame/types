@@ -43,6 +43,10 @@ type UndefinedFromVoid<V> = V extends void ? undefined : V;
 export interface IEventEmitter<H = any, E = any> {
     event: IEventEmitter<this, IEventEmitterEvents<H, E>>;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
+    /**
+     * Emit an event only to the subscribers of this emitter instance.
+     */
+    emitSelf<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     emitFirst<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): UndefinedFromVoid<ReturnOf<E[K]>> | undefined;
     emitFirstDefault<K extends keyof E, D>(event: K, generateDefault: () => D, ...args: ArgsOf<E[K]>): Exclude<ReturnOf<E[K]>, null | undefined> | D;
     emitCollect<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Array<ReturnOf<E[K]>>;
@@ -75,6 +79,7 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     get event(): IEventEmitter<this, IEventEmitterEvents<H, E>>;
     constructor(host: H);
     raw(): IEventEmitter<H, E>;
+    emitSelf<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     emitFirst<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): any;
     emitFirstDefault<K extends keyof E, D>(event: K, generateDefault: () => D, ...args: ArgsOf<E[K]>): any;
@@ -89,7 +94,7 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
     hasHandlersForEvent(...events: Array<keyof E>): boolean;
     private copyFrom;
-    private handlersForEvent;
+    protected handlersForEvent<K extends keyof E>(event: K, ignoreClassSubscriptions?: true): (string | Handler<any, any>)[];
 }
 declare module EventEmitter {
     class Host<E> implements IEventEmitterHost<E> {

@@ -12,7 +12,6 @@
  * Used for ordering a list of items by "priority". Higher priorities come before lower priorities.
  */
 export declare class PriorityMap<T> {
-    static orderMultiple2<T extends Iterable<any>>(lists: Array<PriorityMap<T>>): T[];
     static orderMultiple<T extends Iterable<any>>(lists: Array<PriorityMap<T>>): T[];
     private readonly priorities;
     private readonly map;
@@ -38,7 +37,7 @@ export declare class PriorityMap<T> {
      * Returns an iterator of the items in this list.
      */
     stream(direction?: PriorityListStreamDirection): import("@wayward/goodstream").default<T>;
-    array(): (T extends readonly (infer InnerArr)[] ? InnerArr : T)[];
+    array(direction?: PriorityListStreamDirection): T[];
     getInternalMap(): Record<number, T>;
 }
 export declare enum PriorityListStreamDirection {

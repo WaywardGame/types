@@ -16,7 +16,7 @@ import type { SkillType } from "game/entity/IHuman";
 import type { IDecayTemperatureRange } from "game/IGame";
 import type { Quality } from "game/IObject";
 import type { WaterType } from "game/island/IIsland";
-import type { IContainer, ItemType } from "game/item/IItem";
+import type { IContainer, IMaybeContainer, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
 import type { MapTile } from "game/mapping/IMapTile";
@@ -146,6 +146,7 @@ export interface ITileOld {
     event?: TileEvent[];
 }
 export type ITileContainer = IContainer & IVector3;
+export type IMaybeTileContainer = IMaybeContainer & IVector3;
 export interface ITileData {
     type: TerrainType;
     minDur?: number;

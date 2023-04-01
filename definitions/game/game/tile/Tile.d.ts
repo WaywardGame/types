@@ -18,9 +18,8 @@ import type { IMessageManager } from "game/entity/player/IMessageManager";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
 import type { IslandId } from "game/island/IIsland";
-import type { IContainer } from "game/item/IItem";
 import type Item from "game/item/Item";
-import type { IOverlayInfo, ITerrainDescription, ITileContainer, ITileData } from "game/tile/ITerrain";
+import type { IMaybeTileContainer, IOverlayInfo, ITerrainDescription, ITileContainer, ITileData } from "game/tile/ITerrain";
 import { TerrainType } from "game/tile/ITerrain";
 import type TileEvent from "game/tile/TileEvent";
 import { WorldZ } from "game/WorldZ";
@@ -104,9 +103,18 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     get variation(): number;
     get isMapEdge(): boolean;
     /**
+     * Check if this Tile containers some items
+     */
+    get hasTileContainer(): boolean;
+    /**
      * Gets/creates tile container
      */
-    get tileContainer(): IContainer;
+    get tileContainer(): ITileContainer;
+    /**
+     * Gets a tile container.
+     * It will not create one when called.
+     */
+    get maybeTileContainer(): IMaybeTileContainer;
     /**
      * Checks for:
      * Passable

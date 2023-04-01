@@ -10,7 +10,9 @@
  */
 import type { BiomeType } from "game/biome/IBiome";
 import type Doodad from "game/doodad/Doodad";
+import type Creature from "game/entity/creature/Creature";
 import type Human from "game/entity/Human";
+import type NPC from "game/entity/npc/NPC";
 import type { IIslandTemplate, TickFlag, TileUpdateType } from "game/IGame";
 import type { MultiplayerLoadingDescription } from "game/meta/Loading";
 import type { TerrainType } from "game/tile/ITerrain";
@@ -156,4 +158,18 @@ export interface IIslandPort {
     id: number;
     name: string | ISerializedTranslation;
     position: IVector3;
+}
+export interface IMobCheck extends IVector3 {
+    tile: Tile;
+    creature?: Creature;
+    player?: Human;
+    npc?: NPC;
+    obstacle?: boolean;
+    water?: boolean;
+    freshWater?: boolean;
+    shallowWater?: boolean;
+    swampWater?: boolean;
+    noTile?: boolean;
+    waterTiles?: number;
+    voidTiles?: number;
 }

@@ -33,7 +33,14 @@ import Vector2 from "utilities/math/Vector2";
 export declare const TEMPERATURE_BOUNDARY_MIN_VEC2: Vector2;
 export declare const TEMPERATURE_INVALID = 255;
 export interface ITemperatureManagerEvents {
+    /**
+     * Note: This event can only be listened for by subscribing directly to `temperatureManager.event`
+     */
     updateProducedTile(tile: Tile, invalidateRange?: number): any;
+    /**
+     * Note: This event can only be listened for by subscribing directly to `temperatureManager.event`
+     */
+    recalculate(x: number, y: number, z: number, type: TempType): any;
 }
 export default class TemperatureManager extends EventEmitter.Host<ITemperatureManagerEvents> implements IPreSerializeCallback {
     private readonly island;

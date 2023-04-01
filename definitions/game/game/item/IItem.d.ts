@@ -73,10 +73,15 @@ export interface IContainable {
     containerType?: ContainerType;
     [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
 }
-export interface IContainer extends IContainable {
-    containedItems: Item[];
+interface IBaseContainer extends IContainable {
     transientItems?: Item[];
     itemOrders?: number[];
+}
+export interface IContainer extends IBaseContainer {
+    containedItems: Item[];
+}
+export interface IMaybeContainer extends IBaseContainer {
+    containedItems?: Item[];
 }
 export interface IItemDisassembleResult {
     items: IItemDisassembly[];
