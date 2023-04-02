@@ -12,7 +12,6 @@ import type RendererContext from "renderer/context/RendererContext";
 import type { RenderLayerFlag } from "renderer/world/IWorldRenderer";
 export declare const jitRenderingExtraRenderRange = 2;
 export declare const jitRenderingMaxTileUpdates = 4096;
-export declare const jitRenderingPerTileFlush = false;
 export interface IWorldLayerRendererEvents {
     /**
      * Called when rendering the world

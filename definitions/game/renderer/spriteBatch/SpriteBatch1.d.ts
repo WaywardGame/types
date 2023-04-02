@@ -14,5 +14,6 @@ import { SpriteBatchBase } from "renderer/spriteBatch/SpriteBatchBase";
  */
 export default class SpriteBatch1 extends SpriteBatchBase {
     setup(): void;
+    bindBuffers(): void;
     render(x: number, y: number, tileScale: number, viewportWidth: number, viewportHeight: number): void;
 }

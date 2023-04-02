@@ -100,8 +100,8 @@ declare const dictionaryMap: {
     10: typeof Challenge;
     11: typeof ChangeType;
     12: typeof CharacterSort;
-    13: typeof CombatStrength;
-    14: typeof CombatDangerLevel;
+    13: typeof CombatDangerLevel;
+    14: typeof CombatStrength;
     15: typeof Command;
     16: typeof CreatureType;
     17: typeof CraftEfficacy;
@@ -209,8 +209,8 @@ export declare const strictDictionaries: {
     10: typeof Challenge;
     11: typeof ChangeType;
     12: typeof CharacterSort;
-    13: typeof CombatStrength;
-    14: typeof CombatDangerLevel;
+    13: typeof CombatDangerLevel;
+    14: typeof CombatStrength;
     15: typeof Command;
     16: typeof CreatureType;
     17: typeof CraftEfficacy;

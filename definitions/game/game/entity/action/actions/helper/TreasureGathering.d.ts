@@ -13,7 +13,7 @@ import type Human from "game/entity/Human";
 import type Item from "game/item/Item";
 import type DrawnMap from "game/mapping/DrawnMap";
 import type { ITreasure } from "game/mapping/DrawnMap";
-import type { IVector3 } from "utilities/math/IVector";
+import type Tile from "game/tile/Tile";
 declare namespace TreasureGathering {
     interface IGatherable {
         map: DrawnMap;
@@ -21,7 +21,7 @@ declare namespace TreasureGathering {
         toolRange?: number;
         maxRange?: number;
         treasure: ITreasure;
-        position: IVector3;
+        gatherPointTile: Tile;
     }
     enum GatherablesResult {
         Blocked = 0,
@@ -40,7 +40,7 @@ declare namespace TreasureGathering {
     }
     interface IGatherResult {
         result: Result;
-        position?: IVector3;
+        tile?: Tile;
         treasure?: ITreasure;
     }
     function gather(action: IActionHandlerApi<Human>, itemRange: number, requireMap: boolean, tool?: Item, canGather?: ICanGather): IGatherResult;

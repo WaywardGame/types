@@ -12,6 +12,7 @@ import type { SfxType } from "audio/IAudio";
 import type { IEventEmitter } from "event/EventEmitter";
 import Entity from "game/entity/Entity";
 import type { IEntityConstructorOptions, IEntityEvents, IMoveToOptions } from "game/entity/IEntity";
+import { MoveFlag } from "game/entity/IEntity";
 import { DamageType, MoveType } from "game/entity/IEntity";
 import { MovingClientSide } from "game/entity/IHuman";
 import type { IMovementTime } from "game/IGame";
@@ -34,7 +35,7 @@ export interface IEntityMovableEvents extends IEntityEvents {
     /**
      * Called after moving.
      */
-    postMove(fromTile: Tile, toTile: Tile): void;
+    postMove(fromTile: Tile, toTile: Tile, flags: MoveFlag): void;
 }
 /**
  * Entity class that allows movement

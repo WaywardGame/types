@@ -18,5 +18,5 @@ export interface IBuildCanUse extends IActionUsable {
     tile: Tile;
     buildInfo: IItemBuild;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.Vector3, ActionArgument.Undefined]], import("../../Human").default<number>, void, IBuildCanUse, [import("../../../item/Item").default, (import("../../../../utilities/math/IVector").IVector3 | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.Tile, ActionArgument.Undefined]], import("../../Human").default<number>, void, IBuildCanUse, [import("../../../item/Item").default, (Tile | undefined)?]>;
 export default _default;

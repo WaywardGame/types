@@ -117,7 +117,8 @@ export declare enum TurnTypeFlag {
     /**
      * Indicates the turn is passing due to a movement
      */
-    Movement = 8
+    Movement = 8,
+    DontTickAnim = 16
 }
 export interface IAttackHand {
     mainHand: number;

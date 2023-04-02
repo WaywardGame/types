@@ -18,5 +18,6 @@ export default class SpriteBatch2 extends SpriteBatchBase {
     constructor(context: RendererContext, capacity: number, depthOffset: number, yOffset: number, enableAlphaMultiplcation: boolean, enforceBeginAndEnd: boolean);
     setup(): void;
     delete(): void;
+    bindBuffers(): void;
     render(x: number, y: number, tileScale: number, viewportWidth: number, viewportHeight: number): void;
 }

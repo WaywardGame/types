@@ -15,7 +15,7 @@ import InspectionsList from "ui/screen/screens/game/component/InspectionsList";
 export default class TileInspectionsList extends InspectionsList<TilePositionInspection> {
     private tile?;
     getTile(): Tile | undefined;
-    setTile(tile: Tile): this;
+    setTile(tile: Tile | undefined): this;
     isValid(): boolean;
     protected getInvalidTranslation(): UiTranslation;
     protected initializeInspections(): TilePositionInspection;

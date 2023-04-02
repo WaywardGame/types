@@ -39,6 +39,7 @@ export declare abstract class SpriteBatchBase implements ISpriteBatch {
     static initializePrograms(webGlContext: WebGlContext): Promise<void>;
     constructor(context: RendererContext, capacity: number, depthOffset: number, yOffset: number, enableAlphaMultiplcation: boolean, enforceBeginAndEnd: boolean);
     abstract setup(): void;
+    protected abstract bindBuffers(): void;
     abstract render(x: number, y: number, tileScale: number, viewportWidth: number, viewportHeight: number): void;
     delete(): void;
     begin(): void;

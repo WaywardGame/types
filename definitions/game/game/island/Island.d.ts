@@ -172,10 +172,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * @returns The default terrain type with a fallback to dirt (which shouldn't happen without mods or bugs).
      */
     getDefaultTerrainType(tile: Tile): TerrainType;
-    /**
-     * Ensures a point is valid and is not the edge of the map
-     */
-    ensureValidPoint<T extends IVector2>(point?: T): T | undefined;
     getDirectionFromMovement(x: number, y: number): Direction.East | Direction.North | Direction.West | Direction.South;
     getTileFromPoint(point: IVector3): Tile;
     getTile(x: number, y: number, z: number, disableLog?: boolean): Tile;

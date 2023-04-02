@@ -249,7 +249,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     unequip(item: Item, internal?: boolean, skipMessage?: boolean, skipRevertItem?: boolean): void;
     private updateOffHandState;
     unequipAll(): void;
-    canJump(): boolean;
+    getJumpTile(): Tile | undefined;
     hasDelay(): boolean;
     addDelay(delay: number, replace?: boolean, addStaminaDelay?: boolean): void;
     /**

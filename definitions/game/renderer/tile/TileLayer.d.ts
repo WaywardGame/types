@@ -32,6 +32,10 @@ export default class TileLayer {
     static initializePrograms(webGlContext: WebGlContext): Promise<void>;
     private readonly texTileSprites;
     private readonly inverseTileSpriteTextureSize;
+    /**
+     * Allow overriding the tile layer ticks, used for animation frames
+     */
+    ticks?: number;
     readonly renderLayerFlag: RenderLayerFlag;
     private readonly tileShaderProgram;
     private readonly singleTileData;

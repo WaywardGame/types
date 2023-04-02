@@ -276,9 +276,20 @@ export interface IMoveToOptions {
     movementDelay?: Delay | number;
     animation?: MoveAnimation;
     onMoveCompletedParticles?: IRGB;
+    /**
+     * What caused the move?
+     */
+    flags?: MoveFlag;
 }
 export declare enum MoveAnimation {
     Normal = 0,
     Jump = 1
+}
+export declare enum MoveFlag {
+    None = 0,
+    /**
+     * Skips damage due to movement
+     */
+    SkipEncumberedChecks = 1
 }
 export {};

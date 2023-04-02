@@ -54,7 +54,8 @@ export declare enum SortType {
     DiscoveredTime = 9,
     Worth = 10,
     BestForCrafting = 11,
-    Magical = 12
+    Magical = 12,
+    CraftableOnly = 13
 }
 export interface IContainerSortInfo {
     sortType: SortType;
