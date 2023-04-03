@@ -14,7 +14,7 @@ import type Translation from "language/Translation";
 import { RandomInstance } from "utilities/random/IRandom";
 import type { Random } from "utilities/random/Random";
 import { RandomReference } from "utilities/random/RandomReference";
-export declare abstract class GameplayModifierInstance<ID extends number, INSTANCE_ARGS extends any[] = []> {
+export declare abstract class GameplayModifierInstance<ID extends number, INSTANCE_ARGS extends any[] = [], DATA = any> {
     readonly id: ID;
     readonly random: Random;
     protected readonly args: INSTANCE_ARGS;
@@ -26,6 +26,9 @@ export declare abstract class GameplayModifierInstance<ID extends number, INSTAN
     getTitle(): import("../../../language/impl/TranslationImpl").default;
     protected abstract getDefaultTitle(): Translation;
     setTitle(initializer: (defaultTitle: Translation) => Translation): this;
+    getData(): DATA | undefined;
+    setData(data?: DATA): this;
+    clearData(): this;
 }
 export type GetModifierInstance<MODIFIER extends GameplayModifier<number, GameplayModifierInstance<number, any[]>, any[]>> = MODIFIER extends GameplayModifier<number, infer INSTANCE, any[]> ? INSTANCE : never;
 export type GetModifierId<MODIFIER extends GameplayModifier<number, GameplayModifierInstance<number, any[]>, any[]>> = MODIFIER extends GameplayModifier<infer ID, any, any[]> ? ID : never;

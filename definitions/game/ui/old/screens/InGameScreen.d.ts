@@ -86,6 +86,9 @@ export default class InGameScreen extends BaseScreen {
     private craftingDialogDirty;
     private dismantleDialogDirty;
     private invalidatingTargets;
+    private updateCraftsDiscovery;
+    private updateCraftsSort;
+    private updateCraftsDirection;
     constructor();
     selector(): string;
     bindElements(): void;

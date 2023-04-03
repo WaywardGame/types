@@ -11,7 +11,9 @@
 import type { BiomeType } from "game/biome/IBiome";
 import type Doodad from "game/doodad/Doodad";
 import type Creature from "game/entity/creature/Creature";
+import type { CreatureType, IDamageOutcome, IDamageOutcomeInput } from "game/entity/creature/ICreature";
 import type Human from "game/entity/Human";
+import type { Defense } from "game/entity/IEntity";
 import type NPC from "game/entity/npc/NPC";
 import type { IIslandTemplate, TickFlag, TileUpdateType } from "game/IGame";
 import type { MultiplayerLoadingDescription } from "game/meta/Loading";
@@ -87,6 +89,8 @@ export interface IIslandEvents {
      * @param doodad Doodad that caused the change
      */
     portsChanged(doodad: Doodad): any;
+    getDefense(defense: Defense | undefined, target: Human | Creature | CreatureType): Defense | undefined;
+    calculateAttackOutcome(damageOutcome: IDamageOutcome, input: IDamageOutcomeInput, attackValue: number, defenseValue: number): IDamageOutcome | undefined;
 }
 export interface ILegacySeeds {
     type: SeedType.Legacy;

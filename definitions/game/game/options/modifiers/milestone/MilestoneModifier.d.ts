@@ -27,7 +27,7 @@ export declare enum MilestoneModifierGroup {
     Merchants = 10
 }
 export declare const milestoneGroupIcons: Record<MilestoneModifierGroup, string>;
-export declare class MilestoneModifierInstance extends GameplayModifierInstance<Milestone, [Human?]> {
+export declare class MilestoneModifierInstance<DATA = any> extends GameplayModifierInstance<Milestone, [Human?], DATA> {
     protected get player(): Human<number> | undefined;
     isEnabledForPlayer(entity: Entity): boolean;
     protected getDefaultTitle(): import("../../../../language/impl/TranslationImpl").default;
@@ -45,6 +45,6 @@ export default abstract class MilestoneModifier extends GameplayModifier<Milesto
     constructor(id?: Milestone);
     instantiate(id: Milestone, human?: Human): MilestoneModifierInstance | undefined;
     abstract getOptions(): IGameOptionsPartial;
-    initialize(instance: MilestoneModifierInstance): MilestoneModifierInstance;
+    initialize(instance: MilestoneModifierInstance): MilestoneModifierInstance<any>;
     abstract getGroup(): MilestoneModifierGroup;
 }

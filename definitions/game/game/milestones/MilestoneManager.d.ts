@@ -9,6 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import type { CreatureType } from "game/entity/creature/ICreature";
+import type { DamageType } from "game/entity/IEntity";
 import type { Game } from "game/Game";
 import { Milestone, MilestoneVisibility } from "game/milestones/IMilestone";
 type IMilestoneUpdate = [Milestone, (number | string)?];
@@ -48,6 +50,8 @@ export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents
     isUnlockableInMode(milestone: Milestone, mode?: import("../options/IGameOptions").GameMode): boolean;
     reset(): void;
     getDiscovered(milestone: Milestone): (string | number)[] | undefined;
+    getDiscoveredResistsAndVulns(): Map<CreatureType, Set<DamageType>>;
+    getDiscoveredResistsAndVulns(creatureType: CreatureType): Set<DamageType>;
     getVisibility(milestone: Milestone): MilestoneVisibility;
     isDiscovered(milestone: Milestone, data: number | string): boolean;
     private updateMilestone;

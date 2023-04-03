@@ -55,6 +55,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     private difficultyOptions;
     customMilestoneModifiersAllowed: boolean;
     difficulty: GameMode;
+    gameplayModifierData: Record<number, any>;
     replay: ReplayManager | undefined;
     saveVersion: string;
     shouldUpdateTablesAndWeight: boolean;

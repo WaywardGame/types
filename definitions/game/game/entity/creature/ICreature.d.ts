@@ -330,6 +330,7 @@ export interface IDamageOutcome {
     resistTypes: DamageType[];
     vulnerable: number;
     vulnerableTypes: DamageType[];
+    immunities: DamageType[];
     noDamage: boolean;
     regenerate: number[];
     soundEffect?: SfxType;

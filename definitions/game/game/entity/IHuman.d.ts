@@ -11,10 +11,10 @@
 import type { Events } from "event/EventEmitter";
 import type Doodad from "game/doodad/Doodad";
 import type { ActionType } from "game/entity/action/IAction";
-import type { IDamageInfo } from "game/entity/creature/ICreature";
+import type { CreatureType, IDamageInfo } from "game/entity/creature/ICreature";
 import type EntityWithStats from "game/entity/EntityWithStats";
 import type Human from "game/entity/Human";
-import type { AttackType } from "game/entity/IEntity";
+import type { AttackType, DamageType } from "game/entity/IEntity";
 import type { IMovementIntent, WeightStatus } from "game/entity/player/IPlayer";
 import type { ISkillEvents } from "game/entity/skill/SkillManager";
 import type { IHasImagePath, Quality } from "game/IObject";
@@ -255,6 +255,9 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      * @param tile Tile the human is now on
      */
     setPosition(tile: Tile): void;
+    discoverVulnOrResist(creatureType: CreatureType, damageType: DamageType): any;
+    hasDiscoveredVulnOrResist(creatureType: CreatureType, damageType: DamageType, defaultState: boolean): boolean | undefined;
+    getDiscoveredVulnsAndResists(): Map<CreatureType, Set<DamageType>>;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;

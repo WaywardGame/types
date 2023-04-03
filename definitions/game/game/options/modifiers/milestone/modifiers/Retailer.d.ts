@@ -12,14 +12,12 @@ import type Player from "game/entity/player/Player";
 import type { Milestone } from "game/milestones/IMilestone";
 import type { IGameOptionsPartial } from "game/options/IGameOptions";
 import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "game/options/modifiers/milestone/MilestoneModifier";
-import type { Random } from "utilities/random/Random";
 export default class Retailer extends MilestoneModifier {
     getOptions(): IGameOptionsPartial;
     instantiate(id: Milestone, player?: Player): RetailerMilestoneModifierInstance | undefined;
     getGroup(): MilestoneModifierGroup;
 }
 declare class RetailerMilestoneModifierInstance extends MilestoneModifierInstance {
-    constructor(id: Milestone, random: Random, player?: Player);
     onSpawnPlayer(player: Player): void;
 }
 export {};

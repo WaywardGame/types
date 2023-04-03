@@ -12,9 +12,10 @@ import type { IEventEmitter } from "event/EventEmitter";
 import Doodad from "game/doodad/Doodad";
 import type Creature from "game/entity/creature/Creature";
 import type { IDamageInfo } from "game/entity/creature/ICreature";
+import { CreatureType } from "game/entity/creature/ICreature";
 import EntityWithStats from "game/entity/EntityWithStats";
 import type { IAttack, ICausesDamage, IEntityConstructorOptions } from "game/entity/IEntity";
-import { AttackType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "game/entity/IEntity";
+import { AttackType, DamageType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "game/entity/IEntity";
 import type { ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo } from "game/entity/IHuman";
 import { EquipType, RestCancelReason, SkillType } from "game/entity/IHuman";
 import type { IStat } from "game/entity/IStats";
@@ -115,7 +116,7 @@ export default abstract class Human<TypeType extends number = number> extends En
      * Flag that will prevent a humans vehicle from showing up until the movement finishews
      */
     isMovingSuppressVehicleClientside: boolean;
-    protected readonly milestonesCollection: import("../options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("../options/modifiers/milestone/MilestoneModifier").default, Milestone, import("../options/modifiers/milestone/MilestoneModifier").MilestoneModifierInstance, [(Human<number> | undefined)?]>;
+    protected readonly milestonesCollection: import("../options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("../options/modifiers/milestone/MilestoneModifier").default, Milestone, import("../options/modifiers/milestone/MilestoneModifier").MilestoneModifierInstance<any>, [(Human<number> | undefined)?]>;
     protected gameOptionsCached?: IGameOptionsPlayer;
     protected cachedMovementPenalty?: number;
     constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
@@ -123,7 +124,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     abstract createNoteManager(): INoteManager;
     abstract createMessageManager(): IMessageManager;
     abstract createQuestManager(): IQuestManager;
-    abstract addMilestone(milestone: Milestone, data?: number, update?: boolean): void;
+    abstract addMilestone(milestone: Milestone, data?: number | string, update?: boolean): void;
     createSkillManager(): SkillManager;
     isLocalPlayer(): boolean;
     getGameOptionsBeforeModifiers(): IGameOptionsPlayer;
@@ -384,6 +385,10 @@ export default abstract class Human<TypeType extends number = number> extends En
      * Gets this human's current carried weight, scaled down to what it would be without any weight bonuses applied
      */
     getScaledWeight(): number;
+    hasDiscoveredVulnOrResist(creatureType: CreatureType, damageType: DamageType): boolean;
+    discoverVulnOrResist(creatureType: CreatureType, damageType: DamageType): void;
+    getDiscoveredVulnsAndResists(): Map<CreatureType, Set<DamageType>>;
+    getDiscoveredVulnsAndResists(creatureType: CreatureType): Set<DamageType>;
     get asCorpse(): undefined;
     get asCreature(): undefined;
     get asDoodad(): undefined;

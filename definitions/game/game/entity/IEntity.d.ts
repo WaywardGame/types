@@ -220,12 +220,16 @@ export declare enum DamageType {
 export declare module DamageType {
     function getAll(...damageTypes: DamageType[]): DamageType[];
 }
+export declare const RESIST_IMMUNITY = 99;
+export declare const RESIST_REGEN = 100;
 export declare class Defense {
     base: number;
     resist: Attributes;
     vulnerable: Attributes;
     constructor(base: number);
     setResistance(damageTypes: DamageType, amount: number): this;
+    setImmunity(damageTypes: DamageType): this;
+    setRegen(damageTypes: DamageType): this;
     setVulnerability(damageTypes: DamageType, amount: number): this;
     copy(): Defense;
     equals(defense: Defense): boolean;
@@ -239,7 +243,7 @@ declare class AttributesImpl {
     reset(amount?: number): void;
     all(): [DamageType, number][];
     types(): DamageType[];
-    has(): boolean;
+    has(type?: DamageType): boolean;
     copy(): Attributes;
     equals(attrs: Attributes): boolean;
 }
