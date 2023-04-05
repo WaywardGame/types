@@ -235,6 +235,20 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Decrease the depth of a water tile if under 6 connected tiles
      */
     consumeWaterTile(): void;
+    /**
+     * Used to check if lava exists below, then create a passage above
+     * @returns True if it created a lava passage
+     */
+    makeLavaPassage(source: Human | undefined): boolean;
+    /**
+     * Used to genererate and find appropriate cave entrances
+     * @returns True if it created cave entrances
+     */
+    makeCaveEntrance(source: Human | undefined, chance?: number): boolean;
+    /**
+     * Create puddles around a point and limit them (so they can't expand infinitely)
+     */
+    createPuddles(): void;
     addOrUpdateOverlay(overlay: IOverlayInfo): void;
     removeOverlay(overlay: IOverlayInfo): void;
     canSeeObject(type: CanASeeBType, object: IVector4 & {

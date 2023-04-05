@@ -14,7 +14,6 @@ import { AiType } from "game/entity/IEntity";
 import { EquipType } from "game/entity/IHuman";
 import type { INPCConstructorOptions } from "game/entity/npc/INPC";
 import NPC from "game/entity/npc/NPC";
-import type Player from "game/entity/player/Player";
 import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
@@ -30,8 +29,8 @@ export default class MerchantNPC extends NPC {
     modifyCustomerCredit(customer: Human, creditChange: number): number;
     getActions(): ActionType[] | undefined;
     getPublicContainer(): IContainer | undefined;
-    getSellPrice(player: Player, item: Item): number | undefined;
-    getBuyPrice(player: Player, item: Item): IMerchantBuyPrice | undefined;
+    getSellPrice(human: Human, item: Item): number | undefined;
+    getBuyPrice(human: Human, item: Item): IMerchantBuyPrice | undefined;
     /**
      * Closes container dialogs
      */

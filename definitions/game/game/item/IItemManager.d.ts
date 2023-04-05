@@ -15,9 +15,9 @@ import type Creature from "game/entity/creature/Creature";
 import type { Quality } from "game/IObject";
 import type { IMoveToTileOptions, ItemType, ItemTypeGroup } from "game/item/IItem";
 import type Item from "game/item/Item";
+import type Tile from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 import type { Direction } from "utilities/math/Direction";
-import type { IVector3 } from "utilities/math/IVector";
 /**
  * Includes all protected items by default
  */
@@ -81,7 +81,7 @@ export interface IRequirementInfo {
     missingDoodads?: Set<DoodadType | DoodadTypeGroup>;
     fireSourceDoodad?: Doodad;
     fireSourceTileEvent?: TileEvent;
-    fireSourceLavaPosition?: IVector3;
+    fireSourceLavaTile?: Tile;
     faceDirection?: Direction.Cardinal;
     actionNotUsable?: IActionNotUsable;
 }

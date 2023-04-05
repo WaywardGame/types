@@ -34,7 +34,8 @@ import type EntityWithStats from "game/entity/EntityWithStats";
 import type Tile from "game/tile/Tile";
 import type EntityMovable from "game/entity/EntityMovable";
 import type { RenderSource, UpdateRenderFlag } from "renderer/IRenderer";
-export default abstract class Entity<DescriptionType = unknown, TypeType extends number = number, TagType = unknown, CounterType = unknown> extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, ITemperatureSource, INotificationLocation, IVector3 {
+import type { IVector4 } from "utilities/math/Vector4";
+export default abstract class Entity<DescriptionType = unknown, TypeType extends number = number, TagType = unknown, CounterType = unknown> extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, ITemperatureSource, INotificationLocation, IVector4 {
     abstract readonly entityType: EntityType;
     abstract readonly tileUpdateType: TileUpdateType;
     id: number;

@@ -192,6 +192,11 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      */
     damage(damageInfo: IDamageInfo): number | void;
     /**
+     * Called when an doodad is picked up
+     * @param doodad The doodad object
+     */
+    pickUpDoodad?(doodad: Doodad): any;
+    /**
      * Called when the player tick starts
      */
     tickStart(): any;

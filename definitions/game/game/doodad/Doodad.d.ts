@@ -189,6 +189,10 @@ export default class Doodad extends Entity<IDoodadDescription, DoodadType, Dooda
     unhitch(): void;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(random?: import("../../utilities/random/Random").Random<import("../../utilities/random/generators/LegacySeededGenerator").LegacySeededGenerator | import("../../utilities/random/generators/PCGSeededGenerator").PCGSeededGenerator>): number;
+    /**
+     * Gets the container to use for doodad executed actions
+     */
+    getTargetContainer(): IContainer | undefined;
     addTreasureChestLoot(): void;
     attachStillContainer(item: Item): void;
     detachStillContainer(human: Human): Item | undefined;

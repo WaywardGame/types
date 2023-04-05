@@ -9,7 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Events } from "event/EventEmitter";
-import type Doodad from "game/doodad/Doodad";
 import type Human from "game/entity/Human";
 import type { HairColor, HairStyle, SkinColor } from "game/entity/IHuman";
 import type { IMessage } from "game/entity/player/IMessageManager";
@@ -86,11 +85,6 @@ export interface IPlayerEvents extends Events<Human> {
      * @param id The id of the note that was read.
      */
     readNote(id: number): any;
-    /**
-     * Called when an doodad is picked up
-     * @param doodad The doodad object
-     */
-    pickUpDoodad?(doodad: Doodad): any;
     /**
      * Called when a player sails to civilization.
      */

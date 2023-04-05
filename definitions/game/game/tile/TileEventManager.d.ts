@@ -47,7 +47,10 @@ export default class TileEventManager extends ObjectManager<TileEvent, ITileMana
     getPuddles(tile: Tile): TileEvent[] | undefined;
     canGather(tile: Tile): TileEvent | undefined;
     updateAll(): void;
-    fireOverflow(x: number, y: number, z: number): boolean;
+    /**
+     * Overflow fire around the tile
+     */
+    fireOverflow(tile: Tile): boolean;
     canPickUp(tile: Tile): TileEvent | undefined;
     blocksTile(tile: Tile): boolean;
     /**

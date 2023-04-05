@@ -205,6 +205,8 @@ export default class InGameScreen extends BaseScreen {
      */
     updateTablesDirty(which?: "crafting" | "dismantle"): void;
     createSortMenu(container: JQuery, messageType: Message, containerSortInfo?: IContainerSortInfo): SortRow<number>;
+    getContainerSortInfo(index: "inventory" | "crafting-tabs" | number): IContainerSortInfo;
+    getDefaultSortType(index: "inventory" | "crafting-tabs" | number): SortType;
     sortItems(containerElement: JQuery, sortType: SortType, direction: SortDirection, messageType?: Message, activeSort?: boolean): void;
     onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;
     updateSort(containerElement: JQuery, activeSort: boolean): void;

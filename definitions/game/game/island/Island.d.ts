@@ -179,8 +179,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     createTile(x: number, y: number, z: number, index: number): Tile;
     setTile(x: number, y: number, z: number, tile: Tile): Tile;
     getOrCreateTile(index: number, x: number, y: number, z: number): Tile;
-    makeLavaPassage(human: Human): TerrainType | undefined;
-    makeCaveEntrance(human: Human, chance?: number): TerrainType | undefined;
     updateFlowFieldTile(tile: Tile, tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
     /**
      * Checks if island.tileData is synced with Tile.data
@@ -215,11 +213,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     checkForTargetInRange(tile: Tile, direction: Direction.Cardinal, range: number, includePlayers?: boolean): IMobCheck;
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
     coolFires(requirements: IRequirementInfo, human: Human): void;
-    /**
-     * Create puddles around a point and limit them (so they can't expand infinitely).
-     * @param point x/y/z of the splash/puddle source.
-     */
-    createPuddles(point: IVector3): void;
     /**
      * Resets & recalculates the civilization score
      */

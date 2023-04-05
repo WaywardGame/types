@@ -17,6 +17,7 @@ import { TerrainType } from "game/tile/ITerrain";
 import type Tile from "game/tile/Tile";
 export interface IDigGenericCanUse extends IActionUsable {
     type: "PickUpExcrement" | "PickUp" | "Gather";
+    tile: Tile;
 }
 export interface IDigTileCanUse extends IActionUsable {
     type: "Tile";

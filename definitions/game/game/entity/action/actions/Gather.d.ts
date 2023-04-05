@@ -54,7 +54,7 @@ export interface IGatherDoodadCanUse extends IGatherBaseCanUse {
     doodadDescription: IDoodadDescription;
     growingStage?: GrowingStage;
 }
-export interface IGatherDoodadHarvestCanUse extends IActionUsable {
+export interface IGatherDoodadHarvestCanUse extends IGatherBaseCanUse {
     gatherType: GatherType.DoodadHarvest;
     tool?: Item;
 }
@@ -63,5 +63,5 @@ export interface IGatherTerrainCanUse extends IGatherBaseCanUse {
     terrainDescription: ITerrainDescription;
 }
 export type IGatherCanUse = IGatherTileEventCanUse | IGatherDoodadCanUse | IGatherDoodadHarvestCanUse | IGatherTerrainCanUse;
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number>, void, IGatherCanUse, [(Item | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Tile, ActionArgument.Undefined]], Doodad | import("../../Human").default<number>, void, IGatherCanUse, [(Item | undefined)?, (Tile | undefined)?]>;
 export default _default;

@@ -20,5 +20,5 @@ export interface IHarvestCanUse extends IActionUsable {
     doodad: Doodad;
     resources: ILootItem[];
 }
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number>, void, IHarvestCanUse, [(Item | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Tile, ActionArgument.Undefined]], Doodad | import("../../Human").default<number>, void, IHarvestCanUse, [(Item | undefined)?, (import("../../../tile/Tile").default | undefined)?]>;
 export default _default;

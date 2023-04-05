@@ -23,10 +23,11 @@ export default class Multidisciplined extends MilestoneModifier {
     instantiate(id: Milestone, player?: Player): MultidisciplinedMilestoneModifierInstance | undefined;
 }
 declare class MultidisciplinedMilestoneModifierInstance extends MilestoneModifierInstance<Record<string, Map<CreatureType, Set<DamageType>>>> {
-    protected getDefense(island: Island, defense: Defense | undefined, target: Human | Creature | CreatureType): Defense | undefined;
+    protected getDefense(island: Island, defense: Defense | undefined, target: Human | Creature | CreatureType, damageType?: DamageType): Defense | undefined;
     protected calculateAttackOutcome(island: Island, outcome: IDamageOutcome, input: IDamageOutcomeInput, attackValue: number, defenseValue: number): IDamageOutcome | undefined;
     protected hasDiscoveredVulnOrResist(player: Player, creature: CreatureType, damageType: DamageType): boolean | undefined;
     protected discoverVulnOrResist(player: Player, creature: CreatureType, damageType: DamageType): void;
     protected getDiscoveredVulnsAndResists(player: Player): Map<CreatureType, Set<DamageType>>;
+    protected shouldDisplayUndiscoveredResistsAndVulns(host: any, skill: number, human: Human): boolean | undefined;
 }
 export {};
