@@ -19,6 +19,7 @@ import { AiType } from "game/entity/IEntity";
 import type { IStat } from "game/entity/IStats";
 import type { IPackedMessage } from "game/entity/player/IMessageManager";
 import type { ItemType, ItemTypeGroup } from "game/item/IItem";
+import type Item from "game/item/Item";
 import type { LootGroupType } from "game/item/LootGroups";
 import type { ITemperatureDescription } from "game/temperature/ITemperature";
 import type { TileEventType } from "game/tile/ITileEvent";
@@ -30,6 +31,7 @@ import type Translation from "language/Translation";
 import type { IModdable } from "mod/ModRegistry";
 import type { StatNotificationType } from "renderer/notifier/INotifier";
 import type { IRGB } from "utilities/Color";
+import type { IRange } from "utilities/math/Range";
 export declare enum CreatureType {
     Slime = 0,
     JellyCube = 1,
@@ -388,3 +390,34 @@ export declare const CREATURE_FLEE_DISTANCE_SQ: number;
 export declare const TAMED_CREATURE_FOLLOW_CLOSE_DISTANCE = 1;
 export declare const TAMED_CREATURE_FOLLOW_FAR_DISTANCE = 6;
 export declare const settableAiTypes: Set<AiType>;
+export interface ICreatureAttackOutcomeBase {
+    enemy?: Human | Creature;
+    willAttack: boolean;
+    breakAway: boolean;
+    hidden: boolean;
+    ai: AiType;
+}
+export interface ICreatureAttackOutcomeNoAttack extends ICreatureAttackOutcomeBase {
+    willAttack: false;
+    hidden: false;
+}
+export interface ICreatureAttackOutcomeHidden extends ICreatureAttackOutcomeBase {
+    willAttack: true;
+    hidden: true;
+}
+export interface ICreatureAttackOutcomeAttack extends ICreatureAttackOutcomeBase {
+    enemy: Human | Creature;
+    willAttack: true;
+    hidden: false;
+    ai: AiType;
+    maxParryingMultiplier: number;
+    damagedVehicle?: Item;
+    combatNote?: any[];
+    damageEquipment: boolean;
+    creatureHitRange: IRange;
+    enemyDefense: number;
+    pityPointOfDamageChance: number;
+    effectiveness: number;
+    damageScale: number;
+}
+export type CreatureAttackOutcome = ICreatureAttackOutcomeNoAttack | ICreatureAttackOutcomeHidden | ICreatureAttackOutcomeAttack;

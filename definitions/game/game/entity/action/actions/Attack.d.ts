@@ -37,7 +37,6 @@ export interface IAttackThrowItemCanUse extends IBaseCanUse {
 export interface IAttackRangedWeaponCanUse extends IBaseCanUse {
     attackType: AttackType.RangedWeapon;
     weapon: Item;
-    weaponDescription: IItemDescription;
     ranged: IRanged;
     rangedRequiredWeapon?: Item;
     ammoItem: Item;

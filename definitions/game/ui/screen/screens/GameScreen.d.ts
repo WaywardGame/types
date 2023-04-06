@@ -96,8 +96,6 @@ export default class GameScreen extends Screen {
     protected onZoom(api: IBindHandlerApi): boolean;
     protected onInspect(api: IBindHandlerApi): boolean;
     protected onScreenshotMode(): boolean;
-    protected onShowMoreInfo(): void;
-    protected onUnshowMoreInfo(): void;
     protected onDisableHealthVignette(): void;
     protected onEquipItem(): void;
     protected onCancel(): boolean;

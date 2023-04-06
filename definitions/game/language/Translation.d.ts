@@ -113,6 +113,7 @@ declare module Translation {
     function colorizeImportance(importance: "primary" | "secondary"): Translation;
     function colorizeImportance(importance: "primary" | "secondary", text: string | IStringSection): IStringSection;
     function colorizeImportance(importance: "primary" | "secondary", text: IStringSection[]): IStringSection[];
+    function classes(...classes: string[]): TranslationImpl;
     const formatList: typeof formatListTranslation;
     const sorter: typeof ITranslationSorter.create;
     function nameOf(type: Dictionary, thing: number | {

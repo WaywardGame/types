@@ -26,7 +26,7 @@ import type { IObject, IObjectOptions } from "game/IObject";
 import { Quality } from "game/IObject";
 import type { IslandId } from "game/island/IIsland";
 import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemDisassembleResult, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemCounter, ItemTag, ItemTypeExtra } from "game/item/IItem";
-import { BookType, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE, ItemDamageResult } from "game/item/IItem";
+import { BookType, ItemDamageResult, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "game/item/IItem";
 import type { IPlaceOnTileOptions } from "game/item/IItemManager";
 import ItemMapManager from "game/item/ItemMapManager";
 import type { IHasMagic, MagicalSubPropertySubTypes } from "game/magic/MagicalPropertyManager";
@@ -294,6 +294,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
      * Gets the inherit item type.
      */
     getInheritItemRecipeSkill(): SkillType;
+    getDamageType(): DamageType;
     /**
      * Returns the damage types associated with a skill with a fallback for whatever damage types the item normally provides
      * @param skillType The skill to get default damage types from

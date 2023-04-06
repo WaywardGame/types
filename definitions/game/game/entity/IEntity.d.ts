@@ -244,6 +244,10 @@ declare class AttributesImpl {
     all(): [DamageType, number][];
     types(): DamageType[];
     has(type?: DamageType): boolean;
+    /**
+     * Returns true if any of the given damage types are exactly the given value.
+     */
+    hasTypeAtValue(damage: DamageType, exactly: number): boolean;
     copy(): Attributes;
     equals(attrs: Attributes): boolean;
 }

@@ -30,6 +30,7 @@ import type Item from "game/item/Item";
 import type ItemManager from "game/item/ItemManager";
 import type Loading from "game/meta/Loading";
 import type Prompts from "game/meta/prompt/Prompts";
+import type { MilestoneManager } from "game/milestones/MilestoneManager";
 import type TileEvent from "game/tile/TileEvent";
 import type TileEventManager from "game/tile/TileEventManager";
 import type LanguageManager from "language/LanguageManager";
@@ -77,7 +78,8 @@ export declare enum EventBus {
     Ui = 32,
     UiActionBar = 33,
     UiMovementHandler = 34,
-    WorldRenderer = 35
+    WorldRenderer = 35,
+    Milestones = 36
 }
 declare const eventBuses: {
     [EventBus.Actions](): ActionExecutor<any, any, any, any, any>;
@@ -116,6 +118,7 @@ declare const eventBuses: {
     [EventBus.UiActionBar](): ActionBar;
     [EventBus.UiMovementHandler](): MovementHandler;
     [EventBus.WorldRenderer](): WorldRenderer;
+    [EventBus.Milestones](): MilestoneManager;
 };
 export interface IEventBusRegistration {
     subscribe: NullaryFunction;

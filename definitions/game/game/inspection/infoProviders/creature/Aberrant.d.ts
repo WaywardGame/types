@@ -10,12 +10,14 @@
  */
 import type Creature from "game/entity/creature/Creature";
 import { InfoProvider } from "game/inspection/InfoProvider";
+import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 export default class AberrantInfoProvider extends InfoProvider {
     private readonly creature;
     private aberrant;
+    private tamed;
     constructor(creature: Creature);
     getClass(): string[];
     hasContent(): boolean;
-    get(): import("../../../../language/impl/TranslationImpl").default;
+    get(): LabelledValue;
     onTickEnd(): void;
 }

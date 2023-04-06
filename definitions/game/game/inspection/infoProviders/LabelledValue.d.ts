@@ -19,7 +19,8 @@ export declare enum LabelledValueDisplayMode {
     "label (value)" = 1,
     "value label" = 2,
     "value (label)" = 3,
-    "label value" = 4
+    "label value" = 4,
+    "label - value" = 5
 }
 export default class LabelledValue extends InfoProvider {
     private readonly label;

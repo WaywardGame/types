@@ -10,11 +10,11 @@
  */
 import { SfxType } from "audio/IAudio";
 import type { IEventEmitter } from "event/EventEmitter";
-import type { CreatureType, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "game/entity/creature/ICreature";
+import type { CreatureAttackOutcome, CreatureType, ICreatureAttackOutcomeAttack, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "game/entity/creature/ICreature";
 import EntityWithStats from "game/entity/EntityWithStats";
 import type Human from "game/entity/Human";
 import type { IEntityConstructorOptions, IStatChangeInfo } from "game/entity/IEntity";
-import { AiType, EntityType, MoveType } from "game/entity/IEntity";
+import { AiType, Defense, EntityType, MoveType } from "game/entity/IEntity";
 import type { IStat } from "game/entity/IStats";
 import type { IMovementTime } from "game/IGame";
 import { TileUpdateType } from "game/IGame";
@@ -80,6 +80,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     isTamed(): boolean;
     isValid(): boolean;
     getCommandedAiType(): AiType | undefined;
+    getDefense(human?: Human): Defense;
     /**
      * Check is a creature is allowed to attack the target (rules of engagement)
      * @param target Target thing to attack
@@ -131,7 +132,9 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      * Large creatures should render over the doodad over layer, which means we should hide the doodad over layer for doodads on the creatures tile.
      */
     updateDoodadOverHiddenState(tile: Tile, shouldBeHidden: boolean): void;
-    processAttack(description: ICreatureDescription, humans: Human[], moveType: MoveType, enemy: Human | Creature | undefined): boolean;
+    getAttackOutcome(enemy: Human | Creature | undefined, force: true, humans?: Human[], description?: ICreatureDescription, moveType?: MoveType): ICreatureAttackOutcomeAttack;
+    getAttackOutcome(enemy: Human | Creature | undefined, force?: boolean, humans?: Human[], description?: ICreatureDescription, moveType?: MoveType): CreatureAttackOutcome;
+    processAttack(description: ICreatureDescription, humans: Human[], moveType: MoveType | undefined, enemyIn: Human | Creature | undefined): boolean;
     getProducedTemperature(): number | undefined;
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
     protected updateTile(fromTile: Tile, toTile: Tile): boolean;

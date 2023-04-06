@@ -16,8 +16,10 @@ export default class DifficultyInfoProvider extends InfoProvider {
     private health;
     private ai;
     private aberrant;
+    private tamed;
     constructor(creature: Creature);
     getClass(): string[];
+    hasContent(): boolean;
     get(): LabelledValue;
     onTickEnd(): void;
 }

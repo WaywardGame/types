@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { DamageType } from "game/entity/IEntity";
 import { SkillType } from "game/entity/IHuman";
 import { Stat } from "game/entity/IStats";
 import type { IItemDescription, IMagicalPropertyInfo } from "game/item/IItem";
@@ -64,7 +65,8 @@ export declare enum MagicalPropertyType {
     /**
      * Adds a property that emits skill bonus to anybody within range (3x3 square) of the doodad.
      */
-    DoodadSkill = 27
+    DoodadSkill = 27,
+    ElementalDamage = 28
 }
 export interface IMagicalPropertyDescription {
     /**
@@ -86,5 +88,6 @@ export interface MagicalPropertyTypeSubTypeMap {
     [MagicalPropertyType.Skill]: SkillType;
     [MagicalPropertyType.Reputation]: Stat;
     [MagicalPropertyType.DoodadSkill]: SkillType;
+    [MagicalPropertyType.ElementalDamage]: DamageType;
 }
 export declare const magicalPropertyDescriptions: PartialRecord<MagicalPropertyType, IMagicalPropertyDescription>;
