@@ -8,33 +8,34 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Stream from "@wayward/goodstream";
 import { SfxType } from "audio/IAudio";
-import type Doodad from "game/doodad/Doodad";
-import type Corpse from "game/entity/creature/corpse/Corpse";
-import type Creature from "game/entity/creature/Creature";
-import type Human from "game/entity/Human";
-import type NPC from "game/entity/npc/NPC";
-import type { IMessageManager } from "game/entity/player/IMessageManager";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
+import { WorldZ } from "game/WorldZ";
+import type Doodad from "game/doodad/Doodad";
+import type Human from "game/entity/Human";
+import type Creature from "game/entity/creature/Creature";
+import type Corpse from "game/entity/creature/corpse/Corpse";
+import type NPC from "game/entity/npc/NPC";
+import type { IMessageManager } from "game/entity/player/IMessageManager";
 import type { IslandId } from "game/island/IIsland";
+import type Island from "game/island/Island";
 import type Item from "game/item/Item";
 import type { IMaybeTileContainer, IOverlayInfo, ITerrainDescription, ITileContainer, ITileData } from "game/tile/ITerrain";
 import { TerrainType } from "game/tile/ITerrain";
 import type TileEvent from "game/tile/TileEvent";
-import { WorldZ } from "game/WorldZ";
-import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
+import Message from "language/dictionary/Message";
 import FieldOfView from "renderer/fieldOfView/FieldOfView";
 import type { IFieldOfViewOrigin } from "renderer/fieldOfView/IFieldOfView";
 import { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
 import type { IRGB } from "utilities/Color";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 import type { IVector4 } from "utilities/math/Vector4";
-import type Stream from "@wayward/goodstream";
-import type Island from "game/island/Island";
 export interface ICanSailAwayResult {
     canSailAway: boolean;
+    message?: Message;
     distanceFromEdge?: number;
     blockedTilesChecked?: Set<Tile>;
     path?: IVector2[];

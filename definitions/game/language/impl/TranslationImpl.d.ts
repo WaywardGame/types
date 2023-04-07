@@ -101,7 +101,8 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     toString(): string;
     private getCustomInterpolatorSegments;
     serializeObject(): ISerializedTranslation;
-    serialize(): ISerializedTranslation;
+    private static serializeCount;
+    serialize(resetCount?: boolean): ISerializedTranslation;
     private canCache;
     private getCachedTranslation;
     /**

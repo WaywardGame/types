@@ -24,6 +24,7 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     private readonly mods;
     private readonly onModInitializedCallbacks;
     private loadedMods;
+    private _canUnlockMilestones?;
     constructor(game: Game);
     get areModsLoaded(): boolean;
     waitForSetup(showLoad: boolean): Promise<void>;

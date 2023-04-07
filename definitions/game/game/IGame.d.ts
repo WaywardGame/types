@@ -284,6 +284,7 @@ export declare const LINE_OF_SIGHT_RADIUS = 15;
 export declare const LINE_OF_SIGHT_RADIUS_MAX = 20;
 export declare const LINE_OF_SIGHT_DETAIL = 4;
 export declare const INTERVAL = 16.6666;
+export declare const REAL_TIME_MIN_START_DELAY = 1000;
 export declare const TURN_DELAY_MAX: number;
 export declare const TURN_DELAY_DEFAULT: number;
 export declare const LIGHT_COLOR_DEFAULT: import("utilities/Color").IRGB;

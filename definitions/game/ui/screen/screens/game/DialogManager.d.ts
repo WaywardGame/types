@@ -20,6 +20,7 @@ export default class DialogManager {
     constructor(screen: Screen);
     get<ID extends DialogId>(id: ID, subId?: string): DialogById[ID] | undefined;
     get<DIALOG extends Dialog>(id: DialogId, subId?: string): DIALOG | undefined;
+    getAll(): Array<[DialogId, string]>;
     getAll<ID extends DialogId>(id: ID): Array<[DialogId, string]>;
     getAll<DIALOG extends Dialog>(id: DialogId): Array<[DialogId, string]>;
     open<ID extends DialogId>(id: ID, subId?: string, highlightIfAlreadyOpen?: boolean): DialogById[ID];

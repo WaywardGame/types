@@ -15,7 +15,6 @@ import type Island from "game/island/Island";
 import type { IOverlayInfo } from "game/tile/ITerrain";
 import { TerrainType } from "game/tile/ITerrain";
 import type Tile from "game/tile/Tile";
-import { WorldZ } from "game/WorldZ";
 import type RendererContext from "renderer/context/RendererContext";
 import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 import FieldOfView from "renderer/fieldOfView/FieldOfView";
@@ -28,6 +27,7 @@ import type TileAtlas from "renderer/tile/atlas/TileAtlas";
 import type { TerrainTileInfo } from "renderer/tile/TerrainTileInfo";
 import type { ITileAdaptor } from "renderer/tile/TileAdaptors";
 import type WebGlContext from "renderer/WebGlContext";
+import type { IBounds } from "renderer/world/IWorldRenderer";
 import { RenderFlag, SpriteBatchLayer } from "renderer/world/IWorldRenderer";
 import WorldLayerRenderer from "renderer/world/WorldLayerRenderer";
 import type { IVector2 } from "utilities/math/IVector";
@@ -159,6 +159,8 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private vehicleBatch;
     private readonly entitiesInViewport;
     private viewportSpritesDirty;
+    private cachedBounds;
+    private cachedBoundsTimestamp;
     static initializePrograms(webGlContext: WebGlContext): Promise<void>;
     constructor(context: RendererContext);
     get island(): Island;
@@ -187,7 +189,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     getAmbientColorNight(): [number, number, number];
     getAmbientColorDawn(): [number, number, number];
     getAmbientIntensity(): number;
-    getFogColor(): [x: number, y: number, z: number];
+    getFogColor(): [number, number, number];
     addOrUpdateOverlay(tile: Tile, overlay: IOverlayInfo): void;
     removeOverlay(tile: Tile, overlay: IOverlayInfo): void;
     shouldRender(): RenderFlag;
@@ -196,22 +198,8 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     render(): void;
     screenToVector(screenX: number, screenY: number, timeStamp?: number): Vector2;
     screenToTile(screenX: number, screenY: number): Tile | undefined;
-    getViewportBounds(timeStamp: number): {
-        min: Vector2;
-        max: Vector2;
-        z: WorldZ;
-    };
-    getBounds(timeStamp: number): {
-        viewportBounds: {
-            min: Vector2;
-            max: Vector2;
-            z: WorldZ;
-        };
-        startX: number;
-        endX: number;
-        startY: number;
-        endY: number;
-    };
+    private getViewportBounds;
+    getBounds(timeStamp: number): IBounds;
     computeSpritesInViewport(): void;
     /**
      * Batches entities

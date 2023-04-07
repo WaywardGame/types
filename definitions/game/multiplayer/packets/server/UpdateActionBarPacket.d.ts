@@ -11,8 +11,9 @@
 import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServerPacket";
 import type { IActionBarSlotData } from "ui/screen/screens/game/static/actions/IActionBar";
 export default class UpdateActionBarPacket extends PlayerTargetedServerPacket {
-    slots: Uint8Array;
-    data: IActionBarSlotData[];
+    slots?: Uint8Array;
+    data?: IActionBarSlotData[];
+    enabled?: boolean;
     getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;

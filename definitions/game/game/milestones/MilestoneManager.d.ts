@@ -13,7 +13,7 @@ import type { CreatureType } from "game/entity/creature/ICreature";
 import type { DamageType } from "game/entity/IEntity";
 import type { Game } from "game/Game";
 import { Milestone, MilestoneVisibility } from "game/milestones/IMilestone";
-type IMilestoneUpdate = [Milestone, (number | string)?];
+type MilestoneUpdate = [Milestone, (number | string)?];
 export interface IMilestoneEvents {
     /**
      * @param milestone The milestone that is being updated
@@ -40,10 +40,10 @@ export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents
      */
     getDesiredAmount(milestone: Milestone): number;
     /**
-     * Get a `Stream` of all completed milestones
+     * Get an array of all completed milestones
      */
     getCompleted(): Milestone[];
-    add(...updates: IMilestoneUpdate[]): void;
+    add(update: MilestoneUpdate): void;
     update(): void;
     areUnlockable(mode?: import("../options/IGameOptions").GameMode): boolean;
     areUnlockableInMode(mode?: import("../options/IGameOptions").GameMode): boolean;

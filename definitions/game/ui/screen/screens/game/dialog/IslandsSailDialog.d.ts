@@ -18,9 +18,11 @@ export default class IslandsSailDialog extends IslandsDialog {
     protected initializeSettingsPanel(panel: Component): void;
     protected onChangedSelectedIsland(animate?: boolean): void;
     protected onMouseMoveWhileOver(): void;
+    private updateSailButton;
     protected onSubmit(): boolean;
     protected sail(): void;
     protected preMoveToIsland(): void;
     protected onLoadedOnIsland(): void;
-    private canSailAway;
+    protected onTickEnd(): void;
+    private canMaybeSailToLocalPort;
 }

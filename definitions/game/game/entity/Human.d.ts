@@ -173,6 +173,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     loadUi(): void;
     startResting(restData: IRestData): void;
     cancelResting(reason: RestCancelReason): boolean;
+    findPathToPort(portId: number, startReversed?: boolean, ensureVehicleIsAllowed?: boolean): Tile[] | undefined;
     addTamedCreature(creature: Creature): void;
     removeTamedCreature(creature: Creature): boolean;
     resetMovementIntent(): void;
@@ -247,6 +248,10 @@ export default abstract class Human<TypeType extends number = number> extends En
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
     damageByInteractingWith(thing: Doodad | TileEvent, options: ICheckUnderOptions | undefined, damageLocation: EquipType): ICheckUnderOptions;
     equip(item: Item, slot: EquipType, internal?: boolean): boolean;
+    /**
+     * Unequips an item.
+     * Note: This is safe to call even if the item isn't equipped. it'll do nothing in that case.
+     */
     unequip(item: Item, internal?: boolean, skipMessage?: boolean, skipRevertItem?: boolean): void;
     private updateOffHandState;
     unequipAll(): void;
@@ -308,7 +313,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     getWeightOrStaminaMovementPenalty(): number;
     canSailAway(): ICanSailAwayResult;
     canSailTo(x: number, y: number): boolean;
-    canCombatTides(): true | "Swimming" | "Stamina";
+    canCombatTides(): true | Message.ActionSailToIslandCannotUseNotEnoughSwimmingSkill | Message.ActionSailToIslandCannotUseNotEnoughStamina;
     protected calculateVoyageInfo(destination?: Island, distanceFromEdge?: number): IVoyageInfo;
     /**
      * Applies traveling effects to the player

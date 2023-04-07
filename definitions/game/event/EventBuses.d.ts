@@ -63,23 +63,23 @@ export declare enum EventBus {
     Loading = 17,
     LocalIsland = 18,
     LocalPlayer = 19,
-    Mods = 20,
-    Multiplayer = 21,
-    NPCManager = 22,
-    NPCs = 23,
-    PlayerManager = 24,
-    Players = 25,
-    Prompt = 26,
-    SaveManager = 27,
-    ScreenManager = 28,
-    Steamworks = 29,
-    TileEventManager = 30,
-    TileEvents = 31,
-    Ui = 32,
-    UiActionBar = 33,
-    UiMovementHandler = 34,
-    WorldRenderer = 35,
-    Milestones = 36
+    Milestones = 20,
+    Mods = 21,
+    Multiplayer = 22,
+    NPCManager = 23,
+    NPCs = 24,
+    PlayerManager = 25,
+    Players = 26,
+    Prompt = 27,
+    SaveManager = 28,
+    ScreenManager = 29,
+    Steamworks = 30,
+    TileEventManager = 31,
+    TileEvents = 32,
+    Ui = 33,
+    UiActionBar = 34,
+    UiMovementHandler = 35,
+    WorldRenderer = 36
 }
 declare const eventBuses: {
     [EventBus.Actions](): ActionExecutor<any, any, any, any, any>;
@@ -102,6 +102,7 @@ declare const eventBuses: {
     [EventBus.Loading](): Loading.Events;
     [EventBus.LocalIsland](): Island;
     [EventBus.LocalPlayer](): Player;
+    [EventBus.Milestones](): MilestoneManager;
     [EventBus.Mods](): ModManager;
     [EventBus.Multiplayer](): Multiplayer;
     [EventBus.NPCManager](): NPCManager;
@@ -118,7 +119,6 @@ declare const eventBuses: {
     [EventBus.UiActionBar](): ActionBar;
     [EventBus.UiMovementHandler](): MovementHandler;
     [EventBus.WorldRenderer](): WorldRenderer;
-    [EventBus.Milestones](): MilestoneManager;
 };
 export interface IEventBusRegistration {
     subscribe: NullaryFunction;

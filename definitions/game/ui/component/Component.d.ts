@@ -256,6 +256,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * providing the argument removes the tooltip options.
      */
     setTooltip<ARGS extends any[]>(initializer?: (tooltip: Tooltip, ...args: ARGS) => any, ...args: ARGS): this;
+    refreshTooltip(): void;
     removeTooltip(): void;
     /**
      * Removes the context menu from this element.

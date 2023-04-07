@@ -91,7 +91,7 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
      * Determines if the renderer cares about an update
      * based on the position of the update vs renderer origin
      */
-    shouldUpdate(updateOrigin: IVector4 | undefined): boolean;
+    shouldUpdate(updateOrigin: IVector4 | undefined, flag?: UpdateRenderFlag): boolean;
     updateRender(source: RenderSource, flag: UpdateRenderFlag): void;
     /**
      * Note: Don't inject here. This gets called ten million times. If you want to override this functionality,

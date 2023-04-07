@@ -121,6 +121,7 @@ export interface IMoveToIslandOptions {
     distanceFromEdge: number;
     respawn: boolean;
     newIslandOverrides: Partial<INewIslandOverrides>;
+    targetPortId: number;
 }
 export interface INewIslandOverrides {
     biomeType: BiomeType;

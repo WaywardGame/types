@@ -140,6 +140,10 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     onPlayingEntityChange(_manager: any, entity: Entity): void;
     gameLogicLoop: () => void;
     /**
+     * Stops the game logic loop timer
+     */
+    stopGameLogicLoop(): void;
+    /**
      * Triggers a game logic loop to run in the next javascript event loop
      */
     triggerGameLogicLoop(): void;

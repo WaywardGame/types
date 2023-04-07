@@ -17,6 +17,7 @@ import type { Game } from "game/Game";
 import type { TickFlag } from "game/IGame";
 import type Item from "game/item/Item";
 import Button from "ui/component/Button";
+import { CheckButton } from "ui/component/CheckButton";
 import Component from "ui/component/Component";
 import type { ContextMenuDescriptions } from "ui/component/ContextMenu";
 import type { IRefreshable } from "ui/component/Refreshable";
@@ -29,6 +30,7 @@ import QuadrantComponent from "ui/screen/screens/game/component/QuadrantComponen
 import ActionsConfigurationDrawer from "ui/screen/screens/game/static/actions/ActionsDrawer";
 import ActionSlotTooltipHandler from "ui/screen/screens/game/static/actions/ActionSlotTooltip";
 import { IActionBarSlotData } from "ui/screen/screens/game/static/actions/IActionBar";
+import type TooltipLocationHandler from "ui/tooltip/TooltipLocationHandler";
 export declare const MAX_SLOTS = 48;
 export declare enum ActionBarClasses {
     Main = "game-action-bar",
@@ -50,7 +52,9 @@ export declare enum ActionBarClasses {
     MetaButtonAdd = "game-action-bar-meta-button-add",
     MetaButtonAddIcon = "game-action-bar-meta-button-add-icon",
     MetaButtonRemove = "game-action-bar-meta-button-remove",
-    MetaButtonRemoveIcon = "game-action-bar-meta-button-remove-icon"
+    MetaButtonRemoveIcon = "game-action-bar-meta-button-remove-icon",
+    MetaButtonToggleUseWhenMoving = "game-action-bar-meta-button-toggle-use-when-moving",
+    MetaButtonToggleUseWhenMovingIcon = "game-action-bar-meta-button-toggle-use-when-moving-icon"
 }
 export interface IActionBarEvents extends Events<QuadrantComponent> {
     configure(number: number): any;
@@ -67,6 +71,7 @@ export default class ActionBar extends QuadrantComponent {
     readonly slotsContainer: Component<HTMLElement>;
     readonly metaButtons: Component<HTMLElement>;
     readonly removeSlotButton: Button;
+    readonly toggleUseWhenMovingButton: CheckButton;
     readonly addSlotButton: Button;
     readonly configurationDrawer: ActionsConfigurationDrawer;
     get configuringNumber(): number | undefined;
@@ -75,6 +80,7 @@ export default class ActionBar extends QuadrantComponent {
     addSlot(): this;
     removeSlot(): this;
     generateSlots(): this;
+    private updateToggleUseOnMoveButton;
     getSlottedIn(item: Item): ReadonlySet<number> | undefined;
     private onMoveSlot;
     private readonly slottedIn;
@@ -137,7 +143,7 @@ export declare class ActionSlot extends Button implements IRefreshable {
     protected onGetOrRemoveItemInInventory(player: Player, item: Item): void;
     onToggle(api: IBindHandlerApi): boolean;
     protected onLeave(reason: "mouse" | "focus" | "remove"): void;
-    private getTooltipLocation;
+    static getTooltipLocation(actionBar: ActionBar, handler: TooltipLocationHandler): TooltipLocationHandler;
     getAction(): import("../../../../../game/entity/action/usable/UsableAction").default<IUsableActionRequirements, import("game/entity/action/usable/IUsableAction").IUsableActionDefinition<IUsableActionRequirements>> | undefined;
     getUsing(): IUsableActionPossibleUsing;
 }

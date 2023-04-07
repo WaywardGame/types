@@ -98,6 +98,9 @@ export default class Messages extends QuadrantComponent {
     private hasIncompletePinnedRequirementFromAnotherQuest;
     private showOptions;
     private scheduleShowMessage;
+    private currentTurn?;
+    private currentTurnComponent?;
+    private getTurnGroup;
     private updateMessages;
     private messages;
     /**

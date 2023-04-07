@@ -21,6 +21,7 @@ import { TileUpdateType } from "game/IGame";
 import type { IslandId } from "game/island/IIsland";
 import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
+import type Item from "game/item/Item";
 import { Prompt } from "game/meta/prompt/IPrompt";
 import { Milestone } from "game/milestones/IMilestone";
 import type Tile from "game/tile/Tile";
@@ -42,6 +43,7 @@ export default class Player extends Human implements IPreSerializeCallback, IUns
     islandId: IslandId;
     name: string;
     actionBar: IActionBarSlotData[];
+    useActionsWhileMoving: boolean;
     revealedItems: Record<number, boolean>;
     milestoneModifiers: Set<Milestone>;
     milestoneTitle?: Milestone;
@@ -61,6 +63,10 @@ export default class Player extends Human implements IPreSerializeCallback, IUns
     protected updateTile(fromTile: Tile, toTile: Tile): boolean;
     changeId(id: number): void;
     protected moveToIsland(targetTile: Tile): void;
+    /**
+     * This only does stuff when it's called on the local player
+     */
+    addItemMilestones(item: Item): void;
     checkSkillMilestones(): void;
     protected onCanMove(direction: Direction.Cardinal): false | undefined;
     addMilestone(milestone: Milestone, data?: number | string, update?: boolean): void;
@@ -81,7 +87,7 @@ export default class Player extends Human implements IPreSerializeCallback, IUns
      * Prompts the player
      */
     prompt(type: Prompt, ...args: any[]): Promise<boolean | InterruptChoice>;
-    updateActionSlots(slots: number[], data: IActionBarSlotData[]): void;
+    updateActionSlots(slots: number[], data: IActionBarSlotData[], enabled?: boolean): void;
     updateDialogInfo(dialogIndex: string | number | undefined): void;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
     kill(): void;

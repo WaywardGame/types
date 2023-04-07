@@ -10,7 +10,9 @@
  */
 import type Island from "game/island/Island";
 import Component from "ui/component/Component";
+import IslandPortsDropdown from "ui/component/dropdown/IslandPortsDropdown";
 import Input from "ui/component/Input";
+import { LabelledRow } from "ui/component/LabelledRow";
 import CanvasDialog from "ui/screen/screens/game/component/CanvasDialog";
 import type { DialogId } from "ui/screen/screens/game/Dialogs";
 import type { IVector2 } from "utilities/math/IVector";
@@ -25,7 +27,10 @@ export default abstract class IslandsDialog extends CanvasDialog {
     protected lastSailAwayCheckPosition?: Vector2;
     readonly title: Input;
     readonly info: Component<HTMLElement>;
+    protected readonly portDropdown: IslandPortsDropdown;
+    protected readonly portDropdownLabelContainer: LabelledRow;
     constructor(dialogId: DialogId, options: IIslandDialogOptions);
+    protected get island(): Island | undefined;
     private addMouseMoveListener;
     private removeMouseMoveListener;
     protected onMouseMoveWhileOver(): void;

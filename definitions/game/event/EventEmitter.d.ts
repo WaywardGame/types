@@ -75,6 +75,7 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     private readonly host;
     private readonly hostClass;
     private readonly subscriptions;
+    private readonly cachedEmitSelfHandlers;
     private eventEmitterMeta?;
     get event(): IEventEmitter<this, IEventEmitterEvents<H, E>>;
     constructor(host: H);
@@ -94,7 +95,7 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
     hasHandlersForEvent(...events: Array<keyof E>): boolean;
     private copyFrom;
-    protected handlersForEvent<K extends keyof E>(event: K, ignoreClassSubscriptions?: true): (string | Handler<any, any>)[];
+    protected handlersForEvent<K extends keyof E>(event: K, ignoreClassSubscriptions?: true): Array<keyof H | Handler<any, any>>;
 }
 declare module EventEmitter {
     class Host<E> implements IEventEmitterHost<E> {

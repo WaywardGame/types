@@ -285,7 +285,6 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      */
     getItemListTranslation(items: Item[], listEnder?: ListEnder | false): TranslationImpl;
     saveTileReferences(): void;
-    checkMilestones(human: Human, item: Item): void;
     getDefaultDurability(human: Human | undefined, weight: number, itemType: ItemType, getMax?: boolean): number;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
     /**
