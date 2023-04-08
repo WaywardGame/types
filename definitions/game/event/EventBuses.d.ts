@@ -127,8 +127,8 @@ export interface IEventBusRegistration {
 export default eventBuses;
 export declare module EventBus {
     function register<E extends EventBus>(eventBus: E, classOrHost: ReturnType<(typeof eventBuses)[E]>): void;
-    function register(eventBus: EventBus): (constructor: AbstractNullaryClass<any>) => void;
-    function unregister(eventBus: EventBus): void;
+    function register(eventBus: EventBus): (constructor: AbstractNullaryClass<any>) => any;
+    function unregister(eventBus: EventBus): boolean;
     function onEventBusRegistration(eventBus: EventBus, registration: IEventBusRegistration): void;
 }
 export type EventBusHost<E extends EventBus> = ReturnType<(typeof eventBuses)[E]>;

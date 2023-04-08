@@ -13,7 +13,7 @@ import type Item from "game/item/Item";
 import Component from "ui/component/Component";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import Dialog from "ui/screen/screens/game/component/Dialog";
-import type { IItemDropApi, ItemSlot } from "ui/screen/screens/game/component/Item";
+import type { IItemDropApi, IItemPickUpApi, ItemSlot } from "ui/screen/screens/game/component/Item";
 import ItemComponent, { ItemRefreshType } from "ui/screen/screens/game/component/Item";
 import EquipmentSlotTooltipHandler from "ui/screen/screens/game/dialog/equipment/EquipmentSlotTooltip";
 export declare enum EquipmentClasses {
@@ -43,6 +43,7 @@ export declare class EquipmentSlot extends ItemComponent {
     clear(): void;
     refresh(refreshType: ItemRefreshType): void;
     protected onEquipEvent(): void;
+    protected onPickUp(api: IItemPickUpApi): void;
     protected onDrop(api: IItemDropApi, intoSlot?: ItemSlot): void;
     private isEquippable;
 }

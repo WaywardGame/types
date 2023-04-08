@@ -95,7 +95,7 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
     }, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeeTile(type: CanASeeBType, tile: Tile, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
-    queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
+    queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number): void;
     getMovementDelay(): number;
     moveTo(tile: Tile, options?: IMoveToOptions): boolean;
     /**

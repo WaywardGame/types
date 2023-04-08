@@ -118,7 +118,7 @@ export interface IMessageManager {
     ifOnIsland(island: Island): this;
     send(message: Message | Translation, ...args: TranslationArg[]): boolean;
     sendPacked(pack: Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
-    pruneMessageHistory(): boolean;
+    pruneMessageHistory(isLocalPlayer: boolean): boolean;
     ifIs(human: Human): this;
     ifIsNot(human: Human): this;
     addToHistory(messageHistoryItem: IMessageHistoryItem): void;

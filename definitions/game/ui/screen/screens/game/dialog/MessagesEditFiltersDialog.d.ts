@@ -24,11 +24,18 @@ export default class MessagesEditFiltersDialog extends Dialog {
     private readonly filterContainer;
     constructor();
     initializeFilters(filters: IFilters): this;
+    private restoreToFilter?;
+    private stylesheet?;
     private editFilter;
+    private updateStylesheet;
+    private lastDisplayedMessage?;
+    private displaySourcesTooltip;
     private getSourceState;
     private deleteFilter;
     private saveFilter;
+    private createNewFiltersStateObject;
     private onEditName;
     private resetFilters;
+    protected onHide(): void;
 }
 export {};

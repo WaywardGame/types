@@ -42,7 +42,7 @@ export default class Messages extends QuadrantComponent {
     readonly filter: Button | undefined;
     pinNotesAutomatically: boolean;
     filters: IFilters;
-    private selectedFilter;
+    private selectedFilter?;
     private showSendButton;
     private showOptionsButton;
     private unfocusOnSend;
@@ -122,7 +122,8 @@ export default class Messages extends QuadrantComponent {
     /**
      * Changes the message filter
      */
-    private changeFilter;
+    setFilter(filterName?: string): void;
+    getFilter(): string | undefined;
     private refreshLog;
     private onShowDialog;
     private onShowNote;

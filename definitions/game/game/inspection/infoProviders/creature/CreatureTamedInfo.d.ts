@@ -18,7 +18,7 @@ export default class CreatureTamedInfoProvider extends InfoProvider {
     constructor(creature: Creature);
     getClass(): string[];
     hasContent(): boolean;
-    get(): (LabelledValue | import("game/inspection/InfoProvider").SimpleInfoProvider)[];
+    get(): (import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue)[];
     onTickEnd(): void;
     private getHappinessMessage;
 }

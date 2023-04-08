@@ -206,7 +206,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * @returns TerrainType that we should switch the tile into.
      */
     private canSwitchCave;
-    queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean, force?: boolean): void;
+    queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     createParticles(particle: IRGB | undefined, count?: number, intensity?: number): void;
     /**
      * Finds either lava or water ajacent to either lava or water, and cools the lava down based its findings.

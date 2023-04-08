@@ -31,13 +31,13 @@ export declare class MessageManagerNoOp implements IMessageManager {
     send(): boolean;
     sendPacked(): boolean;
     sentToAll(sentToAll?: boolean): this;
-    pruneMessageHistory(): boolean;
+    pruneMessageHistory(isLocalPlayer: boolean): boolean;
     addToHistory(messageHistoryItem: IMessageHistoryItem): void;
 }
 export interface IMessageManagerOptions {
     shouldDisplayMessage(message: IMessage, id: number): boolean | undefined;
     onDisplayMessage(message: IMessage): void;
-    getMessageStorageMax(): number;
+    getMessageStorageMax(isLocalPlayer: boolean): number;
 }
 export default class MessageManager implements IMessageManager {
     private readonly options;
@@ -71,7 +71,7 @@ export default class MessageManager implements IMessageManager {
     /**
      * Cuts the message history down to the correct bounds (preferring the more recent messages)
      */
-    pruneMessageHistory(): boolean;
+    pruneMessageHistory(isLocalPlayer: boolean): boolean;
     /**
      * Clears the entire message history.
      */

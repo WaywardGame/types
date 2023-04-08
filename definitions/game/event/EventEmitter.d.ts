@@ -41,6 +41,7 @@ export interface ISelfSubscribedEmitter<E> {
 type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
 type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
 type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
+type WeakHandler<H, F> = WeakRef<Handler<H, F>>;
 type UndefinedFromVoid<V> = V extends void ? undefined : V;
 export interface IEventEmitter<H = any, E = any> {
     event: IEventEmitter<this, IEventEmitterEvents<H, E>>;
@@ -98,7 +99,7 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     hasHandlersForEvent(...events: Array<keyof E>): boolean;
     private copyFrom;
     private readonly cachedClassHandlers;
-    protected handlersForEvent<K extends keyof E>(event: K, ignoreClassSubscriptions?: true): Array<keyof H | Handler<any, any>>;
+    protected handlersForEvent<K extends keyof E>(event: K, ignoreClassSubscriptions?: true): Array<keyof H | WeakHandler<any, any>>;
 }
 declare module EventEmitter {
     class Host<E> implements IEventEmitterHost<E> {

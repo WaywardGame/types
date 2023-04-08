@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IBox } from "ui/component/IComponent";
+import type { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 export default class Rectangle implements IBox {
     readonly position: Vector2;
@@ -27,5 +28,6 @@ export default class Rectangle implements IBox {
     get bottom(): number;
     constructor(position: Vector2, size: Vector2);
     getCenter(): Vector2;
-    intersects(rect2: Rectangle): boolean;
+    intersects(v2: IVector2): boolean;
+    intersects(rect2: IBox): boolean;
 }

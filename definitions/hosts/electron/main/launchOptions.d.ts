@@ -42,5 +42,6 @@ export interface ILaunchOptions {
     width: "max" | number;
     x: number | null;
     y: number | null;
+    lastElectronVersion: string;
 }
 export declare const launchOptionsDefault: ILaunchOptions;

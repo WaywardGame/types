@@ -8,21 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Island from "game/island/Island";
-import type EnumCursor from "utilities/enum/EnumCursor";
-export interface IAudio {
-    resetMusicHandler(): void;
-    getMusicHandler(): EnumCursor<Music>;
-    setMusicHandler(handler: EnumCursor<Music>): void;
-    playMusic(): void;
-    stopMusic(): void;
-    processEffects(): void;
-    queueEffect(soundEffect: SfxType, island: Island | undefined, x: number, y: number, z: number, delay?: number, speed?: number, noPosition?: boolean): void;
-    updateMusicSpeed(speed: number): void;
-    updatePosition(): void;
-    updateVolume(): void;
-}
-export default IAudio;
 export declare enum SfxType {
     Boat = 0,
     Bow = 1,

@@ -95,7 +95,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     isInFov(): boolean;
     setInFov(inFov: boolean): void;
     isOnFire(): FireType;
-    queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
+    queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     updateRender(source: RenderSource, flag: UpdateRenderFlag): void;
     updateView(source: RenderSource, updateFov?: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition): void;
     notifyItem(itemNotifierType: ItemNotifierType, item: Item): void;
