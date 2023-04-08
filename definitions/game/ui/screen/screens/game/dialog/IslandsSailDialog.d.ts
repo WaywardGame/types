@@ -24,5 +24,4 @@ export default class IslandsSailDialog extends IslandsDialog {
     protected preMoveToIsland(): void;
     protected onLoadedOnIsland(): void;
     protected onTickEnd(): void;
-    private canMaybeSailToLocalPort;
 }

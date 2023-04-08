@@ -15,6 +15,7 @@ import { MessageType, Source } from "game/entity/player/IMessageManager";
 import type Player from "game/entity/player/Player";
 import type Island from "game/island/Island";
 import Message from "language/dictionary/Message";
+import type { TranslationArg } from "language/ITranslation";
 import Translation from "language/Translation";
 import type { IVector4 } from "utilities/math/Vector4";
 export declare class MessageManagerNoOp implements IMessageManager {
@@ -114,7 +115,7 @@ export default class MessageManager implements IMessageManager {
      *
      * Note: After sending a message, the message source, type, and human (if any) are reset.
      */
-    send(message: Message | Translation, ...args: any[]): boolean;
+    send(message: Message | Translation, ...args: TranslationArg[]): boolean;
     sendPacked(pack: Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
     addToHistory(messageHistoryItem: IMessageHistoryItem): void;
     /**

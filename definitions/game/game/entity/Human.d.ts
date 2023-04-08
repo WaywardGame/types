@@ -173,7 +173,10 @@ export default abstract class Human<TypeType extends number = number> extends En
     loadUi(): void;
     startResting(restData: IRestData): void;
     cancelResting(reason: RestCancelReason): boolean;
-    findPathToPort(portId: number, startReversed?: boolean, ensureVehicleIsAllowed?: boolean): Tile[] | undefined;
+    findPathToPort(portId: number, options?: Partial<{
+        startReversed: boolean;
+        requireBoat: boolean;
+    }>): Tile[] | undefined;
     addTamedCreature(creature: Creature): void;
     removeTamedCreature(creature: Creature): boolean;
     resetMovementIntent(): void;

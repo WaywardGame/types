@@ -10,7 +10,7 @@
  */
 import type { Reference, Referenceable } from "game/reference/IReferenceManager";
 import Dictionary from "language/Dictionary";
-import type { ISerializedTranslation } from "language/ITranslation";
+import type { ISerializedTranslation, TranslationArg } from "language/ITranslation";
 import { TextContext } from "language/ITranslation";
 import type { Link } from "language/segment/LinkSegment";
 import type { ITooltipSection } from "language/segment/TooltipSegment";
@@ -69,7 +69,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     withSegments(priority: true, ...segments: ISegment[]): this;
     withTooltip(tooltip?: Falsy | ITooltipSection["tooltip"]): this;
     setReference(reference?: Reference | Referenceable): this;
-    addArgs(...args: any[]): this;
+    addArgs(...args: TranslationArg[]): this;
     inContext(context?: TextContext, normalize?: boolean): this;
     passTo(...reformatters: Array<TranslationImpl | ((sections: IStringSection[]) => IStringSection[]) | Falsy>): this;
     passTo(beginning: true, ...reformatters: Array<TranslationImpl | ((sections: IStringSection[]) => IStringSection[]) | Falsy>): this;
@@ -101,8 +101,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     toString(): string;
     private getCustomInterpolatorSegments;
     serializeObject(): ISerializedTranslation;
-    private static serializeCount;
-    serialize(resetCount?: boolean): ISerializedTranslation;
+    serialize(depth?: number): ISerializedTranslation;
     private canCache;
     private getCachedTranslation;
     /**

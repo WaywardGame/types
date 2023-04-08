@@ -10,8 +10,8 @@
  */
 import type { EventBusHost } from "event/EventBuses";
 import { EventBus } from "event/EventBuses";
-import type { Events, IEventEmitterHost, IEventEmitterHostClass } from "event/EventEmitter";
 import type EventEmitter from "event/EventEmitter";
+import type { Events, IEventEmitterHost, IEventEmitterHostClass } from "event/EventEmitter";
 type HostOrHostClass = IEventEmitterHost<any> | IEventEmitterHostClass<any>;
 type HostFromHostOrHostClass<H> = H extends {
     event: EventEmitter<null, any>;

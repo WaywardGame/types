@@ -18,6 +18,7 @@ export declare enum Priority {
 }
 export declare const SYMBOL_SUBSCRIPTIONS: unique symbol;
 export declare const SYMBOL_SUPERCLASSES: unique symbol;
+export declare const SYMBOL_SUBSCRIPTION_STATE_IDS: unique symbol;
 type Abstract<T> = Function & {
     prototype: T;
 };
@@ -32,6 +33,7 @@ export type EventPriorityMap = PriorityMap<Set<ReadonlyArray<string | Handler<an
 export interface ITrueEventEmitterHostClass<E> extends Class<any> {
     [SYMBOL_SUPERCLASSES]: Array<ITrueEventEmitterHostClass<E>>;
     [SYMBOL_SUBSCRIPTIONS]: Map<any, Map<keyof E, EventPriorityMap>>;
+    [SYMBOL_SUBSCRIPTION_STATE_IDS]: Map<keyof E, number>;
 }
 export interface ISelfSubscribedEmitter<E> {
     [SYMBOL_SUBSCRIPTIONS]: Array<[ISelfSubscribedEmitter<any>, keyof E, string | number | symbol, number?]>;
@@ -95,6 +97,7 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
     hasHandlersForEvent(...events: Array<keyof E>): boolean;
     private copyFrom;
+    private readonly cachedClassHandlers;
     protected handlersForEvent<K extends keyof E>(event: K, ignoreClassSubscriptions?: true): Array<keyof H | Handler<any, any>>;
 }
 declare module EventEmitter {

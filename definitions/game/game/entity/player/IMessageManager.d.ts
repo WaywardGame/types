@@ -11,9 +11,9 @@
 import type Stream from "@wayward/goodstream";
 import type Human from "game/entity/Human";
 import type Island from "game/island/Island";
-import type Message from "language/dictionary/Message";
-import type { ISerializedTranslation } from "language/ITranslation";
+import type { ISerializedTranslation, TranslationArg } from "language/ITranslation";
 import type Translation from "language/Translation";
+import type Message from "language/dictionary/Message";
 import type { IVector4 } from "utilities/math/Vector4";
 import type { IStringSection } from "utilities/string/Interpolator";
 export declare enum Source {
@@ -116,7 +116,7 @@ export interface IMessageManager {
     type(type?: MessageType): this;
     ifVisible(canSee?: IVector4): this;
     ifOnIsland(island: Island): this;
-    send(message: Message | Translation, ...args: any[]): boolean;
+    send(message: Message | Translation, ...args: TranslationArg[]): boolean;
     sendPacked(pack: Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
     pruneMessageHistory(): boolean;
     ifIs(human: Human): this;

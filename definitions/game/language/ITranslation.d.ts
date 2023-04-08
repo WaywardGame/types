@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Reference } from "game/reference/IReferenceManager";
+import type Translation from "language/Translation";
 import type { Segment } from "language/segment/Segments";
 import type { IInterpolationOptions, IStringSection } from "utilities/string/Interpolator";
 export declare enum ListEnder {
@@ -28,7 +29,7 @@ export interface ISerializedTranslation {
     id: string;
     context?: TextContext;
     normalize?: true;
-    args?: Array<string | number | boolean | any[] | object | ISerializedTranslation>;
+    args?: TranslationArg[];
     failWith?: string | ISerializedTranslation | IStringSection[];
     reformatters?: ISerializedTranslation[];
     reference?: Reference;
@@ -38,4 +39,8 @@ export interface ISerializedTranslation {
 export interface ISerializedInterpolator {
     options?: IInterpolationOptions;
     segments?: Segment[];
+}
+export type TranslationArg = string | number | boolean | Translation | ISerializedTranslation | IStringSection | Iterable<IStringSection> | TranslationArg[] | ITranslationArgRecord | (() => TranslationArg) | undefined | null;
+export interface ITranslationArgRecord {
+    [key: string]: ITranslationArgRecord | TranslationArg;
 }
