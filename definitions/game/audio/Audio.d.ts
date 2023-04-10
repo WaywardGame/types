@@ -37,7 +37,7 @@ export default class WAudio extends EventEmitter.Host<IAudioEvents> {
     private readonly _musicInfo;
     private readonly _sfxInfo;
     private readonly _soundQueue;
-    private readonly _recentlyPlayedSounds;
+    private readonly _recentlyPlayedGameSounds;
     private readonly _fileFormat;
     private _onInitializedPromise;
     private _audioContext;
@@ -73,7 +73,7 @@ export default class WAudio extends EventEmitter.Host<IAudioEvents> {
     /**
      * Plays a ui sound effect (a sound effect with no position)
      */
-    playUiSoundEffect(sfxType: SfxType, speed?: number): void;
+    playUiSoundEffect(sfxType: SfxType, speed?: number): Promise<void>;
     /**
      * Plays a sound effect (game / location based)
      */

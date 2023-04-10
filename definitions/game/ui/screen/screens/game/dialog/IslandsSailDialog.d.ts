@@ -15,6 +15,7 @@ export default class IslandsSailDialog extends IslandsDialog {
     closeOnTravel: boolean;
     readonly sailButton: Button;
     constructor();
+    protected onAppend(): void;
     protected initializeSettingsPanel(panel: Component): void;
     protected onChangedSelectedIsland(animate?: boolean): void;
     protected onMouseMoveWhileOver(): void;

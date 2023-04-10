@@ -180,7 +180,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     addTamedCreature(creature: Creature): void;
     removeTamedCreature(creature: Creature): boolean;
     resetMovementIntent(): void;
-    createItemInInventory(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, updateTables?: boolean, movingMultiple?: boolean): Item;
+    createItemInInventory(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, updateTables?: boolean): Item;
     damageRandomEquipment(): void;
     getDamageModifier(): number;
     calculateDamageAmount(attackType: AttackType, weapon?: Item, ammoItem?: Item): number;

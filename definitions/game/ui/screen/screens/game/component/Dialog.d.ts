@@ -154,7 +154,6 @@ declare abstract class Dialog extends Component implements IDialog {
      */
     close(): Promise<boolean>;
     protected onRemove1(): void;
-    protected onAppend1(): void;
     addPanel(id: string | number): Component<HTMLElement>;
     showPanel(id: string | number): Component<HTMLElement> | undefined;
     getPanel(id: string | number): Component<HTMLElement> | undefined;

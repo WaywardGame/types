@@ -502,6 +502,10 @@ export interface IMagicalPropertyInfo {
      * Generates the random sub-property to use for this magical property, if this magical property is a magical property with subtypes.
      */
     subType?: MagicalSubPropertySubTypes | (() => MagicalSubPropertySubTypes);
+    /**
+     * Set to true if the value can be expanded beyond its normal maximum (in the case of relic items).
+     */
+    expandable?: boolean;
 }
 export interface IItemUsed {
     usedBy?: string[];

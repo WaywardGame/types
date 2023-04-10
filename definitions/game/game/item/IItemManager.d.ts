@@ -90,13 +90,11 @@ export interface IDoodadsUsed {
     group: DoodadType | DoodadTypeGroup;
 }
 export interface IAddToContainerOptions {
-    movingMultiple?: boolean;
     skipMessage?: boolean;
     skipUpdateTables?: boolean;
     skipTileUpdate?: boolean;
 }
 export interface IPlaceOnTileOptions {
-    movingMultiple?: boolean;
     force?: boolean;
     skipMessage?: boolean;
     skipTileUpdate?: boolean;
