@@ -282,6 +282,8 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     onUnequip?(item: Item): void;
     onContainerItemAdd?(container: Item & IContainer, item: Item): void;
     onContainerItemRemove?(container: Item & IContainer, item: Item): void;
+    onCreate?(item: Item): void;
+    onChangeInto?(item: Item, fromItemType: ItemType): void;
 }
 export type ConsumeItemStatsTuple = [health: number, stamina: number, hunger: number, thirst: number];
 export interface IItemOnUse {
@@ -478,6 +480,14 @@ export interface ICreateOnBreak {
     tileEventType?: TileEventType;
 }
 export type IDismantleComponent = Record<number, number>;
+export interface IItemChangeIntoOptions {
+    disableNotify: boolean;
+    disableEmitTransformation: boolean;
+    addCreature: {
+        creature: Creature;
+        remainTamed: boolean;
+    };
+}
 export interface IRanged {
     range: number;
     attack: number;

@@ -12,8 +12,10 @@ import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type Creature from "game/entity/creature/Creature";
+import type { ItemType } from "game/item/IItem";
 export interface ICageCreature extends IActionUsable {
     creature: Creature;
+    changeInto: ItemType;
 }
 declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number>, void, ICageCreature, [import("../../../item/Item").default]>;
 export default _default;

@@ -78,6 +78,10 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     containedItems?: Item[];
     private _description;
     /**
+     * Creates a fake tile
+     */
+    static createFake(island: Island): Tile;
+    /**
      * Constructed during map gen
      */
     constructor(island: Island, x: number, y: number, z: number, id: number);

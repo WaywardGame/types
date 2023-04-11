@@ -15,7 +15,7 @@ import { CreatureType, SpawnGroup, TileGroup } from "game/entity/creature/ICreat
 import EntityManager from "game/entity/EntityManager";
 import type Human from "game/entity/Human";
 import { MoveType } from "game/entity/IEntity";
-import type Tile from "game/tile/Tile";
+import Tile from "game/tile/Tile";
 import type { IVector3 } from "utilities/math/IVector";
 export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> {
     /**
@@ -55,6 +55,7 @@ export default class CreatureManager extends EntityManager<Creature> {
      */
     spawn(type: CreatureType, tile: Tile, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: TileGroup, bypassCreatureLimit?: boolean): Creature | undefined;
     spawnFromGroup(creatureGroup: SpawnGroup, tile: Tile, bypass?: boolean, bypassCreatureLimit?: boolean): Creature | undefined;
+    createFake(type: CreatureType, aberrant: boolean, tile?: Tile, id?: number): Creature;
     exists(creature: Creature): boolean;
     maybeSpawnClawWorm(target: Human | Creature): void;
     /**

@@ -25,7 +25,7 @@ import { TileUpdateType } from "game/IGame";
 import type { IObject, IObjectOptions } from "game/IObject";
 import { Quality } from "game/IObject";
 import type { IslandId } from "game/island/IIsland";
-import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemDisassembleResult, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemCounter, ItemTag, ItemTypeExtra } from "game/item/IItem";
+import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemChangeIntoOptions, IItemDescription, IItemDisassembleResult, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemCounter, ItemTag, ItemTypeExtra } from "game/item/IItem";
 import { BookType, ItemDamageResult, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "game/item/IItem";
 import type { IPlaceOnTileOptions } from "game/item/IItemManager";
 import ItemMapManager from "game/item/ItemMapManager";
@@ -206,7 +206,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
     getEquippedHuman(): Human | undefined;
     isEquipped(includeDisabled?: true): boolean;
     getEquipSlot(includeDisabled?: true): EquipType | undefined;
-    changeInto(type: ItemType, disableNotify?: boolean, emitTransformation?: boolean): void;
+    changeInto(type: ItemType, options?: Partial<IItemChangeIntoOptions>): void;
     /**
      * Verifies an item has a proper weight combined with its magical item weight (featherweight) property and changes it if not.
      * @returns A type of change via ItemWeightChange for showing a new magical property was added or a new magical weight was added. If no change happened, it will return undefined.

@@ -104,6 +104,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      */
     getEnemy(): Human | Creature | undefined;
     setEnemy(enemy: Human | Creature | undefined): void;
+    private incrementEnemyAttempts;
     skipNextUpdate(): void;
     getMoveType(): MoveType;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
@@ -139,7 +140,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
     protected updateTile(fromTile: Tile, toTile: Tile): boolean;
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
-    findPath(target: Tile, maxNodesChecked?: number, ignoreHuman?: Human): Tile[] | undefined;
+    findPath(target: Tile, moveType: MoveType, maxNodesChecked?: number, ignoreHuman?: Human): Tile[] | undefined;
     getHitchingPostsAround(): IHitch;
     /**
      * Check creature move with a multiplayer sync check
