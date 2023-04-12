@@ -261,7 +261,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     /**
      * Returns the type of liquid that can be gathered from the tile
      */
-    getLiquidGatherType(terrainType: TerrainType, terrainDescription?: ITerrainDescription | undefined): keyof ILiquidGather | undefined;
+    getLiquidGatherType(terrainType: TerrainType, terrainDescription: ITerrainDescription): keyof ILiquidGather | undefined;
     addIslandPort(doodad: Doodad): void;
     removeIslandPort(doodad: Doodad): boolean;
 }

@@ -18,9 +18,9 @@ import type Tile from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 export interface ISmotherFireCanUse extends IActionUsable {
     tile: Tile;
+    tileType: TerrainType;
     tileDoodad?: Doodad;
     description: IItemDescription;
-    currentTileType: TerrainType;
     fireTileEvent?: TileEvent;
     smotherableDoodad?: Doodad;
 }

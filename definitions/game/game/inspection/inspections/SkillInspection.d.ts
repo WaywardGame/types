@@ -17,7 +17,7 @@ import Message from "language/dictionary/Message";
 import type { TranslationGenerator } from "ui/component/IComponent";
 export default class SkillInspection extends Inspection<SkillType> {
     static getSkillAttributeMessage(skill: SkillType): Message.Dexterity | Message.Metabolism | Message.Strength | undefined;
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
     private readonly human?;
     constructor([, skill]: [any, SkillType], context?: InfoProviderContext);
     getId(): string;

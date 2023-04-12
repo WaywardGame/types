@@ -14,5 +14,4 @@ export interface ILeftOverTile {
     terrainType: TerrainType;
     chance?: number;
 }
-export declare const DEFAULT_FISH_AVAILABLE = 6;
 export declare const terrainDescriptions: OptionalDescriptions<TerrainType, ITerrainDescription>;

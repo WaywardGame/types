@@ -15,7 +15,7 @@ import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
 import type { TranslationGenerator } from "ui/component/IComponent";
 export default class StatInspection extends Inspection<Stat> {
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
     private readonly human?;
     constructor([, stat]: [any, Stat], context?: InfoProviderContext);
     getId(): string;

@@ -38,7 +38,7 @@ export default class Challenge extends Quest {
     private readonly possibleRequirements;
     constructor();
     reset(): void;
-    protected createRequirements(island: Island): IQuestRequirement<any[], {}>[];
+    protected createRequirements(island: Island): Array<IQuestRequirement<any, any>>;
     protected onUpdate(quest: QuestInstance): void;
     protected onRequirementComplete(quest: QuestInstance, completedRequirement: RequirementInstance): void;
     private createRandomRequirement;

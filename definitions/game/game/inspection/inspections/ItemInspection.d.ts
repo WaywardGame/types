@@ -21,7 +21,7 @@ import type { TranslationGenerator } from "ui/component/IComponent";
 export default class ItemInspection extends Inspection<ItemType> {
     static getFromTile(tile: Tile, _: any, inspectType: InspectType): ItemInspection[];
     static isWorldInspection(type: InspectType): boolean;
-    static handles(type: InspectType, item: unknown): any;
+    static handles(type: InspectType, item: unknown): boolean;
     private static readonly itemTypeHandles;
     private static readonly dismantleHandles;
     readonly item?: WeakRef<Item> | undefined;

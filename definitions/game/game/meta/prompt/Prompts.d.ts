@@ -28,7 +28,7 @@ declare module Prompts {
     const currentQueue: Array<IPrompt<IPromptDescriptionBase<any[]>>>;
     class Events extends EventEmitter.Host<IPromptEvents> {
         static INSTANCE: Events;
-        get queue(): IPrompt<IPromptDescriptionBase<any[]>>[];
+        get queue(): Array<IPrompt<IPromptDescriptionBase<any[]>>>;
     }
     function isQueued(prompt: Prompt | IPromptDescriptionBase<any[]>): boolean;
     function queue<PROMPT extends IPromptDescriptionBase<any[]>>(prompt: PROMPT, ...args: PromptDescriptionArgs<PROMPT>): IPrompt<PROMPT>;

@@ -9,7 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type InterruptChoice from "language/dictionary/InterruptChoice";
-import type UiTranslation from "language/dictionary/UiTranslation";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type Input from "ui/component/Input";
 import type { MenuId } from "ui/screen/screens/menu/component/IMenu";
@@ -142,8 +141,8 @@ export interface IPromptDescriptionBase<A extends any[]> {
     type: Prompt;
     promptType: PromptType;
     priority?: PromptPriority;
-    title?: TranslationGenerator<UiTranslation, A>;
-    description?: TranslationGenerator<UiTranslation, A>;
+    title?: TranslationGenerator;
+    description?: TranslationGenerator;
     init?(...args: A): any;
 }
 type ResolvablePromptProperty<A extends any[], T> = T | ((...args: A) => T);

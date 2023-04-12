@@ -16,7 +16,7 @@ import { TerrainType } from "game/tile/ITerrain";
 import type Tile from "game/tile/Tile";
 export interface ISetDownCanUse extends IActionUsable {
     currentTileDescription: ITerrainDescription;
-    tileType: TerrainType;
+    setDownTileType: TerrainType;
     tile: Tile;
 }
 declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number>, void, ISetDownCanUse, [import("../../../item/Item").default]>;

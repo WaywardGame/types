@@ -22,9 +22,9 @@ export default abstract class Inspection<O> extends InfoProvider {
     readonly value: O;
     static createEnumReferenceHandler<R extends ReferenceType, E, K extends string>(referenceType: R, enumObject: {
         [key in K]: E;
-    }, predicate?: (reference: [R, E], context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext) => any;
+    }, predicate?: (reference: [R, E], context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     static createAnyHandler(...handlers: Array<Exclude<InspectionClass["handles"], undefined>>): (type: InspectType, ...args: any[]) => boolean;
-    static createReferenceHandler<REFTYPE extends EnumReferenceTypes>(referenceType: REFTYPE, handler?: (resolvedReference: EnumReferenceResolved<REFTYPE>, context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext) => any;
+    static createReferenceHandler<REFTYPE extends EnumReferenceTypes>(referenceType: REFTYPE, handler?: (resolvedReference: EnumReferenceResolved<REFTYPE>, context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     static verifyHumanity(_: any, context?: InfoProviderContext): boolean;
     static getDefaultPriority(inspectType: InspectType): number;
     constructor(type: InspectType, value: O);
