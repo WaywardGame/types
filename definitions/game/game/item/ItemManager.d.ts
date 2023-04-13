@@ -80,7 +80,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private static readonly cachedItemsThatAreAcceptedAsOffer;
     private static readonly cachedItemsThatAreUsedForGrowingPlants;
     private static readonly cachedItemsThatAreUsedInRecipes;
-    private static readonly cachedUseItemActions;
+    private static cachedUseItemActions;
     static cachedItemSpawns: OptionalDescriptions<BiomeType, OptionalDescriptions<WorldZ, OptionalDescriptions<TerrainType, ItemType[]>>>;
     static getItemTypes(): readonly ItemType[];
     static getItemsWithRecipes(): readonly ItemType[];

@@ -11,6 +11,7 @@
 import { Quality } from "game/IObject";
 import type Island from "game/island/Island";
 import type { IContainer, ItemType, ItemTypeGroup } from "game/item/IItem";
+import Item from "game/item/Item";
 import Objects from "utilities/object/Objects";
 import type { RandomInstance } from "utilities/random/IRandom";
 import type { RandomReference } from "utilities/random/RandomReference";
@@ -22,6 +23,6 @@ export default class RandomItem extends RandomValueGenerator<Array<ItemType | It
     constructor(random: RandomInstance | RandomReference, ...options: Array<ItemType | ItemTypeGroup>);
     setQuality(quality: Quality): this;
     setMagical(amount: number): this;
-    create(island: Island, container: IContainer): import("../../../../game/item/Item").default;
+    create(island: Island, container: IContainer): Item;
     [Objects.SYMBOL_CLONE](clone: typeof Objects.deepClone): this;
 }
