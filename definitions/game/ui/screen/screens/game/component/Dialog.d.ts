@@ -329,7 +329,7 @@ export declare class Header extends Handle implements IRefreshable {
     readonly closeButton: Button;
     readonly text: Text;
     constructor();
-    setText(text: TranslationGenerator): void;
+    setText(text?: TranslationGenerator, ...args: any[]): void;
     refresh(): this;
     setCloseIcon(icon?: "Minimize" | "Close"): this;
 }

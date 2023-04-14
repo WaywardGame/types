@@ -159,7 +159,8 @@ export declare enum ActionType {
     Summon = 121,
     SetCreatureAi = 122,
     SetTitle = 123,
-    Uncage = 124
+    Uncage = 124,
+    NPCInteract = 125
 }
 export declare const ACTIONS_RECOMMENDED: ActionType[];
 export declare enum ActionUsability {

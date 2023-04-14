@@ -59,6 +59,7 @@ export interface IOptions {
     muteMusic: boolean;
     playInputSoundWhenTyping: boolean;
     realTimeTickSpeed: number;
+    saveUiDataGlobally: boolean;
     shouldLoadLastSave: boolean;
     shouldObjectNamesSkipArticle: boolean;
     skipSplash: boolean;

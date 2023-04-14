@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
+import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
 import { ActionType } from "game/entity/action/IAction";
 import Human from "game/entity/Human";
 import type { IEntityConstructorOptions, IProperties, Property } from "game/entity/IEntity";
@@ -98,7 +99,11 @@ export default abstract class NPC extends Human<NPCType> {
      * @returns true if this is the first time the NPC has been talked to
      */
     talkTo(human: Human): boolean;
-    hasTalkedTo(human: Human): boolean;
+    hasTalkedTo(human?: Human): boolean;
+    getDefaultInteraction(): number | undefined;
+    canInteract(human: Human, interactType?: number): IActionUsable | IActionNotUsable;
+    confirmInteract(human: Human, interactType?: number): Promise<boolean>;
+    interact(action: IActionHandlerApi<Human>, interactType?: number): void;
     /**
      * Closes container dialogs
      */

@@ -35,6 +35,7 @@ import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import type { IHasInsulation, TempType } from "game/temperature/ITemperature";
 import { FireStage } from "game/tile/events/IFire";
 import type Tile from "game/tile/Tile";
+import TranslationImpl from "language/impl/TranslationImpl";
 import type { IUnserializedCallback } from "save/serializer/ISerializer";
 import type { Direction } from "utilities/math/Direction";
 import type Vector3 from "utilities/math/Vector3";
@@ -160,7 +161,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
      * - `item.getName(false)` // "stone axe"
      * - `item.getName(undefined, 3)` // "stone axes"
      */
-    getName(article?: false | "definite" | "indefinite", count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showMagicalType?: boolean): import("../../language/impl/TranslationImpl").default;
+    getName(article?: false | "definite" | "indefinite", count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showMagicalType?: boolean): TranslationImpl;
     protected getDescription(): IItemDescription | undefined;
     isTransient(): boolean;
     isValid(): boolean;

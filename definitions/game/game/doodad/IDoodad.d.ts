@@ -26,6 +26,7 @@ import type { IInsulationDescription, ITemperatureDescription } from "game/tempe
 import type { TerrainType } from "game/tile/ITerrain";
 import type { TileEventType } from "game/tile/ITileEvent";
 import type Tile from "game/tile/Tile";
+import type Translation from "language/Translation";
 import type { IModdable } from "mod/ModRegistry";
 import type { ISpriteAnimation } from "renderer/ISpriteInfo";
 import type { TileLayerType } from "renderer/world/IWorldRenderer";
@@ -45,6 +46,7 @@ export interface IDoodadOptions extends IObjectOptions {
     aberrant?: boolean;
     meltDecay?: number;
     inheritMagic?: MagicalPropertyManager;
+    bonusAttack?: number;
 }
 type MagicalPropertyOld = Exclude<IItemOld["magicalProperties"], undefined> extends Array<infer T> ? T : never;
 export type IDoodadOld = Partial<Doodad> & {
@@ -171,6 +173,12 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
          */
         columns: number;
     }>;
+    /**
+     * Called when the doodad is built via templates
+     * @param doodad Doodad
+     * @returns Name to set the doodad to or undefined to not name it.
+     */
+    getRandomNameOnTemplateSpawn?: (doodad: Doodad) => Translation | undefined;
     /**
      * The doodad type to display instead of the describe doodad type.
      */

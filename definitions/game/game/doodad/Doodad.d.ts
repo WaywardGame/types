@@ -104,6 +104,7 @@ export default class Doodad extends Entity<IDoodadDescription, DoodadType, Dooda
     stillContainer?: Item;
     tradedFrom?: string[];
     weight?: number;
+    bonusAttack?: number;
     private _tileId?;
     /**
      * Separate property just for wells because isInGroup is still expensive for processWell()

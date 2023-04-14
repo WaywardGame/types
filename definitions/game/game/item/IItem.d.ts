@@ -32,6 +32,7 @@ import type { TileEventType } from "game/tile/ITileEvent";
 import type Tile from "game/tile/Tile";
 import type Message from "language/dictionary/Message";
 import type TranslationImpl from "language/impl/TranslationImpl";
+import type Translation from "language/Translation";
 import type { IModdable } from "mod/ModRegistry";
 import type { IRGB } from "utilities/Color";
 import type { IVector3 } from "utilities/math/IVector";
@@ -271,9 +272,16 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      */
     civilizationContainerScore?: number;
     /**
-     * The item name to display instead of the described item name
+     * The item name to display instead of the item's default translation
      */
-    displayNameArgs?: (item: Item) => TranslationImpl[] | undefined;
+    getName?: (item: Item, article?: false | "definite" | "indefinite", count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showMagicalType?: boolean) => TranslationImpl | {
+        translation: TranslationImpl;
+        noReference?: boolean;
+    } | undefined;
+    /**
+     * Extra arguments to pass to the item's name translation
+     */
+    getNameArgs?: (item: Item) => Translation[] | undefined;
     /**
      * The item type to display instead of the described item type
      */

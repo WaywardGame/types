@@ -12,9 +12,12 @@ import type ShipperNPC from "game/entity/npc/npcs/Shipper";
 import IslandsDialog from "ui/screen/screens/game/dialog/islands/IslandsDialog";
 export default class IslandsSelectionDialog extends IslandsDialog {
     private readonly shipButton;
-    private npc;
+    private npcId?;
+    get npc(): import("../../../../../game/entity/npc/NPC").default | undefined;
     constructor();
     setShipper(npc: ShipperNPC): this;
     protected onChangedSelectedIsland(animate?: boolean): void;
     protected ship(): void;
+    protected onLoad(): Promise<void>;
+    protected onTickEnd(): void;
 }

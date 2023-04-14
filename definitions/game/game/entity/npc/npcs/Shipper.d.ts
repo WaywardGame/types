@@ -8,7 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
 import { ActionType } from "game/entity/action/IAction";
+import type Human from "game/entity/Human";
 import { AiType, MoveType } from "game/entity/IEntity";
 import { EquipType } from "game/entity/IHuman";
 import type { INPCConstructorOptions } from "game/entity/npc/INPC";
@@ -20,12 +22,19 @@ import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type Tile from "game/tile/Tile";
 import type { IVector2 } from "utilities/math/IVector";
+export declare enum ShipperNPCInteractType {
+    OpenContainer = 0,
+    ShipToIsland = 1
+}
 export default class ShipperNPC extends NPC {
     private shipTarget;
     private nearbyPortId;
     constructor(options?: INPCConstructorOptions);
     spawn(): void;
     getActions(): ActionType[] | undefined;
+    getDefaultInteraction(): number | undefined;
+    canInteract(human: Human, interactType: number): IActionUsable | IActionNotUsable;
+    interact(action: IActionHandlerApi<Human>, interactType: ShipperNPCInteractType): void | Promise<void>;
     /**
      * Closes container dialogs
      */
