@@ -117,4 +117,5 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
     get isFlying(): boolean;
     getMoveType(): MoveType;
     setMoveType(moveType: MoveType): void;
+    canSwapWith(entity: EntityMovable, source: string | undefined): boolean;
 }

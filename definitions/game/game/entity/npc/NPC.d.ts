@@ -48,6 +48,7 @@ export default abstract class NPC extends Human<NPCType> {
     weightCapacity: number;
     properties?: IProperties;
     talked?: Set<string>;
+    private shouldSkipNextUpdate?;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(entityOptions?: IEntityConstructorOptions<NPCType>);
@@ -84,6 +85,12 @@ export default abstract class NPC extends Human<NPCType> {
     isWaiting(): boolean;
     getDamageModifier(): number;
     makeHostile(): void;
+    /**
+     * Allow swapping with npcs
+     */
+    canSwapWith(human: Human, source: string | undefined): boolean;
+    skipNextUpdate(): void;
+    overrideNextMovement(tile: Tile): void;
     getPublicContainer(): IContainer | undefined;
     /**
      * The actions available to use with this npc
@@ -149,7 +156,7 @@ export default abstract class NPC extends Human<NPCType> {
     protected changeZ(toZ: number, fromZ: number): boolean | void | undefined;
     protected updateTile(fromTile: Tile, toTile: Tile): boolean;
     protected postMove(): void;
-    canMoveToTile(moveType: MoveType, tile: Tile): -1 | 0 | -2 | -3 | -4 | -5 | -6;
+    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): -1 | 0 | -2 | -3 | -4 | -5 | -6;
     getWeightOrStaminaMovementPenalty(): number;
     get asMerchant(): MerchantNPC | undefined;
     get asShipper(): ShipperNPC | undefined;

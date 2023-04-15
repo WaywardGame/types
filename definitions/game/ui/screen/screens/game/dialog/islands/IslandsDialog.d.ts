@@ -35,7 +35,7 @@ export default abstract class IslandsDialog extends CanvasDialog {
     private removeMouseMoveListener;
     protected onMouseMoveWhileOver(): void;
     selectIsland(x: number, y: number): void;
-    protected onLoad(): Promise<void>;
+    protected onLoad(initial: boolean): Promise<void>;
     protected onIslandRenamed(island: Island): void;
     protected onPortsChanged(island: Island): void;
     protected onMouseMove(): void;
@@ -53,7 +53,9 @@ export default abstract class IslandsDialog extends CanvasDialog {
     protected draw(): void;
     private drawBackground;
     private drawFogOfWar;
+    protected abstract shouldDisplayIsland(x: number, y: number, island?: Island): boolean;
     private drawIsland;
+    protected abstract isSelectedIslandValid(): boolean;
     private travelDotHead?;
     private drawTravelDots;
     private dotGenerationSpeed;

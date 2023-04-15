@@ -89,6 +89,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     canTarget(target: Human | Creature | undefined): boolean;
     moveToIsland(targetTile: Tile, owner: Human): void;
     restore(targetTile: Tile, preventRendering?: boolean): void;
+    skipNextUpdate(): void;
     overrideNextMovement(tile: Tile): void;
     preventNextMovement(): void;
     checkForBurn(moveType?: MoveType): boolean;
@@ -105,7 +106,6 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     getEnemy(): Human | Creature | undefined;
     setEnemy(enemy: Human | Creature | undefined): void;
     private incrementEnemyAttempts;
-    skipNextUpdate(): void;
     getMoveType(): MoveType;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     update(playingHumans: Human[]): boolean;

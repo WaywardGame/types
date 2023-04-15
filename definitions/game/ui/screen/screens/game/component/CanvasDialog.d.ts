@@ -35,7 +35,7 @@ export declare class Canvas extends Component<HTMLCanvasElement> {
     get height(): number;
     set height(value: number);
     clear(): this;
-    draw(image: CanvasImageSource, drawPosition: IVector2, drawSize?: IVector2, sourcePosition?: IVector2, sourceSize?: IVector2, angleRadians?: number, scale?: IVector2): this;
+    draw(image: HTMLImageElement | HTMLCanvasElement, drawPosition: IVector2, drawSize?: IVector2, sourcePosition?: IVector2, sourceSize?: IVector2, angleRadians?: number, scale?: IVector2): this;
     fill(pattern: CanvasPattern, drawPosition?: IVector2, drawSize?: IVector2, scale?: IVector2): this;
     fillText(text: string, position: Vector2, maxWidth?: number): void;
 }

@@ -113,6 +113,7 @@ export interface IIslandLoadOptions {
     pauseAndShowLoadingScreen?: boolean;
     multiplayerLoadingDescription?: MultiplayerLoadingDescription;
     newIslandOverrides?: Partial<INewIslandOverrides>;
+    disableLoadingScreen?: boolean;
 }
 export interface IMoveToIslandOptions {
     spawnPosition: IVector2;
@@ -122,6 +123,8 @@ export interface IMoveToIslandOptions {
     respawn: boolean;
     newIslandOverrides: Partial<INewIslandOverrides>;
     targetPortId: number;
+    disableLoadingScreen: boolean;
+    nestedTravelCount: number;
 }
 export interface INewIslandOverrides {
     biomeType: BiomeType;

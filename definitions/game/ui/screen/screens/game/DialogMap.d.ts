@@ -13,7 +13,7 @@ import CraftingDialog from "ui/screen/screens/game/dialog/CraftingDialog";
 import EquipmentDialog from "ui/screen/screens/game/dialog/EquipmentDialog";
 import InspectDialog from "ui/screen/screens/game/dialog/InspectDialog";
 import IslandsSailDialog from "ui/screen/screens/game/dialog/IslandsSailDialog";
-import IslandsSelectionDialog from "ui/screen/screens/game/dialog/IslandsSelectionDialog";
+import IslandsShippingDialog from "ui/screen/screens/game/dialog/IslandsShippingDialog";
 import MapDialog from "ui/screen/screens/game/dialog/MapDialog";
 import MessagesDialog from "ui/screen/screens/game/dialog/MessagesDialog";
 import MessagesEditFiltersDialog from "ui/screen/screens/game/dialog/MessagesEditFiltersDialog";
@@ -28,7 +28,7 @@ declare const dialogMap: {
     12: typeof EquipmentDialog;
     10: typeof InspectDialog;
     11: typeof IslandsSailDialog;
-    13: typeof IslandsSelectionDialog;
+    13: typeof IslandsShippingDialog;
     7: typeof MapDialog;
     0: typeof MessagesDialog;
     2: typeof MessagesEditFiltersDialog;

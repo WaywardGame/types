@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Island from "game/island/Island";
 import Button from "ui/component/Button";
 import type Component from "ui/component/Component";
 import IslandsDialog from "ui/screen/screens/game/dialog/islands/IslandsDialog";
@@ -18,6 +19,8 @@ export default class IslandsSailDialog extends IslandsDialog {
     protected onAppend(): void;
     protected initializeSettingsPanel(panel: Component): void;
     protected onChangedSelectedIsland(animate?: boolean): void;
+    protected isSelectedIslandValid(): boolean;
+    protected shouldDisplayIsland(x: number, y: number, island?: Island): boolean;
     protected onMouseMoveWhileOver(): void;
     private updateSailButton;
     protected onSubmit(): boolean;

@@ -79,7 +79,7 @@ interface IDialogEvents extends Events<Component> {
     /**
      * Emitted after all fields decorated with `@Save` are loaded
      */
-    load(): any;
+    load(initial: boolean): any;
 }
 export declare enum DialogClasses {
     Wrapper = "dialog-wrapper",
@@ -126,6 +126,7 @@ declare abstract class Dialog extends Component implements IDialog {
     private cachedSnapPositions?;
     private readonly activeReasons;
     protected readonly scrollableHandler: void;
+    private loaded?;
     private get visiblePanel();
     get square(): boolean;
     /**

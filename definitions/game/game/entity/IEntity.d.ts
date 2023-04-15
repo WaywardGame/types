@@ -291,7 +291,8 @@ export interface IMoveToOptions {
 }
 export declare enum MoveAnimation {
     Normal = 0,
-    Jump = 1
+    Jump = 1,
+    Teleport = 2
 }
 export declare enum MoveFlag {
     None = 0,

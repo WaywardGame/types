@@ -9,15 +9,18 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type ShipperNPC from "game/entity/npc/npcs/Shipper";
+import type Island from "game/island/Island";
 import IslandsDialog from "ui/screen/screens/game/dialog/islands/IslandsDialog";
-export default class IslandsSelectionDialog extends IslandsDialog {
+export default class IslandsShippingDialog extends IslandsDialog {
     private readonly shipButton;
     private npcId?;
-    get npc(): import("../../../../../game/entity/npc/NPC").default | undefined;
+    get npc(): ShipperNPC | undefined;
     constructor();
     setShipper(npc: ShipperNPC): this;
     protected onChangedSelectedIsland(animate?: boolean): void;
+    protected shouldDisplayIsland(x: number, y: number, island?: Island): boolean;
+    protected isSelectedIslandValid(): boolean;
     protected ship(): void;
-    protected onLoad(): Promise<void>;
+    protected onLoad(initial: boolean): Promise<void>;
     protected onTickEnd(): void;
 }

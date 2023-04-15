@@ -13,6 +13,7 @@ import type { IEntityCanCreateOptions } from "game/entity/EntityManager";
 import EntityManager from "game/entity/EntityManager";
 import type { NPCType } from "game/entity/npc/INPCs";
 import NPC from "game/entity/npc/NPC";
+import type ShipperNPC from "game/entity/npc/npcs/Shipper";
 import type Tile from "game/tile/Tile";
 export interface INPCCanCreateOptions extends IEntityCanCreateOptions {
     uniqueNpcType?: string;
@@ -44,4 +45,8 @@ export default class NPCManager extends EntityManager<NPC> {
     addPlayerLike(npc: NPC): void;
     removePlayerLike(npc: NPC): void;
     updateAll(): void;
+    /**
+     * Get an array of shippers that are in the process of shipping things to another island
+     */
+    getPendingOutboundShippers(): ShipperNPC[];
 }

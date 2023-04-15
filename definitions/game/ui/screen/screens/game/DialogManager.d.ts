@@ -23,14 +23,14 @@ export default class DialogManager {
     getAll(): Array<[DialogId, string]>;
     getAll<ID extends DialogId>(id: ID): Array<[DialogId, string]>;
     getAll<DIALOG extends Dialog>(id: DialogId): Array<[DialogId, string]>;
-    open<ID extends DialogId>(id: ID, subId?: string, highlightIfAlreadyOpen?: boolean): DialogById[ID];
-    open<DIALOG extends Dialog>(id: DialogId, subId?: string, highlightIfAlreadyOpen?: boolean): DIALOG;
+    open<ID extends DialogId>(id: ID, initializer?: (dialog: DialogById[ID]) => any, subId?: string, highlightIfAlreadyOpen?: boolean): DialogById[ID];
+    open<DIALOG extends Dialog>(id: DialogId, initializer?: (dialog: DIALOG) => any, subId?: string, highlightIfAlreadyOpen?: boolean): DIALOG;
     isVisible(id: DialogId, subId?: string): boolean | undefined;
     close(id: DialogId | `${DialogId}` | `${DialogId},${string}`, subId?: string): boolean;
     closeAll(): boolean;
     toggle<ID extends DialogId>(id: ID, force?: boolean, initializer?: (dialog: DialogById[ID]) => any, subId?: string, highlightIfAlreadyOpen?: boolean): this;
     toggle<DIALOG extends Dialog>(id: DialogId, force?: boolean, initializer?: (dialog: DIALOG) => any, subId?: string, highlightIfAlreadyOpen?: boolean): this;
-    toggleAll(states: IDialogStates): this;
+    toggleAll(states: IDialogStates, loaded?: boolean): this;
     private compute;
     private onClose;
     private getKey;

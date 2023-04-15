@@ -15,10 +15,10 @@ declare namespace IUsableActionsDoodad {
     function getUnder(player: Player, filter?: (doodad: Doodad) => any): Doodad | undefined;
     function getUnderOrFacing(player: Player, filter?: (doodad: Doodad) => any): Doodad | undefined;
     function validate(player: Player, doodad: Doodad | undefined): doodad is Doodad;
-    const requireFacing: (filter?: ((doodad: Doodad) => any) | undefined) => {
+    const requireFacing: (filter?: ((doodad: Doodad, player: Player) => any) | undefined) => {
         find: (player: Player) => Doodad | undefined;
     };
-    const requireUnderOrFacing: (filter?: ((doodad: Doodad) => any) | undefined) => {
+    const requireUnderOrFacing: (filter?: ((doodad: Doodad, player: Player) => any) | undefined) => {
         find: (player: Player) => Doodad | undefined;
     };
 }

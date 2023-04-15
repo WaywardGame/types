@@ -15,7 +15,7 @@ import { AiType, MoveType } from "game/entity/IEntity";
 import { EquipType } from "game/entity/IHuman";
 import type { INPCConstructorOptions } from "game/entity/npc/INPC";
 import NPC from "game/entity/npc/NPC";
-import type { IIslandPort } from "game/island/IIsland";
+import type { IIslandPort, IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
@@ -26,8 +26,12 @@ export declare enum ShipperNPCInteractType {
     OpenContainer = 0,
     ShipToIsland = 1
 }
+interface IShipTarget {
+    islandId: IslandId;
+    portId: number;
+}
 export default class ShipperNPC extends NPC {
-    private shipTarget;
+    shipTarget: IShipTarget | undefined;
     private nearbyPortId;
     constructor(options?: INPCConstructorOptions);
     spawn(): void;
@@ -39,6 +43,7 @@ export default class ShipperNPC extends NPC {
      * Closes container dialogs
      */
     closeContainerDialogs(): void;
+    canSailTo(x: number, y: number): boolean;
     getPublicContainer(): IContainer | undefined;
     protected getReputationChangeOnDeath(): number;
     protected getDefaultName(): import("../../../../language/impl/TranslationImpl").default;
@@ -55,7 +60,8 @@ export default class ShipperNPC extends NPC {
     get asMerchant(): undefined;
     get asShipper(): ShipperNPC;
     getShipContainerItem(): (Item & IContainer) | undefined;
-    canMoveToTile(moveType: MoveType, tile: Tile): -1 | 0 | -2 | -3 | -4 | -5 | -6;
+    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): -1 | 0 | -2 | -3 | -4 | -5 | -6;
     shipToPort(island: Island, port: IIslandPort, pathToEdge: IVector2[]): void;
     private moveToPort;
 }
+export {};

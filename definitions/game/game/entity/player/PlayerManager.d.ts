@@ -66,7 +66,7 @@ export default class PlayerManager extends EventEmitter.Host<IPlayerManagerEvent
      * Support loading single player saves in dedicated servers
      * All while not losing data for any players - regardless of if the player was in the server or not at the time of the backup
      */
-    repair(options: Partial<IPlayOptions>): void;
+    repair(options: Partial<IPlayOptions>): Promise<void>;
     /**
      * Removes and deletes a player.
      * Use with caution!
