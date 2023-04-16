@@ -41,6 +41,11 @@ export default class Challenge extends Quest {
     protected createRequirements(island: Island): Array<IQuestRequirement<any, any>>;
     protected onUpdate(quest: QuestInstance): void;
     protected onRequirementComplete(quest: QuestInstance, completedRequirement: RequirementInstance): void;
+    /**
+     *
+     * @param island
+     * @returns Technically a IQuestRequirement<any, any>, but specifying the exact types makes the typing much faster
+     */
     private createRandomRequirement;
     private getSpawnableCreatures;
 }

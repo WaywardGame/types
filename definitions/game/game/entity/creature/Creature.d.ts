@@ -10,7 +10,7 @@
  */
 import { SfxType } from "audio/IAudio";
 import type { IEventEmitter } from "event/EventEmitter";
-import type { CreatureAttackOutcome, CreatureType, ICreatureAttackOutcomeAttack, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "game/entity/creature/ICreature";
+import type { CreatureAttackOutcome, CreatureType, ICreatureAttackOutcomeAttack, ICreatureCheckMoveOptions, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "game/entity/creature/ICreature";
 import EntityWithStats from "game/entity/EntityWithStats";
 import type Human from "game/entity/Human";
 import type { IEntityConstructorOptions, IStatChangeInfo } from "game/entity/IEntity";
@@ -155,7 +155,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      * @param willMove Set to true if the object is about to move to this tile. This method will confirm if theres an existing npc/creature there and return false if so
      * @returns 0 if the creature can move, otherwise an error code
      */
-    checkCreatureMove(isClientside: boolean, tile: Tile, moveType: MoveType, willMove: boolean, ignoreHuman?: Human, ignoreScareCrow?: boolean): number;
+    checkCreatureMove(isClientside: boolean, tile: Tile, moveType: MoveType, willMove: boolean, options?: Partial<ICreatureCheckMoveOptions>): number;
     /**
      * Returns the times a creature has been tamed.
      * @returns number if the creature has been tamed and undefined if it has never been tamed.

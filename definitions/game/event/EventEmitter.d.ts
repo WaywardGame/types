@@ -44,7 +44,6 @@ type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
 type WeakHandler<H, F> = WeakRef<Handler<H, F>>;
 type UndefinedFromVoid<V> = V extends void ? undefined : V;
 export interface IEventEmitter<H = any, E = any> {
-    event: IEventEmitter<this, IEventEmitterEvents<H, E>>;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     /**
      * Emit an event only to the subscribers of this emitter instance.
@@ -70,17 +69,11 @@ export interface IEventEmitter<H = any, E = any> {
 export interface IUntilSubscriber<H, E> {
     subscribe<K extends ArrayOr<keyof E>>(event: K, handler: IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): H;
 }
-interface IEventEmitterEvents<H, E> {
-    subscribe<K extends keyof E>(event: keyof E, handler: Iterable<(keyof H) | Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>): any;
-    unsubscribe<K extends keyof E>(event: keyof E, handler: Iterable<(keyof H) | Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>): any;
-}
-declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
+declare class EventEmitter<H, E> {
     private readonly host;
     private readonly hostClass;
     private readonly subscriptions;
     private readonly cachedEmitSelfHandlers;
-    private eventEmitterMeta?;
-    get event(): IEventEmitter<this, IEventEmitterEvents<H, E>>;
     constructor(host: H);
     raw(): IEventEmitter<H, E>;
     emitSelf<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;

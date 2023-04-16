@@ -18,9 +18,7 @@ declare module Enums {
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
      * @param entry The entry in the enum. Usually its index.
      */
-    function isModded<E, K extends string>(enumObject: {
-        [key in K]: E;
-    }, entry: E): boolean;
+    function isModded<E, K extends string>(enumObject: Record<K, E>, entry: E): boolean;
     function getMod<O>(enumObject: O, entry: O[keyof O], isGlobalEnum?: boolean): IModInfo | undefined;
     /**
      * Returns an enum entry by its name, case-insensitive.
@@ -28,18 +26,14 @@ declare module Enums {
      * @param name The name of the enum entry. Case-insensitive.
      * @returns The enum entry, if found; otherwise `undefined`.
      */
-    function findByName<E, K extends string>(enumObject: {
-        [key in K]: E;
-    }, name: K): E;
+    function findByName<E, K extends string>(enumObject: Record<K, E>, name: K): E;
     /**
      * Returns an enum entry by its index. The order is not guaranteed.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
      * @param n The index of the enum entry.
      * @returns The enum entry, or if out of bounds, `undefined`.
      */
-    function getNth<E, K extends string>(enumObject: {
-        [key in K]: E;
-    }, n: number): Exclude<E, AnyFunction> | undefined;
+    function getNth<E, K extends string>(enumObject: Record<K, E>, n: number): Exclude<E, AnyFunction> | undefined;
     /**
      * Returns the number of entries in this enum.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
@@ -78,13 +72,9 @@ declare module Enums {
      * @param entry The value to check.
      * @param isBasicEnum Whether the enum is a "basic" enum; IE, every entry is a number between `0` and `Infinity`. (Default: `true`)
      */
-    function isValid<E, K extends string>(enumObject: {
-        [key in K]: E;
-    }, entry: unknown, isBasicEnum?: boolean): entry is E;
+    function isValid<E, K extends string>(enumObject: Record<K, E>, entry: unknown, isBasicEnum?: boolean): entry is E;
     function toString(enumObject: any, n: number, exlude?: number): string;
-    function sortKeysByOrdinal<E extends number, K extends string>(enumObject: {
-        [key in K]: E;
-    }): (keyA: K, keyB: K) => number;
+    function sortKeysByOrdinal<E extends number, K extends string>(enumObject: Record<K, E>): (keyA: K, keyB: K) => number;
     /**
      * Creates a "merged" enum which can be used in `Enums.keys`, `values`, `entries`, etc with the same performance.
      *

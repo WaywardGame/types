@@ -421,3 +421,8 @@ export interface ICreatureAttackOutcomeAttack extends ICreatureAttackOutcomeBase
     damageScale: number;
 }
 export type CreatureAttackOutcome = ICreatureAttackOutcomeNoAttack | ICreatureAttackOutcomeHidden | ICreatureAttackOutcomeAttack;
+export interface ICreatureCheckMoveOptions {
+    ignoreHuman: Human;
+    ignoreScareCrow: boolean;
+    ignoreMoveTypeNone: boolean;
+}

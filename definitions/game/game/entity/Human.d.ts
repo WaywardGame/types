@@ -47,6 +47,7 @@ import type Tile from "game/tile/Tile";
 import type { ICanSailAwayResult } from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 import Message from "language/dictionary/Message";
+import type { ISerializedTranslation } from "language/ITranslation";
 import Translation from "language/Translation";
 import type FieldOfView from "renderer/fieldOfView/FieldOfView";
 import { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
@@ -72,7 +73,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     fromY: number;
     crafted: Record<number, ICrafted>;
     customization: ICustomizations;
-    deathBy: import("language/ITranslation").ISerializedTranslation;
+    deathBy: ISerializedTranslation;
     defense: PlayerDefense;
     defenses: number[];
     equippedOffHandDisabled?: ItemReference;

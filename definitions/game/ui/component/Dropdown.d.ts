@@ -37,7 +37,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     private using?;
     private readonly _options;
     get options(): Map<O, Button>;
-    readonly inputButton: InputButton;
+    readonly inputButton: DropdownInputButton;
     protected _optionsWrapper: Component;
     private get optionsWrapper();
     private readonly _optionsWrapperWrapper;
@@ -83,5 +83,17 @@ export default class Dropdown<O = string | number> extends Component implements 
     private updateWrapperPosition;
     private nextOption;
     private previousOption;
+}
+interface IDropdownInputButtonEvents extends Events<InputButton> {
+    nextOption(): any;
+    prevOption(): any;
+}
+declare class DropdownInputButton extends InputButton {
+    readonly event: IEventEmitter<this, IDropdownInputButtonEvents>;
+    constructor(inputInitializer: (input: Input) => any);
+    protected playSound(): void;
+    protected onStopEditMode(): void;
+    protected onNextOption(api: IBindHandlerApi): boolean;
+    protected usePreviousOption(api: IBindHandlerApi): boolean;
 }
 export {};

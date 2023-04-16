@@ -16,7 +16,7 @@ export default class BookDialog extends Dialog {
     private book?;
     private readonly text;
     constructor();
-    getName(): import("../../../../../language/ITranslation").ISerializedTranslation | import("../../../../../language/impl/TranslationImpl").default | Iterable<import("../../../../../utilities/string/Interpolator").IStringSection> | import("../../../../../language/dictionary/UiTranslation").default | undefined;
+    getName(): import("../../../../../language/impl/TranslationImpl").default | import("../../../../../language/ITranslation").ISerializedTranslation | Iterable<import("../../../../../utilities/string/Interpolator").IStringSection> | import("../../../../../language/dictionary/UiTranslation").default | undefined;
     openBook(item: Item): void;
     private getText;
     protected onInventoryItemRemove(_: any, item: Item): void;

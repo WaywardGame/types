@@ -132,16 +132,14 @@ export declare enum MiscTranslation {
     NumberSingleDecimal = 30,
     OwnName = 31,
     Percent = 32,
-    PercentInteger = 33,
-    PercentRaw = 34,
-    PlayerName = 35,
+    PercentRaw = 33,
+    PlayerName = 34,
+    Possession = 35,
     Range = 36,
     ReformatSingularNoun = 37,
     Renamed = 38,
-    TheThing = 39,
-    Thing = 40,
-    Tilled = 41,
-    Unknown = 42,
-    UnknownItem = 43,
-    Possession = 44
+    Thing = 39,
+    Tilled = 40,
+    Unknown = 41,
+    UnknownItem = 42
 }

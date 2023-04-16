@@ -11,6 +11,7 @@
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import CombatStrengthManager from "game/entity/CombatStrengthManager";
 import Creature from "game/entity/creature/Creature";
+import type { ICreatureCheckMoveOptions } from "game/entity/creature/ICreature";
 import { CreatureType, SpawnGroup, TileGroup } from "game/entity/creature/ICreature";
 import EntityManager from "game/entity/EntityManager";
 import type Human from "game/entity/Human";
@@ -70,7 +71,7 @@ export default class CreatureManager extends EntityManager<Creature> {
      * @param willMove Set to true if the object is about to move to this tile. This method will confirm if theres an existing npc/creature there and return false if so
      * @return Blocked penalty - Do no return 0!
      */
-    getMovePenalty(moveType: MoveType, tile: Tile, willMove: boolean, ignoreHuman?: Human): number;
+    getMovePenalty(moveType: MoveType, tile: Tile, willMove: boolean, options?: Partial<ICreatureCheckMoveOptions>): number;
     /**
      * wasm calls this when calculating penalties for flow fields
      */

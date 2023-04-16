@@ -78,7 +78,8 @@ export declare const actionDescriptionsSlow: {
     84: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.ItemInventory], import("../Human").default<number>, void, {
         usable: true;
     }, [import("../../item/Item").default]>;
-    118: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.Player], import("../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [import("../player/Player").default]>;
+    118: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.Human], import("../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [import("../Human").default<number>]>;
+    125: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.NPCNearby, [import("game/entity/action/IAction").ActionArgument.Undefined, import("game/entity/action/IAction").ActionArgument.Integer32]], import("../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [import("../npc/NPC").default, (number | undefined)?]>;
     55: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.ItemInventory], import("../Human").default<number>, void, import("game/entity/action/actions/Offer").IOfferCanUse, [import("../../item/Item").default]>;
     31: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.ItemNearby], import("../Human").default<number>, void, {
         usable: true;
@@ -164,5 +165,4 @@ export declare const actionDescriptionsSlow: {
     105: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.String, import("game/entity/action/IAction").ActionArgument.Object], import("../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [string, any?]>;
     107: import("./Action").Action<[[import("game/entity/action/IAction").ActionArgument.Vector2Array, import("game/entity/action/IAction").ActionArgument.Undefined], [import("game/entity/action/IAction").ActionArgument.Boolean, import("game/entity/action/IAction").ActionArgument.Undefined]], import("../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [(import("../../../utilities/math/IVector").IVector2[] | undefined)?, (boolean | undefined)?]>;
     92: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.ItemNearby, [import("game/entity/action/IAction").ActionArgument.ItemNearby, import("game/entity/action/IAction").ActionArgument.Undefined]], import("../Human").default<number>, void, import("game/entity/action/actions/Upgrade").IUpgradeCanUse, [import("../../item/Item").default, (import("../../item/Item").default | undefined)?]>;
-    125: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.NPCNearby, [import("game/entity/action/IAction").ActionArgument.Undefined, import("game/entity/action/IAction").ActionArgument.Integer32]], import("../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [import("../npc/NPC").default, (number | undefined)?]>;
 };

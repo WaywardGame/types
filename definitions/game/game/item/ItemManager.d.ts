@@ -66,22 +66,22 @@ export interface IItemManagerEvents {
 }
 export default class ItemManager extends ObjectManager<Item, IItemManagerEvents> {
     readonly worldContainer: IContainer;
-    private static cachedBestItemForTier;
-    private static cachedDefaultItemForGroup;
-    private static cachedEquippables;
-    private static cachedHighestItemActionTierForAction;
-    private static cachedItemGroups;
     private static cachedItemTypeGroups;
     private static cachedItemTypes;
     private static cachedItemTypesWithRecipes;
-    private static cachedWeights;
+    private static cachedUseItemActions;
+    private static readonly cachedBestItemForTier;
+    private static readonly cachedDefaultItemForGroup;
+    private static readonly cachedEquippables;
     private static readonly cachedGroupItems;
+    private static readonly cachedHighestItemActionTierForAction;
+    private static readonly cachedItemGroups;
     private static readonly cachedItemGroupsUsedInRecipes;
     private static readonly cachedItemsThatAreAcceptedAsOffer;
     private static readonly cachedItemsThatAreUsedForGrowingPlants;
     private static readonly cachedItemsThatAreUsedInRecipes;
-    private static cachedUseItemActions;
-    static cachedItemSpawns: OptionalDescriptions<BiomeType, OptionalDescriptions<WorldZ, OptionalDescriptions<TerrainType, ItemType[]>>>;
+    private static readonly cachedWeights;
+    static readonly cachedItemSpawns: Map<BiomeType, OptionalDescriptions<WorldZ, OptionalDescriptions<TerrainType, ItemType[]>>>;
     static getItemTypes(): readonly ItemType[];
     static getItemsWithRecipes(): readonly ItemType[];
     static getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;

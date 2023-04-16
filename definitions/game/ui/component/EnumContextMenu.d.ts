@@ -17,9 +17,7 @@ export default class EnumContextMenu<E extends number, K extends string> {
     private translator?;
     private readonly enumEntries;
     private _sort;
-    constructor(e: {
-        [key in K]: E;
-    }, translator?: ((e: E) => Translation) | undefined);
+    constructor(e: Record<K, E>, translator?: ((e: E) => Translation) | undefined);
     setTranslator(translator: (e: E) => Translation): this;
     setSort(sort: EnumSort | ((a: E, b: E) => number)): this;
     waitForChoice(): Promise<E | undefined>;

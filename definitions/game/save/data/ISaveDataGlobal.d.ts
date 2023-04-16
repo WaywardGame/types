@@ -64,9 +64,7 @@ export interface IOptions {
     shouldObjectNamesSkipArticle: boolean;
     skipSplash: boolean;
     tooltipDelay: number;
-    tooltips: {
-        [key in InspectType]: boolean | undefined;
-    };
+    tooltips: Record<InspectType, boolean | undefined>;
     tooltipVisibility?: TooltipVisibilityOption;
     uiExperiments: UiExperiment.Any[];
     uiScale?: number;
