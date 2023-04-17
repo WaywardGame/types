@@ -9,6 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "game/entity/action/Action";
+import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.NPCNearby, [ActionArgument.Undefined, ActionArgument.Integer32]], import("../../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [import("../../npc/NPC").default, (number | undefined)?]>;
+export interface INPCInteractUsable extends IActionUsable {
+    /**
+     * Whether this interaction is only usable when used directly — ie, via a dedicated UsableAction rather than in MoveTo
+     */
+    onlyDirect?: boolean;
+}
+declare const _default: Action<[ActionArgument.NPCNearby, [ActionArgument.Undefined, ActionArgument.Integer32]], import("../../Human").default<number>, void, INPCInteractUsable, [import("../../npc/NPC").default, (number | undefined)?]>;
 export default _default;

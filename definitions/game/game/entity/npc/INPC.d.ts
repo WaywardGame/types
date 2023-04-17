@@ -14,3 +14,7 @@ export type INPCConstructorOptions = Omit<IEntityConstructorOptions<NPCType>, "t
 export interface INPCOld {
     equipped?: Record<number, number>;
 }
+export declare enum ShipperNPCInteractType {
+    OpenContainer = 0,
+    ShipToIsland = 1
+}

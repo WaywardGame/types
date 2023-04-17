@@ -29,12 +29,17 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     texLightLevel: WebGLTexture;
     texExplored: WebGLTexture;
     private exploredMap;
+    /**
+     * Flag for marking that there are changes that need to be rendered in one or more tile layers
+     */
     private dirty;
     private dirtyTiles;
     private dirtyDoodads;
     private readonly dirtyDoodadUpdates;
     private readonly tileLayers;
     private readonly tileLayerMap;
+    private readonly tilesToFlush;
+    private readonly doodadsToFlush;
     private terrainLayer;
     private terrainOverLayer;
     private terrainDecorationsLayer;
@@ -53,7 +58,7 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
      * Note: You must call bind the texture before calling this
      */
     setExploredAlpha(x: number, y: number, alpha: Uint8Array): void;
-    updateDoodad(x: number, y: number, flushImmediate: boolean, { doodadDescription, doodadType, doodadInfo, doodadVariationX, doodadVariationY, terrainMasks }: IDoodadUpdate): void;
+    updateDoodad(x: number, y: number, flushTileImmediately: boolean, { doodadDescription, doodadType, doodadInfo, doodadVariationX, doodadVariationY, terrainMasks }: IDoodadUpdate): void;
     renderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFixedDepth: boolean, flags?: RenderLayerFlag): void;
     getDataIndex(x: number, y: number): number;
     setLayer(layer: TileLayer, dataIndex: number, tileAdaptation: TileAdaptor.ITileAdaptation): void;
@@ -69,7 +74,11 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
      * @returns True when there's more rendering to be done
      */
     ensureRendered({ min, max }: IBound3): boolean;
-    updateTile(x: number, y: number, flushImmediate?: boolean, debug?: boolean): void;
+    /**
+     * Processes pending tile/doodad updates
+     */
+    private processUpdates;
+    updateTile(x: number, y: number, flushTileImmediately?: boolean, debug?: boolean): void;
     private computeDoodad;
     private computeTilled;
     private computeDecorations;

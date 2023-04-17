@@ -79,7 +79,7 @@ export declare const actionDescriptionsSlow: {
         usable: true;
     }, [import("../../item/Item").default]>;
     118: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.Human], import("../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [import("../Human").default<number>]>;
-    125: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.NPCNearby, [import("game/entity/action/IAction").ActionArgument.Undefined, import("game/entity/action/IAction").ActionArgument.Integer32]], import("../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [import("../npc/NPC").default, (number | undefined)?]>;
+    125: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.NPCNearby, [import("game/entity/action/IAction").ActionArgument.Undefined, import("game/entity/action/IAction").ActionArgument.Integer32]], import("../Human").default<number>, void, import("game/entity/action/actions/NPCInteract").INPCInteractUsable, [import("../npc/NPC").default, (number | undefined)?]>;
     55: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.ItemInventory], import("../Human").default<number>, void, import("game/entity/action/actions/Offer").IOfferCanUse, [import("../../item/Item").default]>;
     31: import("./Action").Action<[import("game/entity/action/IAction").ActionArgument.ItemNearby], import("../Human").default<number>, void, {
         usable: true;

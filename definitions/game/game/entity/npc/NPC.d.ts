@@ -26,6 +26,7 @@ import { TileUpdateType } from "game/IGame";
 import type { IContainer, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type Tile from "game/tile/Tile";
+import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 export interface INPCEvents extends Events<Human> {
     /**
@@ -47,7 +48,8 @@ export default abstract class NPC extends Human<NPCType> {
     seen: number;
     weightCapacity: number;
     properties?: IProperties;
-    talked?: Set<string>;
+    talked?: Map<string, number>;
+    interactions?: Map<string, Set<number>>;
     private shouldSkipNextUpdate?;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
@@ -103,13 +105,25 @@ export default abstract class NPC extends Human<NPCType> {
      */
     removeAiType(ai: AiType): void;
     /**
-     * @returns true if this is the first time the NPC has been talked to
+     * Greets a human, if necessary, and sets the NPC as having been talked to them on the current turn.
+     * @returns The time since the NPC was last talked to, or false if the human has never talked to the NPC.
      */
-    talkTo(human: Human): boolean;
-    hasTalkedTo(human?: Human): boolean;
+    talkTo(human: Human): number | false;
+    /**
+     * @returns The time since the NPC was last talked to, or false if the human has never talked to the NPC.
+     */
+    hasTalkedTo(human?: Human): number | false;
+    /**
+     * @param timeSinceLastChat The time it's been since the human last chatted with this NPC, or false if it's the first time.
+     */
+    getGreeting(human: Human, timeSinceLastChat: number | false): Message | undefined;
     getDefaultInteraction(): number | undefined;
+    isAlreadyInteracting(human: Human, interactType?: number): boolean;
     canInteract(human: Human, interactType?: number): IActionUsable | IActionNotUsable;
     confirmInteract(human: Human, interactType?: number): Promise<boolean>;
+    /**
+     * Don't call this directly, it's for implementation. @see {@link NPCInteract}
+     */
     interact(action: IActionHandlerApi<Human>, interactType?: number): void;
     /**
      * Closes container dialogs

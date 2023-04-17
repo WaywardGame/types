@@ -33,6 +33,10 @@ export default class TileLayer {
     private readonly texTileSprites;
     private readonly inverseTileSpriteTextureSize;
     /**
+     * Flag for marking that there are changes that need to be rendered
+     */
+    dirty: boolean;
+    /**
      * Allow overriding the tile layer ticks, used for animation frames
      */
     ticks?: number;

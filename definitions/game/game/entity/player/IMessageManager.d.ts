@@ -16,6 +16,7 @@ import type Translation from "language/Translation";
 import type Message from "language/dictionary/Message";
 import type { IVector4 } from "utilities/math/Vector4";
 import type { IStringSection } from "utilities/string/Interpolator";
+export declare const CHAT_MESSAGE_MAX_LENGTH = 512;
 export declare enum Source {
     /**
      * Every message

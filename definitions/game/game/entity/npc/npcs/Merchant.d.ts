@@ -8,16 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
-import { ActionType } from "game/entity/action/IAction";
 import type Human from "game/entity/Human";
 import { AiType } from "game/entity/IEntity";
 import { EquipType } from "game/entity/IHuman";
+import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
+import { ActionType } from "game/entity/action/IAction";
 import type { INPCConstructorOptions } from "game/entity/npc/INPC";
 import NPC from "game/entity/npc/NPC";
 import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
+import Message from "language/dictionary/Message";
 export interface IMerchantBuyPrice {
     base: number;
     bonus: number;
@@ -32,7 +33,8 @@ export default class MerchantNPC extends NPC {
     getPublicContainer(): IContainer | undefined;
     getSellPrice(human: Human, item: Item): number | undefined;
     getBuyPrice(human: Human, item: Item): IMerchantBuyPrice | undefined;
-    canInteract(human: Human, interactType?: number | undefined): IActionUsable | IActionNotUsable;
+    getGreeting(human: Human, timeSinceLastChat: number | false): Message | undefined;
+    canInteract(human: Human): IActionUsable | IActionNotUsable;
     interact(action: IActionHandlerApi<Human>, interactType?: number | undefined): void;
     /**
      * Closes container dialogs

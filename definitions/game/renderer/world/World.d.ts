@@ -34,8 +34,8 @@ export default class World extends EventEmitter.Host<IWorldEvents> implements IS
     load(): void;
     suspendLayerUpdates(): void;
     resumeLayerUpdates(): void;
-    updateTile(tile: Tile, tileUpdateType: TileUpdateType, updateNeighbors?: boolean, flush?: boolean, skipFlowFieldUpdate?: boolean): void;
-    updateTileLayer(tile: Tile, updateNeighbors?: boolean, flush?: boolean): void;
+    updateTile(tile: Tile, tileUpdateType: TileUpdateType, updateNeighbors?: boolean, skipFlowFieldUpdate?: boolean): void;
+    updateTileLayer(tile: Tile, updateNeighbors: boolean | undefined, flushTileImmediately: boolean): void;
     startUpdateTileBatch(): void;
     endUpdateTileBatch(): void;
     serializeObject(_serializer: ISerializer): undefined;
