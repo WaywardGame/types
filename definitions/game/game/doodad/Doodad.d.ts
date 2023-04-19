@@ -9,8 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IEventEmitter } from "event/EventEmitter";
-import type { DisplayableDoodadType, DoodadTag, DoorOrientation, IDoodadDescription, IDoodadOptions, IHasBuilder } from "game/doodad/IDoodad";
-import type { DoodadTypeExtra } from "game/doodad/IDoodad";
+import type { DisplayableDoodadType, DoodadTag, DoodadTypeExtra, DoorOrientation, IDoodadDescription, IDoodadOptions, IHasBuilder } from "game/doodad/IDoodad";
 import { DoodadType, DoodadTypeGroup, GrowingStage } from "game/doodad/IDoodad";
 import { ActionType } from "game/entity/action/IAction";
 import type Creature from "game/entity/creature/Creature";
@@ -257,6 +256,7 @@ export default class Doodad extends Entity<IDoodadDescription, DoodadType, Dooda
     set durability(value: number);
     get durabilityMax(): number;
     set durabilityMax(value: number);
+    canInspect(human: Human): boolean;
     private processSpecials;
     /**
      * Check for items on top of lit/fire doodads, set them on fire

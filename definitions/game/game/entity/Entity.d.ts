@@ -10,30 +10,30 @@
  */
 import type { SfxType } from "audio/IAudio";
 import EventEmitter from "event/EventEmitter";
+import type { TileUpdateType } from "game/IGame";
+import { FireType } from "game/IGame";
 import type Doodad from "game/doodad/Doodad";
-import type Corpse from "game/entity/creature/corpse/Corpse";
-import type Creature from "game/entity/creature/Creature";
+import type EntityMovable from "game/entity/EntityMovable";
+import type EntityWithStats from "game/entity/EntityWithStats";
 import type Human from "game/entity/Human";
 import type { IEntityConstructorOptions, IEntityEvents } from "game/entity/IEntity";
 import { EntityType } from "game/entity/IEntity";
+import type Creature from "game/entity/creature/Creature";
+import type Corpse from "game/entity/creature/corpse/Corpse";
 import type NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
-import { FireType } from "game/IGame";
-import type { TileUpdateType } from "game/IGame";
 import type { IInspector } from "game/inspection/IInfoProvider";
 import type { IslandId } from "game/island/IIsland";
 import type Item from "game/item/Item";
 import type { IReferenceable, Reference } from "game/reference/IReferenceManager";
 import type { ITemperatureSource } from "game/temperature/ITemperature";
+import type Tile from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 import type { ISerializedTranslation } from "language/ITranslation";
 import type Translation from "language/Translation";
+import type { RenderSource, UpdateRenderFlag } from "renderer/IRenderer";
 import type { INotificationLocation, ItemNotifierType, StatNotificationType } from "renderer/notifier/INotifier";
 import type { IVector3 } from "utilities/math/IVector";
-import type EntityWithStats from "game/entity/EntityWithStats";
-import type Tile from "game/tile/Tile";
-import type EntityMovable from "game/entity/EntityMovable";
-import type { RenderSource, UpdateRenderFlag } from "renderer/IRenderer";
 import type { IVector4 } from "utilities/math/Vector4";
 export default abstract class Entity<DescriptionType = unknown, TypeType extends number = number, TagType = unknown, CounterType = unknown> extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, ITemperatureSource, INotificationLocation, IVector4 {
     abstract readonly entityType: EntityType;
@@ -102,6 +102,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     notifyStat(type: StatNotificationType, value: number): void;
     getProducedTemperature(): number | undefined;
     setName(renamed: string | ISerializedTranslation | undefined): void;
+    canInspect(human: Human): boolean;
     hasTag(tag: TagType): boolean;
     addTag(tag: TagType): void;
     removeTag(tag: TagType): void;

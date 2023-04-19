@@ -242,7 +242,8 @@ export declare enum PauseSource {
     PlayerMoveToIsland = 3,
     SyncGameState = 4,
     WebGlContextLost = 5,
-    MultiplayerConnect = 6
+    MultiplayerConnect = 6,
+    StartGame = 7
 }
 /**
  * For items and terrain that can decay, the temperature range that controls the rate of decay.

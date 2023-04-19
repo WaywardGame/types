@@ -189,7 +189,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     getAmbientColorNight(): [number, number, number];
     getAmbientColorDawn(): [number, number, number];
     getAmbientIntensity(): number;
-    getFogColor(): [x: number, y: number, z: number];
+    getFogColor(): [number, number, number];
     addOrUpdateOverlay(tile: Tile, overlay: IOverlayInfo): void;
     removeOverlay(tile: Tile, overlay: IOverlayInfo): void;
     shouldRender(): RenderFlag;

@@ -8,17 +8,33 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IIslandPort } from "game/island/IIsland";
 import type Island from "game/island/Island";
+import type Button from "ui/component/Button";
 import Component from "ui/component/Component";
-import IslandPortsDropdown from "ui/component/dropdown/IslandPortsDropdown";
 import Input from "ui/component/Input";
-import { LabelledRow } from "ui/component/LabelledRow";
 import CanvasDialog from "ui/screen/screens/game/component/CanvasDialog";
 import type { DialogId } from "ui/screen/screens/game/Dialogs";
 import type { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 export interface IIslandDialogOptions {
     allowRename?: boolean;
+}
+export declare enum IslandsDialogClasses {
+    Main = "game-dialog-islands",
+    Drawer = "game-dialog-islands-drawer",
+    IslandTitle = "game-dialog-islands-title",
+    Info = "game-dialog-islands-info",
+    Ports = "game-dialog-islands-ports",
+    Port = "game-dialog-islands-port",
+    PortTitle = "game-dialog-islands-port-title",
+    PortButton = "game-dialog-islands-port-button",
+    NoPort = "game-dialog-islands-port-none"
+}
+export interface IIslandsDialogPort {
+    port?: IIslandPort;
+    wrapper: Component;
+    button: Button;
 }
 export default abstract class IslandsDialog extends CanvasDialog {
     private readonly options;
@@ -27,8 +43,8 @@ export default abstract class IslandsDialog extends CanvasDialog {
     protected lastSailAwayCheckPosition?: Vector2;
     readonly title: Input;
     readonly info: Component<HTMLElement>;
-    protected readonly portDropdown: IslandPortsDropdown;
-    protected readonly portDropdownLabelContainer: LabelledRow;
+    readonly portsWrapper: Component<HTMLElement>;
+    readonly ports: IIslandsDialogPort[];
     constructor(dialogId: DialogId, options: IIslandDialogOptions);
     protected get island(): Island | undefined;
     private addMouseMoveListener;
@@ -47,6 +63,8 @@ export default abstract class IslandsDialog extends CanvasDialog {
     protected onDown(): boolean;
     private moveSelectedIsland;
     protected onChangedSelectedIsland(animate?: boolean): void;
+    private initializePortComponent;
+    protected abstract createExecuteButton(port?: IIslandPort): Button | undefined;
     protected resetViewZoom(): void;
     protected resetViewOffset(islandPosition?: IVector2): void;
     protected canHideDrawer(): boolean;

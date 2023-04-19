@@ -13,12 +13,15 @@ import { InfoProvider } from "game/inspection/InfoProvider";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 export default class CreatureTamedInfoProvider extends InfoProvider {
     private readonly creature;
-    private message;
-    private ai?;
+    private readonly tamed;
+    private readonly mood;
+    private readonly tameTime;
+    private readonly ai;
+    private readonly pet;
+    private readonly milk;
     constructor(creature: Creature);
     getClass(): string[];
     hasContent(): boolean;
-    get(): (import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue)[];
-    onTickEnd(): void;
+    get(): (LabelledValue | import("game/inspection/InfoProvider").SimpleInfoProvider)[];
     private getHappinessMessage;
 }

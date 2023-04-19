@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { EventBus } from "event/EventBuses";
 import EventEmitter from "event/EventEmitter";
 import type { Emitter, EmitterOrBus, Event, Handler } from "event/EventManager";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
@@ -71,6 +72,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     static multiTextParagraph: string;
     private static uniqueInitializationId;
     static create(...translations: TranslationGenerator[]): SimpleInfoProvider;
+    static dynamic<T>(observer: InfoProvider.Observer<T>, supplier: (value: T) => InfoProvider | undefined): SimpleInfoProvider;
     static of(...classes: string[]): SimpleInfoProvider;
     static title(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
     static subtitle(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
@@ -98,12 +100,20 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     setSynchronous(): this;
     init(): void;
     private readonly refreshEvents;
+    subscribeRefreshOnTick(observer: InfoProvider.Observer<any>): this;
+    subscribeRefreshOnTick(predicate: (...params: Parameters<Handler<EventBus.Game, "tickEnd">>) => boolean): this;
     /**
      * Marks this info provider as to subscribe refresh events to the given host.
      * Note: Any existing initialized components will not be retroactively subscribed.
      * @param predicate A predicate function for whether or not this info provider should actually refresh when the event is hit
      */
     subscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...args: [...events: K[], predicate: (...params: Parameters<Handler<E, K>>) => boolean]): this;
+    /**
+     * Marks this info provider as to subscribe refresh events to the given host.
+     * Note: Any existing initialized components will not be retroactively subscribed.
+     * @param observer An observer that will only trigger a refresh if the value has changed
+     */
+    subscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...args: [...events: K[], observer: InfoProvider.Observer<any>]): this;
     /**
      * Marks this info provider as to subscribe refresh events to the given host.
      * Note: Any existing initialized components will not be retroactively subscribed.
@@ -134,6 +144,14 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
         fullInit(): void;
     };
     protected initChildTextComponent(text: TranslationGenerator): Text;
+}
+export declare namespace InfoProvider {
+    class Observer<T> {
+        private readonly _observe;
+        value: T;
+        constructor(_observe: () => T);
+        observe(): boolean;
+    }
 }
 export declare class SimpleInfoProvider extends InfoProvider {
     private readonly classes;

@@ -194,6 +194,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      * Item groups of this type in the container will provide skill bonuses to adjacent players.
      */
     containedItemGroupProvidesSkill?: IProvidesSkill;
+    alwaysInspectable?: true;
 }
 export interface IItemStackRegion {
     xMin?: number;
