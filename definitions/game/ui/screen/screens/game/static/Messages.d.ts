@@ -55,6 +55,7 @@ export default class Messages extends QuadrantComponent {
     private readonly chatSentHistory;
     private chatHistoryIndex;
     private pushedCurrentToHistory;
+    private wasInTopQuadrant;
     constructor();
     getPins(): Stream<IPinnedMessage>;
     getMessageTimestampMode(): MessageTimestamp;
@@ -122,7 +123,7 @@ export default class Messages extends QuadrantComponent {
     /**
      * Changes the message filter
      */
-    setFilter(filterName?: string): void;
+    setFilter(filterName?: string, skipRefresh?: boolean): void;
     getFilter(): string | undefined;
     private refreshLog;
     private onShowDialog;

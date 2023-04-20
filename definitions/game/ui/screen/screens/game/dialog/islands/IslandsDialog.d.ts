@@ -61,6 +61,7 @@ export default abstract class IslandsDialog extends CanvasDialog {
     protected onRight(): boolean;
     protected onUp(): boolean;
     protected onDown(): boolean;
+    protected onSubmit(): boolean;
     private moveSelectedIsland;
     protected onChangedSelectedIsland(animate?: boolean): void;
     private initializePortComponent;
