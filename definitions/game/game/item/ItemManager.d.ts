@@ -28,7 +28,7 @@ import { WorldZ } from "game/WorldZ";
 import Message from "language/dictionary/Message";
 import type TranslationImpl from "language/impl/TranslationImpl";
 import type { ListEnder } from "language/ITranslation";
-import Translation from "language/Translation";
+import Translation, { Article } from "language/Translation";
 import Vector3 from "utilities/math/Vector3";
 import type { Random } from "utilities/random/Random";
 export interface IItemManagerEvents {
@@ -96,7 +96,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     static isItemExtra(type: number): type is ItemTypeExtra;
     static getGroupItems(itemGroup: ItemType | ItemTypeGroup): Set<ItemType>;
     private static getGroupItemsWithoutCache;
-    static getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: false | "definite" | "indefinite", count?: number): Translation;
+    static getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: Article, count?: number): Translation;
     static getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     /**
      * Returns the "processed" weight of the given item.
@@ -190,7 +190,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     isItemExtra(type: number): type is ItemTypeExtra;
     getGroupItems(itemGroup: ItemType | ItemTypeGroup): Set<ItemType>;
-    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: false | "definite" | "indefinite", count?: number): Translation;
+    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: Article, count?: number): Translation;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     getGroups(itemType: ItemType): ItemTypeGroup[];
     getPlayerFromInventoryContainer(containable: IContainable): Player | undefined;
@@ -269,16 +269,16 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     capWeightOfItems(createdItems: Item[], itemWeight: number): void;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup): Translation;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number): Translation;
-    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, article: false | "definite" | "indefinite"): Translation;
-    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number, article: false | "definite" | "indefinite"): Translation;
-    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count?: number, article?: false | "definite" | "indefinite"): Translation;
+    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, article: Article): Translation;
+    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number, article: Article): Translation;
+    getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count?: number, article?: Article): Translation;
     getItemTypeListTranslation(itemTypes: Array<ItemType | ItemTypeGroup>): TranslationImpl;
     /**
      * Maps each item in the given array to its name translation.
      * @param article Whether the item name translation should include an article
      * @param formatter A formatting translation that should be used for each item translation
      */
-    getItemTranslations(items: Item[], article?: false | "definite" | "indefinite", formatter?: Translation): TranslationImpl[];
+    getItemTranslations(items: Item[], article?: Article, formatter?: Translation): TranslationImpl[];
     /**
      * Formats a list translation out of an array of items.
      * @param listEnder The way the list should end (ie `and`, `or`, etc)

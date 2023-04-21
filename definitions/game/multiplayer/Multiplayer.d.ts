@@ -150,6 +150,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     updatePlayerId(oldPid: number, newPid: number): void;
     suppressSyncChecks(suppress: boolean): void;
     syncGameState(): void;
+    isKeepAliveTimeoutPaused(): boolean;
     pauseKeepAliveTimeouts(): void;
     resumeKeepAliveTimeouts(): void;
     updateGlobalServerDirectory(): void;

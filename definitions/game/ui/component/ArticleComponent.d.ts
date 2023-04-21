@@ -9,6 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Component from "ui/component/Component";
-export declare class Article extends Component {
+export declare class ArticleComponent extends Component {
     constructor();
 }

@@ -14,6 +14,7 @@ import type { CreatureType } from "game/entity/creature/ICreature";
 import { ObjectManager } from "game/ObjectManager";
 import type Tile from "game/tile/Tile";
 import type { TextContext } from "language/ITranslation";
+import { Article } from "language/Translation";
 export interface ICorpseManagerEvents {
     create(corpse: Corpse): any;
     remove(corpse: Corpse): any;
@@ -23,7 +24,7 @@ export default class CorpseManager extends ObjectManager<Corpse, ICorpseManagerE
     create(type: CreatureType, tile: Tile, decay?: number, aberrant?: boolean, name?: string, qualityBonus?: number, respawned?: number): Corpse | undefined;
     updateAll(): void;
     remove(corpse: Corpse): void;
-    getName(typeOrCorpse: CreatureType | Corpse, article?: false | "definite" | "indefinite", count?: number, showCount?: boolean): import("../../../../language/impl/TranslationImpl").default;
-    getCorpseTranslations(corpses: Corpse[], article?: false | "definite" | "indefinite", context?: TextContext): Stream<import("../../../../language/impl/TranslationImpl").default>;
-    getCorpseListTranslation(corpses: Corpse[], article?: false | "definite" | "indefinite", context?: TextContext): import("../../../../language/impl/TranslationImpl").default;
+    getName(typeOrCorpse: CreatureType | Corpse, article?: Article, count?: number, showCount?: boolean): import("../../../../language/impl/TranslationImpl").default;
+    getCorpseTranslations(corpses: Corpse[], article?: Article, context?: TextContext): Stream<import("../../../../language/impl/TranslationImpl").default>;
+    getCorpseListTranslation(corpses: Corpse[], article?: Article, context?: TextContext): import("../../../../language/impl/TranslationImpl").default;
 }

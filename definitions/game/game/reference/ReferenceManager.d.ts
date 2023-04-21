@@ -33,14 +33,15 @@ export default class ReferenceManager {
     constructor(game: Game);
     create(): number;
     reset(): void;
-    getList(type: ReferenceType, gameIsland?: Island): import("../entity/creature/corpse/CorpseManager").default | import("../entity/creature/CreatureManager").default | import("../doodad/DoodadManager").default | import("../item/ItemManager").default | import("../entity/npc/NPCManager").default | import("../tile/TileEventManager").default | Player[] | import("game/entity/IHuman").EquipType[] | readonly SkillType[] | readonly Milestone[] | IterableIterator<Island> | readonly Stat[] | readonly ItemType[] | (string | ActionType)[];
+    getList(type: ReferenceType, gameIsland?: Island): import("../entity/creature/corpse/CorpseManager").default | import("../entity/creature/CreatureManager").default | import("../doodad/DoodadManager").default | import("../item/ItemManager").default | import("../entity/npc/NPCManager").default | import("../tile/TileEventManager").default | Player[] | import("game/entity/IHuman").EquipType[] | readonly Milestone[] | readonly SkillType[] | IterableIterator<Island> | readonly Stat[] | readonly ItemType[] | (string | ActionType)[];
     get(thing: Item): Reference<ReferenceType.Item> | undefined;
     get(thing: Doodad): Reference<ReferenceType.Doodad> | undefined;
     get(thing: Creature): Reference<ReferenceType.Creature> | undefined;
     get(thing: Referenceable): Reference | undefined;
     getReferenceType(thing: Value<IReferenceTypeMap>): ReferenceType;
-    resolve<REFTYPE extends ReferenceType>(reference?: Reference<REFTYPE>): IReferenceTypeMap[REFTYPE] | undefined;
-    resolve(reference?: Reference): IReferenceTypeMap[ReferenceType] | undefined;
+    resolve<REFTYPE extends ReferenceType>(reference?: Reference<REFTYPE>, gameIsland?: Island): IReferenceTypeMap[REFTYPE] | undefined;
+    resolve(reference?: Reference, gameIsland?: Island): IReferenceTypeMap[ReferenceType] | undefined;
+    private resolveInternal;
     inspect<REFTYPE extends ReferenceType>(reference: Reference<REFTYPE>, ...args: any[]): Inspection<any> | undefined;
     inspect(reference: Reference, ...args: any[]): Inspection<any> | undefined;
     tooltip(reference: Reference, initializer?: (tooltip: Tooltip, handler: ReferenceTooltipHandler) => any): (tooltip: Tooltip) => Promise<void>;

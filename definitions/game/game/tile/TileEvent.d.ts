@@ -19,6 +19,7 @@ import { FireStage } from "game/tile/events/IFire";
 import type { ITileEventDescription } from "game/tile/ITileEvent";
 import { TileEventType } from "game/tile/ITileEvent";
 import type Tile from "game/tile/Tile";
+import type { Article } from "language/Translation";
 import type { IVector3 } from "utilities/math/IVector";
 export interface ITileEventEvents extends IEntityMovableEvents {
     /**
@@ -63,7 +64,7 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
     get tile(): Tile;
     toString(): string;
     protected getDescription(): ITileEventDescription | undefined;
-    getName(article?: false | "definite" | "indefinite", count?: number): import("../../language/impl/TranslationImpl").default;
+    getName(article?: Article, count?: number): import("../../language/impl/TranslationImpl").default;
     getProducedTemperature(): number | undefined;
     updateFire(tile: Tile): void;
     protected updateTile(fromTile: Tile, toTile: Tile): boolean;

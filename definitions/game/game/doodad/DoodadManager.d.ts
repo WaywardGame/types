@@ -18,6 +18,7 @@ import { ObjectManager } from "game/ObjectManager";
 import type { TerrainType } from "game/tile/ITerrain";
 import Tile from "game/tile/Tile";
 import type { WorldZ } from "game/WorldZ";
+import type { Article } from "language/Translation";
 import Translation from "language/Translation";
 export interface IDoodadManagerEvents {
     /**
@@ -55,7 +56,7 @@ export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerE
      */
     static isDoodadExtra(type: number): type is DoodadTypeExtra;
     static getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
-    static getDoodadTypeGroupName(doodadType: DoodadType | DoodadTypeGroup, article?: false | "definite" | "indefinite", count?: number): Translation;
+    static getDoodadTypeGroupName(doodadType: DoodadType | DoodadTypeGroup, article?: Article, count?: number): Translation;
     /**
      * Note: This can be called multiple times in the same game depending on loading/unloading of islands
      */

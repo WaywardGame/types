@@ -9,23 +9,23 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
-import type { BiomeTypes } from "game/biome/IBiome";
-import type { ITemplateBiomeOptions } from "game/biome/template/Template";
-import type Doodad from "game/doodad/Doodad";
-import DoodadManager from "game/doodad/DoodadManager";
-import CorpseManager from "game/entity/creature/corpse/CorpseManager";
-import Creature from "game/entity/creature/Creature";
-import CreatureManager from "game/entity/creature/CreatureManager";
-import type { IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "game/entity/creature/ICreature";
-import FlowFieldManager from "game/entity/flowfield/FlowFieldManager";
-import Human from "game/entity/Human";
-import type { SkillType } from "game/entity/IHuman";
-import NPCManager from "game/entity/npc/NPCManager";
 import type { Game } from "game/Game";
 import type { IGameOld } from "game/IGame";
 import { TickFlag, TileUpdateType } from "game/IGame";
 import { Quality } from "game/IObject";
-import type { IIslandEvents, IIslandLoadOptions, IIslandPort, IMobCheck, ISeeds, IslandId, IWaterContamination, IWaterFill, IWell } from "game/island/IIsland";
+import type { BiomeTypes } from "game/biome/IBiome";
+import type { ITemplateBiomeOptions } from "game/biome/template/Template";
+import type Doodad from "game/doodad/Doodad";
+import DoodadManager from "game/doodad/DoodadManager";
+import Human from "game/entity/Human";
+import type { SkillType } from "game/entity/IHuman";
+import Creature from "game/entity/creature/Creature";
+import CreatureManager from "game/entity/creature/CreatureManager";
+import type { IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "game/entity/creature/ICreature";
+import CorpseManager from "game/entity/creature/corpse/CorpseManager";
+import FlowFieldManager from "game/entity/flowfield/FlowFieldManager";
+import NPCManager from "game/entity/npc/NPCManager";
+import type { IIslandEvents, IIslandLoadOptions, IIslandPort, IMobCheck, ISeeds, IWaterContamination, IWaterFill, IWell, IslandId } from "game/island/IIsland";
 import { WaterType } from "game/island/IIsland";
 import type { ILiquidGather } from "game/item/IItem";
 import type { IRequirementInfo } from "game/item/IItemManager";
@@ -44,12 +44,12 @@ import TimeManager from "game/time/TimeManager";
 import Translation from "language/Translation";
 import World from "renderer/world/World";
 import type { IPostSerializeCallback, IPreSerializeCallback, ISerializer } from "save/serializer/ISerializer";
+import type { IVersionInfo } from "utilities/Version";
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
+import type { Random } from "utilities/random/Random";
 import type { LegacySeededGenerator } from "utilities/random/generators/LegacySeededGenerator";
 import type { PCGSeededGenerator } from "utilities/random/generators/PCGSeededGenerator";
-import type { Random } from "utilities/random/Random";
-import type { IVersionInfo } from "utilities/Version";
 export interface IIslandDetails {
     seed: number;
     biomeType: BiomeTypes;
@@ -113,7 +113,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     private _world;
     modifiersCollection?: IslandModifiersCollection;
     details?: IIslandDetails;
-    ranUpgrades: boolean;
+    private _ranUpgrade;
     private serializeObjectStats?;
     constructor(game?: Game, position?: IVector2, seed?: number, mapSize?: number);
     toString(): string;
@@ -146,6 +146,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     private getNameDescriptor;
     private getNameNoun;
     getNeighboringIslands(): Island[];
+    ensureUpgraded(isSynced: boolean): void;
     /**
      * Loads the island
      */

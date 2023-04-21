@@ -21,7 +21,7 @@ import { TileUpdateType } from "game/IGame";
 import type { IObject } from "game/IObject";
 import type Item from "game/item/Item";
 import type Tile from "game/tile/Tile";
-import Translation from "language/Translation";
+import Translation, { Article } from "language/Translation";
 import type { IUnserializedCallback } from "save/serializer/ISerializer";
 import { Direction } from "utilities/math/Direction";
 import type { IVector3 } from "utilities/math/IVector";
@@ -72,7 +72,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      * - `creature.getName(false)` // "acid spitter demon"
      * - `creature.getName(undefined, 3)` // "acid spitter demons"
      */
-    getName(article?: false | "definite" | "indefinite", count?: number): Translation;
+    getName(article?: Article, count?: number): Translation;
     protected getDescription(): ICreatureDescription | undefined;
     hasAi(aiType: AiType): boolean;
     isHidden(): boolean;

@@ -20,6 +20,7 @@ import type { IObject } from "game/IObject";
 import { ItemType } from "game/item/IItem";
 import type Tile from "game/tile/Tile";
 import type Translation from "language/Translation";
+import type { Article } from "language/Translation";
 import type { IVector3 } from "utilities/math/IVector";
 export interface ICorpseEvents extends IEntityEvents {
     /**
@@ -69,7 +70,7 @@ export default class Corpse extends Entity<ICorpseDescription, CreatureType> imp
      * - `corpse.getName(false)` // "acid spitter demon"
      * - `corpse.getName(undefined, 3)` // "acid spitter demons"
      */
-    getName(article?: false | "definite" | "indefinite", count?: number): Translation;
+    getName(article?: Article, count?: number): Translation;
     protected getDescription(): ICorpseDescription | undefined;
     creatureDescription(): ICreatureDescription | undefined;
     isValid(): boolean;

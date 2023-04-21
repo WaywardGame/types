@@ -33,6 +33,7 @@ import MagicalPropertyManager from "game/magic/MagicalPropertyManager";
 import type { IHasInsulation, TempType } from "game/temperature/ITemperature";
 import { FireStage } from "game/tile/events/IFire";
 import type Tile from "game/tile/Tile";
+import { Article } from "language/Translation";
 import type { IUnserializedCallback } from "save/serializer/ISerializer";
 import type { IRGB } from "utilities/Color";
 import type { Direction } from "utilities/math/Direction";
@@ -131,7 +132,7 @@ export default class Doodad extends Entity<IDoodadDescription, DoodadType, Dooda
      * - `doodad.getName(false)` // "stone furnace"
      * - `doodad.getName(undefined, 3)` // "stone furnaces"
      */
-    getName(article?: false | "definite" | "indefinite", count?: number): import("../../language/impl/TranslationImpl").default;
+    getName(article?: Article, count?: number): import("../../language/impl/TranslationImpl").default;
     protected getDescription(): IDoodadDescription | undefined;
     updateTile(tileUpdateType: TileUpdateType): void;
     changeType(doodadType: DoodadType): void;

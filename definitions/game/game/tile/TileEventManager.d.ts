@@ -15,6 +15,7 @@ import { TileEventType } from "game/tile/ITileEvent";
 import type Tile from "game/tile/Tile";
 import TileEvent from "game/tile/TileEvent";
 import type { TextContext } from "language/ITranslation";
+import { Article } from "language/Translation";
 import type { IVector3 } from "utilities/math/IVector";
 export interface ITileManagerEvents {
     /**
@@ -60,7 +61,7 @@ export default class TileEventManager extends ObjectManager<TileEvent, ITileMana
      */
     createBlood(origin: IVector3): boolean;
     containsDamagingTileEvents(events: TileEvent[] | undefined): boolean;
-    getName(typeOrEvent: CreatureType | TileEvent, article?: false | "definite" | "indefinite", count?: number, showCount?: boolean): import("../../language/impl/TranslationImpl").default;
-    getEventTranslations(events: TileEvent[], article?: false | "definite" | "indefinite", context?: TextContext): Stream<import("../../language/impl/TranslationImpl").default>;
-    getEventListTranslation(events: TileEvent[], article?: false | "definite" | "indefinite", context?: TextContext): import("../../language/impl/TranslationImpl").default;
+    getName(typeOrEvent: CreatureType | TileEvent, article?: Article, count?: number, showCount?: boolean): import("../../language/impl/TranslationImpl").default;
+    getEventTranslations(events: TileEvent[], article?: Article, context?: TextContext): Stream<import("../../language/impl/TranslationImpl").default>;
+    getEventListTranslation(events: TileEvent[], article?: Article, context?: TextContext): import("../../language/impl/TranslationImpl").default;
 }

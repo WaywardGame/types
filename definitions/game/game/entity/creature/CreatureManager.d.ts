@@ -17,6 +17,7 @@ import EntityManager from "game/entity/EntityManager";
 import type Human from "game/entity/Human";
 import { MoveType } from "game/entity/IEntity";
 import Tile from "game/tile/Tile";
+import type { Article } from "language/Translation";
 import type { IVector3 } from "utilities/math/IVector";
 export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> {
     /**
@@ -42,8 +43,8 @@ export default class CreatureManager extends EntityManager<Creature> {
     get combatStrength(): CombatStrengthManager;
     static generateLookups(): void;
     load(): void;
-    static getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: false | "definite" | "indefinite"): import("../../../language/impl/TranslationImpl").default;
-    getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: false | "definite" | "indefinite"): import("../../../language/impl/TranslationImpl").default;
+    static getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: Article): import("../../../language/impl/TranslationImpl").default;
+    getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: Article): import("../../../language/impl/TranslationImpl").default;
     getHappinessLevel(human: Human, creature: Creature, bonus?: number): number;
     /**
      * Spawns a creature.
