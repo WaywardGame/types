@@ -20,7 +20,7 @@ import type { Stat } from "game/entity/IStats";
 import type { IDecayTemperatureRange } from "game/IGame";
 import type { IObjectDescription, Quality } from "game/IObject";
 import type { IslandId } from "game/island/IIsland";
-import type { IAddToContainerOptions } from "game/item/IItemManager";
+import type { IMoveItemOptions } from "game/item/IItemManager";
 import type Item from "game/item/Item";
 import type Recipe from "game/item/recipe/Recipe";
 import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
@@ -289,8 +289,8 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     displayItem?: SupplierOr<DisplayableItemType | undefined, [Item]>;
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
-    onContainerItemAdd?(container: Item & IContainer, item: Item): void;
-    onContainerItemRemove?(container: Item & IContainer, item: Item): void;
+    onContainerItemAdd?(container: Item & IContainer, items: Item[]): void;
+    onContainerItemRemove?(container: Item & IContainer, items: Item[]): void;
     onCreate?(item: Item): void;
     onChangeInto?(item: Item, fromItemType: ItemType): void;
 }
@@ -449,7 +449,7 @@ export interface IMoveToTileOptions {
     toTile: Tile;
     toTileApplyPlayerOffset?: boolean;
     toContainer?: IContainer;
-    toContainerOptions?: IAddToContainerOptions;
+    toContainerOptions?: IMoveItemOptions;
     beforeMovement?: IMoveToTileBeforeMovementOptions;
     extinguishTorches?: boolean;
     /**

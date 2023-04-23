@@ -300,7 +300,7 @@ export default class Doodad extends Entity<IDoodadDescription, DoodadType, Dooda
      * @param item The item that is being added to the bookcase.
      * @param add True if adding score, false if you are substracting.
      */
-    updateBookcase(item: Item, add: boolean): void;
+    updateBookcase(items: Item[], add: boolean): void;
     /**
      * Determines which graphic to show based on how full the bookcase is with books/text.
      * @param item set to true if DisplayableItemType is to be returned.

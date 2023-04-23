@@ -31,7 +31,7 @@ export default class TilePositionInspection extends InspectionsHandler {
     protected onTileEventMove(tileEvent: TileEvent): void;
     protected onTileEventCreate(_: any, tileEvent: TileEvent): void;
     protected onItemCreate(_: any, item: Item): void;
-    protected onItemMove(_: any, _item: Item, containerFrom: IContainer | undefined, _containerFromTile: Tile | undefined, containerTo: IContainer): void;
+    protected onItemMove(_: any, _items: Item[], containerFrom: IContainer | undefined, _containerFromTile: Tile | undefined, containerTo: IContainer): void;
     protected onCorpseCreate(_: any, corpse: Corpse): void;
     protected onDoodadCreate(_: any, doodad: Doodad): void;
     private updateInspectionsForEntity;

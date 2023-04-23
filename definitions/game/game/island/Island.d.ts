@@ -15,7 +15,6 @@ import { TickFlag, TileUpdateType } from "game/IGame";
 import { Quality } from "game/IObject";
 import type { BiomeTypes } from "game/biome/IBiome";
 import type { ITemplateBiomeOptions } from "game/biome/template/Template";
-import type Doodad from "game/doodad/Doodad";
 import DoodadManager from "game/doodad/DoodadManager";
 import Human from "game/entity/Human";
 import type { SkillType } from "game/entity/IHuman";
@@ -25,8 +24,9 @@ import type { IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "game/enti
 import CorpseManager from "game/entity/creature/corpse/CorpseManager";
 import FlowFieldManager from "game/entity/flowfield/FlowFieldManager";
 import NPCManager from "game/entity/npc/NPCManager";
-import type { IIslandEvents, IIslandLoadOptions, IIslandPort, IMobCheck, ISeeds, IWaterContamination, IWaterFill, IWell, IslandId } from "game/island/IIsland";
+import type { IIslandEvents, IIslandLoadOptions, IMobCheck, ISeeds, IWaterContamination, IWaterFill, IWell, IslandId } from "game/island/IIsland";
 import { WaterType } from "game/island/IIsland";
+import { PortManager } from "game/island/Port";
 import type { ILiquidGather } from "game/item/IItem";
 import type { IRequirementInfo } from "game/item/IItemManager";
 import ItemManager from "game/item/ItemManager";
@@ -69,9 +69,12 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly flowFieldManager: FlowFieldManager;
     readonly items: ItemManager;
     readonly npcs: NPCManager;
+    readonly ports: PortManager;
     readonly temperature: TemperatureManager;
     readonly tileEvents: TileEventManager;
     readonly time: TimeManager;
+    saveVersion: string;
+    saveBuildTime?: number;
     biomeType: BiomeTypes;
     civilizationScore: number;
     civilizationScoreTiles: Record<number, number>;
@@ -81,11 +84,9 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     name?: string;
     position: IVector2;
     readonly mapSize: number;
-    readonly ports: Map<number, IIslandPort>;
     readonly treasureMaps: DrawnMap[];
     readonly wellData: SaferNumberIndexedObject<IWell>;
     referenceId?: number;
-    saveVersion: string;
     templateBiomeOptions: ITemplateBiomeOptions | undefined;
     tileContainers: ITileContainer[];
     version: string;
@@ -263,6 +264,4 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * Returns the type of liquid that can be gathered from the tile
      */
     getLiquidGatherType(terrainType: TerrainType, terrainDescription: ITerrainDescription): keyof ILiquidGather | undefined;
-    addIslandPort(doodad: Doodad): void;
-    removeIslandPort(doodad: Doodad): boolean;
 }

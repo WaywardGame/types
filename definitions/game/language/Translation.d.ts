@@ -21,7 +21,7 @@ import { EquipSlotTranslation, MiscTranslation } from "language/dictionary/Misc"
 import type UiTranslation from "language/dictionary/UiTranslation";
 import type { DictionaryEntryEnums } from "language/DictionaryMap";
 import TranslationImpl from "language/impl/TranslationImpl";
-import type { ISerializedTranslation } from "language/ITranslation";
+import type { ISerializedTranslation, TranslationArg } from "language/ITranslation";
 import { formatListTranslation } from "language/segment/FormatListSegment";
 import ITranslationSorter from "language/utility/TranslationSorter";
 import type { IStringSection } from "utilities/string/Interpolator";
@@ -117,6 +117,8 @@ declare module Translation {
     const damage: (damageTypes: ArrayOr<DamageType>, colorize?: boolean, reformatter?: TranslationImpl | ((type: DamageType) => Translation) | undefined) => TranslationImpl;
     function growthStage(stage: GrowingStage, spores?: boolean): TranslationImpl;
     function growthStage(stage?: GrowingStage, spores?: boolean): TranslationImpl | undefined;
+    function merge(...content: TranslationArg[]): TranslationImpl;
+    function mergeSpaced(...content: TranslationArg[]): TranslationImpl;
     const getString: typeof TranslationImpl.getString;
     const resolve: typeof TranslationImpl.resolve;
     function colorizeQuality(quality: Quality | string | undefined): Translation;
@@ -147,5 +149,6 @@ declare module Translation {
     function reformatSingularNoun(article: Article): Translation;
     function reformatSingularNoun(count: number, article: Article): Translation;
     function reformatSingularNoun(count?: number | Article, article?: Article): Translation;
+    function upgrade(translation: ISerializedTranslation, id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number): void;
 }
 export default Translation;

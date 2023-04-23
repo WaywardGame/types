@@ -11,6 +11,7 @@
 import type Stream from "@wayward/goodstream";
 import type Human from "game/entity/Human";
 import type Island from "game/island/Island";
+import type Dictionary from "language/Dictionary";
 import type { ISerializedTranslation, TranslationArg } from "language/ITranslation";
 import type Translation from "language/Translation";
 import type Message from "language/dictionary/Message";
@@ -127,6 +128,7 @@ export interface IMessageManager {
      * Signal that the message was sent to everyone
      */
     sentToAll(sentToAll?: boolean): this;
+    upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number): this;
 }
 export interface IMessageHistoryItem {
     id: number;

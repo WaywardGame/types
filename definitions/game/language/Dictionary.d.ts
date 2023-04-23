@@ -118,6 +118,7 @@ declare enum Dictionary {
     UsableActionType = 106,
     Website = 107,
     WeightStatus = 108,
-    WorldLayer = 109
+    WorldLayer = 109,
+    Region = 110
 }
 export default Dictionary;

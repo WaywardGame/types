@@ -188,8 +188,8 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      */
     getAssociatedItem?(doodad: Doodad): ItemType | ItemTypeExtra | undefined;
     getVariation?(island: Island, tile: Tile, doodad: Doodad | undefined, existingVariationX: number, existingVariationY: number): [number, number] | undefined;
-    onContainerItemAdd?(container: Doodad & IContainer, item: Item): void;
-    onContainerItemRemove?(container: Doodad & IContainer, item: Item): void;
+    onContainerItemAdd?(container: Doodad & IContainer, items: Item[]): void;
+    onContainerItemRemove?(container: Doodad & IContainer, items: Item[]): void;
     /**
      * Item groups of this type in the container will provide skill bonuses to adjacent players.
      */

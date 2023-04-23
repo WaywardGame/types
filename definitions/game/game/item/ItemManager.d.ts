@@ -16,9 +16,9 @@ import Human from "game/entity/Human";
 import type NPC from "game/entity/npc/NPC";
 import type Player from "game/entity/player/Player";
 import { Quality } from "game/IObject";
-import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IMoveToTileOptions, IRecipe } from "game/item/IItem";
+import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IRecipe } from "game/item/IItem";
 import { ContainerType, CraftResult, ItemType, ItemTypeExtra, ItemTypeGroup } from "game/item/IItem";
-import type { IAddToContainerOptions, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IRequirementInfo } from "game/item/IItemManager";
+import type { IMoveItemOptions, IAddToContainerResult, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IRequirementInfo } from "game/item/IItemManager";
 import { ContainerReferenceSource, CraftStatus, ICraftResultChances, WeightType } from "game/item/IItemManager";
 import Item from "game/item/Item";
 import { ObjectManager } from "game/ObjectManager";
@@ -34,29 +34,32 @@ import type { Random } from "utilities/random/Random";
 export interface IItemManagerEvents {
     create(item: Item): any;
     remove(item: Item): any;
-    canMoveItem(human: Human | undefined, item: Item, toContainer: IContainer): boolean | undefined;
-    canMoveItems(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType: ItemType | undefined, ofQuality: Quality | undefined): boolean | undefined;
     /**
-     * Called when an item is removed from a container.
-     * @param item The item object.
+     * Called before moving items to another container
+     */
+    canMoveItems(human: Human | undefined, itemsToMove: Item[], fromContainer: IContainer | undefined, toContainer: IContainer, options?: IMoveItemOptions): boolean | undefined;
+    /**
+     * Called when items are removed from a container.
+     * @param items The items.
      * @param container The container object the item was removed from.
      * @param containerTile The tile of that container when the remove occurred.
      */
-    containerItemRemove(item: Item, container: IContainer | undefined, containerTile: Tile | undefined): any;
+    containerItemRemove(items: Item[], container: IContainer | undefined, containerTile: Tile | undefined): any;
     /**
-     * Called when an item is moved from one container to another.
-     * @param item The item object.
-     * @param containerFrom The container object the item was moved from. This container might be inventory or a container within the inventory.
+     * Called when items are moved from one container to another.
+     * @param items The items.
+     * @param containerFrom The container object the items were moved from. This container might be inventory or a container within the inventory.
      * @param containerFromTile The tile of containerFrom when the update occurred.
-     * @param containerTo The container object the item was moved to. This container might be inventory or a container within the inventory.
+     * @param containerTo The container object the items were moved to. This container might be inventory or a container within the inventory.
      */
-    containerItemUpdate(item: Item, containerFrom: IContainer | undefined, containerFromTile: Tile | undefined, containerTo: IContainer): any;
+    containerItemUpdate(items: Item[], containerFrom: IContainer | undefined, containerFromTile: Tile | undefined, containerTo: IContainer): any;
     /**
-     * Called when an item is added to a container.
-     * @param item The item object.
-     * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
+     * Called when items are added to a container.
+     * @param items The items.
+     * @param container The container object the items were added to. This container might be inventory or a container within the inventory.
+     * @param options Move item options.
      */
-    containerItemAdd(item: Item, container: IContainer): any;
+    containerItemAdd(items: Item[], container: IContainer, options?: IMoveItemOptions): any;
     /**
      * Called when an item is crafted
      * @param human The human object
@@ -130,7 +133,34 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     hashContainer(containable: IContainable, containerReferenceSource?: ContainerReferenceSource): string;
     hashContainerReference(containerReference: ContainerReference): string;
     updateContainedWithin(containable: IContainable, containedWithin: IContainer | undefined): void;
-    addToContainerInternal(item: Item, container: IContainer, options?: IAddToContainerOptions): boolean;
+    /**
+     * Moves an item into a container
+     * @param human Human causing the item movement
+     * @param item Item to move
+     * @param toContainer Container to move the item to
+     * @param options Item move options
+     * @returns Result that tells you what moved
+     */
+    moveItemToContainer(human: Human | undefined, item: Item, toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult;
+    /**
+     * Moves items from one container into another container
+     * @param human Human causing the item movement
+     * @param fromContainer Source container
+     * @param toContainer Destination container
+     * @param options Item move options
+     * @returns Result that tells you what moved
+     */
+    moveItemsFromContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult;
+    /**
+     * Moves items to a container.
+     * Note: All the items must be contained within the same container.
+     * @param human Human causing the item movement
+     * @param item Items to move
+     * @param toContainer Destination container
+     * @param options Item move options
+     * @returns Result that tells you what moved
+     */
+    moveItemsToContainer(human: Human | undefined, items: Item[], toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult;
     removeContainerItems(container: IContainer, removeContainedItems?: boolean): void;
     exists(item: Item): boolean;
     remove(item: Item, removeContainedItems?: boolean, extinguishTorches?: boolean): void;
@@ -140,19 +170,8 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, updateTables?: boolean): Item;
     createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human): Item;
     getContainedContainers(container: IContainer): IContainer[];
-    moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: Quality): Item[];
     computeContainerWeight(container: IContainer): number;
     getMagicalWeightCapacity(container: IContainer): number;
-    moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, filterText?: string | undefined, onMoveItem?: (item: Item) => void, moveToTileOptions?: IMoveToTileOptions): Item[];
-    /**
-     * Moves an item into a container when the container has enough room for it
-     * @param human Human causing the item movement
-     * @param item Item to move
-     * @param container Container to move the item to
-     * @param moveToTileOptions When set, the movement will be animated
-     * @returns True if the item was moved, false if it wasn't
-     */
-    moveToContainer(human: Human | undefined, item: Item, container: IContainer, moveToTileOptions?: IMoveToTileOptions): boolean;
     hasRoomInContainer(targetContainer: IContainer, itemToMove: Item): boolean;
     /**
      * Gets the name of a container

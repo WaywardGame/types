@@ -24,5 +24,5 @@ export default class ContainedItemsInfoProvider extends InfoProvider {
     getDefaultDisplayLevel(): InfoDisplayLevel;
     hasContent(): boolean;
     get(): LabelledValue;
-    protected onItemMove(_: any, item: Item, previousContainer: IContainer | undefined, _previousContainerTile: Tile | undefined, newContainer: IContainer): void;
+    protected onItemMove(_: any, items: Item[], previousContainer: IContainer | undefined, _previousContainerTile: Tile | undefined, newContainer: IContainer): void;
 }

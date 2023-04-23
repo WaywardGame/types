@@ -19,8 +19,8 @@ export default class BookDialog extends Dialog {
     getName(): import("../../../../../language/ITranslation").ISerializedTranslation | import("../../../../../language/impl/TranslationImpl").default | Iterable<import("../../../../../utilities/string/Interpolator").IStringSection> | import("../../../../../language/dictionary/UiTranslation").default | undefined;
     openBook(item: Item): void;
     private getText;
-    protected onInventoryItemRemove(_: any, item: Item): void;
-    protected onInventoryItemUpdate(_: any, item: Item): void;
+    protected onInventoryItemRemove(_: any, itemOrItems: Item | Item[]): void;
+    protected onInventoryItemUpdate(_: any, items: Item[]): void;
     protected onPostMove(player: Player): void;
     private closeIfItemIsGone;
 }

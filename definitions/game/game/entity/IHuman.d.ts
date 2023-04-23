@@ -49,23 +49,23 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
     restEnd(restData: IRestData): any;
     /**
      * Called when an item is added to the player's inventory
-     * @param item The item object
-     * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
+     * @param item The items
+     * @param container The container object the items were added to. This container might be inventory or a container within the inventory.
      */
-    inventoryItemAdd(item: Item, container: IContainer): any;
+    inventoryItemAdd(items: Item[], container: IContainer): any;
     /**
      * Called when an item is removed from the players inventory
-     * @param item The item object
-     * @param container The container object the item was moved to.
+     * @param item The items
+     * @param container The container object the items were moved to.
      */
-    inventoryItemRemove(item: Item, container: IContainer): any;
+    inventoryItemRemove(items: Item[], container: IContainer): any;
     /**
      * Called when an item is moved from one container to another, while still in the players inventory.
-     * @param item The item object
-     * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
-     * @param previousContainer The container object the item was moved from. This container might be inventory or a container within the inventory.
+     * @param items The items
+     * @param container The container object the items were moved to. This container might be inventory or a container within the inventory.
+     * @param previousContainer The container object the items were moved from. This container might be inventory or a container within the inventory.
      */
-    inventoryItemUpdate(item: Item, container: IContainer, previousContainer?: IContainer): any;
+    inventoryItemUpdate(items: Item[], container: IContainer, previousContainer?: IContainer): any;
     /**
      * Called when the human equips an item to a slot
      * @param item The item being equipped

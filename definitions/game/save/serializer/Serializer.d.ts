@@ -10,7 +10,7 @@
  */
 import type { Game } from "game/Game";
 import type { ISerializer, ISerializerOptions } from "save/serializer/ISerializer";
-import { SerializerMetadataKey, SavePropertyFlag, Types } from "save/serializer/ISerializer";
+import { SavePropertyFlag, SerializerMetadataKey, Types } from "save/serializer/ISerializer";
 import StringTokenizer from "save/serializer/StringTokenizer";
 export default class Serializer implements ISerializer {
     readonly game: Game;

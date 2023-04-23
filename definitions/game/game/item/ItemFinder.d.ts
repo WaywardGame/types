@@ -39,8 +39,8 @@ export default class ItemFinder extends EventEmitter.Host<IItemFinderEvents> {
     markDirty(): void;
     private compute;
     protected onItemStateChange(item: Item): void;
-    protected onContainerItemAdd(items: ItemManager, itemAdded: Item, containerAddedTo: IContainer): void;
-    protected onContainerItemRemove(items: ItemManager, itemRemoved: Item, containerRemovedFrom?: IContainer): void;
+    protected onContainerItemAdd(items: ItemManager, itemsAdded: Item[], containerAddedTo: IContainer): void;
+    protected onContainerItemRemove(items: ItemManager, itemsRemoved: Item[], containerRemovedFrom?: IContainer): void;
     protected onLoadOnIsland(player: Player): void;
     private trackContainer;
     private untrackContainer;

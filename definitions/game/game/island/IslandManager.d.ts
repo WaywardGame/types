@@ -38,7 +38,7 @@ export default class IslandManager extends Map<IslandId, Island> {
      * Gets an island by id. Try to use "get" instead!
      * @returns Island or undefined if it does not exist
      */
-    getIfExists(islandId: IslandId): Island | undefined;
+    getIfExists(islandId?: IslandId): Island | undefined;
     /**
      * Gets an island by position
      */

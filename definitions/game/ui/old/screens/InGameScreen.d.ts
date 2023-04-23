@@ -12,7 +12,9 @@ import type Doodad from "game/doodad/Doodad";
 import type NPC from "game/entity/npc/NPC";
 import type { ContainerReference, DisplayableItemType, IContainer, IDismantleComponent } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
+import type { IMoveItemOptions } from "game/item/IItemManager";
 import Item from "game/item/Item";
+import type ItemManager from "game/item/ItemManager";
 import Message from "language/dictionary/Message";
 import { SortDirection } from "save/ISaveManager";
 import Input from "ui/component/Input";
@@ -47,6 +49,12 @@ export interface IUiContainer {
     container: IContainer;
     name: string;
     owner: NPC | Doodad | Item;
+}
+export interface IOldUiContainerItemAdd {
+    containerDialogElement?: JQuery;
+    containerElement?: JQuery;
+    itemsToSync?: Item[];
+    skipSaveItemOrder?: boolean;
 }
 interface IDialogPosition {
     title?: string;
@@ -144,9 +152,7 @@ export default class InGameScreen extends BaseScreen {
     private readonly SYMBOL_LAST_NEARLY_DECAYED;
     private readonly SYMBOL_LAST_DECAY;
     syncDecayBar(item: Item, force?: boolean, element?: HTMLElement | null): void;
-    addItemToContainer(item: Item, container: IContainer, _internal?: boolean, updateTables?: boolean, containerElement?: JQuery): void;
     insertItemStringToContainer(itemElement: string | JQuery, containerElement: JQuery): void;
-    onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery | undefined, isInventoryContainer: boolean, updateTables?: boolean): void;
     /**
      * Call this before starting to add items to a container
      */
@@ -155,8 +161,9 @@ export default class InGameScreen extends BaseScreen {
      * Call this after adding multiple items to a container.
      * You must also call startAddingMultipleItemsToContainer before adding any items
      */
-    completeAddingMultipleItemsToContainer(container: IContainer, itemsToSync?: Item[], saveItemOrder?: boolean, updateTables?: boolean): void;
-    removeItemFromContainer(item: Item, container: IContainer): void;
+    completeAddingMultipleItemsToContainer(container: IContainer, itemsToSync?: Item[]): void;
+    onContainerItemAdd(itemManager: ItemManager, itemsAdded: Item[], container: IContainer, options?: IMoveItemOptions, customOptions?: IOldUiContainerItemAdd): void;
+    protected onContainerItemRemove(itemManager: ItemManager, itemsRemoved: Item[], containerRemovedFrom?: IContainer): void;
     refreshContainerName(container: IContainer, nestedUpdate?: boolean): void;
     getInventoryItemsInOrder(): any[];
     saveItemOrder(containerElement: JQuery, activeSort?: boolean): void;

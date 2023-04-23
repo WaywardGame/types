@@ -89,10 +89,20 @@ export interface IDoodadsUsed {
     doodad: Doodad;
     group: DoodadType | DoodadTypeGroup;
 }
-export interface IAddToContainerOptions {
+export interface IMoveItemOptions {
+    onMoveItem?: (item: Item) => void;
+    filter?: {
+        itemType?: ItemType;
+        itemQuality?: Quality;
+        filterText?: string;
+    };
     skipMessage?: boolean;
-    skipUpdateTables?: boolean;
+    skipSound?: boolean;
     skipTileUpdate?: boolean;
+    skipUpdateTables?: boolean;
+    skipWeightChecks?: boolean;
+    suspendNotifier?: boolean;
+    moveToTileOptions?: IMoveToTileOptions;
 }
 export interface IPlaceOnTileOptions {
     force?: boolean;
@@ -123,4 +133,8 @@ export interface ICraftResultChances {
 }
 export declare namespace ICraftResultChances {
     const NEVER: Readonly<ICraftResultChances>;
+}
+export interface IAddToContainerResult {
+    itemsMoved: Item[];
+    noMoreRoomForItems: Item[];
 }

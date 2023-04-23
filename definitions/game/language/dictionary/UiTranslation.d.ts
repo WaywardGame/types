@@ -193,7 +193,7 @@ declare enum UiTranslation {
     GameTooltipIslandUnnamed = 178,
     GameTooltipIslandSelf = 179,
     GameTooltipIslandPlayers = 180,
-    GameTooltipIslandLighthouses = 181,
+    GameTooltipIslandPorts = 181,
     GameTooltipIslandNPCs = 182,
     GameTooltipIslandModifiers = 183,
     GameTooltipIslandMaps = 184,

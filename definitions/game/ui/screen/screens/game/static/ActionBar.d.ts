@@ -140,7 +140,7 @@ export declare class ActionSlot extends Button implements IRefreshable {
     private lastUsableResult?;
     private lastUseAttempt;
     onActivate(nonClick?: IBindHandlerApi | true, silent?: true): boolean;
-    protected onGetOrRemoveItemInInventory(player: Player, item: Item): void;
+    protected onGetOrRemoveItemInInventory(player: Player, items: Item[]): void;
     onToggle(api: IBindHandlerApi): boolean;
     protected onLeave(reason: "mouse" | "focus" | "remove"): void;
     static getTooltipLocation(actionBar: ActionBar, handler: TooltipLocationHandler): TooltipLocationHandler;

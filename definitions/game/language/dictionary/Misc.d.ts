@@ -138,8 +138,9 @@ export declare enum MiscTranslation {
     Range = 36,
     ReformatSingularNoun = 37,
     Renamed = 38,
-    Thing = 39,
-    Tilled = 40,
-    Unknown = 41,
-    UnknownItem = 42
+    Merge = 39,
+    MergeSpaced = 40,
+    Tilled = 41,
+    Unknown = 42,
+    UnknownItem = 43
 }
