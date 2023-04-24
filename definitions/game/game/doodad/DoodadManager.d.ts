@@ -39,9 +39,9 @@ export interface IDoodadManagerEvents {
     remove(doodad: Doodad): any;
 }
 export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerEvents> {
-    private static cachedBestDoodadForTier;
-    private static cachedGroups;
-    static cachedDoodadSpawns: OptionalDescriptions<BiomeType, OptionalDescriptions<WorldZ, OptionalDescriptions<TerrainType, DoodadType[]>>>;
+    private static readonly cachedBestDoodadForTier;
+    private static readonly cachedDoodadGroups;
+    static readonly cachedDoodadSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, Set<DoodadType>>>>;
     private readonly scarecrows;
     static getBestDoodadForTier(doodad: DoodadType | DoodadTypeGroup): DoodadType | undefined;
     static generateLookups(): void;
@@ -55,7 +55,6 @@ export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerE
      * @returns true or false depending on if the number is a DoodadType or DoodadTypeExtra.
      */
     static isDoodadExtra(type: number): type is DoodadTypeExtra;
-    static getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
     static getDoodadTypeGroupName(doodadType: DoodadType | DoodadTypeGroup, article?: Article, count?: number): Translation;
     /**
      * Note: This can be called multiple times in the same game depending on loading/unloading of islands

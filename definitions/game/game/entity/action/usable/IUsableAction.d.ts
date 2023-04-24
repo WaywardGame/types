@@ -236,7 +236,7 @@ export interface IUsableActionDefinitionSubmenu<REQUIREMENTS extends IUsableActi
 }
 export interface IUsableActionDefinitionExecutable<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {
     slottable?: boolean;
-    discoveredByDefault?: true;
+    discoveredByDefault?: true | (() => boolean);
     submenu?: undefined;
     forceDisplayWhenEmpty?: undefined;
     execute(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): any;

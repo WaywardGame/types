@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { AiType } from "game/entity/IEntity";
-declare const aiTypes: OptionalDescriptions<AiType, string>;
+declare const aiTypes: Map<AiType, string>;
 export default aiTypes;

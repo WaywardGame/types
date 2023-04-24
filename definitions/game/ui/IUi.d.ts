@@ -53,7 +53,8 @@ export declare const UI_HOOK_PRIORITY = -99999999999;
 export declare enum UiClasses {
     FitContent = "fit-content",
     ColoredSecondary = "colored-secondary",
-    BalancedSmooth = "balanced-smooth"
+    BalancedSmooth = "balanced-smooth",
+    Hint = "hint"
 }
 export declare namespace UiClasses {
     function createDynamic<CLASS extends string, ENUM>(baseClass: CLASS, enm: ENUM): (enumValue: ENUM[keyof ENUM]) => `${CLASS}-${Lowercase<keyof ENUM & string>}`;

@@ -9,11 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { ICharacter, IColorDescription, ICustomizations, IHairstyleDescription } from "game/entity/IHuman";
-import { HairStyle } from "game/entity/IHuman";
+import { HairColor, HairStyle, SkinColor } from "game/entity/IHuman";
 import type { Random } from "utilities/random/Random";
-export declare const hairstyleDescriptions: OptionalDescriptions<HairStyle, IHairstyleDescription>;
-export declare const hairColorDescriptions: Record<number, IColorDescription | undefined>;
-export declare const skinColorDescriptions: Record<number, IColorDescription | undefined>;
+export declare const hairstyleDescriptions: Map<HairStyle, IHairstyleDescription>;
+export declare const hairColorDescriptions: Map<HairColor, IColorDescription>;
+export declare const skinColorDescriptions: Map<SkinColor, IColorDescription>;
 export declare function generateRandomCustomization(random: Random): ICustomizations;
 export declare function generateRandomCharacter(random: Random): ICharacter;
 export declare enum ColorType {

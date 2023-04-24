@@ -10,5 +10,4 @@
  */
 import { QuestType } from "game/entity/player/quest/quest/IQuest";
 import type { Quest } from "game/entity/player/quest/quest/Quest";
-declare const quests: OptionalDescriptions<QuestType, Quest>;
-export default quests;
+export declare const questDescriptions: Map<QuestType, Quest>;

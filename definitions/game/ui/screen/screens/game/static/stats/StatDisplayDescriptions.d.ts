@@ -13,7 +13,7 @@ import type { IStat, IStatBase } from "game/entity/IStats";
 import { Stat } from "game/entity/IStats";
 import type Component from "ui/component/Component";
 import type { IStatDisplayDescription } from "ui/screen/screens/game/static/stats/IStatDisplayDescription";
-declare const statDisplayDescriptions: OptionalDescriptions<Stat, IStatDisplayDescription>;
+export declare const statDisplayDescriptions: Map<Stat, IStatDisplayDescription>;
 export interface IStatInfo extends Partial<IStatBase> {
     value: number;
     percent: number;
@@ -35,4 +35,3 @@ export declare function toggleClasses(...classes: string[]): (matched: boolean, 
  * When adding the `shake` class, removes it after 250 ms.
  */
 export declare function shake(shouldShake: boolean, statElement: Component): Promise<void>;
-export default statDisplayDescriptions;

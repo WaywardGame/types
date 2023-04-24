@@ -63,7 +63,7 @@ declare module Enums {
     /**
      * Iterate over the entries in an enum. Yields a tuple containing the name and value of each entry.
      */
-    function entries<T>(enumObject: T): readonly [keyof T, Exclude<T[keyof T], AnyFunction<any>>][];
+    function entries<T>(enumObject: T): ReadonlyArray<[keyof T, Exclude<T[keyof T], AnyFunction>]>;
     function entryStream<T>(enumObject: T): import("@wayward/goodstream").default<[keyof T, Exclude<T[keyof T], AnyFunction<any>>]>;
     function lerp<T>(enumObject: T, t: number): Exclude<T[keyof T], AnyFunction<any>>;
     /**

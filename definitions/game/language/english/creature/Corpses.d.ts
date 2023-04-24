@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { CreatureType } from "game/entity/creature/ICreature";
-declare const corpses: OptionalDescriptions<CreatureType, string>;
+declare const corpses: Map<CreatureType, string>;
 export default corpses;

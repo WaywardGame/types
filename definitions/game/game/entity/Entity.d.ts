@@ -18,6 +18,7 @@ import type EntityWithStats from "game/entity/EntityWithStats";
 import type Human from "game/entity/Human";
 import type { IEntityConstructorOptions, IEntityEvents } from "game/entity/IEntity";
 import { EntityType } from "game/entity/IEntity";
+import type { IHumanBound } from "game/entity/IEntityManager";
 import type Creature from "game/entity/creature/Creature";
 import type Corpse from "game/entity/creature/corpse/Corpse";
 import type NPC from "game/entity/npc/NPC";
@@ -41,6 +42,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     id: number;
     type: TypeType;
     referenceId?: number;
+    private _humansVisible;
     renamed?: string | ISerializedTranslation;
     x: number;
     y: number;
@@ -93,7 +95,8 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     clearTileCache(): void;
     isNearby(entity: Entity<DescriptionType>): boolean;
     isInFov(): boolean;
-    setInFov(inFov: boolean): void;
+    setInFov(inFov: boolean, humansWithinBound: IHumanBound[]): void;
+    humansVisible(): Human[];
     isOnFire(): FireType;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     updateRender(source: RenderSource, flag: UpdateRenderFlag): void;

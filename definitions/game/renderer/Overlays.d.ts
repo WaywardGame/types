@@ -13,4 +13,4 @@ import type { OverlayType } from "game/tile/ITerrain";
 import type { IModdable } from "mod/ModRegistry";
 export interface IOverlayDescription extends IModdable, IHasImagePath {
 }
-export declare const overlayDescriptions: OptionalDescriptions<OverlayType, IOverlayDescription>;
+export declare const overlayDescriptions: Map<OverlayType, IOverlayDescription>;

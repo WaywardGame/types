@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { WorldZ } from "game/WorldZ";
-declare const worldLayers: Record<Exclude<WorldZ, WorldZ.Min | WorldZ.Max>, string>;
+declare const worldLayers: Map<WorldZ.Cave | WorldZ.Overworld, string>;
 export default worldLayers;

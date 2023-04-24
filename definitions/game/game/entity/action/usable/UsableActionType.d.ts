@@ -81,6 +81,7 @@ export declare enum UsableActionTypePlaceholder {
     MoveAllToInventory = 200001,
     MoveAllOfSameQualityToInventory = 200002,
     Paddle = 200003,
-    Operate = 200004
+    Operate = 200004,
+    SwimToIsland = 200005
 }
 export declare const usableActionDescriptions: PartialRecord<UsableActionType | UsableActionTypePlaceholder, IModdable>;

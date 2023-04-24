@@ -12,7 +12,7 @@ import type { IColorDescription } from "game/entity/IHuman";
 import ChoiceList, { Choice } from "ui/component/ChoiceList";
 export declare class SwatchList<T extends number> extends ChoiceList<Swatch> {
     private readonly colors;
-    constructor(colors: Record<number, IColorDescription | undefined>);
+    constructor(colors: Map<T, IColorDescription>);
     select(selection: T, thro?: boolean): void;
     refreshChoices(): void;
 }

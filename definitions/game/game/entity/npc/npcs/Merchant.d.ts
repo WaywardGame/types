@@ -24,9 +24,16 @@ export interface IMerchantBuyPrice {
     bonus: number;
     total: number;
 }
+export declare enum MerchantCustomerKnowledgeState {
+    None = 0,
+    KnowsOfNewStock = 1,
+    HasSeenInventory = 2
+}
 export default class MerchantNPC extends NPC {
     credit: Record<string, number>;
+    customerKnowledge: Map<string, MerchantCustomerKnowledgeState>;
     constructor(options?: INPCConstructorOptions);
+    knowsOfUnseenStock(customer: Human): boolean;
     getCustomerCredit(customer: Human): number;
     modifyCustomerCredit(customer: Human, creditChange: number): number;
     getActions(): ActionType[] | undefined;

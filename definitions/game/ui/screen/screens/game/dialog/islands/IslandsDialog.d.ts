@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Player from "game/entity/player/Player";
 import type { IIslandPort } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import type Button from "ui/component/Button";
@@ -29,7 +30,9 @@ export declare enum IslandsDialogClasses {
     Port = "game-dialog-islands-port",
     PortTitle = "game-dialog-islands-port-title",
     PortButton = "game-dialog-islands-port-button",
-    NoPort = "game-dialog-islands-port-none"
+    NoPort = "game-dialog-islands-port-none",
+    PortButtonSwimming = "game-dialog-islands-port-button-swimming",
+    ConstructLighthousesHint = "game-dialog-islands-construct-lighthouses-hint"
 }
 export interface IIslandsDialogPort {
     port?: IIslandPort;
@@ -54,6 +57,7 @@ export default abstract class IslandsDialog extends CanvasDialog {
     protected onLoad(initial: boolean): Promise<void>;
     protected onIslandRenamed(island: Island): void;
     protected onPortsChanged(island: Island): void;
+    protected isPlayerSwimming(player: Player, swimming: boolean): boolean | undefined;
     protected onMouseMove(): void;
     protected onCanvasClick(): void;
     protected onAccept(): boolean;

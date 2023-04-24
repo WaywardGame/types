@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { BiomeType } from "game/biome/IBiome";
-declare const islandNameBiomeNouns: OptionalDescriptions<BiomeType, [forgotten_NOUN: string, NOUN_of_the_forgotten: string]>;
+declare const islandNameBiomeNouns: Map<BiomeType, [forgotten_NOUN: string, NOUN_of_the_forgotten: string]>;
 export default islandNameBiomeNouns;

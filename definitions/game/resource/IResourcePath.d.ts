@@ -13,7 +13,7 @@ import type { IModdable } from "mod/ModRegistry";
 import { PathType } from "resource/IResourceLoader";
 interface IResourceData {
     enumObject: any;
-    descriptions?: OptionalDescriptions<number, IModdable & IHasImagePath> | ((key: number) => (IModdable & IHasImagePath) | undefined);
+    descriptions?: Map<number, IModdable & IHasImagePath> | OptionalDescriptions<number, IModdable & IHasImagePath> | ((key: number) => (IModdable & IHasImagePath) | undefined);
     referencedType?: PathType;
 }
 declare module IResourceData {

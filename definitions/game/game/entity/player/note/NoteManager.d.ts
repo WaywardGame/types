@@ -16,7 +16,7 @@ import { HelpArticle } from "ui/screen/screens/menu/menus/help/HelpArticleDescri
 export interface INoteDescription extends IModdable {
     learnMore?: HelpArticle;
 }
-export declare const noteDescriptions: OptionalDescriptions<Note, INoteDescription>;
+export declare const noteDescriptions: Map<Note, INoteDescription>;
 export type Time = PartOfDay | string;
 export interface INote {
     id: keyof typeof Note;

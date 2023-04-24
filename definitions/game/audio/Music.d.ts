@@ -9,5 +9,4 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Music } from "audio/IAudio";
-import type { IMusicDescription } from "audio/IMusic";
-export declare const musicDescriptions: OptionalDescriptions<Music, IMusicDescription>;
+export declare const musicDescriptions: Map<Music, import("../mod/ModRegistry").IModdable>;

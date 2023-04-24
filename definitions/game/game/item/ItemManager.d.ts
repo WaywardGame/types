@@ -18,7 +18,7 @@ import type Player from "game/entity/player/Player";
 import { Quality } from "game/IObject";
 import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IRecipe } from "game/item/IItem";
 import { ContainerType, CraftResult, ItemType, ItemTypeExtra, ItemTypeGroup } from "game/item/IItem";
-import type { IMoveItemOptions, IAddToContainerResult, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IRequirementInfo } from "game/item/IItemManager";
+import type { IAddToContainerResult, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IMoveItemOptions, IRequirementInfo } from "game/item/IItemManager";
 import { ContainerReferenceSource, CraftStatus, ICraftResultChances, WeightType } from "game/item/IItemManager";
 import Item from "game/item/Item";
 import { ObjectManager } from "game/ObjectManager";
@@ -84,7 +84,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private static readonly cachedItemsThatAreUsedForGrowingPlants;
     private static readonly cachedItemsThatAreUsedInRecipes;
     private static readonly cachedWeights;
-    static readonly cachedItemSpawns: Map<BiomeType, OptionalDescriptions<WorldZ, OptionalDescriptions<TerrainType, ItemType[]>>>;
+    static readonly cachedItemSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, Set<ItemType>>>>;
     static getItemTypes(): readonly ItemType[];
     static getItemsWithRecipes(): readonly ItemType[];
     static getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
@@ -98,7 +98,10 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     static isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     static isItemExtra(type: number): type is ItemTypeExtra;
     static getGroupItems(itemGroup: ItemType | ItemTypeGroup): Set<ItemType>;
-    private static getGroupItemsWithoutCache;
+    /**
+     * Gets a set of additional item types that belong to the specified group
+     */
+    private static getAdditionalGroupItemsWithoutCache;
     static getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: Article, count?: number): Translation;
     static getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     /**

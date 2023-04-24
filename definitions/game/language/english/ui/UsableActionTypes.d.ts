@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { UsableActionType } from "game/entity/action/usable/UsableActionType";
-declare const uiActionTypes: Record<UsableActionType, [string, string?]>;
-export default uiActionTypes;
+declare const usableActionTypes: Record<UsableActionType, [string, string?]>;
+export default usableActionTypes;

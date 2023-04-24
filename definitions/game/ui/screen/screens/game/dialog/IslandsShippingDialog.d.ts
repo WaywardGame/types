@@ -13,6 +13,10 @@ import type { IIslandPort } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import Button from "ui/component/Button";
 import IslandsDialog from "ui/screen/screens/game/dialog/islands/IslandsDialog";
+export declare enum IslandsShippingDialogClasses {
+    PortButtonShipping = "game-dialog-islands-port-button-shipping",
+    PortsOnlyMode = "game-dialog-islands-ports-only-mode"
+}
 export default class IslandsShippingDialog extends IslandsDialog {
     private npcId?;
     get npc(): ShipperNPC | undefined;
@@ -25,4 +29,5 @@ export default class IslandsShippingDialog extends IslandsDialog {
     protected ship(port: IIslandPort): void;
     protected onLoad(initial: boolean): Promise<void>;
     protected onTickEnd(): void;
+    private updatePortsOnlyMode;
 }

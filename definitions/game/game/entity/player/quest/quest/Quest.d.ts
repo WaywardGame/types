@@ -46,7 +46,7 @@ export declare class Quest extends EventEmitter.Host<IQuestEvents> {
     getRequirements(host: Player, instance: IQuest): RequirementInstance[];
     getRequirement(host: Player, quest: IQuest, requirement: IQuestRequirement): RequirementInstance | undefined;
     needsManualCompletion(): boolean;
-    protected createRequirements(island: Island): IQuestRequirement<any[], {}>[];
+    protected createRequirements(island: Island): IQuestRequirement[];
     protected createRequirement<R extends QuestRequirementType>(type: R, ...options: RequirementArgs<R>): IQuestRequirement<RequirementArgs<R>>;
 }
 export declare class RequirementInstance extends EventEmitter.Host<IQuestRequirementEvents> {

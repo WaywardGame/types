@@ -143,6 +143,11 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     ranged?: IRanged;
     recipe?: IRecipe;
     /**
+     * A list of groups the item should belong too.
+     * Do not use this during runtime - use itemManager.getGroups instead!
+     */
+    group?: ItemTypeGroup[];
+    /**
      * A list of recipes that have this item as an output.
      *
      * This helper is intended for simple recipes that don't need to change how many of the item are created, and from what.
@@ -554,8 +559,11 @@ export interface IDismantleItemDescription {
     transferDecay?: boolean;
 }
 export interface IItemGroupDescription {
-    types: Array<ItemType | ItemTypeGroup>;
     default: ItemType | ItemTypeGroup;
+    /**
+     * An array of additional Item types / group's that should be added to this one during lookup generation.
+     */
+    types?: Array<ItemType | ItemTypeGroup>;
     /**
      * Whether this group is hidden to the player. Defaults to `false`
      */

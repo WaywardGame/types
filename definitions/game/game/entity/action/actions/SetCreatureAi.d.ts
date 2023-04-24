@@ -12,8 +12,11 @@ import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type Creature from "game/entity/creature/Creature";
+import type Human from "game/entity/Human";
+import { AiType } from "game/entity/IEntity";
 export interface ISetCreatureAiCanUse extends IActionUsable {
     creature: Creature;
 }
-declare const _default: Action<[ActionArgument.Integer32], import("../../Human").default<number>, void, ISetCreatureAiCanUse, [number]>;
+export declare function hasSkillToSetCreatureAi(human: Human, ai: AiType): boolean;
+declare const _default: Action<[ActionArgument.Integer32], Human<number>, void, ISetCreatureAiCanUse, [number]>;
 export default _default;
