@@ -42,7 +42,6 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     id: number;
     type: TypeType;
     referenceId?: number;
-    private _humansVisible;
     renamed?: string | ISerializedTranslation;
     x: number;
     y: number;
@@ -50,7 +49,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     private _tags?;
     islandId: IslandId;
     preventRendering?: boolean;
-    private _inFov;
+    private _humansWithinBound;
     /**
      * Cached tile the entity is on.
      * This should be cleared when x,y,z is changing.
@@ -94,8 +93,11 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     protected setCachedTile(tile: Tile): void;
     clearTileCache(): void;
     isNearby(entity: Entity<DescriptionType>): boolean;
-    isInFov(): boolean;
-    setInFov(inFov: boolean, humansWithinBound: IHumanBound[]): void;
+    /**
+     * Checks if the entity is within the viewport bounds of one or more humans
+     */
+    isWithinHumanBounds(): boolean;
+    setHumansWithinBound(humansWithinBound: IHumanBound[]): void;
     humansVisible(): Human[];
     isOnFire(): FireType;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;

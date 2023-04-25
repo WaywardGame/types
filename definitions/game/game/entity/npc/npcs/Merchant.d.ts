@@ -30,7 +30,7 @@ export declare enum MerchantCustomerKnowledgeState {
     HasSeenInventory = 2
 }
 export default class MerchantNPC extends NPC {
-    credit: Record<string, number>;
+    credit: Map<string, number>;
     customerKnowledge: Map<string, MerchantCustomerKnowledgeState>;
     constructor(options?: INPCConstructorOptions);
     knowsOfUnseenStock(customer: Human): boolean;

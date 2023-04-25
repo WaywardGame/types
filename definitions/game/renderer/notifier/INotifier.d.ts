@@ -45,7 +45,8 @@ export declare enum NotifierIconType {
     Untame = 1,
     Water = 2,
     Warning = 3,
-    Decay = 4
+    Decay = 4,
+    Talk = 5
 }
 export declare const itemDamageNotifierThreshold = 3;
 export declare const doodadDamageNotifierThreshold = 5;
