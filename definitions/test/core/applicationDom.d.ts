@@ -27,5 +27,8 @@ export default class ApplicationDom {
     waitForVisibleThenClick(selector: string, timeout?: number, indent?: boolean, clickOnce?: boolean): Promise<void>;
     waitForVisibleElements(selector: string, timeout?: number, scrollIntoView?: boolean): Promise<WebdriverIO.Element[]>;
     waitForNotVisible(selector: string, timeout?: number): Promise<void>;
-    waitUntil(executor: () => Promise<boolean>, options: webdriverio.WaitUntilOptions): Promise<true | void>;
+    waitUntil(executor: () => Promise<boolean>, options: WaitUntilOptions): Promise<true | void>;
+}
+export interface WaitUntilOptions extends Omit<webdriverio.WaitUntilOptions, "timeoutMsg"> {
+    timeoutMsg?: string | (() => string);
 }

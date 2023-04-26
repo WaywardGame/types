@@ -92,6 +92,7 @@ export declare class BasicText extends Component {
     currentTooltip?: (tooltip: Tooltip) => any;
     constructor(elementType?: string);
     setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection> & Partial<IBindingsSection>, data?: IEntireTextData): this;
+    protected onRemove(): void;
     private setTooltipLocation;
     private onClick;
 }

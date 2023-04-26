@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Random } from "../../game/utilities/random/Random";
-export declare function createRandom(): Random;
+export declare function createRandom(appId: string): Random;
 export declare function getSeed(): number;

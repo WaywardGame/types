@@ -71,8 +71,10 @@ export interface IUntilSubscriber<H, E> {
 }
 declare class EventEmitter<H, E> {
     private readonly host;
+    static RECORD_MODE: boolean;
     private readonly hostClass;
     private readonly subscriptions;
+    private readonly subscriptionsRecord;
     private readonly cachedEmitSelfHandlers;
     constructor(host: H);
     raw(): IEventEmitter<H, E>;

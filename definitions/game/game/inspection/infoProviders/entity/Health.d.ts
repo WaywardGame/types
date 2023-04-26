@@ -16,6 +16,7 @@ export default class HealthInfoProvider<E extends EntityWithStats> extends InfoP
     protected readonly entity: E;
     constructor(entity: E);
     getClass(): string[];
+    protected onInitContent(): void;
     hasContent(): boolean;
     get(context: InfoProviderContext): InfoProvider;
     private getValue;

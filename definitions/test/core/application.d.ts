@@ -15,12 +15,13 @@ import type { MenuId } from "../../game/ui/screen/screens/menu/component/IMenu";
 import type { Random } from "../../game/utilities/random/Random";
 import type { IAppPaths } from "../interfaces";
 import type { TestRunContext } from "../testRunner";
-import type { Apps } from "./applicationManager";
 import ApplicationInteractions from "./applicationInteractions";
+import type { Apps } from "./applicationManager";
 export interface IApplicationOptions {
     additionalArgs?: string[];
     mods?: string[];
     nodeJsMode?: boolean;
+    random?: Random;
 }
 export interface ITestState {
     seed: number;
@@ -52,7 +53,7 @@ export default class Application extends ApplicationInteractions {
     private videoPath;
     private videoTimerId;
     private readonly videoFrames;
-    constructor(testContext: TestRunContext, appId: string, paths: IAppPaths, random: Random, options?: IApplicationOptions);
+    constructor(testContext: TestRunContext, appId: string, paths: IAppPaths, options?: IApplicationOptions);
     get waywardLogFilePath(): string;
     reportResults(): Promise<void>;
     start(expectedInitialScreen?: "title" | "mp_gameplay_modifiers"): Promise<void>;

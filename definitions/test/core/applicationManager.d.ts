@@ -75,7 +75,7 @@ export declare class Apps {
     sailToCivilization(winnerApp: Application): Promise<void>;
     executeJavascript<T2 extends any[], T = void>(app: Application, executor: (player: Player, ...extraArgs: T2) => T, ...extraArgs: T2): Promise<T[]>;
     executeOnPlayingClients<T>(runnable: (app: Application) => Promise<T>): Promise<T[]>;
-    executeOnApps<T>(apps: Application[], runnable: (app: Application) => Promise<T>): Promise<T[]>;
+    executeOnApps<T>(apps: Application[], runnable: (app: Application) => Promise<T>, requiresDeterminism: boolean): Promise<T[]>;
     runWhilePaused(blockId: string, runnable: () => Promise<void>): Promise<void>;
     private bindApp;
     private log;

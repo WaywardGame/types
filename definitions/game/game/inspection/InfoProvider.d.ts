@@ -43,6 +43,10 @@ export interface IInfoProviderEvents {
     /**
      * Should be emitted when the info provider should be removed.
      */
+    requestRemove(): any;
+    /**
+     * Emitted when the info provider has been removed.
+     */
     remove(): any;
     /**
      * Should be emitted when the info provider's display level changes.
