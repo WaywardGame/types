@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IHasImagePath } from "game/IObject";
 import type EntityWithStats from "game/entity/EntityWithStats";
 import type { IStat, StatDisplayType } from "game/entity/IStats";
 import type { Reference } from "game/reference/IReferenceManager";
@@ -15,7 +16,7 @@ import type { IModdable } from "mod/ModRegistry";
 import type Component from "ui/component/Component";
 import type Tooltip from "ui/tooltip/Tooltip";
 import type { IStringSection } from "utilities/string/Interpolator";
-export interface IStatDisplayDescription extends IModdable {
+export interface IStatDisplayDescription extends IModdable, IHasImagePath<string | ((entity: EntityWithStats, stat: IStat) => string)> {
     imagePath?: string | ((entity: EntityWithStats, stat: IStat) => string);
     /**
      * The CSS variable to use for the stat bar color

@@ -17,8 +17,13 @@ export interface ISkillLevel {
     core: number;
 }
 export interface ISkillDescription extends IModdable {
-    attribute?: Stat;
+    attribute?: Stat | ISkillAttribute;
     reputation?: number;
     defaultDamageType?: DamageType;
+}
+export interface ISkillAttribute {
+    stat: Stat;
+    gainChanceOffset?: number;
+    gainMultiplier?: number;
 }
 export declare const skillDescriptions: OptionalDescriptions<SkillType, ISkillDescription>;

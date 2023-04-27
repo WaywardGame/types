@@ -73,8 +73,8 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly temperature: TemperatureManager;
     readonly tileEvents: TileEventManager;
     readonly time: TimeManager;
-    saveVersion: string;
     saveBuildTime?: number;
+    saveVersion: string;
     biomeType: BiomeTypes;
     civilizationScore: number;
     civilizationScoreTiles: Record<number, number>;

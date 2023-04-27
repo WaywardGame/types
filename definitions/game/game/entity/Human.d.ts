@@ -26,6 +26,7 @@ import { PlayerState, TurnTypeFlag, WeightStatus } from "game/entity/player/IPla
 import type { INoteManager } from "game/entity/player/note/NoteManager";
 import PlayerDefense from "game/entity/player/PlayerDefense";
 import type { IQuestManager } from "game/entity/player/quest/QuestManager";
+import type { ISkillAttribute } from "game/entity/skill/ISkills";
 import SkillManager from "game/entity/skill/SkillManager";
 import type { StatChangeTimerFactory } from "game/entity/StatFactory";
 import { StatChangeCurrentTimerStrategy } from "game/entity/StatFactory";
@@ -350,7 +351,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     /**
      * Improve one of the core player stats
      */
-    protected statGain(stat: Stat, bypass: boolean): void;
+    protected statGain(stat: Stat | ISkillAttribute, bypass: boolean): void;
     protected calculateStats(): void;
     kill(): void;
     protected resetDefense(skipStatChangedEvent?: boolean): void;

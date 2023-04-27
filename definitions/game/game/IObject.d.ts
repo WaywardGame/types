@@ -38,11 +38,11 @@ export interface IObjectDescription extends IHasImagePath {
     preservationChance?: number;
     spawnOnWorldGen?: OptionalDescriptions<BiomeType, OptionalDescriptions<WorldZ, OptionalDescriptions<TerrainType, number>>>;
 }
-export interface IHasImagePath {
+export interface IHasImagePath<ImagePathType = string> {
     /**
      * A replacement image to use. Used in modding.
      */
-    imagePath?: string;
+    imagePath?: ImagePathType;
     /**
      * The number of alternate textures that this image has. Not supported for most things.
      */

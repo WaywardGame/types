@@ -11,6 +11,7 @@
 import type { SfxType } from "audio/IAudio";
 import type { BiomeType } from "game/biome/IBiome";
 import type { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
+import type { IActionApi } from "game/entity/action/IAction";
 import { ActionType } from "game/entity/action/IAction";
 import type Creature from "game/entity/creature/Creature";
 import type { CreatureType, TileGroup } from "game/entity/creature/ICreature";
@@ -199,6 +200,8 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     plural?: string;
     hideHelmet?: boolean;
     worth?: number;
+    lightSource?: boolean;
+    lightColor?: IRGB;
     /**
      * Array of items that the item is "made from" in cases where we can't use the disassembly items to burn into.
      * All items in array are required to have onBurn set in their description to function properly.
@@ -299,7 +302,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     onCreate?(item: Item): void;
     onChangeInto?(item: Item, fromItemType: ItemType): void;
 }
-export type ConsumeItemStatsTuple = [health: number, stamina: number, hunger: number, thirst: number];
+export type ConsumeItemStatsTuple = [health: number, stamina: number, hunger: number, thirst: number, otherStats?: Array<{
+    stat: Stat;
+    amount: number;
+}>];
 export interface IItemOnUse {
     [ActionType.Apply]?: ConsumeItemStatsTuple;
     [ActionType.Build]?: IItemBuild;
@@ -505,9 +511,12 @@ export interface IItemChangeIntoOptions {
 export interface IRanged {
     range: number;
     attack: number;
-    ammunitionType?: ItemTypeGroup;
+    ammunitionType?: ItemType | ItemTypeGroup | ((action: IActionApi) => ItemType | ItemTypeGroup | undefined);
     requiredToFire?: ItemType;
     skillType?: SkillType;
+    unlimitedAmmunition?: boolean;
+    attackMessage?: Message;
+    particles?: IRGB | ((action: IActionApi) => IRGB | undefined);
 }
 export interface IMagicalPropertyInfo {
     /**
@@ -1576,7 +1585,22 @@ export declare enum ItemTypeGroup {
     Boat = 916,
     Text = 917,
     ContainerWithLiquid = 918,
-    All = 919,
-    Last = 920
+    CraftingMaterial = 919,
+    MagicalComponent = 920,
+    Scarecrow = 921,
+    Well = 922,
+    Mapping = 923,
+    Terrain = 924,
+    Lighthouse = 925,
+    SeedBearer = 926,
+    Mushroom = 927,
+    Lockpick = 928,
+    WaterPurification = 929,
+    CreatureContainment = 930,
+    Gem = 931,
+    Golem = 932,
+    CreatureResource = 933,
+    All = 934,
+    Last = 935
 }
 export {};
