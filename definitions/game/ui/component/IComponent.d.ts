@@ -90,7 +90,7 @@ export interface IDisableable {
     disabled: boolean;
     setDisabled(disabled: boolean): this;
 }
-export type TranslationGenerator<ENUM extends number = UiTranslation, A extends any[] = []> = Translation | ENUM | ISerializedTranslation | ((...args: A) => Iterable<IStringSection> | Translation | ENUM | ISerializedTranslation | undefined);
+export type TranslationGenerator<ENUM extends number = UiTranslation, A extends any[] = []> = Translation | ENUM | ISerializedTranslation | ((...args: A) => IStringSection[] | Translation | ENUM | ISerializedTranslation | undefined);
 export interface IBox {
     left: number;
     top: number;

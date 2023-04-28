@@ -24,7 +24,6 @@ import type TooltipLocationHandler from "ui/tooltip/TooltipLocationHandler";
 import type { IDraggableEvents } from "ui/util/Draggable";
 import Draggable from "ui/util/Draggable";
 import Log from "utilities/Log";
-import type { IStringSection } from "utilities/string/Interpolator";
 /**
  * The positions of each edge of the dialog. Stored as percentages.
  */
@@ -188,7 +187,7 @@ declare abstract class Dialog extends Component implements IDialog {
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
-    getName(): Iterable<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined;
+    getName(): Translation | UiTranslation | ISerializedTranslation | undefined;
     /**
      * Event handler for when this dialog is appended
      */

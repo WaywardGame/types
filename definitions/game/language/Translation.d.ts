@@ -24,7 +24,7 @@ import TranslationImpl from "language/impl/TranslationImpl";
 import type { ISerializedTranslation, TranslationArg } from "language/ITranslation";
 import { formatListTranslation } from "language/segment/FormatListSegment";
 import ITranslationSorter from "language/utility/TranslationSorter";
-import type { IStringSection } from "utilities/string/Interpolator";
+import { IStringSection } from "utilities/string/Interpolator";
 export declare enum Article {
     /**
      * Use no article.
@@ -149,6 +149,11 @@ declare module Translation {
     function reformatSingularNoun(article: Article): Translation;
     function reformatSingularNoun(count: number, article: Article): Translation;
     function reformatSingularNoun(count?: number | Article, article?: Article): Translation;
-    function upgrade(translation: ISerializedTranslation, id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number): void;
+    interface ITranslationUpgrader {
+        translation?(translation: TranslationImpl | ISerializedTranslation): any;
+        argument?(argument: TranslationArg): TranslationArg;
+    }
+    function upgrade(translation: ISerializedTranslation, id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: ITranslationUpgrader): ISerializedTranslation | TranslationImpl;
+    function upgradeTranslationArgument(argument: TranslationArg, id: string, dictionary: Dictionary, entry: number, upgrader?: ITranslationUpgrader): TranslationArg;
 }
 export default Translation;

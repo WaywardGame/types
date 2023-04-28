@@ -125,5 +125,5 @@ export default class MessageManager implements IMessageManager {
      */
     sentToAll(sentToAll?: boolean): this;
     private reset;
-    upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number): this;
+    upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
 }

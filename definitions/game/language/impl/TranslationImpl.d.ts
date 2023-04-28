@@ -46,9 +46,9 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     private static getStringSections;
     readonly isValid: boolean;
     private readonly translationData;
-    private readonly translationId;
-    private readonly args;
-    private readonly reformatters;
+    readonly id: string;
+    readonly args: TranslationArg[];
+    readonly reformatters: Array<TranslationImpl | ((sections: IStringSection[]) => IStringSection[])>;
     private interpolator;
     private _context;
     get context(): TextContext;
@@ -102,6 +102,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     private getCustomInterpolatorSegments;
     serializeObject(): ISerializedTranslation;
     serialize(depth?: number): ISerializedTranslation;
+    static serializeTranslationArg(arg: any, depth?: number, maxSerializationDepth?: number): any;
     private canCache;
     private getCachedTranslation;
     /**

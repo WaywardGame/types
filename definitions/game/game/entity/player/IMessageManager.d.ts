@@ -128,7 +128,7 @@ export interface IMessageManager {
      * Signal that the message was sent to everyone
      */
     sentToAll(sentToAll?: boolean): this;
-    upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number): this;
+    upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
 }
 export interface IMessageHistoryItem {
     id: number;

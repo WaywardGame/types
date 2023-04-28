@@ -40,7 +40,7 @@ export interface ISerializedInterpolator {
     options?: IInterpolationOptions;
     segments?: Segment[];
 }
-export type TranslationArg = string | number | boolean | Translation | ISerializedTranslation | IStringSection | Iterable<IStringSection> | TranslationArg[] | ITranslationArgRecord | (() => TranslationArg) | undefined | null;
+export type TranslationArg = string | number | boolean | Translation | ISerializedTranslation | IStringSection | TranslationArg[] | ITranslationArgRecord | (() => TranslationArg) | undefined | null;
 export interface ITranslationArgRecord {
     [key: string]: ITranslationArgRecord | TranslationArg;
 }

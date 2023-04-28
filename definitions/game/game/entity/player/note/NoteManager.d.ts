@@ -10,6 +10,9 @@
  */
 import type Island from "game/island/Island";
 import type { PartOfDay } from "game/time/ITimeManager";
+import type Dictionary from "language/Dictionary";
+import type { TranslationArg } from "language/ITranslation";
+import Translation from "language/Translation";
 import Note from "language/dictionary/Note";
 import type { IModdable } from "mod/ModRegistry";
 import { HelpArticle } from "ui/screen/screens/menu/menus/help/HelpArticleDescriptions";
@@ -25,7 +28,7 @@ export interface INote {
         time: number;
         skilled: boolean;
     };
-    args: any[];
+    args: TranslationArg[];
     unread?: boolean;
 }
 export interface INoteManager {
@@ -35,6 +38,7 @@ export interface INoteManager {
     write(note: Note, ...args: any[]): void;
     getUnread(): INote[];
     markRead(noteId: number): void;
+    upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
 }
 export interface INoteHost {
     getIsland(): Island;
@@ -47,9 +51,10 @@ export declare class NoteManagerNoOp implements INoteManager {
     readonly notes: INote[];
     getNote(id: number): INote | undefined;
     wasWritten(note: Note): boolean;
-    write(note: Note, ...args: any[]): void;
+    write(note: Note, ...args: TranslationArg[]): void;
     getUnread(): INote[];
     markRead(noteId: number): void;
+    upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
 }
 export default class NoteManager implements INoteManager {
     private readonly host;
@@ -58,7 +63,8 @@ export default class NoteManager implements INoteManager {
     get notes(): INote[];
     getNote(id: number): INote | undefined;
     wasWritten(note: Note): boolean;
-    write(note: Note, ...args: any[]): void;
+    write(note: Note, ...args: TranslationArg[]): void;
     getUnread(): INote[];
     markRead(noteId: number): void;
+    upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
 }
