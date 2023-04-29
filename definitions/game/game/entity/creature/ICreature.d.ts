@@ -157,6 +157,10 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      * Prevents the creature from spawning for the provided WorldZ's
      */
     preventSpawnZs?: Set<WorldZ>;
+    /**
+     * Prevents release the creature from its tamed state
+     */
+    preventRelease?: boolean;
     fishable?: boolean;
     blood?: IRGB;
     aberrantBlood?: IRGB;
@@ -249,6 +253,10 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      * If set, creature will only listen to certain commands.
      */
     allowedCommands?: AiType[];
+    /**
+     * When true, the player will always be able to command the creature, regardless of their taming skill.
+     */
+    alwaysAllowCommands?: boolean;
     /**
      * Called when a stat changes
      */
