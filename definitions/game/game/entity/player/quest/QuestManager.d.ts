@@ -9,12 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import type { Game } from "game/Game";
 import type Player from "game/entity/player/Player";
 import type PlayerManager from "game/entity/player/PlayerManager";
 import type { IQuest } from "game/entity/player/quest/quest/IQuest";
 import { QuestType } from "game/entity/player/quest/quest/IQuest";
 import type { RequirementInstance } from "game/entity/player/quest/quest/Quest";
-import type { Game } from "game/Game";
 export interface IQuestManager extends EventEmitter.Host<IQuestManagerEvents> {
     /**
      * Get all quests

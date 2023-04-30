@@ -173,7 +173,7 @@ export default class InGameScreen extends BaseScreen {
     onSortableItemReceive(sortableEvent: ISortableEvent): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent, force?: boolean): void;
-    createCraftItemElements(containerSortInfo: IContainerSortInfo | undefined): void;
+    createCraftItemElements(containerSortInfo: IContainerSortInfo | undefined, force?: boolean): void;
     updateItem(item: Item, updateChildren?: boolean): void;
     onActionBarSlotUpdate(actionBar: ActionBar, actionSlot: ActionSlot, item?: Item, oldItem?: Item): void;
     private tooltipTarget?;

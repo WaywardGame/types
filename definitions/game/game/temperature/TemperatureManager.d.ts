@@ -157,7 +157,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     protected onTickStart(island: Island): void;
     protected onTickEnd(island: Island): void;
     private runContainerInvalidations;
-    update(invalidateContainers?: boolean, source?: GetterOfOr<string>): void;
+    update(invalidateContainers: boolean | undefined, source: GetterOfOr<string>): void;
     private processScheduledUpdate;
     private calculateProduced;
     private updateProducedType;
@@ -208,4 +208,5 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     private getProduced;
     private doesProduceTemperature;
     private generateEmptyTempCache;
+    private getSourceString;
 }

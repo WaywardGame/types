@@ -101,9 +101,8 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly players: Set<Human<number>>;
     /**
      * Entity move types in fov on this island
-     * `${z}-${moveType}` -> Humans
      */
-    readonly moveTypesInFov: Map<string, Set<Human<number>>>;
+    readonly moveTypesInFov: Map<"-1-0" | "-1-1" | "-1-2" | "-1-4" | "-1-8" | "-1-16" | "-1-32" | "-1-64" | "-1-128" | "-1-256" | "-1-512" | "-1-1024" | "-1-15" | "0-0" | "0-1" | "0-2" | "0-4" | "0-8" | "0-16" | "0-32" | "0-64" | "0-128" | "0-256" | "0-512" | "0-1024" | "0-15" | "1-0" | "1-1" | "1-2" | "1-4" | "1-8" | "1-16" | "1-32" | "1-64" | "1-128" | "1-256" | "1-512" | "1-1024" | "1-15", Set<Human<number>>>;
     previousSaveVersion: IVersionInfo | undefined;
     brokenReferencesCount: number;
     readonly id: IslandId;
