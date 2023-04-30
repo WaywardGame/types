@@ -192,6 +192,9 @@ export interface IActionUsable {
     usableOnMove?: boolean;
     displayLevel?: ActionDisplayLevel;
 }
+export declare namespace IActionUsable {
+    function usableOrPrintable(usability: IActionUsable | IActionNotUsable): boolean;
+}
 export interface IActionNotUsable extends Partial<IPackedMessage> {
     usable: false;
     alreadyUsing?: true;

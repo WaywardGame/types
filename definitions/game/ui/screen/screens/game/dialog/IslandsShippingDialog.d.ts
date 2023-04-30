@@ -25,6 +25,7 @@ export default class IslandsShippingDialog extends IslandsDialog {
     protected createExecuteButton(port?: IIslandPort): Button | undefined;
     protected onChangedSelectedIsland(animate?: boolean): void;
     protected shouldDisplayIsland(x: number, y: number, island?: Island): boolean;
+    protected shouldDisplayConstructLighthousesHint(): boolean;
     protected isSelectedIslandValid(): boolean;
     protected ship(port: IIslandPort): void;
     protected onLoad(initial: boolean): Promise<void>;

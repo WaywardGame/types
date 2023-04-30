@@ -232,6 +232,7 @@ export default class InGameScreen extends BaseScreen {
     onItemMove(api: IBindHandlerApi): boolean;
     onStopItemMove(api: IBindHandlerApi): void;
     onItemEquipToggle(api: IBindHandlerApi): boolean;
+    onItemOpen(api: IBindHandlerApi): boolean;
     onItemProtectToggle(api: IBindHandlerApi): boolean;
     onItemRename(api: IBindHandlerApi): boolean;
     onDropItem(api: IBindHandlerApi): boolean;

@@ -68,6 +68,7 @@ export default abstract class IslandsDialog extends CanvasDialog {
     protected onSubmit(): boolean;
     private moveSelectedIsland;
     protected onChangedSelectedIsland(animate?: boolean): void;
+    protected shouldDisplayConstructLighthousesHint(): boolean;
     private initializePortComponent;
     protected abstract createExecuteButton(port?: IIslandPort): Button | undefined;
     protected resetViewZoom(): void;
