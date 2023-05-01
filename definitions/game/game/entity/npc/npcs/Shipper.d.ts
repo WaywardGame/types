@@ -21,7 +21,7 @@ import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type Tile from "game/tile/Tile";
-import Message from "language/dictionary/Message";
+import type TranslationImpl from "language/impl/TranslationImpl";
 import type { IVector2 } from "utilities/math/IVector";
 interface IShipTarget {
     islandId: IslandId;
@@ -33,7 +33,7 @@ export default class ShipperNPC extends NPC {
     constructor(options?: INPCConstructorOptions);
     spawn(): void;
     getActions(): ActionType[] | undefined;
-    getGreeting(human: Human, timeSinceLastChat: number | false): Message | undefined;
+    getGreeting(human: Human, timeSinceLastChat: number | false): TranslationImpl | undefined;
     getDefaultInteraction(): number | undefined;
     canInteract(human: Human, interactType: number): IActionUsable | IActionNotUsable;
     interact(action: IActionHandlerApi<Human>, interactType: ShipperNPCInteractType): void;
@@ -44,7 +44,7 @@ export default class ShipperNPC extends NPC {
     canSailTo(x: number, y: number): boolean;
     getPublicContainer(): IContainer | undefined;
     protected getReputationChangeOnDeath(): number;
-    protected getDefaultName(): import("../../../../language/impl/TranslationImpl").default;
+    protected getDefaultName(): TranslationImpl;
     protected initializeStats(): void;
     protected getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;
     protected getDefaultInventory(): Array<Item | ItemType>;

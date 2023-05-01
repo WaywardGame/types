@@ -153,7 +153,7 @@ declare module Translation {
         translation?(translation: TranslationImpl | ISerializedTranslation): any;
         argument?(argument: TranslationArg): TranslationArg;
     }
-    function upgrade(translation: ISerializedTranslation, id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: ITranslationUpgrader): ISerializedTranslation | TranslationImpl;
+    function upgrade(translation: ISerializedTranslation, id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: ITranslationUpgrader): TranslationImpl | ISerializedTranslation;
     function upgradeTranslationArgument(argument: TranslationArg, id: string, dictionary: Dictionary, entry: number, upgrader?: ITranslationUpgrader): TranslationArg;
 }
 export default Translation;

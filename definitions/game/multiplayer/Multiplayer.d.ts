@@ -11,7 +11,7 @@
 import EventEmitter from "event/EventEmitter";
 import Player from "game/entity/player/Player";
 import type Island from "game/island/Island";
-import type { IJoinServerOptions, IMultiplayerEvents, IMultiplayerOptions, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
+import type { IJoinServerOptions, IMultiplayerEvents, IMultiplayerOptions, IMultiplayerRunSafelyOptions, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
 import { DisconnectReason, JoinServerRetryReason, MultiplayerSyncCheck, MultiplayerSyncCheckLevel, UnableToJoinReason } from "multiplayer/IMultiplayer";
 import type { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import type { IConnection } from "multiplayer/networking/IConnection";
@@ -146,10 +146,14 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     markCurrentProcessingPacket(packetId: number, processing: boolean): void;
     clearSyncPacketWaiting(packet: IPacket, wait: number): void;
     clearSyncPacketsWaiting(waitId?: string): void;
-    pauseIncomingPacketProcessing(pause: boolean, clearQueue?: boolean): void;
+    private pauseIncomingPacketProcessing;
+    /**
+     * Execute an async function while applying some temporary state changes
+     */
+    runSafely<T = void>(executor: () => Promise<T>, options: IMultiplayerRunSafelyOptions): Promise<T>;
     updatePlayerId(oldPid: number, newPid: number): void;
     suppressSyncChecks(suppress: boolean): void;
-    syncGameState(): void;
+    syncGameState(): Promise<void>;
     isKeepAliveTimeoutPaused(): boolean;
     pauseKeepAliveTimeouts(): void;
     resumeKeepAliveTimeouts(): void;

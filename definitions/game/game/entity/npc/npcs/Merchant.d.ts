@@ -18,7 +18,7 @@ import NPC from "game/entity/npc/NPC";
 import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
-import Message from "language/dictionary/Message";
+import type TranslationImpl from "language/impl/TranslationImpl";
 export interface IMerchantBuyPrice {
     base: number;
     bonus: number;
@@ -40,7 +40,7 @@ export default class MerchantNPC extends NPC {
     getPublicContainer(): IContainer | undefined;
     getSellPrice(human: Human, item: Item): number | undefined;
     getBuyPrice(human: Human, item: Item): IMerchantBuyPrice | undefined;
-    getGreeting(human: Human, timeSinceLastChat: number | false): Message | undefined;
+    getGreeting(human: Human, timeSinceLastChat: number | false): TranslationImpl | undefined;
     canInteract(human: Human): IActionUsable | IActionNotUsable;
     interact(action: IActionHandlerApi<Human>, interactType?: number | undefined): void;
     /**
@@ -48,7 +48,7 @@ export default class MerchantNPC extends NPC {
      */
     closeContainerDialogs(): void;
     protected getReputationChangeOnDeath(): number;
-    protected getDefaultName(): import("../../../../language/impl/TranslationImpl").default;
+    protected getDefaultName(): TranslationImpl;
     protected initializeStats(): void;
     protected getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;
     protected getDefaultInventory(): Array<Item | ItemType>;

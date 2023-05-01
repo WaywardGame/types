@@ -26,7 +26,7 @@ import { TileUpdateType } from "game/IGame";
 import type { IContainer, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type Tile from "game/tile/Tile";
-import Message from "language/dictionary/Message";
+import type TranslationImpl from "language/impl/TranslationImpl";
 import Translation from "language/Translation";
 export interface INPCEvents extends Events<Human> {
     /**
@@ -116,7 +116,7 @@ export default abstract class NPC extends Human<NPCType> {
     /**
      * @param timeSinceLastChat The time it's been since the human last chatted with this NPC, or false if it's the first time.
      */
-    getGreeting(human: Human, timeSinceLastChat: number | false): Message | undefined;
+    getGreeting(human: Human, timeSinceLastChat: number | false): TranslationImpl | undefined;
     getDefaultInteraction(): number | undefined;
     isAlreadyInteracting(human: Human, interactType?: number): boolean;
     canInteract(human: Human, interactType?: number): IActionUsable | IActionNotUsable;
@@ -134,7 +134,7 @@ export default abstract class NPC extends Human<NPCType> {
      * Sets the default weightCapacity of an NPC (based on their equipment and starting items).
      */
     generateWeightCapacity(): void;
-    getName(asKnownBy?: Human): import("../../../language/impl/TranslationImpl").default;
+    getName(asKnownBy?: Human): TranslationImpl;
     /**
      * The name of the npc - called when created
      */
