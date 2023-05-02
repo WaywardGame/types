@@ -9,22 +9,21 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "game/entity/action/IAction";
-import { Stat } from "game/entity/IStats";
+import type { Stat } from "game/entity/IStats";
 import UseInfo from "game/inspection/infoProviders/UseInfo";
 import type Item from "game/item/Item";
 import type Tooltip from "ui/tooltip/Tooltip";
 declare const _default: UseInfo<{
-    onConsume: number | import("../../../../item/IItem").ConsumeItemStatsTuple;
+    onConsume: [Stat, number][];
     skill: import("../../../../entity/IHuman").SkillType | undefined;
     itemQuality: import("../../../../IObject").Quality | undefined;
     qualityBonus: number;
     skillBonus: number;
     magicalBonus: number;
-    stats: Stat[];
     entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
-    type: import("../../../../item/IItem").ItemType;
-    description: import("../../../../item/IItem").IItemDescription;
+    type: import("game/item/IItem").ItemType;
+    description: import("game/item/IItem").IItemDescription;
     quality: import("../../../../IObject").Quality;
     action: ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.Cure | ActionType.HealOther;
     union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.Cure | ActionType.HealOther>;

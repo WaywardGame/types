@@ -44,5 +44,6 @@ export interface ILaunchOptions {
     y: number | null;
     lastGameVersion: string;
     lastElectronVersion: string;
+    launcher?: true;
 }
 export declare const launchOptionsDefault: ILaunchOptions;

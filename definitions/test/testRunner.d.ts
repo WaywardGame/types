@@ -31,8 +31,14 @@ export interface ITest {
 }
 declare abstract class BaseContext {
     private _timeoutMilliseconds?;
+    private _parallel?;
+    private _retries?;
     get timeout(): number | undefined;
     set timeout(value: number | undefined);
+    get parallel(): number | undefined;
+    set parallel(value: number | undefined);
+    get retries(): number | undefined;
+    set retries(value: number | undefined);
 }
 export declare class TestSetupContext extends BaseContext {
     readonly title: string;
@@ -105,10 +111,11 @@ export declare class TestSetupContext extends BaseContext {
      * Runs tests
      */
     private runTests;
+    private runTest;
     /**
      * Runs a test
      */
-    private runTest;
+    private executeTest;
     private logNoDepth;
 }
 export declare class TestRunContext extends BaseContext {
@@ -126,6 +133,7 @@ export declare class TestRunContext extends BaseContext {
     private _output;
     private readonly _errors;
     private readonly _attachments;
+    private readonly _data;
     private readonly startTime;
     private endTime;
     private duration;
@@ -187,10 +195,14 @@ export declare class TestRunContext extends BaseContext {
      * Adds an attachment to the test result
      */
     addAttachment(attachmentName: string, attachmentData: ITestAttachmentData): Promise<void>;
+    getData<T = unknown>(key: string): T;
+    tryGetData<T = unknown>(key: string): T | undefined;
+    setData<T = unknown>(key: string, value: T): T;
+    start(): void;
     /**
      * Mark the context as being completed (finished running)
      */
-    complete(): void;
+    end(): void;
     /**
      * https://docs.nunit.org/articles/nunit/technical-notes/usage/Test-Result-XML-Format.html
      */

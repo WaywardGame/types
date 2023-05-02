@@ -10,5 +10,5 @@
  */
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.NPCNearby], import("../../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [import("../../npc/NPC").default]>;
+declare const _default: Action<[ActionArgument.NPCNearby], import("../../Human").default<number>, void, import("game/entity/action/actions/NPCInteract").INPCInteractUsable, [import("../../npc/NPC").default]>;
 export default _default;

@@ -26,7 +26,7 @@ export interface INewGameOptions extends ICommonGameOptions {
     reuseCharacter?: boolean;
 }
 export type IDedicatedServerGameOptions = ICommonGameOptions;
-export interface IJoinServerOptions {
+export interface ITestJoinServerOptions {
     joinProgrammatically: boolean;
     enableAllMilestoneModifiers?: boolean;
     multiplayerIdentifier?: string;

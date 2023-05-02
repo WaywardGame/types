@@ -61,5 +61,6 @@ export default class ShipperNPC extends NPC {
     canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): -1 | 0 | -2 | -3 | -4 | -5 | -6;
     shipToPort(island: Island, port: IIslandPort, pathToEdge: IVector2[]): void;
     private moveToPort;
+    private canSeePort;
 }
 export {};

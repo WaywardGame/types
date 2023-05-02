@@ -10,9 +10,9 @@
  */
 /// <reference types="webdriverio/async" />
 import type * as webdriverio from "webdriverio";
-import type ApplicationLogger from "./applicationLogger";
+import type { ApplicationLogger } from "@wayward/test/core/applicationLogger";
 export declare const defaultWaitTimeout: number;
-export default class ApplicationDom {
+export declare class ApplicationDom {
     private readonly browser;
     private readonly logger;
     constructor(browser: WebdriverIO.Browser, logger: ApplicationLogger);

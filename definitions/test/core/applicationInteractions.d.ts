@@ -10,14 +10,14 @@
  */
 /// <reference types="webdriverio/async" />
 import type { TestRunContext } from "@wayward/test/testRunner";
-import type { IInit } from "../../game/Init";
-import type { Stat } from "../../game/game/entity/IStats";
-import type { IslandId } from "../../game/game/island/IIsland";
-import { Direction } from "../../game/utilities/math/Direction";
-import type { IDedicatedServerGameOptions, IJoinServerOptions, INewGameOptions, IWaitUntilGameLoadedOptions } from "../interfaces";
-import type { Random } from "../../game/utilities/random/Random";
-import ApplicationDom from "./applicationDom";
-import ApplicationLogger from "./applicationLogger";
+import type { IInit } from "@wayward/game/Init";
+import type { Stat } from "@wayward/game/game/entity/IStats";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import { Direction } from "@wayward/game/utilities/math/Direction";
+import type { Random } from "@wayward/game/utilities/random/Random";
+import { ApplicationLogger } from "@wayward/test/core/applicationLogger";
+import { ApplicationDom } from "@wayward/test/core/applicationDom";
+import type { IWaitUntilGameLoadedOptions, IDedicatedServerGameOptions, INewGameOptions, ITestJoinServerOptions } from "@wayward/test/interfaces";
 export default class ApplicationInteractions {
     protected readonly testContext: TestRunContext;
     readonly appId: string;
@@ -75,7 +75,7 @@ export default class ApplicationInteractions {
     waitForGameEndScreen(isWinner: boolean): Promise<void>;
     returnToTitleScreen(): Promise<void>;
     getServerGameCode(): Promise<string>;
-    joinMultiplayerServer(gameCode: string, options: IJoinServerOptions, isDedicatedServer: boolean): Promise<void>;
+    joinMultiplayerServer(gameCode: string, options: ITestJoinServerOptions, isDedicatedServer: boolean): Promise<void>;
     pauseGame(): Promise<void>;
     unpauseGame(): Promise<void>;
     moveToIslandId(islandId: IslandId): Promise<void>;

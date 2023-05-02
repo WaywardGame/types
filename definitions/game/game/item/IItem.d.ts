@@ -17,7 +17,7 @@ import type Creature from "game/entity/creature/Creature";
 import type { CreatureType, TileGroup } from "game/entity/creature/ICreature";
 import type { DamageType, Defense, MoveType, StatusType } from "game/entity/IEntity";
 import type { Delay, EquipType, SkillType } from "game/entity/IHuman";
-import type { Stat } from "game/entity/IStats";
+import { Stat } from "game/entity/IStats";
 import type { IDecayTemperatureRange } from "game/IGame";
 import type { IObjectDescription, Quality } from "game/IObject";
 import type { IslandId } from "game/island/IIsland";
@@ -302,18 +302,24 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     onCreate?(item: Item): void;
     onChangeInto?(item: Item, fromItemType: ItemType): void;
 }
-export type ConsumeItemStatsTuple = [health: number, stamina: number, hunger: number, thirst: number, otherStats?: Array<{
+export interface IConsumeItemStat {
     stat: Stat;
     amount: number;
-}>];
+}
+export type ConsumeItemStatsTuple = [health: number, stamina: number, hunger: number, thirst: number, otherStats?: IConsumeItemStat[]];
+export type ConsumeItemStats = ConsumeItemStatsTuple | IConsumeItemStat[];
+export declare namespace ConsumeItemStats {
+    const DEFAULT_STATS: Stat[];
+    function resolve(stats?: number | ConsumeItemStats): Map<Stat, number>;
+}
 export interface IItemOnUse {
-    [ActionType.Apply]?: ConsumeItemStatsTuple;
+    [ActionType.Apply]?: ConsumeItemStats;
     [ActionType.Build]?: IItemBuild;
     [ActionType.CageCreature]?: ItemType;
-    [ActionType.Cure]?: ConsumeItemStatsTuple;
-    [ActionType.DrinkItem]?: ConsumeItemStatsTuple;
-    [ActionType.Eat]?: ConsumeItemStatsTuple;
-    [ActionType.Heal]?: ConsumeItemStatsTuple;
+    [ActionType.Cure]?: ConsumeItemStats;
+    [ActionType.DrinkItem]?: ConsumeItemStats;
+    [ActionType.Eat]?: ConsumeItemStats;
+    [ActionType.Heal]?: ConsumeItemStats;
     [ActionType.HealOther]?: number;
     [ActionType.PlaceDown]?: IItemBuild;
     [ActionType.Plant]?: DoodadType;

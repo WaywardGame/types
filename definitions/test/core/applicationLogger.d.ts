@@ -10,7 +10,7 @@
  */
 /// <reference types="node" />
 import { EventEmitter } from "events";
-export default class ApplicationLogger extends EventEmitter {
+export declare class ApplicationLogger extends EventEmitter {
     private _logBlockIndentation;
     private readonly _logs;
     getLogs(): string[];

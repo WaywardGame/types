@@ -47,13 +47,12 @@ export default class ItemUses extends Uses<Item> {
     } & {
         getDoodadSkill: () => import("../LabelledValue").default[];
     }, Item> | import("../UseInfo").default<{
-        onConsume: number | import("game/item/IItem").ConsumeItemStatsTuple;
+        onConsume: [import("../../../entity/IStats").Stat, number][];
         skill: import("../../../entity/IHuman").SkillType | undefined;
         itemQuality: import("../../../IObject").Quality | undefined;
         qualityBonus: number;
         skillBonus: number;
         magicalBonus: number;
-        stats: import("../../../entity/IStats").Stat[];
         entityType: EntityType.Item;
         value?: Item | undefined;
         type: ItemType;

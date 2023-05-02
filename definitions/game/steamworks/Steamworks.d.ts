@@ -45,6 +45,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private _serverToJoin;
     private _automaticallyJoinServer;
     private _dedicatedServerInfo;
+    private _defaultMatchmakingServerPort;
     private _nextBackupTime;
     private _currentLobbyId;
     private _multiplayerLogs;
@@ -76,6 +77,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     isDedicatedServer(): boolean;
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
     getMatchmakingServer(): IMatchmakingServer | undefined;
+    getMatchmakingServerPort(): number;
     getSteamNetworking(): ISteamworksNetworking | undefined;
     initialize(): Promise<IWaywardPreload | undefined>;
     enableSafePaths(): void;

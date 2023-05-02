@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Player from "../../game/game/entity/player/Player";
-import { Direction } from "../../game/utilities/math/Direction";
-import type { IJoinServerOptions, INewGameOptions } from "../interfaces";
-import type Application from "./application";
-import type { ITestState } from "./application";
+import type Player from "@wayward/game/game/entity/player/Player";
+import { Direction } from "@wayward/game/utilities/math/Direction";
+import type { ITestState } from "@wayward/test/core/application";
+import type { INewGameOptions, ITestJoinServerOptions } from "@wayward/test/interfaces";
+import type { Application } from "@wayward/test/core/application";
 export declare class Apps {
     private readonly _logs;
     private readonly _applications;
@@ -49,7 +49,7 @@ export declare class Apps {
     get inactiveClients(): Application[];
     reset(): void;
     add(app: Application): Application;
-    addServer(app: Application): Application;
+    addServer(app: Application): Promise<Application>;
     addTARS(app: Application): Application;
     addConnectedClient(app: Application): Application;
     activateTARS(): () => void;
@@ -63,7 +63,7 @@ export declare class Apps {
     createMultiplayerGame(options: Omit<INewGameOptions, "playMode">): Promise<void>;
     setClientJoinIsland(x: number, y: number): Promise<void>;
     getServerGameCode(): Promise<string>;
-    joinServer(options: IJoinServerOptions, ...apps: Application[]): Promise<void>;
+    joinServer(options: ITestJoinServerOptions, ...apps: Application[]): Promise<void>;
     leaveServer(...apps: Application[]): Promise<void>;
     returnToTitleScreen(): Promise<void>;
     waitUntilLoadingIsFinished(): Promise<void>;
@@ -80,5 +80,4 @@ export declare class Apps {
     private bindApp;
     private log;
 }
-declare const _default: Apps;
-export default _default;
+export declare const appsContextKey = "APPS";
