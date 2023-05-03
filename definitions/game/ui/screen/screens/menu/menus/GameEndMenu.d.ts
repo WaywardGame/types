@@ -20,7 +20,7 @@ export default class GameEndMenu extends Menu {
     private readonly highscore;
     readonly respawnButton: Button;
     readonly continueAsGhostButton: Button;
-    private gameEndData;
+    gameEndData: IGameEndData;
     constructor();
     setGameEndData(gameEndData: IGameEndData): this;
     protected onShow(): void;

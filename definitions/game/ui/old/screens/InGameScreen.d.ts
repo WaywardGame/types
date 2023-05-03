@@ -95,8 +95,6 @@ export default class InGameScreen extends BaseScreen {
     private dismantleDialogDirty;
     private invalidatingTargets;
     private updateCraftsDiscovery;
-    private updateCraftsSort;
-    private updateCraftsDirection;
     private addingMultipleItemsToContainer;
     constructor();
     selector(): string;

@@ -48,7 +48,7 @@ export declare class Apps {
      */
     get inactiveClients(): Application[];
     reset(): void;
-    add(app: Application): Application;
+    add(app: Application): Promise<Application>;
     addServer(app: Application): Promise<Application>;
     addTARS(app: Application): Application;
     addConnectedClient(app: Application): Application;
