@@ -45,6 +45,7 @@ export interface ICanSailAwayResult {
  */
 export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOfViewOrigin {
     readonly id: number;
+    static is(value: any): value is Tile;
     readonly island: Island;
     /**
      * IVector4
@@ -88,6 +89,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     get point(): IVector3;
     get description(): ITerrainDescription | undefined;
     toString(): string;
+    getName(): Translation;
     get type(): TerrainType;
     /**
      * Use game.changeTile or game.removeTopTile when modifying tiles.

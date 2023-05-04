@@ -27,7 +27,7 @@ export declare class GameplayModifiersCollection<MODIFIER extends GameplayModifi
     protected readonly args: INSTANCE_ARGS;
     constructor(manager: GameplayModifiersManager<MODIFIER>, ...args: INSTANCE_ARGS);
     hasAny(): boolean;
-    initialize(source: StringableObject, ids: Iterable<ID>): INSTANCE[];
+    initialize(source: StringableObject, ids: Iterable<ID>, uninitializeExisting?: boolean): INSTANCE[];
     uninitialize(source: StringableObject): void;
     options(): import("@wayward/goodstream").default<import("../IGameOptions").IGameOptionsPartial>;
     initialized(): IterableIterator<ID>;

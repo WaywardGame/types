@@ -39,7 +39,7 @@ import TranslationImpl from "language/impl/TranslationImpl";
 import { Article } from "language/Translation";
 import type { IUnserializedCallback } from "save/serializer/ISerializer";
 import type { Direction } from "utilities/math/Direction";
-import type Vector3 from "utilities/math/Vector3";
+import type { IVector3 } from "utilities/math/IVector";
 export interface IItemEvents extends IEntityMovableEvents {
     toggleProtected(isProtected: boolean): any;
     fireUpdate(stage?: FireStage): any;
@@ -224,7 +224,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
     createOnBreak(tile: Tile): void;
     spawnOnDecay(tile: Tile): Creature | undefined;
     spawnCreatureOnItem(tile: Tile, creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingTile?: Human, maxTilesChecked?: number): Creature | undefined;
-    get point(): Vector3 | undefined;
+    get point(): IVector3 | undefined;
     get tile(): Tile | undefined;
     dropInWater(human: Human, tile?: Tile, skipParticles?: boolean): void;
     placeOnTile(tile: Tile, options?: IPlaceOnTileOptions): boolean;

@@ -19,4 +19,5 @@ export declare class SharedOSIPCHandler implements IOS {
     release(): Promise<string>;
     totalmem(): Promise<number>;
     freemem(): Promise<number>;
+    execDetached(command: string, ...args: string[]): void;
 }

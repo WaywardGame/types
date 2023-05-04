@@ -14,6 +14,7 @@ export default abstract class GenericOverlay<OVERLAY extends IOverlayInfo = IOve
     protected readonly overlay: Map<Tile, OVERLAY>;
     protected alpha: number;
     constructor(hideByDefault?: boolean);
+    get isHidden(): boolean;
     getDefaultAlpha(): number;
     show(): void;
     hide(): void;

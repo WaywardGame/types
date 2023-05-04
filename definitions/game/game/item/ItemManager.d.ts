@@ -29,7 +29,6 @@ import Message from "language/dictionary/Message";
 import type TranslationImpl from "language/impl/TranslationImpl";
 import type { ListEnder } from "language/ITranslation";
 import Translation, { Article } from "language/Translation";
-import Vector3 from "utilities/math/Vector3";
 import type { Random } from "utilities/random/Random";
 export interface IItemManagerEvents {
     create(item: Item): any;
@@ -129,7 +128,12 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     static getUseItemActions(): ReadonlySet<ActionType>;
     private static getDefaultWeightRange;
     load(): void;
-    getPoint(itemOrContainer?: Item | IContainer): Vector3 | undefined;
+    /**
+     * Gets the tile the item/container is on
+     * @param itemOrContainer Item or container
+     * @returns Tile or undefined
+     */
+    getTile(itemOrContainer?: Item | IContainer): Tile | undefined;
     resolveContainer(container?: IContainer): Doodad | Item | Player | NPC | IContainer | Tile | undefined;
     getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
