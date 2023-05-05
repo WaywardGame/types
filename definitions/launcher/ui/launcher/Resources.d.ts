@@ -8,16 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import FolderButton from "ui/main/FolderButton";
-import type { IFolder } from "ui/main/FolderSelector";
-import FolderSelector from "ui/main/FolderSelector";
-export default class Resources extends FolderSelector {
-    readonly steamButton: FolderButton;
-    constructor();
+import type { IFolder } from "ui/launcher/FolderSelector";
+import FolderSelector from "ui/launcher/FolderSelector";
+export default class Resources extends FolderSelector.WithDefault {
     protected getName(): string;
+    protected getDefaultFolder(): IFolder;
     verifyFolder(folder: IFolder): Promise<boolean>;
     protected verifyAddingFolders(verifyFolders: IFolder[]): Promise<IFolder[]>;
-    protected select(button?: FolderButton): void;
-    getSelectedFolderPath(): string;
-    getFolders(includeSteam?: boolean): IFolder[];
 }

@@ -80,6 +80,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     civilizationScoreTiles: Record<number, number>;
     contaminatedWater: IWaterContamination[];
     creatureSpawnTimer: number;
+    loadCount: number;
     mapGenVersion: string;
     name?: string;
     position: IVector2;
@@ -91,7 +92,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     tileContainers: ITileContainer[];
     version: string;
     tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;
-    loadCount: number;
     readonly seeds: ISeeds;
     readonly seededRandom: Random<LegacySeededGenerator | PCGSeededGenerator>;
     readonly game: Game;

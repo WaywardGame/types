@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ComponentEventManager, ComponentEvents } from "ui/Component";
-import Component from "ui/Component";
-import FolderButton from "ui/main/FolderButton";
-import Section from "ui/Section";
+import type { ComponentEventManager, ComponentEvents } from "ui/component/Component";
+import Component from "ui/component/Component";
+import Section from "ui/component/Section";
+import FolderButton from "ui/launcher/FolderButton";
 export interface IFolderSelectorEvents extends ComponentEvents<Section> {
     addNew: {
         folders: IFolder[];
@@ -28,9 +28,13 @@ export interface IFolder {
     path: string;
 }
 export type Folders = Map<string, string>;
-export default abstract class FolderSelector extends Section {
+export declare enum FolderSelectorClasses {
+    Main = "folder-selector",
+    AddNewButton = "folder-selector-add-new-button"
+}
+declare abstract class FolderSelector extends Section {
     event: ComponentEventManager<this, IFolderSelectorEvents>;
-    readonly optionsWrapper: Component<HTMLDivElement>;
+    readonly optionsWrapper: Component;
     constructor();
     getSelectedFolderPath(): string | null;
     getFolders(): IFolder[];
@@ -46,3 +50,14 @@ export default abstract class FolderSelector extends Section {
     save(folders: Folders | IFolder[]): void;
     load(): Map<string, string>;
 }
+declare namespace FolderSelector {
+    abstract class WithDefault extends FolderSelector {
+        readonly defaultButton: FolderButton;
+        constructor();
+        protected abstract getDefaultFolder(): IFolder;
+        protected select(button?: FolderButton): void;
+        getSelectedFolderPath(): string;
+        getFolders(includeDefault?: boolean): IFolder[];
+    }
+}
+export default FolderSelector;

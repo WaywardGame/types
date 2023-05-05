@@ -23,7 +23,7 @@ import type QuadrantComponent from "ui/screen/screens/game/component/QuadrantCom
 import { DialogId } from "ui/screen/screens/game/Dialogs";
 import { QuadrantComponentId } from "ui/screen/screens/game/IGameScreenApi";
 import type ActionBar from "ui/screen/screens/game/static/ActionBar";
-import type MenuBar from "ui/screen/screens/game/static/MenuBar";
+import MenuBar from "ui/screen/screens/game/static/MenuBar";
 import type Messages from "ui/screen/screens/game/static/Messages";
 import type StatsQuadrant from "ui/screen/screens/game/static/Stats";
 import MovementHandler from "ui/screen/screens/game/util/movement/MovementHandler";
