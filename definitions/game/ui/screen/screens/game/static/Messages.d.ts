@@ -68,7 +68,7 @@ export default class Messages extends QuadrantComponent {
     setShouldUnfocusOnSend(shouldUnfocusOnSend: boolean): this;
     getMaxMessages(): number;
     setMaxMessages(maxMessages: number): this;
-    scrollToNewest(): void;
+    scrollToNewest(): Promise<void>;
     sendPinnedMessage(pinnedMessage: PinnedMessage): PinnedMessage;
     pinQuestRequirement(quest: QuestInstance, requirement?: RequirementInstance): IPinnedMessage | PinnedMessage | undefined;
     unpinMessage(pinnedMessage: PinnedMessage, time?: number): Promise<void>;

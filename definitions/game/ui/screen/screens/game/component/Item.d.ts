@@ -99,6 +99,8 @@ export default class ItemComponent extends Component {
     durabilityBar?: Component;
     readonly draggable?: Draggable;
     constructor(handler: IItemHandler);
+    private registerTickEndHandlerForDecay;
+    private deregisterTickEndHandlerForDecay;
     private lastItem?;
     private getItem;
     protected onSlotUpdate(actionBar: ActionBar, slot: ActionSlot): void;
