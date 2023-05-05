@@ -18,5 +18,5 @@ export interface IReinforceCanUse extends IActionUsable {
     actionTier: number;
     reinforcee: Item;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default, void, IReinforceCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default<number>, void, IReinforceCanUse, [Item, (Item | undefined)?]>;
 export default _default;

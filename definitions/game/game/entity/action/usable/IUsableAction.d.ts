@@ -34,7 +34,7 @@ import type HashSet from "utilities/collection/set/HashSet";
 export interface IUsableActionRequirement<TYPE> {
     allowNone?: true;
     validate?(player: Player, value: TYPE): boolean;
-    find?(player: Player): TYPE | undefined;
+    find?(player: Player): TYPE | false | undefined;
     getMissingName?(): Translation;
 }
 export interface IUsableActionItemRequirement extends Omit<IUsableActionRequirement<Item>, "find"> {
@@ -61,6 +61,7 @@ export interface IUsableActionPossibleUsing {
     doodad?: Doodad;
     creature?: Creature;
     npc?: NPC;
+    misc?: any;
 }
 export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequirements> {
     item: ((REQUIREMENTS["item"] extends true ? Item : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
@@ -102,6 +103,7 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
     } ? NPC : never) | (REQUIREMENTS["npc"] extends {
         find(player: Player): NPC;
     } ? NPC : never));
+    misc: any;
 }
 export type UsableActionIconReference = ActionType | UsableActionType | UsableActionTypePlaceholder | (Omit<IIcon, "path"> & {
     action: ActionType | UsableActionType | UsableActionTypePlaceholder;
@@ -234,7 +236,7 @@ export interface IUsableActionDefinitionSubmenu<REQUIREMENTS extends IUsableActi
 }
 export interface IUsableActionDefinitionExecutable<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {
     slottable?: boolean;
-    discoveredByDefault?: true;
+    discoveredByDefault?: true | (() => boolean);
     submenu?: undefined;
     forceDisplayWhenEmpty?: undefined;
     execute(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): any;

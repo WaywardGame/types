@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Game } from "game/Game";
 import type IAsyncDataStorage from "save/datastorage/IAsyncDataStorage";
 import type { ISaveObject } from "save/ISaveManager";
 export default class IndexedDbDataStorage implements IAsyncDataStorage {
@@ -20,7 +21,7 @@ export default class IndexedDbDataStorage implements IAsyncDataStorage {
     private readonly uniqueSlotsIndexName;
     private database;
     private readonly dataStorageLocalStorage;
-    constructor();
+    constructor(game: Game);
     initialize(): Promise<void>;
     isEnabled(): boolean;
     isSlotUsed(slot: number): Promise<boolean>;

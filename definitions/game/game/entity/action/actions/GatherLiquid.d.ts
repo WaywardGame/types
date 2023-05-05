@@ -17,6 +17,7 @@ import type { IWell } from "game/island/IIsland";
 import type { ILiquidGather } from "game/item/IItem";
 import type { ITerrainDescription } from "game/tile/ITerrain";
 import { TerrainType } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export interface IGatherLiquidFromWispCanUse extends IActionUsable {
     type: "wisp";
     liquidGather: ILiquidGather;
@@ -24,11 +25,9 @@ export interface IGatherLiquidFromWispCanUse extends IActionUsable {
 }
 export interface IGatherLiquidFromGoatCanUse extends IActionUsable {
     type: "goat";
+    tile: Tile;
     liquidGather: ILiquidGather;
     goat: Creature;
-    x: number;
-    y: number;
-    z: number;
 }
 export interface IGatherLiquidFromWaterStillCanUse extends IActionUsable {
     type: "waterStill";
@@ -49,10 +48,8 @@ export interface IGatherLiquidFromLiquidCanUse extends IActionUsable {
     terrainDescription: ITerrainDescription;
     liquidGatherType: keyof ILiquidGather;
     tileType: TerrainType;
-    x: number;
-    y: number;
-    z: number;
+    tile: Tile;
 }
 export type IGatherLiquidCanUse = IGatherLiquidFromWispCanUse | IGatherLiquidFromGoatCanUse | IGatherLiquidFromWaterStillCanUse | IGatherLiquidFromWellCanUse | IGatherLiquidFromLiquidCanUse;
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default, void, IGatherLiquidCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<number>, void, IGatherLiquidCanUse, [import("../../../item/Item").default]>;
 export default _default;

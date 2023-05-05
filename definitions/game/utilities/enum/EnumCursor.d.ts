@@ -28,9 +28,7 @@ declare class EnumCursor<E, K extends string = string> extends EventEmitter.Host
      * @param enumObject The full enumeration.
      * @param n The starting position of the cursor. Defaults to `0`.
      */
-    constructor(enumObject: {
-        [key in K]: E;
-    }, n?: number);
+    constructor(enumObject: Record<K, E>, n?: number);
     /**
      * Refreshes the internal list of enum entries. If the full enumeration has changed,
      * the cursor may be moved to a different entry.

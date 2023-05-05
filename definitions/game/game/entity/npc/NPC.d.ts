@@ -9,56 +9,58 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
-import type { ActionType } from "game/entity/action/IAction";
+import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
+import { ActionType } from "game/entity/action/IAction";
 import Human from "game/entity/Human";
+import type { IEntityConstructorOptions, IProperties, Property } from "game/entity/IEntity";
 import { AiType, EntityType, MoveType, StatusType } from "game/entity/IEntity";
 import type { ICustomizations } from "game/entity/IHuman";
 import { EquipType } from "game/entity/IHuman";
 import type { NPCType } from "game/entity/npc/INPCs";
 import type MerchantNPC from "game/entity/npc/npcs/Merchant";
+import type ShipperNPC from "game/entity/npc/npcs/Shipper";
 import { MessageManagerNoOp } from "game/entity/player/MessageManager";
 import { NoteManagerNoOp } from "game/entity/player/note/NoteManager";
 import { QuestManagerNoOp } from "game/entity/player/quest/QuestManager";
-import { CreationId, TileUpdateType } from "game/IGame";
-import type Island from "game/island/Island";
-import type { ItemType } from "game/item/IItem";
+import { TileUpdateType } from "game/IGame";
+import type { IContainer, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
+import type TranslationImpl from "language/impl/TranslationImpl";
 import Translation from "language/Translation";
-import type { IVector3 } from "utilities/math/IVector";
 export interface INPCEvents extends Events<Human> {
     /**
      * Called when a npc tries to move
      * @param tile The tile the npc is trying to move to
-     * @param x The x coordinate of the tile
-     * @param y The y coordinate of the tile
-     * @param z The z coordinate of the tile
      * @param moveType The npcs move type
      * @returns True if the npc can move, false if the npc cannot move, or undefined to use the default logic
      */
-    canNPCMove(tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
+    canNPCMove(tile: Tile, moveType: MoveType): boolean | undefined;
 }
-export default abstract class NPC extends Human {
+export default abstract class NPC extends Human<NPCType> {
     protected static registrarId: number;
-    readonly objectType = CreationId.NPC;
-    readonly event: IEventEmitter<this, INPCEvents>;
-    readonly entityType: EntityType.NPC;
-    readonly tileUpdateType = TileUpdateType.NPC;
     get constructorFunction(): typeof NPC;
     readonly isPlayerLike: boolean;
+    get entityType(): EntityType.NPC;
+    get tileUpdateType(): TileUpdateType;
+    readonly event: IEventEmitter<this, INPCEvents>;
     ai: AiType;
     seen: number;
-    type: NPCType;
     weightCapacity: number;
+    properties?: IProperties;
+    talked?: Map<string, number>;
+    interactions?: Map<string, Set<number>>;
+    private shouldSkipNextUpdate?;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
-    constructor(type?: NPCType, id?: number, islandId?: `${number},${number}`, x?: number, y?: number, z?: number);
+    constructor(entityOptions?: IEntityConstructorOptions<NPCType>);
     getRegistrarId(): number;
     createNoteManager(): NoteManagerNoOp;
     createMessageManager(): MessageManagerNoOp;
     createQuestManager(): QuestManagerNoOp;
     addMilestone(): void;
-    protected getApplicableStatusEffects(): Set<StatusType>;
+    protected getApplicableStatusEffects(): Set<StatusType> | undefined;
+    isValid(): boolean;
     /**
      * Creates inventory, equips items, and scales stats
      */
@@ -69,11 +71,29 @@ export default abstract class NPC extends Human {
      * @returns True if the npc is doing something that would prevent it from attacking/moving
      */
     protected runActions(): boolean;
+    /**
+     * Override in npcs for custom logic
+     * @returns True if the npc can despawn due to not being seen for a while
+     */
+    protected canDespawn(): boolean;
+    /**
+     * Override in npcs for custom logic
+     * @returns True if an npc can move / attack / do other things while not in anyones field of view
+     */
+    protected canUpdateOutsideFov(): boolean;
+    protected runCommonProcesses(inventoryItems: Item[]): boolean;
     kill(): boolean;
     isHostile(): boolean;
     isWaiting(): boolean;
     getDamageModifier(): number;
     makeHostile(): void;
+    /**
+     * Allow swapping with npcs
+     */
+    canSwapWith(human: Human, source: string | undefined): boolean;
+    skipNextUpdate(): void;
+    overrideNextMovement(tile: Tile): void;
+    getPublicContainer(): IContainer | undefined;
     /**
      * The actions available to use with this npc
      */
@@ -85,16 +105,36 @@ export default abstract class NPC extends Human {
      */
     removeAiType(ai: AiType): void;
     /**
-     * Closes the merchant trading window for everybody.
+     * Greets a human, if necessary, and sets the NPC as having been talked to them on the current turn.
+     * @returns The time since the NPC was last talked to, or false if the human has never talked to the NPC.
      */
-    closeInventory(): void;
-    updateDirection(x: number, y: number): void;
-    moveToIsland(targetIsland: Island, targetPosition: IVector3): void;
+    talkTo(human: Human): number | false;
+    /**
+     * @returns The time since the NPC was last talked to, or false if the human has never talked to the NPC.
+     */
+    hasTalkedTo(human?: Human): number | false;
+    /**
+     * @param timeSinceLastChat The time it's been since the human last chatted with this NPC, or false if it's the first time.
+     */
+    getGreeting(human: Human, timeSinceLastChat: number | false): TranslationImpl | undefined;
+    getDefaultInteraction(): number | undefined;
+    isAlreadyInteracting(human: Human, interactType?: number): boolean;
+    canInteract(human: Human, interactType?: number): IActionUsable | IActionNotUsable;
+    confirmInteract(human: Human, interactType?: number): Promise<boolean>;
+    /**
+     * Don't call this directly, it's for implementation. @see {@link NPCInteract}
+     */
+    interact(action: IActionHandlerApi<Human>, interactType?: number): void;
+    /**
+     * Closes container dialogs
+     */
+    closeContainerDialogs(): void;
+    protected moveToIsland(targetTile: Tile): void;
     /**
      * Sets the default weightCapacity of an NPC (based on their equipment and starting items).
      */
     generateWeightCapacity(): void;
-    getName(): import("../../../language/impl/TranslationImpl").default;
+    getName(asKnownBy?: Human): TranslationImpl;
     /**
      * The name of the npc - called when created
      */
@@ -106,7 +146,7 @@ export default abstract class NPC extends Human {
     /**
      * The customizations of the npc - called when created
      */
-    protected abstract getDefaultCustomization(): ICustomizations;
+    protected getDefaultCustomization(): ICustomizations;
     /**
      * The equip the npc spawns with - called for every equip type when the npc is created
      */
@@ -128,12 +168,42 @@ export default abstract class NPC extends Human {
     protected move(): boolean;
     protected autoScaleStats(): void;
     protected changeZ(toZ: number, fromZ: number): boolean | void | undefined;
-    protected preMove(fromX: number, fromY: number, fromZ: number, fromTile: ITile, toX: number, toY: number, toZ: number, toTile: ITile, isMoving: boolean): boolean | void | undefined;
+    protected updateTile(fromTile: Tile, toTile: Tile): boolean;
     protected postMove(): void;
-    protected checkMove(moveType: MoveType, tileX: number, tileY: number, tileZ: number): 0 | -1 | -2 | -3 | -4 | -5;
+    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): 0 | -1 | -2 | -3 | -4 | -5 | -6;
     getWeightOrStaminaMovementPenalty(): number;
     get asMerchant(): MerchantNPC | undefined;
+    get asShipper(): ShipperNPC | undefined;
     get asNPC(): NPC;
     get asPlayer(): undefined;
     get asLocalPlayer(): undefined;
+    /**
+     * Properties system that is only used for merchants
+     */
+    hasProperty(property: Property): boolean;
+    addProperty(property: Property, value: any): void;
+    getProperty<T>(property: Property): T | undefined;
+    removeProperty(property: Property): boolean;
+    /**
+     * Equip better things when available
+     */
+    private processEquipment;
+    /**
+     * Try to do something when health is below 20%
+     */
+    private processHealth;
+    /**
+     * Try to do something when hunger is below 20%
+     */
+    private processHunger;
+    /**
+     * Try to do something when thirst is below 20%
+     */
+    private processThirst;
+    /**
+     * Stop stat timers when they would kill
+     */
+    protected capStatTimers(): void;
+    private calculateWeaponEquipItemScore;
+    private calculateDefenseEquipItemScore;
 }

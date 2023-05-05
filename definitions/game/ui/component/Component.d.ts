@@ -194,7 +194,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     /**
      * Returns whether this component contains the given element.
      */
-    contains(what?: string | Element | Component | null): boolean;
+    contains(what?: string | Node | Component | null): boolean;
     /**
      * An alias for `element.querySelectorAll(selector)`
      */
@@ -256,6 +256,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * providing the argument removes the tooltip options.
      */
     setTooltip<ARGS extends any[]>(initializer?: (tooltip: Tooltip, ...args: ARGS) => any, ...args: ARGS): this;
+    refreshTooltip(): void;
     removeTooltip(): void;
     /**
      * Removes the context menu from this element.
@@ -270,14 +271,14 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * @param child The child to scroll to
      * @param ms The time to take, defaulting to 1000 (1 second)
      */
-    scrollTo(child?: Component, ms?: number): void;
+    scrollTo(child?: HTMLElement | Component, ms?: number): void;
     /**
      * Scrolls this element so the given child is at the top of the viewport.
      * @param child The child to scroll to
      * @param offsetTop An offset for the position to scroll to, relative to the position of the child
      * @param ms The time to take, defaulting to 1000 (1 second)
      */
-    scrollTo(child: Component | undefined, offsetTop: number, ms?: number): void;
+    scrollTo(child: HTMLElement | Component | undefined, offsetTop: number, ms?: number): void;
     /**
      * Triggers a repaint on this element.
      */

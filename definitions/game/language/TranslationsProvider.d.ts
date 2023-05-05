@@ -43,7 +43,7 @@ export default abstract class TranslationsProvider {
     readonly contextRules: IContextRules;
     constructor(language: string);
     getTranslation(dictionaryName: string, entry: string): string[] | undefined;
-    setDictionary(dictionary: string, translations: Record<string, string | string[]>): this;
+    setDictionary(dictionary: string, translations: Record<string, string | string[]> | Map<any, string | string[]>): this;
     setIrregularRules(...rules: Array<[string, string]>): this;
     setPluralizationRules(...rules: Array<PluralRule | [string, string]>): this;
     setSingularizationRules(...rules: Array<SingularRule | [string, string]>): this;

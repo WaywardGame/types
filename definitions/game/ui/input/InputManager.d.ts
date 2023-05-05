@@ -123,6 +123,7 @@ declare class InputManager extends EventEmitter.Host<IInputManagerEvents> {
     private updateModifiersChanged;
     private unpress;
     private handleOther;
+    private lastLoop?;
     private inputLoop;
     private onUnpress;
     /**

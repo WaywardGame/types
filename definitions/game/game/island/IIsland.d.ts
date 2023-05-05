@@ -9,12 +9,20 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { BiomeType } from "game/biome/IBiome";
+import type Creature from "game/entity/creature/Creature";
+import type { CreatureType, IDamageOutcome, IDamageOutcomeInput } from "game/entity/creature/ICreature";
 import type Human from "game/entity/Human";
-import type { TickFlag, TileUpdateType } from "game/IGame";
+import type { DamageType, Defense } from "game/entity/IEntity";
+import type NPC from "game/entity/npc/NPC";
+import type { IIslandTemplate, TickFlag, TileUpdateType } from "game/IGame";
+import type Port from "game/island/Port";
 import type { MultiplayerLoadingDescription } from "game/meta/Loading";
-import type { ITile, TerrainType } from "game/tile/ITerrain";
+import type { TerrainType } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
+import type { ISerializedTranslation } from "language/ITranslation";
 import type World from "renderer/world/World";
-import type { IVector2 } from "utilities/math/IVector";
+import type { IVector2, IVector3 } from "utilities/math/IVector";
+import type { SeedType } from "utilities/random/IRandom";
 export type IslandId = `${number},${number}`;
 export declare module IslandPosition {
     function toId(position: IVector2): IslandId;
@@ -33,6 +41,10 @@ export interface IIslandEvents {
      */
     deactivated(): void;
     /**
+     * Called when the island is unloaded
+     */
+    unloaded(): void;
+    /**
      * Called when the island is deleted
      */
     delete(): void;
@@ -41,16 +53,13 @@ export interface IIslandEvents {
     /**
      * Called when a tile is updated (tile type changed, doodad created on it, etc)
      * @param tile The tile that was updated
-     * @param x The x position of the updated tile
-     * @param y The y position of the updated tile
-     * @param z The z position of the updated tile
      * @param tileUpdateType The tile update type
      */
-    tileUpdate(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType): void;
+    tileUpdate(tile: Tile, tileUpdateType: TileUpdateType): void;
     /**
      * Called when a tile type changes.
      */
-    terrainChange(x: number, y: number, z: number, tile: ITile, oldType: TerrainType): any;
+    terrainChange(tile: Tile, oldType: TerrainType): any;
     /**
      * Called when item references are loaded
      */
@@ -75,25 +84,50 @@ export interface IIslandEvents {
      * Emitted when an island is renamed
      */
     rename(human: Human, newName?: string, oldName?: string): any;
+    /**
+     * Emitted when island ports have changed
+     */
+    portsChanged(addedPort?: Port, removedPort?: Port): any;
+    getDefense(defense: Defense | undefined, target: Human | Creature | CreatureType, damageType?: DamageType): Defense | undefined;
+    calculateAttackOutcome(damageOutcome: IDamageOutcome, input: IDamageOutcomeInput, attackValue: number, defenseValue: number): IDamageOutcome | undefined;
 }
-export interface ISeeds {
+export interface ILegacySeeds {
+    type: SeedType.Legacy;
     base: number;
     saved: number;
 }
+export interface IPCGSeeds {
+    type: SeedType.PCG;
+    base: number;
+    saved: Uint16Array;
+}
+export type ISeeds = ILegacySeeds | IPCGSeeds;
 export interface IIslandLoadOptions {
-    isNewSave: boolean;
-    travelTime: number;
-    newWorldBiomeTypeOverride: BiomeType;
-    pauseAndShowLoadingScreen: boolean;
-    multiplayerLoadingDescription: MultiplayerLoadingDescription;
-    allowItemAndDoodadFixesInMultiplayer: boolean;
+    /**
+     * Set to true when the island load is happening for everyone eveywhere all at once
+     */
+    isSynced: boolean;
+    isNewSave?: boolean;
+    travelTime?: number;
+    pauseAndShowLoadingScreen?: boolean;
+    multiplayerLoadingDescription?: MultiplayerLoadingDescription;
+    newIslandOverrides?: Partial<INewIslandOverrides>;
+    disableLoadingScreen?: boolean;
 }
 export interface IMoveToIslandOptions {
     spawnPosition: IVector2;
-    newWorldBiomeTypeOverride: BiomeType;
     noTravelingEffects: true;
+    noTravelingTime: true;
     distanceFromEdge: number;
     respawn: boolean;
+    newIslandOverrides: Partial<INewIslandOverrides>;
+    targetPortId: number;
+    disableLoadingScreen: boolean;
+    nestedTravelCount: number;
+}
+export interface INewIslandOverrides {
+    biomeType: BiomeType;
+    template: IIslandTemplate;
 }
 export interface IWell {
     quantity: number;
@@ -125,4 +159,24 @@ export declare enum LiquidType {
 }
 export declare const ISLAND_NAME_MAX_LENGTH = 32;
 export declare const DEFAULT_ISLAND_ID = "0,0";
-export declare const DEFAULT_ISLAND_POSITION: IVector2;
+export declare const DEFAULT_ISLAND_MAP_SIZE = 512;
+export declare const TRAVEL_ANIMATION_ISLAND_ID: IslandId;
+export interface IIslandPort {
+    id: number;
+    name: string | ISerializedTranslation;
+    position: IVector3;
+}
+export interface IMobCheck extends IVector3 {
+    tile: Tile;
+    creature?: Creature;
+    player?: Human;
+    npc?: NPC;
+    obstacle?: boolean;
+    water?: boolean;
+    freshWater?: boolean;
+    shallowWater?: boolean;
+    swampWater?: boolean;
+    noTile?: boolean;
+    waterTiles?: number;
+    voidTiles?: number;
+}

@@ -10,29 +10,39 @@
  */
 import type { BiomeType } from "game/biome/IBiome";
 import type { SkillType } from "game/entity/IHuman";
-import type { CreationId } from "game/IGame";
 import type { TerrainType } from "game/tile/ITerrain";
 import type { WorldZ } from "game/WorldZ";
 import type { ISerializedTranslation } from "language/ITranslation";
 export interface IObject<T> {
-    objectType: CreationId;
     type: T;
     id: number;
     renamed?: string | ISerializedTranslation;
 }
 export interface IObjectDescription extends IHasImagePath {
+    /**
+     * Set to true if we want to store decay, but not have it active (in the case of torches)
+     */
     storeDecay?: boolean;
+    /**
+     * number of game ticks until decay
+     */
     decayMax?: number;
     skillUse?: SkillType;
+    /**
+     * container maximum weight
+     */
     weightCapacity?: number;
+    /**
+     * Chance that things will decay inside it
+     */
     preservationChance?: number;
     spawnOnWorldGen?: OptionalDescriptions<BiomeType, OptionalDescriptions<WorldZ, OptionalDescriptions<TerrainType, number>>>;
 }
-export interface IHasImagePath {
+export interface IHasImagePath<ImagePathType = string> {
     /**
      * A replacement image to use. Used in modding.
      */
-    imagePath?: string;
+    imagePath?: ImagePathType;
     /**
      * The number of alternate textures that this image has. Not supported for most things.
      */

@@ -9,11 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import type { Game } from "game/Game";
 import type { IGenericManager, IGenericRegistration } from "utilities/generic/IGenericManager";
 import type { LogSource } from "utilities/Log";
 export default abstract class GenericManager<T extends IGenericRegistration> extends EventEmitter.Host<{}> implements IGenericManager<T> {
+    readonly game: Game;
     private readonly registered;
-    constructor();
+    constructor(game: Game);
     abstract setup(instance: GenericManager<T>): void;
     has(type: number): boolean;
     add(registration: T): void;

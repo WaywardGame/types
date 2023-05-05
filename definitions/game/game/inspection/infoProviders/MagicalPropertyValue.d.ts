@@ -14,7 +14,6 @@ import type { Quality } from "game/IObject";
 import type { IHasMagic, MagicalNormalPropertyTypes, MagicalSubPropertyTypes } from "game/magic/MagicalPropertyManager";
 import { MagicalPropertyIdentity } from "game/magic/MagicalPropertyManager";
 import type { MagicalPropertyTypeSubTypeMap } from "game/magic/MagicalPropertyType";
-import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import { IRange } from "utilities/math/Range";
@@ -48,6 +47,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     setMagical(magicalThingy: IHasMagic | undefined, type: MagicalNormalPropertyTypes): this;
     setMagical<T extends MagicalSubPropertyTypes>(magicalThingy: IHasMagic | undefined, type: T, subType?: MagicalPropertyTypeSubTypeMap[T]): this;
     setMagical(magicalThingy: IHasMagic | undefined, ...identity: MagicalPropertyIdentity): this;
+    setCustomMagical(identity: MagicalPropertyIdentity, custom?: GetterOfOr<number | undefined>): this;
     setMagicalReduction(): this;
     setQuality(quality?: Quality, modifier?: number | IRange): this;
     setSkill(skill?: SkillType, modifier?: number | IRange): this;
@@ -69,7 +69,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     setExpandedVerbose(): this;
     setMagicIncluded(): this;
     getClass(): string[];
-    get(): (TranslationGenerator<UiTranslation, []> | InfoProvider)[];
+    get(): (TranslationGenerator | InfoProvider)[];
     private getOutOf;
     private formatNumber;
 }

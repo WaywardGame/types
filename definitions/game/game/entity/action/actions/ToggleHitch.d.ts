@@ -16,5 +16,5 @@ export interface IToggleHitchCanUse extends IActionUsable {
     creature: Creature;
     hitch?: Doodad;
 }
-declare const _default: Action<[], import("../../Human").default, void, IToggleHitchCanUse, []>;
+declare const _default: Action<[], import("../../Human").default<number>, void, IToggleHitchCanUse, []>;
 export default _default;

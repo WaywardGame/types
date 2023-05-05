@@ -15,7 +15,7 @@ import Inspection from "game/inspection/Inspection";
 import { ItemType } from "game/item/IItem";
 import type { TranslationGenerator } from "ui/component/IComponent";
 export default class RecipeInspection extends Inspection<ItemType> {
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
     private checker;
     constructor([, itemType]: [any, ItemType]);
     getId(): string;

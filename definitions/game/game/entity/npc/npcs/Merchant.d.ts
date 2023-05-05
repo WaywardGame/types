@@ -8,54 +8,53 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ActionType } from "game/entity/action/IAction";
+import type Human from "game/entity/Human";
 import { AiType } from "game/entity/IEntity";
-import type { ICustomizations } from "game/entity/IHuman";
 import { EquipType } from "game/entity/IHuman";
+import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
+import { ActionType } from "game/entity/action/IAction";
+import type { INPCConstructorOptions } from "game/entity/npc/INPC";
 import NPC from "game/entity/npc/NPC";
-import type Player from "game/entity/player/Player";
+import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
+import type TranslationImpl from "language/impl/TranslationImpl";
 export interface IMerchantBuyPrice {
     base: number;
     bonus: number;
     total: number;
 }
+export declare enum MerchantCustomerKnowledgeState {
+    None = 0,
+    KnowsOfNewStock = 1,
+    HasSeenInventory = 2
+}
 export default class MerchantNPC extends NPC {
-    constructor(id?: number, islandId?: `${number},${number}`, x?: number, y?: number, z?: number);
+    credit: Map<string, number>;
+    customerKnowledge: Map<string, MerchantCustomerKnowledgeState>;
+    constructor(options?: INPCConstructorOptions);
+    knowsOfUnseenStock(customer: Human): boolean;
+    getCustomerCredit(customer: Human): number;
+    modifyCustomerCredit(customer: Human, creditChange: number): number;
     getActions(): ActionType[] | undefined;
-    getSellPrice(player: Player, item: Item): number | undefined;
-    getBuyPrice(player: Player, item: Item): IMerchantBuyPrice | undefined;
+    getPublicContainer(): IContainer | undefined;
+    getSellPrice(human: Human, item: Item): number | undefined;
+    getBuyPrice(human: Human, item: Item): IMerchantBuyPrice | undefined;
+    getGreeting(human: Human, timeSinceLastChat: number | false): TranslationImpl | undefined;
+    canInteract(human: Human): IActionUsable | IActionNotUsable;
+    interact(action: IActionHandlerApi<Human>, interactType?: number | undefined): void;
+    /**
+     * Closes container dialogs
+     */
+    closeContainerDialogs(): void;
     protected getReputationChangeOnDeath(): number;
-    protected getDefaultName(): import("../../../../language/impl/TranslationImpl").default;
+    protected getDefaultName(): TranslationImpl;
     protected initializeStats(): void;
-    protected getDefaultCustomization(): ICustomizations;
     protected getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;
     protected getDefaultInventory(): Array<Item | ItemType>;
     protected getDefaultAiType(): AiType;
     private canSpawnItem;
     protected runActions(): boolean;
-    /**
-     * Stop stat timers when they would kill
-     */
-    private capStatTimers;
-    /**
-     * Equip better things when available
-     */
-    private processEquipment;
-    /**
-     * Try to do something when health is below 20%
-     */
-    private processHealth;
-    /**
-     * Try to do something when hunger is below 20%
-     */
-    private processHunger;
-    /**
-     * Try to do something when thirst is below 20%
-     */
-    private processThirst;
     get asMerchant(): MerchantNPC;
-    private calculateWeaponEquipItemScore;
-    private calculateDefenseEquipItemScore;
+    get asShipper(): undefined;
 }

@@ -11,11 +11,13 @@
 import type Stream from "@wayward/goodstream";
 import type Human from "game/entity/Human";
 import type Island from "game/island/Island";
-import type Message from "language/dictionary/Message";
-import type { ISerializedTranslation } from "language/ITranslation";
+import type Dictionary from "language/Dictionary";
+import type { ISerializedTranslation, TranslationArg } from "language/ITranslation";
 import type Translation from "language/Translation";
+import type Message from "language/dictionary/Message";
 import type { IVector4 } from "utilities/math/Vector4";
 import type { IStringSection } from "utilities/string/Interpolator";
+export declare const CHAT_MESSAGE_MAX_LENGTH = 512;
 export declare enum Source {
     /**
      * Every message
@@ -116,9 +118,9 @@ export interface IMessageManager {
     type(type?: MessageType): this;
     ifVisible(canSee?: IVector4): this;
     ifOnIsland(island: Island): this;
-    send(message: Message | Translation, ...args: any[]): boolean;
+    send(message: Message | Translation, ...args: TranslationArg[]): boolean;
     sendPacked(pack: Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
-    pruneMessageHistory(): boolean;
+    pruneMessageHistory(isLocalPlayer: boolean): boolean;
     ifIs(human: Human): this;
     ifIsNot(human: Human): this;
     addToHistory(messageHistoryItem: IMessageHistoryItem): void;
@@ -126,6 +128,7 @@ export interface IMessageManager {
      * Signal that the message was sent to everyone
      */
     sentToAll(sentToAll?: boolean): this;
+    upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
 }
 export interface IMessageHistoryItem {
     id: number;

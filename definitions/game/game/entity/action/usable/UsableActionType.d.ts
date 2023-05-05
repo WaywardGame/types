@@ -68,13 +68,20 @@ export declare enum UsableActionType {
     EquipMainHand = 100046,
     EquipOffHand = 100047,
     RestOnGround = 100048,
-    SleepOnGround = 100049
+    SleepOnGround = 100049,
+    CommandMenu = 100050,
+    CommandFollowClose = 100051,
+    CommandFollowFar = 100052,
+    CommandStay = 100053,
+    CommandDefend = 100054,
+    CommandAttack = 100055
 }
 export declare enum UsableActionTypePlaceholder {
     TradeItem = 200000,
     MoveAllToInventory = 200001,
     MoveAllOfSameQualityToInventory = 200002,
     Paddle = 200003,
-    Operate = 200004
+    Operate = 200004,
+    SwimToIsland = 200005
 }
 export declare const usableActionDescriptions: PartialRecord<UsableActionType | UsableActionTypePlaceholder, IModdable>;

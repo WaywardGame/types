@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { ItemType } from "game/item/IItem";
-import ItemOutput from "game/item/recipe/output/ItemOutput";
 import type Recipe from "game/item/recipe/Recipe";
+import ItemOutput from "game/item/recipe/output/ItemOutput";
 export declare enum RecipeSort {
     Name = 0
 }

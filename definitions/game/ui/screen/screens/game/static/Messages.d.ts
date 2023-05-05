@@ -42,7 +42,7 @@ export default class Messages extends QuadrantComponent {
     readonly filter: Button | undefined;
     pinNotesAutomatically: boolean;
     filters: IFilters;
-    private selectedFilter;
+    private selectedFilter?;
     private showSendButton;
     private showOptionsButton;
     private unfocusOnSend;
@@ -55,6 +55,7 @@ export default class Messages extends QuadrantComponent {
     private readonly chatSentHistory;
     private chatHistoryIndex;
     private pushedCurrentToHistory;
+    private wasInTopQuadrant;
     constructor();
     getPins(): Stream<IPinnedMessage>;
     getMessageTimestampMode(): MessageTimestamp;
@@ -67,7 +68,7 @@ export default class Messages extends QuadrantComponent {
     setShouldUnfocusOnSend(shouldUnfocusOnSend: boolean): this;
     getMaxMessages(): number;
     setMaxMessages(maxMessages: number): this;
-    scrollToNewest(): void;
+    scrollToNewest(): Promise<void>;
     sendPinnedMessage(pinnedMessage: PinnedMessage): PinnedMessage;
     pinQuestRequirement(quest: QuestInstance, requirement?: RequirementInstance): IPinnedMessage | PinnedMessage | undefined;
     unpinMessage(pinnedMessage: PinnedMessage, time?: number): Promise<void>;
@@ -98,6 +99,9 @@ export default class Messages extends QuadrantComponent {
     private hasIncompletePinnedRequirementFromAnotherQuest;
     private showOptions;
     private scheduleShowMessage;
+    private currentTurn?;
+    private currentTurnComponent?;
+    private getTurnGroup;
     private updateMessages;
     private messages;
     /**
@@ -119,7 +123,8 @@ export default class Messages extends QuadrantComponent {
     /**
      * Changes the message filter
      */
-    private changeFilter;
+    setFilter(filterName?: string, skipRefresh?: boolean): void;
+    getFilter(): string | undefined;
     private refreshLog;
     private onShowDialog;
     private onShowNote;

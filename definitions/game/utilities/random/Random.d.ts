@@ -8,20 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IslandId } from "game/island/IIsland";
 import type { IRange } from "utilities/math/Range";
-export type WeightedOption<T> = [number, T];
-export interface IRandomPushed {
-    seed: number;
-    history?: IRandomHistory[];
-}
-export interface IRandomHistory {
-    stack: string;
-    seeds: number[];
-}
-export interface IRandomGenerator {
-    get(): number;
-}
+import type { IRandomGenerator, WeightedOption } from "utilities/random/IRandom";
 export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
     generator: G;
     constructor(generator: G);
@@ -85,51 +73,29 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
      * Note: Be careful. This method can be very slow if used on a big array with a high count.
      */
     sampling<T = any>(arr: T[], count: number): T[];
-    shuffle<T>(array: T[]): T[];
+    /**
+     * Returns a new shuffled array
+     */
+    shuffle<T>(array: readonly T[]): T[];
+    /**
+     * Modifies an array and shuffles it
+     */
+    shuffleInPlace<T>(array: T[]): T[];
     getElement<T>(array: T[]): T;
     /**
      * Returns a random T from the given choices, where each choice is weighted by a number. Higher numbers = higher chance.
      */
     weightedChoice<T>(choices: Array<WeightedOption<T>>): T;
     withGenerator<T>(generator: G, execute: () => T): T;
+    clone<T>(requiresSynchronization?: boolean, initialState?: T): Random<G>;
+    /**
+     * Generates a rounded number between a range of numbers using exponential interpolation with optional weight.
+     * Note: Thanks ChatGPT!
+     * @param min Minimum number of range.
+     * @param max Maximum number of range.
+     * @param steepness Steepness of the curve.
+     * @returns number between provided min/max, rounded.
+     */
+    intInRangeExponential(min: number, max: number, steepness?: number): number;
+    advance(): this;
 }
-/**
- * Converts string or number into a map gen seed
- * Prevents negative numbers and integer overflows
- */
-export declare function convertStringToSeed(seed: string | number): number;
-export declare class SeededGenerator implements IRandomGenerator {
-    private readonly requiresSynchronization;
-    private history;
-    private maxHistoryLength;
-    private seed;
-    private readonly pushedSeeds;
-    constructor(requiresSynchronization: boolean, seed?: number);
-    tickSeed(s: number): number;
-    getSeed(): number;
-    setSeed(newSeed: number): void;
-    generateSeed(): void;
-    pushSeed(newSeed?: number): void;
-    popSeed(): number;
-    get(): number;
-    startHistory(maxHistory?: number): void;
-    getHistory(): IRandomHistory[] | undefined;
-    takeHistory(): IRandomHistory[] | undefined;
-    stopHistory(): IRandomHistory[];
-    getBaseSeed(): number;
-}
-export declare enum RandomInstance {
-    Seeded = 0,
-    MilestoneModifiers = 1,
-    IslandModifier = 2
-}
-export type RandomReference = [random: RandomInstance, islandId?: IslandId];
-export declare module RandomReference {
-    function resolve(reference: RandomInstance | RandomReference): RandomReference;
-}
-export declare function getRandom(randomInstance: RandomInstance, islandId?: IslandId): Random<SeededGenerator>;
-export declare function createSeededRandom(requiresSynchronization: boolean, seed?: number): Random<SeededGenerator>;
-export declare const mapGenRandom: Random<SeededGenerator>;
-export declare const generalRandom: Random<{
-    get: () => number;
-}>;

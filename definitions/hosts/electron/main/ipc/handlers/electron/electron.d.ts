@@ -33,4 +33,5 @@ export declare class ElectronIPCHandler implements IElectron, IIPCHandler<IElect
     invalidateWindow(): Promise<void>;
     destroyWindow(): Promise<void>;
     showSaveDialog(defaultPath: string, filterName: string, filterExtension: string): Promise<string | undefined>;
+    showOpenDirectoryDialog(defaultPath: string): Promise<string[]>;
 }

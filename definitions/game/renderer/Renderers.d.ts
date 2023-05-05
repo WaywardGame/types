@@ -11,35 +11,45 @@
 import type { CreatureType } from "game/entity/creature/ICreature";
 import type { StatusEffectChangeReason } from "game/entity/IEntity";
 import type StatusEffect from "game/entity/status/StatusEffect";
+import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
-import type { ItemType } from "game/item/IItem";
+import type { DisplayableItemType } from "game/item/IItem";
+import type { IOverlayInfo } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import type { RenderSource, UpdateRenderFlag } from "renderer/IRenderer";
 import type { CreatureNotifierType, INotificationLocation, ItemNotifierType, NotifierIconType, StatNotificationType } from "renderer/notifier/INotifier";
 import type Renderer from "renderer/Renderer";
 import type { IRGB } from "utilities/Color";
+import type { IVector4 } from "utilities/math/Vector4";
 /**
  * Tracks active Renderer instances for the client
  */
 export default class Renderers {
-    private readonly renderers;
+    readonly renderers: Set<Renderer>;
     readonly notifier: {
         suspend: () => void;
         resume: () => void;
         addNotifierIcon: (location: INotificationLocation, type: NotifierIconType) => void;
         addStat: (location: INotificationLocation, type: StatNotificationType, value: number) => void;
         addStatusEffect: (location: INotificationLocation, statusEffect: StatusEffect, reason: StatusEffectChangeReason) => void;
-        addItem: (location: INotificationLocation, itemNotifierType: ItemNotifierType, type: ItemType) => void;
+        addItem: (location: INotificationLocation, itemNotifierType: ItemNotifierType, type: DisplayableItemType) => void;
         addCreature: (location: INotificationLocation, creatureNotifierType: CreatureNotifierType, type: CreatureType, aberrant?: boolean) => void;
     };
     readonly particle: {
-        create: (island: Island, tileX: number, tileY: number, tileZ: number, particle: IRGB) => void;
-        createMultiple: (island: Island, tileX: number, tileY: number, tileZ: number, particle: IRGB, count: number, intensity?: number) => void;
+        create: (tile: Tile, particle: IRGB, count?: number, intensity?: number) => void;
     };
+    getRenderersForObject(object: IVector4): Renderer[];
+    getRenderersForIslandId(islandId: IslandId): Renderer[];
     hasRendererForIsland(island: Island): boolean;
-    add(renderer: Renderer): void;
-    remove(renderer: Renderer): void;
-    computeSpritesInViewport(): void;
+    add(renderer: Renderer): boolean;
+    remove(renderer: Renderer): boolean;
+    stop(): void;
+    reinitialize(): Promise<void>;
+    delete(): Promise<void>;
     update(timeStamp: number): void;
-    updateView(/*island: Island,*/ source: RenderSource, updateFov?: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition): void;
-    updateRender(/*island: Island,*/ source: RenderSource, flag: UpdateRenderFlag): void;
+    computeSpritesInViewport(origin: IVector4): void;
+    addOrUpdateOverlay(tile: Tile, overlay: IOverlayInfo): void;
+    removeOverlay(tile: Tile, overlay: IOverlayInfo): void;
+    updateView(origin: IVector4 | undefined, source: RenderSource, updateFov?: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition): void;
+    updateRender(origin: IVector4 | undefined, source: RenderSource, flag: UpdateRenderFlag): void;
 }

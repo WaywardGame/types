@@ -10,6 +10,8 @@
  */
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, import("game/entity/action/IAction").IActionUsable, [(import("../../../item/Item").default | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number>, void, {
+    usable: true;
+}, [import("../../../item/Item").default]>;
 export default _default;
 export declare function getCoordinatesTranslationArgs(x: number, y: number): any[];

@@ -15,7 +15,7 @@ import type Item from "game/item/Item";
 declare const _default: UseInfo<{
     civilizationScore: number | undefined;
     growingSpeed: number | undefined;
-    objectType: import("../../../../IGame").CreationId.Item;
+    entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
     type: import("../../../../item/IItem").ItemType;
     description: import("../../../../item/IItem").IItemDescription;

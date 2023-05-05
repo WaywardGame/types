@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { CreatureType } from "game/entity/creature/ICreature";
-declare const islandNameOverrunWithCreatureDescriptors: OptionalDescriptions<CreatureType, [adjective: string, noun: string]>;
+declare const islandNameOverrunWithCreatureDescriptors: Map<CreatureType, [adjective: string, noun: string]>;
 export default islandNameOverrunWithCreatureDescriptors;

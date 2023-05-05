@@ -8,9 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Game } from "game/Game";
 import type { IslandId } from "game/island/IIsland";
+import type { IIslandDetails } from "game/island/Island";
 import Island from "game/island/Island";
+import type { IVector2 } from "utilities/math/IVector";
+import type { SeedType } from "utilities/random/IRandom";
 export default class IslandManager extends Map<IslandId, Island> {
+    private readonly game;
+    constructor(game: Game);
     /**
      * Get the list of islands that contain players
      */
@@ -32,7 +38,7 @@ export default class IslandManager extends Map<IslandId, Island> {
      * Gets an island by id. Try to use "get" instead!
      * @returns Island or undefined if it does not exist
      */
-    getIfExists(islandId: IslandId): Island | undefined;
+    getIfExists(islandId?: IslandId): Island | undefined;
     /**
      * Gets an island by position
      */
@@ -41,9 +47,12 @@ export default class IslandManager extends Map<IslandId, Island> {
     /**
      * Gets or creates a new island by id
      */
-    getOrCreate(islandId: IslandId, ensureUpgraded?: boolean): Island;
+    getOrCreate(islandId: IslandId, ensureUpgraded?: boolean, mapSize?: number): Island;
     /**
      * Unloads islands that are no longer needed
      */
     cleanup(): void;
+    getBiomeType(x: number, y: number): import("../biome/IBiome").BiomeTypes;
+    getDetails(x: number, y: number): IIslandDetails;
+    generateDetails(position: IVector2, seedType: SeedType, seed?: number): IIslandDetails;
 }

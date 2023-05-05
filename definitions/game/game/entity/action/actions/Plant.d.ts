@@ -13,14 +13,13 @@ import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type { ITerrainDescription, TerrainType } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export interface IPlantCanUse extends IActionUsable {
     plantType: DoodadType;
     plantDescription: IDoodadDescription;
     tileType: TerrainType;
     terrainDescription?: ITerrainDescription;
-    x: number;
-    y: number;
-    z: number;
+    tile: Tile;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, IPlantCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number>, void, IPlantCanUse, [import("../../../item/Item").default]>;
 export default _default;

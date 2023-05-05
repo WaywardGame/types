@@ -11,10 +11,10 @@
 import type Doodad from "game/doodad/Doodad";
 import type { DoodadType, IDoodadDescription } from "game/doodad/IDoodad";
 import { ActionType } from "game/entity/action/IAction";
-import { CreationId } from "game/IGame";
+import { EntityType } from "game/entity/IEntity";
 import Uses from "game/inspection/infoProviders/Uses";
 export default class DoodadUses extends Uses<Doodad> {
-    protected getObjectType(): CreationId.Doodad;
+    protected getEntityType(): EntityType.Doodad;
     protected getDescription(type: DoodadType): IDoodadDescription | undefined;
     protected getUses(description: IDoodadDescription): ActionType[];
     protected getUseInfoHandlers(): import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Doodad, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>, ActionType.StartFire | ActionType.Ignite | ActionType.Equip, {}, Doodad>[];

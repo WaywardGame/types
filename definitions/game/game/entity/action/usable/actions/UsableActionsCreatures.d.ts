@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { UsableActionGenerator } from "game/entity/action/usable/UsableActionRegistrar";
-declare const _default: UsableActionGenerator<[]>;
-export default _default;
+export declare const UsableActionsCreatures: UsableActionGenerator<[]>;
+export declare const UsableActionsTamedCreatures: UsableActionGenerator<[]>;

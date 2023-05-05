@@ -14,14 +14,14 @@ import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Inspection from "game/inspection/Inspection";
 import ListInspection from "game/inspection/inspections/ListInspection";
+import type Tile from "game/tile/Tile";
 import TileEvent from "game/tile/TileEvent";
 import Translation from "language/Translation";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import Text from "ui/component/Text";
-import type { IVector3 } from "utilities/math/IVector";
 declare class TileEventInspection extends Inspection<TileEvent> {
-    static getFromTile(position: IVector3): TileEventInspection[];
-    static getFromTileFiltered(position: IVector3, minorEvents: boolean): TileEventInspection[];
+    static getFromTile(tile: Tile): TileEventInspection[];
+    static getFromTileFiltered(tile: Tile, minorEvents: boolean): TileEventInspection[];
     static handles(type: InspectType, tileEvent: unknown): boolean;
     constructor(tileEvent: TileEvent, inspectType?: InspectType);
     getId(): string;
@@ -30,7 +30,7 @@ declare class TileEventInspection extends Inspection<TileEvent> {
 }
 declare module TileEventInspection {
     class Minors extends ListInspection<TileEventInspection> {
-        static getFromTile(position: IVector3): never[] | Minors;
+        static getFromTile(tile: Tile): never[] | Minors;
         constructor(...inspections: TileEventInspection[]);
         get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
         getDefaultDisplayLevel(): InfoDisplayLevel;

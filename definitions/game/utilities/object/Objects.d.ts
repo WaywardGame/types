@@ -18,7 +18,7 @@ declare module Objects {
     function keys<O extends object>(o: O): Array<keyof O>;
     function values<O extends object>(o: O): Array<O[keyof O]>;
     function entries<O extends object>(o: O): Array<[keyof O, O[keyof O]]>;
-    function fromEntries<K extends string | number | symbol, V>(entriesIterable: Iterable<[K, V] | readonly [K, V]>): { [key in K]: V; };
+    function fromEntries<K extends string | number | symbol, V>(entriesIterable: Iterable<[K, V] | readonly [K, V]>): Record<K, V>;
     function windowKeysToObject(windowKeys: string[]): any;
     function windowKeysToParentObject(windowKeys: string[]): any;
     function anyAreObjects(things: any[]): boolean;

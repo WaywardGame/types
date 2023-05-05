@@ -12,6 +12,6 @@ import type { ISerializedTranslation } from "language/ITranslation";
 import { ListEnder } from "language/ITranslation";
 import type Translation from "language/Translation";
 import type { ISegment, IStringSection } from "utilities/string/Interpolator";
-export declare function formatList(items: Iterable<string | IStringSection | Iterable<IStringSection> | Translation | ISerializedTranslation>, ender?: ListEnder | false): Translation;
+export declare function formatListTranslation(items: Iterable<string | IStringSection | IStringSection[] | Translation | ISerializedTranslation>, ender?: ListEnder | false): Translation;
 declare const _default: ISegment;
 export default _default;

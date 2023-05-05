@@ -86,29 +86,11 @@ export type TranslationData = IBaseTranslationData | (Partial<IBaseTranslationDa
     entry: UiTranslation;
 });
 export type TextOrTranslationData = string | UiTranslation | TranslationData;
-/**
- * @deprecated
- */
-export declare enum TooltipLocation {
-    AboveLeft = 0,
-    AboveMiddle = 1,
-    AboveRight = 2,
-    TopLeft = 3,
-    TopRight = 4,
-    CenterLeft = 5,
-    CenterRight = 6,
-    BottomLeft = 7,
-    BottomRight = 8,
-    BeneathLeft = 9,
-    BeneathMiddle = 10,
-    BeneathRight = 11,
-    Mouse = 12
-}
 export interface IDisableable {
     disabled: boolean;
     setDisabled(disabled: boolean): this;
 }
-export type TranslationGenerator<ENUM extends number = UiTranslation, A extends any[] = []> = Translation | ENUM | ISerializedTranslation | ((...args: A) => Iterable<IStringSection> | Translation | ENUM | ISerializedTranslation | undefined);
+export type TranslationGenerator<ENUM extends number = UiTranslation, A extends any[] = []> = Translation | ENUM | ISerializedTranslation | ((...args: A) => IStringSection[] | Translation | ENUM | ISerializedTranslation | undefined);
 export interface IBox {
     left: number;
     top: number;

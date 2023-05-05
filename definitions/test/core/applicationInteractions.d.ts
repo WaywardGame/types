@@ -9,25 +9,28 @@
  * https://github.com/WaywardGame/types/wiki
  */
 /// <reference types="webdriverio/async" />
-import type { Stat } from "../../game/game/entity/IStats";
-import type { IslandId } from "../../game/game/island/IIsland";
-import { Direction } from "../../game/utilities/math/Direction";
-import type { Random, SeededGenerator } from "../../game/utilities/random/Random";
-import type { IDedicatedServerGameOptions, IJoinServerOptions, INewGameOptions, IWaitUntilGameLoadedOptions } from "../interfaces";
-import ApplicationDom from "./applicationDom";
-import ApplicationLogger from "./applicationLogger";
+import type { TestRunContext } from "@wayward/test/testRunner";
+import type { IInit } from "@wayward/game/Init";
+import type { Stat } from "@wayward/game/game/entity/IStats";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import { Direction } from "@wayward/game/utilities/math/Direction";
+import type { Random } from "@wayward/game/utilities/random/Random";
+import { ApplicationLogger } from "@wayward/test/core/applicationLogger";
+import { ApplicationDom } from "@wayward/test/core/applicationDom";
+import type { IWaitUntilGameLoadedOptions, IDedicatedServerGameOptions, INewGameOptions, ITestJoinServerOptions } from "@wayward/test/interfaces";
 export default class ApplicationInteractions {
+    protected readonly testContext: TestRunContext;
     readonly appId: string;
-    readonly random: Random<SeededGenerator>;
+    readonly random: Random;
     readonly logger: ApplicationLogger;
     dom: ApplicationDom;
-    protected browser: WebdriverIO.Browser;
+    protected browser: WebdriverIO.Browser | undefined;
+    protected nodeJsInit: IInit | undefined;
     readonly isDedicatedServer: boolean;
     userDataDirectory: string;
-    readonly screenshots: string[];
     private returnToTitleScreenCount;
     private readonly savedStates;
-    constructor(appId: string, additionalArgs: string[], random: Random<SeededGenerator>);
+    constructor(testContext: TestRunContext, appId: string, additionalArgs: string[], random: Random);
     waitForInitialStartup(expectedInitialScreen: "title" | "mp_gameplay_modifiers"): Promise<void>;
     waitUntilLoadingIsFinished(options?: Partial<IWaitUntilGameLoadedOptions>): Promise<void>;
     playDedicatedServer(options: IDedicatedServerGameOptions): Promise<void>;
@@ -60,7 +63,7 @@ export default class ApplicationInteractions {
     setNewGameSeed(seed: string | number): Promise<void>;
     setMultiplayerIdentifier(identifier: string): Promise<void>;
     runItemAction(itemId: number, action: string): Promise<void>;
-    importGame(savePath: string): Promise<void>;
+    private importGame;
     /**
      * Executes a Move action
      * @param direction Direction to move
@@ -72,7 +75,7 @@ export default class ApplicationInteractions {
     waitForGameEndScreen(isWinner: boolean): Promise<void>;
     returnToTitleScreen(): Promise<void>;
     getServerGameCode(): Promise<string>;
-    joinMultiplayerServer(gameCode: string, options: IJoinServerOptions, isDedicatedServer: boolean): Promise<void>;
+    joinMultiplayerServer(gameCode: string, options: ITestJoinServerOptions, isDedicatedServer: boolean): Promise<void>;
     pauseGame(): Promise<void>;
     unpauseGame(): Promise<void>;
     moveToIslandId(islandId: IslandId): Promise<void>;

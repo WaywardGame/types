@@ -9,21 +9,21 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Island from "game/island/Island";
-import type { ITile, TerrainType } from "game/tile/ITerrain";
+import type { TerrainType } from "game/tile/ITerrain";
 import { TileEventType } from "game/tile/ITileEvent";
+import type Tile from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
-import type { IVector3 } from "utilities/math/IVector";
 declare const _default: {
     internal: boolean;
     /**
      * Gets the decay rate of a terrain type based on the temperature (returns as a default of 0).
      * @param terrainType The terrain type to check.
-     * @param point The point of the terrain/tile.
+     * @param tile The tile.
      * @returns The number of decay reduction of the terrain given the temperature of the point.
      */
-    getMeltRate(island: Island, terrainType: TerrainType, point: IVector3): number;
-    canMelt(island: Island, terrainType: TerrainType, point: IVector3): boolean;
-    canCreate(island: Island, type: TileEventType, tile: ITile, tileType: TerrainType, x: number, y: number, z: number): boolean;
+    getMeltRate(island: Island, terrainType: TerrainType, tile: Tile): number;
+    canMelt(island: Island, terrainType: TerrainType, tile: Tile): boolean;
+    canCreate(island: Island, type: TileEventType, tile: Tile, tileType: TerrainType): boolean;
     update(tileEvent: TileEvent): void;
 };
 export default _default;

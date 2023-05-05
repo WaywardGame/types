@@ -37,6 +37,7 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     private readonly previouslyRefreshed;
     constructor(context: InfoProviderContext);
     get<TYPE extends InspectType>(type: TYPE): HashSet<ResolvedInspection<TYPE>> | undefined;
+    all(): Iterable<[InspectType, HashSet<Inspection<any>>]>;
     setInspectTypeFilter(filter?: (inspectType: InspectType) => boolean): this;
     refreshInspectTypeFilter(): this;
     deregister(): void;

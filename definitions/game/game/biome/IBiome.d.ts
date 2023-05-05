@@ -14,6 +14,7 @@ import type { TerrainType } from "game/tile/ITerrain";
 import type { IModdable } from "mod/ModRegistry";
 import type { IRGB } from "utilities/Color";
 export interface IBiomeDescription extends IModdable {
+    disableTravel?: boolean;
     defaultTerrainBackground: TerrainType;
     defaultCaveEntranceFlooring: TerrainType;
     terrainOverrides?: Set<TerrainType>;
@@ -51,7 +52,7 @@ export interface IFogDescription {
      */
     nightFogColorMaxMix?: number;
 }
-export type BiomeMapGen = MapGenVersions<IBiomeMapGen>;
+export type BiomeMapGen<T = void> = MapGenVersions<IBiomeMapGen>;
 export type BiomeTypes = Exclude<BiomeType, BiomeType.Random>;
 export declare enum BiomeType {
     Random = 0,
@@ -59,7 +60,8 @@ export declare enum BiomeType {
     IceCap = 2,
     Arid = 3,
     Volcanic = 4,
-    Wetlands = 5
+    Wetlands = 5,
+    Template = 6
 }
 /**
  * @see {@link IFogDescription.ambientColorFogBrightness }

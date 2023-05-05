@@ -17,6 +17,7 @@ import type NPC from "game/entity/npc/NPC";
 import type { IMovementIntent } from "game/entity/player/IPlayer";
 import type Player from "game/entity/player/Player";
 import type Item from "game/item/Item";
+import type TileEvent from "game/tile/TileEvent";
 import BasePacket from "multiplayer/packets/BasePacket";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 export default abstract class IndexedPacket extends BasePacket {
@@ -56,11 +57,13 @@ export default abstract class IndexedPacket extends BasePacket {
     protected writeIndexedPlayer(value?: Player): void;
     protected readIndexedDoodad(): Doodad | undefined;
     protected writeIndexedDoodad(value?: Doodad): void;
+    protected readIndexedTileEvent(): TileEvent | undefined;
+    protected writeIndexedTileEvent(value?: TileEvent): void;
     protected readIndexedNPC(): NPC | undefined;
     protected writeIndexedNPC(value?: NPC): void;
     protected readIndexedCorpse(): Corpse | undefined;
     protected writeIndexedCorpse(value?: Corpse): void;
-    protected readIndexedEntity(): Creature | NPC | Player | undefined;
+    protected readIndexedEntity(): Player | Creature | NPC | Doodad | TileEvent | Corpse | Item | undefined;
     protected writeIndexedEntity(value?: Entity): void;
     protected readIndexedHuman(): Human | undefined;
     protected writeIndexedHuman(value?: Human): void;

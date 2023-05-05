@@ -15,5 +15,5 @@ import type Creature from "game/entity/creature/Creature";
 export interface IOfferCanUse extends IActionUsable {
     creature: Creature;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default, void, IOfferCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number>, void, IOfferCanUse, [import("../../../item/Item").default]>;
 export default _default;

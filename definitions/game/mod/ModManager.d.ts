@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import type { Game } from "game/Game";
 import type { IPlayOptions } from "game/IGame";
 import type { IModConfig } from "mod/IMod";
 import { MultiplayerCompatibility } from "mod/IMod";
@@ -18,10 +19,13 @@ import type { ICanLoadInfo, IModManagerEvents } from "mod/IModManager";
 import { CanLoadState, ModLoadFailureReason } from "mod/IModManager";
 import Log from "utilities/Log";
 export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
+    private readonly game;
     private setup;
     private readonly mods;
     private readonly onModInitializedCallbacks;
     private loadedMods;
+    private _canUnlockMilestones?;
+    constructor(game: Game);
     get areModsLoaded(): boolean;
     waitForSetup(showLoad: boolean): Promise<void>;
     loadAll(options: Partial<IPlayOptions>): Promise<Array<[ModLoadFailureReason, ...any[]]>>;

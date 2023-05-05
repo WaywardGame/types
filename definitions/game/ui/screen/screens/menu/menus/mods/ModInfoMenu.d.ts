@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Article } from "ui/component/Article";
+import { ArticleComponent } from "ui/component/ArticleComponent";
 import { Block } from "ui/component/Block";
 import { BlockRow } from "ui/component/BlockRow";
 import Component from "ui/component/Component";
@@ -18,7 +18,7 @@ export default class ModInfoMenu extends Menu {
     protected modImage: Component<HTMLElement>;
     protected modMetadata: Block;
     protected mainInfo: BlockRow;
-    protected readme: Article;
+    protected readme: ArticleComponent;
     private readonly hostRef;
     get host(): ModRow;
     constructor(host: ModRow);

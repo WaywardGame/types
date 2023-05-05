@@ -29,7 +29,7 @@ import SkillInspection from "game/inspection/inspections/SkillInspection";
 import StatInspection from "game/inspection/inspections/StatInspection";
 import TileEventInspection from "game/inspection/inspections/TileEventInspection";
 import TileInspection from "game/inspection/inspections/TileInspection";
-import type { IVector3 } from "utilities/math/IVector";
+import type Tile from "game/tile/Tile";
 declare const inspectionTypeMap: {
     12: typeof ActionInspection;
     14: typeof CorpseInspection;
@@ -56,7 +56,7 @@ declare const inspectionTypeMap: {
 };
 export type InspectionClass = Class<Inspection<any>> & {
     isWorldInspection?(inspectType: InspectType): boolean;
-    getFromTile?(position: IVector3, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<any>>;
+    getFromTile?(tile: Tile, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<any>>;
     /**
      * Whether or not this inspection class can handle the given arguments.
      * @param args A list of arguments that an inspection can be provided

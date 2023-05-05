@@ -9,10 +9,9 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { SfxType } from "audio/IAudio";
-import type { IslandId } from "game/island/IIsland";
-import type { IVector2, IVector3 } from "utilities/math/IVector";
-export interface INotificationLocation extends IVector3 {
-    readonly islandId: IslandId;
+import type { IVector2 } from "utilities/math/IVector";
+import type { IVector4 } from "utilities/math/Vector4";
+export interface INotificationLocation extends IVector4 {
     getMovementPoint?(timeStamp: number): IVector2;
     queueSoundEffect?(soundEffect: SfxType): void;
 }
@@ -33,7 +32,8 @@ export declare enum ItemNotifierType {
     Removed = 2,
     Broken = 3,
     Offer = 4,
-    Damaged = 5
+    Damaged = 5,
+    Decaying = 6
 }
 export declare enum CreatureNotifierType {
     Neutral = 0,
@@ -44,7 +44,9 @@ export declare enum NotifierIconType {
     Tame = 0,
     Untame = 1,
     Water = 2,
-    Warning = 3
+    Warning = 3,
+    Decay = 4,
+    Talk = 5
 }
 export declare const itemDamageNotifierThreshold = 3;
 export declare const doodadDamageNotifierThreshold = 5;

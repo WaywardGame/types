@@ -41,6 +41,7 @@ export declare class SmartConnection extends Connection {
     protected onClosed(): void;
     addKeepAliveTimeout(): void;
     sendKeepAlive(): void;
+    clearTimeout(): boolean;
     send(data: Uint8Array, byteOffset: number, length?: number): boolean;
     processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;
     private trySteamNetwork;

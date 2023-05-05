@@ -18,7 +18,7 @@ export interface IUpgradeCanUse extends IActionUsable {
     upgrade: IUpgradeable;
     upgradeTarget: Item;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default, void, IUpgradeCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default<number>, void, IUpgradeCanUse, [Item, (Item | undefined)?]>;
 export default _default;
 export interface IUpgradeable extends IMagicalPropertyInfo {
     target: Item;

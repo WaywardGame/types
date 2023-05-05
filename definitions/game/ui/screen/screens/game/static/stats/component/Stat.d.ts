@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Entity from "game/entity/Entity";
+import type EntityWithStats from "game/entity/EntityWithStats";
 import type { IStatChangeInfo } from "game/entity/IEntity";
 import type { IStat, IStatMax, Stat } from "game/entity/IStats";
 import Component from "ui/component/Component";
@@ -18,7 +19,7 @@ export declare abstract class StatComponent extends Component {
     private readonly entity;
     private readonly stat;
     private readonly statIcon;
-    constructor(entity: Entity, stat: Stat, noEvents?: true);
+    constructor(entity: EntityWithStats, stat: Stat, noEvents?: true);
     protected onRemove(): void;
     /**
      * Returns the attached entity's `IStat` for this `StatElement`'s `Stat`.
@@ -74,7 +75,7 @@ export declare abstract class StatsContainer<STAT_COMPONENT extends StatComponen
 export declare class Statbar extends StatComponent {
     private readonly bar;
     private readonly text;
-    constructor(entity: Entity, stat: Stat, noEvents?: true);
+    constructor(entity: EntityWithStats, stat: Stat, noEvents?: true);
     getDisplayElement(): Text;
     getGenericStatValue(stat: IStatMax): IStringSection[];
     /**
@@ -86,14 +87,14 @@ export declare class Statbar extends StatComponent {
 }
 export declare class StatAttribute extends StatComponent {
     private readonly attribute;
-    constructor(entity: Entity, stat: Stat, noEvents?: true);
+    constructor(entity: EntityWithStats, stat: Stat, noEvents?: true);
     getDisplayElement(): Text;
 }
 export declare class Statbars extends StatsContainer<Statbar> {
     constructor(entity: Entity, stats: Iterable<Stat>, noEvents?: true);
-    protected createStatComponent(entity: Entity, stat: Stat, noEvents: true | undefined): Statbar;
+    protected createStatComponent(entity: EntityWithStats, stat: Stat, noEvents: true | undefined): Statbar;
 }
 export declare class StatAttributes extends StatsContainer<StatAttribute> {
-    constructor(entity: Entity, stats: Iterable<Stat>, noEvents?: true);
-    protected createStatComponent(entity: Entity, stat: Stat, noEvents: true | undefined): StatAttribute;
+    constructor(entity: EntityWithStats, stats: Iterable<Stat>, noEvents?: true);
+    protected createStatComponent(entity: EntityWithStats, stat: Stat, noEvents: true | undefined): StatAttribute;
 }

@@ -12,7 +12,7 @@ import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { ActionId } from "game/entity/action/usable/IUsableAction";
 import { EquipType } from "game/entity/IHuman";
 import { Quality } from "game/IObject";
-import type { ItemType } from "game/item/IItem";
+import type { ItemType, ItemTypeExtra } from "game/item/IItem";
 import type Item from "game/item/Item";
 import Component from "ui/component/Component";
 import type ContextMenu from "ui/component/ContextMenu";
@@ -42,7 +42,6 @@ export declare enum ItemDetailIconLocation {
 export declare enum ItemClasses {
     Main = "item-component",
     Icon = "item-component-icon",
-    ItemIcon = "item-component-icon-item",
     ItemIconIsReal = "item-component-icon-item-is-real",
     ActionIcon = "item-component-icon-action",
     ActionIconHasItem = "item-component-icon-action-has-item",
@@ -69,7 +68,7 @@ export interface IItemHandler {
     noDrag?: true;
     equipSlot?: EquipType;
     getItem?(): Item | undefined;
-    getItemType?(): ItemType | undefined;
+    getItemType?(): ItemType | ItemTypeExtra | undefined;
     getItemQuality?(): Quality | undefined;
     getActionSlot?(): ActionSlot | undefined;
     getBindables?(bindables: Bindable[]): Bindable[];
@@ -90,7 +89,6 @@ export default class ItemComponent extends Component {
     protected readonly handler: IItemHandler;
     static registerSlot(slot: ItemSlot): void;
     event: IEventEmitter<this, Events<IDraggableComponent> & IItemSlotEvents>;
-    readonly itemIcon: Component<HTMLElement>;
     readonly magicalIcon: Component<HTMLElement>;
     readonly protectedIcon: Component<HTMLElement>;
     readonly actionIcon: Component<HTMLElement> | undefined;
@@ -101,6 +99,8 @@ export default class ItemComponent extends Component {
     durabilityBar?: Component;
     readonly draggable?: Draggable;
     constructor(handler: IItemHandler);
+    private registerTickEndHandlerForDecay;
+    private deregisterTickEndHandlerForDecay;
     private lastItem?;
     private getItem;
     protected onSlotUpdate(actionBar: ActionBar, slot: ActionSlot): void;

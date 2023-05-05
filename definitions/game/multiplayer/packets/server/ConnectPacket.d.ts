@@ -16,5 +16,5 @@ export default class ConnectPacket extends ServerPacket {
     getDebugInfo(): string;
     getAllowedStates(): ConnectionState;
     isAllowedWhenPaused(): boolean;
-    process(): void;
+    process(): Promise<void>;
 }

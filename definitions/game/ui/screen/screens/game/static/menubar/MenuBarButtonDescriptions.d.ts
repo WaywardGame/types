@@ -10,5 +10,4 @@
  */
 import type { IMenuBarButtonDescription } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
-declare const menuBarButtonDescriptions: OptionalDescriptions<MenuBarButtonType, IMenuBarButtonDescription>;
-export default menuBarButtonDescriptions;
+export declare const menuBarButtonDescriptions: Map<MenuBarButtonType, IMenuBarButtonDescription>;

@@ -12,10 +12,13 @@ import Doodad from "game/doodad/Doodad";
 import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
+import type NPC from "game/entity/npc/NPC";
+import type ShipperNPC from "game/entity/npc/npcs/Shipper";
 import type { IContainer } from "game/item/IItem";
 import Item from "game/item/Item";
 export interface IToggleContainerCanUse extends IActionUsable {
-    container: Doodad | (Item & IContainer);
+    container: Doodad | Item;
+    shipper?: ShipperNPC;
 }
-declare const _default: Action<[[ActionArgument.Container, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default, void, IToggleContainerCanUse, [(IContainer | undefined)?, (boolean | undefined)?]>;
+declare const _default: Action<[[ActionArgument.Container, ActionArgument.NPCNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default<number>, void, IToggleContainerCanUse, [(NPC | IContainer | undefined)?, (boolean | undefined)?]>;
 export default _default;

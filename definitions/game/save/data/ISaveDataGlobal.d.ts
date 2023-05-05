@@ -49,9 +49,9 @@ export interface IOptions {
     fontStyle: FontStyle;
     fullscreen: boolean;
     hideEquippedHeadgear: boolean;
-    leftHanded: boolean;
     hudWidth?: number;
     keepSortActive: boolean;
+    leftHanded: boolean;
     lowPowerMode: boolean;
     mouseTurnDelay: number;
     musicPlaylist: MusicPlaylist;
@@ -59,13 +59,12 @@ export interface IOptions {
     muteMusic: boolean;
     playInputSoundWhenTyping: boolean;
     realTimeTickSpeed: number;
+    saveUiDataGlobally: boolean;
     shouldLoadLastSave: boolean;
     shouldObjectNamesSkipArticle: boolean;
     skipSplash: boolean;
     tooltipDelay: number;
-    tooltips: {
-        [key in InspectType]: boolean | undefined;
-    };
+    tooltips: Record<InspectType, boolean | undefined>;
     tooltipVisibility?: TooltipVisibilityOption;
     uiExperiments: UiExperiment.Any[];
     uiScale?: number;
@@ -79,6 +78,7 @@ export interface IOptions {
     warnWhenBreakingItemsOnCraft: boolean;
     windowMode: boolean;
     zoomLevel: number;
+    zoomSmoothing: boolean;
     /**
      * Indexed by `Bindable` names, IE `GameFaceDirection`
      * Missing indices = use default binding
@@ -98,7 +98,8 @@ export declare enum MusicPlaylist {
 export declare enum TooltipVisibilityOption {
     HiddenUnlessBind = 0,
     ShowMoreInformationWithBind = 1,
-    AlwaysShowMoreInformation = 2
+    AlwaysShowMoreInformation = 2,
+    Default = 1
 }
 export type IOptionsOld = Partial<Pick<IOptions, "bindings">> & Partial<{
     alwaysShowMoreInformation: boolean;

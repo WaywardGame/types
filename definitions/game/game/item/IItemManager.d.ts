@@ -15,9 +15,9 @@ import type Creature from "game/entity/creature/Creature";
 import type { Quality } from "game/IObject";
 import type { IMoveToTileOptions, ItemType, ItemTypeGroup } from "game/item/IItem";
 import type Item from "game/item/Item";
+import type Tile from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 import type { Direction } from "utilities/math/Direction";
-import type { IVector3 } from "utilities/math/IVector";
 /**
  * Includes all protected items by default
  */
@@ -81,7 +81,7 @@ export interface IRequirementInfo {
     missingDoodads?: Set<DoodadType | DoodadTypeGroup>;
     fireSourceDoodad?: Doodad;
     fireSourceTileEvent?: TileEvent;
-    fireSourceLavaPosition?: IVector3;
+    fireSourceLavaTile?: Tile;
     faceDirection?: Direction.Cardinal;
     actionNotUsable?: IActionNotUsable;
 }
@@ -89,14 +89,22 @@ export interface IDoodadsUsed {
     doodad: Doodad;
     group: DoodadType | DoodadTypeGroup;
 }
-export interface IAddToContainerOptions {
-    movingMultiple?: boolean;
+export interface IMoveItemOptions {
+    onMoveItem?: (item: Item) => void;
+    filter?: {
+        itemType?: ItemType;
+        itemQuality?: Quality;
+        filterText?: string;
+    };
     skipMessage?: boolean;
-    skipUpdateTables?: boolean;
+    skipSound?: boolean;
     skipTileUpdate?: boolean;
+    skipUpdateTables?: boolean;
+    skipWeightChecks?: boolean;
+    suspendNotifier?: boolean;
+    moveToTileOptions?: IMoveToTileOptions;
 }
 export interface IPlaceOnTileOptions {
-    movingMultiple?: boolean;
     force?: boolean;
     skipMessage?: boolean;
     skipTileUpdate?: boolean;
@@ -104,7 +112,7 @@ export interface IPlaceOnTileOptions {
 }
 export declare enum ContainerReferenceSource {
     ContainerWeightReduction = 0,
-    GetContainerId = 1,
+    GetDialogIndex = 1,
     GetPoint = 2,
     GetWeightCapacity = 3,
     HashContainer = 4,
@@ -116,7 +124,8 @@ export declare enum ContainerReferenceSource {
     ScheduleContainerInvalidation = 10,
     Serializer = 11,
     WriteContainer = 12,
-    GetContainerName = 13
+    GetContainerName = 13,
+    Upgrade = 14
 }
 export interface ICraftResultChances {
     success: number;
@@ -124,4 +133,8 @@ export interface ICraftResultChances {
 }
 export declare namespace ICraftResultChances {
     const NEVER: Readonly<ICraftResultChances>;
+}
+export interface IAddToContainerResult {
+    itemsMoved: Item[];
+    noMoreRoomForItems: Item[];
 }

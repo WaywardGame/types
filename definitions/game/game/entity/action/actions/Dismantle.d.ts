@@ -18,5 +18,5 @@ export interface IDismantleCanUse extends IActionUsable {
     dismantleDescription: IDismantleDescription;
     requiredItem?: Item;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default, void, IDismantleCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default<number>, void, IDismantleCanUse, [Item, (Item | undefined)?]>;
 export default _default;

@@ -18,10 +18,11 @@ import { SkillType } from "game/entity/IHuman";
 import type { ILootItem } from "game/ILoot";
 import { Quality } from "game/IObject";
 import type Item from "game/item/Item";
-import type { ITerrainDescription, ITile } from "game/tile/ITerrain";
+import type { ITerrainDescription } from "game/tile/ITerrain";
 import { TerrainType } from "game/tile/ITerrain";
 import type { ITileEventDescription } from "game/tile/ITileEvent";
 import type { ITerrainLoot } from "game/tile/TerrainResources";
+import type Tile from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 import Translation from "language/Translation";
 import type { IRGB } from "utilities/Color";
@@ -38,12 +39,9 @@ export interface IGatherBaseCanUse extends IActionUsable {
     resources?: ITerrainLoot | ILootItem[];
     skill?: SkillType;
     terrainDescription?: ITerrainDescription;
-    tile: ITile;
+    tile: Tile;
     tileType: TerrainType;
     tool?: Item;
-    x: number;
-    y: number;
-    z: number;
 }
 export interface IGatherTileEventCanUse extends IGatherBaseCanUse {
     gatherType: GatherType.TileEvent;
@@ -56,7 +54,7 @@ export interface IGatherDoodadCanUse extends IGatherBaseCanUse {
     doodadDescription: IDoodadDescription;
     growingStage?: GrowingStage;
 }
-export interface IGatherDoodadHarvestCanUse extends IActionUsable {
+export interface IGatherDoodadHarvestCanUse extends IGatherBaseCanUse {
     gatherType: GatherType.DoodadHarvest;
     tool?: Item;
 }
@@ -65,5 +63,5 @@ export interface IGatherTerrainCanUse extends IGatherBaseCanUse {
     terrainDescription: ITerrainDescription;
 }
 export type IGatherCanUse = IGatherTileEventCanUse | IGatherDoodadCanUse | IGatherDoodadHarvestCanUse | IGatherTerrainCanUse;
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, IGatherCanUse, [(Item | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Tile, ActionArgument.Undefined]], import("../../Human").default<number> | Doodad, void, IGatherCanUse, [(Item | undefined)?, (Tile | undefined)?]>;
 export default _default;

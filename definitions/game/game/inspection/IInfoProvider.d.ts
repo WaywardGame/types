@@ -24,9 +24,11 @@ export declare module InfoDisplayLevel {
     function canDisplay(level: InfoDisplayLevel, ...toDisplay: InfoDisplayLevel[]): boolean;
 }
 export declare enum InfoClass {
-    Title = "title",
-    Description = "description",
-    List = "list"
+    Title = "info-provider-title",
+    Subtitle = "info-provider-subtitle",
+    Description = "info-provider-description",
+    List = "info-provider-list",
+    MultiTextParagraph = "info-provider-multi-text-paragraph"
 }
 export interface IInspector {
     asEntity?: Entity;

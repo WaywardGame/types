@@ -11,10 +11,10 @@
 import type Player from "game/entity/player/Player";
 import type { Milestone } from "game/milestones/IMilestone";
 import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "game/options/modifiers/milestone/MilestoneModifier";
-import type { Random, SeededGenerator } from "utilities/random/Random";
+import type { Random } from "utilities/random/Random";
 declare class TamedCreatureMilestoneModifierInstance extends MilestoneModifierInstance {
     private readonly modifier;
-    constructor(modifier: TamedCreatureMilestoneModifier, id: Milestone, random: Random<SeededGenerator>, player?: Player);
+    constructor(modifier: TamedCreatureMilestoneModifier, id: Milestone, random: Random, player?: Player);
     onSpawnPlayer(player: Player): void;
 }
 export default abstract class TamedCreatureMilestoneModifier extends MilestoneModifier {

@@ -67,6 +67,10 @@ export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> 
     private languageLoadId;
     get loadID(): number;
     initialize(): void;
+    /**
+     * Asynchronously load additional languages
+     */
+    private loadAdditionalLanguages;
     shouldUseAlternateFontStyle(): boolean;
     refreshUiTranslations(): void;
     getTranslation(dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean): string[] | undefined;
@@ -74,7 +78,14 @@ export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> 
     remove(provider: TranslationsProvider): void;
     serialize(languageName?: string, caseStyle?: CaseStyle): ISerializedLanguage | undefined;
     serializeLanguageToFile(language?: string, caseStyle?: CaseStyle): void;
-    serializeLanguageToFiles(language?: string, caseStyle?: CaseStyle): Promise<void>;
+    /**
+     * Serializes the language into individual pieces for use by Weblate
+     */
+    serializeToFiles(language?: string, caseStyle?: CaseStyle): Map<string, string>;
+    /**
+     * Unserializes the language from individual pieces (from Weblate), into an ISerializedLanguage object
+     */
+    reserializeFromFiles(files: Map<string, Record<string, any>>): ISerializedLanguage;
     deserialize(serialized: ISerializedLanguage | ISerializedLanguageExtension): Language | LanguageExtension;
     generateSchema(): void;
     reformatSingularNoun(noun: string, count: number, article?: false | "definite" | "indefinite"): string;

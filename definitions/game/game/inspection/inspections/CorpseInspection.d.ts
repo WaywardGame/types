@@ -14,9 +14,9 @@ import { InspectType } from "game/inspection/IInspection";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import Inspection from "game/inspection/Inspection";
-import type { IVector3 } from "utilities/math/IVector";
+import type Tile from "game/tile/Tile";
 export default class CorpseInspection extends Inspection<Corpse> {
-    static getFromTile(position: IVector3): CorpseInspection[];
+    static getFromTile(tile: Tile): CorpseInspection[];
     static handles(type: InspectType, corpse: unknown): boolean;
     constructor(corpse: Corpse);
     get(context: InfoProviderContext): (0 | import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue)[];

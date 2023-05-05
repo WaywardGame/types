@@ -17,8 +17,8 @@ import type { ItemType } from "game/item/IItem";
 import type { Milestone } from "game/milestones/IMilestone";
 import type { ThreeStateButtonState } from "ui/component/IThreeStateButton";
 import type DefaultMap from "utilities/collection/map/DefaultMap";
-import type RandomItem from "utilities/random/generators/RandomItem";
-import type RandomRange from "utilities/random/generators/RandomRange";
+import type RandomItem from "utilities/random/generators/specific/RandomItem";
+import type RandomRange from "utilities/random/generators/specific/RandomRange";
 import type { RecursivePartial } from "utilities/types/Recursive";
 export declare enum GameMode {
     Hardcore = 0,
@@ -133,6 +133,10 @@ export interface IGameOptions {
              * Can spawn at all.
              */
             allowSpawning: boolean;
+            /**
+             * A multiplier for the merchant spawn cap (which is based on civilization score and this value).
+             */
+            spawnCapMultiplier: number;
         };
     };
     /**

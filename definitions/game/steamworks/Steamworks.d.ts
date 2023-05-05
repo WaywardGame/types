@@ -11,10 +11,12 @@
 /// <reference types="node" />
 import type { IMatchmakingServer, INapiDiscordPresenceInfo, IRemoteFile, ISteamFriend, ISteamId, ISteamworksNetworking, IWaywardPreload, IWorkshopItem, LobbyType } from "@hosts/shared/interfaces";
 import EventEmitter from "event/EventEmitter";
+import type { Game } from "game/Game";
 import { ModType } from "mod/IModInfo";
 import type { IJoinServerOptions, ServerInfo } from "multiplayer/IMultiplayer";
 import type { IBuild, IDedicatedServerInfo, IModPath, ISteamworksEvents } from "steamworks/ISteamworks";
 export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
+    private readonly game;
     protected initialized: boolean;
     private steamId;
     private betaName;
@@ -36,10 +38,14 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private publishedMods;
     private readonly workshopUrl;
     private readonly workshopFileUrl;
+    /**
+     * Files/directories ignored when uploads mods to steam workspace
+     */
     private readonly ignoredDirectories;
     private _serverToJoin;
     private _automaticallyJoinServer;
     private _dedicatedServerInfo;
+    private _defaultMatchmakingServerPort;
     private _nextBackupTime;
     private _currentLobbyId;
     private _multiplayerLogs;
@@ -49,6 +55,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private _isTraceRecording;
     private _osPlatform;
     private readonly _intervalIds;
+    constructor(game: Game);
     get isGameOverlayActive(): boolean;
     get isRunningOnSteamDeck(): boolean;
     get isRunningOnBatteryPower(): boolean;
@@ -57,7 +64,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getOsPlatform(): NodeJS.Platform | undefined;
     reload(): Promise<void>;
     openGpuInfoWindow(): void;
-    closeWindow(): void;
+    closeWindow(): Promise<void>;
     isOverlayWorking(): boolean;
     isGreenworksEnabled(): boolean;
     isNapiEnabled(): boolean;
@@ -70,6 +77,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     isDedicatedServer(): boolean;
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
     getMatchmakingServer(): IMatchmakingServer | undefined;
+    getMatchmakingServerPort(): number;
     getSteamNetworking(): ISteamworksNetworking | undefined;
     initialize(): Promise<IWaywardPreload | undefined>;
     enableSafePaths(): void;

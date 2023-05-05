@@ -12,7 +12,7 @@ import type { IslandId } from "game/island/IIsland";
 import ClientPacket from "multiplayer/packets/ClientPacket";
 export default class LoadIslandPacket extends ClientPacket<Promise<void>> {
     islandId: IslandId;
-    allowItemFixes: boolean;
+    isSynced: boolean;
     getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     process(): Promise<void>;

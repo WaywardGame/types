@@ -12,8 +12,9 @@ import EventEmitter from "event/EventEmitter";
 import type Creature from "game/entity/creature/Creature";
 import type NPC from "game/entity/npc/NPC";
 import type Island from "game/island/Island";
-import type { ITile } from "game/tile/ITerrain";
+import type { IOverlayInfo } from "game/tile/ITerrain";
 import { TerrainType } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import type RendererContext from "renderer/context/RendererContext";
 import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 import FieldOfView from "renderer/fieldOfView/FieldOfView";
@@ -26,8 +27,10 @@ import type TileAtlas from "renderer/tile/atlas/TileAtlas";
 import type { TerrainTileInfo } from "renderer/tile/TerrainTileInfo";
 import type { ITileAdaptor } from "renderer/tile/TileAdaptors";
 import type WebGlContext from "renderer/WebGlContext";
+import type { IBounds } from "renderer/world/IWorldRenderer";
 import { RenderFlag, SpriteBatchLayer } from "renderer/world/IWorldRenderer";
 import WorldLayerRenderer from "renderer/world/WorldLayerRenderer";
+import type { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 export interface IWorldRendererEvents {
     /**
@@ -36,14 +39,14 @@ export interface IWorldRendererEvents {
      * @param tile The tile the creature is on
      * @returns False if the player should not see the creature or undefined to use the default logic
      */
-    canSeeCreature(creature: Creature, tile: ITile): boolean | undefined;
+    canSeeCreature(creature: Creature, tile: Tile): boolean | undefined;
     /**
      * Called when calculating npcs in the viewport
      * @param npc The npc object
      * @param tile The tile the npc is on
      * @returns False if the player should not see the npc or undefined to use the default logic
      */
-    canSeeNPC(npc: NPC, tile: ITile): boolean | undefined;
+    canSeeNPC(npc: NPC, tile: Tile): boolean | undefined;
     /**
      * Called when rendering creatures in the viewport
      * @param creature The creature object
@@ -110,6 +113,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     readonly fieldOfView: FieldOfView;
     readonly particleSystem: ParticleSystem;
     readonly notifier: Notifier;
+    private readonly overlays;
     layers: Record<number, WorldLayerRenderer>;
     defaultAdaptor: ITileAdaptor;
     doodadLikeAdaptor: ITileAdaptor;
@@ -124,7 +128,6 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     waterAdaptor: ITileAdaptor;
     defaultBackground: TerrainTileInfo;
     defaultBackgroundType: TerrainType;
-    private readonly screenspaceViewport;
     private readonly worldspaceViewport;
     private tileScale;
     private zoom;
@@ -156,10 +159,16 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private vehicleBatch;
     private readonly entitiesInViewport;
     private viewportSpritesDirty;
+    private cachedBounds;
+    private cachedBoundsTimestamp;
     static initializePrograms(webGlContext: WebGlContext): Promise<void>;
     constructor(context: RendererContext);
     get island(): Island;
     get tileAtlas(): TileAtlas;
+    /**
+     * Prevent some rendering when zoomed out too much (with debug tools)
+     */
+    private get shouldRenderEntities();
     delete(): void;
     load(island: Island): void;
     update(timeStamp: number): void;
@@ -171,9 +180,9 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     getTileScale(): number;
     private setTileScale;
     setZoom(zoom: number): void;
-    setViewport(view: Vector2): void;
-    getViewport(): Vector2;
-    getTileViewport(): Vector2;
+    syncViewport(): void;
+    private syncTileScale;
+    getViewport(): IVector2;
     calculateAmbientColor(): [number, number, number];
     getAmbientColorCave(): [number, number, number];
     getAmbientColorDay(): [number, number, number];
@@ -181,29 +190,21 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     getAmbientColorDawn(): [number, number, number];
     getAmbientIntensity(): number;
     getFogColor(): [number, number, number];
+    addOrUpdateOverlay(tile: Tile, overlay: IOverlayInfo): void;
+    removeOverlay(tile: Tile, overlay: IOverlayInfo): void;
     shouldRender(): RenderFlag;
     renderWorld(timeStamp: number, x: number, y: number, z: number): void;
     renderWorldLayer(worldLayer: WorldLayerRenderer, x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFlags: RenderFlag, enableDepth: boolean): void;
     render(): void;
     screenToVector(screenX: number, screenY: number, timeStamp?: number): Vector2;
-    screenToTile(screenX: number, screenY: number): Vector2 | undefined;
-    getViewportBounds(timeStamp: number): {
-        min: Vector2;
-        max: Vector2;
-        z: number;
-    };
-    getBounds(timeStamp: number): {
-        viewportBounds: {
-            min: Vector2;
-            max: Vector2;
-            z: number;
-        };
-        startX: number;
-        endX: number;
-        startY: number;
-        endY: number;
-    };
+    screenToTile(screenX: number, screenY: number): Tile | undefined;
+    private getViewportBounds;
+    getBounds(timeStamp: number): IBounds;
     computeSpritesInViewport(): void;
+    /**
+     * Batches entities
+     * @returns True when there's more rendering to be done
+     */
     batchMovable(timeStamp: number): boolean;
     private batchCreature;
     private getFlyingOffset;
@@ -221,7 +222,11 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
      */
     private renderStatusEffect;
     private spriteBatchForLayer;
-    addTileToViewport(visibleTiles: Set<ITile>, x: number, y: number, itemBatch: ISpriteBatch | undefined): void;
+    addTileToViewport(visibleTiles: Set<Tile>, tile: Tile, itemBatch: ISpriteBatch | undefined): void;
+    /**
+     * Computes sprites in the viewport
+     * @returns True when there's more rendering to be done
+     */
     private computeSpritesInViewportImmediately;
     private batchItems;
     private batchItem;

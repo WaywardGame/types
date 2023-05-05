@@ -9,21 +9,26 @@
  * https://github.com/WaywardGame/types/wiki
  */
 /// <reference types="node" />
+import CommandManager from "command/CommandManager";
 import EventEmitter from "event/EventEmitter";
 import type { BiomeTypes } from "game/biome/IBiome";
+import { BiomeType } from "game/biome/IBiome";
 import type Entity from "game/entity/Entity";
 import type Human from "game/entity/Human";
 import type { Defense } from "game/entity/IEntity";
 import { DamageType } from "game/entity/IEntity";
 import type { Delay } from "game/entity/IHuman";
 import type { TurnTypeFlag } from "game/entity/player/IPlayer";
+import PlayerManager from "game/entity/player/PlayerManager";
 import type { IGameEvents, IMovementTime, IPlayOptions, ISynchronizeState } from "game/IGame";
 import { PauseSource, SaveType, TickFlag, TurnMode } from "game/IGame";
 import type Island from "game/island/Island";
 import IslandManager from "game/island/IslandManager";
+import { AutoSave } from "game/meta/AutoSave";
 import type { MultiplayerLoadingDescription } from "game/meta/Loading";
-import SaveLoad from "game/meta/SaveLoad";
-import type { Milestone } from "game/milestones/IMilestone";
+import { SaveLoad } from "game/meta/SaveLoad";
+import { Milestone } from "game/milestones/IMilestone";
+import { MilestoneManager } from "game/milestones/MilestoneManager";
 import type { IGameOptions } from "game/options/IGameOptions";
 import { GameMode } from "game/options/IGameOptions";
 import type { ChallengeModifiersCollection } from "game/options/modifiers/challenge/ChallengeModifiers";
@@ -31,63 +36,75 @@ import type { GameplayModifiersCollection } from "game/options/modifiers/Gamepla
 import type MilestoneModifier from "game/options/modifiers/milestone/MilestoneModifier";
 import ReferenceManager from "game/reference/ReferenceManager";
 import TimeManager from "game/time/TimeManager";
-import VotingManager from "game/VotingManager";
-import type ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
+import ModManager from "mod/ModManager";
+import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 import type WebGlContext from "renderer/WebGlContext";
 import ReplayManager from "replay/ReplayManager";
 import type { IOptions } from "save/data/ISaveDataGlobal";
+import SaveManager from "save/SaveManager";
 import type StringTokenizer from "save/serializer/StringTokenizer";
+import Steamworks from "steamworks/Steamworks";
 import ItemStylesheetHandler from "ui/screen/screens/game/util/item/ItemStylesheet";
+import { Uninit } from "Uninit";
 import type { IVector2 } from "utilities/math/IVector";
 import type { Random } from "utilities/random/Random";
 import type { IVersionInfo } from "utilities/Version";
+import { WebWorkerManager } from "webWorker/WebWorkerManager";
 export declare class Game extends EventEmitter.Host<IGameEvents> {
     get isChallenge(): boolean;
-    islands: IslandManager;
+    private difficultyOptions;
     customMilestoneModifiersAllowed: boolean;
     difficulty: GameMode;
+    gameplayModifierData: Record<number, any>;
+    replay: ReplayManager | undefined;
+    saveVersion: string;
     shouldUpdateTablesAndWeight: boolean;
     tickSpeed: number;
-    turnMode: TurnMode;
     time: TimeManager;
-    references: ReferenceManager;
-    replay: ReplayManager | undefined;
-    originalPlayOptions: Partial<IPlayOptions>;
-    saveVersion: string;
+    turnMode: TurnMode;
     upgrades: string[];
+    originalPlayOptions: Partial<IPlayOptions>;
+    worldId: string;
     /**
      * The version the save was originally created on
      */
     version: string;
-    worldId: string;
-    private difficultyOptions;
     readonly interval = 16.6666;
-    slot: number | undefined;
+    readonly autoSave: AutoSave;
+    readonly commandManager: CommandManager;
+    readonly milestoneManager: MilestoneManager;
+    readonly modManager: ModManager;
+    readonly saveLoad: SaveLoad;
+    readonly saveManager: SaveManager;
+    readonly steamworks: Steamworks;
+    readonly uninit: Uninit;
+    readonly webWorkerManager: WebWorkerManager;
+    readonly islands: IslandManager;
+    readonly playerManager: PlayerManager;
+    readonly references: ReferenceManager;
     absoluteTime: number;
+    challengeCollection?: ChallengeModifiersCollection;
+    initialThumbnailTimeout: NodeJS.Timer | undefined;
+    lastTickTime: number | undefined;
+    milestonesCollection?: GameplayModifiersCollection<MilestoneModifier, Milestone>;
+    nextTickTime: number | undefined;
     paused: Set<PauseSource>;
     playing: boolean;
-    nextTickTime: number | undefined;
-    lastTickTime: number | undefined;
-    saveClear: boolean;
-    tileDecorations: Uint16Array;
-    initialThumbnailTimeout: NodeJS.Timer | undefined;
-    mapSize: number;
-    mapSizeSq: number;
-    readonly itemStylesheetHandler: ItemStylesheetHandler | undefined;
-    readonly voting: VotingManager;
-    milestonesCollection?: GameplayModifiersCollection<MilestoneModifier, Milestone>;
-    challengeCollection?: ChallengeModifiersCollection;
-    debugRenderer: ITextureDebugRenderer | undefined;
-    webGlContext: WebGlContext | undefined;
-    visible: boolean;
     previousSaveVersion: IVersionInfo;
+    saveClear: boolean;
     saveSize?: string;
-    canvas: HTMLCanvasElement | undefined;
-    private gameLoopLogicTimer;
+    slot: number | undefined;
+    tileDecorations: Uint16Array;
+    protected stringTokenizer: StringTokenizer | undefined;
     private gameOptionsCached?;
     private synchronizeStateId;
-    protected stringTokenizer: StringTokenizer | undefined;
-    readonly saveLoad: typeof SaveLoad;
+    readonly itemStylesheetHandler: ItemStylesheetHandler | undefined;
+    visible: boolean;
+    webGlContext: WebGlContext | undefined;
+    canvasElement: HTMLCanvasElement | undefined;
+    private gameLoopLogicTimer;
+    initialize(): Promise<void>;
+    uninitialize(): Promise<void>;
     toString(): string;
     get isPaused(): boolean;
     /**
@@ -102,7 +119,11 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      */
     getPlayingHumans(includeGhosts?: boolean, includeConnecting?: boolean, includeDedicatedServer?: boolean, includeAbsent?: boolean): Human[];
     getNonPlayerHumans(): Human[];
+    getPlayingHuman(identifier: string): Human<number> | undefined;
     initializeRenderer(): void;
+    /**
+     * It's important that this is lowest, so that it happens after modManager's globalSlotReady event
+     */
     globalSlotReady(): void;
     /**
      * Initializes WebGl
@@ -119,6 +140,10 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     setPaused(pause: boolean, source: PauseSource): void;
     onPlayingEntityChange(_manager: any, entity: Entity): void;
     gameLogicLoop: () => void;
+    /**
+     * Stops the game logic loop timer
+     */
+    stopGameLogicLoop(): void;
     /**
      * Triggers a game logic loop to run in the next javascript event loop
      */
@@ -171,8 +196,12 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     /**
      * Collection of things to perform on each tick
      */
-    tickAsync(island: Island, ticks: number, playingHumans: Human[] | undefined, tickFlag: TickFlag | undefined, onProgress: (progess: number) => Promise<void>, dueToAction?: boolean): Promise<void>;
-    createRenderer(entity: Entity): void;
+    tickAsync(island: Island, ticks: number, playingHumans: Human<number>[] | undefined, tickFlag: TickFlag | undefined, onProgress: (progess: number) => Promise<void>, dueToAction?: boolean): Promise<void>;
+    /**
+     * Creates the renderer.
+     * Should only be called once when starting / loading a save
+     */
+    createRenderer(origin: IRendererOrigin): void;
     /**
      * Resets the game state. This should be called when returning to the main menu from a game and/or right before starting/joining a game.
      * This method should be able to be called multiple times in a row and nothing unexpected should occur.
@@ -182,4 +211,6 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      */
     reset(saveType?: SaveType | false, shouldDisconnect?: boolean, hasDisconnected?: boolean): Promise<void>;
     fastForwardIsland(island: Island, ticks: number, multiplayerLoadingDescription?: MultiplayerLoadingDescription): Promise<void>;
+    testFastForwardSpeed(ticks?: number, biomeType?: BiomeType): Promise<void>;
+    unlockAllMilestones(): void;
 }

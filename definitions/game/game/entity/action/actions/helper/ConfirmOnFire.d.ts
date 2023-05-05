@@ -10,7 +10,7 @@
  */
 import type { IActionConfirmerApi } from "game/entity/action/IAction";
 import type Human from "game/entity/Human";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import type Message from "language/dictionary/Message";
 import Translation from "language/Translation";
-export default function (action: IActionConfirmerApi<Human>, tile: ITile, thing: Translation | undefined, message: Message): true | Promise<boolean>;
+export default function (action: IActionConfirmerApi<Human>, tile: Tile, thing: Translation | undefined, message: Message): true | Promise<boolean>;

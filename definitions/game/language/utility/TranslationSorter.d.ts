@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Dictionary from "language/Dictionary";
-import type Translation from "language/Translation";
+import Translation from "language/Translation";
 export interface ITranslationSorter<T = number> {
     (a: T, b: T): number;
     /**
@@ -37,12 +37,12 @@ export interface ITranslationSorter<T = number> {
     /**
      * Sets a custom translator, which takes each value to sort and makes a string from it. These strings are cached by the sorter
      */
-    setTranslator(translator: ITranslationSorter.Translator<T>): this;
+    setTranslator<T2 = T>(translator: ITranslationSorter.Translator<T2>): ITranslationSorter<T2>;
 }
 declare module ITranslationSorter {
     type EntryMapper<T = any> = (v: T) => number;
     type SortFallback<T = any, A extends any[] = any[]> = (a: T, b: T, entryA: T extends Translation ? undefined : number, entryB: T extends Translation ? undefined : number, stringA: string, stringB: string, ...args: A) => number;
-    type Translator<T = any> = (v: T, entry: number, dictionary: Dictionary, index?: number) => Translation | string | undefined;
+    type Translator<T = any> = (v: T, entry?: number, dictionary?: Dictionary, index?: number) => Translation | string | undefined;
     function create(): ITranslationSorter<Translation>;
     function create<T = number>(dictionary: Dictionary, index?: number): ITranslationSorter<T>;
 }

@@ -19,7 +19,7 @@ export interface IModConfig {
     readonly description: string;
     readonly version: string;
     readonly author: string;
-    readonly file: string;
+    readonly file?: string;
     readonly unloadable?: boolean;
     readonly tags?: string[];
     readonly dependencies?: string[];

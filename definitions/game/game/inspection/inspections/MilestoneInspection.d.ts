@@ -16,8 +16,9 @@ import { Milestone, MilestoneVisibility } from "game/milestones/IMilestone";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import type { TranslationGenerator } from "ui/component/IComponent";
+import type { InspectionTooltipHints } from "ui/screen/screens/game/InspectionsTooltipHandler";
 export default class MilestoneInspection extends Inspection<Milestone> {
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
     static getMilestoneName(milestone: Milestone, visibility?: MilestoneVisibility): import("../../../language/impl/TranslationImpl").default;
     static getMilestoneReadout(milestone: Milestone, name?: Translation): () => import("../../../language/impl/TranslationImpl").default;
     static getDescription(milestone: Milestone): import("../../../language/impl/TranslationImpl").default | UiTranslation.GameDialogMilestonesTooltipHidden | UiTranslation.GameDialogMilestonesTooltipInvisible;
@@ -25,6 +26,7 @@ export default class MilestoneInspection extends Inspection<Milestone> {
     getId(): string;
     getBorder(): string;
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
+    renderHints(hints: InspectionTooltipHints): void;
     private getDiscovered;
     private getDiscoveredTranslations;
     private getDiscoveryTranslation;

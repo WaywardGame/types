@@ -24,7 +24,7 @@ export default abstract class BadTemperatureEffect extends StatusEffect {
     protected onTick(): void;
     protected abstract getConsequenceEffect(): StatusType;
     protected abstract getConsequenceStat(): Stat;
-    private onGameTickStart;
+    private onGameTick;
     private onPlayerTurnStart;
     private isLevelTwoBadTemp;
 }

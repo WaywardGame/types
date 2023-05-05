@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Human from "game/entity/Human";
-import type { ITile } from "game/tile/ITerrain";
-export default function writeCorpseNote(human: Human, tile: ITile): void;
+import type Tile from "game/tile/Tile";
+export default function writeCorpseNote(human: Human, tile: Tile): void;

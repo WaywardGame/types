@@ -8,18 +8,21 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Load } from "../../game/game/meta/Loading";
-import type { Prompt } from "../../game/game/meta/prompt/IPrompt";
-import type { ScreenId } from "../../game/ui/screen/IScreen";
-import type { MenuId } from "../../game/ui/screen/screens/menu/component/IMenu";
-import type { Random, SeededGenerator } from "../../game/utilities/random/Random";
-import type { ITest } from "../util/mochaNUnitReporter";
-import type { IAppPaths } from "../interfaces";
-import type { Apps } from "./applicationManager";
-import ApplicationInteractions from "./applicationInteractions";
+import type { Load } from "@wayward/game/game/meta/Loading";
+import type { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
+import type { ScreenId } from "@wayward/game/ui/screen/IScreen";
+import type { MenuId } from "@wayward/game/ui/screen/screens/menu/component/IMenu";
+import type { Random } from "@wayward/game/utilities/random/Random";
+import type { TestRunContext } from "@wayward/test/testRunner";
+import ApplicationInteractions from "@wayward/test/core/applicationInteractions";
+import type { Apps } from "@wayward/test/core/applicationManager";
+import type { IAppPaths } from "@wayward/test/interfaces";
 export interface IApplicationOptions {
     additionalArgs?: string[];
     mods?: string[];
+    nodeJsMode?: boolean;
+    random?: Random;
+    serverPort?: number;
 }
 export interface ITestState {
     seed: number;
@@ -36,9 +39,9 @@ export interface IApplicationState {
 /**
  * WebDriver client api: http://webdriver.io/api.html
  */
-export default class Application extends ApplicationInteractions {
+export declare class Application extends ApplicationInteractions {
     private readonly paths;
-    private readonly options;
+    readonly options: IApplicationOptions;
     private static readonly browsers;
     static get browserCount(): number;
     static stop(): Promise<void>;
@@ -46,21 +49,20 @@ export default class Application extends ApplicationInteractions {
     readonly basePath: string;
     private readonly chromeDriver;
     manager: Apps;
-    private heapSnapshotPath;
+    readonly heapSnapshotPath: string;
     private recordVideo;
     private videoPath;
     private videoTimerId;
     private readonly videoFrames;
-    constructor(mochaTestContext: Mocha.Context | ITest, appId: string, paths: IAppPaths, random: Random<SeededGenerator>, options?: IApplicationOptions);
+    constructor(testContext: TestRunContext, appId: string, paths: IAppPaths, options?: IApplicationOptions);
     get waywardLogFilePath(): string;
+    reportResults(): Promise<void>;
     start(expectedInitialScreen?: "title" | "mp_gameplay_modifiers"): Promise<void>;
     stop(shouldQuitGame?: boolean): Promise<string[]>;
     clearDirectory(directory: string): Promise<void>;
     getApplicationState(): Promise<IApplicationState>;
     getLogs(): Promise<string[]>;
-    requestHeapSnapshot(heapSnapshotPath: string): void;
     requestVideo(videoPath: string): void;
     private recordVideoFrame;
     private configureDirectories;
-    private getFreePort;
 }

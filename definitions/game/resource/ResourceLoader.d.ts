@@ -10,6 +10,7 @@
  */
 import type WebGlContext from "renderer/WebGlContext";
 import type { IResourceContainer } from "resource/IResourceLoader";
+import type SaveManager from "save/SaveManager";
 export default class ResourceLoader {
     private readonly webGlContext;
     private concurrent;
@@ -31,7 +32,7 @@ export default class ResourceLoader {
     continueLoading(): void;
     takeLoadingSlot(callback: () => void): void;
     releaseLoadingSlot(): void;
-    protected onGlobalSlotReady(): Promise<void>;
+    protected onGlobalSlotReady(saveManager: SaveManager): Promise<void>;
     private loadSpritePacker;
     private createSpritePacker;
     private createTilePacker;

@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { BiomeTypes } from "game/biome/IBiome";
+import type { ITemplateBiomeOptions } from "game/biome/template/Template";
 import type Doodad from "game/doodad/Doodad";
 import type Corpse from "game/entity/creature/corpse/Corpse";
 import type Creature from "game/entity/creature/Creature";
@@ -16,7 +17,7 @@ import type { ICharacter, ICrafted } from "game/entity/IHuman";
 import type NPC from "game/entity/npc/NPC";
 import type { PlayerState } from "game/entity/player/IPlayer";
 import type { Game } from "game/Game";
-import type { ISeeds, IslandId, IWell } from "game/island/IIsland";
+import type { ILegacySeeds, IslandId, IWell } from "game/island/IIsland";
 import type Item from "game/item/Item";
 import type { Milestone } from "game/milestones/IMilestone";
 import type { GameMode, IGameOptions } from "game/options/IGameOptions";
@@ -144,7 +145,7 @@ export type IGameOld = Partial<Game> & Partial<{
     mapGenVersion: string;
     npcs: SaferArray<NPC>;
     saveVersion: string;
-    seeds: ISeeds;
+    seeds: ILegacySeeds;
     tileContainers: ITileContainer[];
     tileData: Record<number, Record<number, Record<number, ITileData[]>>>;
     tileEvents: SaferArray<TileEvent>;
@@ -159,16 +160,21 @@ export interface IPlayOptions {
     difficultyOptions?: IGameOptions;
     milestoneModifiers: Set<Milestone>;
     character: ICharacter;
-    multiplayer: IMultiplayerOptions | true | undefined;
+    multiplayer: IMultiplayerOptions | boolean | undefined;
     multiplayerServerToJoin: ServerInfo | undefined;
     turnMode: TurnMode;
     realTimeTickSpeed: number;
     customMilestoneModifiersAllowed: boolean;
-    mapSize: number | undefined;
     recordReplay: boolean;
     multiplayerWorld?: IMultiplayerWorldData;
     replayLog?: IReplayLogEntry[];
     replyCompletedMilestoneCount?: number;
+    skipServerOpen?: boolean;
+    template?: IIslandTemplate;
+}
+export interface IIslandTemplate {
+    mapSize: number;
+    options: ITemplateBiomeOptions;
 }
 export interface IPlayerOptions {
     id?: number;
@@ -198,38 +204,33 @@ export declare enum SaveType {
 }
 export declare enum TileUpdateType {
     Batch = 0,
-    CorpseManager = 1,
-    Creature = 2,
-    CreatureSpawn = 3,
-    DoodadAttachStillContainer = 4,
-    DoodadChangeType = 5,
-    DoodadCreate = 6,
-    DoodadDetachStillContainer = 7,
-    DoodadEmbers = 8,
-    DoodadGatherReady = 9,
-    DoodadGrowingStage = 10,
-    DoodadOrientation = 11,
-    DoodadOverHidden = 12,
-    DoodadRemove = 13,
-    Item = 14,
-    ItemDrop = 15,
-    ItemMovement = 16,
-    Mod = 17,
-    NPC = 18,
-    NPCSpawn = 19,
-    Player = 20,
-    Terrain = 21,
-    TileEventManager = 22,
-    Tilled = 23
-}
-export declare enum CreationId {
-    Doodad = 0,
-    Creature = 1,
-    Corpse = 2,
-    NPC = 3,
-    Item = 4,
-    TileEvent = 5,
-    Player = 6
+    Corpse = 1,
+    CorpseManager = 2,
+    Creature = 3,
+    CreatureRestore = 4,
+    CreatureSpawn = 5,
+    Doodad = 6,
+    DoodadAttachStillContainer = 7,
+    DoodadChangeType = 8,
+    DoodadCreate = 9,
+    DoodadDetachStillContainer = 10,
+    DoodadEmbers = 11,
+    DoodadGatherReady = 12,
+    DoodadGrowingStage = 13,
+    DoodadOrientation = 14,
+    DoodadOverHidden = 15,
+    DoodadRemove = 16,
+    Item = 17,
+    ItemDrop = 18,
+    ItemMovement = 19,
+    Mod = 20,
+    NPC = 21,
+    NPCSpawn = 22,
+    Player = 23,
+    Terrain = 24,
+    TileEvent = 25,
+    TileEventManager = 26,
+    Tilled = 27
 }
 export declare enum PauseSource {
     /**
@@ -241,7 +242,8 @@ export declare enum PauseSource {
     PlayerMoveToIsland = 3,
     SyncGameState = 4,
     WebGlContextLost = 5,
-    MultiplayerConnect = 6
+    MultiplayerConnect = 6,
+    StartGame = 7
 }
 /**
  * For items and terrain that can decay, the temperature range that controls the rate of decay.
@@ -279,16 +281,13 @@ export interface IMovementTime {
     start: number;
     end: number;
 }
-export declare const DEFAULT_MAP_SIZE = 512;
-export declare const DEFAULT_MAP_SIZE_SQUARED: number;
 export declare const LINE_OF_SIGHT_RADIUS = 15;
 export declare const LINE_OF_SIGHT_RADIUS_MAX = 20;
 export declare const LINE_OF_SIGHT_DETAIL = 4;
 export declare const INTERVAL = 16.6666;
+export declare const REAL_TIME_MIN_START_DELAY = 1000;
 export declare const TURN_DELAY_MAX: number;
 export declare const TURN_DELAY_DEFAULT: number;
 export declare const LIGHT_COLOR_DEFAULT: import("utilities/Color").IRGB;
 export declare const TOOLTIP_DELAY_DEFAULT = 0;
 export declare const TOOLTIP_DELAY_MAX = 3000;
-export declare const ZOOM_LEVEL_MAX = 16;
-export declare const ZOOM_LEVEL_MIN = 1;

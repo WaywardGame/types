@@ -8,7 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Game } from "game/Game";
 export interface ISerializer {
+    readonly game: Game;
     readonly version: string;
     readonly metadata: Map<SerializerMetadataKey, any>;
     readonly dataView: DataView;
@@ -26,7 +28,9 @@ export interface ISerializer {
 }
 export declare enum SerializerMetadataKey {
     Island = 0,
-    TypesStats = 1
+    TypesStats = 1,
+    JITDeserialize = 2,
+    StringStats = 3
 }
 export interface ISerializerOptions {
     version: string;
@@ -34,7 +38,7 @@ export interface ISerializerOptions {
     emptyObjectMode?: boolean;
     disableJitDeserialization?: boolean;
     enableDuplicateObjectDetection?: boolean;
-    enableTypesStats?: boolean;
+    enableStats?: boolean;
     stringTokenizationProperty?: string;
     forceSuccess?: boolean;
     swallowErrors?: boolean;
@@ -45,9 +49,14 @@ export interface ISerializable {
 }
 export interface IPreSerializeCallback {
     preSerializeObject(serializer: ISerializer): void;
+    preSerializeProperty?(serializer: ISerializer, key: string): void;
+}
+export interface IPostSerializeCallback {
+    postSerializeObject(serializer: ISerializer): void;
+    postSerializeProperty?(serializer: ISerializer, key: string): void;
 }
 export interface IUnserializedCallback {
-    onUnserialized(): void;
+    onUnserialized(serializer: ISerializer): void;
 }
 export interface IPropSerializable {
     getSerializationProperties(version: string): string[];
@@ -105,7 +114,8 @@ export declare enum Types {
     FlowField = 44,
     ItemReference = 45,
     StringTokenizer = 46,
-    MagicalPropertyManager = 47
+    MagicalPropertyManager = 47,
+    ItemMapManager = 48
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_SAVE_PROPERTY_FLAGS: unique symbol;
@@ -135,6 +145,10 @@ export declare enum SavePropertyFlag {
      * Explicitly excludes the property from using JIT Deserialization (overrides JITDeserialization flag)
      */
     ExcludeFromJITDeserialization = 16,
+    /**
+     * Make this object and it's children all JIT deserialize
+     */
+    JITDeserializationNested = 32,
     All = 65535
 }
 export declare function SaveProperty(flags?: SavePropertyFlag): PropertyDecorator;

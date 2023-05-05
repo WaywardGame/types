@@ -12,11 +12,13 @@ import { ActionType } from "game/entity/action/IAction";
 import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import UseInfo from "game/inspection/infoProviders/UseInfo";
 import type Item from "game/item/Item";
+import { MagicalPropertyEntry } from "game/magic/MagicalPropertyManager";
+import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import { TempType } from "game/temperature/ITemperature";
 declare const _default: UseInfo<{
     doodadContainer: import("../../../../doodad/IDoodad").IDoodadDescription | undefined;
     civilizationScore: number | undefined;
-    objectType: import("../../../../IGame").CreationId.Item;
+    entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
     type: import("../../../../item/IItem").ItemType;
     description: import("../../../../item/IItem").IItemDescription;
@@ -36,5 +38,11 @@ declare const _default: UseInfo<{
     getPreservationChance: () => LabelledValue | undefined;
 } & {
     getCivilizationScore: () => LabelledValue | undefined;
+} & {
+    getMagicalBuildTypes: () => Set<MagicalPropertyType>;
+} & {
+    getMagicEffect: (magic: MagicalPropertyEntry) => LabelledValue;
+} & {
+    getDoodadSkill: () => LabelledValue[];
 }, Item>;
 export default _default;

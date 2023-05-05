@@ -9,10 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type RendererContext from "renderer/context/RendererContext";
+import type { IParticleRenderer } from "renderer/particle/IParticleRenderer";
 /**
  * Particle renderer for webgl 1
  */
-export declare class ParticleRenderer1 {
+export declare class ParticleRenderer1 implements IParticleRenderer {
     private readonly context;
     private readonly positionSizeData;
     private readonly colorData;

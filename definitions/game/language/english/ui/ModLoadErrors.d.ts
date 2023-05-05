@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { CanLoadState } from "mod/IModManager";
-declare const modLoadErrors: OptionalDescriptions<CanLoadState, string>;
+declare const modLoadErrors: Map<CanLoadState, string>;
 export default modLoadErrors;

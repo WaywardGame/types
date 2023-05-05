@@ -15,7 +15,8 @@ import type Island from "game/island/Island";
 export declare enum MapPinType {
     Self = 0,
     Friend = 1,
-    Map = 2
+    Map = 2,
+    Lighthouse = 3
 }
 export declare const ISLANDS_SHOW_TREASURE_MAPS_SKILL_THRESHOLD = 40;
 export declare function getMapsForIslandInInventory(player: Player, island: Island): import("../../../../../../game/item/Item").default[];

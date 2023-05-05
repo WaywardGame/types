@@ -17,7 +17,7 @@ import type { EnumReferenceResolved } from "game/reference/IReferenceManager";
 import { ReferenceType } from "game/reference/IReferenceManager";
 import type { TranslationGenerator } from "ui/component/IComponent";
 export default class EquipSlotInspection extends Inspection<EquipType | undefined> {
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
     constructor(value?: EquipType | EnumReferenceResolved<ReferenceType.EquipSlot>);
     getId(): string;
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;

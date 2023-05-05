@@ -9,10 +9,9 @@
  * https://github.com/WaywardGame/types/wiki
  */
 declare const config: {
-    testRetires: string | number;
-    testTimeout: string | number;
+    testTimeout: number;
     randomInputCount: number;
     outputConsoleErrors: boolean;
 };
-export type Config = typeof config;
+export type TestConfig = typeof config;
 export {};

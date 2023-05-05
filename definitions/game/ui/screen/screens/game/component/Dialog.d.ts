@@ -20,10 +20,10 @@ import Text from "ui/component/Text";
 import type { IDialogDescription } from "ui/screen/screens/game/Dialogs";
 import { DialogId, Edge } from "ui/screen/screens/game/Dialogs";
 import type { IDialog } from "ui/screen/screens/game/IGameScreenApi";
+import type TooltipLocationHandler from "ui/tooltip/TooltipLocationHandler";
 import type { IDraggableEvents } from "ui/util/Draggable";
 import Draggable from "ui/util/Draggable";
 import Log from "utilities/Log";
-import type { IStringSection } from "utilities/string/Interpolator";
 /**
  * The positions of each edge of the dialog. Stored as percentages.
  */
@@ -78,7 +78,7 @@ interface IDialogEvents extends Events<Component> {
     /**
      * Emitted after all fields decorated with `@Save` are loaded
      */
-    load(): any;
+    load(initial: boolean): any;
 }
 export declare enum DialogClasses {
     Wrapper = "dialog-wrapper",
@@ -99,7 +99,7 @@ export declare enum DialogClasses {
     EndsContent = "dialog-ends-content",
     FooterContent = "dialog-footer-content"
 }
-export default abstract class Dialog extends Component implements IDialog {
+declare abstract class Dialog extends Component implements IDialog {
     readonly subId: string;
     private static topOrder;
     private static topDialog;
@@ -125,6 +125,7 @@ export default abstract class Dialog extends Component implements IDialog {
     private cachedSnapPositions?;
     private readonly activeReasons;
     protected readonly scrollableHandler: void;
+    private loaded?;
     private get visiblePanel();
     get square(): boolean;
     /**
@@ -141,6 +142,7 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     private description;
     constructor(id: number, subId?: string);
+    tempHighlight(duration?: number): void;
     addScrollableWrapper(type?: "scroll" | "auto", initializer?: (wrapper: Component) => any): Component<HTMLElement>;
     addSettingsPanel(): Component<HTMLElement>;
     showSettingsPanel(): this;
@@ -152,7 +154,6 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     close(): Promise<boolean>;
     protected onRemove1(): void;
-    protected onAppend1(): void;
     addPanel(id: string | number): Component<HTMLElement>;
     showPanel(id: string | number): Component<HTMLElement> | undefined;
     getPanel(id: string | number): Component<HTMLElement> | undefined;
@@ -186,7 +187,7 @@ export default abstract class Dialog extends Component implements IDialog {
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
-    getName(): Iterable<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined;
+    getName(): Translation | UiTranslation | ISerializedTranslation | undefined;
     /**
      * Event handler for when this dialog is appended
      */
@@ -300,6 +301,10 @@ export default abstract class Dialog extends Component implements IDialog {
     private correctPosition;
     private addHandle;
 }
+declare namespace Dialog {
+    const TooltipLocation: (locationHandler: TooltipLocationHandler) => TooltipLocationHandler;
+}
+export default Dialog;
 /**
  * A component that emits events for being dragged. Takes a `HandlePosition` to be styled with.
  */
@@ -324,7 +329,7 @@ export declare class Header extends Handle implements IRefreshable {
     readonly closeButton: Button;
     readonly text: Text;
     constructor();
-    setText(text: TranslationGenerator): void;
+    setText(text?: TranslationGenerator, ...args: any[]): void;
     refresh(): this;
     setCloseIcon(icon?: "Minimize" | "Close"): this;
 }
@@ -334,4 +339,3 @@ export declare class Footer extends Component {
     readonly content: Component;
     constructor();
 }
-export {};

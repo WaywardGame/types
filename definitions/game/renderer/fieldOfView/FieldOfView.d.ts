@@ -11,7 +11,7 @@
 import EventEmitter from "event/EventEmitter";
 import type Player from "game/entity/player/Player";
 import type CompiledProgram from "renderer/CompiledProgram";
-import type { IFieldOfViewEvents } from "renderer/fieldOfView/IFieldOfView";
+import type { IFieldOfViewEvents, IFieldOfViewOrigin } from "renderer/fieldOfView/IFieldOfView";
 import { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
 import type ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import type RendererContext from "renderer/context/RendererContext";
@@ -20,7 +20,6 @@ import type WorldRenderer from "renderer/world/WorldRenderer";
 import type { IBound3 } from "utilities/math/Bound3";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
-import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 import type { IslandId } from "game/island/IIsland";
 import type Human from "game/entity/Human";
 export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
@@ -50,16 +49,17 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     texLightOld: WebGLTexture | undefined;
     private seed;
     private transitionFinishTime;
+    private readonly transitioningExploredMap;
     private lastComputedIslandId;
     static initializePrograms(webGlContext: WebGlContext): Promise<void>;
-    static canSeePosition(origin: IRendererOrigin, type: CanASeeBType, islandId: IslandId, tileX: number, tileY: number, tileZ: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
-    static getBounds(origin: IVector3, radius: number): IBound3;
+    static canSeePosition(origin: IFieldOfViewOrigin, type: CanASeeBType, islandId: IslandId, tileX: number, tileY: number, tileZ: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
+    static getBounds(origin: IVector3, mapSize: number, radius: number): IBound3;
     /**
      * Gets the field of view radius based on either the field of view object, player, or the default value
      */
     static getRadius(fieldOfView: FieldOfView | undefined, human: Human | undefined): number;
     /**
-     * Marks a set of tiles as exploreed
+     * Marks a set of tiles as explored
      */
     static markAsExplored(player: Player, tiles: IVector2[]): boolean;
     constructor(context: RendererContext, worldRenderer: WorldRenderer, radius: number, maxRadius: number, subdivisions?: number);
@@ -73,6 +73,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     startTransition(timeStamp: number): void;
     updateTransitionProgress(timeStamp: number): boolean;
     resetTransitionProgress(): void;
+    private processExploredMapTransition;
     compute(timeStamp: number, force?: boolean, skipTransition?: boolean): boolean;
     createDebugRenderer(): ITextureDebugRenderer;
     /**
@@ -85,5 +86,5 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
      * This prevents clientside only seed changes
      */
     private processExploredMapBounds;
-    private computeLights;
+    private computeLightMap;
 }

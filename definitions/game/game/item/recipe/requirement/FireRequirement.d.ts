@@ -10,11 +10,11 @@
  */
 import type Crafter from "game/item/recipe/Crafter";
 import RecipeRequirement, { RecipeRequirementType } from "game/item/recipe/RecipeRequirement";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export default class FireRequirement extends RecipeRequirement<RecipeRequirementType.Fire> {
     static readonly BASE: FireRequirement;
     constructor();
-    getUsable(api: Crafter): import("@wayward/goodstream").default<ITile>;
+    getUsable(api: Crafter): Tile[];
     isMet(api: Crafter): boolean;
     private onCraft;
 }

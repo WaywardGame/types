@@ -23,22 +23,28 @@ export interface IVersionInfo {
     update?: number;
 }
 declare module Version {
-    const versionInfoRegExp: RegExp;
-    const versionInfoRegExpSemver: RegExp;
+    export const versionInfoRegExp: RegExp;
+    export const versionInfoRegExpSemver: RegExp;
     /**
      * Returns whether the given version is compatible with the game's version. This is used to check, for example,
      * if a mod is compatible with the game's version.
      */
-    function isCompatible(version: IVersionInfo | string): boolean;
+    export function isCompatible(version: IVersionInfo | string): boolean;
     /**
      * Returns whether the given `version` is `atLeast` another version. This can be used, for example,
      * to see if a save or mod was created/edited after a specific thing was implemented.
      */
-    function isAtLeast(version: IVersionInfo | string, atLeast: IVersionInfo | string): boolean;
-    function create(stage: "beta" | "release", major: number, minor: number, patch?: number, date?: Date): IVersionInfo;
-    function getVersionInfo(version: string): IVersionInfo;
-    function isSameVersion(version: IVersionInfo, compareVersion: IVersionInfo): boolean;
-    function getVersionDisplayString(version?: string | IVersionInfo, development?: boolean): string;
-    function getUpdateDisplayString(version?: string | IVersionInfo): string | undefined;
+    export function isAtLeast(version: IVersionInfo | string, atLeast: IVersionInfo | string): boolean;
+    export function create(stage: "beta" | "release", major: number, minor: number, patch?: number, date?: Date): IVersionInfo;
+    export function getVersionInfo(version: string): IVersionInfo;
+    export function isSameVersion(version: IVersionInfo, compareVersion: IVersionInfo): boolean;
+    export function getVersionDisplayString(version?: string | IVersionInfo, development?: boolean): string;
+    export function getUpdateDisplayString(version?: string | IVersionInfo): string | undefined;
+    const timezones: {
+        nz: string;
+        build: string;
+    };
+    export function isBefore(date: Date, dateStr: `${string} ${number} ${number} ${number}:${number}`, timezone: keyof typeof timezones): boolean;
+    export {};
 }
 export default Version;

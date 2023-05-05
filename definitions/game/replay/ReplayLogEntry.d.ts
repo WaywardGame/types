@@ -10,15 +10,15 @@
  */
 import type { IReplayLogEntry } from "replay/IReplayLogEntry";
 import type { ISerializable, ISerializer } from "save/serializer/ISerializer";
-import type { IRandomHistory } from "utilities/random/Random";
+import type { IRandomHistory } from "utilities/random/IRandom";
 export declare class ReplayLogEntry implements IReplayLogEntry, ISerializable {
     time: number;
-    beforeSeed: number;
+    beforeSeed: number | Uint16Array;
     tickRealtime?: boolean | undefined;
     action?: Uint8Array | undefined;
     playbackTime?: number | undefined;
     gameState?: string | undefined;
-    randomHistory?: IRandomHistory[] | undefined;
+    randomHistory?: Array<IRandomHistory<any>> | undefined;
     static create(recordingStartTime?: number): ReplayLogEntry;
     /**
      * Custom serializer to reduce save data size

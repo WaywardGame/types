@@ -12,7 +12,8 @@ import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 export interface ISailToIslandCanUse extends IActionUsable {
+    isLocalIslandSailing?: boolean;
     distanceFromEdge?: number;
 }
-declare const _default: Action<[ActionArgument.Integer32, ActionArgument.Integer32], import("../../Human").default, void, ISailToIslandCanUse, [number, number]>;
+declare const _default: Action<[ActionArgument.Integer32, ActionArgument.Integer32, [ActionArgument.Integer32, ActionArgument.Undefined]], import("../../Human").default<number>, void, ISailToIslandCanUse, [number, number, (number | undefined)?]>;
 export default _default;

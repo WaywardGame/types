@@ -13,10 +13,12 @@ import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import type { ITerrainDescription } from "game/tile/ITerrain";
 import { TerrainType } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export interface IDrinkInFrontCanUse extends IActionUsable {
+    tile: Tile;
     terrainDescription?: ITerrainDescription;
     tileType?: TerrainType;
     doodad?: Doodad;
 }
-declare const _default: Action<[], import("../../Human").default, void, IDrinkInFrontCanUse, []>;
+declare const _default: Action<[], import("../../Human").default<number>, void, IDrinkInFrontCanUse, []>;
 export default _default;

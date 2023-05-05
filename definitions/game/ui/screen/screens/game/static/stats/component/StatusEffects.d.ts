@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
-import type Entity from "game/entity/Entity";
+import type EntityWithStats from "game/entity/EntityWithStats";
 import { StatusType } from "game/entity/IEntity";
 import Component from "ui/component/Component";
 export interface IStatusEffectsEvents extends Events<Component> {
@@ -19,7 +19,7 @@ export default class StatusEffects extends Component {
     readonly event: IEventEmitter<this, IStatusEffectsEvents>;
     private readonly entity;
     private readonly effectIcons;
-    constructor(entity: Entity);
+    constructor(entity: EntityWithStats);
     /**
      * Event handler for the status effects of this entity changing
      */

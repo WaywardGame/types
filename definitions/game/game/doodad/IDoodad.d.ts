@@ -18,13 +18,15 @@ import type { IDecayTemperatureRange } from "game/IGame";
 import type { ILootItem } from "game/ILoot";
 import type { IObjectDescription, IObjectOptions } from "game/IObject";
 import type Island from "game/island/Island";
-import type { IItemOld, ItemType } from "game/item/IItem";
+import type { IContainer, IItemOld, ItemType, ItemTypeExtra, ItemTypeGroup } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type { LootGroupType } from "game/item/LootGroups";
 import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
 import type { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
-import type { ITile, TerrainType } from "game/tile/ITerrain";
+import type { TerrainType } from "game/tile/ITerrain";
 import type { TileEventType } from "game/tile/ITileEvent";
+import type Tile from "game/tile/Tile";
+import type Translation from "language/Translation";
 import type { IModdable } from "mod/ModRegistry";
 import type { ISpriteAnimation } from "renderer/ISpriteInfo";
 import type { TileLayerType } from "renderer/world/IWorldRenderer";
@@ -33,7 +35,7 @@ export interface IDoodadOptions extends IObjectOptions {
     force?: boolean;
     gatherReady?: number;
     stillContainer?: Item;
-    gfx?: number;
+    growth?: GrowingStage;
     spread?: number;
     weight?: number;
     disassembly?: Item[];
@@ -44,10 +46,12 @@ export interface IDoodadOptions extends IObjectOptions {
     aberrant?: boolean;
     meltDecay?: number;
     inheritMagic?: MagicalPropertyManager;
+    bonusAttack?: number;
 }
 type MagicalPropertyOld = Exclude<IItemOld["magicalProperties"], undefined> extends Array<infer T> ? T : never;
 export type IDoodadOld = Partial<Doodad> & {
     growInto?: DoodadType;
+    gfx?: number;
     legendary?: MagicalPropertyOld;
     magicalProperties?: MagicalPropertyOld[];
     ownerIdentifier?: string;
@@ -87,6 +91,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     isDoor?: boolean;
     isFence?: boolean;
     isFlammable?: boolean;
+    containedItemsContributeToCivilizationScore?: boolean;
     usesSpores?: boolean;
     isGate?: boolean;
     adaptsToFence?: boolean;
@@ -97,6 +102,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     isWaterSource?: boolean;
     isVehicle?: boolean;
     attackable?: true;
+    subTypes?: DoodadTypeExtra[];
     /**
      * When gathered completely, convert to a new DoodadType
      */
@@ -128,6 +134,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     itemStackOffset?: number;
     itemStackRegion?: IItemStackRegion | ((doodad: Doodad) => IItemStackRegion | undefined);
     decayTemperatureRange?: IDecayTemperatureRange;
+    isIslandPort?: boolean;
     /**
      * Item that defines the decay amount when this doodad is melting.
      */
@@ -166,7 +173,28 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
          */
         columns: number;
     }>;
-    getVariation?(island: Island, tile: ITile, x: number, y: number, z: number, doodad: Doodad | undefined, existingVariationX: number, existingVariationY: number): [number, number] | undefined;
+    /**
+     * Called when the doodad is built via templates
+     * @param doodad Doodad
+     * @returns Name to set the doodad to or undefined to not name it.
+     */
+    getRandomNameOnTemplateSpawn?: (doodad: Doodad) => Translation | undefined;
+    /**
+     * The doodad type to display instead of the describe doodad type.
+     */
+    displayDoodad?: SupplierOr<DisplayableDoodadType | undefined, [Doodad]>;
+    /**
+     * Sets (and overwrites) the associated item that shows in the tooltip.
+     */
+    getAssociatedItem?(doodad: Doodad): ItemType | ItemTypeExtra | undefined;
+    getVariation?(island: Island, tile: Tile, doodad: Doodad | undefined, existingVariationX: number, existingVariationY: number): [number, number] | undefined;
+    onContainerItemAdd?(container: Doodad & IContainer, items: Item[]): void;
+    onContainerItemRemove?(container: Doodad & IContainer, items: Item[]): void;
+    /**
+     * Item groups of this type in the container will provide skill bonuses to adjacent players.
+     */
+    containedItemGroupProvidesSkill?: IProvidesSkill;
+    alwaysInspectable?: true;
 }
 export interface IItemStackRegion {
     xMin?: number;
@@ -195,6 +223,20 @@ export interface ILockedChest {
      * Number of potential guardian group creatures spawned when unlocking the chest.
      */
     guardiansSpawned?: number;
+}
+export interface IProvidesSkill {
+    /**
+     * Skill type that is provided to the player.
+     */
+    skillType: SkillType;
+    /**
+     * Item group that triggers the skill bonus.
+     */
+    itemGroup: ItemTypeGroup;
+    /**
+     * How much each of that item provides.
+     */
+    skillValue: number;
 }
 export type IDoodadParticles = Record<number, IRGB>;
 export type IDoodadLoot = Record<number, ILootItem[] | undefined>;
@@ -351,8 +393,25 @@ export declare enum DoodadType {
     WoodenTrackGateOpen = 149,
     Cattails = 150,
     WaterLilies = 151,
-    Spikerush = 152
+    Spikerush = 152,
+    WoodenBookcase = 153,
+    GraniteLighthouse = 154,
+    LitGraniteLighthouse = 155,
+    SandstoneLighthouse = 156,
+    LitSandstoneLighthouse = 157,
+    ClayLighthouse = 158,
+    LitClayLighthouse = 159,
+    BasaltLighthouse = 160,
+    LitBasaltLighthouse = 161
 }
+export declare enum DoodadTypeExtra {
+    None = 999,
+    WoodenBookcase_25 = 1000,
+    WoodenBookcase_50 = 1001,
+    WoodenBookcase_75 = 1002,
+    WoodenBookcase_100 = 1003
+}
+export type DisplayableDoodadType = DoodadType | DoodadTypeExtra;
 export declare enum DoodadTag {
     None = 0,
     ProppedOpen = 1
@@ -379,7 +438,9 @@ export declare enum DoodadTypeGroup {
     LitStructure = 413,
     LockedChest = 414,
     Scarecrow = 415,
-    Last = 416
+    Lighthouse = 416,
+    LitLighthouse = 417,
+    Last = 418
 }
 export declare enum DoorOrientation {
     Default = 0,

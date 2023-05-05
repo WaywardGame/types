@@ -12,7 +12,9 @@ import { ItemType, ItemTypeGroup } from "game/item/IItem";
 import type { IDropdownOption } from "ui/component/Dropdown";
 import GroupDropdown from "ui/component/GroupDropdown";
 export default class ItemDropdown<OTHER_OPTIONS extends string = never> extends GroupDropdown<typeof ItemType, OTHER_OPTIONS, ItemTypeGroup, Exclude<ItemType, ItemType.None>> {
-    constructor(defaultOption: OTHER_OPTIONS | Exclude<ItemType, ItemType.None>, options?: Iterable<IDropdownOption<OTHER_OPTIONS>>);
+    private canRefresh;
+    constructor(defaultOption: OTHER_OPTIONS | Exclude<ItemType, ItemType.None>, options?: Iterable<IDropdownOption<OTHER_OPTIONS>>, inherit?: boolean);
+    refresh(): this;
     protected filterEnum(value: ItemType): boolean;
     protected getGroupName(group: ItemTypeGroup): string;
     protected isInGroup(item: ItemType, group: ItemTypeGroup): boolean;

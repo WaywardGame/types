@@ -11,5 +11,4 @@
 import type { IDoodadDescription, IDoodadGroupDescription } from "game/doodad/IDoodad";
 import { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
 export declare const doodadDescriptions: OptionalDescriptions<DoodadType, IDoodadDescription>;
-export default doodadDescriptions;
 export declare const doodadGroups: OptionalDescriptions<DoodadTypeGroup, IDoodadGroupDescription>;

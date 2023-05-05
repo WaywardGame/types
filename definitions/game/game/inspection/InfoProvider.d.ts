@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { EventBus } from "event/EventBuses";
 import EventEmitter from "event/EventEmitter";
 import type { Emitter, EmitterOrBus, Event, Handler } from "event/EventManager";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
@@ -42,6 +43,10 @@ export interface IInfoProviderEvents {
     /**
      * Should be emitted when the info provider should be removed.
      */
+    requestRemove(): any;
+    /**
+     * Emitted when the info provider has been removed.
+     */
     remove(): any;
     /**
      * Should be emitted when the info provider's display level changes.
@@ -68,13 +73,16 @@ export interface ISerializedIcon extends IIcon {
     path: string | ISerializedImagePath;
 }
 export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProviderEvents> implements IRefreshable {
+    static multiTextParagraph: string;
     private static uniqueInitializationId;
     static create(...translations: TranslationGenerator[]): SimpleInfoProvider;
+    static dynamic<T>(observer: InfoProvider.Observer<T>, supplier: (value: T) => InfoProvider | undefined): SimpleInfoProvider;
     static of(...classes: string[]): SimpleInfoProvider;
     static title(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
+    static subtitle(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
     static description(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
     static text(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
-    static list(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
+    static list(...translations: Array<InfoProvider | TranslationGenerator | undefined>): SimpleInfoProvider;
     static ofComponent(componentSupplier: () => Component): InfoProvider;
     private displayLevel?;
     protected component?: Component;
@@ -83,9 +91,11 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     abstract get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     abstract getClass(): string[];
     getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel | Set<InfoDisplayLevel>;
-    setDisplayLevel(...displayLevel: InfoDisplayLevel[]): this;
+    setDisplayLevel(...displayLevel: Array<InfoDisplayLevel | undefined>): this;
     getDisplayLevel(context: InfoProviderContext): Set<InfoDisplayLevel>;
     setComponent(componentClass: Class<Component>): this;
+    private componentInitializer?;
+    setComponentInitializer(initializer: (componenent: Component) => any): this;
     private icon?;
     getIcon(): IIcon | string | undefined;
     setIcon(icon?: IIcon | string): this;
@@ -94,12 +104,20 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     setSynchronous(): this;
     init(): void;
     private readonly refreshEvents;
+    subscribeRefreshOnTick(observer: InfoProvider.Observer<any>): this;
+    subscribeRefreshOnTick(predicate: (...params: Parameters<Handler<EventBus.Game, "tickEnd">>) => boolean): this;
     /**
      * Marks this info provider as to subscribe refresh events to the given host.
      * Note: Any existing initialized components will not be retroactively subscribed.
      * @param predicate A predicate function for whether or not this info provider should actually refresh when the event is hit
      */
     subscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...args: [...events: K[], predicate: (...params: Parameters<Handler<E, K>>) => boolean]): this;
+    /**
+     * Marks this info provider as to subscribe refresh events to the given host.
+     * Note: Any existing initialized components will not be retroactively subscribed.
+     * @param observer An observer that will only trigger a refresh if the value has changed
+     */
+    subscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...args: [...events: K[], observer: InfoProvider.Observer<any>]): this;
     /**
      * Marks this info provider as to subscribe refresh events to the given host.
      * Note: Any existing initialized components will not be retroactively subscribed.
@@ -131,13 +149,21 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     };
     protected initChildTextComponent(text: TranslationGenerator): Text;
 }
+export declare namespace InfoProvider {
+    class Observer<T> {
+        private readonly _observe;
+        value: T;
+        constructor(_observe: () => T);
+        observe(): boolean;
+    }
+}
 export declare class SimpleInfoProvider extends InfoProvider {
     private readonly classes;
     private readonly contents;
     private childComponentClass;
     private validWhen?;
     constructor(...translations: Array<TranslationGenerator | InfoProvider>);
-    get(): (import("../../language/impl/TranslationImpl").default | import("../../language/ITranslation").ISerializedTranslation | import("../../language/dictionary/UiTranslation").default | (() => import("../../language/impl/TranslationImpl").default | import("../../language/ITranslation").ISerializedTranslation | import("../../language/dictionary/UiTranslation").default | Iterable<import("../../utilities/string/Interpolator").IStringSection> | undefined) | InfoProvider)[];
+    get(): (import("../../language/impl/TranslationImpl").default | import("../../language/ITranslation").ISerializedTranslation | import("../../language/dictionary/UiTranslation").default | (() => import("../../language/impl/TranslationImpl").default | import("../../language/ITranslation").ISerializedTranslation | import("../../language/dictionary/UiTranslation").default | import("../../utilities/string/Interpolator").IStringSection[] | undefined) | InfoProvider)[];
     add(...translations: Array<TranslationGenerator | InfoProvider | Falsy>): this;
     onlyIfHasContents(): this | undefined;
     addInfoGetter(provider: () => InfoProvider | undefined): this;

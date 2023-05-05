@@ -34,10 +34,14 @@ export interface IDropdownData<OptionId = string | number> {
 }
 export default class Dropdown<O = string | number> extends Component implements IRefreshableValue<IDropdownData<O>> {
     event: IEventEmitter<this, IDropdownEvents<O>>;
-    readonly options: Map<O, Button>;
-    readonly inputButton: InputButton;
-    protected optionsWrapper: Component;
-    private readonly optionsWrapperWrapper;
+    private using?;
+    private readonly _options;
+    get options(): Map<O, Button>;
+    readonly inputButton: DropdownInputButton;
+    protected _optionsWrapper: Component;
+    private get optionsWrapper();
+    private readonly _optionsWrapperWrapper;
+    private get optionsWrapperWrapper();
     private refreshMethod;
     private visibleOptions;
     private defaultOption?;
@@ -49,6 +53,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     private hovered;
     private shouldRetainLastFilter;
     constructor();
+    use(dropdown?: Dropdown<O>): this;
     retainLastFilter(retainLastFilter?: boolean): this;
     open(): void;
     close(input?: InputButton): boolean;
@@ -78,5 +83,17 @@ export default class Dropdown<O = string | number> extends Component implements 
     private updateWrapperPosition;
     private nextOption;
     private previousOption;
+}
+interface IDropdownInputButtonEvents extends Events<InputButton> {
+    nextOption(): any;
+    prevOption(): any;
+}
+declare class DropdownInputButton extends InputButton {
+    readonly event: IEventEmitter<this, IDropdownInputButtonEvents>;
+    constructor(inputInitializer: (input: Input) => any);
+    protected playSound(): void;
+    protected onStopEditMode(): void;
+    protected onNextOption(api: IBindHandlerApi): boolean;
+    protected usePreviousOption(api: IBindHandlerApi): boolean;
 }
 export {};

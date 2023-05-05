@@ -14,7 +14,7 @@ import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export interface ToggleVehicleDoodadCanUse extends IActionUsable {
     type: "doodad";
     existingVehicleItem?: Item;
@@ -25,9 +25,9 @@ export interface ToggleVehicleItemCanUse extends IActionUsable {
     type: "item";
     existingVehicleItem?: Item;
     vehicleItemOrDoodad: Item;
-    currentTile?: ITile;
-    facingTile?: ITile;
+    currentTile?: Tile;
+    facingTile?: Tile;
 }
 export type ToggleVehicleCanUse = ToggleVehicleDoodadCanUse | ToggleVehicleItemCanUse;
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Undefined]], import("../../Human").default, void, ToggleVehicleCanUse, [(Item | Doodad | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Undefined]], import("../../Human").default<number>, void, ToggleVehicleCanUse, [(Doodad | Item | undefined)?]>;
 export default _default;

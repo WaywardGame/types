@@ -29,7 +29,7 @@ export default class SaveDataGlobal {
         language?: string;
     };
     utilitiesEnumsAllocated: Record<string, EnumInfo>;
-    savedDialogInfo: Record<string, IDialogInfo>;
+    savedDialogInfo: Record<string, IDialogInfo | undefined>;
     multiplayerBannedPlayers: string[];
     multiplayerPreviousGames: Record<string, IMultiplayerPreviousGame | undefined>;
     multiplayerMessageOfTheDay: string;

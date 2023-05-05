@@ -67,6 +67,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     private translator?;
     getTranslation(using?: IUsableActionPossibleUsing, which?: ActionWhichTranslation, context?: UsableActionDisplayContext): Translation | undefined;
     getOrder(using?: IUsableActionPossibleUsing): number;
+    getContextualLevel(using?: IUsableActionPossibleUsing): number;
     canUseOnMoveWhenDiscovered(): boolean;
     canUseOnMove(): boolean;
 }

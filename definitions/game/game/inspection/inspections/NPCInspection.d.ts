@@ -13,12 +13,15 @@ import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import HumanInspection from "game/inspection/inspections/HumanInspection";
+import type Tile from "game/tile/Tile";
 import type { TranslationGenerator } from "ui/component/IComponent";
-import type { IVector3 } from "utilities/math/IVector";
 export default class NPCInspection extends HumanInspection<NPC> {
-    static getFromTile(position: IVector3): never[] | NPCInspection;
+    static getFromTile(tile: Tile): never[] | NPCInspection;
     static handles(type: InspectType, npc: unknown): boolean;
     constructor(npc: NPC);
     getBorder(): string;
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
+    private renderNPCDetails;
+    private renderMerchantDetails;
+    private renderShipperDetails;
 }

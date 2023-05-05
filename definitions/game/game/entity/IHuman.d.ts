@@ -11,11 +11,11 @@
 import type { Events } from "event/EventEmitter";
 import type Doodad from "game/doodad/Doodad";
 import type { ActionType } from "game/entity/action/IAction";
-import type { IDamageInfo } from "game/entity/creature/ICreature";
-import type Entity from "game/entity/Entity";
+import type { CreatureType, IDamageInfo } from "game/entity/creature/ICreature";
+import type EntityWithStats from "game/entity/EntityWithStats";
 import type Human from "game/entity/Human";
-import type { AttackType } from "game/entity/IEntity";
-import type { ILoadOnIslandOptions, IMovementIntent, WeightStatus } from "game/entity/player/IPlayer";
+import type { AttackType, DamageType } from "game/entity/IEntity";
+import type { IMovementIntent, WeightStatus } from "game/entity/player/IPlayer";
 import type { ISkillEvents } from "game/entity/skill/SkillManager";
 import type { IHasImagePath, Quality } from "game/IObject";
 import type { IslandId } from "game/island/IIsland";
@@ -24,7 +24,7 @@ import type { IContainer } from "game/item/IItem";
 import { ItemType, ItemTypeGroup, RecipeLevel } from "game/item/IItem";
 import type Item from "game/item/Item";
 import { TempType } from "game/temperature/ITemperature";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import Message from "language/dictionary/Message";
 import type { IModdable } from "mod/ModRegistry";
 import type { IOptions } from "save/data/ISaveDataGlobal";
@@ -32,7 +32,7 @@ import type { IRGB } from "utilities/Color";
 import type { Direction } from "utilities/math/Direction";
 import type { IVector2 } from "utilities/math/IVector";
 import type { IRange } from "utilities/math/Range";
-export interface IHumanEvents extends Events<Entity>, ISkillEvents {
+export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
     /**
      * Called when the human is spawned. (At the end of `Player.setup` / `NPC.spawn`)
      */
@@ -49,23 +49,23 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
     restEnd(restData: IRestData): any;
     /**
      * Called when an item is added to the player's inventory
-     * @param item The item object
-     * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
+     * @param item The items
+     * @param container The container object the items were added to. This container might be inventory or a container within the inventory.
      */
-    inventoryItemAdd(item: Item, container: IContainer): any;
+    inventoryItemAdd(items: Item[], container: IContainer): any;
     /**
      * Called when an item is removed from the players inventory
-     * @param item The item object
-     * @param container The container object the item was moved to.
+     * @param item The items
+     * @param container The container object the items were moved to.
      */
-    inventoryItemRemove(item: Item, container: IContainer): any;
+    inventoryItemRemove(items: Item[], container: IContainer): any;
     /**
      * Called when an item is moved from one container to another, while still in the players inventory.
-     * @param item The item object
-     * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
-     * @param previousContainer The container object the item was moved from. This container might be inventory or a container within the inventory.
+     * @param items The items
+     * @param container The container object the items were moved to. This container might be inventory or a container within the inventory.
+     * @param previousContainer The container object the items were moved from. This container might be inventory or a container within the inventory.
      */
-    inventoryItemUpdate(item: Item, container: IContainer, previousContainer?: IContainer): any;
+    inventoryItemUpdate(items: Item[], container: IContainer, previousContainer?: IContainer): any;
     /**
      * Called when the human equips an item to a slot
      * @param item The item being equipped
@@ -104,7 +104,7 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      * @param dropAllQuality If not undefined, all items of this quality will be dropped
      * @returns True if the item can be dropped, false if the item can not be dropped, or undefined to use the default logic
      */
-    canDropItem(item: Item, tile: ITile, dropAll: boolean, dropAllQuality: Quality | undefined): boolean | undefined;
+    canDropItem(item: Item, tile: Tile, dropAll: boolean, dropAllQuality: Quality | undefined): boolean | undefined;
     /**
      * Called before an npc attacks
      * @param weapon The weapon used to attack
@@ -184,13 +184,18 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      * @param tile The tile something was built on
      * @param doodad The doodad that was created on the tile
      */
-    build?(item: Item, tile: ITile, doodad: Doodad): void;
+    build?(item: Item, tile: Tile, doodad: Doodad): void;
     /**
      * Called when the human is damaged
      * @param damageInfo The damage info object
      * @returns The amount of damage the player should take (the player will take this damage)
      */
     damage(damageInfo: IDamageInfo): number | void;
+    /**
+     * Called when an doodad is picked up
+     * @param doodad The doodad object
+     */
+    pickUpDoodad?(doodad: Doodad): any;
     /**
      * Called when the player tick starts
      */
@@ -250,6 +255,14 @@ export interface IHumanEvents extends Events<Entity>, ISkillEvents {
      * @return `false` to stop the human from dying
      */
     shouldDie(): false | void;
+    /**
+     * Called when the human position is set, from a teleport type of movement
+     * @param tile Tile the human is now on
+     */
+    setPosition(tile: Tile): void;
+    discoverVulnOrResist(creatureType: CreatureType, damageType: DamageType): any;
+    hasDiscoveredVulnOrResist(creatureType: CreatureType, damageType: DamageType, defaultState: boolean): boolean | undefined;
+    getDiscoveredVulnsAndResists(): Map<CreatureType, Set<DamageType>>;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;
@@ -274,7 +287,8 @@ export declare enum Delay {
     Collision = 40,
     TurnDirection = 2,
     ReallyLongPause = 100,
-    AttackAnimation = 30
+    AttackAnimation = 30,
+    Jump = 18
 }
 export declare enum EquipType {
     None = 0,
@@ -418,15 +432,16 @@ export interface IHumanOld extends Partial<Human> {
  * Defaults to 90% (0.9)
  */
 export declare const WEIGHT_ENCUMBERED = 0.9;
-export interface ICanSailAwayResult {
-    canSailAway: boolean;
-    distanceFromEdge?: number;
-    blockedTilesChecked?: Set<ITile>;
+export interface ILoadOnIslandOptions {
+    spawnPosition: IVector2;
+    startingGame: boolean;
+    travelType?: "swimming" | "sailing";
 }
 export interface IVoyageInfo {
     time: number;
     boat?: Item;
     destination?: Island;
+    direction?: Direction.Cardinal;
     usedItems?: Item[];
     wantedItems?: ItemType[];
 }

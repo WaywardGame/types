@@ -24,7 +24,7 @@ export default class FlowFieldManager {
     private readonly island;
     private readonly size;
     delegate: DebugRendererDelegate;
-    flowFields: Record<string, FlowField>;
+    flowFields: Map<"-1-0" | "-1-1" | "-1-2" | "-1-4" | "-1-8" | "-1-16" | "-1-32" | "-1-64" | "-1-128" | "-1-256" | "-1-512" | "-1-1024" | "-1-15" | "0-0" | "0-1" | "0-2" | "0-4" | "0-8" | "0-16" | "0-32" | "0-64" | "0-128" | "0-256" | "0-512" | "0-1024" | "0-15" | "1-0" | "1-1" | "1-2" | "1-4" | "1-8" | "1-16" | "1-32" | "1-64" | "1-128" | "1-256" | "1-512" | "1-1024" | "1-15", FlowField>;
     humans: IFlowFieldHuman[];
     private _flowFieldHumans;
     constructor(island: Island, size: number);
@@ -50,6 +50,5 @@ export default class FlowFieldManager {
     reset(): void;
     private getDirection;
     private getFlowField;
-    private getFlowFields;
 }
 export {};

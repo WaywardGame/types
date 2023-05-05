@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Stream from "@wayward/goodstream/Stream";
+import { CreatureType } from "game/entity/creature/ICreature";
 import type { RequirementInstance } from "game/entity/player/quest/quest/Quest";
 import { Quest } from "game/entity/player/quest/quest/Quest";
 import type { QuestInstance } from "game/entity/player/quest/QuestManager";
 import type { IQuestRequirement } from "game/entity/player/quest/requirement/IRequirement";
 import type Island from "game/island/Island";
 export default class Challenge extends Quest {
-    static getCreaturesOfRequirements(): Stream<any>;
+    static getCreaturesOfRequirements(): CreatureType[];
     private static readonly possibleRequirements;
     /**
      * These are the only items that can be requested to collect
@@ -39,9 +39,14 @@ export default class Challenge extends Quest {
     private readonly possibleRequirements;
     constructor();
     reset(): void;
-    protected createRequirements(island: Island): Stream<IQuestRequirement<any[], {}>>;
+    protected createRequirements(island: Island): Array<IQuestRequirement<any, any>>;
     protected onUpdate(quest: QuestInstance): void;
     protected onRequirementComplete(quest: QuestInstance, completedRequirement: RequirementInstance): void;
+    /**
+     *
+     * @param island
+     * @returns Technically a IQuestRequirement<any, any>, but specifying the exact types makes the typing much faster
+     */
     private createRandomRequirement;
     private getSpawnableCreatures;
 }

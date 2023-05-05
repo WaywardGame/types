@@ -18,5 +18,5 @@ export interface IReadCanUse extends IActionUsable {
     book: BookType;
     basicBookName: TranslationImpl;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default, void, IReadCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<number>, void, IReadCanUse, [Item]>;
 export default _default;

@@ -20,7 +20,7 @@ import type { TranslationGenerator } from "ui/component/IComponent";
 import type { ActionSlot } from "ui/screen/screens/game/static/ActionBar";
 export default class ActionInspection extends Inspection<ActionId | undefined> {
     private readonly slot?;
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => any;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
     private readonly item?;
     using?: IUsableActionPossibleUsing;
     constructor(value?: string | EnumReferenceResolved<ReferenceType.Action>, slot?: ActionSlot | undefined);

@@ -76,6 +76,9 @@ export declare class Heading extends Text {
     icon?: Component;
     addIcon(initializer: (component: Component) => any): this;
 }
+interface IEntireTextData {
+    referenceIcons?: Set<string>;
+}
 export type BasicTextLink = string | [string, string?, string?];
 export interface IBasicTextEvents extends Events<Component> {
     handleLink(link: BasicTextLink): true | void;
@@ -88,7 +91,9 @@ export declare class BasicText extends Component {
     protected inputModifier?: Modifier;
     currentTooltip?: (tooltip: Tooltip) => any;
     constructor(elementType?: string);
-    setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection> & Partial<IBindingsSection>): this;
+    setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection> & Partial<IBindingsSection>, data?: IEntireTextData): this;
+    protected onRemove(): void;
     private setTooltipLocation;
     private onClick;
 }
+export {};

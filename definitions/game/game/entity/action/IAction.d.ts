@@ -28,7 +28,7 @@ import type Item from "game/item/Item";
 import type { RecipeType } from "game/item/recipe/RecipeRegistry";
 import type { IPromptDescriptionBase, PromptDescriptionArgs } from "game/meta/prompt/IPrompt";
 import type { Milestone } from "game/milestones/IMilestone";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 import type { IModdable } from "mod/ModRegistry";
 import type { IRGB } from "utilities/Color";
@@ -152,7 +152,15 @@ export declare enum ActionType {
     CreateControllableNPC = 114,
     RemoveControllableNPC = 115,
     PropOpenDoor = 116,
-    DamageMap = 117
+    DamageMap = 117,
+    Noclip = 118,
+    ShipToIsland = 119,
+    CageCreature = 120,
+    Summon = 121,
+    SetCreatureAi = 122,
+    SetTitle = 123,
+    Uncage = 124,
+    NPCInteract = 125
 }
 export declare const ACTIONS_RECOMMENDED: ActionType[];
 export declare enum ActionUsability {
@@ -184,13 +192,21 @@ export interface IActionUsable {
     usableOnMove?: boolean;
     displayLevel?: ActionDisplayLevel;
 }
+export declare namespace IActionUsable {
+    function usableOrPrintable(usability: IActionUsable | IActionNotUsable): boolean;
+}
 export interface IActionNotUsable extends Partial<IPackedMessage> {
     usable: false;
     alreadyUsing?: true;
     errorDisplayLevel?: ActionDisplayLevel;
-    mobCheck?: IVector3;
+    mobCheckTile?: Tile;
     arg?: never;
     source?: never;
+}
+export interface IProtectedItems {
+    consumedItems?: Item[] | Item;
+    damagedItems?: Item[] | Item;
+    actionType?: ActionType;
 }
 export type AnyActionDescription = IActionDescription<Array<ActionArgument | ActionArgument[]>, Entity, any, IActionUsable, any[]>;
 export interface IActionDescription<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> extends IModdable {
@@ -247,7 +263,7 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
      * When checking when the action is being execute
      * true if a creature is on a tile, false otherwise
      */
-    isCreatureBlocking(tile: ITile): boolean;
+    isCreatureBlocking(tile: Tile): boolean;
     setDelay(delay: number, replace?: boolean): this;
     setPassTurn(turnType?: TurnTypeFlag): this;
     setUpdateView(updateFov?: boolean): this;
@@ -280,6 +296,10 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
      * Removes specific items added by `addItems`
      */
     removeItems(...items: Array<Item | undefined>): this;
+    /**
+     * Checks to see if a protected item can be used
+     */
+    canProtectedItemBeUsed(items: IProtectedItems): IActionNotUsable | true;
 }
 export interface IActionHandlerApi<E extends Entity = Entity, CU extends IActionUsable = IActionUsable> extends IActionApi<E, CU> {
     /**
@@ -300,14 +320,14 @@ export interface IActionConfirmerApi<E extends Entity = Entity, CU extends IActi
 export interface IActionSoundEffect {
     type: SfxType;
     inFront?: boolean;
-    position?: Partial<IVector3>;
+    tile?: Tile;
     delay?: number;
     speed?: number;
     noPosition?: boolean;
 }
 export interface IActionParticle {
     color: IRGB;
-    position?: Partial<IVector3>;
+    tile?: Tile;
     count?: number;
     inFront?: boolean;
 }
@@ -349,11 +369,13 @@ export declare enum ActionArgument {
     Quality = 32,
     RecipeType = 33,
     RestType = 34,
-    TileEvent = 35,
-    UnsignedInteger32NumberArray = 36,
-    Vector2 = 37,
-    Vector2Array = 38,
-    Vector3 = 39
+    Tile = 35,
+    TileArray = 36,
+    TileEvent = 37,
+    UnsignedInteger32NumberArray = 38,
+    Vector2 = 39,
+    Vector2Array = 40,
+    Vector3 = 41
 }
 export interface IActionArgumentTypeMap {
     [ActionArgument.Undefined]: undefined;
@@ -391,6 +413,8 @@ export interface IActionArgumentTypeMap {
     [ActionArgument.Quality]: Quality;
     [ActionArgument.RecipeType]: RecipeType;
     [ActionArgument.RestType]: RestType;
+    [ActionArgument.Tile]: Tile;
+    [ActionArgument.TileArray]: Tile[];
     [ActionArgument.TileEvent]: TileEvent;
     [ActionArgument.UnsignedInteger32NumberArray]: number[];
     [ActionArgument.Vector2]: IVector2;
@@ -409,4 +433,17 @@ export type Tuple5<X1, X2, X3, X4, X5> = undefined extends X5 ? (undefined exten
 export type ActionArguments<A extends IActionDescription<any, any, any, any, any>> = A extends IActionDescription<any, any, any, any, infer AA> ? AA : never;
 export type ActionEntities<A extends IActionDescription<any, any>> = A extends IActionDescription<any, infer E> ? E : never;
 export type ActionApi<A extends IActionDescription<any, any>> = IActionApi<ActionEntities<A>>;
+export interface ActionExecutorEvents {
+    /**
+     * Called before an action is executed
+     * This is called before the action result is used
+     * @returns False to cancel the action
+     */
+    preExecuteAction<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, AV extends any[] = ActionArgumentTupleTypes<A>, CU extends IActionUsable = any>(actionType: ActionType, actionApi: IActionHandlerApi<E, CU>, args: AV): false | void;
+    /**
+     * Called after an action has been executed
+     * This is called after the action result is used
+     */
+    postExecuteAction<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, AV extends any[] = ActionArgumentTupleTypes<A>, CU extends IActionUsable = any>(actionType: ActionType, actionApi: IActionHandlerApi<E, CU>, args: AV): any;
+}
 export {};

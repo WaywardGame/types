@@ -12,12 +12,12 @@ import type { IProgramDescription } from "renderer/CompiledProgram";
 import CompiledProgram from "renderer/CompiledProgram";
 import ResourceLoader from "resource/ResourceLoader";
 export default class WebGlContext {
-    readonly id: number;
+    readonly canvas: HTMLCanvasElement;
     readonly gl: WebGL2RenderingContext;
     readonly version: number;
     private readonly programs;
     readonly resourceLoader: ResourceLoader;
-    constructor(id: number, gl: WebGL2RenderingContext, version: number);
+    constructor(canvas: HTMLCanvasElement, gl: WebGL2RenderingContext, version: number);
     delete(): void;
     /**
      * Initializes shaders and resource loader

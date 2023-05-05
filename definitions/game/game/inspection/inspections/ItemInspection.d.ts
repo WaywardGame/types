@@ -16,12 +16,12 @@ import Inspection from "game/inspection/Inspection";
 import { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import { ReferenceType } from "game/reference/IReferenceManager";
+import type Tile from "game/tile/Tile";
 import type { TranslationGenerator } from "ui/component/IComponent";
-import type { IVector3 } from "utilities/math/IVector";
 export default class ItemInspection extends Inspection<ItemType> {
-    static getFromTile(position: IVector3, _: any, inspectType: InspectType): ItemInspection[];
+    static getFromTile(tile: Tile, _: any, inspectType: InspectType): ItemInspection[];
     static isWorldInspection(type: InspectType): boolean;
-    static handles(type: InspectType, item: unknown): any;
+    static handles(type: InspectType, item: unknown): boolean;
     private static readonly itemTypeHandles;
     private static readonly dismantleHandles;
     readonly item?: WeakRef<Item> | undefined;

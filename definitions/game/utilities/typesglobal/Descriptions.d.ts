@@ -24,7 +24,5 @@ declare global {
      * @param E The enum with which to index these descriptions.
      * @param V The description type.
      */
-    type Descriptions<E extends string | number, V> = {
-        [key in E]: V;
-    } & Record<number, V | undefined>;
+    type Descriptions<E extends string | number, V> = Record<E, V> & Record<number, V | undefined>;
 }

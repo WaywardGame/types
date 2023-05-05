@@ -12,6 +12,7 @@ import type { Events, IEventEmitter } from "event/EventEmitter";
 import Component from "ui/component/Component";
 import type ContextMenu from "ui/component/ContextMenu";
 import type { IBindHandlerApi } from "ui/input/Bind";
+import Macros from "ui/input/Macros";
 import { Background, ScreenId } from "ui/screen/IScreen";
 import type Dialog from "ui/screen/screens/game/component/Dialog";
 import DialogManager from "ui/screen/screens/game/DialogManager";
@@ -42,6 +43,8 @@ export default abstract class Screen extends Component {
     setBackground(background: Background): this;
     removeBackground(): this;
     hasContextMenu(): boolean;
+    getPartialContextMenuMacros(): Macros.IBindableMatch | undefined;
+    hasPartialContextMenuMacro(api: IBindHandlerApi, macroMatch?: Macros.IBindableMatch): boolean;
     /**
      * Remove the context menu from this element
      */

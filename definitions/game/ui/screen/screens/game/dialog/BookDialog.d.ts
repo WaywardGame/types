@@ -16,11 +16,11 @@ export default class BookDialog extends Dialog {
     private book?;
     private readonly text;
     constructor();
-    getName(): import("../../../../../language/impl/TranslationImpl").default | import("../../../../../language/ITranslation").ISerializedTranslation | import("../../../../../language/dictionary/UiTranslation").default | Iterable<import("../../../../../utilities/string/Interpolator").IStringSection> | undefined;
+    getName(): import("../../../../../language/impl/TranslationImpl").default | import("../../../../../language/ITranslation").ISerializedTranslation | import("../../../../../language/dictionary/UiTranslation").default | undefined;
     openBook(item: Item): void;
     private getText;
-    protected onInventoryItemRemove(_: any, item: Item): void;
-    protected onInventoryItemUpdate(_: any, item: Item): void;
+    protected onInventoryItemRemove(_: any, itemOrItems: Item | Item[]): void;
+    protected onInventoryItemUpdate(_: any, items: Item[]): void;
     protected onPostMove(player: Player): void;
     private closeIfItemIsGone;
 }

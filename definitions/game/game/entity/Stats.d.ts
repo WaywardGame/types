@@ -155,7 +155,7 @@ export default class Stats<T extends IStatHost> {
      * @param amt The amount to increase the change timer by. Defaults to the stat's `changeTimerSpeed`.
      */
     increaseChangeTimer(stat: Stat | IStat, amt?: number): T;
-    getTimeUntilChange(stat: Stat | IStat): number | undefined;
+    getTimeUntilChange(stat: Stat | IStat, allowFailure?: boolean): number;
     removeChangeTimer(stat: Stat | IStat): T;
     /**
      * Passes the "turn" for stats, decrements their `changeTimer`s. If a stat's timer reaches `0`,

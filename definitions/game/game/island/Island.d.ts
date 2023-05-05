@@ -9,21 +9,24 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import type { Game } from "game/Game";
+import type { IGameOld } from "game/IGame";
+import { TickFlag, TileUpdateType } from "game/IGame";
+import { Quality } from "game/IObject";
 import type { BiomeTypes } from "game/biome/IBiome";
+import type { ITemplateBiomeOptions } from "game/biome/template/Template";
 import DoodadManager from "game/doodad/DoodadManager";
-import CorpseManager from "game/entity/creature/corpse/CorpseManager";
+import Human from "game/entity/Human";
+import type { SkillType } from "game/entity/IHuman";
 import Creature from "game/entity/creature/Creature";
 import CreatureManager from "game/entity/creature/CreatureManager";
 import type { IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "game/entity/creature/ICreature";
+import CorpseManager from "game/entity/creature/corpse/CorpseManager";
 import FlowFieldManager from "game/entity/flowfield/FlowFieldManager";
-import Human from "game/entity/Human";
-import { SkillType } from "game/entity/IHuman";
 import NPCManager from "game/entity/npc/NPCManager";
-import type { IGameOld } from "game/IGame";
-import { FireType, TickFlag, TileUpdateType } from "game/IGame";
-import { Quality } from "game/IObject";
-import type { IIslandEvents, IIslandLoadOptions, ISeeds, IslandId, IWaterContamination, IWaterFill, IWell } from "game/island/IIsland";
+import type { IIslandEvents, IIslandLoadOptions, IMobCheck, ISeeds, IWaterContamination, IWaterFill, IWell, IslandId } from "game/island/IIsland";
 import { WaterType } from "game/island/IIsland";
+import { PortManager } from "game/island/Port";
 import type { ILiquidGather } from "game/item/IItem";
 import type { IRequirementInfo } from "game/item/IItemManager";
 import ItemManager from "game/item/ItemManager";
@@ -32,22 +35,23 @@ import type { IGameOptions } from "game/options/IGameOptions";
 import type { IslandModifiersCollection } from "game/options/modifiers/island/IslandModifiers";
 import type { IReferenceable } from "game/reference/IReferenceManager";
 import TemperatureManager from "game/temperature/TemperatureManager";
-import type { ITerrainDescription, ITile, ITileContainer, ITileData } from "game/tile/ITerrain";
+import type { ITerrainDescription, ITileContainer, ITileData } from "game/tile/ITerrain";
 import { TerrainType } from "game/tile/ITerrain";
 import type { ITerrainLoot, ITerrainLootItem } from "game/tile/TerrainResources";
+import Tile from "game/tile/Tile";
 import TileEventManager from "game/tile/TileEventManager";
 import TimeManager from "game/time/TimeManager";
 import Translation from "language/Translation";
 import World from "renderer/world/World";
-import type { IPreSerializeCallback, ISerializer } from "save/serializer/ISerializer";
+import type { IPostSerializeCallback, IPreSerializeCallback, ISerializer } from "save/serializer/ISerializer";
+import type { IVersionInfo } from "utilities/Version";
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
-import Vector3 from "utilities/math/Vector3";
-import type { Random, SeededGenerator } from "utilities/random/Random";
-import type { IVersionInfo } from "utilities/Version";
+import type { Random } from "utilities/random/Random";
+import type { LegacySeededGenerator } from "utilities/random/generators/LegacySeededGenerator";
+import type { PCGSeededGenerator } from "utilities/random/generators/PCGSeededGenerator";
 export interface IIslandDetails {
     seed: number;
-    random: Random;
     biomeType: BiomeTypes;
     offset: IVector2;
 }
@@ -58,63 +62,70 @@ export declare module IIslandDetails {
  * Represents the worlds island
  * Items, Creatures, Npcs, etc.. all exist on the island
  */
-export default class Island extends EventEmitter.Host<IIslandEvents> implements IReferenceable, IPreSerializeCallback {
-    static getBiomeType(x: number, y: number): BiomeTypes;
-    static getDetails(x: number, y: number): IIslandDetails;
-    static generateDetails(position: IVector2, seed?: number): IIslandDetails;
-    corpses: CorpseManager;
-    creatures: CreatureManager;
-    doodads: DoodadManager;
-    flowFieldManager: FlowFieldManager;
-    items: ItemManager;
-    npcs: NPCManager;
-    temperature: TemperatureManager;
-    tileEvents: TileEventManager;
-    time: TimeManager;
+export default class Island extends EventEmitter.Host<IIslandEvents> implements IReferenceable, IPreSerializeCallback, IPostSerializeCallback {
+    readonly corpses: CorpseManager;
+    readonly creatures: CreatureManager;
+    readonly doodads: DoodadManager;
+    readonly flowFieldManager: FlowFieldManager;
+    readonly items: ItemManager;
+    readonly npcs: NPCManager;
+    readonly ports: PortManager;
+    readonly temperature: TemperatureManager;
+    readonly tileEvents: TileEventManager;
+    readonly time: TimeManager;
+    saveBuildTime?: number;
+    saveVersion: string;
     biomeType: BiomeTypes;
     civilizationScore: number;
     civilizationScoreTiles: Record<number, number>;
     contaminatedWater: IWaterContamination[];
     creatureSpawnTimer: number;
+    loadCount: number;
     mapGenVersion: string;
     name?: string;
     position: IVector2;
+    readonly mapSize: number;
+    readonly treasureMaps: DrawnMap[];
+    readonly wellData: SaferNumberIndexedObject<IWell>;
     referenceId?: number;
-    saveVersion: string;
+    templateBiomeOptions: ITemplateBiomeOptions | undefined;
     tileContainers: ITileContainer[];
-    tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;
-    treasureMaps: DrawnMap[];
     version: string;
-    wellData: SaferNumberIndexedObject<IWell>;
-    loadCount: number;
-    seeds: ISeeds;
-    readonly seededRandom: Random<SeededGenerator>;
+    tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;
+    readonly seeds: ISeeds;
+    readonly seededRandom: Random<LegacySeededGenerator | PCGSeededGenerator>;
+    readonly game: Game;
     /**
      * Set of players on this island
      */
-    readonly players: Set<Human>;
+    readonly players: Set<Human<number>>;
     /**
      * Entity move types in fov on this island
-     * `${z}-${moveType}` -> Humans
      */
-    readonly moveTypesInFov: Map<string, Set<Human>>;
+    readonly moveTypesInFov: Map<"-1-0" | "-1-1" | "-1-2" | "-1-4" | "-1-8" | "-1-16" | "-1-32" | "-1-64" | "-1-128" | "-1-256" | "-1-512" | "-1-1024" | "-1-15" | "0-0" | "0-1" | "0-2" | "0-4" | "0-8" | "0-16" | "0-32" | "0-64" | "0-128" | "0-256" | "0-512" | "0-1024" | "0-15" | "1-0" | "1-1" | "1-2" | "1-4" | "1-8" | "1-16" | "1-32" | "1-64" | "1-128" | "1-256" | "1-512" | "1-1024" | "1-15", Set<Human<number>>>;
     previousSaveVersion: IVersionInfo | undefined;
     brokenReferencesCount: number;
+    readonly id: IslandId;
+    readonly mapSizeSq: number;
     spawnPoint: IVector3;
     private _loadedReferences;
     private _tiles;
     private _world;
     modifiersCollection?: IslandModifiersCollection;
     details?: IIslandDetails;
-    ranUpgrades: boolean;
-    constructor(position?: IVector2, seed?: number);
+    private _ranUpgrade;
+    private serializeObjectStats?;
+    constructor(game?: Game, position?: IVector2, seed?: number, mapSize?: number);
     toString(): string;
     private registerMemoryLeakDetector;
     preSerializeObject(serializer: ISerializer): void;
-    onUnserialized(): void;
-    get id(): `${number},${number}`;
+    postSerializeObject(serializer: ISerializer): void;
+    preSerializeProperty(serializer: ISerializer, key: string): void;
+    postSerializeProperty(serializer: ISerializer, key: string): void;
+    onUnserialized(serializer: ISerializer): void;
     get biome(): import("game/biome/IBiome").IBiomeDescription;
     get isLoaded(): boolean;
+    get tiles(): Record<number, Tile | undefined>;
     get hasLoadedItemReferences(): boolean;
     get isLocalIsland(): boolean;
     get world(): World;
@@ -135,7 +146,11 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     private getNameDescriptor;
     private getNameNoun;
     getNeighboringIslands(): Island[];
-    load(options?: Partial<IIslandLoadOptions>): Promise<void>;
+    ensureUpgraded(isSynced: boolean): void;
+    /**
+     * Loads the island
+     */
+    load(options: IIslandLoadOptions): Promise<void>;
     private initializeIslandModifiers;
     /**
      * Unload the island from memory
@@ -154,118 +169,51 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     getIslandDistance(): number;
     /**
      * Gets the default terrain type that should be under a tile (in the case of melting or removing it in some way).
-     * @param tile ITile that we are getting the default terrain type for.
+     * @param tile Tile that we are getting the default terrain type for.
      * @returns The default terrain type with a fallback to dirt (which shouldn't happen without mods or bugs).
      */
-    getDefaultTerrainType(tile: ITile): TerrainType;
-    checkForHiddenMob(human: Human, x: number, y: number, z: number): void;
-    isMapEdge(x: number, y: number): boolean;
+    getDefaultTerrainType(tile: Tile): TerrainType;
+    getDirectionFromMovement(x: number, y: number): Direction.East | Direction.North | Direction.West | Direction.South;
+    getTileFromPoint(point: IVector3): Tile;
+    getTile(x: number, y: number, z: number, disableLog?: boolean): Tile;
+    getTileSafe(x: number, y: number, z: number): Tile | undefined;
+    createTile(x: number, y: number, z: number, index: number): Tile;
+    setTile(x: number, y: number, z: number, tile: Tile): Tile;
+    getOrCreateTile(index: number, x: number, y: number, z: number): Tile;
+    updateFlowFieldTile(tile: Tile, tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
     /**
-     * Ensures a point is valid and is not the edge of the map
-     */
-    ensureValidPoint<T extends IVector2>(point?: T): T | undefined;
-    getTileFromPoint(point: IVector3): ITile;
-    getTile(x: number, y: number, z: number): ITile;
-    getTileSafe(x: number, y: number, z: number): ITile | undefined;
-    setTile(x: number, y: number, z: number, tile: ITile): ITile;
-    setTiles(tiles: ITile[]): void;
-    getOrCreateTile(index: number): ITile;
-    changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean): void;
-    makeLavaPassage(human: Human): TerrainType | undefined;
-    makeCaveEntrance(human: Human, chance?: number): TerrainType | undefined;
-    getTileData(x: number, y: number, z: number): ITileData[] | undefined;
-    getOrCreateTileData(x: number, y: number, z: number): ITileData[];
-    updateFlowFieldTile(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
-    isTilled(x: number, y: number, z: number): boolean;
-    packGround(x: number, y: number, z: number): void;
-    /**
-     * Removes the top tiledata (index 0) from the tile
-     * If there is no remaining tile data, a new tile data will be added with the newTileTypeWhenEmpty type
-     */
-    removeTopTile(x: number, y: number, z: number, newTileTypeWhenEmpty: TerrainType | ((tile: ITile) => TerrainType)): void;
-    /**
-     * Checks if island.tileData is synced with ITile.data
+     * Checks if island.tileData is synced with Tile.data
      */
     checkTileState(): void;
-    isPositionFull(x: number, y: number, z: number): boolean;
-    isTileFull(tile: ITile): boolean;
-    isOnFire(tile: ITile): FireType;
-    isTileEmpty(tile: ITile): boolean;
-    isPositionEmpty(x: number, y: number, z: number): boolean;
     processWaterContamination(): void;
     addPlayer(human: Human, refreshStatusEffects?: boolean): void;
     removePlayer(human: Human, isAbsentPlayer?: boolean): void;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): Human[];
-    isPlayerAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): boolean;
-    isPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): boolean;
-    getPlayersAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): Human[];
-    getPlayersAtPosition(position: IVector3, includeGhosts?: boolean, includeConnecting?: boolean): Human[];
-    getPlayersAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): Human[];
-    getPlayersThatSeePosition(x: number, y: number, z: number): Human[];
-    /**
-     * Gets the nearest player based on x/y/z coordinates.
-     * @param x The x coord to get the closest player.
-     * @param y The y coord to get the closest player.
-     * @param z The z coord to get the closest player.
-     * @param canSee If set to true, check if the player can see the x/y/z coords. Defaults to false.
-     */
-    getNearestPlayer(x: number, y: number, z?: number, canSee?: boolean, includeGhosts?: boolean, includeConnecting?: boolean): {
-        player?: Human;
-        distance?: number;
-    };
     getReputation(): number;
     getMalignity(): number;
     getBenignity(): number;
     getMaxHealth(): number;
     getMaxWeight(): number;
-    getTactics(): number;
     getSkillPercent(skill: SkillType): number;
     getPlayerAverage(calc: (player: Human) => number | undefined, round?: boolean): number;
     updateReputation(reputation: number): void;
     /**
      * Check the amount of water tiles there is connected to a supplied x/y area
      */
-    checkWaterFill(x: number, y: number, z: number, needed: number, waterType: WaterType, waterFill?: IWaterFill): number;
-    getSpawnPoint(): IVector3;
-    consumeWaterTile(x: number, y: number, z: number): void;
+    checkWaterFill(tile: Tile, needed: number, waterType: WaterType, waterFill?: IWaterFill): number;
+    getSpawnPoint(): Tile;
+    getSuitableSpawnPoint(): Tile;
     calculateDamageOutcome(input: IDamageOutcomeInput): IDamageOutcome | undefined;
     damage(target: Human | Creature, damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
     /**
      * Calculates the light level of a tile.
      * @returns 32bit number representing RED GREEN BLUE ALPHA
      */
-    calculateTileLightLevel(tile: ITile, x: number, y: number, z: number): number;
+    calculateTileLightLevel(tile: Tile): number;
     getLightSourceAt(x: number, y: number, z: number): number;
+    checkForTargetInRange(tile: Tile, direction: Direction.Cardinal, range: number, includePlayers?: boolean): IMobCheck;
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
     coolFires(requirements: IRequirementInfo, human: Human): void;
-    isFlammable(x: number, y: number, z: number): boolean;
-    /**
-     * Converts shallow single bodies of fresh/swamp water into seawater.
-     * @param point x/y/z of the tile to check against.
-     */
-    contaminateNonSeawater(point: IVector3): void;
-    /**
-     * Create puddles around a point and limit them (so they can't expand infinitely).
-     * @param point x/y/z of the splash/puddle source.
-     */
-    createPuddles(point: IVector3): void;
-    /**
-     * Cools the tile (such as lava) and reveals to any in-LOS players about it.
-     * @param point x/y/z of the lava tile.
-     * @param islandId The island ID of where we are checking so we can tell players about the cooled lava/tile.
-     */
-    coolTile(point: IVector3, islandId?: IslandId): void;
-    /**
-     * Finds either lava or water ajacent to either lava or water, and cools the lava down based its findings.
-     * @param point x/y/z of the lava or water source.
-     * @param islandId The island ID of where we are checking so we can tell players about the cooled lava.
-     */
-    coolLava(point: IVector3, islandId?: IslandId): void;
-    /**
-     * Contaminate water sources when new ones are created based on the surrounding water.
-     * @param point x/y/z of the water tile created.
-     */
-    contaminateWater(point: IVector3): void;
     /**
      * Resets & recalculates the civilization score
      */
@@ -273,7 +221,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     /**
      * Refreshes the provided civ score for the given tile
      */
-    refreshTileCivilizationScore(tile: ITile, x: number, y: number, z: number, isRecalculating?: boolean): void;
+    refreshTileCivilizationScore(tile: Tile, isRecalculating?: boolean): void;
     /**
      * Adds civilization score
      */
@@ -285,30 +233,9 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     getGrowingSpeed(terrainType: TerrainType, quality?: Quality, magicValue?: number): number;
     processTickFlags(tickFlag: TickFlag, ticks: number, playingHumans: Human[]): void;
     processTickFlagsAsync(tickFlag: TickFlag, ticks: number, playingHumans: Human[], onProgress: (progess: number) => Promise<void>): Promise<void>;
-    /**
-     * Possibly collapses or opens up a cave (on both sides) and breaks any doodads.
-     * @param point Vector3 of the location to collapse or open the caves (if it exists).
-     * @param checkType TerrainType to check if the tile point equals this before switching.
-     */
-    switchCave(point: Vector3, checkType?: TerrainType): void;
-    /**
-     * Checks to see if there is a cave and if it can be switched to collapsed from open or vice versa.
-     * @param terrainType TerrainType to get the description of.
-     * @param checkType TerrainType to check if the tile point equals this before switching.
-     * @returns TerrainType that we should switch the tile into.
-     */
-    canSwitchCave(terrainType: TerrainType, checkType?: TerrainType): TerrainType | undefined;
     private updateEntityFov;
     private processTimers;
     private runRandomEvents;
-    /**
-     * Plants a random seed at the given coordinates based on what can grow on that tile naturally. This will replace any doodad that is there.
-     * @param x X coordinates.
-     * @param y Y coordinates.
-     * @param z Z coordinates.
-     * @returns True if a seed was planted.
-     */
-    plantRandomSeed(x: number, y: number, z: number): boolean;
     /**
      * Synchronizes player events
      * Usually called when a new player joins
@@ -324,7 +251,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * Only allow loading references once
      * Even if an island is unloaded, the loaded references will remain
      */
-    loadReferences(allowFixesInMultiplayer?: boolean): void;
+    loadReferences(allowFixes: boolean): void;
     /**
      * Gets the items/resources from terrain based on the TerrainResources definition and checks if it is based on the current biome type.
      * @param terrainLoot The resource to check.
@@ -335,5 +262,5 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     /**
      * Returns the type of liquid that can be gathered from the tile
      */
-    getLiquidGatherType(terrainType: TerrainType, terrainDescription?: ITerrainDescription | undefined): keyof ILiquidGather | undefined;
+    getLiquidGatherType(terrainType: TerrainType, terrainDescription: ITerrainDescription): keyof ILiquidGather | undefined;
 }

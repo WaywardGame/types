@@ -10,7 +10,7 @@
  */
 import type { SfxType } from "audio/IAudio";
 import EventEmitter from "event/EventEmitter";
-import type { AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionHandlerApi, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable } from "game/entity/action/IAction";
+import type { ActionExecutorEvents, AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable, IProtectedItems } from "game/entity/action/IAction";
 import { ActionArgument, ActionType } from "game/entity/action/IAction";
 import type Entity from "game/entity/Entity";
 import type { SkillType } from "game/entity/IHuman";
@@ -18,32 +18,19 @@ import type { TurnTypeFlag } from "game/entity/player/IPlayer";
 import type Item from "game/item/Item";
 import type { IPromptDescriptionBase, PromptDescriptionArgs } from "game/meta/prompt/IPrompt";
 import type { Milestone } from "game/milestones/IMilestone";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import ActionPacket from "multiplayer/packets/shared/ActionPacket";
 import type { IRGB } from "utilities/Color";
 import type { Direction } from "utilities/math/Direction";
 import type { IVector3 } from "utilities/math/IVector";
-interface ActionEvents {
-    /**
-     * Called before an action is executed
-     * This is called before the action result is used
-     * @returns False to cancel the action
-     */
-    preExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any, any>, args: any[]): false | void;
-    /**
-     * Called after an action has been executed
-     * This is called after the action result is used
-     */
-    postExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any, any>, args: any[]): any;
-}
-export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R, CU extends IActionUsable, AV extends any[]> extends EventEmitter.Host<ActionEvents> implements IActionApi<E, CU>, IActionConfirmerApi<E, CU> {
+export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R, CU extends IActionUsable, AV extends any[]> extends EventEmitter.Host<ActionExecutorEvents> implements IActionApi<E, CU>, IActionConfirmerApi<E, CU> {
     /**
      * Gets an action by its description. If you're using the Action class for constructing the descriptions, just pass the action instance.
      *
      * Note: Prefer `IActionApi.get` if you're calling this from within another action.
      */
     static get<D extends AnyActionDescription>(action: D): D extends IActionDescription<infer A, infer E, infer R, infer CU, infer AV> ? ActionExecutor<A, E, R, CU, AV> : never;
-    static executeMultiplayer(packet: ActionPacket, executor?: Entity | undefined, nonMpActionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any, any, any[]>): any;
+    static executeMultiplayer(packet: ActionPacket, executor?: Entity<unknown, number, unknown, unknown> | undefined, nonMpActionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any, any, any[]>): any;
     get executor(): E;
     get actionStack(): ActionType[];
     get lastAction(): ActionType;
@@ -83,7 +70,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
      * When checking when the action is being execute
      * true if a creature is on a tile, false otherwise
      */
-    isCreatureBlocking(tile: ITile): boolean;
+    isCreatureBlocking(tile: Tile): boolean;
     /**
      * Check if an action can be used.
      * When used within an action, the result will automatically be processed.
@@ -122,6 +109,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
     setParticle(particle: IActionParticle): this;
     addItems(...addItems: Array<Item | undefined>): this;
+    canProtectedItemBeUsed(items: IProtectedItems): true | IActionNotUsable;
     getItems(): readonly Item[];
     removeItems(...items: Array<Item | undefined>): this;
     setItemsUsed(used?: boolean): this;
@@ -136,4 +124,3 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private isUsableWhen;
     private static validate;
 }
-export {};

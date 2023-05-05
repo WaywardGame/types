@@ -13,11 +13,11 @@ import type { DoodadType } from "game/doodad/IDoodad";
 import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export interface IToggleDoorCanUse extends IActionUsable {
     doodad: Doodad;
-    tile: ITile;
+    tile: Tile;
     changeType: DoodadType;
 }
-declare const _default: Action<[[ActionArgument.Doodad, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default, true | undefined, IToggleDoorCanUse, [(Doodad | undefined)?, (boolean | undefined)?]>;
+declare const _default: Action<[[ActionArgument.Doodad, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default<number>, true | undefined, IToggleDoorCanUse, [(Doodad | undefined)?, (boolean | undefined)?]>;
 export default _default;

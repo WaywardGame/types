@@ -17,21 +17,17 @@ export interface IWaywardCPP {
     DijkstraMap: IDijkstraMapConstructor;
     FieldOfView: any;
     FlowField: IFlowFieldConstructor;
-    Game: IWaywardCPPGame;
     KDTree: IKDTreeConstructor;
     Navigation: INavigationConstructor;
     WorldLayer: IWorldLayerConstructor;
 }
-export type IFlowFieldConstructor = new (x: number, y: number, size: number, z: number, moveType: number) => IWaywardCPPFlowField;
+export type IFlowFieldConstructor = new (x: number, y: number, mapSize: number, size: number, z: number, moveType: number) => IWaywardCPPFlowField;
 export type IByteGridConstructor = new (width: number, height: number) => IByteGrid;
 export type IBitGridConstructor = new (count: number) => IBitGrid;
-export type IDijkstraMapConstructor = new () => IDijkstraMap;
-export type IKDTreeConstructor = new () => IKDTree;
-export type INavigationConstructor = new (autoConnect: boolean) => INavigation;
-export type IWorldLayerConstructor = new (width: number, height: number, level: number) => IWorldLayerCPP;
-export interface IWaywardCPPGame {
-    setMapSize(size: number): void;
-}
+export type IDijkstraMapConstructor = new (mapSize: number) => IDijkstraMap;
+export type IKDTreeConstructor = new (mapSize: number) => IKDTree;
+export type INavigationConstructor = new (mapSize: number, autoConnect: boolean) => INavigation;
+export type IWorldLayerConstructor = new (islandX: number, islandY: number, width: number, height: number, level: number) => IWorldLayerCPP;
 export interface IWaywardCPPFlowField {
     delete(): void;
     reset(): void;

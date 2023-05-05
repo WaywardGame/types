@@ -15,13 +15,14 @@ import type Human from "game/entity/Human";
 import { AttackType } from "game/entity/IEntity";
 import { SkillType } from "game/entity/IHuman";
 import type { IItemDescription, IRanged } from "game/item/IItem";
+import { ItemType, ItemTypeGroup } from "game/item/IItem";
 import type Item from "game/item/Item";
-import type { ITile } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export interface IBaseCanUse extends IActionUsable {
     human: Human;
     attackType: AttackType;
     pvp: boolean;
-    facingTile: ITile;
+    facingTile: Tile;
     attackSkill: SkillType;
     weapon?: Item;
     weaponDescription?: IItemDescription;
@@ -37,11 +38,11 @@ export interface IAttackThrowItemCanUse extends IBaseCanUse {
 export interface IAttackRangedWeaponCanUse extends IBaseCanUse {
     attackType: AttackType.RangedWeapon;
     weapon: Item;
-    weaponDescription: IItemDescription;
     ranged: IRanged;
-    rangedRequiredWeapon?: Item;
-    ammoItem: Item;
+    rangedRequiredWeapon: Item | undefined;
+    ammoItem: Item | undefined;
+    ammunitionType: ItemType | ItemTypeGroup | undefined;
 }
 export type IAttackCanUse = IAttackCloseUpCanUse | IAttackThrowItemCanUse | IAttackRangedWeaponCanUse;
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined], [ActionArgument.ItemInventory, ActionArgument.Undefined]], Human, void, IAttackCanUse, [(Item | undefined)?, (AttackType | undefined)?, (Item | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined], [ActionArgument.ItemInventory, ActionArgument.Undefined]], Human<number>, void, IAttackCanUse, [(Item | undefined)?, (AttackType | undefined)?, (Item | undefined)?]>;
 export default _default;

@@ -8,36 +8,46 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import EntityManager from "game/entity/EntityManager";
+import EventEmitter from "event/EventEmitter";
+import type { IEntityManagerEvents } from "game/entity/EntityManager";
 import Player from "game/entity/player/Player";
+import type { Game } from "game/Game";
 import type { IPlayerOptions, IPlayOptions } from "game/IGame";
-import { CreationId } from "game/IGame";
-export interface IPlayerManagerEvents extends Events<EntityManager<Player>> {
+export interface IPlayerManagerEvents extends IEntityManagerEvents<Player> {
     /**
      * Called when a player is about to be removed
      * The player is going to be added into absentPlayers
      * @param player The player object
      */
-    preRemove?(player: Player): void;
+    preRemove(player: Player): void;
     /**
      * Called when a player joins the server
      * @param player The player object
      */
-    join?(player: Player): void;
+    join(player: Player): void;
     /**
      * Called when a player leaves the server
      * Note: This hook is not called for the player who left the server (player will never be localPlayer)
      * @param player The player object
      */
-    leave?(player: Player): void;
-}
-export default class PlayerManager extends EntityManager<Player> {
-    protected readonly creationId: CreationId;
-    event: IEventEmitter<this, IPlayerManagerEvents>;
-    constructor();
+    leave(player: Player): void;
     /**
-     * Get players in the game. Parameters include additional players that may not be relevant, such as ghosts, connecting players, absent players, the dedicated server fake player.
+     * Called when a player-like human (player / special npc) is spawned
+     */
+    addPlayingEntity(entity: Player): any;
+    /**
+     * Called when a player-like human (player / special npc) is removed
+     */
+    removePlayingEntity(entity: Player): any;
+}
+export default class PlayerManager extends EventEmitter.Host<IPlayerManagerEvents> {
+    private readonly game;
+    readonly players: Array<Player | undefined>;
+    readonly absentPlayers: Array<Player | undefined>;
+    constructor(game: Game);
+    reset(): void;
+    /**
+     * Get players. Parameters include additional players that may not be relevant, such as ghosts, connecting players, absent players, the dedicated server fake player.
      * @param includeGhosts True to include players that are ghosts
      * @param includeConnecting True to include players that are connecting
      * @param includeDedicatedServer True to include the dedicated server fake player
@@ -56,7 +66,7 @@ export default class PlayerManager extends EntityManager<Player> {
      * Support loading single player saves in dedicated servers
      * All while not losing data for any players - regardless of if the player was in the server or not at the time of the backup
      */
-    repair(options: Partial<IPlayOptions>): void;
+    repair(options: Partial<IPlayOptions>): Promise<void>;
     /**
      * Removes and deletes a player.
      * Use with caution!

@@ -8,34 +8,37 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { DoodadTag, DoorOrientation, IDoodadDescription, IDoodadOptions, IHasBuilder } from "game/doodad/IDoodad";
+import type { IEventEmitter } from "event/EventEmitter";
+import type { DisplayableDoodadType, DoodadTag, DoodadTypeExtra, DoorOrientation, IDoodadDescription, IDoodadOptions, IHasBuilder } from "game/doodad/IDoodad";
 import { DoodadType, DoodadTypeGroup, GrowingStage } from "game/doodad/IDoodad";
 import { ActionType } from "game/entity/action/IAction";
 import type Creature from "game/entity/creature/Creature";
+import Entity from "game/entity/Entity";
 import type Human from "game/entity/Human";
+import type { IEntityConstructorOptions, IEntityEvents } from "game/entity/IEntity";
+import { EntityType } from "game/entity/IEntity";
+import type { SkillType } from "game/entity/IHuman";
 import { EquipType } from "game/entity/IHuman";
 import type Player from "game/entity/player/Player";
-import { CreationId, TileUpdateType } from "game/IGame";
+import { TileUpdateType } from "game/IGame";
 import type { IObject } from "game/IObject";
 import { Quality } from "game/IObject";
-import type { IslandId, IWell } from "game/island/IIsland";
+import type { IWell } from "game/island/IIsland";
 import { LiquidType } from "game/island/IIsland";
-import type { IContainer, ILiquidGather } from "game/item/IItem";
+import type { DisplayableItemType, IContainer, ILiquidGather } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type { IHasMagic } from "game/magic/MagicalPropertyManager";
 import MagicalPropertyManager from "game/magic/MagicalPropertyManager";
-import type { IReferenceable } from "game/reference/IReferenceManager";
-import type { IHasInsulation, ITemperatureSource, TempType } from "game/temperature/ITemperature";
+import type { IHasInsulation, TempType } from "game/temperature/ITemperature";
 import { FireStage } from "game/tile/events/IFire";
-import type { ITile } from "game/tile/ITerrain";
-import type { ISerializedTranslation } from "language/ITranslation";
+import type Tile from "game/tile/Tile";
+import { Article } from "language/Translation";
 import type { IUnserializedCallback } from "save/serializer/ISerializer";
 import type { IRGB } from "utilities/Color";
 import type { Direction } from "utilities/math/Direction";
 import type { IVector3 } from "utilities/math/IVector";
-export interface IDoodadEvents {
+export interface IDoodadEvents extends IEntityEvents {
     /**
      * Called when an doodad is being updated
      * @param tile The tile the doodad is on
@@ -53,7 +56,7 @@ export interface IDoodadEvents {
      * Note: The fire stage of doodads is not saved, so when the doodad's fire stage is first checked on load, this event will be
      * emitted.
      */
-    fireUpdate(tile: ITile, stage: FireStage | undefined): any;
+    fireUpdate(tile: Tile, stage: FireStage | undefined): any;
     /**
      * Emitted when the doodad is created.
      */
@@ -69,52 +72,55 @@ export interface IDoodadEvents {
     durabilityChange(durability: number, oldDurability: number): any;
     durabilityMaxChange(durability: number, oldDurability: number): any;
 }
-export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements IReferenceable, IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, ITemperatureSource, IHasInsulation, IHasBuilder, IHasMagic {
+export default class Doodad extends Entity<IDoodadDescription, DoodadType, DoodadTag> implements IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, Partial<IContainer>, IHasInsulation, IHasBuilder, IHasMagic {
     static is(value: any): value is Doodad;
     get constructorFunction(): typeof Doodad;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     protected static registrarId: number;
-    readonly objectType = CreationId.Doodad;
-    containedItems: Item[];
-    decay?: number;
-    startingDecay?: number;
-    meltDecay?: number;
-    disassembly?: Item[];
-    gatherReady?: number;
-    stillContainer?: Item;
-    gfx?: number;
-    id: number;
-    referenceId?: number;
-    itemOrders?: number[];
+    get entityType(): EntityType.Doodad;
+    get tileUpdateType(): TileUpdateType;
+    readonly event: IEventEmitter<this, IDoodadEvents>;
     maxDur: number;
     minDur: number;
-    orientation?: DoorOrientation | Direction.Cardinal;
-    crafterIdentifier?: string;
-    builderIdentifier?: string;
-    quality?: Quality;
-    renamed?: string | ISerializedTranslation;
-    spread?: number;
-    type: DoodadType;
-    weight?: number;
-    readonly x: number;
-    readonly y: number;
-    readonly z: number;
-    step: number | undefined;
-    hitchedCreature?: number;
-    tradedFrom?: string[];
-    aberrant?: boolean;
-    private _tags?;
-    magic: MagicalPropertyManager;
     private fireStage?;
-    get tags(): Set<DoodadTag>;
-    islandId: IslandId;
-    private _description;
-    private _tile;
-    private _tileId;
+    aberrant?: boolean;
+    bonusAttack?: number;
+    builderIdentifier?: string;
+    containedItems?: Item[];
+    crafterIdentifier?: string;
+    decay?: number;
+    disassembly?: Item[];
+    gatherReady?: number;
+    growth?: GrowingStage;
+    hitchedCreature?: number;
+    itemOrders?: number[];
+    magic?: MagicalPropertyManager;
+    meltDecay?: number;
+    orientation?: DoorOrientation | Direction.Cardinal;
+    quality?: Quality;
+    spread?: number;
+    startingDecay?: number;
+    step?: number;
+    stillContainer?: Item;
+    tradedFrom?: string[];
+    weight?: number;
+    private _tileId?;
+    /**
+     * Separate property just for wells because isInGroup is still expensive for processWell()
+     */
+    private _isWell?;
     private readonly _doodadGroupCache;
-    constructor(type?: DoodadType, islandId?: `${number},${number}`, x?: number, y?: number, z?: number, options?: IDoodadOptions);
-    get island(): import("../island/Island").default;
+    constructor(entityOptions?: IEntityConstructorOptions<DoodadType>, options?: IDoodadOptions);
+    get asCorpse(): undefined;
+    get asCreature(): undefined;
+    get asDoodad(): Doodad | undefined;
+    get asHuman(): undefined;
+    get asLocalPlayer(): undefined;
+    get asNPC(): undefined;
+    get asPlayer(): undefined;
+    get asTileEvent(): undefined;
+    get asItem(): undefined;
     toString(): string;
     getRegistrarId(): number;
     /**
@@ -126,18 +132,17 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * - `doodad.getName(false)` // "stone furnace"
      * - `doodad.getName(undefined, 3)` // "stone furnaces"
      */
-    getName(article?: false | "definite" | "indefinite", count?: number): import("../../language/impl/TranslationImpl").default;
-    description(): IDoodadDescription | undefined;
+    getName(article?: Article, count?: number): import("../../language/impl/TranslationImpl").default;
+    protected getDescription(): IDoodadDescription | undefined;
     updateTile(tileUpdateType: TileUpdateType): void;
     changeType(doodadType: DoodadType): void;
     isValid(): boolean;
     isInGroup(doodadTypeGroup: DoodadTypeGroup): boolean;
     updateGroupCache(doodadTypeGroup: DoodadTypeGroup): boolean;
-    getTile(ignoreCache?: boolean): ITile;
+    get point(): IVector3;
+    get tile(): Tile;
     getTileId(): number;
-    getPoint(): IVector3;
     canGrow(): boolean;
-    getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage): void;
     /**
      * Checks if the doodad will be rendered as tall (2 tiles)
@@ -146,7 +151,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     isTall(): boolean;
     canPickUp(human: Human): boolean;
     getPickUpTypes(): ItemType[] | undefined;
-    getAssociatedItem(): ItemType;
+    getAssociatedItem(): ItemType | import("game/item/IItem").ItemTypeExtra;
     getActions(): ActionType[] | undefined;
     /**
      * Can the doodad be gathered from in its current form?
@@ -184,12 +189,16 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     getBuilder(): Player | undefined;
     unhitch(): void;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
-    getDefaultDurability(random?: import("../../utilities/random/Random").Random<import("../../utilities/random/Random").SeededGenerator>): number;
+    getDefaultDurability(random?: import("../../utilities/random/Random").Random<import("../../utilities/random/generators/LegacySeededGenerator").LegacySeededGenerator | import("../../utilities/random/generators/PCGSeededGenerator").PCGSeededGenerator>): number;
+    /**
+     * Gets the container to use for doodad executed actions
+     */
+    getTargetContainer(): IContainer | undefined;
     addTreasureChestLoot(): void;
     attachStillContainer(item: Item): void;
     detachStillContainer(human: Human): Item | undefined;
     blocksMove(): boolean;
-    update(ticks: number, playingHumans: Human[], updatesPerTick?: number): void;
+    update(ticks: number, playingHumans: Human[], playerHumanTiles: Set<Tile>, updatesPerTick?: number): void;
     canCauseStatus(): boolean;
     /**
      * Potentially animates a skeleton (if it can spawn) and returns a message to all those who can see it.
@@ -221,6 +230,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     getLiquidGatherType(): keyof ILiquidGather | undefined;
     getProducedTemperature(): number | undefined;
     getInsulation(type: TempType): number | undefined;
+    isIslandPort(): boolean;
     /**
      * Refills solar stills when they are on shallow water automatically.
      */
@@ -247,6 +257,7 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     set durability(value: number);
     get durabilityMax(): number;
     set durabilityMax(value: number);
+    canInspect(human: Human): boolean;
     private processSpecials;
     /**
      * Check for items on top of lit/fire doodads, set them on fire
@@ -273,10 +284,9 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
     /**
      * Gets the decay rate of a doodad based on the temperature (returns as a default of 0).
      * @param terrainType The doodad description to check.
-     * @param point The point of the tile the doodad is on.
      * @returns The number of melt reduction of the doodad given the temperature of the point.
      */
-    getMeltRate(description: IDoodadDescription, point: IVector3): number;
+    getMeltRate(description: IDoodadDescription): number;
     /**
      * Initialized the doodad's melting decay number
      */
@@ -285,6 +295,42 @@ export default class Doodad extends EventEmitter.Host<IDoodadEvents> implements 
      * Gives civilization score based on how much is defined for this doodad.
      */
     changeCivilizationScore(add: boolean): void;
+    /**
+     * Updates a bookcase's graphics and civilization score (based on if books are added).
+     * @param item The item that is being added to the bookcase.
+     * @param add True if adding score, false if you are substracting.
+     */
+    updateBookcase(items: Item[], add: boolean): void;
+    /**
+     * Determines which graphic to show based on how full the bookcase is with books/text.
+     * @param item set to true if DisplayableItemType is to be returned.
+     * @returns DoodadTypeExtra or DisplayableItemType equal to which graphic it should show.
+     */
+    getBookcaseFullness(item?: boolean): DoodadTypeExtra | DisplayableItemType | undefined;
+    /**
+     * Gets if the doodad is set to display any extra graphics/assets.
+     * @returns DisplayableDoodadType or DoodadType (if no extra is set)
+     */
+    getDisplayDoodad(): DisplayableDoodadType;
+    /**
+     * Gets civilization score based on doodad's quality and type, but without the magical property values.
+     * @returns number of score (or 0 if no civilization score is set).
+     */
+    getCivilizationScore(excludeMagic?: boolean): number;
+    /**
+     * Gets a set of skill types and values from doodads that have "containedItemGroupProvidesSkill" set for items that provide adjacent skill bonuses.
+     * @returns Map of skill type and number (skill value).
+     */
+    getcontainedItemSkillBonuses(): Map<SkillType, number>;
+    /**
+     * Gets a set of skill types and values for magical adjacent skill bonuses from doodads.
+     * @returns Map of skill type and number (skill value).
+     */
+    getMagicalDoodadSkills(): Map<SkillType, number>;
+    /**
+     * Forces a boat to be drydocked (revert from doodad to an item if water was taken away for some reason).
+     */
+    dryDockBoat(human: Human): void;
     /**
      * Decay over time
      */

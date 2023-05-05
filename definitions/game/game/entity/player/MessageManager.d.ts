@@ -14,7 +14,9 @@ import type { IMessage, IMessageHistoryItem, IMessageManager, IPackedMessage } f
 import { MessageType, Source } from "game/entity/player/IMessageManager";
 import type Player from "game/entity/player/Player";
 import type Island from "game/island/Island";
+import type Dictionary from "language/Dictionary";
 import Message from "language/dictionary/Message";
+import type { TranslationArg } from "language/ITranslation";
 import Translation from "language/Translation";
 import type { IVector4 } from "utilities/math/Vector4";
 export declare class MessageManagerNoOp implements IMessageManager {
@@ -30,13 +32,14 @@ export declare class MessageManagerNoOp implements IMessageManager {
     send(): boolean;
     sendPacked(): boolean;
     sentToAll(sentToAll?: boolean): this;
-    pruneMessageHistory(): boolean;
+    pruneMessageHistory(isLocalPlayer: boolean): boolean;
     addToHistory(messageHistoryItem: IMessageHistoryItem): void;
+    upgrade(): this;
 }
 export interface IMessageManagerOptions {
     shouldDisplayMessage(message: IMessage, id: number): boolean | undefined;
     onDisplayMessage(message: IMessage): void;
-    getMessageStorageMax(): number;
+    getMessageStorageMax(isLocalPlayer: boolean): number;
 }
 export default class MessageManager implements IMessageManager {
     private readonly options;
@@ -70,7 +73,7 @@ export default class MessageManager implements IMessageManager {
     /**
      * Cuts the message history down to the correct bounds (preferring the more recent messages)
      */
-    pruneMessageHistory(): boolean;
+    pruneMessageHistory(isLocalPlayer: boolean): boolean;
     /**
      * Clears the entire message history.
      */
@@ -114,7 +117,7 @@ export default class MessageManager implements IMessageManager {
      *
      * Note: After sending a message, the message source, type, and human (if any) are reset.
      */
-    send(message: Message | Translation, ...args: any[]): boolean;
+    send(message: Message | Translation, ...args: TranslationArg[]): boolean;
     sendPacked(pack: Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
     addToHistory(messageHistoryItem: IMessageHistoryItem): void;
     /**
@@ -122,4 +125,5 @@ export default class MessageManager implements IMessageManager {
      */
     sentToAll(sentToAll?: boolean): this;
     private reset;
+    upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
 }

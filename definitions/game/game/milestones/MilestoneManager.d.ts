@@ -9,8 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import type { CreatureType } from "game/entity/creature/ICreature";
+import type { DamageType } from "game/entity/IEntity";
+import type { Game } from "game/Game";
 import { Milestone, MilestoneVisibility } from "game/milestones/IMilestone";
-type IMilestoneUpdate = [Milestone, (number | string)?];
+type MilestoneUpdate = [Milestone, (number | string)?];
 export interface IMilestoneEvents {
     /**
      * @param milestone The milestone that is being updated
@@ -19,7 +22,9 @@ export interface IMilestoneEvents {
      */
     update(milestone: Milestone, value: number, max: number): void;
 }
-declare class MilestonesManager extends EventEmitter.Host<IMilestoneEvents> {
+export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents> {
+    private readonly game;
+    constructor(game: Game);
     readonly descriptions: Descriptions<Milestone, import("./MilestoneDefinition").default>;
     private readonly milestoneUpdates;
     /**
@@ -35,19 +40,20 @@ declare class MilestonesManager extends EventEmitter.Host<IMilestoneEvents> {
      */
     getDesiredAmount(milestone: Milestone): number;
     /**
-     * Get a `Stream` of all completed milestones
+     * Get an array of all completed milestones
      */
     getCompleted(): Milestone[];
-    add(...updates: IMilestoneUpdate[]): void;
+    add(update: MilestoneUpdate): void;
     update(): void;
     areUnlockable(mode?: import("../options/IGameOptions").GameMode): boolean;
     areUnlockableInMode(mode?: import("../options/IGameOptions").GameMode): boolean;
     isUnlockableInMode(milestone: Milestone, mode?: import("../options/IGameOptions").GameMode): boolean;
     reset(): void;
     getDiscovered(milestone: Milestone): (string | number)[] | undefined;
+    getDiscoveredResistsAndVulns(): Map<CreatureType, Set<DamageType>>;
+    getDiscoveredResistsAndVulns(creatureType: CreatureType): Set<DamageType>;
     getVisibility(milestone: Milestone): MilestoneVisibility;
     isDiscovered(milestone: Milestone, data: number | string): boolean;
     private updateMilestone;
 }
-declare const _default: MilestonesManager;
-export default _default;
+export {};

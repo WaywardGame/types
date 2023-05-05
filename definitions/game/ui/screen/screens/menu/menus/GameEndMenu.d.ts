@@ -10,6 +10,7 @@
  */
 import { PlayerState } from "game/entity/player/IPlayer";
 import type { IHighscore } from "save/data/ISaveDataGlobal";
+import Button from "ui/component/Button";
 import Menu from "ui/screen/screens/menu/component/Menu";
 export interface IGameEndData {
     state: PlayerState.Won | PlayerState.Dead;
@@ -17,8 +18,9 @@ export interface IGameEndData {
 }
 export default class GameEndMenu extends Menu {
     private readonly highscore;
-    private readonly respawnButton;
-    private gameEndData;
+    readonly respawnButton: Button;
+    readonly continueAsGhostButton: Button;
+    gameEndData: IGameEndData;
     constructor();
     setGameEndData(gameEndData: IGameEndData): this;
     protected onShow(): void;

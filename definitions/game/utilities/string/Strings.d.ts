@@ -39,6 +39,10 @@ declare class Strings {
     formatKeyCase<R = any>(obj: any, caseStyle: CaseStyle): R;
     hashCode(str: string): number;
     protected onAcquire(d: any, req: IRequireFunction): Promise<void>;
+    /**
+     * Processes chat messaage string (enforces max length / trimming)
+     */
+    processChatMessage(message: string): string;
 }
 declare const _default: Strings;
 export default _default;

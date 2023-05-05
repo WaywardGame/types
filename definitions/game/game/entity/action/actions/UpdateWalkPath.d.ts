@@ -10,5 +10,5 @@
  */
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[[ActionArgument.Vector2Array, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default, void, import("game/entity/action/IAction").IActionUsable, [(import("../../../../utilities/math/IVector").IVector2[] | undefined)?, (boolean | undefined)?]>;
+declare const _default: Action<[[ActionArgument.Vector2Array, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [(import("../../../../utilities/math/IVector").IVector2[] | undefined)?, (boolean | undefined)?]>;
 export default _default;

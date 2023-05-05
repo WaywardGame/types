@@ -15,5 +15,5 @@ import type Item from "game/item/Item";
 export interface IEnchantCanUse extends IActionUsable {
     enchantTarget: Item;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default, void, IEnchantCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default<number>, void, IEnchantCanUse, [Item, (Item | undefined)?]>;
 export default _default;

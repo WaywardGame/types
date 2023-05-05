@@ -17,7 +17,7 @@ export interface ISegmentApi extends Readonly<IInterpolationOptions> {
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;
     with(options: IInterpolationOptions): ISegmentApi;
-    formatValue(value: unknown): string | Iterable<IStringSection>;
+    formatValue(value: unknown): string | IStringSection[];
 }
 export interface IInterpolationOptions {
     formatNumbers?: boolean;
@@ -38,6 +38,7 @@ export interface IStringSection {
     stringOnly?: true;
 }
 export declare namespace IStringSection {
+    function is(value: unknown): value is IStringSection;
     function get(content?: string | IStringSection | Iterable<IStringSection>): Iterable<IStringSection>;
 }
 export interface IReferenceSection extends IStringSection {
@@ -50,9 +51,7 @@ declare class Interpolator {
     get formatDates(): boolean | undefined;
     private readonly _segments;
     get segments(): ISegment[];
-    random: Random<{
-        get: () => number;
-    }>;
+    random: Random;
     matchedEnds?: Ends;
     constructor(...segments: ISegment[]);
     setRandom(random: Random): this;

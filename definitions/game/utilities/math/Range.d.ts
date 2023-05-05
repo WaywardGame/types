@@ -30,4 +30,7 @@ export declare module IRange {
     function add(...rangesOrNumbers: Array<IRange | number>): IRange;
     function flatten(rangeOrNumber: IRange | number): IRange | number;
     function flatten(rangeOrNumber: IRange | number | undefined): IRange | number | undefined;
+    function multiply(range: IRange, by: number, into?: IRange): IRange;
+    function ceil(range: IRange, into?: IRange): IRange;
+    function average(range: IRange): number;
 }

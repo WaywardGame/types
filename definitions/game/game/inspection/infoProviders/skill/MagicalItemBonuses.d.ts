@@ -14,8 +14,9 @@ import { InfoProvider } from "game/inspection/InfoProvider";
 export default class SkillBonusMagicalItemsInfoProvider extends InfoProvider {
     private readonly skill;
     private readonly human?;
-    constructor(skill: SkillType, human?: Human | undefined);
+    constructor(skill: SkillType, human?: Human<number> | undefined);
     getClass(): string[];
+    protected onInitContent(): void;
     hasContent(): boolean;
     get(): (0 | import("../../../../language/impl/TranslationImpl").default | import("game/inspection/InfoProvider").SimpleInfoProvider)[];
     private getMagicalItems;

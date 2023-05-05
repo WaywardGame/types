@@ -12,8 +12,9 @@ import { LobbyType } from "@hosts/shared/interfaces";
 import type { ICharacter } from "game/entity/IHuman";
 import type { PlayerState } from "game/entity/player/IPlayer";
 import type Player from "game/entity/player/Player";
-import type { ISynchronizeState } from "game/IGame";
+import type { ISynchronizeState, PauseSource } from "game/IGame";
 import { TurnMode } from "game/IGame";
+import type { Load } from "game/meta/Loading";
 import type { Milestone } from "game/milestones/IMilestone";
 import type { GameMode, IGameOptions } from "game/options/IGameOptions";
 import type { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
@@ -212,4 +213,16 @@ export interface IJoinServerOptions {
     retryMatchmakingInfo: IMatchmakingInfo;
     automaticallyRetry: boolean;
     enableSteamNetworkConnections: boolean;
+}
+export interface IMultiplayerRunSafelyOptions {
+    isSynced: boolean;
+    pauseGame?: PauseSource;
+    pauseIncomingPacketProcessing?: boolean;
+    showLoadingScreen?: {
+        load: Load;
+        args?: any[];
+        excludeTargets?: PacketTarget;
+        disableDelayAfter?: boolean;
+        hostInitiatesHide?: boolean;
+    };
 }

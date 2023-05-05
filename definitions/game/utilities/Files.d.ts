@@ -10,7 +10,6 @@
  */
 declare module Files {
     function getXML(path: string, signal?: AbortSignal): Promise<Document>;
-    function get(path: string, signal?: AbortSignal): Promise<Response>;
     function getText(path: string, signal?: AbortSignal): Promise<string>;
     function getJson<T>(path: string, signal?: AbortSignal): Promise<T>;
     function getArrayBuffer(path: string, signal?: AbortSignal): Promise<ArrayBuffer>;

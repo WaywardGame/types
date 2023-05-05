@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IUsableActionPossibleUsing } from "game/entity/action/usable/IUsableAction";
+import type Item from "game/item/Item";
 import type { Reference, ReferenceType } from "game/reference/IReferenceManager";
 import type { Modifier } from "ui/input/IInput";
 export interface IActionBarSlotData {
@@ -23,7 +24,8 @@ export interface IActionBarSlotData {
 }
 export declare module IActionBarSlotData {
     function using(slotData?: IActionBarSlotData): IUsableActionPossibleUsing;
-    function item(slotData?: IActionBarSlotData | IActionBarSlotData["using"]): import("../../../../../../game/item/Item").default | undefined;
+    function item(slotData?: IActionBarSlotData | IActionBarSlotData["using"]): Item | undefined;
+    function itemIs(slotData: IActionBarSlotData | IActionBarSlotData["using"] | undefined, item: Item): boolean;
     function copy(slotData?: IActionBarSlotData): IActionBarSlotData;
     function equals(a?: IActionBarSlotData, b?: IActionBarSlotData): boolean;
 }

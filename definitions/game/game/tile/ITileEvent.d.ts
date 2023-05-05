@@ -15,7 +15,8 @@ import type { IObjectDescription } from "game/IObject";
 import type Island from "game/island/Island";
 import type { ItemType } from "game/item/IItem";
 import type { ITemperatureSource } from "game/temperature/ITemperature";
-import type { ITile, TerrainType } from "game/tile/ITerrain";
+import type { TerrainType } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import type TileEvent from "game/tile/TileEvent";
 import type { IModdable } from "mod/ModRegistry";
 import type { IRGB } from "utilities/Color";
@@ -74,7 +75,7 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
      */
     canBurn?: boolean;
     decayTemperatureRange?: IDecayTemperatureRange;
-    canCreate?(island: Island, type: TileEventType, tile: ITile, tileType: TerrainType, x: number, y: number, z: number): boolean;
+    canCreate?(island: Island, type: TileEventType, tile: Tile, tileType: TerrainType): boolean;
     create?(tileEvent: TileEvent): void;
     remove?(tileEvent: TileEvent): void;
     update?(tileEvent: TileEvent): void;

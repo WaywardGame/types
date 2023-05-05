@@ -10,9 +10,15 @@
  */
 import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 import type WebGlContext from "renderer/WebGlContext";
+import type { IVector2 } from "utilities/math/IVector";
 export default class BaseRendererContext {
     readonly webGlContext: WebGlContext;
-    origin: IRendererOrigin;
     readonly gl: WebGL2RenderingContext;
-    constructor(webGlContext: WebGlContext, origin: IRendererOrigin);
+    readonly viewport: IVector2;
+    private _origin;
+    constructor(webGlContext: WebGlContext);
+    get maybeOrigin(): IRendererOrigin | undefined;
+    get origin(): IRendererOrigin;
+    set origin(origin: IRendererOrigin);
+    setWebGlContext(webGlContext: WebGlContext): void;
 }

@@ -10,17 +10,13 @@
  */
 import type { SfxType } from "audio/IAudio";
 import type { BiomeType } from "game/biome/IBiome";
-import type Doodad from "game/doodad/Doodad";
 import type { GrowingStage } from "game/doodad/IDoodad";
 import { DoodadType } from "game/doodad/IDoodad";
-import type Corpse from "game/entity/creature/corpse/Corpse";
-import type Creature from "game/entity/creature/Creature";
 import type { SkillType } from "game/entity/IHuman";
-import type NPC from "game/entity/npc/NPC";
 import type { IDecayTemperatureRange } from "game/IGame";
 import type { Quality } from "game/IObject";
 import type { WaterType } from "game/island/IIsland";
-import type { IContainer, ItemType } from "game/item/IItem";
+import type { IContainer, IMaybeContainer, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
 import type { MapTile } from "game/mapping/IMapTile";
@@ -43,7 +39,6 @@ export interface ITerrainDescription extends IModdable {
     freshWater?: boolean;
     swampWater?: boolean;
     gather?: boolean;
-    noGfxSwitch?: boolean;
     noLos?: boolean;
     flammable?: boolean;
     gatherSkillUse?: SkillType;
@@ -78,7 +73,7 @@ export interface ITerrainDescription extends IModdable {
     /**
      * Update neighbors when the tile type is involved
      */
-    updateNeighbors?: boolean;
+    updateNeighbors?: true;
     /**
      * Terrain that water tile becomes when dug up using the dig action.
      */
@@ -147,32 +142,16 @@ export interface ITerrainDescription extends IModdable {
      */
     useDoodadLikeAdaptor?: boolean;
 }
-export interface ITile extends Partial<ITileContainer> {
-    /**
-     * Note: corpses must be ordered by id asc
-     */
-    corpses?: Corpse[];
-    creature?: Creature;
-    data: number;
-    doodad?: Doodad;
-    /**
-     * Note: tile events must be ordered by id asc
-     */
-    events?: TileEvent[];
-    npc?: NPC;
-    overlays?: IOverlayInfo[];
-    quality?: Quality;
-}
 export interface ITileOld {
     event?: TileEvent[];
 }
 export type ITileContainer = IContainer & IVector3;
+export type IMaybeTileContainer = IMaybeContainer & IVector3;
 export interface ITileData {
     type: TerrainType;
     minDur?: number;
     maxDur?: number;
     quality?: Quality;
-    gfx?: number;
     tilled?: boolean;
     step?: number;
     fishAvailable?: number;
@@ -186,6 +165,7 @@ export interface ITileData {
 }
 export type ITileDataOld = Partial<ITileData> & {
     strength?: number;
+    gfx?: number;
 };
 export declare enum TileTemplateType {
     WoodenHouses = 0,
@@ -201,7 +181,9 @@ export declare enum TileTemplateType {
     SnowHouses = 10,
     AshCementHouses = 11,
     StoneHouses = 12,
-    Railways = 13
+    Railways = 13,
+    GraniteLighthouse = 14,
+    BasaltLighthouse = 15
 }
 export interface ITemplate {
     mapTile?: MapTile;
@@ -253,7 +235,9 @@ export declare enum OverlayType {
     Arrows = 1,
     FootPrints = 2,
     Target = 3,
-    FacingTile = 4
+    FacingTile = 4,
+    Full = 5,
+    QuestionMark = 6
 }
 export declare enum TerrainType {
     DeepSeawater = 0,
@@ -329,7 +313,10 @@ export declare enum TerrainType {
     BasaltGround = 70,
     CobblestoneFlooring = 71,
     Mud = 72,
-    Spikerush = 73
+    Spikerush = 73,
+    SandstoneWithOpal = 74,
+    GraniteWithTopaz = 75,
+    BasaltWithSapphire = 76
 }
 export declare enum TerrainTypeGroup {
     Flooring = 0,
@@ -338,3 +325,4 @@ export declare enum TerrainTypeGroup {
 }
 export declare const trackTerrainTypes: Set<TerrainType>;
 export declare const trackGateDoodadTypes: Set<DoodadType>;
+export declare const DEFAULT_FISH_AVAILABLE = 6;

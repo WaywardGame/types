@@ -21,10 +21,28 @@ import { EquipSlotTranslation, MiscTranslation } from "language/dictionary/Misc"
 import type UiTranslation from "language/dictionary/UiTranslation";
 import type { DictionaryEntryEnums } from "language/DictionaryMap";
 import TranslationImpl from "language/impl/TranslationImpl";
-import type { ISerializedTranslation } from "language/ITranslation";
-import { formatList as formatListTranslation } from "language/segment/FormatListSegment";
+import type { ISerializedTranslation, TranslationArg } from "language/ITranslation";
+import { formatListTranslation } from "language/segment/FormatListSegment";
 import ITranslationSorter from "language/utility/TranslationSorter";
-import type { IStringSection } from "utilities/string/Interpolator";
+import { IStringSection } from "utilities/string/Interpolator";
+export declare enum Article {
+    /**
+     * Use no article.
+     */
+    None = "",
+    /**
+     * In English, this is "a" or "an" in front of the text, assuming the "count" is one.
+     */
+    Indefinite = "indefinite",
+    /**
+     * In English, this is "the" in front of the text.
+     */
+    Definite = "definite",
+    /**
+     * Uses "indefinite" if the user hasn't opted out of articles in titles.
+     */
+    Title = "title"
+}
 type Translation = TranslationImpl;
 declare module Translation {
     function equals(a: Translation, b: Translation): boolean;
@@ -99,6 +117,8 @@ declare module Translation {
     const damage: (damageTypes: ArrayOr<DamageType>, colorize?: boolean, reformatter?: TranslationImpl | ((type: DamageType) => Translation) | undefined) => TranslationImpl;
     function growthStage(stage: GrowingStage, spores?: boolean): TranslationImpl;
     function growthStage(stage?: GrowingStage, spores?: boolean): TranslationImpl | undefined;
+    function merge(...content: TranslationArg[]): TranslationImpl;
+    function mergeSpaced(...content: TranslationArg[]): TranslationImpl;
     const getString: typeof TranslationImpl.getString;
     const resolve: typeof TranslationImpl.resolve;
     function colorizeQuality(quality: Quality | string | undefined): Translation;
@@ -113,20 +133,27 @@ declare module Translation {
     function colorizeImportance(importance: "primary" | "secondary"): Translation;
     function colorizeImportance(importance: "primary" | "secondary", text: string | IStringSection): IStringSection;
     function colorizeImportance(importance: "primary" | "secondary", text: IStringSection[]): IStringSection[];
+    function classes(...classes: string[]): TranslationImpl;
     const formatList: typeof formatListTranslation;
     const sorter: typeof ITranslationSorter.create;
     function nameOf(type: Dictionary, thing: number | {
         type: number;
         renamed?: string | ISerializedTranslation;
-    }, article?: false | "definite" | "indefinite"): Translation;
+    }, article?: Article): Translation;
     function nameOf(type: Dictionary, thing: number | {
         type: number;
         renamed?: string | ISerializedTranslation;
-    }, count?: number, article?: false | "definite" | "indefinite", showRenamedQuotes?: boolean): Translation;
+    }, count?: number, article?: Article, showRenamedQuotes?: boolean): Translation;
     function reformatSingularNoun(): Translation;
     function reformatSingularNoun(count: number): Translation;
-    function reformatSingularNoun(article: false | "definite" | "indefinite"): Translation;
-    function reformatSingularNoun(count: number, article: false | "definite" | "indefinite"): Translation;
-    function reformatSingularNoun(count?: number | false | "definite" | "indefinite", article?: false | "definite" | "indefinite"): Translation;
+    function reformatSingularNoun(article: Article): Translation;
+    function reformatSingularNoun(count: number, article: Article): Translation;
+    function reformatSingularNoun(count?: number | Article, article?: Article): Translation;
+    interface ITranslationUpgrader {
+        translation?(translation: TranslationImpl | ISerializedTranslation): any;
+        argument?(argument: TranslationArg): TranslationArg;
+    }
+    function upgrade(translation: ISerializedTranslation, id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: ITranslationUpgrader): TranslationImpl | ISerializedTranslation;
+    function upgradeTranslationArgument(argument: TranslationArg, id: string, dictionary: Dictionary, entry: number, upgrader?: ITranslationUpgrader): TranslationArg;
 }
 export default Translation;

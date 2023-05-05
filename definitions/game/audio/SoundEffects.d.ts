@@ -10,4 +10,4 @@
  */
 import { SfxType } from "audio/IAudio";
 import type { ISoundEffectDescription } from "audio/IMusic";
-export declare const soundEffectDescriptions: OptionalDescriptions<SfxType, ISoundEffectDescription>;
+export declare const soundEffectDescriptions: Map<SfxType, ISoundEffectDescription>;

@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import MilestoneModifier, { MilestoneModifierGroup } from "game/options/modifiers/milestone/MilestoneModifier";
-import RandomItem from "utilities/random/generators/RandomItem";
+import RandomItem from "utilities/random/generators/specific/RandomItem";
 export default class Challenger extends MilestoneModifier {
     getOptions(): {
         player: {

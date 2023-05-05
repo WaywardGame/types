@@ -11,5 +11,6 @@
 export declare enum NPCType {
     Merchant = 0,
     DeathKnight = 1,
-    Controllable = 2
+    Controllable = 2,
+    Shipper = 3
 }

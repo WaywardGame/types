@@ -41,12 +41,8 @@ export declare enum InjectionPosition {
      */
     Post = "post"
 }
-export declare function InjectObject<T extends {
-    [key in K]: AnyFunction;
-}, K extends keyof T>(injectInto: T, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any;
-export declare function Inject<T extends {
-    [key in K]: AnyFunction;
-}, K extends keyof T>(injectInto: AnyClass<T>, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any;
+export declare function InjectObject<T extends Record<K, AnyFunction>, K extends keyof T>(injectInto: T, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any;
+export declare function Inject<T extends Record<K, AnyFunction>, K extends keyof T>(injectInto: AnyClass<T>, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any;
 /**
  * Classes decorated with `Injector` will have their methods automatically injected using `inject`.
  *

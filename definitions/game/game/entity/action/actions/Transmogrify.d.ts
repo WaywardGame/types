@@ -15,5 +15,5 @@ import type Item from "game/item/Item";
 export interface ITransmogrifyCanUse extends IActionUsable {
     transmogrifyTarget: Item;
 }
-declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, ITransmogrifyCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number>, void, ITransmogrifyCanUse, [Item, (Item | undefined)?]>;
 export default _default;

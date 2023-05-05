@@ -15,5 +15,5 @@ export interface ITameCanUse extends IActionUsable {
     creature: Creature;
     tamingDifficulty: number;
 }
-declare const _default: Action<[], import("../../Human").default, void, ITameCanUse, []>;
+declare const _default: Action<[], import("../../Human").default<number>, void, ITameCanUse, []>;
 export default _default;

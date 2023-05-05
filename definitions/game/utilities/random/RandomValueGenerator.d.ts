@@ -9,14 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Objects from "utilities/object/Objects";
-import type { RandomInstance } from "utilities/random/Random";
-import { RandomReference } from "utilities/random/Random";
+import type { RandomInstance } from "utilities/random/IRandom";
+import { RandomReference } from "utilities/random/RandomReference";
 export default abstract class RandomValueGenerator<T> implements Objects.ICloneable {
     random?: RandomInstance | RandomReference;
     value?: T;
     constructor(random?: RandomInstance | RandomReference, value?: T);
     getRandomInstance(): RandomInstance | undefined;
-    getRandom(): import("utilities/random/Random").Random<import("utilities/random/Random").SeededGenerator>;
+    getRandom(): import("./Random").Random<import("./generators/LegacySeededGenerator").LegacySeededGenerator | import("./generators/PCGSeededGenerator").PCGSeededGenerator>;
     abstract [Objects.SYMBOL_CLONE](clone: typeof Objects.deepClone): this;
     protected clone(clone: typeof Objects.deepClone): readonly [RandomInstance | RandomReference | undefined, T | undefined];
 }

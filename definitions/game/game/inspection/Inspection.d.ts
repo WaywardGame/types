@@ -15,15 +15,14 @@ import type { InspectionClass } from "game/inspection/InspectionTypeMap";
 import type { EnumReferenceResolved, EnumReferenceTypes, ReferenceType } from "game/reference/IReferenceManager";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type Text from "ui/component/Text";
+import type { InspectionTooltipHints } from "ui/screen/screens/game/InspectionsTooltipHandler";
 import type { IVector3 } from "utilities/math/IVector";
 export default abstract class Inspection<O> extends InfoProvider {
     readonly type: InspectType;
     readonly value: O;
-    static createEnumReferenceHandler<R extends ReferenceType, E, K extends string>(referenceType: R, enumObject: {
-        [key in K]: E;
-    }, predicate?: (reference: [R, E], context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext) => any;
+    static createEnumReferenceHandler<R extends ReferenceType, E, K extends string>(referenceType: R, enumObject: Record<K, E>, predicate?: (reference: [R, E], context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     static createAnyHandler(...handlers: Array<Exclude<InspectionClass["handles"], undefined>>): (type: InspectType, ...args: any[]) => boolean;
-    static createReferenceHandler<REFTYPE extends EnumReferenceTypes>(referenceType: REFTYPE, handler?: (resolvedReference: EnumReferenceResolved<REFTYPE>, context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext) => any;
+    static createReferenceHandler<REFTYPE extends EnumReferenceTypes>(referenceType: REFTYPE, handler?: (resolvedReference: EnumReferenceResolved<REFTYPE>, context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     static verifyHumanity(_: any, context?: InfoProviderContext): boolean;
     static getDefaultPriority(inspectType: InspectType): number;
     constructor(type: InspectType, value: O);
@@ -34,6 +33,7 @@ export default abstract class Inspection<O> extends InfoProvider {
      * Returns a string that should differentiate this inspection from other inspections of the same type.
      */
     abstract getId(): string;
+    renderHints(hints: InspectionTooltipHints): void;
     protected createIdFromVector3(vec3: IVector3): string;
     protected initChildTextComponent(text: TranslationGenerator): Text;
 }

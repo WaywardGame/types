@@ -20,9 +20,9 @@ export default abstract class Uses<T extends IDescribed> extends InfoProvider {
     private label?;
     private readonly value?;
     private readonly type;
-    private readonly objectType;
+    private readonly entityType;
     private readonly description?;
-    protected abstract getObjectType(): T["objectType"];
+    protected abstract getEntityType(): T["entityType"];
     protected abstract getDescription(type: T["type"]): DescribedDescription<T> | undefined;
     constructor(value: T["type"]);
     constructor(value: T);

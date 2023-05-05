@@ -16,4 +16,5 @@ export interface IElectronContainer {
     consoleMode?: boolean;
     forceWindowedMode?: boolean;
     reloading?: boolean;
+    launcher?: boolean;
 }

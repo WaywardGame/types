@@ -44,11 +44,11 @@ export default class Crafter {
     private quality?;
     constructor(recipe: Recipe, crafter: Entity, accessibleItems: Item[]);
     /**
-     * Gets a stream of the tiles around the crafter entity.
+     * Gets an array of the tiles around the crafter entity.
      * @param includeCrafterTile Whether the tile the crafter is on should be included. Defaults to `true`.
      */
-    tilesAroundCrafter(includeCrafterTile?: boolean): Stream<import("../../tile/ITerrain").ITile>;
-    getCrafter(): Entity;
+    tilesAroundCrafter(includeCrafterTile?: boolean): import("../../tile/Tile").default[];
+    getCrafter(): Entity<unknown, number, unknown, unknown>;
     getUsable<R extends RecipeRequirementType>(type: R, requirement: InstanceType<RecipeRequirementClass<R>>): Set<RecipeInputType<R>>;
     getUsed<R extends RecipeRequirementType>(type: R, requirement?: InstanceType<RecipeRequirementClass<R>>): Stream<RecipeInputType<R>>;
     /**

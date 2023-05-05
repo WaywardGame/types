@@ -35,18 +35,18 @@ export declare class Quest extends EventEmitter.Host<IQuestEvents> {
     addRequirement<RA extends any[]>(type: QuestRequirementType, ...args: RA): this;
     setNeedsManualCompletion(): this;
     addChildQuests(...children: QuestType[]): this;
-    getChildren(): import("@wayward/goodstream").default<QuestType>;
+    getChildren(): QuestType[];
     setTitle(translation?: Translation | ((quest: IQuest) => Translation)): this;
     setDescription(translation?: Translation): this;
     create(island: Island, type?: QuestType | undefined): IQuest;
     getTitle(quest: IQuest): import("../../../../../language/impl/TranslationImpl").default | undefined;
     getDescription(quest: IQuest): import("../../../../../language/impl/TranslationImpl").default | undefined;
-    getEventBusTriggers(instance: IQuest): import("@wayward/goodstream").default<[IQuestRequirement<any[], {}>, import("@wayward/goodstream").default<readonly [import("../../../../../event/EventManager").EmitterOrBus, string | number | symbol, (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
-    getHostTriggers(instance: IQuest): import("@wayward/goodstream").default<[IQuestRequirement<any[], {}>, IterableIterator<[keyof import("../../IPlayer").IPlayerEvents, (api: IQuestRequirementApi<[], {}>, player: Player, ...args: any[]) => boolean]>]>;
-    getRequirements(host: Player, instance: IQuest): import("@wayward/goodstream").default<RequirementInstance>;
+    getEventBusTriggers(instance: IQuest): [IQuestRequirement<any[], {}>, import("@wayward/goodstream").default<readonly [import("../../../../../event/EventManager").EmitterOrBus, string | number | symbol, (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]>][];
+    getHostTriggers(instance: IQuest): [IQuestRequirement<any[], {}>, IterableIterator<[keyof import("../../IPlayer").IPlayerEvents, (api: IQuestRequirementApi<[], {}>, player: Player, ...args: any[]) => boolean]>][];
+    getRequirements(host: Player, instance: IQuest): RequirementInstance[];
     getRequirement(host: Player, quest: IQuest, requirement: IQuestRequirement): RequirementInstance | undefined;
     needsManualCompletion(): boolean;
-    protected createRequirements(island: Island): import("@wayward/goodstream").default<IQuestRequirement<any[], {}>>;
+    protected createRequirements(island: Island): IQuestRequirement[];
     protected createRequirement<R extends QuestRequirementType>(type: R, ...options: RequirementArgs<R>): IQuestRequirement<RequirementArgs<R>>;
 }
 export declare class RequirementInstance extends EventEmitter.Host<IQuestRequirementEvents> {

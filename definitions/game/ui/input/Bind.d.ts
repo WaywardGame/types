@@ -49,9 +49,7 @@ export interface IBindHandlerApi {
     cancelled: boolean;
 }
 export type BindingHandler<R = boolean> = (api: IBindHandlerApi) => R;
-interface IBindHandlerRegistration<T extends {
-    [K in P]: BindingHandler;
-}, P extends string | number | symbol> {
+interface IBindHandlerRegistration<T extends Record<P, BindingHandler>, P extends string | number | symbol> {
     bindable: Bindable | "anything";
     event: BindingEvent;
     priority: number;
@@ -124,27 +122,15 @@ declare module Bind {
     function addHandler(bindable: Bindable, event: BindingEventName, handler: BindingHandler, priority?: number): void;
     function addHandler(bindable: "anything", event: BindingEventName, handler: BindingHandler<void>, priority?: number): void;
     function addHandler(bindable: Bindable | "anything", event: BindingEventName, handler: BindingHandler<void>, priority: number | undefined, always: true): void;
-    function addHandler<T extends {
-        [key in K]: BindingHandler;
-    }, K extends keyof T>(bindable: Bindable, event: BindingEventName, obj: T, key: K, priority?: number): void;
-    function addHandler<T extends {
-        [key in K]: BindingHandler<void>;
-    }, K extends keyof T>(bindable: "anything", event: BindingEventName, obj: T, key: K, priority?: number): void;
-    function addHandler<T extends {
-        [key in K]: BindingHandler<void>;
-    }, K extends keyof T>(bindable: Bindable | "anything", event: BindingEventName, obj: T, key: K, priority: number | undefined, always: true): void;
+    function addHandler<T extends Record<K, BindingHandler>, K extends keyof T>(bindable: Bindable, event: BindingEventName, obj: T, key: K, priority?: number): void;
+    function addHandler<T extends Record<K, BindingHandler<void>>, K extends keyof T>(bindable: "anything", event: BindingEventName, obj: T, key: K, priority?: number): void;
+    function addHandler<T extends Record<K, BindingHandler<void>>, K extends keyof T>(bindable: Bindable | "anything", event: BindingEventName, obj: T, key: K, priority: number | undefined, always: true): void;
     function removeHandler(bindable: Bindable, event: BindingEventName, handler: BindingHandler, priority?: number): void;
     function removeHandler(bindable: "anything", event: BindingEventName, handler: BindingHandler<void>, priority?: number): void;
     function removeHandler(bindable: Bindable | "anything", event: BindingEventName, handler: BindingHandler<void>, priority: number | undefined, always: true): void;
-    function removeHandler<T extends {
-        [key in K]: BindingHandler;
-    }, K extends keyof T>(bindable: Bindable, event: BindingEventName, obj: T, key: K, priority?: number): void;
-    function removeHandler<T extends {
-        [key in K]: BindingHandler<void>;
-    }, K extends keyof T>(bindable: "anything", event: BindingEventName, obj: T, key: K, priority?: number): void;
-    function removeHandler<T extends {
-        [key in K]: BindingHandler<void>;
-    }, K extends keyof T>(bindable: Bindable | "anything", event: BindingEventName, obj: T, key: K, priority: number | undefined, always: true): void;
+    function removeHandler<T extends Record<K, BindingHandler>, K extends keyof T>(bindable: Bindable, event: BindingEventName, obj: T, key: K, priority?: number): void;
+    function removeHandler<T extends Record<K, BindingHandler<void>>, K extends keyof T>(bindable: "anything", event: BindingEventName, obj: T, key: K, priority?: number): void;
+    function removeHandler<T extends Record<K, BindingHandler<void>>, K extends keyof T>(bindable: Bindable | "anything", event: BindingEventName, obj: T, key: K, priority: number | undefined, always: true): void;
     type HandlerRegistrationGeneric = IBindHandlerRegistration<{
         [K in string | number]: BindingHandler;
     }, string | number>;

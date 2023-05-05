@@ -12,14 +12,16 @@ import type { ActionDisplayLevel } from "game/entity/action/IAction";
 import { ActionType } from "game/entity/action/IAction";
 import type { IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, ReturnableUsableActionUsability, UsableActionIconReference } from "game/entity/action/usable/IUsableAction";
 import { UsableActionGenerator } from "game/entity/action/usable/UsableActionRegistrar";
+import type { UsableActionTranslator } from "game/entity/action/usable/UsableActionTranslator";
 import type Player from "game/entity/player/Player";
 import type Bindable from "ui/input/Bindable";
 export interface IUsableActionDynamicDefinition {
-    icon?: UsableActionIconReference;
+    icon?: SupplierOr<UsableActionIconReference>;
     bindable: Bindable;
     displayLevel?: ActionDisplayLevel;
     priority?: number;
     discoveredByDefault?: true;
+    translate?: (translator: UsableActionTranslator) => UsableActionTranslator;
 }
 export interface IUsableActionsDynamicConfig<DEFINITION extends IUsableActionDynamicDefinition, REQUIREMENTS extends IUsableActionRequirements> {
     id: string;

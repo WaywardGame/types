@@ -51,16 +51,12 @@ declare module Mod {
     /**
      * Injects the decorated field with this mod's log.
      */
-    function log(): <K extends string | number | symbol, T extends {
-        [k in K]: Log;
-    }>(target: T, key: K) => void;
+    function log(): <K extends string | number | symbol, T extends Record<K, Log>>(target: T, key: K) => void;
     /**
      * Injects the decorated field with a mod's log.
      * @param name Given a mod name, the decorated field will be injected with the log of the enabled/loaded mod by that name.
      */
-    function log(name?: string): <K extends string | number | symbol, T extends {
-        [k in K]: Log;
-    }>(target: T, key: K) => void;
+    function log(name?: string): <K extends string | number | symbol, T extends Record<K, Log>>(target: T, key: K) => void;
     /**
      * Injects the save data for this mod.
      */

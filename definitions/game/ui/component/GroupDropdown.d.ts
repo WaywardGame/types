@@ -24,7 +24,7 @@ export default abstract class GroupDropdown<ENUM_OBJECT, OTHER_OPTIONS extends s
     private regex;
     private regexAll;
     private regexLast;
-    constructor(enumObject: ENUM_OBJECT, dictionary: Dictionary, defaultOption: VALUES | OTHER_OPTIONS, options: SupplierOr<Iterable<IDropdownOption<OTHER_OPTIONS>>>);
+    constructor(enumObject: ENUM_OBJECT, dictionary: Dictionary | undefined, defaultOption: VALUES | OTHER_OPTIONS, options: SupplierOr<Iterable<IDropdownOption<OTHER_OPTIONS>>>);
     setPrefix(prefix: string): this;
     protected optionMatchesFilterWord(word: string, option: VALUES | OTHER_OPTIONS, text: string): boolean;
     protected abstract getGroups(): Iterable<GROUP>;

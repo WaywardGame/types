@@ -56,7 +56,10 @@ export declare enum Milestone {
     Traitor = 44,
     MasterOfAll = 45,
     Rouseabout = 46,
-    Murderer = 47
+    Murderer = 47,
+    Retailer = 48,
+    Masochist = 49,
+    Versatile = 50
 }
 export type ExcludeInternalMilestones<MILESTONE extends Milestone> = PickValueKeys<typeof Milestone, MILESTONE> extends `Internal${string}` ? never : MILESTONE;
 export declare enum MilestoneVisibility {

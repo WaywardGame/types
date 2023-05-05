@@ -21,7 +21,7 @@ declare module ItemDismantleInfo {
     export const SYMBOL_IS_DISMANTLE_INSPECTION: unique symbol;
     export const useInfo: UseInfo<{
         dismantle: IDismantleDescription;
-        objectType: import("../../../../IGame").CreationId.Item;
+        entityType: import("../../../../entity/IEntity").EntityType.Item;
         value?: Item | undefined;
         type: ItemType;
         description: import("game/item/IItem").IItemDescription;

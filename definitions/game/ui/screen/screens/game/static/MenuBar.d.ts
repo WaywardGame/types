@@ -37,6 +37,6 @@ export default class MenuBar extends QuadrantComponent implements ISortableCompo
     refresh(): void;
     protected getContextMenuDescription(api: IBindHandlerApi): ContextMenuDescriptions;
     private getMissingMenuBarButtons;
-    private registerButtonBindHandlers;
+    static registerButtonBindHandlers(until: Promise<any>): void;
 }
 export {};

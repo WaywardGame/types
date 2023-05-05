@@ -17,18 +17,8 @@ import type WorldLayer from "renderer/world/WorldLayer";
 import type WorldRenderer from "renderer/world/WorldRenderer";
 import type { IBound3 } from "utilities/math/Bound3";
 import type RendererContext from "renderer/context/RendererContext";
-export interface IWorldLayerRendererEvents {
-    /**
-     * Called when rendering the world
-     * @returns Flags indicating what layers to render
-     */
-    getRenderFlags(): RenderLayerFlag;
-    /**
-     * Called when tile layers are created
-     * Custom tile layers can be added to it
-     */
-    createTileLayers(context: RendererContext, width: number, height: number, positionBuffer: WebGLBuffer): void;
-}
+import type ExploredMapClientData from "save/clientStore/clientData/ExploredMap";
+import type { IWorldLayerRendererEvents } from "renderer/world/IWorldLayerRenderer";
 export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRendererEvents> {
     readonly context: RendererContext;
     protected readonly worldRenderer: WorldRenderer;
@@ -38,12 +28,18 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     texLightBlock: WebGLTexture;
     texLightLevel: WebGLTexture;
     texExplored: WebGLTexture;
+    private exploredMap;
+    /**
+     * Flag for marking that there are changes that need to be rendered in one or more tile layers
+     */
     private dirty;
     private dirtyTiles;
     private dirtyDoodads;
     private readonly dirtyDoodadUpdates;
     private readonly tileLayers;
     private readonly tileLayerMap;
+    private readonly tilesToFlush;
+    private readonly doodadsToFlush;
     private terrainLayer;
     private terrainOverLayer;
     private terrainDecorationsLayer;
@@ -54,10 +50,15 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     delete(): void;
     private deleteTileLayers;
     reset(): void;
-    setWorldLayer(worldLayer: WorldLayer): void;
+    setWorldLayer(worldLayer: WorldLayer, exploredMapClientData: ExploredMapClientData): void;
     addTileLayer(tileLayer: TileLayer): void;
     updateAll(): void;
-    updateDoodad(x: number, y: number, flushImmediate: boolean, { doodadDescription, doodadType, doodadInfo, doodadVariationX, doodadVariationY, terrainMasks }: IDoodadUpdate): void;
+    /**
+     * Sets the alpha of a tile in the explored data
+     * Note: You must call bind the texture before calling this
+     */
+    setExploredAlpha(x: number, y: number, alpha: Uint8Array): void;
+    updateDoodad(x: number, y: number, flushTileImmediately: boolean, { doodadDescription, doodadType, doodadInfo, doodadVariationX, doodadVariationY, terrainMasks }: IDoodadUpdate): void;
     renderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFixedDepth: boolean, flags?: RenderLayerFlag): void;
     getDataIndex(x: number, y: number): number;
     setLayer(layer: TileLayer, dataIndex: number, tileAdaptation: TileAdaptor.ITileAdaptation): void;
@@ -70,9 +71,14 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     /**
      * Ensures tiles in the view are rendered/flushed
      * Tiles & doodads are flushed the first time they are visible within the fov
+     * @returns True when there's more rendering to be done
      */
-    ensureRendered({ min, max }: IBound3): void;
-    updateTile(x: number, y: number, flushImmediate?: boolean, debug?: boolean): void;
+    ensureRendered({ min, max }: IBound3): boolean;
+    /**
+     * Processes pending tile/doodad updates
+     */
+    private processUpdates;
+    updateTile(x: number, y: number, flushTileImmediately?: boolean, debug?: boolean): void;
     private computeDoodad;
     private computeTilled;
     private computeDecorations;

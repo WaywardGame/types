@@ -11,6 +11,7 @@
 import type DoodadInfo from "game/doodad/DoodadInfo";
 import type { DoodadType, IDoodadDescription } from "game/doodad/IDoodad";
 import type { TerrainType } from "game/tile/ITerrain";
+import type ExploreMap from "renderer/exploreMap/ExploreMap";
 export interface ITileUpdate {
     terrainType: TerrainType;
     terrainMasks: TerrainMask;
@@ -26,8 +27,8 @@ export interface IDoodadUpdate {
     hasGraphicVariation: boolean;
     terrainMasks: TerrainMask;
 }
-export type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean, debug?: boolean) => void;
-export type onDoodadUpdateDelegate = (x: number, y: number, flushImmediate: boolean, doodadUpdate: IDoodadUpdate) => void;
+export type onTileUpdateDelegate = (x: number, y: number, flushTileImmediately: boolean, debug?: boolean) => void;
+export type onDoodadUpdateDelegate = (x: number, y: number, flushTileImmediately: boolean, doodadUpdate: IDoodadUpdate) => void;
 export type TerrainData = number;
 export declare enum TerrainMask {
     None = 0,
@@ -37,5 +38,8 @@ export declare enum TerrainMask {
     Tilled = 536870912,
     Wall = 1073741824,
     Fence = 2147483648
+}
+export interface IWorldLayerOld {
+    exploredMap?: ExploreMap;
 }
 export declare const stillContainerOrder: Record<number, number>;

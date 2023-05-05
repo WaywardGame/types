@@ -108,6 +108,8 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     protected onInterruptClosed(): void;
     protected onLanguageChange(_: any, language: string): void;
     protected onToggleScreen(): void;
+    protected onShowMoreInfo(): void;
+    protected onUnshowMoreInfo(): void;
     protected onFullscreen(): boolean;
     protected onToggleDevMode(): boolean;
     protected onReload(api: IBindHandlerApi): boolean;

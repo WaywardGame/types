@@ -12,20 +12,19 @@ import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
 import type Item from "game/item/Item";
-import type { ITerrainDescription, ITile } from "game/tile/ITerrain";
+import type { ITerrainDescription } from "game/tile/ITerrain";
 import { TerrainType } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 export interface IDigGenericCanUse extends IActionUsable {
     type: "PickUpExcrement" | "PickUp" | "Gather";
+    tile: Tile;
 }
 export interface IDigTileCanUse extends IActionUsable {
     type: "Tile";
-    tile: ITile;
-    x: number;
-    y: number;
-    z: number;
+    tile: Tile;
     terrainDescription?: ITerrainDescription;
     tileType: TerrainType;
 }
 type IDigCanUse = IDigGenericCanUse | IDigTileCanUse;
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default, void, IDigCanUse, [(Item | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number>, void, IDigCanUse, [(Item | undefined)?]>;
 export default _default;
