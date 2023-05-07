@@ -22,7 +22,7 @@ export default abstract class BindableManager {
     static MANAGERS: Map<string, BindableManager>;
     static registerManager(name: string, manager: BindableManager): boolean;
     static deregisterManager(name: string): boolean;
-    private static setNeedsUpdate;
+    static setNeedsUpdate(): void;
     private static BINDABLES;
     private static BINDABLES_BY_VALUE;
     private static needsUpdate;
