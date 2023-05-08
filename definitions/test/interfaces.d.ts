@@ -47,4 +47,5 @@ export interface IPaths extends Omit<IAppPaths, "saveZipPath"> {
     generalDataPath: string;
     specificDataPath: string;
     versionsPath: string;
+    saveImportsPath: string;
 }

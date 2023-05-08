@@ -23,6 +23,7 @@ export interface IApplicationOptions {
     nodeJsMode?: boolean;
     random?: Random;
     serverPort?: number;
+    ignoreErrorsInLogs?: boolean;
 }
 export interface ITestState {
     seed: number;

@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type ISshShell from "multiplayer/dedicatedServer/ssh/ISshShell";
+import type CommandLine from "utilities/CommandLine";
 export interface ISshCommand {
     type: SshCommandType;
     category: SshCommandCategory;
@@ -16,7 +17,7 @@ export interface ISshCommand {
     requirements: SshCommandRequirement;
     callback: SshCommandCallback;
 }
-export type SshCommandCallback = (shell: ISshShell, args: string) => Promise<SshCommandResult>;
+export type SshCommandCallback = (shell: ISshShell, args: CommandLine.Args) => Promise<SshCommandResult>;
 export type SshCommandResult = ISshShell | false | undefined | void;
 export declare enum SshCommandType {
     Help = 0,

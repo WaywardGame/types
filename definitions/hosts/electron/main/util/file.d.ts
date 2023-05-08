@@ -23,7 +23,7 @@ export declare class TemplateWriter {
      * @param mode What to do if the file already exists
      * @param report Whether to report the changes to the file
      */
-    addJSON(file: string | false | 0 | undefined | null, contents: any, mode: "notexist" | "replace" | "mergebefore" | "mergeafter" | "ignore", report?: boolean): this;
+    addJSON(file: string | false | 0 | undefined | null, contents: any, mode: "notexist" | "replace" | "mergebefore" | "mergeafter" | "ignore", report?: string | boolean | undefined): this;
     /**
      * @param report What to report on success, `false` or `undefined` to skip
      */

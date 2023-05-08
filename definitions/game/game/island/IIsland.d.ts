@@ -107,7 +107,6 @@ export interface IIslandLoadOptions {
      * Set to true when the island load is happening for everyone eveywhere all at once
      */
     isSynced: boolean;
-    isNewSave?: boolean;
     travelTime?: number;
     pauseAndShowLoadingScreen?: boolean;
     multiplayerLoadingDescription?: MultiplayerLoadingDescription;
