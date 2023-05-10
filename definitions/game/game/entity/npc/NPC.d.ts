@@ -36,6 +36,11 @@ export interface INPCEvents extends Events<Human> {
      * @returns True if the npc can move, false if the npc cannot move, or undefined to use the default logic
      */
     canNPCMove(tile: Tile, moveType: MoveType): boolean | undefined;
+    /**
+     * Called when a npc tries to attack
+     * @returns True if the npc can attack, false if the npc cannot attack, or undefined to use the default logic
+     */
+    canNPCAttack(): boolean | undefined;
 }
 export default abstract class NPC extends Human<NPCType> {
     protected static registrarId: number;

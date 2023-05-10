@@ -12,6 +12,7 @@ import { EquipType } from "game/entity/IHuman";
 import type Item from "game/item/Item";
 import Component from "ui/component/Component";
 import type { IBindHandlerApi } from "ui/input/Bind";
+import Bindable from "ui/input/Bindable";
 import Dialog from "ui/screen/screens/game/component/Dialog";
 import type { IItemDropApi, IItemPickUpApi, ItemSlot } from "ui/screen/screens/game/component/Item";
 import ItemComponent, { ItemRefreshType } from "ui/screen/screens/game/component/Item";
@@ -33,6 +34,7 @@ export default class EquipmentDialog extends Dialog {
     readonly slots: Component<HTMLElement>;
     readonly tooltipHandler: EquipmentSlotTooltipHandler;
     constructor();
+    getBindable(): Bindable | undefined;
     protected onClearActionSlot(api: IBindHandlerApi): boolean;
 }
 export declare class EquipmentSlot extends ItemComponent {

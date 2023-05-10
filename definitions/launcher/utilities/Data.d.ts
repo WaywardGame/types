@@ -8,13 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Bindable from "ui/input/Bindable";
-import Dialog from "ui/screen/screens/game/component/Dialog";
-export default class MessagesDialog extends Dialog {
-    constructor();
-    getBindable(): Bindable | undefined;
-    protected onAppend2(): void;
-    protected willRemove(): void;
-    private onFocus;
-    private onBlur;
+export default class Data {
+    readonly selectedFolder: Record<string, string | undefined>;
+    readonly allFolders: Record<string, Array<[string, string]> | undefined>;
+    load(): Promise<this>;
+    save(): Promise<void>;
 }

@@ -13,7 +13,7 @@ import type NPC from "game/entity/npc/NPC";
 import type { IContainer, IDismantleComponent, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import "ui/old/functional/FunctionalSortable";
-import type { OldUiDialogId, IDialogInfo } from "ui/old/IOldUi";
+import type { IDialogInfo, OldUiDialogId } from "ui/old/IOldUi";
 import InGameScreen from "ui/old/screens/InGameScreen";
 export default class OldUi {
     screenInGame: InGameScreen | undefined;

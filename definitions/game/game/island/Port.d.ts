@@ -23,13 +23,14 @@ interface IPort {
     name: ISerializedTranslation;
     position: IVector3;
     doodadRef?: Reference<ReferenceType.Doodad>;
+    lit: boolean;
 }
 interface Port extends Readonly<IPort> {
 }
 declare class Port {
     static fromDoodad(doodad: Doodad): Port;
     constructor(port: IPort);
-    get doodad(): Doodad | undefined;
+    getDoodad(): Doodad | undefined;
     get island(): Island | undefined;
     getName(): TranslationImpl;
 }
@@ -40,4 +41,5 @@ export declare class PortManager extends Map<number, Port> implements IUnseriali
     onUnserialized(serializer: ISerializer): void;
     register(doodad: Doodad): void;
     deregister(doodad: Doodad): boolean;
+    get litPortCount(): number;
 }

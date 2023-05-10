@@ -30,6 +30,7 @@ import type { IPreSerializeCallback } from "save/serializer/ISerializer";
 import type { IVector3 } from "utilities/math/IVector";
 import { IRange } from "utilities/math/Range";
 import Vector2 from "utilities/math/Vector2";
+export declare const TEMPERATURE_DIFFUSION_RATE: number;
 export declare const TEMPERATURE_BOUNDARY_MIN_VEC2: Vector2;
 export declare const TEMPERATURE_INVALID = 255;
 export interface ITemperatureManagerEvents {
@@ -121,7 +122,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     /**
      * Returns the temperature of the given tile, produced by combining the temperatures of each type.
      */
-    private getTile;
+    getTile(tile: Tile, serverSideSource: GetterOfOr<string> | undefined): number;
     /**
      * Returns the temperature on the tile of the given type. IE, some things can produce "cold", and some things can produce "heat",
      * and both of them are cached per-tile.

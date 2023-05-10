@@ -17,6 +17,7 @@ import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IRefreshable } from "ui/component/Refreshable";
 import Text from "ui/component/Text";
+import type Bindable from "ui/input/Bindable";
 import type { IDialogDescription } from "ui/screen/screens/game/Dialogs";
 import { DialogId, Edge } from "ui/screen/screens/game/Dialogs";
 import type { IDialog } from "ui/screen/screens/game/IGameScreenApi";
@@ -188,6 +189,7 @@ declare abstract class Dialog extends Component implements IDialog {
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
     getName(): Translation | UiTranslation | ISerializedTranslation | undefined;
+    getBindable(): Bindable | undefined;
     /**
      * Event handler for when this dialog is appended
      */

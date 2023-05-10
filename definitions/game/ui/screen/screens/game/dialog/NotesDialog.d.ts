@@ -10,6 +10,7 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type Player from "game/entity/player/Player";
+import Bindable from "ui/input/Bindable";
 import Dialog from "ui/screen/screens/game/component/Dialog";
 interface INotesDialogEvents extends Events<Dialog> {
     /**
@@ -25,6 +26,7 @@ export default class NotesDialog extends Dialog {
     private note;
     private current;
     constructor();
+    getBindable(): Bindable | undefined;
     onWrittenNote(_player: Player, _id: number): void;
     showNote(noteId: number): this;
     showFirstUnreadNote(): void;

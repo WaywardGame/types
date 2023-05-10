@@ -192,7 +192,8 @@ export declare enum FireType {
     Doodad = 1,
     Fire = 2,
     Lava = 3,
-    CoolingLava = 4
+    CoolingLava = 4,
+    Creature = 5
 }
 export declare enum SaveType {
     InGame = 0,

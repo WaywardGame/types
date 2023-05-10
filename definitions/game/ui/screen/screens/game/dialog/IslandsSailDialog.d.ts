@@ -22,10 +22,9 @@ export default class IslandsSailDialog extends IslandsDialog {
     protected onChangedSelectedIsland(animate?: boolean): void;
     protected isSelectedIslandValid(): boolean;
     protected shouldDisplayIsland(x: number, y: number, island?: Island): boolean;
-    protected onMouseMoveWhileOver(): void;
     private updateSailButton;
     protected sail(port?: IIslandPort): void;
     protected preMoveToIsland(): void;
     protected onLoadedOnIsland(): void;
-    protected onTickEnd(): void;
+    protected onTickEndOrPostMove(): void;
 }

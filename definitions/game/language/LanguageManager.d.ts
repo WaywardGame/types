@@ -12,8 +12,8 @@ import EventEmitter from "event/EventEmitter";
 import Dictionary from "language/Dictionary";
 import Language from "language/Language";
 import LanguageExtension from "language/LanguageExtension";
-import Translation from "language/Translation";
 import type TranslationsProvider from "language/TranslationsProvider";
+import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IStringSection } from "utilities/string/Interpolator";
 import { CaseStyle } from "utilities/string/Strings";
 type ArticleRules = Array<[number | {
@@ -95,17 +95,11 @@ export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> 
     private setDebug;
     private debugFor;
     private debugLog;
-    private readonly uiTranslationsToSelector;
-    private setup;
-    private addTranslateSelector;
-    private addTranslateSelectors;
     private refreshUiTranslation;
 }
-export interface ISelector {
-    selector: string | string[];
-    html?: boolean;
-    attribute?: string;
-    func?(translation: Translation): string;
+export interface ITranslationInjection {
+    selector: string;
+    translation: TranslationGenerator;
+    type?: "title" | "generic";
 }
-export type ISelectorArray = Record<number, ISelector>;
 export {};

@@ -18,10 +18,14 @@ declare class App {
     showOpenDirectoryDialog(defaultPath?: string): Promise<string[] | undefined>;
     pathExists(path?: string): Promise<boolean>;
     writeFile(path?: string, file?: string): Promise<void>;
+    readFile(path?: string): Promise<string | undefined>;
+    writeJSON(path?: string, json?: any): Promise<void>;
+    readJSON<T = any>(path?: string): Promise<T | undefined>;
     get path(): {
         steam: string;
         app: string;
         mods: string;
+        saves: string;
     };
     execDetached(command: string, ...args: string[]): void | undefined;
     exit(): void;
