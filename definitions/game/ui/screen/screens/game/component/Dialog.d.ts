@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
+import type { IIcon } from "game/inspection/InfoProvider";
 import UiTranslation from "language/dictionary/UiTranslation";
 import type { ISerializedTranslation } from "language/ITranslation";
 import Translation from "language/Translation";
@@ -21,6 +22,7 @@ import type Bindable from "ui/input/Bindable";
 import type { IDialogDescription } from "ui/screen/screens/game/Dialogs";
 import { DialogId, Edge } from "ui/screen/screens/game/Dialogs";
 import type { IDialog } from "ui/screen/screens/game/IGameScreenApi";
+import type { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 import type TooltipLocationHandler from "ui/tooltip/TooltipLocationHandler";
 import type { IDraggableEvents } from "ui/util/Draggable";
 import Draggable from "ui/util/Draggable";
@@ -190,6 +192,7 @@ declare abstract class Dialog extends Component implements IDialog {
      */
     getName(): Translation | UiTranslation | ISerializedTranslation | undefined;
     getBindable(): Bindable | undefined;
+    getIcon(): MenuBarButtonType | IIcon | undefined;
     /**
      * Event handler for when this dialog is appended
      */

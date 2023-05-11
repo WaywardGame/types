@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
+import type { IIcon } from "game/inspection/InfoProvider";
 import Dictionary from "language/Dictionary";
 import Language from "language/Language";
 import LanguageExtension from "language/LanguageExtension";
@@ -101,5 +102,6 @@ export interface ITranslationInjection {
     selector: string;
     translation: TranslationGenerator;
     type?: "title" | "generic";
+    icon?: IIcon;
 }
 export {};

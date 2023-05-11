@@ -10,12 +10,14 @@
  */
 import Bindable from "ui/input/Bindable";
 import Dialog from "ui/screen/screens/game/component/Dialog";
+import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 export default class SkillsDialog extends Dialog {
     private readonly skills;
     private readonly inputFilter;
     private readonly sortRow;
     constructor();
-    getBindable(): Bindable | undefined;
+    getBindable(): Bindable;
+    getIcon(): MenuBarButtonType;
     protected onDialogRemove(): void;
     private updateSkill;
     private sort;

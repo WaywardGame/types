@@ -10,9 +10,11 @@
  */
 import Bindable from "ui/input/Bindable";
 import Dialog from "ui/screen/screens/game/component/Dialog";
+import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 export default class MessagesDialog extends Dialog {
     constructor();
-    getBindable(): Bindable | undefined;
+    getBindable(): Bindable;
+    getIcon(): MenuBarButtonType;
     protected onAppend2(): void;
     protected willRemove(): void;
     private onFocus;

@@ -10,6 +10,7 @@
  */
 import Bindable from "ui/input/Bindable";
 import Dialog from "ui/screen/screens/game/component/Dialog";
+import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 export default class QuestDialog extends Dialog {
     private readonly questsActiveWrapper;
     private readonly questsActiveHeading;
@@ -22,7 +23,8 @@ export default class QuestDialog extends Dialog {
     private readonly completeQuestButton;
     private current;
     constructor();
-    getBindable(): Bindable | undefined;
+    getBindable(): Bindable;
+    getIcon(): MenuBarButtonType;
     protected onDialogRemove(): void;
     showQuest(id: number): this;
     protected onSwitchPanel(panelId: string | number): void;

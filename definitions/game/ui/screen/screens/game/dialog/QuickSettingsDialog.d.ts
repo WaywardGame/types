@@ -11,10 +11,12 @@
 import type { IRefreshable } from "ui/component/Refreshable";
 import Bindable from "ui/input/Bindable";
 import Dialog from "ui/screen/screens/game/component/Dialog";
+import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 export default class QuickSettingsDialog extends Dialog implements IRefreshable {
     private readonly refreshables;
     constructor();
-    getBindable(): Bindable | undefined;
+    getBindable(): Bindable;
+    getIcon(): MenuBarButtonType;
     refresh(): this;
     private addRefreshable;
 }

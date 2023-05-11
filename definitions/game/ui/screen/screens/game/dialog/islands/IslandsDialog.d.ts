@@ -14,7 +14,6 @@ import type Island from "game/island/Island";
 import type Button from "ui/component/Button";
 import Component from "ui/component/Component";
 import Input from "ui/component/Input";
-import Bindable from "ui/input/Bindable";
 import CanvasDialog from "ui/screen/screens/game/component/CanvasDialog";
 import type { DialogId } from "ui/screen/screens/game/Dialogs";
 import type { IVector2 } from "utilities/math/IVector";
@@ -50,7 +49,6 @@ export default abstract class IslandsDialog extends CanvasDialog {
     readonly portsWrapper: Component<HTMLElement>;
     readonly ports: IIslandsDialogPort[];
     constructor(dialogId: DialogId, options: IIslandDialogOptions);
-    getBindable(): Bindable | undefined;
     protected get island(): Island | undefined;
     selectIsland(x: number, y: number): void;
     protected onLoad(initial: boolean): Promise<void>;

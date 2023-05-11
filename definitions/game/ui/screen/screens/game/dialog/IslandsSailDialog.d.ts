@@ -12,11 +12,15 @@ import type { IIslandPort } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import Button from "ui/component/Button";
 import type Component from "ui/component/Component";
+import Bindable from "ui/input/Bindable";
 import IslandsDialog from "ui/screen/screens/game/dialog/islands/IslandsDialog";
+import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 export default class IslandsSailDialog extends IslandsDialog {
     closeOnTravel: boolean;
     constructor();
     protected createExecuteButton(port?: IIslandPort): Button;
+    getBindable(): Bindable;
+    getIcon(): MenuBarButtonType;
     protected onAppend(): void;
     protected initializeSettingsPanel(panel: Component): void;
     protected onChangedSelectedIsland(animate?: boolean): void;

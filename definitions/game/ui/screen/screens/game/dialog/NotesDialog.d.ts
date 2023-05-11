@@ -12,6 +12,7 @@ import type { Events, IEventEmitter } from "event/EventEmitter";
 import type Player from "game/entity/player/Player";
 import Bindable from "ui/input/Bindable";
 import Dialog from "ui/screen/screens/game/component/Dialog";
+import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 interface INotesDialogEvents extends Events<Dialog> {
     /**
      * @param noteId The note that was shown
@@ -26,7 +27,8 @@ export default class NotesDialog extends Dialog {
     private note;
     private current;
     constructor();
-    getBindable(): Bindable | undefined;
+    getBindable(): Bindable;
+    getIcon(): MenuBarButtonType;
     onWrittenNote(_player: Player, _id: number): void;
     showNote(noteId: number): this;
     showFirstUnreadNote(): void;

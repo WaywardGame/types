@@ -17,6 +17,7 @@ import Dialog from "ui/screen/screens/game/component/Dialog";
 import type { IItemDropApi, IItemPickUpApi, ItemSlot } from "ui/screen/screens/game/component/Item";
 import ItemComponent, { ItemRefreshType } from "ui/screen/screens/game/component/Item";
 import EquipmentSlotTooltipHandler from "ui/screen/screens/game/dialog/equipment/EquipmentSlotTooltip";
+import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 export declare enum EquipmentClasses {
     Main = "game-dialog-equipment",
     Body = "game-dialog-equipment-body",
@@ -34,7 +35,8 @@ export default class EquipmentDialog extends Dialog {
     readonly slots: Component<HTMLElement>;
     readonly tooltipHandler: EquipmentSlotTooltipHandler;
     constructor();
-    getBindable(): Bindable | undefined;
+    getBindable(): Bindable;
+    getIcon(): MenuBarButtonType;
     protected onClearActionSlot(api: IBindHandlerApi): boolean;
 }
 export declare class EquipmentSlot extends ItemComponent {

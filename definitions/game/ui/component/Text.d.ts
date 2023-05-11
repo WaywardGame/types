@@ -10,6 +10,7 @@
  */
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { EmitterOrBus, Event, Handler } from "event/EventManager";
+import type { IIcon } from "game/inspection/InfoProvider";
 import UiTranslation from "language/dictionary/UiTranslation";
 import type { IBindingsSection } from "language/segment/BindSegment";
 import type { IColorSection } from "language/segment/ColorSegment";
@@ -84,6 +85,7 @@ export interface IBasicTextEvents extends Events<Component> {
     handleLink(link: BasicTextLink): true | void;
 }
 export declare class BasicText extends Component {
+    static applyIcon(component?: Component, icon?: IIcon): void;
     event: IEventEmitter<this, IBasicTextEvents>;
     private _link;
     inputIndex?: number;

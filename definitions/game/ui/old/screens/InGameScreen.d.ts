@@ -236,7 +236,6 @@ export default class InGameScreen extends BaseScreen {
     onDropItem(api: IBindHandlerApi): boolean;
     onReleaseDrop(): void;
     onMoreInformation(api: IBindHandlerApi): boolean;
-    onDismantleTab(): boolean;
     private isOverlayVisible;
     private readonly onInterrupt;
     private readonly onInterruptClosed;
