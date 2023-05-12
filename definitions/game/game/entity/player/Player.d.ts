@@ -88,7 +88,14 @@ export default class Player extends Human implements IPreSerializeCallback, IUns
      */
     prompt(type: Prompt, ...args: any[]): Promise<boolean | InterruptChoice>;
     updateActionSlots(slots: number[], data: IActionBarSlotData[], enabled?: boolean): void;
+    /**
+     * Send a packet to the server about the dialog info for the dialog
+     */
     updateDialogInfo(dialogIndex: string | number | undefined): void;
+    /**
+     * Send a packet to the server about the sort info for the container
+     */
+    updateContainerSortInfo(dialogIndex: string | number): void;
     getDialogInfo(dialogIndex: string | number): IDialogInfo | undefined;
     kill(): void;
     respawn(reset: boolean): void;

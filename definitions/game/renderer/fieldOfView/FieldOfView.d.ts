@@ -48,7 +48,7 @@ export default class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     texLight: WebGLTexture | undefined;
     texLightOld: WebGLTexture | undefined;
     private seed;
-    private transitionFinishTime;
+    private transitionMovementTime;
     private readonly transitioningExploredMap;
     private lastComputedIslandId;
     static initializePrograms(webGlContext: WebGlContext): Promise<void>;

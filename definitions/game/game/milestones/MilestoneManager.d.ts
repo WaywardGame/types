@@ -20,7 +20,7 @@ export interface IMilestoneEvents {
      * @param value The new value for this milestone
      * @param max The max value for this milestone
      */
-    update(milestone: Milestone, value: number, max: number): void;
+    update(milestone: Milestone, value: number, max: number, newData?: string | number): void;
 }
 export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents> {
     private readonly game;

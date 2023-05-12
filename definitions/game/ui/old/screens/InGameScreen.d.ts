@@ -10,6 +10,7 @@
  */
 import type Doodad from "game/doodad/Doodad";
 import type NPC from "game/entity/npc/NPC";
+import type NPCManager from "game/entity/npc/NPCManager";
 import type { ContainerReference, DisplayableItemType, IContainer, IDismantleComponent } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import type { IMoveItemOptions } from "game/item/IItemManager";
@@ -162,6 +163,7 @@ export default class InGameScreen extends BaseScreen {
     completeAddingMultipleItemsToContainer(container: IContainer, itemsToSync?: Item[]): void;
     onContainerItemAdd(itemManager: ItemManager, itemsAdded: Item[], container: IContainer, options?: IMoveItemOptions, customOptions?: IOldUiContainerItemAdd): void;
     protected onContainerItemRemove(itemManager: ItemManager, itemsRemoved: Item[], containerRemovedFrom?: IContainer): void;
+    protected onNpcRemove(npcManager: NPCManager, npc: NPC): void;
     refreshContainerName(container: IContainer, nestedUpdate?: boolean): void;
     getInventoryItemsInOrder(): any[];
     saveItemOrder(containerElement: JQuery, activeSort?: boolean): void;

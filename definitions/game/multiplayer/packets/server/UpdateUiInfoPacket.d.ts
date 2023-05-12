@@ -9,10 +9,17 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServerPacket";
-import type { IDialogInfo } from "ui/old/IOldUi";
-export default class UpdateDialogInfoPacket extends PlayerTargetedServerPacket {
+import type { IContainerSortInfo, IDialogInfo } from "ui/old/IOldUi";
+export declare enum UpdateUiInfoPacketType {
+    DialogInfo = 0,
+    DialogContainerInfo = 1,
+    ContainerSortInfo = 2
+}
+export default class UpdateUiInfoPacket extends PlayerTargetedServerPacket {
+    type: UpdateUiInfoPacketType;
     index: string | number;
     info: IDialogInfo;
+    containerSortInfo: IContainerSortInfo;
     getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;

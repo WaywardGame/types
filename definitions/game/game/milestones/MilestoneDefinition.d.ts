@@ -66,4 +66,6 @@ export default class MilestoneDefinition {
     setNotDisabledByMods(): this;
     unlockedHandler?: (tellPlayer: () => void) => any;
     onUnlocked(handler: (tellPlayer: () => void) => any): this;
+    progressHandler?: (newData?: string | number) => any;
+    onProgress(handler: (newData?: string | number) => any): this;
 }

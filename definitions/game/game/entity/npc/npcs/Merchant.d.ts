@@ -53,6 +53,7 @@ export default class MerchantNPC extends NPC {
     protected getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;
     protected getDefaultInventory(): Array<Item | ItemType>;
     protected getDefaultAiType(): AiType;
+    protected onSpawn(): void;
     private canSpawnItem;
     protected runActions(): boolean;
     get asMerchant(): MerchantNPC;

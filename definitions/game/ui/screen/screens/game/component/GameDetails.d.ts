@@ -13,28 +13,25 @@ import type Island from "game/island/Island";
 import Component from "ui/component/Component";
 import type { IGameIconsHost, IGameModifiersHost } from "ui/component/GameIcons";
 import GameIcons, { GameModifiers } from "ui/component/GameIcons";
-import { Heading } from "ui/component/Text";
+import PopupOverlay from "ui/screen/screens/game/component/PopupOverlay";
 import type { IGameOptionsIcon } from "ui/screen/screens/menu/menus/pause/GameOptionsIcons";
 import { GameOptionsIcon } from "ui/screen/screens/menu/menus/pause/GameOptionsIcons";
 import type Tooltip from "ui/tooltip/Tooltip";
-export declare class GameDetails extends Component implements IGameIconsHost, IGameModifiersHost {
+export declare class GameDetails extends PopupOverlay implements IGameIconsHost, IGameModifiersHost {
     get difficulty(): import("../../../../../game/options/IGameOptions").GameMode;
     get pvp(): boolean;
     get mods(): [string, import("ui/util/Misc").ModLoadability][];
     get friends(): ISteamFriend[];
-    islandName: IslandName;
     readonly gameModifiers: GameModifiers;
     readonly gameIcons: GameIcons;
     questsWrapper?: Component;
     private refreshGameIconsTimeout?;
     private steamworksFriends;
     constructor(island: Island);
-    lockHidden(): this;
-    show(): this;
     setHasLabels(hasLabels?: boolean): this;
     setHasQuests(hasQuests?: boolean): this;
     hasIcons(): boolean;
-    refresh(): void;
+    refresh(): this;
     getOptionsIconTooltipHandler(icon: GameOptionsIcon, description: IGameOptionsIcon): ((tooltip: Tooltip) => any) | undefined;
     getOptionsIcons(): [GameOptionsIcon, IGameOptionsIcon][];
     getChallengeModifiers(): import("../../../../../game/options/modifiers/challenge/IChallenge").Challenge[];
@@ -42,8 +39,4 @@ export declare class GameDetails extends Component implements IGameIconsHost, IG
     getIslandModifiers(): import("../../../../../game/options/modifiers/island/IslandModifier").IslandModifierType[];
     protected refreshGameIcons(): void;
     private refreshQuests;
-}
-export declare class IslandName extends Heading {
-    constructor();
-    setIsland(island: Island): void;
 }
