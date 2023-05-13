@@ -97,14 +97,16 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      */
     canConsumeItem(itemType: ItemType, actionType: ActionType): boolean | undefined;
     /**
-     * Called when an item is being dropped
-     * @param item The item to be dropped
-     * @param tile The tile the item will be dropped on
-     * @param dropAll True if all items of this type will be dropped
-     * @param dropAllQuality If not undefined, all items of this quality will be dropped
-     * @returns True if the item can be dropped, false if the item can not be dropped, or undefined to use the default logic
+     * @deprecated Use filterDroppable
      */
     canDropItem(item: Item, tile: Tile, dropAll: boolean, dropAllQuality: Quality | undefined): boolean | undefined;
+    /**
+     * Called in `Drop.canUse()`
+     * @param items The items that will be dropped
+     * @param tile The tile the items will be dropped on
+     * @returns an `Item[]` if filtering, `undefined` to allow all of these items to be dropped
+     */
+    filterDroppable(items: Item[], tile: Tile): Item[] | undefined;
     /**
      * Called before an npc attacks
      * @param weapon The weapon used to attack

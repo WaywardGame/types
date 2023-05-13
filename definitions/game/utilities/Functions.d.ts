@@ -10,5 +10,10 @@
  */
 declare namespace Functions {
     const noOp: () => void;
+    const noOpString: () => string;
+    const noOpZero: () => number;
+    const noOpNull: () => null;
+    const noOpFalse: () => boolean;
+    const noOpTrue: () => boolean;
 }
 export default Functions;

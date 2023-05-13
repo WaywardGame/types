@@ -103,6 +103,7 @@ export interface IMoveItemOptions {
     skipWeightChecks?: boolean;
     suspendNotifier?: boolean;
     moveToTileOptions?: IMoveToTileOptions;
+    dryRun?: true;
 }
 export interface IPlaceOnTileOptions {
     force?: boolean;

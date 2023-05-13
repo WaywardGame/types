@@ -10,7 +10,7 @@
  */
 import EventEmitter from "event/EventEmitter";
 import type { ActionId, IUsableActionDefinition, IUsableActionDefinitionExecutable, IUsableActionExecutionContext, IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, UsableActionUsability } from "game/entity/action/usable/IUsableAction";
-import { IUsableActionNotUsable, UsableActionDisplayContext } from "game/entity/action/usable/IUsableAction";
+import { IUsableActionNotUsable, UsableActionDisplayContext, UsableActionExecutionContext } from "game/entity/action/usable/IUsableAction";
 import UsableActionRegistrar from "game/entity/action/usable/UsableActionRegistrar";
 import type { ActionWhichTranslation } from "game/entity/action/usable/UsableActionTranslator";
 import type Player from "game/entity/player/Player";
@@ -43,9 +43,9 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     id: ActionId;
     constructor(requirements: REQUIREMENTS, definition: DEFINITION);
     isExecutable(): this is UsableAction<REQUIREMENTS, IUsableActionDefinitionExecutable<REQUIREMENTS>>;
-    execute(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): boolean;
+    execute(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): boolean;
     resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>): false | IUsableActionUsing<REQUIREMENTS>;
-    isUsable(player: Player, provided: IUsableActionUsing<REQUIREMENTS>): UsableActionUsability<REQUIREMENTS>;
+    isUsable(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): UsableActionUsability<REQUIREMENTS>;
     isApplicable(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean): provided is IUsableActionUsing<REQUIREMENTS>;
     private isItemApplicable;
     private isDoodadApplicable;

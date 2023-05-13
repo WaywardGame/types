@@ -121,6 +121,7 @@ export default class Doodad extends Entity<IDoodadDescription, DoodadType, Dooda
     get asPlayer(): undefined;
     get asTileEvent(): undefined;
     get asItem(): undefined;
+    get asContainer(): this & IContainer | undefined;
     toString(): string;
     getRegistrarId(): number;
     /**

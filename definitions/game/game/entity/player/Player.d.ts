@@ -9,15 +9,15 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IEventEmitter } from "event/EventEmitter";
-import { CreatureType } from "game/entity/creature/ICreature";
+import { TileUpdateType } from "game/IGame";
 import Human from "game/entity/Human";
 import { EntityType } from "game/entity/IEntity";
 import { SkillType } from "game/entity/IHuman";
+import { CreatureType } from "game/entity/creature/ICreature";
 import type { IMovementIntent, IPlayerEvents } from "game/entity/player/IPlayer";
 import MessageManager from "game/entity/player/MessageManager";
 import NoteManager from "game/entity/player/note/NoteManager";
 import QuestManager from "game/entity/player/quest/QuestManager";
-import { TileUpdateType } from "game/IGame";
 import type { IslandId } from "game/island/IIsland";
 import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";

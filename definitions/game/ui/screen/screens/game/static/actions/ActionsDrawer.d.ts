@@ -99,6 +99,7 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     get configuringSlotData(): number | undefined;
     private current?;
     private savedUsing?;
+    get oldUsing(): IActionBarSlotData["using"];
     constructor();
     open(number: number, slot: IActionBarSlotData): Promise<this>;
     refresh(updateSavedUsing?: boolean): this;
