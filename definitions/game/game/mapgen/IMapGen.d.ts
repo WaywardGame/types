@@ -60,6 +60,7 @@ export interface IMapGenGenerateInput {
     getHeightMap(x: number, y: number): number;
     getBiomeHeightMap(x: number, y: number): number;
     getRandomQuality(tileType: number): number;
+    getTileGen(x: number, y: number, z: number): number;
     setTileGen(x: number, y: number, z: number, value: number): void;
     setDoodad(type: MapGenDoodadTrees, compatOverride?: boolean): number;
     setTileVein(x: number, y: number, z: number, value: number, terrainType: number): void;

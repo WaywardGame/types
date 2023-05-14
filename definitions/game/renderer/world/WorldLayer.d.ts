@@ -16,8 +16,13 @@ import type { ITileUpdate, onDoodadUpdateDelegate, onTileUpdateDelegate, Terrain
 import { TerrainMask } from "renderer/world/IWorldLayer";
 import type { IColorGrid, IWorldLayerCPP } from "@cplusplus/index";
 import type Tile from "game/tile/Tile";
-export default class WorldLayer {
-    readonly island: Island;
+import type { IPreSerializeCallback } from "save/serializer/ISerializer";
+import type World from "renderer/world/World";
+export default class WorldLayer implements IPreSerializeCallback {
+    /**
+     * Run length encoded light block map to ensure FieldOfView.canSeePosition is always synced correctly.
+     */
+    encodedLightBlockMap: Uint32Array | undefined;
     readonly width: number;
     readonly height: number;
     readonly z: WorldZ;
@@ -25,17 +30,21 @@ export default class WorldLayer {
      * Light level for the renderer.
      * Updated in FieldOfView.computeLightMap
      */
-    readonly lightLevelMap: IColorGrid;
+    lightLevelMap: IColorGrid;
     /**
      * Light blocks - changed via tileUpdate event
      */
-    readonly lightBlockMap: IByteGrid;
+    lightBlockMap: IByteGrid;
+    island: Island;
     onTileUpdates: Map<number, onTileUpdateDelegate>;
     onDoodadUpdates: Map<number, onDoodadUpdateDelegate>;
-    private readonly terrainMap;
-    readonly instance: IWorldLayerCPP;
-    constructor(island: Island, width: number, height: number, z: WorldZ);
-    delete(): void;
+    private terrainMap;
+    instance: IWorldLayerCPP | undefined;
+    private _loadedLighting;
+    constructor(width: number | undefined, height: number, z: WorldZ);
+    preSerializeObject(): void;
+    load(world: World): void;
+    unload(): void;
     getTileType(x: number, y: number): TerrainType;
     getTile(x: number, y: number): TerrainData;
     getType(terrain: TerrainData): TerrainType;
@@ -58,4 +67,10 @@ export default class WorldLayer {
      * This must be synced with the loop in WorldLayer::BatchUpdateLightBlockValues c++
      */
     private mapIndex;
+    /**
+     * The pointer to the views might change when emscripten grows memory
+     * So we need to refetch it sometimes
+     * The array length is 0 when the view is invalid
+     */
+    private updateViews;
 }

@@ -12,32 +12,38 @@ import EventEmitter from "event/EventEmitter";
 import { TileUpdateType } from "game/IGame";
 import type Island from "game/island/Island";
 import type Tile from "game/tile/Tile";
-import type { WorldZ } from "game/WorldZ";
+import { WorldZ } from "game/WorldZ";
 import WorldLayer from "renderer/world/WorldLayer";
-import type { ISerializable, ISerializer } from "save/serializer/ISerializer";
+import { type ISerializable, type ISerializer } from "save/serializer/ISerializer";
 export interface IWorldEvents {
     updateTile(tile: Tile, tileUpdateType: TileUpdateType): any;
 }
 export default class World extends EventEmitter.Host<IWorldEvents> implements ISerializable {
     readonly island: Island;
+    readonly layers: Map<WorldZ, WorldLayer>;
     width: number;
     height: number;
-    layers: Record<number, WorldLayer>;
-    private batchTileUpdate;
-    private layerUpdatesSuspended;
+    private _batchTileUpdate;
+    private _layerUpdatesSuspended;
     private _loaded;
-    constructor(island: Island, width: number, height: number);
-    delete(): void;
+    private _setupTiles;
+    constructor(island: Island);
+    /**
+     * Called after the island map size is configured
+     */
+    initialize(): void;
+    addLayer(z: WorldZ): void;
+    load(): void;
+    unload(): void;
+    updateAll(): void;
     get loaded(): boolean;
     toLocal(world: number, local: number): number;
-    addLayer(level: WorldZ): void;
-    load(): void;
     suspendLayerUpdates(): void;
     resumeLayerUpdates(): void;
     updateTile(tile: Tile, tileUpdateType: TileUpdateType, updateNeighbors?: boolean, skipFlowFieldUpdate?: boolean): void;
     updateTileLayer(tile: Tile, updateNeighbors: boolean | undefined, flushTileImmediately: boolean): void;
     startUpdateTileBatch(): void;
     endUpdateTileBatch(): void;
-    serializeObject(_serializer: ISerializer): undefined;
-    deserializeObject(serializer: ISerializer): boolean;
+    serializeObject(_serializer: ISerializer): this;
+    deserializeObject(serializer: ISerializer): boolean | undefined;
 }

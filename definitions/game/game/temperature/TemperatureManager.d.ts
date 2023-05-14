@@ -150,7 +150,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     protected onPlayerIdChanged(player: Player): void;
     protected onCreateOrRemoveObject(_: any, object: Doodad | TileEvent | Creature | NPC): void;
     protected onEntityMove(object: EntityMovable, lastTile: Tile, tile: Tile): void;
-    protected onUpdateTile(island: Island, tile: Tile, oldType: TerrainType): void;
+    protected onTerrainChange(island: Island, tile: Tile, oldType: TerrainType): void;
     protected onItemContainerAdd(itemManager: ItemManager, items: Item[], container?: IContainer): void;
     protected onItemContainerRemove(itemManager: ItemManager, items: Item[], container: IContainer | undefined, containerTile: Tile | undefined): void;
     protected onItemFireUpdate(item: Item): void;

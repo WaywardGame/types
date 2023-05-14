@@ -73,6 +73,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly temperature: TemperatureManager;
     readonly tileEvents: TileEventManager;
     readonly time: TimeManager;
+    readonly world: World;
     saveBuildTime?: number;
     saveVersion: string;
     biomeType: BiomeTypes;
@@ -110,7 +111,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     spawnPoint: IVector3;
     private _loadedReferences;
     private _tiles;
-    private _world;
     modifiersCollection?: IslandModifiersCollection;
     details?: IIslandDetails;
     private _ranUpgrade;
@@ -128,7 +128,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     get tiles(): Record<number, Tile | undefined>;
     get hasLoadedItemReferences(): boolean;
     get isLocalIsland(): boolean;
-    get world(): World;
     /**
      * Check if this island has players on it
      */

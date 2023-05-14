@@ -103,7 +103,8 @@ export declare enum MultiplayerSyncCheck {
     TileEvent = 63,
     Time = 64,
     UpdateDirection = 65,
-    Weight = 66
+    Weight = 66,
+    WorldUpdateTile = 67
 }
 export declare const maxPlayers = 32;
 export declare const packetTickRate = 16;
@@ -218,6 +219,7 @@ export interface IMultiplayerRunSafelyOptions {
     isSynced: boolean;
     pauseGame?: PauseSource;
     pauseIncomingPacketProcessing?: boolean;
+    suppressSyncChecks?: boolean;
     showLoadingScreen?: {
         load: Load;
         args?: any[];
