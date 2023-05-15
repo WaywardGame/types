@@ -15,6 +15,9 @@ export declare enum UpdateUiInfoPacketType {
     DialogContainerInfo = 1,
     ContainerSortInfo = 2
 }
+/**
+ * Updates a clients UI data (for old ui)
+ */
 export default class UpdateUiInfoPacket extends PlayerTargetedServerPacket {
     type: UpdateUiInfoPacketType;
     index: string | number;

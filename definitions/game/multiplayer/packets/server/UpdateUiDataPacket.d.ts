@@ -10,9 +10,14 @@
  */
 import type Player from "game/entity/player/Player";
 import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServerPacket";
-export default class UiDataUpdatePacket extends PlayerTargetedServerPacket {
-    static create(player: Player, updates: Map<string | number, Record<string, any>>): UiDataUpdatePacket;
+/**
+ * Updates a clients UI data (for new ui)
+ */
+export default class UpdateUiDataPacket extends PlayerTargetedServerPacket {
+    static create(player: Player, updates: Map<string | number, Record<string, any>>): UpdateUiDataPacket;
     updates: Map<string | number, Record<string, any>>;
     getDebugInfo(): string;
+    isSyncCheckEnabled(): boolean;
+    isAllowedWhenPaused(): boolean;
     process(): void;
 }
