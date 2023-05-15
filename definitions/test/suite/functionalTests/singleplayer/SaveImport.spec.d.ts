@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { TestConfig } from "@wayward/test";
-import type { IPaths } from "@wayward/test/interfaces";
+import { type IPaths } from "@wayward/test/interfaces";
 export default function (paths: IPaths, config: TestConfig): void;

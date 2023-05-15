@@ -30,7 +30,8 @@ export declare enum MenuBarButtonType {
     Equipment = 11,
     Skills = 12,
     Islands = 13,
-    ActionsItems = 14
+    ActionsItems = 14,
+    Dismantle = 15
 }
 export declare const DEFAULT_MENU_BAR_BUTTON_ORDER: {
     0: number;
@@ -48,6 +49,7 @@ export declare const DEFAULT_MENU_BAR_BUTTON_ORDER: {
     12: number;
     13: number;
     14: number;
+    15: number;
 };
 export interface IMenuBarButtonDescription extends IModdable, IHasImagePath {
     /**

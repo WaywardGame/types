@@ -10,11 +10,15 @@
  */
 import type Player from "game/entity/player/Player";
 import { Milestone } from "game/milestones/IMilestone";
+import Bindable from "ui/input/Bindable";
 import Dialog from "ui/screen/screens/game/component/Dialog";
+import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 export default class MilestonesDialog extends Dialog {
     private readonly milestones;
     private readonly sortRow;
     constructor();
+    getBindable(): Bindable;
+    getIcon(): MenuBarButtonType;
     onPlayerChangeTitle(player: Player, milestone?: Milestone): void;
     onMilestoneUpdate(_: any, milestone: Milestone): void;
     private sort;

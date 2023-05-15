@@ -9,15 +9,15 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IEventEmitter } from "event/EventEmitter";
-import { CreatureType } from "game/entity/creature/ICreature";
+import { TileUpdateType } from "game/IGame";
 import Human from "game/entity/Human";
 import { EntityType } from "game/entity/IEntity";
 import { SkillType } from "game/entity/IHuman";
+import { CreatureType } from "game/entity/creature/ICreature";
 import type { IMovementIntent, IPlayerEvents } from "game/entity/player/IPlayer";
 import MessageManager from "game/entity/player/MessageManager";
 import NoteManager from "game/entity/player/note/NoteManager";
 import QuestManager from "game/entity/player/quest/QuestManager";
-import { TileUpdateType } from "game/IGame";
 import type { IslandId } from "game/island/IIsland";
 import type { IContainer } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
@@ -88,7 +88,14 @@ export default class Player extends Human implements IPreSerializeCallback, IUns
      */
     prompt(type: Prompt, ...args: any[]): Promise<boolean | InterruptChoice>;
     updateActionSlots(slots: number[], data: IActionBarSlotData[], enabled?: boolean): void;
+    /**
+     * Send a packet to the server about the dialog info for the dialog
+     */
     updateDialogInfo(dialogIndex: string | number | undefined): void;
+    /**
+     * Send a packet to the server about the sort info for the container
+     */
+    updateContainerSortInfo(dialogIndex: string | number): void;
     getDialogInfo(dialogIndex: string | number): IDialogInfo | undefined;
     kill(): void;
     respawn(reset: boolean): void;

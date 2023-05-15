@@ -195,9 +195,9 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
     isNearby(executor: Entity, allowNearby?: boolean): boolean;
     /**
      * Fixes item issues.
-     * Note: Be careful with what gets fixed in multiplayer! (when onlyRestoreIslandIds is set)
+     * Note: Be careful with what gets fixed in multiplayer!
      */
-    verifyAndFixItem(allowFixes: boolean): void;
+    verifyAndFixItem(): void;
     /**
      * @param source A string representing the reason for this damage. Used for multiplayer debugging. Just put a unique string of characters here
      * @param modifier The amount of damage to take. Defaults to 1.

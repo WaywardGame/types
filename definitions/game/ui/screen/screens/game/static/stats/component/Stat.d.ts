@@ -45,7 +45,8 @@ export declare abstract class StatComponent extends Component {
      * Returns the display priority for this stat.
      */
     getDisplayOrder(): number;
-    abstract getDisplayElement(): Text;
+    abstract getTextElement(): Text;
+    abstract getDisplayElement(): Component;
     /**
      * Returns the generic string representation of this stat.
      */
@@ -76,7 +77,8 @@ export declare class Statbar extends StatComponent {
     private readonly bar;
     private readonly text;
     constructor(entity: EntityWithStats, stat: Stat, noEvents?: true);
-    getDisplayElement(): Text;
+    getTextElement(): Text;
+    getDisplayElement(): Component<HTMLElement>;
     getGenericStatValue(stat: IStatMax): IStringSection[];
     /**
      * Overrides the superclass method of the same name. Calls the superclass method, then updates the CSS
@@ -88,6 +90,7 @@ export declare class Statbar extends StatComponent {
 export declare class StatAttribute extends StatComponent {
     private readonly attribute;
     constructor(entity: EntityWithStats, stat: Stat, noEvents?: true);
+    getTextElement(): Text;
     getDisplayElement(): Text;
 }
 export declare class Statbars extends StatsContainer<Statbar> {

@@ -357,6 +357,10 @@ export default abstract class Human<TypeType extends number = number> extends En
     protected resetDefense(skipStatChangedEvent?: boolean): void;
     protected swimAndSootheCheck(): void;
     /**
+     * Chance to stop frostbite when next to a fire
+     */
+    protected fireSootheCheck(): void;
+    /**
      * Event handler for when a status effect is applied or removed.
      */
     protected onStatusEffectChanged(status: StatusType, level: number): void;

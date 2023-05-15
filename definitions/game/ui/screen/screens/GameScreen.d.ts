@@ -49,7 +49,9 @@ export default class GameScreen extends Screen {
     private readonly gameCanvas;
     private readonly effects;
     private readonly placeholders;
-    private readonly islandIntroWrapper;
+    private readonly popupOverlayWrapper;
+    private islandIntroPopupOverlay?;
+    private readonly pausedPopupOverlay;
     private readonly buttonRespawn;
     constructor();
     getQuadrantComponents(): import("@wayward/goodstream").default<QuadrantComponent>;
@@ -57,6 +59,8 @@ export default class GameScreen extends Screen {
     getQuadrantContainer(): Component<HTMLElement>;
     isMouseWithin(): Component<HTMLElement> | undefined;
     mouseStartWasWithin(api: IBindHandlerApi): boolean | undefined;
+    private readonly cinematicModeReasons;
+    toggleCinematicMode(enabled: boolean, reason: string): this;
     onGameStart(game: Game, _isLoadingSave: boolean, _playedCount: number): void;
     onLoadedOnIsland(player: Player, island: Island): void;
     private showIslandIntro;

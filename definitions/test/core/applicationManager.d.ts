@@ -56,7 +56,10 @@ export declare class Apps {
     getTestState(): Promise<ITestState>;
     startAll(): Promise<void>;
     lastTestState?: ITestState;
-    stopAll(): Promise<Map<string, string[]>>;
+    stopAll(): Promise<Map<string, {
+        logs: string[];
+        errorsAreFatal: boolean;
+    }>>;
     get(): readonly Application[];
     getLogs(): string[];
     verifyGameStates(): Promise<void>;

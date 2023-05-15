@@ -12,10 +12,12 @@ import { EquipType } from "game/entity/IHuman";
 import type Item from "game/item/Item";
 import Component from "ui/component/Component";
 import type { IBindHandlerApi } from "ui/input/Bind";
+import Bindable from "ui/input/Bindable";
 import Dialog from "ui/screen/screens/game/component/Dialog";
 import type { IItemDropApi, IItemPickUpApi, ItemSlot } from "ui/screen/screens/game/component/Item";
 import ItemComponent, { ItemRefreshType } from "ui/screen/screens/game/component/Item";
 import EquipmentSlotTooltipHandler from "ui/screen/screens/game/dialog/equipment/EquipmentSlotTooltip";
+import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 export declare enum EquipmentClasses {
     Main = "game-dialog-equipment",
     Body = "game-dialog-equipment-body",
@@ -27,12 +29,14 @@ export declare enum EquipmentClasses {
     SlotsWrapper = "game-dialog-equipment-slots-wrapper"
 }
 export declare namespace EquipmentClasses {
-    const SlotType: (enumValue: EquipType) => "game-dialog-equipment-slot-head" | "game-dialog-equipment-slot-none" | "game-dialog-equipment-slot-held" | "game-dialog-equipment-slot-legs" | "game-dialog-equipment-slot-chest" | "game-dialog-equipment-slot-waist" | "game-dialog-equipment-slot-feet" | "game-dialog-equipment-slot-neck" | "game-dialog-equipment-slot-hands" | "game-dialog-equipment-slot-back" | "game-dialog-equipment-slot-mainhand" | "game-dialog-equipment-slot-offhand";
+    const SlotType: (enumValue: EquipType) => "game-dialog-equipment-slot-none" | "game-dialog-equipment-slot-head" | "game-dialog-equipment-slot-held" | "game-dialog-equipment-slot-legs" | "game-dialog-equipment-slot-chest" | "game-dialog-equipment-slot-waist" | "game-dialog-equipment-slot-feet" | "game-dialog-equipment-slot-neck" | "game-dialog-equipment-slot-hands" | "game-dialog-equipment-slot-back" | "game-dialog-equipment-slot-mainhand" | "game-dialog-equipment-slot-offhand";
 }
 export default class EquipmentDialog extends Dialog {
     readonly slots: Component<HTMLElement>;
     readonly tooltipHandler: EquipmentSlotTooltipHandler;
     constructor();
+    getBindable(): Bindable;
+    getIcon(): MenuBarButtonType;
     protected onClearActionSlot(api: IBindHandlerApi): boolean;
 }
 export declare class EquipmentSlot extends ItemComponent {

@@ -43,6 +43,7 @@ export interface IDedicatedServerInfo {
     sshPassword?: string;
     devMode: boolean;
     syncChecks: MultiplayerSyncCheckLevel;
+    gameCode?: string;
 }
 export interface IBuild {
     name: string;

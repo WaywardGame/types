@@ -119,6 +119,7 @@ export declare class ActionSlot extends Button implements IRefreshable {
     readonly slotted: ActionSlotSlottedContainer;
     readonly useOnMoveIndicator: Component<HTMLElement>;
     private lastItem?;
+    private lastQuality?;
     usability: ReturnableUsableActionUsability;
     constructor(number: number, slotData: IActionBarSlotData);
     refresh(): this;

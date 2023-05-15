@@ -119,7 +119,6 @@ export default class Renderer extends EventEmitter.Host<IRendererEvents> {
      */
     protected static gameRenderLoop: (timeStamp: number) => void;
     private render;
-    private shouldUpdateWorldRender;
     private registerOriginEvents;
     private unregisterOriginEvents;
     private registerIslandEvents;

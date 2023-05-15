@@ -10,7 +10,7 @@
  */
 import type { BiomeType } from "game/biome/IBiome";
 import Doodad from "game/doodad/Doodad";
-import type { IActionHandlerApi } from "game/entity/action/IAction";
+import type { IActionHandlerApi, IActionNotUsable } from "game/entity/action/IAction";
 import { ActionType } from "game/entity/action/IAction";
 import Human from "game/entity/Human";
 import type NPC from "game/entity/npc/NPC";
@@ -134,7 +134,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      * @returns Tile or undefined
      */
     getTile(itemOrContainer?: Item | IContainer): Tile | undefined;
-    resolveContainer(container?: IContainer): Player | Doodad | Item | NPC | IContainer | Tile | undefined;
+    resolveContainer(container?: IContainer): Player | Item | Doodad | NPC | Tile | IContainer | undefined;
     getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
     hashContainer(containable: IContainable, containerReferenceSource?: ContainerReferenceSource): string;
@@ -168,6 +168,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      * @returns Result that tells you what moved
      */
     moveItemsToContainer(human: Human | undefined, items: Item[], toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult;
+    tryMoveItemsToContainer(human: Human | undefined, items: Item[], toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult | IActionNotUsable;
     removeContainerItems(container: IContainer, removeContainedItems?: boolean): void;
     exists(item: Item): boolean;
     remove(item: Item, removeContainedItems?: boolean, extinguishTorches?: boolean): void;

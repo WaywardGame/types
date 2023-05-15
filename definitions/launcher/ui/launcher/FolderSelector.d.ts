@@ -12,6 +12,7 @@ import type { ComponentEventManager, ComponentEvents } from "ui/component/Compon
 import Component from "ui/component/Component";
 import Section from "ui/component/Section";
 import FolderButton from "ui/launcher/FolderButton";
+import type Data from "utilities/Data";
 export interface IFolderSelectorEvents extends ComponentEvents<Section> {
     addNew: {
         folders: IFolder[];
@@ -33,10 +34,11 @@ export declare enum FolderSelectorClasses {
     AddNewButton = "folder-selector-add-new-button"
 }
 declare abstract class FolderSelector extends Section {
+    protected readonly data: Data;
     event: ComponentEventManager<this, IFolderSelectorEvents>;
     readonly optionsWrapper: Component;
-    constructor();
-    getSelectedFolderPath(): string | null;
+    constructor(data: Data);
+    getSelectedFolderPath(): string | undefined;
     getFolders(): IFolder[];
     refresh(): void;
     protected select(button: FolderButton): void;
@@ -53,7 +55,7 @@ declare abstract class FolderSelector extends Section {
 declare namespace FolderSelector {
     abstract class WithDefault extends FolderSelector {
         readonly defaultButton: FolderButton;
-        constructor();
+        constructor(data: Data);
         protected abstract getDefaultFolder(): IFolder;
         protected select(button?: FolderButton): void;
         getSelectedFolderPath(): string;

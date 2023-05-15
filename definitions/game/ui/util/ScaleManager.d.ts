@@ -11,6 +11,7 @@
 export default class ScaleManager {
     private scale;
     get scaleNativeFactor(): number;
+    constructor();
     /**
      * Returns the minimum scale we allow, 0.5.
      */
@@ -38,5 +39,7 @@ export default class ScaleManager {
     /**
      * Updates the UI scale based on the current viewport.
      */
-    update(): void;
+    update(force?: boolean): void;
+    private lastScaleFactor;
+    checkScaleFactor(): void;
 }

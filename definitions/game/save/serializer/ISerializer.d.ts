@@ -45,7 +45,7 @@ export interface ISerializerOptions {
 }
 export interface ISerializable {
     serializeObject(serializer: ISerializer): object | undefined;
-    deserializeObject(serializer: ISerializer, dataType: Types): boolean;
+    deserializeObject(serializer: ISerializer, dataType: Types): boolean | undefined;
 }
 export interface IPreSerializeCallback {
     preSerializeObject(serializer: ISerializer): void;
@@ -115,7 +115,8 @@ export declare enum Types {
     ItemReference = 45,
     StringTokenizer = 46,
     MagicalPropertyManager = 47,
-    ItemMapManager = 48
+    ItemMapManager = 48,
+    WorldLayer = 49
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_SAVE_PROPERTY_FLAGS: unique symbol;

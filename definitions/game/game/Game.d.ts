@@ -165,7 +165,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     updateGameOptions(gameOptions: IGameOptions): void;
     initializeGameOptions(seed: string | number, mode?: GameMode, options?: IGameOptions, milestoneModifiers?: Set<Milestone>): void;
     initializeModifiers(): void;
-    getMovementTime(delay: Delay | number): IMovementTime;
+    getMovementTime(delay: Delay | number, timestamp?: number): IMovementTime;
     getMovementProgress(timeStamp: number, movementTime: IMovementTime | undefined): number;
     getSynchronizeState(identifier: string): ISynchronizeState;
     synchronizeState(synchronizeState: ISynchronizeState): void;

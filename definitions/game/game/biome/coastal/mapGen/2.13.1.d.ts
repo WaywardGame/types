@@ -8,12 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-declare namespace Functions {
-    const noOp: () => void;
-    const noOpString: () => string;
-    const noOpZero: () => number;
-    const noOpNull: () => null;
-    const noOpFalse: () => boolean;
-    const noOpTrue: () => boolean;
-}
-export default Functions;
+import type { IBiomeMapGen } from "game/mapgen/IMapGen";
+export declare const coastalMapGen2131: IBiomeMapGen;

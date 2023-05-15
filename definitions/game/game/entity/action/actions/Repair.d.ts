@@ -21,5 +21,5 @@ export interface IRepairCanUse extends IActionUsable {
     itemDescription?: IItemDescription;
     repaireeIsItem: boolean;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Undefined]], import("../../Human").default<number>, void, IRepairCanUse, [Item, (Doodad | Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Undefined]], import("../../Human").default<number>, void, IRepairCanUse, [Item, (Item | Doodad | undefined)?]>;
 export default _default;

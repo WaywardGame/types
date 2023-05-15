@@ -107,7 +107,7 @@ declare module Translation {
     const misc: (entry: string | MiscTranslation) => TranslationImpl;
     const skill: (entry: string | SkillType, color?: boolean) => TranslationImpl;
     const milestone: (entry: string | Milestone, color?: boolean) => TranslationImpl;
-    const stat: (entry: string | Stat, color?: boolean) => TranslationImpl;
+    const stat: (entry: string | Stat, color?: boolean, ref?: boolean) => TranslationImpl;
     const equipSlot: (entry: string | EquipType, type?: EquipSlotTranslation) => TranslationImpl;
     const quality: (entry: string | Quality, color?: boolean) => TranslationImpl;
     /**

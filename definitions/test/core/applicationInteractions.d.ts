@@ -9,15 +9,15 @@
  * https://github.com/WaywardGame/types/wiki
  */
 /// <reference types="webdriverio/async" />
-import type { TestRunContext } from "@wayward/test/testRunner";
 import type { IInit } from "@wayward/game/Init";
 import type { Stat } from "@wayward/game/game/entity/IStats";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { Random } from "@wayward/game/utilities/random/Random";
-import { ApplicationLogger } from "@wayward/test/core/applicationLogger";
 import { ApplicationDom } from "@wayward/test/core/applicationDom";
-import type { IWaitUntilGameLoadedOptions, IDedicatedServerGameOptions, INewGameOptions, ITestJoinServerOptions } from "@wayward/test/interfaces";
+import { ApplicationLogger } from "@wayward/test/core/applicationLogger";
+import type { IDedicatedServerGameOptions, INewGameOptions, ITestJoinServerOptions, IWaitUntilGameLoadedOptions } from "@wayward/test/interfaces";
+import type { TestRunContext } from "@wayward/test/testRunner";
 export default class ApplicationInteractions {
     protected readonly testContext: TestRunContext;
     readonly appId: string;

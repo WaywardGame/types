@@ -65,10 +65,15 @@ export interface IIslandEvents {
      */
     loadedReferences(): void;
     /**
-     * Called when loading an island and the world is created
+     * Called when the world is created
      * @param world World object
      */
     createWorld(world: World): any;
+    /**
+     * Called when right before the world is loaded
+     * @param world World object
+     */
+    preLoadWorld(world: World): any;
     /**
      * Called after the world is generating
      * @param generateNewWorld True if a new world is being generated
@@ -107,7 +112,6 @@ export interface IIslandLoadOptions {
      * Set to true when the island load is happening for everyone eveywhere all at once
      */
     isSynced: boolean;
-    isNewSave?: boolean;
     travelTime?: number;
     pauseAndShowLoadingScreen?: boolean;
     multiplayerLoadingDescription?: MultiplayerLoadingDescription;

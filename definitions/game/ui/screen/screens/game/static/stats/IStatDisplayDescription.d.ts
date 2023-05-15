@@ -10,7 +10,7 @@
  */
 import type { IHasImagePath } from "game/IObject";
 import type EntityWithStats from "game/entity/EntityWithStats";
-import type { IStat, StatDisplayType } from "game/entity/IStats";
+import type { IStat, IStatBase, StatDisplayType } from "game/entity/IStats";
 import type { Reference } from "game/reference/IReferenceManager";
 import type { IModdable } from "mod/ModRegistry";
 import type Component from "ui/component/Component";
@@ -60,3 +60,28 @@ export interface IStatDisplayDescription extends IModdable, IHasImagePath<string
     subscribeCalculateEquipmentStats?: true;
 }
 export declare const STAT_DEFAULT_DISPLAY_ORDER = 100;
+export interface IStatInfo extends Partial<IStatBase> {
+    value: number;
+    percent: number;
+    oldValue?: number;
+}
+/**
+ * Returns a `IStatDescription["onChange"]` handler that will check a predicate and run the handler with the result of that predicate.
+ * @param predicate A function that takes an `IStatInfo` object and returns whether it "matches".
+ * @param handler A function that takes whether the info matches, the `statElement`, the entity, and the `IStatInfo` object and "handles" it.
+ */
+export declare function when(predicate: (info: IStatInfo, entity: EntityWithStats) => boolean, handler: (matched: boolean, statElement: Component, entity: EntityWithStats, info: IStatInfo) => any): (statElement: Component, entity: EntityWithStats, stat: IStat, oldValue?: number) => void;
+/**
+ * Returns a `when()` handler that will toggle classes on a `statElement` based on whether the `predicate` matched.
+ */
+export declare function toggleClasses(...classes: string[]): (matched: boolean, statElement: Component) => void;
+/**
+ * Returns a `when()` handler that will discover a stat when the `predicate` matches.
+ */
+export declare function discover(matched: boolean, statElement: Component, entity: EntityWithStats, stat: IStatInfo): void;
+/**
+ * Shakes the stat element if `shouldShake` is true, otherwise removes the `shake` class.
+ *
+ * When adding the `shake` class, removes it after 250 ms.
+ */
+export declare function shake(shouldShake: boolean, statElement: Component): Promise<void>;

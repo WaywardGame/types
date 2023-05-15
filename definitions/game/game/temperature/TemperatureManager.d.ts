@@ -30,6 +30,7 @@ import type { IPreSerializeCallback } from "save/serializer/ISerializer";
 import type { IVector3 } from "utilities/math/IVector";
 import { IRange } from "utilities/math/Range";
 import Vector2 from "utilities/math/Vector2";
+export declare const TEMPERATURE_DIFFUSION_RATE: number;
 export declare const TEMPERATURE_BOUNDARY_MIN_VEC2: Vector2;
 export declare const TEMPERATURE_INVALID = 255;
 export interface ITemperatureManagerEvents {
@@ -121,7 +122,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     /**
      * Returns the temperature of the given tile, produced by combining the temperatures of each type.
      */
-    private getTile;
+    getTile(tile: Tile, serverSideSource: GetterOfOr<string> | undefined): number;
     /**
      * Returns the temperature on the tile of the given type. IE, some things can produce "cold", and some things can produce "heat",
      * and both of them are cached per-tile.
@@ -149,7 +150,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     protected onPlayerIdChanged(player: Player): void;
     protected onCreateOrRemoveObject(_: any, object: Doodad | TileEvent | Creature | NPC): void;
     protected onEntityMove(object: EntityMovable, lastTile: Tile, tile: Tile): void;
-    protected onUpdateTile(island: Island, tile: Tile, oldType: TerrainType): void;
+    protected onTerrainChange(island: Island, tile: Tile, oldType: TerrainType): void;
     protected onItemContainerAdd(itemManager: ItemManager, items: Item[], container?: IContainer): void;
     protected onItemContainerRemove(itemManager: ItemManager, items: Item[], container: IContainer | undefined, containerTile: Tile | undefined): void;
     protected onItemFireUpdate(item: Item): void;

@@ -36,6 +36,11 @@ export interface INPCEvents extends Events<Human> {
      * @returns True if the npc can move, false if the npc cannot move, or undefined to use the default logic
      */
     canNPCMove(tile: Tile, moveType: MoveType): boolean | undefined;
+    /**
+     * Called when a npc tries to attack
+     * @returns True if the npc can attack, false if the npc cannot attack, or undefined to use the default logic
+     */
+    canNPCAttack(): boolean | undefined;
 }
 export default abstract class NPC extends Human<NPCType> {
     protected static registrarId: number;
@@ -170,7 +175,7 @@ export default abstract class NPC extends Human<NPCType> {
     protected changeZ(toZ: number, fromZ: number): boolean | void | undefined;
     protected updateTile(fromTile: Tile, toTile: Tile): boolean;
     protected postMove(): void;
-    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): 0 | -1 | -2 | -3 | -4 | -5 | -6;
+    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): 0 | -1 | -2 | -5 | -4 | -6 | -3;
     getWeightOrStaminaMovementPenalty(): number;
     get asMerchant(): MerchantNPC | undefined;
     get asShipper(): ShipperNPC | undefined;

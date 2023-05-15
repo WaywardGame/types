@@ -40,6 +40,7 @@ export interface IUsableActionRequirement<TYPE> {
 export interface IUsableActionItemRequirement extends Omit<IUsableActionRequirement<Item>, "find"> {
     allowOnlyItemType?(player: Player, type: ItemType): boolean;
     finder?(player: Player): ItemFinder | undefined;
+    requiresQuality?: true;
 }
 export declare namespace IUsableActionRequirement {
     interface Maybe<TYPE> {
@@ -66,7 +67,7 @@ export interface IUsableActionPossibleUsing {
 export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequirements> {
     item: ((REQUIREMENTS["item"] extends true ? Item : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
         allowNone: true;
-    } ? undefined : never) | (REQUIREMENTS["item"] extends {
+    } ? Item | undefined : never) | (REQUIREMENTS["item"] extends {
         validate(player: Player, value: Item): boolean;
     } ? Item : never) | (REQUIREMENTS["item"] extends {
         finder: ItemFinder;
@@ -74,14 +75,23 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
         allowOnlyItemType(player: Player, type: ItemType): boolean;
     } ? undefined : never));
     itemType: ((REQUIREMENTS["item"] extends true ? ItemType : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
-        allowNone: true;
-    } ? undefined : never) | (REQUIREMENTS["item"] extends {
+        allowOnlyItemType(player: Player, type: ItemType): boolean;
+    } ? ItemType : never) | (REQUIREMENTS["item"] extends {
         validate(player: Player, value: Item): boolean;
     } ? ItemType | undefined : never) | (REQUIREMENTS["item"] extends {
         finder: ItemFinder;
     } ? ItemType : never) | (REQUIREMENTS["item"] extends {
+        allowNone: true;
+    } ? undefined : never));
+    itemQuality: ((REQUIREMENTS["item"] extends true ? Quality : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
+        allowNone: true;
+    } ? undefined : never) | (REQUIREMENTS["item"] extends {
+        validate(player: Player, value: Item): boolean;
+    } ? Quality | undefined : never) | (REQUIREMENTS["item"] extends {
+        finder: ItemFinder;
+    } ? Quality : never) | (REQUIREMENTS["item"] extends {
         allowOnlyItemType(player: Player, type: ItemType): boolean;
-    } ? ItemType : never));
+    } ? Quality : never));
     doodad: ((REQUIREMENTS["doodad"] extends true ? Doodad : never) | (undefined extends REQUIREMENTS["doodad"] ? undefined : never) | (REQUIREMENTS["doodad"] extends {
         allowNone: true;
     } ? undefined : never) | (REQUIREMENTS["doodad"] extends {
@@ -123,8 +133,9 @@ export declare namespace IUsableActionNotUsable {
 }
 export type UsableActionUsability<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> = IUsableActionUsable<REQUIREMENTS> | IUsableActionNotUsable;
 export declare enum UsableActionExecutionContext {
-    ContextMenu = 0,
-    ActionBar = 1
+    Generic = 0,
+    ContextMenu = 1,
+    ActionBar = 2
 }
 export interface IUsableActionExecutionContext {
     context: UsableActionExecutionContext;
@@ -193,7 +204,7 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
      * @param player The player executing this action. This isn't always the local player!
      * @param using What the player is using — items, doodads, etc.
      */
-    isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>): ReturnableUsableActionUsability;
+    isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): ReturnableUsableActionUsability;
     /**
      * Marks this "action" as a submenu container instead of an executable. Is a generator for the submenu.
      * @param registrar The registrar that submenu actions should be appended to.
@@ -215,22 +226,28 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
      * @param using What the player is using — items, doodads, etc.
      * @param context Context to do with this action execution — where it's executed from, etc.
      */
-    execute?(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): any;
+    execute?(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): any;
     /**
      * Marks this usable action as only executable client-side. This disables support for "use when moving" in action slots.
      */
     clientSide?: true;
     /**
      * Marks this usable action as, when slotted in the action bar on an item, the item should be ignored and instead the type should be used.
+     * Compatible with onlySlotItemQuality
      */
     onlySlotItemType?: true;
+    /**
+     * Marks this usable action as, when slotted in the action bar on an item, the item should be ignored and instead the quality should be used.
+     * Compatible with onlySlotItemType
+     */
+    onlySlotItemQuality?: true;
     tooltip?(tooltip: Tooltip): any;
     forceDisplayWhenEmpty?: true;
 }
 export interface IUsableActionDefinitionSubmenu<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {
     submenu(registrar: UsableActionRegistrar, using: IUsableActionUsing<REQUIREMENTS>): UsableActionRegistrar | void;
     execute?: undefined;
-    isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>): ReturnableUsableActionUsability;
+    isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): ReturnableUsableActionUsability;
     slottable?: undefined;
     forceDisplayWhenEmpty?: true;
 }
@@ -240,7 +257,7 @@ export interface IUsableActionDefinitionExecutable<REQUIREMENTS extends IUsableA
     submenu?: undefined;
     forceDisplayWhenEmpty?: undefined;
     execute(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): any;
-    isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>): ReturnableUsableActionUsability;
+    isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): ReturnableUsableActionUsability;
 }
 export type IUsableActionDefinition<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> = IUsableActionDefinitionSubmenu<REQUIREMENTS> | IUsableActionDefinitionExecutable<REQUIREMENTS>;
 export type ActionId = string | ActionType | UsableActionType;

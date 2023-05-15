@@ -816,6 +816,7 @@ export declare module Registry {
          * - If the type is a method, and an ID is returned by `Registry.id(registry[property])`, the ID will be returned.
          */
         getRegistrationId<T = any>(registry: IRegistry): T | undefined;
+        initializeProperty<O extends object, K extends keyof O>(object: O, key: K, registries: IRegistry | Set<IRegistry>): void;
     }
 }
 export interface IBaseModRegistration {

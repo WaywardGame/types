@@ -61,6 +61,10 @@ declare module Math2 {
      */
     function unlerp(from: number, to: number, lerped: number): number;
     /**
+     * Given a number between `from` and `to`, returns a decimal how far it is, `t`, clamped between 0 and 1.
+     */
+    function unclerp(from: number, to: number, lerped: number): number;
+    /**
      * Curve the value t exponentially (IE, starts gentle, ends steep)
      * @param from Rather than starting the curve at 0, start it here
      * @param to Rather than ending the curve at 1, end it here

@@ -59,6 +59,7 @@ export default class Button extends Component implements IDisableable {
     setDisabled(val?: boolean, reason?: string): this;
     setActive(val?: boolean, reason?: string): this;
     activate(playSound?: boolean): void;
+    addButton(returnNewButton: true, initializer: (button: Button) => Button): Button;
     addButton(initializer: (button: Button) => Button): this;
     addDescription(initializer: (description: Paragraph) => any): this;
     setText(text?: TranslationGenerator): this;

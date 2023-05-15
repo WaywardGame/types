@@ -89,7 +89,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     get point(): IVector3;
     get description(): ITerrainDescription | undefined;
     toString(): string;
-    getName(): Translation;
+    getName(includeCoordinates?: boolean): Translation;
     get type(): TerrainType;
     /**
      * Use game.changeTile or game.removeTopTile when modifying tiles.
@@ -145,7 +145,14 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Check is a tile is open
      */
     get isOpenTile(): boolean;
+    /**
+     * Gets the fire type of a fire on the tile if there is one
+     */
     get isOnFire(): FireType;
+    /**
+     * Gets the source of a fire on the tile if there is one
+     */
+    get fireSource(): Doodad | TileEvent | Tile | Creature | undefined;
     /**
      * Check if the tile can be lit on fire (has terrain/doodad/items that are flammable)
      */

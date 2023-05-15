@@ -71,7 +71,15 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
      */
     load(slot: number): Promise<boolean>;
     loadSpecificData(slot: number, keys: Set<AnyPropertyToSerialize>): Promise<Record<AnyPropertyToSerialize, any>>;
-    loadSpecificDatas(slots: number[], keys: Set<AnyPropertyToSerialize>): Promise<Array<Record<AnyPropertyToSerialize, any>>>;
+    /**
+     * Attempts to load all the given keys from the slot at once. Upon failure, instead loads each separately.
+     * @returns an object of results, and an object of errors, both indexed by the given keys.
+     */
+    loadSpecificDataResilient(slot: number, keys: Set<AnyPropertyToSerialize>): Promise<{
+        result: Record<string, any>;
+        errors: Map<string, Error>;
+    }>;
+    loadSpecificDatas(slots: number[], keys: Set<AnyPropertyToSerialize>): Promise<Map<number, Record<AnyPropertyToSerialize, any>>>;
     /**
      * Returns the number of bytes the save takes up
      */

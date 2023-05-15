@@ -50,9 +50,6 @@ export default abstract class IslandsDialog extends CanvasDialog {
     readonly ports: IIslandsDialogPort[];
     constructor(dialogId: DialogId, options: IIslandDialogOptions);
     protected get island(): Island | undefined;
-    private addMouseMoveListener;
-    private removeMouseMoveListener;
-    protected onMouseMoveWhileOver(): void;
     selectIsland(x: number, y: number): void;
     protected onLoad(initial: boolean): Promise<void>;
     protected onIslandRenamed(island: Island): void;

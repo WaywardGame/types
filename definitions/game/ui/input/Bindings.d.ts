@@ -35,7 +35,7 @@ declare module Bindings {
     function translate(bindable?: Bindable, noBindings?: TranslationImpl | null, simplify?: true): TranslationImpl | undefined;
     function translateRaw(bindable?: Bindable, noBindings?: TranslationImpl): TranslationImpl;
     function translateRaw(bindable?: Bindable, noBindings?: TranslationImpl | null): TranslationImpl | undefined;
-    function markCacheInvalid(): void;
+    function markCacheInvalid(updateBindableManagers?: boolean): void;
     function getBoundTo(binding: Binding): Set<Bindable>;
 }
 export default Bindings;

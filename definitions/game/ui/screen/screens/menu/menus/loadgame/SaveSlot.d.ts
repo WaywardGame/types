@@ -11,6 +11,7 @@
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { IGameOptions } from "game/options/IGameOptions";
 import { GameMode } from "game/options/IGameOptions";
+import type { AnyPropertyToSerialize } from "save/serializer/PropertiesToSerialize";
 import InputButton from "ui/component/InputButton";
 export interface SaveSlotData {
     slot: number;
@@ -27,6 +28,7 @@ export interface SaveSlotData {
     difficulty: GameMode | -1;
     options: IGameOptions;
     thumbnail?: string;
+    corrupted?: Map<AnyPropertyToSerialize, Error>;
 }
 interface ISaveSlotEvents extends Events<InputButton> {
     rename(): any;
@@ -37,6 +39,9 @@ declare class SaveSlot extends InputButton {
     slotData: SaveSlotData;
     private deathby;
     private isContinue?;
+    readonly editButton: import("../../../../../component/Button").default;
+    readonly exportButton: import("../../../../../component/Button").default;
+    readonly deleteButton: import("../../../../../component/Button").default;
     constructor(slot: number, isNewSlot?: boolean);
     setContinue(): this;
     /**
@@ -47,7 +52,7 @@ declare class SaveSlot extends InputButton {
      * Loads the data for this save slot.
      */
     load(loadAll?: boolean): Promise<void>;
-    private loadTooltip;
+    private loadFullData;
     /**
      * The tooltip generator for this component.
      */
