@@ -49,7 +49,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     private _tags?;
     islandId: IslandId;
     preventRendering?: boolean;
-    private _humansWithinBound;
+    private _humansWithinBound?;
     /**
      * Cached tile the entity is on.
      * This should be cleared when x,y,z is changing.
