@@ -41,7 +41,7 @@ export interface IDoodadManagerEvents {
 export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerEvents> {
     private static readonly cachedBestDoodadForTier;
     private static readonly cachedDoodadGroups;
-    static readonly cachedDoodadSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, Set<DoodadType>>>>;
+    static readonly cachedDoodadSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, DoodadType[]>>>;
     private readonly scarecrows;
     static getBestDoodadForTier(doodad: DoodadType | DoodadTypeGroup): DoodadType | undefined;
     static generateLookups(): void;

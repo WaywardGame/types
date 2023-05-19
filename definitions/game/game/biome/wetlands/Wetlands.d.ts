@@ -13,7 +13,7 @@ import type { IBiomeTemperature } from "game/temperature/ITemperature";
 import { TerrainType } from "game/tile/ITerrain";
 declare const _default: {
     readonly defaultTerrainBackground: TerrainType.Mud;
-    readonly defaultCaveEntranceFlooring: TerrainType.Mud;
+    readonly defaultCaveEntranceFlooring: TerrainType.GraniteGround;
     readonly fog: {
         color: import("utilities/Color").IRGB;
     };

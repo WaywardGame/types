@@ -83,7 +83,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private static readonly cachedItemsThatAreUsedForGrowingPlants;
     private static readonly cachedItemsThatAreUsedInRecipes;
     private static readonly cachedWeights;
-    static readonly cachedItemSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, Set<ItemType>>>>;
+    static readonly cachedItemSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, ItemType[]>>>;
     static getItemTypes(): readonly ItemType[];
     static getItemsWithRecipes(): readonly ItemType[];
     static getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;

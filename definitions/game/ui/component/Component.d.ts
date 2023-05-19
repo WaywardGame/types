@@ -25,8 +25,9 @@ import Rectangle from "utilities/math/Rectangle";
 declare const ContextMenu: typeof ContextMenuExport;
 declare type ContextMenu = ContextMenuExport;
 declare global {
-    interface Element {
+    interface Node {
         component?: Component;
+        originalRemove?: () => void;
     }
 }
 export default class Component<E extends HTMLElement = HTMLElement> extends EventEmitter.Host<IComponentEvents> {
@@ -50,7 +51,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     static findDescendants(inElement: Component | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: Component | HTMLElement): number | false;
     static append(elementToMove: string | Component | HTMLElement, placeToAppendTo: string | Component | HTMLElement, strategy?: AppendStrategy): void;
-    static remove(elementToRemove: string | Component | Element, force?: boolean): void;
+    static remove(elementToRemove: string | Component | Element | ChildNode | null, force?: boolean): void;
     private static appendRegenerateBoxes;
     private static regenerateAncestorBoxes;
     private static regenerateSiblingBoxes;
@@ -81,9 +82,9 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     private box?;
     private boxCacheLastScroll?;
     private boxCacheScrollable?;
-    removed: boolean;
-    observing: boolean;
-    private eventListeners;
+    removed?: boolean | string;
+    observing?: boolean;
+    private eventListeners?;
     /**
      * The selectable layer of this element, or `false` if it is not selectable.
      */

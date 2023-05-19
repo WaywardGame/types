@@ -11,6 +11,7 @@
 import type Doodad from "game/doodad/Doodad";
 import type NPC from "game/entity/npc/NPC";
 import type NPCManager from "game/entity/npc/NPCManager";
+import { Quality } from "game/IObject";
 import type { ContainerReference, DisplayableItemType, IContainer, IDismantleComponent } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import type { IMoveItemOptions } from "game/item/IItemManager";
@@ -144,7 +145,7 @@ export default class InGameScreen extends BaseScreen {
     autoOpenDialog(dialogId: OldUiDialogId, element: JQuery): boolean;
     openDialogs(): void;
     clampDialogs(): void;
-    getItemClass(item?: Item, itemType?: DisplayableItemType): string;
+    getItemClass(item?: Item, itemType?: DisplayableItemType, quality?: Quality): string;
     createItemString(itemType: ItemType, item?: Item, extraClass?: string): string;
     syncItemElements(itemIds: number | number[], forceSyncDecay?: boolean): void;
     private readonly SYMBOL_LAST_NEARLY_DESTROYED;
