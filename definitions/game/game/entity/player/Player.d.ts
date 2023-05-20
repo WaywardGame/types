@@ -95,8 +95,8 @@ export default class Player extends Human implements IPreSerializeCallback, IUns
     /**
      * Send a packet to the server about the sort info for the container
      */
-    updateContainerSortInfo(dialogIndex: string | number): void;
-    getDialogInfo(dialogIndex: string | number): IDialogInfo | undefined;
+    updateContainerSortInfo(dialogIndex: string | number | undefined): void;
+    getDialogInfo(dialogIndex: string | number | undefined): IDialogInfo | undefined;
     kill(): void;
     respawn(reset: boolean): void;
     /**
