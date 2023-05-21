@@ -164,8 +164,8 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
         message: Message;
         object: Translation;
     } | false;
-    isPlayerOnTile(includeGhosts?: boolean, includeConnecting?: boolean): boolean;
-    getPlayersOnTile(includeGhosts?: boolean, includeConnecting?: boolean): Human[];
+    isPlayerOnTile(includeGhosts?: boolean, includeConnecting?: boolean, includeZMovement?: boolean): boolean;
+    getPlayersOnTile(includeGhosts?: boolean, includeConnecting?: boolean, includeZMovement?: boolean): Human[];
     getPlayersThatSeeTile(): Human[];
     /**
      * Gets the nearest player based.

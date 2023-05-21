@@ -54,7 +54,8 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
     movementCompleteZ?: number;
     anim?: number;
     moveType?: MoveType;
-    stopNextMovement?: boolean;
+    shouldSkipNextMovement?: true;
+    protected shouldSkipNextUpdate?: true;
     /**
      * undefined = Vector2.ZERO for this
      */
@@ -98,6 +99,15 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number): void;
     getMovementDelay(): number;
     moveTo(tile: Tile, options?: IMoveToOptions): boolean;
+    /**
+     * Skips the next update for this creature / npc
+     */
+    skipNextUpdate(): void;
+    /**
+     * Skips the next movement for this creature / npc
+     */
+    skipNextMovement(): void;
+    overrideNextMovement(tile: Tile): void;
     /**
      * Faces the target tile
      */

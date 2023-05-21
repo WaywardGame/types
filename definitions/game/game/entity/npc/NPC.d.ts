@@ -55,7 +55,6 @@ export default abstract class NPC extends Human<NPCType> {
     properties?: IProperties;
     talked?: Map<string, number>;
     interactions?: Map<string, Set<number>>;
-    private shouldSkipNextUpdate?;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(entityOptions?: IEntityConstructorOptions<NPCType>);
@@ -96,8 +95,6 @@ export default abstract class NPC extends Human<NPCType> {
      * Allow swapping with npcs
      */
     canSwapWith(human: Human, source: string | undefined): boolean;
-    skipNextUpdate(): void;
-    overrideNextMovement(tile: Tile): void;
     getPublicContainer(): IContainer | undefined;
     /**
      * The actions available to use with this npc
