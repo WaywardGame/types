@@ -22,10 +22,6 @@ export default class GlobalServerDirectory extends Server {
     private sendResponse;
     private checkConnection;
     /**
-     * Creates a new websocket connection to the matchmaking server and "joins" the game via webrtc
-     */
-    private checkWebRTCConnection;
-    /**
      * Connects to the servers websocket
      * @param serverAddress Address to connect to
      */

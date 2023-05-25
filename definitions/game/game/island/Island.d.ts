@@ -24,7 +24,7 @@ import type { IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "game/enti
 import CorpseManager from "game/entity/creature/corpse/CorpseManager";
 import FlowFieldManager from "game/entity/flowfield/FlowFieldManager";
 import NPCManager from "game/entity/npc/NPCManager";
-import type { IIslandEvents, IIslandLoadOptions, IMobCheck, ISeeds, IWaterContamination, IWaterFill, IWell, IslandId } from "game/island/IIsland";
+import type { IIslandEvents, IIslandLoadOptions, IMobCheck, ISeeds, IWaterContamination, IWaterFill, IWaterFillReturn, IWell, IslandId } from "game/island/IIsland";
 import { WaterType } from "game/island/IIsland";
 import { PortManager } from "game/island/Port";
 import type { ILiquidGather } from "game/item/IItem";
@@ -109,6 +109,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly id: IslandId;
     readonly mapSizeSq: number;
     spawnPoint: IVector3;
+    private _activated;
     private _loadedReferences;
     private _tiles;
     modifiersCollection?: IslandModifiersCollection;
@@ -134,8 +135,20 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     get isActive(): boolean;
     get isDefaultIsland(): boolean;
     getDetails(): IIslandDetails;
-    onActivated(): void;
-    onDeactivated(): void;
+    /**
+     * Activates the island.
+     * Islands should be activated when a player is going to load onto it
+     */
+    private activate;
+    /**
+     * Runs some logic while ensuring the island is activated
+     */
+    private runWhileActivated;
+    /**
+     * Deactivates the island.
+     * Islands should be deactivated when the last player leaves it or when it's being unloaded.
+     */
+    private deactivate;
     private gameOptionsCached?;
     getGameOptions(): IGameOptions;
     clearGameOptionsCache(): void;
@@ -199,7 +212,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     /**
      * Check the amount of water tiles there is connected to a supplied x/y area
      */
-    checkWaterFill(tile: Tile, needed: number, waterType: WaterType, waterFill?: IWaterFill): number;
+    checkWaterFill(tile: Tile, needed: number, waterType: WaterType, waterFill?: IWaterFill): IWaterFillReturn;
     getSpawnPoint(): Tile;
     getSuitableSpawnPoint(): Tile;
     calculateDamageOutcome(input: IDamageOutcomeInput): IDamageOutcome | undefined;

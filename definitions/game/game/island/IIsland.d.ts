@@ -140,6 +140,11 @@ export interface IWell {
 export interface IWaterFill {
     count: number;
     tiles: Record<number, Record<number, boolean>>;
+    tile?: Tile;
+}
+export interface IWaterFillReturn {
+    count: number;
+    tile?: Tile;
 }
 export interface IWaterContamination {
     x: number;

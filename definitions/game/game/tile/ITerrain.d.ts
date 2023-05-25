@@ -183,7 +183,8 @@ export declare enum TileTemplateType {
     StoneHouses = 12,
     Railways = 13,
     GraniteLighthouse = 14,
-    BasaltLighthouse = 15
+    BasaltLighthouse = 15,
+    FairyRings = 16
 }
 export interface ITemplate {
     mapTile?: MapTile;

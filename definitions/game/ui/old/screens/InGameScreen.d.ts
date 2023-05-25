@@ -94,8 +94,8 @@ export default class InGameScreen extends BaseScreen {
     private sortingCancelled;
     private onSortableAction;
     private isCurrentlySorting;
-    private craftableItemTypes;
-    private nonCraftableItemTypes;
+    craftableItemTypes: ItemType[] | undefined;
+    nonCraftableItemTypes: ItemType[] | undefined;
     private dismantleItems;
     private craftingDialogDirty;
     private dismantleDialogDirty;

@@ -67,7 +67,7 @@ export interface IIcon {
     height: number;
     imageWidth?: number;
     imageHeight?: number;
-    scale?: number;
+    scale?: string | number;
 }
 export interface ISerializedIcon extends IIcon {
     path: string | ISerializedImagePath;

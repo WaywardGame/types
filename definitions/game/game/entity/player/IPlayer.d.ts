@@ -103,6 +103,7 @@ export interface IPlayerEvents extends Events<Human> {
      * @param isAbsentPlayer True if the player is absent
      */
     idChanged(currentId: number, newId: number, isAbsentPlayer: boolean): any;
+    updateCraftTable(): any;
 }
 export declare enum TurnTypeFlag {
     CheckUnderPlayer = 1,

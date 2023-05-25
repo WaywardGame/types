@@ -110,7 +110,11 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     get variation(): number;
     get isMapEdge(): boolean;
     /**
-     * Check if this Tile containers some items
+     * Check if this tile is Void type
+     */
+    get isVoid(): boolean;
+    /**
+     * Check if this tile contains some items
      */
     get hasTileContainer(): boolean;
     /**

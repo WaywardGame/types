@@ -60,7 +60,7 @@ export default class WorldLayer implements IPreSerializeCallback {
      * Updates the rendered tile.
      * All neighbors are updated by default, but the neighbor tile update is only done when updateNeighbors is true
      */
-    updateTile(x: number, y: number, tile: Tile, shouldUpdate: boolean, updateNeighbors: boolean, flushTileImmediately: boolean, isUpdatingNeighbors?: boolean, debug?: boolean): void;
+    updateTile(tile: Tile, shouldUpdate: boolean, updateNeighbors: boolean, flushTileImmediately: boolean, isUpdatingNeighbors?: boolean, debug?: boolean): void;
     getTileUpdate(tile: Tile): ITileUpdate;
     private setTileInternal;
     /**

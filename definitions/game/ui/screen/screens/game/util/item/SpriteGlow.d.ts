@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IRGB } from "utilities/Color";
+import type { IRGBA } from "utilities/Color";
 export default class SpriteGlow {
     private readonly data;
     private readonly canvas;
@@ -24,7 +24,7 @@ export default class SpriteGlow {
      * Releases a cache of data used for generation.
      */
     releaseGenerationImageDataCache(): void;
-    render(path: string, color: IRGB, signal: AbortSignal): Promise<string | undefined>;
+    render(path: string, color: IRGBA, signal: AbortSignal): Promise<string | undefined>;
     private renderInternal;
     private getVersion;
     private getGitVersionID;
