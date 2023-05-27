@@ -12,7 +12,7 @@ import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
 import { ActionType } from "game/entity/action/IAction";
 import Human from "game/entity/Human";
-import type { IEntityConstructorOptions, IProperties, Property } from "game/entity/IEntity";
+import type { IEntityConstructorOptions } from "game/entity/IEntity";
 import { AiType, EntityType, MoveType, StatusType } from "game/entity/IEntity";
 import type { ICustomizations } from "game/entity/IHuman";
 import { EquipType } from "game/entity/IHuman";
@@ -52,7 +52,6 @@ export default abstract class NPC extends Human<NPCType> {
     ai: AiType;
     seen: number;
     weightCapacity: number;
-    properties?: IProperties;
     talked?: Map<string, number>;
     interactions?: Map<string, Set<number>>;
     static getRegistrarId(): number;
@@ -179,13 +178,6 @@ export default abstract class NPC extends Human<NPCType> {
     get asNPC(): NPC;
     get asPlayer(): undefined;
     get asLocalPlayer(): undefined;
-    /**
-     * Properties system that is only used for merchants
-     */
-    hasProperty(property: Property): boolean;
-    addProperty(property: Property, value: any): void;
-    getProperty<T>(property: Property): T | undefined;
-    removeProperty(property: Property): boolean;
     /**
      * Equip better things when available
      */

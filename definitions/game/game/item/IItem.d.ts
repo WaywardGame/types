@@ -1567,7 +1567,7 @@ export declare enum ItemTypeGroup {
     Spine = 892,
     Spores = 893,
     Stick = 894,
-    NotForSale = 895,
+    NotStockedOnMerchants = 895,
     ContainerOfSwampWater = 896,
     ContainerOfFilteredWater = 897,
     Sundial = 898,

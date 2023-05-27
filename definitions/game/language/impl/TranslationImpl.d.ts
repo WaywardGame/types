@@ -68,6 +68,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     withSegments(...segments: ISegment[]): this;
     withSegments(priority: true, ...segments: ISegment[]): this;
     withTooltip(tooltip?: Falsy | ITooltipSection["tooltip"]): this;
+    getReference(): Reference | undefined;
     setReference(reference?: Reference | Referenceable): this;
     addArgs(...args: TranslationArg[]): this;
     inContext(context?: TextContext, normalize?: boolean): this;

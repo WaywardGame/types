@@ -92,9 +92,6 @@ export interface ICausesStatusEffect {
 export interface ICausesDamage {
     damage?: number;
 }
-export declare enum Property {
-}
-export type IProperties = Map<Property, any>;
 export declare enum EntityType {
     Player = 0,
     Creature = 1,

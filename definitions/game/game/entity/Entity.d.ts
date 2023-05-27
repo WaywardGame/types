@@ -46,6 +46,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     x: number;
     y: number;
     z: number;
+    private _data?;
     private _tags?;
     islandId: IslandId;
     preventRendering?: boolean;
@@ -111,6 +112,31 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     hasTag(tag: TagType): boolean;
     addTag(tag: TagType): void;
     removeTag(tag: TagType): void;
+    /**
+     * Check if a data was set
+     * @param key Data key
+     * @returns True if the data exists, false if it doesn't
+     */
+    hasData(key: string): boolean;
+    /**
+     * Sets a data
+     * @param key Data key
+     * @param value Data value
+     * @rturns The value
+     */
+    setData<T>(key: string, value: T): T;
+    /**
+     * Gets a data
+     * @param key Data key
+     * @returns Data value or undefined if it wasn't found
+     */
+    getData<T>(key: string): T | undefined;
+    /**
+     * Removes a data
+     * @param key Data key
+     * @returns True when the data is removed. False if the key wasn't set
+     */
+    removeData(key: string): boolean;
     abstract isValid(): boolean;
     get asEntity(): Entity<DescriptionType, TypeType, TagType>;
     get asEntityMovable(): EntityMovable<DescriptionType, TypeType, TagType> | undefined;

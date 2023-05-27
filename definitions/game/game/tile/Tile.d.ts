@@ -259,6 +259,11 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     makeLavaPassage(source: Human | undefined): boolean;
     /**
+     * Checks if another cave entrance is nearby.
+     * @returns True if it created cave entrances
+     */
+    isCaveEntranceNearby(): boolean;
+    /**
      * Used to genererate and find appropriate cave entrances
      * @returns True if it created cave entrances
      */

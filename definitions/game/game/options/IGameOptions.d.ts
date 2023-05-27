@@ -154,6 +154,7 @@ export interface IGameOptions {
          */
         decayMultiplier: number;
     };
+    randomEvents: boolean;
 }
 export declare enum UnlockedRecipesStrategy {
     StartWithNone = 0,
