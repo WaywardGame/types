@@ -112,6 +112,7 @@ export interface IIslandLoadOptions {
      * Set to true when the island load is happening for everyone eveywhere all at once
      */
     isSynced: boolean;
+    isTransient?: boolean;
     travelTime?: number;
     pauseAndShowLoadingScreen?: boolean;
     multiplayerLoadingDescription?: MultiplayerLoadingDescription;
@@ -169,6 +170,7 @@ export declare enum LiquidType {
 export declare const ISLAND_NAME_MAX_LENGTH = 32;
 export declare const DEFAULT_ISLAND_ID = "0,0";
 export declare const DEFAULT_ISLAND_MAP_SIZE = 512;
+export declare const GENERIC_TRANSIENT_ISLAND_ID_START: IslandId;
 export declare const TRAVEL_ANIMATION_ISLAND_ID: IslandId;
 export interface IIslandPort {
     id: number;
@@ -188,4 +190,15 @@ export interface IMobCheck extends IVector3 {
     noTile?: boolean;
     waterTiles?: number;
     voidTiles?: number;
+}
+/**
+ * Allows choosing what to copy from the human.
+ * All options default to true
+ */
+export interface ICopyHumanOptions {
+    human: Human;
+    copyCustomizations?: false;
+    copyItemsAndEquipment?: false;
+    copyStats?: false;
+    copyStatus?: false;
 }

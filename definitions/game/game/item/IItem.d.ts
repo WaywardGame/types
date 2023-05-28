@@ -344,6 +344,10 @@ export interface IItemBuild {
      * When defined, allows the build to work only on these tile types
      */
     allowedTileTypes?: Set<TerrainType>;
+    /**
+     * Skill to gain 0.1 of when building the item
+     */
+    skillGain?: SkillType;
 }
 export interface ISummon {
     /**

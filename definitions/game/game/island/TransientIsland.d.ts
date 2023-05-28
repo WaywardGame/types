@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Human from "game/entity/Human";
-import type { IIslandLoadOptions, IslandId } from "game/island/IIsland";
+import { type ICopyHumanOptions, type IIslandLoadOptions, type IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import type { Direction } from "utilities/math/Direction";
 import type { IVector3 } from "utilities/math/IVector";
@@ -18,7 +18,8 @@ import type { IVector3 } from "utilities/math/IVector";
  */
 export declare class TransientIsland {
     readonly island: Island;
-    static create(islandId: IslandId, islandOptions?: Partial<IIslandLoadOptions>): Promise<TransientIsland>;
+    static createIslandId(): IslandId;
+    static create(islandId?: IslandId, islandOptions?: Partial<IIslandLoadOptions>): Promise<TransientIsland>;
     private deleted;
     private constructor();
     delete(): void;
@@ -26,8 +27,8 @@ export declare class TransientIsland {
      * Creates a human you can do stuff with
      * @param spawnPoint Spawn point. Set to undefined to use the default island spawn point
      * @param facingDirection Direction they should face when spawing
-     * @param copyFromHuman Human object to copy customizations, items, and vehicles from
+     * @param copyFromHumanOptions Human object to copy customizations, items, and vehicles from
      * @returns Human
      */
-    createHuman(spawnPoint?: IVector3, facingDirection?: Direction.Cardinal, copyFromHuman?: Human): Human;
+    createHuman(spawnPoint?: IVector3, facingDirection?: Direction.Cardinal, copyFromHumanOptions?: ICopyHumanOptions): Human;
 }

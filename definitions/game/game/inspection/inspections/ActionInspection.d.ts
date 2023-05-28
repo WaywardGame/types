@@ -33,4 +33,5 @@ export default class ActionInspection extends Inspection<ActionId | undefined> {
     private getActionDiscovered;
     private getActionTier;
     private getActionUsability;
+    private getActionExample;
 }

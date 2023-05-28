@@ -105,24 +105,25 @@ export declare enum ModRegistrationType {
     NPC = 32,
     OptionsSection = 33,
     Overlay = 34,
-    Packet = 35,
-    Prompt = 36,
-    QuadrantComponent = 37,
-    Quest = 38,
-    QuestRequirement = 39,
-    Registry = 40,
-    Skill = 41,
-    SoundEffect = 42,
-    Stat = 43,
-    StatusEffect = 44,
-    Terrain = 45,
-    TerrainDecoration = 46,
-    TileEvent = 47,
-    TileLayerType = 48,
-    UsableActions = 49,
-    UsableActionType = 50,
-    UsableActionTypePlaceholder = 51,
-    WorldLayer = 52
+    Override = 35,
+    Packet = 36,
+    Prompt = 37,
+    QuadrantComponent = 38,
+    Quest = 39,
+    QuestRequirement = 40,
+    Registry = 41,
+    Skill = 42,
+    SoundEffect = 43,
+    Stat = 44,
+    StatusEffect = 45,
+    Terrain = 46,
+    TerrainDecoration = 47,
+    TileEvent = 48,
+    TileLayerType = 49,
+    UsableActions = 50,
+    UsableActionType = 51,
+    UsableActionTypePlaceholder = 52,
+    WorldLayer = 53
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -375,10 +376,19 @@ export interface IEntityTagRegistration extends IBaseModRegistration {
     type: ModRegistrationType.EntityTag;
     name: string;
 }
+export interface IOverrideDescription<OBJECT extends object, PROPERTY extends keyof OBJECT> {
+    object: OBJECT;
+    property: PROPERTY;
+    value: OBJECT[PROPERTY];
+}
+export interface IOverrideRegistration<OBJECT extends object, PROPERTY extends keyof OBJECT> extends IBaseModRegistration {
+    type: ModRegistrationType.Override;
+    overrider: () => IOverrideDescription<OBJECT, PROPERTY>;
+}
 export interface IInheritsRegistrationTime {
     useRegistrationTime: ModRegistrationType;
 }
-export type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IDoodadTagRegistration | IEntityTagRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | IItemTagRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration;
+export type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IDoodadTagRegistration | IEntityTagRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | IItemTagRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IOverrideRegistration<any, any> | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration;
 export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare module Register {
     /**
@@ -695,6 +705,23 @@ declare module Register {
     export function usableActionTypePlaceholder(name: string): <K extends string | number | symbol, T extends Record<K, UsableActionType>>(target: T, key: K) => void;
     export function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends Record<K, InterModRegistry<V>>>(target: T, key: K) => void;
     export function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends Record<K, InterModRegistration<V>>>(target: T, key: K) => void;
+    /**
+     * Register custom values that will replace default values in a vanilla object.
+     *
+     * For example, say you want to change the number of planks to dismantle from a log from 2 to 4. That would look like this:
+     * ```ts
+     * @Register.override(() => ({
+     * 	object: itemDescriptions[ItemType.Log].dismantle!,
+     * 	property: "items",
+     * 	value: [
+     * 		{ type: ItemType.TreeBark, amount: 2 },
+     * 		{ type: ItemType.WoodenPlank, amount: 4 }
+     * 	],
+     * }))
+     * public itemDescriptionLogDismantle: IDismantleDescription;
+     * ```
+     */
+    export function override<OBJECT extends object, PROPERTY extends keyof OBJECT>(overrider: () => IOverrideDescription<OBJECT, PROPERTY>): <K extends string | number | symbol, T extends Record<K, OBJECT>>(target: T, key: K) => void;
     type ExtractRegisteredType<F> = F extends (...args: any) => infer F2 ? F2 extends (t: infer T, k: infer K) => any ? T[Extract<K, keyof T>] : never : never;
     /**
      * Registers any number of registrations of a single type. Any other registration type can be used.

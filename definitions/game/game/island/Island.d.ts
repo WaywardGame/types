@@ -134,6 +134,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     get isActive(): boolean;
     get isDefaultIsland(): boolean;
+    get isTransient(): boolean;
     getDetails(): IIslandDetails;
     /**
      * Activates the island.
