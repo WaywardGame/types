@@ -25,6 +25,6 @@ export default class SkillInspection extends Inspection<SkillType> {
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getCurrentValue;
     private getDescription;
-    private getReputationImpact;
+    protected getReputationImpact(): 0 | import("../../../language/impl/TranslationImpl").default | undefined;
     private getCanIncrease;
 }

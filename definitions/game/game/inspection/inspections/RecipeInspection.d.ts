@@ -11,6 +11,7 @@
 import { InspectType } from "game/inspection/IInspection";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
+import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import Inspection from "game/inspection/Inspection";
 import { ItemType } from "game/item/IItem";
 import type { TranslationGenerator } from "ui/component/IComponent";
@@ -22,7 +23,7 @@ export default class RecipeInspection extends Inspection<ItemType> {
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getDetails;
     private isUnskilled;
-    private getReputation;
+    protected getReputation(): LabelledValue | undefined;
     private getDescription;
     private getDoodadUses;
     private getRequirements;

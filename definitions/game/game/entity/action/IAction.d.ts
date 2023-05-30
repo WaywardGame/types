@@ -21,7 +21,9 @@ import type NPC from "game/entity/npc/NPC";
 import type { IPackedMessage } from "game/entity/player/IMessageManager";
 import type { TurnTypeFlag } from "game/entity/player/IPlayer";
 import type Player from "game/entity/player/Player";
+import type { IIslandTemplate } from "game/IGame";
 import type { Quality } from "game/IObject";
+import type { Automation } from "game/island/automation/Automation";
 import type Island from "game/island/Island";
 import type { IContainer, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
@@ -226,6 +228,7 @@ export interface IActionDescription<A extends Array<ActionArgument | ActionArgum
      * Check if the action has setup CanUse logic
      */
     readonly hasSetCanUse: boolean;
+    getExample(executor: E, ...args: AV): IActionExample | undefined;
     canUse(executor: E, ...args: AV): CU | IActionNotUsable;
     /**
      * Called internally during `execute`
@@ -243,6 +246,10 @@ export interface IActionDescription<A extends Array<ActionArgument | ActionArgum
      * Called internally during `execute`
      */
     confirmer?(actionApi: IActionConfirmerApi<E, CU>, ...args: AV): Promise<boolean>;
+    /**
+     * Called internally before `execute`
+     */
+    exampleHandler?(actionApi: IActionExampleApi<E, CU>, ...args: AV): IActionExample;
     skipConfirmation(): this;
     clone(): IActionDescription<A, E, R, CU, AV>;
 }
@@ -316,6 +323,13 @@ export interface IActionConfirmerApi<E extends Entity = Entity, CU extends IActi
      * Prompts the user about something
      */
     prompt<PROMPT extends IPromptDescriptionBase<any[]>>(prompt: PROMPT, ...args: PromptDescriptionArgs<PROMPT>): Promise<boolean>;
+}
+export interface IActionExampleApi<E extends Entity = Entity, CU extends IActionUsable = IActionUsable> extends IActionApi<E, CU> {
+    description: IActionDescription<Array<ActionArgument | ActionArgument[]>, E, any, CU, any[]>;
+}
+export interface IActionExample {
+    automation: Automation;
+    template: IIslandTemplate;
 }
 export interface IActionSoundEffect {
     type: SfxType;
@@ -446,4 +460,5 @@ export interface ActionExecutorEvents {
      */
     postExecuteAction<A extends Array<ActionArgument | ActionArgument[]> = Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, AV extends any[] = ActionArgumentTupleTypes<A>, CU extends IActionUsable = any>(actionType: ActionType, actionApi: IActionHandlerApi<E, CU>, args: AV): any;
 }
+export declare const defaultExampleIslandTemplate: IIslandTemplate;
 export {};

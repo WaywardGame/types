@@ -25,8 +25,9 @@ export default class QuestDialog extends Dialog {
     constructor();
     getBindable(): Bindable;
     getIcon(): MenuBarButtonType;
+    protected onDialogLoad(): void;
     protected onDialogRemove(): void;
-    showQuest(id: number): this;
+    showQuest(id: number, disableAnimations?: boolean): this;
     protected onSwitchPanel(panelId: string | number): void;
     private onQuestOrRequirementComplete;
     private refreshFooter;

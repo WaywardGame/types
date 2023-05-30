@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "game/doodad/Doodad";
-import type { ActionArgument, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
+import type { ActionArgument, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionExample, IActionExampleApi, IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
 import type Corpse from "game/entity/creature/corpse/Corpse";
 import type Creature from "game/entity/creature/Creature";
 import type Entity from "game/entity/Entity";
@@ -34,12 +34,14 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     canUseHandler: (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => CU | IActionNotUsable;
     handler: (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => R;
     confirmer?: (actionApi: IActionConfirmerApi<E, any>, ...args: AV) => Promise<boolean>;
+    exampleHandler?: (actionApi: IActionExampleApi<E, CU>, ...args: AV) => IActionExample;
     private shouldSkipConfirmation;
     constructor(...argumentTypes: A);
     /**
      * Check if the action has setup CanUse logic
      */
     get hasSetCanUse(): boolean;
+    getExample(executor: E, ...args: AV): IActionExample | undefined;
     canUse(actionApi: IActionApi<E, any>, ...args: AV): CU | IActionNotUsable;
     canUse(executor: E, ...args: AV): CU | IActionNotUsable;
     canUseWhileFacing(actionExecutor: E, position: IVector3, direction: Direction.Cardinal, ...args: AV): CU | IActionNotUsable;
@@ -67,6 +69,10 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
      * @return `false` to cancel the execution of the action.
      */
     setConfirmer(confirmer: (actionApi: IActionConfirmerApi<E, CU>, ...args: AV) => Promise<boolean>): this;
+    /**
+     * Add an example to this action.
+     */
+    setExample(exampleHandler: (actionApi: IActionExampleApi<E, CU>, ...args: AV) => IActionExample): this;
     /**
      * Add a can use handler for this action.
      *

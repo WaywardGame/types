@@ -138,4 +138,5 @@ export default class GameScreen extends Screen {
      */
     private getUnusedQuadrant;
     private updatePauseIcon;
+    private get canUnpause();
 }

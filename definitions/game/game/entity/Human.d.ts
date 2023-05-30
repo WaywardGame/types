@@ -221,6 +221,7 @@ export default abstract class Human<TypeType extends number = number> extends En
      */
     processInput(timeStamp: number): IMovementIntent | undefined;
     staminaReduction(skill?: SkillType, level?: number): void;
+    updateReputationForAttackingWithTamedCreature(target: Creature, attacker: Creature): void;
     updateReputation(reputation: number): void;
     protected checkOnLoadMilestones(): void;
     capReputation(): void;
@@ -251,6 +252,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     hasWalkPath(): boolean;
     setWalkPath(path: IVector2[] | undefined, force?: boolean): void;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
+    trampleFire(fireEvent: TileEvent): void;
     damageByInteractingWith(thing: Doodad | TileEvent, options: ICheckUnderOptions | undefined, damageLocation: EquipType): ICheckUnderOptions;
     equip(item: Item, slot: EquipType, internal?: boolean): boolean;
     /**
