@@ -239,7 +239,7 @@ export interface IProvidesSkill {
     skillValue: number;
 }
 export type IDoodadParticles = Record<number, IRGB>;
-export type IDoodadLoot = Record<number, ILootItem[] | undefined>;
+export type IDoodadLoot = PartialRecord<GrowingStage, ILootItem[]>;
 export declare enum DoodadType {
     WoodenDoor = 0,
     WoodenFence = 1,
