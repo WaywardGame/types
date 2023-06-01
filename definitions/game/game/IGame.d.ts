@@ -221,17 +221,18 @@ export declare enum TileUpdateType {
     DoodadOrientation = 14,
     DoodadOverHidden = 15,
     DoodadRemove = 16,
-    Item = 17,
-    ItemDrop = 18,
-    ItemMovement = 19,
-    Mod = 20,
-    NPC = 21,
-    NPCSpawn = 22,
-    Player = 23,
-    Terrain = 24,
-    TileEvent = 25,
-    TileEventManager = 26,
-    Tilled = 27
+    DoodadAddWater = 17,
+    Item = 18,
+    ItemDrop = 19,
+    ItemMovement = 20,
+    Mod = 21,
+    NPC = 22,
+    NPCSpawn = 23,
+    Player = 24,
+    Terrain = 25,
+    TileEvent = 26,
+    TileEventManager = 27,
+    Tilled = 28
 }
 export declare enum PauseSource {
     /**

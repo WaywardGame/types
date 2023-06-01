@@ -32,7 +32,7 @@ export declare const promptGameConfirmationDestroyOnGather: import("game/meta/pr
 export declare const promptGameConfirmationDroppingContainer: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameConfirmationRestWithEquippedFireSource: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[actionVerb: Text, objectName: Text, actionNoun: Text]>;
 export declare const promptGameContainerNotFull: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
-export declare const promptGameDesalinationNoNeed: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
+export declare const promptGameDesalinationNoNeed: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[dripstoneOrStile: Text]>;
 export declare const promptGameExtinguishWaterStill: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameItemMayBeDestroyedInCraft: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[breakingItemsList: Text]>;
 export declare const promptGameItemMayCauseBurns: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
@@ -40,7 +40,7 @@ export declare const promptGameItemsMayBeDestroyedOnUse: import("game/meta/promp
 export declare const promptGameLoadFailure: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptGameNoHealingRequired: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameNoSaveOnDeath: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
-export declare const promptGamePickUpStillWithWater: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
+export declare const promptGamePickUpStillWithWater: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[dripstoneOrStile: Text]>;
 export declare const promptGameReleaseCreature: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[creatureName: Text]>;
 export declare const promptGameUncage: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[creatureName: Text]>;
 export declare const promptGameRenameGeneric: import("game/meta/prompt/IPrompt").IPromptInputDescription<[placeholder?: string | TranslationImpl | undefined, name?: string | ISerializedTranslation | undefined]>;

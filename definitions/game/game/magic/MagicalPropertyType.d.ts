@@ -82,6 +82,7 @@ export interface IMagicalPropertyDescription {
      */
     disableInscription?: true;
     subTypeEnum?: any;
+    isValidEnum?(enumValue: number): boolean;
 }
 export interface MagicalPropertyTypeSubTypeMap {
     [MagicalPropertyType.Stat]: Stat;

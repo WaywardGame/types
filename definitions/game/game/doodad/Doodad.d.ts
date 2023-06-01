@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IEventEmitter } from "event/EventEmitter";
-import type { DisplayableDoodadType, DoodadTag, DoodadTypeExtra, DoorOrientation, IDoodadDescription, IDoodadOptions, IHasBuilder } from "game/doodad/IDoodad";
+import type { DisplayableDoodadType, DoodadTag, DoodadTypeExtra, DoorOrientation, IDoodadDescription, IDoodadOptions, IHasBuilder, IHasWater } from "game/doodad/IDoodad";
 import { DoodadType, DoodadTypeGroup, GrowingStage } from "game/doodad/IDoodad";
 import { ActionType } from "game/entity/action/IAction";
 import type Creature from "game/entity/creature/Creature";
@@ -93,6 +93,7 @@ export default class Doodad extends Entity<IDoodadDescription, DoodadType, Dooda
     disassembly?: Item[];
     gatherReady?: number;
     growth?: GrowingStage;
+    hasWater?: IHasWater;
     hitchedCreature?: number;
     itemOrders?: number[];
     magic?: MagicalPropertyManager;
@@ -125,13 +126,13 @@ export default class Doodad extends Entity<IDoodadDescription, DoodadType, Dooda
     toString(): string;
     getRegistrarId(): number;
     /**
-     * @param article Whether to include an article for the name of the doodad. Uses the article rules on the language. Defaults to `true`.
+     * @param article Whether to include an article for the name of the doodad. Uses the article rules on the language.`.
      * @param count The number of this doodad that you're getting the name of. Defaults to `1`.
      *
      * Examples:
      * - `doodad.getName()` // "a stone furnace"
-     * - `doodad.getName(false)` // "stone furnace"
-     * - `doodad.getName(undefined, 3)` // "stone furnaces"
+     * - `doodad.getName(Article.None)` // "stone furnace"
+     * - `doodad.getName(Article.None, 3)` // "stone furnaces"
      */
     getName(article?: Article, count?: number): import("../../language/impl/TranslationImpl").default;
     protected getDescription(): IDoodadDescription | undefined;

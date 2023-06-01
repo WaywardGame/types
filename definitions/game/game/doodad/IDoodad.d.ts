@@ -34,6 +34,7 @@ import type { IRGB } from "utilities/Color";
 export interface IDoodadOptions extends IObjectOptions {
     force?: boolean;
     gatherReady?: number;
+    hasWater?: IHasWater;
     stillContainer?: Item;
     growth?: GrowingStage;
     spread?: number;
@@ -402,7 +403,11 @@ export declare enum DoodadType {
     ClayLighthouse = 158,
     LitClayLighthouse = 159,
     BasaltLighthouse = 160,
-    LitBasaltLighthouse = 161
+    LitBasaltLighthouse = 161,
+    GraniteDripstone = 162,
+    SandstoneDripstone = 163,
+    BasaltDripstone = 164,
+    ClayDripstone = 165
 }
 export declare enum DoodadTypeExtra {
     None = 999,
@@ -440,7 +445,8 @@ export declare enum DoodadTypeGroup {
     Scarecrow = 415,
     Lighthouse = 416,
     LitLighthouse = 417,
-    Last = 418
+    Dripstone = 418,
+    Last = 419
 }
 export declare enum DoorOrientation {
     Default = 0,
@@ -457,5 +463,9 @@ export declare enum GrowingStage {
 }
 export interface IHasBuilder {
     getBuilder(): Human | undefined;
+}
+export interface IHasWater {
+    top?: boolean;
+    bottom?: boolean;
 }
 export {};

@@ -1449,7 +1449,11 @@ export declare enum ItemType {
     AberrantClayGolemFigure = 750,
     AberrantGraniteGolemFigure = 751,
     AberrantSandstoneGolemFigure = 752,
-    AberrantBasaltGolemFigure = 753
+    AberrantBasaltGolemFigure = 753,
+    GraniteDripstone = 754,
+    SandstoneDripstone = 755,
+    BasaltDripstone = 756,
+    ClayDripstone = 757
 }
 export declare enum ItemTypeExtra {
     None = 999,
@@ -1610,7 +1614,8 @@ export declare enum ItemTypeGroup {
     Gem = 931,
     Golem = 932,
     CreatureResource = 933,
-    All = 934,
-    Last = 935
+    Dripstone = 934,
+    All = 935,
+    Last = 936
 }
 export {};

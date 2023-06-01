@@ -10,7 +10,8 @@
  */
 declare enum UiExperiment {
     ColorSchemeLight = 0,
-    NewCraftingDialog = 1
+    NewCraftingDialog = 1,
+    ActionExamples = 2
 }
 declare module UiExperiment {
     type Excluded = "toggle" | "update" | "all" | "name" | "has";
