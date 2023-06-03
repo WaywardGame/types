@@ -196,6 +196,10 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      */
     containedItemGroupProvidesSkill?: IProvidesSkill;
     alwaysInspectable?: true;
+    /**
+     * The amount of turns it takes to purify the water.
+     */
+    waterPurificationTurns?: number;
 }
 export interface IItemStackRegion {
     xMin?: number;
