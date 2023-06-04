@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { SavePropertyFlag } from "save/serializer/ISerializer";
+import type Version from "utilities/Version";
 export declare const SLOT_MIN = 0;
 export declare const SLOT_GLOBAL = -1;
 export declare const SLOT_MULTIPLAYER = -2;
@@ -38,7 +39,7 @@ export declare enum CompressionType {
 }
 export declare const defaultCompressionType = CompressionType.PakoDeflate;
 export interface ISaveObject {
-    version: string;
+    version: Version.String;
     compressionType: CompressionType;
     data: Record<string, any>;
 }
@@ -48,8 +49,8 @@ export interface ISerializeProperty {
     enableStats?: boolean;
     skipCompression?: boolean;
     savePropertyFlag?: SavePropertyFlag;
-    shouldSerialize?(version: string): boolean;
-    shouldDeserialize?(version: string): boolean;
+    shouldSerialize?(version: Version.String): boolean;
+    shouldDeserialize?(version: Version.String): boolean;
 }
 export interface ISaveManagerEvents {
     /**

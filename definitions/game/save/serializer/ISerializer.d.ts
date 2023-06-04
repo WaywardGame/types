@@ -9,9 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Game } from "game/Game";
+import type Version from "utilities/Version";
 export interface ISerializer {
     readonly game: Game;
-    readonly version: string;
+    readonly version: Version.String;
     readonly metadata: Map<SerializerMetadataKey, any>;
     readonly dataView: DataView;
     byteOffset: number;
@@ -33,7 +34,7 @@ export declare enum SerializerMetadataKey {
     StringStats = 3
 }
 export interface ISerializerOptions {
-    version: string;
+    version: Version.String;
     includeFlags?: SavePropertyFlag;
     emptyObjectMode?: boolean;
     disableJitDeserialization?: boolean;

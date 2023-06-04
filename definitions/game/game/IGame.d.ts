@@ -30,6 +30,7 @@ import type { IReplayLogEntry } from "replay/IReplayLogEntry";
 import type { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 import type { IRange } from "utilities/math/Range";
+import type Version from "utilities/Version";
 export interface IGameEvents {
     /**
      * Called when the game is starting
@@ -128,7 +129,7 @@ export type IGameOld = Partial<Game> & Partial<{
     monsters: Creature[];
     tamedCreatures: number[];
     options: IOptions;
-    lastPlayedVersion: string | undefined;
+    lastPlayedVersion: Version.String | undefined;
     highscores: IHighscoreOld[];
     playedCount: number;
     dailyChallenge: boolean;

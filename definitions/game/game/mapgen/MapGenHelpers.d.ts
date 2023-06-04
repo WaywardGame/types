@@ -14,9 +14,10 @@ import type Island from "game/island/Island";
 import type { MapGenVersions } from "game/mapgen/IMapGen";
 import type { ITemplate, TileTemplateType } from "game/tile/ITerrain";
 import type Tile from "game/tile/Tile";
+import Version from "utilities/Version";
 export declare module MapGenHelpers {
-    function pickBasedOnVersion<T>(version: string, versions: MapGenVersions<T>): {
-        version: string;
+    function pickBasedOnVersion<T>(version: Version.String, versions: MapGenVersions<T>): {
+        version: Version.String;
         selection: T;
     };
     function startLoading(): Promise<void>;

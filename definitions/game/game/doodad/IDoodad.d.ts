@@ -275,8 +275,8 @@ export declare enum DoodadType {
     Cotton = 26,
     PricklyPears = 27,
     Tumbleweed = 28,
-    GraniteWaterStill = 29,
-    LitGraniteWaterStill = 30,
+    TinWaterStill = 29,
+    LitTinWaterStill = 30,
     GraniteCampfire = 31,
     LitGraniteCampfire = 32,
     SandstoneKiln = 33,
@@ -301,14 +301,14 @@ export declare enum DoodadType {
     LitClayCampfire = 52,
     ClayFurnace = 53,
     LitClayFurnace = 54,
-    ClayWaterStill = 55,
-    LitClayWaterStill = 56,
+    CopperWaterStill = 55,
+    LitCopperWaterStill = 56,
     SandstoneCampfire = 57,
     LitSandstoneCampfire = 58,
     SandstoneFurnace = 59,
     LitSandstoneFurnace = 60,
-    SandstoneWaterStill = 61,
-    LitSandstoneWaterStill = 62,
+    WroughtIronWaterStill = 61,
+    LitWroughtIronWaterStill = 62,
     GraniteKiln = 63,
     LitGraniteKiln = 64,
     WroughtIronAnvil = 65,
@@ -384,8 +384,8 @@ export declare enum DoodadType {
     BronzeMinecart = 135,
     BasaltWall = 136,
     SetBasaltDeadfall = 137,
-    BasaltWaterStill = 138,
-    LitBasaltWaterStill = 139,
+    IronWaterStill = 138,
+    LitIronWaterStill = 139,
     BasaltCampfire = 140,
     LitBasaltCampfire = 141,
     BasaltFurnace = 142,
@@ -411,7 +411,9 @@ export declare enum DoodadType {
     GraniteDripstone = 162,
     SandstoneDripstone = 163,
     BasaltDripstone = 164,
-    ClayDripstone = 165
+    ClayDripstone = 165,
+    BronzeWaterStill = 166,
+    LitBronzeWaterStill = 167
 }
 export declare enum DoodadTypeExtra {
     None = 999,
@@ -450,7 +452,8 @@ export declare enum DoodadTypeGroup {
     Lighthouse = 416,
     LitLighthouse = 417,
     Dripstone = 418,
-    Last = 419
+    WaterStill = 419,
+    Last = 420
 }
 export declare enum DoorOrientation {
     Default = 0,

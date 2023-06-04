@@ -49,6 +49,7 @@ import { Uninit } from "Uninit";
 import type { IVector2 } from "utilities/math/IVector";
 import type { Random } from "utilities/random/Random";
 import type { IVersionInfo } from "utilities/Version";
+import Version from "utilities/Version";
 import { WebWorkerManager } from "webWorker/WebWorkerManager";
 export declare class Game extends EventEmitter.Host<IGameEvents> {
     get isChallenge(): boolean;
@@ -57,7 +58,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     difficulty: GameMode;
     gameplayModifierData: Record<number, any>;
     replay: ReplayManager | undefined;
-    saveVersion: string;
+    saveVersion: Version.String;
     shouldUpdateTablesAndWeight: boolean;
     tickSpeed: number;
     time: TimeManager;
@@ -68,7 +69,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     /**
      * The version the save was originally created on
      */
-    version: string;
+    version: Version.String;
     readonly interval = 16.6666;
     readonly autoSave: AutoSave;
     readonly commandManager: CommandManager;

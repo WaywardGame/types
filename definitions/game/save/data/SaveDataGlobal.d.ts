@@ -15,10 +15,11 @@ import type { IHighscore, IOptions } from "save/data/ISaveDataGlobal";
 import type { IDialogInfo } from "ui/old/IOldUi";
 import type { ISavedCharacter } from "ui/screen/screens/menu/menus/character/Character";
 import type EnumInfo from "utilities/enum/EnumInfo";
+import type Version from "utilities/Version";
 export default class SaveDataGlobal {
     static defaultOptions: IOptions;
     gameCrafted: Record<number, ICrafted>;
-    gameLastPlayedVersion: string;
+    gameLastPlayedVersion: Version.String;
     gameHighscores: IHighscore[];
     gamePlayedCount: number;
     options: IOptions;

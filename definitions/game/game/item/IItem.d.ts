@@ -899,7 +899,7 @@ export declare enum ItemType {
     WroughtIronTongs = 200,
     SheetOfGlass = 201,
     SolarStill = 202,
-    GraniteWaterStill = 203,
+    TinWaterStill = 203,
     GraniteSundial = 204,
     LitTallowTorch = 205,
     Sinew = 206,
@@ -993,10 +993,10 @@ export declare enum ItemType {
     ClayKiln = 294,
     ClayCampfire = 295,
     ClayFurnace = 296,
-    ClayWaterStill = 297,
+    CopperWaterStill = 297,
     SandstoneCampfire = 298,
     SandstoneFurnace = 299,
-    SandstoneWaterStill = 300,
+    WroughtIronWaterStill = 300,
     GraniteKiln = 301,
     WroughtIronAnvil = 302,
     IronAnvil = 303,
@@ -1396,7 +1396,7 @@ export declare enum ItemType {
     BasaltHammer = 697,
     BasaltAnvil = 698,
     BasaltDeadfall = 699,
-    BasaltWaterStill = 700,
+    IronWaterStill = 700,
     BasaltSundial = 701,
     BasaltBullet = 702,
     BasaltKnife = 703,
@@ -1453,7 +1453,8 @@ export declare enum ItemType {
     GraniteDripstone = 754,
     SandstoneDripstone = 755,
     BasaltDripstone = 756,
-    ClayDripstone = 757
+    ClayDripstone = 757,
+    BronzeWaterStill = 758
 }
 export declare enum ItemTypeExtra {
     None = 999,
