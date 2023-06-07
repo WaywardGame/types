@@ -311,11 +311,21 @@ export declare const EQUIP_SLOTS_FREE: EquipType[];
 export declare const EQUIP_SLOT_ITEM_GROUPS: Record<EquipType, ItemTypeGroup | undefined>;
 export declare const equipmentRenderOrder: EquipType[];
 export type InsulationWeight = number | [number, "onlyWhenEquipped"];
-export declare const equipSlotInsulationWeights: Record<TempType, Record<EquipType, InsulationWeight>>;
+export declare const equipSlotInsulationWeights: Record<TempType, PartialRecord<EquipType, InsulationWeight>>;
 export interface IExcludedWhenLowering {
     excludeIfLowering: true;
 }
-export declare function calculateEquipSlotInsulation(type: TempType, slot: EquipType, equipped?: Item): [number, number, IExcludedWhenLowering | undefined];
+/**
+ * @param weight The weight of this slot in the calculation. Compare this number to the weights of other slots.
+ * @param insulation The insulation value of the item in this slot.
+ * @param excluded Whether this slot's insulation should be excluded if it lowers the resulting insulation value.
+ */
+export type CalculatedEquipSlotInsulation = [
+    weight: number,
+    insulation: number,
+    excluded?: IExcludedWhenLowering
+];
+export declare function calculateEquipSlotInsulation(type: TempType, slot: EquipType, equipped?: Item): CalculatedEquipSlotInsulation;
 export declare const insulationRangeWhenSwimming: Record<TempType, IRange>;
 export declare enum HairColor {
     "#e7c978" = 0,

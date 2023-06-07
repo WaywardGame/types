@@ -86,5 +86,6 @@ export declare enum EnumId {
     DoodadTag = 44,
     EntityTag = 45,
     ItemTypeExtra = 46,
-    DoodadTypeExtra = 47
+    DoodadTypeExtra = 47,
+    EquipType = 48
 }

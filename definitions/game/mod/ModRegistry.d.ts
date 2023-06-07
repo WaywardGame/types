@@ -20,7 +20,7 @@ import type { UsableActionType } from "game/entity/action/usable/UsableActionTyp
 import type { ICorpseDescription } from "game/entity/creature/corpse/ICorpse";
 import type { CreatureType, ICreatureDescription } from "game/entity/creature/ICreature";
 import type { EntityTag, StatusType } from "game/entity/IEntity";
-import type { SkillType } from "game/entity/IHuman";
+import type { EquipType, InsulationWeight, SkillType } from "game/entity/IHuman";
 import type { Stat } from "game/entity/IStats";
 import type { NPCType } from "game/entity/npc/INPCs";
 import type { INPCClass } from "game/entity/npc/NPCS";
@@ -31,6 +31,7 @@ import type { Quest } from "game/entity/player/quest/quest/Quest";
 import type { QuestRequirementType } from "game/entity/player/quest/requirement/IRequirement";
 import type { QuestRequirement } from "game/entity/player/quest/requirement/Requirement";
 import type { ISkillDescription } from "game/entity/skill/ISkills";
+import type { IStatDescription } from "game/entity/StatDescriptions";
 import type { StatusEffectClass } from "game/entity/status/StatusEffect";
 import type { InspectType } from "game/inspection/IInspection";
 import type { InspectionClass } from "game/inspection/InspectionTypeMap";
@@ -38,6 +39,7 @@ import type { IItemDescription, IItemGroupDescription, ItemTag, ItemType, ItemTy
 import type { IMagicalPropertyDescription, MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import type { ILoadingDescription } from "game/meta/Loading";
 import type { Prompt } from "game/meta/prompt/IPrompt";
+import type { TempType } from "game/temperature/ITemperature";
 import type { ITerrainDescription, OverlayType, TerrainType } from "game/tile/ITerrain";
 import type { ITileEventDescription, TileEventType } from "game/tile/ITileEvent";
 import type { ITerrainLootItem } from "game/tile/TerrainResources";
@@ -66,6 +68,9 @@ import type { IStatDisplayDescription } from "ui/screen/screens/game/static/stat
 import type { HelpArticle, IHelpArticle } from "ui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 import type { ModOptionSectionInitializer } from "ui/screen/screens/menu/menus/options/TabMods";
 export interface IModdable {
+    /**
+     * Do not provide or modify this value, only reference it. This is set by the modding system during the process of registration.
+     */
     modIndex?: number;
 }
 export declare const SYMBOL_MOD_REGISTRATIONS: unique symbol;
@@ -83,47 +88,48 @@ export declare enum ModRegistrationType {
     DoodadGroup = 10,
     DoodadTag = 11,
     EntityTag = 12,
-    HelpArticle = 13,
-    InspectionType = 14,
-    InterModRegistration = 15,
-    InterModRegistry = 16,
-    Interrupt = 17,
-    InterruptChoice = 18,
-    Item = 19,
-    ItemExtra = 20,
-    ItemGroup = 21,
-    ItemTag = 22,
-    Language = 23,
-    LanguageExtension = 24,
-    Load = 25,
-    MagicalProperty = 26,
-    MenuBarButton = 27,
-    Message = 28,
-    MessageSource = 29,
-    MusicTrack = 30,
-    Note = 31,
-    NPC = 32,
-    OptionsSection = 33,
-    Overlay = 34,
-    Override = 35,
-    Packet = 36,
-    Prompt = 37,
-    QuadrantComponent = 38,
-    Quest = 39,
-    QuestRequirement = 40,
-    Registry = 41,
-    Skill = 42,
-    SoundEffect = 43,
-    Stat = 44,
-    StatusEffect = 45,
-    Terrain = 46,
-    TerrainDecoration = 47,
-    TileEvent = 48,
-    TileLayerType = 49,
-    UsableActions = 50,
-    UsableActionType = 51,
-    UsableActionTypePlaceholder = 52,
-    WorldLayer = 53
+    EquipType = 13,
+    HelpArticle = 14,
+    InspectionType = 15,
+    InterModRegistration = 16,
+    InterModRegistry = 17,
+    Interrupt = 18,
+    InterruptChoice = 19,
+    Item = 20,
+    ItemExtra = 21,
+    ItemGroup = 22,
+    ItemTag = 23,
+    Language = 24,
+    LanguageExtension = 25,
+    Load = 26,
+    MagicalProperty = 27,
+    MenuBarButton = 28,
+    Message = 29,
+    MessageSource = 30,
+    MusicTrack = 31,
+    Note = 32,
+    NPC = 33,
+    OptionsSection = 34,
+    Overlay = 35,
+    Override = 36,
+    Packet = 37,
+    Prompt = 38,
+    QuadrantComponent = 39,
+    Quest = 40,
+    QuestRequirement = 41,
+    Registry = 42,
+    Skill = 43,
+    SoundEffect = 44,
+    Stat = 45,
+    StatusEffect = 46,
+    Terrain = 47,
+    TerrainDecoration = 48,
+    TileEvent = 49,
+    TileLayerType = 50,
+    UsableActions = 51,
+    UsableActionType = 52,
+    UsableActionTypePlaceholder = 53,
+    WorldLayer = 54
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -251,7 +257,7 @@ export interface ISkillRegistration extends IBaseModRegistration {
 export interface IStatRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Stat;
     name: string;
-    description?: IStatDisplayDescription;
+    description?: IStatDisplayDescription & IStatDescription;
 }
 export interface IStatusEffectRegistration extends IBaseModRegistration {
     type: ModRegistrationType.StatusEffect;
@@ -376,6 +382,36 @@ export interface IEntityTagRegistration extends IBaseModRegistration {
     type: ModRegistrationType.EntityTag;
     name: string;
 }
+export interface IEquipTypeDescription extends IModdable {
+    /**
+     * If you need to set up an "internal" slot — such as the vanilla "EquipType.Held" which is an internal slot meaning "main hand or off hand."
+     */
+    disableSlot?: true;
+    /**
+     * Set this to true to allow the player to change which item is slotted in this slot for free. (IE, like the main hand and off hand slots.)
+     */
+    freeSlot?: true;
+    /**
+     * An item group to automatically assign to all items equippable in this equip slot.
+     */
+    itemGroup?: ItemTypeGroup;
+    /**
+     * For each temperature type (`TempType.Cold` and `TempType.Heat`), the "weight" that it has.
+     * When calculating insulation, this weight is compared with all other weights.
+     * Higher weight = higher % of the insulation score comes from this slot.
+     *
+     * To make the slot optional for insulation of a temp type,
+     * make the value 0 (not considered at all) OR make it `[<weight>, "onlyWhenEquipped"]`.
+     *
+     * Optional slots do not reduce the human's insulation.
+     */
+    insulationWeights?: PartialRecord<TempType, InsulationWeight>;
+}
+export interface IEquipTypeRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.EquipType;
+    name: string;
+    description: IEquipTypeDescription;
+}
 export interface IOverrideDescription<OBJECT extends object, PROPERTY extends keyof OBJECT> {
     object: OBJECT;
     property: PROPERTY;
@@ -388,7 +424,7 @@ export interface IOverrideRegistration<OBJECT extends object, PROPERTY extends k
 export interface IInheritsRegistrationTime {
     useRegistrationTime: ModRegistrationType;
 }
-export type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IDoodadTagRegistration | IEntityTagRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | IItemTagRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IOverrideRegistration<any, any> | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration;
+export type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IDoodadTagRegistration | IEntityTagRegistration | IEquipTypeRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | IItemTagRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IOverrideRegistration<any, any> | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration;
 export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare module Register {
     /**
@@ -472,7 +508,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered stat.
      */
-    export function stat(name: string, description?: IStatDisplayDescription): <K extends string | number | symbol, T extends Record<K, Stat>>(target: T, key: K) => void;
+    export function stat(name: string, description?: IStatDisplayDescription & IStatDescription): <K extends string | number | symbol, T extends Record<K, Stat>>(target: T, key: K) => void;
     /**
      * Registers a status effect.
      * @param name The name of the status effect.
@@ -703,6 +739,11 @@ declare module Register {
      * `<your mod directory>/static/image/ui/icons/action/mod<your mod name><this registration name>.png`.
      */
     export function usableActionTypePlaceholder(name: string): <K extends string | number | symbol, T extends Record<K, UsableActionType>>(target: T, key: K) => void;
+    /**
+     * Registers an equip slot.
+     * @param description The definition of the equip slot.
+     */
+    export function equipType(name: string, description: IEquipTypeDescription): <K extends string | number | symbol, T extends Record<K, EquipType>>(target: T, key: K) => void;
     export function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends Record<K, InterModRegistry<V>>>(target: T, key: K) => void;
     export function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends Record<K, InterModRegistration<V>>>(target: T, key: K) => void;
     /**

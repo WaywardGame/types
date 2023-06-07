@@ -59,6 +59,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     private temperatureBoundaryMax;
     temperatureBoundaryMaxVector: Vector2;
     constructor(island: Island);
+    clearAll(): void;
     /**
      * Called after the island map size is configured
      */
