@@ -12,6 +12,7 @@ import type { SfxType } from "audio/IAudio";
 import EventEmitter from "event/EventEmitter";
 import type { TileUpdateType } from "game/IGame";
 import { FireType } from "game/IGame";
+import type { WorldZ } from "game/WorldZ";
 import type Doodad from "game/doodad/Doodad";
 import type EntityMovable from "game/entity/EntityMovable";
 import type EntityWithStats from "game/entity/EntityWithStats";
@@ -45,7 +46,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     renamed?: string | ISerializedTranslation;
     x: number;
     y: number;
-    z: number;
+    z: WorldZ;
     private _data?;
     private _tags?;
     islandId: IslandId;

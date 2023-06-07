@@ -17,6 +17,22 @@ declare const _default: {
     readonly fog: {
         color: import("utilities/Color").IRGB;
     };
+    readonly ferocity: {
+        1: {
+            1: number;
+            2: number;
+            3: number;
+            4: number;
+            5: number;
+        };
+        0: {
+            1: number;
+            2: number;
+            3: number;
+            4: number;
+            5: number;
+        };
+    };
     mapGen: BiomeMapGen;
     temperature: IBiomeTemperature;
 };

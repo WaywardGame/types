@@ -63,15 +63,15 @@ export interface IStatChangeInfo<T = any> {
 export declare module IStatChangeInfo {
     /**
      * Creates a stat change info object
-     * @param important Marked as "important" if true
-     */
-    function get<T = any>(important: boolean): IStatChangeInfo<T>;
-    /**
-     * Creates a stat change info object
      * @param reasonOrInfo A `StatChangeReason`, or an already created `IStatChangeInfo` object.
      * @param important Whether this change should be marked as important
      */
     function get<T = any>(reasonOrInfo: StatChangeReason | IStatChangeInfo, important?: boolean): IStatChangeInfo<T>;
+    /**
+     * Creates a stat change info object
+     * @param important Marked as "important" if true
+     */
+    function get<T = any>(important: boolean): IStatChangeInfo<T>;
 }
 export declare enum StatusType {
     Bleeding = 0,

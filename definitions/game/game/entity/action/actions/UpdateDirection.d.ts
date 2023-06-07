@@ -10,8 +10,10 @@
  */
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
+import type Human from "game/entity/Human";
 import { Direction } from "utilities/math/Direction";
-declare const _default: Action<[ActionArgument.Direction, [ActionArgument.Integer32, ActionArgument.Undefined]], import("../../Human").default<number>, void, {
+declare const _default: Action<[ActionArgument.Direction, [ActionArgument.Integer32, ActionArgument.Undefined]], Human<number>, void, {
     usable: true;
 }, [Direction.None | Direction.East | Direction.North | Direction.West | Direction.South, (number | undefined)?]>;
 export default _default;
+export declare function UpdateDirectionInternal(human: Human, direction: Direction.Cardinal): void;

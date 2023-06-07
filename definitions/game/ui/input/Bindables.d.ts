@@ -9,11 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Bindable from "ui/input/Bindable";
-import { BindableType } from "ui/input/Bindable";
+import { BindableMouseTargetingContext, BindableType, BindableTypeContext } from "ui/input/Bindable";
 import type { Binding } from "ui/input/Bindings";
 declare module Bindables {
     function register(index: number, defaultBinding: Binding[]): void;
     function deregister(index: number): void;
     function getType(bindable: Bindable): BindableType | undefined;
+    function getContext(bindable: Bindable): BindableTypeContext;
+    function getMouseContext(bindable: Bindable): BindableMouseTargetingContext | undefined;
 }
 export default Bindables;

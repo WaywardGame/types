@@ -8,6 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { WorldZ } from "game/WorldZ";
+import { type FerocityLevelThresholds } from "game/deity/IDeities";
 import type { IBiomeMapGen, MapGenVersions } from "game/mapgen/IMapGen";
 import type { IBiomeTemperature } from "game/temperature/ITemperature";
 import type { TerrainType } from "game/tile/ITerrain";
@@ -21,6 +23,17 @@ export interface IBiomeDescription extends IModdable {
     temperature?: IBiomeTemperature;
     mapGen: MapGenVersions<IBiomeMapGen>;
     fog?: IFogDescription;
+    /**
+     * A record defining maximum thresholds for each ferocity level.
+     *
+     * When a layer's ferocity thresholds are not set, thresholds for `WorldZ.Overworld` are used.
+     * When no thresholds are set *at all*, {@link DEFAULT_FEROCITY_LEVEL_THRESHOLDS} is used.
+     *
+     * The current ferocity level is equivalent to the level with the threshold *closest* to the current alignment value, without exceeding it.
+     *
+     * When no thresholds are applicable, `FerocityLevel.Minimal` is used.
+     */
+    ferocity?: PartialRecord<WorldZ, FerocityLevelThresholds>;
 }
 export interface IFogDescription {
     color: IRGB;
