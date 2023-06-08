@@ -14,8 +14,8 @@ import Component from "ui/component/Component";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import Bindable from "ui/input/Bindable";
 import Dialog from "ui/screen/screens/game/component/Dialog";
-import type { IItemDropApi, IItemPickUpApi, ItemSlot } from "ui/screen/screens/game/component/Item";
-import ItemComponent, { ItemRefreshType } from "ui/screen/screens/game/component/Item";
+import type { IItemDropApi, IItemPickUpApi, ItemSlot } from "ui/screen/screens/game/component/ItemComponent";
+import ItemComponent, { ItemRefreshType } from "ui/screen/screens/game/component/ItemComponent";
 import EquipmentSlotTooltipHandler from "ui/screen/screens/game/dialog/equipment/EquipmentSlotTooltip";
 import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 export declare enum EquipmentClasses {

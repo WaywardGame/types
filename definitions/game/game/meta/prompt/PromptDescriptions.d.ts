@@ -94,6 +94,7 @@ export declare const promptMenuModsConfirmUninstallMod: import("game/meta/prompt
 export declare const promptMenuModsUnloadableSaveGameMod: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[folderName: string]>;
 export declare const promptMenuModsSubmenuEditInternalModsModsListChangeReload: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuMultiplayerCannotJoinFailedToLoadMods: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[modErrors: Text[]]>;
+export declare const promptMenuMultiplayerCannotJoinMissingMods: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[missingMods: Text[]]>;
 export declare const promptMenuNewGameTooManySaves: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptMenuCustomGameOptionsConfirmImport: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuCustomGameOptionsImportFailure: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;

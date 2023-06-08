@@ -14,6 +14,7 @@ export declare function startGame(gameOptions: IPlayOptions): void;
 export declare enum ModLoadability {
     NotEnabled = "notenabled",
     Enabled = "enabled",
+    NotFound = "notfound",
     Error = "error"
 }
 export declare function isModLoadable(publishId?: string): [string, ModLoadability];

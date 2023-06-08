@@ -70,7 +70,8 @@ export interface ISteamworks {
     getLobbyMembers(lobbyId: string): ISteamFriend[] | undefined;
     ugcGetUserItems(type: number, sort: number, listType: number, cb: (err: string | null, items: IWorkshopItem[]) => void): void;
     ugcSynchronizeItems(path: string, cb: (err: string | null, items: IWorkshopItem[]) => void): void;
-    ugcUnsubscribe(publishId: string, cb: (err: string | null) => void): void;
+    ugcSubscribe(publishFileId: string, cb: (err: string | null) => void): void;
+    ugcUnsubscribe(publishFileId: string, cb: (err: string | null) => void): void;
     saveFilesToCloud(files: string[], cb: (err: string | null) => void): void;
     publishWorkshopFile(path: string, imagePath: string, title: string, description: string, tags: string[], cb: (err: string | null, publishedFileId2: string) => void): void;
     updatePublishedWorkshopFile(publishFileId: string, path: string, imagePath: string, title: string, description: string, tags: string[], cb: (err: string | null, publishedFileId2: string) => void): void;
@@ -249,7 +250,7 @@ export interface IServerGameDetails {
 export interface IServerMod {
     name: string;
     version: string;
-    publishFileId: string | undefined;
+    publishFileId?: string;
 }
 export interface IServerIslandDetails {
     position: {

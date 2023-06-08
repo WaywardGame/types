@@ -27,7 +27,7 @@ import type ItemFinder from "game/item/ItemFinder";
 import type Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import type Bindable from "ui/input/Bindable";
-import type { ItemDetailIconLocation } from "ui/screen/screens/game/component/Item";
+import type { ItemDetailIconLocation } from "ui/screen/screens/game/component/ItemComponent";
 import type Tooltip from "ui/tooltip/Tooltip";
 import type { HighlightSelector } from "ui/util/IHighlight";
 import type HashSet from "utilities/collection/set/HashSet";
