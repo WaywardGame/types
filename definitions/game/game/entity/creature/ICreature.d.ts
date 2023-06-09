@@ -134,10 +134,11 @@ export declare enum TileGroup {
     Seawater = 15,
     FreshWater = 16,
     Swamp = 17,
-    IceCap = 18,
-    IceCapWithWater = 19,
-    Void = 20,
-    DesertWithDirt = 21
+    FreshWaterSwampWater = 18,
+    IceCap = 19,
+    IceCapWithWater = 20,
+    Void = 21,
+    DesertWithDirt = 22
 }
 export interface ICreatureDescription extends IModdable, ITemperatureDescription, ICausesStatusEffect {
     minhp: number;
