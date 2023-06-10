@@ -28,7 +28,7 @@ declare module Version {
     export type String = `${Stage}${bigint}.${bigint}.${bigint}` | `${Stage}${bigint}.${bigint}` | `${Stage}${bigint}`;
     export type StringSemVer = `${bigint}.${bigint}.${bigint}-${Stage}` | `${bigint}.${bigint}.${bigint}`;
     export type Month = "jan" | "feb" | "mar" | "apr" | "may" | "jun" | "jul" | "aug" | "sep" | "oct" | "nov" | "dec";
-    export type DateString = `${Month} ${bigint} ${bigint} ${bigint}:${bigint | "00"}`;
+    export type DateString = `${Month} ${bigint} ${bigint} ${bigint | "00"}:${bigint | "00"}`;
     export const versionInfoRegExp: RegExp;
     export const versionInfoRegExpSemver: RegExp;
     /**

@@ -27,6 +27,7 @@ export type IslandId = `${number},${number}`;
 export declare module IslandPosition {
     function toId(position: IVector2): IslandId;
     function fromId(id: IslandId): IVector2 | undefined;
+    function isTransient(id: IslandId): boolean;
     function calculateBaseSeed(x: number, y: number, initialSeed: number): number;
 }
 export interface IIslandEvents {

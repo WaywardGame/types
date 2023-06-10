@@ -27,6 +27,7 @@ export default class EnumDropdown<ENUM_OBJECT, OTHER_OPTIONS extends string | ne
     setExcluded(...excluded: VALUES[]): this;
     protected getTranslation(id: VALUES): import("../../../language/impl/TranslationImpl").default;
     protected filterEnum?(id: VALUES): boolean;
+    protected getEnumValues(enumObject: any): VALUES[];
     protected getOptions(enumObject: any): [VALUES, (option: Button) => Button][];
     protected getOptionTooltipLocation(handler: TooltipLocationHandler): void;
     protected optionTooltipInitializer?(tooltip: Tooltip, type: VALUES, translation: Translation): any;

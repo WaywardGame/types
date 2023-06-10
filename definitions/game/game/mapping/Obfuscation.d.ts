@@ -13,7 +13,7 @@ import type { DrawnMapTheme } from "game/mapping/IMapRender";
 export default class Obfuscation {
     private readonly seed?;
     private readonly canvas;
-    constructor(radius: number, seed?: Uint16Array | undefined);
+    constructor(radius: number, seed?: number | Uint16Array | undefined);
     obfuscate(mapImage: CanvasImage, obfuscation: number, theme: DrawnMapTheme): Promise<HTMLCanvasElement>;
     private render;
 }

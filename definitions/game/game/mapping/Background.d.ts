@@ -13,7 +13,7 @@ export type CanvasImage = HTMLImageElement | HTMLCanvasElement | ImageBitmap;
 export default class MapBackground {
     private readonly seed?;
     private readonly canvas;
-    constructor(radius: number, seed?: Uint16Array | undefined);
+    constructor(radius: number, seed?: number | Uint16Array | undefined);
     render(mapImage: CanvasImage, theme: DrawnMapTheme): Promise<HTMLCanvasElement>;
     private lastTheme?;
     private renderBackground;

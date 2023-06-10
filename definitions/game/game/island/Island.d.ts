@@ -75,15 +75,25 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly tileEvents: TileEventManager;
     readonly time: TimeManager;
     readonly world: World;
-    saveBuildTime?: number;
+    /**
+     * The version this island was originally made on
+     */
+    version: Version.String;
+    /**
+     * The version the mapgen for this island uses
+     */
+    mapGenVersion: Version.String;
+    /**
+     * The version this island was last loaded on
+     */
     saveVersion: Version.String;
+    saveBuildTime: number;
     biomeType: BiomeTypes;
     civilizationScore: number;
     civilizationScoreTiles: Record<number, number>;
     contaminatedWater: IWaterContamination[];
     creatureSpawnTimer: number;
     loadCount: number;
-    mapGenVersion: Version.String;
     name?: string;
     position: IVector2;
     readonly mapSize: number;
@@ -92,7 +102,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     referenceId?: number;
     templateBiomeOptions: ITemplateBiomeOptions | undefined;
     tileContainers: ITileContainer[];
-    version: Version.String;
     tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;
     readonly seeds: ISeeds;
     readonly seededRandom: Random<LegacySeededGenerator | PCGSeededGenerator>;
