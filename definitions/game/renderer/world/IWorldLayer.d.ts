@@ -44,3 +44,4 @@ export interface IWorldLayerOld {
     exploredMap?: ExploreMap;
 }
 export declare const stillContainerOrder: Record<number, number>;
+export declare const tileAnimatedOffset = 127;
