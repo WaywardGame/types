@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,6 +12,7 @@ import type { Game } from "game/Game";
 import type { ISerializer, ISerializerOptions } from "save/serializer/ISerializer";
 import { SavePropertyFlag, SerializerMetadataKey, Types } from "save/serializer/ISerializer";
 import StringTokenizer from "save/serializer/StringTokenizer";
+import type Version from "utilities/Version";
 export default class Serializer implements ISerializer {
     readonly game: Game;
     private readonly options;
@@ -23,7 +24,7 @@ export default class Serializer implements ISerializer {
     readonly metadata: Map<SerializerMetadataKey, any>;
     dataView: DataView;
     byteOffset: number;
-    readonly version: string;
+    readonly version: Version.String;
     private readonly includeFlags;
     private readonly emptyObjectMode;
     private readonly disableJitDeserialization;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,6 +14,7 @@ export declare function startGame(gameOptions: IPlayOptions): void;
 export declare enum ModLoadability {
     NotEnabled = "notenabled",
     Enabled = "enabled",
+    NotFound = "notfound",
     Error = "error"
 }
 export declare function isModLoadable(publishId?: string): [string, ModLoadability];

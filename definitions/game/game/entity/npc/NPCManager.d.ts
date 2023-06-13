@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -42,7 +42,7 @@ export default class NPCManager extends EntityManager<NPC> {
     load(): void;
     spawn(npcType: NPCType, tile: Tile, options?: INPCCanCreateOptions): NPC | undefined;
     remove(npc: NPC): void;
-    addPlayerLike(npc: NPC): void;
+    addPlayerLike(npc: NPC, addToIsland?: boolean): void;
     removePlayerLike(npc: NPC): void;
     updateAll(): void;
     /**

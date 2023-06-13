@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,9 +10,10 @@
  */
 import type { SfxType } from "audio/IAudio";
 import EventEmitter from "event/EventEmitter";
-import type { ActionExecutorEvents, AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable, IProtectedItems } from "game/entity/action/IAction";
+import type { ActionExecutorEvents, AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionExample, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable, IProtectedItems } from "game/entity/action/IAction";
 import { ActionArgument, ActionType } from "game/entity/action/IAction";
 import type Entity from "game/entity/Entity";
+import type Human from "game/entity/Human";
 import type { SkillType } from "game/entity/IHuman";
 import type { TurnTypeFlag } from "game/entity/player/IPlayer";
 import type Item from "game/item/Item";
@@ -60,6 +61,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private itemsUsed;
     private readonly action;
     constructor(action?: IActionDescription<A, E, R, CU>, type?: number | undefined);
+    get description(): IActionDescription<A, E, R, CU>;
     skipConfirmation(): this;
     /**
      * Check if a creature on a tile and blocking the execution of the action
@@ -71,6 +73,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
      * true if a creature is on a tile, false otherwise
      */
     isCreatureBlocking(tile: Tile): boolean;
+    getExample(executor: E, ...args: AV): IActionExample | undefined;
     /**
      * Check if an action can be used.
      * When used within an action, the result will automatically be processed.
@@ -119,6 +122,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private executeInternal;
     private createActionPacket;
     private handleApiOnActionFailure;
+    protected handleReputationChange(human: Human): void;
     private handleApi;
     private canExecute;
     private isUsableWhen;

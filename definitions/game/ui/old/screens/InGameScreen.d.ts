@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,14 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type NPC from "game/entity/npc/NPC";
+import Doodad from "game/doodad/Doodad";
+import NPC from "game/entity/npc/NPC";
 import type NPCManager from "game/entity/npc/NPCManager";
+import { Quality } from "game/IObject";
 import type { ContainerReference, DisplayableItemType, IContainer, IDismantleComponent } from "game/item/IItem";
 import { ItemType } from "game/item/IItem";
 import type { IMoveItemOptions } from "game/item/IItemManager";
 import Item from "game/item/Item";
 import type ItemManager from "game/item/ItemManager";
+import { Reference, ReferenceType } from "game/reference/IReferenceManager";
 import Message from "language/dictionary/Message";
 import { SortDirection } from "save/ISaveManager";
 import Input from "ui/component/Input";
@@ -35,6 +37,9 @@ export declare enum TextElementId {
     Defense = 2,
     Reputation = 3
 }
+export type DialogIndexStrings = "inventory" | "crafting-tabs";
+export type DialogIndex = DialogIndexStrings | Reference<ReferenceType.Item | ReferenceType.Doodad | ReferenceType.NPC>;
+export type DereferencedDialogIndex = DialogIndexStrings | number;
 declare global {
     interface JQuery {
         isVisible(): boolean;
@@ -89,8 +94,8 @@ export default class InGameScreen extends BaseScreen {
     private sortingCancelled;
     private onSortableAction;
     private isCurrentlySorting;
-    private craftableItemTypes;
-    private nonCraftableItemTypes;
+    craftableItemTypes: ItemType[] | undefined;
+    nonCraftableItemTypes: ItemType[] | undefined;
     private dismantleItems;
     private craftingDialogDirty;
     private dismantleDialogDirty;
@@ -118,15 +123,19 @@ export default class InGameScreen extends BaseScreen {
      * Gets dialog index
      * @param dialogId Dialog id
      * @param containerReference Container reference when opening a container
-     * @returns string if it's a named dialog, number if it's a container (reference id), -1 if no dialog index was retrievable
+     * @returns string if it's a named dialog, Reference if it's a container, undefined if no dialog index was retrievable
      */
-    getDialogIndex(dialogId: OldUiDialogId, containerReference?: ContainerReference): "inventory" | "crafting-tabs" | number;
+    getDialogIndex(dialogId: OldUiDialogId, containerReference?: ContainerReference): DialogIndex | undefined;
     /**
      * Gets dialog index
      * @param containerElement Dialog container element
-     * @returns string if it's a named dialog, number if it's a container (reference id), -1 if no dialog index was retrievable
+     * @returns string if it's a named dialog, Reference if it's a container, undefined if no dialog index was retrievable
      */
-    getDialogIndexByContainerElement(containerElement: JQuery): "inventory" | "crafting-tabs" | number;
+    getDialogIndexByContainerElement(containerElement: JQuery): DialogIndex | undefined;
+    /**
+     * Dereferences a dialog index into a string, number, or undefined
+     */
+    private derefenceDialogIndex;
     setupDialog(dialogId: OldUiDialogId, containerReference?: ContainerReference, highlightItemId?: number): JQueryUI.DialogOptions;
     highlightItemElementByItemId(itemId: number, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementByItemType(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
@@ -144,7 +153,7 @@ export default class InGameScreen extends BaseScreen {
     autoOpenDialog(dialogId: OldUiDialogId, element: JQuery): boolean;
     openDialogs(): void;
     clampDialogs(): void;
-    getItemClass(item?: Item, itemType?: DisplayableItemType): string;
+    getItemClass(item?: Item, itemType?: DisplayableItemType, quality?: Quality): string;
     createItemString(itemType: ItemType, item?: Item, extraClass?: string): string;
     syncItemElements(itemIds: number | number[], forceSyncDecay?: boolean): void;
     private readonly SYMBOL_LAST_NEARLY_DESTROYED;
@@ -221,8 +230,8 @@ export default class InGameScreen extends BaseScreen {
      */
     updateTablesDirty(which?: "crafting" | "dismantle"): void;
     createSortMenu(container: JQuery, messageType: Message, containerSortInfo?: IContainerSortInfo): SortRow<number>;
-    getContainerSortInfo(index: "inventory" | "crafting-tabs" | number): IContainerSortInfo;
-    getDefaultSortType(index: "inventory" | "crafting-tabs" | number): SortType;
+    getContainerSortInfo(dialogIndex: DialogIndex | undefined): IContainerSortInfo;
+    getDefaultSortType(index: DereferencedDialogIndex | undefined): SortType;
     sortItems(containerElement: JQuery, sortType: SortType, direction: SortDirection, messageType?: Message, activeSort?: boolean): void;
     onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;
     updateSort(containerElement: JQuery, activeSort: boolean): void;

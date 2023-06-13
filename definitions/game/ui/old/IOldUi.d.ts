@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Reference } from "game/reference/IReferenceManager";
 export declare enum OldUiDialogId {
     Inventory = 0,
     Crafting = 1,
@@ -24,6 +25,7 @@ export interface IUiScreen {
 }
 export interface IDialogInfo {
     fromReferenceId?: boolean;
+    reference?: Reference;
     id?: string;
     title?: string;
     open?: boolean;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,11 +10,11 @@
  */
 export type ICanLoadInfo = {
     name: string;
-    loadable: true;
+    loadable: CanLoadState.Loadable;
     index: number;
 } | {
     name: string;
-    loadable: false;
+    loadable: CanLoadState.NotFound | CanLoadState.ModLoadError;
 };
 export declare enum CanLoadState {
     Loadable = 0,
@@ -29,7 +29,8 @@ export declare enum CanLoadState {
     WorkshopModPrecedence = 9,
     IncompatibleVersion = 10,
     DisabledInMultiplayer = 11,
-    ServerSideOnNonDedicatedServer = 12
+    ServerSideOnNonDedicatedServer = 12,
+    NotFound = 13
 }
 export declare enum ModLoadFailureReason {
     IsDisabled = 0,

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -52,7 +52,7 @@ export default class Stats<T extends IStatHost> {
     /**
      * Returns the value of the given stat, or `undefined` if the stat does not exist. Stat bonus is *not* applied.
      */
-    getBaseValue(stat: Stat | IStat): number | undefined;
+    getBaseValue(stat: Stat | IStat, allowFailure?: boolean): number | undefined;
     /**
      * Sets the given `Stat`'s value to the given amount. Assumes the given value includes any bonus. Triggers `statChange`
      * @param stat The `Stat` to set.
@@ -110,7 +110,7 @@ export default class Stats<T extends IStatHost> {
     /**
      * Returns the `max` of the given stat, or undefined if the stat isn't an `IStatMax`. Stat bonus is *not* applied.
      */
-    getBaseMax(stat: Stat | IStat): number | undefined;
+    getBaseMax(stat: Stat | IStat, allowFailure?: boolean): number | undefined;
     /**
      * Sets the given `Stat`'s `max` to the given amount. Triggers `statMaxChange`
      * @param stat The `Stat` to set.

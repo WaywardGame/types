@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -24,7 +24,7 @@ import type { IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "game/enti
 import CorpseManager from "game/entity/creature/corpse/CorpseManager";
 import FlowFieldManager from "game/entity/flowfield/FlowFieldManager";
 import NPCManager from "game/entity/npc/NPCManager";
-import type { IIslandEvents, IIslandLoadOptions, IMobCheck, ISeeds, IWaterContamination, IWaterFill, IWell, IslandId } from "game/island/IIsland";
+import type { IIslandEvents, IIslandLoadOptions, IMobCheck, ISeeds, IWaterContamination, IWaterFill, IWaterFillReturn, IWell, IslandId } from "game/island/IIsland";
 import { WaterType } from "game/island/IIsland";
 import { PortManager } from "game/island/Port";
 import type { ILiquidGather } from "game/item/IItem";
@@ -44,6 +44,7 @@ import TimeManager from "game/time/TimeManager";
 import Translation from "language/Translation";
 import World from "renderer/world/World";
 import type { IPostSerializeCallback, IPreSerializeCallback, ISerializer } from "save/serializer/ISerializer";
+import type Version from "utilities/Version";
 import type { IVersionInfo } from "utilities/Version";
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
@@ -74,15 +75,25 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly tileEvents: TileEventManager;
     readonly time: TimeManager;
     readonly world: World;
-    saveBuildTime?: number;
-    saveVersion: string;
+    /**
+     * The version this island was originally made on
+     */
+    version: Version.String;
+    /**
+     * The version the mapgen for this island uses
+     */
+    mapGenVersion: Version.String;
+    /**
+     * The version this island was last loaded on
+     */
+    saveVersion: Version.String;
+    saveBuildTime: number;
     biomeType: BiomeTypes;
     civilizationScore: number;
     civilizationScoreTiles: Record<number, number>;
     contaminatedWater: IWaterContamination[];
     creatureSpawnTimer: number;
     loadCount: number;
-    mapGenVersion: string;
     name?: string;
     position: IVector2;
     readonly mapSize: number;
@@ -91,7 +102,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     referenceId?: number;
     templateBiomeOptions: ITemplateBiomeOptions | undefined;
     tileContainers: ITileContainer[];
-    version: string;
     tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;
     readonly seeds: ISeeds;
     readonly seededRandom: Random<LegacySeededGenerator | PCGSeededGenerator>;
@@ -109,6 +119,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly id: IslandId;
     readonly mapSizeSq: number;
     spawnPoint: IVector3;
+    private _activated;
     private _loadedReferences;
     private _tiles;
     modifiersCollection?: IslandModifiersCollection;
@@ -133,9 +144,22 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     get isActive(): boolean;
     get isDefaultIsland(): boolean;
+    get isTransient(): boolean;
     getDetails(): IIslandDetails;
-    onActivated(): void;
-    onDeactivated(): void;
+    /**
+     * Activates the island.
+     * Islands should be activated when a player is going to load onto it
+     */
+    private activate;
+    /**
+     * Runs some logic while ensuring the island is activated
+     */
+    private runWhileActivated;
+    /**
+     * Deactivates the island.
+     * Islands should be deactivated when the last player leaves it or when it's being unloaded.
+     */
+    private deactivate;
     private gameOptionsCached?;
     getGameOptions(): IGameOptions;
     clearGameOptionsCache(): void;
@@ -199,7 +223,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     /**
      * Check the amount of water tiles there is connected to a supplied x/y area
      */
-    checkWaterFill(tile: Tile, needed: number, waterType: WaterType, waterFill?: IWaterFill): number;
+    checkWaterFill(tile: Tile, needed: number, waterType: WaterType, waterFill?: IWaterFill): IWaterFillReturn;
     getSpawnPoint(): Tile;
     getSuitableSpawnPoint(): Tile;
     calculateDamageOutcome(input: IDamageOutcomeInput): IDamageOutcome | undefined;

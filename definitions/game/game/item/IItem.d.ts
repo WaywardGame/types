@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -344,6 +344,10 @@ export interface IItemBuild {
      * When defined, allows the build to work only on these tile types
      */
     allowedTileTypes?: Set<TerrainType>;
+    /**
+     * Skill to gain 0.1 of when building the item
+     */
+    skillGain?: SkillType;
 }
 export interface ISummon {
     /**
@@ -895,7 +899,7 @@ export declare enum ItemType {
     WroughtIronTongs = 200,
     SheetOfGlass = 201,
     SolarStill = 202,
-    GraniteWaterStill = 203,
+    TinWaterStill = 203,
     GraniteSundial = 204,
     LitTallowTorch = 205,
     Sinew = 206,
@@ -989,10 +993,10 @@ export declare enum ItemType {
     ClayKiln = 294,
     ClayCampfire = 295,
     ClayFurnace = 296,
-    ClayWaterStill = 297,
+    CopperWaterStill = 297,
     SandstoneCampfire = 298,
     SandstoneFurnace = 299,
-    SandstoneWaterStill = 300,
+    WroughtIronWaterStill = 300,
     GraniteKiln = 301,
     WroughtIronAnvil = 302,
     IronAnvil = 303,
@@ -1392,7 +1396,7 @@ export declare enum ItemType {
     BasaltHammer = 697,
     BasaltAnvil = 698,
     BasaltDeadfall = 699,
-    BasaltWaterStill = 700,
+    IronWaterStill = 700,
     BasaltSundial = 701,
     BasaltBullet = 702,
     BasaltKnife = 703,
@@ -1445,7 +1449,12 @@ export declare enum ItemType {
     AberrantClayGolemFigure = 750,
     AberrantGraniteGolemFigure = 751,
     AberrantSandstoneGolemFigure = 752,
-    AberrantBasaltGolemFigure = 753
+    AberrantBasaltGolemFigure = 753,
+    GraniteDripstone = 754,
+    SandstoneDripstone = 755,
+    BasaltDripstone = 756,
+    ClayDripstone = 757,
+    BronzeWaterStill = 758
 }
 export declare enum ItemTypeExtra {
     None = 999,
@@ -1567,7 +1576,7 @@ export declare enum ItemTypeGroup {
     Spine = 892,
     Spores = 893,
     Stick = 894,
-    NotForSale = 895,
+    NotStockedOnMerchants = 895,
     ContainerOfSwampWater = 896,
     ContainerOfFilteredWater = 897,
     Sundial = 898,
@@ -1606,7 +1615,8 @@ export declare enum ItemTypeGroup {
     Gem = 931,
     Golem = 932,
     CreatureResource = 933,
-    All = 934,
-    Last = 935
+    Dripstone = 934,
+    All = 935,
+    Last = 936
 }
 export {};

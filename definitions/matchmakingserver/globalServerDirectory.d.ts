@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -21,10 +21,6 @@ export default class GlobalServerDirectory extends Server {
     protected onMessage(connection: shared.ClientConnection, data: ws.Data, ipAddress: string): void;
     private sendResponse;
     private checkConnection;
-    /**
-     * Creates a new websocket connection to the matchmaking server and "joins" the game via webrtc
-     */
-    private checkWebRTCConnection;
     /**
      * Connects to the servers websocket
      * @param serverAddress Address to connect to

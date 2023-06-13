@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,6 +11,7 @@
 import type DoodadInfo from "game/doodad/DoodadInfo";
 import type { DoodadType, IDoodadDescription } from "game/doodad/IDoodad";
 import type { TerrainType } from "game/tile/ITerrain";
+import type Tile from "game/tile/Tile";
 import type ExploreMap from "renderer/exploreMap/ExploreMap";
 export interface ITileUpdate {
     terrainType: TerrainType;
@@ -27,8 +28,8 @@ export interface IDoodadUpdate {
     hasGraphicVariation: boolean;
     terrainMasks: TerrainMask;
 }
-export type onTileUpdateDelegate = (x: number, y: number, flushTileImmediately: boolean, debug?: boolean) => void;
-export type onDoodadUpdateDelegate = (x: number, y: number, flushTileImmediately: boolean, doodadUpdate: IDoodadUpdate) => void;
+export type onTileUpdateDelegate = (tile: Tile, flushTileImmediately: boolean, debug?: boolean) => void;
+export type onDoodadUpdateDelegate = (tile: Tile, flushTileImmediately: boolean, doodadUpdate: IDoodadUpdate) => void;
 export type TerrainData = number;
 export declare enum TerrainMask {
     None = 0,
@@ -43,3 +44,4 @@ export interface IWorldLayerOld {
     exploredMap?: ExploreMap;
 }
 export declare const stillContainerOrder: Record<number, number>;
+export declare const tileAnimatedOffset = 127;

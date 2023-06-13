@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -50,7 +50,7 @@ export default abstract class QuadrantComponent extends StaticComponent {
     protected readonly scrollableHandler: void;
     get preferredQuadrant(): Quadrant;
     get quadrant(): Quadrant;
-    get quadrantName(): "None" | "Top" | "Bottom" | "Any" | "TopLeft" | "TopRight" | "BottomRight" | "BottomLeft";
+    get quadrantName(): "None" | "Top" | "Bottom" | "TopRight" | "BottomRight" | "BottomLeft" | "TopLeft" | "Any";
     readonly log: Log;
     constructor(id: QuadrantComponentId);
     protected registerDataHost(): void;

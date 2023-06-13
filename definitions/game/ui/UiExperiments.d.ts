@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,7 +10,8 @@
  */
 declare enum UiExperiment {
     ColorSchemeLight = 0,
-    NewCraftingDialog = 1
+    NewCraftingDialog = 1,
+    ActionExamples = 2
 }
 declare module UiExperiment {
     type Excluded = "toggle" | "update" | "all" | "name" | "has";

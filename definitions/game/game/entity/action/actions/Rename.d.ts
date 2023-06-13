@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,5 +11,5 @@
 import { Action } from "game/entity/action/Action";
 import { ActionArgument } from "game/entity/action/IAction";
 import Creature from "game/entity/creature/Creature";
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Creature, ActionArgument.NPC], ActionArgument.String], import("../../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [import("../../../item/Item").default | Creature | import("../../../doodad/Doodad").default | import("../../npc/NPC").default, string]>;
+declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Creature, ActionArgument.NPC], ActionArgument.String], import("../../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [import("../../../doodad/Doodad").default | import("../../../item/Item").default | import("../../npc/NPC").default | Creature, string]>;
 export default _default;

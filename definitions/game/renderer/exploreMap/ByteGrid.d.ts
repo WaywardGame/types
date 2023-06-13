@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,7 +14,7 @@ export default class ByteGrid implements IByteGrid {
     readonly height: number;
     readonly size: number;
     readonly data: Uint8Array;
-    constructor(width: number, height?: number);
+    constructor(width: number, height: number);
     get(x: number, y: number): number;
     set(x: number, y: number, value: number): void;
     rawSet(i: number, value: number): void;

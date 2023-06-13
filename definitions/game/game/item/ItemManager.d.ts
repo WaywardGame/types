@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -83,7 +83,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
     private static readonly cachedItemsThatAreUsedForGrowingPlants;
     private static readonly cachedItemsThatAreUsedInRecipes;
     private static readonly cachedWeights;
-    static readonly cachedItemSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, Set<ItemType>>>>;
+    static readonly cachedItemSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, ItemType[]>>>;
     static getItemTypes(): readonly ItemType[];
     static getItemsWithRecipes(): readonly ItemType[];
     static getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
@@ -134,7 +134,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      * @returns Tile or undefined
      */
     getTile(itemOrContainer?: Item | IContainer): Tile | undefined;
-    resolveContainer(container?: IContainer): Player | Item | Doodad | NPC | Tile | IContainer | undefined;
+    resolveContainer(container?: IContainer): Tile | Doodad | IContainer | Item | Player | NPC | undefined;
     getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
     hashContainer(containable: IContainable, containerReferenceSource?: ContainerReferenceSource): string;

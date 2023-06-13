@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -63,5 +63,5 @@ export interface IGatherTerrainCanUse extends IGatherBaseCanUse {
     terrainDescription: ITerrainDescription;
 }
 export type IGatherCanUse = IGatherTileEventCanUse | IGatherDoodadCanUse | IGatherDoodadHarvestCanUse | IGatherTerrainCanUse;
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Tile, ActionArgument.Undefined]], import("../../Human").default<number> | Doodad, void, IGatherCanUse, [(Item | undefined)?, (Tile | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Tile, ActionArgument.Undefined]], Doodad | import("../../Human").default<number>, void, IGatherCanUse, [(Item | undefined)?, (Tile | undefined)?]>;
 export default _default;

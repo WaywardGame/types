@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,5 +9,9 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { ITileEventDescription } from "game/tile/ITileEvent";
-declare const fire: ITileEventDescription;
+import type TileEvent from "game/tile/TileEvent";
+interface IFireDescription extends ITileEventDescription {
+    spread(tileEvent: TileEvent): void;
+}
+declare const fire: IFireDescription;
 export default fire;

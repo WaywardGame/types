@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -44,7 +44,7 @@ export default abstract class Screen extends Component {
     removeBackground(): this;
     hasContextMenu(): boolean;
     getPartialContextMenuMacros(): Macros.IBindableMatch | undefined;
-    hasPartialContextMenuMacro(api: IBindHandlerApi, macroMatch?: Macros.IBindableMatch): boolean;
+    hasPartialContextMenuMacro(api?: Pick<IBindHandlerApi, "input">, macroMatch?: Macros.IBindableMatch): boolean;
     /**
      * Remove the context menu from this element
      */

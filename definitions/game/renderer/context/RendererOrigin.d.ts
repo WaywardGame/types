@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -43,7 +43,7 @@ export declare class RendererOrigin implements IRendererOrigin {
     readonly asEntity: Entity;
     readonly asPlayer: Player | undefined;
     readonly asHuman: Human | undefined;
-    private constructor();
+    constructor(islandId: IslandId, x: number, y: number, z: number);
     get island(): Island;
     getMovementProgress(_timeStamp: number): number;
     canSeeObject(type: CanASeeBType, object: IVector4 & {

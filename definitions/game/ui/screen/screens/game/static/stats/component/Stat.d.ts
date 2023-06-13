@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,9 +12,9 @@ import type Entity from "game/entity/Entity";
 import type EntityWithStats from "game/entity/EntityWithStats";
 import type { IStatChangeInfo } from "game/entity/IEntity";
 import type { IStat, IStatMax, Stat } from "game/entity/IStats";
+import Translation from "language/Translation";
 import Component from "ui/component/Component";
 import Text from "ui/component/Text";
-import type { IStringSection } from "utilities/string/Interpolator";
 export declare abstract class StatComponent extends Component {
     private readonly entity;
     private readonly stat;
@@ -32,7 +32,7 @@ export declare abstract class StatComponent extends Component {
      *
      * If `statDescription.getFormatted` is defined, uses this method. Else, generates based on if the stat has a `max`
      */
-    getStatValue(): IStringSection[];
+    getStatValue(): Translation;
     /**
      * Returns the color of this stat.
      */
@@ -50,7 +50,7 @@ export declare abstract class StatComponent extends Component {
     /**
      * Returns the generic string representation of this stat.
      */
-    protected getGenericStatValue(stat: IStat): IStringSection[];
+    protected getGenericStatValue(stat: IStat): import("../../../../../../../language/impl/TranslationImpl").default;
     /**
      * Event handler for when a stat changes. Updates the text, color, icon, and tooltip of this `StatElement`.
      *
@@ -79,7 +79,7 @@ export declare class Statbar extends StatComponent {
     constructor(entity: EntityWithStats, stat: Stat, noEvents?: true);
     getTextElement(): Text;
     getDisplayElement(): Component<HTMLElement>;
-    getGenericStatValue(stat: IStatMax): IStringSection[];
+    getGenericStatValue(stat: IStatMax): import("../../../../../../../language/impl/TranslationImpl").default;
     /**
      * Overrides the superclass method of the same name. Calls the superclass method, then updates the CSS
      * property `--stat-percent`, to update the statbar's fill width.

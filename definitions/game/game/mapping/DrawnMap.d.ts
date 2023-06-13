@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -23,6 +23,8 @@ import type { IPreSerializeCallback, IUnserializedCallback } from "save/serializ
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 import { IRange } from "utilities/math/Range";
 import Sampler from "utilities/math/Sampler";
+import { LegacySeededGenerator } from "utilities/random/generators/LegacySeededGenerator";
+import { PCGSeededGenerator } from "utilities/random/generators/PCGSeededGenerator";
 import type { Random } from "utilities/random/Random";
 export declare enum DrawnMapType {
     Treasure = 0,
@@ -103,7 +105,7 @@ export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> impleme
      */
     static initializeIslandTreasureMaps(island: Island, generationSettings: ITreasureMapGenerationSettings, mapGenOutput: IMapGenGenerateOutput): void;
     static initializeIslandTreasureMapsDifferences(island: Island): void;
-    static plotRegion(island: Island, x: number, y: number, z: number, random?: Random, map?: DrawnMap, radius?: number): DrawnMap;
+    static plotRegion(island: Island, x: number, y: number, z: number, random?: Random<PCGSeededGenerator | LegacySeededGenerator>, map?: DrawnMap, radius?: number): DrawnMap;
     private static plotTreasure;
     private static findValidTreasureLocation;
     private static getMapTile;

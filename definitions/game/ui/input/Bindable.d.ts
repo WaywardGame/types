@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -233,3 +233,15 @@ export declare enum BindableType {
     Developer = 6,
     Mod = 7
 }
+export declare enum BindableTypeContext {
+    Default = 0,
+    ActionMenu = 1,
+    Mod = 2
+}
+export declare const BINDABLE_TYPE_CONTEXTS: Record<BindableType, BindableTypeContext>;
+export declare enum BindableMouseTargetingContext {
+    Generic = 0,
+    World = 1,
+    Item = 2
+}
+export declare const MOUSE_TARGETING_BINDABLE_CONTEXTS: Record<BindableMouseTargetingContext, Bindable[]>;

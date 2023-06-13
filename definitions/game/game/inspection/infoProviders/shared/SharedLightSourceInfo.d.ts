@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -33,5 +33,5 @@ declare const _default: UseInfo<{
     action: ActionType.StartFire | ActionType.Ignite | ActionType.Equip;
     union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Doodad, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>;
     details: Set<symbol>;
-}, ActionType.StartFire | ActionType.Ignite | ActionType.Equip, {}, Item | Doodad>;
+}, ActionType.StartFire | ActionType.Ignite | ActionType.Equip, {}, Doodad | Item>;
 export default _default;

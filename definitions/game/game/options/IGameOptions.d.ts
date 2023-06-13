@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -154,6 +154,7 @@ export interface IGameOptions {
          */
         decayMultiplier: number;
     };
+    randomEvents: boolean;
 }
 export declare enum UnlockedRecipesStrategy {
     StartWithNone = 0,

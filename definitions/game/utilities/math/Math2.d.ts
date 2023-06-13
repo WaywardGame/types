@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -144,10 +144,20 @@ declare module Math2 {
      * - `0.75 + 0` is `0.75`.
      */
     function weightedAverage(...ns: Array<[number, number]>): number;
-    type WeightedAverageWithExclusionInput = [number, number, {
+    interface IWeightedAverageWithExclusionInputOptions {
         excludeIfLowering?: boolean;
         excludeIfRaising?: boolean;
-    }?];
+    }
+    type WeightedAverageWithExclusionInput = [weight: number, value: number, options?: IWeightedAverageWithExclusionInputOptions];
+    interface WeightedAverageWithExclusionOutput {
+        averageValue: number;
+        totalValue: number;
+        totalWeight: number;
+        includedInputsCount: number;
+        inputs: Array<{
+            included: boolean;
+        }>;
+    }
     /**
      * Takes an any number of `[weight, number]` tuples, and returns the "weighted average".
      * @param ns Any number of `[weight, number]` tuples.
@@ -159,6 +169,7 @@ declare module Math2 {
      * - `0.75 + 0` is `0.75`.
      */
     function weightedAverageWithExclusion(...ns: WeightedAverageWithExclusionInput[]): number;
+    function weightedAverageWithExclusion(returnDetail: true, ...ns: WeightedAverageWithExclusionInput[]): WeightedAverageWithExclusionOutput;
     function radians(degrees: number): number;
     function degrees(radians: number): number;
     function rotateTowards(direction: number, targetDirection: number, maxAmount: number): number;

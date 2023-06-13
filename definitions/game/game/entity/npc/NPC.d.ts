@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,7 +12,7 @@ import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
 import { ActionType } from "game/entity/action/IAction";
 import Human from "game/entity/Human";
-import type { IEntityConstructorOptions, IProperties, Property } from "game/entity/IEntity";
+import type { IEntityConstructorOptions } from "game/entity/IEntity";
 import { AiType, EntityType, MoveType, StatusType } from "game/entity/IEntity";
 import type { ICustomizations } from "game/entity/IHuman";
 import { EquipType } from "game/entity/IHuman";
@@ -52,10 +52,8 @@ export default abstract class NPC extends Human<NPCType> {
     ai: AiType;
     seen: number;
     weightCapacity: number;
-    properties?: IProperties;
     talked?: Map<string, number>;
     interactions?: Map<string, Set<number>>;
-    private shouldSkipNextUpdate?;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(entityOptions?: IEntityConstructorOptions<NPCType>);
@@ -96,8 +94,6 @@ export default abstract class NPC extends Human<NPCType> {
      * Allow swapping with npcs
      */
     canSwapWith(human: Human, source: string | undefined): boolean;
-    skipNextUpdate(): void;
-    overrideNextMovement(tile: Tile): void;
     getPublicContainer(): IContainer | undefined;
     /**
      * The actions available to use with this npc
@@ -175,20 +171,13 @@ export default abstract class NPC extends Human<NPCType> {
     protected changeZ(toZ: number, fromZ: number): boolean | void | undefined;
     protected updateTile(fromTile: Tile, toTile: Tile): boolean;
     protected postMove(): void;
-    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): 0 | -1 | -2 | -5 | -4 | -6 | -3;
+    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): 0 | -1 | -2 | -3 | -4 | -5 | -6;
     getWeightOrStaminaMovementPenalty(): number;
     get asMerchant(): MerchantNPC | undefined;
     get asShipper(): ShipperNPC | undefined;
     get asNPC(): NPC;
     get asPlayer(): undefined;
     get asLocalPlayer(): undefined;
-    /**
-     * Properties system that is only used for merchants
-     */
-    hasProperty(property: Property): boolean;
-    addProperty(property: Property, value: any): void;
-    getProperty<T>(property: Property): T | undefined;
-    removeProperty(property: Property): boolean;
     /**
      * Equip better things when available
      */

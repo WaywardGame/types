@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -138,4 +138,5 @@ export default class GameScreen extends Screen {
      */
     private getUnusedQuadrant;
     private updatePauseIcon;
+    private get canUnpause();
 }

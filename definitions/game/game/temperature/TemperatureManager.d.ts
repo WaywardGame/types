@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -59,6 +59,7 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     private temperatureBoundaryMax;
     temperatureBoundaryMaxVector: Vector2;
     constructor(island: Island);
+    clearAll(): void;
     /**
      * Called after the island map size is configured
      */

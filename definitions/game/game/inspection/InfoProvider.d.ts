@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -67,7 +67,7 @@ export interface IIcon {
     height: number;
     imageWidth?: number;
     imageHeight?: number;
-    scale?: number;
+    scale?: string | number;
 }
 export interface ISerializedIcon extends IIcon {
     path: string | ISerializedImagePath;
@@ -78,10 +78,10 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     static create(...translations: TranslationGenerator[]): SimpleInfoProvider;
     static dynamic<T>(observer: InfoProvider.Observer<T>, supplier: (value: T) => InfoProvider | undefined): SimpleInfoProvider;
     static of(...classes: string[]): SimpleInfoProvider;
-    static title(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
-    static subtitle(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
-    static description(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
-    static text(...translations: Array<TranslationGenerator | undefined>): SimpleInfoProvider;
+    static title(...translations: Array<InfoProvider | TranslationGenerator | undefined>): SimpleInfoProvider;
+    static subtitle(...translations: Array<InfoProvider | TranslationGenerator | undefined>): SimpleInfoProvider;
+    static description(...translations: Array<InfoProvider | TranslationGenerator | undefined>): SimpleInfoProvider;
+    static text(...translations: Array<InfoProvider | TranslationGenerator | undefined>): SimpleInfoProvider;
     static list(...translations: Array<InfoProvider | TranslationGenerator | undefined>): SimpleInfoProvider;
     static ofComponent(componentSupplier: () => Component): InfoProvider;
     private displayLevel?;
@@ -109,6 +109,12 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     /**
      * Marks this info provider as to subscribe refresh events to the given host.
      * Note: Any existing initialized components will not be retroactively subscribed.
+     */
+    subscribeRefreshOn<E extends EmitterOrBus>(emitterOrBus: E, ...events: Array<Event<E>>): this;
+    subscribeRefreshOn<E extends Emitter, K extends Event<E>>(emitter: WeakRef<E>, ...events: Array<Event<E>>): this;
+    /**
+     * Marks this info provider as to subscribe refresh events to the given host.
+     * Note: Any existing initialized components will not be retroactively subscribed.
      * @param predicate A predicate function for whether or not this info provider should actually refresh when the event is hit
      */
     subscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...args: [...events: K[], predicate: (...params: Parameters<Handler<E, K>>) => boolean]): this;
@@ -117,13 +123,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
      * Note: Any existing initialized components will not be retroactively subscribed.
      * @param observer An observer that will only trigger a refresh if the value has changed
      */
-    subscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...args: [...events: K[], observer: InfoProvider.Observer<any>]): this;
-    /**
-     * Marks this info provider as to subscribe refresh events to the given host.
-     * Note: Any existing initialized components will not be retroactively subscribed.
-     */
-    subscribeRefreshOn<E extends EmitterOrBus, K extends Event<E>>(emitterOrBus: E, ...events: K[]): this;
-    subscribeRefreshOn<E extends Emitter, K extends Event<E>>(emitter: WeakRef<E>, ...events: K[]): this;
+    subscribeRefreshOn<E extends EmitterOrBus>(emitterOrBus: E, ...args: [...events: Array<Event<E>>, observer: InfoProvider.Observer<any>]): this;
     /**
      * Call when this info provider should be refreshed.
      */
@@ -163,7 +163,7 @@ export declare class SimpleInfoProvider extends InfoProvider {
     private childComponentClass;
     private validWhen?;
     constructor(...translations: Array<TranslationGenerator | InfoProvider>);
-    get(): (import("../../language/impl/TranslationImpl").default | import("../../language/ITranslation").ISerializedTranslation | import("../../language/dictionary/UiTranslation").default | (() => import("../../language/impl/TranslationImpl").default | import("../../language/ITranslation").ISerializedTranslation | import("../../utilities/string/Interpolator").IStringSection[] | import("../../language/dictionary/UiTranslation").default | undefined) | InfoProvider)[];
+    get(): (import("../../language/impl/TranslationImpl").default | import("../../language/ITranslation").ISerializedTranslation | import("../../language/dictionary/UiTranslation").default | (() => import("../../language/impl/TranslationImpl").default | import("../../language/ITranslation").ISerializedTranslation | import("../../language/dictionary/UiTranslation").default | import("../../utilities/string/Interpolator").IStringSection[] | undefined) | InfoProvider)[];
     add(...translations: Array<TranslationGenerator | InfoProvider | Falsy>): this;
     onlyIfHasContents(): this | undefined;
     addInfoGetter(provider: () => InfoProvider | undefined): this;

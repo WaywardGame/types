@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -31,7 +31,7 @@ export declare class ServerRow extends Button implements IRefreshable, IGameIcon
     private _place;
     constructor(server: IServer, getFriend: (player: string) => ISteamFriend | undefined);
     refresh(): this;
-    protected onActivate(): void;
+    protected onActivate(_: any, allowModDownloads?: boolean): void;
     /**
      * Check if the client can join the server
      */

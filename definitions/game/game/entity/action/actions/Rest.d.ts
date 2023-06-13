@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -21,5 +21,5 @@ export interface IRestCanUse extends IActionUsable {
     tileDescription?: ITerrainDescription;
     tileType: TerrainType;
 }
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Undefined], [ActionArgument.RestType, ActionArgument.Undefined]], import("../../Human").default<number>, void, IRestCanUse, [(import("../../../item/Item").default | import("../../../doodad/Doodad").default | undefined)?, (RestType | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Undefined], [ActionArgument.RestType, ActionArgument.Undefined]], import("../../Human").default<number>, void, IRestCanUse, [(import("../../../doodad/Doodad").default | import("../../../item/Item").default | undefined)?, (RestType | undefined)?]>;
 export default _default;

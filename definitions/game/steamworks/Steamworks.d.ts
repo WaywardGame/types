@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -122,14 +122,15 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     createArchive(id: string): Promise<void>;
     getPublishedItems(): Promise<IWorkshopItem[]>;
     openUrl(url: string): void;
-    openWorkshop(publishId?: string): Promise<void>;
+    openWorkshop(publishFileId?: string): Promise<void>;
     openInviteDialog(): void;
     openSaveFolder(): void;
     openModsFolder(): Promise<void>;
     openModFolder(modIndex: number): Promise<void>;
     openLogsFolder(): void;
     openBackupsFolder(): void;
-    unsubscribe(publishId: string): Promise<void>;
+    subscribe(publishFileIds: string[]): Promise<void>;
+    unsubscribe(publishFileId: string): Promise<void>;
     toggleDeveloperTools(): Promise<void>;
     getModPath(name: string, modType: ModType, file?: string, checkIfExists?: boolean): Promise<IModPath | undefined>;
     getModPathSync(name: string, modType: ModType, file?: string): IModPath | undefined;

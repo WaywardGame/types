@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -32,7 +32,7 @@ export declare const promptGameConfirmationDestroyOnGather: import("game/meta/pr
 export declare const promptGameConfirmationDroppingContainer: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameConfirmationRestWithEquippedFireSource: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[actionVerb: Text, objectName: Text, actionNoun: Text]>;
 export declare const promptGameContainerNotFull: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
-export declare const promptGameDesalinationNoNeed: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
+export declare const promptGameDesalinationNoNeed: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[dripstoneOrStill: Text]>;
 export declare const promptGameExtinguishWaterStill: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameItemMayBeDestroyedInCraft: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[breakingItemsList: Text]>;
 export declare const promptGameItemMayCauseBurns: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
@@ -40,7 +40,7 @@ export declare const promptGameItemsMayBeDestroyedOnUse: import("game/meta/promp
 export declare const promptGameLoadFailure: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptGameNoHealingRequired: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameNoSaveOnDeath: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
-export declare const promptGamePickUpStillWithWater: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
+export declare const promptGamePickUpStillWithWater: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[dripstoneOrStill: Text]>;
 export declare const promptGameReleaseCreature: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[creatureName: Text]>;
 export declare const promptGameUncage: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[creatureName: Text]>;
 export declare const promptGameRenameGeneric: import("game/meta/prompt/IPrompt").IPromptInputDescription<[placeholder?: string | TranslationImpl | undefined, name?: string | ISerializedTranslation | undefined]>;
@@ -55,7 +55,7 @@ export declare const promptGameShipToIslandPayment: import("game/meta/prompt/IPr
 export declare const promptGameSaveFailure: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptGameIslandTravelConfirmation: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[isGhost: boolean]>;
 export declare const promptGameWellConvert: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[waterName: Text]>;
-export declare const promptGameSolarStillWontWorkInTemperature: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
+export declare const promptGameSolarStillWontWorkInTemperature: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[dripstoneOrSolarStill: Text]>;
 export declare const promptGameSolarStillWontWorkInCave: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGamePause: import("game/meta/prompt/IPrompt").IPromptMenuDescription<MenuId.Pause, []>;
 export declare const promptGameWin: import("game/meta/prompt/IPrompt").IPromptMenuDescription<MenuId.GameEnd, []>;
@@ -94,6 +94,7 @@ export declare const promptMenuModsConfirmUninstallMod: import("game/meta/prompt
 export declare const promptMenuModsUnloadableSaveGameMod: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[folderName: string]>;
 export declare const promptMenuModsSubmenuEditInternalModsModsListChangeReload: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuMultiplayerCannotJoinFailedToLoadMods: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[modErrors: Text[]]>;
+export declare const promptMenuMultiplayerCannotJoinMissingMods: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[missingMods: Text[]]>;
 export declare const promptMenuNewGameTooManySaves: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptMenuCustomGameOptionsConfirmImport: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuCustomGameOptionsImportFailure: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;

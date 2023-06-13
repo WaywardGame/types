@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,10 +12,10 @@ import type { IHasImagePath } from "game/IObject";
 import type EntityWithStats from "game/entity/EntityWithStats";
 import type { IStat, IStatBase, StatDisplayType } from "game/entity/IStats";
 import type { Reference } from "game/reference/IReferenceManager";
+import type Translation from "language/Translation";
 import type { IModdable } from "mod/ModRegistry";
 import type Component from "ui/component/Component";
 import type Tooltip from "ui/tooltip/Tooltip";
-import type { IStringSection } from "utilities/string/Interpolator";
 export interface IStatDisplayDescription extends IModdable, IHasImagePath<string | ((entity: EntityWithStats, stat: IStat) => string)> {
     imagePath?: string | ((entity: EntityWithStats, stat: IStat) => string);
     /**
@@ -52,7 +52,7 @@ export interface IStatDisplayDescription extends IModdable, IHasImagePath<string
      *
      * For overriding the normal formatted output of a stat.
      */
-    getFormatted?(entity: EntityWithStats, stat?: IStat): IStringSection[];
+    getFormatted?(entity: EntityWithStats, stat?: IStat): Translation;
     /**
      * A function that will initialize a tooltip for this stat element, or a reference to show a tooltip for
      */

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -35,7 +35,8 @@ export default class MovementHandler extends EventEmitter.Host<IMovementHandlerE
     protected onPlayerDamage(_: any, damageInfo: IDamageInfo): void;
     protected onPlayerDeath(): void;
     protected onFaceDown(api: IBindHandlerApi): boolean;
-    protected onFaceDirection(api: IBindHandlerApi): boolean;
+    faceTowardsMouse(api?: Pick<IBindHandlerApi, "mouse">): void;
+    protected onFaceDirection(api?: Pick<IBindHandlerApi, "mouse" | "input">): boolean;
     protected onIdle(api: IBindHandlerApi): boolean;
     protected onMoveToTile(api: IBindHandlerApi): boolean;
     protected onMove(api: IBindHandlerApi): boolean;

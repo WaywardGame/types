@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -33,4 +33,5 @@ export default class ActionInspection extends Inspection<ActionId | undefined> {
     private getActionDiscovered;
     private getActionTier;
     private getActionUsability;
+    private getActionExample;
 }

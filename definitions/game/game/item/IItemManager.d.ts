@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -30,7 +30,7 @@ export interface IGetItemOptions {
      * True to only include protected items if they pass an item.willBreakOnDamage() check.
      * excludeProtectedItems must be set to true for this to work.
      */
-    includeProtectedItemsThatWillNotBreak: ActionType;
+    includeProtectedItemsThatWillNotBreak: ActionType | true;
     /**
      * Item will be ignored
      */

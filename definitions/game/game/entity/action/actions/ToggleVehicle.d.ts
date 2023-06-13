@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -29,5 +29,5 @@ export interface ToggleVehicleItemCanUse extends IActionUsable {
     facingTile?: Tile;
 }
 export type ToggleVehicleCanUse = ToggleVehicleDoodadCanUse | ToggleVehicleItemCanUse;
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Undefined]], import("../../Human").default<number>, void, ToggleVehicleCanUse, [(Item | Doodad | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Undefined]], import("../../Human").default<number>, void, ToggleVehicleCanUse, [(Doodad | Item | undefined)?]>;
 export default _default;

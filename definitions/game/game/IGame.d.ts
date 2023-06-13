@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -30,6 +30,7 @@ import type { IReplayLogEntry } from "replay/IReplayLogEntry";
 import type { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 import type { IRange } from "utilities/math/Range";
+import type Version from "utilities/Version";
 export interface IGameEvents {
     /**
      * Called when the game is starting
@@ -128,7 +129,7 @@ export type IGameOld = Partial<Game> & Partial<{
     monsters: Creature[];
     tamedCreatures: number[];
     options: IOptions;
-    lastPlayedVersion: string | undefined;
+    lastPlayedVersion: Version.String | undefined;
     highscores: IHighscoreOld[];
     playedCount: number;
     dailyChallenge: boolean;
@@ -221,17 +222,18 @@ export declare enum TileUpdateType {
     DoodadOrientation = 14,
     DoodadOverHidden = 15,
     DoodadRemove = 16,
-    Item = 17,
-    ItemDrop = 18,
-    ItemMovement = 19,
-    Mod = 20,
-    NPC = 21,
-    NPCSpawn = 22,
-    Player = 23,
-    Terrain = 24,
-    TileEvent = 25,
-    TileEventManager = 26,
-    Tilled = 27
+    DoodadAddWater = 17,
+    Item = 18,
+    ItemDrop = 19,
+    ItemMovement = 20,
+    Mod = 21,
+    NPC = 22,
+    NPCSpawn = 23,
+    Player = 24,
+    Terrain = 25,
+    TileEvent = 26,
+    TileEventManager = 27,
+    Tilled = 28
 }
 export declare enum PauseSource {
     /**

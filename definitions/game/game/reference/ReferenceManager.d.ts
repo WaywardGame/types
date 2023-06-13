@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -33,7 +33,7 @@ export default class ReferenceManager {
     constructor(game: Game);
     create(): number;
     reset(): void;
-    getList(type: ReferenceType, gameIsland?: Island): Player[] | import("../entity/npc/NPCManager").default | import("../item/ItemManager").default | import("../entity/creature/CreatureManager").default | import("../tile/TileEventManager").default | import("../doodad/DoodadManager").default | readonly SkillType[] | readonly ItemType[] | import("game/entity/IHuman").EquipType[] | import("../entity/creature/corpse/CorpseManager").default | readonly Milestone[] | readonly Stat[] | IterableIterator<Island> | (string | ActionType)[];
+    getList(type: ReferenceType, gameIsland?: Island): import("../item/ItemManager").default | import("../entity/npc/NPCManager").default | import("../entity/creature/corpse/CorpseManager").default | import("../entity/creature/CreatureManager").default | import("../doodad/DoodadManager").default | import("../tile/TileEventManager").default | readonly ItemType[] | import("game/entity/IHuman").EquipType[] | Player[] | readonly Milestone[] | readonly SkillType[] | IterableIterator<Island> | readonly Stat[] | (string | ActionType)[];
     get(thing: Item): Reference<ReferenceType.Item> | undefined;
     get(thing: Doodad): Reference<ReferenceType.Doodad> | undefined;
     get(thing: Creature): Reference<ReferenceType.Creature> | undefined;

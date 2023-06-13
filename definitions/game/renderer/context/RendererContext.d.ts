@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -25,6 +25,6 @@ export default class RendererContext {
     get isWebGl2(): boolean;
     get origin(): IRendererOrigin;
     get viewport(): IVector2;
-    createSpriteBatch(capacity: number, depthOffset?: number, yOffset?: number, enableAlphaMultiplcation?: boolean, enforceBeginAndEnd?: boolean): SpriteBatch2 | SpriteBatch1;
+    createSpriteBatch(capacity: number, depthOffset?: number, yOffset?: number, enableAlphaMultiplcation?: boolean, enforceBeginAndEnd?: boolean): SpriteBatch1 | SpriteBatch2;
     createPersistantSpriteBatch(depthOffset?: number, yOffset?: number, enableAlphaMultiplcation?: boolean): PersistantSpriteBatch;
 }

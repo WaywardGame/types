@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -24,8 +24,8 @@ import type { IRefreshable } from "ui/component/Refreshable";
 import Text from "ui/component/Text";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import { Quadrant } from "ui/screen/screens/game/component/IQuadrantComponent";
-import type { IItemSlotEvents } from "ui/screen/screens/game/component/Item";
-import ItemComponent from "ui/screen/screens/game/component/Item";
+import type { IItemSlotEvents } from "ui/screen/screens/game/component/ItemComponent";
+import ItemComponent from "ui/screen/screens/game/component/ItemComponent";
 import QuadrantComponent from "ui/screen/screens/game/component/QuadrantComponent";
 import ActionsConfigurationDrawer from "ui/screen/screens/game/static/actions/ActionsDrawer";
 import ActionSlotTooltipHandler from "ui/screen/screens/game/static/actions/ActionSlotTooltip";

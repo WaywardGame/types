@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,7 +12,7 @@ import type { Source } from "game/entity/player/IMessageManager";
 import { ThreeStateButtonState } from "ui/component/IThreeStateButton";
 export declare const DEFAULT_MAX_MESSAGES = 15;
 export declare const MESSAGES_MAX_PINNED = 3;
-export type IFilters = Record<string, IFilter>;
+export type IFilters = PartialRecord<string, IFilter>;
 export type IFilter = {
     -readonly [K in keyof typeof Source]?: ThreeStateButtonState;
 };

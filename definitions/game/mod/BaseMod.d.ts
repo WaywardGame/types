@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -24,29 +24,43 @@ export interface IRegistry {
     [SYMBOL_MOD_REGISTRATIONS]: ModRegistration[];
 }
 export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
-    private readonly index;
+    readonly index: number;
     private allocatedEnums;
     private registeredPackets;
     private readonly subRegistries;
     private subscribedHandlers;
     constructor(index: number);
+    /** @deprecated Use the `index` property */
     getIndex(): number;
     /**
      * Returns the name of this mod.
+     * @deprecated Use the `name` property
      */
     getName(): string;
     /**
      * Returns the prefix for this mod used in registrations. Example: A mod named `Debug Tools` would be `ModDebugTools`
+     * @deprecated Use the `prefix` property
      */
     getPrefix(): string;
+    /** @deprecated Use the `log` property */
+    getLog(): Log;
+    /** @deprecated Use the `path` property */
+    getPath(): string;
+    /** @deprecated Use the `version` property */
+    getVersion(): string;
+    get name(): string;
+    /**
+     * The prefix for this mod used in registrations. Example: A mod named `Debug Tools` would be `ModDebugTools`
+     */
+    get prefix(): string;
+    get log(): Log;
+    get path(): string;
+    get version(): string;
     /**
      * Returns the full registry name for the given registration name, concatenating the mod registration prefix.
      * Example: A mod named `Debug Tools` registering `Cool Thingy` would be `ModDebugToolsCoolThingy`
      */
     getRegistryName(name: string): string;
-    getLog(): Log;
-    getPath(): string;
-    getVersion(): string;
     loadFile(file: string): Promise<string | undefined>;
     /**
      * Called when the save data for this mod is retrieved from a field decorated with `@Mod.saveData`.

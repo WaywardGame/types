@@ -18,7 +18,7 @@ Learn how to mod Wayward.
 # Other Useful Links
 
 ## [Wayward Types Viewer](https://waywardgame.github.io/)
-A pretty, searchable list of all the type definitions in Wayward. This `types` repository is actually the *raw* form of what you can find on this website!
+A pretty, searchable list of all the type definitions in Wayward. This `types` repository is actually the same stuff you can find on this website, but it's the *raw* form of it!
 
 ## [Modding Examples](https://github.com/WaywardGame)
 Every official mod created for Wayward, and some other Wayward-related projects.

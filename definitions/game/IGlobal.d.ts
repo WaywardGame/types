@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -36,6 +36,7 @@ import "utilities/typesglobal/Iterables";
 import "utilities/typesglobal/Misc";
 import "utilities/typesglobal/Objects";
 import "utilities/typesglobal/Types";
+import type Version from "utilities/Version";
 declare global {
     let audio: WAudio | undefined;
     let game: Game;
@@ -50,7 +51,7 @@ declare global {
     let saveData: SaveData;
     let saveDataGlobal: SaveDataGlobal;
     let ui: Ui;
-    const gameVersion: string;
+    const gameVersion: Version.String;
     const gameVersionStage: string;
     const gameVersionMajor: number;
     const gameVersionMinor: number;

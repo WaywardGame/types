@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -110,7 +110,11 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     get variation(): number;
     get isMapEdge(): boolean;
     /**
-     * Check if this Tile containers some items
+     * Check if this tile is Void type
+     */
+    get isVoid(): boolean;
+    /**
+     * Check if this tile contains some items
      */
     get hasTileContainer(): boolean;
     /**
@@ -164,8 +168,8 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
         message: Message;
         object: Translation;
     } | false;
-    isPlayerOnTile(includeGhosts?: boolean, includeConnecting?: boolean): boolean;
-    getPlayersOnTile(includeGhosts?: boolean, includeConnecting?: boolean): Human[];
+    isPlayerOnTile(includeGhosts?: boolean, includeConnecting?: boolean, includeZMovement?: boolean): boolean;
+    getPlayersOnTile(includeGhosts?: boolean, includeConnecting?: boolean, includeZMovement?: boolean): Human[];
     getPlayersThatSeeTile(): Human[];
     /**
      * Gets the nearest player based.
@@ -254,6 +258,11 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * @returns True if it created a lava passage
      */
     makeLavaPassage(source: Human | undefined): boolean;
+    /**
+     * Checks if another cave entrance is nearby.
+     * @returns True if it created cave entrances
+     */
+    isCaveEntranceNearby(): boolean;
     /**
      * Used to genererate and find appropriate cave entrances
      * @returns True if it created cave entrances

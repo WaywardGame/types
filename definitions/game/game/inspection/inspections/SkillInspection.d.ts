@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -25,6 +25,6 @@ export default class SkillInspection extends Inspection<SkillType> {
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getCurrentValue;
     private getDescription;
-    private getReputationImpact;
+    protected getReputationImpact(): 0 | import("../../../language/impl/TranslationImpl").default | undefined;
     private getCanIncrease;
 }

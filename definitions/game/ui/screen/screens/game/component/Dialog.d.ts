@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2021 Unlok
+ * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
+import { type Events, type IEventEmitter } from "event/EventEmitter";
 import type { IIcon } from "game/inspection/InfoProvider";
 import UiTranslation from "language/dictionary/UiTranslation";
 import type { ISerializedTranslation } from "language/ITranslation";
@@ -123,8 +123,8 @@ declare abstract class Dialog extends Component implements IDialog {
     private _footer?;
     private readonly handles;
     private readonly panels;
-    private currentPanel;
-    private lastPanel;
+    private currentPanel?;
+    private lastPanel?;
     private cachedSnapPositions?;
     private readonly activeReasons;
     protected readonly scrollableHandler: void;
@@ -158,7 +158,7 @@ declare abstract class Dialog extends Component implements IDialog {
     close(): Promise<boolean>;
     protected onRemove1(): void;
     addPanel(id: string | number): Component<HTMLElement>;
-    showPanel(id: string | number): Component<HTMLElement> | undefined;
+    showPanel(id: string | number, disableAnimations?: boolean): Component<HTMLElement> | undefined;
     getPanel(id: string | number): Component<HTMLElement> | undefined;
     isPanelVisible(id: string | number): boolean;
     /**
