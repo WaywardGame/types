@@ -74,7 +74,7 @@ export default class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
      * Tiles & doodads are flushed the first time they are visible within the fov
      * @returns True when there's more rendering to be done
      */
-    ensureRendered({ min, max }: IBound3): boolean;
+    ensureRendered({ min, max }: IBound3, ignoreFieldOfView?: boolean): boolean;
     /**
      * Processes pending tile/doodad updates
      */
