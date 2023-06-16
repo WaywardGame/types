@@ -16,9 +16,11 @@ import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBa
 export default class MilestonesDialog extends Dialog {
     private readonly milestones;
     private readonly sortRow;
+    private sortData;
     constructor();
     getBindable(): Bindable;
     getIcon(): MenuBarButtonType;
+    protected onDialogLoad(): void;
     onPlayerChangeTitle(player: Player, milestone?: Milestone): void;
     onMilestoneUpdate(_: any, milestone: Milestone): void;
     private sort;

@@ -42,6 +42,7 @@ export default class SortRow<S extends number> extends LabelledRow implements IR
     setDisabledSorts(val: S[], refresh?: boolean): this;
     setRefreshMethod(refresh: () => SortRowData<S>): this;
     refresh(): this;
+    setSort(sort: S, direction: SortDirection): void;
     toggleSortDirection(sortDirection?: SortDirection): void;
     triggerSort(): void;
     triggerSortAsync(): Promise<any[]>;
