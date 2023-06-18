@@ -13,12 +13,20 @@ import type { IBindHandlerApi } from "ui/input/Bind";
 import type Bindable from "ui/input/Bindable";
 import { Binding } from "ui/input/Bindings";
 import { IInput } from "ui/input/IInput";
+import type { IStringSection } from "utilities/string/Interpolator";
+export interface IMacroSection extends IStringSection {
+    macro: Macro;
+    macroSimplify?: true;
+}
+export declare namespace IMacroSection {
+    function create(macro: Macro, simplify?: boolean): IMacroSection;
+}
 export type Macro = IInput[];
 export declare module Macro {
     function is(value: unknown): value is Macro;
     function of(inputOrMacro: IInput | Macro): Macro;
     function hash(macro: Macro): string;
-    function translate(macro: Macro): TranslationImpl;
+    function translate(macro: Macro, simplify?: true): TranslationImpl;
 }
 declare module Macros {
     interface IEvents {

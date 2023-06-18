@@ -65,7 +65,7 @@ import type { DialogId, IDialogDescription } from "ui/screen/screens/game/Dialog
 import type { QuadrantComponentId } from "ui/screen/screens/game/IGameScreenApi";
 import type { IMenuBarButtonDescription, MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 import type { IStatDisplayDescription } from "ui/screen/screens/game/static/stats/IStatDisplayDescription";
-import type { HelpArticle, IHelpArticle } from "ui/screen/screens/menu/menus/help/HelpArticleDescriptions";
+import type { HelpArticle, IHelpArticle } from "ui/screen/screens/menu/menus/help/IHelpArticle";
 import type { ModOptionSectionInitializer } from "ui/screen/screens/menu/menus/options/TabMods";
 export interface IModdable {
     /**

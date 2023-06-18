@@ -81,7 +81,7 @@ import { SkillSort } from "ui/screen/screens/game/dialog/ISkillsDialog";
 import { ActionSort } from "ui/screen/screens/game/static/actions/IActionsDrawer";
 import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
 import { CharacterSort } from "ui/screen/screens/menu/menus/character/Character";
-import { HelpArticle } from "ui/screen/screens/menu/menus/help/HelpArticleDescriptions";
+import { HelpArticle } from "ui/screen/screens/menu/menus/help/IHelpArticle";
 import { HighscoreSort } from "ui/screen/screens/menu/menus/highscores/IHighscoresMenu";
 import { Responsibility } from "ui/screen/screens/menu/menus/main/IAbout";
 import { Website } from "ui/screen/screens/menu/menus/main/component/IWebsite";

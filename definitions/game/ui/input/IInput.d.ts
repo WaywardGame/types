@@ -86,6 +86,12 @@ export declare module IInput {
         resolvedCatalyst: Modifier;
     }
     function modifiersResolvedHashes(input: IInput): [IModifierResolvedHash, IModifierResolvedHash?];
+    /**
+     * @deprecated This function returns raw text translations.
+     *
+     * You might be looking for {@link Macro.translate} — you can call it with a single-`IInput` macro, ie, `[IInput]`,
+     * and it will result in the fancy iconography and stuff.
+     */
     function translate(input: IInput, resolvedModifierCatalyst?: Modifier): TranslationImpl;
 }
 export {};

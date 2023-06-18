@@ -14,7 +14,7 @@ import type { ISerializedTranslation } from "language/ITranslation";
 import type Translation from "language/Translation";
 import type Bindable from "ui/input/Bindable";
 import { MenuId } from "ui/screen/screens/menu/component/IMenu";
-import type { HelpArticle } from "ui/screen/screens/menu/menus/help/HelpArticleDescriptions";
+import type { HelpArticle } from "ui/screen/screens/menu/menus/help/IHelpArticle";
 type Text = Translation | ISerializedTranslation | string;
 export declare const promptGameDialogMessagesEditFiltersSaveOverExisting: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameDialogMessagesEditFiltersResetConfirm: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;

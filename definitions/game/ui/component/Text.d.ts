@@ -23,6 +23,7 @@ import Translation from "language/Translation";
 import Component from "ui/component/Component";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { IInput, Modifier } from "ui/input/IInput";
+import type { IMacroSection } from "ui/input/Macros";
 import type Tooltip from "ui/tooltip/Tooltip";
 import type { IReferenceSection, ISegment, IStringSection } from "utilities/string/Interpolator";
 export default class Text extends Component {
@@ -94,7 +95,7 @@ export declare class BasicText extends Component {
     protected inputModifier?: Modifier;
     currentTooltip?: (tooltip: Tooltip) => any;
     constructor(elementType?: string);
-    setText(text: IStringSection & Partial<IColorSection> & Partial<ILinkSection> & Partial<IHeadingSection> & Partial<ITooltipSection> & Partial<IReferenceSection> & Partial<IListItemSection> & Partial<IBindingsSection>, data?: IEntireTextData): this;
+    setText(text: IStringSection & Partial<IColorSection & ILinkSection & IHeadingSection & ITooltipSection & IReferenceSection & IListItemSection & IBindingsSection & IMacroSection>, data?: IEntireTextData): this;
     protected onRemove(): void;
     private setTooltipLocation;
     private onClick;

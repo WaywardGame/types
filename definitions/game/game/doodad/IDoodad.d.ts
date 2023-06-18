@@ -475,7 +475,7 @@ export interface IHasBuilder {
     getBuilder(): Human | undefined;
 }
 export interface IHasWater {
-    top?: boolean;
-    bottom?: boolean;
+    top?: true;
+    bottom?: true;
 }
 export {};

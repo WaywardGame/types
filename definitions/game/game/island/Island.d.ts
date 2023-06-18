@@ -200,9 +200,9 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     getTileFromPoint(point: IVector3): Tile;
     getTile(x: number, y: number, z: number, disableLog?: boolean): Tile;
     getTileSafe(x: number, y: number, z: number): Tile | undefined;
-    createTile(x: number, y: number, z: number, index: number): Tile;
+    createTile(x: number, y: number, z: number, index: number, rendererData: number, quality: Quality): Tile;
     setTile(x: number, y: number, z: number, tile: Tile): Tile;
-    getOrCreateTile(index: number, x: number, y: number, z: number): Tile;
+    getOrCreateTile(index: number, x: number, y: number, z: number, rendererData: number, quality: Quality): Tile;
     updateFlowFieldTile(tile: Tile, tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
     /**
      * Checks if island.tileData is synced with Tile.data

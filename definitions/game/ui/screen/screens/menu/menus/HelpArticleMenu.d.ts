@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Menu from "ui/screen/screens/menu/component/Menu";
-import { HelpArticle } from "ui/screen/screens/menu/menus/help/HelpArticleDescriptions";
+import { HelpArticle } from "ui/screen/screens/menu/menus/help/IHelpArticle";
 export default class HelpArticleMenu extends Menu {
     constructor(article: HelpArticle);
     protected onGoBackFrom(): Promise<void>;

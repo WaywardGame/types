@@ -58,6 +58,7 @@ export interface ITooltipLocation extends IVector2 {
     alignment?: Lowercase<keyof typeof TooltipLocationAlignment>;
 }
 export default class TooltipLocationHandler {
+    static make(handler: (location: TooltipLocationHandler) => TooltipLocationHandler): (location: TooltipLocationHandler) => TooltipLocationHandler;
     readonly locationPreference: ITooltipLocationPreference[];
     private readonly _tooltip;
     get tooltip(): Tooltip | undefined;

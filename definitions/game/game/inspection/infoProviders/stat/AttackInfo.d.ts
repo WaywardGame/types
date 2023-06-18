@@ -12,7 +12,7 @@ import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import { StatInfo } from "game/inspection/infoProviders/stat/StatInfo";
 export default class AttackInfo extends StatInfo {
     getClass(): string[];
-    get(): (import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue)[];
+    get(): (LabelledValue | import("game/inspection/InfoProvider").SimpleInfoProvider)[];
     private getTactics;
     private getMainHand;
     private getOffHand;
