@@ -216,19 +216,19 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
      * as internal actions are called on all sides, rather than only clientside*.
      *
      * ***Warning:** While usable actions appear to only ever be client-side, they're *not always.*
-     * The "use when moving" feature for action slots results in actions being executed *only* on the server's side.
-     * **If you try to perform a client-side UI function here, such as showing a prompt, and a player puts the action in a "use when moving" action slot,
+     * The "auto-use" feature for action slots results in actions being executed *only* on the server's side.
+     * **If you try to perform a client-side UI function here, such as showing a prompt, and a player puts the action in a "auto-use" action slot,
      * the host will receive the prompt instead!**
      *
      * If you'd like to execute some things on clientside, you can check if the player is the local player by checking `if (player.asLocalPlayer)`,
-     * or ensure that this action is only executed clientside by setting `clientSide: true`, which disables support for the "use when moving" feature.
+     * or ensure that this action is only executed clientside by setting `clientSide: true`, which disables support for the "auto-use" feature.
      * @param player The player executing this action. This isn't always the local player!
      * @param using What the player is using — items, doodads, etc.
      * @param context Context to do with this action execution — where it's executed from, etc.
      */
     execute?(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): any;
     /**
-     * Marks this usable action as only executable client-side. This disables support for "use when moving" in action slots.
+     * Marks this usable action as only executable client-side. This disables support for "auto-use" in action slots.
      */
     clientSide?: true;
     /**
