@@ -24,6 +24,7 @@ import type { Quality } from "game/IObject";
 import type { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type ItemFinder from "game/item/ItemFinder";
+import type { IItemFinderOptions } from "game/item/ItemFinder";
 import type Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import type Bindable from "ui/input/Bindable";
@@ -39,7 +40,7 @@ export interface IUsableActionRequirement<TYPE> {
 }
 export interface IUsableActionItemRequirement extends Omit<IUsableActionRequirement<Item>, "find"> {
     allowOnlyItemType?(player: Player, type: ItemType): boolean;
-    finder?(player: Player): ItemFinder | undefined;
+    finder?(player: Player, options?: IItemFinderOptions): ItemFinder | undefined;
     requiresQuality?: true;
 }
 export declare namespace IUsableActionRequirement {

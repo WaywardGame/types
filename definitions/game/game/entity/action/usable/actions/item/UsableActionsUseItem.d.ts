@@ -18,7 +18,6 @@ import type { IGetBestItemsOptions } from "game/item/IItemManager";
 import type Item from "game/item/Item";
 export interface IUseItemAction extends IUsableActionDynamicDefinition {
     canDamageItem?: true;
-    allowProtectedItems?: true;
     allowAnyItems?: true;
     allowNoItem?: true;
     hasNoBestItem?: true;

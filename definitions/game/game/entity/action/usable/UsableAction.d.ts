@@ -56,6 +56,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     getItem(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean): Item | false | undefined;
     private requirementsItemFinders?;
     private getItemFinder;
+    private createItemFinder;
     private itemFinderFullCheck?;
     private itemFinderSimpleCheck?;
     private getItemByType;

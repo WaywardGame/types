@@ -99,6 +99,8 @@ export interface IItemDisassembly {
     magic: MagicalPropertyManager | undefined;
     disassembly: Item[];
     tradedFrom: string[] | undefined;
+    decay: number | undefined;
+    startingDecay: number | undefined;
 }
 export declare enum ItemDamageResult {
     NoDamage = 0,

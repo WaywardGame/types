@@ -11,11 +11,9 @@
 import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-import type { ISummon } from "game/item/IItem";
 import type Tile from "game/tile/Tile";
 export interface ISummonAction extends IActionUsable {
     tile: Tile;
-    creatureSummon: ISummon;
 }
 /**
  * Summon a creature (golem) from an item.
