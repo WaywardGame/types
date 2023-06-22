@@ -21,11 +21,14 @@ export interface IUseItemAction extends IUsableActionDynamicDefinition {
     allowAnyItems?: true;
     allowNoItem?: true;
     hasNoBestItem?: true;
+    skipUseCheck?: true;
     filterFind?(item: Item, player: Player): boolean;
     validate?(item: Item, player: Player): boolean;
     initialiseFinder?(finder: UsableActionItemFinder): any;
     onFinderTrack?(finder: UsableActionItemFinder): any;
     onFinderDispose?(finder: UsableActionItemFinder): any;
+    requiresQuality?: true;
+    requiresType?: true;
 }
 export declare namespace IUseItemAction {
     function getGetItemOptions(actionType: ActionType, useItemAction?: Omit<IUseItemAction, keyof IUsableActionDynamicDefinition>): Partial<IGetBestItemsOptions>;

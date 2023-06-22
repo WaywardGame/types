@@ -15,9 +15,11 @@ import type { ActionId, IUsableActionPossibleUsing, IUsableActionRequirements } 
 import type UsableAction from "game/entity/action/usable/UsableAction";
 import ContextMenu from "ui/component/ContextMenu";
 export default class UsableActionRegistrar {
+    private readonly id;
     readonly actions: Array<[string, UsableAction]>;
     readonly actionIndices: Record<string, number>;
     readonly actionIds: string[];
+    constructor(id: string);
     byId(id?: ActionId): UsableAction | undefined;
     filter(filter: (action: UsableAction, id: string) => any): UsableActionRegistrar;
     private contextMenuInitializer?;
@@ -70,8 +72,8 @@ export declare class UsableActionGenerator<ARGS extends any[] = []> extends Even
      * Forcibly regenerates and returns a new action registrar from this generator.
      * If this generator is marked for persistence, the generated registrar will be cached and accessible thereafter by `get()`.
      */
-    generate(...args: ARGS): UsableActionRegistrar;
-    private activePersistences;
+    private generate;
+    private existingPersistenceId?;
     /**
      * Marks this generator for persistence when the "when" event occurs,
      * and unmarks this generator for persistence when the "until" event occurs.

@@ -40,8 +40,9 @@ export interface IUsableActionRequirement<TYPE> {
 }
 export interface IUsableActionItemRequirement extends Omit<IUsableActionRequirement<Item>, "find"> {
     allowOnlyItemType?(player: Player, type: ItemType): boolean;
-    finder?(player: Player, options?: IItemFinderOptions): ItemFinder | undefined;
+    finder?(player: Player, defaultOptions?: IItemFinderOptions, provided?: Omit<IUsableActionPossibleUsing, "item">): ItemFinder | undefined;
     requiresQuality?: true;
+    requiresType?: true;
 }
 export declare namespace IUsableActionRequirement {
     interface Maybe<TYPE> {

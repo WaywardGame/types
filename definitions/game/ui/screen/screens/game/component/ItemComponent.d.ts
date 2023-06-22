@@ -44,6 +44,7 @@ export declare enum ItemClasses {
     Icon = "item-component-icon",
     ItemIconIsReal = "item-component-icon-item-is-real",
     ActionIcon = "item-component-icon-action",
+    ActionIconAnyItem = "item-component-icon-action-any-item",
     ActionIconHasItem = "item-component-icon-action-has-item",
     ActionIconNone = "item-component-icon-action-none",
     SlottedIcon = "item-component-icon-slotted",

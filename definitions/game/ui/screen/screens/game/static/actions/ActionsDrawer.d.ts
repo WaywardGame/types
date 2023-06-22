@@ -126,7 +126,9 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     protected onNext(): boolean;
     protected onPrevious(): boolean;
     protected onLeft(): boolean;
-    protected onEnterBind(api: IBindHandlerApi | Input): boolean;
+    protected onEnterBind(api: IBindHandlerApi | Input, event?: KeyboardEvent): boolean;
+    protected onSubmit(): boolean;
+    private chooseSelected;
     protected onSelectionChange(handler: SelectionHandler, component?: Component): void;
     private selectNext;
     private selectPrevious;
