@@ -8,12 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-export declare enum ActionSort {
-    Default = 0
-}
-export declare enum ActionSlotItemMethod {
-    ExactItem = 0,
-    AnyOfTypeAndQuality = 1,
-    AnyOfType = 2,
-    AnyItem = 3
-}
+import { ActionSlotItemMethod } from "ui/screen/screens/game/static/actions/IActionsDrawer";
+declare const actionSlotItemMethods: Descriptions<ActionSlotItemMethod, string>;
+export default actionSlotItemMethods;

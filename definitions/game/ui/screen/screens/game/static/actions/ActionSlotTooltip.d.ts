@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InspectType } from "game/inspection/IInspection";
-import { InfoProviderContext } from "game/inspection/InfoProviderContext";
+import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import type Inspection from "game/inspection/Inspection";
 import InspectionsHandler from "game/inspection/InspectionsHandler";
 import InspectionsList from "ui/screen/screens/game/component/InspectionsList";

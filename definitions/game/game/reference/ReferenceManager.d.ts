@@ -15,13 +15,14 @@ import { SkillType } from "game/entity/IHuman";
 import { Stat } from "game/entity/IStats";
 import Player from "game/entity/player/Player";
 import type { Game } from "game/Game";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import type Inspection from "game/inspection/Inspection";
 import Island from "game/island/Island";
 import { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import { Milestone } from "game/milestones/IMilestone";
-import type { EnumReferenceTypes, IReferenceTypeMap, Referenceable } from "game/reference/IReferenceManager";
-import { Reference, ReferenceType } from "game/reference/IReferenceManager";
+import type { EnumReferenceTypes, IReferenceTypeMap, Referenceable, Reference } from "game/reference/IReferenceManager";
+import { ReferenceType } from "game/reference/IReferenceManager";
 import ReferenceTooltipHandler from "ui/screen/screens/game/ReferenceTooltipHandler";
 import type Tooltip from "ui/tooltip/Tooltip";
 export default class ReferenceManager {
@@ -44,5 +45,5 @@ export default class ReferenceManager {
     private resolveInternal;
     inspect<REFTYPE extends ReferenceType>(reference: Reference<REFTYPE>, ...args: any[]): Inspection<any> | undefined;
     inspect(reference: Reference, ...args: any[]): Inspection<any> | undefined;
-    tooltip(reference: Reference, initializer?: (tooltip: Tooltip, handler: ReferenceTooltipHandler) => any): (tooltip: Tooltip) => Promise<void>;
+    tooltip(reference: Reference, initializer?: (tooltip: Tooltip, handler: ReferenceTooltipHandler) => any, context?: InfoProviderContext): (tooltip: Tooltip) => Promise<void>;
 }

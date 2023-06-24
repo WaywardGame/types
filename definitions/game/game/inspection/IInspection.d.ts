@@ -44,5 +44,6 @@ export declare enum InfoIcon {
     PinFriend = 3,
     PinMap = 4,
     ActionUndiscovered = 5,
-    PinLighthouse = 6
+    ActionUsingAnyItem = 6,
+    PinLighthouse = 7
 }

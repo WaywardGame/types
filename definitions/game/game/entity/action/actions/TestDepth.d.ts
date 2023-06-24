@@ -12,11 +12,9 @@ import type Doodad from "game/doodad/Doodad";
 import { Action } from "game/entity/action/Action";
 import type { IActionUsable } from "game/entity/action/IAction";
 import { ActionArgument } from "game/entity/action/IAction";
-import type { ITerrainDescription } from "game/tile/ITerrain";
 import type Tile from "game/tile/Tile";
 export interface ITestDepthCanUse extends IActionUsable {
     doodad: Doodad;
-    terrainDescription: ITerrainDescription;
     tile: Tile;
 }
 declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number>, void, ITestDepthCanUse, [(import("../../../item/Item").default | undefined)?]>;

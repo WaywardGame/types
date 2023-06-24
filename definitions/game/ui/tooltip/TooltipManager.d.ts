@@ -36,6 +36,7 @@ export default class TooltipManager {
     protected onInterruptClose(): void;
     protected onScreenResize(): void;
     protected onMove(): void;
+    protected onToggleMoreInfo(): void;
     private loop;
 }
 export interface ITooltipSurfaceEvents {

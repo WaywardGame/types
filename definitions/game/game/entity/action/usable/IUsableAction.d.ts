@@ -185,6 +185,10 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
     inspectTypes?: InspectType[];
     inspect?(type: InspectType, using: IUsableActionPossibleUsing): HashSet<Inspection<any>> | Inspection<any> | undefined;
     /**
+     * A hint for the inspection system that this UA is internally using a specific action. Use tooltip filtering checks this.
+     */
+    useHintAction?: ActionType;
+    /**
      * The contexts this action appears in.
      * - "Always" means whenever an action of this type is shown, it will be. For example, the "item actions" menu.
      * - "Direct" means whenever an action of this type is applicable to given objects, it will be. For example, a specific item's menu.

@@ -10,17 +10,22 @@
  */
 import type { IInspector } from "game/inspection/IInfoProvider";
 import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
+export interface InfoProviderContextRegistration {
+}
 export declare enum InfoProviderContextType {
-    Tooltip = 0,
-    Generic = 1
+    Generic = 0,
+    Tooltip = 1
 }
 export declare class InfoProviderContext {
     static readonly GENERIC: new (inspector?: IInspector | undefined, maxDisplayLevel?: InfoDisplayLevel | undefined) => InfoProviderContext;
     static readonly TOOLTIP: new (inspector?: IInspector | undefined, maxDisplayLevel?: InfoDisplayLevel | undefined) => InfoProviderContext;
     protected readonly _inspector: WeakRef<IInspector>;
-    readonly type: InfoProviderContextType;
+    readonly type: InfoProviderContextType | keyof InfoProviderContextRegistration;
     readonly maxDisplayLevel: InfoDisplayLevel;
     constructor(context: InfoProviderContext);
-    constructor(type: InfoProviderContextType, inspector?: IInspector, maxDisplayLevel?: InfoDisplayLevel);
+    constructor(type: InfoProviderContextType | keyof InfoProviderContextRegistration, inspector?: IInspector, maxDisplayLevel?: InfoDisplayLevel);
     get inspector(): IInspector | undefined;
+    is(...types: Array<InfoProviderContextType | keyof InfoProviderContextRegistration>): boolean;
+    as<TYPE extends keyof InfoProviderContextRegistration>(type: TYPE): InfoProviderContextRegistration[TYPE] | undefined;
+    as(type: InfoProviderContextType): InfoProviderContext | undefined;
 }

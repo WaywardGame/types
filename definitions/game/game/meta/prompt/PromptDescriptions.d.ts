@@ -123,6 +123,7 @@ export declare const promptMultiplayerFailedToConnect: import("game/meta/prompt/
 export declare const promptMultiplayerRestartServerAfterLoadingSave: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMultiplayerDisconnect: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[type: TranslationImpl, reason?: TranslationImpl | undefined]>;
 export declare const promptMultiplayerDisconnectRejoin: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[type: TranslationImpl, reason?: TranslationImpl | undefined]>;
+export declare const promptMultiplayerServerHasUnpublishedMods: import("game/meta/prompt/IPrompt").IPromptInfoDescription<string[]>;
 export declare const promptSteamworksURLOpenedInBrowser: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptSteamworksWorkshopOpenedInBrowser: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptSteamworksModWithNameAlreadyExists: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;

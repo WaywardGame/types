@@ -21,7 +21,6 @@ import type Island from "game/island/Island";
 import type { ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type { Milestone } from "game/milestones/IMilestone";
-import type ReferenceManager from "game/reference/ReferenceManager";
 import type TileEvent from "game/tile/TileEvent";
 export interface IReferenceable {
     /**
@@ -66,7 +65,7 @@ export interface IReferenceTypeMap {
     [ReferenceType.ItemType]: [ReferenceType.ItemType, ItemType];
     [ReferenceType.Dismantle]: [ReferenceType.Dismantle, ItemType];
     [ReferenceType.Stat]: [ReferenceType.Stat, Stat];
-    [ReferenceType.Action]: [ReferenceType.Action, ActionId, Item?];
+    [ReferenceType.Action]: [ReferenceType.Action, ActionId];
     [ReferenceType.EquipSlot]: [ReferenceType.EquipSlot, EquipType];
 }
 export type ReferenceContext = [number, ReferenceType?];
@@ -76,9 +75,7 @@ export type Referenceable = IReferenceTypeMap[ReferenceableReferenceTypes];
 export type ResolveReference<REFTYPE extends ReferenceType> = IReferenceTypeMap[REFTYPE];
 export type EnumReferenceResolved<REFTYPE extends EnumReferenceTypes = EnumReferenceTypes> = IReferenceTypeMap[REFTYPE];
 export declare module Reference {
-    function setReferenceResolver(resolver: typeof ReferenceManager.get): void;
     function create(id: number): Reference;
-    function create<REFTYPE extends ReferenceType>(id: ReferenceId<REFTYPE>, type: REFTYPE, context?: Referenceable | number | [number, ReferenceType?]): Reference;
-    function context(reference?: Reference): [number] | [id: number, type: ReferenceType.Item, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: number, type: ReferenceType.Creature, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: number, type: ReferenceType.Doodad, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: number, type: ReferenceType.NPC, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: number, type: ReferenceType.Player, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: number, type: ReferenceType.TileEvent, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: number, type: ReferenceType.Island, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: number, type: ReferenceType.Corpse, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: SkillType, type: ReferenceType.Skill, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: Milestone, type: ReferenceType.Milestone, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: ItemType, type: ReferenceType.Recipe, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: ItemType, type: ReferenceType.ItemType, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: ItemType, type: ReferenceType.Dismantle, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: Stat, type: ReferenceType.Stat, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: ActionId, type: ReferenceType.Action, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | [id: EquipType, type: ReferenceType.EquipSlot, context?: ReferenceContext | undefined, islandId?: `${number},${number}` | undefined] | undefined;
+    function create<REFTYPE extends ReferenceType>(id: ReferenceId<REFTYPE>, type: REFTYPE): Reference;
 }
 export {};

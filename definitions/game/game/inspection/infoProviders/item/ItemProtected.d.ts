@@ -9,6 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InfoProvider } from "game/inspection/InfoProvider";
+import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
+import LabelledValue from "game/inspection/infoProviders/LabelledValue";
 import type Item from "game/item/Item";
 import { PathType } from "resource/IResourceLoader";
 import ImagePath from "ui/util/ImagePath";
@@ -24,6 +26,6 @@ export default class ItemProtectedInfoProvider extends InfoProvider {
         height: number;
     };
     hasContent(): boolean;
-    get(): import("../../../../language/impl/TranslationImpl").default;
+    get(context: InfoProviderContext): LabelledValue;
     protected onToggleProtected(item: Item): void;
 }

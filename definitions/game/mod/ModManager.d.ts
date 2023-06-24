@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IServerMod } from "@hosts/shared/interfaces";
 import EventEmitter from "event/EventEmitter";
 import type { Game } from "game/Game";
 import type { IPlayOptions } from "game/IGame";
@@ -79,8 +80,9 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     getPublishFileId(index: number): string | undefined;
     getSteamIdOwner(index: number): string | undefined;
     getProvided(index: number): IModProvides;
+    canPublish(index: number): boolean;
     canLoad(index: number, fromModsMenu?: boolean, count?: number): CanLoadState;
-    getLoadabilityInfo(publishFileIdOrIndex: string | number): ICanLoadInfo;
+    getLoadabilityInfo(publishFileIdOrModOrIndex: string | IServerMod | number): ICanLoadInfo;
     getIndicesFromIdentifier(identifier: string): number[];
     getIndexFromName(name: string): number[];
     getIndexFromPublishId(publishFileId: string): number[];

@@ -10,13 +10,18 @@
  */
 import { ActionType } from "game/entity/action/IAction";
 import { EntityType } from "game/entity/IEntity";
+import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
+import { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import Uses from "game/inspection/infoProviders/Uses";
 import type { IItemDescription, ItemType } from "game/item/IItem";
 import type Item from "game/item/Item";
+import UiTranslation from "language/dictionary/UiTranslation";
+import type TranslationImpl from "language/impl/TranslationImpl";
 export default class ItemUses extends Uses<Item> {
     protected getEntityType(): EntityType.Item;
     protected getDescription(type: ItemType): IItemDescription;
     protected getUses(description: IItemDescription): ActionType[];
+    protected getUseDisplayLevel(action: ActionType, context: InfoProviderContext): InfoDisplayLevel;
     protected getUseInfoHandlers(): (import("../UseInfo").default<{
         doodadContainer: import("../../../doodad/IDoodad").IDoodadDescription | undefined;
         civilizationScore: number | undefined;
@@ -83,7 +88,7 @@ export default class ItemUses extends Uses<Item> {
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Disassemble>;
         details: Set<symbol>;
     }, ActionType.Disassemble, {
-        getRequiredItems: () => import("../../../../language/impl/TranslationImpl").default[];
+        getRequiredItems: () => TranslationImpl[];
     }, Item> | import("../UseInfo").default<{
         dismantle: import("game/item/IItem").IDismantleDescription;
         entityType: EntityType.Item;
@@ -107,7 +112,7 @@ export default class ItemUses extends Uses<Item> {
     }, ActionType.Equip, {
         getMagicalEquipTypes: () => Set<import("../../../magic/MagicalPropertyType").MagicalPropertyType>;
     } & {
-        getMagicalPropertyLabels: () => Map<import("../../../magic/MagicalPropertyType").MagicalPropertyType, import("../../../../language/dictionary/UiTranslation").default>;
+        getMagicalPropertyLabels: () => Map<import("../../../magic/MagicalPropertyType").MagicalPropertyType, UiTranslation>;
     } & {
         isMagicalPropertyPercentage: (property: import("../../../magic/MagicalPropertyType").MagicalPropertyType) => boolean;
     } & {
@@ -115,7 +120,7 @@ export default class ItemUses extends Uses<Item> {
     } & {
         getAttack: () => import("../MagicalPropertyValue").default | undefined;
     } & {
-        getDefense: () => (import("../../../../language/impl/TranslationImpl").default | import("../MagicalPropertyValue").default)[];
+        getDefense: () => (TranslationImpl | import("../MagicalPropertyValue").default)[];
     } & {
         formatInsulation: (insulation?: number | undefined, type?: import("../../../temperature/ITemperature").TempType | undefined) => import("../LabelledValue").default;
     } & {
@@ -201,4 +206,14 @@ export default class ItemUses extends Uses<Item> {
         union: import("../UseInfo").IUseInfoBase<Item, ActionType.Build>;
         details: Set<symbol>;
     }, ActionType.Build, {}, Item> | import("../UseInfo").default<import("../UseInfo").IUseInfoBase<Item, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>, ActionType.StartFire | ActionType.Ignite | ActionType.Equip, {}, Item>)[];
+    protected getUse(description: IItemDescription, action: ActionType): TranslationImpl;
+}
+declare module "game/inspection/InfoProviderContext" {
+    interface InfoProviderContextRegistration {
+        ItemUse: ItemUseContext;
+    }
+}
+export declare class ItemUseContext extends InfoProviderContext {
+    readonly item?: Item | undefined;
+    constructor(item?: Item | undefined);
 }
