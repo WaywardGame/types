@@ -10,6 +10,7 @@
  */
 import EventEmitter from "event/EventEmitter";
 import type { IPromptDescriptionBase } from "game/meta/prompt/IPrompt";
+import { Prompt } from "game/meta/prompt/IPrompt";
 import type { IPrompt } from "game/meta/prompt/Prompts";
 import Prompts from "game/meta/prompt/Prompts";
 export interface IPromptsBridgeEvents {
@@ -18,7 +19,7 @@ export interface IPromptsBridgeEvents {
 export default class PromptsBridge extends EventEmitter.Host<IPromptsBridgeEvents> {
     private showing?;
     private hasShownThisInterrupt;
-    get isShowingPrompt(): boolean;
+    isShowingPrompt(prompt?: Prompt): boolean;
     protected onPromptQueue<PROMPT extends IPromptDescriptionBase<any[]>>(prompts: Prompts.Events, prompt: IPrompt<PROMPT>): Promise<void>;
     protected onPromptInterrupt<PROMPT extends IPromptDescriptionBase<any[]>>(prompts: Prompts.Events, prompt: IPrompt<PROMPT>): Promise<void>;
     private wasInterruptHiddenSomehow;
