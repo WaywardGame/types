@@ -43,8 +43,13 @@ export default abstract class Screen extends Component {
     setBackground(background: Background): this;
     removeBackground(): this;
     hasContextMenu(): boolean;
+    /**
+     * @deprecated Use {@link getContextMenuMacroMatches}
+     */
     getPartialContextMenuMacros(): Macros.IBindableMatch | undefined;
+    getContextMenuMacroMatches(): Macros.IBindableMatch | undefined;
     hasPartialContextMenuMacro(api?: Pick<IBindHandlerApi, "input">, macroMatch?: Macros.IBindableMatch): boolean;
+    hasContextMenuMacroPartialOrMatch(api?: Pick<IBindHandlerApi, "input">, macroMatch?: Macros.IBindableMatch): boolean;
     /**
      * Remove the context menu from this element
      */
