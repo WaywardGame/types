@@ -38,7 +38,8 @@ import type { InspectionClass } from "game/inspection/InspectionTypeMap";
 import type { IItemDescription, IItemGroupDescription, ItemTag, ItemType, ItemTypeGroup } from "game/item/IItem";
 import type { IMagicalPropertyDescription, MagicalPropertyType } from "game/magic/MagicalPropertyType";
 import type { ILoadingDescription } from "game/meta/Loading";
-import type { Prompt } from "game/meta/prompt/IPrompt";
+import type { IPromptDescriptionBase, Prompt } from "game/meta/prompt/IPrompt";
+import type PromptDescriptionFactory from "game/meta/prompt/PromptDescriptionFactory";
 import type { TempType } from "game/temperature/ITemperature";
 import type { ITerrainDescription, OverlayType, TerrainType } from "game/tile/ITerrain";
 import type { ITileEventDescription, TileEventType } from "game/tile/ITileEvent";
@@ -329,9 +330,11 @@ export interface IQuestRequirementRegistration extends IBaseModRegistration {
     name: string;
     description: QuestRequirement;
 }
+export type PromptConstructorFunction<DESCRIPTION extends IPromptDescriptionBase<any[]>> = (type: Prompt, factory: PromptDescriptionFactory) => DESCRIPTION;
 export interface IPromptRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Prompt;
     name: string;
+    construct: PromptConstructorFunction<IPromptDescriptionBase<any[]>>;
 }
 export interface ILoadRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Load;
@@ -620,7 +623,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered prompt.
      */
-    export function prompt(name: string): <K extends string | number | symbol, T extends Record<K, Prompt>>(target: T, key: K) => void;
+    export function prompt<DESCRIPTION extends IPromptDescriptionBase<any[]>>(name: string, construct: PromptConstructorFunction<DESCRIPTION>): <K extends string | number | symbol, T extends Record<K, DESCRIPTION>>(target: T, key: K) => void;
     /**
      * Registers an interrupt choice.
      * @param name The name of the interrupt choice.

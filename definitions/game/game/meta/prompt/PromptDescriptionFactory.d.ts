@@ -14,15 +14,19 @@ import type InterruptChoice from "language/dictionary/InterruptChoice";
 import type { TranslationGenerator } from "ui/component/IComponent";
 import type { MenuId } from "ui/screen/screens/menu/component/IMenu";
 export declare const promptDescriptions: Descriptions<PromptType, IPromptDescriptionBase<any>>;
-declare class PromptDescriptionFactory {
+export default class PromptDescriptionFactory {
     private readonly _priority?;
     constructor(_priority?: PromptPriority | undefined);
+    static priority(priority: PromptPriority): PromptDescriptionFactory;
+    /**
+     * @deprecated Use {@link PromptDescriptionFactory.priority}
+     */
     priority(priority: PromptPriority): PromptDescriptionFactory;
-    info<A extends any[] = []>(type: Prompt): IPromptInfoDescription<A>;
-    confirm<A extends any[] = []>(type: Prompt, yesTranslation?: TranslationGenerator<InterruptChoice>, noTranslation?: TranslationGenerator<InterruptChoice>): IPromptConfirmDescription<A>;
-    choice<A extends any[], CHOICES extends PromptChoices<A>>(type: Prompt, choices: CHOICES): IPromptChoiceDescription<A, CHOICES>;
+    info<A extends any[] = []>(type: SupplierOr<Prompt>): IPromptInfoDescription<A>;
+    confirm<A extends any[] = []>(type: SupplierOr<Prompt>, yesTranslation?: TranslationGenerator<InterruptChoice>, noTranslation?: TranslationGenerator<InterruptChoice>): IPromptConfirmDescription<A>;
+    choice<A extends any[], CHOICES extends PromptChoices<A>>(type: SupplierOr<Prompt>, choices: CHOICES): IPromptChoiceDescription<A, CHOICES>;
     input<A extends any[] = []>(type: Prompt, configure?: IPromptInputDescription<A>["configure"], canCancel?: true): IPromptInputDescription<A>;
     menu<MENU extends MenuId, A extends any[] = []>(type: Prompt, menu: MENU, configure?: IPromptMenuDescription<MENU, A>["configure"]): IPromptMenuDescription<MENU, A>;
+    private create;
 }
 export declare const promptDescriptionFactory: PromptDescriptionFactory;
-export {};
