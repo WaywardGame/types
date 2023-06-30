@@ -40,6 +40,14 @@ declare module Version {
      */
     export function isCompatible(version: IVersionInfo | Version.String | Version.StringSemVer): boolean;
     /**
+     * Returns whether the given version is compatible with the game's version. This is used to check, for example,
+     * if a mod is compatible with the game's version.
+     *
+     * - Compatible versions in "beta" stage require identical stage, major, minor, and a patch less than or equal to the current patch.
+     * - Compatible versions in "release" stage require identical stage and major, and a minor and patch less than or equal to the current minor and patch.
+     */
+    export function is(versionA: IVersionInfo | Version.String | Version.StringSemVer, versionB: IVersionInfo | Version.String | Version.StringSemVer): boolean;
+    /**
      * Returns whether the given `version` is `atLeast` another version. This can be used, for example,
      * to see if a save or mod was created/edited after a specific thing was implemented.
      */
@@ -78,6 +86,11 @@ declare module Version {
          * to see if a save or mod was created/edited after a specific thing was implemented.
          */
         isAtLeast(version: IVersionInfo | Version.String | Version.StringSemVer): boolean;
+        /**
+         * Returns whether this version is greater than or equal to the given version. This can be used, for example,
+         * to see if a save or mod was created/edited after a specific thing was implemented.
+         */
+        is(version: IVersionInfo | Version.String | Version.StringSemVer): boolean;
         /**
          * Returns whether this version is older than the given version.
          */
