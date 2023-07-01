@@ -62,10 +62,18 @@ export interface IMatchmakingIpAddressMessageData extends IMatchmakingMessageDat
 }
 export interface IMatchmakingJoinChannelMessageData extends IMatchmakingMessageData {
     type: MatchmakingMessageDataType.JoinChannel;
+    targetMatchmakingIdentifier: string;
     clientVersion: string;
     clientBuild: number | undefined;
     playerIdentifier: string;
     playerSteamId: string | undefined;
+    /**
+     * Used by clients to authenticate ownership of their player
+     */
+    clientSecret: string;
+    /**
+     * Used by hosts to authenticate ownership of a server/matchmaking channel
+     */
     secret?: string;
 }
 export interface IMatchmakingIceCandidateMessageData extends IMatchmakingMessageData {

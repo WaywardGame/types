@@ -25,6 +25,10 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
      */
     private _playerIdentifier;
     /**
+     * A secret string that's stored in localStorage that helps authorize players to servers.
+     */
+    private readonly _clientSecret;
+    /**
      * Steam id - used for steam networking
      */
     private readonly _playerSteamId;

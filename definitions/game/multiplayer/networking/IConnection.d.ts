@@ -24,6 +24,7 @@ export interface IConnection {
     name: string;
     maxMessageSize: number;
     playerIdentifier: string | undefined;
+    clientSecret: string;
     playerSteamId: string | undefined;
     matchmakingIdentifier: string;
     pid?: number;

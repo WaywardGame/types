@@ -83,4 +83,9 @@ export default class PlayerManager extends EventEmitter.Host<IPlayerManagerEvent
      * Finds the first available player id in the array
      */
     private findAvailablePlayerId;
+    /**
+     * Clears the existing client secret for the player
+     * @param playerIdentifier Player identifier
+     */
+    clearClientSecret(playerIdentifier: string): void;
 }

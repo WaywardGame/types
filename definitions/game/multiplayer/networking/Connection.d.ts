@@ -19,6 +19,7 @@ export declare abstract class Connection implements IConnection {
     playerIdentifier: string | undefined;
     playerSteamId: string | undefined;
     matchmakingIdentifier: string;
+    clientSecret: string;
     pid?: number;
     buffer?: Uint8Array;
     bufferOffset?: number;
