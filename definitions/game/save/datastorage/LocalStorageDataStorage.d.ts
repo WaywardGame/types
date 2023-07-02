@@ -11,6 +11,7 @@
 import type IDataStorage from "save/datastorage/IDataStorage";
 import type { ISaveObject } from "save/ISaveManager";
 export default class LocalStorageDataStorage implements IDataStorage {
+    static clearLocalStorage(): void;
     initialize(): void;
     isEnabled(): boolean;
     isSlotUsed(slot: number, _interval?: number): boolean;
