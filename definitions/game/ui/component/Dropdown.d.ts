@@ -57,7 +57,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     retainLastFilter(retainLastFilter?: boolean): this;
     open(): void;
     close(input?: InputButton): boolean;
-    select(optionId: O | undefined): this;
+    select(optionId: O | undefined, force?: boolean): this;
     selectDefault(): this;
     setRefreshMethod(refresh: () => IDropdownData<O>): this;
     refresh(): this;

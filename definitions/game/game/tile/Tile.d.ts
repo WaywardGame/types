@@ -55,11 +55,6 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     readonly y: number;
     readonly z: WorldZ;
     /**
-     * Data associated with the tile
-     */
-    rendererData: number;
-    quality?: Quality;
-    /**
      * Entities on the tile
      */
     creature?: Creature;
@@ -79,24 +74,29 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     containedItems?: Item[];
     private _description;
     /**
+     * Data associated with the tile
+     */
+    private _rendererData;
+    /**
+     * Tile quality that is linked to map gen / tileData
+     */
+    private _quality?;
+    /**
      * Creates a fake tile
      */
-    static createFake(island: Island): Tile;
+    static createFake(island: Island, x?: number, y?: number, z?: number): Tile;
     /**
      * Constructed during map gen
      */
-    constructor(island: Island, x: number, y: number, z: number, id: number);
+    constructor(island: Island, x: number, y: number, z: number, id: number, rendererData: number, quality: Quality);
     get point(): IVector3;
     get description(): ITerrainDescription | undefined;
     toString(): string;
     getName(includeCoordinates?: boolean): Translation;
     get type(): TerrainType;
-    /**
-     * Use game.changeTile or game.removeTopTile when modifying tiles.
-     * This should only be called if you know what you're doing.
-     * Otherwise the game state could get out of sync.
-     */
-    set type(value: number);
+    private set type(value);
+    get quality(): Quality;
+    private set quality(value);
     get isTilled(): boolean;
     /**
      * This should only be called if you know what you're doing
@@ -181,6 +181,15 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     };
     getTileData(): ITileData[] | undefined;
     getOrCreateTileData(): ITileData[];
+    /**
+     * Use game.changeTile or game.removeTopTile when modifying tiles.
+     * This should only be called if you know what you're doing.
+     * Otherwise the game state could get out of sync.
+     */
+    forceChangeTile(type: TerrainType, quality: Quality): void;
+    /**
+     * Changes the tile
+     */
     changeTile(newTileInfo: TerrainType | ITileData, stackTiles: boolean, dropTiles?: boolean): void;
     /**
      * Removes the top tiledata (index 0) from the tile

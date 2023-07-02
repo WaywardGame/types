@@ -37,6 +37,7 @@ export interface IUiEvents {
     interruptClose(options: Partial<InterruptOptions>, result?: string | boolean | InterruptChoice): any;
     loadedFromSave(): any;
     changeInformationVisibility(informationVisibility: TooltipVisibilityOption): any;
+    toggleMoreInfo(moreInfo: boolean): any;
     toggleHealthVignette(healthVignette: boolean): any;
     toggleDeveloperMode(developerMode: boolean): any;
 }

@@ -14,7 +14,7 @@ import type { ISerializedTranslation } from "language/ITranslation";
 import type Translation from "language/Translation";
 import type Bindable from "ui/input/Bindable";
 import { MenuId } from "ui/screen/screens/menu/component/IMenu";
-import type { HelpArticle } from "ui/screen/screens/menu/menus/help/HelpArticleDescriptions";
+import type { HelpArticle } from "ui/screen/screens/menu/menus/help/IHelpArticle";
 type Text = Translation | ISerializedTranslation | string;
 export declare const promptGameDialogMessagesEditFiltersSaveOverExisting: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameDialogMessagesEditFiltersResetConfirm: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
@@ -123,6 +123,7 @@ export declare const promptMultiplayerFailedToConnect: import("game/meta/prompt/
 export declare const promptMultiplayerRestartServerAfterLoadingSave: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMultiplayerDisconnect: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[type: TranslationImpl, reason?: TranslationImpl | undefined]>;
 export declare const promptMultiplayerDisconnectRejoin: import("game/meta/prompt/IPrompt").IPromptConfirmDescription<[type: TranslationImpl, reason?: TranslationImpl | undefined]>;
+export declare const promptMultiplayerServerHasUnpublishedMods: import("game/meta/prompt/IPrompt").IPromptInfoDescription<string[]>;
 export declare const promptSteamworksURLOpenedInBrowser: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptSteamworksWorkshopOpenedInBrowser: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptSteamworksModWithNameAlreadyExists: import("game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;

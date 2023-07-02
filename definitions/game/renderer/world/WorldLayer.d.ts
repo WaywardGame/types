@@ -54,6 +54,8 @@ export default class WorldLayer implements IPreSerializeCallback {
     isTilled(terrain: TerrainData): boolean;
     isDoodadOverHidden(terrain: TerrainData): boolean;
     isDoodadAnimationDisabled(terrain: TerrainData): boolean;
+    terrainTypesMatch(terrain: TerrainData, otherTerrainType: TerrainType): boolean;
+    baseWaterTypesMatch(baseWaterType: TerrainType, comparisonBaseWaterType: TerrainType): boolean;
     setTile(x: number, y: number, terrainType: TerrainType, terrainMasks?: TerrainMask): void;
     updateAll(): void;
     /**

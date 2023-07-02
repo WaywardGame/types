@@ -10,7 +10,7 @@
  */
 import EventEmitter from "event/EventEmitter";
 import Component from "ui/component/Component";
-import type Bindable from "ui/input/Bindable";
+import Bindable from "ui/input/Bindable";
 import { IInput, InputCatalyst, Modifier } from "ui/input/IInput";
 import HashMap from "utilities/collection/map/HashMap";
 import Vector2 from "utilities/math/Vector2";

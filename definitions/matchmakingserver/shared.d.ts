@@ -27,6 +27,7 @@ export interface ClientConnection extends ws {
     identifier: string;
     version: ServerVersion;
     channel?: string;
+    channelMatchmakingIdentifier?: string;
     servers?: string[];
     pendingCheckConnection?: boolean;
 }

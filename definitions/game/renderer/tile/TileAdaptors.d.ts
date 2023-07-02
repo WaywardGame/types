@@ -10,7 +10,7 @@
  */
 import type Doodad from "game/doodad/Doodad";
 import type { DoodadType } from "game/doodad/IDoodad";
-import { TerrainType } from "game/tile/ITerrain";
+import type { TerrainType } from "game/tile/ITerrain";
 import type WorldLayer from "renderer/world/WorldLayer";
 import Vector2 from "utilities/math/Vector2";
 import type TileAtlas from "renderer/tile/atlas/TileAtlas";
@@ -41,5 +41,4 @@ export interface IDoodadAdaptor {
     adapt(worldLayer: WorldLayer, tileAtlas: TileAtlas, x: number, y: number, doodadType: DoodadType, result: ITileAdaptation): void;
 }
 export declare function isDoor(doodad?: Doodad): boolean;
-export declare function baseWaterTypesMatch(baseWaterType: TerrainType, comparisonBaseWaterType: TerrainType): boolean;
 export declare const emptyTileAdaptor: ITileAdaptation;

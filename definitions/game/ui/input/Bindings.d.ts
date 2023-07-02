@@ -31,10 +31,8 @@ declare module Bindings {
     function reset(bindable: Bindable): void;
     function clear(bindable: Bindable): void;
     function resetAll(): void;
-    function translate(bindable?: Bindable, noBindings?: TranslationImpl, simplify?: true): TranslationImpl;
-    function translate(bindable?: Bindable, noBindings?: TranslationImpl | null, simplify?: true): TranslationImpl | undefined;
-    function translateRaw(bindable?: Bindable, noBindings?: TranslationImpl): TranslationImpl;
-    function translateRaw(bindable?: Bindable, noBindings?: TranslationImpl | null): TranslationImpl | undefined;
+    function translate(bindable?: Bindable, noBindings?: TranslationImpl, simplify?: true, contextless?: true): TranslationImpl;
+    function translate(bindable?: Bindable, noBindings?: TranslationImpl | null, simplify?: true, contextless?: true): TranslationImpl | undefined;
     function markCacheInvalid(updateBindableManagers?: boolean): void;
     function getBoundTo(binding: Binding): Set<Bindable>;
 }

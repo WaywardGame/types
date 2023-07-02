@@ -41,4 +41,5 @@ export default class MainMenu extends Menu {
     private checkAndShowGameInterrupts;
     private getAboutMenu;
     private getNewsMenu;
+    private getEnabledModsTooltip;
 }

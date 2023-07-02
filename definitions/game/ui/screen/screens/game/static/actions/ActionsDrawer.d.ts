@@ -19,6 +19,7 @@ import type { IRefreshable } from "ui/component/Refreshable";
 import Text, { Paragraph } from "ui/component/Text";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import { IActionBarSlotData } from "ui/screen/screens/game/static/actions/IActionBar";
+import { ActionSlotItemMethod } from "ui/screen/screens/game/static/actions/IActionsDrawer";
 import SelectionHandler from "ui/screen/screens/menu/component/SelectionHandler";
 declare enum Classes {
     Main = "game-action-configuration-drawer",
@@ -49,12 +50,6 @@ declare enum Classes {
     ConfigurationColumnTitleInapplicable = "game-action-configuration-drawer-column-title-inapplicable"
 }
 export { Classes as ActionsConfigurationDrawerClasses };
-declare enum ItemMethod {
-    ExactItem = 0,
-    AnyOfTypeAndQuality = 1,
-    AnyOfType = 2,
-    AnyItem = 3
-}
 export interface IActionsConfigurationDrawerEvents extends Events<Component> {
     update(): any;
     endConfiguration(): any;
@@ -80,7 +75,7 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     readonly hintSelectAction: Paragraph;
     readonly configurationColumnHeaderHorizontalLine: HorizontalLine;
     readonly configurationColumnContents: Component<HTMLElement>;
-    readonly itemOrTypeChoiceList: ChoiceList<Choice<ItemMethod>, false>;
+    readonly itemOrTypeChoiceList: ChoiceList<Choice<ActionSlotItemMethod>, false>;
     private translateUseExact;
     private translateUseByTypeAndQuality;
     private translateUseByType;
@@ -126,7 +121,9 @@ export default class ActionsConfigurationDrawer extends Component implements IRe
     protected onNext(): boolean;
     protected onPrevious(): boolean;
     protected onLeft(): boolean;
-    protected onEnterBind(api: IBindHandlerApi | Input): boolean;
+    protected onEnterBind(api: IBindHandlerApi | Input, event?: KeyboardEvent): boolean;
+    protected onSubmit(): boolean;
+    private chooseSelected;
     protected onSelectionChange(handler: SelectionHandler, component?: Component): void;
     private selectNext;
     private selectPrevious;

@@ -134,7 +134,7 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      * @returns Tile or undefined
      */
     getTile(itemOrContainer?: Item | IContainer): Tile | undefined;
-    resolveContainer(container?: IContainer): Tile | Doodad | IContainer | Item | Player | NPC | undefined;
+    resolveContainer(container?: IContainer): Doodad | Item | Player | NPC | IContainer | Tile | undefined;
     getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
     hashContainer(containable: IContainable, containerReferenceSource?: ContainerReferenceSource): string;

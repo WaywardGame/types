@@ -20,5 +20,5 @@ export interface IToggleContainerCanUse extends IActionUsable {
     container: Doodad | Item;
     shipper?: ShipperNPC;
 }
-declare const _default: Action<[[ActionArgument.Container, ActionArgument.NPCNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default<number>, void, IToggleContainerCanUse, [(IContainer | NPC | undefined)?, (boolean | undefined)?]>;
+declare const _default: Action<[[ActionArgument.Container, ActionArgument.NPCNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default<number>, void, IToggleContainerCanUse, [(NPC | IContainer | undefined)?, (boolean | undefined)?]>;
 export default _default;

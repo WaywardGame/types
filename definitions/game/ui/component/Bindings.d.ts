@@ -17,19 +17,22 @@ export declare enum BindingsClasses {
     Main = "bindings",
     Macro = "bindings-macro",
     Input = "bindings-macro-input",
+    InputHoverItem = "bindings-macro-input-hover-item",
     InputIcon = "bindings-macro-input-icon",
     InputIconLabel = "bindings-macro-input-icon-label",
     Modifier = "bindings-macro-input-modifier",
-    MacroSeparator = "bindings-macro-separator"
+    MacroSeparator = "bindings-macro-separator",
+    MacroSeparatorPadded = "bindings-macro-separator-padded"
 }
 export default class Bindings extends Component {
     readonly bindable: Bindable | null;
     private readonly noBindingsFallback?;
     private readonly simplify?;
-    static createDisplays(bindable: Bindable | null, sortByComplexity?: true, simplify?: true): MacroDisplay[];
-    static createMacroDisplay(macro: Macro): MacroDisplay;
+    private readonly contextless?;
+    static createDisplays(bindable: Bindable | null, sortByComplexity?: true, simplify?: true, contextless?: true): MacroDisplay[];
+    static createMacroDisplay(macro: Macro, simplify?: true): MacroDisplay;
     macroDisplays: MacroDisplay[];
-    constructor(bindable: Bindable | null, noBindingsFallback?: (() => Text) | undefined, simplify?: true | undefined);
+    constructor(bindable: Bindable | null, noBindingsFallback?: (() => Text) | undefined, simplify?: true | undefined, contextless?: true | undefined);
     refresh(): this;
     protected onAppend(): void;
     protected onInvalidateBindings(): void;
@@ -41,7 +44,7 @@ declare class MacroDisplay extends Component {
     readonly macro: Macro;
     readonly inputDisplays: InputDisplay[];
     readonly complexity: number;
-    constructor(bindable: Bindable, macro: Macro, simplify?: true);
+    constructor(bindable: Bindable, macro: Macro, simplify?: true, contextless?: true);
     private addMacroSeparator;
 }
 declare class InputDisplay extends Component {

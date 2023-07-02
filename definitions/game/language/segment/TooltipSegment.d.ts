@@ -12,7 +12,7 @@ import type Translation from "language/Translation";
 import type Tooltip from "ui/tooltip/Tooltip";
 import type { ISegment, IStringSection } from "utilities/string/Interpolator";
 export interface ITooltipSection extends IStringSection {
-    tooltip: IStringSection[] | Translation | ((tooltip: Tooltip) => Tooltip);
+    tooltip: IStringSection[] | Translation | ((tooltip: Tooltip) => any);
 }
 declare const tooltipSegment: ISegment;
 export default tooltipSegment;

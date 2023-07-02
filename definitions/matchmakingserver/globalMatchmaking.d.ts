@@ -20,5 +20,4 @@ export default class GlobalMatchmaking extends Server {
     protected onMessage(connection: shared.ClientConnection, data: ws.Data, ipAddress: string): void;
     private removeFromChannel;
     private addToChannel;
-    private broadcastData;
 }

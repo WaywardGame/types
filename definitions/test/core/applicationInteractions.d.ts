@@ -12,6 +12,7 @@
 import type { IInit } from "@wayward/game/Init";
 import type { Stat } from "@wayward/game/game/entity/IStats";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
+import { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { Random } from "@wayward/game/utilities/random/Random";
 import { ApplicationDom } from "@wayward/test/core/applicationDom";
@@ -57,6 +58,9 @@ export default class ApplicationInteractions {
     }>): Promise<void>;
     clickYesIfVisible(): Promise<boolean>;
     clickButtonIfVisible(name: string): Promise<boolean>;
+    isShowingPrompt(prompt: Prompt): Promise<boolean>;
+    dismissPrompt(prompt: Prompt): Promise<void>;
+    dismissPromptIfShown(prompt: Prompt): Promise<void>;
     clickUnpauseIconIfVisible(): Promise<void>;
     clickNewGameCheckbox(name: string): Promise<void>;
     clickButtonIfClickable(name: string): Promise<boolean>;

@@ -14,9 +14,10 @@ export interface IBindingsSection extends IStringSection {
     bindable: Bindable | null;
     bindableNoBindingsFallback?: IStringSection[];
     bindableSimplify?: true;
+    bindableContextless?: true;
 }
 export declare namespace IBindingsSection {
-    function create(bindable: Bindable | null, fallback?: IStringSection[], simplify?: boolean): IBindingsSection;
+    function create(bindable: Bindable | null, fallback?: IStringSection[], simplify?: boolean, contextless?: boolean): IBindingsSection;
 }
 declare const bindSegment: ISegment;
 export default bindSegment;

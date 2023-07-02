@@ -456,7 +456,10 @@ export declare enum DoodadTypeGroup {
     Last = 420
 }
 export declare enum DoorOrientation {
-    Default = 0,
+    /**
+     * Horizontal (handle on right)
+     */
+    Horizontal = 0,
     Vertical = 1
 }
 export declare enum GrowingStage {
@@ -472,7 +475,7 @@ export interface IHasBuilder {
     getBuilder(): Human | undefined;
 }
 export interface IHasWater {
-    top?: boolean;
-    bottom?: boolean;
+    top?: true;
+    bottom?: true;
 }
 export {};

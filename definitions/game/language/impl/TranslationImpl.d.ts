@@ -95,6 +95,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
      */
     get(...args: any[]): IStringSection[];
     private resolveSections;
+    static sectionStringRenderers: Array<((section: IStringSection) => string | undefined)>;
     /**
      * Returns the translation as a string
      */

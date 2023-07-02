@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IServerMod } from "@hosts/shared/interfaces";
 import EventEmitter from "event/EventEmitter";
 import Player from "game/entity/player/Player";
 import type Island from "game/island/Island";
@@ -23,6 +24,10 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
      * Otherwise it will be a random guid that persists
      */
     private _playerIdentifier;
+    /**
+     * A secret string that's stored in localStorage that helps authorize players to servers.
+     */
+    private readonly _clientSecret;
     /**
      * Steam id - used for steam networking
      */
@@ -157,6 +162,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     isKeepAliveTimeoutPaused(): boolean;
     pauseKeepAliveTimeouts(): void;
     resumeKeepAliveTimeouts(): void;
+    getServerMods(): IServerMod[];
     updateGlobalServerDirectory(): void;
     checkConnection(): Promise<void>;
     isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;

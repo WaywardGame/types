@@ -10,9 +10,8 @@
  */
 import type Player from "@wayward/game/game/entity/player/Player";
 import { Direction } from "@wayward/game/utilities/math/Direction";
-import type { ITestState } from "@wayward/test/core/application";
+import type { Application, ITestState } from "@wayward/test/core/application";
 import type { INewGameOptions, ITestJoinServerOptions } from "@wayward/test/interfaces";
-import type { Application } from "@wayward/test/core/application";
 export declare class Apps {
     private readonly _logs;
     private readonly _applications;

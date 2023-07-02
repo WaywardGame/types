@@ -16,6 +16,7 @@ import type { ActionWhichTranslation } from "game/entity/action/usable/UsableAct
 import type Player from "game/entity/player/Player";
 import type { IIcon } from "game/inspection/InfoProvider";
 import type Item from "game/item/Item";
+import Message from "language/dictionary/Message";
 import type Translation from "language/Translation";
 import type { HighlightSelector } from "ui/util/IHighlight";
 export declare const USABLE_ACTION_USE_ON_MOVE_UNLOCK_AT = 20;
@@ -44,7 +45,8 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     constructor(requirements: REQUIREMENTS, definition: DEFINITION);
     isExecutable(): this is UsableAction<REQUIREMENTS, IUsableActionDefinitionExecutable<REQUIREMENTS>>;
     execute(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): boolean;
-    resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>): false | IUsableActionUsing<REQUIREMENTS>;
+    resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>): Message.UiActionCannotUseRequiresCreature | Message.UiActionCannotUseRequiresDoodad | Message.UiActionCannotUseRequiresItem | Message.UiActionCannotUseRequiresNPC | IUsableActionUsing<REQUIREMENTS>;
+    resolveUsingOrUndefined(player: Player, using: IUsableActionUsing<REQUIREMENTS>): IUsableActionUsing<REQUIREMENTS> | undefined;
     isUsable(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): UsableActionUsability<REQUIREMENTS>;
     isApplicable(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean): provided is IUsableActionUsing<REQUIREMENTS>;
     private isItemApplicable;
@@ -56,6 +58,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     getItem(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean): Item | false | undefined;
     private requirementsItemFinders?;
     private getItemFinder;
+    private createItemFinder;
     private itemFinderFullCheck?;
     private itemFinderSimpleCheck?;
     private getItemByType;

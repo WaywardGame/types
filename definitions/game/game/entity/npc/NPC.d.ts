@@ -171,7 +171,7 @@ export default abstract class NPC extends Human<NPCType> {
     protected changeZ(toZ: number, fromZ: number): boolean | void | undefined;
     protected updateTile(fromTile: Tile, toTile: Tile): boolean;
     protected postMove(): void;
-    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): 0 | -1 | -2 | -3 | -4 | -5 | -6;
+    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): -1 | 0 | -2 | -3 | -4 | -5 | -6;
     getWeightOrStaminaMovementPenalty(): number;
     get asMerchant(): MerchantNPC | undefined;
     get asShipper(): ShipperNPC | undefined;

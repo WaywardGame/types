@@ -19,7 +19,8 @@ declare module EnumManager {
      */
     function clearCacheForMod(modIndex: number): void;
     function reset(): void;
-    function allocate(modIndex: number, id: EnumId, name: string, objectValue?: ((enumNumber: number) => any) | any, onAllocate?: ((enumNumber: number) => void), onUnallocate?: ((enumNumber: number) => void)): EnumInfo | undefined;
+    function allocate<DESCRIPTION extends object | undefined>(modIndex: number, id: EnumId, name: string, description: DESCRIPTION, onAllocate?: ((enumNumber: number, description: DESCRIPTION) => void), onUnallocate?: ((enumNumber: number) => void)): EnumInfo | undefined;
+    function allocate<DESCRIPTION extends object | undefined>(modIndex: number, id: EnumId, name: string, description?: DESCRIPTION, onAllocate?: ((enumNumber: number, description?: DESCRIPTION) => void), onUnallocate?: ((enumNumber: number) => void)): EnumInfo | undefined;
     function unallocate(enumInfo: EnumInfo): void;
     function unallocateMod(modIndex: number): void;
 }

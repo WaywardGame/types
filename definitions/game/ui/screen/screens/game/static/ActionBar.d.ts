@@ -11,6 +11,7 @@
 import Stream from "@wayward/goodstream/Stream";
 import type { Events, IEventEmitter } from "event/EventEmitter";
 import type { IActionApi } from "game/entity/action/IAction";
+import { ActionType } from "game/entity/action/IAction";
 import type { IUsableActionPossibleUsing, IUsableActionRequirements, ReturnableUsableActionUsability } from "game/entity/action/usable/IUsableAction";
 import type Player from "game/entity/player/Player";
 import type { Game } from "game/Game";
@@ -146,6 +147,7 @@ export declare class ActionSlot extends Button implements IRefreshable {
     protected onLeave(reason: "mouse" | "focus" | "remove"): void;
     static getTooltipLocation(actionBar: ActionBar, handler: TooltipLocationHandler): TooltipLocationHandler;
     getAction(): import("../../../../../game/entity/action/usable/UsableAction").default<IUsableActionRequirements, import("game/entity/action/usable/IUsableAction").IUsableActionDefinition<IUsableActionRequirements>> | undefined;
+    getInternalActionType(): ActionType | undefined;
     getUsing(): IUsableActionPossibleUsing;
 }
 export {};

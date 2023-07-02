@@ -77,8 +77,9 @@ export interface IWorldRendererEvents {
      * @param tileScale The tile scale
      * @param viewWidth The width of the view port
      * @param viewHeight The height of the view port
+     * @param timeStamp The animation frame timestamp
      */
-    preRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
+    preRenderWorld(tileScale: number, viewWidth: number, viewHeight: number, timeStamp: number): void;
     /**
      * Caller after rendering the world
      * @param tileScale The tile scale

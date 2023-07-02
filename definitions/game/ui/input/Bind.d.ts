@@ -14,6 +14,10 @@ import { IInput } from "ui/input/IInput";
 import type { GlobalInputInfo, GlobalMouseInfo, InputInfo } from "ui/input/InputManager";
 export interface IBindHandlerApi {
     /**
+     * You should never need this unless you expect the user to be trying to use a scroll binding for your bind handler.
+     */
+    preventDefault?: true;
+    /**
      * The bindable this handler is called for.
      */
     bindable: Bindable | "anything";

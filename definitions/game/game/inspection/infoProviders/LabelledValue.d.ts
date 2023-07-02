@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { InfoDisplayLevel } from "game/inspection/IInfoProvider";
+import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
@@ -38,6 +38,8 @@ export default class LabelledValue extends InfoProvider {
     getClass(): string[];
     addClasses(...classes: string[]): this;
     private getLabel;
+    private getPunctuation;
+    private getContent;
     get(): Array<Translation | InfoProvider>;
     protected initChildTextComponent(text: TranslationGenerator): Text;
     setDisplayMode(mode: keyof typeof LabelledValueDisplayMode): this;

@@ -15,7 +15,7 @@ import type { TranslationArg } from "language/ITranslation";
 import Translation from "language/Translation";
 import Note from "language/dictionary/Note";
 import type { IModdable } from "mod/ModRegistry";
-import { HelpArticle } from "ui/screen/screens/menu/menus/help/HelpArticleDescriptions";
+import { HelpArticle } from "ui/screen/screens/menu/menus/help/IHelpArticle";
 export interface INoteDescription extends IModdable {
     learnMore?: HelpArticle;
 }

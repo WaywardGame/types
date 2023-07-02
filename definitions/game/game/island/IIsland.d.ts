@@ -96,6 +96,12 @@ export interface IIslandEvents {
     portsChanged(addedPort?: Port, removedPort?: Port): any;
     getDefense(defense: Defense | undefined, target: Human | Creature | CreatureType, damageType?: DamageType): Defense | undefined;
     calculateAttackOutcome(damageOutcome: IDamageOutcome, input: IDamageOutcomeInput, attackValue: number, defenseValue: number): IDamageOutcome | undefined;
+    /**
+     * Called when determining how many ticks to process when fast forwarding an island during traveling
+     * @param fastForwardAmount Fast forward amount
+     * @param travelTime Travel time
+     */
+    getFastForwardAmount(fastForwardAmount: number, travelTime: number): number | undefined;
 }
 export interface ILegacySeeds {
     type: SeedType.Legacy;

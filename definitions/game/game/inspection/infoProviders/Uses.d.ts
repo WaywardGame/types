@@ -9,19 +9,21 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "game/entity/action/IAction";
+import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
 import { InfoProvider } from "game/inspection/InfoProvider";
 import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
 import type UseInfo from "game/inspection/infoProviders/UseInfo";
 import type { DescribedDescription, IDescribed } from "game/inspection/infoProviders/UseInfo";
 import UiTranslation from "language/dictionary/UiTranslation";
+import type TranslationImpl from "language/impl/TranslationImpl";
 import Translation from "language/Translation";
 import type { TranslationGenerator } from "ui/component/IComponent";
 export default abstract class Uses<T extends IDescribed> extends InfoProvider {
     private label?;
-    private readonly value?;
-    private readonly type;
-    private readonly entityType;
-    private readonly description?;
+    protected readonly value?: T;
+    protected readonly type: T["type"];
+    protected readonly entityType: T["entityType"];
+    protected readonly description?: DescribedDescription<T>;
     protected abstract getEntityType(): T["entityType"];
     protected abstract getDescription(type: T["type"]): DescribedDescription<T> | undefined;
     constructor(value: T["type"]);
@@ -34,7 +36,8 @@ export default abstract class Uses<T extends IDescribed> extends InfoProvider {
     addDetails(...details: symbol[]): this;
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getUseExtraInfo;
+    protected getUseDisplayLevel(action: ActionType, context: InfoProviderContext): InfoDisplayLevel;
     private getDetailsHandlerResolver;
-    private getUse;
+    protected getUse(description: DescribedDescription<T>, action: ActionType): TranslationImpl;
     private getUseName;
 }

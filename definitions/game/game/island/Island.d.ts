@@ -44,8 +44,8 @@ import TimeManager from "game/time/TimeManager";
 import Translation from "language/Translation";
 import World from "renderer/world/World";
 import type { IPostSerializeCallback, IPreSerializeCallback, ISerializer } from "save/serializer/ISerializer";
-import type Version from "utilities/Version";
 import type { IVersionInfo } from "utilities/Version";
+import Version from "utilities/Version";
 import { Direction } from "utilities/math/Direction";
 import type { IVector2, IVector3 } from "utilities/math/IVector";
 import type { Random } from "utilities/random/Random";
@@ -83,6 +83,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * The version the mapgen for this island uses
      */
     mapGenVersion: Version.String;
+    mapGenBuildTime?: number;
     /**
      * The version this island was last loaded on
      */
@@ -104,6 +105,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     tileContainers: ITileContainer[];
     tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;
     readonly seeds: ISeeds;
+    get mapGenVersionInfo(): Version.Info;
     readonly seededRandom: Random<LegacySeededGenerator | PCGSeededGenerator>;
     readonly game: Game;
     /**
@@ -200,9 +202,9 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     getTileFromPoint(point: IVector3): Tile;
     getTile(x: number, y: number, z: number, disableLog?: boolean): Tile;
     getTileSafe(x: number, y: number, z: number): Tile | undefined;
-    createTile(x: number, y: number, z: number, index: number): Tile;
+    createTile(x: number, y: number, z: number, index: number, rendererData: number, quality: Quality): Tile;
     setTile(x: number, y: number, z: number, tile: Tile): Tile;
-    getOrCreateTile(index: number, x: number, y: number, z: number): Tile;
+    getOrCreateTile(index: number, x: number, y: number, z: number, rendererData: number, quality: Quality): Tile;
     updateFlowFieldTile(tile: Tile, tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
     /**
      * Checks if island.tileData is synced with Tile.data

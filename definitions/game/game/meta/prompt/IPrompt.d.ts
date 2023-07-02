@@ -116,15 +116,16 @@ export declare enum Prompt {
     MultiplayerRestartServerAfterLoadingSave = 99,
     MultiplayerDisconnect = 100,
     MultiplayerDisconnectRejoin = 101,
-    SteamworksURLOpenedInBrowser = 102,
-    SteamworksWorkshopOpenedInBrowser = 103,
-    SteamworksModWithNameAlreadyExists = 104,
-    SteamworksModImportSaveGameFailure = 105,
-    SteamworksModImportedSaveGame = 106,
-    SteamworksOpenFolderFailure = 107,
-    SteamworksModPublishModJsonUpdateFailed = 108,
-    SteamworksNotAvailableOnSteamDeck = 109,
-    UiSaveDrop = 110
+    MultiplayerServerHasUnpublishedMods = 102,
+    SteamworksURLOpenedInBrowser = 103,
+    SteamworksWorkshopOpenedInBrowser = 104,
+    SteamworksModWithNameAlreadyExists = 105,
+    SteamworksModImportSaveGameFailure = 106,
+    SteamworksModImportedSaveGame = 107,
+    SteamworksOpenFolderFailure = 108,
+    SteamworksModPublishModJsonUpdateFailed = 109,
+    SteamworksNotAvailableOnSteamDeck = 110,
+    UiSaveDrop = 111
 }
 export declare enum PromptType {
     Info = 0,

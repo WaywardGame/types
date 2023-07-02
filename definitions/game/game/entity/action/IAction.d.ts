@@ -189,7 +189,7 @@ export declare enum ActionDisplayLevel {
 export interface IActionUsable {
     usable: true;
     /**
-     * Whether this action is currently usable with the "use on move" feature. Defaults to `true`
+     * Whether this action is currently usable with the "auto-use" feature. Defaults to `true`
      */
     usableOnMove?: boolean;
     displayLevel?: ActionDisplayLevel;

@@ -30,5 +30,5 @@ declare const _default: Action<[[ActionArgument.Undefined, ActionArgument.ItemNe
     items: Item[];
     into: IContainer | undefined;
     tile: Tile;
-}, [(import("game/item/IItem").ItemType | Item | Item[] | undefined)?, (Quality | undefined)?, (string | undefined)?, (number | undefined)?, (IContainer | undefined)?]>;
+}, [(Item | import("game/item/IItem").ItemType | Item[] | undefined)?, (Quality | undefined)?, (string | undefined)?, (number | undefined)?, (IContainer | undefined)?]>;
 export default _default;

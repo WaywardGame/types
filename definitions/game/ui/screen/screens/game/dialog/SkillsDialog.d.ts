@@ -15,9 +15,11 @@ export default class SkillsDialog extends Dialog {
     private readonly skills;
     private readonly inputFilter;
     private readonly sortRow;
+    private sortData;
     constructor();
     getBindable(): Bindable;
     getIcon(): MenuBarButtonType;
+    protected onDialogLoad(): void;
     protected onDialogRemove(): void;
     private updateSkill;
     private sort;

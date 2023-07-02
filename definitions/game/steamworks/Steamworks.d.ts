@@ -116,7 +116,8 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     setLobbyData(name: string, data: string): boolean;
     getLobbyOwner(): string | undefined;
     getLobbyMembers(): ISteamFriend[] | undefined;
-    getPublishedMod(publishFileId: string): IWorkshopItem | undefined;
+    private getPublishedModFromTitle;
+    getPublishedModFromPublishFileId(publishFileId: string): IWorkshopItem | undefined;
     fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
     publishMod(modIndex: number): Promise<string>;
     createArchive(id: string): Promise<void>;

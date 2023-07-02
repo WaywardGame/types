@@ -172,7 +172,7 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      * Allocates an enum for this mod.
      * @param id The enum type.
      * @param name The name of the enumeration value.
-     * @param objectValue An object to register with the enum. For example, all values in the creature enumeration have a corresponding
+     * @param description An object to register with the enum. For example, all values in the creature enumeration have a corresponding
      * `description` object.
      * @param onAllocate A callback for when the enum has been allocated.
      * @param onUnallocate A callback for when the enum has been unallocated.

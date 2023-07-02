@@ -24,7 +24,8 @@ export declare enum InputIcon {
     HoverItem = 5,
     Shift = 6,
     Ctrl = 7,
-    Alt = 8
+    Alt = 8,
+    Tap = 9
 }
 export declare namespace InputIcon {
     function get(catalyst: Modifier): InputIcon;
