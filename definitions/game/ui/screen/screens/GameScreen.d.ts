@@ -94,7 +94,7 @@ export default class GameScreen extends Screen {
     onOpenBook(human: Human, item: Item): void;
     protected onReadMap1(map: DrawnMap, item: Item, reader: Human): void;
     protected onSailOffMapEdge(player: Player, direction: Direction): void;
-    protected onDie(player: Player, showingGameEndScreen: boolean): void;
+    protected onDie(player: Player, showingGameEndScreen?: boolean): void;
     protected onRespawn(): void;
     protected onItemMenu(api: IBindHandlerApi): boolean;
     protected onZoom(api: IBindHandlerApi): boolean;

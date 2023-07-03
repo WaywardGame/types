@@ -9,7 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
-import type { IDamageInfo } from "game/entity/creature/ICreature";
 import type Component from "ui/component/Component";
 import type { IBindHandlerApi } from "ui/input/Bind";
 import WalkToTileHandler from "ui/screen/screens/game/util/movement/WalkToTileHandler";
@@ -32,8 +31,6 @@ export default class MovementHandler extends EventEmitter.Host<IMovementHandlerE
     deregister(): this;
     protected onMoveStart(): void;
     protected onMoveComplete(): void;
-    protected onPlayerDamage(_: any, damageInfo: IDamageInfo): void;
-    protected onPlayerDeath(): void;
     protected onFaceDown(api: IBindHandlerApi): boolean;
     faceTowardsMouse(api?: Pick<IBindHandlerApi, "mouse">): void;
     protected onFaceDirection(api?: Pick<IBindHandlerApi, "mouse" | "input">): boolean;

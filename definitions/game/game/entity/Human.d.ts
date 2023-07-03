@@ -30,6 +30,7 @@ import type { ISkillAttribute } from "game/entity/skill/ISkills";
 import SkillManager from "game/entity/skill/SkillManager";
 import type { StatChangeTimerFactory } from "game/entity/StatFactory";
 import { StatChangeCurrentTimerStrategy } from "game/entity/StatFactory";
+import StatusEffect from "game/entity/status/StatusEffect";
 import { FireType } from "game/IGame";
 import type { Quality } from "game/IObject";
 import type { IMobCheck, IMoveToIslandOptions, IslandId } from "game/island/IIsland";
@@ -194,7 +195,10 @@ export default abstract class Human<TypeType extends number = number> extends En
     private getAttackSkillBonus;
     private getAttackSkill;
     damage(damageInfoOrAmount: IDamageInfo | number): number | undefined;
-    damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: Message | Translation, soundDelay?: number, causesBlood?: boolean): number | undefined;
+    /**
+     * @deprecated provide a full IDamageInfo object yourself you lazy fiend
+     */
+    damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: Message | Translation, soundDelay?: number, causesBlood?: boolean, statusEffect?: StatusEffect): number | undefined;
     getEquippedItems(includeDisabled?: true): Item[];
     getEquippedItem(slot: EquipType, includeDisabled?: true): Item | undefined;
     isOffHandDisabled(): boolean;
@@ -251,6 +255,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     updateMovementIntent(movementIntent: IMovementIntent): boolean;
     hasWalkPath(): boolean;
     setWalkPath(path: IVector2[] | undefined, force?: boolean): void;
+    protected onDie(): void;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
     trampleFire(fireEvent: TileEvent): void;
     damageByInteractingWith(thing: Doodad | TileEvent, options: ICheckUnderOptions | undefined, damageLocation: EquipType): ICheckUnderOptions;
