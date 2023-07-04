@@ -96,6 +96,7 @@ export interface IInputManagerEvents {
     enabled(): any;
     rising(catalyst: InputCatalyst, info: InputInfo, modifiers: Set<Modifier>): any;
     falling(catalyst: InputCatalyst, info: InputInfo, modifiers: Set<Modifier>): any;
+    loop(): any;
 }
 declare class InputManager extends EventEmitter.Host<IInputManagerEvents> {
     readonly mouse: GlobalMouseInfo;

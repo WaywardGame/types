@@ -19,13 +19,13 @@ import type ContextMenu from "ui/component/ContextMenu";
 import Bindable from "ui/input/Bindable";
 import type ActionBar from "ui/screen/screens/game/static/ActionBar";
 import type { ActionSlot } from "ui/screen/screens/game/static/ActionBar";
-import type { IDraggableComponent } from "ui/util/Draggable";
+import type { IDraggableEvents } from "ui/util/Draggable";
 import Draggable from "ui/util/Draggable";
 import Vector2 from "utilities/math/Vector2";
 export type ItemSlot = Omit<Component, "event"> & {
     event: IEventEmitter<Component, IItemSlotEvents>;
 };
-export interface IItemSlotEvents extends Events<Component> {
+export interface IItemSlotEvents extends Events<Component>, IDraggableEvents {
     pickUp(api: IItemPickUpApi): any;
     drop(api: IItemDropApi, intoSlot?: ItemSlot): any;
 }
@@ -89,7 +89,7 @@ export declare enum ItemRefreshType {
 export default class ItemComponent extends Component {
     protected readonly handler: IItemHandler;
     static registerSlot(slot: ItemSlot): void;
-    event: IEventEmitter<this, Events<IDraggableComponent> & IItemSlotEvents>;
+    event: IEventEmitter<this, IItemSlotEvents>;
     readonly magicalIcon: Component<HTMLElement>;
     readonly protectedIcon: Component<HTMLElement>;
     readonly actionIcon: Component<HTMLElement> | undefined;
@@ -129,4 +129,5 @@ export default class ItemComponent extends Component {
     private refreshDurabilityBar;
     private lastActionIcon?;
     private refreshActionIcon;
+    protected onHoldingNotMoving(time: number): void;
 }
