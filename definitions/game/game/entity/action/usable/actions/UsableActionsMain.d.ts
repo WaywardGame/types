@@ -61,7 +61,7 @@ export declare const usableActionSets: {
     16: UsableActionGenerator<[]>;
     17: UsableActionGenerator<[]>;
     18: UsableActionGenerator<[]>;
-    19: UsableActionGenerator<[]>;
+    19: UsableActionGenerator<[moveTarget?: import("game/entity/action/usable/actions/item/UsableActionsItemMove").UsableActionsItemMoveTarget | undefined]>;
     20: UsableActionGenerator<[isDropMenu?: true | undefined]>;
     21: UsableActionGenerator<[]>;
     22: UsableActionGenerator<[]>;

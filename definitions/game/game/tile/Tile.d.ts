@@ -27,6 +27,7 @@ import { TerrainType } from "game/tile/ITerrain";
 import type TileEvent from "game/tile/TileEvent";
 import Translation from "language/Translation";
 import Message from "language/dictionary/Message";
+import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 import FieldOfView from "renderer/fieldOfView/FieldOfView";
 import type { IFieldOfViewOrigin } from "renderer/fieldOfView/IFieldOfView";
 import { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
@@ -283,10 +284,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     createPuddles(): void;
     addOrUpdateOverlay(overlay: IOverlayInfo): void;
     removeOverlay(overlay: IOverlayInfo): void;
-    canSeeObject(type: CanASeeBType, object: IVector4 & {
-        fromX: number;
-        fromY: number;
-    }, fieldOfView?: FieldOfView, customRadius?: number): boolean;
+    canSeeObject(type: CanASeeBType, object: IRendererOrigin, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeeTile(type: CanASeeBType, tile: Tile, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
     messageIfVisible(callback: (manager: IMessageManager) => boolean): void;

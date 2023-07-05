@@ -66,11 +66,11 @@ export default abstract class Human<TypeType extends number = number> extends En
     direction: Vector2;
     facingDirection: Direction.Cardinal;
     /**
-     * Not guaranteed to be synced between the server and client for Human entities
+     * Note: This might not be a whole number.
      */
     fromX: number;
     /**
-     * Not guaranteed to be synced between the server and client for Human entities
+     * Note: This might not be a whole number.
      */
     fromY: number;
     crafted: Record<number, ICrafted>;

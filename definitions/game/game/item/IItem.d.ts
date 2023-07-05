@@ -283,6 +283,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      */
     civilizationContainerScore?: number;
     /**
+     * Whether magical properties have no effect on this item.
+     */
+    magicInert?: true;
+    /**
      * The item name to display instead of the item's default translation
      */
     getName?: (item: Item, article?: Article, count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showMagicalType?: boolean) => TranslationImpl | {

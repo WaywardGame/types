@@ -89,7 +89,7 @@ export default class ActionBar extends QuadrantComponent {
     configure(number: number): void;
     protected onResize(): void;
     endConfiguration(): void;
-    hasFilledSlot(): boolean;
+    hasFilledSlot(predicate?: (slot: IActionBarSlotData) => any): boolean;
     protected getContextMenuDescription(api: IBindHandlerApi): ContextMenuDescriptions;
     protected onClearActionSlot(api: IBindHandlerApi): boolean;
     protected onToggleUseWhileMoving(api: IBindHandlerApi): boolean;

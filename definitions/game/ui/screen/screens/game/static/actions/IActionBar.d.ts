@@ -60,5 +60,7 @@ export declare enum ActionSlotUpdateReason {
     Replace = 1,
     Using = 2,
     Verify = 3,
-    Used = 4
+    Used = 4,
+    ActionsDrawer = 5,
+    LoadOrUpdateDirection = 6
 }

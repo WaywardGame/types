@@ -105,8 +105,10 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
     private cachedNormalTypes?;
     private cachedSubTypes?;
     private cachedHash?;
+    private inert?;
     static inherit(source: IHasMagic | MagicalPropertyManager | undefined, target: IHasMagic): void;
     constructor(properties?: Partial<Record<MagicalPropertyType, AnyMagicalProperty>>);
+    setInert(inert?: boolean): this;
     /**
      * @returns the number of magical properties on this object
      */
@@ -128,6 +130,15 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      */
     has<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): boolean;
     has(...identity: MagicalPropertyIdentity): boolean;
+    /**
+     * @returns a magical property on this object, if it exists
+     */
+    getInert<T extends MagicalNormalPropertyTypes>(type: T): number | undefined;
+    /**
+     * @returns a magical sub-property on this object, if it exists
+     */
+    getInert<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): number | undefined;
+    getInert(...identity: MagicalPropertyIdentity): number | undefined;
     /**
      * @returns a magical property on this object, if it exists
      */

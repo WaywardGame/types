@@ -16,7 +16,6 @@ import type { IslandId } from "game/island/IIsland";
 import type Island from "game/island/Island";
 import FieldOfView from "renderer/fieldOfView/FieldOfView";
 import type { CanASeeBType, IFieldOfViewOrigin } from "renderer/fieldOfView/IFieldOfView";
-import type { IVector4 } from "utilities/math/Vector4";
 export interface IRendererOrigin extends IFieldOfViewOrigin {
     readonly fromX?: number;
     readonly fromY?: number;
@@ -24,10 +23,7 @@ export interface IRendererOrigin extends IFieldOfViewOrigin {
     readonly asEntity: Entity;
     readonly asPlayer: Player | undefined;
     readonly asHuman: Human | undefined;
-    canSeeObject(type: CanASeeBType, object: IVector4 & {
-        fromX: number;
-        fromY: number;
-    }, fieldOfView: FieldOfView | undefined): boolean;
+    canSeeObject(type: CanASeeBType, object: IRendererOrigin, fieldOfView: FieldOfView | undefined): boolean;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView: FieldOfView | undefined): boolean;
     getMovementProgress(timeStamp: number): number;
 }
@@ -46,9 +42,6 @@ export declare class RendererOrigin implements IRendererOrigin {
     constructor(islandId: IslandId, x: number, y: number, z: number);
     get island(): Island;
     getMovementProgress(_timeStamp: number): number;
-    canSeeObject(type: CanASeeBType, object: IVector4 & {
-        fromX: number;
-        fromY: number;
-    }, fieldOfView: FieldOfView | undefined): boolean;
+    canSeeObject(type: CanASeeBType, object: IRendererOrigin, fieldOfView: FieldOfView | undefined): boolean;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView: FieldOfView | undefined): boolean;
 }

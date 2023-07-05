@@ -31,6 +31,12 @@ declare module Math2 {
      */
     function roundNumber(num: number, places: number): number;
     /**
+     * Returns a number floored to a certain number of decimal places.
+     *
+     * Example: `roundNumber(1.24999999, 2): 1.24`
+     */
+    function floorNumber(num: number, places: number): number;
+    /**
      * Returns a number rounded to a multiple
      *
      * Example: `roundNumberToMultiple(97, 10): 100`

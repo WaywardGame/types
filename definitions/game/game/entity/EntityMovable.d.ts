@@ -24,7 +24,6 @@ import type { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
 import type { Direction } from "utilities/math/Direction";
 import type { IVector2 } from "utilities/math/IVector";
 import type Vector2 from "utilities/math/Vector2";
-import type { IVector4 } from "utilities/math/Vector4";
 export interface IEntityMovableEvents extends IEntityEvents {
     /**
      * Called before moving.
@@ -43,10 +42,16 @@ export interface IEntityMovableEvents extends IEntityEvents {
 export default abstract class EntityMovable<DescriptionType = unknown, TypeType extends number = number, TagType = unknown, CounterType = unknown> extends Entity<DescriptionType, TypeType, TagType, CounterType> implements IRendererOrigin {
     event: IEventEmitter<this, IEntityMovableEvents>;
     /**
-     * Not guaranteed to be synced between the server and client for Human entities
+     * Note: This might not be a whole number.
      */
     fromX?: number;
+    /**
+     * Note: This might not be a whole number.
+     */
     fromY?: number;
+    /**
+     * Not guaranteed to be synced between the server and client for Human entities
+     */
     isMoving?: boolean;
     /**
      * Only used for Human entities
@@ -90,10 +95,7 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
      * Regular entities don't have a direction so this will be the same as getTile()
      */
     get facingTile(): Tile;
-    canSeeObject(type: CanASeeBType, object: IVector4 & {
-        fromX: number;
-        fromY: number;
-    }, fieldOfView?: FieldOfView, customRadius?: number): boolean;
+    canSeeObject(type: CanASeeBType, object: IRendererOrigin, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeeTile(type: CanASeeBType, tile: Tile, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number): void;
@@ -117,6 +119,7 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
      */
     animateBumpTowards(tile: Tile): void;
     protected setMoving(fromX: number, fromY: number, toZ?: number, options?: IMoveToOptions): void;
+    protected setFromPosition(fromX?: number, fromY?: number): void;
     animateAttack(damageType: DamageType[] | undefined): void;
     getMovementPoint(timeStamp: number): IVector2;
     /**
