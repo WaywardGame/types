@@ -18,6 +18,7 @@ import type { DamageType, Defense, ICausesStatusEffect, IStatChangeInfo, MoveTyp
 import { AiType } from "game/entity/IEntity";
 import type { IStat } from "game/entity/IStats";
 import type { IPackedMessage } from "game/entity/player/IMessageManager";
+import type StatusEffect from "game/entity/status/StatusEffect";
 import type { ItemType, ItemTypeGroup } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type { LootGroupType } from "game/item/LootGroups";
@@ -325,6 +326,7 @@ export interface IDamageInfo {
     damageMessage?: Message | Translation;
     soundDelay?: number;
     surpressAttackAnimation?: boolean;
+    statusEffect?: StatusEffect;
 }
 export interface IDamageOutcomeInput {
     human?: Human;

@@ -9,7 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "event/EventEmitter";
-import type { IStat } from "game/entity/IStats";
 import type Player from "game/entity/player/Player";
 import type Tile from "game/tile/Tile";
 import type Component from "ui/component/Component";
@@ -50,7 +49,6 @@ export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHand
     protected onCancelMoveToTile(_api: IBindHandlerApi): boolean;
     protected onHoldMoveToTilePreview(api: IBindHandlerApi): boolean;
     protected onReleaseMoveToTilePreview(): void;
-    protected onStatChanged(player: Player, stat: IStat): void;
     protected onPostMove(player: Player, fromTile: Tile, toTile: Tile): void;
     protected onWalkPathChange(player: Player, walkPath: IVector2[] | undefined): void;
     private resetToMouse;

@@ -9,5 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { UsableActionGenerator } from "game/entity/action/usable/UsableActionRegistrar";
-declare const UsableActionsItemMoveMenus: UsableActionGenerator<[]>;
-export default UsableActionsItemMoveMenus;
+export declare enum UsableActionsItemMoveTarget {
+    None = 0,
+    Inventory = 1,
+    ActiveNonTradingContainer = 2,
+    TradeContainer = 3,
+    FacingContainer = 4
+}
+declare const UsableActionsItemMove: UsableActionGenerator<[moveTarget?: UsableActionsItemMoveTarget | undefined]>;
+export default UsableActionsItemMove;

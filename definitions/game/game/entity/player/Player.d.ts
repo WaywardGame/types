@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IEventEmitter } from "event/EventEmitter";
+import { type IEventEmitter } from "event/EventEmitter";
 import { TileUpdateType } from "game/IGame";
 import Human from "game/entity/Human";
 import { EntityType } from "game/entity/IEntity";
 import { SkillType } from "game/entity/IHuman";
+import type { IDamageInfo } from "game/entity/creature/ICreature";
 import { CreatureType } from "game/entity/creature/ICreature";
 import type { IMovementIntent, IPlayerEvents } from "game/entity/player/IPlayer";
 import MessageManager from "game/entity/player/MessageManager";
@@ -68,7 +69,10 @@ export default class Player extends Human implements IPreSerializeCallback, IUns
      */
     addItemMilestones(item: Item): void;
     checkSkillMilestones(): void;
+    private getUsableAction;
+    protected onGetMovementIntent(): IMovementIntent | undefined;
     protected onCanMove(direction: Direction.Cardinal): false | undefined;
+    protected onDamage(damageInfo: IDamageInfo): void;
     addMilestone(milestone: Milestone, data?: number | string, update?: boolean): void;
     updateMovementIntent(movementIntent: IMovementIntent): boolean;
     load(): void;

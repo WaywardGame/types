@@ -30,6 +30,7 @@ export interface IDraggableEvents {
     moveStart(mouse: Vector2): false | void;
     move(offset: Vector2, mouse: Vector2): any;
     moveEnd(offset: Vector2, mouse: Vector2, bindable?: Bindable): any;
+    holdingNotMoving(time: number): any;
 }
 export type WithDraggableEvents<EVENTS_OF> = Events<EVENTS_OF> & IDraggableEvents;
 export interface IDraggableComponent extends Component {
@@ -38,6 +39,7 @@ export interface IDraggableComponent extends Component {
 export default class Draggable {
     private mouseStartPosition?;
     private dragStage;
+    private dragStartTime?;
     private readonly hostRef;
     get host(): IDraggableComponent;
     constructor(host: IDraggableComponent, ...bindables: Bindable[]);
@@ -58,5 +60,6 @@ export default class Draggable {
     dragStart(event: IDraggableInputEvent): boolean;
     private drag;
     dragEnd(event?: IDraggableInputEvent): boolean;
+    private onInputLoop;
     private getMousePosition;
 }

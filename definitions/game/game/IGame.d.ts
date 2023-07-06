@@ -242,7 +242,7 @@ export declare enum PauseSource {
     Generic = 0,
     IslandLoad = 1,
     Mod = 2,
-    PlayerMoveToIsland = 3,
+    HumanMoveToIsland = 3,
     SyncGameState = 4,
     WebGlContextLost = 5,
     MultiplayerConnect = 6,

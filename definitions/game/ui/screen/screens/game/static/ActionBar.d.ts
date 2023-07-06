@@ -30,7 +30,7 @@ import ItemComponent from "ui/screen/screens/game/component/ItemComponent";
 import QuadrantComponent from "ui/screen/screens/game/component/QuadrantComponent";
 import ActionsConfigurationDrawer from "ui/screen/screens/game/static/actions/ActionsDrawer";
 import ActionSlotTooltipHandler from "ui/screen/screens/game/static/actions/ActionSlotTooltip";
-import { IActionBarSlotData } from "ui/screen/screens/game/static/actions/IActionBar";
+import { ActionSlotUpdateReason, IActionBarSlotData } from "ui/screen/screens/game/static/actions/IActionBar";
 import type TooltipLocationHandler from "ui/tooltip/TooltipLocationHandler";
 export declare const MAX_SLOTS = 48;
 export declare enum ActionBarClasses {
@@ -89,7 +89,7 @@ export default class ActionBar extends QuadrantComponent {
     configure(number: number): void;
     protected onResize(): void;
     endConfiguration(): void;
-    hasFilledSlot(): boolean;
+    hasFilledSlot(predicate?: (slot: IActionBarSlotData) => any): boolean;
     protected getContextMenuDescription(api: IBindHandlerApi): ContextMenuDescriptions;
     protected onClearActionSlot(api: IBindHandlerApi): boolean;
     protected onToggleUseWhileMoving(api: IBindHandlerApi): boolean;
@@ -108,7 +108,7 @@ declare class ActionSlotSlottedContainer extends ItemComponent {
     protected onEnter(reason: "mouse" | "focus"): void;
 }
 export interface IActionSlotEvents extends Events<Button>, IItemSlotEvents {
-    update(item?: Item, oldItem?: Item): any;
+    update(item: Item | undefined, oldItem: Item | undefined, reason: ActionSlotUpdateReason): any;
     unequipItem(): any;
 }
 export declare class ActionSlot extends Button implements IRefreshable {
@@ -123,7 +123,10 @@ export declare class ActionSlot extends Button implements IRefreshable {
     private lastQuality?;
     usability: ReturnableUsableActionUsability;
     constructor(number: number, slotData: IActionBarSlotData);
-    refresh(): this;
+    private skipNextClick;
+    private lastActivate;
+    protected onHoldingNotDragging(time: number): void;
+    refresh(_?: any, newItem?: Item, oldItem?: Item, reason?: ActionSlotUpdateReason): this;
     private onItemTransformed;
     private isUsable;
     clear(): void;

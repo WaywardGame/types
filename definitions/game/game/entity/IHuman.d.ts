@@ -258,6 +258,10 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      */
     shouldDie(): false | void;
     /**
+     * Called when the human is killed.
+     */
+    die(): any;
+    /**
      * Called when the human position is set, from a teleport type of movement
      * @param tile Tile the human is now on
      */

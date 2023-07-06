@@ -10,6 +10,7 @@
  */
 import type Tile from "game/tile/Tile";
 import type { WorldZ } from "game/WorldZ";
+import type { IRendererOrigin } from "renderer/context/RendererOrigin";
 export interface IVector2 {
     x: number;
     y: number;
@@ -26,4 +27,4 @@ export declare module IVector3 {
 export declare function objectIsOrWasInTile(tile: Tile, object: IVector3 & {
     fromX?: number;
     fromY?: number;
-}): boolean;
+} | IRendererOrigin): boolean;

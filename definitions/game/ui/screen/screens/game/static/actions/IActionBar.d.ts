@@ -55,3 +55,12 @@ export declare class ActionSlotContext extends InfoProviderContext {
     getActionType(): ActionType | undefined;
     displayLevelExtraUnlessActionType(actionType: ActionType): InfoDisplayLevel.Always | InfoDisplayLevel.Extra;
 }
+export declare enum ActionSlotUpdateReason {
+    AutoUseToggle = 0,
+    Replace = 1,
+    Using = 2,
+    Verify = 3,
+    Used = 4,
+    ActionsDrawer = 5,
+    LoadOrUpdateDirection = 6
+}
