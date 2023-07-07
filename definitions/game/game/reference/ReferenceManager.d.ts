@@ -21,7 +21,7 @@ import Island from "game/island/Island";
 import { ItemType } from "game/item/IItem";
 import Item from "game/item/Item";
 import { Milestone } from "game/milestones/IMilestone";
-import type { EnumReferenceTypes, IReferenceTypeMap, Referenceable, Reference } from "game/reference/IReferenceManager";
+import type { EnumReferenceTypes, IReferenceTypeMap, Reference, Referenceable } from "game/reference/IReferenceManager";
 import { ReferenceType } from "game/reference/IReferenceManager";
 import ReferenceTooltipHandler from "ui/screen/screens/game/ReferenceTooltipHandler";
 import type Tooltip from "ui/tooltip/Tooltip";
@@ -31,6 +31,7 @@ export default class ReferenceManager {
     static get(thing: Referenceable): Reference | undefined;
     static getReferenceType(thing: Value<IReferenceTypeMap>): ReferenceType;
     private referenceCursor;
+    private readonly referencesCache;
     constructor(game: Game);
     create(): number;
     reset(): void;
