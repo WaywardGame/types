@@ -10,6 +10,7 @@
         "noUnusedLocals": true,
         "preserveConstEnums": true,
         "removeComments": true,
+        "skipLibCheck": true,
         "strict": true,
         "strictPropertyInitialization": false,
         // classic is required for auto imports to use the shortest path in vscode
