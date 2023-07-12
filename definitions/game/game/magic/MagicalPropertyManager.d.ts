@@ -99,13 +99,13 @@ export interface IMagicalPropertyManagerEvents {
 }
 export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPropertyManagerEvents> {
     private properties;
+    private inert?;
     private cachedCount?;
     private cachedEntries?;
     private cachedTypes?;
     private cachedNormalTypes?;
     private cachedSubTypes?;
     private cachedHash?;
-    private inert?;
     static inherit(source: IHasMagic | MagicalPropertyManager | undefined, target: IHasMagic): void;
     constructor(properties?: Partial<Record<MagicalPropertyType, AnyMagicalProperty>>);
     setInert(inert?: boolean): this;
