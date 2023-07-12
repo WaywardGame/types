@@ -195,7 +195,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
     isNearby(executor: Entity, allowNearby?: boolean): boolean;
     /**
      * Fixes item issues.
-     * Note: Be careful with what gets fixed in multiplayer!
+     * Note: This is not called by clients joining a mp game.
      */
     verifyAndFixItem(): void;
     /**
