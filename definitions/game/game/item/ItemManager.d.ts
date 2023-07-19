@@ -359,6 +359,13 @@ export default class ItemManager extends ObjectManager<Item, IItemManagerEvents>
      */
     getCivilizationContentsScore(container: Item | Doodad): number;
     /**
+     * Gets the item or doodad's weight based on disassembly.
+     * @param itemDoodad An Item or Doodad to get the weight for.
+     * @param itemType Pass an ItemType when checking for Doodads since reducedWeight is only available on item descriptions.
+     * @returns number equal to the weight.
+     */
+    getDisassemblyWeight(itemDoodad: Item | Doodad, itemType?: ItemType): number;
+    /**
      * Runs a thing the container + parent containers
      */
     private forEachContainer;

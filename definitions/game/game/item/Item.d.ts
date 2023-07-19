@@ -190,7 +190,6 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
     getPreservationDecayMultiplier(): number;
     getTemperatureDecayMultiplier(isClientSide: boolean): number;
     getTotalWeight(bypassContainer?: boolean, targetContainer?: IContainer): number;
-    getDisassemblyWeight(): number;
     getDisassemblyItems(): IItemDisassembleResult | undefined;
     isNearby(executor: Entity, allowNearby?: boolean): boolean;
     /**
