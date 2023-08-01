@@ -68,7 +68,7 @@ export interface IInput {
 export declare module IInput {
     function is(value: unknown): value is IInput;
     function create<K extends keyof typeof InputCatalystType, C extends (typeof InputCatalystType)[K]>(type: K, catalyst: IInputCatalystValueMap[C], ...modifiers: Modifier[]): IInput;
-    function get(catalyst: InputCatalyst, modifiers: Set<Modifier>): IInput;
+    function get(catalyst: InputCatalyst, modifiers?: Set<"Shift" | "Alt" | "Ctrl">): IInput;
     function key(which: IInputCatalystValueMap[InputCatalystType.Key], ...modifiers: Modifier[]): IInput;
     function mouseButton(which: IInputCatalystValueMap[InputCatalystType.MouseButton], ...modifiers: Modifier[]): IInput;
     function touch(which: IInputCatalystValueMap[InputCatalystType.Touch], ...modifiers: Modifier[]): IInput;
