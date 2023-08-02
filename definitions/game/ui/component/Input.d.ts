@@ -53,6 +53,7 @@ export default class Input extends Component implements IRefreshable {
     private shouldSelectOnFocus;
     private shouldSelectOnNextMouseUp;
     private debounce;
+    private isFocusing?;
     get changed(): boolean;
     protected readonly input: Component;
     private readonly wrapperButtons;
@@ -90,7 +91,11 @@ export default class Input extends Component implements IRefreshable {
      * @param clearType `ClearType.UseDefault` to force using default, `ClearType.NotDefault` to prevent using default, `ClearType.Auto` otherwise. Defaults to `ClearType.Auto`
      */
     clear(clearType?: ClearType): this;
-    focus(): void;
+    focus(openSteamInputKeyboard?: boolean): void;
+    /**
+     * Open the steam input keyboard when clicking on an already focused input
+     */
+    private click;
     private emitEnterBindOn;
     setEmitEnterBindOn(on: "blur" | "keydown"): this;
     private shouldIgnoreShiftEnter;
