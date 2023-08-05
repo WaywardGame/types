@@ -15,7 +15,7 @@ import type { IMagicalPropertyInfo } from "game/item/IItem";
 import type Item from "game/item/Item";
 import type { MagicalPropertyType } from "game/magic/MagicalPropertyType";
 export interface IUpgradeCanUse extends IActionUsable {
-    upgrade: IUpgradeable;
+    upgrades: IUpgradeable[];
     upgradeTarget: Item;
 }
 declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default<number>, void, IUpgradeCanUse, [Item, (Item | undefined)?]>;

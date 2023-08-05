@@ -8,20 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Bindable from "ui/input/Bindable";
 import BindableManager from "ui/input/BindableManager";
 export default class ActionBarBindableManager extends BindableManager {
     /**
      * Default to 1 full action bar
      */
     static readonly DEFAULT_ACTION_BAR_SLOTS = 12;
+    static readonly DEFAULT_ACTION_BAR_ROW_MODIFIER_ORDER: string;
     static readonly INSTANCE: ActionBarBindableManager;
     private requiredSlots;
     private constructor();
-    getSlotUseBindable(slot: number): Bindable | undefined;
-    getSlotAssignBindable(slot: number): Bindable | undefined;
-    getSlotToggleUseOnMoveBindable(slot: number): Bindable | undefined;
-    requireSlots(slotCount: number): void;
+    getSlotUseBindable(slot: number): number | undefined;
+    getSlotAssignBindable(slot: number): number | undefined;
+    getSlotToggleUseOnMoveBindable(slot: number): number | undefined;
+    requireSlots(slotCount: number, modifierOrderHash: string): void;
     private generateBindings;
     private generateUseOnMoveBindings;
     private generateAssignBindings;

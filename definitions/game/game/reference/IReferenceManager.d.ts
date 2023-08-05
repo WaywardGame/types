@@ -70,7 +70,7 @@ export interface IReferenceTypeMap {
 }
 export type ReferenceContext = [number, ReferenceType?];
 type ReferenceId<REFTYPE extends ReferenceType> = IReferenceTypeMap[REFTYPE] extends [REFTYPE, infer IdType, any?] ? IdType : number;
-export type Reference<REFTYPE extends ReferenceType | undefined = ReferenceType | undefined> = REFTYPE extends ReferenceType ? [id: ReferenceId<REFTYPE>, type: REFTYPE, context?: ReferenceContext, islandId?: IslandId] : [number];
+export type Reference<REFTYPE extends ReferenceType | undefined = ReferenceType | undefined> = REFTYPE extends ReferenceType ? [id: ReferenceId<REFTYPE>, type: REFTYPE, context?: ReferenceContext, islandId?: IslandId, objectId?: number] : [number];
 export type Referenceable = IReferenceTypeMap[ReferenceableReferenceTypes];
 export type ResolveReference<REFTYPE extends ReferenceType> = IReferenceTypeMap[REFTYPE];
 export type EnumReferenceResolved<REFTYPE extends EnumReferenceTypes = EnumReferenceTypes> = IReferenceTypeMap[REFTYPE];

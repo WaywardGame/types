@@ -24,5 +24,5 @@ export default class FerocityInfo extends StatInfo {
     readonly ticks: InfoProvider.Observer<number>;
     getTitle(stat: Stat): SimpleInfoProvider;
     getClass(): string[];
-    get(): (LabelledValue | SimpleInfoProvider)[];
+    get(): (SimpleInfoProvider | LabelledValue)[];
 }

@@ -58,7 +58,7 @@ export default class ShipperNPC extends NPC {
     get asMerchant(): undefined;
     get asShipper(): ShipperNPC;
     getShipContainerItem(): (Item & IContainer) | undefined;
-    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): -1 | 0 | -2 | -3 | -4 | -5 | -6;
+    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): 0 | -1 | -2 | -5 | -4 | -6 | -3;
     shipToPort(island: Island, port: IIslandPort, pathToEdge: IVector2[]): void;
     private moveToPort;
     private canSeePort;

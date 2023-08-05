@@ -71,6 +71,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     isProcessingPacket(): boolean;
     isServer(): boolean;
     isClient(): boolean;
+    get areSyncChecksSuppressed(): boolean;
     getPlayerIdentifier(): string;
     setPlayerIdentifier(identifier: string): void;
     getOptions(): IMultiplayerOptions;
@@ -165,6 +166,10 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     getServerMods(): IServerMod[];
     updateGlobalServerDirectory(): void;
     checkConnection(): Promise<void>;
+    /**
+     * Checks if a sync check is active and enabled.
+     * Active means there's a current sync check being recorded
+     */
     isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any, addStackTrace?: boolean): void;
     addSyncCheckWithSeed(island: Island, syncCheck: MultiplayerSyncCheck, ...messages: any[]): void;

@@ -160,6 +160,11 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      */
     getMovementIntent(): IMovementIntent | undefined;
     /**
+     * Called when the walk path of the player is about to change.
+     * @returns False to prevent the walk path change or undefined to use the default logic
+     */
+    canChangeWalkPath(walkPath: IVector2[] | undefined, reason: WalkPathChangeReason): false | undefined;
+    /**
      * Called when the walk path of the player changes.
      */
     walkPathChange(walkPath: IVector2[] | undefined): any;
@@ -376,6 +381,7 @@ export declare enum RestCancelReason {
     WaterPoured = 7
 }
 export declare const restCancelReasonMessageMap: Record<RestCancelReason, Message | undefined>;
+export type WalkPathChangeReason = "Damage" | "Overburdened" | "Unknown";
 export interface IRestData {
     type: RestType;
     startHealth: number;

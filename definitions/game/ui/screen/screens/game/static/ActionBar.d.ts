@@ -33,6 +33,7 @@ import ActionSlotTooltipHandler from "ui/screen/screens/game/static/actions/Acti
 import { ActionSlotUpdateReason, IActionBarSlotData } from "ui/screen/screens/game/static/actions/IActionBar";
 import type TooltipLocationHandler from "ui/tooltip/TooltipLocationHandler";
 export declare const MAX_SLOTS = 48;
+export declare const ACTION_BAR_SLOTS_PER_ROW = 12;
 export declare enum ActionBarClasses {
     Main = "game-action-bar",
     Configuring = "game-action-bar-configuring",
@@ -67,8 +68,11 @@ export default class ActionBar extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
     get preferredQuadrant(): Quadrant;
     slots: IActionBarSlotData[];
+    globalSlots?: IActionBarSlotData[];
     showBindings?: boolean;
     autoSelectPrimaryUse?: boolean;
+    bringSlotsAcrossSaves?: boolean;
+    defaultModifiersOrder: string;
     readonly slotsContainer: Component<HTMLElement>;
     readonly metaButtons: Component<HTMLElement>;
     readonly removeSlotButton: Button;
@@ -78,7 +82,9 @@ export default class ActionBar extends QuadrantComponent {
     get configuringNumber(): number | undefined;
     readonly actionSlotTooltipHandler: ActionSlotTooltipHandler;
     constructor();
+    protected onWillRemove(): void;
     addSlot(): this;
+    private refreshBindables;
     removeSlot(): this;
     generateSlots(): this;
     private updateToggleUseOnMoveButton;
@@ -97,7 +103,6 @@ export default class ActionBar extends QuadrantComponent {
     protected onChangeWhetherCopying(api: IBindHandlerApi): boolean;
     getSlots(): Stream<ActionSlot>;
     private toggleShowingBindings;
-    private toggleAutoSelectPrimaryUse;
     private focus;
     private refreshSlots;
 }

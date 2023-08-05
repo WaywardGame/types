@@ -190,12 +190,11 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
     getPreservationDecayMultiplier(): number;
     getTemperatureDecayMultiplier(isClientSide: boolean): number;
     getTotalWeight(bypassContainer?: boolean, targetContainer?: IContainer): number;
-    getDisassemblyWeight(): number;
     getDisassemblyItems(): IItemDisassembleResult | undefined;
     isNearby(executor: Entity, allowNearby?: boolean): boolean;
     /**
      * Fixes item issues.
-     * Note: Be careful with what gets fixed in multiplayer!
+     * Note: This is not called by clients joining a mp game.
      */
     verifyAndFixItem(): void;
     /**

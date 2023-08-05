@@ -33,5 +33,5 @@ declare const _default: UseInfo<{
     action: ActionType.StartFire | ActionType.Ignite | ActionType.Equip;
     union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Doodad, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>;
     details: Set<symbol>;
-}, ActionType.StartFire | ActionType.Ignite | ActionType.Equip, {}, Doodad | Item>;
+}, ActionType.StartFire | ActionType.Ignite | ActionType.Equip, {}, Item | Doodad>;
 export default _default;

@@ -56,7 +56,7 @@ export interface IStatDisplayDescription extends IModdable, IHasImagePath<string
     /**
      * A function that will initialize a tooltip for this stat element, or a reference to show a tooltip for
      */
-    tooltip: Reference | ((tooltip: Tooltip, entity: EntityWithStats, stat: IStat) => any);
+    tooltip?: Reference | ((tooltip: Tooltip, entity: EntityWithStats, stat: IStat) => any);
     subscribeCalculateEquipmentStats?: true;
 }
 export declare const STAT_DEFAULT_DISPLAY_ORDER = 100;

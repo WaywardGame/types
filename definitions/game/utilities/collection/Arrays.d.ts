@@ -50,5 +50,6 @@ declare module Arrays {
     function tupleOr<A>(value: A): A extends any[] ? A : [A];
     function concat<T>(...arrays: T[][]): T[];
     function lerp<T>(array: readonly T[], t: number): T;
+    function permutations<T>(...items: T[]): T[][];
 }
 export default Arrays;

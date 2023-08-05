@@ -82,6 +82,10 @@ export declare enum MusicPlaylistTranslation {
     Name = 0,
     Tooltip = 1
 }
+export declare enum SteamInputKeyboardPositionTranslation {
+    Name = 0,
+    Tooltip = 1
+}
 export declare enum DifficultyTranslation {
     Name = 0,
     Description = 1

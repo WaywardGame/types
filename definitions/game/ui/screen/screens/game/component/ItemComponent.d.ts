@@ -63,7 +63,7 @@ export declare enum ItemClasses {
     NearlyDecayed = "item-component-nearly-decayed"
 }
 export declare namespace ItemClasses {
-    const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-bottomright" | "item-component-icon-location-topleft";
+    const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-topleft" | "item-component-icon-location-bottomright";
 }
 export interface IItemHandler {
     noDrag?: true;

@@ -10,5 +10,5 @@
  */
 import { QuestRequirement } from "game/entity/player/quest/requirement/Requirement";
 import type { ItemType, ItemTypeGroup } from "game/item/IItem";
-declare const _default: QuestRequirement<[(ItemType | ItemTypeGroup)[], number], {}>;
+declare const _default: QuestRequirement<[(ItemTypeGroup | ItemType)[], number], {}>;
 export default _default;

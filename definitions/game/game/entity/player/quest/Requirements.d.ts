@@ -14,18 +14,18 @@ declare const requirements: {
     0: QuestRequirement<[], {}>;
     2: QuestRequirement<[import("../../creature/ICreature").CreatureType, number], import("game/entity/player/quest/requirement/KillCreatureRequirement").IKillCreatureRequirement>;
     3: QuestRequirement<[number], import("game/entity/player/quest/requirement/KillCreaturesRequirement").IKillCreaturesRequirement>;
-    1: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[], number], {}>;
+    1: QuestRequirement<[(import("../../../item/IItem").ItemTypeGroup | import("../../../item/IItem").ItemType)[], number], {}>;
     4: QuestRequirement<[import("../../IHuman").SkillType, number], {}>;
     5: QuestRequirement<[number], {}>;
     6: QuestRequirement<[number], {}>;
     7: QuestRequirement<[import("../../IHuman").EquipType[], import("../../../item/IItem").ItemTypeGroup[]], {}>;
-    8: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[], number], {
+    8: QuestRequirement<[(import("../../../item/IItem").ItemTypeGroup | import("../../../item/IItem").ItemType)[], number], {
         crafted: number;
     }>;
-    9: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[], number], {
+    9: QuestRequirement<[(import("../../../item/IItem").ItemTypeGroup | import("../../../item/IItem").ItemType)[], number], {
         dismantled: number;
     }>;
-    10: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[]], {}>;
+    10: QuestRequirement<[(import("../../../item/IItem").ItemTypeGroup | import("../../../item/IItem").ItemType)[]], {}>;
     11: QuestRequirement<[import("../../creature/ICreature").CreatureType, number], import("game/entity/player/quest/requirement/TameCreatureRequirement").ITameCreatureRequirement>;
     12: QuestRequirement<[number], import("game/entity/player/quest/requirement/TameCreaturesRequirement").ITameCreaturesRequirement>;
     13: QuestRequirement<[number], {

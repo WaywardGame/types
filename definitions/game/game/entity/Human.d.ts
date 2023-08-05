@@ -16,7 +16,7 @@ import { CreatureType } from "game/entity/creature/ICreature";
 import EntityWithStats from "game/entity/EntityWithStats";
 import type { IAttack, ICausesDamage, IEntityConstructorOptions } from "game/entity/IEntity";
 import { AttackType, DamageType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "game/entity/IEntity";
-import type { ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo } from "game/entity/IHuman";
+import type { ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkPathChangeReason } from "game/entity/IHuman";
 import { EquipType, RestCancelReason, SkillType } from "game/entity/IHuman";
 import type { IStat } from "game/entity/IStats";
 import { Stat } from "game/entity/IStats";
@@ -254,7 +254,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     getMovementIntent(): IMovementIntent;
     updateMovementIntent(movementIntent: IMovementIntent): boolean;
     hasWalkPath(): boolean;
-    setWalkPath(path: IVector2[] | undefined, force?: boolean): void;
+    setWalkPath(path: IVector2[] | undefined, force?: boolean, reason?: WalkPathChangeReason): void;
     protected onDie(): void;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
     trampleFire(fireEvent: TileEvent): void;

@@ -63,6 +63,7 @@ export interface IOptions {
     shouldLoadLastSave: boolean;
     shouldObjectNamesSkipArticle: boolean;
     skipSplash: boolean;
+    steamInputKeyboardPosition: SteamInputKeyboardPosition;
     tooltipDelay: number;
     tooltips: Record<InspectType, boolean | undefined>;
     tooltipVisibility?: TooltipVisibilityOption;
@@ -94,6 +95,11 @@ export declare enum MusicPlaylist {
     Ordered = 0,
     Shuffle = 1,
     Dynamic = 2
+}
+export declare enum SteamInputKeyboardPosition {
+    Dynamic = 0,
+    Top = 1,
+    Bottom = 2
 }
 export declare enum TooltipVisibilityOption {
     HiddenUnlessBind = 0,
