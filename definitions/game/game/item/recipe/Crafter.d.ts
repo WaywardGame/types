@@ -9,14 +9,15 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Stream from "@wayward/goodstream/Stream";
-import type Entity from "game/entity/Entity";
-import { Quality } from "game/IObject";
-import { CraftResult } from "game/item/IItem";
-import type Item from "game/item/Item";
-import type Recipe from "game/item/recipe/Recipe";
-import type { IRecipeInputUseStrategy, RecipeInputType } from "game/item/recipe/RecipeRequirement";
-import { RecipeRequirementType } from "game/item/recipe/RecipeRequirement";
-import type { RecipeRequirementClass } from "game/item/recipe/RecipeRequirements";
+import type Entity from "@wayward/game/game/entity/Entity";
+import { Quality } from "@wayward/game/game/IObject";
+import { CraftResult } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type Recipe from "@wayward/game/game/item/recipe/Recipe";
+import type { IRecipeInputUseStrategy, RecipeInputType } from "@wayward/game/game/item/recipe/RecipeRequirement";
+import { RecipeRequirementType } from "@wayward/game/game/item/recipe/RecipeRequirement";
+import type { RecipeRequirementClass } from "@wayward/game/game/item/recipe/RecipeRequirements";
+import type Tile from "@wayward/game/game/tile/Tile";
 export declare enum CraftEfficacy {
     Lowest = 0,
     Low = 1,
@@ -47,8 +48,8 @@ export default class Crafter {
      * Gets an array of the tiles around the crafter entity.
      * @param includeCrafterTile Whether the tile the crafter is on should be included. Defaults to `true`.
      */
-    tilesAroundCrafter(includeCrafterTile?: boolean): import("../../tile/Tile").default[];
-    getCrafter(): Entity<unknown, number, unknown, unknown>;
+    tilesAroundCrafter(includeCrafterTile?: boolean): Tile[];
+    getCrafter(): Entity;
     getUsable<R extends RecipeRequirementType>(type: R, requirement: InstanceType<RecipeRequirementClass<R>>): Set<RecipeInputType<R>>;
     getUsed<R extends RecipeRequirementType>(type: R, requirement?: InstanceType<RecipeRequirementClass<R>>): Stream<RecipeInputType<R>>;
     /**

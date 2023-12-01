@@ -8,16 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import type { ContextMenuDescriptions } from "ui/component/ContextMenu";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import type Screen from "ui/screen/Screen";
-import type { QuadrantRegion } from "ui/screen/screens/game/component/IQuadrantComponent";
-import { Quadrant } from "ui/screen/screens/game/component/IQuadrantComponent";
-import StaticComponent from "ui/screen/screens/game/component/StaticComponent";
-import { QuadrantComponentId } from "ui/screen/screens/game/IGameScreenApi";
-import type GameScreen from "ui/screen/screens/GameScreen";
-import Log from "utilities/Log";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { ContextMenuDescriptions } from "@wayward/game/ui/component/ContextMenu";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import type Screen from "@wayward/game/ui/screen/Screen";
+import type GameScreen from "@wayward/game/ui/screen/screens/GameScreen";
+import { QuadrantComponentId } from "@wayward/game/ui/screen/screens/game/IGameScreenApi";
+import type { QuadrantRegion } from "@wayward/game/ui/screen/screens/game/component/IQuadrantComponent";
+import { Quadrant } from "@wayward/game/ui/screen/screens/game/component/IQuadrantComponent";
+import StaticComponent from "@wayward/game/ui/screen/screens/game/component/StaticComponent";
+import Log from "@wayward/utilities/Log";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 interface IQuadrantComponentEvents extends Events<StaticComponent> {
     /**
      * @param quadrant The new quadrant of this element
@@ -50,7 +51,7 @@ export default abstract class QuadrantComponent extends StaticComponent {
     protected readonly scrollableHandler: void;
     get preferredQuadrant(): Quadrant;
     get quadrant(): Quadrant;
-    get quadrantName(): "None" | "Top" | "Bottom" | "TopRight" | "BottomRight" | "BottomLeft" | "TopLeft" | "Any";
+    get quadrantName(): keyof typeof Quadrant;
     readonly log: Log;
     constructor(id: QuadrantComponentId);
     protected registerDataHost(): void;
@@ -69,11 +70,11 @@ export default abstract class QuadrantComponent extends StaticComponent {
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
-    getName(): import("../../../../../language/impl/TranslationImpl").default;
+    getName(): TranslationImpl;
     getScreen(): GameScreen | null;
     getScreen<S extends Screen | undefined = Screen | undefined>(): S | null;
     protected shouldShowContextMenu(api: IBindHandlerApi): boolean;
-    protected getContextMenuDescription(api: IBindHandlerApi): ContextMenuDescriptions;
+    protected getContextMenuDescription(api?: IBindHandlerApi): ContextMenuDescriptions;
     /**
      * Returns a new context menu using this element's context menu descriptions
      */

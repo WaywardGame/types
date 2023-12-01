@@ -8,15 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { InspectType } from "game/inspection/IInspection";
-import type { AutoSaveMode } from "game/meta/IAutoSave";
-import type { GameMode, IGameOptions } from "game/options/IGameOptions";
-import type { ISerializedTranslation } from "language/ITranslation";
-import type Bindable from "ui/input/Bindable";
-import type { Binding } from "ui/input/Bindings";
-import type { FontStyle } from "ui/IUi";
-import type UiExperiment from "ui/UiExperiments";
-import type { ISourceFilter } from "utilities/Log";
+import type { InspectType } from "@wayward/game/game/inspection/IInspection";
+import type { AutoSaveMode } from "@wayward/game/game/meta/IAutoSave";
+import type { GameMode, IGameOptions } from "@wayward/game/game/options/IGameOptions";
+import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import type Bindable from "@wayward/game/ui/input/Bindable";
+import type { Binding } from "@wayward/game/ui/input/Bindings";
+import type { FontStyle } from "@wayward/game/ui/IUi";
+import type UiExperiment from "@wayward/game/ui/UiExperiments";
 export interface IOptions {
     alternatingDirectionMovement: boolean;
     autoAttack: boolean;
@@ -24,7 +23,7 @@ export interface IOptions {
     autoPickupOnIdle: boolean;
     autoSave: [AutoSaveMode.Off] | [AutoSaveMode.Turns | AutoSaveMode.Time, number];
     compressSaves: boolean;
-    consoleLogSourceFilter: ISourceFilter;
+    consoleLogSourceFilters: Record<string, boolean>;
     currentGame: number;
     customTitleBar: boolean;
     defaultCursor: boolean;
@@ -37,6 +36,7 @@ export interface IOptions {
     disableHealthVignette: boolean;
     disableMovementAnimations: boolean;
     disableOverlaySupport: boolean;
+    disableSpritePack: boolean;
     disableUIEffects: boolean;
     disableUIOpacity: boolean;
     dropIntoContainers: boolean;
@@ -50,7 +50,6 @@ export interface IOptions {
     fullscreen: boolean;
     hideEquippedHeadgear: boolean;
     hudWidth?: number;
-    keepSortActive: boolean;
     leftHanded: boolean;
     lowPowerMode: boolean;
     mouseTurnDelay: number;
@@ -59,6 +58,7 @@ export interface IOptions {
     muteMusic: boolean;
     playInputSoundWhenTyping: boolean;
     realTimeTickSpeed: number;
+    renderer: "webgl" | "webgpu";
     saveUiDataGlobally: boolean;
     shouldLoadLastSave: boolean;
     shouldObjectNamesSkipArticle: boolean;

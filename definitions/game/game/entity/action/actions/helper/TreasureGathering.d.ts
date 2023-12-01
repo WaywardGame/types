@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IActionHandlerApi } from "game/entity/action/IAction";
-import type Human from "game/entity/Human";
-import type Item from "game/item/Item";
-import type DrawnMap from "game/mapping/DrawnMap";
-import type { ITreasure } from "game/mapping/DrawnMap";
-import type Tile from "game/tile/Tile";
+import type { IActionHandlerApi } from "@wayward/game/game/entity/action/IAction";
+import type Human from "@wayward/game/game/entity/Human";
+import type Item from "@wayward/game/game/item/Item";
+import type DrawnMap from "@wayward/game/game/mapping/DrawnMap";
+import type { ITreasure } from "@wayward/game/game/mapping/DrawnMap";
+import type Tile from "@wayward/game/game/tile/Tile";
 declare namespace TreasureGathering {
     interface IGatherable {
         map: DrawnMap;

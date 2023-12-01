@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IslandId } from "game/island/IIsland";
-import type Island from "game/island/Island";
-import type { IContainer } from "game/item/IItem";
-import type Item from "game/item/Item";
-import DrawnMap from "game/mapping/DrawnMap";
-import type { IVector3 } from "utilities/math/IVector";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
+import type { IContainer } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import DrawnMap from "@wayward/game/game/mapping/DrawnMap";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 export declare const DEFAULT_ITEM_MAP_CHANCE_COMPLETED = 0.1;
 export declare const DEFAULT_ITEM_MAP_CHANCE_OTHER_ISLAND = 0.5;
 export default class ItemMapManager {

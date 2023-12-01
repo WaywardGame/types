@@ -8,20 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type ContextMenuExport from "@wayward/game/ui/component/ContextMenu";
+import type { AppendStrategy, IComponentEvents, Namespace } from "@wayward/game/ui/component/IComponent";
+import { SelectableLayer } from "@wayward/game/ui/component/IComponent";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import type Screen from "@wayward/game/ui/screen/Screen";
+import type Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
+import type Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
+import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
+import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "@wayward/game/ui/util/ComponentManipulator";
+import type { IHighlight } from "@wayward/game/ui/util/IHighlight";
+import Rectangle from "@wayward/game/utilities/math/shapes/Rectangle";
 import Stream from "@wayward/goodstream/Stream";
-import type { Events } from "event/EventEmitter";
-import EventEmitter from "event/EventEmitter";
-import type ContextMenuExport from "ui/component/ContextMenu";
-import type { AppendStrategy, IComponentEvents, Namespace } from "ui/component/IComponent";
-import { SelectableLayer } from "ui/component/IComponent";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import type Screen from "ui/screen/Screen";
-import type Dialog from "ui/screen/screens/game/component/Dialog";
-import type Menu from "ui/screen/screens/menu/component/Menu";
-import type Tooltip from "ui/tooltip/Tooltip";
-import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "ui/util/ComponentManipulator";
-import type { IHighlight } from "ui/util/IHighlight";
-import Rectangle from "utilities/math/Rectangle";
+import type { Events } from "@wayward/utilities/event/EventEmitter";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 declare const ContextMenu: typeof ContextMenuExport;
 declare type ContextMenu = ContextMenuExport;
 declare global {
@@ -31,6 +31,7 @@ declare global {
     }
 }
 export default class Component<E extends HTMLElement = HTMLElement> extends EventEmitter.Host<IComponentEvents> {
+    static map: WeakMap<Element, Component<HTMLElement>>;
     static get(selector: string): Component | undefined;
     static get(element: Element | Component): Component;
     static get(event: Event): Component;
@@ -47,15 +48,16 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     static get<C extends Component>(element: Element | C, create: false | undefined): C | undefined;
     static get<C extends Component>(event: Event, create: false | undefined): C | undefined;
     static get<C extends Component>(element: Element | C | null | false | undefined, create: false | undefined): C | undefined;
-    static all(selector: string): Stream<Component<HTMLElement>>;
+    static all(selector: string): Stream<Component>;
     static findDescendants(inElement: Component | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: Component | HTMLElement): number | false;
     static append(elementToMove: string | Component | HTMLElement, placeToAppendTo: string | Component | HTMLElement, strategy?: AppendStrategy): void;
-    static remove(elementToRemove: string | Component | Element | ChildNode | null, force?: boolean): void;
-    private static appendRegenerateBoxes;
-    private static regenerateAncestorBoxes;
-    private static regenerateSiblingBoxes;
-    private static regenerateDescendantBoxes;
+    static remove(elementToRemove: string | Component | Element | ChildNode | null, force?: boolean, uncacheSiblingsAndAncestors?: boolean): void;
+    private static updateComponentsDueToAppend;
+    private static uncacheAncestorBoxes;
+    private static uncacheSiblingBoxes;
+    private static updateDescendantComponents;
+    private static updateComponent;
     /**
      * The element that this `Component` instance wraps.
      */
@@ -84,6 +86,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     private boxCacheScrollable?;
     removed?: boolean | string;
     observing?: boolean;
+    rooted: boolean;
     private eventListeners?;
     /**
      * The selectable layer of this element, or `false` if it is not selectable.
@@ -95,7 +98,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      */
     addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): this;
     removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any): this;
-    getAs<C extends Component>(cls: Class<C>): C | undefined;
+    getAs<C extends Component>(cls: AbstractClass<C>): C | undefined;
     matches(selector: string): boolean;
     exists(): boolean;
     /**
@@ -141,23 +144,24 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     registerBindHandlers(...untilEvents: Array<keyof Events<this>>): void;
     registerBindHandlers(warnIfNoHandlers: false, ...untilEvents: Array<keyof Events<this>>): void;
     deregisterBindHandlers(): void;
+    protected hasHiddenClass?: boolean;
     /**
      * Returns whether the element is visible.
      */
-    isVisible(): boolean;
+    isVisible(trustInternalState?: boolean): boolean;
     /**
      * Shows the element.
      */
-    show(): this;
+    show(trustInternalState?: boolean): this;
     /**
      * Hides the element. If a tooltip is shown for this element, hides that as well.
      */
-    hide(): this;
+    hide(trustInternalState?: boolean): this;
     /**
      * Toggles the visibility of this element. Internally uses `show` and `hide`.
      * @param visible The new visiblity of this element.
      */
-    toggle(visible?: boolean): this;
+    toggle(visible?: boolean, trustInternalState?: boolean): this;
     /**
      * Returns this component's parent component, if it exists.
      */
@@ -207,11 +211,20 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      */
     closest(selector: string): Element | null;
     /**
+     * An alias for `element.closest(selector)`
+     */
+    furthest(selector: string): HTMLElement | undefined;
+    /**
      * Appends this component to another element, by selector, element, or component.
      * @param where A CSS selector, an element, or a component to append this component to.
      * @param appendStrategy Where in the new container to insert this component. See {@link AppendStrategy}
      */
     appendTo(where?: string | HTMLElement | Component | null, appendStrategy?: AppendStrategy): this;
+    /**
+     * Appends this component to another element, by selector, element, or component.
+     * @param where A CSS selector, an element, or a component to append this component to.
+     */
+    prependTo(where?: string | HTMLElement | Component | null): this;
     /**
      * Appends every element of a list of components/elements.
      * @param elements A varargs list of elements or iterables of elements. Falsy values are skipped
@@ -223,6 +236,11 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * @param elements A varargs list of elements or iterables of elements. Falsy values are skipped
      */
     append(appendStrategy: AppendStrategy, ...elements: ArrayOfIterablesOr<HTMLElement | Component | undefined | false>): this;
+    /**
+     * Appends every element of a list of components/elements.
+     * @param elements A varargs list of elements or iterables of elements. Falsy values are skipped
+     */
+    prepend(...elements: ArrayOfIterablesOr<HTMLElement | Component | undefined | false>): this;
     /**
      * Removes this element and all descendants.
      */
@@ -257,7 +275,9 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * providing the argument removes the tooltip options.
      */
     setTooltip<ARGS extends any[]>(initializer?: (tooltip: Tooltip, ...args: ARGS) => any, ...args: ARGS): this;
+    isShowingTooltip(): boolean;
     refreshTooltip(): void;
+    showTooltip(): void;
     removeTooltip(): void;
     /**
      * Removes the context menu from this element.
@@ -342,6 +362,6 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      */
     sleep(ms: number): Promise<boolean>;
     protected getClosestDialog(): Dialog | undefined;
-    private showTooltip;
+    private _showTooltip;
 }
 export {};

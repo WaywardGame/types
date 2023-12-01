@@ -8,15 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ModType } from "mod/IModInfo";
-import Component from "ui/component/Component";
-import { EnableDisableAllRow } from "ui/component/EnableDisableAllRow";
-import FilterRow from "ui/component/FilterRow";
-import SortRow from "ui/component/SortRow";
-import WarningRow from "ui/component/WarningRow";
-import Menu, { Tab } from "ui/screen/screens/menu/component/Menu";
-import { ModSort } from "ui/screen/screens/menu/menus/mods/IModsMenu";
-import ModRow from "ui/screen/screens/menu/menus/mods/ModRow";
+import { ModType } from "@wayward/game/mod/IModInformation";
+import type { ModInformation } from "@wayward/game/mod/ModInformation";
+import Component from "@wayward/game/ui/component/Component";
+import { EnableDisableAllRow } from "@wayward/game/ui/component/EnableDisableAllRow";
+import FilterRow from "@wayward/game/ui/component/FilterRow";
+import SortRow from "@wayward/game/ui/component/SortRow";
+import WarningRow from "@wayward/game/ui/component/WarningRow";
+import Menu, { Tab } from "@wayward/game/ui/screen/screens/menu/component/Menu";
+import { ModSort } from "@wayward/game/ui/screen/screens/menu/menus/mods/IModsMenu";
+import ModRow from "@wayward/game/ui/screen/screens/menu/menus/mods/ModRow";
 export default class ModsMenu extends Menu {
     readonly warningAllModsDisabled: WarningRow;
     readonly rowToggleAllMods: EnableDisableAllRow;
@@ -28,7 +29,7 @@ export default class ModsMenu extends Menu {
     readonly sortRow: SortRow<ModSort>;
     filter: FilterRow;
     constructor();
-    getModRow(index: number): ModRow | undefined;
+    getModRow(mod: ModInformation): ModRow | undefined;
     setFilter(filter?: string): this;
     protected onOverlayHidden(): Promise<void>;
     protected refreshMods(): void;

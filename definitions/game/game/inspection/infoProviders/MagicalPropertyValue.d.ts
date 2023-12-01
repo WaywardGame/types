@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SkillType } from "game/entity/IHuman";
-import { InfoProvider } from "game/inspection/InfoProvider";
-import type { Quality } from "game/IObject";
-import type { IHasMagic, MagicalNormalPropertyTypes, MagicalSubPropertyTypes } from "game/magic/MagicalPropertyManager";
-import { MagicalPropertyIdentity } from "game/magic/MagicalPropertyManager";
-import type { MagicalPropertyTypeSubTypeMap } from "game/magic/MagicalPropertyType";
-import Translation from "language/Translation";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import { IRange } from "utilities/math/Range";
+import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import type { Quality } from "@wayward/game/game/IObject";
+import type { IHasMagic, MagicalNormalPropertyTypes, MagicalSubPropertyTypes } from "@wayward/game/game/magic/MagicalPropertyManager";
+import { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { MagicalPropertyTypeSubTypeMap } from "@wayward/game/game/magic/MagicalPropertyType";
+import Translation from "@wayward/game/language/Translation";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import { IRange } from "@wayward/utilities/math/Range";
 export type NumberTranslator = (number: number | IRange, isMod: boolean, isPercent: boolean, isMultiplied: boolean) => Translation;
 export default class MagicalPropertyValue extends InfoProvider {
     private readonly base;
@@ -60,8 +60,8 @@ export default class MagicalPropertyValue extends InfoProvider {
     setIsPercentage(isPercentage?: boolean, premultiplied?: boolean): this;
     setIsMultiplied(isMultiplied?: boolean): this;
     setCurrent(amount: GetterOfOr<number>): this;
-    setBaseColor(translation?: Translation, preferred?: boolean): this;
-    setCurrentColor(translation: Translation): this;
+    setBaseColor(translation?: GetterOfOr<Translation | undefined>, preferred?: boolean): this;
+    setCurrentColor(translation?: GetterOfOr<Translation | undefined>): this;
     setNumberTranslator(translator: (number: number | IRange) => Translation): this;
     setFormatter(formatter?: Translation): this;
     setBefore(...before: Array<TranslationGenerator | InfoProvider | undefined>): this;
@@ -69,7 +69,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     setExpandedVerbose(): this;
     setMagicIncluded(): this;
     getClass(): string[];
-    get(): (TranslationGenerator | InfoProvider)[];
+    get(): Array<InfoProvider | TranslationGenerator>;
     private getOutOf;
     private formatNumber;
 }

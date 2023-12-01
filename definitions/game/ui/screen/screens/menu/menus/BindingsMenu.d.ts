@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Bindable from "ui/input/Bindable";
-import Menu from "ui/screen/screens/menu/component/Menu";
+import Bindable from "@wayward/game/ui/input/Bindable";
+import Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
 export default class BindingsMenu extends Menu {
     private readonly modBindingsTab;
     private readonly bindCatcher;

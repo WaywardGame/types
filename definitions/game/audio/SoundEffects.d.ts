@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { SfxType } from "audio/IAudio";
-import type { ISoundEffectDescription } from "audio/IMusic";
+import { SfxType } from "@wayward/game/audio/IAudio";
+import type { ISoundEffectDescription } from "@wayward/game/audio/IMusic";
 export declare const soundEffectDescriptions: Map<SfxType, ISoundEffectDescription>;

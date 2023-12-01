@@ -8,17 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Human from "game/entity/Human";
-import { DamageType, Defense } from "game/entity/IEntity";
-import type Creature from "game/entity/creature/Creature";
-import type { CreatureType, IDamageOutcome, IDamageOutcomeInput } from "game/entity/creature/ICreature";
-import type Player from "game/entity/player/Player";
-import type Island from "game/island/Island";
-import type Item from "game/item/Item";
-import type ItemManager from "game/item/ItemManager";
-import type { Milestone } from "game/milestones/IMilestone";
-import type { IGameOptionsPartial } from "game/options/IGameOptions";
-import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "game/options/modifiers/milestone/MilestoneModifier";
+import type Human from "@wayward/game/game/entity/Human";
+import { DamageType, Defense } from "@wayward/game/game/entity/IEntity";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { CreatureType, IDamageOutcome, IDamageOutcomeInput } from "@wayward/game/game/entity/creature/ICreature";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type Island from "@wayward/game/game/island/Island";
+import type Item from "@wayward/game/game/item/Item";
+import type ItemManager from "@wayward/game/game/item/ItemManager";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
+import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
 export default class Versatile extends MilestoneModifier {
     getOptions(): IGameOptionsPartial;
     getGroup(): MilestoneModifierGroup;

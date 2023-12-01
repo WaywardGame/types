@@ -8,23 +8,21 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import EntityManager from "@wayward/game/game/entity/EntityManager";
+import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
+import Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type { TextContext } from "@wayward/game/language/ITranslation";
+import { Article } from "@wayward/game/language/Translation";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import Stream from "@wayward/goodstream/Stream";
-import Corpse from "game/entity/creature/corpse/Corpse";
-import type { CreatureType } from "game/entity/creature/ICreature";
-import { ObjectManager } from "game/ObjectManager";
-import type Tile from "game/tile/Tile";
-import type { TextContext } from "language/ITranslation";
-import { Article } from "language/Translation";
-export interface ICorpseManagerEvents {
-    create(corpse: Corpse): any;
-    remove(corpse: Corpse): any;
-}
-export default class CorpseManager extends ObjectManager<Corpse, ICorpseManagerEvents> {
-    load(): void;
+export default class CorpseManager extends EntityManager<Corpse> {
+    protected readonly name = "CorpseManager";
+    loadEntity(corpse: Corpse): void;
     create(type: CreatureType, tile: Tile, decay?: number, aberrant?: boolean, name?: string, qualityBonus?: number, respawned?: number): Corpse | undefined;
+    protected onRemove(corpse: Corpse): boolean;
     updateAll(): void;
-    remove(corpse: Corpse): void;
-    getName(typeOrCorpse: CreatureType | Corpse, article?: Article, count?: number, showCount?: boolean): import("../../../../language/impl/TranslationImpl").default;
-    getCorpseTranslations(corpses: Corpse[], article?: Article, context?: TextContext): Stream<import("../../../../language/impl/TranslationImpl").default>;
-    getCorpseListTranslation(corpses: Corpse[], article?: Article, context?: TextContext): import("../../../../language/impl/TranslationImpl").default;
+    getName(typeOrCorpse: CreatureType | Corpse, article?: Article, count?: number, showCount?: boolean): TranslationImpl;
+    getCorpseTranslations(corpses: Corpse[], article?: Article, context?: TextContext): Stream<TranslationImpl>;
+    getCorpseListTranslation(corpses: Corpse[], article?: Article, context?: TextContext): TranslationImpl;
 }

@@ -8,13 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { Game } from "game/Game";
-import type Player from "game/entity/player/Player";
-import type PlayerManager from "game/entity/player/PlayerManager";
-import type { IQuest } from "game/entity/player/quest/quest/IQuest";
-import { QuestType } from "game/entity/player/quest/quest/IQuest";
-import type { RequirementInstance } from "game/entity/player/quest/quest/Quest";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { Game } from "@wayward/game/game/Game";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type PlayerManager from "@wayward/game/game/entity/player/PlayerManager";
+import type { IQuest } from "@wayward/game/game/entity/player/quest/quest/IQuest";
+import { QuestType } from "@wayward/game/game/entity/player/quest/quest/IQuest";
+import type { RequirementInstance } from "@wayward/game/game/entity/player/quest/quest/Quest";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export interface IQuestManager extends EventEmitter.Host<IQuestManagerEvents> {
     /**
      * Get all quests
@@ -97,8 +98,8 @@ export declare class QuestInstance extends EventEmitter.Host<IQuestInstanceEvent
     readonly data: IQuest;
     readonly id: number;
     constructor(host: Player, data: IQuest, id: number);
-    getTitle(): import("../../../../language/impl/TranslationImpl").default | undefined;
-    getDescription(): import("../../../../language/impl/TranslationImpl").default | undefined;
+    getTitle(): TranslationImpl | undefined;
+    getDescription(): TranslationImpl | undefined;
     getRequirements(): RequirementInstance[];
     needsManualCompletion(): boolean | undefined;
     complete(): this;

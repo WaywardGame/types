@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ISteamworksNetworking } from "@hosts/shared/interfaces";
-import type { IMatchmakingInfo, MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
-import { Connection } from "multiplayer/networking/Connection";
+import type { IMatchmakingInfo, MatchmakingMessageData } from "@wayward/game/multiplayer/matchmaking/IMatchmaking";
+import { Connection } from "@wayward/game/multiplayer/networking/Connection";
+import type { ISteamworksNetworking } from "@wayward/hosts/shared/interfaces";
 export declare class SteamNetworkConnection extends Connection {
     private readonly steamNetworking;
     private readonly hostSteamId;
@@ -28,7 +28,7 @@ export declare class SteamNetworkConnection extends Connection {
     get steamIdRemote(): string | undefined;
     protected onClosing(): void;
     protected onClosed(): void;
-    isConnected(): boolean;
+    get isConnected(): boolean;
     send(data: ArrayBuffer | Uint8Array): boolean;
     processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;
     private checkSessionState;

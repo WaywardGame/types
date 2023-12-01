@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import ClientPacket from "multiplayer/packets/ClientPacket";
+import ClientPacket from "@wayward/game/multiplayer/packets/ClientPacket";
 /**
  * This should be the last packet the player receives before they are caught up
  * Tell the server to mark us as ready

@@ -8,23 +8,25 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { StatusType } from "game/entity/IEntity";
-import type { Stat } from "game/entity/IStats";
-import { BadTemperatureLevel } from "game/entity/status/handler/IBadTemperature";
-import StatusEffect, { StatusEffectBadness } from "game/entity/status/StatusEffect";
-import { Temperature } from "game/temperature/ITemperature";
+import type { StatusType } from "@wayward/game/game/entity/IEntity";
+import type { Stat } from "@wayward/game/game/entity/IStats";
+import { BadTemperatureLevel } from "@wayward/game/game/entity/status/handler/IBadTemperature";
+import StatusEffect, { StatusEffectBadness } from "@wayward/game/game/entity/status/StatusEffect";
+import type Island from "@wayward/game/game/island/Island";
+import { Temperature } from "@wayward/game/game/temperature/ITemperature";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default abstract class BadTemperatureEffect extends StatusEffect {
     protected effectiveTemperature: Temperature;
     register(): void;
     getBadness(): StatusEffectBadness.Neutral | StatusEffectBadness.Bad;
-    getTranslation(): import("../../../../language/impl/TranslationImpl").default;
-    getDescription(): import("../../../../language/impl/TranslationImpl").default;
+    getTranslation(): TranslationImpl;
+    getDescription(): TranslationImpl;
     abstract getLevel(): BadTemperatureLevel;
     refresh(): void;
     protected onTick(): void;
     protected abstract getConsequenceEffect(): StatusType;
     protected abstract getConsequenceStat(): Stat;
-    private onGameTick;
-    private onPlayerTurnStart;
+    protected onIslandTick(island: Island): void;
+    private onPostMove;
     private isLevelTwoBadTemp;
 }

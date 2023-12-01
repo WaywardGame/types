@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import LabelledValue from "game/inspection/infoProviders/LabelledValue";
-import { StatInfo } from "game/inspection/infoProviders/stat/StatInfo";
+import LabelledValue from "@wayward/game/game/inspection/infoProviders/LabelledValue";
+import { StatInfo } from "@wayward/game/game/inspection/infoProviders/stat/StatInfo";
 export default class DefenseInfo extends StatInfo {
     getClass(): string[];
     get(): LabelledValue[];

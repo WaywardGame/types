@@ -8,29 +8,28 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { BiomeTypes } from "game/biome/IBiome";
-import type { ITemplateBiomeOptions } from "game/biome/template/Template";
-import type Doodad from "game/doodad/Doodad";
-import type Corpse from "game/entity/creature/corpse/Corpse";
-import type Creature from "game/entity/creature/Creature";
-import type { ICharacter, ICrafted } from "game/entity/IHuman";
-import type NPC from "game/entity/npc/NPC";
-import type { PlayerState } from "game/entity/player/IPlayer";
-import type { Game } from "game/Game";
-import type { ILegacySeeds, IslandId, IWell } from "game/island/IIsland";
-import type Item from "game/item/Item";
-import type { Milestone } from "game/milestones/IMilestone";
-import type { GameMode, IGameOptions } from "game/options/IGameOptions";
-import type { ITileContainer, ITileData } from "game/tile/ITerrain";
-import type TileEvent from "game/tile/TileEvent";
-import type TimeManager from "game/time/TimeManager";
-import type { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
-import type Renderer from "renderer/Renderer";
-import type { IReplayLogEntry } from "replay/IReplayLogEntry";
-import type { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
-import type { IVector2, IVector3 } from "utilities/math/IVector";
-import type { IRange } from "utilities/math/Range";
-import type Version from "utilities/Version";
+import type { BiomeTypes } from "@wayward/game/game/biome/IBiome";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { ICharacter, ICrafted } from "@wayward/game/game/entity/IHuman";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type { PlayerState } from "@wayward/game/game/entity/player/IPlayer";
+import type { Game } from "@wayward/game/game/Game";
+import type { ILegacySeeds, INewIslandOverrides, IslandId, IWell } from "@wayward/game/game/island/IIsland";
+import type Item from "@wayward/game/game/item/Item";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { GameMode, IGameOptions } from "@wayward/game/game/options/IGameOptions";
+import type { ITileContainer, ITileData } from "@wayward/game/game/tile/ITerrain";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import type TimeManager from "@wayward/game/game/time/TimeManager";
+import type { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
+import type { Renderer } from "@wayward/game/renderer/Renderer";
+import type { IReplayLogEntry } from "@wayward/game/replay/IReplayLogEntry";
+import type { IHighscoreOld, IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { IRange } from "@wayward/utilities/math/Range";
+import type Version from "@wayward/game/utilities/Version";
 export interface IGameEvents {
     /**
      * Called when the game is starting
@@ -71,8 +70,6 @@ export interface IGameEvents {
     getBiomeType(positon: IVector2, biomeType: BiomeTypes): BiomeTypes | undefined;
     pause(): any;
     resume(): any;
-    tickStart(tickFlag: TickFlag, ticks: number, dueToAction: boolean): any;
-    tickEnd(tickFlag: TickFlag, ticks: number, dueToAction: boolean): any;
     /**
      * Called when the playing entity count changes
      */
@@ -81,9 +78,10 @@ export interface IGameEvents {
      * Called when the turn mode is set
      */
     setTurnMode(turnMode: TurnMode): any;
-    glLostContext(): any;
-    glSetup(restored: boolean): any;
-    glInitialized(): any;
+    /**
+     * Called when the renderer is configured during game startup
+     */
+    rendererReady(): any;
     /**
      * Called when the game creates the primary renderer
      */
@@ -107,7 +105,7 @@ export declare enum TickFlag {
     FlowFields = 512,
     PlayerNotes = 1024,
     Items = 2048,
-    IslandTimeAdjustment = 2078,
+    IslandFastForward = 2078,
     All = 4095
 }
 /**
@@ -171,11 +169,7 @@ export interface IPlayOptions {
     replayLog?: IReplayLogEntry[];
     replyCompletedMilestoneCount?: number;
     skipServerOpen?: boolean;
-    template?: IIslandTemplate;
-}
-export interface IIslandTemplate {
-    mapSize: number;
-    options: ITemplateBiomeOptions;
+    startingIslandOverrides?: Partial<INewIslandOverrides>;
 }
 export interface IPlayerOptions {
     id?: number;
@@ -185,7 +179,7 @@ export interface IPlayerOptions {
     spawnIslandId?: IslandId;
     spawnPosition?: IVector3;
     character: ICharacter;
-    crafted?: Record<number, ICrafted>;
+    crafted?: SaferNumberIndexedObject<ICrafted>;
     milestoneModifiers?: Set<Milestone>;
 }
 export declare enum FireType {
@@ -223,17 +217,18 @@ export declare enum TileUpdateType {
     DoodadOverHidden = 15,
     DoodadRemove = 16,
     DoodadAddWater = 17,
-    Item = 18,
-    ItemDrop = 19,
-    ItemMovement = 20,
-    Mod = 21,
-    NPC = 22,
-    NPCSpawn = 23,
-    Player = 24,
-    Terrain = 25,
-    TileEvent = 26,
-    TileEventManager = 27,
-    Tilled = 28
+    DoodadDisplay = 18,
+    Item = 19,
+    ItemDrop = 20,
+    ItemMovement = 21,
+    Mod = 22,
+    NPC = 23,
+    NPCSpawn = 24,
+    Player = 25,
+    Terrain = 26,
+    TileEvent = 27,
+    TileEventManager = 28,
+    Tilled = 29
 }
 export declare enum PauseSource {
     /**
@@ -291,6 +286,6 @@ export declare const INTERVAL = 16.6666;
 export declare const REAL_TIME_MIN_START_DELAY = 1000;
 export declare const TURN_DELAY_MAX: number;
 export declare const TURN_DELAY_DEFAULT: number;
-export declare const LIGHT_COLOR_DEFAULT: import("utilities/Color").IRGB;
+export declare const LIGHT_COLOR_DEFAULT: import("@wayward/utilities/Color").IRGB;
 export declare const TOOLTIP_DELAY_DEFAULT = 0;
 export declare const TOOLTIP_DELAY_MAX = 3000;

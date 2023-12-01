@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { PacketTarget } from "multiplayer/IMultiplayer";
-import { ConnectionState } from "multiplayer/networking/IConnection";
-import IndexedPacket from "multiplayer/packets/IndexedPacket";
-import type { IPacket, ISynchronizationCheckData } from "multiplayer/packets/IPacket";
+import type { PacketTarget } from "@wayward/game/multiplayer/IMultiplayer";
+import { ConnectionState } from "@wayward/game/multiplayer/networking/IConnection";
+import IndexedPacket from "@wayward/game/multiplayer/packets/IndexedPacket";
+import type { IPacket, ISynchronizationCheckData } from "@wayward/game/multiplayer/packets/IPacket";
 export declare abstract class Packet<T = void> extends IndexedPacket implements IPacket<T> {
     protected synchronizationCheckData: ISynchronizationCheckData;
     private _arrayBuffer;

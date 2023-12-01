@@ -8,20 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { BiomeType } from "game/biome/IBiome";
-import { DoodadType } from "game/doodad/IDoodad";
-import type Island from "game/island/Island";
-import type { MapGenVersions } from "game/mapgen/IMapGen";
-import type { ITemplate, TileTemplateType } from "game/tile/ITerrain";
-import type Tile from "game/tile/Tile";
-import Version from "utilities/Version";
-export declare module MapGenHelpers {
+import { BiomeType } from "@wayward/game/game/biome/IBiome";
+import { DoodadType } from "@wayward/game/game/doodad/IDoodad";
+import type Island from "@wayward/game/game/island/Island";
+import type { MapGenVersions } from "@wayward/game/game/mapgen/IMapGen";
+import type { ITemplate, TileTemplateType } from "@wayward/game/game/tile/ITerrain";
+import type Tile from "@wayward/game/game/tile/Tile";
+import Version from "@wayward/game/utilities/Version";
+export declare namespace MapGenHelpers {
     function pickBasedOnVersion<T>(version: Version.String, versions: MapGenVersions<T>): {
         version: Version.String;
         selection: T;
     };
-    function startLoading(): Promise<void>;
-    function setFinishedLoading(): void;
     interface ITemplateOptions {
         /**
          * If not provided, randomly decides whether to mirror the template vertically.

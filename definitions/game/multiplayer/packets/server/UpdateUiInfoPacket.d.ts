@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServerPacket";
-import type { IContainerSortInfo, IDialogInfo } from "ui/old/IOldUi";
+import PlayerTargetedServerPacket from "@wayward/game/multiplayer/packets/PlayerTargetedServerPacket";
+import type { IContainerSortInfo, IDialogInfo } from "@wayward/game/ui/old/IOldUi";
 export declare enum UpdateUiInfoPacketType {
     DialogInfo = 0,
     DialogContainerInfo = 1,

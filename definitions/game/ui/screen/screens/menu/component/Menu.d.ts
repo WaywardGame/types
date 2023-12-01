@@ -8,13 +8,24 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import { BlockRow } from "ui/component/BlockRow";
-import Button from "ui/component/Button";
-import Component from "ui/component/Component";
-import Text, { Heading, Paragraph } from "ui/component/Text";
-import type { IMenuEvents } from "ui/screen/screens/menu/component/IMenu";
-import { MenuId } from "ui/screen/screens/menu/component/IMenu";
+import { BlockRow } from "@wayward/game/ui/component/BlockRow";
+import Button from "@wayward/game/ui/component/Button";
+import Component from "@wayward/game/ui/component/Component";
+import Text, { Heading, Paragraph } from "@wayward/game/ui/component/Text";
+import type { IMenuEvents } from "@wayward/game/ui/screen/screens/menu/component/IMenu";
+import { MenuId } from "@wayward/game/ui/screen/screens/menu/component/IMenu";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export declare enum MenuClasses {
+    Main = "menu",
+    Submenu = "submenu",
+    Title = "menu-title",
+    TitleTextContainer = "menu-title-text-container",
+    TitleRow = "menu-title-row",
+    Content = "menu-content",
+    HasTabs = "menu-hastabs",
+    Tabs = "menu-tabs",
+    TabsWrapper = "menu-tabs-wrapper"
+}
 export default class Menu extends Component {
     event: IEventEmitter<this, IMenuEvents>;
     menuId: MenuId | string;
@@ -46,7 +57,7 @@ export default class Menu extends Component {
     scrollToTabSection(tabId: string | number): this;
     clearTabs(): void;
     addTabs(...tabs: ArrayOfIterablesOr<Tab>): void;
-    getTabs(): import("@wayward/goodstream").default<Tab<string | number | undefined>>;
+    getTabs(): Tab[];
     addSubtabs(tab: Tab): this;
     /**
      * When called in `show` or after `ComponentEvent.Show`, returns whether the menu was "went back to"
@@ -64,7 +75,7 @@ export declare class Tab<I extends string | number | undefined = string | number
     readonly id: I;
     section: MenuSection | undefined;
     private _subtabs;
-    get subtabs(): Tab<string | number | undefined>[];
+    get subtabs(): Tab[];
     constructor(id: I);
     private icon?;
     setTabIcon(icon?: string): this;

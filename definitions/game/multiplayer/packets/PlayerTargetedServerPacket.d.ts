@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { PacketType } from "multiplayer/packets/IPacket";
-import PlayerTargetedPacket from "multiplayer/packets/PlayerTargetedPacket";
+import { PacketType } from "@wayward/game/multiplayer/packets/IPacket";
+import PlayerTargetedPacket from "@wayward/game/multiplayer/packets/PlayerTargetedPacket";
 export default abstract class PlayerTargetedServerPacket extends PlayerTargetedPacket {
     setPlayer(): void;
     getType(): PacketType;

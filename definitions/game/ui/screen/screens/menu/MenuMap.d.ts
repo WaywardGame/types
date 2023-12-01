@@ -8,24 +8,24 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { MenuId } from "ui/screen/screens/menu/component/IMenu";
-import type Menu from "ui/screen/screens/menu/component/Menu";
-import BindingsMenu from "ui/screen/screens/menu/menus/BindingsMenu";
-import CharacterSelectionMenu from "ui/screen/screens/menu/menus/CharacterSelectionMenu";
-import GameEndMenu from "ui/screen/screens/menu/menus/GameEndMenu";
-import HelpMenu from "ui/screen/screens/menu/menus/HelpMenu";
-import HighscoresMenu from "ui/screen/screens/menu/menus/HighscoresMenu";
-import InterruptMenu from "ui/screen/screens/menu/menus/InterruptMenu";
-import JoinServerChooseModifiersMenu from "ui/screen/screens/menu/menus/JoinServerChooseModifiersMenu";
-import JoinServerMenu from "ui/screen/screens/menu/menus/JoinServerMenu";
-import LoadGameMenu from "ui/screen/screens/menu/menus/LoadGameMenu";
-import ChangelogMenu from "ui/screen/screens/menu/menus/main/ChangelogMenu";
-import MainMenu from "ui/screen/screens/menu/menus/MainMenu";
-import ModsMenu from "ui/screen/screens/menu/menus/ModsMenu";
-import MultiplayerMenu from "ui/screen/screens/menu/menus/MultiplayerMenu";
-import NewGameMenu from "ui/screen/screens/menu/menus/NewGameMenu";
-import OptionsMenu from "ui/screen/screens/menu/menus/OptionsMenu";
-import PauseMenu from "ui/screen/screens/menu/menus/PauseMenu";
+import { MenuId } from "@wayward/game/ui/screen/screens/menu/component/IMenu";
+import type Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
+import BindingsMenu from "@wayward/game/ui/screen/screens/menu/menus/BindingsMenu";
+import CharacterSelectionMenu from "@wayward/game/ui/screen/screens/menu/menus/CharacterSelectionMenu";
+import GameEndMenu from "@wayward/game/ui/screen/screens/menu/menus/GameEndMenu";
+import HelpMenu from "@wayward/game/ui/screen/screens/menu/menus/HelpMenu";
+import HighscoresMenu from "@wayward/game/ui/screen/screens/menu/menus/HighscoresMenu";
+import InterruptMenu from "@wayward/game/ui/screen/screens/menu/menus/InterruptMenu";
+import JoinServerChooseModifiersMenu from "@wayward/game/ui/screen/screens/menu/menus/JoinServerChooseModifiersMenu";
+import JoinServerMenu from "@wayward/game/ui/screen/screens/menu/menus/JoinServerMenu";
+import LoadGameMenu from "@wayward/game/ui/screen/screens/menu/menus/LoadGameMenu";
+import ChangelogMenu from "@wayward/game/ui/screen/screens/menu/menus/main/ChangelogMenu";
+import MainMenu from "@wayward/game/ui/screen/screens/menu/menus/MainMenu";
+import ModsMenu from "@wayward/game/ui/screen/screens/menu/menus/ModsMenu";
+import MultiplayerMenu from "@wayward/game/ui/screen/screens/menu/menus/MultiplayerMenu";
+import NewGameMenu from "@wayward/game/ui/screen/screens/menu/menus/NewGameMenu";
+import OptionsMenu from "@wayward/game/ui/screen/screens/menu/menus/OptionsMenu";
+import PauseMenu from "@wayward/game/ui/screen/screens/menu/menus/PauseMenu";
 declare const menuMap: {
     0: typeof BindingsMenu;
     1: typeof ChangelogMenu;

@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SavePropertyFlag } from "save/serializer/ISerializer";
-import type Version from "utilities/Version";
+import type { SavePropertyFlag } from "@wayward/game/save/serializer/ISerializer";
+import type Version from "@wayward/game/utilities/Version";
 export declare const SLOT_MIN = 0;
 export declare const SLOT_GLOBAL = -1;
 export declare const SLOT_MULTIPLAYER = -2;
@@ -28,8 +28,8 @@ export declare enum SaveSort {
     CreatedTime = 3
 }
 export declare enum SortDirection {
-    More = 1,
-    Less = -1
+    Ascending = 1,
+    Descending = -1
 }
 export declare enum CompressionType {
     None = 0,
@@ -66,7 +66,8 @@ export declare enum SaveImportErrorReason {
     UnknownError = 0,
     IncorrectFileType = 1,
     NoFreeSlots = 2,
-    UploadFailed = 3
+    UploadFailed = 3,
+    IncorrectSaveType = 4
 }
 export interface IPartialSaveImportResult {
     file: File;

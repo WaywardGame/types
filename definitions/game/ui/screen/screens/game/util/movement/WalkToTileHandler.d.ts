@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type Player from "game/entity/player/Player";
-import type Tile from "game/tile/Tile";
-import type Component from "ui/component/Component";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import type { IVector2 } from "utilities/math/IVector";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type Component from "@wayward/game/ui/component/Component";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IWalkToTileHandlerEvents {
     /**
      * Called when calculating the movement penalty of a tile.
@@ -23,13 +23,12 @@ export interface IWalkToTileHandlerEvents {
     getTilePenalty(penalty: number, tile: Tile): number;
 }
 export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHandlerEvents> {
-    private previewTarget;
-    private previewPath;
+    private preview;
     private overlays;
     private readonly overlayType;
     private canResetTarget;
     private readonly surfaceRef;
-    get surface(): Component<HTMLElement>;
+    get surface(): Component;
     constructor(surface: Component);
     register(): void;
     deregister(): void;
@@ -60,7 +59,7 @@ export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHand
     /**
      * Finds a path to a target and then updates the overlay to that path (if it was valid)
      */
-    private updatePreviewPath;
+    private updatePreview;
     /**
      * Returns the penalty of the given tile (just how much we *don't* want to step there)
      */

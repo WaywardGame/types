@@ -8,12 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type EventEmitter from "event/EventEmitter";
-import { SkillType } from "game/entity/IHuman";
-import type { ISkillLevel } from "game/entity/skill/ISkills";
-import type Island from "game/island/Island";
+import { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { ISkillLevel } from "@wayward/game/game/entity/skill/ISkills";
+import type Island from "@wayward/game/game/island/Island";
+import type EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface ISkillConfiguration {
-    id: GetterOfOr<string | number>;
     getSkillGainMultiplier?(skill: SkillType): number;
     canSkillGain?(skill: SkillType): boolean;
     onSkillGain?(skill: SkillType, fromValue: number, toValue: number, mod: number): any;
@@ -35,6 +34,7 @@ export interface ISkillEvents {
 }
 export type SkillSet = Record<SkillType, ISkillLevel>;
 export interface ISkillHost extends EventEmitter.Host<ISkillEvents> {
+    readonly id: number;
     readonly island: Island;
 }
 export default class SkillManager {
@@ -70,11 +70,11 @@ export default class SkillManager {
      * @returns The total skill (combination of all other skills). Ignores skill bonuses.
      */
     getTotal(): number;
-    all(): {
+    all(): Array<{
         bonus: number;
         core: number;
         type: SkillType;
-    }[];
+    }>;
     set(skill: SkillType, core?: number, bonus?: number): this;
     /**
      * Sets the "base value" of the skill (ignoring any bonuses applied by magical equipment)
@@ -89,7 +89,7 @@ export default class SkillManager {
      */
     skillAndActionTierCheck(skill: SkillType, check: number, actionTier?: number): boolean;
     getSkillAndActionTierValue(skill: SkillType, actionTier?: number): number;
-    gain(skill: SkillType, multiplier?: number, actionTier?: number, bypass?: boolean): void;
+    private calculateRandomSkillGain;
+    gain(skill: SkillType, multiplier?: number, actionTier?: number, bypass?: boolean, times?: number): void;
     setAll(skills: SkillSet): void;
-    private getId;
 }

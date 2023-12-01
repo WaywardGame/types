@@ -10,5 +10,6 @@
  */
 export declare enum MilestoneSort {
     Name = 0,
-    Progress = 1
+    Progress = 1,
+    Recent = 2
 }

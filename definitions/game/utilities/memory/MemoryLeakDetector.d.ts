@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ExpectedLifetime } from "utilities/memory/ILifetime";
-import type Screen from "ui/screen/Screen";
+import type Screen from "@wayward/game/ui/screen/Screen";
+import { ExpectedLifetime } from "@wayward/utilities/memory/ILifetime";
 declare class MemoryLeakDetector {
     private surpressLogs;
     private nextObjectId;

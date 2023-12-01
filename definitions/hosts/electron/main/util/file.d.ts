@@ -10,7 +10,7 @@
  */
 import * as chalk from "ansicolor";
 export declare function isDirectory(directory: string): boolean;
-export declare function readJsonSync(path: string): any;
+export declare function readJsonSync(path: string): unknown;
 export declare class TemplateWriter {
     private files;
     constructor();

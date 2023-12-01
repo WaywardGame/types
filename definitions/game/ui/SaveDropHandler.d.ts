@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { ISaveImportSuccess, SaveImportResult } from "save/ISaveManager";
-import InterruptMenu from "ui/screen/screens/menu/menus/InterruptMenu";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { ISaveImportSuccess, SaveImportResult } from "@wayward/game/save/ISaveManager";
+import InterruptMenu from "@wayward/game/ui/screen/screens/menu/menus/InterruptMenu";
 export interface IImportHandler {
     onImport?(result: ISaveImportSuccess): any;
     onComplete?(results: SaveImportResult[]): any;

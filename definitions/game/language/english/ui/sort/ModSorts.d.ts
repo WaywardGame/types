@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ModSort } from "ui/screen/screens/menu/menus/mods/IModsMenu";
+import { ModSort } from "@wayward/game/ui/screen/screens/menu/menus/mods/IModsMenu";
 declare const modSorts: Descriptions<ModSort, string>;
 export default modSorts;

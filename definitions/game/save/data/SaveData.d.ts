@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { PlayerState } from "game/entity/player/IPlayer";
-import type { GameMode, IGameOptions } from "game/options/IGameOptions";
-import type { ISerializedTranslation } from "language/ITranslation";
-import type { IMultiplayerState } from "multiplayer/IMultiplayer";
-import type IClientStore from "save/clientStore/IClientStore";
-import type EnumInfo from "utilities/enum/EnumInfo";
+import { PlayerState } from "@wayward/game/game/entity/player/IPlayer";
+import type { GameMode, IGameOptions } from "@wayward/game/game/options/IGameOptions";
+import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import type { IMultiplayerState } from "@wayward/game/multiplayer/IMultiplayer";
+import type IClientStore from "@wayward/game/save/clientStore/IClientStore";
+import type EnumInfo from "@wayward/game/utilities/enum/EnumInfo";
 export declare const saveDataVersionUnknown = "Unknown";
 export default class SaveData {
     gameSlotName: string;

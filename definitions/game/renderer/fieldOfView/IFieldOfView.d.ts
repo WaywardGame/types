@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Human from "game/entity/Human";
-import type Player from "game/entity/player/Player";
-import type Island from "game/island/Island";
-import type { IVector4 } from "utilities/math/Vector4";
+import type Human from "@wayward/game/game/entity/Human";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type Island from "@wayward/game/game/island/Island";
+import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 export interface IFieldOfViewEvents {
     getPlayerFieldOfViewRadius(radius: number, player: Player): number;
 }

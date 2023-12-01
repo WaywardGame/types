@@ -8,18 +8,22 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { BiomeType } from "game/biome/IBiome";
-import type { CreatureType, TileGroup } from "game/entity/creature/ICreature";
-import type { AttackType, StatusType } from "game/entity/IEntity";
-import type { SkillType } from "game/entity/IHuman";
-import type { Stat } from "game/entity/IStats";
-import type { ItemType } from "game/item/IItem";
-import type { Milestone } from "game/milestones/IMilestone";
-import type { ThreeStateButtonState } from "ui/component/IThreeStateButton";
-import type DefaultMap from "utilities/collection/map/DefaultMap";
-import type RandomItem from "utilities/random/generators/specific/RandomItem";
-import type RandomRange from "utilities/random/generators/specific/RandomRange";
-import type { RecursivePartial } from "utilities/types/Recursive";
+import type { Quality } from "@wayward/game/game/IObject";
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import type { Deity } from "@wayward/game/game/deity/Deity";
+import type { AttackType, StatusType } from "@wayward/game/game/entity/IEntity";
+import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { Stat } from "@wayward/game/game/entity/IStats";
+import type { CreatureType, TileGroup } from "@wayward/game/game/entity/creature/ICreature";
+import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
+import type { ItemType } from "@wayward/game/game/item/IItem";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { ThreeStateButtonState } from "@wayward/game/ui/component/IThreeStateButton";
+import type DefaultMap from "@wayward/game/utilities/collection/map/DefaultMap";
+import type RandomItem from "@wayward/game/utilities/random/generators/specific/RandomItem";
+import type RandomRange from "@wayward/game/utilities/random/generators/specific/RandomRange";
+import type { RecursivePartial } from "@wayward/game/utilities/types/Recursive";
+import type { IRange } from "@wayward/utilities/math/Range";
 export declare enum GameMode {
     Hardcore = 0,
     Casual = 1,
@@ -28,9 +32,6 @@ export declare enum GameMode {
 }
 export declare const TIME_ETERNAL_NIGHT = 0.7;
 export declare const TIME_ETERNAL_DAY = 0.3;
-export declare const MAX_TRAVEL_TIME_MIN = 1000;
-export declare const MAX_TRAVEL_TIME_MAX = 200000;
-export declare const MAX_TRAVEL_TIME_DEFAULT = 20000;
 export interface IGameOptions {
     /**
      * Whether players respawn when they die
@@ -45,10 +46,6 @@ export interface IGameOptions {
          * Traveling effect options
          */
         applyTravelingEffects: boolean;
-        /**
-         * Maximum amount of turns to tick when traveling
-         */
-        maxTravelTime: number;
     };
     creatures: {
         /**
@@ -81,6 +78,10 @@ export interface IGameOptions {
          * Maximum number of creatures that can spawn in a world
          */
         spawnLimit: number;
+        /**
+         * Multiplier for changing the creature spawn rate
+         */
+        spawnRateMultiplier: number;
         /**
          * Multiplier for how much max/min HP bonus is given on each tame
          */
@@ -120,23 +121,38 @@ export interface IGameOptions {
     };
     player: IGameOptionsPlayer;
     npcs: {
+        spawning: DefaultMap<NPCType, {
+            /**
+             * A multiplier for the spawning interval duration for this NPC type
+             */
+            intervalMultiplier: number;
+            /**
+             * A multiplier for the spawn chance for this NPC type
+             */
+            chanceMultiplier: number;
+            /**
+             * The number of NPCs of this type that each have a separate chance to spawn in this interval
+             */
+            count: number;
+            /**
+             * A multiplier for the merchant spawn cap (which is based on civilization score)
+             */
+            capMultiplier: number;
+        }>;
         merchants: {
             /**
              * A multiplier for the price of each merchant item.
              */
             priceMultiplier: number;
             /**
+             * A multiplier in price of an item for sale (and divisor in the credit they offer for an item)
+             * for each time an item has already been traded with a merchant.
+             */
+            alreadyTradedMultiplier: number;
+            /**
              * The number of items a merchant spawns with.
              */
             initialItems: RandomRange[];
-            /**
-             * Can spawn at all.
-             */
-            allowSpawning: boolean;
-            /**
-             * A multiplier for the merchant spawn cap (which is based on civilization score and this value).
-             */
-            spawnCapMultiplier: number;
         };
     };
     /**
@@ -153,6 +169,10 @@ export interface IGameOptions {
          * Multiplier for decay of items.
          */
         decayMultiplier: number;
+        /**
+         * Changes item quality properties.
+         */
+        qualities: DefaultMap<Quality, IGameOptionsItemQuality>;
     };
     randomEvents: boolean;
 }
@@ -190,23 +210,59 @@ export interface IGameOptionsPlayer {
          */
         customs: DefaultMap<SkillType, IGameOptionsSkill>;
     };
-    reputation: {
+    alignment: {
         /**
-         * The initial malignity
+         * A decimal number between 0 to 1 determining the starting evil alignment
          */
-        initialMalignity: number;
+        initialEvil: number;
         /**
-         * The initial benignity
+         * A decimal number between 0 to 1 determining the starting good alignment
          */
-        initialBenignity: number;
+        initialGood: number;
         /**
-         * The rate at which malignity is gained
+         * The rate at which evil alignment is gained
          */
-        malignityMultiplier: number;
+        evilMultiplier: number;
         /**
-         * The rate at which benignity is gained
+         * The rate at which good alignment is gained
          */
-        benignityMultiplier: number;
+        goodMultiplier: number;
+        /**
+         * The maximum evil alignment a player can have
+         */
+        evilCap: number;
+        /**
+         * The maximum good alignment a player can have
+         */
+        goodCap: number;
+        /**
+         * A multiplier for the chance of the player being given a rune.
+         */
+        runeChanceMultiplier: number;
+        /**
+         * Options for the sacrifice action.
+         */
+        sacrifice: {
+            /**
+             * Options for the "invoke" part of the sacrifice value calculation.
+             */
+            invoke: {
+                /**
+                 * The base value of invoke for each deity.
+                 */
+                base: Record<Deity, number>;
+                /**
+                 * A range for the invoke multiplier at 0% piety and at 100% piety.
+                 *
+                 * When piety exceeds 100%, values outside the range will be returned.
+                 */
+                pietyMultiplier: IRange;
+            };
+            /**
+             * A multiplier for how much of a sacrificed item's worth is translated into alignment for the given deity.
+             */
+            worthMultiplier: Record<Deity, number>;
+        };
     };
     inventory: {
         /**
@@ -253,9 +309,13 @@ export interface IGameOptionsPlayer {
          */
         attackMultiplier: DefaultMap<AttackType, number>;
         /**
-         * Add player damage multiplier based on attack type (used within Attack action).
+         * Add player trap damage multiplier.
          */
         trapMultiplier: number;
+        /**
+         * Add player base defense multiplier.
+         */
+        baseDefenseMultiplier: number;
     };
 }
 /**
@@ -362,4 +422,43 @@ export interface IGameOptionsCreature {
         type: ItemType;
         chance: number;
     }>;
+}
+export interface IGameOptionsItemQuality {
+    /**
+     * Modifies the spawning chance of the quality.
+     */
+    spawnChance: number;
+    magicalProperties: IGameOptionsItemMagic;
+}
+export interface IGameOptionsItemMagic {
+    /**
+     * The chance for magical properties to be generated on an item of this quality.
+     */
+    chance: number;
+    /**
+     * When spawning an item with magical properties, this is the minimum number it will spawn with.
+     */
+    min: number;
+    /**
+     * The maximum number of additional magical properties the item could spawn with.
+     */
+    bonus: number;
+    /**
+     * The chance of a bonus property. Is checked once for each additional property, stopping whenever it fails to add one.
+     *
+     * For example, given a chance of 0.5:
+     * - 50% chance of 1 bonus property
+     * - 25% chance of 2 bonus properties
+     * - 12.5% chance of 3 bonus properties
+     * - etc
+     */
+    bonusChance: number;
+    /**
+     * Whether bonus chances also take the "contextual multiplier" into account (based on skill, island distance, etc.)
+     */
+    bonusChanceUsesContextualMultiplier: boolean;
+    /**
+     * Whether to randomize the magical properties as a flat range chance instead of applying bonusChance for every additional property.
+     */
+    randomizeAsRange: boolean;
 }

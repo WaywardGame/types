@@ -8,12 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { EmitterOrBus, Event } from "event/EventManager";
-import { ActionDisplayLevel } from "game/entity/action/IAction";
-import type { ActionId, IUsableActionPossibleUsing, IUsableActionRequirements } from "game/entity/action/usable/IUsableAction";
-import type UsableAction from "game/entity/action/usable/UsableAction";
-import ContextMenu from "ui/component/ContextMenu";
+import type { GameEmitterOrBus, GameEvent } from "@wayward/game/event/EventManager";
+import { ActionDisplayLevel } from "@wayward/game/game/entity/action/IAction";
+import type { ActionId, IUsableActionPossibleUsing, IUsableActionRequirements } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
+import ContextMenu from "@wayward/game/ui/component/ContextMenu";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export default class UsableActionRegistrar {
     private readonly id;
     readonly actions: Array<[string, UsableAction]>;
@@ -26,15 +27,15 @@ export default class UsableActionRegistrar {
     setContextMenuInitializer(initializer?: (menu: ContextMenu) => any): this;
     add(registrar: UsableActionRegistrar): this;
     add<REQUIREMENTS extends IUsableActionRequirements>(id: string | number, action: UsableAction<REQUIREMENTS>): this;
-    showContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any): ContextMenu<string | number | symbol>;
-    createContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any): ContextMenu;
+    showContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any, position?: IVector2): ContextMenu | undefined;
+    createContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any): ContextMenu | undefined;
 }
 export interface IUsableActionGeneratorEvents {
     stopPersisting(): any;
 }
 export interface IUsableActionGeneratorPersistenceFactory<HOST> {
-    when<E extends EmitterOrBus, K extends Event<E>>(emitter: E, event: K): {
-        until<E extends EmitterOrBus, K extends Event<E>>(emitter: E, event: K): HOST;
+    when<E extends GameEmitterOrBus, K extends GameEvent<E>>(emitter: E, event: K): {
+        until<E extends GameEmitterOrBus, K extends GameEvent<E>>(emitter: E, event: K): HOST;
     };
 }
 export type UsableActionGeneratorRegistrationHandler<ARGS extends any[]> = (registrar: UsableActionRegistrar, ...args: ARGS) => any;
@@ -45,7 +46,7 @@ export interface IUsableActionGeneratorFactory {
 export declare class UsableActionGenerator<ARGS extends any[] = []> extends EventEmitter.Host<IUsableActionGeneratorEvents> {
     static persisting(initializer: (persist: IUsableActionGeneratorPersistenceFactory<IUsableActionGeneratorFactory>) => IUsableActionGeneratorFactory): IUsableActionGeneratorFactory;
     static persisting(initializer: (persist: IUsableActionGeneratorPersistenceFactory<IUsableActionGeneratorFactory>) => UsableActionGenerator): UsableActionGenerator;
-    static singleton<REQUIREMENTS extends IUsableActionRequirements>(id: string | number, action: UsableAction<REQUIREMENTS>): UsableActionGenerator<[]>;
+    static singleton<REQUIREMENTS extends IUsableActionRequirements>(id: string | number, action: UsableAction<REQUIREMENTS>): UsableActionGenerator;
     private readonly id?;
     private readonly registrationHandlers;
     private get log();

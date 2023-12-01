@@ -8,24 +8,30 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { SfxType } from "audio/IAudio";
-import type { IEventEmitter } from "event/EventEmitter";
-import type { CreatureAttackOutcome, CreatureType, ICreatureAttackOutcomeAttack, ICreatureCheckMoveOptions, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "game/entity/creature/ICreature";
-import EntityWithStats from "game/entity/EntityWithStats";
-import type Human from "game/entity/Human";
-import type { IEntityConstructorOptions, IStatChangeInfo } from "game/entity/IEntity";
-import { AiType, Defense, EntityType, MoveType } from "game/entity/IEntity";
-import type { IStat } from "game/entity/IStats";
-import type { IMovementTime } from "game/IGame";
-import { TileUpdateType } from "game/IGame";
-import type { IObject } from "game/IObject";
-import type Item from "game/item/Item";
-import type Tile from "game/tile/Tile";
-import Translation, { Article } from "language/Translation";
-import type { IUnserializedCallback } from "save/serializer/ISerializer";
-import { Direction } from "utilities/math/Direction";
-import type { IVector3 } from "utilities/math/IVector";
-import Vector2 from "utilities/math/Vector2";
+import { SfxType } from "@wayward/game/audio/IAudio";
+import type { IMovementTime } from "@wayward/game/game/IGame";
+import { TileUpdateType } from "@wayward/game/game/IGame";
+import type { IObject } from "@wayward/game/game/IObject";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
+import type Human from "@wayward/game/game/entity/Human";
+import type { IEntityConstructorOptions, IStatChangeInfo } from "@wayward/game/game/entity/IEntity";
+import { AiType, Defense, EntityType, MoveType } from "@wayward/game/game/entity/IEntity";
+import type { IStat } from "@wayward/game/game/entity/IStats";
+import type { CreatureAttackOutcome, CreatureType, ICreatureAttackOutcomeAttack, ICreatureCheckMoveOptions, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "@wayward/game/game/entity/creature/ICreature";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type Item from "@wayward/game/game/item/Item";
+import type { Reference } from "@wayward/game/game/reference/IReferenceManager";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import Translation, { Article } from "@wayward/game/language/Translation";
+import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
+import { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export default class Creature extends EntityWithStats<ICreatureDescription, CreatureType> implements IUnserializedCallback, IObject<CreatureType> {
     static is(value: any): value is Creature;
     get entityType(): EntityType.Creature;
@@ -39,8 +45,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     ai: AiType;
     aberrant?: true;
     enemy?: {
-        type: EntityType;
-        id: number;
+        reference: Reference;
         attacks: number;
         attempts: number;
         breakAway?: boolean;
@@ -48,14 +53,10 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     hitchedTo?: number;
     originalMoveType?: MoveType;
     owner?: {
-        type: EntityType.Player;
-        identifier: string;
-    } | {
-        type: EntityType.NPC;
-        id: number;
+        reference: Reference;
+        tameTime: number;
     };
     respawned?: number;
-    tameTime?: number;
     spawnAnimationTime: IMovementTime | undefined;
     constructor(entityOptions?: IEntityConstructorOptions<CreatureType>, aberrant?: boolean);
     /**
@@ -74,10 +75,10 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     getName(article?: Article, count?: number): Translation;
     protected getDescription(): ICreatureDescription | undefined;
     hasAi(aiType: AiType): boolean;
-    isHidden(): boolean;
-    isRetaliator(): boolean;
-    isTamed(): boolean;
-    isValid(): boolean;
+    get isHidden(): boolean;
+    get isRetaliator(): boolean;
+    get isTamed(): boolean;
+    get isValid(): boolean;
     getCommandedAiType(): AiType | undefined;
     getDefense(human?: Human): Defense;
     /**
@@ -134,9 +135,13 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     processAttack(description: ICreatureDescription, humans: Human[], moveType: MoveType | undefined, enemyIn: Human | Creature | undefined): boolean;
     getProducedTemperature(): number | undefined;
     protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
-    protected updateTile(fromTile: Tile, toTile: Tile): boolean;
+    protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
-    findPath(target: Tile, moveType: MoveType, maxNodesChecked?: number, ignoreHuman?: Human): Tile[] | undefined;
+    /**
+     * Finds a path from the creatures tile to the target tile
+     * @param source Provided when the check is running in a sync environment (NOT CLIENTSIDE)
+     */
+    findPath(source: string | undefined, target: Tile, moveType: MoveType, maxNodesChecked?: number, ignoreHuman?: Human): Tile[] | undefined;
     getHitchingPostsAround(): IHitch;
     /**
      * Check creature move with a multiplayer sync check
@@ -154,13 +159,18 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     checkCreatureMove(isClientside: boolean, tile: Tile, moveType: MoveType, willMove: boolean, options?: Partial<ICreatureCheckMoveOptions>): number;
     /**
      * Returns the times a creature has been tamed.
-     * @returns number if the creature has been tamed and undefined if it has never been tamed.
+     * @returns number if the creature has been tamed (0 if it has never been tamed).
      */
-    timesTamed(): number | undefined;
+    get timesTamed(): number;
     private findHumansWithinRadius;
     private shouldSpecialAttack;
     private specialAttack;
     private processMovement;
+    /**
+     * Actually tries to move to the tile
+     * @returns True or false if a move was attempted, undefined if a move was canceled
+     */
+    private runMovement;
     /**
      * Some creatures can break doodads, leading to lost rest or sleep when near them
      * @param doodad The doodad to damage
@@ -183,6 +193,15 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     get asPlayer(): undefined;
     get asTileEvent(): undefined;
     get asItem(): undefined;
+    isCorpse(): this is Corpse;
+    isCreature(): this is Creature;
+    isDoodad(): this is Doodad;
+    isHuman(): this is Human;
+    get isLocalPlayer(): boolean;
+    isNPC(): this is NPC;
+    isPlayer(): this is Player;
+    isTileEvent(): this is TileEvent;
+    isItem(): this is Item;
     get point(): IVector3;
     get tile(): Tile;
 }

@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Dictionary from "language/Dictionary";
-import type { Random } from "utilities/random/Random";
-import type { ISegment, ISegmentApi, IStringSection } from "utilities/string/Interpolator";
-declare module TranslationSegment {
+import type Dictionary from "@wayward/game/language/Dictionary";
+import type { Random } from "@wayward/utilities/random/Random";
+import type { ISegment, ISegmentApi, IStringSection } from "@wayward/game/utilities/string/Interpolator";
+declare namespace TranslationSegment {
     const include: ISegment;
     const thisEntry: ISegment & {
         translationChain: Array<[Dictionary, number | string, number, Random]>;

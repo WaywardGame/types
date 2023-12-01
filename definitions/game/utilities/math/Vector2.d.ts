@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ISerializable, ISerializer } from "save/serializer/ISerializer";
-import { Types } from "save/serializer/ISerializer";
-import { Direction } from "utilities/math/Direction";
-import type { IVector2, IVector3 } from "utilities/math/IVector";
-import Vector3 from "utilities/math/Vector3";
+import type { ISerializable, ISerializer } from "@wayward/game/save/serializer/ISerializer";
+import { Types } from "@wayward/game/save/serializer/ISerializer";
+import { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import Vector3 from "@wayward/game/utilities/math/Vector3";
 type ConsumerVectorRange = (vec: IVector2, value: number) => any;
 export default class Vector2 implements IVector2, ISerializable {
     static get ZERO(): Vector2;
@@ -45,7 +45,7 @@ export default class Vector2 implements IVector2, ISerializable {
         clientX?: number;
         clientY?: number;
     }): Vector2 | undefined;
-    static inRange(center: IVector2, range: number, includeCenter?: boolean): import("@wayward/goodstream").default<IVector2>;
+    static inRange(center: IVector2, range: number, includeCenter?: boolean): IterableIterator<IVector2>;
     static angle(directionInRadians: number, distance?: number): Vector2;
     static forRange(center: IVector2, range: number, consumer: ConsumerVectorRange): void;
     static forRange(center: IVector2, range: number, includeCenter: boolean, consumer: ConsumerVectorRange): void;
@@ -71,7 +71,7 @@ export default class Vector2 implements IVector2, ISerializable {
     static product<D extends IVector2>(vector: IVector2, vector2: IVector2, dest: D): D;
     static quotient(vector: IVector2, vector2: IVector2): Vector2;
     static quotient<D extends IVector2>(vector: IVector2, vector2: IVector2, dest: D): D;
-    static range(a: IVector2, b: IVector2): Generator<number[], void, unknown>;
+    static range(a: IVector2, b: IVector2): Generator<number[], void>;
     static is(thing: unknown): thing is IVector2;
     private readonly values;
     get x(): number;
@@ -118,6 +118,7 @@ export default class Vector2 implements IVector2, ISerializable {
     raw(): IVector2;
     clamp(a: IVector2, b: IVector2): this;
     offset(direction: Direction): this;
+    midpoint(vec: IVector2): IVector2;
     toString(): string;
     serializeObject(serializer: ISerializer): undefined;
     deserializeObject(serializer: ISerializer, dataType: Types): boolean;

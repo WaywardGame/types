@@ -8,30 +8,31 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type { ActionDisplayLevel, ActionType, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
-import type UsableAction from "game/entity/action/usable/UsableAction";
-import type UsableActionRegistrar from "game/entity/action/usable/UsableActionRegistrar";
-import type { UsableActionTranslator } from "game/entity/action/usable/UsableActionTranslator";
-import type { UsableActionType, UsableActionTypePlaceholder } from "game/entity/action/usable/UsableActionType";
-import type Creature from "game/entity/creature/Creature";
-import type NPC from "game/entity/npc/NPC";
-import type Player from "game/entity/player/Player";
-import type { InspectType } from "game/inspection/IInspection";
-import type { IIcon } from "game/inspection/InfoProvider";
-import type Inspection from "game/inspection/Inspection";
-import type { Quality } from "game/IObject";
-import type { ItemType } from "game/item/IItem";
-import type Item from "game/item/Item";
-import type ItemFinder from "game/item/ItemFinder";
-import type { IItemFinderOptions } from "game/item/ItemFinder";
-import type Message from "language/dictionary/Message";
-import Translation from "language/Translation";
-import type Bindable from "ui/input/Bindable";
-import type { ItemDetailIconLocation } from "ui/screen/screens/game/component/ItemComponent";
-import type Tooltip from "ui/tooltip/Tooltip";
-import type { HighlightSelector } from "ui/util/IHighlight";
-import type HashSet from "utilities/collection/set/HashSet";
+import type { Deity } from "@wayward/game/game/deity/Deity";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { ActionDisplayLevel, ActionType, IActionNotUsable, IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
+import type UsableActionRegistrar from "@wayward/game/game/entity/action/usable/UsableActionRegistrar";
+import type { UsableActionTranslator } from "@wayward/game/game/entity/action/usable/UsableActionTranslator";
+import type { UsableActionType, UsableActionTypePlaceholder } from "@wayward/game/game/entity/action/usable/UsableActionType";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { InspectType } from "@wayward/game/game/inspection/IInspection";
+import type { IIcon } from "@wayward/game/game/inspection/InfoProvider";
+import type Inspection from "@wayward/game/game/inspection/Inspection";
+import type { Quality } from "@wayward/game/game/IObject";
+import type { IItemDescription, ItemType } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type ItemFinder from "@wayward/game/game/item/ItemFinder";
+import type { IItemFinderOptions } from "@wayward/game/game/item/ItemFinder";
+import type Message from "@wayward/game/language/dictionary/Message";
+import Translation from "@wayward/game/language/Translation";
+import type Bindable from "@wayward/game/ui/input/Bindable";
+import type { ItemDetailIconLocation } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
+import type { HighlightSelector } from "@wayward/game/ui/util/IHighlight";
+import type HashSet from "@wayward/utilities/collection/set/HashSet";
 export interface IUsableActionRequirement<TYPE> {
     allowNone?: true;
     validate?(player: Player, value: TYPE): boolean;
@@ -39,8 +40,8 @@ export interface IUsableActionRequirement<TYPE> {
     getMissingName?(): Translation;
 }
 export interface IUsableActionItemRequirement extends Omit<IUsableActionRequirement<Item>, "find"> {
-    allowOnlyItemType?(player: Player, type: ItemType): boolean;
-    finder?(player: Player, defaultOptions?: IItemFinderOptions, provided?: Omit<IUsableActionPossibleUsing, "item">): ItemFinder | undefined;
+    validateType?(player: Player, value: ItemType, description?: IItemDescription): boolean;
+    finder?: false | ((player: Player, defaultOptions?: IItemFinderOptions, provided?: Omit<IUsableActionPossibleUsing, "item">) => ItemFinder | undefined);
     requiresQuality?: true;
     requiresType?: true;
 }
@@ -52,16 +53,30 @@ export declare namespace IUsableActionRequirement {
     type Always = true;
 }
 export interface IUsableActionRequirements {
+    /**
+     * For reference: I hate this.
+     *
+     * - `undefined` for no item, no type, no item finder
+     * - `true` to require an item to be specified, *not found*
+     * - `IUsableActionItemRequirement` for anything else
+     *   - To require that the slot gets an item from a default item finder, include `validate: () => true,` (it's horrible)
+     *   - To implement a custom item finder, pass it in the `finder` property
+     *   - To specify that the slot can have no item stuff specified too, include `allowNone: true,`
+     *     - To specify that the slot requires an item type at minimum, however, include `requiresType: true,`
+     *   - To force the actions system to pass in an `itemQuality` in the action `using` even when an item is provided, include `requiresQuality: true,`
+     */
     item?: true | IUsableActionItemRequirement;
     doodad?: true | IUsableActionRequirement<Doodad>;
+    vehicle?: true | IUsableActionRequirement<Doodad>;
     creature?: true | IUsableActionRequirement<Creature>;
     npc?: true | IUsableActionRequirement<NPC>;
 }
 export interface IUsableActionPossibleUsing {
     item?: Item;
     itemType?: ItemType;
-    itemQuality?: Quality;
+    itemQuality?: ArrayOr<Quality>;
     doodad?: Doodad;
+    vehicle?: Doodad;
     creature?: Creature;
     npc?: NPC;
     misc?: any;
@@ -72,6 +87,8 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
     } ? Item | undefined : never) | (REQUIREMENTS["item"] extends {
         validate(player: Player, value: Item): boolean;
     } ? Item : never) | (REQUIREMENTS["item"] extends {
+        validateType(player: Player, value: ItemType, description?: IItemDescription): boolean;
+    } ? Item : never) | (REQUIREMENTS["item"] extends {
         finder: ItemFinder;
     } ? Item : never) | (REQUIREMENTS["item"] extends {
         allowOnlyItemType(player: Player, type: ItemType): boolean;
@@ -79,26 +96,39 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
     itemType: ((REQUIREMENTS["item"] extends true ? ItemType : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
         allowOnlyItemType(player: Player, type: ItemType): boolean;
     } ? ItemType : never) | (REQUIREMENTS["item"] extends {
+        requiresType: true;
+    } ? ItemType : ((REQUIREMENTS["item"] extends {
         validate(player: Player, value: Item): boolean;
     } ? ItemType | undefined : never) | (REQUIREMENTS["item"] extends {
+        validateType(player: Player, value: ItemType, description?: IItemDescription): boolean;
+    } ? ItemType | undefined : never))) | (REQUIREMENTS["item"] extends {
         finder: ItemFinder;
     } ? ItemType : never) | (REQUIREMENTS["item"] extends {
         allowNone: true;
     } ? undefined : never));
-    itemQuality: ((REQUIREMENTS["item"] extends true ? Quality : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
+    itemQuality: ((REQUIREMENTS["item"] extends true ? ArrayOr<Quality> : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
         allowNone: true;
     } ? undefined : never) | (REQUIREMENTS["item"] extends {
         validate(player: Player, value: Item): boolean;
-    } ? Quality | undefined : never) | (REQUIREMENTS["item"] extends {
+    } ? ArrayOr<Quality> | undefined : never) | (REQUIREMENTS["item"] extends {
+        validateType(player: Player, value: ItemType, description?: IItemDescription): boolean;
+    } ? ArrayOr<Quality> | undefined : never) | (REQUIREMENTS["item"] extends {
         finder: ItemFinder;
-    } ? Quality : never) | (REQUIREMENTS["item"] extends {
+    } ? ArrayOr<Quality> : never) | (REQUIREMENTS["item"] extends {
         allowOnlyItemType(player: Player, type: ItemType): boolean;
-    } ? Quality : never));
+    } ? ArrayOr<Quality> : never));
     doodad: ((REQUIREMENTS["doodad"] extends true ? Doodad : never) | (undefined extends REQUIREMENTS["doodad"] ? undefined : never) | (REQUIREMENTS["doodad"] extends {
         allowNone: true;
     } ? undefined : never) | (REQUIREMENTS["doodad"] extends {
         validate(player: Player, value: Doodad): boolean;
     } ? Doodad : never) | (REQUIREMENTS["doodad"] extends {
+        find(player: Player): Doodad;
+    } ? Doodad : never));
+    vehicle: ((REQUIREMENTS["vehicle"] extends true ? Doodad : never) | (undefined extends REQUIREMENTS["vehicle"] ? undefined : never) | (REQUIREMENTS["vehicle"] extends {
+        allowNone: true;
+    } ? undefined : never) | (REQUIREMENTS["vehicle"] extends {
+        validate(player: Player, value: Doodad): boolean;
+    } ? Doodad : never) | (REQUIREMENTS["vehicle"] extends {
         find(player: Player): Doodad;
     } ? Doodad : never));
     creature: ((REQUIREMENTS["creature"] extends true ? Creature : never) | (undefined extends REQUIREMENTS["creature"] ? undefined : never) | (REQUIREMENTS["creature"] extends {
@@ -147,8 +177,10 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
     id?: string | number;
     /**
      * Whether this action can be slotted in the action bar. Defaults to `true`.
+     *
+     * If set to an `ActionId`, the `ActionId` will be attempted to be slotted instead.
      */
-    slottable?: boolean;
+    slottable?: boolean | ActionId;
     /**
      * Whether this action is "applicable" given this player and these "provided" objects.
      * @param player The player executing this action. This isn't always the local player!
@@ -176,7 +208,7 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
      * @param selectors The default selectors. The defaults can be removed, and/or additional selectors can be added.
      * @param using What this action is using. Item, doodad, etc.
      */
-    highlight?(selectors: HighlightSelector[], using: IUsableActionPossibleUsing): any;
+    highlight?(selectors: Array<HighlightSelector | undefined>, using: IUsableActionPossibleUsing): any;
     /**
      * The bindable assigned to this action, for use in action context menus (ie, right clicking on the world or an item.)
      * Allows for a dynamically generated bindable based on what this action is using — item, doodad, etc.
@@ -239,26 +271,27 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
     clientSide?: true;
     /**
      * Marks this usable action as, when slotted in the action bar on an item, the item should be ignored and instead the type should be used.
-     * Compatible with onlySlotItemQuality
+     * Compatible with noSlotQuality
      */
-    onlySlotItemType?: true;
+    noSlotItem?: true;
     /**
-     * Marks this usable action as, when slotted in the action bar on an item, the item should be ignored and instead the quality should be used.
-     * Compatible with onlySlotItemType
+     * Marks this usable action as, when slotted in the action bar on an item, the item & quality should be ignored.
+     * Compatible with noSlotItem
      */
-    onlySlotItemQuality?: true;
+    noSlotQuality?: true;
     tooltip?(tooltip: Tooltip): any;
     forceDisplayWhenEmpty?: true;
+    alignment?: SupplierOr<Deity | 0 | undefined, [IUsableActionPossibleUsing]>;
 }
 export interface IUsableActionDefinitionSubmenu<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {
     submenu(registrar: UsableActionRegistrar, using: IUsableActionUsing<REQUIREMENTS>): UsableActionRegistrar | void;
     execute?: undefined;
     isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): ReturnableUsableActionUsability;
-    slottable?: undefined;
+    slottable?: ActionId;
     forceDisplayWhenEmpty?: true;
 }
 export interface IUsableActionDefinitionExecutable<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {
-    slottable?: boolean;
+    slottable?: boolean | ActionId;
     discoveredByDefault?: true | (() => boolean);
     submenu?: undefined;
     forceDisplayWhenEmpty?: undefined;

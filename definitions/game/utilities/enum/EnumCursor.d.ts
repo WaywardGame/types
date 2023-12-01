@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IEnumCursorEvents<E> {
     /**
      * Triggered when the cursor position is changed, for any reason

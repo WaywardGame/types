@@ -12,7 +12,7 @@ import type { Load } from "@wayward/game/game/meta/Loading";
 import type { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
 import type { ScreenId } from "@wayward/game/ui/screen/IScreen";
 import type { MenuId } from "@wayward/game/ui/screen/screens/menu/component/IMenu";
-import type { Random } from "@wayward/game/utilities/random/Random";
+import type { Random } from "@wayward/utilities/random/Random";
 import ApplicationInteractions from "@wayward/test/core/applicationInteractions";
 import type { Apps } from "@wayward/test/core/applicationManager";
 import type { IAppPaths } from "@wayward/test/interfaces";

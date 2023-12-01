@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IInspector } from "game/inspection/IInfoProvider";
-import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
+import type { IInspector } from "@wayward/game/game/inspection/IInfoProvider";
+import { InfoDisplayLevel } from "@wayward/game/game/inspection/IInfoProvider";
 export interface InfoProviderContextRegistration {
 }
 export declare enum InfoProviderContextType {
@@ -19,7 +19,7 @@ export declare enum InfoProviderContextType {
 export declare class InfoProviderContext {
     static readonly GENERIC: new (inspector?: IInspector | undefined, maxDisplayLevel?: InfoDisplayLevel | undefined) => InfoProviderContext;
     static readonly TOOLTIP: new (inspector?: IInspector | undefined, maxDisplayLevel?: InfoDisplayLevel | undefined) => InfoProviderContext;
-    protected readonly _inspector: WeakRef<IInspector>;
+    protected readonly _inspector?: WeakRef<IInspector>;
     readonly type: InfoProviderContextType | keyof InfoProviderContextRegistration;
     readonly maxDisplayLevel: InfoDisplayLevel;
     constructor(context: InfoProviderContext);

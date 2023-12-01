@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IPlayerOptions } from "game/IGame";
-import { ConnectionState } from "multiplayer/networking/IConnection";
-import ServerPacket from "multiplayer/packets/ServerPacket";
+import type { IPlayerOptions } from "@wayward/game/game/IGame";
+import { ConnectionState } from "@wayward/game/multiplayer/networking/IConnection";
+import ServerPacket from "@wayward/game/multiplayer/packets/ServerPacket";
 export default class ConnectPacket extends ServerPacket {
     playerOptions: IPlayerOptions;
     getDebugInfo(): string;

@@ -8,30 +8,31 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events } from "event/EventEmitter";
-import type Doodad from "game/doodad/Doodad";
-import type { ActionType } from "game/entity/action/IAction";
-import type { CreatureType, IDamageInfo } from "game/entity/creature/ICreature";
-import type EntityWithStats from "game/entity/EntityWithStats";
-import type Human from "game/entity/Human";
-import type { AttackType, DamageType } from "game/entity/IEntity";
-import type { IMovementIntent, WeightStatus } from "game/entity/player/IPlayer";
-import type { ISkillEvents } from "game/entity/skill/SkillManager";
-import type { IHasImagePath, Quality } from "game/IObject";
-import type { IslandId } from "game/island/IIsland";
-import type Island from "game/island/Island";
-import type { IContainer } from "game/item/IItem";
-import { ItemType, ItemTypeGroup, RecipeLevel } from "game/item/IItem";
-import type Item from "game/item/Item";
-import { TempType } from "game/temperature/ITemperature";
-import type Tile from "game/tile/Tile";
-import Message from "language/dictionary/Message";
-import type { IModdable } from "mod/ModRegistry";
-import type { IOptions } from "save/data/ISaveDataGlobal";
-import type { IRGB } from "utilities/Color";
-import type { Direction } from "utilities/math/Direction";
-import type { IVector2 } from "utilities/math/IVector";
-import type { IRange } from "utilities/math/Range";
+import type { IHasImagePath } from "@wayward/game/game/IObject";
+import type { Deity } from "@wayward/game/game/deity/Deity";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
+import type Human from "@wayward/game/game/entity/Human";
+import type { AttackType, DamageType } from "@wayward/game/game/entity/IEntity";
+import type { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type { CreatureType, IDamageInfo } from "@wayward/game/game/entity/creature/ICreature";
+import type { IMovementIntent, WeightStatus } from "@wayward/game/game/entity/player/IPlayer";
+import type { ISkillEvents } from "@wayward/game/game/entity/skill/SkillManager";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
+import type { IContainer } from "@wayward/game/game/item/IItem";
+import { ItemType, ItemTypeGroup, RecipeLevel } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import { TempType } from "@wayward/game/game/temperature/ITemperature";
+import type Tile from "@wayward/game/game/tile/Tile";
+import Message from "@wayward/game/language/dictionary/Message";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type { IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
+import type { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
+import type { IRGB } from "@wayward/utilities/Color";
+import type { Events } from "@wayward/utilities/event/EventEmitter";
+import type { IRange } from "@wayward/utilities/math/Range";
 export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
     /**
      * Called when the human is spawned. (At the end of `Player.setup` / `NPC.spawn`)
@@ -51,8 +52,9 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      * Called when an item is added to the player's inventory
      * @param item The items
      * @param container The container object the items were added to. This container might be inventory or a container within the inventory.
+     * @param index The index the items were inserted at
      */
-    inventoryItemAdd(items: Item[], container: IContainer): any;
+    inventoryItemAdd(items: Item[], container: IContainer, index: number): any;
     /**
      * Called when an item is removed from the players inventory
      * @param item The items
@@ -96,10 +98,6 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      * @returns True if the human can consume the item (default logic isn't called, should use your own code for consumption), false if the human cannot consume the item, or undefined to use the default logic
      */
     canConsumeItem(itemType: ItemType, actionType: ActionType): boolean | undefined;
-    /**
-     * @deprecated Use filterDroppable
-     */
-    canDropItem(item: Item, tile: Tile, dropAll: boolean, dropAllQuality: Quality | undefined): boolean | undefined;
     /**
      * Called in `Drop.canUse()`
      * @param items The items that will be dropped
@@ -220,6 +218,12 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      */
     turnEnd(): any;
     /**
+     * Called when we get the skill gain multiplier
+     * @param skillType The skill to check for
+     * @returns The multiplier for skill gain as a number or undefined to use the default logic
+     */
+    getSkillGainMultiplier(skillType: SkillType): number | undefined;
+    /**
      * Called when checking if a human is swimming
      * @param isSwimming True if the human is swimming
      * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
@@ -266,14 +270,12 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      * Called when the human is killed.
      */
     die(): any;
-    /**
-     * Called when the human position is set, from a teleport type of movement
-     * @param tile Tile the human is now on
-     */
-    setPosition(tile: Tile): void;
     discoverVulnOrResist(creatureType: CreatureType, damageType: DamageType): any;
     hasDiscoveredVulnOrResist(creatureType: CreatureType, damageType: DamageType, defaultState: boolean): boolean | undefined;
     getDiscoveredVulnsAndResists(): Map<CreatureType, Set<DamageType>>;
+    alignmentChange(type: Deity): any;
+    nightlyAlignmentChange(): any;
+    curseChange(daysWithoutInvocation: number): any;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;
@@ -299,7 +301,8 @@ export declare enum Delay {
     TurnDirection = 2,
     ReallyLongPause = 100,
     AttackAnimation = 30,
-    Jump = 18
+    Jump = 18,
+    VehicleConnection = 5.1
 }
 export declare enum EquipType {
     None = 0,
@@ -313,7 +316,8 @@ export declare enum EquipType {
     Hands = 8,
     Back = 9,
     MainHand = 10,
-    OffHand = 11
+    OffHand = 11,
+    DualWield = 12
 }
 export declare const EQUIP_SLOTS: EquipType[];
 export declare const EQUIP_SLOTS_FREE: EquipType[];
@@ -337,25 +341,25 @@ export type CalculatedEquipSlotInsulation = [
 export declare function calculateEquipSlotInsulation(type: TempType, slot: EquipType, equipped?: Item): CalculatedEquipSlotInsulation;
 export declare const insulationRangeWhenSwimming: Record<TempType, IRange>;
 export declare enum HairColor {
-    "#e7c978" = 0,
-    "#b9793d" = 1,
-    "#b84627" = 2,
-    "#7f3721" = 3,
-    "#7e4b1c" = 4,
-    "#422116" = 5,
-    "#28222a" = 6,
-    "#bfb0a8" = 7,
+    "#e7c978" = 0,// blonde
+    "#b9793d" = 1,// golden
+    "#b84627" = 2,// red
+    "#7f3721" = 3,// copper
+    "#7e4b1c" = 4,// brown
+    "#422116" = 5,// dark brown
+    "#28222a" = 6,// black
+    "#bfb0a8" = 7,// grey
     "#ffffff" = 8
 }
 export declare enum SkinColor {
-    "#fddcd4" = 0,
-    "#d6be93" = 1,
-    "#f0ceab" = 2,
-    "#c7a077" = 3,
-    "#d89a72" = 4,
-    "#89623a" = 5,
-    "#88563b" = 6,
-    "#613429" = 7,
+    "#fddcd4" = 0,// rose
+    "#d6be93" = 1,// olive
+    "#f0ceab" = 2,// chai
+    "#c7a077" = 3,// mocha
+    "#d89a72" = 4,// almond
+    "#89623a" = 5,// chocolate
+    "#88563b" = 6,// raisin
+    "#613429" = 7,// cocoa
     "#361e1c" = 8
 }
 export declare enum HairStyle {
@@ -424,11 +428,12 @@ export declare enum SkillType {
     Trapping = 25,
     Woodworking = 26,
     Taming = 27,
-    Gardening = 28,
+    Horticulture = 28,
     Bartering = 29,
     Seafaring = 30,
     Thaumaturgy = 31,
-    DualWielding = 32
+    DualWielding = 32,
+    Piety = 33
 }
 export interface ICrafted {
     unlockTime: number;
@@ -467,25 +472,24 @@ export interface IVoyageInfo {
     usedItems?: Item[];
     wantedItems?: ItemType[];
 }
-export declare enum MovingClientSide {
+export declare enum MovingState {
     /**
      * NoInput = Idle
      */
-    NoInput = 0,
     /**
      * Is actively moving
      */
-    Moving = 1,
+    Moving = 0,
     /**
      * Just completed their movement.
      * They might be about to move again.
      */
-    Moved = 2,
+    Moved = 1,
     /**
      * The game registered the end of the movement.
      * It's about to check if it will move again or finish (state change into Moving or NoInput)
      */
-    PreNoInput = 3
+    PreNoInput = 2
 }
 /**
  * The swimming skill required to travel to another island

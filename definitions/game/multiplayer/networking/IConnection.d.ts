@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
-import type { IPacket } from "multiplayer/packets/IPacket";
+import type { MatchmakingMessageData } from "@wayward/game/multiplayer/matchmaking/IMatchmaking";
+import type { IPacket } from "@wayward/game/multiplayer/packets/IPacket";
 export declare enum ConnectionState {
     Connecting = 1,
     Connected = 2,
@@ -33,8 +33,9 @@ export interface IConnection {
     bufferPacketId?: number;
     lastPacketNumberSent?: number;
     lastPacketNumberReceived?: number;
+    readonly isConnected: boolean;
+    readonly isLocalPlayer: boolean;
     getState(): ConnectionState;
-    isConnected(): boolean;
     close(closeImmediately: boolean): void;
     addConnectionTimeout(): void;
     addKeepAliveTimeout(): void;

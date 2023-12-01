@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type InterruptChoice from "language/dictionary/InterruptChoice";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import type Input from "ui/component/Input";
-import type { MenuId } from "ui/screen/screens/menu/component/IMenu";
-import type { MenuById } from "ui/screen/screens/menu/MenuMap";
+import type InterruptChoice from "@wayward/game/language/dictionary/InterruptChoice";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import type Input from "@wayward/game/ui/component/Input";
+import type { MenuId } from "@wayward/game/ui/screen/screens/menu/component/IMenu";
+import type { MenuById } from "@wayward/game/ui/screen/screens/menu/MenuMap";
 export declare enum Prompt {
     GameDialogMessagesEditFiltersSaveOverExisting = 0,
     GameDialogMessagesEditFiltersResetConfirm = 1,

@@ -8,16 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IServerMod } from "@hosts/shared/interfaces";
-import EventEmitter from "event/EventEmitter";
-import Player from "game/entity/player/Player";
-import type Island from "game/island/Island";
-import type { IJoinServerOptions, IMultiplayerEvents, IMultiplayerOptions, IMultiplayerRunSafelyOptions, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
-import { DisconnectReason, JoinServerRetryReason, MultiplayerSyncCheck, MultiplayerSyncCheckLevel, UnableToJoinReason } from "multiplayer/IMultiplayer";
-import type { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
-import type { IConnection } from "multiplayer/networking/IConnection";
-import type { IPacket } from "multiplayer/packets/IPacket";
-import DesyncPacket from "multiplayer/packets/server/DesyncPacket";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import Player from "@wayward/game/game/entity/player/Player";
+import type Island from "@wayward/game/game/island/Island";
+import type { IJoinServerOptions, IMultiplayerEvents, IMultiplayerOptions, IMultiplayerRunSafelyOptions, PacketTarget, ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
+import { DisconnectReason, JoinServerRetryReason, MultiplayerSyncCheck, MultiplayerSyncCheckLevel, UnableToJoinReason } from "@wayward/game/multiplayer/IMultiplayer";
+import type { IMatchmakingInfo } from "@wayward/game/multiplayer/matchmaking/IMatchmaking";
+import type { IConnection } from "@wayward/game/multiplayer/networking/IConnection";
+import type { IPacket } from "@wayward/game/multiplayer/packets/IPacket";
+import DesyncPacket from "@wayward/game/multiplayer/packets/server/DesyncPacket";
+import type { IServerMod } from "@wayward/hosts/shared/interfaces";
 export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     /**
      * Static steam account id when steam support is on
@@ -66,15 +66,15 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private _ipAddress;
     private readonly _matchmakingSecret;
     constructor();
-    isConnected(): boolean;
-    isPacketProcessingPaused(): boolean;
-    isProcessingPacket(): boolean;
-    isServer(): boolean;
-    isClient(): boolean;
+    get isConnected(): boolean;
+    get isPacketProcessingPaused(): boolean;
+    get isProcessingPacket(): boolean;
+    get isServer(): boolean;
+    get isClient(): boolean;
     get areSyncChecksSuppressed(): boolean;
     getPlayerIdentifier(): string;
     setPlayerIdentifier(identifier: string): void;
-    getOptions(): IMultiplayerOptions;
+    get options(): ImmutableObject<IMultiplayerOptions>;
     setOptions(options: IMultiplayerOptions, updateGame?: boolean): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
     /**

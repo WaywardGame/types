@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IMatchmakingInfo, MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
-import { Connection } from "multiplayer/networking/Connection";
-import { ConnectionState } from "multiplayer/networking/IConnection";
+import type { IMatchmakingInfo, MatchmakingMessageData } from "@wayward/game/multiplayer/matchmaking/IMatchmaking";
+import { Connection } from "@wayward/game/multiplayer/networking/Connection";
+import { ConnectionState } from "@wayward/game/multiplayer/networking/IConnection";
 /**
  * Connects to the host either using Steam Networking, WebRTC, or WebSockets (in that order)
  */
@@ -32,7 +32,7 @@ export declare class SmartConnection extends Connection {
     constructor(matchmakingInfo: IMatchmakingInfo, matchmakingIdentifier: string, webRTCConfig: RTCConfiguration, sendMatchmakingMessage: (message: MatchmakingMessageData) => void, onData: (data: ArrayBuffer) => void, onConnected: (matchmakingInfo: IMatchmakingInfo) => void, trySteamRelayNetwork: boolean, connectGlobalMatchmakingServer: () => void);
     private get activeConnection();
     get isSteamNetworkConnection(): boolean;
-    isConnected(): boolean;
+    get isConnected(): boolean;
     getState(): ConnectionState;
     setState(state: ConnectionState): void;
     get maxMessageSize(): number;

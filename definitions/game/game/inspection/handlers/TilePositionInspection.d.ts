@@ -8,18 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type Corpse from "game/entity/creature/corpse/Corpse";
-import type Entity from "game/entity/Entity";
-import { InspectType } from "game/inspection/IInspection";
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import type Inspection from "game/inspection/Inspection";
-import InspectionsHandler from "game/inspection/InspectionsHandler";
-import type { IContainer } from "game/item/IItem";
-import type Item from "game/item/Item";
-import type Tile from "game/tile/Tile";
-import type TileEvent from "game/tile/TileEvent";
-import type HashSet from "utilities/collection/set/HashSet";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type Entity from "@wayward/game/game/entity/Entity";
+import { InspectType } from "@wayward/game/game/inspection/IInspection";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import type Inspection from "@wayward/game/game/inspection/Inspection";
+import InspectionsHandler from "@wayward/game/game/inspection/InspectionsHandler";
+import type { IContainer } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import type HashSet from "@wayward/utilities/collection/set/HashSet";
 export interface ITilePositionInspectionEvents {
     updatedInspections(type: InspectType, newInspections: HashSet<Inspection<any>>, oldInspections?: HashSet<Inspection<any>>): any;
 }
@@ -37,4 +37,5 @@ export default class TilePositionInspection extends InspectionsHandler {
     private updateInspectionsForEntity;
     protected getInspections(inspectType: InspectType): HashSet<Inspection<any>>;
     private getInspectType;
+    private objectIsOrWasInTile;
 }

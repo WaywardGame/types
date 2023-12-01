@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import type { IGameOptions } from "game/options/IGameOptions";
-import { GameMode } from "game/options/IGameOptions";
-import type { AnyPropertyToSerialize } from "save/serializer/PropertiesToSerialize";
-import InputButton from "ui/component/InputButton";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type { IGameOptions } from "@wayward/game/game/options/IGameOptions";
+import { GameMode } from "@wayward/game/game/options/IGameOptions";
+import type { AnyPropertyToSerialize } from "@wayward/game/save/serializer/PropertiesToSerialize";
+import InputButton from "@wayward/game/ui/component/InputButton";
 export interface SaveSlotData {
     slot: number;
     score: number;
@@ -79,7 +79,7 @@ declare class SaveSlot extends InputButton {
     private exportToFile;
     static getFileName(name?: string): string;
 }
-declare module SaveSlot {
+declare namespace SaveSlot {
     enum Classes {
         Is = "save-slot",
         New = "new-slot"

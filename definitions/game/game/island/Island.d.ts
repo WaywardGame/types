@@ -8,55 +8,58 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { Game } from "game/Game";
-import type { IGameOld } from "game/IGame";
-import { TickFlag, TileUpdateType } from "game/IGame";
-import { Quality } from "game/IObject";
-import type { BiomeTypes } from "game/biome/IBiome";
-import type { ITemplateBiomeOptions } from "game/biome/template/Template";
-import DoodadManager from "game/doodad/DoodadManager";
-import Human from "game/entity/Human";
-import type { SkillType } from "game/entity/IHuman";
-import Creature from "game/entity/creature/Creature";
-import CreatureManager from "game/entity/creature/CreatureManager";
-import type { IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "game/entity/creature/ICreature";
-import CorpseManager from "game/entity/creature/corpse/CorpseManager";
-import FlowFieldManager from "game/entity/flowfield/FlowFieldManager";
-import NPCManager from "game/entity/npc/NPCManager";
-import type { IIslandEvents, IIslandLoadOptions, IMobCheck, ISeeds, IWaterContamination, IWaterFill, IWaterFillReturn, IWell, IslandId } from "game/island/IIsland";
-import { WaterType } from "game/island/IIsland";
-import { PortManager } from "game/island/Port";
-import type { ILiquidGather } from "game/item/IItem";
-import type { IRequirementInfo } from "game/item/IItemManager";
-import ItemManager from "game/item/ItemManager";
-import type DrawnMap from "game/mapping/DrawnMap";
-import type { IGameOptions } from "game/options/IGameOptions";
-import type { IslandModifiersCollection } from "game/options/modifiers/island/IslandModifiers";
-import type { IReferenceable } from "game/reference/IReferenceManager";
-import TemperatureManager from "game/temperature/TemperatureManager";
-import type { ITerrainDescription, ITileContainer, ITileData } from "game/tile/ITerrain";
-import { TerrainType } from "game/tile/ITerrain";
-import type { ITerrainLoot, ITerrainLootItem } from "game/tile/TerrainResources";
-import Tile from "game/tile/Tile";
-import TileEventManager from "game/tile/TileEventManager";
-import TimeManager from "game/time/TimeManager";
-import Translation from "language/Translation";
-import World from "renderer/world/World";
-import type { IPostSerializeCallback, IPreSerializeCallback, ISerializer } from "save/serializer/ISerializer";
-import type { IVersionInfo } from "utilities/Version";
-import Version from "utilities/Version";
-import { Direction } from "utilities/math/Direction";
-import type { IVector2, IVector3 } from "utilities/math/IVector";
-import type { Random } from "utilities/random/Random";
-import type { LegacySeededGenerator } from "utilities/random/generators/LegacySeededGenerator";
-import type { PCGSeededGenerator } from "utilities/random/generators/PCGSeededGenerator";
+import type { Game } from "@wayward/game/game/Game";
+import type { IGameOld } from "@wayward/game/game/IGame";
+import { TickFlag } from "@wayward/game/game/IGame";
+import { Quality } from "@wayward/game/game/IObject";
+import { TickHelper } from "@wayward/game/game/TickHelper";
+import type { BiomeTypes, IBiomeDescription } from "@wayward/game/game/biome/IBiome";
+import type { IReadableAlignment } from "@wayward/game/game/deity/IDeities";
+import DoodadManager from "@wayward/game/game/doodad/DoodadManager";
+import Human from "@wayward/game/game/entity/Human";
+import type { StatusType } from "@wayward/game/game/entity/IEntity";
+import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import Creature from "@wayward/game/game/entity/creature/Creature";
+import CreatureManager from "@wayward/game/game/entity/creature/CreatureManager";
+import type { IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "@wayward/game/game/entity/creature/ICreature";
+import CorpseManager from "@wayward/game/game/entity/creature/corpse/CorpseManager";
+import FlowFieldManager from "@wayward/game/game/entity/flowfield/FlowFieldManager";
+import NPCManager from "@wayward/game/game/entity/npc/NPCManager";
+import type { TurnTypeFlag } from "@wayward/game/game/entity/player/IPlayer";
+import type { IIslandEvents, IIslandLoadOptions, IMobCheck, ISeeds, IWaterContamination, IWaterFill, IWaterFillReturn, IWell, IslandId } from "@wayward/game/game/island/IIsland";
+import { WaterType } from "@wayward/game/game/island/IIsland";
+import { PortManager } from "@wayward/game/game/island/Port";
+import type { ILiquidGather } from "@wayward/game/game/item/IItem";
+import type { IRequirementInfo } from "@wayward/game/game/item/IItemManager";
+import ItemManager from "@wayward/game/game/item/ItemManager";
+import type DrawnMap from "@wayward/game/game/mapping/DrawnMap";
+import type { MultiplayerLoadingDescription } from "@wayward/game/game/meta/Loading";
+import type { IGameOptions } from "@wayward/game/game/options/IGameOptions";
+import type { IslandModifiersCollection } from "@wayward/game/game/options/modifiers/island/IslandModifiers";
+import type { IReferenceable } from "@wayward/game/game/reference/IReferenceManager";
+import TemperatureManager from "@wayward/game/game/temperature/TemperatureManager";
+import type { ITerrainDescription, ITileContainer, ITileData } from "@wayward/game/game/tile/ITerrain";
+import { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { ITerrainLoot, ITerrainLootItem } from "@wayward/game/game/tile/TerrainResources";
+import Tile from "@wayward/game/game/tile/Tile";
+import TileEventManager from "@wayward/game/game/tile/TileEventManager";
+import Translation from "@wayward/game/language/Translation";
+import World from "@wayward/game/renderer/world/World";
+import type { IPostSerializeCallback, IPreSerializeCallback, ISerializer } from "@wayward/game/save/serializer/ISerializer";
+import type { IVersionInfo } from "@wayward/game/utilities/Version";
+import Version from "@wayward/game/utilities/Version";
+import { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { Random } from "@wayward/utilities/random/Random";
+import type { LegacySeededGenerator } from "@wayward/utilities/random/generators/LegacySeededGenerator";
+import type { PCGSeededGenerator } from "@wayward/utilities/random/generators/PCGSeededGenerator";
 export interface IIslandDetails {
     seed: number;
     biomeType: BiomeTypes;
     offset: IVector2;
 }
-export declare module IIslandDetails {
+export declare namespace IIslandDetails {
     const NOOP: IIslandDetails;
 }
 /**
@@ -73,8 +76,11 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly ports: PortManager;
     readonly temperature: TemperatureManager;
     readonly tileEvents: TileEventManager;
-    readonly time: TimeManager;
     readonly world: World;
+    /**
+     * Alignment values averaged across all players on the island.
+     */
+    readonly communalAlignment: IReadableAlignment;
     /**
      * The version this island was originally made on
      */
@@ -89,9 +95,10 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     saveVersion: Version.String;
     saveBuildTime: number;
+    biomeOptions?: unknown;
     biomeType: BiomeTypes;
     civilizationScore: number;
-    civilizationScoreTiles: Record<number, number>;
+    civilizationScoreTiles: SaferNumberIndexedObject<number>;
     contaminatedWater: IWaterContamination[];
     creatureSpawnTimer: number;
     loadCount: number;
@@ -101,7 +108,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly treasureMaps: DrawnMap[];
     readonly wellData: SaferNumberIndexedObject<IWell>;
     referenceId?: number;
-    templateBiomeOptions: ITemplateBiomeOptions | undefined;
     tileContainers: ITileContainer[];
     tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;
     readonly seeds: ISeeds;
@@ -111,11 +117,15 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     /**
      * Set of players on this island
      */
-    readonly players: Set<Human<number>>;
+    readonly players: Set<Human<number, import("@wayward/game/game/reference/IReferenceManager").ReferenceType.NPC | import("@wayward/game/game/reference/IReferenceManager").ReferenceType.Player>>;
     /**
      * Entity move types in fov on this island
      */
-    readonly moveTypesInFov: Map<"-1-0" | "-1-1" | "-1-2" | "-1-4" | "-1-8" | "-1-16" | "-1-32" | "-1-64" | "-1-128" | "-1-256" | "-1-512" | "-1-1024" | "-1-15" | "0-0" | "0-1" | "0-2" | "0-4" | "0-8" | "0-16" | "0-32" | "0-64" | "0-128" | "0-256" | "0-512" | "0-1024" | "0-15" | "1-0" | "1-1" | "1-2" | "1-4" | "1-8" | "1-16" | "1-32" | "1-64" | "1-128" | "1-256" | "1-512" | "1-1024" | "1-15", Set<Human<number>>>;
+    readonly moveTypesInFov: Map<"-1-0" | "-1-1" | "-1-2" | "-1-4" | "-1-8" | "-1-16" | "-1-32" | "-1-64" | "-1-128" | "-1-256" | "-1-512" | "-1-1024" | "-1-15" | "0-0" | "0-1" | "0-2" | "0-4" | "0-8" | "0-16" | "0-32" | "0-64" | "0-128" | "0-256" | "0-512" | "0-1024" | "0-15" | "1-0" | "1-1" | "1-2" | "1-4" | "1-8" | "1-16" | "1-32" | "1-64" | "1-128" | "1-256" | "1-512" | "1-1024" | "1-15", Set<Human<number, import("@wayward/game/game/reference/IReferenceManager").ReferenceType.NPC | import("@wayward/game/game/reference/IReferenceManager").ReferenceType.Player>>>;
+    /**
+     * Helps instruct when to tick when in simulated turn mode
+     */
+    readonly simulatedTickHelper: TickHelper;
     previousSaveVersion: IVersionInfo | undefined;
     brokenReferencesCount: number;
     readonly id: IslandId;
@@ -136,9 +146,9 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     preSerializeProperty(serializer: ISerializer, key: string): void;
     postSerializeProperty(serializer: ISerializer, key: string): void;
     onUnserialized(serializer: ISerializer): void;
-    get biome(): import("game/biome/IBiome").IBiomeDescription;
+    get biome(): IBiomeDescription;
     get isLoaded(): boolean;
-    get tiles(): Record<number, Tile | undefined>;
+    get tiles(): SaferNumberIndexedObject<Tile>;
     get hasLoadedItemReferences(): boolean;
     get isLocalIsland(): boolean;
     /**
@@ -163,7 +173,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     private deactivate;
     private gameOptionsCached?;
-    getGameOptions(): IGameOptions;
+    getGameOptions(): ImmutableObject<IGameOptions>;
     clearGameOptionsCache(): void;
     rename(human: Human, newName: string): void;
     private generatedName?;
@@ -185,7 +195,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     unload(): void;
     delete(): void;
     private deleteIfDeserialized;
-    private fastForward;
     hydrateFromOldGame(oldGame: IGameOld): void;
     /**
      * Gets the total distance away the current island is from 0, 0 as a positive value.
@@ -205,7 +214,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     createTile(x: number, y: number, z: number, index: number, rendererData: number, quality: Quality): Tile;
     setTile(x: number, y: number, z: number, tile: Tile): Tile;
     getOrCreateTile(index: number, x: number, y: number, z: number, rendererData: number, quality: Quality): Tile;
-    updateFlowFieldTile(tile: Tile, tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
     /**
      * Checks if island.tileData is synced with Tile.data
      */
@@ -214,14 +222,10 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     addPlayer(human: Human, refreshStatusEffects?: boolean): void;
     removePlayer(human: Human, isAbsentPlayer?: boolean): void;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): Human[];
-    getReputation(): number;
-    getMalignity(): number;
-    getBenignity(): number;
     getMaxHealth(): number;
     getMaxWeight(): number;
     getSkillPercent(skill: SkillType): number;
     getPlayerAverage(calc: (player: Human) => number | undefined, round?: boolean): number;
-    updateReputation(reputation: number): void;
     /**
      * Check the amount of water tiles there is connected to a supplied x/y area
      */
@@ -237,7 +241,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     calculateTileLightLevel(tile: Tile): number;
     getLightSourceAt(x: number, y: number, z: number): number;
     checkForTargetInRange(tile: Tile, direction: Direction.Cardinal, range: number, includePlayers?: boolean): IMobCheck;
-    fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
+    fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, human?: Human): void;
     coolFires(requirements: IRequirementInfo, human: Human): void;
     /**
      * Resets & recalculates the civilization score
@@ -256,8 +260,32 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * @param quality Quality of the item or tile to check the growing speed of.
      */
     getGrowingSpeed(terrainType: TerrainType, quality?: Quality, magicValue?: number): number;
-    processTickFlags(tickFlag: TickFlag, ticks: number, playingHumans: Human[]): void;
-    processTickFlagsAsync(tickFlag: TickFlag, ticks: number, playingHumans: Human[], onProgress: (progess: number) => Promise<void>): Promise<void>;
+    /**
+     * This is called on each active island on each game tick (16ms) when in simulated mode
+     */
+    processSimulateTick(timeStamp: number): void;
+    triggerTickPacket(playingHumans?: Human[]): void;
+    /**
+     * Called when the island is ticking during simulated or real-time mode
+     */
+    tickRealtime(): void;
+    /**
+     * Marks that the human had a turn
+     * In manual turn mode, it will tick the humans stat timers & the game
+     */
+    passTurn(human: Human, turnType?: TurnTypeFlag, dueToAction?: boolean): void;
+    fastForward(travelTime: number, multiplayerLoadingDescription?: MultiplayerLoadingDescription): Promise<void>;
+    /**
+     * Collection of things to perform on each tick
+     */
+    tick(ticks?: number, tickFlag?: TickFlag, dueToAction?: boolean): void;
+    /**
+     * Collection of things to perform on each tick
+     */
+    private tickAsync;
+    private processTickFlags;
+    private processTickFlagsAsync;
+    private updateTablesAndWeight;
     private updateEntityFov;
     private processTimers;
     private runRandomEvents;
@@ -288,4 +316,8 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * Returns the type of liquid that can be gathered from the tile
      */
     getLiquidGatherType(terrainType: TerrainType, terrainDescription: ITerrainDescription): keyof ILiquidGather | undefined;
+    /**
+     * Gets an array of statuses that players have
+     */
+    getPlayerStatuses(): StatusType[];
 }

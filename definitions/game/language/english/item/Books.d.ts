@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { BookType } from "game/item/IItem";
+import { BookType } from "@wayward/game/game/item/IItem";
 declare const books: Descriptions<BookType, [string, string]>;
 export default books;

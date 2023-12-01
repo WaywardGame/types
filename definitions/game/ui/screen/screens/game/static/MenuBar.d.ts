@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IEventEmitter } from "event/EventEmitter";
-import Component from "ui/component/Component";
-import type { ContextMenuDescriptions } from "ui/component/ContextMenu";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import { Quadrant } from "ui/screen/screens/game/component/IQuadrantComponent";
-import QuadrantComponent from "ui/screen/screens/game/component/QuadrantComponent";
-import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
-import type { ISortableComponent, WithSortableEvents } from "ui/util/Sortable";
-import Sortable from "ui/util/Sortable";
+import Component from "@wayward/game/ui/component/Component";
+import type { ContextMenuDescriptions } from "@wayward/game/ui/component/ContextMenu";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import { Quadrant } from "@wayward/game/ui/screen/screens/game/component/IQuadrantComponent";
+import QuadrantComponent from "@wayward/game/ui/screen/screens/game/component/QuadrantComponent";
+import { MenuBarButtonType } from "@wayward/game/ui/screen/screens/game/static/menubar/IMenuBarButton";
+import type { ISortableComponent, WithSortableEvents } from "@wayward/game/ui/util/Sortable";
+import Sortable from "@wayward/game/ui/util/Sortable";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 /**
  * Never change this!
  */
@@ -38,5 +38,6 @@ export default class MenuBar extends QuadrantComponent implements ISortableCompo
     protected getContextMenuDescription(api: IBindHandlerApi): ContextMenuDescriptions;
     private getMissingMenuBarButtons;
     static registerButtonBindHandlers(until: Promise<any>): void;
+    protected onCommitSort(): void;
 }
 export {};

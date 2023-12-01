@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Game } from "game/Game";
-import type { ISerializer, ISerializerOptions } from "save/serializer/ISerializer";
-import { SavePropertyFlag, SerializerMetadataKey, Types } from "save/serializer/ISerializer";
-import StringTokenizer from "save/serializer/StringTokenizer";
-import type Version from "utilities/Version";
+import type { Game } from "@wayward/game/game/Game";
+import type { ISerializer, ISerializerOptions } from "@wayward/game/save/serializer/ISerializer";
+import { SavePropertyFlag, SerializerMetadataKey, Types } from "@wayward/game/save/serializer/ISerializer";
+import StringTokenizer from "@wayward/game/save/serializer/StringTokenizer";
+import type Version from "@wayward/game/utilities/Version";
 export default class Serializer implements ISerializer {
     readonly game: Game;
     private readonly options;
@@ -43,7 +43,7 @@ export default class Serializer implements ISerializer {
     readArrayV2(object: any, key: any): void;
     readArrayV3(object: any, key: any): void;
     readArrayV4(object: any, key: any): void;
-    readArrayBuffer(): any;
+    readArrayBuffer(): ArrayBufferLike;
     readMap(object: any, key: any): Map<any, any>;
     readSet(object: any, key: any): Set<any>;
     writeObject(object: any, objectKey: string, parentObject: any, chain?: string[]): void;

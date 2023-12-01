@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { UsableActionGenerator } from "game/entity/action/usable/UsableActionRegistrar";
+import { UsableActionGenerator } from "@wayward/game/game/entity/action/usable/UsableActionRegistrar";
 declare const UsableActionsMain: UsableActionGenerator<[]>;
 export default UsableActionsMain;
 export declare enum UsableActionSet {
@@ -35,7 +35,7 @@ export declare enum UsableActionSet {
     Craft = 16,
     XWithY = 17,
     ItemMisc = 18,
-    ItemMoveMenus = 19,
+    ItemMove = 19,
     ItemDrop = 20,
     Rename = 21,
     Protect = 22,
@@ -48,11 +48,11 @@ export declare const usableActionSets: {
     3: UsableActionGenerator<[]>;
     4: UsableActionGenerator<[]>;
     5: UsableActionGenerator<[]>;
-    6: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/item/UsableActionsUseItem").IUseItemAction, import("game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
+    6: import("./UsableActionsDynamic").default<import("@wayward/game/game/entity/action/usable/actions/item/UsableActionsUseItem").IUseItemAction, import("@wayward/game/game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
     7: UsableActionGenerator<[]>;
     8: UsableActionGenerator<[]>;
     9: UsableActionGenerator<[]>;
-    10: import("./UsableActionsDynamic").default<import("game/entity/action/usable/actions/UsableActionsUseNPC").IUseNPCAction, import("game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
+    10: import("./UsableActionsDynamic").default<import("@wayward/game/game/entity/action/usable/actions/UsableActionsUseNPC").IUseNPCAction, import("@wayward/game/game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
     11: UsableActionGenerator<[]>;
     12: UsableActionGenerator<[]>;
     13: UsableActionGenerator<[]>;
@@ -61,7 +61,7 @@ export declare const usableActionSets: {
     16: UsableActionGenerator<[]>;
     17: UsableActionGenerator<[]>;
     18: UsableActionGenerator<[]>;
-    19: UsableActionGenerator<[moveTarget?: import("game/entity/action/usable/actions/item/UsableActionsItemMove").UsableActionsItemMoveTarget | undefined]>;
+    19: UsableActionGenerator<[moveTarget?: import("@wayward/game/game/entity/action/usable/actions/item/UsableActionsItemMove").UsableActionsItemMoveTarget | undefined]>;
     20: UsableActionGenerator<[isDropMenu?: true | undefined]>;
     21: UsableActionGenerator<[]>;
     22: UsableActionGenerator<[]>;

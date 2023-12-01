@@ -8,17 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Entity from "game/entity/Entity";
-import type Human from "game/entity/Human";
-import type { Milestone } from "game/milestones/IMilestone";
-import type { IGameOptionsPartial } from "game/options/IGameOptions";
-import GameplayModifier, { GameplayModifierInstance } from "game/options/modifiers/GameplayModifier";
+import type Entity from "@wayward/game/game/entity/Entity";
+import type Human from "@wayward/game/game/entity/Human";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
+import GameplayModifier, { GameplayModifierInstance } from "@wayward/game/game/options/modifiers/GameplayModifier";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export declare enum MilestoneModifierGroup {
     Creatures = 0,
     Skills = 1,
     Items = 2,
     Equipment = 3,
-    Reputation = 4,
+    Alignment = 4,
     Actions = 5,
     Treasure = 6,
     Metagame = 7,
@@ -28,9 +29,9 @@ export declare enum MilestoneModifierGroup {
 }
 export declare const milestoneGroupIcons: Record<MilestoneModifierGroup, string>;
 export declare class MilestoneModifierInstance<DATA = any> extends GameplayModifierInstance<Milestone, [Human?], DATA> {
-    protected get player(): Human<number> | undefined;
+    protected get player(): Human | undefined;
     isEnabledForPlayer(entity: Entity): boolean;
-    protected getDefaultTitle(): import("../../../../language/impl/TranslationImpl").default;
+    protected getDefaultTitle(): TranslationImpl;
 }
 export default abstract class MilestoneModifier extends GameplayModifier<Milestone, MilestoneModifierInstance, [Human?]> {
     static isGlobal(modifier: MilestoneModifier): boolean;
@@ -45,6 +46,6 @@ export default abstract class MilestoneModifier extends GameplayModifier<Milesto
     constructor(id?: Milestone);
     instantiate(id: Milestone, human?: Human): MilestoneModifierInstance | undefined;
     abstract getOptions(): IGameOptionsPartial;
-    initialize(instance: MilestoneModifierInstance): MilestoneModifierInstance<any>;
+    initialize(instance: MilestoneModifierInstance): MilestoneModifierInstance;
     abstract getGroup(): MilestoneModifierGroup;
 }

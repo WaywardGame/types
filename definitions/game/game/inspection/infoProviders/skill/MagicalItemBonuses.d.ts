@@ -8,16 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Human from "game/entity/Human";
-import type { SkillType } from "game/entity/IHuman";
-import { InfoProvider } from "game/inspection/InfoProvider";
+import type Human from "@wayward/game/game/entity/Human";
+import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class SkillBonusMagicalItemsInfoProvider extends InfoProvider {
     private readonly skill;
     private readonly human?;
-    constructor(skill: SkillType, human?: Human<number> | undefined);
+    constructor(skill: SkillType, human?: Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player> | undefined);
     getClass(): string[];
     protected onInitContent(): void;
     hasContent(): boolean;
-    get(): (0 | import("../../../../language/impl/TranslationImpl").default | import("game/inspection/InfoProvider").SimpleInfoProvider)[];
+    get(): Array<0 | TranslationImpl | SimpleInfoProvider>;
     private getMagicalItems;
 }

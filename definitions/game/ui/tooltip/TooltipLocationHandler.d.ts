@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Tooltip from "ui/tooltip/Tooltip";
-import type { IVector2 } from "utilities/math/IVector";
+import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 export declare enum TooltipAnchorType {
     Off = 0,
     Aligned = 1
@@ -25,10 +25,11 @@ export declare enum TooltipAnchorSideVertical {
 export type TooltipAnchorTypeString = Lowercase<keyof typeof TooltipAnchorType>;
 export type TooltipAnchorSideStringHorizontal = Lowercase<keyof typeof TooltipAnchorSideHorizontal>;
 export type TooltipAnchorSideStringVertical = Lowercase<keyof typeof TooltipAnchorSideVertical>;
+export type TooltipAnchorOffset = `+${number}` | `-${number}`;
 export type TooltipAnchorStringHorizontalSimple = `${TooltipAnchorTypeString} ${TooltipAnchorSideStringHorizontal}` | "center";
-export type TooltipAnchorStringHorizontal = `${"sticky " | ""}${TooltipAnchorStringHorizontalSimple}`;
+export type TooltipAnchorStringHorizontal = `${"sticky " | ""}${TooltipAnchorStringHorizontalSimple}${"" | ` ${TooltipAnchorOffset}`}`;
 export type TooltipAnchorStringVerticalSimple = `${TooltipAnchorTypeString} ${TooltipAnchorSideStringVertical}` | "center";
-export type TooltipAnchorStringVertical = `${"sticky " | ""}${TooltipAnchorStringVerticalSimple}`;
+export type TooltipAnchorStringVertical = `${"sticky " | ""}${TooltipAnchorStringVerticalSimple}${"" | ` ${TooltipAnchorOffset}`}`;
 export type TooltipAnchorStringSimple = TooltipAnchorStringHorizontalSimple | TooltipAnchorStringVerticalSimple;
 export type TooltipAnchorString = TooltipAnchorStringHorizontal | TooltipAnchorStringVertical;
 export interface ITooltipLocationPreference {
@@ -41,11 +42,13 @@ export interface ITooltipLocationHorizontalAnchor {
     type: TooltipAnchorTypeString | "center";
     side: TooltipAnchorSideStringHorizontal | "center";
     sticky: boolean;
+    offset: number;
 }
 export interface ITooltipLocationVerticalAnchor {
     type: TooltipAnchorTypeString | "center";
     side: TooltipAnchorSideStringVertical | "center";
     sticky: boolean;
+    offset: number;
 }
 export declare enum TooltipLocationAlignment {
     Left = 0,

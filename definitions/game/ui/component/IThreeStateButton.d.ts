@@ -13,7 +13,7 @@ export declare enum ThreeStateButtonState {
     On = 1,
     Off = 2
 }
-export declare module ThreeStateButtonState {
+export declare namespace ThreeStateButtonState {
     function boolean(state: ThreeStateButtonState): boolean | undefined;
     function get(bool: boolean | undefined | null): ThreeStateButtonState;
 }

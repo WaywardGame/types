@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { InspectType } from "game/inspection/IInspection";
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import type Inspection from "game/inspection/Inspection";
-import type { ResolvedInspection } from "game/inspection/InspectionTypeMap";
-import HashSet from "utilities/collection/set/HashSet";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { InspectType } from "@wayward/game/game/inspection/IInspection";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import type Inspection from "@wayward/game/game/inspection/Inspection";
+import type { ResolvedInspection } from "@wayward/game/game/inspection/InspectionTypeMap";
+import HashSet from "@wayward/utilities/collection/set/HashSet";
 export interface IInspectionsHandlerEvents {
     updatedInspections(type: InspectType, newInspections: HashSet<Inspection<any>>, oldInspections?: HashSet<Inspection<any>>): any;
 }

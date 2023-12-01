@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import { Action } from "game/entity/action/Action";
-import type { IActionUsable } from "game/entity/action/IAction";
-import { ActionArgument } from "game/entity/action/IAction";
-import type Tile from "game/tile/Tile";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type Tile from "@wayward/game/game/tile/Tile";
 export interface ITestDepthCanUse extends IActionUsable {
     doodad: Doodad;
     tile: Tile;
 }
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number>, void, ITestDepthCanUse, [(import("../../../item/Item").default | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ITestDepthCanUse, [(import("../../../item/Item").default | undefined)?]>;
 export default _default;

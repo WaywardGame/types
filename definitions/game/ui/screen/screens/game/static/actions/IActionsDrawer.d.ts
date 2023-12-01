@@ -13,7 +13,5 @@ export declare enum ActionSort {
 }
 export declare enum ActionSlotItemMethod {
     ExactItem = 0,
-    AnyOfTypeAndQuality = 1,
-    AnyOfType = 2,
-    AnyItem = 3
+    AnyItem = 1
 }

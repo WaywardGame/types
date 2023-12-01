@@ -8,7 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Action } from "game/entity/action/Action";
-import { ActionArgument } from "game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.Container, [ActionArgument.UnsignedInteger32NumberArray, ActionArgument.Undefined]], import("../../Human").default<number>, void, import("game/entity/action/IAction").IActionUsable, [import("../../../item/IItem").IContainer, (number[] | undefined)?]>;
+import type Entity from "@wayward/game/game/entity/Entity";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgumentCustom } from "@wayward/game/game/entity/action/argument/ActionArgumentCustom";
+import type { IContainerSort } from "@wayward/game/game/item/IItemManager";
+export declare class ActionArgumentItemSort extends ActionArgumentCustom<IContainerSort> {
+    validate(executor: Entity | undefined, value: unknown): value is IContainerSort;
+    read(): IContainerSort;
+    write(executor: Entity | undefined, value: IContainerSort): void;
+}
+declare const _default: Action<[ActionArgument.Container, [ActionArgument.UnsignedInteger32NumberArray, ActionArgumentItemSort]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [import("@wayward/game/game/item/IItem").IContainer, number[] | IContainerSort]>;
 export default _default;

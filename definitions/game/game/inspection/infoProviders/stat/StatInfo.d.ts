@@ -8,13 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Human from "game/entity/Human";
-import type { Stat } from "game/entity/IStats";
-import { InfoProvider } from "game/inspection/InfoProvider";
+import type Human from "@wayward/game/game/entity/Human";
+import type { Stat } from "@wayward/game/game/entity/IStats";
+import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import Translation from "@wayward/game/language/Translation";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export declare abstract class StatInfo extends InfoProvider {
-    static getTitle(stat: Stat): import("game/inspection/InfoProvider").SimpleInfoProvider;
-    private readonly _human;
-    protected get human(): Human<number> | undefined;
+    static getTitle(stat: Stat): InfoProvider | Translation;
+    static getDescription(stat: Stat): InfoProvider | Translation | undefined;
+    protected readonly humanRef: WeakRef<Human>;
+    protected get human(): Human | undefined;
     constructor(human: Human);
-    getTitle(stat: Stat): import("game/inspection/InfoProvider").SimpleInfoProvider;
+    getTitle(stat: Stat): TranslationImpl | InfoProvider;
+    getDescription(stat: Stat): TranslationImpl | InfoProvider | undefined;
 }

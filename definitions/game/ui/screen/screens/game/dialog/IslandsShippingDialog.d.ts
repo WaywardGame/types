@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type ShipperNPC from "game/entity/npc/npcs/Shipper";
-import type { IIslandPort } from "game/island/IIsland";
-import type Island from "game/island/Island";
-import Button from "ui/component/Button";
-import IslandsDialog from "ui/screen/screens/game/dialog/islands/IslandsDialog";
+import type ShipperNPC from "@wayward/game/game/entity/npc/npcs/Shipper";
+import type { IIslandPort } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
+import Button from "@wayward/game/ui/component/Button";
+import IslandsDialog from "@wayward/game/ui/screen/screens/game/dialog/islands/IslandsDialog";
 export declare enum IslandsShippingDialogClasses {
     PortButtonShipping = "game-dialog-islands-port-button-shipping",
     PortsOnlyMode = "game-dialog-islands-ports-only-mode"

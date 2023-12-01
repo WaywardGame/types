@@ -8,18 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Entity from "game/entity/Entity";
-import type Human from "game/entity/Human";
-import { MovingClientSide } from "game/entity/IHuman";
-import type Player from "game/entity/player/Player";
-import type { IslandId } from "game/island/IIsland";
-import type Island from "game/island/Island";
-import FieldOfView from "renderer/fieldOfView/FieldOfView";
-import type { CanASeeBType, IFieldOfViewOrigin } from "renderer/fieldOfView/IFieldOfView";
+import type Entity from "@wayward/game/game/entity/Entity";
+import type Human from "@wayward/game/game/entity/Human";
+import type { IMovingData } from "@wayward/game/game/entity/IEntity";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
+import { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
+import type { CanASeeBType, IFieldOfViewOrigin } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
 export interface IRendererOrigin extends IFieldOfViewOrigin {
     readonly fromX?: number;
     readonly fromY?: number;
-    readonly movingClientside: MovingClientSide;
+    readonly movingData: IMovingData;
     readonly asEntity: Entity;
     readonly asPlayer: Player | undefined;
     readonly asHuman: Human | undefined;
@@ -35,7 +35,7 @@ export declare class RendererOrigin implements IRendererOrigin {
     static fromEntity(entity: Entity): IRendererOrigin;
     readonly fromX: number;
     readonly fromY: number;
-    readonly movingClientside: MovingClientSide;
+    readonly movingData: IMovingData;
     readonly asEntity: Entity;
     readonly asPlayer: Player | undefined;
     readonly asHuman: Human | undefined;

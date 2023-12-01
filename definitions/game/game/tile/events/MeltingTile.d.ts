@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Island from "game/island/Island";
-import type { TerrainType } from "game/tile/ITerrain";
-import { TileEventType } from "game/tile/ITileEvent";
-import type Tile from "game/tile/Tile";
-import type TileEvent from "game/tile/TileEvent";
+import type Island from "@wayward/game/game/island/Island";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import { TileEventType } from "@wayward/game/game/tile/ITileEvent";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
 declare const _default: {
     internal: boolean;
     /**

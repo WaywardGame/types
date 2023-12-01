@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ActionType } from "game/entity/action/IAction";
-import LabelledValue from "game/inspection/infoProviders/LabelledValue";
-import UseInfo from "game/inspection/infoProviders/UseInfo";
-import type Item from "game/item/Item";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
+import LabelledValue from "@wayward/game/game/inspection/infoProviders/LabelledValue";
+import UseInfo from "@wayward/game/game/inspection/infoProviders/UseInfo";
+import type Item from "@wayward/game/game/item/Item";
 declare const _default: UseInfo<{
     civilizationScore: number | undefined;
     growingSpeed: number | undefined;
@@ -21,7 +21,7 @@ declare const _default: UseInfo<{
     description: import("../../../../item/IItem").IItemDescription;
     quality: import("../../../../IObject").Quality;
     action: ActionType.SetDown;
-    union: import("game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.SetDown>;
+    union: import("@wayward/game/game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.SetDown>;
     details: Set<symbol>;
 }, ActionType.SetDown, {
     getCivilizationScore: () => LabelledValue | undefined;

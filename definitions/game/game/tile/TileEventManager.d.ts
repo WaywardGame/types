@@ -8,16 +8,19 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import EntityManager from "@wayward/game/game/entity/EntityManager";
+import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
+import { TileEventType } from "@wayward/game/game/tile/ITileEvent";
+import type Tile from "@wayward/game/game/tile/Tile";
+import TileEvent from "@wayward/game/game/tile/TileEvent";
+import type { TextContext } from "@wayward/game/language/ITranslation";
+import { Article } from "@wayward/game/language/Translation";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import Stream from "@wayward/goodstream/Stream";
-import { CreatureType } from "game/entity/creature/ICreature";
-import { ObjectManager } from "game/ObjectManager";
-import { TileEventType } from "game/tile/ITileEvent";
-import type Tile from "game/tile/Tile";
-import TileEvent from "game/tile/TileEvent";
-import type { TextContext } from "language/ITranslation";
-import { Article } from "language/Translation";
-import type { IVector3 } from "utilities/math/IVector";
-export interface ITileManagerEvents {
+import type Human from "@wayward/game/game/entity/Human";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+export interface ITileManagerEvents extends Events<EntityManager<TileEvent>> {
     /**
      * Called when a tile event is about to be created
      * @param type The type of tile event
@@ -25,20 +28,14 @@ export interface ITileManagerEvents {
      * @returns False if the creature cannot spawn, or undefined to use the default logic
      */
     canCreate(type: TileEventType, tile: Tile): boolean | undefined;
-    /**
-     * Called when a tile event is created.
-     */
-    create(event: TileEvent): any;
-    /**
-     * Called when a tile event is removed.
-     */
-    remove(event: TileEvent): any;
 }
-export default class TileEventManager extends ObjectManager<TileEvent, ITileManagerEvents> {
-    load(): void;
+export default class TileEventManager extends EntityManager<TileEvent> {
+    protected readonly name = "TileEventManager";
+    readonly event: IEventEmitter<this, ITileManagerEvents>;
+    loadEntity(tileEvent: TileEvent): void;
     create(type: TileEventType, tile: Tile): TileEvent | undefined;
     createFake(type: TileEventType, tile: Tile, id?: number): TileEvent | undefined;
-    remove(tileEvent: TileEvent): void;
+    protected onRemove(tileEvent: TileEvent): boolean;
     getFromTile(tile: Tile, type: TileEventType): TileEvent | undefined;
     /**
      * Gets an array of tile events that have the water property at a given tile.
@@ -51,9 +48,8 @@ export default class TileEventManager extends ObjectManager<TileEvent, ITileMana
     /**
      * Overflow fire around the tile
      */
-    fireOverflow(tile: Tile): boolean;
+    fireOverflow(tile: Tile, human?: Human): boolean;
     canPickUp(tile: Tile): TileEvent | undefined;
-    blocksTile(tile: Tile): boolean;
     /**
      * Creates either blood or water blood
      * @param origin The origin around where you want to spawn around (can be any adjacent tile)
@@ -61,7 +57,7 @@ export default class TileEventManager extends ObjectManager<TileEvent, ITileMana
      */
     createBlood(origin: IVector3): boolean;
     containsDamagingTileEvents(events: TileEvent[] | undefined): boolean;
-    getName(typeOrEvent: CreatureType | TileEvent, article?: Article, count?: number, showCount?: boolean): import("../../language/impl/TranslationImpl").default;
-    getEventTranslations(events: TileEvent[], article?: Article, context?: TextContext): Stream<import("../../language/impl/TranslationImpl").default>;
-    getEventListTranslation(events: TileEvent[], article?: Article, context?: TextContext): import("../../language/impl/TranslationImpl").default;
+    getName(typeOrEvent: CreatureType | TileEvent, article?: Article, count?: number, showCount?: boolean): TranslationImpl;
+    getEventTranslations(events: TileEvent[], article?: Article, context?: TextContext): Stream<TranslationImpl>;
+    getEventListTranslation(events: TileEvent[], article?: Article, context?: TextContext): TranslationImpl;
 }

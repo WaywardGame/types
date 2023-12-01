@@ -16,7 +16,7 @@ export interface IEventSubscriptionManager<EVENTS = {}, TARGET extends EventTarg
 }
 export declare class EventManager<HOST extends object, EVENTS = {}, TARGET extends EventTarget = EventTarget> {
     static readonly global: EventManager<{}, GlobalEventHandlersEventMap, EventTarget>;
-    static make<EVENTS>(): EventManager<{}, EVENTS, EventTarget>;
+    static make<EVENTS>(): EventManager<{}, EVENTS>;
     static emit(target: EventTarget | undefined, event: Event | string, init?: ((event: Event) => any) | object): Event;
     private readonly host;
     private readonly _target;

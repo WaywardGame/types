@@ -8,27 +8,31 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Game } from "@wayward/game/game/Game";
+import type { IMessage } from "@wayward/game/game/entity/player/IMessageManager";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { QuestInstance } from "@wayward/game/game/entity/player/quest/QuestManager";
+import type { RequirementInstance } from "@wayward/game/game/entity/player/quest/quest/Quest";
+import Button from "@wayward/game/ui/component/Button";
+import Component from "@wayward/game/ui/component/Component";
+import Contenteditable from "@wayward/game/ui/component/Contenteditable";
+import type { ContextMenuDescriptions } from "@wayward/game/ui/component/ContextMenu";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import type { IPinnedMessage } from "@wayward/game/ui/screen/screens/game/IGameScreenApi";
+import { MessageTimestamp, PinType } from "@wayward/game/ui/screen/screens/game/IGameScreenApi";
+import type { IFilters } from "@wayward/game/ui/screen/screens/game/IMessages";
+import { MessageFilterDefault } from "@wayward/game/ui/screen/screens/game/IMessages";
+import { Quadrant } from "@wayward/game/ui/screen/screens/game/component/IQuadrantComponent";
+import QuadrantComponent from "@wayward/game/ui/screen/screens/game/component/QuadrantComponent";
 import Stream from "@wayward/goodstream/Stream";
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import type { IMessage } from "game/entity/player/IMessageManager";
-import type Player from "game/entity/player/Player";
-import type { RequirementInstance } from "game/entity/player/quest/quest/Quest";
-import type { QuestInstance } from "game/entity/player/quest/QuestManager";
-import type { Game } from "game/Game";
-import Button from "ui/component/Button";
-import Component from "ui/component/Component";
-import Contenteditable from "ui/component/Contenteditable";
-import type { ContextMenuDescriptions } from "ui/component/ContextMenu";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import { Quadrant } from "ui/screen/screens/game/component/IQuadrantComponent";
-import QuadrantComponent from "ui/screen/screens/game/component/QuadrantComponent";
-import type { IPinnedMessage } from "ui/screen/screens/game/IGameScreenApi";
-import { MessageTimestamp, PinType } from "ui/screen/screens/game/IGameScreenApi";
-import type { IFilters } from "ui/screen/screens/game/IMessages";
-import { MessageFilterDefault } from "ui/screen/screens/game/IMessages";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 interface IMessagesEvents extends Events<QuadrantComponent> {
     pinQuestRequirement(pin: IPinnedMessage): any;
     unpinQuestRequirement(pin: IPinnedMessage): any;
+}
+export declare enum MessagesClasses {
+    Main = "game-messages",
+    Message = "game-message"
 }
 export default class Messages extends QuadrantComponent {
     private static get defaultFilters();

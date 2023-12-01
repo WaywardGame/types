@@ -15,6 +15,6 @@ export declare enum MapQuality {
     High = 3,
     VeryHigh = 4
 }
-export declare module MapQuality {
+export declare namespace MapQuality {
     function get(number: number): MapQuality;
 }

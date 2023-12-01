@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IEventEmitter } from "event/EventEmitter";
-import EventEmitter from "event/EventEmitter";
-import type { IslandId } from "game/island/IIsland";
-import type Island from "game/island/Island";
-import type Item from "game/item/Item";
-import type { IUnserializedCallback } from "save/serializer/ISerializer";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
+import type Item from "@wayward/game/game/item/Item";
+import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
 export interface IItemReference {
     islandId?: IslandId;
     itemId?: number;

@@ -8,20 +8,21 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type { ActionArgument, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionExample, IActionExampleApi, IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
-import type Corpse from "game/entity/creature/corpse/Corpse";
-import type Creature from "game/entity/creature/Creature";
-import type Entity from "game/entity/Entity";
-import type Human from "game/entity/Human";
-import type { EntityType } from "game/entity/IEntity";
-import type NPC from "game/entity/npc/NPC";
-import type Player from "game/entity/player/Player";
-import type Item from "game/item/Item";
-import type TileEvent from "game/tile/TileEvent";
-import type { Direction } from "utilities/math/Direction";
-import type { IVector3 } from "utilities/math/IVector";
-export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> implements IActionDescription<A, E, R, CU, AV> {
+import type { Deity } from "@wayward/game/game/deity/Deity";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { ActionArguments, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionExample, IActionExampleApi, IActionHandlerApi, IActionNotUsable, IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Entity from "@wayward/game/game/entity/Entity";
+import type Human from "@wayward/game/game/entity/Human";
+import type { EntityType } from "@wayward/game/game/entity/IEntity";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type Item from "@wayward/game/game/item/Item";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import type { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+export declare class Action<A extends ActionArguments, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> implements IActionDescription<A, E, R, CU, AV> {
     readonly argumentTypes: A;
     readonly usability: {
         [key in ActionUsability]?: boolean;
@@ -35,6 +36,7 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     handler: (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => R;
     confirmer?: (actionApi: IActionConfirmerApi<E, any>, ...args: AV) => Promise<boolean>;
     exampleHandler?: (actionApi: IActionExampleApi<E, CU>, ...args: AV) => IActionExample;
+    alignment: Deity;
     private shouldSkipConfirmation;
     constructor(...argumentTypes: A);
     /**
@@ -45,8 +47,8 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     canUse(actionApi: IActionApi<E, any>, ...args: AV): CU | IActionNotUsable;
     canUse(executor: E, ...args: AV): CU | IActionNotUsable;
     canUseWhileFacing(actionExecutor: E, position: IVector3, direction: Direction.Cardinal, ...args: AV): CU | IActionNotUsable;
-    execute(actionApiOrExecutor: IActionApi<E, any> | E, ...args: AV): R | Promise<R>;
-    executeConfirmer(actionApiOrExecutor: IActionApi<E, any> | E, args: AV, argumentTypes?: ActionArgument[]): Promise<boolean>;
+    execute(actionApiOrExecutor: IActionApi<E, any> | E, ...args: AV): R | Promise<R> | Promise<R | undefined> | undefined;
+    executeConfirmer(actionApiOrExecutor: IActionApi<E, any> | E, args: AV): Promise<boolean>;
     skipConfirmation(): this;
     /**
      * Add a "pre-execution" handler to this action.
@@ -102,6 +104,7 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
      * @param flag Flag to check
      */
     hasFlag(flag: ActionFlag): boolean;
+    setAlignment(alignment: Deity): this;
     /**
      * Creates an identical clone of this action.
      */

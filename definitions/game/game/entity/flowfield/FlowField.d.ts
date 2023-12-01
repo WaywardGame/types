@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { MoveType } from "game/entity/IEntity";
-import type { IPreSerializeCallback } from "save/serializer/ISerializer";
-import type Human from "game/entity/Human";
+import type Human from "@wayward/game/game/entity/Human";
+import { MoveType } from "@wayward/game/game/entity/IEntity";
+import type { IPreSerializeCallback } from "@wayward/game/save/serializer/ISerializer";
 export default class FlowField implements IPreSerializeCallback {
     readonly x: number;
     readonly y: number;

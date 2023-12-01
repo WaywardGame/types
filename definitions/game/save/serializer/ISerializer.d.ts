@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Game } from "game/Game";
-import type Version from "utilities/Version";
+import type { Game } from "@wayward/game/game/Game";
+import type Version from "@wayward/game/utilities/Version";
 export interface ISerializer {
     readonly game: Game;
     readonly version: Version.String;
@@ -26,6 +26,8 @@ export interface ISerializer {
     writeProperty(object: any, key: any): void;
     readMap(object: any, key: any): Map<any, any>;
     writeMap(value: Map<any, any>): void;
+    readString(): string;
+    writeString(value: string): void;
 }
 export declare enum SerializerMetadataKey {
     Island = 0,

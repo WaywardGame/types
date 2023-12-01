@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ActionType } from "game/entity/action/IAction";
-import type { EntityType } from "game/entity/IEntity";
-import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
-import type { InfoProvider } from "game/inspection/InfoProvider";
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import type { Quality } from "game/IObject";
-import type Island from "game/island/Island";
-import type Translation from "language/Translation";
-import type { TranslationGenerator } from "ui/component/IComponent";
+import type { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type { EntityType } from "@wayward/game/game/entity/IEntity";
+import { InfoDisplayLevel } from "@wayward/game/game/inspection/IInfoProvider";
+import type { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import type { Quality } from "@wayward/game/game/IObject";
+import type Island from "@wayward/game/game/island/Island";
+import type Translation from "@wayward/game/language/Translation";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export interface IDescribed {
     entityType: EntityType;
     type: number;

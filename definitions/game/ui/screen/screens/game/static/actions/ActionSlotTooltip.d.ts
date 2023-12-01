@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { InspectType } from "game/inspection/IInspection";
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import type Inspection from "game/inspection/Inspection";
-import InspectionsHandler from "game/inspection/InspectionsHandler";
-import InspectionsList from "ui/screen/screens/game/component/InspectionsList";
-import type { InspectionTooltipHints } from "ui/screen/screens/game/InspectionsTooltipHandler";
-import InspectionsTooltipHandler from "ui/screen/screens/game/InspectionsTooltipHandler";
-import type { ActionSlot } from "ui/screen/screens/game/static/ActionBar";
-import type HashSet from "utilities/collection/set/HashSet";
+import { InspectType } from "@wayward/game/game/inspection/IInspection";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import type Inspection from "@wayward/game/game/inspection/Inspection";
+import InspectionsHandler from "@wayward/game/game/inspection/InspectionsHandler";
+import type { InspectionTooltipHints } from "@wayward/game/ui/screen/screens/game/InspectionsTooltipHandler";
+import InspectionsTooltipHandler from "@wayward/game/ui/screen/screens/game/InspectionsTooltipHandler";
+import InspectionsList from "@wayward/game/ui/screen/screens/game/component/InspectionsList";
+import type { ActionSlot } from "@wayward/game/ui/screen/screens/game/static/actions/ActionSlot";
+import type HashSet from "@wayward/utilities/collection/set/HashSet";
 export declare enum ActionSlotTooltipClasses {
     Hints = "game-action-slot-tooltip-hints"
 }
@@ -25,11 +25,12 @@ export default class ActionSlotTooltipHandler extends InspectionsTooltipHandler<
     protected initializeHints(hints: InspectionTooltipHints, slot: ActionSlot): void;
     private onSlotChanged;
 }
-declare class ActionSlotInspectionsList extends InspectionsList<ActionSlotInspectionsHandler> {
+export declare class ActionSlotInspectionsList extends InspectionsList<ActionSlotInspectionsHandler> {
     readonly slot: ActionSlot;
     constructor(slot: ActionSlot, context: InfoProviderContext);
     isValid(): boolean;
     protected initializeInspections(): ActionSlotInspectionsHandler;
+    protected onInspect(): boolean;
 }
 declare class ActionSlotInspectionsHandler extends InspectionsHandler {
     private readonly slot;

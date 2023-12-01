@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { IslandModifierType } from "game/options/modifiers/island/IslandModifier";
+import { IslandModifierType } from "@wayward/game/game/options/modifiers/island/IslandModifier";
 declare const islandNameModifierDescriptors: Descriptions<IslandModifierType, [adjective: string, noun: string]>;
 export default islandNameModifierDescriptors;

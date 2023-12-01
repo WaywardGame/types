@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import type Human from "game/entity/Human";
-import Component from "ui/component/Component";
-import { Quadrant } from "ui/screen/screens/game/component/IQuadrantComponent";
-import QuadrantComponent from "ui/screen/screens/game/component/QuadrantComponent";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type Human from "@wayward/game/game/entity/Human";
+import Component from "@wayward/game/ui/component/Component";
+import { Quadrant } from "@wayward/game/ui/screen/screens/game/component/IQuadrantComponent";
+import QuadrantComponent from "@wayward/game/ui/screen/screens/game/component/QuadrantComponent";
 export default class StatsQuadrant extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
     get preferredQuadrant(): Quadrant;

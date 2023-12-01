@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IVector2 } from "utilities/math/IVector";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 export declare enum Direction {
     None = -1,
     East = 0,
@@ -20,7 +20,7 @@ export declare enum Direction {
     Southeast = 6,
     Southwest = 7
 }
-export declare module Direction {
+export declare namespace Direction {
     type CardinalNames = "East" | "North" | "West" | "South";
     type Cardinal = (typeof CARDINALS)[number];
     type Ordinal = (typeof ORDINALS)[number];
@@ -29,6 +29,12 @@ export declare module Direction {
     const CARDINALS: readonly [Direction.East, Direction.North, Direction.West, Direction.South];
     const ORDINALS: readonly [Direction.Northwest, Direction.Northeast, Direction.Southeast, Direction.Southwest];
     const DIRECTIONS: readonly [Direction.East, Direction.North, Direction.West, Direction.South, Direction.Northwest, Direction.Northeast, Direction.Southeast, Direction.Southwest];
+    const NEXT_CARDINAL: {
+        1: Direction;
+        0: Direction;
+        3: Direction;
+        2: Direction;
+    };
     function isCardinal(value: unknown): value is Cardinal;
     function isOrdinal(value: unknown): value is Ordinal;
     function isValid(value: unknown): value is Valid;
@@ -56,11 +62,11 @@ export declare module Direction {
     /**
      * `0` = East
      */
-    function fromRadians(rad: number): Direction;
+    function fromRadians(rad: number): Direction.Cardinal;
     /**
      * `0` = East
      */
-    function fromDegrees(deg: number): Direction;
+    function fromDegrees(deg: number): Direction.Cardinal;
     const HORIZONTAL: Readonly<Record<Direction, boolean>>;
     const VERTICAL: Readonly<Record<Direction, boolean>>;
 }

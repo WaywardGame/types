@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type ISpriteInfo from "renderer/ISpriteInfo";
-import { PriorityMap } from "utilities/collection/map/PriorityMap";
-import type { IRGB } from "utilities/Color";
+import type { ISpriteInfo } from "@wayward/game/renderer/ISpriteInfo";
+import { PriorityMap } from "@wayward/utilities/collection/map/PriorityMap";
+import type { IRGB } from "@wayward/utilities/Color";
 export type IRenderFunction = (sprite: number | ISpriteInfo) => void;
 export type IRenderLayerImplementation = (render: IRenderFunction) => any;
 export type SpriteLineOrRenderLayerImpl = number | IRenderLayerImplementation;

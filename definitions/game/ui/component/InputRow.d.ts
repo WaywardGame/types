@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import Input from "ui/component/Input";
-import { LabelledRow } from "ui/component/LabelledRow";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import Input from "@wayward/game/ui/component/Input";
+import { LabelledRow } from "@wayward/game/ui/component/LabelledRow";
 export interface IInputRowEvents extends Events<LabelledRow> {
     change(text: string): any;
     toggleDisabled(disabled: boolean): any;

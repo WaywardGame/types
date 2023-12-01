@@ -8,43 +8,40 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import "@cplusplus/index";
-import "@hosts/shared/globalTypes";
+import "@wayward/cplusplus/index";
+import type WAudio from "@wayward/game/audio/Audio";
+import type { Game } from "@wayward/game/game/Game";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type Island from "@wayward/game/game/island/Island";
+import type { ItemType } from "@wayward/game/game/item/IItem";
+import type Multiplayer from "@wayward/game/multiplayer/Multiplayer";
+import type { Renderer } from "@wayward/game/renderer/Renderer";
+import type Renderers from "@wayward/game/renderer/Renderers";
+import type SaveData from "@wayward/game/save/data/SaveData";
+import type SaveDataGlobal from "@wayward/game/save/data/SaveDataGlobal";
+import "@wayward/game/typings/jquery";
+import "@wayward/game/typings/jqueryui";
+import type { Ui } from "@wayward/game/ui/Ui";
+import type OldUi from "@wayward/game/ui/old/OldUi";
+import type Version from "@wayward/game/utilities/Version";
 import "@wayward/goodstream/apply";
-import type WAudio from "audio/Audio";
-import type Player from "game/entity/player/Player";
-import type { Game } from "game/Game";
-import type Island from "game/island/Island";
-import type { ItemType } from "game/item/IItem";
-import type LanguageManager from "language/LanguageManager";
-import type { IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
-import type Multiplayer from "multiplayer/Multiplayer";
-import type Renderer from "renderer/Renderer";
-import type Renderers from "renderer/Renderers";
-import type SaveData from "save/data/SaveData";
-import type SaveDataGlobal from "save/data/SaveDataGlobal";
-import "typings/jquery";
-import "typings/jqueryui";
-import type { ISortable, ISortableOptions } from "ui/old/functional/IFunctionalSortable";
-import type OldUi from "ui/old/OldUi";
-import type { Ui } from "ui/Ui";
-import "utilities/prototype/Promise";
-import "utilities/typesglobal/Class";
-import "utilities/typesglobal/Descriptions";
-import "utilities/typesglobal/Function";
-import "utilities/typesglobal/Iterables";
-import "utilities/typesglobal/Misc";
-import "utilities/typesglobal/Objects";
-import "utilities/typesglobal/Types";
-import type Version from "utilities/Version";
+import "@wayward/hosts/shared/globalTypes";
+import "@wayward/utilities/IGlobal";
+import "@wayward/utilities/prototype/Promise";
+import "@wayward/utilities/typesglobal/Class";
+import "@wayward/utilities/typesglobal/Descriptions";
+import "@wayward/utilities/typesglobal/Function";
+import "@wayward/utilities/typesglobal/Immutable";
+import "@wayward/utilities/typesglobal/Iterables";
+import "@wayward/utilities/typesglobal/Misc";
+import "@wayward/utilities/typesglobal/Objects";
+import "@wayward/utilities/typesglobal/Types";
 declare global {
     let audio: WAudio | undefined;
     let game: Game;
-    let languageManager: LanguageManager;
     let localIsland: Island;
     let localPlayer: Player;
     let multiplayer: Multiplayer;
-    let multiplayerNetworkingOptions: IMultiplayerNetworkingOptions;
     let oldui: OldUi;
     let renderer: Renderer | undefined;
     let renderers: Renderers;
@@ -60,9 +57,6 @@ declare global {
     const gameVersionTitleMajor: string;
     const gameVersionTitleMinor: string;
     const gameVersionTitle: string;
-    const isNodeJs: boolean;
-    const isWebWorker: boolean;
-    const overlayWorks: boolean | undefined;
     let webGlVersion: number;
     const VIEWPORT_MIN_WIDTH: number;
     const VIEWPORT_MIN_HEIGHT: number;
@@ -76,8 +70,5 @@ declare global {
     }
     interface JQuery {
         getItemType(): ItemType;
-        functionalSortable(data: string, ...args: any[]): void;
-        functionalSortable(data: ISortableOptions): ISortable;
-        import(template: JQuery | HTMLTemplateElement): JQuery;
     }
 }

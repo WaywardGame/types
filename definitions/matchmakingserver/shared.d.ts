@@ -35,7 +35,7 @@ export type Connections = Map<string, ClientConnection>;
 export interface IServer {
     serverDetails?: Partial<IServerServerDetails>;
     gameDetails?: Partial<IServerGameDetails>;
-    pendingCheckConnectionTimeoutId?: NodeJS.Timer;
+    pendingCheckConnectionTimeoutId?: NodeJS.Timeout;
     pendingCheckConnectionPromise?: Promise<ICheckConnectionServerDirectoryResponse>;
     pendingCheckConnectionResolve?: (response: ICheckConnectionServerDirectoryResponse) => void;
 }
@@ -60,7 +60,7 @@ export interface IServerGameDetails {
     maxPlayers: number;
     difficulty: number;
     pvp: boolean;
-    reputation: number;
+    alignment: number;
     days: number;
     mods: IServerMod[];
     peaceful: boolean;

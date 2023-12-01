@@ -8,27 +8,35 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Human from "game/entity/Human";
-import type Player from "game/entity/player/Player";
-import type { Game } from "game/Game";
-import { TickFlag } from "game/IGame";
-import type Island from "game/island/Island";
-import type Item from "game/item/Item";
-import DrawnMap from "game/mapping/DrawnMap";
-import Component from "ui/component/Component";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import Screen from "ui/screen/Screen";
-import { Quadrant } from "ui/screen/screens/game/component/IQuadrantComponent";
-import type QuadrantComponent from "ui/screen/screens/game/component/QuadrantComponent";
-import { DialogId } from "ui/screen/screens/game/Dialogs";
-import { QuadrantComponentId } from "ui/screen/screens/game/IGameScreenApi";
-import type ActionBar from "ui/screen/screens/game/static/ActionBar";
-import MenuBar from "ui/screen/screens/game/static/MenuBar";
-import type Messages from "ui/screen/screens/game/static/Messages";
-import type StatsQuadrant from "ui/screen/screens/game/static/Stats";
-import MovementHandler from "ui/screen/screens/game/util/movement/MovementHandler";
-import WorldTooltipHandler from "ui/screen/screens/game/WorldTooltipHandler";
-import type { Direction } from "utilities/math/Direction";
+import type { Game } from "@wayward/game/game/Game";
+import { TickFlag } from "@wayward/game/game/IGame";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
+import type Human from "@wayward/game/game/entity/Human";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type Island from "@wayward/game/game/island/Island";
+import type { IContainer } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type ItemManager from "@wayward/game/game/item/ItemManager";
+import DrawnMap from "@wayward/game/game/mapping/DrawnMap";
+import type Tile from "@wayward/game/game/tile/Tile";
+import Component from "@wayward/game/ui/component/Component";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import Screen from "@wayward/game/ui/screen/Screen";
+import { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
+import { QuadrantComponentId } from "@wayward/game/ui/screen/screens/game/IGameScreenApi";
+import WorldTooltipHandler from "@wayward/game/ui/screen/screens/game/WorldTooltipHandler";
+import ContainerBucket from "@wayward/game/ui/screen/screens/game/component/ContainerBucket";
+import { Quadrant } from "@wayward/game/ui/screen/screens/game/component/IQuadrantComponent";
+import type QuadrantComponent from "@wayward/game/ui/screen/screens/game/component/QuadrantComponent";
+import type ContainerDialog from "@wayward/game/ui/screen/screens/game/dialog/ContainerDialog";
+import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
+import MenuBar from "@wayward/game/ui/screen/screens/game/static/MenuBar";
+import type Messages from "@wayward/game/ui/screen/screens/game/static/Messages";
+import type StatsQuadrant from "@wayward/game/ui/screen/screens/game/static/Stats";
+import MovementHandler from "@wayward/game/ui/screen/screens/game/util/movement/MovementHandler";
+import type { Direction } from "@wayward/game/utilities/math/Direction";
+import type Stream from "@wayward/goodstream";
 export type IDialogStates = {
     [key in `${DialogId}` | `${DialogId},${string}`]: boolean;
 };
@@ -46,30 +54,40 @@ export default class GameScreen extends Screen {
     private quadrantContainer;
     private readonly quadrantMap;
     private readonly quadrantComponents;
-    private readonly gameCanvas;
+    private readonly gameComponent;
     private readonly effects;
     private readonly placeholders;
     private readonly popupOverlayWrapper;
     private islandIntroPopupOverlay?;
     private readonly pausedPopupOverlay;
+    private readonly nightPopupOverlay;
     private readonly buttonRespawn;
     constructor();
-    getQuadrantComponents(): import("@wayward/goodstream").default<QuadrantComponent>;
+    private get gameCanvasComponent();
+    getQuadrantComponents(): Stream<QuadrantComponent>;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: QuadrantComponentId): (never extends C ? QuadrantComponent : C extends never[] ? QuadrantComponent | C : {} extends C ? QuadrantComponent | Partial<QuadrantComponent> : QuadrantComponent | C) | undefined;
-    getQuadrantContainer(): Component<HTMLElement>;
-    isMouseWithin(): Component<HTMLElement> | undefined;
+    getQuadrantContainer(): Component;
+    isMouseWithin(): Component | undefined;
     mouseStartWasWithin(api: IBindHandlerApi): boolean | undefined;
+    getContainerBucket(container?: IContainer): ContainerBucket | undefined;
+    hasOpenContainerBucket(container?: IContainer): boolean;
+    hasOpenAncestorBuckets(container?: IContainer): boolean;
+    openContainerDialog(container?: IContainer): false | ContainerDialog;
+    closeContainerDialog(container?: IContainer): boolean;
     private readonly cinematicModeReasons;
     toggleCinematicMode(enabled: boolean, reason: string): this;
     onGameStart(game: Game, _isLoadingSave: boolean, _playedCount: number): void;
     onLoadedOnIsland(player: Player, island: Island): void;
     private showIslandIntro;
-    onGameTickEnd(game: Game, tickFlag: TickFlag): void;
+    onIslandTickEnd(island: Island, tickFlag: TickFlag): void;
     onExploreAsGhost(): void;
     /**
      * Notee: calculateEquipmentStats is always ran after calculateStats is called, so this will work
      */
     onCalculateEquipmentStats(): void;
+    onNightlyAlignmentChange(): Promise<void>;
+    protected onItemRevertFromDoodad(item: Item, doodad: Doodad): void;
+    protected onRemoveContainableFromContainer(itemManager: ItemManager, items: Item[], container?: IContainer): void;
     /**
      * Refreshed death / ghost state stuff
      */
@@ -96,7 +114,7 @@ export default class GameScreen extends Screen {
     protected onSailOffMapEdge(player: Player, direction: Direction): void;
     protected onDie(player: Player, showingGameEndScreen?: boolean): void;
     protected onRespawn(): void;
-    protected onItemMenu(api: IBindHandlerApi): boolean;
+    protected onEntityMoved(object: EntityMovable, lastTile: Tile, tile: Tile): void;
     protected onZoom(api: IBindHandlerApi): boolean;
     protected onInspect(api: IBindHandlerApi): boolean;
     protected onScreenshotMode(): boolean;

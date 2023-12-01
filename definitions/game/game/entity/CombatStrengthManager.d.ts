@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Human from "game/entity/Human";
-import type Creature from "game/entity/creature/Creature";
-import { CreatureType } from "game/entity/creature/ICreature";
+import type Human from "@wayward/game/game/entity/Human";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 export declare enum CombatStrength {
     Tier0 = 0,
     Tier1 = 1,
@@ -45,7 +45,7 @@ export default class CombatStrengthManager {
     /**
      * Calculates a float value between 0 and 1 representing a creature's difficulty.
      */
-    getCreature(creature: Creature | CreatureType, aberrant?: boolean): number;
+    getCreature(creature: CreatureType, aberrant?: boolean): number;
     getCreatureDifficultyAgainstHuman(creature: Creature, human: Human): number;
     private getEstimatedTurnsToKillHuman;
     private getEstimatedTurnsToKillCreature;

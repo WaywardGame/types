@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { DialogId } from "ui/screen/screens/game/Dialogs";
+import { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
 declare const dialogs: Record<DialogId, string>;
 export default dialogs;

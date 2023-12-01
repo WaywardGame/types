@@ -8,13 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type NPC from "game/entity/npc/NPC";
-import type { IContainer, IDismantleComponent, ItemType } from "game/item/IItem";
-import type Item from "game/item/Item";
-import "ui/old/functional/FunctionalSortable";
-import type { IDialogInfo, OldUiDialogId } from "ui/old/IOldUi";
-import InGameScreen from "ui/old/screens/InGameScreen";
+import type { IDismantleComponent, ItemType } from "@wayward/game/game/item/IItem";
+import InGameScreen from "@wayward/game/ui/old/screens/InGameScreen";
 export default class OldUi {
     screenInGame: InGameScreen | undefined;
     private readonly elementDocument;
@@ -37,26 +32,10 @@ export default class OldUi {
     isOptionsOverlayEnabled(): boolean;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent, force?: boolean): void;
-    filterContainers(): void;
-    getInventoryItemOrder(): any[];
-    updateItem(item: Item, updateChildren?: boolean): void;
-    syncDecayBar(item: Item, syncDamage?: boolean): void;
-    syncItemElements(itemIds: number | number[], forceSyncDecay?: boolean): void;
     shouldRefreshMods(): boolean;
-    onGameEnd(): void;
     getSerializationProperties(_: string): string[];
-    closeAllContainers(): void;
-    hasOpenContainer(): boolean;
-    openContainer(container: IContainer, containerNameSource: NPC | Doodad | Item): void;
-    closeContainer(container: IContainer): void;
-    refreshContainerName(container: IContainer): void;
-    isContainerOpen(value: unknown): boolean;
-    startAddingMultipleItemsToContainer(container: IContainer): void;
-    completeAddingMultipleItemsToContainer(container: IContainer, itemsToSync?: Item[]): void;
-    getDialogInfo(dialogId: OldUiDialogId): IDialogInfo;
     setVersionExtra(msg: string): void;
     openDialogs(): void;
-    cancelSorting(): void;
     logErrorEvent(event: ErrorEvent | (Partial<ErrorEvent> & Error)): void;
     private loggingRejection;
     private logPromiseRejectionEvent;

@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Action } from "game/entity/action/Action";
-import type { IActionUsable } from "game/entity/action/IAction";
-import type { ITileContainer } from "game/tile/ITerrain";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import type { ITileContainer } from "@wayward/game/game/tile/ITerrain";
 export interface IPickUpAllItemsCanUse extends IActionUsable {
     tileContainer: ITileContainer;
 }
-declare const _default: Action<[], import("../../Human").default<number>, void, IPickUpAllItemsCanUse, []>;
+declare const _default: Action<[], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpAllItemsCanUse, []>;
 export default _default;

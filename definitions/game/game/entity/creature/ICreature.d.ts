@@ -8,31 +8,33 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SfxType } from "audio/IAudio";
-import type { BiomeType } from "game/biome/IBiome";
-import type Doodad from "game/doodad/Doodad";
-import type Creature from "game/entity/creature/Creature";
-import type { IEntityWithStatsEvents } from "game/entity/EntityWithStats";
-import type Human from "game/entity/Human";
-import type { DamageType, Defense, ICausesStatusEffect, IStatChangeInfo, MoveType } from "game/entity/IEntity";
-import { AiType } from "game/entity/IEntity";
-import type { IStat } from "game/entity/IStats";
-import type { IPackedMessage } from "game/entity/player/IMessageManager";
-import type StatusEffect from "game/entity/status/StatusEffect";
-import type { ItemType, ItemTypeGroup } from "game/item/IItem";
-import type Item from "game/item/Item";
-import type { LootGroupType } from "game/item/LootGroups";
-import type { ITemperatureDescription } from "game/temperature/ITemperature";
-import type { TileEventType } from "game/tile/ITileEvent";
-import type Tile from "game/tile/Tile";
-import type { WorldZ } from "game/WorldZ";
-import type Message from "language/dictionary/Message";
-import type TranslationImpl from "language/impl/TranslationImpl";
-import type Translation from "language/Translation";
-import type { IModdable } from "mod/ModRegistry";
-import type { StatNotificationType } from "renderer/notifier/INotifier";
-import type { IRGB } from "utilities/Color";
-import type { IRange } from "utilities/math/Range";
+import type { SfxType } from "@wayward/game/audio/IAudio";
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { IEntityWithStatsEvents } from "@wayward/game/game/entity/EntityWithStats";
+import type Human from "@wayward/game/game/entity/Human";
+import type { DamageType, Defense, EntityType, ICausesStatusEffect, IStatChangeInfo, MoveType, SlippingSpeed } from "@wayward/game/game/entity/IEntity";
+import { AiType } from "@wayward/game/game/entity/IEntity";
+import type { IStat } from "@wayward/game/game/entity/IStats";
+import type { IPackedMessage } from "@wayward/game/game/entity/player/IMessageManager";
+import type StatusEffect from "@wayward/game/game/entity/status/StatusEffect";
+import type { ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type { LootGroupType } from "@wayward/game/game/item/LootGroups";
+import type { ITemperatureDescription } from "@wayward/game/game/temperature/ITemperature";
+import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type { WorldZ } from "@wayward/utilities/game/WorldZ";
+import type Message from "@wayward/game/language/dictionary/Message";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type Translation from "@wayward/game/language/Translation";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type { StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
+import type { IRGB } from "@wayward/utilities/Color";
+import type { IRange } from "@wayward/utilities/math/Range";
+import type { RuneChance } from "@wayward/game/game/deity/IDeities";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
 export declare enum CreatureType {
     Slime = 0,
     JellyCube = 1,
@@ -94,7 +96,9 @@ export declare enum CreatureType {
     ClayGolem = 57,
     GraniteGolem = 58,
     SandstoneGolem = 59,
-    BasaltGolem = 60
+    BasaltGolem = 60,
+    ShadowCreature = 61,
+    PirateSkeleton = 62
 }
 export interface ICreatureOld extends Creature {
     hp: number;
@@ -102,6 +106,24 @@ export interface ICreatureOld extends Creature {
     happiness?: number;
     chickenEggCounter?: number;
     goatMilkCounter?: number;
+}
+export interface ICreatureEntityTypeOld {
+    id: number;
+    owner?: {
+        type: EntityType.Player;
+        identifier: string;
+    } | {
+        type: EntityType.NPC;
+        id: number;
+    };
+    tameTime?: number;
+    enemy?: {
+        type: EntityType;
+        id: number;
+        attacks: number;
+        attempts: number;
+        breakAway?: boolean;
+    };
 }
 export declare enum SpawnGroup {
     Any = 0,
@@ -114,7 +136,8 @@ export declare enum SpawnGroup {
     FreshWater = 7,
     EasyNight = 8,
     CaveVoid = 9,
-    SwampWater = 10
+    SwampWater = 10,
+    Cursed = 11
 }
 export declare enum TileGroup {
     None = 0,
@@ -175,7 +198,7 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
     lootGroup?: LootGroupType;
     jumpOver?: boolean;
     noCorpse?: boolean;
-    reputation: number;
+    runeChance: RuneChance;
     waterAnimations?: boolean;
     tamingDifficulty?: number;
     acceptedItems?: Array<ItemType | ItemTypeGroup>;
@@ -185,7 +208,7 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
     /**
      * If true, this creature will not create puddles when walking in water.
      */
-    noSplash?: boolean;
+    noPuddles?: boolean;
     particlesOnMove?: boolean;
     particlesOnSpawn?: boolean;
     providesFire?: boolean;
@@ -252,6 +275,11 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
     weight: number;
     aberrantWeight: number;
     /**
+     *
+     * If set, creatures can slip at this speed.
+     */
+    slippingSpeed?: SlippingSpeed;
+    /**
      * If set, creature will only listen to certain commands.
      */
     allowedCommands?: AiType[];
@@ -291,16 +319,20 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
          */
         doSpecialAttack: (creature: Creature, enemy: Creature | Human) => boolean;
     };
+    /**
+     * If true, creature will perform their special ability when killing a player or NPC with a bypass
+     */
+    doesSpecialAbilityOnKill?: boolean;
 }
 export interface ICreatureSpawn {
     /**
-     * The reputation of the player or players (averaged) at which the creature spawns at
+     * The alignment of the player or players (averaged) at which the creature spawns at
      */
-    spawnsOnReputation?: number;
+    spawnsOnAlignment?: number;
     /**
-     * True if the creature's spawnsOnReputation is set <= 0 and you want the creature to spawn on any positive reputation value
+     * True if the creature's spawnsOnAlignment is set <= 0 and you want the creature to spawn on any positive alignment value
      */
-    spawnsOnPositiveReputation?: boolean;
+    spawnsOnAnyPositiveAlignment?: boolean;
 }
 export interface ICreatureLoot {
     item: ItemType;
@@ -322,11 +354,12 @@ export interface IDamageInfo {
     creature?: Creature;
     doodad?: Doodad;
     skipMilestones?: boolean;
-    legacy?: boolean;
+    noCalculation?: boolean;
     damageMessage?: Message | Translation;
     soundDelay?: number;
     surpressAttackAnimation?: boolean;
     statusEffect?: StatusEffect;
+    tileEvent?: TileEvent;
 }
 export interface IDamageOutcomeInput {
     human?: Human;

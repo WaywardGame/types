@@ -8,13 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Entity from "game/entity/Entity";
-import type EntityWithStats from "game/entity/EntityWithStats";
-import type { IStatChangeInfo } from "game/entity/IEntity";
-import type { IStat, IStatMax, Stat } from "game/entity/IStats";
-import Translation from "language/Translation";
-import Component from "ui/component/Component";
-import Text from "ui/component/Text";
+import type Entity from "@wayward/game/game/entity/Entity";
+import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
+import type { IStatChangeInfo } from "@wayward/game/game/entity/IEntity";
+import type { IStat, IStatBase, IStatMax, Stat } from "@wayward/game/game/entity/IStats";
+import Translation from "@wayward/game/language/Translation";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import Component from "@wayward/game/ui/component/Component";
+import Text from "@wayward/game/ui/component/Text";
 export declare abstract class StatComponent extends Component {
     private readonly entity;
     private readonly stat;
@@ -24,7 +25,7 @@ export declare abstract class StatComponent extends Component {
     /**
      * Returns the attached entity's `IStat` for this `StatElement`'s `Stat`.
      */
-    getStat<S extends IStat>(): S & (S extends import("game/entity/IStats").IStatBase ? {
+    getStat<S extends IStat>(): S & (S extends IStatBase ? {
         base: S;
     } : undefined);
     /**
@@ -50,7 +51,7 @@ export declare abstract class StatComponent extends Component {
     /**
      * Returns the generic string representation of this stat.
      */
-    protected getGenericStatValue(stat: IStat): import("../../../../../../../language/impl/TranslationImpl").default;
+    protected getGenericStatValue(stat: IStat): TranslationImpl;
     /**
      * Event handler for when a stat changes. Updates the text, color, icon, and tooltip of this `StatElement`.
      *
@@ -78,14 +79,14 @@ export declare class Statbar extends StatComponent {
     private readonly text;
     constructor(entity: EntityWithStats, stat: Stat, noEvents?: true);
     getTextElement(): Text;
-    getDisplayElement(): Component<HTMLElement>;
-    getGenericStatValue(stat: IStatMax): import("../../../../../../../language/impl/TranslationImpl").default;
+    getDisplayElement(): Component;
+    getGenericStatValue(stat: IStatMax): TranslationImpl;
     /**
      * Overrides the superclass method of the same name. Calls the superclass method, then updates the CSS
      * property `--stat-percent`, to update the statbar's fill width.
      */
     onStatChange(_?: any, stat?: IStat, oldValue?: number): void;
-    protected getTooltipElement(): Component<HTMLElement>;
+    protected getTooltipElement(): Component;
 }
 export declare class StatAttribute extends StatComponent {
     private readonly attribute;

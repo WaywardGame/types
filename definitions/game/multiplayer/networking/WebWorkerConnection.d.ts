@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IMatchmakingInfo, MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
-import { Connection } from "multiplayer/networking/Connection";
-import type { WebWorkerClient } from "webWorker/WebWorkerClient";
+import type { IMatchmakingInfo, MatchmakingMessageData } from "@wayward/game/multiplayer/matchmaking/IMatchmaking";
+import { Connection } from "@wayward/game/multiplayer/networking/Connection";
+import type { WebWorkerClient } from "@wayward/game/webWorker/WebWorkerClient";
 export declare class WebWorkerConnection extends Connection {
     private readonly onData;
     private readonly onConnected?;
@@ -18,7 +18,7 @@ export declare class WebWorkerConnection extends Connection {
     name: string;
     get maxMessageSize(): number;
     constructor(matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, onData: (data: ArrayBuffer) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined, webWorkerClient?: WebWorkerClient | undefined);
-    isConnected(): boolean;
+    get isConnected(): boolean;
     protected onClosing(): void;
     protected onClosed(): void;
     /**

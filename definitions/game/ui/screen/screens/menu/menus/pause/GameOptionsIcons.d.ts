@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IHasImagePath } from "game/IObject";
-import type { IGameOptions, IGameOptionsPlayer } from "game/options/IGameOptions";
-import type { IModdable } from "mod/ModRegistry";
-import type Tooltip from "ui/tooltip/Tooltip";
+import type { IHasImagePath } from "@wayward/game/game/IObject";
+import type { IGameOptions, IGameOptionsPlayer } from "@wayward/game/game/options/IGameOptions";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 export declare enum GameOptionsIcon {
     Peaceful = 0,
     Creatures = 1,
@@ -19,8 +19,8 @@ export declare enum GameOptionsIcon {
     EternalDay = 3,
     EternalNight = 4,
     Time = 5,
-    Benignity = 6,
-    Malignity = 7,
+    GoodAlignment = 6,
+    EvilAlignment = 7,
     Health = 8,
     Stamina = 9,
     Hunger = 10,
@@ -36,8 +36,8 @@ export declare enum GameOptionsIcon {
     Travel = 20
 }
 export interface IGameOptionsIcon extends IModdable, IHasImagePath {
-    check(options: IGameOptions, localPlayerOption: IGameOptionsPlayer): boolean;
-    tooltip?(tooltip: Tooltip, options: IGameOptions, localPlayerOption: IGameOptionsPlayer): any;
+    check(options: IGameOptions, localPlayerOption: ImmutableObject<IGameOptionsPlayer>): boolean;
+    tooltip?(tooltip: Tooltip, options: IGameOptions, localPlayerOption: ImmutableObject<IGameOptionsPlayer>): any;
 }
 declare const gameOptionsIcons: Descriptions<GameOptionsIcon, IGameOptionsIcon>;
 export default gameOptionsIcons;

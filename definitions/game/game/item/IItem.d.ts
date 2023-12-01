@@ -8,36 +8,40 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SfxType } from "audio/IAudio";
-import type { BiomeType } from "game/biome/IBiome";
-import type { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
-import type { IActionApi } from "game/entity/action/IAction";
-import { ActionType } from "game/entity/action/IAction";
-import type Creature from "game/entity/creature/Creature";
-import type { CreatureType, TileGroup } from "game/entity/creature/ICreature";
-import type { DamageType, Defense, MoveType, StatusType } from "game/entity/IEntity";
-import type { Delay, EquipType, SkillType } from "game/entity/IHuman";
-import { Stat } from "game/entity/IStats";
-import type { IDecayTemperatureRange } from "game/IGame";
-import type { IObjectDescription, Quality } from "game/IObject";
-import type { IslandId } from "game/island/IIsland";
-import type { IMoveItemOptions } from "game/item/IItemManager";
-import type Item from "game/item/Item";
-import type Recipe from "game/item/recipe/Recipe";
-import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
-import type { MagicalSubPropertySubTypes } from "game/magic/MagicalPropertyManager";
-import type { MagicalPropertyType } from "game/magic/MagicalPropertyType";
-import type { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
-import type { TerrainType } from "game/tile/ITerrain";
-import type { TileEventType } from "game/tile/ITileEvent";
-import type Tile from "game/tile/Tile";
-import type Message from "language/dictionary/Message";
-import type TranslationImpl from "language/impl/TranslationImpl";
-import type Translation from "language/Translation";
-import type { Article } from "language/Translation";
-import type { IModdable } from "mod/ModRegistry";
-import type { IRGB } from "utilities/Color";
-import type { IVector3 } from "utilities/math/IVector";
+import type { SfxType } from "@wayward/game/audio/IAudio";
+import type { IDecayTemperatureRange } from "@wayward/game/game/IGame";
+import type { IObjectDescription, Quality } from "@wayward/game/game/IObject";
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import type { Deity } from "@wayward/game/game/deity/Deity";
+import type { RuneChance } from "@wayward/game/game/deity/IDeities";
+import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
+import type Human from "@wayward/game/game/entity/Human";
+import type { DamageType, Defense, EntityType, MoveType, StatusType } from "@wayward/game/game/entity/IEntity";
+import type { Delay, EquipType, SkillType } from "@wayward/game/game/entity/IHuman";
+import { Stat } from "@wayward/game/game/entity/IStats";
+import type { IActionApi } from "@wayward/game/game/entity/action/IAction";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { CreatureType, TileGroup } from "@wayward/game/game/entity/creature/ICreature";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type { IMoveItemOptions } from "@wayward/game/game/item/IItemManager";
+import type Item from "@wayward/game/game/item/Item";
+import type Recipe from "@wayward/game/game/item/recipe/Recipe";
+import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { MagicalSubPropertySubTypes } from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
+import type { IInsulationDescription, ITemperatureDescription } from "@wayward/game/game/temperature/ITemperature";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type Translation from "@wayward/game/language/Translation";
+import type { Article } from "@wayward/game/language/Translation";
+import type Message from "@wayward/game/language/dictionary/Message";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type { SortDirection } from "@wayward/game/save/ISaveManager";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { IRGB } from "@wayward/utilities/Color";
 export interface IItemWeightComponent {
     weightFraction?: number;
     type: ItemType;
@@ -49,6 +53,7 @@ export interface IConstructedInfo {
     weightTweak?: number;
 }
 export type IItemOld = Pick<Item, Exclude<keyof Item, "map">> & {
+    decay?: number;
     equipped?: EquipType;
     equippedPid?: number;
     legendary?: IMagicalPropertyOld;
@@ -59,8 +64,13 @@ export type IItemOld = Pick<Item, Exclude<keyof Item, "map">> & {
     magicalProperties?: IMagicalPropertyOld[];
     ownerIdentifier?: string;
     map?: [island: IslandId, id: number] | [island: IslandId, completed: boolean, decimal: number];
+    pid?: number | null;
+    driverId?: number;
+    driverType?: EntityType;
+    equippedId?: number;
+    equippedType?: EntityType;
 };
-export declare module IItemOld {
+export declare namespace IItemOld {
     function get(item: Item): IItemOld;
     function get(item?: Item): IItemOld | undefined;
 }
@@ -78,7 +88,13 @@ export interface IContainable {
 }
 interface IBaseContainer extends IContainable {
     transientItems?: Item[];
-    itemOrders?: number[];
+    addOrder?: number[];
+    stacks?: Set<ItemType>;
+    sort?: ContainerSort;
+    /**
+     * When not provided, uses SortDirection.Ascending
+     */
+    sortDirection?: SortDirection;
 }
 export interface IContainer extends IBaseContainer {
     containedItems: Item[];
@@ -118,7 +134,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      */
     durabilityModifierAtStart?: number;
     /**
-     * Do not use this property if you do not want the item to burn at all (unless flammable is set, in which case, it burns into its diassembly items).
+     * Do not use this property if you do not want the item to burn at all (unless flammable is set, in which case, it burns into its disassembly items).
      * Set it to [ItemType.None] if you want it to burn but not produce anything.
      * Otherwise, set it to an array of items you want it to burn into.
      */
@@ -137,6 +153,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     lit?: ItemType;
     damageModifier?: number;
     equip?: EquipType;
+    /**
+     * Set to true if this is a feet equip that should still allow humans to slip on tiles
+     */
+    equipCanSlip?: true;
     returnOnUseAndDecay?: IItemReturn;
     inheritWeight?: ItemType;
     attack?: number;
@@ -147,7 +167,6 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     recipe?: IRecipe;
     /**
      * A list of groups the item should belong too.
-     * Do not use this during runtime - use itemManager.getGroups instead!
      */
     group?: ItemTypeGroup[];
     /**
@@ -286,6 +305,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * Whether magical properties have no effect on this item.
      */
     magicInert?: true;
+    /**
+     * The worth of this item to each deity. Deities not provided use the item's default worth value.
+     */
+    deityWorth?: PartialRecord<Deity, number>;
     /**
      * The item name to display instead of the item's default translation
      */
@@ -478,7 +501,7 @@ export interface IMoveToTileOptions {
     toContainer?: IContainer;
     toContainerOptions?: IMoveItemOptions;
     beforeMovement?: IMoveToTileBeforeMovementOptions;
-    extinguishTorches?: boolean;
+    skipExtinguishTorches?: boolean;
     /**
      * Note: Everything done in afterMovement must be clientside only
      */
@@ -500,7 +523,7 @@ export interface IRecipe {
     level: RecipeLevel;
     requiredDoodads?: Array<DoodadType | DoodadTypeGroup>;
     requiresFire?: boolean;
-    reputation: number;
+    runeChance: RuneChance;
 }
 export interface IRecipeComponent {
     type: ItemType | ItemTypeGroup;
@@ -575,7 +598,7 @@ export interface IDismantleDescription {
     items: IDismantleItemDescription[];
     required?: ItemTypeGroup;
     skill?: SkillType;
-    reputation?: number;
+    runeChance?: RuneChance;
     producesEvent?: TileEventType;
 }
 export interface IDismantleItemDescription {
@@ -598,7 +621,7 @@ export declare enum ContainerReferenceType {
     Invalid = 0,
     PlayerInventory = 1,
     Doodad = 2,
-    World = 3,
+    TileItemContainer = 3,
     Tile = 4,
     Item = 5,
     NPCInventory = 6
@@ -621,17 +644,21 @@ export interface IInvalidContainerReference extends IBaseContainerReference {
     crt: ContainerReferenceType.Invalid;
     type?: ContainerReferenceType.Invalid;
 }
-export interface IWorldContainerReference extends IBaseContainerReference {
-    crt: ContainerReferenceType.World;
-    type?: ContainerReferenceType.World;
+export interface ITileItemContainerReference extends IBaseContainerReference {
+    crt: ContainerReferenceType.TileItemContainer;
+    type?: ContainerReferenceType.TileItemContainer;
 }
 export interface ITileContainerReference extends IBaseContainerReference, IVector3 {
     crt: ContainerReferenceType.Tile;
     type?: ContainerReferenceType.Tile;
 }
-export interface IDoodadContainerReference extends IBaseContainerReference, IVector3 {
+export interface IDoodadContainerReference extends IBaseContainerReference {
     crt: ContainerReferenceType.Doodad;
     type?: ContainerReferenceType.Doodad;
+    id: number;
+    x?: number;
+    y?: number;
+    z?: number;
 }
 export interface IItemContainerReference extends IBaseContainerReference {
     crt: ContainerReferenceType.Item;
@@ -643,7 +670,7 @@ export interface INPCInventoryContainerReference extends IBaseContainerReference
     type?: ContainerReferenceType.NPCInventory;
     id: number;
 }
-export type ContainerReference = IInvalidContainerReference | IWorldContainerReference | IPlayerInventoryContainerReference | ITileContainerReference | IDoodadContainerReference | IItemContainerReference | INPCInventoryContainerReference;
+export type ContainerReference = IInvalidContainerReference | ITileItemContainerReference | IPlayerInventoryContainerReference | ITileContainerReference | IDoodadContainerReference | IItemContainerReference | INPCInventoryContainerReference;
 export declare enum CraftResult {
     Fail = 0,
     Success = 1,
@@ -678,11 +705,23 @@ export declare enum RecipeLevel {
     Expert = 3,
     Master = 4
 }
+export declare enum ContainerSort {
+    Recent = 0,
+    Name = 1,
+    Weight = 2,
+    Group = 3,
+    Durability = 4,
+    Quality = 5,
+    Magical = 6,
+    Decay = 7,
+    Worth = 8,
+    BestForCrafting = 9
+}
 export declare enum BookType {
     RandomEvent = 0,
     IslandPresence = 1,
     Treasures = 2,
-    Deities = 3,
+    OldGods = 3,
     PastCivilizations = 4,
     SandCasting = 5,
     WanderingMerchants = 6,
@@ -699,11 +738,13 @@ export declare enum BookType {
     RemnantsOfCivilization = 17,
     AndTheVoidAnswersBack = 18,
     ThePowerOfTheWrittenWord = 19,
-    TheAbnormals = 20
+    TheAbnormals = 20,
+    TheSpirits = 21,
+    NowhereToRun = 22
 }
 export declare enum ItemType {
     None = 0,
-    Copal = 1,
+    HideGlue = 1,
     AnimalSkull = 2,
     GraniteArrow = 3,
     GraniteArrowhead = 4,
@@ -825,9 +866,9 @@ export declare enum ItemType {
     Pineapple = 120,
     TatteredMap = 121,
     Coal = 122,
-    WroughtIron = 123,
+    SmeltedWroughtIron = 123,
     LimestonePowder = 124,
-    IronIngot = 125,
+    SmeltedIron = 125,
     Backpack = 126,
     RottenMeat = 127,
     GraniteHammer = 128,
@@ -895,7 +936,7 @@ export declare enum ItemType {
     MessageInABottle = 190,
     CarbonPowder = 191,
     PileOfCompost = 192,
-    MeltedCopal = 193,
+    FishGlue = 193,
     WoodenShavings = 194,
     GraniteDeadfall = 195,
     Snare = 196,
@@ -1007,7 +1048,7 @@ export declare enum ItemType {
     WroughtIronAnvil = 302,
     IronAnvil = 303,
     MageRobe = 304,
-    OrbOfInfluence = 305,
+    CrackedOrb = 305,
     AnimalClaw = 306,
     AnimalPelt = 307,
     AnimalFur = 308,
@@ -1064,7 +1105,7 @@ export declare enum ItemType {
     RawClayMortarAndPestle = 359,
     ClayMortarAndPestle = 360,
     CopperOre = 361,
-    CopperIngot = 362,
+    SmeltedCopper = 362,
     CopperPickaxe = 363,
     CopperDoubleAxe = 364,
     CopperShovel = 365,
@@ -1127,12 +1168,12 @@ export declare enum ItemType {
     CoconutContainerOfUnpurifiedFreshWater = 422,
     CoconutContainerOfGoatMilk = 423,
     OldEducationalScroll = 424,
-    StrippedLeather = 425,
+    StrippedHide = 425,
     ClaySandCastFlask = 426,
     SandstoneSandCastFlask = 427,
     GraniteSandCastFlask = 428,
-    AnimalGlue = 429,
-    CopalResin = 430,
+    BoneGlue = 429,
+    CutHide = 430,
     BoneMeal = 431,
     PileOfDesertSand = 432,
     JoshuaTreeLeaves = 433,
@@ -1218,7 +1259,7 @@ export declare enum ItemType {
     WroughtIronKnife = 513,
     IronKnife = 514,
     TinOre = 515,
-    TinIngot = 516,
+    SmeltedTin = 516,
     TinPickaxe = 517,
     TinDoubleAxe = 518,
     TinShovel = 519,
@@ -1245,7 +1286,7 @@ export declare enum ItemType {
     TinBakingTray = 540,
     TinRefinementTools = 541,
     TinKnife = 542,
-    BronzeIngot = 543,
+    SmeltedBronze = 543,
     BronzePickaxe = 544,
     BronzeDoubleAxe = 545,
     BronzeShovel = 546,
@@ -1460,169 +1501,220 @@ export declare enum ItemType {
     SandstoneDripstone = 755,
     BasaltDripstone = 756,
     ClayDripstone = 757,
-    BronzeWaterStill = 758
+    BronzeWaterStill = 758,
+    ArmorStand = 759,
+    RuneOfEvil = 760,
+    RuneOfNeutrality = 761,
+    RuneOfGood = 762,
+    GraniteAltar = 763,
+    WoodenWheelbarrow = 764,
+    TinWheelbarrow = 765,
+    CopperWheelbarrow = 766,
+    WroughtIronWheelbarrow = 767,
+    IronWheelbarrow = 768,
+    BronzeWheelbarrow = 769,
+    GraniteCrucible = 770,
+    SandstoneCrucible = 771,
+    BasaltCrucible = 772,
+    RawClayCrucible = 773,
+    ClayCrucible = 774,
+    SandstoneAltar = 775,
+    BasaltAltar = 776,
+    ClayAltar = 777,
+    PineResin = 778,
+    SpruceResin = 779,
+    CypressResin = 780,
+    Pitch = 781,
+    PitchGlue = 782,
+    MagicalOrb = 783,
+    RawAberrantCod = 784,
+    CookedAberrantCod = 785,
+    RawAberrantBlindfish = 786,
+    CookedAberrantBlindfish = 787,
+    RawAberrantRedSnapper = 788,
+    CookedAberrantRedSnapper = 789,
+    RawAberrantWalleye = 790,
+    CookedAberrantWalleye = 791,
+    FishBones = 792,
+    Last = 793
 }
 export declare enum ItemTypeExtra {
-    None = 999,
-    TatteredMap_RolledUp = 1000,
-    TatteredMap_Completed = 1001,
-    WoodenBookcase_25 = 1002,
-    WoodenBookcase_50 = 1003,
-    WoodenBookcase_75 = 1004,
-    WoodenBookcase_100 = 1005
+    None = 794,
+    TatteredMap_RolledUp = 795,
+    TatteredMap_Completed = 796,
+    WoodenBookcase_25 = 797,
+    WoodenBookcase_50 = 798,
+    WoodenBookcase_75 = 799,
+    WoodenBookcase_100 = 800,
+    RuneOfEvilSplinters = 801,
+    RuneOfGoodCharred = 802,
+    TallySticks = 803
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
     None = 0,
-    ShipperBoat = 1
-}
-export declare enum ItemCounter {
-    None = 0,
-    Repair = 1,
-    Reinforce = 2,
-    Refine = 3,
-    Enhance = 4,
-    En = 5,
-    Upgrade = 6,
-    Transmogrify = 7
+    ShipperBoat = 1,
+    Rune = 2
 }
 export declare enum ItemTypeGroup {
-    Invalid = 800,
-    Sharpened = 801,
-    Carbon = 802,
-    Arrow = 803,
-    CookingEquipment = 804,
-    Fuel = 805,
-    Medicinal = 806,
-    Meat = 807,
-    Bait = 808,
-    Liquid = 809,
-    Treasure = 810,
-    Rock = 811,
-    Compost = 812,
-    Fabric = 813,
-    Needle = 814,
-    Cordage = 815,
-    SharpenedRock = 816,
-    Pole = 817,
-    FireSource = 818,
-    Repairing = 819,
-    Tongs = 820,
-    Hammer = 821,
-    Preservative = 822,
-    Reinforcement = 823,
-    GlassBottleOfPotableWater = 824,
-    Bullet = 825,
-    Transmogrification = 826,
-    WaterskinOfPotableWater = 827,
-    Pulp = 828,
-    ClayJugOfPotableWater = 829,
-    Powder = 830,
-    Equipment = 831,
-    Firemaking = 832,
-    Bedding = 833,
-    Tool = 834,
-    Weapon = 835,
-    Health = 836,
-    Travel = 837,
-    Housing = 838,
-    Heating = 839,
-    Storage = 840,
-    Trap = 841,
-    RawMeat = 842,
-    CookedMeat = 843,
-    ContainerOfSeawater = 844,
-    ContainerOfDesalinatedWater = 845,
-    ContainerOfMedicinalWater = 846,
-    ContainerOfPurifiedFreshWater = 847,
-    ContainerOfUnpurifiedFreshWater = 848,
-    Campfire = 849,
-    Furnace = 850,
-    Kiln = 851,
-    WaterStill = 852,
-    Anvil = 853,
-    Seed = 854,
-    Fruit = 855,
-    Vegetable = 856,
-    Tinder = 857,
-    Bone = 858,
-    Kindling = 859,
-    MortarAndPestle = 860,
-    ContainerOfMilk = 861,
-    Book = 862,
-    CoconutContainerOfPotableWater = 863,
-    SandCastFlask = 864,
-    Glue = 865,
-    FireStarter = 866,
-    Sand = 867,
-    Untradable = 868,
-    Cookware = 869,
-    Refinement = 870,
-    LitTorch = 871,
-    LightDevice = 872,
-    Enchantment = 873,
-    Other = 874,
-    CookedFood = 875,
-    LitCandle = 876,
-    LiquidContainer = 877,
-    FrozenWater = 878,
-    RawFish = 879,
-    Insect = 880,
-    Upgrading = 881,
-    Enhancement = 882,
-    FireExtinguisher = 883,
-    WeaponThatFiresArrows = 884,
-    WeaponThatFiresBullets = 885,
-    BecomesFireSource = 886,
-    Egg = 887,
-    Alteration = 888,
-    WispContainer = 889,
-    Shirt = 890,
-    Trousers = 891,
-    Spine = 892,
-    Spores = 893,
-    Stick = 894,
-    NotStockedOnMerchants = 895,
-    ContainerOfSwampWater = 896,
-    ContainerOfFilteredWater = 897,
-    Sundial = 898,
-    Axle = 899,
-    Minecart = 900,
-    Track = 901,
-    EquippableMainHand = 902,
-    EquippableOffHand = 903,
-    EquippableHead = 904,
-    EquippableNeck = 905,
-    EquippableChest = 906,
-    EquippableHands = 907,
-    EquippableWaist = 908,
-    EquippableLegs = 909,
-    EquippableFeet = 910,
-    EquippableBack = 911,
-    Absorbing = 912,
-    Exuding = 913,
-    DualWield = 914,
-    TwoHanded = 915,
-    Boat = 916,
-    Text = 917,
-    ContainerWithLiquid = 918,
-    CraftingMaterial = 919,
-    MagicalComponent = 920,
-    Scarecrow = 921,
-    Well = 922,
-    Mapping = 923,
-    Terrain = 924,
-    Lighthouse = 925,
-    SeedBearer = 926,
-    Mushroom = 927,
-    Lockpick = 928,
-    WaterPurification = 929,
-    CreatureContainment = 930,
-    Gem = 931,
-    Golem = 932,
-    CreatureResource = 933,
-    Dripstone = 934,
-    All = 935,
-    Last = 936
+    Invalid = -9999,
+    Sharpened = -9998,
+    Carbon = -9997,
+    Arrow = -9996,
+    CookingEquipment = -9995,
+    Fuel = -9994,
+    Medicinal = -9993,
+    Meat = -9992,
+    Bait = -9991,
+    Liquid = -9990,
+    Treasure = -9989,
+    Rock = -9988,
+    Compost = -9987,
+    Fabric = -9986,
+    Needle = -9985,
+    Cordage = -9984,
+    SharpenedRock = -9983,
+    Pole = -9982,
+    FireSource = -9981,
+    Repairing = -9980,
+    Tongs = -9979,
+    Hammer = -9978,
+    Preservative = -9977,
+    Reinforcement = -9976,
+    GlassBottleOfPotableWater = -9975,
+    Bullet = -9974,
+    Transmogrification = -9973,
+    WaterskinOfPotableWater = -9972,
+    Pulp = -9971,
+    ClayJugOfPotableWater = -9970,
+    Powder = -9969,
+    Equipment = -9968,
+    Firemaking = -9967,
+    Bedding = -9966,
+    Tool = -9965,
+    Weapon = -9964,
+    Health = -9963,
+    Travel = -9962,
+    Housing = -9961,
+    Heating = -9960,
+    Storage = -9959,
+    Trap = -9958,
+    RawMeat = -9957,
+    CookedMeat = -9956,
+    ContainerOfSeawater = -9955,
+    ContainerOfDesalinatedWater = -9954,
+    ContainerOfMedicinalWater = -9953,
+    ContainerOfPurifiedFreshWater = -9952,
+    ContainerOfUnpurifiedFreshWater = -9951,
+    Campfire = -9950,
+    Furnace = -9949,
+    Kiln = -9948,
+    WaterStill = -9947,
+    Anvil = -9946,
+    Seed = -9945,
+    Fruit = -9944,
+    Vegetable = -9943,
+    Tinder = -9942,
+    Bone = -9941,
+    Kindling = -9940,
+    MortarAndPestle = -9939,
+    ContainerOfMilk = -9938,
+    Book = -9937,
+    CoconutContainerOfPotableWater = -9936,
+    SandCastFlask = -9935,
+    Glue = -9934,
+    FireStarter = -9933,
+    Sand = -9932,
+    Untradable = -9931,
+    Cookware = -9930,
+    Refinement = -9929,
+    LitTorch = -9928,
+    LightDevice = -9927,
+    Enchantment = -9926,
+    Other = -9925,
+    CookedFood = -9924,
+    LitCandle = -9923,
+    LiquidContainer = -9922,
+    FrozenWater = -9921,
+    RawFish = -9920,
+    Insect = -9919,
+    Upgrading = -9918,
+    Enhancement = -9917,
+    FireExtinguisher = -9916,
+    WeaponThatFiresArrows = -9915,
+    WeaponThatFiresBullets = -9914,
+    BecomesFireSource = -9913,
+    Egg = -9912,
+    Alteration = -9911,
+    WispContainer = -9910,
+    Shirt = -9909,
+    Trousers = -9908,
+    Spine = -9907,
+    Spores = -9906,
+    Stick = -9905,
+    NotStockedOnMerchants = -9904,
+    ContainerOfSwampWater = -9903,
+    ContainerOfFilteredWater = -9902,
+    Sundial = -9901,
+    Axle = -9900,
+    Minecart = -9899,
+    Track = -9898,
+    EquippableMainHand = -9897,
+    EquippableOffHand = -9896,
+    EquippableHead = -9895,
+    EquippableNeck = -9894,
+    EquippableChest = -9893,
+    EquippableHands = -9892,
+    EquippableWaist = -9891,
+    EquippableLegs = -9890,
+    EquippableFeet = -9889,
+    EquippableBack = -9888,
+    Absorbing = -9887,
+    Exuding = -9886,
+    DualWield = -9885,
+    TwoHanded = -9884,
+    Boat = -9883,
+    Text = -9882,
+    ContainerWithLiquid = -9881,
+    CraftingMaterial = -9880,
+    MagicalComponent = -9879,
+    Scarecrow = -9878,
+    Well = -9877,
+    Mapping = -9876,
+    Terrain = -9875,
+    Lighthouse = -9874,
+    SeedBearer = -9873,
+    Mushroom = -9872,
+    Lockpick = -9871,
+    WaterPurification = -9870,
+    CreatureContainment = -9869,
+    Gem = -9868,
+    Golem = -9867,
+    CreatureResource = -9866,
+    Dripstone = -9865,
+    ArtifactOfWorship = -9864,
+    Wheelbarrow = -9863,
+    Crucible = -9862,
+    Reshaping = -9861,
+    Resin = -9860,
+    Filler = -9859,
+    All = -9858
+}
+export type StillContainerBaseItemType = ItemType.Waterskin | ItemType.GlassBottle | ItemType.ClayJug | ItemType.CoconutContainer;
+export interface IItemMovementResult {
+    flags: ItemMovementResultFlag;
+    targetCreature?: Creature;
+    targetHuman?: Human;
+}
+export declare enum ItemMovementResultFlag {
+    None = 0,
+    MovedIntoNoObstacles = 1,
+    MovedIntoObstacle = 2,
+    MovedIntoWater = 4,
+    MovedIntoDepths = 8,
+    MovedIntoVoid = 16,
+    BrokenOnImpact = 32,
+    MovedAndDamaged = 64,
+    RemovedItem = 128
 }
 export {};

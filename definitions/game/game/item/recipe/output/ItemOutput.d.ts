@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Quality } from "game/IObject";
-import type { ItemType } from "game/item/IItem";
-import type Item from "game/item/Item";
-import type Crafter from "game/item/recipe/Crafter";
-import RecipeOutput from "game/item/recipe/RecipeOutput";
-import type { RecipeInputType } from "game/item/recipe/RecipeRequirement";
-import { RecipeRequirementType } from "game/item/recipe/RecipeRequirement";
-import type { RecipeRequirementClass } from "game/item/recipe/RecipeRequirements";
-import type ItemRequirement from "game/item/recipe/requirement/ItemRequirement";
+import type { Quality } from "@wayward/game/game/IObject";
+import type { ItemType } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type Crafter from "@wayward/game/game/item/recipe/Crafter";
+import RecipeOutput from "@wayward/game/game/item/recipe/RecipeOutput";
+import type { RecipeInputType } from "@wayward/game/game/item/recipe/RecipeRequirement";
+import { RecipeRequirementType } from "@wayward/game/game/item/recipe/RecipeRequirement";
+import type { RecipeRequirementClass } from "@wayward/game/game/item/recipe/RecipeRequirements";
+import type ItemRequirement from "@wayward/game/game/item/recipe/requirement/ItemRequirement";
 declare class ItemOutput extends RecipeOutput<Item> {
     readonly itemType: ItemType;
     readonly quantity: number;
@@ -33,7 +33,7 @@ declare class ItemOutput extends RecipeOutput<Item> {
     private getDecay;
     private getOutputInventory;
 }
-declare module ItemOutput {
+declare namespace ItemOutput {
     class Intermediate {
         private readonly output;
         private readonly decays;

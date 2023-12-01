@@ -8,23 +8,31 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { GrowingStage } from "game/doodad/IDoodad";
-import { DamageType } from "game/entity/IEntity";
-import { EquipType, SkillType } from "game/entity/IHuman";
-import { Stat } from "game/entity/IStats";
-import { MessageType } from "game/entity/player/IMessageManager";
-import { Quality } from "game/IObject";
-import { Milestone } from "game/milestones/IMilestone";
-import Dictionary from "language/Dictionary";
-import Message from "language/dictionary/Message";
-import { EquipSlotTranslation, MiscTranslation } from "language/dictionary/Misc";
-import type UiTranslation from "language/dictionary/UiTranslation";
-import type { DictionaryEntryEnums } from "language/DictionaryMap";
-import TranslationImpl from "language/impl/TranslationImpl";
-import type { ISerializedTranslation, TranslationArg } from "language/ITranslation";
-import { formatListTranslation } from "language/segment/FormatListSegment";
-import ITranslationSorter from "language/utility/TranslationSorter";
-import { IStringSection } from "utilities/string/Interpolator";
+import { Quality } from "@wayward/game/game/IObject";
+import type { Deity } from "@wayward/game/game/deity/Deity";
+import type { GrowingStage } from "@wayward/game/game/doodad/IDoodad";
+import type { StatusType } from "@wayward/game/game/entity/IEntity";
+import { DamageType } from "@wayward/game/game/entity/IEntity";
+import type { EquipType, SkillType } from "@wayward/game/game/entity/IHuman";
+import { Stat } from "@wayward/game/game/entity/IStats";
+import type { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type { UsableActionType } from "@wayward/game/game/entity/action/usable/UsableActionType";
+import { MessageType } from "@wayward/game/game/entity/player/IMessageManager";
+import type { ItemType } from "@wayward/game/game/item/IItem";
+import type { IHasMagic } from "@wayward/game/game/magic/MagicalPropertyManager";
+import { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
+import { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { EnumReferenceTypes, Reference } from "@wayward/game/game/reference/IReferenceManager";
+import Dictionary from "@wayward/game/language/Dictionary";
+import type { DictionaryEntryEnums } from "@wayward/game/language/DictionaryMap";
+import type { ISerializedTranslation, TranslationArg } from "@wayward/game/language/ITranslation";
+import Message from "@wayward/game/language/dictionary/Message";
+import { EquipSlotTranslation, MiscTranslation } from "@wayward/game/language/dictionary/Misc";
+import type UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
+import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import { formatListTranslation } from "@wayward/game/language/segment/FormatListSegment";
+import ITranslationSorter from "@wayward/game/language/utility/TranslationSorter";
+import { IStringSection } from "@wayward/game/utilities/string/Interpolator";
 export declare enum Article {
     /**
      * Use no article.
@@ -44,9 +52,9 @@ export declare enum Article {
     Title = "title"
 }
 type Translation = TranslationImpl;
-declare module Translation {
-    function equals(a: Translation, b: Translation): boolean;
-    const RANDOM = "random";
+declare namespace Translation {
+    export function equals(a: Translation, b: Translation): boolean;
+    export const RANDOM = "random";
     /**
      * Gets a translation given a dictionary, entry, and translation index.
      * @param dictionary The dictionary to get a translation from, for instance, `Dictionary.Item`.
@@ -54,7 +62,7 @@ declare module Translation {
      * @param index Optional. The index of the translation in the given dictionary entry, for instance `ItemTranslation.Description`,
      * or `"random"` to return any of the translations in this entry.
      */
-    function get<DICT extends Dictionary>(dictionary: DICT, entry: Dictionary extends DICT ? string | number : DictionaryEntryEnums[DICT], index?: "random" | number): Translation;
+    export function get<DICT extends Dictionary>(dictionary: DICT, entry: Dictionary extends DICT ? string | number : DictionaryEntryEnums[DICT], index?: "random" | number): Translation;
     /**
      * Gets a translation by its translation id. Entry matching is done by changing the case-style of the inputted
      * translation id, so if you provide an all lower-case string it will not work!
@@ -74,13 +82,13 @@ declare module Translation {
      * - `Ui:menumainbuttoncontinuegame`
      * - `UI:MENUMAINBUTTONCONTINUEGAME`
      */
-    function get(translationId: string): Translation;
+    export function get(translationId: string): Translation;
     /**
      * Gets an array of all the translations in a dictionary entry.
      * @param dictionary The dictionary to get a translation from, for instance, `Dictionary.Item`.
      * @param entry The entry in the given dictionary to get a translation from, for instance, `Item.Branch`.
      */
-    function getAll<DICT extends Dictionary>(dictionary: DICT, entry: Dictionary extends DICT ? number : DictionaryEntryEnums[DICT]): Translation[];
+    export function getAll<DICT extends Dictionary>(dictionary: DICT, entry: Dictionary extends DICT ? number : DictionaryEntryEnums[DICT]): Translation[];
     /**
      * Gets an array of translations by their translation id. Entry matching is done by changing the case-style of the inputted
      * translation id, so if you provide an all lower-case string it will not work!
@@ -100,60 +108,97 @@ declare module Translation {
      * - `Ui:menumainbuttoncontinuegame`
      * - `UI:MENUMAINBUTTONCONTINUEGAME`
      */
-    function getAll(translationId: string): Translation[];
-    const empty: () => TranslationImpl;
-    const ui: (entry: string | UiTranslation) => TranslationImpl;
-    const message: (entry: string | Message) => TranslationImpl;
-    const misc: (entry: string | MiscTranslation) => TranslationImpl;
-    const skill: (entry: string | SkillType, color?: boolean) => TranslationImpl;
-    const milestone: (entry: string | Milestone, color?: boolean) => TranslationImpl;
-    const stat: (entry: string | Stat, color?: boolean, ref?: boolean) => TranslationImpl;
-    const equipSlot: (entry: string | EquipType, type?: EquipSlotTranslation) => TranslationImpl;
-    const quality: (entry: string | Quality, color?: boolean) => TranslationImpl;
+    export function getAll(translationId: string): Translation[];
+    type Translator<ENTRY extends number = number, ARGS extends any[] = []> = (entry: string | ENTRY, ...args: ARGS) => Translation;
+    export function translator<ENTRY extends number = number, ARGS extends any[] = []>(_translator: Translator<ENTRY, ARGS> | Dictionary): Translator<ENTRY, ARGS>;
+    export function refTranslator<TRANSLATOR extends Translator<number, [reference: Reference, ...any[]]>>(refType: EnumReferenceTypes, _translator: TRANSLATOR, translationReference?: false): TRANSLATOR extends Translator<infer ENTRY, [reference: Reference | undefined, ...infer ARGS]> ? Translator<ENTRY, ARGS> : never;
+    export function refTranslator<ENTRY extends number = number>(refType: EnumReferenceTypes, dictionary: Dictionary): Translator<ENTRY>;
+    export function refTranslator<ENTRY extends number = number>(refType: EnumReferenceTypes, dictionary: Dictionary, color: (entry: string | ENTRY) => TranslationImpl): Translator<ENTRY, [color?: boolean]>;
+    export const empty: () => TranslationImpl;
+    export const ui: Translator<UiTranslation, []>;
+    export const message: Translator<Message, []>;
+    export const misc: Translator<MiscTranslation, []>;
+    export const skill: Translator<SkillType, [color?: boolean | undefined]>;
+    export const milestone: Translator<Milestone, [color?: boolean | undefined]>;
+    export const stat: Translator<Stat, [color?: boolean | undefined]>;
+    export const itemType: Translator<ItemType, []>;
+    export const deity: Translator<Deity, [color?: boolean | undefined]>;
+    export const status: (entry: string | StatusType, ref?: boolean) => TranslationImpl;
+    export let action: Translator<ActionType | UsableActionType>;
+    export let magic: Translator;
+    export const equipSlot: Translator<EquipType, [type?: EquipSlotTranslation | undefined]>;
+    export const quality: Translator<Quality, [color?: any]>;
+    export const qualityList: (qualities: ArrayOr<Quality>, color?: boolean) => TranslationImpl;
+    export const qualitize: (qualities: ArrayOr<Quality>) => TranslationImpl | undefined;
     /**
      * Damage types are bit flags, so multiple can be stored in one `DamageType`.
      * This method returns a translated list of damage types.
      */
-    const damage: (damageTypes: ArrayOr<DamageType>, colorize?: boolean, reformatter?: TranslationImpl | ((type: DamageType) => Translation) | undefined) => TranslationImpl;
-    function growthStage(stage: GrowingStage, spores?: boolean): TranslationImpl;
-    function growthStage(stage?: GrowingStage, spores?: boolean): TranslationImpl | undefined;
-    function merge(...content: TranslationArg[]): TranslationImpl;
-    function mergeSpaced(...content: TranslationArg[]): TranslationImpl;
-    const getString: typeof TranslationImpl.getString;
-    const resolve: typeof TranslationImpl.resolve;
-    function colorizeQuality(quality: Quality | string | undefined): Translation;
-    function colorizeQuality(quality: Quality | string | undefined, text: string | IStringSection): IStringSection;
-    function colorizeQuality(quality: Quality | string | undefined, text: IStringSection[]): IStringSection[];
-    function colorizeMessageType(type: MessageType): Translation;
-    function colorizeMessageType(type: MessageType, text: string | IStringSection): IStringSection;
-    function colorizeMessageType(type: MessageType, text: IStringSection[]): IStringSection[];
-    function colorizeStat(type: Stat | string): Translation;
-    function colorizeStat(type: Stat | string, text: string | IStringSection): IStringSection;
-    function colorizeStat(type: Stat | string, text: IStringSection[]): IStringSection[];
-    function colorizeImportance(importance: "primary" | "secondary"): Translation;
-    function colorizeImportance(importance: "primary" | "secondary", text: string | IStringSection): IStringSection;
-    function colorizeImportance(importance: "primary" | "secondary", text: IStringSection[]): IStringSection[];
-    function classes(...classes: string[]): TranslationImpl;
-    const formatList: typeof formatListTranslation;
-    const sorter: typeof ITranslationSorter.create;
-    function nameOf(type: Dictionary, thing: number | {
+    export const damage: (damageTypes: ArrayOr<DamageType>, colorize?: boolean, reformatter?: TranslationImpl | ((type: DamageType) => Translation) | undefined) => TranslationImpl;
+    export function growthStage(stage: GrowingStage, spores?: boolean): TranslationImpl;
+    export function growthStage(stage?: GrowingStage, spores?: boolean): TranslationImpl | undefined;
+    export function merge(...content: TranslationArg[]): TranslationImpl;
+    export function mergeSpaced(...content: TranslationArg[]): TranslationImpl;
+    export const getString: typeof TranslationImpl.getString;
+    export const resolve: typeof TranslationImpl.resolve;
+    export function colorizeQuality(quality: Quality | string | undefined): Translation;
+    export function colorizeQuality(quality: Quality | string | undefined, text: string | IStringSection): Translation;
+    export function colorizeQuality(quality: Quality | string | undefined, text: IStringSection[]): Translation;
+    export function colorizeMessageType(type: MessageType): Translation;
+    export function colorizeMessageType(type: MessageType, text: string | IStringSection): Translation;
+    export function colorizeMessageType(type: MessageType, text: IStringSection[]): Translation;
+    export function colorizeStat(type: Stat | string): Translation;
+    export function colorizeStat(type: Stat | string, text: string | IStringSection): Translation;
+    export function colorizeStat(type: Stat | string, text: IStringSection[]): Translation;
+    export function colorizeImportance(importance: "primary" | "secondary"): Translation;
+    export function colorizeImportance(importance: "primary" | "secondary", text: string | IStringSection): Translation;
+    export function colorizeImportance(importance: "primary" | "secondary", text: IStringSection[]): Translation;
+    export function classes(...classes: string[]): TranslationImpl;
+    export const formatList: typeof formatListTranslation;
+    export const sorter: typeof ITranslationSorter.create;
+    export function nameOf(type: Dictionary, thing: number | {
         type: number;
         renamed?: string | ISerializedTranslation;
     }, article?: Article): Translation;
-    function nameOf(type: Dictionary, thing: number | {
+    export function nameOf(type: Dictionary, thing: number | {
         type: number;
         renamed?: string | ISerializedTranslation;
     }, count?: number, article?: Article, showRenamedQuotes?: boolean): Translation;
-    function reformatSingularNoun(): Translation;
-    function reformatSingularNoun(count: number): Translation;
-    function reformatSingularNoun(article: Article): Translation;
-    function reformatSingularNoun(count: number, article: Article): Translation;
-    function reformatSingularNoun(count?: number | Article, article?: Article): Translation;
-    interface ITranslationUpgrader {
+    export function reformatSingularNoun(): Translation;
+    export function reformatSingularNoun(count: number): Translation;
+    export function reformatSingularNoun(article: Article): Translation;
+    export function reformatSingularNoun(count: number, article: Article): Translation;
+    export function reformatSingularNoun(count?: number | Article, article?: Article): Translation;
+    export interface ITranslationUpgrader {
         translation?(translation: TranslationImpl | ISerializedTranslation): any;
         argument?(argument: TranslationArg): TranslationArg;
     }
-    function upgrade(translation: ISerializedTranslation, id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: ITranslationUpgrader): TranslationImpl | ISerializedTranslation;
-    function upgradeTranslationArgument(argument: TranslationArg, id: string, dictionary: Dictionary, entry: number, upgrader?: ITranslationUpgrader): TranslationArg;
+    export function upgrade(translation: ISerializedTranslation, id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: ITranslationUpgrader): TranslationImpl | ISerializedTranslation;
+    export function upgradeTranslationArgument(argument: TranslationArg, id: string, dictionary: Dictionary, entry: number, upgrader?: ITranslationUpgrader): TranslationArg;
+    export function formula(base?: number): TranslationFormulaBuilder;
+    type FVal = SupplierOr<number> | TranslationFormulaBuilder;
+    class TranslationFormulaBuilder {
+        private readonly components;
+        private combinedComponent?;
+        private get combinedValue();
+        private skipParenthesis?;
+        constructor(base?: FVal);
+        noParenthesis(): this;
+        translate(simplify?: boolean): Translation;
+        private parenthesize;
+        private translateAndFormatComponent;
+        private translateComponent;
+        private resolveComponentValue;
+        private getCombinedComponent;
+        combined(value?: FVal, reformatter?: Translation): this;
+        base(value: FVal, reformatter?: Translation): this;
+        mod(value?: FVal, reformatter?: Translation, alreadyIncluded?: true): this;
+        mult(value: FVal, reformatter?: Translation, alreadyIncluded?: true): this;
+        quality(quality: Quality, value: FVal, reformatter?: Translation, alreadyIncluded?: true): this;
+        skill(skill: SkillType, value: FVal, reformatter?: Translation, alreadyIncluded?: true): this;
+        magic(magic: MagicalPropertyIdentity, magical: IHasMagic, value?: FVal, reformatter?: Translation, alreadyIncluded?: true): this;
+        private addComponent;
+    }
+    export {};
 }
 export default Translation;

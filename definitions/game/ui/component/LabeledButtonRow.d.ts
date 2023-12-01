@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Button from "ui/component/Button";
-import Component from "ui/component/Component";
-import { Heading } from "ui/component/Text";
+import Button from "@wayward/game/ui/component/Button";
+import Component from "@wayward/game/ui/component/Component";
+import { Heading } from "@wayward/game/ui/component/Text";
 /**
  * [Label          Button1 Button2 Button3]
  */

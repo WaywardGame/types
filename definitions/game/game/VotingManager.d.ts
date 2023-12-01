@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Player from "game/entity/player/Player";
-import type { Game } from "game/Game";
-import type { Prompt } from "game/meta/prompt/IPrompt";
-import type InterruptChoice from "language/dictionary/InterruptChoice";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { Game } from "@wayward/game/game/Game";
+import type { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
+import type InterruptChoice from "@wayward/game/language/dictionary/InterruptChoice";
 interface IVoteResult {
     interrupt: Prompt;
     votes: Map<string, InterruptChoice | undefined>;

@@ -8,19 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { BiomeType } from "game/biome/IBiome";
-import Doodad from "game/doodad/Doodad";
-import type { IDoodadOptions } from "game/doodad/IDoodad";
-import { DoodadType, DoodadTypeExtra, DoodadTypeGroup } from "game/doodad/IDoodad";
-import type Creature from "game/entity/creature/Creature";
-import type Human from "game/entity/Human";
-import { ObjectManager } from "game/ObjectManager";
-import type { TerrainType } from "game/tile/ITerrain";
-import Tile from "game/tile/Tile";
-import type { WorldZ } from "game/WorldZ";
-import type { Article } from "language/Translation";
-import Translation from "language/Translation";
-export interface IDoodadManagerEvents {
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import Doodad from "@wayward/game/game/doodad/Doodad";
+import type { IDoodadOptions } from "@wayward/game/game/doodad/IDoodad";
+import { DoodadType, DoodadTypeExtra, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
+import EntityManager from "@wayward/game/game/entity/EntityManager";
+import type Human from "@wayward/game/game/entity/Human";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import Tile from "@wayward/game/game/tile/Tile";
+import type { Article } from "@wayward/game/language/Translation";
+import Translation from "@wayward/game/language/Translation";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type { WorldZ } from "@wayward/utilities/game/WorldZ";
+export interface IDoodadManagerEvents extends Events<EntityManager<Doodad>> {
     /**
      * Called when a doodad is about to be spawned
      * @param type The type of doodad
@@ -29,16 +30,10 @@ export interface IDoodadManagerEvents {
      * @returns False if the dooodad cannot spawn, or undefined to use the default logic
      */
     canSpawn(type: DoodadType, tile: Tile, options: IDoodadOptions): boolean | undefined;
-    /**
-     * Called when a doodad is created.
-     */
-    create(doodad: Doodad, creator?: Human): any;
-    /**
-     * Called when a doodad is removed.
-     */
-    remove(doodad: Doodad): any;
 }
-export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerEvents> {
+export default class DoodadManager extends EntityManager<Doodad> {
+    protected readonly name = "DoodadManager";
+    readonly event: IEventEmitter<this, IDoodadManagerEvents>;
     private static readonly cachedBestDoodadForTier;
     private static readonly cachedDoodadGroups;
     static readonly cachedDoodadSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, DoodadType[]>>>;
@@ -59,7 +54,7 @@ export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerE
     /**
      * Note: This can be called multiple times in the same game depending on loading/unloading of islands
      */
-    load(): void;
+    loadEntity(doodad: Doodad): void;
     isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
     isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     getGroups(doodad: DoodadType): DoodadTypeGroup[];
@@ -75,20 +70,16 @@ export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerE
     /**
      * Removes a doodad from the world.
      * @param doodad The doodad to remove
-     * @param removeItems Whether to remove items.
-     *
-     * Note: This method will remove any items in them whether the `removeItems` parameter is provided or not. If the parameter is not
-     * provided, the assumption is that it will only be called on empty doodads. Therefore, if there *are* items, it will log a warning.
      */
-    remove(doodad: Doodad, removeItems?: boolean): void;
+    protected onRemove(doodad: Doodad): boolean;
     /**
      * Runs a full gamut of updates on doodads including decaying items inside containers, spreading/growing plants/mushrooms, water distillation/desenation and more.
      */
-    updateAll(ticks: number, playingHumans: Human[], playerHumanTiles: Set<Tile>, updatesPerTick?: number): void;
+    updateAll(ticks: number, playingHumans: Human[], playerHumanTiles: Set<Tile>): void;
     /**
      * Runs a full gamut of updates on doodads including decaying items inside containers, spreading/growing plants/mushrooms, water distillation/desenation and more.
      */
-    updateAllAsync(ticks: number, playingHumans: Human[], playerHumanTiles: Set<Tile>, updatesPerTick: number | undefined, onProgress: (progess: number) => Promise<void>): Promise<void>;
+    updateAllAsync(ticks: number, playingHumans: Human[], playerHumanTiles: Set<Tile>, onProgress: (progess: number) => Promise<void>): Promise<void>;
     verifyAndFixItemWeights(): void;
     getScarecrowInRange(tile: Tile, range: number): Doodad | undefined;
     getScarecrowInLineOfSight(creature: Creature, isClientside: boolean): Doodad | undefined;
@@ -98,8 +89,4 @@ export default class DoodadManager extends ObjectManager<Doodad, IDoodadManagerE
      * Handles doodad specific effects
      */
     private onSpawnOrRestore;
-    /**
-     * Handles doodad specific effects
-     */
-    private onRemove;
 }

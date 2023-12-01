@@ -45,9 +45,9 @@ export default function generateSchema(): {
                     minItems: number;
                     items: {
                         type: string;
-                        items: {
+                        items: Array<{
                             type: string;
-                        }[];
+                        }>;
                     };
                 };
                 singularRules: {
@@ -56,9 +56,9 @@ export default function generateSchema(): {
                     minItems: number;
                     items: {
                         type: string;
-                        items: {
+                        items: Array<{
                             type: string;
-                        }[];
+                        }>;
                     };
                 };
                 uncountables: {
@@ -75,9 +75,9 @@ export default function generateSchema(): {
                     minItems: number;
                     items: {
                         type: string;
-                        items: {
+                        items: Array<{
                             type: string;
-                        }[];
+                        }>;
                     };
                 };
                 articleRules: {
@@ -90,8 +90,8 @@ export default function generateSchema(): {
                             minItems: number;
                             items: {
                                 type: string;
-                                items: ({
-                                    anyOf: ({
+                                items: Array<{
+                                    anyOf: Array<{
                                         type: string;
                                         properties?: undefined;
                                         required?: undefined;
@@ -106,12 +106,12 @@ export default function generateSchema(): {
                                             };
                                         };
                                         required: string[];
-                                    })[];
+                                    }>;
                                     type?: undefined;
                                 } | {
                                     type: string;
                                     anyOf?: undefined;
-                                })[];
+                                }>;
                             };
                         };
                         definite: {
@@ -120,8 +120,8 @@ export default function generateSchema(): {
                             minItems: number;
                             items: {
                                 type: string;
-                                items: ({
-                                    anyOf: ({
+                                items: Array<{
+                                    anyOf: Array<{
                                         type: string;
                                         properties?: undefined;
                                         required?: undefined;
@@ -136,12 +136,12 @@ export default function generateSchema(): {
                                             };
                                         };
                                         required: string[];
-                                    })[];
+                                    }>;
                                     type?: undefined;
                                 } | {
                                     type: string;
                                     anyOf?: undefined;
-                                })[];
+                                }>;
                             };
                         };
                     };
@@ -178,16 +178,16 @@ export default function generateSchema(): {
         alternateFontStyle: string[];
     };
     additionalProperties: boolean;
-    allOf: ({
-        anyOf: {
+    allOf: Array<{
+        anyOf: Array<{
             required: string[];
-        }[];
+        }>;
         oneOf?: undefined;
     } | {
-        oneOf: {
+        oneOf: Array<{
             required: string[];
-        }[];
+        }>;
         anyOf?: undefined;
-    })[];
+    }>;
 };
 export {};

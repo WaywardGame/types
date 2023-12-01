@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type ISpriteBatch from "renderer/spriteBatch/ISpriteBatch";
+import type { ISpriteBatch } from "@wayward/game/renderer/spriteBatch/ISpriteBatch";
 /**
  * A sprite batch that doesn't reset on each frame.
  * Works similar to tile layers (tile / doodad rendering)

@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type Translation from "language/Translation";
+import type Translation from "@wayward/game/language/Translation";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export declare enum Load {
     GameIsland = 0,
     GameIslandMultiplayerTraveling = 1,
@@ -118,7 +118,7 @@ export declare const loadingDescriptions: {
 };
 export type LoadDescriptionOf<LOAD extends Load> = (typeof loadingDescriptions)[LOAD];
 export type LoadArgs<LOAD extends Load> = (typeof loadingDescriptions)[LOAD] extends ILoadingDescription<infer A> ? A : never;
-declare module Loading {
+declare namespace Loading {
     interface ILoadingEvents {
         /**
          * Emitted when a new thing has begun to load

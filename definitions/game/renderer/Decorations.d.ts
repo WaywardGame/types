@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { TerrainType } from "game/tile/ITerrain";
-import type { IModdable } from "mod/ModRegistry";
-import type WorldLayer from "renderer/world/WorldLayer";
-import type { ITileAdaptation } from "renderer/tile/TileAdaptors";
-import type TileAtlas from "renderer/tile/atlas/TileAtlas";
+import { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type { WorldLayer } from "@wayward/game/renderer/world/WorldLayer";
+import type { ITileAdaptation } from "@wayward/game/renderer/tile/TileAdaptors";
+import type TileAtlas from "@wayward/game/renderer/tile/atlas/TileAtlas";
 export declare enum TerrainDecoration {
     Grass = 0,
     BeachSand = 1,

@@ -8,5 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-declare const _default: import("../Action").Action<[import("../IAction").ActionArgument.ItemNearby, [import("../IAction").ActionArgument.Tile, import("../IAction").ActionArgument.Undefined]], import("../../Human").default<number>, void, import("game/entity/action/actions/Build").IBuildCanUse, [import("../../../item/Item").default, (import("../../../tile/Tile").default | undefined)?]>;
+declare const _default: import("../Action").Action<[import("../IAction").ActionArgument.ItemNearby, [import("../IAction").ActionArgument.Tile, import("../IAction").ActionArgument.Undefined]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/actions/Build").IBuildCanUse, [import("../../../item/Item").default, (import("../../../tile/Tile").default | undefined)?]>;
 export default _default;

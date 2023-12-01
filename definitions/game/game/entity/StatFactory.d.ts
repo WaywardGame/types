@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IStat, IStatBase, IStatFactory, IStats } from "game/entity/IStats";
-import { Stat } from "game/entity/IStats";
-import type { IStatHost } from "game/entity/Stats";
-import type Stats from "game/entity/Stats";
+import type { IStat, IStatBase, IStatFactory, IStats } from "@wayward/game/game/entity/IStats";
+import { Stat } from "@wayward/game/game/entity/IStats";
+import type { IStatHost } from "@wayward/game/game/entity/Stats";
+import type Stats from "@wayward/game/game/entity/Stats";
 export declare class StatsFactory {
     private readonly stats;
     private readonly _host;

@@ -8,19 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type EntityWithStats from "game/entity/EntityWithStats";
-import type { StatusType } from "game/entity/IEntity";
-import { StatusEffectChangeReason } from "game/entity/IEntity";
-import { MessageType } from "game/entity/player/IMessageManager";
-import type { IGameOptionsStatusEffect } from "game/options/IGameOptions";
-import type Message from "language/dictionary/Message";
-import { StatusEffectTranslation } from "language/dictionary/Misc";
-import type { IModdable } from "mod/ModRegistry";
-import type StatusEffectRenderer from "renderer/StatusEffectRenderer";
-import type { IHighlight } from "ui/util/IHighlight";
-import type ImagePath from "ui/util/ImagePath";
-import type { IRGB } from "utilities/Color";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
+import type { StatusType } from "@wayward/game/game/entity/IEntity";
+import { StatusEffectChangeReason } from "@wayward/game/game/entity/IEntity";
+import { MessageType } from "@wayward/game/game/entity/player/IMessageManager";
+import type { IGameOptionsStatusEffect } from "@wayward/game/game/options/IGameOptions";
+import type Message from "@wayward/game/language/dictionary/Message";
+import { StatusEffectTranslation } from "@wayward/game/language/dictionary/Misc";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type StatusEffectRenderer from "@wayward/game/renderer/StatusEffectRenderer";
+import type { IHighlight } from "@wayward/game/ui/util/IHighlight";
+import type ImagePath from "@wayward/game/ui/util/ImagePath";
+import type { IRGB } from "@wayward/utilities/Color";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export interface IStatusEffectIconDescription {
     /**
      * A custom path for the icon, if necessary.
@@ -57,7 +58,7 @@ export declare enum UiStatusType {
 export declare const badnessMessageType: Record<StatusEffectBadness, MessageType>;
 export interface IStatusEffectEvents {
     deregister(): any;
-    refreshed(): any;
+    refreshed(reason?: StatusEffectChangeReason): any;
 }
 export default abstract class StatusEffect extends EventEmitter.Host<IStatusEffectEvents> {
     readonly type: StatusType;
@@ -99,8 +100,8 @@ export default abstract class StatusEffect extends EventEmitter.Host<IStatusEffe
      */
     getLevel(): number;
     getBadness(): StatusEffectBadness;
-    getTranslation(which?: StatusEffectTranslation.Adjective | StatusEffectTranslation.Name): import("../../../language/impl/TranslationImpl").default;
-    getDescription(): import("../../../language/impl/TranslationImpl").default;
+    getTranslation(which?: StatusEffectTranslation.Adjective | StatusEffectTranslation.Name): TranslationImpl;
+    getDescription(): TranslationImpl;
     refresh(): void;
     protected getEffectRate(): number;
     /**

@@ -240,7 +240,7 @@ export interface IServerGameDetails {
     maxPlayers: number;
     difficulty: number;
     pvp: boolean;
-    reputation: number;
+    alignment: number;
     days: number;
     mods: IServerMod[];
     peaceful: boolean;
@@ -260,9 +260,9 @@ export interface IServerIslandDetails {
     biomeType: number;
 }
 export declare enum LobbyType {
-    Private = 0,
-    FriendsOnly = 1,
-    Public = 2,
+    Private = 0,// only way to join the lobby is to invite to someone else
+    FriendsOnly = 1,// shows for friends or invitees, but not in lobby list
+    Public = 2,// visible for friends and in lobby list
     Invisible = 3
 }
 export declare enum SteamInputType {
@@ -270,17 +270,17 @@ export declare enum SteamInputType {
     k_ESteamInputType_SteamController = 1,
     k_ESteamInputType_XBox360Controller = 2,
     k_ESteamInputType_XBoxOneController = 3,
-    k_ESteamInputType_GenericGamepad = 4,
+    k_ESteamInputType_GenericGamepad = 4,// DirectInput controllers
     k_ESteamInputType_PS4Controller = 5,
-    k_ESteamInputType_AppleMFiController = 6,
-    k_ESteamInputType_AndroidController = 7,
-    k_ESteamInputType_SwitchJoyConPair = 8,
-    k_ESteamInputType_SwitchJoyConSingle = 9,
+    k_ESteamInputType_AppleMFiController = 6,// Unused
+    k_ESteamInputType_AndroidController = 7,// Unused
+    k_ESteamInputType_SwitchJoyConPair = 8,// Unused
+    k_ESteamInputType_SwitchJoyConSingle = 9,// Unused
     k_ESteamInputType_SwitchProController = 10,
-    k_ESteamInputType_MobileTouch = 11,
-    k_ESteamInputType_PS3Controller = 12,
-    k_ESteamInputType_PS5Controller = 13,
-    k_ESteamInputType_SteamDeckController = 14,
+    k_ESteamInputType_MobileTouch = 11,// Steam Link App On-screen Virtual Controller
+    k_ESteamInputType_PS3Controller = 12,// Currently uses PS4 Origins
+    k_ESteamInputType_PS5Controller = 13,// Added in SDK 151
+    k_ESteamInputType_SteamDeckController = 14,// Added in SDK 153
     k_ESteamInputType_Count = 15,
     k_ESteamInputType_MaximumPossibleValue = 255
 }

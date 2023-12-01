@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { CreatureType } from "game/entity/creature/ICreature";
-import { StatusEffectChangeReason } from "game/entity/IEntity";
-import type StatusEffect from "game/entity/status/StatusEffect";
-import type { DisplayableItemType } from "game/item/IItem";
-import type { INotificationLocation } from "renderer/notifier/INotifier";
-import { CreatureNotifierType, ItemNotifierType, NotifierIconType, StatNotificationType } from "renderer/notifier/INotifier";
-import type RendererContext from "renderer/context/RendererContext";
-import type { IResourceContainer } from "resource/IResourceLoader";
-export default class Notifier {
+import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
+import { StatusEffectChangeReason } from "@wayward/game/game/entity/IEntity";
+import type StatusEffect from "@wayward/game/game/entity/status/StatusEffect";
+import type { DisplayableItemType } from "@wayward/game/game/item/IItem";
+import type { INotificationLocation } from "@wayward/game/renderer/notifier/INotifier";
+import { CreatureNotifierType, ItemNotifierType, NotifierIconType, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
+import type { IRendererContext } from "@wayward/game/renderer/context/IRendererContext";
+import type { IResourceContainer } from "@wayward/game/renderer/resources/IResourceContainer";
+export declare class Notifier {
     private readonly context;
     private readonly capacity;
     private readonly spriteBatch;
@@ -28,7 +28,7 @@ export default class Notifier {
     private notificationCount;
     private notifications;
     private suspended;
-    constructor(context: RendererContext, capacity: number);
+    constructor(context: IRendererContext, capacity: number);
     setResources(resourceContainer: IResourceContainer): void;
     clear(): void;
     delete(): void;

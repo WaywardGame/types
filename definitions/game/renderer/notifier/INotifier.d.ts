@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SfxType } from "audio/IAudio";
-import type { IVector2 } from "utilities/math/IVector";
-import type { IVector4 } from "utilities/math/Vector4";
+import type { SfxType } from "@wayward/game/audio/IAudio";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
+import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 export interface INotificationLocation extends IVector4 {
     getMovementPoint?(timeStamp: number): IVector2;
     queueSoundEffect?(soundEffect: SfxType): void;
@@ -46,7 +46,12 @@ export declare enum NotifierIconType {
     Water = 2,
     Warning = 3,
     Decay = 4,
-    Talk = 5
+    Talk = 5,
+    DeityAlignmentGood = 6,
+    DeityAlignmentEvil = 7,
+    DeityAlignmentNeutral = 8,
+    DualWieldEnabled = 9,
+    DualWieldDisabled = 10
 }
 export declare const itemDamageNotifierThreshold = 3;
 export declare const doodadDamageNotifierThreshold = 5;

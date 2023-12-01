@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import type EntityWithStats from "game/entity/EntityWithStats";
-import { StatusType } from "game/entity/IEntity";
-import Component from "ui/component/Component";
+import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
+import { StatusType } from "@wayward/game/game/entity/IEntity";
+import Component from "@wayward/game/ui/component/Component";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface IStatusEffectsEvents extends Events<Component> {
     update(): any;
 }

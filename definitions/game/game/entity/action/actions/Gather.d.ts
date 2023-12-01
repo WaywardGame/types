@@ -8,24 +8,24 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type { IDoodadDescription } from "game/doodad/IDoodad";
-import { GrowingStage } from "game/doodad/IDoodad";
-import { Action } from "game/entity/action/Action";
-import type { IActionUsable } from "game/entity/action/IAction";
-import { ActionArgument } from "game/entity/action/IAction";
-import { SkillType } from "game/entity/IHuman";
-import type { ILootItem } from "game/ILoot";
-import { Quality } from "game/IObject";
-import type Item from "game/item/Item";
-import type { ITerrainDescription } from "game/tile/ITerrain";
-import { TerrainType } from "game/tile/ITerrain";
-import type { ITileEventDescription } from "game/tile/ITileEvent";
-import type { ITerrainLoot } from "game/tile/TerrainResources";
-import type Tile from "game/tile/Tile";
-import type TileEvent from "game/tile/TileEvent";
-import Translation from "language/Translation";
-import type { IRGB } from "utilities/Color";
+import type { ILootItem } from "@wayward/game/game/ILoot";
+import { Quality } from "@wayward/game/game/IObject";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
+import { GrowingStage } from "@wayward/game/game/doodad/IDoodad";
+import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type Item from "@wayward/game/game/item/Item";
+import type { ITerrainDescription } from "@wayward/game/game/tile/ITerrain";
+import { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { ITileEventDescription } from "@wayward/game/game/tile/ITileEvent";
+import type { ITerrainLoot } from "@wayward/game/game/tile/TerrainResources";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import Translation from "@wayward/game/language/Translation";
+import type { IRGB } from "@wayward/utilities/Color";
 export declare enum GatherType {
     Doodad = 0,
     DoodadHarvest = 1,
@@ -63,5 +63,5 @@ export interface IGatherTerrainCanUse extends IGatherBaseCanUse {
     terrainDescription: ITerrainDescription;
 }
 export type IGatherCanUse = IGatherTileEventCanUse | IGatherDoodadCanUse | IGatherDoodadHarvestCanUse | IGatherTerrainCanUse;
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Tile, ActionArgument.Undefined]], Doodad | import("../../Human").default<number>, void, IGatherCanUse, [(Item | undefined)?, (Tile | undefined)?]>;
+declare const _default: Action<[[ActionArgument.Undefined, ActionArgument.ItemInventory], [ActionArgument.Undefined, ActionArgument.Tile]], Doodad | import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IGatherCanUse, [(Item | undefined)?, (Tile | undefined)?]>;
 export default _default;

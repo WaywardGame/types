@@ -8,21 +8,21 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import TranslationImpl from "language/impl/TranslationImpl";
-import type Bindable from "ui/input/Bindable";
-import { IInput } from "ui/input/IInput";
-import { Macro } from "ui/input/Macros";
+import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type Bindable from "@wayward/game/ui/input/Bindable";
+import { IInput } from "@wayward/game/ui/input/IInput";
+import { Macro } from "@wayward/game/ui/input/Macros";
 export type Binding = IInput | Macro;
-export declare module Binding {
+export declare namespace Binding {
     function is(value: unknown): value is Binding;
     function hash(binding: Binding): string;
     function translate(binding: Binding): TranslationImpl;
 }
-declare module Bindings {
+declare namespace Bindings {
     interface IEvents {
         invalidate(): any;
     }
-    const event: import("event/EventEmitter").IEventEmitter<typeof Bindings, IEvents>;
+    const event: import("@wayward/utilities/event/EventEmitter").IEventEmitter<typeof Bindings, IEvents>;
     function get(bindable?: Bindable): Binding[];
     function getModifierCatalystsResolved(bindable?: Bindable): Binding[];
     function getPrecision(bindable?: Bindable): number;

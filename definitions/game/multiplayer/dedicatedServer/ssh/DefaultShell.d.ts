@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Game } from "game/Game";
-import type { ISshSession, ISshStream } from "multiplayer/dedicatedServer/ssh/ISsh";
-import type { ISshCommandManager } from "multiplayer/dedicatedServer/ssh/ISshCommandManager";
-import type ISshShell from "multiplayer/dedicatedServer/ssh/ISshShell";
-import Shell from "multiplayer/dedicatedServer/ssh/Shell";
+import type { Game } from "@wayward/game/game/Game";
+import type { ISshSession, ISshStream } from "@wayward/game/multiplayer/dedicatedServer/ssh/ISsh";
+import type { ISshCommandManager } from "@wayward/game/multiplayer/dedicatedServer/ssh/ISshCommandManager";
+import type ISshShell from "@wayward/game/multiplayer/dedicatedServer/ssh/ISshShell";
+import Shell from "@wayward/game/multiplayer/dedicatedServer/ssh/Shell";
 export default class DefaultShell extends Shell implements ISshShell {
     private readonly username;
     private readonly serverName;
@@ -21,7 +21,7 @@ export default class DefaultShell extends Shell implements ISshShell {
     /**
      * Writes the marker
      */
-    writeMarker(): Promise<void>;
+    writeMarker(): void;
     /**
      * Processes a line sent for the session
      * @returns A shell to push a new action shell, false to exit the session, undefined to keep the active shell going

@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type ExploredMapClientData from "save/clientStore/clientData/ExploredMap";
-import type MultiplayerClientData from "save/clientStore/clientData/MultiplayerClientData";
-import type UiData from "save/clientStore/clientData/UiData";
+import type ExploredMapClientData from "@wayward/game/save/clientStore/clientData/ExploredMap";
+import type MultiplayerClientData from "@wayward/game/save/clientStore/clientData/MultiplayerClientData";
+import type UiData from "@wayward/game/save/clientStore/clientData/UiData";
 export interface IClientStore {
     get<T extends ClientDataType>(type: T): ClientDataMap<T>;
 }

@@ -19,8 +19,8 @@ export declare enum Milestone {
     Locksmith = 7,
     ReaperOfSouls = 8,
     Survivor = 9,
-    Thrower = 10,
-    Trapper = 11,
+    Pitcher = 10,
+    Trapsetter = 11,
     TreasureHunter = 12,
     Collector = 13,
     Explorer = 14,
@@ -28,7 +28,7 @@ export declare enum Milestone {
     Prepared = 16,
     Doctor = 17,
     Artificer = 18,
-    Seafarer = 19,
+    Returned = 19,
     Navigator = 20,
     DragonSlayer = 21,
     Treasurer = 22,
@@ -60,7 +60,15 @@ export declare enum Milestone {
     Retailer = 48,
     Masochist = 49,
     Versatile = 50,
-    InternalStatDiscovery = 51
+    InternalStatDiscovery = 51,
+    Dedicated = 52,
+    Hounded = 53,
+    Serene = 54,
+    InternalRuneOrAltarDiscovery = 55,
+    Curator = 56,
+    Thaumaturgic = 57,
+    Runekeeper = 58,
+    InternalDeityDiscovery = 59
 }
 export type ExcludeInternalMilestones<MILESTONE extends Milestone> = PickValueKeys<typeof Milestone, MILESTONE> extends `Internal${string}` ? never : MILESTONE;
 export declare enum MilestoneVisibility {
@@ -69,17 +77,21 @@ export declare enum MilestoneVisibility {
      */
     Visible = 0,
     /**
-     * The milestone's name and description are not displayed to the player, but the progress is.
+     * Only display the progress.
      */
     Invisible = 1,
     /**
-     * The milestone's description and progress are not displayed to the player, but the name is.
+     * Only display the name.
      */
-    Hidden = 2,
+    Mystery = 2,
+    /**
+     * Hide the milestone altogether. Useful for hiding until a threshold is reached or another milestone is unlocked.
+     */
+    Hidden = 3,
     /**
      * This milestone's existence is not revealed to the player, as it is only used internally.
      */
-    Internal = 3
+    Internal = 4
 }
 export declare enum MilestoneDataType {
     /**
@@ -111,4 +123,5 @@ export declare enum MilestoneDataType {
 export interface IMilestoneData {
     amount: number;
     data?: Array<number | string>;
+    lastModified?: number;
 }

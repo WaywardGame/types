@@ -8,26 +8,28 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { BiomeType } from "game/biome/IBiome";
-import type { ICreatureDescription } from "game/entity/creature/ICreature";
-import { CreatureType, SpawnGroup } from "game/entity/creature/ICreature";
-import type TimeManager from "game/time/TimeManager";
-import type { Random } from "utilities/random/Random";
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import type { ICreatureDescription } from "@wayward/game/game/entity/creature/ICreature";
+import { CreatureType, SpawnGroup } from "@wayward/game/game/entity/creature/ICreature";
+import type TimeManager from "@wayward/game/game/time/TimeManager";
+import type { Random } from "@wayward/utilities/random/Random";
+import { StatusType } from "@wayward/game/game/entity/IEntity";
 export interface ISpawnContext {
     biome: BiomeType;
     z?: number;
     timeManager?: TimeManager;
     time?: number;
-    reputation?: number;
+    alignment?: number;
     random?: Random;
     inactive?: boolean;
+    status?: StatusType[];
 }
-declare module CreatureSpawning {
+declare namespace CreatureSpawning {
     function getSpawnableCreatures(creatureGroup: SpawnGroup, context: ISpawnContext): {
         pool: CreatureType[];
         aberrantChance: number;
     };
-    function getCreaturesWithSpawnGroup(group: SpawnGroup | undefined, context: ISpawnContext, checkReputation?: boolean): CreatureType[];
-    function checkSpawnReputation(creatureDescription: ICreatureDescription, context: ISpawnContext, bypass?: boolean): boolean;
+    function getCreaturesWithSpawnGroup(group: SpawnGroup | undefined, context: ISpawnContext, checkAlignment?: boolean): CreatureType[];
+    function checkSpawnAlignment(creatureDescription: ICreatureDescription, context: ISpawnContext, bypass?: boolean): boolean;
 }
 export default CreatureSpawning;

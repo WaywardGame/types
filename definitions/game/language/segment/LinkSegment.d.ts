@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IColorSection } from "language/segment/ColorSegment";
-import type { IDecoratedSection } from "language/segment/TextDecorationSegments";
-import type { ISegment } from "utilities/string/Interpolator";
+import type { IColorSection } from "@wayward/game/language/segment/ColorSegment";
+import type { IDecoratedSection } from "@wayward/game/language/segment/TextDecorationSegments";
+import type { ISegment } from "@wayward/game/utilities/string/Interpolator";
 export type Link = string | [string, string | undefined, string | undefined];
 export interface ILinkSection extends IColorSection, IDecoratedSection {
     link: Link;

@@ -13,7 +13,7 @@ declare enum UiExperiment {
     NewCraftingDialog = 1,
     ActionExamples = 2
 }
-declare module UiExperiment {
+declare namespace UiExperiment {
     type Excluded = "toggle" | "update" | "all" | "name" | "has";
     export type Any = Exclude<keyof typeof UiExperiment, Excluded>;
     export function all(): readonly UiExperiment[];

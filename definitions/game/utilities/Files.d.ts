@@ -8,12 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-declare module Files {
+import type { ISpritePackSprite } from "@wayward/game/resource/SpritePack";
+declare namespace Files {
     function getXML(path: string, signal?: AbortSignal): Promise<Document>;
     function getText(path: string, signal?: AbortSignal): Promise<string>;
     function getJson<T>(path: string, signal?: AbortSignal): Promise<T>;
     function getArrayBuffer(path: string, signal?: AbortSignal): Promise<ArrayBuffer>;
     function getImage(path: string, signal?: AbortSignal): Promise<HTMLImageElement>;
+    function getSprite(path: string, signal?: AbortSignal): Promise<ISpritePackSprite | undefined>;
+    function getSpriteOrImage(path: string, signal?: AbortSignal): Promise<ISpritePackSprite | HTMLImageElement>;
     function getImageDataURL(path: string, signal?: AbortSignal): Promise<string | undefined>;
     function download(fileName: string, data: Uint8Array): void;
     function downloadWithJsonEncoding(fileName: string, data: any, stringify?: boolean, pretty?: boolean): void;

@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Reference } from "game/reference/IReferenceManager";
-import type Translation from "language/Translation";
-import type { Segment } from "language/segment/Segments";
-import type { IInterpolationOptions, IStringSection } from "utilities/string/Interpolator";
+import type { Reference } from "@wayward/game/game/reference/IReferenceManager";
+import type Translation from "@wayward/game/language/Translation";
+import type { Segment } from "@wayward/game/language/segment/Segments";
+import type { IInterpolationOptions, IStringSection } from "@wayward/game/utilities/string/Interpolator";
 export declare enum ListEnder {
     None = 0,
     And = 1,
@@ -33,7 +33,9 @@ export interface ISerializedTranslation {
     failWith?: string | ISerializedTranslation | IStringSection[];
     reformatters?: ISerializedTranslation[];
     reference?: Reference;
+    referenceForced?: true;
     tooltip?: ISerializedTranslation | IStringSection[];
+    tooltipWide?: true;
     interpolator?: ISerializedInterpolator;
 }
 export interface ISerializedInterpolator {

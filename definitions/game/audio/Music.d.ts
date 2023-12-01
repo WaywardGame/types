@@ -8,5 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Music } from "audio/IAudio";
+import type { Music } from "@wayward/game/audio/IAudio";
 export declare const musicDescriptions: Map<Music, import("../mod/ModRegistry").IModdable>;

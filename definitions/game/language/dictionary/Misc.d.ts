@@ -34,7 +34,8 @@ export declare enum ItemTranslation {
 }
 export declare enum SkillTranslation {
     Name = 0,
-    Description = 1
+    Title = 1,
+    Description = 2
 }
 export declare enum StatTranslation {
     Name = 0,
@@ -66,7 +67,8 @@ export declare enum EquipSlotTranslation {
 export declare enum StatusEffectTranslation {
     Adjective = 0,
     Name = 1,
-    Description = 2
+    Description = 2,
+    BaseDescription = 3
 }
 export declare enum BleedLevelTranslation {
     Adjective = 0,
@@ -100,7 +102,19 @@ export declare enum LoadingTranslation {
 }
 export declare enum MagicalPropertyTranslation {
     Name = 0,
-    Tooltip = 1
+    Description = 1
+}
+export declare enum ContainerSortTranslation {
+    Verbose = 0,
+    Simple = 1
+}
+export declare enum DeityTranslation {
+    Name = 0,
+    Description = 1
+}
+export declare enum QualityTranslation {
+    Name = 0,
+    Description = 1
 }
 export declare enum MiscTranslation {
     AAndB = 0,
@@ -135,19 +149,24 @@ export declare enum MiscTranslation {
     Merge = 29,
     MergeSpaced = 30,
     Multiply = 31,
-    NPCName = 32,
-    NPCNameUnmet = 33,
-    NumberSingleDecimal = 34,
-    OwnName = 35,
-    Percent = 36,
-    PercentRaw = 37,
-    PlayerName = 38,
-    Possession = 39,
-    Range = 40,
-    ReformatSingularNoun = 41,
-    Renamed = 42,
-    Tile = 43,
-    Tilled = 44,
-    Unknown = 45,
-    UnknownItem = 46
+    Negate = 32,
+    NPCName = 33,
+    NPCNameUnmet = 34,
+    NumberSingleDecimal = 35,
+    Overline = 36,
+    OwnName = 37,
+    Parenthesized = 38,
+    Percent = 39,
+    PercentRaw = 40,
+    PlayerName = 41,
+    Possession = 42,
+    Range = 43,
+    ReformatSingularNoun = 44,
+    Renamed = 45,
+    Simplify = 46,
+    Tile = 47,
+    Tilled = 48,
+    Undiscovered = 49,
+    Unknown = 50,
+    UnknownItem = 51
 }

@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import { Action } from "game/entity/action/Action";
-import type { IActionUsable } from "game/entity/action/IAction";
-import { ActionArgument } from "game/entity/action/IAction";
-import type Item from "game/item/Item";
-import type Tile from "game/tile/Tile";
-import type TileEvent from "game/tile/TileEvent";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type Item from "@wayward/game/game/item/Item";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
 export interface IStartFireCanUse extends IActionUsable {
     tile: Tile;
     kindlingNeeded: boolean;
@@ -27,5 +27,5 @@ export interface IStartFireCanUse extends IActionUsable {
     fuel?: Item;
     tileEvent?: TileEvent;
 }
-declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default<number>, void, IStartFireCanUse, [Item, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IStartFireCanUse, [Item, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?]>;
 export default _default;

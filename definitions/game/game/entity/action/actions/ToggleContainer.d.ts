@@ -8,17 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Doodad from "game/doodad/Doodad";
-import { Action } from "game/entity/action/Action";
-import type { IActionUsable } from "game/entity/action/IAction";
-import { ActionArgument } from "game/entity/action/IAction";
-import type NPC from "game/entity/npc/NPC";
-import type ShipperNPC from "game/entity/npc/npcs/Shipper";
-import type { IContainer } from "game/item/IItem";
-import Item from "game/item/Item";
+import Entity from "@wayward/game/game/entity/Entity";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type { IContainer } from "@wayward/game/game/item/IItem";
 export interface IToggleContainerCanUse extends IActionUsable {
-    container: Doodad | Item;
-    shipper?: ShipperNPC;
+    container: IContainer;
+    entity: Entity;
 }
-declare const _default: Action<[[ActionArgument.Container, ActionArgument.NPCNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default<number>, void, IToggleContainerCanUse, [(NPC | IContainer | undefined)?, (boolean | undefined)?]>;
+declare const _default: Action<[[ActionArgument.Undefined, ActionArgument.Container, ActionArgument.NPCNearby], [ActionArgument.Undefined, ActionArgument.Boolean]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IToggleContainerCanUse, [(import("../../npc/NPC").default | IContainer | undefined)?, (boolean | undefined)?]>;
 export default _default;

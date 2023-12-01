@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IContainer } from "game/item/IItem";
-import type Item from "game/item/Item";
-import Bindable from "ui/input/Bindable";
-import Dialog from "ui/screen/screens/game/component/Dialog";
-import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
+import type { IContainer } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import Bindable from "@wayward/game/ui/input/Bindable";
+import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
+import { MenuBarButtonType } from "@wayward/game/ui/screen/screens/game/static/menubar/IMenuBarButton";
 export default class CraftingDialog extends Dialog {
     private readonly craftableRecipes;
     private accessible;

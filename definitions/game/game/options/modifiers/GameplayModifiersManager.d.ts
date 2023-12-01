@@ -8,9 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type GameplayModifier from "game/options/modifiers/GameplayModifier";
-import type { GameplayModifierInstance, GetModifierId, GetModifierInstance, GetModifierInstanceArgs } from "game/options/modifiers/GameplayModifier";
-import type { StringableObject } from "utilities/object/Objects";
+import type GameplayModifier from "@wayward/game/game/options/modifiers/GameplayModifier";
+import type { GameplayModifierInstance, GetModifierId, GetModifierInstance, GetModifierInstanceArgs } from "@wayward/game/game/options/modifiers/GameplayModifier";
+import type { StringableObject } from "@wayward/utilities/object/Objects";
+import type Stream from "@wayward/goodstream";
+import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 export default abstract class GameplayModifiersManager<MODIFIER extends GameplayModifier<number, GameplayModifierInstance<number, any[]>, any[]>, ID extends GetModifierId<MODIFIER> = GetModifierId<MODIFIER>, INSTANCE_ARGS extends GetModifierInstanceArgs<MODIFIER> = GetModifierInstanceArgs<MODIFIER>> {
     private readonly enumObject;
     private readonly classes;
@@ -29,6 +31,6 @@ export declare class GameplayModifiersCollection<MODIFIER extends GameplayModifi
     hasAny(): boolean;
     initialize(source: StringableObject, ids: Iterable<ID>, uninitializeExisting?: boolean): INSTANCE[];
     uninitialize(source: StringableObject): void;
-    options(): import("@wayward/goodstream").default<import("../IGameOptions").IGameOptionsPartial>;
+    options(): Stream<IGameOptionsPartial>;
     initialized(): IterableIterator<ID>;
 }

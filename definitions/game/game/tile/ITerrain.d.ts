@@ -8,25 +8,25 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SfxType } from "audio/IAudio";
-import type { BiomeType } from "game/biome/IBiome";
-import type { GrowingStage } from "game/doodad/IDoodad";
-import { DoodadType } from "game/doodad/IDoodad";
-import type { SkillType } from "game/entity/IHuman";
-import type { IDecayTemperatureRange } from "game/IGame";
-import type { Quality } from "game/IObject";
-import type { WaterType } from "game/island/IIsland";
-import type { IContainer, IMaybeContainer, ItemType } from "game/item/IItem";
-import type Item from "game/item/Item";
-import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
-import type { MapTile } from "game/mapping/IMapTile";
-import type { TileEventType } from "game/tile/ITileEvent";
-import type { ILeftOverTile } from "game/tile/Terrains";
-import type TileEvent from "game/tile/TileEvent";
-import type { ISerializedTranslation } from "language/ITranslation";
-import type { IModdable } from "mod/ModRegistry";
-import type { IColorFul, IRGB } from "utilities/Color";
-import type { IVector3 } from "utilities/math/IVector";
+import type { SfxType } from "@wayward/game/audio/IAudio";
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import type { GrowingStage } from "@wayward/game/game/doodad/IDoodad";
+import { DoodadType } from "@wayward/game/game/doodad/IDoodad";
+import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { IDecayTemperatureRange } from "@wayward/game/game/IGame";
+import type { Quality } from "@wayward/game/game/IObject";
+import type { WaterType } from "@wayward/game/game/island/IIsland";
+import type { IContainer, IMaybeContainer, ItemType } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { MapTile } from "@wayward/game/game/mapping/IMapTile";
+import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
+import type { ILeftOverTile } from "@wayward/game/game/tile/Terrains";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type { IColorFul, IRGB } from "@wayward/utilities/Color";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 export interface ITerrainDescription extends IModdable {
     passable?: boolean;
     particles?: IRGB;
@@ -38,6 +38,7 @@ export interface ITerrainDescription extends IModdable {
     shallowWater?: true;
     freshWater?: boolean;
     swampWater?: boolean;
+    seawater?: boolean;
     gather?: boolean;
     noLos?: boolean;
     flammable?: boolean;
@@ -141,6 +142,14 @@ export interface ITerrainDescription extends IModdable {
      * True if the terrain sprite is like a doodad
      */
     useDoodadLikeAdaptor?: boolean;
+    /**
+     * True if the terrain allows for sliding
+     */
+    isSlippery?: boolean;
+    /**
+     * Chance of slipping when there's puddles of water on it (amount is multiplied by the amount of puddles up to a maximum of three).
+     */
+    slipperyWhenWet?: number;
 }
 export interface ITileOld {
     event?: TileEvent[];
@@ -184,7 +193,10 @@ export declare enum TileTemplateType {
     Railways = 13,
     GraniteLighthouse = 14,
     BasaltLighthouse = 15,
-    FairyRings = 16
+    FairyRings = 16,
+    VolcanicCave = 17,
+    WetlandsCave = 18,
+    AridCave = 19
 }
 export interface ITemplate {
     mapTile?: MapTile;

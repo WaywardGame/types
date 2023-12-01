@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Action } from "game/entity/action/Action";
-import type { IActionUsable } from "game/entity/action/IAction";
-import { ActionArgument } from "game/entity/action/IAction";
-import { RestType } from "game/entity/IHuman";
-import type { IStatChanging, IStatMax } from "game/entity/IStats";
-import type { ITerrainDescription, TerrainType } from "game/tile/ITerrain";
+import { RestType } from "@wayward/game/game/entity/IHuman";
+import type { IStatChanging, IStatMax } from "@wayward/game/game/entity/IStats";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type { ITerrainDescription, TerrainType } from "@wayward/game/game/tile/ITerrain";
 export interface IRestCanUse extends IActionUsable {
     restType: RestType;
     stamina: IStatMax & IStatChanging;
@@ -21,5 +21,5 @@ export interface IRestCanUse extends IActionUsable {
     tileDescription?: ITerrainDescription;
     tileType: TerrainType;
 }
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Undefined], [ActionArgument.RestType, ActionArgument.Undefined]], import("../../Human").default<number>, void, IRestCanUse, [(import("../../../doodad/Doodad").default | import("../../../item/Item").default | undefined)?, (RestType | undefined)?]>;
+declare const _default: Action<[[ActionArgument.Undefined, ActionArgument.ItemNearby, ActionArgument.Doodad], [ActionArgument.Undefined, import("../argument/ActionArgumentEnum").default<RestType, "Resting" | "Sleeping">]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IRestCanUse, [(import("../../../doodad/Doodad").default | import("../../../item/Item").default | undefined)?, (RestType | undefined)?]>;
 export default _default;

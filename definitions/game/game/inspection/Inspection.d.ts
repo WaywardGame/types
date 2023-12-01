@@ -8,19 +8,19 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { InspectType } from "game/inspection/IInspection";
-import { InfoProvider } from "game/inspection/InfoProvider";
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import type { InspectionClass } from "game/inspection/InspectionTypeMap";
-import type { EnumReferenceResolved, EnumReferenceTypes, ReferenceType } from "game/reference/IReferenceManager";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import type Text from "ui/component/Text";
-import type { InspectionTooltipHints } from "ui/screen/screens/game/InspectionsTooltipHandler";
-import type { IVector3 } from "utilities/math/IVector";
+import { InspectType } from "@wayward/game/game/inspection/IInspection";
+import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import type { InspectionClass } from "@wayward/game/game/inspection/InspectionTypeMap";
+import type { EnumReferenceResolved, EnumReferenceTypes, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import type Text from "@wayward/game/ui/component/Text";
+import type { InspectionTooltipHints } from "@wayward/game/ui/screen/screens/game/InspectionsTooltipHandler";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 export default abstract class Inspection<O> extends InfoProvider {
     readonly type: InspectType;
     readonly value: O;
-    static createEnumReferenceHandler<R extends ReferenceType, E, K extends string>(referenceType: R, enumObject: Record<K, E>, predicate?: (reference: [R, E], context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
+    static createEnumReferenceHandler<R extends ReferenceType, E>(referenceType: R, enumObject: Record<string, E>, predicate?: (reference: [R, E], context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     static createAnyHandler(...handlers: Array<Exclude<InspectionClass["handles"], undefined>>): (type: InspectType, ...args: any[]) => boolean;
     static createReferenceHandler<REFTYPE extends EnumReferenceTypes>(referenceType: REFTYPE, handler?: (resolvedReference: EnumReferenceResolved<REFTYPE>, context?: InfoProviderContext) => any): (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     static verifyHumanity(_: any, context?: InfoProviderContext): boolean;

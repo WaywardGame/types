@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Ui from "language/dictionary/UiTranslation";
+import Ui from "@wayward/game/language/dictionary/UiTranslation";
 declare const uiTranslations: Descriptions<Ui, string>;
 export default uiTranslations;

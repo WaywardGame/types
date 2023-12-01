@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Player from "game/entity/player/Player";
-import type { Milestone } from "game/milestones/IMilestone";
-import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "game/options/modifiers/milestone/MilestoneModifier";
-import type { Random } from "utilities/random/Random";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import type { Random } from "@wayward/utilities/random/Random";
 declare class TamedCreatureMilestoneModifierInstance extends MilestoneModifierInstance {
     private readonly modifier;
     constructor(modifier: TamedCreatureMilestoneModifier, id: Milestone, random: Random, player?: Player);

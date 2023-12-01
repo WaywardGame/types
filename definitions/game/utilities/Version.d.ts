@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import TranslationImpl from "language/impl/TranslationImpl";
+import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export interface IVersionInfo {
     str: Version.String;
     strSemver: Version.StringSemVer;
@@ -23,7 +23,7 @@ export interface IVersionInfo {
      */
     update?: number;
 }
-declare module Version {
+declare namespace Version {
     export type Stage = "beta" | "release";
     export type String = `${Stage}${bigint}.${bigint}.${bigint}` | `${Stage}${bigint}.${bigint}` | `${Stage}${bigint}`;
     export type StringSemVer = `${bigint}.${bigint}.${bigint}-${Stage}` | `${bigint}.${bigint}.${bigint}`;

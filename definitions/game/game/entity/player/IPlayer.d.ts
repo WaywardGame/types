@@ -8,19 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events } from "event/EventEmitter";
-import type Human from "game/entity/Human";
-import type { HairColor, HairStyle, SkinColor } from "game/entity/IHuman";
-import type { IMessage } from "game/entity/player/IMessageManager";
-import type MessageManager from "game/entity/player/MessageManager";
-import type { INote } from "game/entity/player/note/NoteManager";
-import type Player from "game/entity/player/Player";
-import { ItemType } from "game/item/IItem";
-import type { Prompt } from "game/meta/prompt/IPrompt";
-import type { Milestone } from "game/milestones/IMilestone";
-import type InterruptChoice from "language/dictionary/InterruptChoice";
-import { Direction } from "utilities/math/Direction";
-import type { IVector2, IVector3 } from "utilities/math/IVector";
+import type { Events } from "@wayward/utilities/event/EventEmitter";
+import type { TitleType } from "@wayward/game/game/entity/action/actions/SetTitle";
+import type Human from "@wayward/game/game/entity/Human";
+import type { HairColor, HairStyle, SkillType, SkinColor } from "@wayward/game/game/entity/IHuman";
+import type { IMessage } from "@wayward/game/game/entity/player/IMessageManager";
+import type MessageManager from "@wayward/game/game/entity/player/MessageManager";
+import type { INote } from "@wayward/game/game/entity/player/note/NoteManager";
+import type Player from "@wayward/game/game/entity/player/Player";
+import { ItemType } from "@wayward/game/game/item/IItem";
+import type { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type InterruptChoice from "@wayward/game/language/dictionary/InterruptChoice";
+import { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 export interface IPlayerEvents extends Events<Human> {
     /**
      * Called when a message is being displayed for a player
@@ -62,7 +63,7 @@ export interface IPlayerEvents extends Events<Human> {
     /**
      * Called when a player's title changes. IE, John -> John, the Merchant
      */
-    changeTitle(milestone?: Milestone): any;
+    changeTitle(type?: TitleType, value?: Milestone | SkillType): any;
     /**
      * Called when the players quickslots are updated
      * @param quickslot The quick slot
@@ -157,6 +158,7 @@ export type IPlayerOld = Partial<Omit<Player, "customization">> & Partial<{
     spawnPoint: IVector3;
     equipped: Record<number, number>;
     vehicleItemId: number | undefined;
+    milestoneTitle?: Milestone;
 }>;
 export interface IStatsOld {
     health: IStatOld;

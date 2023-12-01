@@ -9,10 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import "@wayward/goodstream/apply";
-import "utilities/prototype/Apply";
-import type { IInit } from "Init";
-import { BaseLoader } from "../shared/baseLoader";
-import type { IWaywardCPP } from "../../cplusplus";
+import "@wayward/game/utilities/prototype/Apply";
+import type { IInit } from "@wayward/game/Init";
+import { BaseLoader } from "@wayward/hosts/shared/baseLoader";
+import type { IWaywardCPP } from "@wayward/cplusplus";
 export declare class NodeJsLoader extends BaseLoader<IInit> {
     private readonly args;
     private readonly workingDirectory;

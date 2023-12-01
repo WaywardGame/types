@@ -8,14 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { AiType } from "game/entity/IEntity";
-import { EquipType } from "game/entity/IHuman";
-import NPC from "game/entity/npc/NPC";
-import { ItemType } from "game/item/IItem";
-import type Item from "game/item/Item";
-import Island from "game/island/Island";
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import type { INPCConstructorOptions } from "game/entity/npc/INPC";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import { AiType } from "@wayward/game/game/entity/IEntity";
+import { EquipType } from "@wayward/game/game/entity/IHuman";
+import type { INPCConstructorOptions } from "@wayward/game/game/entity/npc/INPC";
+import NPC from "@wayward/game/game/entity/npc/NPC";
+import Island from "@wayward/game/game/island/Island";
+import { ItemType } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export interface IControllableNPCEvents extends Events<NPC> {
     /**
      * NPC is spawned / ready to do things
@@ -43,7 +44,7 @@ export default class ControllableNPC<SaveDataType = void> extends NPC {
     onIslandActivated(island: Island): void;
     protected initializeStats(): void;
     protected autoScaleStats(): void;
-    protected getDefaultName(): import("../../../../language/impl/TranslationImpl").default;
+    protected getDefaultName(): TranslationImpl;
     protected getDefaultAiType(): AiType;
     protected getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;
     protected getDefaultInventory(): Array<Item | ItemType>;

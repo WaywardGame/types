@@ -8,9 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Game } from "game/Game";
-import ActionPacket from "multiplayer/packets/shared/ActionPacket";
-import type { IReplayLogEntry } from "replay/IReplayLogEntry";
+import type { Game } from "@wayward/game/game/Game";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import ActionPacket from "@wayward/game/multiplayer/packets/shared/ActionPacket";
+import type { IReplayLogEntry } from "@wayward/game/replay/IReplayLogEntry";
 export default class ReplayManager {
     private readonly game;
     debugMode: boolean;
@@ -40,7 +41,7 @@ export default class ReplayManager {
     tick(timeStamp: number): void;
     convertToSave(): Promise<boolean>;
     recordAction(actionPacket: ActionPacket): void;
-    recordRealtimeTick(): void;
+    recordRealtimeTick(islandId: IslandId): void;
     private _createLogEntry;
     private _updatePlayback;
 }

@@ -8,20 +8,21 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import ItemInspection from "game/inspection/inspections/ItemInspection";
-import ListInspection from "game/inspection/inspections/ListInspection";
-import type Tile from "game/tile/Tile";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import Text from "ui/component/Text";
+import { InfoDisplayLevel } from "@wayward/game/game/inspection/IInfoProvider";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import ItemInspection from "@wayward/game/game/inspection/inspections/ItemInspection";
+import ListInspection from "@wayward/game/game/inspection/inspections/ListInspection";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import Text from "@wayward/game/ui/component/Text";
 export default class ItemsInspection extends ListInspection<ItemInspection> {
     static getFromTile(tile: Tile): never[] | ItemsInspection;
     private inspector;
     private inspectorPosition;
     private itemPositions;
     constructor(...itemInspections: ItemInspection[]);
-    get(): import("../../../language/impl/TranslationImpl").default;
+    get(): TranslationImpl;
     getDefaultDisplayLevel(context: InfoProviderContext): InfoDisplayLevel.NonVerbose | InfoDisplayLevel.Always;
     protected initChildTextComponent(text: TranslationGenerator): Text;
     protected onTickEnd(): void;

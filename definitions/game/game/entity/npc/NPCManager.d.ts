@@ -8,13 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import type { IEntityCanCreateOptions } from "game/entity/EntityManager";
-import EntityManager from "game/entity/EntityManager";
-import type { NPCType } from "game/entity/npc/INPCs";
-import NPC from "game/entity/npc/NPC";
-import type ShipperNPC from "game/entity/npc/npcs/Shipper";
-import type Tile from "game/tile/Tile";
+import type { IEntityCanCreateOptions } from "@wayward/game/game/entity/EntityManager";
+import EntityManager from "@wayward/game/game/entity/EntityManager";
+import type Human from "@wayward/game/game/entity/Human";
+import { NPCType } from "@wayward/game/game/entity/npc/INPCs";
+import NPC from "@wayward/game/game/entity/npc/NPC";
+import type ShipperNPC from "@wayward/game/game/entity/npc/npcs/Shipper";
+import type Island from "@wayward/game/game/island/Island";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface INPCCanCreateOptions extends IEntityCanCreateOptions {
     uniqueNpcType?: string;
     disablePlayerLike?: boolean;
@@ -37,11 +39,14 @@ export interface INPCManagerEvents extends Events<EntityManager<NPC>> {
     removePlayingEntity(entity: NPC): any;
 }
 export default class NPCManager extends EntityManager<NPC> {
+    protected readonly name = "NPCManager";
+    protected readonly reregisterObjectsForMemoryLeaks = true;
     readonly event: IEventEmitter<this, INPCManagerEvents>;
     readonly playerLikeNpcs: NPC[];
-    load(): void;
-    spawn(npcType: NPCType, tile: Tile, options?: INPCCanCreateOptions): NPC | undefined;
-    remove(npc: NPC): void;
+    private readonly spawnIntervals;
+    loadEntity(npc: NPC): void;
+    create(npcType: NPCType, tile: Tile, options?: INPCCanCreateOptions): NPC | undefined;
+    protected onRemove(npc: NPC): boolean;
     addPlayerLike(npc: NPC, addToIsland?: boolean): void;
     removePlayerLike(npc: NPC): void;
     updateAll(): void;
@@ -49,4 +54,10 @@ export default class NPCManager extends EntityManager<NPC> {
      * Get an array of shippers that are in the process of shipping things to another island
      */
     getPendingOutboundShippers(): ShipperNPC[];
+    resetSpawnIntervals(): void;
+    runRandomEvents(island: Island, tile: Tile, human: Human): boolean | undefined | void;
+    private getNPCTypeCount;
+    private getNPCTypeIntervalSpawnChance;
+    private canSpawnNPCType;
+    private getNPCTypeSpawnCap;
 }

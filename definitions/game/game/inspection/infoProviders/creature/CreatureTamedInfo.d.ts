@@ -8,9 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Creature from "game/entity/creature/Creature";
-import { InfoProvider } from "game/inspection/InfoProvider";
-import LabelledValue from "game/inspection/infoProviders/LabelledValue";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import LabelledValue from "@wayward/game/game/inspection/infoProviders/LabelledValue";
 export default class CreatureTamedInfoProvider extends InfoProvider {
     private readonly creature;
     private readonly tamed;
@@ -22,6 +23,6 @@ export default class CreatureTamedInfoProvider extends InfoProvider {
     constructor(creature: Creature);
     getClass(): string[];
     hasContent(): boolean;
-    get(): (LabelledValue | import("game/inspection/InfoProvider").SimpleInfoProvider)[];
+    get(): Array<LabelledValue | SimpleInfoProvider>;
     private getHappinessMessage;
 }

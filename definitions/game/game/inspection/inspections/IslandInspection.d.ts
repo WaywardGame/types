@@ -8,16 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { InspectType } from "game/inspection/IInspection";
-import { InfoProvider } from "game/inspection/InfoProvider";
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import Inspection from "game/inspection/Inspection";
-import Island from "game/island/Island";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import type { IVector2 } from "utilities/math/IVector";
+import { InspectType } from "@wayward/game/game/inspection/IInspection";
+import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import Inspection from "@wayward/game/game/inspection/Inspection";
+import Island from "@wayward/game/game/island/Island";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class IslandInspection extends Inspection<IVector2> {
     private readonly title;
-    static getIslandName(island?: Island, useGenerated?: boolean): import("../../../language/impl/TranslationImpl").default;
+    static getIslandName(island?: Island, useGenerated?: boolean): TranslationImpl;
     static handles(type: InspectType, island: unknown): boolean;
     get island(): Island | undefined;
     constructor(island: Island | IVector2, title?: boolean);

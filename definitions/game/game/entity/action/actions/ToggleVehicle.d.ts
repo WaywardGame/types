@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import { Action } from "game/entity/action/Action";
-import type { IActionUsable } from "game/entity/action/IAction";
-import { ActionArgument } from "game/entity/action/IAction";
-import type { ItemType } from "game/item/IItem";
-import Item from "game/item/Item";
-import type Tile from "game/tile/Tile";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type { ItemType } from "@wayward/game/game/item/IItem";
+import Item from "@wayward/game/game/item/Item";
+import type Tile from "@wayward/game/game/tile/Tile";
 export interface ToggleVehicleDoodadCanUse extends IActionUsable {
     type: "doodad";
     existingVehicleItem?: Item;
@@ -29,5 +29,5 @@ export interface ToggleVehicleItemCanUse extends IActionUsable {
     facingTile?: Tile;
 }
 export type ToggleVehicleCanUse = ToggleVehicleDoodadCanUse | ToggleVehicleItemCanUse;
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Undefined]], import("../../Human").default<number>, void, ToggleVehicleCanUse, [(Doodad | Item | undefined)?]>;
+declare const _default: Action<[[ActionArgument.Undefined, ActionArgument.ItemNearby, ActionArgument.Doodad]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ToggleVehicleCanUse, [(Doodad | Item | undefined)?]>;
 export default _default;

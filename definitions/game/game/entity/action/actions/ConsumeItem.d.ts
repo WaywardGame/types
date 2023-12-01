@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Action } from "game/entity/action/Action";
-import type { IActionUsable } from "game/entity/action/IAction";
-import { ActionArgument } from "game/entity/action/IAction";
-import type { IItemDescription } from "game/item/IItem";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type { IItemDescription } from "@wayward/game/game/item/IItem";
 export interface IConsumeItemCanUse extends IActionUsable {
     description: IItemDescription;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<number>, void, IConsumeItemCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IConsumeItemCanUse, [import("../../../item/Item").default]>;
 export default _default;

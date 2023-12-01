@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IMessage } from "game/entity/player/IMessageManager";
-import type Player from "game/entity/player/Player";
-import type { Game } from "game/Game";
-import type { ISshSession, ISshStream } from "multiplayer/dedicatedServer/ssh/ISsh";
+import type { IMessage } from "@wayward/game/game/entity/player/IMessageManager";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { Game } from "@wayward/game/game/Game";
+import type { ISshSession, ISshStream } from "@wayward/game/multiplayer/dedicatedServer/ssh/ISsh";
 export default abstract class Shell {
     readonly session: ISshSession;
     readonly stream: ISshStream;
@@ -35,7 +35,7 @@ export default abstract class Shell {
     /**
      * Writes the marker
      */
-    abstract writeMarker(): Promise<void>;
+    abstract writeMarker(): void;
     /**
      * Processes a line sent for the session
      * @returns A shell to push a new action shell, false to exit the session, undefined to keep the active shell going

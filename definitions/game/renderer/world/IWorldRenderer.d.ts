@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IBound3 } from "utilities/math/Bound3";
+import type { IBound3 } from "@wayward/game/utilities/math/Bound3";
 export declare enum SpriteBatchLayer {
     Corpse = 0,
     Item = 1,
     ItemMoving = 2,
-    Creature = 3,
+    PlayerCreature = 3,
     TileEvent = 4,
     CreatureFlying = 5,
     Overlay = 6,

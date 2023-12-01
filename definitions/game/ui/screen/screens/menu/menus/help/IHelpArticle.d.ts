@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IModdable } from "mod/ModRegistry";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
 export interface IHelpArticle extends IModdable {
     /**
      * Whether this article is "important", which makes it take up the full row (instead of sharing
@@ -31,7 +31,7 @@ export declare enum HelpArticle {
     Doodads = 8,
     ResourceGathering = 9,
     AttackingDamage = 10,
-    Reputation = 11,
+    AlignmentFerocity = 11,
     Milestones = 12,
     HeldItems = 13,
     Crafting = 14,
@@ -42,9 +42,10 @@ export declare enum HelpArticle {
     Overweight = 19,
     Merchants = 20,
     Gardening = 21,
-    GameModes = 22,
-    Multiplayer = 23,
-    Bugs = 24
+    ItemProtection = 22,
+    GameModes = 23,
+    Multiplayer = 24,
+    Bugs = 25
 }
 export declare enum HelpArticleSection {
     Interface = 0,

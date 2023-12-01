@@ -8,16 +8,30 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
-import type { ActionType, IActionNotUsable } from "game/entity/action/IAction";
-import type Creature from "game/entity/creature/Creature";
-import type { Quality } from "game/IObject";
-import type { IMoveToTileOptions, ItemType, ItemTypeGroup } from "game/item/IItem";
-import type Item from "game/item/Item";
-import type Tile from "game/tile/Tile";
-import type TileEvent from "game/tile/TileEvent";
-import type { Direction } from "utilities/math/Direction";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
+import type { ActionType, IActionNotUsable } from "@wayward/game/game/entity/action/IAction";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { Quality } from "@wayward/game/game/IObject";
+import type { ContainerSort, IContainer, IMoveToTileOptions, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import type { SortDirection } from "@wayward/game/save/ISaveManager";
+import type { Direction } from "@wayward/game/utilities/math/Direction";
+/**
+ * Options when removing an item
+ */
+export interface IItemRemoveOptions {
+    /**
+     * Defaults to false
+     */
+    removeContainedItems?: boolean;
+    /**
+     * Defaults to false
+     */
+    skipExtinguishTorches?: boolean;
+}
 /**
  * Includes all protected items by default
  */
@@ -49,8 +63,9 @@ export interface IGetItemsOptions extends IGetItemOptions {
 export interface IGetBestItemsOptions extends IGetItemsOptions {
     action: ActionType;
     actionWith: Item | (() => Item | undefined);
+    sort(itemA: Item, itemB: Item, options: Partial<IGetBestItemsOptions>): number | undefined;
     filterType: ItemType;
-    filterQuality: Quality;
+    filterQuality: ArrayOr<Quality>;
     filterGroup: ItemTypeGroup;
     filterConsumable: true;
     targetCreature: Creature;
@@ -102,8 +117,11 @@ export interface IMoveItemOptions {
     skipUpdateTables?: boolean;
     skipWeightChecks?: boolean;
     suspendNotifier?: boolean;
-    moveToTileOptions?: IMoveToTileOptions;
+    moveToTileOptions?: IMoveToTileOptions | true;
     dryRun?: true;
+    index?: number;
+    updateView?: true;
+    isTrading?: boolean;
 }
 export interface IPlaceOnTileOptions {
     force?: boolean;
@@ -126,7 +144,8 @@ export declare enum ContainerReferenceSource {
     Serializer = 11,
     WriteContainer = 12,
     GetContainerName = 13,
-    Upgrade = 14
+    Upgrade = 14,
+    MoveItemOfTypeArgument = 15
 }
 export interface ICraftResultChances {
     success: number;
@@ -136,6 +155,14 @@ export declare namespace ICraftResultChances {
     const NEVER: Readonly<ICraftResultChances>;
 }
 export interface IAddToContainerResult {
+    usable?: true;
     itemsMoved: Item[];
     noMoreRoomForItems: Item[];
+}
+export interface IContainerOld extends Omit<IContainer, "addOrder"> {
+    itemOrders?: number[];
+}
+export interface IContainerSort {
+    sort: ContainerSort;
+    direction: SortDirection;
 }

@@ -8,22 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { BiomeType } from "game/biome/IBiome";
-import { DrawnMapTheme } from "game/mapping/IMapRender";
-import { PathType } from "resource/IResourceLoader";
-import IResourceData from "resource/IResourcePath";
+import { BiomeType } from "@wayward/game/game/biome/IBiome";
+import { DrawnMapTheme } from "@wayward/game/game/mapping/IMapRender";
+import { PathType } from "@wayward/game/resource/IResourceLoader";
+import IResourceData from "@wayward/game/resource/IResourcePath";
 interface IResourceOptionsMap {
     [PathType.Terrain]: [biome?: BiomeType];
     [PathType.TerrainTilled]: [biome?: BiomeType];
     [PathType.TerrainTilled]: [biome?: BiomeType];
     [PathType.MapTile]: [theme: DrawnMapTheme];
-    [PathType.Map]: [theme: DrawnMapTheme];
+    [PathType.Map]: [theme: DrawnMapTheme, offset?: number];
     [PathType.Island]: [theme: DrawnMapTheme, offset: number];
     [PathType.Pin]: [theme: DrawnMapTheme];
     [PathType.EquipSlot]: [resolution?: 16 | 8];
+    [PathType.Deity]: [big?: true];
 }
 export type ResourceOptionsMap = Record<Exclude<PathType, keyof IResourceOptionsMap>, []> & IResourceOptionsMap;
-declare module ResourcePath {
+declare namespace ResourcePath {
     /**
      * Returns the path of a resource.
      * @param pathType The type of resource this is.

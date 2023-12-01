@@ -8,59 +8,64 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IEventEmitter } from "event/EventEmitter";
-import Doodad from "game/doodad/Doodad";
-import type Creature from "game/entity/creature/Creature";
-import type { IDamageInfo } from "game/entity/creature/ICreature";
-import { CreatureType } from "game/entity/creature/ICreature";
-import EntityWithStats from "game/entity/EntityWithStats";
-import type { IAttack, ICausesDamage, IEntityConstructorOptions } from "game/entity/IEntity";
-import { AttackType, DamageType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "game/entity/IEntity";
-import type { ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkPathChangeReason } from "game/entity/IHuman";
-import { EquipType, RestCancelReason, SkillType } from "game/entity/IHuman";
-import type { IStat } from "game/entity/IStats";
-import { Stat } from "game/entity/IStats";
-import type { IMessageManager } from "game/entity/player/IMessageManager";
-import type { IMovementIntent, IWalkPath } from "game/entity/player/IPlayer";
-import { PlayerState, TurnTypeFlag, WeightStatus } from "game/entity/player/IPlayer";
-import type { INoteManager } from "game/entity/player/note/NoteManager";
-import PlayerDefense from "game/entity/player/PlayerDefense";
-import type { IQuestManager } from "game/entity/player/quest/QuestManager";
-import type { ISkillAttribute } from "game/entity/skill/ISkills";
-import SkillManager from "game/entity/skill/SkillManager";
-import type { StatChangeTimerFactory } from "game/entity/StatFactory";
-import { StatChangeCurrentTimerStrategy } from "game/entity/StatFactory";
-import StatusEffect from "game/entity/status/StatusEffect";
-import { FireType } from "game/IGame";
-import type { Quality } from "game/IObject";
-import type { IMobCheck, IMoveToIslandOptions, IslandId } from "game/island/IIsland";
-import type Island from "game/island/Island";
-import type { EquipEffectByType, EquipEffects, IContainer, IRanged, RecipeLevel } from "game/item/IItem";
-import { EquipEffect, ItemType, ItemTypeGroup } from "game/item/IItem";
-import type Item from "game/item/Item";
-import ItemReference from "game/item/ItemReference";
-import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
-import { Milestone } from "game/milestones/IMilestone";
-import type { IGameOptionsPlayer } from "game/options/IGameOptions";
-import type { Reference } from "game/reference/IReferenceManager";
-import type { IHasInsulation } from "game/temperature/ITemperature";
-import { TempType } from "game/temperature/ITemperature";
-import type Tile from "game/tile/Tile";
-import type { ICanSailAwayResult } from "game/tile/Tile";
-import type TileEvent from "game/tile/TileEvent";
-import Message from "language/dictionary/Message";
-import type { ISerializedTranslation } from "language/ITranslation";
-import Translation from "language/Translation";
-import type FieldOfView from "renderer/fieldOfView/FieldOfView";
-import { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
-import type { IOptions } from "save/data/ISaveDataGlobal";
-import { Direction } from "utilities/math/Direction";
-import type { IVector2, IVector3 } from "utilities/math/IVector";
-import Vector2 from "utilities/math/Vector2";
-import type { IVector4 } from "utilities/math/Vector4";
-export declare const REPUTATION_MAX = 64000;
-export default abstract class Human<TypeType extends number = number> extends EntityWithStats<unknown, TypeType> implements IHasInsulation {
-    static getNameTranslation(): import("../../language/impl/TranslationImpl").default;
+import { FireType } from "@wayward/game/game/IGame";
+import { Quality } from "@wayward/game/game/IObject";
+import type { Alignment } from "@wayward/game/game/deity/AlignmentManager";
+import { Deity } from "@wayward/game/game/deity/Deity";
+import Doodad from "@wayward/game/game/doodad/Doodad";
+import EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
+import type { IAttack, ICausesDamage, IEntityConstructorOptions, IMovingData } from "@wayward/game/game/entity/IEntity";
+import { AttackType, DamageType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "@wayward/game/game/entity/IEntity";
+import type { ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkPathChangeReason } from "@wayward/game/game/entity/IHuman";
+import { EquipType, RestCancelReason, SkillType } from "@wayward/game/game/entity/IHuman";
+import type { IStat } from "@wayward/game/game/entity/IStats";
+import { Stat } from "@wayward/game/game/entity/IStats";
+import type { StatChangeTimerFactory } from "@wayward/game/game/entity/StatFactory";
+import { StatChangeCurrentTimerStrategy } from "@wayward/game/game/entity/StatFactory";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { CreatureType, IDamageInfo } from "@wayward/game/game/entity/creature/ICreature";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type { IMessageManager } from "@wayward/game/game/entity/player/IMessageManager";
+import type { IMovementIntent, IWalkPath } from "@wayward/game/game/entity/player/IPlayer";
+import { PlayerState, TurnTypeFlag, WeightStatus } from "@wayward/game/game/entity/player/IPlayer";
+import PlayerDefense from "@wayward/game/game/entity/player/PlayerDefense";
+import type { INoteManager } from "@wayward/game/game/entity/player/note/NoteManager";
+import type { IQuestManager } from "@wayward/game/game/entity/player/quest/QuestManager";
+import type { ISkillAttribute } from "@wayward/game/game/entity/skill/ISkills";
+import SkillManager from "@wayward/game/game/entity/skill/SkillManager";
+import type { IMobCheck, IMoveToIslandOptions, IslandId } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
+import type { EquipEffectByType, EquipEffects, IContainer, IRanged, RecipeLevel } from "@wayward/game/game/item/IItem";
+import { EquipEffect, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import ItemReference from "@wayward/game/game/item/ItemReference";
+import { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
+import { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { IGameOptionsPlayer } from "@wayward/game/game/options/IGameOptions";
+import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
+import type { IHasInsulation } from "@wayward/game/game/temperature/ITemperature";
+import { TempType } from "@wayward/game/game/temperature/ITemperature";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type { ICanSailAwayResult } from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import Translation from "@wayward/game/language/Translation";
+import Message from "@wayward/game/language/dictionary/Message";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
+import { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
+import type { IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
+import { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
+import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+interface IEquip {
+    item: Item;
+    equipType: EquipType;
+}
+export default abstract class Human<TypeType extends number = number, EntityReferenceType extends ReferenceType.Player | ReferenceType.NPC = ReferenceType.Player | ReferenceType.NPC> extends EntityWithStats<unknown, TypeType, EntityReferenceType> implements IHasInsulation {
+    static getNameTranslation(): TranslationImpl;
     event: IEventEmitter<this, IHumanEvents>;
     anim: number;
     direction: Vector2;
@@ -73,7 +78,7 @@ export default abstract class Human<TypeType extends number = number> extends En
      * Note: This might not be a whole number.
      */
     fromY: number;
-    crafted: Record<number, ICrafted>;
+    crafted: SaferNumberIndexedObject<ICrafted>;
     customization: ICustomizations;
     deathBy: ISerializedTranslation;
     defense: PlayerDefense;
@@ -86,7 +91,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     isConnecting: boolean;
     lastAttackedByReference?: Reference;
     manualTickActionDelay?: number;
-    options: Readonly<IOptions>;
+    options: ImmutableObject<IOptions>;
     islandId: IslandId;
     readonly equipEffects: Map<EquipEffect, EquipEffects>;
     realTimeTickActionDelay: number;
@@ -94,11 +99,12 @@ export default abstract class Human<TypeType extends number = number> extends En
     restData: IRestData | undefined;
     score: number;
     state: PlayerState;
-    swimming: boolean;
+    protected swimming: boolean;
     tamedCreatures: Map<`${number},${number}`, Set<number>>;
     ticksSpent: Map<`${number},${number}`, number>;
     turns: number;
     vehicleItemReference: ItemReference | undefined;
+    connectedVehicleId?: number;
     walkSoundCounter: number;
     readonly movementIntent: IMovementIntent;
     walkPath?: IWalkPath;
@@ -119,7 +125,7 @@ export default abstract class Human<TypeType extends number = number> extends En
      * Flag that will prevent a humans vehicle from showing up until the movement finishews
      */
     isMovingSuppressVehicleClientside: boolean;
-    protected readonly milestonesCollection: import("../options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("../options/modifiers/milestone/MilestoneModifier").default, Milestone, import("../options/modifiers/milestone/MilestoneModifier").MilestoneModifierInstance<any>, [(Human<number> | undefined)?]>;
+    protected readonly milestonesCollection: import("../options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("../options/modifiers/milestone/MilestoneModifier").default, Milestone, import("../options/modifiers/milestone/MilestoneModifier").MilestoneModifierInstance<any>, [(Human<number, ReferenceType.NPC | ReferenceType.Player> | undefined)?]>;
     protected gameOptionsCached?: IGameOptionsPlayer;
     protected cachedMovementPenalty?: number;
     constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
@@ -129,29 +135,35 @@ export default abstract class Human<TypeType extends number = number> extends En
     abstract createQuestManager(): IQuestManager;
     abstract addMilestone(milestone: Milestone, data?: number | string, update?: boolean): void;
     createSkillManager(): SkillManager;
-    isLocalPlayer(): boolean;
-    getGameOptionsBeforeModifiers(): IGameOptionsPlayer;
-    getGameOptions(): IGameOptionsPlayer;
+    get isLocalPlayer(): boolean;
+    get isResting(): boolean;
+    get isRestingCancelled(): boolean;
+    get isGhost(): boolean;
+    get isDead(): boolean;
+    /**
+     * @returns True if this is the special dedicated server player
+     */
+    get isServer(): boolean;
+    /**
+     * @returns True if this player is the host of the multiplayer game or if there is no multiplayer game active
+     */
+    get isHost(): boolean;
+    get days(): number;
+    /**
+     * Gets the last attacked entity
+     */
+    get lastAttackedByEntity(): Human | Creature | Doodad | TileEvent | undefined;
+    /**
+     * Gets the last attacked entity as a human (from combat, creature owners, doodad builders, firestarters).
+     */
+    get lastAttackedByEntityHuman(): Human | undefined;
+    getGameOptionsBeforeModifiers(): ImmutableObject<IGameOptionsPlayer>;
+    getGameOptions(): ImmutableObject<IGameOptionsPlayer>;
     setOptions(options: IOptions): void;
-    /**
-     * Multiply the reputation amount with whatever is set via milestone modifiers or custom game options for this player.
-     * @param reputation A number or undefined to be mutiplied.
-     * @returns A number or undefined if a reputation number was not passed.
-     */
-    getReputationMultiplier(reputation: number | undefined): number | undefined;
     getEquipEffect<E extends EquipEffect>(type: E): FirstIfOne<EquipEffectByType<E>>;
-    getReputation(): number;
-    isResting(): boolean;
-    isRestingCancelled(): boolean;
-    isGhost(): boolean;
-    isDead(): boolean;
-    /**
-     * Returns true if this is the special dedicated server player
-     */
-    isServer(): boolean;
-    isHost(): boolean;
-    updateDirection(tile: Tile, updateVehicleDirection?: boolean): void;
-    protected onMovementCompleted(): void;
+    get alignment(): Alignment;
+    updateDirection(tile: Tile | Direction.Cardinal, updateVehicleDirection?: boolean): Direction.Cardinal;
+    protected onMovementCompleted(movingData: IMovingData): void;
     moveTowardsIsland(direction: Direction.Cardinal | Direction.None, options?: Partial<IMoveToIslandOptions>): Promise<void>;
     moveToIslandPosition(position: IVector2, options?: Partial<IMoveToIslandOptions>): Promise<void>;
     /**
@@ -194,11 +206,13 @@ export default abstract class Human<TypeType extends number = number> extends En
     private getAttackType;
     private getAttackSkillBonus;
     private getAttackSkill;
-    damage(damageInfoOrAmount: IDamageInfo | number): number | undefined;
+    damage(damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
     /**
-     * @deprecated provide a full IDamageInfo object yourself you lazy fiend
+     * Gets the use benefits for all equipped items.
+     * @param stat to check use benefits for.
+     * @returns number that is the bonus amount the player recieves when consuming.
      */
-    damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: Message | Translation, soundDelay?: number, causesBlood?: boolean, statusEffect?: StatusEffect): number | undefined;
+    getEquippedUseBenefits(stat: Stat): number;
     getEquippedItems(includeDisabled?: true): Item[];
     getEquippedItem(slot: EquipType, includeDisabled?: true): Item | undefined;
     isOffHandDisabled(): boolean;
@@ -220,21 +234,25 @@ export default abstract class Human<TypeType extends number = number> extends En
      */
     protected onNoInput(): void;
     protected onMoveComplete(): void;
+    protected onAlignmentChange(): void;
     /**
      * This is only ran on the server
      */
     processInput(timeStamp: number): IMovementIntent | undefined;
     staminaReduction(skill?: SkillType, level?: number): void;
-    updateReputationForAttackingWithTamedCreature(target: Creature, attacker: Creature): void;
-    updateReputation(reputation: number): void;
+    /**
+     * @param alignment The deity to potentially give a rune for
+     * @param chance A chance multiplier on top of the base rune chance of 10% (an additional 30% chance may be added by piety)
+     * @returns whether the rune was given
+     */
+    giveRune(alignment: Deity, chance: number): boolean;
     protected checkOnLoadMilestones(): void;
-    capReputation(): void;
     setVehicle(item: Item | undefined, extinguishTorches?: boolean): boolean;
     getWeightStatus(): WeightStatus;
     /**
-     * Extinguishes all torches the player is holding.
+     * Extinguishes all torches the player is holding of they are swimming.
      */
-    extinguishTorches(): void;
+    extinguishTorchesIfSwimming(): void;
     rangeAction(weapon: Item | undefined, ranged: IRanged | undefined, bonusMagicalType: MagicalPropertyType, skillType: SkillType, useMaxRange?: boolean): {
         mobCheck: IMobCheck;
         bonusRange: number;
@@ -243,30 +261,31 @@ export default abstract class Human<TypeType extends number = number> extends En
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     getBurnDamage(fireType: FireType, skipParry?: boolean, equipType?: EquipType): number;
     /**
-     * Burn the player
+     * Burn the player/NPC
      */
-    burn(fireType: FireType, skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean, level?: number): number | undefined;
-    setPosition(tile: Tile): void;
+    burn(fireType: FireType, skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean, level?: number, thing?: Doodad | TileEvent): number | undefined;
     /**
      * @param effects If true, adds a delay to the player, clears any particles, and updates the view. (Default: true)
      */
-    setZ(z: number, allowCancelation?: boolean, effects?: boolean, updateFlowField?: boolean): boolean;
+    setZ(z: number, allowCancelation?: boolean, updateFlowField?: boolean): boolean;
     getMovementIntent(): IMovementIntent;
     updateMovementIntent(movementIntent: IMovementIntent): boolean;
     hasWalkPath(): boolean;
     setWalkPath(path: IVector2[] | undefined, force?: boolean, reason?: WalkPathChangeReason): void;
     protected onDie(): void;
     checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
-    trampleFire(fireEvent: TileEvent): void;
     damageByInteractingWith(thing: Doodad | TileEvent, options: ICheckUnderOptions | undefined, damageLocation: EquipType): ICheckUnderOptions;
-    equip(item: Item, slot: EquipType, internal?: boolean): boolean;
+    equip(item: Item, slot: EquipType, internal?: boolean, skipRevertItem?: boolean): boolean;
     /**
      * Unequips an item.
      * Note: This is safe to call even if the item isn't equipped. it'll do nothing in that case.
      */
-    unequip(item: Item, internal?: boolean, skipMessage?: boolean, skipRevertItem?: boolean): void;
+    unequip(item: Item, internal?: boolean, skipMessage?: boolean, skipRevertItem?: boolean, isArmorStandSwap?: boolean): void;
     private updateOffHandState;
-    unequipAll(): void;
+    /**
+     * Unequip all equipment
+     */
+    unequipAll(displayMessage?: boolean, isArmorStandSwap?: boolean): IEquip[];
     getJumpTile(): Tile | undefined;
     hasDelay(): boolean;
     addDelay(delay: number, replace?: boolean, addStaminaDelay?: boolean): void;
@@ -293,6 +312,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     private getEquipmentInsulation;
     discoverRecipe(recipeType: ItemType, crafted?: ICrafted, discoveredClientSide?: boolean): void;
     incrementIslandTickCount(): void;
+    protected onPostMove(lastTile: Tile, tile: Tile): void;
     passTurn(turnType?: TurnTypeFlag): void;
     /**
      * Ticks a player
@@ -319,7 +339,7 @@ export default abstract class Human<TypeType extends number = number> extends En
     /**
      * Gets if the human is swimming (and not on a boat)
      */
-    isSwimming(): boolean;
+    get isSwimming(): boolean;
     updateSwimming(): void;
     updateVehicle(): void;
     getWeightOrStaminaMovementPenalty(): number;
@@ -347,6 +367,7 @@ export default abstract class Human<TypeType extends number = number> extends En
      * Returns the bartering bonus for a given credit value
      */
     getBarteringBonus(baseCredits: number): number;
+    getProducedTemperature(): number | undefined;
     getInsulation(type: TempType): number;
     resetStatTimers(type?: StatChangeCurrentTimerStrategy): void;
     private getBaseStatBonuses;
@@ -362,11 +383,12 @@ export default abstract class Human<TypeType extends number = number> extends En
     protected calculateStats(): void;
     kill(): void;
     protected resetDefense(skipStatChangedEvent?: boolean): void;
-    protected swimAndSootheCheck(): void;
+    protected sootheChecks(): void;
+    private swimSootheCheck;
     /**
      * Chance to stop frostbite when next to a fire
      */
-    protected fireSootheCheck(): void;
+    private fireSootheCheck;
     /**
      * Event handler for when a status effect is applied or removed.
      */
@@ -410,12 +432,25 @@ export default abstract class Human<TypeType extends number = number> extends En
     discoverVulnOrResist(creatureType: CreatureType, damageType: DamageType): void;
     getDiscoveredVulnsAndResists(): Map<CreatureType, Set<DamageType>>;
     getDiscoveredVulnsAndResists(creatureType: CreatureType): Set<DamageType>;
+    get connectedVehicle(): Doodad | undefined;
+    connectVehicle(vehicle: Doodad): void;
+    disconnectVehicle(animate?: boolean): void;
+    /**
+     * Creates a fire at a given tile and assigns the player as its creator.
+     */
+    createFire(tile: Tile): TileEvent | undefined;
     get asCorpse(): undefined;
     get asCreature(): undefined;
     get asDoodad(): undefined;
     get asHuman(): Human;
     get asTileEvent(): undefined;
     get asItem(): undefined;
+    isCorpse(): this is Corpse;
+    isCreature(): this is Creature;
+    isDoodad(): this is Doodad;
+    isHuman(): this is Human;
+    isTileEvent(): this is TileEvent;
+    isItem(): this is Item;
     get point(): IVector3;
     get tile(): Tile;
     /**
@@ -424,3 +459,4 @@ export default abstract class Human<TypeType extends number = number> extends En
      */
     private moveItemsToIsland;
 }
+export {};

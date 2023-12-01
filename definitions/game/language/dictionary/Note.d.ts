@@ -31,7 +31,7 @@ declare enum Note {
     Mercantile = 15,
     Nightfall = 16,
     Poisoned = 17,
-    Reputation = 18,
+    Deities = 18,
     SeaTravel = 19,
     StaminaReplenishment = 20,
     Starvation = 21,

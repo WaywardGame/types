@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { AiType } from "game/entity/IEntity";
+import { AiType } from "@wayward/game/game/entity/IEntity";
 declare const aiTypes: Map<AiType, string>;
 export default aiTypes;

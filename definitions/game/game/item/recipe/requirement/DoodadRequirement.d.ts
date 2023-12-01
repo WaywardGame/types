@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type { DoodadType, DoodadTypeGroup } from "game/doodad/IDoodad";
-import type Crafter from "game/item/recipe/Crafter";
-import RecipeRequirement, { RecipeRequirementType } from "game/item/recipe/RecipeRequirement";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
+import type Crafter from "@wayward/game/game/item/recipe/Crafter";
+import RecipeRequirement, { RecipeRequirementType } from "@wayward/game/game/item/recipe/RecipeRequirement";
 export default class DoodadRequirement extends RecipeRequirement<RecipeRequirementType.Doodad> {
     readonly doodad: DoodadType | DoodadTypeGroup;
     static readonly BASE: DoodadRequirement;

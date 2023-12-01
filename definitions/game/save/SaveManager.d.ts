@@ -8,17 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IWaywardPreload } from "@hosts/shared/interfaces";
-import EventEmitter from "event/EventEmitter";
-import type Player from "game/entity/player/Player";
-import type { Game } from "game/Game";
-import type IClientStore from "save/clientStore/IClientStore";
-import type { ISaveImportSuccess, ISaveInfo, ISaveManagerEvents, ISaveObject, SaveImportResult } from "save/ISaveManager";
-import { SaveSort, SortDirection } from "save/ISaveManager";
-import type { ISerializer } from "save/serializer/ISerializer";
-import type { AnyPropertyToSerialize } from "save/serializer/PropertiesToSerialize";
-import Files from "utilities/Files";
-import type { IVersionInfo } from "utilities/Version";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { Game } from "@wayward/game/game/Game";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { ISaveImportSuccess, ISaveInfo, ISaveManagerEvents, ISaveObject, SaveImportResult } from "@wayward/game/save/ISaveManager";
+import { SaveImportErrorReason, SaveSort, SortDirection } from "@wayward/game/save/ISaveManager";
+import type IClientStore from "@wayward/game/save/clientStore/IClientStore";
+import type { ISerializer } from "@wayward/game/save/serializer/ISerializer";
+import type { AnyPropertyToSerialize } from "@wayward/game/save/serializer/PropertiesToSerialize";
+import Files from "@wayward/game/utilities/Files";
+import type { IVersionInfo } from "@wayward/game/utilities/Version";
+import type { IWaywardPreload } from "@wayward/hosts/shared/interfaces";
 export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
     readonly game: Game;
     lastLoadedVersion: IVersionInfo;
@@ -76,14 +76,14 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
      * @returns an object of results, and an object of errors, both indexed by the given keys.
      */
     loadSpecificDataResilient(slot: number, keys: Set<AnyPropertyToSerialize>): Promise<{
-        result: Record<string, any>;
-        errors: Map<string, Error>;
+        result: Record<AnyPropertyToSerialize, any>;
+        errors: Map<AnyPropertyToSerialize, Error>;
     }>;
     loadSpecificDatas(slots: number[], keys: Set<AnyPropertyToSerialize>): Promise<Map<number, Record<AnyPropertyToSerialize, any>>>;
     /**
      * Returns the number of bytes the save takes up
      */
-    saveSpecificData(slot: number, object: any, keys: Set<AnyPropertyToSerialize>): Promise<number>;
+    saveSpecificData(slot: number, object: any, keys: Set<AnyPropertyToSerialize | "checksums">): Promise<number>;
     /**
      * Exports the specified slot into a Uint8Array format that can be used with importSave
      */
@@ -105,8 +105,16 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
      * 3. Uint8Array - From exported save games
      * @returns the number of bytes the save takes up, or undefined, if an error occurs
      */
-    importSave(slot: number, saveObject: ISaveObject | string | Uint8Array): Promise<number | undefined>;
-    copySave(slot?: number, target?: number): Promise<number | undefined>;
+    importSave(slot: number, saveObject: ISaveObject | string | Uint8Array): Promise<{
+        bytes: number;
+    } | {
+        error: SaveImportErrorReason;
+    }>;
+    copySave(slot?: number, target?: number): Promise<{
+        bytes: number;
+    } | {
+        error: SaveImportErrorReason;
+    }>;
     deleteSlot(slot?: number): Promise<void>;
     deleteAllSlots(): Promise<void>;
     deleteAllData(): Promise<void>;

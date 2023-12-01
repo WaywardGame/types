@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import HumanTargetedClientPacket from "multiplayer/packets/HumanTargetedClientPacket";
+import HumanTargetedClientPacket from "@wayward/game/multiplayer/packets/HumanTargetedClientPacket";
 export declare enum EmitHumanEventType {
     None = 0,
     NoInput = 1,

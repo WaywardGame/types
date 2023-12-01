@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ICustomizations } from "game/entity/IHuman";
-import { HairStyle } from "game/entity/IHuman";
-import ChoiceList, { Choice } from "ui/component/ChoiceList";
-import type { CharacterPreviewFilters, CharacterPreviewRotation } from "ui/screen/screens/menu/menus/character/CharacterPreview";
+import type { ICustomizations } from "@wayward/game/game/entity/IHuman";
+import { HairStyle } from "@wayward/game/game/entity/IHuman";
+import ChoiceList, { Choice } from "@wayward/game/ui/component/ChoiceList";
+import type { CharacterPreviewFilters, CharacterPreviewRotation } from "@wayward/game/ui/screen/screens/menu/menus/character/CharacterPreview";
 export declare class HairstyleList extends ChoiceList<HairstyleChoice> {
     private readonly baseCustomization;
     private readonly filters?;

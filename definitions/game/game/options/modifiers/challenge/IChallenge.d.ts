@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { StatusType } from "game/entity/IEntity";
-import type { IGameOptionsPlayer } from "game/options/IGameOptions";
+import type { StatusType } from "@wayward/game/game/entity/IEntity";
+import type { IGameOptions, IGameOptionsPlayer } from "@wayward/game/game/options/IGameOptions";
 export declare enum Challenge {
     NoHealthRegeneration = 0,
     NoStaminaRegeneration = 1,
@@ -20,11 +20,11 @@ export declare enum Challenge {
     PermanentlyBurning = 6,
     PermanentlyPoisoned = 7,
     NoStartingItems = 8,
-    StartingMalignity = 9,
-    BenignityRate = 10,
-    MalignityRate = 11
+    StartingEvilAlignment = 9,
+    GoodAlignmentRate = 10,
+    EvilAlignmentRate = 11
 }
 export declare function isPermanentEffect(effect: StatusType, options: IGameOptionsPlayer): boolean;
-export declare function isEternal(time: number): (options?: import("game/options/IGameOptions").IGameOptions) => boolean;
+export declare function isEternal(time: number): (options?: IGameOptions) => boolean;
 export declare function getMultiplierChallengeValue(multiplier: number, value?: number): number;
 export declare function getDailyChallengeSeed(): number;

@@ -8,15 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Objects from "utilities/object/Objects";
-import type { RandomInstance } from "utilities/random/IRandom";
-import { RandomReference } from "utilities/random/RandomReference";
+import Objects from "@wayward/utilities/object/Objects";
+import type { RandomInstance } from "@wayward/utilities/random/IRandom";
+import { RandomReference } from "@wayward/game/utilities/random/RandomReference";
+import type { Random } from "@wayward/utilities/random/Random";
+import type { LegacySeededGenerator } from "@wayward/utilities/random/generators/LegacySeededGenerator";
+import type { PCGSeededGenerator } from "@wayward/utilities/random/generators/PCGSeededGenerator";
 export default abstract class RandomValueGenerator<T> implements Objects.ICloneable {
     random?: RandomInstance | RandomReference;
     value?: T;
     constructor(random?: RandomInstance | RandomReference, value?: T);
     getRandomInstance(): RandomInstance | undefined;
-    getRandom(): import("./Random").Random<import("./generators/LegacySeededGenerator").LegacySeededGenerator | import("./generators/PCGSeededGenerator").PCGSeededGenerator>;
+    getRandom(): Random<LegacySeededGenerator | PCGSeededGenerator>;
     abstract [Objects.SYMBOL_CLONE](clone: typeof Objects.deepClone): this;
     protected clone(clone: typeof Objects.deepClone): readonly [RandomInstance | RandomReference | undefined, T | undefined];
 }

@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { TypedPropertyDescriptorFunctionAnyNOfParams } from "event/EventManager";
-import Bindable from "ui/input/Bindable";
-import { IInput } from "ui/input/IInput";
-import type { GlobalInputInfo, GlobalMouseInfo, InputInfo } from "ui/input/InputManager";
+import Bindable from "@wayward/game/ui/input/Bindable";
+import { IInput } from "@wayward/game/ui/input/IInput";
+import type { GlobalInputInfo, GlobalMouseInfo, InputInfo } from "@wayward/game/ui/input/InputManager";
+import type { TypedPropertyDescriptorFunctionAnyNOfParams } from "@wayward/utilities/event/EventManager";
 export interface IBindHandlerApi {
     /**
      * You should never need this unless you expect the user to be trying to use a scroll binding for your bind handler.
@@ -68,7 +68,7 @@ declare enum BindingEvent {
 }
 type BindingEventName = keyof typeof BindingEvent;
 export type { BindingEventName as BindingEvent };
-declare module Bind {
+declare namespace Bind {
     /**
      * Registers a handler for when the given `Bindable` is pressed. This event won't be fired again until the `Bindable` was then *released*.
      *

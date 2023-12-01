@@ -8,19 +8,28 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IEventEmitter } from "event/EventEmitter";
-import type { IEntityMovableEvents } from "game/entity/EntityMovable";
-import EntityMovable from "game/entity/EntityMovable";
-import type { IEntityConstructorOptions } from "game/entity/IEntity";
-import { EntityType } from "game/entity/IEntity";
-import { TileUpdateType } from "game/IGame";
-import type { IObject } from "game/IObject";
-import { FireStage } from "game/tile/events/IFire";
-import type { ITileEventDescription } from "game/tile/ITileEvent";
-import { TileEventType } from "game/tile/ITileEvent";
-import type Tile from "game/tile/Tile";
-import type { Article } from "language/Translation";
-import type { IVector3 } from "utilities/math/IVector";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type { IEntityMovableEvents } from "@wayward/game/game/entity/EntityMovable";
+import EntityMovable from "@wayward/game/game/entity/EntityMovable";
+import type Human from "@wayward/game/game/entity/Human";
+import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
+import { EntityType } from "@wayward/game/game/entity/IEntity";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type Player from "@wayward/game/game/entity/player/Player";
+import { TileUpdateType } from "@wayward/game/game/IGame";
+import type { IObject } from "@wayward/game/game/IObject";
+import type Item from "@wayward/game/game/item/Item";
+import { FireStage } from "@wayward/game/game/tile/events/IFire";
+import type { ITileEventDescription } from "@wayward/game/game/tile/ITileEvent";
+import { TileEventType } from "@wayward/game/game/tile/ITileEvent";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type { Article } from "@wayward/game/language/Translation";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export interface ITileEventEvents extends IEntityMovableEvents {
     /**
      * Emitted when the fire stage of this tile event changes.
@@ -29,7 +38,7 @@ export interface ITileEventEvents extends IEntityMovableEvents {
      */
     fireUpdate(tile: Tile, stage: FireStage | undefined): any;
 }
-export default class TileEvent extends EntityMovable<ITileEventDescription, TileEventType> implements IObject<TileEventType> {
+export default class TileEvent extends EntityMovable<ITileEventDescription, TileEventType, ReferenceType.TileEvent> implements IObject<TileEventType> {
     static is(value: any): value is TileEvent;
     get entityType(): EntityType.TileEvent;
     get tileUpdateType(): TileUpdateType;
@@ -43,6 +52,7 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
     minDur?: number;
     spread?: number;
     step?: number;
+    builderIdentifier?: string;
     /**
      * For use with the Fire TileEvent to check if it has a fuel source and should create ash by default.
      * Set to 0 to stop all ash production.
@@ -50,7 +60,7 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
     fuel?: number;
     private fireStage?;
     constructor(entityOptions?: IEntityConstructorOptions<TileEventType>);
-    isValid(): boolean;
+    get isValid(): boolean;
     get asCorpse(): undefined;
     get asCreature(): undefined;
     get asDoodad(): undefined;
@@ -60,15 +70,28 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
     get asPlayer(): undefined;
     get asTileEvent(): TileEvent | undefined;
     get asItem(): undefined;
+    isCorpse(): this is Corpse;
+    isCreature(): this is Creature;
+    isDoodad(): this is Doodad;
+    isHuman(): this is Human;
+    get isLocalPlayer(): boolean;
+    isNPC(): this is NPC;
+    isPlayer(): this is Player;
+    isTileEvent(): this is TileEvent;
+    isItem(): this is Item;
     get point(): IVector3;
     get tile(): Tile;
     toString(): string;
     protected getDescription(): ITileEventDescription | undefined;
-    getName(article?: Article, count?: number): import("../../language/impl/TranslationImpl").default;
+    getName(article?: Article, count?: number): TranslationImpl;
     getProducedTemperature(): number | undefined;
     updateFire(tile: Tile): void;
-    protected updateTile(fromTile: Tile, toTile: Tile): boolean;
+    protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     addToTile(tile: Tile): void;
     removeFromTile(updateTile: boolean): void;
     burn(fire: TileEvent): void;
+    /**
+     * Gets the builder/creator of this event, or `undefined` if the tile event is creatorless.
+     */
+    getBuilder(): Player | undefined;
 }

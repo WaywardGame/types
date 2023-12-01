@@ -8,9 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Bindable from "ui/input/Bindable";
-import Dialog from "ui/screen/screens/game/component/Dialog";
-import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
+import type Player from "@wayward/game/game/entity/player/Player";
+import Bindable from "@wayward/game/ui/input/Bindable";
+import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
+import { MenuBarButtonType } from "@wayward/game/ui/screen/screens/game/static/menubar/IMenuBarButton";
 export default class SkillsDialog extends Dialog {
     private readonly skills;
     private readonly inputFilter;
@@ -22,6 +23,7 @@ export default class SkillsDialog extends Dialog {
     protected onDialogLoad(): void;
     protected onDialogRemove(): void;
     private updateSkill;
+    onPlayerChangeTitle(player: Player): void;
     private sort;
     private sortSkills;
     private filter;

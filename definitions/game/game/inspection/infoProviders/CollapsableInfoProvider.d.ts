@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { InfoProvider } from "game/inspection/InfoProvider";
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import type Translation from "language/Translation";
-import type Button from "ui/component/Button";
-import type { TranslationGenerator } from "ui/component/IComponent";
+import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import type Translation from "@wayward/game/language/Translation";
+import type Button from "@wayward/game/ui/component/Button";
+import type Component from "@wayward/game/ui/component/Component";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 type ContentHandler = (context: InfoProviderContext, provider: CollapsableInfoProvider) => ArrayOr<TranslationGenerator | InfoProvider>;
 export default class CollapsableInfoProvider extends InfoProvider {
     private contentHandler?;
@@ -27,7 +28,7 @@ export default class CollapsableInfoProvider extends InfoProvider {
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     getClass(): never[];
     initComponent(context: InfoProviderContext): {
-        component: import("../../../ui/component/Component").default<HTMLElement>;
+        component: Component;
         fullInit(): void;
     };
 }

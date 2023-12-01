@@ -8,17 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
-import { InspectType } from "game/inspection/IInspection";
-import { InfoProvider } from "game/inspection/InfoProvider";
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import Inspection from "game/inspection/Inspection";
-import ListInspection from "game/inspection/inspections/ListInspection";
-import type Tile from "game/tile/Tile";
-import TileEvent from "game/tile/TileEvent";
-import Translation from "language/Translation";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import Text from "ui/component/Text";
+import { InfoDisplayLevel } from "@wayward/game/game/inspection/IInfoProvider";
+import { InspectType } from "@wayward/game/game/inspection/IInspection";
+import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import Inspection from "@wayward/game/game/inspection/Inspection";
+import ListInspection from "@wayward/game/game/inspection/inspections/ListInspection";
+import type Tile from "@wayward/game/game/tile/Tile";
+import TileEvent from "@wayward/game/game/tile/TileEvent";
+import Translation from "@wayward/game/language/Translation";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import Text from "@wayward/game/ui/component/Text";
 declare class TileEventInspection extends Inspection<TileEvent> {
     static getFromTile(tile: Tile): TileEventInspection[];
     static getFromTileFiltered(tile: Tile, minorEvents: boolean): TileEventInspection[];
@@ -28,7 +28,7 @@ declare class TileEventInspection extends Inspection<TileEvent> {
     get(context: InfoProviderContext): Array<Translation | InfoProvider>;
     onRemove(_: any, event: TileEvent): void;
 }
-declare module TileEventInspection {
+declare namespace TileEventInspection {
     class Minors extends ListInspection<TileEventInspection> {
         static getFromTile(tile: Tile): never[] | Minors;
         constructor(...inspections: TileEventInspection[]);

@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Quality } from "game/IObject";
-import type Island from "game/island/Island";
-import type { IContainer, ItemType, ItemTypeGroup } from "game/item/IItem";
-import type Item from "game/item/Item";
-import Objects from "utilities/object/Objects";
-import type { RandomInstance } from "utilities/random/IRandom";
-import type { RandomReference } from "utilities/random/RandomReference";
-import RandomValueGenerator from "utilities/random/RandomValueGenerator";
+import { Quality } from "@wayward/game/game/IObject";
+import type Island from "@wayward/game/game/island/Island";
+import type { IContainer, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import Objects from "@wayward/utilities/object/Objects";
+import type { RandomInstance } from "@wayward/utilities/random/IRandom";
+import type { RandomReference } from "@wayward/game/utilities/random/RandomReference";
+import RandomValueGenerator from "@wayward/game/utilities/random/RandomValueGenerator";
 export default class RandomItem extends RandomValueGenerator<Array<ItemType | ItemTypeGroup>> {
     private quality;
     magical: number;

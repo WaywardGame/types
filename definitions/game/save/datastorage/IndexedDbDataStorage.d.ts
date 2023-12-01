@@ -8,10 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Game } from "game/Game";
-import type IAsyncDataStorage from "save/datastorage/IAsyncDataStorage";
-import type { ISaveObject } from "save/ISaveManager";
+import type { Game } from "@wayward/game/game/Game";
+import type IAsyncDataStorage from "@wayward/game/save/datastorage/IAsyncDataStorage";
+import type { ISaveObject } from "@wayward/game/save/ISaveManager";
 export default class IndexedDbDataStorage implements IAsyncDataStorage {
+    private readonly game;
     private readonly databaseV1Name;
     private readonly databaseV1VersionV1;
     private readonly databaseV2Name;

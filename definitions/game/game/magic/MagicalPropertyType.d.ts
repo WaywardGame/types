@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { DamageType } from "game/entity/IEntity";
-import { SkillType } from "game/entity/IHuman";
-import { Stat } from "game/entity/IStats";
-import type { IItemDescription, IMagicalPropertyInfo } from "game/item/IItem";
-import type Item from "game/item/Item";
+import { Deity } from "@wayward/game/game/deity/Deity";
+import { DamageType } from "@wayward/game/game/entity/IEntity";
+import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { Stat } from "@wayward/game/game/entity/IStats";
+import type { IItemDescription, IMagicalPropertyInfo } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
 export declare enum MagicalPropertyType {
     /**
      * Increases attack value (for weapons and ammo).
@@ -43,10 +44,10 @@ export declare enum MagicalPropertyType {
      */
     Skill = 6,
     /**
-     * Increases malignity or benignity when equipped (and past the normal cap).
+     * Multiplies alignment when equipped.
      */
-    Reputation = 7,
-    Unused = 8,
+    Invoking = 7,
+    Unused = 8,// TODO: Remove this on 1.0 or if you put a different property in this position update Milestones.ts
     /**
      * Increases the range in which a weapon can shoot a projectile or fishing pole/net can be thrown.
      */
@@ -126,7 +127,15 @@ export declare enum MagicalPropertyType {
     /**
      * Adds a cold or fire damage type to a weapon.
      */
-    ElementalDamage = 28
+    ElementalDamage = 28,
+    /**
+     * Adds a property to equippables that will enhance the effect of consumables in a given stat.
+     */
+    StatUseBenefit = 29,
+    /**
+     * Adds bonus durability to an item.
+     */
+    ItemDurability = 30
 }
 export interface IMagicalPropertyDescription {
     /**
@@ -147,8 +156,9 @@ export interface IMagicalPropertyDescription {
 export interface MagicalPropertyTypeSubTypeMap {
     [MagicalPropertyType.Stat]: Stat;
     [MagicalPropertyType.Skill]: SkillType;
-    [MagicalPropertyType.Reputation]: Stat;
+    [MagicalPropertyType.Invoking]: Deity;
     [MagicalPropertyType.DoodadSkill]: SkillType;
     [MagicalPropertyType.ElementalDamage]: DamageType;
+    [MagicalPropertyType.StatUseBenefit]: Stat;
 }
 export declare const magicalPropertyDescriptions: PartialRecord<MagicalPropertyType, IMagicalPropertyDescription>;

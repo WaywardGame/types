@@ -8,15 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IEventEmitter } from "event/EventEmitter";
-import { StatusType } from "game/entity/IEntity";
-import type { IStatus, StatusEffectChangeReason, IEntityConstructorOptions } from "game/entity/IEntity";
-import type { IStatEvents, IStats } from "game/entity/IStats";
-import type { IStatHost } from "game/entity/Stats";
-import Stats from "game/entity/Stats";
-import type StatusEffect from "game/entity/status/StatusEffect";
-import type { IEntityMovableEvents } from "game/entity/EntityMovable";
-import EntityMovable from "game/entity/EntityMovable";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type { IEntityMovableEvents } from "@wayward/game/game/entity/EntityMovable";
+import EntityMovable from "@wayward/game/game/entity/EntityMovable";
+import type { IEntityConstructorOptions, IStatus, StatusEffectChangeReason } from "@wayward/game/game/entity/IEntity";
+import { StatusType } from "@wayward/game/game/entity/IEntity";
+import type { IStatEvents, IStats } from "@wayward/game/game/entity/IStats";
+import type { IStatHost } from "@wayward/game/game/entity/Stats";
+import Stats from "@wayward/game/game/entity/Stats";
+import type StatusEffect from "@wayward/game/game/entity/status/StatusEffect";
+import type { EntityReferenceTypes } from "@wayward/game/game/reference/IReferenceManager";
 export interface IEntityWithStatsEvents extends IEntityMovableEvents, IStatEvents {
     /**
      * Called when this entity gets or loses a status effect
@@ -31,7 +32,7 @@ export interface IEntityWithStatsEvents extends IEntityMovableEvents, IStatEvent
  * Entity class that includes stats/status system.
  * Note: We're assuming something with stats is also movable!
  */
-export default abstract class EntityWithStats<DescriptionType = unknown, TypeType extends number = number, TagType = unknown> extends EntityMovable<DescriptionType, TypeType, TagType> implements IStatHost {
+export default abstract class EntityWithStats<DescriptionType = unknown, TypeType extends number = number, EntityReferenceType extends EntityReferenceTypes = EntityReferenceTypes, TagType = unknown> extends EntityMovable<DescriptionType, TypeType, EntityReferenceType, TagType> implements IStatHost {
     event: IEventEmitter<this, IEntityWithStatsEvents>;
     stats: IStats;
     status: IStatus;
@@ -39,7 +40,7 @@ export default abstract class EntityWithStats<DescriptionType = unknown, TypeTyp
     private readonly statusHandlers;
     constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
     protected getApplicableStatusEffects(): Set<StatusType> | undefined;
-    get asEntityWithStats(): EntityWithStats<DescriptionType, TypeType, TagType>;
+    get asEntityWithStats(): EntityWithStats<DescriptionType, TypeType, EntityReferenceType, TagType>;
     /**
      * Returns whether the entity has the given `StatusType`
      * @param status The status to check
@@ -60,6 +61,10 @@ export default abstract class EntityWithStats<DescriptionType = unknown, TypeTyp
      */
     getStatus<S extends StatusEffect = StatusEffect>(status: StatusType): S | undefined;
     /**
+     * Returns the handler for this status effect, whether or not this entity currently has the effect.
+     */
+    getStatusLevel(status: StatusType): number;
+    /**
      * Generator for status effects on the entity.
      */
     getStatuses(): StatusEffect[];
@@ -68,6 +73,9 @@ export default abstract class EntityWithStats<DescriptionType = unknown, TypeTyp
      */
     getActiveStatuses(): StatusEffect[];
     refreshStatusEffects(): void;
-    private initializeStatusEffects;
+    /**
+     * Called when loading the human
+     */
+    protected initializeStatusEffects(): void;
     private initializeStatusHandler;
 }

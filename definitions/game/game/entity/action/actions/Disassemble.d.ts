@@ -8,16 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Action } from "game/entity/action/Action";
-import type { IActionUsable } from "game/entity/action/IAction";
-import { ActionArgument } from "game/entity/action/IAction";
-import type { IItemDescription, IItemDisassembleResult } from "game/item/IItem";
-import type { IRequirementInfo } from "game/item/IItemManager";
-import type Item from "game/item/Item";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type { IItemDescription, IItemDisassembleResult } from "@wayward/game/game/item/IItem";
+import type { IRequirementInfo } from "@wayward/game/game/item/IItemManager";
+import type Item from "@wayward/game/game/item/Item";
 export interface IDisassembleCanUse extends IActionUsable {
     description: IItemDescription;
     requirementInfo: IRequirementInfo;
     disassemblyResult: IItemDisassembleResult;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.OptionalItemArrayNearby, ActionArgument.Undefined]], import("../../Human").default<number>, void, IDisassembleCanUse, [Item, ((Item | undefined)[] | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.OptionalItemArrayNearby, ActionArgument.Undefined]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDisassembleCanUse, [Item, ((Item | undefined)[] | undefined)?]>;
 export default _default;

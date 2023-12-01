@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import "IGlobal";
-import BaseMod from "mod/BaseMod";
-import Log from "utilities/Log";
+import "@wayward/game/IGlobal";
+import BaseMod from "@wayward/game/mod/BaseMod";
+import Log from "@wayward/utilities/Log";
 declare abstract class Mod extends BaseMod {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
@@ -34,7 +34,7 @@ declare abstract class Mod extends BaseMod {
      */
     onUnload(): void;
 }
-declare module Mod {
+declare namespace Mod {
     /**
      * Injects the decorated field with this mod's instance.
      */

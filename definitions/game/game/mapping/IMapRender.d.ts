@@ -16,7 +16,8 @@ export declare enum MapSprite {
     InnerFogOfWar = 4,
     O = 5,
     X = 6,
-    TravelDots = 7
+    TravelDots = 7,
+    Wave = 8
 }
 export declare const DRAWN_MAP_BACKGROUND_PADDING = 16;
 export declare enum DrawnMapTheme {

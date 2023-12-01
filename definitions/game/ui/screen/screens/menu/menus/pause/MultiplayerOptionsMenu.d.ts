@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Menu from "ui/screen/screens/menu/component/Menu";
+import Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
 export default class MultiplayerOptionsMenu extends Menu {
     private readonly openServer;
     private readonly copyGameCode;
@@ -23,6 +23,7 @@ export default class MultiplayerOptionsMenu extends Menu {
     private readonly pvp;
     private readonly allowTraveling;
     private readonly allowHardcoreRespawns;
+    private readonly pauseOnDesync;
     private readonly maxPlayers;
     private readonly descriptionInput;
     private readonly messageOfTheDayInput;

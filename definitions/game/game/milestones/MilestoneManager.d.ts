@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { CreatureType } from "game/entity/creature/ICreature";
-import type { DamageType } from "game/entity/IEntity";
-import type { Game } from "game/Game";
-import { Milestone, MilestoneVisibility } from "game/milestones/IMilestone";
+import type { Game } from "@wayward/game/game/Game";
+import type { DamageType } from "@wayward/game/game/entity/IEntity";
+import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
+import { Milestone, MilestoneVisibility } from "@wayward/game/game/milestones/IMilestone";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 type MilestoneUpdate = [Milestone, (number | string)?];
 export interface IMilestoneEvents {
     /**
@@ -49,11 +49,12 @@ export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents
     areUnlockableInMode(mode?: import("../options/IGameOptions").GameMode): boolean;
     isUnlockableInMode(milestone: Milestone, mode?: import("../options/IGameOptions").GameMode): boolean;
     reset(): void;
-    getDiscovered(milestone: Milestone): (string | number)[] | undefined;
+    getDiscovered(milestone: Milestone): Array<string | number> | undefined;
     getDiscoveredResistsAndVulns(): Map<CreatureType, Set<DamageType>>;
     getDiscoveredResistsAndVulns(creatureType: CreatureType): Set<DamageType>;
     getVisibility(milestone: Milestone): MilestoneVisibility;
     isDiscovered(milestone: Milestone, data: number | string): boolean;
+    getLastModificationTime(milestone: Milestone): number;
     private updateMilestone;
 }
 export {};

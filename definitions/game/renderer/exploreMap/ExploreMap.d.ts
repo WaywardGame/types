@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import ByteGrid from "renderer/exploreMap/ByteGrid";
+import ByteGrid from "@wayward/game/renderer/exploreMap/ByteGrid";
 export declare const EXPLORED_MAP_IS_EXPLORED = 255;
 export default class ExploreMap extends ByteGrid {
     private readonly z;

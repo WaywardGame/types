@@ -8,10 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { Game } from "game/Game";
-import type { IGenericManager, IGenericRegistration } from "utilities/generic/IGenericManager";
-import type { LogSource } from "utilities/Log";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { Game } from "@wayward/game/game/Game";
+import type { IGenericManager, IGenericRegistration } from "@wayward/game/utilities/generic/IGenericManager";
 export default abstract class GenericManager<T extends IGenericRegistration> extends EventEmitter.Host<{}> implements IGenericManager<T> {
     readonly game: Game;
     private readonly registered;
@@ -21,7 +20,7 @@ export default abstract class GenericManager<T extends IGenericRegistration> ext
     add(registration: T): void;
     get(type: number): T;
     remove(type: number): void;
-    protected abstract getSource(): LogSource;
+    protected abstract getLogSource(): string;
     protected abstract getEnumObject(): any;
     private check;
 }

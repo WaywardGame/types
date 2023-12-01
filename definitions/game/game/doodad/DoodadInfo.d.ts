@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { DisplayableDoodadType } from "game/doodad/IDoodad";
-import type { TerrainType } from "game/tile/ITerrain";
-import type { TerrainDecoration } from "renderer/Decorations";
-import Vector2 from "utilities/math/Vector2";
+import type { DisplayableDoodadType } from "@wayward/game/game/doodad/IDoodad";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { TerrainDecoration } from "@wayward/game/renderer/Decorations";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
 export default class DoodadInfo {
     readonly type: DisplayableDoodadType | TerrainType | TerrainDecoration;
     readonly isTall: boolean;

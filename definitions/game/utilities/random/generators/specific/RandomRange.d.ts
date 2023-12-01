@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IRange } from "utilities/math/Range";
-import Objects from "utilities/object/Objects";
-import type { RandomInstance } from "utilities/random/IRandom";
-import type { RandomReference } from "utilities/random/RandomReference";
-import RandomValueGenerator from "utilities/random/RandomValueGenerator";
+import type { IRange } from "@wayward/utilities/math/Range";
+import Objects from "@wayward/utilities/object/Objects";
+import type { RandomInstance } from "@wayward/utilities/random/IRandom";
+import type { RandomReference } from "@wayward/game/utilities/random/RandomReference";
+import RandomValueGenerator from "@wayward/game/utilities/random/RandomValueGenerator";
 export default class RandomRange extends RandomValueGenerator<IRange> {
     limit?: number;
     constructor();

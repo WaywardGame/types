@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import type UiTranslation from "language/dictionary/UiTranslation";
-import Translation from "language/Translation";
-import { CheckButton } from "ui/component/CheckButton";
-import { RangeInput } from "ui/component/RangeInput";
-import { RangeInputValueDisplay } from "ui/component/RangeInputValueDisplay";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
+import Translation from "@wayward/game/language/Translation";
+import { CheckButton } from "@wayward/game/ui/component/CheckButton";
+import { RangeInput } from "@wayward/game/ui/component/RangeInput";
+import { RangeInputValueDisplay } from "@wayward/game/ui/component/RangeInputValueDisplay";
 interface ICheckButtonRangeEvents extends Events<CheckButton> {
     change(value?: number): any;
 }

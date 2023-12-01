@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type { ActionType } from "game/entity/action/IAction";
-import { IUseItemAction } from "game/entity/action/usable/actions/item/UsableActionsUseItem";
-import type { IUsableActionDynamicDefinition } from "game/entity/action/usable/actions/UsableActionsDynamic";
-import type { IUsableActionRequirement } from "game/entity/action/usable/IUsableAction";
-import type Item from "game/item/Item";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { ActionType } from "@wayward/game/game/entity/action/IAction";
+import { IUseItemAction } from "@wayward/game/game/entity/action/usable/actions/item/UsableActionsUseItem";
+import type { IUsableActionDynamicDefinition } from "@wayward/game/game/entity/action/usable/actions/UsableActionsDynamic";
+import type { IUsableActionRequirement } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import type Item from "@wayward/game/game/item/Item";
 declare namespace IUsableActionsItemDoodad {
     interface IRequirements {
         item: IUsableActionRequirement.Maybe<Item>;

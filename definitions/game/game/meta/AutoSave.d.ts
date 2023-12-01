@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Game } from "game/Game";
+import type { Game } from "@wayward/game/game/Game";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export declare class AutoSave {
     private readonly game;
     private autoSaveTimer;
@@ -17,7 +18,7 @@ export declare class AutoSave {
     protected onRestEnd(): void;
     reset(): void;
     process(): Promise<void>;
-    translateLastSave(): import("../../language/impl/TranslationImpl").default;
+    translateLastSave(): TranslationImpl;
     private isTime;
     private isWithinRestThreshold;
 }

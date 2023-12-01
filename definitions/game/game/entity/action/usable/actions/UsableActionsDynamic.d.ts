@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ActionDisplayLevel } from "game/entity/action/IAction";
-import { ActionType } from "game/entity/action/IAction";
-import type { IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, ReturnableUsableActionUsability, UsableActionIconReference } from "game/entity/action/usable/IUsableAction";
-import { UsableActionGenerator } from "game/entity/action/usable/UsableActionRegistrar";
-import type { UsableActionTranslator } from "game/entity/action/usable/UsableActionTranslator";
-import type Player from "game/entity/player/Player";
-import type Bindable from "ui/input/Bindable";
+import type { ActionDisplayLevel } from "@wayward/game/game/entity/action/IAction";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type { IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, ReturnableUsableActionUsability, UsableActionIconReference } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import { UsableActionGenerator } from "@wayward/game/game/entity/action/usable/UsableActionRegistrar";
+import type { UsableActionTranslator } from "@wayward/game/game/entity/action/usable/UsableActionTranslator";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type Bindable from "@wayward/game/ui/input/Bindable";
 export interface IUsableActionDynamicDefinition {
     icon?: SupplierOr<UsableActionIconReference>;
     bindable: Bindable;

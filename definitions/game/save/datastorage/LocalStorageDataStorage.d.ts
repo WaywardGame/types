@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type IDataStorage from "save/datastorage/IDataStorage";
-import type { ISaveObject } from "save/ISaveManager";
+import type IDataStorage from "@wayward/game/save/datastorage/IDataStorage";
+import type { ISaveObject } from "@wayward/game/save/ISaveManager";
 export default class LocalStorageDataStorage implements IDataStorage {
     static clearLocalStorage(): void;
     initialize(): void;

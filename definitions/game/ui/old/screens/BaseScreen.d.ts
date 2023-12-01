@@ -8,14 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IUiScreen } from "ui/old/IOldUi";
+import type { IUiScreen } from "@wayward/game/ui/old/IOldUi";
 export default class BaseScreen implements IUiScreen {
     element: JQuery;
     visible: boolean;
     constructor();
     selector(): string;
     bindElements(): void;
-    unbindElements(): void;
     isVisible(): boolean;
     show(data?: any): void;
     doShow(): void;

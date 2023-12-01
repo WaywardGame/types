@@ -8,17 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import CombatStrengthManager from "game/entity/CombatStrengthManager";
-import Creature from "game/entity/creature/Creature";
-import type { ICreatureCheckMoveOptions } from "game/entity/creature/ICreature";
-import { CreatureType, SpawnGroup, TileGroup } from "game/entity/creature/ICreature";
-import EntityManager from "game/entity/EntityManager";
-import type Human from "game/entity/Human";
-import { MoveType } from "game/entity/IEntity";
-import Tile from "game/tile/Tile";
-import type { Article } from "language/Translation";
-import type { IVector3 } from "utilities/math/IVector";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import CombatStrengthManager from "@wayward/game/game/entity/CombatStrengthManager";
+import Creature from "@wayward/game/game/entity/creature/Creature";
+import type { ICreatureCheckMoveOptions } from "@wayward/game/game/entity/creature/ICreature";
+import { CreatureType, SpawnGroup, TileGroup } from "@wayward/game/game/entity/creature/ICreature";
+import EntityManager from "@wayward/game/game/entity/EntityManager";
+import type Human from "@wayward/game/game/entity/Human";
+import { MoveType } from "@wayward/game/game/entity/IEntity";
+import Tile from "@wayward/game/game/tile/Tile";
+import type { Article } from "@wayward/game/language/Translation";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> {
     /**
      * Called when a creature is about to be spawned
@@ -37,14 +38,17 @@ export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> 
      */
     shouldSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], tile: Tile): boolean | undefined;
 }
-export default class CreatureManager extends EntityManager<Creature> {
+export default class CreatureManager extends EntityManager<Creature, {
+    remainTamed?: boolean;
+}> {
+    protected readonly name = "CreatureManager";
     readonly event: IEventEmitter<this, ICreatureManagerEvents>;
     static combatStrength: CombatStrengthManager;
     get combatStrength(): CombatStrengthManager;
     static generateLookups(): void;
-    load(): void;
-    static getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: Article): import("../../../language/impl/TranslationImpl").default;
-    getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: Article): import("../../../language/impl/TranslationImpl").default;
+    loadEntity(creature: Creature): void;
+    static getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: Article): TranslationImpl;
+    getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: Article): TranslationImpl;
     getHappinessLevel(human: Human, creature: Creature, bonus?: number): number;
     /**
      * Spawns a creature.
@@ -61,11 +65,13 @@ export default class CreatureManager extends EntityManager<Creature> {
     exists(creature: Creature): boolean;
     maybeSpawnClawWorm(target: Human | Creature): void;
     /**
-     * Maybe spawns a Dryad based on target reputation, plants around target, and chance.
+     * Maybe spawns a Dryad based on target's alignment, plants around target, and chance.
      * @param target Human that we check around to find a suitable spawn.
      */
     maybeSpawnDryad(target: Human): void;
-    remove(creature: Creature, remainTamed?: boolean): void;
+    protected onRemove(creature: Creature, options?: {
+        remainTamed?: boolean;
+    }): boolean;
     updateAll(playingHumans: Human[]): void;
     /**
      * getMovePenalty
@@ -77,10 +83,10 @@ export default class CreatureManager extends EntityManager<Creature> {
      * wasm calls this when calculating penalties for flow fields
      */
     getMovePenaltyFromWasm(moveType: MoveType, x: number, y: number, z: number): number;
-    getSpawnableCreatures(creatureGroup: SpawnGroup, z: number, reputation?: number, time?: number): {
+    getSpawnableCreatures(creatureGroup: SpawnGroup, z: number, alignment?: number, time?: number, status?: import("@wayward/game/game/entity/IEntity").StatusType[]): {
         pool: CreatureType[];
         aberrantChance: number;
     };
     spawnGuardians(position: IVector3, amount: number): number;
-    private getReputationAberrantBonus;
+    private getAlignmentAberrantBonus;
 }

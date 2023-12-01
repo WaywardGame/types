@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Action } from "game/entity/action/Action";
-import type { IActionUsable } from "game/entity/action/IAction";
-import { ActionArgument } from "game/entity/action/IAction";
-import type Creature from "game/entity/creature/Creature";
-import type Human from "game/entity/Human";
-import type NPC from "game/entity/npc/NPC";
-import type { IItemDescription, IItemOnUse } from "game/item/IItem";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Human from "@wayward/game/game/entity/Human";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type { IItemDescription, IItemOnUse } from "@wayward/game/game/item/IItem";
 export interface IHealOtherCanUse extends IActionUsable {
     itemDescription: IItemDescription;
     target: Creature | Human | NPC;
@@ -22,5 +22,5 @@ export interface IHealOtherCanUse extends IActionUsable {
     creature?: Creature;
     npc?: NPC;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], Human<number>, void, IHealOtherCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IHealOtherCanUse, [import("../../../item/Item").default]>;
 export default _default;

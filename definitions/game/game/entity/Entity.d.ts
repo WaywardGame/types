@@ -8,36 +8,37 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SfxType } from "audio/IAudio";
-import EventEmitter from "event/EventEmitter";
-import type { TileUpdateType } from "game/IGame";
-import { FireType } from "game/IGame";
-import type { WorldZ } from "game/WorldZ";
-import type Doodad from "game/doodad/Doodad";
-import type EntityMovable from "game/entity/EntityMovable";
-import type EntityWithStats from "game/entity/EntityWithStats";
-import type Human from "game/entity/Human";
-import type { IEntityConstructorOptions, IEntityEvents } from "game/entity/IEntity";
-import { EntityType } from "game/entity/IEntity";
-import type { IHumanBound } from "game/entity/IEntityManager";
-import type Creature from "game/entity/creature/Creature";
-import type Corpse from "game/entity/creature/corpse/Corpse";
-import type NPC from "game/entity/npc/NPC";
-import type Player from "game/entity/player/Player";
-import type { IInspector } from "game/inspection/IInfoProvider";
-import type { IslandId } from "game/island/IIsland";
-import type Item from "game/item/Item";
-import type { IReferenceable, Reference } from "game/reference/IReferenceManager";
-import type { ITemperatureSource } from "game/temperature/ITemperature";
-import type Tile from "game/tile/Tile";
-import type TileEvent from "game/tile/TileEvent";
-import type { ISerializedTranslation } from "language/ITranslation";
-import type Translation from "language/Translation";
-import type { RenderSource, UpdateRenderFlag } from "renderer/IRenderer";
-import type { INotificationLocation, ItemNotifierType, StatNotificationType } from "renderer/notifier/INotifier";
-import type { IVector3 } from "utilities/math/IVector";
-import type { IVector4 } from "utilities/math/Vector4";
-export default abstract class Entity<DescriptionType = unknown, TypeType extends number = number, TagType = unknown, CounterType = unknown> extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, ITemperatureSource, INotificationLocation, IVector4 {
+import type { SfxType } from "@wayward/game/audio/IAudio";
+import type { TileUpdateType } from "@wayward/game/game/IGame";
+import { FireType } from "@wayward/game/game/IGame";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
+import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
+import type Human from "@wayward/game/game/entity/Human";
+import type { IEntityConstructorOptions, IEntityEvents } from "@wayward/game/game/entity/IEntity";
+import { EntityType } from "@wayward/game/game/entity/IEntity";
+import type { IHumanBound } from "@wayward/game/game/entity/IEntityManager";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { IInspector } from "@wayward/game/game/inspection/IInfoProvider";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
+import type Item from "@wayward/game/game/item/Item";
+import type { EntityReferenceTypes, IReferenceable, Reference } from "@wayward/game/game/reference/IReferenceManager";
+import type { ITemperatureSource } from "@wayward/game/game/temperature/ITemperature";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import type Translation from "@wayward/game/language/Translation";
+import type { RenderSource, UpdateRenderFlag } from "@wayward/game/renderer/IRenderer";
+import type { INotificationLocation, ItemNotifierType, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { WorldZ } from "@wayward/utilities/game/WorldZ";
+export default abstract class Entity<DescriptionType = unknown, TypeType extends number = number, EntityReferenceType extends EntityReferenceTypes = EntityReferenceTypes, TagType = unknown> extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, ITemperatureSource, INotificationLocation, IVector4 {
     abstract readonly entityType: EntityType;
     abstract readonly tileUpdateType: TileUpdateType;
     id: number;
@@ -57,15 +58,10 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      * This should be cleared when x,y,z is changing.
      */
     private _tile;
-    /**
-     * Cached tiles around the entity (does not include current / corner tiles)
-     * This should be cleared when x,y,z is changing.
-     */
-    private _tilesAround;
     protected _description?: DescriptionType;
     constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
-    get island(): import("../island/Island").default;
-    get reference(): Reference | undefined;
+    get island(): Island;
+    get reference(): Reference<EntityReferenceType> | undefined;
     /**
      * Get the entities description
      */
@@ -94,14 +90,21 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     get tilesAround(): Tile[] | undefined;
     protected setCachedTile(tile: Tile): void;
     clearTileCache(): void;
-    isNearby(entity: Entity<DescriptionType>): boolean;
+    isNearby(entity: Entity | Tile, includeCurrentTile?: boolean): boolean;
+    /**
+     * Updates the world renderer & flow field state for the tile
+     */
+    updateWorldTile(tileUpdateType?: TileUpdateType, updateNeighbors?: boolean, skipFlowFieldUpdate?: boolean): void;
     /**
      * Checks if the entity is within the viewport bounds of one or more humans
      */
-    isWithinHumanBounds(): boolean;
+    get isWithinHumanBounds(): boolean;
     setHumansWithinBound(humansWithinBound: IHumanBound[]): void;
-    humansVisible(): Human[];
-    isOnFire(): FireType;
+    /**
+     * Returns humans within this entities fov & that they can see
+     */
+    get humansVisible(): Human[];
+    get isOnFire(): FireType;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     updateRender(source: RenderSource, flag: UpdateRenderFlag): void;
     updateView(source: RenderSource, updateFov?: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition): void;
@@ -138,10 +141,10 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      * @returns True when the data is removed. False if the key wasn't set
      */
     removeData(key: string): boolean;
-    abstract isValid(): boolean;
-    get asEntity(): Entity<DescriptionType, TypeType, TagType>;
-    get asEntityMovable(): EntityMovable<DescriptionType, TypeType, TagType> | undefined;
-    get asEntityWithStats(): EntityWithStats<DescriptionType, TypeType, TagType> | undefined;
+    abstract get isValid(): boolean;
+    get asEntity(): Entity<DescriptionType, TypeType, EntityReferenceType, TagType>;
+    get asEntityMovable(): EntityMovable<DescriptionType, TypeType, EntityReferenceType, TagType> | undefined;
+    get asEntityWithStats(): EntityWithStats<DescriptionType, TypeType, EntityReferenceType, TagType> | undefined;
     abstract get asCorpse(): Corpse | undefined;
     abstract get asCreature(): Creature | undefined;
     abstract get asDoodad(): Doodad | undefined;
@@ -151,4 +154,14 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     abstract get asPlayer(): Player | undefined;
     abstract get asTileEvent(): TileEvent | undefined;
     abstract get asItem(): Item | undefined;
+    abstract isCorpse(): this is Corpse;
+    abstract isCreature(): this is Creature;
+    abstract isDoodad(): this is Doodad;
+    abstract isHuman(): this is Human;
+    abstract get isLocalPlayer(): boolean;
+    abstract isNPC(): this is NPC;
+    abstract isPlayer(): this is Player;
+    abstract isTileEvent(): this is TileEvent;
+    abstract isItem(): this is Item;
+    asType(type: TypeType): this | undefined;
 }

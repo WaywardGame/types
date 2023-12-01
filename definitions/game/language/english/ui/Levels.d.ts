@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Level } from "game/inspection/infoProviders/ILevel";
+import { Level } from "@wayward/game/game/inspection/infoProviders/ILevel";
 declare const levels: Record<Level, string>;
 export default levels;

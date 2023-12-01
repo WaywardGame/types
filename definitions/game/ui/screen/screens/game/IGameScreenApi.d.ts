@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type UiTranslation from "language/dictionary/UiTranslation";
-import type { ISerializedTranslation } from "language/ITranslation";
-import type Translation from "language/Translation";
-import type Component from "ui/component/Component";
-import type { DialogId } from "ui/screen/screens/game/Dialogs";
-import type { IStringSection } from "utilities/string/Interpolator";
+import type UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
+import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import type Translation from "@wayward/game/language/Translation";
+import type Component from "@wayward/game/ui/component/Component";
+import type { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
+import type { IStringSection } from "@wayward/game/utilities/string/Interpolator";
 export declare enum QuadrantComponentId {
     Messages = 0,
     Stats = 1,

@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { MenuId } from "ui/screen/screens/menu/component/IMenu";
-import type Menu from "ui/screen/screens/menu/component/Menu";
+import type { MenuId } from "@wayward/game/ui/screen/screens/menu/component/IMenu";
+import type Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
 export declare enum FontStyle {
     Pixel = 0,
     Balanced = 1,
@@ -43,6 +43,13 @@ export declare enum SelectDirection {
     Down = 1,
     Left = -2,
     Right = 2
+}
+/**
+ * An enum for every axis of dialog movement.
+ */
+export declare enum Axis {
+    X = "x",
+    Y = "y"
 }
 export interface LoadMenuArgs {
     _wentBack: boolean;

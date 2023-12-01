@@ -8,29 +8,32 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SfxUi } from "audio/IAudio";
-import { SfxType } from "audio/IAudio";
-import EventEmitter from "event/EventEmitter";
-import type { PlayerState } from "game/entity/player/IPlayer";
-import type { Game } from "game/Game";
-import type { Prompt } from "game/meta/prompt/IPrompt";
-import type InterruptChoice from "language/dictionary/InterruptChoice";
-import { TooltipVisibilityOption } from "save/data/ISaveDataGlobal";
-import Component from "ui/component/Component";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import LoadingBridge from "ui/LoadingBridge";
-import PromptsBridge from "ui/PromptsBridge";
-import SaveDropHandler from "ui/SaveDropHandler";
-import { ScreenId } from "ui/screen/IScreen";
-import ScreenManager from "ui/screen/ScreenManager";
-import SelectionHandler from "ui/screen/screens/menu/component/SelectionHandler";
-import ServerJoinHandler from "ui/ServerJoinHandler";
-import TooltipManager from "ui/tooltip/TooltipManager";
-import HighlightManager from "ui/util/HighlightManager";
-import HudWidthManager from "ui/util/HudWidthManager";
-import type { InterruptOptions } from "ui/util/IInterrupt";
-import ScaleManager from "ui/util/ScaleManager";
-import Vector2 from "utilities/math/Vector2";
+import type { SfxUi } from "@wayward/game/audio/IAudio";
+import { SfxType } from "@wayward/game/audio/IAudio";
+import type { Game } from "@wayward/game/game/Game";
+import type { PlayerState } from "@wayward/game/game/entity/player/IPlayer";
+import type { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
+import type { Reference } from "@wayward/game/game/reference/IReferenceManager";
+import type InterruptChoice from "@wayward/game/language/dictionary/InterruptChoice";
+import { TooltipVisibilityOption } from "@wayward/game/save/data/ISaveDataGlobal";
+import { Axis } from "@wayward/game/ui/IUi";
+import LoadingBridge from "@wayward/game/ui/LoadingBridge";
+import PromptsBridge from "@wayward/game/ui/PromptsBridge";
+import SaveDropHandler from "@wayward/game/ui/SaveDropHandler";
+import ServerJoinHandler from "@wayward/game/ui/ServerJoinHandler";
+import Component from "@wayward/game/ui/component/Component";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import { ScreenId } from "@wayward/game/ui/screen/IScreen";
+import ScreenManager from "@wayward/game/ui/screen/ScreenManager";
+import ItemStylesheetHandler from "@wayward/game/ui/screen/screens/game/util/item/ItemStylesheet";
+import SelectionHandler from "@wayward/game/ui/screen/screens/menu/component/SelectionHandler";
+import TooltipManager from "@wayward/game/ui/tooltip/TooltipManager";
+import HighlightManager from "@wayward/game/ui/util/HighlightManager";
+import HudWidthManager from "@wayward/game/ui/util/HudWidthManager";
+import type { InterruptOptions } from "@wayward/game/ui/util/IInterrupt";
+import ScaleManager from "@wayward/game/ui/util/ScaleManager";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IUiEvents {
     resize(viewport: Vector2, oldViewport: Vector2): any;
     interrupt(options: Partial<InterruptOptions>, interrupt?: Prompt): string | boolean | InterruptChoice | undefined | void;
@@ -50,6 +53,7 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     readonly selection: SelectionHandler;
     readonly serverJoinHandler: ServerJoinHandler;
     readonly saveDropHandler: SaveDropHandler;
+    readonly itemStylesheetHandler: ItemStylesheetHandler;
     readonly versionText: Component<HTMLElement> | undefined;
     readonly viewport: Vector2;
     get windowWidth(): number;
@@ -91,19 +95,21 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     setDialogOpacity(opacity?: number, save?: boolean): void;
     addStylesheet(path: string): void;
     removeStylesheet(path: string): void;
+    private getStylesheet;
+    private resolvePath;
     reloadStylesheets(): void;
-    reloadVariableUIImages(): void;
+    reloadTextures(): void;
     updateFontStyle(): void;
     updateUIAnimations(): void;
     updateUIOpacity(): void;
     updateAcrylicTransparency(): void;
     updatePowerMode(): void;
     toggleDeveloperMode(enabled: boolean): this;
-    protected onGlobalSlotLoaded(): void;
+    protected onGlobalSlotReady(): void;
     /**
      * Screen id used while in game / playing
      */
-    get primaryScreenId(): ScreenId.DedicatedServer | ScreenId.Game;
+    get primaryScreenId(): ScreenId;
     protected onPlay(): void;
     protected onStopPlay(game: Game, state: PlayerState): Promise<void>;
     protected onInterruptClosed(): void;
@@ -116,5 +122,14 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     protected onReload(api: IBindHandlerApi): boolean;
     protected onToggleDevTools(): boolean;
     protected onReloadStylesheets(): boolean;
-    protected onReloadVariableUIImages(): boolean;
+    protected onReloadTextures(): boolean;
+    /**
+     * Returns a percentage of the screen based on the given number of pixels on the given `Axis`.
+     */
+    getPercentageFromPixels(axis: Axis, pixels: number): number;
+    /**
+     * Returns a number of pixels based on the given percentage of the screen on the given `Axis`.
+     */
+    getPixelsFromPercentage(axis: Axis, percentage: number): number;
+    inspectReference(reference: Reference): boolean;
 }

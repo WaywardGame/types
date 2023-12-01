@@ -8,32 +8,33 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Stream from "@wayward/goodstream";
-import { SfxType } from "audio/IAudio";
-import { FireType } from "game/IGame";
-import { Quality } from "game/IObject";
-import { WorldZ } from "game/WorldZ";
-import type Doodad from "game/doodad/Doodad";
-import type Human from "game/entity/Human";
-import type Creature from "game/entity/creature/Creature";
-import type Corpse from "game/entity/creature/corpse/Corpse";
-import type NPC from "game/entity/npc/NPC";
-import type { IMessageManager } from "game/entity/player/IMessageManager";
-import type { IslandId } from "game/island/IIsland";
-import type Island from "game/island/Island";
-import type Item from "game/item/Item";
-import type { IMaybeTileContainer, IOverlayInfo, ITerrainDescription, ITileContainer, ITileData } from "game/tile/ITerrain";
-import { TerrainType } from "game/tile/ITerrain";
-import type TileEvent from "game/tile/TileEvent";
-import Translation from "language/Translation";
-import Message from "language/dictionary/Message";
-import type { IRendererOrigin } from "renderer/context/RendererOrigin";
-import FieldOfView from "renderer/fieldOfView/FieldOfView";
-import type { IFieldOfViewOrigin } from "renderer/fieldOfView/IFieldOfView";
-import { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
-import type { IRGB } from "utilities/Color";
-import type { IVector2, IVector3 } from "utilities/math/IVector";
-import type { IVector4 } from "utilities/math/Vector4";
+import { SfxType } from "@wayward/game/audio/IAudio";
+import { FireType, TileUpdateType } from "@wayward/game/game/IGame";
+import { Quality } from "@wayward/game/game/IObject";
+import { WorldZ } from "@wayward/utilities/game/WorldZ";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type Entity from "@wayward/game/game/entity/Entity";
+import type Human from "@wayward/game/game/entity/Human";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type { IMessageManager } from "@wayward/game/game/entity/player/IMessageManager";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
+import type Item from "@wayward/game/game/item/Item";
+import type { IMaybeTileContainer, IOverlayInfo, ITerrainDescription, ITileContainer, ITileData } from "@wayward/game/game/tile/ITerrain";
+import { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import Translation from "@wayward/game/language/Translation";
+import Message from "@wayward/game/language/dictionary/Message";
+import type { IRendererOrigin } from "@wayward/game/renderer/context/RendererOrigin";
+import { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
+import type { IFieldOfViewOrigin } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
+import { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
+import type { IRGB } from "@wayward/utilities/Color";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
+import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
 export interface ICanSailAwayResult {
     canSailAway: boolean;
     message?: Message;
@@ -59,8 +60,10 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Entities on the tile
      */
     creature?: Creature;
-    doodad?: Doodad;
     npc?: NPC;
+    doodad?: Doodad;
+    vehicle?: Doodad;
+    get vehicleOrDoodad(): Doodad | undefined;
     /**
      * Note: corpses must be ordered by id asc
      */
@@ -74,6 +77,8 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     containedItems?: Item[];
     private _description;
+    private _tilesInRangeCache?;
+    private _tilesAroundCache?;
     /**
      * Data associated with the tile
      */
@@ -82,6 +87,11 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Tile quality that is linked to map gen / tileData
      */
     private _quality?;
+    /**
+     * Tile min/max durability
+     */
+    private _minDur?;
+    private _maxDur?;
     /**
      * Creates a fake tile
      */
@@ -98,6 +108,10 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     private set type(value);
     get quality(): Quality;
     private set quality(value);
+    get minDur(): number | undefined;
+    private set minDur(value);
+    get maxDur(): number | undefined;
+    private set maxDur(value);
     get isTilled(): boolean;
     /**
      * This should only be called if you know what you're doing
@@ -145,11 +159,24 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * Check if the tile is blocked (impassable terrain / creatures / npcs / players / doodads that cause blocked movement).
      */
-    get isTileBlocked(): boolean;
+    get isBlocked(): boolean;
     /**
-     * Check is a tile is open
+     * Check if the tile is open.
+     * Opposite of isTileBlocked.
      */
-    get isOpenTile(): boolean;
+    get isOpen(): boolean;
+    /**
+     * Checks if the tile has terrain that blocks
+     */
+    get hasBlockingTerrain(): boolean;
+    /**
+     * Checks if the tile has a blocking doodad
+     */
+    get hasBlockingDoodad(): boolean;
+    /**
+     * Checks if the tile has any blocking tile event
+     */
+    get hasBlockingTileEvent(): boolean;
     /**
      * Gets the fire type of a fire on the tile if there is one
      */
@@ -162,6 +189,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Check if the tile can be lit on fire (has terrain/doodad/items that are flammable)
      */
     get isFlammable(): boolean;
+    isNearby(entity: Entity | Tile, includeCurrentTile?: boolean): boolean;
     /**
      * Checks if a tile is dangerous for a human
      */
@@ -183,11 +211,19 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     getTileData(): ITileData[] | undefined;
     getOrCreateTileData(): ITileData[];
     /**
+     * Updates the world renderer & flow field state for the tile
+     */
+    updateWorldTile(tileUpdateType: TileUpdateType, updateNeighbors?: boolean, skipFlowFieldUpdate?: boolean): void;
+    /**
+     * Updates the flow field state for the tile
+     */
+    updateFlowField(tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
+    /**
      * Use game.changeTile or game.removeTopTile when modifying tiles.
      * This should only be called if you know what you're doing.
      * Otherwise the game state could get out of sync.
      */
-    forceChangeTile(type: TerrainType, quality: Quality): void;
+    forceChangeTile(type: TerrainType, quality: Quality | undefined): void;
     /**
      * Changes the tile
      */
@@ -246,7 +282,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * Contaminate water sources when new ones are created based on the surrounding water.
      */
-    contaminateWater(): void;
+    contaminateWater(count?: number): void;
     /**
      * Converts shallow single bodies of fresh/swamp water into seawater
      */
@@ -282,6 +318,11 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Create puddles around a point and limit them (so they can't expand infinitely)
      */
     createPuddles(): void;
+    /**
+     * Create particle effects when moving over a puddle and reduce its decay.
+     * @param noSound True when no sound should be made when splashing.
+     */
+    splashPuddles(noSound?: boolean): void;
     addOrUpdateOverlay(overlay: IOverlayInfo): void;
     removeOverlay(overlay: IOverlayInfo): void;
     canSeeObject(type: CanASeeBType, object: IRendererOrigin, fieldOfView?: FieldOfView, customRadius?: number): boolean;
@@ -304,10 +345,14 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Check if a tile is a suitable spawn point
      */
     isSuitableSpawnPointTileForIslandTravel(ensureConnectedToOcean: boolean): boolean;
+    /**
+     * Checks things can slip on this tile
+     */
+    canSlip(entity: EntityMovable | undefined): boolean;
     isAdjacent(otherTile: Tile): boolean;
     isAround(otherTile: Tile): boolean;
     getVariation(noTileDataOffset?: boolean): number;
-    tilesInRange(range: number, includeCurrentTile?: boolean): Stream<Tile>;
+    tilesInRange(range: number, includeCurrentTile?: boolean): Tile[];
     openTileInRange(range: number, includeCurrentTile?: boolean): Tile | undefined;
     /**
      * Array version of tilesAround
@@ -316,7 +361,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * IterableIterator version of TileHelpers.getTilesAround
      */
-    tilesAround(includeCurrentTile?: boolean, includeCorners?: boolean): Generator<Tile, void, unknown>;
+    tilesAround(includeCurrentTile?: boolean, includeCorners?: boolean): Generator<Tile, void>;
     findMatchingTile(isMatchingTile: (tile: Tile) => boolean, options?: {
         maxTilesChecked?: number;
         canVisitTile?: (tile: Tile) => boolean;

@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type { DoodadType } from "game/doodad/IDoodad";
-import type { TerrainType } from "game/tile/ITerrain";
-import type WorldLayer from "renderer/world/WorldLayer";
-import Vector2 from "utilities/math/Vector2";
-import type TileAtlas from "renderer/tile/atlas/TileAtlas";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { DoodadType } from "@wayward/game/game/doodad/IDoodad";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { WorldLayer } from "@wayward/game/renderer/world/WorldLayer";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
+import type TileAtlas from "@wayward/game/renderer/tile/atlas/TileAtlas";
 export interface ITileAdaptation {
     TLFG: Vector2;
     TRFG: Vector2;

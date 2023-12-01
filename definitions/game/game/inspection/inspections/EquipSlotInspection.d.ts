@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { EquipType } from "game/entity/IHuman";
-import { InspectType } from "game/inspection/IInspection";
-import { InfoProvider } from "game/inspection/InfoProvider";
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import Inspection from "game/inspection/Inspection";
-import type { EnumReferenceResolved } from "game/reference/IReferenceManager";
-import { ReferenceType } from "game/reference/IReferenceManager";
-import type { TranslationGenerator } from "ui/component/IComponent";
+import { EquipType } from "@wayward/game/game/entity/IHuman";
+import { InspectType } from "@wayward/game/game/inspection/IInspection";
+import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import Inspection from "@wayward/game/game/inspection/Inspection";
+import type { EnumReferenceResolved } from "@wayward/game/game/reference/IReferenceManager";
+import { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export default class EquipSlotInspection extends Inspection<EquipType | undefined> {
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
     constructor(value?: EquipType | EnumReferenceResolved<ReferenceType.EquipSlot>);

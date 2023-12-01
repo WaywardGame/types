@@ -8,16 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import { Action } from "game/entity/action/Action";
-import type { IActionUsable } from "game/entity/action/IAction";
-import { ActionArgument } from "game/entity/action/IAction";
-import type Creature from "game/entity/creature/Creature";
-import type { IWell } from "game/island/IIsland";
-import type { ILiquidGather } from "game/item/IItem";
-import type { ITerrainDescription } from "game/tile/ITerrain";
-import { TerrainType } from "game/tile/ITerrain";
-import type Tile from "game/tile/Tile";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { IWell } from "@wayward/game/game/island/IIsland";
+import type { ILiquidGather } from "@wayward/game/game/item/IItem";
+import type { ITerrainDescription } from "@wayward/game/game/tile/ITerrain";
+import { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type Tile from "@wayward/game/game/tile/Tile";
 export interface IGatherLiquidFromWispCanUse extends IActionUsable {
     type: "wisp";
     liquidGather: ILiquidGather;
@@ -51,5 +51,5 @@ export interface IGatherLiquidFromLiquidCanUse extends IActionUsable {
     tile: Tile;
 }
 export type IGatherLiquidCanUse = IGatherLiquidFromWispCanUse | IGatherLiquidFromGoatCanUse | IGatherLiquidFromWaterStillCanUse | IGatherLiquidFromWellCanUse | IGatherLiquidFromLiquidCanUse;
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<number>, void, IGatherLiquidCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IGatherLiquidCanUse, [import("../../../item/Item").default]>;
 export default _default;

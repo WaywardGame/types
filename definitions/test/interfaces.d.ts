@@ -20,6 +20,7 @@ export interface IWaitUntilGameLoadedOptions {
     isJoiningServer: boolean;
     isCreatingServer: boolean;
     expectReopenServerPrompt: boolean;
+    expectGameScreen: boolean;
 }
 export interface INewGameOptions extends ICommonGameOptions {
     playMode: GamePlayMode;

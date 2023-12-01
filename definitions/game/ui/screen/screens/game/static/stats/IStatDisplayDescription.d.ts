@@ -8,14 +8,22 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IHasImagePath } from "game/IObject";
-import type EntityWithStats from "game/entity/EntityWithStats";
-import type { IStat, IStatBase, StatDisplayType } from "game/entity/IStats";
-import type { Reference } from "game/reference/IReferenceManager";
-import type Translation from "language/Translation";
-import type { IModdable } from "mod/ModRegistry";
-import type Component from "ui/component/Component";
-import type Tooltip from "ui/tooltip/Tooltip";
+import type { IUntilSubscriber } from "@wayward/utilities/event/EventEmitter";
+import type { IHasImagePath } from "@wayward/game/game/IObject";
+import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
+import type { IEntityWithStatsEvents } from "@wayward/game/game/entity/EntityWithStats";
+import type Human from "@wayward/game/game/entity/Human";
+import type { IHumanEvents } from "@wayward/game/game/entity/IHuman";
+import type { IStat, IStatBase, StatDisplayType } from "@wayward/game/game/entity/IStats";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { ICreatureEvents } from "@wayward/game/game/entity/creature/ICreature";
+import type { IPlayerEvents } from "@wayward/game/game/entity/player/IPlayer";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { Reference } from "@wayward/game/game/reference/IReferenceManager";
+import type Translation from "@wayward/game/language/Translation";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type Component from "@wayward/game/ui/component/Component";
+import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 export interface IStatDisplayDescription extends IModdable, IHasImagePath<string | ((entity: EntityWithStats, stat: IStat) => string)> {
     imagePath?: string | ((entity: EntityWithStats, stat: IStat) => string);
     /**
@@ -57,7 +65,14 @@ export interface IStatDisplayDescription extends IModdable, IHasImagePath<string
      * A function that will initialize a tooltip for this stat element, or a reference to show a tooltip for
      */
     tooltip?: Reference | ((tooltip: Tooltip, entity: EntityWithStats, stat: IStat) => any);
-    subscribeCalculateEquipmentStats?: true;
+    subscriber?: (events: IStatDisplayDescriptionSubscriber, refresh: () => void) => any;
+}
+export interface IStatDisplayDescriptionSubscriber {
+    removed: Promise<[]>;
+    entity: IUntilSubscriber<EntityWithStats, IEntityWithStatsEvents>;
+    human?: IUntilSubscriber<Human, IHumanEvents>;
+    player?: IUntilSubscriber<Player, IPlayerEvents>;
+    creature?: IUntilSubscriber<Creature, ICreatureEvents>;
 }
 export declare const STAT_DEFAULT_DISPLAY_ORDER = 100;
 export interface IStatInfo extends Partial<IStatBase> {

@@ -8,16 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Player from "game/entity/player/Player";
-import type { IIslandPort } from "game/island/IIsland";
-import type Island from "game/island/Island";
-import type Button from "ui/component/Button";
-import Component from "ui/component/Component";
-import Input from "ui/component/Input";
-import CanvasDialog from "ui/screen/screens/game/component/CanvasDialog";
-import type { DialogId } from "ui/screen/screens/game/Dialogs";
-import type { IVector2 } from "utilities/math/IVector";
-import Vector2 from "utilities/math/Vector2";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { IIslandPort } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
+import type Button from "@wayward/game/ui/component/Button";
+import Component from "@wayward/game/ui/component/Component";
+import Input from "@wayward/game/ui/component/Input";
+import type { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
+import CanvasDialog from "@wayward/game/ui/screen/screens/game/component/CanvasDialog";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
 export interface IIslandDialogOptions {
     allowRename?: boolean;
 }
@@ -73,7 +73,7 @@ export default abstract class IslandsDialog extends CanvasDialog {
     protected canHideDrawer(): boolean;
     protected draw(): void;
     private drawBackground;
-    private drawFogOfWar;
+    private drawSpriteAtIslandPosition;
     protected abstract shouldDisplayIsland(x: number, y: number, island?: Island): boolean;
     private drawIsland;
     protected abstract isSelectedIslandValid(): boolean;

@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { FerocityLevel } from "game/deity/IDeities";
+import { FerocityLevel } from "@wayward/game/game/deity/IDeities";
 declare const ferocityLevels: Record<FerocityLevel, string>;
 export default ferocityLevels;

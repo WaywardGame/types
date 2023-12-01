@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Music, SfxType } from "audio/IAudio";
-import EventEmitter from "event/EventEmitter";
-import type EnumCursor from "utilities/enum/EnumCursor";
-import type { IVector4 } from "utilities/math/Vector4";
+import { Music, SfxType } from "@wayward/game/audio/IAudio";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type EnumCursor from "@wayward/game/utilities/enum/EnumCursor";
+import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 export declare enum Fading {
     None = 0,
     In = 1,
@@ -51,7 +51,7 @@ export default class WAudio extends EventEmitter.Host<IAudioEvents> {
     /**
      * Returns the current music handler, an instance of `EnumCursor<Music>`
      */
-    getMusicHandler(): EnumCursor<Music, string>;
+    getMusicHandler(): EnumCursor<Music>;
     /**
      * Sets the music handler to the provided instance of `EnumCursor<Music>`. Causes any playing music to stop.
      */

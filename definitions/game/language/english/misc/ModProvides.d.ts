@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ModProvide } from "mod/IModInfo";
+import { ModProvide } from "@wayward/game/mod/IModInformation";
 declare const modProvides: Descriptions<ModProvide, string>;
 export default modProvides;

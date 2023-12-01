@@ -8,25 +8,26 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { type Events, type IEventEmitter } from "event/EventEmitter";
-import type { IIcon } from "game/inspection/InfoProvider";
-import UiTranslation from "language/dictionary/UiTranslation";
-import type { ISerializedTranslation } from "language/ITranslation";
-import Translation from "language/Translation";
-import Button from "ui/component/Button";
-import Component from "ui/component/Component";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import type { IRefreshable } from "ui/component/Refreshable";
-import Text from "ui/component/Text";
-import type Bindable from "ui/input/Bindable";
-import type { IDialogDescription } from "ui/screen/screens/game/Dialogs";
-import { DialogId, Edge } from "ui/screen/screens/game/Dialogs";
-import type { IDialog } from "ui/screen/screens/game/IGameScreenApi";
-import type { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
-import type TooltipLocationHandler from "ui/tooltip/TooltipLocationHandler";
-import type { IDraggableEvents } from "ui/util/Draggable";
-import Draggable from "ui/util/Draggable";
-import Log from "utilities/Log";
+import type { IIcon } from "@wayward/game/game/inspection/InfoProvider";
+import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import Translation from "@wayward/game/language/Translation";
+import UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
+import Button from "@wayward/game/ui/component/Button";
+import Component from "@wayward/game/ui/component/Component";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
+import Text from "@wayward/game/ui/component/Text";
+import type Bindable from "@wayward/game/ui/input/Bindable";
+import type { DialogDescriptionEdges, IDialogDescription } from "@wayward/game/ui/screen/screens/game/Dialogs";
+import { DialogId, Edge } from "@wayward/game/ui/screen/screens/game/Dialogs";
+import type { IDialog } from "@wayward/game/ui/screen/screens/game/IGameScreenApi";
+import type { MenuBarButtonType } from "@wayward/game/ui/screen/screens/game/static/menubar/IMenuBarButton";
+import type TooltipLocationHandler from "@wayward/game/ui/tooltip/TooltipLocationHandler";
+import type { IDraggableEvents } from "@wayward/game/ui/util/Draggable";
+import Draggable from "@wayward/game/ui/util/Draggable";
+import Rectangle from "@wayward/game/utilities/math/shapes/Rectangle";
+import Log from "@wayward/utilities/Log";
+import { type Events, type IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 /**
  * The positions of each edge of the dialog. Stored as percentages.
  */
@@ -35,6 +36,9 @@ export interface IDialogEdges {
     [Edge.Right]: number;
     [Edge.Bottom]: number;
     [Edge.Left]: number;
+}
+export declare namespace IDialogEdges {
+    function intersects(edges1: IDialogEdges, edges2: IDialogEdges): boolean;
 }
 /**
  * An enum for every position that a dialog handle can be in.
@@ -52,11 +56,6 @@ declare enum HandlePosition {
 }
 interface IDialogEvents extends Events<Component> {
     /**
-     * This event is handled by the GameScreen.
-     * @returns A `IterableOf<Dialog>` containing sibling dialogs. The list may contain this dialog.
-     */
-    getDialogList(): Iterable<Dialog>;
-    /**
      * Emitted when the close button is pressed in the dialog, or when the `close` method is called.
      */
     close(): any;
@@ -67,11 +66,11 @@ interface IDialogEvents extends Events<Component> {
     /**
      * Emitted when the dialog is resized
      */
-    resize(wDiff: number, hDiff: number): any;
+    resize(wDiff: number, hDiff: number, rectangle: Rectangle): any;
     /**
      * Emitted when the dialog is moved
      */
-    move(xDiff: number, yDiff: number): any;
+    move(xDiff: number, yDiff: number, rectangle: Rectangle): any;
     /**
      * Emitted when the dialog panel changes
      * @param id The string or number representing the panel that was switched to
@@ -82,9 +81,13 @@ interface IDialogEvents extends Events<Component> {
      * Emitted after all fields decorated with `@Save` are loaded
      */
     load(initial: boolean): any;
+    makeTopDialog(order: number): any;
+    mouseEnter(): any;
+    mouseLeave(): any;
 }
 export declare enum DialogClasses {
     Wrapper = "dialog-wrapper",
+    HoverOrderEligible = "dialog-wrapper-hover-order-eligible",
     Main = "dialog",
     Body = "dialog-body",
     Footer = "dialog-footer",
@@ -95,6 +98,7 @@ export declare enum DialogClasses {
     ButtonOptions = "game-dialog-button-options",
     Title = "dialog-title",
     ButtonBack = "game-dialog-button-back",
+    ButtonForward = "game-dialog-button-forward",
     Handle = "handle",
     Header = "dialog-header",
     EndsIconsLeft = "dialog-ends-icons-left",
@@ -127,6 +131,7 @@ declare abstract class Dialog extends Component implements IDialog {
     private lastPanel?;
     private cachedSnapPositions?;
     private readonly activeReasons;
+    private readonly pinReasons;
     protected readonly scrollableHandler: void;
     private loaded?;
     private get visiblePanel();
@@ -144,10 +149,11 @@ declare abstract class Dialog extends Component implements IDialog {
      * The description of how the dialog should be sized. (min, default, and max sizes and the position)
      */
     private description;
-    constructor(id: number, subId?: string);
+    constructor(id: DialogId, subId?: string);
+    addClasses(id: string | DialogId): void;
     tempHighlight(duration?: number): void;
-    addScrollableWrapper(type?: "scroll" | "auto", initializer?: (wrapper: Component) => any): Component<HTMLElement>;
-    addSettingsPanel(): Component<HTMLElement>;
+    addScrollableWrapper(type?: "scroll" | "auto", initializer?: (wrapper: Component) => any): Component;
+    addSettingsPanel(): Component;
     showSettingsPanel(): this;
     resetSizeAndPosition(): void;
     /**
@@ -157,14 +163,19 @@ declare abstract class Dialog extends Component implements IDialog {
      */
     close(): Promise<boolean>;
     protected onRemove1(): void;
-    addPanel(id: string | number): Component<HTMLElement>;
-    showPanel(id: string | number, disableAnimations?: boolean): Component<HTMLElement> | undefined;
-    getPanel(id: string | number): Component<HTMLElement> | undefined;
+    addPanel(id: string | number): Component;
+    showPanel(id: string | number, disableAnimations?: boolean): Component | undefined;
+    getPanel(id: string | number): Component | undefined;
     isPanelVisible(id: string | number): boolean;
+    getRectangle(): Rectangle;
     /**
      * Sets the dialog position.
      */
     setSizeAndPosition(description?: IDialogDescription<false> | IDialogDescription<true>): void;
+    protected resolveEdges(): "center" | DialogDescriptionEdges;
+    protected isPositionFree(edges: DialogDescriptionEdges): boolean;
+    protected intersectsWithSiblings(edges?: IDialogEdges): boolean;
+    protected getOppositeEdgePosition(edge: Edge, position: number): number;
     /**
      * Set the position of an edge.
      */
@@ -188,16 +199,31 @@ declare abstract class Dialog extends Component implements IDialog {
     toggleActive(reason: any, active: boolean): void;
     isActive(): boolean;
     /**
+     * Mark that this dialog is forced to be the top dialog
+     */
+    pin(reason: any): void;
+    /**
+     * Mark that this dialog is forced to be the top dialog
+     */
+    unpin(reason: any): void;
+    /**
+     * Toggle whether this dialog is forced to be the top dialog
+     */
+    togglePinned(reason: any, pinned: boolean): void;
+    isPinned(): boolean;
+    /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
     getName(): Translation | UiTranslation | ISerializedTranslation | undefined;
     getBindable(): Bindable | undefined;
     getIcon(): MenuBarButtonType | IIcon | undefined;
+    protected getDataHostId(): string;
     /**
      * Event handler for when this dialog is appended
      */
     protected onAppend(): void;
     protected onSelect(_: any, component?: Component): void;
+    protected onDialogMoveResize(): void;
     private hideSettingsPanel;
     private saveEdgesForScale;
     /**
@@ -264,6 +290,7 @@ declare abstract class Dialog extends Component implements IDialog {
      * Returns the snap positions for the given edge positions, sorted by how close the snap position is.
      */
     private getClosestSnapPositions;
+    protected getSiblingDialogs(): Dialog[];
     /**
      * Returns an object for getting all snap positions on each axis.
      * Each axis's list isn't calculated until requested.
@@ -330,10 +357,12 @@ export declare class Header extends Handle implements IRefreshable {
     readonly iconsLeft: Component;
     readonly iconsRight: Component;
     readonly backButton: Button;
+    readonly forwardButton: Button;
     readonly optionsButton: Button;
     readonly closeButton: Button;
     readonly text: Text;
-    constructor();
+    constructor(id: DialogId);
+    addClasses(id: string | DialogId): void;
     setText(text?: TranslationGenerator, ...args: any[]): void;
     refresh(): this;
     setCloseIcon(icon?: "Minimize" | "Close"): this;

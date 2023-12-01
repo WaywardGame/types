@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type DoodadInfo from "game/doodad/DoodadInfo";
-import type { DoodadType, IDoodadDescription } from "game/doodad/IDoodad";
-import type { TerrainType } from "game/tile/ITerrain";
-import type Tile from "game/tile/Tile";
-import type ExploreMap from "renderer/exploreMap/ExploreMap";
+import type DoodadInfo from "@wayward/game/game/doodad/DoodadInfo";
+import type { DoodadType, IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
+import type { StillContainerBaseItemType } from "@wayward/game/game/item/IItem";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type ExploreMap from "@wayward/game/renderer/exploreMap/ExploreMap";
 export interface ITileUpdate {
     terrainType: TerrainType;
     terrainMasks: TerrainMask;
@@ -43,5 +44,5 @@ export declare enum TerrainMask {
 export interface IWorldLayerOld {
     exploredMap?: ExploreMap;
 }
-export declare const stillContainerOrder: Record<number, number>;
+export declare const stillContainerOrder: Record<StillContainerBaseItemType, number>;
 export declare const tileAnimatedOffset = 127;

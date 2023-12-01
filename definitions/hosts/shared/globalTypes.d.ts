@@ -11,7 +11,13 @@
 import type { IWaywardPreload } from "./interfaces";
 import type { IElectron } from "./ipc/electron";
 export interface IRequireJs {
-    s: any;
+    s: {
+        contexts: {
+            _: {
+                defined: Record<string, any>;
+            };
+        };
+    };
     undef(path: string): void;
     onResourceLoad(ctx: any, map: any): void;
     (moduleName: string): any;

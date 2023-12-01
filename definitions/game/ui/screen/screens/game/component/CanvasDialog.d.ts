@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import EventEmitter from "event/EventEmitter";
-import Component from "ui/component/Component";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import Dialog from "ui/screen/screens/game/component/Dialog";
-import type { DialogId } from "ui/screen/screens/game/Dialogs";
-import type { IVector2 } from "utilities/math/IVector";
-import Vector2 from "utilities/math/Vector2";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import Component from "@wayward/game/ui/component/Component";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import type { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
+import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
 type Zoom = [index: number, zoom: number];
 declare class CanvasZoomReference {
     private readonly reference;

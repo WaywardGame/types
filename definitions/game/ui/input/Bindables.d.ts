@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Bindable from "ui/input/Bindable";
-import { BindableMouseTargetingContext, BindableType, BindableTypeContext } from "ui/input/Bindable";
-import type { Binding } from "ui/input/Bindings";
-declare module Bindables {
+import type Bindable from "@wayward/game/ui/input/Bindable";
+import { BindableMouseTargetingContext, BindableType, BindableTypeContext } from "@wayward/game/ui/input/Bindable";
+import type { Binding } from "@wayward/game/ui/input/Bindings";
+declare namespace Bindables {
     function register(index: number, defaultBinding: Binding[]): void;
     function deregister(index: number): void;
     function getType(bindable: Bindable): BindableType | undefined;

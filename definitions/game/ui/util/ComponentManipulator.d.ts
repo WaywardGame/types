@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Stream from "@wayward/goodstream";
 export type Until<T> = Record<string, (...args: any[]) => T>;
 export type UntilHandler<T, U extends Until<T>> = {
     [key in keyof U]: {
@@ -60,7 +59,6 @@ export declare class ClassManipulator<T> extends Manipulator<T, ClassUntil<T>> {
     hasNone(...classes: string[]): boolean;
     hasAny(...classes: string[]): boolean;
     values(): IterableIterator<string>;
-    stream(): Stream<string>;
 }
 export interface IElementWrapper {
     element: HTMLElement;
@@ -76,7 +74,7 @@ export declare class AttributeManipulator<T> extends Manipulator<T, AttributeUnt
     set(name: string, value: string): T;
     set(attributes: Iterable<[string, string | null]>): T;
     get(name: string): string;
-    get(firstAttribute: string, secondAttribute: string, ...attributes: string[]): Stream<[string, string | null]>;
+    get(firstAttribute: string, secondAttribute: string, ...attributes: string[]): Array<[string, string | null]>;
     remove(...attributes: string[]): T;
     has(...attributes: string[]): boolean;
     private getAttributeIterator;
@@ -85,7 +83,7 @@ export declare class DataManipulator<T> extends Manipulator<T> {
     set(name: string, value: string): T;
     set(data: Iterable<[string, string | undefined]>): T;
     get(name: string): string;
-    get(name: string, ...keys: string[]): Stream<[string, string | undefined]>;
+    get(name: string, ...keys: string[]): Array<[string, string | undefined]>;
     remove(...keys: string[]): T;
     has(...keys: string[]): boolean;
     private getDataIterator;

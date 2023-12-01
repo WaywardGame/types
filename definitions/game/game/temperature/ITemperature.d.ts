@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Island from "game/island/Island";
-import type TimeManager from "game/time/TimeManager";
-import type { WorldZ } from "game/WorldZ";
-import type { IRange } from "utilities/math/Range";
+import type Island from "@wayward/game/game/island/Island";
+import type TimeManager from "@wayward/game/game/time/TimeManager";
+import type { WorldZ } from "@wayward/utilities/game/WorldZ";
+import type { IRange } from "@wayward/utilities/math/Range";
 export declare enum Temperature {
     Coldest = -100,
     Cold = -50,
@@ -58,7 +58,7 @@ export interface ITemperatureSource {
      */
     getProducedTemperature?(): number | undefined;
 }
-export declare module ITemperatureSource {
+export declare namespace ITemperatureSource {
     function is(value: unknown): value is ITemperatureSource;
 }
 export declare enum TempType {

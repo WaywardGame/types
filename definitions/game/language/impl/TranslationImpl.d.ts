@@ -8,17 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Reference, Referenceable } from "game/reference/IReferenceManager";
-import Dictionary from "language/Dictionary";
-import type { ISerializedTranslation, TranslationArg } from "language/ITranslation";
-import { TextContext } from "language/ITranslation";
-import type { Link } from "language/segment/LinkSegment";
-import type { ITooltipSection } from "language/segment/TooltipSegment";
-import type { ISerializable } from "save/serializer/ISerializer";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import type { Random } from "utilities/random/Random";
-import type { ISegment, IStringSection } from "utilities/string/Interpolator";
-import Interpolator from "utilities/string/Interpolator";
+import type { Reference, Referenceable } from "@wayward/game/game/reference/IReferenceManager";
+import Dictionary from "@wayward/game/language/Dictionary";
+import type { ISerializedTranslation, TranslationArg } from "@wayward/game/language/ITranslation";
+import { TextContext } from "@wayward/game/language/ITranslation";
+import type { Link } from "@wayward/game/language/segment/LinkSegment";
+import type { ITooltipSection } from "@wayward/game/language/segment/TooltipSegment";
+import type { ISerializable } from "@wayward/game/save/serializer/ISerializer";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import type { ISegment, IStringSection } from "@wayward/game/utilities/string/Interpolator";
+import Interpolator from "@wayward/game/utilities/string/Interpolator";
+import type { Random } from "@wayward/utilities/random/Random";
 export interface ITranslationConfig {
     segments: Record<number, ISegment>;
     invertedSegmentMap: Map<ISegment, number>;
@@ -60,16 +60,18 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     private cachedString?;
     private isRootTranslation;
     private tooltip?;
+    private tooltipWide?;
     private reference?;
+    private referenceForced?;
     constructor(dictionary: Dictionary | string, entry: number | string, index?: "random" | number);
     constructor(translationId: string);
     equals(translation: TranslationImpl): boolean;
     clone(): TranslationImpl;
     withSegments(...segments: ISegment[]): this;
     withSegments(priority: true, ...segments: ISegment[]): this;
-    withTooltip(tooltip?: Falsy | ITooltipSection["tooltip"]): this;
+    withTooltip(tooltip?: Falsy | ITooltipSection["tooltip"], wide?: true): this;
     getReference(): Reference | undefined;
-    setReference(reference?: Reference | Referenceable): this;
+    setReference(reference?: Reference | Referenceable, forceInclude?: true): this;
     addArgs(...args: TranslationArg[]): this;
     inContext(context?: TextContext, normalize?: boolean): this;
     passTo(...reformatters: Array<TranslationImpl | ((sections: IStringSection[]) => IStringSection[]) | Falsy>): this;
@@ -104,7 +106,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     private getCustomInterpolatorSegments;
     serializeObject(): ISerializedTranslation;
     serialize(depth?: number): ISerializedTranslation;
-    static serializeTranslationArg(arg: any, depth?: number, maxSerializationDepth?: number): any;
+    static serializeTranslationArg(arg: any, depth?: number, maxSerializationDepth?: number): ISerializedTranslation | undefined;
     private canCache;
     private getCachedTranslation;
     /**

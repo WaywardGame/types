@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { BiomeType } from "game/biome/IBiome";
-import type { SkillType } from "game/entity/IHuman";
-import type { TerrainType } from "game/tile/ITerrain";
-import type { WorldZ } from "game/WorldZ";
-import type { ISerializedTranslation } from "language/ITranslation";
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import type { WorldZ } from "@wayward/utilities/game/WorldZ";
 export interface IObject<T> {
     type: T;
     id: number;
@@ -49,7 +49,6 @@ export interface IHasImagePath<ImagePathType = string> {
     imageCount?: number;
 }
 export interface IObjectOptions {
-    decay?: number;
     durability?: number;
     durabilityMax?: number;
     quality?: Quality;

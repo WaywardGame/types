@@ -8,18 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { LobbyType } from "@hosts/shared/interfaces";
-import type { ICharacter } from "game/entity/IHuman";
-import type { PlayerState } from "game/entity/player/IPlayer";
-import type Player from "game/entity/player/Player";
-import type { ISynchronizeState, PauseSource } from "game/IGame";
-import { TurnMode } from "game/IGame";
-import type { Load } from "game/meta/Loading";
-import type { Milestone } from "game/milestones/IMilestone";
-import type { GameMode, IGameOptions } from "game/options/IGameOptions";
-import type { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
-import type { IConnection } from "multiplayer/networking/IConnection";
-import type { ISaveObject } from "save/ISaveManager";
+import { LobbyType } from "@wayward/hosts/shared/interfaces";
+import type { ICharacter } from "@wayward/game/game/entity/IHuman";
+import type { PlayerState } from "@wayward/game/game/entity/player/IPlayer";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { ISynchronizeState, PauseSource } from "@wayward/game/game/IGame";
+import { TurnMode } from "@wayward/game/game/IGame";
+import type { Load } from "@wayward/game/game/meta/Loading";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { GameMode, IGameOptions } from "@wayward/game/game/options/IGameOptions";
+import type { IMatchmakingInfo } from "@wayward/game/multiplayer/matchmaking/IMatchmaking";
+import type { IConnection } from "@wayward/game/multiplayer/networking/IConnection";
+import type { ISaveObject } from "@wayward/game/save/ISaveManager";
 export interface IMultiplayerEvents {
     connect(): any;
     disconnect(): any;
@@ -85,7 +85,7 @@ export declare enum MultiplayerSyncCheck {
     Players = 45,
     PlayerSetup = 46,
     Random = 47,
-    Reputation = 48,
+    Alignment = 48,
     Seed = 49,
     SeededGenerator = 50,
     SetPosition = 51,
@@ -103,10 +103,11 @@ export declare enum MultiplayerSyncCheck {
     Time = 63,
     UpdateDirection = 64,
     Weight = 65,
-    WorldUpdateTile = 66
+    WorldUpdateTile = 66,
+    NPC = 67
 }
 export declare const maxPlayers = 32;
-export declare const packetTickRate = 16;
+export declare const packetTickRate = 16.6666;
 export declare const defaultServerPort = 38740;
 export declare const defaultSshServerPort = 38742;
 export declare const defaultSshServerUsername = "wayward";
@@ -122,6 +123,7 @@ export interface IMultiplayerOptions {
     pvp: boolean;
     allowTraveling: boolean;
     allowHardcoreRespawns: boolean;
+    pauseOnDesync: boolean;
     turnMode: TurnMode;
     maxPlayers: number;
     tickSpeed: number;
@@ -184,7 +186,7 @@ export declare enum DisconnectReason {
     Kick = 6,
     Left = 7,
     LostConnection = 8,
-    Normal = 9,
+    Normal = 9,// server shut down or player left
     ServerShutdown = 10,
     UnableToJoinGame = 11,
     UnableToLoadMods = 12

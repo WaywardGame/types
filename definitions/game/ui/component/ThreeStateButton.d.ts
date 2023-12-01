@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import Button from "ui/component/Button";
-import { ThreeStateButtonState } from "ui/component/IThreeStateButton";
-import type { IRefreshableValue } from "ui/component/Refreshable";
-import type { Paragraph } from "ui/component/Text";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import Button from "@wayward/game/ui/component/Button";
+import { ThreeStateButtonState } from "@wayward/game/ui/component/IThreeStateButton";
+import type { IRefreshableValue } from "@wayward/game/ui/component/Refreshable";
+import type { Paragraph } from "@wayward/game/ui/component/Text";
 interface IThreeStateButtonEvents extends Events<Button> {
     /**
      * @param state The state this button is changing to.
