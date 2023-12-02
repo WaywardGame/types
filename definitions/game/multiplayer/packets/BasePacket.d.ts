@@ -42,7 +42,9 @@ export default abstract class BasePacket {
     protected readInt32(): number;
     protected writeInt32(value: number): void;
     protected readUint8(): number;
+    protected readOptionalUint8(): number | undefined;
     protected writeUint8(value: number): void;
+    protected writeOptionalUint8(value?: number): void;
     protected readUint16(): number;
     protected writeUint16(value: number): void;
     protected readUint32(): number;

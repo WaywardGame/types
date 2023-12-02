@@ -223,7 +223,9 @@ export default class ItemComponent extends Component implements ItemSlot {
     setItemMenu(initialiser?: (contextMenu: ContextMenu<ActionId>) => any): this;
     private registeredItemHighlights;
     registerItemHighlights(): void;
-    private dragPreview?;
+    private static dragPreviewSource?;
+    private static dragPreview?;
+    private static getDragPreview;
     private savedPosition?;
     protected onMoveStart(_: any, mouse: Vector2): false | void;
     protected onMove(_: any, offset: Vector2): void;
@@ -233,6 +235,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     private endDragPreview;
     private handleDrop;
     private getStatBarsWrapper;
+    private refreshStack;
     private lastDecay;
     private refreshDecayBar;
     private lastDurability;

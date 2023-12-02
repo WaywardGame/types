@@ -163,6 +163,6 @@ export interface IContainerOld extends Omit<IContainer, "addOrder"> {
     itemOrders?: number[];
 }
 export interface IContainerSort {
-    sort: ContainerSort;
+    sort?: ContainerSort;
     direction: SortDirection;
 }

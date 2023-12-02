@@ -60,7 +60,7 @@ export declare class GlobalMouseInfo extends EventEmitter.Host<IGlobalMouseInfoE
     /**
      * Forces a target update. Use as much as you want now ;)
      */
-    updateTarget(): void;
+    updateTarget(force?: boolean): void;
     update(evt: Event & Partial<MouseEvent> & Partial<TouchEvent>): void;
     /**
      * Returns whether the mouse is currently within the given component, element, or selector, or its descendants.
