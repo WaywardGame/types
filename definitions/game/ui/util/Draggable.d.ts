@@ -59,6 +59,7 @@ export default class Draggable {
      * Incompatible with `setInputFilter`
      */
     setBindable(bindables: ArrayOr<Bindable>, priority?: number): this;
+    stopDragging(): void;
     private removeBindHandlers;
     dragStart(event: IDraggableInputEvent): boolean;
     private drag;

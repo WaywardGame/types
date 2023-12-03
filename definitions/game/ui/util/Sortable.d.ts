@@ -75,6 +75,8 @@ export default class Sortable {
     setInputFilter(filter: (input: IDraggableInputEvent) => any): this;
     private shouldntDrag?;
     setShouldntDrag(filter: (component: IDraggableComponent) => boolean | undefined): this;
+    private shouldntApplyPositioningTo?;
+    setShouldntApplyPositioningTo(filter: (component: IDraggableComponent) => boolean | undefined): this;
     private cachedOrder?;
     get order(): number[];
     private getCurrentOrder;
