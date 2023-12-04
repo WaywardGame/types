@@ -34,23 +34,27 @@ export declare enum Stat {
     /**
      * UI only. Does not exist on `Player` instances.
      */
-    Ferocity = 9,
+    Luck = 9,
+    /**
+     * UI only. Does not exist on `Player` instances.
+     */
+    Ferocity = 10,
     /**
      * How much this human and their inventory is affected by temperature
      */
-    InsulationHeat = 10,
-    InsulationCold = 11,
+    InsulationHeat = 11,
+    InsulationCold = 12,
     /**
      * Used for chicken eggs and goat milk
      */
-    Produce = 12,
+    Produce = 13,
     /**
      * Used for tamed animals
      */
-    Happiness = 13,
-    Tamed = 14,
-    Petting = 15,
-    Waste = 16
+    Happiness = 14,
+    Tamed = 15,
+    Petting = 16,
+    Waste = 17
 }
 export type IStats = {
     [key in keyof typeof Stat]: IStat;

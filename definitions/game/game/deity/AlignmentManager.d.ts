@@ -76,6 +76,7 @@ export declare class Alignment implements IReadableAlignment {
     get fraction(): number;
     get deity(): number;
     get cursed(): number;
+    get invoked(): boolean;
     setInvoked(): void;
     /**
      * A multiplier for the amount of evil that the player will receive tomorrow night. (IE delayed by one day.)

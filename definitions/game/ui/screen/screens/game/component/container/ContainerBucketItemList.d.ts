@@ -118,6 +118,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     protected onTransferInto(itemComponent: ItemComponent, index: number | undefined, bindable: Bindable | undefined, undo: () => void, oldParent?: ISortableComponent): Promise<void>;
     protected onSort(itemComponent: ItemComponent, index: number, bindable: Bindable | undefined, undo: () => void): Promise<void>;
     protected onContainerOrderUpdate(manager: ItemManager, container: IContainer): void;
+    private getAppendStrategy;
     protected onAddItem(manager: ItemManager, items: Item[], container: IContainer, index: number, options?: IMoveItemOptions): Promise<void>;
     protected onRemoveItem(manager: ItemManager, items: Item[], container?: IContainer, containerTile?: Tile): void;
     protected onStack(manager: ItemManager, container: IContainer, type: ItemType): void;

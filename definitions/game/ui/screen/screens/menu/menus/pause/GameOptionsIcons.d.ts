@@ -33,7 +33,8 @@ export declare enum GameOptionsIcon {
     Weight = 17,
     Crafting = 18,
     Items = 19,
-    Travel = 20
+    Travel = 20,
+    Luck = 21
 }
 export interface IGameOptionsIcon extends IModdable, IHasImagePath {
     check(options: IGameOptions, localPlayerOption: ImmutableObject<IGameOptionsPlayer>): boolean;

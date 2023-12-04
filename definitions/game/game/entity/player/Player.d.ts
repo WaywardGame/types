@@ -84,7 +84,8 @@ export default class Player extends Human<number, ReferenceType.Player> implemen
     protected onCanMove(direction: Direction.Cardinal): false | undefined;
     protected onGetSkillGainMultiplier(skillType: SkillType): number | undefined;
     protected onDamage(damageInfo: IDamageInfo): void;
-    addMilestone(milestone: Milestone, data?: number | string, update?: boolean): void;
+    addMilestone(milestone: Milestone, data?: number | string): void;
+    addMilestone(milestone: Milestone, data: number | string | undefined, update: true): boolean;
     updateMovementIntent(movementIntent: IMovementIntent): boolean;
     load(): void;
     unload(): void;
