@@ -183,6 +183,10 @@ export declare enum UnlockedRecipesStrategy {
 }
 export interface IGameOptionsPlayer {
     /**
+     * A multiplier for some chance checks. 1 = default chances. 0.5 = chances are halved. 2 = chances are doubled. Etc.
+     */
+    luckMultiplier: number;
+    /**
      * Whether the player should use their globally unlocked recipes in this game.
      */
     unlockedRecipes: UnlockedRecipesStrategy;

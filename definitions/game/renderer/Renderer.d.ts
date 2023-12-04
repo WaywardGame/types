@@ -114,7 +114,6 @@ export declare class Renderer extends EventEmitter.Host<IRendererEvents> {
     addOrUpdateOverlay(tile: Tile, overlay: IOverlayInfo): void;
     removeOverlay(tile: Tile, overlay: IOverlayInfo): void;
     updateThumbnail(): Promise<string | undefined>;
-    update(timeStamp: number): void;
     computeSpritesInViewport(): void;
     private getFadeInProgress;
     private getZoomLevelProgress;

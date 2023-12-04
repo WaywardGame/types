@@ -40,7 +40,7 @@ export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_RAMP_RANGE: IRange;
 /**
  * The number of days it takes for nightly evil alignment to fully ramp up.
  */
-export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_RAMP_TIME = 5;
+export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_RAMP_TIME = 15;
 export interface IReadableAlignment {
     /**
      * The current Deity aligned to.

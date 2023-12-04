@@ -162,6 +162,10 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     setOptions(options: IOptions): void;
     getEquipEffect<E extends EquipEffect>(type: E): FirstIfOne<EquipEffectByType<E>>;
     get alignment(): Alignment;
+    /**
+     * Luck is a multiplier applied to some random chance calculations.
+     */
+    get luck(): number;
     updateDirection(tile: Tile | Direction.Cardinal, updateVehicleDirection?: boolean): Direction.Cardinal;
     protected onMovementCompleted(movingData: IMovingData): void;
     moveTowardsIsland(direction: Direction.Cardinal | Direction.None, options?: Partial<IMoveToIslandOptions>): Promise<void>;

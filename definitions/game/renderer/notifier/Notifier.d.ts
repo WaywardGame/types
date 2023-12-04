@@ -39,7 +39,7 @@ export declare class Notifier {
     addNotifierIcon(location: INotificationLocation, type: NotifierIconType): void;
     suspend(): void;
     resume(): void;
-    update(timeStamp: number): void;
+    private update;
     render(timeStamp: number, x: number, y: number, tileScale: number): boolean;
     private addNotification;
     private renderNotification;

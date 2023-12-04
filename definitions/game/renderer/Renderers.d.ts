@@ -46,7 +46,6 @@ export default class Renderers {
     stop(): void;
     reinitialize(): Promise<void>;
     delete(): Promise<void>;
-    update(timeStamp: number): void;
     computeSpritesInViewport(origin: IVector4): void;
     addOrUpdateOverlay(tile: Tile, overlay: IOverlayInfo): void;
     removeOverlay(tile: Tile, overlay: IOverlayInfo): void;

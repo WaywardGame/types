@@ -1692,13 +1692,14 @@ export declare enum ItemTypeGroup {
     Golem = -9867,
     CreatureResource = -9866,
     Dripstone = -9865,
-    ArtifactOfWorship = -9864,
+    ArtifactOfInvocation = -9864,
     Wheelbarrow = -9863,
     Crucible = -9862,
     Reshaping = -9861,
     Resin = -9860,
     Filler = -9859,
-    All = -9858
+    Altar = -9858,
+    All = -9857
 }
 export type StillContainerBaseItemType = ItemType.Waterskin | ItemType.GlassBottle | ItemType.ClayJug | ItemType.CoconutContainer;
 export interface IItemMovementResult {

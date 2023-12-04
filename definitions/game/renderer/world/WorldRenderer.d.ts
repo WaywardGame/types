@@ -158,7 +158,6 @@ export declare class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     load(island: Island): void;
     render(): void;
     renderWorld(timeStamp: number, x: number, y: number, z: number): void;
-    update(timeStamp: number): void;
     updateAllTiles(): void;
     initializeSpriteBatch(layer: SpriteBatchLayer): void;
     private setResources;
