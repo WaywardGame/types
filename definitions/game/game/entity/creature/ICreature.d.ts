@@ -323,6 +323,10 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      * If true, creature will perform their special ability when killing a player or NPC with a bypass
      */
     doesSpecialAbilityOnKill?: boolean;
+    /**
+     * When a flying MoveType is set, by default, a shadow will appear under the creature, this will disable that feature when set to true;
+     */
+    noShadow?: boolean;
 }
 export interface ICreatureSpawn {
     /**
