@@ -314,7 +314,8 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     calculateEquipmentStats(): void;
     private recalculateInsulation;
     private getEquipmentInsulation;
-    discoverRecipe(recipeType: ItemType, crafted?: ICrafted, discoveredClientSide?: boolean): void;
+    discoverRecipes(recipes: Array<[recipeType: ItemType, crafted: ICrafted]>, discoveredClientSide?: boolean): void;
+    discoverRecipe(recipeType: ItemType, crafted?: ICrafted, discoveredClientSide?: boolean, emit?: boolean): void;
     incrementIslandTickCount(): void;
     protected onPostMove(lastTile: Tile, tile: Tile): void;
     passTurn(turnType?: TurnTypeFlag): void;

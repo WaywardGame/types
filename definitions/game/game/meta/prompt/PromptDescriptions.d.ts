@@ -40,6 +40,7 @@ export declare const promptGameItemsMayBeDestroyedOnUse: import("@wayward/game/g
 export declare const promptGameLoadFailure: import("@wayward/game/game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptGameNoHealingRequired: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameNoSaveOnDeath: import("@wayward/game/game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
+export declare const promptGamePickUpDoodadWillBeDestroyed: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[doodad: Text]>;
 export declare const promptGamePickUpStillWithWater: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[dripstoneOrStill: Text]>;
 export declare const promptGameReleaseCreature: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[creatureName: Text]>;
 export declare const promptGameUncage: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[creatureName: Text]>;

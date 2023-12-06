@@ -12,8 +12,7 @@ import { TileUpdateType } from "@wayward/game/game/IGame";
 import type { IObject } from "@wayward/game/game/IObject";
 import { Quality } from "@wayward/game/game/IObject";
 import type { DisplayableDoodadType, DoodadTypeExtra, DoorOrientation, IDoodadDescription, IDoodadOptions, IHasBuilder, IHasWater } from "@wayward/game/game/doodad/IDoodad";
-import { DoodadTag } from "@wayward/game/game/doodad/IDoodad";
-import { DoodadType, DoodadTypeGroup, GrowingStage } from "@wayward/game/game/doodad/IDoodad";
+import { DoodadTag, DoodadType, DoodadTypeGroup, GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import type { IEntityMovableEvents } from "@wayward/game/game/entity/EntityMovable";
 import EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type Human from "@wayward/game/game/entity/Human";
@@ -28,7 +27,7 @@ import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IWell } from "@wayward/game/game/island/IIsland";
 import { LiquidType } from "@wayward/game/game/island/IIsland";
-import type { DisplayableItemType, IContainer, ILiquidGather, ContainerSort, IItemVehicle, ItemTypeExtra } from "@wayward/game/game/item/IItem";
+import type { ContainerSort, DisplayableItemType, IContainer, IItemVehicle, ILiquidGather, ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { IHasMagic } from "@wayward/game/game/magic/MagicalPropertyManager";
@@ -78,6 +77,7 @@ export interface IDoodadEvents extends IEntityMovableEvents {
     transformed(newType: DoodadType, oldType: DoodadType): any;
     durabilityChange(durability: number, oldDurability: number): any;
     durabilityMaxChange(durability: number, oldDurability: number): any;
+    revertToItem(item: Item): any;
 }
 export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType, ReferenceType.Doodad, DoodadTag> implements IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, Partial<IContainer>, IHasInsulation, IHasBuilder, IHasMagic {
     static is(value: any): value is Doodad;

@@ -280,7 +280,7 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      * Luck is a multiplier applied to some chance calculations. 1 is default, 0.5 would mean chances are halved, 2 would mean chances are doubled, etc.
      */
     getLuckMultiplier(multiplier: number): number;
-    discoverRecipe(recipeType: ItemType, crafted: ICrafted): any;
+    discoverRecipes(recipes: Array<[recipeType: ItemType, crafted: ICrafted]>): any;
     undiscoverRecipes(): any;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
