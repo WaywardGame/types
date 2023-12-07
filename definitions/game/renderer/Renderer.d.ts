@@ -9,23 +9,23 @@
  * https://github.com/WaywardGame/types/wiki
  */
 /// <reference types="@webgpu/types" />
-import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import type { IOverlayInfo } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
+import type { IRendererContext } from "@wayward/game/renderer/context/IRendererContext";
 import type { IRendererOrigin } from "@wayward/game/renderer/context/RendererOrigin";
+import type { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
 import type { IRendererEvents } from "@wayward/game/renderer/IRenderer";
 import { RenderSource, UpdateRenderFlag } from "@wayward/game/renderer/IRenderer";
+import type { Notifier } from "@wayward/game/renderer/notifier/Notifier";
+import type { ParticleSystem } from "@wayward/game/renderer/particle/ParticleSystem";
 import { WebGlContext } from "@wayward/game/renderer/platform/webgl/WebGlContext";
 import { WorldRenderer } from "@wayward/game/renderer/world/WorldRenderer";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
-import type { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
-import type { Notifier } from "@wayward/game/renderer/notifier/Notifier";
-import type { ParticleSystem } from "@wayward/game/renderer/particle/ParticleSystem";
-import type { IRendererContext } from "@wayward/game/renderer/context/IRendererContext";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export declare class Renderer extends EventEmitter.Host<IRendererEvents> {
     private readonly createCanvasElement;
     readonly id: number;

@@ -181,6 +181,7 @@ declare namespace Translation {
         private readonly components;
         private combinedComponent?;
         private get combinedValue();
+        private get relevant();
         private skipParenthesis?;
         constructor(base?: FVal);
         noParenthesis(): this;

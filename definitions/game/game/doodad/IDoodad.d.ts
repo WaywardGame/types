@@ -122,6 +122,14 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      * Works with "Gather"-based actions.
      */
     gatherPickUp?: ILootItem[];
+    /**
+     * If this is a doodad container, you can set this to true to make the doodad considered one where you can only "place items onto" the doodad,
+     * rather than storing the items within the doodad.
+     * - Changes messages when putting items in the container to "placed onto"
+     * - Prevents using the item as a container when in your inventory
+     * - Prevents picking up the doodad when
+     */
+    placeOnContainer?: true;
     providesFire?: boolean;
     providesLight?: number;
     reduceDurabilityOnGather?: boolean;

@@ -19,6 +19,7 @@ export type IFilter = {
 export declare enum MessageFilterDefault {
     All = 0,
     Game = 1,
-    Chat = 2
+    Chat = 2,
+    Alignment = 3
 }
 export declare const MESSAGE_FILTERS_DEFAULT: Descriptions<MessageFilterDefault, IFilter>;

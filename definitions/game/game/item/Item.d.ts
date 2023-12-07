@@ -12,6 +12,7 @@ import { TileUpdateType } from "@wayward/game/game/IGame";
 import type { IObject, IObjectOptions } from "@wayward/game/game/IObject";
 import { Quality } from "@wayward/game/game/IObject";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type { IEntityMovableEvents } from "@wayward/game/game/entity/EntityMovable";
 import EntityMovable from "@wayward/game/game/entity/EntityMovable";
@@ -153,6 +154,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     set durabilityMax(value: number);
     getDisplayItem(): DisplayableItemType;
     isContainer(): this is Item & IContainer;
+    get builtDescription(): IDoodadDescription | undefined;
     countTradesWith(human?: Human): number;
     /**
      * Gets the owner of this item.

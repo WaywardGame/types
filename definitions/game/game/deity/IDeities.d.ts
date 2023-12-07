@@ -28,7 +28,7 @@ export declare const DEITY_RUNE_CHANCE_BASE_MAX = 0.1;
  *
  * The piety chance is combined with the base chance in the rune dropping calculation.
  */
-export declare const DEITY_RUNE_CHANCE_PIETY_MAX = 0.06;
+export declare const DEITY_RUNE_CHANCE_PIETY_MAX = 0.1;
 /**
  * The chance that a rune drop is replaced with a neutral rune drop.
  */
@@ -40,7 +40,15 @@ export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_RAMP_RANGE: IRange;
 /**
  * The number of days it takes for nightly evil alignment to fully ramp up.
  */
-export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_RAMP_TIME = 15;
+export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_RAMP_TIME = 50;
+/**
+ * A multiplier for chance values that get added to the nightly evil multiplier.
+ */
+export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_MULTIPLIER_CHANCE_VALUE_MULTIPLIER: number;
+/**
+ * The chance of adding to the nightly evil multiplier.
+ */
+export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_MULTIPLIER_CHANCE_VALUE_CHANCE: number;
 export interface IReadableAlignment {
     /**
      * The current Deity aligned to.
