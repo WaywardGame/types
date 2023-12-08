@@ -28,6 +28,10 @@ export declare class ParticleSystem {
     delete(): void;
     create(tile: Tile, particle: IRGB, count?: number, intensity?: number): number[] | undefined;
     clear(): void;
+    /**
+     * Updates particles (ticks their life)
+     * @returns True if there may be particles to render, false if there are definitely no particles
+     */
     private update;
     render(timeStamp: number, x: number, y: number): boolean;
     private findUnusedParticle;

@@ -9,8 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
-import { Milestone } from "@wayward/game/game/milestones/IMilestone";
-import type { MilestoneManager } from "@wayward/game/game/milestones/MilestoneManager";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IDropdownOption } from "@wayward/game/ui/component/Dropdown";
 import GroupDropdown from "@wayward/game/ui/component/GroupDropdown";
@@ -28,9 +26,8 @@ declare class ItemDropdown<OTHER_OPTIONS extends string = never> extends GroupDr
 declare namespace ItemDropdown {
     class DiscoveredTypes<OTHER_OPTIONS extends string = never> extends ItemDropdown<OTHER_OPTIONS> {
         protected onDiscoveredTypesDropdownAppend(): void;
-        protected onDiscoveredTypesDropdownRemove(): void;
-        protected onMilestoneUpdate(milestones: MilestoneManager, milestone: Milestone): void;
-        protected onRecipesUpdate(): void;
+        private refreshTimeoutId?;
+        private queueRefresh;
         protected filterEnum(value: ItemType): boolean;
         protected getGroups(): ItemTypeGroup[];
     }

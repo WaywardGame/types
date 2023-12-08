@@ -29,7 +29,7 @@ export default class ContainerDialog extends Dialog {
     readonly bucket: ContainerBucket;
     readonly weight: Component<HTMLElement>;
     constructor(id?: DialogId, subId?: string);
-    protected setContainer(container: IContainer): this;
+    setContainer(container: IContainer): this;
     protected onAppend1(): void;
     getName(): TranslationImpl | undefined;
     protected onTickEnd(): void;

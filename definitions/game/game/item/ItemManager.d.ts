@@ -29,6 +29,7 @@ import Translation, { Article } from "@wayward/game/language/Translation";
 import Message from "@wayward/game/language/dictionary/Message";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IRGB } from "@wayward/utilities/Color";
+import type { ISorter } from "@wayward/utilities/collection/sort/Sorter";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import { WorldZ } from "@wayward/utilities/game/WorldZ";
 import type { Random } from "@wayward/utilities/random/Random";
@@ -186,8 +187,8 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      * @returns Result that tells you what moved
      */
     moveItemsToContainer(human: Human | undefined, items: Item[], toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult;
-    setStacked(container: IContainer, itemType: ItemType, stacked?: boolean): void;
-    private ensureContainerSorted;
+    setStacked(human: Human, container: IContainer, itemType: ItemType, stacked?: boolean, atIndex?: number): void;
+    ensureContainerSorted(container?: IContainer, sorter?: ISorter<Item | undefined> | undefined): void;
     private ensureStacksStacked;
     private createSorter;
     tryMoveItemsToContainer(human: Human | undefined, items: Item[], toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult | IActionNotUsable;

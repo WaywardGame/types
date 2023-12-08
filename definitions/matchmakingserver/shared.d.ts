@@ -61,6 +61,7 @@ export interface IServerGameDetails {
     difficulty: number;
     pvp: boolean;
     alignment: number;
+    reputation: number;
     days: number;
     mods: IServerMod[];
     peaceful: boolean;

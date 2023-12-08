@@ -32,6 +32,11 @@ export interface IItemRemoveOptions {
      */
     skipExtinguishTorches?: boolean;
 }
+export declare enum GetItemProtectedItemExclusion {
+    None = 0,
+    Protected = 1,
+    ProtectedOrWithinProtectedContainer = 2
+}
 /**
  * Includes all protected items by default
  */
@@ -39,7 +44,7 @@ export interface IGetItemOptions {
     /**
      * True to exclude protected items
      */
-    excludeProtectedItems: true;
+    excludeProtectedItems: true | GetItemProtectedItemExclusion;
     /**
      * True to only include protected items if they pass an item.willBreakOnDamage() check.
      * excludeProtectedItems must be set to true for this to work.
@@ -122,6 +127,7 @@ export interface IMoveItemOptions {
     index?: number;
     updateView?: true;
     isTrading?: boolean;
+    revertFromDoodad?: boolean;
 }
 export interface IPlaceOnTileOptions {
     force?: boolean;

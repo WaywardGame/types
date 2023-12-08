@@ -39,4 +39,5 @@ export default class DialogManager {
     private onClose;
     private breakKey;
     private getKey;
+    private updateDialogId;
 }

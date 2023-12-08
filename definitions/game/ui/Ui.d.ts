@@ -72,6 +72,7 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
      * Registers an object as a "data host", which allows its fields to be saved to `saveData` or `saveDataGlobal`
      */
     registerDataHost(id: string | number, host: any): void;
+    deregisterDataHost(id: string | number, host: any): boolean;
     playSound(sound: SfxType | SfxUi): void;
     getTooltipVisibility(): TooltipVisibilityOption;
     protected onChangeInformationVisibility(): void;

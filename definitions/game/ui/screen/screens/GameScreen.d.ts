@@ -72,7 +72,7 @@ export default class GameScreen extends Screen {
     getContainerBucket(container?: IContainer): ContainerBucket | undefined;
     hasOpenContainerBucket(container?: IContainer): boolean;
     hasOpenAncestorBuckets(container?: IContainer): boolean;
-    openContainerDialog(container?: IContainer): false | ContainerDialog;
+    openContainerDialog(container?: IContainer, fromContainer?: IContainer): false | ContainerDialog;
     closeContainerDialog(container?: IContainer): boolean;
     private readonly cinematicModeReasons;
     toggleCinematicMode(enabled: boolean, reason: string): this;
@@ -87,6 +87,7 @@ export default class GameScreen extends Screen {
     onCalculateEquipmentStats(): void;
     onNightlyAlignmentChange(): Promise<void>;
     protected onItemRevertFromDoodad(item: Item, doodad: Doodad): void;
+    protected onItemBecomeDoodad(item: Item, doodad: Doodad): void;
     protected onRemoveContainableFromContainer(itemManager: ItemManager, items: Item[], container?: IContainer): void;
     /**
      * Refreshed death / ghost state stuff

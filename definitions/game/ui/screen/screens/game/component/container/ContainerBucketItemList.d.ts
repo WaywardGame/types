@@ -121,6 +121,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private getAppendStrategy;
     protected onAddItem(manager: ItemManager, items: Item[], container: IContainer, index: number, options?: IMoveItemOptions): Promise<void>;
     protected onRemoveItem(manager: ItemManager, items: Item[], container?: IContainer, containerTile?: Tile): void;
+    protected onTransformItem(item: Item, newType: ItemType, oldType: ItemType): void;
     protected onStack(manager: ItemManager, container: IContainer, type: ItemType): void;
     protected onUnstack(manager: ItemManager, container: IContainer, type: ItemType): void;
     protected onTick(): void;

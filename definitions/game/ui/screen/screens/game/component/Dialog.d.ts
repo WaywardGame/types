@@ -84,6 +84,7 @@ interface IDialogEvents extends Events<Component> {
     makeTopDialog(order: number): any;
     mouseEnter(): any;
     mouseLeave(): any;
+    setSubId(id: string, oldId: string): any;
 }
 export declare enum DialogClasses {
     Wrapper = "dialog-wrapper",
@@ -107,7 +108,7 @@ export declare enum DialogClasses {
     FooterContent = "dialog-footer-content"
 }
 declare abstract class Dialog extends Component implements IDialog {
-    readonly subId: string;
+    private _subId;
     private static topOrder;
     private static topDialog;
     static makeTopDialog(element: HTMLElement): void;
@@ -149,7 +150,9 @@ declare abstract class Dialog extends Component implements IDialog {
      * The description of how the dialog should be sized. (min, default, and max sizes and the position)
      */
     private description;
-    constructor(id: DialogId, subId?: string);
+    get subId(): string;
+    set subId(value: string);
+    constructor(id: DialogId, _subId?: string);
     addClasses(id: string | DialogId): void;
     tempHighlight(duration?: number): void;
     addScrollableWrapper(type?: "scroll" | "auto", initializer?: (wrapper: Component) => any): Component;

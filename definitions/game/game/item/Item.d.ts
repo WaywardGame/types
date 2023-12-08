@@ -80,6 +80,7 @@ export interface IItemEvents extends IEntityMovableEvents {
     decayChange(decay?: number, oldDecay?: number): any;
     addMagic(manager: MagicalPropertyManager): any;
     revertFromDoodad(doodad: Doodad): any;
+    becomeDoodad(doodad: Doodad): any;
 }
 export default class Item extends EntityMovable<IItemDescription, ItemType, ReferenceType.Item, ItemTag> implements Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, IHasInsulation, IHasMagic {
     get entityType(): EntityType.Item;
