@@ -53,7 +53,7 @@ export default class DialogSortFilter<SORT extends number | "custom"> extends Co
     private constructor();
     setSound(sound?: SfxType | SfxUi): this;
     setCustomSort(): void;
-    setSort(sort: SORT, direction?: SortDirection): void;
+    setSort(sort: SORT, direction?: SortDirection, triggerSelect?: boolean): void;
     refresh(): void;
     registerDataHost(id: string): this;
     private readonly activeReasons;
