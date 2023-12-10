@@ -12,7 +12,7 @@ import { Quality } from "@wayward/game/game/IObject";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type { IActionNotUsable, IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgumentCustom } from "@wayward/game/game/entity/action/argument/ActionArgumentCustom";
-import type { ItemType } from "@wayward/game/game/item/IItem";
+import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import Translation from "@wayward/game/language/Translation";
 export interface IMoveItemFilterArgument {

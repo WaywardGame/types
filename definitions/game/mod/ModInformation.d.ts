@@ -74,7 +74,7 @@ export declare class ModInformation {
     getIcon(): Promise<string | false | undefined>;
     getFileText(fileName: string): Promise<string | undefined>;
     get canPublish(): boolean;
-    canLoad(fromModsMenu?: boolean, count?: number): CanLoadState;
+    canLoad(fromModsMenu?: boolean, forMultiplayer?: boolean, count?: number): CanLoadState;
     save(): void;
     fillOutWorkshopMod(item?: IWorkshopItem): void;
     setState(state: ModState, force?: boolean, unloaded?: boolean): Promise<boolean>;
