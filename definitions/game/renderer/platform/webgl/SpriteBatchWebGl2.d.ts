@@ -15,7 +15,7 @@ import { SpriteBatchWebGlBase } from "@wayward/game/renderer/platform/webgl/Spri
  */
 export default class SpriteBatchWebGl2 extends SpriteBatchWebGlBase {
     protected readonly vertexArray: WebGLVertexArrayObject;
-    constructor(context: WebGlRendererContext, capacity: number, depthOffset: number, yOffset: number, enableAlphaMultiplcation: boolean, enforceBeginAndEnd: boolean);
+    constructor(context: WebGlRendererContext, capacity: number, depthOffset: number, yOffset: number, enableAlphaMultiplcation: boolean, enforceBeginAndEnd: boolean, roundToNearestPixel: boolean);
     setup(): void;
     delete(): void;
     bindBuffers(): void;
