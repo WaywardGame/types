@@ -88,7 +88,6 @@ export declare class Alignment implements IReadableAlignment {
      * A multiplier for the amount of evil that the player will receive tomorrow night. (IE delayed by one day.)
      */
     addNightlyEvilMultiplier(amount: number): this;
-    reduceNightlyEvilMultiplier(amount: number): this;
     applyNightly(): void;
     /**
      * - Clamp evil/good within proper ranges

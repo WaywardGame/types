@@ -115,12 +115,13 @@ export declare enum RenderSource {
     PlayerWalkToTilePathReset = 53,
     RendererReinitialize = 54,
     Resize = 55,
-    SetupGl = 56,
-    SpawnAnimationStart = 57,
-    StartGame = 58,
-    Steamworks = 59,
-    Thumbnail = 60,
-    WorldLayerRendererFlush = 61
+    Sacrifice = 56,
+    SetupGl = 57,
+    SpawnAnimationStart = 58,
+    StartGame = 59,
+    Steamworks = 60,
+    Thumbnail = 61,
+    WorldLayerRendererFlush = 62
 }
 export declare function calculateAmbientLightLevel(origin: IFieldOfViewOrigin, z: number): number;
 export declare const ZOOM_LEVEL_MIN = 1;

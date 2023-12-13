@@ -11,7 +11,7 @@
 import { ISacrifice } from "@wayward/game/game/deity/IDeities";
 import type Entity from "@wayward/game/game/entity/Entity";
 import { Action } from "@wayward/game/game/entity/action/Action";
-import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { type IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgumentCustom } from "@wayward/game/game/entity/action/argument/ActionArgumentCustom";
 import type Item from "@wayward/game/game/item/Item";
 export declare class SacrificeArgument extends ActionArgumentCustom<ISacrifice> {

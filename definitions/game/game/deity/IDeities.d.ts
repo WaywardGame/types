@@ -42,13 +42,17 @@ export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_RAMP_RANGE: IRange;
  */
 export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_RAMP_TIME = 50;
 /**
- * A multiplier for chance values that get added to the nightly evil multiplier.
+ * A multiplier for values that get added to the nightly evil multiplier.
  */
-export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_MULTIPLIER_CHANCE_VALUE_MULTIPLIER: number;
+export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_MULTIPLIER_CHANCE_VALUE_MULTIPLIER = 0.00075;
 /**
  * The chance of adding to the nightly evil multiplier.
  */
 export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_MULTIPLIER_CHANCE_VALUE_CHANCE: number;
+/**
+ * The maximum amount the ramp can be multiplied by the nightly evil multiplier.
+ */
+export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_MULTIPLIER_MAX_RAMP_MULTIPLIER = 2.5;
 export interface IReadableAlignment {
     /**
      * The current Deity aligned to.

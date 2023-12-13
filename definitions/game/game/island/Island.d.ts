@@ -14,7 +14,7 @@ import { TickFlag } from "@wayward/game/game/IGame";
 import { Quality } from "@wayward/game/game/IObject";
 import { TickHelper } from "@wayward/game/game/TickHelper";
 import type { BiomeTypes, IBiomeDescription } from "@wayward/game/game/biome/IBiome";
-import type { IReadableAlignment } from "@wayward/game/game/deity/IDeities";
+import { FerocityLevel, type IReadableAlignment } from "@wayward/game/game/deity/IDeities";
 import DoodadManager from "@wayward/game/game/doodad/DoodadManager";
 import Human from "@wayward/game/game/entity/Human";
 import type { StatusType } from "@wayward/game/game/entity/IEntity";
@@ -51,6 +51,7 @@ import Version from "@wayward/game/utilities/Version";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import { WorldZ } from "@wayward/utilities/game/WorldZ";
 import type { Random } from "@wayward/utilities/random/Random";
 import type { LegacySeededGenerator } from "@wayward/utilities/random/generators/LegacySeededGenerator";
 import type { PCGSeededGenerator } from "@wayward/utilities/random/generators/PCGSeededGenerator";
@@ -157,6 +158,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     get isActive(): boolean;
     get isDefaultIsland(): boolean;
     get isTransient(): boolean;
+    getFerocityLevel(z: WorldZ): FerocityLevel;
     getDetails(): IIslandDetails;
     /**
      * Activates the island.
