@@ -15,7 +15,7 @@ import { SkillType } from "@wayward/game/game/entity/IHuman";
 import type { IDamageInfo } from "@wayward/game/game/entity/creature/ICreature";
 import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
-import type { IMovementIntent, IPlayerEvents } from "@wayward/game/game/entity/player/IPlayer";
+import type { IMovementIntent, IPlayerEvents, PlayerTitle } from "@wayward/game/game/entity/player/IPlayer";
 import MessageManager from "@wayward/game/game/entity/player/MessageManager";
 import NoteManager from "@wayward/game/game/entity/player/note/NoteManager";
 import QuestManager from "@wayward/game/game/entity/player/quest/QuestManager";
@@ -50,13 +50,7 @@ export default class Player extends Human<number, ReferenceType.Player> implemen
     useActionsWhileMoving: boolean;
     revealedItems: SaferNumberIndexedObject<boolean>;
     milestoneModifiers: Set<Milestone>;
-    title?: {
-        milestone: Milestone;
-        skill?: undefined;
-    } | {
-        skill: SkillType;
-        milestone?: undefined;
-    };
+    title?: PlayerTitle;
     displayCreature?: CreatureType;
     private updateTablesOnNoInput?;
     private lastTableUpdateId?;

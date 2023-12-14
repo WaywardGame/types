@@ -16,6 +16,7 @@ import type { IModdable } from "@wayward/game/mod/ModRegistry";
 export interface ISkillLevel {
     bonus: number;
     core: number;
+    turn?: number;
 }
 export interface ISkillDescription extends IModdable {
     attribute?: Stat | ISkillAttribute;

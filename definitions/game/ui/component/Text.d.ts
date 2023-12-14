@@ -54,7 +54,7 @@ export default class Text extends Component {
      */
     hasText(): boolean;
     isEmpty(): boolean;
-    refresh(): this | undefined;
+    refresh(): this;
     dump(filter?: (element: HTMLElement, component?: Component) => boolean): this;
     private readonly refreshEvents;
     /**

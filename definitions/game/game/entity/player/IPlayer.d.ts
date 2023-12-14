@@ -8,20 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events } from "@wayward/utilities/event/EventEmitter";
-import type { TitleType } from "@wayward/game/game/entity/action/actions/SetTitle";
 import type Human from "@wayward/game/game/entity/Human";
 import type { HairColor, HairStyle, SkillType, SkinColor } from "@wayward/game/game/entity/IHuman";
+import type { TitleType } from "@wayward/game/game/entity/action/actions/SetTitle";
 import type { IMessage } from "@wayward/game/game/entity/player/IMessageManager";
 import type MessageManager from "@wayward/game/game/entity/player/MessageManager";
-import type { INote } from "@wayward/game/game/entity/player/note/NoteManager";
 import type Player from "@wayward/game/game/entity/player/Player";
+import type { INote } from "@wayward/game/game/entity/player/note/NoteManager";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type InterruptChoice from "@wayward/game/language/dictionary/InterruptChoice";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { Events } from "@wayward/utilities/event/EventEmitter";
 export interface IPlayerEvents extends Events<Human> {
     /**
      * Called when a message is being displayed for a player
@@ -217,3 +217,12 @@ export interface IWalkPath {
     path: IVector2[];
     force?: boolean;
 }
+export interface IPlayerTitleMilestone {
+    milestone: Milestone;
+    skill?: undefined;
+}
+export interface IPlayerTitleSkill {
+    skill: SkillType;
+    milestone?: undefined;
+}
+export type PlayerTitle = IPlayerTitleMilestone | IPlayerTitleSkill;

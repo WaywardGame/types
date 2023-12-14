@@ -36,6 +36,7 @@ export type SkillSet = Record<SkillType, ISkillLevel>;
 export interface ISkillHost extends EventEmitter.Host<ISkillEvents> {
     readonly id: number;
     readonly island: Island;
+    readonly turns: number;
 }
 export default class SkillManager {
     private readonly configuration;
@@ -70,6 +71,7 @@ export default class SkillManager {
      * @returns The total skill (combination of all other skills). Ignores skill bonuses.
      */
     getTotal(): number;
+    getModificationTurn(skill: SkillType): number;
     all(): Array<{
         bonus: number;
         core: number;

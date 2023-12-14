@@ -10,5 +10,6 @@
  */
 export declare enum SkillSort {
     Name = 0,
-    Level = 1
+    Level = 1,
+    Recent = 2
 }
