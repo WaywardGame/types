@@ -153,6 +153,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     lit?: ItemType;
     damageModifier?: number;
     equip?: EquipType;
+    equipCannotBeHidden?: true;
     /**
      * Set to true if this is a feet equip that should still allow humans to slip on tiles
      */
@@ -326,6 +327,8 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     displayItem?: SupplierOr<DisplayableItemType | undefined, [Item]>;
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
+    canUnequip?(item: Item): boolean | void;
+    canUnequipFree?: boolean;
     onContainerItemAdd?(container: Item & IContainer, items: Item[]): void;
     onContainerItemRemove?(container: Item & IContainer, items: Item[]): void;
     onCreate?(item: Item): void;

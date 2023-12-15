@@ -22,7 +22,14 @@ export declare enum Challenge {
     NoStartingItems = 8,
     StartingEvilAlignment = 9,
     GoodAlignmentRate = 10,
-    EvilAlignmentRate = 11
+    EvilAlignmentRate = 11,
+    BiomeWetlands = 12,
+    BiomeArid = 13,
+    BiomeIceCap = 14,
+    BiomeVolcanic = 15,
+    Cursed = 16,
+    Sunset = 17,
+    SlitherSucker = 18
 }
 export declare function isPermanentEffect(effect: StatusType, options: IGameOptionsPlayer): boolean;
 export declare function isEternal(time: number): (options?: IGameOptions) => boolean;

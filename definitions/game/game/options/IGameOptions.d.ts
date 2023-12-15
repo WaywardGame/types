@@ -32,6 +32,7 @@ export declare enum GameMode {
 }
 export declare const TIME_ETERNAL_NIGHT = 0.7;
 export declare const TIME_ETERNAL_DAY = 0.3;
+export declare const TIME_SUNSET = 0.625;
 export interface IGameOptions {
     /**
      * Whether players respawn when they die
@@ -215,6 +216,10 @@ export interface IGameOptionsPlayer {
         customs: DefaultMap<SkillType, IGameOptionsSkill>;
     };
     alignment: {
+        /**
+         * The initial days cursed
+         */
+        initialCurse: number;
         /**
          * A decimal number between 0 to 1 determining the starting evil alignment
          */

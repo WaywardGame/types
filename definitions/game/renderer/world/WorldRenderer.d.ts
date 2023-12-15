@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Island from "@wayward/game/game/island/Island";
@@ -28,10 +27,11 @@ import type TileAtlas from "@wayward/game/renderer/tile/atlas/TileAtlas";
 import type { IBounds } from "@wayward/game/renderer/world/IWorldRenderer";
 import { RenderFlag, SpriteBatchLayer } from "@wayward/game/renderer/world/IWorldRenderer";
 import { WorldLayerRenderer } from "@wayward/game/renderer/world/WorldLayerRenderer";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { IRendererContext } from "@wayward/game/renderer/context/IRendererContext";
+import type { IWorldRendererPlatform } from "@wayward/game/renderer/world/IWorldRendererPlatform";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
-import type { IWorldRendererPlatform } from "@wayward/game/renderer/world/IWorldRendererPlatform";
-import type { IRendererContext } from "@wayward/game/renderer/context/IRendererContext";
 export interface IWorldRendererEvents {
     /**
      * Called when calculating creatures in the viewport

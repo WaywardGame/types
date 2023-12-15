@@ -10,7 +10,7 @@
  */
 import type { ChallengeModifierInstance } from "@wayward/game/game/options/modifiers/challenge/ChallengeModifier";
 import ChallengeModifier from "@wayward/game/game/options/modifiers/challenge/ChallengeModifier";
-export default class EternalNight extends ChallengeModifier {
-    readonly weight = 0.25;
+export default class Sunset extends ChallengeModifier {
+    readonly weight = 0.5;
     initialize(instance: ChallengeModifierInstance): ChallengeModifierInstance;
 }

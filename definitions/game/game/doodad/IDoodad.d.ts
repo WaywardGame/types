@@ -119,9 +119,13 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      */
     pickUp?: ItemType[];
     /**
-     * Works with "Gather"-based actions.
+     * The "Chop" action works to pick up these doodads as well as "gather with hands".
      */
-    gatherPickUp?: ILootItem[];
+    chopPickUp?: ILootItem[];
+    /**
+     * The "Mine" action works to pick up these doodads as well as "gather with hands".
+     */
+    minePickUp?: ILootItem[];
     /**
      * If this is a doodad container, you can set this to true to make the doodad considered one where you can only "place items onto" the doodad,
      * rather than storing the items within the doodad.
