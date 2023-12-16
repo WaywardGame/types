@@ -42,6 +42,11 @@ declare namespace Enums {
      */
     function getLength(enumObject: any): number;
     /**
+     * Returns the largest enum value in this enum.
+     * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
+     */
+    function getLargestValue(enumObject: any): number;
+    /**
      * Returns a random enum entry.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
      * @param random The random instance to use. **Defaults to seeded random.** Note that using this method in non-game locations may

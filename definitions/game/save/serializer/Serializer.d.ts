@@ -58,13 +58,6 @@ export default class Serializer implements ISerializer {
     writeMap(value: Map<any, any>, chain?: string[]): void;
     writeSet(value: Set<any>, chain?: string[]): void;
     private determineSerializationProperties;
-    private isInteger;
-    private isByteSigned;
-    private isByteUnsigned;
-    private isShortSigned;
-    private isShortUnsigned;
-    private isIntegerSigned;
-    private isIntegerUnsigned;
     private setupJitDeserialization;
     private incrementTypesStats;
 }

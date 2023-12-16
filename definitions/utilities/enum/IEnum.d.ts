@@ -15,6 +15,7 @@ export declare namespace EnumProperty {
     const EXCLUDED: unique symbol;
     const KEYS: unique symbol;
     const VALUES: unique symbol;
+    const LARGESTVALUE: unique symbol;
     const ENTRIES: unique symbol;
     const DEPENDANTS: unique symbol;
     const COMPUTE: unique symbol;
@@ -26,6 +27,7 @@ export type EnumObject<T> = T & {
     [EnumProperty.EXCLUDED]?: ReadonlySet<keyof T>;
     [EnumProperty.KEYS]?: ReadonlyArray<keyof T>;
     [EnumProperty.VALUES]?: ReadonlyArray<Exclude<T[keyof T], AnyFunction>>;
+    [EnumProperty.LARGESTVALUE]?: number;
     [EnumProperty.ENTRIES]?: ReadonlyArray<[keyof T, Exclude<T[keyof T], AnyFunction>]>;
     [EnumProperty.DEPENDANTS]?: Set<WeakRef<any>>;
     [EnumProperty.COMPUTE]?(): void;

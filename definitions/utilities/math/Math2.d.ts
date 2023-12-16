@@ -190,5 +190,12 @@ declare namespace Math2 {
         every(predicate: (type: FLAG_TYPE) => any): boolean;
         some(predicate: (type: FLAG_TYPE) => any): boolean;
     }
+    function isInteger(nVal: number): boolean;
+    function isByteSigned(num: number): boolean;
+    function isByteUnsigned(num: number): boolean;
+    function isShortSigned(num: number): boolean;
+    function isShortUnsigned(num: number): boolean;
+    function isIntegerSigned(num: number): boolean;
+    function isIntegerUnsigned(num: number): boolean;
 }
 export default Math2;
