@@ -25,7 +25,8 @@ export declare enum ContainerBucketItemListClasses {
     Main = "container-bucket-item-list",
     Anchored = "container-bucket-item-list-anchored",
     Active = "container-bucket-item-list-active",
-    ActualTransferDestination = "container-bucket-item-list-actual-transfer-destination"
+    ActualTransferDestination = "container-bucket-item-list-actual-transfer-destination",
+    HasStackExpanded = "container-bucket-item-list-has-stack-expanded"
 }
 export interface IContainerBucketItemListTransferDetails {
     fromList?: ContainerBucketItemList;
@@ -100,8 +101,6 @@ export default class ContainerBucketItemList extends Component implements ISorta
     onItemToggleStacked(): boolean;
     private openStack;
     onItemToggleStackOpen(): boolean;
-    private closeTimeout?;
-    protected onMouseMove(): void;
     private closeStack;
     private stack;
     private unstack;

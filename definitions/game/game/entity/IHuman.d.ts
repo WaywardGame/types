@@ -87,6 +87,12 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      */
     unequip?(item: Item, slot: EquipType): any;
     /**
+     * Called when the human fails to unequip an item from a slot
+     * @param item The item being unequipped
+     * @param slot The slot
+     */
+    unequipFailed?(item: Item, slot: EquipType): any;
+    /**
      * Called when the human faces a different direction
      * @param direction The direction the player is now facing
      */

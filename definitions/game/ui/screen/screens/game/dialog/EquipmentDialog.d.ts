@@ -29,7 +29,7 @@ export declare enum EquipmentClasses {
     SlotsWrapper = "game-dialog-equipment-slots-wrapper"
 }
 export declare namespace EquipmentClasses {
-    const SlotType: (enumValue: EquipType) => "game-dialog-equipment-slot-none" | "game-dialog-equipment-slot-head" | "game-dialog-equipment-slot-dualwield" | "game-dialog-equipment-slot-held" | "game-dialog-equipment-slot-legs" | "game-dialog-equipment-slot-chest" | "game-dialog-equipment-slot-waist" | "game-dialog-equipment-slot-feet" | "game-dialog-equipment-slot-neck" | "game-dialog-equipment-slot-hands" | "game-dialog-equipment-slot-back" | "game-dialog-equipment-slot-mainhand" | "game-dialog-equipment-slot-offhand";
+    const SlotType: (enumValue: EquipType) => "game-dialog-equipment-slot-none" | "game-dialog-equipment-slot-head" | "game-dialog-equipment-slot-back" | "game-dialog-equipment-slot-waist" | "game-dialog-equipment-slot-chest" | "game-dialog-equipment-slot-feet" | "game-dialog-equipment-slot-hands" | "game-dialog-equipment-slot-held" | "game-dialog-equipment-slot-legs" | "game-dialog-equipment-slot-neck" | "game-dialog-equipment-slot-dualwield" | "game-dialog-equipment-slot-mainhand" | "game-dialog-equipment-slot-offhand";
 }
 export default class EquipmentDialog extends Dialog {
     readonly slots: Component<HTMLElement>;

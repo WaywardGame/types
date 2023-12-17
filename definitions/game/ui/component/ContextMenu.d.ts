@@ -121,5 +121,5 @@ export declare class ContextMenuOption extends Button implements IDraggableCompo
     hideAndRemove(): Promise<void>;
     onSelected(): void;
     onUnselected(): void;
-    protected showSubmenu(generator: () => ContextMenu): void;
+    protected showSubmenu(generator: () => ContextMenu | undefined): void;
 }

@@ -10,13 +10,14 @@
  */
 import type { SfxType } from "@wayward/game/audio/IAudio";
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { IEntityWithStatsEvents } from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
 import type { DamageType, Defense, EntityType, ICausesStatusEffect, IStatChangeInfo, MoveType, SlippingSpeed } from "@wayward/game/game/entity/IEntity";
 import { AiType } from "@wayward/game/game/entity/IEntity";
 import type { IStat } from "@wayward/game/game/entity/IStats";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { IPackedMessage } from "@wayward/game/game/entity/player/IMessageManager";
 import type StatusEffect from "@wayward/game/game/entity/status/StatusEffect";
 import type { ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
@@ -25,16 +26,15 @@ import type { LootGroupType } from "@wayward/game/game/item/LootGroups";
 import type { ITemperatureDescription } from "@wayward/game/game/temperature/ITemperature";
 import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
-import type { WorldZ } from "@wayward/utilities/game/WorldZ";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import type Translation from "@wayward/game/language/Translation";
 import type Message from "@wayward/game/language/dictionary/Message";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-import type Translation from "@wayward/game/language/Translation";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type { StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
 import type { IRGB } from "@wayward/utilities/Color";
+import type { WorldZ } from "@wayward/utilities/game/WorldZ";
 import type { IRange } from "@wayward/utilities/math/Range";
-import type { RuneChance } from "@wayward/game/game/deity/IDeities";
-import type TileEvent from "@wayward/game/game/tile/TileEvent";
 export declare enum CreatureType {
     Slime = 0,
     JellyCube = 1,
@@ -327,6 +327,7 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      * When a flying MoveType is set, by default, a shadow will appear under the creature, this will disable that feature when set to true;
      */
     noShadow?: boolean;
+    noSpringForthMessage?: true;
 }
 export interface ICreatureSpawn {
     /**
