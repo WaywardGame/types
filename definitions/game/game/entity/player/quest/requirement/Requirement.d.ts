@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events } from "@wayward/utilities/event/EventEmitter";
+import type { GameEmitterOrBus, GameEvent, GameEventHandler } from "@wayward/game/event/EventManager";
+import type { IPlayerEvents } from "@wayward/game/game/entity/player/IPlayer";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IQuestRequirementApi } from "@wayward/game/game/entity/player/quest/requirement/IRequirement";
 import Translation from "@wayward/game/language/Translation";
-import type { HighlightSelector } from "@wayward/game/ui/util/IHighlight";
-import type { GameEmitterOrBus, GameEvent, GameEventHandler } from "@wayward/game/event/EventManager";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { HighlightSelector } from "@wayward/game/ui/util/IHighlight";
 import type Stream from "@wayward/goodstream";
-import type { IPlayerEvents } from "@wayward/game/game/entity/player/IPlayer";
+import type { Events } from "@wayward/utilities/event/EventEmitter";
 export type QuestRequirementApi<R extends QuestRequirement<any, any>> = R extends QuestRequirement<infer O, infer D> ? IQuestRequirementApi<O, D> : never;
 export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> {
     readonly defaultData: D;

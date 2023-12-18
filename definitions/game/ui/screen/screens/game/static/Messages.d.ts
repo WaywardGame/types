@@ -24,11 +24,13 @@ import type { IFilters } from "@wayward/game/ui/screen/screens/game/IMessages";
 import { MessageFilterDefault } from "@wayward/game/ui/screen/screens/game/IMessages";
 import { Quadrant } from "@wayward/game/ui/screen/screens/game/component/IQuadrantComponent";
 import QuadrantComponent from "@wayward/game/ui/screen/screens/game/component/QuadrantComponent";
+import QuestDialog from "@wayward/game/ui/screen/screens/game/dialog/QuestDialog";
 import Stream from "@wayward/goodstream/Stream";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 interface IMessagesEvents extends Events<QuadrantComponent> {
     pinQuestRequirement(pin: IPinnedMessage): any;
     unpinQuestRequirement(pin: IPinnedMessage): any;
+    questShown(quest: QuestInstance): any;
 }
 export declare enum MessagesClasses {
     Main = "game-messages",
@@ -55,6 +57,7 @@ export default class Messages extends QuadrantComponent {
     private readonly pinnedNotes;
     private readonly seenNotes;
     private readonly pinnedQuestRequirements;
+    private readonly pinnedNextQuests;
     private readonly messagesToDisplay;
     private readonly chatSentHistory;
     private chatHistoryIndex;
@@ -80,6 +83,7 @@ export default class Messages extends QuadrantComponent {
     onDisplayMessage(player: Player, message: IMessage): void;
     onWrittenNote(player: Player, id: number): void;
     onReadNote(player: Player, id: number): void;
+    protected onShowQuest(dialog: QuestDialog, quest: QuestInstance): void;
     onFocusChat(): boolean;
     getDefaultFilterName(filter: MessageFilterDefault): string;
     private boundScreenEvents;
@@ -99,7 +103,9 @@ export default class Messages extends QuadrantComponent {
     private addPinnedQuestRequirement;
     private onQuestGet;
     private onRequirementComplete;
-    private pinRequirementsFromQuest;
+    private onQuestComplete;
+    private addPinnedNextQuest;
+    pinRequirementsFromQuest(quest: QuestInstance): void;
     private hasIncompletePinnedRequirementFromAnotherQuest;
     private showOptions;
     private scheduleShowMessage;
@@ -136,9 +142,13 @@ export default class Messages extends QuadrantComponent {
     private onFiltersEdited;
     private onFiltersReset;
 }
+export interface PinnedMessageEvents extends Events<Button> {
+    unpinning(): any;
+}
 export declare class PinnedMessage extends Button {
     readonly type: PinType;
     readonly id: any;
+    event: IEventEmitter<this, PinnedMessageEvents>;
     constructor(type: PinType, id: any);
 }
 export {};

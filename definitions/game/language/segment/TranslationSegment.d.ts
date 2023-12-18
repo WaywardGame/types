@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Dictionary from "@wayward/game/language/Dictionary";
-import type { Random } from "@wayward/utilities/random/Random";
 import type { ISegment, ISegmentApi, IStringSection } from "@wayward/game/utilities/string/Interpolator";
+import type { Random } from "@wayward/utilities/random/Random";
 declare namespace TranslationSegment {
     const include: ISegment;
     const thisEntry: ISegment & {

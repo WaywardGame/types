@@ -40,19 +40,7 @@ export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_RAMP_RANGE: IRange;
 /**
  * The number of days it takes for nightly evil alignment to fully ramp up.
  */
-export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_RAMP_TIME = 50;
-/**
- * A multiplier for values that get added to the nightly evil multiplier.
- */
-export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_MULTIPLIER_CHANCE_VALUE_MULTIPLIER = 0.00075;
-/**
- * The chance of adding to the nightly evil multiplier.
- */
-export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_MULTIPLIER_CHANCE_VALUE_CHANCE: number;
-/**
- * The maximum amount the ramp can be multiplied by the nightly evil multiplier.
- */
-export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_MULTIPLIER_MAX_RAMP_MULTIPLIER = 2.5;
+export declare const DEITY_ALIGNMENT_EVIL_NIGHTLY_RAMP_TIME = 20;
 export interface IReadableAlignment {
     /**
      * The current Deity aligned to.
@@ -91,10 +79,6 @@ export interface IReadableAlignment {
      * The number of days since the last invocation/sacrifice.
      */
     readonly cursed: number;
-    /**
-     * Modifies the alignment gained based on the trend of actions the player did over the course of the day.
-     */
-    readonly nightlyEvilMultiplier: number;
 }
 export declare const DEITY_ALIGNMENT_DEFAULT_CAP = 64000;
 export declare namespace IReadableAlignment {

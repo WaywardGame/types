@@ -12,6 +12,7 @@ import type { WebGpuRendererContext } from "@wayward/game/renderer/platform/webg
 import type { ISpriteBatch } from "@wayward/game/renderer/spriteBatch/ISpriteBatch";
 export declare class SpriteBatchWebGpu implements ISpriteBatch {
     private readonly context;
+    readonly id: string;
     capacity: number;
     private readonly enforceBeginAndEnd;
     private pipeline;
@@ -23,7 +24,7 @@ export declare class SpriteBatchWebGpu implements ISpriteBatch {
     private readonly indexBuffer;
     private begun;
     private spriteCount;
-    constructor(context: WebGpuRendererContext, capacity: number, depthOffset: number, yOffset: number, enableAlphaMultiplcation: boolean, enforceBeginAndEnd: boolean);
+    constructor(context: WebGpuRendererContext, id: string, capacity: number, depthOffset: number, yOffset: number, enableAlphaMultiplcation: boolean, enforceBeginAndEnd: boolean);
     private initializePipeline;
     delete(): void;
     begin(): void;

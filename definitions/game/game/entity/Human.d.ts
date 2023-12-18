@@ -284,7 +284,7 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
      * Unequips an item.
      * Note: This is safe to call even if the item isn't equipped. it'll do nothing in that case.
      */
-    unequip(item: Item, internal?: boolean, skipMessage?: boolean, skipRevertItem?: boolean, isArmorStandSwap?: boolean): void;
+    unequip(item: Item, internal?: boolean, skipMessage?: boolean, skipRevertItem?: boolean, isArmorStandSwap?: boolean): boolean;
     private updateOffHandState;
     /**
      * Unequip all equipment

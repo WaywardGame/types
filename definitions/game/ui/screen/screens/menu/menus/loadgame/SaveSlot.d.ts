@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import type { IGameOptions } from "@wayward/game/game/options/IGameOptions";
 import { GameMode } from "@wayward/game/game/options/IGameOptions";
 import type { AnyPropertyToSerialize } from "@wayward/game/save/serializer/PropertiesToSerialize";
 import InputButton from "@wayward/game/ui/component/InputButton";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface SaveSlotData {
     slot: number;
     score: number;

@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { IPromptDescriptionBase, PromptDescriptionArgs, PromptResult } from "@wayward/game/game/meta/prompt/IPrompt";
 import { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IPrompt<PROMPT extends IPromptDescriptionBase<any[]>> extends PromiseLike<PromptResult<PROMPT>> {
     type?: Prompt;
     priority?: number;

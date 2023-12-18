@@ -23,7 +23,8 @@ export declare enum QuadrantComponentId {
 export declare enum PinType {
     Note = 0,
     QuestRequirement = 1,
-    Misc = 2
+    Misc = 2,
+    NextQuest = 3
 }
 export declare enum MessageTimestamp {
     None = 0,

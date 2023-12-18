@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { Game } from "@wayward/game/game/Game";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { ISaveImportSuccess, ISaveInfo, ISaveManagerEvents, ISaveObject, SaveImportResult } from "@wayward/game/save/ISaveManager";
@@ -19,6 +18,7 @@ import type { AnyPropertyToSerialize } from "@wayward/game/save/serializer/Prope
 import Files from "@wayward/game/utilities/Files";
 import type { IVersionInfo } from "@wayward/game/utilities/Version";
 import type { IWaywardPreload } from "@wayward/hosts/shared/interfaces";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
     readonly game: Game;
     lastLoadedVersion: IVersionInfo;

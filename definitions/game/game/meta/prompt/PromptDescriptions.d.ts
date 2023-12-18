@@ -58,6 +58,7 @@ export declare const promptGameIslandTravelConfirmation: import("@wayward/game/g
 export declare const promptGameWellConvert: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[waterName: Text]>;
 export declare const promptGameSolarStillWontWorkInTemperature: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[dripstoneOrSolarStill: Text]>;
 export declare const promptGameSolarStillWontWorkInCave: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
+export declare const promptGameQuestConfirmSkip: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGamePause: import("@wayward/game/game/meta/prompt/IPrompt").IPromptMenuDescription<MenuId.Pause, []>;
 export declare const promptGameWin: import("@wayward/game/game/meta/prompt/IPrompt").IPromptMenuDescription<MenuId.GameEnd, []>;
 export declare const promptGameOver: import("@wayward/game/game/meta/prompt/IPrompt").IPromptMenuDescription<MenuId.GameEnd, []>;

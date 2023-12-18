@@ -206,7 +206,7 @@ export declare class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
      */
     private renderStatusEffect;
     private spriteBatchForLayer;
-    addTileToViewport(visibleTiles: Set<Tile>, tile: Tile, itemBatch: ISpriteBatch | undefined): void;
+    addTileToViewport(timeStamp: number, visibleTiles: Set<Tile>, tile: Tile, itemBatch: ISpriteBatch | undefined): void;
     /**
      * Computes sprites in the viewport
      * @returns True when there's more rendering to be done

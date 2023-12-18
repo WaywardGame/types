@@ -8,10 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { QuestInstance } from "@wayward/game/game/entity/player/quest/QuestManager";
 import Bindable from "@wayward/game/ui/input/Bindable";
 import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
 import { MenuBarButtonType } from "@wayward/game/ui/screen/screens/game/static/menubar/IMenuBarButton";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export interface QuestDialogEvents extends Events<Dialog> {
+    showQuest(quest: QuestInstance): any;
+}
 export default class QuestDialog extends Dialog {
+    readonly event: IEventEmitter<this, QuestDialogEvents>;
     private readonly questsActiveWrapper;
     private readonly questsActiveHeading;
     private readonly questsCompletedWrapper;

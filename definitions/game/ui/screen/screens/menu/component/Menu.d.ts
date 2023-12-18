@@ -55,6 +55,7 @@ export default class Menu extends Component {
     setSectionsForcedOpen(forcedOpen?: boolean): this;
     scrollToTop(): void;
     scrollToTabSection(tabId: string | number): this;
+    getTab<TAB extends Tab = Tab>(tabId: string | number): TAB | undefined;
     clearTabs(): void;
     addTabs(...tabs: ArrayOfIterablesOr<Tab>): void;
     getTabs(): Tab[];

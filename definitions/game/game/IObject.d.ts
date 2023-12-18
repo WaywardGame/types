@@ -37,6 +37,13 @@ export interface IObjectDescription extends IHasImagePath {
      */
     preservationChance?: number;
     spawnOnWorldGen?: OptionalDescriptions<BiomeType, OptionalDescriptions<WorldZ, OptionalDescriptions<TerrainType, number>>>;
+    /**
+     * If this is a doodad/item container, you can set this to true to make the doodad/item considered one where you can only "place items onto" the doodad/item, rather than storing the items within the doodad/item.
+     * - Changes messages when putting items in the container to "placed onto" via `placedOnToMessage`
+     * - Prevents using the item as a container when in your inventory via `preventUsingItemAsContainerInInventory`
+     * - Prevents picking up the doodad when items are inside via `preventPickingUpDoodadWhenItemsAreInside`
+     */
+    containerOptions?: IContainerOptions;
 }
 export interface IHasImagePath<ImagePathType = string> {
     /**
@@ -61,4 +68,9 @@ export declare enum Quality {
     Exceptional = 4,
     Mastercrafted = 5,
     Relic = 6
+}
+export interface IContainerOptions {
+    placedOnToMessage?: boolean;
+    preventUsingItemAsContainerInInventory?: boolean;
+    preventPickingUpDoodadWhenItemsAreInside?: boolean;
 }

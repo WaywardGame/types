@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IMovementTime } from "@wayward/game/game/IGame";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type { Delay, MovingState, SkillType } from "@wayward/game/game/entity/IHuman";
 import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
-import type { IMovementTime } from "@wayward/game/game/IGame";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 export interface IEntityEvents {
     /**

@@ -21,7 +21,6 @@ interface AlignmentDetails {
     lastEvil: number;
     lastGood: number;
     cursed: number;
-    nightlyEvilMultiplier: number;
 }
 export default class AlignmentManager {
     private readonly alignment;
@@ -32,7 +31,7 @@ export default class AlignmentManager {
 }
 export declare class Alignment implements IReadableAlignment {
     private readonly alignment;
-    static calculateNightlyEvilAlignment(human?: Human, modifier?: number): number;
+    static calculateNightlyEvilAlignment(human?: Human): number;
     private static calculateRampFraction;
     private readonly humanRef;
     private get human();
@@ -79,15 +78,6 @@ export declare class Alignment implements IReadableAlignment {
     get cursed(): number;
     get invoked(): boolean;
     setInvoked(): void;
-    /**
-     * A multiplier for the amount of evil that the player will receive tomorrow night. (IE delayed by one day.)
-     */
-    get nightlyEvilMultiplier(): number;
-    get atMaxRamp(): boolean;
-    /**
-     * A multiplier for the amount of evil that the player will receive tomorrow night. (IE delayed by one day.)
-     */
-    addNightlyEvilMultiplier(amount: number): this;
     applyNightly(): void;
     /**
      * - Clamp evil/good within proper ranges

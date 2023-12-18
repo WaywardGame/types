@@ -126,14 +126,6 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      * The "Mine" action works to pick up these doodads as well as "gather with hands".
      */
     minePickUp?: ILootItem[];
-    /**
-     * If this is a doodad container, you can set this to true to make the doodad considered one where you can only "place items onto" the doodad,
-     * rather than storing the items within the doodad.
-     * - Changes messages when putting items in the container to "placed onto" via `placedOnToMessage`
-     * - Prevents using the item as a container when in your inventory via `preventUsingItemAsContainerInInventory`
-     * - Prevents picking up the doodad when items are inside via `preventPickingUpDoodadWhenItemsAreInside`
-     */
-    containerOptions?: IContainerOptions;
     providesFire?: boolean;
     providesLight?: number;
     reduceDurabilityOnGather?: boolean;
@@ -524,10 +516,5 @@ export interface IHasBuilder {
 export interface IHasWater {
     top?: true;
     bottom?: true;
-}
-export interface IContainerOptions {
-    placedOnToMessage?: boolean;
-    preventUsingItemAsContainerInInventory?: boolean;
-    preventPickingUpDoodadWhenItemsAreInside?: boolean;
 }
 export {};

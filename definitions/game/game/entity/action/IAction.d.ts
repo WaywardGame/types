@@ -388,20 +388,21 @@ export declare enum ActionArgument {
     ItemArray = 17,
     ItemArrayInventory = 18,
     ItemArrayNearby = 19,
-    ItemInventory = 20,
-    ItemNearby = 21,
-    ItemNearbyIncludingTradeContainer = 22,
-    NPC = 23,
-    NPCNearby = 24,
-    OptionalItemArrayNearby = 25,
-    Player = 26,
-    Tile = 27,
-    TileArray = 28,
-    TileEvent = 29,
-    UnsignedInteger32NumberArray = 30,
-    Vector2 = 31,
-    Vector2Array = 32,
-    Vector3 = 33
+    ItemArrayNearbyIncludingTradeContainer = 20,
+    ItemInventory = 21,
+    ItemNearby = 22,
+    ItemNearbyIncludingTradeContainer = 23,
+    NPC = 24,
+    NPCNearby = 25,
+    OptionalItemArrayNearby = 26,
+    Player = 27,
+    Tile = 28,
+    TileArray = 29,
+    TileEvent = 30,
+    UnsignedInteger32NumberArray = 31,
+    Vector2 = 32,
+    Vector2Array = 33,
+    Vector3 = 34
 }
 export declare namespace ActionArgument {
     /**
@@ -445,6 +446,7 @@ export interface IActionArgumentTypeMap {
     [ActionArgument.ItemArray]: Item[];
     [ActionArgument.ItemArrayInventory]: Item[];
     [ActionArgument.ItemArrayNearby]: Item[];
+    [ActionArgument.ItemArrayNearbyIncludingTradeContainer]: Item[];
     [ActionArgument.ItemInventory]: Item;
     [ActionArgument.ItemNearby]: Item;
     [ActionArgument.ItemNearbyIncludingTradeContainer]: Item;

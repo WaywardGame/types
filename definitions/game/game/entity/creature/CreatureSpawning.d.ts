@@ -9,11 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import { StatusType } from "@wayward/game/game/entity/IEntity";
 import type { ICreatureDescription } from "@wayward/game/game/entity/creature/ICreature";
 import { CreatureType, SpawnGroup } from "@wayward/game/game/entity/creature/ICreature";
 import type TimeManager from "@wayward/game/game/time/TimeManager";
 import type { Random } from "@wayward/utilities/random/Random";
-import { StatusType } from "@wayward/game/game/entity/IEntity";
 export interface ISpawnContext {
     biome: BiomeType;
     z?: number;

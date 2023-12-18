@@ -20,12 +20,12 @@ export declare const colorLengthPerSprite = 4;
  */
 export declare abstract class SpriteBatchWebGlBase implements ISpriteBatch {
     protected readonly context: WebGlRendererContext;
+    readonly id: string;
     readonly capacity: number;
     protected readonly depthOffset: number;
     protected readonly yRenderOffset: number;
     protected readonly enableAlphaMultiplcation: boolean;
     protected readonly enforceBeginAndEnd: boolean;
-    protected readonly roundToNearestPixel: boolean;
     protected readonly shaderProgram: WebGlCompiledProgram;
     texSprites: WebGLTexture | undefined;
     inverseSpriteTextureSize: Vector2 | undefined;
@@ -36,9 +36,10 @@ export declare abstract class SpriteBatchWebGlBase implements ISpriteBatch {
     protected readonly colorBuffer: WebGLBuffer;
     protected colorArray: Uint8Array;
     protected begun: boolean;
+    protected requiresSubpixels: boolean;
     protected _setup: boolean;
     static initializePrograms(webGlContext: WebGlContext): Promise<void>;
-    constructor(context: WebGlRendererContext, capacity: number, depthOffset: number, yRenderOffset: number, enableAlphaMultiplcation: boolean, enforceBeginAndEnd: boolean, roundToNearestPixel: boolean);
+    constructor(context: WebGlRendererContext, id: string, capacity: number, depthOffset: number, yRenderOffset: number, enableAlphaMultiplcation: boolean, enforceBeginAndEnd: boolean);
     abstract setup(): void;
     protected abstract bindBuffers(): void;
     abstract render(x: number, y: number, tileScale: number, viewportWidth: number, viewportHeight: number): void;

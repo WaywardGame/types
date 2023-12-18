@@ -36,8 +36,8 @@ export interface IRendererContext {
     createWorldRenderer(worldRenderer: WorldRenderer): IWorldRendererPlatform;
     createWorldLayerRenderer(worldLayerRenderer: WorldLayerRenderer): IWorldLayerRendererPlatform;
     createParticleRenderer(maxParticles: number, positionSizeData: Float32Array, colorData: Uint8Array): IParticleRendererPlatform;
-    createSpriteBatch(capacity: number, depthOffset?: number, yOffset?: number, enableAlphaMultiplcation?: boolean, enforceBeginAndEnd?: boolean, roundToNearestPixel?: boolean): ISpriteBatch;
-    createPersistantSpriteBatch(depthOffset?: number, yOffset?: number, enableAlphaMultiplcation?: boolean): PersistantSpriteBatch;
+    createSpriteBatch(id: string, capacity: number, depthOffset?: number, yOffset?: number, enableAlphaMultiplcation?: boolean, enforceBeginAndEnd?: boolean): ISpriteBatch;
+    createPersistantSpriteBatch(id: string, depthOffset?: number, yOffset?: number, enableAlphaMultiplcation?: boolean): PersistantSpriteBatch;
     prepareViewportRender(viewportOffsetX: number, rendererWidth: number, canvasHeight: number, post?: boolean): void;
     render(timeStamp: number, renderersOrder: Set<Renderer>): void;
 }
