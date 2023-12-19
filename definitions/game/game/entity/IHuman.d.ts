@@ -16,6 +16,7 @@ import type Human from "@wayward/game/game/entity/Human";
 import type { AttackType, DamageType } from "@wayward/game/game/entity/IEntity";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { CreatureType, IDamageInfo } from "@wayward/game/game/entity/creature/ICreature";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type { IMovementIntent, WeightStatus } from "@wayward/game/game/entity/player/IPlayer";
 import type { ISkillEvents } from "@wayward/game/game/entity/skill/SkillManager";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
@@ -147,13 +148,11 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
     getMaxWeight(maxWeight: number): number;
     /**
      * Called when input is being processed on the server
-     * @param player The player object
      * @returns False to prevent input processing or undefined to use the default logic
      */
     processInput(): false | undefined;
     /**
      * Called when movement is attempted on the server
-     * @param player The player object
      * @param direction The direction to move
      * @returns False to prevent movement or undefined to use the default logic
      */
@@ -288,6 +287,13 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
     getLuckMultiplier(multiplier: number): number;
     discoverRecipes(recipes: Array<[recipeType: ItemType, crafted: ICrafted]>): any;
     undiscoverRecipes(): any;
+    /**
+     * Called when a human tries to interact with an NPC
+     * @param npc The NPC to interact with
+     * @param interactType The interaction type
+     * @returns True if the human can interact, false if the human cannot interact, or undefined to use the default logic
+     */
+    canInteract(npc: NPC, interactType: number | undefined): boolean | undefined;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;
