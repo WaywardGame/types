@@ -35,6 +35,7 @@ import type { IRGB } from "@wayward/utilities/Color";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
+import type { Direction } from "@wayward/game/utilities/math/Direction";
 export interface ICanSailAwayResult {
     canSailAway: boolean;
     message?: Message;
@@ -241,7 +242,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Checks if this tile can be used for sailing.
      * Ensures it's connected to the edge of the map.
      */
-    canSailAwayFrom(): ICanSailAwayResult;
+    canSailAwayFrom(entity: EntityMovable | undefined): ICanSailAwayResult;
     /**
      * Used to spawn a random item on the current biome type based on spawnOnWorldGen properties in item descriptions.
      * @param terrainType Optional terrain type for overriding the biome item types
@@ -347,10 +348,19 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     isSuitableSpawnPointTileForIslandTravel(ensureConnectedToOcean: boolean): boolean;
     /**
      * Checks things can slip on this tile
+     * @param isClientSide When true, it will assume puddles do not cause slipping
      */
-    canSlip(entity: EntityMovable | undefined): boolean;
+    canSlip(entity: EntityMovable | undefined, isClientSide?: boolean): boolean;
     isAdjacent(otherTile: Tile): boolean;
     isAround(otherTile: Tile): boolean;
+    /**
+     * Gets the direction from this tile to the target tile
+     */
+    getDirectionToTile(tile: Tile): Direction;
+    /**
+     * Gets the adjacent tile in the direction
+     */
+    getTileInDirection(direction: Direction): Tile | undefined;
     getVariation(noTileDataOffset?: boolean): number;
     tilesInRange(range: number, includeCurrentTile?: boolean): Tile[];
     openTileInRange(range: number, includeCurrentTile?: boolean): Tile | undefined;
@@ -371,7 +381,16 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
         maxTilesChecked?: number;
         canVisitTile?: (tile: Tile) => boolean;
     }): Tile[];
-    findPath(target: Tile, isTileBlocked: (tile: Tile) => boolean, getTilePenalty?: (tile: Tile) => number, maxNodesChecked?: number): Tile[] | undefined;
+    /**
+     * A* path finding
+     * @param entity The entity moving
+     * @param target The target tile to move to
+     * @param isTileBlocked Function for determining if the entity can move onto the tile
+     * @param getTilePenalty Function for determining the tile penalty
+     * @param maxNodesChecked Maximum number of nodes to pathfind though
+     * @returns Tile path or undefined if no path is available
+     */
+    findPath(entity: EntityMovable | undefined, target: Tile, isTileBlocked: (tile: Tile) => boolean, getTilePenalty?: (tile: Tile) => number, maxNodesChecked?: number): Tile[] | undefined;
     /**
      * Returns whether the tile is blocked (completely impassible) for the human
      */

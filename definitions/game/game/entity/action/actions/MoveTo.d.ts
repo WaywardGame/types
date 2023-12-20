@@ -14,8 +14,8 @@ import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionApi } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import { Direction } from "@wayward/game/utilities/math/Direction";
-declare const _default: Action<[ActionArgument.Vector2, [ActionArgument.Direction, ActionArgument.Undefined]], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
+declare const _default: Action<[ActionArgument.Vector2, [ActionArgument.Direction, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
     usable: true;
-}, [import("../../../../utilities/math/IVector").IVector2, (Direction.None | Direction.East | Direction.North | Direction.West | Direction.South | undefined)?]>;
+}, [import("../../../../utilities/math/IVector").IVector2, (Direction.None | Direction.East | Direction.North | Direction.West | Direction.South | undefined)?, (boolean | undefined)?]>;
 export default _default;
 export declare function blockMove(action: IActionApi<Human>, delay?: Delay): void;

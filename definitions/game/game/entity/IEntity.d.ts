@@ -313,6 +313,7 @@ export interface IMoveToOptions {
      */
     toX?: number;
     toY?: number;
+    skipExtinguishTorches?: boolean;
 }
 export declare enum MoveAnimation {
     Normal = 0,

@@ -9,6 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 declare namespace AStar {
-    function findPath<T>(start: T, end: T, getConnections: (node: T) => T[], getDistance: (node1: T, node2: T) => number, isNodeBlocked?: (node: T) => boolean, getNodePenalty?: (node: T) => number, maxNodesChecked?: number): T[] | undefined;
+    function findPath<T>(start: T, end: T, getConnections: (node: T) => Array<T | undefined>, getDistance: (node1: T, node2: T) => number, isNodeBlocked?: (node: T) => boolean, getNodePenalty?: (node: T) => number, maxNodesChecked?: number): T[] | undefined;
 }
 export default AStar;

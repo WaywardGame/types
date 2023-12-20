@@ -35,7 +35,7 @@ export interface IEntityMovableEvents extends IEntityEvents {
     /**
      * Called after moving.
      */
-    postMove(fromTile: Tile, toTile: Tile, flags: MoveFlag): void;
+    postMove(fromTile: Tile, toTile: Tile, flags: MoveFlag, skipExtinguishTorches?: boolean): void;
 }
 /**
  * Entity class that allows movement

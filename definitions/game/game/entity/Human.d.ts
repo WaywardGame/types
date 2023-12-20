@@ -14,7 +14,7 @@ import type { Alignment } from "@wayward/game/game/deity/AlignmentManager";
 import { Deity } from "@wayward/game/game/deity/Deity";
 import Doodad from "@wayward/game/game/doodad/Doodad";
 import EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
-import type { IAttack, ICausesDamage, IEntityConstructorOptions, IMovingData } from "@wayward/game/game/entity/IEntity";
+import type { IAttack, ICausesDamage, IEntityConstructorOptions, IMovingData, MoveFlag } from "@wayward/game/game/entity/IEntity";
 import { AttackType, DamageType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "@wayward/game/game/entity/IEntity";
 import type { ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkPathChangeReason } from "@wayward/game/game/entity/IHuman";
 import { EquipType, RestCancelReason, SkillType } from "@wayward/game/game/entity/IHuman";
@@ -317,7 +317,7 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     discoverRecipes(recipes: Array<[recipeType: ItemType, crafted: ICrafted]>, discoveredClientSide?: boolean): void;
     discoverRecipe(recipeType: ItemType, crafted?: ICrafted, discoveredClientSide?: boolean, emit?: boolean): void;
     incrementIslandTickCount(): void;
-    protected onPostMove(lastTile: Tile, tile: Tile): void;
+    protected onPostMove(lastTile: Tile, tile: Tile, flags?: MoveFlag, skipExtinguishTorches?: boolean): void;
     passTurn(turnType?: TurnTypeFlag): void;
     /**
      * Ticks a player
