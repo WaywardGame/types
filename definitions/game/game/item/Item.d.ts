@@ -278,6 +278,9 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     getMovementOptions(): IMoveToTileOptions | undefined;
     protected onMovementCompleted(movingData: IMovingData): void;
     setQuality(human: Human | undefined, quality?: Quality): void;
+    /**
+     * Get acceptable magical types based on item
+     */
     getValidMagicalProperties(): MagicalPropertyType[];
     addMagicalProperties(count: number, source?: string): boolean;
     rerollMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
@@ -295,10 +298,20 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * @param magicalWorth Include the value of `MagicalPropertyType.Worth`, defaults to true
      */
     getWorth(human: Human | undefined, magicalWorth?: boolean): number;
+    /**
+     * Checks to see if the item is in a fire/hot thing
+     */
     canBurnPlayer(): boolean;
+    /**
+     * Get the base defense of an item plus its magical defense stat if applicable
+     */
     getBaseDefense(): number;
+    /**
+     * Returns the durability of the item based on the max durability to be used as a pseudo "charge"
+     */
     getDurabilityCharge(): number;
     revertFromDoodad(doodad: Doodad): void;
+    copyPropertiesFrom(fromItem: Item): void;
     getWeightCapacity(): number | undefined;
     /**
      * Returns the container weight reduction
@@ -306,6 +319,9 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * @returns 1 if there is no reducton or [-50% + magical storing values]
      */
     getContainerWeightReduction(container?: IContainer | undefined): number;
+    /**
+     * Can the item be refined based on disassembly items and minimum getWeight tables?
+     */
     canBeRefined(): boolean;
     getProducedTemperature(): number | undefined;
     postProcessDecay(): void;

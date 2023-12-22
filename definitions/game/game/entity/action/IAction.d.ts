@@ -424,6 +424,10 @@ export declare namespace ActionArgument {
     namespace ENUM {
         let ActionArgumentEnumClass: typeof ActionArgumentEnum;
     }
+    /**
+     * An action argument which is bit flags from the given enum. Performs validation.
+     */
+    function FLAGS<ENUM extends number, K extends string>(object: Record<K, ENUM>): ActionArgumentEnum<ENUM, K>;
 }
 export interface IActionArgumentTypeMap {
     [ActionArgument.Undefined]: undefined;

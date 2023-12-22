@@ -276,7 +276,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * In manual turn mode, it will tick the humans stat timers & the game
      */
     passTurn(human: Human, turnType?: TurnTypeFlag, dueToAction?: boolean): void;
-    fastForward(travelTime: number, multiplayerLoadingDescription?: MultiplayerLoadingDescription): Promise<void>;
+    fastForward(travelTime: number, tickFlags?: TickFlag, multiplayerLoadingDescription?: MultiplayerLoadingDescription): Promise<void>;
     /**
      * Collection of things to perform on each tick
      */

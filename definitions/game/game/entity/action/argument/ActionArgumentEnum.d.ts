@@ -12,7 +12,8 @@ import type Entity from "@wayward/game/game/entity/Entity";
 import { ActionArgumentCustom } from "@wayward/game/game/entity/action/argument/ActionArgumentCustom";
 export default class ActionArgumentEnum<ENUM extends number, K extends string> extends ActionArgumentCustom<ENUM> {
     private readonly enumObject;
-    constructor(enumObject: Record<K, ENUM>);
+    private readonly flags;
+    constructor(enumObject: Record<K, ENUM>, flags?: boolean);
     validate(executor: Entity | undefined, value: unknown): value is ENUM;
     read(): ENUM;
     write(executor: Entity | undefined, value: ENUM): void;

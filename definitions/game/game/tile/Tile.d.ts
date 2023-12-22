@@ -167,6 +167,10 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     get isOpen(): boolean;
     /**
+     * Check if the tile is water or not.
+     */
+    get isWater(): boolean;
+    /**
      * Checks if the tile has terrain that blocks
      */
     get hasBlockingTerrain(): boolean;
@@ -363,7 +367,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     getTileInDirection(direction: Direction): Tile | undefined;
     getVariation(noTileDataOffset?: boolean): number;
     tilesInRange(range: number, includeCurrentTile?: boolean): Tile[];
-    openTileInRange(range: number, includeCurrentTile?: boolean): Tile | undefined;
+    openTileInRange(range: number, includeCurrentTile?: boolean, excludeWater?: boolean): Tile | undefined;
     /**
      * Array version of tilesAround
      */

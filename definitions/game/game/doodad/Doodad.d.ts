@@ -227,7 +227,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     detachStillContainer(human: Human): Item | undefined;
     displayItem(item: Item, equipType: EquipType): void;
     undisplayItem(human: Human, equipType: EquipType): Item | undefined;
-    undisplayAllItems(human: Human, equip?: boolean): Item[];
+    undisplayAllItems(human: Human | undefined, equip?: boolean): Item[];
     get blocksMove(): boolean;
     update(ticks: number, playingHumans: Human[], playerHumanTiles: Set<Tile>): void;
     canCauseStatus(): boolean;

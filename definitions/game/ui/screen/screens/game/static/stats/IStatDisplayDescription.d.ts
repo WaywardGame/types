@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IUntilSubscriber } from "@wayward/utilities/event/EventEmitter";
 import type { IHasImagePath } from "@wayward/game/game/IObject";
 import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type { IEntityWithStatsEvents } from "@wayward/game/game/entity/EntityWithStats";
@@ -24,6 +23,7 @@ import type Translation from "@wayward/game/language/Translation";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type Component from "@wayward/game/ui/component/Component";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
+import type { IUntilSubscriber } from "@wayward/utilities/event/EventEmitter";
 export interface IStatDisplayDescription extends IModdable, IHasImagePath<string | ((entity: EntityWithStats, stat: IStat) => string)> {
     imagePath?: string | ((entity: EntityWithStats, stat: IStat) => string);
     /**
@@ -85,7 +85,7 @@ export interface IStatInfo extends Partial<IStatBase> {
  * @param predicate A function that takes an `IStatInfo` object and returns whether it "matches".
  * @param handler A function that takes whether the info matches, the `statElement`, the entity, and the `IStatInfo` object and "handles" it.
  */
-export declare function when(predicate: (info: IStatInfo, entity: EntityWithStats) => boolean, handler: (matched: boolean, statElement: Component, entity: EntityWithStats, info: IStatInfo) => any): (statElement: Component, entity: EntityWithStats, stat: IStat, oldValue?: number) => void;
+export declare function when(predicate: (info: IStatInfo, entity: EntityWithStats, statElement: Component) => boolean, handler: (matched: boolean, statElement: Component, entity: EntityWithStats, info: IStatInfo) => any): (statElement: Component, entity: EntityWithStats, stat: IStat, oldValue?: number) => void;
 /**
  * Returns a `when()` handler that will toggle classes on a `statElement` based on whether the `predicate` matched.
  */

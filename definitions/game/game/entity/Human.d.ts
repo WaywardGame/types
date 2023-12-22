@@ -200,6 +200,7 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     removeTamedCreature(creature: Creature): boolean;
     resetMovementIntent(): void;
     createItemInInventory(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, updateTables?: boolean): Item;
+    cloneItemIntoInventory(itemToClone: Item, itemType?: ItemType, updateTables?: boolean): Item;
     damageRandomEquipment(): void;
     getDamageModifier(): number;
     calculateDamageAmount(attackType: AttackType, weapon?: Item, ammoItem?: Item): number;

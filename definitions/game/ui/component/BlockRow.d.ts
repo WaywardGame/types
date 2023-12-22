@@ -17,4 +17,5 @@ export declare class BlockRow extends Component {
     constructor(elementType?: string);
     setColumns(...columns: ColumnType[]): this;
     protected onChildrenChange(): void;
+    protected getChildCount(): number;
 }

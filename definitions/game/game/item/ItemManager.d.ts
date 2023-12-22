@@ -360,7 +360,6 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     getNPCFromInventoryContainer(containable: IContainable): NPC | undefined;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: Item[]): number;
-    copyProperties(toItem: Item, fromItem: Item): void;
     getCraftQualityBonus(item: Item, required?: boolean): number;
     /**
      * Returns `true` if the item type or item is filtered out from inventory/crafting/container dialogs.

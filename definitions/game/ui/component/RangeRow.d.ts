@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import type Translation from "@wayward/game/language/Translation";
 import { BlockRow } from "@wayward/game/ui/component/BlockRow";
 import Button from "@wayward/game/ui/component/Button";
@@ -18,6 +17,7 @@ import { RangeInputValueDisplay } from "@wayward/game/ui/component/RangeInputVal
 import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
 import { Heading, Paragraph } from "@wayward/game/ui/component/Text";
 import type { IStringSection } from "@wayward/game/utilities/string/Interpolator";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export declare class RangeRow extends BlockRow implements IRefreshable, IDisableable {
     event: IEventEmitter<this, Events<RangeInput>>;
     rangeInput: RangeInput;
@@ -30,6 +30,7 @@ export declare class RangeRow extends BlockRow implements IRefreshable, IDisable
     private readonly _disabledReasons;
     get disabled(): boolean;
     constructor();
+    protected getChildCount(): number;
     setDisabled(val?: boolean, reason?: string): this;
     editRange(rangeInputInitializer: (rangeInput: RangeInput) => RangeInput): this;
     setLabel(label: (label: Heading) => Heading): this;
