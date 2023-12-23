@@ -49,8 +49,8 @@ export interface IIslandEvents {
      * Called when the island is deleted
      */
     delete(): void;
-    tickStart(tickFlag: TickFlag, ticks: number, dueToAction: boolean): any;
-    tickEnd(tickFlag: TickFlag, ticks: number, dueToAction: boolean): any;
+    tickStart(options: IIslandTickOptions): any;
+    tickEnd(options: IIslandTickOptions): any;
     /**
      * Called when a tile is updated (tile type changed, doodad created on it, etc)
      * @param tile The tile that was updated
@@ -214,4 +214,16 @@ export interface ICopyHumanOptions {
     copyItemsAndEquipment?: false;
     copyStats?: false;
     copyStatus?: false;
+}
+export interface IIslandTickOptions {
+    ticks: number;
+    tickFlags?: TickFlag;
+    playingHumans?: Human[];
+    dueToAction?: boolean;
+}
+export interface IIslandTickAsyncOptions extends IIslandTickOptions {
+    onProgress?: (progess: number) => Promise<void>;
+}
+export interface IIslandFastForwardOptions extends IIslandTickAsyncOptions {
+    multiplayerLoadingDescription?: MultiplayerLoadingDescription;
 }

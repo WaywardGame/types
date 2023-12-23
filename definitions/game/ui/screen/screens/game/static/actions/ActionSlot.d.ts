@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { TickFlag } from "@wayward/game/game/IGame";
 import { Quality } from "@wayward/game/game/IObject";
 import { MoveFlag } from "@wayward/game/game/entity/IEntity";
 import type { IActionApi } from "@wayward/game/game/entity/action/IAction";
@@ -16,6 +15,7 @@ import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { ActionId, IUsableActionDefinition, IUsableActionPossibleUsing, IUsableActionRequirements, ReturnableUsableActionUsability } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
 import type Player from "@wayward/game/game/entity/player/Player";
+import type { IIslandTickOptions } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import type { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
@@ -77,7 +77,7 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
     protected onAppend(): void;
     protected onItemMaybeInaccessible(): void;
     protected onPlayerPostMove(player: Player, _lastTile: Tile, _tile: Tile, moveFlag: MoveFlag): void;
-    protected onTickEnd(island: Island, tickFlag: TickFlag, ticks: number, dueToAction: boolean): void;
+    protected onTickEnd(island: Island, options: IIslandTickOptions): void;
     postExecuteAction(action: IActionApi): void;
     private checkItemAccessible;
     private switchToBestItem;

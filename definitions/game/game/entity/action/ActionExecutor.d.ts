@@ -61,6 +61,7 @@ export default class ActionExecutor<A extends ActionArguments, E extends Entity,
     private readonly items;
     private itemsUsed;
     private readonly action;
+    use: CU;
     constructor(action?: IActionDescription<A, E, R, CU>, type?: number | undefined);
     get description(): IActionDescription<A, E, R, CU>;
     skipConfirmation(): this;

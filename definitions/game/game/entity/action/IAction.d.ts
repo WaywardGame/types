@@ -329,6 +329,10 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
 }
 export interface IActionHandlerApi<E extends Entity = Entity, CU extends IActionUsable = IActionUsable> extends IActionApi<E, CU> {
     /**
+     * Result of a successful canUse check.
+     */
+    use: CU;
+    /**
      * Sets that the items added to this action by `addItems` were "used" (so they will be damaged afterward).
      */
     setItemsUsed(): this;
@@ -337,7 +341,17 @@ export interface IActionHandlerApi<E extends Entity = Entity, CU extends IAction
      */
     setItemsUsed(used?: boolean): this;
 }
+export interface IActionNotUsableHandlerApi<E extends Entity = Entity, CU extends IActionUsable = IActionUsable> extends IActionApi<E, CU> {
+    /**
+     * Result of a non-usable canUse check.
+     */
+    use: IActionNotUsable;
+}
 export interface IActionConfirmerApi<E extends Entity = Entity, CU extends IActionUsable = IActionUsable> extends IActionApi<E, CU> {
+    /**
+     * Result of a successful canUse check.
+     */
+    use: CU;
     /**
      * Prompts the user about something
      */

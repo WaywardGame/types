@@ -9,11 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Game } from "@wayward/game/game/Game";
-import { TickFlag } from "@wayward/game/game/IGame";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type Human from "@wayward/game/game/entity/Human";
 import type Player from "@wayward/game/game/entity/player/Player";
+import type { IIslandTickOptions } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import type { IContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
@@ -79,7 +79,7 @@ export default class GameScreen extends Screen {
     onGameStart(game: Game, _isLoadingSave: boolean, _playedCount: number): void;
     onLoadedOnIsland(player: Player, island: Island): void;
     private showIslandIntro;
-    onIslandTickEnd(island: Island, tickFlag: TickFlag): void;
+    onIslandTickEnd(island: Island, options: IIslandTickOptions): void;
     onExploreAsGhost(): void;
     /**
      * Notee: calculateEquipmentStats is always ran after calculateStats is called, so this will work

@@ -15,5 +15,5 @@ import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 export interface IRotate extends IActionUsable {
     doodad: Doodad;
 }
-declare const _default: Action<[[ActionArgument.Undefined, ActionArgument.Doodad]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, true | undefined, IRotate, [(Doodad | undefined)?]>;
+declare const _default: Action<[[ActionArgument.Undefined, ActionArgument.Doodad]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, boolean, IRotate, [(Doodad | undefined)?]>;
 export default _default;

@@ -10,7 +10,7 @@
  */
 import type { Deity } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import type { ActionArguments, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionExample, IActionExampleApi, IActionHandlerApi, IActionNotUsable, IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import type { ActionArguments, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionExample, IActionExampleApi, IActionHandlerApi, IActionNotUsable, IActionNotUsableHandlerApi, IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Entity from "@wayward/game/game/entity/Entity";
@@ -34,6 +34,7 @@ export declare class Action<A extends ActionArguments, E extends Entity = Entity
     preExecutionHandler?: (actionApi: IActionApi<E, CU>, ...args: AV) => any;
     canUseHandler: (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => CU | IActionNotUsable;
     handler: (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => R;
+    notUsableHandler: (actionApi: IActionNotUsableHandlerApi<E, CU>, ...args: AV) => R;
     confirmer?: (actionApi: IActionConfirmerApi<E, any>, ...args: AV) => Promise<boolean>;
     exampleHandler?: (actionApi: IActionExampleApi<E, CU>, ...args: AV) => IActionExample;
     alignment: Deity;
@@ -87,6 +88,12 @@ export declare class Action<A extends ActionArguments, E extends Entity = Entity
      * Handlers are executed on both the client-side and the server-side.
      */
     setHandler<H extends (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => R>(handler: H): Action<A, E, ReturnType<H>, CU>;
+    /**
+     * Add a handler that is called when it's executed while not being usable
+     *
+     * Handlers are executed on both the client-side and the server-side.
+     */
+    setNotUsableHandler<H extends (actionApi: IActionNotUsableHandlerApi<E, CU>, ...args: AV) => R>(handler: H): Action<A, E, ReturnType<H>, CU>;
     /**
      * Sets additional times the action can be used in.
      */

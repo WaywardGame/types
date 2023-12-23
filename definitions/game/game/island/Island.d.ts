@@ -10,7 +10,6 @@
  */
 import type { Game } from "@wayward/game/game/Game";
 import type { IGameOld } from "@wayward/game/game/IGame";
-import { TickFlag } from "@wayward/game/game/IGame";
 import { Quality } from "@wayward/game/game/IObject";
 import { TickHelper } from "@wayward/game/game/TickHelper";
 import type { BiomeTypes, IBiomeDescription } from "@wayward/game/game/biome/IBiome";
@@ -26,14 +25,13 @@ import CorpseManager from "@wayward/game/game/entity/creature/corpse/CorpseManag
 import FlowFieldManager from "@wayward/game/game/entity/flowfield/FlowFieldManager";
 import NPCManager from "@wayward/game/game/entity/npc/NPCManager";
 import type { TurnTypeFlag } from "@wayward/game/game/entity/player/IPlayer";
-import type { IIslandEvents, IIslandLoadOptions, IMobCheck, ISeeds, IWaterContamination, IWaterFill, IWaterFillReturn, IWell, IslandId } from "@wayward/game/game/island/IIsland";
+import type { IIslandEvents, IIslandFastForwardOptions, IIslandLoadOptions, IIslandTickOptions, IMobCheck, ISeeds, IWaterContamination, IWaterFill, IWaterFillReturn, IWell, IslandId } from "@wayward/game/game/island/IIsland";
 import { WaterType } from "@wayward/game/game/island/IIsland";
 import { PortManager } from "@wayward/game/game/island/Port";
 import type { ILiquidGather } from "@wayward/game/game/item/IItem";
 import type { IRequirementInfo } from "@wayward/game/game/item/IItemManager";
 import ItemManager from "@wayward/game/game/item/ItemManager";
 import type DrawnMap from "@wayward/game/game/mapping/DrawnMap";
-import type { MultiplayerLoadingDescription } from "@wayward/game/game/meta/Loading";
 import type { IGameOptions } from "@wayward/game/game/options/IGameOptions";
 import type { IslandModifiersCollection } from "@wayward/game/game/options/modifiers/island/IslandModifiers";
 import type { IReferenceable } from "@wayward/game/game/reference/IReferenceManager";
@@ -276,11 +274,15 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * In manual turn mode, it will tick the humans stat timers & the game
      */
     passTurn(human: Human, turnType?: TurnTypeFlag, dueToAction?: boolean): void;
-    fastForward(travelTime: number, tickFlags?: TickFlag, multiplayerLoadingDescription?: MultiplayerLoadingDescription): Promise<void>;
+    /**
+     * Fast forwards an island by running lots of ticks.
+     * Defaults to IslandFastForward tick flag with no playing humans.
+     */
+    fastForward(options: IIslandFastForwardOptions): Promise<void>;
     /**
      * Collection of things to perform on each tick
      */
-    tick(ticks?: number, tickFlag?: TickFlag, dueToAction?: boolean): void;
+    tick(options?: IIslandTickOptions): void;
     /**
      * Collection of things to perform on each tick
      */
