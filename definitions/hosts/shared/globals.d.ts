@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-export declare const gameVersionStage = "beta", gameVersionMajor = 2, gameVersionMinor = 14, gameVersionPatch = 0, gameVersionName = "Runekeeper";
+export declare const gameVersionStage = "beta", gameVersionMajor = 2, gameVersionMinor = 14, gameVersionPatch = 0, gameVersionName = "Runekeeper", gameVersionColor = 11015763;
 export declare const gameVersion = "beta2.14.0";
 export declare const gameVersionTitleMajor = "Wayward: Runekeeper";
 export declare const gameVersionTitleMinor: string;

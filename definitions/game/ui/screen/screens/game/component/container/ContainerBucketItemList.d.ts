@@ -76,6 +76,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private containerRef?;
     get container(): IContainer | undefined;
     isStacked(type?: ItemType): boolean | undefined;
+    getStackedItems(type?: ItemType): Item[];
     constructor(container?: IContainer);
     private readonly activeReasons;
     toggleActive(reason: string, active: boolean): void;
@@ -91,6 +92,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private getItemComponent;
     private readonly itemStacks;
     private getItemStackComponent;
+    private removeItemStackComponent;
     refresh(initial?: boolean): void;
     willAccept(item: Item | ItemType): boolean;
     protected getOrderedContainerItems(): Item[];
@@ -117,6 +119,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     protected onTransferInto(itemComponent: ItemComponent, index: number | undefined, bindable: Bindable | undefined, undo: () => void, oldParent?: ISortableComponent): Promise<void>;
     protected onSort(itemComponent: ItemComponent, index: number, bindable: Bindable | undefined, undo: () => void): Promise<void>;
     protected onContainerOrderUpdate(manager: ItemManager, container: IContainer): void;
+    protected onItemToggleProtected(item: Item): void;
     private getAppendStrategy;
     protected onAddItem(manager: ItemManager, items: Item[], container: IContainer, index: number, options?: IMoveItemOptions): Promise<void>;
     protected onRemoveItem(manager: ItemManager, items: Item[], container?: IContainer, containerTile?: Tile): void;
