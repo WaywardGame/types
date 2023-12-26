@@ -32,6 +32,8 @@ import type { IPromptDescriptionBase, PromptDescriptionArgs } from "@wayward/gam
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
+import type Translation from "@wayward/game/language/Translation";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
@@ -84,8 +86,8 @@ export declare enum ActionType {
     Tame = 44,
     Release = 45,
     HealOther = 46,
-    Unused = 47,
-    Unused2 = 48,
+    Unused = 47,// this one must stay unused
+    Unused2 = 48,// you can replace this with a new action
     OpenDoor = 49,
     CloseDoor = 50,
     AddFuel = 51,
@@ -287,6 +289,10 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
      * true if a creature is on a tile, false otherwise
      */
     isCreatureBlocking(tile: Tile): boolean;
+    /**
+     * Sets the contextual tool & target for an action. Exclusively used for translations atm
+     */
+    setContext(tool?: Item | Translation, target?: ArrayOr<Entity> | Tile | Translation, details?: Record<string, TranslationArg>): this;
     setDelay(delay: number, replace?: boolean): this;
     setPassTurn(turnType?: TurnTypeFlag): this;
     setUpdateView(updateFov?: boolean): this;

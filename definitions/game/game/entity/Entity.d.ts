@@ -18,6 +18,7 @@ import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions, IEntityEvents } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
 import type { IHumanBound } from "@wayward/game/game/entity/IEntityManager";
+import type { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
@@ -50,6 +51,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     z: WorldZ;
     private _data?;
     private _tags?;
+    historicalActions?: PartialRecord<ActionType, number>;
     islandId: IslandId;
     preventRendering?: boolean;
     private _humansWithinBound?;

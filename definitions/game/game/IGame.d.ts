@@ -8,15 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Game } from "@wayward/game/game/Game";
 import type { BiomeTypes } from "@wayward/game/game/biome/IBiome";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
-import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Entity from "@wayward/game/game/entity/Entity";
 import type { ICharacter, ICrafted } from "@wayward/game/game/entity/IHuman";
+import type IActionContext from "@wayward/game/game/entity/action/IActionContext";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type { PlayerState } from "@wayward/game/game/entity/player/IPlayer";
-import type { Game } from "@wayward/game/game/Game";
-import type { ILegacySeeds, INewIslandOverrides, IslandId, IWell } from "@wayward/game/game/island/IIsland";
+import type { ILegacySeeds, INewIslandOverrides, IWell, IslandId } from "@wayward/game/game/island/IIsland";
 import type Item from "@wayward/game/game/item/Item";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { GameMode, IGameOptions } from "@wayward/game/game/options/IGameOptions";
@@ -27,9 +29,9 @@ import type { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "@wa
 import type { Renderer } from "@wayward/game/renderer/Renderer";
 import type { IReplayLogEntry } from "@wayward/game/replay/IReplayLogEntry";
 import type { IHighscoreOld, IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
+import type Version from "@wayward/game/utilities/Version";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IRange } from "@wayward/utilities/math/Range";
-import type Version from "@wayward/game/utilities/Version";
 export interface IGameEvents {
     /**
      * Called when the game is starting
@@ -90,6 +92,7 @@ export interface IGameEvents {
      * Called after the field of view has initialized
      */
     postFieldOfView?(): void;
+    addHistoricalAction(executor: Entity, context: IActionContext): any;
 }
 export declare enum TickFlag {
     None = 0,

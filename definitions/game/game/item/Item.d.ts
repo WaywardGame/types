@@ -22,6 +22,7 @@ import { AttackType, DamageType, EntityType } from "@wayward/game/game/entity/IE
 import type { EquipType } from "@wayward/game/game/entity/IHuman";
 import { SkillType } from "@wayward/game/game/entity/IHuman";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type ActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
@@ -287,7 +288,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     rerollMagicalPropertyValues(): void;
     addMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     getMagicalPropertyInfo(type: MagicalPropertyType): IMagicalPropertyInfo | undefined;
-    acquireNotify(human: Human): void;
+    acquireNotify(human: Human, context?: ActionContext): void;
     getStokeFireValue(): number | undefined;
     getStokeFireBonusValue(): number;
     getOnUseBonus(): number;

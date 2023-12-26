@@ -87,6 +87,10 @@ export interface IPlayerEvents extends Events<Human> {
      */
     readNote(id: number): any;
     /**
+     * Called when notes are cleared. (Debug Tools)
+     */
+    clearNotes(): any;
+    /**
      * Called when a player sails to civilization.
      */
     sailToCivilization?(): any;

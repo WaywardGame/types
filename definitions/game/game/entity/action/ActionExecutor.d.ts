@@ -15,11 +15,14 @@ import type Human from "@wayward/game/game/entity/Human";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
 import type { ActionArguments, ActionExecutorEvents, AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionExample, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable, IProtectedItems, SkillGain } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument, ActionType, BlockFlag } from "@wayward/game/game/entity/action/IAction";
+import IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type { TurnTypeFlag } from "@wayward/game/game/entity/player/IPlayer";
 import type Item from "@wayward/game/game/item/Item";
 import type { IPromptDescriptionBase, PromptDescriptionArgs } from "@wayward/game/game/meta/prompt/IPrompt";
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type Tile from "@wayward/game/game/tile/Tile";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
+import type Translation from "@wayward/game/language/Translation";
 import ActionPacket from "@wayward/game/multiplayer/packets/shared/ActionPacket";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
@@ -58,6 +61,7 @@ export default class ActionExecutor<A extends ActionArguments, E extends Entity,
     private particle?;
     private updateView?;
     private updateRender?;
+    private context?;
     private readonly items;
     private itemsUsed;
     private readonly action;
@@ -101,6 +105,8 @@ export default class ActionExecutor<A extends ActionArguments, E extends Entity,
      */
     prompt<PROMPT extends IPromptDescriptionBase<any[]>>(prompt: PROMPT, ...args: PromptDescriptionArgs<PROMPT>): Promise<boolean>;
     isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is IActionArgumentTypeMap[AA];
+    setContext(tool?: Item | Translation, target?: ArrayOr<Entity> | Tile | Translation, details?: Record<string, TranslationArg>): this;
+    getContext(): IActionContext;
     setDelay(delay: number, replace?: boolean): this;
     setPassTurn(turnType?: TurnTypeFlag): this;
     setUpdateView(updateFov?: boolean): this;

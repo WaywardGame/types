@@ -15,6 +15,7 @@ import EntityManager from "@wayward/game/game/entity/EntityManager";
 import Human from "@wayward/game/game/entity/Human";
 import type { IActionHandlerApi, IActionNotUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type ActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IRecipe } from "@wayward/game/game/item/IItem";
@@ -206,7 +207,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): Item[];
     getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getWeightCapacity(container: IContainer, includeMagic?: boolean): number | undefined;
-    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, updateTables?: boolean): Item;
+    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, updateTables?: boolean, context?: ActionContext): Item;
     createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human): Item;
     getContainedContainers(container: IContainer): IContainer[];
     computeContainerWeight(container: IContainer): number;

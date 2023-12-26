@@ -22,6 +22,7 @@ import type { Defense } from "@wayward/game/game/entity/IEntity";
 import { DamageType } from "@wayward/game/game/entity/IEntity";
 import type { Delay } from "@wayward/game/game/entity/IHuman";
 import ActionExecutor from "@wayward/game/game/entity/action/ActionExecutor";
+import type IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import PlayerManager from "@wayward/game/game/entity/player/PlayerManager";
 import IslandManager from "@wayward/game/game/island/IslandManager";
 import { AutoSave } from "@wayward/game/game/meta/AutoSave";
@@ -35,9 +36,10 @@ import type { ChallengeModifiersCollection } from "@wayward/game/game/options/mo
 import type MilestoneModifier from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
 import ReferenceManager from "@wayward/game/game/reference/ReferenceManager";
 import TimeManager from "@wayward/game/game/time/TimeManager";
+import LanguageManager from "@wayward/game/language/LanguageManager";
 import ModManager from "@wayward/game/mod/ModManager";
-import type { WebGlContext } from "@wayward/game/renderer/platform/webgl/WebGlContext";
 import type { IRendererOrigin } from "@wayward/game/renderer/context/RendererOrigin";
+import type { WebGlContext } from "@wayward/game/renderer/platform/webgl/WebGlContext";
 import ReplayManager from "@wayward/game/replay/ReplayManager";
 import SaveManager from "@wayward/game/save/SaveManager";
 import type { IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
@@ -49,7 +51,6 @@ import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import { WebWorkerManager } from "@wayward/game/webWorker/WebWorkerManager";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { Random } from "@wayward/utilities/random/Random";
-import LanguageManager from "@wayward/game/language/LanguageManager";
 export declare class Game extends EventEmitter.Host<IGameEvents> {
     get isChallenge(): boolean;
     private difficultyOptions;
@@ -62,6 +63,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     time: TimeManager;
     turnMode: TurnMode;
     upgrades: string[];
+    history: IActionContext[];
     originalPlayOptions: Partial<IPlayOptions>;
     worldId: string;
     /**
@@ -226,4 +228,5 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      * @param isIslandTimeAdjustment True if it's due to island fast forwarding
      */
     tickTime(isIslandTimeAdjustment: boolean): void;
+    addHistory(executor: Entity, context: IActionContext): void;
 }

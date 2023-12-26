@@ -12,6 +12,7 @@ import type { IMovementTime } from "@wayward/game/game/IGame";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type { Delay, MovingState, SkillType } from "@wayward/game/game/entity/IHuman";
+import type { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
@@ -33,6 +34,7 @@ export interface IEntityEvents {
      * Called when the entity is removed from the game
      */
     removed(): void;
+    updateHistoricalActionCount(action: ActionType, count: number, oldCount: number): any;
 }
 export interface IEntityConstructorOptions<TypeType extends number> {
     id: number;

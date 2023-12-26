@@ -18,5 +18,5 @@ export interface ISetCreatureAiCanUse extends IActionUsable {
     creature: Creature;
 }
 export declare function hasSkillToSetCreatureAi(human: Human, creatureDescription: ICreatureDescription | undefined, ai: AiType): boolean;
-declare const _default: Action<[import("../argument/ActionArgumentEnum").default<AiType, "Attack" | "Tamed" | "Neutral" | "Hostile" | "Scared" | "Random" | "Hidden" | "Fearless" | "FollowClose" | "Retaliate" | "Fleeing" | "Waiting" | "FollowFar" | "Stay" | "AttackAdjacent" | "AttackInSight" | "Defend" | "Heel">], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ISetCreatureAiCanUse, [AiType]>;
+declare const _default: Action<[import("../argument/ActionArgumentEnum").default<AiType, "Attack" | "Tamed" | "Neutral" | "Stay" | "Defend" | "Heel" | "Random" | "Hostile" | "Scared" | "Hidden" | "Fearless" | "FollowClose" | "Retaliate" | "Fleeing" | "Waiting" | "FollowFar" | "AttackAdjacent" | "AttackInSight">], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ISetCreatureAiCanUse, [AiType]>;
 export default _default;

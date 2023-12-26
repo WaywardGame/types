@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { Quality } from "@wayward/game/game/IObject";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
 import type { ActionType, IActionNotUsable } from "@wayward/game/game/entity/action/IAction";
+import type ActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
-import type { Quality } from "@wayward/game/game/IObject";
 import type { ContainerSort, IContainer, IMoveToTileOptions, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -128,6 +129,7 @@ export interface IMoveItemOptions {
     updateView?: true;
     isTrading?: boolean;
     revertFromDoodad?: boolean;
+    context?: ActionContext;
 }
 export interface IPlaceOnTileOptions {
     force?: boolean;

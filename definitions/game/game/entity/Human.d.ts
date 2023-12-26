@@ -22,6 +22,7 @@ import type { IStat } from "@wayward/game/game/entity/IStats";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { StatChangeTimerFactory } from "@wayward/game/game/entity/StatFactory";
 import { StatChangeCurrentTimerStrategy } from "@wayward/game/game/entity/StatFactory";
+import IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { CreatureType, IDamageInfo } from "@wayward/game/game/entity/creature/ICreature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
@@ -199,7 +200,7 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     addTamedCreature(creature: Creature): void;
     removeTamedCreature(creature: Creature): boolean;
     resetMovementIntent(): void;
-    createItemInInventory(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, updateTables?: boolean): Item;
+    createItemInInventory(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, updateTables?: boolean, context?: IActionContext): Item;
     cloneItemIntoInventory(itemToClone: Item, itemType?: ItemType, updateTables?: boolean): Item;
     damageRandomEquipment(): void;
     getDamageModifier(): number;
@@ -250,7 +251,7 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
      * @param chance A chance multiplier on top of the base rune chance of 10% (an additional 30% chance may be added by piety)
      * @returns whether the rune was given
      */
-    giveRune(alignment: Deity, chance: number): boolean;
+    giveRune(alignment: Deity, chance: number, context: IActionContext): boolean;
     protected checkOnLoadMilestones(): void;
     setVehicle(item: Item | undefined, extinguishTorches?: boolean): boolean;
     getWeightStatus(): WeightStatus;

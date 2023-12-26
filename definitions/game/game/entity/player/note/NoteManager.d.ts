@@ -36,6 +36,7 @@ export interface INoteManager {
     getNote(id: number): INote | undefined;
     wasWritten(note: Note): boolean;
     write(note: Note, ...args: any[]): void;
+    clear(): void;
     getUnread(): INote[];
     markRead(noteId: number): void;
     upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
@@ -46,12 +47,14 @@ export interface INoteHost {
     canWriteNote(note: INote): boolean;
     onWriteNote(index: number, note: Note): any;
     onReadNote(index: number): any;
+    onClearNotes(): any;
 }
 export declare class NoteManagerNoOp implements INoteManager {
     readonly notes: INote[];
     getNote(id: number): INote | undefined;
     wasWritten(note: Note): boolean;
     write(note: Note, ...args: TranslationArg[]): void;
+    clear(): void;
     getUnread(): INote[];
     markRead(noteId: number): void;
     upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
@@ -67,4 +70,5 @@ export default class NoteManager implements INoteManager {
     getUnread(): INote[];
     markRead(noteId: number): void;
     upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
+    clear(): void;
 }

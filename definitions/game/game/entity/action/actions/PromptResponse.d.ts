@@ -12,7 +12,7 @@ import { Action } from "@wayward/game/game/entity/action/Action";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
-import type InterruptChoice from "@wayward/game/language/dictionary/InterruptChoice";
+import InterruptChoice from "@wayward/game/language/dictionary/InterruptChoice";
 declare const _default: Action<[ActionArgument.Integer32, [ActionArgument.Boolean, ActionArgument.Integer32]], Player, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [number, number | boolean]>;
 export default _default;
 export declare function waitForPromptResponse(executor: Player, type: Prompt): Promise<boolean | InterruptChoice>;

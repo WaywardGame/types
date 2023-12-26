@@ -16,5 +16,5 @@ import { EquipType } from "@wayward/game/game/entity/IHuman";
 export interface IDisplayItemCanUse extends IActionUsable {
     doodad: Doodad;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, import("../argument/ActionArgumentEnum").default<EquipType, "None" | "DualWield" | "Held" | "Legs" | "Chest" | "Head" | "Waist" | "Feet" | "Neck" | "Hands" | "Back" | "MainHand" | "OffHand">], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDisplayItemCanUse, [import("../../../item/Item").default, EquipType]>;
+declare const _default: Action<[ActionArgument.ItemNearby, import("../argument/ActionArgumentEnum").default<EquipType, "None" | "Held" | "Legs" | "Chest" | "Head" | "Waist" | "Feet" | "Neck" | "Hands" | "Back" | "MainHand" | "OffHand" | "DualWield">], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDisplayItemCanUse, [import("../../../item/Item").default, EquipType]>;
 export default _default;

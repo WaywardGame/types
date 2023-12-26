@@ -12,6 +12,7 @@ import { TileUpdateType } from "@wayward/game/game/IGame";
 import Human from "@wayward/game/game/entity/Human";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
 import { SkillType } from "@wayward/game/game/entity/IHuman";
+import IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type { IDamageInfo } from "@wayward/game/game/entity/creature/ICreature";
 import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
@@ -71,7 +72,7 @@ export default class Player extends Human<number, ReferenceType.Player> implemen
     /**
      * This only does stuff when it's called on the local player
      */
-    addItemMilestones(item: Item): void;
+    addItemMilestones(item: Item, context?: IActionContext): void;
     checkSkillMilestones(): void;
     private getUsableAction;
     protected onGetMovementIntent(): IMovementIntent | undefined;
@@ -125,6 +126,7 @@ export default class Player extends Human<number, ReferenceType.Player> implemen
     private canWriteNote;
     private onWriteNote;
     private onReadNote;
+    private onClearNotes;
     private shouldDisplayMessage;
     private onDisplayMessage;
     get asNPC(): undefined;
