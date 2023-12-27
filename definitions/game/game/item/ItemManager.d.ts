@@ -218,7 +218,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      * @param debug This is for debug context (ie, include tile information, world container, etc)
      * @returns Name of the container or undefined if it's ending up on the ground
      */
-    getContainerName(container: IContainer, debug?: boolean): Translation | undefined;
+    getContainerName(container: IContainer, debug?: boolean, secondPerson?: boolean): Translation | undefined;
     /**
      * Will break a container item on a tile, and remove it after (whether or not if it's a container)
      */

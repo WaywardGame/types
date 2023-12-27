@@ -10,7 +10,14 @@
  */
 import Button from "@wayward/game/ui/component/Button";
 import Component from "@wayward/game/ui/component/Component";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export interface IDetailsEvents extends Events<Component<HTMLDetailsElement>> {
+    open(): any;
+    close(): any;
+    toggle(open: boolean): any;
+}
 export default class Details extends Component<HTMLDetailsElement> {
+    readonly event: IEventEmitter<this, IDetailsEvents>;
     summary: Button;
     get isOpen(): boolean;
     constructor();

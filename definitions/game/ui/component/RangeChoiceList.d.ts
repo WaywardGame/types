@@ -10,7 +10,6 @@
  */
 import Translation from "@wayward/game/language/Translation";
 import { CheckButton } from "@wayward/game/ui/component/CheckButton";
-import type Component from "@wayward/game/ui/component/Component";
 import Details from "@wayward/game/ui/component/Details";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export declare enum RangeChoiceListClasses {
@@ -27,7 +26,7 @@ export interface RangeChoiceListDefinition<CHOICE_ID extends number | string> {
     translate(option: CHOICE_ID): Translation;
     initializeButton?(button: RangeChoiceListButton<CHOICE_ID>): any;
 }
-export interface RangeChoiceListEvents<CHOICE_ID extends number | string> extends Events<Component> {
+export interface RangeChoiceListEvents<CHOICE_ID extends number | string> extends Events<Details> {
     change(choices: CHOICE_ID[]): any;
 }
 export default class RangeChoiceList<CHOICE_ID extends number | string> extends Details {

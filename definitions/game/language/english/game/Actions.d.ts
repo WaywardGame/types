@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
-declare const actions: Descriptions<ActionType, [string, string, string, string?]>;
+declare const actions: Descriptions<ActionType, [name: string, pastTense: string, description: string, levelsDescription?: string, ...extra: string[]]>;
 export default actions;
