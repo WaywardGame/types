@@ -67,7 +67,6 @@ export declare class LoadingDescription<A extends any[]> implements ILoadingDesc
     isCancelable(...args: A): boolean | undefined;
     isBackground(...args: A): boolean | undefined;
     getType(...args: A): LoadType | undefined;
-    getTypeName(...args: A): string | undefined;
 }
 export declare enum LoadType {
     Normal = 0,

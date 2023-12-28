@@ -22,7 +22,7 @@ import type { Defense } from "@wayward/game/game/entity/IEntity";
 import { DamageType } from "@wayward/game/game/entity/IEntity";
 import type { Delay } from "@wayward/game/game/entity/IHuman";
 import ActionExecutor from "@wayward/game/game/entity/action/ActionExecutor";
-import type IActionContext from "@wayward/game/game/entity/action/IActionContext";
+import IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import PlayerManager from "@wayward/game/game/entity/player/PlayerManager";
 import IslandManager from "@wayward/game/game/island/IslandManager";
 import { AutoSave } from "@wayward/game/game/meta/AutoSave";

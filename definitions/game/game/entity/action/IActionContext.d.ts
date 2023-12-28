@@ -34,6 +34,7 @@ declare namespace IActionContext {
     interface GenericSource extends Source {
         translate: (context: IActionContext) => Translation;
     }
+    const HISTORY_LENGTH = 5000;
     function createGeneric(executor: Entity, context?: IActionContext.GenericSource): IActionContext;
     function create(action: ActionType, executor: Entity, context?: IActionContext.Source): IActionContext;
     function translate(context: IActionContext): Translation;

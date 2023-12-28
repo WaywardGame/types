@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import type { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
 import InterruptChoice from "@wayward/game/language/dictionary/InterruptChoice";
 import Component from "@wayward/game/ui/component/Component";
@@ -17,6 +16,7 @@ import { RangeInput } from "@wayward/game/ui/component/RangeInput";
 import Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
 import type { InterruptOptions } from "@wayward/game/ui/util/IInterrupt";
 import { InterruptType } from "@wayward/game/ui/util/IInterrupt";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface IInterruptMenuEvents extends Events<Menu> {
     resolve(choice?: InterruptChoice | string): any;
     cancel(triggerChoice?: boolean): any;

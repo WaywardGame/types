@@ -377,6 +377,7 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     getProducedTemperature(): number | undefined;
     getInsulation(type: TempType): number;
     resetStatTimers(type?: StatChangeCurrentTimerStrategy): void;
+    resetChangeTimers(): void;
     private getBaseStatBonuses;
     protected getApplicableStatusEffects(): Set<StatusType> | undefined;
     private getSkillGainMultiplier;

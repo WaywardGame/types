@@ -28,6 +28,7 @@ import type { IContainer, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
+import type { Article } from "@wayward/game/language/Translation";
 import Translation from "@wayward/game/language/Translation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
@@ -137,6 +138,7 @@ export default abstract class NPC extends Human<NPCType, ReferenceType.NPC> {
      */
     generateWeightCapacity(): void;
     getName(asKnownBy?: Human): TranslationImpl;
+    getName(article?: Article): TranslationImpl;
     /**
      * The name of the npc - called when created
      */

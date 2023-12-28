@@ -87,7 +87,13 @@ export declare enum UsableActionType {
     DisplayMainHand = 100065,
     DisplayOffHand = 100066,
     ReshapeWithItem = 100067,
-    CommandHeel = 100068
+    CommandHeel = 100068,
+    MoveContentsMenu = 100069,
+    MoveContentsToInventory = 100070,
+    MoveContentsToActiveContainer = 100071,
+    MoveContentsToFacingContainer = 100072,
+    MoveContentsOfActiveContainerMenu = 100073,
+    MoveContentsOfFacingContainerMenu = 100074
 }
 export declare enum UsableActionTypePlaceholder {
     TradeItem = 200000,

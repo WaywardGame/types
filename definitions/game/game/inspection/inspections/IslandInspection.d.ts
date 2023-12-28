@@ -13,9 +13,9 @@ import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import Inspection from "@wayward/game/game/inspection/Inspection";
 import Island from "@wayward/game/game/island/Island";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
-import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class IslandInspection extends Inspection<IVector2> {
     private readonly title;
     static getIslandName(island?: Island, useGenerated?: boolean): TranslationImpl;

@@ -61,7 +61,7 @@ export declare const usableActionSets: {
     16: UsableActionGenerator<[]>;
     17: UsableActionGenerator<[]>;
     18: UsableActionGenerator<[]>;
-    19: UsableActionGenerator<[moveTarget?: import("@wayward/game/game/entity/action/usable/actions/item/UsableActionsItemMove").UsableActionsItemMoveTarget | undefined]>;
+    19: UsableActionGenerator<[container?: import("@wayward/game/game/entity/action/usable/actions/item/UsableActionsItemMove").UsableActionsItemMoveContainer | undefined]>;
     20: UsableActionGenerator<[isDropMenu?: true | undefined]>;
     21: UsableActionGenerator<[]>;
     22: UsableActionGenerator<[]>;

@@ -133,7 +133,6 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      */
     setId(id: string): this;
     setHighlight(highlight?: IHighlight): this;
-    setStyle(property: string, value: string | number): this;
     isFocused(): boolean;
     setSelectable(val: SelectableLayer | false): this;
     isSelectable(): boolean;
