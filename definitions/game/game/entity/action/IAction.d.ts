@@ -351,6 +351,10 @@ export interface IActionNotUsableHandlerApi<E extends Entity = Entity, CU extend
      * Result of a non-usable canUse check.
      */
     use: IActionNotUsable;
+    /**
+     * Disables sending a message to the executor for this action not being usable.
+     */
+    setSilent(silent?: boolean): any;
 }
 export interface IActionConfirmerApi<E extends Entity = Entity, CU extends IActionUsable = IActionUsable> extends IActionApi<E, CU> {
     /**

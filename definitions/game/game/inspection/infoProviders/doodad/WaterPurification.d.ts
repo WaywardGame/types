@@ -18,6 +18,6 @@ export default class WaterPurificationInfoProvider extends InfoProvider {
     constructor(doodad: Doodad);
     getClass(): string[];
     hasContent(): boolean;
-    get(): LabelledValue;
+    get(): LabelledValue | never[];
     onTickEnd(): void;
 }

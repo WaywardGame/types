@@ -23,7 +23,7 @@ declare class TileEventInspection extends Inspection<TileEvent> {
     static getFromTile(tile: Tile): TileEventInspection[];
     static getFromTileFiltered(tile: Tile, minorEvents: boolean): TileEventInspection[];
     static handles(type: InspectType, tileEvent: unknown): boolean;
-    constructor(tileEvent: TileEvent, inspectType?: InspectType);
+    constructor(tileEvent: TileEvent);
     getId(): string;
     get(context: InfoProviderContext): Array<Translation | InfoProvider>;
     onRemove(_: any, event: TileEvent): void;

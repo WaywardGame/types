@@ -130,6 +130,8 @@ export default class ActionExecutor<A extends ActionArguments, E extends Entity,
     setItemsUsed(used?: boolean): this;
     confirmItemsBroken(executor: E): Promise<boolean>;
     private checkConfirmer;
+    private silent?;
+    setSilent(silent?: boolean): this;
     private executeInternalOrMultiplayer;
     private executeInternal;
     private createActionPacket;

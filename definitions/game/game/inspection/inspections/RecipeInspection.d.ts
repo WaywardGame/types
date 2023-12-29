@@ -27,4 +27,5 @@ export default class RecipeInspection extends Inspection<ItemType> {
     private getDescription;
     private getDoodadUses;
     private getRequirements;
+    onUpdateCraftTable(): void;
 }

@@ -18,7 +18,14 @@ interface ISprite {
 export interface ISpriteEditorFilters {
     glowColors?: IRGBA[];
     opacity?: number;
+    /**
+     * 0 = current saturation, 1 = full grayscale
+     */
     grayscale?: number;
+    /**
+     * 0 = black, 1 = current colour, 2 = white
+     */
+    brightness?: number;
 }
 export default class SpriteEditor {
     static readonly CACHE: DataCache<ISprite>;
