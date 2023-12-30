@@ -15,6 +15,7 @@ export default class ItemStylesheetHandler {
     private readonly backgroundDefinitions;
     readonly editor: SpriteEditor;
     private readonly stylesheets;
+    private loadCount;
     private abortController?;
     constructor();
     refreshStylesheets(): void;

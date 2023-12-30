@@ -17,6 +17,7 @@ import type { EntityType } from "@wayward/game/game/entity/IEntity";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
 import type { ActionArgumentCustom } from "@wayward/game/game/entity/action/argument/ActionArgumentCustom";
 import type ActionArgumentEnum from "@wayward/game/game/entity/action/argument/ActionArgumentEnum";
+import type ActionArgumentObjectKey from "@wayward/game/game/entity/action/argument/ActionArgumentObjectKey";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
@@ -446,6 +447,13 @@ export declare namespace ActionArgument {
     function OPTIONAL_ENUM<ENUM extends number, K extends string>(enumObject: Record<K, ENUM>): [ActionArgument.Undefined, ActionArgumentEnum<ENUM, K>];
     namespace ENUM {
         let ActionArgumentEnumClass: typeof ActionArgumentEnum;
+    }
+    /**
+     * An action argument which is an entry from the given key in an object Performs validation when an object is passed
+     */
+    function OBJECT_KEY<T extends Record<string, any>>(object?: T): ActionArgumentObjectKey<T>;
+    namespace OBJECT {
+        let ActionArgumentObjectKeyClass: typeof ActionArgumentObjectKey;
     }
     /**
      * An action argument which is bit flags from the given enum. Performs validation.

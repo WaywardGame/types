@@ -294,7 +294,8 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     unequipAll(displayMessage?: boolean, isArmorStandSwap?: boolean): IEquip[];
     getJumpTile(): Tile | undefined;
     hasDelay(): boolean;
-    addDelay(delay: number, replace?: boolean, addStaminaDelay?: boolean): void;
+    addDelay(delay: number, replace?: boolean, addStaminaDelay?: boolean, cap?: number): void;
+    ensureDelay(delay: number): void;
     /**
      * Gets a stamina penalty delay to be used for slowed actions and movement.
      * @param staminaToStartAddingDelayAt Stat value where delays start getting added from.

@@ -77,6 +77,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     get container(): IContainer | undefined;
     isStacked(type?: ItemType): boolean | undefined;
     getStackedItems(type?: ItemType): Item[];
+    getStackIndex(type?: ItemType): number | undefined;
     constructor(container?: IContainer);
     private readonly activeReasons;
     toggleActive(reason: string, active: boolean): void;
@@ -127,6 +128,8 @@ export default class ContainerBucketItemList extends Component implements ISorta
     protected onStack(manager: ItemManager, container: IContainer, type: ItemType): void;
     protected onUnstack(manager: ItemManager, container: IContainer, type: ItemType): void;
     protected onTick(): void;
+    private ensureStackRendered;
+    private ensureStackUnrendered;
     private itemIdsInElements?;
     private getItemIdsInElements;
     private itemListDiffers;
