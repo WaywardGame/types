@@ -197,6 +197,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     private lastItem?;
     private getItem;
     protected onAddMagic(_: Item, magic: MagicalPropertyManager): void;
+    protected onInheritMagic(): void;
     protected onSlotUpdate(actionBar: ActionBar, slot: ActionSlot): void;
     protected onToggleProtected(): void;
     protected onContainerChange(): void;

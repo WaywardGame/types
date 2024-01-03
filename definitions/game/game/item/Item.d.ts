@@ -80,6 +80,7 @@ export interface IItemEvents extends IEntityMovableEvents {
     durabilityMaxChange(durabilityMax: number, oldDurabilityMax: number): any;
     decayChange(decay?: number, oldDecay?: number): any;
     addMagic(manager: MagicalPropertyManager): any;
+    inheritMagic(manager?: MagicalPropertyManager): any;
     revertFromDoodad(doodad: Doodad): any;
     becomeDoodad(doodad: Doodad): any;
 }
