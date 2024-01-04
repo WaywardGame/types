@@ -113,7 +113,7 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
     private cachedNormalTypes?;
     private cachedSubTypes?;
     private cachedHash?;
-    static inherit(source: IHasMagic | MagicalPropertyManager | undefined, target: IHasMagic): void;
+    static inherit(source: IHasMagic | MagicalPropertyManager | undefined, target: IHasMagic, event?: boolean): void;
     constructor(properties?: Partial<Record<MagicalPropertyType, AnyMagicalProperty>>);
     setInert(inert?: boolean): this;
     /**
