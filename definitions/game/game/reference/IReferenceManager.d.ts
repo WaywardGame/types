@@ -852,6 +852,12 @@ export declare const enumRefTypes: {
         RawAberrantWalleye: ItemType.RawAberrantWalleye;
         CookedAberrantWalleye: ItemType.CookedAberrantWalleye;
         FishBones: ItemType.FishBones;
+        AnimalCartilage: ItemType.AnimalCartilage;
+        GelatinPowder: ItemType.GelatinPowder;
+        Gelatin: ItemType.Gelatin;
+        Aspic: ItemType.Aspic;
+        FruitCocktail: ItemType.FruitCocktail;
+        VegetableTerrine: ItemType.VegetableTerrine;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
         WoodenBookcase_25: ItemTypeExtra.WoodenBookcase_25;

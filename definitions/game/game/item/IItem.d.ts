@@ -1539,19 +1539,25 @@ export declare enum ItemType {
     RawAberrantWalleye = 790,
     CookedAberrantWalleye = 791,
     FishBones = 792,
-    Last = 793
+    AnimalCartilage = 793,
+    GelatinPowder = 794,
+    Gelatin = 795,
+    Aspic = 796,
+    FruitCocktail = 797,
+    VegetableTerrine = 798,
+    Last = 799
 }
 export declare enum ItemTypeExtra {
-    None = 794,
-    TatteredMap_RolledUp = 795,
-    TatteredMap_Completed = 796,
-    WoodenBookcase_25 = 797,
-    WoodenBookcase_50 = 798,
-    WoodenBookcase_75 = 799,
-    WoodenBookcase_100 = 800,
-    RuneOfEvilSplinters = 801,
-    RuneOfGoodCharred = 802,
-    TallySticks = 803
+    None = 800,
+    TatteredMap_RolledUp = 801,
+    TatteredMap_Completed = 802,
+    WoodenBookcase_25 = 803,
+    WoodenBookcase_50 = 804,
+    WoodenBookcase_75 = 805,
+    WoodenBookcase_100 = 806,
+    RuneOfEvilSplinters = 807,
+    RuneOfGoodCharred = 808,
+    TallySticks = 809
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
@@ -1702,7 +1708,8 @@ export declare enum ItemTypeGroup {
     Resin = -9860,
     Filler = -9859,
     Altar = -9858,
-    All = -9857
+    Cartilage = -9857,
+    All = -9856
 }
 export type StillContainerBaseItemType = ItemType.Waterskin | ItemType.GlassBottle | ItemType.ClayJug | ItemType.CoconutContainer;
 export interface IItemMovementResult {
