@@ -39,6 +39,7 @@ import type { Article } from "@wayward/game/language/Translation";
 import type Message from "@wayward/game/language/dictionary/Message";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type { ItemNotifierType } from "@wayward/game/renderer/notifier/INotifier";
 import type { SortDirection } from "@wayward/game/save/ISaveManager";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IRGB } from "@wayward/utilities/Color";
@@ -518,6 +519,11 @@ export interface IMoveToTileAfterMovementOptions {
     particles?: IRGB;
     updateTileLayer?: boolean;
     renderCreature?: Creature;
+    notifier?: IItemNotifier;
+}
+export interface IItemNotifier {
+    itemType: ItemType;
+    notifier: ItemNotifierType;
 }
 export interface IRecipe {
     baseComponent?: ItemType | ItemTypeGroup;

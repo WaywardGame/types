@@ -44,14 +44,15 @@ export declare enum NotifierIconType {
     Tame = 0,
     Untame = 1,
     Water = 2,
-    Warning = 3,
-    Decay = 4,
-    Talk = 5,
-    DeityAlignmentGood = 6,
-    DeityAlignmentEvil = 7,
-    DeityAlignmentNeutral = 8,
-    DualWieldEnabled = 9,
-    DualWieldDisabled = 10
+    ItemWarning = 3,
+    Warning = 4,
+    Decay = 5,
+    Talk = 6,
+    DeityAlignmentGood = 7,
+    DeityAlignmentEvil = 8,
+    DeityAlignmentNeutral = 9,
+    DualWieldEnabled = 10,
+    DualWieldDisabled = 11
 }
 export declare const itemDamageNotifierThreshold = 3;
 export declare const doodadDamageNotifierThreshold = 5;
