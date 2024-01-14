@@ -187,7 +187,7 @@ export declare const enumRefTypes: {
         GoldCoins: ItemType.GoldCoins;
         GoldenChalice: ItemType.GoldenChalice;
         GoldenRing: ItemType.GoldenRing;
-        GoldSword: ItemType.GoldSword;
+        GoldShortSword: ItemType.GoldShortSword;
         GrassSeeds: ItemType.GrassSeeds;
         IronOre: ItemType.IronOre;
         WoodenDowels: ItemType.WoodenDowels;
@@ -281,7 +281,7 @@ export declare const enumRefTypes: {
         GraniteHammer: ItemType.GraniteHammer;
         RawChicken: ItemType.RawChicken;
         CookedChicken: ItemType.CookedChicken;
-        IronSword: ItemType.IronSword;
+        IronShortSword: ItemType.IronShortSword;
         IronBreastplate: ItemType.IronBreastplate;
         IronBoots: ItemType.IronBoots;
         IronHelmet: ItemType.IronHelmet;
@@ -331,7 +331,7 @@ export declare const enumRefTypes: {
         WroughtIronHelmet: ItemType.WroughtIronHelmet;
         WroughtIronBoots: ItemType.WroughtIronBoots;
         WroughtIronBreastplate: ItemType.WroughtIronBreastplate;
-        WroughtIronSword: ItemType.WroughtIronSword;
+        WroughtIronShortSword: ItemType.WroughtIronShortSword;
         WoodenFlooring: ItemType.WoodenFlooring;
         FishingRod: ItemType.FishingRod;
         MessageInABottle: ItemType.MessageInABottle;
@@ -423,7 +423,7 @@ export declare const enumRefTypes: {
         OrnateCape: ItemType.OrnateCape;
         FireBladder: ItemType.FireBladder;
         GoldenKey: ItemType.GoldenKey;
-        WoodenSword: ItemType.WoodenSword;
+        WoodenShortSword: ItemType.WoodenShortSword;
         MageRobe: ItemType.MageRobe;
         CrackedOrb: ItemType.CrackedOrb;
         AnimalClaw: ItemType.AnimalClaw;
@@ -492,7 +492,7 @@ export declare const enumRefTypes: {
         CopperHelmet: ItemType.CopperHelmet;
         CopperBoots: ItemType.CopperBoots;
         CopperCuirass: ItemType.CopperCuirass;
-        CopperSword: ItemType.CopperSword;
+        CopperShortSword: ItemType.CopperShortSword;
         CopperTongs: ItemType.CopperTongs;
         CopperArrow: ItemType.CopperArrow;
         CopperBullet: ItemType.CopperBullet;
@@ -636,7 +636,7 @@ export declare const enumRefTypes: {
         TinHelmet: ItemType.TinHelmet;
         TinFootgear: ItemType.TinFootgear;
         TinCuirass: ItemType.TinCuirass;
-        TinSword: ItemType.TinSword;
+        TinShortSword: ItemType.TinShortSword;
         TinTongs: ItemType.TinTongs;
         TinArrow: ItemType.TinArrow;
         TinBullet: ItemType.TinBullet;
@@ -661,7 +661,7 @@ export declare const enumRefTypes: {
         BronzeHelmet: ItemType.BronzeHelmet;
         BronzeBoots: ItemType.BronzeBoots;
         BronzeChestArmor: ItemType.BronzeChestArmor;
-        BronzeSword: ItemType.BronzeSword;
+        BronzeShortSword: ItemType.BronzeShortSword;
         BronzeTongs: ItemType.BronzeTongs;
         BronzeArrow: ItemType.BronzeArrow;
         BronzeBullet: ItemType.BronzeBullet;
