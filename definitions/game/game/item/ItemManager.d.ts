@@ -98,6 +98,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     private static readonly cachedItemsThatAreUsedInRecipes;
     private static readonly cachedWeights;
     private static readonly cachedMostCommonItemColors;
+    private static readonly cachedItemsThatCanBeRelic;
     static readonly cachedItemSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, ItemType[]>>>;
     static getItemTypes(): readonly ItemType[];
     static getItemsWithRecipes(): readonly ItemType[];
@@ -105,6 +106,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     static getHighestItemActionTierForAction(action: ActionType): number;
     static isItemAcceptedAsOffer(item: ItemType): boolean;
     static isItemUsedInRecipe(item: ItemType): boolean;
+    static canItemBeRelic(item: ItemType): boolean;
     static isItemUsedForGrowingPlants(item: ItemType): boolean;
     static getMostCommonItemColor(item: ItemType): IRGB | undefined;
     static isContainer(obj: unknown): obj is IContainer;
@@ -140,6 +142,8 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     private static cacheItemWeights;
     private static cacheCreatureOfferingsAndResources;
     static cacheAsync(): Promise<void>;
+    private static cacheRelicItems;
+    private static getDisassemblyAndBurnItemTypes;
     private static cacheRemainingItemStuff;
     static clearCaches(): void;
     static getUseItemActions(): ReadonlySet<ActionType>;
@@ -205,7 +209,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      */
     protected onRemove(): boolean;
     getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): Item[];
-    getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
+    static getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getWeightCapacity(container: IContainer, includeMagic?: boolean): number | undefined;
     create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, updateTables?: boolean, context?: ActionContext): Item;
     createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human): Item;
