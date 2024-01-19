@@ -858,6 +858,10 @@ export declare const enumRefTypes: {
         Aspic: ItemType.Aspic;
         FruitCocktail: ItemType.FruitCocktail;
         VegetableTerrine: ItemType.VegetableTerrine;
+        TatteredClothBandana: ItemType.TatteredClothBandana;
+        ClothBandana: ItemType.ClothBandana;
+        RustedScimitar: ItemType.RustedScimitar;
+        TricorneHat: ItemType.TricorneHat;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
         WoodenBookcase_25: ItemTypeExtra.WoodenBookcase_25;
