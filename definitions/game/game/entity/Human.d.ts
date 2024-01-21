@@ -104,6 +104,7 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     tamedCreatures: Map<`${number},${number}`, Set<number>>;
     ticksSpent: Map<`${number},${number}`, number>;
     turns: number;
+    activeTurns: number;
     vehicleItemReference: ItemReference | undefined;
     connectedVehicleId?: number;
     walkSoundCounter: number;
