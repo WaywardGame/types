@@ -26,5 +26,6 @@ export default class ItemsInspection extends ListInspection<ItemInspection> {
     getDefaultDisplayLevel(context: InfoProviderContext): InfoDisplayLevel.NonVerbose | InfoDisplayLevel.Always;
     protected initChildTextComponent(text: TranslationGenerator): Text;
     protected onTickEnd(): void;
+    protected onTransformed(): void;
     private updatePosition;
 }

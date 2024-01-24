@@ -34,6 +34,7 @@ import type { IInsulationDescription, ITemperatureDescription } from "@wayward/g
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
+import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import type Translation from "@wayward/game/language/Translation";
 import type { Article } from "@wayward/game/language/Translation";
 import type Message from "@wayward/game/language/dictionary/Message";
@@ -118,6 +119,7 @@ export interface IItemDisassembly {
     tradedFrom: string[] | undefined;
     decay: number | undefined;
     startingDecay: number | undefined;
+    renamed: string | ISerializedTranslation | undefined;
 }
 export declare enum ItemDamageResult {
     NoDamage = 0,
