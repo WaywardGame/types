@@ -33,6 +33,7 @@ import type ContainerDialog from "@wayward/game/ui/screen/screens/game/dialog/Co
 import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
 import MenuBar from "@wayward/game/ui/screen/screens/game/static/MenuBar";
 import type Messages from "@wayward/game/ui/screen/screens/game/static/Messages";
+import Placeholder from "@wayward/game/ui/screen/screens/game/static/Placeholder";
 import type StatsQuadrant from "@wayward/game/ui/screen/screens/game/static/Stats";
 import MovementHandler from "@wayward/game/ui/screen/screens/game/util/movement/MovementHandler";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
@@ -63,9 +64,11 @@ export default class GameScreen extends Screen {
     private readonly nightPopupOverlay;
     private readonly buttonRespawn;
     constructor();
+    get isTwoColumn(): boolean;
     private get gameCanvasComponent();
     getQuadrantComponents(): Stream<QuadrantComponent>;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: QuadrantComponentId): (never extends C ? QuadrantComponent : C extends never[] ? QuadrantComponent | C : {} extends C ? QuadrantComponent | Partial<QuadrantComponent> : QuadrantComponent | C) | undefined;
+    getQuadrantComponentInQuadrant(quadrant: Quadrant): QuadrantComponent | Placeholder | undefined;
     getQuadrantContainer(): Component;
     isMouseWithin(): Component | undefined;
     mouseStartWasWithin(api: IBindHandlerApi): boolean | undefined;
