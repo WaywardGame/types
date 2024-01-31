@@ -1557,19 +1557,21 @@ export declare enum ItemType {
     ClothBandana = 800,
     RustedScimitar = 801,
     TricorneHat = 802,
-    Last = 803
+    SandstoneArrowhead = 803,
+    SandstoneArrow = 804,
+    Last = 805
 }
 export declare enum ItemTypeExtra {
-    None = 804,
-    TatteredMap_RolledUp = 805,
-    TatteredMap_Completed = 806,
-    WoodenBookcase_25 = 807,
-    WoodenBookcase_50 = 808,
-    WoodenBookcase_75 = 809,
-    WoodenBookcase_100 = 810,
-    RuneOfEvilSplinters = 811,
-    RuneOfGoodCharred = 812,
-    TallySticks = 813
+    None = 806,
+    TatteredMap_RolledUp = 807,
+    TatteredMap_Completed = 808,
+    WoodenBookcase_25 = 809,
+    WoodenBookcase_50 = 810,
+    WoodenBookcase_75 = 811,
+    WoodenBookcase_100 = 812,
+    RuneOfEvilSplinters = 813,
+    RuneOfGoodCharred = 814,
+    TallySticks = 815
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {

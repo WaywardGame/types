@@ -216,7 +216,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     getContainedContainers(container: IContainer): IContainer[];
     computeContainerWeight(container: IContainer): number;
     getMagicalWeightCapacity(container: IContainer): number;
-    hasRoomInContainer(targetContainer: IContainer, itemToMove: Item): boolean;
+    hasRoomInContainer(targetContainer: IContainer, itemToMove: Item): IContainer | undefined;
     /**
      * Gets the name of a container
      * @param debug This is for debug context (ie, include tile information, world container, etc)

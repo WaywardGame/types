@@ -53,7 +53,7 @@ export declare class Alignment implements IReadableAlignment {
     /**
      * Reduce the "good" of the player. The value will be rounded and clamped.
      */
-    reduceGood(value: number): this;
+    reduceGood(value: number, check?: boolean): this;
     get goodCap(): number;
     /**
      * The current "evil" of the player. A positive integer from 0 to maximum value.
@@ -71,7 +71,7 @@ export declare class Alignment implements IReadableAlignment {
     /**
      * Reduce the "evil" of the player. The value will be rounded and clamped.
      */
-    reduceEvil(value: number): this;
+    reduceEvil(value: number, check?: boolean): this;
     get evilCap(): number;
     get fraction(): number;
     get deity(): number;

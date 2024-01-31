@@ -166,6 +166,7 @@ export interface IAddToContainerResult {
     usable?: true;
     itemsMoved: Item[];
     noMoreRoomForItems: Item[];
+    topLevelContainer?: IContainer;
 }
 export interface IContainerOld extends Omit<IContainer, "addOrder"> {
     itemOrders?: number[];

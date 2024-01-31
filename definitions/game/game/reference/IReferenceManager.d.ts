@@ -862,6 +862,8 @@ export declare const enumRefTypes: {
         ClothBandana: ItemType.ClothBandana;
         RustedScimitar: ItemType.RustedScimitar;
         TricorneHat: ItemType.TricorneHat;
+        SandstoneArrowhead: ItemType.SandstoneArrowhead;
+        SandstoneArrow: ItemType.SandstoneArrow;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
         WoodenBookcase_25: ItemTypeExtra.WoodenBookcase_25;
