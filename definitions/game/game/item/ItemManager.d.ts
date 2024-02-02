@@ -421,4 +421,5 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      * Runs a thing the container + parent containers
      */
     private forEachContainer;
+    getAncestorContainers(container: IContainer | undefined, includeCurrent?: boolean): Set<IContainer>;
 }

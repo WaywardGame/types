@@ -100,6 +100,9 @@ export declare enum CreatureType {
     ShadowCreature = 61,
     PirateSkeleton = 62
 }
+export declare enum CreatureTypeGroup {
+    Golem = 0
+}
 export interface ICreatureOld extends Creature {
     hp: number;
     maxhp: number;
@@ -328,6 +331,14 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      */
     noShadow?: boolean;
     noSpringForthMessage?: true;
+    /**
+     * The merchant credit value/worth of a creature when contained in another item (bottles/cages/etc.)
+     */
+    worth?: number;
+    /**
+     * Only used for golems currently, but we should use this for all true/false properties for creatures probably
+     */
+    group?: CreatureTypeGroup[];
 }
 export interface ICreatureSpawn {
     /**

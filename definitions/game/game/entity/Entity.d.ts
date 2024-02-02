@@ -144,6 +144,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      */
     removeData(key: string): boolean;
     abstract get isValid(): boolean;
+    get asGenericEntity(): Entity;
     get asEntity(): Entity<DescriptionType, TypeType, EntityReferenceType, TagType>;
     get asEntityMovable(): EntityMovable<DescriptionType, TypeType, EntityReferenceType, TagType> | undefined;
     get asEntityWithStats(): EntityWithStats<DescriptionType, TypeType, EntityReferenceType, TagType> | undefined;
