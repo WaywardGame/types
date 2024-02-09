@@ -91,7 +91,7 @@ export interface IMagicalPropertyManagerEvents {
      */
     set(...args: MagicalPropertyIdentity<[value: number]>): any;
     /**
-     * Emitted when a property was changed or removed
+     * Emitted when a property was set or removed
      */
     change(...identity: MagicalPropertyIdentity): any;
     /**

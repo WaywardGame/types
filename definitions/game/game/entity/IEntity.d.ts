@@ -41,6 +41,7 @@ export interface IEntityConstructorOptions<TypeType extends number> {
     type: TypeType;
     tile: Tile;
 }
+export declare function asEntity(value?: unknown): Entity | undefined;
 export declare enum StatusEffectChangeReason {
     Gained = 0,
     Passed = 1,

@@ -10,7 +10,6 @@
  */
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import LabelledValue from "@wayward/game/game/inspection/infoProviders/LabelledValue";
-import MagicalPropertyValue from "@wayward/game/game/inspection/infoProviders/MagicalPropertyValue";
 import UseInfo from "@wayward/game/game/inspection/infoProviders/UseInfo";
 import type Item from "@wayward/game/game/item/Item";
 import { MagicalPropertyEntry } from "@wayward/game/game/magic/MagicalPropertyManager";
@@ -36,9 +35,9 @@ declare const _default: UseInfo<{
 } & {
     isMagicalPropertyPercentagePremultiplied: (property: MagicalPropertyType) => boolean;
 } & {
-    getAttack: () => MagicalPropertyValue | undefined;
+    getAttack: () => import("@wayward/game/game/inspection/InfoProvider").SimpleInfoProvider | undefined;
 } & {
-    getDefense: () => (import("../../../../../language/impl/TranslationImpl").default | MagicalPropertyValue)[];
+    getDefense: () => (import("../../../../../language/impl/TranslationImpl").default | import("@wayward/game/game/inspection/InfoProvider").SimpleInfoProvider)[];
 } & {
     formatInsulation: (insulation?: number | undefined, type?: TempType | undefined) => LabelledValue;
 } & {

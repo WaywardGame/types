@@ -23,31 +23,31 @@ declare namespace Observer {
         /**
          * Observes events an on emitter to perform refresh functionality or delete caches for JIT stuff.
          */
-        <E extends GameEmitterOrBus>(emitterOrBus: E, events: GameEvent<E> | Array<GameEvent<E>>, priority?: number): HOST;
+        <E extends GameEmitterOrBus>(emitterOrBus: E | undefined, events: GameEvent<E> | Array<GameEvent<E>>, priority?: number): HOST;
         /**
          * Observes events an on emitter (by WeakRef) to perform refresh functionality or delete caches for JIT stuff.
          */
-        <E extends Emitter, K extends GameEvent<E>>(emitter: WeakRef<E>, events: GameEvent<E> | Array<GameEvent<E>>, priority?: number): HOST;
+        <E extends Emitter, K extends GameEvent<E>>(emitter: WeakRef<E> | undefined, events: GameEvent<E> | Array<GameEvent<E>>, priority?: number): HOST;
         /**
          * Observes events an on emitter to perform refresh functionality or delete caches for JIT stuff.
          * @param predicate A predicate function that will only allow event triggers if true
          */
-        <E extends GameEmitterOrBus, K extends GameEvent<E>>(emitterOrBus: E, events: K | K[], predicate: (...params: Parameters<GameEventHandler<E, K>>) => boolean, priority?: number): HOST;
+        <E extends GameEmitterOrBus, K extends GameEvent<E>>(emitterOrBus: E | undefined, events: K | K[], predicate: (...params: Parameters<GameEventHandler<E, K>>) => boolean, priority?: number): HOST;
         /**
          * Observes events an on emitter (by WeakRef) to perform refresh functionality or delete caches for JIT stuff.
          * @param predicate A predicate function that will only allow event triggers if true
          */
-        <E extends Emitter, K extends GameEvent<E>>(emitter: WeakRef<E>, events: K | K[], predicate: (...params: Parameters<GameEventHandler<E, K>>) => boolean, priority?: number): HOST;
+        <E extends Emitter, K extends GameEvent<E>>(emitter: WeakRef<E> | undefined, events: K | K[], predicate: (...params: Parameters<GameEventHandler<E, K>>) => boolean, priority?: number): HOST;
         /**
          * Observes events an on emitter to perform refresh functionality or delete caches for JIT stuff.
          * @param observer An observer that will only allow event triggers if the value has changed
          */
-        <E extends GameEmitterOrBus>(emitterOrBus: E, events: GameEvent<E> | Array<GameEvent<E>>, observer: Observer<any>, priority?: number): HOST;
+        <E extends GameEmitterOrBus>(emitterOrBus: E | undefined, events: GameEvent<E> | Array<GameEvent<E>>, observer: Observer<any>, priority?: number): HOST;
         /**
          * Observes events an on emitter (by WeakRef) to perform refresh functionality or delete caches for JIT stuff.
          * @param observer An observer that will only allow event triggers if the value has changed
          */
-        <E extends Emitter>(emitter: WeakRef<E>, events: GameEvent<E> | Array<GameEvent<E>>, observer: Observer<any>, priority?: number): HOST;
+        <E extends Emitter>(emitter: WeakRef<E> | undefined, events: GameEvent<E> | Array<GameEvent<E>>, observer: Observer<any>, priority?: number): HOST;
         tick(observer: Observer<any>): HOST;
         tick(predicate: (...params: Parameters<GameEventHandler<EventBus.LocalIsland, "tickEnd">>) => boolean): HOST;
         start(): void;

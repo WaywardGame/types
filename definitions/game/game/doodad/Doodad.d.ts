@@ -79,6 +79,8 @@ export interface IDoodadEvents extends IEntityMovableEvents {
     durabilityMaxChange(durability: number, oldDurability: number): any;
     revertToItem(item: Item): any;
     becomeFromItem(item: Item): any;
+    addMagic(magic: MagicalPropertyManager): any;
+    removeMagic(magic: MagicalPropertyManager): any;
 }
 export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType, ReferenceType.Doodad, DoodadTag> implements IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, Partial<IContainer>, IHasInsulation, IHasBuilder, IHasMagic {
     static is(value: any): value is Doodad;

@@ -80,7 +80,9 @@ export interface IItemEvents extends IEntityMovableEvents {
     durabilityMaxChange(durabilityMax: number, oldDurabilityMax: number): any;
     decayChange(decay?: number, oldDecay?: number): any;
     addMagic(manager: MagicalPropertyManager): any;
-    inheritMagic(manager?: MagicalPropertyManager): any;
+    removeMagic(manager: MagicalPropertyManager): any;
+    attackBonusChange(attackBonus: number, oldAttackBonus?: number): any;
+    defenseBonusChange(defenseBonus: number, oldDefenseBonus?: number): any;
     revertFromDoodad(doodad: Doodad): any;
     becomeDoodad(doodad: Doodad): any;
 }
@@ -312,6 +314,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Returns the durability of the item based on the max durability to be used as a pseudo "charge"
      */
     getDurabilityCharge(): number;
+    removeMagic(): void;
     revertFromDoodad(doodad: Doodad): void;
     copyPropertiesFrom(fromItem: Item): void;
     getWeightCapacity(): number | undefined;
