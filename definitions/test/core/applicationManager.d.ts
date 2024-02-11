@@ -69,6 +69,7 @@ export declare class Apps {
     leaveServer(...apps: Application[]): Promise<void>;
     returnToTitleScreen(): Promise<void>;
     waitUntilLoadingIsFinished(): Promise<void>;
+    removeNearbyCreatures(): Promise<void>;
     randomInput(count: number): Promise<void>;
     moveToTowardsIsland(app: Application, direction: Direction.Cardinal, recoverStats?: boolean): Promise<void>;
     recoverStats(app: Application): Promise<void>;
