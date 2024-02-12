@@ -570,6 +570,10 @@ export interface IRanged {
 }
 export interface IMagicalPropertyInfo {
     /**
+     * The minimum value this magical property can be on this item.
+     */
+    min: number;
+    /**
      * The maximum value this magical property can be on this item.
      */
     max: number;

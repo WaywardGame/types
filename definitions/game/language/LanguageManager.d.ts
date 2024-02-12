@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { Game } from "@wayward/game/game/Game";
 import type { IIcon } from "@wayward/game/game/inspection/InfoProvider";
 import Dictionary from "@wayward/game/language/Dictionary";
 import Language from "@wayward/game/language/Language";
@@ -17,7 +17,7 @@ import type TranslationsProvider from "@wayward/game/language/TranslationsProvid
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 import type { IStringSection } from "@wayward/game/utilities/string/Interpolator";
 import { CaseStyle } from "@wayward/game/utilities/string/Strings";
-import type { Game } from "@wayward/game/game/Game";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 type ArticleRules = Array<[number | {
     min: number;
     max?: number;

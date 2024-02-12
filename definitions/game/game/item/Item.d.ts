@@ -289,6 +289,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     addMagicalProperties(count: number, source?: string): boolean;
     rerollMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     rerollMagicalPropertyValues(): void;
+    initializeMagicalPropertyManager(): void;
     addMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     getMagicalPropertyInfo(type: MagicalPropertyType): IMagicalPropertyInfo | undefined;
     acquireNotify(human: Human, context?: ActionContext): void;

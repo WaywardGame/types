@@ -67,9 +67,12 @@ type MagicalSubPropertyTypesResult = {
         subTypes: ReadonlyArray<MagicalPropertyTypeSubTypeMap[K]>;
     };
 }[MagicalSubPropertyTypes];
-export type MagicalPropertyIdentity<A extends any[] = []> = [MagicalPropertyType, ...A] | {
+export type MagicalNormalPropertyIdentity<A extends any[] = []> = [MagicalNormalPropertyTypes, ...A];
+export type MagicalSubPropertyIdentity<A extends any[] = []> = {
     [Key in MagicalSubPropertyTypes]: [Key, MagicalPropertyTypeSubTypeMap[Key], ...A];
 }[MagicalSubPropertyTypes];
+export type MagicalSubPropertyIdentitySimple<A extends any[] = []> = [MagicalSubPropertyTypes, MagicalSubPropertySubTypes, ...A];
+export type MagicalPropertyIdentity<A extends any[] = []> = [MagicalPropertyType, ...A] | MagicalSubPropertyIdentity<A>;
 export type MagicalPropertyIdentityFlat = MagicalNormalPropertyTypes | MagicalSubPropertyTypes | {
     [Key in MagicalSubPropertyTypes]: [Key, MagicalPropertyTypeSubTypeMap[Key]];
 }[MagicalSubPropertyTypes];
@@ -77,7 +80,10 @@ export type MagicalPropertyIdentityHash = `${MagicalNormalPropertyTypes}` | {
     [Key in MagicalSubPropertyTypes]: `${Key}:${MagicalPropertyTypeSubTypeMap[Key]}`;
 }[MagicalSubPropertyTypes];
 export declare namespace MagicalPropertyIdentity {
+    function isNormalProperty(identity: MagicalPropertyIdentity): identity is MagicalNormalPropertyIdentity;
+    function isSubProperty(identity: MagicalPropertyIdentity): identity is MagicalSubPropertyIdentity;
     function hash(...[type, subType]: MagicalPropertyIdentity): MagicalPropertyIdentityHash;
+    function hash(type: MagicalSubPropertyTypes, subType: MagicalSubPropertySubTypes): MagicalPropertyIdentityHash;
     function unhash(hash: MagicalPropertyIdentityHash): MagicalPropertyIdentity | undefined;
     function equals(...identities: MagicalPropertyIdentity[]): boolean;
 }
@@ -86,6 +92,10 @@ export interface IMagicalPropertyManagerEvents {
      * Emitted when a property was removed
      */
     remove(...identity: MagicalPropertyIdentity): any;
+    /**
+     * Emitted when a property was added
+     */
+    add(...args: MagicalPropertyIdentity<[value: number]>): any;
     /**
      * Emitted when a property was set, and the value it was set to
      */
@@ -104,6 +114,10 @@ export interface IMagicalPropertyManagerEvents {
     inherit(from: MagicalPropertyManager): any;
 }
 export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPropertyManagerEvents> {
+    static getNormalTypes(): MagicalNormalPropertyTypes[];
+    static getSubTypes(): MagicalSubPropertyTypes[];
+    static isNormalProperty(property: MagicalPropertyType): property is MagicalNormalPropertyTypes;
+    static isSubProperty(property: MagicalPropertyType): property is MagicalSubPropertyTypes;
     static init(): void;
     private properties;
     private inert?;
@@ -173,6 +187,7 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      * @returns whether the magical sub-property was removed — ie, if it existed
      */
     remove<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): boolean;
+    remove(...identity: MagicalPropertyIdentity): boolean;
     /**
      * Removes any magical properties on this object
      * @returns the number of magical properties removed

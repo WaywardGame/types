@@ -21,6 +21,7 @@ import { MessageType } from "@wayward/game/game/entity/player/IMessageManager";
 import type { ItemType } from "@wayward/game/game/item/IItem";
 import type { IHasMagic } from "@wayward/game/game/magic/MagicalPropertyManager";
 import { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { EnumReferenceTypes, Reference } from "@wayward/game/game/reference/IReferenceManager";
 import Dictionary from "@wayward/game/language/Dictionary";
@@ -28,7 +29,7 @@ import type { DictionaryEntryEnums } from "@wayward/game/language/DictionaryMap"
 import type { ISerializedTranslation, TranslationArg } from "@wayward/game/language/ITranslation";
 import Message from "@wayward/game/language/dictionary/Message";
 import { EquipSlotTranslation, MiscTranslation } from "@wayward/game/language/dictionary/Misc";
-import type UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
+import UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
 import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import { formatListTranslation } from "@wayward/game/language/segment/FormatListSegment";
 import ITranslationSorter from "@wayward/game/language/utility/TranslationSorter";
@@ -125,7 +126,7 @@ declare namespace Translation {
     export const deity: Translator<Deity, [color?: boolean | undefined]>;
     export const status: (entry: string | StatusType, ref?: boolean) => TranslationImpl;
     export let action: Translator<ActionType | UsableActionType>;
-    export let magic: Translator;
+    export let magic: Translator<MagicalPropertyType, [color?: boolean, obscured?: boolean]>;
     export const equipSlot: Translator<EquipType, [type?: EquipSlotTranslation | undefined]>;
     export const quality: Translator<Quality, [color?: any]>;
     export const qualityList: (qualities: ArrayOr<Quality>, color?: boolean) => TranslationImpl;
@@ -139,6 +140,7 @@ declare namespace Translation {
     export function growthStage(stage?: GrowingStage, spores?: boolean): TranslationImpl | undefined;
     export function merge(...content: TranslationArg[]): TranslationImpl;
     export function mergeSpaced(...content: TranslationArg[]): TranslationImpl;
+    export function labelled(label: TranslationArg, ...content: TranslationArg[]): TranslationImpl;
     export const getString: typeof TranslationImpl.getString;
     export const resolve: typeof TranslationImpl.resolve;
     export function colorizeQuality(quality: Quality | string | undefined): Translation;

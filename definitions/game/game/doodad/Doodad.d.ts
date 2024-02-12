@@ -217,6 +217,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * Gets the builder of this doodad, or `undefined` if the doodad is builderless.
      */
     getBuilder(): Player | undefined;
+    removeMagic(): void;
     unhitch(): void;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean, damage?: number): void;
     getDefaultDurability(random?: import("@wayward/utilities/random/Random").Random<import("@wayward/utilities/random/generators/LegacySeededGenerator").LegacySeededGenerator | import("@wayward/utilities/random/generators/PCGSeededGenerator").PCGSeededGenerator>): number;

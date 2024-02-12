@@ -168,15 +168,15 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     /**
      * Returns this component's containing menu, if it exists.
      */
-    getMenu<M extends Menu | undefined = Menu | undefined>(): M | null;
+    getMenu<M extends Menu | undefined = Menu | undefined>(): M | undefined;
     /**
      * Returns this component's containing dialog, if it exists.
      */
-    getDialog<D extends Dialog | undefined = Dialog | undefined>(): D | null;
+    getDialog<D extends Dialog | undefined = Dialog | undefined>(): D | undefined;
     /**
      * Returns this component's containing dialog, if it exists.
      */
-    getScreen<S extends Screen | undefined = Screen | undefined>(): S | null;
+    getScreen<S extends Screen | undefined = Screen | undefined>(): S | undefined;
     /**
      * Returns the `nth` child, defaulting to the first child
      */
@@ -208,7 +208,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     /**
      * An alias for `element.closest(selector)`
      */
-    closest(selector: string): Element | null;
+    closest(selector: string): Element | undefined;
     /**
      * An alias for `element.closest(selector)`
      */
@@ -360,7 +360,6 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * Returns `true` if this component exists, `false` if it has been removed.
      */
     sleep(ms: number): Promise<boolean>;
-    protected getClosestDialog(): Dialog | undefined;
     private _showTooltip;
 }
 export {};
