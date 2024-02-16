@@ -27,7 +27,7 @@ import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IWell } from "@wayward/game/game/island/IIsland";
 import { LiquidType } from "@wayward/game/game/island/IIsland";
-import type { ContainerSort, DisplayableItemType, IContainer, IItemVehicle, ILiquidGather, ItemTypeExtra } from "@wayward/game/game/item/IItem";
+import type { ContainerSort, DisplayableItemType, IContainer, IItemVehicle, ILiquidGather, IUncastableContainer, ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { IHasMagic } from "@wayward/game/game/magic/MagicalPropertyManager";
@@ -137,6 +137,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     get asPlayer(): undefined;
     get asTileEvent(): undefined;
     get asItem(): undefined;
+    get asTile(): undefined;
     get asContainer(): this & IContainer | undefined;
     isCorpse(): this is Corpse;
     isCreature(): this is Creature;
@@ -147,6 +148,8 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     isPlayer(): this is Player;
     isTileEvent(): this is TileEvent;
     isItem(): this is Item;
+    isTile(): this is Tile;
+    isContainer(): this is IUncastableContainer;
     toString(): string;
     getRegistrarId(): number;
     /**
@@ -281,6 +284,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * @param growthBonus The bonus that is applied (on top of a default of 10) to the plants decay (so it grows faster).
      */
     healOrHarmPlant(liquid: LiquidType, growthBonus?: number): void;
+    initializeMagicalPropertyManager(): MagicalPropertyManager;
     isLitAndCanRevert(): boolean;
     /**
      * Reverts lit doodads if they provide fire and have a revert doodad type set.

@@ -8,28 +8,29 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import { TileUpdateType } from "@wayward/game/game/IGame";
+import type { IObject } from "@wayward/game/game/IObject";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import type { ICorpseDescription } from "@wayward/game/game/entity/creature/corpse/ICorpse";
-import type Creature from "@wayward/game/game/entity/creature/Creature";
-import type { ICreatureDescription } from "@wayward/game/game/entity/creature/ICreature";
-import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import Entity from "@wayward/game/game/entity/Entity";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions, IEntityEvents } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { ICreatureDescription } from "@wayward/game/game/entity/creature/ICreature";
+import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
+import type { ICorpseDescription } from "@wayward/game/game/entity/creature/corpse/ICorpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
-import { TileUpdateType } from "@wayward/game/game/IGame";
-import type { IObject } from "@wayward/game/game/IObject";
+import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
+import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type Translation from "@wayward/game/language/Translation";
 import type { Article } from "@wayward/game/language/Translation";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
-import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface ICorpseEvents extends IEntityEvents {
     /**
      * Called when the entity is created in the game
@@ -41,9 +42,6 @@ export interface ICorpseEvents extends IEntityEvents {
      */
     removed(): void;
 }
-/**
- * TODO: extends Entity?
- */
 export default class Corpse extends Entity<ICorpseDescription, CreatureType, ReferenceType.Corpse> implements IObject<CreatureType> {
     static is(value: any): value is Corpse;
     get entityType(): EntityType.Corpse;
@@ -66,6 +64,8 @@ export default class Corpse extends Entity<ICorpseDescription, CreatureType, Ref
     get asPlayer(): undefined;
     get asTileEvent(): undefined;
     get asItem(): undefined;
+    get asTile(): undefined;
+    get asContainer(): undefined;
     isCorpse(): this is Corpse;
     isCreature(): this is Creature;
     isDoodad(): this is Doodad;
@@ -75,6 +75,8 @@ export default class Corpse extends Entity<ICorpseDescription, CreatureType, Ref
     isPlayer(): this is Player;
     isTileEvent(): this is TileEvent;
     isItem(): this is Item;
+    isTile(): this is Tile;
+    isContainer(): this is IUncastableContainer;
     get point(): IVector3;
     get tile(): Tile;
     toString(): string;

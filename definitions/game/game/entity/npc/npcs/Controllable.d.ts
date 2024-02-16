@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import { AiType } from "@wayward/game/game/entity/IEntity";
 import { EquipType } from "@wayward/game/game/entity/IHuman";
 import type { INPCConstructorOptions } from "@wayward/game/game/entity/npc/INPC";
@@ -17,6 +16,7 @@ import Island from "@wayward/game/game/island/Island";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface IControllableNPCEvents extends Events<NPC> {
     /**
      * NPC is spawned / ready to do things

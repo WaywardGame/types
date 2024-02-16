@@ -11,10 +11,17 @@
 import type { IMovementTime } from "@wayward/game/game/IGame";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Entity from "@wayward/game/game/entity/Entity";
+import type Human from "@wayward/game/game/entity/Human";
 import type { Delay, MovingState, SkillType } from "@wayward/game/game/entity/IHuman";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 export interface IEntityEvents {
     /**
@@ -42,6 +49,33 @@ export interface IEntityConstructorOptions<TypeType extends number> {
     tile: Tile;
 }
 export declare function asEntity(value?: unknown): Entity | undefined;
+export interface ICastable {
+    get asEntity(): Entity | undefined;
+    get asUnion(): Corpse | Creature | Doodad | Human | NPC | Player | TileEvent | Item | Tile | undefined;
+    get asCorpse(): Corpse | undefined;
+    get asCreature(): Creature | undefined;
+    get asDoodad(): Doodad | undefined;
+    get asHuman(): Human | undefined;
+    get asNPC(): NPC | undefined;
+    get asPlayer(): Player | undefined;
+    get asLocalPlayer(): Player | undefined;
+    get asTileEvent(): TileEvent | undefined;
+    get asItem(): Item | undefined;
+    get asTile(): Tile | undefined;
+    get asContainer(): (this & IUncastableContainer) | undefined;
+    isEntity(): this is Entity;
+    isCorpse(): this is Corpse;
+    isCreature(): this is Creature;
+    isDoodad(): this is Doodad;
+    isHuman(): this is Human;
+    isNPC(): this is NPC;
+    isPlayer(): this is Player;
+    get isLocalPlayer(): boolean;
+    isTileEvent(): this is TileEvent;
+    isItem(): this is Item;
+    isTile(): this is Tile;
+    isContainer(): this is IUncastableContainer;
+}
 export declare enum StatusEffectChangeReason {
     Gained = 0,
     Passed = 1,

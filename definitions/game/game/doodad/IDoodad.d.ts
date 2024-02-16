@@ -139,6 +139,10 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     trapDamage?: number;
     waterStill?: boolean;
     /**
+     * Whether magical properties have no effect on this doodad.
+     */
+    magicInert?: true;
+    /**
      * The region where items are stacked.
      * The default region is { xMin: 0, xMax: 0, yMin: 1, yMax: 1 }
      * Max should always be greater than min and values should be within [0, 1]

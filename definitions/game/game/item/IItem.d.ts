@@ -16,7 +16,7 @@ import type { Deity } from "@wayward/game/game/deity/Deity";
 import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
 import type Human from "@wayward/game/game/entity/Human";
-import type { DamageType, Defense, EntityType, MoveType, StatusType } from "@wayward/game/game/entity/IEntity";
+import type { DamageType, Defense, EntityType, ICastable, MoveType, StatusType } from "@wayward/game/game/entity/IEntity";
 import type { Delay, EquipType, SkillType } from "@wayward/game/game/entity/IHuman";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { IActionApi } from "@wayward/game/game/entity/action/IAction";
@@ -98,10 +98,12 @@ interface IBaseContainer extends IContainable {
      */
     sortDirection?: SortDirection;
 }
-export interface IContainer extends IBaseContainer {
+export interface IUncastableContainer extends IBaseContainer {
     containedItems: Item[];
 }
-export interface IMaybeContainer extends IBaseContainer {
+export interface IContainer extends IUncastableContainer, ICastable {
+}
+export interface IMaybeContainer extends IBaseContainer, ICastable {
     containedItems?: Item[];
 }
 export interface IItemDisassembleResult {
@@ -636,7 +638,7 @@ export declare enum ContainerReferenceType {
     Invalid = 0,
     PlayerInventory = 1,
     Doodad = 2,
-    TileItemContainer = 3,
+    WorldContainer = 3,
     Tile = 4,
     Item = 5,
     NPCInventory = 6
@@ -659,9 +661,9 @@ export interface IInvalidContainerReference extends IBaseContainerReference {
     crt: ContainerReferenceType.Invalid;
     type?: ContainerReferenceType.Invalid;
 }
-export interface ITileItemContainerReference extends IBaseContainerReference {
-    crt: ContainerReferenceType.TileItemContainer;
-    type?: ContainerReferenceType.TileItemContainer;
+export interface IWorldContainerReference extends IBaseContainerReference {
+    crt: ContainerReferenceType.WorldContainer;
+    type?: ContainerReferenceType.WorldContainer;
 }
 export interface ITileContainerReference extends IBaseContainerReference, IVector3 {
     crt: ContainerReferenceType.Tile;
@@ -685,7 +687,7 @@ export interface INPCInventoryContainerReference extends IBaseContainerReference
     type?: ContainerReferenceType.NPCInventory;
     id: number;
 }
-export type ContainerReference = IInvalidContainerReference | ITileItemContainerReference | IPlayerInventoryContainerReference | ITileContainerReference | IDoodadContainerReference | IItemContainerReference | INPCInventoryContainerReference;
+export type ContainerReference = IInvalidContainerReference | IWorldContainerReference | IPlayerInventoryContainerReference | ITileContainerReference | IDoodadContainerReference | IItemContainerReference | INPCInventoryContainerReference;
 export declare enum CraftResult {
     Fail = 0,
     Success = 1,

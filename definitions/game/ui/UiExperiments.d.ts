@@ -10,8 +10,7 @@
  */
 declare enum UiExperiment {
     ColorSchemeLight = 0,
-    NewCraftingDialog = 1,
-    ActionExamples = 2
+    ActionExamples = 1
 }
 declare namespace UiExperiment {
     type Excluded = "toggle" | "update" | "all" | "name" | "has";

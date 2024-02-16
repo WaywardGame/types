@@ -18,7 +18,7 @@ import type { ITradeArgument } from "@wayward/game/game/entity/action/actions/tr
 import { type INPCConstructorOptions } from "@wayward/game/game/entity/npc/INPC";
 import NPC from "@wayward/game/game/entity/npc/NPC";
 import type { IContainer } from "@wayward/game/game/item/IItem";
-import { ItemType } from "@wayward/game/game/item/IItem";
+import { ContainerType, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
@@ -61,6 +61,7 @@ export default class MerchantNPC extends NPC {
     readonly event: IEventEmitter<this, IMerchantNPCEvents>;
     credit: Map<string, number>;
     customerKnowledge: Map<string, MerchantCustomerKnowledgeState>;
+    containerType: ContainerType;
     constructor(options?: INPCConstructorOptions);
     knowsOfUnseenStock(customer: Human): boolean;
     getCustomerCredit(customer: Human): number;

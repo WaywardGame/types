@@ -34,6 +34,12 @@ import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IRange } from "@wayward/utilities/math/Range";
 export interface IGameEvents {
     /**
+     * Called when game options are first processed, after modifiers are applied.
+     *
+     * You can use this combined with `game.uncacheGameOptions()` to dynamically modify game options.
+     */
+    getGameOptions(gameOptions: IGameOptions): IGameOptions;
+    /**
      * Called when the game is starting
      * @param isLoadingSave True if a save game was loaded
      * @param playedCount The number of times the player has played the game (globally, not per slot)

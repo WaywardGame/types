@@ -19,7 +19,7 @@ import type { IContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type ItemManager from "@wayward/game/game/item/ItemManager";
 import DrawnMap from "@wayward/game/game/mapping/DrawnMap";
-import type Tile from "@wayward/game/game/tile/Tile";
+import Tile from "@wayward/game/game/tile/Tile";
 import Component from "@wayward/game/ui/component/Component";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
 import Screen from "@wayward/game/ui/screen/Screen";

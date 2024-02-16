@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { UsableActionType } from "@wayward/game/game/entity/action/usable/UsableActionType";
-declare const usableActionTypes: Map<UsableActionType, [string, (string | undefined)?]>;
+declare const usableActionTypes: Map<UsableActionType, [string, (string | undefined)?, (string | undefined)?]>;
 export default usableActionTypes;

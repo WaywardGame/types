@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type Entity from "@wayward/game/game/entity/Entity";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import { InspectType } from "@wayward/game/game/inspection/IInspection";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import type Inspection from "@wayward/game/game/inspection/Inspection";

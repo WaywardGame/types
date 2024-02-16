@@ -9,12 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { SfxType } from "@wayward/game/audio/IAudio";
+import type { IDecayTemperatureRange } from "@wayward/game/game/IGame";
+import type { Quality } from "@wayward/game/game/IObject";
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
 import type { GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import { DoodadType } from "@wayward/game/game/doodad/IDoodad";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
-import type { IDecayTemperatureRange } from "@wayward/game/game/IGame";
-import type { Quality } from "@wayward/game/game/IObject";
 import type { WaterType } from "@wayward/game/game/island/IIsland";
 import type { IContainer, IMaybeContainer, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
@@ -25,8 +25,8 @@ import type { ILeftOverTile } from "@wayward/game/game/tile/Terrains";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
-import type { IColorFul, IRGB } from "@wayward/utilities/Color";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { IColorFul, IRGB } from "@wayward/utilities/Color";
 export interface ITerrainDescription extends IModdable {
     passable?: boolean;
     particles?: IRGB;
@@ -339,3 +339,4 @@ export declare enum TerrainTypeGroup {
 export declare const trackTerrainTypes: Set<TerrainType>;
 export declare const trackGateDoodadTypes: Set<DoodadType>;
 export declare const DEFAULT_FISH_AVAILABLE = 6;
+export declare const TILE_MAX_CAPACITY = 36;

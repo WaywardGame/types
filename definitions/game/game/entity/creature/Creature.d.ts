@@ -22,6 +22,7 @@ import type { CreatureAttackOutcome, CreatureType, ICreatureAttackOutcomeAttack,
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
+import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { Reference } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -193,6 +194,8 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     get asPlayer(): undefined;
     get asTileEvent(): undefined;
     get asItem(): undefined;
+    get asTile(): undefined;
+    get asContainer(): undefined;
     isCorpse(): this is Corpse;
     isCreature(): this is Creature;
     isDoodad(): this is Doodad;
@@ -202,6 +205,8 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     isPlayer(): this is Player;
     isTileEvent(): this is TileEvent;
     isItem(): this is Item;
+    isTile(): this is Tile;
+    isContainer(): this is IUncastableContainer;
     get point(): IVector3;
     get tile(): Tile;
 }

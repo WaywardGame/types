@@ -139,6 +139,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     get asPlayer(): undefined;
     get asTileEvent(): undefined;
     get asItem(): Item | undefined;
+    get asTile(): undefined;
     get asContainer(): (this & IContainer) | undefined;
     isCorpse(): this is Corpse;
     isCreature(): this is Creature;
@@ -149,6 +150,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     isPlayer(): this is Player;
     isTileEvent(): this is TileEvent;
     isItem(): this is Item;
+    isTile(): this is Tile;
     toString(): string;
     stopSlipping(): void;
     protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
@@ -289,7 +291,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     addMagicalProperties(count: number, source?: string): boolean;
     rerollMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     rerollMagicalPropertyValues(): void;
-    initializeMagicalPropertyManager(): void;
+    initializeMagicalPropertyManager(): MagicalPropertyManager;
     addMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     getMagicalPropertyInfo(type: MagicalPropertyType): IMagicalPropertyInfo | undefined;
     acquireNotify(human: Human, context?: ActionContext): void;

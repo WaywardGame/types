@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Human from "@wayward/game/game/entity/Human";
-import type { IContainer, IRecipe, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
+import type { IContainer, IRecipe, IUncastableContainer, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 export default class ItemRecipeRequirementChecker {
     private readonly human;
@@ -58,7 +58,7 @@ export default class ItemRecipeRequirementChecker {
      * @param container The container
      * @returns true if the recipe's requirements are satisfied by items in the container.
      */
-    processContainer(container: IContainer): boolean;
+    processContainer(container: IUncastableContainer): boolean;
     private processItem;
     processBaseComponent(item: Item): boolean;
     processComponents(item: Item, disableExtraChecks?: boolean): boolean;

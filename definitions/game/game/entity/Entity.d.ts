@@ -15,7 +15,7 @@ import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
-import type { IEntityConstructorOptions, IEntityEvents } from "@wayward/game/game/entity/IEntity";
+import type { ICastable, IEntityConstructorOptions, IEntityEvents } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
 import type { IHumanBound } from "@wayward/game/game/entity/IEntityManager";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
@@ -26,6 +26,7 @@ import type Player from "@wayward/game/game/entity/player/Player";
 import type { IInspector } from "@wayward/game/game/inspection/IInfoProvider";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
+import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { EntityReferenceTypes, IReferenceable, Reference } from "@wayward/game/game/reference/IReferenceManager";
 import type { ITemperatureSource } from "@wayward/game/game/temperature/ITemperature";
@@ -39,7 +40,7 @@ import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { WorldZ } from "@wayward/utilities/game/WorldZ";
-export default abstract class Entity<DescriptionType = unknown, TypeType extends number = number, EntityReferenceType extends EntityReferenceTypes = EntityReferenceTypes, TagType = unknown> extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, ITemperatureSource, INotificationLocation, IVector4 {
+export default abstract class Entity<DescriptionType = unknown, TypeType extends number = number, EntityReferenceType extends EntityReferenceTypes = EntityReferenceTypes, TagType = unknown> extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, ITemperatureSource, INotificationLocation, IVector4, ICastable {
     abstract readonly entityType: EntityType;
     abstract readonly tileUpdateType: TileUpdateType;
     id: number;
@@ -157,6 +158,8 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     abstract get asPlayer(): Player | undefined;
     abstract get asTileEvent(): TileEvent | undefined;
     abstract get asItem(): Item | undefined;
+    abstract get asTile(): Tile | undefined;
+    abstract get asContainer(): (this & IUncastableContainer) | undefined;
     abstract isCorpse(): this is Corpse;
     abstract isCreature(): this is Creature;
     abstract isDoodad(): this is Doodad;
@@ -166,5 +169,9 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     abstract isPlayer(): this is Player;
     abstract isTileEvent(): this is TileEvent;
     abstract isItem(): this is Item;
+    abstract isTile(): this is Tile;
+    abstract isContainer(): this is IUncastableContainer;
+    isEntity(): this is Entity;
     asType(type: TypeType): this | undefined;
+    get asUnion(): Player | NPC | Creature | TileEvent | Item | Corpse | Doodad;
 }

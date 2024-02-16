@@ -12,7 +12,7 @@ import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type Item from "@wayward/game/game/item/Item";
-import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
+import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 export interface IExudeCanUse extends IActionUsable {
     exudeTarget: Item;
     exudeItemMagic: MagicalPropertyManager;

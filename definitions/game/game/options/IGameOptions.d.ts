@@ -163,6 +163,10 @@ export interface IGameOptions {
     milestoneModifiers: Set<Milestone>;
     items: {
         /**
+         * Whether tile containers should be allowed.
+         */
+        tileContainersEnabled: boolean;
+        /**
          * A multiplier for the durability of each item globally.
          */
         durabilityMultiplier: number;

@@ -11,16 +11,19 @@
 import { SfxType } from "@wayward/game/audio/IAudio";
 import { FireType, TileUpdateType } from "@wayward/game/game/IGame";
 import { Quality } from "@wayward/game/game/IObject";
-import { WorldZ } from "@wayward/utilities/game/WorldZ";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Entity from "@wayward/game/game/entity/Entity";
+import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type Human from "@wayward/game/game/entity/Human";
+import type { ICastable } from "@wayward/game/game/entity/IEntity";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type { IMessageManager } from "@wayward/game/game/entity/player/IMessageManager";
+import type Player from "@wayward/game/game/entity/player/Player";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
+import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { IMaybeTileContainer, IOverlayInfo, ITerrainDescription, ITileContainer, ITileData } from "@wayward/game/game/tile/ITerrain";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
@@ -31,11 +34,11 @@ import type { IRendererOrigin } from "@wayward/game/renderer/context/RendererOri
 import { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
 import type { IFieldOfViewOrigin } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
 import { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
-import type { IRGB } from "@wayward/utilities/Color";
+import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
-import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
-import type { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IRGB } from "@wayward/utilities/Color";
+import { WorldZ } from "@wayward/utilities/game/WorldZ";
 export interface ICanSailAwayResult {
     canSailAway: boolean;
     message?: Message;
@@ -46,7 +49,7 @@ export interface ICanSailAwayResult {
 /**
  * Tile class
  */
-export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOfViewOrigin {
+export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOfViewOrigin, ICastable {
     readonly id: number;
     static is(value: any): value is Tile;
     readonly island: Island;
@@ -136,12 +139,12 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * Gets/creates tile container
      */
-    get tileContainer(): ITileContainer;
+    get tileContainer(): this & ITileContainer;
     /**
      * Gets a tile container.
      * It will not create one when called.
      */
-    get maybeTileContainer(): IMaybeTileContainer;
+    get maybeTileContainer(): this & IMaybeTileContainer;
     /**
      * Checks for:
      * Passable
@@ -375,7 +378,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * IterableIterator version of TileHelpers.getTilesAround
      */
-    tilesAround(includeCurrentTile?: boolean, includeCorners?: boolean): Generator<Tile, void>;
+    generateTilesAround(includeCurrentTile?: boolean, includeCorners?: boolean): Generator<Tile, void>;
     findMatchingTile(isMatchingTile: (tile: Tile) => boolean, options?: {
         maxTilesChecked?: number;
         canVisitTile?: (tile: Tile) => boolean;
@@ -399,4 +402,29 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Returns whether the tile is blocked (completely impassible) for the human
      */
     isWalkToTileBlocked(human: Human, clientSide: boolean): boolean;
+    get asCorpse(): undefined;
+    get asCreature(): undefined;
+    get asDoodad(): undefined;
+    get asHuman(): undefined;
+    get asLocalPlayer(): undefined;
+    get asNPC(): undefined;
+    get asPlayer(): undefined;
+    get asTileEvent(): undefined;
+    get asItem(): undefined;
+    get asTile(): Tile;
+    get asUnion(): Tile;
+    get asEntity(): undefined;
+    get asContainer(): (this & ITileContainer) | undefined;
+    isCorpse(): this is Corpse;
+    isCreature(): this is Creature;
+    isDoodad(): this is Doodad;
+    isHuman(): this is Human;
+    get isLocalPlayer(): boolean;
+    isNPC(): this is NPC;
+    isPlayer(): this is Player;
+    isTileEvent(): this is TileEvent;
+    isItem(): this is Item;
+    isTile(): this is Tile;
+    isEntity(): this is Entity;
+    isContainer(): this is IUncastableContainer;
 }

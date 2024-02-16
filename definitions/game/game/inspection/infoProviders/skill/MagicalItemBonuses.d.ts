@@ -22,4 +22,16 @@ export default class SkillBonusMagicalItemsInfoProvider extends InfoProvider {
     hasContent(): boolean;
     get(): Array<0 | TranslationImpl | SimpleInfoProvider>;
     private getMagicalItems;
+    /**
+     * Retrieves the magical doodads that provide bonuses for a specific skill.
+     * @param skill The skill type to filter the doodads by.
+     * @returns An array of doodads that provide bonuses for the specified skill, or undefined if no doodads are found.
+     */
+    private getMagicalDoodads;
+    /**
+     * Calculates the total skill bonuses provided by a doodad from items contained within.
+     * @param doodad The doodad to calculate skill bonuses for.
+     * @returns The total skill bonus value.
+     */
+    private getTotalSkillBonuses;
 }

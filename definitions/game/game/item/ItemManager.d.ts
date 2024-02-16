@@ -18,11 +18,12 @@ import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type ActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
-import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IRecipe } from "@wayward/game/game/item/IItem";
+import type { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, IRecipe, IUncastableContainer } from "@wayward/game/game/item/IItem";
 import { ContainerType, CraftResult, ItemType, ItemTypeExtra, ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type { IAddToContainerResult, IContainerSort, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IItemRemoveOptions, IMoveItemOptions, IRequirementInfo } from "@wayward/game/game/item/IItemManager";
 import { ContainerReferenceSource, CraftStatus, ICraftResultChances, WeightType } from "@wayward/game/game/item/IItemManager";
 import Item from "@wayward/game/game/item/Item";
+import type { ITileContainer } from "@wayward/game/game/tile/ITerrain";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type { ListEnder } from "@wayward/game/language/ITranslation";
@@ -81,7 +82,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     /**
      * Tiles can be containers and they will always be contained within this container
      */
-    readonly tileItemContainer: IContainer;
+    readonly worldContainer: IContainer;
     private static cachedItemTypeGroups;
     private static cachedItemTypes;
     private static cachedItemTypesWithRecipes;
@@ -327,12 +328,12 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     /**
      * Check if a container is a container that's on a tile
      */
-    isTileContainer(container: IContainable | undefined): boolean;
+    isTileContainer(container: IContainable | undefined): container is Tile & ITileContainer;
     /**
      * Returns ordered items for the containers
      * Note: It ~~may~~ (will always) return the real containedItems array!
      */
-    getOrderedContainerItems(container: IContainer, options?: Partial<IGetItemOptions>): Item[];
+    getOrderedContainerItems(container: IUncastableContainer, options?: Partial<IGetItemOptions>): Item[];
     capWeightOfItems(createdItems: Item[], itemWeight: number): void;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup): Translation;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number): Translation;

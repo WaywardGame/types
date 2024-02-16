@@ -8,28 +8,29 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import { TileUpdateType } from "@wayward/game/game/IGame";
+import type { IObject } from "@wayward/game/game/IObject";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import type Creature from "@wayward/game/game/entity/creature/Creature";
-import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type { IEntityMovableEvents } from "@wayward/game/game/entity/EntityMovable";
 import EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
-import { TileUpdateType } from "@wayward/game/game/IGame";
-import type { IObject } from "@wayward/game/game/IObject";
+import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import { FireStage } from "@wayward/game/game/tile/events/IFire";
+import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type { ITileEventDescription } from "@wayward/game/game/tile/ITileEvent";
 import { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
+import { FireStage } from "@wayward/game/game/tile/events/IFire";
 import type { Article } from "@wayward/game/language/Translation";
-import type { IVector3 } from "@wayward/game/utilities/math/IVector";
-import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface ITileEventEvents extends IEntityMovableEvents {
     /**
      * Emitted when the fire stage of this tile event changes.
@@ -70,6 +71,8 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
     get asPlayer(): undefined;
     get asTileEvent(): TileEvent | undefined;
     get asItem(): undefined;
+    get asTile(): undefined;
+    get asContainer(): undefined;
     isCorpse(): this is Corpse;
     isCreature(): this is Creature;
     isDoodad(): this is Doodad;
@@ -79,6 +82,8 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
     isPlayer(): this is Player;
     isTileEvent(): this is TileEvent;
     isItem(): this is Item;
+    isTile(): this is Tile;
+    isContainer(): this is IUncastableContainer;
     get point(): IVector3;
     get tile(): Tile;
     toString(): string;

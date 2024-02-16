@@ -58,7 +58,8 @@ export declare enum ActionTranslation {
 }
 export declare enum UsableActionTranslation {
     Name = 0,
-    Description = 1
+    Verb = 1,
+    Description = 2
 }
 export declare enum EquipSlotTranslation {
     Name = 0,

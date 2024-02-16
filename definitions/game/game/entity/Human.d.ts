@@ -36,7 +36,7 @@ import type { ISkillAttribute } from "@wayward/game/game/entity/skill/ISkills";
 import SkillManager from "@wayward/game/game/entity/skill/SkillManager";
 import type { IMobCheck, IMoveToIslandOptions, IslandId } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
-import type { EquipEffectByType, EquipEffects, IContainer, IRanged, RecipeLevel } from "@wayward/game/game/item/IItem";
+import type { ContainerSort, ContainerType, EquipEffectByType, EquipEffects, IContainer, IRanged, IUncastableContainer, RecipeLevel } from "@wayward/game/game/item/IItem";
 import { EquipEffect, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import ItemReference from "@wayward/game/game/item/ItemReference";
@@ -55,6 +55,7 @@ import Message from "@wayward/game/language/dictionary/Message";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
 import { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
+import type { SortDirection } from "@wayward/game/save/ISaveManager";
 import type { IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
@@ -65,7 +66,7 @@ interface IEquip {
     item: Item;
     equipType: EquipType;
 }
-export default abstract class Human<TypeType extends number = number, EntityReferenceType extends ReferenceType.Player | ReferenceType.NPC = ReferenceType.Player | ReferenceType.NPC> extends EntityWithStats<unknown, TypeType, EntityReferenceType> implements IHasInsulation {
+export default abstract class Human<TypeType extends number = number, EntityReferenceType extends ReferenceType.Player | ReferenceType.NPC = ReferenceType.Player | ReferenceType.NPC> extends EntityWithStats<unknown, TypeType, EntityReferenceType> implements IHasInsulation, IContainer {
     static getNameTranslation(): TranslationImpl;
     event: IEventEmitter<this, IHumanEvents>;
     anim: number;
@@ -88,7 +89,6 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     equippedReferences: Map<EquipType, ItemReference>;
     flyingDelay?: number;
     handEquippedToLast: EquipType.OffHand | EquipType.MainHand;
-    inventory: IContainer;
     isConnecting: boolean;
     lastAttackedByReference?: Reference;
     manualTickActionDelay?: number;
@@ -108,6 +108,9 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     vehicleItemReference: ItemReference | undefined;
     connectedVehicleId?: number;
     walkSoundCounter: number;
+    containedItems: Item[];
+    sort?: ContainerSort;
+    sortDirection?: SortDirection;
     readonly movementIntent: IMovementIntent;
     walkPath?: IWalkPath;
     identifier: string;
@@ -115,7 +118,10 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     quests: IQuestManager;
     messages: IMessageManager;
     notes: INoteManager;
+    /** @deprecated (use the entity itself) */
+    readonly inventory: IContainer;
     private readonly privateStore;
+    containerType?: ContainerType;
     nextMoveTime: number;
     nextMoveDirection?: Direction.Cardinal | Direction.None;
     private lastVehicleMoveDirection?;
@@ -131,7 +137,7 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     protected gameOptionsCached?: IGameOptionsPlayer;
     protected cachedMovementPenalty?: number;
     constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
-    protected getDescription(): void;
+    protected getDescription(): undefined;
     abstract createNoteManager(): INoteManager;
     abstract createMessageManager(): IMessageManager;
     abstract createQuestManager(): IQuestManager;
@@ -452,15 +458,20 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     get asCorpse(): undefined;
     get asCreature(): undefined;
     get asDoodad(): undefined;
-    get asHuman(): Human;
+    get asHuman(): this;
+    get asGenericHuman(): Human;
     get asTileEvent(): undefined;
     get asItem(): undefined;
+    get asTile(): undefined;
+    get asContainer(): this & IUncastableContainer;
     isCorpse(): this is Corpse;
     isCreature(): this is Creature;
     isDoodad(): this is Doodad;
     isHuman(): this is Human;
     isTileEvent(): this is TileEvent;
     isItem(): this is Item;
+    isTile(): this is Tile;
+    isContainer(): this is IUncastableContainer;
     get point(): IVector3;
     get tile(): Tile;
     /**
