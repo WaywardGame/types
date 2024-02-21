@@ -272,6 +272,11 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      */
     shouldDie(): false | void;
     /**
+     * Called to check whether the human should be rendered. If any handlers return `false`, then the human will not be rendered.
+     * @return `false` to stop the human from being rendered
+     */
+    shouldRender(): false | void;
+    /**
      * Called when the human is killed.
      */
     die(): any;

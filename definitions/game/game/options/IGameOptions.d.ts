@@ -91,6 +91,10 @@ export interface IGameOptions {
          * Multiplier for how long each tame lasts
          */
         tameTimeMutiplier: number;
+        /**
+         * Whether creatures can be scared (run away from players)
+         */
+        disableScared: boolean;
     };
     time: {
         /**

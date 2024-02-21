@@ -143,7 +143,7 @@ export declare enum EntityType {
 }
 export declare enum AiType {
     /**
-     * Doesn't attack
+     * Only attacks randomly when player is adjacent
      */
     Neutral = 0,
     /**
@@ -155,7 +155,7 @@ export declare enum AiType {
      */
     Scared = 2,
     /**
-     * Moves in random direction
+     * Moves in random direction - used as a temporary flag for when we need creatures to stop their normal behavior for a while
      */
     Random = 4,
     /**
