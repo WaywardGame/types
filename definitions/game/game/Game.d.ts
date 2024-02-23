@@ -96,7 +96,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     milestonesCollection?: GameplayModifiersCollection<MilestoneModifier, Milestone>;
     paused: Set<PauseSource>;
     playing: boolean;
-    resetting: boolean;
+    resetting: Promise<void> | undefined;
     previousSaveVersion: IVersionInfo;
     saveClear: boolean;
     saveSize?: string;

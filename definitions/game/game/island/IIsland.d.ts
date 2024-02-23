@@ -102,6 +102,8 @@ export interface IIslandEvents {
      * @param travelTime Travel time
      */
     getFastForwardAmount(fastForwardAmount: number, travelTime: number): number | undefined;
+    fastForwardStart(): any;
+    fastForwardEnd(): any;
     /**
      * Emitted when random events are attempting to run on a tile.
      * @returns `false` to cancel default events

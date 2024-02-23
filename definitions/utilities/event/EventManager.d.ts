@@ -50,6 +50,7 @@ export declare class EventManager<EventBus extends number, EventBuses extends Re
     private initializeBusSubscriptions;
     subscribe<E extends EmitterOrBus<EventBus>, K extends Event<EventBus, EventBuses, E>>(emitter: E, events: ArrayOr<K>, handler: Handler<EventBus, EventBuses, E, K>, priority?: number, once?: boolean): void;
     subscribeNext<E extends EmitterOrBus<EventBus>, K extends Event<EventBus, EventBuses, E>>(emitter: E, events: ArrayOr<K>, handler: Handler<EventBus, EventBuses, E, K>, priority?: number): void;
+    getBusName(eventBus: EventBus): string;
     unsubscribe<E extends EmitterOrBus<EventBus>, K extends Event<EventBus, EventBuses, E>>(emitter: E, events: ArrayOr<K>, handler: Handler<EventBus, EventBuses, E, K>, priority?: number): boolean | undefined;
     waitFor<E extends EmitterOrBus<EventBus>, K extends Event<EventBus, EventBuses, E>>(emitter: E, event: K, priority?: number): Promise<Parameters<Handler<EventBus, EventBuses, E, K>>>;
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IEventManagerUntil<EventBus, EventBuses>;

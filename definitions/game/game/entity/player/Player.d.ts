@@ -129,6 +129,7 @@ export default class Player extends Human<number, ReferenceType.Player> implemen
     private onClearNotes;
     private shouldDisplayMessage;
     private onDisplayMessage;
+    private onClearMessages;
     get asNPC(): undefined;
     get asPlayer(): this;
     get asLocalPlayer(): this | undefined;

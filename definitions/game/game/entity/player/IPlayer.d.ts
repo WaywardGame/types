@@ -29,6 +29,10 @@ export interface IPlayerEvents extends Events<Human> {
      */
     displayMessage(message: IMessage): any;
     /**
+     * Called when messages are cleared for this player
+     */
+    clearMessages(): any;
+    /**
      * Called when a message is about to be displayed
      * @param message The message that will be displayed
      * @param messageId The `Message`, or `-1` if the message being displayed isn't a `Message`

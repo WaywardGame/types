@@ -38,8 +38,9 @@ export declare class MessageManagerNoOp implements IMessageManager {
 }
 export interface IMessageManagerOptions {
     shouldDisplayMessage(message: IMessage, id: number): boolean | undefined;
-    onDisplayMessage(message: IMessage): void;
     getMessageStorageMax(isLocalPlayer: boolean): number;
+    onDisplayMessage(message: IMessage): any;
+    onClearMessages(): any;
 }
 export default class MessageManager implements IMessageManager {
     private readonly options;

@@ -182,6 +182,10 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      */
     getNthChild<C extends Component | undefined = Component | undefined>(nth?: number): C | undefined;
     /**
+     * Returns the `nth` child from the end, defaulting to the last child
+     */
+    getNthChildFromEnd<C extends Component | undefined = Component | undefined>(nth?: number): C | undefined;
+    /**
      * Returns a stream of this component's child components. Child elements that don't have associated components will be `undefined`.
      * @param selector A selector that each element must match to be included in the result stream
      */
@@ -202,7 +206,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     /**
      * An alias for `element.querySelectorAll(selector)`
      */
-    findDescendants<E extends HTMLElement = HTMLElement>(selector: string): NodeListOf<E>;
+    querySelectorAll<E extends HTMLElement = HTMLElement>(selector: string): NodeListOf<E>;
     queryX<N extends Node = Node>(selector: string): N | null;
     queryXAll<N extends Node = Node>(selector: string): N[];
     /**

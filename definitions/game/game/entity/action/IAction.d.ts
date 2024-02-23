@@ -88,7 +88,7 @@ export declare enum ActionType {
     Release = 45,
     HealOther = 46,
     Unused = 47,// this one must stay unused
-    Unused2 = 48,// you can replace this with a new action
+    ClearMessages = 48,
     OpenDoor = 49,
     CloseDoor = 50,
     AddFuel = 51,

@@ -25,6 +25,7 @@ import { MessageFilterDefault } from "@wayward/game/ui/screen/screens/game/IMess
 import { Quadrant } from "@wayward/game/ui/screen/screens/game/component/IQuadrantComponent";
 import QuadrantComponent from "@wayward/game/ui/screen/screens/game/component/QuadrantComponent";
 import QuestDialog from "@wayward/game/ui/screen/screens/game/dialog/QuestDialog";
+import MessageLog from "@wayward/game/ui/screen/screens/game/static/messages/MessageLog";
 import Stream from "@wayward/goodstream/Stream";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 interface IMessagesEvents extends Events<QuadrantComponent> {
@@ -34,16 +35,18 @@ interface IMessagesEvents extends Events<QuadrantComponent> {
 }
 export declare enum MessagesClasses {
     Main = "game-messages",
-    Message = "game-message"
+    Message = "game-message",
+    Group = "game-message-turn-group"
 }
 export default class Messages extends QuadrantComponent {
     private static get defaultFilters();
     get preferredQuadrant(): Quadrant;
     static preferredQuadrant: Quadrant;
     event: IEventEmitter<this, IMessagesEvents>;
+    readonly content: Component;
     readonly sendButton: Button;
     readonly pinnedMessages: Component;
-    readonly messagelog: Component;
+    readonly messageLog: MessageLog;
     readonly input: Contenteditable;
     readonly filter: Button | undefined;
     pinNotesAutomatically: boolean;
@@ -53,16 +56,13 @@ export default class Messages extends QuadrantComponent {
     private showOptionsButton;
     private unfocusOnSend;
     private messageTimestamps;
-    private maxMessages;
     private readonly pinnedNotes;
     private readonly seenNotes;
     private readonly pinnedQuestRequirements;
     private readonly pinnedNextQuests;
-    private readonly messagesToDisplay;
     private readonly chatSentHistory;
     private chatHistoryIndex;
     private pushedCurrentToHistory;
-    private wasInTopQuadrant;
     constructor();
     getPins(): Stream<IPinnedMessage>;
     getMessageTimestampMode(): MessageTimestamp;
@@ -73,9 +73,6 @@ export default class Messages extends QuadrantComponent {
     setShouldShowOptionsButton(shouldShow: boolean): this;
     shouldUnfocusOnSend(): boolean;
     setShouldUnfocusOnSend(shouldUnfocusOnSend: boolean): this;
-    getMaxMessages(): number;
-    setMaxMessages(maxMessages: number): this;
-    scrollToNewest(): Promise<void>;
     sendPinnedMessage(pinnedMessage: PinnedMessage): PinnedMessage;
     pinQuestRequirement(quest: QuestInstance, requirement?: RequirementInstance): IPinnedMessage | PinnedMessage | undefined;
     unpinMessage(pinnedMessage: PinnedMessage, time?: number): Promise<void>;
@@ -87,7 +84,7 @@ export default class Messages extends QuadrantComponent {
     onFocusChat(): boolean;
     getDefaultFilterName(filter: MessageFilterDefault): string;
     private boundScreenEvents;
-    protected onAppend(): void;
+    protected onAppend(): Promise<void>;
     protected onChangeQuadrant(): void;
     /**
      * Event handler for when the text in the chat box should be sent as a message.
@@ -108,12 +105,6 @@ export default class Messages extends QuadrantComponent {
     pinRequirementsFromQuest(quest: QuestInstance): void;
     private hasIncompletePinnedRequirementFromAnotherQuest;
     private showOptions;
-    private scheduleShowMessage;
-    private currentTurn?;
-    private currentTurnComponent?;
-    private getTurnGroup;
-    private updateMessages;
-    private messages;
     /**
      * Returns the basic context menu of messages, no matter what location it is in
      */
@@ -123,9 +114,9 @@ export default class Messages extends QuadrantComponent {
      */
     private runCommand;
     /**
-     * Returns `true` if the message should not be displayed.
+     * Returns `true` if the message should be displayed.
      */
-    private isMessageFilteredOut;
+    private filterMessageSources;
     /**
      * Event handler for when the filter button is clicked
      */
@@ -135,7 +126,6 @@ export default class Messages extends QuadrantComponent {
      */
     setFilter(filterName?: string, skipRefresh?: boolean): void;
     getFilter(): string | undefined;
-    private refreshLog;
     private onShowDialog;
     private onShowNote;
     private editFilters;
