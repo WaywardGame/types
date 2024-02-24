@@ -272,7 +272,7 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
     readonly executor: E;
     readonly type: ActionType;
     readonly actionStack: readonly ActionType[];
-    readonly lastAction: ActionType;
+    readonly callingAction: ActionType;
     readonly hasSetCanUse: boolean;
     isArgumentType<A extends ActionArgument>(argument: any, index: number, argumentType: A): argument is IActionArgumentTypeMap[A];
     canUse(): CU | IActionNotUsable;

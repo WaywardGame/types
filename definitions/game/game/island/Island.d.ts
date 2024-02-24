@@ -136,7 +136,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     modifiersCollection?: IslandModifiersCollection;
     details?: IIslandDetails;
     private _ranUpgrade;
-    private serializeObjectStats?;
+    private readonly serializedSizeTracker;
     private _isFastForwarding;
     get isFastForwarding(): boolean;
     constructor(game?: Game, position?: IVector2, seed?: number, mapSize?: number);

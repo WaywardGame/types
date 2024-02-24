@@ -38,7 +38,7 @@ export default class ActionExecutor<A extends ActionArguments, E extends Entity,
     static executeMultiplayer(packet: ActionPacket, executor?: Entity<unknown, number, import("../../reference/IReferenceManager").EntityReferenceTypes, unknown> | undefined, nonMpActionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any, any, any[]>): unknown;
     get executor(): E;
     get actionStack(): ActionType[];
-    get lastAction(): ActionType;
+    get callingAction(): ActionType;
     /**
      * Check if the action has setup CanUse logic
      */

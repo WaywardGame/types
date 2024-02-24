@@ -43,6 +43,7 @@ import type { WebGlContext } from "@wayward/game/renderer/platform/webgl/WebGlCo
 import ReplayManager from "@wayward/game/replay/ReplayManager";
 import SaveManager from "@wayward/game/save/SaveManager";
 import type { IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
+import type { ISerializer } from "@wayward/game/save/serializer/ISerializer";
 import type StringTokenizer from "@wayward/game/save/serializer/StringTokenizer";
 import Steamworks from "@wayward/game/steamworks/Steamworks";
 import type { IVersionInfo } from "@wayward/game/utilities/Version";
@@ -57,13 +58,13 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     customMilestoneModifiersAllowed: boolean;
     difficulty: GameMode;
     gameplayModifierData: SaferNumberIndexedObject<any>;
+    history: IActionContext[];
     replay: ReplayManager | undefined;
     saveVersion: Version.String;
     tickSpeed: number;
     time: TimeManager;
     turnMode: TurnMode;
     upgrades: string[];
-    history: IActionContext[];
     originalPlayOptions: Partial<IPlayOptions>;
     worldId: string;
     /**
@@ -110,6 +111,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     private rendererCanvasElement;
     private initializedGlCount;
     private gameLoopLogicTimer;
+    private readonly serializedSizeTracker;
     initialize(): Promise<void>;
     uninitialize(): Promise<void>;
     toString(): string;
@@ -230,4 +232,11 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      */
     tickTime(isIslandTimeAdjustment: boolean): void;
     addHistory(executor: Entity, context: IActionContext): void;
+    /**
+     * Serialization tracking
+     */
+    preSerializeObject(serializer: ISerializer): void;
+    postSerializeObject(serializer: ISerializer): void;
+    preSerializeProperty(serializer: ISerializer, key: string): void;
+    postSerializeProperty(serializer: ISerializer, key: string): void;
 }

@@ -59,6 +59,11 @@ export default abstract class BasePacket {
     protected writeFloat64(value: number): void;
     protected readBool(): boolean;
     protected writeBool(value: boolean): boolean;
+    protected readTruthiness(): true | undefined;
+    /**
+     * Writes & returns a boolean of whether the given value is truthy
+     */
+    protected writeTruthiness<T>(value?: T): value is Exclude<T, false | undefined | null | 0 | "">;
     protected readOptionalBool(): boolean | undefined;
     protected writeOptionalBool(value?: boolean): void;
     protected readUint8Array(): Uint8Array;
@@ -85,6 +90,8 @@ export default abstract class BasePacket {
     protected writePlayer(value: Player): void;
     protected readDoodad(): Doodad | undefined;
     protected writeDoodad(value: Doodad): void;
+    protected readOptionalDoodad(): Doodad | undefined;
+    protected writeOptionalDoodad(value?: Doodad): void;
     protected readNPC(): NPC | undefined;
     protected writeNPC(value: NPC): void;
     protected readCorpse(): Corpse | undefined;
@@ -95,6 +102,8 @@ export default abstract class BasePacket {
     protected readHuman(): Player | NPC | undefined;
     protected readItem(): Item;
     protected writeItem(value: Item): void;
+    protected readOptionalItem(): Item | undefined;
+    protected writeOptionalItem(value?: Item): void;
     protected readMovementIntent(): IMovementIntent;
     protected writeMovementIntent(value: IMovementIntent): void;
     protected readIsland(): Island;

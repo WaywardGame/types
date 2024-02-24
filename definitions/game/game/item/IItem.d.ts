@@ -358,6 +358,7 @@ export interface IItemOnUse {
     [ActionType.Eat]?: ConsumeItemStats;
     [ActionType.Heal]?: ConsumeItemStats;
     [ActionType.HealOther]?: number;
+    [ActionType.Invoke]?: Deity;
     [ActionType.PlaceDown]?: IItemBuild;
     [ActionType.Plant]?: DoodadType;
     [ActionType.Pour]?: TileEventType;

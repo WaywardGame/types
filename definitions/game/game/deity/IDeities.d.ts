@@ -86,7 +86,8 @@ export declare namespace IReadableAlignment {
     function project(alignment: IReadableAlignment, sacrifice: ISacrifice, human: Human): IReadableAlignment;
 }
 export interface ISacrifice {
-    altar: Doodad;
+    altar?: Doodad;
+    rune?: Item;
     deity: Deity;
 }
 export declare namespace ISacrifice {
@@ -101,6 +102,7 @@ export declare namespace ISacrifice {
         totalValue: number;
         items: IItemCalculation[];
     }
+    function getItems(sacrifice: ISacrifice): Item[];
     function calculate(sacrifice: ISacrifice, human: Human): ICalculation;
     function getWorth(deity: Deity, item: Item, from: Human): number;
 }
