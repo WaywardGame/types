@@ -21,6 +21,7 @@ export default class FerocityInfo extends StatInfo {
     readonly civilizationScore: InfoProvider.Observer<number>;
     readonly turns: InfoProvider.Observer<number>;
     readonly ticks: InfoProvider.Observer<number>;
+    readonly time: InfoProvider.Observer<import("../../../time/TimeManager").default>;
     getTitle(stat: Stat): SimpleInfoProvider;
     getClass(): string[];
     get(): SimpleInfoProvider[];
