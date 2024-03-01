@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IRandomGenerator, IRandomHistory, RandomSychronizationCheck } from "@wayward/utilities/random/IRandom";
+import type { PCGSeededGenerator } from "@wayward/utilities/random/generators/PCGSeededGenerator";
 /**
  * Based class for all seeded generators
  */
@@ -24,6 +25,7 @@ export declare abstract class SeededGenerator<T> implements IRandomGenerator {
      * @param initialState Optional initial state
      */
     constructor(requiresSynchronization: RandomSychronizationCheck<T>, initialState?: T);
+    get asPCG(): PCGSeededGenerator | undefined;
     abstract clone(requiresSynchronization?: (state: T) => boolean): this;
     protected abstract generateState(): T;
     protected abstract cloneState(): T;

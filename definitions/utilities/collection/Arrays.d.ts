@@ -30,6 +30,24 @@ declare namespace Arrays {
      * @param max A number, exclusive
      */
     function range(max: number): number[];
+    /**
+     * Produces an array of the numbers `min` (inclusive) to `max` (exclusive), in steps of `step`
+     * @param min A number, inclusive
+     * @param max A number, exclusive
+     * @param step The difference between each step between min and max, defaulting to 1
+     */
+    function range<T>(min: number, max: number, step: number, mapper?: (index: number, array: T[]) => T): T[];
+    /**
+     * Produces an array of the numbers `min` (inclusive) to `max` (exclusive)
+     * @param min A number, inclusive
+     * @param max A number, exclusive
+     */
+    function range<T>(min: number, max: number, mapper?: (index: number, array: T[]) => T): T[];
+    /**
+     * Produces an array of the numbers 0 through `max` (exclusive)
+     * @param max A number, exclusive
+     */
+    function range<T>(max: number, mapper?: (index: number, array: T[]) => T): T[];
     function equalsOr<T>(arrayOr1: ArrayLike<T> | T | undefined, arrayOr2: ArrayLike<T> | T | undefined, valueEquals: (a: T, b: T) => any): boolean;
     function equalsOr(arrayOr1: any | undefined, arrayOr2: any | undefined): boolean;
     function equals<T>(array1: ArrayLike<T> | undefined, array2: ArrayLike<T> | undefined, valueEquals: (a: T, b: T) => any): boolean;

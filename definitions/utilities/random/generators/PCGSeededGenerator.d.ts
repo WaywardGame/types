@@ -16,6 +16,7 @@ import { SeededGenerator } from "@wayward/utilities/random/SeededGenerator";
 export declare class PCGSeededGenerator extends SeededGenerator<Uint16Array> {
     private static normalizeState;
     constructor(requiresSynchronization: RandomSychronizationCheck<Uint16Array>, initialState?: Uint16Array | number);
+    get asPCG(): PCGSeededGenerator;
     clone(requiresSynchronization?: RandomSychronizationCheck<Uint16Array>, initialState?: Uint16Array | number): any;
     cloneState(): Uint16Array;
     protected generateState(): Uint16Array;
@@ -32,4 +33,8 @@ export declare class PCGSeededGenerator extends SeededGenerator<Uint16Array> {
      * Allow pushing number seeds
      */
     pushSeed(newSeed?: Uint16Array | number): void;
+    /**
+     * Apply a second seed to the current state, effectively mixing them in a deterministic way
+     */
+    apply(newSeed?: Uint16Array | number): void;
 }

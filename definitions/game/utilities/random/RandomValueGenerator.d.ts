@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { RandomReference } from "@wayward/game/utilities/random/RandomReference";
 import Objects from "@wayward/utilities/object/Objects";
 import type { RandomInstance } from "@wayward/utilities/random/IRandom";
-import { RandomReference } from "@wayward/game/utilities/random/RandomReference";
 import type { Random } from "@wayward/utilities/random/Random";
 import type { LegacySeededGenerator } from "@wayward/utilities/random/generators/LegacySeededGenerator";
 import type { PCGSeededGenerator } from "@wayward/utilities/random/generators/PCGSeededGenerator";
