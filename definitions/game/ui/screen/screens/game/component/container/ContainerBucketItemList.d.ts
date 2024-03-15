@@ -41,6 +41,7 @@ export interface IContainerBucketItemListTransferDetails {
     excludeProtected?: true;
     index?: number;
     silent?: true;
+    excludeEquipped?: boolean;
 }
 export interface IContainerBucketItemListEvents extends WithSortableEvents<Component> {
     addItem(item: Item): any;

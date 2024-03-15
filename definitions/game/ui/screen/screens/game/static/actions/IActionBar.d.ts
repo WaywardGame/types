@@ -25,6 +25,7 @@ export declare const ACTION_BAR_MAX_SLOTS = 48;
 export declare const ACTION_BAR_SLOTS_PER_ROW = 12;
 export interface IActionBarSlotData {
     useOnMove?: true;
+    useHovered?: true;
     actionId?: ActionId;
     using?: Omit<IUsableActionPossibleUsing, "item" | "doodad" | "vehicle" | "creature" | "npc"> & {
         item?: Reference<ReferenceType.Item>;
@@ -75,5 +76,6 @@ export declare enum ActionSlotUpdateReason {
     Used = 4,
     ActionsDrawer = 5,
     LoadOrUpdateDirection = 6,
-    UsableActionUpdate = 7
+    UsableActionUpdate = 7,
+    HoveredItemChanged = 8
 }

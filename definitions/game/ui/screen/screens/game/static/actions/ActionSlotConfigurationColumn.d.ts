@@ -41,7 +41,8 @@ export declare enum ActionSlotConfigurationColumnClasses {
 declare enum Mode {
     None = 0,
     Exact = 1,
-    Best = 2
+    Best = 2,
+    Hovered = 3
 }
 export interface IActionSlotConfigurationColumnEvents extends Events<Component> {
     clear(): any;
@@ -60,6 +61,7 @@ export default class ActionSlotConfigurationColumn extends Component {
     readonly exactItemSlot: ActionSlotConfigurationUseExactSlot;
     readonly exactItemName: Text;
     readonly modeChoiceUseBest: Choice<Mode.Best>;
+    readonly modeChoiceUseHovered: Choice<Mode.Best>;
     private readonly itemDropdownAnyOption;
     readonly itemTypeDropdown: ItemDropdown.DiscoveredTypes<"Any">;
     readonly itemQualityChoiceList: RangeChoiceList<Quality>;
@@ -78,8 +80,9 @@ export default class ActionSlotConfigurationColumn extends Component {
     constructor();
     getUsing(): IUsableActionPossibleUsing;
     shouldAutoUse(): boolean;
+    shouldUseHovered(): boolean;
     setAction(action: UsableAction | undefined, isItemAction: boolean): this;
-    setSlot(number: number, action: UsableAction | undefined, using: IUsableActionPossibleUsing, autoUse: boolean): this;
+    setSlot(number: number, action: UsableAction | undefined, using: IUsableActionPossibleUsing, autoUse: boolean, useHovered: boolean): this;
     private refresh;
     private setMode;
     private ensureModeValidity;

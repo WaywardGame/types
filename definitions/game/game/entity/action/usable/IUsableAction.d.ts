@@ -167,7 +167,8 @@ export type UsableActionUsability<REQUIREMENTS extends IUsableActionRequirements
 export declare enum UsableActionExecutionContext {
     Generic = 0,
     ContextMenu = 1,
-    ActionBar = 2
+    ActionBar = 2,
+    ActionBarAutoUse = 3
 }
 export interface IUsableActionExecutionContext {
     context: UsableActionExecutionContext;

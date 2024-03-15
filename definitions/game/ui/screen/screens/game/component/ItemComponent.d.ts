@@ -147,6 +147,7 @@ export interface IItemComponentEvents extends Events<Component>, IDraggableEvent
 }
 export interface IItemComponentStaticEvents {
     update(type: ItemRefreshType): any;
+    changeHovered(): any;
 }
 export default class ItemComponent extends Component implements ItemSlot {
     readonly handler: ItemComponentHandler;
@@ -245,5 +246,6 @@ export default class ItemComponent extends Component implements ItemSlot {
     private lastActionIcon?;
     private refreshActionIcon;
     protected onHoldingNotMoving(time: number): void;
+    protected onMouseEnterOrLeave(): void;
 }
 export {};

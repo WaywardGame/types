@@ -20,6 +20,7 @@ export interface IMoveItemFilterArgument {
     quality?: ArrayOr<Quality>;
     text?: string;
     excludeProtected?: boolean;
+    excludeEquipped?: boolean;
 }
 export declare class MoveItemFilterArgument<FILTER extends IMoveItemFilterArgument> extends ActionArgumentCustom<FILTER> {
     static canUse(filter: IMoveItemFilterArgument, item: Item, actionName?: Translation): IActionUsable | IActionNotUsable;

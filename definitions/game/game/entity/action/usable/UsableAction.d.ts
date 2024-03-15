@@ -11,7 +11,7 @@
 import type { Deity } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
-import type { ActionId, IUsableActionDefinition, IUsableActionDefinitionExecutable, IUsableActionExecutionContext, IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, UsableActionUsability } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import type { ActionId, IUsableActionDefinition, IUsableActionDefinitionExecutable, IUsableActionExecutionContext, IUsableActionItemRequirement, IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, UsableActionUsability } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import { IUsableActionNotUsable, UsableActionDisplayContext, UsableActionExecutionContext } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import UsableActionRegistrar from "@wayward/game/game/entity/action/usable/UsableActionRegistrar";
 import type { ActionWhichTranslation } from "@wayward/game/game/entity/action/usable/UsableActionTranslator";
@@ -60,7 +60,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>): Message.UiActionCannotUseRequiresCreature | Message.UiActionCannotUseRequiresDoodad | Message.UiActionCannotUseRequiresItem | Message.UiActionCannotUseRequiresNPC | Message.UiActionCannotUseRequiresVehicle | IUsableActionUsing<REQUIREMENTS>;
     resolveUsingOrUndefined(player: Player, using: IUsableActionUsing<REQUIREMENTS>): IUsableActionUsing<REQUIREMENTS> | undefined;
     isUsable(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): UsableActionUsability<REQUIREMENTS>;
-    isApplicable(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean): provided is IUsableActionUsing<REQUIREMENTS>;
+    isApplicable(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean, requireItem?: boolean): provided is IUsableActionUsing<REQUIREMENTS>;
     private isItemApplicable;
     private isDoodadApplicable;
     private isCreatureApplicable;
@@ -82,6 +82,11 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     getHighlightSelectors(using?: IUsableActionPossibleUsing): Array<HighlightSelector | undefined>;
     private translator?;
     getTranslation(using?: IUsableActionPossibleUsing, which?: ActionWhichTranslation, context?: UsableActionDisplayContext): Translation | undefined;
+    /**
+     * Determines whether this action is an item action, using `requirements.item`
+     */
+    isItemAction(predicate?: (requirements: IUsableActionItemRequirement) => any): boolean;
+    get itemRequirementObject(): IUsableActionItemRequirement | undefined;
     getOrder(using?: IUsableActionPossibleUsing): number;
     getContextualLevel(using?: IUsableActionPossibleUsing): number;
     canUseOnMoveWhenDiscovered(): boolean;

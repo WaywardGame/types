@@ -40,7 +40,8 @@ export declare enum ActionSlotClasses {
     SlottedContainerCopyingFrom = "game-action-slot-slotted-container-copying-from",
     Configuring = "game-action-slot-configuring",
     Disabled = "game-action-slot-disabled",
-    UseOnMove = "game-action-slot-use-on-move"
+    UseOnMove = "game-action-slot-use-on-move",
+    UseHovered = "game-action-slot-use-hovered"
 }
 export interface IActionSlotEvents extends Events<Button>, IItemSlotEvents {
     update(data: IActionBarSlotData | undefined, oldData: IActionBarSlotData | undefined, reason: ActionSlotUpdateReason): any;
@@ -56,6 +57,7 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
     readonly label: Text;
     readonly slotted: ActionSlotSlottedContainer;
     readonly useOnMoveIndicator: Component<HTMLElement>;
+    readonly useHoveredIndicator: Component<HTMLElement>;
     private lastItem?;
     private lastQuality?;
     usability: ReturnableUsableActionUsability;

@@ -18,7 +18,7 @@ import type { TranslationArg } from "@wayward/game/language/ITranslation";
 import Translation from "@wayward/game/language/Translation";
 import type { IActionUseContextUsing } from "@wayward/game/ui/screen/screens/game/static/actions/IActionBar";
 export type UsableActionTranslationArguments = [using: IActionUseContextUsing, action: UsableAction, context: UsableActionDisplayContext, inspectionContext?: InfoProviderContext];
-export type ActionWhichTranslation = ActionTranslation | "useExact" | "useBest" | "useNone";
+export type ActionWhichTranslation = ActionTranslation | "useExact" | "useBest" | "useNone" | "useHovered";
 export declare class UsableActionTranslator {
     readonly id: ActionId;
     static translateId(id: ActionId, which?: ActionTranslation): TranslationImpl | undefined;
@@ -27,6 +27,7 @@ export declare class UsableActionTranslator {
     private useExactSupplier?;
     private useBestSupplier?;
     private useNoneSupplier?;
+    private useHoveredSupplier?;
     private readonly args;
     private internalAction?;
     constructor(id: ActionId);
@@ -39,5 +40,6 @@ export declare class UsableActionTranslator {
     useExact(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
     useBest(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
     useNone(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
+    useHovered(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
     get(action: UsableAction, using?: IUsableActionPossibleUsing, which?: ActionWhichTranslation, context?: UsableActionDisplayContext, inspectionContext?: InfoProviderContext): Translation | undefined;
 }
