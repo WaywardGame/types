@@ -316,6 +316,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      */
     deityWorth?: PartialRecord<Deity, number>;
     /**
+     * The worth of this item to each deity added by each additional quality tier. Defaults to 0.
+     */
+    deityWorthQuality?: PartialRecord<Deity, number>;
+    /**
      * The item name to display instead of the item's default translation
      */
     getName?: (item: Item, article?: Article, count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showMagicalType?: boolean) => TranslationImpl | {
