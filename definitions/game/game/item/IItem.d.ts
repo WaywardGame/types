@@ -1735,7 +1735,8 @@ export declare enum ItemTypeGroup {
     Altar = -9858,
     Cartilage = -9857,
     ExcludedFromRandom = -9856,
-    All = -9855
+    Leaves = -9855,
+    All = -9854
 }
 export type StillContainerBaseItemType = ItemType.Waterskin | ItemType.GlassBottle | ItemType.ClayJug | ItemType.CoconutContainer;
 export interface IItemMovementResult {
