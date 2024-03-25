@@ -118,6 +118,9 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     quests: IQuestManager;
     messages: IMessageManager;
     notes: INoteManager;
+    highestAttack?: number;
+    highestDefense?: number;
+    cumulativeEvilCrafting: number;
     /** @deprecated (use the entity itself) */
     readonly inventory: IContainer;
     private readonly privateStore;
@@ -215,6 +218,7 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     isDualWielding(): boolean;
     getAttack(attack?: AttackType, weapon?: Item): IAttack;
     getSimplifiedCumulativeAttack(): number;
+    getSimplifiedCumulativeDefense(): number;
     getCombatStrength(): number;
     private getAttackType;
     private getAttackSkillBonus;
@@ -230,6 +234,7 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     getEquippedItem(slot: EquipType, includeDisabled?: true): Item | undefined;
     isOffHandDisabled(): boolean;
     getEquipSlotForItem(item: Item, includeDisabled?: true): EquipType | undefined;
+    getCurse(): number;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     /**
      * Gets the max health of the player.
