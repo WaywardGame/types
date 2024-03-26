@@ -54,7 +54,8 @@ export declare enum Stat {
     Happiness = 14,
     Tamed = 15,
     Petting = 16,
-    Waste = 17
+    Waste = 17,
+    Petted = 18
 }
 export type IStats = {
     [key in keyof typeof Stat]: IStat;

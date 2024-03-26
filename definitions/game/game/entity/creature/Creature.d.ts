@@ -94,6 +94,10 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     private setOwner;
     tame(human: Human, bonus?: number): boolean;
     increaseTamedCount(): void;
+    /**
+     * Increases the number of times the creature has been petted.
+     */
+    increasePettedCount(): void;
     release(remainTamed?: boolean): boolean;
     unhitch(): void;
     animateSpawn(): void;
@@ -163,6 +167,11 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      * @returns number if the creature has been tamed (0 if it has never been tamed).
      */
     get timesTamed(): number;
+    /**
+     * Returns the times a creature has been petted.
+     * @returns number if the creature has been petted (0 if it has never been petted).
+     */
+    get timesPetted(): number;
     private findHumansWithinRadius;
     private shouldSpecialAttack;
     private specialAttack;
