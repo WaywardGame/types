@@ -450,6 +450,9 @@ export declare const CREATURE_FLEE_DISTANCE_SQ: number;
 export declare const TAMED_CREATURE_FOLLOW_CLOSE_DISTANCE = 1;
 export declare const TAMED_CREATURE_FOLLOW_FAR_DISTANCE = 6;
 export declare const settableAiTypes: Set<AiType>;
+export declare const CREATURE_MAX_HEALTH_BONUS_TAME = 1.1;
+export declare const CREATURE_MAX_HEALTH_BONUS_OFFER = 1.05;
+export declare const CREATURE_MAX_HEALTH_BONUS_PET = 1.01;
 export interface ICreatureAttackOutcomeBase {
     enemy?: Human | Creature;
     willAttack: boolean;

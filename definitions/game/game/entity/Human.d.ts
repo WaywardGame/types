@@ -389,7 +389,7 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     getBarteringBonus(baseCredits: number): number;
     getProducedTemperature(): number | undefined;
     getInsulation(type: TempType): number;
-    resetStatTimers(type?: StatChangeCurrentTimerStrategy): void;
+    resetStatTimers(type?: StatChangeCurrentTimerStrategy, isNPC?: boolean): void;
     resetChangeTimers(): void;
     private getBaseStatBonuses;
     protected getApplicableStatusEffects(): Set<StatusType> | undefined;

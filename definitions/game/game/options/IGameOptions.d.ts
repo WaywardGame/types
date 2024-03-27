@@ -84,7 +84,7 @@ export interface IGameOptions {
          */
         spawnRateMultiplier: number;
         /**
-         * Multiplier for how much max/min HP bonus is given on each tame
+         * Multiplier for how much max/min HP bonus is given on each tame/offer/pet
          */
         tameHealthMultiplier: number;
         /**

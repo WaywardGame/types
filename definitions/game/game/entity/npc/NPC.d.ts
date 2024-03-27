@@ -90,7 +90,7 @@ export default abstract class NPC extends Human<NPCType, ReferenceType.NPC> {
      * @returns True if an npc can move / attack / do other things while not in anyones field of view
      */
     protected canUpdateOutsideFov(): boolean;
-    protected runCommonProcesses(inventoryItems: Item[]): boolean;
+    protected runCommonProcesses(inventoryItems: Item[]): number | undefined;
     kill(): boolean;
     isHostile(): boolean;
     isWaiting(): boolean;

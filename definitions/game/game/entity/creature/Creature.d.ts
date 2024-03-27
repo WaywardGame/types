@@ -18,6 +18,7 @@ import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions, IStatChangeInfo } from "@wayward/game/game/entity/IEntity";
 import { AiType, Defense, EntityType, MoveType } from "@wayward/game/game/entity/IEntity";
 import type { IStat } from "@wayward/game/game/entity/IStats";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { CreatureAttackOutcome, CreatureType, ICreatureAttackOutcomeAttack, ICreatureCheckMoveOptions, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "@wayward/game/game/entity/creature/ICreature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
@@ -93,6 +94,10 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     checkForBurn(moveType?: MoveType): boolean;
     private setOwner;
     tame(human: Human, bonus?: number): boolean;
+    /**
+     * Increases the creature's maximum health in the event of offering/re-taming and petting (to a lesser extent)
+     */
+    increaseMaxHealth(action: ActionType): void;
     increaseTamedCount(): void;
     /**
      * Increases the number of times the creature has been petted.
