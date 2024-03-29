@@ -44,7 +44,12 @@ export default class FlowFieldManager {
     updateTile(tileX: number, tileY: number, tileZ: number): void;
     setPlayers(flowFieldHumans: Human[]): void;
     update(): void;
-    reset(): void;
+    /**
+     * Clears/deletes Flow fields
+     * They'll be recreated when they are used next
+     */
+    clear(): void;
+    updateAll(): void;
     private getDirection;
     private getFlowField;
 }

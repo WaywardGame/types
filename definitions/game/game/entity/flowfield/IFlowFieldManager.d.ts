@@ -10,5 +10,8 @@
  */
 import type { WorldZ } from "@wayward/utilities/game/WorldZ";
 import type { MoveType } from "@wayward/game/game/entity/IEntity";
-export declare const flowFieldBlockedPenalty = 11;
+/**
+ * This penalty equals the maximum tiles a creature will pathfind before giving up.
+ */
+export declare const flowFieldBlockedPenalty = 51;
 export type FlowFieldKey = `${WorldZ}-${MoveType}`;
