@@ -21,6 +21,8 @@ export default class CreatureTamedInfoProvider extends InfoProvider {
     private readonly pet;
     private readonly milk;
     private readonly untamesIn;
+    private readonly timesTamed;
+    private readonly timesPetted;
     constructor(creature: Creature);
     getClass(): string[];
     hasContent(): boolean;
