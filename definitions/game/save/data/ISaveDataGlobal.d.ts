@@ -16,6 +16,8 @@ import type Bindable from "@wayward/game/ui/input/Bindable";
 import type { Binding } from "@wayward/game/ui/input/Bindings";
 import type { FontStyle } from "@wayward/game/ui/IUi";
 import type UiExperiment from "@wayward/game/ui/UiExperiments";
+import type { TurnMode } from "@wayward/game/game/IGame";
+import type { IMultiplayerOptions } from "@wayward/game/multiplayer/IMultiplayer";
 export interface IOptions {
     alternatingDirectionMovement: boolean;
     autoAttack: boolean;
@@ -140,6 +142,9 @@ export interface IHighscore {
     characterName: string;
     seed?: string | number;
     difficultyOptions?: IGameOptions;
+    turnMode: TurnMode;
+    multiplayerOptions?: ImmutableObject<IMultiplayerOptions>;
+    customMilestoneModifiersAllowed?: boolean;
 }
 export type IHighscoreOld = Partial<IHighscore> & Partial<{
     dailyChallenge: boolean;
