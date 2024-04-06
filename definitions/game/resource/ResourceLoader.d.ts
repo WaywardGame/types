@@ -57,6 +57,7 @@ export default class ResourceLoader {
     private loadStatuses;
     private loadStatusOverlay;
     private loadStatusIcon;
+    private loadMarkerIcon;
     private loadOverlays;
     private loadOverlay;
     private loadOthers;

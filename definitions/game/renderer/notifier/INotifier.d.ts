@@ -54,5 +54,8 @@ export declare enum NotifierIconType {
     DualWieldEnabled = 10,
     DualWieldDisabled = 11
 }
+export declare enum MarkerIconType {
+    Tamed = 0
+}
 export declare const itemDamageNotifierThreshold = 3;
 export declare const doodadDamageNotifierThreshold = 5;

@@ -19,6 +19,7 @@ export default class SpriteAtlas {
     items: ISpriteInfoList;
     itemsEquipped: ISpriteInfoList;
     itemsSmall: ISpriteInfoList;
+    markerIcons: ISpriteInfoList;
     miss: ISpriteInfo;
     notifiers: ISpriteInfoList;
     npcs: ISpriteInfoList;

@@ -18,7 +18,7 @@ import type { IOverlayInfo } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type { RenderSource, UpdateRenderFlag } from "@wayward/game/renderer/IRenderer";
 import type { Renderer } from "@wayward/game/renderer/Renderer";
-import type { CreatureNotifierType, INotificationLocation, ItemNotifierType, NotifierIconType, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
+import type { CreatureNotifierType, INotificationLocation, ItemNotifierType, MarkerIconType, NotifierIconType, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import type { IRGB } from "@wayward/utilities/Color";
 /**
@@ -34,6 +34,8 @@ export default class Renderers {
         addStatusEffect: (location: INotificationLocation, statusEffect: StatusEffect, reason: StatusEffectChangeReason) => void;
         addItem: (location: INotificationLocation, itemNotifierType: ItemNotifierType, type: DisplayableItemType) => void;
         addCreature: (location: INotificationLocation, creatureNotifierType: CreatureNotifierType, type: CreatureType, aberrant?: boolean) => void;
+        addMarker: (location: INotificationLocation, markerType: MarkerIconType, markerGuid: string) => void;
+        removeNotification: (location: INotificationLocation, guid: string) => void;
     };
     readonly particle: {
         create: (tile: Tile, particle: IRGB, count?: number, intensity?: number) => void;

@@ -35,7 +35,7 @@ import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import type Translation from "@wayward/game/language/Translation";
 import type { RenderSource, UpdateRenderFlag } from "@wayward/game/renderer/IRenderer";
-import type { INotificationLocation, ItemNotifierType, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
+import type { INotificationLocation, ItemNotifierType, MarkerIconType, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
@@ -55,6 +55,13 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     historicalActions?: PartialRecord<ActionType, number>;
     islandId: IslandId;
     preventRendering?: boolean;
+    /**
+     * Notifier marker assigned to this entity
+     */
+    persistentMarker: {
+        type: MarkerIconType;
+        guid: string;
+    } | undefined;
     private _humansWithinBound?;
     /**
      * Cached tile the entity is on.
@@ -113,6 +120,8 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     updateView(source: RenderSource, updateFov?: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition): void;
     notifyItem(itemNotifierType: ItemNotifierType, item: Item): void;
     notifyStat(type: StatNotificationType, value: number): void;
+    addMarkerIcon(type: MarkerIconType): void;
+    removeMarkerIcon(): void;
     getProducedTemperature(): number | undefined;
     setName(renamed: string | ISerializedTranslation | undefined): void;
     canInspect(human: Human): boolean;
