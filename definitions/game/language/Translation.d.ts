@@ -135,7 +135,7 @@ declare namespace Translation {
      * Damage types are bit flags, so multiple can be stored in one `DamageType`.
      * This method returns a translated list of damage types.
      */
-    export const damage: (damageTypes: ArrayOr<DamageType>, colorize?: boolean, reformatter?: TranslationImpl | ((type: DamageType) => Translation) | undefined) => TranslationImpl;
+    export const damage: (damageTypes: ArrayOr<DamageType>, colorize?: boolean, reformatter?: ((type: DamageType) => Translation) | Translation) => TranslationImpl;
     export function growthStage(stage: GrowingStage, spores?: boolean): TranslationImpl;
     export function growthStage(stage?: GrowingStage, spores?: boolean): TranslationImpl | undefined;
     export function merge(...content: TranslationArg[]): TranslationImpl;

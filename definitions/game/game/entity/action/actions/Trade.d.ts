@@ -11,5 +11,5 @@
 import { Action } from "@wayward/game/game/entity/action/Action";
 import { TradeArgument } from "@wayward/game/game/entity/action/actions/trade/TradeArgument";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.NPCNearby, [ActionArgument.Undefined, TradeArgument]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/actions/NPCInteract").INPCInteractUsable, [import("../../npc/NPC").default, (import("@wayward/game/game/entity/action/actions/trade/TradeArgument").ITradeArgument | undefined)?]>;
+declare const _default: Action<[ActionArgument.NPCNearby, [arg1: ActionArgument.Undefined, TradeArgument]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/actions/NPCInteract").INPCInteractUsable, [import("../../npc/NPC").default, (import("@wayward/game/game/entity/action/actions/trade/TradeArgument").ITradeArgument | undefined)?]>;
 export default _default;

@@ -9,9 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 declare global {
-    type LiterallyJustTheSameThing<T> = {
-        [K in keyof T]: T[K];
-    };
     type Mutable<T> = {
         -readonly [P in keyof T]: T[P];
     };

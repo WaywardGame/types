@@ -25,7 +25,7 @@ export interface IMoveItemsSourceArgumentUsable extends IActionUsable {
     items: Item[];
 }
 export default class MoveItemsSourceArgument extends ActionArgumentCustom<IMoveItemsSourceArgument> {
-    static ANY: [ActionArgument.Undefined, ActionArgument.ItemNearbyIncludingTradeContainer, ActionArgument.ItemArrayNearbyIncludingTradeContainer, MoveItemsSourceArgument];
+    static ANY: [arg1: ActionArgument.Undefined, ActionArgument.ItemNearbyIncludingTradeContainer, ActionArgument.ItemArrayNearbyIncludingTradeContainer, MoveItemsSourceArgument];
     static canUse(executor: Human, item: Item | Item[] | IMoveItemsSourceArgument | undefined, canUse: (item: Item) => IActionUsable | IActionNotUsable, actionName?: Translation): IMoveItemsSourceArgumentUsable | IActionNotUsable;
     validate(executor: Entity | undefined, value: unknown): value is IMoveItemsSourceArgument;
     read(): IMoveItemsSourceArgument;

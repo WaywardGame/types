@@ -48,7 +48,7 @@ export interface IDropCanUse {
     tile: Tile;
     into?: IContainer;
 }
-declare const _default: Action<[[ActionArgument.Undefined, ActionArgument.ItemNearbyIncludingTradeContainer, ActionArgument.ItemArrayNearbyIncludingTradeContainer, MoveItemsSourceArgument], [ActionArgument.Undefined, DropItemFilterArgument]], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearbyIncludingTradeContainer, ActionArgument.ItemArrayNearbyIncludingTradeContainer, MoveItemsSourceArgument], [arg1: ActionArgument.Undefined, DropItemFilterArgument]], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
     usable: true;
     items: Item[];
     into: IContainer;

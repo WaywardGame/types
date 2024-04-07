@@ -19,7 +19,7 @@ declare global {
     /**
      * Gets the arguments tuple of a function.
      */
-    type ArgumentsOf<T> = Extract<LiterallyJustTheSameThing<Parameters<Extract<T, AnyFunction>>>, any[]>;
+    type ArgumentsOf<T> = Extract<Parameters<Extract<T, AnyFunction>>, any[]>;
     type ReturnTypeOrT<T> = T extends (...args: any[]) => infer R ? R : T;
     /**
      * Changes the return type of the given function, or creates a new function from the given arguments and return type.

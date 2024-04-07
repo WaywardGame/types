@@ -44,5 +44,5 @@ export interface IAttackRangedWeaponCanUse extends IBaseCanUse {
     ammunitionType: ItemType | ItemTypeGroup | undefined;
 }
 export type IAttackCanUse = IAttackCloseUpCanUse | IAttackThrowItemCanUse | IAttackRangedWeaponCanUse;
-declare const _default: Action<[[ActionArgument.Undefined, ActionArgument.ItemInventory], [ActionArgument.Undefined, import("../argument/ActionArgumentEnum").default<AttackType, "MeleeWeapon" | "HandToHand" | "RangedWeapon" | "ThrowItem">], [ActionArgument.Undefined, ActionArgument.ItemInventory]], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IAttackCanUse, [(Item | undefined)?, (AttackType | undefined)?, (Item | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory], [ActionArgument.Undefined, import("../argument/ActionArgumentEnum").default<AttackType, "MeleeWeapon" | "HandToHand" | "RangedWeapon" | "ThrowItem">], [arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IAttackCanUse, [(Item | undefined)?, (AttackType | undefined)?, (Item | undefined)?]>;
 export default _default;

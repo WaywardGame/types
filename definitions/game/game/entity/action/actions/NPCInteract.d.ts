@@ -17,5 +17,5 @@ export interface INPCInteractUsable extends IActionUsable {
      */
     onlyDirect?: boolean;
 }
-declare const _default: Action<[ActionArgument.NPCNearby, [ActionArgument.Undefined, ActionArgument.Integer32]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, INPCInteractUsable, [import("../../npc/NPC").default, (number | undefined)?]>;
+declare const _default: Action<[ActionArgument.NPCNearby, [arg1: ActionArgument.Undefined, ActionArgument.Integer32]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, INPCInteractUsable, [import("../../npc/NPC").default, (number | undefined)?]>;
 export default _default;
