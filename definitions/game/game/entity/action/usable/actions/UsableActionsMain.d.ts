@@ -39,7 +39,8 @@ export declare enum UsableActionSet {
     ItemDrop = 20,
     Rename = 21,
     Protect = 22,
-    Main = 23
+    Main = 23,
+    CommandAll = 24
 }
 export declare const usableActionSets: {
     0: UsableActionGenerator<[]>;
@@ -66,4 +67,5 @@ export declare const usableActionSets: {
     21: UsableActionGenerator<[]>;
     22: UsableActionGenerator<[]>;
     23: UsableActionGenerator<[]>;
+    24: UsableActionGenerator<[isCommandMenuAll?: true | undefined]>;
 };

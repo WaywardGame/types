@@ -863,6 +863,7 @@ export declare const enumRefTypes: {
         TricorneHat: ItemType.TricorneHat;
         SandstoneArrowhead: ItemType.SandstoneArrowhead;
         SandstoneArrow: ItemType.SandstoneArrow;
+        ReedFlute: ItemType.ReedFlute;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;

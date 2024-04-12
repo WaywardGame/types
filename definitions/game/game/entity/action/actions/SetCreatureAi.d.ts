@@ -10,13 +10,14 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { ICreatureDescription } from "@wayward/game/game/entity/creature/ICreature";
 import type Human from "@wayward/game/game/entity/Human";
 import { AiType } from "@wayward/game/game/entity/IEntity";
 export interface ISetCreatureAiCanUse extends IActionUsable {
-    creature: Creature;
+    creatures: Creature[];
 }
 export declare function hasSkillToSetCreatureAi(human: Human, creatureDescription: ICreatureDescription | undefined, ai: AiType): boolean;
-declare const _default: Action<[import("../argument/ActionArgumentEnum").default<AiType, "Attack" | "Tamed" | "Neutral" | "Random" | "Hostile" | "Scared" | "Hidden" | "Fearless" | "FollowClose" | "Retaliate" | "Fleeing" | "Waiting" | "FollowFar" | "Stay" | "AttackAdjacent" | "AttackInSight" | "Defend" | "Heel">], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ISetCreatureAiCanUse, [AiType]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], import("../argument/ActionArgumentEnum").default<AiType, "Attack" | "Tamed" | "Neutral" | "Random" | "Hostile" | "Scared" | "Hidden" | "Fearless" | "FollowClose" | "Retaliate" | "Fleeing" | "Waiting" | "FollowFar" | "Stay" | "AttackAdjacent" | "AttackInSight" | "Defend" | "Heel">], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ISetCreatureAiCanUse, [import("../../../item/Item").default | undefined, AiType]>;
 export default _default;

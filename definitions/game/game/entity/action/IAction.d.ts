@@ -175,7 +175,8 @@ export declare enum ActionType {
     DumpItems = 132,
     Reshape = 133,
     Stack = 134,
-    Unstack = 135
+    Unstack = 135,
+    SetCreatureAiAll = 136
 }
 export declare const ACTIONS_RECOMMENDED: ActionType[];
 export declare enum ActionUsability {

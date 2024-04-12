@@ -288,7 +288,7 @@ export interface IUsableActionDefinitionSubmenu<REQUIREMENTS extends IUsableActi
     submenu(registrar: UsableActionRegistrar, using: IUsableActionUsing<REQUIREMENTS>): UsableActionRegistrar | void;
     execute?: undefined;
     isUsable?(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): ReturnableUsableActionUsability;
-    slottable?: ActionId;
+    slottable?: boolean | ActionId;
     forceDisplayWhenEmpty?: true;
 }
 export interface IUsableActionDefinitionExecutable<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {

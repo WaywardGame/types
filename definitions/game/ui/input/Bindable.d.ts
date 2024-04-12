@@ -237,7 +237,8 @@ declare enum Bindable {
     GameActionReshape = 218,
     GameActionReshapeWithItem = 219,
     GameActionCreatureHeelAi = 220,
-    GameActionOpenTileContainer = 221
+    GameActionOpenTileContainer = 221,
+    GameActionCommandCreatureAll = 222
 }
 export default Bindable;
 export declare enum BindableType {
