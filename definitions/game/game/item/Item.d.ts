@@ -375,6 +375,14 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      */
     getDamageTypesForSkill(skillType: SkillType): DamageType[] | undefined;
     /**
+     * Used to return the quality bonuses for crafting with superior/remarkable/exceptional items
+     */
+    getCraftQualityBonus(required?: boolean): number;
+    /**
+     * Item tier bonus
+     */
+    getCraftTierBonus(group?: ItemTypeGroup, required?: boolean): number;
+    /**
      * Gets the item's quality and action level (how good it is at doing the action).
      * @param action The ActionType you are trying to get the level for.
      * @returns A number (possibly 0 if no quality or action level).

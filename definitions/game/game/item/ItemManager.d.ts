@@ -366,7 +366,6 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     getNPCFromInventoryContainer(containable: IContainable): NPC | undefined;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: Item[]): number;
-    getCraftQualityBonus(item: Item, required?: boolean): number;
     /**
      * Returns `true` if the item type or item is filtered out from inventory/crafting/container dialogs.
      * @param item The ItemType or Item to check.
@@ -388,7 +387,6 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     loadReference(allowFixes: boolean, container: IContainer, loadChildReferences?: boolean, parentContainer?: IContainer): boolean;
     private removeFromContainerInternal;
     private onItemMoveOrRemove;
-    private getCraftTierBonus;
     computeCraftQualityBonus(itemType: ItemType, itemsToRequire: Item[], itemsToConsume: Item[], doodadsUsed: IDoodadsUsed[] | undefined): number;
     getCraftChance(human: Human, recipe: IRecipe, qualityBonus: number, returnQuality?: boolean): number;
     getCraftResultChances(human: Human, recipe: IRecipe, qualityBonus: number): Readonly<ICraftResultChances>;
