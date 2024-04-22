@@ -18,6 +18,7 @@ import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
+import type Island from "@wayward/game/game/island/Island";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -50,6 +51,7 @@ export interface IEntityConstructorOptions<TypeType extends number> {
 }
 export declare function asEntity(value?: unknown): Entity | undefined;
 export interface ICastable {
+    get island(): Island;
     get asEntity(): Entity | undefined;
     get asUnion(): Corpse | Creature | Doodad | Human | NPC | Player | TileEvent | Item | Tile | undefined;
     get asCorpse(): Corpse | undefined;

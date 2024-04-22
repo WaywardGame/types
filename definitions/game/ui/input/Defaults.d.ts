@@ -10,5 +10,5 @@
  */
 import Bindable from "@wayward/game/ui/input/Bindable";
 import type { Binding } from "@wayward/game/ui/input/Bindings";
-declare const _default: Record<Bindable, Binding[]>;
-export default _default;
+declare const defaultBindings: Record<Bindable, Binding[]>;
+export default defaultBindings;

@@ -17,6 +17,7 @@ import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
 import type { IContainer, IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -32,6 +33,7 @@ export declare class WorldContainer implements IContainer, ICastable {
      */
     readonly containedItems: Item[];
     constructor(islandId: IslandId);
+    get island(): Island;
     getName(): Translation;
     toString(): string;
     get asCorpse(): undefined;

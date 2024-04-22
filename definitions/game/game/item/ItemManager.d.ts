@@ -135,7 +135,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     static getWeight(itemType: ItemType | Item | IItemWeightComponent, random: Random | undefined, weightType?: WeightType): number;
     static weightTree(itemType: ItemType, random: Random | undefined, weightType?: WeightType, debug?: boolean, depth?: number): number;
     static getGroups(itemType: ItemType): ItemTypeGroup[];
-    static generateLookups(): Promise<void>;
+    static generateLookups(): void;
     private static cacheEquippables;
     private static cacheGroupItems;
     private static cacheItemRecipes;

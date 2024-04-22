@@ -22,7 +22,7 @@ export declare namespace IHighlight {
     function optionalItem(item?: Item): HighlightSelector | undefined;
     function optionalEquipSlot(item?: Item): HighlightSelector | undefined;
     function container(container: IContainer): HighlightSelector;
-    function optionalContainer(container?: unknown): HighlightSelector | undefined;
+    function optionalContainer(maybeContainer: Item): HighlightSelector | undefined;
     function actionSlots(item?: Item): HighlightSelector[];
 }
 export declare enum HighlightType {

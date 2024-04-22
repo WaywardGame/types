@@ -8,9 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { MagicalPropertyIdentity, MagicalPropertyIdentityHash } from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { MagicalPropertyIdentityHash } from "@wayward/game/game/magic/MagicalPropertyManager";
+import { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
 import { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
-import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IDropdownOption } from "@wayward/game/ui/component/Dropdown";
 import GroupDropdown from "@wayward/game/ui/component/GroupDropdown";
 export default class MagicalPropertyDropdown<OTHER_OPTIONS extends string = never> extends GroupDropdown<typeof MagicalPropertyType, OTHER_OPTIONS | MagicalPropertyIdentityHash, MagicalPropertyType, MagicalPropertyType> {
