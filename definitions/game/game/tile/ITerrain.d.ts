@@ -171,6 +171,7 @@ export interface ITileData {
     ownerIdentifier?: string;
     renamed?: string | ISerializedTranslation | undefined;
     tradedFrom?: string[];
+    tilesDug?: number;
 }
 export type ITileDataOld = Partial<ITileData> & {
     strength?: number;
@@ -340,3 +341,4 @@ export declare const trackTerrainTypes: Set<TerrainType>;
 export declare const trackGateDoodadTypes: Set<DoodadType>;
 export declare const DEFAULT_FISH_AVAILABLE = 6;
 export declare const TILE_MAX_CAPACITY = 36;
+export declare const TILE_MAX_DUG_AMOUNT = 8;
