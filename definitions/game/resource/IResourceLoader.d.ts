@@ -49,7 +49,8 @@ export declare enum PathType {
     TerrainDecoration = 37,
     TerrainMound = 38,
     TerrainTilled = 39,
-    TileEvent = 40,
-    Vehicle = 41,
-    Website = 42
+    TerrainDug = 40,
+    TileEvent = 41,
+    Vehicle = 42,
+    Website = 43
 }

@@ -150,6 +150,10 @@ export interface ITerrainDescription extends IModdable {
      * Chance of slipping when there's puddles of water on it (amount is multiplied by the amount of puddles up to a maximum of three).
      */
     slipperyWhenWet?: number;
+    /**
+     * When digging this tile, can it be dug down to a maximum depth and show a visual?
+     */
+    canBeDug?: boolean;
 }
 export interface ITileOld {
     event?: TileEvent[];
@@ -171,7 +175,10 @@ export interface ITileData {
     ownerIdentifier?: string;
     renamed?: string | ISerializedTranslation | undefined;
     tradedFrom?: string[];
-    tilesDug?: number;
+    /**
+     * The times a tile has been dug (if it can be dug)
+     */
+    dug?: number;
 }
 export type ITileDataOld = Partial<ITileData> & {
     strength?: number;

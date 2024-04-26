@@ -24,6 +24,7 @@ export default class TileAtlas {
     readonly terrainDecoration: Map<TerrainDecoration, DoodadInfo>;
     private readonly terrain;
     private readonly terrainTilled;
+    readonly terrainDug: Map<string, TerrainTileInfo>;
     private readonly baseWaterTypes;
     private readonly freshWaterTypes;
     private readonly iceTypes;
@@ -35,8 +36,10 @@ export default class TileAtlas {
     private readonly waterTypes;
     getTerrain(terrainType: TerrainType, biomeType: BiomeType | undefined): TerrainTileInfo | undefined;
     getTerrainTilled(terrainType: TerrainType, biomeType: BiomeType | undefined): TerrainTileInfo | undefined;
+    getTerrainDug(terrainType: TerrainType, biomeType: BiomeType | undefined): TerrainTileInfo | undefined;
     setTerrain(terrainType: TerrainType, terrainTileInfo: TerrainTileInfo, biomeType: BiomeType | undefined): void;
     setTerrainTilled(terrainType: TerrainType, terrainTileInfo: TerrainTileInfo, biomeType: BiomeType | undefined): void;
+    setTerrainDug(terrainType: TerrainType, terrainTileInfo: TerrainTileInfo, biomeType: BiomeType | undefined): void;
     clearCaches(): void;
     generateLookups(): void;
     isMountain(type: TerrainType): boolean;

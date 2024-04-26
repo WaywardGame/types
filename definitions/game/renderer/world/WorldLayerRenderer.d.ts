@@ -86,6 +86,7 @@ export declare class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     updateTile(tile: Tile, flushTileImmediately?: boolean, debug?: boolean): void;
     private computeDoodad;
     private computeTilled;
+    private computeDug;
     private computeDecorations;
     private updateTileLightBlock;
     private flush;

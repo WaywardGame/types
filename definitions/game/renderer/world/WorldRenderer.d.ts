@@ -121,6 +121,7 @@ export declare class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     mountainAdaptor: ITileAdaptor;
     mountainGroundAdaptor: ITileAdaptor;
     tillAdaptor: ITileAdaptor;
+    dugAdaptor: ITileAdaptor;
     trackAdaptor: ITileAdaptor;
     wallAdaptor: WallTileAdaptor;
     waterAdaptor: ITileAdaptor;

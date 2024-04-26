@@ -117,6 +117,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     get maxDur(): number | undefined;
     private set maxDur(value);
     get isTilled(): boolean;
+    get depth(): number;
     /**
      * This should only be called if you know what you're doing
      * Ensure a tile data with tilled is created
