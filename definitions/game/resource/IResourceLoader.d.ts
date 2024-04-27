@@ -47,9 +47,9 @@ export declare enum PathType {
     StatusEffectOverlay = 35,
     Terrain = 36,
     TerrainDecoration = 37,
-    TerrainMound = 38,
-    TerrainTilled = 39,
-    TerrainDug = 40,
+    TerrainDug = 38,
+    TerrainMound = 39,
+    TerrainTilled = 40,
     TileEvent = 41,
     Vehicle = 42,
     Website = 43
