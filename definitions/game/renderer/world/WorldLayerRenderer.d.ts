@@ -70,7 +70,7 @@ export declare class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     setWorldLayer(worldLayer: WorldLayer, exploredMapClientData: ExploredMapClientData): void;
     addTileLayer(tileLayer: ITileLayerRendererPlatform): void;
     updateAll(): void;
-    updateDoodad({ x, y }: Tile, flushTileImmediately: boolean, { doodadDescription, doodadType, doodadInfo, doodadVariationX, doodadVariationY, terrainMasks }: IDoodadUpdate): void;
+    updateDoodad({ x, y }: Tile, flushTileImmediately: boolean, { doodadDescription, doodadInfo, doodadVariationX, doodadVariationY, terrainMasks }: IDoodadUpdate): void;
     renderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFixedDepth: boolean, flags?: RenderLayerFlag): void;
     getDataIndex(x: number, y: number): number;
     /**

@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type DoodadInfo from "@wayward/game/game/doodad/DoodadInfo";
-import type { DoodadType, IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
+import type { IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
 import type { StillContainerBaseItemType } from "@wayward/game/game/item/IItem";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -22,11 +22,9 @@ export interface ITileUpdate {
 }
 export interface IDoodadUpdate {
     doodadDescription: IDoodadDescription | undefined;
-    doodadType: DoodadType | undefined;
     doodadInfo: DoodadInfo | undefined;
     doodadVariationX: number;
     doodadVariationY: number;
-    hasGraphicVariation: boolean;
     terrainMasks: TerrainMask;
 }
 export type onTileUpdateDelegate = (tile: Tile, flushTileImmediately: boolean, debug?: boolean) => void;
