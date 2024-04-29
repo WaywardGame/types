@@ -11,7 +11,6 @@
 import type { WebGlRendererContext } from "@wayward/game/renderer/platform/webgl/WebGlRendererContext";
 import type { WebGlContext } from "@wayward/game/renderer/platform/webgl/WebGlContext";
 import { TileLayerType } from "@wayward/game/renderer/world/IWorldRenderer";
-import type { ITileLayerRendererPlatform } from "@wayward/game/renderer/tile/ITileLayerRendererPlatform";
 import { TileLayerRendererBase } from "@wayward/game/renderer/tile/TileLayerRendererBase";
 /**
  * Each tile in the wayward world is rendered as 4 subtiles (topleft, topright, bottomleft, bottomright).
@@ -22,7 +21,7 @@ import { TileLayerRendererBase } from "@wayward/game/renderer/tile/TileLayerRend
  * If Red and Green are both 0, the subtile foreground is not rendered.
  * If Blue and Alpha are both 0, the subtile background is not rendered.
  */
-export declare class TileLayerRendererWebGl extends TileLayerRendererBase implements ITileLayerRendererPlatform {
+export declare class TileLayerRendererWebGl extends TileLayerRendererBase {
     private readonly context;
     private readonly positionBuffer;
     readonly isFixedDepth: boolean;

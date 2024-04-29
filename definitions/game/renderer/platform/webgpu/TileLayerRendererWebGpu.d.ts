@@ -9,10 +9,9 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { WebGpuRendererContext } from "@wayward/game/renderer/platform/webgpu/WebGpuRendererContext";
-import type { ITileLayerRendererPlatform } from "@wayward/game/renderer/tile/ITileLayerRendererPlatform";
 import { TileLayerRendererBase } from "@wayward/game/renderer/tile/TileLayerRendererBase";
 import type { TileLayerType } from "@wayward/game/renderer/world/IWorldRenderer";
-export declare class TileLayerRendererWebGpu extends TileLayerRendererBase implements ITileLayerRendererPlatform {
+export declare class TileLayerRendererWebGpu extends TileLayerRendererBase {
     isFixedDepth: boolean;
     constructor(context: WebGpuRendererContext, type: TileLayerType, width: number, height: number);
     delete(): void;

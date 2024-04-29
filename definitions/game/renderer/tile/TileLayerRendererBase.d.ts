@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { ITileLayerRendererPlatform } from "@wayward/game/renderer/tile/ITileLayerRendererPlatform";
 import type { ITileAdaptation } from "@wayward/game/renderer/tile/TileAdaptors";
 import { RenderLayerFlag, TileLayerType } from "@wayward/game/renderer/world/IWorldRenderer";
 /**
@@ -19,7 +20,7 @@ import { RenderLayerFlag, TileLayerType } from "@wayward/game/renderer/world/IWo
  * If Red and Green are both 0, the subtile foreground is not rendered.
  * If Blue and Alpha are both 0, the subtile background is not rendered.
  */
-export declare abstract class TileLayerRendererBase {
+export declare abstract class TileLayerRendererBase implements ITileLayerRendererPlatform {
     readonly type: TileLayerType;
     protected readonly width: number;
     protected readonly height: number;
@@ -35,6 +36,11 @@ export declare abstract class TileLayerRendererBase {
     protected readonly tileData: ArrayBuffer;
     protected readonly tileDataU8: Uint8Array;
     constructor(type: TileLayerType, width: number, height: number);
+    abstract isFixedDepth: boolean;
+    abstract delete(): void;
+    abstract flushTile(x: number, y: number): void;
+    abstract flush(): void;
+    abstract render(x: number, y: number, subTileSize: number, tileScale: number, viewWidth: number, viewHeight: number, ticks: number): void;
     setLayer(dataIndex: number, tileAdaptation: ITileAdaptation): void;
     setForegroundLayer(dataIndex: number, tileAdaptation: ITileAdaptation, offset?: number): void;
     setBackgroundLayer(dataIndex: number, tileAdaptation: ITileAdaptation, offset?: number): void;
