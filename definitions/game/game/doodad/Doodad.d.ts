@@ -121,6 +121,10 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     stillContainer?: Item;
     tradedFrom?: string[];
     weight?: number;
+    /**
+     * Used to store protection status for built doodads
+     */
+    protected?: boolean;
     private _tileId?;
     /**
      * Separate property just for wells because isInGroup is still expensive for processWell()
