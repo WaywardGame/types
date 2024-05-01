@@ -1,8 +1,43 @@
 {
-    "files": [],
-    "references": [
-        {
-            "path": "../../src"
-        }
-    ]
+	"compilerOptions": {
+		"paths": {
+			"*" : [
+				"./definitions/*",
+				"./definitions/game/*",
+				"./definitions/launcher/*"
+			],
+			"@cplusplus/*": [
+				"./definitions/cplusplus/*"
+			],
+			"@hosts/*": [
+				"./definitions/hosts/*"
+			],
+			"@wayward/game/*": ["./definitions/game/*"],
+			"@wayward/test": ["./definitions/test/index.d.ts"],
+			"@wayward/test/*": ["./definitions/test/*"],
+			"event/*": ["./definitions/game/event/*"],
+			"game/*": ["./definitions/game/game/*"],
+			"launcher/*": [
+				"./definitions/launcher/ui/launcher/*",
+				"./definitions/launcher/*"
+			],
+			"multiplayer/*": ["./definitions/game/multiplayer/*"],
+			"renderer/*": ["./definitions/game/renderer/*"],
+			"test/*": ["./definitions/test/*"],
+			"ui/*": ["./definitions/game/ui/*"],
+			"utilities/*": [
+				"./definitions/game/utilities/*",
+				"./definitions/launcher/utilities/*"
+			]
+		}
+	},
+	"exclude": [
+		"./node_modules/**"
+	]
+
+	// "references": [
+	//   {
+	//     "path": "../../src"
+	//   }
+	// ]
 }
