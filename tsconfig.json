@@ -1,8 +1,34 @@
 {
-    "files": [],
-    "references": [
-        {
-            "path": "../../src"
-        }
-    ]
+  "compilerOptions": {
+    "paths": {
+      "*" : [
+        "./definitions/*",
+        "./definitions/game/*",
+        "./definitions/launcher/*"
+      ],
+      "event/*": ["./definitions/game/event/*"],
+      "game/*": ["./definitions/game/game/*"],
+      "launcher/*": [
+        "./definitions/launcher/ui/launcher/*",
+        "./definitions/launcher/*"
+      ],
+      "multiplayer/*": ["./definitions/game/multiplayer/*"],
+      "renderer/*": ["./definitions/game/renderer/*"],
+      "test/*": ["./definitions/test/*"],
+      "ui/*": ["./definitions/game/ui/*"],
+      "utilities/*": [
+        "./definitions/game/utilities/*",
+        "./definitions/launcher/utilities/*"
+      ]
+    }
+  },
+  "exclude": [
+    "./node_modules/**"
+  ]
+
+  // "references": [
+  //   {
+  //     "path": "../../src"
+  //   }
+  // ]
 }

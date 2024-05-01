@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Stream from "@wayward/goodstream/Stream";
+import type Stream from "goodstream/Stream";
 import { TileGroup } from "game/entity/creature/ICreature";
 import type Island from "game/island/Island";
 import type { IOverlayInfo, ITile } from "game/tile/ITerrain";

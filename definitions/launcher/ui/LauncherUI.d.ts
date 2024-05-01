@@ -10,9 +10,9 @@
  */
 import Button from "ui/component/Button";
 import Component from "ui/component/Component";
-import Mods from "ui/launcher/Mods";
-import Resources from "ui/launcher/Resources";
-import Saves from "ui/launcher/Saves";
+import Mods from "launcher/Mods";
+import Resources from "launcher/Resources";
+import Saves from "launcher/Saves";
 import type Data from "utilities/Data";
 export declare enum LauncherUIClasses {
     Main = "launcher-app",

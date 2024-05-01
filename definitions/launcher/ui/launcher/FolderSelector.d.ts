@@ -11,7 +11,7 @@
 import type { ComponentEventManager, ComponentEvents } from "ui/component/Component";
 import Component from "ui/component/Component";
 import Section from "ui/component/Section";
-import FolderButton from "ui/launcher/FolderButton";
+import FolderButton from "launcher/FolderButton";
 import type Data from "utilities/Data";
 export interface IFolderSelectorEvents extends ComponentEvents<Section> {
     addNew: {

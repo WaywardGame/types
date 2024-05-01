@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Player from "@wayward/game/game/entity/player/Player";
-import { Direction } from "@wayward/game/utilities/math/Direction";
-import type { Application, ITestState } from "@wayward/test/core/application";
-import type { INewGameOptions, ITestJoinServerOptions } from "@wayward/test/interfaces";
+import type Player from "game/entity/player/Player";
+import { Direction } from "utilities/math/Direction";
+import type { Application, ITestState } from "test/core/application";
+import type { INewGameOptions, ITestJoinServerOptions } from "test/interfaces";
 export declare class Apps {
     private readonly _logs;
     private readonly _applications;

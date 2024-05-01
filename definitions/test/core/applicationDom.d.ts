@@ -10,7 +10,7 @@
  */
 /// <reference types="webdriverio/async" />
 import type * as webdriverio from "webdriverio";
-import type { ApplicationLogger } from "@wayward/test/core/applicationLogger";
+import type { ApplicationLogger } from "test/core/applicationLogger";
 export declare const defaultWaitTimeout: number;
 export declare class ApplicationDom {
     private readonly browser;

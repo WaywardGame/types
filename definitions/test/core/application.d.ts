@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Load } from "@wayward/game/game/meta/Loading";
-import type { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
-import type { ScreenId } from "@wayward/game/ui/screen/IScreen";
-import type { MenuId } from "@wayward/game/ui/screen/screens/menu/component/IMenu";
-import type { Random } from "@wayward/game/utilities/random/Random";
-import ApplicationInteractions from "@wayward/test/core/applicationInteractions";
-import type { Apps } from "@wayward/test/core/applicationManager";
-import type { IAppPaths } from "@wayward/test/interfaces";
-import type { TestRunContext } from "@wayward/test/testRunner";
+import type { Load } from "game/meta/Loading";
+import type { Prompt } from "game/meta/prompt/IPrompt";
+import type { ScreenId } from "ui/screen/IScreen";
+import type { MenuId } from "ui/screen/screens/menu/component/IMenu";
+import type { Random } from "utilities/random/Random";
+import ApplicationInteractions from "test/core/applicationInteractions";
+import type { Apps } from "test/core/applicationManager";
+import type { IAppPaths } from "test/interfaces";
+import type { TestRunContext } from "test/testRunner";
 export interface IApplicationOptions {
     additionalArgs?: string[];
     mods?: string[];
