@@ -78,7 +78,7 @@ export default class CreatureManager extends EntityManager<Creature, {
      * @param willMove Set to true if the object is about to move to this tile. This method will confirm if there's an existing npc/creature there and return false if so
      * @return Blocked penalty - Do no return 0!
      */
-    getMovePenalty(moveType: MoveType, tile: Tile, willMove: boolean, options?: Partial<ICreatureCheckMoveOptions>): number;
+    getMovePenalty(moveType: MoveType, tile: Tile, willMove: boolean, options?: Partial<ICreatureCheckMoveOptions>, creature?: Creature): number;
     /**
      * wasm calls this when calculating penalties for flow fields
      */

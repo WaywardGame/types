@@ -230,6 +230,7 @@ export declare enum MoveType {
     WetLand = 256,
     Void = 512,
     LandBlind = 1024,// Will not attempt to move towards targets on land
+    Hole = 2048,
     Flying = 15
 }
 export declare enum AttackType {
