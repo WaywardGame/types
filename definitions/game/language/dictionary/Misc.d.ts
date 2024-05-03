@@ -172,5 +172,6 @@ export declare enum MiscTranslation {
     Tilled = 50,
     Undiscovered = 51,
     Unknown = 52,
-    UnknownItem = 53
+    UnknownItem = 53,
+    The = 54
 }
