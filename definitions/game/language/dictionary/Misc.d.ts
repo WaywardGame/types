@@ -168,10 +168,10 @@ export declare enum MiscTranslation {
     ReformatSingularNoun = 46,
     Renamed = 47,
     Simplify = 48,
-    Tile = 49,
-    Tilled = 50,
-    Undiscovered = 51,
-    Unknown = 52,
-    UnknownItem = 53,
-    The = 54
+    The = 49,
+    Tile = 50,
+    Tilled = 51,
+    Undiscovered = 52,
+    Unknown = 53,
+    UnknownItem = 54
 }
