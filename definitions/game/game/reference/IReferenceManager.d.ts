@@ -864,6 +864,15 @@ export declare const enumRefTypes: {
         SandstoneArrowhead: ItemType.SandstoneArrowhead;
         SandstoneArrow: ItemType.SandstoneArrow;
         ReedFlute: ItemType.ReedFlute;
+        WoodenFlute: ItemType.WoodenFlute;
+        RawClayFlute: ItemType.RawClayFlute;
+        ClayFlute: ItemType.ClayFlute;
+        BoneFlute: ItemType.BoneFlute;
+        TinFlute: ItemType.TinFlute;
+        CopperFlute: ItemType.CopperFlute;
+        WroughtIronFlute: ItemType.WroughtIronFlute;
+        IronFlute: ItemType.IronFlute;
+        BronzeFlute: ItemType.BronzeFlute;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;

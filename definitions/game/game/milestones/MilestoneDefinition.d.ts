@@ -8,9 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { SfxType } from "@wayward/game/audio/IAudio";
+import type { MessageType } from "@wayward/game/game/entity/player/IMessageManager";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import { MilestoneDataType, MilestoneVisibility } from "@wayward/game/game/milestones/IMilestone";
+import type { MilestoneManager } from "@wayward/game/game/milestones/MilestoneManager";
 import { GameMode } from "@wayward/game/game/options/IGameOptions";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
+import type Message from "@wayward/game/language/dictionary/Message";
+import type { EnumObject } from "@wayward/utilities/enum/IEnum";
 export default class MilestoneDefinition {
     dataType: MilestoneDataType;
     amount: SupplierOr<number>;
@@ -35,6 +41,12 @@ export default class MilestoneDefinition {
      * For example, this could be used to check if the player has tamed every single creature type.
      */
     static counter(amount: SupplierOr<number>): MilestoneDefinition;
+    /**
+     * This milestone type requires a number of entries, each of which must be distinct, and which must be discovered in order, from `1` to `amount`.
+     * `0` is never required for discovery.
+     * For example, this could be used to handle staged discovery.
+     */
+    static discovery(obj: EnumObject<Record<string, string | number>>): MilestoneDefinition;
     private constructor();
     /**
      * Replaces the type and desired amount of this MilestoneDefinition with the type and desired amount of another's.
@@ -69,8 +81,10 @@ export default class MilestoneDefinition {
     setGameModes(all: "all"): this;
     disabledByMods: boolean;
     setNotDisabledByMods(): this;
-    unlockedHandler?: (tellPlayer: () => void) => any;
-    onUnlocked(handler: (tellPlayer: () => void) => any): this;
-    progressHandler?: (newData?: string | number) => any;
-    onProgress(handler: (newData?: string | number) => any): this;
+    unlockedHandler?: (tellPlayer: (message?: Message, args?: TranslationArg[], type?: MessageType, sfxType?: SfxType) => void) => any;
+    onUnlocked(handler: (tellPlayer: (message?: Message, args?: TranslationArg[], type?: MessageType, sfxType?: SfxType) => void) => any): this;
+    progressHandler?: (newData: string | number | undefined, tellPlayer: (message?: Message, args?: TranslationArg[], type?: MessageType, sfxType?: SfxType) => void) => any;
+    onProgress(handler: (newData: string | number | undefined, tellPlayer: (message?: Message, args?: TranslationArg[], type?: MessageType, sfxType?: SfxType) => void) => any): this;
+    milestoneProgressHandler?: (milestones: MilestoneManager, milestone: Milestone, newData?: string | number) => any;
+    registerMilestoneProgressHandler(handler: (milestones: MilestoneManager, milestone: Milestone, newData?: string | number) => any): this;
 }

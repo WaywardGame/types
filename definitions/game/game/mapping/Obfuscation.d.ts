@@ -13,7 +13,7 @@ import type { DrawnMapTheme } from "@wayward/game/game/mapping/IMapRender";
 export default class Obfuscation {
     private readonly seed?;
     private readonly canvas;
-    constructor(radius: number, seed?: number | Uint16Array | undefined);
+    constructor(radius: number, seed?: (Uint16Array | number) | undefined);
     obfuscate(mapImage: CanvasImage, obfuscation: number, theme: DrawnMapTheme): Promise<HTMLCanvasElement>;
     private render;
 }

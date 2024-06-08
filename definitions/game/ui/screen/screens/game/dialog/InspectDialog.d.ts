@@ -27,6 +27,7 @@ export default class InspectDialog extends Dialog {
     inspectTile(tile: Tile): this;
     inspectEquipSlot(slot: EquipType): this;
     inspectActionSlot(slot?: ActionSlot): this;
+    inspectAlignment(): this;
     protected onClose(): void;
     protected onMoveToIsland(): void;
     private reinspect;

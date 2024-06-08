@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-/// <reference types="@webgpu/types" />
 import { SpritePackerBase } from "@wayward/game/renderer/resources/SpritePackerBase";
 import type { ISpriteContainer } from "@wayward/game/renderer/resources/ISpritePacker";
 import type { SpriteAtlasNode } from "@wayward/game/renderer/resources/SpriteAtlasNode";

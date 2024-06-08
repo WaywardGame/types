@@ -344,6 +344,9 @@ export declare enum TerrainTypeGroup {
     Nonflammable = 1,
     Ice = 2
 }
+export declare enum TerrainModification {
+    Fished = 0
+}
 export declare const trackTerrainTypes: Set<TerrainType>;
 export declare const trackGateDoodadTypes: Set<DoodadType>;
 export declare const DEFAULT_FISH_AVAILABLE = 6;

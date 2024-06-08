@@ -15,7 +15,7 @@ import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProv
 import Inspection from "@wayward/game/game/inspection/Inspection";
 import { Quality } from "@wayward/game/game/IObject";
 export default class QualityInspection extends Inspection<Quality> {
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     private readonly _human?;
     protected get human(): Human | undefined;
     constructor([, deity]: [any, Quality], context?: InfoProviderContext);

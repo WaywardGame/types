@@ -53,4 +53,8 @@ export default class MovementHandler extends EventEmitter.Host<IMovementHandlerE
      * Returns whether either of the previous statements are true.
      */
     private processDirectionBinds;
+    /**
+     * Returns true if the player changed their facing direction.
+     */
+    private faceDirection;
 }

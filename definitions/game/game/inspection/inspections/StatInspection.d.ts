@@ -13,16 +13,17 @@ import { Stat } from "@wayward/game/game/entity/IStats";
 import { InspectType } from "@wayward/game/game/inspection/IInspection";
 import type { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
-import { StatInfo } from "@wayward/game/game/inspection/infoProviders/stat/StatInfo";
 import Inspection from "@wayward/game/game/inspection/Inspection";
+import { StatInfo } from "@wayward/game/game/inspection/infoProviders/stat/StatInfo";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export default class StatInspection extends Inspection<Stat> {
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     private readonly _human?;
     protected get human(): Human | undefined;
     constructor([, stat]: [any, Stat], context?: InfoProviderContext);
     getId(): string;
     getBorder(): string;
+    hasContent(context: InfoProviderContext): boolean;
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     private getInfo;
 }

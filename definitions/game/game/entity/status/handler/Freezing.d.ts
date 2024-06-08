@@ -12,8 +12,10 @@ import { StatusType } from "@wayward/game/game/entity/IEntity";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import BadTemperatureEffect from "@wayward/game/game/entity/status/handler/BadTemperatureEffect";
 import { BadTemperatureLevel } from "@wayward/game/game/entity/status/handler/IBadTemperature";
+import { TempType } from "@wayward/game/game/temperature/ITemperature";
 export default class Freezing extends BadTemperatureEffect {
     getLevel(): BadTemperatureLevel.Hypothermia | BadTemperatureLevel.Freezing | BadTemperatureLevel.None;
     protected getConsequenceEffect(): StatusType;
     protected getConsequenceStat(): Stat;
+    getTempType(): TempType;
 }

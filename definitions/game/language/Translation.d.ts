@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Quality } from "@wayward/game/game/IObject";
-import type { Deity } from "@wayward/game/game/deity/Deity";
+import { Deity } from "@wayward/game/game/deity/Deity";
 import type { GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import type { StatusType } from "@wayward/game/game/entity/IEntity";
 import { DamageType } from "@wayward/game/game/entity/IEntity";
@@ -112,9 +112,8 @@ declare namespace Translation {
     export function getAll(translationId: string): Translation[];
     type Translator<ENTRY extends number = number, ARGS extends any[] = []> = (entry: string | ENTRY, ...args: ARGS) => Translation;
     export function translator<ENTRY extends number = number, ARGS extends any[] = []>(_translator: Translator<ENTRY, ARGS> | Dictionary): Translator<ENTRY, ARGS>;
-    export function refTranslator<TRANSLATOR extends Translator<number, [reference: Reference, ...any[]]>>(refType: EnumReferenceTypes, _translator: TRANSLATOR, translationReference?: false): TRANSLATOR extends Translator<infer ENTRY, [reference: Reference | undefined, ...infer ARGS]> ? Translator<ENTRY, ARGS> : never;
-    export function refTranslator<ENTRY extends number = number>(refType: EnumReferenceTypes, dictionary: Dictionary): Translator<ENTRY>;
-    export function refTranslator<ENTRY extends number = number>(refType: EnumReferenceTypes, dictionary: Dictionary, color: (entry: string | ENTRY) => TranslationImpl): Translator<ENTRY, [color?: boolean]>;
+    export function refTranslator<ENTRY extends number = number>(refType: EnumReferenceTypes, dictionary: SupplierOr<Dictionary, [number]>, color?: (entry: string | ENTRY) => TranslationImpl): Translator<ENTRY, [color?: boolean]>;
+    export function customRefTranslator<TRANSLATOR extends Translator<number, [reference: Reference, ...any[]]>>(refType: EnumReferenceTypes, _translator: TRANSLATOR, color?: (entry: string | number) => TranslationImpl): TRANSLATOR extends Translator<infer ENTRY, [reference: Reference | undefined, ...infer ARGS]> ? Translator<ENTRY, ARGS> : never;
     export const empty: () => TranslationImpl;
     export const ui: Translator<UiTranslation, []>;
     export const message: Translator<Message, []>;
@@ -122,7 +121,7 @@ declare namespace Translation {
     export const skill: Translator<SkillType, [color?: boolean | undefined]>;
     export const milestone: Translator<Milestone, [color?: boolean | undefined]>;
     export const stat: Translator<Stat, [color?: boolean | undefined]>;
-    export const itemType: Translator<ItemType, []>;
+    export const itemType: Translator<ItemType, [color?: boolean | undefined]>;
     export const deity: Translator<Deity, [color?: boolean | undefined]>;
     export const status: (entry: string | StatusType, ref?: boolean) => TranslationImpl;
     export let action: Translator<ActionType | UsableActionType>;

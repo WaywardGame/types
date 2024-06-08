@@ -104,7 +104,8 @@ export declare enum MultiplayerSyncCheck {
     UpdateDirection = 64,
     Weight = 65,
     WorldUpdateTile = 66,
-    NPC = 67
+    NPC = 67,
+    History = 68
 }
 export declare const maxPlayers = 32;
 export declare const packetTickRate = 16.6666;

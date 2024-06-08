@@ -29,7 +29,7 @@ import type Tile from "@wayward/game/game/tile/Tile";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export default class ActionInspection extends Inspection<ActionId | undefined> {
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     static getAction(id: ActionId): UsableAction<IUsableActionRequirements, IUsableActionDefinition> | undefined;
     static getActionNameWithTier(id: ActionId, context: UsableActionDisplayContext, provided: IUsableActionPossibleUsing | undefined, resolveUsing: boolean): TranslationImpl | undefined;
     private static getTranslation;

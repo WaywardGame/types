@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Deity } from "@wayward/game/game/deity/Deity";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IContainer } from "@wayward/game/game/item/IItem";
@@ -34,7 +34,7 @@ export default class AltarDialog extends Dialog {
     private altarRef?;
     get altar(): Doodad | undefined;
     readonly graph: AlignmentGraph;
-    readonly deityChoice: ChoiceList.Optional<Choice<Deity>>;
+    readonly deityChoice: ChoiceList.Optional<Choice<DeityReal>>;
     readonly bucket: ContainerBucket;
     constructor(id?: DialogId, subId?: string);
     protected onAppend1(): void;

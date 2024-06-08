@@ -124,7 +124,7 @@ export declare enum StatusType {
     Overheating = 7,
     Freezing = 8,
     Frostbitten = 9,
-    Cursed = 10
+    Anguish = 10
 }
 export type IStatus = Record<keyof typeof StatusType, number>;
 export interface ICausesStatusEffect {

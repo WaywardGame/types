@@ -16,12 +16,12 @@ import type IClientStore from "@wayward/game/save/clientStore/IClientStore";
 import type { ISerializer } from "@wayward/game/save/serializer/ISerializer";
 import type { AnyPropertyToSerialize } from "@wayward/game/save/serializer/PropertiesToSerialize";
 import Files from "@wayward/game/utilities/Files";
-import type { IVersionInfo } from "@wayward/game/utilities/Version";
+import Version from "@wayward/game/utilities/Version";
 import type { IWaywardPreload } from "@wayward/hosts/shared/interfaces";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
     readonly game: Game;
-    lastLoadedVersion: IVersionInfo;
+    lastLoadedVersion: Version.Info;
     private loadedGlobalSlot;
     private readonly dataStorage;
     private multiplayerSlotData;

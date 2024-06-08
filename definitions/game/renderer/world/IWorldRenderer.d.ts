@@ -45,6 +45,7 @@ export declare enum RenderLayerFlag {
     Doodad = 8,
     DoodadOver = 16,
     Mod = 32,
+    TerrainCover = 64,
     All = 255,
     ExcludeDoodad = 247
 }
@@ -53,7 +54,8 @@ export declare enum TileLayerType {
     TerrainOver = 1,
     TerrainDecoration = 2,
     Doodad = 3,
-    DoodadOver = 4
+    DoodadOver = 4,
+    TerrainCover = 5
 }
 export interface IBounds {
     viewportBounds: IBound3;

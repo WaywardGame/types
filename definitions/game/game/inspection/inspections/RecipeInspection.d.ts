@@ -16,7 +16,7 @@ import Inspection from "@wayward/game/game/inspection/Inspection";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export default class RecipeInspection extends Inspection<ItemType> {
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     private checker;
     constructor([, itemType]: [any, ItemType]);
     getId(): string;

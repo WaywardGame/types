@@ -25,6 +25,7 @@ declare global {
         awaitAll(): Promise<Array<Awaited<T>>>;
         layerSort(sortInitializer: (sorter: ISorter<T>) => any): T[];
         groupBy<GROUP>(grouper: (value: T, index: number, obj: T[]) => GROUP): Array<[GROUP, T[]]>;
+        distinct(): T[];
     }
 }
 export default function (): void;

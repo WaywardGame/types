@@ -24,11 +24,11 @@ export declare const eventManager: EventManager<EventBus, {
     5(): import("../game/entity/creature/Creature").default;
     6(): import("../game/doodad/DoodadManager").default;
     7(): import("../game/doodad/Doodad").default;
-    8(): import("../game/entity/Entity").default<unknown, number, import("../game/reference/IReferenceManager").EntityReferenceTypes, unknown>;
-    9(): import("../game/entity/EntityMovable").default<unknown, number, import("../game/reference/IReferenceManager").EntityReferenceTypes, unknown>;
-    10(): import("../game/entity/EntityManager").default<any, undefined>;
+    8(): import("../game/entity/Entity").default;
+    9(): import("../game/entity/EntityMovable").default;
+    10(): import("../game/entity/EntityManager").default<any>;
     11(): import("../game/Game").Game;
-    12(): import("../game/entity/Human").default<number, import("../game/reference/IReferenceManager").ReferenceType.NPC | import("../game/reference/IReferenceManager").ReferenceType.Player>;
+    12(): import("../game/entity/Human").default;
     13(): import("../game/island/Island").default;
     14(): import("../game/item/ItemManager").default;
     15(): import("../game/item/Item").default;
@@ -50,7 +50,7 @@ export declare const eventManager: EventManager<EventBus, {
     31(): import("../steamworks/Steamworks").default;
     32(): import("../game/tile/TileEventManager").default;
     33(): import("../game/tile/TileEvent").default;
-    34(): import("../ui/Ui").Ui;
+    34(): typeof ui;
     35(): import("../ui/screen/screens/game/static/ActionBar").default;
     36(): import("../ui/screen/screens/game/util/movement/MovementHandler").default;
     37(): import("../renderer/world/WorldRenderer").WorldRenderer;

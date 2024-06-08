@@ -23,6 +23,7 @@ export default class TileAtlas {
     readonly mounds: Map<TerrainType, DoodadInfo>;
     readonly terrainDecoration: Map<TerrainDecoration, DoodadInfo>;
     readonly terrainDug: Map<string, DoodadInfo>;
+    private fished;
     private readonly terrain;
     private readonly terrainTilled;
     private readonly baseWaterTypes;
@@ -40,6 +41,8 @@ export default class TileAtlas {
     setTerrain(terrainType: TerrainType, terrainTileInfo: TerrainTileInfo, biomeType: BiomeType | undefined): void;
     setTerrainTilled(terrainType: TerrainType, terrainTileInfo: TerrainTileInfo, biomeType: BiomeType | undefined): void;
     setTerrainDug(terrainType: TerrainType, doodadInfo: DoodadInfo, biomeType: BiomeType | undefined): void;
+    getFished(): DoodadInfo | undefined;
+    setFished(doodadInfo: DoodadInfo): void;
     clearCaches(): void;
     generateLookups(): void;
     isMountain(type: TerrainType): boolean;

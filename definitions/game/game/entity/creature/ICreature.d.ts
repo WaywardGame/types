@@ -339,6 +339,14 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      * Only used for golems currently, but we should use this for all true/false properties for creatures probably
      */
     group?: CreatureTypeGroup[];
+    /**
+     * Called when the creature changes AI types
+     */
+    onAiChange?: (creature: Creature, aiType: AiType, changeAiType: ChangeAiType) => void;
+    /**
+     * Called when a creature is spawned
+     */
+    onSpawn?: (creature: Creature) => void;
 }
 export interface ICreatureSpawn {
     /**
@@ -445,6 +453,10 @@ export interface ICreatureEvents extends IEntityWithStatsEvents {
      * @returns The amount of damage the creature should take (the creature will take this damage) or undefined to use the default logic
      */
     damage?(damageInfo: IDamageInfo): number | undefined;
+    /**
+     * Called when the creature's AI is changed.
+     */
+    changeAi?(aiType: AiType, changeAiType: ChangeAiType): void;
 }
 export declare const CREATURE_FLEE_DISTANCE_SQ: number;
 export declare const TAMED_CREATURE_FOLLOW_CLOSE_DISTANCE = 1;
@@ -453,6 +465,11 @@ export declare const settableAiTypes: Set<AiType>;
 export declare const CREATURE_MAX_HEALTH_BONUS_TAME = 1.1;
 export declare const CREATURE_MAX_HEALTH_BONUS_OFFER = 1.05;
 export declare const CREATURE_MAX_HEALTH_BONUS_PET = 1.01;
+export declare enum ChangeAiType {
+    Set = 0,
+    Remove = 1,
+    Add = 2
+}
 export interface ICreatureAttackOutcomeBase {
     enemy?: Human | Creature;
     willAttack: boolean;

@@ -27,6 +27,12 @@ import type { IMacroSection } from "@wayward/game/ui/input/Macros";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 import type { ISegment, IStringSection } from "@wayward/game/utilities/string/Interpolator";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+interface IEntireTextData {
+    currentReferenceId?: string;
+}
+declare namespace IEntireTextData {
+    function getReferenceId(section: IStringSection & Partial<IReferenceSection>): string | undefined;
+}
 export default class Text extends Component {
     static resolve(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[], ...args: TranslationArg[]): {
         sections: IStringSection[];
@@ -85,9 +91,6 @@ export declare class Heading extends Text {
     dump(): this;
     icon?: Component;
     addIcon(initializer: (component: Component) => any): this;
-}
-interface IEntireTextData {
-    referenceIcons?: Set<string>;
 }
 export type BasicTextLink = string | [string, string?, string?];
 export interface IBasicTextEvents extends Events<Component> {

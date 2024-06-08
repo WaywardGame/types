@@ -19,7 +19,7 @@ import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent
 import type { InspectionTooltipHints } from "@wayward/game/ui/screen/screens/game/InspectionsTooltipHandler";
 export default class SkillInspection extends Inspection<SkillType> {
     static getSkillAttributeMessage(skill: SkillType): Message.Dexterity | Message.Metabolism | Message.Strength | undefined;
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     private readonly human?;
     constructor([, skill]: [any, SkillType], context?: InfoProviderContext);
     getId(): string;

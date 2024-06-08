@@ -12,7 +12,7 @@ import type { SfxType } from "@wayward/game/audio/IAudio";
 import type { IDecayTemperatureRange } from "@wayward/game/game/IGame";
 import type { IObjectDescription, Quality } from "@wayward/game/game/IObject";
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
-import type { Deity } from "@wayward/game/game/deity/Deity";
+import type { Deity, DeityReal } from "@wayward/game/game/deity/Deity";
 import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
 import type Human from "@wayward/game/game/entity/Human";
@@ -122,6 +122,26 @@ export interface IItemDisassembly {
     decay: number | undefined;
     startingDecay: number | undefined;
     renamed: string | ISerializedTranslation | undefined;
+}
+export interface IItemGetNameOptions {
+    count: number;
+    showCount: boolean;
+    /**
+     * Defaults to true
+     */
+    showQuality: boolean;
+    /**
+     * Defaults to true
+     */
+    showRenamedQuotes: boolean;
+    /**
+     * Defaults to true
+     */
+    showMagicalType: boolean;
+    /**
+     * Ignore discovery system when computing the name
+     */
+    ignoreDiscovery: boolean;
 }
 export declare enum ItemDamageResult {
     NoDamage = 0,
@@ -322,7 +342,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     /**
      * The item name to display instead of the item's default translation
      */
-    getName?: (item: Item, article?: Article, count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showMagicalType?: boolean) => TranslationImpl | {
+    getName?: (item: Item, article?: Article, options?: Partial<IItemGetNameOptions>) => TranslationImpl | {
         translation: TranslationImpl;
         noReference?: boolean;
     } | undefined;
@@ -362,7 +382,7 @@ export interface IItemOnUse {
     [ActionType.Eat]?: ConsumeItemStats;
     [ActionType.Heal]?: ConsumeItemStats;
     [ActionType.HealOther]?: number;
-    [ActionType.Invoke]?: Deity;
+    [ActionType.Invoke]?: DeityReal;
     [ActionType.PlaceDown]?: IItemBuild;
     [ActionType.Plant]?: DoodadType;
     [ActionType.Pour]?: TileEventType;
@@ -1571,19 +1591,28 @@ export declare enum ItemType {
     SandstoneArrowhead = 803,
     SandstoneArrow = 804,
     ReedFlute = 805,
-    Last = 806
+    WoodenFlute = 806,
+    RawClayFlute = 807,
+    ClayFlute = 808,
+    BoneFlute = 809,
+    TinFlute = 810,
+    CopperFlute = 811,
+    WroughtIronFlute = 812,
+    IronFlute = 813,
+    BronzeFlute = 814,
+    Last = 815
 }
 export declare enum ItemTypeExtra {
-    None = 807,
-    TatteredMap_RolledUp = 808,
-    TatteredMap_Completed = 809,
-    WoodenBookcase_25 = 810,
-    WoodenBookcase_50 = 811,
-    WoodenBookcase_75 = 812,
-    WoodenBookcase_100 = 813,
-    RuneOfEvilSplinters = 814,
-    RuneOfGoodCharred = 815,
-    TallySticks = 816
+    None = 816,
+    TatteredMap_RolledUp = 817,
+    TatteredMap_Completed = 818,
+    WoodenBookcase_25 = 819,
+    WoodenBookcase_50 = 820,
+    WoodenBookcase_75 = 821,
+    WoodenBookcase_100 = 822,
+    RuneOfEvilSplinters = 823,
+    RuneOfGoodCharred = 824,
+    TallySticks = 825
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
@@ -1737,7 +1766,8 @@ export declare enum ItemTypeGroup {
     Cartilage = -9857,
     ExcludedFromRandom = -9856,
     Leaves = -9855,
-    All = -9854
+    Flute = -9854,
+    All = -9853
 }
 export type StillContainerBaseItemType = ItemType.Waterskin | ItemType.GlassBottle | ItemType.ClayJug | ItemType.CoconutContainer;
 export interface IItemMovementResult {

@@ -9,11 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Game } from "@wayward/game/game/Game";
+import { Quality } from "@wayward/game/game/IObject";
 import type { DamageType } from "@wayward/game/game/entity/IEntity";
 import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import { Milestone, MilestoneVisibility } from "@wayward/game/game/milestones/IMilestone";
+import type MilestoneDefinition from "@wayward/game/game/milestones/MilestoneDefinition";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-type MilestoneUpdate = [Milestone, (number | string)?];
 export interface IMilestoneEvents {
     /**
      * @param milestone The milestone that is being updated
@@ -24,8 +25,9 @@ export interface IMilestoneEvents {
 }
 export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents> {
     private readonly game;
+    private milestoneProgressHandlers?;
     constructor(game: Game);
-    readonly descriptions: Descriptions<Milestone, import("./MilestoneDefinition").default>;
+    readonly descriptions: Descriptions<Milestone, MilestoneDefinition>;
     private readonly milestoneUpdates;
     /**
      * Get whether the given milestone is completed or not.
@@ -43,7 +45,7 @@ export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents
      * Get an array of all completed milestones
      */
     getCompleted(): Milestone[];
-    add(update: MilestoneUpdate): void;
+    add(milestone: Milestone, data?: string | number): void;
     update(): void;
     areUnlockable(mode?: import("../options/IGameOptions").GameMode): boolean;
     areUnlockableInMode(mode?: import("../options/IGameOptions").GameMode): boolean;
@@ -55,6 +57,8 @@ export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents
     getVisibility(milestone: Milestone): MilestoneVisibility;
     isDiscovered(milestone: Milestone, data: number | string): boolean;
     getLastModificationTime(milestone: Milestone): number;
+    getCloakingQuality(quality?: Quality): Quality;
+    protected onLoadMods(): void;
     private updateMilestone;
+    private getMilestoneProgressHandlers;
 }
-export {};

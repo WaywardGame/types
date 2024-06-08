@@ -97,6 +97,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     private static readonly cachedItemsThatAreAcceptedAsOffer;
     private static readonly cachedItemsThatAreUsedForGrowingPlants;
     private static readonly cachedItemsThatAreUsedInRecipes;
+    private static readonly cachedItemsThatAreUsedInRecipeWhenBuilt;
     private static readonly cachedWeights;
     private static readonly cachedMostCommonItemColors;
     private static readonly cachedItemsThatCanBeRelic;
@@ -107,6 +108,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     static getHighestItemActionTierForAction(action: ActionType): number;
     static isItemAcceptedAsOffer(item: ItemType): boolean;
     static isItemUsedInRecipe(item: ItemType): boolean;
+    static isItemUsedInRecipeWhenBuilt(item: ItemType): boolean;
     static canItemBeRelic(item: ItemType): boolean;
     static isItemUsedForGrowingPlants(item: ItemType): boolean;
     static getMostCommonItemColor(item: ItemType): IRGB | undefined;
@@ -139,6 +141,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     private static cacheEquippables;
     private static cacheGroupItems;
     private static cacheItemRecipes;
+    static cacheDoodadsForItemRecipes(): void;
     private static cacheItemTypes;
     private static cacheItemWeights;
     private static cacheCreatureOfferingsAndResources;
@@ -217,7 +220,8 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     getContainedContainers(container: IContainer): IContainer[];
     computeContainerWeight(container: IContainer): number;
     getMagicalWeightCapacity(container: IContainer): number;
-    hasRoomInContainer(targetContainer: IContainer, itemToMove: Item): IContainer | undefined;
+    hasRoomInContainer(targetContainer: IContainer, itemToMove: Item): boolean;
+    getTopLevelContainerWhenThereIsNoRoom(targetContainer: IContainer, itemToMove: Item): IContainer | undefined;
     /**
      * Gets the name of a container
      * @param debug This is for debug context (ie, include tile information, world container, etc)
@@ -249,6 +253,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
     isItemAcceptedAsOffer(item: ItemType): boolean;
     isItemUsedInRecipe(item: ItemType): boolean;
+    isItemUsedInRecipeWhenBuilt(item: ItemType): boolean;
     isItemUsedForGrowingPlants(item: ItemType): boolean;
     getHighestItemActionTierForAction(action: ActionType): number;
     isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;

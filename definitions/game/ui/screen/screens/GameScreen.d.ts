@@ -23,6 +23,7 @@ import Tile from "@wayward/game/game/tile/Tile";
 import Component from "@wayward/game/ui/component/Component";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
 import Screen from "@wayward/game/ui/screen/Screen";
+import AlignmentTooltipHandler from "@wayward/game/ui/screen/screens/game/AlignmentTooltipHandler";
 import { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
 import { QuadrantComponentId } from "@wayward/game/ui/screen/screens/game/IGameScreenApi";
 import WorldTooltipHandler from "@wayward/game/ui/screen/screens/game/WorldTooltipHandler";
@@ -52,6 +53,7 @@ export default class GameScreen extends Screen {
     messages: Messages;
     movementHandler: MovementHandler;
     worldTooltipHandler: WorldTooltipHandler;
+    readonly alignmentTooltipHandler: AlignmentTooltipHandler;
     private quadrantContainer;
     private readonly quadrantMap;
     private readonly quadrantComponents;

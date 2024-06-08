@@ -16,7 +16,7 @@ import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class SkillBonusMagicalItemsInfoProvider extends InfoProvider {
     private readonly skill;
     private readonly human?;
-    constructor(skill: SkillType, human?: Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player> | undefined);
+    constructor(skill: SkillType, human?: Human | undefined);
     getClass(): string[];
     protected onInitContent(): void;
     hasContent(): boolean;

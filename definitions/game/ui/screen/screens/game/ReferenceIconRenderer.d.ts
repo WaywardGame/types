@@ -17,5 +17,6 @@ export interface IReferenceIconDefinition<TYPE extends ReferenceType> {
 export declare const referenceIconDefinitions: PartialRecord<ReferenceType, IReferenceIconDefinition<ReferenceType>>;
 export declare function registerReferenceIcon<TYPE extends ReferenceType>(type: TYPE, definition: IReferenceIconDefinition<TYPE>): void;
 export declare enum ReferenceIconClasses {
-    Main = "reference-icon"
+    Main = "reference-icon",
+    Stat = "reference-icon-stat"
 }

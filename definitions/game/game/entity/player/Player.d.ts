@@ -111,10 +111,6 @@ export default class Player extends Human<number, ReferenceType.Player> implemen
     getDialogInfo(dialogIndex: string | number | undefined): IDialogInfo | undefined;
     kill(): void;
     respawn(reset: boolean): void;
-    /**
-     * Returns true if the player changed their facing direction.
-     */
-    faceDirection(direction: Direction.Cardinal | Direction.None, turnDelay?: number): boolean;
     revealItem(itemType: ItemType): void;
     /**
      * Check if a position is marked as explored

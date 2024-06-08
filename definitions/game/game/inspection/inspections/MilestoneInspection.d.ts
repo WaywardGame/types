@@ -19,7 +19,7 @@ import Translation from "@wayward/game/language/Translation";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 import type { InspectionTooltipHints } from "@wayward/game/ui/screen/screens/game/InspectionsTooltipHandler";
 export default class MilestoneInspection extends Inspection<Milestone> {
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     static getMilestoneName(milestone: Milestone, visibility?: MilestoneVisibility): TranslationImpl;
     static getMilestoneReadout(milestone: Milestone, name?: Translation): () => TranslationImpl;
     static getDescription(milestone: Milestone): TranslationImpl | UiTranslation.GameDialogMilestonesTooltipMystery | UiTranslation.GameDialogMilestonesTooltipInvisible;

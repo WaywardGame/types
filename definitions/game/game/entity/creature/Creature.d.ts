@@ -77,6 +77,9 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     getName(article?: Article, count?: number): Translation;
     protected getDescription(): ICreatureDescription | undefined;
     hasAi(aiType: AiType): boolean;
+    setAi(aiType: AiType): void;
+    addAi(aiType: AiType): void;
+    removeAi(aiType: AiType): void;
     get isHidden(): boolean;
     get isRetaliator(): boolean;
     get isTamed(): boolean;

@@ -8,12 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Entity from "@wayward/game/game/entity/Entity";
-import { type IStatDisplayDescription } from "@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription";
+import StatusEffect from "@wayward/game/game/entity/status/StatusEffect";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-/**
- * Returns the difficulty translation for the given player's alignment
- */
-export declare function getFerocityTranslation(entity?: Entity): TranslationImpl;
-declare const alignment: IStatDisplayDescription;
-export default alignment;
+export default class Anguish extends StatusEffect {
+    register(): void;
+    refresh(): void;
+    getDescription(): TranslationImpl;
+}

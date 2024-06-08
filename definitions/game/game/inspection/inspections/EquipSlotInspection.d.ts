@@ -17,7 +17,7 @@ import type { EnumReferenceResolved } from "@wayward/game/game/reference/IRefere
 import { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export default class EquipSlotInspection extends Inspection<EquipType | undefined> {
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     constructor(value?: EquipType | EnumReferenceResolved<ReferenceType.EquipSlot>);
     getId(): string;
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;

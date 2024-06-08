@@ -9,6 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { StatusType } from "@wayward/game/game/entity/IEntity";
+import type { StatusEffectClass } from "@wayward/game/game/entity/status/StatusEffect";
+import Anguish from "@wayward/game/game/entity/status/handler/Anguish";
 import Bleeding from "@wayward/game/game/entity/status/handler/Bleeding";
 import Burned from "@wayward/game/game/entity/status/handler/Burned";
 import Dehydrated from "@wayward/game/game/entity/status/handler/Dehydrated";
@@ -18,13 +20,11 @@ import Freezing from "@wayward/game/game/entity/status/handler/Freezing";
 import Frostbitten from "@wayward/game/game/entity/status/handler/Frostbitten";
 import Overheating from "@wayward/game/game/entity/status/handler/Overheating";
 import Poisoned from "@wayward/game/game/entity/status/handler/Poisoned";
-import Cursed from "@wayward/game/game/entity/status/handler/Cursed";
 import Starving from "@wayward/game/game/entity/status/handler/Starving";
-import type { StatusEffectClass } from "@wayward/game/game/entity/status/StatusEffect";
-declare const _default: {
+declare const statusEffects: {
+    10: typeof Anguish;
     0: typeof Bleeding;
     2: typeof Burned;
-    10: typeof Cursed;
     6: typeof Dehydrated;
     3: typeof Encumbered;
     4: typeof Exhausted;
@@ -33,5 +33,6 @@ declare const _default: {
     7: typeof Overheating;
     1: typeof Poisoned;
     5: typeof Starving;
-} & Record<StatusType, StatusEffectClass>;
+};
+declare const _default: typeof statusEffects & Record<StatusType, StatusEffectClass>;
 export default _default;

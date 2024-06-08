@@ -118,7 +118,6 @@ export default class InGameScreen extends BaseScreen {
     getContainerSortInfo(dialogIndex: DialogIndex | undefined): IContainerSortInfo;
     getDefaultSortType(index: DereferencedDialogIndex | undefined): CraftingSort;
     sortItems(containerElement: JQuery, sortType: CraftingSort, direction: SortDirection, messageType?: Message, activeSort?: boolean): void;
-    updateSort(containerElement: JQuery, activeSort: boolean): void;
     private isOverlayVisible;
     private readonly onInterrupt;
     private readonly onInterruptClosed;

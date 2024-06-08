@@ -22,10 +22,10 @@ export declare const promptGameMessagesContextMenuClear: import("@wayward/game/g
 export declare const promptGameCannotRunGlError: import("@wayward/game/game/meta/prompt/IPrompt").IPromptChoiceDescription<any[], InterruptChoice.Quit[]>;
 export declare const promptGameCannotRunIndexedDbError: import("@wayward/game/game/meta/prompt/IPrompt").IPromptChoiceDescription<any[], InterruptChoice.Quit[]>;
 export declare const promptGameConfirmationActionInLavaOrFire: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[{
-    WITH?: Text | undefined;
+    WITH?: Text;
     ACTION: Text;
     AMOUNT: number;
-    LAVA?: true | undefined;
+    LAVA?: true;
 }]>;
 export declare const promptGameConfirmationActionIsLava: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[gatherText: Text]>;
 export declare const promptGameConfirmationDestroyOnGather: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[growthStage: Text | undefined, objectName: Text]>;

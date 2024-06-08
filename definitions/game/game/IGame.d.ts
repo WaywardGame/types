@@ -237,7 +237,9 @@ export declare enum TileUpdateType {
     Terrain = 26,
     TileEvent = 27,
     TileEventManager = 28,
-    Tilled = 29
+    Tilled = 29,
+    Dug = 30,
+    Fished = 31
 }
 export declare enum PauseSource {
     /**

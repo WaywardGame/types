@@ -10,19 +10,11 @@
  */
 import type { Stat } from "@wayward/game/game/entity/IStats";
 import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
-import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import { StatInfo } from "@wayward/game/game/inspection/infoProviders/stat/StatInfo";
+import type { IStatDisplayDescription } from "@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription";
 export default class FerocityInfo extends StatInfo {
-    readonly hasCommunalAlignment: InfoProvider.Observer<boolean>;
-    readonly alignment: InfoProvider.Observer<number>;
-    readonly alignmentGood: InfoProvider.Observer<number>;
-    readonly alignmentEvil: InfoProvider.Observer<number>;
-    readonly score: InfoProvider.Observer<number>;
-    readonly civilizationScore: InfoProvider.Observer<number>;
-    readonly turns: InfoProvider.Observer<number>;
-    readonly ticks: InfoProvider.Observer<number>;
-    readonly time: InfoProvider.Observer<import("../../../time/TimeManager").default>;
     getTitle(stat: Stat): SimpleInfoProvider;
     getClass(): string[];
     get(): SimpleInfoProvider[];
+    getBorderColorPreference(stat: Stat): IStatDisplayDescription["color"];
 }

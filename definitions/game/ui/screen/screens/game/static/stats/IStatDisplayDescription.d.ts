@@ -13,7 +13,7 @@ import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type { IEntityWithStatsEvents } from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IHumanEvents } from "@wayward/game/game/entity/IHuman";
-import type { IStat, IStatBase, StatDisplayType } from "@wayward/game/game/entity/IStats";
+import type { IStat, IStatBase, Stat, StatDisplayType } from "@wayward/game/game/entity/IStats";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { ICreatureEvents } from "@wayward/game/game/entity/creature/ICreature";
 import type { IPlayerEvents } from "@wayward/game/game/entity/player/IPlayer";
@@ -25,22 +25,28 @@ import type Component from "@wayward/game/ui/component/Component";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 import type { IUntilSubscriber } from "@wayward/utilities/event/EventEmitter";
 export interface IStatDisplayDescription extends IModdable, IHasImagePath<string | ((entity: EntityWithStats, stat: IStat) => string)> {
-    imagePath?: string | ((entity: EntityWithStats, stat: IStat) => string);
+    /**
+     * This stat displays as multiple sub-stats. (Incompatible with all other properties)
+     *
+     * Sub-stats always display as `StatDisplayType.Attribute`
+     */
+    multi?: Map<Stat, IStatDisplayDescription>;
+    imagePath?: string | ((entity: EntityWithStats | undefined, stat: IStat) => string);
     /**
      * The CSS variable to use for the stat bar color
      * Defaults to white
      */
-    color?: string | ((entity: EntityWithStats, stat: IStat) => string);
+    color?: string | ((entity: EntityWithStats | undefined, stat: IStat) => string);
     /**
      * The CSS variable to use for the stat bar color in RGB format
      * Defaults to white
      */
-    rgbColor?: string | ((entity: EntityWithStats, stat: IStat) => string);
+    rgbColor?: string | ((entity: EntityWithStats | undefined, stat: IStat) => string);
     /**
      * The CSS variable to use for the background of the stat bar
      * Defaults to black
      */
-    darkColor?: string | ((entity: EntityWithStats, stat: IStat) => string);
+    darkColor?: string | ((entity: EntityWithStats | undefined, stat: IStat) => string);
     /**
      * Defaults to `StatDisplayType.Auto`
      */
@@ -51,6 +57,10 @@ export interface IStatDisplayDescription extends IModdable, IHasImagePath<string
      * Not providing `displayPriority` uses `100`.
      */
     displayOrder?: number;
+    /**
+     * Whether this stat display should be unlockable. (Unlocked by doing `player.addMilestone(Milestone.InternalStatDiscovery, stat)`)
+     */
+    unlockable?: true;
     /**
      * Handlers for when the stat changes. Called when the stat changes & when the stat max changes.
      */

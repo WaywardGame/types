@@ -44,5 +44,7 @@ declare const _default: UseInfo<{
     getMagicEffect: (magic: MagicalPropertyEntry) => LabelledValue;
 } & {
     getDoodadSkill: () => LabelledValue[];
+} & {
+    getCraftingBonus: () => LabelledValue | undefined;
 }, Item>;
 export default _default;

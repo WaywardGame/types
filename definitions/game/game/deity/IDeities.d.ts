@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import { Deity } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Human from "@wayward/game/game/entity/Human";
@@ -88,7 +89,7 @@ export declare namespace IReadableAlignment {
 export interface ISacrifice {
     altar?: Doodad;
     rune?: Item;
-    deity: Deity;
+    deity: DeityReal;
 }
 export declare namespace ISacrifice {
     interface IItemCalculation {
@@ -104,7 +105,7 @@ export declare namespace ISacrifice {
     }
     function getItems(sacrifice: ISacrifice): Item[];
     function calculate(sacrifice: ISacrifice, human: Human): ICalculation;
-    function getWorth(deity: Deity, item: Item, from: Human): number;
+    function getWorth(deity: DeityReal, item: Item, from: Human): number;
 }
 export declare enum DeityAlignmentLevel {
     Neutral = 0,// 0 - 7999 alignment

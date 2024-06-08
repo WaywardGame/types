@@ -16,7 +16,7 @@ import Inspection from "@wayward/game/game/inspection/Inspection";
 import type { MagicalPropertyIdentityHash } from "@wayward/game/game/magic/MagicalPropertyManager";
 import { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
 export default class MagicInspection extends Inspection<MagicalPropertyIdentityHash> {
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     private readonly _human?;
     protected get human(): Human | undefined;
     readonly magic: MagicalPropertyIdentity;

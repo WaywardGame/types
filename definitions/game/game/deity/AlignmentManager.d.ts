@@ -21,6 +21,7 @@ interface AlignmentDetails {
     lastEvil: number;
     lastGood: number;
     cursed: number;
+    invoked: boolean;
 }
 export default class AlignmentManager {
     private readonly alignment;
@@ -32,7 +33,6 @@ export default class AlignmentManager {
 export declare class Alignment implements IReadableAlignment {
     private readonly alignment;
     static calculateNightlyEvilAlignment(human?: Human): number;
-    private static calculateRampFraction;
     private readonly humanRef;
     private get human();
     constructor(human: Human, alignment: AlignmentDetails);

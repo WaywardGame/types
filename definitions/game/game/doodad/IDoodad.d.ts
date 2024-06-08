@@ -67,6 +67,13 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     actionTypes?: ActionType[];
     allowedTiles?: TerrainType[];
     blockJump?: boolean;
+    /**
+     * Blocks line of sight when set to true with some exceptions:
+     * Plants only block line of sight when they are not seedlings, vegetative, or bare.
+     * isWall automatically sets this to true.
+     * If set to false specifically, it will overwrite the above conditions and never block line of sight.
+     * blockLos is cached/saved, so the doodad must be rebuilt to update this status.
+     */
     blockLos?: boolean;
     blockMove?: boolean;
     moveIntoAction?: ActionType;
@@ -129,7 +136,11 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     providesFire?: boolean;
     providesLight?: number;
     reduceDurabilityOnGather?: boolean;
-    repairItem?: ItemType;
+    /**
+     * This doodad as the item it starts from.
+     * Used in many places including repairing and getting item bonuses.
+     */
+    asItem?: ItemType;
     revert?: DoodadType;
     spawnOnTerrain?: OptionalDescriptions<BiomeType, TerrainType[]>;
     spreadMax?: number;

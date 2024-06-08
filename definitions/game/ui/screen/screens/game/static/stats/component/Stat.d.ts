@@ -17,10 +17,13 @@ import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import Component from "@wayward/game/ui/component/Component";
 import Text from "@wayward/game/ui/component/Text";
 export declare abstract class StatComponent extends Component {
-    private readonly entity;
     private readonly stat;
+    protected readonly statDescription: import("@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription").IStatDisplayDescription | undefined;
     private readonly statIcon;
-    constructor(entity: EntityWithStats, stat: Stat, noEvents?: true);
+    private readonly entityRef;
+    protected get entity(): EntityWithStats<unknown, number, import("@wayward/game/game/reference/IReferenceManager").EntityReferenceTypes, unknown> | undefined;
+    constructor(entity: EntityWithStats, stat: Stat, noEvents?: true, statDescription?: import("@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription").IStatDisplayDescription | undefined);
+    private onUpdateMilestone;
     protected onRemove(): void;
     /**
      * Returns the attached entity's `IStat` for this `StatElement`'s `Stat`.
@@ -46,8 +49,8 @@ export declare abstract class StatComponent extends Component {
      * Returns the display priority for this stat.
      */
     getDisplayOrder(): number;
-    abstract getTextElement(): Text;
-    abstract getDisplayElement(): Component;
+    abstract getTextElement(): Text | undefined;
+    abstract getDisplayElement(): Component | undefined;
     /**
      * Returns the generic string representation of this stat.
      */
@@ -61,7 +64,7 @@ export declare abstract class StatComponent extends Component {
     /**
      * Returns the component that should have the stat tooltip
      */
-    protected getTooltipElement(): Component;
+    protected getTooltipElement(): Component | undefined;
     private getTooltip;
     private getTooltipLocation;
 }
@@ -90,9 +93,9 @@ export declare class Statbar extends StatComponent {
 }
 export declare class StatAttribute extends StatComponent {
     private readonly attribute;
-    constructor(entity: EntityWithStats, stat: Stat, noEvents?: true);
-    getTextElement(): Text;
-    getDisplayElement(): Text;
+    constructor(entity: EntityWithStats, stat: Stat, noEvents?: true, statDescription?: import("@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription").IStatDisplayDescription | undefined);
+    getTextElement(): Text | undefined;
+    getDisplayElement(): Text | undefined;
 }
 export declare class Statbars extends StatsContainer<Statbar> {
     constructor(entity: Entity, stats: Iterable<Stat>, noEvents?: true);

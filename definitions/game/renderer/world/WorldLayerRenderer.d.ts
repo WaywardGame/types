@@ -46,6 +46,10 @@ export declare class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
      */
     private terrainLayer;
     /**
+     * Rendered over terrain tiles and over terrain decorations
+     */
+    private terrainCoverLayer;
+    /**
      * Rendered over terrain tiles, but under terrain decorations
      */
     private terrainOverLayer;
@@ -87,6 +91,7 @@ export declare class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     private computeDoodad;
     private computeTilled;
     private computeDug;
+    private computeOverfished;
     private computeDecorations;
     private updateTileLightBlock;
     private flush;

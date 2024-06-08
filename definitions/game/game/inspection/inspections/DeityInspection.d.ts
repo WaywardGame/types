@@ -16,7 +16,7 @@ import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProv
 import Inspection from "@wayward/game/game/inspection/Inspection";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export default class DeityInspection extends Inspection<Deity> {
-    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext | undefined) => boolean;
+    static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     private readonly _human?;
     protected get human(): Human | undefined;
     constructor([, deity]: [any, Deity], context?: InfoProviderContext);

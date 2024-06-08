@@ -117,7 +117,18 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     get maxDur(): number | undefined;
     private set maxDur(value);
     get isTilled(): boolean;
+    /**
+     * Gets the depth of the tile (how far it is dug down to).
+     */
     get depth(): number;
+    /**
+     * Gets if the tile is overfished.
+     */
+    get isOverfished(): boolean;
+    /**
+     * Gets if the tile is a deep hole to perform special functionality.
+     */
+    get isDeepHole(): boolean;
     /**
      * This should only be called if you know what you're doing
      * Ensure a tile data with tilled is created
@@ -154,6 +165,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * No creatures
      * No corpses
      * No tile events
+     * No holes/depth
      * No girls
      */
     get isEmpty(): boolean;
@@ -161,6 +173,10 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Checks if the tile is full of items
      */
     get isFull(): boolean;
+    /**
+     * Gets the tile's max capacity based on the TILE_MAX_CAPACITY constant with variation provided by the depth of the tile.
+     */
+    get maxCapacity(): number;
     /**
      * Check if the tile is blocked (impassable terrain / creatures / npcs / players / doodads that cause blocked movement).
      */

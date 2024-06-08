@@ -66,6 +66,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     constructor(dictionary: Dictionary | string, entry: number | string, index?: "random" | number);
     constructor(translationId: string);
     equals(translation: TranslationImpl): boolean;
+    setWhich(which?: number | "random"): this;
     clone(): TranslationImpl;
     withSegments(...segments: ISegment[]): this;
     withSegments(priority: true, ...segments: ISegment[]): this;

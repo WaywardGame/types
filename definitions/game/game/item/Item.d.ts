@@ -29,7 +29,7 @@ import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IMobCheck, IslandId } from "@wayward/game/game/island/IIsland";
-import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemChangeIntoOptions, IItemDescription, IItemDisassembleResult, IItemUsed, IItemVehicle, IMagicalPropertyInfo, IItemMovementResult as IMoveToTileMobCheckResult, IMoveToTileOptions, ItemTag, ItemTypeExtra } from "@wayward/game/game/item/IItem";
+import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemChangeIntoOptions, IItemDescription, IItemDisassembleResult, IItemGetNameOptions, IItemUsed, IItemVehicle, IMagicalPropertyInfo, IItemMovementResult as IMoveToTileMobCheckResult, IMoveToTileOptions, ItemTag, ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { BookType, ContainerSort, ItemDamageResult, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "@wayward/game/game/item/IItem";
 import type { IPlaceOnTileOptions } from "@wayward/game/game/item/IItemManager";
 import ItemMapManager from "@wayward/game/game/item/ItemMapManager";
@@ -198,7 +198,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * - `item.getName(false)` // "stone axe"
      * - `item.getName(undefined, 3)` // "stone axes"
      */
-    getName(article?: Article, count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showMagicalType?: boolean): TranslationImpl;
+    getName(article?: Article, options?: Partial<IItemGetNameOptions>): TranslationImpl;
     protected getDescription(): IItemDescription | undefined;
     get isTransient(): boolean;
     get isValid(): boolean;
@@ -236,6 +236,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Note: This is not called by clients joining a mp game.
      */
     verifyAndFixItem(): void;
+    verifyAndFixMagic(): void;
     /**
      * @param source A string representing the reason for this damage. Used for multiplayer debugging. Just put a unique string of characters here
      * @param modifier The amount of damage to take. Defaults to 1.

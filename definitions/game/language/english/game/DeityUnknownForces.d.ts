@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Deity } from "@wayward/game/game/deity/Deity";
-declare const deitiesUndiscovered: Record<Deity, [name: string, description: string]>;
-export default deitiesUndiscovered;
+declare const deityUnknownForces: Record<Deity, [name: string, description: string]>;
+export default deityUnknownForces;

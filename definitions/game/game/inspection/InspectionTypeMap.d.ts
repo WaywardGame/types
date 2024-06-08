@@ -72,33 +72,7 @@ export type InspectionClass = Class<Inspection<any>> & {
     handles?(inspectType: InspectType, ...args: any[]): boolean | number | undefined;
     getDefaultPriority(type: InspectType): number;
 };
-declare const _default: {
-    12: typeof ActionInspection;
-    14: typeof CorpseInspection;
-    15: typeof CorpsesInspection;
-    3: typeof CreatureInspection;
-    22: typeof DeityInspection;
-    10: typeof ItemInspection;
-    4: typeof DoodadInspection;
-    7: typeof EquipSlotInspection;
-    6: typeof PlayerInspection;
-    21: typeof IslandInspection;
-    8: typeof ItemInspection;
-    13: typeof ItemsInspection;
-    11: typeof ItemInspection;
-    24: typeof MagicInspection;
-    19: typeof MilestoneInspection;
-    2: typeof NPCInspection;
-    1: typeof PlayerInspection;
-    23: typeof QualityInspection;
-    9: typeof RecipeInspection;
-    0: typeof SelfInspection;
-    18: typeof SkillInspection;
-    20: typeof StatInspection;
-    17: typeof TileInspection;
-    5: typeof TileEventInspection;
-    16: typeof TileEventInspection.Minors;
-} & Record<InspectType, InspectionClass>;
+declare const _default: typeof inspectionTypeMap & Record<InspectType, InspectionClass>;
 export default _default;
 export type ResolvedInspection<TYPE extends InspectType> = InstanceOf<(typeof inspectionTypeMap)[TYPE]>;
 export declare namespace Inspections {

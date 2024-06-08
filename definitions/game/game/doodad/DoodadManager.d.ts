@@ -37,6 +37,7 @@ export default class DoodadManager extends EntityManager<Doodad> {
     private static readonly cachedBestDoodadForTier;
     private static readonly cachedDoodadGroups;
     static readonly cachedDoodadSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, DoodadType[]>>>;
+    private static readonly cachedDoodadsInGroup;
     private readonly scarecrows;
     static getBestDoodadForTier(doodad: DoodadType | DoodadTypeGroup): DoodadType | undefined;
     static generateLookups(): void;
@@ -44,6 +45,7 @@ export default class DoodadManager extends EntityManager<Doodad> {
     static isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
     static isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     static getGroups(doodadType: DoodadType): DoodadTypeGroup[];
+    static getDoodadsInGroup(doodadTypeGroup: DoodadTypeGroup): DoodadType[];
     /**
      * Checks if a number is a DoodadType or DoodadTypeExtra.
      * @param type a number (DoodadType/DoodadTypeExtra enum).

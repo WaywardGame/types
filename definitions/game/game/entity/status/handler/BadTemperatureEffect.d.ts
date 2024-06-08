@@ -13,7 +13,7 @@ import type { Stat } from "@wayward/game/game/entity/IStats";
 import { BadTemperatureLevel } from "@wayward/game/game/entity/status/handler/IBadTemperature";
 import StatusEffect, { StatusEffectBadness } from "@wayward/game/game/entity/status/StatusEffect";
 import type Island from "@wayward/game/game/island/Island";
-import { Temperature } from "@wayward/game/game/temperature/ITemperature";
+import { Temperature, TempType } from "@wayward/game/game/temperature/ITemperature";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default abstract class BadTemperatureEffect extends StatusEffect {
     protected effectiveTemperature: Temperature;
@@ -22,6 +22,7 @@ export default abstract class BadTemperatureEffect extends StatusEffect {
     getTranslation(): TranslationImpl;
     getDescription(): TranslationImpl;
     abstract getLevel(): BadTemperatureLevel;
+    abstract getTempType(): TempType;
     refresh(): void;
     protected onTick(): void;
     protected abstract getConsequenceEffect(): StatusType;

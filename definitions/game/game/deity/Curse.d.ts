@@ -33,6 +33,7 @@ declare function getSkillValue(human: Human): {
 };
 declare namespace Curse {
     const getSkill: typeof getSkillValue;
+    function getComponentValue(human: Human, component: CurseComponent): number;
     function getValue(human: Human): number;
 }
 export default Curse;

@@ -11,5 +11,17 @@
 export declare enum Deity {
     Evil = 1,
     Neutral = 2,
-    Good = 4
+    Good = 4,
+    All = 8,
+    Single = 16
+}
+export type DeityReal = Exclude<Deity, Deity.All | Deity.Single>;
+export declare enum DeityDiscovery {
+    AlignmentGraph = 0,// sacrifice/invoke to any deity at an altar
+    AlignmentGraphExactNumbers = 1,// uses Invoker (16,000)
+    AlignmentUpdateExactNumbers = 2,// uses Invoker (16,000)
+    CurseExactNumbers = 3,// uses Invoker (16,000)
+    CurseFactors = 4,// uses current alignment (-8,000)
+    CurseFactorsExact = 5,// uses current alignment (-16,000)
+    DeitiesUnderstood = 6
 }

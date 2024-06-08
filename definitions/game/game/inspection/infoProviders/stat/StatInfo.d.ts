@@ -13,6 +13,7 @@ import type { Stat } from "@wayward/game/game/entity/IStats";
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import Translation from "@wayward/game/language/Translation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { IStatDisplayDescription } from "@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription";
 export declare abstract class StatInfo extends InfoProvider {
     static getTitle(stat: Stat): InfoProvider | Translation;
     static getDescription(stat: Stat): InfoProvider | Translation | undefined;
@@ -21,4 +22,5 @@ export declare abstract class StatInfo extends InfoProvider {
     constructor(human: Human);
     getTitle(stat: Stat): TranslationImpl | InfoProvider;
     getDescription(stat: Stat): TranslationImpl | InfoProvider | undefined;
+    getBorderColorPreference(stat: Stat): IStatDisplayDescription["color"];
 }

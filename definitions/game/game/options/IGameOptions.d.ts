@@ -10,7 +10,7 @@
  */
 import type { Quality } from "@wayward/game/game/IObject";
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
-import type { Deity } from "@wayward/game/game/deity/Deity";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type { AttackType, StatusType } from "@wayward/game/game/entity/IEntity";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
 import type { Stat } from "@wayward/game/game/entity/IStats";
@@ -215,6 +215,10 @@ export interface IGameOptionsPlayer {
          */
         initial: RandomRange[];
         /**
+         * Initial value range for starting skills.
+         */
+        initialValue: IRange;
+        /**
          * Configuration that affects every skill which doesn't have its own configuration.
          */
         global: IGameOptionsSkill;
@@ -267,7 +271,7 @@ export interface IGameOptionsPlayer {
                 /**
                  * The base value of invoke for each deity.
                  */
-                base: Record<Deity, number>;
+                base: Record<DeityReal, number>;
                 /**
                  * A range for the invoke multiplier at 0% piety and at 100% piety.
                  *
@@ -278,7 +282,7 @@ export interface IGameOptionsPlayer {
             /**
              * A multiplier for how much of a sacrificed item's worth is translated into alignment for the given deity.
              */
-            worthMultiplier: Record<Deity, number>;
+            worthMultiplier: Record<DeityReal, number>;
         };
     };
     inventory: {
