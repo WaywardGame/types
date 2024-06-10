@@ -146,4 +146,4 @@ export interface IServerDirectoryV1ServersServer extends IServer {
 export declare function log(...args: any[]): void;
 export declare function error(...args: any[]): void;
 export declare function setLogCallback(logFunc: ((...args: any[]) => void) | undefined): void;
-export declare const webRtcConfig: RTCConfiguration;
+export declare function randomUUID(): string;
