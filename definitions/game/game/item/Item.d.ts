@@ -29,7 +29,7 @@ import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IMobCheck, IslandId } from "@wayward/game/game/island/IIsland";
-import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemChangeIntoOptions, IItemDescription, IItemDisassembleResult, IItemGetNameOptions, IItemUsed, IItemVehicle, IMagicalPropertyInfo, IItemMovementResult as IMoveToTileMobCheckResult, IMoveToTileOptions, ItemTag, ItemTypeExtra } from "@wayward/game/game/item/IItem";
+import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemChangeIntoOptions, IItemDescription, IItemDisassembleResult, IItemDisassembly, IItemGetNameOptions, IItemUsed, IItemVehicle, IMagicalPropertyInfo, IItemMovementResult as IMoveToTileMobCheckResult, IMoveToTileOptions, ItemTag, ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { BookType, ContainerSort, ItemDamageResult, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "@wayward/game/game/item/IItem";
 import type { IPlaceOnTileOptions } from "@wayward/game/game/item/IItemManager";
 import ItemMapManager from "@wayward/game/game/item/ItemMapManager";
@@ -319,6 +319,12 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      */
     getDurabilityCharge(): number;
     removeMagic(): void;
+    /**
+     * Reverts properties of an item from a disassembly item (IItemDisassembly)
+     * @param disassemblyItem	Disassembly item to revert from
+     * @param placeOnTile	Place the item on a tile after reverting if set to a tile
+     */
+    revertFromDisassembly(disassemblyItem: IItemDisassembly, placeOnTile?: Tile): void;
     revertFromDoodad(doodad: Doodad): void;
     copyPropertiesFrom(fromItem: Item): void;
     getWeightCapacity(): number | undefined;
@@ -466,6 +472,11 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * @returns number The base defense value.
      */
     getBaseDefenseWithBonus(): number;
+    /**
+     * When the item melts, it will leave behind items that are specified in the leaveDissassemblyItemsOnMelt property
+     * @param container The container to leave the items in or on
+     */
+    dropItemsOnMelt(container: IContainer): void;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;
 }
