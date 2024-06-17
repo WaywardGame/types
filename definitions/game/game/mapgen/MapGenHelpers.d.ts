@@ -16,7 +16,7 @@ import type { ITemplate, TileTemplateType } from "@wayward/game/game/tile/ITerra
 import type Tile from "@wayward/game/game/tile/Tile";
 import Version from "@wayward/game/utilities/Version";
 export declare namespace MapGenHelpers {
-    function pickBasedOnVersion<T>(version: Version.String, versions: MapGenVersions<T>): {
+    function pickBasedOnVersion<T>(targetVersion: Version.String, versions: MapGenVersions<T>): {
         version: Version.String;
         selection: T;
     };
