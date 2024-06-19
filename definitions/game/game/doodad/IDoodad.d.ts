@@ -224,7 +224,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      */
     displayDoodad?: SupplierOr<DisplayableDoodadType | undefined, [Doodad]>;
     /**
-     * Sets (and overwrites) the associated item that shows in the tooltip.
+     * Sets (and overwrites) the associated item (or item extra) that shows in the tooltip.
      */
     getAssociatedItem?(doodad: Doodad): ItemType | ItemTypeExtra | undefined;
     getVariation?(island: Island, tile: Tile, doodad: Doodad | undefined, existingVariationX: number, existingVariationY: number): [number, number] | undefined;

@@ -363,7 +363,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     onCreate?(item: Item): void;
     onChangeInto?(item: Item, fromItemType: ItemType): void;
     /**
-     * When this item (or as a doodad) is melted, item types that match this array in the disassembly object will be left behind
+     * When this item (or as a doodad) is melted, item types that match in this array against the disassembly object will be left behind.
      */
     dropDissassemblyItemsOnMelt?: Array<ItemType | ItemTypeGroup>;
 }
