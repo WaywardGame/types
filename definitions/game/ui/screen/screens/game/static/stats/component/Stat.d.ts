@@ -21,7 +21,7 @@ export declare abstract class StatComponent extends Component {
     protected readonly statDescription: import("@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription").IStatDisplayDescription | undefined;
     private readonly statIcon;
     private readonly entityRef;
-    protected get entity(): EntityWithStats<unknown, number, import("@wayward/game/game/reference/IReferenceManager").EntityReferenceTypes, unknown> | undefined;
+    protected get entity(): EntityWithStats | undefined;
     constructor(entity: EntityWithStats, stat: Stat, noEvents?: true, statDescription?: import("@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription").IStatDisplayDescription | undefined);
     private onUpdateMilestone;
     protected onRemove(): void;

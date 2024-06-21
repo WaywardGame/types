@@ -20,8 +20,7 @@ export default class ItemDurabilityInfoProvider extends InfoProvider {
     private getDecay;
     private minDur;
     private shouldRefreshDurability;
-    private decay;
-    private shouldRefreshDecay;
+    private decayTime;
     private decayRate;
-    private shouldRefreshDecayRate;
+    private shouldRefreshDecay;
 }

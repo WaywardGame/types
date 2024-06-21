@@ -203,7 +203,8 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * into it, consider instead registering a recipe directly.
      */
     recipes?: Array<(recipe: Recipe) => Recipe>;
-    disassemble?: boolean;
+    storeDisassemblyItems?: boolean;
+    canDisassemble?: false;
     /**
      * Set items that are part of the item's disassembly that are converted into another item when disassembled.
      */

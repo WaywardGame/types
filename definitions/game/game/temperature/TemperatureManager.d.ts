@@ -158,6 +158,10 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     protected onItemContainerAdd(itemManager: ItemManager, items: Item[], container?: IContainer): void;
     protected onItemContainerRemove(itemManager: ItemManager, items: Item[], container: IContainer | undefined, containerTile: Tile | undefined): void;
     protected onItemFireUpdate(item: Item): void;
+    /**
+     * Run inventory updates when human changes Z
+     */
+    protected onChangeZ(human: Human): void;
     protected onPlay(): void;
     protected onTickStart(island: Island): void;
     protected onTickEnd(island: Island): void;
