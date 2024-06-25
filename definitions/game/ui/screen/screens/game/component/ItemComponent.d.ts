@@ -185,6 +185,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     private registerTickEndHandlerForDecay;
     private deregisterTickEndHandlerForDecay;
     getItemComponent(): ItemComponent | undefined;
+    isStack(): boolean;
     /**
      * Set this item component as "transient" — when dragging from this item, it creates a "preview" and may or may not
      * actually remove the item from the slot on drag end. IE, this isn't the "real" copy of the item.
