@@ -90,7 +90,7 @@ export declare const enumRefTypes: {
         WoodenDowels: ItemType.WoodenDowels;
         Granite: ItemType.Granite;
         LeafBedroll: ItemType.LeafBedroll;
-        LeatherHide: ItemType.LeatherHide;
+        Hide: ItemType.Hide;
         Leaves: ItemType.Leaves;
         Limestone: ItemType.Limestone;
         Log: ItemType.Log;
@@ -126,7 +126,7 @@ export declare const enumRefTypes: {
         GraniteWall: ItemType.GraniteWall;
         String: ItemType.String;
         StrippedBark: ItemType.StrippedBark;
-        TannedLeather: ItemType.TannedLeather;
+        Leather: ItemType.Leather;
         Tannin: ItemType.Tannin;
         MilkThistleSeeds: ItemType.MilkThistleSeeds;
         TreeBark: ItemType.TreeBark;
@@ -873,6 +873,7 @@ export declare const enumRefTypes: {
         WroughtIronFlute: ItemType.WroughtIronFlute;
         IronFlute: ItemType.IronFlute;
         BronzeFlute: ItemType.BronzeFlute;
+        StrippedLeather: ItemType.StrippedLeather;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;

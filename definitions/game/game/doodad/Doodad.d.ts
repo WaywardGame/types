@@ -79,6 +79,7 @@ export interface IDoodadEvents extends IEntityMovableEvents {
     durabilityMaxChange(durability: number, oldDurability: number): any;
     revertToItem(item: Item): any;
     becomeFromItem(item: Item): any;
+    melted(producedItems: Item[], producedTileEvents: TileEvent[], producedDoodad: Doodad | undefined): any;
     addMagic(magic: MagicalPropertyManager): any;
     removeMagic(magic: MagicalPropertyManager): any;
 }

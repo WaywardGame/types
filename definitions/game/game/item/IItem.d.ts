@@ -821,7 +821,7 @@ export declare enum ItemType {
     WoodenDowels = 28,
     Granite = 29,
     LeafBedroll = 30,
-    LeatherHide = 31,
+    Hide = 31,
     Leaves = 32,
     Limestone = 33,
     Log = 34,
@@ -857,7 +857,7 @@ export declare enum ItemType {
     GraniteWall = 64,
     String = 65,
     StrippedBark = 66,
-    TannedLeather = 67,
+    Leather = 67,
     Tannin = 68,
     MilkThistleSeeds = 69,
     TreeBark = 70,
@@ -1605,19 +1605,20 @@ export declare enum ItemType {
     WroughtIronFlute = 812,
     IronFlute = 813,
     BronzeFlute = 814,
-    Last = 815
+    StrippedLeather = 815,
+    Last = 816
 }
 export declare enum ItemTypeExtra {
-    None = 816,
-    TatteredMap_RolledUp = 817,
-    TatteredMap_Completed = 818,
-    WoodenBookcase_25 = 819,
-    WoodenBookcase_50 = 820,
-    WoodenBookcase_75 = 821,
-    WoodenBookcase_100 = 822,
-    RuneOfEvilSplinters = 823,
-    RuneOfGoodCharred = 824,
-    TallySticks = 825
+    None = 817,
+    TatteredMap_RolledUp = 818,
+    TatteredMap_Completed = 819,
+    WoodenBookcase_25 = 820,
+    WoodenBookcase_50 = 821,
+    WoodenBookcase_75 = 822,
+    WoodenBookcase_100 = 823,
+    RuneOfEvilSplinters = 824,
+    RuneOfGoodCharred = 825,
+    TallySticks = 826
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {

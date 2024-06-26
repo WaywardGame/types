@@ -201,7 +201,8 @@ export declare enum UnableToJoinReason {
     UnknownError = 5,
     VersionMismatch = 6,
     Banned = 7,
-    FailedToLoadMods = 8
+    FailedToLoadMods = 8,
+    ClientDataInvalid = 9
 }
 export declare enum JoinServerRetryReason {
     Timeout = 0,
