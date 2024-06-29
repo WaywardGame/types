@@ -22,7 +22,7 @@ export interface IUseItemAction extends IUsableActionDynamicDefinition {
     allowNoItem?: true;
     hasNoBestItem?: true;
     skipUseCheck?: true;
-    filterFind?(item: Item, player: Player): boolean;
+    filterFind?(item: Item, player: Player, provided?: IUsableActionPossibleUsing): boolean;
     validate?(item: Item, player: Player): boolean;
     initialiseFinder?(finder: UsableActionItemFinder): any;
     onFinderTrack?(finder: UsableActionItemFinder): any;

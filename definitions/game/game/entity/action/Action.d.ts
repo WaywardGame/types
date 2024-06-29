@@ -10,6 +10,7 @@
  */
 import type { Deity } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { IActionExpectedLocation } from "@wayward/game/game/entity/action/argument/ActionArgumentExpectedLocation";
 import type { ActionArguments, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionExample, IActionExampleApi, IActionHandlerApi, IActionNotUsable, IActionNotUsableHandlerApi, IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
@@ -20,7 +21,7 @@ import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type Item from "@wayward/game/game/item/Item";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
-import type { Direction } from "@wayward/game/utilities/math/Direction";
+import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 export declare class Action<A extends ActionArguments, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> implements IActionDescription<A, E, R, CU, AV> {
     readonly argumentTypes: A;
@@ -47,8 +48,10 @@ export declare class Action<A extends ActionArguments, E extends Entity = Entity
     getExample(executor: E, ...args: AV): IActionExample | undefined;
     canUse(actionApi: IActionApi<E, any>, ...args: AV): CU | IActionNotUsable;
     canUse(executor: E, ...args: AV): CU | IActionNotUsable;
+    canUseAt(actionExecutor: E, location?: Partial<IActionExpectedLocation>, ...args: AV): CU | IActionNotUsable;
     canUseWhileFacing(actionExecutor: E, position: IVector3, direction: Direction.Cardinal, ...args: AV): CU | IActionNotUsable;
     execute(actionApiOrExecutor: IActionApi<E, any> | E, ...args: AV): R | Promise<R> | Promise<R | undefined> | undefined;
+    executeAt(actionApiOrExecutor: IActionApi<E, any> | E, location: IActionExpectedLocation, ...args: AV): Promise<R | undefined>;
     executeConfirmer(actionApiOrExecutor: IActionApi<E, any> | E, args: AV): Promise<boolean>;
     skipConfirmation(): this;
     /**

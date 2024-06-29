@@ -17,6 +17,7 @@ import type { EntityType } from "@wayward/game/game/entity/IEntity";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
 import type { ActionArgumentCustom } from "@wayward/game/game/entity/action/argument/ActionArgumentCustom";
 import type ActionArgumentEnum from "@wayward/game/game/entity/action/argument/ActionArgumentEnum";
+import type { IActionExpectedLocation } from "@wayward/game/game/entity/action/argument/ActionArgumentExpectedLocation";
 import type ActionArgumentObjectKey from "@wayward/game/game/entity/action/argument/ActionArgumentObjectKey";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
@@ -238,6 +239,7 @@ export interface IActionDescription<A extends ActionArguments = ActionArguments,
     validExecutors: Set<EntityType>;
     hasFlag(flag: ActionFlag): boolean;
     execute(actionApiOrExecutor: IActionApi<E, CU> | E, ...args: AV): PromiseOr<R | undefined>;
+    executeAt(actionApiOrExecutor: IActionApi<E, CU> | E, location: IActionExpectedLocation, ...args: AV): PromiseOr<R | undefined>;
     executeConfirmer(actionApiOrExecutor: IActionApi<E, any> | E, args: AV, argumentTypes?: ActionArgument[]): Promise<boolean>;
     /**
      * Check if the action has setup CanUse logic
@@ -245,6 +247,7 @@ export interface IActionDescription<A extends ActionArguments = ActionArguments,
     readonly hasSetCanUse: boolean;
     getExample(executor: E, ...args: AV): IActionExample | undefined;
     canUse(executor: E, ...args: AV): CU | IActionNotUsable;
+    canUseAt(executor: E, location: IActionExpectedLocation, ...args: AV): CU | IActionNotUsable;
     /**
      * Called internally during `execute`
      */

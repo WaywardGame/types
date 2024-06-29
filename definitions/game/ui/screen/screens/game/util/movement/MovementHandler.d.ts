@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type Component from "@wayward/game/ui/component/Component";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
 import WalkToTileHandler from "@wayward/game/ui/screen/screens/game/util/movement/WalkToTileHandler";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IMovementHandlerEvents {
     /**
      * Called every frame where the mouse is not hovering over an item
@@ -39,6 +39,7 @@ export default class MovementHandler extends EventEmitter.Host<IMovementHandlerE
     protected onMove(api: IBindHandlerApi): boolean;
     protected onMoveDirection(api: IBindHandlerApi): boolean;
     protected onReleaseMoveBind(api: IBindHandlerApi): void;
+    protected onActions(api: IBindHandlerApi): boolean;
     private setIntent;
     /**
      * Processes moving towards the mouse.

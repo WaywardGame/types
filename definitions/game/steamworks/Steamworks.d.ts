@@ -15,7 +15,9 @@ import type { ModInformation } from "@wayward/game/mod/ModInformation";
 import type { IJoinServerOptions, ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
 import { SteamStatArea } from "@wayward/game/steamworks/ISteamworks";
 import type { IBuild, IDedicatedServerInfo, IModPath, ISteamworksEvents, SteamStatTypeValues } from "@wayward/game/steamworks/ISteamworks";
-import type { IMatchmakingServer, INapiDiscordPresenceInfo, IRemoteFile, ISteamFriend, ISteamId, ISteamworksNetworking, IWaywardPreload, IWorkshopItem, LobbyType } from "@wayward/hosts/shared/interfaces";
+import { type IMatchmakingServer, type INapiDiscordPresenceInfo, type IRemoteFile, type ISteamFriend, type ISteamId, type ISteamworksNetworking, type IWaywardPreload, type IWorkshopItem, type LobbyType } from "@wayward/hosts/shared/interfaces";
+import type Entity from "@wayward/game/game/entity/Entity";
+import IActionContext from "@wayward/game/game/entity/action/IActionContext";
 export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private readonly game;
     protected initialized: boolean;
@@ -27,6 +29,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private runningOnBatteryPower;
     private floatingTextInputFocused;
     private floatingTextInputBlurTime;
+    private timelineGameMode;
     private initializingMods;
     private logsPath;
     private backupsPath;
@@ -109,6 +112,9 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     setSteamRichPresence(key: string, value: string): boolean;
     clearSteamRichPresence(): void;
     updateSteamRichPresence(): void;
+    onAddHistoricalAction(game: Game, executor: Entity, context: IActionContext): void;
+    private addTimelineEvent;
+    private updateTimelineGameMode;
     updateDiscordPresence(): void;
     setDiscordPresence(presenceInfo: INapiDiscordPresenceInfo): Promise<void>;
     getLobbyId(): string | undefined;

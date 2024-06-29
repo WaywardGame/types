@@ -299,6 +299,12 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      * @returns True if the human can interact, false if the human cannot interact, or undefined to use the default logic
      */
     canInteract(npc: NPC, interactType: number | undefined): boolean | undefined;
+    /**
+     * Called when calculating the movement penalty of a tile.
+     * @param penalty The current penalty of the tile
+     * @param tile The tile to get the movement penalty of
+     */
+    getTilePenalty(penalty: number, tile: Tile): number;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;

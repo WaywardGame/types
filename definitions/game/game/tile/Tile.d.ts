@@ -416,9 +416,17 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     findPath(entity: EntityMovable | undefined, target: Tile, isTileBlocked: (tile: Tile) => boolean, getTilePenalty?: (tile: Tile) => number, maxNodesChecked?: number): Tile[] | undefined;
     /**
+     * Find a path using the preferred algorithm. Use only if you're not calling this very often, or you're calling it clientside.
+     */
+    findPathPreferred(human: Human, targetTile: Tile): Tile[] | undefined;
+    /**
      * Returns whether the tile is blocked (completely impassible) for the human
      */
     isWalkToTileBlocked(human: Human, clientSide: boolean): boolean;
+    /**
+     * Returns the penalty of the given tile (just how much we *don't* want to step there)
+     */
+    private getTilePenalty;
     get asCorpse(): undefined;
     get asCreature(): undefined;
     get asDoodad(): undefined;

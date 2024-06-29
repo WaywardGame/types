@@ -48,7 +48,7 @@ export interface ISteamworks {
         createArchive(target: string, src: string, success: () => void, failure: (err: string) => void): void;
         extractArchive(src: string, dest: string): Promise<void>;
     };
-    initialize(): boolean;
+    initialize(): void;
     shutdown(): void;
     runCallbacks(): void;
     getFriends(): ISteamFriend[];
@@ -96,6 +96,8 @@ export interface ISteamworks {
     dismissFloatingGamepadTextInput(): boolean;
     setFloatingGamepadTextInputDismissedCallback(cb: () => void): void;
     getInputType(): SteamInputType;
+    setTimelineGameMode(timelineGameMode: SteamTimelineGameMode): void;
+    addTimelineEvent(marker: SteamTimelineMarker, title: string, description: string, clipPriority: SteamTimelineEventClipPriority): void;
 }
 export interface ISteamworksNetworking {
     initRelayNetworkAccess(): undefined;
@@ -284,3 +286,18 @@ export declare enum SteamInputType {
     k_ESteamInputType_Count = 15,
     k_ESteamInputType_MaximumPossibleValue = 255
 }
+export declare enum SteamTimelineGameMode {
+    k_ETimelineGameMode_Invalid = 0,
+    k_ETimelineGameMode_Playing = 1,
+    k_ETimelineGameMode_Staging = 2,
+    k_ETimelineGameMode_Menus = 3,
+    k_ETimelineGameMode_LoadingScreen = 4,
+    k_ETimelineGameMode_Max = 5
+}
+export declare enum SteamTimelineEventClipPriority {
+    k_ETimelineEventClipPriority_Invalid = 0,
+    k_ETimelineEventClipPriority_None = 1,
+    k_ETimelineEventClipPriority_Standard = 2,
+    k_ETimelineEventClipPriority_Featured = 3
+}
+export type SteamTimelineMarker = "steam_marker" | "steam_achievement" | "steam_attack" | "steam_bolt" | "steam_bookmark" | "steam_bug" | "steam_cart" | "steam_caution" | "steam_chat" | "steam_checkmark" | "steam_chest" | "steam_circle" | "steam_combat" | "steam_completed" | "steam_crown" | "steam_death" | "steam_defend" | "steam_diamond" | "steam_edit" | "steam_effect" | "steam_explosion" | "steam_fix" | "steam_flag" | "steam_gem" | "steam_group" | "steam_heart" | "steam_info" | "steam_invalid" | "steam_minus" | "steam_pair" | "steam_person" | "steam_plus" | "steam_purchase" | "steam_question" | "steam_ribbon" | "steam_screenshot" | "steam_scroll" | "steam_square" | "steam_star" | "steam_starburst" | "steam_timer" | "steam_transfer" | "steam_triangle" | "steam_trophy" | "steam_view" | "steam_x";

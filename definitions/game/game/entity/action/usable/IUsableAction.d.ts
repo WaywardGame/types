@@ -26,6 +26,7 @@ import type { IItemDescription, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type ItemFinder from "@wayward/game/game/item/ItemFinder";
 import type { IItemFinderOptions } from "@wayward/game/game/item/ItemFinder";
+import type Tile from "@wayward/game/game/tile/Tile";
 import type Message from "@wayward/game/language/dictionary/Message";
 import Translation from "@wayward/game/language/Translation";
 import type Bindable from "@wayward/game/ui/input/Bindable";
@@ -36,7 +37,7 @@ import type HashSet from "@wayward/utilities/collection/set/HashSet";
 export interface IUsableActionRequirement<TYPE> {
     allowNone?: true;
     validate?(player: Player, value: TYPE): boolean;
-    find?(player: Player): TYPE | false | undefined;
+    find?(player: Player, provided?: IUsableActionPossibleUsing): TYPE | false | undefined;
     getMissingName?(): Translation;
 }
 export interface IUsableActionItemRequirement extends Omit<IUsableActionRequirement<Item>, "find"> {
@@ -72,6 +73,8 @@ export interface IUsableActionRequirements {
     npc?: true | IUsableActionRequirement<NPC>;
 }
 export interface IUsableActionPossibleUsing {
+    targetTile?: Tile;
+    fromTile?: Tile;
     item?: Item;
     itemType?: ItemType;
     itemQuality?: ArrayOr<Quality>;
@@ -82,6 +85,8 @@ export interface IUsableActionPossibleUsing {
     misc?: any;
 }
 export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequirements> {
+    targetTile: Tile;
+    fromTile: Tile;
     item: ((REQUIREMENTS["item"] extends true ? Item : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
         allowNone: true;
     } ? Item | undefined : never) | (REQUIREMENTS["item"] extends {
@@ -122,28 +127,28 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
     } ? undefined : never) | (REQUIREMENTS["doodad"] extends {
         validate(player: Player, value: Doodad): boolean;
     } ? Doodad : never) | (REQUIREMENTS["doodad"] extends {
-        find(player: Player): Doodad;
+        find(player: Player, provided?: IUsableActionPossibleUsing): Doodad;
     } ? Doodad : never));
     vehicle: ((REQUIREMENTS["vehicle"] extends true ? Doodad : never) | (undefined extends REQUIREMENTS["vehicle"] ? undefined : never) | (REQUIREMENTS["vehicle"] extends {
         allowNone: true;
     } ? undefined : never) | (REQUIREMENTS["vehicle"] extends {
         validate(player: Player, value: Doodad): boolean;
     } ? Doodad : never) | (REQUIREMENTS["vehicle"] extends {
-        find(player: Player): Doodad;
+        find(player: Player, provided?: IUsableActionPossibleUsing): Doodad;
     } ? Doodad : never));
     creature: ((REQUIREMENTS["creature"] extends true ? Creature : never) | (undefined extends REQUIREMENTS["creature"] ? undefined : never) | (REQUIREMENTS["creature"] extends {
         allowNone: true;
     } ? undefined : never) | (REQUIREMENTS["creature"] extends {
         validate(player: Player, value: Creature): boolean;
     } ? Creature : never) | (REQUIREMENTS["creature"] extends {
-        find(player: Player): Creature;
+        find(player: Player, provided?: IUsableActionPossibleUsing): Creature;
     } ? Creature : never));
     npc: ((REQUIREMENTS["npc"] extends true ? NPC : never) | (undefined extends REQUIREMENTS["npc"] ? undefined : never) | (REQUIREMENTS["npc"] extends {
         allowNone: true;
     } ? undefined : never) | (REQUIREMENTS["npc"] extends {
         validate(player: Player, value: NPC): boolean;
     } ? NPC : never) | (REQUIREMENTS["npc"] extends {
-        find(player: Player): NPC;
+        find(player: Player, provided?: IUsableActionPossibleUsing): NPC;
     } ? NPC : never));
     misc: any;
 }
@@ -191,7 +196,7 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
     /**
      * A handler for registering translations for the action's name, description, etc.
      */
-    translate?: (translator: UsableActionTranslator) => UsableActionTranslator;
+    translate?: (translator: UsableActionTranslator, using?: IUsableActionPossibleUsing) => UsableActionTranslator;
     /**
      * The icon this action should have, if any.
      */

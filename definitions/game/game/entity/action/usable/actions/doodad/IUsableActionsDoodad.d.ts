@@ -9,14 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Doodad from "@wayward/game/game/doodad/Doodad";
+import type { IUsableActionPossibleUsing } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 declare namespace IUsableActionsDoodad {
-    function getFacing(player: Player, filter?: (doodad: Doodad) => any): Doodad | undefined;
-    function getUnder(player: Player, filter?: (doodad: Doodad) => any): Doodad | undefined;
-    function getUnderOrFacing(player: Player, filter?: (doodad: Doodad) => any): Doodad | undefined;
-    function validate(player: Player, doodad: Doodad | undefined): doodad is Doodad;
+    function getFacing(player: Player, provided?: IUsableActionPossibleUsing, filter?: (doodad: Doodad) => any): Doodad | undefined;
+    function getUnder(player: Player, provided?: IUsableActionPossibleUsing, filter?: (doodad: Doodad) => any): Doodad | undefined;
+    function getUnderOrFacing(player: Player, provided?: IUsableActionPossibleUsing, filter?: (doodad: Doodad) => any): Doodad | undefined;
     const requireFacing: (filter?: (doodad: Doodad, player: Player) => any) => {
         find: (player: Player) => Doodad | undefined;
     };

@@ -246,6 +246,12 @@ export default abstract class Human<TypeType extends number = number, EntityRefe
     getCraftingDifficulty(level: RecipeLevel): number;
     updateStatsAndAttributes(): void;
     getMovementDelay(): number;
+    faceDirection(direction: Direction.Cardinal): Promise<boolean>;
+    walkToTile(tile: Tile): Promise<boolean>;
+    /**
+     * Attempt to walk along a path. Returns false when failed to start walking
+     */
+    walkAlongPath(path?: Tile[]): Promise<boolean>;
     /**
      * Note: The noInput event would be emitted before moveComplete.
      * Ordering is done via EmitHumanEventPacket

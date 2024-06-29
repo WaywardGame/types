@@ -13,17 +13,9 @@ import type Tile from "@wayward/game/game/tile/Tile";
 import type Component from "@wayward/game/ui/component/Component";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
-import EventEmitter from "@wayward/utilities/event/EventEmitter";
-export interface IWalkToTileHandlerEvents {
-    /**
-     * Called when calculating the movement penalty of a tile.
-     * @param penalty The current penalty of the tile
-     * @param tile The tile to get the movement penalty of
-     */
-    getTilePenalty(penalty: number, tile: Tile): number;
-}
-export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHandlerEvents> {
+export default class WalkToTileHandler {
     private preview;
+    private forcedPathPreview;
     private overlays;
     private readonly overlayType;
     private canResetTarget;
@@ -59,11 +51,7 @@ export default class WalkToTileHandler extends EventEmitter.Host<IWalkToTileHand
     /**
      * Finds a path to a target and then updates the overlay to that path (if it was valid)
      */
-    private updatePreview;
-    /**
-     * Returns the penalty of the given tile (just how much we *don't* want to step there)
-     */
-    private getTilePenalty;
+    updatePreview(target: IVector2, forced?: boolean): boolean;
     /**
      * Updates the overlay to the given path
      */

@@ -11,6 +11,7 @@
 import { UsableActionGenerator } from "@wayward/game/game/entity/action/usable/UsableActionRegistrar";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type Item from "@wayward/game/game/item/Item";
-export declare function requestRename(player: Player, item?: Item): Promise<void>;
+import type Tile from "@wayward/game/game/tile/Tile";
+export declare function requestRename(player: Player, tile: Tile, item?: Item): Promise<void>;
 declare const _default: UsableActionGenerator<[]>;
 export default _default;
