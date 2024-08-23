@@ -180,7 +180,8 @@ export declare enum UsableActionExecutionContext {
     Generic = 0,
     ContextMenu = 1,
     ActionBar = 2,
-    ActionBarAutoUse = 3
+    ActionBarAutoUse = 3,
+    ActionBarHoveredTile = 4
 }
 export interface IUsableActionExecutionContext {
     context: UsableActionExecutionContext;

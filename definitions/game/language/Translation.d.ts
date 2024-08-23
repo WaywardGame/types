@@ -34,7 +34,7 @@ import { ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import Message from "@wayward/game/language/dictionary/Message";
 import type { Term } from "@wayward/game/language/dictionary/Misc";
 import { EquipSlotTranslation, MiscTranslation } from "@wayward/game/language/dictionary/Misc";
-import UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
+import type UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
 import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import { formatListTranslation } from "@wayward/game/language/segment/FormatListSegment";
 import makeTranslationListBuilder from "@wayward/game/language/utility/TranslationListBuilder";
@@ -161,6 +161,17 @@ declare namespace Translation {
     export function growthStage(stage?: GrowingStage, spores?: boolean): Translation | undefined;
     export function merge(...content: TranslationArg[]): Translation;
     export function mergeSpaced(...content: TranslationArg[]): Translation;
+    enum LabelName {
+        "label: value" = 0,
+        "label (value)" = 1,
+        "value label" = 2,
+        "value (label)" = 3,
+        "label value" = 4,
+        "label - value" = 5,
+        "valuelabel" = 6
+    }
+    export type LabelType = keyof typeof LabelName;
+    export function labelled(type: LabelType, label: TranslationArg, ...content: TranslationArg[]): Translation;
     export function labelled(label: TranslationArg, ...content: TranslationArg[]): Translation;
     export function simplify(normal?: TranslationArg, extra?: TranslationArg, verbose?: TranslationArg): Translation;
     export function colorizeQuality(quality: SupplierOr<Quality | string | undefined>): Translation;

@@ -15,8 +15,8 @@ import InteractionHandler from "@wayward/game/ui/screen/screens/game/util/moveme
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface IActionMenuHandlerEvents extends IInteractionHandlerEvents {
-    show(targetTile: Tile, path: IVector2[]): any;
-    hide(targetTile?: Tile, path?: IVector2[]): any;
+    set(targetTile: Tile, path: IVector2[]): any;
+    reset(targetTile?: Tile, path?: IVector2[]): any;
 }
 export default class ActionMenuHandler extends InteractionHandler {
     event: IEventEmitter<this, IActionMenuHandlerEvents>;
@@ -25,7 +25,10 @@ export default class ActionMenuHandler extends InteractionHandler {
     private path?;
     private contextMenu?;
     private previewDistance;
+    protected onActionsInFront(api: IBindHandlerApi): boolean;
     protected onActions(api: IBindHandlerApi): boolean;
+    private reset;
+    private queueActionsAt;
     private onHide;
     private onContextMenuOptionHovered;
     private updatePath;

@@ -64,7 +64,7 @@ import { Health, HealthAccuracy } from "@wayward/game/language/dictionary/Health
 import HumanName from "@wayward/game/language/dictionary/HumanName";
 import InterruptChoice from "@wayward/game/language/dictionary/InterruptChoice";
 import Message from "@wayward/game/language/dictionary/Message";
-import { MiscTranslation, Term } from "@wayward/game/language/dictionary/Misc";
+import { Label, MiscTranslation, Term } from "@wayward/game/language/dictionary/Misc";
 import { MultiplayerCompatibility } from "@wayward/game/language/dictionary/MultiplayerCompatibility";
 import Note from "@wayward/game/language/dictionary/Note";
 import UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
@@ -1054,6 +1054,7 @@ declare const dictionaryMap: {
     124: typeof Website;
     125: typeof WeightStatus;
     126: typeof WorldZ;
+    127: typeof Label;
 };
 export declare const strictDictionaries: {
     0: typeof ActionType;
@@ -2012,12 +2013,13 @@ export declare const strictDictionaries: {
     124: typeof Website;
     125: typeof WeightStatus;
     126: typeof WorldZ;
+    127: typeof Label;
 };
 export type DictionaryEnum = (typeof dictionaryMap)[Dictionary];
 type ExtractEnumString<E> = E extends Record<string, infer V> ? V : never;
 type ExtractEnumNumber<E> = E extends {
     [key in keyof E]: infer V;
-} ? (V extends string ? never : {} extends V ? never : V) : never;
+} ? (V extends string ? never : Empty extends V ? never : V) : never;
 export type DictionaryEntryEnums = ({
     [DICTIONARY in keyof typeof dictionaryMap as (typeof dictionaryMap)[DICTIONARY] extends Record<string, string> ? DICTIONARY : never]: Extract<ExtractEnumString<(typeof dictionaryMap)[DICTIONARY]>, string | number>;
 } & {

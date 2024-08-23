@@ -200,5 +200,15 @@ export declare enum Term {
     UsingX = 11,
     XTick = 12,
     XtoYZ = 13,
-    XY = 14
+    XY = 14,
+    Attack = 15
+}
+export declare enum Label {
+    LabelColonValue = 0,
+    LabelParensValue = 1,
+    LabelSpaceValue = 2,
+    LabelDashValue = 3,
+    ValueSpaceLabel = 4,
+    ValueParensLabel = 5,
+    ValueLabel = 6
 }

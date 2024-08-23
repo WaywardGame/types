@@ -101,6 +101,10 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
     private lastClickUseWhenMoving;
     protected onClick(event?: Event & Partial<MouseEvent>): void;
     toggleUseOnMove(): boolean;
+    private firstActivate;
+    onActivateDown(api: IBindHandlerApi): boolean;
+    onActivateUp(api: IBindHandlerApi): boolean;
+    onActivateHolding(api: IBindHandlerApi): boolean;
     onActivate(nonClick?: IBindHandlerApi | true, silent?: true): boolean;
     protected onGetOrRemoveItemInInventory(player: Player, items: Item[]): void;
     onToggle(): boolean;
