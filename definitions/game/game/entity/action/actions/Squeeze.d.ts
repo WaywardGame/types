@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,7 +10,7 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
     usable: true;
 }, [import("../../../item/Item").default]>;
 export default _default;

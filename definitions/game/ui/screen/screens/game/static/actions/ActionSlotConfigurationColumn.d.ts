@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -49,10 +49,11 @@ export interface IActionSlotConfigurationColumnEvents extends Events<Component> 
     change(): any;
 }
 export default class ActionSlotConfigurationColumn extends Component {
-    readonly event: IEventEmitter<this, IActionSlotConfigurationColumnEvents>;
+    event: IEventEmitter<this, IActionSlotConfigurationColumnEvents>;
     private readonly using;
     private action?;
     autoUse: boolean;
+    useOnHoveredTile: boolean;
     private number;
     readonly title: Heading;
     readonly configurationColumnContents: Component<HTMLElement>;
@@ -67,6 +68,7 @@ export default class ActionSlotConfigurationColumn extends Component {
     readonly itemQualityChoiceList: RangeChoiceList<Quality>;
     readonly modeChoiceList: ChoiceList<Choice<Mode>, false>;
     readonly hr0: HorizontalLine;
+    readonly targetHoveredTileCheckButton: CheckButton;
     readonly autoUseCheckButton: CheckButton;
     readonly hintDiscoverMore: Paragraph;
     readonly hr1: HorizontalLine;
@@ -80,9 +82,10 @@ export default class ActionSlotConfigurationColumn extends Component {
     constructor();
     getUsing(): IUsableActionPossibleUsing;
     shouldAutoUse(): boolean;
+    shouldUseOnHoveredTile(): boolean;
     shouldUseHovered(): boolean;
     setAction(action: UsableAction | undefined, isItemAction: boolean): this;
-    setSlot(number: number, action: UsableAction | undefined, using: IUsableActionPossibleUsing, autoUse: boolean, useHovered: boolean): this;
+    setSlot(number: number, action: UsableAction | undefined, using: IUsableActionPossibleUsing, autoUse: boolean, useHovered: boolean, useOnHoveredTile: boolean): this;
     private refresh;
     private setMode;
     private ensureModeValidity;
@@ -93,19 +96,20 @@ export default class ActionSlotConfigurationColumn extends Component {
     private editBindings;
     private clearSlot;
     private setUseOnMove;
+    private setUseOnHoveredTile;
     private onDropIntoUseExact;
 }
 interface ActionSlotModeChoiceUseExactEvents extends Events<Choice<Mode>>, IItemSlotEvents {
 }
 declare class ActionSlotModeChoiceUseExact extends Choice<Mode> {
-    readonly event: IEventEmitter<this, ActionSlotModeChoiceUseExactEvents>;
+    event: IEventEmitter<this, ActionSlotModeChoiceUseExactEvents>;
     constructor();
 }
 interface IActionSlotConfigurationUseExactSlotEvents extends Events<ItemComponent> {
     slot(item?: Item): any;
 }
 declare class ActionSlotConfigurationUseExactSlot extends ItemComponent {
-    readonly event: IEventEmitter<this, IActionSlotConfigurationUseExactSlotEvents>;
+    event: IEventEmitter<this, IActionSlotConfigurationUseExactSlotEvents>;
     slottedItem?: Item;
     constructor(handler: IItemComponentHandlerDescription);
     protected onDropFrom(api: IItemDropApi, intoSlot?: ItemSlot): boolean;

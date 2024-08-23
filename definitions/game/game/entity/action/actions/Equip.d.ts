@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,5 +15,5 @@ import { EquipType } from "@wayward/game/game/entity/IHuman";
 export interface IEquipCanUse extends IActionUsable {
     damageOnUse: boolean;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, import("../argument/ActionArgumentEnum").default<EquipType, "None" | "Held" | "Legs" | "Chest" | "Head" | "Waist" | "Feet" | "Neck" | "Hands" | "Back" | "MainHand" | "OffHand" | "DualWield">], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, boolean, IEquipCanUse, [import("../../../item/Item").default, EquipType]>;
+declare const _default: Action<[ActionArgument.ItemNearby, import("../argument/ActionArgumentEnum").default<EquipType, "None" | "Held" | "Legs" | "Chest" | "Head" | "Waist" | "Feet" | "Neck" | "Hands" | "Back" | "MainHand" | "OffHand" | "DualWield">], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, boolean, IEquipCanUse, [import("../../../item/Item").default, EquipType]>;
 export default _default;

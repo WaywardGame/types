@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { DayQuarter, PartOfDay, TimeFormat } from "@wayward/game/game/time/ITimeManager";
+import type { PartOfDayGranular } from "@wayward/game/game/time/ITimeManager";
+import { DayQuarter, TimeFormat } from "@wayward/game/game/time/ITimeManager";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class TimeManager {
     dayLength: number;
@@ -99,7 +100,7 @@ export default class TimeManager {
      * Returns the `PartOfDay` of the given time.
      * @param time The time to use, defaulting to the current time.
      */
-    getPartOfDay(time?: number): PartOfDay;
+    getPartOfDay(time?: number): PartOfDayGranular;
     /**
      * Returns the `DayQuarter` of the given time.
      * @param time The time to use, defaulting to the current time.

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,20 +8,22 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { SfxType } from "@wayward/game/audio/IAudio";
 export declare enum Deity {
+    Single = -2,
+    All = -1,
+    None = 0,
     Evil = 1,
-    Neutral = 2,
-    Good = 4,
-    All = 8,
-    Single = 16
+    Chaos = 2,
+    Good = 3
 }
-export type DeityReal = Exclude<Deity, Deity.All | Deity.Single>;
+export type DeityReal = Exclude<Deity, Deity.All | Deity.Single | Deity.None>;
+export declare namespace DeityReal {
+    function is(value: unknown): value is DeityReal;
+}
 export declare enum DeityDiscovery {
-    AlignmentGraph = 0,// sacrifice/invoke to any deity at an altar
-    AlignmentGraphExactNumbers = 1,// uses Invoker (16,000)
-    AlignmentUpdateExactNumbers = 2,// uses Invoker (16,000)
-    CurseExactNumbers = 3,// uses Invoker (16,000)
-    CurseFactors = 4,// uses current alignment (-8,000)
-    CurseFactorsExact = 5,// uses current alignment (-16,000)
-    DeitiesUnderstood = 6
+    CurseFactors = 0,// uses current alignment (-8,000)
+    CurseFactorsExact = 1
 }
+export declare const DEITY_ENEMIES: PartialRecord<DeityReal, DeityReal>;
+export declare const DEITY_SOUNDS: PartialRecord<DeityReal, SfxType>;

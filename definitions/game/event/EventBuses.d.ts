@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -17,6 +17,7 @@ import type EntityManager from "@wayward/game/game/entity/EntityManager";
 import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type Human from "@wayward/game/game/entity/Human";
 import type ActionExecutor from "@wayward/game/game/entity/action/ActionExecutor";
+import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type CreatureManager from "@wayward/game/game/entity/creature/CreatureManager";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
@@ -41,8 +42,13 @@ import type { WorldRenderer } from "@wayward/game/renderer/world/WorldRenderer";
 import type SaveManager from "@wayward/game/save/SaveManager";
 import type Steamworks from "@wayward/game/steamworks/Steamworks";
 import type ScreenManager from "@wayward/game/ui/screen/ScreenManager";
+import type GameScreen from "@wayward/game/ui/screen/screens/GameScreen";
 import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
+import type HoveredTileTracker from "@wayward/game/ui/screen/screens/game/util/HoveredTileTracker";
+import type ActionMenuHandler from "@wayward/game/ui/screen/screens/game/util/movement/ActionMenuHandler";
+import type InteractionManager from "@wayward/game/ui/screen/screens/game/util/movement/InteractionManager";
 import type MovementHandler from "@wayward/game/ui/screen/screens/game/util/movement/MovementHandler";
+import type PathingHandler from "@wayward/game/ui/screen/screens/game/util/movement/PathingHandler";
 import { EventBusManager } from "@wayward/utilities/event/EventBusManager";
 export declare enum EventBus {
     Actions = 0,
@@ -81,8 +87,14 @@ export declare enum EventBus {
     TileEvents = 33,
     Ui = 34,
     UiActionBar = 35,
-    UiMovementHandler = 36,
-    WorldRenderer = 37
+    UiActionMenuHandler = 36,
+    UiGameScreen = 37,
+    UiHoveredTileTracker = 38,
+    UiInteractionManager = 39,
+    UiMovementHandler = 40,
+    UiPathingHandler = 41,
+    UsableActions = 42,
+    WorldRenderer = 43
 }
 declare const eventBuses: {
     [EventBus.Actions](): ActionExecutor<any, any, any, any, any>;
@@ -121,7 +133,13 @@ declare const eventBuses: {
     [EventBus.TileEvents](): TileEvent;
     [EventBus.Ui](): typeof ui;
     [EventBus.UiActionBar](): ActionBar;
+    [EventBus.UiActionMenuHandler](): ActionMenuHandler;
+    [EventBus.UiGameScreen](): GameScreen;
+    [EventBus.UiHoveredTileTracker](): HoveredTileTracker;
+    [EventBus.UiInteractionManager](): InteractionManager;
     [EventBus.UiMovementHandler](): MovementHandler;
+    [EventBus.UiPathingHandler](): PathingHandler;
+    [EventBus.UsableActions](): UsableAction;
     [EventBus.WorldRenderer](): WorldRenderer;
 };
 export type EventBuses = typeof eventBuses;
@@ -162,8 +180,14 @@ export declare const eventBusManager: EventBusManager<EventBus, {
     33(): TileEvent;
     34(): typeof ui;
     35(): ActionBar;
-    36(): MovementHandler;
-    37(): WorldRenderer;
+    36(): ActionMenuHandler;
+    37(): GameScreen;
+    38(): HoveredTileTracker;
+    39(): InteractionManager;
+    40(): MovementHandler;
+    41(): PathingHandler;
+    42(): UsableAction;
+    43(): WorldRenderer;
 }>;
 /**
  * For backwards compat / ease of use

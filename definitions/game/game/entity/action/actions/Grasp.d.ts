@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,5 +15,5 @@ import type { ITileContainer } from "@wayward/game/game/tile/ITerrain";
 export interface IGraspCanUse extends IActionUsable {
     tileContainer: ITileContainer;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IGraspCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IGraspCanUse, [import("../../../item/Item").default]>;
 export default _default;

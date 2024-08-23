@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -29,7 +29,8 @@ export interface IMessageLogDescription {
 export declare enum MessageLogClasses {
     Main = "message-log",
     Content = "message-log-content",
-    ContentAnchored = "message-log-content--anchored",
+    Content_Reversed = "message-log-content--reversed",
+    Content_Anchored = "message-log-content--anchored",
     TurnGroup = "message-log-turn-group",
     TurnGroupTimestamp = "message-log-turn-group-timestamp",
     TurnGroupTimestampRealtime = "message-log-turn-group-timestamp-realtime",
@@ -46,16 +47,18 @@ export default class MessageLog extends Component {
     private direction;
     private length;
     private newMessages;
+    private scrollingToNewest;
     get messages(): MessageComponent[];
     get isAnchored(): boolean;
     constructor(description: IMessageLogDescription);
     clip(): void;
     reset(refresh?: boolean): void;
     refresh(): void;
-    scheduleScrollToNewest(behavior?: ScrollBehavior): void;
+    scrollToNewest(behavior?: ScrollBehavior): void;
     protected onFastForwardStart(): void;
     protected onFastForwardEnd(): void;
     protected onClearMessages(): void;
+    protected onResize(): void;
     private height;
     private lastScroll;
     private updateScroll;
@@ -68,9 +71,7 @@ declare class MessageLogTurnGroup extends Component {
     readonly content: Component<HTMLElement>;
     readonly messages: MessageComponent[];
     readonly turn: number;
-    direction: SortDirection;
     constructor(messages: IMessage[]);
-    setDirection(direction: SortDirection): this;
     add(...messages: IMessage[]): number;
 }
 export declare class MessageComponent extends Component {

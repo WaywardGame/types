@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -23,7 +23,7 @@ export interface ISimplificationSection extends IStringSection {
 }
 export declare namespace ISimplificationSection {
     function create(section: ISimplificationSection["displayLevels"]): ISimplificationSection;
-    function is(section: IStringSection): section is ISimplificationSection;
+    function is<S extends IStringSection>(section: S): section is S & ISimplificationSection;
 }
 declare const simplificationSegment: ISegment;
 export default simplificationSegment;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -25,12 +25,13 @@ export default class ItemUses extends Uses<Item> {
     protected getUseInfoHandlers(): Array<UseInfo<any, any, any, Item>>;
     protected getUse(description: IItemDescription, action: ActionType): TranslationImpl;
 }
+export declare class ItemUseContext extends InfoProviderContext {
+    private readonly itemRef?;
+    get item(): Item | undefined;
+    constructor(item?: Item);
+}
 declare module "@wayward/game/game/inspection/InfoProviderContext" {
     interface InfoProviderContextRegistration {
         ItemUse: ItemUseContext;
     }
-}
-export declare class ItemUseContext extends InfoProviderContext {
-    readonly item?: Item | undefined;
-    constructor(item?: Item | undefined);
 }

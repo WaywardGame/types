@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { TileUpdateType } from "@wayward/game/game/IGame";
-import type { IObject } from "@wayward/game/game/IObject";
+import type { IHasQuality, IObject, IQualityEvents } from "@wayward/game/game/IObject";
 import { Quality } from "@wayward/game/game/IObject";
 import type { DisplayableDoodadType, DoodadTypeExtra, DoorOrientation, IDoodadDescription, IDoodadOptions, IHasBuilder, IHasWater } from "@wayward/game/game/doodad/IDoodad";
 import { DoodadTag, DoodadType, DoodadTypeGroup, GrowingStage } from "@wayward/game/game/doodad/IDoodad";
@@ -44,7 +44,7 @@ import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISeria
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IRGB } from "@wayward/utilities/Color";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export interface IDoodadEvents extends IEntityMovableEvents {
+export interface IDoodadEvents extends IEntityMovableEvents, IQualityEvents {
     /**
      * Called when an doodad is being updated
      * @param tile The tile the doodad is on
@@ -83,7 +83,7 @@ export interface IDoodadEvents extends IEntityMovableEvents {
     addMagic(magic: MagicalPropertyManager): any;
     removeMagic(magic: MagicalPropertyManager): any;
 }
-export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType, ReferenceType.Doodad, DoodadTag> implements IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, Partial<IContainer>, IHasInsulation, IHasBuilder, IHasMagic {
+export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType, ReferenceType.Doodad, DoodadTag> implements IUnserializedCallback, IObject<DoodadType>, IDoodadOptions, Partial<IContainer>, IHasInsulation, IHasBuilder, IHasMagic, IHasQuality {
     static is(value: any): value is Doodad;
     get constructorFunction(): typeof Doodad;
     static getRegistrarId(): number;
@@ -91,7 +91,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     protected static registrarId: number;
     get entityType(): EntityType.Doodad;
     get tileUpdateType(): TileUpdateType;
-    readonly event: IEventEmitter<this, IDoodadEvents>;
+    event: IEventEmitter<this, IDoodadEvents>;
     maxDur: number;
     minDur: number;
     private fireStage?;
@@ -180,6 +180,11 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     get point(): IVector3;
     get tile(): Tile;
     getTileId(): number;
+    /**
+     * @deprecated This is the correct way to change quality, but it is not completely implemented.
+     * It does not perform any required changes due to the quality change, like durability, all it does is change the quality and emit an event.
+     */
+    setQuality(quality: Quality): void;
     canGrow(): boolean;
     setGrowingStage(stage: GrowingStage): void;
     /**

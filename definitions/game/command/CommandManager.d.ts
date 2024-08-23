@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,10 +11,10 @@
 import type { ICommand } from "@wayward/game/command/ICommand";
 import { Command } from "@wayward/game/command/ICommand";
 import type { ICommandManager } from "@wayward/game/command/ICommandManager";
-import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import type Player from "@wayward/game/game/entity/player/Player";
 import GenericManager from "@wayward/game/utilities/generic/GenericManager";
 import type { IGenericManager } from "@wayward/game/utilities/generic/IGenericManager";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface ICommandManagerEvents {
     /**
      * Called before a command is executed

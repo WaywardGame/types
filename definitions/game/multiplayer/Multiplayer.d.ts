@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import Player from "@wayward/game/game/entity/player/Player";
 import type Island from "@wayward/game/game/island/Island";
 import type { IJoinServerOptions, IMultiplayerEvents, IMultiplayerOptions, IMultiplayerRunSafelyOptions, PacketTarget, ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
@@ -18,6 +17,7 @@ import type { IConnection } from "@wayward/game/multiplayer/networking/IConnecti
 import type { IPacket } from "@wayward/game/multiplayer/packets/IPacket";
 import DesyncPacket from "@wayward/game/multiplayer/packets/server/DesyncPacket";
 import type { IServerMod } from "@wayward/hosts/shared/interfaces";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     /**
      * Static steam account id when steam support is on

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -19,7 +19,7 @@ export default abstract class GenericOverlay<OVERLAY extends IOverlayInfo = IOve
     show(): void;
     hide(): void;
     addOrUpdate(tile: Tile, ...params: PARAMS): void;
-    protected abstract generateOverlayInfo(tile: Tile, ...params: PARAMS): OVERLAY | undefined;
+    protected abstract generateOverlayInfo(tile: Tile, existingOverlay: OVERLAY | undefined, ...params: PARAMS): OVERLAY | undefined;
     protected updateOverlayAlpha(tile: Tile, overlay: OVERLAY, alpha: number): OVERLAY | undefined;
     clear(): void;
     private updateAlpha;

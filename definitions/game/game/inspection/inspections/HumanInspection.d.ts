@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,12 +10,15 @@
  */
 import type Human from "@wayward/game/game/entity/Human";
 import type { InspectType } from "@wayward/game/game/inspection/IInspection";
+import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import EntityInspection from "@wayward/game/game/inspection/inspections/EntityInspection";
+import type Translation from "@wayward/game/language/Translation";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export default abstract class HumanInspection<H extends Human> extends EntityInspection<H> {
-    constructor(inspectType: InspectType, human: H);
-    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
+    constructor(inspectType: InspectType, human: H, context?: InfoProviderContext);
+    protected getTitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getContent(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider | undefined>;
     isImportant(): boolean;
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -28,7 +28,7 @@ export declare enum ContainerDialogClasses {
     WeightCapacity = "container-dialog-weight-capacity"
 }
 export default class ContainerDialog extends Dialog {
-    readonly event: IEventEmitter<this, IContainerDialogEvents>;
+    event: IEventEmitter<this, IContainerDialogEvents>;
     readonly bucket: ContainerBucket;
     readonly weight: Component<HTMLElement>;
     constructor(id?: DialogId, subId?: string);

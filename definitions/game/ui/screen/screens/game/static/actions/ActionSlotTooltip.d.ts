@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,7 +15,7 @@ import InspectionsHandler from "@wayward/game/game/inspection/InspectionsHandler
 import type { InspectionTooltipHints } from "@wayward/game/ui/screen/screens/game/InspectionsTooltipHandler";
 import InspectionsTooltipHandler from "@wayward/game/ui/screen/screens/game/InspectionsTooltipHandler";
 import InspectionsList from "@wayward/game/ui/screen/screens/game/component/InspectionsList";
-import type { ActionSlot } from "@wayward/game/ui/screen/screens/game/static/actions/ActionSlot";
+import { type ActionSlot } from "@wayward/game/ui/screen/screens/game/static/actions/ActionSlot";
 import type HashSet from "@wayward/utilities/collection/set/HashSet";
 export declare enum ActionSlotTooltipClasses {
     Hints = "game-action-slot-tooltip-hints"

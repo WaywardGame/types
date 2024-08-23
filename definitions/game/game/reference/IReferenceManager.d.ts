@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,6 +11,7 @@
 import { Quality } from "@wayward/game/game/IObject";
 import { Deity } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
+import { DamageType } from "@wayward/game/game/entity/IEntity";
 import { EquipType, SkillType } from "@wayward/game/game/entity/IHuman";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { ActionId } from "@wayward/game/game/entity/action/usable/IUsableAction";
@@ -18,6 +19,7 @@ import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
+import { StatusType } from "@wayward/game/game/entity/status/IStatus";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import { ItemType, ItemTypeExtra } from "@wayward/game/game/item/IItem";
@@ -51,7 +53,9 @@ export declare enum ReferenceType {
     EquipSlot = 15,
     Deity = 16,
     Quality = 17,
-    Magic = 18
+    Magic = 18,
+    Status = 19,
+    Damage = 20
 }
 export declare const enumRefTypes: {
     8: typeof SkillType;
@@ -819,7 +823,7 @@ export declare const enumRefTypes: {
         BronzeWaterStill: ItemType.BronzeWaterStill;
         ArmorStand: ItemType.ArmorStand;
         RuneOfEvil: ItemType.RuneOfEvil;
-        RuneOfNeutrality: ItemType.RuneOfNeutrality;
+        RuneOfChaos: ItemType.RuneOfChaos;
         RuneOfGood: ItemType.RuneOfGood;
         GraniteAltar: ItemType.GraniteAltar;
         WoodenWheelbarrow: ItemType.WoodenWheelbarrow;
@@ -874,6 +878,8 @@ export declare const enumRefTypes: {
         IronFlute: ItemType.IronFlute;
         BronzeFlute: ItemType.BronzeFlute;
         StrippedLeather: ItemType.StrippedLeather;
+        ChickenEggshells: ItemType.ChickenEggshells;
+        PenguinEggshells: ItemType.PenguinEggshells;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
@@ -887,16 +893,20 @@ export declare const enumRefTypes: {
     };
     12: typeof ItemType;
     13: typeof Stat;
+    19: typeof StatusType;
     14: boolean;
     15: typeof EquipType;
     16: typeof Deity;
     17: typeof Quality;
     18: boolean;
+    20: typeof DamageType;
 };
 export type EnumReferenceTypes = keyof typeof enumRefTypes;
 export type EntityReferenceTypes = ReferenceType.Corpse | ReferenceType.Creature | ReferenceType.Doodad | ReferenceType.Item | ReferenceType.NPC | ReferenceType.Player | ReferenceType.TileEvent;
+export declare const enumRefColorRegistry: PartialRecord<EnumReferenceTypes, (entry: string | number) => Translation>;
 export declare const enumRefTranslatorRegistry: PartialRecord<EnumReferenceTypes, (entry: string | number) => Translation>;
 export declare function registerEnumRefTranslator<ENUM extends number = number>(type: EnumReferenceTypes, translator: (entry: string | ENUM) => Translation): (entry: string | ENUM) => Translation;
+export declare function registerEnumRefColor<ENUM extends number = number>(type: EnumReferenceTypes, supplier: (entry: string | ENUM) => Translation): (entry: string | ENUM) => Translation;
 export type ReferenceableReferenceTypes = Exclude<ReferenceType, EnumReferenceTypes>;
 export declare const referenceableRefTypes: Set<ReferenceableReferenceTypes>;
 export interface IReferenceTypeMap {
@@ -919,6 +929,8 @@ export interface IReferenceTypeMap {
     [ReferenceType.Deity]: [ReferenceType.Deity, Deity];
     [ReferenceType.Quality]: [ReferenceType.Quality, Quality];
     [ReferenceType.Magic]: [ReferenceType.Magic, MagicalPropertyIdentityHash];
+    [ReferenceType.Status]: [ReferenceType.Status, StatusType];
+    [ReferenceType.Damage]: [ReferenceType.Damage, DamageType];
 }
 export type ReferenceContext = [number, ReferenceType?];
 type ReferenceId<REFTYPE extends ReferenceType> = IReferenceTypeMap[REFTYPE] extends [REFTYPE, infer IdType, any?] ? IdType : number;

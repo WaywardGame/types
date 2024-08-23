@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -200,12 +200,12 @@ export declare class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     /**
      * Renders the status effects currently on the human.
      */
-    private renderStatusEffects;
+    private renderStatuses;
     private shouldRenderBaseLayer;
     /**
      * Renders a status effect image.
      */
-    private renderStatusEffect;
+    private renderStatus;
     private spriteBatchForLayer;
     addTileToViewport(timeStamp: number, visibleTiles: Set<Tile>, tile: Tile, itemBatch: ISpriteBatch | undefined): void;
     /**

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,17 +9,17 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { SfxType } from "@wayward/game/audio/IAudio";
-import { Deity } from "@wayward/game/game/deity/Deity";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type Human from "@wayward/game/game/entity/Human";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
-import type { ActionArguments, ActionExecutorEvents, AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionExample, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable, IProtectedItems, SkillGain } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument, ActionType, BlockFlag } from "@wayward/game/game/entity/action/IAction";
+import type { ActionArguments, ActionExecutorEvents, AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionExample, IActionParticle, IActionSoundEffect, IActionUsable, IProtectedItems, SkillGain } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType, BlockFlag, IActionNotUsable } from "@wayward/game/game/entity/action/IAction";
 import IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type { TurnTypeFlag } from "@wayward/game/game/entity/player/IPlayer";
 import type Item from "@wayward/game/game/item/Item";
 import type { IPromptDescriptionBase, PromptDescriptionArgs } from "@wayward/game/game/meta/prompt/IPrompt";
-import { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
 import type Translation from "@wayward/game/language/Translation";
@@ -50,6 +50,7 @@ export default class ActionExecutor<A extends ActionArguments, E extends Entity,
     private _actionArgs;
     private executionStage;
     private shouldSkipConfirmation;
+    targetTile?: Tile;
     private readonly privateStore;
     private updateTablesAndWeight;
     private updateWeight;
@@ -96,7 +97,7 @@ export default class ActionExecutor<A extends ActionArguments, E extends Entity,
      * Alternate version of canUse that allows you to specify the facing point.
      * Use with caution as this probably won't work for some actions
      */
-    canUseWhileFacing(executor: E, position: IVector3, direction: Direction.Cardinal, ...args: AV): CU | IActionNotUsable;
+    canUseWhileFacing(executor: E, position: IVector3, direction?: Direction.Cardinal, ...args: AV): CU | IActionNotUsable;
     private processNotUsableResult;
     execute(actionApiOrExecutor: IActionApi<E, CU> | E, ...args: AV): PromiseOr<R | undefined>;
     executeConfirmer(actionApiOrExecutor: IActionApi<E, CU> | E, args: AV): Promise<boolean>;
@@ -114,7 +115,7 @@ export default class ActionExecutor<A extends ActionArguments, E extends Entity,
     setUpdateTablesAndWeight(): this;
     setUpdateWeight(): this;
     setStaminaReduction(reduction?: SkillType, actionTier?: number): this;
-    setRuneChance(alignment: Deity, chance: number): this;
+    setRuneChance(chanceOrDeity: ArrayOr<DeityReal> | number | undefined, chance?: number): this;
     addSkillGains(...skills: SkillGain[]): this;
     addSkillGains(skill: SkillType, amount?: number, actionTier?: number, bypass?: true, times?: number): this;
     setMilestone(milestone: Milestone, data?: number): this;

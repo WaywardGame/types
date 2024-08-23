@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,7 +14,7 @@ export default class TabDeveloper extends Tab implements IRefreshable {
     private readonly refreshables;
     private readonly buttonDeveloperMode1;
     private readonly buttonDeveloperMode2;
-    private readonly buttonDiscoverAllActions;
+    private readonly buttonDiscoverEverything;
     private readonly buttonUnlockAllMilestones;
     private readonly buttonUnlockAllRecipes;
     private readonly buttonOpenLogsFolder;
@@ -40,6 +40,5 @@ export default class TabDeveloper extends Tab implements IRefreshable {
     private onFullscreen;
     private reloadGame;
     private unlockAllMilestones;
-    private discoverAllActions;
     private unlockAllRecipes;
 }

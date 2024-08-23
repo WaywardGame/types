@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,9 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Deity } from "@wayward/game/game/deity/Deity";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import type { ActionDisplayLevel, ActionType, IActionNotUsable, IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import type { ActionDisplayLevel, ActionType, IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { IActionNotUsable } from "@wayward/game/game/entity/action/IAction";
 import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
 import type UsableActionRegistrar from "@wayward/game/game/entity/action/usable/UsableActionRegistrar";
 import type { UsableActionTranslator } from "@wayward/game/game/entity/action/usable/UsableActionTranslator";
@@ -26,9 +27,12 @@ import type { IItemDescription, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type ItemFinder from "@wayward/game/game/item/ItemFinder";
 import type { IItemFinderOptions } from "@wayward/game/game/item/ItemFinder";
+import type { FindPathRange } from "@wayward/game/game/tile/ITerrain";
+import { type IFindPathRange } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type Message from "@wayward/game/language/dictionary/Message";
-import Translation from "@wayward/game/language/Translation";
+import { TranslationArg } from "@wayward/game/language/ITranslation";
+import type Translation from "@wayward/game/language/Translation";
 import type Bindable from "@wayward/game/ui/input/Bindable";
 import type { ItemDetailIconLocation } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
@@ -152,6 +156,9 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
     } ? NPC : never));
     misc: any;
 }
+export declare namespace IUsableActionUsing {
+    function fromTarget<USING extends IUsableActionPossibleUsing>(using: USING): USING;
+}
 export type UsableActionIconReference = ActionType | UsableActionType | UsableActionTypePlaceholder | (Omit<IIcon, "path"> & {
     action: ActionType | UsableActionType | UsableActionTypePlaceholder;
 }) | IIcon;
@@ -164,7 +171,7 @@ export interface IUsableActionNotUsable extends IActionNotUsable {
     sendMessage(): void;
 }
 export declare namespace IUsableActionNotUsable {
-    function create(message?: Message, ...args: any[]): IUsableActionNotUsable;
+    function create(message?: Message, ...args: TranslationArg[]): IUsableActionNotUsable;
     function sendMessage(notUsable: IActionNotUsable): void;
     function equals(a: IUsableActionNotUsable, b: IUsableActionNotUsable): boolean;
 }
@@ -234,6 +241,10 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
      */
     displayLevel?: ActionDisplayLevel | ((using: IUsableActionPossibleUsing) => ActionDisplayLevel | undefined);
     /**
+     * The display level of the action when there's an error with its requirements.
+     */
+    requirementsErrorDisplayLevel?: ActionDisplayLevel;
+    /**
      * Controls the display order of this action compared to other actions.
      * Generally you want to leave this as 0 (default) and just register your action in the correct place.
      * Priority can be generated dynamically based on the given objects — item, doodad, etc.
@@ -287,7 +298,34 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
     noSlotQuality?: true;
     tooltip?(tooltip: Tooltip): any;
     forceDisplayWhenEmpty?: true;
-    alignment?: SupplierOr<Deity | 0 | undefined, [IUsableActionPossibleUsing]>;
+    alignment?: SupplierOr<ArrayOr<DeityReal> | undefined, [IUsableActionPossibleUsing]>;
+    /**
+     * By default, actions are assumed to be interacting with the tile in front of them.
+     * This recategorises the action as one that either is unrelated to the tile in front, or interacting with the tile below.
+     *
+     * This affects where the game chooses to path the player to in order to use the action.
+     */
+    interactionDistance?: InteractionDistance | ((using: IUsableActionPossibleUsing) => InteractionDistance | undefined);
+    /**
+     * Whether action history should remember the tile this action was used on
+     */
+    historyRememberLocation?: true;
+    /**
+     * Whether to target the tile the mouse is over by default.
+     */
+    targetHoveredTile?: true;
+}
+export declare enum InteractionDistanceType {
+    SameTile = 0,
+    AdjacentTile = 1,
+    InfiniteRange = 2
+}
+export interface IInteractionDistanceRanged extends IFindPathRange {
+}
+export type InteractionDistance = InteractionDistanceType.SameTile | InteractionDistanceType.AdjacentTile | InteractionDistanceType.InfiniteRange | IInteractionDistanceRanged;
+export declare namespace InteractionDistance {
+    function convertToFindPathRange(distance: InteractionDistance): FindPathRange;
+    function findPathPreferred(targetTile: Tile, distance: InteractionDistance | undefined, clientSide: boolean): Tile[] | undefined;
 }
 export interface IUsableActionDefinitionSubmenu<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {
     submenu(registrar: UsableActionRegistrar, using: IUsableActionUsing<REQUIREMENTS>): UsableActionRegistrar | void;

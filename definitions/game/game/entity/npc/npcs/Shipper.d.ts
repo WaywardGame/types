@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { RuneChance } from "@wayward/game/game/deity/IDeities";
+import { AiType } from "@wayward/game/game/entity/AI";
 import type Human from "@wayward/game/game/entity/Human";
-import { AiType, MoveType } from "@wayward/game/game/entity/IEntity";
+import { MoveType } from "@wayward/game/game/entity/IEntity";
 import { EquipType } from "@wayward/game/game/entity/IHuman";
 import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
@@ -40,7 +40,6 @@ export default class ShipperNPC extends NPC {
     interact(action: IActionHandlerApi<Human>, interactType: ShipperNPCInteractType): void;
     canSailTo(x: number, y: number): boolean;
     getPublicContainer(): IContainer | undefined;
-    protected giveRuneOnDeath(): RuneChance;
     protected getDefaultName(): TranslationImpl;
     protected initializeStats(): void;
     protected getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;

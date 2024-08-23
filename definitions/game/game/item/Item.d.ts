@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { TileUpdateType } from "@wayward/game/game/IGame";
-import type { IObject, IObjectOptions } from "@wayward/game/game/IObject";
+import type { IHasQuality, IObject, IObjectOptions, IQualityEvents } from "@wayward/game/game/IObject";
 import { Quality } from "@wayward/game/game/IObject";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type { IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
@@ -42,20 +42,19 @@ import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import { FireStage } from "@wayward/game/game/tile/events/IFire";
 import { Article } from "@wayward/game/language/Translation";
-import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { SortDirection } from "@wayward/game/save/ISaveManager";
 import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export interface IItemEvents extends IEntityMovableEvents {
+export interface IItemEvents extends IEntityMovableEvents, IQualityEvents {
     toggleProtected(isProtected: boolean): any;
     containerChange(): any;
     fireUpdate(stage?: FireStage): any;
     damage(): any;
     transformed(newType: ItemType, oldType: ItemType): any;
     weightUpdate(): any;
-    moved(): any;
     movedIsland(islandId: IslandId, itemId: number): any;
     /**
      * Called when the human equips an item to a slot
@@ -75,7 +74,6 @@ export interface IItemEvents extends IEntityMovableEvents {
      * @returns The amount of damage the item shouldd take or undefined to use the default logic
      */
     shouldDamage(modifier?: number): number | false | undefined;
-    qualityChange(quality: Quality, oldQuality: Quality): any;
     durabilityChange(durability: number, oldDurability: number): any;
     durabilityMaxChange(durabilityMax: number, oldDurabilityMax: number): any;
     decayChange(decay?: number, oldDecay?: number): any;
@@ -86,10 +84,10 @@ export interface IItemEvents extends IEntityMovableEvents {
     revertFromDoodad(doodad: Doodad): any;
     becomeDoodad(doodad: Doodad): any;
 }
-export default class Item extends EntityMovable<IItemDescription, ItemType, ReferenceType.Item, ItemTag> implements Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, IHasInsulation, IHasMagic {
+export default class Item extends EntityMovable<IItemDescription, ItemType, ReferenceType.Item, ItemTag> implements Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, IHasInsulation, IHasMagic, IHasQuality {
     get entityType(): EntityType.Item;
     get tileUpdateType(): TileUpdateType;
-    readonly event: IEventEmitter<this, IItemEvents>;
+    event: IEventEmitter<this, IItemEvents>;
     private maxDur;
     private minDur;
     weight: number;
@@ -228,6 +226,12 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     getDecayRate(isClientSide: boolean): number;
     getPreservationDecayMultiplier(): number;
     getTemperatureDecayMultiplier(isClientSide: boolean): number;
+    canHaveCooldown(): boolean;
+    /**
+     * @returns The cooldown for this item. `0` = just started cooldown, `1` = finished cooldown
+     */
+    getCooldown(human: Human): number;
+    getVisualCooldown(human: Human): number;
     getTotalWeight(bypassContainer?: boolean, targetContainer?: IContainer): number;
     getDisassemblyItems(): IItemDisassembleResult | undefined;
     isNearby(executor: Entity, allowNearby?: boolean): boolean;
@@ -248,6 +252,11 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     isEquipped(includeDisabled?: true): boolean;
     getEquipSlot(includeDisabled?: true): EquipType | undefined;
     changeInto(type: ItemType, options?: Partial<IItemChangeIntoOptions>): void;
+    /**
+     * Verifies an item has the proper magical properties and rerolls individual ones if needed.
+     * @returns True if the item had a glowing magical property.
+     */
+    verifyMagicalProperties(): boolean;
     /**
      * Verifies an item has a proper weight combined with its magical item weight (featherweight) property and changes it if not.
      * @returns A type of change via ItemWeightChange for showing a new magical property was added or a new magical weight was added. If no change happened, it will return undefined.

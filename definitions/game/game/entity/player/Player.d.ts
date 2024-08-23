@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -20,6 +20,7 @@ import type { IMovementIntent, IPlayerEvents, PlayerTitle } from "@wayward/game/
 import MessageManager from "@wayward/game/game/entity/player/MessageManager";
 import NoteManager from "@wayward/game/game/entity/player/note/NoteManager";
 import QuestManager from "@wayward/game/game/entity/player/quest/QuestManager";
+import { StatusType } from "@wayward/game/game/entity/status/IStatus";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type { IContainer } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
@@ -36,10 +37,10 @@ import type { IContainerSortInfo, IDialogInfo } from "@wayward/game/ui/old/IOldU
 import { IActionBarSlotData } from "@wayward/game/ui/screen/screens/game/static/actions/IActionBar";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import { type IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export default class Player extends Human<number, ReferenceType.Player> implements IPreSerializeCallback, IUnserializedCallback {
+export default class Player extends Human<undefined, number, ReferenceType.Player> implements IPreSerializeCallback, IUnserializedCallback {
     get entityType(): EntityType.Player;
     get tileUpdateType(): TileUpdateType;
-    readonly event: IEventEmitter<this, IPlayerEvents>;
+    event: IEventEmitter<this, IPlayerEvents>;
     absentLastUsedTime: number;
     containerSortInfo: Record<string | number, IContainerSortInfo | undefined>;
     dialogContainerInfo: SaferNumberIndexedObject<IDialogInfo>;
@@ -62,6 +63,7 @@ export default class Player extends Human<number, ReferenceType.Player> implemen
     delete(): void;
     get isValid(): boolean;
     get clientStore(): IClientStore;
+    getDescription(): undefined;
     createNoteManager(): NoteManager;
     createMessageManager(): MessageManager;
     createQuestManager(): QuestManager;
@@ -85,7 +87,7 @@ export default class Player extends Human<number, ReferenceType.Player> implemen
     load(): void;
     unload(): void;
     private onLoadOrUnload;
-    setup(spawnTile: Tile): void;
+    setup(spawnTile: Tile, respawn: boolean): void;
     protected onNoInput(): void;
     updateTables(source: string, options?: Partial<{
         allowCaching: boolean;
@@ -118,6 +120,7 @@ export default class Player extends Human<number, ReferenceType.Player> implemen
      */
     isExploredClientSide(x: number, y: number, z: number): boolean;
     protected onSkillGain(skill: SkillType, fromValue: number, toValue: number, mod: number): void;
+    protected getApplicableStatuses(): Set<StatusType> | undefined;
     private canWriteInHours;
     private canWriteNote;
     private onWriteNote;

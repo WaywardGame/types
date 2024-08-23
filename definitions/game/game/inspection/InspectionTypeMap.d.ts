@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,6 +15,7 @@ import ActionInspection from "@wayward/game/game/inspection/inspections/ActionIn
 import CorpseInspection from "@wayward/game/game/inspection/inspections/CorpseInspection";
 import CorpsesInspection from "@wayward/game/game/inspection/inspections/CorpsesInspection";
 import CreatureInspection from "@wayward/game/game/inspection/inspections/CreatureInspection";
+import DamageInspection from "@wayward/game/game/inspection/inspections/DamageInspection";
 import DeityInspection from "@wayward/game/game/inspection/inspections/DeityInspection";
 import DoodadInspection from "@wayward/game/game/inspection/inspections/DoodadInspection";
 import EquipSlotInspection from "@wayward/game/game/inspection/inspections/EquipSlotInspection";
@@ -30,6 +31,7 @@ import RecipeInspection from "@wayward/game/game/inspection/inspections/RecipeIn
 import SelfInspection from "@wayward/game/game/inspection/inspections/SelfInspection";
 import SkillInspection from "@wayward/game/game/inspection/inspections/SkillInspection";
 import StatInspection from "@wayward/game/game/inspection/inspections/StatInspection";
+import StatusInspection from "@wayward/game/game/inspection/inspections/StatusInspection";
 import TileEventInspection from "@wayward/game/game/inspection/inspections/TileEventInspection";
 import TileInspection from "@wayward/game/game/inspection/inspections/TileInspection";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -38,6 +40,7 @@ declare const inspectionTypeMap: {
     14: typeof CorpseInspection;
     15: typeof CorpsesInspection;
     3: typeof CreatureInspection;
+    26: typeof DamageInspection;
     22: typeof DeityInspection;
     10: typeof ItemInspection;
     4: typeof DoodadInspection;
@@ -56,11 +59,12 @@ declare const inspectionTypeMap: {
     0: typeof SelfInspection;
     18: typeof SkillInspection;
     20: typeof StatInspection;
+    25: typeof StatusInspection;
     17: typeof TileInspection;
     5: typeof TileEventInspection;
     16: typeof TileEventInspection.Minors;
 };
-export type InspectionClass = Class<Inspection<any>> & {
+export type InspectionClass = Class<Inspection<any>, [value: any, context?: InfoProviderContext, ...args: any[]]> & {
     isWorldInspection?(inspectType: InspectType): boolean;
     getFromTile?(tile: Tile, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<any>>;
     /**

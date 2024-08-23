@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -19,22 +19,20 @@ export declare enum GameOptionsIcon {
     EternalDay = 3,
     EternalNight = 4,
     Time = 5,
-    GoodAlignment = 6,
-    EvilAlignment = 7,
-    Health = 8,
-    Stamina = 9,
-    Hunger = 10,
-    Thirst = 11,
-    Bleeding = 12,
-    Poisoned = 13,
-    Burned = 14,
-    Skills = 15,
-    NoItems = 16,
-    Weight = 17,
-    Crafting = 18,
-    Items = 19,
-    Travel = 20,
-    Luck = 21
+    Health = 6,
+    Stamina = 7,
+    Hunger = 8,
+    Thirst = 9,
+    Bleeding = 10,
+    Poisoned = 11,
+    Burned = 12,
+    Skills = 13,
+    NoItems = 14,
+    Weight = 15,
+    Crafting = 16,
+    Items = 17,
+    Travel = 18,
+    Luck = 19
 }
 export interface IGameOptionsIcon extends IModdable, IHasImagePath {
     check(options: IGameOptions, localPlayerOption: ImmutableObject<IGameOptionsPlayer>): boolean;

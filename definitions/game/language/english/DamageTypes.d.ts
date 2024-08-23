@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { DamageType } from "@wayward/game/game/entity/IEntity";
-declare const damageTypes: Descriptions<DamageType, string>;
+declare const damageTypes: Descriptions<DamageType, [string, string]>;
 export default damageTypes;

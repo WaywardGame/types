@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,13 +10,13 @@
  */
 import type { IHasBuilder } from "@wayward/game/game/doodad/IDoodad";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
-import type { IInspector } from "@wayward/game/game/inspection/IInfoProvider";
+import type Player from "@wayward/game/game/entity/player/Player";
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 type SkillRequirement = [skill: SkillType, amount: number];
 type InfoGenerator = () => ArrayOr<TranslationGenerator | InfoProvider>;
-type HasResolvableBuilder = IInspector | IHasBuilder;
+type HasResolvableBuilder = Player | IHasBuilder;
 export default class ObscuredValue extends InfoProvider {
     private readonly isOrCheck;
     private readonly inspector;

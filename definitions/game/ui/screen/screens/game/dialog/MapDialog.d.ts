@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,18 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type Item from "@wayward/game/game/item/Item";
 import type DrawnMap from "@wayward/game/game/mapping/DrawnMap";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type Component from "@wayward/game/ui/component/Component";
 import PrerenderedCanvasDialog from "@wayward/game/ui/screen/screens/game/component/PrerenderedCanvasDialog";
-import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface IMapDialogEvents extends Events<PrerenderedCanvasDialog> {
     read(map: DrawnMap, item: Item): any;
 }
 export default class MapDialog extends PrerenderedCanvasDialog {
-    readonly event: IEventEmitter<this, IMapDialogEvents>;
+    event: IEventEmitter<this, IMapDialogEvents>;
     private readonly riddleText;
     private readonly buttonRiddle;
     private readonly buttonCopyMap;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,6 +11,7 @@
 import type { ItemType } from "@wayward/game/game/item/IItem";
 import { ContainerSort, type IContainer } from "@wayward/game/game/item/IItem";
 import Item from "@wayward/game/game/item/Item";
+import Button from "@wayward/game/ui/component/Button";
 import { CheckButton } from "@wayward/game/ui/component/CheckButton";
 import Component from "@wayward/game/ui/component/Component";
 import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
@@ -20,13 +21,18 @@ import ContainerBucketItemList from "@wayward/game/ui/screen/screens/game/compon
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export declare enum ContainerBucketClasses {
+    _ShowQuickMoveTargetButtons = "--show-container-bucket-quick-move-target-buttons",
+    _ShowQuickMoveTarget = "--show-container-bucket-quick-move-target",
     Main = "container-bucket",
-    ActiveTabButton = "container-bucket-active-tab-button",
-    ActiveTabButtonReverse = "container-bucket-active-tab-button-reverse",
-    ActiveTabButtonHover = "container-bucket-active-tab-button-hover",
-    ActiveTabButtonsShow = "container-bucket-active-tab-buttons-show",
-    ActiveTabButtonActualTarget = "container-bucket-active-tab-button-actual-target",
-    ActiveTabButtonHoverOrderEligible = "container-bucket-active-tab-button-hover-order-eligible"
+    TabButton = "container-bucket-tab-button",
+    TabButton_PrefersRight = "container-bucket-tab-button--prefers-right",
+    TabButton_Reverse = "container-bucket-tab-button--reverse",
+    TabButton_Hover = "container-bucket-tab-button--hover",
+    TabButton_HoverOrderEligible = "container-bucket-tab-button--hover-order-eligible",
+    TabButtonQuickMoveTarget = "container-bucket-tab-button-quick-move-target",
+    TabButtonQuickMoveTarget_Targeted = "container-bucket-tab-button-quick-move-target--targeted",
+    TabButtonMoveAll = "container-bucket-tab-button-move-all",
+    TabButtonAction = "container-bucket-tab-button-action"
 }
 export interface IContainerBucketsEvents {
     register(bucket: ContainerBucket): any;
@@ -51,16 +57,22 @@ export default class ContainerBucket extends Component {
     static getSorting(): ItemComponent | undefined;
     static cancelSorting(): void;
     static getTransferDestination(transferFrom?: IContainer, item?: Item | ItemType, filter?: (bucket: ContainerBucket) => any): ContainerBucket | undefined;
-    static updateTransferDestination(transferFrom?: ContainerBucket): void;
+    private static readonly transferDestinationHolds;
+    static addTransferDestinationHoldFor(id: string, transferFrom: ContainerBucket): void;
+    static removeTransferDestinationHoldFor(id: string): void;
+    static updateTransferDestination(): void;
+    private readonly instanceId;
     private settingContainer;
     readonly itemList: ContainerBucketItemList;
-    readonly sortFilterRow: DialogSortFilter<ContainerSort | "custom">;
+    readonly sortFilterRow: DialogSortFilter<"custom" | ContainerSort>;
     readonly activeContainerTabButton: CheckButton;
+    readonly moveAllItemsTabButton: Button;
     get container(): IContainer | undefined;
     get filterText(): string;
     private dialogRef?;
     get dialog(): Dialog | undefined;
-    readonly event: IEventEmitter<this, IContainerBucketEvents>;
+    event: IEventEmitter<this, IContainerBucketEvents>;
+    tabButtons: Button[];
     constructor(container?: IContainer);
     deregisterAsDestination(): this;
     hideSortFilterRow(): this;
@@ -71,4 +83,5 @@ export default class ContainerBucket extends Component {
     protected onMouseLeave(): void;
     private updateDialogActive;
     private sort;
+    registerTabButton(button: Button, className: string): void;
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -18,5 +18,5 @@ export declare class ActionArgumentItemSort extends ActionArgumentCustom<IContai
     read(): IContainerSort;
     write(executor: Entity | undefined, value: IContainerSort): void;
 }
-declare const _default: Action<[ActionArgument.Container, [ActionArgument.UnsignedInteger32NumberArray, ActionArgumentItemSort]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [import("@wayward/game/game/item/IItem").IContainer, number[] | IContainerSort]>;
+declare const _default: Action<[ActionArgument.Container, [ActionArgument.UnsignedInteger32NumberArray, ActionArgumentItemSort]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [import("@wayward/game/game/item/IItem").IContainer, number[] | IContainerSort]>;
 export default _default;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,7 +14,7 @@ import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class FireInfoProvider extends InfoProvider {
     private readonly decayProvider;
     static getFireStageTranslation(decay?: number): TranslationImpl | undefined;
-    static get(doodad: Doodad): false | FireInfoProvider | undefined;
+    static get(doodad: Doodad): FireInfoProvider | undefined;
     private fireStage;
     constructor(decayProvider: () => number);
     getClass(): string[];

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,6 +12,7 @@ import type { SfxUi } from "@wayward/game/audio/IAudio";
 import { SfxType } from "@wayward/game/audio/IAudio";
 import type { Game } from "@wayward/game/game/Game";
 import type { PlayerState } from "@wayward/game/game/entity/player/IPlayer";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import type { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
 import type { Reference } from "@wayward/game/game/reference/IReferenceManager";
 import type InterruptChoice from "@wayward/game/language/dictionary/InterruptChoice";
@@ -28,6 +29,7 @@ import ScreenManager from "@wayward/game/ui/screen/ScreenManager";
 import ItemStylesheetHandler from "@wayward/game/ui/screen/screens/game/util/item/ItemStylesheet";
 import SelectionHandler from "@wayward/game/ui/screen/screens/menu/component/SelectionHandler";
 import TooltipManager from "@wayward/game/ui/tooltip/TooltipManager";
+import FocusManager from "@wayward/game/ui/util/FocusManager";
 import HighlightManager from "@wayward/game/ui/util/HighlightManager";
 import HudWidthManager from "@wayward/game/ui/util/HudWidthManager";
 import type { InterruptOptions } from "@wayward/game/ui/util/IInterrupt";
@@ -54,6 +56,7 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     readonly serverJoinHandler: ServerJoinHandler;
     readonly saveDropHandler: SaveDropHandler;
     readonly itemStylesheetHandler: ItemStylesheetHandler;
+    readonly focus: FocusManager;
     readonly versionText: Component<HTMLElement> | undefined;
     readonly viewport: Vector2;
     get windowWidth(): number;
@@ -112,7 +115,8 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
      */
     get primaryScreenId(): ScreenId;
     protected onPlay(): void;
-    protected onStopPlay(game: Game, state: PlayerState): Promise<void>;
+    protected onStoppingPlay(game: Game, state: PlayerState): Promise<void>;
+    protected onStopPlay(game: Game, state: PlayerState): void;
     protected onInterruptClosed(): void;
     protected onLanguageChange(_: any, language: string): void;
     protected onToggleScreen(): void;
@@ -124,6 +128,8 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     protected onToggleDevTools(): boolean;
     protected onReloadStylesheets(): boolean;
     protected onReloadTextures(): boolean;
+    protected onScaleDown(api: IBindHandlerApi): boolean;
+    protected onScaleUp(api: IBindHandlerApi): boolean;
     /**
      * Returns a percentage of the screen based on the given number of pixels on the given `Axis`.
      */
@@ -132,5 +138,5 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
      * Returns a number of pixels based on the given percentage of the screen on the given `Axis`.
      */
     getPixelsFromPercentage(axis: Axis, percentage: number): number;
-    inspectReference(reference: Reference): boolean;
+    inspectReference(reference: Reference, context?: InfoProviderContext): boolean;
 }

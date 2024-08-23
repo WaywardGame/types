@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,5 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
-declare const _default: Action<[], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, []>;
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type Item from "@wayward/game/game/item/Item";
+export interface IPickUpItemCanUse extends IActionUsable {
+    pickUpItem: Item;
+}
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.Boolean]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpItemCanUse, [(boolean | undefined)?]>;
 export default _default;

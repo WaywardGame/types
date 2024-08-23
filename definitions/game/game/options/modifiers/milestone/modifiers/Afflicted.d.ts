@@ -1,0 +1,31 @@
+/*!
+ * Copyright 2011-2024 Unlok
+ * https://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * https://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://github.com/WaywardGame/types/wiki
+ */
+import { Stat } from "@wayward/game/game/entity/IStats";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
+import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+export default class Afflicted extends MilestoneModifier {
+    getOptions(): IGameOptionsPartial;
+    getGroup(): MilestoneModifierGroup;
+    instantiate(id: Milestone, player?: Player): AfflictedMilestoneModifierInstance | undefined;
+}
+declare class AfflictedMilestoneModifierInstance extends MilestoneModifierInstance<OptionalDescriptions<Stat, number>> {
+    initialize(): void;
+    private getBaseStatBonuses;
+    private getBaseAttack;
+    private getDefense;
+    private onStatusChange;
+    private applyStatBonus;
+    private getEffectValue;
+    private getStatBaseValue;
+}
+export {};

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -19,5 +19,5 @@ export interface IDisassembleCanUse extends IActionUsable {
     requirementInfo: IRequirementInfo;
     disassemblyResult: IItemDisassembleResult;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.OptionalItemArrayNearby, ActionArgument.Undefined]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDisassembleCanUse, [Item, ((Item | undefined)[] | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.OptionalItemArrayNearby, ActionArgument.Undefined]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void | Promise<void>, IDisassembleCanUse, [Item, ((Item | undefined)[] | undefined)?]>;
 export default _default;

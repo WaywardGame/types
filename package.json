@@ -16,7 +16,7 @@
 	"dependencies": {
 		"@types/fs-extra": "^9.0.13",
 		"@types/node": "^17.0.5",
-		"@wayward/goodstream": "0.7.1"
+		"@wayward/goodstream": "0.9.0"
 	},
 	"devDependencies": {
 		"@wayward/game": "^1.0.0"

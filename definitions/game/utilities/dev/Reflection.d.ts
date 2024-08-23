@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -59,4 +59,8 @@ export default class Reflection {
     export(name: string, which: number): unknown;
     private warn;
     private setLastQueryCloseMatches;
+    findPath(value: unknown): Generator<string[]>;
+    getPrimaryPath(value: unknown): string[] | undefined;
+    hash(value: unknown): string | undefined;
+    getName(value: unknown): string | undefined;
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -26,7 +26,7 @@ import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
-import type { IColorFul, IRGB } from "@wayward/utilities/Color";
+import type { IColorFul, IRGB, IRGBA } from "@wayward/utilities/Color";
 export interface ITerrainDescription extends IModdable {
     passable?: boolean;
     particles?: IRGB;
@@ -154,6 +154,10 @@ export interface ITerrainDescription extends IModdable {
      * When digging this tile, can it be dug down to a maximum depth and show a visual?
      */
     canBeDug?: boolean;
+    /**
+     * If set, this tile will be illuminated in this color and alpha.
+     */
+    lightColor?: IRGBA;
 }
 export interface ITileOld {
     event?: TileEvent[];
@@ -352,3 +356,40 @@ export declare const trackGateDoodadTypes: Set<DoodadType>;
 export declare const DEFAULT_FISH_AVAILABLE = 6;
 export declare const TILE_MAX_CAPACITY = 36;
 export declare const TILE_MAX_DUG_AMOUNT = 8;
+export declare enum FindPathRangeType {
+    SameTile = 0,
+    AdjacentTile = 1,
+    Ranged = 2,
+    InfiniteRange = 3
+}
+export type FindPathRange = FindPathRangeType | IFindPathRange;
+export declare enum FindPathDistanceAlgorithm {
+    /**
+     * The number of adjacent grid cell movements needed to get from A to B.
+     *
+     * This distance formula covers a diamond pattern on a grid.
+     */
+    Manhattan = 0,
+    /**
+     * The measure of a straight line between points A and B.
+     *
+     * This distance formula covers a circular pattern on a grid.
+     */
+    Euclidean = 1,
+    /**
+     * The greater of the distances from points A and B on each axis.
+     *
+     * This distance formula covers a square pattern on a grid.
+     */
+    Chebyshev = 2
+}
+export interface IFindPathRange {
+    distance: number;
+    noLoSRequirement?: true;
+    /**
+     * Defaults to {@link FindPathDistanceAlgorithm.Euclidean}.
+     *
+     * (The measure of a straight line between points A and B, or what would cover a circular pattern on a grid.)
+     */
+    algorithm?: FindPathDistanceAlgorithm;
+}

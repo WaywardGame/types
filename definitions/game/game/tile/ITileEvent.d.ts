@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ICausesStatusEffect } from "@wayward/game/game/entity/IEntity";
+import type { ICausesStatus } from "@wayward/game/game/entity/IEntity";
 import type { IDecayTemperatureRange } from "@wayward/game/game/IGame";
 import type { ILootItem } from "@wayward/game/game/ILoot";
 import type { IObjectDescription } from "@wayward/game/game/IObject";
@@ -20,7 +20,7 @@ import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type { IRGB } from "@wayward/utilities/Color";
-export interface ITileEventDescription extends IObjectDescription, IModdable, ICausesStatusEffect, ITemperatureSource {
+export interface ITileEventDescription extends IObjectDescription, IModdable, ICausesStatus, ITemperatureSource {
     spreadMax?: number;
     decayMax?: number;
     animated?: boolean;

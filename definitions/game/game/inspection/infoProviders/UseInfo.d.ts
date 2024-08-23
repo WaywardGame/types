@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -72,10 +72,10 @@ export default class UseInfo<I extends IUseInfoBase<T, A>, A extends ActionType,
     };
     static of<T extends IDescribed>(): IUseInfoFactory<IUseInfoBase<T, never>, T, never>;
     displayLevel: InfoDisplayLevel | UseInfoDisplayLevelGetter<I, T, A>;
-    ownRow?: true;
+    ownRow?: InfoDisplayLevel;
     private constructor();
     initializeInfo(info: I, context: InfoProviderContext): I & IItemUseInfo<T, A, M>;
     setDisplayLevel(level: InfoDisplayLevel | UseInfoDisplayLevelGetter<I, T, A>): this;
-    setOwnRow(): this;
+    setOwnRow(level?: InfoDisplayLevel): this;
     of<T2 extends T>(): UseInfo<IUseInfoBase<T2, A>, A, M, T2>;
 }

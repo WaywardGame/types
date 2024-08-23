@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,3 +13,6 @@ import MilestoneDefinition from "@wayward/game/game/milestones/MilestoneDefiniti
 import Dictionary from "@wayward/game/language/Dictionary";
 export declare const milestoneDescriptions: Descriptions<Milestone, MilestoneDefinition>;
 export declare const milestoneDictionaries: Partial<Record<Milestone, Dictionary>>;
+export declare namespace Milestones {
+    function initializeDynamic(): void;
+}

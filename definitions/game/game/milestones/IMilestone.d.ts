@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -72,8 +72,12 @@ export declare enum Milestone {
     InternalMerchantsDiscovery = 60,
     InternalDeitySystemDiscovery = 61,
     Invoker = 62,
-    InternalDeitySacrifice = 63,
-    InternalInsulationDiscovery = 64
+    InternalDeityInvoked = 63,
+    InternalInsulationDiscovery = 64,
+    Turbulent = 65,
+    Statistician = 66,
+    Afflicted = 67,
+    Exsanguinated = 68
 }
 export type ExcludeInternalMilestones<MILESTONE extends Milestone> = PickValueKeys<typeof Milestone, MILESTONE> extends `Internal${string}` ? never : MILESTONE;
 export declare enum MilestoneVisibility {
@@ -129,7 +133,7 @@ export declare enum MilestoneDataType {
      *
      * For example, this type could be used to handle staged discovery.
      */
-    Discovery = 4
+    Ordered = 4
 }
 export interface IMilestoneData {
     amount: number;

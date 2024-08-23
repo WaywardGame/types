@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,10 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InspectType } from "@wayward/game/game/inspection/IInspection";
+import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import Inspection from "@wayward/game/game/inspection/Inspection";
 import Island from "@wayward/game/game/island/Island";
+import Translation from "@wayward/game/language/Translation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
@@ -21,9 +23,11 @@ export default class IslandInspection extends Inspection<IVector2> {
     static getIslandName(island?: Island, useGenerated?: boolean): TranslationImpl;
     static handles(type: InspectType, island: unknown): boolean;
     get island(): Island | undefined;
-    constructor(island: Island | IVector2, title?: boolean);
+    constructor(island: Island | IVector2, context?: InfoProviderContext, title?: boolean);
     getId(): string;
-    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
+    protected getTitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getSubtitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getContent(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider | undefined>;
     private getTreasureMaps;
     private getModifiers;
     private getBiome;

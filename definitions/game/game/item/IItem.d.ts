@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,18 +12,19 @@ import type { SfxType } from "@wayward/game/audio/IAudio";
 import type { IDecayTemperatureRange } from "@wayward/game/game/IGame";
 import type { IObjectDescription, Quality } from "@wayward/game/game/IObject";
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
-import type { Deity, DeityReal } from "@wayward/game/game/deity/Deity";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
 import type Human from "@wayward/game/game/entity/Human";
-import type { DamageType, Defense, EntityType, ICastable, MoveType, StatusType } from "@wayward/game/game/entity/IEntity";
+import type { DamageType, Defense, EntityType, ICastable, MoveType } from "@wayward/game/game/entity/IEntity";
 import type { Delay, EquipType, SkillType } from "@wayward/game/game/entity/IHuman";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { IActionApi } from "@wayward/game/game/entity/action/IAction";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { CreatureType, TileGroup } from "@wayward/game/game/entity/creature/ICreature";
-import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type { StatusType } from "@wayward/game/game/entity/status/IStatus";
+import type { IMobCheck, IslandId } from "@wayward/game/game/island/IIsland";
 import type { IMoveItemOptions } from "@wayward/game/game/item/IItemManager";
 import type Item from "@wayward/game/game/item/Item";
 import type Recipe from "@wayward/game/game/item/recipe/Recipe";
@@ -34,16 +35,17 @@ import type { IInsulationDescription, ITemperatureDescription } from "@wayward/g
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
-import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import type { ISerializedTranslation, TranslationArg } from "@wayward/game/language/ITranslation";
 import type Translation from "@wayward/game/language/Translation";
 import type { Article } from "@wayward/game/language/Translation";
 import type Message from "@wayward/game/language/dictionary/Message";
-import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type { ItemNotifierType } from "@wayward/game/renderer/notifier/INotifier";
 import type { SortDirection } from "@wayward/game/save/ISaveManager";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IRGB } from "@wayward/utilities/Color";
+import type { IRange } from "@wayward/utilities/math/Range";
 export interface IItemWeightComponent {
     weightFraction?: number;
     type: ItemType;
@@ -189,7 +191,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     defense?: Defense;
     revert?: ItemType;
     use?: ActionType[];
-    ranged?: IRanged;
+    ranged?: IRangedDescription;
     recipe?: IRecipe;
     /**
      * A list of groups the item should belong too.
@@ -333,24 +335,32 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      */
     magicInert?: true;
     /**
-     * The worth of this item to each deity. Deities not provided use the item's default worth value.
+     * Whether magical enhancement should be disabled
      */
-    deityWorth?: PartialRecord<Deity, number>;
-    /**
-     * The worth of this item to each deity added by each additional quality tier. Defaults to 0.
-     */
-    deityWorthQuality?: PartialRecord<Deity, number>;
+    noEnhance?: true;
     /**
      * The item name to display instead of the item's default translation
      */
-    getName?: (item: Item, article?: Article, options?: Partial<IItemGetNameOptions>) => TranslationImpl | {
-        translation: TranslationImpl;
-        noReference?: boolean;
-    } | undefined;
+    getName?: SupplierOr<Translation | undefined, [item: Item, article?: Article, options?: Partial<IItemGetNameOptions>]>;
     /**
-     * Extra arguments to pass to the item's name translation
+     * Return true to not make a reference icon/link for this item
      */
-    getNameArgs?: (item: Item) => Translation[] | undefined;
+    noNameReference?: SupplierOr<boolean, [item: Item, article?: Article, options?: Partial<IItemGetNameOptions>]>;
+    /**
+     * Extra arguments to pass to the item's name translation.
+     *
+     * **Note that the name will be converted into a plaintext string as part of the pluralisation process.**
+     * If you're trying to add an affix to the name, and need some other reference translation for it, consider adding a new affix.
+     */
+    getNameArgs?: SupplierOr<TranslationArg[] | undefined, [item: Item, article?: Article, options?: Partial<IItemGetNameOptions>]>;
+    /**
+     * Extra arguments to pass to the item's name affix translation
+     */
+    getNameAffixArgs?: SupplierOr<TranslationArg[] | undefined, [item?: Item, article?: Article, options?: Partial<IItemGetNameOptions>]>;
+    /**
+     * Extra arguments to pass to the item's name affix translation
+     */
+    getNameArticle?: SupplierOr<Article | undefined, [item?: Item, article?: Article, options?: Partial<IItemGetNameOptions>]>;
     /**
      * The item type to display instead of the described item type
      */
@@ -387,16 +397,37 @@ export interface IItemOnUse {
     [ActionType.Eat]?: ConsumeItemStats;
     [ActionType.Heal]?: ConsumeItemStats;
     [ActionType.HealOther]?: number;
-    [ActionType.Invoke]?: DeityReal;
+    [ActionType.Invoke]?: IInvokeUse;
     [ActionType.PlaceDown]?: IItemBuild;
     [ActionType.Plant]?: DoodadType;
     [ActionType.Pour]?: TileEventType;
     [ActionType.PourOnYourself]?: TileEventType;
+    [ActionType.SetCreatureAiAll]?: SfxType;
     [ActionType.SetDown]?: TerrainType;
     [ActionType.SmotherFire]?: TerrainType;
     [ActionType.StokeFire]?: number;
     [ActionType.Summon]?: ISummon;
     [ActionType.Uncage]?: ItemType;
+}
+export interface IInvokeUse {
+    deity: DeityReal;
+    /**
+     * The drop rate of this rune compared to other runes for the same deity. Defaults to `1`.
+     */
+    dropWeight?: number;
+    /**
+     * Defaults to 1 day.
+     */
+    cooldownDays?: number;
+    /**
+     * A multiplier for reducing the cooldown of invocation.
+     * If given an `IRange`, the `minimum` value is the multiplier at 0% skill, and the `maximum` value is the multiplier at 100% skill.
+     * If given a `number`, the multiplier is `1.0` at 0% skill, and the `maximum` value is the multiplier at 100% skill.
+     *
+     * Defaults to 1.0 — no cooldown multiplier from theurgy skill.
+     */
+    cooldownTheurgyMultiplier?: number | IRange;
+    use(human: Human, rune: Item): any;
 }
 export interface IItemBuild {
     /**
@@ -580,6 +611,7 @@ export interface ICreateOnBreak {
     creatureType?: CreatureType;
     aberrantCreature?: boolean;
     tileEventType?: TileEventType;
+    itemType?: ItemType;
 }
 export type IDismantleComponent = Record<number, number>;
 export interface IItemChangeIntoOptions {
@@ -590,15 +622,34 @@ export interface IItemChangeIntoOptions {
         remainTamed: boolean;
     };
 }
-export interface IRanged {
+export interface IRangedDescription {
     range: number;
     attack: number;
+    /**
+     * An accuracy of `1.0` (default) means you will shoot directly from the centre of the "from" tile to the centre of the "target" tile.
+     * An accuracy of `0.5` means your shot can go all the way to perpendicular to where you had intended to shoot, to either side.
+     * An accuracy of `0.0` means your shot can go in any direction, no matter where you're targeting.
+     */
+    accuracy?: number;
     ammunitionType?: ItemType | ItemTypeGroup | ((action: IActionApi) => ItemType | ItemTypeGroup | undefined);
     requiredToFire?: ItemType;
     skillType?: SkillType;
     unlimitedAmmunition?: boolean;
     attackMessage?: Message;
     particles?: IRGB | ((action: IActionApi) => IRGB | undefined);
+}
+export interface IRangedResolvedDistance {
+    mobCheck: IMobCheck;
+    bonusRange: number;
+    actionRange: number;
+    skillRange: number;
+}
+export interface IRangedInProgress extends Partial<IRangedDescription> {
+    targetTile?: Tile;
+}
+export interface IRangedResolvedDirection {
+    range: number;
+    direction: Vector2;
 }
 export interface IMagicalPropertyInfo {
     /**
@@ -1551,7 +1602,7 @@ export declare enum ItemType {
     BronzeWaterStill = 758,
     ArmorStand = 759,
     RuneOfEvil = 760,
-    RuneOfNeutrality = 761,
+    RuneOfChaos = 761,
     RuneOfGood = 762,
     GraniteAltar = 763,
     WoodenWheelbarrow = 764,
@@ -1606,19 +1657,21 @@ export declare enum ItemType {
     IronFlute = 813,
     BronzeFlute = 814,
     StrippedLeather = 815,
-    Last = 816
+    ChickenEggshells = 816,
+    PenguinEggshells = 817,
+    Last = 818
 }
 export declare enum ItemTypeExtra {
-    None = 817,
-    TatteredMap_RolledUp = 818,
-    TatteredMap_Completed = 819,
-    WoodenBookcase_25 = 820,
-    WoodenBookcase_50 = 821,
-    WoodenBookcase_75 = 822,
-    WoodenBookcase_100 = 823,
-    RuneOfEvilSplinters = 824,
-    RuneOfGoodCharred = 825,
-    TallySticks = 826
+    None = 819,
+    TatteredMap_RolledUp = 820,
+    TatteredMap_Completed = 821,
+    WoodenBookcase_25 = 822,
+    WoodenBookcase_50 = 823,
+    WoodenBookcase_75 = 824,
+    WoodenBookcase_100 = 825,
+    RuneOfEvilSplinters = 826,
+    RuneOfGoodCharred = 827,
+    TallySticks = 828
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -250,12 +250,13 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
     /**
      * @returns a translation for a magical property type
      */
-    static translateTooltip(type: MagicalNormalPropertyTypes): Translation;
+    static getDescription(type: MagicalNormalPropertyTypes): Translation;
     /**
      * @returns a translation for a magical sub-property type
      */
-    static translateTooltip<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): Translation;
-    static translateTooltip(...identity: MagicalPropertyIdentity): Translation;
+    static getDescription<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): Translation;
+    static getDescription(...identity: MagicalPropertyIdentity): Translation;
+    private static translateInternal;
     hash(): string;
     private clearCachedArrays;
 }

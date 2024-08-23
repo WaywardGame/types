@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -26,8 +26,11 @@ export declare const ACTION_BAR_SLOTS_PER_ROW = 12;
 export interface IActionBarSlotData {
     useOnMove?: true;
     useHovered?: true;
+    useOnHoveredTile?: true;
     actionId?: ActionId;
-    using?: Omit<IUsableActionPossibleUsing, "item" | "doodad" | "vehicle" | "creature" | "npc"> & {
+    using?: Omit<IUsableActionPossibleUsing, "item" | "doodad" | "vehicle" | "creature" | "npc" | "fromTile" | "targetTile"> & {
+        fromTile?: number;
+        targetTile?: number;
         item?: Reference<ReferenceType.Item>;
         doodad?: Reference<ReferenceType.Doodad>;
         vehicle?: Reference<ReferenceType.Doodad>;
@@ -45,28 +48,30 @@ export declare namespace IActionBarSlotData {
     function equals(a?: IActionBarSlotData, b?: IActionBarSlotData): boolean;
 }
 export declare function isActionBarUseOnMoveToggleBoundToClick(...modifiers: Modifier[]): boolean;
-declare module "@wayward/game/game/inspection/InfoProviderContext" {
-    interface InfoProviderContextRegistration {
-        ActionUse: ActionUseContext;
-        ActionSlot: ActionSlotContext;
-    }
-}
 export interface IActionUseContextUsing extends Omit<IUsableActionPossibleUsing, "misc"> {
     misc?(): any[];
 }
 export declare class ActionUseContext extends InfoProviderContext {
-    readonly provided: IActionUseContextUsing;
     readonly context: UsableActionDisplayContext;
+    private readonly stored?;
+    get provided(): IActionUseContextUsing | undefined;
     constructor(provided: IActionUseContextUsing, context?: UsableActionDisplayContext);
 }
 export declare class ActionSlotContext extends InfoProviderContext {
-    readonly actionSlot: ActionSlot;
-    constructor(actionSlot: ActionSlot);
+    private readonly slotRef?;
+    get actionSlot(): ActionSlot | undefined;
+    constructor(actionSlot: ActionSlot, maxDisplayLevel?: InfoDisplayLevel);
     getAction(): UsableAction<IUsableActionRequirements, IUsableActionDefinition> | undefined;
     getUsing(): IUsableActionPossibleUsing;
     isAction(action: ActionType): boolean;
     getActionType(): ActionType | undefined;
     displayLevelExtraUnlessActionType(actionType: ActionType): InfoDisplayLevel.Always | InfoDisplayLevel.Extra;
+}
+declare module "@wayward/game/game/inspection/InfoProviderContext" {
+    interface InfoProviderContextRegistration {
+        ActionUse: ActionUseContext;
+        ActionSlot: ActionSlotContext;
+    }
 }
 export declare enum ActionSlotUpdateReason {
     AutoUseToggle = 0,
@@ -77,5 +82,8 @@ export declare enum ActionSlotUpdateReason {
     ActionsDrawer = 5,
     LoadOrUpdateDirection = 6,
     UsableActionUpdate = 7,
-    HoveredItemChanged = 8
+    HoveredItemChanged = 8,
+    HistoryChange = 9,
+    HistoryItemChange = 10,
+    HoveredTileChange = 11
 }

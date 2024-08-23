@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,6 +13,7 @@ import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type { IItemDescription } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
@@ -24,5 +25,5 @@ export interface ISmotherFireCanUse extends IActionUsable {
     fireTileEvent?: TileEvent;
     smotherableDoodad?: Doodad;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ISmotherFireCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ISmotherFireCanUse, [Item]>;
 export default _default;

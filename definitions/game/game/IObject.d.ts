@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,6 +12,7 @@ import type { BiomeType } from "@wayward/game/game/biome/IBiome";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import type { WorldZ } from "@wayward/utilities/game/WorldZ";
 export interface IObject<T> {
     type: T;
@@ -68,6 +69,14 @@ export declare enum Quality {
     Exceptional = 4,
     Mastercrafted = 5,
     Relic = 6
+}
+export type QualityNatural = Exclude<Quality, Quality.Random | Quality.Mastercrafted>;
+export interface IQualityEvents {
+    qualityChange(quality: Quality, oldQuality: Quality): any;
+}
+export interface IHasQuality {
+    event: IEventEmitter<this, IQualityEvents>;
+    quality?: Quality;
 }
 export interface IContainerOptions {
     placedOnToMessage?: boolean;

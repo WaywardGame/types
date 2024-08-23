@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -78,7 +78,7 @@ export interface IItemManagerEvents extends Events<EntityManager<Item>> {
 }
 export default class ItemManager extends EntityManager<Item, IItemRemoveOptions> {
     protected readonly name = "ItemManager";
-    readonly event: IEventEmitter<this, IItemManagerEvents>;
+    event: IEventEmitter<this, IItemManagerEvents>;
     /**
      * Tiles can be containers and they will always be contained within this container
      */
@@ -197,7 +197,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      */
     moveItemsToContainer(human: Human | undefined, items: Item[], toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult;
     setStacked(human: Human, container: IContainer, itemType: ItemType, stacked?: boolean, atIndex?: number): void;
-    ensureContainerSorted(container?: IContainer, sorter?: ISorter<Item | undefined> | undefined): void;
+    ensureContainerSorted(container?: IContainer, sorter?: ISorter<Item | undefined> | undefined): boolean;
     private ensureStacksStacked;
     private createSorter;
     tryMoveItemsToContainer(human: Human | undefined, items: Item[], toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult | IActionNotUsable;
@@ -214,8 +214,8 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     protected onRemove(): boolean;
     getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): Item[];
     static getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
-    getWeightCapacity(container: IContainer, includeMagic?: boolean): number | undefined;
-    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, updateTables?: boolean, context?: ActionContext): Item;
+    getWeightCapacity(container?: IContainer, includeMagic?: boolean): number | undefined;
+    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, context?: ActionContext): Item;
     createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human): Item;
     getContainedContainers(container: IContainer): IContainer[];
     computeContainerWeight(container: IContainer): number;
@@ -345,13 +345,14 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, article: Article): Translation;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number, article: Article): Translation;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count?: number, article?: Article): Translation;
-    getItemTypeListTranslation(itemTypes: Array<ItemType | ItemTypeGroup>): TranslationImpl;
+    getItemTypeListTranslation(itemTypes: Array<ItemType | ItemTypeGroup>, ender?: ListEnder | false): TranslationImpl;
     /**
      * Maps each item in the given array to its name translation.
      * @param article Whether the item name translation should include an article
      * @param formatter A formatting translation that should be used for each item translation
      */
     getItemTranslations(items: Item[], article?: Article, formatter?: Translation): TranslationImpl[];
+    static list: import("../../language/utility/TranslationListBuilder").ITranslationListBuilder<Item, string, Quality>;
     /**
      * Formats a list translation out of an array of items.
      * @param listEnder The way the list should end (ie `and`, `or`, etc)

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,7 +10,7 @@
  */
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
-import type { CreatureType, IDamageOutcome, IDamageOutcomeInput } from "@wayward/game/game/entity/creature/ICreature";
+import type { CreatureType, IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "@wayward/game/game/entity/creature/ICreature";
 import type Human from "@wayward/game/game/entity/Human";
 import type { DamageType, Defense } from "@wayward/game/game/entity/IEntity";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
@@ -109,6 +109,11 @@ export interface IIslandEvents {
      * @returns `false` to cancel default events
      */
     randomEvents(tile: Tile, human: Human): boolean | undefined | void;
+    /**
+     * Called when damaging an entity
+     * @returns `false` to cancel default damage
+     */
+    damage(target: Human | Creature, damageInfo: IDamageInfo, attackOutcome: number): false | void;
 }
 export interface ILegacySeeds {
     type: SeedType.Legacy;

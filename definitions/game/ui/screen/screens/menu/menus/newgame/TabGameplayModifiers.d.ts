@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -21,7 +21,7 @@ export default class TabGameplayModifiers extends Tab {
     readonly choiceCustomModifiers: Choice<undefined>;
     readonly choiceListClientsModifiers: ChoiceList<Choice<string | number | undefined>, false>;
     private readonly menuRef;
-    get menu(): NewGameMenu;
+    get menu(): NewGameMenu | undefined;
     constructor(menu: NewGameMenu);
     resetMilestoneModifiers(milestoneModifiers?: Iterable<Milestone>): this;
     private onShow;

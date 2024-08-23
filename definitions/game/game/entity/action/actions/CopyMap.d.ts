@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -21,5 +21,5 @@ interface ICopyMapRequirement {
 export declare const copyMapRequirements: ICopyMapRequirement[];
 export declare function hasMapRequirement(requirement: ICopyMapRequirement, human: Human): Item | undefined;
 export declare function canMakeMapCopy(human: Human): boolean;
-declare const _default: Action<[ActionArgument.ItemNearby], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [Item]>;
+declare const _default: Action<[ActionArgument.ItemNearby], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [Item]>;
 export default _default;

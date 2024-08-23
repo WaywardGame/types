@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,19 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { StatusType } from "@wayward/game/game/entity/IEntity";
-import type { Stat } from "@wayward/game/game/entity/IStats";
+import { Stat } from "@wayward/game/game/entity/IStats";
 import { BadTemperatureLevel } from "@wayward/game/game/entity/status/handler/IBadTemperature";
-import StatusEffect, { StatusEffectBadness } from "@wayward/game/game/entity/status/StatusEffect";
+import type { StatusType } from "@wayward/game/game/entity/status/IStatus";
+import Status from "@wayward/game/game/entity/status/Status";
 import type Island from "@wayward/game/game/island/Island";
 import { Temperature, TempType } from "@wayward/game/game/temperature/ITemperature";
-import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-export default abstract class BadTemperatureEffect extends StatusEffect {
+export default abstract class BadTemperatureEffect extends Status {
     protected effectiveTemperature: Temperature;
     register(): void;
-    getBadness(): StatusEffectBadness.Neutral | StatusEffectBadness.Bad;
-    getTranslation(): TranslationImpl;
-    getDescription(): TranslationImpl;
     abstract getLevel(): BadTemperatureLevel;
     abstract getTempType(): TempType;
     refresh(): void;

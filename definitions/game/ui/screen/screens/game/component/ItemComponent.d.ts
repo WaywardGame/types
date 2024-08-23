@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -55,6 +55,7 @@ export declare enum ItemDetailIconLocation {
 }
 export declare enum ItemClasses {
     Main = "item-component",
+    _InHeading = "item-component--in-heading",
     Active = "active",// currently used for crafting & trading
     Icon = "item-component-icon",
     ItemIconIsReal = "item-component-icon-item-is-real",
@@ -63,6 +64,13 @@ export declare enum ItemClasses {
     ActionIconMissingItem = "item-component-icon-action-missing-item",
     ActionIconHasItem = "item-component-icon-action-has-item",
     ActionIconNone = "item-component-icon-action-none",
+    TargetIcon = "item-component-icon-target",
+    TargetIcon_Creature = "item-component-icon-target--creature",
+    TargetIcon_Doodad = "item-component-icon-target--doodad",
+    TargetIcon_Vehicle = "item-component-icon-target--vehicle",
+    TargetIcon_Plant = "item-component-icon-target--plant",
+    TargetIcon_NPC = "item-component-icon-target--npc",
+    TargetIcon_TileEvent = "item-component-icon-target--tile-event",
     SlottedIcon = "item-component-icon-slotted",
     Equipped = "item-component-equipped",
     EquipIcon = "item-component-icon-equip",
@@ -79,6 +87,7 @@ export declare enum ItemClasses {
     StatBar = "item-component-stat-bar",
     StatBars = "item-component-stat-bars-wrapper",
     DecayBar = "item-component-stat-bar-decay",
+    CooldownBar = "item-component-stat-bar-cooldown",
     DurabilityBar = "item-component-stat-bar-durability",
     NearlyDestroyed = "item-component-nearly-destroyed",
     NearlyDecayed = "item-component-nearly-decayed",
@@ -92,7 +101,7 @@ export declare enum ItemClasses {
     StackedVisible = "item-component-stacked-visible"
 }
 export declare namespace ItemClasses {
-    const IconLocation: (enumValue: ItemDetailIconLocation) => `${"item-component-icon-location"}-${Lowercase<("BottomRight" | "TopLeft") & string>}`;
+    const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-topleft" | "item-component-icon-location-bottomright";
 }
 export interface IItemComponentHandlerDescription {
     noDrag?: true;
@@ -139,7 +148,8 @@ export declare enum ItemRefreshType {
     Stacked = 1024,
     Trading = 2048,
     ContainerChange = 4096,
-    All = 8191
+    Cooldown = 8192,
+    All = 16383
 }
 export interface IItemComponentEvents extends Events<Component>, IDraggableEvents, IItemSlotEvents, ISortableDraggableEvents {
     deregisterHighlights(): any;
@@ -167,6 +177,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     readonly magicalIcon: Component<HTMLElement> | undefined;
     readonly protectedIcon: Component<HTMLElement> | undefined;
     readonly actionIcon: Component<HTMLElement> | undefined;
+    readonly targetIcon: Component<HTMLElement> | undefined;
     readonly tradingIcon: Component<HTMLElement> | undefined;
     readonly slottedIcon: Component<HTMLElement> | undefined;
     readonly equipIcon: Component<HTMLElement> | undefined;
@@ -177,13 +188,15 @@ export default class ItemComponent extends Component implements ItemSlot {
     readonly stackQuantityDigit1: Component<HTMLElement> | undefined;
     statBars?: Component;
     decayBar?: Component;
+    cooldownBar?: Component;
     durabilityBar?: Component;
     stackQuantityValue?: number;
     readonly draggable?: Draggable;
     private transient;
     constructor(handler: ItemComponentHandler);
-    private registerTickEndHandlerForDecay;
-    private deregisterTickEndHandlerForDecay;
+    private tickEndHandlerReasons?;
+    private registerTickEndHandler;
+    private deregisterTickEndHandler;
     getItemComponent(): ItemComponent | undefined;
     isStack(): boolean;
     /**
@@ -210,6 +223,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     protected onUpdateDecay(): void;
     protected onUpdateQuality(): void;
     protected onTickEnd(): void;
+    protected onRootedAndAppend(): void;
     protected onLoadedOnIsland(): void;
     protected onActionBarItemSlottedMapUpdate(): void;
     private _itemRef?;
@@ -242,6 +256,8 @@ export default class ItemComponent extends Component implements ItemSlot {
     private refreshStack;
     private lastDecay;
     private refreshDecayBar;
+    private lastCooldown;
+    private refreshCooldownBar;
     private lastDurability;
     private refreshDurabilityBar;
     private lastActionIcon?;

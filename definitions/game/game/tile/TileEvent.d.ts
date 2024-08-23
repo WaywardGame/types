@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -43,7 +43,7 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
     static is(value: any): value is TileEvent;
     get entityType(): EntityType.TileEvent;
     get tileUpdateType(): TileUpdateType;
-    readonly event: IEventEmitter<this, ITileEventEvents>;
+    event: IEventEmitter<this, ITileEventEvents>;
     anim: number;
     fromX: number;
     fromY: number;

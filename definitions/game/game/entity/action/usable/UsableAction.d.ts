@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Deity } from "@wayward/game/game/deity/Deity";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
-import type { ActionId, IUsableActionDefinition, IUsableActionDefinitionExecutable, IUsableActionExecutionContext, IUsableActionItemRequirement, IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, UsableActionUsability } from "@wayward/game/game/entity/action/usable/IUsableAction";
-import { IUsableActionNotUsable, UsableActionDisplayContext, UsableActionExecutionContext } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import type { ActionId, InteractionDistance, IUsableActionDefinition, IUsableActionDefinitionExecutable, IUsableActionExecutionContext, IUsableActionItemRequirement, IUsableActionPossibleUsing, IUsableActionRequirements, UsableActionUsability } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import { IUsableActionNotUsable, IUsableActionUsing, UsableActionDisplayContext, UsableActionExecutionContext } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import UsableActionRegistrar from "@wayward/game/game/entity/action/usable/UsableActionRegistrar";
 import type { ActionWhichTranslation } from "@wayward/game/game/entity/action/usable/UsableActionTranslator";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
@@ -57,8 +57,8 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     is(id?: ActionId): boolean;
     isExecutable(): this is UsableAction<REQUIREMENTS, IUsableActionDefinitionExecutable<REQUIREMENTS>>;
     execute(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): boolean;
-    resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>): Message.UiActionCannotUseRequiresCreature | Message.UiActionCannotUseRequiresDoodad | Message.UiActionCannotUseRequiresItem | Message.UiActionCannotUseRequiresNPC | Message.UiActionCannotUseRequiresVehicle | IUsableActionUsing<REQUIREMENTS>;
-    resolveUsingOrUndefined(player: Player, using: IUsableActionUsing<REQUIREMENTS>): IUsableActionUsing<REQUIREMENTS> | undefined;
+    resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>, fillTiles?: boolean): Message.UiActionCannotUseRequiresCreature | Message.UiActionCannotUseRequiresDoodad | Message.UiActionCannotUseRequiresItem | Message.UiActionCannotUseRequiresNPC | Message.UiActionCannotUseRequiresVehicle | IUsableActionUsing<REQUIREMENTS>;
+    resolveUsingOrUndefined(player: Player, using: IUsableActionUsing<REQUIREMENTS>, fillTiles?: boolean): IUsableActionUsing<REQUIREMENTS> | undefined;
     isUsable(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): UsableActionUsability<REQUIREMENTS>;
     isApplicable(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean, requireItem?: boolean): provided is IUsableActionUsing<REQUIREMENTS>;
     private isItemApplicable;
@@ -88,11 +88,14 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     isItemAction(predicate?: (requirements: IUsableActionItemRequirement) => any): boolean;
     get itemRequirementObject(): IUsableActionItemRequirement | undefined;
     getOrder(using?: IUsableActionPossibleUsing): number;
-    getContextualLevel(using?: IUsableActionPossibleUsing): number;
+    getSubmenu(parentMenuId: string, using: IUsableActionPossibleUsing, actionExecutionContext: IUsableActionExecutionContext, fullUsabilityCheck?: boolean): UsableActionRegistrar | undefined;
+    getContextualLevel(using: IUsableActionPossibleUsing | undefined, parentMenuId: string, actionExecutionContext: IUsableActionExecutionContext): number;
+    private getOwnContextualLevel;
     canUseOnMoveWhenDiscovered(): boolean;
     canUseOnMove(): boolean;
     getInternalActionType(): ActionType | undefined;
-    getAlignment(using?: IUsableActionPossibleUsing): 0 | Deity | undefined;
+    getAlignment(using?: IUsableActionPossibleUsing): DeityReal[];
+    getInteractionDistance(provided?: IUsableActionPossibleUsing): InteractionDistance | undefined;
 }
 export interface IUsableActionFactory<REQUIREMENTS extends IUsableActionRequirements> {
     create: <DEFINITION extends IUsableActionDefinition<REQUIREMENTS>>(action: DEFINITION) => UsableAction<REQUIREMENTS, DEFINITION>;

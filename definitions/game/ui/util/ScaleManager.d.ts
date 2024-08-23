@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,6 +12,7 @@ export default class ScaleManager {
     private scale;
     get scaleNativeFactor(): number;
     constructor();
+    apply(value: number, floor?: number | "pixel"): number;
     /**
      * Returns the minimum scale we allow, 0.5.
      */
@@ -36,6 +37,8 @@ export default class ScaleManager {
      * Requests a new UI scale, a multiplier of the default size.
      */
     setUserSetting(scale: number): void;
+    scaleUp(): boolean;
+    scaleDown(): boolean;
     /**
      * Updates the UI scale based on the current viewport.
      */

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,11 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Creature from "@wayward/game/game/entity/creature/Creature";
-import type Entity from "@wayward/game/game/entity/Entity";
-import type Human from "@wayward/game/game/entity/Human";
-import type NPC from "@wayward/game/game/entity/npc/NPC";
-import type Player from "@wayward/game/game/entity/player/Player";
 export declare enum InfoDisplayLevel {
     Always = 0,
     NonVerbose = 1,
@@ -28,20 +23,18 @@ export declare namespace InfoDisplayLevel {
     type ExtraNonVerbose = CompileTimeInfoDisplayLevel.ExtraNonVerbose;
     const ExtraNonVerbose: ExtraNonVerbose;
     function canDisplay(level: InfoDisplayLevel, ...toDisplay: InfoDisplayLevel[]): boolean;
+    function max(level: InfoDisplayLevel | undefined): InfoDisplayLevel | undefined;
+    function max(a: InfoDisplayLevel | undefined, b: InfoDisplayLevel | undefined): InfoDisplayLevel | undefined;
+    function min(level: InfoDisplayLevel | undefined): InfoDisplayLevel | undefined;
+    function min(a: InfoDisplayLevel | undefined, b: InfoDisplayLevel | undefined): InfoDisplayLevel | undefined;
 }
 export declare enum InfoClass {
+    Header = "info-provider-header",
     Title = "info-provider-title",
     Subtitle = "info-provider-subtitle",
     Description = "info-provider-description",
     List = "info-provider-list",
+    ListItem = "info-provider-list-item",
     MultiTextParagraph = "info-provider-multi-text-paragraph"
-}
-export interface IInspector {
-    asEntity?: Entity;
-    asCreature?: Creature;
-    asHuman?: Human;
-    asNPC?: NPC;
-    asPlayer?: Player;
-    getInspectionId(): string;
 }
 export {};

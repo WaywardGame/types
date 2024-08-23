@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -21,5 +21,5 @@ export default class PriorityQueue<T> {
     isEmpty(): boolean;
     push(data: T, priority: number): void;
     pop(): T | undefined;
-    entries(): IterableIterator<T>;
+    entries(): Generator<T>;
 }

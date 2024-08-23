@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,7 +15,6 @@ import { PauseSource, SaveType, TurnMode } from "@wayward/game/game/IGame";
 import { TickHelper } from "@wayward/game/game/TickHelper";
 import type { BiomeTypes } from "@wayward/game/game/biome/IBiome";
 import { BiomeType } from "@wayward/game/game/biome/IBiome";
-import AlignmentManager from "@wayward/game/game/deity/AlignmentManager";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type Human from "@wayward/game/game/entity/Human";
 import type { Defense } from "@wayward/game/game/entity/IEntity";
@@ -71,6 +70,8 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      * The version the save was originally created on
      */
     version: Version.String;
+    lastSaveVersion?: Version.String;
+    lastSaveBuildTime?: number;
     readonly interval = 16.6666;
     readonly autoSave: AutoSave;
     readonly commandManager: CommandManager;
@@ -90,7 +91,6 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     readonly islands: IslandManager;
     readonly playerManager: PlayerManager;
     readonly references: ReferenceManager;
-    readonly alignment: AlignmentManager;
     absoluteTime: number;
     challengeCollection?: ChallengeModifiersCollection;
     initialThumbnailTimeout: number | undefined;
@@ -172,7 +172,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     isTurnModeAllowed(turnMode: TurnMode): boolean;
     getTickSpeed(): number;
     setTickSpeed(tickSpeed: number): void;
-    selectBiome(position: IVector2, random: Random): BiomeTypes;
+    selectBiome(position: IVector2 | undefined, random: Random): BiomeTypes;
     getGameMode(): GameMode;
     getGameOptionsBeforeModifiers(): IGameOptions;
     getGameOptions(): IGameOptions;

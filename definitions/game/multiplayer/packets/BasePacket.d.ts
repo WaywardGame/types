@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -82,6 +82,8 @@ export default abstract class BasePacket {
     protected writeVector2(value: IVector2): void;
     protected readVector3(): IVector3;
     protected writeVector3(value: IVector3): void;
+    protected writeOptionalVector3(value?: IVector3): void;
+    protected readOptionalVector3(): IVector3 | undefined;
     protected readContainer(): IContainer;
     protected writeContainer(island: Island, value: IContainer): void;
     protected readCreature(): Creature | undefined;
@@ -116,6 +118,8 @@ export default abstract class BasePacket {
     protected writeTileEvent(value: TileEvent): void;
     protected readTile(): Tile;
     protected writeTile(value: Tile): void;
+    protected readOptionalTile(): Tile | undefined;
+    protected writeOptionalTile(value?: Tile): void;
     protected readTileArray(): Tile[];
     protected writeTileArray(value: Tile[]): void;
     protected readObject(): unknown;

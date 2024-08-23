@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,9 +15,10 @@ export declare enum CurseComponent {
     HighestAttack = 1,
     HighestDefense = 2,
     CumulativeEvilCrafting = 3,
-    Equipment = 4
+    Equipment = 4,
+    Modifier = 5
 }
-export declare const CURSE_WEIGHTS: Record<CurseComponent, number>;
+export declare const CURSE_WEIGHTS: PartialRecord<CurseComponent, number>;
 export declare const CURSE_ATTACK_MAX = 50;
 export declare const CURSE_DEFENSE_MAX = 100;
 export declare const CURSE_CRAFTING_MAX = 100;

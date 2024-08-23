@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,5 +11,5 @@
 import { Action } from "@wayward/game/game/entity/action/Action";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import Creature from "@wayward/game/game/entity/creature/Creature";
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Creature, ActionArgument.NPC], ActionArgument.String], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [Creature | import("../../../doodad/Doodad").default | import("../../../item/Item").default | import("../../npc/NPC").default, string]>;
+declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad, ActionArgument.Creature, ActionArgument.NPC], ActionArgument.String], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [Creature | import("../../../doodad/Doodad").default | import("../../../item/Item").default | import("../../npc/NPC").default, string]>;
 export default _default;

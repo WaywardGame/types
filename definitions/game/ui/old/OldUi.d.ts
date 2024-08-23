@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -28,8 +28,6 @@ export default class OldUi {
     hideInGameScreen(): void;
     onWindowResize(): void;
     isInGameScreenShown(): boolean;
-    isOptionsOverlayShown(): boolean;
-    isOptionsOverlayEnabled(): boolean;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent, force?: boolean): void;
     shouldRefreshMods(): boolean;

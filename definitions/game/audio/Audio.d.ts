@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,9 +9,9 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Music, SfxType } from "@wayward/game/audio/IAudio";
-import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type EnumCursor from "@wayward/game/utilities/enum/EnumCursor";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export declare enum Fading {
     None = 0,
     In = 1,

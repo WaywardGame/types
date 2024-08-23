@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -26,21 +26,23 @@ import type Item from "@wayward/game/game/item/Item";
 import type { EnumReferenceResolved } from "@wayward/game/game/reference/IReferenceManager";
 import { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
+import Translation from "@wayward/game/language/Translation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export default class ActionInspection extends Inspection<ActionId | undefined> {
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     static getAction(id: ActionId): UsableAction<IUsableActionRequirements, IUsableActionDefinition> | undefined;
     static getActionNameWithTier(id: ActionId, context: UsableActionDisplayContext, provided: IUsableActionPossibleUsing | undefined, resolveUsing: boolean): TranslationImpl | undefined;
     private static getTranslation;
     static getRuneInfo(id: ActionId, itemType?: ItemType, item?: Item): SimpleInfoProvider | undefined;
-    constructor(value?: ActionId | EnumReferenceResolved<ReferenceType.Action>);
+    constructor(value?: ActionId | EnumReferenceResolved<ReferenceType.Action>, context?: InfoProviderContext);
     private get using();
     private getAction;
     private get item();
     getId(): string;
     private getActionId;
-    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
+    protected getTitle(context: InfoProviderContext): Translation;
+    protected getSubtitle(context: InfoProviderContext): Translation | undefined;
+    protected getContent(context: InfoProviderContext): ArrayOr<Translation | InfoProvider | undefined>;
     private getActionSlotItemMode;
     private getTranslation;
     private getActionDiscovered;

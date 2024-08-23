@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -20,6 +20,7 @@ export default class SaveDataGlobal {
     static defaultOptions: IOptions;
     gameCrafted: SaferNumberIndexedObject<ICrafted>;
     gameLastPlayedVersion: Version.String;
+    gameLastPlayedBuildTime?: number;
     gameHighscores: IHighscore[];
     gamePlayedCount: number;
     options: IOptions;
@@ -32,7 +33,7 @@ export default class SaveDataGlobal {
     utilitiesEnumsAllocated: Record<string, EnumInfo>;
     savedDialogInfo: Record<string, IDialogInfo | undefined>;
     multiplayerBannedPlayers: string[];
-    multiplayerPreviousGames: Record<string, IMultiplayerPreviousGame | undefined>;
+    multiplayerPreviousGames: PartialRecord<string, IMultiplayerPreviousGame>;
     multiplayerMessageOfTheDay: string;
     characters: ISavedCharacter[];
     ui: Record<string, any>;

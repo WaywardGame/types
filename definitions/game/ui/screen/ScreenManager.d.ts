@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -76,7 +76,7 @@ export default class ScreenManager extends EventEmitter.Host<IScreenManagerEvent
     /**
      * Hides the given screen, or the current screen if none is passed.
      */
-    hide(screen: ScreenId | Screen): void;
+    hide(screen: ScreenId | Screen): Promise<void> | void;
     /**
      * Returns a promise that resolves when the given screen is shown.
      */

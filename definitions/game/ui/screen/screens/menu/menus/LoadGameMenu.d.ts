@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -33,6 +33,7 @@ export default class LoadGameMenu extends Menu {
     private addSlot;
     private deleteSlot;
     private sortSlots;
+    private unselectSlots;
     private updateSelectedSlots;
     private deleteSelectedSlots;
 }

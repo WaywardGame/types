@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -22,11 +22,16 @@ export declare function convertStringToSeed(seed: string | number): number;
  * Creates a seeded random generator with the latest one available
  */
 export declare function createLatestSeededRandom(requiresSynchronization: RandomSychronizationCheck, seed?: Uint16Array | number): Random<PCGSeededGenerator> | Random<LegacySeededGenerator>;
+interface SeededGeneratorMap {
+    [SeedType.PCG]: PCGSeededGenerator;
+    [SeedType.Legacy]: LegacySeededGenerator;
+}
 /**
  * Creates seeded random generator for the given type
  */
-export declare function createSeededRandom(seedType: SeedType, requiresSynchronization: RandomSychronizationCheck, seed?: Uint16Array | number): Random<PCGSeededGenerator> | Random<LegacySeededGenerator>;
+export declare function createSeededRandom<TYPE extends SeedType = SeedType>(seedType: TYPE, requiresSynchronization: RandomSychronizationCheck, seed?: Uint16Array | number): Random<SeededGeneratorMap[TYPE]>;
 /**
  * Random without seeds
  */
 export declare const generalRandom: Random<IRandomGenerator<any>>;
+export {};

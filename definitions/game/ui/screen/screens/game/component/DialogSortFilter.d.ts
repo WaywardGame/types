@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -41,7 +41,7 @@ export default class DialogSortFilter<SORT extends number | "custom"> extends Co
     private readonly translate;
     static create<SORT extends number>(enumObject: Record<PropertyKey, SORT | string>, defaultSort: SORT, translate: (sort: SORT, simple: boolean) => Translation, includeCustomSort: true): DialogSortFilter<SORT | "custom">;
     static create<SORT extends number>(enumObject: Record<PropertyKey, SORT | string>, defaultSort: SORT, translate: (sort: SORT, simple: boolean) => Translation, includeCustomSort?: false): DialogSortFilter<SORT>;
-    readonly event: IEventEmitter<this, IDialogSortFilterEvents<SORT>>;
+    event: IEventEmitter<this, IDialogSortFilterEvents<SORT>>;
     private sort?;
     private sortDirection;
     readonly textWrapper: Component<HTMLElement>;

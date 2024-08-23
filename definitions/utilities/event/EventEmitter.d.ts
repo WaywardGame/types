@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -63,6 +63,8 @@ export interface IEventEmitter<H = any, E = any> {
     subscribeNext<K extends ArrayOr<keyof E>>(event: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number): H;
     unsubscribe<K extends ArrayOr<keyof E>>(event: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number): boolean;
     waitFor<K extends ArrayOr<keyof E>>(events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
+    race<K extends ArrayOr<keyof E>>(raceWith: Promise<any>, events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
+    race<K extends ArrayOr<keyof E>>(ms: number, events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
     hasHandlersForEvent(...events: Array<keyof E>): boolean;
@@ -94,6 +96,7 @@ declare class EventEmitter<H, E> {
     subscribeNext<K extends ArrayOr<keyof E>>(events: K, handler: keyof H | Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number): H;
     unsubscribe<K extends ArrayOr<keyof E>>(events: K, handler: keyof H | Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number): boolean;
     waitFor<K extends ArrayOr<keyof E>>(events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
+    race<K extends ArrayOr<keyof E>>(raceWith: number | Promise<any>, events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
     hasHandlersForEvent(...events: Array<keyof E>): boolean;

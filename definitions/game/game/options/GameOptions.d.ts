@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,7 +13,7 @@ import type { ItemType } from "@wayward/game/game/item/IItem";
 import type { IGameOptions, IGameOptionsSkill } from "@wayward/game/game/options/IGameOptions";
 import { GameMode } from "@wayward/game/game/options/IGameOptions";
 import type Version from "@wayward/game/utilities/Version";
-export declare const CREATURE_SPAWN_LIMIT = 300;
+export declare const CREATURE_SPAWN_LIMIT = 15;
 declare namespace GameOptions {
     export function getDefault(difficulty?: GameMode, seed?: number): IGameOptions;
     enum TravelingEffectStrategy {
@@ -51,7 +51,7 @@ declare namespace GameOptions {
             };
         };
     }
-    export function upgrade(options: IGameOptions, version: Version.Info): string[];
+    export function upgrade(options: IGameOptions, version: Version.Info): void;
     export {};
 }
 export default GameOptions;

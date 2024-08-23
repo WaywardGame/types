@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,12 +12,13 @@ import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import TreasureGathering from "@wayward/game/game/entity/action/actions/helper/TreasureGathering";
-import type { IRanged } from "@wayward/game/game/item/IItem";
+import type { IRangedDescription } from "@wayward/game/game/item/IItem";
 export interface ICastCanUse extends IActionUsable {
-    ranged: IRanged;
+    ranged: IRangedDescription;
+    accuracy: number;
     itemRange: number;
     maxFishingRange: number;
     canGatherTreasure?: TreasureGathering.ICanGather;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ICastCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ICastCanUse, [import("../../../item/Item").default]>;
 export default _default;

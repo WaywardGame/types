@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,17 +10,24 @@
  */
 import Creature from "@wayward/game/game/entity/creature/Creature";
 import { InspectType } from "@wayward/game/game/inspection/IInspection";
+import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import EntityInspection from "@wayward/game/game/inspection/inspections/EntityInspection";
 import type Tile from "@wayward/game/game/tile/Tile";
+import Translation from "@wayward/game/language/Translation";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export default class CreatureInspection extends EntityInspection<Creature> {
-    static getFromTile(tile: Tile): never[] | CreatureInspection;
+    static getFromTile(tile: Tile, context?: InfoProviderContext): never[] | CreatureInspection;
     static handles(type: InspectType, creature: unknown): boolean;
-    constructor(creature: Creature);
+    constructor(creature: Creature, context?: InfoProviderContext);
+    private updateDangerLevel;
     getId(): string;
-    getBorder(): "var(--color-tamed)" | "var(--color-aberrant)" | undefined;
-    get(context: InfoProviderContext): ArrayOr<InfoProvider | TranslationGenerator>;
+    getBorder(): string | undefined;
+    protected getTitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getSubtitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getColorContext(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getContent(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider | undefined>;
     private getCreatureCombatDetails;
+    private getStatuses;
 }

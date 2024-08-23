@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { Game } from "@wayward/game/game/Game";
 import type { IPlayOptions } from "@wayward/game/game/IGame";
 import { ModState, ModType } from "@wayward/game/mod/IModInformation";
@@ -16,6 +15,7 @@ import type { ICanLoadInfo, IModManagerEvents } from "@wayward/game/mod/IModMana
 import { ModLoadFailureReason } from "@wayward/game/mod/IModManager";
 import { ModInformation } from "@wayward/game/mod/ModInformation";
 import type { IServerMod } from "@wayward/hosts/shared/interfaces";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     private readonly game;
     private readonly _mods;

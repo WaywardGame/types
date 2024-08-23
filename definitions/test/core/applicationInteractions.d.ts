@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -65,7 +65,6 @@ export default class ApplicationInteractions {
     clickButtonIfClickable(name: string): Promise<boolean>;
     setNewGameSeed(seed: string | number): Promise<void>;
     setMultiplayerIdentifier(identifier: string): Promise<void>;
-    runItemAction(itemId: number, action: string): Promise<void>;
     private importGame;
     /**
      * Executes a Move action

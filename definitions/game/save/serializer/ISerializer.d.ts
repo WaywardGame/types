@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -119,13 +119,15 @@ export declare enum Types {
     StringTokenizer = 46,
     MagicalPropertyManager = 47,
     ItemMapManager = 48,
-    WorldLayer = 49
+    WorldLayer = 49,
+    CreatureZone = 50
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_SAVE_PROPERTY_FLAGS: unique symbol;
 export declare const SYMBOL_SAVE_ALL_PROPERTIES: unique symbol;
 export declare const SYMBOL_JIT_DESERIALIZE_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_JIT_PROPERTIES: unique symbol;
+export declare const SYMBOL_DISALLOW_SERIALIZATION: unique symbol;
 export declare enum SavePropertyFlag {
     /**
      * Normal property
@@ -156,6 +158,7 @@ export declare enum SavePropertyFlag {
     All = 65535
 }
 export declare function SaveProperty(flags?: SavePropertyFlag): PropertyDecorator;
+export declare function DisallowSerialization(): ClassDecorator;
 export declare function SaveAllProperties(): ClassDecorator;
 export declare function JITDeserializeSaveProperties(): ClassDecorator;
 /**

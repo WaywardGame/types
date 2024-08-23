@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { WorldZ } from "@wayward/utilities/game/WorldZ";
-declare const worldLayers: Map<WorldZ.Cave | WorldZ.Overworld, string>;
+declare const worldLayers: Map<WorldZ.Cave | WorldZ.Surface, string>;
 export default worldLayers;

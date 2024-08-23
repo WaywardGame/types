@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,16 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { TurnMode } from "@wayward/game/game/IGame";
 import type { InspectType } from "@wayward/game/game/inspection/IInspection";
 import type { AutoSaveMode } from "@wayward/game/game/meta/IAutoSave";
 import type { GameMode, IGameOptions } from "@wayward/game/game/options/IGameOptions";
 import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import type { IMultiplayerOptions } from "@wayward/game/multiplayer/IMultiplayer";
 import type Bindable from "@wayward/game/ui/input/Bindable";
 import type { Binding } from "@wayward/game/ui/input/Bindings";
 import type { FontStyle } from "@wayward/game/ui/IUi";
 import type UiExperiment from "@wayward/game/ui/UiExperiments";
-import type { TurnMode } from "@wayward/game/game/IGame";
-import type { IMultiplayerOptions } from "@wayward/game/multiplayer/IMultiplayer";
 export interface IOptions {
     alternatingDirectionMovement: boolean;
     autoAttack: boolean;
@@ -41,6 +41,7 @@ export interface IOptions {
     disableSpritePack: boolean;
     disableUIEffects: boolean;
     disableUIOpacity: boolean;
+    discoveredEverything: boolean;
     dropIntoContainers: boolean;
     dropLocation: DropLocation;
     dropOnDisassemble: boolean;
@@ -58,6 +59,7 @@ export interface IOptions {
     musicPlaylist: MusicPlaylist;
     muteEffects: boolean;
     muteMusic: boolean;
+    muteWhileNotFocused: boolean;
     playInputSoundWhenTyping: boolean;
     realTimeTickSpeed: number;
     renderer: "webgl" | "webgpu";
@@ -109,29 +111,29 @@ export declare enum TooltipVisibilityOption {
     AlwaysShowMoreInformation = 2,
     Default = 1
 }
-export type IOptionsOld = Partial<Pick<IOptions, "bindings">> & Partial<{
-    alwaysShowMoreInformation: boolean;
-    keyBinds: Record<number, number>;
-    bindings: IBindingsOld;
-    directionTurnDelay: boolean;
-    fontStyle: boolean;
-    developerLogging: boolean;
-    hints: boolean;
-    skipIntro: boolean;
-    worldTooltips: boolean;
-    dropUnderYourself: boolean;
-    openNotesAutomatically: boolean;
-    tooltipsCreatures: boolean;
-    tooltipsDoodads: boolean;
-    tooltipsNPCs: boolean;
-    tooltipsTerrain: boolean;
-    tooltipsItems: boolean;
-    allowDiagonalMovement: boolean;
-    disableUIAnimations: boolean;
-    enableAutoSave: boolean;
-    protectedCraftingItems: boolean;
-    protectedCraftingItemContainers: boolean;
-}>;
+export interface IOptionsOld {
+    alwaysShowMoreInformation?: boolean;
+    keyBinds?: Record<number, number>;
+    bindings?: IBindingsOld;
+    directionTurnDelay?: boolean;
+    fontStyle?: boolean;
+    developerLogging?: boolean;
+    hints?: boolean;
+    skipIntro?: boolean;
+    worldTooltips?: boolean;
+    dropUnderYourself?: boolean;
+    openNotesAutomatically?: boolean;
+    tooltipsCreatures?: boolean;
+    tooltipsDoodads?: boolean;
+    tooltipsNPCs?: boolean;
+    tooltipsTerrain?: boolean;
+    tooltipsItems?: boolean;
+    allowDiagonalMovement?: boolean;
+    disableUIAnimations?: boolean;
+    enableAutoSave?: boolean;
+    protectedCraftingItems?: boolean;
+    protectedCraftingItemContainers?: boolean;
+}
 export interface IHighscore {
     name: string;
     message: ISerializedTranslation;

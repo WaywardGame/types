@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -20,8 +20,8 @@ export declare class ApplicationDom {
     getElement(selector: string): Promise<WebdriverIO.Element>;
     getElements(selector: string, onlyVisible?: boolean): Promise<WebdriverIO.Element[]>;
     isClickableElement(element: WebdriverIO.Element): Promise<boolean>;
-    clickIfVisibleElement(selector: string): Promise<WebdriverIO.Element | undefined>;
-    getVisibleElements(selector: string, logNotVisible?: boolean): Promise<WebdriverIO.Element[] | undefined>;
+    clickIfVisibleElement(selector: string, logNotVisible?: boolean): Promise<WebdriverIO.Element | undefined>;
+    getVisibleElements(selector: string, logNotVisible?: boolean, logVisible?: boolean): Promise<WebdriverIO.Element[] | undefined>;
     getVisibleAndClickableElement(selector: string, logNotVisible?: boolean): Promise<WebdriverIO.Element | undefined>;
     waitForVisibleThenClick(selector: string, timeout?: number, indent?: boolean, clickOnce?: boolean): Promise<void>;
     waitForVisibleElements(selector: string, timeout?: number, scrollIntoView?: boolean): Promise<WebdriverIO.Element[]>;

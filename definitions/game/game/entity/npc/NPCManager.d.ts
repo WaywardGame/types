@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -41,7 +41,7 @@ export interface INPCManagerEvents extends Events<EntityManager<NPC>> {
 export default class NPCManager extends EntityManager<NPC> {
     protected readonly name = "NPCManager";
     protected readonly reregisterObjectsForMemoryLeaks = true;
-    readonly event: IEventEmitter<this, INPCManagerEvents>;
+    event: IEventEmitter<this, INPCManagerEvents>;
     readonly playerLikeNpcs: NPC[];
     private readonly spawnIntervals;
     loadEntity(npc: NPC): void;

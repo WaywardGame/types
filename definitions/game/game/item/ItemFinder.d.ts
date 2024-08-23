@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -28,25 +28,49 @@ export interface IItemFinderEvents {
     track(): any;
     dispose(): any;
 }
-export default class ItemFinder extends EventEmitter.Host<IItemFinderEvents> {
+declare class ItemFinder extends EventEmitter.Host<IItemFinderEvents> {
     private readonly options;
-    private readonly human;
-    private readonly container;
+    private readonly humanRef;
+    private readonly containerRef;
     private trackedContainers?;
     private trackedItems?;
     private foundItemIds?;
+    get human(): Human | undefined;
+    get container(): IContainer | undefined;
     readonly observe: Observer.IRegistrar<this>;
     constructor(human: Human, container: IContainer, options?: IItemFinderOptions);
     best(): Item | undefined;
     all(): Item[];
+    markDirty(): void;
     track(): this;
     dispose(): this;
-    markDirty(): void;
-    private compute;
     protected onItemStateChange(item: Item): void;
     protected onContainerItemAdd(items: ItemManager, itemsAdded: Item[], containerAddedTo: IContainer): void;
     protected onContainerItemRemove(items: ItemManager, itemsRemoved: Item[], containerRemovedFrom?: IContainer): void;
     protected onPlayerEvent(player: Player): void;
+    private compute;
     private trackContainer;
     private untrackContainer;
 }
+declare namespace ItemFinder {
+    interface IBusEvents {
+        dispose(): any;
+    }
+    class Bus extends EventEmitter.Host<IBusEvents> {
+        private static readonly humanBuses;
+        static compute(human: Human): Bus;
+        static get(human?: Human): Bus | undefined;
+        private readonly itemFinders;
+        private readonly humanRef;
+        get human(): Human | undefined;
+        constructor(human: Human);
+        register(finder: ItemFinder): void;
+        deregister(finder: ItemFinder): void;
+        dispose(): void;
+        protected onItemStateChange(item: Item): void;
+        protected onContainerItemAdd(items: ItemManager, itemsAdded: Item[], containerAddedTo: IContainer): void;
+        protected onContainerItemRemove(items: ItemManager, itemsRemoved: Item[], containerRemovedFrom?: IContainer): void;
+        protected onPlayerEvent(player: Player): void;
+    }
+}
+export default ItemFinder;

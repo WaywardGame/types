@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Deity } from "@wayward/game/game/deity/Deity";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type Entity from "@wayward/game/game/entity/Entity";
 import { SkillType } from "@wayward/game/game/entity/IHuman";
@@ -45,7 +45,7 @@ export default class Recipe {
     getLevel(): RecipeLevel;
     setLevel(level: RecipeLevel): this;
     getRuneChance(): RuneChance;
-    setRuneChance(alignment: Deity, chance: number): this;
+    setRuneChance(alignment: ArrayOr<DeityReal>, chance: number): this;
     canCraft(crafter: Crafter): boolean;
     canCraft(entity: Entity, items: Item[]): boolean;
     requirementsStatus(entity: Entity, items: Item[]): Stream<[RecipeRequirement<any>, boolean]>;

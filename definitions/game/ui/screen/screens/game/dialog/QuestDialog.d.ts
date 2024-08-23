@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -17,7 +17,7 @@ export interface QuestDialogEvents extends Events<Dialog> {
     showQuest(quest: QuestInstance): any;
 }
 export default class QuestDialog extends Dialog {
-    readonly event: IEventEmitter<this, QuestDialogEvents>;
+    event: IEventEmitter<this, QuestDialogEvents>;
     private readonly questsActiveWrapper;
     private readonly questsActiveHeading;
     private readonly questsCompletedWrapper;

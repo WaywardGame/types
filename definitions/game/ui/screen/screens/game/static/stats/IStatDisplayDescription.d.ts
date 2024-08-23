@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -76,6 +76,8 @@ export interface IStatDisplayDescription extends IModdable, IHasImagePath<string
      */
     tooltip?: Reference | ((tooltip: Tooltip, entity: EntityWithStats, stat: IStat) => any);
     subscriber?: (events: IStatDisplayDescriptionSubscriber, refresh: () => void) => any;
+    getValue?(entity?: EntityWithStats): number | undefined;
+    getMax?(entity?: EntityWithStats): number | undefined;
 }
 export interface IStatDisplayDescriptionSubscriber {
     removed: Promise<[]>;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -24,7 +24,8 @@ export declare enum StatNotificationType {
     Thirst = 5,
     Zero = 6,
     Miss = 7,
-    Immune = 8
+    Immune = 8,
+    Regen = 9
 }
 export declare enum ItemNotifierType {
     Neutral = 0,
@@ -48,11 +49,8 @@ export declare enum NotifierIconType {
     Warning = 4,
     Decay = 5,
     Talk = 6,
-    DeityAlignmentGood = 7,
-    DeityAlignmentEvil = 8,
-    DeityAlignmentNeutral = 9,
-    DualWieldEnabled = 10,
-    DualWieldDisabled = 11
+    DualWieldEnabled = 7,
+    DualWieldDisabled = 8
 }
 export declare enum MarkerIconType {
     Tamed = 0

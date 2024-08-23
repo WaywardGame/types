@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import { GameMode } from "@wayward/game/game/options/IGameOptions";
 import ChoiceList, { Choice } from "@wayward/game/ui/component/ChoiceList";
 import { Tab } from "@wayward/game/ui/screen/screens/menu/component/Menu";
 import CustomGameOptionsMenu from "@wayward/game/ui/screen/screens/menu/menus/newgame/CustomGameOptionsMenu";
 import type NewGameMenu from "@wayward/game/ui/screen/screens/menu/menus/NewGameMenu";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export default class TabGameMode extends Tab {
     customGameOptionsMenu: CustomGameOptionsMenu;
     readonly gameMode: ChoiceList<DifficultyChoice, false>;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,5 +13,4 @@ export interface IColorSection extends IStringSection {
     color: string;
 }
 declare const colorSegment: ISegment;
-export declare function colorize(sections: IStringSection[], color: string): IColorSection[];
 export default colorSegment;

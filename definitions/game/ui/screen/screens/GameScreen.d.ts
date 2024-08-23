@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,6 +12,9 @@ import type { Game } from "@wayward/game/game/Game";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type Human from "@wayward/game/game/entity/Human";
+import type { ActionId, IUsableActionExecutionContext, IUsableActionPossibleUsing, UsableActionUsability } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import { UsableActionExecutionContext } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IIslandTickOptions } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
@@ -23,9 +26,9 @@ import Tile from "@wayward/game/game/tile/Tile";
 import Component from "@wayward/game/ui/component/Component";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
 import Screen from "@wayward/game/ui/screen/Screen";
-import AlignmentTooltipHandler from "@wayward/game/ui/screen/screens/game/AlignmentTooltipHandler";
 import { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
-import { QuadrantComponentId } from "@wayward/game/ui/screen/screens/game/IGameScreenApi";
+import type { IUsableActionExecutionOptions } from "@wayward/game/ui/screen/screens/game/IGameScreenApi";
+import { QuadrantComponentId, UsableActionExecutionResult } from "@wayward/game/ui/screen/screens/game/IGameScreenApi";
 import WorldTooltipHandler from "@wayward/game/ui/screen/screens/game/WorldTooltipHandler";
 import ContainerBucket from "@wayward/game/ui/screen/screens/game/component/ContainerBucket";
 import { Quadrant } from "@wayward/game/ui/screen/screens/game/component/IQuadrantComponent";
@@ -36,26 +39,33 @@ import MenuBar from "@wayward/game/ui/screen/screens/game/static/MenuBar";
 import type Messages from "@wayward/game/ui/screen/screens/game/static/Messages";
 import Placeholder from "@wayward/game/ui/screen/screens/game/static/Placeholder";
 import type StatsQuadrant from "@wayward/game/ui/screen/screens/game/static/Stats";
-import MovementHandler from "@wayward/game/ui/screen/screens/game/util/movement/MovementHandler";
+import { ActionUseContext } from "@wayward/game/ui/screen/screens/game/static/actions/IActionBar";
+import InteractionManager from "@wayward/game/ui/screen/screens/game/util/movement/InteractionManager";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type Stream from "@wayward/goodstream";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export type IDialogStates = {
     [key in `${DialogId}` | `${DialogId},${string}`]: boolean;
 };
 declare global {
     let gameScreen: GameScreen | undefined;
 }
+export interface IGameScreenEvents extends Events<Screen> {
+    toggleScreenshotMode(enabled: boolean): any;
+}
 export default class GameScreen extends Screen {
+    event: IEventEmitter<this, IGameScreenEvents>;
+    /** Current locations for visible quadrant components */
     quadrantComponentQuadrants: OptionalDescriptions<QuadrantComponentId, Quadrant>;
+    /** Saved/previous locations for quadrant components that were hidden */
+    quadrantComponentHeldQuadrants: OptionalDescriptions<QuadrantComponentId, Quadrant>;
     menuBar: MenuBar;
     stats: StatsQuadrant;
     actionBar: ActionBar | undefined;
     messages: Messages;
-    movementHandler: MovementHandler;
+    interactionManager: InteractionManager;
     worldTooltipHandler: WorldTooltipHandler;
-    readonly alignmentTooltipHandler: AlignmentTooltipHandler;
     private quadrantContainer;
-    private readonly quadrantMap;
     private readonly quadrantComponents;
     private readonly gameComponent;
     private readonly effects;
@@ -69,8 +79,10 @@ export default class GameScreen extends Screen {
     get isTwoColumn(): boolean;
     private get gameCanvasComponent();
     getQuadrantComponents(): Stream<QuadrantComponent>;
-    getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: QuadrantComponentId): (never extends C ? QuadrantComponent : C extends never[] ? QuadrantComponent | C : {} extends C ? QuadrantComponent | Partial<QuadrantComponent> : QuadrantComponent | C) | undefined;
-    getQuadrantComponentInQuadrant(quadrant: Quadrant): QuadrantComponent | Placeholder | undefined;
+    getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: QuadrantComponentId): (never extends C ? QuadrantComponent : C extends never[] ? QuadrantComponent | C : Empty extends C ? QuadrantComponent | Partial<QuadrantComponent> : QuadrantComponent | C) | undefined;
+    getQuadrantComponentQuadrants(includeHeldLocations?: boolean): Array<[QuadrantComponentId, Quadrant?]>;
+    getQuadrantComponentInQuadrant(quadrant: Quadrant, includeHeldLocations: boolean, includePlaceholders?: false): QuadrantComponent | undefined;
+    getQuadrantComponentInQuadrant(quadrant: Quadrant, includeHeldLocations: boolean, includePlaceholders?: boolean): QuadrantComponent | Placeholder | undefined;
     getQuadrantContainer(): Component;
     isMouseWithin(): Component | undefined;
     mouseStartWasWithin(api: IBindHandlerApi): boolean | undefined;
@@ -81,6 +93,14 @@ export default class GameScreen extends Screen {
     closeContainerDialog(container?: IContainer): boolean;
     private readonly cinematicModeReasons;
     toggleCinematicMode(enabled: boolean, reason: string): this;
+    getActionUseContext(action?: ActionId | UsableAction, using?: IUsableActionPossibleUsing): ActionUseContext;
+    getActionUsing(action?: ActionId | UsableAction, using?: IUsableActionPossibleUsing, fillTiles?: boolean): IUsableActionPossibleUsing;
+    private lastAttemptedAction?;
+    private lastUsableResult?;
+    private lastFailTime;
+    private lastAttemptTime;
+    executeAction(action?: ActionId | UsableAction, using?: IUsableActionPossibleUsing, context?: UsableActionExecutionContext | IUsableActionExecutionContext, options?: IUsableActionExecutionOptions): UsableActionExecutionResult;
+    isActionUsable(action?: ActionId | UsableAction, using?: IUsableActionPossibleUsing, context?: UsableActionExecutionContext | IUsableActionExecutionContext): UsableActionUsability;
     onGameStart(game: Game, _isLoadingSave: boolean, _playedCount: number): void;
     onLoadedOnIsland(player: Player, island: Island): void;
     private showIslandIntro;
@@ -140,6 +160,7 @@ export default class GameScreen extends Screen {
      * use instead the result of `getUnusedQuadrant()`
      */
     private addQuadrantComponent;
+    private onQuadrantComponentToggle;
     /**
      * Event handler for `QuadrantElementEvent.ChangeQuadrant`
      *
@@ -150,6 +171,7 @@ export default class GameScreen extends Screen {
      * from the `quadrantMap`.
      */
     private onQuadrantComponentChange;
+    private isQuadrantComponentHeldLocation;
     private onSwitchQuadrantComponents;
     private onQuadrantComponentUpdatePosition;
     /**

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { InspectType } from "@wayward/game/game/inspection/IInspection";
+import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import Inspection from "@wayward/game/game/inspection/Inspection";
@@ -26,9 +27,12 @@ export default class MilestoneInspection extends Inspection<Milestone> {
     constructor([, milestone]: [any, Milestone], context?: InfoProviderContext);
     getId(): string;
     getBorder(): string;
-    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
+    protected getTitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getSubtitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getContent(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider | undefined>;
     renderHints(hints: InspectionTooltipHints): void;
     private getDiscovered;
+    private getDiscoveredTabs;
     private getDiscoveredTranslations;
     private getDiscoveryTranslation;
 }

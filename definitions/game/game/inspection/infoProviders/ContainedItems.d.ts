@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -19,7 +19,7 @@ import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class ContainedItemsInfoProvider extends InfoProvider {
     private readonly container;
     static translateItems(max: number, ...items: Item[]): TranslationImpl;
-    static get(doodad: Doodad): false | ContainedItemsInfoProvider;
+    static get(doodad: Doodad): ContainedItemsInfoProvider | undefined;
     constructor(container: IContainer);
     getClass(): string[];
     getDefaultDisplayLevel(): InfoDisplayLevel;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,21 +10,22 @@
  */
 import { SkillType } from "@wayward/game/game/entity/IHuman";
 import { InspectType } from "@wayward/game/game/inspection/IInspection";
+import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import Inspection from "@wayward/game/game/inspection/Inspection";
-import Message from "@wayward/game/language/dictionary/Message";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import Translation from "@wayward/game/language/Translation";
 import type { InspectionTooltipHints } from "@wayward/game/ui/screen/screens/game/InspectionsTooltipHandler";
 export default class SkillInspection extends Inspection<SkillType> {
-    static getSkillAttributeMessage(skill: SkillType): Message.Dexterity | Message.Metabolism | Message.Strength | undefined;
+    static getSkillAttributeMessage(skill: SkillType): Translation | undefined;
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
-    private readonly human?;
     constructor([, skill]: [any, SkillType], context?: InfoProviderContext);
     getId(): string;
     getBorder(): string;
-    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
+    protected getTitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getSubtitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getContent(context: InfoProviderContext): ArrayOr<Translation | InfoProvider | undefined>;
     renderHints(hints: InspectionTooltipHints): void;
     private getCurrentValue;
     private getDescription;

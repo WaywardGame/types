@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -18,6 +18,7 @@ import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
+import type { StatusType } from "@wayward/game/game/entity/status/IStatus";
 import type Island from "@wayward/game/game/island/Island";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
@@ -78,7 +79,7 @@ export interface ICastable {
     isTile(): this is Tile;
     isContainer(): this is IUncastableContainer;
 }
-export declare enum StatusEffectChangeReason {
+export declare enum StatusChangeReason {
     Gained = 0,
     Passed = 1,
     Treated = 2
@@ -113,21 +114,8 @@ export declare namespace IStatChangeInfo {
      */
     function get<T = any>(important: boolean): IStatChangeInfo<T>;
 }
-export declare enum StatusType {
-    Bleeding = 0,
-    Poisoned = 1,
-    Burned = 2,
-    Encumbered = 3,
-    Exhausted = 4,
-    Starving = 5,
-    Dehydrated = 6,
-    Overheating = 7,
-    Freezing = 8,
-    Frostbitten = 9,
-    Anguish = 10
-}
 export type IStatus = Record<keyof typeof StatusType, number>;
-export interface ICausesStatusEffect {
+export interface ICausesStatus {
     causesStatus?: Array<StatusType | [status: StatusType, level: number]>;
 }
 export interface ICausesDamage {
@@ -142,80 +130,6 @@ export declare enum EntityType {
     TileEvent = 5,
     Corpse = 6,
     Item = 7
-}
-export declare enum AiType {
-    /**
-     * Only attacks randomly when player is adjacent
-     */
-    Neutral = 0,
-    /**
-     * Attacks player
-     */
-    Hostile = 1,
-    /**
-     * Move like neutral - become fleeing within 10 tiles of a player
-     */
-    Scared = 2,
-    /**
-     * Moves in random direction - used as a temporary flag for when we need creatures to stop their normal behavior for a while
-     */
-    Random = 4,
-    /**
-     * Doesn't move, can't be seen
-     */
-    Hidden = 8,
-    /**
-     * Never scared
-     */
-    Fearless = 16,
-    /**
-     * Monster is tamed
-     */
-    Tamed = 32,
-    /**
-     * Follows the player at a close distance
-     */
-    FollowClose = 64,
-    /**
-     * Retaliates the player when attacked
-     */
-    Retaliate = 128,
-    /**
-     * Run away from the player
-     */
-    Fleeing = 256,
-    /**
-     * Do nothing until there are no players next to the entity
-     */
-    Waiting = 512,
-    /**
-     * Follows the player at a far distance
-     */
-    FollowFar = 1024,
-    /**
-     * Never move
-     */
-    Stay = 2048,
-    /**
-     * Attacks adjacent enemies (creatures when tamed)
-     */
-    AttackAdjacent = 4096,
-    /**
-     * Attacks enemies in sight(creatures when tamed)
-     */
-    AttackInSight = 8192,
-    /**
-     * Stays in place and attacks things that pass by it
-     */
-    Defend = 6144,
-    /**
-     * Follows the owner and attacks enemies it sees
-     */
-    Attack = 8256,
-    /**
-     * Follows the owner and never attacks, even when attacked itself or sees owner attacked
-     */
-    Heel = 16384
 }
 export declare enum MoveType {
     None = 0,

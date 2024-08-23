@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,7 +14,7 @@ import { SkillType } from "@wayward/game/game/entity/IHuman";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
-import type { IItemDescription, IRanged, ItemType } from "@wayward/game/game/item/IItem";
+import type { IItemDescription, IRangedDescription, ItemType } from "@wayward/game/game/item/IItem";
 import { ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -38,11 +38,11 @@ export interface IAttackThrowItemCanUse extends IBaseCanUse {
 export interface IAttackRangedWeaponCanUse extends IBaseCanUse {
     attackType: AttackType.RangedWeapon;
     weapon: Item;
-    ranged: IRanged;
+    ranged: IRangedDescription;
     rangedRequiredWeapon: Item | undefined;
     ammoItem: Item | undefined;
     ammunitionType: ItemType | ItemTypeGroup | undefined;
 }
 export type IAttackCanUse = IAttackCloseUpCanUse | IAttackThrowItemCanUse | IAttackRangedWeaponCanUse;
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory], [ActionArgument.Undefined, import("../argument/ActionArgumentEnum").default<AttackType, "MeleeWeapon" | "HandToHand" | "RangedWeapon" | "ThrowItem">], [arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IAttackCanUse, [(Item | undefined)?, (AttackType | undefined)?, (Item | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory], [ActionArgument.Undefined, import("../argument/ActionArgumentEnum").default<AttackType, "MeleeWeapon" | "HandToHand" | "RangedWeapon" | "ThrowItem">], [arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IAttackCanUse, [(Item | undefined)?, (AttackType | undefined)?, (Item | undefined)?]>;
 export default _default;

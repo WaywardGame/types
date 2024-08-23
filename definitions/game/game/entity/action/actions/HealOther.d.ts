@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -22,5 +22,5 @@ export interface IHealOtherCanUse extends IActionUsable {
     creature?: Creature;
     npc?: NPC;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IHealOtherCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IHealOtherCanUse, [import("../../../item/Item").default]>;
 export default _default;

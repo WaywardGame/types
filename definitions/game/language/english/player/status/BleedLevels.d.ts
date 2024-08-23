@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,11 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { BleedLevel } from "@wayward/game/game/entity/status/handler/IBleeding";
-type BleedTranslations = [
-    adjective: string,
-    name: string,
-    description: string,
-    effects: string
-];
-declare const bleedLevels: Record<BleedLevel, BleedTranslations>;
+import type { StatusTranslationTuple } from "@wayward/game/language/dictionary/Misc";
+declare const bleedLevels: Map<BleedLevel, StatusTranslationTuple>;
 export default bleedLevels;

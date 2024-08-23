@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -30,13 +30,23 @@ export interface ISegment {
     handle(match: RegExpMatchArray, segment: string, api: ISegmentApi, ...args: any[]): string | IStringSection | Iterable<IStringSection>;
 }
 export interface IStringSection {
-    content: string;
+    content: string | IStringSection[];
     classes?: Set<string>;
     icon?: ISerializedIcon;
     forceInclude?: true;
 }
+export interface IStringRawSection extends IStringSection {
+    content: string;
+}
+export interface IStringWrapperSection extends IStringSection {
+    content: IStringSection[];
+}
 export declare namespace IStringSection {
     function is(value: unknown): value is IStringSection;
+    function isRaw(value: unknown): value is IStringRawSection;
+    function isWrapper(value: unknown): value is IStringWrapperSection;
+    function isRawAndSimple(section: IStringSection): section is IStringRawSection;
+    function isExtraneousWrapper(section: IStringSection): section is IStringWrapperSection;
     function get(content?: string | IStringSection | Iterable<IStringSection>): Iterable<IStringSection>;
 }
 declare class Interpolator {
@@ -52,6 +62,7 @@ declare class Interpolator {
     setRandom(random: Random): this;
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;
+    private flattenToString;
     with(options: IInterpolationOptions): this;
     formatValue(value: unknown): string | Iterable<IStringSection>;
     private handleChar;

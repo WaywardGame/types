@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,7 +13,7 @@ import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
-declare const _default: Action<[ActionArgument.Direction], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
+declare const _default: Action<[ActionArgument.Direction], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
     usable: true;
 }, [Direction.None | Direction.East | Direction.North | Direction.West | Direction.South]>;
 export default _default;

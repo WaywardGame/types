@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import type { ModInformation } from "@wayward/game/mod/ModInformation";
 import { CheckButton } from "@wayward/game/ui/component/CheckButton";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 interface IModRowEvents extends Events<CheckButton> {
     shouldRefreshMenu(): any;
     deleted(): any;

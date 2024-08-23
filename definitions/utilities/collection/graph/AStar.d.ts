@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,6 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 declare namespace AStar {
-    function findPath<T>(start: T, end: T, getConnections: (node: T) => Array<T | undefined>, getDistance: (node1: T, node2: T) => number, isNodeBlocked?: (node: T) => boolean, getNodePenalty?: (node: T) => number, maxNodesChecked?: number): T[] | undefined;
+    type IsEndNodeFunction<T> = ((node: T) => boolean);
+    function findPath<T>(start: T, end: T, getConnections: (node: T) => Array<T | undefined>, getDistanceToEnd: (node1: T, node2: T) => number, isNodeBlocked?: (node: T) => boolean, getNodePenalty?: (node: T) => number, maxNodesChecked?: number): T[] | undefined;
+    function findPath<T>(start: T, end: T | ((node: T) => boolean), getConnections: (node: T) => Array<T | undefined>, getDistanceToEnd: (node1: T, node2?: T) => number, isNodeBlocked?: (node: T) => boolean, getNodePenalty?: (node: T) => number, maxNodesChecked?: number): T[] | undefined;
 }
 export default AStar;

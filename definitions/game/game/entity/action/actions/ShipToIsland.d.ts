@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -22,5 +22,5 @@ export interface IShipToIslandCanUse extends IActionUsable {
     port?: IIslandPort;
     island?: Island;
 }
-declare const _default: Action<[ActionArgument.NPCNearby, [ActionArgument.Island, ActionArgument.Vector2, ActionArgument.Undefined], [ActionArgument.Integer32, ActionArgument.Undefined]], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IShipToIslandCanUse, [import("../../npc/NPC").default, (Island | IVector2 | undefined)?, (number | undefined)?]>;
+declare const _default: Action<[ActionArgument.NPCNearby, [ActionArgument.Island, ActionArgument.Vector2, ActionArgument.Undefined], [ActionArgument.Integer32, ActionArgument.Undefined]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IShipToIslandCanUse, [import("../../npc/NPC").default, (Island | IVector2 | undefined)?, (number | undefined)?]>;
 export default _default;

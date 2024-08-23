@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -21,7 +21,7 @@ export interface IBindRowEvents extends Events<Button> {
     update(): any;
 }
 export declare class BindRow extends Button implements IRefreshable {
-    readonly event: IEventEmitter<this, IBindRowEvents>;
+    event: IEventEmitter<this, IBindRowEvents>;
     private readonly currentBinds;
     private readonly bind;
     private readonly bindingCatcher;

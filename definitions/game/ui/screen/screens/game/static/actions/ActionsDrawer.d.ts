@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -31,7 +31,7 @@ export interface IActionsConfigurationDrawerEvents extends Events<Component> {
     endConfiguration(): any;
 }
 export default class ActionsConfigurationDrawer extends Component {
-    readonly event: IEventEmitter<this, IActionsConfigurationDrawerEvents>;
+    event: IEventEmitter<this, IActionsConfigurationDrawerEvents>;
     readonly header: Component<HTMLElement>;
     readonly headerTitle: Text;
     readonly acceptButton: Button;

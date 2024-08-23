@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,8 +10,9 @@
  */
 import type { Game } from "@wayward/game/game/Game";
 import type Player from "@wayward/game/game/entity/player/Player";
+import UpgradesArray from "@wayward/game/save/upgrade/UpgradesArray";
 import Version from "@wayward/game/utilities/Version";
-export default function upgradePlayer(game: Game, player: Player, saveVersion: Version.Info, isLocalPlayer: boolean): string[];
+export default function upgradePlayer(game: Game, player: Player, saveVersion: Version.Info, isLocalPlayer: boolean): UpgradesArray;
 /**
  * Called after loading item & tile references
  */

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,22 +13,21 @@ import type { IGameOld } from "@wayward/game/game/IGame";
 import { Quality } from "@wayward/game/game/IObject";
 import { TickHelper } from "@wayward/game/game/TickHelper";
 import type { BiomeTypes, IBiomeDescription } from "@wayward/game/game/biome/IBiome";
-import { FerocityLevel, type IReadableAlignment } from "@wayward/game/game/deity/IDeities";
 import DoodadManager from "@wayward/game/game/doodad/DoodadManager";
 import Human from "@wayward/game/game/entity/Human";
-import type { StatusType } from "@wayward/game/game/entity/IEntity";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
 import Creature from "@wayward/game/game/entity/creature/Creature";
 import CreatureManager from "@wayward/game/game/entity/creature/CreatureManager";
 import type { IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "@wayward/game/game/entity/creature/ICreature";
 import CorpseManager from "@wayward/game/game/entity/creature/corpse/CorpseManager";
+import CreatureZoneManager from "@wayward/game/game/entity/creature/zone/CreatureZoneManager";
 import FlowFieldManager from "@wayward/game/game/entity/flowfield/FlowFieldManager";
 import NPCManager from "@wayward/game/game/entity/npc/NPCManager";
 import type { TurnTypeFlag } from "@wayward/game/game/entity/player/IPlayer";
-import type { IIslandEvents, IIslandFastForwardOptions, IIslandLoadOptions, IIslandTickOptions, IMobCheck, ISeeds, IWaterContamination, IWaterFill, IWaterFillReturn, IWell, IslandId } from "@wayward/game/game/island/IIsland";
+import type { IIslandEvents, IIslandFastForwardOptions, IIslandLoadOptions, IIslandTickOptions, IMobCheck, ISeeds, IslandId, IWaterContamination, IWaterFill, IWaterFillReturn, IWell } from "@wayward/game/game/island/IIsland";
 import { WaterType } from "@wayward/game/game/island/IIsland";
 import { PortManager } from "@wayward/game/game/island/Port";
-import type { ILiquidGather } from "@wayward/game/game/item/IItem";
+import type { ILiquidGather, IRangedResolvedDirection } from "@wayward/game/game/item/IItem";
 import type { IRequirementInfo } from "@wayward/game/game/item/IItemManager";
 import ItemManager from "@wayward/game/game/item/ItemManager";
 import type DrawnMap from "@wayward/game/game/mapping/DrawnMap";
@@ -48,8 +47,8 @@ import type { IVersionInfo } from "@wayward/game/utilities/Version";
 import Version from "@wayward/game/utilities/Version";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-import { WorldZ } from "@wayward/utilities/game/WorldZ";
 import type { Random } from "@wayward/utilities/random/Random";
 import type { LegacySeededGenerator } from "@wayward/utilities/random/generators/LegacySeededGenerator";
 import type { PCGSeededGenerator } from "@wayward/utilities/random/generators/PCGSeededGenerator";
@@ -76,10 +75,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly temperature: TemperatureManager;
     readonly tileEvents: TileEventManager;
     readonly world: World;
-    /**
-     * Alignment values averaged across all players on the island.
-     */
-    readonly communalAlignment: IReadableAlignment;
+    readonly zones: CreatureZoneManager;
     /**
      * The version this island was originally made on
      */
@@ -96,10 +92,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     saveBuildTime: number;
     biomeOptions?: unknown;
     biomeType: BiomeTypes;
-    civilizationScore: number;
-    civilizationScoreTiles: SaferNumberIndexedObject<number>;
     contaminatedWater: IWaterContamination[];
-    creatureSpawnTimer: number;
     loadCount: number;
     name?: string;
     position: IVector2;
@@ -116,11 +109,11 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     /**
      * Set of players on this island
      */
-    readonly players: Set<Human<number, import("@wayward/game/game/reference/IReferenceManager").ReferenceType.NPC | import("@wayward/game/game/reference/IReferenceManager").ReferenceType.Player>>;
+    readonly players: Set<Human<unknown, number, import("@wayward/game/game/reference/IReferenceManager").ReferenceType.NPC | import("@wayward/game/game/reference/IReferenceManager").ReferenceType.Player>>;
     /**
      * Entity move types in fov on this island
      */
-    readonly moveTypesInFov: Map<"-1-0" | "-1-1" | "-1-2" | "-1-4" | "-1-8" | "-1-16" | "-1-32" | "-1-64" | "-1-128" | "-1-256" | "-1-512" | "-1-1024" | "-1-2048" | "-1-15" | "0-0" | "0-1" | "0-2" | "0-4" | "0-8" | "0-16" | "0-32" | "0-64" | "0-128" | "0-256" | "0-512" | "0-1024" | "0-2048" | "0-15" | "1-0" | "1-1" | "1-2" | "1-4" | "1-8" | "1-16" | "1-32" | "1-64" | "1-128" | "1-256" | "1-512" | "1-1024" | "1-2048" | "1-15", Set<Human<number, import("@wayward/game/game/reference/IReferenceManager").ReferenceType.NPC | import("@wayward/game/game/reference/IReferenceManager").ReferenceType.Player>>>;
+    readonly moveTypesInFov: Map<"-1-0" | "-1-1" | "-1-2" | "-1-4" | "-1-8" | "-1-16" | "-1-32" | "-1-64" | "-1-128" | "-1-256" | "-1-512" | "-1-1024" | "-1-2048" | "-1-15" | "0-0" | "0-1" | "0-2" | "0-4" | "0-8" | "0-16" | "0-32" | "0-64" | "0-128" | "0-256" | "0-512" | "0-1024" | "0-2048" | "0-15" | "1-0" | "1-1" | "1-2" | "1-4" | "1-8" | "1-16" | "1-32" | "1-64" | "1-128" | "1-256" | "1-512" | "1-1024" | "1-2048" | "1-15", Set<Human<unknown, number, import("@wayward/game/game/reference/IReferenceManager").ReferenceType.NPC | import("@wayward/game/game/reference/IReferenceManager").ReferenceType.Player>>>;
     /**
      * Helps instruct when to tick when in simulated turn mode
      */
@@ -141,6 +134,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     get isFastForwarding(): boolean;
     constructor(game?: Game, position?: IVector2, seed?: number, mapSize?: number);
     toString(): string;
+    createStaticRandom(seed?: number): Random<PCGSeededGenerator>;
     private registerMemoryLeakDetector;
     preSerializeObject(serializer: ISerializer): void;
     postSerializeObject(serializer: ISerializer): void;
@@ -158,7 +152,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     get isActive(): boolean;
     get isDefaultIsland(): boolean;
     get isTransient(): boolean;
-    getFerocityLevel(z: WorldZ): FerocityLevel;
     getDetails(): IIslandDetails;
     /**
      * Activates the island.
@@ -221,7 +214,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     checkTileState(): void;
     processWaterContamination(): void;
-    addPlayer(human: Human, refreshStatusEffects?: boolean): void;
+    addPlayer(human: Human, refreshStatuses?: boolean): void;
     removePlayer(human: Human, isAbsentPlayer?: boolean): void;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): Human[];
     getMaxHealth(): number;
@@ -237,26 +230,34 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     calculateDamageOutcome(input: IDamageOutcomeInput): IDamageOutcome | undefined;
     damage(target: Human | Creature, damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
     /**
-     * Calculates the light level of a tile.
+     * Calculates the light level and light color of a tile.
      * @returns 32bit number representing RED GREEN BLUE ALPHA
      */
     calculateTileLightLevel(tile: Tile): number;
     getLightSourceAt(x: number, y: number, z: number): number;
-    checkForTargetInRange(tile: Tile, direction: Direction.Cardinal, range: number, includePlayers?: boolean): IMobCheck;
+    /**
+     * @param tile The tile to apply from
+     * @param towardsTileOrDirection The `Tile`, `Vector2` (direction vector, not point), or `Direction` to do the ranged action towards
+     * @param range The range to use the action at. If `towardsTileOrDirection` is a `Tile`, this will be capped by the tile's distance
+     * @param accuracy 1.0 = perfectly accurate in target direction, 0.5 = can be perpendicular, 0.0 = can be in any direction around the check tile
+     */
+    applyRangedAccuracy(tile: Tile, towardsTileOrDirection: Tile | Vector2 | Direction, range: number, accuracy?: number): IRangedResolvedDirection;
+    /**
+     * @param tile The tile to apply from
+     * @param towardsTileOrDirection The `Tile`, `Vector2` (direction vector, not point), or `Direction` to do the ranged action towards
+     * @param range The range to use the action at. If `towardsTileOrDirection` is a `Tile`, this will be capped by the tile's distance
+     * @param accuracy 1.0 = perfectly accurate in target direction, 0.5 = can be perpendicular, 0.0 = can be in any direction around the check tile
+     * @param clientSide Returns a list of directions to raycast to that ensures that all potential end tiles will be tested against
+     */
+    applyRangedAccuracy(tile: Tile, towardsTileOrDirection: Tile | Vector2 | Direction, range: number, accuracy: number | undefined, clientSide: true): IRangedResolvedDirection[];
+    /**
+     * @param tile The tile to check from
+     * @param ranged The range & direction vector to check towards. Generate this information using `applyRangedAccuracy`
+     * @param includePlayers Whether players can be hit by this check
+     */
+    checkForTargetInRange(tile: Tile, ranged: IRangedResolvedDirection, includePlayers?: boolean): IMobCheck;
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, human?: Human): void;
     coolFires(requirements: IRequirementInfo, human: Human): void;
-    /**
-     * Resets & recalculates the civilization score
-     */
-    recalculateCivilizationScore(): void;
-    /**
-     * Refreshes the provided civ score for the given tile
-     */
-    refreshTileCivilizationScore(tile: Tile, isRecalculating?: boolean): void;
-    /**
-     * Adds civilization score
-     */
-    addCivilizationScore(score: number, source: string | undefined): void;
     /**
      * Gets the growing speed (or chance to grow more every tick).
      * @param quality Quality of the item or tile to check the growing speed of.
@@ -303,7 +304,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     /**
      * @returns a range value for the weapon being shot based on the weapon range and the players skill with that weapon type. This value then becomes the maximum potential range of the current shot.
      */
-    rangeFinder(weaponRange: number, playerSkillLevel: number, get?: "random" | "min" | "max"): number;
+    rangeFinder(weaponRange: number, human: Human, skillUse: SkillType, get?: "random" | "min" | "max"): number;
     getRandomQuality(bonusQuality?: number): Quality.None | Quality.Superior | Quality.Remarkable | Quality.Exceptional;
     getQualityDurabilityBonus(quality: Quality, itemDurability: number, getMax?: boolean): number;
     /**
@@ -322,8 +323,4 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * Returns the type of liquid that can be gathered from the tile
      */
     getLiquidGatherType(terrainType: TerrainType, terrainDescription: ITerrainDescription): keyof ILiquidGather | undefined;
-    /**
-     * Gets an array of statuses that players have
-     */
-    getPlayerStatuses(): StatusType[];
 }

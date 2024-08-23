@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,14 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Quality } from "@wayward/game/game/IObject";
+import type { Quality, QualityNatural } from "@wayward/game/game/IObject";
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
 import type { DeityReal } from "@wayward/game/game/deity/Deity";
-import type { AttackType, StatusType } from "@wayward/game/game/entity/IEntity";
+import type { AttackType } from "@wayward/game/game/entity/IEntity";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
 import type { Stat } from "@wayward/game/game/entity/IStats";
 import type { CreatureType, TileGroup } from "@wayward/game/game/entity/creature/ICreature";
 import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
+import type { StatusType } from "@wayward/game/game/entity/status/IStatus";
 import type { ItemType } from "@wayward/game/game/item/IItem";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { ThreeStateButtonState } from "@wayward/game/ui/component/IThreeStateButton";
@@ -76,7 +77,7 @@ export interface IGameOptions {
          */
         chanceToSpawnScared: number;
         /**
-         * Maximum number of creatures that can spawn in a world
+         * Maximum number of creatures that can spawn in a zone
          */
         spawnLimit: number;
         /**
@@ -95,6 +96,12 @@ export interface IGameOptions {
          * Whether creatures can be scared (run away from players)
          */
         disableScared: boolean;
+        zones: {
+            /**
+             * A global tier modifier to apply to every zone
+             */
+            globalTierModifier: number;
+        };
     };
     time: {
         /**
@@ -196,6 +203,10 @@ export interface IGameOptionsPlayer {
      */
     luckMultiplier: number;
     /**
+     * Starting curse value, added to the calculated value.
+     */
+    initialCurse: number;
+    /**
      * Whether the player should use their globally unlocked recipes in this game.
      */
     unlockedRecipes: UnlockedRecipesStrategy;
@@ -204,9 +215,17 @@ export interface IGameOptionsPlayer {
      */
     stats: DefaultMap<Stat, IGameOptionsStat>;
     /**
-     * A map of options for each status effect.
+     * A global multiplier for stat gain chance.
      */
-    statusEffects: DefaultMap<StatusType, IGameOptionsStatusEffect>;
+    statGainChanceGlobalMultiplier: number;
+    /**
+     * Whether to enable stat gain type lockout. (IE, preventing gaining the same stat twice in a row.)
+     */
+    statGainTypeLockout: boolean;
+    /**
+     * A map of options for each status.
+     */
+    statuses: DefaultMap<StatusType, IGameOptionsStatus>;
     skills: {
         /**
          * Amount of starting skills the player has (by default, 1 or 0, depending on mode)
@@ -227,62 +246,26 @@ export interface IGameOptionsPlayer {
          */
         customs: DefaultMap<SkillType, IGameOptionsSkill>;
     };
-    alignment: {
+    runes: {
         /**
-         * The initial days cursed
+         * Upon the player receiving a rune, they will not be able to receive runes of the same type,
+         * until receiving a rune of another type.
          */
-        initialCurse: number;
-        /**
-         * A decimal number between 0 to 1 determining the starting evil alignment
-         */
-        initialEvil: number;
-        /**
-         * A decimal number between 0 to 1 determining the starting good alignment
-         */
-        initialGood: number;
-        /**
-         * The rate at which evil alignment is gained
-         */
-        evilMultiplier: number;
-        /**
-         * The rate at which good alignment is gained
-         */
-        goodMultiplier: number;
-        /**
-         * The maximum evil alignment a player can have
-         */
-        evilCap: number;
-        /**
-         * The maximum good alignment a player can have
-         */
-        goodCap: number;
+        typeLockout: boolean;
         /**
          * A multiplier for the chance of the player being given a rune.
          */
-        runeChanceMultiplier: number;
+        globalChanceMultiplier: number;
+        /**
+         * A multiplier for the chance of the player being given a rune, for each deity.
+         */
+        deityChanceMultiplier: Record<DeityReal, number>;
         /**
          * Options for the sacrifice action.
          */
         sacrifice: {
-            /**
-             * Options for the "invoke" part of the sacrifice value calculation.
-             */
-            invoke: {
-                /**
-                 * The base value of invoke for each deity.
-                 */
-                base: Record<DeityReal, number>;
-                /**
-                 * A range for the invoke multiplier at 0% piety and at 100% piety.
-                 *
-                 * When piety exceeds 100%, values outside the range will be returned.
-                 */
-                pietyMultiplier: IRange;
-            };
-            /**
-             * A multiplier for how much of a sacrificed item's worth is translated into alignment for the given deity.
-             */
-            worthMultiplier: Record<DeityReal, number>;
+            points: Record<QualityNatural, IRange>;
+            thresholds: Record<QualityNatural, number>;
         };
     };
     inventory: {
@@ -293,12 +276,31 @@ export interface IGameOptionsPlayer {
         randomItems: boolean;
         /**
          * An additional set of items the player should spawn with.
+         *
+         * **Note that respawning on a Hardcore multiplayer server with Hardcore Respawns enabled will give the player these items.**
          */
         additionalItems: RandomItem[];
         /**
+         * An additional set of items the player should spawn with.
+         *
+         * These items will not be given to the player if they are respawning on a Hardcore multiplayer server with Hardcore Respawns enabled.
+         */
+        additionalItemsNonRespawn: RandomItem[];
+        /**
          * An additional set of items the player should spawn with that should be equipped.
+         *
+         * **Note that respawning on a Hardcore multiplayer server with Hardcore Respawns enabled will give the player these items.**
          */
         equipment: Array<{
+            type: RandomItem;
+            priority?: number;
+        }>;
+        /**
+         * An additional set of items the player should spawn with that should be equipped.
+         *
+         * These items will not be given to the player if they are respawning on a Hardcore multiplayer server with Hardcore Respawns enabled.
+         */
+        equipmentNonRespawn: Array<{
             type: RandomItem;
             priority?: number;
         }>;
@@ -373,7 +375,7 @@ export interface IGameOptionsStat {
      */
     gainAmount: number;
 }
-export interface IGameOptionsStatusEffect {
+export interface IGameOptionsStatus {
     /**
      * Whether every player starts with this status effect.
      */
@@ -389,7 +391,7 @@ export interface IGameOptionsStatusEffect {
     /**
      * A multiplier for the number of ticks between effect ticks.
      */
-    effectRateMultiplier: number;
+    intervalMultiplier: number;
     /**
      * Decrease or increase the effect of the... effect.
      */

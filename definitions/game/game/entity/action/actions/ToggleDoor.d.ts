@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -19,5 +19,5 @@ export interface IToggleDoorCanUse extends IActionUsable {
     tile: Tile;
     changeType: DoodadType;
 }
-declare const _default: Action<[[ActionArgument.Doodad, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, boolean, IToggleDoorCanUse, [(Doodad | undefined)?, (boolean | undefined)?]>;
+declare const _default: Action<[[ActionArgument.Doodad, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, boolean, IToggleDoorCanUse, [(Doodad | undefined)?, (boolean | undefined)?]>;
 export default _default;

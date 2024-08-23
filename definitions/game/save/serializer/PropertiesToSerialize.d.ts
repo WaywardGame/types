@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -115,6 +115,9 @@ declare const propertiesToSerializeObject: {
 };
 declare const propertiesToSerializeGlobalObject: {
     lastPlayedVersion: {
+        property: string[];
+    };
+    lastPlayedBuildTime: {
         property: string[];
     };
     gamesPlayed: {

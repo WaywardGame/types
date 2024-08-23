@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -31,7 +31,7 @@ export interface RangeChoiceListEvents<CHOICE_ID extends number | string> extend
 }
 export default class RangeChoiceList<CHOICE_ID extends number | string> extends Details {
     definition?: RangeChoiceListDefinition<CHOICE_ID> | undefined;
-    readonly event: IEventEmitter<this, RangeChoiceListEvents<CHOICE_ID>>;
+    event: IEventEmitter<this, RangeChoiceListEvents<CHOICE_ID>>;
     readonly optionButtons: Map<CHOICE_ID, RangeChoiceListButton<CHOICE_ID>>;
     options: CHOICE_ID[];
     private choiceStart?;

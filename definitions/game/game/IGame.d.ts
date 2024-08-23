@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -51,16 +51,23 @@ export interface IGameEvents {
     exploreAsGhost(): any;
     preSaveGame(saveType: SaveType): any;
     postSaveGame(saveType: SaveType): any;
+    initializeGameplayModifiers(): any;
+    uninitializeGameplayModifiers(): any;
     /**
      * Called when the game is stopping being played
      * @param state The state of the player (why the game is ending)
      */
-    stoppingPlay(state: PlayerState): any;
+    stoppingPlayPreSave(state: PlayerState): any;
+    /**
+     * Called when the game is stopping being played, and it has saved
+     * @param state The state of the player (why the game is ending)
+     */
+    stoppingPlayPostSave(state: PlayerState): any;
     /**
      * Called when the game has stopped being played
      * @param state The state of the player (why the game ended)
      */
-    stopPlay(state: PlayerState): any;
+    stoppedPlay(state: PlayerState): any;
     loadStep(): any;
     /**
      * Called when all game state was reset
@@ -72,10 +79,10 @@ export interface IGameEvents {
     getBiomeTypeChances(): Array<[number, BiomeTypes]> | undefined;
     /**
      * Called when selecting the biome type for and island
-     * @param positon Island position
+     * @param positon Island position, or undefined if this is not related to island initialisation
      * @param biomeType Biome type
      */
-    getBiomeType(positon: IVector2, biomeType: BiomeTypes): BiomeTypes | undefined;
+    getBiomeType(positon: IVector2 | undefined, biomeType: BiomeTypes): BiomeTypes | undefined;
     pause(): any;
     resume(): any;
     /**
@@ -99,6 +106,10 @@ export interface IGameEvents {
      */
     postFieldOfView?(): void;
     addHistoricalAction(executor: Entity, context: IActionContext): any;
+    /**
+     * Called as the game is closing
+     */
+    uninit(): any;
 }
 export declare enum TickFlag {
     None = 0,
@@ -110,7 +121,7 @@ export declare enum TickFlag {
     Creatures = 32,
     NPCs = 64,
     RandomEvents = 128,
-    StatusEffects = 256,
+    Statuses = 256,
     FlowFields = 512,
     PlayerNotes = 1024,
     Items = 2048,

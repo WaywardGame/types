@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import { StatInfo } from "@wayward/game/game/inspection/infoProviders/stat/StatInfo";
 export default class GenericInfo extends StatInfo {
     readonly score: InfoProvider.Observer<number>;
+    readonly totalCivilizationScore: InfoProvider.Observer<number>;
     readonly civilizationScore: InfoProvider.Observer<number>;
     readonly turns: InfoProvider.Observer<number>;
     readonly ticks: InfoProvider.Observer<number>;
     readonly time: InfoProvider.Observer<import("../../../time/TimeManager").default>;
     getClass(): string[];
-    get(): SimpleInfoProvider[];
+    get(): InfoProvider[];
 }

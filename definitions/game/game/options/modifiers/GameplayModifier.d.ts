@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,14 +10,20 @@
  */
 import type { IHasImagePath } from "@wayward/game/game/IObject";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type Translation from "@wayward/game/language/Translation";
-import { RandomInstance } from "@wayward/utilities/random/IRandom";
-import type { Random } from "@wayward/utilities/random/Random";
 import { RandomReference } from "@wayward/game/utilities/random/RandomReference";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { LegacySeededGenerator } from "@wayward/utilities/random/generators/LegacySeededGenerator";
 import type { PCGSeededGenerator } from "@wayward/utilities/random/generators/PCGSeededGenerator";
-import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-export declare abstract class GameplayModifierInstance<ID extends number, INSTANCE_ARGS extends any[] = [], DATA = any> {
+import { RandomInstance } from "@wayward/utilities/random/IRandom";
+import type { Random } from "@wayward/utilities/random/Random";
+export interface IGameplayModifierInstanceEvents {
+    initialize(): any;
+    changeOptions(): any;
+    uninitialize(): any;
+}
+export declare abstract class GameplayModifierInstance<ID extends number, INSTANCE_ARGS extends any[] = [], DATA = any> extends EventEmitter.Host<IGameplayModifierInstanceEvents> {
     readonly id: ID;
     readonly random: Random;
     protected readonly args: INSTANCE_ARGS;
@@ -32,6 +38,8 @@ export declare abstract class GameplayModifierInstance<ID extends number, INSTAN
     getData(): DATA | undefined;
     setData(data?: DATA): this;
     clearData(): this;
+    initialize?(): void;
+    uninitialize?(): void;
 }
 export type GetModifierInstance<MODIFIER extends GameplayModifier<number, GameplayModifierInstance<number, any[]>, any[]>> = MODIFIER extends GameplayModifier<number, infer INSTANCE, any[]> ? INSTANCE : never;
 export type GetModifierId<MODIFIER extends GameplayModifier<number, GameplayModifierInstance<number, any[]>, any[]>> = MODIFIER extends GameplayModifier<infer ID, any, any[]> ? ID : never;

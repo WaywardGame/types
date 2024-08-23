@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -26,5 +26,5 @@ export interface IDigTileCanUse extends IActionUsable {
     tileType: TerrainType;
 }
 type IDigCanUse = IDigGenericCanUse | IDigTileCanUse;
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDigCanUse, [(Item | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void | Promise<void>, IDigCanUse, [(Item | undefined)?]>;
 export default _default;

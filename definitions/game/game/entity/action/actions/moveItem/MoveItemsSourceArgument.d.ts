@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -17,6 +17,7 @@ import Island from "@wayward/game/game/island/Island";
 import type { IContainer } from "@wayward/game/game/item/IItem";
 import Item from "@wayward/game/game/item/Item";
 import type Translation from "@wayward/game/language/Translation";
+export type MoveItemsSourceArgumentResolvable = Item | Item[] | IMoveItemsSourceArgument;
 export interface IMoveItemsSourceArgument {
     island?: Island;
     container?: IContainer;
@@ -25,8 +26,10 @@ export interface IMoveItemsSourceArgumentUsable extends IActionUsable {
     items: Item[];
 }
 export default class MoveItemsSourceArgument extends ActionArgumentCustom<IMoveItemsSourceArgument> {
+    static resolveOne(source?: MoveItemsSourceArgumentResolvable): Item | undefined;
+    static resolve(source?: MoveItemsSourceArgumentResolvable): Item[];
     static ANY: [arg1: ActionArgument.Undefined, ActionArgument.ItemNearbyIncludingTradeContainer, ActionArgument.ItemArrayNearbyIncludingTradeContainer, MoveItemsSourceArgument];
-    static canUse(executor: Human, item: Item | Item[] | IMoveItemsSourceArgument | undefined, canUse: (item: Item) => IActionUsable | IActionNotUsable, actionName?: Translation): IMoveItemsSourceArgumentUsable | IActionNotUsable;
+    static canUse(executor: Human, item: MoveItemsSourceArgumentResolvable | undefined, canUse: (item: Item) => IActionUsable | IActionNotUsable, actionName?: Translation): IMoveItemsSourceArgumentUsable | IActionNotUsable;
     validate(executor: Entity | undefined, value: unknown): value is IMoveItemsSourceArgument;
     read(): IMoveItemsSourceArgument;
     write(entity: Entity | undefined, value: IMoveItemsSourceArgument): void;

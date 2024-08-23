@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,6 +13,7 @@ import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type Item from "@wayward/game/game/item/Item";
+import type Tile from "@wayward/game/game/tile/Tile";
 import { PacketType } from "@wayward/game/multiplayer/packets/IPacket";
 import ActionPacketBase from "@wayward/game/multiplayer/packets/shared/ActionPacketBase";
 export default class ActionPacket extends ActionPacketBase {
@@ -21,6 +22,7 @@ export default class ActionPacket extends ActionPacketBase {
     arguments: any[];
     items: Item[];
     argumentTypes: ActionArgumentArray;
+    targetTile?: Tile;
     connectionPlayer: Player | undefined;
     getType(): PacketType;
     get action(): IActionDescription;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,6 +13,7 @@ import { Quality } from "@wayward/game/game/IObject";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type { IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
 import { GrowingStage } from "@wayward/game/game/doodad/IDoodad";
+import type Human from "@wayward/game/game/entity/Human";
 import { SkillType } from "@wayward/game/game/entity/IHuman";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
@@ -63,5 +64,5 @@ export interface IGatherTerrainCanUse extends IGatherBaseCanUse {
     terrainDescription: ITerrainDescription;
 }
 export type IGatherCanUse = IGatherTileEventCanUse | IGatherDoodadCanUse | IGatherDoodadHarvestCanUse | IGatherTerrainCanUse;
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory], [arg1: ActionArgument.Undefined, ActionArgument.Tile]], Doodad | import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IGatherCanUse, [(Item | undefined)?, (Tile | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory], [arg1: ActionArgument.Undefined, ActionArgument.Tile]], Doodad | Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void | Promise<void>, IGatherCanUse, [(Item | undefined)?, (Tile | undefined)?]>;
 export default _default;

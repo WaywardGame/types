@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,7 +11,7 @@
 import type { SfxType } from "@wayward/game/audio/IAudio";
 import Entity from "@wayward/game/game/entity/Entity";
 import type { IAttackAnimationData, IEntityConstructorOptions, IEntityEvents, IMoveToOptions, IMovingData, ISlippingData } from "@wayward/game/game/entity/IEntity";
-import { SlippingSpeed, DamageType, MoveFlag, MoveType } from "@wayward/game/game/entity/IEntity";
+import { DamageType, MoveFlag, MoveType, SlippingSpeed } from "@wayward/game/game/entity/IEntity";
 import { Delay } from "@wayward/game/game/entity/IHuman";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type { IItemVehicle } from "@wayward/game/game/item/IItem";

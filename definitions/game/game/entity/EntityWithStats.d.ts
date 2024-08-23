@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,16 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import type { IEntityMovableEvents } from "@wayward/game/game/entity/EntityMovable";
 import EntityMovable from "@wayward/game/game/entity/EntityMovable";
-import type { IEntityConstructorOptions, IStatus, StatusEffectChangeReason } from "@wayward/game/game/entity/IEntity";
-import { StatusType } from "@wayward/game/game/entity/IEntity";
-import type { IStatEvents, IStats } from "@wayward/game/game/entity/IStats";
+import type { IEntityConstructorOptions, IStatus, StatusChangeReason } from "@wayward/game/game/entity/IEntity";
+import { type IStatEvents, type IStats } from "@wayward/game/game/entity/IStats";
 import type { IStatHost } from "@wayward/game/game/entity/Stats";
 import Stats from "@wayward/game/game/entity/Stats";
-import type StatusEffect from "@wayward/game/game/entity/status/StatusEffect";
+import { StatusType } from "@wayward/game/game/entity/status/IStatus";
+import Status from "@wayward/game/game/entity/status/Status";
 import type { EntityReferenceTypes } from "@wayward/game/game/reference/IReferenceManager";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface IEntityWithStatsEvents extends IEntityMovableEvents, IStatEvents {
     /**
      * Called when this entity gets or loses a status effect
@@ -26,7 +26,7 @@ export interface IEntityWithStatsEvents extends IEntityMovableEvents, IStatEvent
      * @param level Whether the entity now has the status effect
      * @param reason The reason for the change
      */
-    statusChange(status: StatusType, level: number, reason: StatusEffectChangeReason): void;
+    statusChange(status: StatusType, level: number, reason: StatusChangeReason, oldLevel: number): void;
 }
 /**
  * Entity class that includes stats/status system.
@@ -39,7 +39,7 @@ export default abstract class EntityWithStats<DescriptionType = unknown, TypeTyp
     readonly stat: Stats<this>;
     private readonly statusHandlers;
     constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
-    protected getApplicableStatusEffects(): Set<StatusType> | undefined;
+    protected getApplicableStatuses(): Set<StatusType> | undefined;
     get asEntityWithStats(): EntityWithStats<DescriptionType, TypeType, EntityReferenceType, TagType>;
     /**
      * Returns whether the entity has the given `StatusType`
@@ -55,11 +55,11 @@ export default abstract class EntityWithStats<DescriptionType = unknown, TypeTyp
      * @param reason The reason for the change
      * @param force Forces the status to be set to the given value, even if the current effect is being lowered.
      */
-    setStatus(status: StatusType, level: number | boolean, reason: StatusEffectChangeReason, force?: boolean): boolean;
+    setStatus(status: StatusType, level: number | boolean, reason: StatusChangeReason, force?: boolean): boolean;
     /**
      * Returns the handler for this status effect, whether or not this entity currently has the effect.
      */
-    getStatus<S extends StatusEffect = StatusEffect>(status: StatusType): S | undefined;
+    getStatus<S extends Status = Status>(status: StatusType): S | undefined;
     /**
      * Returns the handler for this status effect, whether or not this entity currently has the effect.
      */
@@ -67,15 +67,15 @@ export default abstract class EntityWithStats<DescriptionType = unknown, TypeTyp
     /**
      * Generator for status effects on the entity.
      */
-    getStatuses(): StatusEffect[];
+    getStatuses(): Status[];
     /**
      * Generator for status effects on the entity.
      */
-    getActiveStatuses(): StatusEffect[];
-    refreshStatusEffects(): void;
+    getActiveStatuses(): Status[];
+    refreshStatuses(): void;
     /**
      * Called when loading the human
      */
-    protected initializeStatusEffects(): void;
+    protected initializeStatuses(): void;
     private initializeStatusHandler;
 }

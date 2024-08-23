@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -36,31 +36,28 @@ export declare enum Stat {
      */
     Luck = 9,
     /**
-     * UI only. Does not exist on `Player` instances.
-     */
-    Ferocity = 10,
-    /**
      * How much this human and their inventory is affected by temperature
      */
-    InsulationHeat = 11,
-    InsulationCold = 12,
+    InsulationHeat = 10,
+    InsulationCold = 11,
     /**
      * Used for chicken eggs and goat milk
      */
-    Produce = 13,
+    Produce = 12,
     /**
      * Used for tamed animals
      */
-    Happiness = 14,
-    Tamed = 15,
-    Petting = 16,
-    Waste = 17,
-    Petted = 18,
-    Alignment = 19,
-    Curse = 20,
-    GenericStats = 21,
-    AttackDefenseRow = 22
+    Happiness = 13,
+    Tamed = 14,
+    Petting = 15,
+    Waste = 16,
+    Petted = 17,
+    Curse = 18,
+    Generic = 19,
+    AttackDefenseRow = 20,
+    Dexterity = 21
 }
+export declare const CORE_STATS: Stat[];
 export type IStats = {
     [key in keyof typeof Stat]: IStat;
 };

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,7 +14,6 @@ import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import UseInfo from "@wayward/game/game/inspection/infoProviders/UseInfo";
 import type { IDismantleDescription, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 declare namespace ItemDismantleInfo {
     type Mode = "action" | "standalone";
     export function getRequired(item: ItemType, dismantle: IDismantleDescription, mode?: Mode): SimpleInfoProvider | undefined;
@@ -41,5 +40,5 @@ declare class ItemDismantleOutputInfoProvider extends InfoProvider {
     constructor(item: ItemType, count: number, scale?: number);
     getClass(): string[];
     getIcon(): IIcon;
-    get(): TranslationImpl;
+    get(): InfoProvider;
 }

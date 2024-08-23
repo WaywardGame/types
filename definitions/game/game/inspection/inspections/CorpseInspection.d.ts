@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,15 +12,19 @@ import Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import { InfoDisplayLevel } from "@wayward/game/game/inspection/IInfoProvider";
 import { InspectType } from "@wayward/game/game/inspection/IInspection";
 import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
-import LabelledValue from "@wayward/game/game/inspection/infoProviders/LabelledValue";
 import Inspection from "@wayward/game/game/inspection/Inspection";
 import type Tile from "@wayward/game/game/tile/Tile";
+import Translation from "@wayward/game/language/Translation";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export default class CorpseInspection extends Inspection<Corpse> {
-    static getFromTile(tile: Tile): CorpseInspection[];
+    static getFromTile(tile: Tile, context?: InfoProviderContext): CorpseInspection[];
     static handles(type: InspectType, corpse: unknown): boolean;
-    constructor(corpse: Corpse);
-    get(context: InfoProviderContext): Array<0 | LabelledValue | SimpleInfoProvider>;
+    constructor(corpse: Corpse, context?: InfoProviderContext);
+    protected getTitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getSubtitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getContent(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider | undefined>;
     private getDecay;
     private decay;
     private shouldRefreshDecay;

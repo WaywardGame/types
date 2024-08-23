@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,17 +10,17 @@
  */
 import Player from "@wayward/game/game/entity/player/Player";
 import { InspectType } from "@wayward/game/game/inspection/IInspection";
-import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import type Inspection from "@wayward/game/game/inspection/Inspection";
 import HumanInspection from "@wayward/game/game/inspection/inspections/HumanInspection";
 import type Tile from "@wayward/game/game/tile/Tile";
+import Translation from "@wayward/game/language/Translation";
 export default class PlayerInspection extends HumanInspection<Player> {
-    static getFromTile(tile: Tile, context: InfoProviderContext, inspectType: InspectType): ArrayOr<Inspection<Player>>;
+    static getFromTile(tile: Tile, context: InfoProviderContext | undefined, inspectType: InspectType): ArrayOr<Inspection<Player>>;
     static handles(type: InspectType, player: unknown, context?: InfoProviderContext): boolean;
-    constructor(player: Player, context?: InfoProviderContext);
-    constructor(player: Player, inspectType?: InspectType);
+    constructor(player: Player, context?: InfoProviderContext, inspectType?: InspectType);
     getBorder(): string;
     isImportant(): boolean;
-    get(context: InfoProviderContext): InfoProvider[];
+    protected getSubtitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
 }

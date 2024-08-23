@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Human from "@wayward/game/game/entity/Human";
+import type { SkillType } from "@wayward/game/game/entity/IHuman";
 import { Stat } from "@wayward/game/game/entity/IStats";
 export interface IStatGainInfo {
     amount?: number;
@@ -22,11 +23,12 @@ export interface IStatDescription {
      * When a human "gains" stat (ie from skill use), if this method is defined, it will be called.
      * @param human The human that "gains" stat
      * @param gainAmount The amount to gain. This will usually be 1. You should respect this if possible.
+     * @param sourceSkill The skill that caused this stat gain, if any.
      * @returns Whether the stat was truly gained
      *
      * **Note:** When implementing this, it is recommended to use
      */
-    gain?(human: Human, gainAmount: number): boolean;
+    gain?(human: Human, gainAmount: number, sourceSkill?: SkillType): boolean;
     /**
      * When a human performs an action that has a chance of raising a stat, the chance is `1 / getGainChanceOffset()`
      *

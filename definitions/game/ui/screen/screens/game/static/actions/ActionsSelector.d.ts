@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -31,7 +31,7 @@ export interface ActionsSelectorEvents extends Events<Component> {
     choose(action: UsableAction | undefined, isItemAction: boolean): any;
 }
 export default class ActionsSelector extends Component {
-    readonly event: IEventEmitter<this, ActionsSelectorEvents>;
+    event: IEventEmitter<this, ActionsSelectorEvents>;
     readonly actionsFilterSort: Component<HTMLElement>;
     readonly actionsColumnsContainer: Component<HTMLElement>;
     readonly filterInput: Input;

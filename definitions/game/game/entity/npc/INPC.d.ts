@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { RuneChance } from "@wayward/game/game/deity/IDeities";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
-import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
+import { NPCType } from "@wayward/game/game/entity/npc/INPCs";
 export type INPCConstructorOptions = Omit<IEntityConstructorOptions<NPCType>, "type">;
 export interface INPCOld {
     equipped?: SaferNumberIndexedObject<number>;
@@ -44,3 +46,8 @@ export declare const NPC_SPAWN_CHANCE_DENOMINATOR = 5;
  * The absolute maximum chance of spawning an NPC type in an interval
  */
 export declare const NPC_SPAWN_CHANCE_MAX = 0.4;
+export interface INPCDescription {
+    runeChance?: RuneChance;
+    tabAction?: ActionType;
+}
+export declare const npcDescriptions: OptionalDescriptions<NPCType, INPCDescription>;

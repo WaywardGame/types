@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,6 +14,8 @@ import { SkillType } from "@wayward/game/game/entity/IHuman";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { IItemDescription, IMagicalPropertyInfo } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
+import type { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
 export declare enum MagicalPropertyType {
     /**
      * Increases attack value (for weapons and ammo).
@@ -44,9 +46,9 @@ export declare enum MagicalPropertyType {
      */
     Skill = 6,
     /**
-     * Multiplies alignment when equipped.
+     * Improves invoking and sacrifice chances.
      */
-    Invoking = 7,
+    Deity = 7,
     Unused = 8,// TODO: Remove this on 1.0 or if you put a different property in this position update Milestones.ts
     /**
      * Increases the range in which a weapon can shoot a projectile or fishing pole/net can be thrown.
@@ -152,11 +154,12 @@ export interface IMagicalPropertyDescription {
     disableInscription?: true;
     subTypeEnum?: any;
     isValidEnum?(enumValue: number): boolean;
+    translateArgs?(...identity: MagicalPropertyIdentity): TranslationArg[];
 }
 export interface MagicalPropertyTypeSubTypeMap {
     [MagicalPropertyType.Stat]: Stat;
     [MagicalPropertyType.Skill]: SkillType;
-    [MagicalPropertyType.Invoking]: Deity;
+    [MagicalPropertyType.Deity]: Deity;
     [MagicalPropertyType.DoodadSkill]: SkillType;
     [MagicalPropertyType.ElementalDamage]: DamageType;
     [MagicalPropertyType.StatUseBenefit]: Stat;

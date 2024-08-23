@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -53,7 +53,7 @@ export default class SkillManager {
     /**
      * @returns The value of the given skill, the sum of the base value and any bonuses from magical equipment
      */
-    get(skill: SkillType): number;
+    get(skill?: SkillType): number;
     /**
      * @returns The value of the given skill, represented as a decimal number 0-1, where 0 is 0% and 1 is 100%.
      * The value may exceed 1 given skill bonuses.

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,6 +11,8 @@
 declare global {
     interface Map<K, V> {
         compute<ARGS extends any[]>(key: K, computer: (key: K, ...args: any[]) => V, ...args: ARGS): V;
+        getKey(value: V): K | undefined;
+        findKey(predicate: (value: V) => unknown): K | undefined;
     }
     interface WeakMap<K, V> {
         compute<ARGS extends any[]>(key: K, computer: (key: K, ...args: any[]) => V, ...args: ARGS): V;

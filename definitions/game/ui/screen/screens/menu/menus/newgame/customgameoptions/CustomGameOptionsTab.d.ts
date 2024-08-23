@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -19,10 +19,9 @@ export declare enum CustomGameOptionsSection {
     General = 0,
     Island = 1,
     Time = 2,
-    Alignment = 3,
-    Stats = 4,
-    StatusEffects = 5,
-    Skills = 6,
-    Items = 7,
-    Creatures = 8
+    Stats = 3,
+    Statuses = 4,
+    Skills = 5,
+    Items = 6,
+    Creatures = 7
 }

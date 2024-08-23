@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,7 +12,7 @@ import { Quality } from "@wayward/game/game/IObject";
 import { MoveFlag } from "@wayward/game/game/entity/IEntity";
 import type { IActionApi } from "@wayward/game/game/entity/action/IAction";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
-import type { ActionId, IUsableActionDefinition, IUsableActionPossibleUsing, IUsableActionRequirements, ReturnableUsableActionUsability } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import type { ActionId, IUsableActionDefinition, IUsableActionPossibleUsing, IUsableActionRequirements, ReturnableUsableActionUsability, UsableActionUsability } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IIslandTickOptions } from "@wayward/game/game/island/IIsland";
@@ -35,13 +35,23 @@ export declare enum ActionSlotClasses {
     Main = "game-action-slot",
     Sortable = "game-action-slot-sortable",
     Filled = "game-action-slot-filled",
+    Empty = "game-action-slot-empty",
     Label = "game-action-slot-label",
     SlottedContainerDragging = "game-action-slot-slotted-container-dragging",
     SlottedContainerCopyingFrom = "game-action-slot-slotted-container-copying-from",
     Configuring = "game-action-slot-configuring",
     Disabled = "game-action-slot-disabled",
     UseOnMove = "game-action-slot-use-on-move",
-    UseHovered = "game-action-slot-use-hovered"
+    UseHovered = "game-action-slot-use-hovered",
+    UseHistory = "game-action-slot-use-history",
+    UseOnHoveredTile = "game-action-slot-use-on-hovered-tile",
+    History = "game-action-slot-history",
+    History_Cleared = "game-action-slot-history--cleared",
+    ItemComponent = "game-action-slot-item-component"
+}
+export declare enum ActionSlotType {
+    Normal = 0,
+    History = 1
 }
 export interface IActionSlotEvents extends Events<Button>, IItemSlotEvents {
     update(data: IActionBarSlotData | undefined, oldData: IActionBarSlotData | undefined, reason: ActionSlotUpdateReason): any;
@@ -51,25 +61,28 @@ export interface IActionSlotEvents extends Events<Button>, IItemSlotEvents {
 export declare class ActionSlot extends Button implements IRefreshable, ItemSlot {
     readonly number: number;
     slotData: IActionBarSlotData;
+    readonly type: ActionSlotType;
     static getHovered(): ActionSlot | undefined;
     event: IEventEmitter<this, IActionSlotEvents>;
     private get actionBar();
     readonly label: Text;
     readonly slotted: ActionSlotSlottedContainer;
     readonly useOnMoveIndicator: Component<HTMLElement>;
+    readonly useOnHoveredTileIndicator: Component<HTMLElement>;
     readonly useHoveredIndicator: Component<HTMLElement>;
+    readonly useHistoryIndicator: Component<HTMLElement>;
     private lastItem?;
     private lastQuality?;
     usability: ReturnableUsableActionUsability;
-    constructor(number: number, slotData: IActionBarSlotData);
+    constructor(number: number, slotData: IActionBarSlotData, type?: ActionSlotType);
     isTransientSlot(): boolean;
     getItemComponent(): ItemComponent | undefined;
     private skipNextClick;
     private lastActivate;
     protected onHoldingNotDragging(time: number): void;
-    refresh(newItem?: Item, oldItem?: Item, reason?: ActionSlotUpdateReason): this;
+    refresh(slotData?: IActionBarSlotData, reason?: ActionSlotUpdateReason): this;
     private onItemTransformed;
-    private isUsable;
+    isUsable(using?: IUsableActionPossibleUsing | undefined, action?: UsableAction<IUsableActionRequirements, IUsableActionDefinition> | undefined): UsableActionUsability;
     clear(): void;
     equipAction(actionId: ActionId, using?: IUsableActionPossibleUsing, autoUse?: boolean): void;
     equipItem(item: Item | ItemType, configure?: boolean, autoUse?: boolean, quality?: boolean | ArrayOr<Quality>): void;
@@ -78,6 +91,7 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
     configure(emitToActionBar?: boolean): void;
     protected onAppend(): void;
     protected onItemMaybeInaccessible(): void;
+    protected onHoveredTileChange(): void;
     protected onPlayerPostMove(player: Player, _lastTile: Tile, _tile: Tile, moveFlag: MoveFlag): void;
     protected onTickEnd(island: Island, options: IIslandTickOptions): void;
     postExecuteAction(action: IActionApi): void;
@@ -87,8 +101,6 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
     private lastClickUseWhenMoving;
     protected onClick(event?: Event & Partial<MouseEvent>): void;
     toggleUseOnMove(): boolean;
-    private lastUsableResult?;
-    private lastUseAttempt;
     onActivate(nonClick?: IBindHandlerApi | true, silent?: true): boolean;
     protected onGetOrRemoveItemInInventory(player: Player, items: Item[]): void;
     onToggle(): boolean;
@@ -99,7 +111,8 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
     getAction(): UsableAction<IUsableActionRequirements, IUsableActionDefinition> | undefined;
     getActionId(): ActionId | undefined;
     getInternalActionType(): ActionType | undefined;
-    getUsing(): IUsableActionPossibleUsing;
+    getUsing(): IUsableActionPossibleUsing | undefined;
+    private getBindingText;
 }
 declare class ActionSlotSlottedContainer extends ItemComponent {
     readonly slot: ActionSlot;

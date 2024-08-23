@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -21,5 +21,5 @@ export interface IRestCanUse extends IActionUsable {
     tileDescription?: ITerrainDescription;
     tileType: TerrainType;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearby, ActionArgument.Doodad], [ActionArgument.Undefined, import("../argument/ActionArgumentEnum").default<RestType, "Resting" | "Sleeping">]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IRestCanUse, [(import("../../../doodad/Doodad").default | import("../../../item/Item").default | undefined)?, (RestType | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearby, ActionArgument.Doodad], [ActionArgument.Undefined, import("../argument/ActionArgumentEnum").default<RestType, "Resting" | "Sleeping">]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IRestCanUse, [(import("../../../doodad/Doodad").default | import("../../../item/Item").default | undefined)?, (RestType | undefined)?]>;
 export default _default;

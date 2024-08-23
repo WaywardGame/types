@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -37,6 +37,7 @@ export default class ImagePath<PATHTYPE extends PathType = PathType> {
     private constructor();
     static equals(imagePath?: ImagePath | ISerializedImagePath | string, imagePath2?: ImagePath | ISerializedImagePath | string): boolean;
     serialize(): ISerializedImagePath;
+    setType(type: number): this;
     setExtension(extension?: string): this;
     setArgs(args?: ResourceOptionsMap[PATHTYPE]): this;
     setCustomPath(customPath?: GetterOfOr<string | ImagePath | undefined>): this;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,10 +14,12 @@ import { Quality } from "@wayward/game/game/IObject";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
+import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
 import type { ICastable } from "@wayward/game/game/entity/IEntity";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/CreatureZone";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type { IMessageManager } from "@wayward/game/game/entity/player/IMessageManager";
 import type Player from "@wayward/game/game/entity/player/Player";
@@ -25,10 +27,10 @@ import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type { IMaybeTileContainer, IOverlayInfo, ITerrainDescription, ITileContainer, ITileData } from "@wayward/game/game/tile/ITerrain";
+import type { FindPathRange, IMaybeTileContainer, IOverlayInfo, ITerrainDescription, ITileContainer, ITileData } from "@wayward/game/game/tile/ITerrain";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
-import Translation from "@wayward/game/language/Translation";
+import Translation, { Article } from "@wayward/game/language/Translation";
 import Message from "@wayward/game/language/dictionary/Message";
 import type { IRendererOrigin } from "@wayward/game/renderer/context/RendererOrigin";
 import { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
@@ -45,6 +47,10 @@ export interface ICanSailAwayResult {
     distanceFromEdge?: number;
     blockedTilesChecked?: Set<Tile>;
     path?: IVector2[];
+}
+export interface ITileGetNameOptions {
+    includeCoordinates?: boolean;
+    magic?: boolean;
 }
 /**
  * Tile class
@@ -96,6 +102,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     private _minDur?;
     private _maxDur?;
+    get zone(): CreatureZone;
     /**
      * Creates a fake tile
      */
@@ -103,11 +110,11 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * Constructed during map gen
      */
-    constructor(island: Island, x: number, y: number, z: number, id: number, rendererData: number, quality: Quality);
+    constructor(island: Island, x: number, y: number, z: number, id: number, rendererData: number, quality: Quality, isFake?: true);
     get point(): IVector3;
     get description(): ITerrainDescription | undefined;
     toString(): string;
-    getName(includeCoordinates?: boolean): Translation;
+    getName(layerIndex?: number, article?: Article, options?: ITileGetNameOptions): Translation;
     get type(): TerrainType;
     private set type(value);
     get quality(): Quality;
@@ -116,6 +123,14 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     private set minDur(value);
     get maxDur(): number | undefined;
     private set maxDur(value);
+    /**
+     * Gets the primary/first blocking entity on this tile.
+     */
+    get entity(): Entity | undefined;
+    /**
+     * Gets the primary/first blocking entity on this tile, that is a creature, NPC, or player.
+     */
+    get livingEntity(): EntityWithStats | undefined;
     get isTilled(): boolean;
     /**
      * Gets the depth of the tile (how far it is dug down to).
@@ -214,7 +229,6 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Check if the tile can be lit on fire (has terrain/doodad/items that are flammable)
      */
     get isFlammable(): boolean;
-    isNearby(entity: Entity | Tile, includeCurrentTile?: boolean): boolean;
     /**
      * Checks if a tile is dangerous for a human
      */
@@ -375,8 +389,10 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * @param isClientSide When true, it will assume puddles do not cause slipping
      */
     canSlip(entity: EntityMovable | undefined, isClientSide?: boolean): boolean;
-    isAdjacent(otherTile: Tile): boolean;
-    isAround(otherTile: Tile): boolean;
+    isAt(otherTile: Tile | IVector3): boolean;
+    isAdjacent(otherTile: Tile | IVector3): boolean;
+    isAround(otherTile: Tile | IVector3): boolean;
+    isNearby(entity: Entity | Tile, includeCurrentTile?: boolean): boolean;
     /**
      * Gets the direction from this tile to the target tile
      */
@@ -386,6 +402,13 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     getTileInDirection(direction: Direction): Tile | undefined;
     getVariation(noTileDataOffset?: boolean): number;
+    /**
+     * Gets the preferred adjacent tile for the human to walk onto.
+     * - Doesn't choose tiles that the "walk to" algorithm considers blocked
+     * - Prefers tiles with lower "walk to" algorithm penalty
+     * - Prefers the facing tile if it has the same penalty as others
+     */
+    getPreferredAdjacentTile(human: Human, clientSide: boolean): Tile | undefined;
     tilesInRange(range: number, includeCurrentTile?: boolean): Tile[];
     openTileInRange(range: number, includeCurrentTile?: boolean, excludeWater?: boolean): Tile | undefined;
     /**
@@ -414,11 +437,13 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * @param maxNodesChecked Maximum number of nodes to pathfind though
      * @returns Tile path or undefined if no path is available
      */
-    findPath(entity: EntityMovable | undefined, target: Tile, isTileBlocked: (tile: Tile) => boolean, getTilePenalty?: (tile: Tile) => number, maxNodesChecked?: number): Tile[] | undefined;
+    findPath(entity: EntityMovable | undefined, target: Tile, isTileBlocked: (tile: Tile) => boolean, getTilePenalty?: (tile: Tile) => number, maxNodesChecked?: number, shouldEndEarly?: (tile: Tile) => boolean): Tile[] | undefined;
     /**
      * Find a path using the preferred algorithm. Use only if you're not calling this very often, or you're calling it clientside.
      */
-    findPathPreferred(human: Human, targetTile: Tile): Tile[] | undefined;
+    findPathPreferred(human: Human, targetTile: Tile, range?: FindPathRange, isClientSide?: boolean): Tile[] | undefined;
+    isInRange(targetTile: Tile | Entity | undefined, range: FindPathRange, isClientSide?: boolean): boolean;
+    getWalkToTilePenalty(human: Human): number;
     /**
      * Returns whether the tile is blocked (completely impassible) for the human
      */

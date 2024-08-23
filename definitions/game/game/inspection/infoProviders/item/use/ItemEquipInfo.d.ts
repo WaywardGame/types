@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -17,7 +17,7 @@ import { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyTyp
 import { TempType } from "@wayward/game/game/temperature/ITemperature";
 import UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
 declare const _default: UseInfo<{
-    equip: import("../../../../entity/IHuman").EquipType;
+    equip: import("@wayward/game/game/entity/IHuman").EquipType;
     entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
     type: import("../../../../item/IItem").ItemType;

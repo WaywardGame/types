@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -21,5 +21,5 @@ export interface IMoveItemCanUse extends IActionUsable {
     targetContainer: IContainer;
     index?: number;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearbyIncludingTradeContainer, ActionArgument.ItemArrayNearbyIncludingTradeContainer, MoveItemsSourceArgument], [arg1: ActionArgument.Undefined, ActionArgument.Container], [arg1: ActionArgument.Undefined, ActionArgument.Integer32], [arg1: ActionArgument.Undefined, MoveItemFilterArgument<import("@wayward/game/game/entity/action/actions/moveItem/MoveItemFilterArgument").IMoveItemFilterArgument>], [arg1: ActionArgument.Undefined, MoveItemOptionsArgument]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IMoveItemCanUse, [(Item | Item[] | import("@wayward/game/game/entity/action/actions/moveItem/MoveItemsSourceArgument").IMoveItemsSourceArgument | undefined)?, (IContainer | undefined)?, (number | undefined)?, (import("@wayward/game/game/entity/action/actions/moveItem/MoveItemFilterArgument").IMoveItemFilterArgument | undefined)?, (import("@wayward/game/game/entity/action/actions/moveItem/MoveItemOptionsArgument").IMoveItemOptionsArgument | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearbyIncludingTradeContainer, ActionArgument.ItemArrayNearbyIncludingTradeContainer, MoveItemsSourceArgument], [arg1: ActionArgument.Undefined, ActionArgument.Container], [arg1: ActionArgument.Undefined, ActionArgument.Integer32], [arg1: ActionArgument.Undefined, MoveItemFilterArgument<import("@wayward/game/game/entity/action/actions/moveItem/MoveItemFilterArgument").IMoveItemFilterArgument>], [arg1: ActionArgument.Undefined, MoveItemOptionsArgument]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IMoveItemCanUse, [(Item | Item[] | import("@wayward/game/game/entity/action/actions/moveItem/MoveItemsSourceArgument").IMoveItemsSourceArgument | undefined)?, (IContainer | undefined)?, (number | undefined)?, (import("@wayward/game/game/entity/action/actions/moveItem/MoveItemFilterArgument").IMoveItemFilterArgument | undefined)?, (import("@wayward/game/game/entity/action/actions/moveItem/MoveItemOptionsArgument").IMoveItemOptionsArgument | undefined)?]>;
 export default _default;

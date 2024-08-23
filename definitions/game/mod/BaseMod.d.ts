@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -119,6 +119,7 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      *
      * @param registry The `IRegistry` that the registration is from.
      * @param registration A `ModRegistration` — This is a type alias for any possible interface that extends `IBaseRegistration`.
+     * @returns Optionally, a callback that should be executed when all registrations have been registered
      *
      * ------
      * 1. The registration is validated with `validateRegistration`. This is an asynchronous operation that replaces any references to
@@ -138,6 +139,7 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      * and any values in it which are instances of `Registry.Registered` are asynchronously replaced with their registered values.
      */
     private validateRegistration;
+    private validateRegistrationProperty;
     /**
      * @param registry The registry to get a property value from.
      * @param property The property to get the value of.

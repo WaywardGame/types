@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,7 +12,7 @@ import type { BiomeType } from "@wayward/game/game/biome/IBiome";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Human from "@wayward/game/game/entity/Human";
-import type { ICausesDamage, ICausesStatusEffect } from "@wayward/game/game/entity/IEntity";
+import type { ICausesDamage, ICausesStatus } from "@wayward/game/game/entity/IEntity";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
 import type { IDecayTemperatureRange } from "@wayward/game/game/IGame";
 import type { ILootItem } from "@wayward/game/game/ILoot";
@@ -63,7 +63,7 @@ export interface IDoodadGroupDescription {
      */
     hidden?: boolean;
 }
-export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatusEffect, ICausesDamage, ITemperatureDescription {
+export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatus, ICausesDamage, ITemperatureDescription {
     actionTypes?: ActionType[];
     allowedTiles?: TerrainType[];
     blockJump?: boolean;
@@ -78,6 +78,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     blockMove?: boolean;
     moveIntoAction?: ActionType;
     openContainerAction?: ActionType;
+    tabAction?: ActionType;
     burnsLike?: ItemType[];
     canBreak?: boolean;
     canGrow?: boolean;

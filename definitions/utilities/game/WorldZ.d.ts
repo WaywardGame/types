@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,5 +12,5 @@ export declare enum WorldZ {
     Min = -1,
     Max = -1,
     Cave = 0,
-    Overworld = 1
+    Surface = 1
 }

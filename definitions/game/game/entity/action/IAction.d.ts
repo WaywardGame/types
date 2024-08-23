@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,20 +9,20 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { SfxType } from "@wayward/game/audio/IAudio";
-import type { Deity } from "@wayward/game/game/deity/Deity";
+import type { Deity, DeityReal } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type Human from "@wayward/game/game/entity/Human";
 import type { EntityType } from "@wayward/game/game/entity/IEntity";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { INotUsableMessage } from "@wayward/game/game/entity/action/actions/helper/NotUsableMessage";
 import type { ActionArgumentCustom } from "@wayward/game/game/entity/action/argument/ActionArgumentCustom";
 import type ActionArgumentEnum from "@wayward/game/game/entity/action/argument/ActionArgumentEnum";
-import type { IActionExpectedLocation } from "@wayward/game/game/entity/action/argument/ActionArgumentExpectedLocation";
 import type ActionArgumentObjectKey from "@wayward/game/game/entity/action/argument/ActionArgumentObjectKey";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
-import type { IPackedMessage } from "@wayward/game/game/entity/player/IMessageManager";
+import type { IPackedMessage, Source } from "@wayward/game/game/entity/player/IMessageManager";
 import type { TurnTypeFlag } from "@wayward/game/game/entity/player/IPlayer";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { INewIslandOverrides } from "@wayward/game/game/island/IIsland";
@@ -32,10 +32,12 @@ import type { IContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { IPromptDescriptionBase, PromptDescriptionArgs } from "@wayward/game/game/meta/prompt/IPrompt";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { IFindPathRange } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
 import type Translation from "@wayward/game/language/Translation";
+import type Message from "@wayward/game/language/dictionary/Message";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
@@ -148,7 +150,7 @@ export declare enum ActionType {
     ToggleContainer = 104,
     UpdateOption = 105,
     UpdateGameOption = 106,
-    UpdateWalkPath = 107,
+    UpdateWalkTo = 107,
     Sacrifice = 108,
     Absorb = 109,
     Exude = 110,
@@ -177,7 +179,8 @@ export declare enum ActionType {
     Reshape = 133,
     Stack = 134,
     Unstack = 135,
-    SetCreatureAiAll = 136
+    SetCreatureAiAll = 136,
+    CraftingIngredient = 137
 }
 export declare const ACTIONS_RECOMMENDED: ActionType[];
 export declare enum ActionUsability {
@@ -212,13 +215,19 @@ export interface IActionUsable {
 export declare namespace IActionUsable {
     function usableOrPrintable(usability: IActionUsable | IActionNotUsable): boolean;
 }
-export interface IActionNotUsable extends Partial<IPackedMessage> {
+export interface IActionNotUsable {
     usable: false;
     alreadyUsing?: true;
-    errorDisplayLevel?: ActionDisplayLevel;
     mobCheckTile?: Tile;
+    message?: Message | INotUsableMessage;
+    sources?: ArrayOr<Source>;
+    errorDisplayLevel?: ActionDisplayLevel;
+    args?: never;
     arg?: never;
     source?: never;
+}
+export declare namespace IActionNotUsable {
+    function packMessage(definition: IActionNotUsable): IPackedMessage | undefined;
 }
 export interface IProtectedItems {
     consumedItems?: Item[] | Item;
@@ -228,7 +237,7 @@ export interface IProtectedItems {
 export type AnyActionDescription = IActionDescription<ActionArguments, Entity, any, IActionUsable, any[]>;
 export interface IActionDescription<A extends ActionArguments = ActionArguments, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> extends IModdable {
     type?: number;
-    alignment?: Deity;
+    deities?: DeityReal[];
     argumentTypes: A;
     usability: {
         [key in ActionUsability]?: boolean;
@@ -239,7 +248,9 @@ export interface IActionDescription<A extends ActionArguments = ActionArguments,
     validExecutors: Set<EntityType>;
     hasFlag(flag: ActionFlag): boolean;
     execute(actionApiOrExecutor: IActionApi<E, CU> | E, ...args: AV): PromiseOr<R | undefined>;
-    executeAt(actionApiOrExecutor: IActionApi<E, CU> | E, location: IActionExpectedLocation, ...args: AV): PromiseOr<R | undefined>;
+    executeAt(actionApiOrExecutor: IActionApi<E, CU> | E, location: IActionTargetAdjacent, ...args: AV): PromiseOr<R | undefined>;
+    executeOn(actionApiOrExecutor: IActionApi<E, CU> | E, entity: Entity | IActionTargetEntityRanged, ...args: AV): PromiseOr<R | undefined>;
+    executeRanged(actionApiOrExecutor: IActionApi<E, CU> | E, target: IActionTargetTileRanged, ...args: AV): PromiseOr<R | undefined>;
     executeConfirmer(actionApiOrExecutor: IActionApi<E, any> | E, args: AV, argumentTypes?: ActionArgument[]): Promise<boolean>;
     /**
      * Check if the action has setup CanUse logic
@@ -247,7 +258,7 @@ export interface IActionDescription<A extends ActionArguments = ActionArguments,
     readonly hasSetCanUse: boolean;
     getExample(executor: E, ...args: AV): IActionExample | undefined;
     canUse(executor: E, ...args: AV): CU | IActionNotUsable;
-    canUseAt(executor: E, location: IActionExpectedLocation, ...args: AV): CU | IActionNotUsable;
+    canUseAt(executor: E, location: IActionTargetAdjacent, ...args: AV): CU | IActionNotUsable;
     /**
      * Called internally during `execute`
      */
@@ -278,6 +289,7 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
     readonly actionStack: readonly ActionType[];
     readonly callingAction: ActionType;
     readonly hasSetCanUse: boolean;
+    readonly targetTile?: Tile;
     isArgumentType<A extends ActionArgument>(argument: any, index: number, argumentType: A): argument is IActionArgumentTypeMap[A];
     canUse(): CU | IActionNotUsable;
     /**
@@ -312,7 +324,11 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
     /**
      * Sets the chance that this action will create a rune item in the player's inventory.
      */
-    setRuneChance(alignment: Deity, chance: number): this;
+    setRuneChance(chance: number): this;
+    /**
+     * Sets the chance that this action will create a rune item in the player's inventory.
+     */
+    setRuneChance(alignment: ArrayOr<Deity> | undefined, chance: number): this;
     setMilestone(milestone: Milestone, data?: number): this;
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
     setParticle(color: IRGB, inFront?: boolean): this;
@@ -392,6 +408,18 @@ export interface IActionParticle {
     tile?: Tile;
     count?: number;
     inFront?: boolean;
+}
+export interface IActionTargetAdjacent {
+    targetTile: Tile;
+    fromTile: Tile;
+}
+export interface IActionTargetTileRanged {
+    tile: Tile;
+    range: IFindPathRange;
+}
+export interface IActionTargetEntityRanged {
+    entity: Entity;
+    range: IFindPathRange;
 }
 export type ActionArgumentArray = Array<ActionArgumentCustom<any> | ActionArgument>;
 export type ActionArgumentsEntry = ActionArgumentCustom<any> | ActionArgument | ActionArgumentArray;

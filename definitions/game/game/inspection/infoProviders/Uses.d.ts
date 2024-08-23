@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -34,7 +34,12 @@ export default abstract class Uses<T extends IDescribed> extends InfoProvider {
     setLabel(label: Translation | UiTranslation): this;
     private readonly details;
     addDetails(...details: symbol[]): this;
+    private hasExtraUseInfoForActionSlot;
+    private hasAlwaysVisibleUses;
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
+    private getUsesForDisplayLevel;
+    private getUseRows;
+    private getUseList;
     private getUseExtraInfo;
     protected getUseDisplayLevel(action: ActionType, context: InfoProviderContext): InfoDisplayLevel;
     private getDetailsHandlerResolver;

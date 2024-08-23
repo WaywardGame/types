@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -20,5 +20,5 @@ export interface IHarvestCanUse extends IActionUsable {
     doodad: Doodad;
     resources: ILootItem[];
 }
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Tile, ActionArgument.Undefined]], Doodad | import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IHarvestCanUse, [(Item | undefined)?, (import("../../../tile/Tile").default | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Tile, ActionArgument.Undefined]], Doodad | import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IHarvestCanUse, [(Item | undefined)?, (import("../../../tile/Tile").default | undefined)?]>;
 export default _default;

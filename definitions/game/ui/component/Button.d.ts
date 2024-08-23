@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -19,6 +19,7 @@ interface IButtonEvents extends Events<Component> {
     activate(): any;
     toggleDisabled(disabled: boolean): any;
     toggleActive(active: boolean): any;
+    initializeText(text: Text): any;
 }
 export declare enum ButtonClasses {
     Main = "button",

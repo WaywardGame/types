@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -17,5 +17,5 @@ export interface IReleaseCanUse extends IActionUsable {
 /**
  * Releases a creature from being tamed
  */
-declare const _default: Action<[], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IReleaseCanUse, []>;
+declare const _default: Action<[], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IReleaseCanUse, []>;
 export default _default;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,6 +10,7 @@
  */
 import { InfoDisplayLevel } from "@wayward/game/game/inspection/IInfoProvider";
 import { InspectType } from "@wayward/game/game/inspection/IInspection";
+import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import Inspection from "@wayward/game/game/inspection/Inspection";
@@ -17,26 +18,30 @@ import { ItemType, ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import Item from "@wayward/game/game/item/Item";
 import { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
-import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import Translation from "@wayward/game/language/Translation";
 export default class ItemInspection extends Inspection<ItemType | ItemTypeExtra> {
-    static getFromTile(tile: Tile, _: any, inspectType: InspectType): ItemInspection[];
+    static getFromTile(tile: Tile, context: InfoProviderContext | undefined, inspectType: InspectType): ItemInspection[];
     static isWorldInspection(type: InspectType): boolean;
     static handles(type: InspectType, item: unknown): boolean;
     private static readonly itemTypeHandles;
     private static readonly dismantleHandles;
-    readonly item?: WeakRef<Item> | undefined;
+    private readonly itemRef?;
+    get item(): Item | undefined;
     private readonly description?;
     private readonly isDismantle;
     private inspectorPosition;
     private itemPosition;
     private isItemVisible;
-    constructor(item: Item | [ReferenceType, ItemType | ItemTypeExtra]);
+    constructor(item: Item | [ReferenceType, ItemType | ItemTypeExtra], context?: InfoProviderContext);
     getId(): string;
     getBorder(): string | undefined;
     getDefaultDisplayLevel(): InfoDisplayLevel;
     hasContent(context: InfoProviderContext): boolean;
     private getName;
-    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
+    protected getTitle(context: InfoProviderContext): Translation;
+    protected getSubtitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getColorContext(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getContent(context: InfoProviderContext): ArrayOr<Translation | InfoProvider | undefined>;
     protected onItemRemove(_: any, item: Item): void;
     protected onTickEnd(): void;
     private updatePosition;

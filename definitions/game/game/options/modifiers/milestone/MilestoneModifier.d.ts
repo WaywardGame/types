@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -19,13 +19,14 @@ export declare enum MilestoneModifierGroup {
     Skills = 1,
     Items = 2,
     Equipment = 3,
-    Alignment = 4,
+    Deities = 4,
     Actions = 5,
     Treasure = 6,
     Metagame = 7,
     Turns = 8,
     Challenge = 9,
-    Merchants = 10
+    Merchants = 10,
+    Statuses = 11
 }
 export declare const milestoneGroupIcons: Record<MilestoneModifierGroup, string>;
 export declare class MilestoneModifierInstance<DATA = any> extends GameplayModifierInstance<Milestone, [Human?], DATA> {

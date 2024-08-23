@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -91,6 +91,7 @@ export interface IDijkstraMapFindPathResult {
     score: number;
     endX: number;
     endY: number;
+    moveAdjacentToTarget: boolean;
 }
 export interface INavigation {
     getNode(x: number, y: number): INavigationNode;

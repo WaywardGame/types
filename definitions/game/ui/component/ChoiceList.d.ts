@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -20,7 +20,7 @@ export declare enum ChoiceListClasses {
     NoChoice = "menu-choice-list-no-choice"
 }
 export interface IChoiceListEvents<C extends Choice = Choice, OPTIONAL extends boolean = false> extends Events<BlockRow> {
-    choose(choice: OPTIONAL extends true ? C | undefined : C): any;
+    choose(choice: OPTIONAL extends true ? C | undefined : C, oldChoice?: C): any;
 }
 declare class ChoiceList<C extends Choice = Choice, OPTIONAL extends boolean = false> extends BlockRow implements IRefreshableValue<OPTIONAL extends true ? C | undefined : C>, IDisableable {
     event: IEventEmitter<this, IChoiceListEvents<C, OPTIONAL>>;
@@ -53,7 +53,7 @@ export interface IChoiceEvents extends Events<CheckButton> {
 }
 export declare class Choice<I extends string | number | undefined = string | number | undefined> extends CheckButton {
     readonly id: I;
-    readonly event: IEventEmitter<this, IChoiceEvents>;
+    event: IEventEmitter<this, IChoiceEvents>;
     constructor(id: I);
     choose(): void;
 }

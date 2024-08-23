@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,7 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { GameEmitterOrBus, GameEvent, GameEventHandler } from "@wayward/game/event/EventManager";
-import type { IIcon } from "@wayward/game/game/inspection/InfoProvider";
 import { TextContext, type TranslationArg } from "@wayward/game/language/ITranslation";
 import Translation from "@wayward/game/language/Translation";
 import UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
@@ -17,34 +16,40 @@ import type { IBindingsSection } from "@wayward/game/language/segment/BindSegmen
 import type { IColorSection } from "@wayward/game/language/segment/ColorSegment";
 import type { IHeadingSection } from "@wayward/game/language/segment/HeadingSegment";
 import type { ILinkSection } from "@wayward/game/language/segment/LinkSegment";
-import type { IListItemSection } from "@wayward/game/language/segment/ListSegment";
+import type { IListItemSection, IListSection } from "@wayward/game/language/segment/ListSegment";
 import type { IReferenceSection } from "@wayward/game/language/segment/ReferenceSegment";
+import { ISimplificationSection } from "@wayward/game/language/segment/SimplificationSegment";
 import type { ITooltipSection } from "@wayward/game/language/segment/TooltipSegment";
 import Component from "@wayward/game/ui/component/Component";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 import type { IInput, Modifier } from "@wayward/game/ui/input/IInput";
 import type { IMacroSection } from "@wayward/game/ui/input/Macros";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
-import type { ISegment, IStringSection } from "@wayward/game/utilities/string/Interpolator";
+import type { ISegment, IStringRawSection } from "@wayward/game/utilities/string/Interpolator";
+import { IStringSection } from "@wayward/game/utilities/string/Interpolator";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-interface IEntireTextData {
-    currentReferenceId?: string;
+export declare enum TextClasses {
+    Heading = "heading",
+    Link = "link",
+    _HasTooltip = "has-tooltip"
 }
-declare namespace IEntireTextData {
-    function getReferenceId(section: IStringSection & Partial<IReferenceSection>): string | undefined;
+export interface ITextResolved {
+    sections: IStringSection[];
+    context: TextContext;
+}
+export interface ITextEvents extends Events<Component> {
+    refresh(): any;
 }
 export default class Text extends Component {
-    static resolve(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[], ...args: TranslationArg[]): {
-        sections: IStringSection[];
-        context: TextContext;
-    };
+    event: IEventEmitter<this, ITextEvents>;
+    static resolve(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[], ...args: TranslationArg[]): ITextResolved;
+    static simplify(sections: IStringSection[]): IStringSection[];
     private static areIdenticalSections;
     private static isIdenticalSection;
     static toString(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[], ...args: TranslationArg[]): string;
     private segments;
     private text?;
     private args?;
-    private paragraphs?;
     private existingSections?;
     constructor(elementType?: string);
     setSegments(...segments: ISegment[]): this;
@@ -61,8 +66,10 @@ export default class Text extends Component {
     hasText(): boolean;
     isEmpty(): boolean;
     refresh(): this;
+    private renderSections;
     dump(filter?: (element: HTMLElement, component?: Component) => boolean): this;
     private readonly refreshEvents;
+    private readonly translationRefreshEvents;
     /**
      * Subscribes refresh events to the given host.
      *
@@ -77,8 +84,8 @@ export default class Text extends Component {
      */
     subscribeRefreshOn<E extends GameEmitterOrBus, K extends GameEvent<E>>(emitterOrBus: E, ...events: K[]): this;
     protected onRemove(): void;
-    private refreshParagraphs;
-    private refreshBasic;
+    private subscribeRefreshEvents;
+    private unsubscribeRefreshEvents;
 }
 export declare class Paragraph extends Text {
     constructor();
@@ -92,21 +99,26 @@ export declare class Heading extends Text {
     icon?: Component;
     addIcon(initializer: (component: Component) => any): this;
 }
-export type BasicTextLink = string | [string, string?, string?];
-export interface IBasicTextEvents extends Events<Component> {
-    handleLink(link: BasicTextLink): true | void;
+export type TextWrapperLink = string | [string, string?, string?];
+type ITextWrapperSection = IStringSection & Partial<IColorSection & IReferenceSection & IListItemSection & IListSection & ISimplificationSection & ITooltipSection & ILinkSection>;
+export interface ITextWrapperEvents extends Events<Component> {
+    handleLink(link: TextWrapperLink): true | void;
+}
+export declare class TextWrapper extends Component {
+    static renderSection(section: ITextWrapperSection): Component;
+    event: IEventEmitter<this, ITextWrapperEvents>;
+    currentTooltip?: (tooltip: Tooltip) => any;
+    private _link;
+    render(section: ITextWrapperSection): void;
+    protected onRemove(): void;
+    private onClick;
 }
 export declare class BasicText extends Component {
-    static applyIcon(component?: Component, icon?: IIcon): void;
-    event: IEventEmitter<this, IBasicTextEvents>;
-    private _link;
     inputIndex?: number;
     protected input?: IInput;
     protected inputModifier?: Modifier;
-    currentTooltip?: (tooltip: Tooltip) => any;
     constructor(elementType?: string);
-    setText(text: IStringSection & Partial<IColorSection & ILinkSection & IHeadingSection & ITooltipSection & IReferenceSection & IListItemSection & IBindingsSection & IMacroSection>, data?: IEntireTextData): this;
+    setText(text: IStringRawSection & Partial<IColorSection & ILinkSection & IHeadingSection & IBindingsSection & IMacroSection>): this;
     protected onRemove(): void;
-    private onClick;
 }
 export {};

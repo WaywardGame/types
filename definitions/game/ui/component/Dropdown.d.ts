@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -109,7 +109,7 @@ interface IDropdownInputButtonEvents extends Events<InputButton> {
     prevOption(): any;
 }
 declare class DropdownInputButton extends InputButton {
-    readonly event: IEventEmitter<this, IDropdownInputButtonEvents>;
+    event: IEventEmitter<this, IDropdownInputButtonEvents>;
     constructor(inputInitializer: (input: Input) => any);
     protected playSound(): void;
     protected onStopEditMode(): void;

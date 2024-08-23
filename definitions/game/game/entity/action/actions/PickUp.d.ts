@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,6 +13,7 @@ import type { IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type Human from "@wayward/game/game/entity/Human";
 import type { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { ITerrainDescription } from "@wayward/game/game/tile/ITerrain";
@@ -24,5 +25,5 @@ export interface IPickUpCanUse extends IActionUsable {
     pickUpTypes: ItemType[];
     terrainDescription: ITerrainDescription;
 }
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpCanUse, [(Item | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpCanUse, [(Item | undefined)?]>;
 export default _default;

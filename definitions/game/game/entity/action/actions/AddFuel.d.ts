@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,5 +14,5 @@ import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 export interface IAddFuelCanUse extends IActionUsable {
     stokeAmount: number;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IAddFuelCanUse, [import("../../../item/Item").default, import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IAddFuelCanUse, [import("../../../item/Item").default, import("../../../item/Item").default]>;
 export default _default;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -33,6 +33,7 @@ export default class LabelledValue extends InfoProvider {
     private contentDisplayLevel?;
     private labelDisplayLevel?;
     private inline?;
+    private labelRow?;
     private classes?;
     private constructor();
     add(...values: Array<Falsy | GetterOfOr<InfoProvider | Translation | UiTranslation | undefined>>): this;
@@ -47,5 +48,6 @@ export default class LabelledValue extends InfoProvider {
     setDisplayMode(mode: keyof typeof LabelledValueDisplayMode): this;
     setDisplayMode(mode: keyof typeof LabelledValueDisplayMode, contentDisplayLevel?: InfoDisplayLevel): this;
     setInline(): this;
+    setLabelRow(): this;
     setLabelDisplayLevel(displayLevel?: InfoDisplayLevel): this;
 }

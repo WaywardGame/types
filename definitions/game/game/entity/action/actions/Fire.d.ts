@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,5 +13,5 @@ import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 /**
  * Firing a weapon (like a bow)
  */
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/actions/Attack").IAttackCloseUpCanUse | import("@wayward/game/game/entity/action/actions/Attack").IAttackThrowItemCanUse | import("@wayward/game/game/entity/action/actions/Attack").IAttackRangedWeaponCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/actions/Attack").IAttackCloseUpCanUse | import("@wayward/game/game/entity/action/actions/Attack").IAttackThrowItemCanUse | import("@wayward/game/game/entity/action/actions/Attack").IAttackRangedWeaponCanUse, [import("../../../item/Item").default]>;
 export default _default;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,12 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
-import { StatusEffectChangeReason } from "@wayward/game/game/entity/IEntity";
-import type StatusEffect from "@wayward/game/game/entity/status/StatusEffect";
+import { StatusChangeReason } from "@wayward/game/game/entity/IEntity";
+import type Status from "@wayward/game/game/entity/status/Status";
 import type { DisplayableItemType } from "@wayward/game/game/item/IItem";
+import type { IRendererContext } from "@wayward/game/renderer/context/IRendererContext";
 import type { INotificationLocation, MarkerIconType } from "@wayward/game/renderer/notifier/INotifier";
 import { CreatureNotifierType, ItemNotifierType, NotifierIconType, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
-import type { IRendererContext } from "@wayward/game/renderer/context/IRendererContext";
 import type { IResourceContainer } from "@wayward/game/renderer/resources/IResourceContainer";
 export declare class Notifier {
     private readonly context;
@@ -35,7 +35,7 @@ export declare class Notifier {
     addItem(location: INotificationLocation, itemNotifierType: ItemNotifierType, type: DisplayableItemType): void;
     addCreature(location: INotificationLocation, creatureNotifierType: CreatureNotifierType, type: CreatureType, aberrant?: boolean): void;
     addStat(location: INotificationLocation, type: StatNotificationType, value: number): void;
-    addStatusEffect(location: INotificationLocation, statusEffect: StatusEffect, reason: StatusEffectChangeReason): void;
+    addStatus(location: INotificationLocation, status: Status, reason: StatusChangeReason): void;
     addNotifierIcon(location: INotificationLocation, type: NotifierIconType): void;
     addMarker(location: INotificationLocation, type: MarkerIconType, markerGuid: string): void;
     removeNotification(guid: string): void;

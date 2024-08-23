@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,11 +12,12 @@ import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type { IItemBuild, IItemDescription } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
 export interface IBuildCanUse extends IActionUsable {
     description: IItemDescription;
     tile: Tile;
     buildInfo: IItemBuild;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.Tile, ActionArgument.Undefined]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IBuildCanUse, [import("../../../item/Item").default, (Tile | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.Tile, ActionArgument.Undefined]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IBuildCanUse, [Item, (Tile | undefined)?]>;
 export default _default;

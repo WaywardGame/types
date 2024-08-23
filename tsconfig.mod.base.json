@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "ES2021",
+		"target": "esnext",
 		"module": "AMD",
 		"moduleResolution": "node",
 		"composite": true,
@@ -14,6 +14,7 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"strictPropertyInitialization": false,
+		"useDefineForClassFields": false,
 		"paths": {
 			"@wayward/goodstream": [
 				"node_modules/@wayward/goodstream/Stream",
@@ -31,7 +32,7 @@
 		"lib": [
 			"DOM",
 			"DOM.Iterable",
-			"ES2021",
+			"ESNext",
 			"WebWorker.ImportScripts",
 		]
 	},

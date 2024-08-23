@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -26,5 +26,6 @@ export default abstract class UniversalOverlay<OVERLAY extends IOverlayInfo = IO
     protected onTickEndOrLocalPlayerPostMove(): void;
     protected invalidate(tile: Tile, invalidateRange?: number): void;
     clear(): void;
+    protected shouldRefresh?(): boolean;
     refresh(): void;
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { WorldZ } from "@wayward/utilities/game/WorldZ";
-import { type FerocityLevelThresholds } from "@wayward/game/game/deity/IDeities";
+import type { IBiomeCreatureZones } from "@wayward/game/game/entity/creature/zone/ICreatureZone";
 import type { IBiomeMapGen, MapGenVersions } from "@wayward/game/game/mapgen/IMapGen";
 import type { IBiomeTemperature } from "@wayward/game/game/temperature/ITemperature";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
@@ -29,16 +28,9 @@ export interface IBiomeDescription<BiomeOptionsType = unknown> extends IModdable
     mapGen: MapGenVersions<IBiomeMapGen<BiomeOptionsType>>;
     fog?: IFogDescription;
     /**
-     * A record defining maximum thresholds for each ferocity level.
-     *
-     * When a layer's ferocity thresholds are not set, thresholds for `WorldZ.Overworld` are used.
-     * When no thresholds are set *at all*, {@link DEFAULT_FEROCITY_LEVEL_THRESHOLDS} is used.
-     *
-     * The current ferocity level is equivalent to the level with the threshold *closest* to the current alignment value, without exceeding it.
-     *
-     * When no thresholds are applicable, `FerocityLevel.Minimal` is used.
+     * Optional, looks in `CreatureZoneDescriptions.ts` by default
      */
-    ferocity?: PartialRecord<WorldZ, FerocityLevelThresholds>;
+    zones?: IBiomeCreatureZones;
     /**
      * Returns default biome options
      */

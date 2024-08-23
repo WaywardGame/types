@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,18 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import EntityManager from "@wayward/game/game/entity/EntityManager";
+import type Human from "@wayward/game/game/entity/Human";
 import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
 import TileEvent from "@wayward/game/game/tile/TileEvent";
 import type { TextContext } from "@wayward/game/language/ITranslation";
 import { Article } from "@wayward/game/language/Translation";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import Stream from "@wayward/goodstream/Stream";
-import type Human from "@wayward/game/game/entity/Human";
-import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface ITileManagerEvents extends Events<EntityManager<TileEvent>> {
     /**
      * Called when a tile event is about to be created
@@ -31,7 +31,7 @@ export interface ITileManagerEvents extends Events<EntityManager<TileEvent>> {
 }
 export default class TileEventManager extends EntityManager<TileEvent> {
     protected readonly name = "TileEventManager";
-    readonly event: IEventEmitter<this, ITileManagerEvents>;
+    event: IEventEmitter<this, ITileManagerEvents>;
     loadEntity(tileEvent: TileEvent): void;
     create(type: TileEventType, tile: Tile): TileEvent | undefined;
     createFake(type: TileEventType, tile: Tile, id?: number): TileEvent | undefined;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,28 +9,31 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { EquipType } from "@wayward/game/game/entity/IHuman";
+import { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import { Reference } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
 import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
 import type { ActionSlot } from "@wayward/game/ui/screen/screens/game/static/actions/ActionSlot";
 export default class InspectDialog extends Dialog {
+    private static get baseContext();
     private inspections?;
     private readonly dropdownDisplayLevel;
     private readonly scrollableWrapper;
-    private readonly context;
+    private context;
     private inspected?;
-    private readonly inspectionPast;
+    private inspectionPast;
     private inspectionFuture;
     constructor();
     protected onLoad(): Promise<void | this>;
-    inspectReference(reference: Reference): this;
-    inspectTile(tile: Tile): this;
-    inspectEquipSlot(slot: EquipType): this;
-    inspectActionSlot(slot?: ActionSlot): this;
-    inspectAlignment(): this;
+    private loadInspections;
+    inspectReference(reference: Reference, context?: InfoProviderContext): boolean;
+    inspectTile(tile: Tile): boolean;
+    inspectEquipSlot(slot: EquipType): boolean;
+    inspectActionSlot(slot?: ActionSlot): boolean;
     protected onClose(): void;
     protected onMoveToIsland(): void;
     private reinspect;
+    private tryInspect;
     private update;
     private removeOverlay;
     private setInspected;

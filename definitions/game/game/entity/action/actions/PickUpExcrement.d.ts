@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,6 +11,7 @@
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type Human from "@wayward/game/game/entity/Human";
 import type { ITileEventDescription } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
@@ -20,5 +21,5 @@ export interface IPickUpExcrementCanUse extends IActionUsable {
     excrementDescription: ITileEventDescription;
     excrement: TileEvent;
 }
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpExcrementCanUse, [(import("../../../item/Item").default | undefined)?]>;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpExcrementCanUse, [(import("../../../item/Item").default | undefined)?]>;
 export default _default;

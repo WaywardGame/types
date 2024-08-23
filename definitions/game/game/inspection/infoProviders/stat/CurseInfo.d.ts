@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,11 +11,12 @@
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import { StatInfo } from "@wayward/game/game/inspection/infoProviders/stat/StatInfo";
+export declare enum CurseInfoClasses {
+    Factors = "inspection-type-curse-factors"
+}
 export default class CurseInfo extends StatInfo {
     private readonly curseFactors;
-    private readonly curse;
     private readonly curseFactorsExact;
-    getClass(): string[];
     hasContent(context: InfoProviderContext): boolean;
     get(): InfoProvider[];
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,13 +14,15 @@ import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import Inspection from "@wayward/game/game/inspection/Inspection";
 import { ItemType } from "@wayward/game/game/item/IItem";
-import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import Translation from "@wayward/game/language/Translation";
 export default class RecipeInspection extends Inspection<ItemType> {
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     private checker;
-    constructor([, itemType]: [any, ItemType]);
+    constructor([, itemType]: [any, ItemType], context?: InfoProviderContext);
     getId(): string;
-    get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
+    protected getTitle(context: InfoProviderContext): Translation;
+    protected getSubtitle(context: InfoProviderContext): Translation | undefined;
+    protected getContent(context: InfoProviderContext): ArrayOr<Translation | InfoProvider | undefined>;
     private getDetails;
     private isUnskilled;
     protected getRuneInfo(): SimpleInfoProvider | undefined;

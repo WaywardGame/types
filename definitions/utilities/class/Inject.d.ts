@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -21,7 +21,7 @@ export interface IInjectionApi<T, K extends keyof T> {
     /**
      * The return value of the method call.
      */
-    returnValue: ReturnType<T[K] extends (...args: any[]) => any ? T[K] : never> | undefined;
+    returnValue: T[K] extends ((...args: any[]) => infer RETURN_TYPE) | undefined ? RETURN_TYPE : undefined;
     /**
      * The arguments given to the method call.
      */
@@ -31,7 +31,7 @@ export interface IInjectionApi<T, K extends keyof T> {
      */
     cancelled: boolean;
 }
-type InjectionMethod<T, K extends keyof T> = T[K] extends (...args: infer A) => any ? (api: IInjectionApi<T, K>, ...args: A) => any : never;
+type InjectionMethod<T, K extends keyof T> = T[K] extends ((...args: infer A) => any) | undefined ? (api: IInjectionApi<T, K>, ...args: A) => any : never;
 export declare enum InjectionPosition {
     /**
      * This injection will be called before the target method.
@@ -42,8 +42,13 @@ export declare enum InjectionPosition {
      */
     Post = "post"
 }
-export declare function InjectObject<T extends Record<K, AnyFunction>, K extends keyof T>(injectInto: T, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any;
+export declare function InjectObject<T, K extends keyof T>(injectInto: T, property: K, position: InjectionPosition, priority?: number): T extends {
+    [KEY in K]?: AnyFunction;
+} ? (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any : never;
 export declare function Inject<T extends Record<K, AnyFunction>, K extends keyof T>(injectInto: AnyClass<T>, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any;
+export declare namespace Inject {
+    function makeInjectableClass<T extends AbstractNullaryClass<any>, O>(cls: T): Class<Merge<InstanceOf<T>, O>>;
+}
 /**
  * Classes decorated with `Injector` will have their methods automatically injected using `inject`.
  *

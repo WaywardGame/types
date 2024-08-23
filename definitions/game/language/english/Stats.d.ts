@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Stat } from "@wayward/game/game/entity/IStats";
-declare const stats: Descriptions<Stat, string | [string, string?]>;
+declare const stats: Descriptions<Stat, string | [string, string?, string?]>;
 export default stats;

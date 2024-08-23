@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,5 +15,5 @@ import type { IItemDescription } from "@wayward/game/game/item/IItem";
 export interface IConsumeItemCanUse extends IActionUsable {
     description: IItemDescription;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IConsumeItemCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IConsumeItemCanUse, [import("../../../item/Item").default]>;
 export default _default;

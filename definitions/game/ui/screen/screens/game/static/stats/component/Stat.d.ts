@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,21 +8,47 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Entity from "@wayward/game/game/entity/Entity";
 import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type { IStatChangeInfo } from "@wayward/game/game/entity/IEntity";
-import type { IStat, IStatBase, IStatMax, Stat } from "@wayward/game/game/entity/IStats";
+import type { IStat, IStatBase, IStatMax } from "@wayward/game/game/entity/IStats";
+import { Stat, StatDisplayType } from "@wayward/game/game/entity/IStats";
 import Translation from "@wayward/game/language/Translation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import { PathType } from "@wayward/game/resource/IResourceLoader";
 import Component from "@wayward/game/ui/component/Component";
 import Text from "@wayward/game/ui/component/Text";
+import ImagePath from "@wayward/game/ui/util/ImagePath";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export declare enum StatClasses {
+    List = "stats-list",
+    Row = "stat-row",
+    Row_FirstOfType = "stat-row--first-of-type",
+    RowBar = "stat-bar-row",
+    RowAttribute = "stat-attribute-row",
+    Main = "stat",
+    _Type_ = "stat--type-",
+    Label = "stat-label",
+    Display = "stat-display",
+    Text = "stat-text",
+    Bar = "stat-bar",
+    BarDisplay = "stat-bar-display",
+    BarLabel = "stat-bar-label",
+    Attribute = "stat-attribute",
+    AttributeMulti = "stat-attribute-multi",
+    AttributeDisplay = "stat-attribute-display",
+    AttributeLabel = "stat-attribute-label"
+}
+export interface IStatComponentEvents extends Events<Component> {
+    update(): any;
+}
 export declare abstract class StatComponent extends Component {
     private readonly stat;
-    protected readonly statDescription: import("@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription").IStatDisplayDescription | undefined;
-    private readonly statIcon;
+    protected readonly statDescription: import("../IStatDisplayDescription").IStatDisplayDescription | undefined;
+    event: IEventEmitter<this, IStatComponentEvents>;
+    readonly statIcon: ImagePath<PathType.StatIcon>;
     private readonly entityRef;
     protected get entity(): EntityWithStats | undefined;
-    constructor(entity: EntityWithStats, stat: Stat, noEvents?: true, statDescription?: import("@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription").IStatDisplayDescription | undefined);
+    constructor(entity: EntityWithStats, stat: Stat, noEvents?: true, statDescription?: import("../IStatDisplayDescription").IStatDisplayDescription | undefined);
     private onUpdateMilestone;
     protected onRemove(): void;
     /**
@@ -45,10 +71,6 @@ export declare abstract class StatComponent extends Component {
      * Returns the formatted CSS url for the stat icon.
      */
     getCustomStatIconPath(): string | undefined;
-    /**
-     * Returns the display priority for this stat.
-     */
-    getDisplayOrder(): number;
     abstract getTextElement(): Text | undefined;
     abstract getDisplayElement(): Component | undefined;
     /**
@@ -61,25 +83,22 @@ export declare abstract class StatComponent extends Component {
      * Should be used for both `value` & `max` changing.
      */
     protected onStatChange(_?: any, stat?: IStat, oldValue?: number, info?: IStatChangeInfo): void;
-    /**
-     * Returns the component that should have the stat tooltip
-     */
-    protected getTooltipElement(): Component | undefined;
     private getTooltip;
     private getTooltipLocation;
 }
-export declare abstract class StatsContainer<STAT_COMPONENT extends StatComponent> extends Component {
+export declare class StatsContainer extends Component {
     private readonly entity;
     private readonly noEvents?;
     private readonly _stats;
-    get stats(): Map<Stat, STAT_COMPONENT>;
-    constructor(entity: Entity, stats: Iterable<Stat>, noEvents?: true | undefined);
-    addStat(stat: Stat): void;
-    protected abstract createStatComponent(entity: Entity, stat: Stat, noEvents: true | undefined): STAT_COMPONENT;
+    get stats(): Map<Stat, StatComponent>;
+    constructor(entity: EntityWithStats, noEvents?: true | undefined);
+    addType(type: StatDisplayType.Statbar | StatDisplayType.Attribute, ...stats: Stat[]): this;
+    addStat(stat: Stat, type: StatDisplayType.Statbar | StatDisplayType.Attribute, index: number): void;
 }
 export declare class Statbar extends StatComponent {
-    private readonly bar;
-    private readonly text;
+    readonly label: Text;
+    readonly bar: Component<HTMLElement>;
+    readonly text: Text;
     constructor(entity: EntityWithStats, stat: Stat, noEvents?: true);
     getTextElement(): Text;
     getDisplayElement(): Component;
@@ -89,19 +108,11 @@ export declare class Statbar extends StatComponent {
      * property `--stat-percent`, to update the statbar's fill width.
      */
     onStatChange(_?: any, stat?: IStat, oldValue?: number): void;
-    protected getTooltipElement(): Component;
 }
 export declare class StatAttribute extends StatComponent {
-    private readonly attribute;
-    constructor(entity: EntityWithStats, stat: Stat, noEvents?: true, statDescription?: import("@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription").IStatDisplayDescription | undefined);
+    readonly attribute?: Text;
+    readonly label?: Text;
+    constructor(entity: EntityWithStats, stat: Stat, noEvents?: true, statDescription?: import("../IStatDisplayDescription").IStatDisplayDescription | undefined);
     getTextElement(): Text | undefined;
     getDisplayElement(): Text | undefined;
-}
-export declare class Statbars extends StatsContainer<Statbar> {
-    constructor(entity: Entity, stats: Iterable<Stat>, noEvents?: true);
-    protected createStatComponent(entity: EntityWithStats, stat: Stat, noEvents: true | undefined): Statbar;
-}
-export declare class StatAttributes extends StatsContainer<StatAttribute> {
-    constructor(entity: EntityWithStats, stats: Iterable<Stat>, noEvents?: true);
-    protected createStatComponent(entity: EntityWithStats, stat: Stat, noEvents: true | undefined): StatAttribute;
 }

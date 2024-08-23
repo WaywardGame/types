@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -92,13 +92,9 @@ export declare enum Source {
      */
     Events = 17,
     /**
-     * The message type that logs your deity alignment changes
-     */
-    DeityAlignment = 18,
-    /**
      * Trading-related messages
      */
-    Trading = 19
+    Trading = 18
 }
 export interface IMessage {
     id: number;
@@ -110,7 +106,7 @@ export interface IMessage {
 }
 export interface IPackedMessage {
     message: Message;
-    args?: () => Translation | any[];
+    args?: () => ArrayOr<TranslationArg>;
     type?: MessageType;
     sources?: Source | Source[];
 }
@@ -123,7 +119,7 @@ export interface IMessageManager {
     ifVisible(canSee?: IVector4): this;
     ifOnIsland(island: Island): this;
     send(message: Message | Translation, ...args: TranslationArg[]): boolean;
-    sendPacked(pack: Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
+    sendPacked(pack?: Message | Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
     pruneMessageHistory(isLocalPlayer: boolean): boolean;
     ifIs(human: Human): this;
     ifIsNot(human: Human): this;
@@ -150,5 +146,6 @@ export declare enum MessageType {
     Attack = 4,
     Stat = 5,
     Skill = 6,
-    Warning = 7
+    Warning = 7,
+    Evil = 8
 }

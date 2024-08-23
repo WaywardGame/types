@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 declare global {
+    type Empty = Record<string, never>;
     type PartialRecord<K extends string | number | symbol, V> = {
         [P in K]?: V;
     };
@@ -43,6 +44,16 @@ declare global {
     type PickValues<FROM, VALUES> = Pick<FROM, PickValueKeys<FROM, VALUES>>;
     type EnumKey<E> = keyof {
         [K in keyof E as E[K] extends number ? K : never]: true;
+    };
+    /**
+     * Merges T1 and T2, favouring properties from T2
+     */
+    type Merge<T1, T2> = {
+        [KEY in keyof T1 | keyof T2]: T2 extends {
+            [OLD_KEY in KEY]?: any;
+        } ? T2[KEY] : T1 extends {
+            [NEW_KEY in KEY]?: any;
+        } ? T1[KEY] : never;
     };
 }
 declare const _default: {};

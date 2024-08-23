@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -18,6 +18,7 @@ import Component from "@wayward/game/ui/component/Component";
 import Contenteditable from "@wayward/game/ui/component/Contenteditable";
 import type { ContextMenuDescriptions } from "@wayward/game/ui/component/ContextMenu";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import Bindable from "@wayward/game/ui/input/Bindable";
 import type { IPinnedMessage } from "@wayward/game/ui/screen/screens/game/IGameScreenApi";
 import { MessageTimestamp, PinType } from "@wayward/game/ui/screen/screens/game/IGameScreenApi";
 import type { IFilters } from "@wayward/game/ui/screen/screens/game/IMessages";
@@ -35,8 +36,7 @@ interface IMessagesEvents extends Events<QuadrantComponent> {
 }
 export declare enum MessagesClasses {
     Main = "game-messages",
-    Message = "game-message",
-    Group = "game-message-turn-group"
+    Content = "game-messages-content"
 }
 export default class Messages extends QuadrantComponent {
     private static get defaultFilters();
@@ -64,6 +64,7 @@ export default class Messages extends QuadrantComponent {
     private chatHistoryIndex;
     private pushedCurrentToHistory;
     constructor();
+    getBindable(): Bindable;
     getPins(): Stream<IPinnedMessage>;
     getMessageTimestampMode(): MessageTimestamp;
     setMessageTimestampMode(mode: MessageTimestamp): this;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,6 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IUsableActionExecutionContext, IUsableActionPossibleUsing } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
+import type Player from "@wayward/game/game/entity/player/Player";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import Button from "@wayward/game/ui/component/Button";
@@ -15,6 +18,7 @@ import { CheckButton } from "@wayward/game/ui/component/CheckButton";
 import Component from "@wayward/game/ui/component/Component";
 import type { ContextMenuDescriptions } from "@wayward/game/ui/component/ContextMenu";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import Bindable from "@wayward/game/ui/input/Bindable";
 import { Quadrant } from "@wayward/game/ui/screen/screens/game/component/IQuadrantComponent";
 import QuadrantComponent from "@wayward/game/ui/screen/screens/game/component/QuadrantComponent";
 import { ActionSlot } from "@wayward/game/ui/screen/screens/game/static/actions/ActionSlot";
@@ -28,13 +32,18 @@ export declare enum ActionBarClasses {
     Configuring = "game-action-bar-configuring",
     SlotsContainer = "game-action-bar-slots",
     SlotsContainerLastFour = "game-action-bar-slots-last-four",
+    SlotsContainerHistory = "game-action-bar-slots-history",
     MovingSlot = "game-action-bar-moving-slot",
     MetaButtons = "game-action-bar-meta-buttons-container",
     MetaButton = "game-action-bar-meta-button",
     MetaButtonAdd = "game-action-bar-meta-button-add",
     MetaButtonRemove = "game-action-bar-meta-button-remove",
     MetaButtonConfigure = "game-action-bar-meta-button-configure",
-    MetaButtonToggleUseWhenMoving = "game-action-bar-meta-button-toggle-use-when-moving"
+    MetaButtonToggleUseWhenMoving = "game-action-bar-meta-button-toggle-use-when-moving",
+    _HistoryInactive = "game-action-bar--history-inactive",
+    _HistoryActive = "game-action-bar--history-active",
+    _HistoryClearing = "game-action-bar--history-clearing",
+    _AutoPaused = "game-action-bar--auto-paused"
 }
 export interface IActionBarEvents extends Events<QuadrantComponent> {
     configure(number: number): any;
@@ -44,9 +53,10 @@ export interface IActionBarEvents extends Events<QuadrantComponent> {
     slotUpdate(slot: ActionSlot, data?: IActionBarSlotData, oldData?: IActionBarSlotData): any;
 }
 export default class ActionBar extends QuadrantComponent {
-    readonly event: IEventEmitter<this, IActionBarEvents>;
+    event: IEventEmitter<this, IActionBarEvents>;
     static preferredQuadrant: Quadrant;
     get preferredQuadrant(): Quadrant;
+    history: IActionBarSlotData[];
     slots: IActionBarSlotData[];
     globalSlots?: IActionBarSlotData[];
     showBindings?: boolean;
@@ -54,16 +64,18 @@ export default class ActionBar extends QuadrantComponent {
     bringSlotsAcrossSaves?: boolean;
     automaticallyBestItem?: boolean;
     defaultModifiersOrder: string;
-    readonly slotsContainer: Component<HTMLElement>;
+    readonly historyContainer: Component<HTMLElement>;
     readonly metaButtons: Component<HTMLElement>;
     readonly actionBarOptionsButton: Button;
     readonly toggleUseWhenMovingButton: CheckButton;
     readonly removeSlotButton: Button;
     readonly addSlotButton: Button;
+    readonly slotsContainer: Component<HTMLElement>;
     readonly configurationDrawer: ActionsConfigurationDrawer;
     get configuringNumber(): number | undefined;
     readonly actionSlotTooltipHandler: ActionSlotTooltipHandler;
     constructor();
+    getBindable(): Bindable;
     getHoveredSlot(): ActionSlot | undefined;
     protected onWillRemove(): void;
     addSlot(): this;
@@ -79,15 +91,25 @@ export default class ActionBar extends QuadrantComponent {
     private onSlotUpdate;
     configure(number: number): void;
     protected onResize(): void;
+    protected onExecuteAction(action: UsableAction, player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): void;
     endConfiguration(): void;
     hasFilledSlot(predicate?: (slot: IActionBarSlotData) => any): boolean;
     protected getContextMenuDescription(api?: IBindHandlerApi): ContextMenuDescriptions;
     protected onClearActionSlot(api: IBindHandlerApi): boolean;
+    protected onClearedActionSlot(): void;
+    private clearSlot;
+    protected onToggleHistory(api: IBindHandlerApi): boolean;
     protected onToggleUseWhileMoving(api: IBindHandlerApi): boolean;
+    protected onToggleAllUseWhileMoving(api: IBindHandlerApi): boolean;
     protected onMenuCancel(): boolean;
     protected onChangeWhetherCopying(api: IBindHandlerApi): boolean;
     getSlots(): Stream<ActionSlot>;
+    getHistorySlots(): Stream<ActionSlot>;
+    private toggleAllUseWhenMoving;
     private toggleShowingBindings;
     private focus;
     private refreshSlots;
+    isHistoryMode(): boolean;
+    private toggleHistory;
+    private validateSlots;
 }

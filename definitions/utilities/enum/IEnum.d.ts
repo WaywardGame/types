@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -57,7 +57,7 @@ export declare enum EnumId {
     SoundEffect = 13,
     Command = 14,
     Stat = 15,
-    StatusEffect = 16,
+    Status = 16,
     MenuBarButton = 17,
     CorpseType = 18,
     TileEventType = 19,
@@ -89,5 +89,7 @@ export declare enum EnumId {
     EntityTag = 45,
     ItemTypeExtra = 46,
     DoodadTypeExtra = 47,
-    EquipType = 48
+    EquipType = 48,
+    TileGroup = 49,
+    EnumId = 50
 }

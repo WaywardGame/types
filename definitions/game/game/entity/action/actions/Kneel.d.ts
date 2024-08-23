@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,5 +10,5 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.Doodad], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [import("../../../doodad/Doodad").default]>;
+declare const _default: Action<[ActionArgument.Doodad], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void | Promise<void> | Promise<void | undefined> | undefined, import("./ToggleContainer").IToggleContainerCanUse, [import("../../../doodad/Doodad").default]>;
 export default _default;

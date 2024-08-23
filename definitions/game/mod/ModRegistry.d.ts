@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,7 +12,7 @@ import type { Music, SfxType } from "@wayward/game/audio/IAudio";
 import type { Command, CommandCallback } from "@wayward/game/command/ICommand";
 import type { BiomeType, IBiomeDescription } from "@wayward/game/game/biome/IBiome";
 import type { DoodadTag, DoodadType, DoodadTypeGroup, IDoodadDescription, IDoodadGroupDescription } from "@wayward/game/game/doodad/IDoodad";
-import type { EntityTag, StatusType } from "@wayward/game/game/entity/IEntity";
+import type { EntityTag } from "@wayward/game/game/entity/IEntity";
 import type { EquipType, InsulationWeight, SkillType } from "@wayward/game/game/entity/IHuman";
 import type { Stat } from "@wayward/game/game/entity/IStats";
 import type { IStatDescription } from "@wayward/game/game/entity/StatDescriptions";
@@ -21,7 +21,7 @@ import type UsableActionRegistrar from "@wayward/game/game/entity/action/usable/
 import type { UsableActionGenerator } from "@wayward/game/game/entity/action/usable/UsableActionRegistrar";
 import type { UsableActionType } from "@wayward/game/game/entity/action/usable/UsableActionType";
 import type { UsableActionSet, usableActionSets } from "@wayward/game/game/entity/action/usable/actions/UsableActionsMain";
-import type { CreatureType, ICreatureDescription } from "@wayward/game/game/entity/creature/ICreature";
+import type { CreatureType, ICreatureDescription, TileGroup } from "@wayward/game/game/entity/creature/ICreature";
 import type { ICorpseDescription } from "@wayward/game/game/entity/creature/corpse/ICorpse";
 import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
 import type { INPCClass } from "@wayward/game/game/entity/npc/NPCS";
@@ -32,7 +32,8 @@ import type { Quest } from "@wayward/game/game/entity/player/quest/quest/Quest";
 import type { QuestRequirementType } from "@wayward/game/game/entity/player/quest/requirement/IRequirement";
 import type { QuestRequirement } from "@wayward/game/game/entity/player/quest/requirement/Requirement";
 import type { ISkillDescription } from "@wayward/game/game/entity/skill/ISkills";
-import type { StatusEffectClass } from "@wayward/game/game/entity/status/StatusEffect";
+import type { IStatusDescription, StatusType } from "@wayward/game/game/entity/status/IStatus";
+import type { StatusClass } from "@wayward/game/game/entity/status/Status";
 import type { InspectType } from "@wayward/game/game/inspection/IInspection";
 import type { InspectionClass } from "@wayward/game/game/inspection/InspectionTypeMap";
 import type { IItemDescription, IItemGroupDescription, ItemTag, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
@@ -91,47 +92,49 @@ export declare enum ModRegistrationType {
     DoodadTag = 11,
     EntityTag = 12,
     EquipType = 13,
-    HelpArticle = 14,
-    InspectionType = 15,
-    InterModRegistration = 16,
-    InterModRegistry = 17,
-    Interrupt = 18,
-    InterruptChoice = 19,
-    Item = 20,
-    ItemExtra = 21,
-    ItemGroup = 22,
-    ItemTag = 23,
-    Language = 24,
-    LanguageExtension = 25,
-    Load = 26,
-    MagicalProperty = 27,
-    MenuBarButton = 28,
-    Message = 29,
-    MessageSource = 30,
-    MusicTrack = 31,
-    Note = 32,
-    NPC = 33,
-    OptionsSection = 34,
-    Overlay = 35,
-    Override = 36,
-    Packet = 37,
-    Prompt = 38,
-    QuadrantComponent = 39,
-    Quest = 40,
-    QuestRequirement = 41,
-    Registry = 42,
-    Skill = 43,
-    SoundEffect = 44,
-    Stat = 45,
-    StatusEffect = 46,
-    Terrain = 47,
-    TerrainDecoration = 48,
-    TileEvent = 49,
-    TileLayerType = 50,
-    UsableActions = 51,
-    UsableActionType = 52,
-    UsableActionTypePlaceholder = 53,
-    WorldLayer = 54
+    GenericEnum = 14,
+    HelpArticle = 15,
+    InspectionType = 16,
+    InterModRegistration = 17,
+    InterModRegistry = 18,
+    Interrupt = 19,
+    InterruptChoice = 20,
+    Item = 21,
+    ItemExtra = 22,
+    ItemGroup = 23,
+    ItemTag = 24,
+    Language = 25,
+    LanguageExtension = 26,
+    Load = 27,
+    MagicalProperty = 28,
+    MenuBarButton = 29,
+    Message = 30,
+    MessageSource = 31,
+    MusicTrack = 32,
+    Note = 33,
+    NPC = 34,
+    OptionsSection = 35,
+    Overlay = 36,
+    Override = 37,
+    Packet = 38,
+    Prompt = 39,
+    QuadrantComponent = 40,
+    Quest = 41,
+    QuestRequirement = 42,
+    Registry = 43,
+    Skill = 44,
+    SoundEffect = 45,
+    Stat = 46,
+    Status = 47,
+    Terrain = 48,
+    TerrainDecoration = 49,
+    TileEvent = 50,
+    TileGroup = 51,
+    TileLayerType = 52,
+    UsableActions = 53,
+    UsableActionType = 54,
+    UsableActionTypePlaceholder = 55,
+    WorldLayer = 56
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -145,6 +148,11 @@ export interface IInspectionTypeRegistration extends IBaseModRegistration {
     type: ModRegistrationType.InspectionType;
     name: string;
     handlerClass: InspectionClass;
+}
+export interface IGenericEnumRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.GenericEnum;
+    enumObject: any;
+    name: string;
 }
 export interface IMusicTrackRegistration extends IBaseModRegistration {
     type: ModRegistrationType.MusicTrack;
@@ -261,10 +269,11 @@ export interface IStatRegistration extends IBaseModRegistration {
     name: string;
     description?: IStatDisplayDescription & IStatDescription;
 }
-export interface IStatusEffectRegistration extends IBaseModRegistration {
-    type: ModRegistrationType.StatusEffect;
+export interface IStatusRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Status;
     name: string;
-    handlerClass: StatusEffectClass;
+    handlerClass: StatusClass;
+    description: IStatusDescription;
 }
 export interface IItemRegistrationDescription extends IItemDescription {
     groups?: ItemTypeGroup[];
@@ -294,12 +303,18 @@ export interface ITerrainRegistration extends IBaseModRegistration {
     description?: ITerrainRegistrationDescription;
 }
 export interface ITerrainDecorationRegistration extends IBaseModRegistration {
+    name: string;
     type: ModRegistrationType.TerrainDecoration;
     description?: ITerrainDecorationBase;
 }
 export interface ITerrainRegistrationDescription extends ITerrainDescription {
     resources?: ITerrainLootItem[];
     defaultItem?: ItemType;
+}
+export interface ITileGroupRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.TileGroup;
+    name: string;
+    description: Set<TerrainType>;
 }
 export interface IDoodadRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Doodad;
@@ -421,6 +436,7 @@ export interface IOverrideDescription<OBJECT extends object, PROPERTY extends ke
     property: PROPERTY;
     value: OBJECT[PROPERTY];
 }
+export type OverrideDecorator<OBJECT extends object, PROPERTY extends keyof OBJECT> = (overrider: () => IOverrideDescription<OBJECT, PROPERTY>) => <K extends string | number | symbol, T extends Record<K, OBJECT>>(target: T, key: K) => void;
 export interface IOverrideRegistration<OBJECT extends object, PROPERTY extends keyof OBJECT> extends IBaseModRegistration {
     type: ModRegistrationType.Override;
     overrider: () => IOverrideDescription<OBJECT, PROPERTY>;
@@ -428,7 +444,7 @@ export interface IOverrideRegistration<OBJECT extends object, PROPERTY extends k
 export interface IInheritsRegistrationTime {
     useRegistrationTime: ModRegistrationType;
 }
-export type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IDoodadTagRegistration | IEntityTagRegistration | IEquipTypeRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | IItemTagRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IOverrideRegistration<any, any> | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration;
+export type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IDoodadTagRegistration | IEntityTagRegistration | IEquipTypeRegistration | IGenericEnumRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | IItemTagRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IOverrideRegistration<any, any> | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileGroupRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration;
 export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare namespace Register {
     /**
@@ -451,6 +467,18 @@ declare namespace Register {
      * The decorated property will be injected with the provided language extension instance.
      */
     function languageExtension<L extends LanguageExtension>(instance: L): <K extends string | number | symbol, T extends Record<K, L>>(target: T, key: K) => void;
+    /**
+     * Registers into an enum that we haven't added explicit modding support for.
+     *
+     * # Caveats!
+     * - This will not work for enums associated with a descriptions/definitions record or map. **Only use it for enums that work on their own.**
+     * - If we ever change the import path of the enum, **previous registrations to it will not persist**, so any registrations will be assigned new IDs.
+     * - Any enums registered in this way will not work on servers.
+     *
+     * @param enumObject The enum object to register into.
+     * @param name The name of this mod registration in the enum.
+     */
+    function genericEnum<E>(enumObject: E, name: string): <K extends string | number | symbol, T extends Record<K, E[keyof E]>>(target: T, key: K) => void;
     /**
      * Registers a music track.
      * @param name The name of the music track.
@@ -520,7 +548,7 @@ declare namespace Register {
      *
      * The decorated property will be injected with the id of the registered status effect.
      */
-    function statusEffect(name: string, handlerClass: StatusEffectClass): <K extends string | number | symbol, T extends Record<K, StatusType>>(target: T, key: K) => void;
+    function status(name: string, handlerClass: StatusClass, description: IStatusDescription): <K extends string | number | symbol, T extends Record<K, StatusType>>(target: T, key: K) => void;
     /**
      * Registers an item.
      * @param name The name of the item.
@@ -553,6 +581,14 @@ declare namespace Register {
      * The decorated property will be injected with the id of the registered terrain.
      */
     function terrain(name: string, description?: ITerrainRegistrationDescription): <K extends string | number | symbol, T extends Record<K, TerrainType>>(target: T, key: K) => void;
+    /**
+     * Registers a tile group.
+     * @param name The name of the tile group.
+     * @param description The definition of the tile group.
+     *
+     * The decorated property will be injected with the id of the registered tile group.
+     */
+    function tileGroup(name: string, description: Set<TerrainType>): <K extends string | number | symbol, T extends Record<K, TileGroup>>(target: T, key: K) => void;
     /**
      * Registers a terrain decoration.
      * @param description The definition of the terrain decoration.
@@ -886,6 +922,7 @@ export declare namespace Registry {
          * - If the type is a method, and an ID is returned by `Registry.id(registry[property])`, the ID will be returned.
          */
         getRegistrationId<T = any>(registry: IRegistry): T | undefined;
+        getFirstRegistrationId<T = any>(registries: IRegistry | Set<IRegistry>): T | undefined;
         initializeProperty<O extends object, K extends keyof O>(object: O, key: K, registries: IRegistry | Set<IRegistry>): void;
     }
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,13 +10,13 @@
  */
 import type { GameEmitterOrBus, GameEvent } from "@wayward/game/event/EventManager";
 import { ActionDisplayLevel } from "@wayward/game/game/entity/action/IAction";
-import type { ActionId, IUsableActionPossibleUsing, IUsableActionRequirements } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import type { ActionId, IUsableActionExecutionContext, IUsableActionPossibleUsing, IUsableActionRequirements } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
 import ContextMenu from "@wayward/game/ui/component/ContextMenu";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export default class UsableActionRegistrar {
-    private readonly id;
+    readonly id: string;
     readonly actions: Array<[string, UsableAction]>;
     readonly actionIndices: Record<string, number>;
     readonly actionIds: string[];
@@ -27,8 +27,9 @@ export default class UsableActionRegistrar {
     setContextMenuInitializer(initializer?: (menu: ContextMenu) => any): this;
     add(registrar: UsableActionRegistrar): this;
     add<REQUIREMENTS extends IUsableActionRequirements>(id: string | number, action: UsableAction<REQUIREMENTS>): this;
-    showContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any, position?: IVector2): ContextMenu | undefined;
-    createContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any): ContextMenu | undefined;
+    showContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any, position?: IVector2): ContextMenu<ActionId> | undefined;
+    static getContextMenuActionExecutionContext(provided: IUsableActionPossibleUsing): IUsableActionExecutionContext;
+    createContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any): ContextMenu<ActionId> | undefined;
 }
 export interface IUsableActionGeneratorEvents {
     stopPersisting(): any;

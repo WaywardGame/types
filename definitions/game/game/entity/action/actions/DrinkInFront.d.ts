@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -20,5 +20,5 @@ export interface IDrinkInFrontCanUse extends IActionUsable {
     tileType?: TerrainType;
     doodad?: Doodad;
 }
-declare const _default: Action<[], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDrinkInFrontCanUse, []>;
+declare const _default: Action<[], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDrinkInFrontCanUse, []>;
 export default _default;

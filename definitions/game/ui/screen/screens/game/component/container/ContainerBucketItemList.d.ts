@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -72,7 +72,7 @@ interface ItemListDifferenceItemDifference {
 }
 export type ItemListDifference = undefined | ItemListDifferenceSize | ItemListDifferenceItemDifference;
 export default class ContainerBucketItemList extends Component implements ISortableComponent {
-    readonly event: IEventEmitter<this, IContainerBucketItemListEvents>;
+    event: IEventEmitter<this, IContainerBucketItemListEvents>;
     readonly sortable: Sortable;
     private containerRef?;
     get container(): IContainer | undefined;
@@ -87,6 +87,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private filter;
     setFilter(filter: string): void;
     resort(): void;
+    private checkItemIdsMatch;
     private readonly transientItemComponents;
     addTransientItem(item: Item): ItemComponent;
     removeTransientItem(item: Item): void;
@@ -133,6 +134,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private ensureStackUnrendered;
     private itemIdsInElements?;
     private getItemIdsInElements;
+    private getItemElementId;
     private itemListDiffers;
     private getItemComponentElements;
     private regenerate;

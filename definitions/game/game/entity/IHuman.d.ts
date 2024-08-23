@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,15 +9,16 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IHasImagePath } from "@wayward/game/game/IObject";
-import type { Deity } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
 import type { AttackType, DamageType } from "@wayward/game/game/entity/IEntity";
+import type { Stat } from "@wayward/game/game/entity/IStats";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { CreatureType, IDamageInfo } from "@wayward/game/game/entity/creature/ICreature";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
-import type { IMovementIntent, WeightStatus } from "@wayward/game/game/entity/player/IPlayer";
+import type { IMovementIntent, WalkTo, WeightStatus } from "@wayward/game/game/entity/player/IPlayer";
+import type PlayerDefense from "@wayward/game/game/entity/player/PlayerDefense";
 import type { ISkillEvents } from "@wayward/game/game/entity/skill/SkillManager";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
@@ -119,7 +120,10 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      * @returns False if the npc cannot attack, or undefined to use the default logic
      */
     canAttack(weapon: Item | undefined, attackType: AttackType): boolean | undefined;
+    getDefense(defense: PlayerDefense): PlayerDefense;
     calculateEquipmentStats(): any;
+    getBaseStatBonuses(baseStatBonuses: OptionalDescriptions<Stat, number>): OptionalDescriptions<Stat, number>;
+    getBaseAttack(attack: number): number;
     /**
      * Called when getting the player's maximum health
      * @param maxHealth The current max health of the player (after any other previous mods)
@@ -163,14 +167,14 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      */
     getMovementIntent(): IMovementIntent | undefined;
     /**
-     * Called when the walk path of the player is about to change.
-     * @returns False to prevent the walk path change or undefined to use the default logic
+     * Called when the walkTo of the player is about to change.
+     * @returns False to prevent the walk change or undefined to use the default logic
      */
-    canChangeWalkPath(walkPath: IVector2[] | undefined, reason: WalkPathChangeReason): false | undefined;
+    canChangeWalkTo(walkTo: WalkTo | undefined, reason: WalkToChangeReason): false | undefined;
     /**
      * Called when the walk path of the player changes.
      */
-    walkPathChange(walkPath: IVector2[] | undefined): any;
+    walkToChange(walkTo: WalkTo | undefined, reason: WalkToChangeReason): any;
     /**
      * Called when the human changes their layer (z position)
      */
@@ -283,9 +287,7 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
     discoverVulnOrResist(creatureType: CreatureType, damageType: DamageType): any;
     hasDiscoveredVulnOrResist(creatureType: CreatureType, damageType: DamageType, defaultState: boolean): boolean | undefined;
     getDiscoveredVulnsAndResists(): Map<CreatureType, Set<DamageType>>;
-    alignmentChange(type: Deity): any;
     nightlyAlignmentChange(): any;
-    curseChange(daysWithoutInvocation: number): any;
     /**
      * Luck is a multiplier applied to some chance calculations. 1 is default, 0.5 would mean chances are halved, 2 would mean chances are doubled, etc.
      */
@@ -414,7 +416,7 @@ export declare enum RestCancelReason {
     WaterPoured = 7
 }
 export declare const restCancelReasonMessageMap: Record<RestCancelReason, Message | undefined>;
-export type WalkPathChangeReason = "Damage" | "Overburdened" | "Unknown";
+export type WalkToChangeReason = "Damage" | "Overburdened" | "Unknown";
 export interface IRestData {
     type: RestType;
     startHealth: number;
@@ -462,7 +464,7 @@ export declare enum SkillType {
     Seafaring = 30,
     Thaumaturgy = 31,
     DualWielding = 32,
-    Piety = 33
+    Theurgy = 33
 }
 export interface ICrafted {
     unlockTime: number;
@@ -476,7 +478,6 @@ export interface ICheckUnderOptions {
     burned?: boolean;
 }
 export declare const craftingChances: Descriptions<RecipeLevel, number>;
-export declare const STAMINA_LOW_PENALTY_START = 15;
 export interface IHumanOld extends Partial<Human> {
     skills?: Record<SkillType, {
         bonus: number;
@@ -583,3 +584,8 @@ export declare const PLAYER_TRAVEL_TIME_REDUCTION_ITEM_MULTIPLIER = 0.75;
  * A list of items that reduce the travel time, when in the player's inventory
  */
 export declare const PLAYER_TRAVEL_TIME_REDUCTION_ITEMS: ItemType[];
+export interface IRangeActionAccuracySkillMultiplier {
+    min?: number;
+    max?: number;
+}
+export declare const RANGE_ACTION_ACCURACY_SKILL_MULTIPLIERS: PartialRecord<SkillType, IRangeActionAccuracySkillMultiplier>;

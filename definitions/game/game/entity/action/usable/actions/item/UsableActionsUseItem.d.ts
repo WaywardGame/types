@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,13 +11,14 @@
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { IUsableActionDynamicDefinition } from "@wayward/game/game/entity/action/usable/actions/UsableActionsDynamic";
 import UsableActionsDynamic from "@wayward/game/game/entity/action/usable/actions/UsableActionsDynamic";
-import type { ActionId, IUsableActionItemRequirement, IUsableActionPossibleUsing, IUsableActionRequirements } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import { type ActionId, type IUsableActionItemRequirement, type IUsableActionPossibleUsing, type IUsableActionRequirements } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import UsableActionItemFinder from "@wayward/game/game/entity/action/usable/UsableActionItemFinder";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IGetBestItemsOptions } from "@wayward/game/game/item/IItemManager";
 import type Item from "@wayward/game/game/item/Item";
 export interface IUseItemAction extends IUsableActionDynamicDefinition {
     canDamageItem?: true;
+    consumesItem?: true;
     allowAnyItems?: true;
     allowNoItem?: true;
     hasNoBestItem?: true;

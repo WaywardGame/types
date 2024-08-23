@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,8 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { ISegment, IStringSection } from "@wayward/game/utilities/string/Interpolator";
+export interface IListSection extends IStringSection {
+    isList: true;
+}
 export interface IListItemSection extends IStringSection {
-    sections: IStringSection[];
+    isListItem: true;
 }
 declare const listSegment: ISegment;
 export default listSegment;

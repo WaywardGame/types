@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,7 +13,7 @@ import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class GrowthStageInfoProvider extends InfoProvider {
     private readonly doodad;
-    static get(doodad: Doodad): false | GrowthStageInfoProvider | undefined;
+    static get(doodad: Doodad): GrowthStageInfoProvider | undefined;
     static getGrowthStage(doodad: Doodad): TranslationImpl | undefined;
     private stage;
     private constructor();

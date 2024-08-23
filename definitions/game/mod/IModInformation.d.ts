@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,6 +11,7 @@
 import type { IHasImagePath } from "@wayward/game/game/IObject";
 import type { ISerializedLanguage, ISerializedLanguageExtension } from "@wayward/game/language/LanguageManager";
 import type TranslationsProvider from "@wayward/game/language/TranslationsProvider";
+import type Log from "@wayward/utilities/Log";
 export declare enum TypeFlag {
     Undefined = 1,
     Null = 2,
@@ -76,4 +77,9 @@ export type IModLanguage = {
 export interface IModStylesheet {
     name: string;
     path: string;
+}
+export interface IModInformation {
+    log: Log;
+    state: ModState;
+    name: string;
 }

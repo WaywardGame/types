@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -27,8 +27,7 @@ export declare enum DialogId {
     IslandsShipping = 13,
     Inventory = 14,
     Container = 15,
-    Altar = 16,
-    Trade = 17
+    Trade = 16
 }
 export declare enum Edge {
     Top = 0,

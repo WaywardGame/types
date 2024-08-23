@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,5 +15,5 @@ import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 export interface IRotate extends IActionUsable {
     doodad: Doodad;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.Doodad]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, boolean, IRotate, [(Doodad | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.Doodad]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, boolean, IRotate, [(Doodad | undefined)?]>;
 export default _default;

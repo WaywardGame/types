@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -42,11 +42,20 @@ export default class MilestoneDefinition {
      */
     static counter(amount: SupplierOr<number>): MilestoneDefinition;
     /**
+     * @param discoveryList All things that can be discovered via this milestone
+     * @param requiredToUnlock The amount that the player must discover for this milestone to complete. 1 = 100%, 0.5 = 50%
+     */
+    static discovery(discoveryList: ReadonlyArray<string | number>, requiredToUnlock?: number): MilestoneDefinition;
+    /**
      * This milestone type requires a number of entries, each of which must be distinct, and which must be discovered in order, from `1` to `amount`.
      * `0` is never required for discovery.
      * For example, this could be used to handle staged discovery.
      */
-    static discovery(obj: EnumObject<Record<string, string | number>>): MilestoneDefinition;
+    static ordered(obj: EnumObject<Record<string, string | number>>): MilestoneDefinition;
+    /**
+     * A helper to create a function that will produce a MilestoneDefinition
+     */
+    static function<T = {}>(create: (this: T) => MilestoneDefinition, assign?: T): (() => MilestoneDefinition) & T;
     private constructor();
     /**
      * Replaces the type and desired amount of this MilestoneDefinition with the type and desired amount of another's.
@@ -81,10 +90,12 @@ export default class MilestoneDefinition {
     setGameModes(all: "all"): this;
     disabledByMods: boolean;
     setNotDisabledByMods(): this;
-    unlockedHandler?: (tellPlayer: (message?: Message, args?: TranslationArg[], type?: MessageType, sfxType?: SfxType) => void) => any;
-    onUnlocked(handler: (tellPlayer: (message?: Message, args?: TranslationArg[], type?: MessageType, sfxType?: SfxType) => void) => any): this;
-    progressHandler?: (newData: string | number | undefined, tellPlayer: (message?: Message, args?: TranslationArg[], type?: MessageType, sfxType?: SfxType) => void) => any;
-    onProgress(handler: (newData: string | number | undefined, tellPlayer: (message?: Message, args?: TranslationArg[], type?: MessageType, sfxType?: SfxType) => void) => any): this;
-    milestoneProgressHandler?: (milestones: MilestoneManager, milestone: Milestone, newData?: string | number) => any;
-    registerMilestoneProgressHandler(handler: (milestones: MilestoneManager, milestone: Milestone, newData?: string | number) => any): this;
+    unlockedHandler?: (milestones: MilestoneManager, tellPlayer: (message?: Message, args?: TranslationArg[], type?: MessageType, sfxType?: SfxType) => void) => any;
+    onUnlocked(handler: (milestones: MilestoneManager, tellPlayer: (message?: Message, args?: TranslationArg[], type?: MessageType, sfxType?: SfxType) => void) => any): this;
+    progressHandler?: (milestones: MilestoneManager, newData: string | number | undefined, tellPlayer: (message?: Message, args?: TranslationArg[], type?: MessageType, sfxType?: SfxType) => void) => any;
+    onProgress(handler: (milestones: MilestoneManager, newData: string | number | undefined, tellPlayer: (message?: Message, args?: TranslationArg[], type?: MessageType, sfxType?: SfxType) => void) => any): this;
+    anyMilestoneProgressHandler?: (milestones: MilestoneManager, milestone: Milestone, newData?: string | number) => any;
+    onAnyMilestoneProgressHandler(handler: (milestones: MilestoneManager, milestone: Milestone, newData?: string | number) => any): this;
+    fullDiscoveryList?: ReadonlyArray<string | number>;
+    setFullDiscoveryList(list: ReadonlyArray<string | number>): this;
 }

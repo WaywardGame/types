@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -17,7 +17,7 @@ export interface IDetailsEvents extends Events<Component<HTMLDetailsElement>> {
     toggle(open: boolean): any;
 }
 export default class Details extends Component<HTMLDetailsElement> {
-    readonly event: IEventEmitter<this, IDetailsEvents>;
+    event: IEventEmitter<this, IDetailsEvents>;
     summary: Button;
     get isOpen(): boolean;
     constructor();

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,6 +11,7 @@
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { ContextMenuDescriptions } from "@wayward/game/ui/component/ContextMenu";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import type Bindable from "@wayward/game/ui/input/Bindable";
 import type Screen from "@wayward/game/ui/screen/Screen";
 import type GameScreen from "@wayward/game/ui/screen/screens/GameScreen";
 import { QuadrantComponentId } from "@wayward/game/ui/screen/screens/game/IGameScreenApi";
@@ -33,6 +34,10 @@ interface IQuadrantComponentEvents extends Events<StaticComponent> {
      * Emit this event when the quadrant's position or height changes, this means other quadrants should be resized accordingly.
      */
     updatePosition(): any;
+    /**
+     * Emit this event when the quadrant should be toggled hidden/visible
+     */
+    toggle(): any;
 }
 /**
  * An element that displays in one quadrant of the screen.
@@ -55,6 +60,7 @@ export default abstract class QuadrantComponent extends StaticComponent {
     readonly log: Log;
     constructor(id: QuadrantComponentId);
     protected registerDataHost(): void;
+    abstract getBindable(): Bindable;
     inRegion(region: QuadrantRegion): boolean;
     /**
      * Changes the quadrant of this element, then emits the `ChangeQuadrant` event
@@ -64,17 +70,15 @@ export default abstract class QuadrantComponent extends StaticComponent {
      */
     setQuadrant(quadrant: Quadrant, trigger?: boolean): this;
     /**
-     * The ID is used for `Switch With` context menu options
-     */
-    getID(): QuadrantComponentId;
-    /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
     getName(): TranslationImpl;
     getScreen(): GameScreen | null;
     getScreen<S extends Screen | undefined = Screen | undefined>(): S | null;
+    protected onRemove(): void;
     protected shouldShowContextMenu(api: IBindHandlerApi): boolean;
     protected getContextMenuDescription(api?: IBindHandlerApi): ContextMenuDescriptions;
+    private onToggle;
     /**
      * Returns a new context menu using this element's context menu descriptions
      */

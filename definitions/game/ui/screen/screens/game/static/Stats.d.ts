@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,14 +10,20 @@
  */
 import type Human from "@wayward/game/game/entity/Human";
 import Component from "@wayward/game/ui/component/Component";
+import Bindable from "@wayward/game/ui/input/Bindable";
 import { Quadrant } from "@wayward/game/ui/screen/screens/game/component/IQuadrantComponent";
 import QuadrantComponent from "@wayward/game/ui/screen/screens/game/component/QuadrantComponent";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export declare enum StatsClasses {
+    Quadrant = "stats-quadrant",
+    Main = "stats"
+}
 export default class StatsQuadrant extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
     get preferredQuadrant(): Quadrant;
     private readonly stats;
     constructor();
+    getBindable(): Bindable;
     setPlayer(human: Human): this;
 }
 export interface IStatsEvents extends Events<Component> {
@@ -25,7 +31,7 @@ export interface IStatsEvents extends Events<Component> {
 }
 export declare class Stats extends Component {
     private readonly noEvents?;
-    readonly event: IEventEmitter<this, IStatsEvents>;
+    event: IEventEmitter<this, IStatsEvents>;
     private human;
     constructor(human?: Human, noEvents?: true | undefined);
     setHuman(human: Human): this;
@@ -34,7 +40,8 @@ export declare class Stats extends Component {
      * Returns an object containing iterables for all stats that exist on the player and have a description,
      * separated by how a given stat should be displayed
      */
-    private getStatsIterables;
+    private getStats;
+    private getDisplayOrder;
     /**
      * Returns how the stat on an entity should be displayed.
      */

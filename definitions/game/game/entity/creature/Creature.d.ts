@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,19 +13,22 @@ import type { IMovementTime } from "@wayward/game/game/IGame";
 import { TileUpdateType } from "@wayward/game/game/IGame";
 import type { IObject } from "@wayward/game/game/IObject";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
+import { AiMaskType, AiType } from "@wayward/game/game/entity/AI";
 import EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions, IStatChangeInfo } from "@wayward/game/game/entity/IEntity";
-import { AiType, Defense, EntityType, MoveType } from "@wayward/game/game/entity/IEntity";
+import { Defense, EntityType, MoveType } from "@wayward/game/game/entity/IEntity";
 import type { IStat } from "@wayward/game/game/entity/IStats";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { CreatureAttackOutcome, CreatureType, ICreatureAttackOutcomeAttack, ICreatureCheckMoveOptions, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "@wayward/game/game/entity/creature/ICreature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/CreatureZone";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
+import { StatusType } from "@wayward/game/game/entity/status/IStatus";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type { Reference } from "@wayward/game/game/reference/IReferenceManager";
+import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import Translation, { Article } from "@wayward/game/language/Translation";
@@ -34,17 +37,20 @@ import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export default class Creature extends EntityWithStats<ICreatureDescription, CreatureType> implements IUnserializedCallback, IObject<CreatureType> {
+export default class Creature extends EntityWithStats<ICreatureDescription, CreatureType, ReferenceType.Creature> implements IUnserializedCallback, IObject<CreatureType> {
     static is(value: any): value is Creature;
     get entityType(): EntityType.Creature;
     get tileUpdateType(): TileUpdateType;
-    readonly event: IEventEmitter<this, ICreatureEvents>;
+    event: IEventEmitter<this, ICreatureEvents>;
     anim: number;
     direction: Vector2;
     facingDirection: Direction.Cardinal;
     fromX: number;
     fromY: number;
     ai: AiType;
+    aiMasks: AiMaskType[];
+    private lastCalculatedAi;
+    private wanderIntent?;
     aberrant?: true;
     enemy?: {
         reference: Reference;
@@ -59,12 +65,15 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
         tameTime: number;
     };
     respawned?: number;
+    zonePoint?: IVector3;
     spawnAnimationTime: IMovementTime | undefined;
     constructor(entityOptions?: IEntityConstructorOptions<CreatureType>, aberrant?: boolean);
+    initializeAi(resetAiType?: boolean): void;
     /**
      * Initializes the creature's stats. Used in the constructor & save conversion.
      */
     initializeStats(hp: number, maxhp?: number): void;
+    get zone(): CreatureZone | undefined;
     /**
      * @param article Whether to include an article for the name of the creature. Uses the article rules on the language. Defaults to `true`.
      * @param count The number of this creature that you're getting the name of. Defaults to `1`.
@@ -76,15 +85,51 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      */
     getName(article?: Article, count?: number): Translation;
     protected getDescription(): ICreatureDescription | undefined;
+    /**
+     * Gets the latest synced state of the ai.
+     * This should only be used clientside.
+     */
+    get lastCalculatedAiClientSide(): AiType;
+    calculateAi(): AiType;
+    private emitAiChange;
     hasAi(aiType: AiType): boolean;
-    setAi(aiType: AiType): void;
-    addAi(aiType: AiType): void;
-    removeAi(aiType: AiType): void;
+    /**
+     * @deprecated I hope you know what you're doing
+     */
+    setAiType(aiType: AiType): void;
+    /**
+     * @returns whether the ai type was added
+     */
+    addAiType(aiType: AiType): boolean;
+    /**
+     * @returns whether the ai type was removed
+     */
+    removeAiType(aiType: AiType): boolean;
+    /**
+     * @returns whether the ai type is present
+     */
+    toggleAiType(aiType: AiType, active: boolean): boolean;
+    hasAiMask(mask: AiMaskType, checkActive?: boolean): boolean;
+    /**
+     * @returns whether the ai mask was added
+     */
+    addAiMask(mask: AiMaskType): boolean;
+    /**
+     * @returns whether the ai mask was removed
+     */
+    removeAiMask(mask: AiMaskType): boolean;
+    /**
+     * @returns whether the ai mask is present
+     */
+    toggleAiMask(mask: AiMaskType, present: boolean): boolean;
+    get isHostile(): boolean;
     get isHidden(): boolean;
     get isRetaliator(): boolean;
     get isTamed(): boolean;
     get isValid(): boolean;
     getCommandedAiType(): AiType | undefined;
+    protected getApplicableStatuses(): Set<StatusType> | undefined;
+    tickStatuses(): void;
     getDefense(human?: Human): Defense;
     /**
      * Check is a creature is allowed to attack the target (rules of engagement)
@@ -94,6 +139,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     canTarget(target: Human | Creature | undefined): boolean;
     moveToIsland(targetTile: Tile, owner: Human): void;
     restore(targetTile: Tile, preventRendering?: boolean): void;
+    load(): void;
     checkForBurn(moveType?: MoveType): boolean;
     private setOwner;
     tame(human: Human, bonus?: number): boolean;
@@ -101,7 +147,10 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      * Increases the creature's maximum health in the event of offering/re-taming and petting (to a lesser extent)
      */
     increaseMaxHealth(action: ActionType): void;
-    increaseTamedCount(): void;
+    /**
+     * @returns The new times tamed
+     */
+    increaseTamedCount(): number;
     /**
      * Increases the number of times the creature has been petted.
      */
@@ -202,6 +251,23 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      */
     private breakItems;
     private processAiChanges;
+    /**
+     * @returns Whether the creature has lost interest
+     */
+    private processAiInterest;
+    /**
+     * Changes the direction the creature is moving while wandering (ie not alerted).
+     * Sometimes the creature will pause, instead.
+     */
+    private processWanderIntent;
+    /**
+     * Rerolls the wander intent to a random direction (cardinals, intercardinals, and secondary intercardinals).
+     *
+     * When the creature is zoneless, all directions are weighted equally.
+     * When the creature has a zone, it prefers staying within the zone using MATHS
+     */
+    private rerollWanderIntentDirection;
+    private getDirectionToZoneCenter;
     get asCorpse(): undefined;
     get asCreature(): Creature;
     get asDoodad(): undefined;

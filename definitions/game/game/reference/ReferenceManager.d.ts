@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -24,7 +24,7 @@ import type Inspection from "@wayward/game/game/inspection/Inspection";
 import Island from "@wayward/game/game/island/Island";
 import Item from "@wayward/game/game/item/Item";
 import type ItemManager from "@wayward/game/game/item/ItemManager";
-import type { EnumReferenceTypes, IReferenceTypeMap, Reference, Referenceable } from "@wayward/game/game/reference/IReferenceManager";
+import type { EnumReferenceTypes, IReferenceTypeMap, Reference, Referenceable, ReferenceableReferenceTypes } from "@wayward/game/game/reference/IReferenceManager";
 import { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type TileEventManager from "@wayward/game/game/tile/TileEventManager";
 import ReferenceTooltipHandler from "@wayward/game/ui/screen/screens/game/ReferenceTooltipHandler";
@@ -40,17 +40,17 @@ export default class ReferenceManager {
     create(): number;
     clearCacheEntry(referenceId: string | number | undefined): void;
     reset(): void;
-    getList(type: ReferenceType, gameIsland?: Island): DoodadManager | CorpseManager | CreatureManager | ItemManager | NPCManager | TileEventManager | IterableIterator<Island> | Player[] | Array<string | ActionType> | EquipType[] | readonly string[];
+    getList(type: ReferenceType, gameIsland?: Island): DoodadManager | CorpseManager | CreatureManager | ItemManager | NPCManager | TileEventManager | BuiltinIterator<Island> | Player[] | Array<string | ActionType> | EquipType[] | readonly string[];
     get(thing: Item): Reference<ReferenceType.Item> | undefined;
     get(thing: Doodad): Reference<ReferenceType.Doodad> | undefined;
     get(thing: Creature): Reference<ReferenceType.Creature> | undefined;
     get(thing: NPC): Reference<ReferenceType.NPC> | undefined;
-    get(thing: Referenceable): Reference | undefined;
+    get(thing: Referenceable): Reference<ReferenceableReferenceTypes> | undefined;
     getReferenceType(thing: Value<IReferenceTypeMap>): ReferenceType;
     resolve<REFTYPE extends ReferenceType>(reference?: Reference<REFTYPE>, gameIsland?: Island): IReferenceTypeMap[REFTYPE] | undefined;
     resolve(reference?: Reference, gameIsland?: Island): IReferenceTypeMap[ReferenceType] | undefined;
     private resolveInternal;
-    inspect<REFTYPE extends ReferenceType>(reference: Reference<REFTYPE>, ...args: any[]): Inspection<any> | undefined;
-    inspect(reference: Reference, ...args: any[]): Inspection<any> | undefined;
+    inspect<REFTYPE extends ReferenceType>(reference: Reference<REFTYPE>, context?: InfoProviderContext): Inspection<any> | undefined;
+    inspect(reference: Reference, context?: InfoProviderContext): Inspection<any> | undefined;
     tooltip(reference: Reference, initializer?: (tooltip: Tooltip, handler: ReferenceTooltipHandler) => any, context?: InfoProviderContext): (tooltip: Tooltip) => Promise<void>;
 }

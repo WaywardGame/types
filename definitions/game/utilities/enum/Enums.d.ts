@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -87,7 +87,7 @@ declare namespace Enums {
      *
      * **Note that basic lookup will not be aware of new/deleted values until an `Enums` operation is called.**
      */
-    function merge<ENUM_OBJECTS extends any[]>(...enumObjects: ENUM_OBJECTS): (ENUM_OBJECTS["length"] extends 0 ? {} : ENUM_OBJECTS["length"] extends 1 ? ENUM_OBJECTS[0] : ENUM_OBJECTS["length"] extends 2 ? {
+    function merge<ENUM_OBJECTS extends any[]>(...enumObjects: ENUM_OBJECTS): (ENUM_OBJECTS["length"] extends 0 ? Empty : ENUM_OBJECTS["length"] extends 1 ? ENUM_OBJECTS[0] : ENUM_OBJECTS["length"] extends 2 ? {
         [KEY in keyof ENUM_OBJECTS[0] | keyof ENUM_OBJECTS[1]]: KEY extends keyof ENUM_OBJECTS[0] ? ENUM_OBJECTS[0][KEY] : ENUM_OBJECTS[1][KEY];
     } : ENUM_OBJECTS["length"] extends 3 ? {
         [KEY in keyof ENUM_OBJECTS[0] | keyof ENUM_OBJECTS[1] | keyof ENUM_OBJECTS[2]]: KEY extends keyof ENUM_OBJECTS[0] ? ENUM_OBJECTS[0][KEY] : KEY extends keyof ENUM_OBJECTS[1] ? ENUM_OBJECTS[1][KEY] : ENUM_OBJECTS[2][KEY];

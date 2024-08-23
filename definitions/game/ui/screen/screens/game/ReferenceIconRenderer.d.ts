@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -18,5 +18,7 @@ export declare const referenceIconDefinitions: PartialRecord<ReferenceType, IRef
 export declare function registerReferenceIcon<TYPE extends ReferenceType>(type: TYPE, definition: IReferenceIconDefinition<TYPE>): void;
 export declare enum ReferenceIconClasses {
     Main = "reference-icon",
-    Stat = "reference-icon-stat"
+    Stat = "reference-icon-stat",
+    Status = "reference-icon-status",
+    Damage = "reference-icon-damage"
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,22 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { HeapStatistics } from "electron";
 import type { Game } from "@wayward/game/game/Game";
+import type Entity from "@wayward/game/game/entity/Entity";
+import IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import { ModType } from "@wayward/game/mod/IModInformation";
 import type { ModInformation } from "@wayward/game/mod/ModInformation";
 import type { IJoinServerOptions, ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
-import { SteamStatArea } from "@wayward/game/steamworks/ISteamworks";
 import type { IBuild, IDedicatedServerInfo, IModPath, ISteamworksEvents, SteamStatTypeValues } from "@wayward/game/steamworks/ISteamworks";
+import { SteamStatArea } from "@wayward/game/steamworks/ISteamworks";
 import { type IMatchmakingServer, type INapiDiscordPresenceInfo, type IRemoteFile, type ISteamFriend, type ISteamId, type ISteamworksNetworking, type IWaywardPreload, type IWorkshopItem, type LobbyType } from "@wayward/hosts/shared/interfaces";
-import type Entity from "@wayward/game/game/entity/Entity";
-import IActionContext from "@wayward/game/game/entity/action/IActionContext";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private readonly game;
     protected initialized: boolean;
     private steamId;
     private betaName;
-    private build;
+    private _build;
     private overlayWorks;
     private runningOnSteamDeck;
     private runningOnBatteryPower;
@@ -86,6 +87,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     initialize(): Promise<IWaywardPreload | undefined>;
     enableSafePaths(): void;
     onUnload(): void;
+    getHeapStatistics(): Promise<HeapStatistics | undefined>;
     setFullscreen(fullscreen: boolean): Promise<void>;
     setCustomTitleBar(enabled: boolean): Promise<void>;
     setOverlayWorks(overlayWorks: boolean): void;
@@ -95,8 +97,20 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getFriends(): ISteamFriend[] | undefined;
     getScreenName(): string | undefined;
     isDevelopmentBranch(): boolean;
-    getBuild(): IBuild | undefined;
-    getBuildName(): string;
+    get build(): IBuild | undefined;
+    get buildName(): string;
+    /**
+     * Returns the build time of the game, not depending on any save that's currently loaded.
+     *
+     * If there is no IBuild data associated with this build, the build is considered as having happened "now".
+     * This will only be the case in dev builds, and means that after this build time is saved with a version,
+     * no further upgrades will be run. Build time is saved in the following places:
+     * - {@link saveDataGlobal.gameLastPlayedBuildTime}
+     * - {@link saveData.gameBuildTime}
+     * - {@link Island.mapGenBuildTime}
+     * - {@link Island.saveBuildTime}
+     */
+    get buildTime(): number;
     getPublishedMods(): IWorkshopItem[] | undefined;
     getStatInt(name: string): number | undefined;
     /**

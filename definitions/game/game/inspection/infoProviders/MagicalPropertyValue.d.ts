@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -18,6 +18,9 @@ import Translation from "@wayward/game/language/Translation";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 import { IRange } from "@wayward/utilities/math/Range";
 export type NumberTranslator = (number: number | IRange, isMod: boolean, isPercent: boolean, isMultiplied: boolean) => Translation;
+/**
+ * @deprecated Use {@link Translation.formula}
+ */
 export default class MagicalPropertyValue extends InfoProvider {
     private readonly base;
     private numberTranslator?;

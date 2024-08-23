@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,10 +15,11 @@ import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProv
 import type Inspection from "@wayward/game/game/inspection/Inspection";
 import PlayerInspection from "@wayward/game/game/inspection/inspections/PlayerInspection";
 import type Tile from "@wayward/game/game/tile/Tile";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export default class SelfInspection extends PlayerInspection {
-    static getFromTile(tile: Tile, context: InfoProviderContext): ArrayOr<Inspection<Player>>;
+    static getFromTile(tile: Tile, context?: InfoProviderContext): ArrayOr<Inspection<Player>>;
     static handles(type: InspectType, player: unknown, context?: InfoProviderContext): boolean;
-    constructor(player: Player);
+    constructor(player: Player, context?: InfoProviderContext);
     getBorder(): string;
-    get(context: InfoProviderContext): InfoProvider[];
+    protected getContent(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider | undefined>;
 }

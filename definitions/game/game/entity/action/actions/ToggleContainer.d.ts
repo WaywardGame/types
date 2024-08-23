@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -17,5 +17,5 @@ export interface IToggleContainerCanUse extends IActionUsable {
     container: IContainer;
     entity: Entity;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.Container, ActionArgument.NPCNearby], [arg1: ActionArgument.Undefined, ActionArgument.Boolean]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IToggleContainerCanUse, [(import("../../npc/NPC").default | IContainer | undefined)?, (boolean | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.Container, ActionArgument.NPCNearby], [arg1: ActionArgument.Undefined, ActionArgument.Boolean]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IToggleContainerCanUse, [(import("../../npc/NPC").default | IContainer | undefined)?, (boolean | undefined)?]>;
 export default _default;

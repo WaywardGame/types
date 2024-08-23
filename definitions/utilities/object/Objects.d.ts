@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,6 +12,10 @@ export type StringableObject = object & {
     toString(): string;
 };
 export declare function weakRefify<T>(value: T): T extends object ? WeakRef<T> : T;
+export declare function deWeakRefify<T>(value: T | (T extends WeakKey ? WeakRef<T> : never)): T | (T extends WeakKey ? undefined : never);
+export type UnWeakRefified<ARGS extends any[]> = {
+    [INDEX in keyof ARGS]: ARGS[INDEX] | (ARGS[INDEX] extends WeakKey ? undefined : never);
+};
 declare namespace Objects {
     function keys<K extends string | number | symbol>(o: {
         [key in K]?: any;
@@ -38,10 +42,12 @@ declare namespace Objects {
         hasValue: false;
         value?: undefined;
     };
+    function getDirections(target: any, within: any): Generator<string[]>;
     function stringify(object: any, pretty?: boolean, noDepth?: boolean, maxIterations?: number): string;
     function mutable<T>(object: T): Mutable<T>;
     function removeUndefinedProperties<T extends object>(object: T): T;
     function filterProperties<T extends object>(object: T, filter: (key: keyof T, value: T[keyof T]) => any): T;
+    function bind<T>(obj: T): T;
 }
 export default Objects;
 export interface IPrivateStore<T> {

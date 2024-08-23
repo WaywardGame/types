@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,10 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Deity } from "@wayward/game/game/deity/Deity";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import type { IActionExpectedLocation } from "@wayward/game/game/entity/action/argument/ActionArgumentExpectedLocation";
-import type { ActionArguments, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionExample, IActionExampleApi, IActionHandlerApi, IActionNotUsable, IActionNotUsableHandlerApi, IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import type { ActionArguments, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionExample, IActionExampleApi, IActionHandlerApi, IActionNotUsable, IActionNotUsableHandlerApi, IActionTargetAdjacent, IActionTargetEntityRanged, IActionTargetTileRanged, IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Entity from "@wayward/game/game/entity/Entity";
@@ -38,8 +37,9 @@ export declare class Action<A extends ActionArguments, E extends Entity = Entity
     notUsableHandler: (actionApi: IActionNotUsableHandlerApi<E, CU>, ...args: AV) => R;
     confirmer?: (actionApi: IActionConfirmerApi<E, any>, ...args: AV) => Promise<boolean>;
     exampleHandler?: (actionApi: IActionExampleApi<E, CU>, ...args: AV) => IActionExample;
-    alignment: Deity;
+    deities?: DeityReal[];
     private shouldSkipConfirmation;
+    private targetTile?;
     constructor(...argumentTypes: A);
     /**
      * Check if the action has setup CanUse logic
@@ -48,10 +48,12 @@ export declare class Action<A extends ActionArguments, E extends Entity = Entity
     getExample(executor: E, ...args: AV): IActionExample | undefined;
     canUse(actionApi: IActionApi<E, any>, ...args: AV): CU | IActionNotUsable;
     canUse(executor: E, ...args: AV): CU | IActionNotUsable;
-    canUseAt(actionExecutor: E, location?: Partial<IActionExpectedLocation>, ...args: AV): CU | IActionNotUsable;
-    canUseWhileFacing(actionExecutor: E, position: IVector3, direction: Direction.Cardinal, ...args: AV): CU | IActionNotUsable;
+    canUseAt(actionExecutor: E, location?: Partial<IActionTargetAdjacent>, ...args: AV): CU | IActionNotUsable;
+    canUseWhileFacing(actionExecutor: E, position: IVector3, direction?: Direction.Cardinal, ...args: AV): CU | IActionNotUsable;
     execute(actionApiOrExecutor: IActionApi<E, any> | E, ...args: AV): R | Promise<R> | Promise<R | undefined> | undefined;
-    executeAt(actionApiOrExecutor: IActionApi<E, any> | E, location: IActionExpectedLocation, ...args: AV): Promise<R | undefined>;
+    executeAt(actionApiOrExecutor: IActionApi<E, any> | E, location: IActionTargetAdjacent, ...args: AV): Promise<R | undefined>;
+    executeRanged(actionApiOrExecutor: IActionApi<E, any> | E, target: IActionTargetTileRanged, ...args: AV): Promise<R | undefined>;
+    executeOn(actionApiOrExecutor: IActionApi<E, any> | E, targetEntity?: Entity | IActionTargetEntityRanged, ...args: AV): Promise<R | undefined>;
     executeConfirmer(actionApiOrExecutor: IActionApi<E, any> | E, args: AV): Promise<boolean>;
     skipConfirmation(): this;
     /**
@@ -114,7 +116,11 @@ export declare class Action<A extends ActionArguments, E extends Entity = Entity
      * @param flag Flag to check
      */
     hasFlag(flag: ActionFlag): boolean;
-    setAlignment(alignment: Deity): this;
+    /**
+     * Sets which deities can award runes for this action
+     * @param deity A deity or union of multiple deities
+     */
+    setDeityDomain(...deities: DeityReal[]): this;
     /**
      * Creates an identical clone of this action.
      */

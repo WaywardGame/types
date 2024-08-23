@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -19,7 +19,6 @@ export type IFilter = {
 export declare enum MessageFilterDefault {
     All = 0,
     Game = 1,
-    Chat = 2,
-    Alignment = 3
+    Chat = 2
 }
 export declare const MESSAGE_FILTERS_DEFAULT: Descriptions<MessageFilterDefault, IFilter>;

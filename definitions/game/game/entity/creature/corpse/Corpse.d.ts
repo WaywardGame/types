@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -46,7 +46,7 @@ export default class Corpse extends Entity<ICorpseDescription, CreatureType, Ref
     static is(value: any): value is Corpse;
     get entityType(): EntityType.Corpse;
     get tileUpdateType(): TileUpdateType;
-    readonly event: IEventEmitter<this, ICorpseEvents>;
+    event: IEventEmitter<this, ICorpseEvents>;
     aberrant?: boolean | undefined;
     decay?: number | undefined;
     qualityBonus?: number | undefined;

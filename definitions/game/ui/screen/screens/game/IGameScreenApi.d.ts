@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,6 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IUsableActionPossibleUsing, UsableActionUsability } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
 import type UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
 import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import type Translation from "@wayward/game/language/Translation";
@@ -40,4 +42,35 @@ export interface IDialog extends Component {
     getName(): Iterable<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined;
     showPanel(id: string | number): Component | undefined;
     showSettingsPanel(): this;
+}
+export declare enum UsableActionExecutionResult {
+    UnknownAction = 0,
+    NotExecutable = 1,
+    NotUsableDidAlert = 2,
+    NotUsableNoAlert = 3,
+    Executed = 4,
+    Debounced = 5
+}
+export interface IUsableActionExecutionOptions {
+    /**
+     * An optional `UsableActionUsability` failure to skip all checks and fail with this result instead
+     */
+    notUsable?: UsableActionUsability;
+    /**
+     * Whether failing actions should be silent
+     */
+    silent?: true;
+    /**
+     * Whether to debounce error messages & sounds.
+     */
+    debounce?: true;
+    /**
+     * An optional replacement for the default `isUsable` check on the action
+     * @param isUsable The default `isUsable` check
+     */
+    isUsable?(action: UsableAction, using: IUsableActionPossibleUsing, isUsable: (using: IUsableActionPossibleUsing) => UsableActionUsability): UsableActionUsability;
+    /**
+     * An optional handler for before `isUsable` is checked
+     */
+    onPreUsabilityCheck?(action: UsableAction, using: IUsableActionPossibleUsing): any;
 }

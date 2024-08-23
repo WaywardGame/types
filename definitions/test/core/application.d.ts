@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,9 +14,12 @@ import type { ScreenId } from "@wayward/game/ui/screen/IScreen";
 import type { MenuId } from "@wayward/game/ui/screen/screens/menu/component/IMenu";
 import type { Random } from "@wayward/utilities/random/Random";
 import ApplicationInteractions from "@wayward/test/core/applicationInteractions";
-import type { Apps } from "@wayward/test/core/applicationManager";
+import type { ApplicationManager } from "@wayward/test/core/applicationManager";
 import type { IAppPaths } from "@wayward/test/interfaces";
 import type { TestRunContext } from "@wayward/test/testRunner";
+import type Player from "@wayward/game/game/entity/player/Player";
+import { ItemType } from "@wayward/game/game/item/IItem";
+import { ItemComponentMarshal } from "@wayward/test/core/marshals/ui/itemComponentMarshal";
 export interface IApplicationOptions {
     additionalArgs?: string[];
     mods?: string[];
@@ -49,7 +52,7 @@ export declare class Application extends ApplicationInteractions {
     readonly id: string;
     readonly basePath: string;
     private readonly chromeDriver;
-    manager: Apps;
+    manager: ApplicationManager;
     readonly heapSnapshotPath: string;
     private recordVideo;
     private videoPath;
@@ -63,6 +66,15 @@ export declare class Application extends ApplicationInteractions {
     clearDirectory(directory: string): Promise<void>;
     getApplicationState(): Promise<IApplicationState>;
     getLogs(): Promise<string[]>;
+    /**
+     * Executes a function on just this app in the context of the local player
+     */
+    executeLocalJavaScript<T2 extends any[], T = void>(executor: (player: Player, ...extraArgs: T2) => T, ...extraArgs: T2): Promise<T>;
+    /**
+     * Asserts some code on just this app
+     */
+    assertScript(executor: (player: Player) => boolean, assertMessage?: string): Promise<void>;
+    findItemComponents(itemType: ItemType): Promise<ItemComponentMarshal[]>;
     requestVideo(videoPath: string): void;
     private recordVideoFrame;
     private configureDirectories;

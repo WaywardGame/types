@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { HeapStatistics } from "electron";
 import type { IOS } from "./ipc/os";
 import type { IFileSystem } from "./ipc/fileSystem";
 import type { IElectron } from "./ipc/electron";
@@ -32,6 +33,7 @@ export interface IHostContextBridge {
     os: IOS;
     path: IPath;
     ssh2: any;
+    getHeapStatistics(): HeapStatistics;
 }
 export interface ISteamworks {
     UGCMatchingType: {
@@ -242,7 +244,7 @@ export interface IServerGameDetails {
     maxPlayers: number;
     difficulty: number;
     pvp: boolean;
-    alignment: number;
+    tier: number;
     days: number;
     mods: IServerMod[];
     peaceful: boolean;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -39,7 +39,8 @@ export declare enum SkillTranslation {
 }
 export declare enum StatTranslation {
     Name = 0,
-    Description = 1
+    Abbreviation = 1,
+    Description = 2
 }
 export declare enum BookTranslation {
     Title = 0,
@@ -66,18 +67,12 @@ export declare enum EquipSlotTranslation {
     EquipTo = 1,
     Description = 2
 }
-export declare enum StatusEffectTranslation {
+export declare enum StatusTranslation {
     Adjective = 0,
     Name = 1,
-    Description = 2,
-    BaseDescription = 3
+    Description = 2
 }
-export declare enum BleedLevelTranslation {
-    Adjective = 0,
-    Name = 1,
-    Description = 2,
-    Effects = 3
-}
+export type StatusTranslationTuple = [adjective: string, name: string, description?: string];
 export declare enum QuestTranslation {
     Title = 0,
     Description = 1
@@ -118,61 +113,92 @@ export declare enum QualityTranslation {
     Name = 0,
     Description = 1
 }
+export declare enum RunekeeperDomainTranslation {
+    Name = 0,
+    Domain = 1
+}
+export declare enum DamageTypeTranslation {
+    Name = 0,
+    Description = 1
+}
 export declare enum MiscTranslation {
     AAndB = 0,
     Aberrant = 1,
     Add = 2,
-    AListAndB = 3,
-    AListOrB = 4,
-    AOrB = 5,
-    Binding = 6,
-    BindingInputModifierSeparator = 7,
-    BindingListSeparator = 8,
-    BindingMacroSeparator = 9,
-    BindingWhenHoveringItem = 10,
-    Classes = 11,
-    Colorize = 12,
-    ColorizeDamage = 13,
-    ColorizeMagical = 14,
-    ColorizeMessageType = 15,
-    ColorizePrimary = 16,
-    ColorizeQuality = 17,
-    ColorizeSecondary = 18,
-    ColorizeStat = 19,
-    ColorizeVulnerability = 20,
-    CorpseOf = 21,
-    CountThing = 22,
-    CreatureSubtitle = 23,
-    Dependency = 24,
-    Difference = 25,
-    Dug = 26,
-    EquipSlotEquipToYour = 27,
-    ExpressionSeparator = 28,
-    ItemMagicalProperty = 29,
-    ListItemSeparator = 30,
-    Merge = 31,
-    MergeSpaced = 32,
-    Multiply = 33,
-    Negate = 34,
-    NPCName = 35,
-    NPCNameUnmet = 36,
-    NumberSingleDecimal = 37,
-    Overfished = 38,
-    Overline = 39,
-    OwnName = 40,
-    Parenthesized = 41,
-    Percent = 42,
-    PercentRaw = 43,
-    PlayerName = 44,
-    Possession = 45,
-    Range = 46,
-    ReformatSingularNoun = 47,
-    Renamed = 48,
-    Simplify = 49,
-    The = 50,
-    Tile = 51,
-    Tilled = 52,
-    Undiscovered = 53,
-    Unknown = 54,
-    UnknownItem = 55
+    AdditionalXs = 3,
+    AListAndB = 4,
+    AListOrB = 5,
+    AOfB = 6,
+    AOrB = 7,
+    ASlashB = 8,
+    Binding = 9,
+    BindingInputModifierSeparator = 10,
+    BindingListSeparator = 11,
+    BindingMacroSeparator = 12,
+    BindingWhenHoveringItem = 13,
+    BOfA = 14,
+    Classes = 15,
+    Colorize = 16,
+    ColorizeDamage = 17,
+    ColorizeMagical = 18,
+    ColorizeMessageType = 19,
+    ColorizePrimary = 20,
+    ColorizeQuality = 21,
+    ColorizeSecondary = 22,
+    ColorizeStat = 23,
+    ColorizeVulnerability = 24,
+    CorpseOf = 25,
+    CountThing = 26,
+    CountUnit = 27,
+    Dependency = 28,
+    Difference = 29,
+    Dug = 30,
+    EquipSlotEquipToYour = 31,
+    ExpressionSeparator = 32,
+    ListItemSeparator = 33,
+    Merge = 34,
+    MergeSlash = 35,
+    MergeSpaced = 36,
+    Multiply = 37,
+    Negate = 38,
+    NPCNameColor = 39,
+    NPCNameUnmet = 40,
+    NumberSingleDecimal = 41,
+    Overfished = 42,
+    Overline = 43,
+    OwnName = 44,
+    Parenthesized = 45,
+    Percent = 46,
+    PercentRaw = 47,
+    PlayerName = 48,
+    Possession = 49,
+    QualityAffix = 50,
+    Range = 51,
+    ReformatSingularNoun = 52,
+    Renamed = 53,
+    Sentence = 54,
+    Simplify = 55,
+    Tile = 56,
+    Tilled = 57,
+    Undiscovered = 58,
+    Unknown = 59,
+    UnknownItem = 60,
+    XUndiscovered = 61
+}
+export declare enum Term {
+    Aberrant = 0,
+    Action = 1,
+    DamageTick = 2,
+    EveryX = 3,
+    Hostile = 4,
+    Movement = 5,
+    NextX = 6,
+    Normal = 7,
+    Tamed = 8,
+    TimeToX = 9,
+    Turn = 10,
+    UsingX = 11,
+    XTick = 12,
+    XtoYZ = 13,
+    XY = 14
 }

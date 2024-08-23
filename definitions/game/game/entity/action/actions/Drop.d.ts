@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,6 +14,7 @@ import { Action } from "@wayward/game/game/entity/action/Action";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type { IMoveItemFilterArgument } from "@wayward/game/game/entity/action/actions/moveItem/MoveItemFilterArgument";
 import { MoveItemFilterArgument } from "@wayward/game/game/entity/action/actions/moveItem/MoveItemFilterArgument";
+import type { MoveItemsSourceArgumentResolvable } from "@wayward/game/game/entity/action/actions/moveItem/MoveItemsSourceArgument";
 import MoveItemsSourceArgument from "@wayward/game/game/entity/action/actions/moveItem/MoveItemsSourceArgument";
 import type { IContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
@@ -42,13 +43,13 @@ interface IResolvedTileDrop {
     into: IContainer;
     blocker?: Translation;
 }
-export declare function resolveTileDrop(human: Human, tile?: Tile): IResolvedTileDrop;
+export declare function resolveTileDrop(human: Human, tile?: Tile, items?: MoveItemsSourceArgumentResolvable): IResolvedTileDrop;
 export interface IDropCanUse {
     items: Item[];
     tile: Tile;
     into?: IContainer;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearbyIncludingTradeContainer, ActionArgument.ItemArrayNearbyIncludingTradeContainer, MoveItemsSourceArgument], [arg1: ActionArgument.Undefined, DropItemFilterArgument]], Human<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearbyIncludingTradeContainer, ActionArgument.ItemArrayNearbyIncludingTradeContainer, MoveItemsSourceArgument], [arg1: ActionArgument.Undefined, DropItemFilterArgument]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
     usable: true;
     items: Item[];
     into: IContainer;

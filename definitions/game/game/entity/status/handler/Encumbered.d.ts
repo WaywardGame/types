@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,19 +9,16 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { WeightStatus } from "@wayward/game/game/entity/player/IPlayer";
-import StatusEffect, { StatusEffectBadness } from "@wayward/game/game/entity/status/StatusEffect";
-import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import Status from "@wayward/game/game/entity/status/Status";
+import { StatusEffectList } from "@wayward/game/game/entity/status/StatusEffectList";
 import type { IHighlight } from "@wayward/game/ui/util/IHighlight";
-export default class Encumbered extends StatusEffect {
-    private previousStatus?;
-    private status?;
+export default class Encumbered extends Status {
     register(): void;
-    getLevel(): 0 | WeightStatus;
+    getLevel(): WeightStatus;
     getHighlight(): IHighlight;
-    getBadness(): StatusEffectBadness.Neutral | StatusEffectBadness.Bad;
-    getTranslation(): TranslationImpl;
-    getDescription(): TranslationImpl;
+    getEffects(): StatusEffectList;
     refresh(): void;
+    private getTimeToNextThirstTickReductionMultiplier;
     private onEntityMove;
     private onStatChange;
     private getStaminaReductionPerTurn;

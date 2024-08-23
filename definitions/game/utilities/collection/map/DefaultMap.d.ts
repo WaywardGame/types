@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,6 +14,7 @@ import Objects from "@wayward/utilities/object/Objects";
 export default class DefaultMap<K, V> extends Map<K, V> implements ISerializable, Objects.ICloneable {
     readonly defaultValue: V;
     constructor(defaultValue: V, entries?: Iterable<readonly [K, RecursivePartial<V>]>);
+    valuesAndDefault(): Generator<V>;
     initialize(key: K): V;
     serializeObject(serializer: ISerializer): undefined;
     deserializeObject(serializer: ISerializer): boolean;

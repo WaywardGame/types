@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -45,19 +45,40 @@ export default class Vector2 implements IVector2, ISerializable {
         clientX?: number;
         clientY?: number;
     }): Vector2 | undefined;
-    static inRange(center: IVector2, range: number, includeCenter?: boolean): IterableIterator<IVector2>;
+    static inRange(center: IVector2, range: number, includeCenter?: boolean): Generator<IVector2>;
     static angle(directionInRadians: number, distance?: number): Vector2;
     static forRange(center: IVector2, range: number, consumer: ConsumerVectorRange): void;
     static forRange(center: IVector2, range: number, includeCenter: boolean, consumer: ConsumerVectorRange): void;
     static forRange(center: IVector2, range: number, min: IVector2, max: IVector2, consumer: ConsumerVectorRange): void;
     static forRange(center: IVector2, range: number, min: IVector2, max: IVector2, includeCenter: boolean, consumer: ConsumerVectorRange): void;
+    static raycast(center: IVector2, range: number, angle: IVector2): IVector2[];
+    static raycastArc(center: IVector2, radius: number, angleStart: IVector2 | number, angleEnd: IVector2 | number): IVector2[];
     static cross(vector: IVector2, vector2: IVector2): Vector3;
     static cross<D extends IVector3>(vector: IVector2, vector2: IVector2, dest: D): D;
     static dot(vector: IVector2, vector2: IVector2): number;
     static isDistanceWithin(vector: IVector2, vector2: IVector2, distance: number): boolean;
+    /**
+     * The measure of a straight line between points A and B.
+     *
+     * This distance formula covers a circular pattern on a grid.
+     */
     static distance(vector: IVector2, vector2: IVector2): number;
+    /**
+     * The euclidean distance ({@link Vector2.distance}), but without a sqrt operation afterwards, usually used for performance.
+     */
     static squaredDistance(vector: IVector2, vector2: IVector2): number;
+    /**
+     * The number of adjacent grid cell movements needed to get from A to B.
+     *
+     * This distance formula covers a diamond pattern on a grid.
+     */
     static manhattanDistance(vec1: IVector2, vec2: IVector2): number;
+    /**
+     * The greater of the distances from points A and B on each axis.
+     *
+     * This distance formula covers a square pattern on a grid.
+     */
+    static chebyshevDistance(vec1: IVector2, vec2: IVector2): number;
     static equals(vec1: IVector2, vec2: IVector2): boolean;
     static direction(vector: IVector2, vector2: IVector2): Vector2;
     static direction<D extends IVector2>(vector: IVector2, vector2: IVector2, dest: D): D;
@@ -73,6 +94,7 @@ export default class Vector2 implements IVector2, ISerializable {
     static quotient<D extends IVector2>(vector: IVector2, vector2: IVector2, dest: D): D;
     static range(a: IVector2, b: IVector2): Generator<number[], void>;
     static is(thing: unknown): thing is IVector2;
+    static rawCopy(v2: IVector2): IVector2;
     private readonly values;
     get x(): number;
     set x(value: number);

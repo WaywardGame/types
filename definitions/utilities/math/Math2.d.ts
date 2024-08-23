@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,6 +11,10 @@
 export declare const π: number;
 export declare const τ: number;
 declare namespace Math2 {
+    /**
+     * Szudzik's function (signed)
+     */
+    function hash2(x: number, y: number): number;
     function parseLocalizedFloat(str: string): number;
     /**
      * Clamps the given number in the given range
@@ -139,6 +143,7 @@ declare namespace Math2 {
     function mod(n1: number, n2: number): number;
     function average(...ns: number[]): number;
     function sum(...ns: number[]): number;
+    function mult(...ns: number[]): number;
     /**
      * https://stackoverflow.com/a/5732390
      */
@@ -197,5 +202,6 @@ declare namespace Math2 {
     function isShortUnsigned(num: number): boolean;
     function isIntegerSigned(num: number): boolean;
     function isIntegerUnsigned(num: number): boolean;
+    function normalizeRadians(radians: number): number;
 }
 export default Math2;

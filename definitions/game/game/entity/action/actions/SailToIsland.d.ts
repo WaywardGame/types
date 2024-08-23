@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,5 +15,5 @@ export interface ISailToIslandCanUse extends IActionUsable {
     isLocalIslandSailing?: boolean;
     distanceFromEdge?: number;
 }
-declare const _default: Action<[ActionArgument.Integer32, ActionArgument.Integer32, [ActionArgument.Integer32, ActionArgument.Undefined]], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ISailToIslandCanUse, [number, number, (number | undefined)?]>;
+declare const _default: Action<[ActionArgument.Integer32, ActionArgument.Integer32, [ActionArgument.Integer32, ActionArgument.Undefined]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ISailToIslandCanUse, [number, number, (number | undefined)?]>;
 export default _default;

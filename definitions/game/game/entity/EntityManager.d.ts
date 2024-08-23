@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -22,7 +22,7 @@ export interface IEntityCanCreateOptions {
     allowOnBlockedTiles?: boolean;
     allowOnFire?: boolean;
     allowOverDooadsAndTileEvents?: boolean;
-    chanceOfScarecrowScare?: number;
+    blockOnScarecrow?: boolean;
 }
 export default abstract class EntityManager<T extends Entity, IRemoveOptions = undefined> extends ObjectManager<T, IEntityManagerEvents<T>> implements IEntityManager<T> {
     /**

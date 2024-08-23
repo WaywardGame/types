@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,7 +12,7 @@ import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import UseInfo from "@wayward/game/game/inspection/infoProviders/UseInfo";
 import type Item from "@wayward/game/game/item/Item";
 declare const _default: UseInfo<{
-    ranged: import("../../../../item/IItem").IRanged;
+    ranged: import("../../../../item/IItem").IRangedDescription;
     entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
     type: import("../../../../item/IItem").ItemType;

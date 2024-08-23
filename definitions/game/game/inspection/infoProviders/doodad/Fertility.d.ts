@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,7 +14,7 @@ import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class FertilityInfoProvider extends InfoProvider {
     private readonly doodad;
-    static get(doodad: Doodad): false | 0 | FertilityInfoProvider | undefined;
+    static get(doodad: Doodad): FertilityInfoProvider | undefined;
     private message;
     private constructor();
     getClass(): string[];

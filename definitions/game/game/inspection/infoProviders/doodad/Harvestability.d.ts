@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,7 +15,7 @@ import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProv
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class HarvestabilityInfoProvider extends InfoProvider {
     private readonly doodad;
-    static get(doodad: Doodad): false | HarvestabilityInfoProvider | undefined;
+    static get(doodad: Doodad): HarvestabilityInfoProvider | undefined;
     private harvestMessage;
     private constructor();
     getClass(): string[];

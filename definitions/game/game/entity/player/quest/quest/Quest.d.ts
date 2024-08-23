@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -49,7 +49,7 @@ export declare class Quest extends EventEmitter.Host<IQuestEvents> {
     getTitle(quest: IQuest): TranslationImpl | undefined;
     getDescription(quest: IQuest): TranslationImpl | undefined;
     getEventBusTriggers(instance: IQuest): Array<[IQuestRequirement, Stream<readonly [GameEmitterOrBus, string | number | symbol, (api: IQuestRequirementApi<[]>, ...args: any[]) => boolean]>]>;
-    getHostTriggers(instance: IQuest): Array<[IQuestRequirement, IterableIterator<[keyof IPlayerEvents, (api: IQuestRequirementApi<[]>, player: Player, ...args: any[]) => boolean]>]>;
+    getHostTriggers(instance: IQuest): Array<[IQuestRequirement, BuiltinIterator<[keyof IPlayerEvents, (api: IQuestRequirementApi<[]>, player: Player, ...args: any[]) => boolean]>]>;
     getRequirements(host: Player, instance: IQuest): RequirementInstance[];
     getRequirement(host: Player, quest: IQuest, requirement: IQuestRequirement): RequirementInstance | undefined;
     needsManualCompletion(): boolean;

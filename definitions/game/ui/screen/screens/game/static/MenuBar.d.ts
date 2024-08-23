@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,6 +11,7 @@
 import Component from "@wayward/game/ui/component/Component";
 import type { ContextMenuDescriptions } from "@wayward/game/ui/component/ContextMenu";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import Bindable from "@wayward/game/ui/input/Bindable";
 import { Quadrant } from "@wayward/game/ui/screen/screens/game/component/IQuadrantComponent";
 import QuadrantComponent from "@wayward/game/ui/screen/screens/game/component/QuadrantComponent";
 import { MenuBarButtonType } from "@wayward/game/ui/screen/screens/game/static/menubar/IMenuBarButton";
@@ -23,13 +24,14 @@ import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 declare const ID_SEPARATOR = -1;
 type Order = Array<MenuBarButtonType | typeof ID_SEPARATOR>;
 export default class MenuBar extends QuadrantComponent implements ISortableComponent {
-    readonly event: IEventEmitter<this, WithSortableEvents<QuadrantComponent>>;
+    event: IEventEmitter<this, WithSortableEvents<QuadrantComponent>>;
     static getDefaultOrder(): Order;
     static preferredQuadrant: Quadrant;
     get preferredQuadrant(): Quadrant;
     order?: Order;
     readonly sortable: Sortable;
     constructor();
+    getBindable(): Bindable;
     getSortableID(child: Component): -1 | MenuBarButtonType;
     /**
      * Removes any existing groups of menubar buttons, then initializes new ones from the `MenuBarButtonType` enum.

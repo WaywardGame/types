@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -50,18 +50,19 @@ export type IContextMenuOptionDescription = {
 export type ContextMenuOptionKeyValuePair<O extends number | string | symbol = number | string | symbol> = [O, IContextMenuOptionDescription];
 export type ContextMenuOptionDescription<O extends number | string | symbol = number | string | symbol> = ContextMenuOptionKeyValuePair<O> | typeof ContextMenu.Divider;
 export type ContextMenuDescriptions<O extends number | string | symbol = number | string | symbol> = Array<ContextMenuOptionDescription<O>>;
-export interface IContextMenuEvents extends Events<Component> {
+export interface IContextMenuEvents<O extends number | string | symbol = number | string | symbol> extends Events<Component> {
     setPosition(): any;
     interactable(): any;
-    chosen(choice: ContextMenuOption): any;
+    chosen(choice: ContextMenuOption<O>): any;
     becomeActive(): any;
+    showTooltip(option: ContextMenuOption<O>, tooltip: Tooltip): any;
 }
 declare class ContextMenu<O extends number | string | symbol = number | string | symbol> extends Component {
-    event: IEventEmitter<this, IContextMenuEvents>;
+    event: IEventEmitter<this, IContextMenuEvents<O>>;
     private activeOption?;
     private contextMenuId?;
     private readonly descriptions;
-    readonly options: Map<O, ContextMenuOption>;
+    readonly options: Map<O, ContextMenuOption<O>>;
     parentMenu?: ContextMenu;
     readonly content: Component<HTMLElement>;
     constructor(...descriptions: Array<ContextMenuOptionKeyValuePair<O> | typeof ContextMenu.Divider | undefined>);
@@ -104,8 +105,9 @@ interface IContextMenuOptionEvents extends Events<Button>, IDraggableEvents {
     becomeActive(): any;
     dispose(): any;
 }
-export declare class ContextMenuOption extends Button implements IDraggableComponent {
-    private readonly optionDescription;
+export declare class ContextMenuOption<O extends number | string | symbol = number | string | symbol> extends Button implements IDraggableComponent {
+    readonly optionId: O;
+    readonly optionDescription: IContextMenuOptionDescription;
     event: IEventEmitter<this, IContextMenuOptionEvents>;
     submenu?: ContextMenu;
     private readonly submenuDescription?;
@@ -114,7 +116,7 @@ export declare class ContextMenuOption extends Button implements IDraggableCompo
     readonly draggable?: Draggable;
     get contextMenu(): ContextMenu | undefined;
     get rootMenu(): ContextMenu | undefined;
-    constructor(optionDescription: IContextMenuOptionDescription);
+    constructor(optionId: O, optionDescription: IContextMenuOptionDescription);
     bindEvents(): void;
     setRequiresClick(requiresClick?: boolean): this;
     hideSubmenu(): void;

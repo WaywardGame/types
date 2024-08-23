@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -25,6 +25,7 @@ export interface IRange {
 export declare namespace IRange {
     const ZERO: Readonly<IRange>;
     const ONE: Readonly<IRange>;
+    function is(value: unknown): value is IRange;
     function lerp(t: number, range: IRange): number;
     function unlerp(lerped: number, range: IRange): number;
     function add(...rangesOrNumbers: Array<IRange | number>): IRange;
@@ -32,5 +33,12 @@ export declare namespace IRange {
     function flatten(rangeOrNumber: IRange | number | undefined): IRange | number | undefined;
     function multiply(range: IRange, by: number, into?: IRange): IRange;
     function ceil(range: IRange, into?: IRange): IRange;
+    function floor(range: IRange, into?: IRange): IRange;
     function average(range: IRange): number;
+    namespace Optional {
+        function simplify(value: number | IRange): number | IRange;
+        function add(a: number | IRange, b: number | IRange): number | IRange;
+        function subtract(a: number | IRange, b: number | IRange): number | IRange;
+        function mult(a: number | IRange, b: number | IRange): number | IRange;
+    }
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Entity from "@wayward/game/game/entity/Entity";
 import type Human from "@wayward/game/game/entity/Human";
 import type { HairColor, HairStyle, SkillType, SkinColor } from "@wayward/game/game/entity/IHuman";
 import type { TitleType } from "@wayward/game/game/entity/action/actions/SetTitle";
@@ -18,6 +19,9 @@ import type { INote } from "@wayward/game/game/entity/player/note/NoteManager";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
+import type { FindPathRange } from "@wayward/game/game/tile/ITerrain";
+import type Tile from "@wayward/game/game/tile/Tile";
 import type InterruptChoice from "@wayward/game/language/dictionary/InterruptChoice";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
@@ -221,9 +225,29 @@ export declare enum WeightStatus {
  * The amount of extra weight the player can hold (added to max health)
  */
 export declare const STRENGTH_BONUS = 25;
-export interface IWalkPath {
-    path: IVector2[];
+export type WalkTo = IWalkToTile | IWalkToEntity | IWalkToPath;
+export type WalkToReference = Reference<ReferenceType.Player | ReferenceType.NPC | ReferenceType.Creature | ReferenceType.TileEvent | ReferenceType.Item | ReferenceType.Doodad>;
+interface IWalkTo {
     force?: boolean;
+}
+export interface IWalkToTile extends IWalkTo {
+    type: "tile";
+    tile: Tile;
+    range?: FindPathRange;
+}
+export interface IWalkToEntity extends IWalkTo {
+    type: "entity";
+    entity: Entity;
+    range?: FindPathRange;
+}
+export interface IWalkToPath extends IWalkTo {
+    type: "path";
+    path: IVector2[];
+}
+export interface IWalkToPathInProgress extends IWalkToPath {
+    trackedReference?: WalkToReference;
+    trackedPosition?: IVector3;
+    range?: FindPathRange;
 }
 export interface IPlayerTitleMilestone {
     milestone: Milestone;
@@ -234,3 +258,4 @@ export interface IPlayerTitleSkill {
     milestone?: undefined;
 }
 export type PlayerTitle = IPlayerTitleMilestone | IPlayerTitleSkill;
+export {};

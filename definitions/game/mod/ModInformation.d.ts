@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,7 +10,7 @@
  */
 import type { Game } from "@wayward/game/game/Game";
 import { MultiplayerCompatibility, type IModConfig } from "@wayward/game/mod/IMod";
-import type { IImageOverrides, IModLanguage, IModProvides } from "@wayward/game/mod/IModInformation";
+import type { IImageOverrides, IModInformation, IModLanguage, IModProvides } from "@wayward/game/mod/IModInformation";
 import { ModState, ModType } from "@wayward/game/mod/IModInformation";
 import { CanLoadState } from "@wayward/game/mod/IModManager";
 import type Mod from "@wayward/game/mod/Mod";
@@ -18,7 +18,7 @@ import type { IModPath } from "@wayward/game/steamworks/ISteamworks";
 import type { IRequireJs } from "@wayward/hosts/shared/globalTypes";
 import type { IWorkshopItem } from "@wayward/hosts/shared/interfaces";
 import Log from "@wayward/utilities/Log";
-export declare class ModInformation {
+export declare class ModInformation implements IModInformation {
     private readonly game;
     readonly config: Readonly<IModConfig>;
     readonly provides: IModProvides;

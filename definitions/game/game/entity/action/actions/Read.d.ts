@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -18,5 +18,5 @@ export interface IReadCanUse extends IActionUsable {
     book: BookType;
     basicBookName: TranslationImpl;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IReadCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IReadCanUse, [Item]>;
 export default _default;

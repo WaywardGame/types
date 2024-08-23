@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -42,6 +42,7 @@ export interface IMessageManagerOptions {
     onDisplayMessage(message: IMessage): any;
     onClearMessages(): any;
 }
+type MessageManagerToAllSender = (manager: IMessageManager, player: Player) => boolean;
 export default class MessageManager implements IMessageManager {
     private readonly options;
     /**
@@ -60,7 +61,8 @@ export default class MessageManager implements IMessageManager {
      * Note: When this is called from a client, it actually only displays the message to the client and syncs that with the server.
      * When called from the server, it is sent to every client.
      */
-    static toAll(callback: (manager: IMessageManager, player: Player) => boolean): boolean;
+    static toAll(sender: MessageManagerToAllSender): boolean;
+    static toAll(players: Human[], sender: MessageManagerToAllSender): boolean;
     private readonly history;
     private lastMessageId;
     private _source;
@@ -119,7 +121,7 @@ export default class MessageManager implements IMessageManager {
      * Note: After sending a message, the message source, type, and human (if any) are reset.
      */
     send(message: Message | Translation, ...args: TranslationArg[]): boolean;
-    sendPacked(pack: Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
+    sendPacked(pack: Message | Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
     addToHistory(messageHistoryItem: IMessageHistoryItem): void;
     /**
      * Signal that the message was sent to everyone
@@ -128,3 +130,4 @@ export default class MessageManager implements IMessageManager {
     private reset;
     upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
 }
+export {};

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,4 +10,5 @@
  */
 import { TileGroup } from "@wayward/game/game/entity/creature/ICreature";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
-export declare const tileGroups: Descriptions<TileGroup, Set<TerrainType>>;
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+export declare const tileGroups: Descriptions<TileGroup, Set<TerrainType> & IModdable>;

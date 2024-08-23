@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import AltarDialog from "@wayward/game/ui/screen/screens/game/dialog/AltarDialog";
 import BookDialog from "@wayward/game/ui/screen/screens/game/dialog/BookDialog";
 import ContainerDialog from "@wayward/game/ui/screen/screens/game/dialog/ContainerDialog";
 import CraftingDialog from "@wayward/game/ui/screen/screens/game/dialog/CraftingDialog";
@@ -27,7 +26,6 @@ import QuickSettingsDialog from "@wayward/game/ui/screen/screens/game/dialog/Qui
 import SkillsDialog from "@wayward/game/ui/screen/screens/game/dialog/SkillsDialog";
 import TradeDialog from "@wayward/game/ui/screen/screens/game/dialog/TradeDialog";
 declare const dialogMap: {
-    16: typeof AltarDialog;
     6: typeof BookDialog;
     15: typeof ContainerDialog;
     9: typeof CraftingDialog;
@@ -44,7 +42,7 @@ declare const dialogMap: {
     8: typeof QuestDialog;
     3: typeof QuickSettingsDialog;
     5: typeof SkillsDialog;
-    17: typeof TradeDialog;
+    16: typeof TradeDialog;
 };
 export type DialogById = {
     [ID in keyof typeof dialogMap]: (typeof dialogMap)[ID] extends new () => infer DIALOG ? DIALOG : never;

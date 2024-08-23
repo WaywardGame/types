@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,13 +10,15 @@
  */
 import { TileUpdateType } from "@wayward/game/game/IGame";
 import type { RuneChance } from "@wayward/game/game/deity/IDeities";
+import { AiType } from "@wayward/game/game/entity/AI";
 import Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
-import { AiType, EntityType, MoveType, StatusType } from "@wayward/game/game/entity/IEntity";
+import { EntityType, MoveType } from "@wayward/game/game/entity/IEntity";
 import type { ICustomizations } from "@wayward/game/game/entity/IHuman";
 import { EquipType } from "@wayward/game/game/entity/IHuman";
 import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type { INPCDescription } from "@wayward/game/game/entity/npc/INPC";
 import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
 import type MerchantNPC from "@wayward/game/game/entity/npc/npcs/Merchant";
 import type ShipperNPC from "@wayward/game/game/entity/npc/npcs/Shipper";
@@ -24,6 +26,7 @@ import { MessageManagerNoOp } from "@wayward/game/game/entity/player/MessageMana
 import type Player from "@wayward/game/game/entity/player/Player";
 import { NoteManagerNoOp } from "@wayward/game/game/entity/player/note/NoteManager";
 import { QuestManagerNoOp } from "@wayward/game/game/entity/player/quest/QuestManager";
+import { StatusType } from "@wayward/game/game/entity/status/IStatus";
 import type { IContainer, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
@@ -46,13 +49,13 @@ export interface INPCEvents extends Events<Human> {
      */
     canNPCAttack(): boolean | undefined;
 }
-export default abstract class NPC extends Human<NPCType, ReferenceType.NPC> {
+export default abstract class NPC extends Human<INPCDescription, NPCType, ReferenceType.NPC> {
     protected static registrarId: number;
     get constructorFunction(): typeof NPC;
     readonly isPlayerLike: boolean;
     get entityType(): EntityType.NPC;
     get tileUpdateType(): TileUpdateType;
-    readonly event: IEventEmitter<this, INPCEvents>;
+    event: IEventEmitter<this, INPCEvents>;
     ai: AiType;
     seen: number;
     private weightCapacity;
@@ -61,13 +64,14 @@ export default abstract class NPC extends Human<NPCType, ReferenceType.NPC> {
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(entityOptions?: IEntityConstructorOptions<NPCType>);
+    getDescription(): INPCDescription | undefined;
     getWeightCapacity(): number;
     getRegistrarId(): number;
     createNoteManager(): NoteManagerNoOp;
     createMessageManager(): MessageManagerNoOp;
     createQuestManager(): QuestManagerNoOp;
     addMilestone(): void;
-    protected getApplicableStatusEffects(): Set<StatusType> | undefined;
+    protected getApplicableStatuses(): Set<StatusType> | undefined;
     get isValid(): boolean;
     load(): void;
     /**

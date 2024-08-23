@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -31,7 +31,7 @@ export declare abstract class ObjectManager<ObjectType extends StringableObject 
      */
     delete(): void;
     onUnserialized(): void;
-    [Symbol.iterator](): IterableIterator<ObjectType | undefined>;
+    [Symbol.iterator](): BuiltinIterator<ObjectType | undefined>;
     get length(): number;
     get(id: number): ObjectType | undefined;
     set(id: number, value: ObjectType | undefined): void;

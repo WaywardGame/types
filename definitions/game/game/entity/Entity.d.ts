@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -23,7 +23,6 @@ import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
-import type { IInspector } from "@wayward/game/game/inspection/IInfoProvider";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
@@ -40,7 +39,7 @@ import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { WorldZ } from "@wayward/utilities/game/WorldZ";
-export default abstract class Entity<DescriptionType = unknown, TypeType extends number = number, EntityReferenceType extends EntityReferenceTypes = EntityReferenceTypes, TagType = unknown> extends EventEmitter.Host<IEntityEvents> implements IReferenceable, IInspector, ITemperatureSource, INotificationLocation, IVector4, ICastable {
+export default abstract class Entity<DescriptionType = unknown, TypeType extends number = number, EntityReferenceType extends EntityReferenceTypes = EntityReferenceTypes, TagType = unknown> extends EventEmitter.Host<IEntityEvents> implements IReferenceable, ITemperatureSource, INotificationLocation, IVector4, ICastable {
     abstract readonly entityType: EntityType;
     abstract readonly tileUpdateType: TileUpdateType;
     id: number;
@@ -86,7 +85,6 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      */
     protected abstract getDescription(): DescriptionType | undefined;
     toString(): string;
-    getInspectionId(): string;
     /**
      * Location of the entity on the world.
      * Parent classes will probably mark this as always defined

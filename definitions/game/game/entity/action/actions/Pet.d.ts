@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,5 +14,5 @@ import type Creature from "@wayward/game/game/entity/creature/Creature";
 export interface IPetCanUse extends IActionUsable {
     creature: Creature;
 }
-declare const _default: Action<[], import("../../Human").default<number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPetCanUse, []>;
+declare const _default: Action<[], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPetCanUse, []>;
 export default _default;

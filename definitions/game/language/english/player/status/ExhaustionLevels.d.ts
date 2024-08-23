@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,5 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ExhaustionLevel } from "@wayward/game/game/entity/status/handler/IExhausted";
-declare const exhaustionLevels: Record<ExhaustionLevel, string>;
+import type { StatusTranslationTuple } from "@wayward/game/language/dictionary/Misc";
+declare const exhaustionLevels: Map<ExhaustionLevel, StatusTranslationTuple>;
 export default exhaustionLevels;

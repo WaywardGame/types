@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,17 +9,17 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { SfxType } from "@wayward/game/audio/IAudio";
-import type { BiomeType } from "@wayward/game/game/biome/IBiome";
 import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { AiMaskType } from "@wayward/game/game/entity/AI";
+import { AiType } from "@wayward/game/game/entity/AI";
 import type { IEntityWithStatsEvents } from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
-import type { DamageType, Defense, EntityType, ICausesStatusEffect, IStatChangeInfo, MoveType, SlippingSpeed } from "@wayward/game/game/entity/IEntity";
-import { AiType } from "@wayward/game/game/entity/IEntity";
+import type { DamageType, Defense, EntityType, ICausesStatus, IStatChangeInfo, MoveType, SlippingSpeed } from "@wayward/game/game/entity/IEntity";
 import type { IStat } from "@wayward/game/game/entity/IStats";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { IPackedMessage } from "@wayward/game/game/entity/player/IMessageManager";
-import type StatusEffect from "@wayward/game/game/entity/status/StatusEffect";
+import type Status from "@wayward/game/game/entity/status/Status";
 import type { ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { LootGroupType } from "@wayward/game/game/item/LootGroups";
@@ -128,20 +128,6 @@ export interface ICreatureEntityTypeOld {
         breakAway?: boolean;
     };
 }
-export declare enum SpawnGroup {
-    Any = 0,
-    Guardians = 1,
-    Seawater = 2,
-    CaveWater = 3,
-    Cave = 4,
-    Night = 5,
-    StrongGuardians = 6,
-    FreshWater = 7,
-    EasyNight = 8,
-    CaveVoid = 9,
-    SwampWater = 10,
-    Cursed = 11
-}
 export declare enum TileGroup {
     None = 0,
     Default = 1,
@@ -154,7 +140,7 @@ export declare enum TileGroup {
     Flying = 8,
     Ghost = 9,
     Desert = 10,
-    Lava = 11,
+    DesertWithLava = 11,
     Wet = 12,
     Ground = 13,
     All = 14,
@@ -167,14 +153,19 @@ export declare enum TileGroup {
     Void = 21,
     DesertWithDirt = 22
 }
-export interface ICreatureDescription extends IModdable, ITemperatureDescription, ICausesStatusEffect {
+export interface IAiMaskChance {
+    mask: AiMaskType;
+    chance?: number;
+}
+export interface ICreatureDescription extends IModdable, ITemperatureDescription, ICausesStatus {
     minhp: number;
     maxhp: number;
     minatk: number;
     maxatk: number;
     defense: Defense;
     damageType: DamageType;
-    ai: AiType;
+    ai: AiType.Neutral | AiType.Scared | AiType.Hostile | AiType.HostileFearless;
+    aiMasks?: IAiMaskChance[];
     moveType: MoveType;
     /**
      * A percentage number for the amount of time the creature should skip movement
@@ -195,13 +186,17 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
     loot?: ICreatureLoot[];
     aberrantLoot?: ICreatureLoot[];
     spawnTiles: TileGroup;
-    spawnGroup?: OptionalDescriptions<BiomeType, SpawnGroup[]>;
     spawnAnimation?: boolean;
     makeNoise?: boolean;
     lootGroup?: LootGroupType;
     jumpOver?: boolean;
     noCorpse?: boolean;
-    runeChance: RuneChance;
+    /**
+     * The deity associated with this creature, and the chance of receiving a rune for doing actions with it.
+     * - Initial Tame: Gives rune of this creature's deity
+     * - Kill: Gives rune of this creature's deity's enemy
+     */
+    runeChance?: RuneChance;
     waterAnimations?: boolean;
     tamingDifficulty?: number;
     acceptedItems?: Array<ItemType | ItemTypeGroup>;
@@ -236,7 +231,6 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
     passable?: boolean;
     texOffsetY?: number;
     isTall?: boolean;
-    spawn?: OptionalDescriptions<BiomeType, ICreatureSpawn>;
     /**
      * True if the creature moves around by teleporting through time AND space
      */
@@ -254,18 +248,14 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      */
     despawnInDayLight?: boolean;
     /**
-     * Change ai to be scared when it's day in the overworld
-     */
-    scareDuringDayLight?: boolean;
-    /**
      * If true, this creature will get the "produce" stat.
      * If it's a function, the result value will be the change timer.
      */
     hasProduce?: true | ((creature: Creature) => number);
     /**
      * The chance (for example, 0.25) it will be scared from a scarecrow (in a radius) when moving minus how close it is to the scarecrow (calculated in checkCreatureMove).
-     * Also, the chance it will not spawn in the radius of one.
-     * If set to 1, it will never move close to a scarecrow when visible to it and it will never spawn in view of one.
+     * If set to 1, it will never move close to a scarecrow when visible to it.
+     * All creatures will never spawn in the radius of a scarecrow regardless of this value.
      */
     chanceOfScarecrowScare?: number;
     /**
@@ -348,16 +338,6 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      */
     onSpawn?: (creature: Creature) => void;
 }
-export interface ICreatureSpawn {
-    /**
-     * The alignment of the player or players (averaged) at which the creature spawns at
-     */
-    spawnsOnAlignment?: number;
-    /**
-     * True if the creature's spawnsOnAlignment is set <= 0 and you want the creature to spawn on any positive alignment value
-     */
-    spawnsOnAnyPositiveAlignment?: boolean;
-}
 export interface ICreatureLoot {
     item: ItemType;
     chance?: number;
@@ -382,7 +362,7 @@ export interface IDamageInfo {
     damageMessage?: Message | Translation;
     soundDelay?: number;
     surpressAttackAnimation?: boolean;
-    statusEffect?: StatusEffect;
+    status?: Status;
     tileEvent?: TileEvent;
 }
 export interface IDamageOutcomeInput {
@@ -456,7 +436,14 @@ export interface ICreatureEvents extends IEntityWithStatsEvents {
     /**
      * Called when the creature's AI is changed.
      */
-    changeAi?(aiType: AiType, changeAiType: ChangeAiType): void;
+    changeAi?(aiType: AiType, changeAiType: ChangeAiType): any;
+    /**
+     * Called when the creature's AI masks are changed.
+     */
+    changeAiMask?(maskType: AiMaskType, changeAiType: ChangeAiType): any;
+    hasAi(aiType: AiType): boolean | undefined;
+    changeWanderIntent?(intent?: number, directionToZoneCenter?: number): any;
+    getDefense(defense: Defense): Defense;
 }
 export declare const CREATURE_FLEE_DISTANCE_SQ: number;
 export declare const TAMED_CREATURE_FOLLOW_CLOSE_DISTANCE = 1;
@@ -466,30 +453,27 @@ export declare const CREATURE_MAX_HEALTH_BONUS_TAME = 1.1;
 export declare const CREATURE_MAX_HEALTH_BONUS_OFFER = 1.05;
 export declare const CREATURE_MAX_HEALTH_BONUS_PET = 1.01;
 export declare enum ChangeAiType {
-    Set = 0,
-    Remove = 1,
-    Add = 2
+    Remove = 0,
+    Add = 1
 }
 export interface ICreatureAttackOutcomeBase {
     enemy?: Human | Creature;
     willAttack: boolean;
     breakAway: boolean;
-    hidden: boolean;
-    ai: AiType;
+    unhiding: boolean;
 }
 export interface ICreatureAttackOutcomeNoAttack extends ICreatureAttackOutcomeBase {
     willAttack: false;
-    hidden: false;
+    unhiding: false;
 }
 export interface ICreatureAttackOutcomeHidden extends ICreatureAttackOutcomeBase {
     willAttack: true;
-    hidden: true;
+    unhiding: true;
 }
 export interface ICreatureAttackOutcomeAttack extends ICreatureAttackOutcomeBase {
     enemy: Human | Creature;
     willAttack: true;
-    hidden: false;
-    ai: AiType;
+    unhiding: false;
     maxParryingMultiplier: number;
     damagedVehicle?: Item;
     combatNote?: any[];
@@ -499,6 +483,8 @@ export interface ICreatureAttackOutcomeAttack extends ICreatureAttackOutcomeBase
     pityPointOfDamageChance: number;
     effectiveness: number;
     damageScale: number;
+    enemyImmune: boolean;
+    enemyRegen: boolean;
 }
 export type CreatureAttackOutcome = ICreatureAttackOutcomeNoAttack | ICreatureAttackOutcomeHidden | ICreatureAttackOutcomeAttack;
 export interface ICreatureCheckMoveOptions {

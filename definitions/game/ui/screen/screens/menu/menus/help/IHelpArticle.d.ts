@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -31,7 +31,7 @@ export declare enum HelpArticle {
     Doodads = 8,
     ResourceGathering = 9,
     AttackingDamage = 10,
-    AlignmentFerocity = 11,
+    CreatureTerritories = 11,
     Milestones = 12,
     HeldItems = 13,
     Crafting = 14,

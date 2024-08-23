@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -80,18 +80,20 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     static create(...translations: TranslationGenerator[]): SimpleInfoProvider;
     static dynamic<T>(observer: BaseObserver<T>, supplier: (value: T) => InfoProvider | undefined): SimpleInfoProvider;
     static of(...classes: string[]): SimpleInfoProvider;
+    static header(...classes: string[]): SimpleInfoProvider;
     static title(...translations: Array<InfoProvider | TranslationGenerator | undefined>): SimpleInfoProvider;
     static subtitle(...translations: Array<InfoProvider | TranslationGenerator | undefined>): SimpleInfoProvider;
     static description(...translations: Array<InfoProvider | TranslationGenerator | undefined>): SimpleInfoProvider;
     static text(...translations: Array<InfoProvider | TranslationGenerator | undefined>): SimpleInfoProvider;
     static list(...translations: Array<InfoProvider | TranslationGenerator | undefined>): SimpleInfoProvider;
+    static textlist(...translations: Array<InfoProvider | TranslationGenerator | undefined>): SimpleInfoProvider;
     static ofComponent(componentSupplier: () => Component): InfoProvider;
     private displayLevel?;
     protected component?: Component;
     protected context?: InfoProviderContext;
     private componentClass?;
     abstract get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
-    abstract getClass(): string[];
+    abstract getClass(context: InfoProviderContext): string[];
     getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel | Set<InfoDisplayLevel>;
     setDisplayLevel(...displayLevel: Array<InfoDisplayLevel | undefined>): this;
     getDisplayLevel(context: InfoProviderContext): Set<InfoDisplayLevel>;
@@ -141,6 +143,7 @@ export declare namespace InfoProvider {
 }
 export declare class SimpleInfoProvider extends InfoProvider {
     private readonly classes;
+    private readonly childClasses;
     private readonly contents;
     private childComponentClass;
     private validWhen?;
@@ -152,6 +155,8 @@ export declare class SimpleInfoProvider extends InfoProvider {
     setValidWhen(predicate: () => any): this;
     getClass(): string[];
     addClasses(...classes: string[]): this;
+    getChildClass(): string[];
+    addChildClasses(...classes: string[]): this;
     protected initChildTextComponent(text: TranslationGenerator): Text;
     setChildComponent(componentClass: Class<Text>): this;
 }

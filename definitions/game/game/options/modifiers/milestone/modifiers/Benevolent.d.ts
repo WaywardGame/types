@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
-import MilestoneModifier, { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
-export default class Benevolent extends MilestoneModifier {
+import DeityInvokeMilestoneModifier, { DeityInvokeMilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/modifiers/shared/DeityInvokeMilestoneModifier";
+export default class Benevolent extends DeityInvokeMilestoneModifier {
     getOptions(): IGameOptionsPartial;
-    getGroup(): MilestoneModifierGroup;
+    protected getClass(): Class<DeityInvokeMilestoneModifierInstance>;
 }
