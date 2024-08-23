@@ -12,7 +12,7 @@ import type { SkillType } from "@wayward/game/game/entity/IHuman";
 import type { ItemType } from "@wayward/game/game/item/IItem";
 import type { IGameOptions, IGameOptionsSkill } from "@wayward/game/game/options/IGameOptions";
 import { GameMode } from "@wayward/game/game/options/IGameOptions";
-import type Version from "@wayward/game/utilities/Version";
+import Version from "@wayward/game/utilities/Version";
 export declare const CREATURE_SPAWN_LIMIT = 15;
 declare namespace GameOptions {
     export function getDefault(difficulty?: GameMode, seed?: number): IGameOptions;
