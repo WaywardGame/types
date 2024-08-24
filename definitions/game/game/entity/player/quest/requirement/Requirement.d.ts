@@ -30,7 +30,7 @@ export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> {
     setEventTrigger<E extends GameEmitterOrBus, K extends GameEvent<E>>(bus: E, event: K, checker: (api: IQuestRequirementApi<O, D>, ...args: Parameters<GameEventHandler<E, K>>) => boolean): this;
     getEventBusTriggers(): Stream<readonly [GameEmitterOrBus, string | number | symbol, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
     setHostTrigger<E extends keyof Events<Player>>(event: E, checker: (api: IQuestRequirementApi<O, D>, player: Player, ...args: ArgumentsOf<Events<Player>[E]>) => boolean): this;
-    getHostTriggers(): BuiltinIterator<[keyof IPlayerEvents, (api: IQuestRequirementApi<O, D>, player: Player, ...args: any[]) => boolean]>;
+    getHostTriggers(): IteratorObject<[keyof IPlayerEvents, (api: IQuestRequirementApi<O, D>, player: Player, ...args: any[]) => boolean]>;
     setInitializeTrigger(checker: (api: IQuestRequirementApi<O, D>) => boolean): this;
     getInitializeTrigger(): ((api: IQuestRequirementApi<O, D>) => boolean) | undefined;
     setRelations(relations: HighlightSelector[]): this;

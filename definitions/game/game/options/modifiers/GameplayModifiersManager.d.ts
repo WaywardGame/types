@@ -38,5 +38,5 @@ export declare class GameplayModifiersCollection<MODIFIER extends GameplayModifi
     initialize(source: StringableObject, ids: Iterable<ID>, uninitializeExisting?: boolean): INSTANCE[];
     uninitialize(source: StringableObject): void;
     options(): Stream<IGameOptionsPartial>;
-    initialized(): BuiltinIterator<ID>;
+    initialized(): IteratorObject<ID>;
 }

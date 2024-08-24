@@ -30,11 +30,11 @@ export default class HashSet<T> {
     has(...values: T[]): boolean;
     hasAll(...valuesIterables: Array<Iterable<T> | Falsy>): boolean;
     clear(): this;
-    keys(): BuiltinIterator<string>;
-    values(): BuiltinIterator<T>;
-    entries(): BuiltinIterator<[string, T]>;
+    keys(): IteratorObject<string>;
+    values(): IteratorObject<T>;
+    entries(): IteratorObject<[string, T]>;
     forEach(consumer: (value: T, key: string) => any): void;
-    [Symbol.iterator](): BuiltinIterator<T>;
+    [Symbol.iterator](): IteratorObject<T>;
     toArray(): T[];
     retainNot(value: T): boolean;
     get(hash: string): T | undefined;

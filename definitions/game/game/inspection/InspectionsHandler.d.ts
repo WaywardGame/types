@@ -24,9 +24,9 @@ export default abstract class InspectionsHandler extends EventEmitter.Host<IInsp
     constructor(context: InfoProviderContext, inspectionsMap?: Map<InspectType, HashSet<Inspection<any>>>);
     get<TYPE extends InspectType>(inspectType: InspectType): HashSet<ResolvedInspection<TYPE>> | undefined;
     set(inspectType: InspectType, inspections: HashSet<Inspection<any>>): Map<InspectType, HashSet<Inspection<any>>>;
-    [Symbol.iterator](): BuiltinIterator<[InspectType, HashSet<Inspection<any>>]>;
-    types(): BuiltinIterator<InspectType>;
-    all(): BuiltinIterator<[InspectType, HashSet<Inspection<any>>]>;
+    [Symbol.iterator](): IteratorObject<[InspectType, HashSet<Inspection<any>>]>;
+    types(): IteratorObject<InspectType>;
+    all(): IteratorObject<[InspectType, HashSet<Inspection<any>>]>;
     getInspectTypes(): InspectType[];
     register(): void;
     deregister(): void;

@@ -31,7 +31,7 @@ export declare abstract class ObjectManager<ObjectType extends StringableObject 
      */
     delete(): void;
     onUnserialized(): void;
-    [Symbol.iterator](): BuiltinIterator<ObjectType | undefined>;
+    [Symbol.iterator](): IteratorObject<ObjectType | undefined>;
     get length(): number;
     get(id: number): ObjectType | undefined;
     set(id: number, value: ObjectType | undefined): void;

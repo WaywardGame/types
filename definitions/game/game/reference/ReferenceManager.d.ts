@@ -40,7 +40,7 @@ export default class ReferenceManager {
     create(): number;
     clearCacheEntry(referenceId: string | number | undefined): void;
     reset(): void;
-    getList(type: ReferenceType, gameIsland?: Island): DoodadManager | CorpseManager | CreatureManager | ItemManager | NPCManager | TileEventManager | BuiltinIterator<Island> | Player[] | Array<string | ActionType> | EquipType[] | readonly string[];
+    getList(type: ReferenceType, gameIsland?: Island): DoodadManager | CorpseManager | CreatureManager | ItemManager | NPCManager | TileEventManager | IteratorObject<Island> | Player[] | Array<string | ActionType> | EquipType[] | readonly string[];
     get(thing: Item): Reference<ReferenceType.Item> | undefined;
     get(thing: Doodad): Reference<ReferenceType.Doodad> | undefined;
     get(thing: Creature): Reference<ReferenceType.Creature> | undefined;
