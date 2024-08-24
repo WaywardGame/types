@@ -161,6 +161,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     abstract get asDoodad(): Doodad | undefined;
     abstract get asHuman(): Human | undefined;
     abstract get asLocalPlayer(): Player | undefined;
+    get asNotLocalPlayer(): this | undefined;
     abstract get asNPC(): NPC | undefined;
     abstract get asPlayer(): Player | undefined;
     abstract get asTileEvent(): TileEvent | undefined;

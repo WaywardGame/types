@@ -132,6 +132,7 @@ export default class Player extends Human<undefined, number, ReferenceType.Playe
     get asNPC(): undefined;
     get asPlayer(): this;
     get asLocalPlayer(): this | undefined;
+    get asNotLocalPlayer(): this | undefined;
     isNPC(): this is NPC;
     isPlayer(): this is Player;
 }
