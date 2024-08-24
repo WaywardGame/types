@@ -15,7 +15,7 @@ export interface IWaywardCPP {
     BitGrid: IBitGridConstructor;
     ByteGrid: IByteGridConstructor;
     DijkstraMap: IDijkstraMapConstructor;
-    FieldOfView: any;
+    FieldOfView: IFieldOfViewConstructor;
     FlowField: IFlowFieldConstructor;
     KDTree: IKDTreeConstructor;
     Navigation: INavigationConstructor;
@@ -28,6 +28,7 @@ export type IDijkstraMapConstructor = new (mapSize: number) => IDijkstraMap;
 export type IKDTreeConstructor = new (mapSize: number) => IKDTree;
 export type INavigationConstructor = new (mapSize: number, autoConnect: boolean) => INavigation;
 export type IWorldLayerConstructor = new (islandX: number, islandY: number, width: number, height: number, level: number) => IWorldLayerCPP;
+export type IFieldOfViewConstructor = new () => IFieldOfViewCPP;
 export interface IWaywardCPPFlowField {
     delete(): void;
     reset(): void;
@@ -120,4 +121,8 @@ export interface IKDTree {
         distance: number;
     }>;
     delete(): void;
+}
+export interface IFieldOfViewCPP {
+    computeLights(worldLayer: IWorldLayerCPP, startX0: number, endX0: number, startY0: number, endY0: number): void;
+    bresenham(worldLayer: IWorldLayerCPP, x0: number, y0: number, x1: number, y1: number): boolean;
 }

@@ -18,7 +18,12 @@ import type { ITileUpdate, onDoodadUpdateDelegate, onTileUpdateDelegate, Terrain
 import { TerrainMask } from "@wayward/game/renderer/world/IWorldLayer";
 import type { IPreSerializeCallback } from "@wayward/game/save/serializer/ISerializer";
 import type World from "@wayward/game/renderer/world/World";
+import type Human from "@wayward/game/game/entity/Human";
 export declare class WorldLayer implements IPreSerializeCallback {
+    /**
+     * Run length encoded light level map to ensure FieldOfView.canSeePosition is always synced correctly.
+     */
+    encodedLightLevelMap: Uint32Array | undefined;
     /**
      * Run length encoded light block map to ensure FieldOfView.canSeePosition is always synced correctly.
      */
@@ -40,7 +45,8 @@ export declare class WorldLayer implements IPreSerializeCallback {
     onDoodadUpdates: Map<number, onDoodadUpdateDelegate>;
     private terrainMap;
     instance: IWorldLayerCPP | undefined;
-    private _loadedLighting;
+    private _loadedLightLevelMap;
+    private _loadedLightBlockMap;
     constructor(width: number | undefined, height: number, z: WorldZ);
     preSerializeObject(): void;
     load(world: World): void;
@@ -75,4 +81,5 @@ export declare class WorldLayer implements IPreSerializeCallback {
      * The array length is 0 when the view is invalid
      */
     private updateViews;
+    computeLights(human: Human): void;
 }

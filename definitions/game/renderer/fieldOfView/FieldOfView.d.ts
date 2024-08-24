@@ -20,6 +20,7 @@ import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IFieldOfViewPlatform } from "@wayward/game/renderer/fieldOfView/IFieldOfViewPlatform";
 import type { IRendererContext } from "@wayward/game/renderer/context/IRendererContext";
+import type { IFieldOfViewCPP } from "@wayward/cplusplus/index";
 export declare class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     protected readonly context: IRendererContext;
     private readonly worldRenderer;
@@ -27,7 +28,7 @@ export declare class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     maxRadius: number;
     private readonly subdivisions;
     private static _instance;
-    private static get instance();
+    static get instance(): IFieldOfViewCPP;
     disabled: boolean;
     blurEnabled: boolean;
     computeOffset: Vector2;
@@ -35,6 +36,9 @@ export declare class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     private transitionMovementTime;
     private readonly transitioningExploredMap;
     private lastComputedIslandId;
+    /**
+     * Note: CanASeeBType.ClientSide is used to skip adding a sync check for the result
+     */
     static canSeePosition(origin: IFieldOfViewOrigin, type: CanASeeBType, islandId: IslandId, tileX: number, tileY: number, tileZ: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
     static getBounds(origin: IVector3, mapSize: number, radius: number): IBound3;
     /**
@@ -66,5 +70,4 @@ export declare class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
      * This prevents clientside only seed changes
      */
     private processExploredMapBounds;
-    private computeLightMap;
 }

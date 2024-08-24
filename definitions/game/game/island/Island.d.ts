@@ -294,6 +294,10 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     private processTickFlagsAsync;
     private updateTablesAndWeight;
     private updateEntityFov;
+    /**
+     * Compute lights around each human
+     */
+    private processLights;
     private processTimers;
     private runRandomEvents;
     /**
