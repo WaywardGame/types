@@ -77,5 +77,6 @@ declare class MessageLogTurnGroup extends Component {
 export declare class MessageComponent extends Component {
     readonly message: IMessage;
     constructor(message: IMessage);
+    toString(): string;
 }
 export {};

@@ -45,7 +45,6 @@ export declare class WorldLayer implements IPreSerializeCallback {
     onDoodadUpdates: Map<number, onDoodadUpdateDelegate>;
     private terrainMap;
     instance: IWorldLayerCPP | undefined;
-    private _loadedLightLevelMap;
     private _loadedLightBlockMap;
     constructor(width: number | undefined, height: number, z: WorldZ);
     preSerializeObject(): void;

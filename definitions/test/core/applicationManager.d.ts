@@ -11,8 +11,8 @@
 import type Player from "@wayward/game/game/entity/player/Player";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { Application, ITestState } from "@wayward/test/core/application";
-import type { INewGameOptions, ITestJoinServerOptions, ITestSetup } from "@wayward/test/interfaces";
 import { ApplicationInteraction } from "@wayward/test/core/applicationInteraction";
+import type { INewGameOptions, ITestJoinServerOptions, ITestSetup } from "@wayward/test/interfaces";
 export declare class ApplicationManager {
     private readonly _logs;
     private readonly _applications;

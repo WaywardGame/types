@@ -179,6 +179,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     abstract isItem(): this is Item;
     abstract isTile(): this is Tile;
     abstract isContainer(): this is IUncastableContainer;
+    asNot(entity: Entity): this | undefined;
     isEntity(): this is Entity;
     asType(type: TypeType): this | undefined;
     get asUnion(): Player | NPC | Creature | TileEvent | Item | Corpse | Doodad;
