@@ -18,7 +18,7 @@ declare const _default: UseInfo<{
     entityType: EntityType.Item;
     value?: Item | undefined;
     type: import("@wayward/game/game/item/IItem").ItemType;
-    description: import("@wayward/game/game/item/IItem").IItemDescription;
+    description: Readonly<import("@wayward/game/game/item/IItem").IItemDescription>;
     quality: import("../../../IObject").Quality;
     action: ActionType.StartFire | ActionType.Ignite | ActionType.Equip;
     union: import("@wayward/game/game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>;
@@ -28,7 +28,7 @@ declare const _default: UseInfo<{
     entityType: EntityType.Doodad;
     value?: Doodad | undefined;
     type: import("../../../doodad/IDoodad").DoodadType;
-    description: import("../../../doodad/IDoodad").IDoodadDescription;
+    description: Readonly<import("../../../doodad/IDoodad").IDoodadDescription>;
     quality: import("../../../IObject").Quality;
     action: ActionType.StartFire | ActionType.Ignite | ActionType.Equip;
     union: import("@wayward/game/game/inspection/infoProviders/UseInfo").IUseInfoBase<Doodad, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>;

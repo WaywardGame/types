@@ -43,14 +43,14 @@ export default class TradeDialog extends Dialog {
     readonly tradeWrapperMerchant: Component<HTMLElement>;
     readonly tradeTitleMerchant: Text;
     readonly tradeContainerMerchant: ContainerBucket;
-    readonly tallySticksMerchant: ItemComponent;
+    readonly tallySticksMerchant: ItemComponent | undefined;
     readonly merchantWeightCapacity: Text;
     readonly tradeColumn: Component<HTMLElement>;
     readonly tradeButton: Button;
     readonly tradeWrapperYou: Component<HTMLElement>;
     readonly tradeTitleYou: Text;
     readonly tradeContainerYou: ContainerBucket;
-    readonly tallySticksYou: ItemComponent;
+    readonly tallySticksYou: ItemComponent | undefined;
     readonly credit: Text;
     private merchantRef?;
     get merchant(): MerchantNPC | undefined;

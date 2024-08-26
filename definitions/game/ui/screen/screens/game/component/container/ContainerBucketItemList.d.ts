@@ -89,7 +89,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     resort(): void;
     private checkItemIdsMatch;
     private readonly transientItemComponents;
-    addTransientItem(item: Item): ItemComponent;
+    addTransientItem(item: Item): ItemComponent | undefined;
     removeTransientItem(item: Item): void;
     private readonly itemComponents;
     private getItemComponent;

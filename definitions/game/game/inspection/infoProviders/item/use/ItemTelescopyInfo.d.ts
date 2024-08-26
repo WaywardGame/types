@@ -16,7 +16,7 @@ declare const _default: UseInfo<{
     entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
     type: import("@wayward/game/game/item/IItem").ItemType;
-    description: import("@wayward/game/game/item/IItem").IItemDescription;
+    description: Readonly<import("@wayward/game/game/item/IItem").IItemDescription>;
     quality: import("../../../../IObject").Quality;
     action: ActionType.Equip;
     union: import("@wayward/game/game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Equip>;

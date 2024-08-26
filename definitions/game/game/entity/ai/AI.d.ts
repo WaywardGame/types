@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Entity from "@wayward/game/game/entity/Entity";
 export declare enum AiType {
     None = 0,
     /** Only attacks randomly when player is adjacent */
@@ -22,14 +22,14 @@ export declare enum AiType {
     HostileFearless = 17,
     /** Flees from player, or chases player, based on whether the creature is scared or hostile */
     Alerted = 256,
-    /** Doesn't move, can't be seen */
-    Hidden = 8,
-    /** Do nothing until there are no players next to the entity */
+    /** Does not move */
     Waiting = 512,
-    /** An override to allows swapping tiles with this creature */
-    CanSwapWith = 4,
-    /** This creature cannot attack */
+    /** Can't be seen */
+    Hidden = 8,
+    /** Cannot attack */
     Pacified = 32,
+    /** Can swap tiles with the player */
+    CanSwapWith = 4,
     /** Follows the player at a close distance */
     FollowClose = 64,
     /** Follows the player at a far distance */
@@ -46,7 +46,8 @@ export declare enum AiType {
     Attack = 8256,
     /** Follows the owner and never attacks, even when attacked itself or sees owner attacked */
     Heel = 16384,
-    Unused2 = 128
+    /** Not currently wandering. This AI type is managed by the wander system. Do not put it in AI masks. */
+    Idle = 128
 }
 declare namespace AI {
     function debugString(ai: AiType): string;
@@ -64,7 +65,9 @@ export declare enum AiMaskType {
     Released = 6,
     LostInterest = 7,
     ScaredInDaylight = 8,
-    Frenzied = 9
+    Frenzied = 9,
+    WaitingForNoPlayerAdjacent = 10,
+    Angered = 11
 }
 export declare enum AiMaskOrder {
     NeutralIfScaredDisabled = 0,
@@ -76,7 +79,9 @@ export declare enum AiMaskOrder {
     Released = 6,
     Hidden = 7,
     Frenzied = 8,
-    Pacified = 9
+    Pacified = 9,
+    WaitingForNoPlayerAdjacent = 10,
+    Angered = 11
 }
 export interface IAiMaskDescription {
     /**
@@ -94,6 +99,20 @@ export interface IAiMaskDescription {
     /**
      * Whether this AI mask should currently be applied
      */
-    condition?(creature: Creature): boolean;
+    condition?(entity: Entity): boolean;
 }
 export declare const aiMaskDescriptions: OptionalDescriptions<AiMaskType, IAiMaskDescription>;
+export declare enum ChangeAiType {
+    Remove = 0,
+    Add = 1
+}
+/** The chance to start wandering after being idle */
+export declare const AI_WANDER_CHANCE: number;
+/** The chance to start idling */
+export declare const AI_WANDER_IDLE_CHANCE: number;
+/** The chance to decide to wander in a new direction */
+export declare const AI_WANDER_REROLL_CHANCE: number;
+/** The smaller the number, tighter the range, ie the more likely the entity goes directly towards home (for creatures, zone centre) */
+export declare const AI_WANDER_DIRECTION_MAXIMUM_HOME_PRIORITY = 0.5;
+/** The bigger the number, the looser the range, ie the more likely the entity is to wander anywhere. Bigger numbers stop having much of an effect around 12-16. */
+export declare const AI_WANDER_DIRECTION_MINIMUM_HOME_PRIORITY = 16;

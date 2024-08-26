@@ -98,7 +98,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      */
     addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): this;
     removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any): this;
-    getAs<C extends Component>(cls: AbstractClass<C>): C | undefined;
+    getAs<C extends Component>(cls: AnyClass<C>): C | undefined;
     matches(selector: string): boolean;
     exists(): boolean;
     /**

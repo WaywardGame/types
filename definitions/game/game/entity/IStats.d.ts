@@ -55,7 +55,11 @@ export declare enum Stat {
     Curse = 18,
     Generic = 19,
     AttackDefenseRow = 20,
-    Dexterity = 21
+    Dexterity = 21,
+    /**
+     * Used for creatures to stop them despawning until this stat reaches 0.
+     */
+    DespawnProtection = 22
 }
 export declare const CORE_STATS: Stat[];
 export type IStats = {

@@ -12,4 +12,4 @@ import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { ICreatureDescription } from "@wayward/game/game/entity/creature/ICreature";
 import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 export declare const creatureDescriptions: OptionalDescriptions<CreatureType, ICreatureDescription>;
-export declare const creatureDig: (creature: Creature) => void;
+export declare const creatureDig: (creature: Creature, minDig?: number) => void;

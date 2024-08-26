@@ -120,7 +120,8 @@ export declare enum Types {
     MagicalPropertyManager = 47,
     ItemMapManager = 48,
     WorldLayer = 49,
-    CreatureZone = 50
+    CreatureZone = 50,
+    AiManager = 51
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_SAVE_PROPERTY_FLAGS: unique symbol;

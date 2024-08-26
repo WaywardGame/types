@@ -11,12 +11,13 @@
 import type { SfxType } from "@wayward/game/audio/IAudio";
 import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import type { AiMaskType } from "@wayward/game/game/entity/AI";
-import { AiType } from "@wayward/game/game/entity/AI";
 import type { IEntityWithStatsEvents } from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
 import type { DamageType, Defense, EntityType, ICausesStatus, IStatChangeInfo, MoveType, SlippingSpeed } from "@wayward/game/game/entity/IEntity";
 import type { IStat } from "@wayward/game/game/entity/IStats";
+import type { AiMaskType, ChangeAiType } from "@wayward/game/game/entity/ai/AI";
+import { AiType } from "@wayward/game/game/entity/ai/AI";
+import type { IEntityAiEvents } from "@wayward/game/game/entity/ai/AiManager";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { IPackedMessage } from "@wayward/game/game/entity/player/IMessageManager";
 import type Status from "@wayward/game/game/entity/status/Status";
@@ -167,11 +168,14 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
     ai: AiType.Neutral | AiType.Scared | AiType.Hostile | AiType.HostileFearless;
     aiMasks?: IAiMaskChance[];
     moveType: MoveType;
-    /**
-     * A percentage number for the amount of time the creature should skip movement
-     * 100 means the creature always skips their movement
-     */
+    /** The chance that the creature should skip movement. 0 = never, 1 = always */
     skipMovementChance?: number;
+    /** A multiplier for the chance the creature has to start wandering (while idling) */
+    wanderChanceMultiplier?: SupplierOr<number | undefined, [Creature, defaultChance: number]>;
+    /** A multiplier for the chance the creature has to start idling (while wandering) */
+    idleChanceMultiplier?: SupplierOr<number | undefined, [Creature, defaultChance: number]>;
+    /** A multiplier for the chance the creature has to choose a new direction to wander */
+    wanderNewDirectionChanceMultiplier?: SupplierOr<number | undefined, [Creature, defaultChance: number]>;
     /**
      * Prevents the creature from spawning for the provided WorldZ's
      */
@@ -387,7 +391,7 @@ export interface IDamageOutcome {
     statNotifications: Array<[StatNotificationType, number]>;
     messages: IPackedMessage[];
 }
-export interface ICreatureEvents extends IEntityWithStatsEvents {
+export interface ICreatureEvents extends IEntityWithStatsEvents, IEntityAiEvents {
     /**
      * Called before a creature attacks
      * @param enemy The enemy (human or creature)
@@ -433,18 +437,12 @@ export interface ICreatureEvents extends IEntityWithStatsEvents {
      * @returns The amount of damage the creature should take (the creature will take this damage) or undefined to use the default logic
      */
     damage?(damageInfo: IDamageInfo): number | undefined;
-    /**
-     * Called when the creature's AI is changed.
-     */
-    changeAi?(aiType: AiType, changeAiType: ChangeAiType): any;
-    /**
-     * Called when the creature's AI masks are changed.
-     */
-    changeAiMask?(maskType: AiMaskType, changeAiType: ChangeAiType): any;
-    hasAi(aiType: AiType): boolean | undefined;
-    changeWanderIntent?(intent?: number, directionToZoneCenter?: number): any;
     getDefense(defense: Defense): Defense;
 }
+/** The chance to start wandering after being paused, if fearless */
+export declare const CREATURE_WANDER_FEARLESS_CHANCE: number;
+/** The chance to start wandering after being paused, if scared */
+export declare const CREATURE_WANDER_SCARED_CHANCE: number;
 export declare const CREATURE_FLEE_DISTANCE_SQ: number;
 export declare const TAMED_CREATURE_FOLLOW_CLOSE_DISTANCE = 1;
 export declare const TAMED_CREATURE_FOLLOW_FAR_DISTANCE = 6;
@@ -452,10 +450,6 @@ export declare const settableAiTypes: Set<AiType>;
 export declare const CREATURE_MAX_HEALTH_BONUS_TAME = 1.1;
 export declare const CREATURE_MAX_HEALTH_BONUS_OFFER = 1.05;
 export declare const CREATURE_MAX_HEALTH_BONUS_PET = 1.01;
-export declare enum ChangeAiType {
-    Remove = 0,
-    Add = 1
-}
 export interface ICreatureAttackOutcomeBase {
     enemy?: Human | Creature;
     willAttack: boolean;

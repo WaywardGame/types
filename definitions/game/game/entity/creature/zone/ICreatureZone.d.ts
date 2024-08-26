@@ -79,7 +79,7 @@ export declare const CREATURE_ZONE_ISLAND_DISTANCE_TIER_CHANCE_MIN = 0;
  *
  * IE, with a value of 50, at island (50,0) the chance will be `max * max * max`
  */
-export declare const CREATURE_ZONE_ISLAND_DISTANCE_MAX = 50;
+export declare const CREATURE_ZONE_ISLAND_DISTANCE_MAX = 25;
 /**
  * The steepness of the curve, ie, how fast the chance of additional tiers increases.
  * @see {@link Math2.curve2} for more information

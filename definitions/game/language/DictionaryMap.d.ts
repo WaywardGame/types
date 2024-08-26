@@ -14,7 +14,6 @@ import { BiomeType } from "@wayward/game/game/biome/IBiome";
 import { CurseComponent } from "@wayward/game/game/deity/Curse";
 import { Deity } from "@wayward/game/game/deity/Deity";
 import { DoodadType, DoodadTypeExtra, DoodadTypeGroup, GrowingStage } from "@wayward/game/game/doodad/IDoodad";
-import { AiType } from "@wayward/game/game/entity/AI";
 import { CombatDangerLevel, CombatStrength } from "@wayward/game/game/entity/CombatStrengthManager";
 import { DamageType } from "@wayward/game/game/entity/IEntity";
 import { EquipType, SkillType } from "@wayward/game/game/entity/IHuman";
@@ -22,6 +21,7 @@ import { Stat } from "@wayward/game/game/entity/IStats";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import { MapQuality } from "@wayward/game/game/entity/action/actions/map/MapQuality";
 import { UsableActionType } from "@wayward/game/game/entity/action/usable/UsableActionType";
+import { AiType } from "@wayward/game/game/entity/ai/AI";
 import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import { NPCType } from "@wayward/game/game/entity/npc/INPCs";
 import { Source } from "@wayward/game/game/entity/player/IMessageManager";
@@ -162,6 +162,7 @@ declare const dictionaryMap: {
     61: {
         Bow: ItemType.Bow;
         None: ItemType.None;
+        SlitherSucker: ItemType.SlitherSucker;
         HideGlue: ItemType.HideGlue;
         AnimalSkull: ItemType.AnimalSkull;
         GraniteArrow: ItemType.GraniteArrow;
@@ -555,7 +556,6 @@ declare const dictionaryMap: {
         MossCoveredBook: ItemType.MossCoveredBook;
         GildedRedBook: ItemType.GildedRedBook;
         ArrowShaft: ItemType.ArrowShaft;
-        SlitherSucker: ItemType.SlitherSucker;
         AberrantSlitherSucker: ItemType.AberrantSlitherSucker;
         StrawHat: ItemType.StrawHat;
         BlackplateSabatons: ItemType.BlackplateSabatons;
@@ -1121,6 +1121,7 @@ export declare const strictDictionaries: {
     61: {
         Bow: ItemType.Bow;
         None: ItemType.None;
+        SlitherSucker: ItemType.SlitherSucker;
         HideGlue: ItemType.HideGlue;
         AnimalSkull: ItemType.AnimalSkull;
         GraniteArrow: ItemType.GraniteArrow;
@@ -1514,7 +1515,6 @@ export declare const strictDictionaries: {
         MossCoveredBook: ItemType.MossCoveredBook;
         GildedRedBook: ItemType.GildedRedBook;
         ArrowShaft: ItemType.ArrowShaft;
-        SlitherSucker: ItemType.SlitherSucker;
         AberrantSlitherSucker: ItemType.AberrantSlitherSucker;
         StrawHat: ItemType.StrawHat;
         BlackplateSabatons: ItemType.BlackplateSabatons;

@@ -162,6 +162,7 @@ export interface IItemComponentStaticEvents {
 export default class ItemComponent extends Component implements ItemSlot {
     readonly handler: ItemComponentHandler;
     static readonly eventGlobal: EventEmitter<null, IItemComponentStaticEvents>;
+    static create<C extends ItemComponent = ItemComponent>(handler: ItemComponentHandler, ...params: any[]): C | undefined;
     static registerSlot(slot: ItemSlot): void;
     static getHovered(): ItemComponent | undefined;
     static QUALITY_CLASS_NAMES: PerfCache<string[]>;
@@ -193,7 +194,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     stackQuantityValue?: number;
     readonly draggable?: Draggable;
     private transient;
-    constructor(handler: ItemComponentHandler);
+    protected constructor(handler: ItemComponentHandler, ...params: any[]);
     private tickEndHandlerReasons?;
     private registerTickEndHandler;
     private deregisterTickEndHandler;
@@ -237,7 +238,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     private _equipSlot;
     get equipSlot(): EquipType;
     refresh(refreshType: ItemRefreshType): this;
-    clone(): ItemComponent;
+    clone(): this | undefined;
     setItemMenu(initialiser?: (contextMenu: ContextMenu<ActionId>) => any): this;
     private registeredItemHighlights;
     registerItemHighlights(): void;

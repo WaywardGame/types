@@ -10,7 +10,6 @@
  */
 import { TileUpdateType } from "@wayward/game/game/IGame";
 import type { RuneChance } from "@wayward/game/game/deity/IDeities";
-import { AiType } from "@wayward/game/game/entity/AI";
 import Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
 import { EntityType, MoveType } from "@wayward/game/game/entity/IEntity";
@@ -18,6 +17,9 @@ import type { ICustomizations } from "@wayward/game/game/entity/IHuman";
 import { EquipType } from "@wayward/game/game/entity/IHuman";
 import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
+import { AiType, ChangeAiType } from "@wayward/game/game/entity/ai/AI";
+import type { IEntityAiEvents } from "@wayward/game/game/entity/ai/AiManager";
+import AiManager from "@wayward/game/game/entity/ai/AiManager";
 import type { INPCDescription } from "@wayward/game/game/entity/npc/INPC";
 import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
 import type MerchantNPC from "@wayward/game/game/entity/npc/npcs/Merchant";
@@ -35,7 +37,7 @@ import type { Article } from "@wayward/game/language/Translation";
 import Translation from "@wayward/game/language/Translation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export interface INPCEvents extends Events<Human> {
+export interface INPCEvents extends Events<Human>, IEntityAiEvents {
     /**
      * Called when a npc tries to move
      * @param tile The tile the npc is trying to move to
@@ -56,11 +58,11 @@ export default abstract class NPC extends Human<INPCDescription, NPCType, Refere
     get entityType(): EntityType.NPC;
     get tileUpdateType(): TileUpdateType;
     event: IEventEmitter<this, INPCEvents>;
-    ai: AiType;
     seen: number;
     private weightCapacity;
     talked?: Map<string, number>;
     interactions?: Map<string, Set<number>>;
+    ai: AiManager;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(entityOptions?: IEntityConstructorOptions<NPCType>);
@@ -109,12 +111,6 @@ export default abstract class NPC extends Human<INPCDescription, NPCType, Refere
      * The actions available to use with this npc
      */
     getActions(): ActionType[] | undefined;
-    addAiType(ai: AiType): void;
-    /**
-     * Removes an AiType from an NPC.
-     * @param ai The AiType to remove from the NPC.
-     */
-    removeAiType(ai: AiType): void;
     /**
      * Greets a human, if necessary, and sets the NPC as having been talked to them on the current turn.
      * @returns The time since the NPC was last talked to, or false if the human has never talked to the NPC.
@@ -183,6 +179,7 @@ export default abstract class NPC extends Human<INPCDescription, NPCType, Refere
     protected move(): boolean;
     protected autoScaleStats(): void;
     protected changeZ(toZ: number, fromZ: number): boolean | void | undefined;
+    protected onAiChange(ai: AiType, type: ChangeAiType): void;
     protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): 0 | -1 | -6 | -2 | -3 | -4 | -5;
     getWeightOrStaminaMovementPenalty(): number;

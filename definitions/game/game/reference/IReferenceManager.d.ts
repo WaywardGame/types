@@ -64,6 +64,7 @@ export declare const enumRefTypes: {
     11: {
         Bow: ItemType.Bow;
         None: ItemType.None;
+        SlitherSucker: ItemType.SlitherSucker;
         HideGlue: ItemType.HideGlue;
         AnimalSkull: ItemType.AnimalSkull;
         GraniteArrow: ItemType.GraniteArrow;
@@ -457,7 +458,6 @@ export declare const enumRefTypes: {
         MossCoveredBook: ItemType.MossCoveredBook;
         GildedRedBook: ItemType.GildedRedBook;
         ArrowShaft: ItemType.ArrowShaft;
-        SlitherSucker: ItemType.SlitherSucker;
         AberrantSlitherSucker: ItemType.AberrantSlitherSucker;
         StrawHat: ItemType.StrawHat;
         BlackplateSabatons: ItemType.BlackplateSabatons;

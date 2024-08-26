@@ -13,13 +13,14 @@ import type { IMovementTime } from "@wayward/game/game/IGame";
 import { TileUpdateType } from "@wayward/game/game/IGame";
 import type { IObject } from "@wayward/game/game/IObject";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import { AiMaskType, AiType } from "@wayward/game/game/entity/AI";
 import EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions, IStatChangeInfo } from "@wayward/game/game/entity/IEntity";
 import { Defense, EntityType, MoveType } from "@wayward/game/game/entity/IEntity";
 import type { IStat } from "@wayward/game/game/entity/IStats";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
+import { AiType } from "@wayward/game/game/entity/ai/AI";
+import AiManager from "@wayward/game/game/entity/ai/AiManager";
 import type { CreatureAttackOutcome, CreatureType, ICreatureAttackOutcomeAttack, ICreatureCheckMoveOptions, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "@wayward/game/game/entity/creature/ICreature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/CreatureZone";
@@ -34,7 +35,7 @@ import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import Translation, { Article } from "@wayward/game/language/Translation";
 import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
 import { Direction } from "@wayward/game/utilities/math/Direction";
-import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export default class Creature extends EntityWithStats<ICreatureDescription, CreatureType, ReferenceType.Creature> implements IUnserializedCallback, IObject<CreatureType> {
@@ -47,10 +48,6 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     facingDirection: Direction.Cardinal;
     fromX: number;
     fromY: number;
-    ai: AiType;
-    aiMasks: AiMaskType[];
-    private lastCalculatedAi;
-    private wanderIntent?;
     aberrant?: true;
     enemy?: {
         reference: Reference;
@@ -66,6 +63,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     };
     respawned?: number;
     zonePoint?: IVector3;
+    ai: AiManager;
     spawnAnimationTime: IMovementTime | undefined;
     constructor(entityOptions?: IEntityConstructorOptions<CreatureType>, aberrant?: boolean);
     initializeAi(resetAiType?: boolean): void;
@@ -85,43 +83,6 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      */
     getName(article?: Article, count?: number): Translation;
     protected getDescription(): ICreatureDescription | undefined;
-    /**
-     * Gets the latest synced state of the ai.
-     * This should only be used clientside.
-     */
-    get lastCalculatedAiClientSide(): AiType;
-    calculateAi(): AiType;
-    private emitAiChange;
-    hasAi(aiType: AiType): boolean;
-    /**
-     * @deprecated I hope you know what you're doing
-     */
-    setAiType(aiType: AiType): void;
-    /**
-     * @returns whether the ai type was added
-     */
-    addAiType(aiType: AiType): boolean;
-    /**
-     * @returns whether the ai type was removed
-     */
-    removeAiType(aiType: AiType): boolean;
-    /**
-     * @returns whether the ai type is present
-     */
-    toggleAiType(aiType: AiType, active: boolean): boolean;
-    hasAiMask(mask: AiMaskType, checkActive?: boolean): boolean;
-    /**
-     * @returns whether the ai mask was added
-     */
-    addAiMask(mask: AiMaskType): boolean;
-    /**
-     * @returns whether the ai mask was removed
-     */
-    removeAiMask(mask: AiMaskType): boolean;
-    /**
-     * @returns whether the ai mask is present
-     */
-    toggleAiMask(mask: AiMaskType, present: boolean): boolean;
     get isHostile(): boolean;
     get isHidden(): boolean;
     get isRetaliator(): boolean;
@@ -255,19 +216,11 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      * @returns Whether the creature has lost interest
      */
     private processAiInterest;
-    /**
-     * Changes the direction the creature is moving while wandering (ie not alerted).
-     * Sometimes the creature will pause, instead.
-     */
-    private processWanderIntent;
-    /**
-     * Rerolls the wander intent to a random direction (cardinals, intercardinals, and secondary intercardinals).
-     *
-     * When the creature is zoneless, all directions are weighted equally.
-     * When the creature has a zone, it prefers staying within the zone using MATHS
-     */
-    private rerollWanderIntentDirection;
-    private getDirectionToZoneCenter;
+    getWanderChance(defaultChance: number): number | undefined;
+    getWanderIdleChance(defaultChance: number): number | undefined;
+    getWanderNewDirectionChance(defaultChance: number): number | undefined;
+    getWanderHomePoint(): IVector2 | undefined;
+    getWanderHomeRadius(): number | undefined;
     get asCorpse(): undefined;
     get asCreature(): Creature;
     get asDoodad(): undefined;

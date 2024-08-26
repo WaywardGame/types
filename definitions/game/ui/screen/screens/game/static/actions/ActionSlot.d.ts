@@ -26,7 +26,7 @@ import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
 import Text from "@wayward/game/ui/component/Text";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
 import type { IItemSlotEvents, ItemSlot } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
-import ItemComponent from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import ItemComponent, { ItemComponentHandler } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
 import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
 import { ActionSlotUpdateReason, IActionBarSlotData } from "@wayward/game/ui/screen/screens/game/static/actions/IActionBar";
 import type TooltipLocationHandler from "@wayward/game/ui/tooltip/TooltipLocationHandler";
@@ -63,10 +63,11 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
     slotData: IActionBarSlotData;
     readonly type: ActionSlotType;
     static getHovered(): ActionSlot | undefined;
+    static tryCreate(number: number, slotData: IActionBarSlotData, type?: ActionSlotType): ActionSlot;
     event: IEventEmitter<this, IActionSlotEvents>;
     private get actionBar();
     readonly label: Text;
-    readonly slotted: ActionSlotSlottedContainer;
+    readonly slotted: ActionSlotSlottedContainer | undefined;
     readonly useOnMoveIndicator: Component<HTMLElement>;
     readonly useOnHoveredTileIndicator: Component<HTMLElement>;
     readonly useHoveredIndicator: Component<HTMLElement>;
@@ -74,7 +75,7 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
     private lastItem?;
     private lastQuality?;
     usability: ReturnableUsableActionUsability;
-    constructor(number: number, slotData: IActionBarSlotData, type?: ActionSlotType);
+    protected constructor(number: number, slotData: IActionBarSlotData, type?: ActionSlotType);
     isTransientSlot(): boolean;
     getItemComponent(): ItemComponent | undefined;
     private skipNextClick;
@@ -120,7 +121,8 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
 }
 declare class ActionSlotSlottedContainer extends ItemComponent {
     readonly slot: ActionSlot;
-    constructor(slot: ActionSlot);
-    clone(): ActionSlotSlottedContainer;
+    static createSlottedContainer(slot: ActionSlot): ActionSlotSlottedContainer | undefined;
+    protected constructor(handler: ItemComponentHandler, slot: ActionSlot);
+    clone(): this | undefined;
 }
 export {};

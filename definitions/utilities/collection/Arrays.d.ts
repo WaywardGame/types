@@ -68,6 +68,7 @@ declare namespace Arrays {
     function pushTo<T>(arr: T[]): (...items: T[]) => number;
     function arrayOr<T>(value: T | T[]): T[];
     function tupleOr<A>(value: A): A extends any[] ? A : [A];
+    function objectValuesOr<T>(value: T | Record<PropertyKey, T>): T[];
     function concat<T>(...arrays: T[][]): T[];
     function lerp<T>(array: readonly T[], t: number): T;
     function permutations<T>(...items: T[]): T[][];

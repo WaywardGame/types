@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { AiType } from "@wayward/game/game/entity/AI";
 import type Human from "@wayward/game/game/entity/Human";
 import { EquipType } from "@wayward/game/game/entity/IHuman";
 import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { ITradeArgument } from "@wayward/game/game/entity/action/actions/trade/TradeArgument";
+import { AiType } from "@wayward/game/game/entity/ai/AI";
 import { type INPCConstructorOptions } from "@wayward/game/game/entity/npc/INPC";
 import NPC from "@wayward/game/game/entity/npc/NPC";
 import type { IContainer } from "@wayward/game/game/item/IItem";
