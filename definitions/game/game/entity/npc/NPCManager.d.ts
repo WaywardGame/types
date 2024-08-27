@@ -37,6 +37,16 @@ export interface INPCManagerEvents extends Events<EntityManager<NPC>> {
      * Called when a player-like human (player / special npc) is removed
      */
     removePlayingEntity(entity: NPC): any;
+    startInterval(spawnTracker: INPCManagerSpawnTracker): any;
+    endInterval(spawnTracker: INPCManagerSpawnTracker): any;
+    intervalSpawn(spawnTracker: INPCManagerSpawnTracker, npc: NPC): any;
+}
+export interface INPCManagerSpawnTracker {
+    intervalEnd: number;
+    length: number;
+    potentialSpawnCount: number;
+    spawned: number;
+    chances: number[];
 }
 export default class NPCManager extends EntityManager<NPC> {
     protected readonly name = "NPCManager";
@@ -55,6 +65,8 @@ export default class NPCManager extends EntityManager<NPC> {
      */
     getPendingOutboundShippers(): ShipperNPC[];
     resetSpawnIntervals(): void;
+    private getSpawnIntervalLengthRange;
+    resetSpawnInterval(npcType: NPCType): void;
     runRandomEvents(island: Island, tile: Tile, human: Human): boolean | undefined | void;
     private getNPCTypeCount;
     private getNPCTypeIntervalSpawnChance;

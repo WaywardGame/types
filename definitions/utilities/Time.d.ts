@@ -20,6 +20,6 @@ export declare function centuries(a: number): number;
 export declare function never(): number;
 declare namespace Time {
     function ago(date: Date | number): string;
-    function total(time: number): string;
+    function total(ms: number): string;
 }
 export default Time;

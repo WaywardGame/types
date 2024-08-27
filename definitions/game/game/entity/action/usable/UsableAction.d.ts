@@ -57,7 +57,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     is(id?: ActionId): boolean;
     isExecutable(): this is UsableAction<REQUIREMENTS, IUsableActionDefinitionExecutable<REQUIREMENTS>>;
     execute(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): boolean;
-    resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>, fillTiles?: boolean): Message.UiActionCannotUseRequiresCreature | Message.UiActionCannotUseRequiresDoodad | Message.UiActionCannotUseRequiresItem | Message.UiActionCannotUseRequiresNPC | Message.UiActionCannotUseRequiresVehicle | IUsableActionUsing<REQUIREMENTS>;
+    resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>, fillTiles?: boolean): Message | IUsableActionUsing<REQUIREMENTS>;
     resolveUsingOrUndefined(player: Player, using: IUsableActionUsing<REQUIREMENTS>, fillTiles?: boolean): IUsableActionUsing<REQUIREMENTS> | undefined;
     isUsable(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): UsableActionUsability<REQUIREMENTS>;
     isApplicable(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean, requireItem?: boolean): provided is IUsableActionUsing<REQUIREMENTS>;

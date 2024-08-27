@@ -15,6 +15,7 @@ import type { IGameOptions } from "@wayward/game/game/options/IGameOptions";
 import type { UpgradesArrayCompressedPusher } from "@wayward/game/save/upgrade/UpgradesArray";
 import type Version from "@wayward/game/utilities/Version";
 export interface IUpgradeVersion {
+    name?: string;
     applies(version: Version.Info): boolean;
     upgradeGlobal?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher): any;
     upgradeGame?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, game: Game): any;

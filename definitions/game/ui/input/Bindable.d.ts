@@ -233,23 +233,24 @@ declare enum Bindable {
     MenuRight = 214,
     MenuCancel = 215,
     MenuNextOption = 216,
-    MenuMoreInformation = 217,
-    MenuPreviousOption = 218,
-    MenuContextMenu = 219,
-    MenuSelect = 220,
-    DeveloperInterfaceScaleUp = 221,
-    DeveloperInterfaceScaleDown = 222,
-    DeveloperToggleDeveloperMode = 223,
-    DeveloperToggleDeveloperTools = 224,
-    DeveloperReloadGame = 225,
-    DeveloperReloadAndContinueGame = 226,
-    DeveloperReloadStylesheets = 227,
-    DeveloperReloadTextures = 228,
-    GameActionReshape = 229,
-    GameActionReshapeWithItem = 230,
-    GameActionCreatureHeelAi = 231,
-    GameActionOpenTileContainer = 232,
-    GameActionCommandCreatureAll = 233
+    TooltipMoreInformation = 217,
+    TooltipToggle = 218,
+    MenuPreviousOption = 219,
+    MenuContextMenu = 220,
+    MenuSelect = 221,
+    DeveloperInterfaceScaleUp = 222,
+    DeveloperInterfaceScaleDown = 223,
+    DeveloperToggleDeveloperMode = 224,
+    DeveloperToggleDeveloperTools = 225,
+    DeveloperReloadGame = 226,
+    DeveloperReloadAndContinueGame = 227,
+    DeveloperReloadStylesheets = 228,
+    DeveloperReloadTextures = 229,
+    GameActionReshape = 230,
+    GameActionReshapeWithItem = 231,
+    GameActionCreatureHeelAi = 232,
+    GameActionOpenTileContainer = 233,
+    GameActionCommandCreatureAll = 234
 }
 export default Bindable;
 export declare enum BindableType {
@@ -259,9 +260,10 @@ export declare enum BindableType {
     GameActionBar = 3,
     Dialog = 4,
     Hud = 5,
-    Menu = 6,
-    Developer = 7,
-    Mod = 8
+    Tooltip = 6,
+    Menu = 7,
+    Developer = 8,
+    Mod = 9
 }
 export declare enum BindableTypeContext {
     Default = 0,

@@ -17,6 +17,7 @@ import type UsableActionRegistrar from "@wayward/game/game/entity/action/usable/
 import type { UsableActionTranslator } from "@wayward/game/game/entity/action/usable/UsableActionTranslator";
 import type { UsableActionType, UsableActionTypePlaceholder } from "@wayward/game/game/entity/action/usable/UsableActionType";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Human from "@wayward/game/game/entity/Human";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { InspectType } from "@wayward/game/game/inspection/IInspection";
@@ -75,6 +76,12 @@ export interface IUsableActionRequirements {
     vehicle?: true | IUsableActionRequirement<Doodad>;
     creature?: true | IUsableActionRequirement<Creature>;
     npc?: true | IUsableActionRequirement<NPC>;
+    /**
+     * Replaces the calculated `IUsableActionPossibleUsing` with a new one,
+     * ...or returns `false` or a `Message` if it's invalid in some way
+     * ...or returns `undefined` to use the default
+     */
+    map?(using: NoInfer<IUsableActionUsing<this>>): NoInfer<IUsableActionUsing<this>> | Message | false | undefined;
 }
 export interface IUsableActionPossibleUsing {
     targetTile?: Tile;
@@ -87,6 +94,9 @@ export interface IUsableActionPossibleUsing {
     creature?: Creature;
     npc?: NPC;
     misc?: any;
+}
+export declare namespace IUsableActionPossibleUsing {
+    function isLoaded(human: Human, using: IUsableActionPossibleUsing): boolean;
 }
 export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequirements> {
     targetTile: Tile;

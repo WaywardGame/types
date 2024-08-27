@@ -188,5 +188,8 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     isEntity(): this is Entity;
     asType(type: TypeType): this | undefined;
     get asUnion(): Player | NPC | Creature | TileEvent | Item | Corpse | Doodad;
+    /** `undefined` if this entity's island is not loaded, `this` if it is */
     get asLoaded(): this | undefined;
+    /** Whether this entity's island is loaded */
+    get isLoaded(): boolean;
 }
