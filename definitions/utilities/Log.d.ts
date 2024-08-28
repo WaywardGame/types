@@ -53,6 +53,7 @@ declare class Log extends BaseLog {
  * Logs to an in-memory array - not the console
  */
 export declare class MemoryLog extends BaseLog {
+    errorCount: number;
     lines: ILogLine[];
     /**
      * Re-binds the Log methods
@@ -73,8 +74,10 @@ export declare const DEFAULT_FILE_LOG_SOURCE_FILTERS: Record<string, boolean>;
 declare namespace Log {
     enum LogType {
         Console = 0,
-        File = 1
+        File = 1,
+        Memory = 2
     }
+    function setMemoryLog(memoryLog: MemoryLog | undefined): void;
     function disableFileLogging(source: string): void;
     function initializeGameState(): void;
     function setCallback(cb?: (...args: any[]) => void): void;

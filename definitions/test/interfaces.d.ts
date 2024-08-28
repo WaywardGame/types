@@ -60,6 +60,7 @@ export interface IPaths extends Omit<IAppPaths, "saveZipPath"> {
     specificDataPath: string;
     versionsPath: string;
     saveImportsPath: string;
+    savewardPath: string | undefined;
 }
 export interface ITestSetup {
     options?: Partial<IOptions>;

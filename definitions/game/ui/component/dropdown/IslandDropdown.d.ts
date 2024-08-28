@@ -13,10 +13,12 @@ import { type IslandId } from "@wayward/game/game/island/IIsland";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IDropdownOption } from "@wayward/game/ui/component/Dropdown";
 import GroupDropdown from "@wayward/game/ui/component/GroupDropdown";
+import type { IDropdownSortableOption } from "@wayward/game/ui/component/dropdown/EnumDropdown";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 export default class IslandDropdown<OTHER_OPTIONS extends string = never> extends GroupDropdown<Record<string, string>, OTHER_OPTIONS, BiomeType> {
     constructor(defaultOption: IslandId | OTHER_OPTIONS, options?: SupplierOr<Iterable<IDropdownOption<OTHER_OPTIONS>>>);
     protected getTranslation(islandId: IslandId): TranslationImpl;
+    protected sortEnumOptions(o1: IDropdownSortableOption<string>, o2: IDropdownSortableOption<string>): number;
     protected getGroupName(biome: BiomeType): string;
     protected optionTooltipInitializer: (tooltip: Tooltip, option: string) => Promise<void> | undefined;
     protected shouldIncludeOtherOptionsInGroupFilter(): boolean;
