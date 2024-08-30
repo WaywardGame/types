@@ -49,11 +49,18 @@ declare class Log extends BaseLog {
      */
     setup(): void;
 }
+export declare class MemoryLogLine implements ILogLine {
+    readonly type: LogLineType;
+    readonly args: any[];
+    constructor(type: LogLineType, args: any[]);
+    toString(): string;
+}
 /**
  * Logs to an in-memory array - not the console
  */
 export declare class MemoryLog extends BaseLog {
     errorCount: number;
+    readonly linesPerType: Map<LogLineType, ILogLine[]>;
     lines: ILogLine[];
     /**
      * Re-binds the Log methods

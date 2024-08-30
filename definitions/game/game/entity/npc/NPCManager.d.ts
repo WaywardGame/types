@@ -69,7 +69,8 @@ export default class NPCManager extends EntityManager<NPC> {
     resetSpawnInterval(npcType: NPCType): void;
     runRandomEvents(island: Island, tile: Tile, human: Human): boolean | undefined | void;
     private getNPCTypeCount;
-    private getNPCTypeIntervalSpawnChance;
+    private getNPCTypeTargetCount;
+    private getNPCSpawnContext;
+    private getNPCTypeIntervalSpawnCountChances;
     private canSpawnNPCType;
-    private getNPCTypeSpawnCap;
 }

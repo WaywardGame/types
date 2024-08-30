@@ -33,6 +33,10 @@ export declare abstract class ObjectManager<ObjectType extends StringableObject 
     onUnserialized(): void;
     [Symbol.iterator](): IteratorObject<ObjectType | undefined>;
     get length(): number;
+    /**
+     * This is likely only used during save upgrades
+     */
+    set length(val: number);
     get(id: number): ObjectType | undefined;
     set(id: number, value: ObjectType | undefined): void;
     getObjects(): SaferArray<ObjectType>;

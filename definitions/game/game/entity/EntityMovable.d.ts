@@ -169,4 +169,9 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
     canSwapWith(entity: EntityMovable, source: string | undefined): boolean;
     getVehicle(): IItemVehicle | undefined;
     isVehicleAllowedOnTile(tile: Tile): boolean;
+    getWanderChance?(defaultChance: number): number | undefined;
+    getWanderIdleChance?(defaultChance: number): number | undefined;
+    getWanderNewDirectionChance?(defaultChance: number): number | undefined;
+    getWanderHomePoint?(): IVector2 | undefined;
+    getWanderHomeRadius?(): number | undefined;
 }

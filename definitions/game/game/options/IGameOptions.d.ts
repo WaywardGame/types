@@ -133,24 +133,7 @@ export interface IGameOptions {
     };
     player: IGameOptionsPlayer;
     npcs: {
-        spawning: DefaultMap<NPCType, {
-            /**
-             * A multiplier for the spawning interval duration for this NPC type
-             */
-            intervalMultiplier: number;
-            /**
-             * A multiplier for the spawn chance for this NPC type
-             */
-            chanceMultiplier: number;
-            /**
-             * The number of NPCs of this type that each have a separate chance to spawn in this interval
-             */
-            count: number;
-            /**
-             * A multiplier for the merchant spawn cap (which is based on civilization score)
-             */
-            capMultiplier: number;
-        }>;
+        spawning: DefaultMap<NPCType, IGameOptionsNPCSpawning>;
         merchants: {
             /**
              * A multiplier for the price of each merchant item.
@@ -445,6 +428,24 @@ export interface IGameOptionsCreature {
         type: ItemType;
         chance: number;
     }>;
+}
+export interface IGameOptionsNPCSpawning {
+    /**
+     * A multiplier for the spawning interval duration for this NPC type
+     */
+    intervalMultiplier: number;
+    /**
+     * A multiplier for the spawn chance for this NPC type
+     */
+    chanceMultiplier: number;
+    /**
+     * The number of NPCs of this type that each have a separate chance to spawn in this interval
+     */
+    count: number;
+    /**
+     * A multiplier for the merchant spawn cap (which is based on civilization score)
+     */
+    capMultiplier: number;
 }
 export interface IGameOptionsItemQuality {
     /**

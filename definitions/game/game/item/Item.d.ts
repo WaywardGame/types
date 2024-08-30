@@ -50,7 +50,7 @@ import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface IItemEvents extends IEntityMovableEvents, IQualityEvents {
     toggleProtected(isProtected: boolean): any;
-    containerChange(): any;
+    containerChange(newContainer: IContainer, oldContainer?: IContainer): any;
     fireUpdate(stage?: FireStage): any;
     damage(): any;
     transformed(newType: ItemType, oldType: ItemType): any;

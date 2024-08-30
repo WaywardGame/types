@@ -199,8 +199,13 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     setStacked(human: Human, container: IContainer, itemType: ItemType, stacked?: boolean, atIndex?: number): void;
     ensureContainerSorted(container?: IContainer, sorter?: ISorter<Item | undefined> | undefined): boolean;
     private ensureStacksStacked;
-    private createSorter;
+    createSorter(container?: IContainer): ISorter<Item | undefined> | undefined;
     tryMoveItemsToContainer(human: Human | undefined, items: Item[], toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult | IActionNotUsable;
+    /**
+     * Return `number` to insert the item at a specific index. Return `undefined` to push the item to the end.
+     * Defaults to `0` or `undefined` if sort is `ContainerSort.Recent`, or polling the sorting algorithm otherwise
+     */
+    getItemInsertIndexInContainer(container: IContainer, item: Item, sorter?: ISorter<Item | undefined>): number | undefined;
     removeContainerItems(container: IContainer, options?: IItemRemoveOptions): void;
     exists(item: Item): boolean;
     remove(item: Item, options?: IItemRemoveOptions): void;
@@ -353,6 +358,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      */
     getItemTranslations(items: Item[], article?: Article, formatter?: Translation): TranslationImpl[];
     static list: import("../../language/utility/TranslationListBuilder").ITranslationListBuilder<Item, string, Quality>;
+    readonly list: import("../../language/utility/TranslationListBuilder").ITranslationListBuilder<Item, string, Quality>;
     /**
      * Formats a list translation out of an array of items.
      * @param listEnder The way the list should end (ie `and`, `or`, etc)

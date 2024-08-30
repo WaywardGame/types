@@ -20,23 +20,23 @@ export declare enum MagicalPropertyType {
     /**
      * Increases attack value (for weapons and ammo).
      */
-    Attack = 0,
+    Power_Attack = 0,
     /**
      * Increases defense value for anything equippable.
      */
-    Defense = 1,
+    Guarding_Defense = 1,
     /**
      * Increases the illumination strength of torches/candles.
      */
-    Illumination = 2,
+    Illumination_LightItemLightBonus = 2,
     /**
      * Increases the amount of weight/items that can be contained.
      */
-    WeightCapacity = 3,
+    Magnitude_WeightCapacity = 3,
     /**
      * Decreases item weight to a minimum of 0.1.
      */
-    ItemWeight = 4,
+    Featherweight = 4,
     /**
      * Increases a stat when equipped.
      */
@@ -48,7 +48,7 @@ export declare enum MagicalPropertyType {
     /**
      * Improves invoking and sacrifice chances.
      */
-    Deity = 7,
+    Fanaticism_Deity = 7,
     Unused = 8,// TODO: Remove this on 1.0 or if you put a different property in this position update Milestones.ts
     /**
      * Increases the range in which a weapon can shoot a projectile or fishing pole/net can be thrown.
@@ -57,7 +57,7 @@ export declare enum MagicalPropertyType {
     /**
      * Increases the stats normally gained when consuming/using an item.
      */
-    UseBenefits = 10,
+    Potency_ImproveConsumableStats = 10,
     /**
      * Increases the merchant sell value on an item.
      */
@@ -65,31 +65,32 @@ export declare enum MagicalPropertyType {
     /**
      * Increases a trap's damage.
      */
-    TrapDamage = 12,
+    Ensnaring_TrapDamage = 12,
     /**
      * Increases the player's max weight when equipped.
      */
-    MaxWeight = 13,
+    Lightening_PlayerWeightMax = 13,
     /**
-     * Reduces the weight of each item contained within by a certain percentage.
+     * Reduces the weight of each item contained within by a certain percentage if the item has reducedStoredItemsWeight set.
+     * This does not change the container's weight capacity.
      */
-    ContainerWeight = 14,
+    Storing_ContainedItemsWeight = 14,
     /**
      * Increases the preservation rate of a container of all contained items.
      */
-    PreservationRate = 15,
+    Preservation_ContainedItemsDecayRate = 15,
     /**
      * Increases an item's decay value, making it last longer.
      */
-    MaxDecay = 16,
+    Hoarding_MaxDecay = 16,
     /**
      * Adds a chance in which an item does reduce in durability when taking damage.
      */
-    ItemDamage = 17,
+    Endurance_DurabilityLossChance = 17,
     /**
      * Increases the stoking value of an item, adding more decay to a fire source.
      */
-    StokeValue = 18,
+    Stoking = 18,
     /**
      * Increases the insulation effect of any equippable item or container.
      */
@@ -97,7 +98,7 @@ export declare enum MagicalPropertyType {
     /**
      * Adds damage, range, and reduces stamina used when throwing items. It also removes the heavy item reduction when calculating the range.
      */
-    ThrowingBonus = 20,
+    Hurling_ThrowDamage = 20,
     /**
      * Adds tame length and disables chance to fail taming when attempting to offer to aberrant creatures.
      */
@@ -105,27 +106,27 @@ export declare enum MagicalPropertyType {
     /**
      * Increased effectiveness (quality and chance) of crafts when using this in crafts.
      */
-    CraftingBonus = 22,
+    Aptitude_CraftingBonus = 22,
     /**
      * Has a chance to regenerate durability every turn.
      */
-    ItemRegeneration = 23,
+    Regeneration_DurabilityRegen = 23,
     /**
      * Adds a bonus to the item's civilization score value.
      */
-    CivilizationBonus = 24,
+    Progress_CivScore = 24,
     /**
      * Adds a bonus to the growth speed for plants and mushrooms planted on it.
      */
-    GrowingSpeed = 25,
+    Prosperity_TerrainGrowingSpeed = 25,
     /**
      * Adds "light" to any piece of equipment/weapon.
      */
-    Glowing = 26,
+    Glowing_EquipmentLightBonus = 26,
     /**
      * Adds a property that emits skill bonus to anybody within range (3x3 square) of the doodad.
      */
-    DoodadSkill = 27,
+    Encircling_DoodadSkill = 27,
     /**
      * Adds a cold or fire damage type to a weapon.
      */
@@ -133,11 +134,11 @@ export declare enum MagicalPropertyType {
     /**
      * Adds a property to equippables that will enhance the effect of consumables in a given stat.
      */
-    StatUseBenefit = 29,
+    StatPotency_EquipmentImproveConsumableStats = 29,
     /**
      * Adds bonus durability to an item.
      */
-    ItemDurability = 30
+    Persistence_MaxDurability = 30
 }
 export interface IMagicalPropertyDescription {
     /**
@@ -159,9 +160,9 @@ export interface IMagicalPropertyDescription {
 export interface MagicalPropertyTypeSubTypeMap {
     [MagicalPropertyType.Stat]: Stat;
     [MagicalPropertyType.Skill]: SkillType;
-    [MagicalPropertyType.Deity]: Deity;
-    [MagicalPropertyType.DoodadSkill]: SkillType;
+    [MagicalPropertyType.Fanaticism_Deity]: Deity;
+    [MagicalPropertyType.Encircling_DoodadSkill]: SkillType;
     [MagicalPropertyType.ElementalDamage]: DamageType;
-    [MagicalPropertyType.StatUseBenefit]: Stat;
+    [MagicalPropertyType.StatPotency_EquipmentImproveConsumableStats]: Stat;
 }
 export declare const magicalPropertyDescriptions: PartialRecord<MagicalPropertyType, IMagicalPropertyDescription>;

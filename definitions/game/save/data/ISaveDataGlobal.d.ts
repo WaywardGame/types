@@ -24,6 +24,11 @@ export interface IOptions {
     autoPickup: boolean;
     autoPickupOnIdle: boolean;
     autoSave: [AutoSaveMode.Off] | [AutoSaveMode.Turns | AutoSaveMode.Time, number];
+    /**
+     * Indexed by `Bindable` names, IE `GameFaceDirection`
+     * Missing indices = use default binding
+     */
+    bindings: OptionalDescriptions<keyof typeof Bindable, Binding[]>;
     compressSaves: boolean;
     consoleLogSourceFilters: Record<string, boolean>;
     currentGame: number;
@@ -84,11 +89,6 @@ export interface IOptions {
     windowMode: boolean;
     zoomLevel: number;
     zoomSmoothing: boolean;
-    /**
-     * Indexed by `Bindable` names, IE `GameFaceDirection`
-     * Missing indices = use default binding
-     */
-    bindings: OptionalDescriptions<keyof typeof Bindable, Binding[]>;
 }
 export declare enum DropLocation {
     Facing = 0,

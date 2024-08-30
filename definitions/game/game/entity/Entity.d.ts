@@ -35,7 +35,7 @@ import type { ISerializedTranslation } from "@wayward/game/language/ITranslation
 import type Translation from "@wayward/game/language/Translation";
 import type { RenderSource, UpdateRenderFlag } from "@wayward/game/renderer/IRenderer";
 import type { INotificationLocation, ItemNotifierType, MarkerIconType, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
-import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { WorldZ } from "@wayward/utilities/game/WorldZ";
@@ -151,11 +151,6 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      * @returns True when the data is removed. False if the key wasn't set
      */
     removeData(key: string): boolean;
-    getWanderChance?(defaultChance: number): number | undefined;
-    getWanderIdleChance?(defaultChance: number): number | undefined;
-    getWanderNewDirectionChance?(defaultChance: number): number | undefined;
-    getWanderHomePoint?(): IVector2 | undefined;
-    getWanderHomeRadius?(): number | undefined;
     abstract get isValid(): boolean;
     get asGenericEntity(): Entity;
     get asEntity(): Entity<DescriptionType, TypeType, EntityReferenceType, TagType>;

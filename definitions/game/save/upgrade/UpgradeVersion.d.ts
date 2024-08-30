@@ -12,6 +12,7 @@ import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type { IMessageManager } from "@wayward/game/game/entity/player/IMessageManager";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { Game } from "@wayward/game/game/Game";
 import type Island from "@wayward/game/game/island/Island";
@@ -28,6 +29,7 @@ export interface IUpgradeVersion {
     upgradeIsland?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, island: Island): any;
     upgradePlayer?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, player: Player, isLocalPlayer: boolean): any;
     upgradeGameOptions?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, options: IGameOptions, defaultOptions: IGameOptions): any;
+    upgradeMessages?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, messages: IMessageManager): any;
     upgradeCreature?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, creature: Creature): any;
     upgradeItem?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, item: Item): any;
     upgradeDoodad?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, doodad: Doodad): any;
