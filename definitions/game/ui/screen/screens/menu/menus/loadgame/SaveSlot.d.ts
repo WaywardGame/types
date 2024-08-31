@@ -8,50 +8,43 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IGameOptions } from "@wayward/game/game/options/IGameOptions";
-import { GameMode } from "@wayward/game/game/options/IGameOptions";
-import type { AnyPropertyToSerialize } from "@wayward/game/save/serializer/PropertiesToSerialize";
+import SaveMetadata from "@wayward/game/save/SaveMetadata";
+import type Button from "@wayward/game/ui/component/Button";
 import InputButton from "@wayward/game/ui/component/InputButton";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export interface SaveSlotData {
-    slot: number;
-    score: number;
-    modsUnloadable: Record<string, {
-        name: string;
-        unloadable: boolean;
-    }>;
-    saveTime: number;
-    createdTime: number;
-    turns: number;
-    seed: string;
-    name: string;
-    difficulty: GameMode | -1;
-    options: IGameOptions;
-    thumbnail?: string;
-    corrupted?: Map<AnyPropertyToSerialize, Error>;
-}
 interface ISaveSlotEvents extends Events<InputButton> {
     rename(): any;
     delete(): any;
 }
+export declare enum SaveSlotClasses {
+    Main = "save-slot",
+    New = "new-slot",
+    Selected = "selected",
+    Text = "save-slot-text",
+    TextPath = "save-slot-text-path",
+    Text_HasPath = "save-slot-text--has-path"
+}
 declare class SaveSlot extends InputButton {
     event: IEventEmitter<this, ISaveSlotEvents>;
-    slotData: SaveSlotData;
+    metadata: SaveMetadata;
     private deathby;
     private isContinue?;
-    readonly editButton: import("../../../../../component/Button").default;
-    readonly exportButton: import("../../../../../component/Button").default;
-    readonly deleteButton: import("../../../../../component/Button").default;
-    constructor(slot: number, isNewSlot?: boolean);
+    readonly editButton: Button;
+    readonly exportButton: Button;
+    readonly deleteButton: Button;
+    constructor(slot?: number, isNewSlot?: boolean);
     setContinue(): this;
     /**
      * Renames the save. Event handler for when this InputButton leaves edit mode.
      */
     protected rename(newName: string): Promise<void>;
+    setMetadata(data: SaveMetadata): this;
     /**
      * Loads the data for this save slot.
      */
     load(loadAll?: boolean): Promise<void>;
+    private refresh;
+    private observed;
     private loadFullData;
     /**
      * The tooltip generator for this component.
@@ -78,11 +71,5 @@ declare class SaveSlot extends InputButton {
      */
     private exportToFile;
     static getFileName(name?: string): string;
-}
-declare namespace SaveSlot {
-    enum Classes {
-        Is = "save-slot",
-        New = "new-slot"
-    }
 }
 export default SaveSlot;

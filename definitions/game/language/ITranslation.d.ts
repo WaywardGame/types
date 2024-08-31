@@ -42,6 +42,7 @@ export interface ISerializedTranslation {
     tooltip?: ISerializedTranslation | IStringSection[];
     tooltipWide?: true;
     interpolator?: ISerializedInterpolator;
+    classes?: string[];
 }
 export declare namespace ISerializedTranslation {
     function is(value: unknown): value is ISerializedTranslation;

@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-declare const colours: {
+declare const colors: {
     default: number;
     dim: number;
     veryDim: number;
@@ -25,6 +25,7 @@ declare const colours: {
     warning: number;
     important: number;
     notice: number;
+    file: number;
     number: number;
     boolean: number;
     function: number;
@@ -47,7 +48,7 @@ declare enum CursorStyle {
     SteadyBar = 6
 }
 type ANSIColours = {
-    [NAME in keyof typeof colours]: ANSITagFunction;
+    [NAME in keyof typeof colors]: ANSITagFunction;
 };
 type ANSICursorStyles = {
     -readonly [NAME in Exclude<keyof typeof CursorStyle, number> as `cursor${NAME}`]: string;

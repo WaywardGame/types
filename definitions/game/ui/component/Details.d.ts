@@ -16,12 +16,19 @@ export interface IDetailsEvents extends Events<Component<HTMLDetailsElement>> {
     close(): any;
     toggle(open: boolean): any;
 }
+export declare enum DetailsClasses {
+    Main = "details",
+    _Padded = "details--padded",
+    _Simplified = "details--simplified"
+}
 export default class Details extends Component<HTMLDetailsElement> {
     event: IEventEmitter<this, IDetailsEvents>;
     summary: Button;
     get isOpen(): boolean;
     constructor();
     setBlock(block?: boolean): this;
+    setPadded(padded?: boolean): this;
+    setSimplified(simplified?: boolean): this;
     setSummary(initializer?: (summary: Button) => any): this;
     refreshSummary(): this;
     open(): this;

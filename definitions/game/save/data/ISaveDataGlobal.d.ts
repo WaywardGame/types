@@ -47,6 +47,7 @@ export interface IOptions {
     disableUIEffects: boolean;
     disableUIOpacity: boolean;
     discoveredEverything: boolean;
+    grantAllMilestoneModifiers: boolean;
     dropIntoContainers: boolean;
     dropLocation: DropLocation;
     dropOnDisassemble: boolean;
@@ -89,6 +90,7 @@ export interface IOptions {
     windowMode: boolean;
     zoomLevel: number;
     zoomSmoothing: boolean;
+    saveImportFolders: string[];
 }
 export declare enum DropLocation {
     Facing = 0,

@@ -70,12 +70,12 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
      * Returns whether or not it succeeded
      */
     load(slot: number): Promise<boolean>;
-    loadSpecificData(slot: number, keys: Set<AnyPropertyToSerialize>): Promise<Record<AnyPropertyToSerialize, any>>;
+    loadSpecificData(slotOrSaveObject: number | ISaveObject, keys: Set<AnyPropertyToSerialize>): Promise<Record<AnyPropertyToSerialize, any>>;
     /**
      * Attempts to load all the given keys from the slot at once. Upon failure, instead loads each separately.
      * @returns an object of results, and an object of errors, both indexed by the given keys.
      */
-    loadSpecificDataResilient(slot: number, keys: Set<AnyPropertyToSerialize>): Promise<{
+    loadSpecificDataResilient(slotOrSaveObject: number | ISaveObject, keys: Set<AnyPropertyToSerialize>): Promise<{
         result: Record<AnyPropertyToSerialize, any>;
         errors: Map<AnyPropertyToSerialize, Error>;
     }>;
@@ -96,7 +96,7 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
      * Converts a Uint8Array into a SaveObject
      * Used in conjection with exportSlotAsUint8Array / exportSaveObjectAsUint8Array
      */
-    getSaveObjectFromUint8Array(slot: number, data: Uint8Array): ISaveObject;
+    getSaveObjectFromUint8Array(data: Uint8Array): ISaveObject;
     importSaves(saveObjects: Files.FileUploadResult[], onImportSave?: (result: ISaveImportSuccess, index: number) => any): Promise<SaveImportResult[]>;
     /**
      * Imports saves from multiple formats
@@ -110,6 +110,9 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
     } | {
         error: SaveImportErrorReason;
     }>;
+    importSaveToObject(slot: number | undefined, saveObject: ISaveObject | string | Uint8Array): ISaveObject | {
+        error: SaveImportErrorReason;
+    };
     copySave(slot?: number, target?: number): Promise<{
         bytes: number;
     } | {
@@ -119,7 +122,8 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
     deleteAllSlots(): Promise<void>;
     deleteAllData(): Promise<void>;
     compressSave(slot: number, saveObject: ISaveObject): void;
-    decompressSave(slot: number, saveObject: ISaveObject, legacyDecompressAllProperties?: boolean): void;
+    doesSaveLookWaywardy(saveObject: ISaveObject, slot?: number): boolean;
+    decompressSave(slot: number | undefined, saveObject: ISaveObject, legacyDecompressAllProperties?: boolean): void;
     getSerializer(): ISerializer;
     private setupGameSave;
     getGameStateAsJson(cleanup: boolean | undefined, pretty: boolean | undefined, compress: true): Uint8Array;

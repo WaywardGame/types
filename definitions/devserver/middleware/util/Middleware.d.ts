@@ -11,14 +11,12 @@
 import type { IncomingMessage as HTTPIncomingMessage, ServerResponse } from "http";
 interface IncomingMessageOverride {
     url: string;
-    url1: string;
-    url2: string;
 }
 export type IncomingMessage = Merge<HTTPIncomingMessage, IncomingMessageOverride>;
-type Middleware = (req: IncomingMessage, res: ServerResponse) => PromiseOr<ServerResponse | undefined | void>;
+type Middleware<ARGS extends any[] = any[]> = (req: IncomingMessage, res: ServerResponse, ...args: ARGS) => PromiseOr<ServerResponse | undefined | void>;
 /**
  * Return the `ServerResponse` object to indicate the response is handled.
  * Return `undefined` or `void` from the middleware to defer to the next middleware.
  */
-declare function Middleware(middleware: Middleware): Middleware;
+declare function Middleware<ARGS extends any[]>(middleware: Middleware<ARGS>): Middleware<ARGS>;
 export default Middleware;

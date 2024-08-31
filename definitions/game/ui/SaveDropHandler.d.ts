@@ -20,6 +20,8 @@ export interface ISaveDropHandlerEvents {
     complete(results: SaveImportResult[]): any;
 }
 export default class SaveDropHandler extends EventEmitter.Host<ISaveDropHandlerEvents> {
+    private importing;
+    get isImporting(): boolean;
     constructor();
     import(files: File[], handler?: IImportHandler): Promise<void>;
     private getSlotName;

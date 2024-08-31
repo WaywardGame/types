@@ -24,7 +24,10 @@ export declare enum MenuClasses {
     Content = "menu-content",
     HasTabs = "menu-hastabs",
     Tabs = "menu-tabs",
-    TabsWrapper = "menu-tabs-wrapper"
+    TabsWrapper = "menu-tabs-wrapper",
+    StaticContent = "menu-static-content",
+    StickyHeader = "menu-static-content-sticky-header",
+    StickyFooter = "menu-static-content-sticky-footer"
 }
 export default class Menu extends Component {
     event: IEventEmitter<this, IMenuEvents>;
@@ -36,7 +39,8 @@ export default class Menu extends Component {
     readonly title: Heading;
     readonly description: Text;
     readonly header: BlockRow;
-    readonly staticContent: Component<HTMLElement>;
+    readonly stickyHeader: Component<HTMLElement>;
+    readonly stickyFooter: Component<HTMLElement>;
     readonly content: Component;
     tabContainer?: Component;
     readonly tabs: Map<string | number, Tab<string | number | undefined>>;

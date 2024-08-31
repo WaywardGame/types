@@ -68,6 +68,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     private reference?;
     private referenceContext?;
     private referenceForced?;
+    private classes?;
     constructor(dictionary: Dictionary | string, entry: number | string, index?: "random" | number);
     constructor(translationId: string);
     getDictionary(): Dictionary;
@@ -76,6 +77,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     clone(): TranslationImpl;
     withSegments(...segments: ISegment[]): this;
     withSegments(priority: true, ...segments: ISegment[]): this;
+    classed(...classes: Array<string | Supplier<string | undefined>>): this;
     withTooltip(tooltip?: Falsy | ITooltipSection["tooltip"], wide?: true): this;
     private readonly refreshEvents;
     /**

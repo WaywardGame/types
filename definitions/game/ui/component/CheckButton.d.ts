@@ -14,7 +14,9 @@ import type { IRefreshableValue } from "@wayward/game/ui/component/Refreshable";
 import type { Paragraph } from "@wayward/game/ui/component/Text";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export declare enum CheckButtonClasses {
-    Main = "menu-check-button"
+    Main = "menu-check-button",
+    _HasDescription = "menu-check-button--has-description",
+    Description = "menu-check-button-description"
 }
 interface ICheckButtonEvents extends Events<Button> {
     /**

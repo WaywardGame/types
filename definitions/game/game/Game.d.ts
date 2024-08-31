@@ -26,7 +26,7 @@ import PlayerManager from "@wayward/game/game/entity/player/PlayerManager";
 import IslandManager from "@wayward/game/game/island/IslandManager";
 import { AutoSave } from "@wayward/game/game/meta/AutoSave";
 import { SaveLoad } from "@wayward/game/game/meta/SaveLoad";
-import { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import { MilestoneManager } from "@wayward/game/game/milestones/MilestoneManager";
 import type { IGameOptions } from "@wayward/game/game/options/IGameOptions";
 import { GameMode } from "@wayward/game/game/options/IGameOptions";
@@ -211,7 +211,6 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      */
     reset(saveType?: SaveType | false, shouldDisconnect?: boolean, hasDisconnected?: boolean): Promise<void>;
     testFastForwardSpeed(ticks?: number, biomeType?: BiomeType): Promise<void>;
-    unlockAllMilestones(): void;
     /**
      * This is called on each game tick (16ms) when in simulated mode.
      * Time ticks are desychronized with island ticks.

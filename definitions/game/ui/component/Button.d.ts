@@ -34,7 +34,8 @@ export declare enum ButtonClasses {
     Text = "button-text",
     ListIconsZoom2To3 = "button-list-zoom-2-to-3",
     IconZoom2To3 = "button-icon-zoom-2-to-3",
-    Opaque = "button-opaque"
+    Opaque = "button-opaque",
+    Description = "button-description"
 }
 export declare enum ButtonType {
     None = "button-type-none",

@@ -61,13 +61,16 @@ export interface ISaveManagerEvents {
      * When the global slot is ready (after `globalSlotLoaded` event)
      */
     globalSlotReady(slot: number): any;
+    saveObjectToSlot(slot: number): any;
 }
 export declare enum SaveImportErrorReason {
     UnknownError = 0,
     IncorrectFileType = 1,
     NoFreeSlots = 2,
     UploadFailed = 3,
-    IncorrectSaveType = 4
+    IncorrectSaveType = 4,
+    NotWaywardSave = 5,
+    InvalidJson = 6
 }
 export interface IPartialSaveImportResult {
     file: File;

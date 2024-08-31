@@ -8,9 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { Stat } from "@wayward/game/game/entity/IStats";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import MilestoneModifier, { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
 export default class Diverse extends MilestoneModifier {
+    getHalvedStats(): Stat[];
+    getDoubledMaxStats(): Stat[];
     getOptions(): IGameOptionsPartial;
     getGroup(): MilestoneModifierGroup;
 }

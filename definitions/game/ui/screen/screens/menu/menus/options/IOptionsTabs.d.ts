@@ -16,8 +16,8 @@ export declare enum OptionsTab {
     Performance = 4,
     Controls = 5,
     Tooltips = 6,
-    Other = 7,
-    Mods = 8,
-    SaveData = 9,
+    Mods = 7,
+    SaveData = 8,
+    Other = 9,
     Developer = 10
 }
