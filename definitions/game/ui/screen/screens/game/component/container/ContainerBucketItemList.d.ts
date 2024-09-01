@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Quality } from "@wayward/game/game/IObject";
+import type Human from "@wayward/game/game/entity/Human";
 import { ItemType, type IContainer } from "@wayward/game/game/item/IItem";
 import type { IMoveItemOptions } from "@wayward/game/game/item/IItemManager";
 import type Item from "@wayward/game/game/item/Item";
@@ -121,6 +122,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     protected onSortEnd(): void;
     protected onTransferInto(itemComponent: ItemComponent, index: number | undefined, bindable: Bindable | undefined, undo: () => void, oldParent?: ISortableComponent): Promise<void>;
     protected onSort(itemComponent: ItemComponent, index: number, bindable: Bindable | undefined, undo: () => void): Promise<void>;
+    protected onContainerItemUpdate(manager: ItemManager, items: Item[], fromContainer: IContainer | undefined, fromContainerTile: Tile | undefined, toContainer: IContainer, human?: Human): void;
     protected onContainerOrderUpdate(manager: ItemManager, container: IContainer): void;
     protected onItemToggleProtected(item: Item): void;
     private getAppendStrategy;
@@ -139,5 +141,6 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private getItemComponentElements;
     private regenerate;
     private transfer;
+    private getSorter;
 }
 export {};

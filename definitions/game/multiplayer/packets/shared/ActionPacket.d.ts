@@ -28,7 +28,7 @@ export default class ActionPacket extends ActionPacketBase {
     get action(): IActionDescription;
     getDebugInfo(): string;
     preProcess(): void;
-    process(): void;
+    process(): unknown;
     protected preWriteData(): void;
     protected writeData(): void;
     protected preReadData(): void;

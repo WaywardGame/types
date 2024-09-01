@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type AiManager from "@wayward/game/game/entity/ai/AiManager";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
@@ -36,6 +37,7 @@ export interface IUpgradeVersion {
     upgradeNPC?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, npc: NPC): any;
     upgradeTileEvent?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, tileEvent: TileEvent): any;
     upgradeCorpse?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, corpse: Corpse): any;
+    upgradeAi?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, ai: AiManager): any;
 }
 export type UpgradeType = Exclude<keyof IUpgradeVersion, "applies">;
 export type UpgradeParameters<TYPE extends UpgradeType> = Required<IUpgradeVersion>[TYPE] extends (_v: any, _u: any, ...params: infer PARAMS) => any ? PARAMS : never;

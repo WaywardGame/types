@@ -243,14 +243,16 @@ declare enum Bindable {
     DeveloperToggleDeveloperMode = 224,
     DeveloperToggleDeveloperTools = 225,
     DeveloperReloadGame = 226,
-    DeveloperReloadAndContinueGame = 227,
-    DeveloperReloadStylesheets = 228,
-    DeveloperReloadTextures = 229,
-    GameActionReshape = 230,
-    GameActionReshapeWithItem = 231,
-    GameActionCreatureHeelAi = 232,
-    GameActionOpenTileContainer = 233,
-    GameActionCommandCreatureAll = 234
+    DeveloperReloadWithoutSavingGame = 227,
+    DeveloperReloadAndContinueGame = 228,
+    DeveloperReloadWithoutSavingAndContinueGame = 229,
+    DeveloperReloadStylesheets = 230,
+    DeveloperReloadTextures = 231,
+    GameActionReshape = 232,
+    GameActionReshapeWithItem = 233,
+    GameActionCreatureHeelAi = 234,
+    GameActionOpenTileContainer = 235,
+    GameActionCommandCreatureAll = 236
 }
 export default Bindable;
 export declare enum BindableType {

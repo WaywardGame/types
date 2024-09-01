@@ -150,7 +150,18 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Otherwise the game state could get out of sync
      */
     get doodadOverHidden(): boolean;
-    set doodadOverHidden(value: boolean);
+    private set doodadOverHidden(value);
+    /**
+     * Updates the DoodadOverHidden tile flag if the creature is large.
+     * Large creatures/corpses should render over the doodad over layer, which means we should hide the doodad over layer for doodads on the creatures tile.
+     * This should be called when a doodad changes (add / remove / growth change)
+     */
+    refreshDoodadOverHiddenState(): void;
+    /**
+     * Updates the DoodadOverHidden tile flag if the creature is large.
+     * Large creatures should render over the doodad over layer, which means we should hide the doodad over layer for doodads on the creatures tile.
+     */
+    private updateDoodadOverHiddenState;
     get doodadAnimationDisabled(): boolean;
     set doodadAnimationDisabled(value: boolean);
     get variation(): number;

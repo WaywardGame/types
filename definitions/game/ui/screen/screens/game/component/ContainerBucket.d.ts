@@ -11,6 +11,7 @@
 import type { ItemType } from "@wayward/game/game/item/IItem";
 import { ContainerSort, type IContainer } from "@wayward/game/game/item/IItem";
 import Item from "@wayward/game/game/item/Item";
+import type ItemManager from "@wayward/game/game/item/ItemManager";
 import Button from "@wayward/game/ui/component/Button";
 import { CheckButton } from "@wayward/game/ui/component/CheckButton";
 import Component from "@wayward/game/ui/component/Component";
@@ -79,9 +80,11 @@ export default class ContainerBucket extends Component {
     setContainer(container?: IContainer): this;
     protected makeTopDialog(dialog: Dialog, order: number): void;
     protected onDialogMoveOrResize(dialog: Dialog): void;
+    protected onContainerUpdateOrder(manager: ItemManager, container: IContainer): void;
     protected onMouseEnter(): void;
     protected onMouseLeave(): void;
     private updateDialogActive;
     private sort;
     registerTabButton(button: Button, className: string): void;
+    private refreshSort;
 }

@@ -47,7 +47,6 @@ export interface IOptions {
     disableUIEffects: boolean;
     disableUIOpacity: boolean;
     discoveredEverything: boolean;
-    grantAllMilestoneModifiers: boolean;
     dropIntoContainers: boolean;
     dropLocation: DropLocation;
     dropOnDisassemble: boolean;
@@ -57,6 +56,7 @@ export interface IOptions {
     fallBackToEnglish: boolean;
     fontStyle: FontStyle;
     fullscreen: boolean;
+    grantAllMilestoneModifiers: boolean;
     hideEquippedHeadgear: boolean;
     hudWidth?: number;
     leftHanded: boolean;
@@ -69,6 +69,7 @@ export interface IOptions {
     playInputSoundWhenTyping: boolean;
     realTimeTickSpeed: number;
     renderer: "webgl" | "webgpu";
+    saveImportFolders: string[];
     saveUiDataGlobally: boolean;
     shouldLoadLastSave: boolean;
     shouldObjectNamesSkipArticle: boolean;
@@ -90,7 +91,7 @@ export interface IOptions {
     windowMode: boolean;
     zoomLevel: number;
     zoomSmoothing: boolean;
-    saveImportFolders: string[];
+    disableQuitConfirmation: boolean;
 }
 export declare enum DropLocation {
     Facing = 0,

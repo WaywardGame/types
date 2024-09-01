@@ -12,6 +12,7 @@ import type { Game } from "@wayward/game/game/Game";
 export declare class Uninit {
     private readonly game;
     private unloading;
+    disableSave: boolean;
     constructor(game: Game);
     onBeforeUnloadAsynchronous(event?: {
         preventDefault?: () => void;

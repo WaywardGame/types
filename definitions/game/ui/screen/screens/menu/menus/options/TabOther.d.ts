@@ -11,8 +11,6 @@
 import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
 import { Tab } from "@wayward/game/ui/screen/screens/menu/component/Menu";
 export default class TabOther extends Tab implements IRefreshable {
-    private readonly skipSplash;
     constructor();
     refresh(): this;
-    private toggleSkipSplash;
 }

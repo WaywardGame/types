@@ -10,6 +10,7 @@
  */
 import type { MenuId } from "@wayward/game/ui/screen/screens/menu/component/IMenu";
 import type Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
+import { InfoDisplayLevel } from "@wayward/game/game/inspection/IInfoProvider";
 export declare enum FontStyle {
     Pixel = 0,
     Balanced = 1,
@@ -61,8 +62,10 @@ export declare enum UiClasses {
     FitContent = "fit-content",
     ColoredSecondary = "colored-secondary",
     BalancedSmooth = "balanced-smooth",
-    Hint = "hint"
+    Hint = "hint",
+    RequiresDeveloperMode = "requires-developer-mode"
 }
 export declare namespace UiClasses {
     function createDynamic<CLASS extends string, ENUM>(baseClass: CLASS, enm: ENUM): (enumValue: ENUM[keyof ENUM]) => `${CLASS}-${Lowercase<keyof ENUM & string>}`;
+    function displayLevel(displayLevel: InfoDisplayLevel): string[];
 }

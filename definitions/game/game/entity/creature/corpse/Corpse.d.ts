@@ -98,11 +98,4 @@ export default class Corpse extends Entity<ICorpseDescription, CreatureType, Ref
     removeFromTile(updateTile: boolean): void;
     update(): void;
     getResources(clientSide?: boolean): ItemType[];
-    protected onCreated(): void;
-    protected onRemoved(): void;
-    /**
-     * Updates the DoodadOverHidden tile flag if the creature is large.
-     * Large creatures should render over the doodad over layer, which means we should hide the doodad over layer for doodads on the creatures tile.
-     */
-    updateDoodadOverHiddenState(shouldBeHidden: boolean): void;
 }

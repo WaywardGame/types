@@ -46,7 +46,7 @@ export type AppendStrategy = number | "append" | "prepend" | {
     after?: Component | string | Element;
     before?: Component | string | Element;
 } | {
-    sorted(a: Component, b: Component): number;
+    sorted: SortingFunction<Element>;
 };
 export declare namespace AppendStrategy {
     const Append = "append";
@@ -61,8 +61,8 @@ export declare namespace AppendStrategy {
      * A strategy that will use a sorting function in order to find the position the component should be placed.
      * This strategy assumes that the parent's children are already sorted.
      */
-    function sorted<C extends Component>(sortFunction: SortingFunction<C>): {
-        sorted(a: Component, b: Component): number;
+    function sorted(sortFunction: SortingFunction<Element>): {
+        sorted: SortingFunction<Element>;
     };
 }
 export declare enum Namespace {

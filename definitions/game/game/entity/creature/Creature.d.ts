@@ -21,7 +21,7 @@ import type { IStat } from "@wayward/game/game/entity/IStats";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import { AiType } from "@wayward/game/game/entity/ai/AI";
 import AiManager from "@wayward/game/game/entity/ai/AiManager";
-import type { CreatureAttackOutcome, CreatureType, ICreatureAttackOutcomeAttack, ICreatureCheckMoveOptions, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "@wayward/game/game/entity/creature/ICreature";
+import { CreatureAttackOutcome, CreatureType, ICreatureAttackOutcomeAttack, ICreatureCheckMoveOptions, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "@wayward/game/game/entity/creature/ICreature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/CreatureZone";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
@@ -148,16 +148,10 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     processSpecialAbilities(enemy: Human | Creature | undefined, bypass?: boolean): boolean;
     increaseWaste(item: Item): void;
     onUnserialized(): void;
-    /**
-     * Updates the DoodadOverHidden tile flag if the creature is large.
-     * Large creatures should render over the doodad over layer, which means we should hide the doodad over layer for doodads on the creatures tile.
-     */
-    updateDoodadOverHiddenState(tile: Tile, shouldBeHidden: boolean): void;
     getAttackOutcome(enemy: Human | Creature | undefined, force: true, humans?: Human[], description?: ICreatureDescription, moveType?: MoveType): ICreatureAttackOutcomeAttack;
     getAttackOutcome(enemy: Human | Creature | undefined, force?: boolean, humans?: Human[], description?: ICreatureDescription, moveType?: MoveType): CreatureAttackOutcome;
     processAttack(description: ICreatureDescription, humans: Human[], moveType: MoveType | undefined, enemyIn: Human | Creature | undefined): boolean;
     getProducedTemperature(): number | undefined;
-    protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
     protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
     /**
@@ -243,6 +237,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     isItem(): this is Item;
     isTile(): this is Tile;
     isContainer(): this is IUncastableContainer;
+    toString(): string;
     get point(): IVector3;
     get tile(): Tile;
 }

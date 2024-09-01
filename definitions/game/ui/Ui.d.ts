@@ -126,6 +126,7 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     protected onFullscreen(): boolean;
     protected onToggleDevMode(): boolean;
     protected onReload(api: IBindHandlerApi): boolean;
+    protected onReloadWithoutSaving(api: IBindHandlerApi): boolean;
     protected onToggleDevTools(): boolean;
     protected onReloadStylesheets(): boolean;
     protected onReloadTextures(): boolean;

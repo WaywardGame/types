@@ -30,6 +30,8 @@ export declare enum AiType {
     Pacified = 32,
     /** Can swap tiles with the player */
     CanSwapWith = 4,
+    /** Can move between z layers via cave entrances */
+    CanSwapLayers = 65536,
     /** Follows the player at a close distance */
     FollowClose = 64,
     /** Follows the player at a far distance */
@@ -67,7 +69,10 @@ export declare enum AiMaskType {
     ScaredInDaylight = 8,
     Frenzied = 9,
     WaitingForNoPlayerAdjacent = 10,
-    Angered = 11
+    Angered = 11,
+    RecentlyAlerted = 12,
+    WrongLayerForZone = 13,
+    RecentlySwappedLayers = 14
 }
 export declare enum AiMaskOrder {
     NeutralIfScaredDisabled = 0,
@@ -81,7 +86,10 @@ export declare enum AiMaskOrder {
     Frenzied = 8,
     Pacified = 9,
     WaitingForNoPlayerAdjacent = 10,
-    Angered = 11
+    Angered = 11,
+    RecentlyAlerted = 12,
+    WrongLayerForZone = 13,
+    RecentlySwappedLayers = 14
 }
 export interface IAiMaskDescription {
     /**

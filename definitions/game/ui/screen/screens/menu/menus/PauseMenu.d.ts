@@ -43,4 +43,6 @@ export default class PauseMenu extends Menu {
     private onTogglePaused;
     private isPaused;
     private onQuitButtonClick;
+    private onQuitButtonClickNoSave;
+    private quit;
 }
