@@ -67,5 +67,8 @@ export declare enum UiClasses {
 }
 export declare namespace UiClasses {
     function createDynamic<CLASS extends string, ENUM>(baseClass: CLASS, enm: ENUM): (enumValue: ENUM[keyof ENUM]) => `${CLASS}-${Lowercase<keyof ENUM & string>}`;
+    /**
+     * For raw classes use `InfoClass`
+     */
     function displayLevel(displayLevel: InfoDisplayLevel): string[];
 }

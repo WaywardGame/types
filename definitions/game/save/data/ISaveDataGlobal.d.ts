@@ -43,6 +43,7 @@ export interface IOptions {
     disableHealthVignette: boolean;
     disableMovementAnimations: boolean;
     disableOverlaySupport: boolean;
+    disableQuitConfirmation: boolean;
     disableSpritePack: boolean;
     disableUIEffects: boolean;
     disableUIOpacity: boolean;
@@ -91,7 +92,6 @@ export interface IOptions {
     windowMode: boolean;
     zoomLevel: number;
     zoomSmoothing: boolean;
-    disableQuitConfirmation: boolean;
 }
 export declare enum DropLocation {
     Facing = 0,

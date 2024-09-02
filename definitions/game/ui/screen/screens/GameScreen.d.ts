@@ -44,6 +44,13 @@ import InteractionManager from "@wayward/game/ui/screen/screens/game/util/moveme
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type Stream from "@wayward/goodstream";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export declare enum GameScreenClasses {
+    PauseIcon = "pause-icon",
+    PauseIcon_Paused = "pause-icon--paused",
+    PauseIcon_Unpausable = "pause-icon--unpausable",
+    PauseIcon_Visible = "pause-icon--visible",
+    PauseIcon_Overlay = "pause-icon--overlay"
+}
 export type IDialogStates = {
     [key in `${DialogId}` | `${DialogId},${string}`]: boolean;
 };
@@ -75,6 +82,7 @@ export default class GameScreen extends Screen {
     private readonly pausedPopupOverlay;
     private readonly nightPopupOverlay;
     private readonly buttonRespawn;
+    private readonly buttonPause;
     constructor();
     get isTwoColumn(): boolean;
     private get gameCanvasComponent();
@@ -183,6 +191,9 @@ export default class GameScreen extends Screen {
      * Returns the first unused `Quadrant`, or `Quadrant.None` if there are none.
      */
     private getUnusedQuadrant;
+    protected onObscureOrReveal(): void;
     private updatePauseIcon;
-    private get canUnpause();
+    private get canSelfUnpause();
+    private get isRelevantlyPaused();
+    private get couldBeRelevantlyPaused();
 }

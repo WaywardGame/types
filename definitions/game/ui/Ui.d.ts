@@ -97,6 +97,7 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
      * @param save Whether or not to save the new scale into options. Defaults to true.
      */
     setDialogOpacity(opacity?: number, save?: boolean): void;
+    private stylesheetIndex;
     addStylesheet(path: string): void;
     removeStylesheet(path: string): void;
     private getStylesheet;

@@ -35,6 +35,9 @@ export declare enum InfoClass {
     Description = "info-provider-description",
     List = "info-provider-list",
     ListItem = "info-provider-list-item",
-    MultiTextParagraph = "info-provider-multi-text-paragraph"
+    MultiTextParagraph = "info-provider-multi-text-paragraph",
+    DisplayRoot = "display-root",
+    DisplayLevelExtra = "display-level-extra",
+    DisplayLevelVerbose = "display-level-verbose"
 }
 export {};

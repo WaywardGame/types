@@ -81,6 +81,7 @@ export default class ContainerBucket extends Component {
     protected makeTopDialog(dialog: Dialog, order: number): void;
     protected onDialogMoveOrResize(dialog: Dialog): void;
     protected onContainerUpdateOrder(manager: ItemManager, container: IContainer): void;
+    protected onRooted(): void;
     protected onMouseEnter(): void;
     protected onMouseLeave(): void;
     private updateDialogActive;

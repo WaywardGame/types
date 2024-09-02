@@ -67,7 +67,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     private tooltipWide?;
     private reference?;
     private referenceContext?;
-    private referenceForced?;
+    private forceInclude?;
     private classes?;
     constructor(dictionary: Dictionary | string, entry: number | string, index?: "random" | number);
     constructor(translationId: string);
@@ -132,7 +132,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     private getCustomInterpolatorSegments;
     serializeObject(): ISerializedTranslation;
     serialize(depth?: number): ISerializedTranslation;
-    static serializeTranslationArg(arg: any, depth?: number, maxSerializationDepth?: number): ISerializedTranslation | undefined;
+    static serializeTranslationArg(arg: any, depth?: number, maxSerializationDepth?: number): TranslationArg | undefined;
     private canCache;
     private getCachedTranslation;
     /**

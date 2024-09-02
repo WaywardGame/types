@@ -22,6 +22,7 @@ import { GlobalMouseInfo } from "@wayward/game/ui/input/InputManager";
 import type { IContainerSortInfo } from "@wayward/game/ui/old/IOldUi";
 import { CraftingSort, OldUiDialogId } from "@wayward/game/ui/old/IOldUi";
 import BaseScreen from "@wayward/game/ui/old/screens/BaseScreen";
+import type ScreenManager from "@wayward/game/ui/screen/ScreenManager";
 export type DialogIndexStrings = "inventory" | "crafting-tabs";
 export type DialogIndex = DialogIndexStrings | Reference<ReferenceType.Item | ReferenceType.Doodad | ReferenceType.NPC>;
 export type DereferencedDialogIndex = DialogIndexStrings | number;
@@ -79,6 +80,7 @@ export default class InGameScreen extends BaseScreen {
     private derefenceDialogIndex;
     setupDialog(dialogId: OldUiDialogId, containerReference?: ContainerReference): JQueryUI.DialogOptions;
     blurInputs(): void;
+    protected onScreenStateChange(screens: ScreenManager): void;
     toggleDialog(dialog: JQuery): boolean;
     openDialog(dialog: JQuery): boolean;
     onOpenDialog(dialog: JQuery): void;

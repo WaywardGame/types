@@ -67,6 +67,8 @@ declare global {
          * @returns The new array length
          */
         insertSorted(value: T, ...sorters: SortingFunction.List<T>): number;
+        indexOfOrElse(value: T): number | undefined;
+        findIndexOrElse(predicate: (value: T) => any): number | undefined;
     }
 }
 export default function (): void;

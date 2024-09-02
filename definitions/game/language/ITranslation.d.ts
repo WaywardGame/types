@@ -38,7 +38,7 @@ export interface ISerializedTranslation {
     reformatters?: Reformatter[];
     reference?: Reference;
     referenceContext?: InfoProviderContext;
-    referenceForced?: true;
+    forceInclude?: true;
     tooltip?: ISerializedTranslation | IStringSection[];
     tooltipWide?: true;
     interpolator?: ISerializedInterpolator;

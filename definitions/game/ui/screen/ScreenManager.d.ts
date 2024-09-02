@@ -14,6 +14,11 @@ import Screen from "@wayward/game/ui/screen/Screen";
 import type { ScreenById } from "@wayward/game/ui/screen/ScreenMap";
 import Stream from "@wayward/goodstream/Stream";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
+export declare enum ScreenClasses {
+    Main = "screen",
+    _Top = "screen--top",
+    _Obscured = "screen--obscured"
+}
 export interface IScreenManagerEvents {
     init(screen: Screen): any;
     show(screen: Screen): any;
@@ -68,6 +73,7 @@ export default class ScreenManager extends EventEmitter.Host<IScreenManagerEvent
      * Returns if the given screen id is a currently visible screen (either the main screen or the overlay screen).
      */
     isVisible(screenId: ScreenId): boolean;
+    hasOverlay(): boolean;
     /**
      * Shows a screen
      * @param screenId The id of the screen to show

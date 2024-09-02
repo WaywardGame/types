@@ -25,6 +25,10 @@ interface IScreenEvents extends Events<Component> {
     showDialog(dialog: Dialog): any;
     showContextMenu(contextMenu: ContextMenu): any;
     hideContextMenu(contextMenu: ContextMenu): any;
+    /** Emitted when this screen is obscured by another */
+    obscure(): any;
+    /** Emitted when this screen is no longer obscured */
+    reveal(): any;
 }
 export default abstract class Screen extends Component {
     readonly type: ScreenId;
@@ -38,6 +42,7 @@ export default abstract class Screen extends Component {
     dialogs: DialogManager;
     visibleDialogs: IDialogStates;
     constructor(type: ScreenId);
+    get isObscured(): boolean;
     remove(): this;
     getBackground(): Background;
     setBackground(background: Background): this;

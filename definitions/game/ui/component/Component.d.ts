@@ -97,6 +97,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * Alias of `.element.addEventListener`, except it returns `this` instead and prevents memory leaks
      */
     addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): this;
+    addEventListener(type: string, listener: (this: HTMLElement, ev: Event) => any, options?: boolean | AddEventListenerOptions): this;
     removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any): this;
     getAs<C extends Component>(cls: AnyClass<C>): C | undefined;
     matches(selector: string): boolean;
@@ -161,6 +162,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      * @param visible The new visiblity of this element.
      */
     toggle(visible?: boolean, trustInternalState?: boolean): this;
+    setInert(inert?: boolean): this;
     /**
      * Returns this component's parent component, if it exists.
      */

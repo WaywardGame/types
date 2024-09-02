@@ -50,8 +50,9 @@ export default class ApplicationInteractions {
     clickJoinServer(): Promise<void>;
     clickDailyChallenge(): Promise<void>;
     clickBack(timeout?: number): Promise<void>;
-    clickButton(name: string, options?: Partial<{
+    clickButton(buttonText: string, options?: Partial<{
         force: boolean;
+        selector: string;
         clickOnce: boolean;
         timeout: number;
     }>): Promise<void>;
