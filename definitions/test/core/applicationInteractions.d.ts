@@ -55,6 +55,7 @@ export default class ApplicationInteractions {
         selector: string;
         clickOnce: boolean;
         timeout: number;
+        logFailure: boolean;
     }>): Promise<void>;
     clickYesIfVisible(): Promise<boolean>;
     clickButtonIfVisible(name: string): Promise<boolean>;
@@ -89,13 +90,14 @@ export default class ApplicationInteractions {
     waitUntilPauseMenuIsShown(): Promise<void>;
     waitUntilGameIsLoaded(options?: Partial<IWaitUntilGameLoadedOptions>): Promise<void>;
     isTitleScreenVisible(): Promise<WebdriverIO.Element[] | undefined>;
-    isButtonVisible(text: string): Promise<WebdriverIO.Element[] | undefined>;
+    isButtonVisible(text: string, logNotVisible?: boolean): Promise<WebdriverIO.Element[] | undefined>;
     isOverlayVisible(): Promise<WebdriverIO.Element[] | undefined>;
     waitUntilTitleScreenIsVisible(): Promise<void>;
     waitUntilGameEndMenuIsVisible(): Promise<void>;
     waitForVisibleButtonThenClick(name: string, options?: Partial<{
         clickOnce: boolean;
         timeout: number;
+        logFailure: boolean;
     }>): Promise<void>;
     increaseStat(stat: Stat, value: number): Promise<void>;
     randomInput(count: number): Promise<void>;

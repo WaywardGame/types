@@ -15,6 +15,8 @@ import type ItemManager from "@wayward/game/game/item/ItemManager";
 import Button from "@wayward/game/ui/component/Button";
 import { CheckButton } from "@wayward/game/ui/component/CheckButton";
 import Component from "@wayward/game/ui/component/Component";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import { GlobalMouseInfo } from "@wayward/game/ui/input/InputManager";
 import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
 import DialogSortFilter from "@wayward/game/ui/screen/screens/game/component/DialogSortFilter";
 import type ItemComponent from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
@@ -22,8 +24,9 @@ import ContainerBucketItemList from "@wayward/game/ui/screen/screens/game/compon
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export declare enum ContainerBucketClasses {
-    _ShowQuickMoveTargetButtons = "--show-container-bucket-quick-move-target-buttons",
-    _ShowQuickMoveTarget = "--show-container-bucket-quick-move-target",
+    __ShowQuickMoveTargetButtons = "--show-container-bucket-quick-move-target-buttons",
+    __ShowQuickMoveTarget_HoveredAction = "--show-container-bucket-quick-move-target--hovered-action",
+    __ShowQuickMoveTarget_BindableModifiers = "--show-container-bucket-quick-move-target--bindable-modifiers",
     Main = "container-bucket",
     TabButton = "container-bucket-tab-button",
     TabButton_PrefersRight = "container-bucket-tab-button--prefers-right",
@@ -80,6 +83,10 @@ export default class ContainerBucket extends Component {
     setContainer(container?: IContainer): this;
     protected makeTopDialog(dialog: Dialog, order: number): void;
     protected onDialogMoveOrResize(dialog: Dialog): void;
+    private currentModifiersDown;
+    protected onQuickMoveModifiersDown(api: IBindHandlerApi): boolean;
+    protected onUpdateMouseTarget(mouse: GlobalMouseInfo): boolean;
+    protected onQuickMoveModifiersUp(api: IBindHandlerApi): void;
     protected onContainerUpdateOrder(manager: ItemManager, container: IContainer): void;
     protected onRooted(): void;
     protected onMouseEnter(): void;

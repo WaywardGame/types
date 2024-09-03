@@ -35,5 +35,6 @@ declare namespace Bindings {
     function translate(bindable?: Bindable, noBindings?: TranslationImpl | null, simplify?: true, contextless?: true): TranslationImpl | undefined;
     function markCacheInvalid(updateBindableManagers?: boolean): void;
     function getBoundTo(binding: Binding): Set<Bindable>;
+    function getBoundToByModifiers(input: IInput): Set<Bindable>;
 }
 export default Bindings;

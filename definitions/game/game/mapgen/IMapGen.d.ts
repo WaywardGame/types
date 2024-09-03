@@ -16,6 +16,7 @@ import type { Load, MultiplayerLoadingDescription } from "@wayward/game/game/met
 import type { ITemplate, TileTemplateType } from "@wayward/game/game/tile/ITerrain";
 import type Version from "@wayward/game/utilities/Version";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { WorldZ } from "@wayward/utilities/game/WorldZ";
 import type { Random } from "@wayward/utilities/random/Random";
 export type MapGenVersions<T> = Descriptions<Version.String, T>;
 export interface IMapGenGenerateWorldOptions {
@@ -80,10 +81,12 @@ export interface IMapGenGenerateOutput {
     caveSpawns: CaveSpawns;
     waterSpawns: WaterSpawns;
     templateSpawns: TemplateSpawns;
+    gemSpawns?: GemSpawns;
 }
 export type CaveSpawns = Array<[number, number]>;
 export type WaterSpawns = Array<[number, number, number]>;
 export type TemplateSpawn = [TileTemplateType | ITemplate, number, number, number, MapGenHelpers.ITemplateOptions?];
 export type TemplateSpawns = TemplateSpawn[];
+export type GemSpawns = OptionalDescriptions<WorldZ, number>;
 export declare const tileTypeDoodadOffset = 256;
 export default IMapGen;

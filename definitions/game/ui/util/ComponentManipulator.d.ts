@@ -15,7 +15,7 @@ export type UntilHandler<T, U extends Until<T>> = {
         end: U[key];
     };
 };
-type EmptyIfUndefined<T> = T extends undefined ? {} : T;
+type EmptyIfUndefined<T> = T extends undefined ? Empty : T;
 export declare abstract class Manipulator<T, U extends Until<T> | undefined = undefined> {
     protected readonly element: () => HTMLElement;
     protected readonly host: T;

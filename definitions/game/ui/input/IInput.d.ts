@@ -76,6 +76,10 @@ export declare namespace IInput {
     function equals(inputA: IInput, inputB: IInput): boolean;
     function modifiersEqual(inputA: IInput, modifiersB: Set<Modifier>): boolean;
     function getPrecision(input: IInput): number;
+    /**
+     * Given an input with modifiers
+     */
+    function getModifiersInputs(input: IInput): IInput[];
     function hash(input: IInput, resolveModifiers?: boolean): string;
     interface IModifierResolvedHash {
         hash: string;

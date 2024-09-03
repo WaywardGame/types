@@ -27,9 +27,17 @@ export interface IWaywardPreloadLoader {
     installPath?: string;
     getObject?: () => IWaywardPreload;
 }
+export interface IWaywardTitle {
+    isSimplified?: boolean;
+    includeBuild?: boolean;
+    isLauncher?: boolean;
+    isDedicatedServer?: boolean;
+    testAppId?: string;
+    testTitleId?: string;
+}
 export interface IWaywardTitleBar {
     customTitleBar: boolean;
-    title: string;
+    title: IWaywardTitle;
     platform: string;
     isMaximized: boolean;
     electron: IElectron;

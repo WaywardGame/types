@@ -11,8 +11,7 @@
 		"clean": "rimraf ./definitions ./*.tsbuildinfo"
 	},
 	"dependencies": {
-		"@types/fs-extra": "^9.0.13",
-		"@types/node": "22.4.1",
+		"@types/node": "20.16.3",
 		"@wayward/goodstream": "0.10.0"
 	},
 	"devDependencies": {

@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import * as fs from "fs-extra";
+import * as fs from "fs";
 import type { IFileSystem } from "../../fileSystem";
 export declare class SharedFileSystemIPCHandler implements IFileSystem {
     private readonly shell;
@@ -29,7 +29,6 @@ export declare class SharedFileSystemIPCHandler implements IFileSystem {
     appendLogFile(message: string): Promise<void>;
     closeLogFile(): Promise<void>;
     copy(source: string, destination: string, dereference?: boolean, ignoredDirectories?: string[]): Promise<void>;
-    emptyDir(destination: string): Promise<void>;
     stat(path: string): Promise<{
         atime: Date;
         mtime: Date;
@@ -40,13 +39,13 @@ export declare class SharedFileSystemIPCHandler implements IFileSystem {
         isSymbolicLink: boolean;
     }>;
     createWriteStream(path: string, opt: any): Promise<fs.WriteStream>;
-    mkdir(path: string, opt: any): Promise<void>;
+    mkdir(path: string, opt?: {
+        recursive: boolean;
+    }): Promise<void>;
     pathExists(path: string): Promise<boolean>;
     readdir(path: string): Promise<string[]>;
     readFile(path: string, encoding: "utf8" | undefined): Promise<any>;
     remove(path: string): Promise<void>;
-    rmdir(path: string): Promise<void>;
-    unlink(path: string): Promise<void>;
     writeFile(path: string, data: any, opt: fs.WriteFileOptions): Promise<void>;
     private ensurePathSafety;
 }

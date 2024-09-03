@@ -175,7 +175,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     addSyncCheckWithSeed(island: Island, syncCheck: MultiplayerSyncCheck, ...messages: any[]): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addAfterSyncChecks(packet: IPacket): void;
-    sendChatMessage(sender: Player, message: string): void;
+    sendChatMessage(sender: Player, message: string): Promise<void>;
     private addDefaultSyncChecks;
     /**
      * Returns sync check hashes
