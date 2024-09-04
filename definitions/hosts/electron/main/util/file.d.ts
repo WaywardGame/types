@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import * as chalk from "ansicolor";
-export declare function isDirectory(directory: string): boolean;
-export declare function readJsonSync(path: string): unknown;
+export declare function isDirectory(directory: string): Promise<boolean>;
+export declare function readJson(path: string): Promise<unknown>;
 export declare class TemplateWriter {
     private files;
     constructor();
@@ -29,5 +29,5 @@ export declare class TemplateWriter {
      */
     updateJSON(file: string | false | 0 | undefined | null, contents: any, report: string | undefined | false): this;
     message(file: string, message: string, color?: keyof typeof chalk): string;
-    create(): [boolean, string[] | any];
+    create(): Promise<[boolean, string[] | any]>;
 }

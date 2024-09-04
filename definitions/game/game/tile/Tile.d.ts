@@ -488,4 +488,5 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     isTile(): this is Tile;
     isEntity(): this is Entity;
     isContainer(): this is IUncastableContainer;
+    isTileWithinSquareRadiusOfLitLighthouse(radius?: number): boolean;
 }
