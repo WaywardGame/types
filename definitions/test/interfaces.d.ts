@@ -10,11 +10,13 @@
  */
 import type { DoodadType, GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import type { Quality } from "@wayward/game/game/IObject";
 import type { INewIslandOverrides } from "@wayward/game/game/island/IIsland";
 import type { ContainerSort, ItemType } from "@wayward/game/game/item/IItem";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { GameMode } from "@wayward/game/game/options/IGameOptions";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type { IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
 import type { SortDirection } from "@wayward/game/save/ISaveManager";
 import type { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
@@ -73,12 +75,29 @@ export interface ITestSetup {
         }>;
     };
     world?: {
+        tiles?: Array<{
+            type: TerrainType;
+            x?: number;
+            y?: number;
+            z?: number;
+        }>;
         doodads?: Array<{
             type: DoodadType;
             growingStage?: GrowingStage;
-            x: number;
-            y: number;
+            x?: number;
+            y?: number;
+            z?: number;
             inventory?: ITestSetupItemContainer;
+        }>;
+        creatures?: Array<{
+            type: CreatureType;
+            x?: number;
+            y?: number;
+            z?: number;
+            tamed?: true;
+            /** Defaults to a massive number */
+            happiness?: number;
+            aberrant?: true;
         }>;
     };
     player?: {
@@ -97,3 +116,4 @@ export interface ITestSetupItem {
     type: ItemType;
     quality?: Quality;
 }
+export declare const APP_CONTEXT_KEY = "APP";

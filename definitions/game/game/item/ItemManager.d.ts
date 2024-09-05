@@ -33,7 +33,7 @@ import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IRGB } from "@wayward/utilities/Color";
 import type { ISorter } from "@wayward/utilities/collection/sort/Sorter";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-import { WorldZ } from "@wayward/utilities/game/WorldZ";
+import WorldZ from "@wayward/utilities/game/WorldZ";
 import type { Random } from "@wayward/utilities/random/Random";
 export interface IItemManagerEvents extends Events<EntityManager<Item>> {
     /**

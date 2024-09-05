@@ -12,6 +12,8 @@ import { Quality } from "@wayward/game/game/IObject";
 import type { IUsableActionPossibleUsing } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
 import type Item from "@wayward/game/game/item/Item";
+import { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { MilestoneManager } from "@wayward/game/game/milestones/MilestoneManager";
 import Button from "@wayward/game/ui/component/Button";
 import { CheckButton } from "@wayward/game/ui/component/CheckButton";
 import ChoiceList, { Choice } from "@wayward/game/ui/component/ChoiceList";
@@ -89,7 +91,7 @@ export default class ActionSlotConfigurationColumn extends Component {
     private refresh;
     private setMode;
     private ensureModeValidity;
-    protected onUpdateMilestone(): void;
+    protected onUpdateMilestone(manager: MilestoneManager, milestone: Milestone): void;
     private onChangeItemType;
     private onChangeQualities;
     private onChangeItem;

@@ -12,7 +12,7 @@ import type { IColorGrid, IWorldLayerCPP } from "@wayward/cplusplus/index";
 import type Island from "@wayward/game/game/island/Island";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
-import { WorldZ } from "@wayward/utilities/game/WorldZ";
+import WorldZ from "@wayward/utilities/game/WorldZ";
 import type { IByteGrid } from "@wayward/game/renderer/fieldOfView/IByteGrid";
 import type { ITileUpdate, onDoodadUpdateDelegate, onTileUpdateDelegate, TerrainData } from "@wayward/game/renderer/world/IWorldLayer";
 import { TerrainMask } from "@wayward/game/renderer/world/IWorldLayer";

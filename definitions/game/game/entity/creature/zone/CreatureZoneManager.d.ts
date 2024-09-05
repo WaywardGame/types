@@ -15,7 +15,7 @@ import type Human from "@wayward/game/game/entity/Human";
 import type Island from "@wayward/game/game/island/Island";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-import { WorldZ } from "@wayward/utilities/game/WorldZ";
+import WorldZ from "@wayward/utilities/game/WorldZ";
 export interface ICreatureZoneManagerEvents {
     initialize(): any;
     load(): any;

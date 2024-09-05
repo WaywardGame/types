@@ -8,9 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-export declare enum WorldZ {
+declare enum WorldZ {
     Min = -1,
     Max = -1,
     Cave = 0,
     Surface = 1
 }
+export default WorldZ;

@@ -74,7 +74,9 @@ export declare class ApplicationManager {
     randomInput(count: number): Promise<void>;
     moveToTowardsIsland(app: Application, direction: Direction.Cardinal, recoverStats?: boolean): Promise<void>;
     recoverStats(app: Application): Promise<void>;
-    moveAndVerifyTicks(app: Application, direction: Direction.Cardinal): Promise<void>;
+    idle(app: Application, steps?: number): Promise<void>;
+    moveInDirection(app: Application, direction: Direction.Cardinal, steps?: number): Promise<void>;
+    executeAndWaitForNextTick(app: Application, executor: () => Promise<void>): Promise<void>;
     waitForClientConsistency(): Promise<void>;
     createInteraction(application: Application): ApplicationInteraction;
     sailToCivilization(winnerApp: Application): Promise<void>;

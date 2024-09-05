@@ -94,7 +94,7 @@ import { Website } from "@wayward/game/ui/screen/screens/menu/menus/main/compone
 import { ModSort } from "@wayward/game/ui/screen/screens/menu/menus/mods/IModsMenu";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import { ChangeType } from "@wayward/game/utilities/trello/ITrello";
-import { WorldZ } from "@wayward/utilities/game/WorldZ";
+import WorldZ from "@wayward/utilities/game/WorldZ";
 export type Enum = Record<string, number> & Record<number, string>;
 export declare const SYMBOL_ANY_DICTIONARY: unique symbol;
 declare const dictionaryMap: {

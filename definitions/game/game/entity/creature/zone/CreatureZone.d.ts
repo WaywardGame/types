@@ -18,7 +18,7 @@ import type Island from "@wayward/game/game/island/Island";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type Rectangle from "@wayward/game/utilities/math/shapes/Rectangle";
-import { WorldZ } from "@wayward/utilities/game/WorldZ";
+import WorldZ from "@wayward/utilities/game/WorldZ";
 import type { Random } from "@wayward/utilities/random/Random";
 export declare const DEFAULT_ATTEMPTED_CREATURE_SPAWNS = 10;
 export declare class CreatureZone {

@@ -69,7 +69,7 @@ import type { IMenuBarButtonDescription, MenuBarButtonType } from "@wayward/game
 import type { IStatDisplayDescription } from "@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription";
 import type { HelpArticle, IHelpArticle } from "@wayward/game/ui/screen/screens/menu/menus/help/IHelpArticle";
 import type { ModOptionSectionInitializer } from "@wayward/game/ui/screen/screens/menu/menus/options/TabMods";
-import type { WorldZ } from "@wayward/utilities/game/WorldZ";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 export interface IModdable {
     /**
      * Do not provide or modify this value, only reference it. This is set by the modding system during the process of registration.

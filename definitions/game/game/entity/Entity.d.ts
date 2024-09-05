@@ -38,7 +38,7 @@ import type { INotificationLocation, ItemNotifierType, MarkerIconType, StatNotif
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-import type { WorldZ } from "@wayward/utilities/game/WorldZ";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 export default abstract class Entity<DescriptionType = unknown, TypeType extends number = number, EntityReferenceType extends EntityReferenceTypes = EntityReferenceTypes, TagType = unknown> extends EventEmitter.Host<IEntityEvents> implements IReferenceable, ITemperatureSource, INotificationLocation, IVector4, ICastable {
     abstract readonly entityType: EntityType;
     abstract readonly tileUpdateType: TileUpdateType;

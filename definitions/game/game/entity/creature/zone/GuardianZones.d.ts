@@ -10,7 +10,7 @@
  */
 import { BiomeType } from "@wayward/game/game/biome/IBiome";
 import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
-import { WorldZ } from "@wayward/utilities/game/WorldZ";
+import WorldZ from "@wayward/utilities/game/WorldZ";
 export type IBiomeGuardianZones = PartialRecord<`tier${number}`, IBiomeGuardianZoneTier>;
 export type IBiomeGuardianZoneTier = PartialRecord<WorldZ, CreatureType[]>;
 export declare const guardianZoneDescriptions: OptionalDescriptions<BiomeType, IBiomeGuardianZones>;

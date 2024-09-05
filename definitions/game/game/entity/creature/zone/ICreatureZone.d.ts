@@ -11,7 +11,7 @@
 import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import type { PartOfDay } from "@wayward/game/game/time/ITimeManager";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
-import type { WorldZ } from "@wayward/utilities/game/WorldZ";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 export declare namespace ZoneId {
     function make(x: number, y: number, axisCount: number): number;
     function resolve(id: number, axisCount: number): IVector2;

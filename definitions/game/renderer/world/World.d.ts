@@ -12,7 +12,7 @@ import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import { TileUpdateType } from "@wayward/game/game/IGame";
 import type Island from "@wayward/game/game/island/Island";
 import type Tile from "@wayward/game/game/tile/Tile";
-import { WorldZ } from "@wayward/utilities/game/WorldZ";
+import WorldZ from "@wayward/utilities/game/WorldZ";
 import { WorldLayer } from "@wayward/game/renderer/world/WorldLayer";
 import { type ISerializable, type ISerializer } from "@wayward/game/save/serializer/ISerializer";
 export interface IWorldEvents {

@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-import { WorldZ } from "@wayward/utilities/game/WorldZ";
+import WorldZ from "@wayward/utilities/game/WorldZ";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type { DoodadType } from "@wayward/game/game/doodad/IDoodad";
 import type EntityMovable from "@wayward/game/game/entity/EntityMovable";

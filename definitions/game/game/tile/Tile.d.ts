@@ -40,7 +40,7 @@ import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import type { IRGB } from "@wayward/utilities/Color";
-import { WorldZ } from "@wayward/utilities/game/WorldZ";
+import WorldZ from "@wayward/utilities/game/WorldZ";
 export interface ICanSailAwayResult {
     canSailAway: boolean;
     message?: Message;
@@ -463,6 +463,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Returns the penalty of the given tile (just how much we *don't* want to step there)
      */
     private getTilePenalty;
+    asType(type: TerrainType): Tile | undefined;
     get asCorpse(): undefined;
     get asCreature(): undefined;
     get asDoodad(): undefined;

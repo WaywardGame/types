@@ -20,7 +20,7 @@ import Tile from "@wayward/game/game/tile/Tile";
 import type { Article } from "@wayward/game/language/Translation";
 import Translation from "@wayward/game/language/Translation";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-import type { WorldZ } from "@wayward/utilities/game/WorldZ";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 export interface IDoodadManagerEvents extends Events<EntityManager<Doodad>> {
     /**
      * Called when a doodad is about to be spawned

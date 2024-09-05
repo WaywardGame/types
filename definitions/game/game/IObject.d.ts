@@ -13,7 +13,7 @@ import type { SkillType } from "@wayward/game/game/entity/IHuman";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-import type { WorldZ } from "@wayward/utilities/game/WorldZ";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 export interface IObject<T> {
     type: T;
     id: number;

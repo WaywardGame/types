@@ -72,7 +72,8 @@ export declare enum AiMaskType {
     Angered = 11,
     RecentlyAlerted = 12,
     WrongLayerForZone = 13,
-    RecentlySwappedLayers = 14
+    RecentlySwappedLayers = 14,
+    CanSwapLayersIfTamed = 15
 }
 export declare enum AiMaskOrder {
     NeutralIfScaredDisabled = 0,
@@ -89,7 +90,8 @@ export declare enum AiMaskOrder {
     Angered = 11,
     RecentlyAlerted = 12,
     WrongLayerForZone = 13,
-    RecentlySwappedLayers = 14
+    RecentlySwappedLayers = 14,
+    CanSwapLayersIfTamed = 15
 }
 export interface IAiMaskDescription {
     /**

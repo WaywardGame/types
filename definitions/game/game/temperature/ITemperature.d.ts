@@ -10,7 +10,7 @@
  */
 import type Island from "@wayward/game/game/island/Island";
 import type TimeManager from "@wayward/game/game/time/TimeManager";
-import type { WorldZ } from "@wayward/utilities/game/WorldZ";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 import type { IRange } from "@wayward/utilities/math/Range";
 export declare enum Temperature {
     Coldest = -100,

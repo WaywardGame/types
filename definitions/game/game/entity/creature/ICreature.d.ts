@@ -34,7 +34,7 @@ import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type { StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
 import type { IRGB } from "@wayward/utilities/Color";
-import type { WorldZ } from "@wayward/utilities/game/WorldZ";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 import type { IRange } from "@wayward/utilities/math/Range";
 export declare enum CreatureType {
     Slime = 0,

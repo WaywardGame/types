@@ -118,6 +118,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     lastReceivedRune?: Deity;
     lastGainedStat?: Stat;
     invocations?: PartialRecord<ItemType, number>;
+    lastUsedCaveEntrance?: IVector3;
     readonly movementIntent: IMovementIntent;
     walkToInProgress?: IWalkToPathInProgress;
     identifier: string;

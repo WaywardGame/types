@@ -51,7 +51,7 @@ export default class CreatureManager extends EntityManager<Creature, {
      * @param spawnTiles If set, this will overwrite the creature's description for which tiles it can spawn on
      * @param bypassCreatureLimit If set, the creature limit will be ignored and spawn the creature over the set limit
      */
-    spawn(type: CreatureType, tile: Tile, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: TileGroup, bypassCreatureLimit?: boolean): Creature | undefined;
+    spawn(type: CreatureType, tile: Tile, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: TileGroup, bypassCreatureLimit?: boolean, bypassAll?: boolean): Creature | undefined;
     spawnFromZone(tile: Tile, bypassCreatureLimit?: boolean, checkTerrainType?: boolean): Creature | undefined;
     createFake(type: CreatureType, aberrant: boolean, tile?: Tile, id?: number): Creature;
     exists(creature: Creature): boolean;

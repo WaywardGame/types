@@ -16,7 +16,7 @@ import type { Load, MultiplayerLoadingDescription } from "@wayward/game/game/met
 import type { ITemplate, TileTemplateType } from "@wayward/game/game/tile/ITerrain";
 import type Version from "@wayward/game/utilities/Version";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
-import type { WorldZ } from "@wayward/utilities/game/WorldZ";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 import type { Random } from "@wayward/utilities/random/Random";
 export type MapGenVersions<T> = Descriptions<Version.String, T>;
 export interface IMapGenGenerateWorldOptions {

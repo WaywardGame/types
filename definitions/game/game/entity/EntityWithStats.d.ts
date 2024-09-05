@@ -27,6 +27,7 @@ export interface IEntityWithStatsEvents extends IEntityMovableEvents, IStatEvent
      * @param reason The reason for the change
      */
     statusChange(status: StatusType, level: number, reason: StatusChangeReason, oldLevel: number): void;
+    refreshStatuses(): any;
 }
 /**
  * Entity class that includes stats/status system.
