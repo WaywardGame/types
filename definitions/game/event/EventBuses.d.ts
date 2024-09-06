@@ -38,6 +38,7 @@ import type TileEventManager from "@wayward/game/game/tile/TileEventManager";
 import type LanguageManager from "@wayward/game/language/LanguageManager";
 import type ModManager from "@wayward/game/mod/ModManager";
 import type Multiplayer from "@wayward/game/multiplayer/Multiplayer";
+import type { Renderer } from "@wayward/game/renderer/Renderer";
 import type { WorldRenderer } from "@wayward/game/renderer/world/WorldRenderer";
 import type SaveManager from "@wayward/game/save/SaveManager";
 import type Steamworks from "@wayward/game/steamworks/Steamworks";
@@ -94,7 +95,8 @@ export declare enum EventBus {
     UiMovementHandler = 40,
     UiPathingHandler = 41,
     UsableActions = 42,
-    WorldRenderer = 43
+    WorldRenderer = 43,
+    Renderer = 44
 }
 declare const eventBuses: {
     [EventBus.Actions](): ActionExecutor<any, any, any, any, any>;
@@ -141,6 +143,7 @@ declare const eventBuses: {
     [EventBus.UiPathingHandler](): PathingHandler;
     [EventBus.UsableActions](): UsableAction;
     [EventBus.WorldRenderer](): WorldRenderer;
+    [EventBus.Renderer](): Renderer;
 };
 export type EventBuses = typeof eventBuses;
 export declare const eventBusManager: EventBusManager<EventBus, {
@@ -188,6 +191,7 @@ export declare const eventBusManager: EventBusManager<EventBus, {
     41(): PathingHandler;
     42(): UsableAction;
     43(): WorldRenderer;
+    44(): Renderer;
 }>;
 /**
  * For backwards compat / ease of use

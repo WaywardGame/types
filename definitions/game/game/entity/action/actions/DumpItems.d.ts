@@ -13,8 +13,9 @@ import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type { IContainer } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
 export interface IDumpItemsCanUse extends IActionUsable {
     tileContainer: IContainer;
 }
-declare const _default: Action<[ActionArgument.Doodad], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDumpItemsCanUse, [Doodad]>;
+declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Doodad]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDumpItemsCanUse, [Doodad | Item]>;
 export default _default;

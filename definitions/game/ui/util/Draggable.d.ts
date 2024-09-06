@@ -26,7 +26,7 @@ export type IDraggableInputEvent = (MouseEvent & {
 } & {
     [KEY in Exclude<keyof TouchEvent, keyof IBindHandlerApi>]?: undefined;
 });
-export interface IDraggableEvents {
+export interface IDraggableEvents extends Events<Component> {
     moveStart(mouse: Vector2): false | void;
     move(offset: Vector2, mouse: Vector2): any;
     moveEnd(offset: Vector2, mouse: Vector2, bindable?: Bindable): any;
@@ -34,7 +34,7 @@ export interface IDraggableEvents {
 }
 export type WithDraggableEvents<EVENTS_OF> = Events<EVENTS_OF> & IDraggableEvents;
 export interface IDraggableComponent extends Component {
-    event: IEventEmitter<this, Events<Component> & IDraggableEvents>;
+    event: IEventEmitter<this, IDraggableEvents>;
 }
 export default class Draggable {
     static isDragging: boolean;

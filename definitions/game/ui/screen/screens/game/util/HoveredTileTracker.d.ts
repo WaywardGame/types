@@ -22,6 +22,7 @@ export default class HoveredTileTracker extends InteractionHandler {
     protected onMouseMove(mouse: GlobalMouseInfo): void;
     protected onDialogChangeState(): Promise<void>;
     protected onPlayerMove(): void;
+    protected onZoom(): void;
     private update;
     private getHoveredTile;
 }

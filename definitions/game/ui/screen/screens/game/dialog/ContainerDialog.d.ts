@@ -13,7 +13,7 @@ import type { IContainer } from "@wayward/game/game/item/IItem";
 import type { ITileContainer } from "@wayward/game/game/tile/ITerrain";
 import Tile from "@wayward/game/game/tile/Tile";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-import Component from "@wayward/game/ui/component/Component";
+import Text from "@wayward/game/ui/component/Text";
 import { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
 import ContainerBucket from "@wayward/game/ui/screen/screens/game/component/ContainerBucket";
 import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
@@ -30,7 +30,7 @@ export declare enum ContainerDialogClasses {
 export default class ContainerDialog extends Dialog {
     event: IEventEmitter<this, IContainerDialogEvents>;
     readonly bucket: ContainerBucket;
-    readonly weight: Component<HTMLElement>;
+    readonly weight: Text;
     constructor(id?: DialogId, subId?: string);
     setContainer(container: IContainer): this;
     protected resolveContainer(): (Tile & ITileContainer) | (Entity & IContainer) | undefined;

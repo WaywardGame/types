@@ -28,7 +28,9 @@ export declare enum StatusInspectionClasses {
     ColorContext = "inspection-type-status-color-context",
     _Instanced = "inspection-type-status--instanced",
     Title = "inspection-type-status-title",
-    Effects = "inspection-type-status-effects"
+    Effects = "inspection-type-status-effects",
+    LevelDescription = "inspection-type-status-level-description",
+    Cures = "inspection-type-status-cures"
 }
 export default class StatusInspection extends Inspection<StatusType> {
     static getAdjective(type: StatusType, status?: Status, threatGroup?: StatusThreatLevel): Translation;

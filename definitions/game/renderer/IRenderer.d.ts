@@ -38,6 +38,8 @@ export interface IRendererEvents {
      * @param zoomLevel The zoom level that will be used by default
      */
     getZoomLevel(zoomLevel: number): number | undefined;
+    /** Called when the zoom level changes. */
+    setZoom(zoomlevel: number): any;
     /**
      * Called when the renderer is initialized
      */

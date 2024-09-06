@@ -60,6 +60,7 @@ export declare const eventManager: EventManager<EventBus, {
     41(): import("../ui/screen/screens/game/util/movement/PathingHandler").default;
     42(): import("../game/entity/action/usable/UsableAction").default;
     43(): import("../renderer/world/WorldRenderer").WorldRenderer;
+    44(): import("../renderer/Renderer").Renderer;
 }>;
 /**
  * EventHandler that is typed with the games event buses

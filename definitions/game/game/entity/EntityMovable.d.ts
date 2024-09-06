@@ -104,6 +104,7 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
      * Regular entities don't have a direction so this will be the same as getTile()
      */
     get facingTile(): Tile;
+    facingTileOffset(offset?: number): Tile;
     get slippingData(): ISlippingData | undefined;
     canSeeObject(type: CanASeeBType, object: IRendererOrigin, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeeTile(type: CanASeeBType, tile: Tile, fieldOfView?: FieldOfView, customRadius?: number): boolean;

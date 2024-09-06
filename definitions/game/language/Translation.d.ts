@@ -202,7 +202,7 @@ declare namespace Translation {
     }
     export function upgrade(translation: ISerializedTranslation, id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: ITranslationUpgrader): Translation | ISerializedTranslation;
     export function upgradeTranslationArgument(argument: TranslationArg, id: string, dictionary: Dictionary, entry: number, upgrader?: ITranslationUpgrader): TranslationArg;
-    export function formula(base?: FVal, reformatter?: SupplierOr<Translation>): TranslationFormulaBuilder;
+    export function formula(base?: FVal, reformatter?: SupplierOr<Translation | undefined>): TranslationFormulaBuilder;
     type FVal = SupplierOr<number | IRange | TranslationFormulaBuilder>;
     class TranslationFormulaBuilder {
         private readonly components;
@@ -213,7 +213,7 @@ declare namespace Translation {
          */
         private get relevant();
         private skipParenthesis?;
-        constructor(base?: FVal, reformatter?: SupplierOr<Translation>);
+        constructor(base?: FVal, reformatter?: SupplierOr<Translation | undefined>);
         noParenthesis(): this;
         translate(simple?: boolean): Translation;
         private parenthesize;
@@ -223,13 +223,14 @@ declare namespace Translation {
         private resolveComponentValue;
         private getHighestValueComponent;
         private getCombinedComponent;
-        combined(value?: FVal, reformatter?: SupplierOr<Translation>): this;
-        base(value: FVal, reformatter?: SupplierOr<Translation>): this;
-        add(value?: FVal, reformatter?: SupplierOr<Translation>, alreadyIncluded?: true): this;
-        mult(value: FVal, reformatter?: SupplierOr<Translation>, alreadyIncluded?: true): this;
-        quality(quality?: IHasQuality | SupplierOr<Quality | undefined>, value?: FVal, reformatter?: SupplierOr<Translation>, alreadyIncluded?: true): this;
-        skill(skill?: SkillType, value?: FVal, reformatter?: SupplierOr<Translation>, alreadyIncluded?: true): this;
-        magic(magic?: MagicalPropertyIdentity, magical?: IHasMagic, value?: FVal, reformatter?: SupplierOr<Translation>, alreadyIncluded?: true): this;
+        combined(value?: FVal, reformatter?: SupplierOr<Translation | undefined>): this;
+        base(value: FVal, reformatter?: SupplierOr<Translation | undefined>): this;
+        add(value?: FVal, reformatter?: SupplierOr<Translation | undefined>, alreadyIncluded?: true): this;
+        mult(value: FVal, reformatter?: SupplierOr<Translation | undefined>, alreadyIncluded?: true): this;
+        outOf(value: FVal): TranslationImpl;
+        quality(quality?: IHasQuality | SupplierOr<Quality | undefined>, value?: FVal, reformatter?: SupplierOr<Translation | undefined>, alreadyIncluded?: true): this;
+        skill(skill?: SkillType, value?: FVal, reformatter?: SupplierOr<Translation | undefined>, alreadyIncluded?: true): this;
+        magic(magic?: MagicalPropertyIdentity, magical?: IHasMagic, value?: FVal, reformatter?: SupplierOr<Translation | undefined>, alreadyIncluded?: true): this;
         private addComponent;
     }
     export type RefreshEvents = Map<GameEmitterOrBus, Map<string, Set<AnyFunction<boolean> | undefined>>>;

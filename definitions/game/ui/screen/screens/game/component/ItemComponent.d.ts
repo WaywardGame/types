@@ -84,6 +84,7 @@ export declare enum ItemClasses {
     Slot = "item-component-slot",
     Dragging = "item-component-dragging",
     DragPreview = "item-component-drag-preview",
+    DragPreview_Small = "item-component-drag-preview--small",
     StatBar = "item-component-stat-bar",
     StatBars = "item-component-stat-bars-wrapper",
     DecayBar = "item-component-stat-bar-decay",
@@ -243,7 +244,8 @@ export default class ItemComponent extends Component implements ItemSlot {
     private registeredItemHighlights;
     registerItemHighlights(): void;
     private static dragPreviewSource?;
-    private static dragPreview?;
+    private static _dragPreview?;
+    static get dragPreview(): ItemComponent | undefined;
     private static getDragPreview;
     private savedPosition?;
     protected onMoveStart(_: any, mouse: Vector2): false | void;

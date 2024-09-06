@@ -11,7 +11,7 @@
 import type { Music, SfxType } from "@wayward/game/audio/IAudio";
 import type { Command, CommandCallback } from "@wayward/game/command/ICommand";
 import type { BiomeType, IBiomeDescription } from "@wayward/game/game/biome/IBiome";
-import type { DoodadTag, DoodadType, DoodadTypeGroup, IDoodadDescription, IDoodadGroupDescription } from "@wayward/game/game/doodad/IDoodad";
+import type { DoodadTag, DoodadType, DoodadTypeExtra, DoodadTypeGroup, IDoodadDescription, IDoodadGroupDescription } from "@wayward/game/game/doodad/IDoodad";
 import type { EntityTag } from "@wayward/game/game/entity/IEntity";
 import type { EquipType, InsulationWeight, SkillType } from "@wayward/game/game/entity/IHuman";
 import type { Stat } from "@wayward/game/game/entity/IStats";
@@ -36,7 +36,7 @@ import type { IStatusDescription, StatusType } from "@wayward/game/game/entity/s
 import type { StatusClass } from "@wayward/game/game/entity/status/Status";
 import type { InspectType } from "@wayward/game/game/inspection/IInspection";
 import type { InspectionClass } from "@wayward/game/game/inspection/InspectionTypeMap";
-import type { IItemDescription, IItemGroupDescription, ItemTag, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
+import type { IItemDescription, IItemGroupDescription, ItemTag, ItemType, ItemTypeExtra, ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type { IMagicalPropertyDescription, MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
 import type { ILoadingDescription } from "@wayward/game/game/meta/Loading";
 import type { IPromptDescriptionBase, Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
@@ -444,7 +444,7 @@ export interface IOverrideRegistration<OBJECT extends object, PROPERTY extends k
 export interface IInheritsRegistrationTime {
     useRegistrationTime: ModRegistrationType;
 }
-export type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IDoodadTagRegistration | IEntityTagRegistration | IEquipTypeRegistration | IGenericEnumRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | IItemTagRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IOverrideRegistration<any, any> | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileGroupRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration;
+export type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IDoodadTagRegistration | IEntityTagRegistration | IEquipTypeRegistration | IGenericEnumRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | IItemTagRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IOverrideRegistration<any, any> | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileGroupRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration | IItemExtraRegistration | IDoodadExtraRegistration;
 export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare namespace Register {
     /**
@@ -738,6 +738,14 @@ declare namespace Register {
      * See — [Adding Magical Properties](https://github.com/WaywardGame/types/wiki/Adding-Magical-Properties)
      */
     function magicalProperty(name: string, description: IMagicalPropertyDescription): <K extends string | number | symbol, T extends Record<K, MagicalPropertyType>>(target: T, key: K) => void;
+    /**
+     * Registers an "extra"/displayable item type. **Not** a real item.
+     */
+    function itemExtra(name: string): <K extends string | number | symbol, T extends Record<K, ItemTypeExtra>>(target: T, key: K) => void;
+    /**
+     * Registers an "extra"/displayable doodad type. **Not** a real doodad.
+     */
+    function doodadExtra(name: string): <K extends string | number | symbol, T extends Record<K, DoodadTypeExtra>>(target: T, key: K) => void;
     /**
      * Registers an item tag.
      */

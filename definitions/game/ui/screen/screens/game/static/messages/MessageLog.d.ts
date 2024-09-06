@@ -13,11 +13,12 @@ import { SortDirection } from "@wayward/game/save/ISaveManager";
 import Button from "@wayward/game/ui/component/Button";
 import Component from "@wayward/game/ui/component/Component";
 import Text from "@wayward/game/ui/component/Text";
+import type Stream from "@wayward/goodstream/Stream";
 export declare const MESSAGE_LOG_LENGTH_MIN = 25;
 export declare const MESSAGE_LOG_LENGTH_EXPAND = 25;
 export declare const MESSAGE_LOG_LENGTH_MAX: number;
 export interface IMessageLogDescription {
-    getMessages(): IMessage[];
+    getMessages(): Stream<IMessage>;
     getDirection(): SortDirection;
     /**
      * Provide this method to filter the messages that appear in this message log.

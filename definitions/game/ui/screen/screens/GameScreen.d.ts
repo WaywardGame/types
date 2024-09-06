@@ -92,7 +92,8 @@ export default class GameScreen extends Screen {
     getQuadrantComponentInQuadrant(quadrant: Quadrant, includeHeldLocations: boolean, includePlaceholders?: false): QuadrantComponent | undefined;
     getQuadrantComponentInQuadrant(quadrant: Quadrant, includeHeldLocations: boolean, includePlaceholders?: boolean): QuadrantComponent | Placeholder | undefined;
     getQuadrantContainer(): Component;
-    isMouseWithin(): Component | undefined;
+    get isMouseWithin(): boolean;
+    get asMouseWithin(): this | undefined;
     mouseStartWasWithin(api: IBindHandlerApi): boolean | undefined;
     getContainerBucket(container?: IContainer): ContainerBucket | undefined;
     hasOpenContainerBucket(container?: IContainer): boolean;
