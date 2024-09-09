@@ -45,22 +45,22 @@ export declare const eventManager: EventManager<EventBus, {
     26(): import("../game/entity/player/PlayerManager").default;
     27(): import("../game/entity/player/Player").default;
     28(): import("../game/meta/prompt/Prompts").default.Events;
-    29(): import("../save/SaveManager").default;
-    30(): import("../ui/screen/ScreenManager").default;
-    31(): import("../steamworks/Steamworks").default;
-    32(): import("../game/tile/TileEventManager").default;
-    33(): import("../game/tile/TileEvent").default;
-    34(): typeof ui;
-    35(): import("../ui/screen/screens/game/static/ActionBar").default;
-    36(): import("../ui/screen/screens/game/util/movement/ActionMenuHandler").default;
-    37(): import("../ui/screen/screens/GameScreen").default;
-    38(): import("../ui/screen/screens/game/util/HoveredTileTracker").default;
-    39(): import("../ui/screen/screens/game/util/movement/InteractionManager").default;
-    40(): import("../ui/screen/screens/game/util/movement/MovementHandler").default;
-    41(): import("../ui/screen/screens/game/util/movement/PathingHandler").default;
-    42(): import("../game/entity/action/usable/UsableAction").default;
-    43(): import("../renderer/world/WorldRenderer").WorldRenderer;
-    44(): import("../renderer/Renderer").Renderer;
+    29(): import("../renderer/Renderer").Renderer;
+    30(): import("../save/SaveManager").default;
+    31(): import("../ui/screen/ScreenManager").default;
+    32(): import("../steamworks/Steamworks").default;
+    33(): import("../game/tile/TileEventManager").default;
+    34(): import("../game/tile/TileEvent").default;
+    35(): typeof ui;
+    36(): import("../ui/screen/screens/game/static/ActionBar").default;
+    37(): import("../ui/screen/screens/game/util/movement/ActionMenuHandler").default;
+    38(): import("../ui/screen/screens/GameScreen").default;
+    39(): import("../ui/screen/screens/game/util/HoveredTileTracker").default;
+    40(): import("../ui/screen/screens/game/util/movement/InteractionManager").default;
+    41(): import("../ui/screen/screens/game/util/movement/MovementHandler").default;
+    42(): import("../ui/screen/screens/game/util/movement/PathingHandler").default;
+    43(): import("../game/entity/action/usable/UsableAction").default;
+    44(): import("../renderer/world/WorldRenderer").WorldRenderer;
 }>;
 /**
  * EventHandler that is typed with the games event buses

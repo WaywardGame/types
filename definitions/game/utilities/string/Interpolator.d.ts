@@ -48,6 +48,8 @@ export declare namespace IStringSection {
     function isRawAndSimple(section: IStringSection): section is IStringRawSection;
     function isExtraneousWrapper(section: IStringSection): section is IStringWrapperSection;
     function get(content?: string | IStringSection | Iterable<IStringSection>): Iterable<IStringSection>;
+    function flattenToString(sections: IStringSection[]): string;
+    function inject(raw: IStringSection[], index: number, injection: string | IStringSection[]): void;
 }
 declare class Interpolator {
     private options;
@@ -62,7 +64,6 @@ declare class Interpolator {
     setRandom(random: Random): this;
     interpolate(str: string, ...args: any[]): IStringSection[];
     interpolateString(str: string, ...args: any[]): string;
-    private flattenToString;
     with(options: IInterpolationOptions): this;
     formatValue(value: unknown): string | Iterable<IStringSection>;
     private handleChar;

@@ -10,5 +10,8 @@
  */
 import type { ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
-declare const itemAffixes: Map<ItemType | ItemTypeExtra, string>;
-export default itemAffixes;
+declare const _default: {
+    affixesBeforeReformat: Map<ItemType | ItemTypeExtra, string>;
+    affixesAfterReformat: Map<ItemType | ItemTypeExtra, string>;
+};
+export default _default;

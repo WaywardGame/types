@@ -81,22 +81,22 @@ export declare enum EventBus {
     PlayerManager = 26,
     Players = 27,
     Prompt = 28,
-    SaveManager = 29,
-    ScreenManager = 30,
-    Steamworks = 31,
-    TileEventManager = 32,
-    TileEvents = 33,
-    Ui = 34,
-    UiActionBar = 35,
-    UiActionMenuHandler = 36,
-    UiGameScreen = 37,
-    UiHoveredTileTracker = 38,
-    UiInteractionManager = 39,
-    UiMovementHandler = 40,
-    UiPathingHandler = 41,
-    UsableActions = 42,
-    WorldRenderer = 43,
-    Renderer = 44
+    Renderer = 29,
+    SaveManager = 30,
+    ScreenManager = 31,
+    Steamworks = 32,
+    TileEventManager = 33,
+    TileEvents = 34,
+    Ui = 35,
+    UiActionBar = 36,
+    UiActionMenuHandler = 37,
+    UiGameScreen = 38,
+    UiHoveredTileTracker = 39,
+    UiInteractionManager = 40,
+    UiMovementHandler = 41,
+    UiPathingHandler = 42,
+    UsableActions = 43,
+    WorldRenderer = 44
 }
 declare const eventBuses: {
     [EventBus.Actions](): ActionExecutor<any, any, any, any, any>;
@@ -128,6 +128,7 @@ declare const eventBuses: {
     [EventBus.PlayerManager](): PlayerManager;
     [EventBus.Players](): Player;
     [EventBus.Prompt](): Prompts.Events;
+    [EventBus.Renderer](): Renderer;
     [EventBus.SaveManager](): SaveManager;
     [EventBus.ScreenManager](): ScreenManager;
     [EventBus.Steamworks](): Steamworks;
@@ -143,7 +144,6 @@ declare const eventBuses: {
     [EventBus.UiPathingHandler](): PathingHandler;
     [EventBus.UsableActions](): UsableAction;
     [EventBus.WorldRenderer](): WorldRenderer;
-    [EventBus.Renderer](): Renderer;
 };
 export type EventBuses = typeof eventBuses;
 export declare const eventBusManager: EventBusManager<EventBus, {
@@ -176,22 +176,22 @@ export declare const eventBusManager: EventBusManager<EventBus, {
     26(): PlayerManager;
     27(): Player;
     28(): Prompts.Events;
-    29(): SaveManager;
-    30(): ScreenManager;
-    31(): Steamworks;
-    32(): TileEventManager;
-    33(): TileEvent;
-    34(): typeof ui;
-    35(): ActionBar;
-    36(): ActionMenuHandler;
-    37(): GameScreen;
-    38(): HoveredTileTracker;
-    39(): InteractionManager;
-    40(): MovementHandler;
-    41(): PathingHandler;
-    42(): UsableAction;
-    43(): WorldRenderer;
-    44(): Renderer;
+    29(): Renderer;
+    30(): SaveManager;
+    31(): ScreenManager;
+    32(): Steamworks;
+    33(): TileEventManager;
+    34(): TileEvent;
+    35(): typeof ui;
+    36(): ActionBar;
+    37(): ActionMenuHandler;
+    38(): GameScreen;
+    39(): HoveredTileTracker;
+    40(): InteractionManager;
+    41(): MovementHandler;
+    42(): PathingHandler;
+    43(): UsableAction;
+    44(): WorldRenderer;
 }>;
 /**
  * For backwards compat / ease of use

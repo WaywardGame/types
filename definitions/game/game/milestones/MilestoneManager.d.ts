@@ -55,7 +55,9 @@ export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents
     getDiscoveredResistsAndVulns(): Map<CreatureType, Set<DamageType>>;
     getDiscoveredResistsAndVulns(creatureType: CreatureType): Set<DamageType>;
     getVisibility(milestone: Milestone): MilestoneVisibility;
-    isDiscovered(milestone: Milestone, data: number | string): boolean;
+    isDiscovered(milestone: Milestone, data?: number | string): boolean;
+    static globalize(milestone: Milestone | MilestoneDefinition, data?: number | string): number | string | undefined;
+    static unglobalize(milestone: Milestone | MilestoneDefinition, data?: number | string): number | string | undefined;
     getLastModificationTime(milestone: Milestone): number;
     getCloakingQuality(quality?: Quality): Quality;
     protected onLoadMods(): void;

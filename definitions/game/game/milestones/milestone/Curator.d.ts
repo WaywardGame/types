@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import MilestoneDefinition from "@wayward/game/game/milestones/MilestoneDefinition";
-declare const _default: () => MilestoneDefinition;
+declare const _default: (() => MilestoneDefinition) & Empty;
 export default _default;

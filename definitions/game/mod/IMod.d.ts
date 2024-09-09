@@ -58,6 +58,12 @@ export interface IModEvents {
      */
     unallocate(): any;
     /**
+     * Called when a mod is reinitialized. (A world has been exited)
+     *
+     * Internally, this is used to reset enums to their global values.
+     */
+    reinitialize(): any;
+    /**
      * Called when a mod is setup. (Modders — Don't use this, just run code in your constructor.)
      *
      * Internally, this is used for some mod registrations.

@@ -101,6 +101,6 @@ export default class ApplicationInteractions {
     }>): Promise<void>;
     increaseStat(stat: Stat, value: number): Promise<void>;
     randomInput(count: number): Promise<void>;
-    pressKey(key: string, modifier?: string): Promise<void>;
+    pressKey(key: string, modifier?: string, duration?: number): Promise<void>;
     protected screenshot(suffix: string): Promise<void>;
 }

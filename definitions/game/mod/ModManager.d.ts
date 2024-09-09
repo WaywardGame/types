@@ -30,6 +30,7 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     get hasLoadedMods(): boolean;
     waitForSetup(showLoad: boolean): Promise<void>;
     loadAll(options: Partial<IPlayOptions>): Promise<Array<[ModLoadFailureReason, ...any[]]>>;
+    reinitializeAll(): void;
     unloadAll(resetState?: boolean): Promise<void>;
     protected setupMods(): Promise<void>;
     saveAll(): void;

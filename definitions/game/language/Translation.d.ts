@@ -35,6 +35,7 @@ import Message from "@wayward/game/language/dictionary/Message";
 import type { Term } from "@wayward/game/language/dictionary/Misc";
 import { EquipSlotTranslation, MiscTranslation } from "@wayward/game/language/dictionary/Misc";
 import type UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
+import type { TranslationReformatter } from "@wayward/game/language/impl/TranslationImpl";
 import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import { formatListTranslation } from "@wayward/game/language/segment/FormatListSegment";
 import makeTranslationListBuilder from "@wayward/game/language/utility/TranslationListBuilder";
@@ -124,11 +125,11 @@ declare namespace Translation {
     export function nameOf(type: Dictionary, thing: number | {
         type: number;
         renamed?: string | ISerializedTranslation;
-    }, article?: Article): Translation;
+    }, article?: Article, preArticleReformatters?: [ArrayOr<TranslationReformatter>, ...TranslationArg[]]): Translation;
     export function nameOf(type: Dictionary, thing: number | {
         type: number;
         renamed?: string | ISerializedTranslation;
-    }, count?: number, article?: Article, showRenamedQuotes?: boolean): Translation;
+    }, count?: number, article?: Article, showRenamedQuotes?: boolean, preArticleReformatters?: [ArrayOr<TranslationReformatter>, ...TranslationArg[]]): Translation;
     type Translator<ENTRY extends number = number, ARGS extends any[] = []> = (entry: string | ENTRY, ...args: ARGS) => Translation;
     export function translator<ENTRY extends number = number, ARGS extends any[] = []>(_translator: Translator<ENTRY, ARGS> | Dictionary): Translator<ENTRY, ARGS>;
     export function refTranslator<ENTRY extends number = number>(refType: EnumReferenceTypes, dictionary: SupplierOr<Dictionary, [number]>, color?: (entry: string | ENTRY) => TranslationImpl): Translator<ENTRY, [color?: boolean]>;

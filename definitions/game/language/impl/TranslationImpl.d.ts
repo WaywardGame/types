@@ -27,7 +27,7 @@ export interface ITranslationConfig {
     interpolator: Interpolator;
     provideTranslation(dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean): string[] | undefined;
 }
-type Reformatter = TranslationImpl | Falsy;
+export type TranslationReformatter = TranslationImpl | Falsy;
 type TranslationStringRenderer = (section: IStringSection) => string | undefined;
 export default class TranslationImpl implements Omit<ISerializable, "deserializeObject"> {
     private static defaultInterpolatorSegmentIds?;
@@ -100,8 +100,8 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     setReference(reference?: Reference | Referenceable, context?: InfoProviderContext, forceInclude?: true): this;
     addArgs(...args: TranslationArg[]): this;
     inContext(context?: TextContext, normalize?: boolean): this;
-    passTo(reformatters: ArrayOr<Reformatter>, ...args: TranslationArg[]): this;
-    passTo(beginning: true, reformatters: ArrayOr<Reformatter>, ...args: TranslationArg[]): this;
+    passTo(reformatters: ArrayOr<TranslationReformatter>, ...args: TranslationArg[]): this;
+    passTo(beginning: true, reformatters: ArrayOr<TranslationReformatter>, ...args: TranslationArg[]): this;
     /**
      * Sets what this translation will return if there is no translation.
      */

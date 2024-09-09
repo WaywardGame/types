@@ -15,7 +15,7 @@ import Language from "@wayward/game/language/Language";
 import LanguageExtension from "@wayward/game/language/LanguageExtension";
 import type TranslationsProvider from "@wayward/game/language/TranslationsProvider";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
-import type { IStringSection } from "@wayward/game/utilities/string/Interpolator";
+import { IStringSection } from "@wayward/game/utilities/string/Interpolator";
 import { CaseStyle } from "@wayward/game/utilities/string/Strings";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 type ArticleRules = Array<[number | {
@@ -92,7 +92,7 @@ export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> 
     reserializeFromFiles(files: Map<string, Record<string, any>>): ISerializedLanguage;
     deserialize(serialized: ISerializedLanguage | ISerializedLanguageExtension): Language | LanguageExtension;
     generateSchema(): void;
-    reformatSingularNoun(noun: string, count: number, article?: false | "definite" | "indefinite"): string;
+    reformatSingularNoun(noun: string | IStringSection[], count: number, article?: false | "definite" | "indefinite"): string | IStringSection[];
     private getNounType;
     private plural;
     private getEntryNameFromEntryId;

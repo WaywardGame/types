@@ -80,6 +80,8 @@ declare namespace Enums {
      * @param isBasicEnum Whether the enum is a "basic" enum; IE, every entry is a number between `0` and `Infinity`. (Default: `true`)
      */
     function isValid<E>(enumObject: Record<string, E> | undefined, entry: unknown, isBasicEnum?: boolean): entry is E;
+    let getSaveEnumFromGlobalEnum: <E>(enumObject: E, globalOrdinal?: number) => E[keyof E] | undefined;
+    let getGlobalEnumFromSaveEnum: <E>(enumObject: E, saveOrdinal?: number) => E[keyof E] | undefined;
     function toString(enumObject: any, n: number, exlude?: number): string;
     function sortKeysByOrdinal<E extends number, K extends string>(enumObject: Record<K, E>): (keyA: K, keyB: K) => number;
     /**

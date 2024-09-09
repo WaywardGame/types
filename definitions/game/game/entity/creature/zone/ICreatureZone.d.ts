@@ -38,7 +38,7 @@ export interface IBiomeCreatureZones {
     scaling?: number;
     tiers?: PartialRecord<`tier${number}`, IBiomeCreatureZoneTier>;
 }
-export type IBiomeCreatureZoneTier = PartialRecord<WorldZ, IBiomeCreatureZoneSpawnGroup[]>;
+export type IBiomeCreatureZoneTier = Map<WorldZ, IBiomeCreatureZoneSpawnGroup[]>;
 export type IBiomeCreatureZoneSpawnGroup = PartialRecord<PartOfDay, CreatureType[][]>;
 /**
  * The default size of a zone, on each axis. IE, a value of 60 is 60 tiles wide and 60 tiles long.

@@ -52,6 +52,7 @@ import type InterruptChoice from "@wayward/game/language/dictionary/InterruptCho
 import type Message from "@wayward/game/language/dictionary/Message";
 import type Note from "@wayward/game/language/dictionary/Note";
 import type { IRegistry } from "@wayward/game/mod/BaseMod";
+import type { ModRegistrationTime } from "@wayward/game/mod/BaseMod";
 import type InterModRegistry from "@wayward/game/mod/InterModRegistry";
 import type { InterModRegistration } from "@wayward/game/mod/InterModRegistry";
 import type { ModInformation } from "@wayward/game/mod/ModInformation";
@@ -70,6 +71,7 @@ import type { IStatDisplayDescription } from "@wayward/game/ui/screen/screens/ga
 import type { HelpArticle, IHelpArticle } from "@wayward/game/ui/screen/screens/menu/menus/help/IHelpArticle";
 import type { ModOptionSectionInitializer } from "@wayward/game/ui/screen/screens/menu/menus/options/TabMods";
 import type WorldZ from "@wayward/utilities/game/WorldZ";
+import Objects from "@wayward/utilities/object/Objects";
 export interface IModdable {
     /**
      * Do not provide or modify this value, only reference it. This is set by the modding system during the process of registration.
@@ -239,9 +241,9 @@ export interface IRegistryRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Registry;
     class: new (mod: any) => any;
 }
-export interface IBulkRegistration extends IBaseModRegistration, IInheritsRegistrationTime {
+export interface IBulkRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Bulk;
-    registrations: any;
+    [SYMBOL_MOD_REGISTRATIONS]: any[];
 }
 export interface IDialogRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Dialog;
@@ -436,15 +438,13 @@ export interface IOverrideDescription<OBJECT extends object, PROPERTY extends ke
     property: PROPERTY;
     value: OBJECT[PROPERTY];
 }
-export type OverrideDecorator<OBJECT extends object, PROPERTY extends keyof OBJECT> = (overrider: () => IOverrideDescription<OBJECT, PROPERTY>) => <K extends string | number | symbol, T extends Record<K, OBJECT>>(target: T, key: K) => void;
+export type OverrideDecorator<OBJECT extends object, PROPERTY extends keyof OBJECT> = (time: ModRegistrationTime, overrider: () => IOverrideDescription<OBJECT, PROPERTY>) => <K extends string | number | symbol, T extends Record<K, OBJECT>>(target: T, key: K) => void;
 export interface IOverrideRegistration<OBJECT extends object, PROPERTY extends keyof OBJECT> extends IBaseModRegistration {
     type: ModRegistrationType.Override;
+    time: ModRegistrationTime;
     overrider: () => IOverrideDescription<OBJECT, PROPERTY>;
 }
-export interface IInheritsRegistrationTime {
-    useRegistrationTime: ModRegistrationType;
-}
-export type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadGroupRegistration | IDoodadRegistration | IDoodadTagRegistration | IEntityTagRegistration | IEquipTypeRegistration | IGenericEnumRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | IItemTagRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IOverrideRegistration<any, any> | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileGroupRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration | IItemExtraRegistration | IDoodadExtraRegistration;
+export type ModRegistration = IActionRegistration | IBindableRegistration | IBiomeRegistration | IBulkRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadExtraRegistration | IDoodadGroupRegistration | IDoodadRegistration | IDoodadTagRegistration | IEntityTagRegistration | IEquipTypeRegistration | IGenericEnumRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemExtraRegistration | IItemGroupRegistration | IItemRegistration | IItemTagRegistration | ILanguageExtensionRegistration | ILanguageRegistration | ILoadRegistration | IMagicalPropertyRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IOverrideRegistration<any, any> | IPacketRegistration | IPromptRegistration | IQuadrantComponentRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | IStatRegistration | IStatusRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | ITileGroupRegistration | ITileLayerTypeRegistration | IUsableActionsRegistration | IUsableActionTypePlaceholderRegistration | IUsableActionTypeRegistration;
 export declare const SYMBOL_SUPER_REGISTRY: unique symbol;
 declare namespace Register {
     /**
@@ -810,7 +810,7 @@ declare namespace Register {
      * public itemDescriptionLogDismantle: IDismantleDescription;
      * ```
      */
-    function override<OBJECT extends object, PROPERTY extends keyof OBJECT>(overrider: () => IOverrideDescription<OBJECT, PROPERTY>): <K extends string | number | symbol, T extends Record<K, OBJECT>>(target: T, key: K) => void;
+    function override<OBJECT extends object, PROPERTY extends keyof OBJECT>(time: ModRegistrationTime.Initialize | ModRegistrationTime.Load, overrider: () => IOverrideDescription<OBJECT, PROPERTY>): <K extends string | number | symbol, T extends Record<K, OBJECT>>(target: T, key: K) => void;
     /**
      * Registers any number of registrations of a single type. Any other registration type can be used.
      *
@@ -829,7 +829,7 @@ declare namespace Register {
      * }
      * ```
      */
-    function bulk<REG_TYPE extends keyof typeof Register, REG extends AnyFunction = (typeof Register)[REG_TYPE]>(type: REG_TYPE, ...entries: Array<Parameters<REG>>): <K extends string | number | symbol, T extends Record<K, Array<REG extends (...args: any) => infer F2 ? F2 extends (t: infer T, k: infer K) => any ? T[Extract<K, keyof T>] : never : never>>>(target: T, key: K) => void;
+    function bulk<REG_TYPE extends keyof typeof Register, REG extends AnyFunction = (typeof Register)[REG_TYPE]>(type: REG_TYPE, ...entries: Array<Parameters<NoInfer<REG>>>): <K extends string | number | symbol, T extends Record<K, Array<REG extends (...args: any) => infer F2 ? F2 extends (t: infer T, k: infer K) => any ? T[Extract<K, keyof T>] : never : never>>>(target: T, key: K) => void;
     /**
      * Registers a command.
      * @param name The name of this command (what players will type to use it, eg: `/heal`).
@@ -908,10 +908,20 @@ export declare namespace Registry {
      * @param method An action or command callback method
      */
     function functionId<M extends AnyFunction>(method: M): Command;
+    interface IRegistrationsObject {
+        _isRegistrationsObject: boolean;
+        _registrationsDirty: boolean;
+        _registries: IRegistry | Set<IRegistry>;
+    }
+    namespace IRegistrationsObject {
+        function is(value: unknown): value is IRegistrationsObject;
+    }
+    function makeRegistrationsMap<MAP extends Map<K, V>, K, V>(map: MAP, registries: IRegistry | Set<IRegistry>): MAP & IRegistrationsObject;
+    function makeRegistrationsSet<SET extends Set<T>, T>(set: SET, registries: IRegistry | Set<IRegistry>): SET & IRegistrationsObject;
     /**
      * Used internally for `Registry<H, T>.get(key)`
      */
-    class Registered {
+    class Registered implements Objects.ICloneable {
         readonly mod?: string;
         readonly type: RegistryRegisteredIntermediateType;
         readonly path: PropertyKey[];
@@ -932,6 +942,7 @@ export declare namespace Registry {
         getRegistrationId<T = any>(registry: IRegistry): T | undefined;
         getFirstRegistrationId<T = any>(registries: IRegistry | Set<IRegistry>): T | undefined;
         initializeProperty<O extends object, K extends keyof O>(object: O, key: K, registries: IRegistry | Set<IRegistry>): void;
+        [Objects.SYMBOL_CLONE](clone: <T>(value: T) => T): this;
     }
 }
 export interface IBaseModRegistration {
