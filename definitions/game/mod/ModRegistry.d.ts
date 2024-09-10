@@ -765,7 +765,7 @@ declare namespace Register {
      */
     function usableActions<SET extends UsableActionSet>(name: string, set: SET, registrationHandler: (registrar: UsableActionRegistrar, ...args: (typeof usableActionSets)[SET] extends UsableActionGenerator<infer ARGS> ? ARGS : []) => any): <K extends string | number | symbol, T extends Record<K, UsableActionGenerator>>(target: T, key: K) => void;
     /**
-     * **Trying to register an action with the UI?** You may be looking for `@Register.`{@link usableActions}
+     * **Trying to register an action with the UI?** You may be looking for {@link usableActions `@Register.usableActions`}
      *
      * Registers a "usable" action type. This is solely used for generating an ID that can be associated with custom UsableActions.
      * A custom UsableActionType provides an ID used for translation, icons, etc.
@@ -778,7 +778,7 @@ declare namespace Register {
      */
     function usableActionType(name: string): <K extends string | number | symbol, T extends Record<K, UsableActionType>>(target: T, key: K) => void;
     /**
-     * **Trying to register an action with the UI?** You may be looking for `@Register.`{@link usableActions}
+     * **Trying to register an action with the UI?** You may be looking for {@link usableActions `@Register.usableActions`}
      *
      * Registers a "usable" action *placeholder* type. This is solely used for generating an ID that can be used in `UsableAction`s.
      * A custom UsableActionTypePlaceholder provides an ID that can be used for icons.
