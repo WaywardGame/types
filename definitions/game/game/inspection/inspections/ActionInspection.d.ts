@@ -31,7 +31,7 @@ import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class ActionInspection extends Inspection<ActionId | undefined> {
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     static getAction(id: ActionId): UsableAction<IUsableActionRequirements, IUsableActionDefinition> | undefined;
-    static getActionNameWithTier(id: ActionId, context: UsableActionDisplayContext, provided: IUsableActionPossibleUsing | undefined, resolveUsing: boolean): TranslationImpl | undefined;
+    static getActionNameWithTier(id: ActionId | UsableAction, context: UsableActionDisplayContext, provided: IUsableActionPossibleUsing | undefined, resolveUsing: boolean): TranslationImpl | undefined;
     private static getTranslation;
     static getRuneInfo(id: ActionId, itemType?: ItemType, item?: Item): SimpleInfoProvider | undefined;
     constructor(value?: ActionId | EnumReferenceResolved<ReferenceType.Action>, context?: InfoProviderContext);

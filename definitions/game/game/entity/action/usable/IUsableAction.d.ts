@@ -45,18 +45,22 @@ export interface IUsableActionRequirement<TYPE> {
     find?(player: Player, provided?: IUsableActionPossibleUsing): TYPE | false | undefined;
     getMissingName?(): Translation;
 }
-export interface IUsableActionItemRequirement extends Omit<IUsableActionRequirement<Item>, "find"> {
-    validateType?(player: Player, value: ItemType, description?: IItemDescription): boolean;
-    finder?: false | ((player: Player, defaultOptions?: IItemFinderOptions, provided?: Omit<IUsableActionPossibleUsing, "item">) => ItemFinder | undefined);
-    requiresQuality?: true;
-    requiresType?: true;
-}
 export declare namespace IUsableActionRequirement {
     interface Maybe<TYPE> {
         allowNone: true;
         validate(player: Player, value: TYPE): boolean;
     }
     type Always = true;
+}
+export interface IUsableActionItemRequirement extends Omit<IUsableActionRequirement<Item>, "find"> {
+    validateType?(player: Player, value: ItemType, description?: IItemDescription): boolean;
+    finder?: false | ((player: Player, defaultOptions?: IItemFinderOptions, provided?: Omit<IUsableActionPossibleUsing, "item">) => ItemFinder | undefined);
+    requiresQuality?: true;
+    requiresType?: true;
+}
+export declare namespace IUsableActionItemRequirement {
+    function hasFinder(requirements?: IUsableActionRequirements): boolean;
+    function allowsNoItem(requirements?: IUsableActionRequirements): boolean;
 }
 export interface IUsableActionRequirements {
     /**

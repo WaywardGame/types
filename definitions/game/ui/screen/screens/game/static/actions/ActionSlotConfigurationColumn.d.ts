@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Quality } from "@wayward/game/game/IObject";
-import type { IUsableActionPossibleUsing } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import { type IUsableActionPossibleUsing } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
 import type Item from "@wayward/game/game/item/Item";
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
@@ -100,6 +100,7 @@ export default class ActionSlotConfigurationColumn extends Component {
     private setUseOnMove;
     private setUseOnHoveredTile;
     private onDropIntoUseExact;
+    private onDropFromUseExact;
 }
 interface ActionSlotModeChoiceUseExactEvents extends Events<Choice<Mode>>, IItemSlotEvents {
 }

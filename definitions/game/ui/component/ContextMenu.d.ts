@@ -93,6 +93,7 @@ declare class ContextMenu<O extends number | string | symbol = number | string |
     private hiding;
     private silent?;
     hideAndRemove(): void;
+    protected onRemove(): void;
     private getDescription;
     protected onAppend(): void;
 }
