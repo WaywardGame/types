@@ -52,9 +52,9 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
     bool(): boolean;
     /**
      * Get a percentage for something
-     * Returns a number between 1 and 100 (inclusive)
+     * Returns a number between 1 and 100 (inclusive, if minOffset is not set)
      */
-    percent(minChance?: number, chanceOutOf?: number, ceil?: boolean): number;
+    percent(minOffset?: number, chanceOutOf?: number, ceil?: boolean): number;
     /**
      * Returns whether a chance passes, given a decimal number.
      *

@@ -56,7 +56,12 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     constructor(requirements: REQUIREMENTS, definition: DEFINITION);
     is(id?: ActionId): boolean;
     isExecutable(): this is UsableAction<REQUIREMENTS, IUsableActionDefinitionExecutable<REQUIREMENTS>>;
-    execute(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): boolean;
+    execute(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): {
+        used: true;
+        result: any;
+    } | {
+        used: false;
+    };
     resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>, fillTiles?: boolean): Message | IUsableActionUsing<REQUIREMENTS>;
     resolveUsingOrUndefined(player: Player, using: IUsableActionUsing<REQUIREMENTS>, fillTiles?: boolean): IUsableActionUsing<REQUIREMENTS> | undefined;
     isUsable(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): UsableActionUsability<REQUIREMENTS>;
@@ -102,6 +107,6 @@ export interface IUsableActionFactory<REQUIREMENTS extends IUsableActionRequirem
 }
 declare namespace UsableAction {
     function requiring<REQUIREMENTS1 extends IUsableActionRequirements>(requirements: REQUIREMENTS1): IUsableActionFactory<REQUIREMENTS1>;
-    function create<DEFINITION extends IUsableActionDefinition<{}>>(action: DEFINITION): UsableAction<{}, DEFINITION>;
+    function create<DEFINITION extends IUsableActionDefinition<Empty>>(action: DEFINITION): UsableAction<Empty, DEFINITION>;
 }
 export default UsableAction;

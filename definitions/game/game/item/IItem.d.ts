@@ -427,7 +427,10 @@ export interface IInvokeUse {
      * Defaults to 1.0 — no cooldown multiplier from theurgy skill.
      */
     cooldownTheurgyMultiplier?: number | IRange;
-    use(human: Human, rune: Item): any;
+    /**
+     * @returns The amount of success this action had, a decimal from 0-1
+     */
+    use(human: Human, rune: Item): number | undefined;
 }
 export interface IItemBuild {
     /**
@@ -633,7 +636,7 @@ export interface IRangedDescription {
     accuracy?: number;
     ammunitionType?: ItemType | ItemTypeGroup | ((action: IActionApi) => ItemType | ItemTypeGroup | undefined);
     requiredToFire?: ItemType;
-    skillType?: SkillType;
+    skillType: SkillType;
     unlimitedAmmunition?: boolean;
     attackMessage?: Message;
     particles?: IRGB | ((action: IActionApi) => IRGB | undefined);

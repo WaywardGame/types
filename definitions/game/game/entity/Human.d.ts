@@ -303,7 +303,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * Extinguishes all torches the player is holding of they are swimming.
      */
     extinguishTorchesIfSwimming(): void;
-    getRangedAccuracy(weapon: Item | undefined, ranged: IRangedInProgress | undefined, skillType: SkillType): number;
+    getRangedAccuracy(weapon: Item | undefined, ranged: IRangedInProgress | undefined, skillType: SkillType, which?: "base" | "skill" | "calc"): number;
     rangeAction(weapon: Item | undefined, ranged: IRangedInProgress | undefined, bonusMagicalType: MagicalPropertyType, skillType: SkillType, useMaxRange?: boolean): IRangedResolvedDistance;
     rangeAction(weapon: Item | undefined, ranged: IRangedInProgress | undefined, bonusMagicalType: MagicalPropertyType, skillType: SkillType, useMaxRange: boolean | undefined, clientSide: true): IRangedResolvedDistance[];
     checkForTargetInRange(towardsTile: Tile | undefined, range: number, accuracy: number | undefined, includePlayers?: boolean): IMobCheck;

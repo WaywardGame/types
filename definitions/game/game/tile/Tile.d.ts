@@ -407,7 +407,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * Gets the direction from this tile to the target tile
      */
-    getDirectionToTile(tile: Tile): Direction;
+    getDirectionToTile(tile: Tile): Direction.Cardinal;
     /**
      * Gets the adjacent tile in the direction
      */

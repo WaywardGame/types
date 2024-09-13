@@ -108,7 +108,11 @@ export default class GameScreen extends Screen {
     private lastUsableResult?;
     private lastFailTime;
     private lastAttemptTime;
-    executeAction(action?: ActionId | UsableAction, using?: IUsableActionPossibleUsing, context?: UsableActionExecutionContext | IUsableActionExecutionContext, options?: IUsableActionExecutionOptions): UsableActionExecutionResult;
+    private executingActionPromise?;
+    private queuedActionExecutionId?;
+    executeAction(action?: ActionId | UsableAction, using?: IUsableActionPossibleUsing, context?: UsableActionExecutionContext | IUsableActionExecutionContext, options?: IUsableActionExecutionOptions): UsableActionExecutionResult.UnknownAction | UsableActionExecutionResult.NotExecutable | Promise<UsableActionExecutionResult | {
+        result: any;
+    }>;
     isActionUsable(action?: ActionId | UsableAction, using?: IUsableActionPossibleUsing, context?: UsableActionExecutionContext | IUsableActionExecutionContext): UsableActionUsability;
     onGameStart(game: Game, _isLoadingSave: boolean, _playedCount: number): void;
     onLoadedOnIsland(player: Player, island: Island): void;

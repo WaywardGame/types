@@ -214,8 +214,10 @@ declare namespace Translation {
          */
         private get relevant();
         private skipParenthesis?;
+        private isPercentage?;
         constructor(base?: FVal, reformatter?: SupplierOr<Translation | undefined>);
         noParenthesis(): this;
+        percentage(): this;
         translate(simple?: boolean): Translation;
         private parenthesize;
         private translateAndFormatComponent;
@@ -230,8 +232,14 @@ declare namespace Translation {
         mult(value: FVal, reformatter?: SupplierOr<Translation | undefined>, alreadyIncluded?: true): this;
         outOf(value: FVal): TranslationImpl;
         quality(quality?: IHasQuality | SupplierOr<Quality | undefined>, value?: FVal, reformatter?: SupplierOr<Translation | undefined>, alreadyIncluded?: true): this;
+        qualityMult(quality?: IHasQuality | SupplierOr<Quality | undefined>, value?: FVal, reformatter?: SupplierOr<Translation | undefined>, alreadyIncluded?: true): this;
+        private _quality;
         skill(skill?: SkillType, value?: FVal, reformatter?: SupplierOr<Translation | undefined>, alreadyIncluded?: true): this;
+        skillMult(skill?: SkillType, value?: FVal, reformatter?: SupplierOr<Translation | undefined>, alreadyIncluded?: true): this;
+        private _skill;
         magic(magic?: MagicalPropertyIdentity, magical?: IHasMagic, value?: FVal, reformatter?: SupplierOr<Translation | undefined>, alreadyIncluded?: true): this;
+        magicMult(magic?: MagicalPropertyIdentity, magical?: IHasMagic, value?: FVal, reformatter?: SupplierOr<Translation | undefined>, alreadyIncluded?: true): this;
+        private _magic;
         private addComponent;
     }
     export type RefreshEvents = Map<GameEmitterOrBus, Map<string, Set<AnyFunction<boolean> | undefined>>>;

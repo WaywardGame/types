@@ -48,8 +48,8 @@ export declare enum UsableActionExecutionResult {
     NotExecutable = 1,
     NotUsableDidAlert = 2,
     NotUsableNoAlert = 3,
-    Executed = 4,
-    Debounced = 5
+    Debounced = 4,
+    QueueReplacement = 5
 }
 export interface IUsableActionExecutionOptions {
     /**
