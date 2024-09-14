@@ -18,15 +18,12 @@ import { CreatureNotifierType, ItemNotifierType, NotifierIconType, StatNotificat
 import type { IResourceContainer } from "@wayward/game/renderer/resources/IResourceContainer";
 export declare class Notifier {
     private readonly context;
-    private readonly capacity;
     private readonly spriteBatch;
     private spriteAtlas;
-    private count;
-    private mostRecent;
     private mostRecentLife;
     private nextUpdate;
-    private notificationCount;
-    private notifications;
+    private readonly notifications;
+    private readonly markers;
     private suspended;
     constructor(context: IRendererContext, capacity: number);
     setResources(resourceContainer: IResourceContainer): void;

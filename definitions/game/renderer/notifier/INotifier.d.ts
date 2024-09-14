@@ -13,6 +13,7 @@ import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 export interface INotificationLocation extends IVector4 {
     getMovementPoint?(timeStamp: number): IVector2;
+    getMovementProgress?(timeStamp: number): number;
     queueSoundEffect?(soundEffect: SfxType): void;
 }
 export declare enum StatNotificationType {

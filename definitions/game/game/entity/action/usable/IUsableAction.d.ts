@@ -128,7 +128,9 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
         finder: ItemFinder;
     } ? ItemType : never) | (REQUIREMENTS["item"] extends {
         allowNone: true;
-    } ? undefined : never));
+    } ? REQUIREMENTS["item"] extends {
+        requiresType: true;
+    } ? never : undefined : never));
     itemQuality: ((REQUIREMENTS["item"] extends true ? ArrayOr<Quality> : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
         allowNone: true;
     } ? undefined : never) | (REQUIREMENTS["item"] extends {

@@ -66,10 +66,10 @@ export default class ActionBar extends QuadrantComponent {
     defaultModifiersOrder: string;
     readonly historyContainer: Component<HTMLElement>;
     readonly metaButtons: Component<HTMLElement>;
+    readonly addSlotButton: Button;
+    readonly removeSlotButton: Button;
     readonly actionBarOptionsButton: Button;
     readonly toggleUseWhenMovingButton: CheckButton;
-    readonly removeSlotButton: Button;
-    readonly addSlotButton: Button;
     readonly slotsContainer: Component<HTMLElement>;
     readonly configurationDrawer: ActionsConfigurationDrawer;
     get configuringNumber(): number | undefined;
