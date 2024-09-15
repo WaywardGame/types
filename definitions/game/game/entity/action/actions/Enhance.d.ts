@@ -15,5 +15,5 @@ import type Item from "@wayward/game/game/item/Item";
 export interface IEnhanceCanUse extends IActionUsable {
     enhanceTarget: Item;
 }
-declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IEnhanceCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemInventory, [arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IEnhanceCanUse, [Item, (Item | undefined)?]>;
 export default _default;

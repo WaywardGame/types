@@ -19,6 +19,7 @@ import type { EntityType } from "@wayward/game/game/entity/IEntity";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type Item from "@wayward/game/game/item/Item";
+import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
@@ -53,7 +54,7 @@ export declare class Action<A extends ActionArguments, E extends Entity = Entity
     execute(actionApiOrExecutor: IActionApi<E, any> | E, ...args: AV): R | Promise<R> | Promise<R | undefined> | undefined;
     executeAt(actionApiOrExecutor: IActionApi<E, any> | E, location: IActionTargetAdjacent, ...args: AV): Promise<R | undefined>;
     executeRanged(actionApiOrExecutor: IActionApi<E, any> | E, target: IActionTargetTileRanged, ...args: AV): Promise<R | undefined>;
-    executeOn(actionApiOrExecutor: IActionApi<E, any> | E, targetEntity?: Entity | IActionTargetEntityRanged, ...args: AV): Promise<R | undefined>;
+    executeOn(actionApiOrExecutor: IActionApi<E, any> | E, targetEntity?: Entity | Tile | IActionTargetEntityRanged, ...args: AV): Promise<R | undefined>;
     executeConfirmer(actionApiOrExecutor: IActionApi<E, any> | E, args: AV): Promise<boolean>;
     skipConfirmation(): this;
     /**

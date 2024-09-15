@@ -14,7 +14,7 @@ import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionApi } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import { Direction } from "@wayward/game/utilities/math/Direction";
-declare const _default: Action<[ActionArgument.Vector2, [ActionArgument.Direction, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
+declare const _default: Action<[ActionArgument.Vector2, [arg1: ActionArgument.Undefined, ActionArgument.Direction], [arg1: ActionArgument.Undefined, ActionArgument.Boolean]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
     usable: true;
 }, [import("../../../../utilities/math/IVector").IVector2, (Direction.None | Direction.East | Direction.North | Direction.West | Direction.South | undefined)?, (boolean | undefined)?]>;
 export default _default;

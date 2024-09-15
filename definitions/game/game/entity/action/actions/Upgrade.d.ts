@@ -18,7 +18,7 @@ export interface IUpgradeCanUse extends IActionUsable {
     upgrades: IUpgradeable[];
     upgradeTarget: Item;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IUpgradeCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IUpgradeCanUse, [Item, (Item | undefined)?]>;
 export default _default;
 export interface IUpgradeable extends IMagicalPropertyInfo {
     target: Item;

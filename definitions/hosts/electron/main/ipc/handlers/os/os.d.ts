@@ -15,7 +15,7 @@ import type { IIPCHandler } from "../../interfaces";
 declare class OSIPCHandler extends SharedOSIPCHandler implements IIPCHandler<IOS> {
     readonly ipc: import("@wayward/hosts/shared/ipc").IIPC<IOS>;
     readonly container: IElectronContainer;
-    execDetached(command: string, ...args: string[]): void;
+    execDetached(command: string, ...args: string[]): Promise<void>;
 }
 export declare const osIPCHandler: OSIPCHandler;
 export {};

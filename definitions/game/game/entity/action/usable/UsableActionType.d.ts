@@ -94,7 +94,7 @@ export declare enum UsableActionType {
     MoveContentsToFacingContainer = 100072,
     MoveContentsOfActiveContainerMenu = 100073,
     MoveContentsOfFacingContainerMenu = 100074,
-    ViewItems = 100075,
+    Unused = 100075,
     CommandMenuAll = 100076,
     CommandAllFollowClose = 100077,
     CommandAllFollowFar = 100078,

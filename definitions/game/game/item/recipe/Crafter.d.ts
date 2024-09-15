@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Stream from "@wayward/goodstream/Stream";
 import type Entity from "@wayward/game/game/entity/Entity";
 import { Quality } from "@wayward/game/game/IObject";
 import { CraftResult } from "@wayward/game/game/item/IItem";
@@ -51,7 +50,7 @@ export default class Crafter {
     tilesAroundCrafter(includeCrafterTile?: boolean): Tile[];
     getCrafter(): Entity;
     getUsable<R extends RecipeRequirementType>(type: R, requirement: InstanceType<RecipeRequirementClass<R>>): Set<RecipeInputType<R>>;
-    getUsed<R extends RecipeRequirementType>(type: R, requirement?: InstanceType<RecipeRequirementClass<R>>): Stream<RecipeInputType<R>>;
+    getUsed<R extends RecipeRequirementType>(type: R, requirement?: InstanceType<RecipeRequirementClass<R>>): IteratorObject<RecipeInputType<R>>;
     /**
      * Returns whether the input could be "freed" (the requirement using it could use sth else instead).
      *

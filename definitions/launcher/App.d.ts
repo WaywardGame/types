@@ -27,7 +27,7 @@ declare class App {
         mods: string;
         saves: string;
     };
-    execDetached(command: string, ...args: string[]): void | undefined;
+    execDetached(command: string, ...args: string[]): Promise<void> | undefined;
     exit(): void;
 }
 export default App;

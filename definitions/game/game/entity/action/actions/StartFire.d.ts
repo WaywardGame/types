@@ -27,5 +27,5 @@ export interface IStartFireCanUse extends IActionUsable {
     fuel?: Item;
     tileEvent?: TileEvent;
 }
-declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IStartFireCanUse, [Item, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemInventory, [arg1: ActionArgument.Undefined, ActionArgument.ItemInventory], [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby], [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby], [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IStartFireCanUse, [Item, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?]>;
 export default _default;

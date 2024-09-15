@@ -17,5 +17,5 @@ export interface IExudeCanUse extends IActionUsable {
     exudeTarget: Item;
     exudeItemMagic: MagicalPropertyManager;
 }
-declare const _default: Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IExudeCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemInventory, [arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IExudeCanUse, [Item, (Item | undefined)?]>;
 export default _default;

@@ -257,7 +257,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     getCraftingDifficulty(level: RecipeLevel): number;
     updateStatsAndAttributes(): void;
     getMovementDelay(): number;
-    faceDirection(direction: Direction.Cardinal | Entity): Promise<boolean>;
+    faceDirection(direction: Direction.Cardinal | Entity | Tile): Promise<boolean>;
     get isWalkingTo(): boolean;
     /**
      * Returns a promise that resolves once the walk finishes

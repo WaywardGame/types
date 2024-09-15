@@ -12,7 +12,7 @@ import { Action } from "@wayward/game/game/entity/action/Action";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type Human from "@wayward/game/game/entity/Human";
 import { Direction } from "@wayward/game/utilities/math/Direction";
-declare const _default: Action<[ActionArgument.Direction, [ActionArgument.Integer32, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
+declare const _default: Action<[ActionArgument.Direction, [arg1: ActionArgument.Undefined, ActionArgument.Integer32], [arg1: ActionArgument.Undefined, ActionArgument.Boolean]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
     usable: true;
 }, [Direction.None | Direction.East | Direction.North | Direction.West | Direction.South, (number | undefined)?, (boolean | undefined)?]>;
 export default _default;

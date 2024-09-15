@@ -18,5 +18,5 @@ export interface IOS {
     release(): Promise<string>;
     totalmem(): Promise<number>;
     type(): Promise<string>;
-    execDetached(command: string, ...args: string[]): void;
+    execDetached(command: string, ...args: string[]): Promise<void>;
 }

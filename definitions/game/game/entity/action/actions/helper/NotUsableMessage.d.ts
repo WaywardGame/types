@@ -9,12 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import type { ActionDisplayLevel, IActionNotUsable } from "@wayward/game/game/entity/action/IAction";
+import type { ActionDisplayLevel, ActionType, IActionNotUsable } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import { Source, type IPackedMessage } from "@wayward/game/game/entity/player/IMessageManager";
 import type Item from "@wayward/game/game/item/Item";
-import type Message from "@wayward/game/language/dictionary/Message";
-import type { TranslationArg } from "@wayward/game/language/ITranslation";
+import Message from "@wayward/game/language/dictionary/Message";
+import { type TranslationArg } from "@wayward/game/language/ITranslation";
 import type _Translation from "@wayward/game/language/Translation";
 import type { UnWeakRefified } from "@wayward/utilities/object/Objects";
 declare const SYMBOL_NOT_USABLE_MESSAGE: unique symbol;
@@ -57,4 +57,6 @@ export declare const NotUsableMessageItemOrDoodad: NotUsableMessage.IFactory<[Do
     args: (itemOrDoodad: Doodad | Item | undefined) => import("../../../../../language/impl/TranslationImpl").default | undefined;
     sources: Source.Action[];
 }>;
+export declare const NotUsableMessageCannotFromHere: (action: ActionType) => IActionNotUsable;
+export declare const NotUsableMessageCannotAnythingHere: (action: ActionType) => IActionNotUsable;
 export {};

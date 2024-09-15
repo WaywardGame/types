@@ -19,5 +19,5 @@ export interface IBuildCanUse extends IActionUsable {
     tile: Tile;
     buildInfo: IItemBuild;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.Tile, ActionArgument.Undefined]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IBuildCanUse, [Item, (Tile | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.Tile]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IBuildCanUse, [Item, (Tile | undefined)?]>;
 export default _default;

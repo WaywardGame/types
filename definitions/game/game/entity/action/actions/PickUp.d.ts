@@ -25,5 +25,5 @@ export interface IPickUpCanUse extends IActionUsable {
     pickUpTypes: ItemType[];
     terrainDescription: ITerrainDescription;
 }
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpCanUse, [(Item | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpCanUse, [(Item | undefined)?]>;
 export default _default;

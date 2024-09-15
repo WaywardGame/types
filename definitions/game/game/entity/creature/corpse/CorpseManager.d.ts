@@ -15,7 +15,6 @@ import type Tile from "@wayward/game/game/tile/Tile";
 import type { TextContext } from "@wayward/game/language/ITranslation";
 import { Article } from "@wayward/game/language/Translation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-import Stream from "@wayward/goodstream/Stream";
 export default class CorpseManager extends EntityManager<Corpse> {
     protected readonly name = "CorpseManager";
     loadEntity(corpse: Corpse): void;
@@ -23,6 +22,6 @@ export default class CorpseManager extends EntityManager<Corpse> {
     protected onRemove(corpse: Corpse): boolean;
     updateAll(): void;
     getName(typeOrCorpse: CreatureType | Corpse, article?: Article, count?: number, showCount?: boolean): TranslationImpl;
-    getCorpseTranslations(corpses: Corpse[], article?: Article, context?: TextContext): Stream<TranslationImpl>;
+    getCorpseTranslations(corpses: Corpse[], article?: Article, context?: TextContext): TranslationImpl[];
     getCorpseListTranslation(corpses: Corpse[], article?: Article, context?: TextContext): TranslationImpl;
 }

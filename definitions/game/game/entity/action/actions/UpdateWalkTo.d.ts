@@ -20,5 +20,5 @@ export declare class WalkToArgument extends ActionArgumentCustom<IWalkToPathInPr
     private readOptionalRange;
     private writeOptionalRange;
 }
-declare const _default: Action<[[WalkToArgument, ActionArgument.Undefined]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [(IWalkToPathInProgress | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, WalkToArgument]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [(IWalkToPathInProgress | undefined)?]>;
 export default _default;
