@@ -18,6 +18,12 @@ import type { IRefreshableValue } from "@wayward/game/ui/component/Refreshable";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
 import { InputCatalyst } from "@wayward/game/ui/input/IInput";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export declare enum DropdownClasses {
+    Main = "menu-dropdown",
+    ContentWrapper = "menu-dropdown-content-wrapper",
+    ContentWrapper_DisabledHidden = "menu-dropdown-content-wrapper--disabled-hidden",
+    Content = "menu-dropdown-content"
+}
 interface IDropdownEvents<O = string | number> extends Events<Component> {
     /**
      * @param optionId The new option which is selected.
@@ -58,6 +64,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     constructor();
     private sound?;
     setSound(sound?: SfxType | SfxUi): this;
+    setDisabledHidden(hidden?: boolean): this;
     private searchValidOption;
     setSearchValidOption(searchValidOption?: boolean): this;
     use(dropdown?: Dropdown<O>): this;

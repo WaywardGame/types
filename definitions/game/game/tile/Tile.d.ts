@@ -344,7 +344,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     clearPuddles(executor: Human): boolean;
     clearWaste(): void;
-    checkForHiddenMob(human: Human): void;
+    checkForHiddenMob(human?: Human): void;
     /**
      * Decrease the depth of a water tile if under 6 connected tiles
      */

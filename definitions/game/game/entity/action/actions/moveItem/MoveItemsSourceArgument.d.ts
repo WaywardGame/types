@@ -13,7 +13,7 @@ import type Human from "@wayward/game/game/entity/Human";
 import type { IActionNotUsable, IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgumentCustom } from "@wayward/game/game/entity/action/argument/ActionArgumentCustom";
-import Island from "@wayward/game/game/island/Island";
+import type Island from "@wayward/game/game/island/Island";
 import type { IContainer } from "@wayward/game/game/item/IItem";
 import Item from "@wayward/game/game/item/Item";
 import type Translation from "@wayward/game/language/Translation";

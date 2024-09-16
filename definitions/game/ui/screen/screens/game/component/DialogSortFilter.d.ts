@@ -52,6 +52,7 @@ export default class DialogSortFilter<SORT extends number | "custom"> extends Co
     readonly sortRow: SortRow<SORT>;
     private constructor();
     setSound(sound?: SfxType | SfxUi): this;
+    setDisabledHidden(hidden?: boolean): this;
     setCustomSort(): void;
     setSort(sort: SORT, direction?: SortDirection, triggerSelect?: boolean): void;
     refresh(): void;

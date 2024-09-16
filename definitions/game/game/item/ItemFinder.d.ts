@@ -35,6 +35,7 @@ declare class ItemFinder extends EventEmitter.Host<IItemFinderEvents> {
     private trackedContainers?;
     private trackedItems?;
     private foundItemIds?;
+    private foundItemBest?;
     get human(): Human | undefined;
     get container(): IContainer | undefined;
     readonly observe: Observer.IRegistrar<this>;
@@ -44,7 +45,7 @@ declare class ItemFinder extends EventEmitter.Host<IItemFinderEvents> {
     markDirty(): void;
     track(): this;
     dispose(): this;
-    protected onItemStateChange(item: Item): void;
+    protected onItemStateChange(item: Item, event: "durabilityChange" | "toggleProtected" | "qualityChange" | "transformed"): void;
     protected onContainerItemAdd(items: ItemManager, itemsAdded: Item[], containerAddedTo: IContainer): void;
     protected onContainerItemRemove(items: ItemManager, itemsRemoved: Item[], containerRemovedFrom?: IContainer): void;
     protected onPlayerEvent(player: Player): void;
@@ -67,7 +68,10 @@ declare namespace ItemFinder {
         register(finder: ItemFinder): void;
         deregister(finder: ItemFinder): void;
         dispose(): void;
-        protected onItemStateChange(item: Item): void;
+        protected onItemDurabilityChange(item: Item): void;
+        protected onItemToggleProtected(item: Item): void;
+        protected onItemQualityChange(item: Item): void;
+        protected onItemTransformed(item: Item): void;
         protected onContainerItemAdd(items: ItemManager, itemsAdded: Item[], containerAddedTo: IContainer): void;
         protected onContainerItemRemove(items: ItemManager, itemsRemoved: Item[], containerRemovedFrom?: IContainer): void;
         protected onPlayerEvent(player: Player): void;

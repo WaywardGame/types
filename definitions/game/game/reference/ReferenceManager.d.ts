@@ -32,6 +32,7 @@ import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 export default class ReferenceManager {
     private readonly game;
     static isEnumReference(type: ReferenceType): type is EnumReferenceTypes;
+    isEnumReference(type: ReferenceType): type is EnumReferenceTypes;
     static get(thing: Referenceable): Reference | undefined;
     static getReferenceType(thing: Value<IReferenceTypeMap>): ReferenceType;
     private referenceCursor;

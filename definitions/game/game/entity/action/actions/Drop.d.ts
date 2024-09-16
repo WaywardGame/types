@@ -43,12 +43,17 @@ interface IResolvedTileDrop {
     into: IContainer;
     blocker?: Translation;
 }
-export declare function resolveTileDrop(human: Human, tile?: Tile, items?: MoveItemsSourceArgumentResolvable): IResolvedTileDrop;
+export declare function resolveTileDrop(human: Human | undefined, tile: Tile, items?: MoveItemsSourceArgumentResolvable, dropIntoContainers?: boolean): IResolvedTileDrop;
+export declare function resolveTileDrop(human: Human, tile?: Tile, items?: MoveItemsSourceArgumentResolvable, dropIntoContainers?: boolean): IResolvedTileDrop;
 export interface IDropCanUse {
     items: Item[];
     tile: Tile;
     into?: IContainer;
 }
+export declare function drop(human: Human | undefined, into: IContainer, items: Item[]): {
+    itemsDropped: Item[];
+    failedDrops: Item[];
+};
 declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearbyIncludingTradeContainer, ActionArgument.ItemArrayNearbyIncludingTradeContainer, MoveItemsSourceArgument], [arg1: ActionArgument.Undefined, DropItemFilterArgument]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
     usable: true;
     items: Item[];

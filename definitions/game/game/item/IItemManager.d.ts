@@ -14,6 +14,7 @@ import type DoodadManager from "@wayward/game/game/doodad/DoodadManager";
 import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
 import type { ActionType, IActionNotUsable } from "@wayward/game/game/entity/action/IAction";
 import type ActionContext from "@wayward/game/game/entity/action/IActionContext";
+import type { DropAllowProtected } from "@wayward/game/game/entity/action/actions/Drop";
 import { NotUsableMessage } from "@wayward/game/game/entity/action/actions/helper/NotUsableMessage";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { ContainerSort, IContainer, IMoveToTileOptions, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
@@ -121,6 +122,7 @@ export interface IMoveItemOptions {
         itemQuality?: Quality;
         filterText?: string;
     };
+    dropAllowProtected?: DropAllowProtected;
     skipMessage?: boolean;
     skipSound?: boolean;
     skipTileUpdate?: boolean;
@@ -132,6 +134,7 @@ export interface IMoveItemOptions {
     updateView?: true;
     isTrading?: boolean;
     revertFromDoodad?: boolean;
+    skipDrop?: true;
     context?: ActionContext;
 }
 export interface IPlaceOnTileOptions {
@@ -170,6 +173,7 @@ export interface IAddToContainerResult {
     itemsMoved: Item[];
     noMoreRoomForItems: Item[];
     topLevelContainer?: IContainer;
+    dropped?: true;
 }
 export interface IContainerOld extends Omit<IContainer, "addOrder"> {
     itemOrders?: number[];

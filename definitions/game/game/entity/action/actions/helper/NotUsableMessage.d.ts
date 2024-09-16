@@ -57,6 +57,7 @@ export declare const NotUsableMessageItemOrDoodad: NotUsableMessage.IFactory<[Do
     args: (itemOrDoodad: Doodad | Item | undefined) => import("../../../../../language/impl/TranslationImpl").default | undefined;
     sources: Source.Action[];
 }>;
+export declare const NotUsableMessageCannotHere: (action: ActionType) => IActionNotUsable;
 export declare const NotUsableMessageCannotFromHere: (action: ActionType) => IActionNotUsable;
 export declare const NotUsableMessageCannotAnythingHere: (action: ActionType) => IActionNotUsable;
 export {};
