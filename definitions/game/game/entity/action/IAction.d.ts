@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { SfxType } from "@wayward/game/audio/IAudio";
-import type { Deity, DeityReal } from "@wayward/game/game/deity/Deity";
+import type Deity from "@wayward/game/game/deity/Deity";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type Human from "@wayward/game/game/entity/Human";

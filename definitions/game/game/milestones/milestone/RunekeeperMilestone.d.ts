@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Runekeeper from "@wayward/game/game/milestones/milestone/Runekeeper";
-declare const runekeeperDomains: Descriptions<Runekeeper.Domain, [name: string, domain: string]>;
-export default runekeeperDomains;
+import MilestoneDefinition from "@wayward/game/game/milestones/MilestoneDefinition";
+declare const _default: (() => MilestoneDefinition) & Empty;
+export default _default;

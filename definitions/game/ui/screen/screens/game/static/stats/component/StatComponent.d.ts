@@ -41,7 +41,7 @@ export declare enum StatClasses {
 export interface IStatComponentEvents extends Events<Component> {
     update(): any;
 }
-export declare abstract class StatComponent extends Component {
+export default abstract class StatComponent extends Component {
     private readonly stat;
     protected readonly statDescription: import("../IStatDisplayDescription").IStatDisplayDescription | undefined;
     event: IEventEmitter<this, IStatComponentEvents>;

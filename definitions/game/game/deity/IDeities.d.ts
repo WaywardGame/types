@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Deity, DeityReal } from "@wayward/game/game/deity/Deity";
+import type Deity from "@wayward/game/game/deity/Deity";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 export type RuneChance = [deity: ArrayOr<DeityReal>, chance: number];
 /**
  * The maximum chance of a rune dropping that can come from the base chance.

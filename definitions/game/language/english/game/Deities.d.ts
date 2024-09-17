@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Deity } from "@wayward/game/game/deity/Deity";
+import Deity from "@wayward/game/game/deity/Deity";
 declare const deities: Record<Deity, [name: string, description: string]>;
 export default deities;

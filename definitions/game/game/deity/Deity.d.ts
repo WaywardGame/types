@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { SfxType } from "@wayward/game/audio/IAudio";
-export declare enum Deity {
+declare enum Deity {
     Single = -2,
     All = -1,
     None = 0,
@@ -17,6 +17,7 @@ export declare enum Deity {
     Chaos = 2,
     Good = 3
 }
+export default Deity;
 export type DeityReal = Exclude<Deity, Deity.All | Deity.Single | Deity.None>;
 export declare namespace DeityReal {
     function is(value: unknown): value is DeityReal;

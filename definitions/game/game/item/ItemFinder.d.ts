@@ -39,10 +39,12 @@ declare class ItemFinder extends EventEmitter.Host<IItemFinderEvents> {
     get human(): Human | undefined;
     get container(): IContainer | undefined;
     readonly observe: Observer.IRegistrar<this>;
+    readonly observePostFilter: Observer.IRegistrar<this>;
     constructor(human: Human, container: IContainer, options?: IItemFinderOptions);
     best(): Item | undefined;
     all(): Item[];
     markDirty(): void;
+    markDirtyPostFilter(): void;
     track(): this;
     dispose(): this;
     protected onItemStateChange(item: Item, event: "durabilityChange" | "toggleProtected" | "qualityChange" | "transformed"): void;

@@ -11,7 +11,7 @@
 import { FireType } from "@wayward/game/game/IGame";
 import type { Quality } from "@wayward/game/game/IObject";
 import type { DeityReal } from "@wayward/game/game/deity/Deity";
-import { Deity } from "@wayward/game/game/deity/Deity";
+import Deity from "@wayward/game/game/deity/Deity";
 import Doodad from "@wayward/game/game/doodad/Doodad";
 import type Entity from "@wayward/game/game/entity/Entity";
 import EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
@@ -44,7 +44,7 @@ import type Item from "@wayward/game/game/item/Item";
 import ItemReference from "@wayward/game/game/item/ItemReference";
 import { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
-import Runekeeper from "@wayward/game/game/milestones/milestone/IRunekeeper";
+import Runekeeper from "@wayward/game/game/milestones/milestone/Runekeeper";
 import type { IGameOptionsPlayer } from "@wayward/game/game/options/IGameOptions";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type { IHasInsulation } from "@wayward/game/game/temperature/ITemperature";

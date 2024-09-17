@@ -11,7 +11,7 @@
 import type { GameEmitterOrBus } from "@wayward/game/event/EventManager";
 import type { IHasQuality } from "@wayward/game/game/IObject";
 import { Quality } from "@wayward/game/game/IObject";
-import { Deity } from "@wayward/game/game/deity/Deity";
+import Deity from "@wayward/game/game/deity/Deity";
 import type { GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import { DamageType } from "@wayward/game/game/entity/IEntity";
 import type { EquipType, SkillType } from "@wayward/game/game/entity/IHuman";
@@ -157,7 +157,7 @@ declare namespace Translation {
      * Damage types are bit flags, so multiple can be stored in one `DamageType`.
      * This method returns a translated list of damage types.
      */
-    export const damage: (damageTypes: ArrayOr<DamageType>, colorize?: boolean, reformatter?: ((type: DamageType) => Translation) | Translation) => Translation;
+    export const damage: (damageTypes: ArrayOr<DamageType>, colorize?: boolean, reformatter?: ((type: DamageType) => Translation | undefined) | Translation) => Translation;
     export function growthStage(stage: GrowingStage, spores?: boolean): Translation;
     export function growthStage(stage?: GrowingStage, spores?: boolean): Translation | undefined;
     export function merge(...content: TranslationArg[]): Translation;

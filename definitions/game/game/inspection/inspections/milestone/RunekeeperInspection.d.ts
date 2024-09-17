@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { CollapsibleInfoProviderTabs } from "@wayward/game/game/inspection/infoProviders/CollapsableInfoProvider";
-import Runekeeper from "@wayward/game/game/milestones/milestone/IRunekeeper";
+import Runekeeper from "@wayward/game/game/milestones/milestone/Runekeeper";
 declare namespace RunekeeperInspection {
     enum Classes {
         Main = "inspection-type-milestone-runekeeper",

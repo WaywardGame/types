@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Quality } from "@wayward/game/game/IObject";
-import { Deity } from "@wayward/game/game/deity/Deity";
+import Deity from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import { DamageType } from "@wayward/game/game/entity/IEntity";
 import { EquipType, SkillType } from "@wayward/game/game/entity/IHuman";

@@ -18,8 +18,11 @@ import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
 import { Heading, Paragraph } from "@wayward/game/ui/component/Text";
 import type { IStringSection } from "@wayward/game/utilities/string/Interpolator";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export interface IRangeRowEvents extends Events<BlockRow>, Events<RangeInput> {
+    default(): any;
+}
 export declare class RangeRow extends BlockRow implements IRefreshable, IDisableable {
-    event: IEventEmitter<this, Events<RangeInput>>;
+    event: IEventEmitter<this, IRangeRowEvents>;
     rangeInput: RangeInput;
     heading: Heading;
     rangeInputValueDisplay: RangeInputValueDisplay | undefined;

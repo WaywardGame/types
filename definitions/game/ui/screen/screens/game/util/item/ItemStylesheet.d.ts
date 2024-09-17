@@ -22,6 +22,7 @@ export default class ItemStylesheetHandler {
     reset(): Promise<void>;
     protected onStoppingPlay(): void;
     protected onLoadedOnIsland(player: any, island: Island, options?: ILoadOnIslandOptions): Promise<void>;
+    private refreshStylesheetsStagedInBackground;
     private refreshStylesheetsStaged;
     /**
      * Append items for the specified stage to the stylesheet.

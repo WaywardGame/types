@@ -19,7 +19,11 @@ declare class Observer<T> {
 }
 export default Observer;
 declare namespace Observer {
-    interface IRegistrar<HOST> {
+    interface IRegistrarObserveDefaultEvent<HOST, E extends GameEmitterOrBus, K extends GameEvent<E>> {
+        (predicate?: (...params: Parameters<GameEventHandler<E, K>>) => boolean): HOST;
+        (observer: Observer<any>): HOST;
+    }
+    export interface IRegistrar<HOST> {
         /**
          * Observes events an on emitter to perform refresh functionality or delete caches for JIT stuff.
          */
@@ -48,12 +52,13 @@ declare namespace Observer {
          * @param observer An observer that will only allow event triggers if the value has changed
          */
         <E extends Emitter>(emitter: WeakRef<E> | undefined, events: GameEvent<E> | Array<GameEvent<E>>, observer: Observer<any>, priority?: number): HOST;
-        tick(observer: Observer<any>): HOST;
-        tick(predicate: (...params: Parameters<GameEventHandler<EventBus.LocalIsland, "tickEnd">>) => boolean): HOST;
+        tick: IRegistrarObserveDefaultEvent<HOST, EventBus.LocalIsland, "tickEnd">;
+        updateDirection: IRegistrarObserveDefaultEvent<HOST, EventBus.LocalPlayer, "updateDirection">;
         start(): void;
         end(): void;
         setDefaultPriority(priority?: number): this;
         inherit(registrar: IRegistrar<any>): void;
     }
-    function createRegistrar<HOST>(host: HOST, handler: () => any): IRegistrar<HOST>;
+    export function createRegistrar<HOST>(host: HOST, handler: () => any): IRegistrar<HOST>;
+    export {};
 }

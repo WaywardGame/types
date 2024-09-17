@@ -32,11 +32,13 @@ export default class ScaleManager {
      * Returns the currently "requested" UI scale.
      */
     getUserSetting(): number;
-    private getPlatformDefaultUiScale;
+    getPlatformDefaultUiScale(): number;
+    private convertScaleNativeFactorToInterfaceScaleMultiplier;
     /**
      * Requests a new UI scale, a multiplier of the default size.
      */
     setUserSetting(scale: number): void;
+    clearUserSetting(): void;
     scaleUp(): boolean;
     scaleDown(): boolean;
     /**
