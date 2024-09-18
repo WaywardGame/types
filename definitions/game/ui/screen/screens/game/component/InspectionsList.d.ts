@@ -42,6 +42,7 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     deregister(): void;
     setDisplayLevel(displayLevel: InfoDisplayLevel): this;
     refresh(): this;
+    private refreshAsync;
     protected abstract initializeInspections(): INSPECTIONS_HANDLER | undefined;
     isValid?(): boolean;
     protected getInvalidTranslation?(): TranslationGenerator | undefined;

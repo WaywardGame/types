@@ -9,8 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 export type Awaited<T> = T extends PromiseLike<infer U> ? Awaited<U> : T;
-export declare function yieldTask(): Promise<void>;
-export declare function postTask<T>(callback: () => Promise<T>, priority: "user-blocking" | "user-visible" | "background"): Promise<T>;
 /**
  * Create a promise that will resolve after `ms`.
  * @param ms The time in milliseconds until the promise will resolve.

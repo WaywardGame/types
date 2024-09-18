@@ -16,10 +16,11 @@ import type { Events } from "@wayward/utilities/event/EventEmitter";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type Log from "@wayward/utilities/Log";
 export declare enum ModRegistrationTime {
-    Setup = 0,
-    Initialize = 1,
-    Load = 2,
-    All = 3
+    Setup = 1,
+    Initialize = 2,
+    Load = 4,
+    All = 7,
+    Reinitialize = 10
 }
 export interface IRegistry {
     [SYMBOL_MOD_REGISTRATIONS]: ModRegistration[];
@@ -83,6 +84,7 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      * Handles registration of fields decorated with ` @Register.thing`, which occur at `ModRegistrationTime.Initialize`
      */
     private onBeforeInitialize;
+    private onBeforeReinitialize;
     protected registerEventHandlersOnPreLoad: boolean;
     /**
      * Event handler for `ModEvent.PreLoad`.

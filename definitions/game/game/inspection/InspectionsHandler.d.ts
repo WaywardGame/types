@@ -21,6 +21,7 @@ export default abstract class InspectionsHandler extends EventEmitter.Host<IInsp
     protected readonly context: InfoProviderContext;
     protected readonly inspectionsMap: Map<InspectType, HashSet<Inspection<any>>>;
     static makeInspectionsSet(...values: Array<IterableOr<Inspection<any> | undefined>>): HashSet<Inspection<any>>;
+    protected registered: boolean;
     constructor(context: InfoProviderContext, inspectionsMap?: Map<InspectType, HashSet<Inspection<any>>>);
     get<TYPE extends InspectType>(inspectType: InspectType): HashSet<ResolvedInspection<TYPE>> | undefined;
     set(inspectType: InspectType, inspections: HashSet<Inspection<any>>): Map<InspectType, HashSet<Inspection<any>>>;
