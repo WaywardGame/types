@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { MagicalPropertyTypeSubTypeMap } from "@wayward/game/game/magic/MagicalPropertyType";
-import { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
+import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { ListEnder } from "@wayward/game/language/ITranslation";
 import Translation from "@wayward/game/language/Translation";

@@ -35,7 +35,7 @@ import type { IPlaceOnTileOptions } from "@wayward/game/game/item/IItemManager";
 import ItemMapManager from "@wayward/game/game/item/ItemMapManager";
 import type { IHasMagic, MagicalSubPropertySubTypes } from "@wayward/game/game/magic/MagicalPropertyManager";
 import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
-import { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
+import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type { IHasInsulation, TempType } from "@wayward/game/game/temperature/ITemperature";
 import type Tile from "@wayward/game/game/tile/Tile";

@@ -42,7 +42,7 @@ import type { ContainerSort, ContainerType, EquipEffectByType, EquipEffects, ICo
 import { EquipEffect, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import ItemReference from "@wayward/game/game/item/ItemReference";
-import { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
+import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import Runekeeper from "@wayward/game/game/milestones/milestone/Runekeeper";
 import type { IGameOptionsPlayer } from "@wayward/game/game/options/IGameOptions";

@@ -10,7 +10,7 @@
  */
 import type { MagicalPropertyIdentityHash } from "@wayward/game/game/magic/MagicalPropertyManager";
 import { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
-import { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
+import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IDropdownOption } from "@wayward/game/ui/component/Dropdown";
 import GroupDropdown from "@wayward/game/ui/component/GroupDropdown";

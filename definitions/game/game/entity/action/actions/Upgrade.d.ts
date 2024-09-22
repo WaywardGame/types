@@ -13,7 +13,7 @@ import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type { IMagicalPropertyInfo } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
+import type MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 export interface IUpgradeCanUse extends IActionUsable {
     upgrades: IUpgradeable[];
     upgradeTarget: Item;

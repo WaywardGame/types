@@ -92,6 +92,6 @@ export default class SkillManager {
     skillAndActionTierCheck(skill: SkillType, check: number, actionTier?: number): boolean;
     getSkillAndActionTierValue(skill: SkillType, actionTier?: number): number;
     private calculateRandomSkillGain;
-    gain(skill: SkillType, multiplier?: number, actionTier?: number, bypass?: boolean, times?: number): void;
+    gain(skill: SkillType, multiplier?: number, actionTier?: number, bypass?: boolean, times?: number, decimalPlace?: number): void;
     setAll(skills: SkillSet): void;
 }

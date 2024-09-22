@@ -40,7 +40,7 @@ import { Level } from "@wayward/game/game/inspection/infoProviders/ILevel";
 import { DurabilityLevel } from "@wayward/game/game/inspection/infoProviders/doodad/IDurability";
 import { BookType, ContainerSort, EquipEffect, ItemType, ItemTypeExtra, ItemTypeGroup, RecipeLevel } from "@wayward/game/game/item/IItem";
 import { CraftEfficacy } from "@wayward/game/game/item/recipe/Crafter";
-import { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
+import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import { DrawnMapTheme } from "@wayward/game/game/mapping/IMapRender";
 import { AutoSaveMode } from "@wayward/game/game/meta/IAutoSave";
 import { Load } from "@wayward/game/game/meta/Loading";

@@ -13,7 +13,7 @@ import LabelledValue from "@wayward/game/game/inspection/infoProviders/LabelledV
 import UseInfo from "@wayward/game/game/inspection/infoProviders/UseInfo";
 import type Item from "@wayward/game/game/item/Item";
 import { MagicalPropertyEntry } from "@wayward/game/game/magic/MagicalPropertyManager";
-import { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
+import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import { TempType } from "@wayward/game/game/temperature/ITemperature";
 declare const _default: UseInfo<{
     doodadContainer: import("../../../../doodad/IDoodad").IDoodadDescription | undefined;

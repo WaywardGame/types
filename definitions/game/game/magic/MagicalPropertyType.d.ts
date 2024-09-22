@@ -16,7 +16,7 @@ import type { IItemDescription, IMagicalPropertyInfo } from "@wayward/game/game/
 import type Item from "@wayward/game/game/item/Item";
 import type { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
-export declare enum MagicalPropertyType {
+declare enum MagicalPropertyType {
     /** Increases attack value (for weapons and ammo) */
     Power_Attack = 0,
     /** Increases defense value for anything equippable */
@@ -85,6 +85,7 @@ export declare enum MagicalPropertyType {
     /** Adds bonus durability to an item */
     Persistence_MaxDurability = 30
 }
+export default MagicalPropertyType;
 export interface IMagicalPropertyDescription {
     /**
      * Whether this magical property is applicable for the given item.

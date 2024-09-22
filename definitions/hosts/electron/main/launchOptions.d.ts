@@ -17,8 +17,6 @@ export interface ILaunchOptions {
     colorProfile: string;
     customTitleBar: boolean;
     devtools: boolean;
-    disableDirectComposition: boolean;
-    disableES3GLContext: boolean;
     disableGpuDriverBugWorkarounds: boolean;
     disableHardwareAcceleration: boolean;
     disableVSync: boolean;

@@ -24,7 +24,7 @@ import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProv
 import type { ItemType } from "@wayward/game/game/item/IItem";
 import type { IHasMagic } from "@wayward/game/game/magic/MagicalPropertyManager";
 import { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
-import type { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
+import type MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { EnumReferenceTypes, Reference, Referenceable } from "@wayward/game/game/reference/IReferenceManager";
 import Dictionary from "@wayward/game/language/Dictionary";

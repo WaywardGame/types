@@ -30,7 +30,7 @@ import type Item from "@wayward/game/game/item/Item";
 import type Recipe from "@wayward/game/game/item/recipe/Recipe";
 import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import type { MagicalSubPropertySubTypes } from "@wayward/game/game/magic/MagicalPropertyManager";
-import type { MagicalPropertyType } from "@wayward/game/game/magic/MagicalPropertyType";
+import type MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type { IInsulationDescription, ITemperatureDescription } from "@wayward/game/game/temperature/ITemperature";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
