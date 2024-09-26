@@ -39,7 +39,7 @@ export declare class Notifier {
     suspend(): void;
     resume(): void;
     private update;
-    render(timeStamp: number, x: number, y: number, tileScale: number, forceMarkerRender?: boolean): boolean;
+    render(timeStamp: number, x: number, y: number, tileScale: number, forceMarkerRender: boolean): boolean;
     private addNotification;
     private renderNotification;
 }
