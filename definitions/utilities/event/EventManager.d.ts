@@ -56,7 +56,7 @@ export declare class EventManager<EventBus extends number, EventBuses extends Re
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IEventManagerUntil<EventBus, EventBuses>;
     until(promise: Promise<any>): IEventManagerUntil<EventBus, EventBuses>;
     registerEventBusSubscriber(subscriber: object): void;
-    deregisterEventBusSubscriber(subscriber: object): void;
+    deregisterEventBusSubscriber(subscriber: object): boolean;
 }
 declare const SYMBOL_EVENT_HANDLERS: unique symbol;
 export interface IEventSubscriberClass<EventBus extends number> extends NullaryClass<any> {

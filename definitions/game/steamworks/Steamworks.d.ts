@@ -67,6 +67,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     get isLowPowerMode(): boolean;
     isElectron(): boolean;
     getOsPlatform(): NodeJS.Platform | undefined;
+    takeHeapSnapshot(snapshotName: string): string | undefined;
     reload(): Promise<void>;
     openGpuInfoWindow(): void;
     closeWindow(): Promise<void>;

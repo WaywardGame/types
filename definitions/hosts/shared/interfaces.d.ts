@@ -34,6 +34,7 @@ export interface IHostContextBridge {
     path: IPath;
     ssh2: any;
     getHeapStatistics(): HeapStatistics;
+    takeHeapSnapshot(filePath: string): boolean;
 }
 export interface ISteamworks {
     UGCMatchingType: {

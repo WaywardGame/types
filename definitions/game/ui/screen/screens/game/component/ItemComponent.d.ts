@@ -199,6 +199,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     private tickEndHandlerReasons?;
     private registerTickEndHandler;
     private deregisterTickEndHandler;
+    protected onRemoved(): void;
     getItemComponent(): ItemComponent | undefined;
     isStack(): boolean;
     /**

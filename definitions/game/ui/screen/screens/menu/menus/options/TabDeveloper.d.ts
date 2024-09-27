@@ -12,16 +12,15 @@ import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
 import { Tab } from "@wayward/game/ui/screen/screens/menu/component/Menu";
 export default class TabDeveloper extends Tab implements IRefreshable {
     private readonly refreshables;
-    private readonly buttonDeveloperMode1;
-    private readonly buttonDeveloperMode2;
+    private readonly buttonDeveloperMode;
     private readonly buttonOpenLogsFolder;
     private readonly buttonToggleDevTools;
-    private readonly buttonToggleTraceRecording;
     private readonly buttonFullscreen;
     private readonly buttonReloadGame;
     private readonly buttonReloadStylesheets;
     private readonly buttonReloadTexturesCache;
     private readonly buttonTogglePrepackedSprites;
+    private readonly buttonToggleTraceRecording;
     private readonly buttonDisposeReflection;
     private readonly blockLogSourceFiltering;
     private readonly blockUIExperiments;

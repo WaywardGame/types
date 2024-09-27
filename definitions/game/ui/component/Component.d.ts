@@ -139,6 +139,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     isSelectable(): boolean;
     getSelectionTarget(): Component;
     setInitialSelection(initialSelection?: boolean): this;
+    private registered?;
     registerEventBusSubscriber(...untilEvents: Array<keyof Events<this>>): void;
     deregisterEventBusSubscriber(): void;
     registerBindHandlers(...untilEvents: Array<keyof Events<this>>): void;
