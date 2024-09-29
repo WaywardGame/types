@@ -41,7 +41,7 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     refreshInspectTypeFilter(): this;
     deregister(): void;
     setDisplayLevel(displayLevel: InfoDisplayLevel): this;
-    refresh(): this;
+    refresh(): Promise<this>;
     private refreshAsync;
     protected abstract initializeInspections(): INSPECTIONS_HANDLER | undefined;
     isValid?(): boolean;

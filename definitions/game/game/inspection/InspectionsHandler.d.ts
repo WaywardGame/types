@@ -20,6 +20,8 @@ export interface IInspectionsHandlerEvents {
 export default abstract class InspectionsHandler extends EventEmitter.Host<IInspectionsHandlerEvents> {
     protected readonly context: InfoProviderContext;
     protected readonly inspectionsMap: Map<InspectType, HashSet<Inspection<any>>>;
+    private static readonly registeredInspections;
+    static cleanupRegisteredInspections(): void;
     static makeInspectionsSet(...values: Array<IterableOr<Inspection<any> | undefined>>): HashSet<Inspection<any>>;
     protected registered: boolean;
     constructor(context: InfoProviderContext, inspectionsMap?: Map<InspectType, HashSet<Inspection<any>>>);
