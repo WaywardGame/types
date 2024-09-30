@@ -15,8 +15,8 @@ import { ActionType } from "@wayward/game/game/entity/action/IAction";
 export interface ISteamworksEvents {
     initialize(): any;
     batteryChange(): any;
-    overlayShown(): any;
-    overlayHidden(): any;
+    overlayShown(isActive: true): any;
+    overlayHidden(isActive: false): any;
     onRelayNetworkStatus(ready: boolean, status: ISteamNetworkRelayStatus): void;
     onSteamNetworkingMessagesSessionRequest(steamIdRemote: string): void;
     onSteamNetworkingMessagesSessionFailed(steamIdRemote: string, state: SteamNetworkingConnectionState, endReason: number): void;
