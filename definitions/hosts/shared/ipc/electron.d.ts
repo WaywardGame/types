@@ -18,6 +18,7 @@ export interface IElectron {
     log(...args: any[]): Promise<void>;
     startContentTraceRecording(): Promise<void>;
     stopContentTraceRecording(logPath: string): Promise<void>;
+    enableOverlaySupport(enable: boolean): Promise<void>;
     setFullScreen(fullscreen: boolean): Promise<void>;
     setCustomTitleBar(enabled: boolean): Promise<void>;
     isMaximized(): Promise<boolean>;

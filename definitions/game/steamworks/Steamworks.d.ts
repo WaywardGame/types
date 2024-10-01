@@ -91,11 +91,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getHeapStatistics(): Promise<HeapStatistics | undefined>;
     setFullscreen(fullscreen: boolean): Promise<void>;
     setCustomTitleBar(enabled: boolean): Promise<void>;
-    setOverlayWorks(overlayWorks: boolean): void;
-    /**
-     * Shows / hides the overlay-refresh element
-     */
-    protected refreshOverlayRefresher(isActive: boolean): void;
+    setOverlayWorks(overlayWorks: boolean): Promise<void>;
     setupMods(): Promise<void>;
     getSteamId(): ISteamId | undefined;
     getFriends(): ISteamFriend[] | undefined;

@@ -26,4 +26,8 @@ export interface IElectronContainer {
      * This is set after the electron browser window is created
      */
     mainWindow?: electron.BrowserWindow;
+    /**
+     * Window invalidation interval for steam overlay support
+     */
+    invalidateInternal?: NodeJS.Timeout;
 }
