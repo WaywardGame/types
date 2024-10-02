@@ -30,6 +30,7 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     private readonly paragraphInspectionsInvalid;
     private inspectTypeFilter;
     protected inspectionsHandler?: InspectionsHandler;
+    protected refreshInspectionsOfTypeIsRunning: boolean;
     protected inspectionsHandlerUpdatedInspectionsCallback?: (_: any, inspectType: InspectType, inspections: HashSet<Inspection<any>>, oldInspections: HashSet<Inspection<any>> | undefined) => void;
     private displayLevel;
     private readonly inspectTypeWrappers;
@@ -41,7 +42,7 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     refreshInspectTypeFilter(): this;
     deregister(): void;
     setDisplayLevel(displayLevel: InfoDisplayLevel): this;
-    refresh(): Promise<this>;
+    refresh(): this;
     private refreshAsync;
     protected abstract initializeInspections(): INSPECTIONS_HANDLER | undefined;
     isValid?(): boolean;
