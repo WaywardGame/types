@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 export declare class ContainerBucketMarshal {
-    constructor(_element: WebdriverIO.Element);
+    constructor(_element: ContainerBucketMarshal);
 }

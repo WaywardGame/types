@@ -18,6 +18,7 @@ import Component from "@wayward/game/ui/component/Component";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 import type HashSet from "@wayward/utilities/collection/set/HashSet";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import ResolvablePromise from "@wayward/utilities/promise/ResolvablePromise";
 export interface ITileInspectionsEvents extends Events<Component> {
     refreshed(isValid?: boolean): any;
     updateInspectTypeFilter(): any;
@@ -30,7 +31,7 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     private readonly paragraphInspectionsInvalid;
     private inspectTypeFilter;
     protected inspectionsHandler?: InspectionsHandler;
-    protected refreshInspectionsOfTypeIsRunning: boolean;
+    protected refreshInspectionsOfTypeRunning?: ResolvablePromise;
     protected inspectionsHandlerUpdatedInspectionsCallback?: (_: any, inspectType: InspectType, inspections: HashSet<Inspection<any>>, oldInspections: HashSet<Inspection<any>> | undefined) => void;
     private displayLevel;
     private readonly inspectTypeWrappers;
@@ -40,7 +41,7 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     all(): Iterable<[InspectType, HashSet<Inspection<any>>]>;
     setInspectTypeFilter(filter?: (inspectType: InspectType) => boolean): this;
     refreshInspectTypeFilter(): this;
-    deregister(): void;
+    deregister(): Promise<void>;
     setDisplayLevel(displayLevel: InfoDisplayLevel): this;
     refresh(): this;
     private refreshAsync;
