@@ -381,9 +381,9 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      */
     getMaxDecayTime(overrideDefault?: number, withRandomization?: boolean): number | undefined;
     /**
-     * Gets the inherit item type.
+     * Gets the skill type associated with the item, or choose a random one if the description is an array.
      */
-    getInheritItemRecipeSkill(): SkillType;
+    getSkillUse(): SkillType;
     getDamageType(): DamageType;
     /**
      * Returns the damage types associated with a skill with a fallback for whatever damage types the item normally provides

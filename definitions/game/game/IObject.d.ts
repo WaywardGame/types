@@ -28,7 +28,11 @@ export interface IObjectDescription extends IHasImagePath {
      * number of game ticks until decay
      */
     decayMax?: number;
-    skillUse?: SkillType;
+    /**
+     * An associated skill or skills for the item when refining, reinforcing, dismantling, consuming, etc.
+     * If multiple skills are set, it will pick one at random when using
+     */
+    skillUse?: SkillType | SkillType[];
     /**
      * container maximum weight
      */

@@ -416,7 +416,7 @@ export declare enum RestCancelReason {
     WaterPoured = 7
 }
 export declare const restCancelReasonMessageMap: Record<RestCancelReason, Message | undefined>;
-export type WalkToChangeReason = "Damage" | "Overburdened" | "Unknown";
+export type WalkToChangeReason = "Damage" | "Overburdened" | "PromptVisible" | "Unknown";
 export interface IRestData {
     type: RestType;
     startHealth: number;

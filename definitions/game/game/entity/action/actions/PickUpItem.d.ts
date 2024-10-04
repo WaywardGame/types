@@ -13,7 +13,7 @@ import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type Item from "@wayward/game/game/item/Item";
 export interface IPickUpItemCanUse extends IActionUsable {
-    pickUpItem: Item;
+    pickUpItem: Item | Item[];
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.Boolean]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpItemCanUse, [(boolean | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.Boolean], [arg1: ActionArgument.Undefined, ActionArgument.ItemArrayNearby]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpItemCanUse, [(boolean | undefined)?, (Item[] | undefined)?]>;
 export default _default;

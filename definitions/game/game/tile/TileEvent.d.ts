@@ -16,6 +16,7 @@ import EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
+import { SkillType } from "@wayward/game/game/entity/IHuman";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
@@ -99,4 +100,8 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
      * Gets the builder/creator of this event, or `undefined` if the tile event is creatorless.
      */
     getBuilder(): Player | undefined;
+    /**
+     * Gets the skill type associated with the tile event, or choose a random one if the description is an array.
+     */
+    getSkillUse(): SkillType;
 }

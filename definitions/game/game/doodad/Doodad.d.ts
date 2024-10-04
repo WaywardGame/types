@@ -18,7 +18,7 @@ import EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/IHuman";
 import { EquipType } from "@wayward/game/game/entity/IHuman";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
@@ -385,6 +385,10 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * Forces a boat to be drydocked (revert from doodad to an item if water was taken away for some reason).
      */
     dryDockBoat(human: Human): void;
+    /**
+     * Gets the skill type associated with the doodad, or choose a random one if the description is an array.
+     */
+    getSkillUse(): SkillType;
     /**
      * Decay over time
      */

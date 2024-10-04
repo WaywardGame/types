@@ -596,6 +596,9 @@ export interface IItemNotifier {
 export interface IRecipe {
     baseComponent?: ItemType | ItemTypeGroup;
     components: IRecipeComponent[];
+    /**
+     * The skill used when crafting or disassembling the item.
+     */
     skill: SkillType;
     level: RecipeLevel;
     requiredDoodads?: Array<DoodadType | DoodadTypeGroup>;
@@ -698,7 +701,6 @@ export interface ILiquidGather {
 export interface IDismantleDescription {
     items: IDismantleItemDescription[];
     required?: ItemTypeGroup;
-    skill?: SkillType;
     runeChance?: RuneChance;
     producesEvent?: TileEventType;
 }
