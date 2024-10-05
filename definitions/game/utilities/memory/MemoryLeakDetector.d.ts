@@ -18,6 +18,7 @@ declare class MemoryLeakDetector {
     private activeTask;
     get isReportingErrors(): boolean;
     get isMonitoring(): boolean;
+    getCount(prefix: string): number;
     waitForIdle(): Promise<void>;
     register(object: object, objectName: string, expectedLifetime: ExpectedLifetime, parentObjectIdentifier?: string): void;
     registerMultiple<T extends object>(prefix: string, objects: SaferArray<T>, objectNamer: (object: T) => string, expectedLifetime: ExpectedLifetime): void;
