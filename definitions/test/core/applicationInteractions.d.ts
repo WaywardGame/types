@@ -70,11 +70,12 @@ export default class ApplicationInteractions {
     private importGame;
     /**
      * Executes a Move action
-     * @param direction Direction to move
+     * @param direction Direction to move. Direction.None to Idle
      * @param steps Number of movements (steps)
      * @param verifyMovement True to verify the players position changed. Don't use this if the player is moving into the edge
      */
-    moveInDirection(direction: Direction.Cardinal, steps?: number, verifyMovement?: boolean): Promise<void>;
+    moveInDirection(direction: Direction.Cardinal | Direction.None, steps?: number, verifyMovement?: boolean): Promise<void>;
+    waitForNoDelay(): Promise<void>;
     setSail(): Promise<void>;
     waitForGameEndScreen(isWinner: boolean): Promise<void>;
     returnToTitleScreen(): Promise<void>;
@@ -100,7 +101,7 @@ export default class ApplicationInteractions {
         logFailure: boolean;
     }>): Promise<void>;
     increaseStat(stat: Stat, value: number): Promise<void>;
-    randomInput(count: number): Promise<void>;
+    randomMovement(count: number): Promise<void>;
     pressKey(key: string, modifier?: string, duration?: number): Promise<void>;
     screenshot(suffix: string): Promise<void>;
 }

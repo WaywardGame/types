@@ -71,7 +71,7 @@ export declare class ApplicationManager {
     returnToTitleScreen(): Promise<void>;
     waitUntilLoadingIsFinished(): Promise<void>;
     removeNearbyCreatures(): Promise<void>;
-    randomInput(count: number): Promise<void>;
+    randomMovement(count: number): Promise<void>;
     moveToTowardsIsland(app: Application, direction: Direction.Cardinal, recoverStats?: boolean): Promise<void>;
     recoverStats(app: Application): Promise<void>;
     idle(app: Application, steps?: number): Promise<void>;
