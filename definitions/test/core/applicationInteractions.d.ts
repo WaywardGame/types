@@ -62,7 +62,10 @@ export default class ApplicationInteractions {
     isShowingPrompt(prompt: Prompt): Promise<boolean>;
     dismissPrompt(prompt: Prompt): Promise<void>;
     dismissPromptIfShown(prompt: Prompt): Promise<void>;
-    clickUnpauseIconIfVisible(): Promise<void>;
+    /**
+     * Checks for a pause icon / if the game is caused
+     */
+    ensureUnpaused(): Promise<void>;
     clickNewGameCheckbox(name: string): Promise<void>;
     clickButtonIfClickable(name: string): Promise<boolean>;
     setNewGameSeed(seed: string | number): Promise<void>;
@@ -75,7 +78,7 @@ export default class ApplicationInteractions {
      * @param verifyMovement True to verify the players position changed. Don't use this if the player is moving into the edge
      */
     moveInDirection(direction: Direction.Cardinal | Direction.None, steps?: number, verifyMovement?: boolean): Promise<void>;
-    waitForNoDelay(): Promise<void>;
+    waitUntilCanMove(): Promise<void>;
     setSail(): Promise<void>;
     waitForGameEndScreen(isWinner: boolean): Promise<void>;
     returnToTitleScreen(): Promise<void>;

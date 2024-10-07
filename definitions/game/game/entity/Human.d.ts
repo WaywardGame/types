@@ -283,7 +283,6 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * Ordering is done via EmitHumanEventPacket
      */
     protected onNoInput(): void;
-    protected onMoveComplete(): void;
     /**
      * This is only ran on the server
      */

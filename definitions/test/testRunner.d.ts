@@ -212,7 +212,6 @@ export declare class TestRunContext extends BaseContext {
     private getCommonNUnitXmlAttributes;
     private sanitizeXmlText;
 }
-export declare const rootContext: TestSetupContext;
 export declare const before: (executor: TestExecutor) => void;
 export declare const after: (executor: TestExecutor) => void;
 export declare const beforeEach: (executor: TestExecutor) => void;

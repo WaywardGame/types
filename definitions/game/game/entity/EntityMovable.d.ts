@@ -51,10 +51,6 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
      */
     fromY?: number;
     /**
-     * Not guaranteed to be synced between the server and client for Human entities
-     */
-    isMoving?: boolean;
-    /**
      * Only used for Human entities
      */
     movementCompleteZ?: number;
@@ -165,6 +161,11 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
     getMovementProgress(timeStamp: number): number;
     protected onMovementCompleted(movingData: IMovingData): void;
     get isFlying(): boolean;
+    /**
+     * Checks if the entity is moving.
+     * This is based on the local client state (renderer).
+     */
+    get isMovingClientside(): boolean;
     getMoveType(): MoveType;
     setMoveType(moveType: MoveType): void;
     canSwapWith(entity: EntityMovable, source: string | undefined): boolean;

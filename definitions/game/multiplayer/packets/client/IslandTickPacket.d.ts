@@ -12,7 +12,6 @@ import type { IslandId } from "@wayward/game/game/island/IIsland";
 import ClientPacket from "@wayward/game/multiplayer/packets/ClientPacket";
 export default class IslandTickPacket extends ClientPacket {
     islandId: IslandId;
-    isMoving: boolean[];
     getDebugInfo(): string;
     process(): void;
     protected getInitialBufferSize(): number;
