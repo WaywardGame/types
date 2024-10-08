@@ -22,13 +22,12 @@ export interface ILaunchOptions {
     disableVSync: boolean;
     extraGpuFlags: boolean;
     forceHighPerformanceGpu: boolean;
-    forceInProcessGPU: boolean;
     forceWaveAudio: boolean;
     forceOverlaySupport: boolean;
     fullscreen: boolean;
     height: "max" | number;
     ignoreGpuBlockList: boolean;
-    inProcessGpu: boolean;
+    overlaySupport: boolean;
     internalVersion: number;
     maximized: boolean;
     openGpuInfoPage: boolean;

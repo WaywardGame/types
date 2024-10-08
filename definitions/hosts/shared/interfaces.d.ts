@@ -99,6 +99,7 @@ export interface ISteamworks {
     dismissFloatingGamepadTextInput(): boolean;
     setFloatingGamepadTextInputDismissedCallback(cb: () => void): void;
     overlayNeedsPresent(): boolean;
+    isGameOverlayEnabled(): boolean;
     getInputType(): SteamInputType;
     setTimelineGameMode(timelineGameMode: SteamTimelineGameMode): void;
     addTimelineEvent(marker: SteamTimelineMarker, title: string, description: string, clipPriority: SteamTimelineEventClipPriority): void;
