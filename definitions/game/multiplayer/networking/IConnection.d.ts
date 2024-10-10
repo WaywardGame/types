@@ -69,7 +69,7 @@ export interface IConnection {
     sendKeepAlive(): void;
 }
 export interface IQueuedData {
-    data: ArrayBuffer;
+    data: ArrayBufferLike;
     byteOffset: number;
     packetNumber?: number;
     retries?: number;

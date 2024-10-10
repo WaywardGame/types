@@ -8,5 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-declare const _default: [string, import("../../../../testRunner").TestExecutor];
+import type { TestExecutor } from "@wayward/test/testRunner";
+declare const _default: [string, TestExecutor];
 export default _default;

@@ -47,9 +47,9 @@ export interface ITemperatureManagerEvents {
 }
 export default class TemperatureManager extends EventEmitter.Host<ITemperatureManagerEvents> implements IPreSerializeCallback {
     private readonly island;
-    encodedCalculatedCache: Map<number, Map<number, Uint32Array>>;
-    encodedProducedCache: Map<number, Map<number, Uint32Array>>;
-    encodedGuaranteedCorrectCache: Map<number, Map<number, Uint32Array>>;
+    encodedCalculatedCache: Map<number, Map<number, Uint32Array<ArrayBufferLike>>>;
+    encodedProducedCache: Map<number, Map<number, Uint32Array<ArrayBufferLike>>>;
+    encodedGuaranteedCorrectCache: Map<number, Map<number, Uint32Array<ArrayBufferLike>>>;
     private readonly containerTemperatureCache;
     private readonly containerTileTemperatureCache;
     private readonly containerItemsTemperatureCache;

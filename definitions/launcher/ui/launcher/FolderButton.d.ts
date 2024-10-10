@@ -23,7 +23,7 @@ export interface IFolderButtonEvents extends ComponentEvents<InputButton> {
 export default class FolderButton extends InputButton {
     readonly folder: IFolder;
     event: ComponentEventManager<this, IFolderButtonEvents>;
-    readonly path: Component<HTMLParagraphElement> & Component<HTMLElement>;
+    readonly path: Component;
     constructor(folder: IFolder);
     protected shouldSelectInputOnClick(): boolean;
 }

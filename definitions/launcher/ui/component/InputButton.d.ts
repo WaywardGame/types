@@ -16,7 +16,7 @@ export declare enum InputButtonClasses {
     Input = "button-input-input"
 }
 export default class InputButton extends Button {
-    readonly input: Component<HTMLInputElement> & Component<HTMLElement>;
+    readonly input: Component<HTMLInputElement>;
     constructor();
     setPlaceholder(text: string): this;
     protected shouldSelectInputOnClick(): boolean;

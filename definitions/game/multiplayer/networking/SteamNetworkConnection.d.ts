@@ -21,7 +21,7 @@ export declare class SteamNetworkConnection extends Connection {
     readonly maxMessageSize = 65536;
     private _processIntervalId;
     private _checkSessionStateIntervalId;
-    constructor(steamNetworking: ISteamworksNetworking, hostSteamId: string, matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, onData: (data: ArrayBuffer) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined, connectGlobalMatchmakingServer?: (() => void) | undefined);
+    constructor(steamNetworking: ISteamworksNetworking, hostSteamId: string, matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, onData: (data: ArrayBufferLike) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined, connectGlobalMatchmakingServer?: (() => void) | undefined);
     /**
      * Steam id of the peer
      */

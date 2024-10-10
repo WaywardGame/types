@@ -21,7 +21,7 @@ export declare abstract class Packet<T = void> extends IndexedPacket implements 
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     getSynchronizationCheckData(): ISynchronizationCheckData;
-    getArrayBuffer(id?: number): ArrayBuffer;
+    getArrayBuffer(id?: number): ArrayBufferLike;
     serializeData(): number;
     processSerializedData(dataView: DataView): void;
     abstract process(): T;

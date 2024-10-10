@@ -23,13 +23,13 @@ export declare enum LauncherUIClasses {
 }
 export default class LauncherUI extends Component {
     private readonly data;
-    readonly content: Component<HTMLDivElement> & Component<HTMLElement>;
+    readonly content: Component;
     readonly resources: Resources;
     readonly mods: Mods;
     readonly saves: Saves;
-    readonly launchRow: Component<HTMLElement>;
+    readonly launchRow: Component;
     readonly launchOptions: Component;
-    readonly launchButton: Button & Component<HTMLElement>;
+    readonly launchButton: Button;
     constructor(data: Data);
     private launch;
     private cleanUp;

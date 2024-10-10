@@ -15,7 +15,7 @@ interface IWebWorkerMessage<Type extends string, DataType> {
 interface IDatalessWebWorkerMessage<Type extends string> {
     type: Type;
 }
-export type SharedWebWorkerMessages = IDatalessWebWorkerMessage<"delete"> | IWebWorkerMessage<"multiplayerData", ArrayBuffer>;
+export type SharedWebWorkerMessages = IDatalessWebWorkerMessage<"delete"> | IWebWorkerMessage<"multiplayerData", ArrayBufferLike>;
 export type HostWebWorkerMessage = SharedWebWorkerMessages | IDatalessWebWorkerMessage<"ready"> | IWebWorkerMessage<"status", {
     status: WebWorkerStatus;
 }> | IWebWorkerMessage<"multiplayerConnect", {

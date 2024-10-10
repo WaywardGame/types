@@ -63,7 +63,7 @@ export declare abstract class Connection implements IConnection {
     /**
      * Queues data to be sent soon
      */
-    protected queuePacketData(data: ArrayBuffer, packetNumber?: number): void;
+    protected queuePacketData(data: ArrayBufferLike, packetNumber?: number): void;
     /**
      * Clears queued packets
      */

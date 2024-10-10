@@ -17,7 +17,7 @@ import type { HostWebWorkerMessage } from "@wayward/game/webWorker/WebWorkerMess
 export declare class WebWorkerManager {
     private readonly game;
     readonly workers: Map<string, WebWorkerClient>;
-    multiplayerDataCallback: ((data: ArrayBuffer) => void) | undefined;
+    multiplayerDataCallback: ((data: ArrayBufferLike) => void) | undefined;
     constructor(game: Game);
     get workerId(): string | undefined;
     /**

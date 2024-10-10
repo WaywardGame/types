@@ -34,7 +34,7 @@ export interface IHashedSyncCheck {
 }
 export interface IPacket<T = any> {
     getAllowedStates(): ConnectionState;
-    getArrayBuffer(id?: number): ArrayBuffer;
+    getArrayBuffer(id?: number): ArrayBufferLike;
     getRegistrarId(): number;
     getDebugInfo(): string;
     getSynchronizationCheckData(): ISynchronizationCheckData;

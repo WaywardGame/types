@@ -15,7 +15,7 @@ import { WebWorkerStatus } from "@wayward/game/webWorker/WebWorkerMessages";
  */
 export declare class WebWorkerClient {
     readonly identifier: string;
-    multiplayerDataCallback: ((data: ArrayBuffer) => void) | undefined;
+    multiplayerDataCallback: ((data: ArrayBufferLike) => void) | undefined;
     private readonly log;
     private readonly worker;
     private readonly readyPromise;

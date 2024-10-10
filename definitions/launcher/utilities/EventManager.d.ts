@@ -15,7 +15,7 @@ export interface IEventSubscriptionManager<EVENTS = {}, TARGET extends EventTarg
     subscribeOnce(type: string | string[], listener: (this: TARGET, event: Event) => any): this;
 }
 export declare class EventManager<HOST extends object, EVENTS = {}, TARGET extends EventTarget = EventTarget> {
-    static readonly global: EventManager<{}, GlobalEventHandlersEventMap, EventTarget>;
+    static readonly global: EventManager<{}, GlobalEventHandlersEventMap>;
     static make<EVENTS>(): EventManager<{}, EVENTS>;
     static emit(target: EventTarget | undefined, event: Event | string, init?: ((event: Event) => any) | object): Event;
     private readonly host;

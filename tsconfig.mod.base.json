@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "esnext",
+		"target": "ES2024",
 		"module": "AMD",
 		"moduleResolution": "node",
 		"composite": true,
@@ -32,7 +32,8 @@
 		"lib": [
 			"DOM",
 			"DOM.Iterable",
-			"ESNext",
+			"ES2024",
+			"ESNext.Iterator",
 			"WebWorker.ImportScripts",
 		]
 	},

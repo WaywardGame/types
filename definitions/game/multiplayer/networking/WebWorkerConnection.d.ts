@@ -17,7 +17,7 @@ export declare class WebWorkerConnection extends Connection {
     private webWorkerClient?;
     name: string;
     get maxMessageSize(): number;
-    constructor(matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, onData: (data: ArrayBuffer) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined, webWorkerClient?: WebWorkerClient | undefined);
+    constructor(matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, onData: (data: ArrayBufferLike) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined, webWorkerClient?: WebWorkerClient | undefined);
     get isConnected(): boolean;
     protected onClosing(): void;
     protected onClosed(): void;

@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Middleware from "@wayward/devserver/middleware/util/Middleware";
-declare const _default: Middleware<[message?: any]>;
+declare const _default: Middleware<[message?: string]>;
 export default _default;
