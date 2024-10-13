@@ -15,5 +15,7 @@ export default class Task {
     private lastYieldEnd;
     constructor(interval?: number);
     reset(): void;
-    yield(quick?: boolean): Promise<void>;
+    get shouldYield(): boolean;
+    yield(quick?: boolean): Promise<void> | undefined;
+    forceYield(quick?: boolean): Promise<void>;
 }

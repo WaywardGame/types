@@ -16,7 +16,7 @@ import { Direction } from "@wayward/game/utilities/math/Direction";
 import { ApplicationDom } from "@wayward/test/core/applicationDom";
 import { ApplicationLogger } from "@wayward/test/core/applicationLogger";
 import type { IDedicatedServerGameOptions, INewGameOptions, ITestJoinServerOptions, IWaitUntilGameLoadedOptions } from "@wayward/test/interfaces";
-import type { TestRunContext } from "@wayward/test/testRunner";
+import { type TestRunContext } from "@wayward/test/testRunner";
 import type { Random } from "@wayward/utilities/random/Random";
 export default class ApplicationInteractions {
     protected readonly testContext: TestRunContext;
