@@ -14,7 +14,7 @@ import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Human from "@wayward/game/game/entity/Human";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
-import type { IItemDescription, IItemOnUse } from "@wayward/game/game/item/IItem";
+import { type IItemDescription, type IItemOnUse } from "@wayward/game/game/item/IItem";
 export interface IHealOtherCanUse extends IActionUsable {
     itemDescription: IItemDescription;
     target: Creature | Human | NPC;

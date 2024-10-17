@@ -384,6 +384,11 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Gets the skill type associated with the item, or choose a random one if the description is an array.
      */
     getSkillUse(): SkillType;
+    /**
+     *
+     * @param action Gets the consume skill for the given action (Eat, Heal, HealOther, DrinkItem, or Cure) on the item
+     */
+    getConsumeSkillUse(action: ActionType): SkillType;
     getDamageType(): DamageType;
     /**
      * Returns the damage types associated with a skill with a fallback for whatever damage types the item normally provides

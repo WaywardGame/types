@@ -17,7 +17,7 @@ import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
 import type Human from "@wayward/game/game/entity/Human";
 import type { DamageType, Defense, EntityType, ICastable, MoveType } from "@wayward/game/game/entity/IEntity";
-import type { Delay, EquipType, SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType, type Delay, type EquipType } from "@wayward/game/game/entity/IHuman";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { IActionApi } from "@wayward/game/game/entity/action/IAction";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
@@ -382,11 +382,11 @@ export interface IConsumeItemStat {
     stat: Stat;
     amount: number;
 }
-export type ConsumeItemStatsTuple = [health: number, stamina: number, hunger: number, thirst: number, otherStats?: IConsumeItemStat[]];
+export type ConsumeItemStatsTuple = [health: number, stamina: number, hunger: number, thirst: number, skillUse: SkillType, otherStats?: IConsumeItemStat[]];
 export type ConsumeItemStats = ConsumeItemStatsTuple | IConsumeItemStat[];
 export declare namespace ConsumeItemStats {
     const DEFAULT_STATS: Stat[];
-    function resolve(stats?: number | ConsumeItemStats): Map<Stat, number>;
+    function resolve(stats?: ConsumeItemStats): Map<Stat, number>;
 }
 export interface IItemOnUse {
     [ActionType.Apply]?: ConsumeItemStats;
@@ -396,7 +396,7 @@ export interface IItemOnUse {
     [ActionType.DrinkItem]?: ConsumeItemStats;
     [ActionType.Eat]?: ConsumeItemStats;
     [ActionType.Heal]?: ConsumeItemStats;
-    [ActionType.HealOther]?: number;
+    [ActionType.HealOther]?: ConsumeItemStats;
     [ActionType.Invoke]?: IInvokeUse;
     [ActionType.PlaceDown]?: IItemBuild;
     [ActionType.Plant]?: DoodadType;
