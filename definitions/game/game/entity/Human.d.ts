@@ -224,7 +224,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     getDamageModifier(): number;
     calculateDamageAmount(attackType: AttackType, weapon?: Item, ammoItem?: Item): number;
     isDualWielding(): boolean;
-    getAttack(attack?: AttackType, weapon?: Item): IAttack;
+    getAttack(attack?: AttackType, weapon?: Item, offHandWeapon?: Item): IAttack;
     getSimplifiedCumulativeAttack(): number;
     getSimplifiedCumulativeDefense(): number;
     getCombatStrength(): number;

@@ -20,8 +20,8 @@ declare const _default: UseInfo<{
     equip: import("@wayward/game/game/entity/IHuman").EquipType;
     entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
-    type: import("../../../../item/IItem").ItemType;
-    description: Readonly<import("../../../../item/IItem").IItemDescription>;
+    type: import("@wayward/game/game/item/IItem").ItemType;
+    description: Readonly<import("@wayward/game/game/item/IItem").IItemDescription>;
     quality: import("../../../../IObject").Quality;
     action: ActionType.Equip;
     union: import("@wayward/game/game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Equip>;
