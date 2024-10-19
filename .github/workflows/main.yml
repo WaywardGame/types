@@ -36,7 +36,6 @@ jobs:
           typesversion=$(echo ${{fromJson(steps.set_var.outputs.packageJson).version}} | cut -c 2-999)
           echo "$typesversion"
           echo "TYPES_VERSION=$typesversion" >> $GITHUB_ENV
-
       - name: zip
         run: |
           cd ../
