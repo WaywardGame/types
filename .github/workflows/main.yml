@@ -7,7 +7,8 @@ on:
 
 env:
   REPO_NAME: ${{ github.event.repository.name }}
-  EXTRA_ARGS: ${{ github.ref == 'refs/heads/development' && '--tag dev' || '' }}
+  EXTRA_RELEASE_ARGS: ${{ github.ref == 'refs/heads/development' && '--prerelease' || '' }}
+  EXTRA_NPM_ARGS: ${{ github.ref == 'refs/heads/development' && '--tag dev' || '' }}
 
 jobs:
   release:
@@ -36,6 +37,7 @@ jobs:
           typesversion=$(echo ${{fromJson(steps.set_var.outputs.packageJson).version}} | cut -c 2-999)
           echo "$typesversion"
           echo "TYPES_VERSION=$typesversion" >> $GITHUB_ENV
+
       - name: zip
         run: |
           cd ../
@@ -58,9 +60,9 @@ jobs:
               --target="${{ github.sha }}" \
               --title="v$TYPES_VERSION" \
               --generate-notes \
-              $EXTRA_ARGS \
+              $EXTRA_RELEASE_ARGS \
               "../$REPO_NAME.zip#$REPO_NAME.zip"
 
-      - run: npm publish --provenance --access public $EXTRA_ARGS
+      - run: npm publish --provenance --access public $EXTRA_NPM_ARGS
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
