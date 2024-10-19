@@ -15,7 +15,7 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write
     steps:
       - uses: actions/checkout@v4
@@ -34,7 +34,7 @@ jobs:
           echo "::set-output name=packageJson::$content"
       - run: |
           echo "${{fromJson(steps.set_var.outputs.packageJson).version}}"
-          typesversion=$(echo ${{fromJson(steps.set_var.outputs.packageJson).version}} | cut -c 2-999)
+          typesversion=${{fromJson(steps.set_var.outputs.packageJson).version}}
           echo "$typesversion"
           echo "TYPES_VERSION=$typesversion" >> $GITHUB_ENV
 
