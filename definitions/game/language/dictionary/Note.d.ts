@@ -37,7 +37,6 @@ declare enum Note {
     Starvation = 21,
     Stranded = 22,
     ToolUse = 23,
-    TreasureHunting = 24,
-    Cursed = 25
+    TreasureHunting = 24
 }
 export default Note;
