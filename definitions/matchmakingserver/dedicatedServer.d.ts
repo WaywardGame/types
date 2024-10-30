@@ -11,13 +11,14 @@
 import type * as ws from "ws";
 import Server from "./server";
 import * as shared from "./shared";
+import type { IServerGameDetails, IServerServerDetails } from "@wayward/hosts-shared/interfaces";
 export default class DedicatedServer extends Server {
     private host;
     private readonly dedicatedServerId;
     stop(): void;
     setLogCallback(logFunc: ((...args: any[]) => void) | undefined): void;
     get ipAddress(): string | undefined;
-    updateDirectory(serverDetails: Partial<shared.IServerServerDetails>, gameDetails: shared.IServerGameDetails): void;
+    updateDirectory(serverDetails: Partial<IServerServerDetails>, gameDetails: IServerGameDetails): void;
     checkConnection(): Promise<shared.ICheckConnectionServerDirectoryResponse>;
     protected getDirectoryConnectionAddress(): string | undefined;
     protected getConnectionIdentifier(path: string | undefined): string | undefined;

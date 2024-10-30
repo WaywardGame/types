@@ -253,6 +253,8 @@ export interface IServerGameDetails {
     peaceful: boolean;
     milestoneModifiersAllowed: boolean;
     island: IServerIslandDetails;
+    reputation?: number;
+    alignment?: number;
 }
 export interface IServerMod {
     name: string;

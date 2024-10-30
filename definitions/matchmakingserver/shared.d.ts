@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IServerGameDetails, IServerServerDetails } from "@wayward/hosts/shared/interfaces";
 import type * as ws from "ws";
 export declare const matchmakingServer = "mm.waywardgame.com";
 export declare const matchmakingServerPort = 38740;
@@ -40,44 +41,6 @@ export interface IServer {
 }
 export interface IServerConnectionDetails {
     code: string;
-}
-export interface IServerServerDetails {
-    worldId: string;
-    name: string;
-    description: string;
-    hostPlayerName: string;
-    hostPlayerId: string;
-    lobbyType: ServerLobbyType;
-    region: string;
-    code: string;
-    isDedicatedServer: boolean;
-    buildTime: number | undefined;
-    gameVersion: string;
-}
-export interface IServerGameDetails {
-    players: string[];
-    maxPlayers: number;
-    difficulty: number;
-    pvp: boolean;
-    alignment: number;
-    reputation: number;
-    days: number;
-    mods: IServerMod[];
-    peaceful: boolean;
-    milestoneModifiersAllowed: boolean;
-    island: IServerIslandDetails;
-}
-export interface IServerMod {
-    name: string;
-    version: string;
-    publishFileId: string | undefined;
-}
-export interface IServerIslandDetails {
-    position: {
-        x: number;
-        y: number;
-    };
-    biomeType: number;
 }
 export declare enum ServerLobbyType {
     Private = 0,
