@@ -67,4 +67,5 @@ export declare class RequirementInstance extends EventEmitter.Host<IQuestRequire
     getCompletionAmount(): number;
     getRelations(): HighlightSelector[];
     setVisible(): this;
+    private get description();
 }
