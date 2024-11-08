@@ -377,6 +377,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * When this item (or as a doodad) is melted, item types that match in this array against the disassembly object will be left behind.
      */
     dropDissassemblyItemsOnMelt?: Array<ItemType | ItemTypeGroup>;
+    /**
+     * When set to true, the item will provide no consumption bonuses when used based on its quality
+     */
+    qualityProvidesNoConsumeBonus?: boolean;
 }
 export interface IConsumeItemStat {
     stat: Stat;
