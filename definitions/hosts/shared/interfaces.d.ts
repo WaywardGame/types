@@ -85,6 +85,13 @@ export interface ISteamworks {
     getCurrentGameInstallDir(): string;
     getSteamId(): ISteamId;
     getCurrentBetaName(): string;
+    getBetas(): Array<{
+        buildId: number;
+        name: string;
+        description: string;
+        flags: number;
+    }>;
+    setActiveBeta(name: string): boolean;
     onGameOverlayActive(cb: (isActive: boolean) => void): void;
     onLobbyCreated(cb: (success: boolean, lobbyId: string, result?: number) => void): void;
     onLobbyEntered(cb: (success: boolean, lobbyId: string, result?: number) => void): void;

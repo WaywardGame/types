@@ -123,6 +123,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
      */
     remove(): this;
     onStoppingPlay(): void;
+    onPreMoveToIsland(): void;
     private _shouldDisplayWhenEmpty;
     protected shouldDisplayWhenEmpty(): boolean;
     setShouldDisplayWhenEmpty(shouldDisplayWhenEmpty?: boolean): this;
