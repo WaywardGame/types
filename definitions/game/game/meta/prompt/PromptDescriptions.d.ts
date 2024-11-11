@@ -103,6 +103,7 @@ export declare const promptMenuCustomGameOptionsImportFailure: import("@wayward/
 export declare const promptMenuMilestoneModifiersConfirmImport: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuMilestoneModifiersImportFailure: import("@wayward/game/game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptMenuOptionsReloadGame: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
+export declare const promptMenuOptionsChangeSteamBeta: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsChangeReload: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsConfirmUnlockMilestones: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsConfirmDiscoverActions: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;

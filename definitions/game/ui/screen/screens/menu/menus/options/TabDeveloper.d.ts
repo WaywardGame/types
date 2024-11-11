@@ -35,4 +35,6 @@ export default class TabDeveloper extends Tab implements IRefreshable {
     private toggleDeveloperMode;
     private onFullscreen;
     private reloadGame;
+    private createSteamBetasDropdown;
+    private onSteamBetaSelect;
 }

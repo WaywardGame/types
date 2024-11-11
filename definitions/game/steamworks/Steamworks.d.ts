@@ -17,6 +17,7 @@ import type { ModInformation } from "@wayward/game/mod/ModInformation";
 import type { IJoinServerOptions, ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
 import type { IBuild, IDedicatedServerInfo, IModPath, ISteamworksEvents, SteamStatTypeValues } from "@wayward/game/steamworks/ISteamworks";
 import { SteamStatArea } from "@wayward/game/steamworks/ISteamworks";
+import type { ISteamBeta } from "@wayward/hosts/shared/interfaces";
 import { type IMatchmakingServer, type INapiDiscordPresenceInfo, type IRemoteFile, type ISteamFriend, type ISteamId, type ISteamworksNetworking, type IWaywardPreload, type IWorkshopItem, type LobbyType } from "@wayward/hosts/shared/interfaces";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
@@ -119,6 +120,9 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
      */
     incrementStat<T extends SteamStatArea>(area: T, type: SteamStatTypeValues<T>, name: string): void;
     getGlobalStatInt(name: string): number | undefined;
+    getCurrentBetaName(): string | undefined;
+    getBetas(): ISteamBeta[] | undefined;
+    setActiveBeta(betaName: string): boolean;
     isContentTracingRecording(): boolean;
     toggleContentTracingRecording(): Promise<boolean>;
     startPlaytimeTracking(): void;

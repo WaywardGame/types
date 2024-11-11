@@ -85,12 +85,7 @@ export interface ISteamworks {
     getCurrentGameInstallDir(): string;
     getSteamId(): ISteamId;
     getCurrentBetaName(): string;
-    getBetas(): Array<{
-        buildId: number;
-        name: string;
-        description: string;
-        flags: number;
-    }>;
+    getBetas(): ISteamBeta[];
     setActiveBeta(name: string): boolean;
     onGameOverlayActive(cb: (isActive: boolean) => void): void;
     onLobbyCreated(cb: (success: boolean, lobbyId: string, result?: number) => void): void;
@@ -127,6 +122,12 @@ export interface ISteamworksNetworking {
     setSteamNetworkingConnectionStatusCallback(callback: (steamIdRemote: string, state: SteamNetworkingConnectionState, endReason: number, oldState: SteamNetworkingConnectionState) => void): void;
     setSteamNetworkingSendRates(min: number, max: number): void;
     setSteamNetworkingDebugCallback(callback: (type: number, message: string) => void): void;
+}
+export interface ISteamBeta {
+    buildId: number;
+    name: string;
+    description: string;
+    flags: number;
 }
 export interface ISteamFriend {
     name?: string;
