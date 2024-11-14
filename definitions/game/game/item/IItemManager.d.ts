@@ -135,6 +135,7 @@ export interface IMoveItemOptions {
     isTrading?: boolean;
     revertFromDoodad?: boolean;
     skipDrop?: true;
+    skipClearSort?: true;
     context?: ActionContext;
 }
 export interface IPlaceOnTileOptions {
