@@ -79,6 +79,7 @@ export interface IGetBestItemsOptions extends IGetItemsOptions {
     filterQuality: ArrayOr<Quality>;
     filterGroup: ItemTypeGroup;
     filterConsumable: true;
+    filterContainer: IContainer;
     targetCreature: Creature;
     filter(item: Item): any;
 }

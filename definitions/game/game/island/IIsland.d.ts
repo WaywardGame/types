@@ -225,7 +225,7 @@ export interface IIslandTickOptions {
     ticks: number;
     tickFlags?: TickFlag;
     playingHumans?: Human[];
-    dueToAction?: boolean;
+    dueToAction?: Human;
 }
 export interface IIslandTickAsyncOptions extends IIslandTickOptions {
     onProgress?: (progess: number) => Promise<void>;

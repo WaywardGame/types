@@ -76,6 +76,7 @@ export interface ISerializedIcon extends IIcon {
     path: string | ISerializedImagePath;
 }
 export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProviderEvents> implements IRefreshable {
+    private static bus?;
     static multiTextParagraph: string;
     static create(...translations: TranslationGenerator[]): SimpleInfoProvider;
     static dynamic<T>(observer: BaseObserver<T>, supplier: (value: T) => InfoProvider | undefined): SimpleInfoProvider;
@@ -106,6 +107,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     hasContent(_context: InfoProviderContext): boolean;
     init(): void;
     readonly subscribeRefreshOn: BaseObserver.IRegistrar<this>;
+    private dirty;
     /**
      * Call when this info provider should be refreshed.
      */

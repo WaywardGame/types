@@ -25,12 +25,8 @@ import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 export declare class Action<A extends ActionArguments, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> implements IActionDescription<A, E, R, CU, AV> {
     readonly argumentTypes: A;
-    readonly usability: {
-        [key in ActionUsability]?: boolean;
-    };
-    readonly flags: {
-        [key in ActionFlag]?: boolean;
-    };
+    readonly usability: PartialRecord<ActionUsability, boolean>;
+    readonly flags: PartialRecord<ActionFlag, boolean>;
     validExecutors: Set<EntityType>;
     preExecutionHandler?: (actionApi: IActionApi<E, CU>, ...args: AV) => any;
     canUseHandler: (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => CU | IActionNotUsable;

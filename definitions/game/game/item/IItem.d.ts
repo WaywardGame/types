@@ -17,7 +17,8 @@ import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
 import type Human from "@wayward/game/game/entity/Human";
 import type { DamageType, Defense, EntityType, ICastable, MoveType } from "@wayward/game/game/entity/IEntity";
-import { SkillType, type Delay, type EquipType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import { type Delay, type EquipType } from "@wayward/game/game/entity/IHuman";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { IActionApi } from "@wayward/game/game/entity/action/IAction";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
@@ -1686,7 +1687,8 @@ export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
     None = 0,
     ShipperBoat = 1,
-    Rune = 2
+    Rune = 2,
+    VersatileApplied = 3
 }
 export declare enum ItemTypeGroup {
     Invalid = -9999,

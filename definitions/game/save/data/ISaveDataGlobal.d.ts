@@ -87,6 +87,7 @@ export interface IOptions {
     volumeEffects: number;
     volumeMusic: number;
     warnOnDangerousActions: boolean;
+    warnOnDestructiveActions: boolean;
     warnWhenBreakingItems: boolean;
     warnWhenBreakingItemsOnCraft: boolean;
     windowMode: boolean;

@@ -24,7 +24,7 @@ import type { InspectType } from "@wayward/game/game/inspection/IInspection";
 import type { IIcon } from "@wayward/game/game/inspection/InfoProvider";
 import type Inspection from "@wayward/game/game/inspection/Inspection";
 import type { Quality } from "@wayward/game/game/IObject";
-import type { IItemDescription, ItemType } from "@wayward/game/game/item/IItem";
+import type { IContainer, IItemDescription, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type ItemFinder from "@wayward/game/game/item/ItemFinder";
 import type { IItemFinderOptions } from "@wayward/game/game/item/ItemFinder";
@@ -93,6 +93,7 @@ export interface IUsableActionPossibleUsing {
     item?: Item;
     itemType?: ItemType;
     itemQuality?: ArrayOr<Quality>;
+    container?: IContainer;
     doodad?: Doodad;
     vehicle?: Doodad;
     creature?: Creature;

@@ -13,6 +13,7 @@ import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAct
 import Component from "@wayward/game/ui/component/Component";
 import Input from "@wayward/game/ui/component/Input";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import type ActionsConfigurationDrawer from "@wayward/game/ui/screen/screens/game/static/actions/ActionsDrawer";
 import ActionsList from "@wayward/game/ui/screen/screens/game/static/actions/ActionsList";
 import SelectionHandler from "@wayward/game/ui/screen/screens/menu/component/SelectionHandler";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
@@ -46,7 +47,7 @@ export default class ActionsSelector extends Component {
     get action(): UsableAction<IUsableActionRequirements, IUsableActionDefinition> | undefined;
     private readonly host;
     private using?;
-    constructor(host: Component);
+    constructor(host: ActionsConfigurationDrawer);
     listen(): this;
     unlisten(): this;
     setSlot(number: number, action: UsableAction | undefined, using: IUsableActionPossibleUsing): void;

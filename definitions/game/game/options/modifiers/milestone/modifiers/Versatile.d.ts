@@ -24,10 +24,16 @@ export default class Versatile extends MilestoneModifier {
     getGroup(): MilestoneModifierGroup;
     instantiate(id: Milestone, player?: Player): VersatileMilestoneModifierInstance | undefined;
 }
+interface IVersatileOutcome extends IDamageOutcome {
+    versatileApplied?: true;
+}
+interface VersatileDefense extends Defense {
+    versatileApplied?: true;
+}
 declare class VersatileMilestoneModifierInstance extends MilestoneModifierInstance<Record<string, Map<CreatureType, Set<DamageType>>>> {
     protected onCreateItem(manager: ItemManager, item: Item): void;
-    protected getDefense(island: Island, defense: Defense | undefined, target: Human | Creature | CreatureType, damageType?: DamageType): Defense | undefined;
-    protected calculateAttackOutcome(island: Island, outcome: IDamageOutcome, input: IDamageOutcomeInput, attackValue: number, defenseValue: number): IDamageOutcome | undefined;
+    protected getDefense(island: Island, defense: VersatileDefense | undefined, target: Human | Creature | CreatureType, damageType?: DamageType): Defense | undefined;
+    protected calculateAttackOutcome(island: Island, outcome: IVersatileOutcome, input: IDamageOutcomeInput, attackValue: number, defenseValue: number): IDamageOutcome | undefined;
     protected hasDiscoveredVulnOrResist(player: Player, creature: CreatureType, damageType: DamageType): boolean | undefined;
     protected discoverVulnOrResist(player: Player, creature: CreatureType, damageType: DamageType): void;
     protected getDiscoveredVulnsAndResists(player: Player): Map<CreatureType, Set<DamageType>>;
