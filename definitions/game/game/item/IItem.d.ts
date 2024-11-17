@@ -779,6 +779,9 @@ export interface INPCInventoryContainerReference extends IBaseContainerReference
     id: number;
 }
 export type ContainerReference = IInvalidContainerReference | IWorldContainerReference | IPlayerInventoryContainerReference | ITileContainerReference | IDoodadContainerReference | IItemContainerReference | INPCInventoryContainerReference;
+export declare namespace ContainerReference {
+    function equals(a?: ContainerReference, b?: ContainerReference): boolean;
+}
 export declare enum CraftResult {
     Fail = 0,
     Success = 1,

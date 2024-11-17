@@ -53,6 +53,7 @@ export declare const promptGameReturnToTitleScreenChallenge: import("@wayward/ga
 export declare const promptGameSailAwayEnd: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameSailAwayReturnable: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameShipToIslandPayment: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[npcName: Text, itemName?: Text | undefined]>;
+export declare const promptGameSaveError: import("@wayward/game/game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptGameSaveFailure: import("@wayward/game/game/meta/prompt/IPrompt").IPromptInfoDescription<[]>;
 export declare const promptGameIslandTravelConfirmation: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[isGhost: boolean]>;
 export declare const promptGameWellConvert: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[waterName: Text]>;

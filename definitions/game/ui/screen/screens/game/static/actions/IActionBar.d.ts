@@ -14,6 +14,7 @@ import { UsableActionDisplayContext } from "@wayward/game/game/entity/action/usa
 import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
 import { InfoDisplayLevel } from "@wayward/game/game/inspection/IInfoProvider";
 import { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import { ContainerReference } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type { Modifier } from "@wayward/game/ui/input/IInput";
@@ -28,10 +29,11 @@ export interface IActionBarSlotData {
     useHovered?: true;
     useOnHoveredTile?: true;
     actionId?: ActionId;
-    using?: Omit<IUsableActionPossibleUsing, "item" | "doodad" | "vehicle" | "creature" | "npc" | "fromTile" | "targetTile"> & {
+    using?: Omit<IUsableActionPossibleUsing, "item" | "doodad" | "vehicle" | "creature" | "npc" | "fromTile" | "targetTile" | "container"> & {
         fromTile?: number;
         targetTile?: number;
         item?: Reference<ReferenceType.Item>;
+        container?: ContainerReference;
         doodad?: Reference<ReferenceType.Doodad>;
         vehicle?: Reference<ReferenceType.Doodad>;
         creature?: Reference<ReferenceType.Creature>;

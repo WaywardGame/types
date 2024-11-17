@@ -161,7 +161,8 @@ export declare enum ContainerReferenceSource {
     WriteContainer = 12,
     GetContainerName = 13,
     Upgrade = 14,
-    MoveItemOfTypeArgument = 15
+    MoveItemOfTypeArgument = 15,
+    ActionBarUsingContainer = 16
 }
 export interface ICraftResultChances {
     success: number;

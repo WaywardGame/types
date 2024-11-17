@@ -20,6 +20,7 @@ export default class Serializer implements ISerializer {
     static convertStringToUint8Array(data: string): Uint8Array;
     private static array;
     private static usingArray;
+    private static alertUserAboutError;
     private static savedObjectCache;
     readonly metadata: Map<SerializerMetadataKey, any>;
     dataView: DataView;
@@ -30,7 +31,7 @@ export default class Serializer implements ISerializer {
     private readonly disableJitDeserialization;
     constructor(game: Game, options: ISerializerOptions, stringTokenizer?: StringTokenizer | undefined);
     private get isDeveloperMode();
-    saveToUint8Array(object: any, objectKey: any): Uint8Array | undefined;
+    saveToUint8Array(object: any, objectKey: any, forceEnableChainLogging?: boolean): Uint8Array | undefined;
     saveToString(object: any, objectKey: any): string | undefined;
     convertUint8ArrayToString(bytes: Uint8Array, length?: number): string;
     load(object: any, objectKey: any, data: string | Uint8Array): void;

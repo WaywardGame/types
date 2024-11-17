@@ -16,3 +16,4 @@ declare namespace Errors {
     function getMessage(error: unknown): string | undefined;
 }
 export default Errors;
+export declare function ensureExhaustive(value: never): never;

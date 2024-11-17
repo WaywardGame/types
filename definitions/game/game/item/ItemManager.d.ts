@@ -162,7 +162,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      * @returns Tile or undefined
      */
     getTile(itemOrContainer?: Item | IContainer): Tile | undefined;
-    resolveContainer(container?: IContainer): Tile | Player | Item | Doodad | NPC | IContainer | undefined;
+    resolveContainer(container?: IContainer | ContainerReference): Tile | Player | Item | Doodad | NPC | IContainer | undefined;
     getContainerReference(containable: IContainable | undefined, source: ContainerReferenceSource | undefined): ContainerReference;
     derefenceContainerReference(containerReference: ContainerReference, showWarnings?: boolean): IContainable | undefined;
     hashContainer(containable: IContainable, containerReferenceSource?: ContainerReferenceSource): string;
