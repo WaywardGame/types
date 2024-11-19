@@ -76,13 +76,13 @@ export declare enum AiMaskType {
     CanSwapLayersIfTamed = 15
 }
 export declare enum AiMaskOrder {
-    NeutralIfScaredDisabled = 0,
-    ScaredIfLowHealth = 1,
-    HostileIfAberrant = 2,
-    ScaredInDaylight = 3,
-    LostInterest = 4,
-    IfTamed = 5,
-    Released = 6,
+    Released = 0,
+    NeutralIfScaredDisabled = 1,
+    ScaredIfLowHealth = 2,
+    HostileIfAberrant = 3,
+    ScaredInDaylight = 4,
+    LostInterest = 5,
+    IfTamed = 6,
     Hidden = 7,
     Frenzied = 8,
     Pacified = 9,

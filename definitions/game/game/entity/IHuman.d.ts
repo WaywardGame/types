@@ -472,7 +472,6 @@ export interface ICrafted {
 }
 export interface ICheckUnderOptions {
     autoActions?: boolean;
-    enterCave?: boolean;
     forcePickUp?: boolean;
     skipDoodadEvents?: boolean;
     burned?: boolean;

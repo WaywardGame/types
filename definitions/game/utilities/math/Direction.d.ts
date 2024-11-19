@@ -67,7 +67,7 @@ export declare namespace Direction {
      * `0` = East
      */
     function fromDegrees(deg: number): Direction.Cardinal;
-    function asCardinal(direction: Direction): Direction.Cardinal | undefined;
+    function asCardinal(direction?: Direction): Direction.Cardinal | undefined;
     const HORIZONTAL: Readonly<Record<Direction, boolean>>;
     const VERTICAL: Readonly<Record<Direction, boolean>>;
 }

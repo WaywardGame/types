@@ -36,7 +36,7 @@ import type { IRendererOrigin } from "@wayward/game/renderer/context/RendererOri
 import { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
 import type { IFieldOfViewOrigin } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
 import { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
-import type { Direction } from "@wayward/game/utilities/math/Direction";
+import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import type { IRGB } from "@wayward/utilities/Color";
@@ -398,8 +398,9 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * Checks things can slip on this tile
      * @param isClientSide When true, it will assume puddles do not cause slipping
+     * @param assumeEntitySlips When entity is undefined, set this to true to assume slippery tiles trigger for the entity
      */
-    canSlip(entity: EntityMovable | undefined, isClientSide?: boolean): boolean;
+    canSlip(entity: EntityMovable | undefined, isClientSide?: boolean, assumeEntitySlips?: boolean): boolean;
     isAt(otherTile: Tile | IVector3): boolean;
     isAdjacent(otherTile: Tile | IVector3): boolean;
     isAround(otherTile: Tile | IVector3): boolean;
@@ -407,7 +408,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * Gets the direction from this tile to the target tile
      */
-    getDirectionToTile(tile: Tile): Direction.Cardinal;
+    getDirectionToTile(tile: Tile): Direction.Cardinal | Direction.None;
     /**
      * Gets the adjacent tile in the direction
      */
@@ -458,7 +459,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * Returns whether the tile is blocked (completely impassible) for the human
      */
-    isWalkToTileBlocked(human: Human, clientSide: boolean): boolean;
+    isWalkToTileBlocked(human: Human, clientSide: boolean, forceDangerous?: boolean): boolean;
     /**
      * Returns the penalty of the given tile (just how much we *don't* want to step there)
      */

@@ -154,6 +154,7 @@ export default class GameScreen extends Screen {
     protected onDie(player: Player, showingGameEndScreen?: boolean): void;
     protected onRespawn(): void;
     protected onEntityMoved(object: EntityMovable, lastTile: Tile, tile: Tile): void;
+    protected onAscendDescend(api: IBindHandlerApi): boolean;
     protected onZoom(api: IBindHandlerApi): boolean;
     protected onInspect(api: IBindHandlerApi): boolean;
     protected onScreenshotMode(): boolean;

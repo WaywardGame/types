@@ -180,4 +180,5 @@ export declare const actionDescriptionsSlow: {
     138: import("./Action").Action<[import("@wayward/game/game/entity/action/IAction").ActionArgument.Tile], import("../Human").default<unknown, number, import("../../reference/IReferenceManager").ReferenceType.NPC | import("../../reference/IReferenceManager").ReferenceType.Player>, void, {
         usable: true;
     }, [import("../../tile/Tile").default]>;
+    139: import("./Action").Action<[], import("../Human").default<unknown, number, import("../../reference/IReferenceManager").ReferenceType.NPC | import("../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, []>;
 };

@@ -151,7 +151,7 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
      * Animates the entity between a specific set of positions
      */
     animate(fromX: number, fromY: number, toX: number, toY: number, delay: Delay): void;
-    protected setMoving(fromX: number, fromY: number, toZ?: number, options?: IMoveToOptions): void;
+    setMoving(fromX: number, fromY: number, toZ?: number, options?: IMoveToOptions): void;
     protected setFromPosition(fromX?: number, fromY?: number): void;
     animateAttack(damageType: DamageType[] | undefined): void;
     getMovementPoint(timeStamp: number): IVector2;

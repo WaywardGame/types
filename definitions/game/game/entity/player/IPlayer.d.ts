@@ -120,13 +120,12 @@ export interface IPlayerEvents extends Events<Human> {
 }
 export declare enum TurnTypeFlag {
     CheckUnderPlayer = 1,
-    DontEnterCaves = 2,
-    Idle = 4,
+    Idle = 2,
     /**
      * Indicates the turn is passing due to a movement
      */
-    Movement = 8,
-    DontTickAnim = 16
+    Movement = 4,
+    DontTickAnim = 8
 }
 export interface IAttackHand {
     mainHand: number;

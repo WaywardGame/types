@@ -20,6 +20,9 @@ export interface IUsableActionDynamicDefinition {
     bindable: Bindable;
     displayLevel?: ActionDisplayLevel;
     priority?: number;
+    /**
+     * Whether the action is visible in the action drawer by default (without using it normally first).
+     */
     discoveredByDefault?: true | (() => boolean);
     translate?: (translator: UsableActionTranslator) => UsableActionTranslator;
     /**

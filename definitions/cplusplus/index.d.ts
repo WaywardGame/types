@@ -110,6 +110,7 @@ export interface INavigationNode {
     disabled: boolean;
     penalty: number;
     connectTo(node: INavigationNode, direction: number): void;
+    disconnectFrom(direction: number): void;
     getConnection(direction: number): INavigationNode | undefined;
 }
 export interface IKDTree {
