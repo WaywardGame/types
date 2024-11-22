@@ -28,6 +28,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private _build;
     private overlayWorks;
     private runningOnSteamDeck;
+    private runningOnSteamDeckDesktop;
     private runningOnBatteryPower;
     private floatingTextInputFocused;
     private floatingTextInputBlurTime;
@@ -64,6 +65,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     constructor(game: Game);
     get isGameOverlayActive(): boolean;
     get isRunningOnSteamDeck(): boolean;
+    get isRunningOnSteamDeckDesktop(): boolean;
     get isRunningOnBatteryPower(): boolean;
     get isLowPowerMode(): boolean;
     isElectron(): boolean;

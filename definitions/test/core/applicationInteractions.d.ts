@@ -72,6 +72,10 @@ export default class ApplicationInteractions {
     setMultiplayerIdentifier(identifier: string): Promise<void>;
     private importGame;
     /**
+     * Executes a ascend/descend action
+     */
+    ascendDescend(): Promise<void>;
+    /**
      * Executes a Move action
      * @param direction Direction to move. Direction.None to Idle
      * @param steps Number of movements (steps)

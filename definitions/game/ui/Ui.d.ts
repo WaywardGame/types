@@ -70,6 +70,7 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
      * @param elements The elements to refresh translations inside
      */
     refreshTranslations(...elements: Array<HTMLElement | Component | undefined>): void;
+    isFullscreen(): boolean;
     storeElements(owner: Component, ...components: Component[]): void;
     /**
      * Registers an object as a "data host", which allows its fields to be saved to `saveData` or `saveDataGlobal`
