@@ -132,7 +132,7 @@ export declare class TestRunContext extends BaseContext {
     private _output;
     private readonly _errors;
     private readonly _attachments;
-    private readonly _data;
+    protected readonly _data: Map<string, unknown>;
     private readonly startTime;
     private endTime;
     private duration;
@@ -197,7 +197,7 @@ export declare class TestRunContext extends BaseContext {
     getData<T = unknown>(key: string): T;
     tryGetData<T = unknown>(key: string): T | undefined;
     setData<T = unknown>(key: string, value: T): T;
-    start(): void;
+    start(suiteRunContext: TestRunContext): void;
     /**
      * Mark the context as being completed (finished running)
      */
