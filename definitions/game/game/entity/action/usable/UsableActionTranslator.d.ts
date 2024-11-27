@@ -33,13 +33,13 @@ export declare class UsableActionTranslator {
     constructor(id: ActionId);
     setInternalAction(id: ActionId): this;
     name(id: ActionId): this;
-    name(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
+    name(supplier: SupplierOr<Translation | undefined, UsableActionTranslationArguments>): this;
     addArgs(...args: Array<Exclude<TranslationArg, () => TranslationArg> | Supplier<TranslationArg, UsableActionTranslationArguments>>): this;
     description(id: ActionId): this;
-    description(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
-    useExact(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
-    useBest(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
-    useNone(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
-    useHovered(supplier: SupplierOr<Translation, UsableActionTranslationArguments>): this;
+    description(supplier: SupplierOr<Translation | undefined, UsableActionTranslationArguments>): this;
+    useExact(supplier: SupplierOr<Translation | undefined, UsableActionTranslationArguments>): this;
+    useBest(supplier: SupplierOr<Translation | undefined, UsableActionTranslationArguments>): this;
+    useNone(supplier: SupplierOr<Translation | undefined, UsableActionTranslationArguments>): this;
+    useHovered(supplier: SupplierOr<Translation | undefined, UsableActionTranslationArguments>): this;
     get(action: UsableAction, using?: IUsableActionPossibleUsing, which?: ActionWhichTranslation, context?: UsableActionDisplayContext, inspectionContext?: InfoProviderContext): Translation | undefined;
 }

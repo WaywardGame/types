@@ -27,7 +27,8 @@ export declare enum DialogId {
     IslandsShipping = 13,
     Inventory = 14,
     Container = 15,
-    Trade = 16
+    Trade = 16,
+    Altar = 17
 }
 export declare enum Edge {
     Top = 0,

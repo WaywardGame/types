@@ -11,7 +11,7 @@
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
-import type { IDismantleDescription, IItemDescription } from "@wayward/game/game/item/IItem";
+import { type IDismantleDescription, type IItemDescription } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 export interface IDismantleCanUse extends IActionUsable {
     description: IItemDescription;

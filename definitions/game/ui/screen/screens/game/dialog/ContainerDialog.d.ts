@@ -34,6 +34,7 @@ export default class ContainerDialog extends Dialog {
     constructor(id?: DialogId, subId?: string);
     setContainer(container: IContainer): this;
     protected resolveContainer(): (Tile & ITileContainer) | (Entity & IContainer) | undefined;
+    protected shouldSkipSetContainerOnAppend(): boolean;
     protected onAppend1(): void;
     getName(): TranslationImpl | undefined;
     protected onTickEnd(): void;

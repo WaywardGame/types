@@ -68,7 +68,7 @@ declare enum Bindable {
     GameActionsItemsInFront = 49,
     GameActionAltarInvoke = 50,
     GameActionAltarKneel = 51,
-    GameActionAltarSacrifice = 52,
+    GameActionAltarConsecrate = 52,
     GameActionArmorStandDisplayItem = 53,
     GameActionArmorStandDisplayLeft = 54,
     GameActionArmorStandDisplayRight = 55,

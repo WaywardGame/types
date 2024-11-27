@@ -33,7 +33,7 @@ import WorldTooltipHandler from "@wayward/game/ui/screen/screens/game/WorldToolt
 import ContainerBucket from "@wayward/game/ui/screen/screens/game/component/ContainerBucket";
 import { Quadrant } from "@wayward/game/ui/screen/screens/game/component/IQuadrantComponent";
 import type QuadrantComponent from "@wayward/game/ui/screen/screens/game/component/QuadrantComponent";
-import type ContainerDialog from "@wayward/game/ui/screen/screens/game/dialog/ContainerDialog";
+import ContainerDialog from "@wayward/game/ui/screen/screens/game/dialog/ContainerDialog";
 import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
 import MenuBar from "@wayward/game/ui/screen/screens/game/static/MenuBar";
 import type Messages from "@wayward/game/ui/screen/screens/game/static/Messages";
@@ -51,9 +51,7 @@ export declare enum GameScreenClasses {
     PauseIcon_Visible = "pause-icon--visible",
     PauseIcon_Overlay = "pause-icon--overlay"
 }
-export type IDialogStates = {
-    [key in `${DialogId}` | `${DialogId},${string}`]: boolean;
-};
+export type IDialogStates = Record<`${DialogId}` | `${DialogId},${string}`, boolean>;
 declare global {
     let gameScreen: GameScreen | undefined;
 }

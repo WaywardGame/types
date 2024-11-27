@@ -43,6 +43,7 @@ import type Message from "@wayward/game/language/dictionary/Message";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type { ItemNotifierType } from "@wayward/game/renderer/notifier/INotifier";
 import type { SortDirection } from "@wayward/game/save/ISaveManager";
+import type { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IRGB } from "@wayward/utilities/Color";
@@ -194,6 +195,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     use?: ActionType[];
     ranged?: IRangedDescription;
     recipe?: IRecipe;
+    containerDialog?: DialogId;
     /**
      * A list of groups the item should belong too.
      */

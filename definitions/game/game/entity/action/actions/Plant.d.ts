@@ -13,7 +13,8 @@ import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type Item from "@wayward/game/game/item/Item";
-import type { ITerrainDescription, TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { ITerrainDescription } from "@wayward/game/game/tile/ITerrain";
+import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
 export interface IPlantCanUse extends IActionUsable {
     plantType: DoodadType;

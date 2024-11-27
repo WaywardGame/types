@@ -12,7 +12,7 @@ import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
-import type { ItemType } from "@wayward/game/game/item/IItem";
+import { ItemType } from "@wayward/game/game/item/IItem";
 export interface ICageCreature extends IActionUsable {
     creature: Creature;
     changeInto: ItemType;

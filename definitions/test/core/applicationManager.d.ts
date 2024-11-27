@@ -12,7 +12,8 @@ import type Player from "@wayward/game/game/entity/player/Player";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { Application, ITestState } from "@wayward/test/core/application";
 import { ApplicationInteraction } from "@wayward/test/core/applicationInteraction";
-import type { INewGameOptions, ITestJoinServerOptions, ITestSetup } from "@wayward/test/interfaces";
+import type { INewGameOptions, ITestJoinServerOptions } from "@wayward/test/interfaces";
+import type { IAutomationSetup } from "@wayward/game/game/island/automation/IAutomation";
 export declare class ApplicationManager {
     private readonly _logs;
     private readonly _applications;
@@ -84,7 +85,7 @@ export declare class ApplicationManager {
     executeOnPlayingClients<T>(runnable: (app: Application) => Promise<T>): Promise<T[]>;
     executeOnApps<T>(apps: Application[], runnable: (app: Application) => Promise<T>, requiresDeterminism: boolean): Promise<T[]>;
     runWhilePaused(blockId: string, runnable: () => Promise<void>): Promise<void>;
-    setup(app: Application, setup: Readonly<ITestSetup>): Promise<void>;
+    setup(app: Application, setup: Readonly<IAutomationSetup>): Promise<void>;
     private bindApp;
     private log;
 }

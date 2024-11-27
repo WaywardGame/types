@@ -152,7 +152,7 @@ export declare enum ActionType {
     UpdateOption = 105,
     UpdateGameOption = 106,
     UpdateWalkTo = 107,
-    Sacrifice = 108,
+    Consecrate = 108,
     Absorb = 109,
     Exude = 110,
     PackGround = 111,
@@ -242,12 +242,8 @@ export interface IActionDescription<A extends ActionArguments = ActionArguments,
     type?: number;
     deities?: DeityReal[];
     argumentTypes: A;
-    usability: {
-        [key in ActionUsability]?: boolean;
-    };
-    flags: {
-        [key in ActionFlag]?: boolean;
-    };
+    usability: Partial<Record<ActionUsability, boolean>>;
+    flags: Partial<Record<ActionFlag, boolean>>;
     validExecutors: Set<EntityType>;
     hasFlag(flag: ActionFlag): boolean;
     execute(actionApiOrExecutor: IActionApi<E, CU> | E, ...args: AV): PromiseOr<R | undefined>;
@@ -396,7 +392,7 @@ export interface IActionExampleApi<E extends Entity = Entity, CU extends IAction
 }
 export interface IActionExample {
     automation: Automation;
-    island: INewIslandOverrides;
+    island?: INewIslandOverrides;
 }
 export interface IActionSoundEffect {
     type: SfxType;
@@ -586,5 +582,8 @@ export declare enum BlockFlag {
      */
     FullOfItems = 10
 }
+/**
+ * A sea of grass
+ */
 export declare const defaultExampleIslandTemplate: INewIslandOverrides;
 export {};

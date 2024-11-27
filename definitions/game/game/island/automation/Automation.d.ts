@@ -10,16 +10,25 @@
  */
 import type Human from "@wayward/game/game/entity/Human";
 import type { AutomationStep } from "@wayward/game/game/island/automation/AutomationStep";
-import type { IAutomationInitialState } from "@wayward/game/game/island/automation/IAutomation";
+import type { IAutomationSetup, IAutomationSetupResult } from "@wayward/game/game/island/automation/IAutomation";
 export declare class Automation {
     private running;
     private repeat;
     private repeatDelay;
-    private initialState;
+    private setup;
+    private startDelay;
     private readonly steps;
     private readonly resetSteps;
+    /**
+     * Applys the setup to the player.
+     * Called during automation & tests.
+     * @param human Human to apply the setup too
+     * @param setup The setup
+     */
+    static applySetup(human: Human, setup: Readonly<IAutomationSetup>): IAutomationSetupResult;
     setRepeat(repeat: boolean, delay?: number): this;
-    setInitialState(initialState: IAutomationInitialState): this;
+    setStartDelay(delay: number): this;
+    setSetup(setup: IAutomationSetup): this;
     addStep(step: AutomationStep): this;
     start(human: Human): Promise<void>;
     stop(): void;

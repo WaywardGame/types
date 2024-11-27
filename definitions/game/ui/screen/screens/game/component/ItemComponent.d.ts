@@ -120,6 +120,8 @@ export interface IItemComponentHandlerDescription {
     getStackItems?(): readonly Item[];
     getStackDisplayItem?(): Item | undefined;
     getDisplayItem?(): Item | undefined;
+    getDurability?(): number;
+    getCooldown?(): number;
     isDamaged?(): boolean;
     isDecayed?(): boolean;
 }

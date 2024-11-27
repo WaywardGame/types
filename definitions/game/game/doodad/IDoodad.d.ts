@@ -30,6 +30,7 @@ import type Translation from "@wayward/game/language/Translation";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type { ISpriteAnimation } from "@wayward/game/renderer/ISpriteInfo";
 import type { TileLayerType } from "@wayward/game/renderer/world/IWorldRenderer";
+import type { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
 import type { IRGB } from "@wayward/utilities/Color";
 export interface IDoodadOptions extends IObjectOptions {
     force?: boolean;
@@ -79,6 +80,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     moveIntoAction?: ActionType;
     openContainerAction?: ActionType;
     tabAction?: ActionType;
+    containerDialog?: DialogId;
     burnsLike?: ItemType[];
     canBreak?: boolean;
     canGrow?: boolean;

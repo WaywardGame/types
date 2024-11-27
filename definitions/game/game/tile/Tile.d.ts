@@ -260,6 +260,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     };
     getTileData(): ITileData[] | undefined;
     getOrCreateTileData(): ITileData[];
+    deleteTileData(): void;
     /**
      * Updates the world renderer & flow field state for the tile
      */

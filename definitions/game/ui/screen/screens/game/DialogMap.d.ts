@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import AltarDialog from "@wayward/game/ui/screen/screens/game/dialog/AltarDialog";
 import BookDialog from "@wayward/game/ui/screen/screens/game/dialog/BookDialog";
 import ContainerDialog from "@wayward/game/ui/screen/screens/game/dialog/ContainerDialog";
 import CraftingDialog from "@wayward/game/ui/screen/screens/game/dialog/CraftingDialog";
@@ -26,6 +27,7 @@ import QuickSettingsDialog from "@wayward/game/ui/screen/screens/game/dialog/Qui
 import SkillsDialog from "@wayward/game/ui/screen/screens/game/dialog/SkillsDialog";
 import TradeDialog from "@wayward/game/ui/screen/screens/game/dialog/TradeDialog";
 declare const dialogMap: {
+    17: typeof AltarDialog;
     6: typeof BookDialog;
     15: typeof ContainerDialog;
     9: typeof CraftingDialog;

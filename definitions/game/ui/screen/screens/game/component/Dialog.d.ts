@@ -134,6 +134,7 @@ declare abstract class Dialog extends Component implements IDialog {
     private readonly activeReasons;
     private readonly pinReasons;
     protected readonly scrollableHandler: void;
+    order: number;
     private loaded?;
     private get visiblePanel();
     get square(): boolean;

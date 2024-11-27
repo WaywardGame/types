@@ -159,6 +159,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     set durabilityMax(value: number);
     getDisplayItem(): DisplayableItemType;
     isContainer(): this is Item & IContainer;
+    isWithin(container?: IContainer): boolean;
     get builtDescription(): IDoodadDescription | undefined;
     countTradesWith(human?: Human): number;
     /**

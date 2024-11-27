@@ -16,7 +16,7 @@ import type { IMoveItemFilterArgument } from "@wayward/game/game/entity/action/a
 import { MoveItemFilterArgument } from "@wayward/game/game/entity/action/actions/moveItem/MoveItemFilterArgument";
 import type { MoveItemsSourceArgumentResolvable } from "@wayward/game/game/entity/action/actions/moveItem/MoveItemsSourceArgument";
 import MoveItemsSourceArgument from "@wayward/game/game/entity/action/actions/moveItem/MoveItemsSourceArgument";
-import type { IContainer } from "@wayward/game/game/item/IItem";
+import { type IContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
 import Translation from "@wayward/game/language/Translation";

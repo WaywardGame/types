@@ -14,7 +14,7 @@ import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { IWell } from "@wayward/game/game/island/IIsland";
-import type { ILiquidGather } from "@wayward/game/game/item/IItem";
+import { type ILiquidGather } from "@wayward/game/game/item/IItem";
 import type { ITerrainDescription } from "@wayward/game/game/tile/ITerrain";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
