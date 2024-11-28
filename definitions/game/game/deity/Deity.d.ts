@@ -28,3 +28,4 @@ export declare enum DeityDiscovery {
 }
 export declare const DEITY_ENEMIES: PartialRecord<DeityReal, DeityReal>;
 export declare const DEITY_SOUNDS: PartialRecord<DeityReal, SfxType>;
+export declare function getDeityEnemies(deity: ArrayOr<DeityReal>, orElse?: ArrayOr<DeityReal>): ArrayOr<DeityReal>;

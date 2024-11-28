@@ -22,16 +22,20 @@ declare namespace Runekeeper {
         TameCreature = 3,
         KillNPC = 4,
         Event = 5,
-        Craft = 6
+        Craft = 6,
+        Disassemble = 7,
+        Dismantle = 8
     }
     type DomainName = Lowercase<keyof typeof Domain>;
-    const DOMAINS: ("action" | "event" | "craft" | "skill" | "killcreature" | "tamecreature" | "killnpc")[];
+    const DOMAINS: ("action" | "event" | "dismantle" | "skill" | "craft" | "disassemble" | "killcreature" | "tamecreature" | "killnpc")[];
     type DomainData = `${DomainName}:${number}`;
     function domainName(domain: Domain): DomainName;
     function isDiscovered(domain: DomainData): boolean;
     function action(type: ActionType): DomainData;
     function skill(type: SkillType): DomainData;
     function craft(type: ItemType): DomainData;
+    function dismantle(type: ItemType): DomainData;
+    function disassemble(type: ItemType): DomainData;
     function killCreature(type: CreatureType): DomainData;
     function tameCreature(type: CreatureType): DomainData;
     function killNPC(type: NPCType): DomainData;

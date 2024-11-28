@@ -16,6 +16,7 @@ import type Entity from "@wayward/game/game/entity/Entity";
 import type Human from "@wayward/game/game/entity/Human";
 import type { EntityType } from "@wayward/game/game/entity/IEntity";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type { INotUsableMessage } from "@wayward/game/game/entity/action/actions/helper/NotUsableMessage";
 import type { ActionArgumentCustom } from "@wayward/game/game/entity/action/argument/ActionArgumentCustom";
 import type ActionArgumentEnum from "@wayward/game/game/entity/action/argument/ActionArgumentEnum";
@@ -308,7 +309,7 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
     /**
      * Sets the contextual tool & target for an action. Exclusively used for translations atm
      */
-    setContext(tool?: Item | Translation, target?: ArrayOr<Entity> | Tile | Translation, details?: Record<string, TranslationArg>): this;
+    setContext(tool?: Item | Translation, target?: ArrayOr<Entity> | Tile | Translation, details?: Record<string, TranslationArg>): IActionContext | undefined;
     setDelay(delay: number, replace?: boolean): this;
     setPassTurn(turnType?: TurnTypeFlag): this;
     setUpdateView(updateFov?: boolean): this;

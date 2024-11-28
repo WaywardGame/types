@@ -26,24 +26,18 @@ export interface ConsecrateRuneGroupFriendAndFoe {
     friend: Item[];
     foe: Item[];
 }
-export interface ConsecrateOutcomeRuneQualityCounts extends PartialRecord<Quality, {
+export type ConsecrateOutcomeRuneQualityCounts = PartialRecord<Quality, {
     quantity: number;
     minProgress: number;
     maxProgress: number;
-}> {
-    worth: number;
-}
-export interface ConsecrateOutcomeValue {
-    value: number;
-    worth: number;
-}
+}>;
 declare const _default: Action<[ActionArgument.Doodad], import("../../player/Player").default, void, IConsecrateUsable, [Doodad]> & {
     getRunes(container?: IContainer): Item[];
     groupRunes(runes: Item[]): ConsecrateRuneGroup[];
     getReturnDeity(runeGroups: ConsecrateRuneGroup[]): DeityReal | undefined;
     groupRunesFriendAndFoe(runeGroups: ConsecrateRuneGroup[], deity: DeityReal): ConsecrateRuneGroupFriendAndFoe;
     getDeityRuneTypes(deity: DeityReal): ItemType[];
-    calculateValue(human: Human, runes: Item[], deity: DeityReal, calculationType: "min" | "max" | "random"): ConsecrateOutcomeValue;
+    calculateValue(human: Human, runes: Item[], deity: DeityReal, calculationType: "min" | "max" | "random"): number;
     resolveRunesForValue(human: Human, value: number, maxValue?: number): ConsecrateOutcomeRuneQualityCounts;
 };
 export default _default;

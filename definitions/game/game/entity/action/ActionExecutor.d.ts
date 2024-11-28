@@ -106,7 +106,7 @@ export default class ActionExecutor<A extends ActionArguments, E extends Entity,
      */
     prompt<PROMPT extends IPromptDescriptionBase<any[]>>(prompt: PROMPT, ...args: PromptDescriptionArgs<PROMPT>): Promise<boolean>;
     isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is IActionArgumentTypeMap[AA];
-    setContext(tool?: Item | Translation, target?: ArrayOr<Entity> | Tile | Translation, details?: Record<string, TranslationArg>): this;
+    setContext(tool?: Item | Translation, target?: ArrayOr<Entity> | Tile | Translation, details?: Record<string, TranslationArg>): IActionContext | undefined;
     getContext(): IActionContext;
     setDelay(delay: number, replace?: boolean): this;
     setPassTurn(turnType?: TurnTypeFlag): this;

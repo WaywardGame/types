@@ -24,6 +24,7 @@ import type { SortDirection } from "@wayward/game/save/ISaveManager";
 import type { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 export interface IAutomationContextState {
     human: Human;
     islandId: IslandId;
@@ -63,9 +64,15 @@ export interface IAutomationSetupWorld {
     defaultTerrain?: TerrainType;
     tiles?: Array<{
         type?: TerrainType;
+        /**
+         * Offset from the humans position
+         */
         x?: number;
+        /**
+         * Offset from the humans position
+         */
         y?: number;
-        z?: number;
+        z?: WorldZ;
         items?: IAutomationSetupItem[];
         tilled?: boolean;
         fishAvailable?: number;
@@ -99,7 +106,7 @@ export interface IAutomationSetupWorld {
 }
 export interface IAutomationSetupPlayer {
     alwaysPassSkillChecks?: boolean;
-    position?: IVector3;
+    position?: Partial<IVector3>;
     direction?: Direction.Cardinal;
     inventory?: IAutomationSetupItemContainer;
     status?: StatusType[];

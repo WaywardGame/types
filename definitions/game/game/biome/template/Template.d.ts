@@ -12,10 +12,11 @@ import type { BiomeMapGen } from "@wayward/game/game/biome/IBiome";
 import type { TemplateSpawns } from "@wayward/game/game/mapgen/IMapGen";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 export interface ITemplateBiomeOptions {
     spawnCoords: IVector3;
-    defaultTerrain: TerrainType;
-    templates: TemplateSpawns;
+    defaultTerrain: PartialRecord<WorldZ, TerrainType>;
+    templates?: TemplateSpawns;
 }
 declare const _default: {
     readonly disableTravel: true;

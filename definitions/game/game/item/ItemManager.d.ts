@@ -241,7 +241,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      * Drop items in a 3x3 square around the location.
      * This will ensure all items in the container are removed
      */
-    placeItemsAroundTile(container: IContainer, tile: Tile, skipMessage?: boolean): void;
+    placeItemsAroundTile(container: IContainer, tile: Tile, skipMessage?: boolean, skipCurrentTile?: boolean): void;
     /**
      * Returns the "processed" weight of the given item.
      * - If the item is a "raw" item — ie, it was not created from other items, this is the `weightFraction` lerping the item's min & max weight.

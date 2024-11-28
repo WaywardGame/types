@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Runekeeper from "@wayward/game/game/milestones/milestone/Runekeeper";
-declare const runekeeperDomains: Descriptions<Runekeeper.Domain, [name: string, domain: string]>;
+declare const runekeeperDomains: Descriptions<Runekeeper.Domain, [name: string, domain?: string]>;
 export default runekeeperDomains;

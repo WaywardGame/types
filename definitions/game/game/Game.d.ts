@@ -128,7 +128,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      * @returns Array of Human objects
      */
     getPlayingHumans(includeGhosts?: boolean, includeConnecting?: boolean, includeDedicatedServer?: boolean, includeAbsent?: boolean): Human[];
-    getNonPlayerHumans(): Human[];
+    getNonPlayerHumans(excludeTransientIslands?: boolean): Human[];
     getPlayingHuman(identifier: string): Human | undefined;
     /**
      * It's important that this is lowest, so that it happens after modManager's globalSlotReady event

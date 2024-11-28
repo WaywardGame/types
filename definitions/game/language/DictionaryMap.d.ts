@@ -162,7 +162,6 @@ declare const dictionaryMap: {
     61: {
         Bow: ItemType.Bow;
         None: ItemType.None;
-        SlitherSucker: ItemType.SlitherSucker;
         HideGlue: ItemType.HideGlue;
         AnimalSkull: ItemType.AnimalSkull;
         GraniteArrow: ItemType.GraniteArrow;
@@ -556,6 +555,7 @@ declare const dictionaryMap: {
         MossCoveredBook: ItemType.MossCoveredBook;
         GildedRedBook: ItemType.GildedRedBook;
         ArrowShaft: ItemType.ArrowShaft;
+        SlitherSucker: ItemType.SlitherSucker;
         AberrantSlitherSucker: ItemType.AberrantSlitherSucker;
         StrawHat: ItemType.StrawHat;
         BlackplateSabatons: ItemType.BlackplateSabatons;
@@ -992,7 +992,6 @@ declare const dictionaryMap: {
     62: {
         Bow: ItemType.Bow;
         None: ItemType.None;
-        SlitherSucker: ItemType.SlitherSucker;
         HideGlue: ItemType.HideGlue;
         AnimalSkull: ItemType.AnimalSkull;
         GraniteArrow: ItemType.GraniteArrow;
@@ -1386,6 +1385,7 @@ declare const dictionaryMap: {
         MossCoveredBook: ItemType.MossCoveredBook;
         GildedRedBook: ItemType.GildedRedBook;
         ArrowShaft: ItemType.ArrowShaft;
+        SlitherSucker: ItemType.SlitherSucker;
         AberrantSlitherSucker: ItemType.AberrantSlitherSucker;
         StrawHat: ItemType.StrawHat;
         BlackplateSabatons: ItemType.BlackplateSabatons;
@@ -1951,7 +1951,6 @@ export declare const strictDictionaries: {
     61: {
         Bow: ItemType.Bow;
         None: ItemType.None;
-        SlitherSucker: ItemType.SlitherSucker;
         HideGlue: ItemType.HideGlue;
         AnimalSkull: ItemType.AnimalSkull;
         GraniteArrow: ItemType.GraniteArrow;
@@ -2345,6 +2344,7 @@ export declare const strictDictionaries: {
         MossCoveredBook: ItemType.MossCoveredBook;
         GildedRedBook: ItemType.GildedRedBook;
         ArrowShaft: ItemType.ArrowShaft;
+        SlitherSucker: ItemType.SlitherSucker;
         AberrantSlitherSucker: ItemType.AberrantSlitherSucker;
         StrawHat: ItemType.StrawHat;
         BlackplateSabatons: ItemType.BlackplateSabatons;
@@ -2781,7 +2781,6 @@ export declare const strictDictionaries: {
     62: {
         Bow: ItemType.Bow;
         None: ItemType.None;
-        SlitherSucker: ItemType.SlitherSucker;
         HideGlue: ItemType.HideGlue;
         AnimalSkull: ItemType.AnimalSkull;
         GraniteArrow: ItemType.GraniteArrow;
@@ -3175,6 +3174,7 @@ export declare const strictDictionaries: {
         MossCoveredBook: ItemType.MossCoveredBook;
         GildedRedBook: ItemType.GildedRedBook;
         ArrowShaft: ItemType.ArrowShaft;
+        SlitherSucker: ItemType.SlitherSucker;
         AberrantSlitherSucker: ItemType.AberrantSlitherSucker;
         StrawHat: ItemType.StrawHat;
         BlackplateSabatons: ItemType.BlackplateSabatons;

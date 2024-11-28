@@ -117,6 +117,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
      */
     setRandom(random?: Random): this;
     hasTranslation(): boolean;
+    orElse(translation: GetterOfOr<TranslationImpl>): TranslationImpl;
     orElse(translation?: GetterOfOr<TranslationImpl | undefined>): TranslationImpl | undefined;
     /**
      * Returns this translation as a list of string sections

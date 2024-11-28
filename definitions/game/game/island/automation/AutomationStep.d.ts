@@ -11,4 +11,5 @@
 import type { IAutomationContextState } from "@wayward/game/game/island/automation/IAutomation";
 export declare abstract class AutomationStep {
     abstract execute(context: IAutomationContextState): Promise<void>;
+    protected waitForNoDelay(context: IAutomationContextState): Promise<void>;
 }
