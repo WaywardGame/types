@@ -162,6 +162,7 @@ declare const dictionaryMap: {
     61: {
         Bow: ItemType.Bow;
         None: ItemType.None;
+        String: ItemType.String;
         HideGlue: ItemType.HideGlue;
         AnimalSkull: ItemType.AnimalSkull;
         GraniteArrow: ItemType.GraniteArrow;
@@ -226,7 +227,6 @@ declare const dictionaryMap: {
         GraniteSpear: ItemType.GraniteSpear;
         Stones: ItemType.Stones;
         GraniteWall: ItemType.GraniteWall;
-        String: ItemType.String;
         StrippedBark: ItemType.StrippedBark;
         Leather: ItemType.Leather;
         Tannin: ItemType.Tannin;
@@ -992,6 +992,7 @@ declare const dictionaryMap: {
     62: {
         Bow: ItemType.Bow;
         None: ItemType.None;
+        String: ItemType.String;
         HideGlue: ItemType.HideGlue;
         AnimalSkull: ItemType.AnimalSkull;
         GraniteArrow: ItemType.GraniteArrow;
@@ -1056,7 +1057,6 @@ declare const dictionaryMap: {
         GraniteSpear: ItemType.GraniteSpear;
         Stones: ItemType.Stones;
         GraniteWall: ItemType.GraniteWall;
-        String: ItemType.String;
         StrippedBark: ItemType.StrippedBark;
         Leather: ItemType.Leather;
         Tannin: ItemType.Tannin;
@@ -1951,6 +1951,7 @@ export declare const strictDictionaries: {
     61: {
         Bow: ItemType.Bow;
         None: ItemType.None;
+        String: ItemType.String;
         HideGlue: ItemType.HideGlue;
         AnimalSkull: ItemType.AnimalSkull;
         GraniteArrow: ItemType.GraniteArrow;
@@ -2015,7 +2016,6 @@ export declare const strictDictionaries: {
         GraniteSpear: ItemType.GraniteSpear;
         Stones: ItemType.Stones;
         GraniteWall: ItemType.GraniteWall;
-        String: ItemType.String;
         StrippedBark: ItemType.StrippedBark;
         Leather: ItemType.Leather;
         Tannin: ItemType.Tannin;
@@ -2781,6 +2781,7 @@ export declare const strictDictionaries: {
     62: {
         Bow: ItemType.Bow;
         None: ItemType.None;
+        String: ItemType.String;
         HideGlue: ItemType.HideGlue;
         AnimalSkull: ItemType.AnimalSkull;
         GraniteArrow: ItemType.GraniteArrow;
@@ -2845,7 +2846,6 @@ export declare const strictDictionaries: {
         GraniteSpear: ItemType.GraniteSpear;
         Stones: ItemType.Stones;
         GraniteWall: ItemType.GraniteWall;
-        String: ItemType.String;
         StrippedBark: ItemType.StrippedBark;
         Leather: ItemType.Leather;
         Tannin: ItemType.Tannin;

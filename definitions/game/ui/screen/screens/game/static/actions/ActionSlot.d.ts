@@ -117,7 +117,8 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
     getAction(): UsableAction<IUsableActionRequirements, IUsableActionDefinition> | undefined;
     getActionId(): ActionId | undefined;
     getInternalActionType(): ActionType | undefined;
-    getUsing(): IUsableActionPossibleUsing | undefined;
+    private usingCache?;
+    getUsing(fresh?: true): IUsableActionPossibleUsing | undefined;
     private getBindingText;
 }
 declare class ActionSlotSlottedContainer extends ItemComponent {

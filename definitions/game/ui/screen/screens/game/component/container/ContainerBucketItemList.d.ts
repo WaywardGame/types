@@ -77,7 +77,8 @@ export default class ContainerBucketItemList extends Component implements ISorta
     readonly sortable: Sortable;
     private containerRef?;
     get container(): IContainer | undefined;
-    isStacked(type?: ItemType): boolean | undefined;
+    isStacked(type?: ItemType): boolean;
+    isStacked(item?: Item): boolean;
     getStackedItems(type?: ItemType): Item[];
     getStackIndex(type?: ItemType): number | undefined;
     constructor(container?: IContainer);
@@ -99,7 +100,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private removeItemStackComponent;
     refresh(initial?: boolean): void;
     willAccept(item: Item | ItemType): boolean;
-    protected getOrderedContainerItems(): Item[];
+    protected getOrderedContainerItems(): readonly Item[];
     private getHovered;
     protected onItemMenu(): boolean;
     onItemEquipToggle(): boolean;
@@ -137,7 +138,6 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private itemIdsInElements?;
     private getItemIdsInElements;
     private getItemElementId;
-    private itemListDiffers;
     private getItemComponentElements;
     private regenerate;
     private transfer;

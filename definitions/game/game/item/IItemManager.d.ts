@@ -65,13 +65,13 @@ export interface IGetItemOptions {
      */
     filterText?: string;
 }
-export interface IGetItemsOptions extends IGetItemOptions {
+export interface IGetItemsOptions extends Pick<IGetItemOptions, "excludeProtectedItems" | "includeProtectedItemsThatWillNotBreak"> {
     /**
      * Include sub containers in the search
      */
     includeSubContainers: true;
 }
-export interface IGetBestItemsOptions extends IGetItemsOptions {
+export interface IGetBestItemsOptions extends IGetItemOptions, IGetItemsOptions {
     action: ActionType;
     actionWith: Item | (() => Item | undefined);
     sort(itemA: Item, itemB: Item, options: Partial<IGetBestItemsOptions>): number | undefined;
@@ -80,6 +80,7 @@ export interface IGetBestItemsOptions extends IGetItemsOptions {
     filterGroup: ItemTypeGroup;
     filterConsumable: true;
     filterContainer: IContainer;
+    filterStacked: boolean;
     targetCreature: Creature;
     filter(item: Item): any;
 }

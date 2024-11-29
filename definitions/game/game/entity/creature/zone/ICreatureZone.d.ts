@@ -8,7 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { DoodadType } from "@wayward/game/game/doodad/IDoodad";
 import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type { PartOfDay } from "@wayward/game/game/time/ITimeManager";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import type WorldZ from "@wayward/utilities/game/WorldZ";
@@ -36,10 +38,36 @@ export interface IBiomeCreatureZones {
      * With a multiplier of 2/3, it only increases the tier every 2/3 zones.
      */
     scaling?: number;
-    tiers?: PartialRecord<`tier${number}`, IBiomeCreatureZoneTier>;
+    creatures?: IBiomeCreatureZoneTiers;
+    guardians?: IBiomeGuardianZoneTiers;
+    tileReplacements?: IBiomeTileReplacements;
+    doodadReplacements?: IBiomeDoodadReplacements;
 }
+export type IBiomeCreatureZoneTiers = PartialRecord<`tier${number}`, IBiomeCreatureZoneTier>;
 export type IBiomeCreatureZoneTier = Map<WorldZ, IBiomeCreatureZoneSpawnGroup[]>;
 export type IBiomeCreatureZoneSpawnGroup = PartialRecord<PartOfDay, CreatureType[][]>;
+export declare function creatureZoneTiers(tiers: IBiomeCreatureZoneTiers): IBiomeCreatureZoneTiers;
+export type IBiomeGuardianZoneTiers = PartialRecord<`tier${number}`, IBiomeGuardianZoneTier>;
+export type IBiomeGuardianZoneTier = PartialRecord<WorldZ, CreatureType[]>;
+export declare function guardianZoneTiers(tiers: IBiomeGuardianZoneTiers): IBiomeGuardianZoneTiers;
+export interface IBiomeTileReplacement {
+    where: ArrayOr<TerrainType>;
+    replaceWith: TerrainType;
+    /** `0` = 0% chance of replacing all tiles of this type in this zone, `1` = 100%. Defaults to `1`. */
+    chance?: number;
+}
+export type IBiomeTileReplacements = PartialRecord<`tier${number}`, IBiomeTileReplacement[]>;
+export declare function tileReplacementsTiers(replacements: IBiomeTileReplacements): IBiomeTileReplacements;
+export interface IBiomeDoodadReplacement {
+    where: ArrayOr<DoodadType>;
+    replaceWith: DoodadType | null;
+    /** Upon replacing or removing the doodad, also change the terrain to this type */
+    replaceTerrain?: TerrainType;
+    /** `0` = 0% chance of replacing all doodads of this type in this zone, `1` = 100%. Defaults to `1`. */
+    chance?: number;
+}
+export type IBiomeDoodadReplacements = PartialRecord<`tier${number}`, IBiomeDoodadReplacement[]>;
+export declare function doodadReplacementsTiers(replacements: IBiomeDoodadReplacements): IBiomeDoodadReplacements;
 /**
  * The default size of a zone, on each axis. IE, a value of 60 is 60 tiles wide and 60 tiles long.
  */

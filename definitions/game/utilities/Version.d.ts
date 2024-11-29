@@ -65,7 +65,7 @@ declare namespace Version {
     export function getUpdateDisplayTranslation(version?: Version.String | Version.StringSemVer | IVersionInfo): TranslationImpl | undefined;
     const timezones: {
         nz: string;
-        pst: string;
+        pt: string;
         build: string;
     };
     export function isTimeBefore(date: Date, dateStr: DateString, timezone: keyof typeof timezones): boolean;

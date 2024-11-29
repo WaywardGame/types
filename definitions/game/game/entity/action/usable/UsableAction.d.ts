@@ -20,6 +20,8 @@ import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IIcon } from "@wayward/game/game/inspection/InfoProvider";
 import type Item from "@wayward/game/game/item/Item";
+import type ItemFinder from "@wayward/game/game/item/ItemFinder";
+import type { IItemFinderOptions } from "@wayward/game/game/item/ItemFinder";
 import type Translation from "@wayward/game/language/Translation";
 import Message from "@wayward/game/language/dictionary/Message";
 import type { HighlightSelector } from "@wayward/game/ui/util/IHighlight";
@@ -75,7 +77,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     getItem(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean): Item | false | undefined;
     private requirementsItemFinders?;
     private getItemFinder;
-    private createItemFinder;
+    createItemFinder(player: Player, options?: IItemFinderOptions, provided?: IUsableActionPossibleUsing): ItemFinder;
     private itemFinderFullCheck?;
     private itemFinderSimpleCheck?;
     private getItemByType;

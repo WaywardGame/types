@@ -195,12 +195,12 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      * @param options Item move options
      * @returns Result that tells you what moved
      */
-    moveItemsToContainer(human: Human | undefined, items: Item[], toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult;
+    moveItemsToContainer(human: Human | undefined, items: readonly Item[], toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult;
     setStacked(human: Human, container: IContainer, itemType: ItemType, stacked?: boolean, atIndex?: number): void;
     ensureContainerSorted(container?: IContainer, sorter?: ISorter<Item | undefined> | undefined): boolean;
     private ensureStacksStacked;
     createSorter(container?: IContainer): ISorter<Item | undefined> | undefined;
-    tryMoveItemsToContainer(human: Human | undefined, items: Item[], toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult | IActionNotUsable;
+    tryMoveItemsToContainer(human: Human | undefined, items: readonly Item[], toContainer: IContainer, options?: IMoveItemOptions): IAddToContainerResult | IActionNotUsable;
     /**
      * Return `number` to insert the item at a specific index. Return `undefined` to push the item to the end.
      * Defaults to `0` or `undefined` if sort is `ContainerSort.Recent`, or polling the sorting algorithm otherwise
@@ -341,9 +341,9 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     isTileContainer(container: IContainable | undefined): container is Tile & ITileContainer;
     /**
      * Returns ordered items for the containers
-     * Note: It ~~may~~ (will always) return the real containedItems array!
+     * Note: If not filtered, it will return the real containedItems array!
      */
-    getOrderedContainerItems(container: IUncastableContainer, options?: Partial<IGetItemOptions>): Item[];
+    getOrderedContainerItems(container: IUncastableContainer, options?: Partial<IGetItemsOptions>): readonly Item[];
     capWeightOfItems(createdItems: Item[], itemWeight: number): void;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup): Translation;
     getItemTypeTranslation(itemType: ItemType | ItemTypeGroup, count: number): Translation;

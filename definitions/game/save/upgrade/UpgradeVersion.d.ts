@@ -12,6 +12,7 @@ import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type AiManager from "@wayward/game/game/entity/ai/AiManager";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/CreatureZone";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type { IMessageManager } from "@wayward/game/game/entity/player/IMessageManager";
 import type Player from "@wayward/game/game/entity/player/Player";
@@ -38,6 +39,7 @@ export interface IUpgradeVersion {
     upgradeTileEvent?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, tileEvent: TileEvent): any;
     upgradeCorpse?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, corpse: Corpse): any;
     upgradeAi?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, ai: AiManager): any;
+    upgradeCreatureZone?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, zone: CreatureZone): any;
 }
 export type UpgradeType = Exclude<keyof IUpgradeVersion, "applies">;
 export type UpgradeParameters<TYPE extends UpgradeType> = Required<IUpgradeVersion>[TYPE] extends (_v: any, _u: any, ...params: infer PARAMS) => any ? PARAMS : never;

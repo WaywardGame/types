@@ -29,7 +29,7 @@ export declare class CreatureZone {
     private creatureSpawnTimer;
     kills: number;
     tames: number;
-    spawnedCreatures: boolean;
+    setup: boolean;
     private civilizationScore?;
     civilizationScoreTiles: SaferNumberIndexedObject<number>;
     zonePoint: IVector3;
@@ -37,6 +37,7 @@ export declare class CreatureZone {
     rectangle: Rectangle;
     private _spawnableCreatures?;
     private _spawnableCreaturesAtTier?;
+    tiles(): Iterable<Tile>;
     getCivilizationScore(): number;
     getCurrentCreatures(): Creature[];
     getCreaturesWithinZoneBounds(): Creature[];
@@ -80,10 +81,10 @@ export declare class CreatureZone {
      */
     spawnCreature(playingHumans?: Human[]): void;
     /**
-     * Attempts to spawns some creatures for this zone to start with.
+     * Spawning initial creatures, performing tile replacements, etc.
      * Method will no-op if called more than once.
      */
-    spawnDefaultCreatures(): void;
+    setupZone(force?: boolean): void;
     /**
      * Resets & recalculates the civilization score for the zone.
      */

@@ -112,9 +112,9 @@ export default class CreatureZoneManager extends EventEmitter.Host<ICreatureZone
      */
     load(): void;
     /**
-     * Ensures all zones spawned default creatures one time
+     * Ensures all zones have run their setup function (spawning initial creatures, performing tile replacements, etc)
      */
-    spawnDefaultCreatures(): void;
+    setupZones(force?: boolean): void;
     delete(): void;
     onUnserialized(): void;
     /**

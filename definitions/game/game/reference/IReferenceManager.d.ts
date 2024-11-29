@@ -64,6 +64,7 @@ export declare const enumRefTypes: {
     11: {
         Bow: ItemType.Bow;
         None: ItemType.None;
+        String: ItemType.String;
         HideGlue: ItemType.HideGlue;
         AnimalSkull: ItemType.AnimalSkull;
         GraniteArrow: ItemType.GraniteArrow;
@@ -128,7 +129,6 @@ export declare const enumRefTypes: {
         GraniteSpear: ItemType.GraniteSpear;
         Stones: ItemType.Stones;
         GraniteWall: ItemType.GraniteWall;
-        String: ItemType.String;
         StrippedBark: ItemType.StrippedBark;
         Leather: ItemType.Leather;
         Tannin: ItemType.Tannin;
