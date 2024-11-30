@@ -31,6 +31,7 @@ export declare enum InspectionClasses {
     $Subtitle = "subtitle",
     ColorContext = "inspection-color-context",
     $ColorContext = "color-context",
+    $ColorContext_Optional = "color-context--optional",
     Icon = "inspection-icon",
     $Icon = "icon"
 }

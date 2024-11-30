@@ -60,6 +60,7 @@ export interface IOptions {
     grantAllMilestoneModifiers: boolean;
     hideEquippedHeadgear: boolean;
     hudWidth?: number;
+    disableItemNotifiers: boolean;
     leftHanded: boolean;
     lowPowerMode: boolean;
     mouseTurnDelay: number;

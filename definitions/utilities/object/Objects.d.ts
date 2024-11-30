@@ -17,26 +17,16 @@ export type UnWeakRefified<ARGS extends any[]> = {
     [INDEX in keyof ARGS]: ARGS[INDEX] | (ARGS[INDEX] extends WeakKey ? undefined : never);
 };
 declare namespace Objects {
-    function mapOrRecordKeys<RK extends PropertyKey, MK>(o: {
-        [key in RK]?: any;
-    } | Map<MK, any>): Array<RK | MK>;
-    function mapOrRecordValues<V>(o: {
-        [key in PropertyKey]?: V;
-    } | Map<any, V>): V[];
-    function mapOrRecordEntries<RK extends PropertyKey, MK, V>(o: {
-        [key in RK]?: V;
-    } | Map<MK, V>): Array<[RK | MK, V]>;
+    function mapOrRecordKeys<RK extends PropertyKey, MK>(o: Partial<Record<RK, any>> | Map<MK, any>): Array<RK | MK>;
+    function mapOrRecordValues<V>(o: Partial<Record<PropertyKey, V>> | Map<any, V>): V[];
+    function mapOrRecordEntries<RK extends PropertyKey, MK, V>(o: Partial<Record<RK, V>> | Map<MK, V>): Array<[RK | MK, V]>;
     function keys<K>(o: Map<K, any>): MapIterator<K>;
-    function keys<K extends PropertyKey>(o: {
-        [key in K]?: any;
-    }): K[];
+    function keys<K extends PropertyKey>(o: Partial<Record<K, any>>): K[];
     function keys<O extends object>(o: O): Array<keyof O>;
     function values<V>(o: Map<any, V>): MapIterator<V>;
     function values<O extends object>(o: O): Array<O[keyof O]>;
     function entries<K, V>(o: Map<K, V>): MapIterator<[K, V]>;
-    function entries<K extends PropertyKey, V>(o: {
-        [key in K]?: V;
-    }): Array<[K, V]>;
+    function entries<K extends PropertyKey, V>(o: Partial<Record<K, V>>): Array<[K, V]>;
     function entries<O extends object>(o: O): Array<[keyof O, O[keyof O]]>;
     function fromEntries<K extends PropertyKey, V>(entriesIterable: Iterable<[K, V] | readonly [K, V]>): Record<K, V>;
     function windowKeysToParentObject(windowKeys: string[]): unknown;

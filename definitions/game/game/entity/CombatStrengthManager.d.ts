@@ -24,11 +24,12 @@ export declare enum CombatStrength {
     Tier9 = 9
 }
 export declare enum CombatDangerLevel {
-    Low = 0,
-    Medium = 1,
-    High = 2,
-    VeryHigh = 3,
-    Extreme = 4
+    None = 0,
+    Low = 1,
+    Medium = 2,
+    High = 3,
+    VeryHigh = 4,
+    Extreme = 5
 }
 export default class CombatStrengthManager {
     readonly minimumCreatureValue: number;

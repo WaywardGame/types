@@ -91,7 +91,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     defenses: number[];
     equippedOffHandDisabled?: ItemReference;
     equippedReferences: Map<EquipType, ItemReference>;
-    flyingDelay?: number;
+    fastMovingDelay?: number;
     handEquippedToLast: EquipType.OffHand | EquipType.MainHand;
     isConnecting: boolean;
     lastAttackedByReference?: Reference;

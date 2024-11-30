@@ -56,6 +56,7 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
     movementCompleteZ?: number;
     anim?: number;
     moveType?: MoveType;
+    fastMoving?: boolean;
     shouldSkipNextMovement?: true;
     protected slipping?: ISlippingData;
     protected shouldSkipNextUpdate?: true;
@@ -161,6 +162,7 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
     getMovementProgress(timeStamp: number): number;
     protected onMovementCompleted(movingData: IMovingData): void;
     get isFlying(): boolean;
+    get isFastMoving(): boolean;
     /**
      * Checks if the entity is moving.
      * This is based on the local client state (renderer).

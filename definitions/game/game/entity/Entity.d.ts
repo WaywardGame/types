@@ -119,7 +119,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     notifyItem(itemNotifierType: ItemNotifierType, item: Item): void;
     notifyStat(type: StatNotificationType, value: number): void;
     addMarkerIcon(type: MarkerIconType): void;
-    removeMarkerIcon(): void;
+    removeMarkerIcon(...types: MarkerIconType[]): void;
     getProducedTemperature(): number | undefined;
     setName(renamed: string | ISerializedTranslation | undefined): void;
     canInspect(human: Human): boolean;
