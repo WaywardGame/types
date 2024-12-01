@@ -183,26 +183,29 @@ export declare enum MiscTranslation {
     Tilled = 58,
     Undiscovered = 59,
     Unknown = 60,
-    UnknownItem = 61,
-    XUndiscovered = 62
+    UnknownItem = 61
 }
 export declare enum Term {
     Aberrant = 0,
     Action = 1,
     Attack = 2,
     DamageTick = 3,
-    EveryX = 4,
-    Hostile = 5,
-    Movement = 6,
-    NextX = 7,
-    Normal = 8,
-    Tamed = 9,
-    TimeToX = 10,
-    Turn = 11,
-    UsingX = 12,
-    XTick = 13,
-    XtoYZ = 14,
-    XY = 15
+    Effect = 4,
+    EveryX = 5,
+    Hostile = 6,
+    Movement = 7,
+    NextX = 8,
+    Normal = 9,
+    Tamed = 10,
+    TimeToX = 11,
+    Turn = 12,
+    Undiscovered = 13,
+    UndiscoveredSymbol = 14,
+    UsingX = 15,
+    XTick = 16,
+    XtoYZ = 17,
+    XUndiscovered = 18,
+    XY = 19
 }
 export declare enum Label {
     LabelColonValue = 0,

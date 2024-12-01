@@ -41,6 +41,8 @@ export interface IOptions {
     disableAcrylicTransparency: boolean;
     disableCraftingProtectedItems: boolean;
     disableHealthVignette: boolean;
+    disableItemNotifiers: boolean;
+    disableMilestones: boolean;
     disableMovementAnimations: boolean;
     disableOverlaySupport: boolean;
     disableQuitConfirmation: boolean;
@@ -60,7 +62,6 @@ export interface IOptions {
     grantAllMilestoneModifiers: boolean;
     hideEquippedHeadgear: boolean;
     hudWidth?: number;
-    disableItemNotifiers: boolean;
     leftHanded: boolean;
     lowPowerMode: boolean;
     mouseTurnDelay: number;

@@ -84,7 +84,7 @@ export declare class CreatureZone {
      * Spawning initial creatures, performing tile replacements, etc.
      * Method will no-op if called more than once.
      */
-    setupZone(force?: boolean): void;
+    setupZone(force?: boolean): boolean;
     /**
      * Resets & recalculates the civilization score for the zone.
      */

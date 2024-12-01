@@ -9,7 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
-import LabelledValue from "@wayward/game/game/inspection/infoProviders/LabelledValue";
 import UseInfo from "@wayward/game/game/inspection/infoProviders/UseInfo";
 import type Item from "@wayward/game/game/item/Item";
 import { MagicalPropertyEntry } from "@wayward/game/game/magic/MagicalPropertyManager";
@@ -37,16 +36,14 @@ declare const _default: UseInfo<{
 } & {
     getAttack: () => import("@wayward/game/game/inspection/InfoProvider").SimpleInfoProvider | undefined;
 } & {
-    getDefense: () => (import("../../../../../language/impl/TranslationImpl").default | import("@wayward/game/game/inspection/InfoProvider").SimpleInfoProvider)[];
+    getDefense: () => import("../../../../../language/impl/TranslationImpl").default[];
 } & {
-    formatInsulation: (insulation?: number | undefined, type?: TempType | undefined) => LabelledValue;
+    formatInsulation: (insulation?: number | undefined, type?: TempType | undefined) => import("../../../../../language/impl/TranslationImpl").default;
 } & {
-    getInsulationOfType: (type: TempType) => LabelledValue | undefined;
+    getInsulation: () => (import("../../../../../language/impl/TranslationImpl").default | undefined)[];
 } & {
-    getInsulation: () => (LabelledValue | undefined)[];
+    getMagicEffect: (magic: MagicalPropertyEntry) => import("../../../../../language/impl/TranslationImpl").default;
 } & {
-    getMagicEffect: (magic: MagicalPropertyEntry) => LabelledValue;
-} & {
-    getMagic: () => LabelledValue[];
+    getMagic: () => import("../../../../../language/impl/TranslationImpl").default[];
 }, Item>;
 export default _default;
