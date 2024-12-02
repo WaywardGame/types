@@ -19,7 +19,8 @@ type EmptyIfUndefined<T> = T extends undefined ? Empty : T;
 export declare abstract class Manipulator<T, U extends Until<T> | undefined = undefined> {
     protected readonly element: () => HTMLElement;
     protected readonly host: T;
-    protected untilHandler?: UntilHandler<T, EmptyIfUndefined<U>>;
+    protected getUntilHandler?(): UntilHandler<T, EmptyIfUndefined<U>>;
+    private untilHandler?;
     constructor(host: T, element: () => HTMLElement);
     until(promise: Promise<any>): EmptyIfUndefined<U>;
     until(ms: number): EmptyIfUndefined<U>;
@@ -32,7 +33,7 @@ export interface ClassUntil<T> extends Until<T> {
     toggle(hasClass: boolean, ...classes: string[]): T;
 }
 export declare class ClassManipulator<T> extends Manipulator<T, ClassUntil<T>> {
-    protected untilHandler: {
+    protected getUntilHandler(): {
         add: {
             start: (...classes: string[]) => T;
             end: (...classes: string[]) => T;
@@ -68,7 +69,7 @@ export interface AttributeUntil<T> extends Until<T> {
     set(attributes: Iterable<[string, string | null]>): T;
 }
 export declare class AttributeManipulator<T> extends Manipulator<T, AttributeUntil<T>> {
-    protected untilHandler: {
+    protected getUntilHandler(): {
         set: any;
     };
     set(name: string, value: string): T;
@@ -92,7 +93,7 @@ export interface StyleUntil<T> extends Until<T> {
     set(rule: string, value: string): T;
 }
 export declare class StyleManipulator<T> extends Manipulator<T, StyleUntil<T>> {
-    protected untilHandler: {
+    protected getUntilHandler(): {
         set: {
             start: (rule: string, value: string | number) => T;
             end: (rule: string) => T;

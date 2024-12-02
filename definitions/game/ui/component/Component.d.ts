@@ -80,13 +80,14 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     private tooltipInitializer?;
     private tooltipArgs?;
     private highlight;
-    private readonly debounces;
+    private debounces?;
     private box?;
     private boxCacheLastScroll?;
     private boxCacheScrollable?;
     removed?: boolean | string;
     observing?: boolean;
     rooted: boolean;
+    protected parentComponent?: WeakRef<Component>;
     private eventListeners?;
     /**
      * The selectable layer of this element, or `false` if it is not selectable.

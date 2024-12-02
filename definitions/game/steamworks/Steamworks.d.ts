@@ -189,6 +189,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     multiplayerLogWarn(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
     enumerateRemoteFiles(): IRemoteFile[];
+    writeGameStateJson(cleanup?: boolean): Promise<string>;
     private initializeGreenworks;
     private initializeNapi;
     private setupAndInitializeWorkshopMods;

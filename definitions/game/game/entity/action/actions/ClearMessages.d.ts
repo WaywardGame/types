@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
-declare const _default: Action<[], import("../../player/Player").default, void, import("../IAction").IActionUsable, []>;
+declare const _default: Action<[], import("../../player/Player").default, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, []>;
 export default _default;

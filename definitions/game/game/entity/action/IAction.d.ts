@@ -192,7 +192,11 @@ export declare enum ActionUsability {
     Resting = 1,
     Moving = 2,
     Ghost = 3,
-    Delayed = 4
+    Delayed = 4,
+    /**
+     * This makes action.isUsableWhen(*) always return true
+     */
+    Always = 5
 }
 export declare enum ActionFlag {
     /**
