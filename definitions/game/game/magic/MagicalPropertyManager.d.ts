@@ -31,9 +31,7 @@ export interface IMagicalSubProperty<T extends number> {
         value: number;
     }>;
 }
-export type MagicalProperty<T extends MagicalPropertyType> = MagicalPropertyTypeSubTypeMap extends {
-    [key in T]: any;
-} ? IMagicalSubProperty<MagicalPropertyTypeSubTypeMap[T]> : IMagicalProperty;
+export type MagicalProperty<T extends MagicalPropertyType> = MagicalPropertyTypeSubTypeMap extends Record<T, any> ? IMagicalSubProperty<MagicalPropertyTypeSubTypeMap[T]> : IMagicalProperty;
 type MagicalNormalPropertyEntry = {
     type: MagicalNormalPropertyTypes;
     value: number;

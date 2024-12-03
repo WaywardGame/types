@@ -130,10 +130,14 @@ declare namespace Translation {
         type: number;
         renamed?: string | ISerializedTranslation;
     }, count?: number, article?: Article, showRenamedQuotes?: boolean, preArticleReformatters?: [ArrayOr<TranslationReformatter>, ...TranslationArg[]]): Translation;
-    type Translator<ENTRY extends number = number, ARGS extends any[] = []> = (entry: string | ENTRY, ...args: ARGS) => Translation;
-    export function translator<ENTRY extends number = number, ARGS extends any[] = []>(_translator: Translator<ENTRY, ARGS> | Dictionary): Translator<ENTRY, ARGS>;
+    interface Translator<ENTRY extends number = number, ARGS extends any[] = []> {
+        (entry: string | ENTRY, ...args: ARGS): Translation;
+        (entry?: string | ENTRY, ...args: ARGS): Translation | undefined;
+    }
+    type TranslatorImpl<ENTRY extends number = number, ARGS extends any[] = []> = (entry?: string | ENTRY, ...args: ARGS) => Translation | undefined;
+    export function translator<ENTRY extends number = number, ARGS extends any[] = []>(_translator: TranslatorImpl<ENTRY, ARGS> | Dictionary): Translator<ENTRY, ARGS>;
     export function refTranslator<ENTRY extends number = number>(refType: EnumReferenceTypes, dictionary: SupplierOr<Dictionary, [number]>, color?: (entry: string | ENTRY) => TranslationImpl): Translator<ENTRY, [color?: boolean]>;
-    export function customRefTranslator<TRANSLATOR extends Translator<number, [reference: Reference, ...any[]]>>(refType: EnumReferenceTypes, _translator: TRANSLATOR, color?: (entry: string | number) => TranslationImpl): TRANSLATOR extends Translator<infer ENTRY, [reference: Reference | undefined, ...infer ARGS]> ? Translator<ENTRY, ARGS> : never;
+    export function customRefTranslator<TRANSLATOR extends TranslatorImpl<number, [reference: Reference, ...any[]]>>(refType: EnumReferenceTypes, _translator: TRANSLATOR, color?: (entry: string | number) => TranslationImpl): TRANSLATOR extends TranslatorImpl<infer ENTRY, [reference: Reference | undefined, ...infer ARGS]> ? Translator<ENTRY, ARGS> : never;
     export const empty: () => Translation;
     export const sentence: () => Translation;
     export const count: (amount: number, noun?: TranslationArg) => Translation;
