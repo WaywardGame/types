@@ -513,7 +513,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     /**
      * Recompute lights around the human
      */
-    computeLights(): void;
+    computeLights(z?: number): void;
     /**
      * Moves inventory items to the target island
      * This should be called before switching islands
