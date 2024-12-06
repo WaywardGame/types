@@ -49,6 +49,10 @@ export interface IObjectDescription extends IHasImagePath {
      * - Prevents picking up the doodad when items are inside via `preventPickingUpDoodadWhenItemsAreInside`
      */
     containerOptions?: IContainerOptions;
+    /**
+     * If set to true, this item will not tryRestoreCreature() when breaking (the difference between golems and full cages)
+     */
+    disableRestoreCreature?: boolean;
 }
 export interface IHasImagePath<ImagePathType = string> {
     /**

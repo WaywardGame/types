@@ -57,6 +57,11 @@ export default class TileEventManager extends EntityManager<TileEvent> {
      */
     createBlood(origin: IVector3): boolean;
     containsDamagingTileEvents(events: TileEvent[] | undefined): boolean;
+    /**
+     * Removes all tile events from the tile
+     * @param tile The tile to remove all tile events from
+     */
+    removeAll(tile: Tile): void;
     getName(typeOrEvent: CreatureType | TileEvent, article?: Article, count?: number, showCount?: boolean): TranslationImpl;
     getEventTranslations(events: TileEvent[], article?: Article, context?: TextContext): Stream<TranslationImpl>;
     getEventListTranslation(events: TileEvent[], article?: Article, context?: TextContext): TranslationImpl;

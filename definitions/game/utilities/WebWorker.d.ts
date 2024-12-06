@@ -11,7 +11,10 @@
 export type WorkerFunction<RequestType, ResultType> = (data: RequestType) => ({
     message: ResultType;
     transfer?: Transferable[];
-} | undefined);
+} | Promise<{
+    message: ResultType;
+    transfer?: Transferable[];
+}> | undefined);
 export declare class WebWorker<RequestType, ResultType> {
     private worker;
     private blobUrl;

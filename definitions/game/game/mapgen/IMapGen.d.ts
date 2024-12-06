@@ -43,7 +43,7 @@ export interface IBiomeMapGen<BiomeOptionsType = unknown> {
      * Generated the world tiles
      * Called within a WebWorker
      */
-    generate(input: IMapGenGenerateInput<BiomeOptionsType>): IMapGenGenerateOutput;
+    generate(input: IMapGenGenerateInput<BiomeOptionsType>): IMapGenGenerateOutput | Promise<IMapGenGenerateOutput>;
     /**
      * Called after generating the world for the first time
      */
