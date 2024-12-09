@@ -36,6 +36,7 @@ declare class ItemFinder extends EventEmitter.Host<IItemFinderEvents> {
     private trackedItems?;
     private foundItemIds?;
     private foundItemBest?;
+    private disposed?;
     get human(): Human | undefined;
     get container(): IContainer | undefined;
     readonly observe: Observer.IRegistrar<this>;

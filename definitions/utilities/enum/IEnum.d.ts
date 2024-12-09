@@ -21,7 +21,7 @@ export declare namespace EnumProperty {
     const COMPUTE: unique symbol;
 }
 export type EnumObject<T> = T & {
-    [EnumProperty.NAME]?: string;
+    [EnumProperty.NAME]?: ArrayOr<string>;
     [EnumProperty.OFFICIAL_MAX]?: number;
     [EnumProperty.MOD_START]?: number;
     [EnumProperty.EXCLUDED]?: ReadonlySet<keyof T>;
