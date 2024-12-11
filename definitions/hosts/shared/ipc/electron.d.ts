@@ -27,6 +27,7 @@ export interface IElectron {
     reloadWindow(): Promise<void>;
     invalidateWindow(): Promise<void>;
     destroyWindow(): Promise<void>;
+    isFullScreen(): Promise<boolean>;
     showSaveDialog(defaultPath: string, filterName: string, filterExtension: string): Promise<string | undefined>;
     showOpenDirectoryDialog(defaultPath?: string): Promise<string[]>;
 }
