@@ -11,6 +11,7 @@
 import type { ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
 import type Steamworks from "@wayward/game/steamworks/Steamworks";
 export default class ServerJoinHandler {
+    private triedToJoin;
     constructor();
     protected tryToJoinServer(): Promise<void>;
     protected onJoinServer(steamworks: Steamworks, serverInfo: ServerInfo): Promise<void>;
