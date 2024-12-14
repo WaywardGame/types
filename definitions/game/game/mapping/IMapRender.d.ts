@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -16,7 +16,8 @@ export declare enum MapSprite {
     InnerFogOfWar = 4,
     O = 5,
     X = 6,
-    TravelDots = 7
+    TravelDots = 7,
+    Wave = 8
 }
 export declare const DRAWN_MAP_BACKGROUND_PADDING = 16;
 export declare enum DrawnMapTheme {

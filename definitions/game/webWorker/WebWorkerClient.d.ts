@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { WebWorkerStatus } from "webWorker/WebWorkerMessages";
-import type { ClientWebWorkerMessage } from "webWorker/WebWorkerMessages";
+import type { ClientWebWorkerMessage } from "@wayward/game/webWorker/WebWorkerMessages";
+import { WebWorkerStatus } from "@wayward/game/webWorker/WebWorkerMessages";
 /**
  * Wrapper around a WebWorker that provides useful functionality
  */
 export declare class WebWorkerClient {
     readonly identifier: string;
-    multiplayerDataCallback: ((data: ArrayBuffer) => void) | undefined;
+    multiplayerDataCallback: ((data: ArrayBufferLike) => void) | undefined;
     private readonly log;
     private readonly worker;
     private readonly readyPromise;

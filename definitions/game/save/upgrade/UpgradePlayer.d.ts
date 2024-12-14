@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,10 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Player from "game/entity/player/Player";
-import type { Game } from "game/Game";
-import Version from "utilities/Version";
-export default function upgradePlayer(game: Game, player: Player, saveVersion: Version.Info, isLocalPlayer: boolean): string[];
+import type { Game } from "@wayward/game/game/Game";
+import type Player from "@wayward/game/game/entity/player/Player";
+import UpgradesArray from "@wayward/game/save/upgrade/UpgradesArray";
+import Version from "@wayward/game/utilities/Version";
+export default function upgradePlayer(game: Game, player: Player, saveVersion: Version.Info, isLocalPlayer: boolean): UpgradesArray;
 /**
  * Called after loading item & tile references
  */

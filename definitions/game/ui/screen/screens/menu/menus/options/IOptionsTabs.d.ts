@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -16,8 +16,8 @@ export declare enum OptionsTab {
     Performance = 4,
     Controls = 5,
     Tooltips = 6,
-    Other = 7,
-    Mods = 8,
-    SaveData = 9,
+    Mods = 7,
+    SaveData = 8,
+    Other = 9,
     Developer = 10
 }

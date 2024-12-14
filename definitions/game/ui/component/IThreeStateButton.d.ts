@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,7 +13,7 @@ export declare enum ThreeStateButtonState {
     On = 1,
     Off = 2
 }
-export declare module ThreeStateButtonState {
+export declare namespace ThreeStateButtonState {
     function boolean(state: ThreeStateButtonState): boolean | undefined;
     function get(bool: boolean | undefined | null): ThreeStateButtonState;
 }

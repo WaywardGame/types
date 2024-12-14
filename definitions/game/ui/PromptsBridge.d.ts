@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { IPromptDescriptionBase } from "game/meta/prompt/IPrompt";
-import { Prompt } from "game/meta/prompt/IPrompt";
-import type { IPrompt } from "game/meta/prompt/Prompts";
-import Prompts from "game/meta/prompt/Prompts";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { IPromptDescriptionBase } from "@wayward/game/game/meta/prompt/IPrompt";
+import { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
+import type { IPrompt } from "@wayward/game/game/meta/prompt/Prompts";
+import Prompts from "@wayward/game/game/meta/prompt/Prompts";
 export interface IPromptsBridgeEvents {
     promptResolved(): any;
 }

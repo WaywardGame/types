@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IModdable } from "mod/ModRegistry";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
 export declare enum ActionTypeStarts {
     ActionType = 0,
     ModActionType = 10000,
@@ -19,7 +19,7 @@ export declare enum ActionTypeStarts {
 }
 export declare enum UsableActionType {
     None = -1,
-    Use = 100000,
+    Use = 100000,// the start is so high to make sure it's past normal actions (and modded actions)
     QuickSlotRemove = 100001,
     QuickSlotAdd = 100002,
     QuickSlotAddToFree = 100003,
@@ -74,7 +74,36 @@ export declare enum UsableActionType {
     CommandFollowFar = 100052,
     CommandStay = 100053,
     CommandDefend = 100054,
-    CommandAttack = 100055
+    CommandAttack = 100055,
+    DisplayHeld = 100056,
+    DisplayLegs = 100057,
+    DisplayChest = 100058,
+    DisplayHead = 100059,
+    DisplayWaist = 100060,
+    DisplayFeet = 100061,
+    DisplayNeck = 100062,
+    DisplayHands = 100063,
+    DisplayBack = 100064,
+    DisplayMainHand = 100065,
+    DisplayOffHand = 100066,
+    ReshapeWithItem = 100067,
+    CommandHeel = 100068,
+    MoveContentsMenu = 100069,
+    MoveContentsToInventory = 100070,
+    MoveContentsToActiveContainer = 100071,
+    MoveContentsToFacingContainer = 100072,
+    MoveContentsOfActiveContainerMenu = 100073,
+    MoveContentsOfFacingContainerMenu = 100074,
+    Unused = 100075,
+    CommandMenuAll = 100076,
+    CommandAllFollowClose = 100077,
+    CommandAllFollowFar = 100078,
+    CommandAllStay = 100079,
+    CommandAllDefend = 100080,
+    CommandAllAttack = 100081,
+    CommandAllHeel = 100082,
+    Ascend = 100083,
+    Descend = 100084
 }
 export declare enum UsableActionTypePlaceholder {
     TradeItem = 200000,

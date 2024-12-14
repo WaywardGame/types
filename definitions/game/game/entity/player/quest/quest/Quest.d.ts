@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,14 +8,19 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type Player from "game/entity/player/Player";
-import type { IQuest, QuestType } from "game/entity/player/quest/quest/IQuest";
-import type { QuestInstance } from "game/entity/player/quest/QuestManager";
-import type { IQuestRequirement, IQuestRequirementApi, IQuestRequirementEvents, QuestRequirementType } from "game/entity/player/quest/requirement/IRequirement";
-import type { RequirementArgs } from "game/entity/player/quest/Requirements";
-import type Island from "game/island/Island";
-import Translation from "language/Translation";
+import type { GameEmitterOrBus } from "@wayward/game/event/EventManager";
+import type { IPlayerEvents } from "@wayward/game/game/entity/player/IPlayer";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { QuestInstance } from "@wayward/game/game/entity/player/quest/QuestManager";
+import type { RequirementArgs } from "@wayward/game/game/entity/player/quest/Requirements";
+import type { IQuest, QuestType } from "@wayward/game/game/entity/player/quest/quest/IQuest";
+import type { IQuestRequirement, IQuestRequirementApi, IQuestRequirementEvents, QuestRequirementType } from "@wayward/game/game/entity/player/quest/requirement/IRequirement";
+import type Island from "@wayward/game/game/island/Island";
+import Translation from "@wayward/game/language/Translation";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { HighlightSelector } from "@wayward/game/ui/util/IHighlight";
+import type Stream from "@wayward/goodstream";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IQuestEvents {
     update(quest: QuestInstance, requirement: RequirementInstance): any;
     requirementCompleted(quest: QuestInstance, requirement: RequirementInstance): any;
@@ -29,23 +34,26 @@ export declare class Quest extends EventEmitter.Host<IQuestEvents> {
     private readonly children;
     private readonly requirementInstances;
     private _needsManualCompletion;
+    private _skippable;
     constructor(type?: QuestType | undefined);
     reset(): void;
     addRequirement<R extends QuestRequirementType>(type: R, ...args: RequirementArgs<R>): this;
     addRequirement<RA extends any[]>(type: QuestRequirementType, ...args: RA): this;
     setNeedsManualCompletion(): this;
+    setSkippable(): this;
     addChildQuests(...children: QuestType[]): this;
     getChildren(): QuestType[];
     setTitle(translation?: Translation | ((quest: IQuest) => Translation)): this;
     setDescription(translation?: Translation): this;
     create(island: Island, type?: QuestType | undefined): IQuest;
-    getTitle(quest: IQuest): import("../../../../../language/impl/TranslationImpl").default | undefined;
-    getDescription(quest: IQuest): import("../../../../../language/impl/TranslationImpl").default | undefined;
-    getEventBusTriggers(instance: IQuest): [IQuestRequirement<any[], {}>, import("@wayward/goodstream").default<readonly [import("../../../../../event/EventManager").EmitterOrBus, string | number | symbol, (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]>][];
-    getHostTriggers(instance: IQuest): [IQuestRequirement<any[], {}>, IterableIterator<[keyof import("../../IPlayer").IPlayerEvents, (api: IQuestRequirementApi<[], {}>, player: Player, ...args: any[]) => boolean]>][];
+    getTitle(quest: IQuest): TranslationImpl | undefined;
+    getDescription(quest: IQuest): TranslationImpl | undefined;
+    getEventBusTriggers(instance: IQuest): Array<[IQuestRequirement, Stream<readonly [GameEmitterOrBus, string | number | symbol, (api: IQuestRequirementApi<[]>, ...args: any[]) => boolean]>]>;
+    getHostTriggers(instance: IQuest): Array<[IQuestRequirement, IteratorObject<[keyof IPlayerEvents, (api: IQuestRequirementApi<[]>, player: Player, ...args: any[]) => boolean]>]>;
     getRequirements(host: Player, instance: IQuest): RequirementInstance[];
     getRequirement(host: Player, quest: IQuest, requirement: IQuestRequirement): RequirementInstance | undefined;
     needsManualCompletion(): boolean;
+    skippable(): boolean;
     protected createRequirements(island: Island): IQuestRequirement[];
     protected createRequirement<R extends QuestRequirementType>(type: R, ...options: RequirementArgs<R>): IQuestRequirement<RequirementArgs<R>>;
 }
@@ -55,8 +63,9 @@ export declare class RequirementInstance extends EventEmitter.Host<IQuestRequire
     private readonly api;
     constructor(host: Player, data: IQuestRequirement, id: number);
     triggerInitialization(): boolean;
-    getTranslation(): import("../../../../../language/impl/TranslationImpl").default;
+    getTranslation(): TranslationImpl;
     getCompletionAmount(): number;
-    getRelations(): import("../../../../../ui/util/IHighlight").HighlightSelector[];
+    getRelations(): HighlightSelector[];
     setVisible(): this;
+    private get description();
 }

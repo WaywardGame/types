@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,10 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Button from "ui/component/Button";
-import Dropdown from "ui/component/Dropdown";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type Button from "@wayward/game/ui/component/Button";
+import Dropdown from "@wayward/game/ui/component/Dropdown";
 export default class NPCDropdown extends Dropdown<number> {
     constructor();
-    get selectedNPC(): import("../../../game/entity/npc/NPC").default | undefined;
-    protected getOptions(): [number, (option: Button) => Button][];
+    get selectedNPC(): NPC | undefined;
+    protected getOptions(): Array<[number, (option: Button) => Button]>;
 }

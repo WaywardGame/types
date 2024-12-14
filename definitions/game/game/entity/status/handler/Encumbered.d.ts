@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,18 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { WeightStatus } from "game/entity/player/IPlayer";
-import StatusEffect, { StatusEffectBadness } from "game/entity/status/StatusEffect";
-import type { IHighlight } from "ui/util/IHighlight";
-export default class Encumbered extends StatusEffect {
-    private status?;
+import { WeightStatus } from "@wayward/game/game/entity/player/IPlayer";
+import Status from "@wayward/game/game/entity/status/Status";
+import { StatusEffectList } from "@wayward/game/game/entity/status/StatusEffectList";
+import type { IHighlight } from "@wayward/game/ui/util/IHighlight";
+export default class Encumbered extends Status {
     register(): void;
-    getLevel(): 0 | WeightStatus;
+    getLevel(): WeightStatus;
     getHighlight(): IHighlight;
-    getBadness(): StatusEffectBadness.Neutral | StatusEffectBadness.Bad;
-    getTranslation(): import("../../../../language/impl/TranslationImpl").default;
-    getDescription(): import("../../../../language/impl/TranslationImpl").default;
+    getEffects(): StatusEffectList;
     refresh(): void;
+    private getTimeToNextThirstTickReductionMultiplier;
     private onEntityMove;
     private onStatChange;
     private getStaminaReductionPerTurn;

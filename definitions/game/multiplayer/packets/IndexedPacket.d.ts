@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,18 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type Corpse from "game/entity/creature/corpse/Corpse";
-import type Creature from "game/entity/creature/Creature";
-import type Entity from "game/entity/Entity";
-import type Human from "game/entity/Human";
-import type NPC from "game/entity/npc/NPC";
-import type { IMovementIntent } from "game/entity/player/IPlayer";
-import type Player from "game/entity/player/Player";
-import type Item from "game/item/Item";
-import type TileEvent from "game/tile/TileEvent";
-import BasePacket from "multiplayer/packets/BasePacket";
-import type { IVector2, IVector3 } from "utilities/math/IVector";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Entity from "@wayward/game/game/entity/Entity";
+import type Human from "@wayward/game/game/entity/Human";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type { IMovementIntent } from "@wayward/game/game/entity/player/IPlayer";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type Item from "@wayward/game/game/item/Item";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import BasePacket from "@wayward/game/multiplayer/packets/BasePacket";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 export default abstract class IndexedPacket extends BasePacket {
     private _index;
     private _indexFlags;
@@ -73,8 +73,8 @@ export default abstract class IndexedPacket extends BasePacket {
     protected writeIndexedMovementIntent(value?: IMovementIntent): void;
     protected readIndexedItems(): Item[] | undefined;
     protected writeIndexedItems(value?: Item[]): void;
-    protected readIndexedObject(): any;
-    protected writeIndexedObject(value?: any): void;
+    protected readIndexedObject(): unknown;
+    protected writeIndexedObject(value?: unknown): void;
     protected readIndexedVector2Array(): IVector2[] | undefined;
     protected writeIndexedVector2Array(value?: IVector2[]): void;
     private writeIndex;

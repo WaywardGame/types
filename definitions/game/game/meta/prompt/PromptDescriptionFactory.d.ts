@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IPromptChoiceDescription, IPromptConfirmDescription, IPromptDescriptionBase, IPromptInfoDescription, IPromptInputDescription, IPromptMenuDescription, Prompt, PromptChoices, PromptPriority } from "game/meta/prompt/IPrompt";
-import { PromptType } from "game/meta/prompt/IPrompt";
-import type InterruptChoice from "language/dictionary/InterruptChoice";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import type { MenuId } from "ui/screen/screens/menu/component/IMenu";
+import type { IPromptChoiceDescription, IPromptConfirmDescription, IPromptDescriptionBase, IPromptInfoDescription, IPromptInputDescription, IPromptMenuDescription, Prompt, PromptChoices, PromptPriority } from "@wayward/game/game/meta/prompt/IPrompt";
+import { PromptType } from "@wayward/game/game/meta/prompt/IPrompt";
+import type InterruptChoice from "@wayward/game/language/dictionary/InterruptChoice";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import type { MenuId } from "@wayward/game/ui/screen/screens/menu/component/IMenu";
 export declare const promptDescriptions: Descriptions<PromptType, IPromptDescriptionBase<any>>;
 export default class PromptDescriptionFactory {
     private readonly _priority?;

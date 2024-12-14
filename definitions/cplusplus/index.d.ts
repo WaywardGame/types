@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,7 +15,7 @@ export interface IWaywardCPP {
     BitGrid: IBitGridConstructor;
     ByteGrid: IByteGridConstructor;
     DijkstraMap: IDijkstraMapConstructor;
-    FieldOfView: any;
+    FieldOfView: IFieldOfViewConstructor;
     FlowField: IFlowFieldConstructor;
     KDTree: IKDTreeConstructor;
     Navigation: INavigationConstructor;
@@ -28,6 +28,7 @@ export type IDijkstraMapConstructor = new (mapSize: number) => IDijkstraMap;
 export type IKDTreeConstructor = new (mapSize: number) => IKDTree;
 export type INavigationConstructor = new (mapSize: number, autoConnect: boolean) => INavigation;
 export type IWorldLayerConstructor = new (islandX: number, islandY: number, width: number, height: number, level: number) => IWorldLayerCPP;
+export type IFieldOfViewConstructor = new () => IFieldOfViewCPP;
 export interface IWaywardCPPFlowField {
     delete(): void;
     reset(): void;
@@ -76,6 +77,7 @@ export interface IWorldLayerCPP {
 export interface IDijkstraMap {
     getNode(x: number, y: number): INavigationNode;
     updateNode(x: number, y: number, penalty: number, disabled: boolean): void;
+    connectNodes(x1: number, y1: number, x2: number, y2: number, direction: number): void;
     updateOrigin(origin: INavigationNode): void;
     findPath(end: INavigationNode): {
         success: boolean;
@@ -91,6 +93,7 @@ export interface IDijkstraMapFindPathResult {
     score: number;
     endX: number;
     endY: number;
+    moveAdjacentToTarget: boolean;
 }
 export interface INavigation {
     getNode(x: number, y: number): INavigationNode;
@@ -108,6 +111,7 @@ export interface INavigationNode {
     disabled: boolean;
     penalty: number;
     connectTo(node: INavigationNode, direction: number): void;
+    disconnectFrom(direction: number): void;
     getConnection(direction: number): INavigationNode | undefined;
 }
 export interface IKDTree {
@@ -119,4 +123,8 @@ export interface IKDTree {
         distance: number;
     }>;
     delete(): void;
+}
+export interface IFieldOfViewCPP {
+    computeLights(worldLayer: IWorldLayerCPP, startX0: number, endX0: number, startY0: number, endY0: number): void;
+    bresenham(worldLayer: IWorldLayerCPP, x0: number, y0: number, x1: number, y1: number): boolean;
 }

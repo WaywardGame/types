@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { HeapStatistics } from "electron";
 import type { IOS } from "./ipc/os";
 import type { IFileSystem } from "./ipc/fileSystem";
 import type { IElectron } from "./ipc/electron";
@@ -32,6 +33,8 @@ export interface IHostContextBridge {
     os: IOS;
     path: IPath;
     ssh2: any;
+    getHeapStatistics(): HeapStatistics;
+    takeHeapSnapshot(filePath: string): boolean;
 }
 export interface ISteamworks {
     UGCMatchingType: {
@@ -48,7 +51,7 @@ export interface ISteamworks {
         createArchive(target: string, src: string, success: () => void, failure: (err: string) => void): void;
         extractArchive(src: string, dest: string): Promise<void>;
     };
-    initialize(): boolean;
+    initialize(): void;
     shutdown(): void;
     runCallbacks(): void;
     getFriends(): ISteamFriend[];
@@ -82,6 +85,8 @@ export interface ISteamworks {
     getCurrentGameInstallDir(): string;
     getSteamId(): ISteamId;
     getCurrentBetaName(): string;
+    getBetas(): ISteamBeta[];
+    setActiveBeta(name: string): boolean;
     onGameOverlayActive(cb: (isActive: boolean) => void): void;
     onLobbyCreated(cb: (success: boolean, lobbyId: string, result?: number) => void): void;
     onLobbyEntered(cb: (success: boolean, lobbyId: string, result?: number) => void): void;
@@ -95,7 +100,11 @@ export interface ISteamworks {
     showFloatingGamepadTextInput(nTextFieldXPosition: number, nTextFieldYPosition: number, nTextFieldWidth: number, nTextFieldHeight: number): boolean;
     dismissFloatingGamepadTextInput(): boolean;
     setFloatingGamepadTextInputDismissedCallback(cb: () => void): void;
+    overlayNeedsPresent(): boolean;
+    isGameOverlayEnabled(): boolean;
     getInputType(): SteamInputType;
+    setTimelineGameMode(timelineGameMode: SteamTimelineGameMode): void;
+    addTimelineEvent(marker: SteamTimelineMarker, title: string, description: string, clipPriority: SteamTimelineEventClipPriority): void;
 }
 export interface ISteamworksNetworking {
     initRelayNetworkAccess(): undefined;
@@ -113,6 +122,12 @@ export interface ISteamworksNetworking {
     setSteamNetworkingConnectionStatusCallback(callback: (steamIdRemote: string, state: SteamNetworkingConnectionState, endReason: number, oldState: SteamNetworkingConnectionState) => void): void;
     setSteamNetworkingSendRates(min: number, max: number): void;
     setSteamNetworkingDebugCallback(callback: (type: number, message: string) => void): void;
+}
+export interface ISteamBeta {
+    buildId: number;
+    name: string;
+    description: string;
+    flags: number;
 }
 export interface ISteamFriend {
     name?: string;
@@ -240,12 +255,14 @@ export interface IServerGameDetails {
     maxPlayers: number;
     difficulty: number;
     pvp: boolean;
-    reputation: number;
+    tier: number;
     days: number;
     mods: IServerMod[];
     peaceful: boolean;
     milestoneModifiersAllowed: boolean;
     island: IServerIslandDetails;
+    reputation?: number;
+    alignment?: number;
 }
 export interface IServerMod {
     name: string;
@@ -260,9 +277,9 @@ export interface IServerIslandDetails {
     biomeType: number;
 }
 export declare enum LobbyType {
-    Private = 0,
-    FriendsOnly = 1,
-    Public = 2,
+    Private = 0,// only way to join the lobby is to invite to someone else
+    FriendsOnly = 1,// shows for friends or invitees, but not in lobby list
+    Public = 2,// visible for friends and in lobby list
     Invisible = 3
 }
 export declare enum SteamInputType {
@@ -270,17 +287,32 @@ export declare enum SteamInputType {
     k_ESteamInputType_SteamController = 1,
     k_ESteamInputType_XBox360Controller = 2,
     k_ESteamInputType_XBoxOneController = 3,
-    k_ESteamInputType_GenericGamepad = 4,
+    k_ESteamInputType_GenericGamepad = 4,// DirectInput controllers
     k_ESteamInputType_PS4Controller = 5,
-    k_ESteamInputType_AppleMFiController = 6,
-    k_ESteamInputType_AndroidController = 7,
-    k_ESteamInputType_SwitchJoyConPair = 8,
-    k_ESteamInputType_SwitchJoyConSingle = 9,
+    k_ESteamInputType_AppleMFiController = 6,// Unused
+    k_ESteamInputType_AndroidController = 7,// Unused
+    k_ESteamInputType_SwitchJoyConPair = 8,// Unused
+    k_ESteamInputType_SwitchJoyConSingle = 9,// Unused
     k_ESteamInputType_SwitchProController = 10,
-    k_ESteamInputType_MobileTouch = 11,
-    k_ESteamInputType_PS3Controller = 12,
-    k_ESteamInputType_PS5Controller = 13,
-    k_ESteamInputType_SteamDeckController = 14,
+    k_ESteamInputType_MobileTouch = 11,// Steam Link App On-screen Virtual Controller
+    k_ESteamInputType_PS3Controller = 12,// Currently uses PS4 Origins
+    k_ESteamInputType_PS5Controller = 13,// Added in SDK 151
+    k_ESteamInputType_SteamDeckController = 14,// Added in SDK 153
     k_ESteamInputType_Count = 15,
     k_ESteamInputType_MaximumPossibleValue = 255
 }
+export declare enum SteamTimelineGameMode {
+    k_ETimelineGameMode_Invalid = 0,
+    k_ETimelineGameMode_Playing = 1,
+    k_ETimelineGameMode_Staging = 2,
+    k_ETimelineGameMode_Menus = 3,
+    k_ETimelineGameMode_LoadingScreen = 4,
+    k_ETimelineGameMode_Max = 5
+}
+export declare enum SteamTimelineEventClipPriority {
+    k_ETimelineEventClipPriority_Invalid = 0,
+    k_ETimelineEventClipPriority_None = 1,
+    k_ETimelineEventClipPriority_Standard = 2,
+    k_ETimelineEventClipPriority_Featured = 3
+}
+export type SteamTimelineMarker = "steam_marker" | "steam_achievement" | "steam_attack" | "steam_bolt" | "steam_bookmark" | "steam_bug" | "steam_cart" | "steam_caution" | "steam_chat" | "steam_checkmark" | "steam_chest" | "steam_circle" | "steam_combat" | "steam_completed" | "steam_crown" | "steam_death" | "steam_defend" | "steam_diamond" | "steam_edit" | "steam_effect" | "steam_explosion" | "steam_fix" | "steam_flag" | "steam_gem" | "steam_group" | "steam_heart" | "steam_info" | "steam_invalid" | "steam_minus" | "steam_pair" | "steam_person" | "steam_plus" | "steam_purchase" | "steam_question" | "steam_ribbon" | "steam_screenshot" | "steam_scroll" | "steam_square" | "steam_star" | "steam_starburst" | "steam_timer" | "steam_transfer" | "steam_triangle" | "steam_trophy" | "steam_view" | "steam_x";

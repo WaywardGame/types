@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,17 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Human from "@wayward/game/game/entity/Human";
+import type { IMessage, IMessageHistoryItem, IMessageManager, IPackedMessage } from "@wayward/game/game/entity/player/IMessageManager";
+import { MessageType, Source } from "@wayward/game/game/entity/player/IMessageManager";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type Island from "@wayward/game/game/island/Island";
+import type Dictionary from "@wayward/game/language/Dictionary";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
+import Translation from "@wayward/game/language/Translation";
+import Message from "@wayward/game/language/dictionary/Message";
+import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import Stream from "@wayward/goodstream/Stream";
-import type Human from "game/entity/Human";
-import type { IMessage, IMessageHistoryItem, IMessageManager, IPackedMessage } from "game/entity/player/IMessageManager";
-import { MessageType, Source } from "game/entity/player/IMessageManager";
-import type Player from "game/entity/player/Player";
-import type Island from "game/island/Island";
-import type Dictionary from "language/Dictionary";
-import Message from "language/dictionary/Message";
-import type { TranslationArg } from "language/ITranslation";
-import Translation from "language/Translation";
-import type { IVector4 } from "utilities/math/Vector4";
 export declare class MessageManagerNoOp implements IMessageManager {
     private readonly history;
     getMessageHistory(): Stream<IMessage>;
@@ -38,9 +38,11 @@ export declare class MessageManagerNoOp implements IMessageManager {
 }
 export interface IMessageManagerOptions {
     shouldDisplayMessage(message: IMessage, id: number): boolean | undefined;
-    onDisplayMessage(message: IMessage): void;
     getMessageStorageMax(isLocalPlayer: boolean): number;
+    onDisplayMessage(message: IMessage): any;
+    onClearMessages(): any;
 }
+type MessageManagerToAllSender = (manager: IMessageManager, player: Player) => boolean;
 export default class MessageManager implements IMessageManager {
     private readonly options;
     /**
@@ -59,7 +61,8 @@ export default class MessageManager implements IMessageManager {
      * Note: When this is called from a client, it actually only displays the message to the client and syncs that with the server.
      * When called from the server, it is sent to every client.
      */
-    static toAll(callback: (manager: IMessageManager, player: Player) => boolean): boolean;
+    static toAll(sender: MessageManagerToAllSender): boolean;
+    static toAll(players: Human[], sender: MessageManagerToAllSender): boolean;
     private readonly history;
     private lastMessageId;
     private _source;
@@ -118,7 +121,7 @@ export default class MessageManager implements IMessageManager {
      * Note: After sending a message, the message source, type, and human (if any) are reset.
      */
     send(message: Message | Translation, ...args: TranslationArg[]): boolean;
-    sendPacked(pack: Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
+    sendPacked(pack: Message | Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
     addToHistory(messageHistoryItem: IMessageHistoryItem): void;
     /**
      * Signal that the message was sent to everyone
@@ -127,3 +130,4 @@ export default class MessageManager implements IMessageManager {
     private reset;
     upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
 }
+export {};

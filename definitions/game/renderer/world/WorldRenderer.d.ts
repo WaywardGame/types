@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,30 +8,30 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type Creature from "game/entity/creature/Creature";
-import type NPC from "game/entity/npc/NPC";
-import type Island from "game/island/Island";
-import type { IOverlayInfo } from "game/tile/ITerrain";
-import { TerrainType } from "game/tile/ITerrain";
-import type Tile from "game/tile/Tile";
-import type RendererContext from "renderer/context/RendererContext";
-import type { IRendererOrigin } from "renderer/context/RendererOrigin";
-import FieldOfView from "renderer/fieldOfView/FieldOfView";
-import Notifier from "renderer/notifier/Notifier";
-import ParticleSystem from "renderer/particle/ParticleSystem";
-import type ISpriteBatch from "renderer/spriteBatch/ISpriteBatch";
-import FenceTileAdaptor from "renderer/tile/adaptors/Fence";
-import WallTileAdaptor from "renderer/tile/adaptors/Wall";
-import type TileAtlas from "renderer/tile/atlas/TileAtlas";
-import type { TerrainTileInfo } from "renderer/tile/TerrainTileInfo";
-import type { ITileAdaptor } from "renderer/tile/TileAdaptors";
-import type WebGlContext from "renderer/WebGlContext";
-import type { IBounds } from "renderer/world/IWorldRenderer";
-import { RenderFlag, SpriteBatchLayer } from "renderer/world/IWorldRenderer";
-import WorldLayerRenderer from "renderer/world/WorldLayerRenderer";
-import type { IVector2 } from "utilities/math/IVector";
-import Vector2 from "utilities/math/Vector2";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type Island from "@wayward/game/game/island/Island";
+import type { IOverlayInfo } from "@wayward/game/game/tile/ITerrain";
+import { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type { IRendererOrigin } from "@wayward/game/renderer/context/RendererOrigin";
+import { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
+import { Notifier } from "@wayward/game/renderer/notifier/Notifier";
+import { ParticleSystem } from "@wayward/game/renderer/particle/ParticleSystem";
+import type { ISpriteBatch } from "@wayward/game/renderer/spriteBatch/ISpriteBatch";
+import type { TerrainTileInfo } from "@wayward/game/renderer/tile/TerrainTileInfo";
+import type { ITileAdaptor } from "@wayward/game/renderer/tile/TileAdaptors";
+import FenceTileAdaptor from "@wayward/game/renderer/tile/adaptors/Fence";
+import WallTileAdaptor from "@wayward/game/renderer/tile/adaptors/Wall";
+import type TileAtlas from "@wayward/game/renderer/tile/atlas/TileAtlas";
+import type { IBounds } from "@wayward/game/renderer/world/IWorldRenderer";
+import { RenderFlag, SpriteBatchLayer } from "@wayward/game/renderer/world/IWorldRenderer";
+import { WorldLayerRenderer } from "@wayward/game/renderer/world/WorldLayerRenderer";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { IRendererContext } from "@wayward/game/renderer/context/IRendererContext";
+import type { IWorldRendererPlatform } from "@wayward/game/renderer/world/IWorldRendererPlatform";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
 export interface IWorldRendererEvents {
     /**
      * Called when calculating creatures in the viewport
@@ -106,11 +106,8 @@ export interface IWorldRendererEvents {
      */
     shouldRender(): RenderFlag | undefined;
 }
-export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvents> {
+export declare class WorldRenderer extends EventEmitter.Host<IWorldRendererEvents> {
     private readonly context;
-    private readonly textureShaderProgram;
-    private readonly worldShaderProgram;
-    private readonly fogShaderProgram;
     readonly fieldOfView: FieldOfView;
     readonly particleSystem: ParticleSystem;
     readonly notifier: Notifier;
@@ -124,6 +121,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     mountainAdaptor: ITileAdaptor;
     mountainGroundAdaptor: ITileAdaptor;
     tillAdaptor: ITileAdaptor;
+    dugAdaptor: ITileAdaptor;
     trackAdaptor: ITileAdaptor;
     wallAdaptor: WallTileAdaptor;
     waterAdaptor: ITileAdaptor;
@@ -133,26 +131,13 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private tileScale;
     private zoom;
     private _island;
-    readonly positionTextureBuffer: WebGLBuffer;
-    readonly positionBuffer: WebGLBuffer;
-    readonly ditherTexture: WebGLTexture;
-    private readonly compositeFramebuffer;
-    private readonly compositeTexture;
-    private readonly layerFramebuffer;
-    private readonly layerTexture;
-    private readonly depthRenderBuffer;
-    private readonly fogFramebuffer;
-    private readonly fogTexture;
-    private readonly fogTextureStorage;
-    private readonly vertexArraySingle;
-    private readonly vertexArrayDouble;
     private _tileAtlas;
     private _spriteAtlas;
     private belowDoodadsBatch;
     private itemBatch;
     private itemMovingBatch;
     private corpseBatch;
-    private creatureBatch;
+    private playerCreatureBatch;
     private tileEventBatch;
     private overTreesBatch;
     private creatureFlyingBatch;
@@ -162,8 +147,8 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private viewportSpritesDirty;
     private cachedBounds;
     private cachedBoundsTimestamp;
-    static initializePrograms(webGlContext: WebGlContext): Promise<void>;
-    constructor(context: RendererContext);
+    readonly rendererPlatform: IWorldRendererPlatform;
+    constructor(context: IRendererContext);
     get island(): Island;
     get tileAtlas(): TileAtlas;
     /**
@@ -172,7 +157,8 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private get shouldRenderEntities();
     delete(): void;
     load(island: Island): void;
-    update(timeStamp: number): void;
+    render(): void;
+    renderWorld(timeStamp: number, x: number, y: number, z: number): void;
     updateAllTiles(): void;
     initializeSpriteBatch(layer: SpriteBatchLayer): void;
     private setResources;
@@ -194,9 +180,7 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     addOrUpdateOverlay(tile: Tile, overlay: IOverlayInfo): void;
     removeOverlay(tile: Tile, overlay: IOverlayInfo): void;
     shouldRender(): RenderFlag;
-    renderWorld(timeStamp: number, x: number, y: number, z: number): void;
     renderWorldLayer(worldLayer: WorldLayerRenderer, x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFlags: RenderFlag, enableDepth: boolean): void;
-    render(): void;
     screenToVector(screenX: number, screenY: number, timeStamp?: number): Vector2;
     screenToTile(screenX: number, screenY: number): Tile | undefined;
     private getViewportBounds;
@@ -210,25 +194,26 @@ export default class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private batchCreature;
     private getFlyingOffset;
     private batchShadow;
-    private batchDoodad;
+    private batchDoodadOrVehicle;
     private batchHuman;
     private batchAttackAnimation;
     /**
      * Renders the status effects currently on the human.
      */
-    private renderStatusEffects;
+    private renderStatuses;
     private shouldRenderBaseLayer;
     /**
      * Renders a status effect image.
      */
-    private renderStatusEffect;
+    private renderStatus;
     private spriteBatchForLayer;
-    addTileToViewport(visibleTiles: Set<Tile>, tile: Tile, itemBatch: ISpriteBatch | undefined): void;
+    addTileToViewport(timeStamp: number, visibleTiles: Set<Tile>, tile: Tile, itemBatch: ISpriteBatch | undefined): void;
     /**
      * Computes sprites in the viewport
      * @returns True when there's more rendering to be done
      */
     private computeSpritesInViewportImmediately;
+    private batchTileItems;
     private batchItems;
     private batchItem;
     private batchTileEvents;

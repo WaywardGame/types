@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,13 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IRefreshable } from "ui/component/Refreshable";
-import { Tab } from "ui/screen/screens/menu/component/Menu";
+import { CheckButton } from "@wayward/game/ui/component/CheckButton";
+import { RangeRow } from "@wayward/game/ui/component/RangeRow";
+import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
+import { Tab } from "@wayward/game/ui/screen/screens/menu/component/Menu";
 export default class TabVideo extends Tab implements IRefreshable {
     private readonly refreshables;
-    private readonly checkButtonFullscreen;
-    private readonly inputUiScale;
-    private readonly inputHudWidth;
+    readonly checkButtonFullscreen: CheckButton | undefined;
+    readonly checkButtonSmoothZooming: CheckButton;
+    readonly inputUiScale: RangeRow;
+    readonly inputHudWidth: RangeRow;
     constructor();
     refresh(): this;
     protected onViewportResize(): void;

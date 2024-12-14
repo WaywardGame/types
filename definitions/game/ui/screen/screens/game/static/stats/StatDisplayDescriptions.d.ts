@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Stat } from "game/entity/IStats";
-import { discover, shake, toggleClasses, when, type IStatDisplayDescription } from "ui/screen/screens/game/static/stats/IStatDisplayDescription";
+import { Stat } from "@wayward/game/game/entity/IStats";
+import { discover, shake, toggleClasses, when, type IStatDisplayDescription } from "@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription";
 export { discover, shake, toggleClasses, when };
 export declare const statDisplayDescriptions: Map<Stat, IStatDisplayDescription>;

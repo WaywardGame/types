@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { PlayerState } from "game/entity/player/IPlayer";
-import type { IHighscore } from "save/data/ISaveDataGlobal";
-import Button from "ui/component/Button";
-import Menu from "ui/screen/screens/menu/component/Menu";
+import { PlayerState } from "@wayward/game/game/entity/player/IPlayer";
+import type { IHighscore } from "@wayward/game/save/data/ISaveDataGlobal";
+import Button from "@wayward/game/ui/component/Button";
+import Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
 export interface IGameEndData {
     state: PlayerState.Won | PlayerState.Dead;
     highscore: IHighscore;

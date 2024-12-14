@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,34 +8,35 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type { ActionArgument, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionExample, IActionExampleApi, IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
-import type Corpse from "game/entity/creature/corpse/Corpse";
-import type Creature from "game/entity/creature/Creature";
-import type Entity from "game/entity/Entity";
-import type Human from "game/entity/Human";
-import type { EntityType } from "game/entity/IEntity";
-import type NPC from "game/entity/npc/NPC";
-import type Player from "game/entity/player/Player";
-import type Item from "game/item/Item";
-import type TileEvent from "game/tile/TileEvent";
-import type { Direction } from "utilities/math/Direction";
-import type { IVector3 } from "utilities/math/IVector";
-export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> implements IActionDescription<A, E, R, CU, AV> {
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { ActionArguments, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionExample, IActionExampleApi, IActionHandlerApi, IActionNotUsable, IActionNotUsableHandlerApi, IActionTargetAdjacent, IActionTargetEntityRanged, IActionTargetTileRanged, IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Entity from "@wayward/game/game/entity/Entity";
+import type Human from "@wayward/game/game/entity/Human";
+import type { EntityType } from "@wayward/game/game/entity/IEntity";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type Item from "@wayward/game/game/item/Item";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+export declare class Action<A extends ActionArguments, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> implements IActionDescription<A, E, R, CU, AV> {
     readonly argumentTypes: A;
-    readonly usability: {
-        [key in ActionUsability]?: boolean;
-    };
-    readonly flags: {
-        [key in ActionFlag]?: boolean;
-    };
+    readonly usability: PartialRecord<ActionUsability, boolean>;
+    readonly flags: PartialRecord<ActionFlag, boolean>;
     validExecutors: Set<EntityType>;
     preExecutionHandler?: (actionApi: IActionApi<E, CU>, ...args: AV) => any;
     canUseHandler: (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => CU | IActionNotUsable;
     handler: (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => R;
+    notUsableHandler: (actionApi: IActionNotUsableHandlerApi<E, CU>, ...args: AV) => R;
     confirmer?: (actionApi: IActionConfirmerApi<E, any>, ...args: AV) => Promise<boolean>;
     exampleHandler?: (actionApi: IActionExampleApi<E, CU>, ...args: AV) => IActionExample;
+    deities?: DeityReal[];
     private shouldSkipConfirmation;
+    private targetTile?;
     constructor(...argumentTypes: A);
     /**
      * Check if the action has setup CanUse logic
@@ -44,9 +45,13 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     getExample(executor: E, ...args: AV): IActionExample | undefined;
     canUse(actionApi: IActionApi<E, any>, ...args: AV): CU | IActionNotUsable;
     canUse(executor: E, ...args: AV): CU | IActionNotUsable;
-    canUseWhileFacing(actionExecutor: E, position: IVector3, direction: Direction.Cardinal, ...args: AV): CU | IActionNotUsable;
-    execute(actionApiOrExecutor: IActionApi<E, any> | E, ...args: AV): R | Promise<R>;
-    executeConfirmer(actionApiOrExecutor: IActionApi<E, any> | E, args: AV, argumentTypes?: ActionArgument[]): Promise<boolean>;
+    canUseAt(actionExecutor: E, location?: Partial<IActionTargetAdjacent>, ...args: AV): CU | IActionNotUsable;
+    canUseWhileFacing(actionExecutor: E, position: IVector3, direction?: Direction.Cardinal, ...args: AV): CU | IActionNotUsable;
+    execute(actionApiOrExecutor: IActionApi<E, any> | E, ...args: AV): R | Promise<R> | Promise<R | undefined> | undefined;
+    executeAt(actionApiOrExecutor: IActionApi<E, any> | E, location: IActionTargetAdjacent, ...args: AV): Promise<R | undefined>;
+    executeRanged(actionApiOrExecutor: IActionApi<E, any> | E, target: IActionTargetTileRanged, ...args: AV): Promise<R | undefined>;
+    executeOn(actionApiOrExecutor: IActionApi<E, any> | E, targetEntity?: Entity | Tile | IActionTargetEntityRanged, ...args: AV): Promise<R | undefined>;
+    executeConfirmer(actionApiOrExecutor: IActionApi<E, any> | E, args: AV): Promise<boolean>;
     skipConfirmation(): this;
     /**
      * Add a "pre-execution" handler to this action.
@@ -86,6 +91,12 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
      */
     setHandler<H extends (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => R>(handler: H): Action<A, E, ReturnType<H>, CU>;
     /**
+     * Add a handler that is called when it's executed while not being usable
+     *
+     * Handlers are executed on both the client-side and the server-side.
+     */
+    setNotUsableHandler<H extends (actionApi: IActionNotUsableHandlerApi<E, CU>, ...args: AV) => R>(handler: H): Action<A, E, ReturnType<H>, CU>;
+    /**
      * Sets additional times the action can be used in.
      */
     setUsableWhen(...usabilities: ActionUsability[]): this;
@@ -102,6 +113,11 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
      * @param flag Flag to check
      */
     hasFlag(flag: ActionFlag): boolean;
+    /**
+     * Sets which deities can award runes for this action
+     * @param deity A deity or union of multiple deities
+     */
+    setDeityDomain(...deities: DeityReal[]): this;
     /**
      * Creates an identical clone of this action.
      */

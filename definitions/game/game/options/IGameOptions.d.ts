@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,18 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { BiomeType } from "game/biome/IBiome";
-import type { CreatureType, TileGroup } from "game/entity/creature/ICreature";
-import type { AttackType, StatusType } from "game/entity/IEntity";
-import type { SkillType } from "game/entity/IHuman";
-import type { Stat } from "game/entity/IStats";
-import type { ItemType } from "game/item/IItem";
-import type { Milestone } from "game/milestones/IMilestone";
-import type { ThreeStateButtonState } from "ui/component/IThreeStateButton";
-import type DefaultMap from "utilities/collection/map/DefaultMap";
-import type RandomItem from "utilities/random/generators/specific/RandomItem";
-import type RandomRange from "utilities/random/generators/specific/RandomRange";
-import type { RecursivePartial } from "utilities/types/Recursive";
+import type { Quality, QualityNatural } from "@wayward/game/game/IObject";
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
+import type { AttackType } from "@wayward/game/game/entity/IEntity";
+import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { Stat } from "@wayward/game/game/entity/IStats";
+import type { CreatureType, TileGroup } from "@wayward/game/game/entity/creature/ICreature";
+import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
+import type { StatusType } from "@wayward/game/game/entity/status/IStatus";
+import type { ItemType } from "@wayward/game/game/item/IItem";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { ThreeStateButtonState } from "@wayward/game/ui/component/IThreeStateButton";
+import type DefaultMap from "@wayward/game/utilities/collection/map/DefaultMap";
+import type RandomItem from "@wayward/game/utilities/random/generators/specific/RandomItem";
+import type RandomRange from "@wayward/game/utilities/random/generators/specific/RandomRange";
+import type { RecursivePartial } from "@wayward/game/utilities/types/Recursive";
+import type { IRange } from "@wayward/utilities/math/Range";
 export declare enum GameMode {
     Hardcore = 0,
     Casual = 1,
@@ -28,9 +33,7 @@ export declare enum GameMode {
 }
 export declare const TIME_ETERNAL_NIGHT = 0.7;
 export declare const TIME_ETERNAL_DAY = 0.3;
-export declare const MAX_TRAVEL_TIME_MIN = 1000;
-export declare const MAX_TRAVEL_TIME_MAX = 200000;
-export declare const MAX_TRAVEL_TIME_DEFAULT = 20000;
+export declare const TIME_SUNSET = 0.625;
 export interface IGameOptions {
     /**
      * Whether players respawn when they die
@@ -45,10 +48,6 @@ export interface IGameOptions {
          * Traveling effect options
          */
         applyTravelingEffects: boolean;
-        /**
-         * Maximum amount of turns to tick when traveling
-         */
-        maxTravelTime: number;
     };
     creatures: {
         /**
@@ -78,17 +77,31 @@ export interface IGameOptions {
          */
         chanceToSpawnScared: number;
         /**
-         * Maximum number of creatures that can spawn in a world
+         * Maximum number of creatures that can spawn in a zone
          */
         spawnLimit: number;
         /**
-         * Multiplier for how much max/min HP bonus is given on each tame
+         * Multiplier for changing the creature spawn rate
+         */
+        spawnRateMultiplier: number;
+        /**
+         * Multiplier for how much max/min HP bonus is given on each tame/offer/pet
          */
         tameHealthMultiplier: number;
         /**
          * Multiplier for how long each tame lasts
          */
         tameTimeMutiplier: number;
+        /**
+         * Whether creatures can be scared (run away from players)
+         */
+        disableScared: boolean;
+        zones: {
+            /**
+             * A global tier modifier to apply to every zone
+             */
+            globalTierModifier: number;
+        };
     };
     time: {
         /**
@@ -120,23 +133,21 @@ export interface IGameOptions {
     };
     player: IGameOptionsPlayer;
     npcs: {
+        spawning: DefaultMap<NPCType, IGameOptionsNPCSpawning>;
         merchants: {
             /**
              * A multiplier for the price of each merchant item.
              */
             priceMultiplier: number;
             /**
+             * A multiplier in price of an item for sale (and divisor in the credit they offer for an item)
+             * for each time an item has already been traded with a merchant.
+             */
+            alreadyTradedMultiplier: number;
+            /**
              * The number of items a merchant spawns with.
              */
             initialItems: RandomRange[];
-            /**
-             * Can spawn at all.
-             */
-            allowSpawning: boolean;
-            /**
-             * A multiplier for the merchant spawn cap (which is based on civilization score and this value).
-             */
-            spawnCapMultiplier: number;
         };
     };
     /**
@@ -146,6 +157,10 @@ export interface IGameOptions {
     milestoneModifiers: Set<Milestone>;
     items: {
         /**
+         * Whether tile containers should be allowed.
+         */
+        tileContainersEnabled: boolean;
+        /**
          * A multiplier for the durability of each item globally.
          */
         durabilityMultiplier: number;
@@ -153,6 +168,10 @@ export interface IGameOptions {
          * Multiplier for decay of items.
          */
         decayMultiplier: number;
+        /**
+         * Changes item quality properties.
+         */
+        qualities: DefaultMap<Quality, IGameOptionsItemQuality>;
     };
     randomEvents: boolean;
 }
@@ -163,6 +182,14 @@ export declare enum UnlockedRecipesStrategy {
 }
 export interface IGameOptionsPlayer {
     /**
+     * A multiplier for some chance checks. 1 = default chances. 0.5 = chances are halved. 2 = chances are doubled. Etc.
+     */
+    luckMultiplier: number;
+    /**
+     * Starting curse value, added to the calculated value.
+     */
+    initialCurse: number;
+    /**
      * Whether the player should use their globally unlocked recipes in this game.
      */
     unlockedRecipes: UnlockedRecipesStrategy;
@@ -171,9 +198,17 @@ export interface IGameOptionsPlayer {
      */
     stats: DefaultMap<Stat, IGameOptionsStat>;
     /**
-     * A map of options for each status effect.
+     * A global multiplier for stat gain chance.
      */
-    statusEffects: DefaultMap<StatusType, IGameOptionsStatusEffect>;
+    statGainChanceGlobalMultiplier: number;
+    /**
+     * Whether to enable stat gain type lockout. (IE, preventing gaining the same stat twice in a row.)
+     */
+    statGainTypeLockout: boolean;
+    /**
+     * A map of options for each status.
+     */
+    statuses: DefaultMap<StatusType, IGameOptionsStatus>;
     skills: {
         /**
          * Amount of starting skills the player has (by default, 1 or 0, depending on mode)
@@ -181,6 +216,10 @@ export interface IGameOptionsPlayer {
          * Note: Randomly generated skills can be overwritten by custom options in `skills`.
          */
         initial: RandomRange[];
+        /**
+         * Initial value range for starting skills.
+         */
+        initialValue: IRange;
         /**
          * Configuration that affects every skill which doesn't have its own configuration.
          */
@@ -190,23 +229,27 @@ export interface IGameOptionsPlayer {
          */
         customs: DefaultMap<SkillType, IGameOptionsSkill>;
     };
-    reputation: {
+    runes: {
         /**
-         * The initial malignity
+         * Upon the player receiving a rune, they will not be able to receive runes of the same type,
+         * until receiving a rune of another type.
          */
-        initialMalignity: number;
+        typeLockout: boolean;
         /**
-         * The initial benignity
+         * A multiplier for the chance of the player being given a rune.
          */
-        initialBenignity: number;
+        globalChanceMultiplier: number;
         /**
-         * The rate at which malignity is gained
+         * A multiplier for the chance of the player being given a rune, for each deity.
          */
-        malignityMultiplier: number;
+        deityChanceMultiplier: Record<DeityReal, number>;
         /**
-         * The rate at which benignity is gained
+         * Options for the sacrifice action.
          */
-        benignityMultiplier: number;
+        sacrifice: {
+            points: Record<QualityNatural, IRange>;
+            thresholds: Record<QualityNatural, number>;
+        };
     };
     inventory: {
         /**
@@ -216,12 +259,31 @@ export interface IGameOptionsPlayer {
         randomItems: boolean;
         /**
          * An additional set of items the player should spawn with.
+         *
+         * **Note that respawning on a Hardcore multiplayer server with Hardcore Respawns enabled will give the player these items.**
          */
         additionalItems: RandomItem[];
         /**
+         * An additional set of items the player should spawn with.
+         *
+         * These items will not be given to the player if they are respawning on a Hardcore multiplayer server with Hardcore Respawns enabled.
+         */
+        additionalItemsNonRespawn: RandomItem[];
+        /**
          * An additional set of items the player should spawn with that should be equipped.
+         *
+         * **Note that respawning on a Hardcore multiplayer server with Hardcore Respawns enabled will give the player these items.**
          */
         equipment: Array<{
+            type: RandomItem;
+            priority?: number;
+        }>;
+        /**
+         * An additional set of items the player should spawn with that should be equipped.
+         *
+         * These items will not be given to the player if they are respawning on a Hardcore multiplayer server with Hardcore Respawns enabled.
+         */
+        equipmentNonRespawn: Array<{
             type: RandomItem;
             priority?: number;
         }>;
@@ -253,9 +315,13 @@ export interface IGameOptionsPlayer {
          */
         attackMultiplier: DefaultMap<AttackType, number>;
         /**
-         * Add player damage multiplier based on attack type (used within Attack action).
+         * Add player trap damage multiplier.
          */
         trapMultiplier: number;
+        /**
+         * Add player base defense multiplier.
+         */
+        baseDefenseMultiplier: number;
     };
 }
 /**
@@ -292,7 +358,7 @@ export interface IGameOptionsStat {
      */
     gainAmount: number;
 }
-export interface IGameOptionsStatusEffect {
+export interface IGameOptionsStatus {
     /**
      * Whether every player starts with this status effect.
      */
@@ -308,7 +374,7 @@ export interface IGameOptionsStatusEffect {
     /**
      * A multiplier for the number of ticks between effect ticks.
      */
-    effectRateMultiplier: number;
+    intervalMultiplier: number;
     /**
      * Decrease or increase the effect of the... effect.
      */
@@ -362,4 +428,61 @@ export interface IGameOptionsCreature {
         type: ItemType;
         chance: number;
     }>;
+}
+export interface IGameOptionsNPCSpawning {
+    /**
+     * A multiplier for the spawning interval duration for this NPC type
+     */
+    intervalMultiplier: number;
+    /**
+     * A multiplier for the spawn chance for this NPC type
+     */
+    chanceMultiplier: number;
+    /**
+     * The number of NPCs of this type that each have a separate chance to spawn in this interval
+     */
+    count: number;
+    /**
+     * A multiplier for the merchant spawn cap (which is based on civilization score)
+     */
+    capMultiplier: number;
+}
+export interface IGameOptionsItemQuality {
+    /**
+     * Modifies the spawning chance of the quality.
+     */
+    spawnChance: number;
+    magicalProperties: IGameOptionsItemMagic;
+}
+export interface IGameOptionsItemMagic {
+    /**
+     * The chance for magical properties to be generated on an item of this quality.
+     */
+    chance: number;
+    /**
+     * When spawning an item with magical properties, this is the minimum number it will spawn with.
+     */
+    min: number;
+    /**
+     * The maximum number of additional magical properties the item could spawn with.
+     */
+    bonus: number;
+    /**
+     * The chance of a bonus property. Is checked once for each additional property, stopping whenever it fails to add one.
+     *
+     * For example, given a chance of 0.5:
+     * - 50% chance of 1 bonus property
+     * - 25% chance of 2 bonus properties
+     * - 12.5% chance of 3 bonus properties
+     * - etc
+     */
+    bonusChance: number;
+    /**
+     * Whether bonus chances also take the "contextual multiplier" into account (based on skill, island distance, etc.)
+     */
+    bonusChanceUsesContextualMultiplier: boolean;
+    /**
+     * Whether to randomize the magical properties as a flat range chance instead of applying bonusChance for every additional property.
+     */
+    randomizeAsRange: boolean;
 }

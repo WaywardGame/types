@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,13 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 export declare enum TileType {
-    Q2TopRightQ1TopLeft = 0,
+    Q2TopRightQ1TopLeft = 0,// top
     Q2TopLeft = 1,
-    Q2BottomLeftQ3TopLeft = 2,
+    Q2BottomLeftQ3TopLeft = 2,// left
     Q3BottomLeft = 3,
-    Q3BottomRightQ4BottomLeft = 4,
+    Q3BottomRightQ4BottomLeft = 4,// bottom
     Q4BottomRight = 5,
-    Q1BottomRightQ4TopRight = 6,
+    Q1BottomRightQ4TopRight = 6,// right
     Q1TopRight = 7,
     Q4TopLeft = 8,
     Q1BottomLeft = 9,

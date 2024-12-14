@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,16 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ISegment, IStringSection } from "utilities/string/Interpolator";
-export declare enum TextDecoration {
-    Underline = 1,
-    Bold = 2,
-    Italicized = 4
-}
-export interface IDecoratedSection extends IStringSection {
-    decoration: TextDecoration;
+import type { ISegment } from "@wayward/game/utilities/string/Interpolator";
+export declare enum TextDecorationClasses {
+    Underline = "text-decoration-underline",
+    Bold = "text-decoration-bold",
+    Italicized = "text-decoration-italicized",
+    Overline = "text-decoration-overline"
 }
 export declare const italicizedSegment: ISegment;
 export declare const boldSegment: ISegment;
 export declare const underlineSegment: ISegment;
-export declare function getDecorations(section: IStringSection): [TextDecoration, number][];
+export declare const overlineSegment: ISegment;

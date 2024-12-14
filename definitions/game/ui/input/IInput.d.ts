@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import TranslationImpl from "language/impl/TranslationImpl";
-import { InputCatalystType } from "ui/input/IIInput";
+import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import { InputCatalystType } from "@wayward/game/ui/input/IIInput";
 interface IInputCatalystValueMap {
     [InputCatalystType.Key]: string;
     [InputCatalystType.MouseButton]: number;
@@ -25,7 +25,7 @@ type IInputCatalystMap = {
     [C in InputCatalystType]: IInputCatalyst<C>;
 };
 export type InputCatalyst = Value<IInputCatalystMap>;
-export declare module InputCatalyst {
+export declare namespace InputCatalyst {
     function is(value: unknown): value is InputCatalyst;
     function get<K extends keyof typeof InputCatalystType>(type: K, catalyst: IInputCatalystValueMap[(typeof InputCatalystType)[K]]): InputCatalyst;
     function key(catalyst: IInputCatalystValueMap[InputCatalystType.Key]): InputCatalyst;
@@ -47,7 +47,7 @@ declare enum ModifierType {
     Ctrl = 2
 }
 export type Modifier = keyof typeof ModifierType;
-export declare module Modifier {
+export declare namespace Modifier {
     function is(value: unknown): value is Modifier;
     function translate(modifier: Modifier): TranslationImpl;
     function hash(...modifiers: Modifier[]): string;
@@ -65,7 +65,7 @@ export interface IInput {
     catalyst: InputCatalyst;
     modifiers: Set<Modifier>;
 }
-export declare module IInput {
+export declare namespace IInput {
     function is(value: unknown): value is IInput;
     function create<K extends keyof typeof InputCatalystType, C extends (typeof InputCatalystType)[K]>(type: K, catalyst: IInputCatalystValueMap[C], ...modifiers: Modifier[]): IInput;
     function get(catalyst: InputCatalyst, modifiers?: Set<"Shift" | "Alt" | "Ctrl">): IInput;
@@ -76,6 +76,10 @@ export declare module IInput {
     function equals(inputA: IInput, inputB: IInput): boolean;
     function modifiersEqual(inputA: IInput, modifiersB: Set<Modifier>): boolean;
     function getPrecision(input: IInput): number;
+    /**
+     * Given an input with modifiers
+     */
+    function getModifiersInputs(input: IInput): IInput[];
     function hash(input: IInput, resolveModifiers?: boolean): string;
     interface IModifierResolvedHash {
         hash: string;

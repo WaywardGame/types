@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { IEntityManagerEvents } from "game/entity/EntityManager";
-import Player from "game/entity/player/Player";
-import type { Game } from "game/Game";
-import type { IPlayerOptions, IPlayOptions } from "game/IGame";
+import type { IEntityManagerEvents } from "@wayward/game/game/entity/EntityManager";
+import Player from "@wayward/game/game/entity/player/Player";
+import type { Game } from "@wayward/game/game/Game";
+import type { IPlayerOptions, IPlayOptions } from "@wayward/game/game/IGame";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IPlayerManagerEvents extends IEntityManagerEvents<Player> {
     /**
      * Called when a player is about to be removed

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type Item from "game/item/Item";
-import type Crafter from "game/item/recipe/Crafter";
-import type Tile from "game/tile/Tile";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type Item from "@wayward/game/game/item/Item";
+import type Crafter from "@wayward/game/game/item/recipe/Crafter";
+import type Tile from "@wayward/game/game/tile/Tile";
 export declare enum RecipeRequirementType {
     Item = 0,
     Tool = 1,

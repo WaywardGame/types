@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,16 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SfxUi } from "audio/IAudio";
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import type { IIcon } from "game/inspection/InfoProvider";
-import Component from "ui/component/Component";
-import type { IDisableable, TranslationGenerator } from "ui/component/IComponent";
-import Text, { Paragraph } from "ui/component/Text";
+import type { SfxType, SfxUi } from "@wayward/game/audio/IAudio";
+import type { IIcon } from "@wayward/game/game/inspection/InfoProvider";
+import Component from "@wayward/game/ui/component/Component";
+import type { IDisableable, TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import Text, { Paragraph } from "@wayward/game/ui/component/Text";
+import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 interface IButtonEvents extends Events<Component> {
     activate(): any;
     toggleDisabled(disabled: boolean): any;
     toggleActive(active: boolean): any;
+    initializeText(text: Text): any;
 }
 export declare enum ButtonClasses {
     Main = "button",
@@ -32,7 +34,8 @@ export declare enum ButtonClasses {
     Text = "button-text",
     ListIconsZoom2To3 = "button-list-zoom-2-to-3",
     IconZoom2To3 = "button-icon-zoom-2-to-3",
-    Opaque = "button-opaque"
+    Opaque = "button-opaque",
+    Description = "button-description"
 }
 export declare enum ButtonType {
     None = "button-type-none",
@@ -61,15 +64,15 @@ export default class Button extends Component implements IDisableable {
     activate(playSound?: boolean): void;
     addButton(returnNewButton: true, initializer: (button: Button) => Button): Button;
     addButton(initializer: (button: Button) => Button): this;
-    addDescription(initializer: (description: Paragraph) => any): this;
+    addDescription(initializer?: (description: Paragraph) => any): this;
     setText(text?: TranslationGenerator): this;
     getText(): TranslationGenerator | undefined;
     getTextAsString(): string;
-    setInheritTextTooltip(): this;
+    setInheritTextTooltip(initializer?: (tooltip: Tooltip) => any): this;
     refreshText(): this;
     setIcon(icon?: IIcon, scale?: boolean): this;
     private sound?;
-    setSound(sound?: SfxUi): this;
+    setSound(sound?: SfxUi | SfxType): this;
     protected playSound(): void;
     protected onClick(event?: Event | MouseEvent): void;
 }

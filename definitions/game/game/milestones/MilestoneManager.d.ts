@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,12 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { CreatureType } from "game/entity/creature/ICreature";
-import type { DamageType } from "game/entity/IEntity";
-import type { Game } from "game/Game";
-import { Milestone, MilestoneVisibility } from "game/milestones/IMilestone";
-type MilestoneUpdate = [Milestone, (number | string)?];
+import type { Game } from "@wayward/game/game/Game";
+import { Quality } from "@wayward/game/game/IObject";
+import type { DamageType } from "@wayward/game/game/entity/IEntity";
+import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
+import { Milestone, MilestoneVisibility } from "@wayward/game/game/milestones/IMilestone";
+import type MilestoneDefinition from "@wayward/game/game/milestones/MilestoneDefinition";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IMilestoneEvents {
     /**
      * @param milestone The milestone that is being updated
@@ -24,8 +25,9 @@ export interface IMilestoneEvents {
 }
 export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents> {
     private readonly game;
+    private milestoneProgressHandlers?;
     constructor(game: Game);
-    readonly descriptions: Descriptions<Milestone, import("./MilestoneDefinition").default>;
+    readonly descriptions: Descriptions<Milestone, MilestoneDefinition>;
     private readonly milestoneUpdates;
     /**
      * Get whether the given milestone is completed or not.
@@ -43,17 +45,22 @@ export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents
      * Get an array of all completed milestones
      */
     getCompleted(): Milestone[];
-    add(update: MilestoneUpdate): void;
+    add(milestone: Milestone, data?: string | number): void;
     update(): void;
     areUnlockable(mode?: import("../options/IGameOptions").GameMode): boolean;
     areUnlockableInMode(mode?: import("../options/IGameOptions").GameMode): boolean;
     isUnlockableInMode(milestone: Milestone, mode?: import("../options/IGameOptions").GameMode): boolean;
     reset(): void;
-    getDiscovered(milestone: Milestone): (string | number)[] | undefined;
+    getDiscovered(milestone: Milestone): Array<string | number> | undefined;
     getDiscoveredResistsAndVulns(): Map<CreatureType, Set<DamageType>>;
     getDiscoveredResistsAndVulns(creatureType: CreatureType): Set<DamageType>;
     getVisibility(milestone: Milestone): MilestoneVisibility;
-    isDiscovered(milestone: Milestone, data: number | string): boolean;
+    isDiscovered(milestone: Milestone, data?: number | string): boolean;
+    static globalize(milestone: Milestone | MilestoneDefinition, data?: number | string): number | string | undefined;
+    static unglobalize(milestone: Milestone | MilestoneDefinition, data?: number | string): number | string | undefined;
+    getLastModificationTime(milestone: Milestone): number;
+    getCloakingQuality(quality?: Quality): Quality;
+    protected onLoadMods(): void;
     private updateMilestone;
+    private getMilestoneProgressHandlers;
 }
-export {};

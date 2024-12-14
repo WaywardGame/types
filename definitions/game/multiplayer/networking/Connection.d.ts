@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IMatchmakingInfo, MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
-import type { IConnection } from "multiplayer/networking/IConnection";
-import { ConnectionState } from "multiplayer/networking/IConnection";
-import type { IPacket } from "multiplayer/packets/IPacket";
-import Log from "utilities/Log";
+import type { IMatchmakingInfo, MatchmakingMessageData } from "@wayward/game/multiplayer/matchmaking/IMatchmaking";
+import type { IConnection } from "@wayward/game/multiplayer/networking/IConnection";
+import { ConnectionState } from "@wayward/game/multiplayer/networking/IConnection";
+import type { IPacket } from "@wayward/game/multiplayer/packets/IPacket";
+import Log from "@wayward/utilities/Log";
 export declare abstract class Connection implements IConnection {
     protected readonly log: Log;
     abstract name: string;
@@ -41,6 +41,7 @@ export declare abstract class Connection implements IConnection {
     private _timeoutId;
     private _keepAliveTimeoutId;
     constructor(matchmakingInfo: IMatchmakingInfo | undefined, log: Log);
+    get isLocalPlayer(): boolean;
     close(closeImmediately: boolean): void;
     private completeClosing;
     addConnectionTimeout(): void;
@@ -62,7 +63,7 @@ export declare abstract class Connection implements IConnection {
     /**
      * Queues data to be sent soon
      */
-    protected queuePacketData(data: ArrayBuffer, packetNumber?: number): void;
+    protected queuePacketData(data: ArrayBufferLike, packetNumber?: number): void;
     /**
      * Clears queued packets
      */
@@ -81,7 +82,7 @@ export declare abstract class Connection implements IConnection {
     private _processQueuedData;
     private _serializePacket;
     abstract readonly maxMessageSize: number;
-    abstract isConnected(): boolean;
+    abstract get isConnected(): boolean;
     protected abstract onClosing(): void;
     protected abstract onClosed(): void;
     abstract send(data: Uint8Array, byteOffset: number, length?: number): boolean;

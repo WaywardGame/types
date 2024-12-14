@@ -1,46 +1,47 @@
 {
-    "compilerOptions": {
-        "target": "ES2021",
-        "module": "AMD",
-        "composite": true,
-        "experimentalDecorators": true,
-        "forceConsistentCasingInFileNames": true,
-        "inlineSourceMap": true,
-        "noImplicitOverride": true,
-        "noUnusedLocals": true,
-        "preserveConstEnums": true,
-        "removeComments": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "strictPropertyInitialization": false,
-        // classic is required for auto imports to use the shortest path in vscode
-        "moduleResolution": "classic",
-        "paths": {
-            "*": [
-                "node_modules/@wayward/types/definitions/game/*"
-            ],
-            "@cplusplus/*": [
-                "node_modules/@wayward/types/definitions/cplusplus/*"
-            ],
-            "@hosts/*": [
-                "node_modules/@wayward/types/definitions/hosts/*"
-            ],
-            // required when using classic module resolution
-            "@wayward/goodstream": [
-                "node_modules/@wayward/goodstream/Stream",
-                "node_modules/@wayward/types/node_modules/@wayward/goodstream/Stream"
-            ],
-            "@wayward/goodstream/*": [
-                "node_modules/@wayward/goodstream/*",
-                "node_modules/@wayward/types/node_modules/@wayward/goodstream/*"
-            ]
-        },
-        "types": [],
-        "lib": [
-            "DOM",
-            "DOM.Iterable",
-            "ES2021",
-            "WebWorker.ImportScripts",
-        ]
-    }
+	"compilerOptions": {
+		"target": "ES2023",
+		"module": "AMD",
+		"moduleResolution": "node",
+		"composite": true,
+		"experimentalDecorators": true,
+		"forceConsistentCasingInFileNames": true,
+		"inlineSourceMap": true,
+		"noImplicitOverride": true,
+		"noUnusedLocals": true,
+		"preserveConstEnums": true,
+		"removeComments": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"strictPropertyInitialization": false,
+		"useDefineForClassFields": false,
+		"paths": {
+			"@wayward/goodstream": [
+				"node_modules/@wayward/goodstream/Stream",
+				"node_modules/@wayward/types/node_modules/@wayward/goodstream/Stream"
+			],
+			"@wayward/goodstream/*": [
+				"node_modules/@wayward/goodstream/*",
+				"node_modules/@wayward/types/node_modules/@wayward/goodstream/*"
+			],
+			"@wayward/*": [
+				"node_modules/@wayward/types/definitions/*"
+			],
+		},
+		"types": [],
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"ES2023",
+			"ESNext",
+			"WebWorker.ImportScripts",
+		]
+	},
+	"watchOptions": {
+		"watchFile": "useFsEventsOnParentDirectory",
+		"excludeDirectories": [
+			"**/node_modules",
+			"**/.git",
+		],
+	},
 }

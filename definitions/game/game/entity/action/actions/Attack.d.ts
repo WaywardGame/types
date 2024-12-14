@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,16 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Action } from "game/entity/action/Action";
-import type { IActionUsable } from "game/entity/action/IAction";
-import { ActionArgument } from "game/entity/action/IAction";
-import type Human from "game/entity/Human";
-import { AttackType } from "game/entity/IEntity";
-import { SkillType } from "game/entity/IHuman";
-import type { IItemDescription, IRanged } from "game/item/IItem";
-import { ItemType, ItemTypeGroup } from "game/item/IItem";
-import type Item from "game/item/Item";
-import type Tile from "game/tile/Tile";
+import type Human from "@wayward/game/game/entity/Human";
+import { AttackType } from "@wayward/game/game/entity/IEntity";
+import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type { IItemDescription, IRangedDescription, ItemType } from "@wayward/game/game/item/IItem";
+import { ItemTypeGroup } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type Tile from "@wayward/game/game/tile/Tile";
 export interface IBaseCanUse extends IActionUsable {
     human: Human;
     attackType: AttackType;
@@ -38,11 +38,11 @@ export interface IAttackThrowItemCanUse extends IBaseCanUse {
 export interface IAttackRangedWeaponCanUse extends IBaseCanUse {
     attackType: AttackType.RangedWeapon;
     weapon: Item;
-    ranged: IRanged;
+    ranged: IRangedDescription;
     rangedRequiredWeapon: Item | undefined;
     ammoItem: Item | undefined;
     ammunitionType: ItemType | ItemTypeGroup | undefined;
 }
 export type IAttackCanUse = IAttackCloseUpCanUse | IAttackThrowItemCanUse | IAttackRangedWeaponCanUse;
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined], [ActionArgument.ItemInventory, ActionArgument.Undefined]], Human<number>, void, IAttackCanUse, [(Item | undefined)?, (AttackType | undefined)?, (Item | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory], [ActionArgument.Undefined, import("../argument/ActionArgumentEnum").default<AttackType, "MeleeWeapon" | "HandToHand" | "RangedWeapon" | "ThrowItem">], [arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IAttackCanUse, [(Item | undefined)?, (AttackType | undefined)?, (Item | undefined)?]>;
 export default _default;

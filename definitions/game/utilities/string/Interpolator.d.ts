@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,9 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ISerializedIcon } from "game/inspection/InfoProvider";
-import type { Reference } from "game/reference/IReferenceManager";
-import type { Random } from "utilities/random/Random";
+import type { ISerializedIcon } from "@wayward/game/game/inspection/InfoProvider";
+import type { Random } from "@wayward/utilities/random/Random";
 export interface ISegmentApi extends Readonly<IInterpolationOptions> {
     matchedEnds: Ends;
     random: Random;
@@ -31,17 +30,26 @@ export interface ISegment {
     handle(match: RegExpMatchArray, segment: string, api: ISegmentApi, ...args: any[]): string | IStringSection | Iterable<IStringSection>;
 }
 export interface IStringSection {
-    content: string;
+    content: string | IStringSection[];
     classes?: Set<string>;
     icon?: ISerializedIcon;
     forceInclude?: true;
 }
+export interface IStringRawSection extends IStringSection {
+    content: string;
+}
+export interface IStringWrapperSection extends IStringSection {
+    content: IStringSection[];
+}
 export declare namespace IStringSection {
     function is(value: unknown): value is IStringSection;
+    function isRaw(value: unknown): value is IStringRawSection;
+    function isWrapper(value: unknown): value is IStringWrapperSection;
+    function isRawAndSimple(section: IStringSection): section is IStringRawSection;
+    function isExtraneousWrapper(section: IStringSection): section is IStringWrapperSection;
     function get(content?: string | IStringSection | Iterable<IStringSection>): Iterable<IStringSection>;
-}
-export interface IReferenceSection extends IStringSection {
-    reference: Reference;
+    function flattenToString(sections: IStringSection[]): string;
+    function inject(raw: IStringSection[], index: number, injection: string | IStringSection[]): void;
 }
 declare class Interpolator {
     private options;
@@ -61,7 +69,7 @@ declare class Interpolator {
     private handleChar;
     static combineLikeSections(sections: IStringSection[], ignoreKeys?: string[]): void;
 }
-declare module Interpolator {
+declare namespace Interpolator {
     function getArgument(keyMap: string, ...args: any[]): {
         hasValue: false;
         value?: undefined;

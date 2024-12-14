@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-/// <reference types="webdriverio/async" />
 import type * as webdriverio from "webdriverio";
 import type { ApplicationLogger } from "@wayward/test/core/applicationLogger";
 export declare const defaultWaitTimeout: number;
@@ -21,10 +20,15 @@ export declare class ApplicationDom {
     getElement(selector: string): Promise<WebdriverIO.Element>;
     getElements(selector: string, onlyVisible?: boolean): Promise<WebdriverIO.Element[]>;
     isClickableElement(element: WebdriverIO.Element): Promise<boolean>;
-    clickIfVisibleElement(selector: string): Promise<WebdriverIO.Element | undefined>;
-    getVisibleElements(selector: string, logNotVisible?: boolean): Promise<WebdriverIO.Element[] | undefined>;
+    clickIfVisibleElement(selector: string, logNotVisible?: boolean): Promise<WebdriverIO.Element | undefined>;
+    getVisibleElements(selector: string, logNotVisible?: boolean, logVisible?: boolean): Promise<WebdriverIO.Element[] | undefined>;
     getVisibleAndClickableElement(selector: string, logNotVisible?: boolean): Promise<WebdriverIO.Element | undefined>;
-    waitForVisibleThenClick(selector: string, timeout?: number, indent?: boolean, clickOnce?: boolean): Promise<void>;
+    waitForVisibleThenClick(selector: string, options?: Partial<{
+        timeout: number;
+        indent: boolean;
+        clickOnce: boolean;
+        logFailure: boolean;
+    }>): Promise<void>;
     waitForVisibleElements(selector: string, timeout?: number, scrollIntoView?: boolean): Promise<WebdriverIO.Element[]>;
     waitForNotVisible(selector: string, timeout?: number): Promise<void>;
     waitUntil(executor: () => Promise<boolean>, options: WaitUntilOptions): Promise<true | void>;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,20 +8,22 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { BiomeType } from "game/biome/IBiome";
-import type DoodadInfo from "game/doodad/DoodadInfo";
-import type { DisplayableDoodadType } from "game/doodad/IDoodad";
-import type { ItemType } from "game/item/IItem";
-import { TerrainType } from "game/tile/ITerrain";
-import type { TerrainDecoration } from "renderer/Decorations";
-import type { TerrainTileInfo } from "renderer/tile/TerrainTileInfo";
-import { TileType } from "renderer/tile/atlas/ITileAtlas";
-import type Vector2 from "utilities/math/Vector2";
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import type DoodadInfo from "@wayward/game/game/doodad/DoodadInfo";
+import type { DisplayableDoodadType } from "@wayward/game/game/doodad/IDoodad";
+import type { ItemType } from "@wayward/game/game/item/IItem";
+import { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { TerrainDecoration } from "@wayward/game/renderer/Decorations";
+import type { TerrainTileInfo } from "@wayward/game/renderer/tile/TerrainTileInfo";
+import { TileType } from "@wayward/game/renderer/tile/atlas/ITileAtlas";
+import type Vector2 from "@wayward/game/utilities/math/Vector2";
 export default class TileAtlas {
     readonly doodadItems: Map<ItemType, DoodadInfo>;
     readonly doodads: Map<DisplayableDoodadType, DoodadInfo>;
     readonly mounds: Map<TerrainType, DoodadInfo>;
     readonly terrainDecoration: Map<TerrainDecoration, DoodadInfo>;
+    readonly terrainDug: Map<string, DoodadInfo>;
+    private fished;
     private readonly terrain;
     private readonly terrainTilled;
     private readonly baseWaterTypes;
@@ -35,8 +37,12 @@ export default class TileAtlas {
     private readonly waterTypes;
     getTerrain(terrainType: TerrainType, biomeType: BiomeType | undefined): TerrainTileInfo | undefined;
     getTerrainTilled(terrainType: TerrainType, biomeType: BiomeType | undefined): TerrainTileInfo | undefined;
+    getTerrainDug(terrainType: TerrainType, biomeType: BiomeType | undefined): DoodadInfo | undefined;
     setTerrain(terrainType: TerrainType, terrainTileInfo: TerrainTileInfo, biomeType: BiomeType | undefined): void;
     setTerrainTilled(terrainType: TerrainType, terrainTileInfo: TerrainTileInfo, biomeType: BiomeType | undefined): void;
+    setTerrainDug(terrainType: TerrainType, doodadInfo: DoodadInfo, biomeType: BiomeType | undefined): void;
+    getFished(): DoodadInfo | undefined;
+    setFished(doodadInfo: DoodadInfo): void;
     clearCaches(): void;
     generateLookups(): void;
     isMountain(type: TerrainType): boolean;

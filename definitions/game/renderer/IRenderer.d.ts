@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IFieldOfViewOrigin } from "renderer/fieldOfView/IFieldOfView";
-import type { IVector2 } from "utilities/math/IVector";
+import type { IFieldOfViewOrigin } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 export interface IRendererEvents {
     /**
      * Called before rendering everything
@@ -38,6 +38,8 @@ export interface IRendererEvents {
      * @param zoomLevel The zoom level that will be used by default
      */
     getZoomLevel(zoomLevel: number): number | undefined;
+    /** Called when the zoom level changes. */
+    setZoom(zoomlevel: number): any;
     /**
      * Called when the renderer is initialized
      */
@@ -55,7 +57,8 @@ export declare enum UpdateRenderFlag {
     FieldOfViewSkipTransition = 8,
     Particles = 16,
     Notifier = 32,
-    SteamOverlay = 64,
+    Marker = 64,
+    SteamOverlay = 128,
     All = 255
 }
 export declare enum RenderSource {
@@ -64,61 +67,67 @@ export declare enum RenderSource {
     AmbientLightLevelUpdate = 2,
     AttackAnimationStart = 3,
     Automation = 4,
-    DoodadChangeType = 5,
-    FadeIn = 6,
-    FovTransition = 7,
-    FovUpdate = 8,
-    FovUpdateRadius = 9,
-    GameAnimating = 10,
-    GamePassTurn = 11,
-    GameResumed = 12,
-    GameTick = 13,
-    GenericOverlay = 14,
-    HiddenMob = 15,
-    HumanRest = 16,
-    HumanRestStart = 17,
-    HumanRestStop = 18,
-    HumanSetPosition = 19,
-    HumanVehicle = 20,
-    InspectOverlay = 21,
-    IslandLoad = 22,
-    IslandTravel = 23,
-    ItemEquip = 24,
-    ItemEquipEffect = 25,
-    ItemMovement = 26,
-    ItemUnequip = 27,
-    Mod = 28,
-    MovementPlayerPost = 29,
-    MovementPlayerZPost = 30,
-    MultiplayerDisconnect = 31,
-    Notifier = 32,
-    NotifierAddCreature = 33,
-    NotifierAddItem = 34,
-    NotifierAddNotifierIcon = 35,
-    NotifierAddStat = 36,
-    NotifierAddStatusType = 37,
-    OptionEquipment = 38,
-    OptionVisionMode = 39,
-    OptionZoomLevel = 40,
-    Particles = 41,
-    PlayerAdd = 42,
-    PlayerKill = 43,
-    PlayerNoclip = 44,
-    PlayerProcessMovement = 45,
-    PlayerReady = 46,
-    PlayerRemove = 47,
-    PlayerRespawn = 48,
-    PlayerWalkToTilePath = 49,
-    PlayerWalkToTilePathOverburdened = 50,
-    PlayerWalkToTilePathPreview = 51,
-    PlayerWalkToTilePathReset = 52,
-    Resize = 53,
-    SetupGl = 54,
-    SpawnAnimationStart = 55,
-    StartGame = 56,
-    Steamworks = 57,
-    Thumbnail = 58,
-    WorldLayerRendererFlush = 59
+    ContainerBucketItemList = 5,
+    DoodadChangeType = 6,
+    FadeIn = 7,
+    FovTransition = 8,
+    FovUpdate = 9,
+    FovUpdateRadius = 10,
+    GameAnimating = 11,
+    GamePassTurn = 12,
+    GameResumed = 13,
+    GameTick = 14,
+    GameTickPacket = 15,
+    GenericOverlay = 16,
+    HiddenMob = 17,
+    HumanRest = 18,
+    HumanRestStart = 19,
+    HumanRestStop = 20,
+    HumanSetPosition = 21,
+    HumanVehicle = 22,
+    InspectOverlay = 23,
+    IslandLoad = 24,
+    IslandTravel = 25,
+    ItemEquip = 26,
+    ItemEquipEffect = 27,
+    ItemMovement = 28,
+    ItemUnequip = 29,
+    Mod = 30,
+    MovementPlayerPost = 31,
+    MovementPlayerZPost = 32,
+    MultiplayerDisconnect = 33,
+    Notifier = 34,
+    NotifierAddCreature = 35,
+    NotifierAddItem = 36,
+    NotifierAddNotifierIcon = 37,
+    NotifierAddStat = 38,
+    NotifierAddStatusType = 39,
+    NotifierRemoveMarker = 40,
+    NotifierRemoveNotification = 41,
+    OptionEquipment = 42,
+    OptionVisionMode = 43,
+    OptionZoomLevel = 44,
+    Particles = 45,
+    PlayerAdd = 46,
+    PlayerKill = 47,
+    PlayerNoclip = 48,
+    PlayerProcessMovement = 49,
+    PlayerReady = 50,
+    PlayerRemove = 51,
+    PlayerRespawn = 52,
+    PlayerWalkToTilePath = 53,
+    PlayerWalkToTilePathOverburdened = 54,
+    PlayerWalkToTilePathPreview = 55,
+    PlayerWalkToTilePathReset = 56,
+    RendererReinitialize = 57,
+    Resize = 58,
+    Sacrifice = 59,
+    SetupGl = 60,
+    SpawnAnimationStart = 61,
+    StartGame = 62,
+    Steamworks = 63,
+    Thumbnail = 64,
+    WorldLayerRendererFlush = 65
 }
 export declare function calculateAmbientLightLevel(origin: IFieldOfViewOrigin, z: number): number;
 export declare const ZOOM_LEVEL_MIN = 1;

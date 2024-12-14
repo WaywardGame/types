@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { BiomeType } from "game/biome/IBiome";
+import { BiomeType } from "@wayward/game/game/biome/IBiome";
 declare const islandNameBiomeNouns: Map<BiomeType, [forgotten_NOUN: string, NOUN_of_the_forgotten: string]>;
 export default islandNameBiomeNouns;

@@ -1,4 +1,14 @@
 /*!
+ * Copyright 2011-2024 Unlok
+ * https://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * https://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://github.com/WaywardGame/types/wiki
+ */
+/*!
  * Copyright 2011-2023 Unlok
  * https://www.unlok.ca
  *
@@ -44,6 +54,9 @@ declare const numbers: {
     millions: string;
     billions: string;
     romanNumeral: string;
+    romanNumeral0: string;
+    "romanNumeral0.1": string;
+    "romanNumeral0.5": string;
     romanNumeral1: string;
     romanNumeral5: string;
     romanNumeral10: string;

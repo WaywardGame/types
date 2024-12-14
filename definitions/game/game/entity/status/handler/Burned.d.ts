@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,12 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import StatusEffect, { StatusEffectBadness } from "game/entity/status/StatusEffect";
-import StatusEffectRenderer from "renderer/StatusEffectRenderer";
-export default class Burned extends StatusEffect {
-    getRenderer(): StatusEffectRenderer;
-    getBadness(): StatusEffectBadness;
-    getDescription(): import("../../../../language/impl/TranslationImpl").default;
+import Status from "@wayward/game/game/entity/status/Status";
+import { StatusEffectList } from "@wayward/game/game/entity/status/StatusEffectList";
+export default class Burned extends Status {
+    getEffects(): StatusEffectList;
     shouldPass(): boolean;
     onPassed(): void;
     onTick(): void;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,6 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IContainer } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
 export type HighlightSelector = [HighlightType, GetterOfOr<string | number>];
 export interface IHighlight {
     selectors: SupplierOr<HighlightSelector[]>;
@@ -15,8 +17,13 @@ export interface IHighlight {
     iterations?: number;
     class?: string;
 }
-export declare module IHighlight {
-    function itemById(id: number): HighlightSelector;
+export declare namespace IHighlight {
+    function item(item: Item): HighlightSelector;
+    function optionalItem(item?: Item): HighlightSelector | undefined;
+    function optionalEquipSlot(item?: Item): HighlightSelector | undefined;
+    function container(container: IContainer): HighlightSelector;
+    function optionalContainer(maybeContainer: Item): HighlightSelector | undefined;
+    function actionSlots(item?: Item): HighlightSelector[];
 }
 export declare enum HighlightType {
     Stat = 0,
@@ -24,5 +31,9 @@ export declare enum HighlightType {
     Selector = 2,
     Skill = 3,
     ActionSlot = 4,
-    EquipSlot = 5
+    EquipSlot = 5,
+    ItemType = 6,
+    ItemGroup = 7,
+    Item = 8,
+    Container = 9
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Human from "game/entity/Human";
-import type { IContainer, IRecipe, ItemType, ItemTypeGroup } from "game/item/IItem";
-import type Item from "game/item/Item";
+import type Human from "@wayward/game/game/entity/Human";
+import type { IContainer, IRecipe, IUncastableContainer, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
 export default class ItemRecipeRequirementChecker {
     private readonly human;
     private readonly trackItems?;
@@ -58,7 +58,7 @@ export default class ItemRecipeRequirementChecker {
      * @param container The container
      * @returns true if the recipe's requirements are satisfied by items in the container.
      */
-    processContainer(container: IContainer): boolean;
+    processContainer(container: IUncastableContainer): boolean;
     private processItem;
     processBaseComponent(item: Item): boolean;
     processComponents(item: Item, disableExtraChecks?: boolean): boolean;

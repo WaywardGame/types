@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,15 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { IIcon } from "game/inspection/InfoProvider";
-import Dictionary from "language/Dictionary";
-import Language from "language/Language";
-import LanguageExtension from "language/LanguageExtension";
-import type TranslationsProvider from "language/TranslationsProvider";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import type { IStringSection } from "utilities/string/Interpolator";
-import { CaseStyle } from "utilities/string/Strings";
+import type { Game } from "@wayward/game/game/Game";
+import type { IIcon } from "@wayward/game/game/inspection/InfoProvider";
+import Dictionary from "@wayward/game/language/Dictionary";
+import Language from "@wayward/game/language/Language";
+import LanguageExtension from "@wayward/game/language/LanguageExtension";
+import type TranslationsProvider from "@wayward/game/language/TranslationsProvider";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import { IStringSection } from "@wayward/game/utilities/string/Interpolator";
+import { CaseStyle } from "@wayward/game/utilities/string/Strings";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 type ArticleRules = Array<[number | {
     min: number;
     max?: number;
@@ -58,6 +59,8 @@ export interface ILanguageEvents {
     postGetTranslation(sections: IStringSection[]): IStringSection[];
 }
 export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> {
+    private readonly game;
+    constructor(game: Game);
     get language(): string;
     set language(languageName: string);
     private readonly translationProviders;
@@ -89,7 +92,7 @@ export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> 
     reserializeFromFiles(files: Map<string, Record<string, any>>): ISerializedLanguage;
     deserialize(serialized: ISerializedLanguage | ISerializedLanguageExtension): Language | LanguageExtension;
     generateSchema(): void;
-    reformatSingularNoun(noun: string, count: number, article?: false | "definite" | "indefinite"): string;
+    reformatSingularNoun(noun: string | IStringSection[], count: number, article?: false | "definite" | "indefinite"): string | IStringSection[];
     private getNounType;
     private plural;
     private getEntryNameFromEntryId;

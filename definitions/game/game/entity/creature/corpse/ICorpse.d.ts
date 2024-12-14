@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SkillType } from "game/entity/IHuman";
-import type { ItemType } from "game/item/IItem";
-import type { TerrainType } from "game/tile/ITerrain";
-import type { TileEventType } from "game/tile/ITileEvent";
-import type Message from "language/dictionary/Message";
-import type { IModdable } from "mod/ModRegistry";
-import type { IRGB } from "utilities/Color";
+import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { ItemType } from "@wayward/game/game/item/IItem";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
+import type Message from "@wayward/game/language/dictionary/Message";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type { IRGB } from "@wayward/utilities/Color";
 export interface ICorpseDescription extends IModdable {
     decay?: number;
     resource?: ICorpseResourceDrop[];

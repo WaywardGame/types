@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Milestone } from "game/milestones/IMilestone";
-import { BlockRow } from "ui/component/BlockRow";
-import Component from "ui/component/Component";
-import { EnableDisableAllRow } from "ui/component/EnableDisableAllRow";
-import FilterRow from "ui/component/FilterRow";
-import Menu from "ui/screen/screens/menu/component/Menu";
-import MilestoneModifierCheckButton from "ui/screen/screens/menu/component/MilestoneModifierCheckButton";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import { BlockRow } from "@wayward/game/ui/component/BlockRow";
+import Component from "@wayward/game/ui/component/Component";
+import { EnableDisableAllRow } from "@wayward/game/ui/component/EnableDisableAllRow";
+import FilterRow from "@wayward/game/ui/component/FilterRow";
+import Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
+import MilestoneModifierCheckButton from "@wayward/game/ui/screen/screens/menu/component/MilestoneModifierCheckButton";
 export default class MilestoneModifiersMenu extends Menu {
     private readonly milestones;
     private static readonly importButtonInputId;

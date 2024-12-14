@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { TypedPropertyDescriptorFunctionAnyNOfParams } from "event/EventManager";
-import Bindable from "ui/input/Bindable";
-import { IInput } from "ui/input/IInput";
-import type { GlobalInputInfo, GlobalMouseInfo, InputInfo } from "ui/input/InputManager";
+import Bindable from "@wayward/game/ui/input/Bindable";
+import { IInput } from "@wayward/game/ui/input/IInput";
+import type { GlobalInputInfo, GlobalMouseInfo, InputInfo } from "@wayward/game/ui/input/InputManager";
+import type { TypedPropertyDescriptorFunctionAnyNOfParams } from "@wayward/utilities/event/EventManager";
 export interface IBindHandlerApi {
     /**
      * You should never need this unless you expect the user to be trying to use a scroll binding for your bind handler.
@@ -55,6 +55,7 @@ export interface IBindHandlerApi {
 export type BindingHandler<R = boolean> = (api: IBindHandlerApi) => R;
 interface IBindHandlerRegistration<T extends Record<P, BindingHandler>, P extends string | number | symbol> {
     bindable: Bindable | "anything";
+    modifiersOnly: boolean;
     event: BindingEvent;
     priority: number;
     always: boolean;
@@ -68,7 +69,7 @@ declare enum BindingEvent {
 }
 type BindingEventName = keyof typeof BindingEvent;
 export type { BindingEventName as BindingEvent };
-declare module Bind {
+declare namespace Bind {
     /**
      * Registers a handler for when the given `Bindable` is pressed. This event won't be fired again until the `Bindable` was then *released*.
      *
@@ -87,7 +88,7 @@ declare module Bind {
      */
     function onDown(bindable: "anything", priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<BindingHandler<any>>) => void;
     /**
-     * Registers a handler for when anything is pressed. This handler will *always* be executed, even if other handlers also matched the catalyst.
+     * Registers a handler for when the given `Bindable`, or "anything" is pressed. This handler will *always* be executed, even if other handlers also matched the catalyst.
      * @param bindable The `Bindable`, or the string `"anything"` (to handle when *anything* is pressed).
      * @param priority The "priority" of this handler compared to other handlers. Higher priorities are executed first.
      * @param always Must be `true`.
@@ -117,7 +118,7 @@ declare module Bind {
      */
     function onHolding(bindable: "anything", priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<BindingHandler<any>>) => void;
     /**
-     * Registers a handler for every frame in which anything is held down. This handler will *always* be executed, even if other handlers also matched the catalyst.
+     * Registers a handler for every frame in which the given `Bindable` or "anything" is held down. This handler will *always* be executed, even if other handlers also matched the catalyst.
      * @param bindable The `Bindable`, or the string `"anything"` (to handle when *anything* is held).
      * @param priority The "priority" of this handler compared to other handlers. Higher priorities are executed first.
      * @param always Must be `true`.
@@ -148,5 +149,49 @@ declare module Bind {
     function deregisterHandlers(host: any): void;
     const shouldLogHoldingEvent = false;
     function emitEvent(event: BindingEventName, input: IInput, info: InputInfo, mouse: GlobalMouseInfo, globalInput: GlobalInputInfo): Set<Bindable>;
+    namespace Modifiers {
+        /**
+         * Registers a handler for when the modifiers of the given `Bindable` are pressed. This event won't be fired again until the modifiers of the `Bindable` are then *released*.
+         *
+         * Your decorated method should return whether or not the bindable was *actually* activated. (For example, if the mouse was in the right
+         * spot and the action can currently be executed.) If you return `true`, *no other* `@Bind.onDown` handlers will be run. If you return
+         * `false`, other matching `@Bind.onDown` handlers *will* be run.
+         *
+         * @param bindable The `Bindable`.
+         * @param priority The "priority" of this handler compared to other handlers. Higher priorities are executed first.
+         */
+        function onDown(bindable: Bindable, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<BindingHandler>) => void;
+        /**
+         * Registers a handler for when the modifiers of the given `Bindable` are pressed. This handler will *always* be executed, even if other handlers also matched the catalyst.
+         * @param bindable The `Bindable`.
+         * @param priority The "priority" of this handler compared to other handlers. Higher priorities are executed first.
+         * @param always Must be `true`.
+         */
+        function onDown(bindable: Bindable, priority: number | undefined, always: true): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<BindingHandler<any>>) => void;
+        /**
+         * Registers a handler for when the modifiers of the given `Bindable` are released.
+         * @param bindable The `Bindable`.
+         * @param priority The "priority" of this handler compared to other handlers. Higher priorities are executed first.
+         */
+        function onUp(bindable: Bindable, priority?: number, always?: boolean): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<BindingHandler<any>>) => void;
+        /**
+         * Registers a handler for every frame in which the modifiers of the given `Bindable` are held down.
+         *
+         * Your decorated method should return whether or not the bindable is *actually* held. (For example, if the mouse was in the right
+         * spot and the action can currently be executed.) If you return `true`, *no other* `@Bind.onHolding` handlers will be run. If you
+         * return `false`, other matching `@Bind.onHolding` handlers *will* be run.
+         *
+         * @param bindable The `Bindable`.
+         * @param priority The "priority" of this handler compared to other handlers. Higher priorities are executed first.
+         */
+        function onHolding(bindable: Bindable, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<BindingHandler>) => void;
+        /**
+         * Registers a handler for every frame in which the modifiers of the given `Bindable` are held down. This handler will *always* be executed, even if other handlers also matched the catalyst.
+         * @param bindable The `Bindable`, or the string `"anything"` (to handle when *anything* is held).
+         * @param priority The "priority" of this handler compared to other handlers. Higher priorities are executed first.
+         * @param always Must be `true`.
+         */
+        function onHolding(bindable: Bindable, priority: number | undefined, always: true): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<BindingHandler<any>>) => void;
+    }
 }
 export default Bind;

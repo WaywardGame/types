@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,24 +8,31 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-/// <reference types="node" />
-import type { IMatchmakingServer, INapiDiscordPresenceInfo, IRemoteFile, ISteamFriend, ISteamId, ISteamworksNetworking, IWaywardPreload, IWorkshopItem, LobbyType } from "@hosts/shared/interfaces";
-import EventEmitter from "event/EventEmitter";
-import type { Game } from "game/Game";
-import { ModType } from "mod/IModInfo";
-import type { IJoinServerOptions, ServerInfo } from "multiplayer/IMultiplayer";
-import type { IBuild, IDedicatedServerInfo, IModPath, ISteamworksEvents } from "steamworks/ISteamworks";
+import type { HeapStatistics } from "electron";
+import type { Game } from "@wayward/game/game/Game";
+import type Entity from "@wayward/game/game/entity/Entity";
+import IActionContext from "@wayward/game/game/entity/action/IActionContext";
+import { ModType } from "@wayward/game/mod/IModInformation";
+import type { ModInformation } from "@wayward/game/mod/ModInformation";
+import type { IJoinServerOptions, ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
+import type { IBuild, IDedicatedServerInfo, IModPath, ISteamworksEvents, SteamStatTypeValues } from "@wayward/game/steamworks/ISteamworks";
+import { SteamStatArea } from "@wayward/game/steamworks/ISteamworks";
+import type { ISteamBeta } from "@wayward/hosts/shared/interfaces";
+import { type IMatchmakingServer, type INapiDiscordPresenceInfo, type IRemoteFile, type ISteamFriend, type ISteamId, type ISteamworksNetworking, type IWaywardPreload, type IWorkshopItem, type LobbyType } from "@wayward/hosts/shared/interfaces";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private readonly game;
     protected initialized: boolean;
     private steamId;
     private betaName;
-    private build;
+    private _build;
     private overlayWorks;
     private runningOnSteamDeck;
+    private runningOnSteamDeckDesktop;
     private runningOnBatteryPower;
     private floatingTextInputFocused;
     private floatingTextInputBlurTime;
+    private timelineGameMode;
     private initializingMods;
     private logsPath;
     private backupsPath;
@@ -34,7 +41,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private workshopModsPath;
     private workshopSyncPath;
     private workshopSharePath;
-    private readonly loadedMods;
+    readonly loadedMods: Record<string, IWorkshopItem>;
     private publishedMods;
     private readonly workshopUrl;
     private readonly workshopFileUrl;
@@ -58,10 +65,12 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     constructor(game: Game);
     get isGameOverlayActive(): boolean;
     get isRunningOnSteamDeck(): boolean;
+    get isRunningOnSteamDeckDesktop(): boolean;
     get isRunningOnBatteryPower(): boolean;
     get isLowPowerMode(): boolean;
     isElectron(): boolean;
     getOsPlatform(): NodeJS.Platform | undefined;
+    takeHeapSnapshot(snapshotName: string): string | undefined;
     reload(): Promise<void>;
     openGpuInfoWindow(): void;
     closeWindow(): Promise<void>;
@@ -82,21 +91,40 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     initialize(): Promise<IWaywardPreload | undefined>;
     enableSafePaths(): void;
     onUnload(): void;
+    getHeapStatistics(): Promise<HeapStatistics | undefined>;
     setFullscreen(fullscreen: boolean): Promise<void>;
     setCustomTitleBar(enabled: boolean): Promise<void>;
-    setOverlayWorks(overlayWorks: boolean): void;
-    toggleOverlay(disabled: boolean): void;
+    setOverlayWorks(overlayWorks: boolean): Promise<void>;
     setupMods(): Promise<void>;
     getSteamId(): ISteamId | undefined;
     getFriends(): ISteamFriend[] | undefined;
     getScreenName(): string | undefined;
     isDevelopmentBranch(): boolean;
-    getBuild(): IBuild | undefined;
-    getBuildName(): string;
+    get build(): IBuild | undefined;
+    get buildName(): string;
+    /**
+     * Returns the build time of the game, not depending on any save that's currently loaded.
+     *
+     * If there is no IBuild data associated with this build, the build is considered as having happened "now".
+     * This will only be the case in dev builds, and means that after this build time is saved with a version,
+     * no further upgrades will be run. Build time is saved in the following places:
+     * - {@link saveDataGlobal.gameLastPlayedBuildTime}
+     * - {@link saveData.gameBuildTime}
+     * - {@link Island.mapGenBuildTime}
+     * - {@link Island.saveBuildTime}
+     */
+    get buildTime(): number;
     getPublishedMods(): IWorkshopItem[] | undefined;
     getStatInt(name: string): number | undefined;
-    incrementStat(name: string): void;
+    /**
+     * Increases the specified stat. This will never throw errors
+     * todo: strongly typed stat areas & types? method to automatically fetch all stats for each area?
+     */
+    incrementStat<T extends SteamStatArea>(area: T, type: SteamStatTypeValues<T>, name: string): void;
     getGlobalStatInt(name: string): number | undefined;
+    getCurrentBetaName(): string | undefined;
+    getBetas(): ISteamBeta[] | undefined;
+    setActiveBeta(betaName: string): boolean;
     isContentTracingRecording(): boolean;
     toggleContentTracingRecording(): Promise<boolean>;
     startPlaytimeTracking(): void;
@@ -104,6 +132,9 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     setSteamRichPresence(key: string, value: string): boolean;
     clearSteamRichPresence(): void;
     updateSteamRichPresence(): void;
+    onAddHistoricalAction(game: Game, executor: Entity, context: IActionContext): void;
+    private addTimelineEvent;
+    private updateTimelineGameMode;
     updateDiscordPresence(): void;
     setDiscordPresence(presenceInfo: INapiDiscordPresenceInfo): Promise<void>;
     getLobbyId(): string | undefined;
@@ -118,8 +149,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getLobbyMembers(): ISteamFriend[] | undefined;
     private getPublishedModFromTitle;
     getPublishedModFromPublishFileId(publishFileId: string): IWorkshopItem | undefined;
-    fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
-    publishMod(modIndex: number): Promise<string>;
+    publishMod(mod: ModInformation): Promise<string>;
     createArchive(id: string): Promise<void>;
     getPublishedItems(): Promise<IWorkshopItem[]>;
     openUrl(url: string): void;
@@ -127,7 +157,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     openInviteDialog(): void;
     openSaveFolder(): void;
     openModsFolder(): Promise<void>;
-    openModFolder(modIndex: number): Promise<void>;
+    openModFolder(mod: ModInformation): Promise<void>;
     openLogsFolder(): void;
     openBackupsFolder(): void;
     subscribe(publishFileIds: string[]): Promise<void>;
@@ -139,7 +169,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     /**
      * Do not remove callback. It's required for compatibility with pre 2.4 saves
      */
-    importFromSaveGameMod(modIndex: number, jsonOrUint8Array: string | Uint8Array, callback?: (success: boolean) => void): Promise<boolean>;
+    importFromSaveGameMod(mod: ModInformation, jsonOrUint8Array: string | Uint8Array, callback?: (success: boolean) => void): Promise<boolean>;
     deleteSaveGameMod(name: string): Promise<void>;
     saveFile(fileName: string, blob: Blob): Promise<void>;
     hasServerToJoin(): boolean;
@@ -148,7 +178,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     clearServerToJoin(): void;
     shouldAutomaticallyJoinServer(): Partial<IJoinServerOptions> | undefined;
     processDedicatedServerBackups(force?: boolean): Promise<boolean>;
-    protected onGlobalSlotLoaded(): void;
+    protected onGlobalSlotReady(): void;
     writeBackup(slot: number, data: Uint8Array): Promise<string | undefined>;
     private _writeBackupFile;
     onInputFocus(inputElement: HTMLElement): void;
@@ -159,6 +189,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     multiplayerLogWarn(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
     enumerateRemoteFiles(): IRemoteFile[];
+    writeGameStateJson(cleanup?: boolean): Promise<string>;
     private initializeGreenworks;
     private initializeNapi;
     private setupAndInitializeWorkshopMods;

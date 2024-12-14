@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Action } from "game/entity/action/Action";
-import type { IActionUsable } from "game/entity/action/IAction";
-import { ActionArgument } from "game/entity/action/IAction";
-import type Item from "game/item/Item";
-import type { ITerrainDescription } from "game/tile/ITerrain";
-import { TerrainType } from "game/tile/ITerrain";
-import type Tile from "game/tile/Tile";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import type Item from "@wayward/game/game/item/Item";
+import type { ITerrainDescription } from "@wayward/game/game/tile/ITerrain";
+import { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type Tile from "@wayward/game/game/tile/Tile";
 export interface IDigGenericCanUse extends IActionUsable {
     type: "PickUpExcrement" | "PickUp" | "Gather";
     tile: Tile;
@@ -26,5 +26,5 @@ export interface IDigTileCanUse extends IActionUsable {
     tileType: TerrainType;
 }
 type IDigCanUse = IDigGenericCanUse | IDigTileCanUse;
-declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../../Human").default<number>, void, IDigCanUse, [(Item | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void | Promise<void>, IDigCanUse, [(Item | undefined)?]>;
 export default _default;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,16 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ISteamFriend } from "@hosts/shared/interfaces";
-import type { Milestone } from "game/milestones/IMilestone";
-import { GameMode } from "game/options/IGameOptions";
-import type { Challenge } from "game/options/modifiers/challenge/IChallenge";
-import type { IslandModifierType } from "game/options/modifiers/island/IslandModifier";
-import Component from "ui/component/Component";
-import type { IRefreshable } from "ui/component/Refreshable";
-import type { GameOptionsIcon, IGameOptionsIcon } from "ui/screen/screens/menu/menus/pause/GameOptionsIcons";
-import type Tooltip from "ui/tooltip/Tooltip";
-import type { ModLoadability } from "ui/util/Misc";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import { GameMode } from "@wayward/game/game/options/IGameOptions";
+import type { Challenge } from "@wayward/game/game/options/modifiers/challenge/IChallenge";
+import type { IslandModifierType } from "@wayward/game/game/options/modifiers/island/IslandModifier";
+import Component from "@wayward/game/ui/component/Component";
+import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
+import type { GameOptionsIcon, IGameOptionsIcon } from "@wayward/game/ui/screen/screens/menu/menus/pause/GameOptionsIcons";
+import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
+import type { ModLoadability } from "@wayward/game/ui/util/Misc";
+import type { ISteamFriend } from "@wayward/hosts/shared/interfaces";
 export interface IGameIconsHost {
     difficulty: GameMode;
     pvp: boolean;

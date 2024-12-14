@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -17,20 +17,17 @@ export interface ILaunchOptions {
     colorProfile: string;
     customTitleBar: boolean;
     devtools: boolean;
-    disableDirectComposition: boolean;
-    disableES3GLContext: boolean;
     disableGpuDriverBugWorkarounds: boolean;
     disableHardwareAcceleration: boolean;
     disableVSync: boolean;
     extraGpuFlags: boolean;
     forceHighPerformanceGpu: boolean;
-    forceInProcessGPU: boolean;
     forceWaveAudio: boolean;
     forceOverlaySupport: boolean;
     fullscreen: boolean;
     height: "max" | number;
     ignoreGpuBlockList: boolean;
-    inProcessGpu: boolean;
+    overlaySupport: boolean;
     internalVersion: number;
     maximized: boolean;
     openGpuInfoPage: boolean;

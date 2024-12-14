@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,12 +9,25 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type * as electron from "electron";
+import type { IWaywardTitle } from "@wayward/hosts/shared/globalTypes";
 import type { ILaunchOptions } from "./launchOptions";
 export interface IElectronContainer {
     launchOptions: ILaunchOptions;
+    readonly title: IWaywardTitle;
+    readonly isDedicatedServer: boolean;
+    readonly consoleMode: boolean;
+    readonly forceWindowedMode: boolean;
+    isLauncher: boolean;
+    /**
+     * Flag that indicates if the game is being reloaded
+     */
+    isReloading: boolean;
+    /**
+     * This is set after the electron browser window is created
+     */
     mainWindow?: electron.BrowserWindow;
-    consoleMode?: boolean;
-    forceWindowedMode?: boolean;
-    reloading?: boolean;
-    launcher?: boolean;
+    /**
+     * Window invalidation interval for steam overlay support
+     */
+    invalidateInternal?: NodeJS.Timeout;
 }

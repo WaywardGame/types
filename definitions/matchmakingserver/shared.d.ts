@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-/// <reference types="node" />
+import type { IServerGameDetails, IServerServerDetails } from "@wayward/hosts/shared/interfaces";
 import type * as ws from "ws";
 export declare const matchmakingServer = "mm.waywardgame.com";
 export declare const matchmakingServerPort = 38740;
@@ -35,49 +35,12 @@ export type Connections = Map<string, ClientConnection>;
 export interface IServer {
     serverDetails?: Partial<IServerServerDetails>;
     gameDetails?: Partial<IServerGameDetails>;
-    pendingCheckConnectionTimeoutId?: NodeJS.Timer;
+    pendingCheckConnectionTimeoutId?: NodeJS.Timeout;
     pendingCheckConnectionPromise?: Promise<ICheckConnectionServerDirectoryResponse>;
     pendingCheckConnectionResolve?: (response: ICheckConnectionServerDirectoryResponse) => void;
 }
 export interface IServerConnectionDetails {
     code: string;
-}
-export interface IServerServerDetails {
-    worldId: string;
-    name: string;
-    description: string;
-    hostPlayerName: string;
-    hostPlayerId: string;
-    lobbyType: ServerLobbyType;
-    region: string;
-    code: string;
-    isDedicatedServer: boolean;
-    buildTime: number | undefined;
-    gameVersion: string;
-}
-export interface IServerGameDetails {
-    players: string[];
-    maxPlayers: number;
-    difficulty: number;
-    pvp: boolean;
-    reputation: number;
-    days: number;
-    mods: IServerMod[];
-    peaceful: boolean;
-    milestoneModifiersAllowed: boolean;
-    island: IServerIslandDetails;
-}
-export interface IServerMod {
-    name: string;
-    version: string;
-    publishFileId: string | undefined;
-}
-export interface IServerIslandDetails {
-    position: {
-        x: number;
-        y: number;
-    };
-    biomeType: number;
 }
 export declare enum ServerLobbyType {
     Private = 0,
@@ -146,4 +109,4 @@ export interface IServerDirectoryV1ServersServer extends IServer {
 export declare function log(...args: any[]): void;
 export declare function error(...args: any[]): void;
 export declare function setLogCallback(logFunc: ((...args: any[]) => void) | undefined): void;
-export declare const webRtcConfig: RTCConfiguration;
+export declare function randomUUID(): string;

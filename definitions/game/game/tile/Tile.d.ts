@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,32 +8,39 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Stream from "@wayward/goodstream";
-import { SfxType } from "audio/IAudio";
-import { FireType } from "game/IGame";
-import { Quality } from "game/IObject";
-import { WorldZ } from "game/WorldZ";
-import type Doodad from "game/doodad/Doodad";
-import type Human from "game/entity/Human";
-import type Creature from "game/entity/creature/Creature";
-import type Corpse from "game/entity/creature/corpse/Corpse";
-import type NPC from "game/entity/npc/NPC";
-import type { IMessageManager } from "game/entity/player/IMessageManager";
-import type { IslandId } from "game/island/IIsland";
-import type Island from "game/island/Island";
-import type Item from "game/item/Item";
-import type { IMaybeTileContainer, IOverlayInfo, ITerrainDescription, ITileContainer, ITileData } from "game/tile/ITerrain";
-import { TerrainType } from "game/tile/ITerrain";
-import type TileEvent from "game/tile/TileEvent";
-import Translation from "language/Translation";
-import Message from "language/dictionary/Message";
-import type { IRendererOrigin } from "renderer/context/RendererOrigin";
-import FieldOfView from "renderer/fieldOfView/FieldOfView";
-import type { IFieldOfViewOrigin } from "renderer/fieldOfView/IFieldOfView";
-import { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
-import type { IRGB } from "utilities/Color";
-import type { IVector2, IVector3 } from "utilities/math/IVector";
-import type { IVector4 } from "utilities/math/Vector4";
+import { SfxType } from "@wayward/game/audio/IAudio";
+import { FireType, TileUpdateType } from "@wayward/game/game/IGame";
+import { Quality } from "@wayward/game/game/IObject";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type Entity from "@wayward/game/game/entity/Entity";
+import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
+import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
+import type Human from "@wayward/game/game/entity/Human";
+import type { ICastable } from "@wayward/game/game/entity/IEntity";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/CreatureZone";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type { IMessageManager } from "@wayward/game/game/entity/player/IMessageManager";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
+import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type { FindPathRange, IMaybeTileContainer, IOverlayInfo, ITerrainDescription, ITileContainer, ITileData } from "@wayward/game/game/tile/ITerrain";
+import { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import Translation, { Article } from "@wayward/game/language/Translation";
+import Message from "@wayward/game/language/dictionary/Message";
+import type { IRendererOrigin } from "@wayward/game/renderer/context/RendererOrigin";
+import { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
+import type { IFieldOfViewOrigin } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
+import { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
+import { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
+import type { IRGB } from "@wayward/utilities/Color";
+import WorldZ from "@wayward/utilities/game/WorldZ";
 export interface ICanSailAwayResult {
     canSailAway: boolean;
     message?: Message;
@@ -41,10 +48,14 @@ export interface ICanSailAwayResult {
     blockedTilesChecked?: Set<Tile>;
     path?: IVector2[];
 }
+export interface ITileGetNameOptions {
+    includeCoordinates?: boolean;
+    magic?: boolean;
+}
 /**
  * Tile class
  */
-export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOfViewOrigin {
+export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOfViewOrigin, ICastable {
     readonly id: number;
     static is(value: any): value is Tile;
     readonly island: Island;
@@ -59,8 +70,10 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Entities on the tile
      */
     creature?: Creature;
-    doodad?: Doodad;
     npc?: NPC;
+    doodad?: Doodad;
+    vehicle?: Doodad;
+    get vehicleOrDoodad(): Doodad | undefined;
     /**
      * Note: corpses must be ordered by id asc
      */
@@ -74,6 +87,8 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     containedItems?: Item[];
     private _description;
+    private _tilesInRangeCache?;
+    private _tilesAroundCache?;
     /**
      * Data associated with the tile
      */
@@ -83,29 +98,70 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     private _quality?;
     /**
+     * Tile min/max durability
+     */
+    private _minDur?;
+    private _maxDur?;
+    get zone(): CreatureZone;
+    /**
      * Creates a fake tile
      */
     static createFake(island: Island, x?: number, y?: number, z?: number): Tile;
     /**
      * Constructed during map gen
      */
-    constructor(island: Island, x: number, y: number, z: number, id: number, rendererData: number, quality: Quality);
+    constructor(island: Island, x: number, y: number, z: number, id: number, rendererData: number, quality: Quality, isFake?: true);
     get point(): IVector3;
     get description(): ITerrainDescription | undefined;
     toString(): string;
-    getName(includeCoordinates?: boolean): Translation;
+    getName(layerIndex?: number, article?: Article, options?: ITileGetNameOptions): Translation;
     get type(): TerrainType;
     private set type(value);
     get quality(): Quality;
     private set quality(value);
+    get minDur(): number | undefined;
+    private set minDur(value);
+    get maxDur(): number | undefined;
+    private set maxDur(value);
+    /**
+     * Gets the primary/first blocking entity on this tile.
+     */
+    get entity(): Entity | undefined;
+    /**
+     * Gets the primary/first blocking entity on this tile, that is a creature, NPC, or player.
+     */
+    get livingEntity(): EntityWithStats | undefined;
     get isTilled(): boolean;
+    /**
+     * Gets the depth of the tile (how far it is dug down to).
+     */
+    get depth(): number;
+    /**
+     * Gets if the tile is overfished.
+     */
+    get isOverfished(): boolean;
+    /**
+     * Gets if the tile is a deep hole to perform special functionality.
+     */
+    get isDeepHole(): boolean;
     /**
      * This should only be called if you know what you're doing
      * Ensure a tile data with tilled is created
      * Otherwise the game state could get out of sync
      */
     get doodadOverHidden(): boolean;
-    set doodadOverHidden(value: boolean);
+    private set doodadOverHidden(value);
+    /**
+     * Updates the DoodadOverHidden tile flag if the creature is large.
+     * Large creatures/corpses should render over the doodad over layer, which means we should hide the doodad over layer for doodads on the creatures tile.
+     * This should be called when a doodad changes (add / remove / growth change)
+     */
+    refreshDoodadOverHiddenState(): void;
+    /**
+     * Updates the DoodadOverHidden tile flag if the creature is large.
+     * Large creatures should render over the doodad over layer, which means we should hide the doodad over layer for doodads on the creatures tile.
+     */
+    private updateDoodadOverHiddenState;
     get doodadAnimationDisabled(): boolean;
     set doodadAnimationDisabled(value: boolean);
     get variation(): number;
@@ -121,12 +177,12 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * Gets/creates tile container
      */
-    get tileContainer(): ITileContainer;
+    get tileContainer(): this & ITileContainer;
     /**
      * Gets a tile container.
      * It will not create one when called.
      */
-    get maybeTileContainer(): IMaybeTileContainer;
+    get maybeTileContainer(): this & IMaybeTileContainer;
     /**
      * Checks for:
      * Passable
@@ -135,6 +191,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * No creatures
      * No corpses
      * No tile events
+     * No holes/depth
      * No girls
      */
     get isEmpty(): boolean;
@@ -143,13 +200,34 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     get isFull(): boolean;
     /**
+     * Gets the tile's max capacity based on the TILE_MAX_CAPACITY constant with variation provided by the depth of the tile.
+     */
+    get maxCapacity(): number;
+    /**
      * Check if the tile is blocked (impassable terrain / creatures / npcs / players / doodads that cause blocked movement).
      */
-    get isTileBlocked(): boolean;
+    get isBlocked(): boolean;
     /**
-     * Check is a tile is open
+     * Check if the tile is open.
+     * Opposite of isTileBlocked.
      */
-    get isOpenTile(): boolean;
+    get isOpen(): boolean;
+    /**
+     * Check if the tile is water or not.
+     */
+    get isWater(): boolean;
+    /**
+     * Checks if the tile has terrain that blocks
+     */
+    get hasBlockingTerrain(): boolean;
+    /**
+     * Checks if the tile has a blocking doodad
+     */
+    get hasBlockingDoodad(): boolean;
+    /**
+     * Checks if the tile has any blocking tile event
+     */
+    get hasBlockingTileEvent(): boolean;
     /**
      * Gets the fire type of a fire on the tile if there is one
      */
@@ -182,12 +260,21 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     };
     getTileData(): ITileData[] | undefined;
     getOrCreateTileData(): ITileData[];
+    deleteTileData(): void;
+    /**
+     * Updates the world renderer & flow field state for the tile
+     */
+    updateWorldTile(tileUpdateType: TileUpdateType, updateNeighbors?: boolean, skipFlowFieldUpdate?: boolean): void;
+    /**
+     * Updates the flow field state for the tile
+     */
+    updateFlowField(tileUpdateType: TileUpdateType, updatedRenderer?: boolean): void;
     /**
      * Use game.changeTile or game.removeTopTile when modifying tiles.
      * This should only be called if you know what you're doing.
      * Otherwise the game state could get out of sync.
      */
-    forceChangeTile(type: TerrainType, quality: Quality): void;
+    forceChangeTile(type: TerrainType, quality: Quality | undefined): void;
     /**
      * Changes the tile
      */
@@ -205,7 +292,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Checks if this tile can be used for sailing.
      * Ensures it's connected to the edge of the map.
      */
-    canSailAwayFrom(): ICanSailAwayResult;
+    canSailAwayFrom(entity: EntityMovable | undefined): ICanSailAwayResult;
     /**
      * Used to spawn a random item on the current biome type based on spawnOnWorldGen properties in item descriptions.
      * @param terrainType Optional terrain type for overriding the biome item types
@@ -246,7 +333,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * Contaminate water sources when new ones are created based on the surrounding water.
      */
-    contaminateWater(): void;
+    contaminateWater(count?: number): void;
     /**
      * Converts shallow single bodies of fresh/swamp water into seawater
      */
@@ -258,7 +345,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     clearPuddles(executor: Human): boolean;
     clearWaste(): void;
-    checkForHiddenMob(human: Human): void;
+    checkForHiddenMob(human?: Human): void;
     /**
      * Decrease the depth of a water tile if under 6 connected tiles
      */
@@ -282,6 +369,11 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Create puddles around a point and limit them (so they can't expand infinitely)
      */
     createPuddles(): void;
+    /**
+     * Create particle effects when moving over a puddle and reduce its decay.
+     * @param noSound True when no sound should be made when splashing.
+     */
+    splashPuddles(noSound?: boolean): void;
     addOrUpdateOverlay(overlay: IOverlayInfo): void;
     removeOverlay(overlay: IOverlayInfo): void;
     canSeeObject(type: CanASeeBType, object: IRendererOrigin, fieldOfView?: FieldOfView, customRadius?: number): boolean;
@@ -304,11 +396,34 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Check if a tile is a suitable spawn point
      */
     isSuitableSpawnPointTileForIslandTravel(ensureConnectedToOcean: boolean): boolean;
-    isAdjacent(otherTile: Tile): boolean;
-    isAround(otherTile: Tile): boolean;
+    /**
+     * Checks things can slip on this tile
+     * @param isClientSide When true, it will assume puddles do not cause slipping
+     * @param assumeEntitySlips When entity is undefined, set this to true to assume slippery tiles trigger for the entity
+     */
+    canSlip(entity: EntityMovable | undefined, isClientSide?: boolean, assumeEntitySlips?: boolean): boolean;
+    isAt(otherTile: Tile | IVector3): boolean;
+    isAdjacent(otherTile: Tile | IVector3): boolean;
+    isAround(otherTile: Tile | IVector3): boolean;
+    isNearby(entity: Entity | Tile, includeCurrentTile?: boolean): boolean;
+    /**
+     * Gets the direction from this tile to the target tile
+     */
+    getDirectionToTile(tile: Tile): Direction.Cardinal | Direction.None;
+    /**
+     * Gets the adjacent tile in the direction
+     */
+    getTileInDirection(direction: Direction): Tile | undefined;
     getVariation(noTileDataOffset?: boolean): number;
-    tilesInRange(range: number, includeCurrentTile?: boolean): Stream<Tile>;
-    openTileInRange(range: number, includeCurrentTile?: boolean): Tile | undefined;
+    /**
+     * Gets the preferred adjacent tile for the human to walk onto.
+     * - Doesn't choose tiles that the "walk to" algorithm considers blocked
+     * - Prefers tiles with lower "walk to" algorithm penalty
+     * - Prefers the facing tile if it has the same penalty as others
+     */
+    getPreferredAdjacentTile(human: Human, clientSide: boolean): Tile | undefined;
+    tilesInRange(range: number, includeCurrentTile?: boolean): Tile[];
+    openTileInRange(range: number, includeCurrentTile?: boolean, excludeWater?: boolean): Tile | undefined;
     /**
      * Array version of tilesAround
      */
@@ -316,7 +431,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     /**
      * IterableIterator version of TileHelpers.getTilesAround
      */
-    tilesAround(includeCurrentTile?: boolean, includeCorners?: boolean): Generator<Tile, void, unknown>;
+    generateTilesAround(includeCurrentTile?: boolean, includeCorners?: boolean): Generator<Tile, void>;
     findMatchingTile(isMatchingTile: (tile: Tile) => boolean, options?: {
         maxTilesChecked?: number;
         canVisitTile?: (tile: Tile) => boolean;
@@ -326,9 +441,55 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
         maxTilesChecked?: number;
         canVisitTile?: (tile: Tile) => boolean;
     }): Tile[];
-    findPath(target: Tile, isTileBlocked: (tile: Tile) => boolean, getTilePenalty?: (tile: Tile) => number, maxNodesChecked?: number): Tile[] | undefined;
+    /**
+     * A* path finding
+     * @param entity The entity moving
+     * @param target The target tile to move to
+     * @param isTileBlocked Function for determining if the entity can move onto the tile
+     * @param getTilePenalty Function for determining the tile penalty
+     * @param maxNodesChecked Maximum number of nodes to pathfind though
+     * @returns Tile path or undefined if no path is available
+     */
+    findPath(entity: EntityMovable | undefined, target: Tile, isTileBlocked: (tile: Tile) => boolean, getTilePenalty?: (tile: Tile) => number, maxNodesChecked?: number, shouldEndEarly?: (tile: Tile) => boolean): Tile[] | undefined;
+    /**
+     * Find a path using the preferred algorithm. Use only if you're not calling this very often, or you're calling it clientside.
+     */
+    findPathPreferred(human: Human, targetTile: Tile, range?: FindPathRange, isClientSide?: boolean): Tile[] | undefined;
+    isInRange(targetTile: Tile | Entity | undefined, range: FindPathRange, isClientSide?: boolean): boolean;
+    getWalkToTilePenalty(human: Human): number;
     /**
      * Returns whether the tile is blocked (completely impassible) for the human
      */
-    isWalkToTileBlocked(human: Human, clientSide: boolean): boolean;
+    isWalkToTileBlocked(human: Human, clientSide: boolean, forceDangerous?: boolean): boolean;
+    /**
+     * Returns the penalty of the given tile (just how much we *don't* want to step there)
+     */
+    private getTilePenalty;
+    asType(type: TerrainType): Tile | undefined;
+    get asCorpse(): undefined;
+    get asCreature(): undefined;
+    get asDoodad(): undefined;
+    get asHuman(): undefined;
+    get asLocalPlayer(): undefined;
+    get asNPC(): undefined;
+    get asPlayer(): undefined;
+    get asTileEvent(): undefined;
+    get asItem(): undefined;
+    get asTile(): Tile;
+    get asUnion(): Tile;
+    get asEntity(): undefined;
+    get asContainer(): (this & ITileContainer) | undefined;
+    isCorpse(): this is Corpse;
+    isCreature(): this is Creature;
+    isDoodad(): this is Doodad;
+    isHuman(): this is Human;
+    get isLocalPlayer(): boolean;
+    isNPC(): this is NPC;
+    isPlayer(): this is Player;
+    isTileEvent(): this is TileEvent;
+    isItem(): this is Item;
+    isTile(): this is Tile;
+    isEntity(): this is Entity;
+    isContainer(): this is IUncastableContainer;
+    isTileWithinSquareRadiusOfLitLighthouse(radius?: number): boolean;
 }

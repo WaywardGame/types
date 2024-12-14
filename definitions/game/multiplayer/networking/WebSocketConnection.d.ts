@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IMatchmaking, IMatchmakingInfo, MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
-import { Connection } from "multiplayer/networking/Connection";
+import type { IMatchmaking, IMatchmakingInfo, MatchmakingMessageData } from "@wayward/game/multiplayer/matchmaking/IMatchmaking";
+import { Connection } from "@wayward/game/multiplayer/networking/Connection";
 export declare class WebSocketConnection extends Connection {
     private readonly getMatchmaking;
     private readonly onData;
@@ -17,7 +17,7 @@ export declare class WebSocketConnection extends Connection {
     name: string;
     get maxMessageSize(): number;
     constructor(matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, getMatchmaking: () => IMatchmaking | undefined, onData: (data: ArrayBuffer) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined);
-    isConnected(): boolean;
+    get isConnected(): boolean;
     protected onClosing(): void;
     protected onClosed(): void;
     send(data: Uint8Array): boolean;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -34,11 +34,13 @@ export declare enum ItemTranslation {
 }
 export declare enum SkillTranslation {
     Name = 0,
-    Description = 1
+    Title = 1,
+    Description = 2
 }
 export declare enum StatTranslation {
     Name = 0,
-    Description = 1
+    Abbreviation = 1,
+    Description = 2
 }
 export declare enum BookTranslation {
     Title = 0,
@@ -51,29 +53,26 @@ export declare enum MilestoneTranslation {
 }
 export declare enum ActionTranslation {
     Name = 0,
-    Description = 1,
-    TierDescription = 2
+    Verb = 1,
+    Description = 2,
+    TierDescription = 3
 }
 export declare enum UsableActionTranslation {
     Name = 0,
-    Description = 1
+    Verb = 1,
+    Description = 2
 }
 export declare enum EquipSlotTranslation {
     Name = 0,
     EquipTo = 1,
     Description = 2
 }
-export declare enum StatusEffectTranslation {
+export declare enum StatusTranslation {
     Adjective = 0,
     Name = 1,
     Description = 2
 }
-export declare enum BleedLevelTranslation {
-    Adjective = 0,
-    Name = 1,
-    Description = 2,
-    Effects = 3
-}
+export type StatusTranslationTuple = [adjective: string, name: string, description?: string];
 export declare enum QuestTranslation {
     Title = 0,
     Description = 1
@@ -100,54 +99,116 @@ export declare enum LoadingTranslation {
 }
 export declare enum MagicalPropertyTranslation {
     Name = 0,
-    Tooltip = 1
+    Description = 1
+}
+export declare enum ContainerSortTranslation {
+    Verbose = 0,
+    Simple = 1
+}
+export declare enum DeityTranslation {
+    Name = 0,
+    Description = 1
+}
+export declare enum QualityTranslation {
+    Name = 0,
+    Description = 1
+}
+export declare enum RunekeeperDomainTranslation {
+    Name = 0,
+    Domain = 1
+}
+export declare enum DamageTypeTranslation {
+    Name = 0,
+    Description = 1
 }
 export declare enum MiscTranslation {
     AAndB = 0,
     Aberrant = 1,
-    AListAndB = 2,
-    AListOrB = 3,
-    AOrB = 4,
-    Binding = 5,
-    BindingInputModifierSeparator = 6,
-    BindingListSeparator = 7,
-    BindingMacroSeparator = 8,
-    BindingWhenHoveringItem = 9,
-    Classes = 10,
-    Colorize = 11,
-    ColorizeDamage = 12,
-    ColorizeMagical = 13,
-    ColorizeMessageType = 14,
-    ColorizePrimary = 15,
-    ColorizeQuality = 16,
-    ColorizeSecondary = 17,
-    ColorizeStat = 18,
-    ColorizeVulnerability = 19,
-    CorpseOf = 20,
-    CountThing = 21,
-    CreatureSubtitle = 22,
-    Dependency = 23,
-    Difference = 24,
-    EquipSlotEquipToYour = 25,
-    ExpressionSeparator = 26,
-    ItemMagicalProperty = 27,
-    ListItemSeparator = 28,
-    Merge = 29,
-    MergeSpaced = 30,
-    Multiply = 31,
-    NPCName = 32,
-    NPCNameUnmet = 33,
-    NumberSingleDecimal = 34,
-    OwnName = 35,
-    Percent = 36,
-    PercentRaw = 37,
-    PlayerName = 38,
-    Possession = 39,
-    Range = 40,
-    ReformatSingularNoun = 41,
-    Renamed = 42,
-    Tile = 43,
-    Tilled = 44,
-    Unknown = 45,
-    UnknownItem = 46
+    Add = 2,
+    AdditionalXs = 3,
+    AListAndB = 4,
+    AListOrB = 5,
+    AOrB = 6,
+    ASlashB = 7,//#used in Debug Tools
+    BindingInputModifierSeparator = 8,
+    BindingListSeparator = 9,
+    BindingMacroSeparator = 10,
+    BindingWhenHoveringItem = 11,
+    BOfA = 12,
+    Classes = 13,
+    ColorizeDamage = 14,
+    ColorizeMagical = 15,
+    ColorizeMessageType = 16,
+    ColorizePrimary = 17,
+    ColorizeQuality = 18,
+    ColorizeSecondary = 19,
+    ColorizeStat = 20,
+    ColorizeVulnerability = 21,
+    CorpseOf = 22,
+    CountThing = 23,
+    CountUnit = 24,
+    Dependency = 25,
+    Difference = 26,
+    Dug = 27,
+    EquipSlotEquipToYour = 28,
+    ExpressionSeparator = 29,
+    Fraction = 30,
+    ListItemSeparator = 31,
+    Merge = 32,
+    MergeSlash = 33,
+    MergeSpaced = 34,
+    Multiply = 35,
+    Negate = 36,
+    NPCNameColor = 37,
+    NPCNameUnmet = 38,
+    NumberSingleDecimal = 39,
+    Overfished = 40,
+    Overline = 41,
+    OwnName = 42,
+    Parenthesized = 43,
+    Percent = 44,
+    PercentRaw = 45,
+    PlayerName = 46,
+    Possession = 47,
+    QualityAffix = 48,
+    Range = 49,
+    ReformatSingularNoun = 50,
+    Renamed = 51,
+    Sentence = 52,
+    Simplify = 53,
+    Tile = 54,
+    Tilled = 55,
+    Undiscovered = 56,
+    Unknown = 57,
+    UnknownItem = 58
+}
+export declare enum Term {
+    Aberrant = 0,
+    Action = 1,
+    Attack = 2,
+    DamageTick = 3,
+    Effect = 4,
+    EveryX = 5,
+    Hostile = 6,
+    Movement = 7,
+    NextX = 8,
+    Normal = 9,
+    Tamed = 10,
+    TimeToX = 11,
+    Turn = 12,
+    Undiscovered = 13,
+    UsingX = 14,
+    XTick = 15,
+    XtoYZ = 16,
+    XUndiscovered = 17,
+    XY = 18
+}
+export declare enum Label {
+    LabelColonValue = 0,
+    LabelParensValue = 1,
+    LabelSpaceValue = 2,
+    LabelDashValue = 3,
+    ValueSpaceLabel = 4,
+    ValueParensLabel = 5,
+    ValueLabel = 6
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IMultiplayerOptions } from "multiplayer/IMultiplayer";
-import SharedPacket from "multiplayer/packets/SharedPacket";
+import type { IMultiplayerOptions } from "@wayward/game/multiplayer/IMultiplayer";
+import SharedPacket from "@wayward/game/multiplayer/packets/SharedPacket";
 export default class UpdateMultiplayerOptionsPacket extends SharedPacket {
     options: IMultiplayerOptions;
     getDebugInfo(): string;

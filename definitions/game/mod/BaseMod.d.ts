@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,46 +8,30 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events } from "event/EventEmitter";
-import EventEmitter from "event/EventEmitter";
-import type { IModEvents } from "mod/IMod";
-import type { ModRegistration } from "mod/ModRegistry";
-import { SYMBOL_MOD_REGISTRATIONS } from "mod/ModRegistry";
-import type Log from "utilities/Log";
+import type { IModEvents } from "@wayward/game/mod/IMod";
+import type { ModInformation } from "@wayward/game/mod/ModInformation";
+import type { ModRegistration } from "@wayward/game/mod/ModRegistry";
+import { SYMBOL_MOD_REGISTRATIONS } from "@wayward/game/mod/ModRegistry";
+import type { Events } from "@wayward/utilities/event/EventEmitter";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type Log from "@wayward/utilities/Log";
 export declare enum ModRegistrationTime {
-    Inherit = 0,
     Setup = 1,
     Initialize = 2,
-    Load = 3
+    Load = 4,
+    All = 7,
+    Reinitialize = 10
 }
 export interface IRegistry {
     [SYMBOL_MOD_REGISTRATIONS]: ModRegistration[];
 }
 export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
-    readonly index: number;
+    readonly mod: ModInformation;
     private allocatedEnums;
     private registeredPackets;
     private readonly subRegistries;
     private subscribedHandlers;
-    constructor(index: number);
-    /** @deprecated Use the `index` property */
-    getIndex(): number;
-    /**
-     * Returns the name of this mod.
-     * @deprecated Use the `name` property
-     */
-    getName(): string;
-    /**
-     * Returns the prefix for this mod used in registrations. Example: A mod named `Debug Tools` would be `ModDebugTools`
-     * @deprecated Use the `prefix` property
-     */
-    getPrefix(): string;
-    /** @deprecated Use the `log` property */
-    getLog(): Log;
-    /** @deprecated Use the `path` property */
-    getPath(): string;
-    /** @deprecated Use the `version` property */
-    getVersion(): string;
+    constructor(mod: ModInformation);
     get name(): string;
     /**
      * The prefix for this mod used in registrations. Example: A mod named `Debug Tools` would be `ModDebugTools`
@@ -69,7 +53,7 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      *
      * This method is meant to be overridden. It is called internally.
      */
-    initializeSaveData(data: any): any;
+    initializeSaveData(data: unknown): unknown;
     /**
      * Called when the global data for this mod is retrieved from a field decorated with `@Mod.globalData`.
      * @param data Any existing data, or `undefined`
@@ -77,7 +61,7 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      *
      * This method is meant to be overridden. It is called internally.
      */
-    initializeGlobalData(data: any): any;
+    initializeGlobalData(data: unknown): unknown;
     /**
      * Registers event handlers, injections, and bind handlers. This is called on the `preLoad` event by default,
      * and the handlers are deregistered on the `unload` event.
@@ -93,12 +77,14 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      * Event handler for `ModEvent.Unallocate`.
      */
     private onUnallocate;
+    private unallocate;
     /**
      * Event handler for `ModEvent.PreInitialize`.
      *
      * Handles registration of fields decorated with ` @Register.thing`, which occur at `ModRegistrationTime.Initialize`
      */
     private onBeforeInitialize;
+    private onBeforeReinitialize;
     protected registerEventHandlersOnPreLoad: boolean;
     /**
      * Event handler for `ModEvent.PreLoad`.
@@ -106,6 +92,7 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      * Handles registration of fields decorated with ` @Register.thing`, which occur at `ModRegistrationTime.Load`
      */
     private onBeforeLoad;
+    private initializeRegistries;
     /**
      * All mods by default are `IRegistry`s, and any fields decorated with ` @Register.registry(Class)` are constructed as `IRegistry`s.
      *
@@ -136,12 +123,13 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      *
      * @param registry The `IRegistry` that the registration is from.
      * @param registration A `ModRegistration` — This is a type alias for any possible interface that extends `IBaseRegistration`.
+     * @returns Optionally, a callback that should be executed when all registrations have been registered
      *
      * ------
      * 1. The registration is validated with `validateRegistration`. This is an asynchronous operation that replaces any references to
      * other registrations with their values, once they are registered. See `validateRegistration` for more details.
      * 2. The name of the registration is generated: `Mod<modname><registration.name (in pascal case, with all non-letters removed)>`
-     * 3. If the registration contains a `description` field, sets the `modIndex` property in the description to this mod's index.
+     * 3. If the registration contains a `description` field, sets the `mod` property in the description to this mod's `ModInformation`.
      * 4. If the registration is not "basic", IE: it needs to do something besides allocate an enum, it will have an entry in a switch
      * block for its `registration.type`. If it doesn't, by default it just allocates the enum using `registrationTypeToEnumMap`.
      */
@@ -155,6 +143,7 @@ export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
      * and any values in it which are instances of `Registry.Registered` are asynchronously replaced with their registered values.
      */
     private validateRegistration;
+    private validateRegistrationProperty;
     /**
      * @param registry The registry to get a property value from.
      * @param property The property to get the value of.

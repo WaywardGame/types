@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { MultiplayerSyncCheck } from "multiplayer/IMultiplayer";
-import type { ConnectionState } from "multiplayer/networking/IConnection";
+import type { MultiplayerSyncCheck } from "@wayward/game/multiplayer/IMultiplayer";
+import type { ConnectionState } from "@wayward/game/multiplayer/networking/IConnection";
 export declare const reservedBytes = 5;
 export declare enum PacketType {
     Client = 0,
@@ -34,7 +34,7 @@ export interface IHashedSyncCheck {
 }
 export interface IPacket<T = any> {
     getAllowedStates(): ConnectionState;
-    getArrayBuffer(id?: number): ArrayBuffer;
+    getArrayBuffer(id?: number): ArrayBufferLike;
     getRegistrarId(): number;
     getDebugInfo(): string;
     getSynchronizationCheckData(): ISynchronizationCheckData;

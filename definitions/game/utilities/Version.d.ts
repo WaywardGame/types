@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import TranslationImpl from "language/impl/TranslationImpl";
+import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export interface IVersionInfo {
     str: Version.String;
     strSemver: Version.StringSemVer;
@@ -23,7 +23,7 @@ export interface IVersionInfo {
      */
     update?: number;
 }
-declare module Version {
+declare namespace Version {
     export type Stage = "beta" | "release";
     export type String = `${Stage}${bigint}.${bigint}.${bigint}` | `${Stage}${bigint}.${bigint}` | `${Stage}${bigint}`;
     export type StringSemVer = `${bigint}.${bigint}.${bigint}-${Stage}` | `${bigint}.${bigint}.${bigint}`;
@@ -65,7 +65,7 @@ declare module Version {
     export function getUpdateDisplayTranslation(version?: Version.String | Version.StringSemVer | IVersionInfo): TranslationImpl | undefined;
     const timezones: {
         nz: string;
-        pst: string;
+        pt: string;
         build: string;
     };
     export function isTimeBefore(date: Date, dateStr: DateString, timezone: keyof typeof timezones): boolean;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,16 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IServerMod } from "@hosts/shared/interfaces";
-import EventEmitter from "event/EventEmitter";
-import Player from "game/entity/player/Player";
-import type Island from "game/island/Island";
-import type { IJoinServerOptions, IMultiplayerEvents, IMultiplayerOptions, IMultiplayerRunSafelyOptions, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
-import { DisconnectReason, JoinServerRetryReason, MultiplayerSyncCheck, MultiplayerSyncCheckLevel, UnableToJoinReason } from "multiplayer/IMultiplayer";
-import type { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
-import type { IConnection } from "multiplayer/networking/IConnection";
-import type { IPacket } from "multiplayer/packets/IPacket";
-import DesyncPacket from "multiplayer/packets/server/DesyncPacket";
+import Player from "@wayward/game/game/entity/player/Player";
+import type Island from "@wayward/game/game/island/Island";
+import type { IJoinServerOptions, IMultiplayerEvents, IMultiplayerOptions, IMultiplayerRunSafelyOptions, PacketTarget, ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
+import { DisconnectReason, JoinServerRetryReason, MultiplayerSyncCheck, MultiplayerSyncCheckLevel, UnableToJoinReason } from "@wayward/game/multiplayer/IMultiplayer";
+import type { IMatchmakingInfo } from "@wayward/game/multiplayer/matchmaking/IMatchmaking";
+import type { IConnection } from "@wayward/game/multiplayer/networking/IConnection";
+import type { IPacket } from "@wayward/game/multiplayer/packets/IPacket";
+import DesyncPacket from "@wayward/game/multiplayer/packets/server/DesyncPacket";
+import type { IServerMod } from "@wayward/hosts/shared/interfaces";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     /**
      * Static steam account id when steam support is on
@@ -66,15 +66,15 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private _ipAddress;
     private readonly _matchmakingSecret;
     constructor();
-    isConnected(): boolean;
-    isPacketProcessingPaused(): boolean;
-    isProcessingPacket(): boolean;
-    isServer(): boolean;
-    isClient(): boolean;
+    get isConnected(): boolean;
+    get isPacketProcessingPaused(): boolean;
+    get isProcessingPacket(): boolean;
+    get isServer(): boolean;
+    get isClient(): boolean;
     get areSyncChecksSuppressed(): boolean;
     getPlayerIdentifier(): string;
     setPlayerIdentifier(identifier: string): void;
-    getOptions(): IMultiplayerOptions;
+    get options(): ImmutableObject<IMultiplayerOptions>;
     setOptions(options: IMultiplayerOptions, updateGame?: boolean): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
     /**
@@ -148,10 +148,10 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
      * @param checkId When true, this packet will not be sent to the server/client if the same packet is already being processed. When false, this packet will not be sent if any packet is already being processed. Useful when dealing with methods that could end up sending multiple packets while a packet is already being processed.
      * @param wait When true, the client will keep track of what packets it sent to the server. If the client calls this method again before the server responds, it will not send a duplicate packet. It will wait for the server to send the packet back before allowing another one to be sent. When true, it will keep track of duplicate packets based on the packet type. When it's a number, it will keep track of duplicate packets based on the packet type + the number.
      */
-    syncPacket<T = any>(packet: IPacket, clientSide?: NullaryFunction<T>, checkId?: boolean, wait?: number | true): T | undefined;
+    syncPacket<T = any>(packet: IPacket, clientSide?: NullaryFunction<T>, checkId?: boolean, wait?: number | true): PromiseOr<T | undefined>;
     markCurrentProcessingPacket(packetId: number, processing: boolean): void;
-    clearSyncPacketWaiting(packet: IPacket, wait: number): void;
-    clearSyncPacketsWaiting(waitId?: string): void;
+    resolveSyncPacketWaiting(packet: IPacket, wait: number): void;
+    resolveSyncPacketsWaiting(waitId?: string, value?: unknown): void;
     private pauseIncomingPacketProcessing;
     /**
      * Execute an async function while applying some temporary state changes
@@ -175,7 +175,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     addSyncCheckWithSeed(island: Island, syncCheck: MultiplayerSyncCheck, ...messages: any[]): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addAfterSyncChecks(packet: IPacket): void;
-    sendChatMessage(sender: Player, message: string): void;
+    sendChatMessage(sender: Player, message: string): Promise<void>;
     private addDefaultSyncChecks;
     /**
      * Returns sync check hashes

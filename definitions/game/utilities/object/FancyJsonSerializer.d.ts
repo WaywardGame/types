@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -24,7 +24,7 @@ export default class FancyJsonSerializer {
     static hasClassSerializer(cls: Class<any>): boolean;
     static getClassSerializer(cls: Class<any>): IClassSerializer<any, any> | undefined;
     static serialize(obj: any, pretty?: boolean): string;
-    static deserialize(json: string): any;
+    static deserialize(json: string): unknown;
     private static serializeValue;
     private static deserializeValue;
     private static fakeBigInt;

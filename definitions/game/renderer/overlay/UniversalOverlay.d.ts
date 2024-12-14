@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IOverlayInfo } from "game/tile/ITerrain";
-import type Tile from "game/tile/Tile";
-import GenericOverlay from "renderer/overlay/GenericOverlay";
-import Vector2 from "utilities/math/Vector2";
+import type { IOverlayInfo } from "@wayward/game/game/tile/ITerrain";
+import type Tile from "@wayward/game/game/tile/Tile";
+import GenericOverlay from "@wayward/game/renderer/overlay/GenericOverlay";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
 export default abstract class UniversalOverlay<OVERLAY extends IOverlayInfo = IOverlayInfo> extends GenericOverlay<OVERLAY> {
     private readonly scheduledInvalidations;
     get minVector(): Vector2;
@@ -23,8 +23,9 @@ export default abstract class UniversalOverlay<OVERLAY extends IOverlayInfo = IO
     protected onLoadOnIsland(): void;
     protected onPostFieldOfView(): void;
     protected onChangeZOrIsland(): void;
-    protected onTickEnd(): void;
+    protected onTickEndOrLocalPlayerPostMove(): void;
     protected invalidate(tile: Tile, invalidateRange?: number): void;
     clear(): void;
+    protected shouldRefresh?(): boolean;
     refresh(): void;
 }

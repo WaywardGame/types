@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,27 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type Component from "ui/component/Component";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import WalkToTileHandler from "ui/screen/screens/game/util/movement/WalkToTileHandler";
-export interface IMovementHandlerEvents {
+import type { MovementIntent } from "@wayward/game/game/entity/player/IPlayer";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import type { IInteractionHandlerEvents } from "@wayward/game/ui/screen/screens/game/util/movement/InteractionHandler";
+import InteractionHandler from "@wayward/game/ui/screen/screens/game/util/movement/InteractionHandler";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export interface IMovementHandlerEvents extends IInteractionHandlerEvents {
     /**
      * Called every frame where the mouse is not hovering over an item
      * @returns `false` if the client can't move, `undefined` otherwise
      */
     canMove(): false | undefined;
 }
-export default class MovementHandler extends EventEmitter.Host<IMovementHandlerEvents> {
-    readonly walkToTileHandler: WalkToTileHandler;
+export default class MovementHandler extends InteractionHandler {
+    event: IEventEmitter<this, IMovementHandlerEvents>;
     private lastMove;
     private readonly intent;
     private preventMouseMovement;
-    private readonly surfaceRef;
-    get surface(): Component<HTMLElement>;
-    constructor(surface: Component);
-    register(): this;
-    deregister(): this;
     protected onMoveStart(): void;
     protected onMoveComplete(): void;
     protected onFaceDown(api: IBindHandlerApi): boolean;
@@ -39,7 +35,7 @@ export default class MovementHandler extends EventEmitter.Host<IMovementHandlerE
     protected onMove(api: IBindHandlerApi): boolean;
     protected onMoveDirection(api: IBindHandlerApi): boolean;
     protected onReleaseMoveBind(api: IBindHandlerApi): void;
-    private setIntent;
+    setIntent(intent?: MovementIntent): void;
     /**
      * Processes moving towards the mouse.
      */
@@ -53,4 +49,8 @@ export default class MovementHandler extends EventEmitter.Host<IMovementHandlerE
      * Returns whether either of the previous statements are true.
      */
     private processDirectionBinds;
+    /**
+     * Returns true if the player changed their facing direction.
+     */
+    private faceDirection;
 }

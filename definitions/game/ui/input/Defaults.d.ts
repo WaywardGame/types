@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Bindable from "ui/input/Bindable";
-import type { Binding } from "ui/input/Bindings";
-declare const _default: Record<Bindable, Binding[]>;
-export default _default;
+import Bindable from "@wayward/game/ui/input/Bindable";
+import type { Binding } from "@wayward/game/ui/input/Bindings";
+declare const defaultBindings: Record<Bindable, Binding[]>;
+export default defaultBindings;

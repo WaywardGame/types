@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,21 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IRefreshable } from "ui/component/Refreshable";
-import { Tab } from "ui/screen/screens/menu/component/Menu";
+import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
+import { Tab } from "@wayward/game/ui/screen/screens/menu/component/Menu";
 export default class TabDeveloper extends Tab implements IRefreshable {
     private readonly refreshables;
-    private readonly buttonDeveloperMode1;
-    private readonly buttonDeveloperMode2;
-    private readonly buttonDiscoverAllActions;
-    private readonly buttonUnlockAllMilestones;
-    private readonly buttonUnlockAllRecipes;
+    private readonly buttonDeveloperMode;
     private readonly buttonOpenLogsFolder;
     private readonly buttonToggleDevTools;
-    private readonly buttonToggleTraceRecording;
     private readonly buttonReloadGame;
     private readonly buttonReloadStylesheets;
-    private readonly buttonResetGeneratedSpriteCache;
+    private readonly buttonReloadTexturesCache;
+    private readonly buttonTogglePrepackedSprites;
+    private readonly buttonDisableMilestones;
+    private readonly buttonToggleTraceRecording;
+    private readonly buttonDisposeReflection;
     private readonly blockLogSourceFiltering;
     private readonly blockUIExperiments;
     constructor();
@@ -35,8 +34,6 @@ export default class TabDeveloper extends Tab implements IRefreshable {
     private toggleTraceRecording;
     private toggleDeveloperMode;
     private reloadGame;
-    private unlockAllMilestones;
-    private discoverAllActions;
-    private unlockAllRecipes;
-    private resetGeneratedSpriteCache;
+    private createSteamBetasDropdown;
+    private onSteamBetaSelect;
 }

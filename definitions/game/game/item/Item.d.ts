@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,46 +8,53 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IEventEmitter } from "event/EventEmitter";
-import type Doodad from "game/doodad/Doodad";
-import { ActionType } from "game/entity/action/IAction";
-import type Creature from "game/entity/creature/Creature";
-import type { CreatureType } from "game/entity/creature/ICreature";
-import type Entity from "game/entity/Entity";
-import type { IEntityMovableEvents } from "game/entity/EntityMovable";
-import EntityMovable from "game/entity/EntityMovable";
-import type Human from "game/entity/Human";
-import { AttackType, DamageType, EntityType } from "game/entity/IEntity";
-import type { EquipType } from "game/entity/IHuman";
-import { SkillType } from "game/entity/IHuman";
-import type Player from "game/entity/player/Player";
-import { TileUpdateType } from "game/IGame";
-import type { IObject, IObjectOptions } from "game/IObject";
-import { Quality } from "game/IObject";
-import type { IslandId } from "game/island/IIsland";
-import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemChangeIntoOptions, IItemDescription, IItemDisassembleResult, IItemUsed, IMagicalPropertyInfo, IMoveToTileOptions, ItemCounter, ItemTag, ItemTypeExtra } from "game/item/IItem";
-import { BookType, ItemDamageResult, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "game/item/IItem";
-import type { IPlaceOnTileOptions } from "game/item/IItemManager";
-import ItemMapManager from "game/item/ItemMapManager";
-import type { IHasMagic, MagicalSubPropertySubTypes } from "game/magic/MagicalPropertyManager";
-import MagicalPropertyManager from "game/magic/MagicalPropertyManager";
-import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
-import type { IHasInsulation, TempType } from "game/temperature/ITemperature";
-import { FireStage } from "game/tile/events/IFire";
-import type Tile from "game/tile/Tile";
-import TranslationImpl from "language/impl/TranslationImpl";
-import { Article } from "language/Translation";
-import type { IUnserializedCallback } from "save/serializer/ISerializer";
-import type { Direction } from "utilities/math/Direction";
-import type { IVector3 } from "utilities/math/IVector";
-export interface IItemEvents extends IEntityMovableEvents {
+import { TileUpdateType } from "@wayward/game/game/IGame";
+import type { IHasQuality, IObject, IObjectOptions, IQualityEvents } from "@wayward/game/game/IObject";
+import { Quality } from "@wayward/game/game/IObject";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
+import type Entity from "@wayward/game/game/entity/Entity";
+import type { IEntityMovableEvents } from "@wayward/game/game/entity/EntityMovable";
+import EntityMovable from "@wayward/game/game/entity/EntityMovable";
+import type Human from "@wayward/game/game/entity/Human";
+import type { IMovingData } from "@wayward/game/game/entity/IEntity";
+import { AttackType, DamageType, EntityType } from "@wayward/game/game/entity/IEntity";
+import type { EquipType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type ActionContext from "@wayward/game/game/entity/action/IActionContext";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { IMobCheck, IslandId } from "@wayward/game/game/island/IIsland";
+import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemChangeIntoOptions, IItemDescription, IItemDisassembleResult, IItemDisassembly, IItemGetNameOptions, IItemUsed, IItemVehicle, IMagicalPropertyInfo, IItemMovementResult as IMoveToTileMobCheckResult, IMoveToTileOptions, ItemTag, ItemTypeExtra } from "@wayward/game/game/item/IItem";
+import { BookType, ContainerSort, ItemDamageResult, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "@wayward/game/game/item/IItem";
+import type { IPlaceOnTileOptions } from "@wayward/game/game/item/IItemManager";
+import ItemMapManager from "@wayward/game/game/item/ItemMapManager";
+import type { IHasMagic, MagicalSubPropertySubTypes } from "@wayward/game/game/magic/MagicalPropertyManager";
+import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
+import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
+import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
+import type { IHasInsulation, TempType } from "@wayward/game/game/temperature/ITemperature";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import { FireStage } from "@wayward/game/game/tile/events/IFire";
+import { Article } from "@wayward/game/language/Translation";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { SortDirection } from "@wayward/game/save/ISaveManager";
+import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
+import type { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export interface IItemEvents extends IEntityMovableEvents, IQualityEvents {
     toggleProtected(isProtected: boolean): any;
+    containerChange(newContainer: IContainer, oldContainer?: IContainer): any;
     fireUpdate(stage?: FireStage): any;
     damage(): any;
     transformed(newType: ItemType, oldType: ItemType): any;
     weightUpdate(): any;
-    moved(): any;
-    remove(): any;
     movedIsland(islandId: IslandId, itemId: number): any;
     /**
      * Called when the human equips an item to a slot
@@ -67,17 +74,25 @@ export interface IItemEvents extends IEntityMovableEvents {
      * @returns The amount of damage the item shouldd take or undefined to use the default logic
      */
     shouldDamage(modifier?: number): number | false | undefined;
-    qualityChange(quality: Quality, oldQuality: Quality): any;
     durabilityChange(durability: number, oldDurability: number): any;
     durabilityMaxChange(durabilityMax: number, oldDurabilityMax: number): any;
+    decayChange(decay?: number, oldDecay?: number): any;
+    addMagic(manager: MagicalPropertyManager): any;
+    removeMagic(manager: MagicalPropertyManager): any;
+    attackBonusChange(attackBonus: number, oldAttackBonus?: number): any;
+    defenseBonusChange(defenseBonus: number, oldDefenseBonus?: number): any;
+    revertFromDoodad(doodad: Doodad): any;
+    becomeDoodad(doodad: Doodad): any;
 }
-export default class Item extends EntityMovable<IItemDescription, ItemType, ItemTag, ItemCounter> implements Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, IHasInsulation, IHasMagic {
+export default class Item extends EntityMovable<IItemDescription, ItemType, ReferenceType.Item, ItemTag> implements Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, IHasInsulation, IHasMagic, IHasQuality {
     get entityType(): EntityType.Item;
     get tileUpdateType(): TileUpdateType;
-    readonly event: IEventEmitter<this, IItemEvents>;
+    event: IEventEmitter<this, IItemEvents>;
     private maxDur;
     private minDur;
     weight: number;
+    private decay?;
+    addOrder?: number[];
     bonusAttack?: number;
     bonusDefense?: number;
     book?: BookType;
@@ -86,25 +101,28 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
     containedWithin?: IContainer;
     containsCreature?: Creature;
     crafterIdentifier?: string;
-    decay?: number;
     disassembly?: Item[];
-    driverId?: number;
-    driverType?: EntityType;
-    equippedId?: number;
-    equippedType?: EntityType;
+    driverReference?: Reference<ReferenceType.Player | ReferenceType.NPC>;
+    equippedReference?: Reference<ReferenceType.Player | ReferenceType.NPC>;
     fireStage?: FireStage;
-    itemOrders?: number[];
+    holderReference?: Reference<ReferenceType.Player | ReferenceType.NPC>;
     magic?: MagicalPropertyManager;
     map?: ItemMapManager;
-    pid?: number | null;
     protected?: boolean;
     quality?: Quality;
+    sort?: ContainerSort;
+    sortDirection?: SortDirection;
+    stacks?: Set<ItemType>;
     startingDecay?: number;
-    tradedFrom?: string[];
     used?: IItemUsed;
     vehicleFacingDirection?: Direction.Cardinal;
     weightCapacity?: number;
     weightFraction?: number;
+    /**
+     * Includes merchant identifiers for each instance of the item being traded to/from the merchant.
+     * (The property name is out of date.)
+     */
+    tradedFrom?: string[];
     offsetX?: number;
     offsetY?: number;
     [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
@@ -119,14 +137,31 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
     get asPlayer(): undefined;
     get asTileEvent(): undefined;
     get asItem(): Item | undefined;
+    get asTile(): undefined;
+    get asContainer(): (this & IContainer) | undefined;
+    isCorpse(): this is Corpse;
+    isCreature(): this is Creature;
+    isDoodad(): this is Doodad;
+    isHuman(): this is Human;
+    get isLocalPlayer(): boolean;
+    isNPC(): this is NPC;
+    isPlayer(): this is Player;
+    isTileEvent(): this is TileEvent;
+    isItem(): this is Item;
+    isTile(): this is Tile;
     toString(): string;
-    protected updateTile(fromTile: Tile, toTile: Tile): boolean;
+    stopSlipping(): void;
+    protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     get durability(): number;
     set durability(value: number);
+    get durabilityMaxWithMagical(): number;
     get durabilityMax(): number;
     set durabilityMax(value: number);
     getDisplayItem(): DisplayableItemType;
     isContainer(): this is Item & IContainer;
+    isWithin(container?: IContainer): boolean;
+    get builtDescription(): IDoodadDescription | undefined;
+    countTradesWith(human?: Human): number;
     /**
      * Gets the owner of this item.
      * This will be the human who crafted it.
@@ -139,11 +174,11 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
     getCurrentOwner(): Human | undefined;
     /**
      * Sets the item as magical with a chance based on quality (and clears any existing magical properties)
-     * @param bonus The number that chances get multiplied by, for example, 2 or 3
-     * @param propertiesBypass The number of magical properties to force on to the item
+     * @param contextualChanceMultiplier The number that chances get multiplied by, for example, 2 or 3. Currently used based on skill, island distance, etc
+     * @param quantityOverride The number of properties to use instead of generating the quantity randomly
      * @returns True if the item has become magical
      */
-    setMagicalChanceFromQuality(bonus?: number, propertiesBypass?: number): boolean;
+    setMagicalChanceFromQuality(contextualChanceMultiplier?: number, quantityOverride?: number): boolean;
     /**
      * @deprecated This method currently shouldn't be used in production code, as it's to do with the new crafting system. Stay tuned.
      */
@@ -162,12 +197,15 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
      * - `item.getName(false)` // "stone axe"
      * - `item.getName(undefined, 3)` // "stone axes"
      */
-    getName(article?: Article, count?: number, showCount?: boolean, showQuality?: boolean, showRenamedQuotes?: boolean, showMagicalType?: boolean): TranslationImpl;
+    getName(article?: Article, options?: Partial<IItemGetNameOptions>): TranslationImpl;
     protected getDescription(): IItemDescription | undefined;
-    isTransient(): boolean;
-    isValid(): boolean;
+    get isTransient(): boolean;
+    get isValid(): boolean;
     isProtected(): boolean;
     isInGroup(itemGroup: ItemTypeGroup): boolean;
+    /**
+     * Get the driver for this item (if it's a vehicle with a driver)
+     */
     getDriver(): Human | undefined;
     /**
      * Gets the item's damage modifier which certain special items have so they can have high durability for use, but normal damage ranges.
@@ -189,6 +227,12 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
     getDecayRate(isClientSide: boolean): number;
     getPreservationDecayMultiplier(): number;
     getTemperatureDecayMultiplier(isClientSide: boolean): number;
+    canHaveCooldown(): boolean;
+    /**
+     * @returns The cooldown for this item. `0` = just started cooldown, `1` = finished cooldown
+     */
+    getCooldown(human: Human): number;
+    getVisualCooldown(human: Human): number;
     getTotalWeight(bypassContainer?: boolean, targetContainer?: IContainer): number;
     getDisassemblyItems(): IItemDisassembleResult | undefined;
     isNearby(executor: Entity, allowNearby?: boolean): boolean;
@@ -197,6 +241,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
      * Note: This is not called by clients joining a mp game.
      */
     verifyAndFixItem(): void;
+    verifyAndFixMagic(): void;
     /**
      * @param source A string representing the reason for this damage. Used for multiplayer debugging. Just put a unique string of characters here
      * @param modifier The amount of damage to take. Defaults to 1.
@@ -208,6 +253,11 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
     isEquipped(includeDisabled?: true): boolean;
     getEquipSlot(includeDisabled?: true): EquipType | undefined;
     changeInto(type: ItemType, options?: Partial<IItemChangeIntoOptions>): void;
+    /**
+     * Verifies an item has the proper magical properties and rerolls individual ones if needed.
+     * @returns True if the item had a glowing magical property.
+     */
+    verifyMagicalProperties(): boolean;
     /**
      * Verifies an item has a proper weight combined with its magical item weight (featherweight) property and changes it if not.
      * @returns A type of change via ItemWeightChange for showing a new magical property was added or a new magical weight was added. If no change happened, it will return undefined.
@@ -225,12 +275,17 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
     spawnCreatureOnItem(tile: Tile, creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingTile?: Human, maxTilesChecked?: number): Creature | undefined;
     get point(): IVector3 | undefined;
     get tile(): Tile | undefined;
-    dropInWater(human: Human, tile?: Tile, skipParticles?: boolean): void;
+    dropInWater(human: Human | undefined, tile?: Tile, skipParticles?: boolean): void;
     placeOnTile(tile: Tile, options?: IPlaceOnTileOptions): boolean;
     /**
      * Unsupported
      */
     moveTo(): boolean;
+    /**
+     * Moves an item based on the result of a mob check.
+     * This will apply side effects based on what the item hits / where the item lands
+     */
+    moveToTileWithMobCheck(mobCheck: IMobCheck, human: Human | undefined): IMoveToTileMobCheckResult;
     /**
      * Moves an item to a target point / container while animating it
      * @param options Movement options
@@ -238,35 +293,50 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
      */
     moveToTile(options: IMoveToTileOptions): boolean;
     getMovementOptions(): IMoveToTileOptions | undefined;
-    protected onMovementCompleted(): void;
+    protected onMovementCompleted(movingData: IMovingData): void;
     setQuality(human: Human | undefined, quality?: Quality): void;
+    /**
+     * Get acceptable magical types based on item
+     */
     getValidMagicalProperties(): MagicalPropertyType[];
     addMagicalProperties(count: number, source?: string): boolean;
     rerollMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     rerollMagicalPropertyValues(): void;
+    initializeMagicalPropertyManager(): MagicalPropertyManager;
     addMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     getMagicalPropertyInfo(type: MagicalPropertyType): IMagicalPropertyInfo | undefined;
-    acquireNotify(human: Human): void;
+    acquireNotify(human: Human, context?: ActionContext): void;
     getStokeFireValue(): number | undefined;
     getStokeFireBonusValue(): number;
     getOnUseBonus(): number;
     getAttackDamage(type: AttackType.MeleeWeapon | AttackType.RangedWeapon): number;
     /**
-     * Gets the worth of an item used for merchant trading. Does not consider batering or modifiers bonuses; use Item.getTraderSellPrice for that.
+     * Gets the worth of an item used for merchant trading. Does not consider bartering or modifiers bonuses; use Item.getTraderSellPrice for that.
      * @param human The human that is trading the item for its worth (used for durability calculations).
      * @param magicalWorth Include the value of `MagicalPropertyType.Worth`, defaults to true
      */
     getWorth(human: Human | undefined, magicalWorth?: boolean): number;
     /**
-     * The full price the item will go for when traded to a merchant NPC. Considers modifiers and a human's bartering skill.
-     * @param human The human that is trading the item.
-     * @param magicalWorth Include the value of `MagicalPropertyType.Worth`, defaults to true
+     * Checks to see if the item is in a fire/hot thing
      */
-    getTraderSellPrice(human: Human | undefined, magicalWorth?: boolean): number;
     canBurnPlayer(): boolean;
+    /**
+     * Get the base defense of an item plus its magical defense stat if applicable
+     */
     getBaseDefense(): number;
+    /**
+     * Returns the durability of the item based on the max durability to be used as a pseudo "charge"
+     */
     getDurabilityCharge(): number;
+    removeMagic(): void;
+    /**
+     * Reverts properties of an item from a disassembly item (IItemDisassembly)
+     * @param disassemblyItem	Disassembly item to revert from
+     * @param placeOnTile	Place the item on a tile after reverting if set to a tile
+     */
+    revertFromDisassembly(disassemblyItem: IItemDisassembly, placeOnTile?: Tile): void;
     revertFromDoodad(doodad: Doodad): void;
+    copyPropertiesFrom(fromItem: Item): void;
     getWeightCapacity(): number | undefined;
     /**
      * Returns the container weight reduction
@@ -274,6 +344,9 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
      * @returns 1 if there is no reducton or [-50% + magical storing values]
      */
     getContainerWeightReduction(container?: IContainer | undefined): number;
+    /**
+     * Can the item be refined based on disassembly items and minimum getWeight tables?
+     */
     canBeRefined(): boolean;
     getProducedTemperature(): number | undefined;
     postProcessDecay(): void;
@@ -281,26 +354,56 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
     getEquipmentInsulation(type: TempType): number;
     getBaseTemperature(): number | undefined;
     /**
-     * Sets the item's decay with some added randomization.
+     * Gets the ticks until this item will decay at 1x decay speed.
+     * @param resetIfUnset True if it should reset decay if it doesn't exist
      */
-    setDecay(overrideDefault?: number): void;
+    getDecayTime(resetIfUnset?: boolean): number | undefined;
+    /**
+     * Increases the time until the item will decay (ticks until it decays at 1x decay speed).
+     */
+    addDecayTime(time?: number): number | undefined;
+    /**
+     * Decreases the time until the item will decay (ticks until it decays at 1x decay speed).
+     */
+    reduceDecayTime(time?: number): number | undefined;
+    /**
+     * Sets the item's decay time (ticks until it decays at 1x decay speed).
+     */
+    setDecayTime(decayTime?: number): void;
+    /**
+     * Resets the item's decay with some added randomization.
+     */
+    resetDecayTime(overrideDefault?: number): void;
     /**
      * Gets the item's max decay value based on quality. The max number can be modified slightly due to overrideDefault (crafting) and adding fuel which goes over this max.
      * @param overrideDefault Override the item's decayMax definition with something else.
      * @param withRandomization True if you want to return a randomized value (useful when setting the value on an item).
-     * @returns A number equal to the maximum item decay or 0 if the item should not have decay at all.
+     * @returns A number equal to the maximum item decay or `undefined` if the item should not have decay at all.
      */
-    getMaxDecay(overrideDefault?: number, withRandomization?: boolean): number;
+    getMaxDecayTime(overrideDefault?: number, withRandomization?: boolean): number | undefined;
     /**
-     * Gets the inherit item type.
+     * Gets the skill type associated with the item, or choose a random one if the description is an array.
      */
-    getInheritItemRecipeSkill(): SkillType;
+    getSkillUse(): SkillType;
+    /**
+     *
+     * @param action Gets the consume skill for the given action (Eat, Heal, HealOther, DrinkItem, or Cure) on the item
+     */
+    getConsumeSkillUse(action: ActionType): SkillType;
     getDamageType(): DamageType;
     /**
      * Returns the damage types associated with a skill with a fallback for whatever damage types the item normally provides
      * @param skillType The skill to get default damage types from
      */
     getDamageTypesForSkill(skillType: SkillType): DamageType[] | undefined;
+    /**
+     * Used to return the quality bonuses for crafting with superior/remarkable/exceptional items
+     */
+    getCraftQualityBonus(required?: boolean): number;
+    /**
+     * Item tier bonus
+     */
+    getCraftTierBonus(group?: ItemTypeGroup, required?: boolean): number;
     /**
      * Gets the item's quality and action level (how good it is at doing the action).
      * @param action The ActionType you are trying to get the level for.
@@ -313,6 +416,12 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
      * @param human Human entity that is carrying the item to extinguish.
      */
     extinguish(human: Human | undefined): void;
+    /**
+     * Spawns a slither sucker from its item form.
+     * @param tile The tile to attempt to spawn on to.
+     * @param human The human the creature is facing from (in the case where we prefer facing tile).
+     */
+    spawnSlithSucker(tile: Tile, human: Human | undefined): void;
     /**
      * Get the maximum durability for an item based on many factors.
      * @param human Player that we checking to get the maximum item durability (as game options can affect this).
@@ -338,8 +447,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
      * @returns number of score (or 0 if no civilization score is set).
      */
     getCivilizationScore(actionType: ActionType.Build | ActionType.SetDown): number;
-    getVehicle(): import("game/item/IItem").IItemVehicle | undefined;
-    isVehicleAllowedOnTile(tile: Tile): boolean;
+    getVehicle(): IItemVehicle | undefined;
     addCreature(creature: Creature, remainTamed?: boolean): void;
     /**
      * Tries restoring the creature on the target tile and fans out to nearby tiles if it's occupied
@@ -379,6 +487,11 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Item
      * @returns number The base defense value.
      */
     getBaseDefenseWithBonus(): number;
+    /**
+     * When the item melts, it will leave behind items that are specified in the leaveDissassemblyItemsOnMelt property
+     * @param container The container to leave the items in or on
+     */
+    dropItemsOnMelt(container: IContainer): void;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;
 }

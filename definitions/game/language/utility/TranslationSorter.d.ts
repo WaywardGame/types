@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Dictionary from "language/Dictionary";
-import Translation from "language/Translation";
+import type Dictionary from "@wayward/game/language/Dictionary";
+import Translation from "@wayward/game/language/Translation";
 export interface ITranslationSorter<T = number> {
     (a: T, b: T): number;
     /**
@@ -39,7 +39,7 @@ export interface ITranslationSorter<T = number> {
      */
     setTranslator<T2 = T>(translator: ITranslationSorter.Translator<T2>): ITranslationSorter<T2>;
 }
-declare module ITranslationSorter {
+declare namespace ITranslationSorter {
     type EntryMapper<T = any> = (v: T) => number;
     type SortFallback<T = any, A extends any[] = any[]> = (a: T, b: T, entryA: T extends Translation ? undefined : number, entryB: T extends Translation ? undefined : number, stringA: string, stringB: string, ...args: A) => number;
     type Translator<T = any> = (v: T, entry?: number, dictionary?: Dictionary, index?: number) => Translation | string | undefined;

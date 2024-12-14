@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Stream from "@wayward/goodstream";
 export type Until<T> = Record<string, (...args: any[]) => T>;
 export type UntilHandler<T, U extends Until<T>> = {
     [key in keyof U]: {
@@ -16,11 +15,12 @@ export type UntilHandler<T, U extends Until<T>> = {
         end: U[key];
     };
 };
-type EmptyIfUndefined<T> = T extends undefined ? {} : T;
+type EmptyIfUndefined<T> = T extends undefined ? Empty : T;
 export declare abstract class Manipulator<T, U extends Until<T> | undefined = undefined> {
     protected readonly element: () => HTMLElement;
     protected readonly host: T;
-    protected untilHandler?: UntilHandler<T, EmptyIfUndefined<U>>;
+    protected getUntilHandler?(): UntilHandler<T, EmptyIfUndefined<U>>;
+    private untilHandler?;
     constructor(host: T, element: () => HTMLElement);
     until(promise: Promise<any>): EmptyIfUndefined<U>;
     until(ms: number): EmptyIfUndefined<U>;
@@ -33,7 +33,7 @@ export interface ClassUntil<T> extends Until<T> {
     toggle(hasClass: boolean, ...classes: string[]): T;
 }
 export declare class ClassManipulator<T> extends Manipulator<T, ClassUntil<T>> {
-    protected untilHandler: {
+    protected getUntilHandler(): {
         add: {
             start: (...classes: string[]) => T;
             end: (...classes: string[]) => T;
@@ -59,8 +59,7 @@ export declare class ClassManipulator<T> extends Manipulator<T, ClassUntil<T>> {
     hasEvery(...classes: string[]): boolean;
     hasNone(...classes: string[]): boolean;
     hasAny(...classes: string[]): boolean;
-    values(): IterableIterator<string>;
-    stream(): Stream<string>;
+    values(): IteratorObject<string>;
 }
 export interface IElementWrapper {
     element: HTMLElement;
@@ -70,13 +69,13 @@ export interface AttributeUntil<T> extends Until<T> {
     set(attributes: Iterable<[string, string | null]>): T;
 }
 export declare class AttributeManipulator<T> extends Manipulator<T, AttributeUntil<T>> {
-    protected untilHandler: {
+    protected getUntilHandler(): {
         set: any;
     };
     set(name: string, value: string): T;
     set(attributes: Iterable<[string, string | null]>): T;
     get(name: string): string;
-    get(firstAttribute: string, secondAttribute: string, ...attributes: string[]): Stream<[string, string | null]>;
+    get(firstAttribute: string, secondAttribute: string, ...attributes: string[]): Array<[string, string | null]>;
     remove(...attributes: string[]): T;
     has(...attributes: string[]): boolean;
     private getAttributeIterator;
@@ -85,7 +84,7 @@ export declare class DataManipulator<T> extends Manipulator<T> {
     set(name: string, value: string): T;
     set(data: Iterable<[string, string | undefined]>): T;
     get(name: string): string;
-    get(name: string, ...keys: string[]): Stream<[string, string | undefined]>;
+    get(name: string, ...keys: string[]): Array<[string, string | undefined]>;
     remove(...keys: string[]): T;
     has(...keys: string[]): boolean;
     private getDataIterator;
@@ -94,7 +93,7 @@ export interface StyleUntil<T> extends Until<T> {
     set(rule: string, value: string): T;
 }
 export declare class StyleManipulator<T> extends Manipulator<T, StyleUntil<T>> {
-    protected untilHandler: {
+    protected getUntilHandler(): {
         set: {
             start: (rule: string, value: string | number) => T;
             end: (rule: string) => T;

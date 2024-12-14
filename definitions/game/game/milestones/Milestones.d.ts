@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Milestone } from "game/milestones/IMilestone";
-import MilestoneDefinition from "game/milestones/MilestoneDefinition";
-import Dictionary from "language/Dictionary";
+import { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import MilestoneDefinition from "@wayward/game/game/milestones/MilestoneDefinition";
+import Dictionary from "@wayward/game/language/Dictionary";
 export declare const milestoneDescriptions: Descriptions<Milestone, MilestoneDefinition>;
 export declare const milestoneDictionaries: Partial<Record<Milestone, Dictionary>>;
+export declare namespace Milestones {
+    function initializeDynamic(): void;
+}

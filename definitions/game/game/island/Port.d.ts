@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type { IslandId } from "game/island/IIsland";
-import type Island from "game/island/Island";
-import type { Reference, ReferenceType } from "game/reference/IReferenceManager";
-import { type ISerializedTranslation } from "language/ITranslation";
-import TranslationImpl from "language/impl/TranslationImpl";
-import { type ISerializer, type IUnserializedCallback } from "save/serializer/ISerializer";
-import type { IVector3 } from "utilities/math/IVector";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
+import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
+import { type ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import { type ISerializer, type IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 interface IPort {
     id: number;
     islandId: IslandId;

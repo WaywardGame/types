@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,23 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { BiomeType } from "game/biome/IBiome";
-import type Creature from "game/entity/creature/Creature";
-import type { CreatureType, IDamageOutcome, IDamageOutcomeInput } from "game/entity/creature/ICreature";
-import type Human from "game/entity/Human";
-import type { DamageType, Defense } from "game/entity/IEntity";
-import type NPC from "game/entity/npc/NPC";
-import type { IIslandTemplate, TickFlag, TileUpdateType } from "game/IGame";
-import type Port from "game/island/Port";
-import type { MultiplayerLoadingDescription } from "game/meta/Loading";
-import type { TerrainType } from "game/tile/ITerrain";
-import type Tile from "game/tile/Tile";
-import type { ISerializedTranslation } from "language/ITranslation";
-import type World from "renderer/world/World";
-import type { IVector2, IVector3 } from "utilities/math/IVector";
-import type { SeedType } from "utilities/random/IRandom";
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { CreatureType, IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "@wayward/game/game/entity/creature/ICreature";
+import type Human from "@wayward/game/game/entity/Human";
+import type { DamageType, Defense } from "@wayward/game/game/entity/IEntity";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type { TickFlag, TileUpdateType } from "@wayward/game/game/IGame";
+import type Port from "@wayward/game/game/island/Port";
+import type { MultiplayerLoadingDescription } from "@wayward/game/game/meta/Loading";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import type World from "@wayward/game/renderer/world/World";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { SeedType } from "@wayward/utilities/random/IRandom";
 export type IslandId = `${number},${number}`;
-export declare module IslandPosition {
+export declare namespace IslandPosition {
     function toId(position: IVector2): IslandId;
     function fromId(id: IslandId): IVector2 | undefined;
     function isTransient(id: IslandId): boolean;
@@ -49,8 +49,8 @@ export interface IIslandEvents {
      * Called when the island is deleted
      */
     delete(): void;
-    tickStart(tickFlag: TickFlag, ticks: number): any;
-    tickEnd(tickFlag: TickFlag, ticks: number): any;
+    tickStart(options: IIslandTickOptions): any;
+    tickEnd(options: IIslandTickOptions): any;
     /**
      * Called when a tile is updated (tile type changed, doodad created on it, etc)
      * @param tile The tile that was updated
@@ -97,11 +97,22 @@ export interface IIslandEvents {
     getDefense(defense: Defense | undefined, target: Human | Creature | CreatureType, damageType?: DamageType): Defense | undefined;
     calculateAttackOutcome(damageOutcome: IDamageOutcome, input: IDamageOutcomeInput, attackValue: number, defenseValue: number): IDamageOutcome | undefined;
     /**
-     * Called when determining how many ticks to process when fast forwarding an island during traveling
+     * Called when determining how many ticks to process when fast forwarding an island
      * @param fastForwardAmount Fast forward amount
-     * @param travelTime Travel time
      */
-    getFastForwardAmount(fastForwardAmount: number, travelTime: number): number | undefined;
+    getFastForwardAmount(fastForwardAmount: number): number | undefined;
+    fastForwardStart(): any;
+    fastForwardEnd(): any;
+    /**
+     * Emitted when random events are attempting to run on a tile.
+     * @returns `false` to cancel default events
+     */
+    randomEvents(tile: Tile, human: Human): boolean | undefined | void;
+    /**
+     * Called when damaging an entity
+     * @returns `false` to cancel default damage
+     */
+    damage(target: Human | Creature, damageInfo: IDamageInfo, attackOutcome: number): false | void;
 }
 export interface ILegacySeeds {
     type: SeedType.Legacy;
@@ -138,8 +149,9 @@ export interface IMoveToIslandOptions {
     nestedTravelCount: number;
 }
 export interface INewIslandOverrides {
+    mapSize: number;
     biomeType: BiomeType;
-    template: IIslandTemplate;
+    biomeOptions: unknown;
 }
 export interface IWell {
     quantity: number;
@@ -208,4 +220,16 @@ export interface ICopyHumanOptions {
     copyItemsAndEquipment?: false;
     copyStats?: false;
     copyStatus?: false;
+}
+export interface IIslandTickOptions {
+    ticks: number;
+    tickFlags?: TickFlag;
+    playingHumans?: Human[];
+    dueToAction?: Human;
+}
+export interface IIslandTickAsyncOptions extends IIslandTickOptions {
+    onProgress?: (progess: number) => Promise<void>;
+}
+export interface IIslandFastForwardOptions extends IIslandTickAsyncOptions {
+    multiplayerLoadingDescription?: MultiplayerLoadingDescription;
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,8 +11,10 @@
 import type Player from "@wayward/game/game/entity/player/Player";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { Application, ITestState } from "@wayward/test/core/application";
+import { ApplicationInteraction } from "@wayward/test/core/applicationInteraction";
 import type { INewGameOptions, ITestJoinServerOptions } from "@wayward/test/interfaces";
-export declare class Apps {
+import type { IAutomationSetup } from "@wayward/game/game/island/automation/IAutomation";
+export declare class ApplicationManager {
     private readonly _logs;
     private readonly _applications;
     private readonly _clients;
@@ -69,16 +71,21 @@ export declare class Apps {
     leaveServer(...apps: Application[]): Promise<void>;
     returnToTitleScreen(): Promise<void>;
     waitUntilLoadingIsFinished(): Promise<void>;
-    randomInput(count: number): Promise<void>;
+    removeNearbyCreatures(): Promise<void>;
+    randomMovement(count: number): Promise<void>;
     moveToTowardsIsland(app: Application, direction: Direction.Cardinal, recoverStats?: boolean): Promise<void>;
     recoverStats(app: Application): Promise<void>;
-    moveAndVerifyTicks(app: Application, direction: Direction.Cardinal): Promise<void>;
+    ascendDesend(app: Application): Promise<void>;
+    moveInDirection(app: Application, direction: Direction.Cardinal | Direction.None, steps?: number): Promise<void>;
+    executeAndWaitForNextTick(app: Application, executor: () => Promise<void>): Promise<void>;
     waitForClientConsistency(): Promise<void>;
+    createInteraction(application: Application): ApplicationInteraction;
     sailToCivilization(winnerApp: Application): Promise<void>;
     executeJavascript<T2 extends any[], T = void>(app: Application, executor: (player: Player, ...extraArgs: T2) => T, ...extraArgs: T2): Promise<T[]>;
     executeOnPlayingClients<T>(runnable: (app: Application) => Promise<T>): Promise<T[]>;
     executeOnApps<T>(apps: Application[], runnable: (app: Application) => Promise<T>, requiresDeterminism: boolean): Promise<T[]>;
     runWhilePaused(blockId: string, runnable: () => Promise<void>): Promise<void>;
+    setup(app: Application, setup: Readonly<IAutomationSetup>): Promise<void>;
     private bindApp;
     private log;
 }

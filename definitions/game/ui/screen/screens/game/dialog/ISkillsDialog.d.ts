@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,5 +10,6 @@
  */
 export declare enum SkillSort {
     Name = 0,
-    Level = 1
+    Level = 1,
+    Recent = 2
 }

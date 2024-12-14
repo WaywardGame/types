@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,24 +8,31 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IInspector } from "game/inspection/IInfoProvider";
-import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
+import type Player from "@wayward/game/game/entity/player/Player";
+import { InfoDisplayLevel } from "@wayward/game/game/inspection/IInfoProvider";
 export interface InfoProviderContextRegistration {
 }
+type InfoProviderContextInstance<ID extends InfoProviderContextType | keyof InfoProviderContextRegistration> = ID extends keyof InfoProviderContextRegistration ? InfoProviderContextRegistration[ID] : InfoProviderContext;
 export declare enum InfoProviderContextType {
     Generic = 0,
     Tooltip = 1
 }
 export declare class InfoProviderContext {
-    static readonly GENERIC: new (inspector?: IInspector | undefined, maxDisplayLevel?: InfoDisplayLevel | undefined) => InfoProviderContext;
-    static readonly TOOLTIP: new (inspector?: IInspector | undefined, maxDisplayLevel?: InfoDisplayLevel | undefined) => InfoProviderContext;
-    protected readonly _inspector: WeakRef<IInspector>;
+    private static readonly classes;
+    static register<ID extends keyof InfoProviderContextRegistration>(id: ID, cls: Class<InfoProviderContextRegistration[ID]>): void;
+    static init<ID extends InfoProviderContextType | keyof InfoProviderContextRegistration>(id: ID, saved: InfoProviderContextInstance<ID>): InfoProviderContextInstance<ID>;
+    static readonly GENERIC: new (inspector?: Player | undefined, maxDisplayLevel?: InfoDisplayLevel | undefined) => InfoProviderContext;
+    static readonly TOOLTIP: new (inspector?: Player | undefined, maxDisplayLevel?: InfoDisplayLevel | undefined) => InfoProviderContext;
+    private readonly inspectorRef?;
+    get inspector(): Player | undefined;
     readonly type: InfoProviderContextType | keyof InfoProviderContextRegistration;
-    readonly maxDisplayLevel: InfoDisplayLevel;
+    maxDisplayLevel: InfoDisplayLevel;
     constructor(context: InfoProviderContext);
-    constructor(type: InfoProviderContextType | keyof InfoProviderContextRegistration, inspector?: IInspector, maxDisplayLevel?: InfoDisplayLevel);
-    get inspector(): IInspector | undefined;
+    constructor(type: InfoProviderContextType | keyof InfoProviderContextRegistration, inspector?: Player, maxDisplayLevel?: InfoDisplayLevel);
     is(...types: Array<InfoProviderContextType | keyof InfoProviderContextRegistration>): boolean;
     as<TYPE extends keyof InfoProviderContextRegistration>(type: TYPE): InfoProviderContextRegistration[TYPE] | undefined;
     as(type: InfoProviderContextType): InfoProviderContext | undefined;
+    equals(b: InfoProviderContext & Partial<this>): boolean;
+    setMaxDisplayLevel(maxDisplayLevel?: InfoDisplayLevel): this;
 }
+export {};

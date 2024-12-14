@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import Component from "ui/component/Component";
-import Bindable from "ui/input/Bindable";
-import { IInput, InputCatalyst, Modifier } from "ui/input/IInput";
-import HashMap from "utilities/collection/map/HashMap";
-import Vector2 from "utilities/math/Vector2";
+import Component from "@wayward/game/ui/component/Component";
+import Bindable from "@wayward/game/ui/input/Bindable";
+import { IInput, InputCatalyst, Modifier } from "@wayward/game/ui/input/IInput";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
+import HashMap from "@wayward/utilities/collection/map/HashMap";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export declare class InputInfo {
     readonly catalyst: InputCatalyst;
     /**
@@ -56,10 +56,11 @@ export declare class GlobalMouseInfo extends EventEmitter.Host<IGlobalMouseInfoE
      * The element the mouse is currently hovering over.
      */
     get targetElement(): HTMLElement | undefined;
+    updateTargetNextTick(): void;
     /**
      * Forces a target update. Use as much as you want now ;)
      */
-    updateTarget(): void;
+    updateTarget(force?: boolean): void;
     update(evt: Event & Partial<MouseEvent> & Partial<TouchEvent>): void;
     /**
      * Returns whether the mouse is currently within the given component, element, or selector, or its descendants.
@@ -73,7 +74,6 @@ export declare class GlobalMouseInfo extends EventEmitter.Host<IGlobalMouseInfoE
      * @param recalcTarget Whether to recalculate the target before this operation. Defaults to `false`
      */
     isTarget<W extends Component | Element | string | undefined>(what?: W, recalcTarget?: boolean): (W extends Component ? W : HTMLElement) | undefined;
-    invalidateTarget(): void;
     private _updateTarget;
 }
 interface IInputInfoEvents {

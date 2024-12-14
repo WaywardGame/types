@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IHasImagePath } from "game/IObject";
-import type { IGameOptions, IGameOptionsPlayer } from "game/options/IGameOptions";
-import type { IModdable } from "mod/ModRegistry";
-import type Tooltip from "ui/tooltip/Tooltip";
+import type { IHasImagePath } from "@wayward/game/game/IObject";
+import type { IGameOptions, IGameOptionsPlayer } from "@wayward/game/game/options/IGameOptions";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 export declare enum GameOptionsIcon {
     Peaceful = 0,
     Creatures = 1,
@@ -19,25 +19,24 @@ export declare enum GameOptionsIcon {
     EternalDay = 3,
     EternalNight = 4,
     Time = 5,
-    Benignity = 6,
-    Malignity = 7,
-    Health = 8,
-    Stamina = 9,
-    Hunger = 10,
-    Thirst = 11,
-    Bleeding = 12,
-    Poisoned = 13,
-    Burned = 14,
-    Skills = 15,
-    NoItems = 16,
-    Weight = 17,
-    Crafting = 18,
-    Items = 19,
-    Travel = 20
+    Health = 6,
+    Stamina = 7,
+    Hunger = 8,
+    Thirst = 9,
+    Bleeding = 10,
+    Poisoned = 11,
+    Burned = 12,
+    Skills = 13,
+    NoItems = 14,
+    Weight = 15,
+    Crafting = 16,
+    Items = 17,
+    Travel = 18,
+    Luck = 19
 }
 export interface IGameOptionsIcon extends IModdable, IHasImagePath {
-    check(options: IGameOptions, localPlayerOption: IGameOptionsPlayer): boolean;
-    tooltip?(tooltip: Tooltip, options: IGameOptions, localPlayerOption: IGameOptionsPlayer): any;
+    check(options: IGameOptions, localPlayerOption: ImmutableObject<IGameOptionsPlayer>): boolean;
+    tooltip?(tooltip: Tooltip, options: IGameOptions, localPlayerOption: ImmutableObject<IGameOptionsPlayer>): any;
 }
 declare const gameOptionsIcons: Descriptions<GameOptionsIcon, IGameOptionsIcon>;
 export default gameOptionsIcons;

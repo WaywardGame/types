@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type ISpriteInfo from "renderer/ISpriteInfo";
-import type Vector2 from "utilities/math/Vector2";
+import type { ISpriteInfo } from "@wayward/game/renderer/ISpriteInfo";
+import type Vector2 from "@wayward/game/utilities/math/Vector2";
 export default class SpriteInfo implements ISpriteInfo {
     texCoord: Vector2;
     texWidth: number;

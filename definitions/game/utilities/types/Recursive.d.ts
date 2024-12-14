@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type DefaultMap from "utilities/collection/map/DefaultMap";
-import type RandomValueGenerator from "utilities/random/RandomValueGenerator";
+import type DefaultMap from "@wayward/game/utilities/collection/map/DefaultMap";
+import type RandomValueGenerator from "@wayward/game/utilities/random/RandomValueGenerator";
 export type RecursivePartial<T> = {
     map: T extends Map<infer K, infer V> ? Map<K, RecursivePartial<V>> : never;
     defaultmap: T extends DefaultMap<infer K, infer V> ? DefaultMap<K, RecursivePartial<V>> : never;

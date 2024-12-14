@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,33 +8,37 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SfxType } from "audio/IAudio";
-import EventEmitter from "event/EventEmitter";
-import type { ActionExecutorEvents, AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionExample, IActionNotUsable, IActionParticle, IActionSoundEffect, IActionUsable, IProtectedItems } from "game/entity/action/IAction";
-import { ActionArgument, ActionType } from "game/entity/action/IAction";
-import type Entity from "game/entity/Entity";
-import type Human from "game/entity/Human";
-import type { SkillType } from "game/entity/IHuman";
-import type { TurnTypeFlag } from "game/entity/player/IPlayer";
-import type Item from "game/item/Item";
-import type { IPromptDescriptionBase, PromptDescriptionArgs } from "game/meta/prompt/IPrompt";
-import type { Milestone } from "game/milestones/IMilestone";
-import type Tile from "game/tile/Tile";
-import ActionPacket from "multiplayer/packets/shared/ActionPacket";
-import type { IRGB } from "utilities/Color";
-import type { Direction } from "utilities/math/Direction";
-import type { IVector3 } from "utilities/math/IVector";
-export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R, CU extends IActionUsable, AV extends any[]> extends EventEmitter.Host<ActionExecutorEvents> implements IActionApi<E, CU>, IActionConfirmerApi<E, CU> {
+import type { SfxType } from "@wayward/game/audio/IAudio";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
+import type Entity from "@wayward/game/game/entity/Entity";
+import type Human from "@wayward/game/game/entity/Human";
+import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { ActionArguments, ActionExecutorEvents, AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionExample, IActionParticle, IActionSoundEffect, IActionUsable, IProtectedItems, SkillGain } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType, BlockFlag, IActionNotUsable } from "@wayward/game/game/entity/action/IAction";
+import IActionContext from "@wayward/game/game/entity/action/IActionContext";
+import type { TurnTypeFlag } from "@wayward/game/game/entity/player/IPlayer";
+import type Item from "@wayward/game/game/item/Item";
+import type { IPromptDescriptionBase, PromptDescriptionArgs } from "@wayward/game/game/meta/prompt/IPrompt";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
+import type Translation from "@wayward/game/language/Translation";
+import ActionPacket from "@wayward/game/multiplayer/packets/shared/ActionPacket";
+import type { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { IRGB } from "@wayward/utilities/Color";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+export default class ActionExecutor<A extends ActionArguments, E extends Entity, R, CU extends IActionUsable, AV extends any[]> extends EventEmitter.Host<ActionExecutorEvents> implements IActionApi<E, CU>, IActionConfirmerApi<E, CU> {
     /**
      * Gets an action by its description. If you're using the Action class for constructing the descriptions, just pass the action instance.
      *
      * Note: Prefer `IActionApi.get` if you're calling this from within another action.
      */
     static get<D extends AnyActionDescription>(action: D): D extends IActionDescription<infer A, infer E, infer R, infer CU, infer AV> ? ActionExecutor<A, E, R, CU, AV> : never;
-    static executeMultiplayer(packet: ActionPacket, executor?: Entity<unknown, number, unknown, unknown> | undefined, nonMpActionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any, any, any[]>): any;
+    static executeMultiplayer(packet: ActionPacket, executor?: Entity<unknown, number, import("../../reference/IReferenceManager").EntityReferenceTypes, unknown> | undefined, nonMpActionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any, any, any[]>): unknown;
     get executor(): E;
     get actionStack(): ActionType[];
-    get lastAction(): ActionType;
+    get callingAction(): ActionType;
     /**
      * Check if the action has setup CanUse logic
      */
@@ -46,23 +50,30 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private _actionArgs;
     private executionStage;
     private shouldSkipConfirmation;
+    targetTile?: Tile;
     private readonly privateStore;
     private updateTablesAndWeight;
     private updateWeight;
     private staminaReduction?;
-    private reputationChange;
+    private runeChance?;
     private milestone?;
     private skillGains?;
     private sfx?;
     private particle?;
     private updateView?;
     private updateRender?;
+    private context?;
     private readonly items;
     private itemsUsed;
     private readonly action;
+    use: CU;
     constructor(action?: IActionDescription<A, E, R, CU>, type?: number | undefined);
     get description(): IActionDescription<A, E, R, CU>;
     skipConfirmation(): this;
+    /**
+     * Checks if stuff is blocking the tile
+     */
+    isTileBlocked(tile: Tile, ...blockFlags: BlockFlag[]): boolean;
     /**
      * Check if a creature on a tile and blocking the execution of the action
      * @returns
@@ -86,15 +97,17 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
      * Alternate version of canUse that allows you to specify the facing point.
      * Use with caution as this probably won't work for some actions
      */
-    canUseWhileFacing(executor: E, position: IVector3, direction: Direction.Cardinal, ...args: AV): CU | IActionNotUsable;
+    canUseWhileFacing(executor: E, position: IVector3, direction?: Direction.Cardinal, ...args: AV): CU | IActionNotUsable;
     private processNotUsableResult;
-    execute(actionApiOrExecutor: IActionApi<E, CU> | E, ...args: AV): R | Promise<R>;
-    executeConfirmer(actionApiOrExecutor: IActionApi<E, CU> | E, args: AV, argumentTypes?: ActionArgument[]): Promise<boolean>;
+    execute(actionApiOrExecutor: IActionApi<E, CU> | E, ...args: AV): PromiseOr<R | undefined>;
+    executeConfirmer(actionApiOrExecutor: IActionApi<E, CU> | E, args: AV): Promise<boolean>;
     /**
      * Prompts the user about something
      */
     prompt<PROMPT extends IPromptDescriptionBase<any[]>>(prompt: PROMPT, ...args: PromptDescriptionArgs<PROMPT>): Promise<boolean>;
     isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is IActionArgumentTypeMap[AA];
+    setContext(tool?: Item | Translation, target?: ArrayOr<Entity> | Tile | Translation, details?: Record<string, TranslationArg>): IActionContext | undefined;
+    getContext(): IActionContext;
     setDelay(delay: number, replace?: boolean): this;
     setPassTurn(turnType?: TurnTypeFlag): this;
     setUpdateView(updateFov?: boolean): this;
@@ -102,9 +115,9 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setUpdateTablesAndWeight(): this;
     setUpdateWeight(): this;
     setStaminaReduction(reduction?: SkillType, actionTier?: number): this;
-    setReputationChange(amount: number): this;
-    addSkillGains(...skills: Array<[SkillType, number?, number?, true?]>): this;
-    addSkillGains(skill: SkillType, amount?: number, actionTier?: number, bypass?: true): this;
+    setRuneChance(chanceOrDeity: ArrayOr<DeityReal> | number | undefined, chance?: number): this;
+    addSkillGains(...skills: SkillGain[]): this;
+    addSkillGains(skill: SkillType, amount?: number, actionTier?: number, bypass?: true, times?: number): this;
     setMilestone(milestone: Milestone, data?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
@@ -118,11 +131,13 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setItemsUsed(used?: boolean): this;
     confirmItemsBroken(executor: E): Promise<boolean>;
     private checkConfirmer;
+    private silent?;
+    setSilent(silent?: boolean): this;
     private executeInternalOrMultiplayer;
     private executeInternal;
     private createActionPacket;
     private handleApiOnActionFailure;
-    protected handleReputationChange(human: Human): void;
+    protected giveRune(human: Human): void;
     private handleApi;
     private canExecute;
     private isUsableWhen;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,40 +8,49 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Audio from "audio/Audio";
-import type Doodad from "game/doodad/Doodad";
-import type DoodadManager from "game/doodad/DoodadManager";
-import type ActionExecutor from "game/entity/action/ActionExecutor";
-import type Corpse from "game/entity/creature/corpse/Corpse";
-import type CorpseManager from "game/entity/creature/corpse/CorpseManager";
-import type Creature from "game/entity/creature/Creature";
-import type CreatureManager from "game/entity/creature/CreatureManager";
-import type Entity from "game/entity/Entity";
-import type EntityManager from "game/entity/EntityManager";
-import type EntityMovable from "game/entity/EntityMovable";
-import type Human from "game/entity/Human";
-import type NPC from "game/entity/npc/NPC";
-import type NPCManager from "game/entity/npc/NPCManager";
-import type Player from "game/entity/player/Player";
-import type PlayerManager from "game/entity/player/PlayerManager";
-import type { Game } from "game/Game";
-import type Island from "game/island/Island";
-import type Item from "game/item/Item";
-import type ItemManager from "game/item/ItemManager";
-import type Loading from "game/meta/Loading";
-import type Prompts from "game/meta/prompt/Prompts";
-import type { MilestoneManager } from "game/milestones/MilestoneManager";
-import type TileEvent from "game/tile/TileEvent";
-import type TileEventManager from "game/tile/TileEventManager";
-import type LanguageManager from "language/LanguageManager";
-import type ModManager from "mod/ModManager";
-import type Multiplayer from "multiplayer/Multiplayer";
-import type WorldRenderer from "renderer/world/WorldRenderer";
-import type SaveManager from "save/SaveManager";
-import type Steamworks from "steamworks/Steamworks";
-import type ScreenManager from "ui/screen/ScreenManager";
-import type ActionBar from "ui/screen/screens/game/static/ActionBar";
-import type MovementHandler from "ui/screen/screens/game/util/movement/MovementHandler";
+import type Audio from "@wayward/game/audio/Audio";
+import type { Game } from "@wayward/game/game/Game";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type DoodadManager from "@wayward/game/game/doodad/DoodadManager";
+import type Entity from "@wayward/game/game/entity/Entity";
+import type EntityManager from "@wayward/game/game/entity/EntityManager";
+import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
+import type Human from "@wayward/game/game/entity/Human";
+import type ActionExecutor from "@wayward/game/game/entity/action/ActionExecutor";
+import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type CreatureManager from "@wayward/game/game/entity/creature/CreatureManager";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type CorpseManager from "@wayward/game/game/entity/creature/corpse/CorpseManager";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type NPCManager from "@wayward/game/game/entity/npc/NPCManager";
+import type MerchantNPC from "@wayward/game/game/entity/npc/npcs/Merchant";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type PlayerManager from "@wayward/game/game/entity/player/PlayerManager";
+import type Island from "@wayward/game/game/island/Island";
+import type Item from "@wayward/game/game/item/Item";
+import type ItemManager from "@wayward/game/game/item/ItemManager";
+import type Loading from "@wayward/game/game/meta/Loading";
+import type Prompts from "@wayward/game/game/meta/prompt/Prompts";
+import type { MilestoneManager } from "@wayward/game/game/milestones/MilestoneManager";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import type TileEventManager from "@wayward/game/game/tile/TileEventManager";
+import type LanguageManager from "@wayward/game/language/LanguageManager";
+import type ModManager from "@wayward/game/mod/ModManager";
+import type Multiplayer from "@wayward/game/multiplayer/Multiplayer";
+import type { Renderer } from "@wayward/game/renderer/Renderer";
+import type { WorldRenderer } from "@wayward/game/renderer/world/WorldRenderer";
+import type SaveManager from "@wayward/game/save/SaveManager";
+import type Steamworks from "@wayward/game/steamworks/Steamworks";
+import type ScreenManager from "@wayward/game/ui/screen/ScreenManager";
+import type GameScreen from "@wayward/game/ui/screen/screens/GameScreen";
+import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
+import type HoveredTileTracker from "@wayward/game/ui/screen/screens/game/util/HoveredTileTracker";
+import type ActionMenuHandler from "@wayward/game/ui/screen/screens/game/util/movement/ActionMenuHandler";
+import type InteractionManager from "@wayward/game/ui/screen/screens/game/util/movement/InteractionManager";
+import type MovementHandler from "@wayward/game/ui/screen/screens/game/util/movement/MovementHandler";
+import type PathingHandler from "@wayward/game/ui/screen/screens/game/util/movement/PathingHandler";
+import { EventBusManager } from "@wayward/utilities/event/EventBusManager";
 export declare enum EventBus {
     Actions = 0,
     Audio = 1,
@@ -63,23 +72,31 @@ export declare enum EventBus {
     Loading = 17,
     LocalIsland = 18,
     LocalPlayer = 19,
-    Milestones = 20,
-    Mods = 21,
-    Multiplayer = 22,
-    NPCManager = 23,
-    NPCs = 24,
-    PlayerManager = 25,
-    Players = 26,
-    Prompt = 27,
-    SaveManager = 28,
-    ScreenManager = 29,
-    Steamworks = 30,
-    TileEventManager = 31,
-    TileEvents = 32,
-    Ui = 33,
-    UiActionBar = 34,
-    UiMovementHandler = 35,
-    WorldRenderer = 36
+    MerchantNPCs = 20,
+    Milestones = 21,
+    Mods = 22,
+    Multiplayer = 23,
+    NPCManager = 24,
+    NPCs = 25,
+    PlayerManager = 26,
+    Players = 27,
+    Prompt = 28,
+    Renderer = 29,
+    SaveManager = 30,
+    ScreenManager = 31,
+    Steamworks = 32,
+    TileEventManager = 33,
+    TileEvents = 34,
+    Ui = 35,
+    UiActionBar = 36,
+    UiActionMenuHandler = 37,
+    UiGameScreen = 38,
+    UiHoveredTileTracker = 39,
+    UiInteractionManager = 40,
+    UiMovementHandler = 41,
+    UiPathingHandler = 42,
+    UsableActions = 43,
+    WorldRenderer = 44
 }
 declare const eventBuses: {
     [EventBus.Actions](): ActionExecutor<any, any, any, any, any>;
@@ -102,6 +119,7 @@ declare const eventBuses: {
     [EventBus.Loading](): Loading.Events;
     [EventBus.LocalIsland](): Island;
     [EventBus.LocalPlayer](): Player;
+    [EventBus.MerchantNPCs](): MerchantNPC;
     [EventBus.Milestones](): MilestoneManager;
     [EventBus.Mods](): ModManager;
     [EventBus.Multiplayer](): Multiplayer;
@@ -110,6 +128,7 @@ declare const eventBuses: {
     [EventBus.PlayerManager](): PlayerManager;
     [EventBus.Players](): Player;
     [EventBus.Prompt](): Prompts.Events;
+    [EventBus.Renderer](): Renderer;
     [EventBus.SaveManager](): SaveManager;
     [EventBus.ScreenManager](): ScreenManager;
     [EventBus.Steamworks](): Steamworks;
@@ -117,18 +136,69 @@ declare const eventBuses: {
     [EventBus.TileEvents](): TileEvent;
     [EventBus.Ui](): typeof ui;
     [EventBus.UiActionBar](): ActionBar;
+    [EventBus.UiActionMenuHandler](): ActionMenuHandler;
+    [EventBus.UiGameScreen](): GameScreen;
+    [EventBus.UiHoveredTileTracker](): HoveredTileTracker;
+    [EventBus.UiInteractionManager](): InteractionManager;
     [EventBus.UiMovementHandler](): MovementHandler;
+    [EventBus.UiPathingHandler](): PathingHandler;
+    [EventBus.UsableActions](): UsableAction;
     [EventBus.WorldRenderer](): WorldRenderer;
 };
-export interface IEventBusRegistration {
-    subscribe: NullaryFunction;
-    unsubscribe: NullaryFunction;
-}
-export default eventBuses;
-export declare module EventBus {
-    function register<E extends EventBus>(eventBus: E, classOrHost: ReturnType<(typeof eventBuses)[E]>): void;
+export type EventBuses = typeof eventBuses;
+export declare const eventBusManager: EventBusManager<EventBus, {
+    0(): ActionExecutor<any, any, any, any, any>;
+    1(): Audio;
+    2(): CorpseManager;
+    3(): Corpse;
+    4(): CreatureManager;
+    5(): Creature;
+    6(): DoodadManager;
+    7(): Doodad;
+    8(): Entity;
+    9(): EntityMovable;
+    10(): EntityManager<any>;
+    11(): Game;
+    12(): Human;
+    13(): Island;
+    14(): ItemManager;
+    15(): Item;
+    16(): LanguageManager;
+    17(): Loading.Events;
+    18(): Island;
+    19(): Player;
+    20(): MerchantNPC;
+    21(): MilestoneManager;
+    22(): ModManager;
+    23(): Multiplayer;
+    24(): NPCManager;
+    25(): NPC;
+    26(): PlayerManager;
+    27(): Player;
+    28(): Prompts.Events;
+    29(): Renderer;
+    30(): SaveManager;
+    31(): ScreenManager;
+    32(): Steamworks;
+    33(): TileEventManager;
+    34(): TileEvent;
+    35(): typeof ui;
+    36(): ActionBar;
+    37(): ActionMenuHandler;
+    38(): GameScreen;
+    39(): HoveredTileTracker;
+    40(): InteractionManager;
+    41(): MovementHandler;
+    42(): PathingHandler;
+    43(): UsableAction;
+    44(): WorldRenderer;
+}>;
+/**
+ * For backwards compat / ease of use
+ */
+export declare namespace EventBus {
+    function register<E extends EventBus>(eventBus: E, classOrHost: ReturnType<EventBuses[E]>): void;
     function register(eventBus: EventBus): (constructor: AbstractNullaryClass<any>) => any;
     function unregister(eventBus: EventBus): boolean;
-    function onEventBusRegistration(eventBus: EventBus, registration: IEventBusRegistration): void;
 }
-export type EventBusHost<E extends EventBus> = ReturnType<(typeof eventBuses)[E]>;
+export {};

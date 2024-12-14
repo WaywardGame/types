@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,9 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Tile from "game/tile/Tile";
-import type { WorldZ } from "game/WorldZ";
-import type { IRendererOrigin } from "renderer/context/RendererOrigin";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 export interface IVector2 {
     x: number;
     y: number;
@@ -21,10 +19,6 @@ export declare namespace IVector2 {
 export interface IVector3 extends IVector2 {
     z: WorldZ;
 }
-export declare module IVector3 {
+export declare namespace IVector3 {
     function is(value: unknown): value is IVector3;
 }
-export declare function objectIsOrWasInTile(tile: Tile, object: IVector3 & {
-    fromX?: number;
-    fromY?: number;
-} | IRendererOrigin): boolean;

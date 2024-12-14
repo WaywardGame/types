@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,12 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import Component from "@wayward/game/ui/component/Component";
+import { ScreenId } from "@wayward/game/ui/screen/IScreen";
+import Screen from "@wayward/game/ui/screen/Screen";
+import type { ScreenById } from "@wayward/game/ui/screen/ScreenMap";
 import Stream from "@wayward/goodstream/Stream";
-import EventEmitter from "event/EventEmitter";
-import Component from "ui/component/Component";
-import { ScreenId } from "ui/screen/IScreen";
-import Screen from "ui/screen/Screen";
-import type { ScreenById } from "ui/screen/ScreenMap";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+export declare enum ScreenClasses {
+    Main = "screen",
+    _Top = "screen--top",
+    _Obscured = "screen--obscured"
+}
 export interface IScreenManagerEvents {
     init(screen: Screen): any;
     show(screen: Screen): any;
@@ -68,6 +73,7 @@ export default class ScreenManager extends EventEmitter.Host<IScreenManagerEvent
      * Returns if the given screen id is a currently visible screen (either the main screen or the overlay screen).
      */
     isVisible(screenId: ScreenId): boolean;
+    hasOverlay(): boolean;
     /**
      * Shows a screen
      * @param screenId The id of the screen to show
@@ -76,7 +82,7 @@ export default class ScreenManager extends EventEmitter.Host<IScreenManagerEvent
     /**
      * Hides the given screen, or the current screen if none is passed.
      */
-    hide(screen: ScreenId | Screen): void;
+    hide(screen: ScreenId | Screen): Promise<void> | void;
     /**
      * Returns a promise that resolves when the given screen is shown.
      */

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,30 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { BiomeMapGen } from "game/biome/IBiome";
-import type { IBiomeTemperature } from "game/temperature/ITemperature";
-import { TerrainType } from "game/tile/ITerrain";
+import type { BiomeMapGen } from "@wayward/game/game/biome/IBiome";
+import type { IBiomeTemperature } from "@wayward/game/game/temperature/ITemperature";
+import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 declare const _default: {
     readonly defaultTerrainBackground: TerrainType.Ash;
     readonly defaultCaveEntranceFlooring: TerrainType.Ash;
     readonly fog: {
-        color: import("utilities/Color").IRGB;
-    };
-    readonly ferocity: {
-        1: {
-            1: number;
-            2: number;
-            3: number;
-            4: number;
-            5: number;
-        };
-        0: {
-            1: number;
-            2: number;
-            3: number;
-            4: number;
-            5: number;
-        };
+        color: import("@wayward/utilities/Color").IRGB;
     };
     mapGen: BiomeMapGen;
     temperature: IBiomeTemperature;

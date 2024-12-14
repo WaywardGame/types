@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,24 +8,25 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import { DoodadType } from "game/doodad/IDoodad";
-import type Human from "game/entity/Human";
-import type { IslandId } from "game/island/IIsland";
-import type Island from "game/island/Island";
-import type Item from "game/item/Item";
-import type { IMapGenGenerateOutput } from "game/mapgen/IMapGen";
-import MapBackground from "game/mapping/Background";
-import type { DrawnMapTheme } from "game/mapping/IMapRender";
-import type { IMapTileData } from "game/mapping/IMapTile";
-import Obfuscation from "game/mapping/Obfuscation";
-import type { IPreSerializeCallback, IUnserializedCallback } from "save/serializer/ISerializer";
-import type { IVector2, IVector3 } from "utilities/math/IVector";
-import { IRange } from "utilities/math/Range";
-import Sampler from "utilities/math/Sampler";
-import { LegacySeededGenerator } from "utilities/random/generators/LegacySeededGenerator";
-import { PCGSeededGenerator } from "utilities/random/generators/PCGSeededGenerator";
-import type { Random } from "utilities/random/Random";
+import { DoodadType } from "@wayward/game/game/doodad/IDoodad";
+import type Human from "@wayward/game/game/entity/Human";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
+import type Item from "@wayward/game/game/item/Item";
+import type { IMapGenGenerateOutput } from "@wayward/game/game/mapgen/IMapGen";
+import MapBackground from "@wayward/game/game/mapping/Background";
+import type { DrawnMapTheme } from "@wayward/game/game/mapping/IMapRender";
+import type { IMapTileData } from "@wayward/game/game/mapping/IMapTile";
+import Obfuscation from "@wayward/game/game/mapping/Obfuscation";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { IPreSerializeCallback, IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import Sampler from "@wayward/game/utilities/math/Sampler";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import { IRange } from "@wayward/utilities/math/Range";
+import type { Random } from "@wayward/utilities/random/Random";
+import { LegacySeededGenerator } from "@wayward/utilities/random/generators/LegacySeededGenerator";
+import { PCGSeededGenerator } from "@wayward/utilities/random/generators/PCGSeededGenerator";
 export declare enum DrawnMapType {
     Treasure = 0,
     Drawn = 1
@@ -143,7 +144,7 @@ export default class DrawnMap extends EventEmitter.Host<IDrawnMapEvents> impleme
     render(theme: DrawnMapTheme): Promise<HTMLCanvasElement | undefined>;
     getObfuscator(): Obfuscation;
     getBackground(): MapBackground;
-    getRiddle(): import("../../language/impl/TranslationImpl").default | undefined;
+    getRiddle(): TranslationImpl | undefined;
     private plot;
     private plotDifferences;
 }

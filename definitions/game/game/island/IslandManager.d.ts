@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,12 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Game } from "game/Game";
-import type { IslandId } from "game/island/IIsland";
-import type { IIslandDetails } from "game/island/Island";
-import Island from "game/island/Island";
-import type { IVector2 } from "utilities/math/IVector";
-import type { SeedType } from "utilities/random/IRandom";
+import type { Game } from "@wayward/game/game/Game";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type { IIslandDetails } from "@wayward/game/game/island/Island";
+import Island from "@wayward/game/game/island/Island";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
+import type { SeedType } from "@wayward/utilities/random/IRandom";
+import type { BiomeTypes } from "@wayward/game/game/biome/IBiome";
 export default class IslandManager extends Map<IslandId, Island> {
     private readonly game;
     constructor(game: Game);
@@ -52,7 +53,7 @@ export default class IslandManager extends Map<IslandId, Island> {
      * Unloads islands that are no longer needed
      */
     cleanup(): void;
-    getBiomeType(x: number, y: number): import("../biome/IBiome").BiomeTypes;
+    getBiomeType(x: number, y: number): BiomeTypes;
     getDetails(x: number, y: number): IIslandDetails;
     generateDetails(position: IVector2, seedType: SeedType, seed?: number): IIslandDetails;
 }

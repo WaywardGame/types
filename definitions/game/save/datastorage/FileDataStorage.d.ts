@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IWaywardPreload } from "@hosts/shared/interfaces";
-import type IAsyncDataStorage from "save/datastorage/IAsyncDataStorage";
-import type { ISaveObject } from "save/ISaveManager";
-import type SaveManager from "save/SaveManager";
+import type { IWaywardPreload } from "@wayward/hosts/shared/interfaces";
+import type IAsyncDataStorage from "@wayward/game/save/datastorage/IAsyncDataStorage";
+import type { ISaveObject } from "@wayward/game/save/ISaveManager";
+import type SaveManager from "@wayward/game/save/SaveManager";
 export default class FileDataStorage implements IAsyncDataStorage {
     private readonly saveManager;
     private readonly waywardPreload;

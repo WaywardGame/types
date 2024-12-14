@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Human from "@wayward/game/game/entity/Human";
+import type Island from "@wayward/game/game/island/Island";
+import type Dictionary from "@wayward/game/language/Dictionary";
+import type { ISerializedTranslation, TranslationArg } from "@wayward/game/language/ITranslation";
+import type Translation from "@wayward/game/language/Translation";
+import type Message from "@wayward/game/language/dictionary/Message";
+import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
+import type { IStringSection } from "@wayward/game/utilities/string/Interpolator";
 import type Stream from "@wayward/goodstream";
-import type Human from "game/entity/Human";
-import type Island from "game/island/Island";
-import type Dictionary from "language/Dictionary";
-import type { ISerializedTranslation, TranslationArg } from "language/ITranslation";
-import type Translation from "language/Translation";
-import type Message from "language/dictionary/Message";
-import type { IVector4 } from "utilities/math/Vector4";
-import type { IStringSection } from "utilities/string/Interpolator";
 export declare const CHAT_MESSAGE_MAX_LENGTH = 512;
 export declare enum Source {
     /**
@@ -88,13 +88,13 @@ export declare enum Source {
      */
     Stat = 16,
     /**
-     * The single message type that logs your reputation increases/reductions
-     */
-    Reputation = 17,
-    /**
      * Messages for events that happen without direct player action that don't belong to other categories, such as happenings from tile events
      */
-    Events = 18
+    Events = 17,
+    /**
+     * Trading-related messages
+     */
+    Trading = 18
 }
 export interface IMessage {
     id: number;
@@ -106,7 +106,7 @@ export interface IMessage {
 }
 export interface IPackedMessage {
     message: Message;
-    args?: Translation | any[];
+    args?: () => ArrayOr<TranslationArg>;
     type?: MessageType;
     sources?: Source | Source[];
 }
@@ -119,7 +119,7 @@ export interface IMessageManager {
     ifVisible(canSee?: IVector4): this;
     ifOnIsland(island: Island): this;
     send(message: Message | Translation, ...args: TranslationArg[]): boolean;
-    sendPacked(pack: Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
+    sendPacked(pack?: Message | Partial<IPackedMessage>, ...extraSources: Source[]): boolean;
     pruneMessageHistory(isLocalPlayer: boolean): boolean;
     ifIs(human: Human): this;
     ifIsNot(human: Human): this;
@@ -146,5 +146,6 @@ export declare enum MessageType {
     Attack = 4,
     Stat = 5,
     Skill = 6,
-    Warning = 7
+    Warning = 7,
+    Evil = 8
 }

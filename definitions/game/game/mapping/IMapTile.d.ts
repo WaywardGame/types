@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IHasImagePath } from "game/IObject";
-import type { TerrainType } from "game/tile/ITerrain";
-import type { IModdable } from "mod/ModRegistry";
-import type { Direction } from "utilities/math/Direction";
-import Vector2 from "utilities/math/Vector2";
-import type { Random } from "utilities/random/Random";
+import type { IHasImagePath } from "@wayward/game/game/IObject";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type { Direction } from "@wayward/game/utilities/math/Direction";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
+import type { Random } from "@wayward/utilities/random/Random";
 export declare enum MapTile {
     Unknown = 0,
     Land = 1,
@@ -30,7 +30,8 @@ export declare enum MapTile {
     CaveWall = 12,
     Obfuscation = 13,
     DiscoveredTreasure = 14,
-    Lighthouse = 15
+    Lighthouse = 15,
+    Void = 16
 }
 export declare const DRAWN_MAP_TILES_SAVED: Set<MapTile>;
 export interface IMapTileData {

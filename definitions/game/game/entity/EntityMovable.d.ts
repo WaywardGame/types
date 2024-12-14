@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,22 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SfxType } from "audio/IAudio";
-import type { IEventEmitter } from "event/EventEmitter";
-import Entity from "game/entity/Entity";
-import type { IEntityConstructorOptions, IEntityEvents, IMoveToOptions } from "game/entity/IEntity";
-import { MoveFlag } from "game/entity/IEntity";
-import { DamageType, MoveType } from "game/entity/IEntity";
-import { MovingClientSide } from "game/entity/IHuman";
-import type { IMovementTime } from "game/IGame";
-import type { IslandId } from "game/island/IIsland";
-import type Tile from "game/tile/Tile";
-import type { IRendererOrigin } from "renderer/context/RendererOrigin";
-import FieldOfView from "renderer/fieldOfView/FieldOfView";
-import type { CanASeeBType } from "renderer/fieldOfView/IFieldOfView";
-import type { Direction } from "utilities/math/Direction";
-import type { IVector2 } from "utilities/math/IVector";
-import type Vector2 from "utilities/math/Vector2";
+import type { SfxType } from "@wayward/game/audio/IAudio";
+import Entity from "@wayward/game/game/entity/Entity";
+import type { IAttackAnimationData, IEntityConstructorOptions, IEntityEvents, IMoveToOptions, IMovingData, ISlippingData } from "@wayward/game/game/entity/IEntity";
+import { DamageType, MoveFlag, MoveType, SlippingSpeed } from "@wayward/game/game/entity/IEntity";
+import { Delay } from "@wayward/game/game/entity/IHuman";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type { IItemVehicle } from "@wayward/game/game/item/IItem";
+import type { EntityReferenceTypes } from "@wayward/game/game/reference/IReferenceManager";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type { IRendererOrigin } from "@wayward/game/renderer/context/RendererOrigin";
+import { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
+import type { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
+import type { INotificationLocation } from "@wayward/game/renderer/notifier/INotifier";
+import type { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface IEntityMovableEvents extends IEntityEvents {
     /**
      * Called before moving.
@@ -34,12 +35,12 @@ export interface IEntityMovableEvents extends IEntityEvents {
     /**
      * Called after moving.
      */
-    postMove(fromTile: Tile, toTile: Tile, flags: MoveFlag): void;
+    postMove(fromTile: Tile, toTile: Tile, flags: MoveFlag, skipExtinguishTorches?: boolean): void;
 }
 /**
  * Entity class that allows movement
  */
-export default abstract class EntityMovable<DescriptionType = unknown, TypeType extends number = number, TagType = unknown, CounterType = unknown> extends Entity<DescriptionType, TypeType, TagType, CounterType> implements IRendererOrigin {
+export default abstract class EntityMovable<DescriptionType = unknown, TypeType extends number = number, EntityReferenceType extends EntityReferenceTypes = EntityReferenceTypes, TagType = unknown> extends Entity<DescriptionType, TypeType, EntityReferenceType, TagType> implements IRendererOrigin, INotificationLocation {
     event: IEventEmitter<this, IEntityMovableEvents>;
     /**
      * Note: This might not be a whole number.
@@ -50,16 +51,14 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
      */
     fromY?: number;
     /**
-     * Not guaranteed to be synced between the server and client for Human entities
-     */
-    isMoving?: boolean;
-    /**
      * Only used for Human entities
      */
     movementCompleteZ?: number;
     anim?: number;
     moveType?: MoveType;
+    fastMoving?: boolean;
     shouldSkipNextMovement?: true;
+    protected slipping?: ISlippingData;
     protected shouldSkipNextUpdate?: true;
     /**
      * undefined = Vector2.ZERO for this
@@ -70,17 +69,20 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
      */
     facingDirection?: Direction.Cardinal;
     /**
-     * The state of what the client thinks is happening to this entity (regarding movement)
+     * Used for movement animations.
+     * Note: This is clientside only.
      */
-    movingClientside: MovingClientSide;
-    movingOptions?: IMoveToOptions;
+    readonly movingData: IMovingData;
+    /**
+     * Used for attack animations.
+     * Note: This is clientside only.
+     */
+    attackAnimationData?: IAttackAnimationData;
+    /**
+     * Used for smart vehicle movement (minecarts)
+     * Note: This is clientside only.
+     */
     allowSmartMovementClientside?: boolean;
-    attackAnimationType?: DamageType;
-    attackAnimationTime?: IMovementTime;
-    protected _movementTime?: {
-        start: number;
-        end: number;
-    };
     constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
     /**
      * Called when the entity is about to move to another tile.
@@ -89,18 +91,31 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
      * @param toTile Tile the entity is moving onto
      * @returns False to block the move
      */
-    protected abstract updateTile(fromTile: Tile, toTile: Tile): boolean;
-    get asEntityMovable(): EntityMovable<DescriptionType, TypeType, TagType>;
+    protected abstract updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
+    get asEntityMovable(): EntityMovable<DescriptionType, TypeType, EntityReferenceType, TagType>;
+    /**
+     * Tile the entity is moving from
+     */
+    get fromTile(): Tile | undefined;
     /**
      * Regular entities don't have a direction so this will be the same as getTile()
      */
     get facingTile(): Tile;
+    facingTileOffset(offset?: number): Tile;
+    get slippingData(): ISlippingData | undefined;
     canSeeObject(type: CanASeeBType, object: IRendererOrigin, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeeTile(type: CanASeeBType, tile: Tile, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number): void;
     getMovementDelay(): number;
+    /**
+     * Move the entity to the tile
+     */
     moveTo(tile: Tile, options?: IMoveToOptions): boolean;
+    /**
+     * Immediately move the entity to the tile
+     */
+    setPosition(tile: Tile): void;
     /**
      * Skips the next update for this creature / npc
      */
@@ -111,14 +126,33 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
     skipNextMovement(): void;
     overrideNextMovement(tile: Tile): void;
     /**
+     * Faces in the direction
+     */
+    updateDirection(direction: Direction.Cardinal): Direction.Cardinal;
+    /**
      * Faces the target tile
      */
-    updateDirection(tile: Tile): void;
+    updateDirection(tile: Tile): Direction.Cardinal;
+    updateDirection(tile: Tile | Direction): Direction.Cardinal;
+    /**
+     * Start slipping if the tile is slippable.
+     * Stops slipping if above the max slip count or if the tile is not slippable.
+     */
+    updateSlipping(tile: Tile, moveDirection: Direction.Cardinal, slippingSpeed?: SlippingSpeed): ISlippingData | undefined;
+    /**
+     * Start slipping the entity
+     */
+    startSlipping(direction: Direction.Cardinal, speed?: SlippingSpeed): ISlippingData;
+    stopSlipping(): void;
     /**
      * Faces the target and animates a bump into effect
      */
     animateBumpTowards(tile: Tile): void;
-    protected setMoving(fromX: number, fromY: number, toZ?: number, options?: IMoveToOptions): void;
+    /**
+     * Animates the entity between a specific set of positions
+     */
+    animate(fromX: number, fromY: number, toX: number, toY: number, delay: Delay): void;
+    setMoving(fromX: number, fromY: number, toZ?: number, options?: IMoveToOptions): void;
     protected setFromPosition(fromX?: number, fromY?: number): void;
     animateAttack(damageType: DamageType[] | undefined): void;
     getMovementPoint(timeStamp: number): IVector2;
@@ -126,9 +160,22 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
      * Gets movement progress and moves the state machine forward when the movement is completed
      */
     getMovementProgress(timeStamp: number): number;
-    protected onMovementCompleted(): void;
+    protected onMovementCompleted(movingData: IMovingData): void;
     get isFlying(): boolean;
+    get isFastMoving(): boolean;
+    /**
+     * Checks if the entity is moving.
+     * This is based on the local client state (renderer).
+     */
+    get isMovingClientside(): boolean;
     getMoveType(): MoveType;
     setMoveType(moveType: MoveType): void;
     canSwapWith(entity: EntityMovable, source: string | undefined): boolean;
+    getVehicle(): IItemVehicle | undefined;
+    isVehicleAllowedOnTile(tile: Tile): boolean;
+    getWanderChance?(defaultChance: number): number | undefined;
+    getWanderIdleChance?(defaultChance: number): number | undefined;
+    getWanderNewDirectionChance?(defaultChance: number): number | undefined;
+    getWanderHomePoint?(): IVector2 | undefined;
+    getWanderHomeRadius?(): number | undefined;
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import Component from "ui/component/Component";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import type { IRefreshable } from "ui/component/Refreshable";
+import Component from "@wayward/game/ui/component/Component";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export declare enum InputClasses {
     Main = "input",
     Filter = "input-filter",
@@ -63,7 +63,7 @@ export default class Input extends Component implements IRefreshable {
     isFocused(): boolean;
     setDisabled(val?: boolean, reason?: string): this;
     isSelectable(): boolean;
-    getSelectionTarget(): Component<HTMLElement>;
+    getSelectionTarget(): Component;
     addClearButton(): this;
     addResetButton(): this;
     setMaxLength(maxLength?: number): this;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,29 +8,30 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { BiomeType } from "game/biome/IBiome";
-import type Doodad from "game/doodad/Doodad";
-import type { ActionType } from "game/entity/action/IAction";
-import type Human from "game/entity/Human";
-import type { ICausesDamage, ICausesStatusEffect } from "game/entity/IEntity";
-import type { SkillType } from "game/entity/IHuman";
-import type { IDecayTemperatureRange } from "game/IGame";
-import type { ILootItem } from "game/ILoot";
-import type { IObjectDescription, IObjectOptions } from "game/IObject";
-import type Island from "game/island/Island";
-import type { IContainer, IItemOld, ItemType, ItemTypeExtra, ItemTypeGroup } from "game/item/IItem";
-import type Item from "game/item/Item";
-import type { LootGroupType } from "game/item/LootGroups";
-import type MagicalPropertyManager from "game/magic/MagicalPropertyManager";
-import type { IInsulationDescription, ITemperatureDescription } from "game/temperature/ITemperature";
-import type { TerrainType } from "game/tile/ITerrain";
-import type { TileEventType } from "game/tile/ITileEvent";
-import type Tile from "game/tile/Tile";
-import type Translation from "language/Translation";
-import type { IModdable } from "mod/ModRegistry";
-import type { ISpriteAnimation } from "renderer/ISpriteInfo";
-import type { TileLayerType } from "renderer/world/IWorldRenderer";
-import type { IRGB } from "utilities/Color";
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type Human from "@wayward/game/game/entity/Human";
+import type { ICausesDamage, ICausesStatus } from "@wayward/game/game/entity/IEntity";
+import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { IDecayTemperatureRange } from "@wayward/game/game/IGame";
+import type { ILootItem } from "@wayward/game/game/ILoot";
+import type { IObjectDescription, IObjectOptions } from "@wayward/game/game/IObject";
+import type Island from "@wayward/game/game/island/Island";
+import type { IContainer, IItemOld, ItemType, ItemTypeExtra, ItemTypeGroup } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type { LootGroupType } from "@wayward/game/game/item/LootGroups";
+import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { IInsulationDescription, ITemperatureDescription } from "@wayward/game/game/temperature/ITemperature";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type Translation from "@wayward/game/language/Translation";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type { ISpriteAnimation } from "@wayward/game/renderer/ISpriteInfo";
+import type { TileLayerType } from "@wayward/game/renderer/world/IWorldRenderer";
+import type { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
+import type { IRGB } from "@wayward/utilities/Color";
 export interface IDoodadOptions extends IObjectOptions {
     force?: boolean;
     gatherReady?: number;
@@ -63,12 +64,23 @@ export interface IDoodadGroupDescription {
      */
     hidden?: boolean;
 }
-export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatusEffect, ICausesDamage, ITemperatureDescription {
+export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatus, ICausesDamage, ITemperatureDescription {
     actionTypes?: ActionType[];
     allowedTiles?: TerrainType[];
     blockJump?: boolean;
+    /**
+     * Blocks line of sight when set to true with some exceptions:
+     * Plants only block line of sight when they are not seedlings, vegetative, or bare.
+     * isWall automatically sets this to true.
+     * If set to false specifically, it will overwrite the above conditions and never block line of sight.
+     * blockLos is cached/saved, so the doodad must be rebuilt to update this status.
+     */
     blockLos?: boolean;
     blockMove?: boolean;
+    moveIntoAction?: ActionType;
+    openContainerAction?: ActionType;
+    tabAction?: ActionType;
+    containerDialog?: DialogId;
     burnsLike?: ItemType[];
     canBreak?: boolean;
     canGrow?: boolean;
@@ -117,13 +129,21 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      */
     pickUp?: ItemType[];
     /**
-     * Works with "Gather"-based actions.
+     * The "Chop" action works to pick up these doodads as well as "gather with hands".
      */
-    gatherPickUp?: ILootItem[];
+    chopPickUp?: ILootItem[];
+    /**
+     * The "Mine" action works to pick up these doodads as well as "gather with hands".
+     */
+    minePickUp?: ILootItem[];
     providesFire?: boolean;
     providesLight?: number;
     reduceDurabilityOnGather?: boolean;
-    repairItem?: ItemType;
+    /**
+     * This doodad as the item it starts from.
+     * Used in many places including repairing and getting item bonuses.
+     */
+    asItem?: ItemType;
     revert?: DoodadType;
     spawnOnTerrain?: OptionalDescriptions<BiomeType, TerrainType[]>;
     spreadMax?: number;
@@ -132,8 +152,20 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     tileOverLayerType?: TileLayerType;
     trapDamage?: number;
     waterStill?: boolean;
-    itemStackOffset?: number;
+    /**
+     * Whether magical properties have no effect on this doodad.
+     */
+    magicInert?: true;
+    /**
+     * The region where items are stacked.
+     * The default region is { xMin: 0, xMax: 0, yMin: 1, yMax: 1 }
+     * Max should always be greater than min and values should be within [0, 1]
+     */
     itemStackRegion?: IItemStackRegion | ((doodad: Doodad) => IItemStackRegion | undefined);
+    /**
+     * The Y offset for the entire item stack.
+     */
+    itemStackOffsetY?: number | ((doodad: Doodad) => number | undefined);
     decayTemperatureRange?: IDecayTemperatureRange;
     isIslandPort?: boolean;
     /**
@@ -162,9 +194,19 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      */
     renderAsSprite?: boolean | Partial<{
         /**
+         * x offset when rendering the sprite
+         */
+        renderOffsetX: number | {
+            base: number;
+            discretionary: (doodad: Doodad) => number;
+        };
+        /**
          * y offset when rendering the sprite
          */
-        renderOffsetY: number;
+        renderOffsetY: number | {
+            base: number;
+            discretionary: (doodad: Doodad) => number;
+        };
         /**
          * Number of rows in the sprite
          */
@@ -172,7 +214,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
         /**
          * Number of columns in the sprite
          */
-        columns: number;
+        renderContainedItems?: boolean;
     }>;
     /**
      * Called when the doodad is built via templates
@@ -185,7 +227,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      */
     displayDoodad?: SupplierOr<DisplayableDoodadType | undefined, [Doodad]>;
     /**
-     * Sets (and overwrites) the associated item that shows in the tooltip.
+     * Sets (and overwrites) the associated item (or item extra) that shows in the tooltip.
      */
     getAssociatedItem?(doodad: Doodad): ItemType | ItemTypeExtra | undefined;
     getVariation?(island: Island, tile: Tile, doodad: Doodad | undefined, existingVariationX: number, existingVariationY: number): [number, number] | undefined;
@@ -202,10 +244,10 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     waterPurificationTurns?: number;
 }
 export interface IItemStackRegion {
-    xMin?: number;
-    xMax?: number;
-    yMin?: number;
-    yMax?: number;
+    xMin: number;
+    xMax: number;
+    yMin: number;
+    yMax: number;
 }
 export interface ILockedChest {
     /**
@@ -413,19 +455,33 @@ export declare enum DoodadType {
     BasaltDripstone = 164,
     ClayDripstone = 165,
     BronzeWaterStill = 166,
-    LitBronzeWaterStill = 167
+    LitBronzeWaterStill = 167,
+    ArmorStand = 168,
+    GraniteAltar = 169,
+    WoodenWheelbarrow = 170,
+    TinWheelbarrow = 171,
+    CopperWheelbarrow = 172,
+    WroughtIronWheelbarrow = 173,
+    IronWheelbarrow = 174,
+    BronzeWheelbarrow = 175,
+    SandstoneAltar = 176,
+    BasaltAltar = 177,
+    ClayAltar = 178,
+    SkeletalPirateRemains = 179,
+    Last = 180
 }
 export declare enum DoodadTypeExtra {
-    None = 999,
-    WoodenBookcase_25 = 1000,
-    WoodenBookcase_50 = 1001,
-    WoodenBookcase_75 = 1002,
-    WoodenBookcase_100 = 1003
+    None = 181,
+    WoodenBookcase_25 = 182,
+    WoodenBookcase_50 = 183,
+    WoodenBookcase_75 = 184,
+    WoodenBookcase_100 = 185
 }
 export type DisplayableDoodadType = DoodadType | DoodadTypeExtra;
 export declare enum DoodadTag {
     None = 0,
-    ProppedOpen = 1
+    ProppedOpen = 1,
+    CollapsedSkeleton = 2
 }
 /**
  * All tree types that can be spawned during map gen
@@ -433,27 +489,28 @@ export declare enum DoodadTag {
  */
 export type MapGenDoodadTrees = DoodadType.MapleTree | DoodadType.CoconutTree | DoodadType.JoshuaTree | DoodadType.SpruceTree | DoodadType.CypressTree | DoodadType.AppleTree | DoodadType.SpruceTreeWithSnow | DoodadType.WhitePineTree | DoodadType.WhitePineTreeWithSnow | DoodadType.PapayaTree | DoodadType.Palapalai | DoodadType.ButtonMushrooms | DoodadType.PoisonIvy | DoodadType.Cattails | DoodadType.FlyAmanita;
 export declare enum DoodadTypeGroup {
-    Invalid = 400,
-    LitCampfire = 401,
-    LitFurnace = 402,
-    LitKiln = 403,
-    LitWaterStill = 404,
-    Anvil = 405,
-    Well = 406,
-    Hitch = 407,
-    GatheredPlant = 408,
-    FireSource = 409,
-    LitTorch = 410,
-    LightDevice = 411,
-    LightSource = 412,
-    LitStructure = 413,
-    LockedChest = 414,
-    Scarecrow = 415,
-    Lighthouse = 416,
-    LitLighthouse = 417,
-    Dripstone = 418,
-    WaterStill = 419,
-    Last = 420
+    Invalid = -9999,
+    LitCampfire = -9998,
+    LitFurnace = -9997,
+    LitKiln = -9996,
+    LitWaterStill = -9995,
+    Anvil = -9994,
+    Well = -9993,
+    Hitch = -9992,
+    GatheredPlant = -9991,// Special case for plants that need to be gathered to get the "main resource"
+    FireSource = -9990,
+    LitTorch = -9989,
+    LightDevice = -9988,
+    LightSource = -9987,
+    LitStructure = -9986,// Prevents pick up while lit
+    LockedChest = -9985,
+    Scarecrow = -9984,
+    Lighthouse = -9983,
+    LitLighthouse = -9982,
+    Dripstone = -9981,
+    WaterStill = -9980,
+    Wheelbarrow = -9979,
+    Altar = -9978
 }
 export declare enum DoorOrientation {
     /**

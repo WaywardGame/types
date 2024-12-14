@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,39 +8,50 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { SfxType } from "audio/IAudio";
-import type { IEventEmitter } from "event/EventEmitter";
-import type { CreatureAttackOutcome, CreatureType, ICreatureAttackOutcomeAttack, ICreatureCheckMoveOptions, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "game/entity/creature/ICreature";
-import EntityWithStats from "game/entity/EntityWithStats";
-import type Human from "game/entity/Human";
-import type { IEntityConstructorOptions, IStatChangeInfo } from "game/entity/IEntity";
-import { AiType, Defense, EntityType, MoveType } from "game/entity/IEntity";
-import type { IStat } from "game/entity/IStats";
-import type { IMovementTime } from "game/IGame";
-import { TileUpdateType } from "game/IGame";
-import type { IObject } from "game/IObject";
-import type Item from "game/item/Item";
-import type Tile from "game/tile/Tile";
-import Translation, { Article } from "language/Translation";
-import type { IUnserializedCallback } from "save/serializer/ISerializer";
-import { Direction } from "utilities/math/Direction";
-import type { IVector3 } from "utilities/math/IVector";
-import Vector2 from "utilities/math/Vector2";
-export default class Creature extends EntityWithStats<ICreatureDescription, CreatureType> implements IUnserializedCallback, IObject<CreatureType> {
+import { SfxType } from "@wayward/game/audio/IAudio";
+import type { IMovementTime } from "@wayward/game/game/IGame";
+import { TileUpdateType } from "@wayward/game/game/IGame";
+import type { IObject } from "@wayward/game/game/IObject";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
+import type Human from "@wayward/game/game/entity/Human";
+import type { IEntityConstructorOptions, IStatChangeInfo } from "@wayward/game/game/entity/IEntity";
+import { Defense, EntityType, MoveType } from "@wayward/game/game/entity/IEntity";
+import type { IStat } from "@wayward/game/game/entity/IStats";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
+import { AiType } from "@wayward/game/game/entity/ai/AI";
+import AiManager from "@wayward/game/game/entity/ai/AiManager";
+import type { CreatureAttackOutcome, ICreatureAttackOutcomeAttack, ICreatureCheckMoveOptions, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "@wayward/game/game/entity/creature/ICreature";
+import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/CreatureZone";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type Player from "@wayward/game/game/entity/player/Player";
+import { StatusType } from "@wayward/game/game/entity/status/IStatus";
+import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import Translation, { Article } from "@wayward/game/language/Translation";
+import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
+import { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export default class Creature extends EntityWithStats<ICreatureDescription, CreatureType, ReferenceType.Creature> implements IUnserializedCallback, IObject<CreatureType> {
     static is(value: any): value is Creature;
     get entityType(): EntityType.Creature;
     get tileUpdateType(): TileUpdateType;
-    readonly event: IEventEmitter<this, ICreatureEvents>;
+    event: IEventEmitter<this, ICreatureEvents>;
     anim: number;
     direction: Vector2;
     facingDirection: Direction.Cardinal;
     fromX: number;
     fromY: number;
-    ai: AiType;
     aberrant?: true;
     enemy?: {
-        type: EntityType;
-        id: number;
+        reference: Reference;
         attacks: number;
         attempts: number;
         breakAway?: boolean;
@@ -48,20 +59,20 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     hitchedTo?: number;
     originalMoveType?: MoveType;
     owner?: {
-        type: EntityType.Player;
-        identifier: string;
-    } | {
-        type: EntityType.NPC;
-        id: number;
+        reference: Reference;
+        tameTime: number;
     };
     respawned?: number;
-    tameTime?: number;
+    zonePoint?: IVector3;
+    ai: AiManager;
     spawnAnimationTime: IMovementTime | undefined;
     constructor(entityOptions?: IEntityConstructorOptions<CreatureType>, aberrant?: boolean);
+    initializeAi(resetAiType?: boolean): void;
     /**
      * Initializes the creature's stats. Used in the constructor & save conversion.
      */
     initializeStats(hp: number, maxhp?: number): void;
+    get zone(): CreatureZone | undefined;
     /**
      * @param article Whether to include an article for the name of the creature. Uses the article rules on the language. Defaults to `true`.
      * @param count The number of this creature that you're getting the name of. Defaults to `1`.
@@ -73,12 +84,14 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      */
     getName(article?: Article, count?: number): Translation;
     protected getDescription(): ICreatureDescription | undefined;
-    hasAi(aiType: AiType): boolean;
-    isHidden(): boolean;
-    isRetaliator(): boolean;
-    isTamed(): boolean;
-    isValid(): boolean;
+    get isHostile(): boolean;
+    get isHidden(): boolean;
+    get isRetaliator(): boolean;
+    get isTamed(): boolean;
+    get isValid(): boolean;
     getCommandedAiType(): AiType | undefined;
+    protected getApplicableStatuses(): Set<StatusType> | undefined;
+    tickStatuses(): void;
     getDefense(human?: Human): Defense;
     /**
      * Check is a creature is allowed to attack the target (rules of engagement)
@@ -88,10 +101,22 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     canTarget(target: Human | Creature | undefined): boolean;
     moveToIsland(targetTile: Tile, owner: Human): void;
     restore(targetTile: Tile, preventRendering?: boolean): void;
+    load(): void;
     checkForBurn(moveType?: MoveType): boolean;
     private setOwner;
     tame(human: Human, bonus?: number): boolean;
-    increaseTamedCount(): void;
+    /**
+     * Increases the creature's maximum health in the event of offering/re-taming and petting (to a lesser extent)
+     */
+    increaseMaxHealth(action: ActionType): void;
+    /**
+     * @returns The new times tamed
+     */
+    increaseTamedCount(): number;
+    /**
+     * Increases the number of times the creature has been petted.
+     */
+    increasePettedCount(): void;
     release(remainTamed?: boolean): boolean;
     unhitch(): void;
     animateSpawn(): void;
@@ -124,19 +149,17 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     processSpecialAbilities(enemy: Human | Creature | undefined, bypass?: boolean): boolean;
     increaseWaste(item: Item): void;
     onUnserialized(): void;
-    /**
-     * Updates the DoodadOverHidden tile flag if the creature is large.
-     * Large creatures should render over the doodad over layer, which means we should hide the doodad over layer for doodads on the creatures tile.
-     */
-    updateDoodadOverHiddenState(tile: Tile, shouldBeHidden: boolean): void;
     getAttackOutcome(enemy: Human | Creature | undefined, force: true, humans?: Human[], description?: ICreatureDescription, moveType?: MoveType): ICreatureAttackOutcomeAttack;
     getAttackOutcome(enemy: Human | Creature | undefined, force?: boolean, humans?: Human[], description?: ICreatureDescription, moveType?: MoveType): CreatureAttackOutcome;
     processAttack(description: ICreatureDescription, humans: Human[], moveType: MoveType | undefined, enemyIn: Human | Creature | undefined): boolean;
     getProducedTemperature(): number | undefined;
-    protected updateDoodadOverHiddenStateForCurrentTile(hidden?: boolean): void;
-    protected updateTile(fromTile: Tile, toTile: Tile): boolean;
+    protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
-    findPath(target: Tile, moveType: MoveType, maxNodesChecked?: number, ignoreHuman?: Human): Tile[] | undefined;
+    /**
+     * Finds a path from the creatures tile to the target tile
+     * @param source Provided when the check is running in a sync environment (NOT CLIENTSIDE)
+     */
+    findPath(source: string | undefined, target: Tile, moveType: MoveType, maxNodesChecked?: number, ignoreHuman?: Human): Tile[] | undefined;
     getHitchingPostsAround(): IHitch;
     /**
      * Check creature move with a multiplayer sync check
@@ -154,13 +177,23 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     checkCreatureMove(isClientside: boolean, tile: Tile, moveType: MoveType, willMove: boolean, options?: Partial<ICreatureCheckMoveOptions>): number;
     /**
      * Returns the times a creature has been tamed.
-     * @returns number if the creature has been tamed and undefined if it has never been tamed.
+     * @returns number if the creature has been tamed (0 if it has never been tamed).
      */
-    timesTamed(): number | undefined;
+    get timesTamed(): number;
+    /**
+     * Returns the times a creature has been petted.
+     * @returns number if the creature has been petted (0 if it has never been petted).
+     */
+    get timesPetted(): number;
     private findHumansWithinRadius;
     private shouldSpecialAttack;
     private specialAttack;
     private processMovement;
+    /**
+     * Actually tries to move to the tile
+     * @returns True or false if a move was attempted, undefined if a move was canceled
+     */
+    private runMovement;
     /**
      * Some creatures can break doodads, leading to lost rest or sleep when near them
      * @param doodad The doodad to damage
@@ -174,6 +207,15 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      */
     private breakItems;
     private processAiChanges;
+    /**
+     * @returns Whether the creature has lost interest
+     */
+    private processAiInterest;
+    getWanderChance(defaultChance: number): number | undefined;
+    getWanderIdleChance(defaultChance: number): number | undefined;
+    getWanderNewDirectionChance(defaultChance: number): number | undefined;
+    getWanderHomePoint(): IVector2 | undefined;
+    getWanderHomeRadius(): number | undefined;
     get asCorpse(): undefined;
     get asCreature(): Creature;
     get asDoodad(): undefined;
@@ -183,6 +225,20 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     get asPlayer(): undefined;
     get asTileEvent(): undefined;
     get asItem(): undefined;
+    get asTile(): undefined;
+    get asContainer(): undefined;
+    isCorpse(): this is Corpse;
+    isCreature(): this is Creature;
+    isDoodad(): this is Doodad;
+    isHuman(): this is Human;
+    get isLocalPlayer(): boolean;
+    isNPC(): this is NPC;
+    isPlayer(): this is Player;
+    isTileEvent(): this is TileEvent;
+    isItem(): this is Item;
+    isTile(): this is Tile;
+    isContainer(): this is IUncastableContainer;
+    toString(): string;
     get point(): IVector3;
     get tile(): Tile;
 }

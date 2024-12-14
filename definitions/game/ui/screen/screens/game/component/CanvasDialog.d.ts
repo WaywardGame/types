@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,14 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import EventEmitter from "event/EventEmitter";
-import Component from "ui/component/Component";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import Dialog from "ui/screen/screens/game/component/Dialog";
-import type { DialogId } from "ui/screen/screens/game/Dialogs";
-import type { IVector2 } from "utilities/math/IVector";
-import Vector2 from "utilities/math/Vector2";
+import Component from "@wayward/game/ui/component/Component";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import type { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
+import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 type Zoom = [index: number, zoom: number];
 declare class CanvasZoomReference {
     private readonly reference;
@@ -39,22 +38,11 @@ export declare class Canvas extends Component<HTMLCanvasElement> {
     fill(pattern: CanvasPattern, drawPosition?: IVector2, drawSize?: IVector2, scale?: IVector2): this;
     fillText(text: string, position: Vector2, maxWidth?: number): void;
 }
-export interface ICanvasSpriteCacheEvents {
-    load(): any;
-}
-export declare class CanvasSpriteCache extends EventEmitter.Host<ICanvasSpriteCacheEvents> {
-    private readonly cache;
-    private loading;
-    constructor();
-    get(path: string): HTMLImageElement | Promise<HTMLImageElement | undefined> | null;
-    waitFor(path: string): Promise<HTMLImageElement | null | undefined>;
-    private loadSprite;
-}
 export interface ICanvasDialogEvents extends Events<Dialog> {
     resetView(): any;
 }
 export default class CanvasDialog extends Dialog {
-    readonly event: IEventEmitter<this, ICanvasDialogEvents>;
+    event: IEventEmitter<this, ICanvasDialogEvents>;
     protected readonly canvas: Canvas;
     protected viewOffset: Vector2;
     protected viewZoom: number;

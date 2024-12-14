@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ActionType } from "game/entity/action/IAction";
-import type { EntityType } from "game/entity/IEntity";
-import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
-import type { InfoProvider } from "game/inspection/InfoProvider";
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import type { Quality } from "game/IObject";
-import type Island from "game/island/Island";
-import type Translation from "language/Translation";
-import type { TranslationGenerator } from "ui/component/IComponent";
+import type { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type { EntityType } from "@wayward/game/game/entity/IEntity";
+import { InfoDisplayLevel } from "@wayward/game/game/inspection/IInfoProvider";
+import type { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import type { Quality } from "@wayward/game/game/IObject";
+import type Island from "@wayward/game/game/island/Island";
+import type Translation from "@wayward/game/language/Translation";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export interface IDescribed {
     entityType: EntityType;
     type: number;
@@ -72,10 +72,10 @@ export default class UseInfo<I extends IUseInfoBase<T, A>, A extends ActionType,
     };
     static of<T extends IDescribed>(): IUseInfoFactory<IUseInfoBase<T, never>, T, never>;
     displayLevel: InfoDisplayLevel | UseInfoDisplayLevelGetter<I, T, A>;
-    ownRow?: true;
+    ownRow?: InfoDisplayLevel;
     private constructor();
     initializeInfo(info: I, context: InfoProviderContext): I & IItemUseInfo<T, A, M>;
     setDisplayLevel(level: InfoDisplayLevel | UseInfoDisplayLevelGetter<I, T, A>): this;
-    setOwnRow(): this;
+    setOwnRow(level?: InfoDisplayLevel): this;
     of<T2 extends T>(): UseInfo<IUseInfoBase<T2, A>, A, M, T2>;
 }

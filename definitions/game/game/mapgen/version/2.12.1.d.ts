@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,13 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { BiomeTypes } from "game/biome/IBiome";
-import type { ITemplateBiomeOptions } from "game/biome/template/Template";
-import type Island from "game/island/Island";
-import type IMapGen from "game/mapgen/IMapGen";
-import type { IMapGenGenerateOutput, IMapGenOptions } from "game/mapgen/IMapGen";
-import type { Load } from "game/meta/Loading";
+import type { BiomeTypes } from "@wayward/game/game/biome/IBiome";
+import type Island from "@wayward/game/game/island/Island";
+import type IMapGen from "@wayward/game/game/mapgen/IMapGen";
+import type { IMapGenGenerateOutput, IMapGenOptions } from "@wayward/game/game/mapgen/IMapGen";
+import type { Load } from "@wayward/game/game/meta/Loading";
 export default class MapGen2120 implements IMapGen {
-    generateWorld({ island, generateNewWorld, biomeType, templateBiomeOptions, mapGenVersion, load, loadArgs }: IMapGenOptions): void;
-    protected setupTiles(island: Island, generateNewWorld: boolean, biomeType: BiomeTypes, templateBiomeOptions: ITemplateBiomeOptions | undefined, load: Load | undefined, mapGenOutput: IMapGenGenerateOutput, tileGenArray: Uint16Array, tileGenQualityArray: Uint16Array, tileVariationArray: Uint16Array): void;
+    generateWorld({ island, generateNewWorld, biomeType, biomeOptions, mapGenVersion, load, loadArgs }: IMapGenOptions): Promise<void>;
+    protected setupTiles(island: Island, generateNewWorld: boolean, biomeType: BiomeTypes, biomeOptions: unknown, load: Load | undefined, mapGenOutput: IMapGenGenerateOutput, tileGenArray: Uint16Array, tileGenQualityArray: Uint16Array, tileVariationArray: Uint16Array): void;
 }

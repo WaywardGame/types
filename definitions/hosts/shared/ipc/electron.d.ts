@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -18,6 +18,7 @@ export interface IElectron {
     log(...args: any[]): Promise<void>;
     startContentTraceRecording(): Promise<void>;
     stopContentTraceRecording(logPath: string): Promise<void>;
+    enableOverlaySupport(enable: boolean): Promise<void>;
     setFullScreen(fullscreen: boolean): Promise<void>;
     setCustomTitleBar(enabled: boolean): Promise<void>;
     isMaximized(): Promise<boolean>;
@@ -26,6 +27,7 @@ export interface IElectron {
     reloadWindow(): Promise<void>;
     invalidateWindow(): Promise<void>;
     destroyWindow(): Promise<void>;
+    isFullScreen(): Promise<boolean>;
     showSaveDialog(defaultPath: string, filterName: string, filterExtension: string): Promise<string | undefined>;
     showOpenDirectoryDialog(defaultPath?: string): Promise<string[]>;
 }

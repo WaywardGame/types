@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,28 +8,30 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type Doodad from "game/doodad/Doodad";
-import type { DoodadType } from "game/doodad/IDoodad";
-import type Creature from "game/entity/creature/Creature";
-import type EntityMovable from "game/entity/EntityMovable";
-import type NPC from "game/entity/npc/NPC";
-import type Player from "game/entity/player/Player";
-import type Island from "game/island/Island";
-import type { IContainer, ItemType } from "game/item/IItem";
-import type Item from "game/item/Item";
-import type ItemManager from "game/item/ItemManager";
-import { TempType } from "game/temperature/ITemperature";
-import type { FireStage } from "game/tile/events/IFire";
-import type { TerrainType } from "game/tile/ITerrain";
-import type Tile from "game/tile/Tile";
-import type TileEvent from "game/tile/TileEvent";
-import type TimeManager from "game/time/TimeManager";
-import { WorldZ } from "game/WorldZ";
-import type { IPreSerializeCallback } from "save/serializer/ISerializer";
-import type { IVector3 } from "utilities/math/IVector";
-import { IRange } from "utilities/math/Range";
-import Vector2 from "utilities/math/Vector2";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import WorldZ from "@wayward/utilities/game/WorldZ";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type { DoodadType } from "@wayward/game/game/doodad/IDoodad";
+import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
+import type Human from "@wayward/game/game/entity/Human";
+import { EquipType } from "@wayward/game/game/entity/IHuman";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type Island from "@wayward/game/game/island/Island";
+import type { IContainer, ItemType } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type ItemManager from "@wayward/game/game/item/ItemManager";
+import { TempType } from "@wayward/game/game/temperature/ITemperature";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import type { FireStage } from "@wayward/game/game/tile/events/IFire";
+import type TimeManager from "@wayward/game/game/time/TimeManager";
+import type { IPreSerializeCallback } from "@wayward/game/save/serializer/ISerializer";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import { IRange } from "@wayward/utilities/math/Range";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
 export declare const TEMPERATURE_DIFFUSION_RATE: number;
 export declare const TEMPERATURE_BOUNDARY_MIN_VEC2: Vector2;
 export declare const TEMPERATURE_INVALID = 255;
@@ -45,9 +47,9 @@ export interface ITemperatureManagerEvents {
 }
 export default class TemperatureManager extends EventEmitter.Host<ITemperatureManagerEvents> implements IPreSerializeCallback {
     private readonly island;
-    encodedCalculatedCache: Map<number, Map<number, Uint32Array>>;
-    encodedProducedCache: Map<number, Map<number, Uint32Array>>;
-    encodedGuaranteedCorrectCache: Map<number, Map<number, Uint32Array>>;
+    encodedCalculatedCache: Map<number, Map<number, Uint32Array<ArrayBufferLike>>>;
+    encodedProducedCache: Map<number, Map<number, Uint32Array<ArrayBufferLike>>>;
+    encodedGuaranteedCorrectCache: Map<number, Map<number, Uint32Array<ArrayBufferLike>>>;
     private readonly containerTemperatureCache;
     private readonly containerTileTemperatureCache;
     private readonly containerItemsTemperatureCache;
@@ -150,11 +152,16 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     protected onPlayerSpawnOrRemove(_: any, player: Player): void;
     protected onPlayerIdChanged(player: Player): void;
     protected onCreateOrRemoveObject(_: any, object: Doodad | TileEvent | Creature | NPC): void;
+    protected onHumanUnequip(object: Human, item: Item, slot: EquipType): void;
     protected onEntityMove(object: EntityMovable, lastTile: Tile, tile: Tile): void;
     protected onTerrainChange(island: Island, tile: Tile, oldType: TerrainType): void;
     protected onItemContainerAdd(itemManager: ItemManager, items: Item[], container?: IContainer): void;
     protected onItemContainerRemove(itemManager: ItemManager, items: Item[], container: IContainer | undefined, containerTile: Tile | undefined): void;
     protected onItemFireUpdate(item: Item): void;
+    /**
+     * Run inventory updates when human changes Z
+     */
+    protected onChangeZ(human: Human): void;
     protected onPlay(): void;
     protected onTickStart(island: Island): void;
     protected onTickEnd(island: Island): void;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,20 +8,28 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import Button from "ui/component/Button";
-import Component from "ui/component/Component";
-import type Input from "ui/component/Input";
-import InputButton from "ui/component/InputButton";
-import type { IRefreshableValue } from "ui/component/Refreshable";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import { InputCatalyst } from "ui/input/IInput";
-import { SelectDirection } from "ui/IUi";
+import type { SfxType, SfxUi } from "@wayward/game/audio/IAudio";
+import { SelectDirection } from "@wayward/game/ui/IUi";
+import Button from "@wayward/game/ui/component/Button";
+import Component from "@wayward/game/ui/component/Component";
+import type Input from "@wayward/game/ui/component/Input";
+import InputButton from "@wayward/game/ui/component/InputButton";
+import type { IRefreshableValue } from "@wayward/game/ui/component/Refreshable";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import { InputCatalyst } from "@wayward/game/ui/input/IInput";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export declare enum DropdownClasses {
+    Main = "menu-dropdown",
+    ContentWrapper = "menu-dropdown-content-wrapper",
+    ContentWrapper_DisabledHidden = "menu-dropdown-content-wrapper--disabled-hidden",
+    Content = "menu-dropdown-content"
+}
 interface IDropdownEvents<O = string | number> extends Events<Component> {
     /**
      * @param optionId The new option which is selected.
      */
     selection(optionId: O, isFirstSelection: boolean): any;
+    usingSearch(search: string): any;
     open(): any;
     close(): any;
     filterChange(text: string): any;
@@ -49,15 +57,24 @@ export default class Dropdown<O = string | number> extends Component implements 
     private isFirstSelection;
     private lastFilter?;
     private _selection;
-    get selection(): O;
+    get selection(): typeof this._selection;
+    get selectedOption(): O;
     private hovered;
     private shouldRetainLastFilter;
     constructor();
+    private sound?;
+    setSound(sound?: SfxType | SfxUi): this;
+    setDisabledHidden(hidden?: boolean): this;
+    private searchValidOption;
+    setSearchValidOption(searchValidOption?: boolean): this;
     use(dropdown?: Dropdown<O>): this;
     retainLastFilter(retainLastFilter?: boolean): this;
     open(): void;
     close(input?: InputButton): boolean;
-    select(optionId: O | undefined, force?: boolean): this;
+    private isOptionIdDifferent;
+    select(optionId: O | {
+        matching: string;
+    } | undefined, force?: boolean, emit?: boolean): this;
     selectDefault(): this;
     setRefreshMethod(refresh: () => IDropdownData<O>): this;
     refresh(): this;
@@ -69,9 +86,19 @@ export default class Dropdown<O = string | number> extends Component implements 
     protected onCancel(): boolean;
     protected onInterrupt(): void;
     protected onSelectionChange(_: any, selection?: Component): void;
+    private readonly id;
+    private readonly contentsHiddenReasons;
+    markHidden(reason: string): void;
+    markUnhidden(reason: string): void;
+    private readonly usedReasons;
+    markUsed(reason: string): void;
+    markUnused(reason: string): void;
+    private updateOptionsWrapperVisibility;
     protected onAppend(): void;
+    protected onShowDropdown(): void;
+    protected onHideDropdown(): void;
     protected isSelectionWithin(selection?: Component): boolean;
-    protected isMouseWithin(): Component<HTMLElement> | undefined;
+    protected isMouseWithin(): Component | undefined;
     protected selectNext(): void;
     protected selectPrevious(): void;
     protected selectionMove(direction: "next" | "prev"): void;
@@ -89,7 +116,7 @@ interface IDropdownInputButtonEvents extends Events<InputButton> {
     prevOption(): any;
 }
 declare class DropdownInputButton extends InputButton {
-    readonly event: IEventEmitter<this, IDropdownInputButtonEvents>;
+    event: IEventEmitter<this, IDropdownInputButtonEvents>;
     constructor(inputInitializer: (input: Input) => any);
     protected playSound(): void;
     protected onStopEditMode(): void;

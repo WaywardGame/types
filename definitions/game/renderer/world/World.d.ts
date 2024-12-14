@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import { TileUpdateType } from "game/IGame";
-import type Island from "game/island/Island";
-import type Tile from "game/tile/Tile";
-import { WorldZ } from "game/WorldZ";
-import WorldLayer from "renderer/world/WorldLayer";
-import { type ISerializable, type ISerializer } from "save/serializer/ISerializer";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import { TileUpdateType } from "@wayward/game/game/IGame";
+import type Island from "@wayward/game/game/island/Island";
+import type Tile from "@wayward/game/game/tile/Tile";
+import WorldZ from "@wayward/utilities/game/WorldZ";
+import { WorldLayer } from "@wayward/game/renderer/world/WorldLayer";
+import { type ISerializable, type ISerializer } from "@wayward/game/save/serializer/ISerializer";
 export interface IWorldEvents {
     updateTile(tile: Tile, tileUpdateType: TileUpdateType): any;
 }

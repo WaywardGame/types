@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Island from "game/island/Island";
-import GameplayModifier, { GameplayModifierInstance } from "game/options/modifiers/GameplayModifier";
-import type { IslandName } from "language/english/game/islandName/IslandName";
-import Translation from "language/Translation";
-import type Tooltip from "ui/tooltip/Tooltip";
+import type Island from "@wayward/game/game/island/Island";
+import GameplayModifier, { GameplayModifierInstance } from "@wayward/game/game/options/modifiers/GameplayModifier";
+import type { IslandName } from "@wayward/game/language/english/game/islandName/IslandName";
+import Translation from "@wayward/game/language/Translation";
+import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export declare enum IslandModifierType {
     OverrunWithCreature = 0
 }
@@ -24,9 +25,9 @@ export declare class IslandModifierInstance extends GameplayModifierInstance<Isl
     setChallenge(challenge: number): this;
     addChallenge(challenge: number): this;
     getTooltip(tooltip: Tooltip): Tooltip;
-    protected getDefaultTitle(): import("../../../../language/impl/TranslationImpl").default;
+    protected getDefaultTitle(): TranslationImpl;
     private islandNameDescriptorInitializer?;
-    getIslandNameDescriptor(version: IslandName): import("../../../../language/impl/TranslationImpl").default;
+    getIslandNameDescriptor(version: IslandName): TranslationImpl;
     setIslandNameDescriptor(initializer: (defaultTitle: Translation, version: IslandName) => Translation): this;
 }
 export default abstract class IslandModifier extends GameplayModifier<IslandModifierType, IslandModifierInstance, [Island]> {

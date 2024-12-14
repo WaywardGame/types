@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type * as ssh2 from "ssh2";
-import type Log from "utilities/Log";
+import type Log from "@wayward/utilities/Log";
 export declare const globalHistory: Map<string, string[]>;
 export declare const maxHistory = 50;
 export interface ISshStream {

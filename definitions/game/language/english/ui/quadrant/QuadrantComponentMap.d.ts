@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import ActionBar from "ui/screen/screens/game/static/ActionBar";
-import MenuBar from "ui/screen/screens/game/static/MenuBar";
-import Messages from "ui/screen/screens/game/static/Messages";
-import StatsQuadrant from "ui/screen/screens/game/static/Stats";
+import ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
+import MenuBar from "@wayward/game/ui/screen/screens/game/static/MenuBar";
+import Messages from "@wayward/game/ui/screen/screens/game/static/Messages";
+import StatsQuadrant from "@wayward/game/ui/screen/screens/game/static/Stats";
 declare const quadrantComponentMap: {
     3: typeof ActionBar;
     2: typeof MenuBar;

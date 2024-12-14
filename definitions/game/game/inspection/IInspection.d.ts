@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -30,7 +30,12 @@ export declare enum InspectType {
     Skill = 18,
     Milestone = 19,
     Stat = 20,
-    Island = 21
+    Island = 21,
+    Deity = 22,
+    Quality = 23,
+    Magic = 24,
+    Status = 25,
+    Damage = 26
 }
 /**
  * A convenience object for the priority of an inspection compared to other inspections. Useful to make an inspection priority
@@ -45,5 +50,6 @@ export declare enum InfoIcon {
     PinMap = 4,
     ActionUndiscovered = 5,
     ActionUsingAnyItem = 6,
-    PinLighthouse = 7
+    ActionUsingMissingItem = 7,
+    PinLighthouse = 8
 }

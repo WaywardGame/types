@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,18 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Corpse from "game/entity/creature/corpse/Corpse";
-import { InfoDisplayLevel } from "game/inspection/IInfoProvider";
-import { InspectType } from "game/inspection/IInspection";
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import LabelledValue from "game/inspection/infoProviders/LabelledValue";
-import Inspection from "game/inspection/Inspection";
-import type Tile from "game/tile/Tile";
+import Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import { InfoDisplayLevel } from "@wayward/game/game/inspection/IInfoProvider";
+import { InspectType } from "@wayward/game/game/inspection/IInspection";
+import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import Inspection from "@wayward/game/game/inspection/Inspection";
+import type Tile from "@wayward/game/game/tile/Tile";
+import Translation from "@wayward/game/language/Translation";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export default class CorpseInspection extends Inspection<Corpse> {
-    static getFromTile(tile: Tile): CorpseInspection[];
+    static getFromTile(tile: Tile, context?: InfoProviderContext): CorpseInspection[];
     static handles(type: InspectType, corpse: unknown): boolean;
-    constructor(corpse: Corpse);
-    get(context: InfoProviderContext): (0 | import("game/inspection/InfoProvider").SimpleInfoProvider | LabelledValue)[];
+    constructor(corpse: Corpse, context?: InfoProviderContext);
+    protected getTitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getSubtitle(context: InfoProviderContext): Translation | SimpleInfoProvider | undefined;
+    protected getContent(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider | undefined>;
     private getDecay;
     private decay;
     private shouldRefreshDecay;

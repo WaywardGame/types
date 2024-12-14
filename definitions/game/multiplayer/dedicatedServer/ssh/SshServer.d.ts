@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type * as ssh2 from "ssh2";
-import type { IFileSystem } from "@hosts/shared/ipc/fileSystem";
-import type { Game } from "game/Game";
+import type { Game } from "@wayward/game/game/Game";
+import type { IFileSystem } from "@wayward/hosts/shared/ipc/fileSystem";
 export interface ISshServerOptions {
     ssh2: typeof ssh2;
     crypto: any;

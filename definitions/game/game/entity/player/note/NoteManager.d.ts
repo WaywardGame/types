@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Island from "game/island/Island";
-import type { PartOfDay } from "game/time/ITimeManager";
-import type Dictionary from "language/Dictionary";
-import type { TranslationArg } from "language/ITranslation";
-import Translation from "language/Translation";
-import Note from "language/dictionary/Note";
-import type { IModdable } from "mod/ModRegistry";
-import { HelpArticle } from "ui/screen/screens/menu/menus/help/IHelpArticle";
+import type Island from "@wayward/game/game/island/Island";
+import type { PartOfDay } from "@wayward/game/game/time/ITimeManager";
+import type Dictionary from "@wayward/game/language/Dictionary";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
+import Translation from "@wayward/game/language/Translation";
+import Note from "@wayward/game/language/dictionary/Note";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import { HelpArticle } from "@wayward/game/ui/screen/screens/menu/menus/help/IHelpArticle";
 export interface INoteDescription extends IModdable {
     learnMore?: HelpArticle;
 }
@@ -36,6 +36,7 @@ export interface INoteManager {
     getNote(id: number): INote | undefined;
     wasWritten(note: Note): boolean;
     write(note: Note, ...args: any[]): void;
+    clear(): void;
     getUnread(): INote[];
     markRead(noteId: number): void;
     upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
@@ -46,12 +47,14 @@ export interface INoteHost {
     canWriteNote(note: INote): boolean;
     onWriteNote(index: number, note: Note): any;
     onReadNote(index: number): any;
+    onClearNotes(): any;
 }
 export declare class NoteManagerNoOp implements INoteManager {
     readonly notes: INote[];
     getNote(id: number): INote | undefined;
     wasWritten(note: Note): boolean;
     write(note: Note, ...args: TranslationArg[]): void;
+    clear(): void;
     getUnread(): INote[];
     markRead(noteId: number): void;
     upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
@@ -67,4 +70,5 @@ export default class NoteManager implements INoteManager {
     getUnread(): INote[];
     markRead(noteId: number): void;
     upgrade(id: `${keyof typeof Dictionary}:${string}`, dictionary: Dictionary, entry: number, upgrader?: Translation.ITranslationUpgrader): this;
+    clear(): void;
 }

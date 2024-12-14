@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import Button from "ui/component/Button";
-import Component from "ui/component/Component";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import Dialog from "ui/screen/screens/game/component/Dialog";
-import type TabDialogPanel from "ui/screen/screens/game/component/TabDialogPanel";
-import type { DialogId } from "ui/screen/screens/game/Dialogs";
+import Button from "@wayward/game/ui/component/Button";
+import Component from "@wayward/game/ui/component/Component";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import type { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
+import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
+import type TabDialogPanel from "@wayward/game/ui/screen/screens/game/component/TabDialogPanel";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export type SubpanelInformation = [string | number, TranslationGenerator, ((component: Component) => any)?, ((button: Button) => any)?, Button?];
 interface ITabDialogEvents extends Events<Dialog> {
     changeSubpanel(subpanel: SubpanelInformation): any;

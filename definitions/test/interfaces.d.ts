@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { INewIslandOverrides } from "@wayward/game/game/island/IIsland";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { GameMode } from "@wayward/game/game/options/IGameOptions";
 export interface ICommonGameOptions {
@@ -15,11 +16,13 @@ export interface ICommonGameOptions {
     seed?: string | number;
     enableMilestoneModifiers?: Set<Milestone>;
     enableAllMilestoneModifiers?: boolean;
+    startingIslandOverrides?: Partial<INewIslandOverrides>;
 }
 export interface IWaitUntilGameLoadedOptions {
     isJoiningServer: boolean;
     isCreatingServer: boolean;
     expectReopenServerPrompt: boolean;
+    expectGameScreen: boolean;
 }
 export interface INewGameOptions extends ICommonGameOptions {
     playMode: GamePlayMode;
@@ -48,4 +51,6 @@ export interface IPaths extends Omit<IAppPaths, "saveZipPath"> {
     specificDataPath: string;
     versionsPath: string;
     saveImportsPath: string;
+    savewardPath: string | undefined;
 }
+export declare const APP_CONTEXT_KEY = "APP";

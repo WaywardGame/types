@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,12 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Doodad from "game/doodad/Doodad";
-import type Entity from "game/entity/Entity";
-import type { Delay, SkillType } from "game/entity/IHuman";
-import type Item from "game/item/Item";
-import type Tile from "game/tile/Tile";
-import type { IRGB } from "utilities/Color";
+import type { IMovementTime } from "@wayward/game/game/IGame";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type Entity from "@wayward/game/game/entity/Entity";
+import type Human from "@wayward/game/game/entity/Human";
+import type { Delay, MovingState, SkillType } from "@wayward/game/game/entity/IHuman";
+import type { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
+import type NPC from "@wayward/game/game/entity/npc/NPC";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { StatusType } from "@wayward/game/game/entity/status/IStatus";
+import type Island from "@wayward/game/game/island/Island";
+import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import type { Direction } from "@wayward/game/utilities/math/Direction";
 export interface IEntityEvents {
     /**
      * Called when an entity is killed by another entity.
@@ -32,13 +43,43 @@ export interface IEntityEvents {
      * Called when the entity is removed from the game
      */
     removed(): void;
+    updateHistoricalActionCount(action: ActionType, count: number, oldCount: number): any;
 }
 export interface IEntityConstructorOptions<TypeType extends number> {
     id: number;
     type: TypeType;
     tile: Tile;
 }
-export declare enum StatusEffectChangeReason {
+export declare function asEntity(value?: unknown): Entity | undefined;
+export interface ICastable {
+    get island(): Island;
+    get asEntity(): Entity | undefined;
+    get asUnion(): Corpse | Creature | Doodad | Human | NPC | Player | TileEvent | Item | Tile | undefined;
+    get asCorpse(): Corpse | undefined;
+    get asCreature(): Creature | undefined;
+    get asDoodad(): Doodad | undefined;
+    get asHuman(): Human | undefined;
+    get asNPC(): NPC | undefined;
+    get asPlayer(): Player | undefined;
+    get asLocalPlayer(): Player | undefined;
+    get asTileEvent(): TileEvent | undefined;
+    get asItem(): Item | undefined;
+    get asTile(): Tile | undefined;
+    get asContainer(): (this & IUncastableContainer) | undefined;
+    isEntity(): this is Entity;
+    isCorpse(): this is Corpse;
+    isCreature(): this is Creature;
+    isDoodad(): this is Doodad;
+    isHuman(): this is Human;
+    isNPC(): this is NPC;
+    isPlayer(): this is Player;
+    get isLocalPlayer(): boolean;
+    isTileEvent(): this is TileEvent;
+    isItem(): this is Item;
+    isTile(): this is Tile;
+    isContainer(): this is IUncastableContainer;
+}
+export declare enum StatusChangeReason {
     Gained = 0,
     Passed = 1,
     Treated = 2
@@ -60,7 +101,7 @@ export interface IStatChangeInfo<T = any> {
      */
     important?: boolean;
 }
-export declare module IStatChangeInfo {
+export declare namespace IStatChangeInfo {
     /**
      * Creates a stat change info object
      * @param reasonOrInfo A `StatChangeReason`, or an already created `IStatChangeInfo` object.
@@ -73,20 +114,8 @@ export declare module IStatChangeInfo {
      */
     function get<T = any>(important: boolean): IStatChangeInfo<T>;
 }
-export declare enum StatusType {
-    Bleeding = 0,
-    Poisoned = 1,
-    Burned = 2,
-    Encumbered = 3,
-    Exhausted = 4,
-    Starving = 5,
-    Dehydrated = 6,
-    Overheating = 7,
-    Freezing = 8,
-    Frostbitten = 9
-}
 export type IStatus = Record<keyof typeof StatusType, number>;
-export interface ICausesStatusEffect {
+export interface ICausesStatus {
     causesStatus?: Array<StatusType | [status: StatusType, level: number]>;
 }
 export interface ICausesDamage {
@@ -102,76 +131,6 @@ export declare enum EntityType {
     Corpse = 6,
     Item = 7
 }
-export declare enum AiType {
-    /**
-     * Doesn't attack
-     */
-    Neutral = 0,
-    /**
-     * Attacks player
-     */
-    Hostile = 1,
-    /**
-     * Move like neutral - become fleeing within 10 tiles of a player
-     */
-    Scared = 2,
-    /**
-     * Moves in random direction
-     */
-    Random = 4,
-    /**
-     * Doesn't move, can't be seen
-     */
-    Hidden = 8,
-    /**
-     * Never scared
-     */
-    Fearless = 16,
-    /**
-     * Monster is tamed
-     */
-    Tamed = 32,
-    /**
-     * Follows the player at a close distance
-     */
-    FollowClose = 64,
-    /**
-     * Retaliates the player when attacked
-     */
-    Retaliate = 128,
-    /**
-     * Run away from the player
-     */
-    Fleeing = 256,
-    /**
-     * Do nothing until there are no players next to the entity
-     */
-    Waiting = 512,
-    /**
-     * Follows the player at a far distance
-     */
-    FollowFar = 1024,
-    /**
-     * Never move
-     */
-    Stay = 2048,
-    /**
-     * Attacks adjacent enemies (creatures when tamed)
-     */
-    AttackAdjacent = 4096,
-    /**
-     * Attacks enemies in sight(creatures when tamed)
-     */
-    AttackInSight = 8192,
-    /**
-     * Stays in place and attacks things that pass by it
-     */
-    Defend = 6144,
-    /**
-     * Follows the owner and attacks enemies it sees
-     */
-    Attack = 8256
-}
 export declare enum MoveType {
     None = 0,
     Water = 1,
@@ -184,7 +143,9 @@ export declare enum MoveType {
     BreakItems = 128,
     WetLand = 256,
     Void = 512,
-    LandBlind = 1024,
+    LandBlind = 1024,// Will not attempt to move towards targets on land
+    Hole = 2048,
+    Fast = 4096,
     Flying = 15
 }
 export declare enum AttackType {
@@ -214,7 +175,7 @@ export declare enum DamageType {
     Cold = 16,
     True = 32
 }
-export declare module DamageType {
+export declare namespace DamageType {
     function getAll(...damageTypes: DamageType[]): DamageType[];
 }
 export declare const RESIST_IMMUNITY = 99;
@@ -238,7 +199,7 @@ declare class AttributesImpl {
     set(damageTypes: DamageType, amount: number): this;
     add(attributes: Attributes): this;
     reset(amount?: number): void;
-    all(): [DamageType, number][];
+    all(): Array<[DamageType, number]>;
     types(): DamageType[];
     has(type?: DamageType): boolean;
     /**
@@ -276,15 +237,38 @@ export interface IAttackSkillBonus {
 export declare enum EntityTag {
     None = 0
 }
+export interface IMovingData {
+    /**
+     * The state of what the client thinks is happening to this entity (regarding movement)
+     * undefined = NoInput = Idle
+     */
+    state?: MovingState;
+    /**
+     * Start and end timestamps of the current movement
+     */
+    time?: IMovementTime;
+    options?: IMoveToOptions;
+}
+export interface IAttackAnimationData {
+    time: IMovementTime;
+    damageType: DamageType;
+}
 export interface IMoveToOptions {
     disallowCancelation?: boolean;
     movementDelay?: Delay | number;
     animation?: MoveAnimation;
-    onMoveCompletedParticles?: IRGB;
+    onMoveCompletedTileForParticles?: Tile;
     /**
      * What caused the move?
      */
     flags?: MoveFlag;
+    /**
+     * The target position.
+     * This overrides this.x/y
+     */
+    toX?: number;
+    toY?: number;
+    skipExtinguishTorches?: boolean;
 }
 export declare enum MoveAnimation {
     Normal = 0,
@@ -296,6 +280,23 @@ export declare enum MoveFlag {
     /**
      * Skips damage due to movement
      */
-    SkipEncumberedChecks = 1
+    SkipEncumberedChecks = 1,
+    /**
+     * Immediate movement
+     */
+    Teleport = 2
 }
+export declare enum SlippingSpeed {
+    Normal = 0,
+    DoubleSpeed = 1
+}
+export interface ISlippingData {
+    speed: SlippingSpeed;
+    direction: Direction.Cardinal;
+    count: number;
+}
+export declare const MAX_HUMAN_NORMAL_SPEED_SLIP = 25;
+export declare const MAX_HUMAN_DOUBLE_SPEED_SLIP = 50;
+export declare const MAX_CREATURE_SLIP = 20;
+export declare const MAX_DEFAULT_SLIP = 20;
 export {};

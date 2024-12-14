@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,27 +8,36 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "game/entity/action/IAction";
-import { ActionType } from "game/entity/action/IAction";
-import Human from "game/entity/Human";
-import type { IEntityConstructorOptions } from "game/entity/IEntity";
-import { AiType, EntityType, MoveType, StatusType } from "game/entity/IEntity";
-import type { ICustomizations } from "game/entity/IHuman";
-import { EquipType } from "game/entity/IHuman";
-import type { NPCType } from "game/entity/npc/INPCs";
-import type MerchantNPC from "game/entity/npc/npcs/Merchant";
-import type ShipperNPC from "game/entity/npc/npcs/Shipper";
-import { MessageManagerNoOp } from "game/entity/player/MessageManager";
-import { NoteManagerNoOp } from "game/entity/player/note/NoteManager";
-import { QuestManagerNoOp } from "game/entity/player/quest/QuestManager";
-import { TileUpdateType } from "game/IGame";
-import type { IContainer, ItemType } from "game/item/IItem";
-import type Item from "game/item/Item";
-import type Tile from "game/tile/Tile";
-import type TranslationImpl from "language/impl/TranslationImpl";
-import Translation from "language/Translation";
-export interface INPCEvents extends Events<Human> {
+import { TileUpdateType } from "@wayward/game/game/IGame";
+import type { RuneChance } from "@wayward/game/game/deity/IDeities";
+import Human from "@wayward/game/game/entity/Human";
+import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
+import { EntityType, MoveType } from "@wayward/game/game/entity/IEntity";
+import type { ICustomizations } from "@wayward/game/game/entity/IHuman";
+import { EquipType } from "@wayward/game/game/entity/IHuman";
+import type { IActionHandlerApi, IActionNotUsable, IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
+import { AiType, ChangeAiType } from "@wayward/game/game/entity/ai/AI";
+import type { IEntityAiEvents } from "@wayward/game/game/entity/ai/AiManager";
+import AiManager from "@wayward/game/game/entity/ai/AiManager";
+import type { INPCDescription } from "@wayward/game/game/entity/npc/INPC";
+import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
+import type MerchantNPC from "@wayward/game/game/entity/npc/npcs/Merchant";
+import type ShipperNPC from "@wayward/game/game/entity/npc/npcs/Shipper";
+import { MessageManagerNoOp } from "@wayward/game/game/entity/player/MessageManager";
+import type Player from "@wayward/game/game/entity/player/Player";
+import { NoteManagerNoOp } from "@wayward/game/game/entity/player/note/NoteManager";
+import { QuestManagerNoOp } from "@wayward/game/game/entity/player/quest/QuestManager";
+import { StatusType } from "@wayward/game/game/entity/status/IStatus";
+import type { IContainer, ItemType } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type { Article } from "@wayward/game/language/Translation";
+import Translation from "@wayward/game/language/Translation";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export interface INPCEvents extends Events<Human>, IEntityAiEvents {
     /**
      * Called when a npc tries to move
      * @param tile The tile the npc is trying to move to
@@ -42,28 +51,31 @@ export interface INPCEvents extends Events<Human> {
      */
     canNPCAttack(): boolean | undefined;
 }
-export default abstract class NPC extends Human<NPCType> {
+export default abstract class NPC extends Human<INPCDescription, NPCType, ReferenceType.NPC> {
     protected static registrarId: number;
     get constructorFunction(): typeof NPC;
     readonly isPlayerLike: boolean;
     get entityType(): EntityType.NPC;
     get tileUpdateType(): TileUpdateType;
-    readonly event: IEventEmitter<this, INPCEvents>;
-    ai: AiType;
+    event: IEventEmitter<this, INPCEvents>;
     seen: number;
-    weightCapacity: number;
+    private weightCapacity;
     talked?: Map<string, number>;
     interactions?: Map<string, Set<number>>;
+    ai: AiManager;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(entityOptions?: IEntityConstructorOptions<NPCType>);
+    getDescription(): INPCDescription | undefined;
+    getWeightCapacity(): number;
     getRegistrarId(): number;
     createNoteManager(): NoteManagerNoOp;
     createMessageManager(): MessageManagerNoOp;
     createQuestManager(): QuestManagerNoOp;
     addMilestone(): void;
-    protected getApplicableStatusEffects(): Set<StatusType> | undefined;
-    isValid(): boolean;
+    protected getApplicableStatuses(): Set<StatusType> | undefined;
+    get isValid(): boolean;
+    load(): void;
     /**
      * Creates inventory, equips items, and scales stats
      */
@@ -84,7 +96,7 @@ export default abstract class NPC extends Human<NPCType> {
      * @returns True if an npc can move / attack / do other things while not in anyones field of view
      */
     protected canUpdateOutsideFov(): boolean;
-    protected runCommonProcesses(inventoryItems: Item[]): boolean;
+    protected runCommonProcesses(inventoryItems: Item[]): number | undefined;
     kill(): boolean;
     isHostile(): boolean;
     isWaiting(): boolean;
@@ -99,12 +111,6 @@ export default abstract class NPC extends Human<NPCType> {
      * The actions available to use with this npc
      */
     getActions(): ActionType[] | undefined;
-    addAiType(ai: AiType): void;
-    /**
-     * Removes an AiType from an NPC.
-     * @param ai The AiType to remove from the NPC.
-     */
-    removeAiType(ai: AiType): void;
     /**
      * Greets a human, if necessary, and sets the NPC as having been talked to them on the current turn.
      * @returns The time since the NPC was last talked to, or false if the human has never talked to the NPC.
@@ -126,16 +132,13 @@ export default abstract class NPC extends Human<NPCType> {
      * Don't call this directly, it's for implementation. @see {@link NPCInteract}
      */
     interact(action: IActionHandlerApi<Human>, interactType?: number): void;
-    /**
-     * Closes container dialogs
-     */
-    closeContainerDialogs(): void;
     protected moveToIsland(targetTile: Tile): void;
     /**
      * Sets the default weightCapacity of an NPC (based on their equipment and starting items).
      */
     generateWeightCapacity(): void;
     getName(asKnownBy?: Human): TranslationImpl;
+    getName(article?: Article): TranslationImpl;
     /**
      * The name of the npc - called when created
      */
@@ -162,22 +165,32 @@ export default abstract class NPC extends Human<NPCType> {
      */
     protected abstract getDefaultAiType(): AiType;
     /**
-     * The reputation change when the npc dies
+     * The rune granted on when killing the NPC.
      */
-    protected getReputationChangeOnDeath(): number;
+    protected giveRuneOnDeath(): RuneChance;
     protected attack(): boolean;
+    findPath(target: Tile, moveType: MoveType, ignoreHuman: Human, maxNodesChecked?: number): Tile[] | undefined;
+    /**
+     * Check NPC move with a multiplayer sync check
+     * @param source Provided when the check is running in a sync environment (NOT CLIENTSIDE)
+     * @returns 0 if the NPC can move, otherwise an error code
+     */
+    private checkNPCSafeMove;
     protected move(): boolean;
     protected autoScaleStats(): void;
     protected changeZ(toZ: number, fromZ: number): boolean | void | undefined;
-    protected updateTile(fromTile: Tile, toTile: Tile): boolean;
-    protected postMove(): void;
-    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): 0 | -1 | -2 | -5 | -4 | -6 | -3;
+    protected onAiChange(ai: AiType, type: ChangeAiType): void;
+    protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
+    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): 0 | -1 | -6 | -2 | -3 | -4 | -5;
     getWeightOrStaminaMovementPenalty(): number;
     get asMerchant(): MerchantNPC | undefined;
     get asShipper(): ShipperNPC | undefined;
     get asNPC(): NPC;
     get asPlayer(): undefined;
     get asLocalPlayer(): undefined;
+    get isLocalPlayer(): boolean;
+    isNPC(): this is NPC;
+    isPlayer(): this is Player;
     /**
      * Equip better things when available
      */

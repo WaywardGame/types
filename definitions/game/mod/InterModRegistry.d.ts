@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,7 +12,7 @@ export default class InterModRegistry<T> {
     readonly modName: string;
     readonly name: string;
     constructor(modName: string, name: string);
-    getRegistrations(): InterModRegistration<T>[];
+    getRegistrations(): Array<InterModRegistration<T>>;
 }
 export declare class InterModRegistration<T> {
     readonly modName: string;

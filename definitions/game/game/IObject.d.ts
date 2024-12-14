@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { BiomeType } from "game/biome/IBiome";
-import type { SkillType } from "game/entity/IHuman";
-import type { TerrainType } from "game/tile/ITerrain";
-import type { WorldZ } from "game/WorldZ";
-import type { ISerializedTranslation } from "language/ITranslation";
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 export interface IObject<T> {
     type: T;
     id: number;
@@ -27,7 +28,11 @@ export interface IObjectDescription extends IHasImagePath {
      * number of game ticks until decay
      */
     decayMax?: number;
-    skillUse?: SkillType;
+    /**
+     * An associated skill or skills for the item when refining, reinforcing, dismantling, consuming, etc.
+     * If multiple skills are set, it will pick one at random when using
+     */
+    skillUse?: SkillType | SkillType[];
     /**
      * container maximum weight
      */
@@ -37,6 +42,17 @@ export interface IObjectDescription extends IHasImagePath {
      */
     preservationChance?: number;
     spawnOnWorldGen?: OptionalDescriptions<BiomeType, OptionalDescriptions<WorldZ, OptionalDescriptions<TerrainType, number>>>;
+    /**
+     * If this is a doodad/item container, you can set this to true to make the doodad/item considered one where you can only "place items onto" the doodad/item, rather than storing the items within the doodad/item.
+     * - Changes messages when putting items in the container to "placed onto" via `placedOnToMessage`
+     * - Prevents using the item as a container when in your inventory via `preventUsingItemAsContainerInInventory`
+     * - Prevents picking up the doodad when items are inside via `preventPickingUpDoodadWhenItemsAreInside`
+     */
+    containerOptions?: IContainerOptions;
+    /**
+     * If set to true, this item will not tryRestoreCreature() when breaking (the difference between golems and full cages)
+     */
+    disableRestoreCreature?: boolean;
 }
 export interface IHasImagePath<ImagePathType = string> {
     /**
@@ -49,7 +65,6 @@ export interface IHasImagePath<ImagePathType = string> {
     imageCount?: number;
 }
 export interface IObjectOptions {
-    decay?: number;
     durability?: number;
     durabilityMax?: number;
     quality?: Quality;
@@ -62,4 +77,17 @@ export declare enum Quality {
     Exceptional = 4,
     Mastercrafted = 5,
     Relic = 6
+}
+export type QualityNatural = Exclude<Quality, Quality.Random | Quality.Mastercrafted>;
+export interface IQualityEvents {
+    qualityChange(quality: Quality, oldQuality: Quality): any;
+}
+export interface IHasQuality {
+    event: IEventEmitter<this, IQualityEvents>;
+    quality?: Quality;
+}
+export interface IContainerOptions {
+    placedOnToMessage?: boolean;
+    preventUsingItemAsContainerInInventory?: boolean;
+    preventPickingUpDoodadWhenItemsAreInside?: boolean;
 }

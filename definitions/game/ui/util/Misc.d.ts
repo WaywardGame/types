@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IServerMod } from "@hosts/shared/interfaces";
-import type { IPlayOptions } from "game/IGame";
+import type { IPlayOptions } from "@wayward/game/game/IGame";
+import type { ModInformation } from "@wayward/game/mod/ModInformation";
+import type { IServerMod } from "@wayward/hosts/shared/interfaces";
 export declare function startGame(gameOptions: () => IPlayOptions): () => void;
 export declare function startGame(gameOptions: IPlayOptions): void;
 export declare enum ModLoadability {
@@ -18,6 +19,4 @@ export declare enum ModLoadability {
     NotFound = "notfound",
     Error = "error"
 }
-export declare function isModLoadable(publishFileId: string): [string, ModLoadability];
-export declare function isModLoadable(mod: IServerMod): [string, ModLoadability];
-export declare function isModLoadable(index: number): [string, ModLoadability];
+export declare function isModLoadable(publishFileIdOrServerModOrMod: string | IServerMod | ModInformation): [string, ModLoadability];

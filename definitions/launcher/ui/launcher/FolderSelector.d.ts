@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ComponentEventManager, ComponentEvents } from "ui/component/Component";
-import Component from "ui/component/Component";
-import Section from "ui/component/Section";
-import FolderButton from "ui/launcher/FolderButton";
-import type Data from "utilities/Data";
+import type { ComponentEventManager, ComponentEvents } from "@wayward/launcher/ui/component/Component";
+import Component from "@wayward/launcher/ui/component/Component";
+import Section from "@wayward/launcher/ui/component/Section";
+import FolderButton from "@wayward/launcher/ui/launcher/FolderButton";
+import type Data from "@wayward/launcher/utilities/Data";
 export interface IFolderSelectorEvents extends ComponentEvents<Section> {
     addNew: {
         folders: IFolder[];

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { BlockRow } from "ui/component/BlockRow";
-import Button from "ui/component/Button";
-import RowSection from "ui/component/RowSection";
-import Menu from "ui/screen/screens/menu/component/Menu";
-import SaveSlot from "ui/screen/screens/menu/menus/loadgame/SaveSlot";
+import { BlockRow } from "@wayward/game/ui/component/BlockRow";
+import Button from "@wayward/game/ui/component/Button";
+import RowSection from "@wayward/game/ui/component/RowSection";
+import Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
+import SaveSlot from "@wayward/game/ui/screen/screens/menu/menus/loadgame/SaveSlot";
 export default class MainMenu extends Menu {
     private isNewVersion;
     readonly updateBanner: Button;
@@ -38,6 +38,7 @@ export default class MainMenu extends Menu {
     private initContinueNewGame;
     private updateNewsButton;
     protected onModsSetup(): void;
+    private static shownGameInterrupts;
     private checkAndShowGameInterrupts;
     private getAboutMenu;
     private getNewsMenu;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,7 +11,13 @@
 import type { IWaywardPreload } from "./interfaces";
 import type { IElectron } from "./ipc/electron";
 export interface IRequireJs {
-    s: any;
+    s: {
+        contexts: {
+            _: {
+                defined: Record<string, any>;
+            };
+        };
+    };
     undef(path: string): void;
     onResourceLoad(ctx: any, map: any): void;
     (moduleName: string): any;
@@ -21,9 +27,17 @@ export interface IWaywardPreloadLoader {
     installPath?: string;
     getObject?: () => IWaywardPreload;
 }
+export interface IWaywardTitle {
+    isSimplified?: boolean;
+    includeBuild?: boolean;
+    isLauncher?: boolean;
+    isDedicatedServer?: boolean;
+    testAppId?: string;
+    testTitleId?: string;
+}
 export interface IWaywardTitleBar {
     customTitleBar: boolean;
-    title: string;
+    title: IWaywardTitle;
     platform: string;
     isMaximized: boolean;
     electron: IElectron;

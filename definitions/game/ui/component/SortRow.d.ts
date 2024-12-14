@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,43 +8,55 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import { SortDirection } from "save/ISaveManager";
-import Button from "ui/component/Button";
-import { LabelledRow } from "ui/component/LabelledRow";
-import type { IRefreshableValue } from "ui/component/Refreshable";
-export interface SortRowData<Sort> {
+import type { SfxType, SfxUi } from "@wayward/game/audio/IAudio";
+import Translation from "@wayward/game/language/Translation";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import { SortDirection } from "@wayward/game/save/ISaveManager";
+import Button from "@wayward/game/ui/component/Button";
+import Dropdown from "@wayward/game/ui/component/Dropdown";
+import { LabelledRow } from "@wayward/game/ui/component/LabelledRow";
+import type { IRefreshableValue } from "@wayward/game/ui/component/Refreshable";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export interface SortRowData<SORT> {
     sortEnum: any;
-    defaultSort: Sort;
+    defaultSort: SORT;
     defaultDirection?: SortDirection;
-    filter?(name: string, sort: Sort): boolean;
-    initializeOption(button: Button, sort: [string, Sort]): any;
+    includeCustomSort?: boolean;
+    filter?(name: string, sort: SORT): boolean;
+    translate(sort: SORT): Translation;
+    initializeOption?(button: Button, sort: [string, SORT]): any;
 }
-interface ISortRowEvents<S extends number> extends Events<LabelledRow> {
+interface ISortRowEvents<S extends number | "custom"> extends Events<LabelledRow> {
     /**
      * @param sort The sort type (value in the sort enum)
      * @param direction a SortDirection
      */
     sort(sort: S, direction: SortDirection): any;
+    openDropdown(): any;
+    closeDropdown(): any;
 }
-export default class SortRow<S extends number> extends LabelledRow implements IRefreshableValue<SortRowData<S>> {
+export default class SortRow<S extends number | "custom" = number> extends LabelledRow implements IRefreshableValue<SortRowData<S>> {
     event: IEventEmitter<this, ISortRowEvents<S>>;
     private _sort;
     private _sortDirection;
     private disabledSorts;
-    private readonly dropdown;
-    private readonly sortDirectionButton;
+    readonly dropdown: Dropdown<S>;
+    readonly sortDirectionButton: Button;
     private refreshMethod;
     private ignoreNextSelection;
     get sort(): S;
     get sortDirection(): SortDirection;
     constructor();
+    setSound(sound?: SfxType | SfxUi): this;
+    getDefaultSort(): S;
+    getDefaultSortDirection(): SortDirection;
+    translateSort(sort?: S): TranslationImpl;
     setDisabledSorts(val: S[], refresh?: boolean): this;
     setRefreshMethod(refresh: () => SortRowData<S>): this;
     refresh(): this;
-    setSort(sort: S, direction: SortDirection): void;
+    setSort(sort: S, direction: SortDirection, triggerSelect?: boolean): void;
     toggleSortDirection(sortDirection?: SortDirection): void;
     triggerSort(): void;
-    triggerSortAsync(): Promise<any[]>;
+    triggerSortAsync(): Promise<void>;
 }
 export {};

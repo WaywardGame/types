@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IHasImagePath } from "game/IObject";
-import type { IModdable } from "mod/ModRegistry";
-import type Button from "ui/component/Button";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import type Bindable from "ui/input/Bindable";
-import type Tooltip from "ui/tooltip/Tooltip";
-import type { IVector2 } from "utilities/math/IVector";
+import type { IHasImagePath } from "@wayward/game/game/IObject";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type Button from "@wayward/game/ui/component/Button";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import type Bindable from "@wayward/game/ui/input/Bindable";
+import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 export declare enum MenuBarButtonType {
     Menu = 0,
     Save = 1,

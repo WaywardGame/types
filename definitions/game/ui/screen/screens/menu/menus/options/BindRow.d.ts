@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,20 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import Button from "ui/component/Button";
-import Component from "ui/component/Component";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import type { IRefreshable } from "ui/component/Refreshable";
-import Bindable from "ui/input/Bindable";
-import type { Binding } from "ui/input/Bindings";
-import { Macro } from "ui/input/Macros";
+import Button from "@wayward/game/ui/component/Button";
+import Component from "@wayward/game/ui/component/Component";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
+import Bindable from "@wayward/game/ui/input/Bindable";
+import type { Binding } from "@wayward/game/ui/input/Bindings";
+import { Macro } from "@wayward/game/ui/input/Macros";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface IBindRowEvents extends Events<Button> {
     requestFilter(macro: Macro): any;
     update(): any;
 }
 export declare class BindRow extends Button implements IRefreshable {
-    readonly event: IEventEmitter<this, IBindRowEvents>;
+    event: IEventEmitter<this, IBindRowEvents>;
     private readonly currentBinds;
     private readonly bind;
     private readonly bindingCatcher;

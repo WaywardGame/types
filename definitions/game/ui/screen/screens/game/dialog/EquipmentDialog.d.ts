@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,16 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { EquipType } from "game/entity/IHuman";
-import type Item from "game/item/Item";
-import Component from "ui/component/Component";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import Bindable from "ui/input/Bindable";
-import Dialog from "ui/screen/screens/game/component/Dialog";
-import type { IItemDropApi, IItemPickUpApi, ItemSlot } from "ui/screen/screens/game/component/ItemComponent";
-import ItemComponent, { ItemRefreshType } from "ui/screen/screens/game/component/ItemComponent";
-import EquipmentSlotTooltipHandler from "ui/screen/screens/game/dialog/equipment/EquipmentSlotTooltip";
-import { MenuBarButtonType } from "ui/screen/screens/game/static/menubar/IMenuBarButton";
+import { EquipType } from "@wayward/game/game/entity/IHuman";
+import type Item from "@wayward/game/game/item/Item";
+import Component from "@wayward/game/ui/component/Component";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import Bindable from "@wayward/game/ui/input/Bindable";
+import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
+import type { IItemDropApi, IItemPickUpApi, ItemSlot } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import ItemComponent, { ItemRefreshType } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import EquipmentSlotTooltipHandler from "@wayward/game/ui/screen/screens/game/dialog/equipment/EquipmentSlotTooltip";
+import { MenuBarButtonType } from "@wayward/game/ui/screen/screens/game/static/menubar/IMenuBarButton";
 export declare enum EquipmentClasses {
     Main = "game-dialog-equipment",
     Body = "game-dialog-equipment-body",
@@ -29,7 +29,7 @@ export declare enum EquipmentClasses {
     SlotsWrapper = "game-dialog-equipment-slots-wrapper"
 }
 export declare namespace EquipmentClasses {
-    const SlotType: (enumValue: EquipType) => "game-dialog-equipment-slot-none" | "game-dialog-equipment-slot-head" | "game-dialog-equipment-slot-feet" | "game-dialog-equipment-slot-back" | "game-dialog-equipment-slot-waist" | "game-dialog-equipment-slot-chest" | "game-dialog-equipment-slot-hands" | "game-dialog-equipment-slot-held" | "game-dialog-equipment-slot-legs" | "game-dialog-equipment-slot-neck" | "game-dialog-equipment-slot-mainhand" | "game-dialog-equipment-slot-offhand";
+    const SlotType: (enumValue: EquipType) => "game-dialog-equipment-slot-none" | "game-dialog-equipment-slot-head" | "game-dialog-equipment-slot-back" | "game-dialog-equipment-slot-chest" | "game-dialog-equipment-slot-feet" | "game-dialog-equipment-slot-hands" | "game-dialog-equipment-slot-held" | "game-dialog-equipment-slot-legs" | "game-dialog-equipment-slot-neck" | "game-dialog-equipment-slot-waist" | "game-dialog-equipment-slot-mainhand" | "game-dialog-equipment-slot-offhand" | "game-dialog-equipment-slot-dualwield";
 }
 export default class EquipmentDialog extends Dialog {
     readonly slots: Component<HTMLElement>;
@@ -45,9 +45,10 @@ export declare class EquipmentSlot extends ItemComponent {
     private overriddenItem?;
     equipItem(item: Item): Promise<void>;
     clear(): void;
-    refresh(refreshType: ItemRefreshType): void;
+    refresh(refreshType: ItemRefreshType): this;
     protected onEquipEvent(): void;
     protected onPickUp(api: IItemPickUpApi): void;
-    protected onDrop(api: IItemDropApi, intoSlot?: ItemSlot): void;
+    protected onDropInto(api: IItemDropApi, fromSlot?: ItemSlot): boolean;
+    protected onDropFrom(api: IItemDropApi, intoSlot?: ItemSlot): boolean;
     private isEquippable;
 }

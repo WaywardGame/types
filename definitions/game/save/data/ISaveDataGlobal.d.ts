@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,23 +8,29 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { InspectType } from "game/inspection/IInspection";
-import type { AutoSaveMode } from "game/meta/IAutoSave";
-import type { GameMode, IGameOptions } from "game/options/IGameOptions";
-import type { ISerializedTranslation } from "language/ITranslation";
-import type Bindable from "ui/input/Bindable";
-import type { Binding } from "ui/input/Bindings";
-import type { FontStyle } from "ui/IUi";
-import type UiExperiment from "ui/UiExperiments";
-import type { ISourceFilter } from "utilities/Log";
+import type { TurnMode } from "@wayward/game/game/IGame";
+import type { InspectType } from "@wayward/game/game/inspection/IInspection";
+import type { AutoSaveMode } from "@wayward/game/game/meta/IAutoSave";
+import type { GameMode, IGameOptions } from "@wayward/game/game/options/IGameOptions";
+import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import type { IMultiplayerOptions } from "@wayward/game/multiplayer/IMultiplayer";
+import type Bindable from "@wayward/game/ui/input/Bindable";
+import type { Binding } from "@wayward/game/ui/input/Bindings";
+import type { FontStyle } from "@wayward/game/ui/IUi";
+import type UiExperiment from "@wayward/game/ui/UiExperiments";
 export interface IOptions {
     alternatingDirectionMovement: boolean;
     autoAttack: boolean;
     autoPickup: boolean;
     autoPickupOnIdle: boolean;
     autoSave: [AutoSaveMode.Off] | [AutoSaveMode.Turns | AutoSaveMode.Time, number];
+    /**
+     * Indexed by `Bindable` names, IE `GameFaceDirection`
+     * Missing indices = use default binding
+     */
+    bindings: OptionalDescriptions<keyof typeof Bindable, Binding[]>;
     compressSaves: boolean;
-    consoleLogSourceFilter: ISourceFilter;
+    consoleLogSourceFilters: Record<string, boolean>;
     currentGame: number;
     customTitleBar: boolean;
     defaultCursor: boolean;
@@ -35,10 +41,15 @@ export interface IOptions {
     disableAcrylicTransparency: boolean;
     disableCraftingProtectedItems: boolean;
     disableHealthVignette: boolean;
+    disableItemNotifiers: boolean;
+    disableMilestones: boolean;
     disableMovementAnimations: boolean;
     disableOverlaySupport: boolean;
+    disableQuitConfirmation: boolean;
+    disableSpritePack: boolean;
     disableUIEffects: boolean;
     disableUIOpacity: boolean;
+    discoveredEverything: boolean;
     dropIntoContainers: boolean;
     dropLocation: DropLocation;
     dropOnDisassemble: boolean;
@@ -48,17 +59,20 @@ export interface IOptions {
     fallBackToEnglish: boolean;
     fontStyle: FontStyle;
     fullscreen: boolean;
+    grantAllMilestoneModifiers: boolean;
     hideEquippedHeadgear: boolean;
     hudWidth?: number;
-    keepSortActive: boolean;
     leftHanded: boolean;
     lowPowerMode: boolean;
     mouseTurnDelay: number;
     musicPlaylist: MusicPlaylist;
     muteEffects: boolean;
     muteMusic: boolean;
+    muteWhileNotFocused: boolean;
     playInputSoundWhenTyping: boolean;
     realTimeTickSpeed: number;
+    renderer: "webgl" | "webgpu";
+    saveImportFolders: string[];
     saveUiDataGlobally: boolean;
     shouldLoadLastSave: boolean;
     shouldObjectNamesSkipArticle: boolean;
@@ -75,16 +89,12 @@ export interface IOptions {
     volumeEffects: number;
     volumeMusic: number;
     warnOnDangerousActions: boolean;
+    warnOnDestructiveActions: boolean;
     warnWhenBreakingItems: boolean;
     warnWhenBreakingItemsOnCraft: boolean;
     windowMode: boolean;
     zoomLevel: number;
     zoomSmoothing: boolean;
-    /**
-     * Indexed by `Bindable` names, IE `GameFaceDirection`
-     * Missing indices = use default binding
-     */
-    bindings: OptionalDescriptions<keyof typeof Bindable, Binding[]>;
 }
 export declare enum DropLocation {
     Facing = 0,
@@ -107,29 +117,29 @@ export declare enum TooltipVisibilityOption {
     AlwaysShowMoreInformation = 2,
     Default = 1
 }
-export type IOptionsOld = Partial<Pick<IOptions, "bindings">> & Partial<{
-    alwaysShowMoreInformation: boolean;
-    keyBinds: Record<number, number>;
-    bindings: IBindingsOld;
-    directionTurnDelay: boolean;
-    fontStyle: boolean;
-    developerLogging: boolean;
-    hints: boolean;
-    skipIntro: boolean;
-    worldTooltips: boolean;
-    dropUnderYourself: boolean;
-    openNotesAutomatically: boolean;
-    tooltipsCreatures: boolean;
-    tooltipsDoodads: boolean;
-    tooltipsNPCs: boolean;
-    tooltipsTerrain: boolean;
-    tooltipsItems: boolean;
-    allowDiagonalMovement: boolean;
-    disableUIAnimations: boolean;
-    enableAutoSave: boolean;
-    protectedCraftingItems: boolean;
-    protectedCraftingItemContainers: boolean;
-}>;
+export interface IOptionsOld {
+    alwaysShowMoreInformation?: boolean;
+    keyBinds?: Record<number, number>;
+    bindings?: IBindingsOld;
+    directionTurnDelay?: boolean;
+    fontStyle?: boolean;
+    developerLogging?: boolean;
+    hints?: boolean;
+    skipIntro?: boolean;
+    worldTooltips?: boolean;
+    dropUnderYourself?: boolean;
+    openNotesAutomatically?: boolean;
+    tooltipsCreatures?: boolean;
+    tooltipsDoodads?: boolean;
+    tooltipsNPCs?: boolean;
+    tooltipsTerrain?: boolean;
+    tooltipsItems?: boolean;
+    allowDiagonalMovement?: boolean;
+    disableUIAnimations?: boolean;
+    enableAutoSave?: boolean;
+    protectedCraftingItems?: boolean;
+    protectedCraftingItemContainers?: boolean;
+}
 export interface IHighscore {
     name: string;
     message: ISerializedTranslation;
@@ -140,6 +150,9 @@ export interface IHighscore {
     characterName: string;
     seed?: string | number;
     difficultyOptions?: IGameOptions;
+    turnMode: TurnMode;
+    multiplayerOptions?: ImmutableObject<IMultiplayerOptions>;
+    customMilestoneModifiersAllowed?: boolean;
 }
 export type IHighscoreOld = Partial<IHighscore> & Partial<{
     dailyChallenge: boolean;

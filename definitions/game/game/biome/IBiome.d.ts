@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,33 +8,35 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { WorldZ } from "game/WorldZ";
-import { type FerocityLevelThresholds } from "game/deity/IDeities";
-import type { IBiomeMapGen, MapGenVersions } from "game/mapgen/IMapGen";
-import type { IBiomeTemperature } from "game/temperature/ITemperature";
-import type { TerrainType } from "game/tile/ITerrain";
-import type { IModdable } from "mod/ModRegistry";
-import type { IRGB } from "utilities/Color";
-export interface IBiomeDescription extends IModdable {
+import type { IBiomeCreatureZones } from "@wayward/game/game/entity/creature/zone/ICreatureZone";
+import type { IBiomeMapGen, MapGenVersions } from "@wayward/game/game/mapgen/IMapGen";
+import type { IBiomeTemperature } from "@wayward/game/game/temperature/ITemperature";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type { IRGB } from "@wayward/utilities/Color";
+export interface IBiomeDescription<BiomeOptionsType = unknown> extends IModdable {
     disableTravel?: boolean;
+    disableHeightMaps?: boolean;
+    disableWebWorker?: boolean;
+    disableTreasureMaps?: boolean;
+    disableLoadingScreen?: boolean;
+    loadIntoSpawnPoint?: boolean;
     defaultTerrainBackground: TerrainType;
     defaultCaveEntranceFlooring: TerrainType;
     terrainOverrides?: Set<TerrainType>;
     temperature?: IBiomeTemperature;
-    mapGen: MapGenVersions<IBiomeMapGen>;
+    mapGen: MapGenVersions<IBiomeMapGen<BiomeOptionsType>>;
     fog?: IFogDescription;
     /**
-     * A record defining maximum thresholds for each ferocity level.
-     *
-     * When a layer's ferocity thresholds are not set, thresholds for `WorldZ.Overworld` are used.
-     * When no thresholds are set *at all*, {@link DEFAULT_FEROCITY_LEVEL_THRESHOLDS} is used.
-     *
-     * The current ferocity level is equivalent to the level with the threshold *closest* to the current alignment value, without exceeding it.
-     *
-     * When no thresholds are applicable, `FerocityLevel.Minimal` is used.
+     * Optional, looks in `CreatureZoneDescriptions.ts` by default
      */
-    ferocity?: PartialRecord<WorldZ, FerocityLevelThresholds>;
+    zones?: IBiomeCreatureZones;
+    /**
+     * Returns default biome options
+     */
+    getDefaultOptions?(): BiomeOptionsType;
 }
+export type GetBiomeOptionType<T> = T extends IBiomeDescription<infer U> ? U : never;
 export interface IFogDescription {
     color: IRGB;
     /**
@@ -65,7 +67,7 @@ export interface IFogDescription {
      */
     nightFogColorMaxMix?: number;
 }
-export type BiomeMapGen<T = void> = MapGenVersions<IBiomeMapGen>;
+export type BiomeMapGen<BiomeOptionsType = void> = MapGenVersions<IBiomeMapGen<BiomeOptionsType>>;
 export type BiomeTypes = Exclude<BiomeType, BiomeType.Random>;
 export declare enum BiomeType {
     Random = 0,
@@ -74,7 +76,8 @@ export declare enum BiomeType {
     Arid = 3,
     Volcanic = 4,
     Wetlands = 5,
-    Template = 6
+    Template = 6,
+    Dungeon = 7
 }
 /**
  * @see {@link IFogDescription.ambientColorFogBrightness }

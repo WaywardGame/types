@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { MenuId } from "ui/screen/screens/menu/component/IMenu";
-import type Menu from "ui/screen/screens/menu/component/Menu";
+import type { MenuId } from "@wayward/game/ui/screen/screens/menu/component/IMenu";
+import type Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
+import { InfoDisplayLevel } from "@wayward/game/game/inspection/IInfoProvider";
 export declare enum FontStyle {
     Pixel = 0,
     Balanced = 1,
@@ -44,6 +45,13 @@ export declare enum SelectDirection {
     Left = -2,
     Right = 2
 }
+/**
+ * An enum for every axis of dialog movement.
+ */
+export declare enum Axis {
+    X = "x",
+    Y = "y"
+}
 export interface LoadMenuArgs {
     _wentBack: boolean;
 }
@@ -54,8 +62,13 @@ export declare enum UiClasses {
     FitContent = "fit-content",
     ColoredSecondary = "colored-secondary",
     BalancedSmooth = "balanced-smooth",
-    Hint = "hint"
+    Hint = "hint",
+    RequiresDeveloperMode = "requires-developer-mode"
 }
 export declare namespace UiClasses {
     function createDynamic<CLASS extends string, ENUM>(baseClass: CLASS, enm: ENUM): (enumValue: ENUM[keyof ENUM]) => `${CLASS}-${Lowercase<keyof ENUM & string>}`;
+    /**
+     * For raw classes use `InfoClass`
+     */
+    function displayLevel(displayLevel: InfoDisplayLevel): string[];
 }

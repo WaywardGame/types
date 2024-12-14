@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -28,13 +28,17 @@ export declare enum TimeFormat {
     TwentyFourHourNoMinute = 4
 }
 export declare enum PartOfDay {
-    Nighttime = 0,
-    Dawn = 1,
-    Sunrise = 2,
-    Daytime = 3,
-    Sunset = 4,
-    Dusk = 5
+    Nighttime = 1,
+    Dawn = 2,
+    Sunrise = 4,
+    Daytime = 8,
+    Sunset = 16,
+    Dusk = 32,
+    AllDaytime = 30,
+    AllNighttime = 33,
+    Always = 63
 }
+export type PartOfDayGranular = Exclude<PartOfDay, PartOfDay.AllDaytime | PartOfDay.AllNighttime | PartOfDay.Always>;
 export declare enum DayQuarter {
     Day1 = 0,
     Day2 = 1,

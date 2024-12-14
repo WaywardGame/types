@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -27,7 +27,7 @@ declare class App {
         mods: string;
         saves: string;
     };
-    execDetached(command: string, ...args: string[]): void | undefined;
+    execDetached(command: string, ...args: string[]): Promise<void> | undefined;
     exit(): void;
 }
 export default App;

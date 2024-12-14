@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ISerializable, ISerializer } from "save/serializer/ISerializer";
-import { Types } from "save/serializer/ISerializer";
-import type { IVector2, IVector3 } from "utilities/math/IVector";
+import type { ISerializable, ISerializer } from "@wayward/game/save/serializer/ISerializer";
+import { Types } from "@wayward/game/save/serializer/ISerializer";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 export default class Vector3 implements IVector3, ISerializable {
     static get ZERO(): Vector3;
     static get ONE(): Vector3;
@@ -26,6 +26,7 @@ export default class Vector3 implements IVector3, ISerializable {
     static dot(vector: IVector3, vector2: IVector3): number;
     static distance(vector: IVector3, vector2: IVector3): number;
     static squaredDistance(vector: IVector3, vector2: IVector3): number;
+    static equals(vec1?: IVector3, vec2?: IVector3): boolean;
     static direction(vector: IVector3, vector2: IVector3): Vector3;
     static direction<D extends IVector3>(vector: IVector3, vector2: IVector3, dest: D): D;
     static mix(vector: IVector3, vector2: IVector3, time: number): Vector3;
@@ -39,6 +40,7 @@ export default class Vector3 implements IVector3, ISerializable {
     static quotient(vector: IVector3, vector2: IVector3): Vector3;
     static quotient<D extends IVector3>(vector: IVector3, vector2: IVector3, dest: D): D;
     static is(thing: unknown): thing is IVector3;
+    static rawCopy(v3: IVector3): IVector3;
     private readonly values;
     get x(): number;
     set x(value: number);

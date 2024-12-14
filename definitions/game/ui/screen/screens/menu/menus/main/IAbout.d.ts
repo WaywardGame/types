@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Website } from "ui/screen/screens/menu/menus/main/component/IWebsite";
+import { Website } from "@wayward/game/ui/screen/screens/menu/menus/main/component/IWebsite";
 export declare enum Responsibility {
     Programming = 0,
     Design = 1,
@@ -30,10 +30,8 @@ export interface ITeamMember extends IPerson {
     isCurrentMember?: true;
     links?: TeamMemberLink[];
 }
-export declare module About {
-    function getLibraries(): {
-        [x: string]: string;
-    };
+export declare namespace About {
+    function getLibraries(): Record<string, string>;
     function getSpecialThanks(): IPerson[];
     function getTeamMembers(): ITeamMember[];
 }

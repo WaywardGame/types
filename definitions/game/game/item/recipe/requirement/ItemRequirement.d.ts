@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ItemTypeGroup } from "game/item/IItem";
-import { ItemType } from "game/item/IItem";
-import type Item from "game/item/Item";
-import type Crafter from "game/item/recipe/Crafter";
-import ItemOutput from "game/item/recipe/output/ItemOutput";
-import RecipeRequirement, { RecipeRequirementType } from "game/item/recipe/RecipeRequirement";
+import type { ItemTypeGroup } from "@wayward/game/game/item/IItem";
+import { ItemType } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type Crafter from "@wayward/game/game/item/recipe/Crafter";
+import RecipeRequirement, { RecipeRequirementType } from "@wayward/game/game/item/recipe/RecipeRequirement";
+import ItemOutput from "@wayward/game/game/item/recipe/output/ItemOutput";
 export default class ItemRequirement extends RecipeRequirement<RecipeRequirementType.Item> {
     readonly item: ItemType | ItemTypeGroup;
     readonly quantity: number;

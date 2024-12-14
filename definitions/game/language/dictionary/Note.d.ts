@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -31,7 +31,7 @@ declare enum Note {
     Mercantile = 15,
     Nightfall = 16,
     Poisoned = 17,
-    Reputation = 18,
+    Rune = 18,
     SeaTravel = 19,
     StaminaReplenishment = 20,
     Starvation = 21,

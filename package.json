@@ -1,22 +1,18 @@
 {
 	"name": "@wayward/types",
 	"description": "TypeScript declarations for Wayward, used for modding.",
-	"version": "2.8.0",
+	"version": "2.14.0-beta",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/WaywardGame/types.git"
 	},
 	"scripts": {
-		"clean": "rimraf ./definitions ./*.tsbuildinfo",
-		"build": "tsc --build",
-		"build:mods": "tsc --build",
-		"watch": "tsc --build"
+		"clean": "rimraf ./definitions ./*.tsbuildinfo"
 	},
 	"dependencies": {
-		"@types/fs-extra": "^9.0.13",
-		"@types/node": "^17.0.5",
-		"@wayward/goodstream": "0.7.1"
+		"@types/node": "22.7.5",
+		"@wayward/goodstream": "0.10.0"
 	},
 	"devDependencies": {
 		"@wayward/game": "^1.0.0"

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IModdable } from "mod/ModRegistry";
-import type { IVector2 } from "utilities/math/IVector";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 export declare enum DialogId {
     Messages = 0,
     Notes = 1,
@@ -24,7 +24,11 @@ export declare enum DialogId {
     Inspect = 10,
     IslandsSail = 11,
     Equipment = 12,
-    IslandsShipping = 13
+    IslandsShipping = 13,
+    Inventory = 14,
+    Container = 15,
+    Trade = 16,
+    Altar = 17
 }
 export declare enum Edge {
     Top = 0,
@@ -32,7 +36,7 @@ export declare enum Edge {
     Bottom = 2,
     Left = 3
 }
-export type IEdges = [
+export type DialogDescriptionEdges = [
     [
         Edge.Left | Edge.Right,
         number
@@ -42,6 +46,10 @@ export type IEdges = [
         number
     ]
 ];
+export interface IDialogDescriptionEdgeHandling {
+    try: Array<DialogDescriptionEdges | "center">;
+    default: DialogDescriptionEdges | "center";
+}
 export interface IDialogDescription<SQUARE = boolean> extends IModdable {
     /**
      * The minimum resolution of this dialog, in pixels.
@@ -51,7 +59,7 @@ export interface IDialogDescription<SQUARE = boolean> extends IModdable {
      * The default size of this dialog, in percentages. For square dialogs, this is the Y axis.
      */
     size: SQUARE extends true ? number : IVector2;
-    edges: IEdges | "center";
+    edges: DialogDescriptionEdges | "center" | IDialogDescriptionEdgeHandling;
     /**
      * Whether to save if the dialog is open. If this is false, the dialog will always be closed when a game loads. Defaults to true.
      */

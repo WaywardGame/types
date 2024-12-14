@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,31 +8,30 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { MagicalPropertyTypeSubTypeMap } from "game/magic/MagicalPropertyType";
-import { MagicalPropertyType } from "game/magic/MagicalPropertyType";
-import type { ListEnder } from "language/ITranslation";
-import Translation from "language/Translation";
+import type { MagicalPropertyTypeSubTypeMap } from "@wayward/game/game/magic/MagicalPropertyType";
+import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import type { ListEnder } from "@wayward/game/language/ITranslation";
+import Translation from "@wayward/game/language/Translation";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IHasMagic {
     magic?: MagicalPropertyManager;
 }
 export interface IMagicalProperty {
     value: number;
 }
-declare const SYMBOL_SUB_PROPERTY_TYPES: unique symbol;
-declare const SYMBOL_SUB_PROPERTY_ENTRIES: unique symbol;
+export declare const SYMBOL_MAGIC_SUB_PROPERTY_TYPES: unique symbol;
+export declare const SYMBOL_MAGIC_SUB_PROPERTY_ENTRIES: unique symbol;
 export interface IMagicalSubProperty<T extends number> {
     subPropertyCount: number;
     subProperties: Partial<Record<T, number>>;
-    [SYMBOL_SUB_PROPERTY_TYPES]: readonly T[];
-    [SYMBOL_SUB_PROPERTY_ENTRIES]: ReadonlyArray<{
+    [SYMBOL_MAGIC_SUB_PROPERTY_TYPES]: readonly T[];
+    [SYMBOL_MAGIC_SUB_PROPERTY_ENTRIES]: ReadonlyArray<{
         type: T;
         value: number;
     }>;
 }
-export type MagicalProperty<T extends MagicalPropertyType> = MagicalPropertyTypeSubTypeMap extends {
-    [key in T]: any;
-} ? IMagicalSubProperty<MagicalPropertyTypeSubTypeMap[T]> : IMagicalProperty;
+export type MagicalProperty<T extends MagicalPropertyType> = MagicalPropertyTypeSubTypeMap extends Record<T, any> ? IMagicalSubProperty<MagicalPropertyTypeSubTypeMap[T]> : IMagicalProperty;
 type MagicalNormalPropertyEntry = {
     type: MagicalNormalPropertyTypes;
     value: number;
@@ -45,9 +44,9 @@ type MagicalSubPropertyEntry = {
     };
 }[MagicalSubPropertyTypes];
 export type MagicalPropertyEntry = MagicalNormalPropertyEntry | MagicalSubPropertyEntry;
-export declare module MagicalPropertyEntry {
+export declare namespace MagicalPropertyEntry {
     function isSubType(entry: MagicalPropertyEntry): entry is MagicalSubPropertyEntry;
-    function identity(entry: MagicalPropertyEntry): MagicalPropertyIdentity<[]>;
+    function identity(entry: MagicalPropertyEntry): MagicalPropertyIdentity;
 }
 export type MagicalPropertyEntryIntersection = {
     type: MagicalPropertyType;
@@ -66,13 +65,24 @@ type MagicalSubPropertyTypesResult = {
         subTypes: ReadonlyArray<MagicalPropertyTypeSubTypeMap[K]>;
     };
 }[MagicalSubPropertyTypes];
-export type MagicalPropertyIdentity<A extends any[] = []> = [MagicalPropertyType, ...A] | {
+export type MagicalNormalPropertyIdentity<A extends any[] = []> = [MagicalNormalPropertyTypes, ...A];
+export type MagicalSubPropertyIdentity<A extends any[] = []> = {
     [Key in MagicalSubPropertyTypes]: [Key, MagicalPropertyTypeSubTypeMap[Key], ...A];
 }[MagicalSubPropertyTypes];
+export type MagicalSubPropertyIdentitySimple<A extends any[] = []> = [MagicalSubPropertyTypes, MagicalSubPropertySubTypes, ...A];
+export type MagicalPropertyIdentity<A extends any[] = []> = [MagicalPropertyType, ...A] | MagicalSubPropertyIdentity<A>;
 export type MagicalPropertyIdentityFlat = MagicalNormalPropertyTypes | MagicalSubPropertyTypes | {
     [Key in MagicalSubPropertyTypes]: [Key, MagicalPropertyTypeSubTypeMap[Key]];
 }[MagicalSubPropertyTypes];
-export declare module MagicalPropertyIdentity {
+export type MagicalPropertyIdentityHash = `${MagicalNormalPropertyTypes}` | {
+    [Key in MagicalSubPropertyTypes]: `${Key}:${MagicalPropertyTypeSubTypeMap[Key]}`;
+}[MagicalSubPropertyTypes];
+export declare namespace MagicalPropertyIdentity {
+    function isNormalProperty(identity: MagicalPropertyIdentity): identity is MagicalNormalPropertyIdentity;
+    function isSubProperty(identity: MagicalPropertyIdentity): identity is MagicalSubPropertyIdentity;
+    function hash(...[type, subType]: MagicalPropertyIdentity): MagicalPropertyIdentityHash;
+    function hash(type: MagicalSubPropertyTypes, subType: MagicalSubPropertySubTypes): MagicalPropertyIdentityHash;
+    function unhash(hash: MagicalPropertyIdentityHash): MagicalPropertyIdentity | undefined;
     function equals(...identities: MagicalPropertyIdentity[]): boolean;
 }
 export interface IMagicalPropertyManagerEvents {
@@ -81,11 +91,15 @@ export interface IMagicalPropertyManagerEvents {
      */
     remove(...identity: MagicalPropertyIdentity): any;
     /**
+     * Emitted when a property was added
+     */
+    add(...args: MagicalPropertyIdentity<[value: number]>): any;
+    /**
      * Emitted when a property was set, and the value it was set to
      */
     set(...args: MagicalPropertyIdentity<[value: number]>): any;
     /**
-     * Emitted when a property was changed or removed
+     * Emitted when a property was set or removed
      */
     change(...identity: MagicalPropertyIdentity): any;
     /**
@@ -98,6 +112,11 @@ export interface IMagicalPropertyManagerEvents {
     inherit(from: MagicalPropertyManager): any;
 }
 export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPropertyManagerEvents> {
+    static getNormalTypes(): MagicalNormalPropertyTypes[];
+    static getSubTypes(): MagicalSubPropertyTypes[];
+    static isNormalProperty(property: MagicalPropertyType): property is MagicalNormalPropertyTypes;
+    static isSubProperty(property: MagicalPropertyType): property is MagicalSubPropertyTypes;
+    static init(): void;
     private properties;
     private inert?;
     private cachedCount?;
@@ -106,7 +125,7 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
     private cachedNormalTypes?;
     private cachedSubTypes?;
     private cachedHash?;
-    static inherit(source: IHasMagic | MagicalPropertyManager | undefined, target: IHasMagic): void;
+    static inherit(source: IHasMagic | MagicalPropertyManager | undefined, target: IHasMagic, event?: boolean): void;
     constructor(properties?: Partial<Record<MagicalPropertyType, AnyMagicalProperty>>);
     setInert(inert?: boolean): this;
     /**
@@ -166,6 +185,7 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      * @returns whether the magical sub-property was removed — ie, if it existed
      */
     remove<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): boolean;
+    remove(...identity: MagicalPropertyIdentity): boolean;
     /**
      * Removes any magical properties on this object
      * @returns the number of magical properties removed
@@ -175,6 +195,10 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      * Removes any magical properties on this object and replaces them with magical properties on the given object
      */
     inherit(magic: MagicalPropertyManager): this;
+    /**
+     * @returns a list of all the magical property identities on this object `[type, subtype?]`
+     */
+    identities(): MagicalPropertyIdentity[];
     /**
      * @returns a list of all the magical property types on this object
      */
@@ -211,7 +235,7 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      * @param ender The way to end this list translation, ie and/or
      * @param format A formatting-translation to apply to each magical property
      */
-    translate(ender?: ListEnder | false, format?: Translation | ((type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes) => Translation)): import("../../language/impl/TranslationImpl").default;
+    translate(ender?: ListEnder | false, format?: Translation | ((...identity: MagicalPropertyIdentity) => Translation)): TranslationImpl;
     /**
      * @returns a translation for a magical property type
      */
@@ -224,11 +248,13 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
     /**
      * @returns a translation for a magical property type
      */
-    static translateTooltip(type: MagicalNormalPropertyTypes): Translation;
+    static getDescription(type: MagicalNormalPropertyTypes): Translation;
     /**
      * @returns a translation for a magical sub-property type
      */
-    static translateTooltip<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): Translation;
+    static getDescription<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): Translation;
+    static getDescription(...identity: MagicalPropertyIdentity): Translation;
+    private static translateInternal;
     hash(): string;
     private clearCachedArrays;
 }

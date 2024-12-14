@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,13 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import type { Game } from "game/Game";
-import type Player from "game/entity/player/Player";
-import type PlayerManager from "game/entity/player/PlayerManager";
-import type { IQuest } from "game/entity/player/quest/quest/IQuest";
-import { QuestType } from "game/entity/player/quest/quest/IQuest";
-import type { RequirementInstance } from "game/entity/player/quest/quest/Quest";
+import type { Game } from "@wayward/game/game/Game";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type PlayerManager from "@wayward/game/game/entity/player/PlayerManager";
+import type { IQuest } from "@wayward/game/game/entity/player/quest/quest/IQuest";
+import { QuestType } from "@wayward/game/game/entity/player/quest/quest/IQuest";
+import type { RequirementInstance } from "@wayward/game/game/entity/player/quest/quest/Quest";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IQuestManager extends EventEmitter.Host<IQuestManagerEvents> {
     /**
      * Get all quests
@@ -25,7 +26,7 @@ export interface IQuestManager extends EventEmitter.Host<IQuestManagerEvents> {
      */
     getQuests(type: QuestType): QuestInstance[];
     getQuests(type?: QuestType): QuestInstance[];
-    add(type: QuestType): this;
+    add(type: QuestType): QuestInstance | undefined;
     reset(): void;
 }
 export declare class QuestManagerNoOp extends EventEmitter.Host<IQuestManagerEvents> implements IQuestManager {
@@ -33,7 +34,7 @@ export declare class QuestManagerNoOp extends EventEmitter.Host<IQuestManagerEve
     getQuests(): QuestInstance[];
     getQuests(type: QuestType): QuestInstance[];
     getQuests(type?: QuestType): QuestInstance[];
-    add(type: QuestType): this;
+    add(type: QuestType): QuestInstance | undefined;
     reset(): void;
 }
 export default class QuestManager extends EventEmitter.Host<IQuestManagerEvents> implements IQuestManager {
@@ -53,7 +54,7 @@ export default class QuestManager extends EventEmitter.Host<IQuestManagerEvents>
      * Get all quests of the given type
      */
     getQuests(type: QuestType): QuestInstance[];
-    add(type: QuestType): this;
+    add(type: QuestType, isChildQuest?: boolean, initRequirements?: boolean): QuestInstance | undefined;
     /**
      * Removes all quests & disposes of any quest requirement triggers
      */
@@ -62,6 +63,7 @@ export default class QuestManager extends EventEmitter.Host<IQuestManagerEvents>
     onPlayerJoin(manager: PlayerManager, player: Player): void;
     onGameStart(game: Game, _isLoadingSave: boolean, _playedCount: number): void;
     private init;
+    private initRequirements;
     private onUpdateRequirement;
     private onCompleteRequirement;
 }
@@ -70,12 +72,12 @@ export interface IQuestManagerEvents {
      * Emitted when a quest is completed.
      * @param quest The completed `IQuestInstance`
      */
-    questComplete(quest: QuestInstance): any;
+    questComplete(quest: QuestInstance, childQuests: QuestInstance[]): any;
     /**
      * Emitted when a new quest is added.
      * @param quest The `IQuestInstance` that was added
      */
-    questGet(quest: QuestInstance): any;
+    questGet(quest: QuestInstance, isChildQuest: boolean): any;
     /**
      * Emitted when a quest is updated (a requirement is updated)
      * @param quest The `IQuestInstance` that was updated
@@ -97,10 +99,11 @@ export declare class QuestInstance extends EventEmitter.Host<IQuestInstanceEvent
     readonly data: IQuest;
     readonly id: number;
     constructor(host: Player, data: IQuest, id: number);
-    getTitle(): import("../../../../language/impl/TranslationImpl").default | undefined;
-    getDescription(): import("../../../../language/impl/TranslationImpl").default | undefined;
+    getTitle(): TranslationImpl | undefined;
+    getDescription(): TranslationImpl | undefined;
     getRequirements(): RequirementInstance[];
-    needsManualCompletion(): boolean | undefined;
+    needsManualCompletion(): boolean;
+    isSkippable(): boolean;
     complete(): this;
     getChildren(): QuestType[];
     getCompletionAmount(): number;

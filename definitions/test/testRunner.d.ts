@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-/// <reference types="node" />
 export type TestSetupExecutor = (context: TestSetupContext) => Promise<unknown>;
 export type TestExecutor = (context: TestRunContext) => Promise<unknown>;
 interface IRunContext {
@@ -133,7 +132,7 @@ export declare class TestRunContext extends BaseContext {
     private _output;
     private readonly _errors;
     private readonly _attachments;
-    private readonly _data;
+    protected readonly _data: Map<string, unknown>;
     private readonly startTime;
     private endTime;
     private duration;
@@ -198,7 +197,7 @@ export declare class TestRunContext extends BaseContext {
     getData<T = unknown>(key: string): T;
     tryGetData<T = unknown>(key: string): T | undefined;
     setData<T = unknown>(key: string, value: T): T;
-    start(): void;
+    start(suiteRunContext: TestRunContext): void;
     /**
      * Mark the context as being completed (finished running)
      */
@@ -213,7 +212,6 @@ export declare class TestRunContext extends BaseContext {
     private getCommonNUnitXmlAttributes;
     private sanitizeXmlText;
 }
-export declare const rootContext: TestSetupContext;
 export declare const before: (executor: TestExecutor) => void;
 export declare const after: (executor: TestExecutor) => void;
 export declare const beforeEach: (executor: TestExecutor) => void;

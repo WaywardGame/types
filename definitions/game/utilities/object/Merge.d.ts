@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,16 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { RecursivePartial } from "utilities/types/Recursive";
+import type { RecursivePartial } from "@wayward/game/utilities/types/Recursive";
 declare function Merge<T>(...objs: Array<RecursivePartial<T>>): T;
 declare function Merge<T>(...objs: T[]): T;
-declare function Merge<O extends any[]>(...objs: O): O[number] & O[number];
+declare function Merge<O extends any[]>(...objs: O): O[number];
 export declare class Mergeable<T> {
     readonly merge: (value: T | undefined) => T;
     constructor(merge: (value: T | undefined) => T);
     mask(): this & T;
 }
-declare module Merge {
+declare namespace Merge {
     /**
      * Replaces the existing value with the given value.
      */

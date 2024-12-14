@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type RendererContext from "renderer/context/RendererContext";
-import type { RenderLayerFlag } from "renderer/world/IWorldRenderer";
+import type { RenderLayerFlag } from "@wayward/game/renderer/world/IWorldRenderer";
+import type { IWorldRendererPlatform } from "@wayward/game/renderer/world/IWorldRendererPlatform";
 export declare const jitRenderingExtraRenderRange = 2;
 export declare const jitRenderingMaxTileUpdates = 4096;
 export interface IWorldLayerRendererEvents {
@@ -22,5 +22,5 @@ export interface IWorldLayerRendererEvents {
      * Called when tile layers are created
      * Custom tile layers can be added to it
      */
-    createTileLayers(context: RendererContext, width: number, height: number, positionBuffer: WebGLBuffer): void;
+    createTileLayers(worldRendererPlatform: IWorldRendererPlatform): void;
 }

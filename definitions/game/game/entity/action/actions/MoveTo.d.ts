@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,13 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Action } from "game/entity/action/Action";
-import type { IActionApi } from "game/entity/action/IAction";
-import { ActionArgument } from "game/entity/action/IAction";
-import type Human from "game/entity/Human";
-import { Direction } from "utilities/math/Direction";
-declare const _default: Action<[ActionArgument.Vector2, [ActionArgument.Direction, ActionArgument.Undefined]], Human<number>, void, {
+import type Human from "@wayward/game/game/entity/Human";
+import { Delay } from "@wayward/game/game/entity/IHuman";
+import { Action } from "@wayward/game/game/entity/action/Action";
+import type { IActionApi } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { Direction } from "@wayward/game/utilities/math/Direction";
+declare const _default: Action<[ActionArgument.Vector2, [arg1: ActionArgument.Undefined, ActionArgument.Direction], [arg1: ActionArgument.Undefined, ActionArgument.Boolean]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
     usable: true;
-}, [import("../../../../utilities/math/IVector").IVector2, (Direction.None | Direction.East | Direction.North | Direction.West | Direction.South | undefined)?]>;
+}, [import("../../../../utilities/math/IVector").IVector2, (Direction.None | Direction.East | Direction.North | Direction.West | Direction.South | undefined)?, (boolean | undefined)?]>;
 export default _default;
-export declare function blockMove(action: IActionApi<Human>): void;
+export declare function blockMove(action: IActionApi<Human>, delay?: Delay): void;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,18 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { LobbyType } from "@hosts/shared/interfaces";
-import type { ICharacter } from "game/entity/IHuman";
-import type { PlayerState } from "game/entity/player/IPlayer";
-import type Player from "game/entity/player/Player";
-import type { ISynchronizeState, PauseSource } from "game/IGame";
-import { TurnMode } from "game/IGame";
-import type { Load } from "game/meta/Loading";
-import type { Milestone } from "game/milestones/IMilestone";
-import type { GameMode, IGameOptions } from "game/options/IGameOptions";
-import type { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
-import type { IConnection } from "multiplayer/networking/IConnection";
-import type { ISaveObject } from "save/ISaveManager";
+import type { ICharacter } from "@wayward/game/game/entity/IHuman";
+import type { PlayerState } from "@wayward/game/game/entity/player/IPlayer";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { ISynchronizeState, PauseSource } from "@wayward/game/game/IGame";
+import { TurnMode } from "@wayward/game/game/IGame";
+import type { Load } from "@wayward/game/game/meta/Loading";
+import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
+import type { GameMode, IGameOptions } from "@wayward/game/game/options/IGameOptions";
+import type { IMatchmakingInfo } from "@wayward/game/multiplayer/matchmaking/IMatchmaking";
+import type { IConnection } from "@wayward/game/multiplayer/networking/IConnection";
+import type { ISaveObject } from "@wayward/game/save/ISaveManager";
+import { LobbyType } from "@wayward/hosts/shared/interfaces";
 export interface IMultiplayerEvents {
     connect(): any;
     disconnect(): any;
@@ -40,73 +40,82 @@ export declare enum MultiplayerSyncCheck {
     Action = 0,
     ActionAttack = 1,
     ActionMove = 2,
-    BaseEntityManager = 3,
-    CanASeeB = 4,
-    Container = 5,
-    Creature = 6,
-    CreatureCheckMove = 7,
-    CreatureMovement = 8,
-    CreatureNearestPlayer = 9,
-    CreatureOffer = 10,
-    CreatureStatChange = 11,
-    Damage = 12,
-    Dismantle = 13,
-    Doodad = 14,
-    DoodadManager = 15,
-    EncumberedStatus = 16,
-    Entity = 17,
-    EntityPosition = 18,
-    ExhaustedPreMove = 19,
-    FlowFieldHashCode = 20,
-    FlowFieldPenalty = 21,
-    FlowFieldUpdate = 22,
-    FlowFieldUpdateTile = 23,
-    FlowFieldValue = 24,
-    HandToUse = 25,
-    HealthChange = 26,
-    InventoryCount = 27,
-    Island = 28,
-    IslandCivilizationScore = 29,
-    Islands = 30,
-    IsTileEmpty = 31,
-    Item = 32,
-    ItemCraft = 33,
-    ItemDamage = 34,
-    ItemOrder = 35,
-    LastCreationIds = 36,
-    Merchant = 37,
-    MilestoneSeed = 38,
-    Modifier = 39,
-    MoveToTile = 40,
-    Option = 41,
-    PenaltyFieldHashCode = 42,
-    PlaceOnTile = 43,
-    PlayerManager = 44,
-    Players = 45,
-    PlayerSetup = 46,
-    Random = 47,
-    Reputation = 48,
-    Seed = 49,
-    SeededGenerator = 50,
-    SetPosition = 51,
-    SetZ = 52,
-    SkillGain = 53,
-    StaminaChanges = 54,
-    StatChange = 55,
-    Stats = 56,
-    StatusChange = 57,
-    StatusEffect = 58,
-    TemperatureManager = 59,
-    Temporary = 60,
-    Tick = 61,
-    TileEvent = 62,
-    Time = 63,
-    UpdateDirection = 64,
-    Weight = 65,
-    WorldUpdateTile = 66
+    Alignment = 3,
+    BaseEntityManager = 4,
+    CanASeeB = 5,
+    Container = 6,
+    Creature = 7,
+    CreatureAi = 8,
+    CreatureAiAdd = 9,
+    CreatureAiEmit = 10,
+    CreatureAiMaskAdd = 11,
+    CreatureAiMaskRemove = 12,
+    CreatureAiRemove = 13,
+    CreatureAiSet = 14,
+    CreatureCheckMove = 15,
+    CreatureMovement = 16,
+    CreatureNearestPlayer = 17,
+    CreatureOffer = 18,
+    CreatureStatChange = 19,
+    Damage = 20,
+    Dismantle = 21,
+    Doodad = 22,
+    DoodadManager = 23,
+    EncumberedStatus = 24,
+    Entity = 25,
+    EntityPosition = 26,
+    ExhaustedPreMove = 27,
+    FlowFieldHashCode = 28,
+    FlowFieldPenalty = 29,
+    FlowFieldUpdate = 30,
+    FlowFieldUpdateTile = 31,
+    FlowFieldValue = 32,
+    HandToUse = 33,
+    HealthChange = 34,
+    History = 35,
+    InventoryCount = 36,
+    Island = 37,
+    IslandCivilizationScore = 38,
+    Islands = 39,
+    IsTileEmpty = 40,
+    Item = 41,
+    ItemCraft = 42,
+    ItemDamage = 43,
+    ItemOrder = 44,
+    LastCreationIds = 45,
+    Merchant = 46,
+    MilestoneSeed = 47,
+    Modifier = 48,
+    MoveToTile = 49,
+    NPC = 50,
+    Option = 51,
+    PenaltyFieldHashCode = 52,
+    PlaceOnTile = 53,
+    PlayerManager = 54,
+    Players = 55,
+    PlayerSetup = 56,
+    Random = 57,
+    Seed = 58,
+    SeededGenerator = 59,
+    SetPosition = 60,
+    SetZ = 61,
+    SkillGain = 62,
+    StaminaChanges = 63,
+    StatChange = 64,
+    Stats = 65,
+    Status = 66,
+    StatusChange = 67,
+    TemperatureManager = 68,
+    Temporary = 69,
+    Tick = 70,
+    TileEvent = 71,
+    Time = 72,
+    UpdateDirection = 73,
+    Weight = 74,
+    WorldUpdateTile = 75
 }
 export declare const maxPlayers = 32;
-export declare const packetTickRate = 16;
+export declare const packetTickRate = 16.6666;
 export declare const defaultServerPort = 38740;
 export declare const defaultSshServerPort = 38742;
 export declare const defaultSshServerUsername = "wayward";
@@ -122,6 +131,7 @@ export interface IMultiplayerOptions {
     pvp: boolean;
     allowTraveling: boolean;
     allowHardcoreRespawns: boolean;
+    pauseOnDesync: boolean;
     turnMode: TurnMode;
     maxPlayers: number;
     tickSpeed: number;
@@ -184,7 +194,7 @@ export declare enum DisconnectReason {
     Kick = 6,
     Left = 7,
     LostConnection = 8,
-    Normal = 9,
+    Normal = 9,// server shut down or player left
     ServerShutdown = 10,
     UnableToJoinGame = 11,
     UnableToLoadMods = 12
@@ -198,7 +208,8 @@ export declare enum UnableToJoinReason {
     UnknownError = 5,
     VersionMismatch = 6,
     Banned = 7,
-    FailedToLoadMods = 8
+    FailedToLoadMods = 8,
+    ClientDataInvalid = 9
 }
 export declare enum JoinServerRetryReason {
     Timeout = 0,

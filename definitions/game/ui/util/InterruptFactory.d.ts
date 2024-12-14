@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,14 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Prompt } from "game/meta/prompt/IPrompt";
-import type InterruptChoice from "language/dictionary/InterruptChoice";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import type Input from "ui/component/Input";
-import type { MenuId } from "ui/screen/screens/menu/component/IMenu";
-import type Menu from "ui/screen/screens/menu/component/Menu";
-import type InterruptMenu from "ui/screen/screens/menu/menus/InterruptMenu";
-import type ResolvablePromise from "utilities/promise/ResolvablePromise";
+import type { LoadType } from "@wayward/game/game/meta/Loading";
+import type { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
+import type InterruptChoice from "@wayward/game/language/dictionary/InterruptChoice";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import type Input from "@wayward/game/ui/component/Input";
+import type { MenuId } from "@wayward/game/ui/screen/screens/menu/component/IMenu";
+import type Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
+import type InterruptMenu from "@wayward/game/ui/screen/screens/menu/menus/InterruptMenu";
+import type ResolvablePromise from "@wayward/utilities/promise/ResolvablePromise";
 export default class InterruptFactory {
     private readonly interrupt?;
     private title;
@@ -37,7 +38,7 @@ export default class InterruptFactory {
     withInfo(): Promise<void>;
     withInput(input?: (input: Input) => any): Promise<string>;
     withMenu<M extends Menu = Menu>(menuId: MenuId, initializer?: (menu: M) => any): Promise<void>;
-    withLoading(until?: Promise<any> | (() => Promise<any>), canCancel?: boolean | (NullaryFunction), specialType?: string, choices?: InterruptChoice[], cancelPromise?: ResolvablePromise): Promise<InterruptChoice | undefined>;
+    withLoading(until?: Promise<any> | (() => Promise<any>), canCancel?: boolean | (NullaryFunction), loadType?: LoadType, choices?: InterruptChoice[], cancelPromise?: ResolvablePromise): Promise<InterruptChoice | undefined>;
     private execute;
     private warnIfNeverShown;
 }

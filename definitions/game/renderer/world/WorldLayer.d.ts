@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,17 +8,22 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Island from "game/island/Island";
-import { TerrainType } from "game/tile/ITerrain";
-import { WorldZ } from "game/WorldZ";
-import type { IByteGrid } from "renderer/fieldOfView/IByteGrid";
-import type { ITileUpdate, onDoodadUpdateDelegate, onTileUpdateDelegate, TerrainData } from "renderer/world/IWorldLayer";
-import { TerrainMask } from "renderer/world/IWorldLayer";
-import type { IColorGrid, IWorldLayerCPP } from "@cplusplus/index";
-import type Tile from "game/tile/Tile";
-import type { IPreSerializeCallback } from "save/serializer/ISerializer";
-import type World from "renderer/world/World";
-export default class WorldLayer implements IPreSerializeCallback {
+import type { IColorGrid, IWorldLayerCPP } from "@wayward/cplusplus/index";
+import type Island from "@wayward/game/game/island/Island";
+import { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type Tile from "@wayward/game/game/tile/Tile";
+import WorldZ from "@wayward/utilities/game/WorldZ";
+import type { IByteGrid } from "@wayward/game/renderer/fieldOfView/IByteGrid";
+import type { ITileUpdate, onDoodadUpdateDelegate, onTileUpdateDelegate, TerrainData } from "@wayward/game/renderer/world/IWorldLayer";
+import { TerrainMask } from "@wayward/game/renderer/world/IWorldLayer";
+import type { IPreSerializeCallback } from "@wayward/game/save/serializer/ISerializer";
+import type World from "@wayward/game/renderer/world/World";
+import type Human from "@wayward/game/game/entity/Human";
+export declare class WorldLayer implements IPreSerializeCallback {
+    /**
+     * Run length encoded light level map to ensure FieldOfView.canSeePosition is always synced correctly.
+     */
+    encodedLightLevelMap: Uint32Array | undefined;
     /**
      * Run length encoded light block map to ensure FieldOfView.canSeePosition is always synced correctly.
      */
@@ -40,7 +45,7 @@ export default class WorldLayer implements IPreSerializeCallback {
     onDoodadUpdates: Map<number, onDoodadUpdateDelegate>;
     private terrainMap;
     instance: IWorldLayerCPP | undefined;
-    private _loadedLighting;
+    private _loadedLightBlockMap;
     constructor(width: number | undefined, height: number, z: WorldZ);
     preSerializeObject(): void;
     load(world: World): void;
@@ -75,4 +80,5 @@ export default class WorldLayer implements IPreSerializeCallback {
      * The array length is 0 when the view is invalid
      */
     private updateViews;
+    computeLights(human: Human): void;
 }

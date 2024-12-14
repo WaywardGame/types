@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,18 +8,21 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import UiTranslation from "language/dictionary/UiTranslation";
-import Translation from "language/Translation";
-import Component from "ui/component/Component";
-import type { TranslationGenerator } from "ui/component/IComponent";
-import Text, { Heading } from "ui/component/Text";
-import type Bindable from "ui/input/Bindable";
-import type { TooltipAnchorStringHorizontal, TooltipAnchorStringVertical } from "ui/tooltip/TooltipLocationHandler";
-import TooltipLocationHandler from "ui/tooltip/TooltipLocationHandler";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import Translation from "@wayward/game/language/Translation";
+import UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
+import Component from "@wayward/game/ui/component/Component";
+import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
+import Text, { Heading } from "@wayward/game/ui/component/Text";
+import type Bindable from "@wayward/game/ui/input/Bindable";
+import type { TooltipAnchorStringHorizontal, TooltipAnchorStringVertical } from "@wayward/game/ui/tooltip/TooltipLocationHandler";
+import TooltipLocationHandler from "@wayward/game/ui/tooltip/TooltipLocationHandler";
+import type Stream from "@wayward/goodstream";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export declare enum TooltipClasses {
     Main = "tooltip",
     ForceShown = "tooltip-force-shown",
+    ForceShownInvalid = "tooltip-force-shown-invalid",
     Block = "tooltip-block",
     Blocks = "tooltip-blocks",
     Heading = "tooltip-heading",
@@ -40,7 +43,9 @@ export default class Tooltip extends Component {
     private forceShown;
     private maxWidth;
     private hasSetPosition;
-    constructor(source: Component | HTMLElement);
+    initialized?: Promise<any>;
+    context?: InfoProviderContext;
+    constructor(source: Component | HTMLElement, initialize?: (tooltip: Tooltip) => any);
     protected onRemove(): void;
     setSecondary(): this;
     setForceShown(forceShown?: boolean): this;
@@ -73,6 +78,8 @@ export default class Tooltip extends Component {
      * Set this tooltip's location to follow the mouse.
      */
     setLocation(location: "mouse"): this;
+    private static readonly defaultLocations;
+    static registerDefaultLocation<COMPONENT extends Component>(requiredRefSelector: string, initializer: (handler: TooltipLocationHandler, component?: COMPONENT) => any): void;
     private getDefaultLocation;
     /**
      * Sets the max width of this tooltip.
@@ -83,12 +90,10 @@ export default class Tooltip extends Component {
     private delay?;
     setDelay(delay?: number): this;
     getLastBlock(): TooltipBlock;
-    getBlocks(): import("@wayward/goodstream").default<TooltipBlock>;
+    getBlocks(): Stream<TooltipBlock>;
     addBlock(initializer?: (block: TooltipBlock) => any): this;
     addHint(translation: TranslationGenerator, ...bindables: Bindable[]): this;
     updatePosition(regenerateBox?: boolean): this;
-    private initialPositionAndShownHandledExternally;
-    setInitialPositionAndShownHandledExternally(): this;
     private dumpOnShow;
     setDumpOnShow(dumpOnShow?: boolean): this;
     private showId?;
@@ -96,6 +101,7 @@ export default class Tooltip extends Component {
     private reshowInternal;
     protected onShow(): void;
     dump(): this;
+    private onSourceHide;
 }
 export declare class TooltipBlock extends Component {
     constructor();

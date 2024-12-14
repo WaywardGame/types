@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,43 +8,68 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { EventBusHost } from "event/EventBuses";
-import { EventBus } from "event/EventBuses";
-import type EventEmitter from "event/EventEmitter";
-import type { Events, IEventEmitterHost, IEventEmitterHostClass } from "event/EventEmitter";
-type HostOrHostClass = IEventEmitterHost<any> | IEventEmitterHostClass<any>;
-type HostFromHostOrHostClass<H> = H extends {
-    event: EventEmitter<null, any>;
-} ? H : H extends IEventEmitterHostClass<any> ? InstanceOf<H> : H;
-export type Emitter = HostOrHostClass;
-export type EmitterOrBus = EventBus | Emitter;
-export type Event<E extends EmitterOrBus> = keyof Events<E extends EventBus ? EventBusHost<E> : E>;
-type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
-type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
-type HandlerInternal2<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
-type HandlerInternal1<E, K extends keyof Events<E>> = HandlerInternal2<HostFromHostOrHostClass<E>, Events<E>[K]>;
-export type Handler<E, K extends keyof Events<E extends EventBus ? EventBusHost<E> : E>> = HandlerInternal1<E extends EventBus ? EventBusHost<E> : E, K>;
-declare module EventManager {
-    export function subscribe<E extends EmitterOrBus, K extends Event<E>>(emitter: E, event: K, handler: IterableOr<Handler<E, K>>, priority?: number): void;
-    export function unsubscribe<E extends EmitterOrBus, K extends Event<E>>(emitter: E, event: K, handler: IterableOr<Handler<E, K>>, priority?: number): boolean | undefined;
-    export function waitFor<E extends EmitterOrBus, K extends Event<E>>(emitter: E, event: K, priority?: number): Promise<Parameters<Handler<E, K>>>;
-    interface IEventManagerUntil {
-        subscribe<E extends EmitterOrBus, K extends Event<E>>(emitter: E, event: K, handler: IterableOr<Handler<E, K>>, priority?: number): this;
-    }
-    export function until(promise: Promise<any>): IEventManagerUntil;
-    export function registerEventBusSubscriber(subscriber: object): void;
-    export function deregisterEventBusSubscriber(subscriber: object): void;
-    export {};
-}
-export default EventManager;
+import { type EventBus, type EventBuses } from "@wayward/game/event/EventBuses";
+import type { Events, IEventEmitterHost } from "@wayward/utilities/event/EventEmitter";
+import type { Event, Emitter, EmitterOrBus, Handler, TypedPropertyDescriptorFunctionAnyNOfParams, EventBusHost } from "@wayward/utilities/event/EventManager";
+import { EventManager } from "@wayward/utilities/event/EventManager";
+export type GameEmitterOrBus = EmitterOrBus<EventBus>;
+export type GameEvent<E extends GameEmitterOrBus> = Event<EventBus, EventBuses, E>;
+export type GameEventHandler<E, K extends keyof Events<E extends EventBus ? EventBusHost<EventBus, EventBuses, E> : E>> = Handler<EventBus, EventBuses, E, K>;
+export declare const eventManager: EventManager<EventBus, {
+    0(): import("../game/entity/action/ActionExecutor").default<any, any, any, any, any>;
+    1(): import("../audio/Audio").default;
+    2(): import("../game/entity/creature/corpse/CorpseManager").default;
+    3(): import("../game/entity/creature/corpse/Corpse").default;
+    4(): import("../game/entity/creature/CreatureManager").default;
+    5(): import("../game/entity/creature/Creature").default;
+    6(): import("../game/doodad/DoodadManager").default;
+    7(): import("../game/doodad/Doodad").default;
+    8(): import("../game/entity/Entity").default;
+    9(): import("../game/entity/EntityMovable").default;
+    10(): import("../game/entity/EntityManager").default<any>;
+    11(): import("../game/Game").Game;
+    12(): import("../game/entity/Human").default;
+    13(): import("../game/island/Island").default;
+    14(): import("../game/item/ItemManager").default;
+    15(): import("../game/item/Item").default;
+    16(): import("../language/LanguageManager").default;
+    17(): import("../game/meta/Loading").default.Events;
+    18(): import("../game/island/Island").default;
+    19(): import("../game/entity/player/Player").default;
+    20(): import("../game/entity/npc/npcs/Merchant").default;
+    21(): import("../game/milestones/MilestoneManager").MilestoneManager;
+    22(): import("../mod/ModManager").default;
+    23(): import("../multiplayer/Multiplayer").default;
+    24(): import("../game/entity/npc/NPCManager").default;
+    25(): import("../game/entity/npc/NPC").default;
+    26(): import("../game/entity/player/PlayerManager").default;
+    27(): import("../game/entity/player/Player").default;
+    28(): import("../game/meta/prompt/Prompts").default.Events;
+    29(): import("../renderer/Renderer").Renderer;
+    30(): import("../save/SaveManager").default;
+    31(): import("../ui/screen/ScreenManager").default;
+    32(): import("../steamworks/Steamworks").default;
+    33(): import("../game/tile/TileEventManager").default;
+    34(): import("../game/tile/TileEvent").default;
+    35(): typeof ui;
+    36(): import("../ui/screen/screens/game/static/ActionBar").default;
+    37(): import("../ui/screen/screens/game/util/movement/ActionMenuHandler").default;
+    38(): import("../ui/screen/screens/GameScreen").default;
+    39(): import("../ui/screen/screens/game/util/HoveredTileTracker").default;
+    40(): import("../ui/screen/screens/game/util/movement/InteractionManager").default;
+    41(): import("../ui/screen/screens/game/util/movement/MovementHandler").default;
+    42(): import("../ui/screen/screens/game/util/movement/PathingHandler").default;
+    43(): import("../game/entity/action/usable/UsableAction").default;
+    44(): import("../renderer/world/WorldRenderer").WorldRenderer;
+}>;
+/**
+ * EventHandler that is typed with the games event buses
+ */
+export declare function EventHandler<E extends GameEmitterOrBus, K extends Event<EventBus, EventBuses, E>>(emitter: E, event: K, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<Handler<EventBus, EventBuses, E, K>>) => void;
+export declare function EventHandler<E extends Emitter, K extends keyof Events<E>>(emitter: E, event: K, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<Handler<EventBus, EventBuses, IEventEmitterHost<Events<E>>, K>>) => void;
 /**
  * Marks that this class, whenever instantiated, should be an event subscriber.
  * **Note:** This decorator should only be used on classes with instances that will *always* need to be subscribed. IE don't use this on UI stuff. **Mods should never need this.**
  * **Note:** This is incompatible with `@Bind` decorators.
  */
 export declare function EventSubscriber<S extends Class<any>>(constructor: S): S;
-type ReturnTypeLenient<T extends AnyFunction> = ReturnType<T> extends void ? Promise<void> : ReturnType<T>;
-export type TypedPropertyDescriptorFunctionAnyNOfParams<T extends AnyFunction> = TypedPropertyDescriptor<(...args: ArgumentsOf<T>) => ReturnTypeLenient<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3], a4: ArgumentsOf<T>[4], a5: ArgumentsOf<T>[5], a6: ArgumentsOf<T>[6], a7: ArgumentsOf<T>[7], a8: ArgumentsOf<T>[8], a9: ArgumentsOf<T>[9]) => ReturnTypeLenient<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3], a4: ArgumentsOf<T>[4], a5: ArgumentsOf<T>[5], a6: ArgumentsOf<T>[6], a7: ArgumentsOf<T>[7], a8: ArgumentsOf<T>[8]) => ReturnTypeLenient<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3], a4: ArgumentsOf<T>[4], a5: ArgumentsOf<T>[5], a6: ArgumentsOf<T>[6], a7: ArgumentsOf<T>[7]) => ReturnTypeLenient<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3], a4: ArgumentsOf<T>[4], a5: ArgumentsOf<T>[5], a6: ArgumentsOf<T>[6]) => ReturnTypeLenient<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3], a4: ArgumentsOf<T>[4], a5: ArgumentsOf<T>[5]) => ReturnTypeLenient<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3], a4: ArgumentsOf<T>[4]) => ReturnTypeLenient<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3]) => ReturnTypeLenient<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2]) => ReturnTypeLenient<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1]) => ReturnTypeLenient<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0]) => ReturnTypeLenient<T>> | TypedPropertyDescriptor<() => ReturnTypeLenient<T>> | TypedPropertyDescriptor<T> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3], a4: ArgumentsOf<T>[4], a5: ArgumentsOf<T>[5], a6: ArgumentsOf<T>[6], a7: ArgumentsOf<T>[7], a8: ArgumentsOf<T>[8], a9: ArgumentsOf<T>[9]) => ReturnType<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3], a4: ArgumentsOf<T>[4], a5: ArgumentsOf<T>[5], a6: ArgumentsOf<T>[6], a7: ArgumentsOf<T>[7], a8: ArgumentsOf<T>[8]) => ReturnType<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3], a4: ArgumentsOf<T>[4], a5: ArgumentsOf<T>[5], a6: ArgumentsOf<T>[6], a7: ArgumentsOf<T>[7]) => ReturnType<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3], a4: ArgumentsOf<T>[4], a5: ArgumentsOf<T>[5], a6: ArgumentsOf<T>[6]) => ReturnType<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3], a4: ArgumentsOf<T>[4], a5: ArgumentsOf<T>[5]) => ReturnType<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3], a4: ArgumentsOf<T>[4]) => ReturnType<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2], a3: ArgumentsOf<T>[3]) => ReturnType<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1], a2: ArgumentsOf<T>[2]) => ReturnType<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0], a1: ArgumentsOf<T>[1]) => ReturnType<T>> | TypedPropertyDescriptor<(a0: ArgumentsOf<T>[0]) => ReturnType<T>> | TypedPropertyDescriptor<() => ReturnType<T>>;
-export declare function OwnEventHandler<T extends IEventEmitterHostClass<any>, E extends keyof Events<T>>(cls: T, event: E, priority?: number): (host: InstanceOf<T>, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<Events<T>[E]>) => void;
-export declare function EventHandler<E extends EmitterOrBus, K extends Event<E>>(emitter: E, event: K, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<Handler<E, K>>) => void;
-export declare function EventHandler<E extends Emitter, K extends keyof Events<E>>(emitter: E, event: K, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptorFunctionAnyNOfParams<Handler<IEventEmitterHost<Events<E>>, K>>) => void;

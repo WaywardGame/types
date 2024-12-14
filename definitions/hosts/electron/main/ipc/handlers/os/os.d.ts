@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,7 +15,7 @@ import type { IIPCHandler } from "../../interfaces";
 declare class OSIPCHandler extends SharedOSIPCHandler implements IIPCHandler<IOS> {
     readonly ipc: import("@wayward/hosts/shared/ipc").IIPC<IOS>;
     readonly container: IElectronContainer;
-    execDetached(command: string, ...args: string[]): void;
+    execDetached(command: string, ...args: string[]): Promise<void>;
 }
 export declare const osIPCHandler: OSIPCHandler;
 export {};

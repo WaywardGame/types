@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,15 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type WebGlContext from "renderer/WebGlContext";
-import type { IResourceContainer } from "resource/IResourceLoader";
-import type SaveManager from "save/SaveManager";
+import type { IResourceContainer } from "@wayward/game/renderer/resources/IResourceContainer";
+import type { ISpritePackerPlatform } from "@wayward/game/renderer/resources/ISpritePacker";
+import type SaveManager from "@wayward/game/save/SaveManager";
 export default class ResourceLoader {
-    private readonly webGlContext;
-    private concurrent;
-    private loadingInterval;
-    private waitingSlots;
-    private readonly maxConcurrent;
+    private readonly createSpritePackerPlatform;
     private spritePacker;
     private tilePacker;
     private pendingLoads;
@@ -24,14 +20,11 @@ export default class ResourceLoader {
     private _resourceContainer;
     private readonly spriteAtlas;
     private readonly tileAtlas;
-    constructor(webGlContext: WebGlContext);
+    constructor(createSpritePackerPlatform: (size: number, addNullSprite: boolean, packLargeToSmall: boolean) => ISpritePackerPlatform);
     delete(): void;
     get resourceContainer(): IResourceContainer | undefined;
     initialize(): Promise<void>;
     loadResources(background?: boolean): Promise<void>;
-    continueLoading(): void;
-    takeLoadingSlot(callback: () => void): void;
-    releaseLoadingSlot(): void;
     protected onGlobalSlotReady(saveManager: SaveManager): Promise<void>;
     private loadSpritePacker;
     private createSpritePacker;
@@ -64,6 +57,7 @@ export default class ResourceLoader {
     private loadStatuses;
     private loadStatusOverlay;
     private loadStatusIcon;
+    private loadMarkerIcon;
     private loadOverlays;
     private loadOverlay;
     private loadOthers;

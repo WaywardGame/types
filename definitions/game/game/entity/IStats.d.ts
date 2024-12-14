@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IStatChangeInfo } from "game/entity/IEntity";
-import type { StatChangeTimerFactory } from "game/entity/StatFactory";
+import type { IStatChangeInfo } from "@wayward/game/game/entity/IEntity";
+import type { StatChangeTimerFactory } from "@wayward/game/game/entity/StatFactory";
 export declare enum Stat {
     Health = 0,
     Stamina = 1,
@@ -18,49 +18,50 @@ export declare enum Stat {
     Weight = 4,
     Attack = 5,
     /**
-     * Positive reputation
-     */
-    Benignity = 6,
-    /**
-     * Negative reputation
-     */
-    Malignity = 7,
-    /**
      * The base defense of the player.
      * UI only. Does not exist on `Player` instances.
      */
-    Defense = 8,
-    /**
-     * A combination of `Stat.Benignity` + `Stat.Malignity`
-     * UI only. Does not exist on `Player` instances.
-     */
-    Reputation = 9,
+    Defense = 6,
     /**
      * A combination of `Stat.Hunger` + `Stat.Thirst`
      * Does not exist on `Player` instances. Used for magical items.
      */
-    Metabolism = 10,
+    Metabolism = 7,
     /**
      * Used to calculate the max weight & max health of the player.
      */
-    Strength = 11,
+    Strength = 8,
+    /**
+     * UI only. Does not exist on `Player` instances.
+     */
+    Luck = 9,
     /**
      * How much this human and their inventory is affected by temperature
      */
-    InsulationHeat = 12,
-    InsulationCold = 13,
+    InsulationHeat = 10,
+    InsulationCold = 11,
     /**
      * Used for chicken eggs and goat milk
      */
-    Produce = 14,
+    Produce = 12,
     /**
      * Used for tamed animals
      */
-    Happiness = 15,
-    Tamed = 16,
-    Petting = 17,
-    Waste = 18
+    Happiness = 13,
+    Tamed = 14,
+    Petting = 15,
+    Waste = 16,
+    Petted = 17,
+    Curse = 18,
+    Generic = 19,
+    AttackDefenseRow = 20,
+    Dexterity = 21,
+    /**
+     * Used for creatures to stop them despawning until this stat reaches 0.
+     */
+    DespawnProtection = 22
 }
+export declare const CORE_STATS: Stat[];
 export type IStats = {
     [key in keyof typeof Stat]: IStat;
 };

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,15 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import EventEmitter from "event/EventEmitter";
-import Component from "ui/component/Component";
-import Tooltip from "ui/tooltip/Tooltip";
+import Component from "@wayward/game/ui/component/Component";
+import Tooltip from "@wayward/game/ui/tooltip/Tooltip";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export default class TooltipManager {
     readonly surfaceWrapper: Component<HTMLElement>;
     readonly main: TooltipSurface;
     readonly surfaces: TooltipSurface[];
     private readonly disablers;
     constructor();
+    has(host?: HTMLElement): boolean;
     show(host: HTMLElement, initialize?: (tooltip: Tooltip) => any): Tooltip | undefined;
     hide(host?: HTMLElement | undefined): boolean;
     /**
@@ -48,7 +49,7 @@ export declare class TooltipSurface extends EventEmitter.Host<ITooltipSurfaceEve
     tooltip?: Tooltip;
     readonly surface: Component<HTMLElement>;
     setId(id: string): this;
-    hasTooltip(): boolean;
+    hasTooltip(host?: HTMLElement): boolean;
     showTooltip(host: HTMLElement, initialize?: (tooltip: Tooltip) => any): Tooltip | undefined;
     hideTooltip(host?: HTMLElement | undefined): boolean;
     removeTooltip(): void;

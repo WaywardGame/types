@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,31 +8,45 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { IHasImagePath } from "game/IObject";
-import type EntityWithStats from "game/entity/EntityWithStats";
-import type { IStat, IStatBase, StatDisplayType } from "game/entity/IStats";
-import type { Reference } from "game/reference/IReferenceManager";
-import type Translation from "language/Translation";
-import type { IModdable } from "mod/ModRegistry";
-import type Component from "ui/component/Component";
-import type Tooltip from "ui/tooltip/Tooltip";
+import type { IHasImagePath } from "@wayward/game/game/IObject";
+import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
+import type { IEntityWithStatsEvents } from "@wayward/game/game/entity/EntityWithStats";
+import type Human from "@wayward/game/game/entity/Human";
+import type { IHumanEvents } from "@wayward/game/game/entity/IHuman";
+import type { IStat, IStatBase, Stat, StatDisplayType } from "@wayward/game/game/entity/IStats";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { ICreatureEvents } from "@wayward/game/game/entity/creature/ICreature";
+import type { IPlayerEvents } from "@wayward/game/game/entity/player/IPlayer";
+import type Player from "@wayward/game/game/entity/player/Player";
+import type { Reference } from "@wayward/game/game/reference/IReferenceManager";
+import type Translation from "@wayward/game/language/Translation";
+import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type Component from "@wayward/game/ui/component/Component";
+import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
+import type { IUntilSubscriber } from "@wayward/utilities/event/EventEmitter";
 export interface IStatDisplayDescription extends IModdable, IHasImagePath<string | ((entity: EntityWithStats, stat: IStat) => string)> {
-    imagePath?: string | ((entity: EntityWithStats, stat: IStat) => string);
+    /**
+     * This stat displays as multiple sub-stats. (Incompatible with all other properties)
+     *
+     * Sub-stats always display as `StatDisplayType.Attribute`
+     */
+    multi?: Map<Stat, IStatDisplayDescription>;
+    imagePath?: string | ((entity: EntityWithStats | undefined, stat: IStat) => string);
     /**
      * The CSS variable to use for the stat bar color
      * Defaults to white
      */
-    color?: string | ((entity: EntityWithStats, stat: IStat) => string);
+    color?: string | ((entity: EntityWithStats | undefined, stat: IStat) => string);
     /**
      * The CSS variable to use for the stat bar color in RGB format
      * Defaults to white
      */
-    rgbColor?: string | ((entity: EntityWithStats, stat: IStat) => string);
+    rgbColor?: string | ((entity: EntityWithStats | undefined, stat: IStat) => string);
     /**
      * The CSS variable to use for the background of the stat bar
      * Defaults to black
      */
-    darkColor?: string | ((entity: EntityWithStats, stat: IStat) => string);
+    darkColor?: string | ((entity: EntityWithStats | undefined, stat: IStat) => string);
     /**
      * Defaults to `StatDisplayType.Auto`
      */
@@ -43,6 +57,10 @@ export interface IStatDisplayDescription extends IModdable, IHasImagePath<string
      * Not providing `displayPriority` uses `100`.
      */
     displayOrder?: number;
+    /**
+     * Whether this stat display should be unlockable. (Unlocked by doing `player.addMilestone(Milestone.InternalStatDiscovery, stat)`)
+     */
+    unlockable?: true;
     /**
      * Handlers for when the stat changes. Called when the stat changes & when the stat max changes.
      */
@@ -57,7 +75,16 @@ export interface IStatDisplayDescription extends IModdable, IHasImagePath<string
      * A function that will initialize a tooltip for this stat element, or a reference to show a tooltip for
      */
     tooltip?: Reference | ((tooltip: Tooltip, entity: EntityWithStats, stat: IStat) => any);
-    subscribeCalculateEquipmentStats?: true;
+    subscriber?: (events: IStatDisplayDescriptionSubscriber, refresh: () => void) => any;
+    getValue?(entity?: EntityWithStats): number | undefined;
+    getMax?(entity?: EntityWithStats): number | undefined;
+}
+export interface IStatDisplayDescriptionSubscriber {
+    removed: Promise<[]>;
+    entity: IUntilSubscriber<EntityWithStats, IEntityWithStatsEvents>;
+    human?: IUntilSubscriber<Human, IHumanEvents>;
+    player?: IUntilSubscriber<Player, IPlayerEvents>;
+    creature?: IUntilSubscriber<Creature, ICreatureEvents>;
 }
 export declare const STAT_DEFAULT_DISPLAY_ORDER = 100;
 export interface IStatInfo extends Partial<IStatBase> {
@@ -70,7 +97,7 @@ export interface IStatInfo extends Partial<IStatBase> {
  * @param predicate A function that takes an `IStatInfo` object and returns whether it "matches".
  * @param handler A function that takes whether the info matches, the `statElement`, the entity, and the `IStatInfo` object and "handles" it.
  */
-export declare function when(predicate: (info: IStatInfo, entity: EntityWithStats) => boolean, handler: (matched: boolean, statElement: Component, entity: EntityWithStats, info: IStatInfo) => any): (statElement: Component, entity: EntityWithStats, stat: IStat, oldValue?: number) => void;
+export declare function when(predicate: (info: IStatInfo, entity: EntityWithStats, statElement: Component) => boolean, handler: (matched: boolean, statElement: Component, entity: EntityWithStats, info: IStatInfo) => any): (statElement: Component, entity: EntityWithStats, stat: IStat, oldValue?: number) => void;
 /**
  * Returns a `when()` handler that will toggle classes on a `statElement` based on whether the `predicate` matched.
  */

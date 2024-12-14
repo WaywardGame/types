@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Game } from "game/Game";
-import type Version from "utilities/Version";
+import type { Game } from "@wayward/game/game/Game";
+import type Version from "@wayward/game/utilities/Version";
 export interface ISerializer {
     readonly game: Game;
     readonly version: Version.String;
@@ -26,6 +26,8 @@ export interface ISerializer {
     writeProperty(object: any, key: any): void;
     readMap(object: any, key: any): Map<any, any>;
     writeMap(value: Map<any, any>): void;
+    readString(): string;
+    writeString(value: string): void;
 }
 export declare enum SerializerMetadataKey {
     Island = 0,
@@ -117,13 +119,16 @@ export declare enum Types {
     StringTokenizer = 46,
     MagicalPropertyManager = 47,
     ItemMapManager = 48,
-    WorldLayer = 49
+    WorldLayer = 49,
+    CreatureZone = 50,
+    AiManager = 51
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_SAVE_PROPERTY_FLAGS: unique symbol;
 export declare const SYMBOL_SAVE_ALL_PROPERTIES: unique symbol;
 export declare const SYMBOL_JIT_DESERIALIZE_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_JIT_PROPERTIES: unique symbol;
+export declare const SYMBOL_DISALLOW_SERIALIZATION: unique symbol;
 export declare enum SavePropertyFlag {
     /**
      * Normal property
@@ -154,6 +159,7 @@ export declare enum SavePropertyFlag {
     All = 65535
 }
 export declare function SaveProperty(flags?: SavePropertyFlag): PropertyDecorator;
+export declare function DisallowSerialization(): ClassDecorator;
 export declare function SaveAllProperties(): ClassDecorator;
 export declare function JITDeserializeSaveProperties(): ClassDecorator;
 /**

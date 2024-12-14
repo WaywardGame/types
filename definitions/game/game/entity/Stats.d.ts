@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type EventEmitter from "event/EventEmitter";
-import { IStatChangeInfo, StatChangeReason } from "game/entity/IEntity";
-import type { IStat, IStatBase, IStatEvents, IStats } from "game/entity/IStats";
-import { Stat } from "game/entity/IStats";
-import StatFactory, { StatChangeTimerFactory } from "game/entity/StatFactory";
+import { IStatChangeInfo, StatChangeReason } from "@wayward/game/game/entity/IEntity";
+import type { IStat, IStatBase, IStatEvents, IStats } from "@wayward/game/game/entity/IStats";
+import { Stat } from "@wayward/game/game/entity/IStats";
+import StatFactory, { StatChangeTimerFactory } from "@wayward/game/game/entity/StatFactory";
+import type EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IStatHost extends EventEmitter.Host<IStatEvents> {
     stats: IStats;
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { BiomeType } from "game/biome/IBiome";
-import type { MapSprite } from "game/mapping/IMapRender";
-import type { MapTile } from "game/mapping/IMapTile";
-import type { PathType } from "resource/IResourceLoader";
-import type { ResourceOptionsMap } from "resource/ResourcePath";
-import type { MapPinType } from "ui/screen/screens/game/dialog/islands/IIslandsDialog";
-declare module MapSprites {
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
+import type { MapSprite } from "@wayward/game/game/mapping/IMapRender";
+import type { MapTile } from "@wayward/game/game/mapping/IMapTile";
+import type { PathType } from "@wayward/game/resource/IResourceLoader";
+import type { ResourceOptionsMap } from "@wayward/game/resource/ResourcePath";
+import type { MapPinType } from "@wayward/game/ui/screen/screens/game/dialog/islands/IIslandsDialog";
+declare namespace MapSprites {
     interface IMapPathTypes {
         [PathType.Map]: MapSprite;
         [PathType.MapTile]: MapTile;

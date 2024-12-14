@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type * as fs from "fs-extra";
+import type * as fs from "fs";
 import type { IIPC } from "../ipc";
 export declare const fileSystemIPC: IIPC<IFileSystem>;
 export interface IFileSystem {
@@ -16,7 +16,6 @@ export interface IFileSystem {
     appendLogFile(message: string): Promise<void>;
     closeLogFile(): Promise<void>;
     copy(source: string, destination: string, dereference?: boolean, ignoredDirectories?: string[]): Promise<void>;
-    emptyDir(destination: string): Promise<void>;
     enableSafePaths?(): Promise<void>;
     mkdir(path: string, opt?: any): Promise<void>;
     openExternal(url: string): Promise<void>;
@@ -26,10 +25,8 @@ export interface IFileSystem {
     readFile(path: string, encoding: undefined): Promise<Uint8Array>;
     readFile(path: string, encoding: "utf8"): Promise<string>;
     remove(path: string): Promise<void>;
-    rmdir(path: string): Promise<void>;
     setLogsPath(path: string): Promise<void>;
     stat(path: string): Promise<IFileStat>;
-    unlink(path: string): Promise<void>;
     writeFile(path: string, data: string | Uint8Array, opt?: fs.WriteFileOptions): Promise<void>;
 }
 export interface IFile extends IFileStat {

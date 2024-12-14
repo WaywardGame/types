@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,13 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { InfoProvider } from "game/inspection/InfoProvider";
-import MagicalPropertyManager from "game/magic/MagicalPropertyManager";
-import { PathType } from "resource/IResourceLoader";
-import ImagePath from "ui/util/ImagePath";
+import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
+import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+import { PathType } from "@wayward/game/resource/IResourceLoader";
+import ImagePath from "@wayward/game/ui/util/ImagePath";
 export default class MagicalPropertiesInfoProvider extends InfoProvider {
     private readonly magic;
-    static getFireStageTranslation(decay?: number): import("../../../language/impl/TranslationImpl").default | undefined;
+    static getFireStageTranslation(decay?: number): TranslationImpl | undefined;
     static get(magic?: MagicalPropertyManager | {
         magic?: MagicalPropertyManager;
     }): MagicalPropertiesInfoProvider | undefined;
@@ -26,5 +27,5 @@ export default class MagicalPropertiesInfoProvider extends InfoProvider {
         height: number;
     };
     hasContent(): boolean;
-    get(): import("../../../language/impl/TranslationImpl").default;
+    get(): TranslationImpl;
 }

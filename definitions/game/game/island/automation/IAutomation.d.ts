@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,17 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type Human from "game/entity/Human";
-import type { IslandId } from "game/island/IIsland";
-import type { ItemType, ItemTypeGroup } from "game/item/IItem";
-import type Item from "game/item/Item";
-export interface IAutomationInitialState {
-    items?: Array<ItemType | ItemTypeGroup>;
-    /**
-     * Delay before executing steps
-     */
-    delay?: number;
-}
+import type { DoodadType, GrowingStage } from "@wayward/game/game/doodad/IDoodad";
+import type { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
+import type Human from "@wayward/game/game/entity/Human";
+import type { EquipType } from "@wayward/game/game/entity/IHuman";
+import type { StatusType } from "@wayward/game/game/entity/status/IStatus";
+import type { Quality } from "@wayward/game/game/IObject";
+import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type { ContainerSort, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
+import type Item from "@wayward/game/game/item/Item";
+import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
+import type { SortDirection } from "@wayward/game/save/ISaveManager";
+import type { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
+import type { Direction } from "@wayward/game/utilities/math/Direction";
+import type { IVector3 } from "@wayward/game/utilities/math/IVector";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 export interface IAutomationContextState {
     human: Human;
     islandId: IslandId;
@@ -26,4 +32,93 @@ export interface IAutomationContextState {
      * Items created via initial state
      */
     items: Item[];
+}
+export interface IAutomationSetup {
+    options?: Partial<IOptions>;
+    ui?: IAutomationSetupUi;
+    world?: IAutomationSetupWorld;
+    player?: IAutomationSetupPlayer;
+}
+export interface IAutomationSetupResult {
+    player?: {
+        items?: Item[];
+    };
+}
+export interface IAutomationSetupUi {
+    dialogs?: PartialRecord<DialogId, boolean>;
+    actionSlots?: Array<{
+        itemType?: ItemType;
+        actionType?: ActionType;
+        autoUse?: boolean;
+    }>;
+}
+export interface IAutomationSetupWorld {
+    /**
+     * The world resets by default (entities are cleared)
+     * Set to true to disable that.
+     */
+    disableReset?: true;
+    /**
+     * When set, all tiles will be set to this terrain type
+     */
+    defaultTerrain?: TerrainType;
+    tiles?: Array<{
+        type?: TerrainType;
+        /**
+         * Offset from the humans position
+         */
+        x?: number;
+        /**
+         * Offset from the humans position
+         */
+        y?: number;
+        z?: WorldZ;
+        items?: IAutomationSetupItem[];
+        tilled?: boolean;
+        fishAvailable?: number;
+    }>;
+    doodads?: Array<{
+        type: DoodadType;
+        growingStage?: GrowingStage;
+        decay?: number;
+        x?: number;
+        y?: number;
+        z?: number;
+        inventory?: IAutomationSetupItemContainer;
+    }>;
+    creatures?: Array<{
+        type: CreatureType;
+        x?: number;
+        y?: number;
+        z?: number;
+        tamed?: true;
+        /** Defaults to a massive number */
+        happiness?: number;
+        aberrant?: true;
+    }>;
+    corpses?: Array<{
+        type: CreatureType;
+        x?: number;
+        y?: number;
+        z?: number;
+        aberrant?: true;
+    }>;
+}
+export interface IAutomationSetupPlayer {
+    alwaysPassSkillChecks?: boolean;
+    position?: Partial<IVector3>;
+    direction?: Direction.Cardinal;
+    inventory?: IAutomationSetupItemContainer;
+    status?: StatusType[];
+}
+export interface IAutomationSetupItemContainer {
+    sort?: ContainerSort;
+    sortDirection?: SortDirection;
+    stacks?: ItemType[];
+    items?: IAutomationSetupItem[];
+}
+export interface IAutomationSetupItem {
+    type: ItemType | ItemTypeGroup;
+    equip?: EquipType;
+    quality?: Quality;
 }

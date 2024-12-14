@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,16 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { ExhaustionLevel } from "game/entity/status/handler/IExhausted";
-import StatusEffect, { StatusEffectBadness } from "game/entity/status/StatusEffect";
-import type { IHighlight } from "ui/util/IHighlight";
-export default class Exhausted extends StatusEffect {
+import { ExhaustionLevel } from "@wayward/game/game/entity/status/handler/IExhausted";
+import Status from "@wayward/game/game/entity/status/Status";
+import { StatusEffectList } from "@wayward/game/game/entity/status/StatusEffectList";
+import type { IHighlight } from "@wayward/game/ui/util/IHighlight";
+export declare const STAMINA_LOW_PENALTY_START_VALUE = 15;
+export declare const STAMINA_CHANGE_WARNING_PERCENT = 0.05;
+export default class Exhausted extends Status {
     register(): void;
     getLevel(): ExhaustionLevel;
     getHighlight(): IHighlight;
-    getBadness(): StatusEffectBadness.Neutral | StatusEffectBadness.Bad;
-    getTranslation(): import("../../../../language/impl/TranslationImpl").default;
-    getDescription(): import("../../../../language/impl/TranslationImpl").default;
+    getEffects(): StatusEffectList;
     refresh(): void;
     private onPreMove;
     private onStatChange;

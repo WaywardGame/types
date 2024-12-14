@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,10 +10,9 @@
  */
 declare enum UiExperiment {
     ColorSchemeLight = 0,
-    NewCraftingDialog = 1,
-    ActionExamples = 2
+    ActionExamples = 1
 }
-declare module UiExperiment {
+declare namespace UiExperiment {
     type Excluded = "toggle" | "update" | "all" | "name" | "has";
     export type Any = Exclude<keyof typeof UiExperiment, Excluded>;
     export function all(): readonly UiExperiment[];

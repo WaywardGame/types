@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,17 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Reference } from "game/reference/IReferenceManager";
+import type { Reference } from "@wayward/game/game/reference/IReferenceManager";
 export declare enum OldUiDialogId {
-    Inventory = 0,
-    Crafting = 1,
-    Container = 2
+    Crafting = 0
 }
 export interface IUiScreen {
-    bindCatcher?: number;
     selector(): string;
     bindElements(): void;
-    unbindElements(): void;
     show(data?: any): void;
     hide(): void;
     isVisible(): void;
@@ -43,24 +39,15 @@ export interface IDialogInfo {
     onClose?(): void;
     onResizeStop?(): void;
 }
-export declare enum SortType {
+export declare enum CraftingSort {
     Name = 0,
-    Group = 1,
-    Weight = 2,
-    Recent = 3,
-    Skill = 4,
-    Decay = 5,
-    Quality = 6,
-    Category = 7,
-    Durability = 8,
-    DiscoveredTime = 9,
-    Worth = 10,
-    BestForCrafting = 11,
-    Magical = 12,
-    CraftableOnly = 13
+    Skill = 1,
+    Category = 2,
+    DiscoveredTime = 3,
+    CraftableOnly = 4
 }
 export interface IContainerSortInfo {
-    sortType: SortType;
+    sortType: CraftingSort;
     reverse?: boolean;
 }
 export declare enum UiEvent {

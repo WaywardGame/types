@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { Events, IEventEmitter } from "event/EventEmitter";
-import type Component from "ui/component/Component";
-import type { IBindHandlerApi } from "ui/input/Bind";
-import type Bindable from "ui/input/Bindable";
-import Vector2 from "utilities/math/Vector2";
+import type Component from "@wayward/game/ui/component/Component";
+import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import type Bindable from "@wayward/game/ui/input/Bindable";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
+import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export type IDraggableInputEvent = (MouseEvent & {
     [KEY in Exclude<keyof TouchEvent, keyof MouseEvent>]?: undefined;
 } & {
@@ -26,7 +26,7 @@ export type IDraggableInputEvent = (MouseEvent & {
 } & {
     [KEY in Exclude<keyof TouchEvent, keyof IBindHandlerApi>]?: undefined;
 });
-export interface IDraggableEvents {
+export interface IDraggableEvents extends Events<Component> {
     moveStart(mouse: Vector2): false | void;
     move(offset: Vector2, mouse: Vector2): any;
     moveEnd(offset: Vector2, mouse: Vector2, bindable?: Bindable): any;
@@ -34,15 +34,18 @@ export interface IDraggableEvents {
 }
 export type WithDraggableEvents<EVENTS_OF> = Events<EVENTS_OF> & IDraggableEvents;
 export interface IDraggableComponent extends Component {
-    event: IEventEmitter<this, Events<Component> & IDraggableEvents>;
+    event: IEventEmitter<this, IDraggableEvents>;
 }
 export default class Draggable {
+    static isDragging: boolean;
+    private static readonly draggables;
+    static get(host: IDraggableComponent): Draggable;
     private mouseStartPosition?;
     private dragStage;
     private dragStartTime?;
     private readonly hostRef;
     get host(): IDraggableComponent;
-    constructor(host: IDraggableComponent, ...bindables: Bindable[]);
+    private constructor();
     private stickyDistance;
     setStickyDistance(stickyDistance: number): this;
     private delay;
@@ -56,6 +59,7 @@ export default class Draggable {
      * Incompatible with `setInputFilter`
      */
     setBindable(bindables: ArrayOr<Bindable>, priority?: number): this;
+    stopDragging(): void;
     private removeBindHandlers;
     dragStart(event: IDraggableInputEvent): boolean;
     private drag;

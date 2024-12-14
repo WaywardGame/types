@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,17 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-/// <reference types="webdriverio/async" />
 import type { IInit } from "@wayward/game/Init";
 import type { Stat } from "@wayward/game/game/entity/IStats";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
 import { Direction } from "@wayward/game/utilities/math/Direction";
-import type { Random } from "@wayward/game/utilities/random/Random";
 import { ApplicationDom } from "@wayward/test/core/applicationDom";
 import { ApplicationLogger } from "@wayward/test/core/applicationLogger";
 import type { IDedicatedServerGameOptions, INewGameOptions, ITestJoinServerOptions, IWaitUntilGameLoadedOptions } from "@wayward/test/interfaces";
-import type { TestRunContext } from "@wayward/test/testRunner";
+import { type TestRunContext } from "@wayward/test/testRunner";
+import type { Random } from "@wayward/utilities/random/Random";
 export default class ApplicationInteractions {
     protected readonly testContext: TestRunContext;
     readonly appId: string;
@@ -51,30 +50,39 @@ export default class ApplicationInteractions {
     clickJoinServer(): Promise<void>;
     clickDailyChallenge(): Promise<void>;
     clickBack(timeout?: number): Promise<void>;
-    clickButton(name: string, options?: Partial<{
+    clickButton(buttonText: string, options?: Partial<{
         force: boolean;
+        selector: string;
         clickOnce: boolean;
         timeout: number;
+        logFailure: boolean;
     }>): Promise<void>;
     clickYesIfVisible(): Promise<boolean>;
     clickButtonIfVisible(name: string): Promise<boolean>;
     isShowingPrompt(prompt: Prompt): Promise<boolean>;
     dismissPrompt(prompt: Prompt): Promise<void>;
     dismissPromptIfShown(prompt: Prompt): Promise<void>;
-    clickUnpauseIconIfVisible(): Promise<void>;
+    /**
+     * Checks for a pause icon / if the game is caused
+     */
+    ensureUnpaused(): Promise<void>;
     clickNewGameCheckbox(name: string): Promise<void>;
     clickButtonIfClickable(name: string): Promise<boolean>;
     setNewGameSeed(seed: string | number): Promise<void>;
     setMultiplayerIdentifier(identifier: string): Promise<void>;
-    runItemAction(itemId: number, action: string): Promise<void>;
     private importGame;
     /**
+     * Executes a ascend/descend action
+     */
+    ascendDescend(): Promise<void>;
+    /**
      * Executes a Move action
-     * @param direction Direction to move
+     * @param direction Direction to move. Direction.None to Idle
      * @param steps Number of movements (steps)
      * @param verifyMovement True to verify the players position changed. Don't use this if the player is moving into the edge
      */
-    moveInDirection(direction: Direction.Cardinal, steps?: number, verifyMovement?: boolean): Promise<void>;
+    moveInDirection(direction: Direction.Cardinal | Direction.None, steps?: number, verifyMovement?: boolean): Promise<void>;
+    waitUntilCanMove(): Promise<void>;
     setSail(): Promise<void>;
     waitForGameEndScreen(isWinner: boolean): Promise<void>;
     returnToTitleScreen(): Promise<void>;
@@ -90,16 +98,17 @@ export default class ApplicationInteractions {
     waitUntilPauseMenuIsShown(): Promise<void>;
     waitUntilGameIsLoaded(options?: Partial<IWaitUntilGameLoadedOptions>): Promise<void>;
     isTitleScreenVisible(): Promise<WebdriverIO.Element[] | undefined>;
-    isButtonVisible(text: string): Promise<WebdriverIO.Element[] | undefined>;
+    isButtonVisible(text: string, logNotVisible?: boolean): Promise<WebdriverIO.Element[] | undefined>;
     isOverlayVisible(): Promise<WebdriverIO.Element[] | undefined>;
     waitUntilTitleScreenIsVisible(): Promise<void>;
     waitUntilGameEndMenuIsVisible(): Promise<void>;
     waitForVisibleButtonThenClick(name: string, options?: Partial<{
         clickOnce: boolean;
         timeout: number;
+        logFailure: boolean;
     }>): Promise<void>;
     increaseStat(stat: Stat, value: number): Promise<void>;
-    randomInput(count: number): Promise<void>;
-    pressKey(key: string, modifier?: string): Promise<void>;
-    protected screenshot(suffix: string): Promise<void>;
+    randomMovement(count: number): Promise<void>;
+    pressKey(key: string, modifier?: string, duration?: number): Promise<void>;
+    screenshot(suffix: string): Promise<void>;
 }

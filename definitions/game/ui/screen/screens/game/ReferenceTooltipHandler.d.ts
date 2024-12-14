@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { InfoProviderContext } from "game/inspection/InfoProviderContext";
-import type Inspection from "game/inspection/Inspection";
-import InspectionsHandler from "game/inspection/InspectionsHandler";
-import type { Reference } from "game/reference/IReferenceManager";
-import InspectionsList from "ui/screen/screens/game/component/InspectionsList";
-import type { InspectionTooltipHints } from "ui/screen/screens/game/InspectionsTooltipHandler";
-import InspectionsTooltipHandler from "ui/screen/screens/game/InspectionsTooltipHandler";
-import type Tooltip from "ui/tooltip/Tooltip";
+import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
+import type Inspection from "@wayward/game/game/inspection/Inspection";
+import InspectionsHandler from "@wayward/game/game/inspection/InspectionsHandler";
+import type { Reference } from "@wayward/game/game/reference/IReferenceManager";
+import type { InspectionTooltipHints } from "@wayward/game/ui/screen/screens/game/InspectionsTooltipHandler";
+import InspectionsTooltipHandler from "@wayward/game/ui/screen/screens/game/InspectionsTooltipHandler";
+import InspectionsList from "@wayward/game/ui/screen/screens/game/component/InspectionsList";
+import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 export default class ReferenceTooltipHandler extends InspectionsTooltipHandler<ReferenceInspectionsList> {
     private readonly context;
     private readonly reference;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ISegment } from "utilities/string/Interpolator";
+import type { ISegment } from "@wayward/game/utilities/string/Interpolator";
 export declare enum Segment {
     Argument = 0,
     Conditional = 1,
@@ -35,7 +35,9 @@ export declare enum Segment {
     NumberToPercent = 22,
     NumberToPlaces = 23,
     FalsyCoalescing = 24,
-    Class = 25
+    Class = 25,
+    Simplification = 26,
+    Overline = 27
 }
 declare const segments: Record<Segment, ISegment>;
 export default segments;

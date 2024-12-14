@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2023 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -16,7 +16,10 @@
  * so there are no types for the instance exposed.
  */
 export default class Reflection {
-    private readonly definedModules;
+    #private;
+    static init(definedModules: Record<string, any>): void;
+    static dispose(): void;
+    dispose(): void;
     /**
      * On failure, whether or not the log should include each "did you mean" result's "closeness" to what argument was given.
      * Defaults to not display.
@@ -32,13 +35,15 @@ export default class Reflection {
      * The list of previous "did you mean" matches for the last failed query. Also stored in the global variable `$r`.
      */
     get lastQuery(): readonly any[];
+    exports: Record<string, any>;
     constructor(definedModules: Record<string, any>);
+    getCurrentExports(): Record<string, any>;
     /**
      * Retrieves a module given its name.
      * @param name The name of the module. This can be the full path, or it can be just the module name itself.
      * If there are two modules with the same name, but different paths, you will have to use the full path to access either.
      */
-    module(name: string): any;
+    module(name: string): unknown;
     /**
      * Retrieves an export from any module given its name.
      * @param name The name of the export. Default exports for modules can be retrieved with the module name.
@@ -51,7 +56,11 @@ export default class Reflection {
      * @param which A number, the index of the export in the list of exports matching the given name, sorted by how "close" each export's name is.
      * Note: For exports where only one matches, the discriminator `which` parameter is unnecessary.
      */
-    export(name: string, which: number): any;
+    export(name: string, which: number): unknown;
     private warn;
     private setLastQueryCloseMatches;
+    findPath(value: unknown): Generator<string[]>;
+    getPrimaryPath(value: unknown): string[] | undefined;
+    hash(value: unknown): string | undefined;
+    getName(value: unknown): string | undefined;
 }
