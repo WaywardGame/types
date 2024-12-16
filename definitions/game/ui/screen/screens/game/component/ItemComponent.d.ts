@@ -249,6 +249,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     private static dragPreviewSource?;
     private static _dragPreview?;
     static get dragPreview(): ItemComponent | undefined;
+    static get isDragging(): boolean;
     private static getDragPreview;
     private savedPosition?;
     protected onMoveStart(_: any, mouse: Vector2): false | void;

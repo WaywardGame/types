@@ -37,11 +37,13 @@ export interface IContainerBucketItemListTransferDetails {
     item?: Item;
     itemType: ItemType;
     moveAll: boolean;
+    moveLimit?: number;
     quality?: Quality;
     text?: string;
     excludeProtected?: true;
     index?: number;
     silent?: true;
+    hidden?: true;
     excludeEquipped?: boolean;
 }
 export interface IContainerBucketItemListEvents extends WithSortableEvents<Component> {
@@ -116,6 +118,8 @@ export default class ContainerBucketItemList extends Component implements ISorta
     onDropItem(api: IBindHandlerApi): boolean;
     private handleDrop;
     onQuickMove(api: IBindHandlerApi): boolean;
+    onQuickMoveFromStack(api: IBindHandlerApi): boolean;
+    onQuickMoveToStack(api: IBindHandlerApi): boolean;
     protected onSubscribeDraggableEvents(itemComponent: ItemComponent, events: IDraggableComponentSubscriber<ItemComponent>): void;
     private sortingComponent?;
     getSorting(): ItemComponent | undefined;

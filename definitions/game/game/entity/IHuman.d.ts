@@ -471,8 +471,6 @@ export interface ICrafted {
     newUnlock: boolean;
 }
 export interface ICheckUnderOptions {
-    autoActions?: boolean;
-    forcePickUp?: boolean;
     skipDoodadEvents?: boolean;
     burned?: boolean;
 }

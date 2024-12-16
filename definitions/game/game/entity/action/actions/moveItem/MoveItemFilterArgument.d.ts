@@ -17,6 +17,7 @@ import type Item from "@wayward/game/game/item/Item";
 import Translation from "@wayward/game/language/Translation";
 export interface IMoveItemFilterArgument {
     type?: ItemType;
+    moveLimit?: number;
     quality?: ArrayOr<Quality>;
     text?: string;
     excludeProtected?: boolean;

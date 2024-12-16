@@ -58,6 +58,12 @@ export declare class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     startTransition(timeStamp: number): void;
     updateTransitionProgress(timeStamp: number): boolean;
     resetTransitionProgress(): void;
+    /**
+     * Updates the explored map at the edge of the field of view. It becomes revealed as the player moves (from 0 -> 255 alpha).
+     * Set both params to undefined to fully set in-progress transitions to fully revealed
+     * @param timeStamp request animation frame timeout
+     * @param movementTime local players movement
+     */
     private processExploredMapTransition;
     compute(timeStamp: number, force?: boolean, skipTransition?: boolean): boolean;
     /**

@@ -86,6 +86,9 @@ export default class Player extends Human<undefined, number, ReferenceType.Playe
     updateMovementIntent(movementIntent: IMovementIntent): boolean;
     load(): void;
     unload(): void;
+    /**
+     * Note: This method should not do anything that could desync states in mp
+     */
     private onLoadOrUnload;
     setup(spawnTile: Tile, respawn: boolean): void;
     protected onNoInput(): void;

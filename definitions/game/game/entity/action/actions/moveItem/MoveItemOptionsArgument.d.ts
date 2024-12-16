@@ -13,6 +13,7 @@ import { ActionArgumentCustom } from "@wayward/game/game/entity/action/argument/
 export interface IMoveItemOptionsArgument {
     isTrading?: boolean;
     skipSound?: boolean;
+    skipMessage?: boolean;
 }
 export declare class MoveItemOptionsArgument extends ActionArgumentCustom<IMoveItemOptionsArgument> {
     validate(executor: Entity | undefined, value: unknown): value is IMoveItemOptionsArgument;
