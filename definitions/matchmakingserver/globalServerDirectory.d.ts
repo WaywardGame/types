@@ -13,6 +13,7 @@ import Server from "./server";
 import * as shared from "./shared";
 export default class GlobalServerDirectory extends Server {
     private readonly servers;
+    private readonly serverConnections;
     private hasGlobalMatchmakingServerConnection;
     constructor();
     protected getConnectionIdentifier(_: string | undefined, ipAddress: string): string | undefined;

@@ -13,7 +13,7 @@ import type { IBiomeTemperature } from "@wayward/game/game/temperature/ITemperat
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 declare const _default: {
     readonly defaultTerrainBackground: TerrainType.Dirt;
-    readonly defaultCaveEntranceFlooring: TerrainType.Dirt;
+    readonly defaultCaveEntranceFlooring: TerrainType.Gravel;
     readonly fog: {
         color: import("@wayward/utilities/Color").IRGB;
     };

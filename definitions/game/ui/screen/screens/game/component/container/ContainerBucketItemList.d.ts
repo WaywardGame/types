@@ -38,6 +38,7 @@ export interface IContainerBucketItemListTransferDetails {
     itemType: ItemType;
     moveAll: boolean;
     moveLimit?: number;
+    stackList?: ContainerBucketItemList;
     quality?: Quality;
     text?: string;
     excludeProtected?: true;

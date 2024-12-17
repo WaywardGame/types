@@ -171,7 +171,6 @@ export declare enum PacketAcceptType {
 }
 export interface IMultiplayerWorldData {
     pid: number;
-    playerCount: number;
     mods: IMultiplayerMod[];
     multiplayerOptions: IMultiplayerOptions;
     difficulty: GameMode;

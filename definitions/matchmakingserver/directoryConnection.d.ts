@@ -25,6 +25,7 @@ export default class DirectoryConnection extends EventEmitter {
     checkConnection(channel: string, ipAddress?: string): Promise<shared.ICheckConnectionServerDirectoryResponse>;
     private connect;
     private disconnect;
+    private queueProcessMessagesTimer;
     private clearProcessMessagesTimer;
     private processMessages;
 }

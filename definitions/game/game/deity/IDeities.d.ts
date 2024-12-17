@@ -25,6 +25,13 @@ export declare const DEITY_RUNE_CHANCE_BASE_MAX = 0.1;
  * The theurgy chance is combined with the base chance in the rune dropping calculation.
  */
 export declare const DEITY_RUNE_CHANCE_THEURGY_MAX = 0.1;
+/**
+ * The chance of a rune dropping from a zone is multiplied by this value for each tier of the zone.
+ * For example, if this is set to 0.5, a zone of tier 1 would have a 50% less of a chance of dropping a rune, and a zone of tier 2 would have no reduced chance at dropping a rune (since it would be at 1).
+ *
+ * Zone 0 will always have a 0% chance of dropping a rune.
+ */
+export declare const DEITY_RUNE_CHANCE_ZONE_TIER_MULTIPLIER = 0.5;
 export interface IReadableAlignment {
     /**
      * The current Deity aligned to.
