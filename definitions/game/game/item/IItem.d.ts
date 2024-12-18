@@ -718,7 +718,7 @@ export interface ILiquidGather {
 export interface IDismantleDescription {
     items: IDismantleItemDescription[];
     required?: ItemTypeGroup;
-    runeChance?: RuneChance;
+    runeChance: RuneChance;
     producesEvent?: TileEventType;
 }
 export interface IDismantleItemDescription {
