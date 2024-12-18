@@ -72,7 +72,6 @@ export default class ActionSlotConfigurationColumn extends Component {
     readonly hr0: HorizontalLine;
     readonly targetHoveredTileCheckButton: CheckButton;
     readonly autoUseCheckButton: CheckButton;
-    readonly hintDiscoverMore: Paragraph;
     readonly hr1: HorizontalLine;
     readonly clearSlotButton: Button;
     readonly hr2: HorizontalLine;
