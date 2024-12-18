@@ -338,9 +338,15 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      */
     magicInert?: true;
     /**
-     * Whether magical enhancement should be disabled
+     * A list of ActionTypes that should be disabled on this item.
+     * Note that support for this property must be added to each action's `canUse` individually. See the usage in `Enhance.ts`.
      */
-    noEnhance?: true;
+    disabledActions?: ActionType[];
+    /**
+     * A list of ActionTypes that should not gain skill according to the item's associated skill.
+     * Note that support for this property must be added to each action's `canUse` individually. See the usage in `Refine.ts`.
+     */
+    disabledActionSkillGain?: ActionType[];
     /**
      * The item name to display instead of the item's default translation
      */
@@ -384,6 +390,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * When set to true, the item will provide no consumption bonuses when used based on its quality
      */
     qualityProvidesNoConsumeBonus?: boolean;
+}
+export declare namespace IItemDescription {
+    function actionDisabled(description: IItemDescription | undefined, action: ActionType): boolean;
+    function actionSkillGainDisabled(description: IItemDescription | undefined, action: ActionType): boolean;
 }
 export interface IConsumeItemStat {
     stat: Stat;
@@ -708,7 +718,7 @@ export interface ILiquidGather {
 export interface IDismantleDescription {
     items: IDismantleItemDescription[];
     required?: ItemTypeGroup;
-    runeChance?: RuneChance;
+    runeChance: RuneChance;
     producesEvent?: TileEventType;
 }
 export interface IDismantleItemDescription {

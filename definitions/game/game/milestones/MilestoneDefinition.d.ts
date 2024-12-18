@@ -17,9 +17,9 @@ import { GameMode } from "@wayward/game/game/options/IGameOptions";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
 import type Message from "@wayward/game/language/dictionary/Message";
 import type { EnumObject } from "@wayward/utilities/enum/IEnum";
-export interface IMilestoneDataGlobalizer {
-    globalize(data: string | number): string | number | undefined;
-    unglobalize(data: string | number): string | number | undefined;
+export interface IMilestoneDataGlobalizer<ID extends string | number = string | number> {
+    globalize(data: ID): ID | undefined;
+    unglobalize(data: ID): ID | undefined;
 }
 export default class MilestoneDefinition {
     dataType: MilestoneDataType;
@@ -104,5 +104,5 @@ export default class MilestoneDefinition {
     setFullDiscoveryList(list: ReadonlyArray<string | number>): this;
     dataGlobalizer?: Record<string, string | number> | IMilestoneDataGlobalizer;
     setDataGlobalizer(dataEnum: Record<string, string | number>): this;
-    setDataGlobalizer(globalizer: IMilestoneDataGlobalizer): this;
+    setDataGlobalizer<ID extends string | number = string | number>(globalizer: IMilestoneDataGlobalizer<ID>): this;
 }

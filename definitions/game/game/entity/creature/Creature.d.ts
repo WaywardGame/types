@@ -85,6 +85,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     getName(article?: Article, count?: number): Translation;
     protected getDescription(): ICreatureDescription | undefined;
     get isHostile(): boolean;
+    get canAlert(): boolean;
     get isHidden(): boolean;
     get isRetaliator(): boolean;
     get isTamed(): boolean;

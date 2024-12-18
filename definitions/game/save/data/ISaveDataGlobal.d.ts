@@ -21,8 +21,6 @@ import type UiExperiment from "@wayward/game/ui/UiExperiments";
 export interface IOptions {
     alternatingDirectionMovement: boolean;
     autoAttack: boolean;
-    autoPickup: boolean;
-    autoPickupOnIdle: boolean;
     autoSave: [AutoSaveMode.Off] | [AutoSaveMode.Turns | AutoSaveMode.Time, number];
     /**
      * Indexed by `Bindable` names, IE `GameFaceDirection`

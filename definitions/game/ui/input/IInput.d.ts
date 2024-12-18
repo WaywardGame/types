@@ -10,6 +10,25 @@
  */
 import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import { InputCatalystType } from "@wayward/game/ui/input/IIInput";
+declare global {
+    interface Keyboard {
+        getLayoutMap(): Promise<KeyboardLayoutMap>;
+    }
+    interface KeyboardLayoutMap {
+        readonly size: number;
+        [Symbol.iterator](): IterableIterator<[string, string]>;
+        entries(): IterableIterator<[string, string]>;
+        forEach(callbackfn: (value: string, key: string, map: KeyboardLayoutMap) => void, thisArg?: any): void;
+        keys(): IterableIterator<string>;
+        values(): IterableIterator<string>;
+        get(key: string): string | undefined;
+        has(key: string): boolean;
+    }
+    interface Navigator {
+        keyboard: Keyboard;
+    }
+}
+export declare function startKeyboardLayoutMonitor(): void;
 interface IInputCatalystValueMap {
     [InputCatalystType.Key]: string;
     [InputCatalystType.MouseButton]: number;

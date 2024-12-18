@@ -103,6 +103,7 @@ export default class ActionBar extends QuadrantComponent {
     protected onToggleAllUseWhileMoving(api: IBindHandlerApi): boolean;
     protected onMenuCancel(): boolean;
     protected onChangeWhetherCopying(api: IBindHandlerApi): boolean;
+    protected onPressingAnything(api: IBindHandlerApi): void;
     getSlots(): Stream<ActionSlot>;
     getHistorySlots(): Stream<ActionSlot>;
     private toggleAllUseWhenMoving;

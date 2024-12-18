@@ -42,8 +42,6 @@ export declare class EventManager<HOST extends object, EVENTS = {}, TARGET exten
     emit<EVENT extends EVENTS[keyof EVENTS]>(event: EVENT, initializer?: (event: EVENT) => any): void;
     emit<EVENT extends Event>(event: EVENT, initializer: (event: EVENT) => EVENTS[keyof EVENTS]): void;
     private readonly pipes;
-    pipe<TYPE extends keyof EVENTS>(type: TYPE, on: EventManager<any, {
-        [key in TYPE]: EVENTS[TYPE];
-    }, any>): this;
+    pipe<TYPE extends keyof EVENTS>(type: TYPE, on: EventManager<any, Record<TYPE, EVENTS[TYPE]>, any>): this;
     private insertPipe;
 }

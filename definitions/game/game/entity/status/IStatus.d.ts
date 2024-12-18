@@ -39,6 +39,9 @@ export interface IStatusDescription {
     highlight?: SupplierOr<IHighlight | undefined, [IStatusContext]>;
     icon?: SupplierOr<IStatusIconDescription | undefined, [IStatusContext]>;
     particles?: SupplierOr<StatusParticle | undefined, [IStatusContext, StatusParticleEvent?]>;
+    /** A list of `StatusRenderer`s that could be returned by a supplier in the `renderer` property */
+    renderers?: StatusRenderer[];
+    /** Note that if you use a supplier, the renderer *must* also be in the `renderers` property so that it can be correctly preloaded */
     renderer?: SupplierOr<StatusRenderer | undefined, [IStatusContext]>;
     /** This function is not used automatically by Status, and must be implemented via a custom `onTick` handler */
     getDamageRange?(status: IStatusContext): IRange | undefined;
