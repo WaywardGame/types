@@ -18,7 +18,7 @@ export interface IHighlight {
     class?: string;
 }
 export declare namespace IHighlight {
-    function item(item: Item): HighlightSelector;
+    function item(item: Item): HighlightSelector | undefined;
     function optionalItem(item?: Item): HighlightSelector | undefined;
     function optionalEquipSlot(item?: Item): HighlightSelector | undefined;
     function container(container: IContainer): HighlightSelector;

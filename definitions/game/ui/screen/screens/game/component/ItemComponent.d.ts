@@ -241,7 +241,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     get actionSlots(): ReadonlySet<number> | undefined;
     private _equipSlot;
     get equipSlot(): EquipType;
-    refresh(refreshType: ItemRefreshType): this;
+    refresh(refreshType: ItemRefreshType, skipPlayingCheck?: boolean): this;
     clone(): this | undefined;
     setItemMenu(initialiser?: (contextMenu: ContextMenu<ActionId>) => any): this;
     private registeredItemHighlights;

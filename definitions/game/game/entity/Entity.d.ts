@@ -96,8 +96,8 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      */
     get tile(): Tile | undefined;
     get tilesAround(): Tile[] | undefined;
-    protected setCachedTile(tile: Tile): void;
-    clearTileCache(): void;
+    protected setCachedTile(tile: Tile | undefined): void;
+    clearTileCache(): Tile | undefined;
     isNearby(entity: Entity | Tile, includeCurrentTile?: boolean): boolean;
     /**
      * Updates the world renderer & flow field state for the tile
