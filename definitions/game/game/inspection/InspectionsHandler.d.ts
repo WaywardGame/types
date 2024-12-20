@@ -32,7 +32,7 @@ export default abstract class InspectionsHandler extends EventEmitter.Host<IInsp
     all(): IteratorObject<[InspectType, HashSet<Inspection<any>>]>;
     getInspectTypes(): InspectType[];
     register(): void;
-    deregister(): void;
+    deregister(isBeingRemoved?: boolean): void;
     protected getInspections?(inspectType: InspectType): HashSet<Inspection<any>>;
     protected createInspectionSet(...values: Array<IterableOr<Inspection<any> | undefined>>): HashSet<Inspection<any>>;
     protected updateInspections(...inspectTypes: InspectType[]): void;

@@ -93,6 +93,7 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     protected component?: Component;
     protected context?: InfoProviderContext;
     private componentClass?;
+    private listeningForRequestRemove?;
     abstract get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
     abstract getClass(context: InfoProviderContext): string[];
     getDefaultDisplayLevel(_context: InfoProviderContext): InfoDisplayLevel | Set<InfoDisplayLevel>;
