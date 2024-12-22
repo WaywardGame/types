@@ -83,6 +83,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      * - `creature.getName(undefined, 3)` // "acid spitter demons"
      */
     getName(article?: Article, count?: number): Translation;
+    protected get typeEnum(): typeof CreatureType;
     protected getDescription(): ICreatureDescription | undefined;
     get isHostile(): boolean;
     get canAlert(): boolean;

@@ -63,6 +63,7 @@ export default class Player extends Human<undefined, number, ReferenceType.Playe
     delete(): void;
     get isValid(): boolean;
     get clientStore(): IClientStore;
+    protected get typeEnum(): {};
     getDescription(): undefined;
     createNoteManager(): NoteManager;
     createMessageManager(): MessageManager;

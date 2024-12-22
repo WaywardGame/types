@@ -69,6 +69,8 @@ export interface IItemManagerEvents extends Events<EntityManager<Item>> {
     containerUpdateOrder(container: IContainer): any;
     containerStack(container: IContainer, type: ItemType): any;
     containerUnstack(container: IContainer, type: ItemType): any;
+    /** Called at the end of inserting new items into a container, specifically when sorting the container was not necessary. */
+    containerItemAddDidNotSort(container: IContainer): any;
     /**
      * Called when an item is crafted
      * @param human The human object

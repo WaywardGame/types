@@ -29,7 +29,8 @@ import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IMobCheck, IslandId } from "@wayward/game/game/island/IIsland";
-import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemChangeIntoOptions, IItemDescription, IItemDisassembleResult, IItemDisassembly, IItemGetNameOptions, IItemUsed, IItemVehicle, IMagicalPropertyInfo, IItemMovementResult as IMoveToTileMobCheckResult, IMoveToTileOptions, ItemTag, ItemTypeExtra } from "@wayward/game/game/item/IItem";
+import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemChangeIntoOptions, IItemDescription, IItemDisassembleResult, IItemDisassembly, IItemGetNameOptions, IItemUsed, IItemVehicle, IMagicalPropertyInfo, IItemMovementResult as IMoveToTileMobCheckResult, IMoveToTileOptions, ItemTag } from "@wayward/game/game/item/IItem";
+import { ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { BookType, ContainerSort, ItemDamageResult, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "@wayward/game/game/item/IItem";
 import type { IPlaceOnTileOptions } from "@wayward/game/game/item/IItemManager";
 import ItemMapManager from "@wayward/game/game/item/ItemMapManager";
@@ -198,6 +199,9 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * - `item.getName(undefined, 3)` // "stone axes"
      */
     getName(article?: Article, options?: Partial<IItemGetNameOptions>): TranslationImpl;
+    protected get debug(): any;
+    private getDebug;
+    protected get typeEnum(): typeof ItemType;
     protected getDescription(): IItemDescription | undefined;
     get isTransient(): boolean;
     get isValid(): boolean;

@@ -21,7 +21,7 @@ import { AiType, ChangeAiType } from "@wayward/game/game/entity/ai/AI";
 import type { IEntityAiEvents } from "@wayward/game/game/entity/ai/AiManager";
 import AiManager from "@wayward/game/game/entity/ai/AiManager";
 import type { INPCDescription } from "@wayward/game/game/entity/npc/INPC";
-import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
+import { NPCType } from "@wayward/game/game/entity/npc/INPCs";
 import type MerchantNPC from "@wayward/game/game/entity/npc/npcs/Merchant";
 import type ShipperNPC from "@wayward/game/game/entity/npc/npcs/Shipper";
 import { MessageManagerNoOp } from "@wayward/game/game/entity/player/MessageManager";
@@ -66,6 +66,7 @@ export default abstract class NPC extends Human<INPCDescription, NPCType, Refere
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(entityOptions?: IEntityConstructorOptions<NPCType>);
+    protected get typeEnum(): typeof NPCType;
     getDescription(): INPCDescription | undefined;
     getWeightCapacity(): number;
     getRegistrarId(): number;

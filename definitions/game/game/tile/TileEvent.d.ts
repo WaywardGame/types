@@ -88,6 +88,7 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
     get point(): IVector3;
     get tile(): Tile;
     toString(): string;
+    protected get typeEnum(): typeof TileEventType;
     protected getDescription(): ITileEventDescription | undefined;
     getName(article?: Article, count?: number): TranslationImpl;
     getProducedTemperature(): number | undefined;
