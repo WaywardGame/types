@@ -45,7 +45,7 @@ export declare class EquipmentSlot extends ItemComponent {
     private overriddenItem?;
     equipItem(item: Item): Promise<void>;
     clear(): void;
-    refresh(refreshType: ItemRefreshType): this;
+    refresh(refreshType: ItemRefreshType, skipPlayingCheck?: boolean): this;
     protected onEquipEvent(): void;
     protected onPickUp(api: IItemPickUpApi): void;
     protected onDropInto(api: IItemDropApi, fromSlot?: ItemSlot): boolean;

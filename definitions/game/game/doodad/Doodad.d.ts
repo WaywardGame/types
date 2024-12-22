@@ -133,6 +133,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     private _isWell?;
     private readonly _doodadGroupCache;
     constructor(entityOptions?: IEntityConstructorOptions<DoodadType>, options?: IDoodadOptions);
+    protected get typeEnum(): typeof DoodadType;
     get asCorpse(): undefined;
     get asCreature(): undefined;
     get asDoodad(): Doodad | undefined;

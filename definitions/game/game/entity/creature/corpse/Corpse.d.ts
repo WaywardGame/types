@@ -90,6 +90,7 @@ export default class Corpse extends Entity<ICorpseDescription, CreatureType, Ref
      * - `corpse.getName(undefined, 3)` // "acid spitter demons"
      */
     getName(article?: Article, count?: number): Translation;
+    protected get typeEnum(): typeof CreatureType;
     protected getDescription(): ICorpseDescription | undefined;
     creatureDescription(): ICreatureDescription | undefined;
     get isValid(): boolean;

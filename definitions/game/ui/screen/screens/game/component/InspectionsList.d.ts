@@ -18,7 +18,7 @@ import Component from "@wayward/game/ui/component/Component";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 import type HashSet from "@wayward/utilities/collection/set/HashSet";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-import ResolvablePromise from "@wayward/utilities/promise/ResolvablePromise";
+import { PromiseSequence } from "@wayward/utilities/promise/PromiseSequence";
 export interface ITileInspectionsEvents extends Events<Component> {
     refreshed(isValid?: boolean): any;
     updateInspectTypeFilter(): any;
@@ -30,8 +30,9 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     event: IEventEmitter<this, ITileInspectionsEvents>;
     private readonly paragraphInspectionsInvalid;
     private inspectTypeFilter;
+    private _removed?;
     protected inspectionsHandler?: InspectionsHandler;
-    protected refreshInspectionsOfTypeRunning?: ResolvablePromise;
+    protected refreshPromiseSequence: PromiseSequence;
     protected inspectionsHandlerUpdatedInspectionsCallback?: (_: any, inspectType: InspectType, inspections: HashSet<Inspection<any>>, oldInspections: HashSet<Inspection<any>> | undefined) => void;
     private displayLevel;
     private readonly inspectTypeWrappers;
@@ -50,5 +51,6 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     protected getInvalidTranslation?(): TranslationGenerator | undefined;
     private deregisterInspectionsHandler;
     private refreshInspectionsOfType;
+    private _refreshInspectionsOfType;
     private initializeTooltipSection;
 }

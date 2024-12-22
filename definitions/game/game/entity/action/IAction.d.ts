@@ -208,8 +208,11 @@ export declare enum ActionFlag {
  * Used for hiding actions that can't currently be used from context menus.
  */
 export declare enum ActionDisplayLevel {
+    /** This action is always displayed, whether usable or not. */
     Always = 0,
+    /** When the action can't be used, it is not displayed, *unless* you are right clicking on an item that has the action. */
     Direct = 1,
+    /** When the action can't be used, it is not displayed. */
     Never = 2
 }
 export interface IActionUsable {
@@ -229,6 +232,7 @@ export interface IActionNotUsable {
     mobCheckTile?: Tile;
     message?: Message | INotUsableMessage;
     sources?: ArrayOr<Source>;
+    /** Whether the action should display or not in context menus due to this error. */
     errorDisplayLevel?: ActionDisplayLevel;
     args?: never;
     arg?: never;

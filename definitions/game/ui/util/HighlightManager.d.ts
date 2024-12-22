@@ -18,7 +18,7 @@ export default class HighlightManager {
      *
      * Note: When not providing `until` events, the `remove` event will be subscribed to automatically.
      */
-    register<C extends Component>(component: C, selector: HighlightSelector, ...until: Array<keyof Events<C>>): void;
+    register<C extends Component>(component: C, selector: HighlightSelector | undefined, ...until: Array<keyof Events<C>>): void;
     is(component: Component, selector: HighlightSelector): boolean;
     private getHighlightSelectorId;
     private getHighlightableComponents;

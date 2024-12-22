@@ -27,7 +27,6 @@ import Message from "@wayward/game/language/dictionary/Message";
 import type { HighlightSelector } from "@wayward/game/ui/util/IHighlight";
 import Observer from "@wayward/game/utilities/Observer";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-export declare const USABLE_ACTION_USE_ON_MOVE_UNLOCK_AT = 20;
 export interface IUsableActionEvents {
     preExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
     postExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;

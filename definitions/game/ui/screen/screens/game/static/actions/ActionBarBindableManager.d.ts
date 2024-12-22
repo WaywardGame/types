@@ -10,10 +10,6 @@
  */
 import BindableManager from "@wayward/game/ui/input/BindableManager";
 export default class ActionBarBindableManager extends BindableManager {
-    /**
-     * Default to 1 full action bar
-     */
-    static readonly DEFAULT_ACTION_BAR_SLOTS = 12;
     static readonly DEFAULT_ACTION_BAR_ROW_MODIFIER_ORDER: string;
     static readonly INSTANCE: ActionBarBindableManager;
     private requiredSlots;

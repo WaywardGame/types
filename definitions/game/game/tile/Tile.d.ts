@@ -113,6 +113,8 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     constructor(island: Island, x: number, y: number, z: number, id: number, rendererData: number, quality: Quality, isFake?: true);
     get point(): IVector3;
     get description(): ITerrainDescription | undefined;
+    /** @deprecated Console helper */
+    protected get debug(): any;
     toString(): string;
     getName(layerIndex?: number, article?: Article, options?: ITileGetNameOptions): Translation;
     get type(): TerrainType;

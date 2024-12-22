@@ -31,7 +31,7 @@ import type { EntityReferenceTypes, IReferenceable, Reference } from "@wayward/g
 import type { ITemperatureSource } from "@wayward/game/game/temperature/ITemperature";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
-import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import { type ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import type Translation from "@wayward/game/language/Translation";
 import type { RenderSource, UpdateRenderFlag } from "@wayward/game/renderer/IRenderer";
 import type { INotificationLocation, ItemNotifierType, MarkerIconType, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
@@ -75,11 +75,14 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      * Get the entities description
      */
     get description(): Readonly<DescriptionType> | undefined;
+    protected abstract get typeEnum(): PartialRecord<string | TypeType, TypeType | string>;
     /**
      * Adds a referenceId to the entity if it doesn't already have one
      */
     addReferenceId(): void;
     abstract getName(): Translation;
+    /** @deprecated Console helper */
+    protected get debug(): any;
     /**
      * Called when filling out the entities description for the first time
      */
@@ -96,8 +99,8 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      */
     get tile(): Tile | undefined;
     get tilesAround(): Tile[] | undefined;
-    protected setCachedTile(tile: Tile): void;
-    clearTileCache(): void;
+    protected setCachedTile(tile: Tile | undefined): void;
+    clearTileCache(): Tile | undefined;
     isNearby(entity: Entity | Tile, includeCurrentTile?: boolean): boolean;
     /**
      * Updates the world renderer & flow field state for the tile

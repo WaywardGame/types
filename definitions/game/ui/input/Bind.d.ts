@@ -10,7 +10,8 @@
  */
 import Bindable from "@wayward/game/ui/input/Bindable";
 import { IInput } from "@wayward/game/ui/input/IInput";
-import type { GlobalInputInfo, GlobalMouseInfo, InputInfo } from "@wayward/game/ui/input/InputManager";
+import type { GlobalInputInfo, GlobalMouseInfo } from "@wayward/game/ui/input/InputManager";
+import { InputInfo } from "@wayward/game/ui/input/InputManager";
 import type { Macro } from "@wayward/game/ui/input/Macros";
 import type { TypedPropertyDescriptorFunctionAnyNOfParams } from "@wayward/utilities/event/EventManager";
 export interface IBindHandlerApi {
@@ -156,6 +157,7 @@ declare namespace Bind {
     function deregisterHandlers(host: any): void;
     const shouldLogHoldingEvent = false;
     function emitEvent(event: BindingEventName, input: IInput, info: InputInfo, mouse: GlobalMouseInfo, globalInput: GlobalInputInfo): Set<Bindable>;
+    function handleMaybeNothingPressed(input: GlobalInputInfo, mouse: GlobalMouseInfo): void;
     namespace Modifiers {
         /**
          * Registers a handler for when the modifiers of the given `Bindable` are pressed. This event won't be fired again until the modifiers of the `Bindable` are then *released*.

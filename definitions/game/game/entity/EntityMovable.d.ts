@@ -22,7 +22,7 @@ import { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
 import type { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
 import type { INotificationLocation } from "@wayward/game/renderer/notifier/INotifier";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
-import type { IVector2 } from "@wayward/game/utilities/math/IVector";
+import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface IEntityMovableEvents extends IEntityEvents {
@@ -107,6 +107,7 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
     canSeeTile(type: CanASeeBType, tile: Tile, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number): void;
+    runWhileFacing<T>(lambda: () => T, position: IVector3, direction?: Direction.Cardinal): T;
     getMovementDelay(): number;
     /**
      * Move the entity to the tile
