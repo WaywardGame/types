@@ -15,11 +15,16 @@ import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAct
 import ContextMenu from "@wayward/game/ui/component/ContextMenu";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-export default class UsableActionRegistrar {
+export interface UsableActionRegistrarEvents {
+    dispose(): any;
+}
+export default class UsableActionRegistrar extends EventEmitter.Host<UsableActionRegistrarEvents> {
     readonly id: string;
     readonly actions: Array<[string, UsableAction]>;
     readonly actionIndices: Record<string, number>;
     readonly actionIds: string[];
+    private readonly _disposed;
+    get disposed(): boolean;
     constructor(id: string);
     byId(id?: ActionId): UsableAction | undefined;
     filter(filter: (action: UsableAction, id: string) => any): UsableActionRegistrar;
@@ -30,6 +35,7 @@ export default class UsableActionRegistrar {
     showContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any, position?: IVector2): ContextMenu<ActionId> | undefined;
     static getContextMenuActionExecutionContext(provided: IUsableActionPossibleUsing): IUsableActionExecutionContext;
     createContextMenu(provided: IUsableActionPossibleUsing, contextMenu?: ContextMenu<ActionId>, context?: ActionDisplayLevel, initialiser?: (contextMenu: ContextMenu<ActionId>) => any): ContextMenu<ActionId> | undefined;
+    dispose(): void;
 }
 export interface IUsableActionGeneratorEvents {
     stopPersisting(): any;

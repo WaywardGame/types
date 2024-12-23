@@ -23,8 +23,10 @@ import type { IGameOptions } from "@wayward/game/game/options/IGameOptions";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type { UpgradesArrayCompressedPusher } from "@wayward/game/save/upgrade/UpgradesArray";
 import type Version from "@wayward/game/utilities/Version";
+import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 export interface IUpgradeVersion {
     name?: string;
+    buildId?: IBuildId;
     applies(buildVersion: Version.Info): boolean;
     upgradeGlobal?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher): any;
     upgradeGame?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, game: Game): any;
@@ -44,4 +46,7 @@ export interface IUpgradeVersion {
 export type UpgradeType = Exclude<keyof IUpgradeVersion, "applies">;
 export type UpgradeParameters<TYPE extends UpgradeType> = Required<IUpgradeVersion>[TYPE] extends (_v: any, _u: any, ...params: infer PARAMS) => any ? PARAMS : never;
 export declare function oldify<CURRENT, OLD>(current: CURRENT): Merge<CURRENT, Partial<OLD>>;
-export default function (definition: IUpgradeVersion): IUpgradeVersion;
+export interface IUpgradeVersionDefinition extends Omit<IUpgradeVersion, "applies" | "name" | "buildId"> {
+    applies?: IUpgradeVersion["applies"];
+}
+export default function (definition: IUpgradeVersionDefinition): IUpgradeVersionDefinition;

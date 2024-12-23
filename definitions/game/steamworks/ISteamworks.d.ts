@@ -21,6 +21,7 @@ export interface ISteamworksEvents {
     onSteamNetworkingMessagesSessionRequest(steamIdRemote: string): void;
     onSteamNetworkingMessagesSessionFailed(steamIdRemote: string, state: SteamNetworkingConnectionState, endReason: number): void;
     requestJoinServer(serverInfo: ServerInfo): any;
+    changeBuildId(): any;
 }
 export interface IModPath {
     path: string;

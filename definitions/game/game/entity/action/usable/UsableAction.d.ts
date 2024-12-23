@@ -35,6 +35,7 @@ export interface IUsableActionEvents {
      * Emitted when the UsableAction should be updated, exclusively for cached UsableActions.
      */
     update(): any;
+    dispose(): any;
 }
 /**
  * Create a basic usable action:
@@ -54,7 +55,13 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     readonly definition: DEFINITION;
     id: ActionId;
     readonly observe: Observer.IRegistrar<this>;
+    private usersCount;
+    readonly users: WeakMap<UsableActionRegistrar, true>;
+    private _disposed;
+    get disposed(): boolean;
     constructor(requirements: REQUIREMENTS, definition: DEFINITION);
+    addUser(user: UsableActionRegistrar): this;
+    removeUser(user: UsableActionRegistrar): this;
     is(id?: ActionId): boolean;
     isExecutable(): this is UsableAction<REQUIREMENTS, IUsableActionDefinitionExecutable<REQUIREMENTS>>;
     execute(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): {
@@ -102,6 +109,10 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     getInternalActionType(): ActionType | undefined;
     getAlignment(using?: IUsableActionPossibleUsing): DeityReal[];
     getInteractionDistance(provided?: IUsableActionPossibleUsing): InteractionDistance | undefined;
+    dispose(): void;
+    private readonly playerDisposalBindings;
+    private bindPlayerDisposal;
+    private clearItemFinderCache;
 }
 export interface IUsableActionFactory<REQUIREMENTS extends IUsableActionRequirements> {
     create: <DEFINITION extends IUsableActionDefinition<REQUIREMENTS>>(action: DEFINITION) => UsableAction<REQUIREMENTS, DEFINITION>;

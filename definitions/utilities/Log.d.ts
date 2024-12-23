@@ -123,6 +123,11 @@ declare namespace Log {
      * @param sources A list of sources to log to.
      */
     function trace(...sources: string[]): (...args: any[]) => void;
+    /**
+     * Warn about something once per session based on unique warning ids.
+     * This is like how node.js does warnings in console.
+     */
+    function warnOncePerSession(warningId: string | string[], ...message: any[]): void;
 }
 declare class NullLog extends BaseLog {
     setup(): void;

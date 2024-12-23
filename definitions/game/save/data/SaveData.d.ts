@@ -14,6 +14,7 @@ import type { ISerializedTranslation } from "@wayward/game/language/ITranslation
 import type { IMultiplayerState } from "@wayward/game/multiplayer/IMultiplayer";
 import type IClientStore from "@wayward/game/save/clientStore/IClientStore";
 import type EnumInfo from "@wayward/game/utilities/enum/EnumInfo";
+import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 export declare const saveDataVersionUnknown = "Unknown";
 export default class SaveData {
     gameSlotName: string;
@@ -23,6 +24,7 @@ export default class SaveData {
     gameThumbnail: string;
     gameDifficulty: GameMode;
     gameBuildTime: number;
+    gameBuildId?: IBuildId;
     saveManagerSaveTime: number;
     saveManagerTicks: number;
     saveManagerDifficulty: GameMode;

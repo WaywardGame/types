@@ -48,6 +48,7 @@ import Version from "@wayward/game/utilities/Version";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
+import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { Random } from "@wayward/utilities/random/Random";
 import type { LegacySeededGenerator } from "@wayward/utilities/random/generators/LegacySeededGenerator";
@@ -85,11 +86,13 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     mapGenVersion: Version.String;
     mapGenBuildTime?: number;
+    mapGenBuildId?: IBuildId;
     /**
      * The version this island was last loaded on
      */
     saveVersion: Version.String;
     saveBuildTime: number;
+    saveBuildId: IBuildId | undefined;
     biomeOptions?: unknown;
     biomeType: BiomeTypes;
     contaminatedWater: IWaterContamination[];

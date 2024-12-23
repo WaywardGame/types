@@ -14,6 +14,7 @@ import type { IEntityConstructorOptions, IStatus, StatusChangeReason } from "@wa
 import { type IStatEvents, type IStats } from "@wayward/game/game/entity/IStats";
 import type { IStatHost } from "@wayward/game/game/entity/Stats";
 import Stats from "@wayward/game/game/entity/Stats";
+import type { StatusApplicability } from "@wayward/game/game/entity/status/IStatus";
 import { StatusType } from "@wayward/game/game/entity/status/IStatus";
 import Status from "@wayward/game/game/entity/status/Status";
 import type { EntityReferenceTypes } from "@wayward/game/game/reference/IReferenceManager";
@@ -40,7 +41,7 @@ export default abstract class EntityWithStats<DescriptionType = unknown, TypeTyp
     readonly stat: Stats<this>;
     private readonly statusHandlers;
     constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
-    protected getApplicableStatuses(): Set<StatusType> | undefined;
+    protected getStatusApplicability(): StatusApplicability | undefined;
     get asEntityWithStats(): EntityWithStats<DescriptionType, TypeType, EntityReferenceType, TagType>;
     /**
      * Returns whether the entity has the given `StatusType`

@@ -27,7 +27,7 @@ import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type { EntityReferenceTypes, IReferenceable, Reference } from "@wayward/game/game/reference/IReferenceManager";
+import { type EntityReferenceTypes, type IReferenceable, type Reference } from "@wayward/game/game/reference/IReferenceManager";
 import type { ITemperatureSource } from "@wayward/game/game/temperature/ITemperature";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
@@ -57,10 +57,8 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     /**
      * Notifier marker assigned to this entity
      */
-    persistentMarker: {
-        type: MarkerIconType;
-        guid: string;
-    } | undefined;
+    private persistentMarker;
+    private persistentMarkerHidden;
     private _humansWithinBound?;
     /**
      * Cached tile the entity is on.
@@ -121,6 +119,9 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     updateView(source: RenderSource, updateFov?: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition): void;
     notifyItem(itemNotifierType: ItemNotifierType, item: Item): void;
     notifyStat(type: StatNotificationType, value: number): void;
+    initMarker(): void;
+    getCurrentMarkerIconType(): MarkerIconType | undefined;
+    setMarkerIconHidden(hidden: boolean): void;
     addMarkerIcon(type: MarkerIconType): void;
     removeMarkerIcon(...types: MarkerIconType[]): void;
     getProducedTemperature(): number | undefined;

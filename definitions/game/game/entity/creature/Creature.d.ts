@@ -27,7 +27,7 @@ import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/CreatureZone";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
-import { StatusType } from "@wayward/game/game/entity/status/IStatus";
+import { StatusApplicability } from "@wayward/game/game/entity/status/IStatus";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
@@ -50,6 +50,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     fromX: number;
     fromY: number;
     aberrant?: true;
+    ai: AiManager<this>;
     enemy?: {
         reference: Reference;
         attacks: number;
@@ -64,7 +65,6 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     };
     respawned?: number;
     zonePoint?: IVector3;
-    ai: AiManager;
     spawnAnimationTime: IMovementTime | undefined;
     constructor(entityOptions?: IEntityConstructorOptions<CreatureType>, aberrant?: boolean);
     initializeAi(resetAiType?: boolean): void;
@@ -92,7 +92,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     get isTamed(): boolean;
     get isValid(): boolean;
     getCommandedAiType(): AiType | undefined;
-    protected getApplicableStatuses(): Set<StatusType> | undefined;
+    protected getStatusApplicability(): StatusApplicability | undefined;
     tickStatuses(): void;
     getDefense(human?: Human): Defense;
     /**
