@@ -8,29 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Quality } from "@wayward/game/game/IObject";
 import { EquipType } from "@wayward/game/game/entity/IHuman";
 import type { ActionId } from "@wayward/game/game/entity/action/usable/IUsableAction";
-import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
-import type MerchantNPC from "@wayward/game/game/entity/npc/npcs/Merchant";
-import type { IContainer, ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import Component from "@wayward/game/ui/component/Component";
 import type ContextMenu from "@wayward/game/ui/component/ContextMenu";
 import Bindable from "@wayward/game/ui/input/Bindable";
+import { ItemComponentHandler } from "@wayward/game/ui/screen/screens/game/component/item/ItemComponentHandler";
 import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
 import type { ActionSlot } from "@wayward/game/ui/screen/screens/game/static/actions/ActionSlot";
 import type { IDraggableEvents } from "@wayward/game/ui/util/Draggable";
 import Draggable from "@wayward/game/ui/util/Draggable";
-import type Sortable from "@wayward/game/ui/util/Sortable";
 import type { ISortableDraggableEvents } from "@wayward/game/ui/util/Sortable";
 import PerfCache from "@wayward/game/utilities/PerfCache";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
-import WeakishSet from "@wayward/utilities/collection/set/WeakishSet";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-import EventEmitter from "@wayward/utilities/event/EventEmitter";
 type ItemSlotExtend = Omit<Component, "event"> & {
     event: IEventEmitter<Component, IItemSlotEvents>;
 };
@@ -104,33 +98,6 @@ export declare enum ItemClasses {
 export declare namespace ItemClasses {
     const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-topleft" | "item-component-icon-location-bottomright";
 }
-export interface IItemComponentHandlerDescription {
-    noDrag?: true;
-    equipSlot?: EquipType;
-    hasHighlight?: SupplierOr<boolean>;
-    getItem?(): Item | undefined;
-    getItemType?(): ItemType | ItemTypeExtra | undefined;
-    getItemQuality?(): ArrayOr<Quality> | undefined;
-    getAction?(): UsableAction | undefined;
-    getActionSlot?(): ActionSlot | undefined;
-    getBindables?(bindables: Bindable[]): Bindable[];
-    getSortable?(): Sortable;
-    getStackQuantity?(): number;
-    getContainer?(): IContainer | undefined;
-    getStackItems?(): readonly Item[];
-    getStackDisplayItem?(): Item | undefined;
-    getDisplayItem?(): Item | undefined;
-    getDurability?(): number;
-    getCooldown?(): number;
-    isDamaged?(): boolean;
-    isDecayed?(): boolean;
-}
-export interface ItemComponentHandler extends IItemComponentHandlerDescription {
-}
-export declare class ItemComponentHandler {
-    readonly isItemComponentHandler = true;
-    constructor(description?: IItemComponentHandlerDescription);
-}
 export declare enum ItemTradeType {
     None = "",
     ToMerchant = "To",
@@ -164,19 +131,10 @@ export interface IItemComponentStaticEvents {
 }
 export default class ItemComponent extends Component implements ItemSlot {
     readonly handler: ItemComponentHandler;
-    static readonly eventGlobal: EventEmitter<null, IItemComponentStaticEvents>;
     static create<C extends ItemComponent = ItemComponent>(handler: ItemComponentHandler, ...params: any[]): C | undefined;
     static registerSlot(slot: ItemSlot): void;
     static getHovered(): ItemComponent | undefined;
     static QUALITY_CLASS_NAMES: PerfCache<string[]>;
-    private static readonly tradingByItem;
-    private static readonly tradingToMerchant;
-    private static readonly tradingFromMerchant;
-    static getTrading(merchant: MerchantNPC, type: ItemTradeType): WeakishSet<Item> | undefined;
-    static isTrading(item: Item, merchant: MerchantNPC): boolean;
-    static toggleTrading(items: Item[], merchant: MerchantNPC, trading: ItemTradeType): ItemTradeType;
-    private static sendMerchantChatMessage;
-    static clearTrading(merchant?: MerchantNPC): void;
     event: IEventEmitter<this, IItemComponentEvents>;
     readonly magicalIcon: Component<HTMLElement> | undefined;
     readonly protectedIcon: Component<HTMLElement> | undefined;
@@ -228,6 +186,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     protected onUpdateDecay(): void;
     protected onUpdateQuality(): void;
     protected onTickEnd(): void;
+    protected onRooted(): void;
     protected onRootedAndAppend(): void;
     protected onLoadedOnIsland(): void;
     protected onActionBarItemSlottedMapUpdate(): void;

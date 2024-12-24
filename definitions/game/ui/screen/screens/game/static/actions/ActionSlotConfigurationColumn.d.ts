@@ -22,8 +22,9 @@ import HorizontalLine from "@wayward/game/ui/component/HorizontalLine";
 import RangeChoiceList from "@wayward/game/ui/component/RangeChoiceList";
 import Text, { Heading, Paragraph } from "@wayward/game/ui/component/Text";
 import ItemDropdown from "@wayward/game/ui/component/dropdown/ItemDropdown";
-import type { IItemComponentHandlerDescription, IItemDropApi, IItemSlotEvents, ItemSlot } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import type { IItemDropApi, ItemSlot, IItemSlotEvents } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
 import ItemComponent from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import type { IItemComponentHandlerDescription } from "@wayward/game/ui/screen/screens/game/component/item/ItemComponentHandler";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export declare enum ActionSlotConfigurationColumnClasses {
     Main = "game-action-configuration-drawer-configuration-column",

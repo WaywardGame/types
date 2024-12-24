@@ -76,7 +76,6 @@ export default abstract class NPC extends Human<INPCDescription, NPCType, Refere
     addMilestone(): void;
     protected getStatusApplicability(): StatusApplicability | undefined;
     get isValid(): boolean;
-    load(): void;
     /**
      * Creates inventory, equips items, and scales stats
      */

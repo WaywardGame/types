@@ -44,6 +44,7 @@ import type SaveManager from "@wayward/game/save/SaveManager";
 import type Steamworks from "@wayward/game/steamworks/Steamworks";
 import type ScreenManager from "@wayward/game/ui/screen/ScreenManager";
 import type GameScreen from "@wayward/game/ui/screen/screens/GameScreen";
+import type ItemComponentEventBus from "@wayward/game/ui/screen/screens/game/component/item/ItemComponentEventBus";
 import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
 import type HoveredTileTracker from "@wayward/game/ui/screen/screens/game/util/HoveredTileTracker";
 import type ActionMenuHandler from "@wayward/game/ui/screen/screens/game/util/movement/ActionMenuHandler";
@@ -93,10 +94,11 @@ export declare enum EventBus {
     UiGameScreen = 38,
     UiHoveredTileTracker = 39,
     UiInteractionManager = 40,
-    UiMovementHandler = 41,
-    UiPathingHandler = 42,
-    UsableActions = 43,
-    WorldRenderer = 44
+    UiItemComponentStatic = 41,
+    UiMovementHandler = 42,
+    UiPathingHandler = 43,
+    UsableActions = 44,
+    WorldRenderer = 45
 }
 declare const eventBuses: {
     [EventBus.Actions](): ActionExecutor<any, any, any, any, any>;
@@ -140,6 +142,7 @@ declare const eventBuses: {
     [EventBus.UiGameScreen](): GameScreen;
     [EventBus.UiHoveredTileTracker](): HoveredTileTracker;
     [EventBus.UiInteractionManager](): InteractionManager;
+    [EventBus.UiItemComponentStatic](): ItemComponentEventBus;
     [EventBus.UiMovementHandler](): MovementHandler;
     [EventBus.UiPathingHandler](): PathingHandler;
     [EventBus.UsableActions](): UsableAction;
@@ -188,10 +191,11 @@ export declare const eventBusManager: EventBusManager<EventBus, {
     38(): GameScreen;
     39(): HoveredTileTracker;
     40(): InteractionManager;
-    41(): MovementHandler;
-    42(): PathingHandler;
-    43(): UsableAction;
-    44(): WorldRenderer;
+    41(): ItemComponentEventBus;
+    42(): MovementHandler;
+    43(): PathingHandler;
+    44(): UsableAction;
+    45(): WorldRenderer;
 }>;
 /**
  * For backwards compat / ease of use

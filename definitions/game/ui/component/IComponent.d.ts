@@ -14,7 +14,8 @@ import type { ISerializedTranslation } from "@wayward/game/language/ITranslation
 import type Translation from "@wayward/game/language/Translation";
 import type Component from "@wayward/game/ui/component/Component";
 import type { IStringSection } from "@wayward/game/utilities/string/Interpolator";
-export interface IComponentEvents {
+import type { IEventSubscriberEvents } from "@wayward/utilities/event/EventEmitter";
+export interface IComponentEvents extends IEventSubscriberEvents {
     show(): any;
     hide(): any;
     toggleVisible(visible: boolean): any;
