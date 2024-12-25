@@ -35,7 +35,7 @@ import type Message from "@wayward/game/language/dictionary/Message";
 import { TranslationArg } from "@wayward/game/language/ITranslation";
 import type Translation from "@wayward/game/language/Translation";
 import type Bindable from "@wayward/game/ui/input/Bindable";
-import type { ItemDetailIconLocation } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import type { ItemDetailIconLocation } from "@wayward/game/ui/screen/screens/game/component/item/IItemComponent";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 import type { HighlightSelector } from "@wayward/game/ui/util/IHighlight";
 import type HashSet from "@wayward/utilities/collection/set/HashSet";

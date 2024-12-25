@@ -82,8 +82,6 @@ export default class ContainerBucketItemList extends Component implements ISorta
     get container(): IContainer | undefined;
     isStacked(type?: ItemType): boolean;
     isStacked(item?: Item): boolean;
-    isFirstVisiblyStacked(item?: Item, excluding?: Item): boolean;
-    getStackedItemsThatAreVisible(type?: ItemType, excluding?: Item): Item[];
     getStackedItems(type?: ItemType, excluding?: Item): Item[];
     getStackIndex(type?: ItemType): number | undefined;
     constructor(container?: IContainer);

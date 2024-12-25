@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { ItemRefreshType } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import type { GlobalMouseInfo } from "@wayward/game/ui/input/InputManager";
+import { type ItemRefreshType } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
 import type ItemComponent from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
 import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
 import type { ActionSlot } from "@wayward/game/ui/screen/screens/game/static/actions/ActionSlot";
@@ -29,6 +30,8 @@ declare namespace _ {
         protected onTickEnd(): void;
         protected onLoadedOnIsland(): void;
         protected onActionBarItemSlottedMapUpdate(): void;
+        private hovered;
+        protected onUpdateTarget(mouse: GlobalMouseInfo): void;
     }
 }
 type ItemComponentEventBus = _.ItemComponentEventBus;

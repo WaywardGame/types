@@ -56,12 +56,13 @@ export declare const eventManager: EventManager<EventBus, {
     37(): import("../ui/screen/screens/game/util/movement/ActionMenuHandler").default;
     38(): import("../ui/screen/screens/GameScreen").default;
     39(): import("../ui/screen/screens/game/util/HoveredTileTracker").default;
-    40(): import("../ui/screen/screens/game/util/movement/InteractionManager").default;
-    41(): import("../ui/screen/screens/game/component/item/ItemComponentEventBus").default;
-    42(): import("../ui/screen/screens/game/util/movement/MovementHandler").default;
-    43(): import("../ui/screen/screens/game/util/movement/PathingHandler").default;
-    44(): import("../game/entity/action/usable/UsableAction").default;
-    45(): import("../renderer/world/WorldRenderer").WorldRenderer;
+    40(): import("../ui/input/InputManager").GlobalMouseInfo;
+    41(): import("../ui/screen/screens/game/util/movement/InteractionManager").default;
+    42(): import("../ui/screen/screens/game/component/item/ItemComponentEventBus").default;
+    43(): import("../ui/screen/screens/game/util/movement/MovementHandler").default;
+    44(): import("../ui/screen/screens/game/util/movement/PathingHandler").default;
+    45(): import("../game/entity/action/usable/UsableAction").default;
+    46(): import("../renderer/world/WorldRenderer").WorldRenderer;
 }>;
 /**
  * EventHandler that is typed with the games event buses

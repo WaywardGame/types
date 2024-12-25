@@ -23,6 +23,9 @@ export declare class Notifier {
     private mostRecentLife;
     private nextUpdate;
     private readonly notifications;
+    /**
+     * Marker guid -> notification
+     */
     private readonly markers;
     private suspended;
     constructor(context: IRendererContext, capacity: number);
@@ -35,7 +38,7 @@ export declare class Notifier {
     addStatus(location: INotificationLocation, status: Status, reason: StatusChangeReason): void;
     addNotifierIcon(location: INotificationLocation, type: NotifierIconType): void;
     addMarker(location: INotificationLocation, type: MarkerIconType, markerGuid: string): void;
-    removeNotification(guid: string): void;
+    removeMarker(guid: string): void;
     suspend(): void;
     resume(): void;
     private update;

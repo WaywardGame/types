@@ -41,4 +41,4 @@ export declare enum Segment {
 }
 declare const segments: Record<Segment, ISegment>;
 export default segments;
-export declare const segmentsMapInverted: Map<ISegment, Segment>;
+export declare const segmentsMapInverted: Map<ISegment<unknown>, Segment>;

@@ -27,6 +27,12 @@ import Message from "@wayward/game/language/dictionary/Message";
 import type { HighlightSelector } from "@wayward/game/ui/util/IHighlight";
 import Observer from "@wayward/game/utilities/Observer";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
+export interface IUsableActionResolveUsingOptions {
+    /** Whether to skip filling in the `fromTile` and `targetTile` properties. Defaults to `true` */
+    skipTiles?: boolean;
+    /** Whether to skip filling in the `item`. Defaults to `false` */
+    skipItem?: boolean;
+}
 export interface IUsableActionEvents {
     preExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
     postExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
@@ -70,8 +76,8 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     } | {
         used: false;
     };
-    resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>, fillTiles?: boolean): Message | IUsableActionUsing<REQUIREMENTS>;
-    resolveUsingOrUndefined(player: Player, using: IUsableActionUsing<REQUIREMENTS>, fillTiles?: boolean): IUsableActionUsing<REQUIREMENTS> | undefined;
+    resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>, options?: IUsableActionResolveUsingOptions): Message | IUsableActionUsing<REQUIREMENTS>;
+    resolveUsingOrUndefined(player: Player, using: IUsableActionUsing<REQUIREMENTS>, options?: IUsableActionResolveUsingOptions): IUsableActionUsing<REQUIREMENTS> | undefined;
     isUsable(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): UsableActionUsability<REQUIREMENTS>;
     isApplicable(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean, requireItem?: boolean): provided is IUsableActionUsing<REQUIREMENTS>;
     private isItemApplicable;

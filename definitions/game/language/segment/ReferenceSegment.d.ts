@@ -10,10 +10,10 @@
  */
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import type { Reference } from "@wayward/game/game/reference/IReferenceManager";
-import type { ISegment, IStringSection } from "@wayward/game/utilities/string/Interpolator";
+import type { IRegexSegment, IStringSection } from "@wayward/game/utilities/string/Interpolator";
 export interface IReferenceSection extends IStringSection {
     reference: Reference;
     context?: InfoProviderContext;
 }
-declare const referenceSegment: ISegment;
+declare const referenceSegment: IRegexSegment;
 export default referenceSegment;

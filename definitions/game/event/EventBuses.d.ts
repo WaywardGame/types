@@ -42,6 +42,7 @@ import type { Renderer } from "@wayward/game/renderer/Renderer";
 import type { WorldRenderer } from "@wayward/game/renderer/world/WorldRenderer";
 import type SaveManager from "@wayward/game/save/SaveManager";
 import type Steamworks from "@wayward/game/steamworks/Steamworks";
+import type { GlobalMouseInfo } from "@wayward/game/ui/input/InputManager";
 import type ScreenManager from "@wayward/game/ui/screen/ScreenManager";
 import type GameScreen from "@wayward/game/ui/screen/screens/GameScreen";
 import type ItemComponentEventBus from "@wayward/game/ui/screen/screens/game/component/item/ItemComponentEventBus";
@@ -93,12 +94,13 @@ export declare enum EventBus {
     UiActionMenuHandler = 37,
     UiGameScreen = 38,
     UiHoveredTileTracker = 39,
-    UiInteractionManager = 40,
-    UiItemComponentStatic = 41,
-    UiMovementHandler = 42,
-    UiPathingHandler = 43,
-    UsableActions = 44,
-    WorldRenderer = 45
+    UiInputManagerMouse = 40,
+    UiInteractionManager = 41,
+    UiItemComponentStatic = 42,
+    UiMovementHandler = 43,
+    UiPathingHandler = 44,
+    UsableActions = 45,
+    WorldRenderer = 46
 }
 declare const eventBuses: {
     [EventBus.Actions](): ActionExecutor<any, any, any, any, any>;
@@ -141,6 +143,7 @@ declare const eventBuses: {
     [EventBus.UiActionMenuHandler](): ActionMenuHandler;
     [EventBus.UiGameScreen](): GameScreen;
     [EventBus.UiHoveredTileTracker](): HoveredTileTracker;
+    [EventBus.UiInputManagerMouse](): GlobalMouseInfo;
     [EventBus.UiInteractionManager](): InteractionManager;
     [EventBus.UiItemComponentStatic](): ItemComponentEventBus;
     [EventBus.UiMovementHandler](): MovementHandler;
@@ -190,12 +193,13 @@ export declare const eventBusManager: EventBusManager<EventBus, {
     37(): ActionMenuHandler;
     38(): GameScreen;
     39(): HoveredTileTracker;
-    40(): InteractionManager;
-    41(): ItemComponentEventBus;
-    42(): MovementHandler;
-    43(): PathingHandler;
-    44(): UsableAction;
-    45(): WorldRenderer;
+    40(): GlobalMouseInfo;
+    41(): InteractionManager;
+    42(): ItemComponentEventBus;
+    43(): MovementHandler;
+    44(): PathingHandler;
+    45(): UsableAction;
+    46(): WorldRenderer;
 }>;
 /**
  * For backwards compat / ease of use

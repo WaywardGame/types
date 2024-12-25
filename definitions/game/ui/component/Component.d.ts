@@ -101,7 +101,9 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
     addEventListener(type: string, listener: (this: HTMLElement, ev: Event) => any, options?: boolean | AddEventListenerOptions): this;
     removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any): this;
     getAs<C extends Component>(cls: AnyClass<C>): C | undefined;
+    cast<C extends Component>(): C;
     matches(selector: string): boolean;
+    matches<C extends Component>(selector: string): this is C;
     exists(): boolean;
     /**
      * A cached alias for `element.getBoundingClientRect()`. Boxes are updated or regenerated as ancestors shift.
