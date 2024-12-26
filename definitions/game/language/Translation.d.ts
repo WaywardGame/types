@@ -29,7 +29,7 @@ import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { EnumReferenceTypes, Reference, Referenceable } from "@wayward/game/game/reference/IReferenceManager";
 import Dictionary from "@wayward/game/language/Dictionary";
 import type { DictionaryEntryEnums } from "@wayward/game/language/DictionaryMap";
-import type { TranslationArg } from "@wayward/game/language/ITranslation";
+import type { ListEnder, TranslationArg } from "@wayward/game/language/ITranslation";
 import { ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import Message from "@wayward/game/language/dictionary/Message";
 import type { Term } from "@wayward/game/language/dictionary/Misc";
@@ -156,7 +156,7 @@ declare namespace Translation {
     export let magic: Translator<MagicalPropertyType, [color?: boolean, obscured?: boolean]>;
     export const equipSlot: Translator<EquipType, [type?: EquipSlotTranslation | undefined]>;
     export const quality: Translator<Quality, [color?: any]>;
-    export const qualityList: (qualities: ArrayOr<Quality>, color?: boolean) => Translation;
+    export const qualityList: (qualities: ArrayOr<Quality>, color?: boolean, ender?: ListEnder | false) => Translation;
     /**
      * Damage types are bit flags, so multiple can be stored in one `DamageType`.
      * This method returns a translated list of damage types.

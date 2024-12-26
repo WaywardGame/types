@@ -34,7 +34,7 @@ export default class OldUi {
     getSerializationProperties(_: string): string[];
     setVersionExtra(msg: string): void;
     openDialogs(): void;
-    logErrorEvent(event: ErrorEvent | (Partial<ErrorEvent> & Error), skipLog?: true): void;
+    logErrorEvent(eventOrError: unknown, skipLog?: true): void;
     private loggingRejection;
     private logPromiseRejectionEvent;
 }

@@ -11,7 +11,7 @@
 export declare enum ActionSort {
     Default = 0
 }
-export declare enum ActionSlotItemMethod {
-    ExactItem = 0,
-    AnyItem = 1
+export declare enum ActionSlotInternalType {
+    Normal = 0,
+    History = 1
 }

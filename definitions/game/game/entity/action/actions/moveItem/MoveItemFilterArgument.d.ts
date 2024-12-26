@@ -20,7 +20,10 @@ export interface IMoveItemFilterArgument {
     moveLimit?: number;
     quality?: ArrayOr<Quality>;
     text?: string;
+    /** Excludes items that are both protected themselves, and that are in a protected container */
     excludeProtected?: boolean;
+    /** Combined with `excludeProtected` to re-include items that are just in a protected container */
+    includeInProtectedContainer?: boolean;
     excludeEquipped?: boolean;
 }
 export declare class MoveItemFilterArgument<FILTER extends IMoveItemFilterArgument> extends ActionArgumentCustom<FILTER> {
