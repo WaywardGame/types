@@ -26,7 +26,7 @@ declare class MemoryLeakDetector {
     onScreenShow(_: any, screen: Screen): Promise<any>;
     private onReset;
     private runCheck;
-    garbageCollect(): Promise<void>;
+    garbageCollect(source: string): Promise<void>;
     private checkObjects;
 }
 export declare const memoryLeakDetector: MemoryLeakDetector;

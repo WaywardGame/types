@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 declare namespace Functions {
-    const noOp: () => void;
+    const noOp: (...args: any[]) => void;
     const noOpString: () => string;
     const noOpZero: () => number;
     const noOpNull: () => null;

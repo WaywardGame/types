@@ -200,7 +200,6 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      */
     getName(article?: Article, options?: Partial<IItemGetNameOptions>): TranslationImpl;
     protected get debug(): any;
-    private getDebug;
     protected get typeEnum(): typeof ItemType;
     protected getDescription(): IItemDescription | undefined;
     get isTransient(): boolean;

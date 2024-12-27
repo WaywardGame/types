@@ -22,7 +22,7 @@ export declare class SaveLoad {
      * Saves the game (asynchronously)
      * Keep in sync with saveGameSynchronous
      */
-    save(saveType: SaveType, load?: Load): Promise<ISaveInfo | undefined>;
+    save(saveType: SaveType, load?: Load, disableSave?: true): Promise<ISaveInfo | undefined>;
     /**
      * Saves the game (synchronously)
      * Keep in sync with saveGame

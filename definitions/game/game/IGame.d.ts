@@ -217,7 +217,8 @@ export declare enum SaveType {
     Quit = 2,
     BackToMainMenu = 3,
     Multiplayer = 4,
-    ReplayConvert = 5
+    ReplayConvert = 5,
+    AutoSave = 6
 }
 export declare enum TileUpdateType {
     Batch = 0,

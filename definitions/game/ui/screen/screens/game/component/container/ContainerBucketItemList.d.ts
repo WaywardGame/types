@@ -146,6 +146,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private getItemIdsInElements;
     private getItemElementId;
     private getItemComponentElements;
+    private getItemComponentById;
     private regenerate;
     private transfer;
     private getSorter;

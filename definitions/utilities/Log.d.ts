@@ -24,6 +24,7 @@ export interface ILog {
     trace(...args: any[]): void;
     warn(...args: any[]): void;
     setSources(...sources: string[]): void;
+    ifEnabled(logger: (log: this) => any): void;
 }
 export interface ILogLine {
     type: LogLineType;
@@ -35,6 +36,7 @@ declare abstract class BaseLog implements ILog {
     info: (...args: any[]) => void;
     trace: (...args: any[]) => void;
     warn: (...args: any[]) => void;
+    ifEnabled: (logger: (log: this) => any) => void;
     protected sources: string[];
     constructor(...sources: Array<BaseLog | string>);
     setSources(...sources: Array<BaseLog | string>): void;
@@ -118,6 +120,8 @@ declare namespace Log {
      * @param sources A list of sources to log to.
      */
     function debug(...sources: string[]): (...args: any[]) => void;
+    function ifEnabled(...sources: string[]): (logger: (log: ILog) => any) => void;
+    function ifEnabled<LOG extends ILog>(log: LOG, ...sources: string[]): (logger: (log: LOG) => any) => void;
     /**
      * Returns a method that can be used to `Log.trace` with the given sources.
      * @param sources A list of sources to log to.
