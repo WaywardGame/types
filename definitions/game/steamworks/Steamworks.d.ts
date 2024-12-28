@@ -89,7 +89,8 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getMatchmakingServer(): IMatchmakingServer | undefined;
     getMatchmakingServerPort(): number;
     getSteamNetworking(): ISteamworksNetworking | undefined;
-    setBuildId(id?: string): void;
+    /** @deprecated For console use */
+    protected setBuildId(id?: string): void;
     initialize(): Promise<IWaywardPreload | undefined>;
     enableSafePaths(): void;
     onUnload(): void;

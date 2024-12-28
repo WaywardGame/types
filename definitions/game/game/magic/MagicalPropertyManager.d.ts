@@ -225,11 +225,11 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
     /**
      * @returns a list of all the magical properties on this object
      */
-    all(): MagicalPropertyEntry[];
+    all(): readonly MagicalPropertyEntry[];
     /**
      * @returns a list of all the magical properties on this object,
      */
-    all(intersectionType: true): MagicalPropertyEntryIntersection[];
+    all(intersectionType: true): readonly MagicalPropertyEntryIntersection[];
     /**
      * Translates a list of the magical properties on this object, including sub-properties
      * @param ender The way to end this list translation, ie and/or

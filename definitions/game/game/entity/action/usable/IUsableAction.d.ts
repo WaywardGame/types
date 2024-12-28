@@ -57,6 +57,7 @@ export interface IUsableActionItemRequirement extends Omit<IUsableActionRequirem
     finder?: false | ((player: Player, defaultOptions?: IItemFinderOptions, provided?: Omit<IUsableActionPossibleUsing, "item">) => ItemFinder | undefined);
     requiresQuality?: true;
     requiresType?: true;
+    cannotDamageItem?: true;
 }
 export declare namespace IUsableActionItemRequirement {
     function hasFinder(requirements?: IUsableActionRequirements): boolean;
@@ -107,6 +108,8 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
     targetTile: Tile;
     fromTile: Tile;
     item: ((REQUIREMENTS["item"] extends true ? Item : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
+        cannotDamageItem: true;
+    } ? Item : never) | (REQUIREMENTS["item"] extends {
         allowNone: true;
     } ? Item | undefined : never) | (REQUIREMENTS["item"] extends {
         validate(player: Player, value: Item): boolean;
@@ -117,7 +120,9 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
     } ? Item : never) | (REQUIREMENTS["item"] extends {
         allowOnlyItemType(player: Player, type: ItemType): boolean;
     } ? undefined : never));
-    itemType: ((REQUIREMENTS["item"] extends true ? ItemType : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
+    itemType: ((REQUIREMENTS["item"] extends true ? ItemType : never) | (REQUIREMENTS["item"] extends {
+        cannotDamageItem: true;
+    } ? ItemType : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
         allowOnlyItemType(player: Player, type: ItemType): boolean;
     } ? ItemType : never) | (REQUIREMENTS["item"] extends {
         requiresType: true;
@@ -132,6 +137,17 @@ export interface IUsableActionUsing<REQUIREMENTS extends IUsableActionRequiremen
     } ? REQUIREMENTS["item"] extends {
         requiresType: true;
     } ? never : undefined : never));
+    container?: ((REQUIREMENTS["item"] extends true ? IContainer : never) | (REQUIREMENTS["item"] extends {
+        allowOnlyItemType(player: Player, type: ItemType): boolean;
+    } ? IContainer : never) | (REQUIREMENTS["item"] extends {
+        requiresType: true;
+    } ? IContainer : ((REQUIREMENTS["item"] extends {
+        validate(player: Player, value: Item): boolean;
+    } ? IContainer : never) | (REQUIREMENTS["item"] extends {
+        validateType(player: Player, value: ItemType, description?: IItemDescription): boolean;
+    } ? IContainer : never))) | (REQUIREMENTS["item"] extends {
+        finder: ItemFinder;
+    } ? IContainer : never));
     itemQuality: ((REQUIREMENTS["item"] extends true ? ArrayOr<Quality> : never) | (undefined extends REQUIREMENTS["item"] ? undefined : never) | (REQUIREMENTS["item"] extends {
         allowNone: true;
     } ? undefined : never) | (REQUIREMENTS["item"] extends {

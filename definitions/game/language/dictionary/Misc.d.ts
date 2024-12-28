@@ -121,6 +121,10 @@ export declare enum DamageTypeTranslation {
     Name = 0,
     Description = 1
 }
+export declare enum MagicalPropertyAffixTranslation {
+    Adjective = 0,
+    Name = 1
+}
 export declare enum MiscTranslation {
     AAndB = 0,
     Aberrant = 1,

@@ -20,7 +20,7 @@ import type { ISerializable } from "@wayward/game/save/serializer/ISerializer";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 import type { ISegment, IStringSection } from "@wayward/game/utilities/string/Interpolator";
 import Interpolator from "@wayward/game/utilities/string/Interpolator";
-import type { Random } from "@wayward/utilities/random/Random";
+import { Random } from "@wayward/utilities/random/Random";
 export interface ITranslationConfig {
     segments: Record<number, ISegment>;
     invertedSegmentMap: Map<ISegment, number>;
@@ -29,6 +29,11 @@ export interface ITranslationConfig {
 }
 export type TranslationReformatter = TranslationImpl | Falsy;
 type TranslationStringRenderer = (section: IStringSection) => string | undefined;
+export interface IRandomDefinition {
+    seed: number;
+    /** number of times to advance the seed */
+    advance?: number;
+}
 export default class TranslationImpl implements Omit<ISerializable, "deserializeObject"> {
     private static defaultInterpolatorSegmentIds?;
     private static _config?;
@@ -59,6 +64,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
     private normalize;
     private failWith?;
     private random;
+    private randomDefinition?;
     private languageLoadId;
     private cachedSections?;
     private cachedString?;
@@ -115,7 +121,7 @@ export default class TranslationImpl implements Omit<ISerializable, "deserialize
      *
      * Note: If this translation is an argument to another translation, it will use the random of the parent translation.
      */
-    setRandom(random?: Random): this;
+    setRandom(random?: Random | IRandomDefinition): this;
     hasTranslation(): boolean;
     orElse(translation: GetterOfOr<TranslationImpl>): TranslationImpl;
     orElse(translation?: GetterOfOr<TranslationImpl | undefined>): TranslationImpl | undefined;

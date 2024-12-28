@@ -25,7 +25,7 @@ declare enum MagicalPropertyType {
     Illumination_LightItemLightBonus = 2,
     /** Increases the amount of weight/items that can be contained */
     Magnitude_WeightCapacity = 3,
-    /** Decreases item weight to a minimum of 0.1 */
+    /** Decreases item weight (minimum weight is 0.1) */
     Featherweight = 4,
     /** Increases a stat when equipped */
     Stat = 5,
@@ -38,7 +38,7 @@ declare enum MagicalPropertyType {
     Range = 9,
     /** Increases the stats normally gained when consuming/using an item */
     Potency_ImproveConsumableStats = 10,
-    /** Increases the merchant sell value on an item */
+    /** Increases the credit awarded by merchants when selling this item */
     Worth = 11,
     /** Increases a trap's damage */
     Ensnaring_TrapDamage = 12,
