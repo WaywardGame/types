@@ -21,8 +21,9 @@ import type { ISerializedImagePath } from "@wayward/game/ui/util/ImagePath";
 import ImagePath from "@wayward/game/ui/util/ImagePath";
 import BaseObserver from "@wayward/game/utilities/Observer";
 import type { IStringSection } from "@wayward/game/utilities/string/Interpolator";
+import type { IEventSubscriberEvents } from "@wayward/utilities/event/EventEmitter";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-export interface IInfoProviderEvents {
+export interface IInfoProviderEvents extends IEventSubscriberEvents {
     /**
      * Should be emitted when the info provider is starting to initialize its component.
      */

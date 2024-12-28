@@ -23,12 +23,13 @@ export interface IInterpolationOptions {
     formatDates?: boolean;
 }
 export type Ends = [start: string, end?: string, endAtStringEnd?: true];
-export interface ISegment {
+export interface ISegment<T = unknown> {
     ends?: Ends[];
     trimTrailingWhitespace?: true;
-    match?: RegExp;
-    handle(match: RegExpMatchArray, segment: string, api: ISegmentApi, ...args: any[]): string | IStringSection | Iterable<IStringSection>;
+    match?: RegExp | ((segment: string) => T | undefined);
+    handle(match: T, segment: string, api: ISegmentApi, ...args: any[]): string | IStringSection | Iterable<IStringSection>;
 }
+export type IRegexSegment = ISegment<RegExpExecArray>;
 export interface IStringSection {
     content: string | IStringSection[];
     classes?: Set<string>;
@@ -92,12 +93,42 @@ export default Interpolator;
  * - `"{test}" => args[0]["test"]`
  * - `"{3.test.4.wow}" => args[3]["test"][4]["wow"]`
  */
-export declare const argumentSegment: ISegment;
+export declare const argumentSegment: IRegexSegment;
 export type InterpolationConditionalSegmentOperator = InterpolationConditionalSegmentOperatorEquivalence | InterpolationConditionalSegmentOperatorNumeric;
 export type InterpolationConditionalSegmentOperatorEquivalence = "=" | "!=";
 export type InterpolationConditionalSegmentOperatorNumeric = "<" | ">" | "<=" | ">=";
-export declare const conditionalSegment: ISegment;
-export declare const falsyCoalescingSegment: ISegment;
+export type ConditionalSegmentCheck = string | {
+    variable: string;
+    operator: InterpolationConditionalSegmentOperator;
+    value: string;
+    variable2?: never;
+} | {
+    variable: string;
+    operator: InterpolationConditionalSegmentOperator;
+    variable2: string;
+    value?: never;
+};
+export interface IConditionalSegmentExpression {
+    checks: ConditionalSegmentCheck[];
+    operator: "&" | "|";
+    length: number;
+}
+/**
+ * Uses an argument to determine whether to show one of two segments. If the argument is truthy, returns
+ * any content in the segment after the `?` and before the `:`. If the argument is falsey, returns any
+ * content in the segment after the `:`. The colon is optional; if not provided, falsey = empty string.
+ *
+ * - `"{0?hi}"`
+ * 	- When given `[true]`, `=> "hi"`
+ * 	- When given `[false]`, `=> ""`
+ * 	- When given `[]`, `=> ""`
+ * - `"{test?hi:bye}"
+ * 	- When given `[{test: true}]`, `=> "hi"`
+ * 	- When given `[{test: false}]`, `=> "bye"`
+ * 	- When given `[]`, `=> "bye"`
+ */
+export declare const conditionalSegment: ISegment<IConditionalSegmentExpression>;
+export declare const falsyCoalescingSegment: IRegexSegment;
 export declare const classSegment: ISegment;
 export declare const basicInterpolator: Interpolator;
 export declare function interpolateSectioned(str: string, ...args: any[]): IStringSection[];

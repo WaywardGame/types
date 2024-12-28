@@ -8,5 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-declare const _default: import("@wayward/game/save/upgrade/UpgradeVersion").IUpgradeVersion;
-export default _default;
+import { ActionSlotType } from "@wayward/game/game/inspection/inspections/action/IActionInspection";
+declare const actionSlotTypes: Descriptions<ActionSlotType, string>;
+export default actionSlotTypes;

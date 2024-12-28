@@ -25,10 +25,12 @@ import Component from "@wayward/game/ui/component/Component";
 import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
 import Text from "@wayward/game/ui/component/Text";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
-import type { IItemSlotEvents, ItemSlot } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
-import ItemComponent, { ItemComponentHandler } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import { type IItemSlotEvents, type ItemSlot } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import ItemComponent from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import { ItemComponentHandler } from "@wayward/game/ui/screen/screens/game/component/item/ItemComponentHandler";
 import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
 import { ActionSlotUpdateReason, IActionBarSlotData } from "@wayward/game/ui/screen/screens/game/static/actions/IActionBar";
+import { ActionSlotInternalType } from "@wayward/game/ui/screen/screens/game/static/actions/IActionsDrawer";
 import type TooltipLocationHandler from "@wayward/game/ui/tooltip/TooltipLocationHandler";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export declare enum ActionSlotClasses {
@@ -49,10 +51,6 @@ export declare enum ActionSlotClasses {
     History_Cleared = "game-action-slot-history--cleared",
     ItemComponent = "game-action-slot-item-component"
 }
-export declare enum ActionSlotType {
-    Normal = 0,
-    History = 1
-}
 export interface IActionSlotEvents extends Events<Button>, IItemSlotEvents {
     update(data: IActionBarSlotData | undefined, oldData: IActionBarSlotData | undefined, reason: ActionSlotUpdateReason): any;
     unequipItem(): any;
@@ -61,9 +59,9 @@ export interface IActionSlotEvents extends Events<Button>, IItemSlotEvents {
 export declare class ActionSlot extends Button implements IRefreshable, ItemSlot {
     readonly number: number;
     slotData: IActionBarSlotData;
-    readonly type: ActionSlotType;
+    readonly type: ActionSlotInternalType;
     static getHovered(): ActionSlot | undefined;
-    static tryCreate(number: number, slotData: IActionBarSlotData, type?: ActionSlotType): ActionSlot;
+    static tryCreate(number: number, slotData: IActionBarSlotData, type?: ActionSlotInternalType): ActionSlot;
     event: IEventEmitter<this, IActionSlotEvents>;
     private get actionBar();
     readonly label: Text;
@@ -75,7 +73,7 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
     private lastItem?;
     private lastQuality?;
     usability: ReturnableUsableActionUsability;
-    protected constructor(number: number, slotData: IActionBarSlotData, type?: ActionSlotType);
+    protected constructor(number: number, slotData: IActionBarSlotData, type?: ActionSlotInternalType);
     isTransientSlot(): boolean;
     getItemComponent(): ItemComponent | undefined;
     private skipNextClick;
@@ -119,7 +117,7 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
     getActionId(): ActionId | undefined;
     getInternalActionType(): ActionType | undefined;
     private usingCache?;
-    getUsing(fresh?: true): IUsableActionPossibleUsing | undefined;
+    getUsing(fresh?: true, forceWithHoveredTile?: true): IUsableActionPossibleUsing | undefined;
     private getBindingText;
 }
 declare class ActionSlotSlottedContainer extends ItemComponent {

@@ -42,6 +42,10 @@ export interface IWaywardTitleBar {
     isMaximized: boolean;
     electron: IElectron;
 }
+export interface IBuildId {
+    date: number;
+    number: number;
+}
 declare global {
     interface Window {
         require: any;

@@ -20,6 +20,7 @@ import { SteamStatArea } from "@wayward/game/steamworks/ISteamworks";
 import type { ISteamBeta } from "@wayward/hosts/shared/interfaces";
 import { type IMatchmakingServer, type INapiDiscordPresenceInfo, type IRemoteFile, type ISteamFriend, type ISteamId, type ISteamworksNetworking, type IWaywardPreload, type IWorkshopItem, type LobbyType } from "@wayward/hosts/shared/interfaces";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
+import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private readonly game;
     protected initialized: boolean;
@@ -88,6 +89,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getMatchmakingServer(): IMatchmakingServer | undefined;
     getMatchmakingServerPort(): number;
     getSteamNetworking(): ISteamworksNetworking | undefined;
+    setBuildId(id?: string): void;
     initialize(): Promise<IWaywardPreload | undefined>;
     enableSafePaths(): void;
     onUnload(): void;
@@ -114,6 +116,19 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
      * - {@link Island.saveBuildTime}
      */
     get buildTime(): number;
+    /**
+     * Returns the build ID of the game, not depending on any save that's currently loaded.
+     *
+     * **Note that this is NOT based on the deploy ID.** If a deploy reuses a previous build, for example due to no new commits happening,
+     * or due to the tests failing, this build ID will be for that previous build even if the deploy ID is different.
+     *
+     * Build IDs are saved in the following places:
+     * - {@link saveDataGlobal.gameLastPlayedBuildId}
+     * - {@link saveData.gameBuildId}
+     * - {@link Island.mapGenBuildId}
+     * - {@link Island.saveBuildId}
+     */
+    get buildId(): IBuildId | undefined;
     getPublishedMods(): IWorkshopItem[] | undefined;
     getStatInt(name: string): number | undefined;
     /**

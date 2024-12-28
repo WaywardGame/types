@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Bindable from "@wayward/game/ui/input/Bindable";
-import type { ISegment, IStringSection } from "@wayward/game/utilities/string/Interpolator";
+import type { IRegexSegment, IStringSection } from "@wayward/game/utilities/string/Interpolator";
 export interface IBindingsSection extends IStringSection {
     bindable: Bindable | null;
     bindableNoBindingsFallback?: IStringSection[];
@@ -19,5 +19,5 @@ export interface IBindingsSection extends IStringSection {
 export declare namespace IBindingsSection {
     function create(bindable: Bindable | null, fallback?: IStringSection[], simplify?: boolean, contextless?: boolean): IBindingsSection;
 }
-declare const bindSegment: ISegment;
+declare const bindSegment: IRegexSegment;
 export default bindSegment;

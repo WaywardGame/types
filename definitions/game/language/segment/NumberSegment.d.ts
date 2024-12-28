@@ -10,18 +10,18 @@
  */
 import type Translation from "@wayward/game/language/Translation";
 import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-import type { ISegment } from "@wayward/game/utilities/string/Interpolator";
+import type { IRegexSegment, ISegment } from "@wayward/game/utilities/string/Interpolator";
 declare namespace NumberTranslation {
     function translate(number: number, failWith?: string | Translation): Translation;
     const numberAsWordsSegment: ISegment;
     function romanNumeral(number: number): TranslationImpl;
     const numberAsRomanNumeralSegment: ISegment;
-    const numberToPlacesSegment: ISegment;
-    const numberToPercentSegment: ISegment;
+    const numberToPlacesSegment: IRegexSegment;
+    const numberToPercentSegment: IRegexSegment;
     const numberDifferenceSegment: ISegment;
     /**
      * @deprecated Prefer `numberToPlacesSegment`, `numberAsWordsSegment`
      */
-    const compatNumberSegment: ISegment;
+    const compatNumberSegment: IRegexSegment;
 }
 export default NumberTranslation;

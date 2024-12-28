@@ -110,6 +110,10 @@ export interface IAiMaskDescription {
      * Whether this AI mask should currently be applied
      */
     condition?(entity: Entity): boolean;
+    /**
+     * Called when changing whether the AI mask is applied to the entity
+     */
+    onChange?(entity: Entity, change: ChangeAiType): void;
 }
 export declare const aiMaskDescriptions: OptionalDescriptions<AiMaskType, IAiMaskDescription>;
 export declare enum ChangeAiType {

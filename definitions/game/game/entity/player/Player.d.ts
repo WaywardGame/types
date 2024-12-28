@@ -20,7 +20,7 @@ import type { IMovementIntent, IPlayerEvents, PlayerTitle } from "@wayward/game/
 import MessageManager from "@wayward/game/game/entity/player/MessageManager";
 import NoteManager from "@wayward/game/game/entity/player/note/NoteManager";
 import QuestManager from "@wayward/game/game/entity/player/quest/QuestManager";
-import { StatusType } from "@wayward/game/game/entity/status/IStatus";
+import { StatusApplicability } from "@wayward/game/game/entity/status/IStatus";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type { IContainer } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
@@ -124,7 +124,7 @@ export default class Player extends Human<undefined, number, ReferenceType.Playe
      */
     isExploredClientSide(x: number, y: number, z: number): boolean;
     protected onSkillGain(skill: SkillType, fromValue: number, toValue: number, mod: number): void;
-    protected getApplicableStatuses(): Set<StatusType> | undefined;
+    protected getStatusApplicability(): StatusApplicability | undefined;
     private canWriteInHours;
     private canWriteNote;
     private onWriteNote;

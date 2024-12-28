@@ -64,6 +64,9 @@ declare const propertiesToSerializeObject: {
     gameBuildTime: {
         property: string[];
     };
+    gameBuildId: {
+        property: string[];
+    };
     saveTime: {
         property: string[];
         savePropertyFlag: SavePropertyFlag;
@@ -118,6 +121,9 @@ declare const propertiesToSerializeGlobalObject: {
         property: string[];
     };
     lastPlayedBuildTime: {
+        property: string[];
+    };
+    lastPlayedBuildId: {
         property: string[];
     };
     gamesPlayed: {

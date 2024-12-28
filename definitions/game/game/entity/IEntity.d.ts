@@ -25,7 +25,8 @@ import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
-export interface IEntityEvents {
+import type { IEventSubscriberEvents } from "@wayward/utilities/event/EventEmitter";
+export interface IEntityEvents extends IEventSubscriberEvents {
     /**
      * Called when an entity is killed by another entity.
      */

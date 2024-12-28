@@ -482,7 +482,12 @@ export interface IGameOptionsItemMagic {
      */
     bonusChanceUsesContextualMultiplier: boolean;
     /**
-     * Whether to randomize the magical properties as a flat range chance instead of applying bonusChance for every additional property.
+     * Whether to ignore the magical property quantity override from mastercrafting.
+     */
+    ignoreQuantityOverride: boolean;
+    /**
+     * Whether to randomize the magical properties as a value from a range with flat chances.
+     * Disables `bonusChance` and `bonusChanceUsesContextualMultiplier`.
      */
     randomizeAsRange: boolean;
 }

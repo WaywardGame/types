@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Version from "@wayward/game/utilities/Version";
+import type { IEventSubscriberEvents } from "@wayward/utilities/event/EventEmitter";
 export declare enum MultiplayerCompatibility {
     Clientside = "clientside",
     Serverside = "serverside",
@@ -35,7 +36,7 @@ export interface IModConfig {
     readonly github?: string;
     readonly saveGameData?: boolean;
 }
-export interface IModEvents {
+export interface IModEvents extends IEventSubscriberEvents {
     unload(): any;
     initialize(): any;
     uninitialize(): any;

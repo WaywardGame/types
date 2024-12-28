@@ -27,13 +27,14 @@ import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type { EntityReferenceTypes, IReferenceable, Reference } from "@wayward/game/game/reference/IReferenceManager";
+import { type EntityReferenceTypes, type IReferenceable, type Reference } from "@wayward/game/game/reference/IReferenceManager";
 import type { ITemperatureSource } from "@wayward/game/game/temperature/ITemperature";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import { type ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import type Translation from "@wayward/game/language/Translation";
 import type { RenderSource, UpdateRenderFlag } from "@wayward/game/renderer/IRenderer";
+import type { Renderer } from "@wayward/game/renderer/Renderer";
 import type { INotificationLocation, ItemNotifierType, MarkerIconType, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
@@ -44,23 +45,18 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     abstract readonly tileUpdateType: TileUpdateType;
     id: number;
     type: TypeType;
+    historicalActions?: PartialRecord<ActionType, number>;
     referenceId?: number;
     renamed?: string | ISerializedTranslation;
     x: number;
     y: number;
     z: WorldZ;
     private _data?;
+    private _persistentMarker?;
+    private _persistentMarkerHidden?;
     private _tags?;
-    historicalActions?: PartialRecord<ActionType, number>;
     islandId: IslandId;
     preventRendering?: boolean;
-    /**
-     * Notifier marker assigned to this entity
-     */
-    persistentMarker: {
-        type: MarkerIconType;
-        guid: string;
-    } | undefined;
     private _humansWithinBound?;
     /**
      * Cached tile the entity is on.
@@ -121,6 +117,12 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     updateView(source: RenderSource, updateFov?: boolean | UpdateRenderFlag.FieldOfView | UpdateRenderFlag.FieldOfViewSkipTransition): void;
     notifyItem(itemNotifierType: ItemNotifierType, item: Item): void;
     notifyStat(type: StatNotificationType, value: number): void;
+    /**
+     * This is called clientside the first time the renderer seens the entity
+     */
+    onFirstRender(renderer: Renderer): void;
+    getCurrentMarkerIconType(): MarkerIconType | undefined;
+    setMarkerIconHidden(hidden: boolean): void;
     addMarkerIcon(type: MarkerIconType): void;
     removeMarkerIcon(...types: MarkerIconType[]): void;
     getProducedTemperature(): number | undefined;

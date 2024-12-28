@@ -13,8 +13,9 @@ import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProv
 import type Inspection from "@wayward/game/game/inspection/Inspection";
 import type { ResolvedInspection } from "@wayward/game/game/inspection/InspectionTypeMap";
 import HashSet from "@wayward/utilities/collection/set/HashSet";
+import type { IEventSubscriberEvents } from "@wayward/utilities/event/EventEmitter";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-export interface IInspectionsHandlerEvents {
+export interface IInspectionsHandlerEvents extends IEventSubscriberEvents {
     updatedInspections(type: InspectType, newInspections: HashSet<Inspection<any>>, oldInspections?: HashSet<Inspection<any>>): any;
 }
 export default abstract class InspectionsHandler extends EventEmitter.Host<IInspectionsHandlerEvents> {

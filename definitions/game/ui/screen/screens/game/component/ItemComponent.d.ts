@@ -8,29 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { Quality } from "@wayward/game/game/IObject";
 import { EquipType } from "@wayward/game/game/entity/IHuman";
 import type { ActionId } from "@wayward/game/game/entity/action/usable/IUsableAction";
-import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
-import type MerchantNPC from "@wayward/game/game/entity/npc/npcs/Merchant";
-import type { IContainer, ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import Component from "@wayward/game/ui/component/Component";
 import type ContextMenu from "@wayward/game/ui/component/ContextMenu";
 import Bindable from "@wayward/game/ui/input/Bindable";
+import { ItemComponentHandler } from "@wayward/game/ui/screen/screens/game/component/item/ItemComponentHandler";
 import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
 import type { ActionSlot } from "@wayward/game/ui/screen/screens/game/static/actions/ActionSlot";
 import type { IDraggableEvents } from "@wayward/game/ui/util/Draggable";
 import Draggable from "@wayward/game/ui/util/Draggable";
-import type Sortable from "@wayward/game/ui/util/Sortable";
 import type { ISortableDraggableEvents } from "@wayward/game/ui/util/Sortable";
 import PerfCache from "@wayward/game/utilities/PerfCache";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
-import WeakishSet from "@wayward/utilities/collection/set/WeakishSet";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-import EventEmitter from "@wayward/utilities/event/EventEmitter";
 type ItemSlotExtend = Omit<Component, "event"> & {
     event: IEventEmitter<Component, IItemSlotEvents>;
 };
@@ -48,88 +42,6 @@ export interface IItemPickUpApi {
 export interface IItemDropApi {
     bindable?: Bindable;
     handler?: ItemComponentHandler;
-}
-export declare enum ItemDetailIconLocation {
-    TopLeft = 0,
-    BottomRight = 1
-}
-export declare enum ItemClasses {
-    Main = "item-component",
-    _InHeading = "item-component--in-heading",
-    Active = "active",// currently used for crafting & trading
-    Icon = "item-component-icon",
-    ItemIconIsReal = "item-component-icon-item-is-real",
-    ActionIcon = "item-component-icon-action",
-    ActionIconAnyItem = "item-component-icon-action-any-item",
-    ActionIconMissingItem = "item-component-icon-action-missing-item",
-    ActionIconHasItem = "item-component-icon-action-has-item",
-    ActionIconNone = "item-component-icon-action-none",
-    TargetIcon = "item-component-icon-target",
-    TargetIcon_Creature = "item-component-icon-target--creature",
-    TargetIcon_Doodad = "item-component-icon-target--doodad",
-    TargetIcon_Vehicle = "item-component-icon-target--vehicle",
-    TargetIcon_Plant = "item-component-icon-target--plant",
-    TargetIcon_NPC = "item-component-icon-target--npc",
-    TargetIcon_TileEvent = "item-component-icon-target--tile-event",
-    SlottedIcon = "item-component-icon-slotted",
-    Equipped = "item-component-equipped",
-    EquipIcon = "item-component-icon-equip",
-    EquipIconHasItem = "item-component-icon-equip-has-item",
-    MagicalIcon = "item-component-icon-magical",
-    ProtectedIcon = "item-component-icon-protected",
-    Trading = "item-component-trading",
-    TradingIcon = "item-component-icon-trading",
-    TradingIconFromMerchant = "item-component-icon-trading-from-merchant",
-    TradingIconToMerchant = "item-component-icon-trading-to-merchant",
-    Slot = "item-component-slot",
-    Dragging = "item-component-dragging",
-    DragPreview = "item-component-drag-preview",
-    DragPreview_Small = "item-component-drag-preview--small",
-    StatBar = "item-component-stat-bar",
-    StatBars = "item-component-stat-bars-wrapper",
-    DecayBar = "item-component-stat-bar-decay",
-    CooldownBar = "item-component-stat-bar-cooldown",
-    DurabilityBar = "item-component-stat-bar-durability",
-    NearlyDestroyed = "item-component-nearly-destroyed",
-    NearlyDecayed = "item-component-nearly-decayed",
-    Transient = "item-component-transient",
-    Highlight = "item-component-highlight",
-    Stack = "item-component-stack",
-    StackQuantity = "item-component-stack-quantity",
-    StackQuantityX = "item-component-stack-quantity-x",
-    StackQuantityDigit = "item-component-stack-quantity-digit",
-    Stacked = "item-component-stacked",
-    StackedVisible = "item-component-stacked-visible"
-}
-export declare namespace ItemClasses {
-    const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-topleft" | "item-component-icon-location-bottomright";
-}
-export interface IItemComponentHandlerDescription {
-    noDrag?: true;
-    equipSlot?: EquipType;
-    hasHighlight?: SupplierOr<boolean>;
-    getItem?(): Item | undefined;
-    getItemType?(): ItemType | ItemTypeExtra | undefined;
-    getItemQuality?(): ArrayOr<Quality> | undefined;
-    getAction?(): UsableAction | undefined;
-    getActionSlot?(): ActionSlot | undefined;
-    getBindables?(bindables: Bindable[]): Bindable[];
-    getSortable?(): Sortable;
-    getStackQuantity?(): number;
-    getContainer?(): IContainer | undefined;
-    getStackItems?(): readonly Item[];
-    getStackDisplayItem?(): Item | undefined;
-    getDisplayItem?(): Item | undefined;
-    getDurability?(): number;
-    getCooldown?(): number;
-    isDamaged?(): boolean;
-    isDecayed?(): boolean;
-}
-export interface ItemComponentHandler extends IItemComponentHandlerDescription {
-}
-export declare class ItemComponentHandler {
-    readonly isItemComponentHandler = true;
-    constructor(description?: IItemComponentHandlerDescription);
 }
 export declare enum ItemTradeType {
     None = "",
@@ -164,19 +76,10 @@ export interface IItemComponentStaticEvents {
 }
 export default class ItemComponent extends Component implements ItemSlot {
     readonly handler: ItemComponentHandler;
-    static readonly eventGlobal: EventEmitter<null, IItemComponentStaticEvents>;
     static create<C extends ItemComponent = ItemComponent>(handler: ItemComponentHandler, ...params: any[]): C | undefined;
     static registerSlot(slot: ItemSlot): void;
     static getHovered(): ItemComponent | undefined;
     static QUALITY_CLASS_NAMES: PerfCache<string[]>;
-    private static readonly tradingByItem;
-    private static readonly tradingToMerchant;
-    private static readonly tradingFromMerchant;
-    static getTrading(merchant: MerchantNPC, type: ItemTradeType): WeakishSet<Item> | undefined;
-    static isTrading(item: Item, merchant: MerchantNPC): boolean;
-    static toggleTrading(items: Item[], merchant: MerchantNPC, trading: ItemTradeType): ItemTradeType;
-    private static sendMerchantChatMessage;
-    static clearTrading(merchant?: MerchantNPC): void;
     event: IEventEmitter<this, IItemComponentEvents>;
     readonly magicalIcon: Component<HTMLElement> | undefined;
     readonly protectedIcon: Component<HTMLElement> | undefined;
@@ -198,6 +101,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     readonly draggable?: Draggable;
     private transient;
     protected constructor(handler: ItemComponentHandler, ...params: any[]);
+    protected get debug(): any;
     private tickEndHandlerReasons?;
     private registerTickEndHandler;
     private deregisterTickEndHandler;
@@ -228,6 +132,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     protected onUpdateDecay(): void;
     protected onUpdateQuality(): void;
     protected onTickEnd(): void;
+    protected onRooted(): void;
     protected onRootedAndAppend(): void;
     protected onLoadedOnIsland(): void;
     protected onActionBarItemSlottedMapUpdate(): void;
@@ -270,6 +175,5 @@ export default class ItemComponent extends Component implements ItemSlot {
     private lastActionIcon?;
     private refreshActionIcon;
     protected onHoldingNotMoving(time: number): void;
-    protected onMouseEnterOrLeave(): void;
 }
 export {};

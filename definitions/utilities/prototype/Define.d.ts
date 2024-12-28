@@ -11,6 +11,8 @@
 type Implementation<P, K extends keyof P> = (this: P, ...args: P[K] extends (...args: infer A) => any ? A : []) => P[K] extends (...args: any[]) => infer R ? R : never;
 declare function Define<P, K extends string & keyof P>(proto: P, key: K, implementation: Implementation<P, K>): void;
 declare namespace Define {
+    export function set<P, K extends string & keyof P>(proto: P, key: K, value: P[K]): P[K];
+    export function set<V>(proto: any, key: PropertyKey, value: V): V;
     export function all<P, K extends string & keyof P>(protos: P[], key: K, implementation: Implementation<P, K>): void;
     interface IMagicImplementation<O, K extends string & keyof O> {
         get(this: O): O[K];

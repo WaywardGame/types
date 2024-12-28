@@ -33,9 +33,9 @@ export default class AiManager<ENTITY extends EntityMovable = EntityMovable> {
     aiMasks: AiMaskType[];
     private lastCalculatedAi;
     private wanderIntent?;
-    private entityRef?;
+    private readonly entityRef?;
+    constructor(entity: ENTITY);
     get entity(): ENTITY | undefined;
-    set entity(entity: ENTITY | undefined);
     protected get entityEvent(): IEventEmitter<EntityMovable, IEntityMovableEvents & IEntityAiEvents> | undefined;
     protected get island(): Island | undefined;
     /**

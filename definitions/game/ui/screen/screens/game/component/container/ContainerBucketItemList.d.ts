@@ -22,6 +22,7 @@ import ItemComponent from "@wayward/game/ui/screen/screens/game/component/ItemCo
 import type { IDraggableComponentSubscriber, ISortableComponent, WithSortableEvents } from "@wayward/game/ui/util/Sortable";
 import Sortable from "@wayward/game/ui/util/Sortable";
 import { type IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type { IMoveItemFilterArgument } from "@wayward/game/game/entity/action/actions/moveItem/MoveItemFilterArgument";
 export declare enum ContainerBucketItemListClasses {
     Main = "container-bucket-item-list",
     Anchored = "container-bucket-item-list-anchored",
@@ -29,7 +30,7 @@ export declare enum ContainerBucketItemListClasses {
     ActualTransferDestination = "container-bucket-item-list-actual-transfer-destination",
     HasStackExpanded = "container-bucket-item-list-has-stack-expanded"
 }
-export interface IContainerBucketItemListTransferDetails {
+export interface IContainerBucketItemListTransferDetails extends Omit<IMoveItemFilterArgument, "type"> {
     fromList?: ContainerBucketItemList;
     toList?: ContainerBucketItemList;
     fromContainer?: IContainer;
@@ -37,15 +38,11 @@ export interface IContainerBucketItemListTransferDetails {
     item?: Item;
     itemType: ItemType;
     moveAll: boolean;
-    moveLimit?: number;
     stackList?: ContainerBucketItemList;
     quality?: Quality;
-    text?: string;
-    excludeProtected?: true;
     index?: number;
     silent?: true;
     hidden?: true;
-    excludeEquipped?: boolean;
 }
 export interface IContainerBucketItemListEvents extends WithSortableEvents<Component> {
     addItem(item: Item): any;
@@ -81,9 +78,10 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private containerRef?;
     get container(): IContainer | undefined;
     isStacked(type?: ItemType): boolean;
+    /**
+     * Returns whether this item's type is stacked in this container, *and* this item is not protected.
+     */
     isStacked(item?: Item): boolean;
-    isFirstVisiblyStacked(item?: Item, excluding?: Item): boolean;
-    getStackedItemsThatAreVisible(type?: ItemType, excluding?: Item): Item[];
     getStackedItems(type?: ItemType, excluding?: Item): Item[];
     getStackIndex(type?: ItemType): number | undefined;
     constructor(container?: IContainer);
@@ -148,6 +146,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private getItemIdsInElements;
     private getItemElementId;
     private getItemComponentElements;
+    private getItemComponentById;
     private regenerate;
     private transfer;
     private getSorter;

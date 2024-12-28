@@ -10,7 +10,7 @@
  */
 import type { EventBusManager } from "@wayward/utilities/event/EventBusManager";
 import type EventEmitter from "@wayward/utilities/event/EventEmitter";
-import type { Events, IEventEmitterHost, IEventEmitterHostClass } from "@wayward/utilities/event/EventEmitter";
+import type { Events, IEventEmitterHost, IEventEmitterHostClass, IEventSubscriberEvents } from "@wayward/utilities/event/EventEmitter";
 type HostOrHostClass = IEventEmitterHost<any> | IEventEmitterHostClass<any>;
 type HostFromHostOrHostClass<H> = H extends {
     event: EventEmitter<null, any>;
@@ -55,7 +55,17 @@ export declare class EventManager<EventBus extends number, EventBuses extends Re
     waitFor<E extends EmitterOrBus<EventBus>, K extends Event<EventBus, EventBuses, E>>(emitter: E, event: K, priority?: number): Promise<Parameters<Handler<EventBus, EventBuses, E, K>>>;
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IEventManagerUntil<EventBus, EventBuses>;
     until(promise: Promise<any>): IEventManagerUntil<EventBus, EventBuses>;
+    registerEventBusSubscriber(subscriber: IEventEmitterHost<IEventSubscriberEvents>): void;
+    /**
+     * @deprecated This subscriber object will not be automatically cleaned up!
+     *
+     * If this is intentional, switch to {@link registerEventBusSubscriberUnsafe}.
+     *
+     *  Otherwise, this subscriber object needs to be an {@link IEventEmitterHost}<{@link IEventSubscriberEvents}> —
+     * the `"releaseEventSubscriptions"` call will automatically clean up this subscriber.
+     */
     registerEventBusSubscriber(subscriber: object): void;
+    registerEventBusSubscriberUnsafe(subscriber: object): void;
     deregisterEventBusSubscriber(subscriber: object): boolean;
 }
 declare const SYMBOL_EVENT_HANDLERS: unique symbol;

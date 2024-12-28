@@ -43,6 +43,7 @@ export default class ActionInspection extends Inspection<ActionId | undefined> {
     protected getTitle(context: InfoProviderContext): Translation;
     protected getSubtitle(context: InfoProviderContext): Translation | undefined;
     protected getContent(context: InfoProviderContext): ArrayOr<Translation | InfoProvider | undefined>;
+    private getActionSlotType;
     private getActionSlotItemMode;
     private getTranslation;
     private getActionDiscovered;

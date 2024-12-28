@@ -14,7 +14,7 @@ import Component from "@wayward/game/ui/component/Component";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 import Text, { Heading } from "@wayward/game/ui/component/Text";
 import Bindable from "@wayward/game/ui/input/Bindable";
-import type { ItemComponentHandler } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import type { ItemComponentHandler } from "@wayward/game/ui/screen/screens/game/component/item/ItemComponentHandler";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 import type { IDraggableComponent, IDraggableEvents } from "@wayward/game/ui/util/Draggable";
 import Draggable from "@wayward/game/ui/util/Draggable";

@@ -34,6 +34,8 @@ declare namespace Merge {
      */
     function MULTIPLY_NON_ZERO(amt: number): Mergeable<number> & number;
     function DIVIDE(amt: number): Mergeable<number> & number;
+    function MIN(amt: number): Mergeable<number> & number;
+    function MAX(amt: number): Mergeable<number> & number;
     function CONCAT(str: string): Mergeable<string> & string;
     /**
      * Note: "PUSH" is used by default for merging array values.

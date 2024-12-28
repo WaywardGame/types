@@ -47,7 +47,7 @@ declare class ItemFinder extends EventEmitter.Host<IItemFinderEvents> {
     markDirty(): void;
     markDirtyPostFilter(): void;
     track(): this;
-    dispose(): this;
+    dispose(): void;
     protected onItemStateChange(item: Item, event: "durabilityChange" | "toggleProtected" | "qualityChange" | "transformed"): void;
     protected onContainerItemAdd(items: ItemManager, itemsAdded: Item[], containerAddedTo: IContainer): void;
     protected onContainerItemRemove(items: ItemManager, itemsRemoved: Item[], containerRemovedFrom?: IContainer): void;

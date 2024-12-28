@@ -26,6 +26,7 @@ import type OldUi from "@wayward/game/ui/old/OldUi";
 import type Version from "@wayward/game/utilities/Version";
 import "@wayward/goodstream/apply";
 import "@wayward/hosts/shared/globalTypes";
+import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 import "@wayward/utilities/IGlobal";
 import "@wayward/utilities/prototype/Promise";
 import "@wayward/utilities/typesglobal/Class";
@@ -57,6 +58,8 @@ declare global {
     const gameVersionTitleMajor: string;
     const gameVersionTitleMinor: string;
     const gameVersionTitle: string;
+    let gameVersionDeployId: IBuildId | undefined;
+    let gameVersionBuildId: IBuildId | undefined;
     let webGlVersion: number;
     const VIEWPORT_MIN_WIDTH: number;
     const VIEWPORT_MIN_HEIGHT: number;

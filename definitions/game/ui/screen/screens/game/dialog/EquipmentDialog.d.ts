@@ -14,8 +14,8 @@ import Component from "@wayward/game/ui/component/Component";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
 import Bindable from "@wayward/game/ui/input/Bindable";
 import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
-import type { IItemDropApi, IItemPickUpApi, ItemSlot } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
-import ItemComponent, { ItemRefreshType } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import { ItemRefreshType, type IItemDropApi, type IItemPickUpApi, type ItemSlot } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import ItemComponent from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
 import EquipmentSlotTooltipHandler from "@wayward/game/ui/screen/screens/game/dialog/equipment/EquipmentSlotTooltip";
 import { MenuBarButtonType } from "@wayward/game/ui/screen/screens/game/static/menubar/IMenuBarButton";
 export declare enum EquipmentClasses {

@@ -9,14 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Dictionary from "@wayward/game/language/Dictionary";
-import type { ISegment, ISegmentApi, IStringSection } from "@wayward/game/utilities/string/Interpolator";
+import type { IRegexSegment, ISegmentApi, IStringSection } from "@wayward/game/utilities/string/Interpolator";
 import type { Random } from "@wayward/utilities/random/Random";
 declare namespace TranslationSegment {
-    const include: ISegment;
-    const thisEntry: ISegment & {
+    const include: IRegexSegment;
+    const thisEntry: IRegexSegment & {
         translationChain: Array<[Dictionary, number | string, number, Random]>;
     };
-    const conditional: ISegment;
+    const conditional: IRegexSegment;
     function resolveTranslation(random: Random, api: ISegmentApi, dictionaryName: string, entryName: string, index: string | undefined, subTranslationArgsString: string, args: any[]): IStringSection[] | undefined;
     function getSubTranslationArgs(api: ISegmentApi, str: string, ...args: any[]): IStringSection[][];
 }

@@ -27,6 +27,12 @@ import Message from "@wayward/game/language/dictionary/Message";
 import type { HighlightSelector } from "@wayward/game/ui/util/IHighlight";
 import Observer from "@wayward/game/utilities/Observer";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
+export interface IUsableActionResolveUsingOptions {
+    /** Whether to skip filling in the `fromTile` and `targetTile` properties. Defaults to `true` */
+    skipTiles?: boolean;
+    /** Whether to skip filling in the `item`. Defaults to `false` */
+    skipItem?: boolean;
+}
 export interface IUsableActionEvents {
     preExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
     postExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
@@ -35,6 +41,7 @@ export interface IUsableActionEvents {
      * Emitted when the UsableAction should be updated, exclusively for cached UsableActions.
      */
     update(): any;
+    dispose(): any;
 }
 /**
  * Create a basic usable action:
@@ -54,7 +61,13 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     readonly definition: DEFINITION;
     id: ActionId;
     readonly observe: Observer.IRegistrar<this>;
+    private usersCount;
+    readonly users: WeakMap<UsableActionRegistrar, true>;
+    private _disposed;
+    get disposed(): boolean;
     constructor(requirements: REQUIREMENTS, definition: DEFINITION);
+    addUser(user: UsableActionRegistrar): this;
+    removeUser(user: UsableActionRegistrar): this;
     is(id?: ActionId): boolean;
     isExecutable(): this is UsableAction<REQUIREMENTS, IUsableActionDefinitionExecutable<REQUIREMENTS>>;
     execute(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): {
@@ -63,8 +76,8 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     } | {
         used: false;
     };
-    resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>, fillTiles?: boolean): Message | IUsableActionUsing<REQUIREMENTS>;
-    resolveUsingOrUndefined(player: Player, using: IUsableActionUsing<REQUIREMENTS>, fillTiles?: boolean): IUsableActionUsing<REQUIREMENTS> | undefined;
+    resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>, options?: IUsableActionResolveUsingOptions): Message | IUsableActionUsing<REQUIREMENTS>;
+    resolveUsingOrUndefined(player: Player, using: IUsableActionUsing<REQUIREMENTS>, options?: IUsableActionResolveUsingOptions): IUsableActionUsing<REQUIREMENTS> | undefined;
     isUsable(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): UsableActionUsability<REQUIREMENTS>;
     isApplicable(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean, requireItem?: boolean): provided is IUsableActionUsing<REQUIREMENTS>;
     private isItemApplicable;
@@ -102,6 +115,10 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     getInternalActionType(): ActionType | undefined;
     getAlignment(using?: IUsableActionPossibleUsing): DeityReal[];
     getInteractionDistance(provided?: IUsableActionPossibleUsing): InteractionDistance | undefined;
+    dispose(): void;
+    private readonly playerDisposalBindings;
+    private bindPlayerDisposal;
+    private clearItemFinderCache;
 }
 export interface IUsableActionFactory<REQUIREMENTS extends IUsableActionRequirements> {
     create: <DEFINITION extends IUsableActionDefinition<REQUIREMENTS>>(action: DEFINITION) => UsableAction<REQUIREMENTS, DEFINITION>;

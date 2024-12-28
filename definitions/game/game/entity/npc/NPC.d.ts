@@ -28,7 +28,7 @@ import { MessageManagerNoOp } from "@wayward/game/game/entity/player/MessageMana
 import type Player from "@wayward/game/game/entity/player/Player";
 import { NoteManagerNoOp } from "@wayward/game/game/entity/player/note/NoteManager";
 import { QuestManagerNoOp } from "@wayward/game/game/entity/player/quest/QuestManager";
-import { StatusType } from "@wayward/game/game/entity/status/IStatus";
+import { StatusApplicability } from "@wayward/game/game/entity/status/IStatus";
 import type { IContainer, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
@@ -58,11 +58,11 @@ export default abstract class NPC extends Human<INPCDescription, NPCType, Refere
     get entityType(): EntityType.NPC;
     get tileUpdateType(): TileUpdateType;
     event: IEventEmitter<this, INPCEvents>;
-    seen: number;
     private weightCapacity;
-    talked?: Map<string, number>;
+    ai: AiManager<this>;
     interactions?: Map<string, Set<number>>;
-    ai: AiManager;
+    seen: number;
+    talked?: Map<string, number>;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(entityOptions?: IEntityConstructorOptions<NPCType>);
@@ -74,9 +74,8 @@ export default abstract class NPC extends Human<INPCDescription, NPCType, Refere
     createMessageManager(): MessageManagerNoOp;
     createQuestManager(): QuestManagerNoOp;
     addMilestone(): void;
-    protected getApplicableStatuses(): Set<StatusType> | undefined;
+    protected getStatusApplicability(): StatusApplicability | undefined;
     get isValid(): boolean;
-    load(): void;
     /**
      * Creates inventory, equips items, and scales stats
      */
