@@ -21,7 +21,7 @@ export declare function convertStringToSeed(seed: string | number): number;
 /**
  * Creates a seeded random generator with the latest one available
  */
-export declare function createLatestSeededRandom(requiresSynchronization: RandomSychronizationCheck, seed?: Uint16Array | number): Random<PCGSeededGenerator> | Random<LegacySeededGenerator>;
+export declare function createLatestSeededRandom(requiresSynchronization: RandomSychronizationCheck, seed?: Uint16Array | number, advance?: number): Random<PCGSeededGenerator> | Random<LegacySeededGenerator>;
 interface SeededGeneratorMap {
     [SeedType.PCG]: PCGSeededGenerator;
     [SeedType.Legacy]: LegacySeededGenerator;
@@ -29,7 +29,7 @@ interface SeededGeneratorMap {
 /**
  * Creates seeded random generator for the given type
  */
-export declare function createSeededRandom<TYPE extends SeedType = SeedType>(seedType: TYPE, requiresSynchronization: RandomSychronizationCheck, seed?: Uint16Array | number): Random<SeededGeneratorMap[TYPE]>;
+export declare function createSeededRandom<TYPE extends SeedType = SeedType>(seedType: TYPE, requiresSynchronization: RandomSychronizationCheck, seed?: Uint16Array | number, advance?: number): Random<SeededGeneratorMap[TYPE]>;
 /**
  * Random without seeds
  */

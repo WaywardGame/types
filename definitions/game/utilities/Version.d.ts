@@ -77,7 +77,6 @@ declare namespace Version {
         pt: string;
         build: string;
     };
-    export function isTimeBefore(date: Date, dateStr: DateString, timezone: keyof typeof timezones): boolean;
     export interface Info extends IVersionInfo {
     }
     export class Info {

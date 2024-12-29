@@ -92,6 +92,15 @@ export default class Player extends Human<undefined, number, ReferenceType.Playe
      */
     private onLoadOrUnload;
     setup(spawnTile: Tile, respawn: boolean): void;
+    private setupEquipment;
+    private setupStats;
+    private setupSkills;
+    private setupRandomInventory;
+    private setupStatuses;
+    private setupItemsFromGroups;
+    private setupAdditionalItemsFromOptions;
+    private setupEquipmentFromOptions;
+    private setupSkillsFromOptions;
     protected onNoInput(): void;
     updateTables(source: string, options?: Partial<{
         allowCaching: boolean;

@@ -105,14 +105,16 @@ export declare enum MultiplayerSyncCheck {
     Stats = 65,
     Status = 66,
     StatusChange = 67,
-    TemperatureManager = 68,
-    Temporary = 69,
-    Tick = 70,
-    TileEvent = 71,
-    Time = 72,
-    UpdateDirection = 73,
-    Weight = 74,
-    WorldUpdateTile = 75
+    "START REGION" = 68,
+    "END REGION" = 69,
+    TemperatureManager = 70,
+    Temporary = 71,
+    Tick = 72,
+    TileEvent = 73,
+    Time = 74,
+    UpdateDirection = 75,
+    Weight = 76,
+    WorldUpdateTile = 77
 }
 export declare const maxPlayers = 32;
 export declare const packetTickRate = 16.6666;

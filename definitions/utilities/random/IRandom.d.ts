@@ -23,7 +23,7 @@ export interface IRandomGenerator<T = any> {
     pushSeed(seed?: T): void;
     popSeed(): T;
     get(): number;
-    advance?(): this;
+    advance?(times?: number): this;
     asPCG?: PCGSeededGenerator;
 }
 export declare enum RandomInstance {

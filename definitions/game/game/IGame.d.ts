@@ -31,6 +31,7 @@ import type { IReplayLogEntry } from "@wayward/game/replay/IReplayLogEntry";
 import type { IHighscoreOld, IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
 import type Version from "@wayward/game/utilities/Version";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 import type { IRange } from "@wayward/utilities/math/Range";
 export interface IGameEvents {
     /**
@@ -302,6 +303,20 @@ export interface ISynchronizeState {
 export interface IMovementTime {
     start: number;
     end: number;
+}
+export interface IGameUpgradeState {
+    /**
+     * Current state of the upgrade. Set based on what is upgrading at the time.
+     */
+    state: GameUpgradeState;
+    readonly lastSaveVersion: Version.String;
+    readonly lastSaveBuildTime: number;
+    readonly lastSaveBuildId: IBuildId | undefined;
+}
+export declare enum GameUpgradeState {
+    None = 0,
+    Game = 1,
+    Island = 2
 }
 export declare const LINE_OF_SIGHT_RADIUS = 15;
 export declare const LINE_OF_SIGHT_RADIUS_MAX = 20;

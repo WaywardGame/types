@@ -10,7 +10,7 @@
  */
 import { Uninit } from "@wayward/game/Uninit";
 import CommandManager from "@wayward/game/command/CommandManager";
-import type { IGameEvents, IMovementTime, IPlayOptions, ISynchronizeState } from "@wayward/game/game/IGame";
+import type { IGameEvents, IGameUpgradeState, IMovementTime, IPlayOptions, ISynchronizeState } from "@wayward/game/game/IGame";
 import { PauseSource, SaveType, TurnMode } from "@wayward/game/game/IGame";
 import { TickHelper } from "@wayward/game/game/TickHelper";
 import type { BiomeTypes } from "@wayward/game/game/biome/IBiome";
@@ -51,7 +51,6 @@ import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import { WebWorkerManager } from "@wayward/game/webWorker/WebWorkerManager";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { Random } from "@wayward/utilities/random/Random";
-import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 export declare class Game extends EventEmitter.Host<IGameEvents> {
     get isChallenge(): boolean;
     private difficultyOptions;
@@ -71,9 +70,10 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      * The version the save was originally created on
      */
     version: Version.String;
-    lastSaveVersion?: Version.String;
-    lastSaveBuildTime?: number;
-    lastSaveBuildId?: IBuildId;
+    /**
+     * Set when a game save upgrade is running
+     */
+    upgradeState?: IGameUpgradeState;
     readonly interval = 16.6666;
     readonly autoSave: AutoSave;
     readonly commandManager: CommandManager;

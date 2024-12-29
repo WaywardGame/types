@@ -137,7 +137,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     get isFastForwarding(): boolean;
     constructor(game?: Game, position?: IVector2, seed?: number, mapSize?: number);
     toString(): string;
-    createStaticRandom(seed?: number): Random<PCGSeededGenerator>;
+    createStaticRandom(seed?: number, advance?: number): Random<PCGSeededGenerator>;
     private registerMemoryLeakDetector;
     preSerializeObject(serializer: ISerializer): void;
     postSerializeObject(serializer: ISerializer): void;

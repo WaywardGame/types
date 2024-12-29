@@ -29,8 +29,10 @@ export interface ISyncCheck {
 }
 export type SyncChecks = ISyncCheck[];
 export interface IHashedSyncCheck {
-    hash: number;
+    hashServer: number;
+    hashClient: number;
     syncCheck: SyncChecks;
+    type: "enabled" | "universal";
 }
 export interface IPacket<T = any> {
     getAllowedStates(): ConnectionState;

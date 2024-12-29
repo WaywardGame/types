@@ -12,7 +12,7 @@ import Deity from "@wayward/game/game/deity/Deity";
 import { DamageType } from "@wayward/game/game/entity/IEntity";
 import { SkillType } from "@wayward/game/game/entity/IHuman";
 import { Stat } from "@wayward/game/game/entity/IStats";
-import type { IItemDescription, IMagicalPropertyInfo } from "@wayward/game/game/item/IItem";
+import type { IItemDescription, IMagicalPropertyInfo, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
@@ -94,7 +94,7 @@ export interface IMagicalPropertyDescription {
     /**
      * Generates the magical property value when added.
      */
-    getInfo(item: Item, description: IItemDescription): IMagicalPropertyInfo | undefined;
+    getInfo(item: Item | ItemType, description: IItemDescription): IMagicalPropertyInfo | undefined;
     /**
      * By default, all magical property types can be inscribed. This allows disabling that feature for this magical property type.
      */
@@ -110,5 +110,23 @@ export interface MagicalPropertyTypeSubTypeMap {
     [MagicalPropertyType.Encircling_DoodadSkill]: SkillType;
     [MagicalPropertyType.ElementalDamage]: DamageType;
     [MagicalPropertyType.StatPotency_EquipmentImproveConsumableStats]: Stat;
+}
+export declare namespace MagicalPropertyInfoHelper {
+    /**
+     * Creates a partial `IMagicalPropertyDescription` that generates an integer value from min (inclusive) to max (exclusive),
+     * with an *actual* max for the magical property using `max`. (1 higher)
+     */
+    function intRange(item: Item | ItemType, min: number, max: number, generatedMax?: number): {
+        min: number;
+        max: number;
+        value: () => number;
+    };
+    function randomInt(item: Item | ItemType, maxExclusive: number): number;
+    function randomInt(item: Item | ItemType, min: number, maxExclusive: number): number;
+    function randomIntInRange(item: Item | ItemType, max: number): number;
+    function randomIntInRange(item: Item | ItemType, min: number, maxInclusive: number): number;
+    function randomFloat(item: Item | ItemType, maxExclusive: number): number;
+    function randomFloat(item: Item | ItemType, min: number, maxExclusive: number): number;
+    function functionRequiringItem<T>(item: Item | ItemType, fn: (item: Item) => T): () => T;
 }
 export declare const magicalPropertyDescriptions: PartialRecord<MagicalPropertyType, IMagicalPropertyDescription>;
