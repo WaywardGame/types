@@ -13,7 +13,9 @@ import type { GameMode, IGameOptions } from "@wayward/game/game/options/IGameOpt
 import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import type { IMultiplayerState } from "@wayward/game/multiplayer/IMultiplayer";
 import type IClientStore from "@wayward/game/save/clientStore/IClientStore";
+import type { IGameCreationInfo } from "@wayward/game/save/data/ISaveData";
 import type EnumInfo from "@wayward/game/utilities/enum/EnumInfo";
+import type Version from "@wayward/game/utilities/Version";
 import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 export declare const saveDataVersionUnknown = "Unknown";
 export default class SaveData {
@@ -30,7 +32,14 @@ export default class SaveData {
     saveManagerDifficulty: GameMode;
     saveManagerOptions: IGameOptions;
     saveManagerScore: number;
-    saveManagerOriginalVersion: string;
+    saveManagerOriginalVersion: Version.String;
+    /**
+     * Contains extra information about the creation of this save.
+     * This may not be accurate for older saves before this was added (beta2.14.4).
+     * The existing data must not be modified after initial save creation.
+     * TODO: Remove gameCreationTime & saveManagerOriginalVersion and use this instead?
+     */
+    gameCreationInfo: Readonly<IGameCreationInfo>;
     saveManagerDeathBy: ISerializedTranslation;
     modManagerSaveData: Record<string, any>;
     modManagerUnloadable: Record<string, {

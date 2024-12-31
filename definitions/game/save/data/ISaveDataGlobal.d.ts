@@ -34,6 +34,7 @@ export interface IOptions {
     defaultCursor: boolean;
     developerMode: boolean;
     developerModeContextMenu: boolean;
+    developerLogMessagesForContainerDesyncs: boolean;
     dialogOpacity: number;
     directionTurnDelay: number;
     disableAcrylicTransparency: boolean;

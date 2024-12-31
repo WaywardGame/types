@@ -15,7 +15,7 @@ import IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import { ModType } from "@wayward/game/mod/IModInformation";
 import type { ModInformation } from "@wayward/game/mod/ModInformation";
 import type { IJoinServerOptions, ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
-import type { IBuild, IDedicatedServerInfo, IModPath, ISteamworksEvents, SteamStatTypeValues } from "@wayward/game/steamworks/ISteamworks";
+import type { IBuild, IDedicatedServerInfo, IModPath, ISteamworksEvents, RunningContext, SteamStatTypeValues } from "@wayward/game/steamworks/ISteamworks";
 import { SteamStatArea } from "@wayward/game/steamworks/ISteamworks";
 import type { ISteamBeta } from "@wayward/hosts/shared/interfaces";
 import { type IMatchmakingServer, type INapiDiscordPresenceInfo, type IRemoteFile, type ISteamFriend, type ISteamId, type ISteamworksNetworking, type IWaywardPreload, type IWorkshopItem, type LobbyType } from "@wayward/hosts/shared/interfaces";
@@ -92,7 +92,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     /** @deprecated For console use */
     protected setBuildId(id?: string): void;
     initialize(): Promise<IWaywardPreload | undefined>;
-    enableSafePaths(): void;
+    enableSafePaths(): Promise<void>;
     onUnload(): void;
     getHeapStatistics(): Promise<HeapStatistics | undefined>;
     setFullscreen(fullscreen: boolean): Promise<void>;
@@ -130,6 +130,10 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
      * - {@link Island.saveBuildId}
      */
     get buildId(): IBuildId | undefined;
+    /**
+     * Returns a string about how the game is running
+     */
+    get runningContext(): RunningContext;
     getPublishedMods(): IWorkshopItem[] | undefined;
     getStatInt(name: string): number | undefined;
     /**

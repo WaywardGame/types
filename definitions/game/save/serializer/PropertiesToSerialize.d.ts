@@ -57,6 +57,10 @@ declare const propertiesToSerializeObject: {
     saveManagerOriginalVersion: {
         property: string[];
     };
+    gameCreationInfo: {
+        property: string[];
+        savePropertyFlag: SavePropertyFlag;
+    };
     gameThumbnail: {
         property: string[];
         savePropertyFlag: SavePropertyFlag;

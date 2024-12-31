@@ -13,8 +13,8 @@ import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvi
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import Inspection from "@wayward/game/game/inspection/Inspection";
-import type { MagicalPropertyIdentityHash } from "@wayward/game/game/magic/MagicalPropertyManager";
-import { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { MagicalPropertyIdentityHash } from "@wayward/game/game/magic/IMagicalProperty";
+import { MagicalPropertyIdentity } from "@wayward/game/game/magic/IMagicalProperty";
 import Translation from "@wayward/game/language/Translation";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";
 export default class MagicInspection extends Inspection<MagicalPropertyIdentityHash> {

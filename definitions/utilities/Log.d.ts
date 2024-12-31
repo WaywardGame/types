@@ -87,7 +87,8 @@ declare namespace Log {
         Memory = 2
     }
     function setMemoryLog(memoryLog: MemoryLog | undefined): void;
-    function disableFileLogging(source: string): void;
+    function disableFileLogger(): void;
+    function disableFileLoggingForSource(source: string): void;
     function initializeGameState(): void;
     function setCallback(cb?: (...args: any[]) => void): void;
     function addPreConsoleCallback(cb: (...args: any[]) => void): void;
@@ -95,7 +96,7 @@ declare namespace Log {
     /**
      * Setups file logging
      */
-    function setupFileLogger(fileSystem: IFileSystem, logsPath: string): void;
+    function setupFileLogger(fileSystem: IFileSystem, logsPath: string): Promise<void>;
     /**
      * Flushes pending logs to disk if the file logger is active
      */

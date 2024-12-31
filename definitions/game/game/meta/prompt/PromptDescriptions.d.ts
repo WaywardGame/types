@@ -111,6 +111,7 @@ export declare const promptMenuOptionsConfirmDiscoverActions: import("@wayward/g
 export declare const promptMenuOptionsConfirmUnlockRecipes: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsSaveDataClearAll: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsSaveDataClearCharacters: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
+export declare const promptMenuOptionsSaveDataClearUI: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsSaveDataClearHighscores: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsSaveDataClearMilestones: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsSaveDataClearOptions: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;

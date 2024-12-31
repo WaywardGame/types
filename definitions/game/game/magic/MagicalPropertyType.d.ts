@@ -14,7 +14,7 @@ import { SkillType } from "@wayward/game/game/entity/IHuman";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { IItemDescription, IMagicalPropertyInfo, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { MagicalPropertyIdentity } from "@wayward/game/game/magic/IMagicalProperty";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
 declare enum MagicalPropertyType {
     /** Increases attack value (for weapons and ammo) */

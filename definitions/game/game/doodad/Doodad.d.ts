@@ -30,7 +30,7 @@ import { LiquidType } from "@wayward/game/game/island/IIsland";
 import type { ContainerSort, DisplayableItemType, IContainer, IItemVehicle, ILiquidGather, IUncastableContainer, ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type { IHasMagic } from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { IHasMagic } from "@wayward/game/game/magic/IMagicalProperty";
 import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type { IHasInsulation, TempType } from "@wayward/game/game/temperature/ITemperature";

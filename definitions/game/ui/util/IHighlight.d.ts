@@ -11,6 +11,7 @@
 import type { IContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 export type HighlightSelector = [HighlightType, GetterOfOr<string | number>];
+export type HighlightSelectorResolved = [HighlightType, string | number];
 export interface IHighlight {
     selectors: SupplierOr<HighlightSelector[]>;
     time?: number;

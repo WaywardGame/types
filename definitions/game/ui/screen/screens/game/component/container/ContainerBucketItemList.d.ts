@@ -96,6 +96,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private readonly transientItemComponents;
     addTransientItem(item: Item): ItemComponent | undefined;
     removeTransientItem(item: Item): void;
+    ensureItemComponent(item: Item): ItemComponent | undefined;
     private readonly itemComponents;
     private getItemComponent;
     private readonly itemStacks;

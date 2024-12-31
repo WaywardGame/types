@@ -22,6 +22,7 @@ export declare enum MilestonesDialogClasses {
 }
 export default class MilestonesDialog extends UnlockablesDialog<Milestone, MilestoneSort> {
     constructor();
+    refreshNotUnlockableWarning(): void;
     getBindable(): Bindable;
     getIcon(): MenuBarButtonType;
     protected getUnlockablesName(): Translation;

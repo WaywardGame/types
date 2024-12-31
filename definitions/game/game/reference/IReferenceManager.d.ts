@@ -24,7 +24,7 @@ import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import { ItemType, ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type { MagicalPropertyIdentityHash } from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { MagicalPropertyIdentityHash } from "@wayward/game/game/magic/IMagicalProperty";
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type Translation from "@wayward/game/language/Translation";
