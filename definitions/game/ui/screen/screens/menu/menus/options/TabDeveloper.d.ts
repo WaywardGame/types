@@ -23,6 +23,8 @@ export default class TabDeveloper extends Tab implements IRefreshable {
     private readonly buttonToggleTraceRecording;
     private readonly buttonDisposeReflection;
     private readonly blockLogSourceFiltering;
+    private readonly checkButtonReportErrors;
+    private onTryEnableReportErrors;
     private readonly blockUIExperiments;
     constructor();
     refresh(): this;

@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Middleware from "@wayward/devserver/middleware/util/Middleware";
-declare const _default: Middleware<[message?: string]>;
-export default _default;
+import Notice from "@wayward/game/ui/component/Notice";
+export default class ErrorReportingNotice extends Notice {
+    constructor();
+}

@@ -32,9 +32,10 @@ export interface IOptions {
     currentGame: number;
     customTitleBar: boolean;
     defaultCursor: boolean;
+    developerLogMessagesForContainerDesyncs: boolean;
     developerMode: boolean;
     developerModeContextMenu: boolean;
-    developerLogMessagesForContainerDesyncs: boolean;
+    developerReportErrorsToWaywardTeam: boolean;
     dialogOpacity: number;
     directionTurnDelay: number;
     disableAcrylicTransparency: boolean;

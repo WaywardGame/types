@@ -27,11 +27,13 @@ export declare enum NoticeClasses {
     Markdown = "notice-markdown"
 }
 export default class Notice extends Component {
-    static await(noticeClass: Class<Notice>, appendTo: Component): Promise<any>;
+    static await(noticeClass: Class<Notice>, appendTo: Component | HTMLElement): Promise<boolean>;
     readonly sections: Component<HTMLElement>;
     readonly footer: Component<HTMLElement>;
     readonly footerContent: Component<HTMLElement>;
-    readonly dismissButton: Button;
+    private returnValue;
+    readonly proceedButton: Button;
+    get cancelButton(): Button;
     constructor();
     addSection(initializer: (section: NoticeSection) => any): this;
     hideAndRemove(): Promise<void>;

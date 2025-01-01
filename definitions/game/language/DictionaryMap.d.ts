@@ -1830,8 +1830,8 @@ declare const dictionaryMap: {
     70: typeof Load;
     71: symbol;
     72: typeof MagicalPropertyType;
-    74: symbol;
     73: typeof MagicalPropertyType;
+    74: symbol;
     75: typeof MapQuality;
     76: typeof MenuBarButtonType;
     77: typeof Message;
@@ -3622,8 +3622,8 @@ export declare const strictDictionaries: {
     70: typeof Load;
     71: symbol;
     72: typeof MagicalPropertyType;
-    74: symbol;
     73: typeof MagicalPropertyType;
+    74: symbol;
     75: typeof MapQuality;
     76: typeof MenuBarButtonType;
     77: typeof Message;

@@ -16,8 +16,9 @@ import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { ListEnder } from "@wayward/game/language/ITranslation";
 import Translation from "@wayward/game/language/Translation";
+import type { IEventSubscriberEvents } from "@wayward/utilities/event/EventEmitter";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-export interface IMagicalPropertyManagerEvents {
+export interface IMagicalPropertyManagerEvents extends IEventSubscriberEvents {
     /**
      * Emitted when a property was removed
      */

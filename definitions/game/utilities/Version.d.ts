@@ -80,7 +80,7 @@ declare namespace Version {
     export interface Info extends IVersionInfo {
     }
     export class Info {
-        constructor(info: IVersionInfo | Version.String | Version.StringSemVer);
+        constructor(info: IVersionInfo | Version.String | Version.StringSemVer | Version.StringBuildId);
         /**
          * Returns whether this version is compatible with the game's version. This is used to check, for example,
          * if a mod is compatible with the game's version.
