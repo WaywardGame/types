@@ -15,7 +15,7 @@ import type { IMultiplayerState } from "@wayward/game/multiplayer/IMultiplayer";
 import type IClientStore from "@wayward/game/save/clientStore/IClientStore";
 import type { IGameCreationInfo } from "@wayward/game/save/data/ISaveData";
 import type EnumInfo from "@wayward/game/utilities/enum/EnumInfo";
-import type Version from "@wayward/game/utilities/Version";
+import type Version from "@wayward/utilities/Version";
 import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 export declare const saveDataVersionUnknown = "Unknown";
 export default class SaveData {

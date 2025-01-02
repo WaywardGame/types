@@ -14,7 +14,7 @@ import type { ModState } from "@wayward/game/mod/IModInformation";
 import type { IHighscore, IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
 import type { IDialogInfo } from "@wayward/game/ui/old/IOldUi";
 import type { ISavedCharacter } from "@wayward/game/ui/screen/screens/menu/menus/character/Character";
-import type Version from "@wayward/game/utilities/Version";
+import type Version from "@wayward/utilities/Version";
 import type EnumInfo from "@wayward/game/utilities/enum/EnumInfo";
 import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 export default class SaveDataGlobal {

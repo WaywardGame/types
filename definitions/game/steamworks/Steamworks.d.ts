@@ -15,12 +15,12 @@ import IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import { ModType } from "@wayward/game/mod/IModInformation";
 import type { ModInformation } from "@wayward/game/mod/ModInformation";
 import type { IJoinServerOptions, ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
-import type { IBuild, IDedicatedServerInfo, IModPath, ISteamworksEvents, RunningContext, SteamStatTypeValues } from "@wayward/game/steamworks/ISteamworks";
+import type { IDedicatedServerInfo, IModPath, ISteamworksEvents, RunningContext, SteamStatTypeValues } from "@wayward/game/steamworks/ISteamworks";
 import { SteamStatArea } from "@wayward/game/steamworks/ISteamworks";
 import type { ISteamBeta } from "@wayward/hosts/shared/interfaces";
 import { type IMatchmakingServer, type INapiDiscordPresenceInfo, type IRemoteFile, type ISteamFriend, type ISteamId, type ISteamworksNetworking, type IWaywardPreload, type IWorkshopItem, type LobbyType } from "@wayward/hosts/shared/interfaces";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
+import type { IBuild, IBuildId } from "@wayward/hosts/shared/globalTypes";
 export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private readonly game;
     protected initialized: boolean;

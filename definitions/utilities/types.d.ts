@@ -8,6 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import DedicatedServer from "./dedicatedServer";
-declare const server: DedicatedServer;
-export = server;
+import "@wayward/utilities/types/Class";
+import "@wayward/utilities/types/Descriptions";
+import "@wayward/utilities/types/Function";
+import "@wayward/utilities/types/Immutable";
+import "@wayward/utilities/types/Iterables";
+import "@wayward/utilities/types/Misc";
+import "@wayward/utilities/types/Objects";
+import "@wayward/utilities/types/Types";

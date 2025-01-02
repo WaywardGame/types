@@ -22,7 +22,7 @@ import type Item from "@wayward/game/game/item/Item";
 import type { IGameOptions } from "@wayward/game/game/options/IGameOptions";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type { UpgradesArrayCompressedPusher } from "@wayward/game/save/upgrade/UpgradesArray";
-import type Version from "@wayward/game/utilities/Version";
+import type Version from "@wayward/utilities/Version";
 import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 export interface IUpgradeVersion {
     name?: string;

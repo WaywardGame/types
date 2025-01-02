@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
-import type { IVersionInfo } from "@wayward/game/utilities/Version";
+import type { IVersionInfo } from "@wayward/utilities/Version";
 export default class ChangelogMenu extends Menu {
     private static readonly modLinks;
     private readonly headingVersionName;

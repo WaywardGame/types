@@ -29,7 +29,7 @@ import type { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "@wa
 import type { Renderer } from "@wayward/game/renderer/Renderer";
 import type { IReplayLogEntry } from "@wayward/game/replay/IReplayLogEntry";
 import type { IHighscoreOld, IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
-import type Version from "@wayward/game/utilities/Version";
+import type Version from "@wayward/utilities/Version";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 import type { IRange } from "@wayward/utilities/math/Range";

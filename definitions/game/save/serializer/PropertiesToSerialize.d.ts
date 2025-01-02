@@ -10,7 +10,7 @@
  */
 import type { ISerializeProperty } from "@wayward/game/save/ISaveManager";
 import { SavePropertyFlag } from "@wayward/game/save/serializer/ISerializer";
-import Version from "@wayward/game/utilities/Version";
+import Version from "@wayward/utilities/Version";
 declare const propertiesToSerializeObject: {
     game: {
         property: string[];

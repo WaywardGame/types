@@ -10,7 +10,7 @@
  */
 import type { IUpgradeVersion, UpgradeParameters, UpgradeType } from "@wayward/game/save/upgrade/UpgradeVersion";
 import type UpgradesArray from "@wayward/game/save/upgrade/UpgradesArray";
-import type Version from "@wayward/game/utilities/Version";
+import type Version from "@wayward/utilities/Version";
 export declare const BUILD_TIME_INTRODUCED_TIME: Date;
 declare namespace UpgradeVersionRegistry {
     function getAll(): readonly IUpgradeVersion[];

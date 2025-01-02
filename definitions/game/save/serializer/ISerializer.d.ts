@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Game } from "@wayward/game/game/Game";
-import type Version from "@wayward/game/utilities/Version";
+import type Version from "@wayward/utilities/Version";
 export interface ISerializer {
     readonly game: Game;
     readonly version: Version.String;

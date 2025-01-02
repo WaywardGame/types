@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { RunningContext } from "@wayward/game/steamworks/ISteamworks";
-import type Version from "@wayward/game/utilities/Version";
+import type Version from "@wayward/utilities/Version";
 import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 export interface IGameCreationInfo {
     build: IGameCreationInfoBuild;

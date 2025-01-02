@@ -47,12 +47,6 @@ export interface IDedicatedServerInfo {
     syncChecks: MultiplayerSyncCheckLevel;
     gameCode?: string;
 }
-export interface IBuild {
-    name: string;
-    time: number;
-    publishName?: string;
-    publishTime?: string;
-}
 export declare enum SteamStatArea {
     Music = 0,
     Renderer = 1

@@ -12,7 +12,7 @@ import type * as ws from "ws";
 import Server from "./server";
 import * as shared from "./shared";
 import type { IServerGameDetails, IServerServerDetails } from "@wayward/hosts-shared/interfaces";
-export default class DedicatedServer extends Server {
+export declare class DedicatedServer extends Server {
     private host;
     private readonly dedicatedServerId;
     stop(): void;

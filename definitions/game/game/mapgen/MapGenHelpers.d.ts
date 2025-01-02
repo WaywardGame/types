@@ -14,7 +14,7 @@ import type Island from "@wayward/game/game/island/Island";
 import type { MapGenVersions } from "@wayward/game/game/mapgen/IMapGen";
 import type { ITemplate, TileTemplateType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
-import Version from "@wayward/game/utilities/Version";
+import Version from "@wayward/utilities/Version";
 export declare namespace MapGenHelpers {
     function pickBasedOnVersion<T>(targetVersion: Version.String, versions: MapGenVersions<T>): {
         version: Version.String;

@@ -234,7 +234,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     removeMagic(): void;
     unhitch(): void;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean, damage?: number): void;
-    getDefaultDurability(random?: import("@wayward/utilities/random/Random").Random<import("@wayward/utilities/random/generators/PCGSeededGenerator").PCGSeededGenerator | import("@wayward/utilities/random/generators/LegacySeededGenerator").LegacySeededGenerator>): number;
+    getDefaultDurability(random?: import("@wayward/utilities/random/Random").Random<import("@wayward/utilities/random/generators/LegacySeededGenerator").LegacySeededGenerator | import("@wayward/utilities/random/generators/PCGSeededGenerator").PCGSeededGenerator>): number;
     /**
      * Gets the container to use for doodad executed actions
      */

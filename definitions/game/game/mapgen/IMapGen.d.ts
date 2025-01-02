@@ -14,7 +14,7 @@ import type Island from "@wayward/game/game/island/Island";
 import type MapGenHelpers from "@wayward/game/game/mapgen/MapGenHelpers";
 import type { Load, MultiplayerLoadingDescription } from "@wayward/game/game/meta/Loading";
 import type { ITemplate, TileTemplateType } from "@wayward/game/game/tile/ITerrain";
-import type Version from "@wayward/game/utilities/Version";
+import type Version from "@wayward/utilities/Version";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type WorldZ from "@wayward/utilities/game/WorldZ";
 import type { Random } from "@wayward/utilities/random/Random";

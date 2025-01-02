@@ -8,12 +8,17 @@ declare namespace _default {
         }
         export { messages };
         export let schema: never[];
-        export let fixable: string;
+        export let fixable: string | undefined;
     }
     export { createRuleListener as create };
 }
 export default _default;
 export type Context = TSESLint.RuleContext<keyof typeof messages, []>;
+export type Complexity = {
+    value: number;
+    functionValue: number;
+    conditional: boolean;
+};
 declare namespace messages {
     let conditionTooComplexVariable: string;
     let conditionTooComplexFunction: string;

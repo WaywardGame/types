@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
+import type { IBuild, IBuildId } from "@wayward/hosts/shared/globalTypes";
 export interface IVersionInfo {
     str: Version.String;
     strSemver: Version.StringSemVer;
@@ -31,6 +30,7 @@ export declare namespace IVersionInfo {
     }
 }
 declare namespace Version {
+    export function readBuildFile(): Promise<IBuild | undefined>;
     export type Stage = "beta" | "release";
     export type String = `${Stage}${bigint}.${bigint}.${bigint}` | `${Stage}${bigint}.${bigint}` | `${Stage}${bigint}`;
     export type StringSemVer = `${bigint}.${bigint}.${bigint}-${Stage}` | `${bigint}.${bigint}.${bigint}`;
@@ -70,8 +70,6 @@ declare namespace Version {
     export function create(stage: Version.Stage, major: number, minor: number, patch?: number, date?: Date): Info;
     export function getVersionInfo(version: IVersionInfo | Version.String | Version.StringSemVer | Version.StringBuildId): Info;
     export function isSameVersion(version: IVersionInfo, compareVersion: IVersionInfo): boolean;
-    export function getVersionDisplayTranslation(version?: Version.String | Version.StringSemVer | IVersionInfo, development?: boolean): TranslationImpl;
-    export function getUpdateDisplayTranslation(version?: Version.String | Version.StringSemVer | IVersionInfo): TranslationImpl | undefined;
     const timezones: {
         nz: string;
         pt: string;
@@ -110,8 +108,6 @@ declare namespace Version {
          */
         isBefore(dateStr: DateString, timezone: keyof typeof timezones): boolean;
         equals(version: IVersionInfo | Version.String | Version.StringSemVer): boolean;
-        getTranslation(): TranslationImpl;
-        getUpdateTranslation(): TranslationImpl | undefined;
     }
     export {};
 }

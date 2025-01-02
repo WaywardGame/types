@@ -111,4 +111,8 @@ export default class ApplicationInteractions {
     randomMovement(count: number): Promise<void>;
     pressKey(key: string, modifier?: string, duration?: number): Promise<void>;
     screenshot(suffix: string): Promise<void>;
+    /**
+     * Runs a garbage collection and counts the number of objects remaining for the specified item
+     */
+    garbageCollectAndCount(objectIdentifier: string): Promise<number>;
 }

@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IncomingMessage as HTTPIncomingMessage, ServerResponse } from "http";
+import "@wayward/utilities/types";
 interface IncomingMessageOverride {
     url: string;
 }

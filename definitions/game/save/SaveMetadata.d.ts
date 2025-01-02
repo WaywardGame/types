@@ -13,7 +13,7 @@ import type { GameMode, IGameOptions } from "@wayward/game/game/options/IGameOpt
 import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import type { ISaveObject } from "@wayward/game/save/ISaveManager";
 import type { AnyPropertyToSerialize } from "@wayward/game/save/serializer/PropertiesToSerialize";
-import type Version from "@wayward/game/utilities/Version";
+import type Version from "@wayward/utilities/Version";
 interface SaveMetadata {
     slot?: number;
     path?: string;
