@@ -23,7 +23,7 @@ import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/Creat
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type { IMessageManager } from "@wayward/game/game/entity/player/IMessageManager";
 import type Player from "@wayward/game/game/entity/player/Player";
-import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type { IslandId, IWell } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
@@ -129,6 +129,14 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Gets the primary/first blocking entity on this tile.
      */
     get entity(): Entity | undefined;
+    /**
+     * Gets well data on this tile.
+     */
+    get well(): IWell | undefined;
+    /**
+     * Sets well data on this tile.
+     */
+    set well(value: IWell);
     /**
      * Gets the primary/first blocking entity on this tile, that is a creature, NPC, or player.
      */

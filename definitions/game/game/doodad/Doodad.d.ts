@@ -126,7 +126,6 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * Used to store protection status for built doodads
      */
     protected?: boolean;
-    private _tileId?;
     /**
      * Separate property just for wells because isInGroup is still expensive for processWell()
      */
@@ -180,7 +179,6 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     updateGroupCache(doodadTypeGroup: DoodadTypeGroup): boolean;
     get point(): IVector3;
     get tile(): Tile;
-    getTileId(): number;
     /**
      * @deprecated This is the correct way to change quality, but it is not completely implemented.
      * It does not perform any required changes due to the quality change, like durability, all it does is change the quality and emit an event.

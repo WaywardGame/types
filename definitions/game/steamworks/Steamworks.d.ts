@@ -12,7 +12,7 @@ import type { HeapStatistics } from "electron";
 import type { Game } from "@wayward/game/game/Game";
 import type Entity from "@wayward/game/game/entity/Entity";
 import IActionContext from "@wayward/game/game/entity/action/IActionContext";
-import { ModType } from "@wayward/game/mod/IModInformation";
+import { ModState, ModType } from "@wayward/game/mod/IModInformation";
 import type { ModInformation } from "@wayward/game/mod/ModInformation";
 import type { IJoinServerOptions, ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
 import type { IDedicatedServerInfo, IModPath, ISteamworksEvents, RunningContext, SteamStatTypeValues } from "@wayward/game/steamworks/ISteamworks";
@@ -219,6 +219,10 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private refreshSetupMods;
     private cleanupTemporaryLocalFiles;
     private cleanupTemporaryRemoteFiles;
+    /**
+     * Called when the overlay is closed or when the refresh mods button is clicked
+     */
+    refreshWorkshopMods(waitForRefresh?: boolean, initialModState?: ModState.Enabled | ModState.Disabled): Promise<void>;
     private refreshPublishedMods;
     private getIdFromWorkshopItem;
     private syncWorkshopItems;

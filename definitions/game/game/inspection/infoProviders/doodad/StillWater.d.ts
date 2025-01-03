@@ -10,15 +10,13 @@
  */
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
-import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class StillWaterInfoProvider extends InfoProvider {
     private readonly doodad;
     static get(doodad: Doodad): StillWaterInfoProvider | undefined;
-    private message;
+    private readonly waterTopMessage;
+    private readonly waterBottomMessage;
     private constructor();
     getClass(): string[];
     hasContent(): boolean;
-    get(): TranslationImpl;
-    onTickEnd(): void;
-    private getWaterInStill;
+    get(): InfoProvider[];
 }

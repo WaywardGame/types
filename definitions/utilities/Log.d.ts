@@ -87,6 +87,7 @@ declare namespace Log {
         Memory = 2
     }
     function setMemoryLog(memoryLog: MemoryLog | undefined): void;
+    function setTimestampType(type: "full" | "build"): void;
     function disableFileLogger(): void;
     function disableFileLoggingForSource(source: string): void;
     function initializeGameState(): void;

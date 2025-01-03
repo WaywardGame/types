@@ -79,6 +79,10 @@ export interface IEventEmitter<H = any, E = any> {
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
     hasHandlersForEvent(...events: Array<keyof E>): boolean;
+    /**
+     * Closes an event emitter, which will prevent any further subscriptions from being made.
+     */
+    close(): void;
 }
 export interface IUntilSubscriber<H, E> {
     until(promise: Promise<any>): this;
@@ -101,7 +105,13 @@ declare class EventEmitter<H, E> {
     private subscriptions?;
     private cachedEmitSelfHandlers?;
     private cachedClassHandlers?;
+    private closed?;
     constructor(host: H);
+    /**
+     * Closes an event emitter, which will prevent any further subscriptions from being made.
+     */
+    close(): void;
+    private throwIfClosed;
     raw(): IEventEmitter<H, E>;
     emitSelf<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;

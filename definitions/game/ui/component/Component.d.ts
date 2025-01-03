@@ -94,6 +94,7 @@ export default class Component<E extends HTMLElement = HTMLElement> extends Even
      */
     get selectable(): SelectableLayer | false;
     constructor(elementType?: string, namespace?: Namespace);
+    toString(): string;
     /**
      * Alias of `.element.addEventListener`, except it returns `this` instead and prevents memory leaks
      */

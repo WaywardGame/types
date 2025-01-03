@@ -131,7 +131,10 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     cumulativeEvilCrafting: number;
     /** @deprecated (use the entity itself) */
     readonly inventory: IContainer;
-    private readonly privateStore;
+    /**
+     * Used for delays, which are calculated on the server
+     */
+    private nextProcessInput;
     containerType?: ContainerType;
     nextMoveTime: number;
     nextMoveDirection?: Direction.Cardinal | Direction.None;
@@ -339,6 +342,11 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     hasDelay(): boolean;
     addDelay(delay: number, replace?: boolean, addStaminaDelay?: boolean, cap?: number): void;
     ensureDelay(delay: number): void;
+    /**
+     * Removese input processing delay (due to actions) and movement delays.
+     * This won't do much from clientside in a mp game since the server is in charge.
+     */
+    removeDelays(): void;
     /**
      * Gets a stamina penalty delay to be used for slowed actions and movement.
      * @param staminaToStartAddingDelayAt Stat value where delays start getting added from.

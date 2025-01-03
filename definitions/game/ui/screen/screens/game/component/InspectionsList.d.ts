@@ -30,7 +30,6 @@ export default abstract class InspectionsList<INSPECTIONS_HANDLER extends Inspec
     event: IEventEmitter<this, ITileInspectionsEvents>;
     private readonly paragraphInspectionsInvalid;
     private inspectTypeFilter;
-    private _removed?;
     protected inspectionsHandler?: InspectionsHandler;
     protected refreshPromiseSequence: PromiseSequence;
     protected inspectionsHandlerUpdatedInspectionsCallback?: (_: any, inspectType: InspectType, inspections: HashSet<Inspection<any>>, oldInspections: HashSet<Inspection<any>> | undefined) => void;

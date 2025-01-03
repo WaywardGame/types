@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IBuild, IBuildId } from "@wayward/hosts/shared/globalTypes";
+import type { IFileSystem } from "@wayward/hosts/shared/ipc/fileSystem";
 export interface IVersionInfo {
     str: Version.String;
     strSemver: Version.StringSemVer;
@@ -30,7 +31,7 @@ export declare namespace IVersionInfo {
     }
 }
 declare namespace Version {
-    export function readBuildFile(): Promise<IBuild | undefined>;
+    export function readBuildFile(path?: string, fs?: IFileSystem): Promise<IBuild | undefined>;
     export type Stage = "beta" | "release";
     export type String = `${Stage}${bigint}.${bigint}.${bigint}` | `${Stage}${bigint}.${bigint}` | `${Stage}${bigint}`;
     export type StringSemVer = `${bigint}.${bigint}.${bigint}-${Stage}` | `${bigint}.${bigint}.${bigint}`;
@@ -68,7 +69,7 @@ declare namespace Version {
     export function createRawVersionInfo(stage: Version.Stage, major: number, minor: number, patch?: number, date?: Date): IVersionInfo;
     export function convertStringToRawInfo(version: Version.String | Version.StringSemVer | Version.StringBuildId): IVersionInfo;
     export function create(stage: Version.Stage, major: number, minor: number, patch?: number, date?: Date): Info;
-    export function getVersionInfo(version: IVersionInfo | Version.String | Version.StringSemVer | Version.StringBuildId): Info;
+    export function getVersionInfo(version?: IVersionInfo | Version.String | Version.StringSemVer | Version.StringBuildId): Info;
     export function isSameVersion(version: IVersionInfo, compareVersion: IVersionInfo): boolean;
     const timezones: {
         nz: string;
