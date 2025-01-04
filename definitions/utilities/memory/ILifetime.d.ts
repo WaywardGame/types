@@ -16,5 +16,9 @@ export declare enum ExpectedLifetime {
     /**
      * should only exist while playing the game
      */
-    WhilePlaying = 1
+    WhilePlaying = 1,
+    /**
+     * The object is expected to last until the next garbage collection system
+     */
+    UntilNextGarbageCollection = 2
 }

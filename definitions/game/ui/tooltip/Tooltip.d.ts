@@ -43,9 +43,9 @@ export default class Tooltip extends Component {
     private forceShown;
     private maxWidth;
     private hasSetPosition;
-    initialized?: Promise<any>;
+    initialized?: Promise<boolean>;
     context?: InfoProviderContext;
-    constructor(source: Component | HTMLElement, initialize?: (tooltip: Tooltip) => any);
+    constructor(source: Component | HTMLElement, initialize?: (tooltip: Tooltip) => Promise<boolean>);
     protected onRemove(): void;
     setSecondary(): this;
     setForceShown(forceShown?: boolean): this;

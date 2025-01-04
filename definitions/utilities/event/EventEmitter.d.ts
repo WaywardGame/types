@@ -111,7 +111,10 @@ declare class EventEmitter<H, E> {
      * Closes an event emitter, which will prevent any further subscriptions from being made.
      */
     close(): void;
-    private throwIfClosed;
+    /**
+     * @returns True if closed
+     */
+    private throwErrorIfClosed;
     raw(): IEventEmitter<H, E>;
     emitSelf<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
