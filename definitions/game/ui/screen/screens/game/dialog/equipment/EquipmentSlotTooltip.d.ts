@@ -24,7 +24,7 @@ export declare enum EquipmentSlotTooltipClasses {
     Hints = "game-dialog-equipment-slot-tooltip-hints"
 }
 export default class EquipmentSlotTooltipHandler extends InspectionsTooltipHandler<EquipmentSlotInspectionsList, [slot: EquipType]> {
-    initializeTooltip(tooltip: Tooltip, slot: EquipType): Promise<void>;
+    initializeTooltip(tooltip: Tooltip, slot: EquipType): Promise<boolean>;
     protected initializeInspections(slot: EquipType): EquipmentSlotInspectionsList;
     protected initializeHints(hints: InspectionTooltipHints, slot: EquipType): void;
     private onSlotChanged;

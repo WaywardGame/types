@@ -74,6 +74,7 @@ export declare class GlobalMouseInfo extends EventEmitter.Host<IGlobalMouseInfoE
      * @param recalcTarget Whether to recalculate the target before this operation. Defaults to `false`
      */
     isTarget<W extends Component | Element | string | undefined>(what?: W, recalcTarget?: boolean): (W extends Component ? W : HTMLElement) | undefined;
+    clearTarget(target?: Element): void;
     private _updateTarget;
 }
 interface IInputInfoEvents {
