@@ -19,7 +19,7 @@ import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
 import { SkillType } from "@wayward/game/game/entity/IHuman";
-import { EquipType } from "@wayward/game/game/entity/IHuman";
+import type { EquipType } from "@wayward/game/game/entity/IHuman";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
@@ -210,7 +210,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     /**
      * Returns whether the doodad can be trampled
      */
-    canTrample(): boolean | undefined;
+    canTrample(): boolean;
     /**
      * Trampling growing things.
      */

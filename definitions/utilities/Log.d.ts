@@ -130,10 +130,34 @@ declare namespace Log {
      */
     function trace(...sources: string[]): (...args: any[]) => void;
     /**
+     * Warns about an occurrence of something, due to a specific caller, once per session.
+     * @param skip Number of callsites to skip. Automatically skips this function and its caller.
+     * If this is called from a function that is registered in `Errors.ts` as a skipped callsite, you might have to pass `-1`.
+     * @param id The ID of this warning. Can be `Log.simplify` strings.
+     */
+    function warnForCaller(skip: number, id: ArrayOr<string | SimplifyString>, ...message: any[]): void;
+    /**
      * Warn about something once per session based on unique warning ids.
      * This is like how node.js does warnings in console.
      */
-    function warnOncePerSession(warningId: string | string[], ...message: any[]): void;
+    function warnOncePerSession(warningId: ArrayOr<string | SimplifyString>, ...message: any[]): void;
+    interface SimplifyString extends String {
+        simplified: string;
+    }
+    namespace SimplifyString {
+        function is(value: unknown): value is SimplifyString;
+        function get(value: unknown): string;
+    }
+    function simplify(segments: TemplateStringsArray, ...interpolations: unknown[]): SimplifyString;
+    function simplify(mainLog: string, simplified: string): SimplifyString;
+    /**
+     * Returns a combination of the object's constructor and the result of calling `toString` on it.
+     *
+     * If the `toString` result is redundant or useless, it is omitted.
+     *
+     * The resulting string will be automatically simplified when reported to the error server.
+     */
+    function objectToString(object?: object): string;
 }
 declare class NullLog extends BaseLog {
     setup(): void;

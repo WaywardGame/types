@@ -37,7 +37,7 @@ declare namespace Macros {
     function getCurrent(): Macro;
     function getTouch(): Macro;
     function reset(): void;
-    function setHandled(): void;
+    function setHandled(input: IInput): void;
     function setIsolated(_isolated?: boolean): void;
     function didRequestIsolation(): boolean;
     function handleInput(input: IInput, api: IBindHandlerApi): Macro | undefined;

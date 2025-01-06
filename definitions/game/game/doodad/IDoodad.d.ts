@@ -528,6 +528,12 @@ export declare enum GrowingStage {
     Ripening = 5,
     Bare = 6
 }
+export declare namespace Growth {
+    function isAtLeast(growth: GrowingStage | undefined, stage: GrowingStage): boolean;
+    function isAtMost(growth: GrowingStage | undefined, stage: GrowingStage): boolean;
+    function isMoreThan(growth: GrowingStage | undefined, stage: GrowingStage): boolean;
+    function isLessThan(growth: GrowingStage | undefined, stage: GrowingStage): boolean;
+}
 export interface IHasBuilder {
     getBuilder(): Human | undefined;
 }

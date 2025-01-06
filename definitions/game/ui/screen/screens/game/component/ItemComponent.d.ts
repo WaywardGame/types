@@ -69,6 +69,11 @@ export declare enum ItemRefreshType {
 export interface IItemComponentEvents extends Events<Component>, IDraggableEvents, IItemSlotEvents, ISortableDraggableEvents {
     deregisterHighlights(): any;
     refresh(type: ItemRefreshType): any;
+    /**
+     * Called when the item (within the item component) is changing.
+     * Usually during a refresh.
+     */
+    itemChange(): any;
 }
 export interface IItemComponentStaticEvents {
     update(type: ItemRefreshType): any;

@@ -25,7 +25,8 @@ declare global {
         toggle(value: T, includes?: boolean): void;
         awaitAll(): Promise<Array<Awaited<T>>>;
         layerSort(sortInitializer: (sorter: ISorter<T>) => any): T[];
-        groupBy<GROUP>(grouper: (value: T, index: number, obj: T[]) => GROUP): Array<[GROUP, T[]]>;
+        groupBy<GROUP>(grouper: (value: T, index: number, array: T[]) => GROUP): Array<[GROUP, T[]]>;
+        groupBy<GROUP, R>(grouper: (value: T, index: number, array: T[]) => GROUP, mapper: (values: T[], group: GROUP) => R): Array<[GROUP, R]>;
         /**
          * Alias of `.toSet().toArray()`
          */

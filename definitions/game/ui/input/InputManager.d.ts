@@ -107,6 +107,7 @@ declare class InputManager extends EventEmitter.Host<IInputManagerEvents> {
     register(component: Component): this;
     deregister(): this;
     isRegistered(): boolean;
+    private didReset;
     reset(): void;
     /**
      * @param disabler Each `disableUntil` call should be given a unique `disabler`,

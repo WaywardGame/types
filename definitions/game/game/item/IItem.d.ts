@@ -1852,7 +1852,8 @@ export declare enum ItemTypeGroup {
     ExcludedFromRandom = -9856,
     Leaves = -9855,
     Flute = -9854,
-    All = -9853
+    InternalNoDropOnDoodadBreak = -9853,
+    All = -9852
 }
 export type StillContainerBaseItemType = ItemType.Waterskin | ItemType.GlassBottle | ItemType.ClayJug | ItemType.CoconutContainer;
 export interface IItemMovementResult {
