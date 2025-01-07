@@ -324,6 +324,11 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     private processRegeneration;
     /**
+     * Process the magical properties of the doodad when updating
+     * @param ticks the number of ticks to process
+     */
+    private processMagicalProperties;
+    /**
      * Melt doodads (or things on doodads over time)
      * @param description Doodad description
      * @param ticks Amount of melting to perform
