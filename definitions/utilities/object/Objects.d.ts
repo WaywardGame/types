@@ -51,10 +51,11 @@ declare namespace Objects {
     function stringify(object: any, pretty?: boolean, noDepth?: boolean, maxIterations?: number): string;
     namespace stringify {
         const SYMBOL_EXCLUDED_PROPERTIES: unique symbol;
-        export function excludeProperties(...properties: string[]): {
+        export function excludeProperties(...properties: Array<string | object>): {
             [SYMBOL_EXCLUDED_PROPERTIES]: string[];
         };
         export function isExcluded(object: any, property: string): boolean;
+        export function getExcluded(object: any): string[];
         export {};
     }
     function mutable<T>(object: T): Mutable<T>;

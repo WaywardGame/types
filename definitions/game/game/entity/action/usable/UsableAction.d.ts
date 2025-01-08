@@ -66,6 +66,8 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     private _disposed;
     get disposed(): boolean;
     constructor(requirements: REQUIREMENTS, definition: DEFINITION);
+    /** @deprecated For console use only */
+    protected get debug(): any;
     addUser(user: UsableActionRegistrar): this;
     removeUser(user: UsableActionRegistrar): this;
     is(id?: ActionId): boolean;

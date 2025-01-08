@@ -51,6 +51,7 @@ export declare namespace IUsableActionRequirement {
         validate(player: Player, value: TYPE): boolean;
     }
     type Always = true;
+    function isValid<T>(result: false | T | undefined, option: true | IUsableActionRequirement<T> | undefined): boolean;
 }
 export interface IUsableActionItemRequirement extends Omit<IUsableActionRequirement<Item>, "find"> {
     validateType?(player: Player, value: ItemType, description?: IItemDescription): boolean;

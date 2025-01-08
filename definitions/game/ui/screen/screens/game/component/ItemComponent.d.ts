@@ -106,6 +106,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     readonly draggable?: Draggable;
     private transient;
     protected constructor(handler: ItemComponentHandler, ...params: any[]);
+    /** @deprecated For console use only */
     protected get debug(): any;
     private tickEndHandlerReasons?;
     private registerTickEndHandler;
