@@ -104,6 +104,10 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     private _maxDur?;
     get zone(): CreatureZone;
     /**
+     * Gets the tier of the zone the tile is in
+     */
+    get zoneTier(): number;
+    /**
      * Creates a fake tile
      */
     static createFake(island: Island, x?: number, y?: number, z?: number): Tile;

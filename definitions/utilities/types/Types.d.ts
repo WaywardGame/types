@@ -19,6 +19,9 @@ interface PartialUnionizer<TYPES extends any[]> {
 }
 declare global {
     type PartialUnion<TYPES extends any[]> = TYPES[number] & PartialUnionizer<TYPES>[Extract<TYPES["length"], keyof PartialUnionizer<TYPES>>];
+    type MappedOmit<T, K extends keyof T> = {
+        [P in keyof T as P extends K ? never : P]: T[P];
+    };
 }
 declare const _default: {};
 export default _default;
