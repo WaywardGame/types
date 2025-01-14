@@ -237,6 +237,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     damage(damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
     /**
      * Gets the use benefits for all equipped items.
+     * Stat.Hunger and Stat.Thirst get converted to check for Stat.Metabolism as the type for MagicalPropertyType.StatPotency_EquipmentImproveConsumableStats
      * @param stat to check use benefits for.
      * @returns number that is the bonus amount the player recieves when consuming.
      */

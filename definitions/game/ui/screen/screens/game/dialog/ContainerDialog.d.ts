@@ -38,6 +38,7 @@ export default class ContainerDialog extends Dialog {
     protected onAppend1(): void;
     getName(): TranslationImpl | undefined;
     protected onTickEnd(): void;
+    protected onWeightUpdate(): void;
     protected onContainerBucketDeregister(): void;
     private closeIfContainedWithinNotOpen;
 }
