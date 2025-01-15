@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 export default class Performance2 {
+    static executeAndLogTime(id: string, action: () => void): void;
     private readonly fns;
     private _args;
     args(...args: any[]): this;
