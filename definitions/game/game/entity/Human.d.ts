@@ -299,6 +299,9 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      */
     giveRune(deity: ArrayOr<DeityReal>, chance: number, domain: Runekeeper.DomainData, context: IActionContext): boolean;
     private actuallyGiveRune;
+    /**
+     * All the milestones we need to check on game load.
+     */
     protected checkOnLoadMilestones(): void;
     setVehicle(item: Item | undefined, extinguishTorches?: boolean): boolean;
     getWeightStatus(): WeightStatus;

@@ -10,26 +10,15 @@
  */
 import type Component from "@wayward/game/ui/component/Component";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
-import type Bindable from "@wayward/game/ui/input/Bindable";
+import Bindable from "@wayward/game/ui/input/Bindable";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
-import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export type IDraggableInputEvent = (MouseEvent & {
-    [KEY in Exclude<keyof TouchEvent, keyof MouseEvent>]?: undefined;
-} & {
-    [KEY in Exclude<keyof IBindHandlerApi, keyof MouseEvent>]?: undefined;
-}) | (TouchEvent & {
-    [KEY in Exclude<keyof MouseEvent, keyof TouchEvent>]?: undefined;
-} & {
-    [KEY in Exclude<keyof IBindHandlerApi, keyof TouchEvent>]?: undefined;
-}) | (IBindHandlerApi & {
-    [KEY in Exclude<keyof MouseEvent, keyof IBindHandlerApi>]?: undefined;
-} & {
-    [KEY in Exclude<keyof TouchEvent, keyof IBindHandlerApi>]?: undefined;
-});
+import { type Events, type IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export type IDraggableInputEvent = (MouseEvent & Partial<Record<Exclude<keyof TouchEvent, keyof MouseEvent>, undefined>> & Partial<Record<Exclude<keyof IBindHandlerApi, keyof MouseEvent>, undefined>>) | (TouchEvent & Partial<Record<Exclude<keyof MouseEvent, keyof TouchEvent>, undefined>> & Partial<Record<Exclude<keyof IBindHandlerApi, keyof TouchEvent>, undefined>>) | (IBindHandlerApi & Partial<Record<Exclude<keyof MouseEvent, keyof IBindHandlerApi>, undefined>> & Partial<Record<Exclude<keyof TouchEvent, keyof IBindHandlerApi>, undefined>>);
 export interface IDraggableEvents extends Events<Component> {
     moveStart(mouse: Vector2): false | void;
     move(offset: Vector2, mouse: Vector2): any;
     moveEnd(offset: Vector2, mouse: Vector2, bindable?: Bindable): any;
+    moveCancel(): any;
     holdingNotMoving(time: number): any;
 }
 export type WithDraggableEvents<EVENTS_OF> = Events<EVENTS_OF> & IDraggableEvents;
@@ -61,8 +50,12 @@ export default class Draggable {
     setBindable(bindables: ArrayOr<Bindable>, priority?: number): this;
     stopDragging(): void;
     private removeBindHandlers;
+    /** @deprecated don't touch this */
     dragStart(event: IDraggableInputEvent): boolean;
+    /** @deprecated don't touch this */
+    cancelDrag(event?: IDraggableInputEvent): boolean;
     private drag;
+    /** @deprecated don't touch this */
     dragEnd(event?: IDraggableInputEvent): boolean;
     private onInputLoop;
     private getMousePosition;
