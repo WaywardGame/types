@@ -138,6 +138,8 @@ export default class ContainerBucketItemList extends Component implements ISorta
     protected onRemoveItem(manager: ItemManager, items: Item[], container?: IContainer, containerTile?: Tile): void;
     protected onAddItemDidNotSort(manager: ItemManager, container: IContainer): void;
     protected onTransformItem(item: Item, newType: ItemType, oldType: ItemType): void;
+    private filterItem;
+    protected onMagicalPropertyChange(item: Item): void;
     protected onStack(manager: ItemManager, container: IContainer, type: ItemType): void;
     protected onUnstack(manager: ItemManager, container: IContainer, type: ItemType): void;
     protected onTick(): void;

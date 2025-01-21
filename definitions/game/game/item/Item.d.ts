@@ -36,6 +36,7 @@ import type { IPlaceOnTileOptions } from "@wayward/game/game/item/IItemManager";
 import ItemMapManager from "@wayward/game/game/item/ItemMapManager";
 import type { MagicalSubPropertySubTypes } from "@wayward/game/game/magic/IMagicalProperty";
 import type { IHasMagic } from "@wayward/game/game/magic/IMagicalProperty";
+import type { IMagicalPropertyManagerEvents } from "@wayward/game/game/magic/MagicalPropertyManager";
 import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
@@ -50,7 +51,10 @@ import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISeria
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export interface IItemEvents extends IEntityMovableEvents, IQualityEvents {
+type ItemMagicEvents = {
+    [EVENT in keyof IMagicalPropertyManagerEvents as `magic${Capitalize<EVENT>}`]: IMagicalPropertyManagerEvents[EVENT];
+};
+export interface IItemEvents extends IEntityMovableEvents, IQualityEvents, ItemMagicEvents {
     toggleProtected(isProtected: boolean): any;
     containerChange(newContainer: IContainer, oldContainer?: IContainer): any;
     fireUpdate(stage?: FireStage): any;
@@ -245,6 +249,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Note: This is not called by clients joining a mp game.
      */
     verifyAndFixItem(): void;
+    protected pipeMagicalPropertyManagerEvents(magic: MagicalPropertyManager): void;
     verifyAndFixMagic(): void;
     /**
      * @param source A string representing the reason for this damage. Used for multiplayer debugging. Just put a unique string of characters here
@@ -499,3 +504,4 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;
 }
+export {};

@@ -147,7 +147,13 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     getOwner(): Human | undefined;
     damage(damageInfo: IDamageInfo): number | undefined;
     damage(damageInfo: IDamageInfo, creatureX?: number, creatureY?: number, creatureZ?: number): number | undefined;
-    offer(items: Item[]): Item | undefined;
+    /**
+     * Called when we offer a creature an item using the "Offer" action or when a creature walks over an item to see if it tames them.
+     * @param items Items to offer or check to see if they are accepted.
+     * @param human Human that offered it (if not set, it's on the ground and we check for crafterIdentifier).
+     * @returns The item it accepted.
+     */
+    offer(items: Item[], human?: Human): Item | undefined;
     processSpecialAbilities(enemy: Human | Creature | undefined, bypass?: boolean): boolean;
     increaseWaste(item: Item): void;
     onUnserialized(): void;

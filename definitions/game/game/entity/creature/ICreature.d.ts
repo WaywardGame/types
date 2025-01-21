@@ -202,6 +202,10 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      */
     runeChance?: RuneChance;
     waterAnimations?: boolean;
+    /**
+     * We set this for all creatures that are tamable through the the taming skill directly.
+     * - Some creatures are exempt from this and tamed only through items (Living Rock, Time Skitters).
+     */
     tamingDifficulty?: number;
     acceptedItems?: Array<ItemType | ItemTypeGroup>;
     lightSource?: boolean;
@@ -450,6 +454,7 @@ export declare const settableAiTypes: Set<AiType>;
 export declare const CREATURE_MAX_HEALTH_BONUS_TAME = 1.1;
 export declare const CREATURE_MAX_HEALTH_BONUS_OFFER = 1.05;
 export declare const CREATURE_MAX_HEALTH_BONUS_PET = 1.01;
+export declare const CREATURE_DEFAULT_TAME_DIFFICULTY_UNSET = 25;
 export interface ICreatureAttackOutcomeBase {
     enemy?: Human | Creature;
     willAttack: boolean;

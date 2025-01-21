@@ -49,6 +49,7 @@ type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
 type WeakHandler<H, F> = WeakRef<Handler<H, F>>;
 type UndefinedFromVoid<V> = V extends void ? undefined : V;
 export interface IEventEmitter<H = any, E = any> {
+    readonly closed?: true;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     /**
      * Emit an event only to the subscribers of this emitter instance.
@@ -105,7 +106,12 @@ declare class EventEmitter<H, E> {
     private subscriptions?;
     private cachedEmitSelfHandlers?;
     private cachedClassHandlers?;
-    private closed?;
+    /**
+     * Set to true when the event emitted is closed.
+     * This means no more events will be emitted and no more subscriptions can be made.
+     * Public so that the interface can expose a readonly version of this.
+     */
+    closed?: true;
     constructor(host: H);
     /**
      * Closes an event emitter, which will prevent any further subscriptions from being made.
