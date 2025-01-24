@@ -595,6 +595,7 @@ export interface IMoveToTileOptions {
      * Note: Everything done in afterMovement must be clientside only
      */
     afterMovement?: IMoveToTileAfterMovementOptions;
+    skipWeightChecks?: boolean;
 }
 export interface IMoveToTileBeforeMovementOptions {
     remove?: boolean;

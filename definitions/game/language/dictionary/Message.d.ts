@@ -850,6 +850,7 @@ declare enum Message {
     YouUnequip = 838,
     YouUsed = 839,
     YouViewTheItemsOn = 840,
-    YouWhileTraveling = 841
+    YouWhileTraveling = 841,
+    ActionRestAdjacentCreature = 842
 }
 export default Message;
