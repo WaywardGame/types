@@ -851,6 +851,7 @@ declare enum Message {
     YouUnequip = 839,
     YouUsed = 840,
     YouViewTheItemsOn = 841,
-    YouWhileTraveling = 842
+    YouWhileTraveling = 842,
+    Butcher = 843
 }
 export default Message;
