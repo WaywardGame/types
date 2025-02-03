@@ -268,7 +268,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      */
     liquidGather?: ILiquidGather;
     placeDownType?: DoodadType;
-    damageOnUse?: Record<number, any>;
+    damageOnUse?: OptionalDescriptions<ActionType, number>;
     /**
      * How good this item is at being an item of an `ItemTypeGroup`.
      *
