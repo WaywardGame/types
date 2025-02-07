@@ -24,6 +24,6 @@ declare const _default: {
     getMeltRate(island: Island, terrainType: TerrainType, tile: Tile): number;
     canMelt(island: Island, terrainType: TerrainType, tile: Tile): boolean;
     canCreate(island: Island, type: TileEventType, tile: Tile, tileType: TerrainType): boolean;
-    update(tileEvent: TileEvent): void;
+    update(tileEvent: TileEvent, ticks: number): void;
 };
 export default _default;

@@ -78,7 +78,7 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
     canCreate?(island: Island, type: TileEventType, tile: Tile, tileType: TerrainType): boolean;
     create?(tileEvent: TileEvent): void;
     remove?(tileEvent: TileEvent): void;
-    update?(tileEvent: TileEvent): void;
+    update?(tileEvent: TileEvent, ticks: number): void;
     /**
      * Gets the temperature produced by this tile event. Positive values are "heat", negative values are "cold".
      * Refer to the values of the `Temperature` enum to see the possible range.
