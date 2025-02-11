@@ -23,6 +23,7 @@ import type { IStat } from "@wayward/game/game/entity/IStats";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { StatChangeTimerFactory } from "@wayward/game/game/entity/StatFactory";
 import { StatChangeCurrentTimerStrategy } from "@wayward/game/game/entity/StatFactory";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { CreatureType, IDamageInfo } from "@wayward/game/game/entity/creature/ICreature";
@@ -361,7 +362,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     getRangedSkillBonus(skillUse?: SkillType): number;
     getQualityBonus(item: Item | undefined): number;
     setTamedCreatureEnemy(enemy: Human | Creature): void;
-    checkForGatherFire(): Translation | undefined;
+    checkForGatherFire(action: ActionType): Translation | undefined;
     /**
      * Check if there is a still in front of the player.
      * @param withWater Check if the still has water in it?
