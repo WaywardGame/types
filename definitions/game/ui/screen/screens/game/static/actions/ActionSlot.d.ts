@@ -81,6 +81,8 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
     protected onHoldingNotDragging(time: number): void;
     protected onPlay(): void;
     refresh(slotData?: IActionBarSlotData, reason?: ActionSlotUpdateReason): this;
+    private clearLastItem;
+    private setLastItem;
     private onItemTransformed;
     isUsable(using?: IUsableActionPossibleUsing | undefined, action?: UsableAction<IUsableActionRequirements, IUsableActionDefinition> | undefined): UsableActionUsability;
     clear(): void;

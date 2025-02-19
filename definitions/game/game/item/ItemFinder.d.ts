@@ -15,6 +15,7 @@ import type { IGetBestItemsOptions } from "@wayward/game/game/item/IItemManager"
 import type Item from "@wayward/game/game/item/Item";
 import type ItemManager from "@wayward/game/game/item/ItemManager";
 import Observer from "@wayward/game/utilities/Observer";
+import type { IEventSubscriberEvents } from "@wayward/utilities/event/EventEmitter";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IItemFinderOptions extends Partial<IGetBestItemsOptions> {
     /**
@@ -24,7 +25,7 @@ export interface IItemFinderOptions extends Partial<IGetBestItemsOptions> {
     fallback?: ItemFinder;
     postFilter?(item: Item): boolean;
 }
-export interface IItemFinderEvents {
+export interface IItemFinderEvents extends IEventSubscriberEvents {
     track(): any;
     dispose(): any;
 }
