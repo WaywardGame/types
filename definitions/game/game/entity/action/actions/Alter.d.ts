@@ -17,5 +17,5 @@ export interface IAlterCanUse extends IActionUsable {
     alterationTarget: Item;
     targetMagic: MagicalPropertyManager;
 }
-declare const _default: Action<[ActionArgument.ItemInventory, [arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IAlterCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IAlterCanUse, [Item, (Item | undefined)?]>;
 export default _default;

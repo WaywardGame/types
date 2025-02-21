@@ -231,7 +231,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Returns the maximum decay of an item, or undefined if the item does not have the decayMax or storeDecay property.
      * @returns A number or undefined.
      */
-    canDecay(): 1 | undefined;
+    canDecay(): number | undefined;
     getDecayRate(isClientSide: boolean): number;
     getPreservationDecayMultiplier(): number;
     getTemperatureDecayMultiplier(isClientSide: boolean): number;
