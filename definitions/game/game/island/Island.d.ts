@@ -330,4 +330,9 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * Returns the type of liquid that can be gathered from the tile
      */
     getLiquidGatherType(terrainType: TerrainType, terrainDescription: ITerrainDescription): keyof ILiquidGather | undefined;
+    /**
+     * Calculate the maximum travel time (derived currently from the maximum growth time of doodads - we don't need to simulate past that value).
+     * @returns number equal to the maximum travel time.
+     */
+    getMaximumTravelTime(): number;
 }
