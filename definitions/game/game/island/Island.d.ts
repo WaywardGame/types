@@ -99,6 +99,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     loadCount: number;
     name?: string;
     position: IVector2;
+    lastPlayerGameTimeTicks?: number;
     readonly mapSize: number;
     readonly treasureMaps: DrawnMap[];
     readonly wellData: SaferNumberIndexedObject<IWell>;
@@ -280,6 +281,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * In manual turn mode, it will tick the humans stat timers & the game
      */
     passTurn(human: Human, turnType?: TurnTypeFlag, dueToAction?: boolean): void;
+    private travelTimeFastForward;
     /**
      * Fast forwards an island by running lots of ticks.
      * Defaults to IslandFastForward tick flag with no playing humans.

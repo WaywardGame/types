@@ -67,13 +67,13 @@ export declare class GlobalMouseInfo extends EventEmitter.Host<IGlobalMouseInfoE
      * @param what A component, element, or selector.
      * @param recalcTarget Whether to recalculate the target before this operation. Defaults to `false`
      */
-    isWithin<W extends Component | Element | string | undefined>(what?: W, recalcTarget?: boolean): (W extends Component ? W : HTMLElement) | undefined;
+    isWithin<W extends Component | Element | string | undefined>(what?: W, recalcTarget?: boolean): W extends undefined ? undefined : W extends Component ? W : W extends Element | string ? HTMLElement | undefined : never;
     /**
      * Returns whether the mouse is currently within the given component, element, or selector.
      * @param what A component, element, or selector.
      * @param recalcTarget Whether to recalculate the target before this operation. Defaults to `false`
      */
-    isTarget<W extends Component | Element | string | undefined>(what?: W, recalcTarget?: boolean): (W extends Component ? W : HTMLElement) | undefined;
+    isTarget<W extends Component | Element | string | undefined>(what?: W, recalcTarget?: boolean): W extends undefined ? undefined : W extends Component ? W : W extends Element | string ? HTMLElement | undefined : never;
     clearTarget(target?: Element): void;
     private _updateTarget;
 }
