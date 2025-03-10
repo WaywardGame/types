@@ -96,10 +96,10 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     biomeOptions?: unknown;
     biomeType: BiomeTypes;
     contaminatedWater: IWaterContamination[];
+    lastPlayerGameTimeTicks?: number;
     loadCount: number;
     name?: string;
     position: IVector2;
-    lastPlayerGameTimeTicks?: number;
     readonly mapSize: number;
     readonly treasureMaps: DrawnMap[];
     readonly wellData: SaferNumberIndexedObject<IWell>;
