@@ -96,7 +96,6 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
     protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     addToTile(tile: Tile): void;
     removeFromTile(updateTile: boolean): void;
-    burn(fire: TileEvent, ticks: number): void;
     /**
      * Gets the builder/creator of this event, or `undefined` if the tile event is creatorless.
      */

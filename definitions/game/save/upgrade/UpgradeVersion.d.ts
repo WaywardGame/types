@@ -24,6 +24,8 @@ import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type { UpgradesArrayCompressedPusher } from "@wayward/game/save/upgrade/UpgradesArray";
 import type Version from "@wayward/utilities/Version";
 import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type { ITileData } from "@wayward/game/game/tile/ITerrain";
 export interface IUpgradeVersion {
     name?: string;
     buildId?: IBuildId;
@@ -42,6 +44,8 @@ export interface IUpgradeVersion {
     upgradeCorpse?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, corpse: Corpse): any;
     upgradeAi?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, ai: AiManager): any;
     upgradeCreatureZone?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, zone: CreatureZone): any;
+    upgradeTile?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, tile: Tile): any;
+    upgradeTileData?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, tile: Tile, tileData: ITileData[]): any;
 }
 export type UpgradeType = Exclude<keyof IUpgradeVersion, "applies">;
 export type UpgradeParameters<TYPE extends UpgradeType> = Required<IUpgradeVersion>[TYPE] extends (_v: any, _u: any, ...params: infer PARAMS) => any ? PARAMS : never;
