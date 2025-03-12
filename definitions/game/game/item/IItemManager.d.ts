@@ -133,7 +133,6 @@ export interface IMoveItemOptions {
     moveToTileOptions?: IMoveToTileOptions | true;
     dryRun?: true;
     index?: number;
-    updateView?: true;
     isTrading?: boolean;
     revertFromDoodad?: boolean;
     skipDrop?: true;
