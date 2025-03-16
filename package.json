@@ -1,7 +1,7 @@
 {
 	"name": "@wayward/types",
 	"description": "TypeScript declarations for Wayward, used for modding.",
-	"version": "2.14.4-beta.dev.20250313.1",
+	"version": "2.14.4-beta.dev.20250316.1",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -11,7 +11,7 @@
 		"clean": "npx rimraf ./definitions ./*.tsbuildinfo"
 	},
 	"dependencies": {
-		"@types/node": "22.7.5",
+		"@types/node": "22.13.10",
 		"@wayward/goodstream": "0.10.0"
 	},
 	"devDependencies": {
