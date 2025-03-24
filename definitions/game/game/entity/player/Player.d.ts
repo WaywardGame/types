@@ -78,7 +78,10 @@ export default class Player extends Human<undefined, number, ReferenceType.Playe
     addItemMilestones(item: Item, context?: IActionContext): void;
     checkSkillMilestones(): void;
     private getUsableAction;
-    protected onGetMovementIntent(): IMovementIntent | undefined;
+    /**
+     * Note: This is usually only ran on the server
+     */
+    getMovementIntent(): IMovementIntent;
     protected onCanMove(direction: Direction.Cardinal): false | undefined;
     protected onGetSkillGainMultiplier(skillType: SkillType): number | undefined;
     protected onDamage(damageInfo: IDamageInfo): void;
