@@ -345,10 +345,19 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      * Called when a creature is spawned
      */
     onSpawn?: (creature: Creature) => void;
+    /**
+     * Set to PettingType.NotAllowed it they don't accept petting, or PettingType.Attack if they attack when petted
+     */
+    acceptsPets?: PettingType;
 }
 export interface ICreatureLoot {
     item: ItemType;
     chance?: number;
+}
+export declare enum PettingType {
+    Allowed = 0,
+    NotAllowed = 1,
+    Attack = 2
 }
 export interface IWaste {
     event: TileEventType;

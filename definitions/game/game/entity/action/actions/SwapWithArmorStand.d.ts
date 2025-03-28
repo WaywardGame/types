@@ -15,5 +15,5 @@ import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 export interface ISwapEquipment extends IActionUsable {
     doodad: Doodad;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.Doodad]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, boolean, ISwapEquipment, [(Doodad | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.DoodadNearby]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, boolean, ISwapEquipment, [(Doodad | undefined)?]>;
 export default _default;

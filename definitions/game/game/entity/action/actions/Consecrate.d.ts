@@ -31,7 +31,7 @@ export type ConsecrateOutcomeRuneQualityCounts = PartialRecord<Quality, {
     minProgress: number;
     maxProgress: number;
 }>;
-declare const _default: Action<[ActionArgument.Doodad], import("../../player/Player").default, void, IConsecrateUsable, [Doodad]> & {
+declare const _default: Action<[ActionArgument.DoodadNearby], import("../../player/Player").default, void, IConsecrateUsable, [Doodad]> & {
     getRunes(container?: IContainer): Item[];
     groupRunes(runes: Item[]): ConsecrateRuneGroup[];
     getReturnDeity(runeGroups: ConsecrateRuneGroup[]): DeityReal | undefined;
