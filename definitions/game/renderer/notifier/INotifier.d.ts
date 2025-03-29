@@ -60,7 +60,10 @@ export declare enum MarkerType {
     AlertedHostile = 1,
     AlertedScared = 2,
     Text = 3,
-    Item = 4
+    Item = 4,
+    AlertedHostileHighDanger = 5,
+    AlertedHostileVeryHighDanger = 6,
+    AlertedHostileExtremeHighDanger = 7
 }
 export interface IBaseMarkerDescription {
     guid: string;
