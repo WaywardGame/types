@@ -122,10 +122,15 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      * This is called clientside the first time the renderer seens the entity
      */
     onFirstRender(renderer: Renderer): void;
-    getCurrentMarkerType(): MarkerType | undefined;
+    getCurrentMarker(): Readonly<MarkerDescription> | undefined;
     setMarkerIconHidden(hidden: boolean): void;
+    /**
+     * Adds a marker that shows up over the entity
+     * @param description The marker description
+     */
     addMarker(description: MappedOmit<MarkerDescription, "guid">): void;
     removeMarker(...types: MarkerType[]): void;
+    getDynamicMarker(type: string): MarkerType | undefined;
     getProducedTemperature(): number | undefined;
     setName(renamed: string | ISerializedTranslation | undefined): void;
     canInspect(human: Human): boolean;

@@ -34,6 +34,7 @@ import type { Reference, ReferenceType } from "@wayward/game/game/reference/IRef
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import Translation, { Article } from "@wayward/game/language/Translation";
+import { MarkerType } from "@wayward/game/renderer/notifier/INotifier";
 import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
@@ -215,10 +216,12 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      */
     private breakItems;
     private processAiChanges;
+    private addAlertedMarker;
     /**
      * @returns Whether the creature has lost interest
      */
     private processAiInterest;
+    getDynamicMarker(type: string): MarkerType | undefined;
     getWanderChance(defaultChance: number): number | undefined;
     getWanderIdleChance(defaultChance: number): number | undefined;
     getWanderNewDirectionChance(defaultChance: number): number | undefined;

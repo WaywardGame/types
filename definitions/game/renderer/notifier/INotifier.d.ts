@@ -10,6 +10,7 @@
  */
 import type { SfxType } from "@wayward/game/audio/IAudio";
 import type { ItemType } from "@wayward/game/game/item/IItem";
+import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import type { IRGB } from "@wayward/utilities/Color";
@@ -63,7 +64,8 @@ export declare enum MarkerType {
     Item = 4,
     AlertedHostileHighDanger = 5,
     AlertedHostileVeryHighDanger = 6,
-    AlertedHostileExtremeHighDanger = 7
+    AlertedHostileExtremeDanger = 7,
+    Dynamic = 8
 }
 export interface IBaseMarkerDescription {
     guid: string;
@@ -75,6 +77,14 @@ export interface IBaseMarkerDescription {
  */
 export interface ISpriteMarkerDescription extends IBaseMarkerDescription {
     type: MarkerType.Tamed | MarkerType.AlertedHostile | MarkerType.AlertedScared;
+}
+/**
+ * Dynamic markers that change based on some callback
+ */
+export interface IDynamicSpriteMarkerDescription extends IBaseMarkerDescription {
+    type: MarkerType.Dynamic;
+    dynamicType: "AlertedHostile";
+    entityReference: Reference<ReferenceType.Player | ReferenceType.NPC | ReferenceType.Creature>;
 }
 /**
  * Item icon
@@ -95,6 +105,6 @@ export interface ITextMarkerDescription extends IBaseMarkerDescription {
 /**
  * This value may be saved into Entity._persistentMarker!
  */
-export type MarkerDescription = ISpriteMarkerDescription | ITextMarkerDescription | IItemMarkerDescription;
+export type MarkerDescription = ISpriteMarkerDescription | ITextMarkerDescription | IItemMarkerDescription | IDynamicSpriteMarkerDescription;
 export declare const itemDamageNotifierThreshold = 3;
 export declare const doodadDamageNotifierThreshold = 5;
