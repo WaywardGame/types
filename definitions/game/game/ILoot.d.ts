@@ -13,4 +13,5 @@ export interface ILootItem {
     type: ItemType;
     chance?: number;
     chanceOutOf?: number;
+    difficulty?: number;
 }

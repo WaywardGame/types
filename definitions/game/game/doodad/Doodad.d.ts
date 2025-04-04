@@ -253,7 +253,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     setOffTrap(human?: Human, withMessage?: boolean, damage?: boolean): void;
     getGrowthParticles(): IRGB | undefined;
     /**
-     * Increased the fertility (spread) of a plant/growing doodad.
+     * Increased the fertility (spread) of a plant/growing doodad when its ripening.
      * @param bypassChange Set to true if you just want to check if fertility can be increased.
      * @returns True or false depending on if it increased in fertility or not.
      */

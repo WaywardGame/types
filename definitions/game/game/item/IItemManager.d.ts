@@ -12,6 +12,7 @@ import type { Quality } from "@wayward/game/game/IObject";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type DoodadManager from "@wayward/game/game/doodad/DoodadManager";
 import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
+import type { IEntityRemoveOptions } from "@wayward/game/game/entity/EntityManager";
 import type { ActionType, IActionNotUsable } from "@wayward/game/game/entity/action/IAction";
 import type ActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type { DropAllowProtected } from "@wayward/game/game/entity/action/actions/Drop";
@@ -28,7 +29,7 @@ import type { Direction } from "@wayward/game/utilities/math/Direction";
 /**
  * Options when removing an item
  */
-export interface IItemRemoveOptions {
+export interface IItemRemoveOptions extends IEntityRemoveOptions {
     /**
      * Defaults to false
      */

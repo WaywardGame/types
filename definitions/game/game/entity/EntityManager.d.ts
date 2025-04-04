@@ -24,7 +24,10 @@ export interface IEntityCanCreateOptions {
     allowOverDooadsAndTileEvents?: boolean;
     blockOnScarecrow?: boolean;
 }
-export default abstract class EntityManager<T extends Entity, IRemoveOptions = undefined> extends ObjectManager<T, IEntityManagerEvents<T>> implements IEntityManager<T> {
+export interface IEntityRemoveOptions {
+    keepMarker?: boolean;
+}
+export default abstract class EntityManager<T extends Entity, RemoveOptions extends IEntityRemoveOptions = IEntityRemoveOptions> extends ObjectManager<T, IEntityManagerEvents<T>> implements IEntityManager<T> {
     /**
      * Indicates if objects should be re-registered to the memory leak detector after loading
      */
@@ -34,10 +37,14 @@ export default abstract class EntityManager<T extends Entity, IRemoveOptions = u
      * @param entity Entity to remove
      * @returns Return true if this method handled tile updates
      */
-    protected abstract onRemove(entity: T, options?: IRemoveOptions): boolean;
+    protected abstract onRemove(entity: T, options?: RemoveOptions & IEntityRemoveOptions): boolean;
     protected abstract loadEntity?(entity: T): void;
     load(): void;
-    remove(entity: T, options?: IRemoveOptions): void;
+    /**
+     * Restores a previous removed entity
+     */
+    restore(entity: T): void;
+    remove(entity: T, options?: RemoveOptions): void;
     updateFov(humanBounds: IHumanBound[]): void;
     /**
      * Checks if the target position is a good spot for a new entity
