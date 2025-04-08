@@ -13,6 +13,8 @@ import type Human from "@wayward/game/game/entity/Human";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import GameplayModifier, { GameplayModifierInstance } from "@wayward/game/game/options/modifiers/GameplayModifier";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
+import Translation from "@wayward/game/language/Translation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export declare enum MilestoneModifierGroup {
     Creatures = 0,
@@ -45,6 +47,8 @@ export default abstract class MilestoneModifier extends GameplayModifier<Milesto
      */
     isGlobal(): boolean;
     constructor(id?: Milestone);
+    protected getTranslationArgs(): TranslationArg[] | undefined;
+    translateDescription(): Translation;
     instantiate(id: Milestone, human?: Human): MilestoneModifierInstance | undefined;
     abstract getOptions(): IGameOptionsPartial;
     initialize(instance: MilestoneModifierInstance): MilestoneModifierInstance;

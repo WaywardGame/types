@@ -12,6 +12,9 @@ import type { RecursivePartial } from "@wayward/game/utilities/types/Recursive";
 declare function Merge<T>(...objs: Array<RecursivePartial<T>>): T;
 declare function Merge<T>(...objs: T[]): T;
 declare function Merge<O extends any[]>(...objs: O): O[number];
+declare namespace Merge {
+    function value<T>(value?: T | Mergeable<T>): T | undefined;
+}
 export declare class Mergeable<T> {
     readonly merge: (value: T | undefined) => T;
     constructor(merge: (value: T | undefined) => T);
