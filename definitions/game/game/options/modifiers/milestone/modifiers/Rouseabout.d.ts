@@ -10,7 +10,11 @@
  */
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import MilestoneModifier, { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
 export default class Rouseabout extends MilestoneModifier {
+    private readonly additionalItemsNonRespawn;
+    private readonly chance;
     getOptions(): IGameOptionsPartial;
+    getTranslationArgs(): TranslationArg[] | undefined;
     getGroup(): MilestoneModifierGroup;
 }

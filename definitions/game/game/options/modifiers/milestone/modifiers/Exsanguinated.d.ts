@@ -22,9 +22,11 @@ import type Island from "@wayward/game/game/island/Island";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { IGameOptionsPartial, IGameOptionsStatus } from "@wayward/game/game/options/IGameOptions";
 import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
 import type { IInjectionApi } from "@wayward/utilities/class/Inject";
 export default class Exsanguinated extends MilestoneModifier {
     getOptions(): IGameOptionsPartial;
+    getTranslationArgs(): TranslationArg[] | undefined;
     getGroup(): MilestoneModifierGroup;
     instantiate(id: Milestone, player?: Player): ExsanguinatedMilestoneModifierInstance | undefined;
 }

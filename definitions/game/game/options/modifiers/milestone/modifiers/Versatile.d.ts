@@ -19,8 +19,10 @@ import type ItemManager from "@wayward/game/game/item/ItemManager";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
 export default class Versatile extends MilestoneModifier {
     getOptions(): IGameOptionsPartial;
+    getTranslationArgs(): TranslationArg[] | undefined;
     getGroup(): MilestoneModifierGroup;
     instantiate(id: Milestone, player?: Player): VersatileMilestoneModifierInstance | undefined;
 }
