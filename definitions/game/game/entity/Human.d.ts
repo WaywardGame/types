@@ -374,8 +374,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     calculateEquipmentStats(): void;
     private recalculateInsulation;
     private getEquipmentInsulation;
-    discoverRecipes(recipes: Array<[recipeType: ItemType, crafted: ICrafted]>, discoveredClientSide?: boolean): void;
-    discoverRecipe(recipeType: ItemType, crafted?: ICrafted, discoveredClientSide?: boolean, emit?: boolean): void;
+    discoverRecipe(itemType: ItemType, crafted?: ICrafted): void;
     incrementIslandTickCount(): void;
     protected onPostMove(lastTile: Tile, tile: Tile, flags?: MoveFlag, skipExtinguishTorches?: boolean): void;
     passTurn(turnType?: TurnTypeFlag): void;

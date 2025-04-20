@@ -148,7 +148,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
      * @param checkId When true, this packet will not be sent to the server/client if the same packet is already being processed. When false, this packet will not be sent if any packet is already being processed. Useful when dealing with methods that could end up sending multiple packets while a packet is already being processed.
      * @param wait When true, the client will keep track of what packets it sent to the server. If the client calls this method again before the server responds, it will not send a duplicate packet. It will wait for the server to send the packet back before allowing another one to be sent. When true, it will keep track of duplicate packets based on the packet type. When it's a number, it will keep track of duplicate packets based on the packet type + the number.
      */
-    syncPacket<T = any>(packet: IPacket, clientSide?: NullaryFunction<T>, checkId?: boolean, wait?: number | true): PromiseOr<T | undefined>;
+    syncPacket<T = any>(packet: IPacket, clientSide: NullaryFunction<T>, checkId: boolean, wait: boolean | number): PromiseOr<T | undefined>;
     markCurrentProcessingPacket(packetId: number, processing: boolean): void;
     resolveSyncPacketWaiting(packet: IPacket, wait: number): void;
     resolveSyncPacketsWaiting(waitId?: string, value?: unknown): void;

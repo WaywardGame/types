@@ -111,7 +111,7 @@ export default class Player extends Human<undefined, number, ReferenceType.Playe
         skipDeferral: boolean;
     }>): void;
     private updateTablesInternal;
-    shouldDiscoverRecipe(recipe: IRecipe, recipeItemType: ItemType, checker: ItemRecipeRequirementChecker): boolean;
+    shouldDiscoverRecipe(recipe: IRecipe, checker: ItemRecipeRequirementChecker): boolean;
     private isRecipeDiscovered;
     private updateCraftTable;
     updateDismantleTable(adjacentContainers?: IContainer[], force?: boolean): void;
