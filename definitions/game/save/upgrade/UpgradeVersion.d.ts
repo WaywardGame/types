@@ -26,9 +26,13 @@ import type Version from "@wayward/utilities/Version";
 import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type { ITileData } from "@wayward/game/game/tile/ITerrain";
+import type Human from "@wayward/game/game/entity/Human";
+import type Entity from "@wayward/game/game/entity/Entity";
 export interface IUpgradeVersion {
     name?: string;
     buildId?: IBuildId;
+    defaultData?: any;
+    data?: any;
     applies(buildVersion: Version.Info): boolean;
     upgradeGlobal?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher): any;
     upgradeGame?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, game: Game): any;
@@ -36,6 +40,8 @@ export interface IUpgradeVersion {
     upgradePlayer?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, player: Player, isLocalPlayer: boolean): any;
     upgradeGameOptions?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, options: IGameOptions, defaultOptions: IGameOptions): any;
     upgradeMessages?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, messages: IMessageManager): any;
+    upgradeEntity?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, entity: Entity): any;
+    upgradeHuman?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, human: Human): any;
     upgradeCreature?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, creature: Creature): any;
     upgradeItem?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, item: Item): any;
     upgradeDoodad?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, doodad: Doodad): any;
@@ -50,7 +56,12 @@ export interface IUpgradeVersion {
 export type UpgradeType = Exclude<keyof IUpgradeVersion, "applies">;
 export type UpgradeParameters<TYPE extends UpgradeType> = Required<IUpgradeVersion>[TYPE] extends (_v: any, _u: any, ...params: infer PARAMS) => any ? PARAMS : never;
 export declare function oldify<CURRENT, OLD>(current: CURRENT): Merge<CURRENT, Partial<OLD>>;
-export interface IUpgradeVersionDefinition extends Omit<IUpgradeVersion, "applies" | "name" | "buildId"> {
+export interface IUpgradeVersionDefinition<T = any> extends Omit<IUpgradeVersion, "applies" | "name" | "buildId" | "defaultData" | "data"> {
     applies?: IUpgradeVersion["applies"];
+    data?: T;
 }
-export default function (definition: IUpgradeVersionDefinition): IUpgradeVersionDefinition;
+export interface IUpgradeVersionDefinitionWithData<T = any> extends IUpgradeVersionDefinition<T> {
+    data: T;
+}
+export default function <T>(definition: IUpgradeVersionDefinitionWithData<T>): IUpgradeVersionDefinitionWithData<T>;
+export default function <T>(definition: IUpgradeVersionDefinition<T>): IUpgradeVersionDefinition<T>;

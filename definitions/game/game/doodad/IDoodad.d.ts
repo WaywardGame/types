@@ -242,6 +242,10 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      * The amount of turns it takes to purify the water.
      */
     waterPurificationTurns?: number;
+    /**
+     * Radius around scarecrow that will attempt to scare away creatures based on `chanceOfScarecrowScare` property in `creatureDescriptions`.
+     */
+    scareRadius?: number;
 }
 export interface IItemStackRegion {
     xMin: number;
@@ -540,5 +544,25 @@ export interface IHasBuilder {
 export interface IHasWater {
     top?: true;
     bottom?: true;
+}
+export interface IDoodadGetNameOptions {
+    count: number;
+    showCount: boolean;
+    /**
+     * Defaults to true
+     */
+    showQuality: boolean;
+    /**
+     * Defaults to true
+     */
+    showRenamedQuotes: boolean;
+    /**
+     * Defaults to true
+     */
+    showMagicalType: boolean;
+    /**
+     * Ignore discovery system when computing the name
+     */
+    ignoreDiscovery: boolean;
 }
 export {};

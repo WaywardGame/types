@@ -49,6 +49,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     historicalActions?: PartialRecord<ActionType, number>;
     referenceId?: number;
     renamed?: string | ISerializedTranslation;
+    aestheticRandom: number;
     x: number;
     y: number;
     z: WorldZ;

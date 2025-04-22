@@ -11,7 +11,7 @@
 import { TileUpdateType } from "@wayward/game/game/IGame";
 import type { IHasQuality, IObject, IQualityEvents } from "@wayward/game/game/IObject";
 import { Quality } from "@wayward/game/game/IObject";
-import type { DisplayableDoodadType, DoodadTypeExtra, DoorOrientation, IDoodadDescription, IDoodadOptions, IHasBuilder, IHasWater } from "@wayward/game/game/doodad/IDoodad";
+import type { DisplayableDoodadType, DoodadTypeExtra, DoorOrientation, IDoodadDescription, IDoodadGetNameOptions, IDoodadOptions, IHasBuilder, IHasWater } from "@wayward/game/game/doodad/IDoodad";
 import { DoodadTag, DoodadType, DoodadTypeGroup, GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import type { IEntityMovableEvents } from "@wayward/game/game/entity/EntityMovable";
 import EntityMovable from "@wayward/game/game/entity/EntityMovable";
@@ -170,7 +170,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * - `doodad.getName(Article.None)` // "stone furnace"
      * - `doodad.getName(Article.None, 3)` // "stone furnaces"
      */
-    getName(article?: Article, count?: number): TranslationImpl;
+    getName(article?: Article, options?: Partial<IDoodadGetNameOptions>): TranslationImpl;
     protected getDescription(): IDoodadDescription | undefined;
     protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     changeType(doodadType: DoodadType): void;
@@ -375,6 +375,11 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * @returns number of score (or 0 if no civilization score is set).
      */
     getCivilizationScore(excludeMagic?: boolean): number;
+    /**
+     * Gets the scarecrow radius based on quality.
+     * This also exists on items.
+     */
+    getScareRadius(): number;
     /**
      * Gets a set of skill types and values from doodads that have "containedItemGroupProvidesSkill" set for items that provide adjacent skill bonuses.
      * @returns Map of skill type and number (skill value).

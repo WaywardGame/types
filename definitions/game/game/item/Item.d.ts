@@ -451,11 +451,16 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     willBreakOnDamage(actionType?: ActionType): boolean;
     onUnserialized(): void;
     /**
-     * Gets civilization score based on item's quality and type (if it can be build/set down) but without the magical property values.
+     * Gets civilization score based on item's quality and type (if it can be build/set down) but without the magical property values. This also exists on doodads.
      * @param actionType Either Build or SetDown as they are the only types that can use civilization score.
      * @returns number of score (or 0 if no civilization score is set).
      */
     getCivilizationScore(actionType: ActionType.Build | ActionType.SetDown): number;
+    /**
+     * Gets the scarecrow radius based on doodad's definition and quality.
+     * This also exists on doodads.
+     */
+    getScareRadius(): number;
     getVehicle(): IItemVehicle | undefined;
     addCreature(creature: Creature, remainTamed?: boolean): void;
     /**

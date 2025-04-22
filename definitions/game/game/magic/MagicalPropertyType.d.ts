@@ -33,7 +33,8 @@ declare enum MagicalPropertyType {
     Skill = 6,
     /** Improves invoking and sacrifice chances */
     Fanaticism_Deity = 7,
-    Unused = 8,// TODO: Remove this on 1.0 or if you put a different property in this position update Milestones.ts
+    /** Increased the scare radius of the scarecrow */
+    Terror_ScareRadius = 8,
     /** Increases the range in which a weapon can shoot a projectile or fishing pole/net can be thrown */
     Range = 9,
     /** Increases the stats normally gained when consuming/using an item */

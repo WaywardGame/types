@@ -189,6 +189,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * Luck is a multiplier applied to some random chance calculations.
      */
     get luck(): number;
+    protected get debug(): any;
     updateDirection(tile: Tile | Direction.Cardinal, updateVehicleDirection?: boolean): Direction.Cardinal;
     protected onMovementCompleted(movingData: IMovingData): void;
     moveTowardsIsland(direction: Direction.Cardinal | Direction.None, options?: Partial<IMoveToIslandOptions>): Promise<void>;

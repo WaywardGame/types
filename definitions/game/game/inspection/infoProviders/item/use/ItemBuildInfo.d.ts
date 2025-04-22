@@ -18,6 +18,7 @@ import { TempType } from "@wayward/game/game/temperature/ITemperature";
 declare const _default: UseInfo<{
     doodadContainer: import("../../../../doodad/IDoodad").IDoodadDescription | undefined;
     civilizationScore: number | undefined;
+    scareRadius: number;
     entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
     type: import("../../../../item/IItem").ItemType;
@@ -38,6 +39,8 @@ declare const _default: UseInfo<{
     getPreservationChance: () => LabelledValue | undefined;
 } & {
     getCivilizationScore: () => LabelledValue | undefined;
+} & {
+    scareRadius: () => LabelledValue | undefined;
 } & {
     getMagicalBuildTypes: () => Set<MagicalPropertyType>;
 } & {
