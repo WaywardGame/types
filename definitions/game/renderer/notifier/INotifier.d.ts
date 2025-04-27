@@ -15,6 +15,7 @@ import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import type { IRGB } from "@wayward/utilities/Color";
 export interface INotificationLocation extends IVector4 {
+    readonly isValid?: boolean;
     getMovementPoint?(timeStamp: number): IVector2;
     getMovementProgress?(timeStamp: number): number;
     queueSoundEffect?(soundEffect: SfxType): void;
