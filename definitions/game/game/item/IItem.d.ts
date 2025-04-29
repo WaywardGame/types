@@ -390,6 +390,17 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * When set to true, the item will provide no consumption bonuses when used based on its quality
      */
     qualityProvidesNoConsumeBonus?: boolean;
+    /**
+     * When set to true, the item will always be generated with a single magical property from a weighted set of properties.
+     */
+    alwaysGetMagicalProperty?: boolean;
+    /**
+     * If set to true, this item will be able to have all magical properties regardless of the other properties it has.
+     */
+    canHaveAllMagicalProperties?: boolean;
+    canAlter?: false;
+    canTransmogrify?: false;
+    canUpgrade?: false;
 }
 export declare namespace IItemDescription {
     function actionDisabled(description: IItemDescription | undefined, action: ActionType): boolean;
@@ -1685,19 +1696,20 @@ export declare enum ItemType {
     StrippedLeather = 815,
     ChickenEggshells = 816,
     PenguinEggshells = 817,
-    Last = 818
+    MagicalMote = 818,
+    Last = 819
 }
 export declare enum ItemTypeExtra {
-    None = 819,
-    TatteredMap_RolledUp = 820,
-    TatteredMap_Completed = 821,
-    WoodenBookcase_25 = 822,
-    WoodenBookcase_50 = 823,
-    WoodenBookcase_75 = 824,
-    WoodenBookcase_100 = 825,
-    RuneOfEvilSplinters = 826,
-    RuneOfGoodCharred = 827,
-    TallySticks = 828
+    None = 820,
+    TatteredMap_RolledUp = 821,
+    TatteredMap_Completed = 822,
+    WoodenBookcase_25 = 823,
+    WoodenBookcase_50 = 824,
+    WoodenBookcase_75 = 825,
+    WoodenBookcase_100 = 826,
+    RuneOfEvilSplinters = 827,
+    RuneOfGoodCharred = 828,
+    TallySticks = 829
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {

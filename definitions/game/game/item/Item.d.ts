@@ -34,6 +34,7 @@ import { ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { BookType, ContainerSort, ItemDamageResult, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "@wayward/game/game/item/IItem";
 import type { IPlaceOnTileOptions } from "@wayward/game/game/item/IItemManager";
 import ItemMapManager from "@wayward/game/game/item/ItemMapManager";
+import type { MagicalLootType } from "@wayward/game/game/item/MagicalLoot";
 import type { MagicalSubPropertySubTypes } from "@wayward/game/game/magic/IMagicalProperty";
 import type { IHasMagic } from "@wayward/game/game/magic/IMagicalProperty";
 import type { IMagicalPropertyManagerEvents } from "@wayward/game/game/magic/MagicalPropertyManager";
@@ -133,7 +134,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     offsetY?: number;
     [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
     private _movementOptions?;
-    constructor(itemType?: ItemType | undefined, islandId?: IslandId, quality?: Quality, human?: Human);
+    constructor(itemType?: ItemType | undefined, islandId?: IslandId, quality?: Quality, human?: Human, magicalLootType?: MagicalLootType);
     get asCorpse(): undefined;
     get asCreature(): undefined;
     get asDoodad(): undefined;
@@ -184,7 +185,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * @param quantityOverride The number of properties to use instead of generating the quantity randomly
      * @returns True if the item has become magical
      */
-    setMagicalChanceFromQuality(contextualChanceMultiplier?: number, quantityOverride?: number): boolean;
+    setMagicalChanceFromQuality(contextualChanceMultiplier?: number, quantityOverride?: number, magicalLootType?: MagicalLootType): boolean;
     /**
      * @deprecated This method currently shouldn't be used in production code, as it's to do with the new crafting system. Stay tuned.
      */
@@ -308,7 +309,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Get acceptable magical types based on item
      */
     getValidMagicalProperties(): MagicalPropertyType[];
-    addMagicalProperties(count: number, source?: string): boolean;
+    addMagicalProperties(count: number, source?: string, magicalLootType?: MagicalLootType): boolean;
     rerollMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     rerollMagicalPropertyValues(): void;
     initializeMagicalPropertyManager(): MagicalPropertyManager;

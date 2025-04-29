@@ -24,6 +24,7 @@ import type Status from "@wayward/game/game/entity/status/Status";
 import type { ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { LootGroupType } from "@wayward/game/game/item/LootGroups";
+import type { MagicalLootType } from "@wayward/game/game/item/MagicalLoot";
 import type { ITemperatureDescription } from "@wayward/game/game/temperature/ITemperature";
 import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -349,6 +350,10 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      * Set to PettingType.NotAllowed it they don't accept petting, or PettingType.Attack if they attack when petted
      */
     acceptsPets?: PettingType;
+    /**
+     * Defines the magical mote type this creature can drop. Aberrant creatures will always drop a magical mote of the given magical loot type.
+     */
+    magicalLoot?: MagicalLootType;
 }
 export interface ICreatureLoot {
     item: ItemType;

@@ -880,6 +880,7 @@ export declare const enumRefTypes: {
         StrippedLeather: ItemType.StrippedLeather;
         ChickenEggshells: ItemType.ChickenEggshells;
         PenguinEggshells: ItemType.PenguinEggshells;
+        MagicalMote: ItemType.MagicalMote;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;

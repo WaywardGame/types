@@ -28,7 +28,7 @@ import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/Creat
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import { StatusApplicability } from "@wayward/game/game/entity/status/IStatus";
-import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
+import { type IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";

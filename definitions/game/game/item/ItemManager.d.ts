@@ -23,6 +23,7 @@ import { ContainerType, CraftResult, ItemType, ItemTypeExtra, ItemTypeGroup } fr
 import type { IAddToContainerResult, IContainerSort, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IItemRemoveOptions, IMoveItemOptions, IRequirementInfo } from "@wayward/game/game/item/IItemManager";
 import { ContainerReferenceSource, CraftStatus, ICraftResultChances, WeightType } from "@wayward/game/game/item/IItemManager";
 import Item from "@wayward/game/game/item/Item";
+import type { MagicalLootType } from "@wayward/game/game/item/MagicalLoot";
 import type { ITileContainer } from "@wayward/game/game/tile/ITerrain";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -224,8 +225,8 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): Item[];
     static getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getWeightCapacity(container?: IContainer, includeMagic?: boolean): number | undefined;
-    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, context?: ActionContext): Item;
-    createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human): Item;
+    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, context?: ActionContext, magicalLootType?: MagicalLootType): Item;
+    createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human, magicalLootType?: MagicalLootType): Item;
     getContainedContainers(container: IContainer): IContainer[];
     computeContainerWeight(container: IContainer): number;
     getMagicalWeightCapacity(container: IContainer): number;
