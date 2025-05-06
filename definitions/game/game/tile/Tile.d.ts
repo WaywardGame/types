@@ -52,6 +52,20 @@ export interface ITileGetNameOptions {
     includeCoordinates?: boolean;
     magic?: boolean;
 }
+export interface IMakeCaveOptions {
+    /**
+     * Set to true if we want to reveal failure messages to the player.
+     */
+    failureMessages?: boolean;
+    /**
+     * Set to true if we are allowed to make caves upwards (while we are in caves).
+     */
+    allowInCaves?: boolean;
+    /**
+     * The range of tiles outward to check for another cave so we don't create them too close together.
+     */
+    rangeCheck?: number;
+}
 /**
  * Tile class
  */
@@ -373,12 +387,20 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Checks if another cave entrance is nearby.
      * @returns True if it created cave entrances
      */
-    isCaveEntranceNearby(): boolean;
+    isCaveEntranceNearby(tileRange?: number): boolean;
+    /**
+     * Used to check if we can actually make a chave entrance on the tile.
+     * @returns True if we can make a cave entrance
+     */
+    canMakeCaveEntrance(source: Human | undefined, entranceZ?: WorldZ, options?: IMakeCaveOptions): boolean;
     /**
      * Used to genererate and find appropriate cave entrances
+     * @param source The player that created the cave entrance
+     * @param chance The chance of creating a cave entrance (default 5%)
+     * @param entranceZ The direction of the cave entrance (default down)
      * @returns True if it created cave entrances
      */
-    makeCaveEntrance(source: Human | undefined, chance?: number): boolean;
+    makeCaveEntrance(source: Human | undefined, chance?: number, entranceZ?: WorldZ, options?: IMakeCaveOptions): boolean;
     /**
      * Create puddles around a point and limit them (so they can't expand infinitely)
      */

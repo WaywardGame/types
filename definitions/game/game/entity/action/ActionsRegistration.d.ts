@@ -190,4 +190,5 @@ export declare const actionDescriptionsSlow: {
     138: import("./Action").Action<[import("@wayward/game/game/entity/action/IAction").ActionArgument.Tile], import("../Human").default<unknown, number, import("../../reference/IReferenceManager").ReferenceType.NPC | import("../../reference/IReferenceManager").ReferenceType.Player>, void, {
         usable: true;
     }, [import("../../tile/Tile").default]>;
+    141: import("./Action").Action<[[arg1: import("@wayward/game/game/entity/action/IAction").ActionArgument.Undefined, import("@wayward/game/game/entity/action/IAction").ActionArgument.ItemInventory]], import("../Human").default<unknown, number, import("../../reference/IReferenceManager").ReferenceType.NPC | import("../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/actions/ExcavateCollapse").IExcavateCollapseTile, [(import("../../item/Item").default | undefined)?]>;
 };

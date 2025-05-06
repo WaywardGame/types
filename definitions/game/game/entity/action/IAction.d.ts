@@ -185,7 +185,8 @@ export declare enum ActionType {
     CraftingIngredient = 137,
     ViewItems = 138,
     AscendDescend = 139,
-    DiscoverRecipe = 140
+    DiscoverRecipe = 140,
+    ExcavateCollapse = 141
 }
 export declare const ACTIONS_RECOMMENDED: ActionType[];
 export declare enum ActionUsability {
