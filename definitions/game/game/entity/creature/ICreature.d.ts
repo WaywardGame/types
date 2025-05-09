@@ -354,6 +354,11 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      * Defines the magical mote type this creature can drop. Aberrant creatures will always drop a magical mote of the given magical loot type.
      */
     magicalLoot?: MagicalLootType;
+    /**
+     * The radius within which the creature will be alerted to from a player.
+     * Defaults to CREATURE_DEFAULT_ALERTED_DISTANCE_SQ
+     */
+    alertedRadius?: number;
 }
 export interface ICreatureLoot {
     item: ItemType;
@@ -461,7 +466,7 @@ export interface ICreatureEvents extends IEntityWithStatsEvents, IEntityAiEvents
 export declare const CREATURE_WANDER_FEARLESS_CHANCE: number;
 /** The chance to start wandering after being paused, if scared */
 export declare const CREATURE_WANDER_SCARED_CHANCE: number;
-export declare const CREATURE_FLEE_DISTANCE_SQ: number;
+export declare const CREATURE_DEFAULT_ALERTED_DISTANCE_SQ: number;
 export declare const TAMED_CREATURE_FOLLOW_CLOSE_DISTANCE = 1;
 export declare const TAMED_CREATURE_FOLLOW_FAR_DISTANCE = 6;
 export declare const settableAiTypes: Set<AiType>;

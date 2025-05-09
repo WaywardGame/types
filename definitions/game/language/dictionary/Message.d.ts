@@ -85,7 +85,7 @@ declare enum Message {
     ActionExcavateCollapseFail = 73,
     ActionExcavateCollapseNotDeepEnough = 74,
     ActionExcavateCollapseNotPassable = 75,
-    ActionExcavateCollapseOpenCollapse = 76,
+    OpenCollapse = 76,
     ActionFishingNothingBiting = 77,
     ActionFishingSlipped = 78,
     ActionFishingTooShallow = 79,
