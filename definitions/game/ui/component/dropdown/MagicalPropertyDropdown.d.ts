@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { MagicalPropertyIdentityHash } from "@wayward/game/game/magic/MagicalPropertyManager";
-import { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
+import { MagicalPropertyIdentity, type MagicalPropertyIdentityHash } from "@wayward/game/game/magic/IMagicalProperty";
 import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IDropdownOption } from "@wayward/game/ui/component/Dropdown";

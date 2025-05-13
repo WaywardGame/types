@@ -44,7 +44,7 @@ export default class TileEventManager extends EntityManager<TileEvent> {
      */
     getPuddles(tile: Tile): TileEvent[] | undefined;
     canGather(tile: Tile): TileEvent | undefined;
-    updateAll(): void;
+    updateAll(ticks: number): void;
     /**
      * Overflow fire around the tile
      */

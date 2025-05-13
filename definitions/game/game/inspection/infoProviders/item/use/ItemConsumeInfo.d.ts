@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
-import type { Stat } from "@wayward/game/game/entity/IStats";
+import { Stat } from "@wayward/game/game/entity/IStats";
 import UseInfo from "@wayward/game/game/inspection/infoProviders/UseInfo";
 import type Item from "@wayward/game/game/item/Item";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";

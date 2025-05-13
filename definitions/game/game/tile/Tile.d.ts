@@ -23,7 +23,7 @@ import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/Creat
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type { IMessageManager } from "@wayward/game/game/entity/player/IMessageManager";
 import type Player from "@wayward/game/game/entity/player/Player";
-import type { IslandId } from "@wayward/game/game/island/IIsland";
+import type { IslandId, IWell } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
@@ -51,6 +51,20 @@ export interface ICanSailAwayResult {
 export interface ITileGetNameOptions {
     includeCoordinates?: boolean;
     magic?: boolean;
+}
+export interface IMakeCaveOptions {
+    /**
+     * Set to true if we want to reveal failure messages to the player.
+     */
+    failureMessages?: boolean;
+    /**
+     * Set to true if we are allowed to make caves upwards (while we are in caves).
+     */
+    allowInCaves?: boolean;
+    /**
+     * The range of tiles outward to check for another cave so we don't create them too close together.
+     */
+    rangeCheck?: number;
 }
 /**
  * Tile class
@@ -104,6 +118,10 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     private _maxDur?;
     get zone(): CreatureZone;
     /**
+     * Gets the tier of the zone the tile is in
+     */
+    get zoneTier(): number;
+    /**
      * Creates a fake tile
      */
     static createFake(island: Island, x?: number, y?: number, z?: number): Tile;
@@ -129,6 +147,14 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Gets the primary/first blocking entity on this tile.
      */
     get entity(): Entity | undefined;
+    /**
+     * Gets well data on this tile.
+     */
+    get well(): IWell | undefined;
+    /**
+     * Sets well data on this tile.
+     */
+    set well(value: IWell);
     /**
      * Gets the primary/first blocking entity on this tile, that is a creature, NPC, or player.
      */
@@ -361,12 +387,20 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Checks if another cave entrance is nearby.
      * @returns True if it created cave entrances
      */
-    isCaveEntranceNearby(): boolean;
+    isCaveEntranceNearby(tileRange?: number): boolean;
+    /**
+     * Used to check if we can actually make a chave entrance on the tile.
+     * @returns True if we can make a cave entrance
+     */
+    canMakeCaveEntrance(source: Human | undefined, entranceZ?: WorldZ, options?: IMakeCaveOptions): boolean;
     /**
      * Used to genererate and find appropriate cave entrances
+     * @param source The player that created the cave entrance
+     * @param chance The chance of creating a cave entrance (default 5%)
+     * @param entranceZ The direction of the cave entrance (default down)
      * @returns True if it created cave entrances
      */
-    makeCaveEntrance(source: Human | undefined, chance?: number): boolean;
+    makeCaveEntrance(source: Human | undefined, chance?: number, entranceZ?: WorldZ, options?: IMakeCaveOptions): boolean;
     /**
      * Create puddles around a point and limit them (so they can't expand infinitely)
      */

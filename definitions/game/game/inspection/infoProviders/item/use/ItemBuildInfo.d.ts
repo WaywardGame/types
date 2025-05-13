@@ -12,12 +12,13 @@ import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import LabelledValue from "@wayward/game/game/inspection/infoProviders/LabelledValue";
 import UseInfo from "@wayward/game/game/inspection/infoProviders/UseInfo";
 import type Item from "@wayward/game/game/item/Item";
-import { MagicalPropertyEntry } from "@wayward/game/game/magic/MagicalPropertyManager";
+import { MagicalPropertyEntry } from "@wayward/game/game/magic/IMagicalProperty";
 import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import { TempType } from "@wayward/game/game/temperature/ITemperature";
 declare const _default: UseInfo<{
     doodadContainer: import("../../../../doodad/IDoodad").IDoodadDescription | undefined;
     civilizationScore: number | undefined;
+    scareRadius: number;
     entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
     type: import("../../../../item/IItem").ItemType;
@@ -38,6 +39,8 @@ declare const _default: UseInfo<{
     getPreservationChance: () => LabelledValue | undefined;
 } & {
     getCivilizationScore: () => LabelledValue | undefined;
+} & {
+    scareRadius: () => LabelledValue | undefined;
 } & {
     getMagicalBuildTypes: () => Set<MagicalPropertyType>;
 } & {

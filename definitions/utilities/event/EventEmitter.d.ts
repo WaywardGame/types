@@ -49,6 +49,7 @@ type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
 type WeakHandler<H, F> = WeakRef<Handler<H, F>>;
 type UndefinedFromVoid<V> = V extends void ? undefined : V;
 export interface IEventEmitter<H = any, E = any> {
+    readonly closed?: boolean;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     /**
      * Emit an event only to the subscribers of this emitter instance.
@@ -64,11 +65,11 @@ export interface IEventEmitter<H = any, E = any> {
     emitAsyncParallel<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Promise<Array<(Extract<ReturnOf<E[K]>, Promise<any>> extends Promise<infer R> ? R : never) | Exclude<ReturnOf<E[K]>, Promise<any>>>> & {
         isResolved?: true;
     };
-    subscribe<K extends ArrayOr<keyof E>>(host: IEventEmitterHost<IEventSubscriberEvents>, event: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number, once?: boolean): H;
+    subscribe<K extends ArrayOr<keyof E>>(this: IEventEmitter<IEventEmitterHost<IEventSubscriberEvents>, E>, host: IEventEmitterHost<IEventSubscriberEvents>, event: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number, once?: boolean): H;
     /** @deprecated */
     subscribe<K extends ArrayOr<keyof E>>(event: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number, once?: boolean): H;
     subscribeUnsafe<K extends ArrayOr<keyof E>>(event: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number, once?: boolean): H;
-    subscribeNext<K extends ArrayOr<keyof E>>(host: IEventEmitterHost<IEventSubscriberEvents>, event: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number): H;
+    subscribeNext<K extends ArrayOr<keyof E>>(this: IEventEmitter<IEventEmitterHost<IEventSubscriberEvents>, E>, host: IEventEmitterHost<IEventSubscriberEvents>, event: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number): H;
     /** @deprecated */
     subscribeNext<K extends ArrayOr<keyof E>>(event: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number): H;
     subscribeNextUnsafe<K extends ArrayOr<keyof E>>(event: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number): H;
@@ -79,6 +80,14 @@ export interface IEventEmitter<H = any, E = any> {
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
     hasHandlersForEvent(...events: Array<keyof E>): boolean;
+    /**
+     * Re-opens a closed event emitter
+     */
+    open(): void;
+    /**
+     * Closes an event emitter, which will prevent any further subscriptions from being made.
+     */
+    close(): void;
 }
 export interface IUntilSubscriber<H, E> {
     until(promise: Promise<any>): this;
@@ -94,12 +103,32 @@ export interface IUntilSubscriber<H, E> {
 }
 declare class EventEmitter<H, E> {
     private readonly host;
-    static RECORD_MODE: boolean;
     private readonly hostClass;
-    private readonly subscriptions;
-    private readonly subscriptionsRecord;
-    private readonly cachedEmitSelfHandlers;
+    /**
+     * We're not always initializing these since they're not always needed.
+     */
+    private subscriptions?;
+    private cachedEmitSelfHandlers?;
+    private cachedClassHandlers?;
+    /**
+     * Set to true when the event emitted is closed.
+     * This means no more events will be emitted and no more subscriptions can be made.
+     * Public so that the interface can expose a readonly version of this.
+     */
+    closed?: boolean;
     constructor(host: H);
+    /**
+     * Re-opens a closed event emitter
+     */
+    open(): void;
+    /**
+     * Closes an event emitter, which will prevent any further subscriptions from being made.
+     */
+    close(): void;
+    /**
+     * @returns True if closed
+     */
+    private throwErrorIfClosed;
     raw(): IEventEmitter<H, E>;
     emitSelf<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
@@ -125,8 +154,11 @@ declare class EventEmitter<H, E> {
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
     hasHandlersForEvent(...events: Array<keyof E>): boolean;
     private copyFrom;
-    private readonly cachedClassHandlers;
     protected handlersForEvent<K extends keyof E>(event: K, ignoreClassSubscriptions?: true): Array<keyof H | WeakHandler<any, any>>;
+    /**
+     * Deletes an event from the cached handler maps and deletes the maps if they are empty.
+     */
+    private deleteCachedHandler;
 }
 declare namespace EventEmitter {
     class Host<E> implements IEventEmitterHost<E> {

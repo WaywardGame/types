@@ -28,12 +28,13 @@ import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/Creat
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import { StatusApplicability } from "@wayward/game/game/entity/status/IStatus";
-import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
+import { type IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import Translation, { Article } from "@wayward/game/language/Translation";
+import { MarkerType } from "@wayward/game/renderer/notifier/INotifier";
 import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
@@ -147,7 +148,13 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     getOwner(): Human | undefined;
     damage(damageInfo: IDamageInfo): number | undefined;
     damage(damageInfo: IDamageInfo, creatureX?: number, creatureY?: number, creatureZ?: number): number | undefined;
-    offer(items: Item[]): Item | undefined;
+    /**
+     * Called when we offer a creature an item using the "Offer" action or when a creature walks over an item to see if it tames them.
+     * @param items Items to offer or check to see if they are accepted.
+     * @param human Human that offered it (if not set, it's on the ground and we check for crafterIdentifier).
+     * @returns The item it accepted.
+     */
+    offer(items: Item[], human?: Human): Item | undefined;
     processSpecialAbilities(enemy: Human | Creature | undefined, bypass?: boolean): boolean;
     increaseWaste(item: Item): void;
     onUnserialized(): void;
@@ -209,10 +216,12 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
      */
     private breakItems;
     private processAiChanges;
+    private addAlertedMarker;
     /**
      * @returns Whether the creature has lost interest
      */
     private processAiInterest;
+    getDynamicMarker(type: string): MarkerType | undefined;
     getWanderChance(defaultChance: number): number | undefined;
     getWanderIdleChance(defaultChance: number): number | undefined;
     getWanderNewDirectionChance(defaultChance: number): number | undefined;

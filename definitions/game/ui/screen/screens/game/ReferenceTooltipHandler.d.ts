@@ -21,7 +21,7 @@ export default class ReferenceTooltipHandler extends InspectionsTooltipHandler<R
     private readonly reference;
     private readonly initializer?;
     constructor(context: InfoProviderContext, reference: Reference, initializer?: ((tooltip: Tooltip, handler: ReferenceTooltipHandler) => any) | undefined);
-    initializeTooltip(tooltip: Tooltip): Promise<void>;
+    initializeTooltip(tooltip: Tooltip): Promise<boolean>;
     protected initializeInspections(): ReferenceInspectionsList;
     protected initializeHints(hints: InspectionTooltipHints): void;
 }

@@ -13,12 +13,15 @@ import type { IDialogStates } from "@wayward/game/ui/screen/screens/GameScreen";
 import type { DialogById } from "@wayward/game/ui/screen/screens/game/DialogMap";
 import { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
 import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
-export default class DialogManager {
+import type { IEventSubscriberEvents } from "@wayward/utilities/event/EventEmitter";
+import EventEmitter from "@wayward/utilities/event/EventEmitter";
+type IDialogManagerEvents = IEventSubscriberEvents;
+export default class DialogManager extends EventEmitter.Host<IDialogManagerEvents> {
     private readonly map;
     /**
      * Flag set when the dialog manager / parent screen is being removed
      */
-    private removing;
+    private disposing;
     private readonly screenRef;
     get screen(): Screen;
     constructor(screen: Screen);
@@ -31,7 +34,7 @@ export default class DialogManager {
     open<DIALOG extends Dialog>(id: DialogId, initializer?: (dialog: DIALOG) => any, subId?: string, highlightIfAlreadyOpen?: boolean): DIALOG;
     isVisible(id: DialogId, subId?: string): boolean | undefined;
     close(id: DialogId | `${DialogId}` | `${DialogId},${string}`, subId?: string): boolean;
-    closeAll(removing?: boolean): boolean;
+    closeAll(): boolean;
     toggle<ID extends DialogId>(id: ID, force?: boolean, initializer?: (dialog: DialogById[ID]) => any, subId?: string, highlightIfAlreadyOpen?: boolean): this;
     toggle<DIALOG extends Dialog>(id: DialogId, force?: boolean, initializer?: (dialog: DIALOG) => any, subId?: string, highlightIfAlreadyOpen?: boolean): this;
     toggleAll(states: IDialogStates, loaded?: boolean): this;
@@ -40,4 +43,6 @@ export default class DialogManager {
     private breakKey;
     private getKey;
     private updateDialogId;
+    dispose(): void;
 }
+export {};

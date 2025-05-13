@@ -16,5 +16,6 @@ export interface IQuest {
     type: QuestType;
     requirements: IQuestRequirement[];
     complete: boolean;
+    skipped: boolean;
     reset?(): void;
 }

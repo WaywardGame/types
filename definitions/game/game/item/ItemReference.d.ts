@@ -22,20 +22,20 @@ interface IItemReferenceEvents {
     clear(): void;
 }
 export default class ItemReference extends EventEmitter.Host<IItemReferenceEvents> implements IItemReference, IUnserializedCallback {
-    static get(item?: Item | IItemReference): ItemReference | undefined;
-    static item(item?: Item | IItemReference): Item | undefined;
+    static create(item?: Item | IItemReference): ItemReference | undefined;
     event: IEventEmitter<this, IItemReferenceEvents>;
     private registeredForEvents;
     islandId: IslandId | undefined;
     itemId: number | undefined;
     constructor(item?: Item | IItemReference);
+    dispose(): void;
     raw(): IItemReference;
     onUnserialized(): void;
     get isValid(): boolean;
     get island(): Island | undefined;
     get item(): Item | undefined;
     set(reference?: Item | IItemReference): void;
-    clear(): void;
+    private clear;
     private onItemMovedIsland;
     private onItemRemove;
     onStoppingPlay(): void;

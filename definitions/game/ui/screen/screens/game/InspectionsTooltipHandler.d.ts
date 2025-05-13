@@ -28,7 +28,11 @@ export interface IInspectionsTooltipHandlerEvents<INSPECTIONS_LIST extends Inspe
 export default abstract class InspectionsTooltipHandler<INSPECTIONS_LIST extends InspectionsList, TOOLTIP_ARGS extends any[] = []> extends EventEmitter.Host<IInspectionsTooltipHandlerEvents<INSPECTIONS_LIST, TOOLTIP_ARGS>> {
     protected current: IInspectionsTooltipHandlerCurrent<INSPECTIONS_LIST, TOOLTIP_ARGS> | undefined;
     private lastMousePosition?;
-    initializeTooltip(tooltip: Tooltip, ...args: TOOLTIP_ARGS): Promise<void>;
+    /**
+     * Initializes tooltips
+     * @returns True if the tooltip was initialized. False if it was removed or replaced before so.
+     */
+    initializeTooltip(tooltip: Tooltip, ...args: TOOLTIP_ARGS): Promise<boolean>;
     remove(tooltip?: IInspectionsTooltipHandlerCurrent<INSPECTIONS_LIST, TOOLTIP_ARGS> | undefined): void;
     onInitInspections(handler: (inspections: INSPECTIONS_LIST) => any): void;
     protected abstract initializeInspections(...args: TOOLTIP_ARGS): INSPECTIONS_LIST | undefined;

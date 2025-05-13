@@ -24,6 +24,7 @@ import type Status from "@wayward/game/game/entity/status/Status";
 import type { ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { LootGroupType } from "@wayward/game/game/item/LootGroups";
+import type { MagicalLootType } from "@wayward/game/game/item/MagicalLoot";
 import type { ITemperatureDescription } from "@wayward/game/game/temperature/ITemperature";
 import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -202,6 +203,10 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      */
     runeChance?: RuneChance;
     waterAnimations?: boolean;
+    /**
+     * We set this for all creatures that are tamable through the the taming skill directly.
+     * - Some creatures are exempt from this and tamed only through items (Living Rock, Time Skitters).
+     */
     tamingDifficulty?: number;
     acceptedItems?: Array<ItemType | ItemTypeGroup>;
     lightSource?: boolean;
@@ -341,10 +346,28 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      * Called when a creature is spawned
      */
     onSpawn?: (creature: Creature) => void;
+    /**
+     * Set to PettingType.NotAllowed it they don't accept petting, or PettingType.Attack if they attack when petted
+     */
+    acceptsPets?: PettingType;
+    /**
+     * Defines the magical mote type this creature can drop. Aberrant creatures will always drop a magical mote of the given magical loot type.
+     */
+    magicalLoot?: MagicalLootType;
+    /**
+     * The radius within which the creature will be alerted to from a player.
+     * Defaults to CREATURE_DEFAULT_ALERTED_DISTANCE_SQ
+     */
+    alertedRadius?: number;
 }
 export interface ICreatureLoot {
     item: ItemType;
     chance?: number;
+}
+export declare enum PettingType {
+    Allowed = 0,
+    NotAllowed = 1,
+    Attack = 2
 }
 export interface IWaste {
     event: TileEventType;
@@ -443,13 +466,14 @@ export interface ICreatureEvents extends IEntityWithStatsEvents, IEntityAiEvents
 export declare const CREATURE_WANDER_FEARLESS_CHANCE: number;
 /** The chance to start wandering after being paused, if scared */
 export declare const CREATURE_WANDER_SCARED_CHANCE: number;
-export declare const CREATURE_FLEE_DISTANCE_SQ: number;
+export declare const CREATURE_DEFAULT_ALERTED_DISTANCE_SQ: number;
 export declare const TAMED_CREATURE_FOLLOW_CLOSE_DISTANCE = 1;
 export declare const TAMED_CREATURE_FOLLOW_FAR_DISTANCE = 6;
 export declare const settableAiTypes: Set<AiType>;
 export declare const CREATURE_MAX_HEALTH_BONUS_TAME = 1.1;
 export declare const CREATURE_MAX_HEALTH_BONUS_OFFER = 1.05;
 export declare const CREATURE_MAX_HEALTH_BONUS_PET = 1.01;
+export declare const CREATURE_DEFAULT_TAME_DIFFICULTY_UNSET = 25;
 export interface ICreatureAttackOutcomeBase {
     enemy?: Human | Creature;
     willAttack: boolean;

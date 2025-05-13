@@ -21,5 +21,6 @@ export interface IRepairCanUse extends IActionUsable {
     itemDescription?: IItemDescription;
     repaireeIsItem: boolean;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby, ActionArgument.Doodad]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IRepairCanUse, [Item, (Doodad | Item | undefined)?]>;
+export declare function getDurabilityReduction(repairee: Item | Doodad, actionTier: number): number;
+declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby, ActionArgument.DoodadNearby]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IRepairCanUse, [Item, (Doodad | Item | undefined)?]>;
 export default _default;

@@ -143,7 +143,8 @@ export declare class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private creatureFlyingBatch;
     private overlayBatch;
     private vehicleBatch;
-    private readonly entitiesInViewport;
+    private readonly entitiesToRenderInViewport;
+    private readonly doodadsToNotRenderInViewport;
     /**
      * A set of entities seen before (rendered on screen at least once)
      */

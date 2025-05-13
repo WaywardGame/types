@@ -62,6 +62,7 @@ export default class MessageLog extends Component {
     protected onResize(): void;
     private height;
     private lastScroll;
+    private queueUpdateScroll;
     private updateScroll;
     private refreshDirection;
     private refreshMessages;

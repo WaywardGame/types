@@ -9,16 +9,26 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Component from "@wayward/game/ui/component/Component";
-import type { HighlightSelector, IHighlight } from "@wayward/game/ui/util/IHighlight";
+import type { HighlightSelector, HighlightSelectorResolved, IHighlight } from "@wayward/game/ui/util/IHighlight";
+import { HighlightType } from "@wayward/game/ui/util/IHighlight";
 import type { Events } from "@wayward/utilities/event/EventEmitter";
 export default class HighlightManager {
     private readonly highlightableComponents;
+    private readonly highlightableResolvers;
     /**
      * Registers this component to the given highlight selector.
      *
      * Note: When not providing `until` events, the `remove` event will be subscribed to automatically.
      */
     register<C extends Component>(component: C, selector: HighlightSelector | undefined, ...until: Array<keyof Events<C>>): void;
+    /**
+     * Registers a "resolver" function to the given highlight selector. This resolver function will be called to produce an additional list
+     * of components to highlight when the highlight is started.
+     *
+     * This resolver function will never be automatically deregistered. Use {@link deregisterResolver} to deregister it.
+     */
+    registerResolver<C extends Component>(type: HighlightType | undefined, resolver: (selector: HighlightSelectorResolved) => ArrayOr<C> | undefined): void;
+    deregisterResolver<C extends Component>(type: HighlightType | undefined, resolver: (selector: HighlightSelectorResolved) => ArrayOr<C> | undefined): void;
     is(component: Component, selector: HighlightSelector): boolean;
     private getHighlightSelectorId;
     private getHighlightableComponents;

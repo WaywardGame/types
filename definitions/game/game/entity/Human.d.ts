@@ -23,6 +23,7 @@ import type { IStat } from "@wayward/game/game/entity/IStats";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { StatChangeTimerFactory } from "@wayward/game/game/entity/StatFactory";
 import { StatChangeCurrentTimerStrategy } from "@wayward/game/game/entity/StatFactory";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { CreatureType, IDamageInfo } from "@wayward/game/game/entity/creature/ICreature";
@@ -131,7 +132,10 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     cumulativeEvilCrafting: number;
     /** @deprecated (use the entity itself) */
     readonly inventory: IContainer;
-    private readonly privateStore;
+    /**
+     * Used for delays, which are calculated on the server
+     */
+    private nextProcessInput;
     containerType?: ContainerType;
     nextMoveTime: number;
     nextMoveDirection?: Direction.Cardinal | Direction.None;
@@ -185,6 +189,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * Luck is a multiplier applied to some random chance calculations.
      */
     get luck(): number;
+    protected get debug(): any;
     updateDirection(tile: Tile | Direction.Cardinal, updateVehicleDirection?: boolean): Direction.Cardinal;
     protected onMovementCompleted(movingData: IMovingData): void;
     moveTowardsIsland(direction: Direction.Cardinal | Direction.None, options?: Partial<IMoveToIslandOptions>): Promise<void>;
@@ -234,6 +239,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     damage(damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
     /**
      * Gets the use benefits for all equipped items.
+     * Stat.Hunger and Stat.Thirst get converted to check for Stat.Metabolism as the type for MagicalPropertyType.StatPotency_EquipmentImproveConsumableStats
      * @param stat to check use benefits for.
      * @returns number that is the bonus amount the player recieves when consuming.
      */
@@ -295,6 +301,9 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      */
     giveRune(deity: ArrayOr<DeityReal>, chance: number, domain: Runekeeper.DomainData, context: IActionContext): boolean;
     private actuallyGiveRune;
+    /**
+     * All the milestones we need to check on game load.
+     */
     protected checkOnLoadMilestones(): void;
     setVehicle(item: Item | undefined, extinguishTorches?: boolean): boolean;
     getWeightStatus(): WeightStatus;
@@ -340,6 +349,11 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     addDelay(delay: number, replace?: boolean, addStaminaDelay?: boolean, cap?: number): void;
     ensureDelay(delay: number): void;
     /**
+     * Removese input processing delay (due to actions) and movement delays.
+     * This won't do much from clientside in a mp game since the server is in charge.
+     */
+    removeDelays(): void;
+    /**
      * Gets a stamina penalty delay to be used for slowed actions and movement.
      * @param staminaToStartAddingDelayAt Stat value where delays start getting added from.
      */
@@ -349,7 +363,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     getRangedSkillBonus(skillUse?: SkillType): number;
     getQualityBonus(item: Item | undefined): number;
     setTamedCreatureEnemy(enemy: Human | Creature): void;
-    checkForGatherFire(): Translation | undefined;
+    checkForGatherFire(action: ActionType): Translation | undefined;
     /**
      * Check if there is a still in front of the player.
      * @param withWater Check if the still has water in it?
@@ -361,8 +375,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     calculateEquipmentStats(): void;
     private recalculateInsulation;
     private getEquipmentInsulation;
-    discoverRecipes(recipes: Array<[recipeType: ItemType, crafted: ICrafted]>, discoveredClientSide?: boolean): void;
-    discoverRecipe(recipeType: ItemType, crafted?: ICrafted, discoveredClientSide?: boolean, emit?: boolean): void;
+    discoverRecipe(itemType: ItemType, crafted?: ICrafted): void;
     incrementIslandTickCount(): void;
     protected onPostMove(lastTile: Tile, tile: Tile, flags?: MoveFlag, skipExtinguishTorches?: boolean): void;
     passTurn(turnType?: TurnTypeFlag): void;

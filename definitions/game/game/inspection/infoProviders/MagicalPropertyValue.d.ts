@@ -11,8 +11,9 @@
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { Quality } from "@wayward/game/game/IObject";
-import type { IHasMagic, MagicalNormalPropertyTypes, MagicalSubPropertyTypes } from "@wayward/game/game/magic/MagicalPropertyManager";
-import { MagicalPropertyIdentity } from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { MagicalNormalPropertyTypes, MagicalSubPropertyTypes } from "@wayward/game/game/magic/IMagicalProperty";
+import type { IHasMagic } from "@wayward/game/game/magic/IMagicalProperty";
+import { MagicalPropertyIdentity } from "@wayward/game/game/magic/IMagicalProperty";
 import type { MagicalPropertyTypeSubTypeMap } from "@wayward/game/game/magic/MagicalPropertyType";
 import Translation from "@wayward/game/language/Translation";
 import type { TranslationGenerator } from "@wayward/game/ui/component/IComponent";

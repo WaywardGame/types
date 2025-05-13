@@ -10,6 +10,7 @@
  */
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
 import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { ItemType } from "@wayward/game/game/item/IItem";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
@@ -21,9 +22,9 @@ export interface IObject<T> {
 }
 export interface IObjectDescription extends IHasImagePath {
     /**
-     * Set to true if we want to store decay, but not have it active (in the case of torches)
+     * Set to an item type that will derive its decayMax from when its state is changed. This property is set on unlit torches for example where we want to store the decay, but not use it.
      */
-    storeDecay?: boolean;
+    storeDecay?: ItemType;
     /**
      * number of game ticks until decay
      */

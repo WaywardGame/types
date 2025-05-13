@@ -22,9 +22,10 @@ import NoteManager from "@wayward/game/game/entity/player/note/NoteManager";
 import QuestManager from "@wayward/game/game/entity/player/quest/QuestManager";
 import { StatusApplicability } from "@wayward/game/game/entity/status/IStatus";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
-import type { IContainer } from "@wayward/game/game/item/IItem";
+import type { IContainer, IRecipe } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
+import ItemRecipeRequirementChecker from "@wayward/game/game/item/ItemRecipeRequirementChecker";
 import { Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
@@ -78,7 +79,10 @@ export default class Player extends Human<undefined, number, ReferenceType.Playe
     addItemMilestones(item: Item, context?: IActionContext): void;
     checkSkillMilestones(): void;
     private getUsableAction;
-    protected onGetMovementIntent(): IMovementIntent | undefined;
+    /**
+     * Note: This is usually only ran on the server
+     */
+    getMovementIntent(): IMovementIntent;
     protected onCanMove(direction: Direction.Cardinal): false | undefined;
     protected onGetSkillGainMultiplier(skillType: SkillType): number | undefined;
     protected onDamage(damageInfo: IDamageInfo): void;
@@ -92,12 +96,23 @@ export default class Player extends Human<undefined, number, ReferenceType.Playe
      */
     private onLoadOrUnload;
     setup(spawnTile: Tile, respawn: boolean): void;
+    private setupEquipment;
+    private setupStats;
+    private setupSkills;
+    private setupRandomInventory;
+    private setupStatuses;
+    private setupItemsFromGroups;
+    private setupAdditionalItemsFromOptions;
+    private setupEquipmentFromOptions;
+    private setupSkillsFromOptions;
     protected onNoInput(): void;
     updateTables(source: string, options?: Partial<{
         allowCaching: boolean;
         skipDeferral: boolean;
     }>): void;
     private updateTablesInternal;
+    shouldDiscoverRecipe(recipe: IRecipe, checker: ItemRecipeRequirementChecker): boolean;
+    private isRecipeDiscovered;
     private updateCraftTable;
     updateDismantleTable(adjacentContainers?: IContainer[], force?: boolean): void;
     getName(includeTitle?: boolean): TranslationImpl;

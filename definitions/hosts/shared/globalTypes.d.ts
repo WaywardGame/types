@@ -42,6 +42,12 @@ export interface IWaywardTitleBar {
     isMaximized: boolean;
     electron: IElectron;
 }
+export interface IBuild {
+    name: string;
+    time: number;
+    publishName?: string;
+    publishTime?: string;
+}
 export interface IBuildId {
     date: number;
     number: number;

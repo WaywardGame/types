@@ -13,8 +13,9 @@ import { type ItemRefreshType } from "@wayward/game/ui/screen/screens/game/compo
 import type ItemComponent from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
 import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
 import type { ActionSlot } from "@wayward/game/ui/screen/screens/game/static/actions/ActionSlot";
+import type { IEventSubscriberEvents } from "@wayward/utilities/event/EventEmitter";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-interface IItemComponentEventBusEvents {
+interface IItemComponentEventBusEvents extends IEventSubscriberEvents {
     update(type: ItemRefreshType): any;
     changeHovered(): any;
 }

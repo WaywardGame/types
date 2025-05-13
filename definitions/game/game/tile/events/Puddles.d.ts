@@ -11,7 +11,7 @@
 import { LiquidType } from "@wayward/game/game/island/IIsland";
 import type { ITileEventDescription } from "@wayward/game/game/tile/ITileEvent";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
-export declare function puddleUpdate(tileEvent: TileEvent, description: ITileEventDescription, liquidType: LiquidType): void;
+export declare function puddleUpdate(tileEvent: TileEvent, description: ITileEventDescription, liquidType: LiquidType, ticks: number): void;
 export declare const puddleOfFreshWater: ITileEventDescription;
 export declare const puddleOfPurifiedFreshWater: ITileEventDescription;
 export declare const puddleOfUnpurifiedFreshWater: ITileEventDescription;

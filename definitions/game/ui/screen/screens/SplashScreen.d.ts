@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Screen from "@wayward/game/ui/screen/Screen";
-import Notice from "@wayward/game/ui/screen/screens/splash/Notice";
+import Notice from "@wayward/game/ui/component/Notice";
 export default class SplashScreen extends Screen {
     static getNotices(): Array<Class<Notice>>;
     static show(): Promise<void>;

@@ -18,6 +18,7 @@ export default class CreatureTamedInfoProvider extends InfoProvider {
     private readonly mood;
     private readonly tameTime;
     private readonly ai;
+    private readonly noPetting;
     private readonly pet;
     private readonly milk;
     private readonly untamesIn;

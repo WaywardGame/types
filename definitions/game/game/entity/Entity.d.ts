@@ -35,7 +35,8 @@ import { type ISerializedTranslation } from "@wayward/game/language/ITranslation
 import type Translation from "@wayward/game/language/Translation";
 import type { RenderSource, UpdateRenderFlag } from "@wayward/game/renderer/IRenderer";
 import type { Renderer } from "@wayward/game/renderer/Renderer";
-import type { INotificationLocation, ItemNotifierType, MarkerIconType, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
+import type { INotificationLocation, ItemNotifierType, MarkerDescription, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
+import type { MarkerType } from "@wayward/game/renderer/notifier/INotifier";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
@@ -48,6 +49,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     historicalActions?: PartialRecord<ActionType, number>;
     referenceId?: number;
     renamed?: string | ISerializedTranslation;
+    aestheticRandom: number;
     x: number;
     y: number;
     z: WorldZ;
@@ -121,10 +123,15 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      * This is called clientside the first time the renderer seens the entity
      */
     onFirstRender(renderer: Renderer): void;
-    getCurrentMarkerIconType(): MarkerIconType | undefined;
+    getCurrentMarker(): Readonly<MarkerDescription> | undefined;
     setMarkerIconHidden(hidden: boolean): void;
-    addMarkerIcon(type: MarkerIconType): void;
-    removeMarkerIcon(...types: MarkerIconType[]): void;
+    /**
+     * Adds a marker that shows up over the entity
+     * @param description The marker description
+     */
+    addMarker(description: MappedOmit<MarkerDescription, "guid">): void;
+    removeMarker(...types: MarkerType[]): void;
+    getDynamicMarker(type: string): MarkerType | undefined;
     getProducedTemperature(): number | undefined;
     setName(renamed: string | ISerializedTranslation | undefined): void;
     canInspect(human: Human): boolean;

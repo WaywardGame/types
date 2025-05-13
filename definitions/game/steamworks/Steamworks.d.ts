@@ -12,15 +12,15 @@ import type { HeapStatistics } from "electron";
 import type { Game } from "@wayward/game/game/Game";
 import type Entity from "@wayward/game/game/entity/Entity";
 import IActionContext from "@wayward/game/game/entity/action/IActionContext";
-import { ModType } from "@wayward/game/mod/IModInformation";
+import { ModState, ModType } from "@wayward/game/mod/IModInformation";
 import type { ModInformation } from "@wayward/game/mod/ModInformation";
 import type { IJoinServerOptions, ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
-import type { IBuild, IDedicatedServerInfo, IModPath, ISteamworksEvents, SteamStatTypeValues } from "@wayward/game/steamworks/ISteamworks";
+import type { IDedicatedServerInfo, IModPath, ISteamworksEvents, RunningContext, SteamStatTypeValues } from "@wayward/game/steamworks/ISteamworks";
 import { SteamStatArea } from "@wayward/game/steamworks/ISteamworks";
 import type { ISteamBeta } from "@wayward/hosts/shared/interfaces";
 import { type IMatchmakingServer, type INapiDiscordPresenceInfo, type IRemoteFile, type ISteamFriend, type ISteamId, type ISteamworksNetworking, type IWaywardPreload, type IWorkshopItem, type LobbyType } from "@wayward/hosts/shared/interfaces";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
+import type { IBuild, IBuildId } from "@wayward/hosts/shared/globalTypes";
 export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private readonly game;
     protected initialized: boolean;
@@ -89,9 +89,10 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getMatchmakingServer(): IMatchmakingServer | undefined;
     getMatchmakingServerPort(): number;
     getSteamNetworking(): ISteamworksNetworking | undefined;
-    setBuildId(id?: string): void;
+    /** @deprecated For console use */
+    protected setBuildId(id?: string): void;
     initialize(): Promise<IWaywardPreload | undefined>;
-    enableSafePaths(): void;
+    enableSafePaths(): Promise<void>;
     onUnload(): void;
     getHeapStatistics(): Promise<HeapStatistics | undefined>;
     setFullscreen(fullscreen: boolean): Promise<void>;
@@ -129,6 +130,10 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
      * - {@link Island.saveBuildId}
      */
     get buildId(): IBuildId | undefined;
+    /**
+     * Returns a string about how the game is running
+     */
+    get runningContext(): RunningContext;
     getPublishedMods(): IWorkshopItem[] | undefined;
     getStatInt(name: string): number | undefined;
     /**
@@ -214,6 +219,10 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private refreshSetupMods;
     private cleanupTemporaryLocalFiles;
     private cleanupTemporaryRemoteFiles;
+    /**
+     * Called when the overlay is closed or when the refresh mods button is clicked
+     */
+    refreshWorkshopMods(waitForRefresh?: boolean, initialModState?: ModState.Enabled | ModState.Disabled): Promise<void>;
     private refreshPublishedMods;
     private getIdFromWorkshopItem;
     private syncWorkshopItems;

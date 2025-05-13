@@ -69,6 +69,11 @@ export declare enum ItemRefreshType {
 export interface IItemComponentEvents extends Events<Component>, IDraggableEvents, IItemSlotEvents, ISortableDraggableEvents {
     deregisterHighlights(): any;
     refresh(type: ItemRefreshType): any;
+    /**
+     * Called when the item (within the item component) is changing.
+     * Usually during a refresh.
+     */
+    itemChange(): any;
 }
 export interface IItemComponentStaticEvents {
     update(type: ItemRefreshType): any;
@@ -101,6 +106,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     readonly draggable?: Draggable;
     private transient;
     protected constructor(handler: ItemComponentHandler, ...params: any[]);
+    /** @deprecated For console use only */
     protected get debug(): any;
     private tickEndHandlerReasons?;
     private registerTickEndHandler;

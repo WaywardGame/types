@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IFileSystem } from "@wayward/hosts/shared/ipc/fileSystem";
+import Version from "@wayward/utilities/Version";
 export declare enum LogLineType {
     Debug = 0,
     Error = 1,
@@ -87,7 +88,9 @@ declare namespace Log {
         Memory = 2
     }
     function setMemoryLog(memoryLog: MemoryLog | undefined): void;
-    function disableFileLogging(source: string): void;
+    function setTimestampType(type: "full" | "build"): void;
+    function disableFileLogger(): void;
+    function disableFileLoggingForSource(source: string): void;
     function initializeGameState(): void;
     function setCallback(cb?: (...args: any[]) => void): void;
     function addPreConsoleCallback(cb: (...args: any[]) => void): void;
@@ -95,7 +98,7 @@ declare namespace Log {
     /**
      * Setups file logging
      */
-    function setupFileLogger(fileSystem: IFileSystem, logsPath: string): void;
+    function setupFileLogger(fileSystem: IFileSystem, logsPath: string): Promise<void>;
     /**
      * Flushes pending logs to disk if the file logger is active
      */
@@ -127,11 +130,36 @@ declare namespace Log {
      * @param sources A list of sources to log to.
      */
     function trace(...sources: string[]): (...args: any[]) => void;
+    function shouldSendErrorReport(versionInfo?: Version.Info | undefined): boolean;
+    /**
+     * Warns about an occurrence of something, due to a specific caller, once per session.
+     * @param skip Number of callsites to skip. Automatically skips this function and its caller.
+     * If this is called from a function that is registered in `Errors.ts` as a skipped callsite, you might have to pass `-1`.
+     * @param id The ID of this warning. Can be `Log.simplify` strings.
+     */
+    function warnForCaller(skip: number, id: ArrayOr<string | SimplifyString>, ...message: any[]): void;
     /**
      * Warn about something once per session based on unique warning ids.
      * This is like how node.js does warnings in console.
      */
-    function warnOncePerSession(warningId: string | string[], ...message: any[]): void;
+    function warnOncePerSession(warningId: ArrayOr<string | SimplifyString>, ...message: any[]): void;
+    interface SimplifyString extends String {
+        simplified: string;
+    }
+    namespace SimplifyString {
+        function is(value: unknown): value is SimplifyString;
+        function get(value: unknown): string;
+    }
+    function simplify(segments: TemplateStringsArray, ...interpolations: unknown[]): SimplifyString;
+    function simplify(mainLog: string, simplified: string): SimplifyString;
+    /**
+     * Returns a combination of the object's constructor and the result of calling `toString` on it.
+     *
+     * If the `toString` result is redundant or useless, it is omitted.
+     *
+     * The resulting string will be automatically simplified when reported to the error server.
+     */
+    function objectToString(object?: object): string;
 }
 declare class NullLog extends BaseLog {
     setup(): void;

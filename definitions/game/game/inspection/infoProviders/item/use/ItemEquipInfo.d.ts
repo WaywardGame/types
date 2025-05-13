@@ -11,7 +11,7 @@
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import UseInfo from "@wayward/game/game/inspection/infoProviders/UseInfo";
 import type Item from "@wayward/game/game/item/Item";
-import { MagicalPropertyEntry } from "@wayward/game/game/magic/MagicalPropertyManager";
+import { MagicalPropertyEntry } from "@wayward/game/game/magic/IMagicalProperty";
 import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import { TempType } from "@wayward/game/game/temperature/ITemperature";
 import UiTranslation from "@wayward/game/language/dictionary/UiTranslation";

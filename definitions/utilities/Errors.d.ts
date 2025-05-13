@@ -24,6 +24,10 @@ declare namespace Errors {
      * Returns the Error callsite string for the caller of the current function.
      */
     function caller(skip?: number): string;
+    /**
+     * Returns the filename of the caller of the current function.
+     */
+    function callerFileBasename(skip?: number): string;
 }
 export default Errors;
 export declare function ensureExhaustive(value: never): never;

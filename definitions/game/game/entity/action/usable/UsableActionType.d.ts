@@ -103,7 +103,9 @@ export declare enum UsableActionType {
     CommandAllAttack = 100081,
     CommandAllHeel = 100082,
     Ascend = 100083,
-    Descend = 100084
+    Descend = 100084,
+    Excavate = 100085,
+    Collapse = 100086
 }
 export declare enum UsableActionTypePlaceholder {
     TradeItem = 200000,

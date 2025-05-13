@@ -12,6 +12,7 @@ import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import { StatInfo } from "@wayward/game/game/inspection/infoProviders/stat/StatInfo";
 export default class GenericInfo extends StatInfo {
     readonly score: InfoProvider.Observer<number>;
+    readonly tier: InfoProvider.Observer<number>;
     readonly totalCivilizationScore: InfoProvider.Observer<number>;
     readonly civilizationScore: InfoProvider.Observer<number>;
     readonly turns: InfoProvider.Observer<number>;

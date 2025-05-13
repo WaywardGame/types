@@ -11,7 +11,7 @@
 import type { ITileEventDescription } from "@wayward/game/game/tile/ITileEvent";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 interface IFireDescription extends ITileEventDescription {
-    spread(tileEvent: TileEvent): void;
+    spread(tileEvent: TileEvent, ticks: number): void;
 }
 declare const fire: IFireDescription;
 export default fire;

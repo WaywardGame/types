@@ -57,7 +57,7 @@ declare namespace Observer {
         start(): void;
         end(): void;
         setDefaultPriority(priority?: number): this;
-        inherit(registrar: IRegistrar<any>): void;
+        inherit(registrar: IRegistrar<any>): HOST;
     }
     export function createRegistrar<HOST>(host: HOST, handler: () => any): IRegistrar<HOST>;
     export {};

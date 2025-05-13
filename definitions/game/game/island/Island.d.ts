@@ -43,8 +43,8 @@ import TileEventManager from "@wayward/game/game/tile/TileEventManager";
 import Translation from "@wayward/game/language/Translation";
 import World from "@wayward/game/renderer/world/World";
 import type { IPostSerializeCallback, IPreSerializeCallback, ISerializer } from "@wayward/game/save/serializer/ISerializer";
-import type { IVersionInfo } from "@wayward/game/utilities/Version";
-import Version from "@wayward/game/utilities/Version";
+import type { IVersionInfo } from "@wayward/utilities/Version";
+import Version from "@wayward/utilities/Version";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
@@ -96,6 +96,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     biomeOptions?: unknown;
     biomeType: BiomeTypes;
     contaminatedWater: IWaterContamination[];
+    lastPlayerGameTimeTicks?: number;
     loadCount: number;
     name?: string;
     position: IVector2;
@@ -137,7 +138,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     get isFastForwarding(): boolean;
     constructor(game?: Game, position?: IVector2, seed?: number, mapSize?: number);
     toString(): string;
-    createStaticRandom(seed?: number): Random<PCGSeededGenerator>;
+    createStaticRandom(seed?: number, advance?: number): Random<PCGSeededGenerator>;
     private registerMemoryLeakDetector;
     preSerializeObject(serializer: ISerializer): void;
     postSerializeObject(serializer: ISerializer): void;
@@ -280,6 +281,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * In manual turn mode, it will tick the humans stat timers & the game
      */
     passTurn(human: Human, turnType?: TurnTypeFlag, dueToAction?: boolean): void;
+    private travelTimeFastForward;
     /**
      * Fast forwards an island by running lots of ticks.
      * Defaults to IslandFastForward tick flag with no playing humans.
@@ -330,4 +332,9 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * Returns the type of liquid that can be gathered from the tile
      */
     getLiquidGatherType(terrainType: TerrainType, terrainDescription: ITerrainDescription): keyof ILiquidGather | undefined;
+    /**
+     * Calculate the maximum travel time (derived currently from the maximum growth time of doodads - we don't need to simulate past that value).
+     * @returns number equal to the maximum travel time.
+     */
+    getMaximumTravelTime(): number;
 }

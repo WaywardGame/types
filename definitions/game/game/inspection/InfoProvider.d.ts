@@ -126,8 +126,6 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
      * Call when this info provider should be removed.
      */
     remove(): this;
-    onStoppingPlay(): void;
-    onPreMoveToIsland(): void;
     private _shouldDisplayWhenEmpty;
     protected shouldDisplayWhenEmpty(): boolean;
     setShouldDisplayWhenEmpty(shouldDisplayWhenEmpty?: boolean): this;

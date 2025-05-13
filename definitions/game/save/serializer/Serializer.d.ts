@@ -12,7 +12,7 @@ import type { Game } from "@wayward/game/game/Game";
 import type { ISerializer, ISerializerOptions } from "@wayward/game/save/serializer/ISerializer";
 import { SavePropertyFlag, SerializerMetadataKey, Types } from "@wayward/game/save/serializer/ISerializer";
 import StringTokenizer from "@wayward/game/save/serializer/StringTokenizer";
-import type Version from "@wayward/game/utilities/Version";
+import type Version from "@wayward/utilities/Version";
 export default class Serializer implements ISerializer {
     readonly game: Game;
     private readonly options;

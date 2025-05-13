@@ -12,6 +12,7 @@ import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProv
 import type { Reference } from "@wayward/game/game/reference/IReferenceManager";
 import type Translation from "@wayward/game/language/Translation";
 import type TranslationImplImport from "@wayward/game/language/impl/TranslationImpl";
+import type { IRandomDefinition } from "@wayward/game/language/impl/TranslationImpl";
 import type { Segment } from "@wayward/game/language/segment/Segments";
 import type { IInterpolationOptions, IStringSection } from "@wayward/game/utilities/string/Interpolator";
 import type { Random } from "@wayward/utilities/random/Random";
@@ -43,6 +44,7 @@ export interface ISerializedTranslation {
     tooltipWide?: true;
     interpolator?: ISerializedInterpolator;
     classes?: string[];
+    randomDefinition?: IRandomDefinition;
 }
 export declare namespace ISerializedTranslation {
     function is(value: unknown): value is ISerializedTranslation;

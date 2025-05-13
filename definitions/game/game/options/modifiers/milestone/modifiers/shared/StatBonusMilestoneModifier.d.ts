@@ -10,8 +10,10 @@
  */
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import MilestoneModifier, { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
 export default abstract class StatBonusMilestoneModifier extends MilestoneModifier {
     getOptions(): IGameOptionsPartial;
+    getTranslationArgs(): TranslationArg[] | undefined;
     getGroup(): MilestoneModifierGroup;
     protected abstract getBonus(): number;
 }

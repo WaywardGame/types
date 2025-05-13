@@ -13,7 +13,7 @@ import { StatusChangeReason } from "@wayward/game/game/entity/IEntity";
 import type Status from "@wayward/game/game/entity/status/Status";
 import type { DisplayableItemType } from "@wayward/game/game/item/IItem";
 import type { IRendererContext } from "@wayward/game/renderer/context/IRendererContext";
-import type { INotificationLocation, MarkerIconType } from "@wayward/game/renderer/notifier/INotifier";
+import type { INotificationLocation, MarkerDescription } from "@wayward/game/renderer/notifier/INotifier";
 import { CreatureNotifierType, ItemNotifierType, NotifierIconType, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
 import type { IResourceContainer } from "@wayward/game/renderer/resources/IResourceContainer";
 export declare class Notifier {
@@ -37,7 +37,7 @@ export declare class Notifier {
     addStat(location: INotificationLocation, type: StatNotificationType, value: number): void;
     addStatus(location: INotificationLocation, status: Status, reason: StatusChangeReason): void;
     addNotifierIcon(location: INotificationLocation, type: NotifierIconType): void;
-    addMarker(location: INotificationLocation, type: MarkerIconType, markerGuid: string): void;
+    addMarker(location: INotificationLocation, marker: MarkerDescription): void;
     removeMarker(guid: string): void;
     suspend(): void;
     resume(): void;

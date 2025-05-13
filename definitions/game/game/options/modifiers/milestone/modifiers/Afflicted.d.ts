@@ -13,9 +13,11 @@ import type Player from "@wayward/game/game/entity/player/Player";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import { type TranslationArg } from "@wayward/game/language/ITranslation";
 export default class Afflicted extends MilestoneModifier {
     getOptions(): IGameOptionsPartial;
     getGroup(): MilestoneModifierGroup;
+    protected getTranslationArgs(): TranslationArg[] | undefined;
     instantiate(id: Milestone, player?: Player): AfflictedMilestoneModifierInstance | undefined;
 }
 declare class AfflictedMilestoneModifierInstance extends MilestoneModifierInstance<OptionalDescriptions<Stat, number>> {

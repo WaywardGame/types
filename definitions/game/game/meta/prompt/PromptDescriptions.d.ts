@@ -27,6 +27,7 @@ export declare const promptGameConfirmationActionInLavaOrFire: import("@wayward/
     AMOUNT: number;
     LAVA?: true;
 }]>;
+export declare const promptGameConfirmationActionDumpDropItemsInWaterVoid: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptGameConfirmationActionIsLava: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[gatherText: Text]>;
 export declare const promptGameConfirmationDestroyOnGather: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[growthStage: Text | undefined, objectName: Text]>;
 export declare const promptGameConfirmationDroppingContainer: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
@@ -111,6 +112,7 @@ export declare const promptMenuOptionsConfirmDiscoverActions: import("@wayward/g
 export declare const promptMenuOptionsConfirmUnlockRecipes: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsSaveDataClearAll: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsSaveDataClearCharacters: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
+export declare const promptMenuOptionsSaveDataClearUI: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsSaveDataClearHighscores: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsSaveDataClearMilestones: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;
 export declare const promptMenuOptionsSaveDataClearOptions: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[]>;

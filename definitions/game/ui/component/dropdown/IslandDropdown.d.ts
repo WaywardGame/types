@@ -20,7 +20,7 @@ export default class IslandDropdown<OTHER_OPTIONS extends string = never> extend
     protected getTranslation(islandId: IslandId): TranslationImpl;
     protected sortEnumOptions(o1: IDropdownSortableOption<string>, o2: IDropdownSortableOption<string>): number;
     protected getGroupName(biome: BiomeType): string;
-    protected optionTooltipInitializer: (tooltip: Tooltip, option: string) => Promise<void> | undefined;
+    protected optionTooltipInitializer: (tooltip: Tooltip, option: string) => Promise<boolean> | undefined;
     protected shouldIncludeOtherOptionsInGroupFilter(): boolean;
     protected isInGroup(islandId: IslandId, biome: BiomeType): boolean;
     protected getGroups(): BiomeType[];

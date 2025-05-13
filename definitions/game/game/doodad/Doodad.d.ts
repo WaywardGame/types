@@ -11,7 +11,7 @@
 import { TileUpdateType } from "@wayward/game/game/IGame";
 import type { IHasQuality, IObject, IQualityEvents } from "@wayward/game/game/IObject";
 import { Quality } from "@wayward/game/game/IObject";
-import type { DisplayableDoodadType, DoodadTypeExtra, DoorOrientation, IDoodadDescription, IDoodadOptions, IHasBuilder, IHasWater } from "@wayward/game/game/doodad/IDoodad";
+import type { DisplayableDoodadType, DoodadTypeExtra, DoorOrientation, IDoodadDescription, IDoodadGetNameOptions, IDoodadOptions, IHasBuilder, IHasWater } from "@wayward/game/game/doodad/IDoodad";
 import { DoodadTag, DoodadType, DoodadTypeGroup, GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import type { IEntityMovableEvents } from "@wayward/game/game/entity/EntityMovable";
 import EntityMovable from "@wayward/game/game/entity/EntityMovable";
@@ -19,7 +19,7 @@ import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
 import { SkillType } from "@wayward/game/game/entity/IHuman";
-import { EquipType } from "@wayward/game/game/entity/IHuman";
+import type { EquipType } from "@wayward/game/game/entity/IHuman";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
@@ -30,7 +30,7 @@ import { LiquidType } from "@wayward/game/game/island/IIsland";
 import type { ContainerSort, DisplayableItemType, IContainer, IItemVehicle, ILiquidGather, IUncastableContainer, ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type { IHasMagic } from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { IHasMagic } from "@wayward/game/game/magic/IMagicalProperty";
 import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type { IHasInsulation, TempType } from "@wayward/game/game/temperature/ITemperature";
@@ -126,7 +126,6 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * Used to store protection status for built doodads
      */
     protected?: boolean;
-    private _tileId?;
     /**
      * Separate property just for wells because isInGroup is still expensive for processWell()
      */
@@ -171,7 +170,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * - `doodad.getName(Article.None)` // "stone furnace"
      * - `doodad.getName(Article.None, 3)` // "stone furnaces"
      */
-    getName(article?: Article, count?: number): TranslationImpl;
+    getName(article?: Article, options?: Partial<IDoodadGetNameOptions>): TranslationImpl;
     protected getDescription(): IDoodadDescription | undefined;
     protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     changeType(doodadType: DoodadType): void;
@@ -180,7 +179,6 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     updateGroupCache(doodadTypeGroup: DoodadTypeGroup): boolean;
     get point(): IVector3;
     get tile(): Tile;
-    getTileId(): number;
     /**
      * @deprecated This is the correct way to change quality, but it is not completely implemented.
      * It does not perform any required changes due to the quality change, like durability, all it does is change the quality and emit an event.
@@ -212,7 +210,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     /**
      * Returns whether the doodad can be trampled
      */
-    canTrample(): boolean | undefined;
+    canTrample(): boolean;
     /**
      * Trampling growing things.
      */
@@ -234,7 +232,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     removeMagic(): void;
     unhitch(): void;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean, damage?: number): void;
-    getDefaultDurability(random?: import("@wayward/utilities/random/Random").Random<import("@wayward/utilities/random/generators/PCGSeededGenerator").PCGSeededGenerator | import("@wayward/utilities/random/generators/LegacySeededGenerator").LegacySeededGenerator>): number;
+    getDefaultDurability(random?: import("@wayward/utilities/random/Random").Random<import("@wayward/utilities/random/generators/LegacySeededGenerator").LegacySeededGenerator | import("@wayward/utilities/random/generators/PCGSeededGenerator").PCGSeededGenerator>): number;
     /**
      * Gets the container to use for doodad executed actions
      */
@@ -255,7 +253,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     setOffTrap(human?: Human, withMessage?: boolean, damage?: boolean): void;
     getGrowthParticles(): IRGB | undefined;
     /**
-     * Increased the fertility (spread) of a plant/growing doodad.
+     * Increased the fertility (spread) of a plant/growing doodad when its ripening.
      * @param bypassChange Set to true if you just want to check if fertility can be increased.
      * @returns True or false depending on if it increased in fertility or not.
      */
@@ -326,6 +324,11 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     private processRegeneration;
     /**
+     * Process the magical properties of the doodad when updating
+     * @param ticks the number of ticks to process
+     */
+    private processMagicalProperties;
+    /**
      * Melt doodads (or things on doodads over time)
      * @param description Doodad description
      * @param ticks Amount of melting to perform
@@ -373,6 +376,11 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     getCivilizationScore(excludeMagic?: boolean): number;
     /**
+     * Gets the scarecrow radius based on quality.
+     * This also exists on items.
+     */
+    getScareRadius(): number;
+    /**
      * Gets a set of skill types and values from doodads that have "containedItemGroupProvidesSkill" set for items that provide adjacent skill bonuses.
      * @returns Map of skill type and number (skill value).
      */
@@ -404,4 +412,5 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     private processDripstone;
     private postProcessDecay;
     private randomAshSpawn;
+    private canGrowToBare;
 }

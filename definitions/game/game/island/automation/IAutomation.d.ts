@@ -12,7 +12,9 @@ import type { DoodadType, GrowingStage } from "@wayward/game/game/doodad/IDoodad
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import type Human from "@wayward/game/game/entity/Human";
+import type { MoveType } from "@wayward/game/game/entity/IEntity";
 import type { EquipType } from "@wayward/game/game/entity/IHuman";
+import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
 import type { StatusType } from "@wayward/game/game/entity/status/IStatus";
 import type { Quality } from "@wayward/game/game/IObject";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
@@ -102,6 +104,14 @@ export interface IAutomationSetupWorld {
         y?: number;
         z?: number;
         aberrant?: true;
+    }>;
+    npcs?: Array<{
+        type: NPCType;
+        x?: number;
+        y?: number;
+        z?: number;
+        inventory?: IAutomationSetupItemContainer;
+        moveType?: MoveType;
     }>;
 }
 export interface IAutomationSetupPlayer {

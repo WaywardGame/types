@@ -97,5 +97,5 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
      * @returns number between provided min/max, rounded.
      */
     intInRangeExponential(min: number, max: number, steepness?: number): number;
-    advance(): this;
+    advance(times?: number): this;
 }

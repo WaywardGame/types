@@ -12,6 +12,7 @@ import CombatStrengthManager from "@wayward/game/game/entity/CombatStrengthManag
 import Creature from "@wayward/game/game/entity/creature/Creature";
 import type { ICreatureCheckMoveOptions } from "@wayward/game/game/entity/creature/ICreature";
 import { CreatureType, TileGroup } from "@wayward/game/game/entity/creature/ICreature";
+import type { IEntityRemoveOptions } from "@wayward/game/game/entity/EntityManager";
 import EntityManager from "@wayward/game/game/entity/EntityManager";
 import type Human from "@wayward/game/game/entity/Human";
 import { MoveType } from "@wayward/game/game/entity/IEntity";
@@ -30,7 +31,7 @@ export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> 
      */
     canSpawn(type: CreatureType, tile: Tile, aberrant: boolean): boolean | undefined;
 }
-export default class CreatureManager extends EntityManager<Creature, {
+export default class CreatureManager extends EntityManager<Creature, IEntityRemoveOptions & {
     remainTamed?: boolean;
 }> {
     protected readonly name = "CreatureManager";

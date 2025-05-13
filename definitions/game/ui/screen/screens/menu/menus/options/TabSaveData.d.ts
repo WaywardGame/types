@@ -24,6 +24,7 @@ export default class TabSaveData extends Tab implements IRefreshable {
     private onClearOptions;
     private onClearSaves;
     private onClearCharacters;
+    private onClearUI;
     private onClearHighscores;
     private onClearMilestones;
     private onClearCraftingRecipes;

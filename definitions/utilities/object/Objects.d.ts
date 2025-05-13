@@ -49,6 +49,15 @@ declare namespace Objects {
     };
     function getDirections(target: any, within: any): Generator<string[]>;
     function stringify(object: any, pretty?: boolean, noDepth?: boolean, maxIterations?: number): string;
+    namespace stringify {
+        const SYMBOL_EXCLUDED_PROPERTIES: unique symbol;
+        export function excludeProperties(...properties: Array<string | object>): {
+            [SYMBOL_EXCLUDED_PROPERTIES]: string[];
+        };
+        export function isExcluded(object: any, property: string): boolean;
+        export function getExcluded(object: any): string[];
+        export {};
+    }
     function mutable<T>(object: T): Mutable<T>;
     function removeUndefinedProperties<T extends object>(object: T): T;
     function filterProperties<T extends object>(object: T, filter: (key: keyof T, value: T[keyof T]) => any): T;

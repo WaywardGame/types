@@ -30,7 +30,7 @@ import type { IMoveItemOptions } from "@wayward/game/game/item/IItemManager";
 import type Item from "@wayward/game/game/item/Item";
 import type Recipe from "@wayward/game/game/item/recipe/Recipe";
 import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
-import type { MagicalSubPropertySubTypes } from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { MagicalSubPropertySubTypes } from "@wayward/game/game/magic/IMagicalProperty";
 import type MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type { IInsulationDescription, ITemperatureDescription } from "@wayward/game/game/temperature/ITemperature";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
@@ -268,7 +268,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      */
     liquidGather?: ILiquidGather;
     placeDownType?: DoodadType;
-    damageOnUse?: Record<number, any>;
+    damageOnUse?: OptionalDescriptions<ActionType, number>;
     /**
      * How good this item is at being an item of an `ItemTypeGroup`.
      *
@@ -390,6 +390,17 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * When set to true, the item will provide no consumption bonuses when used based on its quality
      */
     qualityProvidesNoConsumeBonus?: boolean;
+    /**
+     * When set to true, the item will always be generated with a single magical property from a weighted set of properties.
+     */
+    alwaysGetMagicalProperty?: boolean;
+    /**
+     * If set to true, this item will be able to have all magical properties regardless of the other properties it has.
+     */
+    canHaveAllMagicalProperties?: boolean;
+    canAlter?: false;
+    canTransmogrify?: false;
+    canUpgrade?: false;
 }
 export declare namespace IItemDescription {
     function actionDisabled(description: IItemDescription | undefined, action: ActionType): boolean;
@@ -595,6 +606,7 @@ export interface IMoveToTileOptions {
      * Note: Everything done in afterMovement must be clientside only
      */
     afterMovement?: IMoveToTileAfterMovementOptions;
+    skipWeightChecks?: boolean;
 }
 export interface IMoveToTileBeforeMovementOptions {
     remove?: boolean;
@@ -1684,19 +1696,20 @@ export declare enum ItemType {
     StrippedLeather = 815,
     ChickenEggshells = 816,
     PenguinEggshells = 817,
-    Last = 818
+    MagicalMote = 818,
+    Last = 819
 }
 export declare enum ItemTypeExtra {
-    None = 819,
-    TatteredMap_RolledUp = 820,
-    TatteredMap_Completed = 821,
-    WoodenBookcase_25 = 822,
-    WoodenBookcase_50 = 823,
-    WoodenBookcase_75 = 824,
-    WoodenBookcase_100 = 825,
-    RuneOfEvilSplinters = 826,
-    RuneOfGoodCharred = 827,
-    TallySticks = 828
+    None = 820,
+    TatteredMap_RolledUp = 821,
+    TatteredMap_Completed = 822,
+    WoodenBookcase_25 = 823,
+    WoodenBookcase_50 = 824,
+    WoodenBookcase_75 = 825,
+    WoodenBookcase_100 = 826,
+    RuneOfEvilSplinters = 827,
+    RuneOfGoodCharred = 828,
+    TallySticks = 829
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
@@ -1852,7 +1865,8 @@ export declare enum ItemTypeGroup {
     ExcludedFromRandom = -9856,
     Leaves = -9855,
     Flute = -9854,
-    All = -9853
+    InternalNoDropOnDoodadBreak = -9853,
+    All = -9852
 }
 export type StillContainerBaseItemType = ItemType.Waterskin | ItemType.GlassBottle | ItemType.ClayJug | ItemType.CoconutContainer;
 export interface IItemMovementResult {

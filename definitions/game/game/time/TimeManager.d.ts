@@ -44,6 +44,14 @@ export default class TimeManager {
      */
     getTime(tickOffset?: number): number;
     /**
+     * Returns the amount of ticks until the time is at least the desired time amount.
+     */
+    getTicksUntilTimeIsAtLeast(desiredTime: number, tickOffset?: number): number | undefined;
+    /**
+     * Returns the amount of ticks until the time is before the desired time amount.
+     */
+    getTicksUntilTimeIsBefore(desiredTime: number, tickOffset?: number): number | undefined;
+    /**
      * Returns if the given time is at day.
      * @param time The time to check, defaulting to the current time.
      */

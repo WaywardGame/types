@@ -184,7 +184,9 @@ export declare enum ActionType {
     SetCreatureAiAll = 136,
     CraftingIngredient = 137,
     ViewItems = 138,
-    AscendDescend = 139
+    AscendDescend = 139,
+    DiscoverRecipe = 140,
+    ExcavateCollapse = 141
 }
 export declare const ACTIONS_RECOMMENDED: ActionType[];
 export declare enum ActionUsability {
@@ -445,29 +447,33 @@ export declare enum ActionArgument {
     Corpse = 9,
     Creature = 10,
     Direction = 11,
+    /**
+     * @deprecated This should only be used for debug tools/cheats/things that don't check that player is nearby
+     */
     Doodad = 12,
-    Entity = 13,
-    Human = 14,
-    Island = 15,
-    Item = 16,
-    ItemArray = 17,
-    ItemArrayInventory = 18,
-    ItemArrayNearby = 19,
-    ItemArrayNearbyIncludingTradeContainer = 20,
-    ItemInventory = 21,
-    ItemNearby = 22,
-    ItemNearbyIncludingTradeContainer = 23,
-    NPC = 24,
-    NPCNearby = 25,
-    OptionalItemArrayNearby = 26,
-    Player = 27,
-    Tile = 28,
-    TileArray = 29,
-    TileEvent = 30,
-    UnsignedInteger32NumberArray = 31,
-    Vector2 = 32,
-    Vector2Array = 33,
-    Vector3 = 34
+    DoodadNearby = 13,
+    Entity = 14,
+    Human = 15,
+    Island = 16,
+    Item = 17,
+    ItemArray = 18,
+    ItemArrayInventory = 19,
+    ItemArrayNearby = 20,
+    ItemArrayNearbyIncludingTradeContainer = 21,
+    ItemInventory = 22,
+    ItemNearby = 23,
+    ItemNearbyIncludingTradeContainer = 24,
+    NPC = 25,
+    NPCNearby = 26,
+    OptionalItemArrayNearby = 27,
+    Player = 28,
+    Tile = 29,
+    TileArray = 30,
+    TileEvent = 31,
+    UnsignedInteger32NumberArray = 32,
+    Vector2 = 33,
+    Vector2Array = 34,
+    Vector3 = 35
 }
 export declare namespace ActionArgument {
     /**
@@ -515,6 +521,7 @@ export interface IActionArgumentTypeMap {
     [ActionArgument.Creature]: Creature;
     [ActionArgument.Direction]: Direction.Cardinal | Direction.None;
     [ActionArgument.Doodad]: Doodad;
+    [ActionArgument.DoodadNearby]: Doodad;
     [ActionArgument.Entity]: Entity;
     [ActionArgument.Human]: Human;
     [ActionArgument.Island]: Island;

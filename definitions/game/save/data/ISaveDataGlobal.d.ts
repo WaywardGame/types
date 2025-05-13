@@ -32,8 +32,10 @@ export interface IOptions {
     currentGame: number;
     customTitleBar: boolean;
     defaultCursor: boolean;
+    developerLogMessagesForContainerDesyncs: boolean;
     developerMode: boolean;
     developerModeContextMenu: boolean;
+    developerReportErrorsToWaywardTeam: boolean;
     dialogOpacity: number;
     directionTurnDelay: number;
     disableAcrylicTransparency: boolean;
@@ -88,6 +90,7 @@ export interface IOptions {
     volumeMusic: number;
     warnOnDangerousActions: boolean;
     warnOnDestructiveActions: boolean;
+    warnOnDroppingActions: boolean;
     warnWhenBreakingItems: boolean;
     warnWhenBreakingItemsOnCraft: boolean;
     windowMode: boolean;

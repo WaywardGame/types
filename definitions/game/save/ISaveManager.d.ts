@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { SavePropertyFlag } from "@wayward/game/save/serializer/ISerializer";
-import type Version from "@wayward/game/utilities/Version";
+import type Version from "@wayward/utilities/Version";
 export declare const SLOT_MIN = 0;
 export declare const SLOT_GLOBAL = -1;
 export declare const SLOT_MULTIPLAYER = -2;

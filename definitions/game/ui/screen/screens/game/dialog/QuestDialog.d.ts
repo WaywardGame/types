@@ -27,6 +27,7 @@ export default class QuestDialog extends Dialog {
     private readonly childQuestsHeading;
     private readonly childQuests;
     private readonly completeQuestButton;
+    private readonly activateQuestButton;
     private current;
     constructor();
     getBindable(): Bindable;

@@ -47,12 +47,6 @@ export interface IDedicatedServerInfo {
     syncChecks: MultiplayerSyncCheckLevel;
     gameCode?: string;
 }
-export interface IBuild {
-    name: string;
-    time: number;
-    publishName?: string;
-    publishTime?: string;
-}
 export declare enum SteamStatArea {
     Music = 0,
     Renderer = 1
@@ -63,3 +57,4 @@ export declare const steamStatTypes: {
 };
 export type SteamStatTypeValues<T extends SteamStatArea> = typeof steamStatTypes[T][keyof typeof steamStatTypes[T]];
 export declare const actionToSteamMarker: OptionalDescriptions<ActionType, SteamTimelineMarker>;
+export type RunningContext = "Steam" | "Electron" | "Node.js" | "Browser";

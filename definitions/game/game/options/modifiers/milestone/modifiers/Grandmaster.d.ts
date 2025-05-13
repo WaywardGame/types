@@ -11,8 +11,11 @@
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import MilestoneModifier, { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
 export default class Grandmaster extends MilestoneModifier {
+    private readonly initial;
     after: Milestone[];
     getOptions(): IGameOptionsPartial;
+    protected getTranslationArgs(): TranslationArg[] | undefined;
     getGroup(): MilestoneModifierGroup;
 }

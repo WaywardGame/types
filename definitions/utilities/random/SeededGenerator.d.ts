@@ -40,5 +40,5 @@ export declare abstract class SeededGenerator<T> implements IRandomGenerator {
     getHistory(): Array<IRandomHistory<T>> | undefined;
     takeHistory(): Array<IRandomHistory<T>> | undefined;
     stopHistory(): Array<IRandomHistory<T>>;
-    advance(): this;
+    advance(times?: number): this;
 }

@@ -10,7 +10,9 @@
  */
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import DeityInvokeMilestoneModifier, { DeityInvokeMilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/modifiers/shared/DeityInvokeMilestoneModifier";
+import type { TranslationArg } from "@wayward/game/language/ITranslation";
 export default class Turbulent extends DeityInvokeMilestoneModifier {
     getOptions(): IGameOptionsPartial;
+    protected getTranslationArgs(): TranslationArg[] | undefined;
     protected getClass(): Class<DeityInvokeMilestoneModifierInstance>;
 }

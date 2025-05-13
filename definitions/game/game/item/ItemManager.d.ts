@@ -23,6 +23,7 @@ import { ContainerType, CraftResult, ItemType, ItemTypeExtra, ItemTypeGroup } fr
 import type { IAddToContainerResult, IContainerSort, IDoodadsUsed, IGetBestItemsOptions, IGetItemOptions, IGetItemsOptions, IItemRemoveOptions, IMoveItemOptions, IRequirementInfo } from "@wayward/game/game/item/IItemManager";
 import { ContainerReferenceSource, CraftStatus, ICraftResultChances, WeightType } from "@wayward/game/game/item/IItemManager";
 import Item from "@wayward/game/game/item/Item";
+import type { MagicalLootType } from "@wayward/game/game/item/MagicalLoot";
 import type { ITileContainer } from "@wayward/game/game/tile/ITerrain";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -71,6 +72,8 @@ export interface IItemManagerEvents extends Events<EntityManager<Item>> {
     containerUnstack(container: IContainer, type: ItemType): any;
     /** Called at the end of inserting new items into a container, specifically when sorting the container was not necessary. */
     containerItemAddDidNotSort(container: IContainer): any;
+    /** Called when the weight of the container changes. */
+    containerWeightUpdate(container: IContainer): any;
     /**
      * Called when an item is crafted
      * @param human The human object
@@ -222,8 +225,8 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): Item[];
     static getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getWeightCapacity(container?: IContainer, includeMagic?: boolean): number | undefined;
-    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, context?: ActionContext): Item;
-    createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human): Item;
+    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, context?: ActionContext, magicalLootType?: MagicalLootType): Item;
+    createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human, magicalLootType?: MagicalLootType): Item;
     getContainedContainers(container: IContainer): IContainer[];
     computeContainerWeight(container: IContainer): number;
     getMagicalWeightCapacity(container: IContainer): number;
@@ -290,11 +293,8 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      * @returns A traslantion for the efficacy or undefined if not enough skill
      */
     getEfficacyTranslation(human: Human, qualityBonus: number, maxQualityBonus: number, recipe: IRecipe, ui?: boolean): TranslationImpl | undefined;
-    updateItems(ticks: number, playerIds: Set<number>, options: {
-        skipHumanItems?: boolean;
-        skipUiUpdates?: boolean;
-    }): boolean;
-    updateItem(ticks: number, item: Item, isInInventory: boolean, skipUiUpdates?: boolean): boolean;
+    updateItems(ticks: number, playerIds: Set<number>, skipHumanItems?: boolean): boolean;
+    updateItem(ticks: number, item: Item, isInInventory: boolean): boolean;
     getPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getAbsentPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getNPCWithItemInInventory(containable: IContainable): NPC | undefined;

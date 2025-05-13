@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Component from "@wayward/game/ui/component/Component";
 export type Until<T> = Record<string, (...args: any[]) => T>;
 export type UntilHandler<T, U extends Until<T>> = {
     [key in keyof U]: {
@@ -16,7 +17,7 @@ export type UntilHandler<T, U extends Until<T>> = {
     };
 };
 type EmptyIfUndefined<T> = T extends undefined ? Empty : T;
-export declare abstract class Manipulator<T, U extends Until<T> | undefined = undefined> {
+export declare abstract class Manipulator<T extends Component, U extends Until<T> | undefined = undefined> {
     protected readonly element: () => HTMLElement;
     protected readonly host: T;
     protected getUntilHandler?(): UntilHandler<T, EmptyIfUndefined<U>>;
@@ -32,7 +33,7 @@ export interface ClassUntil<T> extends Until<T> {
     remove(...classes: string[]): T;
     toggle(hasClass: boolean, ...classes: string[]): T;
 }
-export declare class ClassManipulator<T> extends Manipulator<T, ClassUntil<T>> {
+export declare class ClassManipulator<T extends Component> extends Manipulator<T, ClassUntil<T>> {
     protected getUntilHandler(): {
         add: {
             start: (...classes: string[]) => T;
@@ -68,7 +69,7 @@ export interface AttributeUntil<T> extends Until<T> {
     set(attribute: string, value: string): T;
     set(attributes: Iterable<[string, string | null]>): T;
 }
-export declare class AttributeManipulator<T> extends Manipulator<T, AttributeUntil<T>> {
+export declare class AttributeManipulator<T extends Component> extends Manipulator<T, AttributeUntil<T>> {
     protected getUntilHandler(): {
         set: any;
     };
@@ -80,7 +81,7 @@ export declare class AttributeManipulator<T> extends Manipulator<T, AttributeUnt
     has(...attributes: string[]): boolean;
     private getAttributeIterator;
 }
-export declare class DataManipulator<T> extends Manipulator<T> {
+export declare class DataManipulator<T extends Component> extends Manipulator<T> {
     set(name: string, value: string): T;
     set(data: Iterable<[string, string | undefined]>): T;
     get(name: string): string;
@@ -92,7 +93,7 @@ export declare class DataManipulator<T> extends Manipulator<T> {
 export interface StyleUntil<T> extends Until<T> {
     set(rule: string, value: string): T;
 }
-export declare class StyleManipulator<T> extends Manipulator<T, StyleUntil<T>> {
+export declare class StyleManipulator<T extends Component> extends Manipulator<T, StyleUntil<T>> {
     protected getUntilHandler(): {
         set: {
             start: (rule: string, value: string | number) => T;

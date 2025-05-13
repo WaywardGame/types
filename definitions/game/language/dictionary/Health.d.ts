@@ -19,6 +19,7 @@ export declare enum HealthAccuracy {
     Low = 0,
     Moderate = 1,
     High = 2,
-    Perfect = 3
+    Perfect = 3,
+    Exact = 4
 }
 export declare const healthsByAccuracy: Record<HealthAccuracy, Health[]>;

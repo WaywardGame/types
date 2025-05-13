@@ -34,7 +34,10 @@ import { ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { BookType, ContainerSort, ItemDamageResult, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "@wayward/game/game/item/IItem";
 import type { IPlaceOnTileOptions } from "@wayward/game/game/item/IItemManager";
 import ItemMapManager from "@wayward/game/game/item/ItemMapManager";
-import type { IHasMagic, MagicalSubPropertySubTypes } from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { MagicalLootType } from "@wayward/game/game/item/MagicalLoot";
+import type { MagicalSubPropertySubTypes } from "@wayward/game/game/magic/IMagicalProperty";
+import type { IHasMagic } from "@wayward/game/game/magic/IMagicalProperty";
+import type { IMagicalPropertyManagerEvents } from "@wayward/game/game/magic/MagicalPropertyManager";
 import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
@@ -49,7 +52,10 @@ import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISeria
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export interface IItemEvents extends IEntityMovableEvents, IQualityEvents {
+type ItemMagicEvents = {
+    [EVENT in keyof IMagicalPropertyManagerEvents as `magic${Capitalize<EVENT>}`]: IMagicalPropertyManagerEvents[EVENT];
+};
+export interface IItemEvents extends IEntityMovableEvents, IQualityEvents, ItemMagicEvents {
     toggleProtected(isProtected: boolean): any;
     containerChange(newContainer: IContainer, oldContainer?: IContainer): any;
     fireUpdate(stage?: FireStage): any;
@@ -128,7 +134,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     offsetY?: number;
     [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
     private _movementOptions?;
-    constructor(itemType?: ItemType | undefined, islandId?: IslandId, quality?: Quality, human?: Human);
+    constructor(itemType?: ItemType | undefined, islandId?: IslandId, quality?: Quality, human?: Human, magicalLootType?: MagicalLootType);
     get asCorpse(): undefined;
     get asCreature(): undefined;
     get asDoodad(): undefined;
@@ -179,7 +185,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * @param quantityOverride The number of properties to use instead of generating the quantity randomly
      * @returns True if the item has become magical
      */
-    setMagicalChanceFromQuality(contextualChanceMultiplier?: number, quantityOverride?: number): boolean;
+    setMagicalChanceFromQuality(contextualChanceMultiplier?: number, quantityOverride?: number, magicalLootType?: MagicalLootType): boolean;
     /**
      * @deprecated This method currently shouldn't be used in production code, as it's to do with the new crafting system. Stay tuned.
      */
@@ -226,7 +232,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Returns the maximum decay of an item, or undefined if the item does not have the decayMax or storeDecay property.
      * @returns A number or undefined.
      */
-    canDecay(): 1 | undefined;
+    canDecay(): number | undefined;
     getDecayRate(isClientSide: boolean): number;
     getPreservationDecayMultiplier(): number;
     getTemperatureDecayMultiplier(isClientSide: boolean): number;
@@ -244,6 +250,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Note: This is not called by clients joining a mp game.
      */
     verifyAndFixItem(): void;
+    protected pipeMagicalPropertyManagerEvents(magic: MagicalPropertyManager): void;
     verifyAndFixMagic(): void;
     /**
      * @param source A string representing the reason for this damage. Used for multiplayer debugging. Just put a unique string of characters here
@@ -302,7 +309,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Get acceptable magical types based on item
      */
     getValidMagicalProperties(): MagicalPropertyType[];
-    addMagicalProperties(count: number, source?: string): boolean;
+    addMagicalProperties(count: number, source?: string, magicalLootType?: MagicalLootType): boolean;
     rerollMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     rerollMagicalPropertyValues(): void;
     initializeMagicalPropertyManager(): MagicalPropertyManager;
@@ -445,11 +452,16 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     willBreakOnDamage(actionType?: ActionType): boolean;
     onUnserialized(): void;
     /**
-     * Gets civilization score based on item's quality and type (if it can be build/set down) but without the magical property values.
+     * Gets civilization score based on item's quality and type (if it can be build/set down) but without the magical property values. This also exists on doodads.
      * @param actionType Either Build or SetDown as they are the only types that can use civilization score.
      * @returns number of score (or 0 if no civilization score is set).
      */
     getCivilizationScore(actionType: ActionType.Build | ActionType.SetDown): number;
+    /**
+     * Gets the scarecrow radius based on doodad's definition and quality.
+     * This also exists on doodads.
+     */
+    getScareRadius(): number;
     getVehicle(): IItemVehicle | undefined;
     addCreature(creature: Creature, remainTamed?: boolean): void;
     /**
@@ -498,3 +510,4 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;
 }
+export {};

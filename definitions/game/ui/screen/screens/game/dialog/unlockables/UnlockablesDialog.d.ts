@@ -38,6 +38,7 @@ export default abstract class UnlockablesDialog<UNLOCKABLE extends number, SORT 
     readonly sectionUnlockableInMode: Component;
     readonly sectionNotUnlockableInMode: Component;
     readonly sectionHidden: Component;
+    readonly noticeNotUnlockable: Paragraph;
     readonly noticeRowsHidden: Paragraph;
     readonly sortFilterRow: DialogSortFilter<SORT>;
     constructor(id: DialogId);

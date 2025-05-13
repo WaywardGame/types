@@ -53,5 +53,5 @@ export default class ReferenceManager {
     private resolveInternal;
     inspect<REFTYPE extends ReferenceType>(reference: Reference<REFTYPE>, context?: InfoProviderContext): Inspection<any> | undefined;
     inspect(reference: Reference, context?: InfoProviderContext): Inspection<any> | undefined;
-    tooltip(reference: Reference, initializer?: (tooltip: Tooltip, handler: ReferenceTooltipHandler) => any, context?: InfoProviderContext): (tooltip: Tooltip) => Promise<void>;
+    tooltip(reference: Reference, initializer?: (tooltip: Tooltip, handler: ReferenceTooltipHandler) => any, context?: InfoProviderContext): (tooltip: Tooltip) => Promise<boolean>;
 }
