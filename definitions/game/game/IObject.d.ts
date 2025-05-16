@@ -30,7 +30,7 @@ export interface IObjectDescription extends IHasImagePath {
      */
     decayMax?: number;
     /**
-     * An associated skill or skills for the item when refining, reinforcing, dismantling, consuming, etc.
+     * An associated skill or skills for the item when repairing (as a fallback), refining, reinforcing, dismantling, consuming, etc.
      * If multiple skills are set, it will pick one at random when using
      */
     skillUse?: SkillType | SkillType[];
