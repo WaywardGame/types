@@ -14,6 +14,7 @@ import InspectionsTooltipHandler from "@wayward/game/ui/screen/screens/game/Insp
 import type Vector2 from "@wayward/game/utilities/math/Vector2";
 export default class WorldTooltipHandler extends InspectionsTooltipHandler<TileInspectionsList> {
     private currentInspectionTile;
+    private currentOverlayInfo;
     private nextInspectionTile;
     private pendingSetInspectionTileTimeout;
     private lastSetInspectionTileTime;

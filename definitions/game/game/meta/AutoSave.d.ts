@@ -19,6 +19,10 @@ export declare class AutoSave {
     reset(): void;
     process(): Promise<void>;
     translateLastSave(): TranslationImpl;
-    private isTime;
+    /**
+     * Check if the game should be saved now based on the auto save mode and timer.
+     * @returns true if the game should be saved now
+     */
+    private isTimeToSave;
     private isWithinRestThreshold;
 }

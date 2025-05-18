@@ -452,8 +452,9 @@ export interface ICreatureEvents extends IEntityWithStatsEvents, IEntityAiEvents
     tame?(owner: Human): void;
     /**
      * Called when a creature dies
+     * @param attacker The attacker who killed the creature
      */
-    die?(): void;
+    die?(attacker: Human | Creature | Doodad | undefined): void;
     /**
      * Called when a creature is damaged
      * @param damageInfo The damage info object

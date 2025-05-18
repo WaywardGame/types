@@ -28,10 +28,6 @@ import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IEventSubscriberEvents } from "@wayward/utilities/event/EventEmitter";
 export interface IEntityEvents extends IEventSubscriberEvents {
     /**
-     * Called when an entity is killed by another entity.
-     */
-    kill?(attacker: Entity | Doodad): void;
-    /**
      * Called when the entity is created in the game
      * Also called for players that "rejoin" the game
      */

@@ -11,5 +11,6 @@
 import Doodad from "@wayward/game/game/doodad/Doodad";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Entity from "@wayward/game/game/entity/Entity";
+import type Human from "@wayward/game/game/entity/Human";
 import type Player from "@wayward/game/game/entity/player/Player";
-export default function isCreatureKilledByHost(host: Player, attacker: Entity | Doodad, target: Entity): target is Creature;
+export default function isCreatureKilledByHost(host: Player, attacker: Human | Creature | Doodad | undefined, target: Entity): target is Creature;
