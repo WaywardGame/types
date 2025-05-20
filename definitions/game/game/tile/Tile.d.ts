@@ -65,6 +65,10 @@ export interface IMakeCaveOptions {
      * The range of tiles outward to check for another cave so we don't create them too close together.
      */
     rangeCheck?: number;
+    /**
+     * If set to true, we won't check for passable terrain adjacent to the cave (this doesn't count water).
+     */
+    disablePassableCheck?: boolean;
 }
 /**
  * Tile class

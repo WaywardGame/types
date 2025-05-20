@@ -16,6 +16,7 @@ export default class WorldTooltipHandler extends InspectionsTooltipHandler<TileI
     private currentInspectionTile;
     private currentOverlayInfo;
     private nextInspectionTile;
+    private lastCursorTile;
     private pendingSetInspectionTileTimeout;
     private lastSetInspectionTileTime;
     protected initializeHints(hints: InspectionTooltipHints): void;
@@ -23,5 +24,6 @@ export default class WorldTooltipHandler extends InspectionsTooltipHandler<TileI
     protected initializeInspections(): TileInspectionsList | undefined;
     protected onUpdateTooltipPosition(position: Vector2): void;
     private setInspectionTile;
+    private renderWorldCursor;
     protected updatePosition(): void;
 }
