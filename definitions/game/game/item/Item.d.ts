@@ -183,6 +183,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Sets the item as magical with a chance based on quality (and clears any existing magical properties)
      * @param contextualChanceMultiplier The number that chances get multiplied by, for example, 2 or 3. Currently used based on skill, island distance, etc
      * @param quantityOverride The number of properties to use instead of generating the quantity randomly
+     * @param magicalLootType The type of magical loot to use, if any. Defaults to undefined, which won't use any weighted value. When used, the property value will always use the "min" value.
      * @returns True if the item has become magical
      */
     setMagicalChanceFromQuality(contextualChanceMultiplier?: number, quantityOverride?: number, magicalLootType?: MagicalLootType): boolean;
@@ -313,7 +314,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     rerollMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     rerollMagicalPropertyValues(): void;
     initializeMagicalPropertyManager(): MagicalPropertyManager;
-    addMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
+    addMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes, valueType?: "min" | "max"): boolean;
     getMagicalPropertyInfo(type: MagicalPropertyType): IMagicalPropertyInfo | undefined;
     acquireNotify(human: Human, context?: ActionContext): void;
     getStokeFireValue(): number | undefined;
