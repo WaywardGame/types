@@ -112,7 +112,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     /**
      * Returns humans within this entities fov & that they can see
      */
-    get humansVisible(): Human[];
+    getHumansVisible(isClientside: boolean): Human[];
     get isOnFire(): FireType;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     updateRender(source: RenderSource, flag: UpdateRenderFlag): void;
