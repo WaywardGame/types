@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -50,7 +50,7 @@ export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents
     areUnlockable(mode?: import("../options/IGameOptions").GameMode): boolean;
     areUnlockableInMode(mode?: import("../options/IGameOptions").GameMode): boolean;
     isUnlockableInMode(milestone: Milestone, mode?: import("../options/IGameOptions").GameMode): boolean;
-    reset(): void;
+    reset(milestone?: Milestone): void;
     getDiscovered(milestone: Milestone): Array<string | number> | undefined;
     getDiscoveredResistsAndVulns(): Map<CreatureType, Set<DamageType>>;
     getDiscoveredResistsAndVulns(creatureType: CreatureType): Set<DamageType>;
