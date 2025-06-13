@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -186,7 +186,9 @@ export declare enum ActionType {
     ViewItems = 138,
     AscendDescend = 139,
     DiscoverRecipe = 140,
-    ExcavateCollapse = 141
+    ExcavateCollapse = 141,
+    AddItemDiscovered = 142,
+    ResetItemDiscovered = 143
 }
 export declare const ACTIONS_RECOMMENDED: ActionType[];
 export declare enum ActionUsability {

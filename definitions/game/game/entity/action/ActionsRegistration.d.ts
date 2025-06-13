@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -191,4 +191,6 @@ export declare const actionDescriptionsSlow: {
     138: import("./Action").Action<[import("@wayward/game/game/entity/action/IAction").ActionArgument.Tile], import("../Human").default<unknown, number, import("../../reference/IReferenceManager").ReferenceType.NPC | import("../../reference/IReferenceManager").ReferenceType.Player>, void, {
         usable: true;
     }, [import("../../tile/Tile").default]>;
+    142: import("./Action").Action<[import("@wayward/game/game/entity/action/IAction").ActionArgument.Integer32], import("../Human").default<unknown, number, import("../../reference/IReferenceManager").ReferenceType.NPC | import("../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [number]>;
+    143: import("./Action").Action<[], import("../Human").default<unknown, number, import("../../reference/IReferenceManager").ReferenceType.NPC | import("../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, []>;
 };

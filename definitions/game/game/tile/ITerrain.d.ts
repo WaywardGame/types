@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -175,6 +175,7 @@ export interface ITileData {
     meltDecay?: number;
     weight?: number;
     magic?: MagicalPropertyManager;
+    aestheticRandom?: number;
     disassembly?: Item[];
     ownerIdentifier?: string;
     renamed?: string | ISerializedTranslation | undefined;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -115,7 +115,9 @@ export declare enum MultiplayerSyncCheck {
     Time = 75,
     UpdateDirection = 76,
     Weight = 77,
-    WorldUpdateTile = 78
+    WorldUpdateTile = 78,
+    AddItemDiscovered = 79,
+    ResetItemDiscovered = 80
 }
 export declare const maxPlayers = 32;
 export declare const packetTickRate = 16.6666;

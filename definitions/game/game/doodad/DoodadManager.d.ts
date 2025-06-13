@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -85,7 +85,7 @@ export default class DoodadManager extends EntityManager<Doodad> {
      */
     updateAllAsync(ticks: number, playingHumans: Human[], playerHumanTiles: Set<Tile>, onProgress: (progess: number) => Promise<void>): Promise<void>;
     verifyAndFixItemWeights(): void;
-    getScarecrowInRange(tile: Tile, range: number): Doodad | undefined;
+    getScarecrowInRange(tile: Tile): Doodad | undefined;
     getScarecrowInLineOfSight(creature: Creature, isClientside: boolean): Doodad | undefined;
     private addScarecrow;
     private removeScarecrow;

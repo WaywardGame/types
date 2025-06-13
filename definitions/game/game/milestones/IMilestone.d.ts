@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2025 Unlok
+ * Copyright 2011-2024 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:

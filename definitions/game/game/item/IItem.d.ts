@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -121,6 +121,7 @@ export interface IItemDisassembly {
     maxDur: number;
     weight: number;
     magic: MagicalPropertyManager | undefined;
+    aestheticRandom: number | undefined;
     disassembly: Item[];
     tradedFrom: string[] | undefined;
     decay: number | undefined;

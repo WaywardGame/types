@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -130,6 +130,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     highestAttack?: number;
     highestDefense?: number;
     cumulativeEvilCrafting: number;
+    itemDiscovered: ItemType[];
     /** @deprecated (use the entity itself) */
     readonly inventory: IContainer;
     /**

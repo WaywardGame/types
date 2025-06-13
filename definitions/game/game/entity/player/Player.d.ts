@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -112,6 +112,12 @@ export default class Player extends Human<undefined, number, ReferenceType.Playe
     }>): void;
     private updateTablesInternal;
     shouldDiscoverRecipe(recipe: IRecipe, checker: ItemRecipeRequirementChecker): boolean;
+    /**
+     * Checks if the item is discovered based on the game options and milestones.
+     * @param itemType The type of the item to check.
+     * @returns True if the item is discovered, false otherwise.
+     */
+    private isItemDiscovered;
     private isRecipeDiscovered;
     private updateCraftTable;
     updateDismantleTable(adjacentContainers?: IContainer[], force?: boolean): void;
@@ -138,6 +144,11 @@ export default class Player extends Human<undefined, number, ReferenceType.Playe
      * Only use this clientside
      */
     isExploredClientSide(x: number, y: number, z: number): boolean;
+    /**
+     * Add milestones and local item discovery for the given item type.
+     * @param itemType The type of the item to discover.
+     */
+    discoverItem(itemType: ItemType): void;
     protected onSkillGain(skill: SkillType, fromValue: number, toValue: number, mod: number): void;
     protected getStatusApplicability(): StatusApplicability | undefined;
     private canWriteInHours;
