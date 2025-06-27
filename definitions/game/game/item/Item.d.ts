@@ -168,6 +168,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     isContainer(): this is Item & IContainer;
     isWithin(container?: IContainer): boolean;
     get builtDescription(): IDoodadDescription | undefined;
+    get placeDownDescription(): IDoodadDescription | undefined;
     countTradesWith(human?: Human): number;
     /**
      * Gets the owner of this item.
