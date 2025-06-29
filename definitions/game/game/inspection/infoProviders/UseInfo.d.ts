@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -54,9 +54,7 @@ export interface IUseInfoFactory<I extends IUseInfoBase<T, A>, T extends IDescri
     handle<I2 extends I>(predicate: UseInfoPredicate<I2, T, A>): IUseInfoFactory<I2, T, A, M>;
     method<METHOD_NAME extends string, METHOD_ARGS extends any[], METHOD_RETURN>(name: METHOD_NAME, method: UseInfoMethod<I & {
         methods: M;
-    }, T, A, METHOD_ARGS, METHOD_RETURN>): IUseInfoFactory<I, T, A, M & {
-        [key in METHOD_NAME]: (...args: METHOD_ARGS) => METHOD_RETURN;
-    }>;
+    }, T, A, METHOD_ARGS, METHOD_RETURN>): IUseInfoFactory<I, T, A, M & Record<METHOD_NAME, (...args: METHOD_ARGS) => METHOD_RETURN>>;
     apply(handler: UseInfoHandler<I & {
         methods: M;
     }, T, A>): UseInfo<I, A, M, T>;

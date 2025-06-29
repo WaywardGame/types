@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -24,18 +24,8 @@ declare const _default: UseInfo<{
     action: ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.Cure | ActionType.HealOther;
     union: import("@wayward/game/game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.Cure | ActionType.HealOther>;
     details: Set<symbol>;
-}, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.Cure | ActionType.HealOther, {
-    getSkillBonus: () => number;
-} & {
-    getQualityBonus: () => number;
-} & {
-    getMagicalBonus: () => number;
-} & {
-    getPotencyBonuses: (stat: Stat) => {
-        amount: number;
-        items: Item[];
-    } | undefined;
-} & {
-    generateUseConsumeTooltip: () => (tooltip: Tooltip, stat: Stat, base: number) => Tooltip;
-}, Item>;
+}, ActionType.Eat | ActionType.DrinkItem | ActionType.Heal | ActionType.Cure | ActionType.HealOther, Record<"getSkillBonus", () => number> & Record<"getQualityBonus", () => number> & Record<"getMagicalBonus", () => number> & Record<"getPotencyBonuses", (stat: Stat) => {
+    amount: number;
+    items: Item[];
+} | undefined> & Record<"generateUseConsumeTooltip", () => (tooltip: Tooltip, stat: Stat, base: number) => Tooltip>, Item>;
 export default _default;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,6 +14,9 @@ declare namespace Checksum {
      * https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest
      * @returns checksum string (upper case'd hex)
      */
-    function hash(data: string | Uint8Array): Promise<string>;
+    function hash(data: string | Uint8Array): Promise<{
+        data: string | Uint8Array;
+        hash: string;
+    }>;
 }
 export default Checksum;

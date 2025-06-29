@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -27,27 +27,5 @@ declare const _default: UseInfo<{
     action: ActionType.Build;
     union: import("@wayward/game/game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Build>;
     details: Set<symbol>;
-}, ActionType.Build, {
-    getWeightCapacity: () => LabelledValue | undefined;
-} & {
-    formatInsulation: (insulation: number, type?: TempType | undefined) => LabelledValue;
-} & {
-    getInsulationOfType: (type: TempType) => LabelledValue | undefined;
-} & {
-    getInsulation: () => (LabelledValue | undefined)[];
-} & {
-    getPreservationChance: () => LabelledValue | undefined;
-} & {
-    getCivilizationScore: () => LabelledValue | undefined;
-} & {
-    scareRadius: () => LabelledValue | undefined;
-} & {
-    getMagicalBuildTypes: () => Set<MagicalPropertyType>;
-} & {
-    getMagicEffect: (magic: MagicalPropertyEntry) => LabelledValue;
-} & {
-    getDoodadSkill: () => LabelledValue[];
-} & {
-    getCraftingBonus: () => LabelledValue | undefined;
-}, Item>;
+}, ActionType.Build, Record<"getWeightCapacity", () => LabelledValue | undefined> & Record<"formatInsulation", (insulation: number, type?: TempType | undefined) => LabelledValue> & Record<"getInsulationOfType", (type: TempType) => LabelledValue | undefined> & Record<"getInsulation", () => (LabelledValue | undefined)[]> & Record<"getPreservationChance", () => LabelledValue | undefined> & Record<"getCivilizationScore", () => LabelledValue | undefined> & Record<"scareRadius", () => LabelledValue | undefined> & Record<"getMagicalBuildTypes", () => Set<MagicalPropertyType>> & Record<"getMagicEffect", (magic: MagicalPropertyEntry) => LabelledValue> & Record<"getDoodadSkill", () => LabelledValue[]> & Record<"getCraftingBonus", () => LabelledValue | undefined>, Item>;
 export default _default;

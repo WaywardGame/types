@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -23,9 +23,5 @@ declare const _default: UseInfo<{
     action: ActionType.SetDown;
     union: import("@wayward/game/game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.SetDown>;
     details: Set<symbol>;
-}, ActionType.SetDown, {
-    getCivilizationScore: () => LabelledValue | undefined;
-} & {
-    getGrowingSpeed: () => LabelledValue | undefined;
-}, Item>;
+}, ActionType.SetDown, Record<"getCivilizationScore", () => LabelledValue | undefined> & Record<"getGrowingSpeed", () => LabelledValue | undefined>, Item>;
 export default _default;

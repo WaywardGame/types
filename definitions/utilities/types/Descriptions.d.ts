@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,9 +14,7 @@ declare global {
      * @param E The enum with which to index these descriptions.
      * @param V The description type.
      */
-    type OptionalDescriptions<E extends string | number, V> = {
-        [key in E]?: V;
-    } & Record<number, V | undefined>;
+    type OptionalDescriptions<E extends string | number, V> = Partial<Record<E, V>> & Record<number, V | undefined>;
     /**
      * An object of descriptions. Each key in E *will* map to a valid description.
      * @param E The enum with which to index these descriptions.

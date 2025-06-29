@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -48,9 +48,7 @@ export interface ITrelloChangelog {
 }
 export interface IChangelog {
     version: IVersionInfo;
-    sections: {
-        [index in ChangeType]?: ITrelloCard[];
-    };
+    sections: Partial<Record<ChangeType, ITrelloCard[]>>;
     changeCount: number;
 }
 export declare enum ChangeType {

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -18,9 +18,9 @@ declare enum Type {
     Dim = 1,
     Highlight = 2
 }
-type BackgroundIDTypeSuffix = `` | `-${Lowercase<keyof typeof Type>}`;
+type BackgroundIDTypeSuffix = "" | `-${Lowercase<keyof typeof Type>}`;
 type BackgroundIDQuality = Lowercase<Exclude<keyof typeof Quality, "None" | "Random">>;
-type BackgroundID = `default${BackgroundIDTypeSuffix}` | `quality-${BackgroundIDQuality}${BackgroundIDTypeSuffix}` | `damaged${BackgroundIDTypeSuffix}` | `trading${BackgroundIDTypeSuffix}` | `non-craftable` | `discovery-active` | `non-craftable-discovery`;
+type BackgroundID = `default${BackgroundIDTypeSuffix}` | `quality-${BackgroundIDQuality}${BackgroundIDTypeSuffix}` | `damaged${BackgroundIDTypeSuffix}` | `trading${BackgroundIDTypeSuffix}` | "non-craftable" | "discovery-active" | "non-craftable-discovery";
 export default class ItemStylesheetHandler {
     private readonly backgroundDefinitions;
     readonly editor: SpriteEditor;

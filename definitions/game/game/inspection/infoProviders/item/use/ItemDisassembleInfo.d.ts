@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -21,7 +21,5 @@ declare const _default: UseInfo<{
     action: ActionType.Disassemble;
     union: import("@wayward/game/game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Disassemble>;
     details: Set<symbol>;
-}, ActionType.Disassemble, {
-    getRequiredItems: () => import("../../../../../language/impl/TranslationImpl").default[];
-}, Item>;
+}, ActionType.Disassemble, Record<"getRequiredItems", () => import("../../../../../language/impl/TranslationImpl").default[]>, Item>;
 export default _default;

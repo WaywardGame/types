@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -38,9 +38,7 @@ declare global {
         /**
          * An object of string/regular-expression pairs that determine how jQuery will parse the response, given its content type. (version added: 1.5)
          */
-        contents?: {
-            [key: string]: any;
-        };
+        contents?: Record<string, any>;
         /**
          * When sending data to the server, use this content type. Default is "application/x-www-form-urlencoded; charset=UTF-8", which is fine for most cases. If you explicitly pass in a content-type to $.ajax(), then it is always sent to the server (even if no data is sent). The W3C XMLHttpRequest specification dictates that the charset is always UTF-8; specifying another charset will not force the browser to change the encoding.
          */
@@ -52,9 +50,7 @@ declare global {
         /**
          * An object containing dataType-to-dataType converters. Each converter's value is a function that returns the transformed value of the response. (version added: 1.5)
          */
-        converters?: {
-            [key: string]: any;
-        };
+        converters?: Record<string, any>;
         /**
          * If you wish to force a crossDomain request (such as JSONP) on the same domain, set the value of crossDomain to true. This allows, for example, server-side redirection to another domain. (version added: 1.5)
          */
@@ -82,9 +78,7 @@ declare global {
         /**
          * An object of additional header key/value pairs to send along with requests using the XMLHttpRequest transport. The header X-Requested-With: XMLHttpRequest is always added, but its default XMLHttpRequest value can be changed here. Values in the headers setting can also be overwritten from within the beforeSend function. (version added: 1.5)
          */
-        headers?: {
-            [key: string]: any;
-        };
+        headers?: Record<string, any>;
         /**
          * Allow the request to be successful only if the response has changed since the last request. This is done by checking the Last-Modified header. Default value is false, ignoring the header. In jQuery 1.4 this technique also checks the 'etag' specified by the server to catch unmodified data.
          */
@@ -124,9 +118,7 @@ declare global {
         /**
          * An object of numeric HTTP codes and functions to be called when the response has the corresponding code. f the request is successful, the status code functions take the same parameters as the success callback; if it results in an error (including 3xx redirect), they take the same parameters as the error callback. (version added: 1.5)
          */
-        statusCode?: {
-            [key: string]: any;
-        };
+        statusCode?: Record<string, any>;
         /**
          * A function to be called if the request succeeds. The function gets passed three arguments: The data returned from the server, formatted according to the dataType parameter; a string describing the status; and the jqXHR (in jQuery 1.4.x, XMLHttpRequest) object. As of jQuery 1.5, the success setting can accept an array of functions. Each function will be called in turn. This is an Ajax Event.
          */
@@ -158,9 +150,7 @@ declare global {
         /**
          * An object of fieldName-fieldValue pairs to set on the native XHR object. For example, you can use it to set withCredentials to true for cross-domain requests if needed. In jQuery 1.5, the withCredentials property was not propagated to the native XHR and thus CORS requests requiring it would ignore this flag. For this reason, we recommend using jQuery 1.5.1+ should you require the use of it. (version added: 1.5.1)
          */
-        xhrFields?: {
-            [key: string]: any;
-        };
+        xhrFields?: Record<string, any>;
     }
     /**
      * Interface for the jqXHR object
@@ -283,12 +273,8 @@ declare global {
     /**
      * Interface for the JQuery promise/deferred callbacks
      */
-    interface JQueryPromiseCallback<T> {
-        (value?: T, ...args: any[]): void;
-    }
-    interface JQueryPromiseOperator<T, U> {
-        (callback1: JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[], ...callbacksN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>): JQueryPromise<U>;
-    }
+    type JQueryPromiseCallback<T> = (value?: T, ...args: any[]) => void;
+    type JQueryPromiseOperator<T, U> = (callback1: JQueryPromiseCallback<T> | Array<JQueryPromiseCallback<T>>, ...callbacksN: Array<JQueryPromiseCallback<any> | Array<JQueryPromiseCallback<any>>>) => JQueryPromise<U>;
     /**
      * Interface for the JQuery promise, part of callbacks
      */
@@ -303,27 +289,27 @@ declare global {
          * @param alwaysCallbacks1 A function, or array of functions, that is called when the Deferred is resolved or rejected.
          * @param alwaysCallbacks2 Optional additional functions, or arrays of functions, that are called when the Deferred is resolved or rejected.
          */
-        always(alwaysCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[], ...alwaysCallbacksN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>): JQueryPromise<T>;
+        always(alwaysCallback1?: JQueryPromiseCallback<any> | Array<JQueryPromiseCallback<any>>, ...alwaysCallbacksN: Array<JQueryPromiseCallback<any> | Array<JQueryPromiseCallback<any>>>): JQueryPromise<T>;
         /**
          * Add handlers to be called when the Deferred object is resolved.
          *
          * @param doneCallbacks1 A function, or array of functions, that are called when the Deferred is resolved.
          * @param doneCallbacks2 Optional additional functions, or arrays of functions, that are called when the Deferred is resolved.
          */
-        done(doneCallback1?: JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[], ...doneCallbackN: Array<JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[]>): JQueryPromise<T>;
+        done(doneCallback1?: JQueryPromiseCallback<T> | Array<JQueryPromiseCallback<T>>, ...doneCallbackN: Array<JQueryPromiseCallback<T> | Array<JQueryPromiseCallback<T>>>): JQueryPromise<T>;
         /**
          * Add handlers to be called when the Deferred object is rejected.
          *
          * @param failCallbacks1 A function, or array of functions, that are called when the Deferred is rejected.
          * @param failCallbacks2 Optional additional functions, or arrays of functions, that are called when the Deferred is rejected.
          */
-        fail(failCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[], ...failCallbacksN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>): JQueryPromise<T>;
+        fail(failCallback1?: JQueryPromiseCallback<any> | Array<JQueryPromiseCallback<any>>, ...failCallbacksN: Array<JQueryPromiseCallback<any> | Array<JQueryPromiseCallback<any>>>): JQueryPromise<T>;
         /**
          * Add handlers to be called when the Deferred object generates progress notifications.
          *
          * @param progressCallbacks A function, or array of functions, to be called when the Deferred generates progress notifications.
          */
-        progress(progressCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[], ...progressCallbackN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>): JQueryPromise<T>;
+        progress(progressCallback1?: JQueryPromiseCallback<any> | Array<JQueryPromiseCallback<any>>, ...progressCallbackN: Array<JQueryPromiseCallback<any> | Array<JQueryPromiseCallback<any>>>): JQueryPromise<T>;
         pipe(doneFilter?: (x: any) => any, failFilter?: (x: any) => any, progressFilter?: (x: any) => any): JQueryPromise<any>;
     }
     /**
@@ -340,27 +326,27 @@ declare global {
          * @param alwaysCallbacks1 A function, or array of functions, that is called when the Deferred is resolved or rejected.
          * @param alwaysCallbacks2 Optional additional functions, or arrays of functions, that are called when the Deferred is resolved or rejected.
          */
-        always(alwaysCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[], ...alwaysCallbacksN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>): JQueryDeferred<T>;
+        always(alwaysCallback1?: JQueryPromiseCallback<any> | Array<JQueryPromiseCallback<any>>, ...alwaysCallbacksN: Array<JQueryPromiseCallback<any> | Array<JQueryPromiseCallback<any>>>): JQueryDeferred<T>;
         /**
          * Add handlers to be called when the Deferred object is resolved.
          *
          * @param doneCallbacks1 A function, or array of functions, that are called when the Deferred is resolved.
          * @param doneCallbacks2 Optional additional functions, or arrays of functions, that are called when the Deferred is resolved.
          */
-        done(doneCallback1?: JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[], ...doneCallbackN: Array<JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[]>): JQueryDeferred<T>;
+        done(doneCallback1?: JQueryPromiseCallback<T> | Array<JQueryPromiseCallback<T>>, ...doneCallbackN: Array<JQueryPromiseCallback<T> | Array<JQueryPromiseCallback<T>>>): JQueryDeferred<T>;
         /**
          * Add handlers to be called when the Deferred object is rejected.
          *
          * @param failCallbacks1 A function, or array of functions, that are called when the Deferred is rejected.
          * @param failCallbacks2 Optional additional functions, or arrays of functions, that are called when the Deferred is rejected.
          */
-        fail(failCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[], ...failCallbacksN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>): JQueryDeferred<T>;
+        fail(failCallback1?: JQueryPromiseCallback<any> | Array<JQueryPromiseCallback<any>>, ...failCallbacksN: Array<JQueryPromiseCallback<any> | Array<JQueryPromiseCallback<any>>>): JQueryDeferred<T>;
         /**
          * Add handlers to be called when the Deferred object generates progress notifications.
          *
          * @param progressCallbacks A function, or array of functions, to be called when the Deferred generates progress notifications.
          */
-        progress(progressCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[], ...progressCallbackN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>): JQueryDeferred<T>;
+        progress(progressCallback1?: JQueryPromiseCallback<any> | Array<JQueryPromiseCallback<any>>, ...progressCallbackN: Array<JQueryPromiseCallback<any> | Array<JQueryPromiseCallback<any>>>): JQueryDeferred<T>;
         /**
          * Call the progressCallbacks on a Deferred object with the given args.
          *
@@ -560,11 +546,9 @@ declare global {
         /**
          * A map of one or more of the CSS properties defined by the properties argument and their corresponding easing functions. (version added: 1.4)
          */
-        specialEasing?: Object;
+        specialEasing?: object;
     }
-    interface JQueryEasingFunction {
-        (percent: number): number;
-    }
+    type JQueryEasingFunction = (percent: number) => number;
     interface JQueryEasingFunctions {
         [name: string]: JQueryEasingFunction;
         linear: JQueryEasingFunction;
@@ -623,7 +607,7 @@ declare global {
          * @param success A callback function that is executed if the request succeeds.
          * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, or html).
          */
-        get(url: string, data?: Object | string, success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any, dataType?: string): JQueryXHR;
+        get(url: string, data?: object | string, success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any, dataType?: string): JQueryXHR;
         /**
          * Load JSON-encoded data from the server using a GET HTTP request.
          *
@@ -638,7 +622,7 @@ declare global {
          * @param data A plain object or string that is sent to the server with the request.
          * @param success A callback function that is executed if the request succeeds.
          */
-        getJSON(url: string, data?: Object | string, success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any): JQueryXHR;
+        getJSON(url: string, data?: object | string, success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any): JQueryXHR;
         /**
          * Load a JavaScript file from the server using a GET HTTP request, then execute it.
          *
@@ -666,7 +650,7 @@ declare global {
          * @param success A callback function that is executed if the request succeeds. Required if dataType is provided, but can be null in that case.
          * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).
          */
-        post(url: string, data?: Object | string, success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any, dataType?: string): JQueryXHR;
+        post(url: string, data?: object | string, success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any, dataType?: string): JQueryXHR;
         /**
          * A multi-purpose callbacks list object that provides a powerful way to manage callback lists.
          *
@@ -733,7 +717,7 @@ declare global {
          * @param html A string defining a single, standalone, HTML element (e.g. <div/> or <div></div>).
          * @param attributes An object of attributes, events, and methods to call on the newly-created element.
          */
-        (html: string, attributes: Object): JQuery;
+        (html: string, attributes: object): JQuery;
         /**
          * Relinquish jQuery's control of the $ variable.
          *
@@ -749,9 +733,7 @@ declare global {
         /**
          * Hook directly into jQuery to override how particular CSS properties are retrieved or set, normalize CSS property naming, or create custom properties.
          */
-        cssHooks: {
-            [key: string]: any;
-        };
+        cssHooks: Record<string, any>;
         cssNumber: any;
         /**
          * Store arbitrary data associated with the specified element. Returns the value that was set.
@@ -851,7 +833,7 @@ declare global {
          * @param context The object to which the context (this) of the function should be set.
          * @param additionalArguments Any number of arguments to be passed to the function referenced in the function argument.
          */
-        proxy(fnction: (...args: any[]) => any, context: Object, ...additionalArguments: any[]): any;
+        proxy(fnction: (...args: any[]) => any, context: object, ...additionalArguments: any[]): any;
         /**
          * Takes a function and returns a new one that will always have a particular context.
          *
@@ -859,7 +841,7 @@ declare global {
          * @param name The name of the function whose context will be changed (should be a property of the context object).
          * @param additionalArguments Any number of arguments to be passed to the function named in the name argument.
          */
-        proxy(context: Object, name: string, ...additionalArguments: any[]): any;
+        proxy(context: object, name: string, ...additionalArguments: any[]): any;
         Event: JQueryEventConstructor;
         /**
          * Takes a string and throws an exception containing it.
@@ -1102,7 +1084,7 @@ declare global {
          * @param data A plain object or string that is sent to the server with the request.
          * @param complete A callback function that is executed when the request completes.
          */
-        load(url: string, data?: string | Object, complete?: (responseText: string, textStatus: string, XMLHttpRequest: XMLHttpRequest) => any): JQuery;
+        load(url: string, data?: string | object, complete?: (responseText: string, textStatus: string, XMLHttpRequest: XMLHttpRequest) => any): JQuery;
         /**
          * Encode a set of form elements as a string for submission.
          */
@@ -1152,7 +1134,7 @@ declare global {
          *
          * @param attributes An object of attribute-value pairs to set.
          */
-        attr(attributes: Object): JQuery;
+        attr(attributes: object): JQuery;
         /**
          * Determine whether any of the matched elements are assigned the given class.
          *
@@ -1198,7 +1180,7 @@ declare global {
          *
          * @param properties An object of property-value pairs to set.
          */
-        prop(properties: Object): JQuery;
+        prop(properties: object): JQuery;
         /**
          * Set one or more properties for the set of matched elements.
          *
@@ -1291,7 +1273,7 @@ declare global {
          *
          * @param properties An object of property-value pairs to set.
          */
-        css(properties: Object): JQuery;
+        css(properties: object): JQuery;
         /**
          * Get the current computed height for the first element in the set of matched elements.
          */
@@ -1432,9 +1414,7 @@ declare global {
          *
          * @param obj An object of key-value pairs of data to update.
          */
-        data(obj: {
-            [key: string]: any;
-        }): JQuery;
+        data(obj: Record<string, any>): JQuery;
         /**
          * Return the value at the named data store for the first element in the jQuery collection, as set by data(name, value) or by an HTML5 data-* attribute.
          */
@@ -1467,7 +1447,7 @@ declare global {
          * @param type The type of queue that needs to be observed. (default: fx)
          * @param target Object onto which the promise methods have to be attached
          */
-        promise(type?: string, target?: Object): JQueryPromise<any>;
+        promise(type?: string, target?: object): JQueryPromise<any>;
         /**
          * Perform a custom animation of a set of CSS properties.
          *
@@ -1475,7 +1455,7 @@ declare global {
          * @param duration A string or number determining how long the animation will run.
          * @param complete A function to call once the animation is complete.
          */
-        animate(properties: Object, duration?: string | number, complete?: Function): JQuery;
+        animate(properties: object, duration?: string | number, complete?: Function): JQuery;
         /**
          * Perform a custom animation of a set of CSS properties.
          *
@@ -1484,14 +1464,14 @@ declare global {
          * @param easing A string indicating which easing function to use for the transition. (default: swing)
          * @param complete A function to call once the animation is complete.
          */
-        animate(properties: Object, duration?: string | number, easing?: string, complete?: Function): JQuery;
+        animate(properties: object, duration?: string | number, easing?: string, complete?: Function): JQuery;
         /**
          * Perform a custom animation of a set of CSS properties.
          *
          * @param properties An object of CSS properties and values that the animation will move toward.
          * @param options A map of additional options to pass to the method.
          */
-        animate(properties: Object, options: JQueryAnimationOptions): JQuery;
+        animate(properties: object, options: JQueryAnimationOptions): JQuery;
         /**
          * Set a timer to delay execution of subsequent items in the queue.
          *
@@ -1871,7 +1851,7 @@ declare global {
          * @param eventData An object containing data that will be passed to the event handler.
          * @param handler A function to execute each time the event is triggered.
          */
-        focusin(eventData: Object, handler: (eventObject: JQueryEventObject) => any): JQuery;
+        focusin(eventData: object, handler: (eventObject: JQueryEventObject) => any): JQuery;
         /**
          * Trigger the "focusout" event on an element.
          */
@@ -1888,7 +1868,7 @@ declare global {
          * @param eventData An object containing data that will be passed to the event handler.
          * @param handler A function to execute each time the event is triggered.
          */
-        focusout(eventData: Object, handler: (eventObject: JQueryEventObject) => any): JQuery;
+        focusout(eventData: object, handler: (eventObject: JQueryEventObject) => any): JQuery;
         /**
          * Bind two handlers to the matched elements, to be executed when the mouse pointer enters and leaves the elements.
          *
@@ -1982,7 +1962,7 @@ declare global {
          * @param eventData An object containing data that will be passed to the event handler.
          * @param handler A function to execute when the event is triggered.
          */
-        mousedown(eventData: Object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
+        mousedown(eventData: object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
         /**
          * Trigger the "mouseenter" event on an element.
          */
@@ -1999,7 +1979,7 @@ declare global {
          * @param eventData An object containing data that will be passed to the event handler.
          * @param handler A function to execute when the event is triggered.
          */
-        mouseenter(eventData: Object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
+        mouseenter(eventData: object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
         /**
          * Trigger the "mouseleave" event on an element.
          */
@@ -2016,7 +1996,7 @@ declare global {
          * @param eventData An object containing data that will be passed to the event handler.
          * @param handler A function to execute when the event is triggered.
          */
-        mouseleave(eventData: Object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
+        mouseleave(eventData: object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
         /**
          * Trigger the "mousemove" event on an element.
          */
@@ -2033,7 +2013,7 @@ declare global {
          * @param eventData An object containing data that will be passed to the event handler.
          * @param handler A function to execute when the event is triggered.
          */
-        mousemove(eventData: Object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
+        mousemove(eventData: object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
         /**
          * Trigger the "mouseout" event on an element.
          */
@@ -2050,7 +2030,7 @@ declare global {
          * @param eventData An object containing data that will be passed to the event handler.
          * @param handler A function to execute when the event is triggered.
          */
-        mouseout(eventData: Object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
+        mouseout(eventData: object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
         /**
          * Trigger the "mouseover" event on an element.
          */
@@ -2067,7 +2047,7 @@ declare global {
          * @param eventData An object containing data that will be passed to the event handler.
          * @param handler A function to execute when the event is triggered.
          */
-        mouseover(eventData: Object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
+        mouseover(eventData: object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
         /**
          * Trigger the "mouseup" event on an element.
          */
@@ -2084,7 +2064,7 @@ declare global {
          * @param eventData An object containing data that will be passed to the event handler.
          * @param handler A function to execute when the event is triggered.
          */
-        mouseup(eventData: Object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
+        mouseup(eventData: object, handler: (eventObject: JQueryMouseEventObject) => any): JQuery;
         /**
          * Remove an event handler.
          */
@@ -2117,9 +2097,7 @@ declare global {
          * @param events An object where the string keys represent one or more space-separated event types and optional namespaces, and the values represent handler functions previously attached for the event(s).
          * @param selector A selector which should match the one originally passed to .on() when attaching event handlers.
          */
-        off(events: {
-            [key: string]: any;
-        }, selector?: string): JQuery;
+        off(events: Record<string, any>, selector?: string): JQuery;
         /**
          * Attach an event handler function for one or more events to the selected elements.
          *
@@ -2133,7 +2111,7 @@ declare global {
          * @param events One or more space-separated event types and optional namespaces, such as "click" or "keydown.myPlugin".
          * @param data Data to be passed to the handler in event.data when an event is triggered.
          * @param handler A function to execute when the event is triggered. The value false is also allowed as a shorthand for a function that simply does return false.
-        */
+         */
         on(events: string, data: any, handler: (eventObject: JQueryEventObject, ...args: any[]) => any): JQuery;
         /**
          * Attach an event handler function for one or more events to the selected elements.
@@ -2159,18 +2137,14 @@ declare global {
          * @param selector A selector string to filter the descendants of the selected elements that will call the handler. If the selector is null or omitted, the handler is always called when it reaches the selected element.
          * @param data Data to be passed to the handler in event.data when an event occurs.
          */
-        on(events: {
-            [key: string]: any;
-        }, selector?: string, data?: any): JQuery;
+        on(events: Record<string, any>, selector?: string, data?: any): JQuery;
         /**
          * Attach an event handler function for one or more events to the selected elements.
          *
          * @param events An object in which the string keys represent one or more space-separated event types and optional namespaces, and the values represent a handler function to be called for the event(s).
          * @param data Data to be passed to the handler in event.data when an event occurs.
          */
-        on(events: {
-            [key: string]: any;
-        }, data?: any): JQuery;
+        on(events: Record<string, any>, data?: any): JQuery;
         /**
          * Attach a handler to an event for the elements. The handler is executed at most once per element per event type.
          *
@@ -2185,7 +2159,7 @@ declare global {
          * @param data An object containing data that will be passed to the event handler.
          * @param handler A function to execute at the time the event is triggered.
          */
-        one(events: string, data: Object, handler: (eventObject: JQueryEventObject) => any): JQuery;
+        one(events: string, data: object, handler: (eventObject: JQueryEventObject) => any): JQuery;
         /**
          * Attach a handler to an event for the elements. The handler is executed at most once per element per event type.
          *
@@ -2210,18 +2184,14 @@ declare global {
          * @param selector A selector string to filter the descendants of the selected elements that will call the handler. If the selector is null or omitted, the handler is always called when it reaches the selected element.
          * @param data Data to be passed to the handler in event.data when an event occurs.
          */
-        one(events: {
-            [key: string]: any;
-        }, selector?: string, data?: any): JQuery;
+        one(events: Record<string, any>, selector?: string, data?: any): JQuery;
         /**
          * Attach a handler to an event for the elements. The handler is executed at most once per element per event type.
          *
          * @param events An object in which the string keys represent one or more space-separated event types and optional namespaces, and the values represent a handler function to be called for the event(s).
          * @param data Data to be passed to the handler in event.data when an event occurs.
          */
-        one(events: {
-            [key: string]: any;
-        }, data?: any): JQuery;
+        one(events: Record<string, any>, data?: any): JQuery;
         /**
          * Specify a function to execute when the DOM is fully loaded.
          *
@@ -2244,7 +2214,7 @@ declare global {
          * @param eventData An object containing data that will be passed to the event handler.
          * @param handler A function to execute each time the event is triggered.
          */
-        resize(eventData: Object, handler: (eventObject: JQueryEventObject) => any): JQuery;
+        resize(eventData: object, handler: (eventObject: JQueryEventObject) => any): JQuery;
         /**
          * Trigger the "scroll" event on an element.
          */
@@ -2261,7 +2231,7 @@ declare global {
          * @param eventData An object containing data that will be passed to the event handler.
          * @param handler A function to execute each time the event is triggered.
          */
-        scroll(eventData: Object, handler: (eventObject: JQueryEventObject) => any): JQuery;
+        scroll(eventData: object, handler: (eventObject: JQueryEventObject) => any): JQuery;
         /**
          * Trigger the "select" event on an element.
          */
@@ -2278,7 +2248,7 @@ declare global {
          * @param eventData An object containing data that will be passed to the event handler.
          * @param handler A function to execute each time the event is triggered.
          */
-        select(eventData: Object, handler: (eventObject: JQueryEventObject) => any): JQuery;
+        select(eventData: object, handler: (eventObject: JQueryEventObject) => any): JQuery;
         /**
          * Trigger the "submit" event on an element.
          */
@@ -2302,28 +2272,28 @@ declare global {
          * @param eventType A string containing a JavaScript event type, such as click or submit.
          * @param extraParameters Additional parameters to pass along to the event handler.
          */
-        trigger(eventType: string, extraParameters?: any[] | Object): JQuery;
+        trigger(eventType: string, extraParameters?: any[] | object): JQuery;
         /**
          * Execute all handlers and behaviors attached to the matched elements for the given event type.
          *
          * @param event A jQuery.Event object.
          * @param extraParameters Additional parameters to pass along to the event handler.
          */
-        trigger(event: JQueryEventObject, extraParameters?: any[] | Object): JQuery;
+        trigger(event: JQueryEventObject, extraParameters?: any[] | object): JQuery;
         /**
          * Execute all handlers attached to an element for an event.
          *
          * @param eventType A string containing a JavaScript event type, such as click or submit.
          * @param extraParameters An array of additional parameters to pass along to the event handler.
          */
-        triggerHandler(eventType: string, ...extraParameters: any[]): Object;
+        triggerHandler(eventType: string, ...extraParameters: any[]): object;
         /**
          * Execute all handlers attached to an element for an event.
          *
          * @param event A jQuery.Event object.
          * @param extraParameters An array of additional parameters to pass along to the event handler.
          */
-        triggerHandler(event: JQueryEventObject, ...extraParameters: any[]): Object;
+        triggerHandler(event: JQueryEventObject, ...extraParameters: any[]): object;
         /**
          * Remove a previously-attached event handler from the elements.
          *
@@ -2362,7 +2332,7 @@ declare global {
          * @param selector A selector which will be used to filter the event results.
          * @param events An object of one or more event types and previously bound functions to unbind from them.
          */
-        undelegate(selector: string, events: Object): JQuery;
+        undelegate(selector: string, events: object): JQuery;
         /**
          * Remove a handler from the event for all elements which match the current selector, based upon a specific set of root elements.
          *

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -19,13 +19,13 @@ export declare class WebWorker<RequestType, ResultType> {
     private worker;
     private blobUrl;
     private postMessagePromise;
-    constructor(workerFunction: WorkerFunction<RequestType, ResultType>);
+    private static moduleCache;
+    constructor(workerFunction: WorkerFunction<RequestType, ResultType>, extraBlobs?: string[]);
     free(): void;
-    postMessage(message: RequestType): Promise<ResultType>;
-    private normalizeFunction;
-    private definitionPropertiesToBoolean;
-    private enumToString;
-    private functionOrClassToString;
-    private moduleToString;
-    private biomesToString;
+    postMessage(message: RequestType, transfer?: Transferable[]): Promise<ResultType>;
+    protected static normalizeFunction(func: any): string;
+    protected static definitionPropertiesToBoolean(name: string, values: any): string;
+    protected static enumToString(name: string, values: any, withStrings?: boolean): string;
+    protected static functionOrClassToString(thing: any): string;
+    protected static moduleToString(moduleName: string, name: string | undefined, moduleToConvert: any, globalVariables?: string[]): string;
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,9 +10,7 @@
  */
 declare global {
     type Empty = Record<string, never>;
-    type PartialRecord<K extends string | number | symbol, V> = {
-        [P in K]?: V;
-    };
+    type PartialRecord<K extends string | number | symbol, V> = Partial<Record<K, V>>;
     type Entry<O> = {
         [K in keyof O]: [K, O[K]];
     }[keyof O];
@@ -49,11 +47,7 @@ declare global {
      * Merges T1 and T2, favouring properties from T2
      */
     type Merge<T1, T2> = {
-        [KEY in keyof T1 | keyof T2]: T2 extends {
-            [OLD_KEY in KEY]?: any;
-        } ? T2[KEY] : T1 extends {
-            [NEW_KEY in KEY]?: any;
-        } ? T1[KEY] : never;
+        [KEY in keyof T1 | keyof T2]: T2 extends Partial<Record<KEY, any>> ? T2[KEY] : T1 extends Partial<Record<KEY, any>> ? T1[KEY] : never;
     };
 }
 declare const _default: {};
