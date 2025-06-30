@@ -61,9 +61,6 @@ export interface IPostSerializeCallback {
 export interface IUnserializedCallback {
     onUnserialized(serializer: ISerializer): void;
 }
-export interface IPropSerializable {
-    getSerializationProperties(version: string): string[];
-}
 /**
  * Note 1: Do not add anything to this list unless Spacetech approves it
  * Note 2: Max of 255 types before the game breaks

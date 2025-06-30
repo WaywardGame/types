@@ -31,6 +31,7 @@ declare const propertiesToSerializeObject: {
     };
     ui: {
         property: string[];
+        shouldSerialize: () => boolean;
     };
     world: {
         property: string[];
