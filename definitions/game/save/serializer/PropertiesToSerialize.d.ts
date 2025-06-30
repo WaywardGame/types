@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -31,6 +31,7 @@ declare const propertiesToSerializeObject: {
     };
     ui: {
         property: string[];
+        shouldSerialize: () => boolean;
     };
     world: {
         property: string[];

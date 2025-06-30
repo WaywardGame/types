@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,11 +11,11 @@
 import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 export declare enum MagicalLootType {
     All = 0,
-    High = 1,
+    VeryLow = 1,
     Low = 2,
     Medium = 3,
-    VeryHigh = 4,
-    VeryLow = 5
+    High = 4,
+    VeryHigh = 5
 }
 export declare const magicalLootGroup: Array<Array<[number, MagicalPropertyType | undefined]>>;
 export default magicalLootGroup;

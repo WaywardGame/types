@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -25,25 +25,5 @@ declare const _default: UseInfo<{
     action: ActionType.Equip;
     union: import("@wayward/game/game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.Equip>;
     details: Set<symbol>;
-}, ActionType.Equip, {
-    getMagicalEquipTypes: () => Set<MagicalPropertyType>;
-} & {
-    getMagicalPropertyLabels: () => Map<MagicalPropertyType, UiTranslation>;
-} & {
-    isMagicalPropertyPercentage: (property: MagicalPropertyType) => boolean;
-} & {
-    isMagicalPropertyPercentagePremultiplied: (property: MagicalPropertyType) => boolean;
-} & {
-    getAttack: () => import("@wayward/game/game/inspection/InfoProvider").SimpleInfoProvider | undefined;
-} & {
-    getDefense: () => import("../../../../../language/impl/TranslationImpl").default[];
-} & {
-    formatInsulation: (insulation?: number | undefined, type?: TempType | undefined) => import("../../../../../language/impl/TranslationImpl").default;
-} & {
-    getInsulation: () => (import("../../../../../language/impl/TranslationImpl").default | undefined)[];
-} & {
-    getMagicEffect: (magic: MagicalPropertyEntry) => import("../../../../../language/impl/TranslationImpl").default;
-} & {
-    getMagic: () => import("../../../../../language/impl/TranslationImpl").default[];
-}, Item>;
+}, ActionType.Equip, Record<"getMagicalEquipTypes", () => Set<MagicalPropertyType>> & Record<"getMagicalPropertyLabels", () => Map<MagicalPropertyType, UiTranslation>> & Record<"isMagicalPropertyPercentage", (property: MagicalPropertyType) => boolean> & Record<"isMagicalPropertyPercentagePremultiplied", (property: MagicalPropertyType) => boolean> & Record<"getAttack", () => import("@wayward/game/game/inspection/InfoProvider").SimpleInfoProvider | undefined> & Record<"getDefense", () => import("../../../../../language/impl/TranslationImpl").default[]> & Record<"formatInsulation", (insulation?: number | undefined, type?: TempType | undefined) => import("../../../../../language/impl/TranslationImpl").default> & Record<"getInsulation", () => (import("../../../../../language/impl/TranslationImpl").default | undefined)[]> & Record<"getMagicEffect", (magic: MagicalPropertyEntry) => import("../../../../../language/impl/TranslationImpl").default> & Record<"getMagic", () => import("../../../../../language/impl/TranslationImpl").default[]>, Item>;
 export default _default;

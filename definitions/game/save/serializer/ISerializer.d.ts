@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -60,9 +60,6 @@ export interface IPostSerializeCallback {
 }
 export interface IUnserializedCallback {
     onUnserialized(serializer: ISerializer): void;
-}
-export interface IPropSerializable {
-    getSerializationProperties(version: string): string[];
 }
 /**
  * Note 1: Do not add anything to this list unless Spacetech approves it

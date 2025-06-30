@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,9 +12,7 @@ declare global {
     type Mutable<T> = {
         -readonly [P in keyof T]: T[P];
     };
-    type PropertyOf<T, K extends string | number | symbol> = T extends {
-        [key in K]: infer V;
-    } ? V : never;
+    type PropertyOf<T, K extends string | number | symbol> = T extends Record<K, infer V> ? V : never;
     type Falsy = undefined | null | 0 | "" | false;
     type Nullish = undefined | null;
     type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;

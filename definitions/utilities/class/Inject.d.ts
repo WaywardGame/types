@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -42,9 +42,7 @@ export declare enum InjectionPosition {
      */
     Post = "post"
 }
-export declare function InjectObject<T, K extends keyof T>(injectInto: T, property: K, position: InjectionPosition, priority?: number): T extends {
-    [KEY in K]?: AnyFunction;
-} ? (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any : never;
+export declare function InjectObject<T, K extends keyof T>(injectInto: T, property: K, position: InjectionPosition, priority?: number): T extends Partial<Record<K, AnyFunction>> ? (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any : never;
 export declare function Inject<T extends Record<K, AnyFunction>, K extends keyof T>(injectInto: AnyClass<T>, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any;
 export declare namespace Inject {
     function makeInjectableClass<T extends AbstractNullaryClass<any>, O>(cls: T): Class<Merge<InstanceOf<T>, O>>;

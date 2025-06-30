@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -77,7 +77,8 @@ export declare enum Milestone {
     Turbulent = 65,
     Statistician = 66,
     Afflicted = 67,
-    Exsanguinated = 68
+    Exsanguinated = 68,
+    InternalItemDiscovered = 69
 }
 export type ExcludeInternalMilestones<MILESTONE extends Milestone> = PickValueKeys<typeof Milestone, MILESTONE> extends `Internal${string}` ? never : MILESTONE;
 export declare enum MilestoneVisibility {

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -25,6 +25,7 @@ export declare const MERCHANT_SELL_PRICE_MULTIPLIER = 1.5;
 export declare const MERCHANT_ALREADY_TRADED_MULTIPLIER = 1.1;
 export declare const NPC_MERCHANT_SPAWN_COUNT_CIV_SCORE_BONUS_MULTIPLIER = 0.005;
 export declare const NPC_MERCHANT_SPAWN_COUNT_DISTANCE_PENALTY_MULTIPLIER = 0.1;
+export declare const NPC_MERCHANT_SPAWN_COUNT_MAX = 100;
 export declare const NPC_SHIPPER_SPAWN_COUNT_CIV_SCORE_BONUS_MULTIPLIER = 0.001;
 export declare const NPC_SHIPPER_SPAWN_COUNT_DISTANCE_BONUS_MULTIPLIER = 0.05;
 export declare const NPC_SHIPPER_SPAWN_COUNT_SHIPPER_PORTS_BONUS_MULTIPLIER = 0.1;

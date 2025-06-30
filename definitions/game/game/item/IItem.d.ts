@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -121,6 +121,7 @@ export interface IItemDisassembly {
     maxDur: number;
     weight: number;
     magic: MagicalPropertyManager | undefined;
+    aestheticRandom: number | undefined;
     disassembly: Item[];
     tradedFrom: string[] | undefined;
     decay: number | undefined;
@@ -335,6 +336,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     civilizationContainerScore?: number;
     /**
      * Whether magical properties have no effect on this item.
+     * When magical properties are added to this item, the property value will be a decimal number between 0 and 1, inclusive to signify the value between the minimum and maximum of the target item's magical property value.
      */
     magicInert?: true;
     /**
@@ -401,6 +403,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     canAlter?: false;
     canTransmogrify?: false;
     canUpgrade?: false;
+    canPreserve?: false;
 }
 export declare namespace IItemDescription {
     function actionDisabled(description: IItemDescription | undefined, action: ActionType): boolean;

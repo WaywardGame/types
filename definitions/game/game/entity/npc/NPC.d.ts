@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -181,7 +181,7 @@ export default abstract class NPC extends Human<INPCDescription, NPCType, Refere
     protected changeZ(toZ: number, fromZ: number): boolean | void | undefined;
     protected onAiChange(ai: AiType, type: ChangeAiType): void;
     protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
-    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human): 0 | -1 | -6 | -2 | -3 | -4 | -5;
+    canMoveToTile(moveType: MoveType, tile: Tile, ignoreHuman?: Human, skipEventCheck?: boolean): 0 | -1 | -6 | -2 | -3 | -4 | -5;
     getWeightOrStaminaMovementPenalty(): number;
     get asMerchant(): MerchantNPC | undefined;
     get asShipper(): ShipperNPC | undefined;

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -14,7 +14,9 @@ import InspectionsTooltipHandler from "@wayward/game/ui/screen/screens/game/Insp
 import type Vector2 from "@wayward/game/utilities/math/Vector2";
 export default class WorldTooltipHandler extends InspectionsTooltipHandler<TileInspectionsList> {
     private currentInspectionTile;
+    private currentOverlayInfo;
     private nextInspectionTile;
+    private lastCursorTile;
     private pendingSetInspectionTileTimeout;
     private lastSetInspectionTileTime;
     protected initializeHints(hints: InspectionTooltipHints): void;
@@ -22,5 +24,6 @@ export default class WorldTooltipHandler extends InspectionsTooltipHandler<TileI
     protected initializeInspections(): TileInspectionsList | undefined;
     protected onUpdateTooltipPosition(position: Vector2): void;
     private setInspectionTile;
+    private renderWorldCursor;
     protected updatePosition(): void;
 }

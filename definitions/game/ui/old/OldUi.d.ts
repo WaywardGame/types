@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -31,7 +31,6 @@ export default class OldUi {
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent, force?: boolean): void;
     shouldRefreshMods(): boolean;
-    getSerializationProperties(_: string): string[];
     setVersionExtra(msg: string): void;
     openDialogs(): void;
     logErrorEvent(eventOrError: unknown, skipLog?: true): void;

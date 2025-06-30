@@ -1,5 +1,5 @@
 /*!
- * Copyright 2011-2024 Unlok
+ * Copyright 2011-2025 Unlok
  * https://www.unlok.ca
  *
  * Credits & Thanks:
@@ -128,7 +128,8 @@ export declare enum RenderSource {
     StartGame = 63,
     Steamworks = 64,
     Thumbnail = 65,
-    WorldLayerRendererFlush = 66
+    WorldLayerRendererFlush = 66,
+    WorldTooltipHover = 67
 }
 export declare function calculateAmbientLightLevel(origin: IFieldOfViewOrigin, z: number): number;
 export declare const ZOOM_LEVEL_MIN = 1;
