@@ -54,10 +54,15 @@ export default class NPCManager extends EntityManager<NPC> {
     event: IEventEmitter<this, INPCManagerEvents>;
     readonly playerLikeNpcs: NPC[];
     private readonly spawnIntervals;
+    private killCount;
     loadEntity(npc: NPC): void;
     create(npcType: NPCType, tile: Tile, options?: INPCCanCreateOptions): NPC | undefined;
     protected onRemove(npc: NPC): boolean;
     addPlayerLike(npc: NPC, addToIsland?: boolean): void;
+    /**
+     * Increases the number of kills by 1 (which affects the spawn rate of npcs)
+     */
+    increaseKillCount(): void;
     removePlayerLike(npc: NPC): void;
     updateAll(): void;
     /**

@@ -139,12 +139,14 @@ export interface IMoveItemOptions {
     skipDrop?: true;
     skipClearSort?: true;
     context?: ActionContext;
+    skipTradeChecks?: boolean;
 }
 export interface IPlaceOnTileOptions {
     force?: boolean;
     skipMessage?: boolean;
     skipTileUpdate?: boolean;
     animateMovement?: boolean | Partial<IMoveToTileOptions>;
+    skipTradeChecks?: boolean;
 }
 export declare enum ContainerReferenceSource {
     ContainerWeightReduction = 0,
