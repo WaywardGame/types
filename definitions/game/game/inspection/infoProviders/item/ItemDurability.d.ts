@@ -11,7 +11,7 @@
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import LabelledValue from "@wayward/game/game/inspection/infoProviders/LabelledValue";
 import type Item from "@wayward/game/game/item/Item";
-export default class ItemDurabilityInfoProvider extends InfoProvider {
+export default class ItemDurabilityDecayInfoProvider extends InfoProvider {
     private readonly item;
     constructor(item: Item);
     getClass(): string[];

@@ -382,8 +382,9 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Sets the item's decay time (ticks until it decays at 1x decay speed).
      * @param decayTime The new decay time to set, or `undefined` to remove the decay time.
      * @param bypassMax If set to true, it will not check the maximum decay time and will set it to the given value.
+     * @param increaseStartingDecay If set to true, it will increase the starting decay time if the new decay time is higher than the starting decay time.
      */
-    setDecayTime(decayTime?: number, bypassMax?: boolean): void;
+    setDecayTime(decayTime?: number, capDecayMax?: boolean, increaseStartingDecay?: boolean): void;
     /**
      * Resets the item's decay with some added randomization.
      */
