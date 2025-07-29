@@ -26,7 +26,7 @@ export interface IObjectDescription extends IHasImagePath {
      */
     storeDecay?: ItemType;
     /**
-     * number of game ticks until decay
+     * Number of game ticks until decay. If this is a lit doodad, or tile event, this is the maximum value it can get to while getting fuelled or stoked.
      */
     decayMax?: number;
     /**
