@@ -87,11 +87,11 @@ export default class SaveManager extends EventEmitter.Host<ISaveManagerEvents> {
     /**
      * Exports the specified slot into a Uint8Array format that can be used with importSave
      */
-    exportSlotAsUint8Array(slot: number): Promise<Uint8Array>;
+    exportSlotAsUint8Array(slot: number): Promise<Uint8Array<ArrayBuffer>>;
     /**
      * Exports a saveObject into a Uint8Array format that can be used with importSave
      */
-    exportSaveObjectAsUint8Array(saveObject: ISaveObject): Uint8Array;
+    exportSaveObjectAsUint8Array(saveObject: ISaveObject): Uint8Array<ArrayBuffer>;
     /**
      * Converts a Uint8Array into a SaveObject
      * Used in conjection with exportSlotAsUint8Array / exportSaveObjectAsUint8Array
