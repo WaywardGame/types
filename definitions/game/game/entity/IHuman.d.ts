@@ -530,17 +530,17 @@ export declare const ISLAND_TRAVEL_SWIMMING_SKILL_THRESHOLD = 80;
  */
 export declare const ISLAND_TRAVEL_STAMINA_THRESHOLD = 0.6;
 /**
- * 100 ticks of travel time @ base
+ * 1000 ticks of travel time @ base
  */
-export declare const DEFAULT_ISLAND_TRAVEL_TIME_BASE = 100;
+export declare const DEFAULT_ISLAND_TRAVEL_TIME_BASE = 1000;
 /**
  * A multiplier for how much travel time is added by the distance travelled, variable based on the player's seafaring skill.
  */
 export declare const DEFAULT_ISLAND_TRAVEL_TIME_MULTIPLIER: IRange;
 /**
- * The amount of travel time it takes to travel to civilisation
+ * The amount of travel time it takes to travel to civilization
  */
-export declare const DEFAULT_TRAVEL_TIME_CIVILIZATION = 2000;
+export declare const DEFAULT_TRAVEL_TIME_CIVILIZATION = 3000;
 /**
  * 0 == no reduction, higher is more. The travel time is divided by `Math.log(skill) * multiplier + 1`
  */
