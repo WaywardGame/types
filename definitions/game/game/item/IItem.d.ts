@@ -1034,7 +1034,7 @@ export declare enum ItemType {
     ClayFlakes = 146,
     GreenSand = 147,
     OldInstructionalScroll = 148,
-    SlimeGelatin = 149,
+    SlimeBall = 149,
     SlimeGlue = 150,
     CookedSpiderMeat = 151,
     SpiderMeat = 152,

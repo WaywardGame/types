@@ -211,7 +211,7 @@ export declare const enumRefTypes: {
         ClayFlakes: ItemType.ClayFlakes;
         GreenSand: ItemType.GreenSand;
         OldInstructionalScroll: ItemType.OldInstructionalScroll;
-        SlimeGelatin: ItemType.SlimeGelatin;
+        SlimeBall: ItemType.SlimeBall;
         SlimeGlue: ItemType.SlimeGlue;
         CookedSpiderMeat: ItemType.CookedSpiderMeat;
         SpiderMeat: ItemType.SpiderMeat;
