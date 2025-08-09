@@ -16,6 +16,7 @@ import type { IItemDescription, IMagicalPropertyInfo, ItemType } from "@wayward/
 import type Item from "@wayward/game/game/item/Item";
 import type { MagicalPropertyIdentity } from "@wayward/game/game/magic/IMagicalProperty";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
+export declare const MAGICAL_PROPERTY_GLOWING_LIGHT_BONUS = 5;
 declare enum MagicalPropertyType {
     /** Increases attack value (for weapons and ammo) */
     Power_Attack = 0,
