@@ -413,7 +413,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Create particle effects when moving over a puddle and reduce its decay.
      * @param noSound True when no sound should be made when splashing.
      */
-    splashPuddles(noSound?: boolean): void;
+    splashLiquids(noSound?: boolean): void;
     addOrUpdateOverlay(overlay: IOverlayInfo): void;
     removeOverlay(overlay: IOverlayInfo): void;
     canSeeObject(type: CanASeeBType, object: IRendererOrigin, fieldOfView?: FieldOfView, customRadius?: number): boolean;

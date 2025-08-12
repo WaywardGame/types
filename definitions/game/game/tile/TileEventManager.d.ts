@@ -42,7 +42,7 @@ export default class TileEventManager extends EntityManager<TileEvent> {
      * @param tile Tile that you want to look at.
      * @returns Array of tile events with water properties or undefined
      */
-    getPuddles(tile: Tile): TileEvent[] | undefined;
+    getLiquids(tile: Tile): TileEvent[] | undefined;
     canGather(tile: Tile): TileEvent | undefined;
     updateAll(ticks: number): void;
     /**

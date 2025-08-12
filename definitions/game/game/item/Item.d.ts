@@ -297,7 +297,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Moves an item based on the result of a mob check.
      * This will apply side effects based on what the item hits / where the item lands
      */
-    moveToTileWithMobCheck(mobCheck: IMobCheck, human: Human | undefined): IMoveToTileMobCheckResult;
+    moveToTileWithMobCheck(mobCheck: IMobCheck, human: Human | undefined, damage?: number): IMoveToTileMobCheckResult;
     /**
      * Moves an item to a target point / container while animating it
      * @param options Movement options

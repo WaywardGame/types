@@ -333,7 +333,8 @@ export declare enum Delay {
     ReallyLongPause = 100,
     AttackAnimation = 30,
     Jump = 18,
-    VehicleConnection = 5.1
+    VehicleConnection = 5.1,// this should be a number that is fairly different from the others to avoid overlaps
+    Slowed = 15
 }
 export declare enum EquipType {
     None = 0,

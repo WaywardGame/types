@@ -872,6 +872,8 @@ declare enum Message {
     YouUnequip = 860,
     YouUsed = 861,
     YouViewTheItemsOn = 862,
-    YouWhileTraveling = 863
+    YouWhileTraveling = 863,
+    ActionSquishCannotHere = 864,
+    ActionSquishNoRoom = 865
 }
 export default Message;
