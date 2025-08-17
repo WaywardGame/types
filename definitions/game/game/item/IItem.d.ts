@@ -404,6 +404,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     canTransmogrify?: false;
     canUpgrade?: false;
     canPreserve?: false;
+    /**
+     * Set to true if you want this item to get the `Perpetuity_DecayLossChance` magical property even though it doesn't have a decay itself.
+     */
+    canDecayWhenLit?: boolean;
 }
 export declare namespace IItemDescription {
     function actionDisabled(description: IItemDescription | undefined, action: ActionType): boolean;
@@ -1030,7 +1034,7 @@ export declare enum ItemType {
     ClayFlakes = 146,
     GreenSand = 147,
     OldInstructionalScroll = 148,
-    SlimeGelatin = 149,
+    SlimeBall = 149,
     SlimeGlue = 150,
     CookedSpiderMeat = 151,
     SpiderMeat = 152,

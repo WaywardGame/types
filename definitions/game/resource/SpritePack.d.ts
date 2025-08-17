@@ -11,7 +11,7 @@
 export interface ISpritePackSprite {
     width: number;
     height: number;
-    data: Uint8ClampedArray | HTMLImageElement;
+    data: Uint8ClampedArray<ArrayBuffer> | HTMLImageElement;
 }
 declare class SpritePack {
     private readonly filePath;

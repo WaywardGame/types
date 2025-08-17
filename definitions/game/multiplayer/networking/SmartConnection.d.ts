@@ -42,7 +42,7 @@ export declare class SmartConnection extends Connection {
     addKeepAliveTimeout(): void;
     sendKeepAlive(): void;
     clearTimeout(): boolean;
-    send(data: Uint8Array, byteOffset: number, length?: number): boolean;
+    send(data: Uint8Array<ArrayBuffer>, byteOffset: number, length?: number): boolean;
     processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;
     private trySteamNetwork;
     private tryWebRTC;

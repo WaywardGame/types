@@ -16,6 +16,7 @@ import type { IItemDescription, IMagicalPropertyInfo, ItemType } from "@wayward/
 import type Item from "@wayward/game/game/item/Item";
 import type { MagicalPropertyIdentity } from "@wayward/game/game/magic/IMagicalProperty";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
+export declare const MAGICAL_PROPERTY_GLOWING_LIGHT_BONUS = 5;
 declare enum MagicalPropertyType {
     /** Increases attack value (for weapons and ammo) */
     Power_Attack = 0,
@@ -84,7 +85,9 @@ declare enum MagicalPropertyType {
     /** Adds a property to equippables that will enhance the effect of consumables in a given stat */
     StatPotency_EquipmentImproveConsumableStats = 29,
     /** Adds bonus durability to an item */
-    Persistence_MaxDurability = 30
+    Persistence_MaxDurability = 30,
+    /** Adds a chance in which an item does reduce in decay when passing a turn */
+    Perpetuity_DecayLossChance = 31
 }
 export default MagicalPropertyType;
 export interface IMagicalPropertyDescription {

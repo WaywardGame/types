@@ -514,7 +514,8 @@ export declare enum DoodadTypeGroup {
     Dripstone = -9981,
     WaterStill = -9980,
     Wheelbarrow = -9979,
-    Altar = -9978
+    Altar = -9978,
+    OpenFireSource = -9977
 }
 export declare enum DoorOrientation {
     /**

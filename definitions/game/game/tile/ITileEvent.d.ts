@@ -36,7 +36,7 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
     isWaste?: boolean;
     renderBelowItems?: boolean;
     renderBelowDoodads?: boolean;
-    renderAboveOtherTileEvents?: boolean;
+    renderAbovePlayers?: boolean;
     isTall?: boolean;
     providesFire?: boolean;
     /**
@@ -60,9 +60,9 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
      */
     allowMultiple?: boolean;
     /**
-     * Is the event made of water? These can put out fires if they are on the same tile as them.
+     * Is the event made of water or is liquidy? These can put out fires if they are on the same tile as them. Defaulted to false.
      */
-    water?: boolean;
+    liquid?: boolean;
     /**
      * When more than three puddles of water exist on a tile, they create the this terrain type.
      */
@@ -90,6 +90,11 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
      * If set to true, tile items will appear in a circle around the tile event instead of over top of it.
      */
     tileItemOffset?: boolean;
+    /**
+     * If set to true, players will be slowed in movement speed, skip and turn, and reduce 1 point of stamina when moving over this tile event. Creatures and NPPs will simply skip a turn.
+     * If the tile event is a liquid and slowsEntities is set to true, then no slipping can occur.
+     */
+    slowsEntities?: boolean;
 }
 export declare enum TileEventType {
     None = 0,
@@ -114,5 +119,6 @@ export declare enum TileEventType {
     PuddleOfGoatMilk = 19,
     PuddleOfCoconutWater = 20,
     PuddleOfSwampWater = 21,
-    PuddleOfFilteredWater = 22
+    PuddleOfFilteredWater = 22,
+    SlimePatch = 23
 }

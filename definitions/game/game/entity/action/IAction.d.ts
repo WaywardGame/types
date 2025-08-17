@@ -188,7 +188,8 @@ export declare enum ActionType {
     DiscoverRecipe = 140,
     ExcavateCollapse = 141,
     AddItemDiscovered = 142,
-    ResetItemDiscovered = 143
+    ResetItemDiscovered = 143,
+    Squish = 144
 }
 export declare const ACTIONS_RECOMMENDED: ActionType[];
 export declare enum ActionUsability {

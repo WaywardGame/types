@@ -16,7 +16,7 @@ export interface ISerializer {
     readonly metadata: Map<SerializerMetadataKey, any>;
     readonly dataView: DataView;
     byteOffset: number;
-    saveToUint8Array(object: any, objectKey: any): Uint8Array | undefined;
+    saveToUint8Array(object: any, objectKey: any): Uint8Array<ArrayBuffer> | undefined;
     saveToString(object: any, objectKey: any): string | undefined;
     convertUint8ArrayToString(bytes: Uint8Array): string;
     load(object: any, objectKey: any, data: string | Uint8Array): void;

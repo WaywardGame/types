@@ -89,13 +89,13 @@ export declare const CREATURE_ZONE_DISTANCE_SCALING_MULTIPLIER: number;
 /**
  * The maximum tier modifier an island can have due to its distance.
  */
-export declare const CREATURE_ZONE_ISLAND_DISTANCE_TIER_MODIFIER_MAX = 4;
+export declare const CREATURE_ZONE_ISLAND_DISTANCE_TIER_MODIFIER_MAX = 3;
 /**
  * The maximum chance for an additional tier to be added to an island due to its distance.
  *
- * IE, at 0.9, for an island to have a tier of 3, at maximum distance, the chance is `0.9 * 0.9 * 0.9`
+ * IE, at 0.9, for an island to have a tier of 3, at maximum distance, the chance is `0.8 * 0.8 * 0.8`
  */
-export declare const CREATURE_ZONE_ISLAND_DISTANCE_TIER_CHANCE_MAX = 0.9;
+export declare const CREATURE_ZONE_ISLAND_DISTANCE_TIER_CHANCE_MAX = 0.8;
 /**
  * The minimum chance for an additional tier to be added to an island due to its distance.
  *
@@ -119,3 +119,7 @@ export declare const CREATURE_ZONE_ISLAND_DISTANCE_MAX = 25;
  * The steepness starts steep and ends gentle to make it so that
  */
 export declare const CREATURE_ZONE_ISLAND_DISTANCE_STEEPNESS = 2;
+/**
+ * Sets a minimum distance that additional tiers can be added to and island via RNG using the above constants and generateStartingTier().
+ */
+export declare const CREATURE_ZONE_ISLAND_MINIMUM_DISTANCE_FOR_ADDITIONAL_TIERS = 2;

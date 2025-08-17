@@ -31,7 +31,7 @@ export default class Serializer implements ISerializer {
     private readonly disableJitDeserialization;
     constructor(game: Game, options: ISerializerOptions, stringTokenizer?: StringTokenizer | undefined);
     private get isDeveloperMode();
-    saveToUint8Array(object: any, objectKey: any, forceEnableChainLogging?: boolean): Uint8Array | undefined;
+    saveToUint8Array(object: any, objectKey: any, forceEnableChainLogging?: boolean): Uint8Array<ArrayBuffer> | undefined;
     saveToString(object: any, objectKey: any): string | undefined;
     convertUint8ArrayToString(bytes: Uint8Array, length?: number): string;
     load(object: any, objectKey: any, data: string | Uint8Array): void;
