@@ -233,7 +233,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     prefix?: string;
     spawnOnDecay?: CreatureType;
     /**
-     * Creates creatures or tile events when it breaks.
+     * Creates creatures, tile events, or items when it breaks.
      */
     createOnBreak?: ICreateOnBreak;
     /**
@@ -1872,8 +1872,16 @@ export declare enum ItemTypeGroup {
     ExcludedFromRandom = -9856,
     Leaves = -9855,
     Flute = -9854,
-    InternalNoDropOnDoodadBreak = -9853,
-    All = -9852
+    /**
+     * If set, the item will take damage when the player steps over it when wearing any foot equipment.
+     * Creatures with a MoveType.DamageCrushableTileItems will also break them when stepping over them.
+     */
+    Crushable = -9853,
+    /**
+     * If set, this item will not drop when a doodad (plant) is broken. Set on plant roots for example.
+     */
+    InternalNoDropOnDoodadBreak = -9852,
+    All = -9851
 }
 export type StillContainerBaseItemType = ItemType.Waterskin | ItemType.GlassBottle | ItemType.ClayJug | ItemType.CoconutContainer;
 export interface IItemMovementResult {

@@ -136,13 +136,26 @@ export declare enum MoveType {
     Tree = 8,
     Mountain = 16,
     Fire = 32,
-    BreakDoodads = 64,
-    BreakItems = 128,
+    /**
+     * If set, this entity will damage facing doodads when moving randomly.
+     */
+    DamageFacingDoodads = 64,
+    /**
+     * If set, this entity will randomly damage facing items (only if the tile is full) as well as items on they have stepped on.
+     */
+    DamageAnyNearbyItems = 128,
     WetLand = 256,
     Void = 512,
-    LandBlind = 1024,// Will not attempt to move towards targets on land
+    /**
+     * Will not attempt to move towards targets on land.
+     */
+    LandBlind = 1024,
     Hole = 2048,
     Fast = 4096,
+    /**
+     * If set, this entity will damage any crushable item they have stepped on.
+     */
+    DamageCrushableTileItems = 8192,
     Flying = 15
 }
 export declare enum AttackType {
