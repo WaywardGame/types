@@ -63,6 +63,7 @@ export default class Player extends Human<undefined, number, ReferenceType.Playe
     private scheduledUpdateTables?;
     delete(): void;
     get isValid(): boolean;
+    get isSetup(): boolean;
     get clientStore(): IClientStore;
     protected get typeEnum(): {};
     getDescription(): undefined;
@@ -95,6 +96,7 @@ export default class Player extends Human<undefined, number, ReferenceType.Playe
      * Note: This method should not do anything that could desync states in mp
      */
     private onLoadOrUnload;
+    private _isSetup;
     setup(spawnTile: Tile, respawn: boolean): void;
     private setupEquipment;
     private setupStats;

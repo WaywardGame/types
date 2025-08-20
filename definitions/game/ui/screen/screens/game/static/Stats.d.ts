@@ -16,7 +16,8 @@ import QuadrantComponent from "@wayward/game/ui/screen/screens/game/component/Qu
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export declare enum StatsClasses {
     Quadrant = "stats-quadrant",
-    Main = "stats"
+    Main = "stats",
+    DiscoveryHint = "stats-discovery-hint"
 }
 export default class StatsQuadrant extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
@@ -33,9 +34,11 @@ export declare class Stats extends Component {
     private readonly noEvents?;
     event: IEventEmitter<this, IStatsEvents>;
     private human;
+    private moreStatsToDiscover;
     constructor(human?: Human, noEvents?: true | undefined);
     setHuman(human: Human): this;
     private refresh;
+    protected onMilestonesUpdate(): void;
     /**
      * Returns an object containing iterables for all stats that exist on the player and have a description,
      * separated by how a given stat should be displayed
