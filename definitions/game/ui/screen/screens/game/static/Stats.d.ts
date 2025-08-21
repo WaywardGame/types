@@ -17,7 +17,8 @@ import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitte
 export declare enum StatsClasses {
     Quadrant = "stats-quadrant",
     Main = "stats",
-    DiscoveryHint = "stats-discovery-hint"
+    DiscoveryHint = "stats-discovery-hint",
+    GenericStatuses = "stats-generic-statuses"
 }
 export default class StatsQuadrant extends QuadrantComponent {
     static preferredQuadrant: Quadrant;

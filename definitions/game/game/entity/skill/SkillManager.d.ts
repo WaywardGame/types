@@ -15,7 +15,7 @@ import type EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface ISkillConfiguration {
     getSkillGainMultiplier?(skill: SkillType): number;
     canSkillGain?(skill: SkillType): boolean;
-    onSkillGain?(skill: SkillType, fromValue: number, toValue: number, mod: number): any;
+    onSkillGain?(skill: SkillType, fromValue: number, toValue: number, mod: number, times: number): any;
 }
 export interface ISkillEvents {
     /**

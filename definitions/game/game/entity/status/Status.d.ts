@@ -39,7 +39,13 @@ export declare enum StatusParticleEvent {
     Passed = 2
 }
 export declare enum UiStatusType {
-    Cut = -100000
+    Cut = -100000,
+    RunekeeperEvil = -99999,
+    RunekeeperChaos = -99998,
+    RunekeeperGood = -99997,
+    StatisticianStrength = -99996,
+    StatisticianDexterity = -99995,
+    StatisticianMetabolism = -99994
 }
 export interface IStatusEvents {
     tick(): any;

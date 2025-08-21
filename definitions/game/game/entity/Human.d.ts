@@ -300,7 +300,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * @param chance A chance multiplier on top of the base rune chance of 10% (an additional 30% chance may be added by theurgy)
      * @returns whether the rune was given
      */
-    giveRune(deity: ArrayOr<DeityReal>, chance: number, domain: Runekeeper.DomainData, context: IActionContext): boolean;
+    giveRune(deity: ArrayOr<DeityReal>, chance: number, domain: Runekeeper.DomainData, context: IActionContext, times?: number): boolean;
     private actuallyGiveRune;
     /**
      * All the milestones we need to check on game load.
@@ -440,12 +440,12 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     private getBaseStatBonuses;
     private getSkillGainMultiplier;
     private canSkillGain;
-    protected onSkillGain(skill: SkillType, fromValue: number, toValue: number, mod: number): void;
+    protected onSkillGain(skill: SkillType, fromValue: number, toValue: number, mod: number, times?: number): void;
     setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
     /**
      * Improve one of the core player stats
      */
-    protected statGain(stat: Stat | ISkillAttribute, bypass: boolean, sourceSkill?: SkillType): void;
+    protected statGain(stat: Stat | ISkillAttribute, bypass: boolean, sourceSkill?: SkillType, times?: number): void;
     protected calculateStats(): void;
     kill(): void;
     protected resetDefense(skipStatChangedEvent?: boolean): void;

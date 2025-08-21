@@ -14,7 +14,7 @@ import MilestoneModifier, { MilestoneModifierGroup } from "@wayward/game/game/op
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
 export default class Runekeeper extends MilestoneModifier {
     getOptions(): IGameOptionsPartial;
-    protected getTranslationArgs(): TranslationArg[] | undefined;
+    getTranslationArgs(): TranslationArg[] | undefined;
     getGroup(): MilestoneModifierGroup;
     after: Milestone[];
 }

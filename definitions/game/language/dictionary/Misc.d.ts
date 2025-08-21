@@ -206,7 +206,11 @@ export declare enum Term {
     XTick = 15,
     XtoYZ = 16,
     XUndiscovered = 17,
-    XY = 18
+    XY = 18,
+    XGain = 19,
+    GainX = 20,
+    XReward = 21,
+    BeRewardedByX = 22
 }
 export declare enum Label {
     LabelColonValue = 0,

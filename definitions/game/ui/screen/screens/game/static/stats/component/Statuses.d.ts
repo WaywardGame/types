@@ -37,12 +37,12 @@ export interface IStatusesEvents extends Events<Component> {
     update(): any;
 }
 export default class Statuses extends Component {
-    readonly stat?: Stat | undefined;
+    readonly stat?: (Stat | "all") | undefined;
     event: IEventEmitter<this, IStatusesEvents>;
     private readonly statusIcons;
     private readonly entityRef;
     get entity(): EntityWithStats | undefined;
-    constructor(entity: EntityWithStats, stat?: Stat | undefined);
+    constructor(entity: EntityWithStats, stat?: (Stat | "all") | undefined);
     protected onToggleScreenshotMode(gameScreen: GameScreen, enabled: boolean): void;
     /**
      * Event handler for the status effects of this entity changing

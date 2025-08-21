@@ -31,6 +31,7 @@ export interface IStatusDescription {
     relevantStat?: Stat;
     levelledDictionary?: Dictionary;
     sound?: SfxType | Record<number, SfxType>;
+    /** Defaults to neutral */
     threatLevel?: StatusThreatLevel | Record<number, StatusThreatLevel>;
     /** An optional list of status effect levels that will be displayed in the `StatusInspection` for inspecting the status type itself */
     listedLevels?: number[];
@@ -55,6 +56,7 @@ export interface IStatusDescription {
     onRemove?(status: Status, oldLevel: number, reason: StatusChangeReason): any;
     onTreated?(status: Status, oldLevel: number): any;
     onPassed?(status: Status, oldLevel: number): any;
+    refresh?(status: Status): any;
 }
 export interface IStatusIconDescription {
     /**
@@ -82,7 +84,9 @@ export declare enum StatusType {
     Freezing = 8,
     Frostbitten = 9,
     Pacified = 10,
-    Frenzied = 11
+    Frenzied = 11,
+    Statistician = 12,
+    Runekeeper = 13
 }
 export declare enum StatusApplicability {
     None = 0,
@@ -102,22 +106,26 @@ export declare enum StatusEffectType {
     DealingAroundXDamageY = 1,
     DealingXDamageY = 2,
     IncreasesXRate = 3,
-    LosingXEveryY = 4,
-    MovementSpeedSlowed = 5,
-    PercentChanceToPassEveryX = 6,
-    ReducesXByYEveryZ = 7,
-    XCannotBeRegained = 8
+    IncreasesXRateByY = 4,
+    LosingXEveryY = 5,
+    MovementSpeedSlowed = 6,
+    PercentChanceToPassEveryX = 7,
+    ReducesXByYEveryZ = 8,
+    XCannotBeRegained = 9,
+    CannotX = 10
 }
 export interface StatusEffectTypeArguments {
     [StatusEffectType.AddsAChanceOfXOnY]: [effect: TranslationArg, on?: TranslationArg];
     [StatusEffectType.DealingAroundXDamageY]: [amount?: TranslationArg, eventOrDuration?: TranslationArg];
     [StatusEffectType.DealingXDamageY]: [amount?: TranslationArg, eventOrDuration?: TranslationArg];
     [StatusEffectType.IncreasesXRate]: [increased: TranslationArg];
+    [StatusEffectType.IncreasesXRateByY]: [increased: TranslationArg, by: TranslationArg];
     [StatusEffectType.LosingXEveryY]: [lost: TranslationArg, eventOrDuration?: TranslationArg];
     [StatusEffectType.MovementSpeedSlowed]: [];
     [StatusEffectType.PercentChanceToPassEveryX]: [percent: TranslationArg, eventOrDuration?: TranslationArg];
     [StatusEffectType.ReducesXByYEveryZ]: [reduces: TranslationArg, amount: TranslationArg | undefined, eventOrDuration: TranslationArg];
     [StatusEffectType.XCannotBeRegained]: [notRegainable: TranslationArg];
+    [StatusEffectType.CannotX]: [x: TranslationArg];
 }
 export declare enum StatusEffectGroup {
     VeryBad = 0,
