@@ -13,7 +13,8 @@ export declare enum InfoDisplayLevel {
     NonVerbose = 1,
     NonExtra = 2,
     Extra = 8,
-    Verbose = 16
+    Verbose = 16,
+    Never = 32
 }
 declare const enum CompileTimeInfoDisplayLevel {
     A = 0,

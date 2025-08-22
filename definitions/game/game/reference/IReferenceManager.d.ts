@@ -881,6 +881,8 @@ export declare const enumRefTypes: {
         ChickenEggshells: ItemType.ChickenEggshells;
         PenguinEggshells: ItemType.PenguinEggshells;
         MagicalMote: ItemType.MagicalMote;
+        UnrefinedSugar: ItemType.UnrefinedSugar;
+        RefinedSugar: ItemType.RefinedSugar;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;

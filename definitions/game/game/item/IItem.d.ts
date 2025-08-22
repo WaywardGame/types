@@ -173,6 +173,9 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     equipEffect?: EquipEffects;
     damageType?: DamageType;
     weight?: number;
+    /**
+     * Reduced weight when crafting this versus its base components.
+     */
     reducedWeight?: number;
     minimumWeight?: number;
     weightRange?: [number, number];
@@ -1704,19 +1707,21 @@ export declare enum ItemType {
     ChickenEggshells = 816,
     PenguinEggshells = 817,
     MagicalMote = 818,
-    Last = 819
+    UnrefinedSugar = 819,
+    RefinedSugar = 820,
+    Last = 821
 }
 export declare enum ItemTypeExtra {
-    None = 820,
-    TatteredMap_RolledUp = 821,
-    TatteredMap_Completed = 822,
-    WoodenBookcase_25 = 823,
-    WoodenBookcase_50 = 824,
-    WoodenBookcase_75 = 825,
-    WoodenBookcase_100 = 826,
-    RuneOfEvilSplinters = 827,
-    RuneOfGoodCharred = 828,
-    TallySticks = 829
+    None = 822,
+    TatteredMap_RolledUp = 823,
+    TatteredMap_Completed = 824,
+    WoodenBookcase_25 = 825,
+    WoodenBookcase_50 = 826,
+    WoodenBookcase_75 = 827,
+    WoodenBookcase_100 = 828,
+    RuneOfEvilSplinters = 829,
+    RuneOfGoodCharred = 830,
+    TallySticks = 831
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
@@ -1881,7 +1886,8 @@ export declare enum ItemTypeGroup {
      * If set, this item will not drop when a doodad (plant) is broken. Set on plant roots for example.
      */
     InternalNoDropOnDoodadBreak = -9852,
-    All = -9851
+    Sugar = -9851,
+    All = -9850
 }
 export type StillContainerBaseItemType = ItemType.Waterskin | ItemType.GlassBottle | ItemType.ClayJug | ItemType.CoconutContainer;
 export interface IItemMovementResult {

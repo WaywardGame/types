@@ -103,19 +103,20 @@ export declare enum StatusThreatLevel {
 }
 export declare enum StatusEffectType {
     AddsAChanceOfXOnY = 0,
-    DealingAroundXDamageY = 1,
-    DealingXDamageY = 2,
-    IncreasesXRate = 3,
-    IncreasesXRateByY = 4,
-    LosingXEveryY = 5,
-    MovementSpeedSlowed = 6,
-    PercentChanceToPassEveryX = 7,
-    ReducesXByYEveryZ = 8,
-    XCannotBeRegained = 9,
-    CannotX = 10
+    CannotX = 1,
+    DealingAroundXDamageY = 2,
+    DealingXDamageY = 3,
+    IncreasesXRate = 4,
+    IncreasesXRateByY = 5,
+    LosingXEveryY = 6,
+    MovementSpeedSlowed = 7,
+    PercentChanceToPassEveryX = 8,
+    ReducesXByYEveryZ = 9,
+    XCannotBeRegained = 10
 }
 export interface StatusEffectTypeArguments {
     [StatusEffectType.AddsAChanceOfXOnY]: [effect: TranslationArg, on?: TranslationArg];
+    [StatusEffectType.CannotX]: [x: TranslationArg];
     [StatusEffectType.DealingAroundXDamageY]: [amount?: TranslationArg, eventOrDuration?: TranslationArg];
     [StatusEffectType.DealingXDamageY]: [amount?: TranslationArg, eventOrDuration?: TranslationArg];
     [StatusEffectType.IncreasesXRate]: [increased: TranslationArg];
@@ -125,7 +126,6 @@ export interface StatusEffectTypeArguments {
     [StatusEffectType.PercentChanceToPassEveryX]: [percent: TranslationArg, eventOrDuration?: TranslationArg];
     [StatusEffectType.ReducesXByYEveryZ]: [reduces: TranslationArg, amount: TranslationArg | undefined, eventOrDuration: TranslationArg];
     [StatusEffectType.XCannotBeRegained]: [notRegainable: TranslationArg];
-    [StatusEffectType.CannotX]: [x: TranslationArg];
 }
 export declare enum StatusEffectGroup {
     VeryBad = 0,
