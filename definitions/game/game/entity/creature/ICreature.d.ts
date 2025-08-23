@@ -233,7 +233,7 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
     stokingRestoresHealth?: boolean;
     canTrample?: boolean;
     helpPlants?: boolean;
-    speed?: number;
+    speed?: SupplierOr<number | undefined, [Creature]>;
     disableHitching?: boolean;
     tileMissChance?: OptionalDescriptions<TileGroup, number>;
     waste?: IWaste;

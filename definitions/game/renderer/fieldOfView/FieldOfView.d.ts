@@ -36,6 +36,8 @@ export declare class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
     private transitionMovementTime;
     private readonly transitioningExploredMap;
     private lastComputedIslandId;
+    /** @returns 0-1 */
+    static getLightLevel(origin: IFieldOfViewOrigin, islandId: IslandId, tileX: number, tileY: number, tileZ: number, fieldOfView?: FieldOfView | undefined): number;
     /**
      * Note: CanASeeBType.ClientSide is used to skip adding a sync check for the result
      */

@@ -419,6 +419,8 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     canSeeObject(type: CanASeeBType, object: IRendererOrigin, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeeTile(type: CanASeeBType, tile: Tile, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
+    /** @returns 0-1 */
+    getLightLevel(): number;
     messageIfVisible(callback: (manager: IMessageManager) => boolean): void;
     /**
      * Check if a tile is a suitable spawn point
