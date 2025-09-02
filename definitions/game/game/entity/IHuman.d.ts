@@ -549,7 +549,7 @@ export declare const ISLAND_TRAVEL_TIME_SEAFARING_SKILL_REDUCTION_MULTIPLIER = 0
 /**
  * Metabolic stat loss is `travelTime * this multiplier`
  */
-export declare const PLAYER_TRAVEL_METABOLIC_STAT_REDUCTION_MULTIPLIER = 0.2;
+export declare const PLAYER_TRAVEL_METABOLIC_STAT_REDUCTION_MULTIPLIER = 0.02;
 /**
  * Stamina loss is `this reduction / Math.log2(boat tier)`
  */

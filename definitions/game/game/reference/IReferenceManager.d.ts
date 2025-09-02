@@ -883,6 +883,8 @@ export declare const enumRefTypes: {
         MagicalMote: ItemType.MagicalMote;
         UnrefinedSugar: ItemType.UnrefinedSugar;
         RefinedSugar: ItemType.RefinedSugar;
+        CandiedFruit: ItemType.CandiedFruit;
+        CandiedSugar: ItemType.CandiedSugar;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;

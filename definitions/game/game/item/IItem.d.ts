@@ -657,6 +657,7 @@ export interface ICreateOnBreak {
     aberrantCreature?: boolean;
     tileEventType?: TileEventType;
     itemType?: ItemType;
+    excludeDamageTypes?: DamageType[];
 }
 export type IDismantleComponent = Record<number, number>;
 export interface IItemChangeIntoOptions {
@@ -1709,19 +1710,21 @@ export declare enum ItemType {
     MagicalMote = 818,
     UnrefinedSugar = 819,
     RefinedSugar = 820,
-    Last = 821
+    CandiedFruit = 821,
+    CandiedSugar = 822,
+    Last = 823
 }
 export declare enum ItemTypeExtra {
-    None = 822,
-    TatteredMap_RolledUp = 823,
-    TatteredMap_Completed = 824,
-    WoodenBookcase_25 = 825,
-    WoodenBookcase_50 = 826,
-    WoodenBookcase_75 = 827,
-    WoodenBookcase_100 = 828,
-    RuneOfEvilSplinters = 829,
-    RuneOfGoodCharred = 830,
-    TallySticks = 831
+    None = 824,
+    TatteredMap_RolledUp = 825,
+    TatteredMap_Completed = 826,
+    WoodenBookcase_25 = 827,
+    WoodenBookcase_50 = 828,
+    WoodenBookcase_75 = 829,
+    WoodenBookcase_100 = 830,
+    RuneOfEvilSplinters = 831,
+    RuneOfGoodCharred = 832,
+    TallySticks = 833
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {

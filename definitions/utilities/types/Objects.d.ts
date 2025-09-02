@@ -23,6 +23,9 @@ declare global {
         [K in keyof O]: Partial<O[K]>;
     }[keyof O]>;
     type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+    type PickRequired<T, K extends keyof T> = (Omit<T, K> & Required<Pick<T, K>>) extends infer O ? {
+        [K in keyof O]: O[K] | undefined;
+    } : never;
     /**
      * Given `FROM`, returns a type matching all keys that point to `VALUES`.
      *

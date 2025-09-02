@@ -983,6 +983,8 @@ declare const dictionaryMap: {
         MagicalMote: ItemType.MagicalMote;
         UnrefinedSugar: ItemType.UnrefinedSugar;
         RefinedSugar: ItemType.RefinedSugar;
+        CandiedFruit: ItemType.CandiedFruit;
+        CandiedSugar: ItemType.CandiedSugar;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
@@ -1816,6 +1818,8 @@ declare const dictionaryMap: {
         MagicalMote: ItemType.MagicalMote;
         UnrefinedSugar: ItemType.UnrefinedSugar;
         RefinedSugar: ItemType.RefinedSugar;
+        CandiedFruit: ItemType.CandiedFruit;
+        CandiedSugar: ItemType.CandiedSugar;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
@@ -2781,6 +2785,8 @@ export declare const strictDictionaries: {
         MagicalMote: ItemType.MagicalMote;
         UnrefinedSugar: ItemType.UnrefinedSugar;
         RefinedSugar: ItemType.RefinedSugar;
+        CandiedFruit: ItemType.CandiedFruit;
+        CandiedSugar: ItemType.CandiedSugar;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
@@ -3614,6 +3620,8 @@ export declare const strictDictionaries: {
         MagicalMote: ItemType.MagicalMote;
         UnrefinedSugar: ItemType.UnrefinedSugar;
         RefinedSugar: ItemType.RefinedSugar;
+        CandiedFruit: ItemType.CandiedFruit;
+        CandiedSugar: ItemType.CandiedSugar;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;

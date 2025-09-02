@@ -258,8 +258,9 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * @param source A string representing the reason for this damage. Used for multiplayer debugging. Just put a unique string of characters here
      * @param modifier The amount of damage to take. Defaults to 1.
      * @param min The minimum durability that this item should have remaining. Defaults to n/a
+     * @param type The type of damage being done (currently used to check for createOnBreak).
      */
-    damage(source: string, modifier?: number, min?: number): ItemDamageResult;
+    damage(source: string, modifier?: number, min?: number, type?: DamageType): ItemDamageResult;
     isInTradeContainer(): boolean;
     getEquippedHuman(): Human | undefined;
     isEquipped(includeDisabled?: true): boolean;
@@ -282,7 +283,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      */
     returns(disableNotify?: boolean, craft?: boolean): boolean;
     setUsed(itemUse?: IItemUsed, human?: Human): void;
-    createOnBreak(tile: Tile): void;
+    createOnBreak(tile: Tile, damageType?: DamageType): void;
     spawnOnDecay(tile: Tile): Creature | undefined;
     spawnCreatureOnItem(tile: Tile, creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingTile?: Human, maxTilesChecked?: number): Creature | undefined;
     get point(): IVector3 | undefined;

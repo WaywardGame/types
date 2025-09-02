@@ -13,6 +13,7 @@ import type { BiomeType } from "@wayward/game/game/biome/IBiome";
 import Doodad from "@wayward/game/game/doodad/Doodad";
 import EntityManager from "@wayward/game/game/entity/EntityManager";
 import Human from "@wayward/game/game/entity/Human";
+import type { DamageType } from "@wayward/game/game/entity/IEntity";
 import type { IActionHandlerApi, IActionNotUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type ActionContext from "@wayward/game/game/entity/action/IActionContext";
@@ -241,7 +242,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     /**
      * Will break a container item on a tile, and remove it after (whether or not if it's a container)
      */
-    breakContainerOnTile(itemContainer: Item, tile: Tile): void;
+    breakContainerOnTile(itemContainer: Item, tile: Tile, damageType?: DamageType): void;
     /**
      * Drop items in a 3x3 square around the location.
      * This will ensure all items in the container are removed
