@@ -885,6 +885,9 @@ export declare const enumRefTypes: {
         RefinedSugar: ItemType.RefinedSugar;
         CandiedFruit: ItemType.CandiedFruit;
         CandiedSugar: ItemType.CandiedSugar;
+        RawClayBakingTray: ItemType.RawClayBakingTray;
+        ClayBakingTray: ItemType.ClayBakingTray;
+        GlassBakingTray: ItemType.GlassBakingTray;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
