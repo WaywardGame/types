@@ -1715,19 +1715,27 @@ export declare enum ItemType {
     RawClayBakingTray = 823,
     ClayBakingTray = 824,
     GlassBakingTray = 825,
-    Last = 826
+    RawClayPan = 826,
+    ClayPan = 827,
+    GlassPan = 828,
+    TinPan = 829,
+    CopperPan = 830,
+    WroughtIronPan = 831,
+    IronPan = 832,
+    BronzePan = 833,
+    Last = 834
 }
 export declare enum ItemTypeExtra {
-    None = 827,
-    TatteredMap_RolledUp = 828,
-    TatteredMap_Completed = 829,
-    WoodenBookcase_25 = 830,
-    WoodenBookcase_50 = 831,
-    WoodenBookcase_75 = 832,
-    WoodenBookcase_100 = 833,
-    RuneOfEvilSplinters = 834,
-    RuneOfGoodCharred = 835,
-    TallySticks = 836
+    None = 835,
+    TatteredMap_RolledUp = 836,
+    TatteredMap_Completed = 837,
+    WoodenBookcase_25 = 838,
+    WoodenBookcase_50 = 839,
+    WoodenBookcase_75 = 840,
+    WoodenBookcase_100 = 841,
+    RuneOfEvilSplinters = 842,
+    RuneOfGoodCharred = 843,
+    TallySticks = 844
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
@@ -1893,7 +1901,8 @@ export declare enum ItemTypeGroup {
      */
     InternalNoDropOnDoodadBreak = -9852,
     Sugar = -9851,
-    All = -9850
+    Pan = -9850,
+    All = -9849
 }
 export type StillContainerBaseItemType = ItemType.Waterskin | ItemType.GlassBottle | ItemType.ClayJug | ItemType.CoconutContainer;
 export interface IItemMovementResult {

@@ -888,6 +888,14 @@ export declare const enumRefTypes: {
         RawClayBakingTray: ItemType.RawClayBakingTray;
         ClayBakingTray: ItemType.ClayBakingTray;
         GlassBakingTray: ItemType.GlassBakingTray;
+        RawClayPan: ItemType.RawClayPan;
+        ClayPan: ItemType.ClayPan;
+        GlassPan: ItemType.GlassPan;
+        TinPan: ItemType.TinPan;
+        CopperPan: ItemType.CopperPan;
+        WroughtIronPan: ItemType.WroughtIronPan;
+        IronPan: ItemType.IronPan;
+        BronzePan: ItemType.BronzePan;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
