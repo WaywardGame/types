@@ -20,7 +20,7 @@ declare enum Type {
 }
 type BackgroundIDTypeSuffix = "" | `-${Lowercase<keyof typeof Type>}`;
 type BackgroundIDQuality = Lowercase<Exclude<keyof typeof Quality, "None" | "Random">>;
-type BackgroundID = `default${BackgroundIDTypeSuffix}` | `quality-${BackgroundIDQuality}${BackgroundIDTypeSuffix}` | `damaged${BackgroundIDTypeSuffix}` | `trading${BackgroundIDTypeSuffix}` | "non-craftable" | "discovery-active" | "non-craftable-discovery";
+type BackgroundID = `default${BackgroundIDTypeSuffix}` | `quality-${BackgroundIDQuality}${BackgroundIDTypeSuffix}` | `damaged${BackgroundIDTypeSuffix}` | `trading${BackgroundIDTypeSuffix}` | "overlay" | "non-craftable" | "discovery-active" | "non-craftable-discovery";
 export default class ItemStylesheetHandler {
     private readonly backgroundDefinitions;
     readonly editor: SpriteEditor;

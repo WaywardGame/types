@@ -90,6 +90,7 @@ export interface IItemEvents extends IEntityMovableEvents, IQualityEvents, ItemM
     defenseBonusChange(defenseBonus: number, oldDefenseBonus?: number): any;
     revertFromDoodad(doodad: Doodad): any;
     becomeDoodad(doodad: Doodad): any;
+    baseItem(baseItem: ItemType | undefined): any;
 }
 export default class Item extends EntityMovable<IItemDescription, ItemType, ReferenceType.Item, ItemTag> implements Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, IHasInsulation, IHasMagic, IHasQuality {
     get entityType(): EntityType.Item;
@@ -125,6 +126,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     vehicleFacingDirection?: Direction.Cardinal;
     weightCapacity?: number;
     weightFraction?: number;
+    baseItem?: ItemType;
     /**
      * Includes merchant identifiers for each instance of the item being traded to/from the merchant.
      * (The property name is out of date.)
@@ -513,6 +515,10 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * @param container The container to leave the items in or on
      */
     dropItemsOnMelt(container: IContainer): void;
+    /**
+     * Sets the base item type based on the disassembly items and the overlayItem property.
+     */
+    setBaseItemType(): void;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;
 }

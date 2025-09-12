@@ -411,6 +411,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * Set to true if you want this item to get the `Perpetuity_DecayLossChance` magical property even though it doesn't have a decay itself.
      */
     canDecayWhenLit?: boolean;
+    /**
+     * If set to a group, this item will show as an overlay on top of it's base component (the group we set here) and defined in the baseItem item property which is set from the item's disassembly items in the Item constructor.
+     */
+    overlayItem?: ItemTypeGroup;
 }
 export declare namespace IItemDescription {
     function actionDisabled(description: IItemDescription | undefined, action: ActionType): boolean;
@@ -589,7 +593,7 @@ export declare enum VehicleType {
     Other = 2
 }
 export interface IItemReturn {
-    type: ItemType;
+    type: ItemType | ItemTypeGroup;
     /**
      * If true, the returned item will be damaged by 1 point.
      */
@@ -1723,19 +1727,20 @@ export declare enum ItemType {
     WroughtIronPan = 831,
     IronPan = 832,
     BronzePan = 833,
-    Last = 834
+    PumpkinPie = 834,
+    Last = 835
 }
 export declare enum ItemTypeExtra {
-    None = 835,
-    TatteredMap_RolledUp = 836,
-    TatteredMap_Completed = 837,
-    WoodenBookcase_25 = 838,
-    WoodenBookcase_50 = 839,
-    WoodenBookcase_75 = 840,
-    WoodenBookcase_100 = 841,
-    RuneOfEvilSplinters = 842,
-    RuneOfGoodCharred = 843,
-    TallySticks = 844
+    None = 836,
+    TatteredMap_RolledUp = 837,
+    TatteredMap_Completed = 838,
+    WoodenBookcase_25 = 839,
+    WoodenBookcase_50 = 840,
+    WoodenBookcase_75 = 841,
+    WoodenBookcase_100 = 842,
+    RuneOfEvilSplinters = 843,
+    RuneOfGoodCharred = 844,
+    TallySticks = 845
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
