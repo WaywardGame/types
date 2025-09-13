@@ -101,6 +101,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     weight: number;
     private decay?;
     addOrder?: number[];
+    baseItem?: ItemType;
     bonusAttack?: number;
     bonusDefense?: number;
     book?: BookType;
@@ -126,7 +127,6 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     vehicleFacingDirection?: Direction.Cardinal;
     weightCapacity?: number;
     weightFraction?: number;
-    baseItem?: ItemType;
     /**
      * Includes merchant identifiers for each instance of the item being traded to/from the merchant.
      * (The property name is out of date.)
