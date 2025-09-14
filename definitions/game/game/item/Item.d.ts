@@ -519,6 +519,12 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Sets the base item type based on the disassembly items and the overlayItem property.
      */
     setBaseItemType(): void;
+    /**
+     * Gets the item type that should be returned when the item is used up or decays.
+     * @returns The item type that should be returned when the item is used up or decays, or ItemType.None if nothing should be returned.
+     */
+    getReturnType(): ItemType;
+    createReturnItem(returnType: ItemType, container?: IContainer): Item | undefined;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;
 }

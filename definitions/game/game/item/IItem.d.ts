@@ -662,6 +662,7 @@ export interface ICreateOnBreak {
     tileEventType?: TileEventType;
     itemType?: ItemType;
     excludeDamageTypes?: DamageType[];
+    disassemblyItem?: ItemType | ItemTypeGroup;
 }
 export type IDismantleComponent = Record<number, number>;
 export interface IItemChangeIntoOptions {
