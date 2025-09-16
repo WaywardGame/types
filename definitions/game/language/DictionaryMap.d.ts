@@ -997,6 +997,7 @@ declare const dictionaryMap: {
         IronPan: ItemType.IronPan;
         BronzePan: ItemType.BronzePan;
         PumpkinPie: ItemType.PumpkinPie;
+        FruitPie: ItemType.FruitPie;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
@@ -1844,6 +1845,7 @@ declare const dictionaryMap: {
         IronPan: ItemType.IronPan;
         BronzePan: ItemType.BronzePan;
         PumpkinPie: ItemType.PumpkinPie;
+        FruitPie: ItemType.FruitPie;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
@@ -2823,6 +2825,7 @@ export declare const strictDictionaries: {
         IronPan: ItemType.IronPan;
         BronzePan: ItemType.BronzePan;
         PumpkinPie: ItemType.PumpkinPie;
+        FruitPie: ItemType.FruitPie;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
@@ -3670,6 +3673,7 @@ export declare const strictDictionaries: {
         IronPan: ItemType.IronPan;
         BronzePan: ItemType.BronzePan;
         PumpkinPie: ItemType.PumpkinPie;
+        FruitPie: ItemType.FruitPie;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;

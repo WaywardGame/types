@@ -897,6 +897,7 @@ export declare const enumRefTypes: {
         IronPan: ItemType.IronPan;
         BronzePan: ItemType.BronzePan;
         PumpkinPie: ItemType.PumpkinPie;
+        FruitPie: ItemType.FruitPie;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
