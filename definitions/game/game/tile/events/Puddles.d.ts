@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { LiquidType } from "@wayward/game/game/island/IIsland";
-import type { ITileEventDescription } from "@wayward/game/game/tile/ITileEvent";
+import { type ITileEventDescription } from "@wayward/game/game/tile/ITileEvent";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 export declare function puddleUpdate(tileEvent: TileEvent, description: ITileEventDescription, liquidType: LiquidType, ticks: number): void;
 export declare const puddleOfFreshWater: ITileEventDescription;

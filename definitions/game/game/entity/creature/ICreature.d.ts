@@ -359,6 +359,11 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      * Defaults to CREATURE_DEFAULT_ALERTED_DISTANCE_SQ
      */
     alertedRadius?: number;
+    /**
+     * Set to false if you want the creature to not be slowed by cobwebs
+     * Defaults to true (or undefined, which is treated as true)
+     */
+    slowedByCobwebs?: boolean;
 }
 export interface ICreatureLoot {
     item: ItemType;

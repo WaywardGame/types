@@ -15,7 +15,7 @@ import type { IObjectDescription } from "@wayward/game/game/IObject";
 import type Island from "@wayward/game/game/island/Island";
 import type { ItemType } from "@wayward/game/game/item/IItem";
 import type { ITemperatureSource } from "@wayward/game/game/temperature/ITemperature";
-import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
@@ -95,7 +95,12 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
      * If the tile event is a liquid and slowsEntities is set to true, then no slipping can occur.
      */
     slowsEntities?: boolean;
+    /**
+     * If set to true, picking up (or gathering) this tile event will cause the player to skip their turn and lose 1 stamina.
+     */
+    pickUpSlowsPlayer?: boolean;
 }
+export declare const TILE_EVENTS_WATER_UNPASSABLE_TERRAIN_EXCLUSIONS: TerrainType[];
 export declare enum TileEventType {
     None = 0,
     Fire = 1,
@@ -120,5 +125,6 @@ export declare enum TileEventType {
     PuddleOfCoconutWater = 20,
     PuddleOfSwampWater = 21,
     PuddleOfFilteredWater = 22,
-    SlimePatch = 23
+    SlimePatch = 23,
+    Cobweb = 24
 }

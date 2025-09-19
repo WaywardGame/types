@@ -97,6 +97,10 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
     addToTile(tile: Tile): void;
     removeFromTile(updateTile: boolean): void;
     /**
+     * Damages the tile event by 1 durability. If durability reaches 0, the tile event is removed and all items are dropped.
+     */
+    damage(): void;
+    /**
      * Gets the builder/creator of this event, or `undefined` if the tile event is creatorless.
      */
     getBuilder(): Player | undefined;
