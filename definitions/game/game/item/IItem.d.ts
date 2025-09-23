@@ -1730,19 +1730,20 @@ export declare enum ItemType {
     BronzePan = 833,
     PumpkinPie = 834,
     FruitPie = 835,
-    Last = 836
+    JackOLantern = 836,
+    Last = 837
 }
 export declare enum ItemTypeExtra {
-    None = 837,
-    TatteredMap_RolledUp = 838,
-    TatteredMap_Completed = 839,
-    WoodenBookcase_25 = 840,
-    WoodenBookcase_50 = 841,
-    WoodenBookcase_75 = 842,
-    WoodenBookcase_100 = 843,
-    RuneOfEvilSplinters = 844,
-    RuneOfGoodCharred = 845,
-    TallySticks = 846
+    None = 838,
+    TatteredMap_RolledUp = 839,
+    TatteredMap_Completed = 840,
+    WoodenBookcase_25 = 841,
+    WoodenBookcase_50 = 842,
+    WoodenBookcase_75 = 843,
+    WoodenBookcase_100 = 844,
+    RuneOfEvilSplinters = 845,
+    RuneOfGoodCharred = 846,
+    TallySticks = 847
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {

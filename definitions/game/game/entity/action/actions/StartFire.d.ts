@@ -21,10 +21,12 @@ export interface IStartFireCanUse extends IActionUsable {
     kindlingFuelNeeded: boolean;
     tinderNeeded: boolean;
     fuelNeeded: boolean;
+    candleNeeded: boolean;
     doodad?: Doodad;
     kindling?: Item;
     tinder?: Item;
     fuel?: Item;
+    candle?: Item;
     tileEvent?: TileEvent;
 }
 declare const _default: Action<[ActionArgument.ItemInventory, [arg1: ActionArgument.Undefined, ActionArgument.ItemInventory], [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby], [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby], [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IStartFireCanUse, [Item, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?, (Item | undefined)?]>;

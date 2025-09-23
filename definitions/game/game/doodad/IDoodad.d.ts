@@ -472,14 +472,16 @@ export declare enum DoodadType {
     BasaltAltar = 177,
     ClayAltar = 178,
     SkeletalPirateRemains = 179,
-    Last = 180
+    JackOLantern = 180,
+    LitJackOLantern = 181,
+    Last = 182
 }
 export declare enum DoodadTypeExtra {
-    None = 181,
-    WoodenBookcase_25 = 182,
-    WoodenBookcase_50 = 183,
-    WoodenBookcase_75 = 184,
-    WoodenBookcase_100 = 185
+    None = 183,
+    WoodenBookcase_25 = 184,
+    WoodenBookcase_50 = 185,
+    WoodenBookcase_75 = 186,
+    WoodenBookcase_100 = 187
 }
 export type DisplayableDoodadType = DoodadType | DoodadTypeExtra;
 export declare enum DoodadTag {
@@ -515,7 +517,9 @@ export declare enum DoodadTypeGroup {
     WaterStill = -9980,
     Wheelbarrow = -9979,
     Altar = -9978,
-    OpenFireSource = -9977
+    OpenFireSource = -9977,
+    RequiresCandleToLight = -9976,
+    ContainsFuelSource = -9975
 }
 export declare enum DoorOrientation {
     /**

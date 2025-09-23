@@ -87,8 +87,8 @@ export default class DoodadManager extends EntityManager<Doodad> {
     verifyAndFixItemWeights(): void;
     getScarecrowInRange(tile: Tile): Doodad | undefined;
     getScarecrowInLineOfSight(creature: Creature, isClientside: boolean): Doodad | undefined;
-    private addScarecrow;
-    private removeScarecrow;
+    addScarecrow(doodad: Doodad): void;
+    removeScarecrow(doodad: Doodad): void;
     /**
      * Handles doodad specific effects
      */
