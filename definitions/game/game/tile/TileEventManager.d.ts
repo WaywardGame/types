@@ -15,7 +15,7 @@ import { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
 import TileEvent from "@wayward/game/game/tile/TileEvent";
 import type { TextContext } from "@wayward/game/language/ITranslation";
-import { Article } from "@wayward/game/language/Translation";
+import { Article } from "@wayward/game/language/ITranslation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import Stream from "@wayward/goodstream/Stream";
@@ -30,6 +30,7 @@ export interface ITileManagerEvents extends Events<EntityManager<TileEvent>> {
     canCreate(type: TileEventType, tile: Tile): boolean | undefined;
 }
 export default class TileEventManager extends EntityManager<TileEvent> {
+    readonly static: typeof TileEventManager;
     protected readonly name = "TileEventManager";
     event: IEventEmitter<this, ITileManagerEvents>;
     loadEntity(tileEvent: TileEvent): void;

@@ -36,8 +36,8 @@ import type { Reference, ReferenceType } from "@wayward/game/game/reference/IRef
 import type { IHasInsulation, TempType } from "@wayward/game/game/temperature/ITemperature";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
-import { FireStage } from "@wayward/game/game/tile/events/IFire";
-import { Article } from "@wayward/game/language/Translation";
+import FireStage from "@wayward/game/game/tile/events/fire/FireStage";
+import { Article } from "@wayward/game/language/ITranslation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { SortDirection } from "@wayward/game/save/ISaveManager";
 import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
@@ -175,8 +175,8 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     changeType(doodadType: DoodadType): void;
     get isValid(): boolean;
-    isInGroup(doodadTypeGroup: DoodadTypeGroup): boolean;
-    updateGroupCache(doodadTypeGroup: DoodadTypeGroup): boolean;
+    isInGroup(doodadTypeGroup: DoodadType | DoodadTypeGroup): boolean;
+    updateGroupCache(doodadTypeGroup: DoodadType | DoodadTypeGroup): boolean;
     get point(): IVector3;
     get tile(): Tile;
     /**

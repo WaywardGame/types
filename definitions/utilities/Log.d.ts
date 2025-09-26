@@ -9,7 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IFileSystem } from "@wayward/hosts/shared/ipc/fileSystem";
-import Version from "@wayward/utilities/Version";
 export declare enum LogLineType {
     Debug = 0,
     Error = 1,
@@ -130,19 +129,6 @@ declare namespace Log {
      * @param sources A list of sources to log to.
      */
     function trace(...sources: string[]): (...args: any[]) => void;
-    function shouldSendErrorReport(versionInfo?: Version.Info | undefined): boolean;
-    /**
-     * Warns about an occurrence of something, due to a specific caller, once per session.
-     * @param skip Number of callsites to skip. Automatically skips this function and its caller.
-     * If this is called from a function that is registered in `Errors.ts` as a skipped callsite, you might have to pass `-1`.
-     * @param id The ID of this warning. Can be `Log.simplify` strings.
-     */
-    function warnForCaller(skip: number, id: ArrayOr<string | SimplifyString>, ...message: any[]): void;
-    /**
-     * Warn about something once per session based on unique warning ids.
-     * This is like how node.js does warnings in console.
-     */
-    function warnOncePerSession(warningId: ArrayOr<string | SimplifyString>, ...message: any[]): void;
     interface SimplifyString extends String {
         simplified: string;
     }

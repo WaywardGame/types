@@ -11,7 +11,7 @@
 import type Island from "@wayward/game/game/island/Island";
 import GameplayModifiersManager, { GameplayModifiersCollection } from "@wayward/game/game/options/modifiers/GameplayModifiersManager";
 import type IslandModifier from "@wayward/game/game/options/modifiers/island/IslandModifier";
-import { IslandModifierType } from "@wayward/game/game/options/modifiers/island/IslandModifier";
+import { IslandModifierType } from "@wayward/game/game/options/modifiers/island/IIslandModifier";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 export declare const EXCLUSIVE_MODIFIERS: IslandModifierType[][];
 declare class IslandModifiersManager extends GameplayModifiersManager<IslandModifier> {

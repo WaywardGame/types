@@ -33,7 +33,7 @@ import type { IContainer, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
-import type { Article } from "@wayward/game/language/Translation";
+import type { Article } from "@wayward/game/language/ITranslation";
 import Translation from "@wayward/game/language/Translation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";

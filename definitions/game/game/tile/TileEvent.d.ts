@@ -27,8 +27,8 @@ import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManag
 import type { ITileEventDescription } from "@wayward/game/game/tile/ITileEvent";
 import { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
-import { FireStage } from "@wayward/game/game/tile/events/IFire";
-import type { Article } from "@wayward/game/language/Translation";
+import FireStage from "@wayward/game/game/tile/events/fire/FireStage";
+import type { Article } from "@wayward/game/language/ITranslation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
@@ -100,6 +100,10 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
      * Damages the tile event by 1 durability. If durability reaches 0, the tile event is removed and all items are dropped.
      */
     damage(): void;
+    /**
+     * Drops all items associated with this tile event (if any).
+     */
+    dropItems(): void;
     /**
      * Gets the builder/creator of this event, or `undefined` if the tile event is creatorless.
      */

@@ -70,4 +70,22 @@ export declare namespace TranslationArg {
 export interface ITranslationArgRecord {
     [key: string]: ITranslationArgRecord | TranslationArg;
 }
+export declare enum Article {
+    /**
+     * Use no article.
+     */
+    None = "",
+    /**
+     * In English, this is "a" or "an" in front of the text, assuming the "count" is one.
+     */
+    Indefinite = "indefinite",
+    /**
+     * In English, this is "the" in front of the text.
+     */
+    Definite = "definite",
+    /**
+     * Uses "indefinite" if the user hasn't opted out of articles in titles.
+     */
+    Title = "title"
+}
 export {};

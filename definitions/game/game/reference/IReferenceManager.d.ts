@@ -899,6 +899,7 @@ export declare const enumRefTypes: {
         PumpkinPie: ItemType.PumpkinPie;
         FruitPie: ItemType.FruitPie;
         JackOLantern: ItemType.JackOLantern;
+        DriedLeaves: ItemType.DriedLeaves;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;

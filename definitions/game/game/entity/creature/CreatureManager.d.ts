@@ -18,7 +18,7 @@ import type Human from "@wayward/game/game/entity/Human";
 import { MoveType } from "@wayward/game/game/entity/IEntity";
 import Tile from "@wayward/game/game/tile/Tile";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-import { Article } from "@wayward/game/language/Translation";
+import { Article } from "@wayward/game/language/ITranslation";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> {
@@ -34,6 +34,7 @@ export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> 
 export default class CreatureManager extends EntityManager<Creature, IEntityRemoveOptions & {
     remainTamed?: boolean;
 }> {
+    readonly static: typeof CreatureManager;
     protected readonly name = "CreatureManager";
     event: IEventEmitter<this, ICreatureManagerEvents>;
     static combatStrength: CombatStrengthManager;
@@ -77,6 +78,6 @@ export default class CreatureManager extends EntityManager<Creature, IEntityRemo
      */
     getMovePenaltyFromWasm(moveType: MoveType, x: number, y: number, z: number): number;
     spawnGuardians(position: IVector3, amount: number): number;
-    static list: import("../../../language/utility/TranslationListBuilder").ITranslationListBuilder<Creature, CreatureType, boolean>;
-    list: import("../../../language/utility/TranslationListBuilder").ITranslationListBuilder<Creature, CreatureType, boolean>;
+    static list: import("../../../language/utility/TranslationListBuilder").TranslationListBuilder<Creature, CreatureType, boolean>;
+    list: import("../../../language/utility/TranslationListBuilder").TranslationListBuilder<Creature, CreatureType, boolean>;
 }

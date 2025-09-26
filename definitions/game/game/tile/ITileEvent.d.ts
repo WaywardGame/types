@@ -99,6 +99,10 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
      * If set to true, picking up (or gathering) this tile event will cause the player to skip their turn and lose 1 stamina.
      */
     pickUpSlowsPlayer?: boolean;
+    /**
+     * If true, when jumping onto a tile with this event, the event will be destroyed and all items will fall to the ground.
+     */
+    jumpingOntoDestroysAndDropsItems?: boolean;
 }
 export declare const TILE_EVENTS_WATER_UNPASSABLE_TERRAIN_EXCLUSIONS: TerrainType[];
 export declare enum TileEventType {
@@ -126,5 +130,7 @@ export declare enum TileEventType {
     PuddleOfSwampWater = 21,
     PuddleOfFilteredWater = 22,
     SlimePatch = 23,
-    Cobweb = 24
+    Cobweb = 24,
+    PileOfLeaves = 25
 }
+export declare const TILE_EVENTS_LIQUID_TERRAIN_EXCLUSIONS: TerrainType[];

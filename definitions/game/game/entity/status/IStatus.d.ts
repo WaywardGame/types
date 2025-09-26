@@ -14,7 +14,6 @@ import type { Stat } from "@wayward/game/game/entity/IStats";
 import { MessageType } from "@wayward/game/game/entity/player/IMessageManager";
 import type IStatusContext from "@wayward/game/game/entity/status/IStatusContext";
 import type Status from "@wayward/game/game/entity/status/Status";
-import type { StatusParticleEvent } from "@wayward/game/game/entity/status/Status";
 import type { StatusEffectList } from "@wayward/game/game/entity/status/StatusEffectList";
 import type { IGameOptionsStatus } from "@wayward/game/game/options/IGameOptions";
 import type Dictionary from "@wayward/game/language/Dictionary";
@@ -88,6 +87,16 @@ export declare enum StatusType {
     Statistician = 12,
     Runekeeper = 13
 }
+/** Fake status types just for display */
+export declare enum DisplayStatusType {
+    Cut = -100000,
+    RunekeeperEvil = -99999,
+    RunekeeperChaos = -99998,
+    RunekeeperGood = -99997,
+    StatisticianStrength = -99996,
+    StatisticianDexterity = -99995,
+    StatisticianMetabolism = -99994
+}
 export declare enum StatusApplicability {
     None = 0,
     Creature = 1,
@@ -143,3 +152,17 @@ export type StatusEffect = {
     [TYPE in StatusEffectType]: IStatusEffect<TYPE>;
 }[StatusEffectType];
 export declare const STATUS_GROUP_MESSAGE_TYPE_MAP: Record<StatusThreatLevel, MessageType>;
+export declare enum StatusParticleEvent {
+    /**
+     * Particle effect for when a turn passes
+     */
+    Turn = 0,
+    /**
+     * Particle effect for when the status effect has a "tick". A status effect tick is controlled by the effect rate.
+     */
+    Tick = 1,
+    /**
+     * Particle effect for when the status effect passes.
+     */
+    Passed = 2
+}

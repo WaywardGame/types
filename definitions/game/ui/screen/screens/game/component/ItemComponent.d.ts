@@ -16,6 +16,7 @@ import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropert
 import Component from "@wayward/game/ui/component/Component";
 import type ContextMenu from "@wayward/game/ui/component/ContextMenu";
 import Bindable from "@wayward/game/ui/input/Bindable";
+import { ItemRefreshType } from "@wayward/game/ui/screen/screens/game/component/item/IItemComponent";
 import { ItemComponentHandler } from "@wayward/game/ui/screen/screens/game/component/item/ItemComponentHandler";
 import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
 import type { ActionSlot } from "@wayward/game/ui/screen/screens/game/static/actions/ActionSlot";
@@ -42,29 +43,6 @@ export interface IItemPickUpApi {
 export interface IItemDropApi {
     bindable?: Bindable;
     handler?: ItemComponentHandler;
-}
-export declare enum ItemTradeType {
-    None = "",
-    ToMerchant = "To",
-    FromMerchant = "From"
-}
-export declare enum ItemRefreshType {
-    None = 0,
-    ItemType = 1,
-    Durability = 2,
-    Decay = 4,
-    Quality = 8,
-    Magic = 16,
-    Protected = 32,
-    EquipSlot = 64,
-    MaybeSlottedInActionSlot = 128,
-    Action = 256,
-    Stack = 512,
-    Stacked = 1024,
-    Trading = 2048,
-    ContainerChange = 4096,
-    Cooldown = 8192,
-    All = 16383
 }
 export interface IItemComponentEvents extends Events<Component>, IDraggableEvents, IItemSlotEvents, ISortableDraggableEvents {
     deregisterHighlights(): any;

@@ -14,25 +14,6 @@ import { StatusType } from "@wayward/game/game/entity/status/IStatus";
 import Component from "@wayward/game/ui/component/Component";
 import type GameScreen from "@wayward/game/ui/screen/screens/GameScreen";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export declare enum StatusClasses {
-    Wrapper = "status-effects",
-    Wrapper_Smol = "status-effects--smol",
-    Wrapper_WaitingForScale = "status-effects--waiting-for-scale",
-    Main = "status-effect",
-    _TitleMode = "status-effect--title-mode",
-    Level = "status-effect-level",
-    _Tick = "status-effect--tick",
-    Layer = "status-effect-layer",
-    LayerBackground = "status-effect-layer-background",
-    LayerForeground = "status-effect-layer-foreground",
-    LayerEffect = "status-effect-layer-effect",
-    _NoHigherThreat = "status-effect--no-higher-threat",
-    _Group_ = "status-effect--group-",
-    _GroupThreat = "status-effect--group-threat",
-    _GroupIssue = "status-effect--group-issue",
-    _GroupNeutral = "status-effect--group-neutral",
-    _GroupGood = "status-effect--group-good"
-}
 export interface IStatusesEvents extends Events<Component> {
     update(): any;
 }

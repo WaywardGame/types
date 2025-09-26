@@ -12,7 +12,7 @@ import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type { IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Human from "@wayward/game/game/entity/Human";
 import type { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
@@ -25,5 +25,5 @@ export interface IPickUpCanUse extends IActionUsable {
     pickUpTypes: ItemType[];
     terrainDescription: ITerrainDescription;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpCanUse, [(Item | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], ActionType.PickUp, Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpCanUse, [(Item | undefined)?]>;
 export default _default;

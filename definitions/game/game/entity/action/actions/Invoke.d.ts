@@ -10,11 +10,11 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { IInvokeUse } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 export interface IInvokeUsable extends IActionUsable, IInvokeUse {
     rune: Item;
 }
-declare const _default: Action<[ActionArgument.Item], import("../../player/Player").default, void, IInvokeUsable, [Item]>;
+declare const _default: Action<[ActionArgument.Item], ActionType.Invoke, import("../../player/Player").default, void, IInvokeUsable, [Item]>;
 export default _default;

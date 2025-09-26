@@ -66,10 +66,11 @@ export default class ActionExecutor<A extends ActionArguments, E extends Entity,
     private context?;
     private readonly items;
     private itemsUsed;
-    private readonly action;
+    private readonly _description;
     use: CU;
     constructor(action?: IActionDescription<A, E, R, CU>, type?: number | undefined);
     get description(): IActionDescription<A, E, R, CU>;
+    get(actionType: ActionType): never;
     skipConfirmation(): this;
     /**
      * Checks if stuff is blocking the tile

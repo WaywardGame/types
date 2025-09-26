@@ -11,11 +11,11 @@
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Tile from "@wayward/game/game/tile/Tile";
 export interface ITestDepthCanUse extends IActionUsable {
     doodad: Doodad;
     tile: Tile;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ITestDepthCanUse, [(import("../../../item/Item").default | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], ActionType.TestDepth, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ITestDepthCanUse, [(import("../../../item/Item").default | undefined)?]>;
 export default _default;

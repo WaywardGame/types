@@ -11,6 +11,7 @@
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { ITerrainDescription } from "@wayward/game/game/tile/ITerrain";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -20,5 +21,5 @@ export interface IDrinkInFrontCanUse extends IActionUsable {
     tileType?: TerrainType;
     doodad?: Doodad;
 }
-declare const _default: Action<[], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDrinkInFrontCanUse, []>;
+declare const _default: Action<[], ActionType.DrinkInFront, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDrinkInFrontCanUse, []>;
 export default _default;

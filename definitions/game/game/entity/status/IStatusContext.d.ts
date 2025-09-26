@@ -24,7 +24,7 @@ interface IStatusContext {
 }
 declare namespace IStatusContext {
     function fromStatus(status: Status): IStatusContext;
-    function fromType(status: StatusType, entity?: EntityWithStats): IStatusContext;
+    function fromDef(status: StatusType, definition: IStatusDescription, entity?: EntityWithStats): IStatusContext;
     function withLevel(status: IStatusContext, level: number): IStatusContext;
     function getInterval(status: IStatusContext): number;
     function getOptions(type: StatusType, entity?: EntityWithStats): IGameOptionsStatus;

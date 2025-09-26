@@ -10,18 +10,20 @@
  */
 import type { IWaywardPreload } from "./interfaces";
 import type { IElectron } from "./ipc/electron";
-export interface IRequireJs {
-    s: {
-        contexts: {
-            _: {
-                defined: Record<string, any>;
-            };
-        };
-    };
-    undef(path: string): void;
-    onResourceLoad(ctx: any, map: any): void;
-    (moduleName: string): any;
-    (moduleNames: string[], onLoad: (...args: any[]) => void, onError: (err: any) => void): void;
+export interface ModuleLoaderConfig {
+    baseUrl: string;
+    paths: Record<string, string>;
+    urlArgs?: string;
+}
+export interface ModuleLoader {
+    defined: Record<string, any>;
+    configModuleImport(config: ModuleLoaderConfig): void;
+    processModules(): Promise<void>;
+    importAdditionalScript(script: string, onLoad?: () => void, onError?: (err: any) => void): void;
+    importAdditionalModule<T = unknown>(module: string, onLoad?: (mod: any) => void, onError?: (err: any) => void): Promise<T>;
+    importAdditionalModules<T = unknown[]>(modules: string[], onLoad?: (...mods: any[]) => void, onError?: (err: any) => void): Promise<T>;
+    allowRedefine(name: string): void;
+    hasModule(name: string): boolean;
 }
 export interface IWaywardPreloadLoader {
     installPath?: string;
@@ -56,7 +58,7 @@ declare global {
     interface Window {
         require: any;
         electronRequire: any;
-        requirejs: IRequireJs | undefined;
+        ModuleLoader: ModuleLoader | undefined;
         waywardPreload: IWaywardPreloadLoader | undefined;
         waywardTitleBar: IWaywardTitleBar | undefined;
         getScaleFactor(): number;

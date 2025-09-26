@@ -11,7 +11,7 @@
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import { GameMode } from "@wayward/game/game/options/IGameOptions";
 import type { Challenge } from "@wayward/game/game/options/modifiers/challenge/IChallenge";
-import type { IslandModifierType } from "@wayward/game/game/options/modifiers/island/IslandModifier";
+import type { IslandModifierType } from "@wayward/game/game/options/modifiers/island/IIslandModifier";
 import Component from "@wayward/game/ui/component/Component";
 import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
 import type { GameOptionsIcon, IGameOptionsIcon } from "@wayward/game/ui/screen/screens/menu/menus/pause/GameOptionsIcons";

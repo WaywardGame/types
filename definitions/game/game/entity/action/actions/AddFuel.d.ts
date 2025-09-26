@@ -10,9 +10,9 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 export interface IAddFuelCanUse extends IActionUsable {
     stokeAmount: number;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IAddFuelCanUse, [import("../../../item/Item").default, import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], ActionType.AddFuel, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IAddFuelCanUse, [import("../../../item/Item").default, import("../../../item/Item").default]>;
 export default _default;

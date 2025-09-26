@@ -29,7 +29,8 @@ import type { ITileContainer } from "@wayward/game/game/tile/ITerrain";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type { ListEnder } from "@wayward/game/language/ITranslation";
-import Translation, { Article } from "@wayward/game/language/Translation";
+import Translation from "@wayward/game/language/Translation";
+import { Article } from "@wayward/game/language/ITranslation";
 import Message from "@wayward/game/language/dictionary/Message";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IRGB } from "@wayward/utilities/Color";
@@ -83,6 +84,7 @@ export interface IItemManagerEvents extends Events<EntityManager<Item>> {
     craft?(human: Human, item: Item): void;
 }
 export default class ItemManager extends EntityManager<Item, IItemRemoveOptions> {
+    readonly static: typeof ItemManager;
     protected readonly name = "ItemManager";
     event: IEventEmitter<this, IItemManagerEvents>;
     /**
@@ -360,8 +362,8 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      * @param formatter A formatting translation that should be used for each item translation
      */
     getItemTranslations(items: Item[], article?: Article, formatter?: Translation): TranslationImpl[];
-    static list: import("../../language/utility/TranslationListBuilder").ITranslationListBuilder<Item, string, Quality>;
-    readonly list: import("../../language/utility/TranslationListBuilder").ITranslationListBuilder<Item, string, Quality>;
+    static list: import("../../language/utility/TranslationListBuilder").TranslationListBuilder<Item, string, Quality>;
+    readonly list: import("../../language/utility/TranslationListBuilder").TranslationListBuilder<Item, string, Quality>;
     /**
      * Formats a list translation out of an array of items.
      * @param listEnder The way the list should end (ie `and`, `or`, etc)

@@ -10,7 +10,7 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import { BookType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
@@ -18,5 +18,5 @@ export interface IReadCanUse extends IActionUsable {
     book: BookType;
     basicBookName: TranslationImpl;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IReadCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemNearby], ActionType.Read, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IReadCanUse, [Item]>;
 export default _default;

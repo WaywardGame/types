@@ -16,6 +16,7 @@ import RecipeOutput from "@wayward/game/game/item/recipe/RecipeOutput";
 import type { RecipeInputType } from "@wayward/game/game/item/recipe/RecipeRequirement";
 import { RecipeRequirementType } from "@wayward/game/game/item/recipe/RecipeRequirement";
 import type { RecipeRequirementClass } from "@wayward/game/game/item/recipe/RecipeRequirements";
+import type requirementsType from "@wayward/game/game/item/recipe/RecipeRequirements";
 import type ItemRequirement from "@wayward/game/game/item/recipe/requirement/ItemRequirement";
 declare class ItemOutput extends RecipeOutput<Item> {
     readonly itemType: ItemType;
@@ -34,6 +35,7 @@ declare class ItemOutput extends RecipeOutput<Item> {
     private getOutputInventory;
 }
 declare namespace ItemOutput {
+    function setRequirements(requirementsIn: typeof requirementsType): void;
     class Intermediate {
         private readonly output;
         private readonly decays;

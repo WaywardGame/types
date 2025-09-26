@@ -10,7 +10,7 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import { ActionArgumentCustom } from "@wayward/game/game/entity/action/argument/ActionArgumentCustom";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type { IWalkToPathInProgress } from "@wayward/game/game/entity/player/IPlayer";
 export declare class WalkToArgument extends ActionArgumentCustom<IWalkToPathInProgress> {
@@ -20,5 +20,5 @@ export declare class WalkToArgument extends ActionArgumentCustom<IWalkToPathInPr
     private readOptionalRange;
     private writeOptionalRange;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, WalkToArgument]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [(IWalkToPathInProgress | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, WalkToArgument]], ActionType.UpdateWalkTo, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [(IWalkToPathInProgress | undefined)?]>;
 export default _default;

@@ -10,6 +10,7 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 export interface IReleaseCanUse extends IActionUsable {
     creature: Creature;
@@ -17,5 +18,5 @@ export interface IReleaseCanUse extends IActionUsable {
 /**
  * Releases a creature from being tamed
  */
-declare const _default: Action<[], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IReleaseCanUse, []>;
+declare const _default: Action<[], ActionType.Release, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IReleaseCanUse, []>;
 export default _default;

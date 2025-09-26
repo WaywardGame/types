@@ -14,7 +14,8 @@ import { BiomeType } from "@wayward/game/game/biome/IBiome";
 import { CurseComponent } from "@wayward/game/game/deity/Curse";
 import Deity from "@wayward/game/game/deity/Deity";
 import { DoodadType, DoodadTypeExtra, DoodadTypeGroup, GrowingStage } from "@wayward/game/game/doodad/IDoodad";
-import { CombatDangerLevel, CombatStrength } from "@wayward/game/game/entity/CombatStrengthManager";
+import { CombatDangerLevel } from "@wayward/game/game/entity/ICombatStrength";
+import { CombatStrength } from "@wayward/game/game/entity/ICombatStrength";
 import { DamageType } from "@wayward/game/game/entity/IEntity";
 import { EquipType, SkillType } from "@wayward/game/game/entity/IHuman";
 import { Stat } from "@wayward/game/game/entity/IStats";
@@ -51,13 +52,13 @@ import { DoctorCureMethod, DoctorCureType } from "@wayward/game/game/milestones/
 import Runekeeper from "@wayward/game/game/milestones/milestone/Runekeeper";
 import { GameMode, UnlockedRecipesStrategy } from "@wayward/game/game/options/IGameOptions";
 import { Challenge } from "@wayward/game/game/options/modifiers/challenge/IChallenge";
-import { IslandModifierType } from "@wayward/game/game/options/modifiers/island/IslandModifier";
-import { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import { IslandModifierType } from "@wayward/game/game/options/modifiers/island/IIslandModifier";
+import { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/IMilestoneModifier";
 import Riddle from "@wayward/game/game/riddle/Riddle";
 import { TempType } from "@wayward/game/game/temperature/ITemperature";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import { TileEventType } from "@wayward/game/game/tile/ITileEvent";
-import { FireStage } from "@wayward/game/game/tile/events/IFire";
+import FireStage from "@wayward/game/game/tile/events/fire/FireStage";
 import { PartOfDay } from "@wayward/game/game/time/ITimeManager";
 import Dictionary from "@wayward/game/language/Dictionary";
 import { GameEndMessage } from "@wayward/game/language/dictionary/GameEndMessage";
@@ -999,6 +1000,7 @@ declare const dictionaryMap: {
         PumpkinPie: ItemType.PumpkinPie;
         FruitPie: ItemType.FruitPie;
         JackOLantern: ItemType.JackOLantern;
+        DriedLeaves: ItemType.DriedLeaves;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
@@ -1848,6 +1850,7 @@ declare const dictionaryMap: {
         PumpkinPie: ItemType.PumpkinPie;
         FruitPie: ItemType.FruitPie;
         JackOLantern: ItemType.JackOLantern;
+        DriedLeaves: ItemType.DriedLeaves;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
@@ -2829,6 +2832,7 @@ export declare const strictDictionaries: {
         PumpkinPie: ItemType.PumpkinPie;
         FruitPie: ItemType.FruitPie;
         JackOLantern: ItemType.JackOLantern;
+        DriedLeaves: ItemType.DriedLeaves;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
@@ -3678,6 +3682,7 @@ export declare const strictDictionaries: {
         PumpkinPie: ItemType.PumpkinPie;
         FruitPie: ItemType.FruitPie;
         JackOLantern: ItemType.JackOLantern;
+        DriedLeaves: ItemType.DriedLeaves;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;

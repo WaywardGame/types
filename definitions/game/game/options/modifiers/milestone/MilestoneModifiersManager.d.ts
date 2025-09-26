@@ -11,7 +11,7 @@
 import type Human from "@wayward/game/game/entity/Human";
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import GameplayModifiersManager from "@wayward/game/game/options/modifiers/GameplayModifiersManager";
-import type { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import type { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/IMilestoneModifier";
 import MilestoneModifier from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
 import Abnormalizer from "@wayward/game/game/options/modifiers/milestone/modifiers/Abnormalizer";
 import Afflicted from "@wayward/game/game/options/modifiers/milestone/modifiers/Afflicted";

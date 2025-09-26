@@ -29,7 +29,7 @@ import type { EnumReferenceTypes, Reference, Referenceable } from "@wayward/game
 import Dictionary from "@wayward/game/language/Dictionary";
 import type { DictionaryEntryEnums } from "@wayward/game/language/DictionaryMap";
 import type { ListEnder, TranslationArg } from "@wayward/game/language/ITranslation";
-import { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import { Article, ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import Message from "@wayward/game/language/dictionary/Message";
 import type { Term } from "@wayward/game/language/dictionary/Misc";
 import { EquipSlotTranslation, MiscTranslation } from "@wayward/game/language/dictionary/Misc";
@@ -37,28 +37,10 @@ import type UiTranslation from "@wayward/game/language/dictionary/UiTranslation"
 import type { TranslationReformatter } from "@wayward/game/language/impl/TranslationImpl";
 import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import { formatListTranslation } from "@wayward/game/language/segment/FormatListSegment";
-import makeTranslationListBuilder from "@wayward/game/language/utility/TranslationListBuilder";
-import ITranslationSorter from "@wayward/game/language/utility/TranslationSorter";
+import TranslationListBuilder from "@wayward/game/language/utility/TranslationListBuilder";
+import TranslationSorter from "@wayward/game/language/utility/TranslationSorter";
 import { IStringSection } from "@wayward/game/utilities/string/Interpolator";
 import { IRange } from "@wayward/utilities/math/Range";
-export declare enum Article {
-    /**
-     * Use no article.
-     */
-    None = "",
-    /**
-     * In English, this is "a" or "an" in front of the text, assuming the "count" is one.
-     */
-    Indefinite = "indefinite",
-    /**
-     * In English, this is "the" in front of the text.
-     */
-    Definite = "definite",
-    /**
-     * Uses "indefinite" if the user hasn't opted out of articles in titles.
-     */
-    Title = "title"
-}
 type Translation = TranslationImpl;
 declare namespace Translation {
     export function is(value: unknown): value is Translation;
@@ -66,7 +48,7 @@ declare namespace Translation {
     export const RANDOM = "random";
     export const getString: typeof TranslationImpl.getString;
     export const resolve: typeof TranslationImpl.resolve;
-    export const sorter: typeof ITranslationSorter.create;
+    export const sorter: typeof TranslationSorter.create;
     /**
      * Gets a translation given a dictionary, entry, and translation index.
      * @param dictionary The dictionary to get a translation from, for instance, `Dictionary.Item`.
@@ -192,7 +174,7 @@ declare namespace Translation {
     export function colorizeImportance(importance: "primary" | "secondary", text: IStringSection[]): Translation;
     export function classes(...classes: string[]): Translation;
     export const formatList: typeof formatListTranslation;
-    export const listBuilder: typeof makeTranslationListBuilder;
+    export const listBuilder: typeof TranslationListBuilder;
     export function reformatSingularNoun(): Translation;
     export function reformatSingularNoun(count: number): Translation;
     export function reformatSingularNoun(article: Article): Translation;

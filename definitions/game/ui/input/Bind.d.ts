@@ -10,8 +10,8 @@
  */
 import Bindable from "@wayward/game/ui/input/Bindable";
 import { IInput } from "@wayward/game/ui/input/IInput";
+import InputInfo from "@wayward/game/ui/input/InputInfo";
 import type { GlobalInputInfo, GlobalMouseInfo } from "@wayward/game/ui/input/InputManager";
-import { InputInfo } from "@wayward/game/ui/input/InputManager";
 import type { Macro } from "@wayward/game/ui/input/Macros";
 import type { TypedPropertyDescriptorFunctionAnyNOfParams } from "@wayward/utilities/event/EventManager";
 export interface IBindHandlerApi {

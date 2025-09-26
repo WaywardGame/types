@@ -28,7 +28,7 @@ import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManag
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type Translation from "@wayward/game/language/Translation";
-import type { Article } from "@wayward/game/language/Translation";
+import type { Article } from "@wayward/game/language/ITranslation";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface ICorpseEvents extends IEntityEvents {

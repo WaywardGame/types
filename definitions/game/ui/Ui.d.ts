@@ -24,6 +24,7 @@ import SaveDropHandler from "@wayward/game/ui/SaveDropHandler";
 import ServerJoinHandler from "@wayward/game/ui/ServerJoinHandler";
 import Component from "@wayward/game/ui/component/Component";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import InputManager from "@wayward/game/ui/input/InputManager";
 import { ScreenId } from "@wayward/game/ui/screen/IScreen";
 import ScreenManager from "@wayward/game/ui/screen/ScreenManager";
 import ItemStylesheetHandler from "@wayward/game/ui/screen/screens/game/util/item/ItemStylesheet";
@@ -65,6 +66,8 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     readonly promptsBridge: PromptsBridge;
     private storage;
     private readonly dataHosts;
+    get input(): typeof InputManager;
+    get components(): typeof Component;
     constructor();
     /**
      * @param elements The elements to refresh translations inside

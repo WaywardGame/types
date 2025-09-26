@@ -30,6 +30,7 @@ import type PlayerManager from "@wayward/game/game/entity/player/PlayerManager";
 import type Island from "@wayward/game/game/island/Island";
 import type Item from "@wayward/game/game/item/Item";
 import type ItemManager from "@wayward/game/game/item/ItemManager";
+import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import type Loading from "@wayward/game/game/meta/Loading";
 import type Prompts from "@wayward/game/game/meta/prompt/Prompts";
 import type { MilestoneManager } from "@wayward/game/game/milestones/MilestoneManager";
@@ -74,33 +75,34 @@ export declare enum EventBus {
     Loading = 17,
     LocalIsland = 18,
     LocalPlayer = 19,
-    MerchantNPCs = 20,
-    Milestones = 21,
-    Mods = 22,
-    Multiplayer = 23,
-    NPCManager = 24,
-    NPCs = 25,
-    PlayerManager = 26,
-    Players = 27,
-    Prompt = 28,
-    Renderer = 29,
-    SaveManager = 30,
-    ScreenManager = 31,
-    Steamworks = 32,
-    TileEventManager = 33,
-    TileEvents = 34,
-    Ui = 35,
-    UiActionBar = 36,
-    UiActionMenuHandler = 37,
-    UiGameScreen = 38,
-    UiHoveredTileTracker = 39,
-    UiInputManagerMouse = 40,
-    UiInteractionManager = 41,
-    UiItemComponentStatic = 42,
-    UiMovementHandler = 43,
-    UiPathingHandler = 44,
-    UsableActions = 45,
-    WorldRenderer = 46
+    Magic = 20,
+    MerchantNPCs = 21,
+    Milestones = 22,
+    Mods = 23,
+    Multiplayer = 24,
+    NPCManager = 25,
+    NPCs = 26,
+    PlayerManager = 27,
+    Players = 28,
+    Prompt = 29,
+    Renderer = 30,
+    SaveManager = 31,
+    ScreenManager = 32,
+    Steamworks = 33,
+    TileEventManager = 34,
+    TileEvents = 35,
+    Ui = 36,
+    UiActionBar = 37,
+    UiActionMenuHandler = 38,
+    UiGameScreen = 39,
+    UiHoveredTileTracker = 40,
+    UiInputManagerMouse = 41,
+    UiInteractionManager = 42,
+    UiItemComponentStatic = 43,
+    UiMovementHandler = 44,
+    UiPathingHandler = 45,
+    UsableActions = 46,
+    WorldRenderer = 47
 }
 declare const eventBuses: {
     [EventBus.Actions](): ActionExecutor<any, any, any, any, any>;
@@ -123,6 +125,7 @@ declare const eventBuses: {
     [EventBus.Loading](): Loading.Events;
     [EventBus.LocalIsland](): Island;
     [EventBus.LocalPlayer](): Player;
+    [EventBus.Magic](): MagicalPropertyManager;
     [EventBus.MerchantNPCs](): MerchantNPC;
     [EventBus.Milestones](): MilestoneManager;
     [EventBus.Mods](): ModManager;
@@ -173,33 +176,34 @@ export declare const eventBusManager: EventBusManager<EventBus, {
     17(): Loading.Events;
     18(): Island;
     19(): Player;
-    20(): MerchantNPC;
-    21(): MilestoneManager;
-    22(): ModManager;
-    23(): Multiplayer;
-    24(): NPCManager;
-    25(): NPC;
-    26(): PlayerManager;
-    27(): Player;
-    28(): Prompts.Events;
-    29(): Renderer;
-    30(): SaveManager;
-    31(): ScreenManager;
-    32(): Steamworks;
-    33(): TileEventManager;
-    34(): TileEvent;
-    35(): typeof ui;
-    36(): ActionBar;
-    37(): ActionMenuHandler;
-    38(): GameScreen;
-    39(): HoveredTileTracker;
-    40(): GlobalMouseInfo;
-    41(): InteractionManager;
-    42(): ItemComponentEventBus;
-    43(): MovementHandler;
-    44(): PathingHandler;
-    45(): UsableAction;
-    46(): WorldRenderer;
+    20(): MagicalPropertyManager;
+    21(): MerchantNPC;
+    22(): MilestoneManager;
+    23(): ModManager;
+    24(): Multiplayer;
+    25(): NPCManager;
+    26(): NPC;
+    27(): PlayerManager;
+    28(): Player;
+    29(): Prompts.Events;
+    30(): Renderer;
+    31(): SaveManager;
+    32(): ScreenManager;
+    33(): Steamworks;
+    34(): TileEventManager;
+    35(): TileEvent;
+    36(): typeof ui;
+    37(): ActionBar;
+    38(): ActionMenuHandler;
+    39(): GameScreen;
+    40(): HoveredTileTracker;
+    41(): GlobalMouseInfo;
+    42(): InteractionManager;
+    43(): ItemComponentEventBus;
+    44(): MovementHandler;
+    45(): PathingHandler;
+    46(): UsableAction;
+    47(): WorldRenderer;
 }>;
 /**
  * For backwards compat / ease of use

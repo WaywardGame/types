@@ -14,8 +14,9 @@ import { SkillType } from "@wayward/game/game/entity/IHuman";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { IItemDescription, IMagicalPropertyInfo, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type { MagicalPropertyIdentity } from "@wayward/game/game/magic/IMagicalProperty";
+import type { MagicalPropertyIdentity, MagicalNormalPropertyTypes, MagicalSubPropertyTypes } from "@wayward/game/game/magic/IMagicalProperty";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
+import type TranslationClass from "@wayward/game/language/Translation";
 export declare const MAGICAL_PROPERTY_GLOWING_LIGHT_BONUS = 5;
 declare enum MagicalPropertyType {
     /** Increases attack value (for weapons and ammo) */
@@ -116,6 +117,8 @@ export interface MagicalPropertyTypeSubTypeMap {
     [MagicalPropertyType.StatPotency_EquipmentImproveConsumableStats]: Stat;
 }
 export declare namespace MagicalPropertyInfoHelper {
+    function isNormalProperty(property: MagicalPropertyType): property is MagicalNormalPropertyTypes;
+    function isSubProperty(property: MagicalPropertyType): property is MagicalSubPropertyTypes;
     /**
      * Creates a partial `IMagicalPropertyDescription` that generates an integer value from min (inclusive) to max (exclusive),
      * with an *actual* max for the magical property using `max`. (1 higher)
@@ -134,3 +137,7 @@ export declare namespace MagicalPropertyInfoHelper {
     function functionRequiringItem<T>(item: Item | ItemType, fn: (item: Item) => T): () => T;
 }
 export declare const magicalPropertyDescriptions: PartialRecord<MagicalPropertyType, IMagicalPropertyDescription>;
+declare let Translation: typeof TranslationClass | undefined;
+export declare namespace IMagicalPropertyDescription {
+    function setTranslation(_Translation: typeof Translation): void;
+}

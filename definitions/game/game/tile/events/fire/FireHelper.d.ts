@@ -15,24 +15,9 @@ import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
-export declare enum FireStage {
-    Extinguished = 0,// Used for messages only
-    Embers = 1,
-    AlmostExtinguished = 150,
-    Struggling = 300,
-    Thriving = 450,
-    Healthy = 600,
-    Raging = 750
-}
-export declare namespace FireStage {
-    function get(decay: number): FireStage;
-    function getIndex(fireStage: FireStage): number;
-    function getTemperature(stage: FireStage): number;
-    function getTemperature(stage: FireStage, max?: number): number;
-    function getTemperature(stage: FireStage, min: number, max: number): number;
-}
-export declare namespace IFire {
+declare namespace FireHelper {
     function dissassemblyBurn(island: Island, item: Item, tile: Tile, disassembly: boolean): Item[];
     function harvestGatherBurn(step: number, resources: ILootItem[] | undefined, tile: Tile, quality: Quality | undefined, tileEvent: TileEvent): void;
     function burnsLike(burnsLikeItem: ItemType, tileEvent: TileEvent, tile: Tile, quality: Quality | undefined): Item[];
 }
+export default FireHelper;

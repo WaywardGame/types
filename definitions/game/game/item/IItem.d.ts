@@ -38,7 +38,7 @@ import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type { ISerializedTranslation, TranslationArg } from "@wayward/game/language/ITranslation";
 import type Translation from "@wayward/game/language/Translation";
-import type { Article } from "@wayward/game/language/Translation";
+import type { Article } from "@wayward/game/language/ITranslation";
 import type Message from "@wayward/game/language/dictionary/Message";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type { ItemNotifierType } from "@wayward/game/renderer/notifier/INotifier";
@@ -1731,19 +1731,20 @@ export declare enum ItemType {
     PumpkinPie = 834,
     FruitPie = 835,
     JackOLantern = 836,
-    Last = 837
+    DriedLeaves = 837,
+    Last = 838
 }
 export declare enum ItemTypeExtra {
-    None = 838,
-    TatteredMap_RolledUp = 839,
-    TatteredMap_Completed = 840,
-    WoodenBookcase_25 = 841,
-    WoodenBookcase_50 = 842,
-    WoodenBookcase_75 = 843,
-    WoodenBookcase_100 = 844,
-    RuneOfEvilSplinters = 845,
-    RuneOfGoodCharred = 846,
-    TallySticks = 847
+    None = 839,
+    TatteredMap_RolledUp = 840,
+    TatteredMap_Completed = 841,
+    WoodenBookcase_25 = 842,
+    WoodenBookcase_50 = 843,
+    WoodenBookcase_75 = 844,
+    WoodenBookcase_100 = 845,
+    RuneOfEvilSplinters = 846,
+    RuneOfGoodCharred = 847,
+    TallySticks = 848
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {

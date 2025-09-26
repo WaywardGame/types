@@ -16,7 +16,6 @@ import Button from "@wayward/game/ui/component/Button";
 import Component from "@wayward/game/ui/component/Component";
 import Text from "@wayward/game/ui/component/Text";
 import { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
-import ContainerBucket from "@wayward/game/ui/screen/screens/game/component/ContainerBucket";
 import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
 import ItemComponent from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
 export declare enum TradeDialogClasses {
@@ -39,17 +38,17 @@ export declare enum TradeDialogClasses {
     TextCredit = "trade-dialog-text-credit"
 }
 export default class TradeDialog extends Dialog {
-    readonly inventory: ContainerBucket;
+    readonly inventory: import("../component/ContainerBucket").default;
     readonly tradeWrapperMerchant: Component<HTMLElement>;
     readonly tradeTitleMerchant: Text;
-    readonly tradeContainerMerchant: ContainerBucket;
+    readonly tradeContainerMerchant: import("../component/ContainerBucket").default;
     readonly tallySticksMerchant: ItemComponent | undefined;
     readonly merchantWeightCapacity: Text;
     readonly tradeColumn: Component<HTMLElement>;
     readonly tradeButton: Button;
     readonly tradeWrapperYou: Component<HTMLElement>;
     readonly tradeTitleYou: Text;
-    readonly tradeContainerYou: ContainerBucket;
+    readonly tradeContainerYou: import("../component/ContainerBucket").default;
     readonly tallySticksYou: ItemComponent | undefined;
     readonly credit: Text;
     private merchantRef?;

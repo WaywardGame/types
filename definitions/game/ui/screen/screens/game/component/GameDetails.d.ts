@@ -12,7 +12,7 @@ import type Island from "@wayward/game/game/island/Island";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { GameMode } from "@wayward/game/game/options/IGameOptions";
 import type { Challenge } from "@wayward/game/game/options/modifiers/challenge/IChallenge";
-import type { IslandModifierType } from "@wayward/game/game/options/modifiers/island/IslandModifier";
+import type { IslandModifierType } from "@wayward/game/game/options/modifiers/island/IIslandModifier";
 import Component from "@wayward/game/ui/component/Component";
 import type { IGameIconsHost, IGameModifiersHost } from "@wayward/game/ui/component/GameIcons";
 import GameIcons, { GameModifiers } from "@wayward/game/ui/component/GameIcons";

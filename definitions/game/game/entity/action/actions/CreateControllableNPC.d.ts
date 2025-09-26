@@ -9,6 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.String, ActionArgument.Tile], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [string, import("../../../tile/Tile").default]>;
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
+declare const _default: Action<[ActionArgument.String, ActionArgument.Tile], ActionType.CreateControllableNPC, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [string, import("../../../tile/Tile").default]>;
 export default _default;

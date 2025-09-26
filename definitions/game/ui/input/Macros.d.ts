@@ -11,7 +11,7 @@
 import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
 import type Bindable from "@wayward/game/ui/input/Bindable";
-import { Binding } from "@wayward/game/ui/input/Bindings";
+import type { Binding } from "@wayward/game/ui/input/Bindings";
 import { IInput } from "@wayward/game/ui/input/IInput";
 import type { IStringSection } from "@wayward/game/utilities/string/Interpolator";
 export interface IMacroSection extends IStringSection {
@@ -42,11 +42,14 @@ declare namespace Macros {
     function didRequestIsolation(): boolean;
     function handleInput(input: IInput, api: IBindHandlerApi): Macro | undefined;
     function currentMatch(bindables?: readonly Bindable[], extraInputs?: IInput[]): IBindableMatch | undefined;
+    function setBindablesSupplier(get: () => readonly Bindable[]): void;
     interface IBindableMatch {
         matches?: Set<Bindable>;
         mayMatch?: Set<Bindable>;
     }
     function match(binding: Binding, ...bindables: Bindable[]): IBindableMatch | undefined;
+    function setBindingsResolver(get: (bindable: Bindable) => readonly Binding[]): void;
+    function setBindingsHashFunction(hashFunction: (binding: Binding) => string): void;
     function mergeMatches(...matches: Array<IBindableMatch | undefined>): IBindableMatch | undefined;
 }
 export default Macros;

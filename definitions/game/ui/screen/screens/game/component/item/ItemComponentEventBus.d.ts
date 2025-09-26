@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { GlobalMouseInfo } from "@wayward/game/ui/input/InputManager";
-import { type ItemRefreshType } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import type { ItemRefreshType } from "@wayward/game/ui/screen/screens/game/component/item/IItemComponent";
 import type ItemComponent from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
 import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
 import type { ActionSlot } from "@wayward/game/ui/screen/screens/game/static/actions/ActionSlot";

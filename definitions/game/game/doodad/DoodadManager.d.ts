@@ -17,7 +17,7 @@ import type Human from "@wayward/game/game/entity/Human";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import Tile from "@wayward/game/game/tile/Tile";
-import type { Article } from "@wayward/game/language/Translation";
+import type { Article } from "@wayward/game/language/ITranslation";
 import Translation from "@wayward/game/language/Translation";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import type WorldZ from "@wayward/utilities/game/WorldZ";
@@ -32,6 +32,7 @@ export interface IDoodadManagerEvents extends Events<EntityManager<Doodad>> {
     canSpawn(type: DoodadType, tile: Tile, options: IDoodadOptions): boolean | undefined;
 }
 export default class DoodadManager extends EntityManager<Doodad> {
+    readonly static: typeof DoodadManager;
     protected readonly name = "DoodadManager";
     event: IEventEmitter<this, IDoodadManagerEvents>;
     private static readonly cachedBestDoodadForTier;

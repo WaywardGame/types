@@ -11,7 +11,7 @@
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Item from "@wayward/game/game/item/Item";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
@@ -21,5 +21,5 @@ export interface IStokeFireCanUse extends IActionUsable {
     doodad?: Doodad;
     tileEvent?: TileEvent;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IStokeFireCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemNearby], ActionType.StokeFire, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IStokeFireCanUse, [Item]>;
 export default _default;

@@ -12,6 +12,7 @@ import type Bindable from "@wayward/game/ui/input/Bindable";
 import { BindableMouseTargetingContext, BindableType, BindableTypeContext } from "@wayward/game/ui/input/Bindable";
 import type { Binding } from "@wayward/game/ui/input/Bindings";
 declare namespace Bindables {
+    function onRegistrationsChanged(callback: () => unknown): void;
     function register(index: number, defaultBinding: Binding[]): void;
     function deregister(index: number): void;
     function getType(bindable: Bindable): BindableType | undefined;

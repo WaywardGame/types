@@ -15,9 +15,9 @@ import { ModState, ModType } from "@wayward/game/mod/IModInformation";
 import { CanLoadState } from "@wayward/game/mod/IModManager";
 import type Mod from "@wayward/game/mod/Mod";
 import type { IModPath } from "@wayward/game/steamworks/ISteamworks";
-import type { IRequireJs } from "@wayward/hosts/shared/globalTypes";
 import type { IWorkshopItem } from "@wayward/hosts/shared/interfaces";
 import Log from "@wayward/utilities/Log";
+import type { ModuleLoader } from "@wayward/hosts/shared/globalTypes";
 export declare class ModInformation implements IModInformation {
     private readonly game;
     readonly config: Readonly<IModConfig>;
@@ -119,5 +119,5 @@ export declare class ModInformation implements IModInformation {
      * Called when ModManager setups up the mod
      * @param scriptFileName javascript file name without ".js"
      */
-    loadScript(requireJs: IRequireJs | undefined, modPath: IModPath, scriptFileName: string, reloading: boolean): Promise<void>;
+    loadScript(loader: ModuleLoader | undefined, modPath: IModPath, scriptFileName: string, reloading: boolean): Promise<void>;
 }

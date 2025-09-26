@@ -52,7 +52,10 @@ declare namespace Merge {
     function MERGE_ARRAY<A extends any[]>(...values: A): Mergeable<A>;
 }
 export default Merge;
-export declare const SYMBOL_MERGEABLE: unique symbol;
+export type MergeFunction = (a: unknown, b: unknown) => unknown;
+export declare const SYMBOL_MERGE_OVER: unique symbol;
+export declare const SYMBOL_MERGE_INTO: unique symbol;
 export interface IMergeable<T> {
-    [SYMBOL_MERGEABLE](value: this | undefined): T;
+    [SYMBOL_MERGE_OVER]?(value: unknown, merge: MergeFunction): T;
+    [SYMBOL_MERGE_INTO]?(value: unknown, merge: MergeFunction): unknown;
 }

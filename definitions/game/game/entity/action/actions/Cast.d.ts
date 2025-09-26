@@ -10,7 +10,7 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import TreasureGathering from "@wayward/game/game/entity/action/actions/helper/TreasureGathering";
 import type { IRangedDescription } from "@wayward/game/game/item/IItem";
 export interface ICastCanUse extends IActionUsable {
@@ -20,5 +20,5 @@ export interface ICastCanUse extends IActionUsable {
     maxFishingRange: number;
     canGatherTreasure?: TreasureGathering.ICanGather;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ICastCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Cast, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ICastCanUse, [import("../../../item/Item").default]>;
 export default _default;

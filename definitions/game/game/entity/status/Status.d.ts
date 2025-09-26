@@ -11,6 +11,7 @@
 import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import { StatusChangeReason } from "@wayward/game/game/entity/IEntity";
 import type { IStatusDescription, IStatusIconDescription, StatusParticle, StatusType } from "@wayward/game/game/entity/status/IStatus";
+import { StatusParticleEvent } from "@wayward/game/game/entity/status/IStatus";
 import { StatusThreatLevel } from "@wayward/game/game/entity/status/IStatus";
 import IStatusContext from "@wayward/game/game/entity/status/IStatusContext";
 import type { StatusEffectList } from "@wayward/game/game/entity/status/StatusEffectList";
@@ -24,29 +25,6 @@ import type { IHighlight } from "@wayward/game/ui/util/IHighlight";
 import type { IRGB } from "@wayward/utilities/Color";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export type StatusClass = Class<Status, [StatusType, EntityWithStats?]> & IModdable;
-export declare enum StatusParticleEvent {
-    /**
-     * Particle effect for when a turn passes
-     */
-    Turn = 0,
-    /**
-     * Particle effect for when the status effect has a "tick". A status effect tick is controlled by the effect rate.
-     */
-    Tick = 1,
-    /**
-     * Particle effect for when the status effect passes.
-     */
-    Passed = 2
-}
-export declare enum UiStatusType {
-    Cut = -100000,
-    RunekeeperEvil = -99999,
-    RunekeeperChaos = -99998,
-    RunekeeperGood = -99997,
-    StatisticianStrength = -99996,
-    StatisticianDexterity = -99995,
-    StatisticianMetabolism = -99994
-}
 export interface IStatusEvents {
     tick(): any;
     deregister(): any;

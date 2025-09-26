@@ -26,7 +26,7 @@ import { TempType } from "@wayward/game/game/temperature/ITemperature";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
-import type { FireStage } from "@wayward/game/game/tile/events/IFire";
+import type FireStage from "@wayward/game/game/tile/events/fire/FireStage";
 import type TimeManager from "@wayward/game/game/time/TimeManager";
 import type { IPreSerializeCallback } from "@wayward/game/save/serializer/ISerializer";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";

@@ -10,10 +10,10 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 export interface ISailToIslandCanUse extends IActionUsable {
     isLocalIslandSailing?: boolean;
     distanceFromEdge?: number;
 }
-declare const _default: Action<[ActionArgument.Integer32, ActionArgument.Integer32, [arg1: ActionArgument.Undefined, ActionArgument.Integer32]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ISailToIslandCanUse, [number, number, (number | undefined)?]>;
+declare const _default: Action<[ActionArgument.Integer32, ActionArgument.Integer32, [arg1: ActionArgument.Undefined, ActionArgument.Integer32]], ActionType.SailToIsland, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ISailToIslandCanUse, [number, number, (number | undefined)?]>;
 export default _default;
