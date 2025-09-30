@@ -62,5 +62,6 @@ declare global {
         waywardPreload: IWaywardPreloadLoader | undefined;
         waywardTitleBar: IWaywardTitleBar | undefined;
         getScaleFactor(): number;
+        __modulename: string | undefined;
     }
 }

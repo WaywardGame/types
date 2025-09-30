@@ -56,7 +56,7 @@ declare namespace Translation {
      * @param index Optional. The index of the translation in the given dictionary entry, for instance `ItemTranslation.Description`,
      * or `"random"` to return any of the translations in this entry.
      */
-    export function get<DICT extends Dictionary>(dictionary: DICT, entry: Dictionary extends DICT ? string | number : DictionaryEntryEnums[DICT], index?: "random" | number): Translation;
+    export function get<DICT extends Dictionary>(dictionary: DICT | undefined, entry: Dictionary extends DICT ? string | number : DictionaryEntryEnums[DICT], index?: "random" | number): Translation;
     /**
      * Gets a translation by its translation id. Entry matching is done by changing the case-style of the inputted
      * translation id, so if you provide an all lower-case string it will not work!
