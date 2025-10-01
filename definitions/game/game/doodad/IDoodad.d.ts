@@ -83,7 +83,11 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     containerDialog?: DialogId;
     burnsLike?: ItemType[];
     canBreak?: boolean;
-    canGrow?: boolean;
+    /**
+     * This doodad will be able to grow up until and including this stage.
+     * For example, conifers can grow up until seeding, but not bare. Most trees can grow until bare. Other plants, usually ripening.
+     */
+    canGrow?: GrowingStage;
     canGrowInCaves?: boolean;
     canTrampleWhenMature?: boolean;
     disableDrop?: boolean;
@@ -535,7 +539,8 @@ export declare enum GrowingStage {
     Budding = 3,
     Flowering = 4,
     Ripening = 5,
-    Bare = 6
+    Seeding = 6,
+    Bare = 7
 }
 export declare namespace Growth {
     function isAtLeast(growth: GrowingStage | undefined, stage: GrowingStage): boolean;

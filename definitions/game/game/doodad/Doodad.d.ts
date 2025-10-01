@@ -412,5 +412,4 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     private processDripstone;
     private postProcessDecay;
     private randomAshSpawn;
-    private canGrowToBare;
 }
