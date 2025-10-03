@@ -31,7 +31,7 @@ import type { ILiquidGather, IRangedResolvedDirection } from "@wayward/game/game
 import type { IRequirementInfo } from "@wayward/game/game/item/IItemManager";
 import ItemManager from "@wayward/game/game/item/ItemManager";
 import type DrawnMap from "@wayward/game/game/mapping/DrawnMap";
-import type { IGameOptions } from "@wayward/game/game/options/IGameOptions";
+import type { IGameOptions, IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import type { IslandModifiersCollection } from "@wayward/game/game/options/modifiers/island/IslandModifiers";
 import type { IReferenceable } from "@wayward/game/game/reference/IReferenceManager";
 import TemperatureManager from "@wayward/game/game/temperature/TemperatureManager";
@@ -53,6 +53,7 @@ import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { Random } from "@wayward/utilities/random/Random";
 import type { LegacySeededGenerator } from "@wayward/utilities/random/generators/LegacySeededGenerator";
 import type { PCGSeededGenerator } from "@wayward/utilities/random/generators/PCGSeededGenerator";
+import Curse from "@wayward/game/game/curse/Curse";
 export interface IIslandDetails {
     seed: number;
     biomeType: BiomeTypes;
@@ -105,6 +106,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly wellData: SaferNumberIndexedObject<IWell>;
     referenceId?: number;
     tileContainers: ITileContainer[];
+    curse: Curse;
     tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;
     readonly seeds: ISeeds;
     get mapGenVersionInfo(): Version.Info;
@@ -172,6 +174,8 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     private deactivate;
     private gameOptionsCached?;
+    /** A game options modifier that always returns an empty array by default, to be injected into */
+    getAdditionalGameOptionsSources(): IGameOptionsPartial[];
     getGameOptions(): ImmutableObject<IGameOptions>;
     clearGameOptionsCache(): void;
     rename(human: Human, newName: string): void;

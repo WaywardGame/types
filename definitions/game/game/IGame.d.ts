@@ -127,8 +127,9 @@ export declare enum TickFlag {
     PlayerNotes = 1024,
     Items = 2048,
     Lights = 4096,
+    Curse = 8192,
     IslandFastForward = 6174,
-    All = 65535
+    All = 4294967295
 }
 /**
  * This number * game.interval (16.666) is the tick time in milliseconds

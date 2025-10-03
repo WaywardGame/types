@@ -15,9 +15,12 @@ import { MessageType } from "@wayward/game/game/entity/player/IMessageManager";
 import type IStatusContext from "@wayward/game/game/entity/status/IStatusContext";
 import type Status from "@wayward/game/game/entity/status/Status";
 import type { StatusEffectList } from "@wayward/game/game/entity/status/StatusEffectList";
+import type { IIcon } from "@wayward/game/game/inspection/InfoProvider";
 import type { IGameOptionsStatus } from "@wayward/game/game/options/IGameOptions";
 import type Dictionary from "@wayward/game/language/Dictionary";
+import type { StatusTranslation } from "@wayward/game/language/dictionary/Misc";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
+import type Translation from "@wayward/game/language/Translation";
 import type StatusRenderer from "@wayward/game/renderer/StatusRenderer";
 import type { IHighlight } from "@wayward/game/ui/util/IHighlight";
 import type ImagePath from "@wayward/game/ui/util/ImagePath";
@@ -25,19 +28,33 @@ import type { IRGB } from "@wayward/utilities/Color";
 import type { IRange } from "@wayward/utilities/math/Range";
 export declare const STATUS_BASE_INTERVAL = 20;
 export type StatusParticle = [countOrChance: number, color: IRGB];
-export interface IStatusDescription {
-    applicability: StatusApplicability;
-    relevantStat?: Stat;
-    levelledDictionary?: Dictionary;
-    sound?: SfxType | Record<number, SfxType>;
-    /** Defaults to neutral */
-    threatLevel?: StatusThreatLevel | Record<number, StatusThreatLevel>;
-    /** An optional list of status effect levels that will be displayed in the `StatusInspection` for inspecting the status type itself */
-    listedLevels?: number[];
-    interval?: SupplierOr<number | undefined, [IStatusContext]>;
-    effects?: SupplierOr<StatusEffectList | undefined, [IStatusContext, StatusEffectList]>;
+export interface IStatusDisplayable {
     highlight?: SupplierOr<IHighlight | undefined, [IStatusContext]>;
     icon?: SupplierOr<IStatusIconDescription | undefined, [IStatusContext]>;
+    getBorderColorOverride?(status?: Status): string | undefined;
+    getCategoryOverride?(status?: Status): IStatusCategoryOverride | undefined;
+}
+export interface IStatusCategoryOverride {
+    icon: string | IIcon;
+    translation: Translation;
+}
+export interface IStatusDescription extends IStatusDisplayable {
+    applicability: StatusApplicability;
+    relevantStat?: Stat;
+    levelledDictionary?: Dictionary | {
+        dictionary: Dictionary;
+        whichMap: Record<StatusTranslation, number>;
+    };
+    sound?: SfxType | Record<number, SfxType>;
+    /** Defaults to neutral */
+    threatLevel?: StatusThreatLevel | Record<number, StatusThreatLevel> | false;
+    /** An optional list of status effect levels that will be displayed in the `StatusInspection` for inspecting the status type itself */
+    listedLevels?: number[];
+    /** An optional replacement list of icons to display for this status effect, rather than the single default icon. */
+    getDisplay?(status: Status): IStatusDisplayInstance[] | undefined;
+    getSubtitle?(): Translation | undefined;
+    interval?: SupplierOr<number | undefined, [IStatusContext]>;
+    effects?: SupplierOr<StatusEffectList | undefined, [IStatusContext, StatusEffectList]>;
     particles?: SupplierOr<StatusParticle | undefined, [IStatusContext, StatusParticleEvent?]>;
     /** A list of `StatusRenderer`s that could be returned by a supplier in the `renderer` property */
     renderers?: StatusRenderer[];
@@ -56,6 +73,10 @@ export interface IStatusDescription {
     onTreated?(status: Status, oldLevel: number): any;
     onPassed?(status: Status, oldLevel: number): any;
     refresh?(status: Status): any;
+}
+export interface IStatusDisplayInstance extends IStatusDisplayable {
+    level?: number;
+    threatLevel?: StatusThreatLevel;
 }
 export interface IStatusIconDescription {
     /**
@@ -85,7 +106,8 @@ export declare enum StatusType {
     Pacified = 10,
     Frenzied = 11,
     Statistician = 12,
-    Runekeeper = 13
+    Runekeeper = 13,
+    Cursed = 14
 }
 /** Fake status types just for display */
 export declare enum DisplayStatusType {
@@ -108,7 +130,8 @@ export declare enum StatusThreatLevel {
     Good = 0,
     Neutral = 1,
     Issue = 2,
-    Threat = 3
+    Threat = 3,
+    Hidden = 4
 }
 export declare enum StatusEffectType {
     AddsAChanceOfXOnY = 0,

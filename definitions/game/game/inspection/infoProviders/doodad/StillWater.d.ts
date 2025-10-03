@@ -15,6 +15,7 @@ export default class StillWaterInfoProvider extends InfoProvider {
     static get(doodad: Doodad): StillWaterInfoProvider | undefined;
     private readonly waterTopMessage;
     private readonly waterBottomMessage;
+    private readonly waterContainerMessage;
     private constructor();
     getClass(): string[];
     hasContent(): boolean;

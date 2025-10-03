@@ -13,7 +13,8 @@ import { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderC
 export default class StatusContext extends InfoProviderContext {
     private readonly statusRef?;
     get status(): Status | undefined;
-    constructor(status: Status);
+    get display(): number | undefined;
+    constructor(status: Status, display?: number);
 }
 declare module "@wayward/game/game/inspection/InfoProviderContext" {
     interface InfoProviderContextRegistration {

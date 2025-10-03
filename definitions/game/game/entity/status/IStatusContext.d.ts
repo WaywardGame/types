@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
-import type { IStatusDescription, StatusThreatLevel, StatusType } from "@wayward/game/game/entity/status/IStatus";
+import type { IStatusDescription, StatusType } from "@wayward/game/game/entity/status/IStatus";
+import { StatusThreatLevel } from "@wayward/game/game/entity/status/IStatus";
 import type Status from "@wayward/game/game/entity/status/Status";
 import { StatusEffectList } from "@wayward/game/game/entity/status/StatusEffectList";
 import type { IGameOptionsStatus } from "@wayward/game/game/options/IGameOptions";

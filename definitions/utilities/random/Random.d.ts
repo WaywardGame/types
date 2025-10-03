@@ -62,6 +62,12 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
      */
     chance(decimal: number): boolean;
     /**
+     * Returns the number procs that should happen, given a decimal number.
+     *
+     * Example: `procs(0.1)` is a `1/10` chance for one proc, `procs(1.8)` is 1 guaranteed and `4/5` chance of another
+     */
+    procs(decimal: number): number;
+    /**
      * Chooses a random entry in an array and returns it
      */
     choice<A extends any[]>(...from: A): A[number];

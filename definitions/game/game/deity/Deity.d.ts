@@ -23,8 +23,6 @@ export declare namespace DeityReal {
     function is(value: unknown): value is DeityReal;
 }
 export declare enum DeityDiscovery {
-    CurseFactors = 0,// uses current alignment (-8,000)
-    CurseFactorsExact = 1
 }
 export declare const DEITY_ENEMIES: PartialRecord<DeityReal, DeityReal>;
 export declare const DEITY_SOUNDS: PartialRecord<DeityReal, SfxType>;

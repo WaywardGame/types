@@ -70,7 +70,7 @@ export declare enum Milestone {
     Runekeeper = 58,
     InternalDeityDiscovery = 59,
     InternalMerchantsDiscovery = 60,
-    InternalDeitySystemDiscovery = 61,
+    InternalCurseSystemDiscovery = 61,
     Invoker = 62,
     InternalDeityInvoked = 63,
     InternalInsulationDiscovery = 64,

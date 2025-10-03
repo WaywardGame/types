@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { PartOfDayGranular } from "@wayward/game/game/time/ITimeManager";
+import type { PartOfDayGranular, TimeString } from "@wayward/game/game/time/ITimeManager";
 import { DayQuarter, TimeFormat } from "@wayward/game/game/time/ITimeManager";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class TimeManager {
@@ -66,13 +66,13 @@ export default class TimeManager {
      * @param checkTime A formatted time.
      * @param time The time to check, defaulting to the current time.
      */
-    isPast(checkTime: string, time?: number): boolean | undefined;
+    isPast(checkTime: TimeString, time?: number): boolean | undefined;
     /**
      * Checks if the given time is before a formatted time.
      * @param checkTime A formatted time.
      * @param time The time to check, defaulting to the current time.
      */
-    isBefore(checkTime: string, time?: number): boolean | undefined;
+    isBefore(checkTime: TimeString, time?: number): boolean | undefined;
     /**
      * Returns if the given time is between two formatted times.
      * @param checkPast A formatted time to check if the given time is after.
@@ -81,7 +81,7 @@ export default class TimeManager {
      *
      * Internally calls `isPast` and `isBefore`
      */
-    isBetween(checkPast: string, checkBefore: string, currentTime?: number): boolean | undefined;
+    isBetween(checkPast: TimeString, checkBefore: TimeString, currentTime?: number): boolean | undefined;
     /**
      * Returns the hours and minutes of the given time.
      * @param time The time to use, defaulting to the current time.

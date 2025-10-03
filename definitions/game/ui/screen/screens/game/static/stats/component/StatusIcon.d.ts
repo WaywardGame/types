@@ -14,6 +14,7 @@ import Component from "@wayward/game/ui/component/Component";
 import type { IRefreshable } from "@wayward/game/ui/component/Refreshable";
 export default class StatusIcon extends Component implements IRefreshable {
     readonly status: Status;
+    readonly display?: number | undefined;
     background: Component<HTMLElement>;
     effect: Component<HTMLElement>;
     foreground: Component<HTMLElement>;
@@ -22,7 +23,7 @@ export default class StatusIcon extends Component implements IRefreshable {
     private readonly pathFrameForeground;
     private readonly entityRef;
     get entity(): EntityWithStats | undefined;
-    constructor(entity: EntityWithStats, status: Status);
+    constructor(entity: EntityWithStats, status: Status, display?: number | undefined);
     setTitleMode(): this;
     updateIcon(): void;
     refresh(): this;

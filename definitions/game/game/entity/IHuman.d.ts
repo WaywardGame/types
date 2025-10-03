@@ -414,7 +414,11 @@ export declare enum RestCancelReason {
     CreatureDamaged = 4,
     Canceled = 5,
     Dying = 6,
-    WaterPoured = 7
+    WaterPoured = 7,
+    UncomfortablyCold = 8,
+    TooCold = 9,
+    UncomfortablyHot = 10,
+    TooHot = 11
 }
 export declare const restCancelReasonMessageMap: Record<RestCancelReason, Message | undefined>;
 export type WalkToChangeReason = "Damage" | "Overburdened" | "PromptVisible" | "Unknown";

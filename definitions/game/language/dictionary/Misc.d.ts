@@ -72,6 +72,10 @@ export declare enum StatusTranslation {
     Name = 1,
     Description = 2
 }
+export declare enum CurseEventTranslation {
+    Name = 0,
+    Description = 1
+}
 export type StatusTranslationTuple = [adjective: string, name: string, description?: string];
 export declare enum QuestTranslation {
     Title = 0,

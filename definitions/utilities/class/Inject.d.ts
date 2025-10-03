@@ -76,6 +76,6 @@ export declare namespace Injector {
      *
      * Note: Due to the implementation, this operation is negligible, so don't worry about performance impacts of calling it.
      */
-    function deregister<T>(injectorClass: Class<T>, instance: T): boolean;
+    function deregister<T>(injectorClass?: Class<T>, instance?: T): boolean;
 }
 export {};

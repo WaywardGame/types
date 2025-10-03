@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
-import type { IStatusDescription, StatusThreatLevel } from "@wayward/game/game/entity/status/IStatus";
+import type { IStatusDescription, IStatusDisplayable } from "@wayward/game/game/entity/status/IStatus";
+import { StatusThreatLevel } from "@wayward/game/game/entity/status/IStatus";
 import { StatusType } from "@wayward/game/game/entity/status/IStatus";
 import IStatusContext from "@wayward/game/game/entity/status/IStatusContext";
 import type Status from "@wayward/game/game/entity/status/Status";
@@ -33,10 +34,12 @@ export declare enum StatusInspectionClasses {
     Cures = "inspection-type-status-cures"
 }
 export default class StatusInspection extends Inspection<StatusType> {
-    static getAdjective(type: StatusType, status?: Status, threatGroup?: StatusThreatLevel): Translation;
+    static getAdjective(type: StatusType, status?: Status, threatGroup?: StatusThreatLevel, display?: number): Translation;
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     get statusContext(): IStatusContext;
     get status(): Status | undefined;
+    get displayIndex(): number | undefined;
+    get displayDefinition(): IStatusDisplayable | undefined;
     get entity(): EntityWithStats | undefined;
     get definition(): IStatusDescription | undefined;
     constructor([, type]: [ReferenceType, StatusType], context?: InfoProviderContext);

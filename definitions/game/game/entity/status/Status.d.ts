@@ -63,7 +63,7 @@ export default class Status extends EventEmitter.Host<IStatusEvents> {
      * @param color The color of the particle effect
      */
     getParticles(event: StatusParticleEvent): StatusParticle | undefined;
-    getIcon(): IStatusIconDescription | undefined;
+    getIcon(displayIndex?: number): IStatusIconDescription | undefined;
     getHighlight(): IHighlight | undefined;
     isActive(): boolean;
     add(reason?: StatusChangeReason, level?: number, force?: boolean, oldLevel?: number): this;
@@ -75,7 +75,7 @@ export default class Status extends EventEmitter.Host<IStatusEvents> {
      */
     getLevel(): number;
     getThreatLevel(): StatusThreatLevel;
-    getTranslation(which?: StatusTranslation): TranslationImpl | undefined;
+    getTranslation(which?: StatusTranslation, level?: number): TranslationImpl | undefined;
     refresh(): void;
     getEffects(): StatusEffectList;
     getInterval(): number;
