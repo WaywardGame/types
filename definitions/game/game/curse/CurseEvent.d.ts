@@ -9,13 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
-import type { CurseCategory, CurseEventType } from "@wayward/game/game/curse/ICurse";
+import type { CurseGroup, CurseEventDisplayMode, CurseEventType, CurseCategory } from "@wayward/game/game/curse/ICurse";
 import type Human from "@wayward/game/game/entity/Human";
 import type Island from "@wayward/game/game/island/Island";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import type { TimeString } from "@wayward/game/game/time/ITimeManager";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import type { IRange } from "@wayward/utilities/math/Range";
+/** The API that curse events have access to */
 export interface CurseEventContext {
     readonly island: Island;
     readonly point: IVector2;
@@ -28,21 +29,13 @@ export interface CurseEventContext {
      * This class *must* be included in `CurseEvent.subscribers`.
      */
     inject<T extends CurseEventSubscriber>(subscriber: Class<T>): void;
-    setVisible(visible: boolean): void;
+    setDisplay(mode: CurseEventDisplayMode): void;
     uninject(): void;
     uninject<T extends CurseEventSubscriber>(subscriber: Class<T>): void;
     toString(): string;
 }
-/**
- * A base class for subscribing to game events & applying game options during a curse event.
- * Note that renaming this class will result in it no longer being subscribed for a curse event, if it was before.
- */
-export declare abstract class CurseEventSubscriber {
-    protected readonly event: CurseEventContext;
-    constructor(event: CurseEventContext);
-    protected getOptions?(): IGameOptionsPartial;
-}
 export interface CurseEvent {
+    group: CurseGroup;
     category: CurseCategory;
     /** A number 0-1 representing the curse level that the randomly selected player must have in order for this curse event to be chosen */
     requiredCurseLevel?: number;
@@ -53,6 +46,7 @@ export interface CurseEvent {
     /** If one event is marked as conflicting with another, they will both have the conflict registered. */
     conflicts?: CurseEventType[];
     requiredPredicate?(context: CurseEventContext): boolean;
+    getOptions?(): IGameOptionsPartial;
     subscribers?: Array<Class<CurseEventSubscriber>>;
     onStart?(context: CurseEventContext): void;
     onEnd?(context: CurseEventContext): void;
@@ -108,4 +102,14 @@ export declare namespace CurseEventScript {
     export function Simultaneously(scripts: Record<string, Step[]>): Simultaneously;
     export type Step = Wait | Action | Repeat | Simultaneously;
     export {};
+}
+/**
+ * A base class for subscribing to game events & applying game options during a curse event.
+ * Note that renaming this class will result in it no longer being subscribed for a curse event, if it was before.
+ */
+export declare abstract class CurseEventSubscriber {
+    protected readonly event: CurseEventContext;
+    constructor(event: CurseEventContext);
+    protected getOptions?(): IGameOptionsPartial;
+    private getAdditionalGameOptionsSources;
 }

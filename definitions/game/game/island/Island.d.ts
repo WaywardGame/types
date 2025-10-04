@@ -97,6 +97,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     biomeOptions?: unknown;
     biomeType: BiomeTypes;
     contaminatedWater: IWaterContamination[];
+    curse: Curse;
     lastPlayerGameTimeTicks?: number;
     loadCount: number;
     name?: string;
@@ -106,7 +107,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly wellData: SaferNumberIndexedObject<IWell>;
     referenceId?: number;
     tileContainers: ITileContainer[];
-    curse: Curse;
     tileData: SaferNumberIndexedObject<SaferNumberIndexedObject<SaferNumberIndexedObject<ITileData[]>>>;
     readonly seeds: ISeeds;
     get mapGenVersionInfo(): Version.Info;

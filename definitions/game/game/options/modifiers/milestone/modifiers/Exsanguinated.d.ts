@@ -24,7 +24,7 @@ import type { IGameOptionsPartial, IGameOptionsStatus } from "@wayward/game/game
 import MilestoneModifier, { MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
 import { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/IMilestoneModifier";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
-import type { IInjectionApi } from "@wayward/utilities/class/Inject";
+import type { IInjectionApi } from "@wayward/game/utilities/Inject";
 export default class Exsanguinated extends MilestoneModifier {
     getOptions(): IGameOptionsPartial;
     getTranslationArgs(): TranslationArg[] | undefined;

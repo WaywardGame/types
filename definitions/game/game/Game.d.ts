@@ -28,7 +28,7 @@ import { AutoSave } from "@wayward/game/game/meta/AutoSave";
 import { SaveLoad } from "@wayward/game/game/meta/SaveLoad";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import { MilestoneManager } from "@wayward/game/game/milestones/MilestoneManager";
-import type { IGameOptions } from "@wayward/game/game/options/IGameOptions";
+import type { IGameOptions, IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import { GameMode } from "@wayward/game/game/options/IGameOptions";
 import type { GameplayModifiersCollection } from "@wayward/game/game/options/modifiers/GameplayModifiersManager";
 import type { ChallengeModifiersCollection } from "@wayward/game/game/options/modifiers/challenge/ChallengeModifiers";
@@ -177,6 +177,8 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     selectBiome(position: IVector2 | undefined, random: Random): BiomeTypes;
     getGameMode(): GameMode;
     getGameOptionsBeforeModifiers(): IGameOptions;
+    /** A game options modifier that always returns an empty array by default, to be injected into */
+    getAdditionalGameOptionsSources(): IGameOptionsPartial[];
     getGameOptions(): IGameOptions;
     uncacheGameOptions(): void;
     updateGameOptions(gameOptions: IGameOptions): void;

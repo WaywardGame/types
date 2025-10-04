@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import "@wayward/goodstream/apply";
+import { EventBus, type EventBuses } from "@wayward/game/event/EventBuses";
 export interface IInjectionApi<T, K extends keyof T> {
     /**
      * The instance that the injected method was called on.
@@ -44,6 +44,7 @@ export declare enum InjectionPosition {
 }
 export declare function InjectObject<T, K extends keyof T>(injectInto: T, property: K, position: InjectionPosition, priority?: number): T extends Partial<Record<K, AnyFunction>> ? (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any : never;
 export declare function Inject<T extends Record<K, AnyFunction>, K extends keyof T>(injectInto: AnyClass<T>, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => any;
+export declare function Inject<E extends EventBus, I extends ReturnType<EventBuses[E]>, K extends keyof I>(injectInto: E, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<I, K>>) => any;
 export declare namespace Inject {
     function makeInjectableClass<T extends AbstractNullaryClass<any>, O>(cls: T): Class<Merge<InstanceOf<T>, O>>;
 }

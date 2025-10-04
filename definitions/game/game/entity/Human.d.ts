@@ -46,7 +46,7 @@ import ItemReference from "@wayward/game/game/item/ItemReference";
 import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import Runekeeper from "@wayward/game/game/milestones/milestone/Runekeeper";
-import type { IGameOptionsPlayer } from "@wayward/game/game/options/IGameOptions";
+import type { IGameOptionsPartial, IGameOptionsPlayer } from "@wayward/game/game/options/IGameOptions";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type { IHasInsulation } from "@wayward/game/game/temperature/ITemperature";
 import { TempType } from "@wayward/game/game/temperature/ITemperature";
@@ -182,8 +182,11 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      */
     get lastAttackedByEntityHuman(): Human | undefined;
     getDefense(): PlayerDefense;
+    /** A game options modifier that always returns an empty array by default, to be injected into */
+    getAdditionalGameOptionsSources(): IGameOptionsPartial[];
     getGameOptionsBeforeModifiers(): ImmutableObject<IGameOptionsPlayer>;
     getGameOptions(): ImmutableObject<IGameOptionsPlayer>;
+    clearGameOptionsCache(): void;
     setOptions(options: IOptions): void;
     getEquipEffect<E extends EquipEffect>(type: E): FirstIfOne<EquipEffectByType<E>>;
     /**

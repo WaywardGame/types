@@ -30,10 +30,28 @@ export declare enum CurseEventType {
     FrigidNight = 18,
     HeatWave = 19
 }
-export declare enum CurseCategory {
+export declare enum CurseGroup {
     Lucky = 0,
     Neutral = 1,
     Unlucky = 2
+}
+export declare enum CurseCategory {
+    /**
+     * Primary curses are the main ones that players should be responding to.
+     */
+    Primary = 0,
+    /**
+     * Secondary curses are ones that interact with the primary curses in interesting ways.
+     *
+     * Secondary curses are selected before primary curses.
+     */
+    Secondary = 1,
+    /**
+     * Dependent curses are secondary curses that can ONLY be selected if a specific primary curse is also selected.
+     *
+     * They're still selected before primary curses, but will be cancelled if no primary curse is selected.
+     */
+    Dependent = 2
 }
 export declare enum CurseComponent {
     Skill = 0,
@@ -46,4 +64,9 @@ export declare enum CurseComponent {
 export declare enum CurseSystemDiscovery {
     CurseFactors = 0,
     CurseFactorsExact = 1
+}
+export declare enum CurseEventDisplayMode {
+    Hidden = 0,
+    Mystery = 1,
+    Revealed = 2
 }

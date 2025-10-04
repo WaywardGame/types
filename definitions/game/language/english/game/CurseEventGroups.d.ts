@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { CurseCategory } from "@wayward/game/game/curse/ICurse";
-declare const curseEventCategories: Record<CurseCategory, string>;
-export default curseEventCategories;
+import { CurseGroup } from "@wayward/game/game/curse/ICurse";
+declare const curseEventGroups: Record<CurseGroup, string>;
+export default curseEventGroups;

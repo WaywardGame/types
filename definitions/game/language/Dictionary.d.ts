@@ -34,7 +34,7 @@ declare enum Dictionary {
     Creature = 22,
     CurseComponent = 23,
     CurseEvent = 24,
-    CurseEventCategory = 25,
+    CurseEventGroup = 25,
     DamageType = 26,
     Deity = 27,
     DeitySymbol = 28,

@@ -29,6 +29,7 @@ export default class Statuses extends Component {
      * Event handler for the status effects of this entity changing
      */
     onStatusChange(_: any, type: StatusType, level: number): void;
+    private removeStatusIcons;
     protected updateStatusScale(): void;
     private initializeTooltipLocation;
 }

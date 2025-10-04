@@ -11,7 +11,7 @@
 import { Command } from "@wayward/game/command/ICommand";
 import { Quality } from "@wayward/game/game/IObject";
 import { BiomeType } from "@wayward/game/game/biome/IBiome";
-import { CurseCategory, CurseComponent, CurseEventType } from "@wayward/game/game/curse/ICurse";
+import { CurseGroup, CurseComponent, CurseEventType } from "@wayward/game/game/curse/ICurse";
 import Deity from "@wayward/game/game/deity/Deity";
 import { DoodadType, DoodadTypeExtra, DoodadTypeGroup, GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import { CombatDangerLevel } from "@wayward/game/game/entity/ICombatStrength";
@@ -125,7 +125,7 @@ declare const dictionaryMap: {
     22: typeof CreatureType;
     23: typeof CurseComponent;
     24: typeof CurseEventType;
-    25: typeof CurseCategory;
+    25: typeof CurseGroup;
     26: typeof DamageType;
     27: typeof Deity;
     28: typeof Deity;
@@ -1959,7 +1959,7 @@ export declare const strictDictionaries: {
     22: typeof CreatureType;
     23: typeof CurseComponent;
     24: typeof CurseEventType;
-    25: typeof CurseCategory;
+    25: typeof CurseGroup;
     26: typeof DamageType;
     27: typeof Deity;
     28: typeof Deity;
