@@ -59,7 +59,8 @@ export declare enum CurseComponent {
     HighestDefense = 2,
     CumulativeEvilCrafting = 3,
     Equipment = 4,
-    Modifier = 5
+    Modifier = 5,
+    CumulativeKilling = 6
 }
 export declare enum CurseSystemDiscovery {
     CurseFactors = 0,

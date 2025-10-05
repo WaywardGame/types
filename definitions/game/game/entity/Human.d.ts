@@ -130,6 +130,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     highestAttack?: number;
     highestDefense?: number;
     cumulativeEvilCrafting: number;
+    cumulativeKilling: number;
     itemDiscovered: ItemType[];
     /** @deprecated (use the entity itself) */
     readonly inventory: IContainer;

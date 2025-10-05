@@ -20,6 +20,7 @@ export declare const CURSE_WEIGHTS: PartialRecord<CurseComponent, number>;
 export declare const CURSE_ATTACK_MAX = 50;
 export declare const CURSE_DEFENSE_MAX = 100;
 export declare const CURSE_CRAFTING_MAX = 100;
+export declare const CURSE_KILLING_MAX = 100;
 export declare const CURSE_SKILL_MAX = 100;
 export declare const CURSE_COMPONENTS: Record<CurseComponent, (human: Human) => number>;
 /**
@@ -78,11 +79,23 @@ declare namespace Curse {
     function cleanup(island: Island, humans?: Human[]): void;
     function createCurseEventContext(instance: CurseEventInstance, island: Island, humans?: Human[], cursebearer?: Human): CurseEventContext;
 }
+declare const SYMBOL_CURSE_EVENT_SUBSCRIBER_INSTANCES: unique symbol;
+declare const SYMBOL_CURSE_EVENT_GLOBAL_SUBSCRIBER_INSTANCE: unique symbol;
 interface Curse {
     night?: true;
     events?: CurseEventInstance[];
     cooldown?: number;
     warned?: true;
+    [SYMBOL_CURSE_EVENT_GLOBAL_SUBSCRIBER_INSTANCE]?: CurseEventSubscriber;
+}
+interface CurseEventInstance {
+    type: CurseEventType;
+    display: CurseEventDisplayMode;
+    cursebearerIdentifier: string;
+    point: IVector2;
+    subscribers?: string[];
+    scriptProcesses?: ScriptProcessState[];
+    [SYMBOL_CURSE_EVENT_SUBSCRIBER_INSTANCES]?: Record<string, CurseEventSubscriber>;
 }
 interface ScriptProcessState {
     /** The path of keys/indices from the root of the script to the step this process is currently on. */
@@ -93,15 +106,5 @@ interface ScriptProcessState {
     iterationsRemaining?: number;
     /** The state of any child processes started by a "simultaneously" or "repeat" block. */
     childProcesses?: ScriptProcessState[];
-}
-declare const SYMBOL_CURSE_EVENT_SUBSCRIBER_INSTANCES: unique symbol;
-interface CurseEventInstance {
-    type: CurseEventType;
-    display: CurseEventDisplayMode;
-    cursebearerIdentifier: string;
-    point: IVector2;
-    subscribers?: string[];
-    scriptProcesses?: ScriptProcessState[];
-    [SYMBOL_CURSE_EVENT_SUBSCRIBER_INSTANCES]?: Record<string, CurseEventSubscriber>;
 }
 export default Curse;

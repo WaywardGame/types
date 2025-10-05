@@ -174,9 +174,11 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     private deactivate;
     private gameOptionsCached?;
+    private gameOptionsWithoutModifiersCached?;
     /** A game options modifier that always returns an empty array by default, to be injected into */
     getAdditionalGameOptionsSources(): IGameOptionsPartial[];
     getGameOptions(): ImmutableObject<IGameOptions>;
+    getGameOptionsWithoutModifiers(): ImmutableObject<IGameOptions>;
     clearGameOptionsCache(): void;
     rename(human: Human, newName: string): void;
     private generatedName?;
