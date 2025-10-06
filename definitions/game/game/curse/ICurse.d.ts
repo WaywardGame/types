@@ -53,6 +53,14 @@ export declare enum CurseCategory {
      */
     Dependent = 2
 }
+export declare enum CursePosition {
+    /** The default value for a curse event. `position` returns the island's center. */
+    None = 0,
+    /** The curse event spawns in a random location near the cursebearer. */
+    Random = 1,
+    /** The curse event's position is always directly on the cursebearer. */
+    Follow = 2
+}
 export declare enum CurseComponent {
     Skill = 0,
     HighestAttack = 1,

@@ -15,7 +15,7 @@ import type Human from "@wayward/game/game/entity/Human";
 import { SkillType } from "@wayward/game/game/entity/IHuman";
 import type Island from "@wayward/game/game/island/Island";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
-import { IRange } from "@wayward/utilities/math/Range";
+import { IRange, IRangeRange } from "@wayward/utilities/math/Range";
 export declare const CURSE_WEIGHTS: PartialRecord<CurseComponent, number>;
 export declare const CURSE_ATTACK_MAX = 50;
 export declare const CURSE_DEFENSE_MAX = 100;
@@ -55,15 +55,13 @@ export declare const CURSE_EVENTS_MAELSTROM_SPEED = 1;
  * Additional opportunities before the top opportunity always use the max chance.
  */
 export declare const CURSE_EVENTS_CHANCE: IRange;
-export declare const CURSE_EVENTS_NEARBY_PLAYERS_RADIUS = 25;
+export declare const CURSE_EVENTS_DEFAULT_RADIUS = 25;
 /**
- * For randomly selecting the cooldown time between curse event nights.
- * Interpolates between the minimum and maximum values based on the player's curse — minimum at 0% curse, maximum at 100% curse.
+ * An IRangeRange for randomly selecting the cooldown time between curse event nights.
+ * Interpolates between the minimum and maximum ranges based on the player's curse.
  */
-export declare const CURSE_EVENTS_COOLDOWN_RANGE: {
-    minimum: IRange;
-    maximum: IRange;
-};
+export declare const CURSE_EVENTS_COOLDOWN_RANGE: IRangeRange;
+export declare const CURSE_EVENTS_FIRST_NIGHT = 3;
 declare namespace Curse {
     interface Helper {
         context: CurseEventContext;
@@ -71,11 +69,13 @@ declare namespace Curse {
         definition: CurseEvent;
     }
     function get(island?: Island, type?: CurseEventType): Helper | undefined;
+    function clearCooldown(island: Island): void;
     function tickCurse(island: Island, humans: Human[]): void;
     function reload(island: Island): void;
     function spawnCurseEvents(island: Island, humans: Human[]): void;
     function attemptCurseEventSpawn(category: CurseCategory, human: Human, curse: number, humans: Human[], events: CurseEventInstance[]): CurseEventInstance | undefined;
     function attemptSpecificCurseEventSpawn(human: Human, type: CurseEventType, humans: Human[], curse?: number): CurseEventInstance | undefined;
+    function unload(island: Island): void;
     function cleanup(island: Island, humans?: Human[]): void;
     function createCurseEventContext(instance: CurseEventInstance, island: Island, humans?: Human[], cursebearer?: Human): CurseEventContext;
 }
@@ -92,7 +92,9 @@ interface CurseEventInstance {
     type: CurseEventType;
     display: CurseEventDisplayMode;
     cursebearerIdentifier: string;
+    curse: number;
     point: IVector2;
+    creatures?: number[];
     subscribers?: string[];
     scriptProcesses?: ScriptProcessState[];
     [SYMBOL_CURSE_EVENT_SUBSCRIBER_INSTANCES]?: Record<string, CurseEventSubscriber>;

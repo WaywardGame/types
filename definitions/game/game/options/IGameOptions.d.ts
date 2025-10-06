@@ -299,6 +299,12 @@ export interface IGameOptionsPlayer {
          */
         difficultyMultiplier: number;
         /**
+         * A multiplier for the chance of magical properties being generated on crafted items.
+         *
+         * Multiplied with the island's chance for any item being generated with magical properties (which is per-quality.)
+         */
+        magicChanceMultiplier: number;
+        /**
          * Allow default crafting recipe discovery.
          */
         unlockRecipesWithComponents: boolean;

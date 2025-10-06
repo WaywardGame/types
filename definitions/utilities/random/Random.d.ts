@@ -76,7 +76,7 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
      * @param arr The array to return items from
      * @param count The number of items to return in the array
      *
-     * Note: Be careful. This method can be very slow if used on a big array with a high count.
+     * Using a count >= arr.length will return a shuffled array of all choices.
      */
     sampling<T = any>(arr: T[], count: number): T[];
     /**
@@ -92,6 +92,13 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
      * Returns a random T from the given choices, where each choice is weighted by a number. Higher numbers = higher chance.
      */
     weightedChoice<T>(choices: Array<WeightedOption<T>>): T;
+    /**
+     * Returns a sampling of random T's from the given choices, where each choice is weighted by a number. Higher numbers = higher chance.
+     *
+     * Using a count >= choices.length will return a shuffled array of all choices.
+     */
+    weightedSampling<T>(choices: Array<WeightedOption<T>>, count: number): T[];
+    private getWeightedChoiceTuple;
     withGenerator<T>(generator: G, execute: () => T): T;
     clone<T>(requiresSynchronization?: RandomSychronizationCheck<T>, initialState?: T): Random<G>;
     /**

@@ -42,3 +42,11 @@ export declare namespace IRange {
         function mult(a: number | IRange, b: number | IRange): number | IRange;
     }
 }
+export interface IRangeRange {
+    minimum: IRange;
+    maximum: IRange;
+}
+export declare namespace IRangeRange {
+    function lerp(t: number, range: IRangeRange): IRange;
+}
+export declare function rangeRange(minimum: IRange, maximum: IRange): IRangeRange;

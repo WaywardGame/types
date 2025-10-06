@@ -9,21 +9,40 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
-import type { CurseGroup, CurseEventDisplayMode, CurseEventType, CurseCategory } from "@wayward/game/game/curse/ICurse";
+import type { CurseGroup, CurseEventDisplayMode, CurseEventType, CurseCategory, CursePosition } from "@wayward/game/game/curse/ICurse";
 import type Human from "@wayward/game/game/entity/Human";
 import type Island from "@wayward/game/game/island/Island";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import type { TimeString } from "@wayward/game/game/time/ITimeManager";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
-import type { IRange } from "@wayward/utilities/math/Range";
+import { IRange } from "@wayward/utilities/math/Range";
+import type Tile from "@wayward/game/game/tile/Tile";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 /** The API that curse events have access to */
 export interface CurseEventContext {
     readonly island: Island;
+    /** The epicenter of the curse, based on `CurseEvent.position` */
     readonly point: IVector2;
     /** A number 0-1 of how far through the night it currently is */
     readonly fractionalTime: number;
+    /** The human that happened to get the event rolled on them */
     readonly cursebearer: Human | undefined;
+    /** The cursebearer's curse at the time the event began */
+    readonly curse: number;
+    /** The creatures that the event has spawned */
+    readonly creatures: Creature[];
+    /** Whether the cursebearer is asleep */
+    readonly sleeping: boolean;
+    /** Get the players nearby the curse. This is based on `CurseEvent.position` and `CurseEvent.radius` */
     getNearbyPlayers(): Human[];
+    /** Get a random tile within the curse event's radius. This is based on `CurseEvent.position` and `CurseEvent.radius` */
+    getRandomTile(radius?: number): Tile | undefined;
+    /**
+     * Spawn a creature at the given tile using the curse event spawning rules.
+     * @param evenWhenAsleep Disable the default functionality of preventing spawns if the cursebearer is asleep
+     */
+    spawnCreature(type?: CreatureType, tile?: Tile, evenWhenAsleep?: true): Creature | undefined;
     /**
      * Inject a custom curse event subscriber class into the game.
      * This class *must* be included in `CurseEvent.subscribers`.
@@ -37,6 +56,17 @@ export interface CurseEventContext {
 export interface CurseEvent {
     group: CurseGroup;
     category: CurseCategory;
+    /**
+     * The chance that this curse event will spawn compared to other events.
+     * All curse events default to a weight of 1, so setting this to 0.5 would make it half as likely as any other event.
+     */
+    weight?: number;
+    position?: CursePosition;
+    /**
+     * Controls the radius of the curse event. Defaults to the value of `CURSE_EVENTS_DEFAULT_RADIUS` (at time of writing, 25.)
+     * This is used for the `CurseEventContext.getRandomTile` and `CurseEventContext.getNearbyPlayers` methods.
+     */
+    radius?: number;
     /** A number 0-1 representing the curse level that the randomly selected player must have in order for this curse event to be chosen */
     requiredCurseLevel?: number;
     requiredBiomes?: {
@@ -50,7 +80,7 @@ export interface CurseEvent {
     subscribers?: Array<Class<CurseEventSubscriber>>;
     onStart?(context: CurseEventContext): void;
     onEnd?(context: CurseEventContext): void;
-    script?: CurseEventScript;
+    script?: CurseEventScript | CurseEventScript.Repeat | CurseEventScript.Simultaneously;
 }
 export declare function CurseEvent(event: CurseEvent): CurseEvent;
 export type CurseEventScript = CurseEventScript.Step[];
@@ -61,9 +91,9 @@ export declare namespace CurseEventScript {
     }
     export interface EndAfter extends CurseEventScriptNodeBase {
         type: "end after";
-        ticks: number | IRange;
+        ticks: SupplierOr<number | IRange, [CurseEventContext]>;
     }
-    export function EndAfter(ticks: number | IRange): EndAfter;
+    export function EndAfter(ticks: SupplierOr<number | IRange, [CurseEventContext]>): EndAfter;
     export interface EndAt extends CurseEventScriptNodeBase {
         type: "end at";
         time: TimeString;
@@ -79,6 +109,7 @@ export declare namespace CurseEventScript {
         type: "wait";
         end: EndCondition;
     }
+    export function Wait(ticks: SupplierOr<number | IRange, [CurseEventContext]>): Wait;
     export function Wait(end: EndCondition): Wait;
     export interface Action extends CurseEventScriptNodeBase {
         type: "action";

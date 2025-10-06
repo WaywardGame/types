@@ -256,6 +256,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     getEquippedItem(slot: EquipType, includeDisabled?: true): Item | undefined;
     isOffHandDisabled(): boolean;
     getEquipSlotForItem(item: Item, includeDisabled?: true): EquipType | undefined;
+    getFanaticism(deity: Deity): number;
     getCurse(): number;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     /**
