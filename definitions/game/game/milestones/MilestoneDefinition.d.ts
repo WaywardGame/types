@@ -71,14 +71,15 @@ export default class MilestoneDefinition {
      */
     inherit(def: MilestoneDefinition): this;
     visibility: MilestoneVisibility;
-    visibleThreshold: number | Milestone;
+    visibleThreshold: number | Milestone | [Milestone, number];
     /**
      * @param visibility Whether the milestone is completely visible, has its name hidden, or has its required amount hidden. Defaults to `Visible`
-     * @param until Sets the time when the milestone will become `Visible`. This can be either:
+     * @param until Sets the time when the milestone will become `Visible`. This can be any of:
      * - A completion threshold (in a fractional value between 0 and 1)
      * - A different milestone to complete first
+     * - A tuple of a different milestone and a value that must be discovered in that milestone
      */
-    setVisibility(visibility: MilestoneVisibility, until?: number): this;
+    setVisibility(visibility: MilestoneVisibility, until?: number | [Milestone, number]): this;
     /**
      * Sets this milestone to be unlockable in all game modes, and not disabled by mods.
      */

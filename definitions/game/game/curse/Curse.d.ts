@@ -69,6 +69,9 @@ declare namespace Curse {
         definition: CurseEvent;
     }
     function get(island?: Island, type?: CurseEventType): Helper | undefined;
+    function willHaveEventsTonight(island: Island): boolean;
+    function canWarnAboutIncomingEvents(island: Island): boolean;
+    function getCooldownMultiplier(island: Island, humans?: Human<unknown, number, import("../reference/IReferenceManager").ReferenceType.NPC | import("../reference/IReferenceManager").ReferenceType.Player>[]): number;
     function clearCooldown(island: Island): void;
     function tickCurse(island: Island, humans: Human[]): void;
     function reload(island: Island): void;

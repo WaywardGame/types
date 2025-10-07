@@ -190,6 +190,10 @@ export interface IGameOptionsPlayer {
      */
     initialCurse: number;
     /**
+     * A multiplier for the cooldown of curse events. The multiplier used is the average of all players on the island.
+     */
+    curseCooldownMultiplier: number;
+    /**
      * Whether the player should use their globally unlocked recipes in this game.
      */
     unlockedRecipes: UnlockedRecipesStrategy;

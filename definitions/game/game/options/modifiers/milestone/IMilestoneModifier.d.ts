@@ -20,5 +20,6 @@ export declare enum MilestoneModifierGroup {
     Turns = 8,
     Challenge = 9,
     Merchants = 10,
-    Statuses = 11
+    Statuses = 11,
+    Curse = 12
 }

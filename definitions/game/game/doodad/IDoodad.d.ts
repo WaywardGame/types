@@ -250,6 +250,10 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      * Radius around scarecrow that will attempt to scare away creatures based on `chanceOfScarecrowScare` property in `creatureDescriptions`.
      */
     scareRadius?: number;
+    /**
+     * When the doodad reaches this stage, it will drop the following items with the following chances.
+     */
+    dropsOnGrowth?: IDropsOnGrowth;
 }
 export interface IItemStackRegion {
     xMin: number;
@@ -294,6 +298,7 @@ export interface IProvidesSkill {
     skillValue: number;
 }
 export type IDoodadParticles = Record<number, IRGB>;
+export type IDropsOnGrowth = PartialRecord<GrowingStage, ILootItem[]>;
 export type IDoodadLoot = PartialRecord<GrowingStage, ILootItem[]>;
 export declare enum DoodadType {
     WoodenDoor = 0,

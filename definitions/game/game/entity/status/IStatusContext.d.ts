@@ -27,7 +27,7 @@ declare namespace IStatusContext {
     function fromStatus(status: Status): IStatusContext;
     function fromDef(status: StatusType, definition: IStatusDescription, entity?: EntityWithStats): IStatusContext;
     function withLevel(status: IStatusContext, level: number): IStatusContext;
-    function getInterval(status: IStatusContext): number;
+    function getInterval(status: IStatusContext): number | false;
     function getOptions(type: StatusType, entity?: EntityWithStats): IGameOptionsStatus;
     function getEffects(status: IStatusContext): StatusEffectList;
 }

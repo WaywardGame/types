@@ -15,7 +15,7 @@ import { MessageType } from "@wayward/game/game/entity/player/IMessageManager";
 import type IStatusContext from "@wayward/game/game/entity/status/IStatusContext";
 import type Status from "@wayward/game/game/entity/status/Status";
 import type { StatusEffectList } from "@wayward/game/game/entity/status/StatusEffectList";
-import type { IIcon } from "@wayward/game/game/inspection/InfoProvider";
+import type { IIcon, InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { IGameOptionsStatus } from "@wayward/game/game/options/IGameOptions";
 import type Dictionary from "@wayward/game/language/Dictionary";
 import type { StatusTranslation } from "@wayward/game/language/dictionary/Misc";
@@ -33,10 +33,15 @@ export interface IStatusDisplayable {
     icon?: SupplierOr<IStatusIconDescription | undefined, [IStatusContext]>;
     getBorderColorOverride?(status?: Status): string | undefined;
     getCategoryOverride?(status?: Status): IStatusCategoryOverride | undefined;
+    getDescriptionContent?(status: Status): IStatusDescriptionContent | undefined;
 }
 export interface IStatusCategoryOverride {
     icon: string | IIcon;
     translation: Translation;
+}
+export interface IStatusDescriptionContent {
+    primary?: ArrayOr<Translation | InfoProvider | undefined>;
+    secondary?: ArrayOr<Translation | InfoProvider | undefined>;
 }
 export interface IStatusDescription extends IStatusDisplayable {
     applicability: StatusApplicability;
@@ -53,7 +58,13 @@ export interface IStatusDescription extends IStatusDisplayable {
     /** An optional replacement list of icons to display for this status effect, rather than the single default icon. */
     getDisplay?(status: Status): IStatusDisplayInstance[] | undefined;
     getSubtitle?(): Translation | undefined;
-    interval?: SupplierOr<number | undefined, [IStatusContext]>;
+    /**
+     * Controls whether this status is considered important, separate from the "threat level" system.
+     *
+     * Currently, "important" statuses have the same bounce animation that "threats" have.
+     */
+    important?: true;
+    interval?: SupplierOr<number | undefined, [IStatusContext]> | false;
     effects?: SupplierOr<StatusEffectList | undefined, [IStatusContext, StatusEffectList]>;
     particles?: SupplierOr<StatusParticle | undefined, [IStatusContext, StatusParticleEvent?]>;
     /** A list of `StatusRenderer`s that could be returned by a supplier in the `renderer` property */

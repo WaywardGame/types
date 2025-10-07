@@ -78,7 +78,7 @@ export default class Status extends EventEmitter.Host<IStatusEvents> {
     getTranslation(which?: StatusTranslation, level?: number): TranslationImpl | undefined;
     refresh(): void;
     getEffects(): StatusEffectList;
-    getInterval(): number;
+    getInterval(): number | false;
     /**
      * Whether the status effect should pass (be removed from the human).
      */

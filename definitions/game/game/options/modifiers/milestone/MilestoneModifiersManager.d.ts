@@ -25,6 +25,8 @@ import Collector from "@wayward/game/game/options/modifiers/milestone/modifiers/
 import Contender from "@wayward/game/game/options/modifiers/milestone/modifiers/Contender";
 import Crafter from "@wayward/game/game/options/modifiers/milestone/modifiers/Crafter";
 import Curator from "@wayward/game/game/options/modifiers/milestone/modifiers/Curator";
+import Cursebreaker from "@wayward/game/game/options/modifiers/milestone/modifiers/Cursebreaker";
+import Cursed from "@wayward/game/game/options/modifiers/milestone/modifiers/Cursed";
 import Dedicated from "@wayward/game/game/options/modifiers/milestone/modifiers/Dedicated";
 import DestroyerOfMagi from "@wayward/game/game/options/modifiers/milestone/modifiers/DestroyerOfMagi";
 import Diverse from "@wayward/game/game/options/modifiers/milestone/modifiers/Diverse";
@@ -137,6 +139,8 @@ export declare const milestoneModifiers: {
     65: typeof Turbulent;
     50: typeof Versatile;
     29: typeof Weathered;
+    70: typeof Cursed;
+    71: typeof Cursebreaker;
 };
 declare class MilestoneModifiersManager extends GameplayModifiersManager<MilestoneModifier, Milestone, [Human?]> {
     constructor();

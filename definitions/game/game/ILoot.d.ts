@@ -9,8 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { ItemType } from "@wayward/game/game/item/IItem";
+import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 export interface ILootItem {
-    type: ItemType;
+    itemType?: ItemType;
+    tileEventType?: TileEventType;
     chance?: number;
     chanceOutOf?: number;
     difficulty?: number;

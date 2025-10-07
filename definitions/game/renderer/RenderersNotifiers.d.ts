@@ -23,7 +23,7 @@ export declare class RenderersNotifiers {
     addNotifierIcon(location: INotificationLocation, type: NotifierIconType): void;
     addStat(location: INotificationLocation, type: StatNotificationType, value: number): void;
     addStatus(location: INotificationLocation, status: Status, reason: StatusChangeReason): void;
-    addItem(location: INotificationLocation, itemNotifierType: ItemNotifierType, type: DisplayableItemType): void;
+    addItem(location: INotificationLocation, itemNotifierType: ItemNotifierType, type: DisplayableItemType, baseType?: DisplayableItemType): void;
     addCreature(location: INotificationLocation, creatureNotifierType: CreatureNotifierType, type: CreatureType, aberrant?: boolean): void;
     addMarker(location: INotificationLocation, marker: MarkerDescription): void;
     removeMarker(location: INotificationLocation, guid: string): void;

@@ -49,6 +49,7 @@ export interface CurseEventContext {
      */
     inject<T extends CurseEventSubscriber>(subscriber: Class<T>): void;
     setDisplay(mode: CurseEventDisplayMode): void;
+    discover(forSpecificHuman?: Human): void;
     uninject(): void;
     uninject<T extends CurseEventSubscriber>(subscriber: Class<T>): void;
     toString(): string;
@@ -61,12 +62,7 @@ export interface CurseEvent {
      * All curse events default to a weight of 1, so setting this to 0.5 would make it half as likely as any other event.
      */
     weight?: number;
-    position?: CursePosition;
-    /**
-     * Controls the radius of the curse event. Defaults to the value of `CURSE_EVENTS_DEFAULT_RADIUS` (at time of writing, 25.)
-     * This is used for the `CurseEventContext.getRandomTile` and `CurseEventContext.getNearbyPlayers` methods.
-     */
-    radius?: number;
+    discoveredByDefault?: true;
     /** A number 0-1 representing the curse level that the randomly selected player must have in order for this curse event to be chosen */
     requiredCurseLevel?: number;
     requiredBiomes?: {
@@ -76,6 +72,12 @@ export interface CurseEvent {
     /** If one event is marked as conflicting with another, they will both have the conflict registered. */
     conflicts?: CurseEventType[];
     requiredPredicate?(context: CurseEventContext): boolean;
+    position?: CursePosition;
+    /**
+     * Controls the radius of the curse event. Defaults to the value of `CURSE_EVENTS_DEFAULT_RADIUS` (at time of writing, 25.)
+     * This is used for the `CurseEventContext.getRandomTile` and `CurseEventContext.getNearbyPlayers` methods.
+     */
+    radius?: number;
     getOptions?(): IGameOptionsPartial;
     subscribers?: Array<Class<CurseEventSubscriber>>;
     onStart?(context: CurseEventContext): void;
