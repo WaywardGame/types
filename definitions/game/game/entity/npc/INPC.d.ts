@@ -20,6 +20,9 @@ export declare enum ShipperNPCInteractType {
     OpenContainer = 0,
     ShipToIsland = 1
 }
+export declare enum NPCTag {
+    None = 0
+}
 export declare const MERCHANT_MAX_TRADES = 6;
 export declare const MERCHANT_SELL_PRICE_MULTIPLIER = 1.5;
 export declare const MERCHANT_ALREADY_TRADED_MULTIPLIER = 1.1;

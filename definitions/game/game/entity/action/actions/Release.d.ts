@@ -18,5 +18,5 @@ export interface IReleaseCanUse extends IActionUsable {
 /**
  * Releases a creature from being tamed
  */
-declare const _default: Action<[], ActionType.Release, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IReleaseCanUse, []>;
+declare const _default: Action<[], ActionType.Release, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IReleaseCanUse, []>;
 export default _default;

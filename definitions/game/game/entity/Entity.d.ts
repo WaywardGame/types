@@ -15,7 +15,7 @@ import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
-import type { ICastable, IEntityConstructorOptions, IEntityEvents } from "@wayward/game/game/entity/IEntity";
+import type { EntityTag, ICastable, IEntityConstructorOptions, IEntityEvents } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
 import type { IHumanBound } from "@wayward/game/game/entity/IEntityManager";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
@@ -56,7 +56,10 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     private _data?;
     private _persistentMarker?;
     private _persistentMarkerHidden?;
+    /** Tags from a set specific to the entity type */
     private _tags?;
+    /** Tags from a global set */
+    private _entityTags?;
     islandId: IslandId;
     preventRendering?: boolean;
     private _humansWithinBound?;
@@ -138,6 +141,9 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
     hasTag(tag: TagType): boolean;
     addTag(tag: TagType): void;
     removeTag(tag: TagType): void;
+    hasEntityTag(tag: EntityTag): boolean;
+    addEntityTag(tag: EntityTag): void;
+    removeEntityTag(tag: EntityTag): void;
     /**
      * Check if a data was set
      * @param key Data key

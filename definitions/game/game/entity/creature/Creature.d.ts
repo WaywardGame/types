@@ -22,6 +22,7 @@ import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import { AiType } from "@wayward/game/game/entity/ai/AI";
 import AiManager from "@wayward/game/game/entity/ai/AiManager";
 import type { CreatureAttackOutcome, ICreatureAttackOutcomeAttack, ICreatureCheckMoveOptions, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "@wayward/game/game/entity/creature/ICreature";
+import { CreatureTag } from "@wayward/game/game/entity/creature/ICreature";
 import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/CreatureZone";
@@ -41,7 +42,7 @@ import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export default class Creature extends EntityWithStats<ICreatureDescription, CreatureType, ReferenceType.Creature> implements IUnserializedCallback, IObject<CreatureType> {
+export default class Creature extends EntityWithStats<ICreatureDescription, CreatureType, ReferenceType.Creature, CreatureTag> implements IUnserializedCallback, IObject<CreatureType> {
     static is(value: any): value is Creature;
     get entityType(): EntityType.Creature;
     get tileUpdateType(): TileUpdateType;

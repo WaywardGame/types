@@ -15,5 +15,5 @@ import type Item from "@wayward/game/game/item/Item";
 export interface IEnchantCanUse extends IActionUsable {
     enchantTarget: Item;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby]], ActionType.Enchant, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IEnchantCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby]], ActionType.Enchant, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IEnchantCanUse, [Item, (Item | undefined)?]>;
 export default _default;

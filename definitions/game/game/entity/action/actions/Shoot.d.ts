@@ -18,5 +18,5 @@ export interface IShootCanUse extends IActionUsable {
 /**
  * Shooting a specific item (like an arrow)
  */
-declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Shoot, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IShootCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Shoot, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IShootCanUse, [Item]>;
 export default _default;

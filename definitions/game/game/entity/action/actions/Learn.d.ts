@@ -15,7 +15,7 @@ export declare const ACTION_LEARN_RECIPE_OF_ISLAND_MULTIPLIER = 8;
 export declare const ACTION_LEARN_RECIPE_WORTH_PENALTY_MULTIPLIER = 2;
 export declare const ACTION_LEARN_RECIPE_LEVEL_WEIGHTS: Record<RecipeLevel, number>;
 export declare const ACTION_LEARN_RECIPE_ITEM_GROUP_WEIGHTS: PartialRecord<ItemTypeGroup, number>;
-declare const _default: Action<[ActionArgument.ItemNearby], ActionType.Learn, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
+declare const _default: Action<[ActionArgument.ItemNearby], ActionType.Learn, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, {
     usable: true;
 }, [import("../../../item/Item").default]>;
 export default _default;

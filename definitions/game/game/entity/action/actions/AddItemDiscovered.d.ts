@@ -10,5 +10,5 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.Integer32], ActionType.AddItemDiscovered, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [number]>;
+declare const _default: Action<[ActionArgument.Integer32], ActionType.AddItemDiscovered, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [number]>;
 export default _default;

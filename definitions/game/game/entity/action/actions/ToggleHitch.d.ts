@@ -17,5 +17,5 @@ export interface IToggleHitchCanUse extends IActionUsable {
     creature: Creature;
     hitch?: Doodad;
 }
-declare const _default: Action<[], ActionType.ToggleHitch, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IToggleHitchCanUse, []>;
+declare const _default: Action<[], ActionType.ToggleHitch, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IToggleHitchCanUse, []>;
 export default _default;

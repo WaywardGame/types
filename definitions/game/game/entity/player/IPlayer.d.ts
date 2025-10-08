@@ -257,4 +257,7 @@ export interface IPlayerTitleSkill {
     milestone?: undefined;
 }
 export type PlayerTitle = IPlayerTitleMilestone | IPlayerTitleSkill;
+export declare enum PlayerTag {
+    None = 0
+}
 export {};

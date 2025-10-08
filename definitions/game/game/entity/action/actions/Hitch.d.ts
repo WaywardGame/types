@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
-declare const _default: import("../Action").Action<[], ActionType.Hitch, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/actions/ToggleHitch").IToggleHitchCanUse, []>;
+declare const _default: import("../Action").Action<[], ActionType.Hitch, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, import("@wayward/game/game/entity/action/actions/ToggleHitch").IToggleHitchCanUse, []>;
 export default _default;

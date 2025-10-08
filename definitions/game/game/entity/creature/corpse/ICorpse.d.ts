@@ -47,3 +47,6 @@ export interface ICorpseCreateOnSideEffects {
     tileType: TerrainType;
     tileEvent: TileEventType;
 }
+export declare enum CorpseTag {
+    None = 0
+}

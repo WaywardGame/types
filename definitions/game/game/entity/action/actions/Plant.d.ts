@@ -23,5 +23,5 @@ export interface IPlantCanUse extends IActionUsable {
     terrainDescription?: ITerrainDescription;
     tile: Tile;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Plant, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPlantCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Plant, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IPlantCanUse, [Item]>;
 export default _default;

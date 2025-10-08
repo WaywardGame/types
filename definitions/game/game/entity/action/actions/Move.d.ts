@@ -10,7 +10,7 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.Direction], ActionType.Move, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
+declare const _default: Action<[ActionArgument.Direction], ActionType.Move, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, {
     usable: true;
 }, [import("../../../../utilities/math/Direction").Direction.None | import("../../../../utilities/math/Direction").Direction.East | import("../../../../utilities/math/Direction").Direction.North | import("../../../../utilities/math/Direction").Direction.West | import("../../../../utilities/math/Direction").Direction.South]>;
 export default _default;

@@ -134,3 +134,6 @@ export declare enum TileEventType {
     PileOfLeaves = 25
 }
 export declare const TILE_EVENTS_LIQUID_TERRAIN_EXCLUSIONS: TerrainType[];
+export declare enum TileEventTag {
+    None = 0
+}

@@ -10,5 +10,5 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
-declare const _default: Action<[ActionArgument.DoodadNearby], ActionType.Kneel, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void | undefined, import("./ToggleContainer").IToggleContainerCanUse, [import("../../../doodad/Doodad").default]>;
+declare const _default: Action<[ActionArgument.DoodadNearby], ActionType.Kneel, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void | undefined, import("./ToggleContainer").IToggleContainerCanUse, [import("../../../doodad/Doodad").default]>;
 export default _default;

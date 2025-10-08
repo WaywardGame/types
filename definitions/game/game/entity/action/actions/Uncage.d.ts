@@ -22,5 +22,5 @@ export interface IUncageCanUse extends IActionUsable {
 /**
  * Releases a creature from a cage
  */
-declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Uncage, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IUncageCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Uncage, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IUncageCanUse, [import("../../../item/Item").default]>;
 export default _default;

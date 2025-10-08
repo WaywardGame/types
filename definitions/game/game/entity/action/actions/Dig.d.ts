@@ -26,5 +26,5 @@ export interface IDigTileCanUse extends IActionUsable {
     tileType: TerrainType;
 }
 type IDigCanUse = IDigGenericCanUse | IDigTileCanUse;
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], ActionType.Dig, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDigCanUse, [(Item | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], ActionType.Dig, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IDigCanUse, [(Item | undefined)?]>;
 export default _default;

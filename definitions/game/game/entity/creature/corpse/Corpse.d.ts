@@ -18,7 +18,7 @@ import { EntityType } from "@wayward/game/game/entity/IEntity";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { ICreatureDescription } from "@wayward/game/game/entity/creature/ICreature";
 import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
-import type { ICorpseDescription } from "@wayward/game/game/entity/creature/corpse/ICorpse";
+import type { CorpseTag, ICorpseDescription } from "@wayward/game/game/entity/creature/corpse/ICorpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
@@ -42,7 +42,7 @@ export interface ICorpseEvents extends IEntityEvents {
      */
     removed(): void;
 }
-export default class Corpse extends Entity<ICorpseDescription, CreatureType, ReferenceType.Corpse> implements IObject<CreatureType> {
+export default class Corpse extends Entity<ICorpseDescription, CreatureType, ReferenceType.Corpse, CorpseTag> implements IObject<CreatureType> {
     static is(value: any): value is Corpse;
     get entityType(): EntityType.Corpse;
     get tileUpdateType(): TileUpdateType;

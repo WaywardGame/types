@@ -287,7 +287,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Gets the nearest player based.
      * @param canSee If set to true, check if the player can see the x/y/z coords. Defaults to false.
      */
-    getNearestPlayer(canSee?: boolean, includeGhosts?: boolean, includeConnecting?: boolean): {
+    getNearestPlayer(canSee?: CanASeeBType | false, includeGhosts?: boolean, includeConnecting?: boolean, customRadius?: number): {
         player?: Human;
         distance?: number;
     };
@@ -420,6 +420,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     canSeeObject(type: CanASeeBType, object: IRendererOrigin, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeeTile(type: CanASeeBType, tile: Tile, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
+    isSeenByPlayer(type: CanASeeBType, customRadius?: number): boolean;
     /** @returns 0-1 */
     getLightLevel(): number;
     messageIfVisible(callback: (manager: IMessageManager) => boolean): void;

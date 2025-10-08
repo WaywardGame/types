@@ -13,5 +13,5 @@ import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAc
 /**
  * Firing a weapon (like a bow)
  */
-declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Fire, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/actions/Attack").IAttackCloseUpCanUse | import("@wayward/game/game/entity/action/actions/Attack").IAttackThrowItemCanUse | import("@wayward/game/game/entity/action/actions/Attack").IAttackRangedWeaponCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Fire, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, import("@wayward/game/game/entity/action/actions/Attack").IAttackCloseUpCanUse | import("@wayward/game/game/entity/action/actions/Attack").IAttackThrowItemCanUse | import("@wayward/game/game/entity/action/actions/Attack").IAttackRangedWeaponCanUse, [import("../../../item/Item").default]>;
 export default _default;

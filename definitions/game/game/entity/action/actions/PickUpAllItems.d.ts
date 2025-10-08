@@ -15,5 +15,5 @@ import type { ITileContainer } from "@wayward/game/game/tile/ITerrain";
 export interface IPickUpAllItemsCanUse extends IActionUsable {
     tileContainer: ITileContainer;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.Boolean]], ActionType.PickUpAllItems, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpAllItemsCanUse, [(boolean | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.Boolean]], ActionType.PickUpAllItems, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IPickUpAllItemsCanUse, [(boolean | undefined)?]>;
 export default _default;

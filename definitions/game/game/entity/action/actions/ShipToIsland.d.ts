@@ -22,5 +22,5 @@ export interface IShipToIslandCanUse extends IActionUsable {
     port?: IIslandPort;
     island?: Island;
 }
-declare const _default: Action<[ActionArgument.NPCNearby, [arg1: ActionArgument.Undefined, ActionArgument.Island, ActionArgument.Vector2], [arg1: ActionArgument.Undefined, ActionArgument.Integer32]], ActionType.ShipToIsland, Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IShipToIslandCanUse, [import("../../npc/NPC").default, (Island | IVector2 | undefined)?, (number | undefined)?]>;
+declare const _default: Action<[ActionArgument.NPCNearby, [arg1: ActionArgument.Undefined, ActionArgument.Island, ActionArgument.Vector2], [arg1: ActionArgument.Undefined, ActionArgument.Integer32]], ActionType.ShipToIsland, Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IShipToIslandCanUse, [import("../../npc/NPC").default, (Island | IVector2 | undefined)?, (number | undefined)?]>;
 export default _default;

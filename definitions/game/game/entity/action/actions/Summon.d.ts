@@ -19,5 +19,5 @@ export interface ISummonAction extends IActionUsable {
 /**
  * Summon a creature (golem) from an item.
  */
-declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Summon, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ISummonAction, [Item]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Summon, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, ISummonAction, [Item]>;
 export default _default;

@@ -20,5 +20,5 @@ export interface IExcavateCollapseTile extends IActionUsable {
     terrainDescription?: ITerrainDescription;
     actionType: UsableActionType;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], ActionType.ExcavateCollapse, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IExcavateCollapseTile, [(import("../../../item/Item").default | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], ActionType.ExcavateCollapse, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IExcavateCollapseTile, [(import("../../../item/Item").default | undefined)?]>;
 export default _default;

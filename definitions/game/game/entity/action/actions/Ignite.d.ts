@@ -15,5 +15,5 @@ import { ItemType } from "@wayward/game/game/item/IItem";
 export interface IIgniteCanUse extends IActionUsable {
     lit: ItemType;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Ignite, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IIgniteCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Ignite, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IIgniteCanUse, [import("../../../item/Item").default]>;
 export default _default;

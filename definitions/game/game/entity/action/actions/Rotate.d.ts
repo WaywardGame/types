@@ -15,5 +15,5 @@ import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAc
 export interface IRotate extends IActionUsable {
     doodad: Doodad;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.DoodadNearby]], ActionType.Rotate, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, boolean, IRotate, [(Doodad | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.DoodadNearby]], ActionType.Rotate, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, boolean, IRotate, [(Doodad | undefined)?]>;
 export default _default;

@@ -17,5 +17,5 @@ export interface ILockpickCanUse extends IActionUsable {
     tile: Tile;
     doodad: Doodad;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Lockpick, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ILockpickCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Lockpick, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, ILockpickCanUse, [import("../../../item/Item").default]>;
 export default _default;

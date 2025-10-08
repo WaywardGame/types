@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
-declare const _default: import("../Action").Action<[[arg1: import("@wayward/game/game/entity/action/IAction").ActionArgument.Undefined, import("@wayward/game/game/entity/action/IAction").ActionArgument.ItemInventory]], ActionType.Till, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/actions/ToggleTilled").ITillCanUse, [(import("../../../item/Item").default | undefined)?]>;
+declare const _default: import("../Action").Action<[[arg1: import("@wayward/game/game/entity/action/IAction").ActionArgument.Undefined, import("@wayward/game/game/entity/action/IAction").ActionArgument.ItemInventory]], ActionType.Till, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, import("@wayward/game/game/entity/action/actions/ToggleTilled").ITillCanUse, [(import("../../../item/Item").default | undefined)?]>;
 export default _default;

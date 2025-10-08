@@ -523,6 +523,9 @@ export declare enum MovingState {
      */
     PreNoInput = 2
 }
+export declare enum HumanTag {
+    None = 0
+}
 /**
  * The swimming skill required to travel to another island
  *

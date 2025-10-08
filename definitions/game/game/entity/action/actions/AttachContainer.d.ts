@@ -16,5 +16,5 @@ import type Item from "@wayward/game/game/item/Item";
 export interface IAttachContainerCanUse extends IActionUsable {
     doodad: Doodad;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], ActionType.AttachContainer, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IAttachContainerCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemNearby], ActionType.AttachContainer, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IAttachContainerCanUse, [Item]>;
 export default _default;

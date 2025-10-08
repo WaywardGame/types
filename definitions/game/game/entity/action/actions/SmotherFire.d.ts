@@ -25,5 +25,5 @@ export interface ISmotherFireCanUse extends IActionUsable {
     fireTileEvent?: TileEvent;
     smotherableDoodad?: Doodad;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], ActionType.SmotherFire, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ISmotherFireCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.SmotherFire, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, ISmotherFireCanUse, [Item]>;
 export default _default;

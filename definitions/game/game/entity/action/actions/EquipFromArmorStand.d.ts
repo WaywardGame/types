@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
-declare const _default: import("../Action").Action<[[arg1: import("@wayward/game/game/entity/action/IAction").ActionArgument.Undefined, import("@wayward/game/game/entity/action/IAction").ActionArgument.DoodadNearby]], ActionType.EquipFromArmorStand, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, boolean, import("@wayward/game/game/entity/action/actions/SwapWithArmorStand").ISwapEquipment, [(import("../../../doodad/Doodad").default | undefined)?]>;
+declare const _default: import("../Action").Action<[[arg1: import("@wayward/game/game/entity/action/IAction").ActionArgument.Undefined, import("@wayward/game/game/entity/action/IAction").ActionArgument.DoodadNearby]], ActionType.EquipFromArmorStand, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, boolean, import("@wayward/game/game/entity/action/actions/SwapWithArmorStand").ISwapEquipment, [(import("../../../doodad/Doodad").default | undefined)?]>;
 export default _default;

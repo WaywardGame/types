@@ -17,7 +17,7 @@ import type Entity from "@wayward/game/game/entity/Entity";
 import EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type { IAttack, ICausesDamage, IEntityConstructorOptions, IMovingData, MoveFlag } from "@wayward/game/game/entity/IEntity";
 import { AttackType, DamageType, IStatChangeInfo, StatusChangeReason } from "@wayward/game/game/entity/IEntity";
-import type { ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkToChangeReason } from "@wayward/game/game/entity/IHuman";
+import type { HumanTag, ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkToChangeReason } from "@wayward/game/game/entity/IHuman";
 import { EquipType, RestCancelReason, SkillType } from "@wayward/game/game/entity/IHuman";
 import type { IStat } from "@wayward/game/game/entity/IStats";
 import { Stat } from "@wayward/game/game/entity/IStats";
@@ -71,7 +71,7 @@ interface IEquip {
     item: Item;
     equipType: EquipType;
 }
-export default abstract class Human<DescriptionType = unknown, TypeType extends number = number, EntityReferenceType extends ReferenceType.Player | ReferenceType.NPC = ReferenceType.Player | ReferenceType.NPC> extends EntityWithStats<DescriptionType, TypeType, EntityReferenceType> implements IHasInsulation, IContainer {
+export default abstract class Human<DescriptionType = unknown, TypeType extends number = number, EntityReferenceType extends ReferenceType.Player | ReferenceType.NPC = ReferenceType.Player | ReferenceType.NPC, TagType = unknown> extends EntityWithStats<DescriptionType, TypeType, EntityReferenceType, TagType> implements IHasInsulation, IContainer {
     static getNameTranslation(): TranslationImpl;
     event: IEventEmitter<this, IHumanEvents>;
     anim: number;
@@ -132,6 +132,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     cumulativeEvilCrafting: number;
     cumulativeKilling: number;
     itemDiscovered: ItemType[];
+    private _humanTags?;
     /** @deprecated (use the entity itself) */
     readonly inventory: IContainer;
     /**
@@ -150,7 +151,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * Flag that will prevent a humans vehicle from showing up until the movement finishews
      */
     isMovingSuppressVehicleClientside: boolean;
-    protected readonly milestonesCollection: import("../options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("../options/modifiers/milestone/MilestoneModifier").default, Milestone, import("../options/modifiers/milestone/MilestoneModifier").MilestoneModifierInstance<any>, [(Human<unknown, number, ReferenceType.NPC | ReferenceType.Player> | undefined)?]>;
+    protected readonly milestonesCollection: import("../options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("../options/modifiers/milestone/MilestoneModifier").default, Milestone, import("../options/modifiers/milestone/MilestoneModifier").MilestoneModifierInstance<any>, [(Human<unknown, number, ReferenceType.NPC | ReferenceType.Player, unknown> | undefined)?]>;
     protected gameOptionsCached?: IGameOptionsPlayer;
     protected cachedMovementPenalty?: number;
     constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
@@ -510,6 +511,9 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * Creates a fire at a given tile and assigns the player as its creator.
      */
     createFire(tile: Tile): TileEvent | undefined;
+    hasHumanTag(tag: HumanTag): boolean;
+    addHumanTag(tag: HumanTag): void;
+    removeHumanTag(tag: HumanTag): void;
     get asCorpse(): undefined;
     get asCreature(): undefined;
     get asDoodad(): undefined;

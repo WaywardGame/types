@@ -17,5 +17,5 @@ export interface ICageCreature extends IActionUsable {
     creature: Creature;
     changeInto: ItemType;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], ActionType.CageCreature, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ICageCreature, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.CageCreature, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, ICageCreature, [import("../../../item/Item").default]>;
 export default _default;

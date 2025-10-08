@@ -105,6 +105,11 @@ export declare enum CreatureType {
 export declare enum CreatureTypeGroup {
     Golem = 0
 }
+export declare enum CreatureTag {
+    None = 0,
+    NoAlertIndicator = 1,
+    NoRandomDespawn = 2
+}
 export interface ICreatureOld extends Creature {
     hp: number;
     maxhp: number;

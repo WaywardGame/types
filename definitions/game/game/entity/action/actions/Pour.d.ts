@@ -27,5 +27,5 @@ export interface IPourCanUse extends IActionUsable {
     well?: IWell;
     returnOnUse?: IItemReturn | undefined;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], ActionType.Pour, Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPourCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby], ActionType.Pour, Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IPourCanUse, [import("../../../item/Item").default]>;
 export default _default;

@@ -51,5 +51,5 @@ export interface IGatherLiquidFromLiquidCanUse extends IActionUsable {
     tile: Tile;
 }
 export type IGatherLiquidCanUse = IGatherLiquidFromWispCanUse | IGatherLiquidFromGoatCanUse | IGatherLiquidFromWaterStillCanUse | IGatherLiquidFromWellCanUse | IGatherLiquidFromLiquidCanUse;
-declare const _default: Action<[ActionArgument.ItemNearby], ActionType.GatherLiquid, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IGatherLiquidCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby], ActionType.GatherLiquid, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IGatherLiquidCanUse, [import("../../../item/Item").default]>;
 export default _default;

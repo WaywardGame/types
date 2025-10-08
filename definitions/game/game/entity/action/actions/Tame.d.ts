@@ -16,5 +16,5 @@ export interface ITameCanUse extends IActionUsable {
     creature: Creature;
     tamingDifficulty: number;
 }
-declare const _default: Action<[], ActionType.Tame, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ITameCanUse, []>;
+declare const _default: Action<[], ActionType.Tame, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, ITameCanUse, []>;
 export default _default;

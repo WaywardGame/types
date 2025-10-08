@@ -21,5 +21,5 @@ export interface IRestCanUse extends IActionUsable {
     tileDescription?: ITerrainDescription;
     tileType: TerrainType;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearby, ActionArgument.DoodadNearby], [ActionArgument.Undefined, import("../argument/ActionArgumentEnum").default<RestType, "Resting" | "Sleeping">]], ActionType.Rest, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IRestCanUse, [(import("../../../doodad/Doodad").default | import("../../../item/Item").default | undefined)?, (RestType | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearby, ActionArgument.DoodadNearby], [ActionArgument.Undefined, import("../argument/ActionArgumentEnum").default<RestType, "Resting" | "Sleeping">]], ActionType.Rest, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IRestCanUse, [(import("../../../doodad/Doodad").default | import("../../../item/Item").default | undefined)?, (RestType | undefined)?]>;
 export default _default;

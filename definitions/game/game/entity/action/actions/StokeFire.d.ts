@@ -21,5 +21,5 @@ export interface IStokeFireCanUse extends IActionUsable {
     doodad?: Doodad;
     tileEvent?: TileEvent;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], ActionType.StokeFire, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IStokeFireCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemNearby], ActionType.StokeFire, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IStokeFireCanUse, [Item]>;
 export default _default;

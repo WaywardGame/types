@@ -17,5 +17,5 @@ export interface IDetachContainerCanUse extends IActionUsable {
     doodad: Doodad;
     stillContainer: Item;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.DoodadNearby]], ActionType.DetachContainer, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDetachContainerCanUse, [(Doodad | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.DoodadNearby]], ActionType.DetachContainer, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IDetachContainerCanUse, [(Doodad | undefined)?]>;
 export default _default;

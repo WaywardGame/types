@@ -15,5 +15,5 @@ import type { IItemDescription } from "@wayward/game/game/item/IItem";
 export interface IPourOnYourselfCanUse extends IActionUsable {
     itemDescription: IItemDescription;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], ActionType.PourOnYourself, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPourOnYourselfCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemNearby], ActionType.PourOnYourself, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IPourOnYourselfCanUse, [import("../../../item/Item").default]>;
 export default _default;

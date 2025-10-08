@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
-declare const _default: import("../Action").Action<[import("@wayward/game/game/entity/action/IAction").ActionArgument.ItemNearby], ActionType.Eat, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/actions/ConsumeItem").IConsumeItemCanUse, [import("../../../item/Item").default]>;
+declare const _default: import("../Action").Action<[import("@wayward/game/game/entity/action/IAction").ActionArgument.ItemNearby], ActionType.Eat, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, import("@wayward/game/game/entity/action/actions/ConsumeItem").IConsumeItemCanUse, [import("../../../item/Item").default]>;
 export default _default;

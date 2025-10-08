@@ -62,6 +62,11 @@ export declare const CURSE_EVENTS_DEFAULT_RADIUS = 25;
  */
 export declare const CURSE_EVENTS_COOLDOWN_RANGE: IRangeRange;
 export declare const CURSE_EVENTS_FIRST_NIGHT = 3;
+/**
+ * Each tick after a curse event ends, one entity of each type spawned by the event has this chance to despawn.
+ * If the entity is on a tile that can be seen by a player, it will not despawn.
+ */
+export declare const CURSE_EVENTS_ENTITY_DESPAWN_CHANCE = 0.1;
 declare namespace Curse {
     interface Helper {
         context: CurseEventContext;
@@ -71,7 +76,7 @@ declare namespace Curse {
     function get(island?: Island, type?: CurseEventType): Helper | undefined;
     function willHaveEventsTonight(island: Island): boolean;
     function canWarnAboutIncomingEvents(island: Island): boolean;
-    function getCooldownMultiplier(island: Island, humans?: Human<unknown, number, import("../reference/IReferenceManager").ReferenceType.NPC | import("../reference/IReferenceManager").ReferenceType.Player>[]): number;
+    function getCooldownMultiplier(island: Island, humans?: Human<unknown, number, import("../reference/IReferenceManager").ReferenceType.NPC | import("../reference/IReferenceManager").ReferenceType.Player, unknown>[]): number;
     function clearCooldown(island: Island): void;
     function tickCurse(island: Island, humans: Human[]): void;
     function reload(island: Island): void;
@@ -80,6 +85,7 @@ declare namespace Curse {
     function attemptSpecificCurseEventSpawn(human: Human, type: CurseEventType, humans: Human[], curse?: number): CurseEventInstance | undefined;
     function unload(island: Island): void;
     function cleanup(island: Island, humans?: Human[]): void;
+    function cleanupEphemerals(island: Island): void;
     function createCurseEventContext(instance: CurseEventInstance, island: Island, humans?: Human[], cursebearer?: Human): CurseEventContext;
 }
 declare const SYMBOL_CURSE_EVENT_SUBSCRIBER_INSTANCES: unique symbol;
@@ -89,6 +95,7 @@ interface Curse {
     events?: CurseEventInstance[];
     cooldown?: number;
     warned?: true;
+    ephemeralCreatures?: number[];
     [SYMBOL_CURSE_EVENT_GLOBAL_SUBSCRIBER_INSTANCE]?: CurseEventSubscriber;
 }
 interface CurseEventInstance {
@@ -105,11 +112,9 @@ interface CurseEventInstance {
 interface ScriptProcessState {
     /** The path of keys/indices from the root of the script to the step this process is currently on. */
     path: Array<string | number>;
-    /** The game tick when this step's EndAfter condition is met. */
-    endTick?: number;
-    /** Iterations remaining for a "repeat" block. */
+    /** Iterations remaining for a Repeat block, or ticks remaining for an EndCondition. */
     iterationsRemaining?: number;
-    /** The state of any child processes started by a "simultaneously" or "repeat" block. */
+    /** The state of any child processes started by a Simultaneously or Repeat block. */
     childProcesses?: ScriptProcessState[];
 }
 export default Curse;

@@ -17,5 +17,5 @@ export interface IButcherCanUse extends IActionUsable {
     tile: Tile;
     corpses: Corpse[];
 }
-declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Butcher, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IButcherCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Butcher, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IButcherCanUse, [import("../../../item/Item").default]>;
 export default _default;

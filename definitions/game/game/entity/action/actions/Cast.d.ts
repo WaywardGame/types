@@ -20,5 +20,5 @@ export interface ICastCanUse extends IActionUsable {
     maxFishingRange: number;
     canGatherTreasure?: TreasureGathering.ICanGather;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Cast, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ICastCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Cast, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, ICastCanUse, [import("../../../item/Item").default]>;
 export default _default;

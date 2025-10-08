@@ -15,5 +15,5 @@ import type Item from "@wayward/game/game/item/Item";
 export interface IPickUpItemCanUse extends IActionUsable {
     pickUpItem: Item | Item[];
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.Boolean], [arg1: ActionArgument.Undefined, ActionArgument.ItemArrayNearby]], ActionType.PickUpItem, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPickUpItemCanUse, [(boolean | undefined)?, (Item[] | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.Boolean], [arg1: ActionArgument.Undefined, ActionArgument.ItemArrayNearby]], ActionType.PickUpItem, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IPickUpItemCanUse, [(boolean | undefined)?, (Item[] | undefined)?]>;
 export default _default;

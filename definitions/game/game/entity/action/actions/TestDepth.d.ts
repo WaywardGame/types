@@ -17,5 +17,5 @@ export interface ITestDepthCanUse extends IActionUsable {
     doodad: Doodad;
     tile: Tile;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], ActionType.TestDepth, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, ITestDepthCanUse, [(import("../../../item/Item").default | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemInventory]], ActionType.TestDepth, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, ITestDepthCanUse, [(import("../../../item/Item").default | undefined)?]>;
 export default _default;

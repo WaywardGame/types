@@ -16,7 +16,7 @@ import IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type { IDamageInfo } from "@wayward/game/game/entity/creature/ICreature";
 import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
-import type { IMovementIntent, IPlayerEvents, PlayerTitle } from "@wayward/game/game/entity/player/IPlayer";
+import type { IMovementIntent, IPlayerEvents, PlayerTag, PlayerTitle } from "@wayward/game/game/entity/player/IPlayer";
 import MessageManager from "@wayward/game/game/entity/player/MessageManager";
 import NoteManager from "@wayward/game/game/entity/player/note/NoteManager";
 import QuestManager from "@wayward/game/game/entity/player/quest/QuestManager";
@@ -38,7 +38,7 @@ import type { IContainerSortInfo, IDialogInfo } from "@wayward/game/ui/old/IOldU
 import { IActionBarSlotData } from "@wayward/game/ui/screen/screens/game/static/actions/IActionBar";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import { type IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export default class Player extends Human<undefined, number, ReferenceType.Player> implements IPreSerializeCallback, IUnserializedCallback {
+export default class Player extends Human<undefined, number, ReferenceType.Player, PlayerTag> implements IPreSerializeCallback, IUnserializedCallback {
     get entityType(): EntityType.Player;
     get tileUpdateType(): TileUpdateType;
     event: IEventEmitter<this, IPlayerEvents>;

@@ -19,5 +19,5 @@ export interface IDisassembleCanUse extends IActionUsable {
     requirementInfo: IRequirementInfo;
     disassemblyResult: IItemDisassembleResult;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.OptionalItemArrayNearby]], ActionType.Disassemble, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDisassembleCanUse, [Item, ((Item | undefined)[] | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.OptionalItemArrayNearby]], ActionType.Disassemble, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IDisassembleCanUse, [Item, ((Item | undefined)[] | undefined)?]>;
 export default _default;

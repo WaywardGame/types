@@ -18,5 +18,5 @@ export interface IJumpCanUse extends IActionUsable {
     jumpStamina: number;
     jumpTile: Tile;
 }
-declare const _default: Action<[], ActionType.Jump, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IJumpCanUse, []>;
+declare const _default: Action<[], ActionType.Jump, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IJumpCanUse, []>;
 export default _default;

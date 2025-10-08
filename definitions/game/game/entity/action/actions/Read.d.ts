@@ -18,5 +18,5 @@ export interface IReadCanUse extends IActionUsable {
     book: BookType;
     basicBookName: TranslationImpl;
 }
-declare const _default: Action<[ActionArgument.ItemNearby], ActionType.Read, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IReadCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemNearby], ActionType.Read, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IReadCanUse, [Item]>;
 export default _default;
