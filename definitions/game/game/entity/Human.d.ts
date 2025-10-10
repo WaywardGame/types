@@ -127,10 +127,6 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     quests: IQuestManager;
     messages: IMessageManager;
     notes: INoteManager;
-    highestAttack?: number;
-    highestDefense?: number;
-    cumulativeEvilCrafting: number;
-    cumulativeKilling: number;
     itemDiscovered: ItemType[];
     private _humanTags?;
     /** @deprecated (use the entity itself) */

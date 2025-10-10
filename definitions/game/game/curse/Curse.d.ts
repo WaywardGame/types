@@ -16,13 +16,24 @@ import { SkillType } from "@wayward/game/game/entity/IHuman";
 import type Island from "@wayward/game/game/island/Island";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import { IRange, IRangeRange } from "@wayward/utilities/math/Range";
-export declare const CURSE_WEIGHTS: PartialRecord<CurseComponent, number>;
-export declare const CURSE_ATTACK_MAX = 50;
-export declare const CURSE_DEFENSE_MAX = 100;
-export declare const CURSE_CRAFTING_MAX = 100;
-export declare const CURSE_KILLING_MAX = 100;
-export declare const CURSE_SKILL_MAX = 100;
-export declare const CURSE_COMPONENTS: Record<CurseComponent, (human: Human) => number>;
+import DataComponent from "@wayward/game/game/entity/data/DataComponent";
+export declare const CURSE_CAP = 10000;
+export declare const CURSE_COMPONENT_ATTACK_CAP = 50;
+export declare const CURSE_COMPONENT_DEFENSE_CAP = 100;
+export declare const CURSE_COMPONENT_CRAFTING_CAP = 3000;
+export declare const CURSE_COMPONENT_KILLING_CAP = 500;
+export declare const CURSE_COMPONENT_SKILL_CAP = 100;
+export declare const CURSE_COMPONENT_SLEEPLESSNESS_CAP_DAYS = 6;
+interface CurseComponentDefinition {
+    readonly maxCurseContribution: number | null;
+    compute(human: Human): number;
+}
+export declare const CURSE_COMPONENTS: Record<CurseComponent, CurseComponentDefinition>;
+export declare const CumulativeEvilCrafting: DataComponent<number, number>;
+export declare const CumulativeKilling: DataComponent<number, number>;
+export declare const Sleeplessness: DataComponent<number, number>;
+export declare const HighestAttack: DataComponent.Live<number>;
+export declare const HighestDefense: DataComponent.Live<number>;
 /**
  * Gets the highest value of either current or max skill multiplied by the "evilness" of each skill (from rune chance)
  * (Basically, high values in any of the evil-er skills make curse go brrrr)
@@ -34,6 +45,7 @@ declare function getSkillValue(human: Human): {
 declare namespace Curse {
     const getSkill: typeof getSkillValue;
     function getComponentValue(human: Human, component: CurseComponent): number;
+    function getComponentCap(component: CurseComponent): number | null;
     function getValue(human: Human): number;
 }
 /**
@@ -90,6 +102,7 @@ declare namespace Curse {
 }
 declare const SYMBOL_CURSE_EVENT_SUBSCRIBER_INSTANCES: unique symbol;
 declare const SYMBOL_CURSE_EVENT_GLOBAL_SUBSCRIBER_INSTANCE: unique symbol;
+declare const SYMBOL_CURSE_EVENT_ACTIVE_SUBSCRIBER_INSTANCE: unique symbol;
 interface Curse {
     night?: true;
     events?: CurseEventInstance[];
@@ -97,6 +110,7 @@ interface Curse {
     warned?: true;
     ephemeralCreatures?: number[];
     [SYMBOL_CURSE_EVENT_GLOBAL_SUBSCRIBER_INSTANCE]?: CurseEventSubscriber;
+    [SYMBOL_CURSE_EVENT_ACTIVE_SUBSCRIBER_INSTANCE]?: CurseEventSubscriber;
 }
 interface CurseEventInstance {
     type: CurseEventType;

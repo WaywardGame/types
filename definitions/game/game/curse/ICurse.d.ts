@@ -63,12 +63,11 @@ export declare enum CursePosition {
 }
 export declare enum CurseComponent {
     Skill = 0,
-    HighestAttack = 1,
-    HighestDefense = 2,
-    CumulativeEvilCrafting = 3,
-    Equipment = 4,
-    Modifier = 5,
-    CumulativeKilling = 6
+    AttackDefense = 1,
+    CumulativeEvilCrafting = 2,
+    Modifier = 3,
+    CumulativeKilling = 4,
+    Sleeplessness = 5
 }
 export declare enum CurseSystemDiscovery {
     CurseFactors = 0,

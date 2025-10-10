@@ -399,6 +399,11 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     getSkillUse(): SkillType;
     /**
+     * Checks if a solar still can work in the current temperature.
+     * @returns True if the solar still can work in the current temperature, false if not.
+     */
+    willStillWorkInTemperature(): boolean;
+    /**
      * Decay over time
      */
     private processDecay;
