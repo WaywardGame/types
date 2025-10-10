@@ -17,6 +17,7 @@ import type { SkillType } from "@wayward/game/game/entity/IHuman";
 import type { IDecayTemperatureRange } from "@wayward/game/game/IGame";
 import type { ILootItem } from "@wayward/game/game/ILoot";
 import type { IObjectDescription, IObjectOptions } from "@wayward/game/game/IObject";
+import type { WaterType } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import type { IContainer, IItemOld, ItemType, ItemTypeExtra, ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
@@ -528,7 +529,8 @@ export declare enum DoodadTypeGroup {
     Altar = -9978,
     OpenFireSource = -9977,
     RequiresCandleToLight = -9976,
-    ContainsFuelSource = -9975
+    ContainsFuelSource = -9975,
+    CurseWard = -9974
 }
 export declare enum DoorOrientation {
     /**
@@ -559,6 +561,7 @@ export interface IHasBuilder {
 export interface IHasWater {
     top?: true;
     bottom?: true;
+    waterType?: WaterType;
 }
 export interface IDoodadGetNameOptions {
     count: number;

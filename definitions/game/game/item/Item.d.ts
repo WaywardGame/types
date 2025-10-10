@@ -29,6 +29,7 @@ import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IMobCheck, IslandId } from "@wayward/game/game/island/IIsland";
+import { WaterType } from "@wayward/game/game/island/IIsland";
 import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemChangeIntoOptions, IItemDescription, IItemDisassembleResult, IItemDisassembly, IItemGetNameOptions, IItemUsed, IItemVehicle, IMagicalPropertyInfo, IItemMovementResult as IMoveToTileMobCheckResult, IMoveToTileOptions, ItemTag } from "@wayward/game/game/item/IItem";
 import { ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { BookType, ContainerSort, ItemDamageResult, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "@wayward/game/game/item/IItem";
@@ -525,6 +526,11 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      */
     getReturnType(): ItemType;
     createReturnItem(returnType: ItemType, container?: IContainer): Item | undefined;
+    /**
+     * Returns the type of water contained in the item in the case of containers of liquid.
+     * @returns WaterType enum value.
+     */
+    getWaterType(): WaterType;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;
 }

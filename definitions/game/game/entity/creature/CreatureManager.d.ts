@@ -10,8 +10,8 @@
  */
 import CombatStrengthManager from "@wayward/game/game/entity/CombatStrengthManager";
 import Creature from "@wayward/game/game/entity/creature/Creature";
-import type { ICreatureCheckMoveOptions } from "@wayward/game/game/entity/creature/ICreature";
-import { CreatureType, TileGroup } from "@wayward/game/game/entity/creature/ICreature";
+import type { ICreatureCheckMoveOptions, ICreatureSpawnOptions } from "@wayward/game/game/entity/creature/ICreature";
+import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import type { IEntityRemoveOptions } from "@wayward/game/game/entity/EntityManager";
 import EntityManager from "@wayward/game/game/entity/EntityManager";
 import type Human from "@wayward/game/game/entity/Human";
@@ -48,12 +48,8 @@ export default class CreatureManager extends EntityManager<Creature, IEntityRemo
      * Spawns a creature.
      * @param type The type of creature to spawn.
      * @param tile The tile
-     * @param bypass Whether to bypass checks for whether the creature can spawn there naturally. Defaults to false, if the creature can't spawn naturally, it won't.
-     * @param forceAberrant If provided, forces the spawned creature's aberrant state to be the passed boolean. True = aberrant, false = not aberrant. If not provided, the aberrant state is decided based on chance.
-     * @param spawnTiles If set, this will overwrite the creature's description for which tiles it can spawn on
-     * @param bypassCreatureLimit If set, the creature limit will be ignored and spawn the creature over the set limit
      */
-    spawn(type: CreatureType, tile: Tile, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: TileGroup, bypassCreatureLimit?: boolean, bypassAll?: boolean): Creature | undefined;
+    spawn(type: CreatureType, tile: Tile, options?: ICreatureSpawnOptions): Creature | undefined;
     spawnFromZone(tile: Tile, bypassCreatureLimit?: boolean, checkTerrainType?: boolean): Creature | undefined;
     createFake(type: CreatureType, aberrant: boolean, tile?: Tile, id?: number): Creature;
     exists(creature: Creature): boolean;
