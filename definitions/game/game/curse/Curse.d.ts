@@ -79,6 +79,11 @@ export declare const CURSE_EVENTS_FIRST_NIGHT = 3;
  * If the entity is on a tile that can be seen by a player, it will not despawn.
  */
 export declare const CURSE_EVENTS_ENTITY_DESPAWN_CHANCE = 0.1;
+/**
+ * Some curse events extinguish light sources via additional decay (both static & dynamic (based on % of decay remaining))
+ * This multiplier affects how quickly curse ward doodads & items are extinguished compared to the rest
+ */
+export declare const CURSE_EVENTS_EXTINGUISH_WARD_MULTIPLIER = 0.2;
 declare namespace Curse {
     interface Helper {
         context: CurseEventContext;

@@ -19,6 +19,10 @@ import { IRange } from "@wayward/utilities/math/Range";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
+import type Doodad from "@wayward/game/game/doodad/Doodad";
+import type Item from "@wayward/game/game/item/Item";
+import type TileEvent from "@wayward/game/game/tile/TileEvent";
+import type WorldZ from "@wayward/utilities/game/WorldZ";
 /** The API that curse events have access to */
 export interface CurseEventContext {
     readonly island: Island;
@@ -38,11 +42,29 @@ export interface CurseEventContext {
     getNearbyPlayers(): Human[];
     /** Get a random tile within the curse event's radius. This is based on `CurseEvent.position` and `CurseEvent.radius` */
     getRandomTile(radius?: number): Tile | undefined;
+    /** Get a random tile within the curse event's radius. This is based on `CurseEvent.position` and `CurseEvent.radius` */
+    getTilesInRange(radius?: number, z?: WorldZ): Tile[];
     /**
      * Spawn a creature at the given tile using the curse event spawning rules.
+     *
+     * Note that "curse event" creatures:
+     * - Do not display alerted notifiers
+     * - Do not randomly despawn
+     * - Are despawned at the event end
+     *
      * @param evenWhenAsleep Disable the default functionality of preventing spawns if the cursebearer is asleep
      */
     spawnCreature(type?: CreatureType, tile?: Tile, evenWhenAsleep?: true): Creature | undefined;
+    /**
+     * Note: This does not check whether or not the cursebearer is asleep.
+     * @param options The options for extinguishing lights
+     * @param lights The lights that should lose decay. If no lights are provided, all lights in the event radius will be affected
+     */
+    extinguish(options: CurseEventExtinguishOptions, ...lights: Array<Doodad | Item | TileEvent>): void;
+    /**
+     * Mark the given creatures as "curse event" creatures. See the `spawnCreature` function for more information
+     */
+    claim(...creatures: Creature[]): void;
     /**
      * Inject a custom curse event subscriber class into the game.
      * This class *must* be included in `CurseEvent.subscribers`.
@@ -53,6 +75,20 @@ export interface CurseEventContext {
     uninject(): void;
     uninject<T extends CurseEventSubscriber>(subscriber: Class<T>): void;
     toString(): string;
+}
+export interface CurseEventExtinguishOptions {
+    /**
+     * The number of flat ticks to reduce decays by
+     *
+     * Chooses the higher of `staticDecay` and `dynamicDecay`.
+     */
+    staticDecay?: number | IRange;
+    /**
+     * The percentage of the current decay to reduce by, represented as a number between 0 and 1.
+     *
+     * Chooses the higher of `staticDecay` and `dynamicDecay`.
+     */
+    dynamicDecay?: number | IRange;
 }
 export interface CurseEvent {
     group: CurseGroup;

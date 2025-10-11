@@ -403,6 +403,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * @returns True if the solar still can work in the current temperature, false if not.
      */
     willStillWorkInTemperature(): boolean;
+    forceDecayTick(): void;
     /**
      * Decay over time
      */

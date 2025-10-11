@@ -297,7 +297,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      */
     getEfficacyTranslation(human: Human, qualityBonus: number, maxQualityBonus: number, recipe: IRecipe, ui?: boolean): TranslationImpl | undefined;
     updateItems(ticks: number, playerIds: Set<number>, skipHumanItems?: boolean): boolean;
-    updateItem(ticks: number, item: Item, isInInventory: boolean): boolean;
+    updateItem(ticks: number, item: Item, isInInventory?: boolean): boolean;
     getPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getAbsentPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getNPCWithItemInInventory(containable: IContainable): NPC | undefined;

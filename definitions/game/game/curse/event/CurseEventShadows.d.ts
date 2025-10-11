@@ -9,5 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { CurseEvent } from "@wayward/game/game/curse/CurseEvent";
+import { IRange, IRangeRange } from "@wayward/utilities/math/Range";
+export declare const CURSE_EVENT_SHADOWS_SPAWN_DELAY: IRangeRange;
+export declare const CURSE_EVENT_SHADOWS_EXTINGUISH_DELAY: IRangeRange;
+export declare const CURSE_EVENT_SHADOWS_EXTINGUISH_STATIC: IRangeRange;
+export declare const CURSE_EVENT_SHADOWS_EXTINGUISH_DYNAMIC: IRangeRange;
+export declare const CURSE_EVENT_SHADOWS_EXTINGUISH_TIME_MULTIPLIER: IRange;
 declare const _default: CurseEvent;
 export default _default;
