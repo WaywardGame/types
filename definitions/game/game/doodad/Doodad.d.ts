@@ -376,11 +376,6 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     getCivilizationScore(excludeMagic?: boolean): number;
     /**
-     * Gets the scarecrow radius based on quality.
-     * This also exists on items.
-     */
-    getScareRadius(): number;
-    /**
      * Gets a set of skill types and values from doodads that have "containedItemGroupProvidesSkill" set for items that provide adjacent skill bonuses.
      * @returns Map of skill type and number (skill value).
      */

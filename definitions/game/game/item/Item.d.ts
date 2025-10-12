@@ -466,11 +466,6 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * @returns number of score (or 0 if no civilization score is set).
      */
     getCivilizationScore(actionType: ActionType.Build | ActionType.SetDown): number;
-    /**
-     * Gets the scarecrow radius based on doodad's definition and quality.
-     * This also exists on doodads.
-     */
-    getScareRadius(): number;
     getVehicle(): IItemVehicle | undefined;
     addCreature(creature: Creature, remainTamed?: boolean): void;
     /**

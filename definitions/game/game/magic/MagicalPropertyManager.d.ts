@@ -100,14 +100,15 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      */
     get<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): number | undefined;
     get(...identity: MagicalPropertyIdentity): number | undefined;
+    isCurse(...identity: MagicalPropertyIdentity): boolean;
     /**
      * Sets a magical property on this object. Replaces any existing magical property of that type
      */
-    set<T extends MagicalNormalPropertyTypes>(type: T, value: number): this;
+    set<T extends MagicalNormalPropertyTypes>(type: T, value: number, curse?: true): this;
     /**
      * Sets a magical sub-property on this object. Replaces any existing magical sub-property of that type
      */
-    set<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T], value: number): this;
+    set<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T], value: number, curse?: true): this;
     /**
      * Removes a magical property on this object, if it exists
      * @returns whether the magical property was removed — ie, if it existed
@@ -154,6 +155,7 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
     subProperties<T extends MagicalSubPropertyTypes>(type: T): ReadonlyArray<{
         type: MagicalPropertyTypeSubTypeMap[T];
         value: number;
+        curse?: true;
     }>;
     /**
      * @returns a list of all the magical properties on this object

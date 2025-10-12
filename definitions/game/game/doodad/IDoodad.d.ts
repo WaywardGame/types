@@ -262,6 +262,14 @@ export interface IItemStackRegion {
     yMin: number;
     yMax: number;
 }
+export interface IScareRadius {
+    total: number;
+    /** The "effective" scare radius, ie what's actually used internally. This is slightly increased so that it's a nicer circle */
+    totalEffective: number;
+    base: number;
+    quality: number;
+    magic: number;
+}
 export interface ILockedChest {
     /**
      * Loot groups that gets generated inside a chest.

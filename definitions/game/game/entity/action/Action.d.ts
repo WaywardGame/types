@@ -9,18 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { DeityReal } from "@wayward/game/game/deity/Deity";
-import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type { ActionArguments, ActionArgumentTupleTypes, ActionFlag, ActionType, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionExample, IActionExampleApi, IActionHandlerApi, IActionNotUsable, IActionNotUsableHandlerApi, IActionTargetAdjacent, IActionTargetEntityRanged, IActionTargetTileRanged, IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
-import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Entity from "@wayward/game/game/entity/Entity";
-import type Human from "@wayward/game/game/entity/Human";
-import type { EntityType } from "@wayward/game/game/entity/IEntity";
-import type NPC from "@wayward/game/game/entity/npc/NPC";
-import type Player from "@wayward/game/game/entity/player/Player";
-import type Item from "@wayward/game/game/item/Item";
+import type { EntityType, EntityTypeMap } from "@wayward/game/game/entity/IEntity";
 import type Tile from "@wayward/game/game/tile/Tile";
-import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 export declare class Action<A extends ActionArguments, T extends ActionType = ActionType, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> implements IActionDescription<A, E, R, CU, AV> {
@@ -126,15 +118,5 @@ export declare class Action<A extends ActionArguments, T extends ActionType = Ac
      */
     clone(): Action<A, T, E, R, CU, AV>;
 }
-type EntityTypeMap<E extends EntityType> = {
-    [EntityType.Corpse]: Corpse;
-    [EntityType.Creature]: Creature;
-    [EntityType.Doodad]: Doodad;
-    [EntityType.Human]: Human;
-    [EntityType.Item]: Item;
-    [EntityType.NPC]: NPC;
-    [EntityType.Player]: Player;
-    [EntityType.TileEvent]: TileEvent;
-}[E];
-type EntityTypeTupleType<E extends EntityType[]> = E extends [EntityType] ? EntityTypeMap<E[0]> : E extends [EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> : E extends [EntityType, EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> | EntityTypeMap<E[2]> : never;
+type EntityTypeTupleType<E extends EntityType[]> = E extends [EntityType] ? EntityTypeMap[E[0]] : E extends [EntityType, EntityType] ? EntityTypeMap[E[0]] | EntityTypeMap[E[1]] : E extends [EntityType, EntityType, EntityType] ? EntityTypeMap[E[0]] | EntityTypeMap[E[1]] | EntityTypeMap[E[2]] : never;
 export {};

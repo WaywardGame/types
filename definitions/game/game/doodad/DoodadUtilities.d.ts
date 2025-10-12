@@ -9,9 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import type { DoodadType } from "@wayward/game/game/doodad/IDoodad";
+import type { DoodadType, IScareRadius } from "@wayward/game/game/doodad/IDoodad";
 import { GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import type Human from "@wayward/game/game/entity/Human";
+import type Item from "@wayward/game/game/item/Item";
 declare namespace DoodadUtilities {
     type DoodadIn = Doodad | DoodadType;
     export function hasGrownEnoughIfCanGrow(doodad: Doodad, requiredGrowthStage: GrowingStage): boolean;
@@ -20,6 +21,7 @@ declare namespace DoodadUtilities {
     export function wouldWalkingOnDealNormalDamage(doodad: DoodadIn, human?: Human): boolean;
     export function isDangerous(doodad: DoodadIn, human?: Human): boolean;
     export function canCauseStatus(doodad: DoodadIn): boolean;
+    export function getScareRadius(doodad: Doodad | Item): IScareRadius;
     export {};
 }
 export default DoodadUtilities;

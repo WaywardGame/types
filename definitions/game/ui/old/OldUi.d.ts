@@ -36,4 +36,6 @@ export default class OldUi {
     logErrorEvent(eventOrError: unknown, skipLog?: true): void;
     private loggingRejection;
     private logPromiseRejectionEvent;
+    refreshUiTranslations(): void;
+    private refreshUiTranslation;
 }

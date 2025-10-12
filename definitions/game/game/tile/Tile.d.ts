@@ -39,6 +39,7 @@ import type { IFieldOfViewOrigin } from "@wayward/game/renderer/fieldOfView/IFie
 import { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import { DistanceType } from "@wayward/game/utilities/math/Vector2";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import type { IRGB } from "@wayward/utilities/Color";
 import WorldZ from "@wayward/utilities/game/WorldZ";
@@ -466,8 +467,8 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * - Prefers the facing tile if it has the same penalty as others
      */
     getPreferredAdjacentTile(human: Human, clientSide: boolean): Tile | undefined;
-    tilesInRange(range: number, includeCurrentTile?: boolean): Tile[];
-    openTileInRange(range: number, includeCurrentTile?: boolean, excludeWater?: boolean): Tile | undefined;
+    tilesInRange(type: DistanceType, range: number, includeCurrentTile?: boolean): Tile[];
+    openTileInRange(type: DistanceType, range: number, includeCurrentTile?: boolean, excludeWater?: boolean): Tile | undefined;
     /**
      * Array version of tilesAround
      */

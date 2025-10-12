@@ -128,6 +128,17 @@ export declare enum EntityType {
     Corpse = 6,
     Item = 7
 }
+export interface EntityTypeMap {
+    [EntityType.Corpse]: Corpse;
+    [EntityType.Creature]: Creature;
+    [EntityType.Doodad]: Doodad;
+    [EntityType.Human]: Human;
+    [EntityType.Item]: Item;
+    [EntityType.NPC]: NPC;
+    [EntityType.Player]: Player;
+    [EntityType.TileEvent]: TileEvent;
+}
+export type EntityTypeType<TYPE extends EntityType> = EntityTypeMap[TYPE] extends Entity<any, infer TYPETYPE, any, any> ? TYPETYPE : never;
 export declare enum MoveType {
     None = 0,
     Water = 1,

@@ -76,7 +76,6 @@ export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> 
      */
     private loadAdditionalLanguages;
     shouldUseAlternateFontStyle(): boolean;
-    refreshUiTranslations(): void;
     getTranslation(dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean): string[] | undefined;
     add(provider: TranslationsProvider): void;
     remove(provider: TranslationsProvider): void;
@@ -99,7 +98,6 @@ export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> 
     private setDebug;
     private debugFor;
     private debugLog;
-    private refreshUiTranslation;
 }
 export interface ITranslationInjection {
     selector: string;

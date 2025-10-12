@@ -18,7 +18,7 @@ import { TempType } from "@wayward/game/game/temperature/ITemperature";
 declare const _default: UseInfo<{
     doodadContainer: import("../../../../doodad/IDoodad").IDoodadDescription | undefined;
     civilizationScore: number | undefined;
-    scareRadius: number;
+    scareRadius: import("../../../../doodad/IDoodad").IScareRadius | undefined;
     entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
     type: import("../../../../item/IItem").ItemType;
