@@ -8,8 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { CurseEvent } from "@wayward/game/game/curse/CurseEvent";
-export declare const CURSE_EVENT_CRAFTING_INSPIRATION_DIFFICULTY_MULTIPLIER = 0.85;
-export declare const CURSE_EVENT_CRAFTING_INSPIRATION_MAGIC_CHANCE_MULTIPLIER = 0.5;
-declare const _default: CurseEvent;
+declare const _default: import("@wayward/game/save/upgrade/UpgradeVersion").IUpgradeVersionDefinition<unknown>;
 export default _default;

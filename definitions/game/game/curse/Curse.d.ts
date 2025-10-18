@@ -19,8 +19,11 @@ import { IRange, IRangeRange } from "@wayward/utilities/math/Range";
 import DataComponent from "@wayward/game/game/entity/data/DataComponent";
 export declare const CURSE_CAP = 10000;
 export declare const CURSE_COMPONENT_ATTACK_CAP = 50;
+export declare const CURSE_COMPONENT_ATTACK_FLOOR = 1;
 export declare const CURSE_COMPONENT_DEFENSE_CAP = 100;
+export declare const CURSE_COMPONENT_DEFENSE_FLOOR = 2;
 export declare const CURSE_COMPONENT_CRAFTING_CAP = 3000;
+export declare const CURSE_COMPONENT_CRAFTING_MIN_EFFECT = 0.3;
 export declare const CURSE_COMPONENT_KILLING_CAP = 500;
 export declare const CURSE_COMPONENT_SKILL_CAP = 100;
 export declare const CURSE_COMPONENT_SLEEPLESSNESS_CAP_DAYS = 6;
@@ -66,7 +69,7 @@ export declare const CURSE_EVENTS_MAELSTROM_SPEED = 1;
  * At 0-1 maelstrom, there are up to 2 opportunities per night. (Per player, because curse events are localised.)
  * Additional opportunities before the top opportunity always use the max chance.
  */
-export declare const CURSE_EVENTS_CHANCE: IRange;
+export declare const CURSE_EVENTS_CHANCE: IRange<number>;
 export declare const CURSE_EVENTS_DEFAULT_RADIUS = 25;
 /**
  * An IRangeRange for randomly selecting the cooldown time between curse event nights.
@@ -91,6 +94,9 @@ declare namespace Curse {
         definition: CurseEvent;
     }
     function get(island?: Island, type?: CurseEventType): Helper | undefined;
+    function all(island: Island): CurseEventContext[];
+    function isMysteryForClient(event: CurseEventInstance): boolean;
+    function isMysteryForHuman(event: CurseEventInstance, human: Human): boolean;
     function willHaveEventsTonight(island: Island): boolean;
     function canWarnAboutIncomingEvents(island: Island): boolean;
     function getCooldownMultiplier(island: Island, humans?: Human<unknown, number, import("../reference/IReferenceManager").ReferenceType.NPC | import("../reference/IReferenceManager").ReferenceType.Player, unknown>[]): number;
@@ -101,7 +107,7 @@ declare namespace Curse {
     function attemptCurseEventSpawn(category: CurseCategory, human: Human, curse: number, humans: Human[], events: CurseEventInstance[]): CurseEventInstance | undefined;
     function attemptSpecificCurseEventSpawn(human: Human, type: CurseEventType, humans: Human[], curse?: number): CurseEventInstance | undefined;
     function unload(island: Island): void;
-    function cleanup(island: Island, humans?: Human[]): void;
+    function cleanup(island: Island, humans?: Human[], isMorning?: boolean): void;
     function cleanupEphemerals(island: Island): void;
     function createCurseEventContext(instance: CurseEventInstance, island: Island, humans?: Human[], cursebearer?: Human): CurseEventContext;
 }
@@ -117,9 +123,10 @@ interface Curse {
     [SYMBOL_CURSE_EVENT_GLOBAL_SUBSCRIBER_INSTANCE]?: CurseEventSubscriber;
     [SYMBOL_CURSE_EVENT_ACTIVE_SUBSCRIBER_INSTANCE]?: CurseEventSubscriber;
 }
-interface CurseEventInstance {
+export interface CurseEventInstance {
     type: CurseEventType;
-    display: CurseEventDisplayMode;
+    defaultDisplay: CurseEventDisplayMode;
+    display: Record<string, CurseEventDisplayMode>;
     cursebearerIdentifier: string;
     curse: number;
     point: IVector2;

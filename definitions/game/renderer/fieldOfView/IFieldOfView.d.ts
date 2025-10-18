@@ -36,5 +36,8 @@ export declare enum CanASeeBType {
     TileIsInRange = 13,
     CurseDespawning = 14,
     CreatureDespawning = 15,
-    CreatureOfferFromGround = 16
+    CreatureOfferFromGround = 16,
+    CursePositionRandom = 17,
+    CurseSpawning = 18,
+    CurseWitness = 19
 }

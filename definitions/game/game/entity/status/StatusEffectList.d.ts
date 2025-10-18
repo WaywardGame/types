@@ -21,6 +21,7 @@ export declare class StatusEffectList {
     private readonly array;
     private skill?;
     private skillThresholds?;
+    private sortingDisabled;
     constructor(context: IStatusContext);
     private add;
     setSkillThresholds<THRESHOLDS extends number[]>(skill: SkillType, ...thresholds: THRESHOLDS): THRESHOLDS;
@@ -30,6 +31,7 @@ export declare class StatusEffectList {
     good<TYPE extends StatusEffectType>(type: TYPE | false | undefined, ...args: StatusEffectTypeArguments[TYPE]): this;
     veryGood<TYPE extends StatusEffectType>(type: TYPE | false | undefined, ...args: StatusEffectTypeArguments[TYPE]): this;
     passChance(revealedAt?: number): this;
+    disableSorting(): this;
     get(): StatusEffect[];
     getSkillThresholds(): ISkillThresholds | undefined;
 }

@@ -117,6 +117,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     protected onUpdateQuality(): void;
     protected onUpdateBaseItem(): void;
     protected onTickEnd(): void;
+    protected onRevertFromDoodad(): void;
     protected onRooted(): void;
     protected onRootedAndAppend(): void;
     protected onLoadedOnIsland(): void;

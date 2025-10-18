@@ -34,6 +34,7 @@ export interface IStatusDisplayable {
     getBorderColorOverride?(status?: Status): string | undefined;
     getCategoryOverride?(status?: Status): IStatusCategoryOverride | undefined;
     getDescriptionContent?(status: Status): IStatusDescriptionContent | undefined;
+    effects?: SupplierOr<StatusEffectList | undefined, [IStatusContext, StatusEffectList]>;
 }
 export interface IStatusCategoryOverride {
     icon: string | IIcon;
@@ -64,8 +65,8 @@ export interface IStatusDescription extends IStatusDisplayable {
      * Currently, "important" statuses have the same bounce animation that "threats" have.
      */
     important?: true;
+    disableNotifier?: true;
     interval?: SupplierOr<number | undefined, [IStatusContext]> | false;
-    effects?: SupplierOr<StatusEffectList | undefined, [IStatusContext, StatusEffectList]>;
     particles?: SupplierOr<StatusParticle | undefined, [IStatusContext, StatusParticleEvent?]>;
     /** A list of `StatusRenderer`s that could be returned by a supplier in the `renderer` property */
     renderers?: StatusRenderer[];
@@ -149,19 +150,23 @@ export declare enum StatusEffectType {
     CannotX = 1,
     DealingAroundXDamageY = 2,
     DealingXDamageY = 3,
-    IncreasesXRate = 4,
-    IncreasesXRateByY = 5,
-    LosingXEveryY = 6,
-    MovementSpeedSlowed = 7,
-    PercentChanceToPassEveryX = 8,
-    ReducesXByYEveryZ = 9,
-    XCannotBeRegained = 10
+    DecreasesXByY = 4,
+    IncreasesXByY = 5,
+    IncreasesXRate = 6,
+    IncreasesXRateByY = 7,
+    LosingXEveryY = 8,
+    MovementSpeedSlowed = 9,
+    PercentChanceToPassEveryX = 10,
+    ReducesXByYEveryZ = 11,
+    XCannotBeRegained = 12
 }
 export interface StatusEffectTypeArguments {
     [StatusEffectType.AddsAChanceOfXOnY]: [effect: TranslationArg, on?: TranslationArg];
     [StatusEffectType.CannotX]: [x: TranslationArg];
     [StatusEffectType.DealingAroundXDamageY]: [amount?: TranslationArg, eventOrDuration?: TranslationArg];
     [StatusEffectType.DealingXDamageY]: [amount?: TranslationArg, eventOrDuration?: TranslationArg];
+    [StatusEffectType.DecreasesXByY]: [decreases: TranslationArg, amount?: TranslationArg];
+    [StatusEffectType.IncreasesXByY]: [increases: TranslationArg, amount?: TranslationArg];
     [StatusEffectType.IncreasesXRate]: [increased: TranslationArg];
     [StatusEffectType.IncreasesXRateByY]: [increased: TranslationArg, by: TranslationArg];
     [StatusEffectType.LosingXEveryY]: [lost: TranslationArg, eventOrDuration?: TranslationArg];

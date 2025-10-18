@@ -56,7 +56,7 @@ export declare enum CurseCategory {
 export declare enum CursePosition {
     /** The default value for a curse event. `position` returns the island's center. */
     None = 0,
-    /** The curse event spawns in a random location near the cursebearer. */
+    /** The curse event spawns in a random location near the cursebearer, but not within LoS. */
     Random = 1,
     /** The curse event's position is always directly on the cursebearer. */
     Follow = 2
@@ -77,4 +77,14 @@ export declare enum CurseEventDisplayMode {
     Hidden = 0,
     Mystery = 1,
     Revealed = 2
+}
+export declare enum CurseEventRevealCondition {
+    None = 0,
+    /** Does nothing except indicate to *yourself* that this curse event will reveal via scripts */
+    Scripts = 1,
+    Start = 2,
+    End = 3,
+    Revealed = 4,
+    CreatureWitnessed = 5,
+    CreatureKilled = 6
 }

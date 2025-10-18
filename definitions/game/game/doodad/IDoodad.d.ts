@@ -232,6 +232,19 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      */
     displayDoodad?: SupplierOr<DisplayableDoodadType | undefined, [Doodad]>;
     /**
+     * A number of "display variants" for this item.
+     *
+     * Each variant must be in `DoodadTypeExtra`, named `${main item type name}${1-based variant index}`.
+     * IE, `DoodadType.JackOLantern` having `displayVariants: 3` will look for `DoodadTypeExtra.JackOLantern1`, `JackOLantern2`, and `JackOLantern3`.
+     *
+     * Setting `displayItem` disables the functionality provided by `displayVariants`.
+     *
+     * `displayVariants` uses `aestheticRandom` to determine which variant to use.
+     * `aestheticRandom` is transferred when converting from Item to Doodad and vice versa, so the variant will remain the same,
+     * assuming `displayVariants` is set to the same count on both the item description and doodad description.
+     */
+    displayVariants?: number;
+    /**
      * Sets (and overwrites) the associated item (or item extra) that shows in the tooltip.
      */
     getAssociatedItem?(doodad: Doodad): ItemType | ItemTypeExtra | undefined;
@@ -499,7 +512,17 @@ export declare enum DoodadTypeExtra {
     WoodenBookcase_25 = 184,
     WoodenBookcase_50 = 185,
     WoodenBookcase_75 = 186,
-    WoodenBookcase_100 = 187
+    WoodenBookcase_100 = 187,
+    JackOLantern2 = 188,
+    JackOLantern3 = 189,
+    LitJackOLantern2 = 190,
+    LitJackOLantern3 = 191,
+    StrawScarecrow2 = 192,
+    StrawScarecrow3 = 193,
+    CactusScarecrow2 = 194,
+    CactusScarecrow3 = 195,
+    SnowScarecrow2 = 196,
+    SnowScarecrow3 = 197
 }
 export type DisplayableDoodadType = DoodadType | DoodadTypeExtra;
 export declare enum DoodadTag {
@@ -536,9 +559,10 @@ export declare enum DoodadTypeGroup {
     Wheelbarrow = -9979,
     Altar = -9978,
     OpenFireSource = -9977,
-    RequiresCandleToLight = -9976,
+    RequiresCandleToLight = -9976,// Pumpkins
     ContainsFuelSource = -9975,
-    CurseWard = -9974
+    CurseWard = -9974,
+    CannotBeSpread = -9973
 }
 export declare enum DoorOrientation {
     /**

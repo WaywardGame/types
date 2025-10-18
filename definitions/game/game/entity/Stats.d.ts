@@ -71,6 +71,7 @@ export default class Stats<T extends IStatHost> {
      * Note: Initializes the stat if it does not exist.
      */
     setValue(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
+    cacheDynamicValue(stat: Stat | IStat, value: number): boolean;
     /**
      * Reduces the given `Stat` by the given amount. Triggers `statChange`
      * @param stat The `Stat` to reduce.

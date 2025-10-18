@@ -11,7 +11,8 @@
 import { TileUpdateType } from "@wayward/game/game/IGame";
 import type { IHasQuality, IObject, IQualityEvents } from "@wayward/game/game/IObject";
 import { Quality } from "@wayward/game/game/IObject";
-import type { DisplayableDoodadType, DoodadTypeExtra, DoorOrientation, IDoodadDescription, IDoodadGetNameOptions, IDoodadOptions, IHasBuilder, IHasWater } from "@wayward/game/game/doodad/IDoodad";
+import type { DisplayableDoodadType, DoorOrientation, IDoodadDescription, IDoodadGetNameOptions, IDoodadOptions, IHasBuilder, IHasWater } from "@wayward/game/game/doodad/IDoodad";
+import { DoodadTypeExtra } from "@wayward/game/game/doodad/IDoodad";
 import { DoodadTag, DoodadType, DoodadTypeGroup, GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import type { IEntityMovableEvents } from "@wayward/game/game/entity/EntityMovable";
 import EntityMovable from "@wayward/game/game/entity/EntityMovable";
@@ -257,7 +258,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * @param bypassChange Set to true if you just want to check if fertility can be increased.
      * @returns True or false depending on if it increased in fertility or not.
      */
-    increaseFertility(bypassChange?: boolean): boolean;
+    increaseFertility(bypassChange?: boolean, sendMessage?: boolean): boolean;
     /**
      * Return extra trap damage based on player multiplier and magical status
      */

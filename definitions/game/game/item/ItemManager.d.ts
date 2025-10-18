@@ -38,6 +38,8 @@ import type { ISorter } from "@wayward/utilities/collection/sort/Sorter";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import WorldZ from "@wayward/utilities/game/WorldZ";
 import type { Random } from "@wayward/utilities/random/Random";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
+import type { IRange } from "@wayward/utilities/math/Range";
 export interface IItemManagerEvents extends Events<EntityManager<Item>> {
     /**
      * Called before moving items to another container
@@ -109,8 +111,10 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     private static readonly cachedWeights;
     private static readonly cachedMostCommonItemColors;
     private static readonly cachedItemsThatCanBeRelic;
+    private static readonly cachedRuneChanceRanges;
     static readonly cachedItemSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, ItemType[]>>>;
     static getItemTypes(): readonly ItemType[];
+    static getRuneChanceRange(deity: DeityReal): IRange;
     static getItemsWithRecipes(): readonly ItemType[];
     static getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
     static getHighestItemActionTierForAction(action: ActionType): number;
@@ -153,6 +157,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     private static cacheItemTypes;
     private static cacheItemWeights;
     private static cacheCreatureOfferingsAndResources;
+    private static cacheRuneChanceRanges;
     static cacheAsync(): Promise<void>;
     private static cacheRelicItems;
     private static getDisassemblyAndBurnItemTypes;

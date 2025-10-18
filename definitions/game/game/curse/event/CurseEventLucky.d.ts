@@ -9,5 +9,6 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { CurseEvent } from "@wayward/game/game/curse/CurseEvent";
+export declare const CURSE_EVENT_LUCKY_LUCK_MULTIPLIER = 1.1;
 declare const _default: CurseEvent;
 export default _default;

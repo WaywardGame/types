@@ -13,25 +13,29 @@ import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type { IEntityWithStatsEvents } from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IHumanEvents } from "@wayward/game/game/entity/IHuman";
-import type { IStat, IStatBase, Stat, StatDisplayType } from "@wayward/game/game/entity/IStats";
+import type { IStat, IStatBase, StatDisplayType } from "@wayward/game/game/entity/IStats";
+import { Stat } from "@wayward/game/game/entity/IStats";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { ICreatureEvents } from "@wayward/game/game/entity/creature/ICreature";
 import type { IPlayerEvents } from "@wayward/game/game/entity/player/IPlayer";
 import type Player from "@wayward/game/game/entity/player/Player";
+import type { IIslandEvents } from "@wayward/game/game/island/IIsland";
+import type Island from "@wayward/game/game/island/Island";
 import type { Reference } from "@wayward/game/game/reference/IReferenceManager";
 import type Translation from "@wayward/game/language/Translation";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type Component from "@wayward/game/ui/component/Component";
+import type StatComponent from "@wayward/game/ui/screen/screens/game/static/stats/component/StatComponent";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 import type { IUntilSubscriber } from "@wayward/utilities/event/EventEmitter";
-export interface IStatDisplayDescription extends IModdable, IHasImagePath<string | ((entity: EntityWithStats, stat: IStat) => string)> {
+export interface IStatDisplayDescription extends IModdable, IHasImagePath<string | ((entity: EntityWithStats, stat: IStat) => string | undefined)> {
     /**
      * This stat displays as multiple sub-stats. (Incompatible with all other properties)
      *
      * Sub-stats always display as `StatDisplayType.Attribute`
      */
     multi?: Map<Stat, IStatDisplayDescription>;
-    imagePath?: string | ((entity: EntityWithStats | undefined, stat: IStat) => string);
+    imagePath?: string | ((entity: EntityWithStats | undefined, stat: IStat) => string | undefined);
     /**
      * The CSS variable to use for the stat bar color
      * Defaults to white
@@ -48,6 +52,11 @@ export interface IStatDisplayDescription extends IModdable, IHasImagePath<string
      */
     darkColor?: string | ((entity: EntityWithStats | undefined, stat: IStat) => string);
     /**
+     * By default statbars render as though they're full at the minimum value
+     * so that both the ::before and ::after elements can be used for animation.
+     */
+    disableRenderFullAtMin?: true;
+    /**
      * Defaults to `StatDisplayType.Auto`
      */
     displayType?: StatDisplayType;
@@ -58,7 +67,7 @@ export interface IStatDisplayDescription extends IModdable, IHasImagePath<string
      */
     displayOrder?: number;
     /**
-     * Whether this stat display should be unlockable. (Unlocked by doing `player.addMilestone(Milestone.InternalStatDiscovery, stat)`)
+     * Whether this stat display should be unlockable. (Unlocked by doing `player.addMilestone(Milestone.InternalStatDiscovery, Stat[stat])`)
      */
     unlockable?: true;
     /**
@@ -77,7 +86,9 @@ export interface IStatDisplayDescription extends IModdable, IHasImagePath<string
     tooltip?: Reference | ((tooltip: Tooltip, entity: EntityWithStats, stat: IStat) => any);
     subscriber?: (events: IStatDisplayDescriptionSubscriber, refresh: () => void) => any;
     getValue?(entity?: EntityWithStats): number | undefined;
+    getMin?(entity?: EntityWithStats): number | undefined;
     getMax?(entity?: EntityWithStats): number | undefined;
+    tweak?(component: StatComponent): unknown;
 }
 export interface IStatDisplayDescriptionSubscriber {
     removed: Promise<[]>;
@@ -85,6 +96,7 @@ export interface IStatDisplayDescriptionSubscriber {
     human?: IUntilSubscriber<Human, IHumanEvents>;
     player?: IUntilSubscriber<Player, IPlayerEvents>;
     creature?: IUntilSubscriber<Creature, ICreatureEvents>;
+    island?: IUntilSubscriber<Island, IIslandEvents>;
 }
 export declare const STAT_DEFAULT_DISPLAY_ORDER = 100;
 export interface IStatInfo extends Partial<IStatBase> {

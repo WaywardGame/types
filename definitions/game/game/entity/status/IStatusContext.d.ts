@@ -29,6 +29,6 @@ declare namespace IStatusContext {
     function withLevel(status: IStatusContext, level: number): IStatusContext;
     function getInterval(status: IStatusContext): number | false;
     function getOptions(type: StatusType, entity?: EntityWithStats): IGameOptionsStatus;
-    function getEffects(status: IStatusContext): StatusEffectList;
+    function getEffects(status: IStatusContext, displayIndex?: number): StatusEffectList;
 }
 export default IStatusContext;

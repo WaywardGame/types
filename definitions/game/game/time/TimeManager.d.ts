@@ -12,10 +12,11 @@ import type { PartOfDayGranular, TimeString } from "@wayward/game/game/time/ITim
 import { DayQuarter, TimeFormat } from "@wayward/game/game/time/ITimeManager";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class TimeManager {
-    dayLength: number;
+    private dayLength;
     dayPercent: number;
     frozenTime?: number;
     private _ticks;
+    private dayAnchor;
     private readonly transitionPercent;
     get dayStart(): number;
     constructor(turns: number);
@@ -31,6 +32,7 @@ export default class TimeManager {
      * Returns which day it is. Starts at 1.
      */
     get day(): number;
+    getDayLength(): number;
     /**
      * Returns whether time is frozen.
      */
@@ -131,6 +133,7 @@ export default class TimeManager {
      * Used exclusively for save conversion.
      */
     restoreFromDayNight(dayNight: number, dayNightSwitch: 0 | 1): void;
+    setDayLength(value: number): void;
     /**
      * Sets the time.
      * @param time A number between `0` and `1`, where `0` is the start of the day and `1` is the end.

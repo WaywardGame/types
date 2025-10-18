@@ -233,7 +233,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     isDualWielding(): boolean;
     getAttack(attack?: AttackType, weapon?: Item, offHandWeapon?: Item): IAttack;
     getSimplifiedCumulativeAttack(): number;
-    getSimplifiedCumulativeDefense(): number;
+    getSimplifiedCumulativeDefense(defense?: PlayerDefense): number;
     getCombatStrength(): number;
     private getAttackType;
     private getAttackSkillBonus;
@@ -254,7 +254,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     isOffHandDisabled(): boolean;
     getEquipSlotForItem(item: Item, includeDisabled?: true): EquipType | undefined;
     getFanaticism(deity: Deity): number;
-    getCurse(): number;
+    getCurse(refresh?: true): number;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     /**
      * Gets the max health of the player.
@@ -376,7 +376,6 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     checkForWell(): boolean;
     checkForGather(): Doodad | undefined;
     calculateEquipmentStats(): void;
-    private recalculateInsulation;
     private getEquipmentInsulation;
     discoverRecipe(itemType: ItemType, forceUnlock?: boolean, crafted?: ICrafted): void;
     incrementIslandTickCount(): void;
@@ -450,7 +449,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     protected statGain(stat: Stat | ISkillAttribute, bypass: boolean, sourceSkill?: SkillType, times?: number): void;
     protected calculateStats(): void;
     kill(): void;
-    protected resetDefense(skipStatChangedEvent?: boolean): void;
+    protected resetDefense(): void;
     protected sootheChecks(): void;
     private swimSootheCheck;
     /**

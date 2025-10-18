@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
-import type { CurseGroup, CurseEventDisplayMode, CurseEventType, CurseCategory, CursePosition } from "@wayward/game/game/curse/ICurse";
+import type { CurseGroup, CurseEventType, CurseCategory, CursePosition, CurseEventRevealCondition } from "@wayward/game/game/curse/ICurse";
 import type Human from "@wayward/game/game/entity/Human";
 import type Island from "@wayward/game/game/island/Island";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
@@ -23,8 +23,14 @@ import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Item from "@wayward/game/game/item/Item";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type WorldZ from "@wayward/utilities/game/WorldZ";
+import type { StatusEffectList } from "@wayward/game/game/entity/status/StatusEffectList";
+import type { CurseEventInstance } from "@wayward/game/game/curse/Curse";
 /** The API that curse events have access to */
 export interface CurseEventContext {
+    readonly type: CurseEventType;
+    readonly definition: CurseEvent | undefined;
+    /** @deprecated You shouldn't have to use this */
+    readonly instance: CurseEventInstance;
     readonly island: Island;
     /** The epicenter of the curse, based on `CurseEvent.position` */
     readonly point: IVector2;
@@ -54,7 +60,7 @@ export interface CurseEventContext {
      *
      * @param evenWhenAsleep Disable the default functionality of preventing spawns if the cursebearer is asleep
      */
-    spawnCreature(type?: CreatureType, tile?: Tile, evenWhenAsleep?: true): Creature | undefined;
+    spawnCreature(type?: CreatureType, aberrant?: boolean, tile?: Tile, evenWhenAsleep?: true): Creature | undefined;
     /**
      * Note: This does not check whether or not the cursebearer is asleep.
      * @param options The options for extinguishing lights
@@ -65,13 +71,13 @@ export interface CurseEventContext {
      * Mark the given creatures as "curse event" creatures. See the `spawnCreature` function for more information
      */
     claim(...creatures: Creature[]): void;
+    reveal(forSpecificHuman?: ArrayOr<Human>): boolean;
+    discover(forSpecificHuman?: ArrayOr<Human>): boolean;
     /**
      * Inject a custom curse event subscriber class into the game.
      * This class *must* be included in `CurseEvent.subscribers`.
      */
     inject<T extends CurseEventSubscriber>(subscriber: Class<T>): void;
-    setDisplay(mode: CurseEventDisplayMode): void;
-    discover(forSpecificHuman?: Human): void;
     uninject(): void;
     uninject<T extends CurseEventSubscriber>(subscriber: Class<T>): void;
     toString(): string;
@@ -98,7 +104,9 @@ export interface CurseEvent {
      * All curse events default to a weight of 1, so setting this to 0.5 would make it half as likely as any other event.
      */
     weight?: number;
-    discoveredByDefault?: true;
+    revealOn: ArrayOr<CurseEventRevealCondition>;
+    discoverOn: ArrayOr<CurseEventRevealCondition>;
+    effects?(context: CurseEventContext, effects: StatusEffectList): StatusEffectList;
     /** A number 0-1 representing the curse level that the randomly selected player must have in order for this curse event to be chosen */
     requiredCurseLevel?: number;
     requiredBiomes?: {
@@ -108,6 +116,7 @@ export interface CurseEvent {
     /** If one event is marked as conflicting with another, they will both have the conflict registered. */
     conflicts?: CurseEventType[];
     requiredPredicate?(context: CurseEventContext): boolean;
+    /** Defaults to `CursePosition.None` */
     position?: CursePosition;
     /**
      * Controls the radius of the curse event. Defaults to the value of `CURSE_EVENTS_DEFAULT_RADIUS` (at time of writing, 25.)

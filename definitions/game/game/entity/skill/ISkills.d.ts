@@ -22,6 +22,7 @@ export interface ISkillDescription extends IModdable {
     attribute?: Stat | ISkillAttribute;
     runeChance?: RuneChance;
     defaultDamageType?: DamageType;
+    progressionImpact?: number;
 }
 export interface ISkillAttribute {
     stat: Stat;

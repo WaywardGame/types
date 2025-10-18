@@ -34,8 +34,9 @@ export declare enum InspectType {
     Deity = 22,
     Quality = 23,
     Magic = 24,
-    Status = 25,
-    Damage = 26
+    MagicCurse = 25,
+    Status = 26,
+    Damage = 27
 }
 /**
  * A convenience object for the priority of an inspection compared to other inspections. Useful to make an inspection priority
@@ -48,5 +49,6 @@ export declare enum InfoIcon {
     PinSelf = 2,
     PinFriend = 3,
     PinMap = 4,
-    PinLighthouse = 5
+    PinLighthouse = 5,
+    Curse = 6
 }

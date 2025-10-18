@@ -28,7 +28,7 @@ export default class CombatStrengthManager {
      * Calculates a float value between 0 and 1 representing a creature's difficulty.
      */
     getCreature(creature: CreatureType, aberrant?: boolean): number;
-    getCreatureDifficultyAgainstHuman(creature: Creature, human: Human): number;
+    getCreatureDifficultyAgainstHuman(creature: Creature, human: Human, ignoreCurrentStats?: boolean): number;
     private getEstimatedTurnsToKillHuman;
     private getEstimatedTurnsToKillCreature;
     /**

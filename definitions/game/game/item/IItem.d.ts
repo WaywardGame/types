@@ -379,6 +379,19 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * The item type to display instead of the described item type
      */
     displayItem?: SupplierOr<DisplayableItemType | undefined, [Item]>;
+    /**
+     * A number of "display variants" for this item.
+     *
+     * Each variant must be in `ItemTypeExtra`, named `${main item type name}${1-based variant index}`.
+     * IE, `ItemType.JackOLantern` having `displayVariants: 3` will look for `ItemTypeExtra.JackOLantern1`, `JackOLantern2`, and `JackOLantern3`.
+     *
+     * Setting `displayItem` disables the functionality provided by `displayVariants`.
+     *
+     * `displayVariants` uses `aestheticRandom` to determine which variant to use.
+     * `aestheticRandom` is transferred when converting from Item to Doodad and vice versa, so the variant will remain the same,
+     * assuming `displayVariants` is set to the same count on both the item description and doodad description.
+     */
+    displayVariants?: number;
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
     canUnequip?(item: Item): boolean | void;
@@ -1744,7 +1757,15 @@ export declare enum ItemTypeExtra {
     WoodenBookcase_100 = 845,
     RuneOfEvilSplinters = 846,
     RuneOfGoodCharred = 847,
-    TallySticks = 848
+    TallySticks = 848,
+    JackOLantern2 = 849,
+    JackOLantern3 = 850,
+    StrawScarecrow2 = 851,
+    StrawScarecrow3 = 852,
+    CactusScarecrow2 = 853,
+    CactusScarecrow3 = 854,
+    SnowScarecrow2 = 855,
+    SnowScarecrow3 = 856
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
@@ -1911,7 +1932,8 @@ export declare enum ItemTypeGroup {
     InternalNoDropOnDoodadBreak = -9852,
     Sugar = -9851,
     Pan = -9850,
-    All = -9849
+    CurseWard = -9849,
+    All = -9848
 }
 export type StillContainerBaseItemType = ItemType.Waterskin | ItemType.GlassBottle | ItemType.ClayJug | ItemType.CoconutContainer;
 export interface IItemMovementResult {

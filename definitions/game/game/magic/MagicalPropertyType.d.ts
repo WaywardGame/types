@@ -104,6 +104,10 @@ export interface IMagicalPropertyDescription {
      * By default, all magical property types can be inscribed. This allows disabling that feature for this magical property type.
      */
     disableInscription?: true;
+    /**
+     * If set, this magical property cannot appear as a "curse" (inverted value) magical property.
+     */
+    disableCurse?: true;
     subTypeEnum?: Record<string, string | number>;
     isValidEnum?(enumValue: number): boolean;
     translateArgs?(...identity: MagicalPropertyIdentity): TranslationArg[];

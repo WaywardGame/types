@@ -213,6 +213,10 @@ export declare class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private renderStatus;
     private spriteBatchForLayer;
     addTileToViewport(timeStamp: number, visibleTiles: Set<Tile>, tile: Tile, itemBatch: ISpriteBatch | undefined): void;
+    private addDoodadToViewport;
+    private addCreatureToViewport;
+    private addNPCToViewport;
+    private addCorpsesToViewport;
     /**
      * Computes sprites in the viewport
      * @returns True when there's more rendering to be done

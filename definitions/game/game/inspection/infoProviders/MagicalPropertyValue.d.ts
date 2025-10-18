@@ -32,6 +32,7 @@ export default class MagicalPropertyValue extends InfoProvider {
     private currentColor?;
     private current?;
     private magical?;
+    private isCurse?;
     private magicalProperty?;
     private magicalReduction?;
     private magicIncluded?;

@@ -544,7 +544,7 @@ export declare const DEFAULT_ISLAND_TRAVEL_TIME_BASE = 1000;
 /**
  * A multiplier for how much travel time is added by the distance travelled, variable based on the player's seafaring skill.
  */
-export declare const DEFAULT_ISLAND_TRAVEL_TIME_MULTIPLIER: IRange;
+export declare const DEFAULT_ISLAND_TRAVEL_TIME_MULTIPLIER: IRange<number>;
 /**
  * The amount of travel time it takes to travel to civilization
  */
@@ -572,7 +572,7 @@ export declare const PLAYER_TRAVEL_CIVILIZATION_STAT_REDUCTION = 5;
  * - 100% skill = 60 stamina lost
  * - 125% skill = 0 stamina lost
  */
-export declare const PLAYER_TRAVEL_SWIM_STAMINA_STAT_REDUCTION: IRange;
+export declare const PLAYER_TRAVEL_SWIM_STAMINA_STAT_REDUCTION: IRange<number>;
 /**
  * The minimum remaining stamina the player should have after swimming
  */

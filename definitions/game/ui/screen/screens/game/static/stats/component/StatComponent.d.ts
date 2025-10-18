@@ -48,6 +48,8 @@ export default abstract class StatComponent extends Component {
     readonly statIcon: ImagePath<PathType.StatIcon>;
     private readonly entityRef;
     protected get entity(): EntityWithStats | undefined;
+    private hidingDueToMilestone;
+    private updatingVisibility;
     constructor(entity: EntityWithStats, stat: Stat, noEvents?: true, statDescription?: import("../IStatDisplayDescription").IStatDisplayDescription | undefined);
     private onUpdateMilestone;
     protected onRemove(): void;
@@ -85,6 +87,7 @@ export default abstract class StatComponent extends Component {
     protected onStatChange(_?: any, stat?: IStat, oldValue?: number, info?: IStatChangeInfo): void;
     private getTooltip;
     private getTooltipLocation;
+    private updateVisibility;
 }
 export declare class StatsContainer extends Component {
     private readonly entity;

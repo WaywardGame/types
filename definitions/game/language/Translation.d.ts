@@ -135,6 +135,7 @@ declare namespace Translation {
     export const deity: Translator<Deity, [color?: boolean | undefined]>;
     export let action: Translator<ActionType | UsableActionType>;
     export let magic: Translator<MagicalPropertyType, [color?: boolean, obscured?: boolean]>;
+    export let magicCurse: Translator<MagicalPropertyType, [color?: boolean, obscured?: boolean]>;
     export const equipSlot: Translator<EquipType, [type?: EquipSlotTranslation | undefined]>;
     export const quality: Translator<Quality, [color?: any]>;
     export const qualityList: (qualities: ArrayOr<Quality>, color?: boolean, ender?: ListEnder | false) => Translation;

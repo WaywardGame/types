@@ -1013,6 +1013,14 @@ declare const dictionaryMap: {
         RuneOfEvilSplinters: ItemTypeExtra.RuneOfEvilSplinters;
         RuneOfGoodCharred: ItemTypeExtra.RuneOfGoodCharred;
         TallySticks: ItemTypeExtra.TallySticks;
+        JackOLantern2: ItemTypeExtra.JackOLantern2;
+        JackOLantern3: ItemTypeExtra.JackOLantern3;
+        StrawScarecrow2: ItemTypeExtra.StrawScarecrow2;
+        StrawScarecrow3: ItemTypeExtra.StrawScarecrow3;
+        CactusScarecrow2: ItemTypeExtra.CactusScarecrow2;
+        CactusScarecrow3: ItemTypeExtra.CactusScarecrow3;
+        SnowScarecrow2: ItemTypeExtra.SnowScarecrow2;
+        SnowScarecrow3: ItemTypeExtra.SnowScarecrow3;
     };
     65: {
         Bow: ItemType.Bow;
@@ -1863,6 +1871,14 @@ declare const dictionaryMap: {
         RuneOfEvilSplinters: ItemTypeExtra.RuneOfEvilSplinters;
         RuneOfGoodCharred: ItemTypeExtra.RuneOfGoodCharred;
         TallySticks: ItemTypeExtra.TallySticks;
+        JackOLantern2: ItemTypeExtra.JackOLantern2;
+        JackOLantern3: ItemTypeExtra.JackOLantern3;
+        StrawScarecrow2: ItemTypeExtra.StrawScarecrow2;
+        StrawScarecrow3: ItemTypeExtra.StrawScarecrow3;
+        CactusScarecrow2: ItemTypeExtra.CactusScarecrow2;
+        CactusScarecrow3: ItemTypeExtra.CactusScarecrow3;
+        SnowScarecrow2: ItemTypeExtra.SnowScarecrow2;
+        SnowScarecrow3: ItemTypeExtra.SnowScarecrow3;
     };
     66: typeof ItemTypeExtra;
     67: typeof ItemTypeGroup;
@@ -2847,6 +2863,14 @@ export declare const strictDictionaries: {
         RuneOfEvilSplinters: ItemTypeExtra.RuneOfEvilSplinters;
         RuneOfGoodCharred: ItemTypeExtra.RuneOfGoodCharred;
         TallySticks: ItemTypeExtra.TallySticks;
+        JackOLantern2: ItemTypeExtra.JackOLantern2;
+        JackOLantern3: ItemTypeExtra.JackOLantern3;
+        StrawScarecrow2: ItemTypeExtra.StrawScarecrow2;
+        StrawScarecrow3: ItemTypeExtra.StrawScarecrow3;
+        CactusScarecrow2: ItemTypeExtra.CactusScarecrow2;
+        CactusScarecrow3: ItemTypeExtra.CactusScarecrow3;
+        SnowScarecrow2: ItemTypeExtra.SnowScarecrow2;
+        SnowScarecrow3: ItemTypeExtra.SnowScarecrow3;
     };
     65: {
         Bow: ItemType.Bow;
@@ -3697,6 +3721,14 @@ export declare const strictDictionaries: {
         RuneOfEvilSplinters: ItemTypeExtra.RuneOfEvilSplinters;
         RuneOfGoodCharred: ItemTypeExtra.RuneOfGoodCharred;
         TallySticks: ItemTypeExtra.TallySticks;
+        JackOLantern2: ItemTypeExtra.JackOLantern2;
+        JackOLantern3: ItemTypeExtra.JackOLantern3;
+        StrawScarecrow2: ItemTypeExtra.StrawScarecrow2;
+        StrawScarecrow3: ItemTypeExtra.StrawScarecrow3;
+        CactusScarecrow2: ItemTypeExtra.CactusScarecrow2;
+        CactusScarecrow3: ItemTypeExtra.CactusScarecrow3;
+        SnowScarecrow2: ItemTypeExtra.SnowScarecrow2;
+        SnowScarecrow3: ItemTypeExtra.SnowScarecrow3;
     };
     66: typeof ItemTypeExtra;
     67: typeof ItemTypeGroup;

@@ -45,6 +45,7 @@ export declare class Stats extends Component {
      * separated by how a given stat should be displayed
      */
     private getStats;
+    private getStat;
     private getDisplayOrder;
     /**
      * Returns how the stat on an entity should be displayed.

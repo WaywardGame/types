@@ -173,7 +173,14 @@ export interface IGameOptions {
          */
         qualities: DefaultMap<Quality, IGameOptionsItemQuality>;
     };
+    /**
+     * Controls random island events (excluding curse events).
+     */
     randomEvents: boolean;
+    /**
+     * Controls curse events
+     */
+    curseEvents: boolean;
 }
 export declare enum UnlockedRecipesStrategy {
     StartWithNone = 0,

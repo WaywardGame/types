@@ -94,7 +94,11 @@ export declare enum Source {
     /**
      * Trading-related messages
      */
-    Trading = 18
+    Trading = 18,
+    /**
+     * Messages from curse events
+     */
+    Curse = 19
 }
 export interface IMessage {
     id: number;

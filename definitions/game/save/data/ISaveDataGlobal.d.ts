@@ -47,6 +47,7 @@ export interface IOptions {
     disableOverlaySupport: boolean;
     disableQuitConfirmation: boolean;
     disableSpritePack: boolean;
+    disableUIAnimation: boolean;
     disableUIEffects: boolean;
     disableUIOpacity: boolean;
     discoveredEverything: boolean;

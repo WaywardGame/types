@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { ItemTypeExtra } from "@wayward/game/game/item/IItem";
-declare const items: Descriptions<ItemTypeExtra, string | [string, string?]>;
-export default items;
+declare const _default: Descriptions<ItemTypeExtra, string | [string, string?]>;
+export default _default;

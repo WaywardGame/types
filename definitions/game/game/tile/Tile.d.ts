@@ -153,6 +153,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Gets the primary/first blocking entity on this tile.
      */
     get entity(): Entity | undefined;
+    get entities(): Entity[];
     /**
      * Gets well data on this tile.
      */
