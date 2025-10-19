@@ -109,7 +109,7 @@ declare namespace Curse {
     function unload(island: Island): void;
     function cleanup(island: Island, humans?: Human[], isMorning?: boolean): void;
     function cleanupEphemerals(island: Island): void;
-    function createCurseEventContext(instance: CurseEventInstance, island: Island, humans?: Human[], cursebearer?: Human): CurseEventContext;
+    function createCurseEventContext(instance: CurseEventInstance, island: Island): CurseEventContext;
 }
 declare const SYMBOL_CURSE_EVENT_SUBSCRIBER_INSTANCES: unique symbol;
 declare const SYMBOL_CURSE_EVENT_GLOBAL_SUBSCRIBER_INSTANCE: unique symbol;

@@ -18,11 +18,13 @@ declare namespace ErrorReporting {
      * If this is called from a function that is registered in `Errors.ts` as a skipped callsite, you might have to pass `-1`.
      * @param id The ID of this warning. Can be `Log.simplify` strings.
      */
+    function warnForCaller(id: ArrayOr<string | Log.SimplifyString>, ...message: any[]): void;
     function warnForCaller(skip: number, id: ArrayOr<string | Log.SimplifyString>, ...message: any[]): void;
     /**
      * Warn about something once per session based on unique warning ids.
      * This is like how node.js does warnings in console.
      */
     function warnOncePerSession(warningId: ArrayOr<string | Log.SimplifyString>, ...message: any[]): void;
+    function warnOncePerSession(skip: number, warningId: ArrayOr<string | Log.SimplifyString>, ...message: any[]): void;
 }
 export default ErrorReporting;
