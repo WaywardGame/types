@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Human from "@wayward/game/game/entity/Human";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type { SimpleInfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";

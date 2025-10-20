@@ -14,7 +14,7 @@ import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type { IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
 import { GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import type Human from "@wayward/game/game/entity/Human";
-import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";

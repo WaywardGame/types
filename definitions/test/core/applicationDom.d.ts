@@ -15,7 +15,7 @@ export declare class ApplicationDom {
     private readonly browser;
     private readonly logger;
     constructor(browser: WebdriverIO.Browser, logger: ApplicationLogger);
-    executeFunction<T2 extends any[], T>(executor: (...extraArgs: T2) => T | Promise<T>, ...extraArgs: T2): Promise<T>;
+    executeFunction<T2 extends unknown[], T>(executor: (...extraArgs: webdriverio.TransformElement<T2>) => T | Promise<T>, ...extraArgs: T2): Promise<T>;
     executeJavaScript<T>(javascript: string): Promise<T>;
     getElement(selector: string): Promise<WebdriverIO.Element>;
     getElements(selector: string, onlyVisible?: boolean): Promise<WebdriverIO.Element[]>;

@@ -19,7 +19,7 @@ import EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
-import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type { EquipType } from "@wayward/game/game/entity/IHuman";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
@@ -34,7 +34,7 @@ import type Item from "@wayward/game/game/item/Item";
 import type { IHasMagic } from "@wayward/game/game/magic/IMagicalProperty";
 import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
-import type { IHasInsulation, TempType } from "@wayward/game/game/temperature/ITemperature";
+import type { IHasInsulation, IInsulationResult, TempType } from "@wayward/game/game/temperature/ITemperature";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import FireStage from "@wayward/game/game/tile/events/fire/FireStage";
@@ -233,7 +233,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     removeMagic(): void;
     unhitch(): void;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean, damage?: number): void;
-    getDefaultDurability(random?: import("@wayward/utilities/random/Random").Random<import("@wayward/utilities/random/generators/LegacySeededGenerator").LegacySeededGenerator | import("@wayward/utilities/random/generators/PCGSeededGenerator").PCGSeededGenerator>): number;
+    getDefaultDurability(random?: import("@wayward/utilities/random/Random").Random<import("@wayward/utilities/random/generators/PCGSeededGenerator").PCGSeededGenerator | import("@wayward/utilities/random/generators/LegacySeededGenerator").LegacySeededGenerator>): number;
     /**
      * Gets the container to use for doodad executed actions
      */
@@ -276,7 +276,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     getLiquidGatherType(): keyof ILiquidGather | undefined;
     getProducedTemperature(): number | undefined;
-    getInsulation(type: TempType): number | undefined;
+    getInsulation(type: TempType): IInsulationResult | undefined;
     isIslandPort(): boolean;
     /**
      * Refills solar stills when they are on shallow water automatically.

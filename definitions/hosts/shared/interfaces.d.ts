@@ -194,7 +194,7 @@ export interface IPath {
     isAbsolute(path: string): boolean;
 }
 export interface INapi {
-    discord: INapiDiscord;
+    discord: INapiDiscord | undefined;
 }
 export interface INapiDiscord {
     initialize(apiKey: string, appId?: string): void;

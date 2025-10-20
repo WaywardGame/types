@@ -15,7 +15,7 @@ import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type Human from "@wayward/game/game/entity/Human";
 import type { EntityType } from "@wayward/game/game/entity/IEntity";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../skill/ISkills";
 import type { Action } from "@wayward/game/game/entity/action/Action";
 import type IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type { INotUsableMessage } from "@wayward/game/game/entity/action/actions/helper/NotUsableMessage";

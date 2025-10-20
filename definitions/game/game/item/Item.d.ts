@@ -20,7 +20,7 @@ import type Human from "@wayward/game/game/entity/Human";
 import type { IMovingData } from "@wayward/game/game/entity/IEntity";
 import { AttackType, DamageType, EntityType } from "@wayward/game/game/entity/IEntity";
 import type { EquipType } from "@wayward/game/game/entity/IHuman";
-import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type ActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
@@ -42,7 +42,7 @@ import type { IMagicalPropertyManagerEvents } from "@wayward/game/game/magic/Mag
 import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
-import type { IHasInsulation, TempType } from "@wayward/game/game/temperature/ITemperature";
+import { type IHasInsulation, type IInsulationResult, type TempType } from "@wayward/game/game/temperature/ITemperature";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import FireStage from "@wayward/game/game/tile/events/fire/FireStage";
@@ -366,8 +366,8 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     canBeRefined(): boolean;
     getProducedTemperature(): number | undefined;
     postProcessDecay(): void;
-    getContainerInsulation(type: TempType): number;
-    getEquipmentInsulation(type: TempType): number;
+    getContainerInsulation(type: TempType): IInsulationResult | undefined;
+    getEquipmentInsulation(type: TempType): IInsulationResult | undefined;
     getBaseTemperature(): number | undefined;
     /**
      * Gets the ticks until this item will decay at 1x decay speed.

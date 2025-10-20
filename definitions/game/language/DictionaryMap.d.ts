@@ -17,7 +17,8 @@ import { DoodadType, DoodadTypeExtra, DoodadTypeGroup, GrowingStage } from "@way
 import { CombatDangerLevel } from "@wayward/game/game/entity/ICombatStrength";
 import { CombatStrength } from "@wayward/game/game/entity/ICombatStrength";
 import { DamageType } from "@wayward/game/game/entity/IEntity";
-import { EquipType, SkillType } from "@wayward/game/game/entity/IHuman";
+import { EquipType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import { MapQuality } from "@wayward/game/game/entity/action/actions/map/MapQuality";

@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../skill/ISkills";
 import type { StatusEffect, StatusEffectTypeArguments } from "@wayward/game/game/entity/status/IStatus";
 import { StatusEffectType } from "@wayward/game/game/entity/status/IStatus";
 import type IStatusContext from "@wayward/game/game/entity/status/IStatusContext";

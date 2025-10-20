@@ -11,7 +11,7 @@
 import { TileUpdateType } from "@wayward/game/game/IGame";
 import Human from "@wayward/game/game/entity/Human";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
-import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type { IDamageInfo } from "@wayward/game/game/entity/creature/ICreature";
 import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";

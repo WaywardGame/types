@@ -12,7 +12,7 @@ import type { CurseEvent, CurseEventContext } from "@wayward/game/game/curse/Cur
 import { CurseEventSubscriber } from "@wayward/game/game/curse/CurseEvent";
 import { CurseCategory, CurseComponent, CurseEventDisplayMode, CurseEventType } from "@wayward/game/game/curse/ICurse";
 import type Human from "@wayward/game/game/entity/Human";
-import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type Island from "@wayward/game/game/island/Island";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import { IRange, IRangeRange } from "@wayward/utilities/math/Range";
@@ -106,6 +106,7 @@ declare namespace Curse {
     function spawnCurseEvents(island: Island, humans: Human[]): void;
     function attemptCurseEventSpawn(category: CurseCategory, human: Human, curse: number, humans: Human[], events: CurseEventInstance[]): CurseEventInstance | undefined;
     function attemptSpecificCurseEventSpawn(human: Human, type: CurseEventType, humans: Human[], curse?: number): CurseEventInstance | undefined;
+    function attemptSpecificCurseEventSpawnOnPlayer(player: Human, curseType: CurseEventType): CurseEventInstance | undefined;
     function unload(island: Island): void;
     function cleanup(island: Island, humans?: Human[], isMorning?: boolean): void;
     function cleanupEphemerals(island: Island): void;

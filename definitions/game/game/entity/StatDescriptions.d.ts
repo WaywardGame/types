@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Human from "@wayward/game/game/entity/Human";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "./skill/ISkills";
 import { Stat } from "@wayward/game/game/entity/IStats";
 export interface IStatGainInfo {
     amount?: number;

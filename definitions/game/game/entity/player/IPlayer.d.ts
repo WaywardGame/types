@@ -10,7 +10,8 @@
  */
 import type Entity from "@wayward/game/game/entity/Entity";
 import type Human from "@wayward/game/game/entity/Human";
-import type { HairColor, HairStyle, SkillType, SkinColor } from "@wayward/game/game/entity/IHuman";
+import type { HairColor, HairStyle, SkinColor } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../skill/ISkills";
 import type { TitleType } from "@wayward/game/game/entity/action/actions/SetTitle";
 import type { IMessage } from "@wayward/game/game/entity/player/IMessageManager";
 import type MessageManager from "@wayward/game/game/entity/player/MessageManager";

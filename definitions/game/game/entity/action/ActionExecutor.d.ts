@@ -12,7 +12,7 @@ import type { SfxType } from "@wayward/game/audio/IAudio";
 import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type Human from "@wayward/game/game/entity/Human";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../skill/ISkills";
 import type { ActionArguments, ActionExecutorEvents, AnyActionDescription, IActionApi, IActionArgumentTypeMap, IActionConfirmerApi, IActionDescription, IActionExample, IActionParticle, IActionSoundEffect, IActionUsable, IProtectedItems, SkillGain } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument, ActionType, BlockFlag, IActionNotUsable } from "@wayward/game/game/entity/action/IAction";
 import IActionContext from "@wayward/game/game/entity/action/IActionContext";

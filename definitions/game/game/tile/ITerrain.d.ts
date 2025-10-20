@@ -14,7 +14,7 @@ import type { Quality } from "@wayward/game/game/IObject";
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
 import type { GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import { DoodadType } from "@wayward/game/game/doodad/IDoodad";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../entity/skill/ISkills";
 import type { WaterType } from "@wayward/game/game/island/IIsland";
 import type { IContainer, IMaybeContainer, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";

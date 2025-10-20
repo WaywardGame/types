@@ -15,7 +15,7 @@ import { TickHelper } from "@wayward/game/game/TickHelper";
 import type { BiomeTypes, IBiomeDescription } from "@wayward/game/game/biome/IBiome";
 import DoodadManager from "@wayward/game/game/doodad/DoodadManager";
 import Human from "@wayward/game/game/entity/Human";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../entity/skill/ISkills";
 import Creature from "@wayward/game/game/entity/creature/Creature";
 import CreatureManager from "@wayward/game/game/entity/creature/CreatureManager";
 import type { IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "@wayward/game/game/entity/creature/ICreature";

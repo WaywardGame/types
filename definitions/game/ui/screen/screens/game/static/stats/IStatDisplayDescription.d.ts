@@ -26,6 +26,7 @@ import type Translation from "@wayward/game/language/Translation";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type Component from "@wayward/game/ui/component/Component";
 import type StatComponent from "@wayward/game/ui/screen/screens/game/static/stats/component/StatComponent";
+import type { IStatComponentEvents } from "@wayward/game/ui/screen/screens/game/static/stats/component/StatComponent";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 import type { IUntilSubscriber } from "@wayward/utilities/event/EventEmitter";
 export interface IStatDisplayDescription extends IModdable, IHasImagePath<string | ((entity: EntityWithStats, stat: IStat) => string | undefined)> {
@@ -84,7 +85,7 @@ export interface IStatDisplayDescription extends IModdable, IHasImagePath<string
      * A function that will initialize a tooltip for this stat element, or a reference to show a tooltip for
      */
     tooltip?: Reference | ((tooltip: Tooltip, entity: EntityWithStats, stat: IStat) => any);
-    subscriber?: (events: IStatDisplayDescriptionSubscriber, refresh: () => void) => any;
+    subscriber?: (events: IStatDisplayDescriptionSubscriber, statComponent: StatComponent) => any;
     getValue?(entity?: EntityWithStats): number | undefined;
     getMin?(entity?: EntityWithStats): number | undefined;
     getMax?(entity?: EntityWithStats): number | undefined;
@@ -97,6 +98,7 @@ export interface IStatDisplayDescriptionSubscriber {
     player?: IUntilSubscriber<Player, IPlayerEvents>;
     creature?: IUntilSubscriber<Creature, ICreatureEvents>;
     island?: IUntilSubscriber<Island, IIslandEvents>;
+    stat?: IUntilSubscriber<StatComponent, IStatComponentEvents>;
 }
 export declare const STAT_DEFAULT_DISPLAY_ORDER = 100;
 export interface IStatInfo extends Partial<IStatBase> {

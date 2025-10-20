@@ -15,7 +15,7 @@ declare const requirements: {
     2: QuestRequirement<[import("../../creature/ICreature").CreatureType, number], import("@wayward/game/game/entity/player/quest/requirement/KillCreatureRequirement").IKillCreatureRequirement>;
     3: QuestRequirement<[number], import("@wayward/game/game/entity/player/quest/requirement/KillCreaturesRequirement").IKillCreaturesRequirement>;
     1: QuestRequirement<[(import("../../../item/IItem").ItemType | import("../../../item/IItem").ItemTypeGroup)[], number], {}>;
-    4: QuestRequirement<[import("../../IHuman").SkillType, number], {}>;
+    4: QuestRequirement<[import("../../skill/ISkills").SkillType, number], {}>;
     5: QuestRequirement<[number], {}>;
     6: QuestRequirement<[number], {}>;
     7: QuestRequirement<[import("../../IHuman").EquipType[], import("../../../item/IItem").ItemTypeGroup[]], {}>;

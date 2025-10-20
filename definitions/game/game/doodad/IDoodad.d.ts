@@ -13,7 +13,7 @@ import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Human from "@wayward/game/game/entity/Human";
 import type { ICausesDamage, ICausesStatus } from "@wayward/game/game/entity/IEntity";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../entity/skill/ISkills";
 import type { IDecayTemperatureRange } from "@wayward/game/game/IGame";
 import type { ILootItem } from "@wayward/game/game/ILoot";
 import type { IObjectDescription, IObjectOptions } from "@wayward/game/game/IObject";

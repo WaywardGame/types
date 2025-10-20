@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IHasBuilder } from "@wayward/game/game/doodad/IDoodad";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../../entity/skill/ISkills";
 import type Player from "@wayward/game/game/entity/player/Player";
 import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";

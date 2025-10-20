@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import { TitleType } from "@wayward/game/game/entity/action/actions/SetTitle";
 import { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import Translation from "@wayward/game/language/Translation";

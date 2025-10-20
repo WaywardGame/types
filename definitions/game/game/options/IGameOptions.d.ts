@@ -12,7 +12,7 @@ import type { Quality, QualityNatural } from "@wayward/game/game/IObject";
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
 import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type { AttackType } from "@wayward/game/game/entity/IEntity";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../entity/skill/ISkills";
 import type { Stat } from "@wayward/game/game/entity/IStats";
 import type { CreatureType, TileGroup } from "@wayward/game/game/entity/creature/ICreature";
 import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";

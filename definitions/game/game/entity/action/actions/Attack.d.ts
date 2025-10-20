@@ -10,7 +10,7 @@
  */
 import type Human from "@wayward/game/game/entity/Human";
 import { AttackType } from "@wayward/game/game/entity/IEntity";
-import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";

@@ -40,6 +40,7 @@ export declare enum StatClasses {
     AttributeLabel = "stat-attribute-label"
 }
 export interface IStatComponentEvents extends Events<Component> {
+    refresh(): any;
     update(): any;
     resubscribe(): any;
 }
@@ -49,11 +50,14 @@ export default abstract class StatComponent extends Component {
     event: IEventEmitter<this, IStatComponentEvents>;
     readonly statIcon: ImagePath<PathType.StatIcon>;
     private readonly entityRef;
-    protected get entity(): EntityWithStats | undefined;
+    get entity(): EntityWithStats | undefined;
     private hidingDueToMilestone;
     private updatingVisibility;
     constructor(entity: EntityWithStats, stat: Stat, noEvents?: true, statDescription?: IStatDisplayDescription | undefined);
+    get asBar(): Statbar | undefined;
+    get asAttribute(): StatAttribute | undefined;
     private subscribe;
+    refresh(): void;
     private onUpdateMilestone;
     protected onRemove(): void;
     /**
@@ -109,6 +113,7 @@ export declare class Statbar extends StatComponent {
     getTextElement(): Text;
     getDisplayElement(): Component;
     getGenericStatValue(stat: IStatMax): TranslationImpl;
+    get asBar(): Statbar;
     /**
      * Overrides the superclass method of the same name. Calls the superclass method, then updates the CSS
      * property `--stat-percent`, to update the statbar's fill width.
@@ -118,6 +123,7 @@ export declare class Statbar extends StatComponent {
 export declare class StatAttribute extends StatComponent {
     readonly attribute?: Text;
     readonly label?: Text;
+    get asAttribute(): StatAttribute;
     constructor(entity: EntityWithStats, stat: Stat, noEvents?: true, statDescription?: IStatDisplayDescription | undefined);
     getTextElement(): Text | undefined;
     getDisplayElement(): Text | undefined;

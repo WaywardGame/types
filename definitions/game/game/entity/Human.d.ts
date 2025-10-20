@@ -18,7 +18,8 @@ import EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type { IAttack, ICausesDamage, IEntityConstructorOptions, IMovingData, MoveFlag } from "@wayward/game/game/entity/IEntity";
 import { AttackType, DamageType, IStatChangeInfo, StatusChangeReason } from "@wayward/game/game/entity/IEntity";
 import type { HumanTag, ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkToChangeReason } from "@wayward/game/game/entity/IHuman";
-import { EquipType, RestCancelReason, SkillType } from "@wayward/game/game/entity/IHuman";
+import { EquipType, RestCancelReason } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type { IStat } from "@wayward/game/game/entity/IStats";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { StatChangeTimerFactory } from "@wayward/game/game/entity/StatFactory";
@@ -48,7 +49,7 @@ import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import Runekeeper from "@wayward/game/game/milestones/milestone/Runekeeper";
 import type { IGameOptionsPartial, IGameOptionsPlayer } from "@wayward/game/game/options/IGameOptions";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
-import type { IHasInsulation } from "@wayward/game/game/temperature/ITemperature";
+import type { IHasInsulation, IInsulationResult } from "@wayward/game/game/temperature/ITemperature";
 import { TempType } from "@wayward/game/game/temperature/ITemperature";
 import type { FindPathRange } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -435,7 +436,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      */
     getBarteringBonus(baseCredits: number): number;
     getProducedTemperature(): number | undefined;
-    getInsulation(type: TempType): number;
+    getInsulation(type: TempType): IInsulationResult;
     resetStatTimers(type?: StatChangeCurrentTimerStrategy, isNPC?: boolean): void;
     resetChangeTimers(): void;
     private getBaseStatBonuses;

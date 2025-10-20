@@ -11,7 +11,7 @@
 import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../../entity/skill/ISkills";
 import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
 import type { ItemType } from "@wayward/game/game/item/IItem";
 declare namespace Runekeeper {

@@ -16,7 +16,7 @@ import EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
-import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";

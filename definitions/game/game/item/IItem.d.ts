@@ -17,7 +17,7 @@ import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
 import type Human from "@wayward/game/game/entity/Human";
 import type { DamageType, Defense, EntityType, ICastable, MoveType } from "@wayward/game/game/entity/IEntity";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../entity/skill/ISkills";
 import { type Delay, type EquipType } from "@wayward/game/game/entity/IHuman";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { IActionApi } from "@wayward/game/game/entity/action/IAction";

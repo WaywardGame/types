@@ -19,6 +19,7 @@ import type { CreatureType, IDamageInfo } from "@wayward/game/game/entity/creatu
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type { IMovementIntent, WalkTo, WeightStatus } from "@wayward/game/game/entity/player/IPlayer";
 import type PlayerDefense from "@wayward/game/game/entity/player/PlayerDefense";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type { ISkillEvents } from "@wayward/game/game/entity/skill/SkillManager";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
@@ -355,22 +356,6 @@ export declare const EQUIP_SLOTS: EquipType[];
 export declare const EQUIP_SLOTS_FREE: EquipType[];
 export declare const EQUIP_SLOT_ITEM_GROUPS: Record<EquipType, ItemTypeGroup | undefined>;
 export declare const equipmentRenderOrder: EquipType[];
-export type InsulationWeight = number | [number, "onlyWhenEquipped"];
-export declare const equipSlotInsulationWeights: Record<TempType, PartialRecord<EquipType, InsulationWeight>>;
-export interface IExcludedWhenLowering {
-    excludeIfLowering: true;
-}
-/**
- * @param weight The weight of this slot in the calculation. Compare this number to the weights of other slots.
- * @param insulation The insulation value of the item in this slot.
- * @param excluded Whether this slot's insulation should be excluded if it lowers the resulting insulation value.
- */
-export type CalculatedEquipSlotInsulation = [
-    weight: number,
-    insulation: number,
-    excluded?: IExcludedWhenLowering
-];
-export declare function calculateEquipSlotInsulation(type: TempType, slot: EquipType, equipped?: Item): CalculatedEquipSlotInsulation;
 export declare const insulationRangeWhenSwimming: Record<TempType, IRange>;
 export declare enum HairColor {
     "#e7c978" = 0,// blonde
@@ -434,42 +419,6 @@ export interface IRestData {
 export declare enum RestType {
     Resting = 0,
     Sleeping = 1
-}
-export declare enum SkillType {
-    None = 0,
-    Chemistry = 1,
-    Anatomy = 2,
-    Marksmanship = 3,
-    Blacksmithing = 4,
-    Botany = 5,
-    Camping = 6,
-    Cartography = 7,
-    Claythrowing = 8,
-    Cooking = 9,
-    Fishing = 10,
-    Fletching = 11,
-    Glassblowing = 12,
-    Leatherworking = 13,
-    Lockpicking = 14,
-    Lumberjacking = 15,
-    Mining = 16,
-    Mycology = 17,
-    Parrying = 18,
-    Stonecrafting = 19,
-    Swimming = 20,
-    Tactics = 21,
-    Tailoring = 22,
-    Throwing = 23,
-    Tinkering = 24,
-    Trapping = 25,
-    Woodworking = 26,
-    Taming = 27,
-    Horticulture = 28,
-    Bartering = 29,
-    Seafaring = 30,
-    Thaumaturgy = 31,
-    DualWielding = 32,
-    Theurgy = 33
 }
 export interface ICrafted {
     unlockTime: number;

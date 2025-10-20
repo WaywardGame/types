@@ -8,10 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type Entity from "@wayward/game/game/entity/Entity";
+import type { QualityReal } from "@wayward/game/game/IObject";
 import type Island from "@wayward/game/game/island/Island";
 import type TimeManager from "@wayward/game/game/time/TimeManager";
 import type WorldZ from "@wayward/utilities/game/WorldZ";
-import type { IRange } from "@wayward/utilities/math/Range";
+import { IRange } from "@wayward/utilities/math/Range";
 export declare enum Temperature {
     Coldest = -100,
     Cold = -50,
@@ -75,7 +77,7 @@ export interface IHasInsulation {
      * separate temperature "biome".
      * - Values in between change how much of the temperatures are produced/used on either side.
      */
-    getInsulation?(type: TempType): number | undefined;
+    getInsulation?(type: TempType): IInsulationResult | undefined;
     getBaseTemperature?(): number | undefined;
 }
 export interface IInsulationDescription {
@@ -96,7 +98,19 @@ export interface IInsulationDescription {
      */
     [TempType.Heat]?: number;
 }
-export declare function getInsulationTypesOrderedByRelevance(island: Island): TempType[];
+export declare const TEMPERATURE_INSULATION_QUALITY_MULTIPLIERS: Record<QualityReal, number>;
+export declare const TEMPERATURE_INSULATION_MAGIC_MULTIPLIER_RANGE: IRange<number>;
+export interface IInsulationResult {
+    base: number;
+    qualityBonus: number;
+    magicBonus: number;
+    total: number;
+}
+export declare namespace Insulation {
+    function get(entity: Entity | undefined, insulation: IInsulationDescription | undefined, type: TempType): IInsulationResult | undefined;
+    function equals(a: IInsulationResult | undefined, b: IInsulationResult | undefined): boolean;
+    function getTypesOrderedByRelevance(island: Island): TempType[];
+}
 export interface ITemperatureDescription {
     /**
      * The produced temperature of this object — objects whose temperature affects surrounding objects.
