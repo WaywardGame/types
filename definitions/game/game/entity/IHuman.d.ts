@@ -425,7 +425,8 @@ export interface ICrafted {
     newUnlock: boolean;
 }
 export interface ICheckUnderOptions {
-    skipDoodadEvents?: boolean;
+    skipDoodadsAndTileEvents?: boolean;
+    doItemCrushing?: boolean;
     burned?: boolean;
 }
 export declare const craftingChances: Descriptions<RecipeLevel, number>;

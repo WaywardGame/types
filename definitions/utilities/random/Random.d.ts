@@ -46,6 +46,7 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
      */
     intInRange(min: number, max: number): number;
     intInRange(range: IRange): number;
+    intInRange(range?: IRange): number | undefined;
     /**
      * Generates a random boolean
      */

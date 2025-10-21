@@ -15,7 +15,8 @@ export declare enum DataComponentType {
     CurseCumulativeEvilCrafting = 2,
     CurseCumulativeKilling = 3,
     CurseHighestAttack = 4,
-    CurseHighestDefense = 5
+    CurseHighestDefense = 5,
+    CurseMilestoneObliviousness = 6
 }
 interface DataComponent<T, DEFAULT_VALUE extends T | undefined = undefined> {
     readonly type: DataComponentType;

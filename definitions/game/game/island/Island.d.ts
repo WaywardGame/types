@@ -343,4 +343,5 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * @returns number equal to the maximum travel time.
      */
     getMaximumTravelTime(): number;
+    canMelt(terrainType: TerrainType, tile: Tile): boolean;
 }

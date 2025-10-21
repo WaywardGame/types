@@ -17,7 +17,7 @@ import type Entity from "@wayward/game/game/entity/Entity";
 import EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type { IAttack, ICausesDamage, IEntityConstructorOptions, IMovingData, MoveFlag } from "@wayward/game/game/entity/IEntity";
 import { AttackType, DamageType, IStatChangeInfo, StatusChangeReason } from "@wayward/game/game/entity/IEntity";
-import type { HumanTag, ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkToChangeReason } from "@wayward/game/game/entity/IHuman";
+import type { HumanTag, ICheckUnderOptions as ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkToChangeReason } from "@wayward/game/game/entity/IHuman";
 import { EquipType, RestCancelReason } from "@wayward/game/game/entity/IHuman";
 import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type { IStat } from "@wayward/game/game/entity/IStats";

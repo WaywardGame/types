@@ -53,6 +53,7 @@ import Multitasker from "@wayward/game/game/options/modifiers/milestone/modifier
 import Murderer from "@wayward/game/game/options/modifiers/milestone/modifiers/Murderer";
 import Navigator from "@wayward/game/game/options/modifiers/milestone/modifiers/Navigator";
 import Notekeeper from "@wayward/game/game/options/modifiers/milestone/modifiers/Notekeeper";
+import Oblivious from "@wayward/game/game/options/modifiers/milestone/modifiers/Oblivious";
 import Operator from "@wayward/game/game/options/modifiers/milestone/modifiers/Operator";
 import Pacifier from "@wayward/game/game/options/modifiers/milestone/modifiers/Pacifier";
 import Prepared from "@wayward/game/game/options/modifiers/milestone/modifiers/Prepared";
@@ -141,6 +142,7 @@ export declare const milestoneModifiers: {
     65: typeof Turbulent;
     50: typeof Versatile;
     29: typeof Weathered;
+    72: typeof Oblivious;
 };
 declare class MilestoneModifiersManager extends GameplayModifiersManager<MilestoneModifier, Milestone, [Human?]> {
     constructor();

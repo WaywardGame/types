@@ -25,7 +25,8 @@ export declare enum Challenge {
     BiomeIceCap = 11,
     BiomeVolcanic = 12,
     Sunset = 13,
-    SlitherSucker = 14
+    SlitherSucker = 14,
+    Cursed = 15
 }
 export declare function isPermanentEffect(statusType: StatusType, options: IGameOptionsPlayer): boolean;
 export declare function isEternal(time: number): (options?: IGameOptions) => boolean;

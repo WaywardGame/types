@@ -180,7 +180,12 @@ export interface IGameOptions {
     /**
      * Controls curse events
      */
-    curseEvents: boolean;
+    curse: {
+        stat: boolean;
+        events: boolean;
+        cooldownRangeOverride?: IRange;
+        eventsRangeOverride?: IRange;
+    };
 }
 export declare enum UnlockedRecipesStrategy {
     StartWithNone = 0,

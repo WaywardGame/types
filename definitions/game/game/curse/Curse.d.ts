@@ -37,6 +37,11 @@ export declare const CumulativeKilling: DataComponent<number, number>;
 export declare const Sleeplessness: DataComponent<number, number>;
 export declare const HighestAttack: DataComponent.Live<number>;
 export declare const HighestDefense: DataComponent.Live<number>;
+export interface Obliviousness {
+    days: number;
+    thisNightInvalidated: boolean;
+}
+export declare const Obliviousness: DataComponent<Obliviousness, Obliviousness>;
 /**
  * Gets the highest value of either current or max skill multiplied by the "evilness" of each skill (from rune chance)
  * (Basically, high values in any of the evil-er skills make curse go brrrr)
@@ -101,8 +106,9 @@ declare namespace Curse {
     function canWarnAboutIncomingEvents(island: Island): boolean;
     function getCooldownMultiplier(island: Island, humans?: Human<unknown, number, import("../reference/IReferenceManager").ReferenceType.NPC | import("../reference/IReferenceManager").ReferenceType.Player, unknown>[]): number;
     function clearCooldown(island: Island): void;
+    function resetCooldown(island: Island): void;
     function tickCurse(island: Island, humans: Human[]): void;
-    function reload(island: Island): void;
+    function reload(island: Island, isNew?: boolean): void;
     function spawnCurseEvents(island: Island, humans: Human[]): void;
     function attemptCurseEventSpawn(category: CurseCategory, human: Human, curse: number, humans: Human[], events: CurseEventInstance[]): CurseEventInstance | undefined;
     function attemptSpecificCurseEventSpawn(human: Human, type: CurseEventType, humans: Human[], curse?: number): CurseEventInstance | undefined;

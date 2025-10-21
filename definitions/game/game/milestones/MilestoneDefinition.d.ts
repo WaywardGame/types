@@ -32,8 +32,10 @@ export default class MilestoneDefinition {
     /**
      * This milestone will be granted when an `amount` of conditions happen simultaneously.
      * For example, this could be used to check for a skill level.
+     *
+     * @param live If `true`, the milestone will update its progress even if the new value is lower than the previous value.
      */
-    static check(amount: SupplierOr<number>): MilestoneDefinition;
+    static check(amount: SupplierOr<number>, live?: boolean): MilestoneDefinition;
     /**
      * This milestone will be granted after being incremented `amount` times.
      * It does not require each increment to have a different ID, like `counter` does.
@@ -72,14 +74,16 @@ export default class MilestoneDefinition {
     inherit(def: MilestoneDefinition): this;
     visibility: MilestoneVisibility;
     visibleThreshold: number | Milestone | [Milestone, string | number];
+    visibilityAfterThreshold: MilestoneVisibility;
     /**
      * @param visibility Whether the milestone is completely visible, has its name hidden, or has its required amount hidden. Defaults to `Visible`
-     * @param until Sets the time when the milestone will become `Visible`. This can be any of:
+     * @param until Sets the time when the milestone will become `Visible` (or `visibilityAfterThreshold`). This can be any of:
      * - A completion threshold (in a fractional value between 0 and 1)
      * - A different milestone to complete first
      * - A tuple of a different milestone and a value that must be discovered in that milestone
+     * @param visibilityAfterThreshold What the visibility will be after the `until` condition is met. Defaults to `Visible`
      */
-    setVisibility(visibility: MilestoneVisibility, until?: number | [Milestone, string | number]): this;
+    setVisibility(visibility: MilestoneVisibility, until?: number | [Milestone, string | number], visibilityAfterThreshold?: MilestoneVisibility): this;
     /**
      * Sets this milestone to be unlockable in all game modes, and not disabled by mods.
      */
