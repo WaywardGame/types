@@ -8,8 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import type { CustomModifiers } from "@wayward/game/ui/screen/screens/menu/menus/newgame/customgameoptions/CustomGameOptionsTab";
-import CustomGameOptionsTab from "@wayward/game/ui/screen/screens/menu/menus/newgame/customgameoptions/CustomGameOptionsTab";
-export default class TabItems extends CustomGameOptionsTab {
-    constructor(modifiers: CustomModifiers);
-}
+import { CustomModifierDefinition } from "@wayward/game/game/options/modifiers/custom/ICustomModifier";
+declare const _default: CustomModifierDefinition<[length: number]>;
+export default _default;

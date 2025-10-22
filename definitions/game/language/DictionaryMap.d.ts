@@ -98,6 +98,8 @@ import { ModSort } from "@wayward/game/ui/screen/screens/menu/menus/mods/IModsMe
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import { ChangeType } from "@wayward/game/utilities/trello/ITrello";
 import WorldZ from "@wayward/utilities/game/WorldZ";
+import { CustomModifierType } from "@wayward/game/game/options/modifiers/custom/ICustomModifier";
+import { GameOptionsIcon } from "@wayward/game/ui/screen/screens/menu/menus/pause/GameOptionsIcons";
 export type Enum = Record<string, number> & Record<number, string>;
 export declare const SYMBOL_ANY_DICTIONARY: unique symbol;
 declare const dictionaryMap: {
@@ -1949,6 +1951,8 @@ declare const dictionaryMap: {
     131: typeof Website;
     132: typeof WeightStatus;
     133: typeof WorldZ;
+    134: typeof CustomModifierType;
+    135: typeof GameOptionsIcon;
 };
 export declare const strictDictionaries: {
     0: typeof ActionType;
@@ -3799,6 +3803,8 @@ export declare const strictDictionaries: {
     131: typeof Website;
     132: typeof WeightStatus;
     133: typeof WorldZ;
+    134: typeof CustomModifierType;
+    135: typeof GameOptionsIcon;
 };
 export type DictionaryEnum = (typeof dictionaryMap)[Dictionary];
 type ExtractEnumString<E> = E extends Record<string, infer V> ? V : never;

@@ -309,7 +309,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     canInspect(human: Human): boolean;
     private processSpecials;
     /**
-     * Check for items on top of lit/fire doodads, set them on fire
+     * Check for items on top of lit/fire doodads (that are OpenFireSource), and automatically "stoke" the items
      */
     private processFire;
     /**
@@ -400,6 +400,13 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     willStillWorkInTemperature(): boolean;
     forceDecayTick(): void;
+    /**
+     * Stokes fire from the StokeFire action and other events like directly dropping items into open fire sources.
+     * @param stokeValue The amount to stoke the fire by.
+     * @param human The human that is stoking the fire.
+     * @returns True if fire overflowed, false if not.
+     */
+    stokeFire(stokeValue: number, human?: Human): boolean;
     /**
      * Decay over time
      */

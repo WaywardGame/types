@@ -11,6 +11,8 @@
 import type { PartOfDayGranular, TimeString } from "@wayward/game/game/time/ITimeManager";
 import { DayQuarter, TimeFormat } from "@wayward/game/game/time/ITimeManager";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+export declare const DEFAULT_TIME_DAY_LENGTH = 3200;
+export declare const DEFAULT_TIME_DAY_PERCENT = 0.625;
 export default class TimeManager {
     private dayLength;
     dayPercent: number;

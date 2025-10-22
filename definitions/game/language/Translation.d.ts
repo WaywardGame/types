@@ -46,6 +46,7 @@ type Translation = TranslationImpl;
 declare namespace Translation {
     export function is(value: unknown): value is Translation;
     export function equals(a: Translation, b: Translation): boolean;
+    export function coalesce(...translations: Translation[]): Translation | undefined;
     export const RANDOM = "random";
     export const getString: typeof TranslationImpl.getString;
     export const resolve: typeof TranslationImpl.resolve;

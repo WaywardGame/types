@@ -177,6 +177,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
     selectBiome(position: IVector2 | undefined, random: Random): BiomeTypes;
     getGameMode(): GameMode;
     getGameOptionsBeforeModifiers(): IGameOptions;
+    getCustomGameOptionsPartial(): IGameOptionsPartial;
     /** A game options modifier that always returns an empty array by default, to be injected into */
     getAdditionalGameOptionsSources(): IGameOptionsPartial[];
     getGameOptions(): IGameOptions;

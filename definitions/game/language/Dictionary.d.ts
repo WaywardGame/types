@@ -142,6 +142,8 @@ declare enum Dictionary {
     UsableActionType = 130,
     Website = 131,
     WeightStatus = 132,
-    WorldLayer = 133
+    WorldLayer = 133,
+    CustomModifier = 134,
+    GameOptionsIcon = 135
 }
 export default Dictionary;

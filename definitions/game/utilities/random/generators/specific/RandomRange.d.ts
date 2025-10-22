@@ -13,7 +13,9 @@ import Objects from "@wayward/utilities/object/Objects";
 import type { RandomInstance } from "@wayward/utilities/random/IRandom";
 import type { RandomReference } from "@wayward/game/utilities/random/RandomReference";
 import RandomValueGenerator from "@wayward/game/utilities/random/RandomValueGenerator";
-export default class RandomRange extends RandomValueGenerator<IRange> {
+import type { DiffFunction, IMergeable } from "@wayward/game/utilities/object/Merge";
+import { SYMBOL_MERGE_DIFF } from "@wayward/game/utilities/object/Merge";
+export default class RandomRange extends RandomValueGenerator<IRange> implements IMergeable<RandomRange> {
     limit?: number;
     constructor();
     constructor(random: RandomInstance | RandomReference, max: number);
@@ -24,4 +26,5 @@ export default class RandomRange extends RandomValueGenerator<IRange> {
     intInRange(): number;
     float(): number;
     [Objects.SYMBOL_CLONE](clone: typeof Objects.deepClone): this;
+    [SYMBOL_MERGE_DIFF](b: RandomRange, diff: DiffFunction): unknown;
 }

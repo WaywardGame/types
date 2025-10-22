@@ -44,6 +44,7 @@ export interface IUiEvents {
     loadedFromSave(): any;
     changeInformationVisibility(informationVisibility: TooltipVisibilityOption): any;
     toggleMoreInfo(moreInfo: boolean): any;
+    toggleStackItemsHint(show: boolean): any;
     toggleHealthVignette(healthVignette: boolean): any;
     toggleDeveloperMode(developerMode: boolean): any;
 }
@@ -127,6 +128,8 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     protected onToggleScreen(): void;
     protected onShowMoreInfo(): void;
     protected onUnshowMoreInfo(): void;
+    protected onShowStackItemsHint(): void;
+    protected onHideStackItemsHint(): void;
     protected onTooltipsToggle(): boolean;
     protected onFullscreen(): boolean;
     protected onToggleDevMode(): boolean;

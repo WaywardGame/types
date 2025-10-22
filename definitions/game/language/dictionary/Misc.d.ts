@@ -130,6 +130,10 @@ export declare enum MagicalPropertyAffixTranslation {
     Adjective = 0,
     Name = 1
 }
+export declare enum CustomModifierTypeTranslation {
+    Title = 0,
+    Description = 1
+}
 export declare enum MiscTranslation {
     AAndB = 0,
     Aberrant = 1,

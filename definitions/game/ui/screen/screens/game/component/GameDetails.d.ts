@@ -10,14 +10,14 @@
  */
 import type Island from "@wayward/game/game/island/Island";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
-import type { GameMode } from "@wayward/game/game/options/IGameOptions";
+import { type GameMode } from "@wayward/game/game/options/IGameOptions";
 import type { Challenge } from "@wayward/game/game/options/modifiers/challenge/IChallenge";
+import type { CustomModifierTranslation } from "@wayward/game/game/options/modifiers/custom/ICustomModifier";
 import type { IslandModifierType } from "@wayward/game/game/options/modifiers/island/IIslandModifier";
 import Component from "@wayward/game/ui/component/Component";
 import type { IGameIconsHost, IGameModifiersHost } from "@wayward/game/ui/component/GameIcons";
 import GameIcons, { GameModifiers } from "@wayward/game/ui/component/GameIcons";
 import PopupOverlay from "@wayward/game/ui/screen/screens/game/component/PopupOverlay";
-import type { IGameOptionsIcon } from "@wayward/game/ui/screen/screens/menu/menus/pause/GameOptionsIcons";
 import { GameOptionsIcon } from "@wayward/game/ui/screen/screens/menu/menus/pause/GameOptionsIcons";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 import type { ModLoadability } from "@wayward/game/ui/util/Misc";
@@ -37,8 +37,8 @@ export declare class GameDetails extends PopupOverlay implements IGameIconsHost,
     setHasQuests(hasQuests?: boolean): this;
     hasIcons(): boolean;
     refresh(): this;
-    getOptionsIconTooltipHandler(icon: GameOptionsIcon, description: IGameOptionsIcon): ((tooltip: Tooltip) => any) | undefined;
-    getOptionsIcons(): Array<[GameOptionsIcon, IGameOptionsIcon]>;
+    getOptionsIconTooltipHandler(icon: GameOptionsIcon, translations: Array<ArrayOr<CustomModifierTranslation>>): ((tooltip: Tooltip) => any) | undefined;
+    getOptionsIcons(): Array<[GameOptionsIcon, Array<ArrayOr<CustomModifierTranslation>>]>;
     getChallengeModifiers(): Challenge[];
     getMilestoneModifiers(): Milestone[];
     getIslandModifiers(): IslandModifierType[];

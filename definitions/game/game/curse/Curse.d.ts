@@ -26,7 +26,7 @@ export declare const CURSE_COMPONENT_CRAFTING_CAP = 3000;
 export declare const CURSE_COMPONENT_CRAFTING_MIN_EFFECT = 0.3;
 export declare const CURSE_COMPONENT_KILLING_CAP = 500;
 export declare const CURSE_COMPONENT_SKILL_CAP = 100;
-export declare const CURSE_COMPONENT_SLEEPLESSNESS_CAP_DAYS = 6;
+export declare const CURSE_COMPONENT_SLEEPLESSNESS_CAP_DAYS = 3;
 interface CurseComponentDefinition {
     readonly maxCurseContribution: number | null;
     compute(human: Human): number;

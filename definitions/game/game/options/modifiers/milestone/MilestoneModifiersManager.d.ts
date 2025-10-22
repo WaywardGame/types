@@ -119,6 +119,7 @@ export declare const milestoneModifiers: {
     47: typeof Murderer;
     20: typeof Navigator;
     33: typeof Notekeeper;
+    72: typeof Oblivious;
     34: typeof Operator;
     31: typeof Pacifier;
     10: typeof Thrower;
@@ -142,7 +143,6 @@ export declare const milestoneModifiers: {
     65: typeof Turbulent;
     50: typeof Versatile;
     29: typeof Weathered;
-    72: typeof Oblivious;
 };
 declare class MilestoneModifiersManager extends GameplayModifiersManager<MilestoneModifier, Milestone, [Human?]> {
     constructor();
