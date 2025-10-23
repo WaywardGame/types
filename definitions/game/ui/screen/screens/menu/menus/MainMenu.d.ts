@@ -13,9 +13,14 @@ import Button from "@wayward/game/ui/component/Button";
 import RowSection from "@wayward/game/ui/component/RowSection";
 import Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
 import SaveSlot from "@wayward/game/ui/screen/screens/menu/menus/loadgame/SaveSlot";
+declare class UpdateBanner extends Button {
+    constructor(versionName: string, isNewVersion: boolean);
+    protected onViewChangelog(): void;
+    private init;
+}
 export default class MainMenu extends Menu {
     private isNewVersion;
-    readonly updateBanner: Button;
+    readonly updateBanner: UpdateBanner;
     readonly gameSection: RowSection;
     continueGameButton?: SaveSlot;
     readonly newLoadRow: BlockRow;
@@ -44,3 +49,4 @@ export default class MainMenu extends Menu {
     private getNewsMenu;
     private getEnabledModsTooltip;
 }
+export {};

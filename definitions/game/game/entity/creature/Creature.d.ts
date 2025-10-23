@@ -109,7 +109,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     load(): void;
     checkForBurn(moveType?: MoveType): boolean;
     private setOwner;
-    tame(human: Human, bonus?: number): boolean;
+    tame(human: Human, bonusTime?: number): boolean;
     /**
      * Increases the creature's maximum health in the event of offering/re-taming and petting (to a lesser extent)
      */
@@ -164,6 +164,8 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     getAttackOutcome(enemy: Human | Creature | undefined, force?: boolean, humans?: Human[], description?: ICreatureDescription, moveType?: MoveType): CreatureAttackOutcome;
     processAttack(description: ICreatureDescription, humans: Human[], moveType: MoveType | undefined, enemyIn: Human | Creature | undefined): boolean;
     getProducedTemperature(): number | undefined;
+    makeAberrant(): number | undefined;
+    unAberrant(restoreHealth: number): boolean;
     protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
     /**

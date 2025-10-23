@@ -81,7 +81,18 @@ export interface CurseEventContext {
     uninject(): void;
     uninject<T extends CurseEventSubscriber>(subscriber: Class<T>): void;
     toString(): string;
+    data<T>(def: CurseEventContextDataDefinition<T>): CurseEventContextData<T>;
 }
+export interface CurseEventContextDataDefinition<T> {
+    readonly id: string;
+    initializer?(): T;
+}
+export interface CurseEventContextData<T> {
+    get(): T;
+    set(value: T): void;
+}
+export declare function CurseEventContextData<T>(id: string): CurseEventContextDataDefinition<T | undefined>;
+export declare function CurseEventContextData<T>(id: string, initializer: () => T): CurseEventContextDataDefinition<T>;
 export interface CurseEventExtinguishOptions {
     /**
      * The number of flat ticks to reduce decays by

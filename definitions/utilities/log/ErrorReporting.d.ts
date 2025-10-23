@@ -26,5 +26,6 @@ declare namespace ErrorReporting {
      */
     function warnOncePerSession(warningId: ArrayOr<string | Log.SimplifyString>, ...message: any[]): void;
     function warnOncePerSession(skip: number, warningId: ArrayOr<string | Log.SimplifyString>, ...message: any[]): void;
+    function sendError(id: string, error: Error): Promise<void>;
 }
 export default ErrorReporting;

@@ -43,7 +43,7 @@ export default class CreatureManager extends EntityManager<Creature, IEntityRemo
     loadEntity(creature: Creature): void;
     static getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: Article): TranslationImpl;
     getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: Article): TranslationImpl;
-    getHappinessLevel(human: Human, creature: Creature, bonus?: number): number;
+    calculateHappinessTameTime(human: Human, creature: Creature, bonusTime?: number): number;
     /**
      * Spawns a creature.
      * @param type The type of creature to spawn.

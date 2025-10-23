@@ -138,6 +138,7 @@ export interface CurseEventInstance {
     curse: number;
     point: IVector2;
     creatures?: number[];
+    savedData?: Record<string, any>;
     subscribers?: string[];
     scriptProcesses?: ScriptProcessState[];
     [SYMBOL_CURSE_EVENT_SUBSCRIBER_INSTANCES]?: Record<string, CurseEventSubscriber>;
