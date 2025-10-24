@@ -18,6 +18,10 @@ export interface INotificationLocation extends IVector4 {
     readonly isValid?: boolean;
     getMovementPoint?(timeStamp: number): IVector2;
     getMovementProgress?(timeStamp: number): number;
+    /**
+     * Used to offset markers for creatures that are large or if they are flying ontop of other things
+     */
+    getMovementOffsetY?(timeStamp: number): number;
     queueSoundEffect?(soundEffect: SfxType): void;
 }
 export declare enum StatNotificationType {

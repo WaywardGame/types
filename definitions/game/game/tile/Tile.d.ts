@@ -474,6 +474,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Array version of tilesAround
      */
     getTilesAround(includeCurrentTile?: boolean, includeCorners?: boolean): Tile[];
+    getFlyingOffset(): number;
     /**
      * IterableIterator version of TileHelpers.getTilesAround
      */

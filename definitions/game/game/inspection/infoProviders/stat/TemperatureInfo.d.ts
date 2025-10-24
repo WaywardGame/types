@@ -8,10 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { type ITileEventDescription } from "@wayward/game/game/tile/ITileEvent";
-import type TileEvent from "@wayward/game/game/tile/TileEvent";
-interface IFireDescription extends ITileEventDescription {
-    spread(tileEvent: TileEvent, ticks: number): void;
+import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
+import { StatInfo } from "@wayward/game/game/inspection/infoProviders/stat/StatInfo";
+export declare enum TemperatureInfoClasses {
 }
-declare const fire: IFireDescription;
-export default fire;
+export default class TemperatureInfo extends StatInfo {
+    private readonly temperatureFactors;
+    get(): InfoProvider[];
+}

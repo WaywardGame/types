@@ -222,6 +222,10 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     private processAiChanges;
     private addAlertedMarker;
     /**
+     * Used for offseting notifiers
+     */
+    getMovementOffsetY(timeStamp: number): number;
+    /**
      * @returns Whether the creature has lost interest
      */
     private processAiInterest;

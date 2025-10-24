@@ -111,8 +111,8 @@ declare namespace Curse {
     function reload(island: Island, isNew?: boolean): void;
     function spawnCurseEvents(island: Island, humans: Human[]): void;
     function attemptCurseEventSpawn(category: CurseCategory, human: Human, curse: number, humans: Human[], events: CurseEventInstance[]): CurseEventInstance | undefined;
-    function attemptSpecificCurseEventSpawn(human: Human, type: CurseEventType, humans: Human[], curse?: number): CurseEventInstance | undefined;
-    function attemptSpecificCurseEventSpawnOnPlayer(player: Human, curseType: CurseEventType): CurseEventInstance | undefined;
+    function attemptSpecificCurseEventSpawn(human: Human, type: CurseEventType, humans: Human[], curse?: number, force?: boolean | "full"): CurseEventInstance | undefined;
+    function attemptSpecificCurseEventSpawnOnPlayer(player: Human, curseType: CurseEventType, force: boolean | "full"): CurseEventInstance | undefined;
     function unload(island: Island): void;
     function cleanup(island: Island, humans?: Human[], isMorning?: boolean): void;
     function cleanupEphemerals(island: Island): void;

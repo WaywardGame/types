@@ -10,7 +10,9 @@
  */
 import type { DoodadType } from "@wayward/game/game/doodad/IDoodad";
 import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
+import type { ItemType } from "@wayward/game/game/item/IItem";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type { PartOfDay } from "@wayward/game/game/time/ITimeManager";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import type WorldZ from "@wayward/utilities/game/WorldZ";
@@ -42,6 +44,7 @@ export interface IBiomeCreatureZones {
     guardians?: IBiomeGuardianZoneTiers;
     tileReplacements?: IBiomeTileReplacements;
     doodadReplacements?: IBiomeDoodadReplacements;
+    creatureCombos?: IBiomeCreatureCombos;
 }
 export type IBiomeCreatureZoneTiers = PartialRecord<`tier${number}`, IBiomeCreatureZoneTier>;
 export type IBiomeCreatureZoneTier = Map<WorldZ, IBiomeCreatureZoneSpawnGroup[]>;
@@ -68,6 +71,20 @@ export interface IBiomeDoodadReplacement {
 }
 export type IBiomeDoodadReplacements = PartialRecord<`tier${number}`, IBiomeDoodadReplacement[]>;
 export declare function doodadReplacementsTiers(replacements: IBiomeDoodadReplacements): IBiomeDoodadReplacements;
+export interface IBiomeCreatureCombo {
+    /** The doodad to spawn when the creature is present. */
+    doodad?: DoodadType;
+    /** The tile event to spawn when the creature is present. */
+    tileEvent?: TileEventType;
+    /** The item to spawn when the creature is present. */
+    item?: ItemType;
+    /** `0` = 0% chance of spawning when the creature is present, `1` = 100%. Defaults to `1`. */
+    chance?: number;
+    /** Number of times to attempt spawning in the zone. Defaults to `1`. */
+    attempts?: number;
+}
+export type IBiomeCreatureCombos = PartialRecord<CreatureType, IBiomeCreatureCombo[]>;
+export declare function creatureCombos(spawns: IBiomeCreatureCombos): IBiomeCreatureCombos;
 /**
  * The default size of a zone, on each axis. IE, a value of 60 is 60 tiles wide and 60 tiles long.
  */

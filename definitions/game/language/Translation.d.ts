@@ -207,7 +207,7 @@ declare namespace Translation {
         constructor(base?: FVal, reformatter?: SupplierOr<Translation | undefined>);
         noParenthesis(): this;
         percentage(isPercentage?: boolean, premultiplied?: boolean): this;
-        translate(simple?: boolean): Translation;
+        translate(simple?: boolean | "unless verbose"): Translation;
         private parenthesize;
         private translateAndFormatComponent;
         private translateComponent;

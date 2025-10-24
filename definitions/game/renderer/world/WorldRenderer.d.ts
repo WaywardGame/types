@@ -197,7 +197,6 @@ export declare class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
      */
     batchMovable(timeStamp: number): boolean;
     private batchCreature;
-    private getFlyingOffset;
     private batchShadow;
     private batchDoodadOrVehicle;
     private batchHuman;

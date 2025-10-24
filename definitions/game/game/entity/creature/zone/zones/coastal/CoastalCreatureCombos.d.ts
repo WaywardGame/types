@@ -8,10 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import { type ITileEventDescription } from "@wayward/game/game/tile/ITileEvent";
-import type TileEvent from "@wayward/game/game/tile/TileEvent";
-interface IFireDescription extends ITileEventDescription {
-    spread(tileEvent: TileEvent, ticks: number): void;
-}
-declare const fire: IFireDescription;
-export default fire;
+import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
+declare const _default: Partial<Record<CreatureType, import("@wayward/game/game/entity/creature/zone/ICreatureZone").IBiomeCreatureCombo[]>>;
+export default _default;
