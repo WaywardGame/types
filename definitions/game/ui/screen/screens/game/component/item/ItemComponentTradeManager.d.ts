@@ -11,7 +11,7 @@
 import type Human from "@wayward/game/game/entity/Human";
 import type MerchantNPC from "@wayward/game/game/entity/npc/npcs/Merchant";
 import type Item from "@wayward/game/game/item/Item";
-import { ItemTradeType } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import { ItemTradeType } from "@wayward/game/ui/screen/screens/game/component/item/IItemComponent";
 import WeakishSet from "@wayward/utilities/collection/set/WeakishSet";
 declare namespace _ {
     class ItemComponentTradeManager {

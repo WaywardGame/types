@@ -63,3 +63,26 @@ export declare enum ItemClasses {
 export declare namespace ItemClasses {
     const IconLocation: (enumValue: ItemDetailIconLocation) => "item-component-icon-location-topleft" | "item-component-icon-location-bottomright";
 }
+export declare enum ItemTradeType {
+    None = "",
+    ToMerchant = "To",
+    FromMerchant = "From"
+}
+export declare enum ItemRefreshType {
+    None = 0,
+    ItemType = 1,
+    Durability = 2,
+    Decay = 4,
+    Quality = 8,
+    Magic = 16,
+    Protected = 32,
+    EquipSlot = 64,
+    MaybeSlottedInActionSlot = 128,
+    Action = 256,
+    Stack = 512,
+    Stacked = 1024,
+    Trading = 2048,
+    ContainerChange = 4096,
+    Cooldown = 8192,
+    All = 16383
+}

@@ -10,6 +10,8 @@
  */
 import type { ModInformation } from "@wayward/game/mod/ModInformation";
 import { CheckButton } from "@wayward/game/ui/component/CheckButton";
+import type Component from "@wayward/game/ui/component/Component";
+import ModMetadataInserter from "@wayward/game/ui/screen/screens/menu/menus/mods/ModMetadataInserter";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 interface IModRowEvents extends Events<CheckButton> {
     shouldRefreshMenu(): any;
@@ -21,6 +23,7 @@ export default class ModRow extends CheckButton {
     private readonly buttonHandler;
     constructor(mod: ModInformation);
     shouldDisableButtonButtonsOnUnchecked(): boolean;
+    insertMetadata(into: Component, mod: ModInformation, context: "tooltip" | "menu"): ModMetadataInserter;
     setEnabled(enabled: boolean, prompts?: boolean, changingAllStates?: boolean): Promise<boolean>;
     protected onToggle(checked: boolean): Promise<void>;
     private checkDependants;

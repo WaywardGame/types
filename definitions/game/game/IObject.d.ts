@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "./entity/skill/ISkills";
 import type { ItemType } from "@wayward/game/game/item/IItem";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
@@ -80,6 +80,7 @@ export declare enum Quality {
     Relic = 6
 }
 export type QualityNatural = Exclude<Quality, Quality.Random | Quality.Mastercrafted>;
+export type QualityReal = Exclude<Quality, Quality.Random>;
 export interface IQualityEvents {
     qualityChange(quality: Quality, oldQuality: Quality): any;
 }

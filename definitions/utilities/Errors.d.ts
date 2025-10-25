@@ -19,7 +19,7 @@ declare namespace Errors {
      * @param skip The number of additional callsite strings to skip
      * @param truncate The maximum number of callsite strings to include
      */
-    function stack(skip?: number, truncate?: number): string;
+    function stack(skip?: number, truncate?: number, stack?: string): string;
     /**
      * Returns the Error callsite string for the caller of the current function.
      */

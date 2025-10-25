@@ -8,5 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-declare const _default: import("../Action").Action<[[arg1: import("../IAction").ActionArgument.Undefined, import("../IAction").ActionArgument.DoodadNearby]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, boolean, import("@wayward/game/game/entity/action/actions/SwapWithArmorStand").ISwapEquipment, [(import("../../../doodad/Doodad").default | undefined)?]>;
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
+declare const _default: import("../Action").Action<[[arg1: import("@wayward/game/game/entity/action/IAction").ActionArgument.Undefined, import("@wayward/game/game/entity/action/IAction").ActionArgument.DoodadNearby]], ActionType.EquipFromArmorStand, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, boolean, import("@wayward/game/game/entity/action/actions/SwapWithArmorStand").ISwapEquipment, [(import("../../../doodad/Doodad").default | undefined)?]>;
 export default _default;

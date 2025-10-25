@@ -10,12 +10,12 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Item from "@wayward/game/game/item/Item";
 import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 export interface IAbsorbCanUse extends IActionUsable {
     absorbTarget: Item;
     magic: MagicalPropertyManager;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IAbsorbCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby]], ActionType.Absorb, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IAbsorbCanUse, [Item, (Item | undefined)?]>;
 export default _default;

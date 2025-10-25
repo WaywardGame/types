@@ -10,7 +10,8 @@
  */
 import type Human from "@wayward/game/game/entity/Human";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
-import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import MilestoneModifier, { MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/IMilestoneModifier";
 export default abstract class DeityInvokeMilestoneModifier extends MilestoneModifier {
     getGroup(): MilestoneModifierGroup;
     protected abstract getClass(): Class<DeityInvokeMilestoneModifierInstance>;

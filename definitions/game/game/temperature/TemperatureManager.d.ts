@@ -26,12 +26,13 @@ import { TempType } from "@wayward/game/game/temperature/ITemperature";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
-import type { FireStage } from "@wayward/game/game/tile/events/IFire";
+import type FireStage from "@wayward/game/game/tile/events/fire/FireStage";
 import type TimeManager from "@wayward/game/game/time/TimeManager";
 import type { IPreSerializeCallback } from "@wayward/game/save/serializer/ISerializer";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import { IRange } from "@wayward/utilities/math/Range";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
+import type { BiomeType } from "@wayward/game/game/biome/IBiome";
 export declare const TEMPERATURE_DIFFUSION_RATE: number;
 export declare const TEMPERATURE_BOUNDARY_MIN_VEC2: Vector2;
 export declare const TEMPERATURE_INVALID = 255;
@@ -100,6 +101,8 @@ export default class TemperatureManager extends EventEmitter.Host<ITemperatureMa
     getContainerItemsTemperature(container: IContainer, containerHash?: string): number | undefined;
     private getContainerBaseTemperature;
     private getContainerInsulation;
+    /** A global temperature modifier that always returns 0 by default, to be injected into */
+    getTempModifier(biome: BiomeType, layer: WorldZ): number;
     /**
      * Returns the current overall temperature for the given tile.
      */

@@ -23,7 +23,7 @@ export default class ItemsInspection extends ListInspection<ItemInspection> {
     private itemPositions;
     constructor(itemInspections: ItemInspection[], context?: InfoProviderContext);
     get(context: InfoProviderContext): ArrayOr<TranslationGenerator | InfoProvider>;
-    getDefaultDisplayLevel(context: InfoProviderContext): InfoDisplayLevel.NonVerbose | InfoDisplayLevel.Always;
+    getDefaultDisplayLevel(context: InfoProviderContext): InfoDisplayLevel;
     protected initChildTextComponent(text: TranslationGenerator): Text;
     protected onTickEnd(): void;
     protected onTransformed(): void;

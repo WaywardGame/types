@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { DoodadTypeExtra } from "@wayward/game/game/doodad/IDoodad";
-declare const doodads: Descriptions<DoodadTypeExtra, [string, string]>;
-export default doodads;
+declare const _default: Descriptions<DoodadTypeExtra, string | [string, string?]>;
+export default _default;

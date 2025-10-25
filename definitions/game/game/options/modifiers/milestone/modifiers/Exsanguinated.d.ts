@@ -21,9 +21,10 @@ import StatusInspection from "@wayward/game/game/inspection/inspections/StatusIn
 import type Island from "@wayward/game/game/island/Island";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { IGameOptionsPartial, IGameOptionsStatus } from "@wayward/game/game/options/IGameOptions";
-import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import MilestoneModifier, { MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/IMilestoneModifier";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
-import type { IInjectionApi } from "@wayward/utilities/class/Inject";
+import type { IInjectionApi } from "@wayward/game/utilities/Inject";
 export default class Exsanguinated extends MilestoneModifier {
     getOptions(): IGameOptionsPartial;
     getTranslationArgs(): TranslationArg[] | undefined;

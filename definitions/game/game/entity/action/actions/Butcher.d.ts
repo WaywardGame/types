@@ -10,12 +10,12 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type Tile from "@wayward/game/game/tile/Tile";
 export interface IButcherCanUse extends IActionUsable {
     tile: Tile;
     corpses: Corpse[];
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IButcherCanUse, [import("../../../item/Item").default]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Butcher, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IButcherCanUse, [import("../../../item/Item").default]>;
 export default _default;

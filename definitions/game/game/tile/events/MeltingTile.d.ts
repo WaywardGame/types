@@ -22,7 +22,6 @@ declare const _default: {
      * @returns The number of decay reduction of the terrain given the temperature of the point.
      */
     getMeltRate(island: Island, terrainType: TerrainType, tile: Tile): number;
-    canMelt(island: Island, terrainType: TerrainType, tile: Tile): boolean;
     canCreate(island: Island, type: TileEventType, tile: Tile, tileType: TerrainType): boolean;
     update(tileEvent: TileEvent, ticks: number): void;
 };

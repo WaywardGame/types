@@ -10,11 +10,12 @@
  */
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
-import MilestoneModifier, { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import MilestoneModifier from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/IMilestoneModifier";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
 export default class Runekeeper extends MilestoneModifier {
     getOptions(): IGameOptionsPartial;
-    protected getTranslationArgs(): TranslationArg[] | undefined;
+    getTranslationArgs(): TranslationArg[] | undefined;
     getGroup(): MilestoneModifierGroup;
     after: Milestone[];
 }

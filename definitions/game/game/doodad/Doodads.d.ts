@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IDoodadDescription, IDoodadGroupDescription } from "@wayward/game/game/doodad/IDoodad";
-import { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
+import { DoodadType, DoodadTypeExtra, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
 export declare const doodadDescriptions: OptionalDescriptions<DoodadType, IDoodadDescription>;
 export declare const doodadGroups: OptionalDescriptions<DoodadTypeGroup, IDoodadGroupDescription>;
+export declare const doodadVariantToMainTypeMap: Map<DoodadTypeExtra, DoodadType>;

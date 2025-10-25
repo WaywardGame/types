@@ -13,6 +13,7 @@ import { Tab } from "@wayward/game/ui/screen/screens/menu/component/Menu";
 export default class TabPerformance extends Tab implements IRefreshable {
     private readonly refreshables;
     private readonly acrylicTransparency;
+    private get animations();
     constructor();
     refresh(): this;
     private addRefreshable;

@@ -11,6 +11,7 @@
 import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import { StatusChangeReason } from "@wayward/game/game/entity/IEntity";
 import type { IStatusDescription, IStatusIconDescription, StatusParticle, StatusType } from "@wayward/game/game/entity/status/IStatus";
+import { StatusParticleEvent } from "@wayward/game/game/entity/status/IStatus";
 import { StatusThreatLevel } from "@wayward/game/game/entity/status/IStatus";
 import IStatusContext from "@wayward/game/game/entity/status/IStatusContext";
 import type { StatusEffectList } from "@wayward/game/game/entity/status/StatusEffectList";
@@ -24,23 +25,6 @@ import type { IHighlight } from "@wayward/game/ui/util/IHighlight";
 import type { IRGB } from "@wayward/utilities/Color";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export type StatusClass = Class<Status, [StatusType, EntityWithStats?]> & IModdable;
-export declare enum StatusParticleEvent {
-    /**
-     * Particle effect for when a turn passes
-     */
-    Turn = 0,
-    /**
-     * Particle effect for when the status effect has a "tick". A status effect tick is controlled by the effect rate.
-     */
-    Tick = 1,
-    /**
-     * Particle effect for when the status effect passes.
-     */
-    Passed = 2
-}
-export declare enum UiStatusType {
-    Cut = -100000
-}
 export interface IStatusEvents {
     tick(): any;
     deregister(): any;
@@ -79,7 +63,7 @@ export default class Status extends EventEmitter.Host<IStatusEvents> {
      * @param color The color of the particle effect
      */
     getParticles(event: StatusParticleEvent): StatusParticle | undefined;
-    getIcon(): IStatusIconDescription | undefined;
+    getIcon(displayIndex?: number): IStatusIconDescription | undefined;
     getHighlight(): IHighlight | undefined;
     isActive(): boolean;
     add(reason?: StatusChangeReason, level?: number, force?: boolean, oldLevel?: number): this;
@@ -91,10 +75,10 @@ export default class Status extends EventEmitter.Host<IStatusEvents> {
      */
     getLevel(): number;
     getThreatLevel(): StatusThreatLevel;
-    getTranslation(which?: StatusTranslation): TranslationImpl | undefined;
+    getTranslation(which?: StatusTranslation, level?: number): TranslationImpl | undefined;
     refresh(): void;
     getEffects(): StatusEffectList;
-    getInterval(): number;
+    getInterval(): number | false;
     /**
      * Whether the status effect should pass (be removed from the human).
      */

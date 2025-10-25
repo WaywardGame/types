@@ -10,5 +10,15 @@
  */
 import Bindable from "@wayward/game/ui/input/Bindable";
 import type { Binding } from "@wayward/game/ui/input/Bindings";
-declare const defaultBindings: Record<Bindable, Binding[]>;
-export default defaultBindings;
+import type { IInput } from "@wayward/game/ui/input/IInput";
+import type { Macro } from "@wayward/game/ui/input/Macros";
+interface BindingGenerationContext {
+    mouse: typeof IInput.mouseButton;
+    touch: typeof IInput.touch;
+    key: typeof IInput.key;
+    scroll: typeof IInput.scroll;
+    macro(...inputs: IInput[]): Macro;
+    doublePress(input: IInput): Macro;
+}
+export default function generateDefaultBindings(context: BindingGenerationContext): Record<Bindable, Binding[]>;
+export {};

@@ -38,6 +38,7 @@ export default class TooltipManager {
     protected onScreenResize(): void;
     protected onMove(): void;
     protected onToggleMoreInfo(): void;
+    protected onToggleStackItemsHint(): void;
     private loop;
 }
 export interface ITooltipSurfaceEvents {

@@ -13,23 +13,10 @@ import type Human from "@wayward/game/game/entity/Human";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import GameplayModifier, { GameplayModifierInstance } from "@wayward/game/game/options/modifiers/GameplayModifier";
+import { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/IMilestoneModifier";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
 import Translation from "@wayward/game/language/Translation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-export declare enum MilestoneModifierGroup {
-    Creatures = 0,
-    Skills = 1,
-    Items = 2,
-    Equipment = 3,
-    Deities = 4,
-    Actions = 5,
-    Treasure = 6,
-    Metagame = 7,
-    Turns = 8,
-    Challenge = 9,
-    Merchants = 10,
-    Statuses = 11
-}
 export declare const milestoneGroupIcons: Record<MilestoneModifierGroup, string>;
 export declare class MilestoneModifierInstance<DATA = any> extends GameplayModifierInstance<Milestone, [Human?], DATA> {
     protected get player(): Human | undefined;

@@ -18,6 +18,8 @@ import Translation from "@wayward/game/language/Translation";
 interface IActionContext {
     action: ActionType;
     executorReference?: Reference;
+    toolReference?: Reference;
+    targetReference?: Reference;
     tool?: ISerializedTranslation;
     target?: ISerializedTranslation;
     details?: Record<string, TranslationArg>;

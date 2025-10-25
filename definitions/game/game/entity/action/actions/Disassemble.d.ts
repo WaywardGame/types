@@ -10,7 +10,7 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { IItemDescription, IItemDisassembleResult } from "@wayward/game/game/item/IItem";
 import type { IRequirementInfo } from "@wayward/game/game/item/IItemManager";
 import type Item from "@wayward/game/game/item/Item";
@@ -19,5 +19,5 @@ export interface IDisassembleCanUse extends IActionUsable {
     requirementInfo: IRequirementInfo;
     disassemblyResult: IItemDisassembleResult;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.OptionalItemArrayNearby]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void | Promise<void>, IDisassembleCanUse, [Item, ((Item | undefined)[] | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.OptionalItemArrayNearby]], ActionType.Disassemble, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IDisassembleCanUse, [Item, ((Item | undefined)[] | undefined)?]>;
 export default _default;

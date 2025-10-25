@@ -161,6 +161,10 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
      * Gets movement progress and moves the state machine forward when the movement is completed
      */
     getMovementProgress(timeStamp: number): number;
+    /**
+     * Returns the Y offset when rendering this entity when it's flying
+     */
+    getFlyingOffsetY(movementProgress: number): number;
     protected onMovementCompleted(movingData: IMovingData): void;
     get isFlying(): boolean;
     get isFastMoving(): boolean;

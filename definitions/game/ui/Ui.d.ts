@@ -24,6 +24,7 @@ import SaveDropHandler from "@wayward/game/ui/SaveDropHandler";
 import ServerJoinHandler from "@wayward/game/ui/ServerJoinHandler";
 import Component from "@wayward/game/ui/component/Component";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
+import InputManager from "@wayward/game/ui/input/InputManager";
 import { ScreenId } from "@wayward/game/ui/screen/IScreen";
 import ScreenManager from "@wayward/game/ui/screen/ScreenManager";
 import ItemStylesheetHandler from "@wayward/game/ui/screen/screens/game/util/item/ItemStylesheet";
@@ -43,6 +44,7 @@ export interface IUiEvents {
     loadedFromSave(): any;
     changeInformationVisibility(informationVisibility: TooltipVisibilityOption): any;
     toggleMoreInfo(moreInfo: boolean): any;
+    toggleStackItemsHint(show: boolean): any;
     toggleHealthVignette(healthVignette: boolean): any;
     toggleDeveloperMode(developerMode: boolean): any;
 }
@@ -65,6 +67,8 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     readonly promptsBridge: PromptsBridge;
     private storage;
     private readonly dataHosts;
+    get input(): typeof InputManager;
+    get components(): typeof Component;
     constructor();
     /**
      * @param elements The elements to refresh translations inside
@@ -124,6 +128,8 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     protected onToggleScreen(): void;
     protected onShowMoreInfo(): void;
     protected onUnshowMoreInfo(): void;
+    protected onShowStackItemsHint(): void;
+    protected onHideStackItemsHint(): void;
     protected onTooltipsToggle(): boolean;
     protected onFullscreen(): boolean;
     protected onToggleDevMode(): boolean;

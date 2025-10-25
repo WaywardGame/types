@@ -22,6 +22,7 @@ import EquipSlotInspection from "@wayward/game/game/inspection/inspections/Equip
 import IslandInspection from "@wayward/game/game/inspection/inspections/IslandInspection";
 import ItemInspection from "@wayward/game/game/inspection/inspections/ItemInspection";
 import ItemsInspection from "@wayward/game/game/inspection/inspections/ItemsInspection";
+import MagicCurseInspection from "@wayward/game/game/inspection/inspections/MagicCurseInspection";
 import MagicInspection from "@wayward/game/game/inspection/inspections/MagicInspection";
 import MilestoneInspection from "@wayward/game/game/inspection/inspections/MilestoneInspection";
 import NPCInspection from "@wayward/game/game/inspection/inspections/NPCInspection";
@@ -40,7 +41,7 @@ declare const inspectionTypeMap: {
     14: typeof CorpseInspection;
     15: typeof CorpsesInspection;
     3: typeof CreatureInspection;
-    26: typeof DamageInspection;
+    27: typeof DamageInspection;
     22: typeof DeityInspection;
     10: typeof ItemInspection;
     4: typeof DoodadInspection;
@@ -51,6 +52,7 @@ declare const inspectionTypeMap: {
     13: typeof ItemsInspection;
     11: typeof ItemInspection;
     24: typeof MagicInspection;
+    25: typeof MagicCurseInspection;
     19: typeof MilestoneInspection;
     2: typeof NPCInspection;
     1: typeof PlayerInspection;
@@ -59,7 +61,7 @@ declare const inspectionTypeMap: {
     0: typeof SelfInspection;
     18: typeof SkillInspection;
     20: typeof StatInspection;
-    25: typeof StatusInspection;
+    26: typeof StatusInspection;
     17: typeof TileInspection;
     5: typeof TileEventInspection;
     16: typeof TileEventInspection.Minors;

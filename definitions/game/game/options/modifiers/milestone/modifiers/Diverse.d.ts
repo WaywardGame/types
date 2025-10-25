@@ -10,7 +10,8 @@
  */
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
-import MilestoneModifier, { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import MilestoneModifier from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/IMilestoneModifier";
 import type { TranslationArg } from "@wayward/game/language/ITranslation";
 export default class Diverse extends MilestoneModifier {
     private readonly gainAmount;

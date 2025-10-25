@@ -35,12 +35,6 @@ import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 import type { IRange } from "@wayward/utilities/math/Range";
 export interface IGameEvents {
     /**
-     * Called when game options are first processed, after modifiers are applied.
-     *
-     * You can use this combined with `game.uncacheGameOptions()` to dynamically modify game options.
-     */
-    getGameOptions(gameOptions: IGameOptions): IGameOptions;
-    /**
      * Called when the game is starting
      * @param isLoadingSave True if a save game was loaded
      * @param playedCount The number of times the player has played the game (globally, not per slot)
@@ -127,8 +121,9 @@ export declare enum TickFlag {
     PlayerNotes = 1024,
     Items = 2048,
     Lights = 4096,
+    Curse = 8192,
     IslandFastForward = 6174,
-    All = 65535
+    All = 4294967295
 }
 /**
  * This number * game.interval (16.666) is the tick time in milliseconds

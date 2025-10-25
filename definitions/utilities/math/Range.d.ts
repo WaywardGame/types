@@ -18,9 +18,9 @@ export default function range(maximum: number): IRange;
  * @param maximum Exclusive
  */
 export default function range(minimum: number, maximum: number): IRange;
-export interface IRange {
-    minimum: number;
-    maximum: number;
+export interface IRange<T = number> {
+    minimum: T;
+    maximum: T;
 }
 export declare namespace IRange {
     const ZERO: Readonly<IRange>;
@@ -31,9 +31,9 @@ export declare namespace IRange {
     function add(...rangesOrNumbers: Array<IRange | number>): IRange;
     function flatten(rangeOrNumber: IRange | number): IRange | number;
     function flatten(rangeOrNumber: IRange | number | undefined): IRange | number | undefined;
-    function multiply(range: IRange, by: number, into?: IRange): IRange;
-    function ceil(range: IRange, into?: IRange): IRange;
-    function floor(range: IRange, into?: IRange): IRange;
+    function multiply(range: IRange, by: number, into?: IRange<number>): IRange;
+    function ceil(range: IRange, into?: IRange<number>): IRange;
+    function floor(range: IRange, into?: IRange<number>): IRange;
     function average(range: IRange): number;
     namespace Optional {
         function simplify(value: number | IRange): number | IRange;
@@ -42,3 +42,11 @@ export declare namespace IRange {
         function mult(a: number | IRange, b: number | IRange): number | IRange;
     }
 }
+export interface IRangeRange {
+    minimum: IRange;
+    maximum: IRange;
+}
+export declare namespace IRangeRange {
+    function lerp(t: number, range: IRangeRange): IRange;
+}
+export declare function rangeRange(minimum: IRange, maximum: IRange): IRangeRange;

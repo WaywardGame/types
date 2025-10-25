@@ -12,7 +12,7 @@ import { RestType } from "@wayward/game/game/entity/IHuman";
 import type { IStatChanging, IStatMax } from "@wayward/game/game/entity/IStats";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { ITerrainDescription, TerrainType } from "@wayward/game/game/tile/ITerrain";
 export interface IRestCanUse extends IActionUsable {
     restType: RestType;
@@ -21,5 +21,5 @@ export interface IRestCanUse extends IActionUsable {
     tileDescription?: ITerrainDescription;
     tileType: TerrainType;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearby, ActionArgument.DoodadNearby], [ActionArgument.Undefined, import("../argument/ActionArgumentEnum").default<RestType, "Resting" | "Sleeping">]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IRestCanUse, [(import("../../../doodad/Doodad").default | import("../../../item/Item").default | undefined)?, (RestType | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearby, ActionArgument.DoodadNearby], [ActionArgument.Undefined, import("../argument/ActionArgumentEnum").default<RestType, "Resting" | "Sleeping">]], ActionType.Rest, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IRestCanUse, [(import("../../../doodad/Doodad").default | import("../../../item/Item").default | undefined)?, (RestType | undefined)?]>;
 export default _default;

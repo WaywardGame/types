@@ -20,7 +20,7 @@ import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import { AiType, ChangeAiType } from "@wayward/game/game/entity/ai/AI";
 import type { IEntityAiEvents } from "@wayward/game/game/entity/ai/AiManager";
 import AiManager from "@wayward/game/game/entity/ai/AiManager";
-import type { INPCDescription } from "@wayward/game/game/entity/npc/INPC";
+import type { INPCDescription, NPCTag } from "@wayward/game/game/entity/npc/INPC";
 import { NPCType } from "@wayward/game/game/entity/npc/INPCs";
 import type MerchantNPC from "@wayward/game/game/entity/npc/npcs/Merchant";
 import type ShipperNPC from "@wayward/game/game/entity/npc/npcs/Shipper";
@@ -33,7 +33,7 @@ import type { IContainer, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
-import type { Article } from "@wayward/game/language/Translation";
+import type { Article } from "@wayward/game/language/ITranslation";
 import Translation from "@wayward/game/language/Translation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
@@ -51,7 +51,7 @@ export interface INPCEvents extends Events<Human>, IEntityAiEvents {
      */
     canNPCAttack(): boolean | undefined;
 }
-export default abstract class NPC extends Human<INPCDescription, NPCType, ReferenceType.NPC> {
+export default abstract class NPC extends Human<INPCDescription, NPCType, ReferenceType.NPC, NPCTag> {
     protected static registrarId: number;
     get constructorFunction(): typeof NPC;
     readonly isPlayerLike: boolean;

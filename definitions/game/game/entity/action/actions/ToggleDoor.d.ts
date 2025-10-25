@@ -12,12 +12,12 @@ import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type { DoodadType } from "@wayward/game/game/doodad/IDoodad";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Tile from "@wayward/game/game/tile/Tile";
 export interface IToggleDoorCanUse extends IActionUsable {
     doodad: Doodad;
     tile: Tile;
     changeType: DoodadType;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.DoodadNearby], [arg1: ActionArgument.Undefined, ActionArgument.Boolean]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, boolean, IToggleDoorCanUse, [(Doodad | undefined)?, (boolean | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.DoodadNearby], [arg1: ActionArgument.Undefined, ActionArgument.Boolean]], ActionType.ToggleDoor, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, boolean, IToggleDoorCanUse, [(Doodad | undefined)?, (boolean | undefined)?]>;
 export default _default;

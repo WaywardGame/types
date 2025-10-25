@@ -10,7 +10,7 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Item from "@wayward/game/game/item/Item";
 export interface IShootCanUse extends IActionUsable {
     rangedWeapon: Item;
@@ -18,5 +18,5 @@ export interface IShootCanUse extends IActionUsable {
 /**
  * Shooting a specific item (like an arrow)
  */
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IShootCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Shoot, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IShootCanUse, [Item]>;
 export default _default;

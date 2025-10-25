@@ -12,7 +12,8 @@ import { Quality } from "@wayward/game/game/IObject";
 import Deity from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import { DamageType } from "@wayward/game/game/entity/IEntity";
-import { EquipType, SkillType } from "@wayward/game/game/entity/IHuman";
+import { EquipType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { ActionId } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
@@ -55,7 +56,8 @@ export declare enum ReferenceType {
     Quality = 17,
     Magic = 18,
     Status = 19,
-    Damage = 20
+    Damage = 20,
+    MagicCurse = 21
 }
 export declare const enumRefTypes: {
     8: typeof SkillType;
@@ -881,6 +883,25 @@ export declare const enumRefTypes: {
         ChickenEggshells: ItemType.ChickenEggshells;
         PenguinEggshells: ItemType.PenguinEggshells;
         MagicalMote: ItemType.MagicalMote;
+        UnrefinedSugar: ItemType.UnrefinedSugar;
+        RefinedSugar: ItemType.RefinedSugar;
+        CandiedFruit: ItemType.CandiedFruit;
+        CandiedSugar: ItemType.CandiedSugar;
+        RawClayBakingTray: ItemType.RawClayBakingTray;
+        ClayBakingTray: ItemType.ClayBakingTray;
+        GlassBakingTray: ItemType.GlassBakingTray;
+        RawClayPan: ItemType.RawClayPan;
+        ClayPan: ItemType.ClayPan;
+        GlassPan: ItemType.GlassPan;
+        TinPan: ItemType.TinPan;
+        CopperPan: ItemType.CopperPan;
+        WroughtIronPan: ItemType.WroughtIronPan;
+        IronPan: ItemType.IronPan;
+        BronzePan: ItemType.BronzePan;
+        PumpkinPie: ItemType.PumpkinPie;
+        FruitPie: ItemType.FruitPie;
+        JackOLantern: ItemType.JackOLantern;
+        DriedLeaves: ItemType.DriedLeaves;
         Last: ItemType.Last;
         TatteredMap_RolledUp: ItemTypeExtra.TatteredMap_RolledUp;
         TatteredMap_Completed: ItemTypeExtra.TatteredMap_Completed;
@@ -891,6 +912,14 @@ export declare const enumRefTypes: {
         RuneOfEvilSplinters: ItemTypeExtra.RuneOfEvilSplinters;
         RuneOfGoodCharred: ItemTypeExtra.RuneOfGoodCharred;
         TallySticks: ItemTypeExtra.TallySticks;
+        JackOLantern2: ItemTypeExtra.JackOLantern2;
+        JackOLantern3: ItemTypeExtra.JackOLantern3;
+        StrawScarecrow2: ItemTypeExtra.StrawScarecrow2;
+        StrawScarecrow3: ItemTypeExtra.StrawScarecrow3;
+        CactusScarecrow2: ItemTypeExtra.CactusScarecrow2;
+        CactusScarecrow3: ItemTypeExtra.CactusScarecrow3;
+        SnowScarecrow2: ItemTypeExtra.SnowScarecrow2;
+        SnowScarecrow3: ItemTypeExtra.SnowScarecrow3;
     };
     12: typeof ItemType;
     13: typeof Stat;
@@ -900,6 +929,7 @@ export declare const enumRefTypes: {
     16: typeof Deity;
     17: typeof Quality;
     18: boolean;
+    21: boolean;
     20: typeof DamageType;
 };
 export type EnumReferenceTypes = keyof typeof enumRefTypes;
@@ -930,6 +960,7 @@ export interface IReferenceTypeMap {
     [ReferenceType.Deity]: [ReferenceType.Deity, Deity];
     [ReferenceType.Quality]: [ReferenceType.Quality, Quality];
     [ReferenceType.Magic]: [ReferenceType.Magic, MagicalPropertyIdentityHash];
+    [ReferenceType.MagicCurse]: [ReferenceType.MagicCurse, MagicalPropertyIdentityHash];
     [ReferenceType.Status]: [ReferenceType.Status, StatusType];
     [ReferenceType.Damage]: [ReferenceType.Damage, DamageType];
 }

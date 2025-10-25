@@ -9,10 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Human from "@wayward/game/game/entity/Human";
 import { Direction } from "@wayward/game/utilities/math/Direction";
-declare const _default: Action<[ActionArgument.Direction, [arg1: ActionArgument.Undefined, ActionArgument.Integer32], [arg1: ActionArgument.Undefined, ActionArgument.Boolean]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
+declare const _default: Action<[ActionArgument.Direction, [arg1: ActionArgument.Undefined, ActionArgument.Integer32], [arg1: ActionArgument.Undefined, ActionArgument.Boolean]], ActionType.UpdateDirection, Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, {
     usable: true;
 }, [Direction.None | Direction.East | Direction.North | Direction.West | Direction.South, (number | undefined)?, (boolean | undefined)?]>;
 export default _default;

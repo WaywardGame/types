@@ -12,7 +12,7 @@ import DebugShared from "@wayward/utilities/dev/DebugShared";
 declare namespace Debug {
     function typeIfRelevant(type: string, name: string): string | undefined;
     function where(thing: unknown): string | undefined;
-    type JIT = DebugShared.JIT;
+    type JIT<A extends any[]> = DebugShared.JIT<A>;
     const JIT: typeof DebugShared.JIT;
     const isJIT: typeof DebugShared.isJIT;
 }

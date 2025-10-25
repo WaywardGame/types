@@ -13,7 +13,8 @@ import type { Command, CommandCallback } from "@wayward/game/command/ICommand";
 import type { BiomeType, IBiomeDescription } from "@wayward/game/game/biome/IBiome";
 import type { DoodadTag, DoodadType, DoodadTypeExtra, DoodadTypeGroup, IDoodadDescription, IDoodadGroupDescription } from "@wayward/game/game/doodad/IDoodad";
 import type { EntityTag } from "@wayward/game/game/entity/IEntity";
-import type { EquipType, InsulationWeight, SkillType } from "@wayward/game/game/entity/IHuman";
+import type { EquipType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../game/entity/skill/ISkills";
 import type { Stat } from "@wayward/game/game/entity/IStats";
 import type { IStatDescription } from "@wayward/game/game/entity/StatDescriptions";
 import type { ActionType, IActionDescription } from "@wayward/game/game/entity/action/IAction";
@@ -37,12 +38,11 @@ import type { StatusClass } from "@wayward/game/game/entity/status/Status";
 import type { InspectType } from "@wayward/game/game/inspection/IInspection";
 import type { InspectionClass } from "@wayward/game/game/inspection/InspectionTypeMap";
 import type { IItemDescription, IItemGroupDescription, ItemTag, ItemType, ItemTypeExtra, ItemTypeGroup } from "@wayward/game/game/item/IItem";
-import type { IMagicalPropertyDescription } from "@wayward/game/game/magic/MagicalPropertyType";
+import type { IMagicalPropertyDescription } from "@wayward/game/game/magic/MagicalPropertyDescriptions";
 import type MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type { ILoadingDescription } from "@wayward/game/game/meta/Loading";
 import type { IPromptDescriptionBase, Prompt } from "@wayward/game/game/meta/prompt/IPrompt";
 import type PromptDescriptionFactory from "@wayward/game/game/meta/prompt/PromptDescriptionFactory";
-import type { TempType } from "@wayward/game/game/temperature/ITemperature";
 import type { ITerrainDescription, OverlayType, TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type { ITileEventDescription, TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type { ITerrainLootItem } from "@wayward/game/game/tile/TerrainResources";
@@ -417,17 +417,6 @@ export interface IEquipTypeDescription extends IModdable {
      * An item group to automatically assign to all items equippable in this equip slot.
      */
     itemGroup?: ItemTypeGroup;
-    /**
-     * For each temperature type (`TempType.Cold` and `TempType.Heat`), the "weight" that it has.
-     * When calculating insulation, this weight is compared with all other weights.
-     * Higher weight = higher % of the insulation score comes from this slot.
-     *
-     * To make the slot optional for insulation of a temp type,
-     * make the value 0 (not considered at all) OR make it `[<weight>, "onlyWhenEquipped"]`.
-     *
-     * Optional slots do not reduce the human's insulation.
-     */
-    insulationWeights?: PartialRecord<TempType, InsulationWeight>;
 }
 export interface IEquipTypeRegistration extends IBaseModRegistration {
     type: ModRegistrationType.EquipType;

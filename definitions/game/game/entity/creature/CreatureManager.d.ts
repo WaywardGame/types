@@ -10,15 +10,15 @@
  */
 import CombatStrengthManager from "@wayward/game/game/entity/CombatStrengthManager";
 import Creature from "@wayward/game/game/entity/creature/Creature";
-import type { ICreatureCheckMoveOptions } from "@wayward/game/game/entity/creature/ICreature";
-import { CreatureType, TileGroup } from "@wayward/game/game/entity/creature/ICreature";
+import type { ICreatureCheckMoveOptions, ICreatureSpawnOptions } from "@wayward/game/game/entity/creature/ICreature";
+import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import type { IEntityRemoveOptions } from "@wayward/game/game/entity/EntityManager";
 import EntityManager from "@wayward/game/game/entity/EntityManager";
 import type Human from "@wayward/game/game/entity/Human";
 import { MoveType } from "@wayward/game/game/entity/IEntity";
 import Tile from "@wayward/game/game/tile/Tile";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-import { Article } from "@wayward/game/language/Translation";
+import { Article } from "@wayward/game/language/ITranslation";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> {
@@ -34,6 +34,7 @@ export interface ICreatureManagerEvents extends Events<EntityManager<Creature>> 
 export default class CreatureManager extends EntityManager<Creature, IEntityRemoveOptions & {
     remainTamed?: boolean;
 }> {
+    readonly static: typeof CreatureManager;
     protected readonly name = "CreatureManager";
     event: IEventEmitter<this, ICreatureManagerEvents>;
     static combatStrength: CombatStrengthManager;
@@ -42,17 +43,13 @@ export default class CreatureManager extends EntityManager<Creature, IEntityRemo
     loadEntity(creature: Creature): void;
     static getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: Article): TranslationImpl;
     getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: Article): TranslationImpl;
-    getHappinessLevel(human: Human, creature: Creature, bonus?: number): number;
+    calculateHappinessTameTime(human: Human, creature: Creature, bonusTime?: number): number;
     /**
      * Spawns a creature.
      * @param type The type of creature to spawn.
      * @param tile The tile
-     * @param bypass Whether to bypass checks for whether the creature can spawn there naturally. Defaults to false, if the creature can't spawn naturally, it won't.
-     * @param forceAberrant If provided, forces the spawned creature's aberrant state to be the passed boolean. True = aberrant, false = not aberrant. If not provided, the aberrant state is decided based on chance.
-     * @param spawnTiles If set, this will overwrite the creature's description for which tiles it can spawn on
-     * @param bypassCreatureLimit If set, the creature limit will be ignored and spawn the creature over the set limit
      */
-    spawn(type: CreatureType, tile: Tile, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: TileGroup, bypassCreatureLimit?: boolean, bypassAll?: boolean): Creature | undefined;
+    spawn(type: CreatureType, tile: Tile, options?: ICreatureSpawnOptions): Creature | undefined;
     spawnFromZone(tile: Tile, bypassCreatureLimit?: boolean, checkTerrainType?: boolean): Creature | undefined;
     createFake(type: CreatureType, aberrant: boolean, tile?: Tile, id?: number): Creature;
     exists(creature: Creature): boolean;
@@ -77,6 +74,6 @@ export default class CreatureManager extends EntityManager<Creature, IEntityRemo
      */
     getMovePenaltyFromWasm(moveType: MoveType, x: number, y: number, z: number): number;
     spawnGuardians(position: IVector3, amount: number): number;
-    static list: import("../../../language/utility/TranslationListBuilder").ITranslationListBuilder<Creature, CreatureType, boolean>;
-    list: import("../../../language/utility/TranslationListBuilder").ITranslationListBuilder<Creature, CreatureType, boolean>;
+    static list: import("../../../language/utility/TranslationListBuilder").TranslationListBuilder<Creature, CreatureType, boolean>;
+    list: import("../../../language/utility/TranslationListBuilder").TranslationListBuilder<Creature, CreatureType, boolean>;
 }

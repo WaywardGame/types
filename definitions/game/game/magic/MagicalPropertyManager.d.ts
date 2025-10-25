@@ -26,11 +26,11 @@ export interface IMagicalPropertyManagerEvents extends IEventSubscriberEvents {
     /**
      * Emitted when a property was added
      */
-    add(...args: MagicalPropertyIdentity<[value: number]>): any;
+    add(...args: MagicalPropertyIdentity<[value: number, curse?: true]>): any;
     /**
      * Emitted when a property was set, and the value it was set to
      */
-    set(...args: MagicalPropertyIdentity<[value: number]>): any;
+    set(...args: MagicalPropertyIdentity<[value: number, curse?: true]>): any;
     /**
      * Emitted when a property was set or removed
      */
@@ -74,6 +74,22 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      */
     hasAny(...types: MagicalPropertyIdentityFlat[]): boolean;
     /**
+     * @returns if this object has any uncursed magical properties
+     */
+    hasUncursed(): boolean;
+    /**
+     * @returns if this object has any of the given uncursed magical property types
+     */
+    hasUncursed(...types: MagicalPropertyIdentityFlat[]): boolean;
+    /**
+     * @returns if this object has any cursed magical properties
+     */
+    hasCursed(): boolean;
+    /**
+     * @returns if this object has any of the given cursed magical property types
+     */
+    hasCursed(...types: MagicalPropertyIdentityFlat[]): boolean;
+    /**
      * @returns whether the given type of magical property is present on this object
      */
     has(type: MagicalPropertyType): boolean;
@@ -100,14 +116,22 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      */
     get<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): number | undefined;
     get(...identity: MagicalPropertyIdentity): number | undefined;
+    isCurse(...identity: MagicalPropertyIdentity): boolean;
     /**
      * Sets a magical property on this object. Replaces any existing magical property of that type
      */
-    set<T extends MagicalNormalPropertyTypes>(type: T, value: number): this;
+    set<T extends MagicalNormalPropertyTypes>(type: T, value: number, curse?: true): this;
     /**
      * Sets a magical sub-property on this object. Replaces any existing magical sub-property of that type
      */
-    set<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T], value: number): this;
+    set<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T], value: number, curse?: true): this;
+    /**
+     * Sets a magical property or sub-property on this object. Replaces any existing of that type
+     */
+    set(...identityAndValueAndCurse: MagicalPropertyIdentity<[value: number, curse?: true]>): this;
+    setCurse<T extends MagicalNormalPropertyTypes>(type: T, curse?: boolean): this;
+    setCurse<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T], curse?: boolean): this;
+    setCurse(...identityAndCurse: MagicalPropertyIdentity<[curse?: boolean]>): this;
     /**
      * Removes a magical property on this object, if it exists
      * @returns whether the magical property was removed — ie, if it existed
@@ -154,6 +178,7 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
     subProperties<T extends MagicalSubPropertyTypes>(type: T): ReadonlyArray<{
         type: MagicalPropertyTypeSubTypeMap[T];
         value: number;
+        curse?: true;
     }>;
     /**
      * @returns a list of all the magical properties on this object
@@ -168,7 +193,7 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      * @param ender The way to end this list translation, ie and/or
      * @param format A formatting-translation to apply to each magical property
      */
-    translate(ender?: ListEnder | false, format?: Translation | ((...identity: MagicalPropertyIdentity) => Translation)): TranslationImpl;
+    translate(ender?: ListEnder | false, format?: Translation | ((...identity: MagicalPropertyIdentity) => Translation), curseFilter?: "cursed" | "uncursed"): TranslationImpl;
     /**
      * @returns a translation for a magical property type
      */
@@ -178,6 +203,15 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      */
     static translate<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): Translation;
     static translate(...identity: MagicalPropertyIdentity): Translation;
+    /**
+     * @returns a curse translation for a magical property type
+     */
+    static translateCurse(type: MagicalNormalPropertyTypes): Translation;
+    /**
+     * @returns a curse translation for a magical sub-property type
+     */
+    static translateCurse<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): Translation;
+    static translateCurse(...identity: MagicalPropertyIdentity): Translation;
     /**
      * @returns a translation for a magical property type
      */

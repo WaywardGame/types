@@ -81,6 +81,16 @@ export declare class ApplicationManager {
     waitForClientConsistency(): Promise<void>;
     createInteraction(application: Application): ApplicationInteraction;
     sailToCivilization(winnerApp: Application): Promise<void>;
+    /**
+     * Sets the time of day for a given application (the island that the player is on)
+     * @param time A number between `0` and `1`, where `0` is the start of the day and `1` is the end.
+     */
+    setTimeOfDay(app: Application, time: number): Promise<void>;
+    /**
+     * Creates all curses for the player on the given application
+     */
+    createAllCurses(app: Application): Promise<void>;
+    fastForwardUntil(app: Application, stopCondition: (player: Player) => boolean): Promise<void>;
     executeJavascript<T2 extends any[], T = void>(app: Application, executor: (player: Player, ...extraArgs: T2) => T, ...extraArgs: T2): Promise<T[]>;
     executeOnPlayingClients<T>(runnable: (app: Application) => Promise<T>): Promise<T[]>;
     executeOnApps<T>(apps: Application[], runnable: (app: Application) => Promise<T>, requiresDeterminism: boolean): Promise<T[]>;

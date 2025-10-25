@@ -43,6 +43,7 @@ export default class ImagePath<PATHTYPE extends PathType = PathType> {
     setCustomPath(customPath?: GetterOfOr<string | ImagePath | undefined>): this;
     refresh(): void;
     get(isVariable?: boolean): string | null;
+    getPath(isVariable?: boolean): string | null;
     private deregistered;
     apply(component: Component, variableName: string): this;
     private unapply;

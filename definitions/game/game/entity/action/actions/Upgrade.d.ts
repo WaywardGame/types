@@ -10,7 +10,7 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { IMagicalPropertyInfo } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
@@ -18,7 +18,7 @@ export interface IUpgradeCanUse extends IActionUsable {
     upgrades: IUpgradeable[];
     upgradeTarget: Item;
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IUpgradeCanUse, [Item, (Item | undefined)?]>;
+declare const _default: Action<[ActionArgument.ItemNearby, [arg1: ActionArgument.Undefined, ActionArgument.ItemNearby]], ActionType.Upgrade, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IUpgradeCanUse, [Item, (Item | undefined)?]>;
 export default _default;
 export interface IUpgradeable extends IMagicalPropertyInfo {
     target: Item;

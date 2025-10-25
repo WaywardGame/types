@@ -12,7 +12,7 @@ import type { MagicalNormalPropertyTypes, MagicalPropertyIdentity } from "@waywa
 import type { MagicalSubPropertyTypes } from "@wayward/game/game/magic/IMagicalProperty";
 import type { MagicalPropertyTypeSubTypeMap } from "@wayward/game/game/magic/MagicalPropertyType";
 import Translation from "@wayward/game/language/Translation";
-declare function MagicalSourceTooltip(type: MagicalNormalPropertyTypes): Translation;
-declare function MagicalSourceTooltip<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T]): Translation;
-declare function MagicalSourceTooltip(...config: MagicalPropertyIdentity): Translation;
+declare function MagicalSourceTooltip(type: MagicalNormalPropertyTypes, curse?: true): Translation;
+declare function MagicalSourceTooltip<T extends MagicalSubPropertyTypes>(type: T, subType: MagicalPropertyTypeSubTypeMap[T], curse?: true): Translation;
+declare function MagicalSourceTooltip(...identityAndIsCurse: MagicalPropertyIdentity<[curse?: true]>): Translation;
 export default MagicalSourceTooltip;

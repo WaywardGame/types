@@ -15,7 +15,7 @@ import type Item from "@wayward/game/game/item/Item";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 declare const _default: UseInfo<{
     onConsume: [Stat, number][];
-    skill: import("../../../../entity/IHuman").SkillType | undefined;
+    skill: import("../../../../entity/skill/ISkills").SkillType | undefined;
     entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
     type: import("@wayward/game/game/item/IItem").ItemType;

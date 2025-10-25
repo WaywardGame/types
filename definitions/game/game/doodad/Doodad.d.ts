@@ -11,14 +11,15 @@
 import { TileUpdateType } from "@wayward/game/game/IGame";
 import type { IHasQuality, IObject, IQualityEvents } from "@wayward/game/game/IObject";
 import { Quality } from "@wayward/game/game/IObject";
-import type { DisplayableDoodadType, DoodadTypeExtra, DoorOrientation, IDoodadDescription, IDoodadGetNameOptions, IDoodadOptions, IHasBuilder, IHasWater } from "@wayward/game/game/doodad/IDoodad";
+import type { DisplayableDoodadType, DoorOrientation, IDoodadDescription, IDoodadGetNameOptions, IDoodadOptions, IHasBuilder, IHasWater } from "@wayward/game/game/doodad/IDoodad";
+import { DoodadTypeExtra } from "@wayward/game/game/doodad/IDoodad";
 import { DoodadTag, DoodadType, DoodadTypeGroup, GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import type { IEntityMovableEvents } from "@wayward/game/game/entity/EntityMovable";
 import EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
-import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type { EquipType } from "@wayward/game/game/entity/IHuman";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
@@ -33,11 +34,11 @@ import type Item from "@wayward/game/game/item/Item";
 import type { IHasMagic } from "@wayward/game/game/magic/IMagicalProperty";
 import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
-import type { IHasInsulation, TempType } from "@wayward/game/game/temperature/ITemperature";
+import type { IHasInsulation, IInsulationResult, TempType } from "@wayward/game/game/temperature/ITemperature";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
-import { FireStage } from "@wayward/game/game/tile/events/IFire";
-import { Article } from "@wayward/game/language/Translation";
+import FireStage from "@wayward/game/game/tile/events/fire/FireStage";
+import { Article } from "@wayward/game/language/ITranslation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { SortDirection } from "@wayward/game/save/ISaveManager";
 import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
@@ -175,8 +176,8 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     changeType(doodadType: DoodadType): void;
     get isValid(): boolean;
-    isInGroup(doodadTypeGroup: DoodadTypeGroup): boolean;
-    updateGroupCache(doodadTypeGroup: DoodadTypeGroup): boolean;
+    isInGroup(doodadTypeGroup: DoodadType | DoodadTypeGroup): boolean;
+    updateGroupCache(doodadTypeGroup: DoodadType | DoodadTypeGroup): boolean;
     get point(): IVector3;
     get tile(): Tile;
     /**
@@ -232,7 +233,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     removeMagic(): void;
     unhitch(): void;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean, damage?: number): void;
-    getDefaultDurability(random?: import("@wayward/utilities/random/Random").Random<import("@wayward/utilities/random/generators/LegacySeededGenerator").LegacySeededGenerator | import("@wayward/utilities/random/generators/PCGSeededGenerator").PCGSeededGenerator>): number;
+    getDefaultDurability(random?: import("@wayward/utilities/random/Random").Random<import("@wayward/utilities/random/generators/PCGSeededGenerator").PCGSeededGenerator | import("@wayward/utilities/random/generators/LegacySeededGenerator").LegacySeededGenerator>): number;
     /**
      * Gets the container to use for doodad executed actions
      */
@@ -257,7 +258,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * @param bypassChange Set to true if you just want to check if fertility can be increased.
      * @returns True or false depending on if it increased in fertility or not.
      */
-    increaseFertility(bypassChange?: boolean): boolean;
+    increaseFertility(bypassChange?: boolean, sendMessage?: boolean): boolean;
     /**
      * Return extra trap damage based on player multiplier and magical status
      */
@@ -275,7 +276,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     getLiquidGatherType(): keyof ILiquidGather | undefined;
     getProducedTemperature(): number | undefined;
-    getInsulation(type: TempType): number | undefined;
+    getInsulation(type: TempType): IInsulationResult | undefined;
     isIslandPort(): boolean;
     /**
      * Refills solar stills when they are on shallow water automatically.
@@ -308,7 +309,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     canInspect(human: Human): boolean;
     private processSpecials;
     /**
-     * Check for items on top of lit/fire doodads, set them on fire
+     * Check for items on top of lit/fire doodads (that are OpenFireSource), and automatically "stoke" the items
      */
     private processFire;
     /**
@@ -376,11 +377,6 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     getCivilizationScore(excludeMagic?: boolean): number;
     /**
-     * Gets the scarecrow radius based on quality.
-     * This also exists on items.
-     */
-    getScareRadius(): number;
-    /**
      * Gets a set of skill types and values from doodads that have "containedItemGroupProvidesSkill" set for items that provide adjacent skill bonuses.
      * @returns Map of skill type and number (skill value).
      */
@@ -399,6 +395,19 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     getSkillUse(): SkillType;
     /**
+     * Checks if a solar still can work in the current temperature.
+     * @returns True if the solar still can work in the current temperature, false if not.
+     */
+    willStillWorkInTemperature(): boolean;
+    forceDecayTick(): void;
+    /**
+     * Stokes fire from the StokeFire action and other events like directly dropping items into open fire sources.
+     * @param stokeValue The amount to stoke the fire by.
+     * @param human The human that is stoking the fire.
+     * @returns True if fire overflowed, false if not.
+     */
+    stokeFire(stokeValue: number, human?: Human): boolean;
+    /**
      * Decay over time
      */
     private processDecay;
@@ -412,5 +421,4 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     private processDripstone;
     private postProcessDecay;
     private randomAshSpawn;
-    private canGrowToBare;
 }

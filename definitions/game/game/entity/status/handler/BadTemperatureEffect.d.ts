@@ -14,6 +14,9 @@ import type { StatusType } from "@wayward/game/game/entity/status/IStatus";
 import Status from "@wayward/game/game/entity/status/Status";
 import type Island from "@wayward/game/game/island/Island";
 import { Temperature, TempType } from "@wayward/game/game/temperature/ITemperature";
+export declare const CHANCE_TEMP_CONSEQUENCE_EFFECT = 0.3;
+export declare const CHANCE_TEMP_CONSEQUENCE_STAT = 0.5;
+export declare const CHANCE_TEMP_WAKEUP = 0.15;
 export default abstract class BadTemperatureEffect extends Status {
     protected effectiveTemperature: Temperature;
     register(): void;

@@ -11,10 +11,11 @@
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 export interface IToggleHitchCanUse extends IActionUsable {
     creature: Creature;
     hitch?: Doodad;
 }
-declare const _default: Action<[], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IToggleHitchCanUse, []>;
+declare const _default: Action<[], ActionType.ToggleHitch, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IToggleHitchCanUse, []>;
 export default _default;

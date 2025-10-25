@@ -10,7 +10,8 @@
  */
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
-import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import MilestoneModifier, { MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/IMilestoneModifier";
 import type { Random } from "@wayward/utilities/random/Random";
 declare class TamedCreatureMilestoneModifierInstance extends MilestoneModifierInstance {
     private readonly modifier;

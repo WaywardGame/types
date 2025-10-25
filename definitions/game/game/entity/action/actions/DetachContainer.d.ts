@@ -11,11 +11,11 @@
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Item from "@wayward/game/game/item/Item";
 export interface IDetachContainerCanUse extends IActionUsable {
     doodad: Doodad;
     stillContainer: Item;
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.DoodadNearby]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IDetachContainerCanUse, [(Doodad | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.DoodadNearby]], ActionType.DetachContainer, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IDetachContainerCanUse, [(Doodad | undefined)?]>;
 export default _default;

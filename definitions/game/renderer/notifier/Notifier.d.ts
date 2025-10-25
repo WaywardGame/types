@@ -32,7 +32,7 @@ export declare class Notifier {
     setResources(resourceContainer: IResourceContainer): void;
     clear(): void;
     delete(): void;
-    addItem(location: INotificationLocation, itemNotifierType: ItemNotifierType, type: DisplayableItemType): void;
+    addItem(location: INotificationLocation, itemNotifierType: ItemNotifierType, type: DisplayableItemType, baseType?: DisplayableItemType): void;
     addCreature(location: INotificationLocation, creatureNotifierType: CreatureNotifierType, type: CreatureType, aberrant?: boolean): void;
     addStat(location: INotificationLocation, type: StatNotificationType, value: number): void;
     addStatus(location: INotificationLocation, status: Status, reason: StatusChangeReason): void;

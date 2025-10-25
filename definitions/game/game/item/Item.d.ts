@@ -20,7 +20,7 @@ import type Human from "@wayward/game/game/entity/Human";
 import type { IMovingData } from "@wayward/game/game/entity/IEntity";
 import { AttackType, DamageType, EntityType } from "@wayward/game/game/entity/IEntity";
 import type { EquipType } from "@wayward/game/game/entity/IHuman";
-import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type ActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
@@ -29,6 +29,7 @@ import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IMobCheck, IslandId } from "@wayward/game/game/island/IIsland";
+import { WaterType } from "@wayward/game/game/island/IIsland";
 import type { ContainerReference, DisplayableItemType, IConstructedInfo, IContainable, IContainer, IItemChangeIntoOptions, IItemDescription, IItemDisassembleResult, IItemDisassembly, IItemGetNameOptions, IItemUsed, IItemVehicle, IMagicalPropertyInfo, IItemMovementResult as IMoveToTileMobCheckResult, IMoveToTileOptions, ItemTag } from "@wayward/game/game/item/IItem";
 import { ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { BookType, ContainerSort, ItemDamageResult, ItemType, ItemTypeGroup, ItemWeightChange, SYMBOL_CONTAINER_CACHED_REFERENCE } from "@wayward/game/game/item/IItem";
@@ -41,14 +42,15 @@ import type { IMagicalPropertyManagerEvents } from "@wayward/game/game/magic/Mag
 import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
-import type { IHasInsulation, TempType } from "@wayward/game/game/temperature/ITemperature";
+import { type IHasInsulation, type IInsulationResult, type TempType } from "@wayward/game/game/temperature/ITemperature";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
-import { FireStage } from "@wayward/game/game/tile/events/IFire";
-import { Article } from "@wayward/game/language/Translation";
+import FireStage from "@wayward/game/game/tile/events/fire/FireStage";
+import { Article } from "@wayward/game/language/ITranslation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { SortDirection } from "@wayward/game/save/ISaveManager";
 import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
+import Debug from "@wayward/game/utilities/dev/Debug";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
@@ -90,6 +92,7 @@ export interface IItemEvents extends IEntityMovableEvents, IQualityEvents, ItemM
     defenseBonusChange(defenseBonus: number, oldDefenseBonus?: number): any;
     revertFromDoodad(doodad: Doodad): any;
     becomeDoodad(doodad: Doodad): any;
+    baseItem(baseItem: ItemType | undefined): any;
 }
 export default class Item extends EntityMovable<IItemDescription, ItemType, ReferenceType.Item, ItemTag> implements Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, IHasInsulation, IHasMagic, IHasQuality {
     get entityType(): EntityType.Item;
@@ -100,6 +103,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     weight: number;
     private decay?;
     addOrder?: number[];
+    baseItem?: ItemType;
     bonusAttack?: number;
     bonusDefense?: number;
     book?: BookType;
@@ -207,7 +211,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * - `item.getName(undefined, 3)` // "stone axes"
      */
     getName(article?: Article, options?: Partial<IItemGetNameOptions>): TranslationImpl;
-    protected get debug(): any;
+    get debug(): Debug.JIT<[overrideToStringTag?: string]>;
     protected get typeEnum(): typeof ItemType;
     protected getDescription(): IItemDescription | undefined;
     get isTransient(): boolean;
@@ -258,8 +262,9 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * @param source A string representing the reason for this damage. Used for multiplayer debugging. Just put a unique string of characters here
      * @param modifier The amount of damage to take. Defaults to 1.
      * @param min The minimum durability that this item should have remaining. Defaults to n/a
+     * @param type The type of damage being done (currently used to check for createOnBreak).
      */
-    damage(source: string, modifier?: number, min?: number): ItemDamageResult;
+    damage(source: string, modifier?: number, min?: number, type?: DamageType): ItemDamageResult;
     isInTradeContainer(): boolean;
     getEquippedHuman(): Human | undefined;
     isEquipped(includeDisabled?: true): boolean;
@@ -282,7 +287,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      */
     returns(disableNotify?: boolean, craft?: boolean): boolean;
     setUsed(itemUse?: IItemUsed, human?: Human): void;
-    createOnBreak(tile: Tile): void;
+    createOnBreak(tile: Tile, damageType?: DamageType): void;
     spawnOnDecay(tile: Tile): Creature | undefined;
     spawnCreatureOnItem(tile: Tile, creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingTile?: Human, maxTilesChecked?: number): Creature | undefined;
     get point(): IVector3 | undefined;
@@ -362,8 +367,8 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     canBeRefined(): boolean;
     getProducedTemperature(): number | undefined;
     postProcessDecay(): void;
-    getContainerInsulation(type: TempType): number;
-    getEquipmentInsulation(type: TempType): number;
+    getContainerInsulation(type: TempType): IInsulationResult | undefined;
+    getEquipmentInsulation(type: TempType): IInsulationResult | undefined;
     getBaseTemperature(): number | undefined;
     /**
      * Gets the ticks until this item will decay at 1x decay speed.
@@ -377,7 +382,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     /**
      * Decreases the time until the item will decay (ticks until it decays at 1x decay speed).
      */
-    reduceDecayTime(time?: number): number | undefined;
+    reduceDecayTime(time?: number, skipChance?: boolean): number | undefined;
     /**
      * Sets the item's decay time (ticks until it decays at 1x decay speed).
      * @param decayTime The new decay time to set, or `undefined` to remove the decay time.
@@ -462,11 +467,6 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * @returns number of score (or 0 if no civilization score is set).
      */
     getCivilizationScore(actionType: ActionType.Build | ActionType.SetDown): number;
-    /**
-     * Gets the scarecrow radius based on doodad's definition and quality.
-     * This also exists on doodads.
-     */
-    getScareRadius(): number;
     getVehicle(): IItemVehicle | undefined;
     addCreature(creature: Creature, remainTamed?: boolean): void;
     /**
@@ -512,6 +512,21 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * @param container The container to leave the items in or on
      */
     dropItemsOnMelt(container: IContainer): void;
+    /**
+     * Sets the base item type based on the disassembly items and the overlayItem property.
+     */
+    setBaseItemType(): void;
+    /**
+     * Gets the item type that should be returned when the item is used up or decays.
+     * @returns The item type that should be returned when the item is used up or decays, or ItemType.None if nothing should be returned.
+     */
+    getReturnType(): ItemType;
+    createReturnItem(returnType: ItemType, container?: IContainer): Item | undefined;
+    /**
+     * Returns the type of water contained in the item in the case of containers of liquid.
+     * @returns WaterType enum value.
+     */
+    getWaterType(): WaterType;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;
 }

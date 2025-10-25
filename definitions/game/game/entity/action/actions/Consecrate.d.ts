@@ -13,7 +13,7 @@ import { DeityReal } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Human from "@wayward/game/game/entity/Human";
 import { Action } from "@wayward/game/game/entity/action/Action";
-import { ActionArgument, type IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType, type IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import type { IContainer } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
@@ -31,7 +31,7 @@ export type ConsecrateOutcomeRuneQualityCounts = PartialRecord<Quality, {
     minProgress: number;
     maxProgress: number;
 }>;
-declare const _default: Action<[ActionArgument.DoodadNearby], import("../../player/Player").default, void, IConsecrateUsable, [Doodad]> & {
+declare const _default: Action<[ActionArgument.DoodadNearby], ActionType.Consecrate, import("../../player/Player").default, void, IConsecrateUsable, [Doodad]> & {
     getRunes(container?: IContainer): Item[];
     groupRunes(runes: Item[]): ConsecrateRuneGroup[];
     getReturnDeity(runeGroups: ConsecrateRuneGroup[]): DeityReal | undefined;

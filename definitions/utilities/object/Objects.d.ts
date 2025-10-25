@@ -17,6 +17,7 @@ export type UnWeakRefified<ARGS extends any[]> = {
     [INDEX in keyof ARGS]: ARGS[INDEX] | (ARGS[INDEX] extends WeakKey ? undefined : never);
 };
 declare namespace Objects {
+    function as<T>(value: T): T;
     function mapOrRecordKeys<RK extends PropertyKey, MK>(o: Partial<Record<RK, any>> | Map<MK, any>): Array<RK | MK>;
     function mapOrRecordValues<V>(o: Partial<Record<PropertyKey, V>> | Map<any, V>): V[];
     function mapOrRecordEntries<RK extends PropertyKey, MK, V>(o: Partial<Record<RK, V>> | Map<MK, V>): Array<[RK | MK, V]>;

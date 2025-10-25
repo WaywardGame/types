@@ -11,31 +11,10 @@
 import Component from "@wayward/game/ui/component/Component";
 import Bindable from "@wayward/game/ui/input/Bindable";
 import { IInput, InputCatalyst, Modifier } from "@wayward/game/ui/input/IInput";
+import InputInfo from "@wayward/game/ui/input/InputInfo";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import HashMap from "@wayward/utilities/collection/map/HashMap";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
-export declare class InputInfo {
-    readonly catalyst: InputCatalyst;
-    /**
-     * The component that this input began in.
-     */
-    readonly startTarget: Component;
-    /**
-     * The unix timestamp representing when this input began. If this is a `"down"` event, the value will be `Date.now()`,
-     * whereas if this is a `"holding"` or `"up"` event, the value will be when the `"down"` event fired.
-     */
-    readonly startTime: number;
-    /**
-     * Whether this input was a touch input
-     */
-    readonly touch: boolean;
-    /**
-     * The number of milliseconds that have elapsed since `startTime`. Calculated on the fly.
-     */
-    get duration(): number;
-    constructor(evt: Event, catalyst: InputCatalyst);
-    startWasWithin(component?: Component): boolean | undefined;
-}
 export interface IGlobalMouseInfoEvents {
     move(position: Vector2): any;
     invalidateTarget(): any;

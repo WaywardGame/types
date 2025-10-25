@@ -11,7 +11,7 @@
 import type Human from "@wayward/game/game/entity/Human";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type ShipperNPC from "@wayward/game/game/entity/npc/npcs/Shipper";
 import type { IIslandPort } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
@@ -22,5 +22,5 @@ export interface IShipToIslandCanUse extends IActionUsable {
     port?: IIslandPort;
     island?: Island;
 }
-declare const _default: Action<[ActionArgument.NPCNearby, [arg1: ActionArgument.Undefined, ActionArgument.Island, ActionArgument.Vector2], [arg1: ActionArgument.Undefined, ActionArgument.Integer32]], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IShipToIslandCanUse, [import("../../npc/NPC").default, (Island | IVector2 | undefined)?, (number | undefined)?]>;
+declare const _default: Action<[ActionArgument.NPCNearby, [arg1: ActionArgument.Undefined, ActionArgument.Island, ActionArgument.Vector2], [arg1: ActionArgument.Undefined, ActionArgument.Integer32]], ActionType.ShipToIsland, Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IShipToIslandCanUse, [import("../../npc/NPC").default, (Island | IVector2 | undefined)?, (number | undefined)?]>;
 export default _default;

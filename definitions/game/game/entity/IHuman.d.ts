@@ -9,22 +9,26 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IHasImagePath } from "@wayward/game/game/IObject";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
 import type { AttackType, DamageType } from "@wayward/game/game/entity/IEntity";
 import type { Stat } from "@wayward/game/game/entity/IStats";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type { CreatureType, IDamageInfo } from "@wayward/game/game/entity/creature/ICreature";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type { IMovementIntent, WalkTo, WeightStatus } from "@wayward/game/game/entity/player/IPlayer";
 import type PlayerDefense from "@wayward/game/game/entity/player/PlayerDefense";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type { ISkillEvents } from "@wayward/game/game/entity/skill/SkillManager";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import type { IContainer } from "@wayward/game/game/item/IItem";
 import { ItemType, ItemTypeGroup, RecipeLevel } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
+import type Runekeeper from "@wayward/game/game/milestones/milestone/Runekeeper";
 import { TempType } from "@wayward/game/game/temperature/ITemperature";
 import type Tile from "@wayward/game/game/tile/Tile";
 import Message from "@wayward/game/language/dictionary/Message";
@@ -307,6 +311,14 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      * @param tile The tile to get the movement penalty of
      */
     getTilePenalty(penalty: number, tile: Tile): number;
+    /**
+     * Allows modifying the curse value. This should only be used in debug tools or similar mods — the curse stat tooltip will be incorrect!
+     */
+    getCurse(curse: number): number;
+    /**
+     * Allows modifying a rune chance roll.
+     */
+    getRuneChance(chance: number, deity: ArrayOr<DeityReal>, domain: Runekeeper.DomainData, context: IActionContext): number;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;
@@ -355,22 +367,6 @@ export declare const EQUIP_SLOTS: EquipType[];
 export declare const EQUIP_SLOTS_FREE: EquipType[];
 export declare const EQUIP_SLOT_ITEM_GROUPS: Record<EquipType, ItemTypeGroup | undefined>;
 export declare const equipmentRenderOrder: EquipType[];
-export type InsulationWeight = number | [number, "onlyWhenEquipped"];
-export declare const equipSlotInsulationWeights: Record<TempType, PartialRecord<EquipType, InsulationWeight>>;
-export interface IExcludedWhenLowering {
-    excludeIfLowering: true;
-}
-/**
- * @param weight The weight of this slot in the calculation. Compare this number to the weights of other slots.
- * @param insulation The insulation value of the item in this slot.
- * @param excluded Whether this slot's insulation should be excluded if it lowers the resulting insulation value.
- */
-export type CalculatedEquipSlotInsulation = [
-    weight: number,
-    insulation: number,
-    excluded?: IExcludedWhenLowering
-];
-export declare function calculateEquipSlotInsulation(type: TempType, slot: EquipType, equipped?: Item): CalculatedEquipSlotInsulation;
 export declare const insulationRangeWhenSwimming: Record<TempType, IRange>;
 export declare enum HairColor {
     "#e7c978" = 0,// blonde
@@ -414,7 +410,11 @@ export declare enum RestCancelReason {
     CreatureDamaged = 4,
     Canceled = 5,
     Dying = 6,
-    WaterPoured = 7
+    WaterPoured = 7,
+    UncomfortablyCold = 8,
+    TooCold = 9,
+    UncomfortablyHot = 10,
+    TooHot = 11
 }
 export declare const restCancelReasonMessageMap: Record<RestCancelReason, Message | undefined>;
 export type WalkToChangeReason = "Damage" | "Overburdened" | "PromptVisible" | "Unknown";
@@ -431,48 +431,13 @@ export declare enum RestType {
     Resting = 0,
     Sleeping = 1
 }
-export declare enum SkillType {
-    None = 0,
-    Chemistry = 1,
-    Anatomy = 2,
-    Marksmanship = 3,
-    Blacksmithing = 4,
-    Botany = 5,
-    Camping = 6,
-    Cartography = 7,
-    Claythrowing = 8,
-    Cooking = 9,
-    Fishing = 10,
-    Fletching = 11,
-    Glassblowing = 12,
-    Leatherworking = 13,
-    Lockpicking = 14,
-    Lumberjacking = 15,
-    Mining = 16,
-    Mycology = 17,
-    Parrying = 18,
-    Stonecrafting = 19,
-    Swimming = 20,
-    Tactics = 21,
-    Tailoring = 22,
-    Throwing = 23,
-    Tinkering = 24,
-    Trapping = 25,
-    Woodworking = 26,
-    Taming = 27,
-    Horticulture = 28,
-    Bartering = 29,
-    Seafaring = 30,
-    Thaumaturgy = 31,
-    DualWielding = 32,
-    Theurgy = 33
-}
 export interface ICrafted {
     unlockTime: number;
     newUnlock: boolean;
 }
 export interface ICheckUnderOptions {
-    skipDoodadEvents?: boolean;
+    skipDoodadsAndTileEvents?: boolean;
+    doItemCrushing?: boolean;
     burned?: boolean;
 }
 export declare const craftingChances: Descriptions<RecipeLevel, number>;
@@ -519,6 +484,9 @@ export declare enum MovingState {
      */
     PreNoInput = 2
 }
+export declare enum HumanTag {
+    None = 0
+}
 /**
  * The swimming skill required to travel to another island
  *
@@ -537,7 +505,7 @@ export declare const DEFAULT_ISLAND_TRAVEL_TIME_BASE = 1000;
 /**
  * A multiplier for how much travel time is added by the distance travelled, variable based on the player's seafaring skill.
  */
-export declare const DEFAULT_ISLAND_TRAVEL_TIME_MULTIPLIER: IRange;
+export declare const DEFAULT_ISLAND_TRAVEL_TIME_MULTIPLIER: IRange<number>;
 /**
  * The amount of travel time it takes to travel to civilization
  */
@@ -549,7 +517,7 @@ export declare const ISLAND_TRAVEL_TIME_SEAFARING_SKILL_REDUCTION_MULTIPLIER = 0
 /**
  * Metabolic stat loss is `travelTime * this multiplier`
  */
-export declare const PLAYER_TRAVEL_METABOLIC_STAT_REDUCTION_MULTIPLIER = 0.2;
+export declare const PLAYER_TRAVEL_METABOLIC_STAT_REDUCTION_MULTIPLIER = 0.02;
 /**
  * Stamina loss is `this reduction / Math.log2(boat tier)`
  */
@@ -565,7 +533,7 @@ export declare const PLAYER_TRAVEL_CIVILIZATION_STAT_REDUCTION = 5;
  * - 100% skill = 60 stamina lost
  * - 125% skill = 0 stamina lost
  */
-export declare const PLAYER_TRAVEL_SWIM_STAMINA_STAT_REDUCTION: IRange;
+export declare const PLAYER_TRAVEL_SWIM_STAMINA_STAT_REDUCTION: IRange<number>;
 /**
  * The minimum remaining stamina the player should have after swimming
  */

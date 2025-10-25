@@ -10,9 +10,10 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
 export interface IRespawnCanUse extends IActionUsable {
     rerunInitialPlayerSetup?: boolean;
     isNotMultiplayer?: boolean;
 }
-declare const _default: Action<[], import("../../player/Player").default, void, IRespawnCanUse, []>;
+declare const _default: Action<[], ActionType.Respawn, import("../../player/Player").default, void, IRespawnCanUse, []>;
 export default _default;

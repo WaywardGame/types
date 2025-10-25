@@ -15,7 +15,8 @@ import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type Human from "@wayward/game/game/entity/Human";
 import type { EntityType } from "@wayward/game/game/entity/IEntity";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../skill/ISkills";
+import type { Action } from "@wayward/game/game/entity/action/Action";
 import type IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type { INotUsableMessage } from "@wayward/game/game/entity/action/actions/helper/NotUsableMessage";
 import type { ActionArgumentCustom } from "@wayward/game/game/entity/action/argument/ActionArgumentCustom";
@@ -366,6 +367,7 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
      * Checks to see if a protected item can be used
      */
     canProtectedItemBeUsed(items: IProtectedItems): IActionNotUsable | true;
+    get<A, T extends ActionType = A extends Action<infer _0, infer T extends ActionType, infer _1, infer _2, infer _3> ? T : never>(type: T): A;
 }
 export interface IActionHandlerApi<E extends Entity = Entity, CU extends IActionUsable = IActionUsable> extends IActionApi<E, CU> {
     /**

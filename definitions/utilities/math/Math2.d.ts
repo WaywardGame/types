@@ -46,6 +46,7 @@ declare namespace Math2 {
      * Example: `roundNumberToMultiple(97, 10): 100`
      */
     function roundNumberToMultiple(num: number, multiple: number): number;
+    function listLerp(t: number, ...values: number[]): number;
     /**
      * Return a number between `from` and `to`, using the decimal `t`
      *

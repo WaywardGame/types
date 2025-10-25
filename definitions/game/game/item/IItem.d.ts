@@ -17,7 +17,7 @@ import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
 import type Human from "@wayward/game/game/entity/Human";
 import type { DamageType, Defense, EntityType, ICastable, MoveType } from "@wayward/game/game/entity/IEntity";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../entity/skill/ISkills";
 import { type Delay, type EquipType } from "@wayward/game/game/entity/IHuman";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { IActionApi } from "@wayward/game/game/entity/action/IAction";
@@ -38,7 +38,7 @@ import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type { ISerializedTranslation, TranslationArg } from "@wayward/game/language/ITranslation";
 import type Translation from "@wayward/game/language/Translation";
-import type { Article } from "@wayward/game/language/Translation";
+import type { Article } from "@wayward/game/language/ITranslation";
 import type Message from "@wayward/game/language/dictionary/Message";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
 import type { ItemNotifierType } from "@wayward/game/renderer/notifier/INotifier";
@@ -173,6 +173,9 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     equipEffect?: EquipEffects;
     damageType?: DamageType;
     weight?: number;
+    /**
+     * Reduced weight when crafting this versus its base components.
+     */
     reducedWeight?: number;
     minimumWeight?: number;
     weightRange?: [number, number];
@@ -233,7 +236,7 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
     prefix?: string;
     spawnOnDecay?: CreatureType;
     /**
-     * Creates creatures or tile events when it breaks.
+     * Creates creatures, tile events, or items when it breaks.
      */
     createOnBreak?: ICreateOnBreak;
     /**
@@ -376,6 +379,19 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * The item type to display instead of the described item type
      */
     displayItem?: SupplierOr<DisplayableItemType | undefined, [Item]>;
+    /**
+     * A number of "display variants" for this item.
+     *
+     * Each variant must be in `ItemTypeExtra`, named `${main item type name}${1-based variant index}`.
+     * IE, `ItemType.JackOLantern` having `displayVariants: 3` will look for `ItemTypeExtra.JackOLantern1`, `JackOLantern2`, and `JackOLantern3`.
+     *
+     * Setting `displayItem` disables the functionality provided by `displayVariants`.
+     *
+     * `displayVariants` uses `aestheticRandom` to determine which variant to use.
+     * `aestheticRandom` is transferred when converting from Item to Doodad and vice versa, so the variant will remain the same,
+     * assuming `displayVariants` is set to the same count on both the item description and doodad description.
+     */
+    displayVariants?: number;
     onEquip?(item: Item): void;
     onUnequip?(item: Item): void;
     canUnequip?(item: Item): boolean | void;
@@ -408,6 +424,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * Set to true if you want this item to get the `Perpetuity_DecayLossChance` magical property even though it doesn't have a decay itself.
      */
     canDecayWhenLit?: boolean;
+    /**
+     * If set to a group, this item will show as an overlay on top of it's base component (the group we set here) and defined in the baseItem item property which is set from the item's disassembly items in the Item constructor.
+     */
+    overlayItem?: ItemTypeGroup;
 }
 export declare namespace IItemDescription {
     function actionDisabled(description: IItemDescription | undefined, action: ActionType): boolean;
@@ -586,7 +606,7 @@ export declare enum VehicleType {
     Other = 2
 }
 export interface IItemReturn {
-    type: ItemType;
+    type: ItemType | ItemTypeGroup;
     /**
      * If true, the returned item will be damaged by 1 point.
      */
@@ -654,6 +674,8 @@ export interface ICreateOnBreak {
     aberrantCreature?: boolean;
     tileEventType?: TileEventType;
     itemType?: ItemType;
+    excludeDamageTypes?: DamageType[];
+    disassemblyItem?: ItemType | ItemTypeGroup;
 }
 export type IDismantleComponent = Record<number, number>;
 export interface IItemChangeIntoOptions {
@@ -1704,19 +1726,46 @@ export declare enum ItemType {
     ChickenEggshells = 816,
     PenguinEggshells = 817,
     MagicalMote = 818,
-    Last = 819
+    UnrefinedSugar = 819,
+    RefinedSugar = 820,
+    CandiedFruit = 821,
+    CandiedSugar = 822,
+    RawClayBakingTray = 823,
+    ClayBakingTray = 824,
+    GlassBakingTray = 825,
+    RawClayPan = 826,
+    ClayPan = 827,
+    GlassPan = 828,
+    TinPan = 829,
+    CopperPan = 830,
+    WroughtIronPan = 831,
+    IronPan = 832,
+    BronzePan = 833,
+    PumpkinPie = 834,
+    FruitPie = 835,
+    JackOLantern = 836,
+    DriedLeaves = 837,
+    Last = 838
 }
 export declare enum ItemTypeExtra {
-    None = 820,
-    TatteredMap_RolledUp = 821,
-    TatteredMap_Completed = 822,
-    WoodenBookcase_25 = 823,
-    WoodenBookcase_50 = 824,
-    WoodenBookcase_75 = 825,
-    WoodenBookcase_100 = 826,
-    RuneOfEvilSplinters = 827,
-    RuneOfGoodCharred = 828,
-    TallySticks = 829
+    None = 839,
+    TatteredMap_RolledUp = 840,
+    TatteredMap_Completed = 841,
+    WoodenBookcase_25 = 842,
+    WoodenBookcase_50 = 843,
+    WoodenBookcase_75 = 844,
+    WoodenBookcase_100 = 845,
+    RuneOfEvilSplinters = 846,
+    RuneOfGoodCharred = 847,
+    TallySticks = 848,
+    JackOLantern2 = 849,
+    JackOLantern3 = 850,
+    StrawScarecrow2 = 851,
+    StrawScarecrow3 = 852,
+    CactusScarecrow2 = 853,
+    CactusScarecrow3 = 854,
+    SnowScarecrow2 = 855,
+    SnowScarecrow3 = 856
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {
@@ -1872,8 +1921,19 @@ export declare enum ItemTypeGroup {
     ExcludedFromRandom = -9856,
     Leaves = -9855,
     Flute = -9854,
-    InternalNoDropOnDoodadBreak = -9853,
-    All = -9852
+    /**
+     * If set, the item will take damage when the player steps over it when wearing any foot equipment.
+     * Creatures with a MoveType.DamageCrushableTileItems will also break them when stepping over them.
+     */
+    Crushable = -9853,
+    /**
+     * If set, this item will not drop when a doodad (plant) is broken. Set on plant roots for example.
+     */
+    InternalNoDropOnDoodadBreak = -9852,
+    Sugar = -9851,
+    Pan = -9850,
+    CurseWard = -9849,
+    All = -9848
 }
 export type StillContainerBaseItemType = ItemType.Waterskin | ItemType.GlassBottle | ItemType.ClayJug | ItemType.CoconutContainer;
 export interface IItemMovementResult {

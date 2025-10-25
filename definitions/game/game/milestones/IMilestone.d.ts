@@ -70,7 +70,7 @@ export declare enum Milestone {
     Runekeeper = 58,
     InternalDeityDiscovery = 59,
     InternalMerchantsDiscovery = 60,
-    InternalDeitySystemDiscovery = 61,
+    InternalCurseSystemDiscovery = 61,
     Invoker = 62,
     InternalDeityInvoked = 63,
     InternalInsulationDiscovery = 64,
@@ -78,7 +78,10 @@ export declare enum Milestone {
     Statistician = 66,
     Afflicted = 67,
     Exsanguinated = 68,
-    InternalItemDiscovered = 69
+    InternalItemDiscovered = 69,
+    Cursed = 70,
+    Cursebreaker = 71,
+    Oblivious = 72
 }
 export type ExcludeInternalMilestones<MILESTONE extends Milestone> = PickValueKeys<typeof Milestone, MILESTONE> extends `Internal${string}` ? never : MILESTONE;
 export declare enum MilestoneVisibility {
@@ -124,17 +127,21 @@ export declare enum MilestoneDataType {
      */
     Check = 2,
     /**
+     * The same as the `Check` type, but upon the milestone being set to a value lower than the previous check, the displayed "progress" will match, rather than it staying at your previous highest.
+     */
+    LiveCheck = 3,
+    /**
      * This milestone will be granted the first time it's updated.
      *
      * For example, this type could be used for determining whether the player has done something specific.
      */
-    Event = 3,
+    Event = 4,
     /**
      * This milestone type requires a number of entries, each of which must be distinct, and discovered in order.
      *
      * For example, this type could be used to handle staged discovery.
      */
-    Ordered = 4
+    Ordered = 5
 }
 export interface IMilestoneData {
     amount: number;

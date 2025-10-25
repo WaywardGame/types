@@ -15,7 +15,7 @@ import CustomGameOptionsMenu from "@wayward/game/ui/screen/screens/menu/menus/ne
 import type NewGameMenu from "@wayward/game/ui/screen/screens/menu/menus/NewGameMenu";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 export default class TabGameMode extends Tab {
-    customGameOptionsMenu: CustomGameOptionsMenu;
+    customGameOptionsMenu?: CustomGameOptionsMenu;
     readonly gameMode: ChoiceList<DifficultyChoice, false>;
     private readonly menuRef;
     get menu(): NewGameMenu;

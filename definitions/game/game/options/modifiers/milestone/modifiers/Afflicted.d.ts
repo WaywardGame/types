@@ -12,7 +12,8 @@ import { Stat } from "@wayward/game/game/entity/IStats";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
-import MilestoneModifier, { MilestoneModifierGroup, MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import MilestoneModifier, { MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/IMilestoneModifier";
 import { type TranslationArg } from "@wayward/game/language/ITranslation";
 export default class Afflicted extends MilestoneModifier {
     getOptions(): IGameOptionsPartial;

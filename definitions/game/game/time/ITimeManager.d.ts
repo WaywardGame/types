@@ -27,6 +27,7 @@ export declare enum TimeFormat {
      */
     TwentyFourHourNoMinute = 4
 }
+export type TimeString = (`${number}:${number}` | `${number}:${number}${"am" | "pm"}` | `${number}${"am" | "pm"}`);
 export declare enum PartOfDay {
     Nighttime = 1,
     Dawn = 2,

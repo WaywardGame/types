@@ -16,7 +16,7 @@ import EntityMovable from "@wayward/game/game/entity/EntityMovable";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IEntityConstructorOptions } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
-import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
@@ -24,11 +24,11 @@ import type Player from "@wayward/game/game/entity/player/Player";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
-import type { ITileEventDescription } from "@wayward/game/game/tile/ITileEvent";
+import type { ITileEventDescription, TileEventTag } from "@wayward/game/game/tile/ITileEvent";
 import { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
-import { FireStage } from "@wayward/game/game/tile/events/IFire";
-import type { Article } from "@wayward/game/language/Translation";
+import FireStage from "@wayward/game/game/tile/events/fire/FireStage";
+import type { Article } from "@wayward/game/language/ITranslation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
@@ -40,7 +40,7 @@ export interface ITileEventEvents extends IEntityMovableEvents {
      */
     fireUpdate(tile: Tile, stage: FireStage | undefined): any;
 }
-export default class TileEvent extends EntityMovable<ITileEventDescription, TileEventType, ReferenceType.TileEvent> implements IObject<TileEventType> {
+export default class TileEvent extends EntityMovable<ITileEventDescription, TileEventType, ReferenceType.TileEvent, TileEventTag> implements IObject<TileEventType> {
     static is(value: any): value is TileEvent;
     get entityType(): EntityType.TileEvent;
     get tileUpdateType(): TileUpdateType;
@@ -96,6 +96,14 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
     protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     addToTile(tile: Tile): void;
     removeFromTile(updateTile: boolean): void;
+    /**
+     * Damages the tile event by 1 durability. If durability reaches 0, the tile event is removed and all items are dropped.
+     */
+    damage(): void;
+    /**
+     * Drops all items associated with this tile event (if any).
+     */
+    dropItems(): void;
     /**
      * Gets the builder/creator of this event, or `undefined` if the tile event is creatorless.
      */

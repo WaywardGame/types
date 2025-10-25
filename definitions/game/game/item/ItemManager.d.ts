@@ -13,6 +13,7 @@ import type { BiomeType } from "@wayward/game/game/biome/IBiome";
 import Doodad from "@wayward/game/game/doodad/Doodad";
 import EntityManager from "@wayward/game/game/entity/EntityManager";
 import Human from "@wayward/game/game/entity/Human";
+import type { DamageType } from "@wayward/game/game/entity/IEntity";
 import type { IActionHandlerApi, IActionNotUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type ActionContext from "@wayward/game/game/entity/action/IActionContext";
@@ -28,7 +29,8 @@ import type { ITileContainer } from "@wayward/game/game/tile/ITerrain";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type { ListEnder } from "@wayward/game/language/ITranslation";
-import Translation, { Article } from "@wayward/game/language/Translation";
+import Translation from "@wayward/game/language/Translation";
+import { Article } from "@wayward/game/language/ITranslation";
 import Message from "@wayward/game/language/dictionary/Message";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IRGB } from "@wayward/utilities/Color";
@@ -36,6 +38,8 @@ import type { ISorter } from "@wayward/utilities/collection/sort/Sorter";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import WorldZ from "@wayward/utilities/game/WorldZ";
 import type { Random } from "@wayward/utilities/random/Random";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
+import type { IRange } from "@wayward/utilities/math/Range";
 export interface IItemManagerEvents extends Events<EntityManager<Item>> {
     /**
      * Called before moving items to another container
@@ -82,6 +86,7 @@ export interface IItemManagerEvents extends Events<EntityManager<Item>> {
     craft?(human: Human, item: Item): void;
 }
 export default class ItemManager extends EntityManager<Item, IItemRemoveOptions> {
+    readonly static: typeof ItemManager;
     protected readonly name = "ItemManager";
     event: IEventEmitter<this, IItemManagerEvents>;
     /**
@@ -106,8 +111,10 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     private static readonly cachedWeights;
     private static readonly cachedMostCommonItemColors;
     private static readonly cachedItemsThatCanBeRelic;
+    private static readonly cachedRuneChanceRanges;
     static readonly cachedItemSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, ItemType[]>>>;
     static getItemTypes(): readonly ItemType[];
+    static getRuneChanceRange(deity: DeityReal): IRange;
     static getItemsWithRecipes(): readonly ItemType[];
     static getBestItemForTier(item: ItemType | ItemTypeGroup): ItemType | undefined;
     static getHighestItemActionTierForAction(action: ActionType): number;
@@ -150,6 +157,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     private static cacheItemTypes;
     private static cacheItemWeights;
     private static cacheCreatureOfferingsAndResources;
+    private static cacheRuneChanceRanges;
     static cacheAsync(): Promise<void>;
     private static cacheRelicItems;
     private static getDisassemblyAndBurnItemTypes;
@@ -241,7 +249,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     /**
      * Will break a container item on a tile, and remove it after (whether or not if it's a container)
      */
-    breakContainerOnTile(itemContainer: Item, tile: Tile): void;
+    breakContainerOnTile(itemContainer: Item, tile: Tile, damageType?: DamageType): void;
     /**
      * Drop items in a 3x3 square around the location.
      * This will ensure all items in the container are removed
@@ -294,7 +302,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      */
     getEfficacyTranslation(human: Human, qualityBonus: number, maxQualityBonus: number, recipe: IRecipe, ui?: boolean): TranslationImpl | undefined;
     updateItems(ticks: number, playerIds: Set<number>, skipHumanItems?: boolean): boolean;
-    updateItem(ticks: number, item: Item, isInInventory: boolean): boolean;
+    updateItem(ticks: number, item: Item, isInInventory?: boolean): boolean;
     getPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getAbsentPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getNPCWithItemInInventory(containable: IContainable): NPC | undefined;
@@ -359,8 +367,8 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      * @param formatter A formatting translation that should be used for each item translation
      */
     getItemTranslations(items: Item[], article?: Article, formatter?: Translation): TranslationImpl[];
-    static list: import("../../language/utility/TranslationListBuilder").ITranslationListBuilder<Item, string, Quality>;
-    readonly list: import("../../language/utility/TranslationListBuilder").ITranslationListBuilder<Item, string, Quality>;
+    static list: import("../../language/utility/TranslationListBuilder").TranslationListBuilder<Item, string, Quality>;
+    readonly list: import("../../language/utility/TranslationListBuilder").TranslationListBuilder<Item, string, Quality>;
     /**
      * Formats a list translation out of an array of items.
      * @param listEnder The way the list should end (ie `and`, `or`, etc)

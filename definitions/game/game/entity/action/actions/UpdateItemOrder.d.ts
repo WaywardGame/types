@@ -10,7 +10,7 @@
  */
 import type Entity from "@wayward/game/game/entity/Entity";
 import { Action } from "@wayward/game/game/entity/action/Action";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgumentCustom } from "@wayward/game/game/entity/action/argument/ActionArgumentCustom";
 import type { IContainerSort } from "@wayward/game/game/item/IItemManager";
 export declare class ActionArgumentItemSort extends ActionArgumentCustom<IContainerSort> {
@@ -18,5 +18,5 @@ export declare class ActionArgumentItemSort extends ActionArgumentCustom<IContai
     read(): IContainerSort;
     write(executor: Entity | undefined, value: IContainerSort): void;
 }
-declare const _default: Action<[ActionArgument.Container, [ActionArgument.UnsignedInteger32NumberArray, ActionArgumentItemSort]], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [import("@wayward/game/game/item/IItem").IContainer, number[] | IContainerSort]>;
+declare const _default: Action<[ActionArgument.Container, [ActionArgument.UnsignedInteger32NumberArray, ActionArgumentItemSort]], ActionType.UpdateItemOrder, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [import("@wayward/game/game/item/IItem").IContainer, number[] | IContainerSort]>;
 export default _default;

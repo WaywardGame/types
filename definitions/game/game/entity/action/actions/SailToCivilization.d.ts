@@ -10,10 +10,10 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Item from "@wayward/game/game/item/Item";
 export interface ISailToCivilizationCanUse extends IActionUsable {
     itemsToRemove?: Item[];
 }
-declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearby], [arg1: ActionArgument.Undefined, ActionArgument.Boolean]], import("../../player/Player").default, void, ISailToCivilizationCanUse, [(Item | undefined)?, (boolean | undefined)?]>;
+declare const _default: Action<[[arg1: ActionArgument.Undefined, ActionArgument.ItemNearby], [arg1: ActionArgument.Undefined, ActionArgument.Boolean]], ActionType.SailToCivilization, import("../../player/Player").default, void, ISailToCivilizationCanUse, [(Item | undefined)?, (boolean | undefined)?]>;
 export default _default;

@@ -13,10 +13,11 @@ import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Human from "@wayward/game/game/entity/Human";
 import type { ICausesDamage, ICausesStatus } from "@wayward/game/game/entity/IEntity";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../entity/skill/ISkills";
 import type { IDecayTemperatureRange } from "@wayward/game/game/IGame";
 import type { ILootItem } from "@wayward/game/game/ILoot";
 import type { IObjectDescription, IObjectOptions } from "@wayward/game/game/IObject";
+import type { WaterType } from "@wayward/game/game/island/IIsland";
 import type Island from "@wayward/game/game/island/Island";
 import type { IContainer, IItemOld, ItemType, ItemTypeExtra, ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
@@ -83,7 +84,11 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     containerDialog?: DialogId;
     burnsLike?: ItemType[];
     canBreak?: boolean;
-    canGrow?: boolean;
+    /**
+     * This doodad will be able to grow up until and including this stage.
+     * For example, conifers can grow up until seeding, but not bare. Most trees can grow until bare. Other plants, usually ripening.
+     */
+    canGrow?: GrowingStage;
     canGrowInCaves?: boolean;
     canTrampleWhenMature?: boolean;
     disableDrop?: boolean;
@@ -227,6 +232,19 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      */
     displayDoodad?: SupplierOr<DisplayableDoodadType | undefined, [Doodad]>;
     /**
+     * A number of "display variants" for this item.
+     *
+     * Each variant must be in `DoodadTypeExtra`, named `${main item type name}${1-based variant index}`.
+     * IE, `DoodadType.JackOLantern` having `displayVariants: 3` will look for `DoodadTypeExtra.JackOLantern1`, `JackOLantern2`, and `JackOLantern3`.
+     *
+     * Setting `displayItem` disables the functionality provided by `displayVariants`.
+     *
+     * `displayVariants` uses `aestheticRandom` to determine which variant to use.
+     * `aestheticRandom` is transferred when converting from Item to Doodad and vice versa, so the variant will remain the same,
+     * assuming `displayVariants` is set to the same count on both the item description and doodad description.
+     */
+    displayVariants?: number;
+    /**
      * Sets (and overwrites) the associated item (or item extra) that shows in the tooltip.
      */
     getAssociatedItem?(doodad: Doodad): ItemType | ItemTypeExtra | undefined;
@@ -246,12 +264,24 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
      * Radius around scarecrow that will attempt to scare away creatures based on `chanceOfScarecrowScare` property in `creatureDescriptions`.
      */
     scareRadius?: number;
+    /**
+     * When the doodad reaches this stage, it will drop the following items with the following chances.
+     */
+    dropsOnGrowth?: IDropsOnGrowth;
 }
 export interface IItemStackRegion {
     xMin: number;
     xMax: number;
     yMin: number;
     yMax: number;
+}
+export interface IScareRadius {
+    total: number;
+    /** The "effective" scare radius, ie what's actually used internally. This is slightly increased so that it's a nicer circle */
+    totalEffective: number;
+    base: number;
+    quality: number;
+    magic: number;
 }
 export interface ILockedChest {
     /**
@@ -290,6 +320,7 @@ export interface IProvidesSkill {
     skillValue: number;
 }
 export type IDoodadParticles = Record<number, IRGB>;
+export type IDropsOnGrowth = PartialRecord<GrowingStage, ILootItem[]>;
 export type IDoodadLoot = PartialRecord<GrowingStage, ILootItem[]>;
 export declare enum DoodadType {
     WoodenDoor = 0,
@@ -472,14 +503,26 @@ export declare enum DoodadType {
     BasaltAltar = 177,
     ClayAltar = 178,
     SkeletalPirateRemains = 179,
-    Last = 180
+    JackOLantern = 180,
+    LitJackOLantern = 181,
+    Last = 182
 }
 export declare enum DoodadTypeExtra {
-    None = 181,
-    WoodenBookcase_25 = 182,
-    WoodenBookcase_50 = 183,
-    WoodenBookcase_75 = 184,
-    WoodenBookcase_100 = 185
+    None = 183,
+    WoodenBookcase_25 = 184,
+    WoodenBookcase_50 = 185,
+    WoodenBookcase_75 = 186,
+    WoodenBookcase_100 = 187,
+    JackOLantern2 = 188,
+    JackOLantern3 = 189,
+    LitJackOLantern2 = 190,
+    LitJackOLantern3 = 191,
+    StrawScarecrow2 = 192,
+    StrawScarecrow3 = 193,
+    CactusScarecrow2 = 194,
+    CactusScarecrow3 = 195,
+    SnowScarecrow2 = 196,
+    SnowScarecrow3 = 197
 }
 export type DisplayableDoodadType = DoodadType | DoodadTypeExtra;
 export declare enum DoodadTag {
@@ -515,7 +558,11 @@ export declare enum DoodadTypeGroup {
     WaterStill = -9980,
     Wheelbarrow = -9979,
     Altar = -9978,
-    OpenFireSource = -9977
+    OpenFireSource = -9977,
+    RequiresCandleToLight = -9976,// Pumpkins
+    ContainsFuelSource = -9975,
+    CurseWard = -9974,
+    CannotBeSpread = -9973
 }
 export declare enum DoorOrientation {
     /**
@@ -531,7 +578,8 @@ export declare enum GrowingStage {
     Budding = 3,
     Flowering = 4,
     Ripening = 5,
-    Bare = 6
+    Seeding = 6,
+    Bare = 7
 }
 export declare namespace Growth {
     function isAtLeast(growth: GrowingStage | undefined, stage: GrowingStage): boolean;
@@ -545,6 +593,7 @@ export interface IHasBuilder {
 export interface IHasWater {
     top?: true;
     bottom?: true;
+    waterType?: WaterType;
 }
 export interface IDoodadGetNameOptions {
     count: number;

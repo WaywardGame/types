@@ -22,6 +22,7 @@ import { ActionType } from "@wayward/game/game/entity/action/IAction";
 import { AiType } from "@wayward/game/game/entity/ai/AI";
 import AiManager from "@wayward/game/game/entity/ai/AiManager";
 import type { CreatureAttackOutcome, ICreatureAttackOutcomeAttack, ICreatureCheckMoveOptions, ICreatureDescription, ICreatureEvents, IDamageInfo, IHitch } from "@wayward/game/game/entity/creature/ICreature";
+import { CreatureTag } from "@wayward/game/game/entity/creature/ICreature";
 import { CreatureType } from "@wayward/game/game/entity/creature/ICreature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type { CreatureZone } from "@wayward/game/game/entity/creature/zone/CreatureZone";
@@ -33,14 +34,15 @@ import type Item from "@wayward/game/game/item/Item";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
-import Translation, { Article } from "@wayward/game/language/Translation";
+import Translation from "@wayward/game/language/Translation";
+import { Article } from "@wayward/game/language/ITranslation";
 import { MarkerType } from "@wayward/game/renderer/notifier/INotifier";
 import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export default class Creature extends EntityWithStats<ICreatureDescription, CreatureType, ReferenceType.Creature> implements IUnserializedCallback, IObject<CreatureType> {
+export default class Creature extends EntityWithStats<ICreatureDescription, CreatureType, ReferenceType.Creature, CreatureTag> implements IUnserializedCallback, IObject<CreatureType> {
     static is(value: any): value is Creature;
     get entityType(): EntityType.Creature;
     get tileUpdateType(): TileUpdateType;
@@ -107,7 +109,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     load(): void;
     checkForBurn(moveType?: MoveType): boolean;
     private setOwner;
-    tame(human: Human, bonus?: number): boolean;
+    tame(human: Human, bonusTime?: number, wasByPlayerAction?: boolean): boolean;
     /**
      * Increases the creature's maximum health in the event of offering/re-taming and petting (to a lesser extent)
      */
@@ -162,6 +164,8 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     getAttackOutcome(enemy: Human | Creature | undefined, force?: boolean, humans?: Human[], description?: ICreatureDescription, moveType?: MoveType): CreatureAttackOutcome;
     processAttack(description: ICreatureDescription, humans: Human[], moveType: MoveType | undefined, enemyIn: Human | Creature | undefined): boolean;
     getProducedTemperature(): number | undefined;
+    makeAberrant(): number | undefined;
+    unAberrant(restoreHealth: number): boolean;
     protected updateTileWhenMoving(fromTile: Tile, toTile: Tile): boolean;
     protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
     /**
@@ -217,6 +221,10 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     private breakItems;
     private processAiChanges;
     private addAlertedMarker;
+    /**
+     * Used for offseting notifiers
+     */
+    getMovementOffsetY(timeStamp: number): number;
     /**
      * @returns Whether the creature has lost interest
      */

@@ -49,4 +49,6 @@ export declare class InspectionTooltipHints extends Paragraph {
     get showExtraInfo(): Text;
     private _inspectInDialog?;
     get inspectInDialog(): Text;
+    private _stackItems?;
+    get stackItems(): Text;
 }

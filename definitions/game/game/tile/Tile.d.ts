@@ -30,14 +30,17 @@ import type Item from "@wayward/game/game/item/Item";
 import type { FindPathRange, IMaybeTileContainer, IOverlayInfo, ITerrainDescription, ITileContainer, ITileData } from "@wayward/game/game/tile/ITerrain";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
-import Translation, { Article } from "@wayward/game/language/Translation";
+import Translation from "@wayward/game/language/Translation";
+import { Article } from "@wayward/game/language/ITranslation";
 import Message from "@wayward/game/language/dictionary/Message";
 import type { IRendererOrigin } from "@wayward/game/renderer/context/RendererOrigin";
 import { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
 import type { IFieldOfViewOrigin } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
 import { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
+import Debug from "@wayward/game/utilities/dev/Debug";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
+import { DistanceType } from "@wayward/game/utilities/math/Vector2";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import type { IRGB } from "@wayward/utilities/Color";
 import WorldZ from "@wayward/utilities/game/WorldZ";
@@ -135,8 +138,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     constructor(island: Island, x: number, y: number, z: number, id: number, rendererData: number, quality: Quality, isFake?: true);
     get point(): IVector3;
     get description(): ITerrainDescription | undefined;
-    /** @deprecated Console helper */
-    protected get debug(): any;
+    get debug(): Debug.JIT<[]>;
     toString(): string;
     getName(layerIndex?: number, article?: Article, options?: ITileGetNameOptions): Translation;
     get type(): TerrainType;
@@ -151,6 +153,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Gets the primary/first blocking entity on this tile.
      */
     get entity(): Entity | undefined;
+    get entities(): Entity[];
     /**
      * Gets well data on this tile.
      */
@@ -286,7 +289,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * Gets the nearest player based.
      * @param canSee If set to true, check if the player can see the x/y/z coords. Defaults to false.
      */
-    getNearestPlayer(canSee?: boolean, includeGhosts?: boolean, includeConnecting?: boolean): {
+    getNearestPlayer(canSee?: CanASeeBType | false, includeGhosts?: boolean, includeConnecting?: boolean, customRadius?: number): {
         player?: Human;
         distance?: number;
     };
@@ -419,6 +422,9 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     canSeeObject(type: CanASeeBType, object: IRendererOrigin, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeeTile(type: CanASeeBType, tile: Tile, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
+    isSeenByPlayer(type: CanASeeBType, customRadius?: number): boolean;
+    /** @returns 0-1 */
+    getLightLevel(): number;
     messageIfVisible(callback: (manager: IMessageManager) => boolean): void;
     /**
      * Check if a tile is a suitable spawn point
@@ -462,12 +468,13 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      * - Prefers the facing tile if it has the same penalty as others
      */
     getPreferredAdjacentTile(human: Human, clientSide: boolean): Tile | undefined;
-    tilesInRange(range: number, includeCurrentTile?: boolean): Tile[];
-    openTileInRange(range: number, includeCurrentTile?: boolean, excludeWater?: boolean): Tile | undefined;
+    tilesInRange(type: DistanceType, range: number, includeCurrentTile?: boolean): Tile[];
+    openTileInRange(type: DistanceType, range: number, includeCurrentTile?: boolean, excludeWater?: boolean): Tile | undefined;
     /**
      * Array version of tilesAround
      */
     getTilesAround(includeCurrentTile?: boolean, includeCorners?: boolean): Tile[];
+    getFlyingOffset(): number;
     /**
      * IterableIterator version of TileHelpers.getTilesAround
      */

@@ -18,4 +18,4 @@ export declare class ActionArgumentMerchant extends ActionArgumentCustom<Merchan
     read(): MerchantNPC;
     write(executor: Entity | undefined, value: MerchantNPC): void;
 }
-export declare const BuyItemFromMerchant: Action<[ActionArgument.Item, ActionArgumentMerchant], Entity<unknown, number, import("../../../../reference/IReferenceManager").EntityReferenceTypes, unknown>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [import("../../../../item/Item").default, MerchantNPC]>;
+export declare const BuyItemFromMerchant: Action<[ActionArgument.Item, ActionArgumentMerchant], import("@wayward/game/game/entity/action/IAction").ActionType, Entity<unknown, number, import("../../../../reference/IReferenceManager").EntityReferenceTypes, unknown>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [import("../../../../item/Item").default, MerchantNPC]>;

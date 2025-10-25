@@ -15,7 +15,7 @@ import { TickHelper } from "@wayward/game/game/TickHelper";
 import type { BiomeTypes, IBiomeDescription } from "@wayward/game/game/biome/IBiome";
 import DoodadManager from "@wayward/game/game/doodad/DoodadManager";
 import Human from "@wayward/game/game/entity/Human";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../entity/skill/ISkills";
 import Creature from "@wayward/game/game/entity/creature/Creature";
 import CreatureManager from "@wayward/game/game/entity/creature/CreatureManager";
 import type { IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "@wayward/game/game/entity/creature/ICreature";
@@ -31,7 +31,7 @@ import type { ILiquidGather, IRangedResolvedDirection } from "@wayward/game/game
 import type { IRequirementInfo } from "@wayward/game/game/item/IItemManager";
 import ItemManager from "@wayward/game/game/item/ItemManager";
 import type DrawnMap from "@wayward/game/game/mapping/DrawnMap";
-import type { IGameOptions } from "@wayward/game/game/options/IGameOptions";
+import type { IGameOptions, IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import type { IslandModifiersCollection } from "@wayward/game/game/options/modifiers/island/IslandModifiers";
 import type { IReferenceable } from "@wayward/game/game/reference/IReferenceManager";
 import TemperatureManager from "@wayward/game/game/temperature/TemperatureManager";
@@ -53,6 +53,7 @@ import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { Random } from "@wayward/utilities/random/Random";
 import type { LegacySeededGenerator } from "@wayward/utilities/random/generators/LegacySeededGenerator";
 import type { PCGSeededGenerator } from "@wayward/utilities/random/generators/PCGSeededGenerator";
+import Curse from "@wayward/game/game/curse/Curse";
 export interface IIslandDetails {
     seed: number;
     biomeType: BiomeTypes;
@@ -96,6 +97,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     biomeOptions?: unknown;
     biomeType: BiomeTypes;
     contaminatedWater: IWaterContamination[];
+    curse: Curse;
     lastPlayerGameTimeTicks?: number;
     loadCount: number;
     name?: string;
@@ -113,11 +115,11 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     /**
      * Set of players on this island
      */
-    readonly players: Set<Human<unknown, number, import("@wayward/game/game/reference/IReferenceManager").ReferenceType.NPC | import("@wayward/game/game/reference/IReferenceManager").ReferenceType.Player>>;
+    readonly players: Set<Human<unknown, number, import("@wayward/game/game/reference/IReferenceManager").ReferenceType.NPC | import("@wayward/game/game/reference/IReferenceManager").ReferenceType.Player, unknown>>;
     /**
      * Entity move types in fov on this island
      */
-    readonly moveTypesInFov: Map<"-1-0" | "-1-1" | "-1-2" | "-1-4" | "-1-8" | "-1-16" | "-1-32" | "-1-64" | "-1-128" | "-1-256" | "-1-512" | "-1-1024" | "-1-2048" | "-1-4096" | "-1-15" | "0-0" | "0-1" | "0-2" | "0-4" | "0-8" | "0-16" | "0-32" | "0-64" | "0-128" | "0-256" | "0-512" | "0-1024" | "0-2048" | "0-4096" | "0-15" | "1-0" | "1-1" | "1-2" | "1-4" | "1-8" | "1-16" | "1-32" | "1-64" | "1-128" | "1-256" | "1-512" | "1-1024" | "1-2048" | "1-4096" | "1-15", Set<Human<unknown, number, import("@wayward/game/game/reference/IReferenceManager").ReferenceType.NPC | import("@wayward/game/game/reference/IReferenceManager").ReferenceType.Player>>>;
+    readonly moveTypesInFov: Map<"-1-0" | "-1-1" | "-1-2" | "-1-4" | "-1-8" | "-1-16" | "-1-32" | "-1-64" | "-1-128" | "-1-256" | "-1-512" | "-1-1024" | "-1-2048" | "-1-4096" | "-1-8192" | "-1-15" | "0-0" | "0-1" | "0-2" | "0-4" | "0-8" | "0-16" | "0-32" | "0-64" | "0-128" | "0-256" | "0-512" | "0-1024" | "0-2048" | "0-4096" | "0-8192" | "0-15" | "1-0" | "1-1" | "1-2" | "1-4" | "1-8" | "1-16" | "1-32" | "1-64" | "1-128" | "1-256" | "1-512" | "1-1024" | "1-2048" | "1-4096" | "1-8192" | "1-15", Set<Human<unknown, number, import("@wayward/game/game/reference/IReferenceManager").ReferenceType.NPC | import("@wayward/game/game/reference/IReferenceManager").ReferenceType.Player, unknown>>>;
     /**
      * Helps instruct when to tick when in simulated turn mode
      */
@@ -172,7 +174,11 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     private deactivate;
     private gameOptionsCached?;
+    private gameOptionsWithoutModifiersCached?;
+    /** A game options modifier that always returns an empty array by default, to be injected into */
+    getAdditionalGameOptionsSources(): IGameOptionsPartial[];
     getGameOptions(): ImmutableObject<IGameOptions>;
+    getGameOptionsWithoutModifiers(): ImmutableObject<IGameOptions>;
     clearGameOptionsCache(): void;
     rename(human: Human, newName: string): void;
     private generatedName?;
@@ -337,4 +343,5 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      * @returns number equal to the maximum travel time.
      */
     getMaximumTravelTime(): number;
+    canMelt(terrainType: TerrainType, tile: Tile): boolean;
 }

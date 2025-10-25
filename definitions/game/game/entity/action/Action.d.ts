@@ -9,21 +9,13 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { DeityReal } from "@wayward/game/game/deity/Deity";
-import type Doodad from "@wayward/game/game/doodad/Doodad";
-import type { ActionArguments, ActionArgumentTupleTypes, ActionFlag, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionExample, IActionExampleApi, IActionHandlerApi, IActionNotUsable, IActionNotUsableHandlerApi, IActionTargetAdjacent, IActionTargetEntityRanged, IActionTargetTileRanged, IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
-import type Creature from "@wayward/game/game/entity/creature/Creature";
+import type { ActionArguments, ActionArgumentTupleTypes, ActionFlag, ActionType, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionExample, IActionExampleApi, IActionHandlerApi, IActionNotUsable, IActionNotUsableHandlerApi, IActionTargetAdjacent, IActionTargetEntityRanged, IActionTargetTileRanged, IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import type Entity from "@wayward/game/game/entity/Entity";
-import type Human from "@wayward/game/game/entity/Human";
-import type { EntityType } from "@wayward/game/game/entity/IEntity";
-import type NPC from "@wayward/game/game/entity/npc/NPC";
-import type Player from "@wayward/game/game/entity/player/Player";
-import type Item from "@wayward/game/game/item/Item";
+import type { EntityType, EntityTypeMap } from "@wayward/game/game/entity/IEntity";
 import type Tile from "@wayward/game/game/tile/Tile";
-import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
-export declare class Action<A extends ActionArguments, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> implements IActionDescription<A, E, R, CU, AV> {
+export declare class Action<A extends ActionArguments, T extends ActionType = ActionType, E extends Entity = Entity, R = void, CU extends IActionUsable = IActionUsable, AV extends any[] = ActionArgumentTupleTypes<A>> implements IActionDescription<A, E, R, CU, AV> {
     readonly argumentTypes: A;
     readonly usability: PartialRecord<ActionUsability, boolean>;
     readonly flags: PartialRecord<ActionFlag, boolean>;
@@ -37,7 +29,10 @@ export declare class Action<A extends ActionArguments, E extends Entity = Entity
     deities?: DeityReal[];
     private shouldSkipConfirmation;
     private targetTile?;
+    private _type;
+    get type(): T;
     constructor(...argumentTypes: A);
+    setActionType<T extends ActionType>(type: T): Action<A, T, E, R, CU, AV>;
     /**
      * Check if the action has setup CanUse logic
      */
@@ -83,19 +78,19 @@ export declare class Action<A extends ActionArguments, E extends Entity = Entity
      *
      * This determines if an action is usable or not
      */
-    setCanUse<T extends CU>(canUseHandler: (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => T | IActionNotUsable): Action<A, E, R, T>;
+    setCanUse<RCU extends CU>(canUseHandler: (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => RCU | IActionNotUsable): Action<A, T, E, R, RCU>;
     /**
      * Add a handler for this action.
      *
      * Handlers are executed on both the client-side and the server-side.
      */
-    setHandler<H extends (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => R>(handler: H): Action<A, E, ReturnType<H>, CU>;
+    setHandler<H extends (actionApi: IActionHandlerApi<E, CU>, ...args: AV) => R>(handler: H): Action<A, T, E, Awaited<ReturnType<H>>, CU>;
     /**
      * Add a handler that is called when it's executed while not being usable
      *
      * Handlers are executed on both the client-side and the server-side.
      */
-    setNotUsableHandler<H extends (actionApi: IActionNotUsableHandlerApi<E, CU>, ...args: AV) => R>(handler: H): Action<A, E, ReturnType<H>, CU>;
+    setNotUsableHandler<H extends (actionApi: IActionNotUsableHandlerApi<E, CU>, ...args: AV) => R>(handler: H): Action<A, T, E, ReturnType<H>, CU>;
     /**
      * Sets additional times the action can be used in.
      */
@@ -107,7 +102,7 @@ export declare class Action<A extends ActionArguments, E extends Entity = Entity
     /**
      * Sets the entities that can use an action.
      */
-    setUsableBy<E2 extends EntityType[]>(...entityTypes: E2): Action<A, EntityTypeTupleType<E2>>;
+    setUsableBy<E2 extends EntityType[]>(...entityTypes: E2): Action<A, T, EntityTypeTupleType<E2>>;
     /**
      * Checks if a flag is set
      * @param flag Flag to check
@@ -121,17 +116,7 @@ export declare class Action<A extends ActionArguments, E extends Entity = Entity
     /**
      * Creates an identical clone of this action.
      */
-    clone(): Action<A, E, R, CU, AV>;
+    clone(): Action<A, T, E, R, CU, AV>;
 }
-type EntityTypeMap<E extends EntityType> = {
-    [EntityType.Corpse]: Corpse;
-    [EntityType.Creature]: Creature;
-    [EntityType.Doodad]: Doodad;
-    [EntityType.Human]: Human;
-    [EntityType.Item]: Item;
-    [EntityType.NPC]: NPC;
-    [EntityType.Player]: Player;
-    [EntityType.TileEvent]: TileEvent;
-}[E];
-type EntityTypeTupleType<E extends EntityType[]> = E extends [EntityType] ? EntityTypeMap<E[0]> : E extends [EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> : E extends [EntityType, EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> | EntityTypeMap<E[2]> : never;
+type EntityTypeTupleType<E extends EntityType[]> = E extends [EntityType] ? EntityTypeMap[E[0]] : E extends [EntityType, EntityType] ? EntityTypeMap[E[0]] | EntityTypeMap[E[1]] : E extends [EntityType, EntityType, EntityType] ? EntityTypeMap[E[0]] | EntityTypeMap[E[1]] | EntityTypeMap[E[2]] : never;
 export {};

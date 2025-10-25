@@ -16,50 +16,25 @@ export declare enum Stat {
     Hunger = 2,
     Thirst = 3,
     Weight = 4,
-    Attack = 5,
-    /**
-     * The base defense of the player.
-     * UI only. Does not exist on `Player` instances.
-     */
-    Defense = 6,
-    /**
-     * A combination of `Stat.Hunger` + `Stat.Thirst`
-     * Does not exist on `Player` instances. Used for magical items.
-     */
-    Metabolism = 7,
-    /**
-     * Used to calculate the max weight & max health of the player.
-     */
-    Strength = 8,
-    /**
-     * UI only. Does not exist on `Player` instances.
-     */
-    Luck = 9,
-    /**
-     * How much this human and their inventory is affected by temperature
-     */
+    Metabolism = 5,
+    Strength = 6,
+    Dexterity = 7,
+    Attack = 8,
+    Defense = 9,
     InsulationHeat = 10,
     InsulationCold = 11,
-    /**
-     * Used for chicken eggs and goat milk
-     */
-    Produce = 12,
-    /**
-     * Used for tamed animals
-     */
-    Happiness = 13,
-    Tamed = 14,
-    Petting = 15,
-    Waste = 16,
-    Petted = 17,
-    Curse = 18,
-    Generic = 19,
-    AttackDefenseRow = 20,
-    Dexterity = 21,
-    /**
-     * Used for creatures to stop them despawning until this stat reaches 0.
-     */
-    DespawnProtection = 22
+    Luck = 12,
+    Curse = 13,
+    AttackDefenseRow = 14,
+    Generic = 15,
+    Temperature = 16,
+    Produce = 17,
+    Happiness = 18,
+    Tamed = 19,
+    Petting = 20,
+    Waste = 21,
+    Petted = 22,
+    DespawnProtection = 23
 }
 export declare const CORE_STATS: Stat[];
 export type IStats = {

@@ -14,8 +14,9 @@ import Component from "@wayward/game/ui/component/Component";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
 import Bindable from "@wayward/game/ui/input/Bindable";
 import Dialog from "@wayward/game/ui/screen/screens/game/component/Dialog";
-import { ItemRefreshType, type IItemDropApi, type IItemPickUpApi, type ItemSlot } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import { type IItemDropApi, type IItemPickUpApi, type ItemSlot } from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
 import ItemComponent from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
+import { ItemRefreshType } from "@wayward/game/ui/screen/screens/game/component/item/IItemComponent";
 import EquipmentSlotTooltipHandler from "@wayward/game/ui/screen/screens/game/dialog/equipment/EquipmentSlotTooltip";
 import { MenuBarButtonType } from "@wayward/game/ui/screen/screens/game/static/menubar/IMenuBarButton";
 export declare enum EquipmentClasses {
@@ -29,7 +30,7 @@ export declare enum EquipmentClasses {
     SlotsWrapper = "game-dialog-equipment-slots-wrapper"
 }
 export declare namespace EquipmentClasses {
-    const SlotType: (enumValue: EquipType) => "game-dialog-equipment-slot-none" | "game-dialog-equipment-slot-head" | "game-dialog-equipment-slot-held" | "game-dialog-equipment-slot-legs" | "game-dialog-equipment-slot-chest" | "game-dialog-equipment-slot-waist" | "game-dialog-equipment-slot-feet" | "game-dialog-equipment-slot-neck" | "game-dialog-equipment-slot-hands" | "game-dialog-equipment-slot-back" | "game-dialog-equipment-slot-mainhand" | "game-dialog-equipment-slot-offhand" | "game-dialog-equipment-slot-dualwield";
+    const SlotType: (enumValue: EquipType) => "game-dialog-equipment-slot-none" | "game-dialog-equipment-slot-head" | "game-dialog-equipment-slot-back" | "game-dialog-equipment-slot-chest" | "game-dialog-equipment-slot-feet" | "game-dialog-equipment-slot-hands" | "game-dialog-equipment-slot-held" | "game-dialog-equipment-slot-legs" | "game-dialog-equipment-slot-neck" | "game-dialog-equipment-slot-waist" | "game-dialog-equipment-slot-mainhand" | "game-dialog-equipment-slot-offhand" | "game-dialog-equipment-slot-dualwield";
 }
 export default class EquipmentDialog extends Dialog {
     readonly slots: Component<HTMLElement>;

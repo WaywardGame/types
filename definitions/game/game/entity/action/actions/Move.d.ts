@@ -9,12 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
-import type Entity from "@wayward/game/game/entity/Entity";
-import type { Direction } from "@wayward/game/utilities/math/Direction";
-import Vector2 from "@wayward/game/utilities/math/Vector2";
-declare const _default: Action<[ActionArgument.Direction], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, {
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
+declare const _default: Action<[ActionArgument.Direction], ActionType.Move, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, {
     usable: true;
-}, [Direction.None | Direction.East | Direction.North | Direction.West | Direction.South]>;
+}, [import("../../../../utilities/math/Direction").Direction.None | import("../../../../utilities/math/Direction").Direction.East | import("../../../../utilities/math/Direction").Direction.North | import("../../../../utilities/math/Direction").Direction.West | import("../../../../utilities/math/Direction").Direction.South]>;
 export default _default;
-export declare function getMovePos(executor: Entity, direction: Direction): Vector2;

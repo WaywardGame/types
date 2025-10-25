@@ -9,9 +9,10 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { BindableTranslation } from "@wayward/game/language/dictionary/Misc";
-import Translation from "@wayward/game/language/Translation";
+import type Translation from "@wayward/game/language/Translation";
 import Bindable from "@wayward/game/ui/input/Bindable";
 import type { Binding } from "@wayward/game/ui/input/Bindings";
+export declare const defaultBindings: Record<Bindable, Binding[]>;
 export interface IManagedBindable {
     position: number;
     translation: Translation;
@@ -23,6 +24,8 @@ export default abstract class BindableManager {
     static registerManager(name: string, manager: BindableManager): boolean;
     static deregisterManager(name: string): boolean;
     static setNeedsUpdate(markBindingsCacheInvalid?: boolean): void;
+    private static readonly cacheInvalidatedCallbacks;
+    static onCacheInvalidated(callback: () => unknown): void;
     private static BINDABLES;
     private static BINDABLES_BY_VALUE;
     private static needsUpdate;

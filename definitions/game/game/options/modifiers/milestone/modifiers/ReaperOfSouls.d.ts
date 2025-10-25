@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
-import MilestoneModifier, { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import MilestoneModifier from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/IMilestoneModifier";
 export default class ReaperOfSouls extends MilestoneModifier {
     getOptions(): IGameOptionsPartial;
     getGroup(): MilestoneModifierGroup;

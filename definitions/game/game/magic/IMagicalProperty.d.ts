@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
+import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import type { MagicalPropertyTypeSubTypeMap } from "@wayward/game/game/magic/MagicalPropertyType";
 import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 export interface IHasMagic {
@@ -16,28 +16,32 @@ export interface IHasMagic {
 }
 export interface IMagicalProperty {
     value: number;
+    curse?: true;
 }
 export declare const SYMBOL_MAGIC_SUB_PROPERTY_TYPES: unique symbol;
 export declare const SYMBOL_MAGIC_SUB_PROPERTY_ENTRIES: unique symbol;
 export interface IMagicalSubProperty<T extends number> {
     subPropertyCount: number;
-    subProperties: Partial<Record<T, number>>;
+    subProperties: Partial<Record<T, IMagicalProperty>>;
     [SYMBOL_MAGIC_SUB_PROPERTY_TYPES]: readonly T[];
     [SYMBOL_MAGIC_SUB_PROPERTY_ENTRIES]: ReadonlyArray<{
         type: T;
         value: number;
+        curse?: true;
     }>;
 }
 export type MagicalProperty<T extends MagicalPropertyType> = MagicalPropertyTypeSubTypeMap extends Record<T, any> ? IMagicalSubProperty<MagicalPropertyTypeSubTypeMap[T]> : IMagicalProperty;
 export interface MagicalNormalPropertyEntry {
     type: MagicalNormalPropertyTypes;
     value: number;
+    curse?: true;
 }
 export type MagicalSubPropertyEntry = {
     [K in MagicalSubPropertyTypes]: {
         type: K;
         subType: MagicalPropertyTypeSubTypeMap[K];
         value: number;
+        curse?: true;
     };
 }[MagicalSubPropertyTypes];
 export type MagicalPropertyEntry = MagicalNormalPropertyEntry | MagicalSubPropertyEntry;
@@ -49,6 +53,7 @@ export interface MagicalPropertyEntryIntersection {
     type: MagicalPropertyType;
     subType?: MagicalSubPropertySubTypes;
     value: number;
+    curse?: true;
 }
 export type AnyMagicalProperty = Partial<IMagicalProperty> & PartialValues<{
     [K in MagicalSubPropertyTypes]: IMagicalSubProperty<MagicalPropertyTypeSubTypeMap[K]>;

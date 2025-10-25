@@ -11,7 +11,7 @@
 import type Human from "@wayward/game/game/entity/Human";
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import GameplayModifiersManager from "@wayward/game/game/options/modifiers/GameplayModifiersManager";
-import type { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
+import type { MilestoneModifierGroup } from "@wayward/game/game/options/modifiers/milestone/IMilestoneModifier";
 import MilestoneModifier from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
 import Abnormalizer from "@wayward/game/game/options/modifiers/milestone/modifiers/Abnormalizer";
 import Afflicted from "@wayward/game/game/options/modifiers/milestone/modifiers/Afflicted";
@@ -25,6 +25,8 @@ import Collector from "@wayward/game/game/options/modifiers/milestone/modifiers/
 import Contender from "@wayward/game/game/options/modifiers/milestone/modifiers/Contender";
 import Crafter from "@wayward/game/game/options/modifiers/milestone/modifiers/Crafter";
 import Curator from "@wayward/game/game/options/modifiers/milestone/modifiers/Curator";
+import Cursebreaker from "@wayward/game/game/options/modifiers/milestone/modifiers/Cursebreaker";
+import Cursed from "@wayward/game/game/options/modifiers/milestone/modifiers/Cursed";
 import Dedicated from "@wayward/game/game/options/modifiers/milestone/modifiers/Dedicated";
 import DestroyerOfMagi from "@wayward/game/game/options/modifiers/milestone/modifiers/DestroyerOfMagi";
 import Diverse from "@wayward/game/game/options/modifiers/milestone/modifiers/Diverse";
@@ -51,6 +53,7 @@ import Multitasker from "@wayward/game/game/options/modifiers/milestone/modifier
 import Murderer from "@wayward/game/game/options/modifiers/milestone/modifiers/Murderer";
 import Navigator from "@wayward/game/game/options/modifiers/milestone/modifiers/Navigator";
 import Notekeeper from "@wayward/game/game/options/modifiers/milestone/modifiers/Notekeeper";
+import Oblivious from "@wayward/game/game/options/modifiers/milestone/modifiers/Oblivious";
 import Operator from "@wayward/game/game/options/modifiers/milestone/modifiers/Operator";
 import Pacifier from "@wayward/game/game/options/modifiers/milestone/modifiers/Pacifier";
 import Prepared from "@wayward/game/game/options/modifiers/milestone/modifiers/Prepared";
@@ -88,6 +91,8 @@ export declare const milestoneModifiers: {
     36: typeof Contender;
     3: typeof Crafter;
     56: typeof Curator;
+    71: typeof Cursebreaker;
+    70: typeof Cursed;
     52: typeof Dedicated;
     38: typeof DestroyerOfMagi;
     42: typeof Diverse;
@@ -114,6 +119,7 @@ export declare const milestoneModifiers: {
     47: typeof Murderer;
     20: typeof Navigator;
     33: typeof Notekeeper;
+    72: typeof Oblivious;
     34: typeof Operator;
     31: typeof Pacifier;
     10: typeof Thrower;

@@ -27,24 +27,6 @@ import ActionsConfigurationDrawer from "@wayward/game/ui/screen/screens/game/sta
 import { IActionBarSlotData } from "@wayward/game/ui/screen/screens/game/static/actions/IActionBar";
 import Stream from "@wayward/goodstream/Stream";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export declare enum ActionBarClasses {
-    Main = "game-action-bar",
-    Configuring = "game-action-bar-configuring",
-    SlotsContainer = "game-action-bar-slots",
-    SlotsContainerLastFour = "game-action-bar-slots-last-four",
-    SlotsContainerHistory = "game-action-bar-slots-history",
-    MovingSlot = "game-action-bar-moving-slot",
-    MetaButtons = "game-action-bar-meta-buttons-container",
-    MetaButton = "game-action-bar-meta-button",
-    MetaButtonAdd = "game-action-bar-meta-button-add",
-    MetaButtonRemove = "game-action-bar-meta-button-remove",
-    MetaButtonConfigure = "game-action-bar-meta-button-configure",
-    MetaButtonToggleUseWhenMoving = "game-action-bar-meta-button-toggle-use-when-moving",
-    _HistoryInactive = "game-action-bar--history-inactive",
-    _HistoryActive = "game-action-bar--history-active",
-    _HistoryClearing = "game-action-bar--history-clearing",
-    _AutoPaused = "game-action-bar--auto-paused"
-}
 export interface IActionBarEvents extends Events<QuadrantComponent> {
     configure(number: number): any;
     endConfiguration(): any;

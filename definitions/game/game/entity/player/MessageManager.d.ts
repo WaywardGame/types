@@ -62,7 +62,7 @@ export default class MessageManager implements IMessageManager {
      * When called from the server, it is sent to every client.
      */
     static toAll(sender: MessageManagerToAllSender): boolean;
-    static toAll(players: Human[], sender: MessageManagerToAllSender): boolean;
+    static toAll(players: Iterable<Human>, sender: MessageManagerToAllSender): boolean;
     private readonly history;
     private lastMessageId;
     private _source;

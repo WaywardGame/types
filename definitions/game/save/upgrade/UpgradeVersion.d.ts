@@ -28,6 +28,8 @@ import type Tile from "@wayward/game/game/tile/Tile";
 import type { ITileData } from "@wayward/game/game/tile/ITerrain";
 import type Human from "@wayward/game/game/entity/Human";
 import type Entity from "@wayward/game/game/entity/Entity";
+import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
+import type { CurseEventInstance } from "@wayward/game/game/curse/Curse";
 export interface IUpgradeVersion {
     name?: string;
     buildId?: IBuildId;
@@ -49,6 +51,8 @@ export interface IUpgradeVersion {
     upgradeTileEvent?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, tileEvent: TileEvent): any;
     upgradeCorpse?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, corpse: Corpse): any;
     upgradeAi?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, ai: AiManager): any;
+    upgradeMagic?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, magic?: MagicalPropertyManager): any;
+    upgradeCurseEvent?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, curseEvent: CurseEventInstance): any;
     upgradeCreatureZone?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, zone: CreatureZone): any;
     upgradeTile?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, tile: Tile): any;
     upgradeTileData?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, tile: Tile, tileData: ITileData[]): any;

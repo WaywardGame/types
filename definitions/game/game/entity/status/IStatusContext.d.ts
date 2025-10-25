@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
-import type { IStatusDescription, StatusThreatLevel, StatusType } from "@wayward/game/game/entity/status/IStatus";
+import type { IStatusDescription, StatusType } from "@wayward/game/game/entity/status/IStatus";
+import { StatusThreatLevel } from "@wayward/game/game/entity/status/IStatus";
 import type Status from "@wayward/game/game/entity/status/Status";
 import { StatusEffectList } from "@wayward/game/game/entity/status/StatusEffectList";
 import type { IGameOptionsStatus } from "@wayward/game/game/options/IGameOptions";
@@ -24,10 +25,10 @@ interface IStatusContext {
 }
 declare namespace IStatusContext {
     function fromStatus(status: Status): IStatusContext;
-    function fromType(status: StatusType, entity?: EntityWithStats): IStatusContext;
+    function fromDef(status: StatusType, definition: IStatusDescription, entity?: EntityWithStats): IStatusContext;
     function withLevel(status: IStatusContext, level: number): IStatusContext;
-    function getInterval(status: IStatusContext): number;
+    function getInterval(status: IStatusContext): number | false;
     function getOptions(type: StatusType, entity?: EntityWithStats): IGameOptionsStatus;
-    function getEffects(status: IStatusContext): StatusEffectList;
+    function getEffects(status: IStatusContext, displayIndex?: number): StatusEffectList;
 }
 export default IStatusContext;

@@ -105,6 +105,11 @@ export declare enum CreatureType {
 export declare enum CreatureTypeGroup {
     Golem = 0
 }
+export declare enum CreatureTag {
+    None = 0,
+    NoAlertIndicator = 1,
+    NoRandomDespawn = 2
+}
 export interface ICreatureOld extends Creature {
     hp: number;
     maxhp: number;
@@ -233,7 +238,7 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
     stokingRestoresHealth?: boolean;
     canTrample?: boolean;
     helpPlants?: boolean;
-    speed?: number;
+    speed?: SupplierOr<number | undefined, [Creature]>;
     disableHitching?: boolean;
     tileMissChance?: OptionalDescriptions<TileGroup, number>;
     waste?: IWaste;
@@ -359,6 +364,11 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      * Defaults to CREATURE_DEFAULT_ALERTED_DISTANCE_SQ
      */
     alertedRadius?: number;
+    /**
+     * Set to false if you want the creature to not be slowed by cobwebs
+     * Defaults to true (or undefined, which is treated as true)
+     */
+    slowedByCobwebs?: boolean;
 }
 export interface ICreatureLoot {
     item: ItemType;
@@ -510,4 +520,30 @@ export interface ICreatureCheckMoveOptions {
     ignoreHuman: Human;
     ignoreScareCrow: boolean;
     ignoreMoveTypeNone: boolean;
+}
+export interface ICreatureSpawnOptions {
+    /**
+     * If set to true, the creature will ignore blocked or full tile checks as well as ignore spawnTiles definitions set on the creature.
+     */
+    bypassTiles?: boolean;
+    /**
+     * If provided, forces the spawned creature's aberrant state to be the passed boolean. True = aberrant, false = not aberrant. If not provided, the aberrant state is decided based on chance.
+     */
+    forceAberrant?: boolean;
+    /**
+     * If set, this will overwrite the creature's description for which tiles it can spawn on. This will also change which tiles it can path on to, differing from its set definitions.
+     */
+    spawnTiles?: TileGroup;
+    /**
+     * If set to true, this will bypass the current zone's creature limit and spawn it regardless.
+     */
+    bypassCreatureLimit?: boolean;
+    /**
+     * If set to true, the creatures will ignore scarecrows when spawning. Note that this does NOT ignore the chance of being scared by a scarecrow when moving, just the initial spawn checks.
+     */
+    bypassScarecrows?: boolean;
+    /**
+     * If set to true, all checks will be bypassed and the creature will spawn no matter what.
+     */
+    bypassAll?: boolean;
 }

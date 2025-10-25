@@ -14,7 +14,8 @@ import { Quality } from "@wayward/game/game/IObject";
 import Deity from "@wayward/game/game/deity/Deity";
 import type { GrowingStage } from "@wayward/game/game/doodad/IDoodad";
 import { DamageType } from "@wayward/game/game/entity/IEntity";
-import type { EquipType, SkillType } from "@wayward/game/game/entity/IHuman";
+import type { EquipType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../game/entity/skill/ISkills";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type { UsableActionType } from "@wayward/game/game/entity/action/usable/UsableActionType";
@@ -29,7 +30,7 @@ import type { EnumReferenceTypes, Reference, Referenceable } from "@wayward/game
 import Dictionary from "@wayward/game/language/Dictionary";
 import type { DictionaryEntryEnums } from "@wayward/game/language/DictionaryMap";
 import type { ListEnder, TranslationArg } from "@wayward/game/language/ITranslation";
-import { ISerializedTranslation } from "@wayward/game/language/ITranslation";
+import { Article, ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import Message from "@wayward/game/language/dictionary/Message";
 import type { Term } from "@wayward/game/language/dictionary/Misc";
 import { EquipSlotTranslation, MiscTranslation } from "@wayward/game/language/dictionary/Misc";
@@ -37,36 +38,19 @@ import type UiTranslation from "@wayward/game/language/dictionary/UiTranslation"
 import type { TranslationReformatter } from "@wayward/game/language/impl/TranslationImpl";
 import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import { formatListTranslation } from "@wayward/game/language/segment/FormatListSegment";
-import makeTranslationListBuilder from "@wayward/game/language/utility/TranslationListBuilder";
-import ITranslationSorter from "@wayward/game/language/utility/TranslationSorter";
+import TranslationListBuilder from "@wayward/game/language/utility/TranslationListBuilder";
+import TranslationSorter from "@wayward/game/language/utility/TranslationSorter";
 import { IStringSection } from "@wayward/game/utilities/string/Interpolator";
 import { IRange } from "@wayward/utilities/math/Range";
-export declare enum Article {
-    /**
-     * Use no article.
-     */
-    None = "",
-    /**
-     * In English, this is "a" or "an" in front of the text, assuming the "count" is one.
-     */
-    Indefinite = "indefinite",
-    /**
-     * In English, this is "the" in front of the text.
-     */
-    Definite = "definite",
-    /**
-     * Uses "indefinite" if the user hasn't opted out of articles in titles.
-     */
-    Title = "title"
-}
 type Translation = TranslationImpl;
 declare namespace Translation {
     export function is(value: unknown): value is Translation;
     export function equals(a: Translation, b: Translation): boolean;
+    export function coalesce(...translations: Translation[]): Translation | undefined;
     export const RANDOM = "random";
     export const getString: typeof TranslationImpl.getString;
     export const resolve: typeof TranslationImpl.resolve;
-    export const sorter: typeof ITranslationSorter.create;
+    export const sorter: typeof TranslationSorter.create;
     /**
      * Gets a translation given a dictionary, entry, and translation index.
      * @param dictionary The dictionary to get a translation from, for instance, `Dictionary.Item`.
@@ -74,7 +58,7 @@ declare namespace Translation {
      * @param index Optional. The index of the translation in the given dictionary entry, for instance `ItemTranslation.Description`,
      * or `"random"` to return any of the translations in this entry.
      */
-    export function get<DICT extends Dictionary>(dictionary: DICT, entry: Dictionary extends DICT ? string | number : DictionaryEntryEnums[DICT], index?: "random" | number): Translation;
+    export function get<DICT extends Dictionary>(dictionary: DICT | undefined, entry: Dictionary extends DICT ? string | number : DictionaryEntryEnums[DICT], index?: "random" | number): Translation;
     /**
      * Gets a translation by its translation id. Entry matching is done by changing the case-style of the inputted
      * translation id, so if you provide an all lower-case string it will not work!
@@ -153,6 +137,7 @@ declare namespace Translation {
     export const deity: Translator<Deity, [color?: boolean | undefined]>;
     export let action: Translator<ActionType | UsableActionType>;
     export let magic: Translator<MagicalPropertyType, [color?: boolean, obscured?: boolean]>;
+    export let magicCurse: Translator<MagicalPropertyType, [color?: boolean, obscured?: boolean]>;
     export const equipSlot: Translator<EquipType, [type?: EquipSlotTranslation | undefined]>;
     export const quality: Translator<Quality, [color?: any]>;
     export const qualityList: (qualities: ArrayOr<Quality>, color?: boolean, ender?: ListEnder | false) => Translation;
@@ -192,7 +177,7 @@ declare namespace Translation {
     export function colorizeImportance(importance: "primary" | "secondary", text: IStringSection[]): Translation;
     export function classes(...classes: string[]): Translation;
     export const formatList: typeof formatListTranslation;
-    export const listBuilder: typeof makeTranslationListBuilder;
+    export const listBuilder: typeof TranslationListBuilder;
     export function reformatSingularNoun(): Translation;
     export function reformatSingularNoun(count: number): Translation;
     export function reformatSingularNoun(article: Article): Translation;
@@ -222,7 +207,7 @@ declare namespace Translation {
         constructor(base?: FVal, reformatter?: SupplierOr<Translation | undefined>);
         noParenthesis(): this;
         percentage(isPercentage?: boolean, premultiplied?: boolean): this;
-        translate(simple?: boolean): Translation;
+        translate(simple?: boolean | "unless verbose"): Translation;
         private parenthesize;
         private translateAndFormatComponent;
         private translateComponent;

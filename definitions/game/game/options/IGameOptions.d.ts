@@ -12,7 +12,7 @@ import type { Quality, QualityNatural } from "@wayward/game/game/IObject";
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
 import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type { AttackType } from "@wayward/game/game/entity/IEntity";
-import type { SkillType } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "../entity/skill/ISkills";
 import type { Stat } from "@wayward/game/game/entity/IStats";
 import type { CreatureType, TileGroup } from "@wayward/game/game/entity/creature/ICreature";
 import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
@@ -173,7 +173,19 @@ export interface IGameOptions {
          */
         qualities: DefaultMap<Quality, IGameOptionsItemQuality>;
     };
+    /**
+     * Controls random island events (excluding curse events).
+     */
     randomEvents: boolean;
+    /**
+     * Controls curse events
+     */
+    curse: {
+        stat: boolean;
+        events: boolean;
+        cooldownRangeOverride?: IRange;
+        eventsRangeOverride?: IRange;
+    };
 }
 export declare enum UnlockedRecipesStrategy {
     StartWithNone = 0,
@@ -189,6 +201,10 @@ export interface IGameOptionsPlayer {
      * Starting curse value, added to the calculated value.
      */
     initialCurse: number;
+    /**
+     * A multiplier for the cooldown of curse events. The multiplier used is the average of all players on the island.
+     */
+    curseCooldownMultiplier: number;
     /**
      * Whether the player should use their globally unlocked recipes in this game.
      */
@@ -298,6 +314,12 @@ export interface IGameOptionsPlayer {
          * TODO: Set to Map<RecipeLevel, number> when we can support maps in milestone modifier overrides?
          */
         difficultyMultiplier: number;
+        /**
+         * A multiplier for the chance of magical properties being generated on crafted items.
+         *
+         * Multiplied with the island's chance for any item being generated with magical properties (which is per-quality.)
+         */
+        magicChanceMultiplier: number;
         /**
          * Allow default crafting recipe discovery.
          */

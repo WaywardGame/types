@@ -33,5 +33,11 @@ export declare enum CanASeeBType {
     Shipper = 10,
     SkeletalMage = 11,
     ZombieHorde = 12,
-    TileIsInRange = 13
+    TileIsInRange = 13,
+    CurseDespawning = 14,
+    CreatureDespawning = 15,
+    CreatureOfferFromGround = 16,
+    CursePositionRandom = 17,
+    CurseSpawning = 18,
+    CurseWitness = 19
 }

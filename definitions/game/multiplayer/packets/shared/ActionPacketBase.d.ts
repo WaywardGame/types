@@ -13,6 +13,7 @@ import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
 import type Entity from "@wayward/game/game/entity/Entity";
 import { Packet } from "@wayward/game/multiplayer/packets/Packet";
 export default abstract class ActionPacketBase extends Packet {
+    readonly isActionPacket = true;
     abstract entity: Entity | undefined;
     protected writeArgument(expectedType: ActionArgumentCustom<any> | ActionArgument, value: any): void;
     protected readArgument(expectedType: ActionArgumentCustom<any> | ActionArgument): unknown;

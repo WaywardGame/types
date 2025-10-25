@@ -14,6 +14,26 @@ import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector3 from "@wayward/game/utilities/math/Vector3";
 type ConsumerVectorRange = (vec: IVector2, value: number) => any;
+export declare enum DistanceType {
+    /**
+     * The number of adjacent grid cell movements needed to get from A to B.
+     *
+     * This distance formula covers a diamond pattern on a grid.
+     */
+    Manhattan = 0,
+    /**
+     * The measure of a straight line between points A and B.
+     *
+     * This distance formula covers a circular pattern on a grid.
+     */
+    Euclidean = 1,
+    /**
+     * The greater of the distances from points A and B on each axis.
+     *
+     * This distance formula covers a square pattern on a grid.
+     */
+    Chebyshev = 2
+}
 export default class Vector2 implements IVector2, ISerializable {
     static get ZERO(): Vector2;
     static get ONE(): Vector2;
@@ -45,12 +65,12 @@ export default class Vector2 implements IVector2, ISerializable {
         clientX?: number;
         clientY?: number;
     }): Vector2 | undefined;
-    static inRange(center: IVector2, range: number, includeCenter?: boolean): Generator<IVector2>;
+    static inRange(type: DistanceType, center: IVector2, range: number, includeCenter?: boolean): Generator<IVector2>;
     static angle(directionInRadians: number, distance?: number): Vector2;
-    static forRange(center: IVector2, range: number, consumer: ConsumerVectorRange): void;
-    static forRange(center: IVector2, range: number, includeCenter: boolean, consumer: ConsumerVectorRange): void;
-    static forRange(center: IVector2, range: number, min: IVector2, max: IVector2, consumer: ConsumerVectorRange): void;
-    static forRange(center: IVector2, range: number, min: IVector2, max: IVector2, includeCenter: boolean, consumer: ConsumerVectorRange): void;
+    static forRange(type: DistanceType, center: IVector2, range: number, consumer: ConsumerVectorRange): void;
+    static forRange(type: DistanceType, center: IVector2, range: number, includeCenter: boolean, consumer: ConsumerVectorRange): void;
+    static forRange(type: DistanceType, center: IVector2, range: number, min: IVector2, max: IVector2, consumer: ConsumerVectorRange): void;
+    static forRange(type: DistanceType, center: IVector2, range: number, min: IVector2, max: IVector2, includeCenter: boolean, consumer: ConsumerVectorRange): void;
     static raycast(center: IVector2, range: number, angle: IVector2): IVector2[];
     static raycastArc(center: IVector2, radius: number, angleStart: IVector2 | number, angleEnd: IVector2 | number): IVector2[];
     static cross(vector: IVector2, vector2: IVector2): Vector3;

@@ -197,7 +197,6 @@ export declare class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
      */
     batchMovable(timeStamp: number): boolean;
     private batchCreature;
-    private getFlyingOffset;
     private batchShadow;
     private batchDoodadOrVehicle;
     private batchHuman;
@@ -213,6 +212,10 @@ export declare class WorldRenderer extends EventEmitter.Host<IWorldRendererEvent
     private renderStatus;
     private spriteBatchForLayer;
     addTileToViewport(timeStamp: number, visibleTiles: Set<Tile>, tile: Tile, itemBatch: ISpriteBatch | undefined): void;
+    private addDoodadToViewport;
+    private addCreatureToViewport;
+    private addNPCToViewport;
+    private addCorpsesToViewport;
     /**
      * Computes sprites in the viewport
      * @returns True when there's more rendering to be done

@@ -17,7 +17,7 @@ import type Human from "@wayward/game/game/entity/Human";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
 import Tile from "@wayward/game/game/tile/Tile";
-import type { Article } from "@wayward/game/language/Translation";
+import type { Article } from "@wayward/game/language/ITranslation";
 import Translation from "@wayward/game/language/Translation";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import type WorldZ from "@wayward/utilities/game/WorldZ";
@@ -32,6 +32,7 @@ export interface IDoodadManagerEvents extends Events<EntityManager<Doodad>> {
     canSpawn(type: DoodadType, tile: Tile, options: IDoodadOptions): boolean | undefined;
 }
 export default class DoodadManager extends EntityManager<Doodad> {
+    readonly static: typeof DoodadManager;
     protected readonly name = "DoodadManager";
     event: IEventEmitter<this, IDoodadManagerEvents>;
     private static readonly cachedBestDoodadForTier;
@@ -85,10 +86,10 @@ export default class DoodadManager extends EntityManager<Doodad> {
      */
     updateAllAsync(ticks: number, playingHumans: Human[], playerHumanTiles: Set<Tile>, onProgress: (progess: number) => Promise<void>): Promise<void>;
     verifyAndFixItemWeights(): void;
-    getScarecrowInRange(tile: Tile): Doodad | undefined;
+    getScarecrowInRange(tile: Tile, group?: DoodadTypeGroup): Doodad | undefined;
     getScarecrowInLineOfSight(creature: Creature, isClientside: boolean): Doodad | undefined;
-    private addScarecrow;
-    private removeScarecrow;
+    addScarecrow(doodad: Doodad): void;
+    removeScarecrow(doodad: Doodad): void;
     /**
      * Handles doodad specific effects
      */

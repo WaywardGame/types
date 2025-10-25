@@ -9,9 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { ISerializable, ISerializer } from "@wayward/game/save/serializer/ISerializer";
+import type { IMergeable, MergeFunction } from "@wayward/game/utilities/object/Merge";
+import { SYMBOL_MERGE_INTO, SYMBOL_MERGE_OVER } from "@wayward/game/utilities/object/Merge";
 import type { RecursivePartial } from "@wayward/game/utilities/types/Recursive";
 import Objects from "@wayward/utilities/object/Objects";
-export default class DefaultMap<K, V> extends Map<K, V> implements ISerializable, Objects.ICloneable {
+export default class DefaultMap<K, V> extends Map<K, V> implements ISerializable, Objects.ICloneable, IMergeable<Map<K, V>> {
     readonly defaultValue: V;
     constructor(defaultValue: V, entries?: Iterable<readonly [K, RecursivePartial<V>]>);
     valuesAndDefault(): Generator<V>;
@@ -19,4 +21,6 @@ export default class DefaultMap<K, V> extends Map<K, V> implements ISerializable
     serializeObject(serializer: ISerializer): undefined;
     deserializeObject(serializer: ISerializer): boolean;
     [Objects.SYMBOL_CLONE](clone: typeof Objects.deepClone): this;
+    [SYMBOL_MERGE_INTO](from: unknown, merge: MergeFunction): unknown;
+    [SYMBOL_MERGE_OVER](over: unknown, merge: MergeFunction): Map<K, V>;
 }

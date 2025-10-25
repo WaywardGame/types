@@ -18,6 +18,7 @@ export default class TabVideo extends Tab implements IRefreshable {
     readonly checkButtonSmoothZooming: CheckButton;
     readonly inputUiScale: RangeRow;
     readonly inputHudWidth: RangeRow;
+    readonly checkButtonAnimations: CheckButton;
     constructor();
     refresh(): this;
     protected onViewportResize(): void;
@@ -26,4 +27,5 @@ export default class TabVideo extends Tab implements IRefreshable {
     private onCustomTitleBar;
     private onDitherFOW;
     private onDefaultCursor;
+    private onDisableUIAnimation;
 }

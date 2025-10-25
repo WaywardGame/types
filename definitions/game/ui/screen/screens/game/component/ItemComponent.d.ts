@@ -16,6 +16,7 @@ import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropert
 import Component from "@wayward/game/ui/component/Component";
 import type ContextMenu from "@wayward/game/ui/component/ContextMenu";
 import Bindable from "@wayward/game/ui/input/Bindable";
+import { ItemRefreshType } from "@wayward/game/ui/screen/screens/game/component/item/IItemComponent";
 import { ItemComponentHandler } from "@wayward/game/ui/screen/screens/game/component/item/ItemComponentHandler";
 import type ActionBar from "@wayward/game/ui/screen/screens/game/static/ActionBar";
 import type { ActionSlot } from "@wayward/game/ui/screen/screens/game/static/actions/ActionSlot";
@@ -23,6 +24,7 @@ import type { IDraggableEvents } from "@wayward/game/ui/util/Draggable";
 import Draggable from "@wayward/game/ui/util/Draggable";
 import type { ISortableDraggableEvents } from "@wayward/game/ui/util/Sortable";
 import PerfCache from "@wayward/game/utilities/PerfCache";
+import Debug from "@wayward/game/utilities/dev/Debug";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 type ItemSlotExtend = Omit<Component, "event"> & {
@@ -42,29 +44,6 @@ export interface IItemPickUpApi {
 export interface IItemDropApi {
     bindable?: Bindable;
     handler?: ItemComponentHandler;
-}
-export declare enum ItemTradeType {
-    None = "",
-    ToMerchant = "To",
-    FromMerchant = "From"
-}
-export declare enum ItemRefreshType {
-    None = 0,
-    ItemType = 1,
-    Durability = 2,
-    Decay = 4,
-    Quality = 8,
-    Magic = 16,
-    Protected = 32,
-    EquipSlot = 64,
-    MaybeSlottedInActionSlot = 128,
-    Action = 256,
-    Stack = 512,
-    Stacked = 1024,
-    Trading = 2048,
-    ContainerChange = 4096,
-    Cooldown = 8192,
-    All = 16383
 }
 export interface IItemComponentEvents extends Events<Component>, IDraggableEvents, IItemSlotEvents, ISortableDraggableEvents {
     deregisterHighlights(): any;
@@ -106,8 +85,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     readonly draggable?: Draggable;
     private transient;
     protected constructor(handler: ItemComponentHandler, ...params: any[]);
-    /** @deprecated For console use only */
-    protected get debug(): any;
+    get debug(): Debug.JIT<[]>;
     private tickEndHandlerReasons?;
     private registerTickEndHandler;
     private deregisterTickEndHandler;
@@ -137,7 +115,9 @@ export default class ItemComponent extends Component implements ItemSlot {
     protected onUpdateDurability(): void;
     protected onUpdateDecay(): void;
     protected onUpdateQuality(): void;
+    protected onUpdateBaseItem(): void;
     protected onTickEnd(): void;
+    protected onRevertFromDoodad(): void;
     protected onRooted(): void;
     protected onRootedAndAppend(): void;
     protected onLoadedOnIsland(): void;

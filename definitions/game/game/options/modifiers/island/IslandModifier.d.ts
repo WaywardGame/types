@@ -14,9 +14,7 @@ import type { IslandName } from "@wayward/game/language/english/game/islandName/
 import Translation from "@wayward/game/language/Translation";
 import type Tooltip from "@wayward/game/ui/tooltip/Tooltip";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-export declare enum IslandModifierType {
-    OverrunWithCreature = 0
-}
+import type { IslandModifierType } from "@wayward/game/game/options/modifiers/island/IIslandModifier";
 export declare class IslandModifierInstance extends GameplayModifierInstance<IslandModifierType> {
     /**
      * How much "challenge" this modifier adds (or subtracts!). Defaults to `0`. Added to the result of `apply`.

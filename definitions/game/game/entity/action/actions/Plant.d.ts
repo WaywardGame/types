@@ -11,7 +11,7 @@
 import type { DoodadType, IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Item from "@wayward/game/game/item/Item";
 import type { ITerrainDescription } from "@wayward/game/game/tile/ITerrain";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
@@ -23,5 +23,5 @@ export interface IPlantCanUse extends IActionUsable {
     terrainDescription?: ITerrainDescription;
     tile: Tile;
 }
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IPlantCanUse, [Item]>;
+declare const _default: Action<[ActionArgument.ItemInventory], ActionType.Plant, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IPlantCanUse, [Item]>;
 export default _default;

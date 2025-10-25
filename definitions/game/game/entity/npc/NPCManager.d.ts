@@ -49,6 +49,7 @@ export interface INPCManagerSpawnTracker {
     chances: number[];
 }
 export default class NPCManager extends EntityManager<NPC> {
+    readonly static: typeof NPCManager;
     protected readonly name = "NPCManager";
     protected readonly reregisterObjectsForMemoryLeaks = true;
     event: IEventEmitter<this, INPCManagerEvents>;

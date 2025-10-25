@@ -9,9 +9,20 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Dictionary from "@wayward/game/language/Dictionary";
-import Translation from "@wayward/game/language/Translation";
-export interface ITranslationSorter<T = number> {
+import type Translation from "@wayward/game/language/Translation";
+import TranslationUtility from "@wayward/game/language/utility/TranslationUtility";
+interface TranslationSorter<T = number> {
     (a: T, b: T): number;
+}
+declare class TranslationSorter<T = number> extends TranslationUtility {
+    private mapper?;
+    private fallback?;
+    private reverse?;
+    private customSorter?;
+    private customSorterArgs?;
+    private translator?;
+    private translationCache?;
+    constructor(dictionary?: Dictionary, index?: number, mapper?: TranslationSorter.EntryMapper);
     /**
      * Sets this sort to be reversed
      */
@@ -19,31 +30,31 @@ export interface ITranslationSorter<T = number> {
     /**
      * Sets whether this sort should be reversed
      */
-    setReverse(reverse: boolean): this;
+    setReverse(r: boolean): this;
     /**
      * Sets this translation sorter to be getting the entry with the given mapper
      */
-    setEntryMapper<T2>(mapper: ITranslationSorter.EntryMapper<T2>): ITranslationSorter<T2>;
+    setEntryMapper<T2>(mapper: TranslationSorter.EntryMapper<T2>): TranslationSorter<T2>;
     /**
      * Sets a fallback sorter for when two translations are in the same position
      */
-    setFallback(fallback?: ITranslationSorter.SortFallback<T>): this;
+    setFallback(fallback?: TranslationSorter.SortFallback<T>): this;
     /**
      * Sets a custom sorter to override the default sort functionality
      *
      * Note: When a custom sorter is used, fallbacks registered in `setFallback` will not be.
      */
-    setSorter<A extends any[]>(sorter?: ITranslationSorter.SortFallback<T, A>, ...args: A): this;
+    setSorter<A extends any[]>(sorter?: TranslationSorter.SortFallback<T, A>, ...args: A): this;
     /**
      * Sets a custom translator, which takes each value to sort and makes a string from it. These strings are cached by the sorter
      */
-    setTranslator<T2 = T>(translator: ITranslationSorter.Translator<T2>): ITranslationSorter<T2>;
+    setTranslator<T2 = T>(translator: TranslationSorter.Translator<T2>): TranslationSorter<T2>;
 }
-declare namespace ITranslationSorter {
+declare namespace TranslationSorter {
     type EntryMapper<T = any> = (v: T) => number;
     type SortFallback<T = any, A extends any[] = any[]> = (a: T, b: T, entryA: T extends Translation ? undefined : number, entryB: T extends Translation ? undefined : number, stringA: string, stringB: string, ...args: A) => number;
     type Translator<T = any> = (v: T, entry?: number, dictionary?: Dictionary, index?: number) => Translation | string | undefined;
-    function create(): ITranslationSorter<Translation>;
-    function create<T = number>(dictionary: Dictionary, index?: number): ITranslationSorter<T>;
+    function create(): TranslationSorter<Translation>;
+    function create<T = number>(dictionary: Dictionary, index?: number): TranslationSorter<T>;
 }
-export default ITranslationSorter;
+export default TranslationSorter;

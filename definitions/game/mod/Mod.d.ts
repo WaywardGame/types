@@ -10,6 +10,7 @@
  */
 import "@wayward/game/IGlobal";
 import BaseMod from "@wayward/game/mod/BaseMod";
+import type { ModInformation } from "@wayward/game/mod/ModInformation";
 import Log from "@wayward/utilities/Log";
 declare abstract class Mod extends BaseMod {
     /**
@@ -44,6 +45,20 @@ declare namespace Mod {
      * @param name Given a mod name, the decorated field will be injected with the enabled/loaded instance of the mod by that name.
      */
     function instance<M extends Mod>(name: string): <K extends string | number | symbol, T extends Record<K, M extends (new (index: number) => infer I) ? I : Mod>>(target: T, key: K) => void;
+    /**
+     * A function usable exclusively in the *top level* of a mod script, or within synchronous code called by the top level of the mod script.
+     * Returns a container for the mod's instance, its `ModInformation`, or `undefined` if it can't be found or this is used in the wrong context.
+     */
+    function get<M extends Mod>(): ModInformation & {
+        instance: M;
+    } | undefined;
+    /**
+     * Given a mod name, returns a container (its `ModInformation`) for the enabled/loaded instance of the mod by that name,
+     * or `undefined` if it can't be found.
+     */
+    function get<M extends Mod>(name: string): ModInformation & {
+        instance: M;
+    } | undefined;
     /**
      * Injects the decorated field with this mod's log.
      */

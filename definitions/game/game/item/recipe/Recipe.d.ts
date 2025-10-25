@@ -11,7 +11,7 @@
 import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type Entity from "@wayward/game/game/entity/Entity";
-import { SkillType } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import { RecipeLevel } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import Crafter from "@wayward/game/game/item/recipe/Crafter";

@@ -50,9 +50,17 @@ declare namespace Merge {
      * Note: Tuples (created with `Tuple()`) use "MERGE_ARRAY" by default.
      */
     function MERGE_ARRAY<A extends any[]>(...values: A): Mergeable<A>;
+    function diff<T, D = RecursivePartial<T>>(optionsA: T, optionsB: T): D;
+    function has<T, P = RecursivePartial<T>>(source: T, search: P): boolean;
 }
 export default Merge;
-export declare const SYMBOL_MERGEABLE: unique symbol;
+export type MergeFunction = (a: unknown, b: unknown) => unknown;
+export type DiffFunction = <T, M = RecursivePartial<T>>(optionsA: T, optionsB: T) => M;
+export declare const SYMBOL_MERGE_OVER: unique symbol;
+export declare const SYMBOL_MERGE_INTO: unique symbol;
+export declare const SYMBOL_MERGE_DIFF: unique symbol;
 export interface IMergeable<T> {
-    [SYMBOL_MERGEABLE](value: this | undefined): T;
+    [SYMBOL_MERGE_OVER]?(value: unknown, merge: MergeFunction): T;
+    [SYMBOL_MERGE_INTO]?(value: unknown, merge: MergeFunction): unknown;
+    [SYMBOL_MERGE_DIFF]?(b: T, diff: DiffFunction): unknown;
 }

@@ -18,6 +18,7 @@ import type Tile from "@wayward/game/game/tile/Tile";
 import Component from "@wayward/game/ui/component/Component";
 import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
 import Bindable from "@wayward/game/ui/input/Bindable";
+import type ContainerBucket from "@wayward/game/ui/screen/screens/game/component/ContainerBucket";
 import ItemComponent from "@wayward/game/ui/screen/screens/game/component/ItemComponent";
 import type { IDraggableComponentSubscriber, ISortableComponent, WithSortableEvents } from "@wayward/game/ui/util/Sortable";
 import Sortable from "@wayward/game/ui/util/Sortable";
@@ -84,7 +85,9 @@ export default class ContainerBucketItemList extends Component implements ISorta
     isStacked(item?: Item): boolean;
     getStackedItems(type?: ItemType, excluding?: Item): Item[];
     getStackIndex(type?: ItemType): number | undefined;
-    constructor(container?: IContainer);
+    private readonly bucketRef;
+    get bucket(): ContainerBucket;
+    constructor(bucket: ContainerBucket, container?: IContainer);
     private readonly activeReasons;
     toggleActive(reason: string, active: boolean): void;
     getSortableID(child: Component & Partial<ItemComponent>): number | undefined;
@@ -135,6 +138,7 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private getAppendStrategy;
     private addItemAddedStacks?;
     protected onAddItem(manager: ItemManager, items: Item[], container: IContainer, index: number, options?: IMoveItemOptions): Promise<void>;
+    private isTransferring;
     protected onRemoveItem(manager: ItemManager, items: Item[], container?: IContainer, containerTile?: Tile): void;
     protected onAddItemDidNotSort(manager: ItemManager, container: IContainer): void;
     protected onTransformItem(item: Item, newType: ItemType, oldType: ItemType): void;

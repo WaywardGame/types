@@ -12,7 +12,8 @@ import type { IMovementTime } from "@wayward/game/game/IGame";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type Human from "@wayward/game/game/entity/Human";
-import type { Delay, MovingState, SkillType } from "@wayward/game/game/entity/IHuman";
+import type { Delay, MovingState } from "@wayward/game/game/entity/IHuman";
+import type { SkillType } from "./skill/ISkills";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
@@ -128,6 +129,17 @@ export declare enum EntityType {
     Corpse = 6,
     Item = 7
 }
+export interface EntityTypeMap {
+    [EntityType.Corpse]: Corpse;
+    [EntityType.Creature]: Creature;
+    [EntityType.Doodad]: Doodad;
+    [EntityType.Human]: Human;
+    [EntityType.Item]: Item;
+    [EntityType.NPC]: NPC;
+    [EntityType.Player]: Player;
+    [EntityType.TileEvent]: TileEvent;
+}
+export type EntityTypeType<TYPE extends EntityType> = EntityTypeMap[TYPE] extends Entity<any, infer TYPETYPE, any, any> ? TYPETYPE : never;
 export declare enum MoveType {
     None = 0,
     Water = 1,
@@ -136,13 +148,26 @@ export declare enum MoveType {
     Tree = 8,
     Mountain = 16,
     Fire = 32,
-    BreakDoodads = 64,
-    BreakItems = 128,
+    /**
+     * If set, this entity will damage facing doodads when moving randomly.
+     */
+    DamageFacingDoodads = 64,
+    /**
+     * If set, this entity will randomly damage facing items (only if the tile is full) as well as items on they have stepped on.
+     */
+    DamageAnyNearbyItems = 128,
     WetLand = 256,
     Void = 512,
-    LandBlind = 1024,// Will not attempt to move towards targets on land
+    /**
+     * Will not attempt to move towards targets on land.
+     */
+    LandBlind = 1024,
     Hole = 2048,
     Fast = 4096,
+    /**
+     * If set, this entity will damage any crushable item they have stepped on.
+     */
+    DamageCrushableTileItems = 8192,
     Flying = 15
 }
 export declare enum AttackType {

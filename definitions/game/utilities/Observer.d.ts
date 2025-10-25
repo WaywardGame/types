@@ -54,6 +54,8 @@ declare namespace Observer {
         <E extends Emitter>(emitter: WeakRef<E> | undefined, events: GameEvent<E> | Array<GameEvent<E>>, observer: Observer<any>, priority?: number): HOST;
         tick: IRegistrarObserveDefaultEvent<HOST, EventBus.LocalIsland, "tickEnd">;
         updateDirection: IRegistrarObserveDefaultEvent<HOST, EventBus.LocalPlayer, "updateDirection">;
+        calcEquipmentStats: IRegistrarObserveDefaultEvent<HOST, EventBus.LocalPlayer, "calculateEquipmentStats">;
+        passTurn: IRegistrarObserveDefaultEvent<HOST, EventBus.LocalPlayer, "turnEnd">;
         start(): void;
         end(): void;
         setDefaultPriority(priority?: number): this;

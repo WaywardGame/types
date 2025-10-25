@@ -17,8 +17,9 @@ import type Entity from "@wayward/game/game/entity/Entity";
 import EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type { IAttack, ICausesDamage, IEntityConstructorOptions, IMovingData, MoveFlag } from "@wayward/game/game/entity/IEntity";
 import { AttackType, DamageType, IStatChangeInfo, StatusChangeReason } from "@wayward/game/game/entity/IEntity";
-import type { ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkToChangeReason } from "@wayward/game/game/entity/IHuman";
-import { EquipType, RestCancelReason, SkillType } from "@wayward/game/game/entity/IHuman";
+import type { HumanTag, ICheckUnderOptions as ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkToChangeReason } from "@wayward/game/game/entity/IHuman";
+import { EquipType, RestCancelReason } from "@wayward/game/game/entity/IHuman";
+import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type { IStat } from "@wayward/game/game/entity/IStats";
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type { StatChangeTimerFactory } from "@wayward/game/game/entity/StatFactory";
@@ -46,9 +47,9 @@ import ItemReference from "@wayward/game/game/item/ItemReference";
 import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import Runekeeper from "@wayward/game/game/milestones/milestone/Runekeeper";
-import type { IGameOptionsPlayer } from "@wayward/game/game/options/IGameOptions";
+import type { IGameOptionsPartial, IGameOptionsPlayer } from "@wayward/game/game/options/IGameOptions";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
-import type { IHasInsulation } from "@wayward/game/game/temperature/ITemperature";
+import type { IHasInsulation, IInsulationResult } from "@wayward/game/game/temperature/ITemperature";
 import { TempType } from "@wayward/game/game/temperature/ITemperature";
 import type { FindPathRange } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -62,6 +63,7 @@ import type { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView
 import { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
 import type { SortDirection } from "@wayward/game/save/ISaveManager";
 import type { IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
+import Debug from "@wayward/game/utilities/dev/Debug";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
@@ -71,7 +73,7 @@ interface IEquip {
     item: Item;
     equipType: EquipType;
 }
-export default abstract class Human<DescriptionType = unknown, TypeType extends number = number, EntityReferenceType extends ReferenceType.Player | ReferenceType.NPC = ReferenceType.Player | ReferenceType.NPC> extends EntityWithStats<DescriptionType, TypeType, EntityReferenceType> implements IHasInsulation, IContainer {
+export default abstract class Human<DescriptionType = unknown, TypeType extends number = number, EntityReferenceType extends ReferenceType.Player | ReferenceType.NPC = ReferenceType.Player | ReferenceType.NPC, TagType = unknown> extends EntityWithStats<DescriptionType, TypeType, EntityReferenceType, TagType> implements IHasInsulation, IContainer {
     static getNameTranslation(): TranslationImpl;
     event: IEventEmitter<this, IHumanEvents>;
     anim: number;
@@ -127,10 +129,8 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     quests: IQuestManager;
     messages: IMessageManager;
     notes: INoteManager;
-    highestAttack?: number;
-    highestDefense?: number;
-    cumulativeEvilCrafting: number;
     itemDiscovered: ItemType[];
+    private _humanTags?;
     /** @deprecated (use the entity itself) */
     readonly inventory: IContainer;
     /**
@@ -149,7 +149,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * Flag that will prevent a humans vehicle from showing up until the movement finishews
      */
     isMovingSuppressVehicleClientside: boolean;
-    protected readonly milestonesCollection: import("../options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("../options/modifiers/milestone/MilestoneModifier").default, Milestone, import("../options/modifiers/milestone/MilestoneModifier").MilestoneModifierInstance<any>, [(Human<unknown, number, ReferenceType.NPC | ReferenceType.Player> | undefined)?]>;
+    protected readonly milestonesCollection: import("../options/modifiers/GameplayModifiersManager").GameplayModifiersCollection<import("../options/modifiers/milestone/MilestoneModifier").default, Milestone, import("../options/modifiers/milestone/MilestoneModifier").MilestoneModifierInstance<any>, [(Human<unknown, number, ReferenceType.NPC | ReferenceType.Player, unknown> | undefined)?]>;
     protected gameOptionsCached?: IGameOptionsPlayer;
     protected cachedMovementPenalty?: number;
     constructor(entityOptions?: IEntityConstructorOptions<TypeType>);
@@ -182,15 +182,18 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      */
     get lastAttackedByEntityHuman(): Human | undefined;
     getDefense(): PlayerDefense;
+    /** A game options modifier that always returns an empty array by default, to be injected into */
+    getAdditionalGameOptionsSources(): IGameOptionsPartial[];
     getGameOptionsBeforeModifiers(): ImmutableObject<IGameOptionsPlayer>;
     getGameOptions(): ImmutableObject<IGameOptionsPlayer>;
+    clearGameOptionsCache(): void;
     setOptions(options: IOptions): void;
     getEquipEffect<E extends EquipEffect>(type: E): FirstIfOne<EquipEffectByType<E>>;
     /**
      * Luck is a multiplier applied to some random chance calculations.
      */
     get luck(): number;
-    protected get debug(): any;
+    get debug(): Debug.JIT<[]>;
     updateDirection(tile: Tile | Direction.Cardinal, updateVehicleDirection?: boolean): Direction.Cardinal;
     protected onMovementCompleted(movingData: IMovingData): void;
     moveTowardsIsland(direction: Direction.Cardinal | Direction.None, options?: Partial<IMoveToIslandOptions>): Promise<void>;
@@ -232,7 +235,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     isDualWielding(): boolean;
     getAttack(attack?: AttackType, weapon?: Item, offHandWeapon?: Item): IAttack;
     getSimplifiedCumulativeAttack(): number;
-    getSimplifiedCumulativeDefense(): number;
+    getSimplifiedCumulativeDefense(defense?: PlayerDefense): number;
     getCombatStrength(): number;
     private getAttackType;
     private getAttackSkillBonus;
@@ -252,7 +255,8 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     getEquippedItem(slot: EquipType, includeDisabled?: true): Item | undefined;
     isOffHandDisabled(): boolean;
     getEquipSlotForItem(item: Item, includeDisabled?: true): EquipType | undefined;
-    getCurse(): number;
+    getFanaticism(deity: Deity): number;
+    getCurse(refresh?: true): number;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     /**
      * Gets the max health of the player.
@@ -300,7 +304,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * @param chance A chance multiplier on top of the base rune chance of 10% (an additional 30% chance may be added by theurgy)
      * @returns whether the rune was given
      */
-    giveRune(deity: ArrayOr<DeityReal>, chance: number, domain: Runekeeper.DomainData, context: IActionContext): boolean;
+    giveRune(deity: ArrayOr<DeityReal>, chance: number, domain: Runekeeper.DomainData, context: IActionContext, times?: number): boolean;
     private actuallyGiveRune;
     /**
      * All the milestones we need to check on game load.
@@ -374,7 +378,6 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     checkForWell(): boolean;
     checkForGather(): Doodad | undefined;
     calculateEquipmentStats(): void;
-    private recalculateInsulation;
     private getEquipmentInsulation;
     discoverRecipe(itemType: ItemType, forceUnlock?: boolean, crafted?: ICrafted): void;
     incrementIslandTickCount(): void;
@@ -434,21 +437,21 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      */
     getBarteringBonus(baseCredits: number): number;
     getProducedTemperature(): number | undefined;
-    getInsulation(type: TempType): number;
+    getInsulation(type: TempType): IInsulationResult;
     resetStatTimers(type?: StatChangeCurrentTimerStrategy, isNPC?: boolean): void;
     resetChangeTimers(): void;
     private getBaseStatBonuses;
     private getSkillGainMultiplier;
     private canSkillGain;
-    protected onSkillGain(skill: SkillType, fromValue: number, toValue: number, mod: number): void;
+    protected onSkillGain(skill: SkillType, fromValue: number, toValue: number, mod: number, times?: number): void;
     setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
     /**
      * Improve one of the core player stats
      */
-    protected statGain(stat: Stat | ISkillAttribute, bypass: boolean, sourceSkill?: SkillType): void;
+    protected statGain(stat: Stat | ISkillAttribute, bypass: boolean, sourceSkill?: SkillType, times?: number): void;
     protected calculateStats(): void;
     kill(): void;
-    protected resetDefense(skipStatChangedEvent?: boolean): void;
+    protected resetDefense(): void;
     protected sootheChecks(): void;
     private swimSootheCheck;
     /**
@@ -505,6 +508,9 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * Creates a fire at a given tile and assigns the player as its creator.
      */
     createFire(tile: Tile): TileEvent | undefined;
+    hasHumanTag(tag: HumanTag): boolean;
+    addHumanTag(tag: HumanTag): void;
+    removeHumanTag(tag: HumanTag): void;
     get asCorpse(): undefined;
     get asCreature(): undefined;
     get asDoodad(): undefined;

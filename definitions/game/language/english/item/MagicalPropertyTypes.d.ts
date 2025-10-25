@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
-declare const magicalPropertyTypes: Descriptions<MagicalPropertyType, [string, string]>;
+declare const magicalPropertyTypes: Descriptions<MagicalPropertyType, [string, string, string]>;
 export default magicalPropertyTypes;

@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
-import { ActionArgument } from "@wayward/game/game/entity/action/IAction";
+import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Human from "@wayward/game/game/entity/Human";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
@@ -21,5 +21,5 @@ interface ICopyMapRequirement {
 export declare const copyMapRequirements: ICopyMapRequirement[];
 export declare function hasMapRequirement(requirement: ICopyMapRequirement, human: Human): Item | undefined;
 export declare function canMakeMapCopy(human: Human): boolean;
-declare const _default: Action<[ActionArgument.ItemNearby], Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [Item]>;
+declare const _default: Action<[ActionArgument.ItemNearby], ActionType.CopyMap, Human<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [Item]>;
 export default _default;

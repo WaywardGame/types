@@ -13,7 +13,7 @@ import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature"
 import Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type { TextContext } from "@wayward/game/language/ITranslation";
-import { Article } from "@wayward/game/language/Translation";
+import { Article } from "@wayward/game/language/ITranslation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export default class CorpseManager extends EntityManager<Corpse> {
     protected readonly name = "CorpseManager";

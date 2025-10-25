@@ -12,10 +12,11 @@ import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import type { IStat } from "@wayward/game/game/entity/IStats";
 import type Tile from "@wayward/game/game/tile/Tile";
+import { ActionType } from "@wayward/game/game/entity/action/IAction";
 export interface IJumpCanUse extends IActionUsable {
     stamina: IStat;
     jumpStamina: number;
     jumpTile: Tile;
 }
-declare const _default: Action<[], import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player>, void, IJumpCanUse, []>;
+declare const _default: Action<[], ActionType.Jump, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, IJumpCanUse, []>;
 export default _default;
