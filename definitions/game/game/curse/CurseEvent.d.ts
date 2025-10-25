@@ -25,6 +25,7 @@ import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type WorldZ from "@wayward/utilities/game/WorldZ";
 import type { StatusEffectList } from "@wayward/game/game/entity/status/StatusEffectList";
 import type { CurseEventInstance } from "@wayward/game/game/curse/Curse";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 /** The API that curse events have access to */
 export interface CurseEventContext {
     readonly type: CurseEventType;
@@ -109,6 +110,7 @@ export interface CurseEventExtinguishOptions {
 }
 export interface CurseEvent {
     group: CurseGroup;
+    alignment: DeityReal;
     category: CurseCategory;
     /**
      * The chance that this curse event will spawn compared to other events.
@@ -134,7 +136,10 @@ export interface CurseEvent {
      * This is used for the `CurseEventContext.getRandomTile` and `CurseEventContext.getNearbyPlayers` methods.
      */
     radius?: number;
-    getOptions?(): IGameOptionsPartial;
+    /**
+     * Custom game options to apply during the curse event. Note that this only runs once, right at the start of the event.
+     */
+    getOptions?(context: CurseEventContext): IGameOptionsPartial;
     subscribers?: Array<Class<CurseEventSubscriber>>;
     onStart?(context: CurseEventContext): void;
     onEnd?(context: CurseEventContext): void;

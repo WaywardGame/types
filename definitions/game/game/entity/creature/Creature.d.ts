@@ -109,7 +109,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     load(): void;
     checkForBurn(moveType?: MoveType): boolean;
     private setOwner;
-    tame(human: Human, bonusTime?: number): boolean;
+    tame(human: Human, bonusTime?: number, wasByPlayerAction?: boolean): boolean;
     /**
      * Increases the creature's maximum health in the event of offering/re-taming and petting (to a lesser extent)
      */

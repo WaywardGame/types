@@ -26,6 +26,7 @@ import type Translation from "@wayward/game/language/Translation";
 import Message from "@wayward/game/language/dictionary/Message";
 import type { HighlightSelector } from "@wayward/game/ui/util/IHighlight";
 import Observer from "@wayward/game/utilities/Observer";
+import Debug from "@wayward/game/utilities/dev/Debug";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IUsableActionResolveUsingOptions {
     /** Whether to skip filling in the `fromTile` and `targetTile` properties. Defaults to `true` */
@@ -66,8 +67,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     private _disposed;
     get disposed(): boolean;
     constructor(requirements: REQUIREMENTS, definition: DEFINITION);
-    /** @deprecated For console use only */
-    protected get debug(): any;
+    get debug(): Debug.JIT<[]>;
     addUser(user: UsableActionRegistrar): this;
     removeUser(user: UsableActionRegistrar): this;
     is(id?: ActionId): boolean;

@@ -37,6 +37,7 @@ import type { IRendererOrigin } from "@wayward/game/renderer/context/RendererOri
 import { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
 import type { IFieldOfViewOrigin } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
 import { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
+import Debug from "@wayward/game/utilities/dev/Debug";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import { DistanceType } from "@wayward/game/utilities/math/Vector2";
@@ -137,8 +138,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
     constructor(island: Island, x: number, y: number, z: number, id: number, rendererData: number, quality: Quality, isFake?: true);
     get point(): IVector3;
     get description(): ITerrainDescription | undefined;
-    /** @deprecated Console helper */
-    protected get debug(): any;
+    get debug(): Debug.JIT<[]>;
     toString(): string;
     getName(layerIndex?: number, article?: Article, options?: ITileGetNameOptions): Translation;
     get type(): TerrainType;

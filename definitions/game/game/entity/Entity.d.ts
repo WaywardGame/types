@@ -37,6 +37,7 @@ import type { RenderSource, UpdateRenderFlag } from "@wayward/game/renderer/IRen
 import type { Renderer } from "@wayward/game/renderer/Renderer";
 import type { INotificationLocation, ItemNotifierType, MarkerDescription, StatNotificationType } from "@wayward/game/renderer/notifier/INotifier";
 import type { MarkerType } from "@wayward/game/renderer/notifier/INotifier";
+import Debug from "@wayward/game/utilities/dev/Debug";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
@@ -82,8 +83,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      */
     addReferenceId(): void;
     abstract getName(): Translation;
-    /** @deprecated Console helper */
-    protected get debug(): any;
+    get debug(): Debug.JIT<[]>;
     /**
      * Called when filling out the entities description for the first time
      */

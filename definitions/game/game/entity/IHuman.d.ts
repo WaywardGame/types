@@ -9,12 +9,14 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IHasImagePath } from "@wayward/game/game/IObject";
+import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
 import type { AttackType, DamageType } from "@wayward/game/game/entity/IEntity";
 import type { Stat } from "@wayward/game/game/entity/IStats";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type IActionContext from "@wayward/game/game/entity/action/IActionContext";
 import type { CreatureType, IDamageInfo } from "@wayward/game/game/entity/creature/ICreature";
 import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type { IMovementIntent, WalkTo, WeightStatus } from "@wayward/game/game/entity/player/IPlayer";
@@ -26,6 +28,7 @@ import type Island from "@wayward/game/game/island/Island";
 import type { IContainer } from "@wayward/game/game/item/IItem";
 import { ItemType, ItemTypeGroup, RecipeLevel } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
+import type Runekeeper from "@wayward/game/game/milestones/milestone/Runekeeper";
 import { TempType } from "@wayward/game/game/temperature/ITemperature";
 import type Tile from "@wayward/game/game/tile/Tile";
 import Message from "@wayward/game/language/dictionary/Message";
@@ -308,6 +311,14 @@ export interface IHumanEvents extends Events<EntityWithStats>, ISkillEvents {
      * @param tile The tile to get the movement penalty of
      */
     getTilePenalty(penalty: number, tile: Tile): number;
+    /**
+     * Allows modifying the curse value. This should only be used in debug tools or similar mods — the curse stat tooltip will be incorrect!
+     */
+    getCurse(curse: number): number;
+    /**
+     * Allows modifying a rune chance roll.
+     */
+    getRuneChance(chance: number, deity: ArrayOr<DeityReal>, domain: Runekeeper.DomainData, context: IActionContext): number;
 }
 export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;

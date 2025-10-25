@@ -14,6 +14,7 @@ import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature"
 import type { SkillType } from "../../entity/skill/ISkills";
 import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
 import type { ItemType } from "@wayward/game/game/item/IItem";
+import type { CurseEventType } from "@wayward/game/game/curse/ICurse";
 declare namespace Runekeeper {
     enum Domain {
         Action = 0,
@@ -24,12 +25,13 @@ declare namespace Runekeeper {
         Event = 5,
         Craft = 6,
         Disassemble = 7,
-        Dismantle = 8
+        Dismantle = 8,
+        CurseEvent = 9
     }
     type DomainName = Lowercase<keyof typeof Domain>;
-    const DOMAINS: ("action" | "event" | "dismantle" | "craft" | "skill" | "disassemble" | "killcreature" | "tamecreature" | "killnpc")[];
+    const DOMAINS: ("action" | "event" | "craft" | "curseevent" | "skill" | "disassemble" | "dismantle" | "killcreature" | "tamecreature" | "killnpc")[];
     type DomainData = `${DomainName}:${number}`;
-    function domainName(domain: Domain): DomainName;
+    function domainName(domain: Domain | DomainData): DomainName;
     function isDiscovered(domain: DomainData): boolean;
     function action(type: ActionType): DomainData;
     function skill(type: SkillType): DomainData;
@@ -39,6 +41,7 @@ declare namespace Runekeeper {
     function killCreature(type: CreatureType): DomainData;
     function tameCreature(type: CreatureType): DomainData;
     function killNPC(type: NPCType): DomainData;
+    function curseEvent(type: CurseEventType): DomainData;
     enum Event {
         FireSpread = 0,
         KillAberrant = 1,

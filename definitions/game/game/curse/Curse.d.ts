@@ -16,6 +16,7 @@ import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type Island from "@wayward/game/game/island/Island";
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import { IRange, IRangeRange } from "@wayward/utilities/math/Range";
+import type { WeightedOption } from "@wayward/utilities/random/IRandom";
 import DataComponent from "@wayward/game/game/entity/data/DataComponent";
 export declare const CURSE_CAP = 10000;
 export declare const CURSE_COMPONENT_ATTACK_CAP = 50;
@@ -92,6 +93,14 @@ export declare const CURSE_EVENTS_ENTITY_DESPAWN_CHANCE = 0.1;
  * This multiplier affects how quickly curse ward doodads & items are extinguished compared to the rest
  */
 export declare const CURSE_EVENTS_EXTINGUISH_WARD_MULTIPLIER = 0.2;
+export declare const CURSE_EVENTS_RUNE_CHANCE_MULTIPLIER_UNLUCKY: IRange<number>;
+export declare const CURSE_EVENTS_RUNE_CHANCE_MULTIPLIER_LUCKY: IRange<number>;
+/**
+ * additional runes granted to the player on kills/tames using intInRange.
+ * the amounts in the ranges are scaled by curse %
+ */
+export declare const CURSE_EVENTS_RUNES_KILL_TAME: Array<WeightedOption<IRange>>;
+export declare const CURSE_EVENTS_RUNES_SURVIVED: IRange<number>;
 declare namespace Curse {
     interface Helper {
         context: CurseEventContext;
@@ -123,6 +132,7 @@ declare const SYMBOL_CURSE_EVENT_GLOBAL_SUBSCRIBER_INSTANCE: unique symbol;
 declare const SYMBOL_CURSE_EVENT_ACTIVE_SUBSCRIBER_INSTANCE: unique symbol;
 interface Curse {
     night?: true;
+    globalCurse?: number;
     events?: CurseEventInstance[];
     cooldown?: number;
     warned?: true;

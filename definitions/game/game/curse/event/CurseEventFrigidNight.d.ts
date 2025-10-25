@@ -9,6 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { CurseEvent } from "@wayward/game/game/curse/CurseEvent";
+import { IRange } from "@wayward/utilities/math/Range";
 export declare const CURSE_EVENT_FRIGID_NIGHT_TEMP_GRADIENT: number[];
+export declare const CURSE_EVENT_FRIGID_NIGHT_CURSE_MULTIPLIER: IRange<number>;
 declare const _default: CurseEvent;
 export default _default;

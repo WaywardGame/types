@@ -28,5 +28,6 @@ export default class DeityInspection extends Inspection<DeityReal> {
     private getDomainActions;
     private getDomainSkills;
     private getDomainCreatures;
+    private getDomainCurseEvents;
     private getDomainOther;
 }

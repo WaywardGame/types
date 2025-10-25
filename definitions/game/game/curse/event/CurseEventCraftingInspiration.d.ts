@@ -9,7 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { CurseEvent } from "@wayward/game/game/curse/CurseEvent";
-export declare const CURSE_EVENT_CRAFTING_INSPIRATION_DIFFICULTY_MULTIPLIER = 0.85;
-export declare const CURSE_EVENT_CRAFTING_INSPIRATION_MAGIC_CHANCE_MULTIPLIER = 0.5;
+import { IRange } from "@wayward/utilities/math/Range";
+export declare const CURSE_EVENT_CRAFTING_INSPIRATION_DIFFICULTY_MULTIPLIER: IRange<number>;
+export declare const CURSE_EVENT_CRAFTING_INSPIRATION_MAGIC_CHANCE_MULTIPLIER: IRange<number>;
 declare const _default: CurseEvent;
 export default _default;

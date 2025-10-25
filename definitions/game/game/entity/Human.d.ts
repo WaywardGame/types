@@ -63,6 +63,7 @@ import type { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView
 import { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
 import type { SortDirection } from "@wayward/game/save/ISaveManager";
 import type { IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
+import Debug from "@wayward/game/utilities/dev/Debug";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
@@ -192,7 +193,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * Luck is a multiplier applied to some random chance calculations.
      */
     get luck(): number;
-    protected get debug(): any;
+    get debug(): Debug.JIT<[]>;
     updateDirection(tile: Tile | Direction.Cardinal, updateVehicleDirection?: boolean): Direction.Cardinal;
     protected onMovementCompleted(movingData: IMovingData): void;
     moveTowardsIsland(direction: Direction.Cardinal | Direction.None, options?: Partial<IMoveToIslandOptions>): Promise<void>;

@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { CurseEvent } from "@wayward/game/game/curse/CurseEvent";
-export declare const CURSE_EVENT_UNLUCKY_LUCK_MULTIPLIER = 0.9;
+import { IRange } from "@wayward/utilities/math/Range";
+export declare const CURSE_EVENT_UNLUCKY_LUCK_MULTIPLIER: IRange<number>;
 declare const _default: CurseEvent;
 export default _default;

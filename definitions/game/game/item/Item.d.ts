@@ -50,6 +50,7 @@ import { Article } from "@wayward/game/language/ITranslation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { SortDirection } from "@wayward/game/save/ISaveManager";
 import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISerializer";
+import Debug from "@wayward/game/utilities/dev/Debug";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
@@ -210,7 +211,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * - `item.getName(undefined, 3)` // "stone axes"
      */
     getName(article?: Article, options?: Partial<IItemGetNameOptions>): TranslationImpl;
-    protected get debug(): any;
+    get debug(): Debug.JIT<[overrideToStringTag?: string]>;
     protected get typeEnum(): typeof ItemType;
     protected getDescription(): IItemDescription | undefined;
     get isTransient(): boolean;

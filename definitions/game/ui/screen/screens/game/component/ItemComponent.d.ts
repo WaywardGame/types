@@ -24,6 +24,7 @@ import type { IDraggableEvents } from "@wayward/game/ui/util/Draggable";
 import Draggable from "@wayward/game/ui/util/Draggable";
 import type { ISortableDraggableEvents } from "@wayward/game/ui/util/Sortable";
 import PerfCache from "@wayward/game/utilities/PerfCache";
+import Debug from "@wayward/game/utilities/dev/Debug";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 type ItemSlotExtend = Omit<Component, "event"> & {
@@ -84,8 +85,7 @@ export default class ItemComponent extends Component implements ItemSlot {
     readonly draggable?: Draggable;
     private transient;
     protected constructor(handler: ItemComponentHandler, ...params: any[]);
-    /** @deprecated For console use only */
-    protected get debug(): any;
+    get debug(): Debug.JIT<[]>;
     private tickEndHandlerReasons?;
     private registerTickEndHandler;
     private deregisterTickEndHandler;

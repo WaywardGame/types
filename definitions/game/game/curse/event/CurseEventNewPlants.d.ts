@@ -9,7 +9,9 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { CurseEvent } from "@wayward/game/game/curse/CurseEvent";
+import { IRange } from "@wayward/utilities/math/Range";
 export declare const CURSE_EVENT_NEW_PLAMTS_CHANCE_GRADIENT: number[];
+export declare const CURSE_EVENT_NEW_PLAMTS_CURSE_MULTIPLIER: IRange<number>;
 export declare const CURSE_EVENT_NEW_PLAMTS_DRYAD_CHANCE_GRADIENT: number[];
 declare const _default: CurseEvent;
 export default _default;
