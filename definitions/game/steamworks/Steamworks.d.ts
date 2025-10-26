@@ -90,7 +90,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     getMatchmakingServerPort(): number;
     getSteamNetworking(): ISteamworksNetworking | undefined;
     /** @deprecated For console use */
-    protected setBuildId(id?: string): void;
+    protected setUpgradeId(id?: string): void;
     initialize(): Promise<IWaywardPreload | undefined>;
     enableSafePaths(): Promise<void>;
     onUnload(): void;
@@ -118,18 +118,16 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
      */
     get buildTime(): number;
     /**
-     * Returns the build ID of the game, not depending on any save that's currently loaded.
+     * Returns the upgrade ID of the game, not depending on any save that's currently loaded.
+     * The upgrade ID comes from the most recent applicable save upgrade registered in {@link UpgradeVersionRegistry}.
      *
-     * **Note that this is NOT based on the deploy ID.** If a deploy reuses a previous build, for example due to no new commits happening,
-     * or due to the tests failing, this build ID will be for that previous build even if the deploy ID is different.
-     *
-     * Build IDs are saved in the following places:
+     * Upgrade IDs are saved in the following places:
      * - {@link saveDataGlobal.gameLastPlayedBuildId}
      * - {@link saveData.gameBuildId}
      * - {@link Island.mapGenBuildId}
      * - {@link Island.saveBuildId}
      */
-    get buildId(): IBuildId | undefined;
+    get upgradeId(): IBuildId | undefined;
     /**
      * Returns a string about how the game is running
      */

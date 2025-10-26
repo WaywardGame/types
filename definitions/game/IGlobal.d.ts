@@ -53,6 +53,7 @@ declare global {
     const gameVersionTitle: string;
     let gameVersionDeployId: IBuildId | undefined;
     let gameVersionBuildId: IBuildId | undefined;
+    let gameVersionUpgradeId: IBuildId | undefined;
     let webGlVersion: number;
     const VIEWPORT_MIN_WIDTH: number;
     const VIEWPORT_MIN_HEIGHT: number;

@@ -14,7 +14,7 @@ import type Version from "@wayward/utilities/Version";
 import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 export declare const BUILD_TIME_INTRODUCED_TIME: Date;
 declare namespace UpgradeVersionRegistry {
-    function getMostRecentBuildId(): IBuildId | undefined;
+    function getMostRecentUpgradeId(): IBuildId | undefined;
     function getAll(): readonly IUpgradeVersion[];
     function run<TYPE extends UpgradeType>(version: Version.Info, messages: UpgradesArray, which: TYPE, ...params: UpgradeParameters<TYPE>): void;
 }

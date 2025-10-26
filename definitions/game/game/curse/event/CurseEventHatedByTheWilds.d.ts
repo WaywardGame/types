@@ -10,6 +10,11 @@
  */
 import { CurseEvent } from "@wayward/game/game/curse/CurseEvent";
 import { IRange } from "@wayward/utilities/math/Range";
+export declare const CurseEventHatedByWildsTrackedCreatures: import("@wayward/game/game/curse/CurseEvent").CurseEventContextDataDefinition<number[]>;
+export declare const CurseEventHatedByWildsCreaturesMadeAberrant: import("@wayward/game/game/curse/CurseEvent").CurseEventContextDataDefinition<{
+    id: number;
+    oldHealth: number;
+}[]>;
 export declare const CURSE_EVENT_HATED_BY_WILDS_MIN_CHANCE = 0.01;
 export declare const CURSE_EVENT_HATED_BY_WILDS_CURSE_MULTIPLIER: IRange<number>;
 export declare const CURSE_EVENT_HATED_BY_WILDS_COOLDOWN: IRange<number>;

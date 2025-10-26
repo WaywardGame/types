@@ -10,6 +10,7 @@
  */
 import { CurseEvent } from "@wayward/game/game/curse/CurseEvent";
 import { IRange } from "@wayward/utilities/math/Range";
+export declare const CurseEventLovedByWildsTrackedCreatures: import("@wayward/game/game/curse/CurseEvent").CurseEventContextDataDefinition<number[]>;
 export declare const CURSE_EVENT_LOVED_BY_WILDS_MIN_CHANCE = 0.01;
 export declare const CURSE_EVENT_LOVED_BY_WILDS_CURSE_MULTIPLIER: IRange<number>;
 export declare const CURSE_EVENT_LOVED_BY_WILDS_RANDOM_HAPPINESS_AT_END: IRange<number>;

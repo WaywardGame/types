@@ -18,6 +18,7 @@ import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import { IRange, IRangeRange } from "@wayward/utilities/math/Range";
 import type { WeightedOption } from "@wayward/utilities/random/IRandom";
 import DataComponent from "@wayward/game/game/entity/data/DataComponent";
+import { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 export declare const CURSE_CAP = 10000;
 export declare const CURSE_COMPONENT_ATTACK_CAP = 50;
 export declare const CURSE_COMPONENT_ATTACK_FLOOR = 1;
@@ -113,7 +114,7 @@ declare namespace Curse {
     function isMysteryForHuman(event: CurseEventInstance, human: Human): boolean;
     function willHaveEventsTonight(island: Island): boolean;
     function canWarnAboutIncomingEvents(island: Island): boolean;
-    function getCooldownMultiplier(island: Island, humans?: Human<unknown, number, import("../reference/IReferenceManager").ReferenceType.NPC | import("../reference/IReferenceManager").ReferenceType.Player, unknown>[]): number;
+    function getCooldownMultiplier(island: Island, humans?: Human<unknown, number, ReferenceType.NPC | ReferenceType.Player, unknown>[]): number;
     function clearCooldown(island: Island): void;
     function resetCooldown(island: Island): void;
     function tickCurse(island: Island, humans: Human[]): void;

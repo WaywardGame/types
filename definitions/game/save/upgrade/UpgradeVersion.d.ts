@@ -52,7 +52,7 @@ export interface IUpgradeVersion {
     upgradeCorpse?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, corpse: Corpse): any;
     upgradeAi?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, ai: AiManager): any;
     upgradeMagic?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, magic?: MagicalPropertyManager): any;
-    upgradeCurseEvent?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, curseEvent: CurseEventInstance): any;
+    upgradeCurseEvent?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, curseEvent: CurseEventInstance, island: Island): any;
     upgradeCreatureZone?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, zone: CreatureZone): any;
     upgradeTile?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, tile: Tile): any;
     upgradeTileData?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, tile: Tile, tileData: ITileData[]): any;
