@@ -28,6 +28,7 @@ declare namespace Errors {
      * Returns the filename of the caller of the current function.
      */
     function callerFileBasename(skip?: number): string;
+    function anonymisePaths(stack: string, to?: string): string;
 }
 export default Errors;
 export declare function ensureExhaustive(value: never): never;

@@ -108,7 +108,8 @@ export declare enum CreatureTypeGroup {
 export declare enum CreatureTag {
     None = 0,
     NoAlertIndicator = 1,
-    NoRandomDespawn = 2
+    NoRandomDespawn = 2,
+    MoveWhenOutsideHumanBounds = 3
 }
 export interface ICreatureOld extends Creature {
     hp: number;

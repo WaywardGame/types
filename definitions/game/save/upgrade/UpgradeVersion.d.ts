@@ -69,3 +69,4 @@ export interface IUpgradeVersionDefinitionWithData<T = any> extends IUpgradeVers
 }
 export default function <T>(definition: IUpgradeVersionDefinitionWithData<T>): IUpgradeVersionDefinitionWithData<T>;
 export default function <T>(definition: IUpgradeVersionDefinition<T>): IUpgradeVersionDefinition<T>;
+export declare function UpgradeVersionMinorRegistry(registry: Record<string, IUpgradeVersionDefinition>): Record<string, IUpgradeVersion>;

@@ -42,6 +42,7 @@ import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import { IRange } from "@wayward/utilities/math/Range";
 export default class Creature extends EntityWithStats<ICreatureDescription, CreatureType, ReferenceType.Creature, CreatureTag> implements IUnserializedCallback, IObject<CreatureType> {
     static is(value: any): value is Creature;
     get entityType(): EntityType.Creature;
@@ -235,6 +236,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     getWanderNewDirectionChance(defaultChance: number): number | undefined;
     getWanderHomePoint(): IVector2 | undefined;
     getWanderHomeRadius(): number | undefined;
+    getWanderHomePriority(): IRange | undefined;
     get asCorpse(): undefined;
     get asCreature(): Creature;
     get asDoodad(): undefined;

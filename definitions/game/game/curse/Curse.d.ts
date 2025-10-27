@@ -18,6 +18,7 @@ import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import { IRange, IRangeRange } from "@wayward/utilities/math/Range";
 import type { WeightedOption } from "@wayward/utilities/random/IRandom";
 import DataComponent from "@wayward/game/game/entity/data/DataComponent";
+import type Creature from "@wayward/game/game/entity/creature/Creature";
 import { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 export declare const CURSE_CAP = 10000;
 export declare const CURSE_COMPONENT_ATTACK_CAP = 50;
@@ -102,6 +103,7 @@ export declare const CURSE_EVENTS_RUNE_CHANCE_MULTIPLIER_LUCKY: IRange<number>;
  */
 export declare const CURSE_EVENTS_RUNES_KILL_TAME: Array<WeightedOption<IRange>>;
 export declare const CURSE_EVENTS_RUNES_SURVIVED: IRange<number>;
+export declare const CURSE_EVENTS_CREATURE_WANDER_CURSEBEARER_PRIORITY: IRange<number>;
 declare namespace Curse {
     interface Helper {
         context: CurseEventContext;
@@ -112,6 +114,7 @@ declare namespace Curse {
     function all(island: Island): CurseEventContext[];
     function isMysteryForClient(event: CurseEventInstance): boolean;
     function isMysteryForHuman(event: CurseEventInstance, human: Human): boolean;
+    function getOwnerEvent(island: Island, creature: Creature): CurseEventInstance | undefined;
     function willHaveEventsTonight(island: Island): boolean;
     function canWarnAboutIncomingEvents(island: Island): boolean;
     function getCooldownMultiplier(island: Island, humans?: Human<unknown, number, ReferenceType.NPC | ReferenceType.Player, unknown>[]): number;
@@ -126,6 +129,7 @@ declare namespace Curse {
     function unload(island: Island): void;
     function cleanup(island: Island, humans?: Human[], isMorning?: boolean): void;
     function cleanupEphemerals(island: Island): void;
+    function getCursebearer(island: Island, event: CurseEventInstance): Human | undefined;
     function createCurseEventContext(instance: CurseEventInstance, island: Island): CurseEventContext;
 }
 declare const SYMBOL_CURSE_EVENT_SUBSCRIBER_INSTANCES: unique symbol;
