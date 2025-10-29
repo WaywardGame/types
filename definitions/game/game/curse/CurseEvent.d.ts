@@ -94,6 +94,9 @@ export interface CurseEventContextData<T> {
 }
 export declare function CurseEventContextData<T>(id: string): CurseEventContextDataDefinition<T | undefined>;
 export declare function CurseEventContextData<T>(id: string, initializer: () => T): CurseEventContextDataDefinition<T>;
+export declare namespace CurseEventContextData {
+    function get<T>(instance: CurseEventInstance, def: CurseEventContextDataDefinition<T>): T | undefined;
+}
 export interface CurseEventExtinguishOptions {
     /**
      * The number of flat ticks to reduce decays by

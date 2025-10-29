@@ -52,7 +52,7 @@ export interface IUpgradeVersion {
     upgradeCorpse?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, corpse: Corpse): any;
     upgradeAi?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, ai: AiManager): any;
     upgradeMagic?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, magic?: MagicalPropertyManager): any;
-    upgradeCurseEvent?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, curseEvent: CurseEventInstance): any;
+    upgradeCurseEvent?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, curseEvent: CurseEventInstance, island: Island): any;
     upgradeCreatureZone?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, zone: CreatureZone): any;
     upgradeTile?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, tile: Tile): any;
     upgradeTileData?(version: Version.Info, upgrades: UpgradesArrayCompressedPusher, tile: Tile, tileData: ITileData[]): any;
@@ -69,3 +69,4 @@ export interface IUpgradeVersionDefinitionWithData<T = any> extends IUpgradeVers
 }
 export default function <T>(definition: IUpgradeVersionDefinitionWithData<T>): IUpgradeVersionDefinitionWithData<T>;
 export default function <T>(definition: IUpgradeVersionDefinition<T>): IUpgradeVersionDefinition<T>;
+export declare function UpgradeVersionMinorRegistry(registry: Record<string, IUpgradeVersionDefinition>): Record<string, IUpgradeVersion>;

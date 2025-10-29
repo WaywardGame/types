@@ -25,6 +25,7 @@ import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type { IRange } from "@wayward/utilities/math/Range";
 export interface IEntityMovableEvents extends IEntityEvents {
     /**
      * Called before moving.
@@ -183,4 +184,5 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
     getWanderNewDirectionChance?(defaultChance: number): number | undefined;
     getWanderHomePoint?(): IVector2 | undefined;
     getWanderHomeRadius?(): number | undefined;
+    getWanderHomePriority?(): IRange | undefined;
 }

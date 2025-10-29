@@ -52,6 +52,7 @@ export interface IMagicalPropertyDescription {
      */
     disableCurse?: true;
     subTypeEnum?: Record<string, string | number>;
+    notBasicEnum?: boolean;
     isValidEnum?(enumValue: number): boolean;
     translateArgs?(...identity: MagicalPropertyIdentity): TranslationArg[];
 }

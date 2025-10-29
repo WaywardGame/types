@@ -394,7 +394,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      * @param filterText The string of text in which to filter for.
      * @param craftingFilter True if we are filtering the crafting dialog.
      */
-    static isFiltered(item: ItemType | Item, filterText: string, craftingFilter?: boolean): boolean;
+    static isFiltered(item: ItemType | Item, filterText: string, craftingFilter?: boolean, dismantleFilter?: boolean): boolean;
     /**
      * Returns `true` if the item type or item is filtered out from inventory/crafting/container dialogs.
      * @param item The ItemType or Item to check.

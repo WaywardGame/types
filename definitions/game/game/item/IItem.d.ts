@@ -48,6 +48,7 @@ import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IRGB } from "@wayward/utilities/Color";
 import type { IRange } from "@wayward/utilities/math/Range";
+import type { MagicalLootType } from "@wayward/game/game/item/MagicalLoot";
 export interface IItemWeightComponent {
     weightFraction?: number;
     type: ItemType;
@@ -416,6 +417,10 @@ export interface IItemDescription extends IObjectDescription, IModdable, ITemper
      * If set to true, this item will be able to have all magical properties regardless of the other properties it has.
      */
     canHaveAllMagicalProperties?: boolean;
+    /**
+     * Default magical loot type for this item. Used for natural spawned magical motes
+     */
+    defaultMagicalLootType?: MagicalLootType;
     canAlter?: false;
     canTransmogrify?: false;
     canUpgrade?: false;
@@ -725,9 +730,10 @@ export interface IMagicalPropertyInfo {
      */
     max: number;
     /**
-     * Does nothing for integer magical properties. For decimal magical properties, rounds it to the nearest `.1` for calculations and display.
+     * The precision for this magical property. Magical property values are rounded up to this many decimal places.
+     * Defaults to 0 (integers).
      */
-    roundToNearestTenthPlace?: true;
+    precision?: number;
     /**
      * Generates a random starting value for this magical property.
      */

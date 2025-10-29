@@ -257,6 +257,9 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      */
     verifyAndFixItem(): void;
     protected pipeMagicalPropertyManagerEvents(magic: MagicalPropertyManager): void;
+    protected onMagicSet(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes, value?: number, curse?: true): void;
+    protected onMagicRemove(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): void;
+    protected onMagicClear(): void;
     verifyAndFixMagic(): void;
     /**
      * @param source A string representing the reason for this damage. Used for multiplayer debugging. Just put a unique string of characters here
@@ -320,6 +323,8 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     rerollMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     rerollMagicalPropertyValues(): void;
     initializeMagicalPropertyManager(): MagicalPropertyManager;
+    protected updateDurabilityForPersistence(): void;
+    protected clampDurabilityToMax(): void;
     addMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes, valueType?: "min" | "max"): boolean;
     getMagicalPropertyInfo(type: MagicalPropertyType): IMagicalPropertyInfo | undefined;
     acquireNotify(human: Human, context?: ActionContext): void;

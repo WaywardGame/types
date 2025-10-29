@@ -130,7 +130,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     readonly mapSizeSq: number;
     spawnPoint: IVector3;
     private _activated;
-    private _loadedReferences;
     private _tiles;
     modifiersCollection?: IslandModifiersCollection;
     details?: IIslandDetails;
@@ -150,7 +149,6 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     get biome(): IBiomeDescription;
     get isLoaded(): boolean;
     get tiles(): SaferNumberIndexedObject<Tile>;
-    get hasLoadedItemReferences(): boolean;
     get isLocalIsland(): boolean;
     /**
      * Check if this island has players on it

@@ -11,7 +11,7 @@
 import type Deity from "@wayward/game/game/deity/Deity";
 import type { DamageType } from "@wayward/game/game/entity/IEntity";
 import type { SkillType } from "../entity/skill/ISkills";
-import type { Stat } from "@wayward/game/game/entity/IStats";
+import { Stat } from "@wayward/game/game/entity/IStats";
 export declare const MAGICAL_PROPERTY_GLOWING_LIGHT_BONUS = 5;
 declare enum MagicalPropertyType {
     /** Increases attack value (for weapons and ammo) */
@@ -86,11 +86,24 @@ declare enum MagicalPropertyType {
     Perpetuity_DecayLossChance = 31
 }
 export default MagicalPropertyType;
+export declare enum MagicalPropertyStat {
+    Health = -10,
+    Stamina = -9,
+    Metabolism = -8
+}
+export declare const magicalPropertyStatMap: {
+    [-8]: Stat.Metabolism;
+    [-10]: Stat.Health;
+    [-9]: Stat.Stamina;
+    0: MagicalPropertyStat.Health;
+    1: MagicalPropertyStat.Stamina;
+    5: MagicalPropertyStat.Metabolism;
+};
 export interface MagicalPropertyTypeSubTypeMap {
-    [MagicalPropertyType.Stat]: Stat;
+    [MagicalPropertyType.Stat]: MagicalPropertyStat;
     [MagicalPropertyType.Skill]: SkillType;
     [MagicalPropertyType.Fanaticism_Deity]: Deity;
     [MagicalPropertyType.Encircling_DoodadSkill]: SkillType;
     [MagicalPropertyType.ElementalDamage]: DamageType;
-    [MagicalPropertyType.StatPotency_EquipmentImproveConsumableStats]: Stat;
+    [MagicalPropertyType.StatPotency_EquipmentImproveConsumableStats]: MagicalPropertyStat;
 }
