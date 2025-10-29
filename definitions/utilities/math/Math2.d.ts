@@ -37,9 +37,15 @@ declare namespace Math2 {
     /**
      * Returns a number floored to a certain number of decimal places.
      *
-     * Example: `roundNumber(1.24999999, 2): 1.24`
+     * Example: `floorNumber(1.24999999, 2): 1.24`
      */
     function floorNumber(num: number, places: number): number;
+    /**
+     * Returns a number ceiled to a certain number of decimal places.
+     *
+     * Example: `ceilNumber(1.24111111, 2): 1.25`
+     */
+    function ceilNumber(num: number, places: number): number;
     /**
      * Returns a number rounded to a multiple
      *

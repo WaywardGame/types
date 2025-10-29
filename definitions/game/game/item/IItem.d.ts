@@ -730,9 +730,10 @@ export interface IMagicalPropertyInfo {
      */
     max: number;
     /**
-     * Does nothing for integer magical properties. For decimal magical properties, rounds it to the nearest `.1` for calculations and display.
+     * The precision for this magical property. Magical property values are rounded up to this many decimal places.
+     * Defaults to 0 (integers).
      */
-    roundToNearestTenthPlace?: true;
+    precision?: number;
     /**
      * Generates a random starting value for this magical property.
      */
