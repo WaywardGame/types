@@ -111,7 +111,7 @@ declare namespace Curse {
         definition: CurseEvent;
     }
     function get(island?: Island, type?: CurseEventType): Helper | undefined;
-    function all(island: Island): CurseEventContext[];
+    function all(island: Island, cursebearer?: Human): CurseEventContext[];
     function isMysteryForClient(event: CurseEventInstance): boolean;
     function isMysteryForHuman(event: CurseEventInstance, human: Human): boolean;
     function getOwnerEvent(island: Island, creature: Creature): CurseEventInstance | undefined;
@@ -120,6 +120,7 @@ declare namespace Curse {
     function getCooldownMultiplier(island: Island, humans?: Human<unknown, number, ReferenceType.NPC | ReferenceType.Player, unknown>[]): number;
     function clearCooldown(island: Island): void;
     function resetCooldown(island: Island): void;
+    function updateRuneItemsDisplay(island: Island): void;
     function tickCurse(island: Island, humans: Human[]): void;
     function reload(island: Island, isNew?: boolean): void;
     function spawnCurseEvents(island: Island, humans: Human[]): void;

@@ -920,6 +920,9 @@ export declare const enumRefTypes: {
         CactusScarecrow3: ItemTypeExtra.CactusScarecrow3;
         SnowScarecrow2: ItemTypeExtra.SnowScarecrow2;
         SnowScarecrow3: ItemTypeExtra.SnowScarecrow3;
+        RuneOfEvil_Cursed: ItemTypeExtra.RuneOfEvil_Cursed;
+        RuneOfGood_Cursed: ItemTypeExtra.RuneOfGood_Cursed;
+        RuneOfChaos_Cursed: ItemTypeExtra.RuneOfChaos_Cursed;
     };
     12: typeof ItemType;
     13: typeof Stat;

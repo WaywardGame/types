@@ -1026,6 +1026,9 @@ declare const dictionaryMap: {
         CactusScarecrow3: ItemTypeExtra.CactusScarecrow3;
         SnowScarecrow2: ItemTypeExtra.SnowScarecrow2;
         SnowScarecrow3: ItemTypeExtra.SnowScarecrow3;
+        RuneOfEvil_Cursed: ItemTypeExtra.RuneOfEvil_Cursed;
+        RuneOfGood_Cursed: ItemTypeExtra.RuneOfGood_Cursed;
+        RuneOfChaos_Cursed: ItemTypeExtra.RuneOfChaos_Cursed;
     };
     67: {
         Bow: ItemType.Bow;
@@ -1884,6 +1887,9 @@ declare const dictionaryMap: {
         CactusScarecrow3: ItemTypeExtra.CactusScarecrow3;
         SnowScarecrow2: ItemTypeExtra.SnowScarecrow2;
         SnowScarecrow3: ItemTypeExtra.SnowScarecrow3;
+        RuneOfEvil_Cursed: ItemTypeExtra.RuneOfEvil_Cursed;
+        RuneOfGood_Cursed: ItemTypeExtra.RuneOfGood_Cursed;
+        RuneOfChaos_Cursed: ItemTypeExtra.RuneOfChaos_Cursed;
     };
     68: typeof ItemTypeExtra;
     69: typeof ItemTypeGroup;
@@ -2878,6 +2884,9 @@ export declare const strictDictionaries: {
         CactusScarecrow3: ItemTypeExtra.CactusScarecrow3;
         SnowScarecrow2: ItemTypeExtra.SnowScarecrow2;
         SnowScarecrow3: ItemTypeExtra.SnowScarecrow3;
+        RuneOfEvil_Cursed: ItemTypeExtra.RuneOfEvil_Cursed;
+        RuneOfGood_Cursed: ItemTypeExtra.RuneOfGood_Cursed;
+        RuneOfChaos_Cursed: ItemTypeExtra.RuneOfChaos_Cursed;
     };
     67: {
         Bow: ItemType.Bow;
@@ -3736,6 +3745,9 @@ export declare const strictDictionaries: {
         CactusScarecrow3: ItemTypeExtra.CactusScarecrow3;
         SnowScarecrow2: ItemTypeExtra.SnowScarecrow2;
         SnowScarecrow3: ItemTypeExtra.SnowScarecrow3;
+        RuneOfEvil_Cursed: ItemTypeExtra.RuneOfEvil_Cursed;
+        RuneOfGood_Cursed: ItemTypeExtra.RuneOfGood_Cursed;
+        RuneOfChaos_Cursed: ItemTypeExtra.RuneOfChaos_Cursed;
     };
     68: typeof ItemTypeExtra;
     69: typeof ItemTypeGroup;

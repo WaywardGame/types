@@ -12,7 +12,6 @@ import type { SfxType } from "@wayward/game/audio/IAudio";
 import type { IDecayTemperatureRange } from "@wayward/game/game/IGame";
 import type { IObjectDescription, Quality } from "@wayward/game/game/IObject";
 import type { BiomeType } from "@wayward/game/game/biome/IBiome";
-import type { DeityReal } from "@wayward/game/game/deity/Deity";
 import type { RuneChance } from "@wayward/game/game/deity/IDeities";
 import type { DoodadType, DoodadTypeGroup } from "@wayward/game/game/doodad/IDoodad";
 import type Human from "@wayward/game/game/entity/Human";
@@ -47,8 +46,8 @@ import type { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IRGB } from "@wayward/utilities/Color";
-import type { IRange } from "@wayward/utilities/math/Range";
 import type { MagicalLootType } from "@wayward/game/game/item/MagicalLoot";
+import type { RuneEffectType } from "@wayward/game/game/item/runes/RuneEffects";
 export interface IItemWeightComponent {
     weightFraction?: number;
     type: ItemType;
@@ -470,27 +469,14 @@ export interface IItemOnUse {
     [ActionType.Uncage]?: ItemType;
 }
 export interface IInvokeUse {
-    deity: DeityReal;
+    effect: RuneEffectType | {
+        (item: Item | undefined, human: Human): RuneEffectType;
+        (item: Item, human?: Human): RuneEffectType;
+    };
     /**
      * The drop rate of this rune compared to other runes for the same deity. Defaults to `1`.
      */
     dropWeight?: number;
-    /**
-     * Defaults to 1 day.
-     */
-    cooldownDays?: number;
-    /**
-     * A multiplier for reducing the cooldown of invocation.
-     * If given an `IRange`, the `minimum` value is the multiplier at 0% skill, and the `maximum` value is the multiplier at 100% skill.
-     * If given a `number`, the multiplier is `1.0` at 0% skill, and the `maximum` value is the multiplier at 100% skill.
-     *
-     * Defaults to 1.0 — no cooldown multiplier from theurgy skill.
-     */
-    cooldownTheurgyMultiplier?: number | IRange;
-    /**
-     * @returns The amount of success this action had, a decimal from 0-1
-     */
-    use(human: Human, rune: Item): number | undefined;
 }
 export interface IItemBuild {
     /**
@@ -1771,7 +1757,10 @@ export declare enum ItemTypeExtra {
     CactusScarecrow2 = 853,
     CactusScarecrow3 = 854,
     SnowScarecrow2 = 855,
-    SnowScarecrow3 = 856
+    SnowScarecrow3 = 856,
+    RuneOfEvil_Cursed = 857,
+    RuneOfGood_Cursed = 858,
+    RuneOfChaos_Cursed = 859
 }
 export type DisplayableItemType = ItemType | ItemTypeExtra;
 export declare enum ItemTag {

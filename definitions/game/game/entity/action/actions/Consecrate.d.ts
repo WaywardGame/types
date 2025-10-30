@@ -36,7 +36,7 @@ declare const _default: Action<[ActionArgument.DoodadNearby], ActionType.Consecr
     groupRunes(runes: Item[]): ConsecrateRuneGroup[];
     getReturnDeity(runeGroups: ConsecrateRuneGroup[]): DeityReal | undefined;
     groupRunesFriendAndFoe(runeGroups: ConsecrateRuneGroup[], deity: DeityReal): ConsecrateRuneGroupFriendAndFoe;
-    getDeityRuneTypes(deity: DeityReal): ItemType[];
+    getDeityRuneTypes(human: Human, deity: DeityReal): ItemType[];
     calculateValue(human: Human, runes: Item[], deity: DeityReal, calculationType: "min" | "max" | "random"): number;
     resolveRunesForValue(human: Human, value: number, maxValue?: number): ConsecrateOutcomeRuneQualityCounts;
 };

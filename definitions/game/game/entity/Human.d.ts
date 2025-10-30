@@ -69,6 +69,7 @@ import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type { RuneEffectType } from "@wayward/game/game/item/runes/RuneEffects";
 interface IEquip {
     item: Item;
     equipType: EquipType;
@@ -120,7 +121,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     sortDirection?: SortDirection;
     lastReceivedRune?: Deity;
     lastGainedStat?: Stat;
-    invocations?: PartialRecord<ItemType, number>;
+    invocations?: PartialRecord<RuneEffectType, number>;
     lastUsedCaveEntrance?: IVector3;
     readonly movementIntent: IMovementIntent;
     walkToInProgress?: IWalkToPathInProgress;

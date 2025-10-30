@@ -72,6 +72,10 @@ export interface CurseEventContext {
      * Mark the given creatures as "curse event" creatures. See the `spawnCreature` function for more information
      */
     claim(...creatures: Creature[]): void;
+    /**
+     * Skip time in any scripts running for this event.
+     */
+    skipTime(ticks: number): void;
     reveal(forSpecificHuman?: ArrayOr<Human>): boolean;
     discover(forSpecificHuman?: ArrayOr<Human>): boolean;
     /**
@@ -139,6 +143,10 @@ export interface CurseEvent {
      * This is used for the `CurseEventContext.getRandomTile` and `CurseEventContext.getNearbyPlayers` methods.
      */
     radius?: number;
+    /**
+     * Creature types that this event can spawn by default.
+     */
+    creatureTypes?: SupplierOr<CreatureType[] | undefined, [CurseEventContext]>;
     /**
      * Custom game options to apply during the curse event. Note that this only runs once, right at the start of the event.
      */
