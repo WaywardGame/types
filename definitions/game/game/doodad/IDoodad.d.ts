@@ -559,7 +559,7 @@ export declare enum DoodadTypeGroup {
     Wheelbarrow = -9979,
     Altar = -9978,
     OpenFireSource = -9977,
-    RequiresCandleToLight = -9976,// Pumpkins
+    Unused = -9976,// <----------- Use this one
     ContainsFuelSource = -9975,
     CurseWard = -9974,
     CannotBeSpread = -9973
