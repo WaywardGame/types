@@ -9,16 +9,18 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { RecursivePartial } from "@wayward/game/utilities/types/Recursive";
+import Objects from "@wayward/utilities/object/Objects";
 declare function Merge<T>(...objs: Array<RecursivePartial<T>>): T;
 declare function Merge<T>(...objs: T[]): T;
 declare function Merge<O extends any[]>(...objs: O): O[number];
 declare namespace Merge {
     function value<T>(value?: T | Mergeable<T>): T | undefined;
 }
-export declare class Mergeable<T> {
+export declare class Mergeable<T> implements Objects.ICloneable {
     readonly merge: (value: T | undefined) => T;
     constructor(merge: (value: T | undefined) => T);
     mask(): this & T;
+    [Objects.SYMBOL_CLONE](clone: typeof Objects.deepClone): this;
 }
 declare namespace Merge {
     /**
