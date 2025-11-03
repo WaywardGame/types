@@ -80,6 +80,7 @@ export interface IEventEmitter<H = any, E = any> {
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
     hasHandlersForEvent(...events: Array<keyof E>): boolean;
+    setMaxExpectedSubscriptions(event: keyof E, max: number): this;
     /**
      * Re-opens a closed event emitter
      */
@@ -142,6 +143,8 @@ declare class EventEmitter<H, E> {
     subscribe<K extends ArrayOr<keyof E>>(host: IEventEmitterHost<IEventSubscriberEvents>, events: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number, once?: boolean): H;
     /** @deprecated */
     subscribe<K extends ArrayOr<keyof E>>(events: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number, once?: boolean): H;
+    private readonly maxExpectedSubscriptionsMap;
+    setMaxExpectedSubscriptions(event: keyof E, max: number): this;
     private subscribeInternal;
     subscribeNextUnsafe<K extends ArrayOr<keyof E>>(events: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number): H;
     subscribeNext<K extends ArrayOr<keyof E>>(host: IEventEmitterHost<IEventSubscriberEvents>, events: K, handler: Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>, priority?: number): H;
