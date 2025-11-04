@@ -94,7 +94,12 @@ export declare const CURSE_EVENTS_ENTITY_DESPAWN_CHANCE = 0.1;
  * Some curse events extinguish light sources via additional decay (both static & dynamic (based on % of decay remaining))
  * This multiplier affects how quickly curse ward doodads & items are extinguished compared to the rest
  */
-export declare const CURSE_EVENTS_EXTINGUISH_WARD_MULTIPLIER = 0.2;
+export declare const CURSE_EVENTS_EXTINGUISH_WARD_MULTIPLIER = 0.02;
+/**
+ * Some curse events extinguish light sources via additional decay (both static & dynamic (based on % of decay remaining))
+ * This multiplier affects how quickly it happens when the cursebearer is sleeping
+ */
+export declare const CURSE_EVENTS_EXTINGUISH_SLEEPING_MULTIPLIER = 0.2;
 export declare const CURSE_EVENTS_RUNE_CHANCE_MULTIPLIER_UNLUCKY: IRange<number>;
 export declare const CURSE_EVENTS_RUNE_CHANCE_MULTIPLIER_LUCKY: IRange<number>;
 /**
