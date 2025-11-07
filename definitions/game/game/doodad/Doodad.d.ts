@@ -407,6 +407,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * @returns True if fire overflowed, false if not.
      */
     stokeFire(stokeValue: number, human?: Human): boolean;
+    getDecayAtStartWithMagical(): number;
     /**
      * Decay over time
      */

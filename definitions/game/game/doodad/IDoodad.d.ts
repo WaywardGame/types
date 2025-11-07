@@ -548,6 +548,9 @@ export declare enum DoodadTypeGroup {
     FireSource = -9990,
     LitTorch = -9989,
     LightDevice = -9988,
+    /**
+     * This is set for lit torches, candles, and jack-o'-lanterns specifically
+     */
     LightSource = -9987,
     LitStructure = -9986,// Prevents pick up while lit
     LockedChest = -9985,

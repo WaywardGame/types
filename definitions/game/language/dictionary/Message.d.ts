@@ -891,6 +891,7 @@ declare enum Message {
     YouUnequip = 879,
     YouUsed = 880,
     YouViewTheItemsOn = 881,
-    YouWhileTraveling = 882
+    YouWhileTraveling = 882,
+    ActionCraftNoUnderstanding = 883
 }
 export default Message;

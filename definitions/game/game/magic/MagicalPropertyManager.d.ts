@@ -20,17 +20,17 @@ import type { IEventSubscriberEvents } from "@wayward/utilities/event/EventEmitt
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IMagicalPropertyManagerEvents extends IEventSubscriberEvents {
     /**
-     * Emitted when a property was removed
+     * Emitted when a property was removed and the value of it
      */
-    remove(...identity: MagicalPropertyIdentity): any;
+    remove(...identity: MagicalPropertyIdentity<[value: number]>): any;
     /**
      * Emitted when a property was added
      */
     add(...args: MagicalPropertyIdentity<[value: number, curse?: true]>): any;
     /**
-     * Emitted when a property was set, and the value it was set to
+     * Emitted when a property was set, and the value it was set to, and what it was before
      */
-    set(...args: MagicalPropertyIdentity<[value: number, curse?: true]>): any;
+    set(...args: MagicalPropertyIdentity<[value: number, previousValue?: number, curse?: true]>): any;
     /**
      * Emitted when a property was set or removed
      */
