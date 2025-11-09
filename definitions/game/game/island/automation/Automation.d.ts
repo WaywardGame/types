@@ -26,6 +26,7 @@ export declare class Automation {
      * @param setup The setup
      */
     static applySetup(human: Human, setup: Readonly<IAutomationSetup>): IAutomationSetupResult;
+    private static createItem;
     setRepeat(repeat: boolean, delay?: number): this;
     setStartDelay(delay: number): this;
     setSetup(setup: IAutomationSetup): this;

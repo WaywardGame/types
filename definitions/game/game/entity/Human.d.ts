@@ -196,6 +196,10 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     get luck(): number;
     get debug(): Debug.JIT<[]>;
     updateDirection(tile: Tile | Direction.Cardinal, updateVehicleDirection?: boolean): Direction.Cardinal;
+    /**
+     * Not recommended for regular usage. Use the UpdateDirection action
+     */
+    updateDirectionPropertiesInternal(direction: Direction.Cardinal): void;
     protected onMovementCompleted(movingData: IMovingData): void;
     moveTowardsIsland(direction: Direction.Cardinal | Direction.None, options?: Partial<IMoveToIslandOptions>): Promise<void>;
     moveToIslandPosition(position: IVector2, options?: Partial<IMoveToIslandOptions>): Promise<void>;

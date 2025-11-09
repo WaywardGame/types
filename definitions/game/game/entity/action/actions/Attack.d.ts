@@ -14,8 +14,8 @@ import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
-import type { IItemDescription, IRangedDescription, ItemType } from "@wayward/game/game/item/IItem";
-import { ItemTypeGroup } from "@wayward/game/game/item/IItem";
+import type { IItemDescription, IRangedDescription } from "@wayward/game/game/item/IItem";
+import { ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
 export interface IBaseCanUse extends IActionUsable {
