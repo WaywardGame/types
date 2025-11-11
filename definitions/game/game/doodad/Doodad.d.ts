@@ -258,7 +258,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * @param bypassChange Set to true if you just want to check if fertility can be increased.
      * @returns True or false depending on if it increased in fertility or not.
      */
-    increaseFertility(bypassChange?: boolean, sendMessage?: boolean): boolean;
+    increaseFertility(bypassChange?: boolean, sendMessage?: boolean, bypassRipeningCheck?: boolean): boolean;
     /**
      * Return extra trap damage based on player multiplier and magical status
      */

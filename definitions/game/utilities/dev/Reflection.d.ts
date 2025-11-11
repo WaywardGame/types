@@ -57,6 +57,8 @@ export default class Reflection {
      * Note: For exports where only one matches, the discriminator `which` parameter is unnecessary.
      */
     export(name: string, which: number): unknown;
+    where(name: string): string[];
+    private findExport;
     private warn;
     private setLastQueryCloseMatches;
     findPath(value: unknown): Generator<string[]>;

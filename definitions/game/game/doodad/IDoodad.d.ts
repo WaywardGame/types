@@ -86,7 +86,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     canBreak?: boolean;
     /**
      * This doodad will be able to grow up until and including this stage.
-     * For example, conifers can grow up until seeding, but not bare. Most trees can grow until bare. Other plants, usually ripening.
+     * For example, conifers can grow up until seeding, but not bare. Most trees can grow until bare. Other plants, usually ripening. This is used to reset growth back to budding after reaching max growth (unless growsIntoTerrain is set).
      */
     canGrow?: GrowingStage;
     canGrowInCaves?: boolean;
