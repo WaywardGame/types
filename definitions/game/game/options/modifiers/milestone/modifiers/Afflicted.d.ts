@@ -10,6 +10,7 @@
  */
 import { Stat } from "@wayward/game/game/entity/IStats";
 import type Player from "@wayward/game/game/entity/player/Player";
+import { StatusType } from "@wayward/game/game/entity/status/IStatus";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import MilestoneModifier, { MilestoneModifierInstance } from "@wayward/game/game/options/modifiers/milestone/MilestoneModifier";
@@ -21,6 +22,11 @@ export default class Afflicted extends MilestoneModifier {
     protected getTranslationArgs(): TranslationArg[] | undefined;
     instantiate(id: Milestone, player?: Player): AfflictedMilestoneModifierInstance | undefined;
 }
+interface IAfflictedEffects {
+    stat: Stat;
+    effect: number | Record<number, number>;
+}
+export declare const AFFLICTED_EFFECTS: PartialRecord<StatusType, IAfflictedEffects>;
 declare class AfflictedMilestoneModifierInstance extends MilestoneModifierInstance<OptionalDescriptions<Stat, number>> {
     initialize(): void;
     private getBaseStatBonuses;
