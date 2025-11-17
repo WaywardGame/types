@@ -30,6 +30,12 @@ export default class MultiplayerOptionsMenu extends Menu {
     private readonly checkConnectionHeading;
     private readonly checkConnectionBlock;
     private readonly checkConnectionButton;
+    private readonly playerManagementHeading;
+    private readonly playerManagementBlock;
+    private readonly connectedPlayersHeading;
+    private readonly connectedPlayersContainer;
+    private readonly absentPlayersHeading;
+    private readonly absentPlayersContainer;
     constructor();
     protected refresh(): void;
     private updateMultiplayer;
@@ -39,4 +45,6 @@ export default class MultiplayerOptionsMenu extends Menu {
     private copyGameCodeClick;
     private inviteSteamFriendsClick;
     private refreshSteamNetworkConnection;
+    private refreshPlayerLists;
+    private deletePlayer;
 }
