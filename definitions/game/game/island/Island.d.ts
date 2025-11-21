@@ -230,6 +230,12 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     getSkillPercent(skill: SkillType): number;
     getPlayerAverage(calc: (player: Human) => number | undefined, round?: boolean): number;
     /**
+     * Get all players on the island that can see a specific tile, and get an average of their luck stat
+     * @param tile Tile to check
+     * @returns Average luck of players that can see the tile, or 1 if no players can see it
+     */
+    getPlayerAverageLuckThatSeeTile(tile: Tile): number;
+    /**
      * Check the amount of water tiles there is connected to a supplied x/y area
      */
     checkWaterFill(tile: Tile, needed: number, waterType: WaterType, waterFill?: IWaterFill): IWaterFillReturn;

@@ -282,7 +282,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     getGroups(itemType: ItemType): ItemTypeGroup[];
     getPlayerFromInventoryContainer(containable: IContainable): Player | undefined;
-    getRandomQuality(bonusQuality?: number, relicChance?: boolean): Quality;
+    getRandomQuality(bonusQuality?: number, relicChance?: boolean, tile?: Tile): Quality;
     hasAdditionalRequirements(actionOrHuman: IActionHandlerApi<Human> | Human, craftType: ItemType, actionNotUsableMessage?: Message, isRepairOrDisassembly?: boolean): IRequirementInfo;
     /**
      * Gets the max quality bonus that can be applied to an item (using its recipe).
@@ -384,7 +384,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      * @returns number That is distributed from the quality/value.
      */
     getBreakingQualityBonus(itemQuality: Quality | undefined, bonusValue: number): number;
-    getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, allowIncreasedQuality?: boolean, bonusChance?: number): Quality | undefined;
+    getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, allowIncreasedQuality?: boolean, bonusChance?: number, tile?: Tile): Quality | undefined;
     getNPCFromInventoryContainer(containable: IContainable): NPC | undefined;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: Item[]): number;

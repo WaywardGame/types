@@ -48,6 +48,7 @@ import type Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IRGB } from "@wayward/utilities/Color";
 import type { MagicalLootType } from "@wayward/game/game/item/MagicalLoot";
 import type { RuneEffectType } from "@wayward/game/game/item/runes/RuneEffects";
+export declare const DEFAULT_ITEM_BREAK_QUALITY_BONUS = 10;
 export interface IItemWeightComponent {
     weightFraction?: number;
     type: ItemType;
