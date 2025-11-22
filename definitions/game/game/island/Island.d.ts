@@ -225,16 +225,23 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     addPlayer(human: Human, refreshStatuses?: boolean): void;
     removePlayer(human: Human, isAbsentPlayer?: boolean): void;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): Human[];
-    getMaxHealth(): number;
-    getMaxWeight(): number;
-    getSkillPercent(skill: SkillType): number;
-    getPlayerAverage(calc: (player: Human) => number | undefined, round?: boolean): number;
     /**
-     * Get all players on the island that can see a specific tile, and get an average of their luck stat
-     * @param tile Tile to check
-     * @returns Average luck of players that can see the tile, or 1 if no players can see it
+     * Calculates the average of a value for all players on the island
+     * @param valueSupplier A function that returns the value for a given player. `undefined` values are skipped
+     * @returns The average value, or `undefined` if no players provided a value
      */
-    getPlayerAverageLuckThatSeeTile(tile: Tile): number;
+    getPlayerAverage(valueSupplier: (playingHuman: Human) => number | undefined): number | undefined;
+    /**
+     * Calculates the average of a value for all players that can see a given tile, if provided
+     * @param seeingTile The tile that all players must see. If `undefined`, calculates from all players
+     * @param valueSupplier A function that returns the value for a given player. `undefined` values are skipped
+     * @returns The average value, or `undefined` if no players provided a value
+     */
+    getPlayerAverage(seeingTile: Tile | undefined, valueSupplier: (playingHuman: Human) => number | undefined): number | undefined;
+    getPlayerAverageLuck(seeingTile?: Tile): number;
+    getPlayerAverageMaxHealth(): number;
+    getPlayerAverageMaxWeight(): number;
+    getPlayerAverageSkillPercent(skill: SkillType): number;
     /**
      * Check the amount of water tiles there is connected to a supplied x/y area
      */
