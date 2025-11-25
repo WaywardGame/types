@@ -297,7 +297,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     initializeMagicalPropertyManager(): MagicalPropertyManager;
     isLitAndCanRevert(): boolean;
     /**
-     * Reverts lit doodads if they provide fire and have a revert doodad type set.
+     * Reverts lit doodads if they provide light and have a revert doodad type set.
      */
     revert(): boolean;
     onUnserialized(): void;
