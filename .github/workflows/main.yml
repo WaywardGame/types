@@ -19,13 +19,16 @@ jobs:
       id-token: write
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: "20.x"
+          node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
 
+      - name: Update npm
+        run: npm install -g npm@latest
+        
       - name: Parse package.json
         id: set_var
         run: |
@@ -66,5 +69,3 @@ jobs:
               "../$REPO_NAME.zip#$REPO_NAME.zip"
 
       - run: npm publish --provenance --access public $EXTRA_NPM_ARGS
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -151,4 +151,5 @@ export interface IAutomationSetupItem {
     quality?: Quality;
     magics?: MagicalPropertyType[];
     durability?: number;
+    weightMultiplier?: number;
 }
