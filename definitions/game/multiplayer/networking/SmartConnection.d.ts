@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IMultiplayerOnConnected } from "@wayward/game/multiplayer/IMultiplayer";
 import type { IMatchmakingInfo, MatchmakingMessageData } from "@wayward/game/multiplayer/matchmaking/IMatchmaking";
 import { Connection } from "@wayward/game/multiplayer/networking/Connection";
 import { ConnectionState } from "@wayward/game/multiplayer/networking/IConnection";
@@ -29,7 +30,7 @@ export declare class SmartConnection extends Connection {
     private _steamNetworkTimeoutId;
     private _steamNetworkConnection;
     private _webWorkerConnection;
-    constructor(matchmakingInfo: IMatchmakingInfo, matchmakingIdentifier: string, webRTCConfig: RTCConfiguration, sendMatchmakingMessage: (message: MatchmakingMessageData) => void, onData: (data: ArrayBufferLike) => void, onConnected: (matchmakingInfo: IMatchmakingInfo) => void, trySteamRelayNetwork: boolean, connectGlobalMatchmakingServer: () => void);
+    constructor(matchmakingInfo: IMatchmakingInfo, matchmakingIdentifier: string, webRTCConfig: RTCConfiguration, sendMatchmakingMessage: (message: MatchmakingMessageData) => void, onData: (data: ArrayBufferLike) => void, onConnected: (data: IMultiplayerOnConnected) => void, trySteamRelayNetwork: boolean, connectGlobalMatchmakingServer: () => void);
     private get activeConnection();
     get isSteamNetworkConnection(): boolean;
     get isConnected(): boolean;

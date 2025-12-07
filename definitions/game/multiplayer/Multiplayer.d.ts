@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IMultiplayerServerToJoin } from "@wayward/game/game/IGame";
 import Player from "@wayward/game/game/entity/player/Player";
 import type Island from "@wayward/game/game/island/Island";
 import type { IJoinServerOptions, IMultiplayerEvents, IMultiplayerOptions, IMultiplayerRunSafelyOptions, PacketTarget, ServerInfo } from "@wayward/game/multiplayer/IMultiplayer";
@@ -39,7 +40,6 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private readonly _steamIdToClientMapping;
     private _joinServerTimeoutId;
     private _steamNetworkConnectionWebRTCFallbackTimeoutId;
-    private _joinedMatchmakingInfo;
     private _connectedMatchmakingInfo;
     private _globalMatchmaking;
     private _globalMatchmakingRetryTimeoutId;
@@ -99,7 +99,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     getBannedPlayers(): string[];
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(serverInfo: ServerInfo): void;
-    joinServer(serverInfo: ServerInfo, options?: Partial<IJoinServerOptions>): Promise<void>;
+    joinServer(serverToJoin: IMultiplayerServerToJoin, options?: Partial<IJoinServerOptions>): Promise<void>;
     rejoinServer(options?: {
         randomizeIdentifier?: boolean;
         automaticallyRetry?: boolean;
@@ -112,7 +112,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
      * @returns True when it disconnected. False is there was nothing to disconnect
      */
     disconnect(reason: DisconnectReason, args?: any[], unloadingOrResetGameState?: boolean): Promise<boolean>;
-    displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo, retryReason: JoinServerRetryReason): Promise<void>;
+    displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo | undefined, retryReason: JoinServerRetryReason): Promise<void>;
     disconnectAndResetGameState(reason: DisconnectReason.UnableToJoinGame, unableToJoinReason: UnableToJoinReason): Promise<void>;
     disconnectAndResetGameState(reason: DisconnectReason, reasonDescription?: any[]): Promise<void>;
     /**
@@ -196,7 +196,12 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private connectDedicatedMatchmakingServer;
     private disconnectDedicatedMatchmakingServer;
     private onMatchmakingMessage;
+    /**
+     * Called when a multiplayer connection is established to a server.
+     * This is only called on the client side.
+     */
     private _onConnected;
+    private _sendConnectPacket;
     private onConnectionData;
     private serverPacketTick;
     private clientPacketTick;

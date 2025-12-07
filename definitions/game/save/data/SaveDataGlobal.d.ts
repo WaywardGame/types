@@ -35,7 +35,6 @@ export default class SaveDataGlobal {
     utilitiesEnumsAllocated: Record<string, EnumInfo>;
     savedDialogInfo: Record<string, IDialogInfo | undefined>;
     multiplayerBannedPlayers: string[];
-    multiplayerPreviousGames: PartialRecord<string, IMultiplayerPreviousGame>;
     multiplayerMessageOfTheDay: string;
     characters: ISavedCharacter[];
     ui: Record<string, any>;

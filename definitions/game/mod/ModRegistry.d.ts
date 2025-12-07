@@ -912,10 +912,10 @@ export declare namespace Registry {
      * Used internally for `Registry<H, T>.get(key)`
      */
     class Registered implements Objects.ICloneable {
-        readonly mod?: string;
+        readonly mod?: string | ModInformation;
         readonly type: RegistryRegisteredIntermediateType;
         readonly path: PropertyKey[];
-        constructor(modName: string | undefined, type: RegistryRegisteredIntermediateType, ...path: PropertyKey[]);
+        constructor(modName: string | ModInformation | undefined, type: RegistryRegisteredIntermediateType, ...path: PropertyKey[]);
         mask<T>(): T;
         /**
          * An getter for a registration ID in the given `IRegistry`.

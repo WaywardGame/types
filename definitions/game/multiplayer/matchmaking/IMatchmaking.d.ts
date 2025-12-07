@@ -90,6 +90,8 @@ export interface IMatchmakingHostIpAddressMessageData extends IMatchmakingMessag
 }
 export interface IMatchmakingConnectedMessageData extends IMatchmakingMessageData {
     type: MatchmakingMessageDataType.Connected;
+    hasExistingPlayerInGame: boolean;
+    customMilestoneModifiersAllowed: boolean;
 }
 export interface IMatchmakingUnableToJoinGameMessageData extends IMatchmakingMessageData {
     type: MatchmakingMessageDataType.UnableToJoinGame;

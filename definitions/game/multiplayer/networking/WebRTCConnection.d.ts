@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IMultiplayerOnConnected } from "@wayward/game/multiplayer/IMultiplayer";
 import type { IMatchmakingInfo, MatchmakingMessageData } from "@wayward/game/multiplayer/matchmaking/IMatchmaking";
 import { Connection } from "@wayward/game/multiplayer/networking/Connection";
 export declare class WebRTCConnection extends Connection {
@@ -18,7 +19,8 @@ export declare class WebRTCConnection extends Connection {
     readonly maxMessageSize = 65536;
     private _peerConnection?;
     private _dataChannel?;
-    constructor(matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, config: RTCConfiguration, sendMatchmakingMessage: (message: MatchmakingMessageData) => void, onData: (data: ArrayBuffer) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined);
+    private _matchmakingConnectedMessageData?;
+    constructor(matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, config: RTCConfiguration, sendMatchmakingMessage: (message: MatchmakingMessageData) => void, onData: (data: ArrayBuffer) => void, onConnected?: ((data: IMultiplayerOnConnected) => void) | undefined);
     get isConnected(): boolean;
     protected onClosing(): void;
     protected onClosed(): void;
@@ -31,4 +33,5 @@ export declare class WebRTCConnection extends Connection {
     private _onIceConnectionStateChange;
     private _onDescriptionCreated;
     private _parseIceCandidate;
+    private _processConnectedMessage;
 }

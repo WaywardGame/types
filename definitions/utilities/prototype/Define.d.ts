@@ -14,11 +14,13 @@ declare namespace Define {
     export function set<P, K extends string & keyof P>(proto: P, key: K, value: P[K]): P[K];
     export function set<V>(proto: any, key: PropertyKey, value: V): V;
     export function all<P, K extends string & keyof P>(protos: P[], key: K, implementation: Implementation<P, K>): void;
-    interface IMagicImplementation<O, K extends string & keyof O> {
+    interface IMagicImplementationReadonly<O, K extends string & keyof O> {
         get(this: O): O[K];
+    }
+    interface IMagicImplementation<O, K extends string & keyof O> extends IMagicImplementationReadonly<O, K> {
         set(this: O, value: O[K]): void;
     }
-    export function magic<O, K extends string & keyof O>(obj: O, key: K, implementation: IMagicImplementation<O, K>): void;
+    export function magic<O, K extends string & keyof O>(obj: O, key: K, implementation: IMagicImplementationReadonly<O, K> | IMagicImplementation<O, K>): void;
     export {};
 }
 export default Define;
