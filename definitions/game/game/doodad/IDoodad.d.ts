@@ -67,6 +67,7 @@ export interface IDoodadGroupDescription {
 }
 export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatus, ICausesDamage, ITemperatureDescription {
     actionTypes?: ActionType[];
+    allowedBiomes?: BiomeType[];
     allowedTiles?: TerrainType[];
     blockJump?: boolean;
     /**
