@@ -40,7 +40,7 @@ export interface IContainerBucketItemListTransferDetails extends Omit<IMoveItemF
     itemType: ItemType;
     moveAll: boolean;
     stackList?: ContainerBucketItemList;
-    quality?: Quality;
+    quality?: ArrayOr<Quality>;
     index?: number;
     silent?: true;
     hidden?: true;
