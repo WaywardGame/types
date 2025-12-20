@@ -258,7 +258,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * @param bypassChange Set to true if you just want to check if fertility can be increased.
      * @returns True or false depending on if it increased in fertility or not.
      */
-    increaseFertility(bypassChange?: boolean, sendMessage?: boolean): boolean;
+    increaseFertility(bypassChange?: boolean, sendMessage?: boolean, bypassRipeningCheck?: boolean): boolean;
     /**
      * Return extra trap damage based on player multiplier and magical status
      */
@@ -297,7 +297,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     initializeMagicalPropertyManager(): MagicalPropertyManager;
     isLitAndCanRevert(): boolean;
     /**
-     * Reverts lit doodads if they provide fire and have a revert doodad type set.
+     * Reverts lit doodads if they provide light and have a revert doodad type set.
      */
     revert(): boolean;
     onUnserialized(): void;
@@ -407,6 +407,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      * @returns True if fire overflowed, false if not.
      */
     stokeFire(stokeValue: number, human?: Human): boolean;
+    getDecayAtStartWithMagical(): number;
     /**
      * Decay over time
      */

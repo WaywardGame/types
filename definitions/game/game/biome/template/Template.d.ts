@@ -22,7 +22,7 @@ declare const _default: {
     readonly disableTravel: true;
     readonly disableHeightMaps: true;
     readonly disableWebWorker: true;
-    readonly disableTreasureMaps: true;
+    readonly disableTreasureMaps: false;
     readonly disableLoadingScreen: true;
     readonly defaultTerrainBackground: TerrainType.Dirt;
     readonly defaultCaveEntranceFlooring: TerrainType.Dirt;

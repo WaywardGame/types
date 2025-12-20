@@ -67,6 +67,7 @@ export interface IDoodadGroupDescription {
 }
 export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatus, ICausesDamage, ITemperatureDescription {
     actionTypes?: ActionType[];
+    allowedBiomes?: BiomeType[];
     allowedTiles?: TerrainType[];
     blockJump?: boolean;
     /**
@@ -86,7 +87,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable, ICaus
     canBreak?: boolean;
     /**
      * This doodad will be able to grow up until and including this stage.
-     * For example, conifers can grow up until seeding, but not bare. Most trees can grow until bare. Other plants, usually ripening.
+     * For example, conifers can grow up until seeding, but not bare. Most trees can grow until bare. Other plants, usually ripening. This is used to reset growth back to budding after reaching max growth (unless growsIntoTerrain is set).
      */
     canGrow?: GrowingStage;
     canGrowInCaves?: boolean;
@@ -548,6 +549,9 @@ export declare enum DoodadTypeGroup {
     FireSource = -9990,
     LitTorch = -9989,
     LightDevice = -9988,
+    /**
+     * This is set for lit torches, candles, and jack-o'-lanterns specifically
+     */
     LightSource = -9987,
     LitStructure = -9986,// Prevents pick up while lit
     LockedChest = -9985,
@@ -559,7 +563,7 @@ export declare enum DoodadTypeGroup {
     Wheelbarrow = -9979,
     Altar = -9978,
     OpenFireSource = -9977,
-    RequiresCandleToLight = -9976,// Pumpkins
+    Unused = -9976,// <----------- Use this one
     ContainsFuelSource = -9975,
     CurseWard = -9974,
     CannotBeSpread = -9973

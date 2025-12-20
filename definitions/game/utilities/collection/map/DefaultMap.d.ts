@@ -15,7 +15,7 @@ import type { RecursivePartial } from "@wayward/game/utilities/types/Recursive";
 import Objects from "@wayward/utilities/object/Objects";
 export default class DefaultMap<K, V> extends Map<K, V> implements ISerializable, Objects.ICloneable, IMergeable<Map<K, V>> {
     readonly defaultValue: V;
-    constructor(defaultValue: V, entries?: Iterable<readonly [K, RecursivePartial<V>]>);
+    constructor(defaultValue: V, entries?: Iterable<readonly [K, RecursivePartial<V>]>, mergeDefaultValue?: boolean);
     valuesAndDefault(): Generator<V>;
     initialize(key: K): V;
     serializeObject(serializer: ISerializer): undefined;

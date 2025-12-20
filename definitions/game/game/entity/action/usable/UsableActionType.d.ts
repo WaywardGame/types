@@ -105,14 +105,17 @@ export declare enum UsableActionType {
     Ascend = 100083,
     Descend = 100084,
     Excavate = 100085,
-    Collapse = 100086
+    Collapse = 100086,
+    DropAllExceptQuality = 100087,
+    MoveAllExceptQuality = 100088
 }
 export declare enum UsableActionTypePlaceholder {
     TradeItem = 200000,
     MoveAllToInventory = 200001,
     MoveAllOfSameQualityToInventory = 200002,
-    Paddle = 200003,
-    Operate = 200004,
-    SwimToIsland = 200005
+    MoveAllExceptQualityToInventory = 200003,
+    Paddle = 200004,
+    Operate = 200005,
+    SwimToIsland = 200006
 }
 export declare const usableActionDescriptions: PartialRecord<UsableActionType | UsableActionTypePlaceholder, IModdable>;

@@ -71,7 +71,8 @@ export default class PlayerManager extends EventEmitter.Host<IPlayerManagerEvent
      * Removes and deletes a player.
      * Use with caution!
      */
-    permanentlyDelete(player: Player): void;
+    permanentlyDelete(player: Player, delayForKick?: boolean): void;
+    private performPermanentDelete;
     /**
      * Moves to the player to the target array
      * @param source Where they are coming from. It's okay if they aren't in this array

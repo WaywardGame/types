@@ -168,6 +168,7 @@ export declare enum MoveType {
      * If set, this entity will damage any crushable item they have stepped on.
      */
     DamageCrushableTileItems = 8192,
+    /** Warning: This is a combination of other MoveType's, so when checking make sure to check that *all* flags are present */
     Flying = 15
 }
 export declare enum AttackType {

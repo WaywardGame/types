@@ -10,8 +10,5 @@
  */
 import { Action } from "@wayward/game/game/entity/action/Action";
 import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
-import { Direction } from "@wayward/game/utilities/math/Direction";
-declare const _default: Action<[ActionArgument.Direction], ActionType.Move, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, {
-    usable: true;
-}, [Direction.None | Direction.East | Direction.North | Direction.West | Direction.South]>;
+declare const _default: Action<[ActionArgument.String], ActionType.RemovePlayer, import("../../Human").default<unknown, number, import("../../../reference/IReferenceManager").ReferenceType.NPC | import("../../../reference/IReferenceManager").ReferenceType.Player, unknown>, void, import("@wayward/game/game/entity/action/IAction").IActionUsable, [string]>;
 export default _default;

@@ -8,6 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IUsableActionPossibleUsing } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
+import type Player from "@wayward/game/game/entity/player/Player";
 import Button from "@wayward/game/ui/component/Button";
 import Component from "@wayward/game/ui/component/Component";
 import Text from "@wayward/game/ui/component/Text";
@@ -50,7 +53,7 @@ export default class ActionsConfigurationDrawer extends Component {
     reset(updateSavedUsing?: boolean): this;
     private refresh;
     protected onHide(): void;
-    protected postExecuteAction(): void;
+    protected postExecute(host: UsableAction, player: Player, using: IUsableActionPossibleUsing): void;
     protected onSubmit(): boolean;
     private onChooseAction;
     private onConfigurationChange;

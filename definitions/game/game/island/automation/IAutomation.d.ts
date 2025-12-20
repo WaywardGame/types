@@ -14,13 +14,17 @@ import type { CreatureType } from "@wayward/game/game/entity/creature/ICreature"
 import type Human from "@wayward/game/game/entity/Human";
 import type { MoveType } from "@wayward/game/game/entity/IEntity";
 import type { EquipType } from "@wayward/game/game/entity/IHuman";
+import type { Stat } from "@wayward/game/game/entity/IStats";
 import type { NPCType } from "@wayward/game/game/entity/npc/INPCs";
+import type { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type { StatusType } from "@wayward/game/game/entity/status/IStatus";
 import type { Quality } from "@wayward/game/game/IObject";
 import type { IslandId } from "@wayward/game/game/island/IIsland";
 import type { ContainerSort, ItemType, ItemTypeGroup } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
+import type MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type { TerrainType } from "@wayward/game/game/tile/ITerrain";
+import type { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type { IOptions } from "@wayward/game/save/data/ISaveDataGlobal";
 import type { SortDirection } from "@wayward/game/save/ISaveManager";
 import type { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
@@ -76,8 +80,10 @@ export interface IAutomationSetupWorld {
         y?: number;
         z?: WorldZ;
         items?: IAutomationSetupItem[];
+        events?: TileEventType[];
         tilled?: boolean;
         fishAvailable?: number;
+        depth?: number;
     }>;
     doodads?: Array<{
         type: DoodadType;
@@ -96,6 +102,7 @@ export interface IAutomationSetupWorld {
         tamed?: true;
         /** Defaults to a massive number */
         happiness?: number;
+        timesPetted?: number;
         aberrant?: true;
     }>;
     corpses?: Array<{
@@ -110,6 +117,7 @@ export interface IAutomationSetupWorld {
         x?: number;
         y?: number;
         z?: number;
+        stats?: IAutomationSetupHumanStat[];
         inventory?: IAutomationSetupItemContainer;
         moveType?: MoveType;
     }>;
@@ -118,8 +126,18 @@ export interface IAutomationSetupPlayer {
     alwaysPassSkillChecks?: boolean;
     position?: Partial<IVector3>;
     direction?: Direction.Cardinal;
+    skills?: IAutomationSetupHumanSkill[];
+    stats?: IAutomationSetupHumanStat[];
     inventory?: IAutomationSetupItemContainer;
     status?: StatusType[];
+}
+export interface IAutomationSetupHumanSkill {
+    type: SkillType;
+    value: number;
+}
+export interface IAutomationSetupHumanStat {
+    type: Stat;
+    value: number;
 }
 export interface IAutomationSetupItemContainer {
     sort?: ContainerSort;
@@ -131,4 +149,7 @@ export interface IAutomationSetupItem {
     type: ItemType | ItemTypeGroup;
     equip?: EquipType;
     quality?: Quality;
+    magics?: MagicalPropertyType[];
+    durability?: number;
+    weightMultiplier?: number;
 }

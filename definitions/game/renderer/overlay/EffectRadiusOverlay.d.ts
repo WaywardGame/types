@@ -12,6 +12,7 @@ import type { IOverlayInfo } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
 import UniversalOverlay from "@wayward/game/renderer/overlay/UniversalOverlay";
 import { DistanceType } from "@wayward/game/utilities/math/Vector2";
+import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IColorFul } from "@wayward/utilities/Color";
 export interface IEffectRadiusOverlayColor extends Partial<IColorFul> {
     alpha?: number;
@@ -29,6 +30,8 @@ export default class EffectRadiusOverlay extends UniversalOverlay {
     range: number;
     color?: IEffectRadiusOverlayColor;
     constructor();
+    get minVector(): Vector2;
+    get maxVector(): Vector2;
     set(type: DistanceType, center: Tile, range: number, color?: IEffectRadiusOverlayColor): void;
     unset(center: Tile): void;
     protected generateOverlayInfo(tile: Tile, existingOverlay: IOverlayInfo | undefined): IOverlayInfo | undefined;

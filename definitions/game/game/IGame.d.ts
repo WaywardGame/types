@@ -33,6 +33,7 @@ import type Version from "@wayward/utilities/Version";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 import type { IRange } from "@wayward/utilities/math/Range";
+import type Screen from "@wayward/game/ui/screen/Screen";
 export interface IGameEvents {
     /**
      * Called when the game is starting
@@ -168,6 +169,12 @@ export type IGameOld = Partial<Game> & Partial<{
     time: TimeManager;
     wellData: Record<number, IWell | undefined>;
 }>;
+export interface IMultiplayerServerToJoin {
+    serverInfo: ServerInfo;
+    screen: Screen | undefined;
+    callback?: MultiplayerServerJoinCallback;
+}
+export type MultiplayerServerJoinCallback = (character: ICharacter | undefined, milestoneModifiers: Set<Milestone> | undefined) => void;
 export interface IPlayOptions {
     slot: number | undefined;
     name: string;
@@ -175,9 +182,9 @@ export interface IPlayOptions {
     difficulty: GameMode;
     difficultyOptions?: IGameOptions;
     milestoneModifiers: Set<Milestone>;
-    character: ICharacter;
+    character?: ICharacter;
     multiplayer: IMultiplayerOptions | boolean | undefined;
-    multiplayerServerToJoin: ServerInfo | undefined;
+    multiplayerServerToJoin: IMultiplayerServerToJoin;
     turnMode: TurnMode;
     realTimeTickSpeed: number;
     customMilestoneModifiersAllowed: boolean;

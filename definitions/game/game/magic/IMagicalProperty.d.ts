@@ -11,6 +11,7 @@
 import type MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
 import type { MagicalPropertyTypeSubTypeMap } from "@wayward/game/game/magic/MagicalPropertyType";
 import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
+import TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 export interface IHasMagic {
     magic?: MagicalPropertyManager;
 }
@@ -87,4 +88,5 @@ export declare namespace MagicalPropertyIdentity {
     function translationHash(...identity: MagicalPropertyIdentity): string;
     function unhash(hash: MagicalPropertyIdentityHash): MagicalPropertyIdentity | undefined;
     function equals(...identities: MagicalPropertyIdentity[]): boolean;
+    function getSubTypeTranslationDictionaryAndKey(identity: MagicalPropertyIdentity): TranslationImpl | undefined;
 }

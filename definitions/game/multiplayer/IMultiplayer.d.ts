@@ -11,7 +11,7 @@
 import type { ICharacter } from "@wayward/game/game/entity/IHuman";
 import type { PlayerState } from "@wayward/game/game/entity/player/IPlayer";
 import type Player from "@wayward/game/game/entity/player/Player";
-import type { ISynchronizeState, PauseSource } from "@wayward/game/game/IGame";
+import type { IMultiplayerServerToJoin, ISynchronizeState, PauseSource } from "@wayward/game/game/IGame";
 import { TurnMode } from "@wayward/game/game/IGame";
 import type { Load } from "@wayward/game/game/meta/Loading";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
@@ -223,9 +223,9 @@ export declare enum JoinServerRetryReason {
     WebRTCTimeout = 4
 }
 export interface IJoinServerOptions {
+    multiplayerServerToJoin: IMultiplayerServerToJoin;
     character: ICharacter;
     milestoneModifiers: Set<Milestone>;
-    retryMatchmakingInfo: IMatchmakingInfo;
     automaticallyRetry: boolean;
     enableSteamNetworkConnections: boolean;
 }
@@ -241,4 +241,9 @@ export interface IMultiplayerRunSafelyOptions {
         disableDelayAfter?: boolean;
         hostInitiatesHide?: boolean;
     };
+}
+export interface IMultiplayerOnConnected {
+    matchmakingInfo: IMatchmakingInfo;
+    hasExistingPlayerInGame: boolean;
+    customMilestoneModifiersAllowed: boolean;
 }

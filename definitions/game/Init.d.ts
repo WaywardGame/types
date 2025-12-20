@@ -9,11 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { Game } from "@wayward/game/game/Game";
+import type { SaveType } from "@wayward/game/game/IGame";
 import "@wayward/game/game/entity/action/ActionsRegistration";
 import "@wayward/game/game/entity/npc/NPCRegistration";
 import "@wayward/game/game/item/Items";
 export interface IInit {
     game: Game;
-    onUnload(message?: string): Promise<void>;
+    onUnload(message?: string, saveType?: SaveType | false): Promise<void>;
 }
 export default function (): Promise<IInit | undefined>;

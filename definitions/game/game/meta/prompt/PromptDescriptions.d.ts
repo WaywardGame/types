@@ -77,6 +77,8 @@ export declare const promptMenuGameEndReturnToTitleScreenChallenge: import("@way
 export declare const promptMenuGameEndReturnToTitleScreenMultiplayer: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[playersConnected: number]>;
 export declare const promptMenuLoadGameDeleteSave: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[name?: string | undefined]>;
 export declare const promptMenuLoadGameDeleteSaves: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[deleteCount: number]>;
+export declare const promptMenuMultiplayerOptionsDeletePlayer: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[name: string]>;
+export declare const promptMenuMultiplayerOptionsDeleteConnectedPlayer: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[name: string]>;
 export declare const promptMenuLoadGameImportSaveFailure: import("@wayward/game/game/meta/prompt/IPrompt").IPromptInfoDescription<[succeeded: Text[], failed: Text[], unknownErrors: boolean]>;
 export declare const promptMenuLoadGameExportType: import("@wayward/game/game/meta/prompt/IPrompt").IPromptChoiceDescription<any[], (InterruptChoice.Cancel | InterruptChoice.LocalFile | InterruptChoice.SteamWorkshop)[]>;
 export declare const promptMenuLoadGameMissingMod: import("@wayward/game/game/meta/prompt/IPrompt").IPromptConfirmDescription<[missingMods: string[], disabledMods: string[]]>;

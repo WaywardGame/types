@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { Game } from "@wayward/game/game/Game";
+import { SaveType } from "@wayward/game/game/IGame";
 export declare class Uninit {
     private readonly game;
     private unloading;
@@ -17,6 +18,6 @@ export declare class Uninit {
     onBeforeUnloadAsynchronous(event?: {
         preventDefault?: () => void;
         returnValue?: boolean | string;
-    }): Promise<void>;
+    }, saveType?: SaveType | false): Promise<void>;
     onBeforeUnloadSynchronous(event: Event): void;
 }

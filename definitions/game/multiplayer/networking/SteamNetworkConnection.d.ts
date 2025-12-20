@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import type { IMultiplayerOnConnected } from "@wayward/game/multiplayer/IMultiplayer";
 import type { IMatchmakingInfo, MatchmakingMessageData } from "@wayward/game/multiplayer/matchmaking/IMatchmaking";
 import { Connection } from "@wayward/game/multiplayer/networking/Connection";
 import type { ISteamworksNetworking } from "@wayward/hosts/shared/interfaces";
@@ -21,7 +22,7 @@ export declare class SteamNetworkConnection extends Connection {
     readonly maxMessageSize = 65536;
     private _processIntervalId;
     private _checkSessionStateIntervalId;
-    constructor(steamNetworking: ISteamworksNetworking, hostSteamId: string, matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, onData: (data: ArrayBufferLike) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined, connectGlobalMatchmakingServer?: (() => void) | undefined);
+    constructor(steamNetworking: ISteamworksNetworking, hostSteamId: string, matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, onData: (data: ArrayBufferLike) => void, onConnected?: ((data: IMultiplayerOnConnected) => void) | undefined, connectGlobalMatchmakingServer?: (() => void) | undefined);
     /**
      * Steam id of the peer
      */

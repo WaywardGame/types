@@ -12,7 +12,7 @@ import type Doodad from "@wayward/game/game/doodad/Doodad";
 import { Action } from "@wayward/game/game/entity/action/Action";
 import type { IActionUsable } from "@wayward/game/game/entity/action/IAction";
 import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
-import type { ItemType } from "@wayward/game/game/item/IItem";
+import { ItemType } from "@wayward/game/game/item/IItem";
 import Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
 export interface ToggleVehicleDoodadCanUse extends IActionUsable {
