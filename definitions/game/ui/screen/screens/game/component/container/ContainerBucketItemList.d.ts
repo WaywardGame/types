@@ -88,6 +88,10 @@ export default class ContainerBucketItemList extends Component implements ISorta
     private readonly bucketRef;
     get bucket(): ContainerBucket;
     constructor(bucket: ContainerBucket, container?: IContainer);
+    /**
+     * This is required because ItemComponents might have created subscribers (i.e. registered highlights), which would remain even after this ContainerBucketItemList is removed since the child ItemComponents remain referenced by the highlights manager.
+     */
+    protected onRemoved(): void;
     private readonly activeReasons;
     toggleActive(reason: string, active: boolean): void;
     getSortableID(child: Component & Partial<ItemComponent>): number | undefined;
