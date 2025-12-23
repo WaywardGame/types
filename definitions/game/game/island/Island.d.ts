@@ -18,7 +18,7 @@ import Human from "@wayward/game/game/entity/Human";
 import type { SkillType } from "../entity/skill/ISkills";
 import Creature from "@wayward/game/game/entity/creature/Creature";
 import CreatureManager from "@wayward/game/game/entity/creature/CreatureManager";
-import type { IDamageInfo, IDamageOutcome, IDamageOutcomeInput } from "@wayward/game/game/entity/creature/ICreature";
+import { type IDamageInfo, type IDamageOutcome, type IDamageOutcomeInput } from "@wayward/game/game/entity/creature/ICreature";
 import CorpseManager from "@wayward/game/game/entity/creature/corpse/CorpseManager";
 import CreatureZoneManager from "@wayward/game/game/entity/creature/zone/CreatureZoneManager";
 import FlowFieldManager from "@wayward/game/game/entity/flowfield/FlowFieldManager";
