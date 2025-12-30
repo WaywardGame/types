@@ -9,5 +9,5 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Riddle from "@wayward/game/game/riddle/Riddle";
-declare const riddles: Record<Riddle, string[]>;
+declare const riddles: Record<Riddle, string | string[]>;
 export default riddles;

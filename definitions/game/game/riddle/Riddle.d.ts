@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 declare enum Riddle {
-    Treasure1 = 0
+    Treasure1 = 0,
+    DrawnMap = 1
 }
 export default Riddle;

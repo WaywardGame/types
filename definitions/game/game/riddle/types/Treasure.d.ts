@@ -11,4 +11,4 @@
 import type Island from "@wayward/game/game/island/Island";
 import type { Random } from "@wayward/utilities/random/Random";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
-export default function (island: Island, x: number, y: number, z: number, random: Random): TranslationImpl;
+export default function (island: Island, x: number, y: number, z: number, random?: Random): TranslationImpl;
