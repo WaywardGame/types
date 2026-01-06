@@ -14,9 +14,12 @@ import type Human from "@wayward/game/game/entity/Human";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import Message from "@wayward/game/language/dictionary/Message";
+import type { GetItemProtectedItemExclusion } from "@wayward/game/game/item/IItemManager";
 interface ICopyMapRequirement {
     type: ItemType;
     message: Message;
+    excludeProtectedItems?: true | GetItemProtectedItemExclusion;
+    includeProtectedItemsThatWillNotBreak?: ActionType | true;
 }
 export declare const copyMapRequirements: ICopyMapRequirement[];
 export declare function hasMapRequirement(requirement: ICopyMapRequirement, human: Human): Item | undefined;

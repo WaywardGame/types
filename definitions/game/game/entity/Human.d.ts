@@ -315,7 +315,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * All the milestones we need to check on game load.
      */
     protected checkOnLoadMilestones(): void;
-    setVehicle(item: Item | undefined, extinguishTorches?: boolean): boolean;
+    setVehicle(item: Item | undefined, extinguishTorches?: boolean, skipMessage?: boolean): boolean;
     getWeightStatus(): WeightStatus;
     /**
      * Extinguishes all torches the player is holding of they are swimming.
