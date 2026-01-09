@@ -46,6 +46,7 @@ export default class AiManager<ENTITY extends EntityMovable = EntityMovable> {
     calculate(): AiType;
     private emitChange;
     has(aiType: AiType): boolean;
+    hasAny(aiTypes: AiType[]): boolean;
     hasBase(aiType: AiType): boolean;
     /**
      * @deprecated I hope you know what you're doing
