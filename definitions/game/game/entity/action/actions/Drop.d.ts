@@ -20,6 +20,7 @@ import { type IContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
 import Translation from "@wayward/game/language/Translation";
+import { DropLocation } from "@wayward/game/save/data/ISaveDataGlobal";
 export declare enum DropAllowProtected {
     Disallow = 0,
     AllowSafe = 1,
@@ -27,6 +28,10 @@ export declare enum DropAllowProtected {
 }
 export interface IDropItemFilterArgument extends IMoveItemFilterArgument {
     allowProtected?: DropAllowProtected;
+    /**
+     * Overridable drop location
+     */
+    dropLocation?: DropLocation;
 }
 export declare class DropItemFilterArgument extends MoveItemFilterArgument<IDropItemFilterArgument> {
     validate(executor: Entity | undefined, value: unknown): value is IDropItemFilterArgument;
@@ -43,8 +48,8 @@ interface IResolvedTileDrop {
     into: IContainer;
     blocker?: Translation;
 }
-export declare function resolveTileDrop(human: Human | undefined, tile: Tile, items?: MoveItemsSourceArgumentResolvable, dropIntoContainers?: boolean): IResolvedTileDrop;
-export declare function resolveTileDrop(human: Human, tile?: Tile, items?: MoveItemsSourceArgumentResolvable, dropIntoContainers?: boolean): IResolvedTileDrop;
+export declare function resolveTileDrop(human: Human | undefined, tile: Tile, items?: MoveItemsSourceArgumentResolvable, dropLocation?: DropLocation, dropIntoContainers?: boolean): IResolvedTileDrop;
+export declare function resolveTileDrop(human: Human, tile?: Tile, items?: MoveItemsSourceArgumentResolvable, dropLocation?: DropLocation, dropIntoContainers?: boolean): IResolvedTileDrop;
 export interface IDropCanUse {
     items: Item[];
     tile: Tile;
