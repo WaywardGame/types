@@ -27,13 +27,18 @@ interface DataComponent<T, DEFAULT_VALUE extends T | undefined = undefined> {
     modify(entity: Entity, modify: (current: T | DEFAULT_VALUE) => T): T;
     remove(entity: Entity): void;
 }
+declare function DataComponent<T>(moddedDataTypeName: string, defaultValue: T): DataComponent<T, T>;
+declare function DataComponent<T>(moddedDataTypeName: string, defaultValue?: T): DataComponent<T>;
 declare function DataComponent<T>(type: DataComponentType, defaultValue: T): DataComponent<T, T>;
 declare function DataComponent<T>(type: DataComponentType, defaultValue?: T): DataComponent<T>;
+type RegisterToMod = (moddedDataTypeName: string) => DataComponentType;
 declare namespace DataComponent {
+    function initModSupport(register: RegisterToMod): void;
     interface Live<T> {
         get(entity: Entity): T;
         update(entity: Entity): void;
     }
+    function Live<T>(moddedDataTypeName: string, compute: (entity: Entity, current: T | undefined) => T): Live<T>;
     function Live<T>(type: DataComponentType, compute: (entity: Entity, current: T | undefined) => T): Live<T>;
 }
 export default DataComponent;

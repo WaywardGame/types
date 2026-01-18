@@ -73,6 +73,7 @@ import type { HelpArticle, IHelpArticle } from "@wayward/game/ui/screen/screens/
 import type { ModOptionSectionInitializer } from "@wayward/game/ui/screen/screens/menu/menus/options/TabMods";
 import type WorldZ from "@wayward/utilities/game/WorldZ";
 import Objects from "@wayward/utilities/object/Objects";
+import type { DataComponentType } from "@wayward/game/game/entity/data/DataComponent";
 export interface IModdable {
     /**
      * Do not provide or modify this value, only reference it. This is set by the modding system during the process of registration.
@@ -137,7 +138,8 @@ export declare enum ModRegistrationType {
     UsableActions = 53,
     UsableActionType = 54,
     UsableActionTypePlaceholder = 55,
-    WorldLayer = 56
+    WorldLayer = 56,
+    DataComponentType = 57
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -362,6 +364,10 @@ export interface ILoadRegistration extends IBaseModRegistration {
 }
 export interface IWorldLayerRegistration extends IBaseModRegistration {
     type: ModRegistrationType.WorldLayer;
+    name: string;
+}
+export interface IDataComponentTypeRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.DataComponentType;
     name: string;
 }
 export interface ITileLayerTypeRegistration extends IBaseModRegistration {
@@ -782,6 +788,10 @@ declare namespace Register {
      * @param description The definition of the equip slot.
      */
     function equipType(name: string, description: IEquipTypeDescription): <K extends string | number | symbol, T extends Record<K, EquipType>>(target: T, key: K) => void;
+    /**
+     * Registers a DataComponentType, allowing you to store custom, strongly-typed data on entities.
+     */
+    function dataComponentType(name: string): <K extends string | number | symbol, T extends Record<K, DataComponentType>>(target: T, key: K) => void;
     function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends Record<K, InterModRegistry<V>>>(target: T, key: K) => void;
     function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends Record<K, InterModRegistration<V>>>(target: T, key: K) => void;
     /**
@@ -912,6 +922,7 @@ export declare namespace Registry {
      * Used internally for `Registry<H, T>.get(key)`
      */
     class Registered implements Objects.ICloneable {
+        static get<T>(value: T | Registered): T | undefined;
         readonly mod?: string | ModInformation;
         readonly type: RegistryRegisteredIntermediateType;
         readonly path: PropertyKey[];

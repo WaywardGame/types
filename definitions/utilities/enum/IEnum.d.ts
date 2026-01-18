@@ -91,5 +91,6 @@ export declare enum EnumId {
     DoodadTypeExtra = 47,
     EquipType = 48,
     TileGroup = 49,
-    EnumId = 50
+    EnumId = 50,
+    DataComponentType = 51
 }
