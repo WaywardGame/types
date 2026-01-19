@@ -1,7 +1,7 @@
 {
 	"name": "@wayward/types",
 	"description": "TypeScript declarations for Wayward, used for modding.",
-	"version": "2.15.3-beta.dev.20260118.1",
+	"version": "2.15.3-beta.dev.20260119.1",
 	"license": "MIT",
 	"repository": {
 		"type": "git",

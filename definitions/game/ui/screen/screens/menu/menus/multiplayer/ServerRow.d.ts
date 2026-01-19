@@ -25,6 +25,8 @@ export declare class ServerRow extends Button implements IRefreshable, IGameIcon
     get pvp(): boolean;
     get mods(): Array<[string, ModLoadability]>;
     get friends(): ISteamFriend[];
+    get milestoneModifiersAllowed(): boolean;
+    readonly alwaysShowMultiplayerInfo = true;
     private readonly headingPlace;
     private readonly gameIcons;
     private _server;

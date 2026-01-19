@@ -27,6 +27,7 @@ export declare class GameDetails extends PopupOverlay implements IGameIconsHost,
     get pvp(): boolean;
     get mods(): Array<[string, ModLoadability]>;
     get friends(): ISteamFriend[];
+    get milestoneModifiersAllowed(): boolean;
     readonly gameModifiers: GameModifiers;
     readonly gameIcons: GameIcons;
     questsWrapper?: Component;
