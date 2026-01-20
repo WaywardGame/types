@@ -19,6 +19,10 @@ export default class IslandManager extends Map<IslandId, Island> {
     private readonly game;
     constructor(game: Game);
     /**
+     * Get the list of all islands (loaded and unloaded!)
+     */
+    get loadedAndUnloaded(): Island[];
+    /**
      * Get the list of islands that contain players
      */
     get active(): Island[];
@@ -56,4 +60,8 @@ export default class IslandManager extends Map<IslandId, Island> {
     getBiomeType(x: number, y: number): BiomeTypes;
     getDetails(x: number, y: number): IIslandDetails;
     generateDetails(position: IVector2, seedType: SeedType, seed?: number): IIslandDetails;
+    /**
+     * @deprecated Use .loadedAndUnloaded instead
+     */
+    values(): never;
 }
