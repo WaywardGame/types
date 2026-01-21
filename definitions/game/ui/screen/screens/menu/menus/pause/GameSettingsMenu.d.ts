@@ -8,14 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import Button from "@wayward/game/ui/component/Button";
 import { RangeRow } from "@wayward/game/ui/component/RangeRow";
 import ChoiceListTurnMode from "@wayward/game/ui/screen/screens/menu/component/ChoiceListTurnModes";
 import Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
 export default class GameSettingsMenu extends Menu {
     readonly turnMode: ChoiceListTurnMode;
     readonly tickSpeed: RangeRow;
+    readonly copyGameSeed: Button;
     constructor();
     protected refresh(): void;
     private updateTurnModes;
     private onChangeTurnMode;
+    private copyGameSeedClick;
 }
