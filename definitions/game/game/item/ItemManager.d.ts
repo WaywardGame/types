@@ -230,7 +230,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      * For entity manager compat
      */
     protected onRemove(): boolean;
-    getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): Item[];
+    generateDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): Item[];
     static getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getWeightCapacity(container?: IContainer, includeMagic?: boolean): number | undefined;
     create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, context?: ActionContext, magicalLootType?: MagicalLootType): Item;
