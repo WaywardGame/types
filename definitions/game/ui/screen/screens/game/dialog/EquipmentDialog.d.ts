@@ -39,6 +39,8 @@ export default class EquipmentDialog extends Dialog {
     getBindable(): Bindable;
     getIcon(): MenuBarButtonType;
     protected onClearActionSlot(api: IBindHandlerApi): boolean;
+    protected onItemProtectToggle(api: IBindHandlerApi): boolean;
+    protected onItemRename(api: IBindHandlerApi): boolean;
 }
 export declare class EquipmentSlot extends ItemComponent {
     readonly slot: EquipType;
