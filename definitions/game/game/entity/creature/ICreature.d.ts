@@ -529,9 +529,9 @@ export interface ICreatureSpawnOptions {
      */
     bypassTiles?: boolean;
     /**
-     * If provided, forces the spawned creature's aberrant state to be the passed boolean. True = aberrant, false = not aberrant. If not provided, the aberrant state is decided based on chance.
+     * If provided, forces the spawned creature's aberrant state to be the passed boolean. True = aberrant, false = not aberrant. If a number is provided, we will use seededRandom.chance() to determine aberrant state based on the number provided (0-1).
      */
-    forceAberrant?: boolean;
+    aberrant: boolean | number;
     /**
      * If set, this will overwrite the creature's description for which tiles it can spawn on. This will also change which tiles it can path on to, differing from its set definitions.
      */
