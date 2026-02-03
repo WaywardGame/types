@@ -370,6 +370,10 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      * Defaults to true (or undefined, which is treated as true)
      */
     slowedByCobwebs?: boolean;
+    /**
+     * The size of the creature's attack which equates to how many pieces of equipment it can hit (damage) in one attack.
+     */
+    attackSize?: number;
 }
 export interface ICreatureLoot {
     item: ItemType;

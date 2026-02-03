@@ -70,6 +70,7 @@ declare class ContextMenu<O extends number | string | symbol = number | string |
     getActiveMenu(): ContextMenu;
     isFacingLeft(): boolean;
     isSubmenu(): boolean;
+    hasActiveSubmenu(): boolean;
     getBindables(): Stream<Bindable>;
     describeOption<NO extends number | string | symbol>(id: NO, description: IContextMenuOptionDescription): ContextMenu<O | NO>;
     describeDivider(): this;

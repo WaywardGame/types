@@ -234,7 +234,11 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     resetMovementIntent(): void;
     createItemInInventory(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, context?: IActionContext): Item;
     cloneItemIntoInventory(itemToClone: Item, itemType?: ItemType): Item;
-    damageRandomEquipment(): void;
+    /**
+     * Damages a random piece of equipped armor.
+     * @param amount The number of pieces of equipment to damage. Default is 1.
+     */
+    damageRandomEquipment(amount?: number): void;
     getDamageModifier(): number;
     calculateDamageAmount(attackType: AttackType, weapon?: Item, ammoItem?: Item): number;
     isDualWielding(): boolean;
