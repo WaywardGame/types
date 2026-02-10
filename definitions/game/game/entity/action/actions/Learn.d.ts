@@ -11,7 +11,7 @@
 import { Action } from "@wayward/game/game/entity/action/Action";
 import { ActionArgument, ActionType } from "@wayward/game/game/entity/action/IAction";
 import { ItemTypeGroup, RecipeLevel } from "@wayward/game/game/item/IItem";
-export declare const ACTION_LEARN_RECIPE_OF_ISLAND_MULTIPLIER = 8;
+export declare const ACTION_LEARN_RECIPE_OF_ISLAND_MULTIPLIER = 15;
 export declare const ACTION_LEARN_RECIPE_WORTH_PENALTY_MULTIPLIER = 2;
 export declare const ACTION_LEARN_RECIPE_LEVEL_WEIGHTS: Record<RecipeLevel, number>;
 export declare const ACTION_LEARN_RECIPE_ITEM_GROUP_WEIGHTS: PartialRecord<ItemTypeGroup, number>;
