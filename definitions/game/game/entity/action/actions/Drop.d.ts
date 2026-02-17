@@ -55,7 +55,7 @@ export interface IDropCanUse {
     tile: Tile;
     into?: IContainer;
 }
-export declare function drop(human: Human | undefined, into: IContainer, items: Item[]): {
+export declare function drop(human: Human | undefined, into: IContainer, items: Item[], skipMessage?: boolean): {
     itemsDropped: Item[];
     failedDrops: Item[];
 };
