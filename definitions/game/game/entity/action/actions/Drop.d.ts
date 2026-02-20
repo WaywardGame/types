@@ -40,8 +40,9 @@ export declare class DropItemFilterArgument extends MoveItemFilterArgument<IDrop
 }
 export declare enum TileDropType {
     Tile = 0,
-    Doodad = 1,
-    Vehicle = 2
+    TileContainer = 1,
+    Doodad = 2,
+    Vehicle = 3
 }
 interface IResolvedTileDrop {
     type: TileDropType;
