@@ -29,7 +29,7 @@ export default class ContainerBucket extends Component {
     private readonly instanceId;
     private settingContainer;
     readonly itemList: ContainerBucketItemList;
-    readonly sortFilterRow: DialogSortFilter<"custom" | ContainerSort>;
+    readonly sortFilterRow: DialogSortFilter<ContainerSort | "custom">;
     readonly activeContainerTabButton: CheckButton;
     readonly moveAllItemsTabButton: Button;
     get container(): IContainer | undefined;
