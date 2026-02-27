@@ -29,7 +29,7 @@ declare namespace Runekeeper {
         CurseEvent = 9
     }
     type DomainName = Lowercase<keyof typeof Domain>;
-    const DOMAINS: ("event" | "dismantle" | "action" | "craft" | "curseevent" | "skill" | "disassemble" | "killcreature" | "tamecreature" | "killnpc")[];
+    const DOMAINS: ("event" | "dismantle" | "action" | "craft" | "skill" | "disassemble" | "killcreature" | "tamecreature" | "killnpc" | "curseevent")[];
     type DomainData = `${DomainName}:${number}`;
     function domainName(domain: Domain | DomainData): DomainName;
     function isDiscovered(domain: DomainData): boolean;
