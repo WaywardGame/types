@@ -17,6 +17,7 @@ export declare enum CurseInfoClasses {
 export default class CurseInfo extends StatInfo {
     private readonly curseFactors;
     private readonly curseFactorsExact;
+    private getCurseRatePercent;
     hasContent(context: InfoProviderContext): boolean;
     get(): InfoProvider[];
 }
