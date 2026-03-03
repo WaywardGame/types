@@ -52,6 +52,7 @@ export default class Input extends Component implements IRefreshable {
     private shouldNotClearOnEscape;
     private shouldSelectOnFocus;
     private shouldSelectOnNextMouseUp;
+    private shouldEscapeStopPropagation;
     private debounce;
     private isFocusing?;
     get changed(): boolean;
@@ -76,6 +77,7 @@ export default class Input extends Component implements IRefreshable {
     setBlurOnEnterAndEmpty(shouldBlurOnEnterAndEmpty?: boolean): this;
     setBlurOnEnter(shouldBlurOnEnter?: boolean): this;
     setNotClearOnEscape(shouldNotClearOnEscape?: boolean): this;
+    setStopPropagationOnEscape(shouldStopPropagationOnEscape?: boolean): this;
     setSelectOnFocus(selectOnFocus?: boolean): this;
     setDebounce(debounce?: number): this;
     editInput(consumer: (input: Component) => any): this;
