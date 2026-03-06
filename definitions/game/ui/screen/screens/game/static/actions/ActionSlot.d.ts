@@ -85,7 +85,7 @@ export declare class ActionSlot extends Button implements IRefreshable, ItemSlot
     private setLastItem;
     private onItemTransformed;
     isUsable(using?: IUsableActionPossibleUsing | undefined, action?: UsableAction<IUsableActionRequirements, IUsableActionDefinition> | undefined): UsableActionUsability;
-    clear(): void;
+    clear(playSound?: boolean): void;
     equipAction(actionId: ActionId, using?: IUsableActionPossibleUsing, autoUse?: boolean): void;
     equipItem(item: Item | ItemType, configure?: boolean, autoUse?: boolean, quality?: boolean | ArrayOr<Quality>): void;
     protected onConfigureBind(api: IBindHandlerApi): boolean;
