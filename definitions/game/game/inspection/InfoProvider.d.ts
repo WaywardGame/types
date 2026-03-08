@@ -80,6 +80,9 @@ export declare abstract class InfoProvider extends EventEmitter.Host<IInfoProvid
     private static bus?;
     static multiTextParagraph: string;
     static create(...translations: TranslationGenerator[]): SimpleInfoProvider;
+    static dynamic<const O extends Array<BaseObserver<any>>, const T extends {
+        [I in keyof O]: O[I] extends BaseObserver<infer U> ? U : never;
+    }>(observers: O, supplier: (...values: T) => InfoProvider | undefined): SimpleInfoProvider;
     static dynamic<T>(observer: BaseObserver<T>, supplier: (value: T) => InfoProvider | undefined): SimpleInfoProvider;
     static of(...classes: string[]): SimpleInfoProvider;
     static header(...classes: string[]): SimpleInfoProvider;
