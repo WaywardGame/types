@@ -118,6 +118,7 @@ export interface ICausesStatus {
 }
 export interface ICausesDamage {
     damage?: number;
+    continuousDamage?: number;
 }
 export declare enum EntityType {
     Player = 0,

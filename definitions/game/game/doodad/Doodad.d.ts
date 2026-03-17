@@ -408,6 +408,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     stokeFire(stokeValue: number, human?: Human): boolean;
     getDecayAtStartWithMagical(): number;
+    canCauseDamage(): boolean;
     /**
      * Decay over time
      */

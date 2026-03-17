@@ -33,14 +33,24 @@ export interface ITrelloCard {
     labels: ITrelloCardLabel[];
     important: boolean;
     desc?: string;
+    shortUrl?: string;
+    dateLastActivity?: string;
+    idMembers?: string[];
+    authors?: ITrelloMember[];
 }
 export interface ITrelloCardCover {
     url: string;
+    sourceUrl?: string;
 }
 export interface ITrelloCardLabel {
     id: string;
     name: string;
     color: string;
+}
+export interface ITrelloMember {
+    id: string;
+    fullName: string;
+    avatarUrl?: string;
 }
 export interface ITrelloChangelog {
     version: IVersionInfo;
@@ -50,6 +60,18 @@ export interface IChangelog {
     version: IVersionInfo;
     sections: Partial<Record<ChangeType, ITrelloCard[]>>;
     changeCount: number;
+}
+export interface ISerializedVersionInfo extends Omit<IVersionInfo, "date"> {
+    date?: string;
+    strPretty?: string;
+}
+export interface ISerializedChangelog extends Omit<IChangelog, "version"> {
+    version: ISerializedVersionInfo;
+}
+export interface IGeneratedChangelog {
+    versions: ISerializedVersionInfo[];
+    changelogs: Record<string, ISerializedChangelog>;
+    generatedAt: string;
 }
 export declare enum ChangeType {
     New = 0,

@@ -17,7 +17,7 @@ import type Entity from "@wayward/game/game/entity/Entity";
 import EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type { IAttack, ICausesDamage, IEntityConstructorOptions, IMovingData, MoveFlag } from "@wayward/game/game/entity/IEntity";
 import { AttackType, DamageType, IStatChangeInfo, StatusChangeReason } from "@wayward/game/game/entity/IEntity";
-import type { HumanTag, ICheckUnderOptions as ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkToChangeReason } from "@wayward/game/game/entity/IHuman";
+import type { HumanTag, ICheckUnderOptions as ICheckInteractionOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkToChangeReason } from "@wayward/game/game/entity/IHuman";
 import { EquipType, RestCancelReason } from "@wayward/game/game/entity/IHuman";
 import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type { IStat } from "@wayward/game/game/entity/IStats";
@@ -349,8 +349,9 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     getMovementIntent(): IMovementIntent;
     updateMovementIntent(movementIntent: IMovementIntent): boolean;
     protected onDie(): void;
-    checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
-    damageByInteractingWith(thing: Doodad | TileEvent, options: ICheckUnderOptions | undefined, damageLocation: EquipType): ICheckUnderOptions;
+    checkUnder(inFacingDirection?: boolean, options?: ICheckInteractionOptions): ICheckInteractionOptions;
+    doDoodadTileEventDamage(thing: Doodad | TileEvent, damageLocation: EquipType, onlyContinuousDamage?: boolean): void;
+    damageByInteractingWith(thing: Doodad | TileEvent, options: ICheckInteractionOptions | undefined, damageLocation: EquipType): ICheckInteractionOptions;
     equip(item: Item, slot: EquipType, internal?: boolean, skipRevertItem?: boolean): boolean;
     /**
      * Unequips an item.

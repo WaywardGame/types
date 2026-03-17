@@ -32,6 +32,7 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
     lightSource?: boolean;
     lightColor?: IRGB;
     damage?: number;
+    continuousDamage?: number;
     durability?: number;
     isWaste?: boolean;
     renderBelowItems?: boolean;
