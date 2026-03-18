@@ -83,7 +83,11 @@ declare enum MagicalPropertyType {
     /** Adds bonus durability to an item */
     Persistence_MaxDurability = 30,
     /** Adds a chance in which an item does reduce in decay when passing a turn */
-    Perpetuity_DecayLossChance = 31
+    Perpetuity_DecayLossChance = 31,
+    /** Increases the human luck multiplier while equipped */
+    Fortune_Luck = 32,
+    /** Reduces curse rate while equipped */
+    Warding_CurseReduction = 33
 }
 export default MagicalPropertyType;
 export declare enum MagicalPropertyStat {

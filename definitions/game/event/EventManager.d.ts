@@ -61,9 +61,10 @@ export declare const eventManager: EventManager<EventBus, {
     42(): import("../ui/screen/screens/game/util/movement/InteractionManager").default;
     43(): import("../ui/screen/screens/game/component/item/ItemComponentEventBus").default;
     44(): import("../ui/screen/screens/game/util/movement/MovementHandler").default;
-    45(): import("../ui/screen/screens/game/util/movement/PathingHandler").default;
-    46(): import("../game/entity/action/usable/UsableAction").default;
-    47(): import("../renderer/world/WorldRenderer").WorldRenderer;
+    45(): import("../ui/screen/screens/game/util/movement/PathQueryCache").default;
+    46(): import("../ui/screen/screens/game/util/movement/PathingHandler").default;
+    47(): import("../game/entity/action/usable/UsableAction").default;
+    48(): import("../renderer/world/WorldRenderer").WorldRenderer;
 }>;
 /**
  * EventHandler that is typed with the games event buses

@@ -13,12 +13,14 @@ import HoveredTileTracker from "@wayward/game/ui/screen/screens/game/util/Hovere
 import ActionMenuHandler from "@wayward/game/ui/screen/screens/game/util/movement/ActionMenuHandler";
 import type { IInteractionHandlerHost } from "@wayward/game/ui/screen/screens/game/util/movement/InteractionHandler";
 import MovementHandler from "@wayward/game/ui/screen/screens/game/util/movement/MovementHandler";
+import PathQueryCache from "@wayward/game/ui/screen/screens/game/util/movement/PathQueryCache";
 import PathingHandler from "@wayward/game/ui/screen/screens/game/util/movement/PathingHandler";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IInteractionManagerEvents {
 }
 export default class InteractionManager extends EventEmitter.Host<IInteractionManagerEvents> implements IInteractionHandlerHost {
     readonly hoveredTile: HoveredTileTracker;
+    readonly pathQuery: PathQueryCache;
     readonly pathing: PathingHandler;
     readonly movement: MovementHandler;
     readonly actionMenu: ActionMenuHandler;

@@ -89,6 +89,7 @@ export default class MagicalPropertyManager extends EventEmitter.Host<IMagicalPr
      * @returns if this object has any of the given cursed magical property types
      */
     hasCursed(...types: MagicalPropertyIdentityFlat[]): boolean;
+    private checkSupertypeCurseState;
     /**
      * @returns whether the given type of magical property is present on this object
      */

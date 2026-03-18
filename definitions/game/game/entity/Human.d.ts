@@ -195,6 +195,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * Luck is a multiplier applied to some random chance calculations.
      */
     get luck(): number;
+    private getEquipmentLuckModifier;
     get debug(): Debug.JIT<[]>;
     updateDirection(tile: Tile | Direction.Cardinal, updateVehicleDirection?: boolean): Direction.Cardinal;
     /**
