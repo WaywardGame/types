@@ -10,6 +10,7 @@
  */
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type Tile from "@wayward/game/game/tile/Tile";
+import type { IExploredTileAlpha } from "@wayward/game/renderer/fieldOfView/IFieldOfViewPlatform";
 import type { IDoodadUpdate } from "@wayward/game/renderer/world/IWorldLayer";
 import type { IWorldLayerRendererEvents } from "@wayward/game/renderer/world/IWorldLayerRenderer";
 import { RenderLayerFlag } from "@wayward/game/renderer/world/IWorldRenderer";
@@ -72,6 +73,7 @@ export declare class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     private deleteTileLayers;
     reset(): void;
     setWorldLayer(worldLayer: WorldLayer, exploredMapClientData: ExploredMapClientData): void;
+    setExploredAlpha(tiles: IExploredTileAlpha[]): void;
     addTileLayer(tileLayer: ITileLayerRendererPlatform): void;
     updateAll(): void;
     updateDoodad({ x, y }: Tile, flushTileImmediately: boolean, { doodadDescription, doodadInfo, doodadVariationX, doodadVariationY, terrainMasks }: IDoodadUpdate): void;

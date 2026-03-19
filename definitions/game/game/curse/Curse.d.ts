@@ -104,6 +104,11 @@ export declare const CURSE_EVENTS_RUNE_CHANCE_MULTIPLIER_LUCKY: IRange<number>;
 export declare const CURSE_EVENTS_RUNES_KILL_TAME: Array<WeightedOption<IRange>>;
 export declare const CURSE_EVENTS_RUNES_SURVIVED: IRange<number>;
 export declare const CURSE_EVENTS_CREATURE_WANDER_CURSEBEARER_PRIORITY: IRange<number>;
+export declare const CURSE_EVENTS_VISUAL_EXPLORED_FADE_TURNS = 30;
+export declare const CURSE_EVENTS_VISUAL_EXPLORED_FAST_PHASE_TURNS = 50;
+export declare const CURSE_EVENTS_VISUAL_EXPLORED_MAIN_ALGORITHM_RADIUS = 150;
+export declare const CURSE_EVENTS_VISUAL_EXPLORED_ALPHA_BATCH_SIZE = 4096;
+export declare const CURSE_EVENTS_VISUAL_EXPLORED_VISIBLE_BUFFER_RADIUS = 1;
 declare namespace Curse {
     interface Helper {
         context: CurseEventContext;
@@ -127,6 +132,8 @@ declare namespace Curse {
     function attemptCurseEventSpawn(category: CurseCategory | null, human: Human, curse: number, humans: Human[], events: CurseEventInstance[], allowDependents?: boolean): CurseEventInstance | undefined;
     function attemptSpecificCurseEventSpawn(human: Human, type: CurseEventType, humans: Human[], curse?: number, force?: boolean | "full"): CurseEventInstance | undefined;
     function attemptSpecificCurseEventSpawnOnPlayer(player: Human, curseType: CurseEventType, force: boolean | "full"): CurseEventInstance | undefined;
+    function resetVisualExploredState(island: Island): void;
+    function obscureVisualExploredState(island: Island): void;
     function unload(island: Island): void;
     function cleanup(island: Island, humans?: Human[], isMorning?: boolean): void;
     function cleanupEphemerals(island: Island): void;
@@ -136,10 +143,19 @@ declare namespace Curse {
 declare const SYMBOL_CURSE_EVENT_SUBSCRIBER_INSTANCES: unique symbol;
 declare const SYMBOL_CURSE_EVENT_GLOBAL_SUBSCRIBER_INSTANCE: unique symbol;
 declare const SYMBOL_CURSE_EVENT_ACTIVE_SUBSCRIBER_INSTANCE: unique symbol;
+type CurseVisualHiddenExploredTilesByZ = Partial<Record<number, number[]>>;
+type CurseVisualFastStepsByZ = Partial<Record<number, number>>;
+type CurseVisualOriginsByZ = Partial<Record<number, IVector2>>;
 interface Curse {
     night?: true;
     globalCurse?: number;
     events?: CurseEventInstance[];
+    visualState?: CurseVisualHiddenExploredTilesByZ;
+    visualStateFastHideStepsByZ?: CurseVisualFastStepsByZ;
+    visualStateFastRestoreStepsByZ?: CurseVisualFastStepsByZ;
+    visualStateHideOriginsByZ?: CurseVisualOriginsByZ;
+    visualStateRestoreOriginsByZ?: CurseVisualOriginsByZ;
+    visualStateWeightedRestoreStepsByZ?: CurseVisualFastStepsByZ;
     cooldown?: number;
     ephemeralCreatures?: number[];
     [SYMBOL_CURSE_EVENT_GLOBAL_SUBSCRIBER_INSTANCE]?: CurseEventSubscriber;

@@ -101,8 +101,8 @@ export declare enum EventBus {
     UiInteractionManager = 42,
     UiItemComponentStatic = 43,
     UiMovementHandler = 44,
-    UiPathQueryCache = 45,
-    UiPathingHandler = 46,
+    UiPathingHandler = 45,
+    UiPathQueryCache = 46,
     UsableActions = 47,
     WorldRenderer = 48
 }
@@ -152,8 +152,8 @@ declare const eventBuses: {
     [EventBus.UiInteractionManager](): InteractionManager;
     [EventBus.UiItemComponentStatic](): ItemComponentEventBus;
     [EventBus.UiMovementHandler](): MovementHandler;
-    [EventBus.UiPathQueryCache](): PathQueryCache;
     [EventBus.UiPathingHandler](): PathingHandler;
+    [EventBus.UiPathQueryCache](): PathQueryCache;
     [EventBus.UsableActions](): UsableAction;
     [EventBus.WorldRenderer](): WorldRenderer;
 };
@@ -204,8 +204,8 @@ export declare const eventBusManager: EventBusManager<EventBus, {
     42(): InteractionManager;
     43(): ItemComponentEventBus;
     44(): MovementHandler;
-    45(): PathQueryCache;
-    46(): PathingHandler;
+    45(): PathingHandler;
+    46(): PathQueryCache;
     47(): UsableAction;
     48(): WorldRenderer;
 }>;

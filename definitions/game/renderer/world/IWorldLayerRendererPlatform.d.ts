@@ -9,10 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type ExploreMap from "@wayward/game/renderer/exploreMap/ExploreMap";
+import type { IExploredTileAlpha } from "@wayward/game/renderer/fieldOfView/IFieldOfViewPlatform";
 import type { WorldLayer } from "@wayward/game/renderer/world/WorldLayer";
 export interface IWorldLayerRendererPlatform {
     delete(): void;
-    setWorldLayer(worldLayer: WorldLayer, exploreMap: ExploreMap, sizeChanged: boolean): void;
+    setWorldLayer(worldLayer: WorldLayer, exploreMap: ExploreMap, sizeChanged: boolean, exploredData?: Uint8Array): void;
+    setExploredAlpha(tiles: IExploredTileAlpha[]): void;
     updateTileLightBlock(x: number, y: number, value: number): void;
     updateTileLightBlockMap(lightBlockMap: Uint8Array): void;
 }

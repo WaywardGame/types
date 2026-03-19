@@ -9,6 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type ExploreMap from "@wayward/game/renderer/exploreMap/ExploreMap";
+import type { IExploredTileAlpha } from "@wayward/game/renderer/fieldOfView/IFieldOfViewPlatform";
 import type { WebGpuRendererContext } from "@wayward/game/renderer/platform/webgpu/WebGpuRendererContext";
 import type { IWorldLayerRendererPlatform } from "@wayward/game/renderer/world/IWorldLayerRendererPlatform";
 import type { WorldLayer } from "@wayward/game/renderer/world/WorldLayer";
@@ -16,7 +17,8 @@ import type { WorldLayerRenderer } from "@wayward/game/renderer/world/WorldLayer
 export declare class WorldLayerRendererWebGpu implements IWorldLayerRendererPlatform {
     constructor(context: WebGpuRendererContext, worldLayerRenderer: WorldLayerRenderer);
     delete(): void;
-    setWorldLayer(worldLayer: WorldLayer, exploreMap: ExploreMap, sizeChanged: boolean): void;
+    setWorldLayer(worldLayer: WorldLayer, exploreMap: ExploreMap, sizeChanged: boolean, exploredData?: Uint8Array): void;
+    setExploredAlpha(tiles: IExploredTileAlpha[]): void;
     updateTileLightBlock(x: number, y: number, value: number): void;
     updateTileLightBlockMap(lightBlockMap: Uint8Array): void;
 }
