@@ -10,14 +10,44 @@
  */
 import type Island from "@wayward/game/game/island/Island";
 import ExploreMap from "@wayward/game/renderer/exploreMap/ExploreMap";
+import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import type { IPreSerializeCallback } from "@wayward/game/save/serializer/ISerializer";
 export interface IExploredMapClientDataOld {
     exploredMapEncodedData: number[][];
 }
+export interface ICurseVisualExploredState {
+    hiddenTiles: number[];
+    fastHideStep?: number;
+    fastRestoreStep?: number;
+    hideOrigin?: IVector2;
+    restoreOrigin?: IVector2;
+    weightedRestoreStep?: number;
+}
+export interface ICurseVisualExploredStateUpdate {
+    addHiddenTiles?: number[];
+    removeHiddenTiles?: number[];
+    replaceHiddenTiles?: number[];
+    clearState?: true;
+    fastHideStep?: number | null;
+    fastRestoreStep?: number | null;
+    hideOrigin?: IVector2 | null;
+    restoreOrigin?: IVector2 | null;
+    weightedRestoreStep?: number | null;
+}
+export interface ICurseVisualExploredStateIslandUpdates {
+    clearAll?: true;
+    updatesByZ?: Record<number, ICurseVisualExploredStateUpdate>;
+}
 export default class ExploredMapClientData implements IPreSerializeCallback {
     exploredMapEncodedData: Map<string, Record<number, number[]>>;
+    curseVisualStates: Map<string, Record<number, ICurseVisualExploredState>>;
     private readonly exploredMaps;
     preSerializeObject(): void;
     clear(): void;
     getExploreMap(island: Island, z: number): ExploreMap;
+    getCurseVisualState(island: Island | string, z: number, create?: boolean): ICurseVisualExploredState | undefined;
+    clearCurseVisualState(island: Island | string, z?: number): void;
+    applyCurseVisualStateUpdates(islandId: string, islandUpdates: ICurseVisualExploredStateIslandUpdates): void;
+    private applyCurseVisualStateUpdate;
+    private applyCurseVisualScalarUpdate;
 }
