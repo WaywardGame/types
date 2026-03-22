@@ -15,9 +15,9 @@ import Deity from "@wayward/game/game/deity/Deity";
 import Doodad from "@wayward/game/game/doodad/Doodad";
 import type Entity from "@wayward/game/game/entity/Entity";
 import EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
-import type { IAttack, ICausesDamage, IEntityConstructorOptions, IMovingData, MoveFlag } from "@wayward/game/game/entity/IEntity";
+import type { IAttack, IEntityConstructorOptions, IMovingData, MoveFlag } from "@wayward/game/game/entity/IEntity";
 import { AttackType, DamageType, IStatChangeInfo, StatusChangeReason } from "@wayward/game/game/entity/IEntity";
-import type { HumanTag, ICheckUnderOptions as ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkToChangeReason } from "@wayward/game/game/entity/IHuman";
+import type { HumanTag, ICheckUnderOptions as ICheckInteractionOptions, ICrafted, ICustomizations, IHumanEvents, ILoadOnIslandOptions, IRestData, IVoyageInfo, WalkToChangeReason } from "@wayward/game/game/entity/IHuman";
 import { EquipType, RestCancelReason } from "@wayward/game/game/entity/IHuman";
 import { SkillType } from "@wayward/game/game/entity/skill/ISkills";
 import type { IStat } from "@wayward/game/game/entity/IStats";
@@ -69,6 +69,7 @@ import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import { IRange } from "@wayward/utilities/math/Range";
 import type { RuneEffectType } from "@wayward/game/game/item/runes/RuneEffects";
 interface IEquip {
     item: Item;
@@ -194,6 +195,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * Luck is a multiplier applied to some random chance calculations.
      */
     get luck(): number;
+    private getEquipmentLuckModifier;
     get debug(): Debug.JIT<[]>;
     updateDirection(tile: Tile | Direction.Cardinal, updateVehicleDirection?: boolean): Direction.Cardinal;
     /**
@@ -234,7 +236,11 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     resetMovementIntent(): void;
     createItemInInventory(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, context?: IActionContext): Item;
     cloneItemIntoInventory(itemToClone: Item, itemType?: ItemType): Item;
-    damageRandomEquipment(): void;
+    /**
+     * Damages a random piece of equipped armor.
+     * @param amount The number of pieces of equipment to damage. Default is 1.
+     */
+    damageRandomEquipment(amount?: number): void;
     getDamageModifier(): number;
     calculateDamageAmount(attackType: AttackType, weapon?: Item, ammoItem?: Item): number;
     isDualWielding(): boolean;
@@ -261,7 +267,10 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     isOffHandDisabled(): boolean;
     getEquipSlotForItem(item: Item, includeDisabled?: true): EquipType | undefined;
     getFanaticism(deity: Deity): number;
-    getCurse(refresh?: true): number;
+    getCurseRate(): number;
+    updateCurseRate(): void;
+    accumulateCurse(amount: IRange): void;
+    resetAccumulatedCurse(): void;
     canSeePosition(type: CanASeeBType, islandId: IslandId, x: number, y: number, z: number, fieldOfView?: FieldOfView, customRadius?: number): boolean;
     /**
      * Gets the max health of the player.
@@ -315,7 +324,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      * All the milestones we need to check on game load.
      */
     protected checkOnLoadMilestones(): void;
-    setVehicle(item: Item | undefined, extinguishTorches?: boolean): boolean;
+    setVehicle(item: Item | undefined, extinguishTorches?: boolean, skipMessage?: boolean): boolean;
     getWeightStatus(): WeightStatus;
     /**
      * Extinguishes all torches the player is holding of they are swimming.
@@ -341,8 +350,9 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     getMovementIntent(): IMovementIntent;
     updateMovementIntent(movementIntent: IMovementIntent): boolean;
     protected onDie(): void;
-    checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
-    damageByInteractingWith(thing: Doodad | TileEvent, options: ICheckUnderOptions | undefined, damageLocation: EquipType): ICheckUnderOptions;
+    checkUnder(inFacingDirection?: boolean, options?: ICheckInteractionOptions): ICheckInteractionOptions;
+    doDoodadTileEventDamage(thing: Doodad | TileEvent, damageLocation: EquipType, onlyContinuousDamage?: boolean): void;
+    damageByInteractingWith(thing: Doodad | TileEvent, options: ICheckInteractionOptions | undefined, damageLocation: EquipType): ICheckInteractionOptions;
     equip(item: Item, slot: EquipType, internal?: boolean, skipRevertItem?: boolean): boolean;
     /**
      * Unequips an item.
@@ -394,7 +404,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      */
     tick(isPassTurn?: boolean, turnType?: TurnTypeFlag): boolean;
     private restTick;
-    getDamage(causesDamage: ICausesDamage, equipType?: EquipType): number;
+    getDamage(baseDamage: number, equipType?: EquipType): number;
     private slitherSuckerDamage;
     /**
      * Event handler for when resting begins, weight changes, or strength changes.

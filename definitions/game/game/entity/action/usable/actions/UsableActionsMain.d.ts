@@ -26,21 +26,22 @@ export declare enum UsableActionSet {
     UseItem = 7,
     PickUp = 8,
     Containers = 9,
-    UseCreature = 10,
-    UseNPC = 11,
-    Rest = 12,
-    WithHands = 13,
-    Till = 14,
-    Misc = 15,
-    Equip = 16,
-    Craft = 17,
-    XWithY = 18,
-    ItemMisc = 19,
-    ItemMove = 20,
-    ItemDrop = 21,
-    Rename = 22,
-    Protect = 23,
-    Main = 24
+    DumpItems = 10,
+    UseCreature = 11,
+    UseNPC = 12,
+    Rest = 13,
+    WithHands = 14,
+    Till = 15,
+    Misc = 16,
+    Equip = 17,
+    Craft = 18,
+    XWithY = 19,
+    ItemMisc = 20,
+    ItemMove = 21,
+    ItemDrop = 22,
+    Rename = 23,
+    Protect = 24,
+    Main = 25
 }
 export declare const usableActionSets: {
     0: UsableActionGenerator<[]>;
@@ -53,9 +54,9 @@ export declare const usableActionSets: {
     7: import("./UsableActionsDynamic").default<import("@wayward/game/game/entity/action/usable/actions/item/UsableActionsUseItem").IUseItemAction, import("@wayward/game/game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
     8: UsableActionGenerator<[]>;
     9: UsableActionGenerator<[]>;
-    10: import("./UsableActionsDynamic").default<import("@wayward/game/game/entity/action/usable/actions/UsableActionsUseCreature").IUseCreatureAction, import("@wayward/game/game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
-    11: import("./UsableActionsDynamic").default<import("@wayward/game/game/entity/action/usable/actions/UsableActionsUseNPC").IUseNPCAction, import("@wayward/game/game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
-    12: UsableActionGenerator<[]>;
+    10: UsableActionGenerator<[]>;
+    11: import("./UsableActionsDynamic").default<import("@wayward/game/game/entity/action/usable/actions/UsableActionsUseCreature").IUseCreatureAction, import("@wayward/game/game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
+    12: import("./UsableActionsDynamic").default<import("@wayward/game/game/entity/action/usable/actions/UsableActionsUseNPC").IUseNPCAction, import("@wayward/game/game/entity/action/usable/IUsableAction").IUsableActionRequirements>;
     13: UsableActionGenerator<[]>;
     14: UsableActionGenerator<[]>;
     15: UsableActionGenerator<[]>;
@@ -63,9 +64,10 @@ export declare const usableActionSets: {
     17: UsableActionGenerator<[]>;
     18: UsableActionGenerator<[]>;
     19: UsableActionGenerator<[]>;
-    20: UsableActionGenerator<[container?: import("@wayward/game/game/entity/action/usable/actions/item/UsableActionsItemMove").UsableActionsItemMoveContainer | undefined]>;
-    21: UsableActionGenerator<[isDropMenu?: true | undefined]>;
-    22: UsableActionGenerator<[]>;
+    20: UsableActionGenerator<[]>;
+    21: UsableActionGenerator<[container?: import("@wayward/game/game/entity/action/usable/actions/item/UsableActionsItemMove").UsableActionsItemMoveContainer | undefined]>;
+    22: UsableActionGenerator<[isDropMenu?: true | undefined]>;
     23: UsableActionGenerator<[]>;
     24: UsableActionGenerator<[]>;
+    25: UsableActionGenerator<[]>;
 };

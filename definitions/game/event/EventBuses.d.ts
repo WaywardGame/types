@@ -52,6 +52,7 @@ import type HoveredTileTracker from "@wayward/game/ui/screen/screens/game/util/H
 import type ActionMenuHandler from "@wayward/game/ui/screen/screens/game/util/movement/ActionMenuHandler";
 import type InteractionManager from "@wayward/game/ui/screen/screens/game/util/movement/InteractionManager";
 import type MovementHandler from "@wayward/game/ui/screen/screens/game/util/movement/MovementHandler";
+import type PathQueryCache from "@wayward/game/ui/screen/screens/game/util/movement/PathQueryCache";
 import type PathingHandler from "@wayward/game/ui/screen/screens/game/util/movement/PathingHandler";
 import { EventBusManager } from "@wayward/utilities/event/EventBusManager";
 export declare enum EventBus {
@@ -101,8 +102,9 @@ export declare enum EventBus {
     UiItemComponentStatic = 43,
     UiMovementHandler = 44,
     UiPathingHandler = 45,
-    UsableActions = 46,
-    WorldRenderer = 47
+    UiPathQueryCache = 46,
+    UsableActions = 47,
+    WorldRenderer = 48
 }
 declare const eventBuses: {
     [EventBus.Actions](): ActionExecutor<any, any, any, any, any>;
@@ -151,6 +153,7 @@ declare const eventBuses: {
     [EventBus.UiItemComponentStatic](): ItemComponentEventBus;
     [EventBus.UiMovementHandler](): MovementHandler;
     [EventBus.UiPathingHandler](): PathingHandler;
+    [EventBus.UiPathQueryCache](): PathQueryCache;
     [EventBus.UsableActions](): UsableAction;
     [EventBus.WorldRenderer](): WorldRenderer;
 };
@@ -202,8 +205,9 @@ export declare const eventBusManager: EventBusManager<EventBus, {
     43(): ItemComponentEventBus;
     44(): MovementHandler;
     45(): PathingHandler;
-    46(): UsableAction;
-    47(): WorldRenderer;
+    46(): PathQueryCache;
+    47(): UsableAction;
+    48(): WorldRenderer;
 }>;
 /**
  * For backwards compat / ease of use

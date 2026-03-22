@@ -15,6 +15,7 @@ import type Item from "@wayward/game/game/item/Item";
 declare const _default: UseInfo<{
     civilizationScore: number | undefined;
     growingSpeed: number | undefined;
+    hasGrowingSpeed: number | boolean | undefined;
     entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
     type: import("../../../../item/IItem").ItemType;

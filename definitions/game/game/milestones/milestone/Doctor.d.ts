@@ -14,7 +14,7 @@ import MilestoneDefinition from "@wayward/game/game/milestones/MilestoneDefiniti
 declare const _default: (() => MilestoneDefinition) & {
     readonly id: <TYPE extends DoctorType>(type: TYPE, ...params: IDoctorId[TYPE]) => `${TYPE}:${string}`;
     readonly getStatuses: () => StatusType[];
-    readonly getCures: (status: StatusType) => (`method:${string}` | `item:${string}`)[];
+    readonly getCures: (status: StatusType) => (`item:${string}` | `method:${string}`)[];
     readonly translate: (id: DoctorId) => import("../../../language/impl/TranslationImpl").default;
     readonly isDiscovered: <TYPE extends DoctorType>(type: TYPE, ...params: IDoctorId[TYPE]) => boolean;
     readonly translateCuresList: (status: StatusType) => import("../../../language/impl/TranslationImpl").default[];

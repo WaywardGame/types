@@ -152,4 +152,5 @@ export interface IAutomationSetupItem {
     magics?: MagicalPropertyType[];
     durability?: number;
     weightMultiplier?: number;
+    decayMultiplier?: number;
 }

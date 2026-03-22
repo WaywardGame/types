@@ -110,7 +110,7 @@ export declare const CREATURE_ZONE_ISLAND_DISTANCE_TIER_MODIFIER_MAX = 3;
 /**
  * The maximum chance for an additional tier to be added to an island due to its distance.
  *
- * IE, at 0.9, for an island to have a tier of 3, at maximum distance, the chance is `0.8 * 0.8 * 0.8`
+ * IE, at 0.8, for an island to have a tier of 3, at maximum distance, the chance is `0.8 * 0.8 * 0.8`
  */
 export declare const CREATURE_ZONE_ISLAND_DISTANCE_TIER_CHANCE_MAX = 0.8;
 /**

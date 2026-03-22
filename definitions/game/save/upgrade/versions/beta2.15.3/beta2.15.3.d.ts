@@ -8,6 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-import Riddle from "@wayward/game/game/riddle/Riddle";
-declare const riddles: Record<Riddle, string | string[]>;
-export default riddles;
+declare const _default: Record<string, import("@wayward/game/save/upgrade/UpgradeVersion").IUpgradeVersion>;
+export default _default;

@@ -24,12 +24,15 @@ export interface IGameIconsHost {
     pvp: boolean;
     mods: Array<[string, ModLoadability]>;
     friends: ISteamFriend[];
+    milestoneModifiersAllowed: boolean;
+    alwaysShowMultiplayerInfo?: boolean;
 }
 export default class GameIcons extends Component implements IRefreshable {
     private readonly gameMode;
     private readonly pvp;
     private readonly mods;
     private readonly friends;
+    private readonly milestoneModifiers;
     get hasLabels(): boolean;
     private readonly hostRef;
     get host(): IGameIconsHost;
@@ -40,6 +43,8 @@ export default class GameIcons extends Component implements IRefreshable {
     private getGameModeText;
     private getModsText;
     private getFriendsText;
+    private getMilestoneModifiersText;
+    private getMilestoneModifiersIconClass;
 }
 export interface IGameModifiersHost {
     getOptionsIcons(): Array<[GameOptionsIcon, Array<ArrayOr<CustomModifierTranslation>>]>;

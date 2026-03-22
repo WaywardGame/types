@@ -73,6 +73,7 @@ import type { HelpArticle, IHelpArticle } from "@wayward/game/ui/screen/screens/
 import type { ModOptionSectionInitializer } from "@wayward/game/ui/screen/screens/menu/menus/options/TabMods";
 import type WorldZ from "@wayward/utilities/game/WorldZ";
 import Objects from "@wayward/utilities/object/Objects";
+import type { DataComponentType } from "@wayward/game/game/entity/data/DataComponent";
 export interface IModdable {
     /**
      * Do not provide or modify this value, only reference it. This is set by the modding system during the process of registration.
@@ -87,57 +88,58 @@ export declare enum ModRegistrationType {
     Bulk = 3,
     Command = 4,
     Creature = 5,
-    Dialog = 6,
-    Dictionary = 7,
-    Doodad = 8,
-    DoodadExtra = 9,
-    DoodadGroup = 10,
-    DoodadTag = 11,
-    EntityTag = 12,
-    EquipType = 13,
-    GenericEnum = 14,
-    HelpArticle = 15,
-    InspectionType = 16,
-    InterModRegistration = 17,
-    InterModRegistry = 18,
-    Interrupt = 19,
-    InterruptChoice = 20,
-    Item = 21,
-    ItemExtra = 22,
-    ItemGroup = 23,
-    ItemTag = 24,
-    Language = 25,
-    LanguageExtension = 26,
-    Load = 27,
-    MagicalProperty = 28,
-    MenuBarButton = 29,
-    Message = 30,
-    MessageSource = 31,
-    MusicTrack = 32,
-    Note = 33,
-    NPC = 34,
-    OptionsSection = 35,
-    Overlay = 36,
-    Override = 37,
-    Packet = 38,
-    Prompt = 39,
-    QuadrantComponent = 40,
-    Quest = 41,
-    QuestRequirement = 42,
-    Registry = 43,
-    Skill = 44,
-    SoundEffect = 45,
-    Stat = 46,
-    Status = 47,
-    Terrain = 48,
-    TerrainDecoration = 49,
-    TileEvent = 50,
-    TileGroup = 51,
-    TileLayerType = 52,
-    UsableActions = 53,
-    UsableActionType = 54,
-    UsableActionTypePlaceholder = 55,
-    WorldLayer = 56
+    DataComponentType = 6,
+    Dialog = 7,
+    Dictionary = 8,
+    Doodad = 9,
+    DoodadExtra = 10,
+    DoodadGroup = 11,
+    DoodadTag = 12,
+    EntityTag = 13,
+    EquipType = 14,
+    GenericEnum = 15,
+    HelpArticle = 16,
+    InspectionType = 17,
+    InterModRegistration = 18,
+    InterModRegistry = 19,
+    Interrupt = 20,
+    InterruptChoice = 21,
+    Item = 22,
+    ItemExtra = 23,
+    ItemGroup = 24,
+    ItemTag = 25,
+    Language = 26,
+    LanguageExtension = 27,
+    Load = 28,
+    MagicalProperty = 29,
+    MenuBarButton = 30,
+    Message = 31,
+    MessageSource = 32,
+    MusicTrack = 33,
+    Note = 34,
+    NPC = 35,
+    OptionsSection = 36,
+    Overlay = 37,
+    Override = 38,
+    Packet = 39,
+    Prompt = 40,
+    QuadrantComponent = 41,
+    Quest = 42,
+    QuestRequirement = 43,
+    Registry = 44,
+    Skill = 45,
+    SoundEffect = 46,
+    Stat = 47,
+    Status = 48,
+    Terrain = 49,
+    TerrainDecoration = 50,
+    TileEvent = 51,
+    TileGroup = 52,
+    TileLayerType = 53,
+    UsableActions = 54,
+    UsableActionType = 55,
+    UsableActionTypePlaceholder = 56,
+    WorldLayer = 57
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -362,6 +364,10 @@ export interface ILoadRegistration extends IBaseModRegistration {
 }
 export interface IWorldLayerRegistration extends IBaseModRegistration {
     type: ModRegistrationType.WorldLayer;
+    name: string;
+}
+export interface IDataComponentTypeRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.DataComponentType;
     name: string;
 }
 export interface ITileLayerTypeRegistration extends IBaseModRegistration {
@@ -782,6 +788,10 @@ declare namespace Register {
      * @param description The definition of the equip slot.
      */
     function equipType(name: string, description: IEquipTypeDescription): <K extends string | number | symbol, T extends Record<K, EquipType>>(target: T, key: K) => void;
+    /**
+     * Registers a DataComponentType, allowing you to store custom, strongly-typed data on entities.
+     */
+    function dataComponentType(name: string): <K extends string | number | symbol, T extends Record<K, DataComponentType>>(target: T, key: K) => void;
     function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends Record<K, InterModRegistry<V>>>(target: T, key: K) => void;
     function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends Record<K, InterModRegistration<V>>>(target: T, key: K) => void;
     /**
@@ -912,6 +922,7 @@ export declare namespace Registry {
      * Used internally for `Registry<H, T>.get(key)`
      */
     class Registered implements Objects.ICloneable {
+        static get<T>(value: T | Registered): T | undefined;
         readonly mod?: string | ModInformation;
         readonly type: RegistryRegisteredIntermediateType;
         readonly path: PropertyKey[];

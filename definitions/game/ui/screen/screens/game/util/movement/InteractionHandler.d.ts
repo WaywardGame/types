@@ -13,6 +13,7 @@ import type { IBindHandlerApi } from "@wayward/game/ui/input/Bind";
 import type HoveredTileTracker from "@wayward/game/ui/screen/screens/game/util/HoveredTileTracker";
 import type ActionMenuHandler from "@wayward/game/ui/screen/screens/game/util/movement/ActionMenuHandler";
 import type MovementHandler from "@wayward/game/ui/screen/screens/game/util/movement/MovementHandler";
+import type PathQueryCache from "@wayward/game/ui/screen/screens/game/util/movement/PathQueryCache";
 import type PathingHandler from "@wayward/game/ui/screen/screens/game/util/movement/PathingHandler";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IInteractionHandlerEvents {
@@ -23,6 +24,7 @@ export interface IInteractionHandlerHost {
     surface?: Component;
     hoveredTile: HoveredTileTracker;
     movement: MovementHandler;
+    pathQuery: PathQueryCache;
     pathing: PathingHandler;
     actionMenu: ActionMenuHandler;
 }
@@ -32,6 +34,7 @@ export default class InteractionHandler extends EventEmitter.Host<IInteractionHa
     protected get host(): IInteractionHandlerHost | undefined;
     protected get hoveredTile(): HoveredTileTracker | undefined;
     protected get movement(): MovementHandler | undefined;
+    protected get pathQuery(): PathQueryCache | undefined;
     protected get pathing(): PathingHandler | undefined;
     protected get actionMenu(): ActionMenuHandler | undefined;
     constructor(host: IInteractionHandlerHost);

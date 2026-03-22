@@ -436,9 +436,22 @@ export interface ICrafted {
     newUnlock: boolean;
 }
 export interface ICheckUnderOptions {
-    skipDoodadsAndTileEvents?: boolean;
+    /**
+     * If true, the player will be damaged for doodads and tile events that continuously damage the player like acid, fire, etc.
+     */
+    doContinousDamage?: boolean;
+    /**
+     * If true, the player will be damaged from static doodads that should just hurt "once" like cactus and will trample crops.
+     */
+    doStaticDoodadsTileEvents?: boolean;
+    /**
+     * If true, the player will damage items on the ground via crushing.
+     */
     doItemCrushing?: boolean;
-    burned?: boolean;
+    /**
+     * If true, the player will be damaged from lava, fires, etc.
+     */
+    doBurnDamage?: boolean;
 }
 export declare const craftingChances: Descriptions<RecipeLevel, number>;
 export interface IHumanOld extends Partial<Human> {

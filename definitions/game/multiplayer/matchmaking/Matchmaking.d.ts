@@ -21,5 +21,5 @@ export declare class Matchmaking implements IMatchmaking {
     get isConnected(): boolean;
     connect(): void;
     disconnect(): void;
-    send(data: ArrayBuffer | Uint8Array | MatchmakingMessageData, channel?: string): void;
+    send(data: ArrayBuffer | Uint8Array<ArrayBuffer> | MatchmakingMessageData, channel?: string): void;
 }

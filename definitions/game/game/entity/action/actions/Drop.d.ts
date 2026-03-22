@@ -20,6 +20,7 @@ import { type IContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type Tile from "@wayward/game/game/tile/Tile";
 import Translation from "@wayward/game/language/Translation";
+import { DropLocation } from "@wayward/game/save/data/ISaveDataGlobal";
 export declare enum DropAllowProtected {
     Disallow = 0,
     AllowSafe = 1,
@@ -27,6 +28,10 @@ export declare enum DropAllowProtected {
 }
 export interface IDropItemFilterArgument extends IMoveItemFilterArgument {
     allowProtected?: DropAllowProtected;
+    /**
+     * Overridable drop location
+     */
+    dropLocation?: DropLocation;
 }
 export declare class DropItemFilterArgument extends MoveItemFilterArgument<IDropItemFilterArgument> {
     validate(executor: Entity | undefined, value: unknown): value is IDropItemFilterArgument;
@@ -35,22 +40,23 @@ export declare class DropItemFilterArgument extends MoveItemFilterArgument<IDrop
 }
 export declare enum TileDropType {
     Tile = 0,
-    Doodad = 1,
-    Vehicle = 2
+    TileContainer = 1,
+    Doodad = 2,
+    Vehicle = 3
 }
 interface IResolvedTileDrop {
     type: TileDropType;
     into: IContainer;
     blocker?: Translation;
 }
-export declare function resolveTileDrop(human: Human | undefined, tile: Tile, items?: MoveItemsSourceArgumentResolvable, dropIntoContainers?: boolean): IResolvedTileDrop;
-export declare function resolveTileDrop(human: Human, tile?: Tile, items?: MoveItemsSourceArgumentResolvable, dropIntoContainers?: boolean): IResolvedTileDrop;
+export declare function resolveTileDrop(human: Human | undefined, tile: Tile, items?: MoveItemsSourceArgumentResolvable, dropLocation?: DropLocation, dropIntoContainers?: boolean): IResolvedTileDrop;
+export declare function resolveTileDrop(human: Human, tile?: Tile, items?: MoveItemsSourceArgumentResolvable, dropLocation?: DropLocation, dropIntoContainers?: boolean): IResolvedTileDrop;
 export interface IDropCanUse {
     items: Item[];
     tile: Tile;
     into?: IContainer;
 }
-export declare function drop(human: Human | undefined, into: IContainer, items: Item[]): {
+export declare function drop(human: Human | undefined, into: IContainer, items: Item[], skipMessage?: boolean): {
     itemsDropped: Item[];
     failedDrops: Item[];
 };

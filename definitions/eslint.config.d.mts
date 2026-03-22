@@ -1,2 +1,2 @@
-declare const _default: import("@typescript-eslint/utils/dist/ts-eslint").FlatConfig.ConfigArray;
+declare const _default: import("typescript-eslint").Config;
 export default _default;

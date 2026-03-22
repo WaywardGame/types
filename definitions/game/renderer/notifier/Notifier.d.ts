@@ -31,6 +31,7 @@ export declare class Notifier {
     constructor(context: IRendererContext, capacity: number);
     setResources(resourceContainer: IResourceContainer): void;
     clear(): void;
+    clearFor(location: INotificationLocation): void;
     delete(): void;
     addItem(location: INotificationLocation, itemNotifierType: ItemNotifierType, type: DisplayableItemType, baseType?: DisplayableItemType): void;
     addCreature(location: INotificationLocation, creatureNotifierType: CreatureNotifierType, type: CreatureType, aberrant?: boolean): void;

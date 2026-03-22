@@ -59,7 +59,8 @@ export declare enum NotifierIconType {
     ItemDecay = 5,
     Talk = 6,
     DualWieldEnabled = 7,
-    DualWieldDisabled = 8
+    DualWieldDisabled = 8,
+    Ringing = 9
 }
 export declare enum MarkerType {
     Tamed = 0,

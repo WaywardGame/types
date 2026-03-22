@@ -49,8 +49,9 @@ export default class CreatureManager extends EntityManager<Creature, IEntityRemo
      * @param type The type of creature to spawn.
      * @param tile The tile
      */
-    spawn(type: CreatureType, tile: Tile, options?: ICreatureSpawnOptions): Creature | undefined;
+    spawn(type: CreatureType, tile: Tile, options: ICreatureSpawnOptions): Creature | undefined;
     spawnFromZone(tile: Tile, bypassCreatureLimit?: boolean, checkTerrainType?: boolean): Creature | undefined;
+    getAberrantChance(tile: Tile): number;
     createFake(type: CreatureType, aberrant: boolean, tile?: Tile, id?: number): Creature;
     exists(creature: Creature): boolean;
     maybeSpawnClawWorm(target: Human | Creature): void;

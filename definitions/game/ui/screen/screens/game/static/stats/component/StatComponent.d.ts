@@ -20,25 +20,6 @@ import Text from "@wayward/game/ui/component/Text";
 import type { IStatDisplayDescription } from "@wayward/game/ui/screen/screens/game/static/stats/IStatDisplayDescription";
 import ImagePath from "@wayward/game/ui/util/ImagePath";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export declare enum StatClasses {
-    List = "stats-list",
-    Row = "stat-row",
-    Row_FirstOfType = "stat-row--first-of-type",
-    RowBar = "stat-bar-row",
-    RowAttribute = "stat-attribute-row",
-    Main = "stat",
-    _Type_ = "stat--type-",
-    Label = "stat-label",
-    Display = "stat-display",
-    Text = "stat-text",
-    Bar = "stat-bar",
-    BarDisplay = "stat-bar-display",
-    BarLabel = "stat-bar-label",
-    Attribute = "stat-attribute",
-    AttributeMulti = "stat-attribute-multi",
-    AttributeDisplay = "stat-attribute-display",
-    AttributeLabel = "stat-attribute-label"
-}
 export interface IStatComponentEvents extends Events<Component> {
     refresh(): any;
     update(): any;

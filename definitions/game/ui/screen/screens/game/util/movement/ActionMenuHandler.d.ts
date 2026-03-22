@@ -24,7 +24,6 @@ export default class ActionMenuHandler extends InteractionHandler {
     private overlay?;
     private path?;
     private contextMenu?;
-    private previewDistance;
     protected onActionsInFront(api: IBindHandlerApi): boolean;
     protected onActions(api: IBindHandlerApi): boolean;
     private reset;
@@ -32,5 +31,4 @@ export default class ActionMenuHandler extends InteractionHandler {
     private onHide;
     private onContextMenuOptionHovered;
     private updatePath;
-    private getInitialPath;
 }

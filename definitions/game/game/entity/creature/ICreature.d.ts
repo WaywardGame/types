@@ -370,6 +370,10 @@ export interface ICreatureDescription extends IModdable, ITemperatureDescription
      * Defaults to true (or undefined, which is treated as true)
      */
     slowedByCobwebs?: boolean;
+    /**
+     * The size of the creature's attack which equates to how many pieces of equipment it can hit (damage) in one attack.
+     */
+    attackSize?: number;
 }
 export interface ICreatureLoot {
     item: ItemType;
@@ -486,6 +490,7 @@ export declare const CREATURE_MAX_HEALTH_BONUS_TAME = 1.1;
 export declare const CREATURE_MAX_HEALTH_BONUS_OFFER = 1.05;
 export declare const CREATURE_MAX_HEALTH_BONUS_PET = 1.01;
 export declare const CREATURE_DEFAULT_TAME_DIFFICULTY_UNSET = 25;
+export declare const CREATURE_GOLEM_TAME_BONUS = 25000;
 export interface ICreatureAttackOutcomeBase {
     enemy?: Human | Creature;
     willAttack: boolean;
@@ -528,9 +533,9 @@ export interface ICreatureSpawnOptions {
      */
     bypassTiles?: boolean;
     /**
-     * If provided, forces the spawned creature's aberrant state to be the passed boolean. True = aberrant, false = not aberrant. If not provided, the aberrant state is decided based on chance.
+     * If provided, forces the spawned creature's aberrant state to be the passed boolean. True = aberrant, false = not aberrant. If a number is provided, we will use seededRandom.chance() to determine aberrant state based on the number provided (0-1).
      */
-    forceAberrant?: boolean;
+    aberrant: boolean | number;
     /**
      * If set, this will overwrite the creature's description for which tiles it can spawn on. This will also change which tiles it can path on to, differing from its set definitions.
      */

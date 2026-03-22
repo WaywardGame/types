@@ -28,13 +28,14 @@ export declare enum Stat {
     AttackDefenseRow = 14,
     Generic = 15,
     Temperature = 16,
-    Produce = 17,
-    Happiness = 18,
-    Tamed = 19,
-    Petting = 20,
-    Waste = 21,
-    Petted = 22,
-    DespawnProtection = 23
+    CurseRate = 17,
+    Produce = 18,
+    Happiness = 19,
+    Tamed = 20,
+    Petting = 21,
+    Waste = 22,
+    Petted = 23,
+    DespawnProtection = 24
 }
 export declare const CORE_STATS: Stat[];
 export type IStats = {

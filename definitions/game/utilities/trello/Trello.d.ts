@@ -9,15 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IVersionInfo } from "@wayward/utilities/Version";
-import type { IChangelog, ITrello, ITrelloBoard, ITrelloCard } from "@wayward/game/utilities/trello/ITrello";
+import type { IChangelog, ITrello, ITrelloCard } from "@wayward/game/utilities/trello/ITrello";
 export default class Trello implements ITrello {
+    private generatedChangelog?;
     getCard(id: string, ...fields: string[]): Promise<ITrelloCard>;
     getChangelog(versionInfo: IVersionInfo): Promise<IChangelog | undefined>;
-    getVersions(maxVersion?: IVersionInfo, board?: ITrelloBoard): Promise<IVersionInfo[]>;
-    private getCards;
-    private getBoard;
-    private getListVersionInfo;
-    private findChangelogList;
-    private parseChangelog;
+    getVersions(maxVersion?: IVersionInfo): Promise<IVersionInfo[]>;
+    private getGeneratedChangelog;
 }
 export declare const trello: Trello;

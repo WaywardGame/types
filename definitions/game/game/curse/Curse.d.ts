@@ -20,7 +20,8 @@ import type { WeightedOption } from "@wayward/utilities/random/IRandom";
 import DataComponent from "@wayward/game/game/entity/data/DataComponent";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
-export declare const CURSE_CAP = 10000;
+export declare const CURSE_CAP = 25000;
+export declare const CURSE_RATE_ACCUMULATION_STEEPNESS = 10;
 export declare const CURSE_COMPONENT_ATTACK_CAP = 50;
 export declare const CURSE_COMPONENT_ATTACK_FLOOR = 1;
 export declare const CURSE_COMPONENT_DEFENSE_CAP = 100;
@@ -57,8 +58,11 @@ declare namespace Curse {
     const getSkill: typeof getSkillValue;
     function getComponentValue(human: Human, component: CurseComponent): number;
     function getComponentCap(component: CurseComponent): number | null;
-    function getValue(human: Human): number;
+    function getRate(human?: Human): number;
+    function getAccumulatedChance(human?: Human): number;
+    function getDisplayChance(human?: Human): number;
 }
+export declare const CURSE_CHANCE_PER_TURN: IRange<number>;
 /**
  * In the following graph, this value is `b`:
  * https://www.desmos.com/calculator/sgdtqdqzup
@@ -69,15 +73,6 @@ export declare const CURSE_EVENTS_MAX = 5;
  * https://www.desmos.com/calculator/sgdtqdqzup
  */
 export declare const CURSE_EVENTS_MAELSTROM_SPEED = 1;
-/**
- * The chance that a curse event will occur, given the opportunity.
- * The chance scales up from the minimum (left) value at 0% curse, to the maximum (right) value at 100% curse.
- *
- * There can be up to CURSE_EVENTS_MAX opportunities per night, based on maelstrom level.
- * At 0-1 maelstrom, there are up to 2 opportunities per night. (Per player, because curse events are localised.)
- * Additional opportunities before the top opportunity always use the max chance.
- */
-export declare const CURSE_EVENTS_CHANCE: IRange<number>;
 export declare const CURSE_EVENTS_DEFAULT_RADIUS = 25;
 /**
  * An IRangeRange for randomly selecting the cooldown time between curse event nights.
@@ -109,6 +104,11 @@ export declare const CURSE_EVENTS_RUNE_CHANCE_MULTIPLIER_LUCKY: IRange<number>;
 export declare const CURSE_EVENTS_RUNES_KILL_TAME: Array<WeightedOption<IRange>>;
 export declare const CURSE_EVENTS_RUNES_SURVIVED: IRange<number>;
 export declare const CURSE_EVENTS_CREATURE_WANDER_CURSEBEARER_PRIORITY: IRange<number>;
+export declare const CURSE_EVENTS_VISUAL_EXPLORED_FADE_TURNS = 30;
+export declare const CURSE_EVENTS_VISUAL_EXPLORED_FAST_PHASE_TURNS = 50;
+export declare const CURSE_EVENTS_VISUAL_EXPLORED_MAIN_ALGORITHM_RADIUS = 150;
+export declare const CURSE_EVENTS_VISUAL_EXPLORED_ALPHA_BATCH_SIZE = 4096;
+export declare const CURSE_EVENTS_VISUAL_EXPLORED_VISIBLE_BUFFER_RADIUS = 1;
 declare namespace Curse {
     interface Helper {
         context: CurseEventContext;
@@ -120,18 +120,20 @@ declare namespace Curse {
     function isMysteryForClient(event: CurseEventInstance): boolean;
     function isMysteryForHuman(event: CurseEventInstance, human: Human): boolean;
     function getOwnerEvent(island: Island, creature: Creature): CurseEventInstance | undefined;
-    function willHaveEventsTonight(island: Island): boolean;
-    function canWarnAboutIncomingEvents(island: Island): boolean;
+    function eventsOffCooldown(island: Island): boolean;
+    function isCooldownMode(island: Island): boolean;
     function getCooldownMultiplier(island: Island, humans?: Human<unknown, number, ReferenceType.NPC | ReferenceType.Player, unknown>[]): number;
     function clearCooldown(island: Island): void;
     function resetCooldown(island: Island): void;
     function updateRuneItemsDisplay(island: Island): void;
     function tickCurse(island: Island, humans: Human[]): void;
     function reload(island: Island, isNew?: boolean): void;
-    function spawnCurseEvents(island: Island, humans: Human[]): void;
-    function attemptCurseEventSpawn(category: CurseCategory, human: Human, curse: number, humans: Human[], events: CurseEventInstance[]): CurseEventInstance | undefined;
+    function spawnCurseEvents(island: Island, humans: Human[], requiresEvents: boolean): void;
+    function attemptCurseEventSpawn(category: CurseCategory | null, human: Human, curse: number, humans: Human[], events: CurseEventInstance[], allowDependents?: boolean): CurseEventInstance | undefined;
     function attemptSpecificCurseEventSpawn(human: Human, type: CurseEventType, humans: Human[], curse?: number, force?: boolean | "full"): CurseEventInstance | undefined;
     function attemptSpecificCurseEventSpawnOnPlayer(player: Human, curseType: CurseEventType, force: boolean | "full"): CurseEventInstance | undefined;
+    function resetVisualExploredState(island: Island): void;
+    function obscureVisualExploredState(island: Island): void;
     function unload(island: Island): void;
     function cleanup(island: Island, humans?: Human[], isMorning?: boolean): void;
     function cleanupEphemerals(island: Island): void;
@@ -141,12 +143,20 @@ declare namespace Curse {
 declare const SYMBOL_CURSE_EVENT_SUBSCRIBER_INSTANCES: unique symbol;
 declare const SYMBOL_CURSE_EVENT_GLOBAL_SUBSCRIBER_INSTANCE: unique symbol;
 declare const SYMBOL_CURSE_EVENT_ACTIVE_SUBSCRIBER_INSTANCE: unique symbol;
+type CurseVisualHiddenExploredTilesByZ = Partial<Record<number, number[]>>;
+type CurseVisualFastStepsByZ = Partial<Record<number, number>>;
+type CurseVisualOriginsByZ = Partial<Record<number, IVector2>>;
 interface Curse {
     night?: true;
     globalCurse?: number;
     events?: CurseEventInstance[];
+    visualState?: CurseVisualHiddenExploredTilesByZ;
+    visualStateFastHideStepsByZ?: CurseVisualFastStepsByZ;
+    visualStateFastRestoreStepsByZ?: CurseVisualFastStepsByZ;
+    visualStateHideOriginsByZ?: CurseVisualOriginsByZ;
+    visualStateRestoreOriginsByZ?: CurseVisualOriginsByZ;
+    visualStateWeightedRestoreStepsByZ?: CurseVisualFastStepsByZ;
     cooldown?: number;
-    warned?: true;
     ephemeralCreatures?: number[];
     [SYMBOL_CURSE_EVENT_GLOBAL_SUBSCRIBER_INSTANCE]?: CurseEventSubscriber;
     [SYMBOL_CURSE_EVENT_ACTIVE_SUBSCRIBER_INSTANCE]?: CurseEventSubscriber;

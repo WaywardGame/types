@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"ignoreDeprecations": "6.0",
 		"target": "ES2023",
 		"module": "AMD",
 		"moduleResolution": "node",
@@ -31,7 +32,6 @@
 		"types": [],
 		"lib": [
 			"DOM",
-			"DOM.Iterable",
 			"ES2023",
 			"ESNext",
 			"WebWorker.ImportScripts",

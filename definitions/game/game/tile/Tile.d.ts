@@ -469,6 +469,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     getPreferredAdjacentTile(human: Human, clientSide: boolean): Tile | undefined;
     tilesInRange(type: DistanceType, range: number, includeCurrentTile?: boolean): Tile[];
+    squareSpiralOutwards(includeCurrentTile?: boolean): Generator<Tile>;
     openTileInRange(type: DistanceType, range: number, includeCurrentTile?: boolean, excludeWater?: boolean): Tile | undefined;
     /**
      * Array version of tilesAround

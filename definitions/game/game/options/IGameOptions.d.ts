@@ -198,7 +198,7 @@ export interface IGameOptionsPlayer {
      */
     luckMultiplier: number;
     /**
-     * Starting curse value, added to the calculated value.
+     * Starting curse rate value, added to the calculated value.
      */
     initialCurse: number;
     /**
