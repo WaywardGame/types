@@ -17,5 +17,15 @@ export default class UpdateCurseVisualStatePacket extends PlayerTargetedServerPa
     getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
+    protected writeData(): void;
+    protected readData(): void;
     process(): void;
+    private writeCurseVisualStateUpdate;
+    private readCurseVisualStateUpdate;
+    private writeOptionalUint32NumberArray;
+    private readOptionalUint32NumberArray;
+    private writeNullableInt8;
+    private readNullableInt8;
+    private writeNullableUint16Vector2;
+    private readNullableUint16Vector2;
 }

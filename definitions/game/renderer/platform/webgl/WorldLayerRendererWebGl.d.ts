@@ -20,10 +20,13 @@ export declare class WorldLayerRendererWebGl implements IWorldLayerRendererPlatf
     texLightBlock: WebGLTexture;
     texLightLevel: WebGLTexture;
     texExplored: WebGLTexture;
+    texCurseMask: WebGLTexture;
     constructor(context: WebGlRendererContext, worldLayerRenderer: WorldLayerRenderer);
     delete(): void;
     setWorldLayer(worldLayer: WorldLayer, exploreMap: ExploreMap, sizeChanged: boolean, exploredData?: Uint8Array): void;
     setExploredAlpha(tiles: IExploredTileAlpha[]): void;
+    setCurseMaskData(worldLayer: WorldLayer, data: Uint8Array): void;
+    setCurseMaskAlpha(tiles: IExploredTileAlpha[]): void;
     updateTileLightBlock(x: number, y: number, value: number): void;
     updateTileLightBlockMap(lightBlockMap: Uint8Array): void;
 }

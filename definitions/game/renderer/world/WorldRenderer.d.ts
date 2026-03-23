@@ -26,7 +26,6 @@ import WallTileAdaptor from "@wayward/game/renderer/tile/adaptors/Wall";
 import type TileAtlas from "@wayward/game/renderer/tile/atlas/TileAtlas";
 import type { IBounds } from "@wayward/game/renderer/world/IWorldRenderer";
 import { RenderFlag, SpriteBatchLayer } from "@wayward/game/renderer/world/IWorldRenderer";
-import type { WorldLayer } from "@wayward/game/renderer/world/WorldLayer";
 import { WorldLayerRenderer } from "@wayward/game/renderer/world/WorldLayerRenderer";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { IRendererContext } from "@wayward/game/renderer/context/IRendererContext";
@@ -34,7 +33,6 @@ import type { IWorldRendererPlatform } from "@wayward/game/renderer/world/IWorld
 import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 export interface IWorldRendererEvents {
-    getExploredMapTextureData(data: Uint8Array, worldLayer: WorldLayer): Uint8Array;
     /**
      * Called when calculating creatures in the viewport
      * @param creature The creature object
