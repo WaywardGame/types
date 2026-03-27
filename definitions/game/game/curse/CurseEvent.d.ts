@@ -146,7 +146,7 @@ export interface CurseEvent {
     /**
      * Creature types that this event can spawn by default.
      */
-    creatureTypes?: SupplierOr<CreatureType[] | undefined, [CurseEventContext]>;
+    creatureTypes?: SupplierOr<Array<CreatureType | [CreatureType, aberrant: boolean]> | undefined, [CurseEventContext]>;
     /**
      * Custom game options to apply during the curse event. Note that this only runs once, right at the start of the event.
      */
