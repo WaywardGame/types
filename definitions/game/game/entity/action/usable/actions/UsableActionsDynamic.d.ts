@@ -10,7 +10,7 @@
  */
 import type { ActionDisplayLevel } from "@wayward/game/game/entity/action/IAction";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
-import type { IUsableActionDefinitionBase, IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, ReturnableUsableActionUsability, UsableActionIconReference } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import type { ActionId, IUsableActionDefinitionBase, IUsableActionPossibleUsing, IUsableActionRequirements, IUsableActionUsing, ReturnableUsableActionUsability, UsableActionIconReference } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import { UsableActionGenerator } from "@wayward/game/game/entity/action/usable/UsableActionRegistrar";
 import type { UsableActionTranslator } from "@wayward/game/game/entity/action/usable/UsableActionTranslator";
 import type Player from "@wayward/game/game/entity/player/Player";
@@ -24,6 +24,8 @@ export interface IUsableActionDynamicDefinition {
      * Whether the action is visible in the action drawer by default (without using it normally first).
      */
     discoveredByDefault?: true | (() => boolean);
+    discoveryNotRequired?: true | (() => boolean);
+    discoveryId?: ActionId;
     translate?: (translator: UsableActionTranslator) => UsableActionTranslator;
     /**
      * By default, actions are assumed to be interacting with the tile in front of them.
