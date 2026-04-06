@@ -124,6 +124,11 @@ export interface CurseEvent {
      * All curse events default to a weight of 1, so setting this to 0.5 would make it half as likely as any other event.
      */
     weight?: number;
+    /**
+     * The number of eligible curse event nights that must pass before this event can appear again.
+     * Defaults to 1.
+     */
+    cooldown?: number;
     revealOn: ArrayOr<CurseEventRevealCondition>;
     discoverOn: ArrayOr<CurseEventRevealCondition>;
     effects?(context: CurseEventContext, effects: StatusEffectList): StatusEffectList;
