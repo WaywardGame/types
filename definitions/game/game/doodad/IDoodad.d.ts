@@ -619,4 +619,5 @@ export interface IDoodadGetNameOptions {
      */
     ignoreDiscovery: boolean;
 }
+export declare const DOODAD_GROUP_HIDE_CONDITIONS: Array<(doodad: Doodad, group: DoodadTypeGroup) => boolean>;
 export {};

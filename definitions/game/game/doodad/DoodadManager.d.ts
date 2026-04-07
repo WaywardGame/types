@@ -62,7 +62,8 @@ export default class DoodadManager extends EntityManager<Doodad> {
     loadEntity(doodad: Doodad): void;
     isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
     isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
-    getGroups(doodad: DoodadType): DoodadTypeGroup[];
+    getGroups(doodad?: DoodadType): DoodadTypeGroup[];
+    getVisibleGroups(doodad: Doodad): DoodadTypeGroup[];
     /**
      * Checks if a number is a DoodadType or DoodadTypeExtra.
      * @param type a number (DoodadType/DoodadTypeExtra enum).
@@ -86,8 +87,12 @@ export default class DoodadManager extends EntityManager<Doodad> {
      */
     updateAllAsync(ticks: number, playingHumans: Human[], playerHumanTiles: Set<Tile>, onProgress: (progess: number) => Promise<void>): Promise<void>;
     verifyAndFixItemWeights(): void;
+    /**
+     * Gets the nearest affective scarecrow in the given group, or, if no group is provided, gets the nearest scarecrow that isn't in a specialized group
+     */
     getScarecrowInRange(tile: Tile, group?: DoodadTypeGroup): Doodad | undefined;
     getScarecrowInLineOfSight(creature: Creature, isClientside: boolean): Doodad | undefined;
+    getCursedScarecrowSpawnChance(tile: Tile, curseEvent?: boolean): number;
     addScarecrow(doodad: Doodad): void;
     removeScarecrow(doodad: Doodad): void;
     /**

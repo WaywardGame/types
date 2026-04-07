@@ -32,7 +32,9 @@ import type { ContainerSort, DisplayableItemType, IContainer, IItemVehicle, ILiq
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { IHasMagic } from "@wayward/game/game/magic/IMagicalProperty";
+import type { IMagicalPropertyManagerEvents } from "@wayward/game/game/magic/MagicalPropertyManager";
 import MagicalPropertyManager from "@wayward/game/game/magic/MagicalPropertyManager";
+import MagicalPropertyType from "@wayward/game/game/magic/MagicalPropertyType";
 import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type { IHasInsulation, IInsulationResult, TempType } from "@wayward/game/game/temperature/ITemperature";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -45,7 +47,10 @@ import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISeria
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IRGB } from "@wayward/utilities/Color";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
-export interface IDoodadEvents extends IEntityMovableEvents, IQualityEvents {
+type DoodadMagicEvents = {
+    [EVENT in keyof IMagicalPropertyManagerEvents as `magic${Capitalize<EVENT>}`]: IMagicalPropertyManagerEvents[EVENT];
+};
+export interface IDoodadEvents extends IEntityMovableEvents, IQualityEvents, DoodadMagicEvents {
     /**
      * Called when an doodad is being updated
      * @param tile The tile the doodad is on
@@ -112,6 +117,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     hitchedCreature?: number;
     magic?: MagicalPropertyManager;
     meltDecay?: number;
+    note?: string;
     orientation?: DoorOrientation;
     quality?: Quality;
     sort?: ContainerSort;
@@ -158,6 +164,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     isContainer(): this is IUncastableContainer;
     toString(): string;
     getRegistrarId(): number;
+    get litDescription(): IDoodadDescription | undefined;
     /**
      * Entity controlling this doodad (for wheel barrows)
      */
@@ -231,6 +238,10 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     getBuilder(): Player | undefined;
     removeMagic(): void;
+    private pipingMagic;
+    protected pipeMagicalPropertyManagerEvents(magic: MagicalPropertyManager): void;
+    protected onMagicSet(type: MagicalPropertyType, _subType?: number, value?: number, previousValue?: number, curse?: true): void;
+    protected onMagicRemove(type: MagicalPropertyType): void;
     unhitch(): void;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean, damage?: number): void;
     getDefaultDurability(random?: import("@wayward/utilities/random/Random").Random<import("@wayward/utilities/random/generators/LegacySeededGenerator").LegacySeededGenerator | import("@wayward/utilities/random/generators/PCGSeededGenerator").PCGSeededGenerator>): number;
@@ -408,6 +419,9 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     stokeFire(stokeValue: number, human?: Human): boolean;
     getDecayAtStartWithMagical(): number;
+    protected clampDecayToMax(type: MagicalPropertyType): void;
+    protected clampDurabilityToMax(type: MagicalPropertyType): void;
+    protected updateDurabilityForPersistence(type: MagicalPropertyType, value?: number, previousValue?: number, curse?: true): void;
     canCauseDamage(): boolean;
     /**
      * Decay over time
@@ -424,3 +438,4 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     private postProcessDecay;
     private randomAshSpawn;
 }
+export {};

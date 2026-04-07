@@ -18,6 +18,11 @@ import type EnumInfo from "@wayward/game/utilities/enum/EnumInfo";
 import type Version from "@wayward/utilities/Version";
 import type { IBuildId } from "@wayward/hosts/shared/globalTypes";
 export declare const saveDataVersionUnknown = "Unknown";
+export interface IModManagerUnloadableInfo {
+    name: string;
+    unloadable: boolean;
+    unloaded?: boolean;
+}
 export default class SaveData {
     gameSlotName: string;
     gameState: PlayerState.Won | PlayerState.Ghost | PlayerState.None;
@@ -42,10 +47,7 @@ export default class SaveData {
     gameCreationInfo: Readonly<IGameCreationInfo>;
     saveManagerDeathBy: ISerializedTranslation;
     modManagerSaveData: Record<string, any>;
-    modManagerUnloadable: Record<string, {
-        name: string;
-        unloadable: boolean;
-    }>;
+    modManagerUnloadable: Record<string, IModManagerUnloadableInfo>;
     multiplayerState: IMultiplayerState;
     multiplayerMessageOfTheDay: string;
     utilitiesEnumsAllocated: Record<string, EnumInfo>;

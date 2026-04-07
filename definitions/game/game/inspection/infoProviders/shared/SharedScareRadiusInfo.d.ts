@@ -9,13 +9,11 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import { ActionType } from "@wayward/game/game/entity/action/IAction";
+import type { IScareRadius } from "@wayward/game/game/doodad/IDoodad";
 import LabelledValue from "@wayward/game/game/inspection/infoProviders/LabelledValue";
-import type { InfoUnion } from "@wayward/game/game/inspection/infoProviders/UseInfo";
 import type Item from "@wayward/game/game/item/Item";
-export interface ILightSourceInfoBase {
+export interface IScareRadiusInfoBase {
     value?: Item | Doodad;
-    lightSource: number;
+    scareRadius: IScareRadius;
 }
-export declare function getLightSource(value: InfoUnion<Item | Doodad, ActionType.StartFire | ActionType.Ignite | ActionType.Equip> | Item | Doodad): number | undefined;
-export default function ({ value, lightSource }: ILightSourceInfoBase): LabelledValue | undefined;
+export default function ({ value, scareRadius }: IScareRadiusInfoBase): LabelledValue | undefined;

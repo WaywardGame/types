@@ -46,6 +46,7 @@ export default class ItemInspection extends Inspection<ItemType | ItemTypeExtra>
     protected onTickEnd(): void;
     private updatePosition;
     private getDescription;
+    private getNoteDescription;
     private getCapacity;
     private getDoodadUses;
     private getMapIsland;

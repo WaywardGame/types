@@ -30,5 +30,6 @@ export default class DoodadInspection extends Inspection<Doodad> {
     onUpdateTile(_: any, tile: Tile): void;
     protected onRemove(_: any, doodad: Doodad): void;
     private getDescription;
+    private getNoteDescription;
     private getTier;
 }

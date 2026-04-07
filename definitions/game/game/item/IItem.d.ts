@@ -1948,4 +1948,6 @@ export declare enum ItemMovementResultFlag {
     MovedAndDamaged = 64,
     RemovedItem = 128
 }
+export declare const ITEM_GROUP_HIDE_CONDITIONS: Array<(item: Item, group: ItemTypeGroup) => boolean>;
+export declare function getCraftingAptitudeMultiplier(craftingAptitudeBonus: number | undefined): number;
 export {};

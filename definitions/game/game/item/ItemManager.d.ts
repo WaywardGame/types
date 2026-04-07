@@ -234,7 +234,11 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     static getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getWeightCapacity(container?: IContainer, includeMagic?: boolean): number | undefined;
     create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer | undefined, quality?: Quality, human?: Human, context?: ActionContext, magicalLootType?: MagicalLootType): Item;
+    /**
+     * Note: NOT UI-safe. Use `createClientside`. This should  be named `createTemplate` probably
+     */
     createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality, human?: Human, magicalLootType?: MagicalLootType): Item;
+    createClientside(item: ItemType, quality?: Quality, human?: Human, magicalLootType?: MagicalLootType): Item;
     getContainedContainers(container: IContainer): IContainer[];
     computeContainerWeight(container: IContainer): number;
     getMagicalWeightCapacity(container: IContainer): number;
@@ -281,6 +285,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: Article, count?: number): Translation;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     getGroups(itemType: ItemType): ItemTypeGroup[];
+    getVisibleGroups(item: Item): ItemTypeGroup[];
     getPlayerFromInventoryContainer(containable: IContainable): Player | undefined;
     getRandomQuality(bonusQuality?: number, relicChance?: boolean, tile?: Tile): Quality;
     hasAdditionalRequirements(actionOrHuman: IActionHandlerApi<Human> | Human, craftType: ItemType, actionNotUsableMessage?: Message, isRepairOrDisassembly?: boolean): IRequirementInfo;

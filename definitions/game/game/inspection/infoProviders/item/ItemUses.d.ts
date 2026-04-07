@@ -24,6 +24,7 @@ export default class ItemUses extends Uses<Item> {
     protected getUseDisplayLevel(action: ActionType, context: InfoProviderContext): InfoDisplayLevel;
     protected getUseInfoHandlers(): Array<UseInfo<any, any, any, Item>>;
     protected getUse(description: IItemDescription, action: ActionType): TranslationImpl;
+    protected getActionTier(description: Readonly<IItemDescription>, action: ActionType): number | undefined;
 }
 export declare class ItemUseContext extends InfoProviderContext {
     private readonly itemRef?;
