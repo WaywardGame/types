@@ -96,6 +96,7 @@ export declare const milestoneModifiers: {
     71: typeof Cursebreaker;
     70: typeof Cursed;
     52: typeof Dedicated;
+    74: typeof Defiled;
     38: typeof DestroyerOfMagi;
     42: typeof Diverse;
     17: typeof Doctor;
@@ -144,9 +145,8 @@ export declare const milestoneModifiers: {
     22: typeof Treasurer;
     65: typeof Turbulent;
     50: typeof Versatile;
-    29: typeof Weathered;
     73: typeof Warded;
-    74: typeof Defiled;
+    29: typeof Weathered;
 };
 declare class MilestoneModifiersManager extends GameplayModifiersManager<MilestoneModifier, Milestone, [Human?]> {
     constructor();

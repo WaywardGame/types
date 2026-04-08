@@ -202,6 +202,8 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     canPickUp(human: Human): boolean;
     getPickUpTypes(): ItemType[] | undefined;
     getAssociatedItem(): ItemType | ItemTypeExtra;
+    static getAvailableActions(type: DoodadType, description: IDoodadDescription): ActionType[];
+    private static canCraft;
     getActions(): ActionType[] | undefined;
     /**
      * Can the doodad be gathered from in its current form?
