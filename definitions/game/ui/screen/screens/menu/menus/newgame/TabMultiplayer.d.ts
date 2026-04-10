@@ -13,6 +13,7 @@ import ChoiceList, { Choice } from "@wayward/game/ui/component/ChoiceList";
 import { RangeRow } from "@wayward/game/ui/component/RangeRow";
 import ChoiceListTurnMode from "@wayward/game/ui/screen/screens/menu/component/ChoiceListTurnModes";
 import { Tab } from "@wayward/game/ui/screen/screens/menu/component/Menu";
+import RealTimeTickSpeedRow from "@wayward/game/ui/screen/screens/menu/component/RealTimeTickSpeedRow";
 import type NewGameMenu from "@wayward/game/ui/screen/screens/menu/menus/NewGameMenu";
 export default class TabMultiplayer extends Tab {
     readonly choiceSingleplayer: Choice<undefined>;
@@ -27,10 +28,11 @@ export default class TabMultiplayer extends Tab {
     readonly inputAllowTraveling: CheckButton;
     readonly inputAllowHardcoreRespawns: CheckButton;
     readonly maxPlayersRow: RangeRow;
-    readonly tickSpeedRow: RangeRow;
+    readonly tickSpeedRow: RealTimeTickSpeedRow;
     private readonly menuRef;
     get menu(): NewGameMenu;
     constructor(menu: NewGameMenu);
     private onChangeMultiplayerMode;
     private onChangeTurnMode;
+    private updateTickSpeedRowVisibility;
 }

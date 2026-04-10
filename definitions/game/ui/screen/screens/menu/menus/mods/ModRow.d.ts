@@ -25,6 +25,8 @@ export default class ModRow extends CheckButton {
     shouldDisableButtonButtonsOnUnchecked(): boolean;
     insertMetadata(into: Component, mod: ModInformation, context: "tooltip" | "menu"): ModMetadataInserter;
     setEnabled(enabled: boolean, prompts?: boolean, changingAllStates?: boolean): Promise<boolean>;
+    private isTogglable;
+    private disableConflictingDuplicateMods;
     protected onToggle(checked: boolean): Promise<void>;
     private checkDependants;
     private checkDependencies;

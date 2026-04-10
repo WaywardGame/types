@@ -40,6 +40,7 @@ export default abstract class StatComponent extends Component {
     private subscribe;
     refresh(): void;
     private onUpdateMilestone;
+    protected onGlobalDiscoveryChange(): void;
     protected onRemove(): void;
     /**
      * Returns the attached entity's `IStat` for this `StatElement`'s `Stat`.

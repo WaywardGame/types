@@ -86,6 +86,7 @@ export default class SkillManager {
     setCore(skill: SkillType, value: number): this;
     setBonus(skill: SkillType, bonus: number): this;
     setBonuses(bonuses: Map<SkillType, number>): this;
+    reset(): this;
     /**
      * @returns Whether the skill of this human is more than or equal to a random number between `0` and the value of `check`.
      */

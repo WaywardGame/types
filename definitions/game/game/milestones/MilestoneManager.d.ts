@@ -16,6 +16,7 @@ import { Milestone, MilestoneVisibility } from "@wayward/game/game/milestones/IM
 import type MilestoneDefinition from "@wayward/game/game/milestones/MilestoneDefinition";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export interface IMilestoneEvents {
+    globalDiscoveryChange(bypassed: boolean): void;
     /**
      * @param milestone The milestone that is being updated
      * @param value The new value for this milestone
@@ -51,6 +52,8 @@ export declare class MilestoneManager extends EventEmitter.Host<IMilestoneEvents
     areUnlockableInMode(mode?: import("../options/IGameOptions").GameMode): boolean;
     isUnlockableInMode(milestone: Milestone, mode?: import("../options/IGameOptions").GameMode): boolean;
     reset(milestone?: Milestone): void;
+    isDiscoveryBypassed(): boolean;
+    setDiscoveryBypassed(bypassed: boolean): void;
     getDiscovered(milestone: Milestone): Array<string | number> | undefined;
     getDiscoveredResistsAndVulns(): Map<CreatureType, Set<DamageType>>;
     getDiscoveredResistsAndVulns(creatureType: CreatureType): Set<DamageType>;

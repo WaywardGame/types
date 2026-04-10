@@ -545,7 +545,10 @@ export declare enum DoodadTypeGroup {
     Anvil = -9994,
     Well = -9993,
     Hitch = -9992,
-    GatheredPlant = -9991,// Special case for plants that need to be gathered to get the "main resource"
+    /**
+     * Special case for plants that need to be gathered to get the "main resource"
+     */
+    GatheredPlant = -9991,
     FireSource = -9990,
     LitTorch = -9989,
     LightDevice = -9988,
@@ -553,7 +556,10 @@ export declare enum DoodadTypeGroup {
      * This is set for lit torches, candles, and jack-o'-lanterns specifically
      */
     LightSource = -9987,
-    LitStructure = -9986,// Prevents pick up while lit
+    /**
+     * Prevents pick up while lit
+     */
+    LitStructure = -9986,
     LockedChest = -9985,
     Scarecrow = -9984,
     Lighthouse = -9983,
@@ -563,9 +569,12 @@ export declare enum DoodadTypeGroup {
     Wheelbarrow = -9979,
     Altar = -9978,
     OpenFireSource = -9977,
-    Unused = -9976,// <----------- Use this one
+    ResetsDecayWhenLit = -9976,
     ContainsFuelSource = -9975,
     CurseWard = -9974,
+    /**
+     * Used for plants with snow (so they don't spawn/spread/generate with snow already on them)
+     */
     CannotBeSpread = -9973
 }
 export declare enum DoorOrientation {

@@ -132,7 +132,6 @@ export declare class Ui extends EventEmitter.Host<IUiEvents> {
     protected onHideStackItemsHint(): void;
     protected onTooltipsToggle(): boolean;
     protected onFullscreen(): boolean;
-    protected onToggleDevMode(): boolean;
     protected onReload(api: IBindHandlerApi): boolean;
     protected onReloadWithoutSaving(api: IBindHandlerApi): boolean;
     protected onToggleDevTools(): boolean;

@@ -254,14 +254,13 @@ declare enum Bindable {
     MenuSelect = 235,
     DeveloperInterfaceScaleUp = 236,
     DeveloperInterfaceScaleDown = 237,
-    DeveloperToggleDeveloperMode = 238,
-    DeveloperToggleDeveloperTools = 239,
-    DeveloperReloadGame = 240,
-    DeveloperReloadWithoutSavingGame = 241,
-    DeveloperReloadAndContinueGame = 242,
-    DeveloperReloadWithoutSavingAndContinueGame = 243,
-    DeveloperReloadStylesheets = 244,
-    DeveloperReloadTextures = 245
+    DeveloperToggleDeveloperTools = 238,
+    DeveloperReloadGame = 239,
+    DeveloperReloadWithoutSavingGame = 240,
+    DeveloperReloadAndContinueGame = 241,
+    DeveloperReloadWithoutSavingAndContinueGame = 242,
+    DeveloperReloadStylesheets = 243,
+    DeveloperReloadTextures = 244
 }
 export default Bindable;
 export declare enum BindableType {
