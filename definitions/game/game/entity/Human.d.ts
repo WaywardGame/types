@@ -166,7 +166,10 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     createSkillManager(): SkillManager;
     get isLocalPlayer(): boolean;
     get isResting(): boolean;
+    get isRestingAndNotSleeping(): boolean;
+    get isSleeping(): boolean;
     get isRestingCancelled(): boolean;
+    get restDoodad(): Doodad | undefined;
     get isGhost(): boolean;
     get isDead(): boolean;
     /**

@@ -28,7 +28,7 @@ import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IWell } from "@wayward/game/game/island/IIsland";
 import { LiquidType } from "@wayward/game/game/island/IIsland";
-import type { ContainerSort, DisplayableItemType, IContainer, IItemVehicle, ILiquidGather, IUncastableContainer, ItemTypeExtra } from "@wayward/game/game/item/IItem";
+import type { ContainerSort, DisplayableItemType, IContainer, IItemDescription, IItemVehicle, ILiquidGather, IUncastableContainer, ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import type { IHasMagic } from "@wayward/game/game/magic/IMagicalProperty";
@@ -165,6 +165,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     toString(): string;
     getRegistrarId(): number;
     get litDescription(): IDoodadDescription | undefined;
+    get itemDescription(): IItemDescription | undefined;
     /**
      * Entity controlling this doodad (for wheel barrows)
      */
