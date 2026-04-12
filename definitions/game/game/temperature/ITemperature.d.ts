@@ -108,6 +108,7 @@ export interface IInsulationResult {
 }
 export declare namespace Insulation {
     function get(entity: Entity | undefined, insulation: IInsulationDescription | undefined, type: TempType): IInsulationResult | undefined;
+    const translate: (value: Entity<unknown, number, import("../reference/IReferenceManager").EntityReferenceTypes, unknown> | undefined, insulation: IInsulationResult | undefined, type?: TempType | undefined) => import("../../language/impl/TranslationImpl").default | undefined;
     function equals(a: IInsulationResult | undefined, b: IInsulationResult | undefined): boolean;
     function getTypesOrderedByRelevance(island: Island): TempType[];
 }

@@ -9,12 +9,12 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import Button from "@wayward/game/ui/component/Button";
-import { RangeRow } from "@wayward/game/ui/component/RangeRow";
 import ChoiceListTurnMode from "@wayward/game/ui/screen/screens/menu/component/ChoiceListTurnModes";
 import Menu from "@wayward/game/ui/screen/screens/menu/component/Menu";
+import RealTimeTickSpeedRow from "@wayward/game/ui/screen/screens/menu/component/RealTimeTickSpeedRow";
 export default class GameSettingsMenu extends Menu {
     readonly turnMode: ChoiceListTurnMode;
-    readonly tickSpeed: RangeRow;
+    readonly tickSpeed: RealTimeTickSpeedRow;
     readonly copyGameSeed: Button;
     constructor();
     protected refresh(): void;

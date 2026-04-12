@@ -34,6 +34,7 @@ export interface IMagicalSubProperty<T extends number> {
 export type MagicalProperty<T extends MagicalPropertyType> = MagicalPropertyTypeSubTypeMap extends Record<T, any> ? IMagicalSubProperty<MagicalPropertyTypeSubTypeMap[T]> : IMagicalProperty;
 export interface MagicalNormalPropertyEntry {
     type: MagicalNormalPropertyTypes;
+    /** @deprecated This value is raw, unaffected if this is a curse property! */
     value: number;
     curse?: true;
 }
@@ -41,6 +42,7 @@ export type MagicalSubPropertyEntry = {
     [K in MagicalSubPropertyTypes]: {
         type: K;
         subType: MagicalPropertyTypeSubTypeMap[K];
+        /** @deprecated This value is raw, unaffected if this is a curse property! */
         value: number;
         curse?: true;
     };
@@ -53,6 +55,7 @@ export declare namespace MagicalPropertyEntry {
 export interface MagicalPropertyEntryIntersection {
     type: MagicalPropertyType;
     subType?: MagicalSubPropertySubTypes;
+    /** @deprecated This value is raw, unaffected if this is a curse property! */
     value: number;
     curse?: true;
 }

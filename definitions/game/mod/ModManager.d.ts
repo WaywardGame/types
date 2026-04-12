@@ -35,6 +35,8 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     protected setupMods(): Promise<void>;
     saveAll(): void;
     setupMod(folderName: string, modType: ModType, initialModState?: ModState): Promise<ModInformation | undefined>;
+    private normalizeDuplicateModState;
+    private static compareDuplicateModPrecedence;
     removeMod(mod: ModInformation, uninstall?: boolean): void;
     /**
      * Used by pro developers

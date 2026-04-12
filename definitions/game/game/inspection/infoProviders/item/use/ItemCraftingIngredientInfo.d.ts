@@ -14,8 +14,8 @@ import type Item from "@wayward/game/game/item/Item";
 declare const _default: UseInfo<{
     entityType: import("../../../../entity/IEntity").EntityType.Item;
     value?: Item | undefined;
-    type: import("../../../../item/IItem").ItemType;
-    description: Readonly<import("../../../../item/IItem").IItemDescription>;
+    type: import("@wayward/game/game/item/IItem").ItemType;
+    description: Readonly<import("@wayward/game/game/item/IItem").IItemDescription>;
     quality: import("../../../../IObject").Quality;
     action: ActionType.CraftingIngredient;
     union: import("@wayward/game/game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.CraftingIngredient>;

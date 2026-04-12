@@ -40,6 +40,7 @@ export declare class Stats extends Component {
     setHuman(human: Human): this;
     private refresh;
     protected onMilestonesUpdate(): void;
+    protected onGlobalDiscoveryChange(): void;
     /**
      * Returns an object containing iterables for all stats that exist on the player and have a description,
      * separated by how a given stat should be displayed

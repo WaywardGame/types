@@ -35,6 +35,7 @@ export declare abstract class SeededGenerator<T> implements IRandomGenerator {
     setSeed(newSeed: T): void;
     pushSeed(newSeed?: T): void;
     popSeed(): T;
+    withSeed(newSeed: T | undefined, withSeed: () => unknown): void;
     get(): number;
     startHistory(maxHistory?: number): void;
     getHistory(): Array<IRandomHistory<T>> | undefined;

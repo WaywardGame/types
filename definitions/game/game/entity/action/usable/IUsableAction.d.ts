@@ -228,7 +228,7 @@ export interface IUsableActionDefinitionBase<REQUIREMENTS extends IUsableActionR
      *
      * If set to an `ActionId`, the `ActionId` will be attempted to be slotted instead.
      */
-    slottable?: boolean | ActionId;
+    slottable?: boolean | ActionId | (() => boolean);
     /**
      * Whether this action is "applicable" given this player and these "provided" objects.
      * @param player The player executing this action. This isn't always the local player!
@@ -370,8 +370,10 @@ export interface IUsableActionDefinitionSubmenu<REQUIREMENTS extends IUsableActi
     forceDisplayWhenEmpty?: true;
 }
 export interface IUsableActionDefinitionExecutable<REQUIREMENTS extends IUsableActionRequirements = IUsableActionRequirements> extends IUsableActionDefinitionBase<REQUIREMENTS> {
-    slottable?: boolean | ActionId;
+    slottable?: boolean | ActionId | (() => boolean);
     discoveredByDefault?: true | (() => boolean);
+    discoveryNotRequired?: true | (() => boolean);
+    discoveryId?: ActionId;
     submenu?: undefined;
     forceDisplayWhenEmpty?: undefined;
     execute(player: Player, using: IUsableActionUsing<REQUIREMENTS>, context: IUsableActionExecutionContext): any;

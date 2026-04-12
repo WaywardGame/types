@@ -126,6 +126,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      * This is called clientside the first time the renderer seens the entity
      */
     onFirstRender(renderer: Renderer): void;
+    computeLights(): void;
     getCurrentMarker(): Readonly<MarkerDescription> | undefined;
     setMarkerIconHidden(hidden: boolean): void;
     /**

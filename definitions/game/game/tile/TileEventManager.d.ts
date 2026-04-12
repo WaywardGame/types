@@ -38,6 +38,7 @@ export default class TileEventManager extends EntityManager<TileEvent> {
     createFake(type: TileEventType, tile: Tile, id?: number): TileEvent | undefined;
     protected onRemove(tileEvent: TileEvent): boolean;
     getFromTile(tile: Tile, type: TileEventType): TileEvent | undefined;
+    removeIfExpired(tileEvent: TileEvent): boolean;
     /**
      * Gets an array of tile events that have the water property at a given tile.
      * @param tile Tile that you want to look at.

@@ -75,6 +75,8 @@ export declare class ModInformation implements IModInformation {
     getFileText(fileName: string): Promise<string | undefined>;
     get canPublish(): boolean;
     canLoad(fromModsMenu?: boolean, forMultiplayer?: boolean, count?: number): CanLoadState;
+    getActiveDuplicatePrecedenceState(): CanLoadState.LocalModPrecedence | CanLoadState.WorkshopModPrecedence | undefined;
+    private static compareDuplicateModPrecedence;
     save(): void;
     fillOutWorkshopMod(item?: IWorkshopItem): void;
     setState(state: ModState, force?: boolean, unloaded?: boolean): Promise<boolean>;

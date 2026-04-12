@@ -44,5 +44,6 @@ export default abstract class Uses<T extends IDescribed> extends InfoProvider {
     protected getUseDisplayLevel(action: ActionType, context: InfoProviderContext): InfoDisplayLevel;
     private getDetailsHandlerResolver;
     protected getUse(description: DescribedDescription<T>, action: ActionType): TranslationImpl;
+    protected getActionTier(description: DescribedDescription<T>, action: ActionType): number | undefined;
     private getUseName;
 }

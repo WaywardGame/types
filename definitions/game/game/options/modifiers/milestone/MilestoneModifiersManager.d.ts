@@ -28,6 +28,7 @@ import Curator from "@wayward/game/game/options/modifiers/milestone/modifiers/Cu
 import Cursebreaker from "@wayward/game/game/options/modifiers/milestone/modifiers/Cursebreaker";
 import Cursed from "@wayward/game/game/options/modifiers/milestone/modifiers/Cursed";
 import Dedicated from "@wayward/game/game/options/modifiers/milestone/modifiers/Dedicated";
+import Defiled from "@wayward/game/game/options/modifiers/milestone/modifiers/Defiled";
 import DestroyerOfMagi from "@wayward/game/game/options/modifiers/milestone/modifiers/DestroyerOfMagi";
 import Diverse from "@wayward/game/game/options/modifiers/milestone/modifiers/Diverse";
 import Doctor from "@wayward/game/game/options/modifiers/milestone/modifiers/Doctor";
@@ -76,6 +77,7 @@ import TreasureHunter from "@wayward/game/game/options/modifiers/milestone/modif
 import Treasurer from "@wayward/game/game/options/modifiers/milestone/modifiers/Treasurer";
 import Turbulent from "@wayward/game/game/options/modifiers/milestone/modifiers/Turbulent";
 import Versatile from "@wayward/game/game/options/modifiers/milestone/modifiers/Versatile";
+import Warded from "@wayward/game/game/options/modifiers/milestone/modifiers/Warded";
 import Weathered from "@wayward/game/game/options/modifiers/milestone/modifiers/Weathered";
 import Translation from "@wayward/game/language/Translation";
 export declare const milestoneModifiers: {
@@ -94,6 +96,7 @@ export declare const milestoneModifiers: {
     71: typeof Cursebreaker;
     70: typeof Cursed;
     52: typeof Dedicated;
+    74: typeof Defiled;
     38: typeof DestroyerOfMagi;
     42: typeof Diverse;
     17: typeof Doctor;
@@ -142,6 +145,7 @@ export declare const milestoneModifiers: {
     22: typeof Treasurer;
     65: typeof Turbulent;
     50: typeof Versatile;
+    73: typeof Warded;
     29: typeof Weathered;
 };
 declare class MilestoneModifiersManager extends GameplayModifiersManager<MilestoneModifier, Milestone, [Human?]> {

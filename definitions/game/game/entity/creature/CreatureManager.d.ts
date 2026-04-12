@@ -44,12 +44,15 @@ export default class CreatureManager extends EntityManager<Creature, IEntityRemo
     static getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: Article): TranslationImpl;
     getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: Article): TranslationImpl;
     calculateHappinessTameTime(human: Human, creature: Creature, bonusTime?: number): number;
+    getAberrantOfferRefusalPenalty(offeringBonus?: number): number;
+    shouldAberrantOfferFail(human: Human, creature: Creature, tamingSkillDivisor: number, offeringBonus?: number): boolean;
     /**
      * Spawns a creature.
      * @param type The type of creature to spawn.
      * @param tile The tile
      */
     spawn(type: CreatureType, tile: Tile, options: ICreatureSpawnOptions): Creature | undefined;
+    spawnAdditionalNearCursedScarecrow(creature: Creature, originTile: Tile, curseEvent?: boolean): Creature[];
     spawnFromZone(tile: Tile, bypassCreatureLimit?: boolean, checkTerrainType?: boolean): Creature | undefined;
     getAberrantChance(tile: Tile): number;
     createFake(type: CreatureType, aberrant: boolean, tile?: Tile, id?: number): Creature;

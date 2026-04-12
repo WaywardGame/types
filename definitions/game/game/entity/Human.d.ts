@@ -75,6 +75,10 @@ interface IEquip {
     item: Item;
     equipType: EquipType;
 }
+interface IThrowDamageBreakdown extends IAttack {
+    baseDamage: number;
+    magicalBonus: number;
+}
 export default abstract class Human<DescriptionType = unknown, TypeType extends number = number, EntityReferenceType extends ReferenceType.Player | ReferenceType.NPC = ReferenceType.Player | ReferenceType.NPC, TagType = unknown> extends EntityWithStats<DescriptionType, TypeType, EntityReferenceType, TagType> implements IHasInsulation, IContainer {
     static getNameTranslation(): TranslationImpl;
     event: IEventEmitter<this, IHumanEvents>;
@@ -162,7 +166,10 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
     createSkillManager(): SkillManager;
     get isLocalPlayer(): boolean;
     get isResting(): boolean;
+    get isRestingAndNotSleeping(): boolean;
+    get isSleeping(): boolean;
     get isRestingCancelled(): boolean;
+    get restDoodad(): Doodad | undefined;
     get isGhost(): boolean;
     get isDead(): boolean;
     /**
@@ -242,6 +249,7 @@ export default abstract class Human<DescriptionType = unknown, TypeType extends 
      */
     damageRandomEquipment(amount?: number): void;
     getDamageModifier(): number;
+    getThrowDamageBreakdown(weapon?: Item): IThrowDamageBreakdown;
     calculateDamageAmount(attackType: AttackType, weapon?: Item, ammoItem?: Item): number;
     isDualWielding(): boolean;
     getAttack(attack?: AttackType, weapon?: Item, offHandWeapon?: Item): IAttack;

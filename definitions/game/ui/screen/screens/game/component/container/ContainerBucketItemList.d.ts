@@ -10,6 +10,7 @@
  */
 import { Quality } from "@wayward/game/game/IObject";
 import type Human from "@wayward/game/game/entity/Human";
+import type { ItemTypeExtra } from "@wayward/game/game/item/IItem";
 import { ItemType, type IContainer } from "@wayward/game/game/item/IItem";
 import type { IMoveItemOptions } from "@wayward/game/game/item/IItemManager";
 import type Item from "@wayward/game/game/item/Item";
@@ -72,6 +73,12 @@ interface ItemListDifferenceItemDifference {
     itemId: number;
     item?: Item | string;
 }
+export interface IStackedItemSortPosition {
+    itemType?: ItemType | ItemTypeExtra;
+    protected?: boolean;
+    isStack?: boolean;
+}
+export declare function isValidStackedItemSortPosition(itemType: ItemType | ItemTypeExtra, stackedItemsLength: number, componentBefore?: IStackedItemSortPosition, componentAfter?: IStackedItemSortPosition): boolean;
 export type ItemListDifference = undefined | ItemListDifferenceSize | ItemListDifferenceItemDifference;
 export default class ContainerBucketItemList extends Component implements ISortableComponent {
     event: IEventEmitter<this, IContainerBucketItemListEvents>;

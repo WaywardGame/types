@@ -113,6 +113,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     getContextualLevel(using: IUsableActionPossibleUsing | undefined, parentMenuId: string, actionExecutionContext: IUsableActionExecutionContext): number;
     private getOwnContextualLevel;
     canUseOnMoveWhenDiscovered(): boolean;
+    getDiscoveryId(): string;
     isDiscovered(): boolean;
     canUseOnMove(): boolean;
     getInternalActionType(): ActionType | undefined;

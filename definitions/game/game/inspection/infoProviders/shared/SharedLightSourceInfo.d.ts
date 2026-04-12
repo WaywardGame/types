@@ -10,28 +10,12 @@
  */
 import type Doodad from "@wayward/game/game/doodad/Doodad";
 import { ActionType } from "@wayward/game/game/entity/action/IAction";
-import { EntityType } from "@wayward/game/game/entity/IEntity";
-import UseInfo from "@wayward/game/game/inspection/infoProviders/UseInfo";
+import LabelledValue from "@wayward/game/game/inspection/infoProviders/LabelledValue";
+import type { InfoUnion } from "@wayward/game/game/inspection/infoProviders/UseInfo";
 import type Item from "@wayward/game/game/item/Item";
-declare const _default: UseInfo<{
-    lightSource: number | undefined;
-    entityType: EntityType.Item;
-    value?: Item | undefined;
-    type: import("@wayward/game/game/item/IItem").ItemType;
-    description: Readonly<import("@wayward/game/game/item/IItem").IItemDescription>;
-    quality: import("../../../IObject").Quality;
-    action: ActionType.StartFire | ActionType.Ignite | ActionType.Equip;
-    union: import("@wayward/game/game/inspection/infoProviders/UseInfo").IUseInfoBase<Item, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>;
-    details: Set<symbol>;
-} | {
+export interface ILightSourceInfoBase {
+    value?: Item | Doodad;
     lightSource: number;
-    entityType: EntityType.Doodad;
-    value?: Doodad | undefined;
-    type: import("../../../doodad/IDoodad").DoodadType;
-    description: Readonly<import("../../../doodad/IDoodad").IDoodadDescription>;
-    quality: import("../../../IObject").Quality;
-    action: ActionType.StartFire | ActionType.Ignite | ActionType.Equip;
-    union: import("@wayward/game/game/inspection/infoProviders/UseInfo").IUseInfoBase<Doodad, ActionType.StartFire | ActionType.Ignite | ActionType.Equip>;
-    details: Set<symbol>;
-}, ActionType.StartFire | ActionType.Ignite | ActionType.Equip, {}, Doodad | Item>;
-export default _default;
+}
+export declare function getLightSource(value: InfoUnion<Item | Doodad, ActionType.StartFire | ActionType.Ignite | ActionType.Equip> | Item | Doodad): number | undefined;
+export default function ({ value, lightSource }: ILightSourceInfoBase): LabelledValue | undefined;

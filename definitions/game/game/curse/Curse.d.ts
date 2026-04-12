@@ -80,6 +80,7 @@ export declare const CURSE_EVENTS_DEFAULT_RADIUS = 25;
  */
 export declare const CURSE_EVENTS_COOLDOWN_RANGE: IRangeRange;
 export declare const CURSE_EVENTS_FIRST_NIGHT = 3;
+export declare const CURSE_EVENTS_DEFAULT_EVENT_COOLDOWN = 3;
 /**
  * Each tick after a curse event ends, one entity of each type spawned by the event has this chance to despawn.
  * If the entity is on a tile that can be seen by a player, it will not despawn.
@@ -103,11 +104,13 @@ export declare const CURSE_EVENTS_RUNE_CHANCE_MULTIPLIER_LUCKY: IRange<number>;
  */
 export declare const CURSE_EVENTS_RUNES_KILL_TAME: Array<WeightedOption<IRange>>;
 export declare const CURSE_EVENTS_RUNES_SURVIVED: IRange<number>;
+export declare const CURSE_SCRIPT_REPEAT_INFINITE_ITERATIONS = 99999999;
 export declare const CURSE_EVENTS_CREATURE_WANDER_CURSEBEARER_PRIORITY: IRange<number>;
 export declare const CURSE_EVENTS_VISUAL_EXPLORED_FADE_TURNS = 30;
 export declare const CURSE_EVENTS_VISUAL_EXPLORED_FAST_PHASE_TURNS = 50;
 export declare const CURSE_EVENTS_VISUAL_EXPLORED_MAIN_ALGORITHM_RADIUS = 150;
 export declare const CURSE_EVENTS_VISUAL_EXPLORED_ALPHA_BATCH_SIZE = 4096;
+export declare const CURSE_EVENTS_VISUAL_EXPLORED_WEIGHTED_HIDE_DISTANCE_BAND = 60;
 export declare const CURSE_EVENTS_VISUAL_EXPLORED_VISIBLE_BUFFER_RADIUS = 1;
 declare namespace Curse {
     interface Helper {
@@ -127,6 +130,9 @@ declare namespace Curse {
     function resetCooldown(island: Island): void;
     function updateRuneItemsDisplay(island: Island): void;
     function tickCurse(island: Island, humans: Human[]): void;
+    function executeScriptAction(island: Island, event: CurseEventInstance, path: Array<string | number>): boolean;
+    function skipScriptWait(event: CurseEventInstance, path: Array<string | number>): boolean;
+    function restartScriptBranch(event: CurseEventInstance, path: Array<string | number>): boolean;
     function reload(island: Island, isNew?: boolean): void;
     function spawnCurseEvents(island: Island, humans: Human[], requiresEvents: boolean): void;
     function attemptCurseEventSpawn(category: CurseCategory | null, human: Human, curse: number, humans: Human[], events: CurseEventInstance[], allowDependents?: boolean): CurseEventInstance | undefined;
@@ -146,6 +152,7 @@ declare const SYMBOL_CURSE_EVENT_ACTIVE_SUBSCRIBER_INSTANCE: unique symbol;
 type CurseVisualHiddenExploredTilesByZ = Partial<Record<number, number[]>>;
 type CurseVisualFastStepsByZ = Partial<Record<number, number>>;
 type CurseVisualOriginsByZ = Partial<Record<number, IVector2>>;
+type CurseEventCooldowns = Partial<Record<CurseEventType, number>>;
 interface Curse {
     night?: true;
     globalCurse?: number;
@@ -157,6 +164,7 @@ interface Curse {
     visualStateRestoreOriginsByZ?: CurseVisualOriginsByZ;
     visualStateWeightedRestoreStepsByZ?: CurseVisualFastStepsByZ;
     cooldown?: number;
+    eventCooldowns?: CurseEventCooldowns;
     ephemeralCreatures?: number[];
     [SYMBOL_CURSE_EVENT_GLOBAL_SUBSCRIBER_INSTANCE]?: CurseEventSubscriber;
     [SYMBOL_CURSE_EVENT_ACTIVE_SUBSCRIBER_INSTANCE]?: CurseEventSubscriber;
@@ -179,6 +187,8 @@ interface ScriptProcessState {
     path: Array<string | number>;
     /** Iterations remaining for a Repeat block, or ticks remaining for an EndCondition. */
     iterationsRemaining?: number;
+    /** The original iteration count when the current step or branch was initialized. */
+    iterationsTotal?: number;
     /** The state of any child processes started by a Simultaneously or Repeat block. */
     childProcesses?: ScriptProcessState[];
 }

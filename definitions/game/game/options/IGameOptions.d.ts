@@ -49,6 +49,12 @@ export interface IGameOptions {
          */
         applyTravelingEffects: boolean;
     };
+    doodads: {
+        /**
+         * A bonus amount added to the scare radius of Curse Ward doodads.
+         */
+        curseWardScareRadiusBonus: number;
+    };
     creatures: {
         /**
          * Whether creatures attack when unprovoked
@@ -512,4 +518,8 @@ export interface IGameOptionsItemMagic {
      * Disables `bonusChance` and `bonusChanceUsesContextualMultiplier`.
      */
     randomizeAsRange: boolean;
+    /**
+     * The chance that a magical property becomes a curse.
+     */
+    curseChance: number;
 }

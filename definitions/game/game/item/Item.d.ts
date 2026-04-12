@@ -12,7 +12,7 @@ import { TileUpdateType } from "@wayward/game/game/IGame";
 import type { IHasQuality, IObject, IObjectOptions, IQualityEvents } from "@wayward/game/game/IObject";
 import { Quality } from "@wayward/game/game/IObject";
 import type Doodad from "@wayward/game/game/doodad/Doodad";
-import type { IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
+import type { DoodadType, IDoodadDescription } from "@wayward/game/game/doodad/IDoodad";
 import type Entity from "@wayward/game/game/entity/Entity";
 import type { IEntityMovableEvents } from "@wayward/game/game/entity/EntityMovable";
 import EntityMovable from "@wayward/game/game/entity/EntityMovable";
@@ -54,6 +54,18 @@ import Debug from "@wayward/game/utilities/dev/Debug";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+export interface IItemAttackContributionBreakdown {
+    baseDamage: number;
+    qualityBonus: number;
+    magicalBonus: number;
+    total: number;
+}
+export interface IItemBaseDefenseContributionBreakdown {
+    baseDefense: number;
+    qualityBonus: number;
+    magicalBonus: number;
+    total: number;
+}
 type ItemMagicEvents = {
     [EVENT in keyof IMagicalPropertyManagerEvents as `magic${Capitalize<EVENT>}`]: IMagicalPropertyManagerEvents[EVENT];
 };
@@ -119,6 +131,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     holderReference?: Reference<ReferenceType.Player | ReferenceType.NPC>;
     magic?: MagicalPropertyManager;
     map?: ItemMapManager;
+    note?: string;
     protected?: boolean;
     quality?: Quality;
     sort?: ContainerSort;
@@ -138,7 +151,8 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     offsetY?: number;
     [SYMBOL_CONTAINER_CACHED_REFERENCE]?: ContainerReference;
     private _movementOptions?;
-    constructor(itemType?: ItemType | undefined, islandId?: IslandId, quality?: Quality, human?: Human, magicalLootType?: MagicalLootType);
+    constructor(itemType?: ItemType | undefined, islandId?: IslandId, quality?: Quality, human?: Human, magicalLootType?: MagicalLootType, clientSide?: boolean);
+    private setup;
     get asCorpse(): undefined;
     get asCreature(): undefined;
     get asDoodad(): undefined;
@@ -171,7 +185,9 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     getDisplayItem(): DisplayableItemType;
     isContainer(): this is Item & IContainer;
     isWithin(container?: IContainer): boolean;
+    get builtDoodadType(): DoodadType | undefined;
     get builtDescription(): IDoodadDescription | undefined;
+    get builtAndLitDescription(): IDoodadDescription | undefined;
     get placeDownDescription(): IDoodadDescription | undefined;
     countTradesWith(human?: Human): number;
     /**
@@ -257,9 +273,10 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Note: This is not called by clients joining a mp game.
      */
     verifyAndFixItem(): void;
+    private pipingMagic;
     protected pipeMagicalPropertyManagerEvents(magic: MagicalPropertyManager): void;
     protected onMagicSet(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes, value?: number, previousValue?: number, curse?: true): void;
-    protected onMagicRemove(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes, value?: number): void;
+    protected onMagicRemove(type: MagicalPropertyType): void;
     verifyAndFixMagic(): void;
     /**
      * @param source A string representing the reason for this damage. Used for multiplayer debugging. Just put a unique string of characters here
@@ -323,15 +340,22 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     rerollMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes): boolean;
     rerollMagicalPropertyValues(): void;
     initializeMagicalPropertyManager(): MagicalPropertyManager;
-    protected updateDurabilityForPersistence(type: MagicalPropertyType, value?: number): void;
-    protected clampDecayToMax(type: MagicalPropertyType, value?: number): void;
+    protected updateDurabilityForPersistence(type: MagicalPropertyType, value?: number, previousValue?: number, curse?: true): void;
+    protected clampDecayToMax(type: MagicalPropertyType): void;
     protected clampDurabilityToMax(type: MagicalPropertyType): void;
-    addMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes, valueType?: "min" | "max"): boolean;
+    /**
+     * Adds a randomised magical property of the given type.
+     * @param valueType If provided, instead of random, either use the "min" or "max" value for the property. (Not the expandable max!)
+     * This param being provided does not stop the seeded generator from being advanced in the normal way.
+     * @param cursed If provided, overrides the random curse chance with a guaranteed state.
+     */
+    addMagicalProperty(type: MagicalPropertyType, subType?: MagicalSubPropertySubTypes, valueType?: "min" | "max", cursed?: boolean): boolean;
     getMagicalPropertyInfo(type: MagicalPropertyType): IMagicalPropertyInfo | undefined;
     acquireNotify(human: Human, context?: ActionContext): void;
     getStokeFireValue(): number | undefined;
     getStokeFireBonusValue(): number;
     getOnUseBonus(): number;
+    getAttackContributionBreakdown(type: "attack" | "ranged"): IItemAttackContributionBreakdown;
     getAttackDamage(type: AttackType.MeleeWeapon | AttackType.RangedWeapon): number;
     /**
      * Gets the worth of an item used for merchant trading. Does not consider bartering or modifiers bonuses; use Item.getTraderSellPrice for that.
@@ -343,10 +367,11 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * Checks to see if the item is in a fire/hot thing
      */
     canBurnPlayer(): boolean;
+    getEffectiveBaseDefenseBreakdown(): IItemBaseDefenseContributionBreakdown;
     /**
-     * Get the base defense of an item plus its magical defense stat if applicable
+     * Get the base defense of an item plus its quality and magical defense bonuses.
      */
-    getBaseDefense(): number;
+    getDefense(): number;
     /**
      * Returns the durability of the item based on the max durability to be used as a pseudo "charge"
      */
@@ -495,6 +520,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      * @returns true if bonusDefense/Attack was set.
      */
     setAttackDefenseBonus(): boolean;
+    getBaseAttack(): number;
     /**
      * Gets the attack damage with its bonus value.
      * Note: This does not get the value with any magical properties applied.
@@ -508,9 +534,13 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      */
     getRangedAttackWithBonus(): number;
     /**
+     * @returns The base defense value.
+     */
+    getBaseDefense(): number;
+    /**
      * Gets the base defense with its bonus value.
      * Note: This does not get the value with any magical properties applied.
-     * @returns number The base defense value.
+     * @returns The base defense value with bonus applied.
      */
     getBaseDefenseWithBonus(): number;
     /**

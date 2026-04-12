@@ -12,16 +12,14 @@ import { PlayerState } from "@wayward/game/game/entity/player/IPlayer";
 import type { GameMode, IGameOptions } from "@wayward/game/game/options/IGameOptions";
 import type { ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import type { ISaveObject } from "@wayward/game/save/ISaveManager";
+import type { IModManagerUnloadableInfo } from "@wayward/game/save/data/SaveData";
 import type { AnyPropertyToSerialize } from "@wayward/game/save/serializer/PropertiesToSerialize";
 import type Version from "@wayward/utilities/Version";
 interface SaveMetadata {
     slot?: number;
     path?: string;
     score: number;
-    modsUnloadable: Record<string, {
-        name: string;
-        unloadable: boolean;
-    }>;
+    modsUnloadable: Record<string, IModManagerUnloadableInfo>;
     saveTime: number;
     createdTime: number;
     originalVersion?: Version.String;

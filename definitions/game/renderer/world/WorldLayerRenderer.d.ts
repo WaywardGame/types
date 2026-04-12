@@ -74,6 +74,9 @@ export declare class WorldLayerRenderer extends EventEmitter.Host<IWorldLayerRen
     reset(): void;
     setWorldLayer(worldLayer: WorldLayer, exploredMapClientData: ExploredMapClientData): void;
     setExploredAlpha(tiles: IExploredTileAlpha[]): void;
+    setCurseMaskData(data: Uint8Array): void;
+    setCurseMaskAlpha(tiles: IExploredTileAlpha[]): void;
+    private getCurseMaskData;
     addTileLayer(tileLayer: ITileLayerRendererPlatform): void;
     updateAll(): void;
     updateDoodad({ x, y }: Tile, flushTileImmediately: boolean, { doodadDescription, doodadInfo, doodadVariationX, doodadVariationY, terrainMasks }: IDoodadUpdate): void;
