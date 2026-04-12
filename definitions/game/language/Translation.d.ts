@@ -213,7 +213,10 @@ declare namespace Translation {
         private translateComponent;
         private translateComponentValue;
         private resolveComponentValue;
-        private getHighestValueComponent;
+        private getHighestMagnitudeComponent;
+        private getCombinedColorCandidateComponents;
+        private getQualitySourceValue;
+        private getHighestPriorityColorComponent;
         private getCombinedComponent;
         combined(value?: FVal, reformatter?: SupplierOr<Translation | undefined>): this;
         base(value: FVal, reformatter?: SupplierOr<Translation | undefined>): this;

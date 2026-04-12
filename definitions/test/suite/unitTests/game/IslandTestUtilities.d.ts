@@ -41,7 +41,7 @@ export declare namespace IslandTestUtilities {
      * Clear / reset the the state of the player/world
      */
     function beforeEach(context: TestRunContext, shouldMoveToNewIsland?: boolean): Promise<void>;
-    function createItems(...items: Array<ItemType | ItemTypeGroup>): Item[];
+    function createItems(quality: Quality, ...items: Array<ItemType | ItemTypeGroup>): Item[];
     function createDoodad(doodadType: DoodadType): Doodad;
     function createCreature(creatureType: CreatureType, z?: WorldZ): Creature;
     function createNPC(npcType: NPCType, z?: WorldZ): NPC;
