@@ -33,6 +33,8 @@ export interface IUsableActionResolveUsingOptions {
     skipTiles?: boolean;
     /** Whether to skip filling in the `item`. Defaults to `false` */
     skipItem?: boolean;
+    /** Whether to keep the already-provided `item` instead of resolving it again. */
+    useProvidedItem?: boolean;
 }
 export interface IUsableActionEvents {
     preExecute(player: Player, using: IUsableActionPossibleUsing, context: IUsableActionExecutionContext): any;
@@ -81,6 +83,7 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     resolveUsing(player: Player, using: IUsableActionUsing<REQUIREMENTS>, options?: IUsableActionResolveUsingOptions): Message | IUsableActionUsing<REQUIREMENTS>;
     resolveUsingOrUndefined(player: Player, using: IUsableActionUsing<REQUIREMENTS>, options?: IUsableActionResolveUsingOptions): IUsableActionUsing<REQUIREMENTS> | undefined;
     isUsable(player: Player, provided: IUsableActionUsing<REQUIREMENTS>, context: UsableActionExecutionContext | IUsableActionExecutionContext): UsableActionUsability<REQUIREMENTS>;
+    private getResolvedUsability;
     isApplicable(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean, requireItem?: boolean): provided is IUsableActionUsing<REQUIREMENTS>;
     private isItemApplicable;
     private isDoodadApplicable;
@@ -89,6 +92,9 @@ declare class UsableAction<REQUIREMENTS extends IUsableActionRequirements = IUsa
     private readonly findItemCannotUse;
     getFindItemCannotUse(): IUsableActionNotUsable[];
     getItem(player: Player, provided?: IUsableActionPossibleUsing, fullUsabilityCheck?: boolean): Item | false | undefined;
+    private getProvidedItems;
+    private isProvidedStackItem;
+    private getProvidedItem;
     private requirementsItemFinders?;
     private getItemFinder;
     createItemFinder(player: Player, options?: IItemFinderOptions, provided?: IUsableActionPossibleUsing): ItemFinder;
