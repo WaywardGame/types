@@ -112,6 +112,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      */
     get isWithinHumanBounds(): boolean;
     setHumansWithinBound(humansWithinBound: IHumanBound[]): void;
+    getHumansWithinBound(): Human[];
     /**
      * Returns humans within this entities fov & that they can see
      */
