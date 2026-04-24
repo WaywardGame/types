@@ -422,6 +422,11 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     stokeFire(stokeValue: number, human?: Human): boolean;
     getDecayAtStartWithMagical(): number;
+    /**
+     * Gets the torche's decay value based on quality.
+     * @returns A number equal to the maximum item decay or `undefined` if the item should not have decay at all.
+     */
+    getTorchMaxDecayTime(): number | undefined;
     protected clampDecayToMax(type: MagicalPropertyType): void;
     protected clampDurabilityToMax(type: MagicalPropertyType): void;
     protected updateDurabilityForPersistence(type: MagicalPropertyType, value?: number, previousValue?: number, curse?: true): void;

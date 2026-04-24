@@ -355,4 +355,8 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
      */
     getMaximumTravelTime(): number;
     canMelt(terrainType: TerrainType, tile: Tile): boolean;
+    /**
+     * Gets the decay bonus based on the item or doodad's quality.
+     */
+    getDecayQualityBonus(quality?: Quality): number;
 }
