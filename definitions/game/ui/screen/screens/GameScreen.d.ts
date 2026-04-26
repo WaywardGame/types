@@ -167,6 +167,7 @@ export default class GameScreen extends Screen {
     protected onCancel(): boolean;
     protected create(): void;
     protected onHide(): void;
+    private onErrorReported;
     protected onResize(): void;
     protected onCloseAllDialogs(): boolean;
     /**

@@ -24,7 +24,7 @@ import type Player from "@wayward/game/game/entity/player/Player";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import { ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
+import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import type Translation from "@wayward/game/language/Translation";
@@ -46,6 +46,7 @@ export default class Corpse extends Entity<ICorpseDescription, CreatureType, Ref
     static is(value: any): value is Corpse;
     get entityType(): EntityType.Corpse;
     get tileUpdateType(): TileUpdateType;
+    get reference(): Reference<ReferenceType.Corpse> | undefined;
     event: IEventEmitter<this, ICorpseEvents>;
     aberrant?: boolean | undefined;
     decay?: number | undefined;

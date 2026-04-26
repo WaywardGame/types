@@ -47,6 +47,7 @@ export default class Creature extends EntityWithStats<ICreatureDescription, Crea
     static is(value: any): value is Creature;
     get entityType(): EntityType.Creature;
     get tileUpdateType(): TileUpdateType;
+    get reference(): Reference<ReferenceType.Creature> | undefined;
     event: IEventEmitter<this, ICreatureEvents>;
     anim: number;
     direction: Vector2;

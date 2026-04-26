@@ -109,6 +109,7 @@ export interface IItemEvents extends IEntityMovableEvents, IQualityEvents, ItemM
 export default class Item extends EntityMovable<IItemDescription, ItemType, ReferenceType.Item, ItemTag> implements Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, IHasInsulation, IHasMagic, IHasQuality {
     get entityType(): EntityType.Item;
     get tileUpdateType(): TileUpdateType;
+    get reference(): Reference<ReferenceType.Item> | undefined;
     event: IEventEmitter<this, IItemEvents>;
     private maxDur;
     private minDur;

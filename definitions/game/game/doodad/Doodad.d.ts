@@ -97,6 +97,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     protected static registrarId: number;
     get entityType(): EntityType.Doodad;
     get tileUpdateType(): TileUpdateType;
+    get reference(): Reference<ReferenceType.Doodad> | undefined;
     event: IEventEmitter<this, IDoodadEvents>;
     maxDur: number;
     minDur: number;
