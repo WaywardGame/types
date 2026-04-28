@@ -47,6 +47,7 @@ import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISeria
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IRGB } from "@wayward/utilities/Color";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type DoodadManager from "@wayward/game/game/doodad/DoodadManager";
 type DoodadMagicEvents = {
     [EVENT in keyof IMagicalPropertyManagerEvents as `magic${Capitalize<EVENT>}`]: IMagicalPropertyManagerEvents[EVENT];
 };
@@ -98,6 +99,7 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     get entityType(): EntityType.Doodad;
     get tileUpdateType(): TileUpdateType;
     get reference(): Reference<ReferenceType.Doodad> | undefined;
+    get manager(): DoodadManager;
     event: IEventEmitter<this, IDoodadEvents>;
     maxDur: number;
     minDur: number;

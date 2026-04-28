@@ -74,6 +74,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     get areSyncChecksSuppressed(): boolean;
     getPlayerIdentifier(): string;
     setPlayerIdentifier(identifier: string): void;
+    getPlayAsPlayerUrl(...playerNames: string[]): string[];
     get options(): ImmutableObject<IMultiplayerOptions>;
     setOptions(options: IMultiplayerOptions, updateGame?: boolean): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;

@@ -123,6 +123,15 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     private _minDur?;
     private _maxDur?;
+    /**
+     * Whether this is not a real tile in the world, instead just an ephemeral instance.
+     *
+     * Note that fake tiles can still be pointing to a real position in the world,
+     * and as such *can* affect the real world with their methods.
+     *
+     * The concept mostly just exists to stop a class of errors.
+     */
+    readonly isFake?: true;
     get zone(): CreatureZone;
     /**
      * Gets the tier of the zone the tile is in

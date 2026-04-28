@@ -17,7 +17,7 @@ import type EntityWithStats from "@wayward/game/game/entity/EntityWithStats";
 import type Human from "@wayward/game/game/entity/Human";
 import type { EntityTag, ICastable, IEntityConstructorOptions, IEntityEvents } from "@wayward/game/game/entity/IEntity";
 import { EntityType } from "@wayward/game/game/entity/IEntity";
-import type { IHumanBound } from "@wayward/game/game/entity/IEntityManager";
+import type { IEntityManager, IHumanBound } from "@wayward/game/game/entity/IEntityManager";
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
 import type Creature from "@wayward/game/game/entity/creature/Creature";
 import type Corpse from "@wayward/game/game/entity/creature/corpse/Corpse";
@@ -29,7 +29,7 @@ import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
 import { type EntityReferenceTypes, type IReferenceable, type Reference } from "@wayward/game/game/reference/IReferenceManager";
 import type { ITemperatureSource } from "@wayward/game/game/temperature/ITemperature";
-import type Tile from "@wayward/game/game/tile/Tile";
+import Tile from "@wayward/game/game/tile/Tile";
 import type TileEvent from "@wayward/game/game/tile/TileEvent";
 import { type ISerializedTranslation } from "@wayward/game/language/ITranslation";
 import type Translation from "@wayward/game/language/Translation";
@@ -88,6 +88,7 @@ export default abstract class Entity<DescriptionType = unknown, TypeType extends
      * Called when filling out the entities description for the first time
      */
     protected abstract getDescription(): DescriptionType | undefined;
+    protected abstract get manager(): IEntityManager<Entity>;
     toString(): string;
     /**
      * Location of the entity on the world.

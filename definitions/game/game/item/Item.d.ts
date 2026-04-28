@@ -54,6 +54,7 @@ import Debug from "@wayward/game/utilities/dev/Debug";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type ItemManager from "@wayward/game/game/item/ItemManager";
 export interface IItemAttackContributionBreakdown {
     baseDamage: number;
     qualityBonus: number;
@@ -110,6 +111,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     get entityType(): EntityType.Item;
     get tileUpdateType(): TileUpdateType;
     get reference(): Reference<ReferenceType.Item> | undefined;
+    get manager(): ItemManager;
     event: IEventEmitter<this, IItemEvents>;
     private maxDur;
     private minDur;

@@ -22,6 +22,7 @@ import type { IEntityAiEvents } from "@wayward/game/game/entity/ai/AiManager";
 import AiManager from "@wayward/game/game/entity/ai/AiManager";
 import type { INPCDescription, NPCTag } from "@wayward/game/game/entity/npc/INPC";
 import { NPCType } from "@wayward/game/game/entity/npc/INPCs";
+import type NPCManager from "@wayward/game/game/entity/npc/NPCManager";
 import type MerchantNPC from "@wayward/game/game/entity/npc/npcs/Merchant";
 import type ShipperNPC from "@wayward/game/game/entity/npc/npcs/Shipper";
 import { MessageManagerNoOp } from "@wayward/game/game/entity/player/MessageManager";
@@ -58,6 +59,7 @@ export default abstract class NPC extends Human<INPCDescription, NPCType, Refere
     get entityType(): EntityType.NPC;
     get tileUpdateType(): TileUpdateType;
     get reference(): Reference<ReferenceType.NPC> | undefined;
+    get manager(): NPCManager;
     event: IEventEmitter<this, INPCEvents>;
     private weightCapacity;
     ai: AiManager<this>;

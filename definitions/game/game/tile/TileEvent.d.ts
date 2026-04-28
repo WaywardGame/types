@@ -32,6 +32,7 @@ import type { Article } from "@wayward/game/language/ITranslation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type TileEventManager from "@wayward/game/game/tile/TileEventManager";
 export interface ITileEventEvents extends IEntityMovableEvents {
     /**
      * Emitted when the fire stage of this tile event changes.
@@ -45,6 +46,7 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
     get entityType(): EntityType.TileEvent;
     get tileUpdateType(): TileUpdateType;
     get reference(): Reference<ReferenceType.TileEvent> | undefined;
+    get manager(): TileEventManager;
     event: IEventEmitter<this, ITileEventEvents>;
     anim: number;
     fromX: number;

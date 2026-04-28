@@ -38,10 +38,12 @@ import type { IContainerSortInfo, IDialogInfo } from "@wayward/game/ui/old/IOldU
 import { IActionBarSlotData } from "@wayward/game/ui/screen/screens/game/static/actions/IActionBar";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import { type IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type PlayerManager from "@wayward/game/game/entity/player/PlayerManager";
 export default class Player extends Human<undefined, number, ReferenceType.Player, PlayerTag> implements IPreSerializeCallback, IUnserializedCallback {
     get entityType(): EntityType.Player;
     get tileUpdateType(): TileUpdateType;
     get reference(): Reference<ReferenceType.Player> | undefined;
+    get manager(): PlayerManager;
     event: IEventEmitter<this, IPlayerEvents>;
     absentLastUsedTime: number;
     containerSortInfo: Record<string | number, IContainerSortInfo | undefined>;

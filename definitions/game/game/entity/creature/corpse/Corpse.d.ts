@@ -31,6 +31,7 @@ import type Translation from "@wayward/game/language/Translation";
 import type { Article } from "@wayward/game/language/ITranslation";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type CorpseManager from "@wayward/game/game/entity/creature/corpse/CorpseManager";
 export interface ICorpseEvents extends IEntityEvents {
     /**
      * Called when the entity is created in the game
@@ -47,6 +48,7 @@ export default class Corpse extends Entity<ICorpseDescription, CreatureType, Ref
     get entityType(): EntityType.Corpse;
     get tileUpdateType(): TileUpdateType;
     get reference(): Reference<ReferenceType.Corpse> | undefined;
+    get manager(): CorpseManager;
     event: IEventEmitter<this, ICorpseEvents>;
     aberrant?: boolean | undefined;
     decay?: number | undefined;

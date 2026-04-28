@@ -43,11 +43,13 @@ import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import Vector2 from "@wayward/game/utilities/math/Vector2";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
 import { IRange } from "@wayward/utilities/math/Range";
+import type CreatureManager from "@wayward/game/game/entity/creature/CreatureManager";
 export default class Creature extends EntityWithStats<ICreatureDescription, CreatureType, ReferenceType.Creature, CreatureTag> implements IUnserializedCallback, IObject<CreatureType> {
     static is(value: any): value is Creature;
     get entityType(): EntityType.Creature;
     get tileUpdateType(): TileUpdateType;
     get reference(): Reference<ReferenceType.Creature> | undefined;
+    get manager(): CreatureManager;
     event: IEventEmitter<this, ICreatureEvents>;
     anim: number;
     direction: Vector2;

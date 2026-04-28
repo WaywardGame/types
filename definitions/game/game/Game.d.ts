@@ -51,6 +51,7 @@ import type { IVector2 } from "@wayward/game/utilities/math/IVector";
 import { WebWorkerManager } from "@wayward/game/webWorker/WebWorkerManager";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 import type { Random } from "@wayward/utilities/random/Random";
+import MessageManager from "@wayward/game/game/entity/player/MessageManager";
 export declare class Game extends EventEmitter.Host<IGameEvents> {
     get isChallenge(): boolean;
     private difficultyOptions;
@@ -90,6 +91,7 @@ export declare class Game extends EventEmitter.Host<IGameEvents> {
      */
     readonly tickHelper: TickHelper;
     get actionExecutor(): typeof ActionExecutor;
+    get messageManager(): typeof MessageManager;
     readonly islands: IslandManager;
     readonly playerManager: PlayerManager;
     readonly references: ReferenceManager;
