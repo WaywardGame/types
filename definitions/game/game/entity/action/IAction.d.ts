@@ -42,6 +42,7 @@ import type { TranslationArg } from "@wayward/game/language/ITranslation";
 import type Translation from "@wayward/game/language/Translation";
 import type Message from "@wayward/game/language/dictionary/Message";
 import type { IModdable } from "@wayward/game/mod/ModRegistry";
+import type { ParticlePhysics } from "@wayward/game/renderer/particle/IParticle";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IRGB } from "@wayward/utilities/Color";
@@ -345,8 +346,6 @@ export interface IActionApi<E extends Entity = Entity, CU extends IActionUsable 
      */
     setRuneChance(alignment: ArrayOr<Deity> | undefined, chance: number): this;
     setMilestone(milestone: Milestone, data?: number): this;
-    setParticle(color: IRGB, count?: number, inFront?: boolean): this;
-    setParticle(color: IRGB, inFront?: boolean): this;
     setParticle(particle: IActionParticle): this;
     /**
      * The items passed to this method will be registered as items potentially to be damaged when the action completes.
@@ -423,6 +422,7 @@ export interface IActionParticle {
     color: IRGB;
     tile?: Tile;
     count?: number;
+    physics?: ParticlePhysics;
     inFront?: boolean;
 }
 export interface IActionTargetAdjacent {
