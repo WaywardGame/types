@@ -221,10 +221,7 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     getItemInsertIndexInContainer(container: IContainer, item: Item, sorter?: ISorter<Item | undefined>): number | undefined;
     removeContainerItems(container: IContainer, options?: IItemRemoveOptions): void;
     remove(item: Item, options?: IItemRemoveOptions): void;
-    /**
-     * No need to run special logic when loading items
-     */
-    protected loadEntity: undefined;
+    protected loadEntity(item: Item): void;
     /**
      * For entity manager compat
      */

@@ -429,7 +429,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      */
     resetDecayTime(overrideDefault?: number): void;
     /**
-     * Gets the item's max decay value based on quality. The max number can be modified slightly due to overrideDefault (crafting) and adding fuel which goes over this max.
+     * Gets the item's base max decay value based on quality. The max number can be modified slightly due to overrideDefault (crafting) and adding fuel which goes over this max.
      * @param overrideDefault Override the item's decayMax definition with something else.
      * @param withRandomization True if you want to return a randomized value (useful when setting the value on an item).
      * @returns A number equal to the maximum item decay or `undefined` if the item should not have decay at all.
