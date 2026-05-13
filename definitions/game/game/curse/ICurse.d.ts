@@ -47,9 +47,9 @@ export declare enum CurseCategory {
      */
     Secondary = 1,
     /**
-     * Dependent curses are secondary curses that can ONLY be selected if a specific primary curse is also selected.
+     * Dependent curses are selected during the secondary phase and can affect later curse-event rolls that same night.
      *
-     * They're still selected before primary curses, but will be cancelled if no primary curse is selected.
+     * They do not satisfy the night's non-dependent curse event quota and are discarded if no primary or secondary curse event ends up spawning.
      */
     Dependent = 2
 }
