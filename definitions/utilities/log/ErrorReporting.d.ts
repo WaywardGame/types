@@ -35,6 +35,7 @@ declare namespace ErrorReporting {
         notifyPlayer(report: IReport): any;
         sendToServer(report: IReport): any;
     }
+    export const event: import("@wayward/utilities/event/EventEmitter").IEventEmitter<typeof ErrorReporting, IEvents>;
     export class ErrorReport {
         message?: string;
         error?: Error;
@@ -61,7 +62,6 @@ declare namespace ErrorReporting {
         private snapshot;
         private resolveLogger;
     }
-    export const event: import("@wayward/utilities/event/EventEmitter").IEventEmitter<typeof ErrorReporting, IEvents>;
     type WarningId = ArrayOr<string | Log.SimplifyString>;
     export function capture(message: string): ErrorReport;
     export function capture(options: ICaptureOptions): ErrorReport;
