@@ -33,6 +33,7 @@ import type Island from "@wayward/game/game/island/Island";
 import type { Automation } from "@wayward/game/game/island/automation/Automation";
 import type { IContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
+import type { Quality } from "@wayward/game/game/IObject";
 import type { IPromptDescriptionBase, PromptDescriptionArgs } from "@wayward/game/game/meta/prompt/IPrompt";
 import type { Milestone } from "@wayward/game/game/milestones/IMilestone";
 import type { IFindPathRange } from "@wayward/game/game/tile/ITerrain";
@@ -230,6 +231,13 @@ export interface IActionUsable {
      */
     usableOnMove?: boolean;
     displayLevel?: ActionDisplayLevel;
+    actionTierBreakdown?: IActionTierBreakdown;
+}
+export interface IActionTierBreakdown {
+    baseTier: number;
+    effectiveTier: number;
+    quality?: Quality;
+    qualityBonus?: number;
 }
 export declare namespace IActionUsable {
     function usableOrPrintable(usability: IActionUsable | IActionNotUsable): boolean;

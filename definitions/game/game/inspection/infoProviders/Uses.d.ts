@@ -14,6 +14,7 @@ import { InfoProvider } from "@wayward/game/game/inspection/InfoProvider";
 import type { InfoProviderContext } from "@wayward/game/game/inspection/InfoProviderContext";
 import type UseInfo from "@wayward/game/game/inspection/infoProviders/UseInfo";
 import type { DescribedDescription, IDescribed } from "@wayward/game/game/inspection/infoProviders/UseInfo";
+import { Quality } from "@wayward/game/game/IObject";
 import UiTranslation from "@wayward/game/language/dictionary/UiTranslation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import Translation from "@wayward/game/language/Translation";
@@ -44,6 +45,9 @@ export default abstract class Uses<T extends IDescribed> extends InfoProvider {
     protected getUseDisplayLevel(action: ActionType, context: InfoProviderContext): InfoDisplayLevel;
     private getDetailsHandlerResolver;
     protected getUse(description: DescribedDescription<T>, action: ActionType): TranslationImpl;
+    protected getUseTooltipContext(description: DescribedDescription<T>, action: ActionType): InfoProviderContext | undefined;
+    protected getUseBonus(description: DescribedDescription<T>, action: ActionType): number;
+    protected getUseBonusQuality(): Quality | undefined;
     protected getActionTier(description: DescribedDescription<T>, action: ActionType): number | undefined;
     private getUseName;
 }

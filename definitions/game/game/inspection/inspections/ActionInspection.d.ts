@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import { MoveFlag } from "@wayward/game/game/entity/IEntity";
-import type { IActionApi } from "@wayward/game/game/entity/action/IAction";
-import type { ActionId, IUsableActionDefinition, IUsableActionPossibleUsing, IUsableActionRequirements } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import type { IActionApi, IActionNotUsable, IActionUsable } from "@wayward/game/game/entity/action/IAction";
+import type { ActionId, IUsableActionDefinition, IUsableActionPossibleUsing, IUsableActionRequirements, UsableActionUsability } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import { UsableActionDisplayContext } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
 import type Player from "@wayward/game/game/entity/player/Player";
@@ -28,16 +28,18 @@ import { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
 import Translation from "@wayward/game/language/Translation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
+type ActionInspectionUsability = IActionUsable | IActionNotUsable | UsableActionUsability;
 export default class ActionInspection extends Inspection<ActionId | undefined> {
     static handles: (type: InspectType, value: unknown, context?: InfoProviderContext) => boolean;
     static getAction(id: ActionId): UsableAction<IUsableActionRequirements, IUsableActionDefinition> | undefined;
-    static getActionNameWithTier(id: ActionId | UsableAction, context: UsableActionDisplayContext, provided: IUsableActionPossibleUsing | undefined, resolveUsing: boolean): TranslationImpl | undefined;
+    static getActionNameWithTier(id: ActionId | UsableAction, context: UsableActionDisplayContext, provided: IUsableActionPossibleUsing | undefined, resolveUsing: boolean, usability?: ActionInspectionUsability): TranslationImpl | undefined;
     private static getTranslation;
     static getRuneInfo(id: ActionId, itemType?: ItemType, item?: Item): SimpleInfoProvider | undefined;
     constructor(value?: ActionId | EnumReferenceResolved<ReferenceType.Action>, context?: InfoProviderContext);
     private get using();
     private getAction;
     private get item();
+    private cachedUsability?;
     getId(): string;
     private getActionId;
     protected getTitle(context: InfoProviderContext): Translation;
@@ -47,8 +49,10 @@ export default class ActionInspection extends Inspection<ActionId | undefined> {
     private getActionSlotItemMode;
     private getTranslation;
     private getActionDiscovered;
-    private static getActionTier;
+    private static getItemActionTier;
+    private static getResolvedActionTier;
     private getActionTierInfo;
+    private getUsability;
     private getActionUsability;
     private getActionExample;
     protected onPlayerUpdate(): void;
@@ -56,3 +60,4 @@ export default class ActionInspection extends Inspection<ActionId | undefined> {
     protected onTickEnd(island: Island, options: IIslandTickOptions): void;
     postExecuteAction(action: IActionApi): void;
 }
+export {};
