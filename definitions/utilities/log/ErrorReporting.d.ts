@@ -10,6 +10,7 @@
  */
 import type { CallsiteMatcher } from "@wayward/utilities/Errors";
 import Log, { type ILog } from "@wayward/utilities/Log";
+import ErrorReportAttachments from "@wayward/utilities/log/ErrorReportAttachments";
 import Version from "@wayward/utilities/Version";
 declare namespace ErrorReporting {
     export interface ICallerOptions {
@@ -28,6 +29,7 @@ declare namespace ErrorReporting {
         stack?: string;
         shouldNotifyPlayer?: boolean;
         shouldSendRemote?: boolean;
+        attachments?: ErrorReportAttachments.IAttachment[];
     }
     export interface IEvents {
         logError(report: IReport): any;
@@ -41,6 +43,7 @@ declare namespace ErrorReporting {
         error?: Error;
         stack?: string;
         source: string[];
+        attachments?: ErrorReportAttachments.IAttachment[];
         private hash?;
         private oncePerSessionAllowed?;
         constructor(options: ICaptureOptions);
@@ -57,6 +60,7 @@ declare namespace ErrorReporting {
         logWarning(source: string | string[]): this;
         logWarning(log: ILog): this;
         notifyPlayer(): this;
+        attachText(filename: string, contents: string, contentType?: string): this;
         sendToServer(remoteId?: string): this;
         private shouldExecute;
         private snapshot;

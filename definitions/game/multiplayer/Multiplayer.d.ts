@@ -212,6 +212,8 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private synchronizationCheck;
     private logSyncCheckErrors;
     private sendDesyncPacket;
+    private getDiagnosticModList;
+    private formatDiagnosticModList;
     processDesyncPacket(connection: IConnection, desyncPacket: DesyncPacket): void;
     private sendPacketInternal;
     private onStateChange;
