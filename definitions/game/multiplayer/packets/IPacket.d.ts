@@ -24,6 +24,7 @@ export interface ISynchronizationCheckData {
     afterSyncChecksHash?: number;
 }
 export interface ISyncCheck {
+    erasable?: true;
     id: MultiplayerSyncCheck;
     value: string | number;
 }

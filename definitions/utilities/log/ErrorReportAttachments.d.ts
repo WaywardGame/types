@@ -11,7 +11,6 @@
 declare namespace ErrorReportAttachments {
     const MAX_ATTACHMENTS = 4;
     const MAX_ATTACHMENT_BYTES: number;
-    const MAX_TOTAL_ATTACHMENT_BYTES: number;
     interface IAttachment {
         filename: string;
         contentType: string;
@@ -19,7 +18,7 @@ declare namespace ErrorReportAttachments {
     }
     interface IValidationResult {
         attachments: IAttachment[];
-        error?: string;
+        notices: string[];
         totalBytes: number;
     }
     function validate(attachments: readonly IAttachment[] | undefined): IValidationResult;

@@ -113,6 +113,9 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     private static readonly cachedItemsThatCanBeRelic;
     private static readonly cachedRuneChanceRanges;
     static readonly cachedItemSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, ItemType[]>>>;
+    private getSyncCheckContainerDebug;
+    private getSyncCheckItemDebug;
+    private getSyncCheckItemIdentity;
     static getItemTypes(): readonly ItemType[];
     static getRuneChanceRange(deity: DeityReal): IRange;
     static getItemsWithRecipes(): readonly ItemType[];
