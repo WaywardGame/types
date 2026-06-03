@@ -11,7 +11,7 @@
 export type TestSetupExecutor = (context: TestSetupContext) => Promise<unknown>;
 export type TestExecutor = (context: TestRunContext) => Promise<unknown>;
 interface IRunContext {
-    filter?: string;
+    filters?: string[];
     attachmentPath?: string;
 }
 export interface ITestAttachmentData {
