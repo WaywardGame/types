@@ -42,6 +42,13 @@ export declare class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
      * Note: CanASeeBType.ClientSide is used to skip adding a sync check for the result
      */
     static canSeePosition(origin: IFieldOfViewOrigin, type: CanASeeBType, islandId: IslandId, tileX: number, tileY: number, tileZ: number, fieldOfView?: FieldOfView | undefined, customRadius?: number): boolean;
+    /**
+     * Diagnostic helper that replicates the C++ `FieldOfView::Bresenham` walk to find the first
+     * vision-blocking tile between two points. Used only for multiplayer sync check reporting so
+     * that light-block map divergences between server and client can be pinpointed when line of
+     * sight forks. Must stay in sync with `FieldOfView::Bresenham` in the C++ source.
+     */
+    private static findVisionBlocker;
     static getBounds(origin: IVector3, mapSize: number, radius: number): IBound3;
     /**
      * Gets the field of view radius based on either the field of view object, player, or the default value
