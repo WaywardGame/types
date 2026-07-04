@@ -47,6 +47,11 @@ export declare class FieldOfView extends EventEmitter.Host<IFieldOfViewEvents> {
      * vision-blocking tile between two points. Used only for multiplayer sync check reporting so
      * that light-block map divergences between server and client can be pinpointed when line of
      * sight forks. Must stay in sync with `FieldOfView::Bresenham` in the C++ source.
+     *
+     * As well as the first blocker, this cross-checks the cached C++ light-block map against the block
+     * state freshly derived from each tile's current terrain/doodad (`getTileUpdate`). A mismatch means
+     * the FOV blocker map is stale - i.e. it was not rebuilt when the tile changed - which is a common
+     * source of `CanASeeB` desyncs (e.g. a wall that blocks vision on one side but not the other).
      */
     private static findVisionBlocker;
     static getBounds(origin: IVector3, mapSize: number, radius: number): IBound3;
