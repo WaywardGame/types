@@ -169,6 +169,7 @@ export default abstract class EntityMovable<DescriptionType = unknown, TypeType 
     protected onMovementCompleted(movingData: IMovingData): void;
     get isFlying(): boolean;
     get isFastMoving(): boolean;
+    setFastMoving(fastMoving: boolean): void;
     /**
      * Checks if the entity is moving.
      * This is based on the local client state (renderer).
