@@ -12,7 +12,7 @@ declare namespace _default {
     export { createRuleListener as create };
 }
 export default _default;
-export type Context = TSESLint.RuleContext<keyof typeof messages, []>;
+export type Context = ESLintUtils<keyof typeof messages, []>;
 declare namespace messages {
     let useUsing: string;
     let useAwaitUsing: string;
@@ -23,6 +23,4 @@ declare namespace messages {
  * @param {Context} context
  * @returns {TSESLint.RuleListener}
  */
-declare function createRuleListener(context: Context): ESLintUtils.RuleListener;
-import type { TSESLint } from '@typescript-eslint/utils';
-import { ESLintUtils } from "@typescript-eslint/utils";
+declare function createRuleListener(context: Context): ESLintUtils;
