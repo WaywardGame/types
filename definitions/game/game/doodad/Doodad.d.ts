@@ -47,6 +47,7 @@ import type { IUnserializedCallback } from "@wayward/game/save/serializer/ISeria
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IRGB } from "@wayward/utilities/Color";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type DoodadManager from "@wayward/game/game/doodad/DoodadManager";
 type DoodadMagicEvents = {
     [EVENT in keyof IMagicalPropertyManagerEvents as `magic${Capitalize<EVENT>}`]: IMagicalPropertyManagerEvents[EVENT];
 };
@@ -97,6 +98,8 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
     protected static registrarId: number;
     get entityType(): EntityType.Doodad;
     get tileUpdateType(): TileUpdateType;
+    get reference(): Reference<ReferenceType.Doodad> | undefined;
+    get manager(): DoodadManager;
     event: IEventEmitter<this, IDoodadEvents>;
     maxDur: number;
     minDur: number;
@@ -422,6 +425,11 @@ export default class Doodad extends EntityMovable<IDoodadDescription, DoodadType
      */
     stokeFire(stokeValue: number, human?: Human): boolean;
     getDecayAtStartWithMagical(): number;
+    /**
+     * Gets the torche's decay value based on quality.
+     * @returns A number equal to the maximum item decay or `undefined` if the item should not have decay at all.
+     */
+    getTorchMaxDecayTime(): number | undefined;
     protected clampDecayToMax(type: MagicalPropertyType): void;
     protected clampDurabilityToMax(type: MagicalPropertyType): void;
     protected updateDurabilityForPersistence(type: MagicalPropertyType, value?: number, previousValue?: number, curse?: true): void;

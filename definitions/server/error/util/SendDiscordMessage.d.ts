@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import ErrorReportAttachments from "@wayward/utilities/log/ErrorReportAttachments";
 export interface IDiscordMessage {
     color?: number;
     author?: string;
@@ -15,5 +16,6 @@ export interface IDiscordMessage {
     url?: string;
     description?: string;
     footer?: string;
+    attachments?: ErrorReportAttachments.IAttachment[];
 }
 export default function (message: IDiscordMessage): Promise<void>;

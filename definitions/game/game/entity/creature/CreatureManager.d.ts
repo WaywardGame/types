@@ -56,7 +56,6 @@ export default class CreatureManager extends EntityManager<Creature, IEntityRemo
     spawnFromZone(tile: Tile, bypassCreatureLimit?: boolean, checkTerrainType?: boolean): Creature | undefined;
     getAberrantChance(tile: Tile): number;
     createFake(type: CreatureType, aberrant: boolean, tile?: Tile, id?: number): Creature;
-    exists(creature: Creature): boolean;
     maybeSpawnClawWorm(target: Human | Creature): void;
     /**
      * Maybe spawns a Dryad based on target's skill, zone tier, plants around target, and chance.

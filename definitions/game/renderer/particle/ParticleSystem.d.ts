@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+import { ParticlePhysics } from "@wayward/game/renderer/particle/IParticle";
 import type { WorldRenderer } from "@wayward/game/renderer/world/WorldRenderer";
 import type { IRGB } from "@wayward/utilities/Color";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -17,7 +18,7 @@ export declare class ParticleSystem {
     private readonly worldRenderer;
     private readonly maxParticles;
     readonly particles: Float32Array;
-    readonly dataPerParticle = 10;
+    readonly dataPerParticle = 12;
     private readonly positionSizeData;
     private readonly colorData;
     private count;
@@ -26,7 +27,7 @@ export declare class ParticleSystem {
     private readonly renderer;
     constructor(context: IRendererContext, worldRenderer: WorldRenderer, maxParticles?: number);
     delete(): void;
-    create(tile: Tile, particle: IRGB, count?: number, intensity?: number): number[] | undefined;
+    create(tile: Tile, particle: IRGB, count?: number, intensity?: number, physics?: ParticlePhysics): number[] | undefined;
     clear(): void;
     /**
      * Updates particles (ticks their life)
@@ -34,6 +35,16 @@ export declare class ParticleSystem {
      */
     private update;
     render(timeStamp: number, x: number, y: number): boolean;
+    private updateParticlePhysics;
+    private updateFallParticle;
+    private updateEmberParticle;
+    private updateExplodeParticle;
     private findUnusedParticle;
+    private getPixelAlignedPosition;
+    private getParticleLifetime;
+    private getParticleFloorY;
+    private getParticleSize;
+    private getParticleVelocityX;
+    private getParticleVelocityY;
     private spawn;
 }

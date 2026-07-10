@@ -10,5 +10,12 @@
  */
 export declare enum ParticleType {
     Fire = 0,
-    Blood = 1
+    Blood = 1,
+    Smoke = 2
+}
+export declare enum ParticlePhysics {
+    Fall = 0,
+    Ember = 1,
+    Explode = 2,
+    Rustle = 3
 }

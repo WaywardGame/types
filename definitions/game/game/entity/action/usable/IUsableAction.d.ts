@@ -93,6 +93,7 @@ export interface IUsableActionPossibleUsing {
     targetTile?: Tile;
     fromTile?: Tile;
     item?: Item;
+    stackItems?: readonly Item[];
     itemType?: ItemType;
     itemQuality?: ArrayOr<Quality>;
     container?: IContainer;

@@ -34,8 +34,6 @@ export default class OldUi {
     setVersionExtra(msg: string): void;
     openDialogs(): void;
     logErrorEvent(eventOrError: unknown, skipLog?: true): void;
-    private loggingRejection;
-    private logPromiseRejectionEvent;
     refreshUiTranslations(): void;
     private refreshUiTranslation;
 }

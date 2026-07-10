@@ -73,7 +73,7 @@ export declare class ApplicationManager {
     waitUntilLoadingIsFinished(): Promise<void>;
     removeNearbyCreatures(): Promise<void>;
     randomMovement(count: number): Promise<void>;
-    moveToTowardsIsland(app: Application, direction: Direction.Cardinal, recoverStats?: boolean): Promise<void>;
+    moveToTowardsIsland(app: Application, direction: Direction.Cardinal, recoverStats?: boolean, distance?: number): Promise<void>;
     recoverStats(app: Application): Promise<void>;
     ascendDesend(app: Application): Promise<void>;
     moveInDirection(app: Application, direction: Direction.Cardinal | Direction.None, steps?: number): Promise<void>;

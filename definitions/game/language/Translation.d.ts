@@ -235,7 +235,7 @@ declare namespace Translation {
         private addComponent;
     }
     export type RefreshEvents = Map<GameEmitterOrBus, Map<string, Set<AnyFunction<boolean> | undefined>>>;
-    export function getRefreshEvents(translation: Translation): Generator<RefreshEvents>;
+    export function getRefreshEvents(translation: Translation, visited?: WeakSet<object>): Generator<RefreshEvents>;
     export {};
 }
 export default Translation;

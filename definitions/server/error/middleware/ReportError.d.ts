@@ -11,3 +11,11 @@
 import Middleware from "@wayward/server/core/Middleware";
 declare const _default: Middleware<[message?: string]>;
 export default _default;
+interface IParsedReportRequest {
+    body?: unknown;
+    error?: string;
+}
+export declare function parseReportRequest(req: NodeJS.ReadableStream & {
+    headers: Record<string, string | string[] | undefined>;
+}): Promise<IParsedReportRequest>;
+export declare function parseReportBody(contentType: string, rawBody: Uint8Array): Promise<IParsedReportRequest>;

@@ -38,6 +38,8 @@ export default class AiManager<ENTITY extends EntityMovable = EntityMovable> {
     get entity(): ENTITY | undefined;
     protected get entityEvent(): IEventEmitter<EntityMovable, IEntityMovableEvents & IEntityAiEvents> | undefined;
     protected get island(): Island | undefined;
+    /** Whether AI masks are disabled */
+    get disabled(): boolean;
     /**
      * Gets the latest synced state of the ai.
      * This should only be used clientside.
@@ -45,6 +47,10 @@ export default class AiManager<ENTITY extends EntityMovable = EntityMovable> {
     get lastCalculatedAiClientSide(): AiType;
     calculate(): AiType;
     private emitChange;
+    /** Disables AI masks */
+    disable(): void;
+    /** Enables AI masks */
+    enable(): void;
     has(aiType: AiType): boolean;
     hasAny(aiTypes: AiType[]): boolean;
     hasBase(aiType: AiType): boolean;

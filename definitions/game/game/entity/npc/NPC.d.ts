@@ -22,6 +22,7 @@ import type { IEntityAiEvents } from "@wayward/game/game/entity/ai/AiManager";
 import AiManager from "@wayward/game/game/entity/ai/AiManager";
 import type { INPCDescription, NPCTag } from "@wayward/game/game/entity/npc/INPC";
 import { NPCType } from "@wayward/game/game/entity/npc/INPCs";
+import type NPCManager from "@wayward/game/game/entity/npc/NPCManager";
 import type MerchantNPC from "@wayward/game/game/entity/npc/npcs/Merchant";
 import type ShipperNPC from "@wayward/game/game/entity/npc/npcs/Shipper";
 import { MessageManagerNoOp } from "@wayward/game/game/entity/player/MessageManager";
@@ -31,7 +32,7 @@ import { QuestManagerNoOp } from "@wayward/game/game/entity/player/quest/QuestMa
 import { StatusApplicability } from "@wayward/game/game/entity/status/IStatus";
 import type { IContainer, ItemType } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
+import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type { Article } from "@wayward/game/language/ITranslation";
 import Translation from "@wayward/game/language/Translation";
@@ -57,6 +58,8 @@ export default abstract class NPC extends Human<INPCDescription, NPCType, Refere
     readonly isPlayerLike: boolean;
     get entityType(): EntityType.NPC;
     get tileUpdateType(): TileUpdateType;
+    get reference(): Reference<ReferenceType.NPC> | undefined;
+    get manager(): NPCManager;
     event: IEventEmitter<this, INPCEvents>;
     private weightCapacity;
     ai: AiManager<this>;

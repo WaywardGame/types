@@ -13,7 +13,7 @@ declare namespace _default {
     export { createRuleListener as create };
 }
 export default _default;
-export type Context = TSESLint.RuleContext<keyof typeof messages, []>;
+export type Context = AST_NODE_TYPES<keyof typeof messages, []>;
 export type Complexity = {
     value: number;
     functionValue: number;
@@ -27,5 +27,4 @@ declare namespace messages {
  * @param {Context} context
  * @returns {TSESLint.RuleListener}
  */
-declare function createRuleListener(context: Context): TSESLint.RuleListener;
-import type { TSESLint } from '@typescript-eslint/utils';
+declare function createRuleListener(context: Context): AST_NODE_TYPES;

@@ -54,6 +54,7 @@ import Debug from "@wayward/game/utilities/dev/Debug";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type ItemManager from "@wayward/game/game/item/ItemManager";
 export interface IItemAttackContributionBreakdown {
     baseDamage: number;
     qualityBonus: number;
@@ -109,6 +110,8 @@ export interface IItemEvents extends IEntityMovableEvents, IQualityEvents, ItemM
 export default class Item extends EntityMovable<IItemDescription, ItemType, ReferenceType.Item, ItemTag> implements Partial<IContainer>, IContainable, IUnserializedCallback, IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer>, IHasInsulation, IHasMagic, IHasQuality {
     get entityType(): EntityType.Item;
     get tileUpdateType(): TileUpdateType;
+    get reference(): Reference<ReferenceType.Item> | undefined;
+    get manager(): ItemManager;
     event: IEventEmitter<this, IItemEvents>;
     private maxDur;
     private minDur;
@@ -189,6 +192,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
     get builtDescription(): IDoodadDescription | undefined;
     get builtAndLitDescription(): IDoodadDescription | undefined;
     get placeDownDescription(): IDoodadDescription | undefined;
+    preventsUsingAsContainerInInventory(): boolean;
     countTradesWith(human?: Human): number;
     /**
      * Gets the owner of this item.
@@ -426,7 +430,7 @@ export default class Item extends EntityMovable<IItemDescription, ItemType, Refe
      */
     resetDecayTime(overrideDefault?: number): void;
     /**
-     * Gets the item's max decay value based on quality. The max number can be modified slightly due to overrideDefault (crafting) and adding fuel which goes over this max.
+     * Gets the item's base max decay value based on quality. The max number can be modified slightly due to overrideDefault (crafting) and adding fuel which goes over this max.
      * @param overrideDefault Override the item's decayMax definition with something else.
      * @param withRandomization True if you want to return a randomized value (useful when setting the value on an item).
      * @returns A number equal to the maximum item decay or `undefined` if the item should not have decay at all.

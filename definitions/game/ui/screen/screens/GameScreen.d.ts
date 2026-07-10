@@ -46,6 +46,7 @@ import InteractionManager from "@wayward/game/ui/screen/screens/game/util/moveme
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type Stream from "@wayward/goodstream";
 import type { Events, IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import ErrorReporting from "@wayward/utilities/log/ErrorReporting";
 export declare enum GameScreenClasses {
     PauseIcon = "pause-icon",
     PauseIcon_Paused = "pause-icon--paused",
@@ -167,6 +168,7 @@ export default class GameScreen extends Screen {
     protected onCancel(): boolean;
     protected create(): void;
     protected onHide(): void;
+    protected onErrorReported(_errorReporting: typeof ErrorReporting, report: ErrorReporting.IReport): void;
     protected onResize(): void;
     protected onCloseAllDialogs(): boolean;
     /**

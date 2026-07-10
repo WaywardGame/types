@@ -19,6 +19,9 @@ import type { IPacket } from "@wayward/game/multiplayer/packets/IPacket";
 import DesyncPacket from "@wayward/game/multiplayer/packets/server/DesyncPacket";
 import type { IServerMod } from "@wayward/hosts/shared/interfaces";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
+export interface ISyncRegionHandle extends Disposable {
+    dispose(): void;
+}
 export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     /**
      * Static steam account id when steam support is on
@@ -74,6 +77,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     get areSyncChecksSuppressed(): boolean;
     getPlayerIdentifier(): string;
     setPlayerIdentifier(identifier: string): void;
+    getPlayAsPlayerUrl(...playerNames: string[]): string[];
     get options(): ImmutableObject<IMultiplayerOptions>;
     setOptions(options: IMultiplayerOptions, updateGame?: boolean): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
@@ -171,8 +175,29 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
      * Active means there's a current sync check being recorded
      */
     isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;
+    /**
+     * Opens a sync check region and returns a disposable handle that closes it.
+     *
+     * Erasable sync regions that don't contain a fork are removed from desync reports.
+     */
+    addSyncRegion(syncCheck: MultiplayerSyncCheck, value: any): ISyncRegionHandle;
+    /**
+     * Opens a sync check region and returns a disposable handle that closes it.
+     */
+    addSyncRegion(id: string): ISyncRegionHandle;
+    /**
+     * Opens an erasable sync check region and returns a disposable handle that closes it.
+     *
+     * Erasable regions are removed from collapsed desync reports when they match on both sides.
+     */
+    addErasableSyncRegion(syncCheck: MultiplayerSyncCheck, value: any): ISyncRegionHandle;
+    addErasableSyncRegion(id: string): ISyncRegionHandle;
+    private createSyncRegion;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any, addStackTrace?: boolean): void;
+    addErasableSyncCheck(syncCheck: MultiplayerSyncCheck, value: any, addStackTrace?: boolean): void;
+    private addSyncCheckInternal;
     addSyncCheckWithSeed(island: Island, syncCheck: MultiplayerSyncCheck, ...messages: any[]): void;
+    addErasableSyncCheckWithSeed(island: Island, syncCheck: MultiplayerSyncCheck, ...messages: any[]): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addAfterSyncChecks(packet: IPacket): void;
     sendChatMessage(sender: Player, message: string): Promise<void>;
@@ -211,6 +236,8 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     private synchronizationCheck;
     private logSyncCheckErrors;
     private sendDesyncPacket;
+    private getDiagnosticModList;
+    private formatDiagnosticModList;
     processDesyncPacket(connection: IConnection, desyncPacket: DesyncPacket): void;
     private sendPacketInternal;
     private onStateChange;

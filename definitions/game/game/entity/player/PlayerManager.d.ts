@@ -9,6 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IEntityManagerEvents } from "@wayward/game/game/entity/EntityManager";
+import type { IHumanBound } from "@wayward/game/game/entity/IEntityManager";
+import type IEntityManager from "@wayward/game/game/entity/IEntityManager";
 import Player from "@wayward/game/game/entity/player/Player";
 import type { Game } from "@wayward/game/game/Game";
 import type { IPlayerOptions, IPlayOptions } from "@wayward/game/game/IGame";
@@ -40,11 +42,14 @@ export interface IPlayerManagerEvents extends IEntityManagerEvents<Player> {
      */
     removePlayingEntity(entity: Player): any;
 }
-export default class PlayerManager extends EventEmitter.Host<IPlayerManagerEvents> {
+export default class PlayerManager extends EventEmitter.Host<IPlayerManagerEvents> implements IEntityManager<Player> {
     private readonly game;
     readonly players: Array<Player | undefined>;
     readonly absentPlayers: Array<Player | undefined>;
     constructor(game: Game);
+    exists(player: Player): boolean;
+    /** No-op */
+    updateFov(humanBounds: IHumanBound[]): void;
     reset(): void;
     /**
      * Get players. Parameters include additional players that may not be relevant, such as ghosts, connecting players, absent players, the dedicated server fake player.

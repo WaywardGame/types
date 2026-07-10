@@ -19,7 +19,7 @@ interface SaveMetadata {
     slot?: number;
     path?: string;
     score: number;
-    modsUnloadable: Record<string, IModManagerUnloadableInfo>;
+    modsUnloadable?: Record<string, IModManagerUnloadableInfo>;
     saveTime: number;
     createdTime: number;
     originalVersion?: Version.String;

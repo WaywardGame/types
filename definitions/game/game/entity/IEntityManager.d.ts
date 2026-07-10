@@ -12,6 +12,7 @@ import type Entity from "@wayward/game/game/entity/Entity";
 import type Human from "@wayward/game/game/entity/Human";
 import type { IBound3 } from "@wayward/game/utilities/math/Bound3";
 export interface IEntityManager<T extends Entity> {
+    exists(entity: T): boolean;
     remove(entity: T): void;
     updateFov(humanBounds: IHumanBound[]): void;
 }

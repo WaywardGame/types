@@ -8,4 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
-export declare function throwErrorInDeveloperMode(message: string): void | never;
+declare const _default: import("@wayward/game/save/upgrade/UpgradeVersion").IUpgradeVersionDefinition<unknown>;
+export default _default;

@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://github.com/WaywardGame/types/wiki
  */
+export type CallsiteMatcher = string | ((callsite: string) => any);
 declare namespace Errors {
     function get(error: unknown): Error | undefined;
     function toString(error: unknown): string | undefined;
@@ -21,9 +22,17 @@ declare namespace Errors {
      */
     function stack(skip?: number, truncate?: number, stack?: string): string;
     /**
+     * Returns the callsite stack string after the provided callsite matcher.
+     */
+    function stackAfter(skipPast: ArrayOr<CallsiteMatcher>, truncate?: number, stack?: string): string;
+    /**
      * Returns the Error callsite string for the caller of the current function.
      */
     function caller(skip?: number): string;
+    /**
+     * Returns the Error callsite string after the provided callsite matcher.
+     */
+    function callerAfter(skipPast: ArrayOr<CallsiteMatcher>): string;
     /**
      * Returns the filename of the caller of the current function.
      */

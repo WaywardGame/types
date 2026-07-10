@@ -9,7 +9,7 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { ActionType } from "@wayward/game/game/entity/action/IAction";
-import type { ActionId, IUsableActionDefinition, IUsableActionPossibleUsing, IUsableActionRequirements } from "@wayward/game/game/entity/action/usable/IUsableAction";
+import type { ActionId, IUsableActionDefinition, IUsableActionPossibleUsing, IUsableActionRequirements, UsableActionUsability } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import { UsableActionDisplayContext } from "@wayward/game/game/entity/action/usable/IUsableAction";
 import type UsableAction from "@wayward/game/game/entity/action/usable/UsableAction";
 import { InfoDisplayLevel } from "@wayward/game/game/inspection/IInfoProvider";
@@ -55,9 +55,10 @@ export interface IActionUseContextUsing extends Omit<IUsableActionPossibleUsing,
 }
 export declare class ActionUseContext extends InfoProviderContext {
     readonly context: UsableActionDisplayContext;
+    readonly usability?: UsableActionUsability | undefined;
     private readonly stored?;
     get provided(): IActionUseContextUsing | undefined;
-    constructor(provided: IActionUseContextUsing, context?: UsableActionDisplayContext);
+    constructor(provided: IActionUseContextUsing, context?: UsableActionDisplayContext, usability?: UsableActionUsability | undefined);
 }
 export declare class ActionSlotContext extends InfoProviderContext {
     private readonly slotRef?;

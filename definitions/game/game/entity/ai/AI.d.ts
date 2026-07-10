@@ -49,7 +49,9 @@ export declare enum AiType {
     /** Follows the owner and never attacks, even when attacked itself or sees owner attacked */
     Heel = 16384,
     /** Not currently wandering. This AI type is managed by the wander system. Do not put it in AI masks. */
-    Idle = 128
+    Idle = 128,
+    /** All AI mask checks are disabled. Used for caged creatures */
+    AiDisabled = 131072
 }
 declare namespace AI {
     function debugString(ai: AiType): string;

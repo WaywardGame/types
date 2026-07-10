@@ -113,6 +113,9 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
     private static readonly cachedItemsThatCanBeRelic;
     private static readonly cachedRuneChanceRanges;
     static readonly cachedItemSpawns: Map<BiomeType, Map<WorldZ, Map<TerrainType, ItemType[]>>>;
+    private getSyncCheckContainerDebug;
+    private getSyncCheckItemDebug;
+    private getSyncCheckItemIdentity;
     static getItemTypes(): readonly ItemType[];
     static getRuneChanceRange(deity: DeityReal): IRange;
     static getItemsWithRecipes(): readonly ItemType[];
@@ -220,12 +223,8 @@ export default class ItemManager extends EntityManager<Item, IItemRemoveOptions>
      */
     getItemInsertIndexInContainer(container: IContainer, item: Item, sorter?: ISorter<Item | undefined>): number | undefined;
     removeContainerItems(container: IContainer, options?: IItemRemoveOptions): void;
-    exists(item: Item): boolean;
     remove(item: Item, options?: IItemRemoveOptions): void;
-    /**
-     * No need to run special logic when loading items
-     */
-    protected loadEntity: undefined;
+    protected loadEntity(item: Item): void;
     /**
      * For entity manager compat
      */

@@ -33,7 +33,7 @@ import ItemManager from "@wayward/game/game/item/ItemManager";
 import type DrawnMap from "@wayward/game/game/mapping/DrawnMap";
 import type { IGameOptions, IGameOptionsPartial } from "@wayward/game/game/options/IGameOptions";
 import type { IslandModifiersCollection } from "@wayward/game/game/options/modifiers/island/IslandModifiers";
-import type { IReferenceable } from "@wayward/game/game/reference/IReferenceManager";
+import type { IReferenceable, Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import TemperatureManager from "@wayward/game/game/temperature/TemperatureManager";
 import type { ITerrainDescription, ITileContainer, ITileData } from "@wayward/game/game/tile/ITerrain";
 import { TerrainType } from "@wayward/game/game/tile/ITerrain";
@@ -115,11 +115,11 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     /**
      * Set of players on this island
      */
-    readonly players: Set<Human<unknown, number, import("@wayward/game/game/reference/IReferenceManager").ReferenceType.NPC | import("@wayward/game/game/reference/IReferenceManager").ReferenceType.Player, unknown>>;
+    readonly players: Set<Human<unknown, number, ReferenceType.NPC | ReferenceType.Player, unknown>>;
     /**
      * Entity move types in fov on this island
      */
-    readonly moveTypesInFov: Map<"-1-0" | "-1-1" | "-1-2" | "-1-4" | "-1-8" | "-1-16" | "-1-32" | "-1-64" | "-1-128" | "-1-256" | "-1-512" | "-1-1024" | "-1-2048" | "-1-4096" | "-1-8192" | "-1-15" | "0-0" | "0-1" | "0-2" | "0-4" | "0-8" | "0-16" | "0-32" | "0-64" | "0-128" | "0-256" | "0-512" | "0-1024" | "0-2048" | "0-4096" | "0-8192" | "0-15" | "1-0" | "1-1" | "1-2" | "1-4" | "1-8" | "1-16" | "1-32" | "1-64" | "1-128" | "1-256" | "1-512" | "1-1024" | "1-2048" | "1-4096" | "1-8192" | "1-15", Set<Human<unknown, number, import("@wayward/game/game/reference/IReferenceManager").ReferenceType.NPC | import("@wayward/game/game/reference/IReferenceManager").ReferenceType.Player, unknown>>>;
+    readonly moveTypesInFov: Map<"-1-0" | "-1-1" | "-1-2" | "-1-4" | "-1-8" | "-1-16" | "-1-32" | "-1-64" | "-1-128" | "-1-256" | "-1-512" | "-1-1024" | "-1-2048" | "-1-4096" | "-1-8192" | "-1-15" | "0-0" | "0-1" | "0-2" | "0-4" | "0-8" | "0-16" | "0-32" | "0-64" | "0-128" | "0-256" | "0-512" | "0-1024" | "0-2048" | "0-4096" | "0-8192" | "0-15" | "1-0" | "1-1" | "1-2" | "1-4" | "1-8" | "1-16" | "1-32" | "1-64" | "1-128" | "1-256" | "1-512" | "1-1024" | "1-2048" | "1-4096" | "1-8192" | "1-15", Set<Human<unknown, number, ReferenceType.NPC | ReferenceType.Player, unknown>>>;
     /**
      * Helps instruct when to tick when in simulated turn mode
      */
@@ -139,6 +139,7 @@ export default class Island extends EventEmitter.Host<IIslandEvents> implements 
     get isFastForwarding(): boolean;
     constructor(game?: Game, position?: IVector2, seed?: number, mapSize?: number);
     toString(): string;
+    get reference(): Reference<ReferenceType.Island> | undefined;
     createStaticRandom(seed?: number, advance?: number): Random<PCGSeededGenerator>;
     private registerMemoryLeakDetector;
     preSerializeObject(serializer: ISerializer): void;

@@ -13,6 +13,7 @@ import type Item from "@wayward/game/game/item/Item";
 import type ItemManager from "@wayward/game/game/item/ItemManager";
 import Button from "@wayward/game/ui/component/Button";
 import Component from "@wayward/game/ui/component/Component";
+import Text from "@wayward/game/ui/component/Text";
 import ContainerDialog from "@wayward/game/ui/screen/screens/game/dialog/ContainerDialog";
 import { DialogId } from "@wayward/game/ui/screen/screens/game/Dialogs";
 export declare enum AltarDialogClasses {
@@ -21,12 +22,14 @@ export declare enum AltarDialogClasses {
     ConsecrateButton = "altar-dialog-consecrate-button",
     ConsecrateButtonDisabled = "altar-dialog-consecrate-button--disabled",
     ResultArrow = "altar-dialog-result-arrow",
+    ResultArrowFanaticism = "altar-dialog-result-arrow-fanaticism",
     Projection = "altar-dialog-projection",
     ProjectionItem = "altar-dialog-projection-item"
 }
 export default class AltarDialog extends ContainerDialog {
     readonly consecrateButton: Button;
     readonly resultArrow: Component<HTMLElement>;
+    readonly resultArrowFanaticism: Text;
     readonly projection: Component<HTMLElement>;
     constructor(id?: DialogId, subId?: string);
     setContainer(container: IContainer): this;

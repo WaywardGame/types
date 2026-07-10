@@ -23,7 +23,7 @@ import type NPC from "@wayward/game/game/entity/npc/NPC";
 import type Player from "@wayward/game/game/entity/player/Player";
 import type { IUncastableContainer } from "@wayward/game/game/item/IItem";
 import type Item from "@wayward/game/game/item/Item";
-import type { ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
+import type { Reference, ReferenceType } from "@wayward/game/game/reference/IReferenceManager";
 import type { ITileEventDescription, TileEventTag } from "@wayward/game/game/tile/ITileEvent";
 import { TileEventType } from "@wayward/game/game/tile/ITileEvent";
 import type Tile from "@wayward/game/game/tile/Tile";
@@ -32,6 +32,7 @@ import type { Article } from "@wayward/game/language/ITranslation";
 import type TranslationImpl from "@wayward/game/language/impl/TranslationImpl";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
 import type { IEventEmitter } from "@wayward/utilities/event/EventEmitter";
+import type TileEventManager from "@wayward/game/game/tile/TileEventManager";
 export interface ITileEventEvents extends IEntityMovableEvents {
     /**
      * Emitted when the fire stage of this tile event changes.
@@ -44,6 +45,8 @@ export default class TileEvent extends EntityMovable<ITileEventDescription, Tile
     static is(value: any): value is TileEvent;
     get entityType(): EntityType.TileEvent;
     get tileUpdateType(): TileUpdateType;
+    get reference(): Reference<ReferenceType.TileEvent> | undefined;
+    get manager(): TileEventManager;
     event: IEventEmitter<this, ITileEventEvents>;
     anim: number;
     fromX: number;

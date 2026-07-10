@@ -26,7 +26,6 @@ import type Translation from "@wayward/game/language/Translation";
 import ActionPacket from "@wayward/game/multiplayer/packets/shared/ActionPacket";
 import type { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector3 } from "@wayward/game/utilities/math/IVector";
-import type { IRGB } from "@wayward/utilities/Color";
 import EventEmitter from "@wayward/utilities/event/EventEmitter";
 export default class ActionExecutor<A extends ActionArguments, E extends Entity, R, CU extends IActionUsable, AV extends any[]> extends EventEmitter.Host<ActionExecutorEvents> implements IActionApi<E, CU>, IActionConfirmerApi<E, CU> {
     /**
@@ -123,8 +122,6 @@ export default class ActionExecutor<A extends ActionArguments, E extends Entity,
     setMilestone(milestone: Milestone, data?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
-    setParticle(color: IRGB, inFront?: boolean): this;
-    setParticle(color: IRGB, count?: number, inFront?: boolean): this;
     setParticle(particle: IActionParticle): this;
     addItems(...addItems: Array<Item | undefined>): this;
     canProtectedItemBeUsed(items: IProtectedItems): true | IActionNotUsable;

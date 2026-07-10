@@ -10,6 +10,7 @@
  */
 import { IterableWeakMap } from "@wayward/utilities/collection/map/IterableWeakMap";
 import { PriorityMap } from "@wayward/utilities/collection/map/PriorityMap";
+import type ErrorReporting from "@wayward/utilities/log/ErrorReporting";
 export declare enum Priority {
     Lowest = -2000,
     Low = -1000,
@@ -104,6 +105,7 @@ export interface IUntilSubscriber<H, E> {
 }
 declare class EventEmitter<H, E> {
     private readonly host;
+    static initializeErrorReporting(value: typeof ErrorReporting): void;
     private readonly hostClass;
     /**
      * We're not always initializing these since they're not always needed.

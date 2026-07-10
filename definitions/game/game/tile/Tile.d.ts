@@ -37,6 +37,7 @@ import type { IRendererOrigin } from "@wayward/game/renderer/context/RendererOri
 import { FieldOfView } from "@wayward/game/renderer/fieldOfView/FieldOfView";
 import type { IFieldOfViewOrigin } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
 import { CanASeeBType } from "@wayward/game/renderer/fieldOfView/IFieldOfView";
+import { ParticlePhysics } from "@wayward/game/renderer/particle/IParticle";
 import Debug from "@wayward/game/utilities/dev/Debug";
 import { Direction } from "@wayward/game/utilities/math/Direction";
 import type { IVector2, IVector3 } from "@wayward/game/utilities/math/IVector";
@@ -123,6 +124,15 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     private _minDur?;
     private _maxDur?;
+    /**
+     * Whether this is not a real tile in the world, instead just an ephemeral instance.
+     *
+     * Note that fake tiles can still be pointing to a real position in the world,
+     * and as such *can* affect the real world with their methods.
+     *
+     * The concept mostly just exists to stop a class of errors.
+     */
+    readonly isFake?: true;
     get zone(): CreatureZone;
     /**
      * Gets the tier of the zone the tile is in
@@ -356,7 +366,7 @@ export default class Tile implements IVector4, Partial<ITileContainer>, IFieldOf
      */
     private canSwitchCave;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
-    createParticles(particle: IRGB | undefined, count?: number, intensity?: number): void;
+    createParticles(particle: IRGB | undefined, physics?: ParticlePhysics, count?: number, intensity?: number): void;
     /**
      * Finds either lava or water ajacent to either lava or water, and cools the lava down based its findings.
      */

@@ -40,6 +40,7 @@ export default abstract class EntityManager<T extends Entity, RemoveOptions exte
     protected abstract onRemove(entity: T, options?: RemoveOptions & IEntityRemoveOptions): boolean;
     protected abstract loadEntity?(entity: T): void;
     load(): void;
+    exists(entity: T): boolean;
     /**
      * Restores a previous removed entity
      */

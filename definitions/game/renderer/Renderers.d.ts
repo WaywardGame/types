@@ -13,6 +13,7 @@ import type Island from "@wayward/game/game/island/Island";
 import type { IOverlayInfo } from "@wayward/game/game/tile/ITerrain";
 import type Tile from "@wayward/game/game/tile/Tile";
 import type { RenderSource, UpdateRenderFlag } from "@wayward/game/renderer/IRenderer";
+import { ParticlePhysics } from "@wayward/game/renderer/particle/IParticle";
 import type { Renderer } from "@wayward/game/renderer/Renderer";
 import { RenderersNotifiers } from "@wayward/game/renderer/RenderersNotifiers";
 import type { IVector4 } from "@wayward/game/utilities/math/Vector4";
@@ -24,7 +25,7 @@ export default class Renderers {
     readonly renderers: Set<Renderer>;
     readonly notifier: RenderersNotifiers;
     readonly particle: {
-        create: (tile: Tile, particle: IRGB, count?: number, intensity?: number) => void;
+        create: (tile: Tile, particle: IRGB, count?: number, intensity?: number, physics?: ParticlePhysics) => void;
     };
     getRenderersForObject(object: IVector4): Renderer[];
     getRenderersForIslandId(islandId?: IslandId): Renderer[];

@@ -20,6 +20,8 @@ export default class DesyncPacket extends ServerPacket {
     checkBefore: boolean;
     shouldDisconnect: boolean;
     logs: string;
+    clientLoadedMods: string[];
+    clientAllMods: string[];
     getDebugInfo(): string;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
