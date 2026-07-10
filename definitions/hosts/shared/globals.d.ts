@@ -9,8 +9,8 @@
  * https://github.com/WaywardGame/types/wiki
  */
 import type { IWaywardTitle } from "@wayward/hosts/shared/globalTypes";
-export declare const gameVersionStage = "beta", gameVersionMajor = 2, gameVersionMinor = 15, gameVersionPatch = 5, gameVersionName = "Cursebreaker", gameVersionColor = 5186397;
-export declare const gameVersion = "beta2.15.5";
+export declare const gameVersionStage = "beta", gameVersionMajor = 2, gameVersionMinor = 15, gameVersionPatch = 6, gameVersionName = "Cursebreaker", gameVersionColor = 5186397;
+export declare const gameVersion = "beta2.15.6";
 export declare const gameVersionTitleMajor = "Wayward: Cursebreaker";
 export declare const gameVersionTitleMinor: string;
 export declare const gameVersionTitle: string;
